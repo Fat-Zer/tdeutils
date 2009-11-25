@@ -1,0 +1,13 @@
+Things left:
+
+Backend:
+- test 64 bit, zSeries
+- refactor the hashes to make it efficient
+
+Integration:
+- Cookie jar
+- KMail
+
+Future ideas:
+- Make it a kpart
+

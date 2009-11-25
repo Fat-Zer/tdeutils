@@ -1,0 +1,2 @@
+AC_CHECK_HEADERS(sys/mnttab.h mntent.h sys/statvfs.h sys/statfs.h sys/vfs.h sys/mount.h sys/ucred.h sys/loadavg.h)
+AC_CHECK_FUNCS(statvfs)

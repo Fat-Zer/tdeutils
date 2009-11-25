@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=ServiceType
+X-KDE-ServiceType=KMilo Plugin
+
+[PropertyDef::X-KMilo-Plugin-Author]
+Type=QString
+[PropertyDef::X-KMilo-Default-Enabled]
+Type=bool
+

@@ -1,0 +1,47 @@
+author = Robbie Ward <linuxphreak@gmx.co.uk>
+
+# krell_meter.png taken from ShinyAll2
+
+frame_top_height = 2
+frame_bottom_height = 2
+frame_left_width = 2
+frame_right_width = 2
+
+chart_in_color = #7B9DDE
+chart_in_color_grid = gray20
+chart_out_color = #CDE2FF
+chart_out_color_grid = gray20
+
+bg_grid_mode = 1
+
+normal_font = -adobe-helvetica-medium-r-normal-*-*-100-*-*-p-*-iso8859-1
+large_font = -adobe-helvetica-medium-r-normal-*-*-120-*-*-p-*-iso8859-1
+small_font = -adobe-helvetica-medium-r-normal-*-*-80-*-*-p-*-iso8859-1
+
+rx_led_x = 2
+rx_led_y = 3
+tx_led_x = -2
+tx_led_y = 3
+
+decal_mail_frames = 18
+decal_mail_delay = 1
+
+timer_time_x = 2
+timer_button_x = -2
+
+krell_slider_x_hot = 1
+
+StyleChart *.border = 2,2,2,2
+StyleChart *.textcolor = black white shadow
+
+StylePanel *.border = 2,2,2,2
+StylePanel *.textcolor = black white shadow
+StylePanel *.label_position = 50
+StylePanel *.krell_depth = 4
+
+StyleMeter *.border = 2,2,2,2
+StyleMeter *.textcolor = black white shadow
+StyleMeter *.label_position = 50
+StyleMeter fs.label_position = 0
+StyleMeter cal.font = large_font
+StyleMeter clock.font = large_font

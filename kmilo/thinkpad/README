@@ -1,0 +1,61 @@
+Thinkpad Buttons KMilo Plugin
+
+Jonathan Riddell jr@jriddell.org, January 2004
+
+A port of tpb ( http://www.nongnu.org/tpb/ ) to KMilo.
+
+KMilo is a service for kded, the KDE daemon.  KMilo is new to KDE 3.2.
+It allows plugins which interact with the special buttons found on
+some keyboards and laptops.
+
+This KMilo plugin reads the nvram used in IBM Thinkpads.  You need the
+Linux nvram module ('insmod nvram') and to create a device node
+('mknod /dev/nvram c 10 144').
+
+Thinkpad R30/R31 models do not have a hardware volume control and so
+require software volume control.  Other models need software volume
+control only if you want a volume change step different from the
+builtin value (14).  This required write access to nvram ('chmod 666
+/dev/nvram') and could potentially damage the machine.
+
+A KControl Centre module is included to configure the values including
+whether this service is run or not (by default it is not).
+
+INSTALL:
+
+Download kdeutils source for kde 3.2 or newer.  Then compile as
+usual starting from the kdeutils directory:
+
+ make -f Makefile.cvs
+ ./configure
+ cd kmilo
+ make
+ sudo make install
+
+Restarting kded is probably needed:
+
+ kdekillall kded
+ kded
+
+HISTORY:
+
+05 January 2004, Initial release, most things working
+
+21 January 2004, Bug fix, stop it crashing if starting without kmix
+		runningdisplay rounded min and max volume levels, pda icon for
+		KControl module
+
+24 January 2004, Stopped it start kmix on kded startup even when set not to run
+
+28 January 2004, Added to KDE CVS
+
+TODO:
+
+ - Need a better icon for the KControl module
+ - Test on machines other than my R31, which only has volume, 
+   brightness buttons, light and 'Thinkpad' buttons
+ - Add options for the 'Thinkpad' and other action buttons to do something (e.g. bring up Konqueror)
+   For this sort of thing we really want integration with KHotKeys but I'm not sure how
+
+
+

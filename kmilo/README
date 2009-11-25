@@ -1,0 +1,17 @@
+This is a kded module that can be extended to support various types of hardware
+input devices that exist, such as those on keyboards.
+
+It presently supports:
+- Apple PowerBooks
+- Sony Vaio Laptops (tested on Vaio PCG-GRX series)
+- IBM Thinkpads
+- Asus Laptops
+- Dell laptops (see delli8k/README for models)
+
+The output device is skinnable, though not extensible by 3rd parties currently.
+This will come in the future when the API is finalised.
+
+It also lacks very much functionality.  Any input is appreciated.
+
+Header files are not presently installed in order to avoid committing to an API.
+

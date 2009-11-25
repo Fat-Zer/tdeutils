@@ -1,0 +1,1063 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.2-Based Variant V1.1//EN" "dtd/kdex.dtd" [
+  <!ENTITY kappname "&khexedit;" > <!-- this only *seems* redundant -->
+  <!ENTITY package "kdeutils">
+  <!ENTITY % English "INCLUDE">
+  <!ENTITY % addindex "IGNORE">
+]>
+<book lang="&language;">
+
+<bookinfo>
+<title>The &khexedit; Handbook</title>
+
+<authorgroup>
+<author>
+<firstname>Jonathan</firstname>
+<surname>Singer</surname>
+<affiliation>
+<address><email>jsinger@leeta.net</email></address>
+</affiliation>
+</author>
+
+<othercredit role="developer">
+<firstname>Espen</firstname>
+<surname>Sand</surname>
+<affiliation>
+<address><email>espensa@online.no</email></address>
+</affiliation>
+<contrib>Developer</contrib>
+</othercredit>
+
+<othercredit role="reviewer">
+<firstname>Lauri</firstname>
+<surname>Watts</surname>
+<affiliation>
+<address><email>lauri@kde.org</email></address>
+</affiliation>
+<contrib>Reviewer</contrib>
+</othercredit>
+
+<!-- TRANS:ROLES_OF_TRANSLATORS -->
+</authorgroup>
+
+<copyright>
+<year>1999-2000</year>
+<holder>Jonathan Singer</holder>
+</copyright>
+
+<legalnotice>&FDLNotice;</legalnotice>
+
+<date>2001-07-06</date>
+<releaseinfo>0.08.05</releaseinfo>
+
+<abstract><para>&khexedit; is a hexadecimal editor for the &kde;
+environment.</para></abstract>
+
+<keywordset>
+<keyword>KDE</keyword>
+<keyword>Kapp</keyword>
+<keyword>edit</keyword>
+<keyword>binary</keyword>
+<keyword>hexadecimal</keyword>
+</keywordset>
+</bookinfo>
+
+<chapter id="introduction">
+<title>Introduction</title>
+
+<para>&khexedit; is an editor for the raw data of binary files. It
+includes find/replace functions, bookmarks, many configuration options,
+drag and drop support and other powerful features.</para>
+
+</chapter>
+
+<chapter id="starting-khexedit">
+<title>Starting &khexedit;</title>
+<para>Type <userinput><command>khexedit</command></userinput> at a command
+prompt or select <guimenuitem>Binary Editor</guimenuitem> from the
+<guisubmenu>Utilities</guisubmenu> group in the <guimenu>KDE start
+menu</guimenu>.</para>
+
+<para>The standard &Qt; and &kde; command line
+options are available, and can be listed by entering
+<userinput><command>khexedit</command> <option>--help</option></userinput>. </para>
+
+<para>Other command line options are:</para>
+
+<para><option><replaceable>&lt;file&gt;</replaceable></option> - open the
+specified file</para> 
+
+<para><option>--offset</option>
+<replaceable>&lt;offset&gt;</replaceable> jump to position
+<replaceable>&lt;offset&gt;</replaceable> in the opened file.</para>
+
+</chapter>
+
+<chapter id="nutshell">
+<title>&khexedit; In A Nutshell</title>
+
+<para>The main &khexedit; window has the following components: menu bar, toolbar,
+offset column, data editor window, text field, search bar, conversion field and
+status bar. </para>
+
+<screenshot>
+<screeninfo>&khexedit; Screen</screeninfo>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="khexedit1.png" format="PNG"/>
+          </imageobject>
+          <textobject>
+            <phrase>&khexedit; Screen</phrase>
+          </textobject>
+        </mediaobject>
+</screenshot>
+
+<para>When a document is opened, the bytes are displayed in hexadecimal format
+in the data editor window. The data can be edited, cut, copied, pasted, dragged
+and dropped much as text is in an text editor or word processor. A cursor marks
+the current position. Pressing the <keycap>Insert</keycap> key toggles between
+overwrite and insert text entry modes. The data can also be displayed as octal,
+binary or decimal values, by choosing the desired format in the
+<guimenu>View</guimenu> menu.</para>
+
+<para>The offset column on the left indicates the position of a particular byte
+in the file. The text field on the right displays the <acronym>ASCII</acronym>
+encoding of the file.  The cursor position and edits in the data editor window
+are reflected in the text field. The text field can also be edited, and those
+changes are reflected in the data editor window.</para>
+
+<para>The search bar allows the user to search for a specific value --
+hexadecimal, octal, binary, decimal or text.</para>
+
+<para>The conversion field displays the value of the byte at the cursor position
+in a variety of bases. It also displays the value of all standard data types
+starting at the cursor.</para>
+
+<para>Multiple documents can be open at the same time but only one can be
+active. Use the <guimenu>Documents</guimenu> menu to select which document will
+be active.</para>
+
+</chapter>
+
+<chapter id="menu-commands">
+<title>Menu Commands</title>
+
+<para>Note that most menu commands also have a keyboard shortcut.</para>
+
+<sect1 id="file-menu">
+<title><guimenu>File</guimenu> Menu</title>
+
+<variablelist>
+<varlistentry>
+<term><menuchoice>
+<shortcut>
+<keycombo action="simul">&Ctrl;<keycap>N</keycap></keycombo>
+</shortcut>
+<guimenu>File</guimenu>
+<guimenuitem>New</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Open a new file.</action></para></listitem>
+</varlistentry>
+	
+<varlistentry>
+<term><menuchoice>
+<shortcut>
+<keycombo action="simul">&Ctrl;<keycap>O</keycap></keycombo>
+</shortcut>
+<guimenu>File</guimenu>
+<guimenuitem>Open...</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Open an existing file.</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<shortcut>
+<keycombo action="simul">&Ctrl;<keycap>I</keycap></keycombo>
+</shortcut>
+<guimenu>File</guimenu>
+<guimenuitem>Insert...</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Insert an exiting file in the current
+document.</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>File</guimenu>
+<guisubmenu>Open Recent</guisubmenu>
+</menuchoice></term>
+<listitem><para><action>Choose from a list of the last opened
+files.</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>File</guimenu>
+<guimenuitem>Revert</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Return edited document to the last saved
+state.</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<shortcut>
+<keycombo action="simul">&Ctrl;<keycap>S</keycap></keycombo>
+</shortcut>
+<guimenu>File</guimenu>
+<guimenuitem>Save</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Save document.</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>File</guimenu>
+<guimenuitem>Save As...</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Save document with a new name.</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<shortcut>
+<keycombo action="simul">&Ctrl;<keycap>W</keycap></keycombo>
+</shortcut>
+<guimenu>File</guimenu>
+<guimenuitem>Close</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Close the current document.</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<shortcut>
+<keycombo action="simul">&Ctrl;<keycap>P</keycap></keycombo>
+</shortcut>
+<guimenu>File</guimenu>
+<guimenuitem>Print...</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Print the current document.</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>File</guimenu>
+<guimenuitem>Export...</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Export the selected document or a portion of
+it.</action></para><para>Opens a dialog box with these options:</para>
+<variablelist>
+<varlistentry>
+<term><guilabel>Format</guilabel></term>
+<listitem><para>Plain text, <acronym>HTML</acronym> table, rich text
+format, C array.  Use the <guilabel>Options</guilabel> tab to select
+details for a C array or an <acronym>HTML</acronym> table.</para></listitem>
+</varlistentry>
+<varlistentry>
+<term><guilabel>Destination</guilabel></term>
+<listitem><para>The file to which the data will be
+exported</para></listitem>
+</varlistentry>
+<varlistentry>
+<term><guilabel>Export Range</guilabel></term>
+<listitem><para>Selects which data will be exported -- the entire document, the
+selected portion or the range between two specified
+offsets.</para></listitem>
+</varlistentry>
+</variablelist>
+</listitem></varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>File</guimenu>
+<guimenuitem>Cancel Operation</guimenuitem>
+</menuchoice></term>
+<listitem><para>Stop the current operation</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>File</guimenu>
+<guimenuitem>Permissions</guimenuitem>
+</menuchoice></term>
+<listitem><para>Set write privileges:</para>
+<variablelist>
+
+<varlistentry>
+<term><guilabel>Read only</guilabel></term>
+<listitem><para>When set, changes may not be made to the displayed
+file.</para></listitem>
+</varlistentry>
+<varlistentry>
+<term><guilabel>Allow Resize</guilabel></term>
+<listitem><para>When off, individual bytes may be edited but the total number of
+bytes may not be changed.</para></listitem>
+</varlistentry>
+</variablelist>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>File</guimenu>
+<guimenuitem>New Window</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Open an additional</action> &khexedit;
+window</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>File</guimenu>
+<guimenuitem>Close Window</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Close the current</action> &khexedit;
+window</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<shortcut>
+<keycombo action="simul">&Ctrl;<keycap>Q</keycap></keycombo>
+</shortcut>
+<guimenu>File</guimenu>
+<guimenuitem>Quit</guimenuitem>
+</menuchoice></term>
+<listitem><para>Close all &khexedit; windows</para></listitem>
+</varlistentry>
+</variablelist>
+
+</sect1>
+
+<sect1 id="edit-menu">
+<title><guimenu>Edit</guimenu> Menu</title>
+
+<variablelist>
+<varlistentry>
+<term><menuchoice>
+<shortcut>
+<keycombo action="simul">&Ctrl;<keycap>Z</keycap></keycombo>
+</shortcut>
+<guimenu>Edit</guimenu>
+<guimenuitem>Undo</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Undo the last action.</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<shortcut>
+<keycombo action="simul">&Ctrl;&Shift;<keycap>Z</keycap></keycombo>
+</shortcut>
+<guimenu>Edit</guimenu>
+<guimenuitem>Redo</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Redo the last undone action.</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<shortcut>
+<keycombo action="simul">&Ctrl;<keycap>X</keycap></keycombo>
+</shortcut>
+<guimenu>Edit</guimenu>
+<guimenuitem>Cut</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Delete the selected bytes and copy them to the
+clipboard.</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<shortcut>
+<keycombo action="simul">&Ctrl;<keycap>C</keycap></keycombo>
+</shortcut>
+<guimenu>Edit</guimenu>
+<guimenuitem>Copy</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Copy the selected bytes to the
+clipboard.</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<shortcut>
+<keycombo action="simul">&Ctrl;<keycap>V</keycap></keycombo>
+</shortcut>
+<guimenu>Edit</guimenu>
+<guimenuitem>Paste</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Insert the cut or copied bytes in the
+clipboard.</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>Edit</guimenu>
+<guisubmenu>Special</guisubmenu>
+</menuchoice></term>
+<listitem><para>Variations on <guimenuitem>Copy</guimenuitem> and
+<guimenuitem>Paste</guimenuitem>:</para>
+<itemizedlist>
+<listitem><para><guimenuitem>Copy as Text</guimenuitem>: Copies
+the selected bytes as <acronym>ASCII</acronym> characters.</para></listitem>
+<listitem><para><guimenuitem>Paste into New
+File</guimenuitem>.</para></listitem>
+<listitem><para><guimenuitem>Paste into new
+window.</guimenuitem></para></listitem>
+</itemizedlist>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<shortcut>
+<keycombo action="simul">&Ctrl;<keycap>A</keycap></keycombo>
+</shortcut>
+<guimenu>Edit</guimenu>
+<guimenuitem>Select All</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Select entire document.</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>Edit</guimenu>
+<guimenuitem>Unselect</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Unselect entire document.</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<shortcut>
+<keycombo action="simul">&Ctrl;<keycap>F</keycap></keycombo>
+</shortcut>
+<guimenu>Edit</guimenu>
+<guimenuitem>Find...</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Find a specified pattern in the document.</action>
+Hexadecimal,decimal, octal, binary or text patterns can be searched for.</para>
+<para>Options in the dialog box allow you to specify the starting point,
+direction and range of the search.</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<shortcut>
+<keycombo action="simul"><keycap>F3</keycap></keycombo>
+</shortcut>
+<guimenu>Edit</guimenu>
+<guimenuitem>Find Next</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Find the next instance</action> of the
+<guimenuitem>Find</guimenuitem> pattern.</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<shortcut>
+<keycombo action="simul">&Shift;<keycap>F3</keycap></keycombo>
+</shortcut>
+<guimenu>Edit</guimenu>
+<guimenuitem>Find Previous</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Find the previous instance</action> of the
+<guimenuitem>Find</guimenuitem> pattern.</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<shortcut>
+<keycombo action="simul">&Ctrl;<keycap>R</keycap></keycombo>
+</shortcut>
+<guimenu>Edit</guimenu>
+<guimenuitem>Replace...</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Replace</action> the find pattern with a different
+pattern.</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<shortcut>
+<keycombo action="simul">&Ctrl;<keycap>G</keycap></keycombo>
+</shortcut>
+<guimenu>Edit</guimenu>
+<guimenuitem>Goto Offset...</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Move the cursor to a specified
+offset.</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<shortcut>
+<keycombo action="simul">&Ctrl;<keycap>Ins</keycap></keycombo>
+</shortcut>
+<guimenu>Edit</guimenu>
+<guimenuitem>Insert Pattern...</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Insert a specified string of bytes.</action></para>
+<para>Options in the dialog box allow you to specify the length of the pattern,
+its format (hexadecimal, decimal, octal, binary or text) and the insertion
+point.</para>
+<para>If <guilabel>Repeat pattern</guilabel> is checked, the specified pattern
+will be inserted repeatedly to reach the length set in
+<guilabel>Size</guilabel>.</para></listitem>
+</varlistentry>
+</variablelist>
+</sect1>
+
+<sect1 id="view-menu">
+<title><guimenu>View</guimenu> Menu</title>
+
+<variablelist>
+<varlistentry>
+<term><menuchoice>
+<guimenu>View</guimenu><guimenuitem>Hexadecimal</guimenuitem>
+<guimenu>View</guimenu><guimenuitem>Decimal</guimenuitem>
+<guimenu>View</guimenu><guimenuitem>Octal</guimenuitem>
+<guimenu>View</guimenu><guimenuitem>Binary</guimenuitem>
+<guimenu>View</guimenu><guimenuitem>Text</guimenuitem>
+</menuchoice></term>
+<listitem><para>The first five choices <action>select the format displayed in the data
+editor window</action>: hexadecimal, decimal, octal, binary or text. When text
+display is selected, the extra text field is not displayed.</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>View</guimenu>
+<guimenuitem>Show Offset Column</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Toggles display of offset column on and
+off.</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>View</guimenu>
+<guimenuitem>Show Text Field</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Toggles display of text field on and
+off.</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>View</guimenu>
+<guimenuitem>Offset as Decimal</guimenuitem>
+</menuchoice></term>
+<listitem><para>When set, <action>all offsets are displayed and interpreted as
+decimal numbers</action> rather than as hexadecimals.</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>View</guimenu>
+<guimenuitem>Upper Case (Data)</guimenuitem>
+</menuchoice></term>
+<listitem><para>When set, <action>hexadecimal digits in the data are displayed
+in upper case.</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>View</guimenu>
+<guimenuitem>Upper Case (Offset)</guimenuitem>
+</menuchoice></term>
+<listitem><para>When set, <action>hexadecimal digits in the offset value are
+displayed in upper case.</action></para></listitem>
+</varlistentry>
+
+<varlistentry id="view-encoding">
+<term><menuchoice>
+<guimenu>View</guimenu>
+<guisubmenu>Document Encoding</guisubmenu>
+</menuchoice></term>
+<listitem><para>Select the encoding used for display in the text field.
+Alternative encodings like <acronym>EBCDIC</acronym> and 7-bit
+<acronym>ASCII</acronym> can be used. Additional encodings can be added by the
+user (not implemented yet.)</para></listitem>
+</varlistentry>
+</variablelist>
+
+</sect1>
+
+<sect1 id="bookmarks">
+<title><guimenu>Bookmarks</guimenu> Menu</title>
+
+<variablelist>
+<varlistentry>
+<term><menuchoice>
+<shortcut>
+<keycombo action="simul">&Ctrl;<keycap>B</keycap></keycombo>
+</shortcut>
+<guimenu>Bookmarks</guimenu>
+<guimenuitem>Add Bookmark</guimenuitem>
+</menuchoice></term>
+<listitem><para>Bookmark a location within the document. </para>
+<para>Multiple bookmarks can be set for a single document. Each document has its
+own set of bookmarks and the appropriate set is displayed at the bottom of the
+<guimenu>Bookmarks</guimenu> menu when a document is selected. Choose a bookmark
+from the menu to go to it.</para></listitem> 
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<shortcut>
+<keycombo action="simul">&Ctrl;<keycap>E</keycap></keycombo>
+</shortcut>
+<guimenu>Bookmarks</guimenu>
+<guimenuitem>Replace Bookmark</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Reset an existing bookmark to the current cursor
+location.</action> A dialog will be opened with the list of available bookmarks;
+select the one you wish to change.</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<shortcut>
+<keycombo action="simul">&Ctrl;<keycap>U</keycap></keycombo>
+</shortcut>
+<guimenu>Bookmarks</guimenu>
+<guimenuitem>Remove Bookmark</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Remove an existing bookmark.</action> A dialog will be
+opened with a list  of available bookmarks; select the one you wish to
+remove.</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>Bookmarks</guimenu>
+<guimenuitem>Remove All</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Clear the bookmark list.</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<shortcut>
+<keycombo action="simul">&Alt;<keycap>Down</keycap></keycombo>
+</shortcut>
+<guimenu>Bookmarks</guimenu>
+<guimenuitem>Goto Next Bookmark</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Move the cursor to the next
+bookmark.</action></para></listitem>
+</varlistentry>
+<varlistentry>
+<term><menuchoice>
+<shortcut>
+<keycombo action="simul">&Alt;<keycap>Up</keycap></keycombo>
+</shortcut>
+<guimenu>Bookmarks</guimenu>
+<guimenuitem>Goto Previous Bookmark</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Move the cursor to the previous
+bookmark.</action></para></listitem>
+</varlistentry>
+</variablelist>
+</sect1>
+
+<sect1 id="tools-menu">
+<title><guimenu>Tools</guimenu> Menu</title>
+
+<variablelist>
+<varlistentry>
+<term><menuchoice>
+<guimenu>Tools</guimenu>
+<guimenuitem>Extract Strings...</guimenuitem>
+</menuchoice></term>
+<listitem><para>Locate <acronym>ASCII</acronym> strings in the data. Minimum
+string length, case sensitivity and a pattern to match can be
+specified.</para></listitem> 
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>Tools</guimenu>
+<guimenuitem>Binary Filter...</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Perform a binary operation on the data.</action> The
+operation (AND, OR, ROTATE..) and an operand can be specified in the dialog
+box. Check boxes in the dialog allow the operation to be limited to selected
+bytes or the region before or after the cursor.</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>Tools</guimenu>
+<guimenuitem>Character Table</guimenuitem>
+</menuchoice></term>
+<listitem><para>Open a list of values and their <acronym>ASCII</acronym>
+equivalents and <action>insert the selected value at the
+cursor.</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>Tools</guimenu>
+<guimenuitem>Converter</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Enter a value in any of the fields and see its
+equivalent in hexadecimal, decimal, octal, binary or text</action>.  A check box
+allows viewing of the value at the cursor instead.</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>Tools</guimenu>
+<guimenuitem>Statistics</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Display the frequency of occurrence of values in the
+document.</action></para></listitem>
+</varlistentry>
+</variablelist>
+
+</sect1>
+
+<sect1 id="document-menu">
+<title><guimenu>Documents</guimenu> Menu</title>
+
+<para>Provides a list of the open documents. Selecting one makes it
+active.</para>
+
+</sect1>
+
+<sect1 id="settings-menu">
+<title><guimenu>Settings</guimenu> Menu</title>
+
+<variablelist>
+<varlistentry>
+<term><menuchoice>
+<guimenu>Settings</guimenu>
+<guimenuitem>Show Toolbar</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Toggle display of the toolbar below the
+menu bar.</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>Settings</guimenu>
+<guimenuitem>Show Statusbar</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Toggle display of the status bar</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>Settings</guimenu>
+<guimenuitem>Show Full Path</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Toggle display of the full file path in the
+titlebar</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>Settings</guimenu>
+<guisubmenu>Document Tabs</guisubmenu>
+</menuchoice></term>
+<listitem><para>Change display of tabs for all current documents. The tab can be
+displayed above or below the editor window, or hidden. You may find the tabs
+more convenient than the document menu for switching documents.</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>Settings</guimenu>
+<guisubmenu>Conversion Field</guisubmenu>
+</menuchoice></term>
+<listitem><para><action>Change display of the value conversion field.</action>
+It can be embedded in the main window, made a floating window or
+hidden.</para></listitem> 
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>Settings</guimenu>
+<guimenuitem>Searchbar</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Change display of the value search bar</action>. It can be
+displayed above or below the editor window, or hidden.</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>Settings</guimenu>
+<guimenuitem>Save Options</guimenuitem>
+</menuchoice></term>
+<listitem><para><action>Save the current state of the
+options.</action></para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><menuchoice>
+<guimenu>Settings</guimenu>
+<guimenuitem>Preferences...</guimenuitem>
+</menuchoice></term>
+<listitem><para>Change these settings:</para>
+<variablelist>
+<varlistentry>
+<term><guilabel>Layout</guilabel></term>
+<listitem><para>Line and column size (in bytes). These can be set separately for
+different modes.  Fixed number of bytes per line. Lock column at end of
+line. Grid lines between rows and columns. Width of field separators, spacing and
+margins.</para></listitem> 
+</varlistentry>
+<varlistentry>
+<term><guilabel>Cursor</guilabel></term>
+<listitem><para>Blink rate and shape of the cursor. Behavior of the cursor when
+the window loses focus.</para></listitem>
+</varlistentry>
+<varlistentry>
+<term><guilabel>Font</guilabel></term>
+<listitem><para>Font name, style and size. Character used to display
+non printing
+characters in the text field.</para></listitem>
+</varlistentry>
+<varlistentry>
+<term><guilabel>Colors</guilabel></term>
+<listitem><para> All colors in &khexedit; can be customized, including odd and
+even lines and columns, bookmarks, separators and grid lines. The one exception
+is the selection color, which uses the setting chosen in the KDE Control
+Center.</para></listitem>
+</varlistentry>
+<varlistentry>
+<term><guilabel>Files</guilabel></term>
+<listitem><para>Opening of the last, or all recent documents on
+startup. Restoration of cursor position. Write protection enabled by
+default. Make a backup upon saving files. Saving of <quote>Recent
+Documents</quote> list on exit. The <quote>Recent Documents</quote> list can
+also be cleared in this dialog.</para></listitem>
+</varlistentry>
+<varlistentry>
+<term><guilabel>Miscellaneous</guilabel></term>
+<listitem><para>Automatic copy to clipboard upon selection. Startup in insert
+mode, rather than overwrite. Confirmation required for wrapping to the beginning
+or end during searches. Cursor jumps to nearest byte when moved in binary
+mode. Sound on typing input or fatal failure. Display of bookmarks in the offset
+column and editor fields. Warning when number of printable pages exceeds a
+settable limit. Maximum number of undos.</para></listitem> 
+</varlistentry>
+</variablelist>
+</listitem>
+</varlistentry>
+</variablelist>
+
+</sect1>
+
+<sect1 id="help-menu">
+<title><guimenu>Help</guimenu> Menu</title>
+
+&help.menu.documentation;
+
+</sect1>
+
+<sect1 id="toolbar"><title>Toolbar</title>
+<para>The toolbar contains icons for the following commands:</para>
+
+<note><para>(Except for <guiicon>Drag document</guiicon> and
+<guiicon>Toggle</guiicon> write protection, all behave identically to the menu
+command.)</para></note>
+
+<itemizedlist>
+<listitem><para><guiicon>Drag document</guiicon> -- Click this button and drag
+to a text editor or a new &khexedit; window.</para></listitem>
+<listitem><para><guiicon>New</guiicon></para></listitem>
+<listitem><para><guiicon>Open</guiicon></para></listitem>
+<listitem><para><guiicon>Revert</guiicon></para></listitem>
+<listitem><para><guiicon>Save</guiicon></para></listitem>
+<listitem><para><guiicon>Print</guiicon></para></listitem>
+<listitem><para><guiicon>Find</guiicon></para></listitem>
+<listitem><para><guiicon>Find Next</guiicon></para></listitem>
+<listitem><para><guiicon>Find Previous</guiicon></para></listitem>
+<listitem><para><guiicon>Cut</guiicon></para></listitem>
+<listitem><para><guiicon>Copy</guiicon></para></listitem>
+<listitem><para><guiicon>Paste</guiicon></para></listitem>
+<listitem><para><guiicon>Undo</guiicon></para></listitem>
+<listitem><para><guiicon>Redo</guiicon></para></listitem>
+<listitem><para><guiicon>Cancel Operation</guiicon></para></listitem>
+<listitem><para><guiicon>Help</guiicon></para></listitem>
+</itemizedlist>
+
+<para>..and at the right of the toolbar..</para>
+<para><guiicon>Toggle write protection</guiicon> - switch between read-only and
+read/write modes.</para>
+
+<sect2 id="searchbar">
+<title>Search bar</title>
+
+<para>The search bar is used to locate a specific value in the document. Enter a
+value in the box, select the desired representation (hexadecimal, octal, binary,
+decimal or text) and hit the <guibutton>Find</guibutton> button. Check the
+<guilabel>Backwards</guilabel> box to search backwards from the cursor point or
+check <guilabel>Ignore case</guilabel> for a case-insensitive text search. Click
+the button on the right of the bar (<guiicon>X</guiicon>) to hide the search bar;
+go to <guimenuitem>Searchbar</guimenuitem> in the <guimenu>Settings</guimenu>
+menu to restore it.</para>
+
+</sect2>
+
+<sect2 id="conversion-field">
+<title>Conversion field</title>
+
+<para>The conversion field displays the values of various data types at the
+selected byte. For 8 bit types, it displays the value of the byte under the
+cursor; for larger types, it displays the value starting at that byte. The
+rightmost column displays various encodings of the current byte. Options in the
+conversion field are:</para>
+
+<variablelist>
+<varlistentry>
+<term><guilabel>Show little endian decoding</guilabel></term>
+<listitem><para>When checked, causes multibyte types to be calculated using the
+little-endian method used by x86 and Alpha processors. In this scheme, the first
+byte represents the least significant part of the value. (0a 4e = 0x4e0a =
+19978) When unchecked, causes multibyte types to be calculated using the
+big-endian method used by PowerPC and Sparc processors.  (0a 4e = 0x0a4e =
+2638)</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><guilabel>Show unsigned as hexadecimal</guilabel></term>
+<listitem><para>When checked, causes unsigned types to be displayed in
+hexadecimal, rather than decimal format.</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><guilabel>Stream length</guilabel></term>
+<listitem><para>Determines the number of bits used to calculate the values in
+the fields above it.</para></listitem>
+</varlistentry>
+</variablelist>
+
+</sect2>
+
+<sect2 id="status-bar">
+<title>Status Bar</title>
+
+<para>The status bar displays the following information:</para>
+
+<variablelist>
+<varlistentry>
+<term>Encoding/Selection</term> <!-- fix this --> 
+<listitem><para>When there is
+no selection, this field shows the encoding option used. (See <link
+linkend="view-encoding"><menuchoice> <guimenu>View</guimenu>
+<guimenuitem>Document Encoding</guimenuitem> </menuchoice></link> for more
+information on encoding.)  The start point and the length of the selection are
+shown.</para> 
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>File Modified</term>
+<listitem><para>A <computeroutput>!</computeroutput> in this box indicates the
+current file was modified.</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term>Insert/Overwrite</term>
+<listitem><para>Indicates whether values entered at the keyboard are
+inserted at the cursor point (<guilabel>INS</guilabel>) or overwrite the
+existing data starting at the cursor(<guilabel>OVR</guilabel>). Use the
+<keycap>Insert</keycap> key to toggle between the two modes.</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term>Size</term>
+<listitem><para>Displays the total size of the current
+document.</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term>Offset</term>
+<listitem><para>Indicates the position of the cursor within the
+document.</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term>Display mode</term>
+<listitem><para>Indicates whether data editor window is displaying values in
+hexadecimal, octal, binary, decimal or text mode. Switch between modes with
+the View menu.</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term>Write Protection</term>
+<listitem><para>Indicates whether the document can be edited
+(<guilabel>RW</guilabel>) or is being viewed read-only
+(<guilabel>R</guilabel>). Switch between modes with the button on the far-right
+of the toolbar or the <guimenuitem>Permissions</guimenuitem> command in the
+<guimenu>File</guimenu> menu.</para></listitem>
+</varlistentry>
+</variablelist>
+
+</sect2>
+
+</sect1>
+
+</chapter>
+
+<chapter id="credits">
+<title>Credits and License</title>
+
+<para>
+&khexedit;
+</para>
+
+<para>Program copyright 1999-2000 Espen Sand
+<email>espensa@online.no</email></para>
+
+<para>Contributors:</para>
+
+<itemizedlist>
+<listitem><para>Leon Lessing <email>leon@irlabs.com</email></para></listitem>
+<listitem><para>Craig Graham
+<email>c_graham@hinge.mistral.co.uk</email></para></listitem>
+<listitem><para>Dima Rogozin
+<email>dima@mercury.co.il</email></para></listitem>
+<listitem><para>Edward Livingstone-Blade
+<email>sbcs@bigfoot.com</email></para></listitem>
+</itemizedlist>
+
+<para>Documentation copyright 2000 Jonathan Singer
+<email>jsinger@leeta.net</email></para>
+<!-- TRANS:CREDIT_FOR_TRANSLATORS -->
+
+&underFDL;
+&underGPL;
+
+</chapter>
+
+
+<appendix id="installation">
+<title>Compilation and Installation</title>
+    
+&install.intro.documentation;
+&install.compile.documentation;
+
+</appendix>
+
+&documentation.index; 
+</book>
+
+<!--
+Local Variables:
+mode: sgml
+sgml-minimize-attributes:nil
+sgml-general-insert-case:lower
+sgml-indent-step:0
+sgml-indent-data:nil
+End:
+
+// vim:ts=2:sw=2:tw=78:noet
+-->

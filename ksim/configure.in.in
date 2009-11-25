@@ -1,0 +1,36 @@
+AC_CHECK_FUNCS(getloadavg)
+
+sysinfo_check=no
+case "$target" in
+  *-*-linux*)
+    sysinfo_check=yes
+    ;;
+esac
+
+if test x$sysinfo_check = xyes; then
+  sysinfo_ok=no
+  AC_MSG_CHECKING(for totalhigh and totalfree in sysinfo)
+  AC_TRY_COMPILE(
+  [
+    #include <linux/kernel.h>
+
+    static void check()
+    {
+      struct sysinfo system; /* dummy sysinfo */
+      int totalhigh = system.totalhigh;
+      int freehigh = system.freehigh;
+    }
+  ], [],
+  [
+    sysinfo_ok=yes
+    AC_DEFINE_UNQUOTED(HAVE_SYSINFO_HIGH, 1, [whether we have totalhigh and freehigh])
+  ])
+
+  AC_MSG_RESULT($sysinfo_ok)
+fi
+
+dnl Check for dell laptop support
+AM_CONDITIONAL(supports_i8k, test -f /proc/i8k)
+
+KDE_CHECK_HEADER(X11/extensions/extutil.h, AC_DEFINE(HAVE_EXTUTIL_H, 1, [If we have extutil.h]) have_extutil_h=yes, , )
+AM_CONDITIONAL(include_nv, test "x$have_extutil_h" = "xyes")

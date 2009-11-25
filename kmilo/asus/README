@@ -1,0 +1,43 @@
+Asus Laptop plugin for KMilo
+
+Chris Howells <howells@kde.org>
+
+About
+-----
+
+This KMilo module, in conjunction with the Asus asus_acpi Linux kernel
+module, allows some of the special keys on the keyboard of an Asus laptop to
+be fully utilised.
+
+The asus_acpi kernel modules exports a control and monitoring interface
+using the Linux kernel's /proc psuedo file system.
+
+The /proc file system
+---------------------
+
+/proc/acpi/asus/brn - Sets/gets the brightness of the LCD backlight
+Values between 0 (most dim) and 15 (most bright)
+
+/proc/acpi/asus/info - Shows information about the laptop
+
+/proc/acpi/asus/lcd - Sets/gets whether the LCD is on or off
+Values of 0 or 1
+
+/proc/acpi/asus/disp - Sets/gets whether the LCD/VGA/TV out is used
+Values of
+0 - no display
+1 - LCD only
+2 - CRT only
+3 - LCD + CRT
+4 - TV out only
+5 - LCD + TV out
+6 - CRT + TV out
+7 - LCD + CRT + TV out
+
+Changes
+-------
+
+Todo
+----
+* Support lcd and disp stuff
+* Maybe support volume stuff

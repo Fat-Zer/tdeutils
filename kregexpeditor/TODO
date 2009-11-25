@@ -1,0 +1,49 @@
+TODO:
+-----
+
+When the user drops something on the regular expression area that is of
+mime type text/plain, then ask the user whether he want it parsed as a
+regular expression or whether he wants it inserted as plain text (that is the text escaped)
+
+Later wishes:
+-------------
+- Make the KMultiFormListBox widget support that a line can show several entries.
+  Use this feature to show two CharSelectors on one line for selecting a single char
+  in the CharacterWidget.
+- Cleanup in the use of repaint(). Several of the repaint() can be update() instead.
+- add a checker widget, which can show what the regexp matches from a user defined text.
+- add the posibility to travers the widget using the keyboard.
+- Highlight the dragaccepter on dragEnter
+
+Back references
+---------------
+- when deleting a compound widget, which has a backreference, what should be done with the
+  back reference?
+- cut/past should preserve back reference id, while cut/copy should create
+  a new one.
+- create interface for extracting information about back references.
+
+- support back references in the regexp: "(abc|def)\1"
+
+Modules to go through to search for places to use KRegExpEditor
+---------------------------------------------------------------
+KodeKnight
+kdeadmin
+kdebase
+kdeedu
+kdegames
+kdegraphics
+kdeinstaller
+kdelibs
+kdemultimedia
+kdenetwork
+kdenonbeta
+kdepim
+kdesdk
+kdetoys
+kfte
+kmusic
+koffice
+kpfa
+ksite
+quanta

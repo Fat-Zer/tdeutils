@@ -1,0 +1,40 @@
+AC_ARG_WITH(snmp,
+  [AC_HELP_STRING(--with-snmp,
+    [enable support for SNMP @<:@default=check@:>@])],
+  [], with_snmp=check)
+
+enable_snmp=no
+if test "x$with_snmp" != xno; then
+  KDE_CHECK_HEADER( net-snmp/library/snmp_api.h, 
+    [ have_netsnmp_h=yes ], [ have_netsnmp_h=no ],
+    [ #include <net-snmp/net-snmp-config.h>
+      #include <net-snmp/types.h>
+    ]
+  )
+
+  if test "$have_netsnmp_h" = yes; then
+    KDE_CHECK_LIB( netsnmp, snmp_sess_init, [
+        AC_SUBST( LIBSNMP, "-lnetsnmp" )
+        enable_snmp=yes
+    ], [], [] )
+  fi
+
+  if test "$enable_snmp" != yes; then
+    AC_MSG_CHECKING([if libnetsnmp needs -lcrypto])
+
+    dnl use a different symbol to prevent autoconf from caching
+    KDE_CHECK_LIB( netsnmp, snmp_open, [
+        AC_SUBST( LIBSNMP, "-lnetsnmp -lcrypto" )
+        enable_snmp=yes
+        AC_MSG_RESULT(yes)
+    ], [
+        AC_MSG_RESULT(no)
+    ], [-lcrypto] )
+  fi
+
+  if test "x$with_snmp" != xcheck && test "x$enable_snmp" != xyes; then
+    AC_MSG_ERROR([--with-snmp was given, but test for net-snmp failed])
+  fi
+fi
+
+AM_CONDITIONAL(include_ksim_monitors_snmp, test "x$enable_snmp" = xyes)

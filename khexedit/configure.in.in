@@ -1,0 +1,8 @@
+# kossebau: copied from kdelibs/configure.in.in for khexedit
+AC_LANG_SAVE
+AC_LANG_C
+dnl AC_C_BIGENDIAN has a bug (one of its tests uses "main()" instead of
+dnl "int main()") so C++ compilers would break. Thats why we switch languages
+AC_C_BIGENDIAN
+AC_LANG_RESTORE
+# kossebau end

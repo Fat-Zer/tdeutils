@@ -1,0 +1,9 @@
+if test -z "$TPCTL"; then
+	echo ""
+	echo "You're missing tpctl. If you're using a ThinkPad, you may miss"
+	echo "some functionality of klaptopdaemon."
+	echo "You can get them from http://tpctl.sourceforge.net/tpctlhome.htm"
+	echo ""
+	all_tests=bad
+fi
+

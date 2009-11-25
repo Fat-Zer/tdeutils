@@ -1,0 +1,34 @@
+Overview
+--------
+To confuse you these directories mix two binary editor projects.
+The first project is the current khexedit app from Espen Sand,
+(here called KHE1). The second project is the coming khexedit app
+from Friedrich W. H. Kossebau (called KHE2) which has been already
+partly moved from kdenonbeta/khexedit2.
+
+
+What to find in which directory:
+--------------------------------
+khexedit:
+  sources of KHE1
+
+khexedit/pics:
+  pictures used by KHE1
+
+khexedit/lib:
+  sources of the basic library of KHE2
+
+khexedit/parts:
+  collection of all parts based on KHE2
+
+khexedit/parts/kbytesedit:
+  sources of the implementation for the service type KHexEdit/KBytesEdit
+
+
+Future plans:
+-------------
+* inclusion of the KReadWritePart based HexEdit2Part which can handle
+  GB sized files. (-> KDE 3.3)
+* a binary diff editor widget in the KHE2 lib
+* binary diff editor widget based parts
+* a standalone KHE2 app, replacing KHE1

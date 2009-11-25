@@ -1,0 +1,36 @@
+Notes about laptop daemon's icons:
+
+	lo16-app-klaptopdaemon.png  - is only used for the context menu
+		only the 16x16 is actually needed
+
+		in fact with recent changes to the iconloader icons other than
+		the 16x16 (really 20x20)  are BAD - please don't create them 
+
+	the 3 icons in the action directory:
+		laptop_charge/laptop_concharge/laptop_nobattery
+
+		are 'special' - they are read by the application and
+		modified on-the-fly to create a bar-graph of how full
+		the battery is - you can't just edit them the way you would
+		a normal icon - basically any white pixels will be replaced
+		with a proportional number of blue ones from the bottom of
+		the icon to the top (so pure white pixels are 'magic' and
+		should be treated as the portion of the icon that is the graph)
+		you can use slightly off-white or a not-quite-saturated 
+		white if you want 'white'
+
+		I'd love some cool new battery icons but please contact me 
+		if you need some testing before committing
+	
+
+
+	Paul Campbell - laptop support author
+	paul@taniwha.com
+
+We also have some contributed icons:
+
+the 2 'alt_' ones came from Percy Leonhardt <percy at eris23.de>
+the 3 'alt2_' ones came from Keunwoo Lee <klee at cs.washington.edu> 
+the 2 'alt3_' ones came from Jason Dixon <jasondixon at myrealbox.com>
+
+thanks guys!

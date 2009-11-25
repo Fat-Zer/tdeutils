@@ -1,0 +1,60 @@
+
+##################################################################
+## 
+##    KMilo configure script
+##    George Staikos <staikos@kde.org>
+##
+##################################################################
+
+dnl ---------------------------------------------------------------------
+dnl PowerBook IPC Library
+
+AC_ARG_WITH(powerbook,
+  [AC_HELP_STRING(--with-powerbook,
+    [enable support for PPC PowerBook @<:@default=check@:>@])],
+  [], with_powerbook=check)
+
+have_pbbipc=""
+have_pbb=""
+if test "x$with_powerbook" != xno; then
+
+KDE_CHECK_LIB(pbbipc, create_msgport,
+[
+KEYBOARD_LIBS="-lpbbipc $KEYBOARD_LIBS"
+AC_DEFINE(HAVE_POWERBOOK, 1, [If we have Apple PowerBook support])
+have_pbbipc=true
+])
+
+KDE_CHECK_LIB(pbb, init_libpbb,
+[
+KEYBOARD_LIBS="-lpbb $KEYBOARD_LIBS"
+AC_DEFINE(HAVE_POWERBOOK, 1, [If we have Apple PowerBook support])
+have_pbb=true
+])
+
+if test "x$with_powerbook" != xcheck && test -z "$have_pbbipc$have_pbb"; then
+  AC_MSG_ERROR([--with-powerbook was given, but test for libpbb failed])
+fi
+fi
+
+AM_CONDITIONAL(include_kmilo_powerbook, test x$have_pbbipc = xtrue)
+AM_CONDITIONAL(include_kmilo_pbb, test x$have_pbb = xtrue)
+
+dnl -----------------------------------------------------------------------
+dnl Check if Dell I8K module should be compiled (Linux systems only)
+AC_MSG_CHECKING([if dellI8k KMilo module should be compiled])
+case "$host" in
+  *-*-linux*) kmilo_delli8k_compile=yes; UNAME='Linux' ;;
+  *) kmilo_delli8k_compile=no; UNAME='' ;;
+esac
+
+AC_MSG_RESULT($kmilo_delli8k_compile)
+AM_CONDITIONAL(include_kmilo_delli8k, test x$kmilo_delli8k_compile = xyes)
+dnl -----------------------------------------------------------------------
+
+
+
+AC_CHECK_HEADER(linux/sonypi.h, [have_sonypi=true])
+AM_CONDITIONAL(include_kmilo_kvaio, test x$have_sonypi = xtrue)
+
+AC_SUBST(KEYBOARD_LIBS)

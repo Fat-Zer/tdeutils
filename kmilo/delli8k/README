@@ -1,0 +1,98 @@
+Dell Laptop Buttons Plug-in for KMilo
+
+Barry O'Donovan mail@barryodonovan.com, November 2004
+http://www.barryodonovan.com/
+
+KMilo is a service for kded, the KDE daemon.  KMilo is new to KDE 3.2.
+It allows plug-ins which interact with the special buttons found on
+some keyboards and laptops.
+
+This plug-in reads the /proc/i8k file that is created by the i8k kernel 
+module. If this file does not exist then the plug-in will not load. 
+
+The code in this module is heavily based on:
+    - the Asus Laptop plug-in for KMilo by Chris Howells (howells@kde.org)
+    - the Thinkpad plug-in by Jonathan Riddell (jr@jriddell.org)
+
+Also, for the Dell specific implementations, code was taken from the 
+i8kutils package of Massimo Dal Zotto <dz@debian.org> which can be
+downloaded from http://www.debian.org/~dz/i8k/
+
+LICENSE:
+
+    delli8k - KMilo plug-in for special volume keys of Dell laptops
+    Copyright (C) 2004 Barry O'Donovan <barry.odonovan@kdemail.net>
+
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+
+
+COMPATIBILITY:
+
+This plug-in should work on any Linux distribution that has the i8k module
+loaded or compiled into the kernel. Compatibility is really dependant on
+the i8kutils package of Massimo Dal Zotto <dz@debian.org> which can be
+downloaded from http://www.debian.org/~dz/i8k/. Currently (20041122), this
+should support:
+
+    Inspiron 1100 (BIOS A06), one fan, no buttons
+    Inspiron 2650 (BIOS A05)
+    Inspiron 3700 (BIOS A15), no fan speed
+    Inspiron 3800 (BIOS A14), no fan speed
+    Inspiron 4000 (BIOS A10), no fan speed
+    Inspiron 4100
+    Inspiron 4150
+    Inspiron 5100 (BIOS A06), one fan, no buttons
+    Inspiron 5150 (BIOS A24), one fan, no buttons
+    Inspiron 8000 (BIOS A17)
+    Inspiron 8100 (BIOS A04)
+    Inspiron 8200 (BIOS A06)
+    Latitude C400 (BIOS A01)
+    Latitude C510 (BIOS A07)
+    Latitude C600 (BIOS A17)
+    Latitude C610
+    Latitude C800 (BIOS A17)
+    Latitude C810 (BIOS A12)
+    Latitude C840 (BIOS A10)
+    Latitude CPiA (BIOS A14), no fan speed
+    Latitude CPx J750GT (BIOS A13), no fan speed
+    Latitude D600 (BIOS A05)
+    Latitude D800 (BIOS A00)
+    Latitude X200 (BIOS A07)
+
+That driver seems *NOT WORKING* on the following models:
+
+    Inspiron 2500 (BIOS A10)
+    Inspiron 3200
+    Inspiron 3500
+    Inspiron 5000e (BIOS A06)
+    Inspiron 5150 (BIOS A23)
+    Inspiron 7000
+    Inspiron 7500
+    Latitude CPx H450GT
+    Latitude LS H500ST
+
+HISTORY:
+
+22 November 2004 - Initial release
+
+TODO:
+
+KCM Module
+     - set volume step size
+     - set dcop mixer device
+     - allow use of special keys
+       (this may require the user to set up key codes under X)
+
+

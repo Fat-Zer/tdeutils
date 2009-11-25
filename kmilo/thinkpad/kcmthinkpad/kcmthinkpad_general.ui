@@ -1,0 +1,307 @@
+<!DOCTYPE UI><UI version="3.3" stdsetdef="1">
+<class>KCMThinkpadGeneral</class>
+<widget class="QWidget">
+    <property name="name">
+        <cstring>KCMThinkpadGeneral</cstring>
+    </property>
+    <property name="geometry">
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>559</width>
+            <height>548</height>
+        </rect>
+    </property>
+    <property name="caption">
+        <string>KVaio: General Options</string>
+    </property>
+    <grid>
+        <property name="name">
+            <cstring>unnamed</cstring>
+        </property>
+        <widget class="QLabel" row="0" column="0">
+            <property name="name">
+                <cstring>tlOff</cstring>
+            </property>
+            <property name="frameShape">
+                <enum>NoFrame</enum>
+            </property>
+            <property name="frameShadow">
+                <enum>Plain</enum>
+            </property>
+            <property name="text">
+                <string>Could not read /dev/nvram. If you have an IBM Thinkpad load the nvram Linux module &lt;em&gt;insmod nvram&lt;/em&gt; and create the node &lt;em&gt;mknod /dev/nvram c 10 144&lt;/em&gt; then make the device readable &lt;em&gt;chmod 664 /dev/nvram&lt;/em&gt; or writable &lt;em&gt;chmod 666 /dev/nvram&lt;/em&gt;.&lt;p&gt;  nvram must be writable for software volume control required for R30/R31 models and for using a custom volume change step.</string>
+            </property>
+        </widget>
+        <widget class="QButtonGroup" row="1" column="0">
+            <property name="name">
+                <cstring>bgGeneral</cstring>
+            </property>
+            <property name="title">
+                <string>Thinkpad Button Options</string>
+            </property>
+            <grid>
+                <property name="name">
+                    <cstring>unnamed</cstring>
+                </property>
+                <widget class="QCheckBox" row="0" column="0">
+                    <property name="name">
+                        <cstring>mCbRun</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Run Thinkpad Buttons KMilo plugin</string>
+                    </property>
+                </widget>
+                <widget class="QCheckBox" row="1" column="0">
+                    <property name="name">
+                        <cstring>mCbSoftwareVolume</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Change volume in software (required by R30/R31)</string>
+                    </property>
+                </widget>
+                <widget class="QLayoutWidget" row="2" column="0">
+                    <property name="name">
+                        <cstring>layout27</cstring>
+                    </property>
+                    <grid>
+                        <property name="name">
+                            <cstring>unnamed</cstring>
+                        </property>
+                        <widget class="QLabel" row="4" column="0">
+                            <property name="name">
+                                <cstring>textLabel2_5</cstring>
+                            </property>
+                            <property name="text">
+                                <string>Command for Mail button:</string>
+                            </property>
+                        </widget>
+                        <widget class="QLabel" row="5" column="0">
+                            <property name="name">
+                                <cstring>textLabel2_6</cstring>
+                            </property>
+                            <property name="text">
+                                <string>Command for FN-Zoom button:</string>
+                            </property>
+                        </widget>
+                        <widget class="KURLRequester" row="2" column="1">
+                            <property name="name">
+                                <cstring>commandExecHome</cstring>
+                            </property>
+                            <property name="sizePolicy">
+                                <sizepolicy>
+                                    <hsizetype>3</hsizetype>
+                                    <vsizetype>5</vsizetype>
+                                    <horstretch>1</horstretch>
+                                    <verstretch>0</verstretch>
+                                </sizepolicy>
+                            </property>
+                        </widget>
+                        <widget class="QLabel" row="3" column="0">
+                            <property name="name">
+                                <cstring>textLabel2_4</cstring>
+                            </property>
+                            <property name="text">
+                                <string>Command for Search button:</string>
+                            </property>
+                        </widget>
+                        <widget class="KURLRequester" row="1" column="1">
+                            <property name="name">
+                                <cstring>commandExec</cstring>
+                            </property>
+                            <property name="sizePolicy">
+                                <sizepolicy>
+                                    <hsizetype>3</hsizetype>
+                                    <vsizetype>5</vsizetype>
+                                    <horstretch>1</horstretch>
+                                    <verstretch>0</verstretch>
+                                </sizepolicy>
+                            </property>
+                        </widget>
+                        <widget class="QLabel" row="0" column="0">
+                            <property name="name">
+                                <cstring>volumeStepLabel</cstring>
+                            </property>
+                            <property name="sizePolicy">
+                                <sizepolicy>
+                                    <hsizetype>1</hsizetype>
+                                    <vsizetype>5</vsizetype>
+                                    <horstretch>0</horstretch>
+                                    <verstretch>0</verstretch>
+                                </sizepolicy>
+                            </property>
+                            <property name="frameShape">
+                                <enum>NoFrame</enum>
+                            </property>
+                            <property name="frameShadow">
+                                <enum>Plain</enum>
+                            </property>
+                            <property name="text">
+                                <string>Volume step (out of 100):</string>
+                            </property>
+                        </widget>
+                        <widget class="KURLRequester" row="5" column="1">
+                            <property name="name">
+                                <cstring>commandExecZoom</cstring>
+                            </property>
+                            <property name="sizePolicy">
+                                <sizepolicy>
+                                    <hsizetype>3</hsizetype>
+                                    <vsizetype>5</vsizetype>
+                                    <horstretch>1</horstretch>
+                                    <verstretch>0</verstretch>
+                                </sizepolicy>
+                            </property>
+                        </widget>
+                        <widget class="QLabel" row="2" column="0">
+                            <property name="name">
+                                <cstring>textLabel2_3</cstring>
+                            </property>
+                            <property name="text">
+                                <string>Command for Home button:</string>
+                            </property>
+                        </widget>
+                        <widget class="QSpinBox" row="0" column="1">
+                            <property name="name">
+                                <cstring>mSpinboxVolumeStep</cstring>
+                            </property>
+                            <property name="sizePolicy">
+                                <sizepolicy>
+                                    <hsizetype>3</hsizetype>
+                                    <vsizetype>5</vsizetype>
+                                    <horstretch>1</horstretch>
+                                    <verstretch>0</verstretch>
+                                </sizepolicy>
+                            </property>
+                            <property name="maxValue">
+                                <number>30</number>
+                            </property>
+                            <property name="minValue">
+                                <number>1</number>
+                            </property>
+                        </widget>
+                        <widget class="KURLRequester" row="3" column="1">
+                            <property name="name">
+                                <cstring>commandExecSearch</cstring>
+                            </property>
+                            <property name="sizePolicy">
+                                <sizepolicy>
+                                    <hsizetype>3</hsizetype>
+                                    <vsizetype>5</vsizetype>
+                                    <horstretch>1</horstretch>
+                                    <verstretch>0</verstretch>
+                                </sizepolicy>
+                            </property>
+                        </widget>
+                        <widget class="QLabel" row="1" column="0">
+                            <property name="name">
+                                <cstring>textLabel2</cstring>
+                            </property>
+                            <property name="text">
+                                <string>Command for Thinkpad button:</string>
+                            </property>
+                        </widget>
+                        <widget class="KURLRequester" row="4" column="1">
+                            <property name="name">
+                                <cstring>commandExecMail</cstring>
+                            </property>
+                            <property name="sizePolicy">
+                                <sizepolicy>
+                                    <hsizetype>3</hsizetype>
+                                    <vsizetype>5</vsizetype>
+                                    <horstretch>1</horstretch>
+                                    <verstretch>0</verstretch>
+                                </sizepolicy>
+                            </property>
+                        </widget>
+                    </grid>
+                </widget>
+            </grid>
+        </widget>
+    </grid>
+</widget>
+<customwidgets>
+</customwidgets>
+<connections>
+    <connection>
+        <sender>mCbRun</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>KCMThinkpadGeneral</receiver>
+        <slot>slotChanged()</slot>
+    </connection>
+    <connection>
+        <sender>mCbSoftwareVolume</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>KCMThinkpadGeneral</receiver>
+        <slot>slotChanged()</slot>
+    </connection>
+    <connection>
+        <sender>mSpinboxVolumeStep</sender>
+        <signal>valueChanged(int)</signal>
+        <receiver>KCMThinkpadGeneral</receiver>
+        <slot>slotChanged()</slot>
+    </connection>
+    <connection>
+        <sender>commandExec</sender>
+        <signal>textChanged(const QString&amp;)</signal>
+        <receiver>KCMThinkpadGeneral</receiver>
+        <slot>slotChanged()</slot>
+    </connection>
+    <connection>
+        <sender>commandExecHome</sender>
+        <signal>textChanged(const QString&amp;)</signal>
+        <receiver>KCMThinkpadGeneral</receiver>
+        <slot>slotChanged()</slot>
+    </connection>
+    <connection>
+        <sender>commandExecMail</sender>
+        <signal>textChanged(const QString&amp;)</signal>
+        <receiver>KCMThinkpadGeneral</receiver>
+        <slot>slotChanged()</slot>
+    </connection>
+    <connection>
+        <sender>commandExecSearch</sender>
+        <signal>textChanged(const QString&amp;)</signal>
+        <receiver>KCMThinkpadGeneral</receiver>
+        <slot>slotChanged()</slot>
+    </connection>
+    <connection>
+        <sender>commandExecZoom</sender>
+        <signal>textChanged(const QString&amp;)</signal>
+        <receiver>KCMThinkpadGeneral</receiver>
+        <slot>slotChanged()</slot>
+    </connection>
+</connections>
+<tabstops>
+    <tabstop>mCbRun</tabstop>
+    <tabstop>mCbSoftwareVolume</tabstop>
+    <tabstop>mSpinboxVolumeStep</tabstop>
+    <tabstop>commandExec</tabstop>
+    <tabstop>commandExecHome</tabstop>
+    <tabstop>commandExecSearch</tabstop>
+    <tabstop>commandExecMail</tabstop>
+</tabstops>
+<includes>
+    <include location="local" impldecl="in implementation">kcmthinkpad_general.ui.h</include>
+</includes>
+<signals>
+    <signal>changed();</signal>
+</signals>
+<slots>
+    <slot>slotChanged()</slot>
+</slots>
+<layoutdefaults spacing="6" margin="11"/>
+<layoutfunctions spacing="KDialog::spacingHint" margin="KDialog::marginHint"/>
+<includehints>
+    <includehint>kurlrequester.h</includehint>
+    <includehint>kpushbutton.h</includehint>
+    <includehint>kurlrequester.h</includehint>
+    <includehint>kpushbutton.h</includehint>
+    <includehint>kurlrequester.h</includehint>
+    <includehint>kpushbutton.h</includehint>
+    <includehint>kurlrequester.h</includehint>
+    <includehint>kpushbutton.h</includehint>
+    <includehint>kurlrequester.h</includehint>
+    <includehint>kpushbutton.h</includehint>
+</includehints>
+</UI>

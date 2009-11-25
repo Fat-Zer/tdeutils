@@ -1,0 +1,440 @@
+<!DOCTYPE UI><UI version="3.1" stdsetdef="1">
+<class>KSim::Snmp::MonitorDialogBase</class>
+<widget class="KDialog">
+    <property name="name">
+        <cstring>MonitorDialogBase</cstring>
+    </property>
+    <property name="geometry">
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>725</width>
+            <height>597</height>
+        </rect>
+    </property>
+    <property name="caption">
+        <string>Configure Monitor</string>
+    </property>
+    <property name="sizeGripEnabled">
+        <bool>true</bool>
+    </property>
+    <grid>
+        <property name="name">
+            <cstring>unnamed</cstring>
+        </property>
+        <widget class="QLabel" row="4" column="0">
+            <property name="name">
+                <cstring>textLabel5</cstring>
+            </property>
+            <property name="text">
+                <string>Display type:</string>
+            </property>
+        </widget>
+        <widget class="QLabel" row="3" column="0">
+            <property name="name">
+                <cstring>textLabel2</cstring>
+            </property>
+            <property name="text">
+                <string>Update interval:</string>
+            </property>
+        </widget>
+        <widget class="QLabel" row="2" column="0">
+            <property name="name">
+                <cstring>textLabel1</cstring>
+            </property>
+            <property name="text">
+                <string>Object identifier:</string>
+            </property>
+        </widget>
+        <widget class="QLabel" row="0" column="0">
+            <property name="name">
+                <cstring>textLabel1_2</cstring>
+            </property>
+            <property name="text">
+                <string>Name:</string>
+            </property>
+        </widget>
+        <widget class="QLabel" row="1" column="0">
+            <property name="name">
+                <cstring>textLabel1_3</cstring>
+            </property>
+            <property name="text">
+                <string>Host:</string>
+            </property>
+        </widget>
+        <widget class="QGroupBox" row="5" column="0" rowspan="1" colspan="4">
+            <property name="name">
+                <cstring>labelOptions</cstring>
+            </property>
+            <property name="title">
+                <string>Options for Label</string>
+            </property>
+            <grid>
+                <property name="name">
+                    <cstring>unnamed</cstring>
+                </property>
+                <widget class="QCheckBox" row="0" column="0">
+                    <property name="name">
+                        <cstring>customFormatStringCheckBox</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Use custom format string:</string>
+                    </property>
+                </widget>
+                <widget class="QLineEdit" row="0" column="1">
+                    <property name="name">
+                        <cstring>customFormatString</cstring>
+                    </property>
+                    <property name="enabled">
+                        <bool>false</bool>
+                    </property>
+                </widget>
+                <widget class="QLabel" row="1" column="0" rowspan="1" colspan="2">
+                    <property name="name">
+                        <cstring>textLabel1_4</cstring>
+                    </property>
+                    <property name="sizePolicy">
+                        <sizepolicy>
+                            <hsizetype>7</hsizetype>
+                            <vsizetype>7</vsizetype>
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                        </sizepolicy>
+                    </property>
+                    <property name="text">
+                        <string>The text in the edit box is what is displayed except that any occurrence of &lt;b&gt;%s&lt;/b&gt; will be replaced with the snmp object value and any occurrence of &lt;b&gt;%n&lt;/b&gt; will be replaced with the name of this monitor (see Name input field) .</string>
+                    </property>
+                    <property name="alignment">
+                        <set>WordBreak|AlignVCenter</set>
+                    </property>
+                </widget>
+            </grid>
+        </widget>
+        <widget class="QLayoutWidget" row="3" column="1" rowspan="1" colspan="3">
+            <property name="name">
+                <cstring>layout2</cstring>
+            </property>
+            <hbox>
+                <property name="name">
+                    <cstring>unnamed</cstring>
+                </property>
+                <widget class="QSpinBox">
+                    <property name="name">
+                        <cstring>updateIntervalMinutes</cstring>
+                    </property>
+                    <property name="maxValue">
+                        <number>60</number>
+                    </property>
+                </widget>
+                <widget class="QLabel">
+                    <property name="name">
+                        <cstring>textLabel4</cstring>
+                    </property>
+                    <property name="text">
+                        <string>minutes</string>
+                    </property>
+                </widget>
+                <widget class="QSpinBox">
+                    <property name="name">
+                        <cstring>updateIntervalSeconds</cstring>
+                    </property>
+                    <property name="maxValue">
+                        <number>59</number>
+                    </property>
+                    <property name="minValue">
+                        <number>1</number>
+                    </property>
+                </widget>
+                <widget class="QLabel">
+                    <property name="name">
+                        <cstring>textLabel3</cstring>
+                    </property>
+                    <property name="text">
+                        <string>seconds</string>
+                    </property>
+                </widget>
+                <spacer>
+                    <property name="name">
+                        <cstring>spacer2</cstring>
+                    </property>
+                    <property name="orientation">
+                        <enum>Horizontal</enum>
+                    </property>
+                    <property name="sizeType">
+                        <enum>Expanding</enum>
+                    </property>
+                    <property name="sizeHint">
+                        <size>
+                            <width>141</width>
+                            <height>20</height>
+                        </size>
+                    </property>
+                </spacer>
+            </hbox>
+        </widget>
+        <widget class="QLayoutWidget" row="4" column="1" rowspan="1" colspan="3">
+            <property name="name">
+                <cstring>layout3</cstring>
+            </property>
+            <hbox>
+                <property name="name">
+                    <cstring>unnamed</cstring>
+                </property>
+                <widget class="QComboBox">
+                    <item>
+                        <property name="text">
+                            <string>Chart</string>
+                        </property>
+                    </item>
+                    <item>
+                        <property name="text">
+                            <string>Text Label</string>
+                        </property>
+                    </item>
+                    <property name="name">
+                        <cstring>displayType</cstring>
+                    </property>
+                </widget>
+                <spacer>
+                    <property name="name">
+                        <cstring>spacer3</cstring>
+                    </property>
+                    <property name="orientation">
+                        <enum>Horizontal</enum>
+                    </property>
+                    <property name="sizeType">
+                        <enum>Expanding</enum>
+                    </property>
+                    <property name="sizeHint">
+                        <size>
+                            <width>271</width>
+                            <height>20</height>
+                        </size>
+                    </property>
+                </spacer>
+            </hbox>
+        </widget>
+        <spacer row="0" column="2" rowspan="1" colspan="2">
+            <property name="name">
+                <cstring>spacer4</cstring>
+            </property>
+            <property name="orientation">
+                <enum>Horizontal</enum>
+            </property>
+            <property name="sizeType">
+                <enum>Expanding</enum>
+            </property>
+            <property name="sizeHint">
+                <size>
+                    <width>244</width>
+                    <height>20</height>
+                </size>
+            </property>
+        </spacer>
+        <widget class="QLineEdit" row="0" column="1">
+            <property name="name">
+                <cstring>monitorName</cstring>
+            </property>
+        </widget>
+        <spacer row="1" column="2" rowspan="1" colspan="2">
+            <property name="name">
+                <cstring>spacer5</cstring>
+            </property>
+            <property name="orientation">
+                <enum>Horizontal</enum>
+            </property>
+            <property name="sizeType">
+                <enum>Expanding</enum>
+            </property>
+            <property name="sizeHint">
+                <size>
+                    <width>210</width>
+                    <height>20</height>
+                </size>
+            </property>
+        </spacer>
+        <widget class="QComboBox" row="1" column="1">
+            <property name="name">
+                <cstring>host</cstring>
+            </property>
+        </widget>
+        <widget class="QLayoutWidget" row="9" column="0" rowspan="1" colspan="4">
+            <property name="name">
+                <cstring>Layout1</cstring>
+            </property>
+            <hbox>
+                <property name="name">
+                    <cstring>unnamed</cstring>
+                </property>
+                <property name="margin">
+                    <number>0</number>
+                </property>
+                <property name="spacing">
+                    <number>6</number>
+                </property>
+                <spacer>
+                    <property name="name">
+                        <cstring>Horizontal Spacing2</cstring>
+                    </property>
+                    <property name="orientation">
+                        <enum>Horizontal</enum>
+                    </property>
+                    <property name="sizeType">
+                        <enum>Expanding</enum>
+                    </property>
+                    <property name="sizeHint">
+                        <size>
+                            <width>20</width>
+                            <height>20</height>
+                        </size>
+                    </property>
+                </spacer>
+                <widget class="QPushButton">
+                    <property name="name">
+                        <cstring>buttonOk</cstring>
+                    </property>
+                    <property name="text">
+                        <string>&amp;OK</string>
+                    </property>
+                    <property name="autoDefault">
+                        <bool>true</bool>
+                    </property>
+                    <property name="default">
+                        <bool>true</bool>
+                    </property>
+                </widget>
+                <widget class="QPushButton">
+                    <property name="name">
+                        <cstring>buttonCancel</cstring>
+                    </property>
+                    <property name="text">
+                        <string>&amp;Cancel</string>
+                    </property>
+                    <property name="autoDefault">
+                        <bool>true</bool>
+                    </property>
+                </widget>
+            </hbox>
+        </widget>
+        <widget class="Line" row="8" column="0" rowspan="1" colspan="4">
+            <property name="name">
+                <cstring>line1</cstring>
+            </property>
+            <property name="frameShape">
+                <enum>HLine</enum>
+            </property>
+            <property name="frameShadow">
+                <enum>Sunken</enum>
+            </property>
+            <property name="orientation">
+                <enum>Horizontal</enum>
+            </property>
+        </widget>
+        <widget class="QLabel" row="7" column="0" rowspan="1" colspan="4">
+            <property name="name">
+                <cstring>status</cstring>
+            </property>
+            <property name="text">
+                <string>blehStatus</string>
+            </property>
+        </widget>
+        <widget class="QGroupBox" row="6" column="0" rowspan="1" colspan="4">
+            <property name="name">
+                <cstring>chartOptions</cstring>
+            </property>
+            <property name="title">
+                <string>Options for Chart</string>
+            </property>
+            <hbox>
+                <property name="name">
+                    <cstring>unnamed</cstring>
+                </property>
+                <widget class="QCheckBox">
+                    <property name="name">
+                        <cstring>displayCurrentValueInline</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Treat data as byte transfer rate and display the current value inline</string>
+                    </property>
+                </widget>
+            </hbox>
+        </widget>
+        <widget class="KPushButton" row="2" column="3">
+            <property name="name">
+                <cstring>browseButton</cstring>
+            </property>
+            <property name="text">
+                <string>Browse...</string>
+            </property>
+        </widget>
+        <widget class="QLineEdit" row="2" column="1" rowspan="1" colspan="2">
+            <property name="name">
+                <cstring>oid</cstring>
+            </property>
+        </widget>
+    </grid>
+</widget>
+<connections>
+    <connection>
+        <sender>buttonOk</sender>
+        <signal>clicked()</signal>
+        <receiver>MonitorDialogBase</receiver>
+        <slot>accept()</slot>
+    </connection>
+    <connection>
+        <sender>buttonCancel</sender>
+        <signal>clicked()</signal>
+        <receiver>MonitorDialogBase</receiver>
+        <slot>reject()</slot>
+    </connection>
+    <connection>
+        <sender>monitorName</sender>
+        <signal>textChanged(const QString&amp;)</signal>
+        <receiver>MonitorDialogBase</receiver>
+        <slot>checkValues()</slot>
+    </connection>
+    <connection>
+        <sender>oid</sender>
+        <signal>textChanged(const QString&amp;)</signal>
+        <receiver>MonitorDialogBase</receiver>
+        <slot>checkValues()</slot>
+    </connection>
+    <connection>
+        <sender>displayType</sender>
+        <signal>activated(const QString&amp;)</signal>
+        <receiver>MonitorDialogBase</receiver>
+        <slot>checkValues()</slot>
+    </connection>
+    <connection>
+        <sender>customFormatStringCheckBox</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>customFormatString</receiver>
+        <slot>setEnabled(bool)</slot>
+    </connection>
+    <connection>
+        <sender>browseButton</sender>
+        <signal>clicked()</signal>
+        <receiver>MonitorDialogBase</receiver>
+        <slot>browse()</slot>
+    </connection>
+</connections>
+<tabstops>
+    <tabstop>monitorName</tabstop>
+    <tabstop>host</tabstop>
+    <tabstop>oid</tabstop>
+    <tabstop>updateIntervalMinutes</tabstop>
+    <tabstop>updateIntervalSeconds</tabstop>
+    <tabstop>displayType</tabstop>
+    <tabstop>buttonOk</tabstop>
+    <tabstop>buttonCancel</tabstop>
+</tabstops>
+<slots>
+    <slot access="protected">checkValues()</slot>
+    <slot access="protected">browse()</slot>
+</slots>
+<layoutdefaults spacing="6" margin="11"/>
+<includehints>
+    <includehint>kdialog.h</includehint>
+    <includehint>kpushbutton.h</includehint>
+</includehints>
+</UI>

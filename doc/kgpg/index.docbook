@@ -1,0 +1,354 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.1.2-Based Variant V1.0//EN"
+"dtd/kdex.dtd" [
+  <!ENTITY kgpg "<application>Kgpg</application>">
+  <!ENTITY package "kdeutils">
+  <!ENTITY kappname "&kgpg;">
+  <!ENTITY % addindex "IGNORE">
+  <!ENTITY % English "INCLUDE">
+]>
+
+<book lang="&language;">
+
+<bookinfo>
+<title>The &kgpg; Handbook</title>
+
+<authorgroup>
+<author>
+<firstname>Jean-Baptiste</firstname>
+<surname>Mardelle</surname>
+<affiliation>
+<address><email>bj@altern.org</email></address>
+</affiliation>
+</author>
+
+<!-- TRANS:ROLES_OF_TRANSLATORS -->
+
+</authorgroup>
+
+<copyright>
+<year>2002</year>
+<holder>Jean-Baptiste Mardelle</holder>
+</copyright>
+
+<legalnotice>&FDLNotice;</legalnotice>
+
+<date>2002-03-01</date>
+<releaseinfo>0.02.00</releaseinfo>
+
+<abstract>
+<para>
+&kgpg; is a simple graphical interface for GnuPG <ulink
+url="http://gnupg.org"> (http://gnupg.org)</ulink>
+</para>
+</abstract>
+
+<keywordset>
+<keyword>KDE</keyword>
+<keyword>Kgpg</keyword>
+<keyword>encryption</keyword>
+<keyword>gpg</keyword>
+<keyword>pgp</keyword>
+<keyword>security</keyword>
+</keywordset>
+
+</bookinfo>
+
+<chapter id="introduction">
+<title>Introduction</title>
+
+
+<para>&kgpg; is a simple interface for GnuPG, a powerful encryption utility. GnuPG (also known as gpg) is included in most distributions and should be installed on your system. You can get the latest version on <ulink
+url="http://gnupg.org">http://gnupg.org</ulink>.</para>
+
+<para>With &kgpg; you will be able to encrypt and decrypt your files and emails, allowing much more secure communications. A mini howto on encryption with gpg is available on <ulink url="http://www.gnupg.org/(en)/documentation/howtos.html">gnupg's web site</ulink>.
+</para>
+
+<para>With &kgpg;, you don't need to remember gpg's command lines and options. Almost everything can be done with a few mouse clicks.
+</para>
+</chapter>
+
+<chapter id="getting-started">
+<title>Getting Started</title>
+
+<para>Here is a list of &kgpg;'s main components:</para>
+
+<variablelist>
+
+<varlistentry>
+<term>System Tray Icon </term>
+<listitem>
+
+<screenshot>
+<screeninfo>&kgpg; system tray applet</screeninfo>
+<mediaobject>
+<imageobject>
+<imagedata fileref="kicker.png" format="PNG"/></imageobject>
+</mediaobject>
+</screenshot>
+
+<para>
+When you start &kgpg;, a system tray icon will appear. A &LMB;
+click will open the Key Manager window, while a &RMB; click will open a menu allowing quick access to some important features.
+You can also drop files or text on the applet icon to encrypt or decrypt it.
+</para>
+</listitem>
+</varlistentry>
+
+
+<varlistentry>
+<term>Key Manager Window</term>
+<listitem>
+
+<screenshot>
+<screeninfo>Key manager window</screeninfo>
+<mediaobject>
+<imageobject>
+<imagedata fileref="keymanage.png" format="PNG"/></imageobject>
+</mediaobject>
+</screenshot>
+
+<para>That's the central place to manage your keys. To open the Key Manager window, &LMB; on &kgpg;'s applet.
+You can import, export, sign and edit your keys. Most actions can be performed with a &LMB; click on a key.
+</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>Editor Window</term>
+<listitem>
+
+<screenshot>
+<screeninfo>Editor window</screeninfo>
+<mediaobject>
+<imageobject>
+<imagedata fileref="editor.png" format="PNG"/></imageobject>
+</mediaobject>
+</screenshot>
+
+<para>It's a simple text editor, where you can type or paste text to encrypt/decrypt it. To open the editor, &RMB; on &kgpg;'s applet.
+</para>
+</listitem>
+</varlistentry>
+
+
+<varlistentry>
+<term>Konqueror Integration</term>
+<listitem>
+
+<para>&kgpg; is integrated in &konqueror;. It means that when you right click on a file, you can choose
+ <menuchoice><guimenu>Actions</guimenu><guimenuitem>Encrypt
+File</guimenuitem></menuchoice> to encrypt a file. You can decrypt a file with a &LMB; click.
+ </para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+</chapter>
+
+<chapter id="using-kgpg">
+<title>Using &kgpg;</title>
+
+<para>
+There are two ways to encrypt your data:
+<itemizedlist>
+<listitem><para>Symmetrical encryption: your data is just encrypted with a password. Anybody who has a computer with gpg can decrypt your message if you give him/her the password. To perform a symmetrical encryption, choose "symmetrical encryption" in the options box when asked to choose an encryption key.</para></listitem>
+<listitem><para>Key encryption: you must first create your key pair (secret key and public key) and give a passphrase. Keep your secret key in a safe plece, and exchange your public key with your friends. Then, if you want to send an encrypted message to Alex, you must encrypt the message with Alex's public key. To decrypt the message, the recipient will need Alex's secret key and passphrase.</para></listitem>
+</itemizedlist>
+</para>
+<para>Key encryption is a bit more complicated (you must exchange keys with your friends) but safer. Remember that if you encrypt a key with someone else's key, you will not be able to decrypt it. You can only decrypt messages that have been encrypted with your public key.</para>
+
+<sect1 id="key-generation">
+<title>Generating a key</title>
+
+<para>If you don't have a key, &kgpg; will automatically pop up
+the key generation dialog at the first startup. You can also access it
+in the Key Manager from
+<menuchoice><guimenu>Keys</guimenu><guimenuitem>Generate Key
+Pair</guimenuitem></menuchoice>.</para>
+
+<screenshot>
+<screeninfo>Key generation dialog</screeninfo>
+<mediaobject>
+<imageobject>
+<imagedata fileref="keygen.png" format="PNG"/></imageobject>
+</mediaobject>
+</screenshot>
+
+<para>Simply enter your name, Email address and click
+<guibutton>Ok</guibutton>. This will generate a standard gpg key. If
+you want more options, you can click on the Expert mode button, which
+will bring up a &konsole; window with all of gpg's options.</para>
+
+</sect1>
+
+<sect1 id="encryption">
+<title>Encrypting Your Data</title>
+
+<sect2 id="konqui">
+
+<title>Encrypting a File From &konqueror;</title>
+
+<para>Click on the file you want to
+encrypt with the &RMB;. Choose <menuchoice><guimenu>Actions</guimenu><guimenuitem>Encrypt
+File</guimenuitem></menuchoice> in the pop up
+menu. You will then be prompted with the Public key selection
+dialog. Choose the key of the recipient and click <guibutton>Encrypt</guibutton>. The
+encrypted file will be saved with a <literal
+role="extension">.asc</literal> or <literal
+role="extension">.gpg</literal> extension depending on whether you
+chose ASCII encryption or not.</para>
+
+</sect2>
+
+<sect2 id="drop">
+<title>Encrypting a File or Text With &kgpg;'s Applet</title>
+
+<para>Simply drop your file on the &kgpg; system tray applet. If it is
+an unencrypted file, &kgpg; will pop up the key selection dialog (see
+below). Select the encryption key, and the encrypted file will be
+saved.  If you drop text, the encrypted text will be pasted to the
+clipboard.  You can also encrypt clipboard by selecting the
+<guimenuitem>Encrypt clipboard</guimenuitem> item in applet
+menu.</para>
+
+<screenshot>
+<screeninfo>Here's a screen shot of the key selection window</screeninfo>
+<mediaobject>
+<imageobject>
+<imagedata fileref="keys.png" format="PNG"/></imageobject>
+</mediaobject>
+</screenshot>
+
+<para>For more information on the encryption options <quote>ASCII
+armor</quote>, <quote>Allow encryption with untrusted keys</quote> and
+<quote>Symmetrical encryption</quote>, please refer to gpg's
+documentation or man pages.</para>
+
+</sect2>
+
+<sect2 id="editor">
+<title>Encrypting Text From &kgpg;'s editor</title>
+
+<para>This is as simple as clicking on the
+<guibutton>Encrypt</guibutton> button. You will then be prompted with
+the Public key selection dialog. Choose your key and click
+<guibutton>Encrypt</guibutton> again. The encrypted message will
+appear in the editor window.</para>
+</sect2>
+
+</sect1>
+
+<sect1 id="decryption">
+<title>Decrypting Your Data</title>
+
+
+<sect2 id="konq-dec">
+<title>Decrypting a File From &konqueror;</title>
+<para><mousebutton>Left</mousebutton> click on the file you want to
+decrypt. Enter your passphrase and it will be decrypted. You can also
+drag an encrypted text file and drop it into &kgpg;'s editor window. It
+will then ask the passphrase and open the decrypted text in &kgpg;'s
+editor.  You can even drop remote files ! You can also use the
+<menuchoice><guimenu>File</guimenu><guimenuitem>Decrypt
+File</guimenuitem></menuchoice> and choose a file to decrypt.</para>
+
+</sect2>
+
+<sect2 id="kicker-dec">
+<title>Decrypting Text or a File With the &kgpg; applet</title>
+
+<para>You can drop an encrypted file or selected text on the &kgpg;
+system tray applet. You will then be prompted for passphrase, and the
+decrypted file/text will be saved or opened in the &kgpg; editor
+depending from how you configured the applet.  You can also decrypt
+clipboard with the <guimenuitem>decrypt clipboard</guimenuitem> menu
+entry of the &kgpg; applet </para>
+
+</sect2>
+
+<sect2 id="editor-dec">
+<title>Decrypting a text from the editor</title>
+
+<para>Copy or Drag and Drop the text you want to decrypt, and click on
+the <guibutton>Decrypt</guibutton> button. You will be prompted for the
+passphrase.
+</para>
+</sect2>
+
+</sect1>
+
+<sect1 id="manage">
+<title>Key Management</title>
+
+<para>All basic key management options can be performed through
+&kgpg;. To open the key management window &LMB; on &kgpg;'s applet.
+Most options are available with a <mousebutton>right</mousebutton> click on a key.
+To import/export public keys, you can use drag
+and drop or the Copy/Paste keyboard shortcuts.</para>
+
+<screenshot>
+<screeninfo>Here's a screen shot of key management</screeninfo>
+<mediaobject>
+<imageobject>
+<imagedata fileref="keymanage.png" format="PNG"/></imageobject>
+</mediaobject>
+</screenshot>
+
+</sect1>
+
+<sect1 id="options">
+<title>Configuring &kgpg;</title>
+
+<para>Configuration is accessible through the &kgpg; applet menu (&RMB;
+click on the applet). You can set default parameters for encryption,
+decryption, user interface and applet.  Most encryption options are
+directly related to gpg and are documented in it's man page. </para>
+
+<screenshot>
+<screeninfo>Here's a screen shot of the option dialog</screeninfo>
+<mediaobject>
+<imageobject>
+<imagedata fileref="options.png" format="PNG"/></imageobject>
+</mediaobject>
+</screenshot>
+
+</sect1>
+
+</chapter>
+
+
+<chapter id="credits">
+
+<title>Credits and License</title>
+
+<para>
+&kgpg;
+</para>
+
+<para>Program copyright &copy; 2002-2003 Jean-Baptiste Mardelle
+<email>bj@altern.org</email>.</para>
+
+<!-- TRANS:CREDIT_FOR_TRANSLATORS -->
+
+&underFDL;               <!-- FDL: do not remove -->
+&underGPL;
+
+</chapter>
+
+&documentation.index;
+
+</book>
+
+<!--
+Local Variables:
+mode: sgml
+sgml-minimize-attributes: nil
+sgml-general-insert-case: lower
+sgml-intent-step:0
+sgml-indent-data:nil
+End:
+-->
+
+

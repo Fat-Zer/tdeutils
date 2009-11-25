@@ -1,0 +1,12 @@
+#MIN_CONFIG
+KDE_ENABLE_HIDDEN_VISIBILITY
+KDE_INIT_DOXYGEN([KDE Utils API Reference], [Version $VERSION])
+
+AC_HEADER_DIRENT
+AC_HEADER_STDC
+AC_CHECK_HEADERS(fcntl.h sys/sysctl.h sys/param.h sys/time.h sys/types.h sys/user.h sys/vmmeter.h sys/resource.h vm/vmparam.h unistd.h)
+
+AC_CHECK_SETENV
+AC_CHECK_UNSETENV
+
+CXXFLAGS="$CXXFLAGS $KDE_DEFAULT_CXXFLAGS"

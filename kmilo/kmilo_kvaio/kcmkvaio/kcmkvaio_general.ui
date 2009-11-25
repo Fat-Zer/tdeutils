@@ -1,0 +1,273 @@
+<!DOCTYPE UI><UI version="3.3" stdsetdef="1">
+<class>KCMKVaioGeneral</class>
+<widget class="QWidget">
+    <property name="name">
+        <cstring>KCMKVaioGeneral</cstring>
+    </property>
+    <property name="geometry">
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>536</width>
+            <height>226</height>
+        </rect>
+    </property>
+    <property name="caption">
+        <string>KVaio: General Options</string>
+    </property>
+    <vbox>
+        <property name="name">
+            <cstring>unnamed</cstring>
+        </property>
+        <property name="margin">
+            <number>0</number>
+        </property>
+        <widget class="QLabel">
+            <property name="name">
+                <cstring>tlOff</cstring>
+            </property>
+            <property name="frameShape">
+                <enum>NoFrame</enum>
+            </property>
+            <property name="frameShadow">
+                <enum>Plain</enum>
+            </property>
+            <property name="text">
+                <string>Cannot find the &lt;i&gt;Sony Programmable Interrupt Controller&lt;/i&gt;. If this is a Sony Vaio Laptop, make sure the &lt;b&gt;sonypi&lt;/b&gt; driver module loads without failures.</string>
+            </property>
+        </widget>
+        <widget class="QFrame">
+            <property name="name">
+                <cstring>frameMain</cstring>
+            </property>
+            <property name="frameShape">
+                <enum>NoFrame</enum>
+            </property>
+            <property name="frameShadow">
+                <enum>Plain</enum>
+            </property>
+            <vbox>
+                <property name="name">
+                    <cstring>unnamed</cstring>
+                </property>
+                <property name="margin">
+                    <number>0</number>
+                </property>
+                <widget class="QButtonGroup">
+                    <property name="name">
+                        <cstring>bgBattery</cstring>
+                    </property>
+                    <property name="title">
+                        <string>System Power</string>
+                    </property>
+                    <hbox>
+                        <property name="name">
+                            <cstring>unnamed</cstring>
+                        </property>
+                        <widget class="QLabel">
+                            <property name="name">
+                                <cstring>mTLBattery</cstring>
+                            </property>
+                            <property name="text">
+                                <string>Remaining battery capacity:</string>
+                            </property>
+                            <property name="alignment">
+                                <set>AlignVCenter|AlignRight</set>
+                            </property>
+                        </widget>
+                        <widget class="KProgress">
+                            <property name="name">
+                                <cstring>mKPBattery</cstring>
+                            </property>
+                        </widget>
+                        <widget class="KLed">
+                            <property name="name">
+                                <cstring>kledAC</cstring>
+                            </property>
+                            <property name="state">
+                                <enum>Off</enum>
+                            </property>
+                            <property name="shape">
+                                <enum>Rectangular</enum>
+                            </property>
+                            <property name="color">
+                                <color>
+                                    <red>0</red>
+                                    <green>255</green>
+                                    <blue>0</blue>
+                                </color>
+                            </property>
+                        </widget>
+                        <widget class="QLabel">
+                            <property name="name">
+                                <cstring>tlAC</cstring>
+                            </property>
+                            <property name="font">
+                                <font>
+                                </font>
+                            </property>
+                            <property name="text">
+                                <string>AC</string>
+                            </property>
+                            <property name="alignment">
+                                <set>AlignVCenter|AlignLeft</set>
+                            </property>
+                        </widget>
+                        <widget class="KLed">
+                            <property name="name">
+                                <cstring>kledBat1</cstring>
+                            </property>
+                            <property name="sizePolicy">
+                                <sizepolicy>
+                                    <hsizetype>5</hsizetype>
+                                    <vsizetype>5</vsizetype>
+                                    <horstretch>0</horstretch>
+                                    <verstretch>0</verstretch>
+                                </sizepolicy>
+                            </property>
+                            <property name="state">
+                                <enum>Off</enum>
+                            </property>
+                            <property name="shape">
+                                <enum>Rectangular</enum>
+                            </property>
+                            <property name="color">
+                                <color>
+                                    <red>255</red>
+                                    <green>255</green>
+                                    <blue>0</blue>
+                                </color>
+                            </property>
+                        </widget>
+                        <widget class="QLabel">
+                            <property name="name">
+                                <cstring>tlBat1</cstring>
+                            </property>
+                            <property name="font">
+                                <font>
+                                </font>
+                            </property>
+                            <property name="text">
+                                <string>Bat 1</string>
+                            </property>
+                            <property name="alignment">
+                                <set>AlignVCenter|AlignLeft</set>
+                            </property>
+                        </widget>
+                        <widget class="KLed">
+                            <property name="name">
+                                <cstring>kledBat2</cstring>
+                            </property>
+                            <property name="state">
+                                <enum>Off</enum>
+                            </property>
+                            <property name="shape">
+                                <enum>Rectangular</enum>
+                            </property>
+                            <property name="look">
+                                <enum>Raised</enum>
+                            </property>
+                            <property name="color">
+                                <color>
+                                    <red>255</red>
+                                    <green>255</green>
+                                    <blue>0</blue>
+                                </color>
+                            </property>
+                        </widget>
+                        <widget class="QLabel">
+                            <property name="name">
+                                <cstring>tlBat2</cstring>
+                            </property>
+                            <property name="font">
+                                <font>
+                                </font>
+                            </property>
+                            <property name="text">
+                                <string>Bat 2</string>
+                            </property>
+                            <property name="alignment">
+                                <set>AlignVCenter|AlignLeft</set>
+                            </property>
+                        </widget>
+                    </hbox>
+                </widget>
+                <widget class="QButtonGroup">
+                    <property name="name">
+                        <cstring>bgGeneral</cstring>
+                    </property>
+                    <property name="title">
+                        <string>Other Options</string>
+                    </property>
+                    <vbox>
+                        <property name="name">
+                            <cstring>unnamed</cstring>
+                        </property>
+                        <widget class="QCheckBox">
+                            <property name="name">
+                                <cstring>mCbPowerMsgs</cstring>
+                            </property>
+                            <property name="text">
+                                <string>Periodically inform about battery and AC adapter status</string>
+                            </property>
+                        </widget>
+                        <widget class="QCheckBox">
+                            <property name="name">
+                                <cstring>mCbBackButtonMsg</cstring>
+                            </property>
+                            <property name="text">
+                                <string>Show battery and AC status on Back button press</string>
+                            </property>
+                        </widget>
+                        <widget class="QCheckBox">
+                            <property name="name">
+                                <cstring>cbReportUnknownEvents</cstring>
+                            </property>
+                            <property name="text">
+                                <string>Report unhandled events using On Screen Display</string>
+                            </property>
+                        </widget>
+                    </vbox>
+                </widget>
+            </vbox>
+        </widget>
+    </vbox>
+</widget>
+<connections>
+    <connection>
+        <sender>cbReportUnknownEvents</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>KCMKVaioGeneral</receiver>
+        <slot>slotChanged()</slot>
+    </connection>
+    <connection>
+        <sender>mCbPowerMsgs</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>KCMKVaioGeneral</receiver>
+        <slot>slotChanged()</slot>
+    </connection>
+    <connection>
+        <sender>mCbBackButtonMsg</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>KCMKVaioGeneral</receiver>
+        <slot>slotChanged()</slot>
+    </connection>
+</connections>
+<includes>
+    <include location="local" impldecl="in implementation">kcmkvaio_general.ui.h</include>
+</includes>
+<signals>
+    <signal>changed();</signal>
+</signals>
+<slots>
+    <slot>slotChanged()</slot>
+</slots>
+<layoutdefaults spacing="6" margin="11"/>
+<layoutfunctions spacing="KDialog::spacingHint" margin="KDialog::marginHint"/>
+<includehints>
+    <includehint>kprogress.h</includehint>
+    <includehint>kled.h</includehint>
+    <includehint>kled.h</includehint>
+    <includehint>kled.h</includehint>
+</includehints>
+</UI>

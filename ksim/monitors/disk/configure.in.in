@@ -1,0 +1,13 @@
+AC_CHECK_LIB(devstat, selectdevs,
+[
+  LIB_DEVSTAT="-ldevstat"
+],
+[
+  AC_CHECK_LIB(devstat, devstat_selectdevs,
+      [
+        LIB_DEVSTAT="-ldevstat"
+      ]
+  )
+])
+
+AC_SUBST(LIB_DEVSTAT)

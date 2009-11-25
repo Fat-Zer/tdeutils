@@ -1,0 +1,1255 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.1-Based Variant V1.0//EN" "dtd/kdex.dtd" [
+  <!ENTITY kappname "&kedit;">
+  <!ENTITY package "kdeutils">
+  <!ENTITY % addindex "IGNORE">
+  <!ENTITY % English "INCLUDE">
+]>
+
+<book lang="&language;">
+<bookinfo>
+<title>The &kedit; Handbook</title>
+<authorgroup>
+
+<author><firstname>Thad</firstname><surname>McGinnis</surname>
+<affiliation>
+<address><email>ctmcginnis@compuserve.com</email></address>
+</affiliation>
+</author>
+
+<othercredit role="reviewer">
+<firstname>Lauri</firstname>
+<surname>Watts</surname>
+<affiliation><address><email>lauri@kde.org</email></address></affiliation>
+<contrib>Reviewer</contrib>
+</othercredit>
+</authorgroup>
+
+<date>2003-09-16</date>
+<releaseinfo>1.3</releaseinfo>
+
+<legalnotice>&FDLNotice;</legalnotice>
+
+<abstract><para>This Handbook describes &kedit;, a simple
+text editor for &kde;</para> </abstract>
+
+<keywordset>
+<keyword>KDE</keyword>
+<keyword>KEdit</keyword>
+<keyword>text editor</keyword>
+</keywordset>
+
+<copyright>
+<year>2000</year>
+<holder>Thad McGinnis</holder>
+</copyright>
+
+</bookinfo>
+
+<chapter id="introduction">
+<title>Introduction</title>
+
+<para>&kedit; is a text editor for the &kde; Desktop. It is a
+small editor which can be used with &konqueror; for text and
+configuration file browsing. &kedit; also serves well for creating small
+plain text documents. It is not meant to be a programmers editor, in
+particular it is not meant to replace any of the more powerful editors
+such as &kate;, <application>XEmacs</application> or
+<application>Emacs</application>. &kedit;'s functionality will
+intentionally remain rather limited to ensure a reasonably fast
+start.</para>
+
+</chapter>
+
+<chapter id="on-screen-fundamentals"> 
+<title>Some Fundamentals</title>  
+
+<para>&kedit; is very simple to use. Anyone that has used a text editor
+should have no problems. </para>
+
+<sect1 id="drag-and-drop">
+<title>Drag and Drop</title>  
+
+<para>&kedit; uses the &kde; Drag and Drop protocol. Files may be
+dragged and dropped onto &kedit; from the Desktop, &konqueror;, or some
+remote &FTP; site opened in one of &konqueror;'s windows. </para>
+
+</sect1>  
+
+<sect1 id="command-line-options"> 
+<title>Command Line Options</title>  
+
+<para>Though &kedit; may most often be started from the &kde; program
+menu, or a desktop icon, it can also be opened at the command line
+prompt of a terminal window.  There are a few useful options that are
+available when doing this.</para>
+
+<sect2 id="specify-a-file"> 
+<title>Specify a File</title>  
+
+<para>By specifying the path and name of a particular file the user can
+have &kedit; open (or create) that file immediately upon startup.This
+option might look something like the following:</para>
+
+<informalexample>
+<screen><prompt>%</prompt><userinput><command>kedit</command> <replaceable>/home/myhome/docs/myfile.txt</replaceable></userinput></screen>
+</informalexample> 
+
+</sect2> 
+
+<sect2 id="editing-files-on-the-internet"> 
+<title>Specify a file on the Internet</title>  
+
+<para>The above-mentioned method could even be used to open files on the
+internet (if the user has an active connection at the time.)  An example
+of this might look like the following:</para>
+
+<informalexample>
+<screen><prompt>%</prompt><userinput><command>kedit</command> <replaceable>ftp://ftp.kde.org/pub/kde/Welcome.msg</replaceable></userinput></screen>
+</informalexample>  
+
+</sect2>   
+
+<sect2> 
+<title>Other Command Line Options</title>  
+
+<para>The following command line help options are available</para>  
+
+<variablelist> 
+<varlistentry> 
+<term><command>kedit</command> <option>--help</option></term> 
+<listitem>
+<para>This lists the most basic options available at the command
+line.</para>
+</listitem> 
+</varlistentry> 
+
+<varlistentry> 
+<term><command>kedit</command> <option>--help-qt</option></term> 
+<listitem>
+<para>This lists the options available for changing the way &kedit;
+interacts with &Qt;.</para>
+</listitem> 
+</varlistentry> 
+
+<varlistentry> 
+<term><command>kedit</command> <option>--help-kde</option></term> 
+<listitem>
+<para>This lists the options available for changing the way &kedit;
+interacts with &kde;.</para>
+</listitem> 
+</varlistentry> 
+
+<varlistentry> 
+<term><command>kedit</command> <option>--help-all</option></term> 
+<listitem>
+<para>This lists all of the command line options.</para>
+</listitem>
+</varlistentry> 
+
+<varlistentry> 
+<term><command>kedit</command> <option>--author</option></term> 
+<listitem>
+<para>Lists &kedit;'s authors in the terminal window</para>
+</listitem> 
+</varlistentry> 
+
+<varlistentry> 
+<term><command>kedit</command> <option>--version</option></term> 
+<listitem>
+<para>Lists version information for &Qt;, &kde;, and &kedit;. Also
+available through <command>kedit</command> <option>-V</option></para>
+</listitem> 
+</varlistentry> 
+</variablelist> 
+
+</sect2> 
+
+</sect1> 
+
+<sect1 id="keybindings">
+<title>Key Bindings</title>
+
+<para>Many of the key bindings (shortcuts) are configurable by way of
+the <link linkend="settings">Settings</link> menu.  By default &kedit;
+honors the following key bindings.</para> 
+
+<informaltable>
+<tgroup cols="2">
+<thead>
+<row>
+<entry>Key Binding</entry>
+<entry>Action</entry>
+</row>
+</thead>
+<tbody>
+<!--  Insert mode appears to have disappeared again
+<row>
+<entry><keycap>Insert</keycap></entry>
+<entry><action>Toggle between Insert and Overwrite mode.</action></entry>
+</row>
+-->
+<row>
+<entry><keycap>Left Arrow</keycap></entry>
+<entry><action>Move the cursor one character leftwards.</action></entry>
+</row>
+
+<row>
+<entry><keycap>Right Arrow</keycap></entry>
+<entry><action>Move the cursor one character rightwards.</action></entry>
+</row>
+
+<row>
+<entry><keycap>Up Arrow</keycap></entry>
+<entry><action>Move the cursor one line upwards</action></entry>
+</row>
+
+<row>
+<entry><keycap>Down Arrow</keycap></entry>
+<entry><action>Move the cursor one line downwards.</action></entry>
+</row>
+
+<row>
+<entry><keycap>Page Up</keycap></entry>
+<entry><action>Move the cursor one page upwards.</action></entry>
+</row>
+
+<row>
+<entry><keycap>Page Down</keycap></entry>
+<entry><action>Move the cursor one page downwards.</action></entry>
+</row>
+
+<row>
+<entry><keycap>Backspace</keycap></entry>
+<entry><action>Delete the character to the left of the cursor.</action></entry>
+</row>
+
+<row>
+<entry><keycap>Home</keycap></entry>
+<entry><action>Move the cursor to the beginning of the line.</action></entry>
+</row>
+
+<row>
+<entry><keycap>End</keycap></entry>
+<entry><action>Move the cursor to the end of the line.</action></entry>
+</row>
+
+<row>
+<entry><keycap>Delete</keycap></entry>
+<entry><action>Delete the character to the right of the cursor.</action></entry>
+</row>
+
+<row>
+<entry><keycombo action="simul">&Shift;<keycap>Left
+Arrow</keycap></keycombo></entry>
+<entry><action>Mark text one character leftwards.</action></entry>
+</row>
+
+<row>
+<entry><keycombo action="simul">&Shift;<keycap>Right
+Arrow</keycap></keycombo></entry>
+<entry><action>Mark text one character rightwards.</action></entry>
+</row>
+
+<row>
+<entry><keycombo
+action="simul">&Ctrl;<keycap>A</keycap></keycombo></entry>
+<entry><action>Select all the text in the document.</action></entry>
+</row>
+
+<row>
+<entry><keycombo
+action="simul">&Ctrl;<keycap>B</keycap></keycombo></entry>
+<entry><action>Move the cursor one character leftwards.</action></entry>
+</row>
+
+<row>
+<entry><keycombo action="simul">
+&Ctrl;<keycap>C</keycap></keycombo></entry>
+<entry><action>Copy the marked text to the clipboard.</action></entry>
+</row>
+
+<row>
+<entry><keycombo action="simul">&Ctrl;
+<keycap>D</keycap></keycombo></entry>
+<entry><action>Delete the character to the right of the
+cursor.</action></entry>
+</row>
+
+<row>
+<entry><keycombo
+action="simul">&Ctrl;<keycap>E</keycap></keycombo></entry>
+<entry><action>Move the cursor to the end of the line.</action></entry>
+</row>
+
+<row>
+<entry><keycombo
+action="simul">&Ctrl;<keycap>F</keycap></keycombo></entry>
+<entry><action>Search for text in the document.</action></entry>
+</row>
+
+<row>
+<entry><keycombo
+action="simul">&Ctrl;<keycap>G</keycap></keycombo></entry>
+<entry><action>Go to line.</action></entry>
+</row>
+
+
+<row>
+<entry><keycombo
+action="simul">&Ctrl;<keycap>H</keycap></keycombo></entry>
+<entry><action>Delete the character to the left of the
+cursor.</action></entry>
+</row>
+
+<row>
+<entry><keycombo
+action="simul">&Ctrl;<keycap>K</keycap></keycombo></entry>
+<entry><action>Create a new document</action></entry>
+</row>
+
+<row>
+<entry><keycombo action="simul">&Ctrl;
+<keycap>N</keycap></keycombo></entry>
+<entry><action>Move the cursor one line downwards.</action></entry>
+</row>
+
+<row>
+<entry><keycombo action="simul">&Ctrl;
+<keycap>P</keycap></keycombo></entry>
+<entry><action>Print.</action></entry>
+</row>
+
+<row>
+<entry><keycombo
+action="simul">&Ctrl;<keycap>V</keycap></keycombo></entry>
+<entry><action>Paste the clipboard text into the document at the text
+cursor position.</action></entry>
+</row>
+
+<row>
+<entry><keycombo action="simul">
+&Ctrl;<keycap>X</keycap></keycombo></entry>
+<entry><action>Cut the marked text, copying it to the
+clipboard.</action></entry>
+</row>
+
+<row>
+<entry><keycombo action="simul">&Ctrl;
+<keycap>Y</keycap></keycombo></entry>
+<entry><action>Yank (paste) the content of the kill-buffer (clipboard)
+into the document, at the current cursor position.</action></entry>
+</row>
+</tbody>
+</tgroup>
+</informaltable>
+
+</sect1>
+
+</chapter>
+
+<chapter id="the-menu-entries">
+<title>The Menu Entries</title>
+
+<sect1 id="file">
+<title>The <guimenu>File</guimenu> Menu</title>
+
+<variablelist>
+<varlistentry>
+<term><anchor id="new"/><menuchoice> <shortcut><keycombo
+action="simul">&Ctrl;<keycap>N</keycap></keycombo></shortcut>
+<guimenu>File</guimenu><guimenuitem>New</guimenuitem></menuchoice></term>
+<listitem>
+<para><action>This starts a new Document in a new instance of the
+editor.</action></para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><anchor id="open"/><menuchoice> <shortcut><keycombo
+action="simul">&Ctrl;<keycap>O</keycap></keycombo></shortcut>
+<guimenu>File</guimenu><guimenuitem>Open...</guimenuitem>
+</menuchoice></term> 
+<listitem>
+<para><action>This command opens a file.</action> It does this by means
+of a dialog box which allows the user to navigate the file
+system.</para>
+
+<para>The dialog operates like a small file manager. Clicking on
+folders displayed in the central window directs the dialog to enter
+that folder - displaying its contents.  There is an entry/drop down
+box which can be used to directly type in the location and name of the
+file or by clicking the arrow at the side choose from a drop down list of
+recently used locations.</para>
+
+<para> Below this is a filter which similarly may have data entered
+directly or chosen from a drop down list of recent filter types.  The
+filter facility lets only files that meet its specifications be
+displayed in the central window. If the filter contained text such as
+<literal role="extension">*.txt</literal> then only files with the txt
+extension would be visible in the selection window.</para>
+
+<para>The toolbar has left and right arrow buttons that let the user
+move back and forth through previously selected folders as well as
+an up arrow button for moving up the folder tree. The button with the
+little house takes the user to his or her home folder, and the one
+with the two arrows curved in on each other updates the view of the
+current folder. The flag button lets the user set a new bookmark at
+the current folder or go to one that was previously set. The icon of
+the folder with the sparkle on it, allows you to create a new
+folder. Finally there is drop down box on the toolbar with a list of
+some commonly frequented folders.</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><anchor id="open-recent"/><menuchoice>
+<guimenu>File</guimenu><guimenuitem>Open
+Recent</guimenuitem></menuchoice> 
+</term>
+
+<listitem>
+<para><action>This is a shortcut to open recently saved
+documents.</action> Clicking on this item opens a list to the side of
+the menu with a list of several of the most recently saved
+files. Clicking on a specific file will open it in &kedit; - if the file
+still resides at the same location.  </para>
+</listitem> 
+</varlistentry>
+
+<varlistentry> 
+<term><anchor id="save"/><menuchoice><shortcut><keycombo
+action="simul">&Ctrl;<keycap>S</keycap></keycombo></shortcut>
+<guimenu>File</guimenu><guimenuitem>Save</guimenuitem></menuchoice></term>
+<listitem>
+<para><action>This saves the current document.</action> If there has
+already been a save of the document then this will overwrite the
+previously saved file without asking for the user's consent.</para>
+
+<note>
+<para>The editor can be configured to make a <link
+linkend="backuppref">backup</link>.</para>
+</note>
+
+<para>If it is the first save of a new document the save as dialog
+(described below) will be invoked.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><anchor id="save-as"/><menuchoice>
+<guimenu>File</guimenu><guimenuitem>Save
+As...</guimenuitem></menuchoice></term>
+<listitem>
+<para><action>This allows a document to be saved with a new file
+name.</action> This is done by means of the file dialog box described
+above in the <link linkend="open">Open</link> section of this help
+file.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><anchor id="print"/><menuchoice>
+<shortcut><keycombo
+action="simul">&Ctrl;<keycap>P</keycap></keycombo></shortcut> 
+<guimenu>File</guimenu><guimenuitem>Print...</guimenuitem></menuchoice></term> 
+<listitem>
+<para><action>This opens a simple print dialog allowing the user to
+specify what, where, and how to print.</action> The user can choose
+between the standard <command>lpr</command> or a custom command as well
+as whether to print the whole document or a selected section.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><anchor id="mail"/><menuchoice>
+<guimenu>File</guimenu><guimenuitem>Mail...</guimenuitem></menuchoice></term>
+<listitem>
+<para><action>This is used to email the current document.</action> It
+calls a mail dialog whereby the user can enter the address and subject
+for the message.</para>
+
+<para>You may set your preferred mail client in &kcontrol;</para>
+
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><anchor id="close"/><menuchoice> <shortcut><keycombo
+action="simul">&Ctrl;<keycap>W</keycap> </keycombo></shortcut>
+<guimenu>File</guimenu><guimenuitem>Close</guimenuitem></menuchoice></term>
+<listitem>
+<para><action>This will close the editor window</action>, if you have
+more than one instance of &kedit; running, those instances will not be
+closed.</para> 
+</listitem> 
+</varlistentry>
+
+<varlistentry>
+<term><anchor id="quit"/><menuchoice>
+<shortcut><keycombo action="simul">&Ctrl;<keycap>Q</keycap>
+</keycombo></shortcut>
+<guimenu>File</guimenu>
+<guimenuitem>Quit</guimenuitem></menuchoice></term>
+<listitem>
+<para><action>This closes the editor.</action></para>
+</listitem>
+</varlistentry>
+</variablelist>
+
+</sect1>
+
+<sect1 id="edit">
+<title>The <guimenu>Edit</guimenu> Menu</title>
+
+<variablelist>
+<varlistentry>
+<term><anchor id="undo"/><menuchoice> <shortcut><keycombo
+action="simul">&Ctrl;<keycap>Z</keycap></keycombo></shortcut>
+<guimenu>Edit</guimenu><guimenuitem>Undo</guimenuitem></menuchoice></term>
+<listitem>
+<para><action>This is used to eliminate or reverse the most recent user
+action or operation.</action></para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><anchor id="redo"/><menuchoice> <shortcut><keycombo
+action="simul">&Ctrl;&Shift;<keycap>Z</keycap></keycombo></shortcut>
+<guimenu>Edit</guimenu><guimenuitem>Redo</guimenuitem></menuchoice></term>
+<listitem>
+<para><action>This will reverse the most recent change</action> (if any)
+made using <guimenuitem>Undo</guimenuitem>.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><anchor id="cut"/><menuchoice> <shortcut><keycombo
+action="simul">&Ctrl;<keycap>X</keycap></keycombo></shortcut>
+<guimenu>Edit</guimenu><guimenuitem>Cut</guimenuitem></menuchoice></term>
+<listitem>
+<para><action>This command deletes the current selection and places it
+on the clipboard.</action> The clipboard is a feature of &kde; that
+works invisibly to provide a way to transfer data between
+applications.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><anchor id="copy"/><menuchoice> <shortcut><keycombo
+action="simul">&Ctrl;<keycap>C</keycap></keycombo></shortcut>
+<guimenu>Edit</guimenu><guimenuitem>Copy</guimenuitem></menuchoice></term>
+<listitem>
+<para><action>This copies the currently selected text to the clipboard
+so that it may be pasted elsewhere.</action> The clipboard is a feature
+of &kde; that works invisibly to provide a way to transfer data between
+applications.</para> 
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><anchor id="paste"/><menuchoice> <shortcut><keycombo
+action="simul">&Ctrl;<keycap>V</keycap></keycombo></shortcut>
+<guimenu>Edit</guimenu><guimenuitem>Paste</guimenuitem></menuchoice></term>
+<listitem>
+<para><action>This will insert the contents of the clipboard at the
+cursor position.</action> The clipboard is feature of &kde; that works
+invisibly to provide a way to transfer data between applications.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><anchor id="select-all"/><menuchoice>
+<shortcut><keycombo
+	  action="simul">&Ctrl;<keycap>A</keycap></keycombo></shortcut>
+<guimenu>Edit</guimenu><guimenuitem>Select
+All</guimenuitem></menuchoice></term>
+<listitem>
+<para><action>This will select the entire document.</action> This could
+be very useful for copying the entire file to another
+application.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><anchor id="find"/><menuchoice> <shortcut><keycombo
+action="simul">&Ctrl;<keycap>F</keycap></keycombo></shortcut>
+<guimenu>Edit</guimenu><guimenuitem>Find...</guimenuitem></menuchoice></term>
+<listitem>
+<para><action>This opens the find dialog</action> which is used to
+specify the text to <guilabel>Find</guilabel> in the document. There is
+small text box for entering the search pattern. Two other options are
+included to make the search more efficient. Selecting <guilabel>Case
+sensitive</guilabel> will limit finds to entries that match the case
+(upper or lower) of each of the characters in the search
+pattern. <guilabel>Find backwards</guilabel> directs the search to
+proceed in an upwardly direction.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><anchor id="find-again"/><menuchoice> <shortcut><keycombo
+action="simul"><keycap>F3</keycap></keycombo></shortcut>
+<guimenu>Edit</guimenu><guimenuitem>Find
+Next</guimenuitem></menuchoice></term>
+<listitem>
+<para><action>This repeats the last find operation, if any, without
+calling the find dialog box.</action></para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><anchor id="replace"/><menuchoice> <shortcut><keycombo
+action="simul">&Ctrl;<keycap>R</keycap></keycombo></shortcut>
+<guimenu>Edit</guimenu><guimenuitem>Replace...</guimenuitem></menuchoice></term>
+<listitem>
+<para><action>This command opens the replace dialog box.</action> The
+replace dialog is similar to the above-mentioned find dialog but with
+the addition of a <guilabel>Replace with:</guilabel> text box.  Using
+this dialog the user can specify both the text to be found and text with
+which to replace it. This dialog also contains two additional buttons.
+The <guilabel>Replace</guilabel> button allows the user to make one
+replacement at a time which is useful when not all instances of the
+searched for text should be replaced.  The <guilabel>Replace
+All</guilabel> button should be used with caution as it will immediately
+replace every instance of the specified text.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><anchor id="insertfile"/>
+<menuchoice>
+<guimenu>Edit</guimenu><guimenuitem>Insert
+File...</guimenuitem></menuchoice></term>
+<listitem>
+<para>This opens the <guimenu>File</guimenu><link
+linkend="open"><guimenuitem>Open</guimenuitem></link> dialog box whereby
+the user can <action>insert a complete file in the open
+document.</action> The file will be entered at the position of the
+blinking text cursor.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><anchor id="insertdate"/>
+<menuchoice>
+<guimenu>Edit</guimenu><guimenuitem>Insert
+Date</guimenuitem></menuchoice></term>
+<listitem>
+<para><action>This will enter the current date at the position of the
+blinking text cursor.</action></para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><anchor id="cleanspaces"/>
+<menuchoice>
+<guimenu>Edit</guimenu><guimenuitem>Clean
+Spaces</guimenuitem></menuchoice></term>
+<listitem>
+<para>Choosing this item will remove from any <emphasis>selected
+text</emphasis> any extra spaces and all carriage returns (the code for
+the end of a paragraph brought about by pressing the
+<keycap>Enter</keycap> key.)<action> In other words, any occurrences of
+two or more spaces will be reduced to one space; and all paragraphs and
+blank lines will be reduced to one single
+paragraph.</action></para></listitem>
+</varlistentry>
+</variablelist>
+
+</sect1>
+
+<sect1 id="Go">
+<title>The <guimenu>Go</guimenu> Menu</title>
+
+<variablelist>
+<varlistentry>
+<term><anchor id="go-to-line"/><menuchoice>
+<shortcut><keycombo action="simul">
+&Ctrl;<keycap>G</keycap></keycombo></shortcut>
+<guimenu>Go</guimenu><guimenuitem>Go to
+Line...</guimenuitem></menuchoice></term>
+<listitem>
+<para><action>This opens the goto line dialog box which is used to have
+the cursor jump to a particular line (specified by number) in the
+document.</action> The line number may be entered directly into the text
+box or graphically by clicking on the up or down arrow spin controls at
+the side of the text box. The little up arrow will increase the line
+number and the down arrow decrease it.</para>
+</listitem>
+</varlistentry>
+</variablelist>
+</sect1>
+
+<sect1 id="tools">
+<title>The <guimenu>Tools</guimenu> Menu</title>
+
+<variablelist>
+<varlistentry>
+<term><anchor id="Spelling..."/><menuchoice>
+<guimenu>Tools</guimenu><guimenuitem>Spelling...</guimenuitem></menuchoice></term>
+<listitem>
+<para><action>This initiates the spell checking program - a program
+designed to help the user catch and correct any spelling
+errors.</action> Clicking on this entry will start the checker and bring
+up the speller dialog box through which the user can control the
+process.  There are three text boxes lined up vertically just to the
+left of center with their corresponding labels further to the left.
+Starting at the top they are:</para>
+
+<variablelist>
+<varlistentry>
+<term><guilabel>Misspelled word:</guilabel></term>
+<listitem>
+<para>Here, the spell checker indicates the word currently under
+consideration.  This happens when the checker encounters a word not in
+its dictionary - a file containing a list of correctly spelled words
+against which it compares each word in the editor.</para> 
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><guilabel>Replacement:</guilabel></term>
+<listitem>
+<para> If the checker has any similar words in its dictionary the first
+one will be listed here.  The user can accept the suggestion, type in
+his or her own correction, or choose a different suggestion from the
+next box.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><guilabel>Suggestions:</guilabel></term>
+<listitem>
+<para>The checker may list here a number of possible replacements for
+the word under consideration.  Clicking on any one of the suggestions
+will cause that word to be entered in the
+<guilabel>Replacement:</guilabel> box, above.</para>
+</listitem>
+</varlistentry>
+</variablelist>
+
+<para>On dialog box are 8 buttons that allow the user to control the
+spell check process.  They are:</para>
+
+<variablelist>
+<varlistentry>
+<term><guibutton>Replace</guibutton></term>
+<listitem>
+<para>This button has the checker replace the word under consideration
+in the document with the word in the <guilabel>Replacement:</guilabel>
+box.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><guibutton>Replace All</guibutton></term>
+<listitem>
+<para>This button causes the checker to replace not only the current
+<guilabel>Misspelled Word:</guilabel> but to automatically make the same
+substitution for any other occurrences of this <guilabel>Misspelled
+Word:</guilabel> in the document.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><guibutton>Ignore</guibutton></term>
+<listitem>
+<para>Activating this button will have the checker move on without
+making any changes.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><guibutton>Ignore All</guibutton></term>
+<listitem>
+<para>This button tells the checker to do nothing with the current
+<guilabel>Misspelled Word:</guilabel> and to pass over any other
+instances of the same word.</para>
+
+<note>
+<para>This only applies to the current spell check run.  If the checker
+is run again later it will stop on this same word.</para>
+</note>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><guibutton>Add</guibutton></term>
+<listitem>
+<para>Pressing this button adds the word in the <guilabel>Misspelled
+Word:</guilabel> box to the checker's dictionary. This means that in the
+future the checker will always consider this word to be correctly
+spelled.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><guibutton>Help</guibutton></term>
+<listitem>
+<para>This invokes the &kde; help system starting at the &kedit; help
+pages (this document).</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><guibutton>Stop</guibutton></term>
+<listitem>
+<para>This button stops the spell check process.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><guibutton>Cancel</guibutton></term>
+<listitem>
+<para>This button cancels the spell check process.</para>
+</listitem>
+</varlistentry>
+</variablelist>
+
+<para>Located horizontally along the bottom of the spell check dialog is
+a progress bar.  As the checking process proceeds the bar will fill from
+left to right providing a graphical representation of how far along in
+the document the process has reached.</para>
+
+<note>
+<para>A numerical display of the spell check process is simultaneously
+displayed in the status bar of the editor.  The <link
+linkend="show-statusbar">status bar</link> is the horizontal strip at
+the bottom of the editor just outside of the text entry area.</para>
+</note>
+</listitem>
+</varlistentry>
+</variablelist>
+
+</sect1>
+
+<sect1 id="settings">
+<title>The <guimenu>Settings</guimenu> Menu</title>
+
+<variablelist>
+<varlistentry>
+<term><anchor id="show-toolbar"/><menuchoice>
+<guimenu>Settings</guimenu><guimenuitem>Show
+Toolbar</guimenuitem></menuchoice></term>
+<listitem>
+<para><action>When checked, this displays a movable toolbar containing
+buttons used to initiate frequently used commands. The toolbar is most
+commonly located at the top of the editor just under the menu.  When
+unchecked the toolbar is hidden.</action> Clicking on the striated grip
+will hide or unhide the bar. Clicking and dragging on this grip allows
+the user to move the bar.</para> 
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><anchor id="show-statusbar"/><menuchoice>
+<guimenu>Settings</guimenu><guimenuitem>Show
+Statusbar</guimenuitem></menuchoice></term>
+<listitem>
+<para><action>When checked, this displays a small bar at the bottom of
+the editor containing information about the status of the current
+document. When unchecked the status bar is hidden.</action> </para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><anchor id="save-options"/><menuchoice>
+<guimenu>Settings</guimenu><guimenuitem>Save
+Settings</guimenuitem></menuchoice></term>
+<listitem>
+<para><action>This saves the current editor settings to be used for
+future documents.</action></para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><anchor id="configure-keybindings"/><menuchoice>
+<guimenu>Settings</guimenu><guimenuitem>Configure
+Shortcuts...</guimenuitem></menuchoice></term>
+<listitem>
+<para>This command opens a dialog box whereby the <link
+linkend="keybindings">key bindings</link> may be changed. A display
+window at the top of the dialog box shows the list of commands
+available. Below the display are three radio buttons.  The user may
+choose a modifier key from <guilabel>None</guilabel>,
+<guilabel>Default</guilabel>, and <guilabel>Custom</guilabel>.</para>
+
+<note>
+<para>Note that a set of radio buttons only allows the selection of one
+of the offered items - in the way that buttons on a car radio only offer
+the selection of one preset station.  Also, the Default Key selection is
+only available for those commands that actually have a
+<quote>default</quote> shortcut.)</para>
+</note>
+
+<para>
+Selecting the Custom key option activates the three check boxes and key
+button at the bottom of the dialog. The user may then select a
+combination of keys for the command in question by means of the check
+boxes and key button. For example, with the About &kde; command selected
+in the display window, the user could select &Ctrl; and &Alt;, click on
+the key button, and then press the <keycap>K</keycap> key on the
+keyboard.  This would mean that anytime he or she held down the &Ctrl;
+and &Alt; buttons and pressed <keycap>K</keycap> (while using &kedit;)
+the About &kde; display box would be called. </para>
+</listitem>
+</varlistentry>
+<varlistentry>
+
+<term><anchor id="configure-toolbars"/><menuchoice>
+<guimenu>Settings</guimenu><guimenuitem>Configure
+Toolbars...</guimenuitem></menuchoice></term>
+
+<listitem>
+<para><action>This will open the dialog whereby the toolbar
+configuration may be changed.</action> The user can choose which
+shortcut buttons should appear on the toolbar, as well as whether and
+where any text should appear with the buttons. Other choices include
+button (icon) size and toolbar location (top, left, right, floating, or
+flat.)  Flat causes the toolbar to be retracted. A click on the striated
+grip icon will extend it for use and another click retract it again.  A
+display window on the left lists the commands available to be placed on
+the toolbar.  A display on the right lists those commands already on the
+toolbar.  A set of four arrow buttons between the two displays
+manipulates the selections.  The right pointing arrow places any command
+selected in the left pane onto the right pane, &ie;, it is added to the
+toolbar.  The left arrow does just the opposite, removing any action
+selected in the right window from the toolbar.  The up and down pointing
+arrows change the position of an action selected in the right window
+which changes the position of its button in the toolbar.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><anchor id="preferences"/><menuchoice>
+<guimenu>Settings</guimenu><guimenuitem>Configure KEdit...</guimenuitem></menuchoice></term>
+<listitem>
+<para>This menu item opens a dialog whereby several different <link
+linkend="pref-dialog">settings</link> may be adjusted.</para>
+</listitem>
+</varlistentry>
+</variablelist>
+
+</sect1>
+
+<sect1 id="help">
+<title>The <guimenuitem>Help</guimenuitem> Menu</title>
+
+&help.menu.documentation;
+
+</sect1>
+</chapter>
+
+<chapter id="pref-dialog">
+<title>The Preferences Dialog</title>
+
+<para>Selecting
+<menuchoice><guimenu>Settings</guimenu><guimenuitem>Configure
+KEdit</guimenuitem></menuchoice> from the menu brings up the preferences
+dialog box.  This dialog can be used to alter a number of different
+settings.  The settings available for change vary according to which
+category the user chooses from a vertical list on the left side of the
+dialog.  By means of a row of five buttons along the bottom of the box
+the user can control the process.  She or he may invoke the
+<guilabel>Help</guilabel> system, set the options to their
+<guilabel>Default</guilabel> values, accept the current settings and
+close the dialog by means of the <guibutton>OK</guibutton> button,
+<guibutton>Apply</guibutton> the current choices to the document without
+closing the dialog, or <guibutton>Cancel</guibutton> the process. The
+categories <guilabel>Font</guilabel>, <guilabel>Color</guilabel>,
+<guilabel>Spelling</guilabel>, and <guilabel>Miscellaneous</guilabel>
+are detailed below.</para>
+
+<sect1 id="preffont">
+<title>Font</title>
+
+<para>The preferences dialog opens with this, the first category,
+chosen.  Here the user can change four settings and see the effects of
+any changes in the text sample displayed in the rectangle at the bottom
+or the box.  The settings are:</para>
+
+<variablelist>
+
+<varlistentry>
+<term><guilabel>Font:</guilabel></term>
+<listitem>
+<para>This scroll box allows the user to select by name from among the
+various fonts available.  The appearance of any selected font may be
+seen in the sample text displayed in the rectangle at the bottom of the
+dialog.</para> 
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><guilabel>Font style:</guilabel></term>
+<listitem>
+<para>This, the center, selection box is used to choose between the four
+basic styles of Regular, Italic, Bold, and Bold Italic.  The appearance
+of the selected style may be seen in the sample text displayed in the
+rectangle at the bottom of the dialog. </para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><guilabel>Size:</guilabel></term>
+<listitem> 
+<para>This, the rightmost scroll/selection box allows the user to change
+font size.  The larger the number chosen the larger the font size will
+be.  The sample text displayed in the rectangle at the bottom of the
+dialog will reflect the choice of size.</para> 
+</listitem>
+</varlistentry>
+
+</variablelist>
+
+</sect1>
+
+<sect1 id="prefcolors">
+<title>Color</title>
+
+<para>This section provides access to <link
+linkend="pref-color-settings">two different color settings</link>,
+described below.  Each of these settings may be changed by clicking on
+its corresponding button.  These are special wide buttons that are the
+color of the current setting.  Clicking on one of the buttons calls a
+special color dialog box used to change the setting.</para>
+
+<para>The color dialog box provides a convenient and graphical way to
+select a color.  In the upper left of the box is a rectangular display
+of a spectrum of colors. To the immediate right of this, is a vertical
+bar displaying a range of intensity from the most dark at the bottom to
+the most light at the top.  The user may select and adjust a color by
+clicking in these two boxes. Clicking in the rectangular display selects
+a particular mix of red, green, and blue colors and in the vertical bar
+selects a level of intensity (value).  The various color attributes are
+displayed in numerical form in small text boxes located directly below
+the spectral rectangle and the user can see them change as the color is
+adjusted.  These attributes include the mix of the basic color
+components (red, green, and blue) as well as hue and saturation levels.
+Alternatively the user can enter figures directly in these boxes.  There
+is also a square at the bottom center of the dialog box which displays
+the color which is under consideration at any time.  To the right of
+this display is another text box labeled <guilabel>HTML</guilabel>: This
+shows the user the color code that would be used to specify the
+particular displayed color in <acronym>HTML</acronym> code which is
+widely used for web pages.</para>
+
+<para>In addition to the above, the color dialog allows the capture of
+any color currently displayed on the desktop or in another program.
+Clicking on the button with the dropper icon (located on the right side
+of the dialog box) changes the shape of the mouse cursor to a set of
+cross hairs.  Clicking again will pick up the color attributes of
+whatever color is displayed under the cross hairs.</para>
+
+<para>Furthermore the user has the option of adding any color to a
+personal palette of <guilabel>Use custom colors</guilabel> by clicking on
+the wide button labeled <guibutton>Add to Custom Colors</guibutton>
+(which is located above the display square.)  This adds the current
+color to the custom color palette.  This palette and any other available
+palettes can be displayed using the drop down selection box located
+directly above the palette display at the top right of the dialog box.
+Besides the custom colors, the user can access a number of pre-prepared
+palettes.</para>
+
+<variablelist>
+<varlistentry>
+<term><guilabel>Use custom colors</guilabel></term>
+<listitem>
+<para>By default &kedit; will use your system color scheme.  If this
+is enabled, you may choose a Foreground and background color below.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry id="pref-color-settings">
+<term><guilabel>Foreground color:</guilabel></term>
+<listitem>
+<para>Here the user can specify a color for the text used in
+&kedit;.</para>
+</listitem> 
+</varlistentry>
+
+<varlistentry>
+<term><guilabel>Background color:</guilabel></term>
+<listitem>
+<para>Here the user can specify a color for the general background of
+&kedit;.</para>
+</listitem> 
+</varlistentry>
+
+</variablelist>
+
+</sect1>
+
+<sect1 id="prefspellchecker">
+<title>Spelling</title> 
+
+<para>A spell checker is a program designed to help the user catch and
+correct any spelling errors.  This section of the preferences dialog
+allows certain key settings to be adjusted in this regard.</para>
+
+<variablelist>
+<varlistentry>
+<term><guilabel>Create root/affix combinations not in
+dictionary</guilabel></term>
+<listitem>
+<para>Selecting this option allows the spell checker to register as
+<quote>correct</quote> combinations of root words with suffixes or
+prefixes even if the particular combination is not listed in its
+dictionary database of words. </para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><guilabel>Consider run-together words as spelling
+errors</guilabel></term>
+<listitem>
+<para>Selecting this will cause the spell checker to register as
+<quote>misspelled</quote> two or more correctly spelled words that are
+<quote>run-together</quote>, &ie;, that do not have spaces separating
+them.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><guilabel>Dictionary:</guilabel></term> 
+<listitem>
+<para>Depending on the user's installation, one or more different
+language spelling dictionaries may be available.  This drop down box
+allows the user to choose which language the spell checker should
+use.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><guilabel>Encoding:</guilabel></term> 
+<listitem>
+<para>There are different coding systems used to associate particular
+codes with particular characters and symbols.  If the user knows which
+code he or she is using this drop down box allows this code to be
+specified so that the spell checker can do its job correctly. </para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term><guilabel>Client:</guilabel></term> 
+<listitem>
+<para>Since &kedit; does not contain its own spell checker, an external
+one must be chosen. This is where the user may specify which spell check
+program to use.</para> 
+</listitem>
+</varlistentry>
+</variablelist>
+
+</sect1>
+
+<sect1 id="prefmisc">
+<title>Miscellaneous</title>
+
+<para>This category deals with three different properties detailed
+below.</para>
+
+<variablelist>
+<varlistentry>
+<term><guilabel>Word wrap:</guilabel></term>
+<listitem>
+<para>Word wrap is a feature that causes the editor to automatically
+start a new line of text and move (wrap) the cursor to the beginning of
+that new line.  The drop down box at the top of the dialog provides the
+following three word wrap choices:</para>
+
+<variablelist>
+<varlistentry>
+<term>Disable Wrapping</term>
+<listitem>
+<para>Choosing this will keep the editor from doing any wrapping.  The
+user will have to start new lines manually (with the
+<keycap>Enter</keycap> key.)</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>Soft wrapping</term>
+<listitem>
+<para>This choice has the editor automatically adjust the line lengths
+to fit its current width.  In other words, the wider the user makes the
+editor the longer the lines will be; and the narrower the editor, the
+shorter the lines will be.  These line breaks are not saved in the file.</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term>At specified column</term>
+<listitem>
+<para>Choosing this activates a text box immediately below, labeled
+<guilabel>Wrap column:</guilabel>.  Here the user may specify the
+maximum number of characters in a line of text.
+</para>  
+
+<note>
+<para>Each character including spaces fills one column.</para>
+</note>
+</listitem>
+
+</varlistentry>
+</variablelist>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term id="backuppref"><guilabel>Make backup when saving a
+file</guilabel></term>
+<listitem>
+<para>This check box tells the editor to rename the last saved version of
+the current document before carrying out a <command>save</command>
+command.  The editor does this by adding a tilde (<keycap>~</keycap>) at
+the end of the name of the original file.  In this way the user has a
+chance to recover a document if she or he had mistakenly saved something
+over it.</para>
+</listitem>
+</varlistentry>
+
+</variablelist>
+</sect1>
+
+</chapter>
+
+<chapter id="credits">
+<title>Credits and Licenses</title>
+
+<para>&kedit; Copyright 2000 by Bernd Johannes Wuebben
+<email>wuebben@math.cornell.edu</email></para>
+
+<para>Documentation Copyright 2000 by Thad McGinnis
+<email>ctmcginnis@compuserve.com</email>.</para>
+
+<para>This version of the &kedit; Handbook is based on the original by:
+Bernd Johannes Wuebben <email>wuebben@math.cornell.edu</email></para>
+
+<!-- TRANS:CREDIT_FOR_TRANSLATORS -->
+
+&underFDL;
+&underGPL;
+
+</chapter>
+
+<appendix id="installation">
+<title>Installation</title>  
+
+&install.intro.documentation;
+&install.compile.documentation;
+
+</appendix>
+
+</book>
+
+<!--
+Local Variables:
+mode: sgml
+sgml-minimize-attributes:nil
+sgml-general-insert-case:lower
+sgml-indent-step:0
+sgml-indent-data:nil
+End:
+
+// vim:ts=2:sw=2:tw=78:noet
+-->

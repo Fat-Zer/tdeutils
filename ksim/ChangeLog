@@ -1,0 +1,363 @@
+KSim 1.1.0:
+
+Bug/Feature Changes:
+  * KSim no longer needs to generate gkrellmrc_ksim files, KSim will keep
+     the parsed file in memory
+  * Save the "on all desktop settings" when ksim is minimised
+  * Fixed the crash in the sensors plugin when using lm_sensors 2.7.0
+  * Rewrote the CPU plugin, this should fix the problems with smp systems
+  * Made KSim a Kicker extension
+  * Made the configuration pages more user friendly
+  * Dont display filesystems if the block size is zero
+  * Fixed unsaved checked / unchecked items in the filesystem plugin being
+     removed when the configuration page is redisplayed
+
+API Changes:
+  * None
+
+  -- Robbie Ward <wardy@robbieward.co.uk>
+
+KSim 1.0.0:
+
+Bug/Feature Changes:
+  * Fixed a crash in ksim_disk when using FreeBSD
+  * Fixed the odd crash when ok or close is clicked in the config
+     dialog
+  * Added checks to fix compile issues on older kernel versions
+  * Some compile fixes for certain platforms
+  * Fixed a crash in KSim::ThemeLoader which occurred when
+     the theme alternative was set to a higher value than it should
+  * Fixed rare crashes in KSim::Led
+
+API Changes:
+  * No need to reimplement sizePolicy() in KSim::Label
+     and KSim::Chart
+  * Fixed spelling mistakes in the API
+
+  -- Robbie Ward <linuxphreak@gmx.co.uk> Saturday 02 November 2002
+
+KSim 0.9.0:
+
+Bug/Feature Changes:
+  * Added checkbox to turn on / off the FQDN option
+  * Display the data in the net, cpu and disk plugins when
+     they get loaded
+  * Small cpu usage fix in the net plugin
+  * Added the option to recolour themes to the current
+     KDE color scheme
+  * Less expensive masking routines for the leds, and a less
+     expensive background drawing routine for labels
+  * The disk plugin is now able to monitor multiple disks
+  * Fixed the problem with the mininum width not being set
+     correctly in the filesystem when some entries were long
+  * Only remove a net device from the net plugin configuration
+     page when the apply button is clicked
+  * Remove partitions from the filesystem configuration page if
+     any partitions have been unmounted
+
+API Changes:
+  * Made the function names in KSim::Theme more consistant
+  * Moved setMinValue(), setMaxValue(), setValue() and setTitle()
+     from public to public slots in KSim::Chart
+  * Made KSim::ThemeLoader::currentTheme() a reference rather
+     than a pointer and renamed it to current()
+  * Renamed *Module() to *Plugin() in KSim::PluginLoader
+  * Renamed KSim::ThemeLoader::currentTheme*() to current*()
+  * Moved KSim::Label::setType() from protected to public
+  * Renamed KSim::ThemeLoader::parseThemeDir to parseDir
+  * Renamed KSim::ThemeLoader::themeAltString() to alternativeAsString()
+  * Made KSim::ThemeLoader::pargeConfig() and parseDir() static
+  * Renamed the KSim::ThemeLoader::ImageType enum to PixmapType
+  * Added some functions to KSim::Chart, KSim::Progress
+     and KSim::LedLabel
+
+  -- Robbie Ward <linuxphreak@gmx.co.uk> Wednesday 05 June 2002
+
+KSim 0.8.1:
+
+Bug/Feature Changes:
+  * Fixed the bug in KSim::Label which sometimes prevented setText()
+     from updatig the display, the clock and uptime was affected by this
+
+API Changes:
+  * None
+
+  -- Robbie Ward <linuxphreak@gmx.co.uk> Monday 20 May 2002
+
+KSim 0.8.0:
+
+Bug/Feature Changes:
+  * Make the filesystem plugin compile on Solaris
+  * Fixed the exec command option
+  * Fixed the SMP bug in the cpu plugin
+  * Build fixes in the cpu plugin for OpenBSD
+  * Added the option to display a short version of a mount point in
+     the filesystem plugin
+  * Fixed the problem with the progress meters not working sometimes
+  * Added the option to not display a FQDN, no GUI config option
+     at this time. To enable add 'DisplayFqdn=false' to ksimrc under
+     the '[Misc]' section
+
+API Changes:
+  * Added some new functions to KSim::Led
+  * Be consistant with the way the word 'Colour' is used in function names
+  * Added a KSim::Theme::currentFont() function which returns the
+     font KSim should use according to fontItem();
+  * Renamed KSim::Led::setImage to setPixmap
+  * Remember to update the geometry so the layout can get a new sizeHint()
+  * Renamed setThemeImage to setThemePixmap and
+     setMeterImage to setThemePixmap
+  * Let KSim handle the config()->sync() call rather than the plugins
+  * Added a non-const version of KSim::PluginLoader::pluginList()
+  * Added a KSim::PluginLoader::plugin() function which returns
+     the last plugin loaded (or a null plugin if one couldnt be loaded)
+  * Also added a non-const version of KSim::PluginLoader::plugin()
+  * Renamed splitImage to splitPixmap in KSim::Theme
+  * Added a KSim::Theme::pixmapToList function
+  * Changed KSim::Chart::text() to accept a KSim::Chart::DataType
+     enum rather than an int
+  * Make the second parameter in KSim::Chart::setValue() have a
+     default value
+  * Added a new constructor to KSim::Progress
+  * Added a new constructor to KSim::LedLabel
+  * Document the KSim::PluginInfo class
+  * Append "ksim_" to the config filename for the plugins
+  * Added an extra SearchType to KSim::PluginLoader::findPlugin()
+     called LibName
+
+  -- Robbie Ward <linuxphreak@gmx.co.uk> Saturday 11 May 2002
+
+KSim 0.7.0:
+
+Bug/Feature Changes:
+  * Display an error message if a network interface is added
+     which is already in the listview
+  * Disable the speed spin box if the stack items checkbox is not
+     ticked in the filesystem plugin config page
+  * Cleaned up the filesystem plugin config page GUI a little
+  * Cleaned up the sensors plugin config page GUI a little
+  * Some text / word corrections and spelling corrections
+  * Update the disk plugin display asap if anything has changed
+  * Dont set the hours, minutes and seconds time in the net plugin
+     if they are an invalid time format
+  * Update the memory and swap text labels when KSim reloads its
+     configuration rather than doing it 5 seconds later
+  * Dont increase the size of the filesystem view every time a
+     filesystem display is added or removed
+  * Pevent the net plugin from showing wacko in and out values
+     when a net interface is added or removed
+  * Prevent KSim from increasing size by 1 or 2 pixels when KSim
+     reloads its configuration
+  * Fixed the filesystem plugin view resizing to the wrong width when
+     an item is added
+  * Fixed the very weird problem where the led label and the normal
+     label would appear above the graphs for some people
+  * Fixed the bug where KSim would be resized to a very large width
+     when the net plugin was loaded after KSim had started
+  * Dont wait a second before we display the uptime and clock text
+     at KSim startup
+  * Fixed the problem with the filesystem plugin not being set to the
+     correct width sometimes when the plugin was loaded
+  * Fixed the bug where KSim would sometimes not be resize itself
+     to the correct height due to a bug in the filesystem plugin
+  * Added check for getloadavg() for some systems that dont have
+     this function
+  * Set the minimum width to the smallest possible rather than
+     hardcoding it to 80 pixels
+  * Dont store the enabled/disabled plugin as the translated plugin
+     name but the library name instead
+  * Relayout the leds correctly in KSim::LedLabel on theme change
+
+API Changes:
+  * Added a 'KSim::Theme::splitImage(ImageType type, bool useDefault)'
+     function
+  * Added two new functions to KSim::PluginObject which are
+     'void setConfigFileName(const QString &)' and
+     'const QString &configFileName()'
+  * Make the singleton instances return a reference rather than a
+     pointer to prevent accidental deletion
+  * Made the cleanup() functions in KSim::PluginLoader and
+     KSim::ThemeLoader private, so only the core of KSim can
+     cleanup these classes and nothing else
+  * Added a KSim::PluginLoader::findPlugin() method, which finds
+     out various plugin information from the string you give it
+
+  -- Robbie Ward <linuxphreak@gmx.co.uk> Saturday 27 April 2002
+
+KSim 0.6.1:
+
+Bug/Feature Changes:
+  * Correctly set the default krell depth value so some themes dont show
+     the whole image as the meter/panel
+  * Only show the first part of the image rather than the whole image when
+     the progress bars are told to display krell_meter.png
+  * Dont forget to create the LED masks if needed
+  * Some FreeBSD build fixes in the net and disk plugins
+  * Fixed a recursive looping crash when there was no KSim config file
+
+API Changes:
+  * None
+
+  -- Robbie Ward <linuxphreak@gmx.co.uk> Tuesday 16 April 2002
+
+KSim 0.6.0:
+
+Bug/Feature Changes:
+  * Added a modify button on the net configuration page
+  * Dont store absolute paths in the theme configuration, so if one
+     moves their kdedir to somewhere else then they wont have to
+     change any configuration settings
+  * Display a more correct value of the free ram on linux
+  * Fixed the bug where some themes would prevent any
+     data being drawn onto the graphs
+  * Reload the config page settings when the close button
+     is clicked in the config dialog
+  * Keep any changes in the sensor config listview unless
+     the apply/ok/close buttons are clicked in the config dialog
+  * Fixed the crash when enabling the clock, date, uptime,
+     memory or swap displays
+  * Fixed the charts not being resized when KSim reloads its
+     configuration
+  * Correcly show/hide the systray on configuration reload
+  * Correcly check/uncheck the always on top menu item if
+     the config option has changed
+  * Keep any changes in the filesystem config listview unless
+     the apply/ok/close buttons are clicked in the config dialog
+
+API Changes:
+  * Added a bool isThemeOnly() function in KSim::Base
+    which tells KSim if this KSim::Base instance should
+    have configureObject() called even if the theme hasn't
+    changed
+
+  -- Robbie Ward <linuxphreak@gmx.co.uk> Sunday 14 April 2002
+
+KSim 0.5.1:
+
+Bug/Feature Changes:
+  * Added uptime and clock icons for the config dialog
+  * Fixed the problem when KSim would resize to 0 when the
+     apply button is clicked
+  * Removed the nice checkbox from the cpu config page and
+     added a new cpu key (%T which is user + sys + nice)
+  * Correcly set the filesystem height on plugin reloading if the
+     stack items checkbox is ticked
+  * Fixed the problem of the list view not being cleared in the
+     sensors plugin when the config dialog closes
+
+API Changes:
+  * None
+
+  -- Robbie Ward <linuxphreak@gmx.co.uk> Thursday 28 March 2002
+
+KSim 0.5:
+
+Bug/Feature Changes:
+  * Added Disk monitor plugin
+  * Added Mail monitor plugin (written by Malte Starostik)
+  * Worked around the leak in the sensors plugin
+  * Set the backgrounds of widgets correctly if UseThemes is set to false
+  * Changed the combo boxes in the add net dialog to url requesters
+  * Fixed the ASSERT warnings when the sensors plugin is initially configured
+  * Fixed the problems in the net plugin where there was a slight chance
+     the net device name (for the add net dialog) could contain the receive
+     bytes or the receive bytes data (for the main plugin) could contain the
+     net device also
+  * Speed improvement: dont recreate a plugins view if it is about to be
+     removed or if it was just loaded
+  * Remember to set the current text in the net dialog when you
+     double click on a net interface in the listview
+  * Display a "Are you sure you want to remove this net interface?"
+     message box when you ask KSim to remove the currently selected
+     net interface in the list view
+
+API Changes:
+  * Added a krellMail(bool = false) function in themeloader.h
+  * moved all the theme functions from common.h to themeloader.h
+  * Try and return an optional default value for the themeloader if the value
+     isnt found and then return the value for the default theme if that
+     also is invalid
+
+  -- Robbie Ward <linuxphreak@gmx.co.uk> Tuesday 26 March 2002
+
+KSim 0.4:
+
+Bug/Feature Changes:
+  * Fixed the resize delay in the filesystem plugin
+  * Fixed segfault when KSim was started with an invalid 'themeUrl' entry
+  * Fixed compile problems on FreeBSD in the net plugin
+  * Ported the cpu plugin to OpenBSD and NetBSD
+  * Reduced flicker in the led labels
+  * More theme enhancements
+  * Faster theme loading times
+  * Dont move KSim to the location stored in the config file if the systray
+     icon hides and then later shows KSim's main view
+  * Stop the cpu plugin from updating when it reloads its configuration,
+     and then resume the updating once finished to avoid crashes
+  * Improved the speed/memory usage of the sensors plugin when
+     you are displaying many sensor labels
+  * Dont attempt to unload all plugins and then crash if there was a problem
+     loading a plugin when KSim starts up
+  * Update the listviews in the sensors and filesystem config pages when
+     the config page gets displayed and hidden
+
+API Changes:
+  * Return a null string if we cant open the theme's gkrellmrc
+     file in ThemeLoader::parseConfig()
+  * Completely removed the first arg in KSIM_INIT_PLUGIN()
+  * Removed the 'ksim' prefix from the installed headers (eg: ksimblah is
+     now blah.h), this only affects people who write plugins as
+     eg '#include <ksim/ksimlabel.h>' will become '#include <ksim/label.h>
+
+  -- Robbie Ward <linuxphreak@gmx.co.uk> Tuesday 05 March 2002
+
+KSim 0.3:
+
+  * Added CPU plugin
+  * Implemented more theme support
+  * Improved the performance and cleaned up the code in the net plugin
+  * Decode the filenames to Unicode when using the command line options
+  * Fixed the adding/removing interfaces problem in the net plugin
+  * Made the first arg in KSIM_INIT_PLUGIN() redundant
+  * Some speed/memory fixes
+  * Moved the misc config page to seperate pages in the config dialog
+  * Fixed the plugin reloading issues in the net, sensors and filesystem plugins
+  * Workaround fix for the expensiveness of colecting the meminfo on FreeBSD
+  * Added time/date display (patch from Heitham Omar)
+  * Fixed some leaks in the net/sensors/filesystem plugins
+  * Moved the two enums from KSim::Theme to KSim::Types
+  * Fixed various themeing issues
+  * Fixed various spelling mistakes
+  * Reset the net-plugin information to zero when a net interface goes off line
+  * Insert the available net interfaces into the add net interface dialog
+  * Fixed the bug where some themes (one without masked image borders)
+     would influence if KSim had a kwin deco or not
+  * Re-worked the KSim::Base class, a derived class of KSim::Base no
+     longer has to inherit a QObject derived class and doesn't have to
+     reimplement 'void setName(const char *name)'
+
+  -- Robbie Ward <linuxphreak@gmx.co.uk> Wednesday 13 February 2002
+
+KSim 0.2:
+
+  * Re-Wrote the Plugin/PluginLoader code
+  * Re-Wrote the ThemeLoader code
+  * Fixed various memleaks
+  * Implemented the graph widget
+  * Correctly collect the in/out net data
+  * Fixed various problems on FreeBSD
+  * Some speed improvements
+  * Other tweaks/fixes to the code
+  * Moved the remainder of the API to a KSim namespace
+  * Fixed errors with building plugins outside of KSim
+  * Made X-KSIM-PREFS (in the .desktop files) redundant
+  * Moved the set on all desktops/always on top popupmenu from
+     the frames of the app to the main popup menu
+
+  -- Robbie Ward <linuxphreak@gmx.co.uk> Saturday 05 January 2002
+
+KSim 0.1:
+
+  * Initial release
+
+  -- Robbie Ward <linuxphreak@gmx.co.uk> Thursday 28 June 2001

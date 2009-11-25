@@ -1,0 +1,526 @@
+<!DOCTYPE UI><UI version="3.1" stdsetdef="1">
+<class>KSim::Snmp::HostDialogBase</class>
+<comment>Much thanks to Frerich for hints/advice on the GUI design</comment>
+<author>Simon Hausmann</author>
+<widget class="KDialog">
+    <property name="name">
+        <cstring>HostDialogBase</cstring>
+    </property>
+    <property name="geometry">
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>559</width>
+            <height>454</height>
+        </rect>
+    </property>
+    <property name="caption">
+        <string>Configure Host</string>
+    </property>
+    <property name="sizeGripEnabled">
+        <bool>true</bool>
+    </property>
+    <grid>
+        <property name="name">
+            <cstring>unnamed</cstring>
+        </property>
+        <widget class="QLabel" row="0" column="0">
+            <property name="name">
+                <cstring>textLabel2</cstring>
+            </property>
+            <property name="frameShape">
+                <enum>NoFrame</enum>
+            </property>
+            <property name="frameShadow">
+                <enum>Plain</enum>
+            </property>
+            <property name="text">
+                <string>&amp;Hostname:</string>
+            </property>
+            <property name="buddy" stdset="0">
+                <cstring>hostName</cstring>
+            </property>
+        </widget>
+        <widget class="KLineEdit" row="0" column="1">
+            <property name="name">
+                <cstring>hostName</cstring>
+            </property>
+        </widget>
+        <widget class="QLabel" row="0" column="2">
+            <property name="name">
+                <cstring>textLabel3</cstring>
+            </property>
+            <property name="text">
+                <string>&amp;Port:</string>
+            </property>
+            <property name="buddy" stdset="0">
+                <cstring>port</cstring>
+            </property>
+        </widget>
+        <widget class="QSpinBox" row="0" column="3">
+            <property name="name">
+                <cstring>port</cstring>
+            </property>
+            <property name="maxValue">
+                <number>65535</number>
+            </property>
+            <property name="minValue">
+                <number>1</number>
+            </property>
+        </widget>
+        <spacer row="0" column="4">
+            <property name="name">
+                <cstring>spacer2</cstring>
+            </property>
+            <property name="orientation">
+                <enum>Horizontal</enum>
+            </property>
+            <property name="sizeType">
+                <enum>Expanding</enum>
+            </property>
+            <property name="sizeHint">
+                <size>
+                    <width>91</width>
+                    <height>20</height>
+                </size>
+            </property>
+        </spacer>
+        <widget class="QButtonGroup" row="1" column="0" rowspan="1" colspan="5">
+            <property name="name">
+                <cstring>buttonGroup2</cstring>
+            </property>
+            <property name="title">
+                <string>Authentication Details</string>
+            </property>
+            <grid>
+                <property name="name">
+                    <cstring>unnamed</cstring>
+                </property>
+                <widget class="QWidgetStack" row="2" column="0" rowspan="1" colspan="3">
+                    <property name="name">
+                        <cstring>authenticationDetails</cstring>
+                    </property>
+                    <widget class="QWidget">
+                        <property name="name">
+                            <cstring>snmpV1Page</cstring>
+                        </property>
+                        <attribute name="id">
+                            <number>0</number>
+                        </attribute>
+                        <grid>
+                            <property name="name">
+                                <cstring>unnamed</cstring>
+                            </property>
+                            <widget class="QLabel" row="0" column="0">
+                                <property name="name">
+                                    <cstring>textLabel5</cstring>
+                                </property>
+                                <property name="text">
+                                    <string>&amp;Community String:</string>
+                                </property>
+                                <property name="buddy" stdset="0">
+                                    <cstring>communityString</cstring>
+                                </property>
+                            </widget>
+                            <spacer row="1" column="1">
+                                <property name="name">
+                                    <cstring>spacer4</cstring>
+                                </property>
+                                <property name="orientation">
+                                    <enum>Vertical</enum>
+                                </property>
+                                <property name="sizeType">
+                                    <enum>Expanding</enum>
+                                </property>
+                                <property name="sizeHint">
+                                    <size>
+                                        <width>20</width>
+                                        <height>41</height>
+                                    </size>
+                                </property>
+                            </spacer>
+                            <spacer row="0" column="2">
+                                <property name="name">
+                                    <cstring>spacer3</cstring>
+                                </property>
+                                <property name="orientation">
+                                    <enum>Horizontal</enum>
+                                </property>
+                                <property name="sizeType">
+                                    <enum>Expanding</enum>
+                                </property>
+                                <property name="sizeHint">
+                                    <size>
+                                        <width>160</width>
+                                        <height>20</height>
+                                    </size>
+                                </property>
+                            </spacer>
+                            <widget class="KLineEdit" row="0" column="1">
+                                <property name="name">
+                                    <cstring>communityString</cstring>
+                                </property>
+                                <property name="echoMode">
+                                    <enum>Password</enum>
+                                </property>
+                            </widget>
+                        </grid>
+                    </widget>
+                    <widget class="QWidget">
+                        <property name="name">
+                            <cstring>snmpV3Page</cstring>
+                        </property>
+                        <attribute name="id">
+                            <number>1</number>
+                        </attribute>
+                        <grid>
+                            <property name="name">
+                                <cstring>unnamed</cstring>
+                            </property>
+                            <widget class="QLabel" row="0" column="0">
+                                <property name="name">
+                                    <cstring>textLabel6</cstring>
+                                </property>
+                                <property name="text">
+                                    <string>S&amp;ecurity name:</string>
+                                </property>
+                                <property name="buddy" stdset="0">
+                                    <cstring>securityName</cstring>
+                                </property>
+                            </widget>
+                            <widget class="QLabel" row="1" column="0">
+                                <property name="name">
+                                    <cstring>textLabel7</cstring>
+                                </property>
+                                <property name="text">
+                                    <string>Security &amp;level:</string>
+                                </property>
+                                <property name="buddy" stdset="0">
+                                    <cstring>securityLevel</cstring>
+                                </property>
+                            </widget>
+                            <widget class="QLabel" row="2" column="0">
+                                <property name="name">
+                                    <cstring>authenticationTypeLabel</cstring>
+                                </property>
+                                <property name="text">
+                                    <string>&amp;Authentication type:</string>
+                                </property>
+                                <property name="buddy" stdset="0">
+                                    <cstring>authenticationType</cstring>
+                                </property>
+                            </widget>
+                            <widget class="QLabel" row="4" column="0">
+                                <property name="name">
+                                    <cstring>privacyTypeLabel</cstring>
+                                </property>
+                                <property name="text">
+                                    <string>P&amp;rivacy type:</string>
+                                </property>
+                                <property name="buddy" stdset="0">
+                                    <cstring>privacyType</cstring>
+                                </property>
+                            </widget>
+                            <widget class="QLabel" row="5" column="0">
+                                <property name="name">
+                                    <cstring>privacyPassphraseLabel</cstring>
+                                </property>
+                                <property name="text">
+                                    <string>Priva&amp;cy passphrase:</string>
+                                </property>
+                                <property name="buddy" stdset="0">
+                                    <cstring>privacyPassphrase</cstring>
+                                </property>
+                            </widget>
+                            <widget class="QLabel" row="3" column="0">
+                                <property name="name">
+                                    <cstring>authenticationPassphraseLabel</cstring>
+                                </property>
+                                <property name="text">
+                                    <string>Authentication &amp;passphrase:</string>
+                                </property>
+                                <property name="buddy" stdset="0">
+                                    <cstring>authenticationPassphrase</cstring>
+                                </property>
+                            </widget>
+                            <spacer row="3" column="2">
+                                <property name="name">
+                                    <cstring>spacer5</cstring>
+                                </property>
+                                <property name="orientation">
+                                    <enum>Horizontal</enum>
+                                </property>
+                                <property name="sizeType">
+                                    <enum>Expanding</enum>
+                                </property>
+                                <property name="sizeHint">
+                                    <size>
+                                        <width>71</width>
+                                        <height>20</height>
+                                    </size>
+                                </property>
+                            </spacer>
+                            <widget class="KLineEdit" row="0" column="1">
+                                <property name="name">
+                                    <cstring>securityName</cstring>
+                                </property>
+                            </widget>
+                            <widget class="QComboBox" row="4" column="1">
+                                <property name="name">
+                                    <cstring>privacyType</cstring>
+                                </property>
+                                <property name="enabled">
+                                    <bool>true</bool>
+                                </property>
+                            </widget>
+                            <widget class="KLineEdit" row="5" column="1">
+                                <property name="name">
+                                    <cstring>privacyPassphrase</cstring>
+                                </property>
+                                <property name="echoMode">
+                                    <enum>Password</enum>
+                                </property>
+                            </widget>
+                            <widget class="QComboBox" row="1" column="1">
+                                <property name="name">
+                                    <cstring>securityLevel</cstring>
+                                </property>
+                            </widget>
+                            <widget class="QComboBox" row="2" column="1">
+                                <property name="name">
+                                    <cstring>authenticationType</cstring>
+                                </property>
+                            </widget>
+                            <widget class="KLineEdit" row="3" column="1">
+                                <property name="name">
+                                    <cstring>authenticationPassphrase</cstring>
+                                </property>
+                                <property name="echoMode">
+                                    <enum>Password</enum>
+                                </property>
+                            </widget>
+                            <spacer row="6" column="1">
+                                <property name="name">
+                                    <cstring>spacer7</cstring>
+                                </property>
+                                <property name="orientation">
+                                    <enum>Vertical</enum>
+                                </property>
+                                <property name="sizeType">
+                                    <enum>Expanding</enum>
+                                </property>
+                                <property name="sizeHint">
+                                    <size>
+                                        <width>20</width>
+                                        <height>20</height>
+                                    </size>
+                                </property>
+                            </spacer>
+                        </grid>
+                    </widget>
+                </widget>
+                <widget class="Line" row="1" column="0" rowspan="1" colspan="3">
+                    <property name="name">
+                        <cstring>line3</cstring>
+                    </property>
+                    <property name="frameShape">
+                        <enum>HLine</enum>
+                    </property>
+                    <property name="frameShadow">
+                        <enum>Sunken</enum>
+                    </property>
+                    <property name="orientation">
+                        <enum>Horizontal</enum>
+                    </property>
+                </widget>
+                <widget class="QLabel" row="0" column="0">
+                    <property name="name">
+                        <cstring>textLabel2_2</cstring>
+                    </property>
+                    <property name="text">
+                        <string>&amp;SNMP version:</string>
+                    </property>
+                    <property name="buddy" stdset="0">
+                        <cstring>snmpVersion</cstring>
+                    </property>
+                </widget>
+                <widget class="QComboBox" row="0" column="1">
+                    <property name="name">
+                        <cstring>snmpVersion</cstring>
+                    </property>
+                </widget>
+                <spacer row="0" column="2">
+                    <property name="name">
+                        <cstring>spacer8</cstring>
+                    </property>
+                    <property name="orientation">
+                        <enum>Horizontal</enum>
+                    </property>
+                    <property name="sizeType">
+                        <enum>Expanding</enum>
+                    </property>
+                    <property name="sizeHint">
+                        <size>
+                            <width>351</width>
+                            <height>20</height>
+                        </size>
+                    </property>
+                </spacer>
+            </grid>
+        </widget>
+        <widget class="Line" row="2" column="0" rowspan="1" colspan="5">
+            <property name="name">
+                <cstring>line2</cstring>
+            </property>
+            <property name="frameShape">
+                <enum>HLine</enum>
+            </property>
+            <property name="frameShadow">
+                <enum>Sunken</enum>
+            </property>
+            <property name="orientation">
+                <enum>Horizontal</enum>
+            </property>
+        </widget>
+        <widget class="QLayoutWidget" row="3" column="0" rowspan="1" colspan="5">
+            <property name="name">
+                <cstring>layout2</cstring>
+            </property>
+            <hbox>
+                <property name="name">
+                    <cstring>unnamed</cstring>
+                </property>
+                <widget class="QPushButton">
+                    <property name="name">
+                        <cstring>testHostButton</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Test Host...</string>
+                    </property>
+                </widget>
+                <spacer>
+                    <property name="name">
+                        <cstring>Horizontal Spacing2</cstring>
+                    </property>
+                    <property name="orientation">
+                        <enum>Horizontal</enum>
+                    </property>
+                    <property name="sizeType">
+                        <enum>Expanding</enum>
+                    </property>
+                    <property name="sizeHint">
+                        <size>
+                            <width>220</width>
+                            <height>20</height>
+                        </size>
+                    </property>
+                </spacer>
+                <widget class="QPushButton">
+                    <property name="name">
+                        <cstring>buttonOk</cstring>
+                    </property>
+                    <property name="text">
+                        <string>&amp;OK</string>
+                    </property>
+                    <property name="autoDefault">
+                        <bool>true</bool>
+                    </property>
+                    <property name="default">
+                        <bool>true</bool>
+                    </property>
+                </widget>
+                <widget class="QPushButton">
+                    <property name="name">
+                        <cstring>buttonCancel</cstring>
+                    </property>
+                    <property name="text">
+                        <string>&amp;Cancel</string>
+                    </property>
+                    <property name="autoDefault">
+                        <bool>true</bool>
+                    </property>
+                </widget>
+            </hbox>
+        </widget>
+    </grid>
+</widget>
+<connections>
+    <connection>
+        <sender>buttonOk</sender>
+        <signal>clicked()</signal>
+        <receiver>HostDialogBase</receiver>
+        <slot>accept()</slot>
+    </connection>
+    <connection>
+        <sender>buttonCancel</sender>
+        <signal>clicked()</signal>
+        <receiver>HostDialogBase</receiver>
+        <slot>reject()</slot>
+    </connection>
+    <connection>
+        <sender>snmpVersion</sender>
+        <signal>activated(const QString&amp;)</signal>
+        <receiver>HostDialogBase</receiver>
+        <slot>showSnmpAuthenticationDetailsForVersion(const QString&amp;)</slot>
+    </connection>
+    <connection>
+        <sender>securityLevel</sender>
+        <signal>activated(const QString&amp;)</signal>
+        <receiver>HostDialogBase</receiver>
+        <slot>enableDisabledAuthenticationAndPrivacyElementsForSecurityLevel(const QString&amp;)</slot>
+    </connection>
+    <connection>
+        <sender>hostName</sender>
+        <signal>textChanged(const QString&amp;)</signal>
+        <receiver>HostDialogBase</receiver>
+        <slot>checkValidity()</slot>
+    </connection>
+    <connection>
+        <sender>securityName</sender>
+        <signal>textChanged(const QString&amp;)</signal>
+        <receiver>HostDialogBase</receiver>
+        <slot>checkValidity()</slot>
+    </connection>
+    <connection>
+        <sender>communityString</sender>
+        <signal>textChanged(const QString&amp;)</signal>
+        <receiver>HostDialogBase</receiver>
+        <slot>checkValidity()</slot>
+    </connection>
+    <connection>
+        <sender>testHostButton</sender>
+        <signal>clicked()</signal>
+        <receiver>HostDialogBase</receiver>
+        <slot>testHost()</slot>
+    </connection>
+</connections>
+<tabstops>
+    <tabstop>hostName</tabstop>
+    <tabstop>port</tabstop>
+    <tabstop>snmpVersion</tabstop>
+    <tabstop>securityName</tabstop>
+    <tabstop>securityLevel</tabstop>
+    <tabstop>authenticationType</tabstop>
+    <tabstop>authenticationPassphrase</tabstop>
+    <tabstop>privacyType</tabstop>
+    <tabstop>privacyPassphrase</tabstop>
+    <tabstop>buttonOk</tabstop>
+    <tabstop>buttonCancel</tabstop>
+    <tabstop>communityString</tabstop>
+</tabstops>
+<slots>
+    <slot access="private">showSnmpAuthenticationDetailsForVersion(const QString &amp;)</slot>
+    <slot>enableDisabledAuthenticationAndPrivacyElementsForSecurityLevel(const QString &amp;)</slot>
+    <slot>checkValidity()</slot>
+    <slot access="protected">testHost()</slot>
+</slots>
+<layoutdefaults spacing="6" margin="11"/>
+<includehints>
+    <includehint>kdialog.h</includehint>
+    <includehint>klineedit.h</includehint>
+    <includehint>klineedit.h</includehint>
+    <includehint>klineedit.h</includehint>
+    <includehint>klineedit.h</includehint>
+    <includehint>klineedit.h</includehint>
+</includehints>
+</UI>

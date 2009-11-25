@@ -1,0 +1,33 @@
+kjots - a note taker
+------------------------------------
+
+(C) 2002, 2003 Aaron J. Seigo <aseigo@olympusproject.org>
+
+(C) 1997 Christoph Neerfeld (Christoph.Neerfeld@home.ivm.de)
+You may distribute kjots under the terms of the GNU General Public License.
+
+kjots is a small note taker program. Name and idea are taken from the jots
+program included in the tkgoodstuff package. The tkgoodstuff package is
+copyright (C) 1995-96 by Mark Crimmins (markcrim@umich.edu).
+
+Features:
+	- you may create several folders to store small text notes
+
+Bugs:
+	- see the BUGS doc or http://bugs.kde.org
+
+TODO for 3.2:
+        - preserve ordering of books between reloads
+
+TODO for post 3.2:
+        - statusbar with e.g. timestamp of last mod
+        - allow formatting of text in notes
+        - allow trees of pages
+        - page templates (TODO, diary, etc)
+        - encryption of pages
+        - syncing w/handhelds
+
+Install:
+	see INSTALL for details
+
+If you find bugs or have suggestions, send me an email

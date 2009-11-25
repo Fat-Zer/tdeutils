@@ -1,0 +1,42 @@
+KSim - K System Information Monitor
+-----------------------------------
+
+KSim is a plugin based system monitor that has
+support for GKrellm (www.gkrellm.net) themes.
+
+KSim can currently monitor these types:
+ * Cpu usage (plugin)
+ * Net (eth0, ppp0 etc) usage (plugin)
+ * Filesystem usage (plugin)
+ * Sensors information (plugin)
+ * Disk information (plugin)
+ * Mail monitor (plugin)
+ * Clock & Date display
+ * Hostname display
+ * Uptime display
+ * Memory/Free Memory display
+ * Swap/Free Swap display
+
+The current planned features are:
+ * Proc monitor (plugin)
+
+NOTE: the plugin naming conventions changed
+in v0.5 and above, i recommend you to
+rm -rf $KDEDIR/lib/libksim* before you install
+v0.5 or above, if you are using v0.4 or below.
+
+As of v0.9.0 and above, KSim has the option to
+recolour themes to the current KDE color scheme,
+if you have any problems of it recolouring to the wrong
+color or some other recolouring related problem then
+send me the name of the color scheme you are using
+and the color values for your background and text color.
+
+Please read BUGS for a list of current known bugs 
+and ChangeLog for the changes in the last release.
+Also the theme support isn't 100% implemented 
+(which it may never be), if you have any theme
+related issues then please email me describing what
+problem you had and with which theme.
+
+Any other problems? email me (linuxphreak@gmx.co.uk)

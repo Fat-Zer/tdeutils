@@ -1,0 +1,6 @@
+general:
+* Take out kdedmodule_stub.h, install by default (KDE4)
+
+kcmlirc:
+
+irkick:

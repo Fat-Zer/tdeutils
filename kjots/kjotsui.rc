@@ -1,0 +1,41 @@
+<!DOCTYPE kpartgui>
+<kpartgui version="2" name="kjots" >
+ <MenuBar>
+
+  <Menu name="file">
+   <Action name="new_page" append="new_merge"/>
+   <Action name="new_book" append="new_merge"/>
+   <Separator/>
+   <Action name="save_page_to" append="save_merge"/>
+   <Action name="save_book_to" append="save_merge"/>
+   <Separator/>
+   <Action name="del_page" append="save_merge"/>
+   <Action name="del_folder" append="save_merge"/>
+  </Menu>
+
+  <Menu name="edit">
+   <Action name="copyIntoTitle" append="edit_paste_merge"/>
+   <Action name="rename_entry"/>
+   <Action name="insert_date"/>
+  </Menu>
+
+  <Menu name="go_document">
+   <Action name="go_next_page"/>
+   <Action name="go_prev_page"/>
+   <Separator/>
+   <Action name="go_next_book"/>
+   <Action name="go_prev_book"/>
+  </Menu>
+
+  <Action name="bookmarks"/>
+
+  <Menu name="settings"></Menu>
+
+  <Menu name="help"></Menu>
+ </MenuBar>
+
+ <ToolBar name="mainToolBar" fullWidth="true" >
+  <Separator/>
+  <Action name="insert_date"/>
+ </ToolBar>
+</kpartgui>

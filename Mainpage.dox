@@ -1,0 +1,11 @@
+/** @mainpage KDE Utilities
+*
+* The KDE Utilities SVN module collects together an enormous amount
+* of small shoddy utilities of dubious value that fall under the
+* 'desk utilities' category and that you would normally get for
+* free in a box of cereal. These include:
+*
+* - kfloppy, a floppy disk formatter
+* - superkaramba, a form of eyecandy
+*
+*/

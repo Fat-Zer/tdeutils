@@ -1,0 +1,10 @@
+<!DOCTYPE kpartgui>
+<kpartgui name="kedit" version="2">
+<MenuBar>
+  <Menu name="edit"><text>&amp;Edit</text>
+    <Action name="insert_file"/>
+    <Action name="insert_date"/>
+    <Action name="clean_spaces"/>
+  </Menu>
+</MenuBar>
+</kpartgui>

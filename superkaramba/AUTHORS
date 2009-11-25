@@ -1,0 +1,49 @@
+AUTHORS:
+
+Adam Geitgey <adam@rootnode.org>
+ - SuperKaramba
+
+Hans Karlsson <karlsson.h@home.se>
+ - Original Karamba
+
+MAJOR CONTRIBUTORS:
+
+Wilfried Huss <willihus@sbox.tugraz.at>
+ - Lots and lots of Python API Functions
+ - Various patches
+
+Ralph Churchill <mrchucho@yahoo.com>
+ - RSS Sensor (easy headline display):
+ - Various patches
+
+Ryan Nickell <p0z3r@earthlink.net>
+
+Petri Damstén <petri.damsten@iki.fi>
+
+Ivica Ico Bukvic <ico@fuse.net>
+http://meowing.ccm.uc.edu/~ico/
+ - Various additions/fixes
+ 
+Sarah Elan <selan@users.sf.net>
+
+Luke Kenneth Casson Leighton <lkcl@lkcl.net>
+ - Python API functions, theme inter-communication
+ - Karamba "object"-style auto-wrapper to OO-itise python interface
+ - drag-drop receives x,y coordinates of mouse at drop time.
+
+HELP, PATCHES, AND EXISTING CODE:
+
+Matthias Elter <elter@kde.org>
+ - used his awesome TaskManager class for SuperKaramba task support
+
+Vova Kuznetsov <kv000@mail.ru>
+
+Alexander Wiedenbruch <Alexander@wiedenbruch.de> - Patches and Testing
+
+Scott Grayban <sgrayban@mandriva.org> - Mandriva RPM Packager
+
+THANKS:
+
+The graphics in the welcome dialog are derived from crystalsvg icons by
+everaldo <everaldo@everaldo.com>
+

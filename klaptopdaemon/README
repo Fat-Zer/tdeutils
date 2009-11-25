@@ -1,0 +1,8 @@
+This is klaptop daemon it provides battery monitoring and management
+for laptops - this is a KDE 2 rewrite of kcmlaptop which is not
+supported for KDE >2.0. Please pass any bug reports to Paul Campbell
+paul@taniwha.com.
+
+The power management stuff is all abstracted out into portable.*
+if you feel the urge to port it to your OS/CPU please contact me for
+help - Paul

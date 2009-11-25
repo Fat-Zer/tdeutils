@@ -1,0 +1,507 @@
+<!DOCTYPE UI><UI version="3.3" stdsetdef="1">
+<class>KeyProperties</class>
+<widget class="QWidget">
+    <property name="name">
+        <cstring>KeyProperties</cstring>
+    </property>
+    <property name="geometry">
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>431</width>
+            <height>350</height>
+        </rect>
+    </property>
+    <property name="sizePolicy">
+        <sizepolicy>
+            <hsizetype>5</hsizetype>
+            <vsizetype>5</vsizetype>
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+        </sizepolicy>
+    </property>
+    <property name="caption">
+        <string>Key Properties</string>
+    </property>
+    <grid>
+        <property name="name">
+            <cstring>unnamed</cstring>
+        </property>
+        <property name="margin">
+            <number>0</number>
+        </property>
+        <widget class="QLayoutWidget" row="0" column="3" rowspan="7" colspan="1">
+            <property name="name">
+                <cstring>layout39</cstring>
+            </property>
+            <vbox>
+                <property name="name">
+                    <cstring>unnamed</cstring>
+                </property>
+                <widget class="QLabel">
+                    <property name="name">
+                        <cstring>pLPhoto</cstring>
+                    </property>
+                    <property name="sizePolicy">
+                        <sizepolicy>
+                            <hsizetype>5</hsizetype>
+                            <vsizetype>0</vsizetype>
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                        </sizepolicy>
+                    </property>
+                    <property name="minimumSize">
+                        <size>
+                            <width>120</width>
+                            <height>140</height>
+                        </size>
+                    </property>
+                    <property name="maximumSize">
+                        <size>
+                            <width>32767</width>
+                            <height>140</height>
+                        </size>
+                    </property>
+                    <property name="paletteBackgroundColor">
+                        <color>
+                            <red>200</red>
+                            <green>200</green>
+                            <blue>200</blue>
+                        </color>
+                    </property>
+                    <property name="frameShape">
+                        <enum>Box</enum>
+                    </property>
+                    <property name="lineWidth">
+                        <number>2</number>
+                    </property>
+                    <property name="text">
+                        <string>No Photo</string>
+                    </property>
+                    <property name="scaledContents">
+                        <bool>false</bool>
+                    </property>
+                    <property name="alignment">
+                        <set>AlignCenter</set>
+                    </property>
+                    <property name="whatsThis" stdset="0">
+                        <string>&lt;qt&gt;&lt;b&gt;Photo:&lt;/b&gt;&lt;br /&gt;
+			&lt;p&gt;A photo can be included with a public key for extra security. The photo can be used as an additional method of authenticating the key. However, it should not be relied upon as the only form of authentication.&lt;/p&gt;
+			&lt;/qt&gt;</string>
+                    </property>
+                </widget>
+                <widget class="QLayoutWidget">
+                    <property name="name">
+                        <cstring>layout13</cstring>
+                    </property>
+                    <hbox>
+                        <property name="name">
+                            <cstring>unnamed</cstring>
+                        </property>
+                        <widget class="QLabel">
+                            <property name="name">
+                                <cstring>textLabel1</cstring>
+                            </property>
+                            <property name="text">
+                                <string>Photo Id:</string>
+                            </property>
+                        </widget>
+                        <widget class="KComboBox">
+                            <property name="name">
+                                <cstring>comboId</cstring>
+                            </property>
+                        </widget>
+                    </hbox>
+                </widget>
+            </vbox>
+        </widget>
+        <widget class="QLayoutWidget" row="7" column="3" rowspan="4" colspan="1">
+            <property name="name">
+                <cstring>layout4</cstring>
+            </property>
+            <vbox>
+                <property name="name">
+                    <cstring>unnamed</cstring>
+                </property>
+                <widget class="QCheckBox">
+                    <property name="name">
+                        <cstring>cbDisabled</cstring>
+                    </property>
+                    <property name="text">
+                        <string>Disable key</string>
+                    </property>
+                </widget>
+                <widget class="QPushButton">
+                    <property name="name">
+                        <cstring>changeExp</cstring>
+                    </property>
+                    <property name="enabled">
+                        <bool>true</bool>
+                    </property>
+                    <property name="sizePolicy">
+                        <sizepolicy>
+                            <hsizetype>5</hsizetype>
+                            <vsizetype>0</vsizetype>
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                        </sizepolicy>
+                    </property>
+                    <property name="text">
+                        <string>Change Expiration...</string>
+                    </property>
+                </widget>
+                <widget class="QPushButton">
+                    <property name="name">
+                        <cstring>changePass</cstring>
+                    </property>
+                    <property name="enabled">
+                        <bool>true</bool>
+                    </property>
+                    <property name="sizePolicy">
+                        <sizepolicy>
+                            <hsizetype>1</hsizetype>
+                            <vsizetype>0</vsizetype>
+                            <horstretch>0</horstretch>
+                            <verstretch>0</verstretch>
+                        </sizepolicy>
+                    </property>
+                    <property name="text">
+                        <string>Change Passphrase...</string>
+                    </property>
+                </widget>
+            </vbox>
+        </widget>
+        <widget class="QLabel" row="9" column="0">
+            <property name="name">
+                <cstring>labelLength</cstring>
+            </property>
+            <property name="margin">
+                <number>0</number>
+            </property>
+            <property name="text">
+                <string>Length:</string>
+            </property>
+        </widget>
+        <widget class="QLabel" row="3" column="0">
+            <property name="name">
+                <cstring>labelCreation</cstring>
+            </property>
+            <property name="margin">
+                <number>0</number>
+            </property>
+            <property name="text">
+                <string>Creation:</string>
+            </property>
+        </widget>
+        <widget class="QLabel" row="7" column="0">
+            <property name="name">
+                <cstring>labelID</cstring>
+            </property>
+            <property name="margin">
+                <number>0</number>
+            </property>
+            <property name="text">
+                <string>Key ID:</string>
+            </property>
+        </widget>
+        <widget class="QLabel" row="6" column="0">
+            <property name="name">
+                <cstring>tLTrust_2</cstring>
+            </property>
+            <property name="sizePolicy">
+                <sizepolicy>
+                    <hsizetype>5</hsizetype>
+                    <vsizetype>5</vsizetype>
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                </sizepolicy>
+            </property>
+            <property name="margin">
+                <number>0</number>
+            </property>
+            <property name="text">
+                <string>Owner trust:</string>
+            </property>
+        </widget>
+        <widget class="QLabel" row="1" column="0">
+            <property name="name">
+                <cstring>tLMail2_2</cstring>
+            </property>
+            <property name="margin">
+                <number>0</number>
+            </property>
+            <property name="text">
+                <string>Email:</string>
+            </property>
+        </widget>
+        <widget class="QLabel" row="8" column="0">
+            <property name="name">
+                <cstring>labelAlgo</cstring>
+            </property>
+            <property name="margin">
+                <number>0</number>
+            </property>
+            <property name="text">
+                <string>Algorithm:</string>
+            </property>
+        </widget>
+        <widget class="QLabel" row="4" column="0">
+            <property name="name">
+                <cstring>labelExpiration</cstring>
+            </property>
+            <property name="margin">
+                <number>0</number>
+            </property>
+            <property name="text">
+                <string>Expiration:</string>
+            </property>
+        </widget>
+        <widget class="QLabel" row="5" column="0">
+            <property name="name">
+                <cstring>txtTrust</cstring>
+            </property>
+            <property name="sizePolicy">
+                <sizepolicy>
+                    <hsizetype>5</hsizetype>
+                    <vsizetype>5</vsizetype>
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                </sizepolicy>
+            </property>
+            <property name="margin">
+                <number>0</number>
+            </property>
+            <property name="text">
+                <string>Trust:</string>
+            </property>
+        </widget>
+        <widget class="QLabel" row="2" column="0">
+            <property name="name">
+                <cstring>tLComment2_2</cstring>
+            </property>
+            <property name="margin">
+                <number>0</number>
+            </property>
+            <property name="text">
+                <string>Comment:</string>
+            </property>
+        </widget>
+        <widget class="QLabel" row="0" column="0">
+            <property name="name">
+                <cstring>tLName2_2</cstring>
+            </property>
+            <property name="margin">
+                <number>0</number>
+            </property>
+            <property name="text">
+                <string>Name:</string>
+            </property>
+        </widget>
+        <widget class="KLineEdit" row="11" column="0" rowspan="1" colspan="4">
+            <property name="name">
+                <cstring>lEFinger</cstring>
+            </property>
+            <property name="frame">
+                <bool>true</bool>
+            </property>
+            <property name="readOnly">
+                <bool>true</bool>
+            </property>
+        </widget>
+        <widget class="QLabel" row="10" column="0" rowspan="1" colspan="3">
+            <property name="name">
+                <cstring>tLID_2</cstring>
+            </property>
+            <property name="text">
+                <string>Fingerprint:</string>
+            </property>
+        </widget>
+        <widget class="KActiveLabel" row="2" column="1" rowspan="1" colspan="2">
+            <property name="name">
+                <cstring>tLComment</cstring>
+            </property>
+            <property name="sizePolicy">
+                <sizepolicy>
+                    <hsizetype>7</hsizetype>
+                    <vsizetype>5</vsizetype>
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                </sizepolicy>
+            </property>
+        </widget>
+        <widget class="QLabel" row="5" column="2">
+            <property name="name">
+                <cstring>pixmapTrust</cstring>
+            </property>
+            <property name="sizePolicy">
+                <sizepolicy>
+                    <hsizetype>5</hsizetype>
+                    <vsizetype>5</vsizetype>
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                </sizepolicy>
+            </property>
+            <property name="frameShape">
+                <enum>Box</enum>
+            </property>
+            <property name="scaledContents">
+                <bool>true</bool>
+            </property>
+        </widget>
+        <widget class="KActiveLabel" row="1" column="1" rowspan="1" colspan="2">
+            <property name="name">
+                <cstring>tLMail</cstring>
+            </property>
+            <property name="sizePolicy">
+                <sizepolicy>
+                    <hsizetype>7</hsizetype>
+                    <vsizetype>5</vsizetype>
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                </sizepolicy>
+            </property>
+        </widget>
+        <widget class="KActiveLabel" row="7" column="1" rowspan="1" colspan="2">
+            <property name="name">
+                <cstring>tLID</cstring>
+            </property>
+            <property name="sizePolicy">
+                <sizepolicy>
+                    <hsizetype>7</hsizetype>
+                    <vsizetype>5</vsizetype>
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                </sizepolicy>
+            </property>
+        </widget>
+        <widget class="KActiveLabel" row="4" column="1" rowspan="1" colspan="2">
+            <property name="name">
+                <cstring>tLExpiration</cstring>
+            </property>
+            <property name="sizePolicy">
+                <sizepolicy>
+                    <hsizetype>7</hsizetype>
+                    <vsizetype>5</vsizetype>
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                </sizepolicy>
+            </property>
+        </widget>
+        <widget class="KComboBox" row="6" column="1" rowspan="1" colspan="2">
+            <item>
+                <property name="text">
+                    <string>Don't Know</string>
+                </property>
+            </item>
+            <item>
+                <property name="text">
+                    <string>Do NOT Trust</string>
+                </property>
+            </item>
+            <item>
+                <property name="text">
+                    <string>Marginally</string>
+                </property>
+            </item>
+            <item>
+                <property name="text">
+                    <string>Fully</string>
+                </property>
+            </item>
+            <item>
+                <property name="text">
+                    <string>Ultimately</string>
+                </property>
+            </item>
+            <property name="name">
+                <cstring>kCOwnerTrust</cstring>
+            </property>
+        </widget>
+        <widget class="QLabel" row="5" column="1">
+            <property name="name">
+                <cstring>kLTrust</cstring>
+            </property>
+            <property name="sizePolicy">
+                <sizepolicy>
+                    <hsizetype>5</hsizetype>
+                    <vsizetype>4</vsizetype>
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                </sizepolicy>
+            </property>
+            <property name="text">
+                <string></string>
+            </property>
+        </widget>
+        <widget class="QLabel" row="9" column="1" rowspan="1" colspan="2">
+            <property name="name">
+                <cstring>tLLength</cstring>
+            </property>
+            <property name="sizePolicy">
+                <sizepolicy>
+                    <hsizetype>7</hsizetype>
+                    <vsizetype>5</vsizetype>
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                </sizepolicy>
+            </property>
+            <property name="text">
+                <string></string>
+            </property>
+        </widget>
+        <widget class="QLabel" row="8" column="1" rowspan="1" colspan="2">
+            <property name="name">
+                <cstring>tLAlgo</cstring>
+            </property>
+            <property name="sizePolicy">
+                <sizepolicy>
+                    <hsizetype>7</hsizetype>
+                    <vsizetype>5</vsizetype>
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                </sizepolicy>
+            </property>
+            <property name="text">
+                <string></string>
+            </property>
+        </widget>
+        <widget class="KActiveLabel" row="3" column="1" rowspan="1" colspan="2">
+            <property name="name">
+                <cstring>tLCreation</cstring>
+            </property>
+            <property name="sizePolicy">
+                <sizepolicy>
+                    <hsizetype>7</hsizetype>
+                    <vsizetype>5</vsizetype>
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                </sizepolicy>
+            </property>
+        </widget>
+        <widget class="KActiveLabel" row="0" column="1" rowspan="1" colspan="2">
+            <property name="name">
+                <cstring>tLName</cstring>
+            </property>
+            <property name="sizePolicy">
+                <sizepolicy>
+                    <hsizetype>7</hsizetype>
+                    <vsizetype>5</vsizetype>
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                </sizepolicy>
+            </property>
+        </widget>
+    </grid>
+</widget>
+<customwidgets>
+</customwidgets>
+<layoutdefaults spacing="6" margin="11"/>
+<includehints>
+    <includehint>kactivelabel.h</includehint>
+    <includehint>kactivelabel.h</includehint>
+    <includehint>kactivelabel.h</includehint>
+    <includehint>kactivelabel.h</includehint>
+    <includehint>kactivelabel.h</includehint>
+    <includehint>kactivelabel.h</includehint>
+</includehints>
+</UI>

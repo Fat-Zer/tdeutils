@@ -1,0 +1,4 @@
+File=superkaramba.kcfg
+ClassName=SuperKarambaSettings
+Singleton=true
+Mutators=true

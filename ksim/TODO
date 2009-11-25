@@ -1,0 +1,5 @@
+Current things todo (in any order):
+
+  * Fix the bug in BUGS
+  * Insert the plugin views at the correct location and don't just append
+    them to the bottom of the view

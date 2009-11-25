@@ -1,0 +1,152 @@
+<!DOCTYPE UI><UI version="3.3" stdsetdef="1">
+<class>confPageMisc</class>
+<widget class="QDialog">
+    <property name="name">
+        <cstring>confPageMisc</cstring>
+    </property>
+    <property name="geometry">
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>289</width>
+            <height>123</height>
+        </rect>
+    </property>
+    <property name="caption">
+        <string>Miscellaneous</string>
+    </property>
+    <grid>
+        <property name="name">
+            <cstring>unnamed</cstring>
+        </property>
+        <property name="margin">
+            <number>0</number>
+        </property>
+        <widget class="KIntSpinBox" row="1" column="2">
+            <property name="name">
+                <cstring>kcfg_AutoSaveInterval</cstring>
+            </property>
+            <property name="suffix">
+                <string> minutes</string>
+            </property>
+            <property name="specialValueText">
+                <string>1 minute</string>
+            </property>
+            <property name="maxValue">
+                <number>1440</number>
+            </property>
+            <property name="minValue">
+                <number>1</number>
+            </property>
+            <property name="whatsThis" stdset="0">
+                <string>This is the number of minutes KJots will wait before automatically saving changes.</string>
+            </property>
+        </widget>
+        <widget class="QLabel" row="1" column="1">
+            <property name="name">
+                <cstring>textLabel1</cstring>
+            </property>
+            <property name="text">
+                <string>S&amp;ave every:</string>
+            </property>
+            <property name="buddy" stdset="0">
+                <cstring>kcfg_AutoSaveInterval</cstring>
+            </property>
+            <property name="whatsThis" stdset="0">
+                <string>This is the number of minutes KJots will wait before automatically saving changes.</string>
+            </property>
+        </widget>
+        <spacer row="1" column="3">
+            <property name="name">
+                <cstring>spacer1</cstring>
+            </property>
+            <property name="orientation">
+                <enum>Horizontal</enum>
+            </property>
+            <property name="sizeType">
+                <enum>Expanding</enum>
+            </property>
+            <property name="sizeHint">
+                <size>
+                    <width>40</width>
+                    <height>20</height>
+                </size>
+            </property>
+        </spacer>
+        <spacer row="3" column="2">
+            <property name="name">
+                <cstring>spacer4</cstring>
+            </property>
+            <property name="orientation">
+                <enum>Vertical</enum>
+            </property>
+            <property name="sizeType">
+                <enum>Expanding</enum>
+            </property>
+            <property name="sizeHint">
+                <size>
+                    <width>20</width>
+                    <height>30</height>
+                </size>
+            </property>
+        </spacer>
+        <spacer row="1" column="0">
+            <property name="name">
+                <cstring>spacer3</cstring>
+            </property>
+            <property name="orientation">
+                <enum>Horizontal</enum>
+            </property>
+            <property name="sizeType">
+                <enum>Fixed</enum>
+            </property>
+            <property name="sizeHint">
+                <size>
+                    <width>20</width>
+                    <height>20</height>
+                </size>
+            </property>
+        </spacer>
+        <widget class="QCheckBox" row="0" column="0" rowspan="1" colspan="4">
+            <property name="name">
+                <cstring>kcfg_AutoSave</cstring>
+            </property>
+            <property name="text">
+                <string>&amp;Save changes periodically</string>
+            </property>
+            <property name="checked">
+                <bool>true</bool>
+            </property>
+            <property name="whatsThis" stdset="0">
+                <string>When "Enable autosave" is checked, KJots will automatically save changes made to books at the interval defined below.</string>
+            </property>
+        </widget>
+        <widget class="QCheckBox" row="2" column="0" rowspan="1" colspan="3">
+            <property name="name">
+                <cstring>kcfg_Unicode</cstring>
+            </property>
+            <property name="text">
+                <string>Use Unico&amp;de encoding</string>
+            </property>
+        </widget>
+    </grid>
+</widget>
+<connections>
+    <connection>
+        <sender>kcfg_AutoSave</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>kcfg_AutoSaveInterval</receiver>
+        <slot>setEnabled(bool)</slot>
+    </connection>
+    <connection>
+        <sender>kcfg_AutoSave</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>textLabel1</receiver>
+        <slot>setEnabled(bool)</slot>
+    </connection>
+</connections>
+<layoutdefaults spacing="6" margin="11"/>
+<includehints>
+    <includehint>knuminput.h</includehint>
+</includehints>
+</UI>

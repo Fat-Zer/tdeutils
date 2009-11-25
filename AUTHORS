@@ -1,0 +1,28 @@
+Program			Person held responsible
+=======================================
+ark			Emily Ezust <emilye@corel.com>
+kab (discontinued)	Mirko Boehm <mirko@kde.org>
+karm			Sirtaj Singh Kang <taj@kde.org>
+kcalc			Bernd Johannes Wuebben <wuebben@kde.org>
+kcharselect 		Reginald Stadlbauer <reggie@kde.org>
+kdepasswd		Geert Jansen <jansen@kde.org>
+kdessh			Geert Jansen <jansen@kde.org>
+kdf			Michael Kropfberger <michael.kropfberger@gmx.net>
+kedit			Bernd Johannes Wuebben <wuebben@kde.org>
+kfind			Carsten Pfeiffer <pfeiffer@kde.org>
+kfloppy			Bernd Johannes Wuebben <wuebben@kde.org>
+kfontmanager		Hans Petter Bieker <bieker@kde.org>
+kgpg                    Jean-Baptiste Mardelle <bj@alter.org>
+khexedit		Espen Sand <espensa@online.no>
+kjots			Christoph Neerfeld <chris@kde.org>
+klaptopdaemon		Paul Campbell <paul@taniwha.com>
+klipper			Carsten Pfeiffer <pfeiffer@kde.org>
+kljettool		Bernd Johannes Wuebben <wuebben@kde.org>
+klpq			Bernd Johannes Wuebben <wuebben@kde.org>
+kpm			Mario Weilguni <mweilguni@kde.org>
+ktimemon		Dirk A. Mueller <dmuell@gmx.net> 
+ktop 			Chris Schlaeger <cs@kde.org>
+kwrite			Jochen Wilhelmy <digisnap@cs.tu-berlin.de>
+
+Look in the subdirs to get more info about the authors.
+The package is maintained by Matthias Elter <elter@kde.org>

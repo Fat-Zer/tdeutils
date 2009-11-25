@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kcfg xmlns="http://www.kde.org/standards/kcfg/1.0"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
+      http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
+  <include>kstandarddirs.h</include>
+  <kcfgfile name="keditrc"/>
+  <group name="Text Font">
+    <entry name="Font" type="Font" key="KEditFont">
+      <label>Font</label>
+      <default code="true">KGlobalSettings::fixedFont()</default>
+    </entry>
+  </group>
+  <group name="General Options">
+    <entry name="CustomColor" type="Bool">
+      <label>Use custom colors.</label>
+      <default>false</default>
+    </entry>
+    <entry name="TextColor" type="Color" key="ForeColor">
+      <label>Text color</label>
+      <default code="true">KGlobalSettings::textColor()</default>
+    </entry>
+    <entry name="BackgroundColor" type="Color" key="BackColor">
+      <label>Background color</label>
+      <default code="true">KGlobalSettings::baseColor()</default>
+    </entry>
+    <entry name="WrapMode" type="Enum">
+      <label>Wrapping mode</label>
+      <choices>
+        <choice name="NoWrap"/>
+        <choice name="SoftWrap"/>
+        <choice name="FixedColumnWrap"/>
+      </choices>
+      <default>SoftWrap</default>
+    </entry>
+    <entry name="WrapColumn" type="Int">
+      <label>Wrap at column</label>
+      <default>79</default>
+    </entry>
+    <entry name="BackupCopies" type="Bool">
+      <label>Make backup when saving a file</label>
+      <default>true</default>
+    </entry>
+  </group>
+</kcfg>

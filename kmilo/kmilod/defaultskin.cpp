@@ -33,6 +33,7 @@
 #include <netwm.h>
 #include <kglobalsettings.h>
 #include <kdeversion.h>
+#include <kconfig.h>
 
 #include "defaultskin.h"
 
@@ -49,6 +50,9 @@ DefaultSkin::DefaultSkin() {
 	KWin::setType(_widget->winId(), NET::Override);
 
 	_widget->hide();
+
+	KConfig config("kmilodrc");
+	reconfigure( &config );
 }
 
 
@@ -57,6 +61,34 @@ DefaultSkin::~DefaultSkin() {
 	_widget = 0;
 }
 
+void DefaultSkin::reconfigure( KConfig *config ) {
+	
+	config->setGroup("DefaultSkin");
+	
+	QFont *defaultFont = new QFont("Sans", 10, QFont::Bold );
+	QSize *defaultSize = new QSize( 80, 30 );
+	QColor *defaultpaletteForegroundColor = new QColor( 200, 200, 200 );
+	QColor *defaultpaletteBackgroundColor = new QColor( 100, 100, 100 );
+	QFont *defaultProgressFont = new QFont("Sans", 8, QFont::Bold );
+	
+	_widget->resize( config->readSizeEntry("Size", defaultSize ) );
+	_widget->setFont( config->readFontEntry("Font", defaultFont ) );
+	_widget->setPaletteForegroundColor( config->readColorEntry("paletteForegroundColor", defaultpaletteForegroundColor ) );
+	_widget->setPaletteBackgroundColor( config->readColorEntry("paletteBackgroundColor", defaultpaletteBackgroundColor ) );
+	_widget->_progress->setFont( config->readFontEntry("ProgressFont", defaultProgressFont ) );
+
+	if ( ! config->hasGroup("DefaultSkin") )
+	{
+		
+		config->writeEntry("Size", *defaultSize );
+		config->writeEntry("Font", *defaultFont );
+		config->writeEntry("paletteForegroundColor", *defaultpaletteForegroundColor );
+		config->writeEntry("paletteBackgroundColor", *defaultpaletteBackgroundColor );
+		config->writeEntry("ProgressFont", *defaultProgressFont );
+		
+	}
+	
+}
 
 void DefaultSkin::clear() {
 	_timer.stop();

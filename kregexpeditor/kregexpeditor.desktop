@@ -72,5 +72,5 @@ GenericName[zh_TW]=正規表示式編輯器
 Terminal=false
 Type=Application
 X-KDE-StartupNotify=true
-Categories=Qt;KDE;Utility;X-KDE-More;
+Categories=Qt;KDE;Utility;
 Icon=kregexpeditor

@@ -100,7 +100,7 @@ void write_to_power(const char * str)
    Returns only if the program does not exist; if the program exists
    and is unsafe, exit; if the program exists and is safe, run it
    and never return. */
-void run_program(const char *path)
+void run_program(const char *path, const int action)
 {
 	struct stat sb;
 	int err;
@@ -118,7 +118,13 @@ void run_program(const char *path)
 		exit(1);
 	}
 	::setuid(::geteuid());					// otherwise bash will throw it away
-	::execl(path, NULL);	// this is not KDE environment code 
+	if (action == 1) {
+		system("/usr/sbin/pmi action hibernate");
+	} else if (action == 2) {
+		system("/usr/sbin/pmi action sleep");
+	} else {
+		::execl(path, NULL);	// this is not KDE environment code 
+	}
 	exit(0);
 }
 
@@ -139,11 +145,13 @@ main(int argc, char **argv)
 	for (i = 1; i < argc; i++)
 	if (strcmp(argv[i], "--suspend") == 0 || strcmp(argv[i], "-suspend") == 0) {
 		/* Returns only if suspend does not exist. */
-		run_program("/usr/sbin/suspend");
+		run_program("/usr/sbin/pmi", 2);
+		/*
 		if (useSysPower)
 			write_to_power("mem");
 		else
 			write_to_proc_sleep(3);
+		*/
 		exit(0);
 	} else
 	if (strcmp(argv[i], "--standby") == 0 || strcmp(argv[i], "-standby") == 0) {
@@ -158,15 +166,17 @@ main(int argc, char **argv)
 		exit(0);
 	} else
 	if (strcmp(argv[i], "--hibernate") == 0 || strcmp(argv[i], "-hibernate") == 0) {
-		run_program("/usr/sbin/hibernate");
+		run_program("/usr/sbin/pmi", 1);
+		/*
 		if (useSysPower)
 			write_to_power("disk");
 		else
 			write_to_proc_sleep(4);
+		*/
 		exit(0);
 	} else
 	if (strcmp(argv[i], "--software-suspend") == 0 || strcmp(argv[i], "-software-suspend") == 0) {
-		run_program("/usr/sbin/hibernate");
+		run_program("/usr/sbin/hibernate", 0);
 		exit(0);
 	} else
 	if (strcmp(argv[i], "--throttling") == 0 || strcmp(argv[i], "-throttling") == 0) {

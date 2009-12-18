@@ -262,7 +262,9 @@ void Arch::slotReceivedTOC( KProcess*, char* data, int length )
       break; // We are done all the complete lines
 
     data[ lfChar ] = '\0';
-    m_buffer.append( data + startChar );
+
+    m_buffer.append( QString::fromUtf8(data + startChar).latin1() );
+
     data[ lfChar ] = '\n';
     startChar = lfChar + 1;
 

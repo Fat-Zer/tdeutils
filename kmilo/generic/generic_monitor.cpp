@@ -25,6 +25,7 @@
 
 #include <kgenericfactory.h>
 #include <kdebug.h>
+#include <kprocess.h>
 #include <kconfig.h>
 
 #include <sys/types.h>
@@ -34,6 +35,7 @@
 #include "kmilointerface.h"
 #include <qmessagebox.h>
 #include <qfile.h>
+#include <qdir.h>
 
 #define CONFIG_FILE "kmilodrc"
 
@@ -70,10 +72,25 @@ bool GenericMonitor::init()
 	KConfig config(CONFIG_FILE);
 	reconfigure(&config);
 
+	//config = new KConfig("kmilodrc");
+	config.setGroup("kubuntu");
+
 	if(!m_enabled)
 		return false; // exit early if we are not supposed to run
 
 	static const ShortcutInfo shortcuts[] = {
+ 		{ "Search", KShortcut("XF86Search"), SLOT(launchSearch()) },
+ 		{ "Home Folder", KShortcut("XF86MyComputer"), SLOT(launchHomeFolder()) },
+ 		{ "Mail", KShortcut("XF86Mail"), SLOT(launchMail()) },
+ 		{ "Audio Media", KShortcut("XF86AudioMedia"), SLOT(launchMusic()) },
+ 		{ "Music", KShortcut("XF86Music"), SLOT(launchMusic()) },
+ 		{ "Browser", KShortcut("XF86WWW"), SLOT(launchBrowser()) },
+ 		{ "Calculator", KShortcut("XF86Calculator"), SLOT(launchCalculator()) },
+ 		{ "Terminal", KShortcut("XF86Terminal"), SLOT(launchTerminal()) },
+ 		{ "Eject", KShortcut("XF86Eject"), SLOT(eject()) },
+ 		{ "Help", KShortcut("XF86Launch0"), SLOT(launchHelp()) },
+		{ "Light Bulb", KShortcut("XF86LightBulb"), SLOT(lightBulb()) },
+		{ "Battery", KShortcut("XF86LaunchB"), SLOT(pmBattery()) },
 		{ "FastVolumeUp", Qt::Key_VolumeUp, SLOT(fastVolumeUp()) },
 		{ "FastVolumeDown", Qt::Key_VolumeDown, SLOT(fastVolumeDown()) },
 		{ "SlowVolumeUp", Qt::CTRL+Qt::Key_VolumeUp, SLOT(slowVolumeUp()) },
@@ -318,6 +335,73 @@ Monitor::DisplayType GenericMonitor::poll()
 	return m_displayType;
 }
 
+void GenericMonitor::launch(QString configKey, QString defaultApplication)
+{
+	QString application = config->readEntry(configKey, defaultApplication);
+	KProcess proc;
+	proc << application;
+	proc.start(KProcess::DontCare);
+}
+
+void GenericMonitor::launchMail()
+{
+	kdDebug() << "launchMail" << endl;
+	kapp->invokeMailer("", "", "", "", "", "", "", "");
+}
+
+void GenericMonitor::launchBrowser()
+{
+	kapp->invokeBrowser("");
+}
+
+void GenericMonitor::launchSearch()
+{
+	launch("search", "kfind");
+}
+
+void GenericMonitor::launchHomeFolder()
+{
+	QString home = QDir::home().path();
+	KProcess proc;
+	proc << "kfmclient" << "exec" << home;
+	proc.start(KProcess::DontCare);
+}
+
+void GenericMonitor::launchMusic()
+{
+	launch("search", "amarok");
+}
+
+void GenericMonitor::launchCalculator()
+{
+	launch("search", "speedcrunch");
+}
+
+void GenericMonitor::launchTerminal()
+{
+	launch("search", "konsole");
+}
+
+void GenericMonitor::launchHelp()
+{
+	launch("search", "khelpcenter");
+}
+
+void GenericMonitor::eject()
+{
+	launch("search", "eject");
+}
+
+void GenericMonitor::lightBulb()
+{
+	kdDebug() << "lightBulb()" << endl;
+	_interface->displayText("Screen Light");
+}
+
+void GenericMonitor::pmBattery()
+{
+    DCOPRef("guidance*", "power-manager").send("showTip");
+}
 
 K_EXPORT_COMPONENT_FACTORY(kmilo_generic, KGenericFactory<GenericMonitor>("kmilo_generic"))
 

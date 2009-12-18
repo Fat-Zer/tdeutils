@@ -166,7 +166,7 @@ void ApmConfig::setupHelper()
 			proc << kdesu;
 			proc << "-u";
 			proc << "root";
-			proc <<  QString("chown root ")+apm_name+"; chmod +s "+apm_name;
+			proc <<  QString("dpkg-statoverride --update --add root root 6755 ")+apm_name;
 			proc.start(KProcess::Block);	// run it sync so has_apm below sees the results
 		}
 	} else {
@@ -187,14 +187,6 @@ void ApmConfig::setupHelper2()	// we use the acpi helper to do software suspend
 	unsigned long len, crc;
 	QString helper = KStandardDirs::findExe("klaptop_acpi_helper");
 	checkcrc(helper.latin1(), len, crc);
-	if (len != file_len || crc != file_crc) {
-		QString str(i18n("The %1 application does not seem to have "
-					"the same size or checksum as when it was compiled we do NOT recommend "
-					"you proceed with making it setuid-root without further investigation").arg(helper));
-		int rc = KMessageBox::warningContinueCancel(0, str, i18n("KLaptopDaemon"), i18n("Run Nevertheless"));
-		if (rc != KMessageBox::Continue) 
-			return;
-	}
 
 	QString kdesu = KStandardDirs::findExe("kdesu");
 	if (!kdesu.isEmpty()) {
@@ -208,7 +200,7 @@ void ApmConfig::setupHelper2()	// we use the acpi helper to do software suspend
 			proc << kdesu;
 			proc << "-u";
 			proc << "root";
-			proc <<  "chown root "+helper+"; chmod +s "+helper;
+			proc <<  "dpkg-statoverride --update --add root root 6755 "+helper;
 			proc.start(KProcess::Block);	// run it sync so has_acpi below sees the results
 		}
 	} else {

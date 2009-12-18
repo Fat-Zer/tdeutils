@@ -242,6 +242,7 @@ private: // data
 
     bool m_bBusy;
     bool m_bBusyHold;
+    bool m_settingsAltered;
 
     // for use in the edit methods: the url.
     QString m_strFileToView;

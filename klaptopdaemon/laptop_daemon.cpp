@@ -952,7 +952,7 @@ laptop_daemon::ButtonThreadInternals()
 	// the lid button turns stuff on when it's down and back off again when it's raised
 	// 	(kind of like the fridge door light)
 	//
-	if (lid_state != laptop_portable::get_button(laptop_portable::LidButton)) {
+	if (s.enable_lid_button && lid_state != laptop_portable::get_button(laptop_portable::LidButton)) {
 		lid_state = !lid_state;
 		if (lid_state) {
 			if (s.button_lid_bright_enabled) {
@@ -1015,7 +1015,7 @@ laptop_daemon::ButtonThreadInternals()
 	//
 	// the power button on the other hand is an off/on switch for non-suspend type ops
 	//
-	if (power_state != laptop_portable::get_button(laptop_portable::PowerButton)) {
+	if (s.enable_power_button && power_state != laptop_portable::get_button(laptop_portable::PowerButton)) {
 		power_state = !power_state;
 		if (power_state) {
 			if (power_button_off) {

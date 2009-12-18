@@ -28,10 +28,13 @@ public:
     ~XMMSSensor();
     void update();
     void setMaxValue( SensorParams *);
+    bool hasXMMS() const;
 
 private:
     QTextCodec *codec;
 
+    class XMMS;
+    XMMS *xmms;
 };
 
 

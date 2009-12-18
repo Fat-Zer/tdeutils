@@ -10,11 +10,122 @@
 #include "xmmssensor.h"
 
 #ifdef HAVE_XMMS
-#include <xmmsctrl.h>
+#include <qlibrary.h>
+
+class XMMSSensor::XMMS
+{
+public:
+    XMMS() : libxmms( 0 )
+    {
+        libxmms = new QLibrary( "xmms.so.1" );
+        if ( !libxmms->load() )
+        {
+            delete libxmms;
+            libxmms = 0;
+        }
+
+        if ( libxmms != 0 )
+        {
+            // resolve functions
+            *(void**) (&xmms_remote_is_running) =
+                    libxmms->resolve( "xmms_remote_is_running" );
+
+            *(void**) (&xmms_remote_is_playing) =
+                    libxmms->resolve( "xmms_remote_is_playing" );
+
+            *(void**) (&xmms_remote_get_playlist_title) =
+                    libxmms->resolve( "xmms_remote_get_playlist_title" );
+
+            *(void**) (&xmms_remote_get_playlist_time) =
+                    libxmms->resolve( "xmms_remote_get_playlist_time" );
+
+            *(void**) (&xmms_remote_get_playlist_pos) =
+                    libxmms->resolve( "xmms_remote_get_playlist_pos" );
+
+            *(void**) (&xmms_remote_get_output_time) =
+                    libxmms->resolve( "xmms_remote_get_output_time" );
+        }
+    }
+
+    bool isInitialized() const
+    {
+        return libxmms != 0 &&
+               xmms_remote_is_running != 0 &&
+               xmms_remote_is_playing != 0 &&
+               xmms_remote_get_playlist_title != 0 &&
+               xmms_remote_get_playlist_time  != 0 &&
+               xmms_remote_get_playlist_pos   != 0 &&
+               xmms_remote_get_output_time    != 0;
+    }
+
+    bool isRunning(int session)
+    {
+        if ( !isInitialized() ) return false;
+
+        return (*xmms_remote_is_running)(session);
+    }
+
+    bool isPlaying(int session)
+    {
+        if ( !isInitialized() ) return false;
+
+        return (*xmms_remote_is_playing)(session);
+    }
+
+    char* getPlaylistTitle(int session, int pos)
+    {
+        if ( !isInitialized() ) return "";
+
+        return (*xmms_remote_get_playlist_title)(session, pos);
+    }
+
+    int getPlaylistTime(int session, int pos)
+    {
+        if ( !isInitialized() ) return 0;
+
+        return (*xmms_remote_get_playlist_time)(session, pos);
+    }
+
+    int getPlaylistPos(int session)
+    {
+        if ( !isInitialized() ) return 0;
+
+        return (*xmms_remote_get_playlist_pos)(session);
+    }
+
+    int getOutputTime(int session)
+    {
+        if ( !isInitialized() ) return 0;
+
+        return (*xmms_remote_get_output_time)(session);
+    }
+
+private:
+    QLibrary* libxmms;
+
+    bool (*xmms_remote_is_running)(int);
+    bool (*xmms_remote_is_playing)(int);
+
+    char* (*xmms_remote_get_playlist_title)(int, int);
+    int   (*xmms_remote_get_playlist_time)(int, int);
+    int   (*xmms_remote_get_playlist_pos)(int);
+    int   (*xmms_remote_get_output_time)(int);
+};
+
+#else // No XMMS
+
+class XMMSSensor::XMMS
+{
+public:
+    XMMS() {}
+
+    bool isInitialized() const { return false; }
+};
 #endif // HAVE_XMMS
 
+
 XMMSSensor::XMMSSensor( int interval, const QString &encoding )
-    : Sensor( interval )
+    : Sensor( interval ), xmms( 0 )
 {
      if( !encoding.isEmpty() )
     {
@@ -25,9 +136,13 @@ XMMSSensor::XMMSSensor( int interval, const QString &encoding )
     else
         codec = QTextCodec::codecForLocale();
 
+    xmms = new XMMS();
+
 }
 XMMSSensor::~XMMSSensor()
-{}
+{
+    delete xmms;
+}
 
 void XMMSSensor::update()
 {
@@ -43,21 +158,21 @@ void XMMSSensor::update()
     int songLength = 0;
     int currentTime = 0;
     bool isPlaying = false;
-    bool isRunning = xmms_remote_is_running(0);
+    bool isRunning = xmms->isRunning(0);
 
     if( isRunning )
     {
-        isPlaying = xmms_remote_is_playing(0);
-        pos = xmms_remote_get_playlist_pos(0);
+        isPlaying = xmms->isPlaying(0);
+        pos = xmms->getPlaylistPos(0);
         qDebug("unicode start");
-        title = codec->toUnicode( QCString( xmms_remote_get_playlist_title( 0, pos ) )  );
+        title = codec->toUnicode( QCString( xmms->getPlaylistTitle( 0, pos ) )  );
         qDebug("unicode end");
         if( title.isEmpty() )
             title = "XMMS";
 
         qDebug("Title: %s", title.ascii());
-        songLength = xmms_remote_get_playlist_time( 0, pos );
-        currentTime = xmms_remote_get_output_time( 0 );
+        songLength = xmms->getPlaylistTime( 0, pos );
+        currentTime = xmms->getOutputTime( 0 );
     }
 #endif // HAVE_XMMS
 
@@ -144,6 +259,9 @@ void XMMSSensor::setMaxValue( SensorParams *sp)
 
 }
 
-
+bool XMMSSensor::hasXMMS() const
+{
+    return xmms->isInitialized();
+}
 
 #include "xmmssensor.moc"

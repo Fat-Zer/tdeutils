@@ -117,6 +117,7 @@ ArkWidget::ArkWidget( QWidget *parent, const char *name )
      m_bIsSimpleCompressedFile( false ),
      m_bDropSourceIsSelf( false ), m_extractList( 0 )
 {
+    m_settingsAltered = false;
     m_tmpDir = new KTempDir( locateLocal( "tmp", "ark" ) );
 
     if ( m_tmpDir->status() != 0 )
@@ -155,12 +156,14 @@ ArkWidget::~ArkWidget()
     delete m_fileListView;
     m_fileListView = 0;
     delete arch;
-    ArkSettings::writeConfig();
+    if (m_settingsAltered) {
+        ArkSettings::writeConfig();
+    }
 }
 
 void ArkWidget::cleanArkTmpDir()
 {
-        removeDownloadedFiles();
+   removeDownloadedFiles();
    if ( m_tmpDir )
    {
       m_tmpDir->unlink();
@@ -2257,6 +2260,8 @@ void ArkWidget::showSettings(){
      genPage->konqIntegrationLabel->setText( QString::null );
 
   dialog->show();
+
+  m_settingsAltered = true;
 }
 
 #include "arkwidget.moc"

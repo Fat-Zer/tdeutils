@@ -1,5 +1,5 @@
 # set the include path for X, qt and KDE
-INCLUDES = $(all_includes) $(XMMS_INCLUDES) $(PYTHONINC)
+INCLUDES = $(all_includes) $(PYTHONINC)
 
 # these are the headers for your project
 noinst_HEADERS = karamba.h karambaapp.h karamba_python.h lineparser.h \
@@ -40,9 +40,9 @@ superkaramba_SOURCES = main.cpp karamba.cpp meter.cpp bar.cpp sensor.cpp \
 
 # kde_cfg_DATA = superkaramba.kcfg
 
-superkaramba_LDFLAGS = -Wl,-export-dynamic  $(KDE_RPATH) $(all_libraries) $(PYTHONLIB) $(XMMS_LDFLAGS)
-#superkaramba_LDADD = -lkio $(LIB_KDEUI) $(XMMS_LDADD) $(LIBPYTHON) $(LIBKVM) $(MY_LIBKNEWSTUFF)
-superkaramba_LDADD = -lkio $(LIB_KDEUI) $(XMMS_LIBS) $(LIBPYTHON) $(LIBKVM) $(MY_LIBKNEWSTUFF)
+superkaramba_LDFLAGS = -Wl,-export-dynamic  $(KDE_RPATH) $(all_libraries) $(PYTHONLIB)
+#superkaramba_LDADD = -lkio $(LIB_KDEUI) $(LIBPYTHON) $(LIBKVM) $(MY_LIBKNEWSTUFF)
+superkaramba_LDADD = -lkio $(LIB_KDEUI) $(LIBPYTHON) $(LIBKVM) $(MY_LIBKNEWSTUFF)
 
 # this is where the desktop file will go
 shelldesktopdir = $(kde_appsdir)/Utilities

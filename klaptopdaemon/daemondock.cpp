@@ -106,10 +106,10 @@ laptop_dock::SetupPopup()
     if (can_standby || can_suspend || can_hibernate) {
     	rightPopup->insertSeparator();
     	if (can_standby) rightPopup->insertItem(i18n("Standby..."), this, SLOT(invokeStandby()));
-	if (can_suspend) rightPopup->insertItem(i18n("&Lock && Suspend..."), this, SLOT(invokeLockSuspend()));
-    	if (can_suspend) rightPopup->insertItem(i18n("&Suspend..."), this, SLOT(invokeSuspend()));
-        if (can_hibernate) rightPopup->insertItem(i18n("&Lock && Hibernate..."), this, SLOT(invokeLockHibernation()));
-	if (can_hibernate) rightPopup->insertItem(i18n("&Hibernate..."), this, SLOT(invokeHibernation()));
+	//	if (can_suspend) rightPopup->insertItem(i18n("&Lock && Suspend..."), this, SLOT(invokeLockSuspend()));
+    	if (can_suspend) rightPopup->insertItem(i18n("&Suspend..."), this, SLOT(invokeLockSuspend()));
+	//        if (can_hibernate) rightPopup->insertItem(i18n("&Lock && Hibernate..."), this, SLOT(invokeLockHibernation()));
+	if (can_hibernate) rightPopup->insertItem(i18n("&Hibernate..."), this, SLOT(invokeLockHibernation()));
     }
 
     rightPopup->insertSeparator();

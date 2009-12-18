@@ -29,6 +29,7 @@
 #include <kglobalaccel.h>
 #include <dcopref.h>
 #include <kapplication.h>
+#include <kconfig.h>
 
 #include "kmilod.h"
 #include "monitor.h"
@@ -63,6 +64,17 @@ public slots:
   void fastVolumeUp();
   void fastVolumeDown();
   void mute();
+  void launchMail();
+  void launchBrowser();
+  void launchSearch();
+  void launchHomeFolder();
+  void launchMusic();
+  void launchCalculator();
+  void launchTerminal();
+  void launchHelp();
+  void eject();
+  void lightBulb();
+  void pmBattery();
 
 private:
 	bool retrieveKmixDevices();
@@ -70,8 +82,10 @@ private:
 	bool retrieveMute();
 	bool retrieveVolume();
 	void displayVolume();
+	void launch(QString configKey, QString defaultApplication);
 
 	KGlobalAccel *ga;
+	KConfig* config;
 
 	DCOPRef *kmixClient, *kmixWindow;
 

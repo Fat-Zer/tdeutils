@@ -55,6 +55,8 @@ RarArch::RarArch( ArkWidget *_gui, const QString & _fileName )
 {
   // Check if rar is available
   bool have_rar = !KGlobal::dirs()->findExe( "rar" ).isNull();
+  bool have_unrar = !KGlobal::dirs()->findExe( "unrar" ).isNull();
+  bool have_unrar_free = !KGlobal::dirs()->findExe( "unrar-free" ).isNull();
 
   if ( have_rar )
   {
@@ -63,10 +65,17 @@ RarArch::RarArch( ArkWidget *_gui, const QString & _fileName )
     verifyCompressUtilityIsAvailable( m_archiver_program );
     verifyUncompressUtilityIsAvailable( m_unarchiver_program );
   }
-  else
+  else if (have_unrar)
   {
     // If rar is not available, try to use unrar to open the archive read-only
     m_unarchiver_program = "unrar";
+    verifyUncompressUtilityIsAvailable( m_unarchiver_program );
+    setReadOnly( true );
+  }
+  else
+  {
+    // If rar is not available, try to use unrar to open the archive read-only
+    m_unarchiver_program = "unrar-free";
     verifyUncompressUtilityIsAvailable( m_unarchiver_program );
     setReadOnly( true );
   }

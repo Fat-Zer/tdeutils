@@ -100,6 +100,31 @@ void Arch::verifyUncompressUtilityIsAvailable( const QString &utility )
 
 void Arch::slotOpenExited( KProcess* _kp )
 {
+ bool success = ( _kp->normalExit() && ( _kp->exitStatus() == 0 ) );
+
+  if( !success )
+  {
+    if ( passwordRequired() )
+    {
+        QString msg;
+        if ( !m_password.isEmpty() )
+            msg = i18n("The password was incorrect. ");
+        if (KPasswordDialog::getPassword( m_password, msg+i18n("You must enter a password to open the file:") ) == KPasswordDialog::Accepted )
+        {
+            delete _kp;
+            _kp = m_currentProcess = 0;
+            clearShellOutput();
+            open(); // try to open the file again with a password
+            return;
+        }
+        m_password = "";
+        emit sigOpen( this, false, QString::null, 0 );
+        delete _kp;
+        _kp = m_currentProcess = 0;
+        return;
+    }
+  }
+
   int exitStatus = 100; // arbitrary bad exit status
 
   if ( _kp->normalExit() )

@@ -11,9 +11,9 @@
 #define BAR_H
 
 #include "meter.h"
-#include <qpixmap.h>
-#include <qstring.h>
-#include <qpainter.h>
+#include <tqpixmap.h>
+#include <tqstring.h>
+#include <tqpainter.h>
 
 class Bar : public Meter
 {
@@ -22,18 +22,18 @@ public:
     Bar(karamba* k,int ix,int iy,int iw,int ih );
     ~Bar();
 
-    void mUpdate( QPainter * );
+    void mUpdate( TQPainter * );
 
     virtual void setMax( long m );
     virtual void setMin( long m );
 
 public slots:
-    bool setImage( QString imagePath );
-    QString getImage() { return imagePath; };
+    bool setImage( TQString imagePath );
+    TQString getImage() { return imagePath; };
 
     void setValue( long );
     long  getValue() { return barValue; };
-    void setValue( QString );
+    void setValue( TQString );
     void recalculateValue() {setValue(barValue); };
 
     void setVertical( bool );
@@ -48,8 +48,8 @@ private:
 
     bool vertical; // vertical bar?
 
-    QString imagePath;
-    QPixmap pixmap;
+    TQString imagePath;
+    TQPixmap pixmap;
 }
 ;
 #endif // BAR_H

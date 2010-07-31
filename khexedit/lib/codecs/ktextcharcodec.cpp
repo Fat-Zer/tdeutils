@@ -16,7 +16,7 @@
 
 
 // qt specific
-#include "qtextcodec.h"
+#include "tqtextcodec.h"
 // kde specific
 #include <kglobal.h>
 #include <klocale.h>
@@ -63,7 +63,7 @@ const EncodingNames[] = {
 //TODO: WS2
 static const unsigned int NoOfEncodings = 26;
 
-static bool is8Bit( QTextCodec *Codec )
+static bool is8Bit( TQTextCodec *Codec )
 {
   bool Found = false;
   for( unsigned int i=0; i<NoOfEncodings; ++i )
@@ -77,13 +77,13 @@ static bool is8Bit( QTextCodec *Codec )
   return Found;
 }
 
-static QTextCodec *createLatin1()
+static TQTextCodec *createLatin1()
 {
   return KGlobal::charsets()->codecForName( EncodingNames[0].Name );
 }
 
 /** heuristic seems to be doomed :(
-static bool is8Bit( QTextCodec *Codec )
+static bool is8Bit( TQTextCodec *Codec )
 {
   bool Result = true;
 
@@ -91,9 +91,9 @@ static bool is8Bit( QTextCodec *Codec )
   unsigned char c[4];
   c[0] = 0;
   c[1] = c[2] = c[3] = 230;
-  QString S = Codec->toUnicode( (const char*)&c,4 );
+  TQString S = Codec->toUnicode( (const char*)&c,4 );
   int Length = 1;
-  QCString CS = Codec->fromUnicode( S, Length );
+  TQCString CS = Codec->fromUnicode( S, Length );
   //kdDebug() << Codec->name() << " "<<Length << endl;
   if( Length > 0 )
     Result = false;
@@ -115,26 +115,26 @@ static bool is8Bit( QTextCodec *Codec )
   while( c[0] < 255 );
   return Result;
 }
-const QStringList &KTextCharCodec::codecNames()
+const TQStringList &KTextCharCodec::codecNames()
 {
   // first call?
   if( CodecNames.isEmpty() )
 {
-    const QStringList &CharSets = KGlobal::charsets()->availableEncodingNames();
+    const TQStringList &CharSets = KGlobal::charsets()->availableEncodingNames();
 
-    for( QStringList::ConstIterator it = CharSets.begin(); it != CharSets.end(); ++it )
+    for( TQStringList::ConstIterator it = CharSets.begin(); it != CharSets.end(); ++it )
 {
       bool Found = true;
-      QTextCodec* Codec = KGlobal::charsets()->codecForName( *it, Found );
+      TQTextCodec* Codec = KGlobal::charsets()->codecForName( *it, Found );
       if( Found && is8Bit(Codec) )
-        CodecNames.append( QString::fromLatin1(Codec->name()) );
+        CodecNames.append( TQString::fromLatin1(Codec->name()) );
 }
 }
 
   return CodecNames;
 }
 
-QString KTextCharCodec::nameOfEncoding( KEncoding C )
+TQString KTextCharCodec::nameOfEncoding( KEncoding C )
 {
   KTextCharCodec *Codec = 0;
 
@@ -150,35 +150,35 @@ QString KTextCharCodec::nameOfEncoding( KEncoding C )
 
   if( N != 0 )
   {
-    QString CodeName = QString::fromLatin1( N );
+    TQString CodeName = TQString::fromLatin1( N );
   }
   return Codec;
 }
  */
 
 
-QStringList KTextCharCodec::CodecNames;
+TQStringList KTextCharCodec::CodecNames;
 
 KTextCharCodec *KTextCharCodec::createLocalCodec()
 {
-  QTextCodec *Codec = KGlobal::locale()->codecForEncoding();
+  TQTextCodec *Codec = KGlobal::locale()->codecForEncoding();
   if( !is8Bit(Codec) )
     Codec = createLatin1();
   return new KTextCharCodec( Codec );
 }
 
 
-KTextCharCodec *KTextCharCodec::createCodec( const QString &CodeName )
+KTextCharCodec *KTextCharCodec::createCodec( const TQString &CodeName )
 { 
   bool Ok;
-  QTextCodec *Codec = KGlobal::charsets()->codecForName( CodeName, Ok );
+  TQTextCodec *Codec = KGlobal::charsets()->codecForName( CodeName, Ok );
   if( Ok )
     Ok = is8Bit( Codec );
   return Ok ? new KTextCharCodec( Codec ) : 0;
 }
 
 
-const QStringList &KTextCharCodec::codecNames()
+const TQStringList &KTextCharCodec::codecNames()
 {
   // first call?
   if( CodecNames.isEmpty() )
@@ -186,10 +186,10 @@ const QStringList &KTextCharCodec::codecNames()
     for( unsigned int i=0; i<NoOfEncodings; ++i )
     {
       bool Found = true;
-      QString Name = QString::fromLatin1( EncodingNames[i].Name );
-      QTextCodec* Codec = KGlobal::charsets()->codecForName( Name, Found );
+      TQString Name = TQString::fromLatin1( EncodingNames[i].Name );
+      TQTextCodec* Codec = KGlobal::charsets()->codecForName( Name, Found );
       if( Found )
-        CodecNames.append( QString::fromLatin1(Codec->name()) );
+        CodecNames.append( TQString::fromLatin1(Codec->name()) );
     }
   }
 
@@ -197,7 +197,7 @@ const QStringList &KTextCharCodec::codecNames()
 }
 
 
-KTextCharCodec::KTextCharCodec( QTextCodec *C )
+KTextCharCodec::KTextCharCodec( TQTextCodec *C )
   : Codec( C ),
     Decoder( C->makeDecoder() ),
     Encoder( C->makeEncoder() )
@@ -209,7 +209,7 @@ KTextCharCodec::~KTextCharCodec()
   delete Encoder;
 }
 
-bool KTextCharCodec::encode( char *D, const QChar &C ) const
+bool KTextCharCodec::encode( char *D, const TQChar &C ) const
 {
   if( !Codec->canEncode(C) ) // TODO: do we really need the codec?
     return false;
@@ -223,14 +223,14 @@ bool KTextCharCodec::encode( char *D, const QChar &C ) const
 
 KHEChar KTextCharCodec::decode( char Byte ) const
 {
-  QString S( Decoder->toUnicode(&Byte,1) );
+  TQString S( Decoder->toUnicode(&Byte,1) );
   return KHEChar(S.at(0));
 }
 
 
-const QString& KTextCharCodec::name() const
+const TQString& KTextCharCodec::name() const
 {
   if( Name.isNull() )
-    Name = QString::fromLatin1( Codec->name() );
+    Name = TQString::fromLatin1( Codec->name() );
   return Name;
 }

@@ -34,19 +34,19 @@ namespace KMilo {
 class PowerBookMonitor : public KMilo::Monitor
 {
 public:
-	PowerBookMonitor(QObject *parent, const char *name, const QStringList&);
+	PowerBookMonitor(TQObject *parent, const char *name, const TQStringList&);
 	virtual ~PowerBookMonitor();
 
 	virtual bool init();
 	virtual DisplayType poll();
 	virtual int progress() const;
-	virtual QString message() const;
+	virtual TQString message() const;
 
 private:
 	struct tagitem* readMessage();
 private:
 	int m_progress;
-	QString m_message;
+	TQString m_message;
 	bool m_sleep;
 };
 

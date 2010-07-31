@@ -27,44 +27,44 @@
 
 #include "regexpbuttons.h"
 #include "dcbutton.h"
-#include <qtooltip.h>
-#include <qwhatsthis.h>
-#include <qbuttongroup.h>
-#include <qlayout.h>
-#include <qsignalmapper.h>
+#include <tqtooltip.h>
+#include <tqwhatsthis.h>
+#include <tqbuttongroup.h>
+#include <tqlayout.h>
+#include <tqsignalmapper.h>
 #include "regexpconverter.h"
 
-RegExpButtons::RegExpButtons( QWidget *parent, const char *name )
-  : QDockWindow( QDockWindow::InDock, parent, name), _keepMode(false)
+RegExpButtons::RegExpButtons( TQWidget *parent, const char *name )
+  : TQDockWindow( TQDockWindow::InDock, parent, name), _keepMode(false)
 {
-  QBoxLayout *layout = boxLayout();
+  TQBoxLayout *layout = boxLayout();
 
-  _grp = new QButtonGroup(this);
+  _grp = new TQButtonGroup(this);
   _grp->hide();
   _grp->setExclusive( true );
 
-  _mapper = new QSignalMapper( this, "RegExpButtons::_mapper" );
-  connect( _mapper, SIGNAL( mapped(int) ), this, SIGNAL( clicked(int) ) );
+  _mapper = new TQSignalMapper( this, "RegExpButtons::_mapper" );
+  connect( _mapper, TQT_SIGNAL( mapped(int) ), this, TQT_SIGNAL( clicked(int) ) );
 
   // The "select" button.
-  _selectBut = new QToolButton( this);
+  _selectBut = new TQToolButton( this);
 
 #ifdef QT_ONLY
-  QPixmap pix;
+  TQPixmap pix;
   pix.convertFromImage( qembed_findImage( "select" ) );
 #else
-  QPixmap pix = KGlobal::iconLoader()->loadIcon(locate("data", QString::fromLatin1("kregexpeditor/pics/select.png") ), KIcon::Toolbar );
+  TQPixmap pix = KGlobal::iconLoader()->loadIcon(locate("data", TQString::fromLatin1("kregexpeditor/pics/select.png") ), KIcon::Toolbar );
 #endif
 
   _selectBut->setPixmap( pix );
   layout->addWidget( _selectBut );
   _grp->insert(_selectBut);
   _selectBut->setToggleButton( true );
-  connect( _selectBut, SIGNAL(clicked()), SIGNAL(doSelect()));
-  connect( _selectBut, SIGNAL(clicked()), this, SLOT(slotSetNonKeepMode()) );
+  connect( _selectBut, TQT_SIGNAL(clicked()), TQT_SIGNAL(doSelect()));
+  connect( _selectBut, TQT_SIGNAL(clicked()), this, TQT_SLOT(slotSetNonKeepMode()) );
 
-  QToolTip::add( _selectBut, i18n("Selection tool"));
-  QWhatsThis::add( _selectBut, i18n("<qt>This will change the state of the editor to <i>selection state</i>.<p>"
+  TQToolTip::add( _selectBut, i18n("Selection tool"));
+  TQWhatsThis::add( _selectBut, i18n("<qt>This will change the state of the editor to <i>selection state</i>.<p>"
                              "In this state you will not be inserting <i>regexp items</i>, but instead select them. "
                              "To select a number of items, press down the left mouse button and drag it over the items.<p>"
                              "When you have selected a number of items, you may use cut/copy/paste. These functions are "
@@ -152,28 +152,28 @@ RegExpButtons::RegExpButtons( QWidget *parent, const char *name )
   layout->addWidget( _negLookAhead );
 }
 
-DoubleClickButton* RegExpButtons::insert(RegExpType tp, const char* name, QString tooltip, QString whatsthis)
+DoubleClickButton* RegExpButtons::insert(RegExpType tp, const char* name, TQString tooltip, TQString whatsthis)
 {
 #ifdef QT_ONLY
-    QPixmap pix;
-    pix.convertFromImage( qembed_findImage( QString::fromLatin1( name ) ) );
+    TQPixmap pix;
+    pix.convertFromImage( qembed_findImage( TQString::fromLatin1( name ) ) );
 #else
-    QPixmap pix = KGlobal::iconLoader()->loadIcon(locate("data", QString::fromLatin1("kregexpeditor/pics/")+QString::fromLatin1(name) +
-                                                       QString::fromLatin1(".png") ), KIcon::Toolbar );
+    TQPixmap pix = KGlobal::iconLoader()->loadIcon(locate("data", TQString::fromLatin1("kregexpeditor/pics/")+TQString::fromLatin1(name) +
+                                                       TQString::fromLatin1(".png") ), KIcon::Toolbar );
 #endif
 
   DoubleClickButton* but = new DoubleClickButton( pix, this, "RegExpButtons::but");
 
   _mapper->setMapping( but, tp );
 
-  connect( but, SIGNAL( clicked() ), _mapper, SLOT( map() ) );
-  connect( but, SIGNAL( clicked() ), this, SLOT( slotSetNonKeepMode() ) );
-  connect( but, SIGNAL( doubleClicked() ), this, SLOT( slotSetKeepMode() ) );
+  connect( but, TQT_SIGNAL( clicked() ), _mapper, TQT_SLOT( map() ) );
+  connect( but, TQT_SIGNAL( clicked() ), this, TQT_SLOT( slotSetNonKeepMode() ) );
+  connect( but, TQT_SIGNAL( doubleClicked() ), this, TQT_SLOT( slotSetKeepMode() ) );
 
   _grp->insert( but );
   but->setToggleButton( true );
-  QToolTip::add( but, tooltip );
-  QWhatsThis::add( but, whatsthis );
+  TQToolTip::add( but, tooltip );
+  TQWhatsThis::add( but, whatsthis );
 
   return but;
 }
@@ -181,7 +181,7 @@ DoubleClickButton* RegExpButtons::insert(RegExpType tp, const char* name, QStrin
 void RegExpButtons::slotUnSelect()
 {
   if ( _grp->selected() ) {
-    QToolButton *pb = static_cast<QToolButton*>(_grp->selected());
+    TQToolButton *pb = static_cast<TQToolButton*>(_grp->selected());
     if (pb) {
       pb->setOn( false );
     }

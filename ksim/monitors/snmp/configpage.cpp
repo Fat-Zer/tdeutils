@@ -24,9 +24,9 @@
 #include "hostdialog.h"
 #include "monitordialog.h"
 
-#include <qlayout.h>
-#include <qgroupbox.h>
-#include <qpushbutton.h>
+#include <tqlayout.h>
+#include <tqgroupbox.h>
+#include <tqpushbutton.h>
 
 #include <kconfig.h>
 #include <klistview.h>
@@ -35,9 +35,9 @@
 
 using namespace KSim::Snmp;
 
-static bool listViewHasSelection( QListView *lv )
+static bool listViewHasSelection( TQListView *lv )
 {
-    for ( QListViewItem *i = lv->firstChild(); i; i = i->itemBelow() )
+    for ( TQListViewItem *i = lv->firstChild(); i; i = i->itemBelow() )
         if ( i->isSelected() )
             return true;
     return false;
@@ -46,28 +46,28 @@ static bool listViewHasSelection( QListView *lv )
 ConfigPage::ConfigPage( Plugin *parent, const char *name )
     : KSim::PluginPage( parent, name )
 {
-    ( new QVBoxLayout( this ) )->setAutoAdd( true );
+    ( new TQVBoxLayout( this ) )->setAutoAdd( true );
 
     m_page = new ConfigWidget( this );
 
-    connect( m_page->addHost, SIGNAL( clicked() ),
-             this, SLOT( addNewHost() ) );
-    connect( m_page->modifyHost, SIGNAL( clicked() ),
-             this, SLOT( modifyHost() ) );
-    connect( m_page->removeHost, SIGNAL( clicked() ),
-             this, SLOT( removeHost() ) );
+    connect( m_page->addHost, TQT_SIGNAL( clicked() ),
+             this, TQT_SLOT( addNewHost() ) );
+    connect( m_page->modifyHost, TQT_SIGNAL( clicked() ),
+             this, TQT_SLOT( modifyHost() ) );
+    connect( m_page->removeHost, TQT_SIGNAL( clicked() ),
+             this, TQT_SLOT( removeHost() ) );
 
-    connect( m_page->addMonitor, SIGNAL( clicked() ),
-             this, SLOT( addNewMonitor() ) );
-    connect( m_page->modifyMonitor, SIGNAL( clicked() ),
-             this, SLOT( modifyMonitor() ) );
-    connect( m_page->removeMonitor, SIGNAL( clicked() ),
-             this, SLOT( removeMonitor() ) );
+    connect( m_page->addMonitor, TQT_SIGNAL( clicked() ),
+             this, TQT_SLOT( addNewMonitor() ) );
+    connect( m_page->modifyMonitor, TQT_SIGNAL( clicked() ),
+             this, TQT_SLOT( modifyMonitor() ) );
+    connect( m_page->removeMonitor, TQT_SIGNAL( clicked() ),
+             this, TQT_SLOT( removeMonitor() ) );
 
-    connect( m_page->hosts, SIGNAL( selectionChanged() ),
-             this, SLOT( disableOrEnableSomeWidgets() ) );
-    connect( m_page->monitors, SIGNAL( selectionChanged() ),
-             this, SLOT( disableOrEnableSomeWidgets() ) );
+    connect( m_page->hosts, TQT_SIGNAL( selectionChanged() ),
+             this, TQT_SLOT( disableOrEnableSomeWidgets() ) );
+    connect( m_page->monitors, TQT_SIGNAL( selectionChanged() ),
+             this, TQT_SLOT( disableOrEnableSomeWidgets() ) );
 }
 
 ConfigPage::~ConfigPage()
@@ -82,8 +82,8 @@ void ConfigPage::saveConfig()
     removeAllHostGroups();
     removeAllMonitorGroups();
 
-    QStringList hosts = m_hosts.save( cfg );
-    QStringList monitors = m_monitors.save( cfg );
+    TQStringList hosts = m_hosts.save( cfg );
+    TQStringList monitors = m_monitors.save( cfg );
 
     cfg.setGroup( "General" );
     cfg.writeEntry( "Hosts", hosts );
@@ -95,8 +95,8 @@ void ConfigPage::readConfig()
     KConfig &cfg = *config();
 
     cfg.setGroup( "General" );
-    QStringList hosts = cfg.readListEntry( "Hosts" );
-    QStringList monitors = cfg.readListEntry( "Monitors" );
+    TQStringList hosts = cfg.readListEntry( "Hosts" );
+    TQStringList monitors = cfg.readListEntry( "Monitors" );
 
     m_hosts.load( cfg, hosts );
     m_monitors.load( cfg, monitors, m_hosts );
@@ -151,7 +151,7 @@ void ConfigPage::removeHost()
     if ( hostIt == m_hosts.end() )
         return;
 
-    QStringList monitors = monitorsForHost( *hostIt );
+    TQStringList monitors = monitorsForHost( *hostIt );
     if ( !monitors.isEmpty() ) {
         int answer = KMessageBox::warningContinueCancelList(
             this,
@@ -237,17 +237,17 @@ void ConfigPage::disableOrEnableSomeWidgets()
     m_page->monitorGroup->setEnabled( !m_hosts.isEmpty() );
 }
 
-void ConfigPage::removeMonitors( QStringList monitors )
+void ConfigPage::removeMonitors( TQStringList monitors )
 {
-    for ( QStringList::ConstIterator it = monitors.begin();
+    for ( TQStringList::ConstIterator it = monitors.begin();
           it != monitors.end(); ++it )
         m_monitors.remove( *it );
 
-    QListViewItem *item = m_page->monitors->firstChild();
+    TQListViewItem *item = m_page->monitors->firstChild();
     while ( item ) {
-        QListViewItem *nextItem = item->itemBelow();
+        TQListViewItem *nextItem = item->itemBelow();
 
-        for ( QStringList::Iterator it = monitors.begin();
+        for ( TQStringList::Iterator it = monitors.begin();
               it != monitors.end(); ++it )
             if ( item->text( 0 ) == *it ) {
 
@@ -272,12 +272,12 @@ void ConfigPage::removeAllMonitorGroups()
     removeConfigGroups( "Monitor " );
 }
 
-void ConfigPage::removeConfigGroups( const QString &prefix )
+void ConfigPage::removeConfigGroups( const TQString &prefix )
 {
     KConfig &cfg = *config();
 
-    QStringList groups = cfg.groupList();
-    for ( QStringList::ConstIterator it = groups.begin(); it != groups.end(); ++it )
+    TQStringList groups = cfg.groupList();
+    for ( TQStringList::ConstIterator it = groups.begin(); it != groups.end(); ++it )
         if ( ( *it ).startsWith( prefix ) )
             cfg.deleteGroup( *it, true /* deep */ );
 }
@@ -296,9 +296,9 @@ void ConfigPage::fillGui()
     disableOrEnableSomeWidgets();
 }
 
-QStringList ConfigPage::monitorsForHost( const HostConfig &host ) const
+TQStringList ConfigPage::monitorsForHost( const HostConfig &host ) const
 {
-    QStringList monitors;
+    TQStringList monitors;
 
     for ( MonitorConfigMap::ConstIterator it = m_monitors.begin();
           it != m_monitors.end(); ++it )

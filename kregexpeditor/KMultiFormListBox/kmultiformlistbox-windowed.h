@@ -20,7 +20,7 @@
 
 #ifdef QT_ONLY
   #include "compat.h"
-  #include <qlistbox.h>
+  #include <tqlistbox.h>
 #else
   #include <klistbox.h>
 #endif
@@ -35,28 +35,28 @@ class WindowListboxItem;
 
    @internal
 */
-class KMultiFormListBoxWindowed  :public QWidget, KMultiFormListBoxShower {
+class KMultiFormListBoxWindowed  :public TQWidget, KMultiFormListBoxShower {
 
 Q_OBJECT
 
 friend class KMultiFormListBox;
 
 private:
-  KMultiFormListBoxWindowed(KMultiFormListBoxFactory *factory, QWidget *parent,
-														bool showUpDownButtons, bool showHelpButton, QString addButtonText,
+  KMultiFormListBoxWindowed(KMultiFormListBoxFactory *factory, TQWidget *parent,
+														bool showUpDownButtons, bool showHelpButton, TQString addButtonText,
 														const char *name);
 
   KMultiFormListBoxEntryList elements();
   const KMultiFormListBoxEntryList elements() const;
   void append(KMultiFormListBoxEntry *);
   WindowListboxItem *selected();
-	QWidget* qWidget() { return this; }
+	TQWidget* qWidget() { return this; }
 
-	QVBoxLayout* _layout;
+	TQVBoxLayout* _layout;
   KMultiFormListBoxFactory* _factory;
-	QPtrList<QPushButton> _buttonList;
+	TQPtrList<TQPushButton> _buttonList;
   KListBox* _listbox;
-	virtual void delElement(QWidget *); // Deletes the given element
+	virtual void delElement(TQWidget *); // Deletes the given element
 	virtual void delAnElement();
   void addElement();
 
@@ -69,7 +69,7 @@ signals:
 
 private slots:
   void slotEditSelected();
-  void slotEditSelected(QListBoxItem *item);
+  void slotEditSelected(TQListBoxItem *item);
   void slotCopySelected();
 	void slotMoveItemUp();
 	void slotMoveItemDown();

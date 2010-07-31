@@ -27,7 +27,7 @@
 #endif
 
 #include <Python.h>
-#include <qobject.h>
+#include <tqobject.h>
 #include "karamba.h"
 #include "meter.h"
 #include "meter_python.h"
@@ -111,8 +111,8 @@ long createSystray(long widget, long x, long y, long w, long h)
     currTheme->systray->move((int)x,(int)y);
     currTheme->systray->setMinimumSize((int)w,(int)h);
     currTheme->systray->initSystray();
-    QObject::connect(currTheme->systray,SIGNAL(updated()),
-                     currTheme,SLOT(systrayUpdated()));
+    TQObject::connect(currTheme->systray,TQT_SIGNAL(updated()),
+                     currTheme,TQT_SLOT(systrayUpdated()));
     currTheme->systray->show();
   }
 

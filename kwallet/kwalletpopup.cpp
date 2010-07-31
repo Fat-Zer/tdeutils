@@ -28,31 +28,31 @@
 #include <kwallet.h>
 #include <kstdguiitem.h>
 
-KWalletPopup::KWalletPopup(const QString& wallet, QWidget *parent, const char *name)
+KWalletPopup::KWalletPopup(const TQString& wallet, TQWidget *parent, const char *name)
 : KPopupMenu(parent, name), _walletName(wallet) {
 	insertTitle(wallet);
 	KActionCollection *ac = new KActionCollection(this, "kwallet context actions");
 	KAction *act;
 
 	act = new KAction(i18n("&New Wallet..."), 0, 0, this,
-			SLOT(createWallet()), ac, "wallet_create");
+			TQT_SLOT(createWallet()), ac, "wallet_create");
 	act->plug(this);
 
 	act = new KAction(i18n("&Open..."), 0, Key_Return, this,
-			SLOT(openWallet()), ac, "wallet_open");
+			TQT_SLOT(openWallet()), ac, "wallet_open");
 	act->plug(this);
 
 	act = new KAction(i18n("Change &Password..."), 0, 0, this,
-			SLOT(changeWalletPassword()), ac, "wallet_password");
+			TQT_SLOT(changeWalletPassword()), ac, "wallet_password");
 	act->plug(this);
 
-	QStringList ul = KWallet::Wallet::users(wallet);
+	TQStringList ul = KWallet::Wallet::users(wallet);
 	if (!ul.isEmpty()) {
 		KPopupMenu *pm = new KPopupMenu(this, "Disconnect Apps");
 		int id = 7000;
-		for (QStringList::Iterator it = ul.begin(); it != ul.end(); ++it) {
+		for (TQStringList::Iterator it = ul.begin(); it != ul.end(); ++it) {
 			_appMap[id] = *it;
-			pm->insertItem(*it, this, SLOT(disconnectApp(int)), 0, id);
+			pm->insertItem(*it, this, TQT_SLOT(disconnectApp(int)), 0, id);
 			pm->setItemParameter(id, id);
 			id++;
 		}
@@ -61,14 +61,14 @@ KWalletPopup::KWalletPopup(const QString& wallet, QWidget *parent, const char *n
 	}
 
 	act = KStdAction::close( this,
-			SLOT(closeWallet()), ac, "wallet_close");
+			TQT_SLOT(closeWallet()), ac, "wallet_close");
 	// FIXME: let's track this inside the manager so we don't need a dcop
 	//        roundtrip here.
 	act->setEnabled(KWallet::Wallet::isOpen(wallet));
 	act->plug(this);
 
 	act = new KAction(i18n("&Delete"), 0, Key_Delete, this,
-			SLOT(deleteWallet()), ac, "wallet_delete");
+			TQT_SLOT(deleteWallet()), ac, "wallet_delete");
 	act->plug(this);
 }
 

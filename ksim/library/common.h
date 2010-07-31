@@ -23,7 +23,7 @@
 #define KSIM_VERSION 110
 #define KSIM_VERSION_STRING "1.1.0"
 
-#include <qstring.h>
+#include <tqstring.h>
 #include <kdemacros.h>
 
 /**
@@ -52,13 +52,13 @@ namespace KSim
    *
    * example:
    * <pre>
-   *  #include &lt;qwidget.h&gt;
+   *  #include &lt;tqwidget.h&gt;
    *  #include &lt;ksim/common.h&gt;
    *
-   *  class Test : public QWidget, virtual public KSim::Base
+   *  class Test : public TQWidget, virtual public KSim::Base
    *  {
    *    public:
-   *      Test(QWidget *parent, const char *name) : QWidget(parent, name)
+   *      Test(TQWidget *parent, const char *name) : TQWidget(parent, name)
    *      {
    *      }
    *      ~Test() {}
@@ -100,11 +100,11 @@ namespace KSim
       /**
        * Set the config entry key to look for when reading gkrellmrc
        */
-      void setConfigString(const QString &string);
+      void setConfigString(const TQString &string);
       /**
        * @return the config entry to look for when reading theme files
        */
-      const QString &configString() const;
+      const TQString &configString() const;
 
     protected:
       /**

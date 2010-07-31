@@ -47,30 +47,30 @@ class KarambaApplication : public KApplication
     KHelpMenu* m_helpMenu;
 
     void showKarambaMenuExtension(bool show = true);
-    void setToolTip(const QString &tip = QString::null);
+    void setToolTip(const TQString &tip = TQString::null);
 
   protected:
     KarambaIface* iface;
     ThemesDlg* themeListWindow;
     dcopIface_stub* dcopIfaceStub;
-    QObjectList *karambaList;
+    TQObjectList *karambaList;
     KSystemTray* sysTrayIcon;
 
   public:
     KarambaApplication();
     ~KarambaApplication();
 
-    QString getMainKaramba();
-    QStringList getKarambas();
-    bool themeExists(QString pretty_name);
-    void initDcopStub(QCString app = "");
+    TQString getMainKaramba();
+    TQStringList getKarambas();
+    bool themeExists(TQString pretty_name);
+    void initDcopStub(TQCString app = "");
     void setUpSysTray(KAboutData* about);
-    void checkPreviousSession(KApplication &app, QStringList &lst);
-    void checkCommandLine(KCmdLineArgs *args, QStringList &lst);
-    bool startThemes(QStringList &lst);
+    void checkPreviousSession(KApplication &app, TQStringList &lst);
+    void checkCommandLine(KCmdLineArgs *args, TQStringList &lst);
+    bool startThemes(TQStringList &lst);
     KarambaIface* dcopIface() { return iface; };
     dcopIface_stub* dcopStub() { return dcopIfaceStub; };
-    QWidget* parentWindow() { return (QWidget*)themeListWindow; };
+    TQWidget* parentWindow() { return (TQWidget*)themeListWindow; };
 
     void addKaramba(karamba* k, bool reloading = false);
     void deleteKaramba(karamba* k, bool reloading = false);

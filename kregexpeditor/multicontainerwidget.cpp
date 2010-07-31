@@ -19,14 +19,14 @@
 #include "dragaccepter.h"
 
 MultiContainerWidget::MultiContainerWidget( RegExpEditorWindow* editorWindow,
-                                            QWidget* parent, const char* name)
+                                            TQWidget* parent, const char* name)
   :RegExpWidget( editorWindow, parent, name )
 {
 }
 
 void MultiContainerWidget::append( RegExpWidget* child )
 {
-  child->reparent( this, QPoint(0,0), false );
+  child->reparent( this, TQPoint(0,0), false );
   _children.append( child );
   _children.append( new DragAccepter( _editorWindow, this ) );
 }
@@ -36,7 +36,7 @@ bool MultiContainerWidget::hasSelection() const
   if ( _isSelected )
     return true;
 
-  QPtrListIterator<RegExpWidget> it(_children);
+  TQPtrListIterator<RegExpWidget> it(_children);
   ++it; // Move past the first dragAccepter
 	for ( ; *it;  it += 2 ) {
 		if ( (*it)->hasSelection() ) {
@@ -107,8 +107,8 @@ bool MultiContainerWidget::updateSelection(bool parentSelected)
 {
   bool changed = false;
   bool isSel = _isSelected;
-  QMemArray<bool> oldState(_children.count());
-  QMemArray<bool> newState(_children.count());
+  TQMemArray<bool> oldState(_children.count());
+  TQMemArray<bool> newState(_children.count());
 
   for (int i = 0; i< (int)_children.count();i++) {
     oldState[i] = _children.at(i)->isSelected();
@@ -177,21 +177,21 @@ bool MultiContainerWidget::updateSelection(bool parentSelected)
 
 
 
-QRect MultiContainerWidget::selectionRect() const
+TQRect MultiContainerWidget::selectionRect() const
 {
   if ( _isSelected )
-    return QRect( mapToGlobal( QPoint(0,0) ), size() );
+    return TQRect( mapToGlobal( TQPoint(0,0) ), size() );
   else {
-    QRect res;
-    QPtrListIterator<RegExpWidget> it(_children);
+    TQRect res;
+    TQPtrListIterator<RegExpWidget> it(_children);
     ++it; // Move past the first dragAccepter
     for ( ; *it; it +=2 ) {
       if ( (*it)->hasSelection() ) {
-        QRect childSel = (*it)->selectionRect();
+        TQRect childSel = (*it)->selectionRect();
         if ( res.isNull() )
           res = childSel;
         else {
-          QRect newRes;
+          TQRect newRes;
           newRes.setLeft( QMIN( res.left(), childSel.left() ) );
           newRes.setTop( QMIN( res.top(), childSel.top() ) );
           newRes.setRight( QMAX( res.right(), childSel.right() ) );
@@ -204,7 +204,7 @@ QRect MultiContainerWidget::selectionRect() const
   }
 }
 
-RegExpWidget* MultiContainerWidget::widgetUnderPoint( QPoint globalPos, bool justVisibleWidgets )
+RegExpWidget* MultiContainerWidget::widgetUnderPoint( TQPoint globalPos, bool justVisibleWidgets )
 {
   unsigned int start, incr;
   if ( justVisibleWidgets ) {
@@ -228,7 +228,7 @@ RegExpWidget* MultiContainerWidget::widgetUnderPoint( QPoint globalPos, bool jus
   }
 }
 
-RegExpWidget* MultiContainerWidget::findWidgetToEdit( QPoint globalPos )
+RegExpWidget* MultiContainerWidget::findWidgetToEdit( TQPoint globalPos )
 {
   for ( unsigned int i = 1; i < _children.count(); i+=2 ) {
     RegExpWidget* wid = _children.at(i)->findWidgetToEdit( globalPos );
@@ -241,7 +241,7 @@ RegExpWidget* MultiContainerWidget::findWidgetToEdit( QPoint globalPos )
 void MultiContainerWidget::selectWidget( bool sel )
 {
   RegExpWidget::selectWidget( sel );
-  QPtrListIterator<RegExpWidget> it(_children);
+  TQPtrListIterator<RegExpWidget> it(_children);
   for ( ; *it ; ++it ) {
     (*it)->selectWidget( sel );
   }
@@ -250,7 +250,7 @@ void MultiContainerWidget::selectWidget( bool sel )
 
 void MultiContainerWidget::updateAll()
 {
-  for ( QPtrListIterator<RegExpWidget> it(_children); *it ; ++it ) {
+  for ( TQPtrListIterator<RegExpWidget> it(_children); *it ; ++it ) {
     (*it)->updateAll();
   }
   RegExpWidget::updateAll();
@@ -258,7 +258,7 @@ void MultiContainerWidget::updateAll()
 
 void MultiContainerWidget::updateCursorRecursively()
 {
-  for ( QPtrListIterator<RegExpWidget> it(_children); *it ; ++it ) {
+  for ( TQPtrListIterator<RegExpWidget> it(_children); *it ; ++it ) {
     (*it)->updateCursorRecursively();
   }
   updateCursorShape();

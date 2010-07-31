@@ -27,8 +27,8 @@
 #include <kstandarddirs.h>
 #include <ktar.h>
 #include <kurl.h>
-#include <qdir.h>
-#include <qfileinfo.h>
+#include <tqdir.h>
+#include <tqfileinfo.h>
 
 #ifdef HAVE_CONFIG_H
   #include <config.h>
@@ -45,16 +45,16 @@ SKNewStuff::SKNewStuff( ThemesDlg *dlg ) :
 {
 }
 
-bool SKNewStuff::install( const QString &fileName )
+bool SKNewStuff::install( const TQString &fileName )
 {
   kdDebug() << "SKNewStuff::install(): " << fileName << endl;
 
   KMimeType::Ptr result = KMimeType::findByURL(fileName);
   KStandardDirs myStdDir;
-  QFileInfo fi(fileName);
-  QString base = fi.baseName();
-  QString baseDestDir =myStdDir.saveLocation("data", kapp->instanceName() + "/themes/", true);
-  const QString destDir = baseDestDir + base + "/";
+  TQFileInfo fi(fileName);
+  TQString base = fi.baseName();
+  TQString baseDestDir =myStdDir.saveLocation("data", kapp->instanceName() + "/themes/", true);
+  const TQString destDir = baseDestDir + base + "/";
   KStandardDirs::makeDir( destDir );
 
   kdDebug() << "SKNewStuff::install() mimetype: " << result->name() << endl;
@@ -114,20 +114,20 @@ bool SKNewStuff::install( const QString &fileName )
   return true;
 }
 
-bool SKNewStuff::createUploadFile( const QString &fileName )
+bool SKNewStuff::createUploadFile( const TQString &fileName )
 {
   kdDebug() << "SKNewStuff::createUploadFile(): " << fileName << endl;
   return true;
 }
 
-QString SKNewStuff::downloadDestination( KNS::Entry *entry )
+TQString SKNewStuff::downloadDestination( KNS::Entry *entry )
 {
   KURL source = entry->payload();
   m_sourceLink = source;
 
   kdDebug() << "SKNewStuff::downloadDestination() url: "
     << source.url() <<  " fileName: " << source.fileName() << endl;
-  QString file(source.fileName());
+  TQString file(source.fileName());
   if ( file.isEmpty() )
   {
     kdDebug() << "The file was empty. " << source.url() << 

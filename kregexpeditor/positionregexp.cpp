@@ -34,18 +34,18 @@ bool PositionRegExp::check( ErrorMap& map, bool first , bool last )
     return true;
 }
 
-QDomNode PositionRegExp::toXml( QDomDocument* doc ) const
+TQDomNode PositionRegExp::toXml( TQDomDocument* doc ) const
 {
     switch (_tp) {
-    case BEGLINE: return doc->createElement(QString::fromLocal8Bit( "BegLine" ) );
-    case ENDLINE: return doc->createElement(QString::fromLocal8Bit( "EndLine" ) );
-    case WORDBOUNDARY: return doc->createElement(QString::fromLocal8Bit( "WordBoundary" ) );
-    case NONWORDBOUNDARY: return doc->createElement(QString::fromLocal8Bit( "NonWordBoundary" ) );
+    case BEGLINE: return doc->createElement(TQString::fromLocal8Bit( "BegLine" ) );
+    case ENDLINE: return doc->createElement(TQString::fromLocal8Bit( "EndLine" ) );
+    case WORDBOUNDARY: return doc->createElement(TQString::fromLocal8Bit( "WordBoundary" ) );
+    case NONWORDBOUNDARY: return doc->createElement(TQString::fromLocal8Bit( "NonWordBoundary" ) );
     }
-    return QDomNode();
+    return TQDomNode();
 }
 
-bool PositionRegExp::load( QDomElement /* top */, const QString& /*version*/ )
+bool PositionRegExp::load( TQDomElement /* top */, const TQString& /*version*/ )
 {
     // Nothing to do.
     return true;

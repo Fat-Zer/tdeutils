@@ -8,7 +8,7 @@
  *   (at your option) any later version.                                   *
  ***************************************************************************/
 #include "sensorsensor.h"
-#include <qglobal.h>
+#include <tqglobal.h>
 
 SensorSensor::SensorSensor(int interval, char tempUnit) : Sensor( interval )
 {
@@ -29,10 +29,10 @@ SensorSensor::SensorSensor(int interval, char tempUnit) : Sensor( interval )
 #endif
     if(tempUnit == 'F')
       extraParams = " -f";
-    connect(&ksp, SIGNAL(receivedStdout(KProcess *, char *, int )),
-            this,SLOT(receivedStdout(KProcess *, char *, int )));
-    connect(&ksp, SIGNAL(processExited(KProcess *)),
-            this,SLOT(processExited( KProcess * )));
+    connect(&ksp, TQT_SIGNAL(receivedStdout(KProcess *, char *, int )),
+            this,TQT_SLOT(receivedStdout(KProcess *, char *, int )));
+    connect(&ksp, TQT_SIGNAL(processExited(KProcess *)),
+            this,TQT_SLOT(processExited( KProcess * )));
 
     // readValues();
 }
@@ -45,18 +45,18 @@ SensorSensor::~SensorSensor()
 void SensorSensor::receivedStdout(KProcess *, char *buffer, int len )
 {
     buffer[len] = 0;
-    sensorResult += QString( QCString(buffer) );
+    sensorResult += TQString( TQCString(buffer) );
 }
 
 void SensorSensor::processExited(KProcess *)
 {
-    QStringList stringList = QStringList::split('\n',sensorResult);
+    TQStringList stringList = TQStringList::split('\n',sensorResult);
     sensorResult = "";
-    QStringList::Iterator it = stringList.begin();
+    TQStringList::Iterator it = stringList.begin();
 #if defined __FreeBSD__ || defined(Q_OS_NETBSD)
-    QRegExp rx( "^(\\S+)\\s+:\\s+[\\+\\-]?(\\d+\\.?\\d*)");
+    TQRegExp rx( "^(\\S+)\\s+:\\s+[\\+\\-]?(\\d+\\.?\\d*)");
 #else
-    QRegExp rx( "^(.+):\\s+[\\+\\-]?(\\d+\\.?\\d*)");
+    TQRegExp rx( "^(.+):\\s+[\\+\\-]?(\\d+\\.?\\d*)");
 #endif
     while( it != stringList.end())
     {
@@ -69,12 +69,12 @@ void SensorSensor::processExited(KProcess *)
         it++;
     }
 
-    QString format;
-    QString type;
+    TQString format;
+    TQString type;
     SensorParams *sp;
     Meter *meter;
 
-    QObjectListIt lit( *objList );
+    TQObjectListIt lit( *objList );
     while (lit != 0)
     {
         sp = (SensorParams*)(*lit);
@@ -91,9 +91,9 @@ void SensorSensor::processExited(KProcess *)
         }
 
 #if defined __FreeBSD__ || defined(Q_OS_NETBSD)
-        format.replace( QRegExp("%v", false), sensorMap[sensorMapBSD[type]]);
+        format.replace( TQRegExp("%v", false), sensorMap[sensorMapBSD[type]]);
 #else
-        format.replace( QRegExp("%v", false), sensorMap[type]);
+        format.replace( TQRegExp("%v", false), sensorMap[type]);
 #endif
         meter->setValue(format);
         ++lit;

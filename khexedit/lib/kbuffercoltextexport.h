@@ -19,7 +19,7 @@
 #define KHE_KBUFFERCOLTEXTEXPORT_H
 
 // qt specific
-#include <qstring.h>
+#include <tqstring.h>
 // lib specific
 #include "kcoltextexport.h"
 #include "kcoordrange.h"
@@ -38,18 +38,18 @@ class KBufferColTextExport : public KColTextExport
     virtual ~KBufferColTextExport();
 
   public: // API
-    void printFirstLine( QString &T, int Line ) const;
-    void printNextLine( QString &T ) const;
+    void printFirstLine( TQString &T, int Line ) const;
+    void printNextLine( TQString &T ) const;
     /** tells how much chars per line are needed */
     int charsPerLine() const;
 
 
   protected: // API to be reimplemented by subclasses
-    virtual void print( QString &T ) const;
+    virtual void print( TQString &T ) const;
 
 
   protected:
-    static QString whiteSpace( uint s );
+    static TQString whiteSpace( uint s );
 
   protected:
     const char *Data;

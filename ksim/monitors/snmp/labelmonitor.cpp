@@ -21,17 +21,17 @@
 
 using namespace KSim::Snmp;
 
-LabelMonitor::LabelMonitor( const MonitorConfig &config, QWidget *parent, const char *name )
+LabelMonitor::LabelMonitor( const MonitorConfig &config, TQWidget *parent, const char *name )
     : KSim::Label( parent, name ), m_config( config )
 {
 }
 
 void LabelMonitor::setData( const Value &data )
 {
-     QString dataString = data.toString( m_config.refreshInterval.minutes == 0 ? Value::TimeTicksWithSeconds : 0 );
+     TQString dataString = data.toString( m_config.refreshInterval.minutes == 0 ? Value::TimeTicksWithSeconds : 0 );
 
      if ( m_config.useCustomFormatString ) {
-         QString text = m_config.customFormatString;
+         TQString text = m_config.customFormatString;
          text.replace( "%n", m_config.name );
          text.replace( "%s", dataString );
          setText( text );

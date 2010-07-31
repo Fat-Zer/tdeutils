@@ -20,15 +20,15 @@
 #include "ksimcpu.h"
 #include "ksimcpu.moc"
 
-#include <qtextstream.h>
-#include <qregexp.h>
-#include <qlayout.h>
-#include <qtimer.h>
-#include <qfile.h>
-#include <qgroupbox.h>
-#include <qlabel.h>
-#include <qglobal.h>
-#include <qpushbutton.h>
+#include <tqtextstream.h>
+#include <tqregexp.h>
+#include <tqlayout.h>
+#include <tqtimer.h>
+#include <tqfile.h>
+#include <tqgroupbox.h>
+#include <tqlabel.h>
+#include <tqglobal.h>
+#include <tqpushbutton.h>
 
 #include <klistview.h>
 #include <kdebug.h>
@@ -67,7 +67,7 @@
 #endif
 #endif
 
-#define CPU_NAME(cpu) "Cpu" + QString::number(cpu) + "_options"
+#define CPU_NAME(cpu) "Cpu" + TQString::number(cpu) + "_options"
 #define CPU_SPEED 1000
 
 KSIM_INIT_PLUGIN(CpuPlugin)
@@ -94,7 +94,7 @@ KSim::PluginPage *CpuPlugin::createConfigPage(const char *className)
 
 void CpuPlugin::showAbout()
 {
-  QString version = kapp->aboutData()->version();
+  TQString version = kapp->aboutData()->version();
 
   KAboutData aboutData(instanceName(),
      I18N_NOOP("KSim CPU Plugin"), version.latin1(),
@@ -113,11 +113,11 @@ CpuView::CpuView(KSim::PluginObject *parent, const char *name)
 #ifdef Q_OS_LINUX
   m_procStream = 0L;
   if ((m_procFile = fopen("/proc/stat", "r")))
-    m_procStream = new QTextStream(m_procFile, IO_ReadOnly);
+    m_procStream = new TQTextStream(m_procFile, IO_ReadOnly);
 #endif
 
-  m_mainLayout = new QVBoxLayout(this);
-  QSpacerItem *item = new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Expanding);
+  m_mainLayout = new TQVBoxLayout(this);
+  TQSpacerItem *item = new TQSpacerItem(0, 0, TQSizePolicy::Expanding, TQSizePolicy::Expanding);
   m_mainLayout->addItem(item);
   
   m_firstTime = true;
@@ -125,8 +125,8 @@ CpuView::CpuView(KSim::PluginObject *parent, const char *name)
   m_cpus = createList();
   addDisplay();
 
-  m_timer = new QTimer(this);
-  connect(m_timer, SIGNAL(timeout()), SLOT(updateView()));
+  m_timer = new TQTimer(this);
+  connect(m_timer, TQT_SIGNAL(timeout()), TQT_SLOT(updateView()));
   m_timer->start(CPU_SPEED);
   updateView();
 }
@@ -168,7 +168,7 @@ void CpuView::updateView()
     CpuData cpuData;
     updateCpu(cpuData, current.number());
 
-    QString text = current.format();
+    TQString text = current.format();
     current.setData(cpuData);
     cpuData -= current.oldData();
     int cpuDiff = 0;
@@ -216,22 +216,22 @@ void CpuView::updateCpu(CpuData &cpu, int cpuNumber)
     return;
 
   bool cpuFound = false;
-  QString output;
-  QString parser;
-  QString cpuString;
+  TQString output;
+  TQString parser;
+  TQString cpuString;
   cpuString.setNum(cpuNumber).prepend("cpu");
 
   // Parse the proc file
   while (!m_procStream->atEnd()) {
     parser = m_procStream->readLine();
     // remove all the entries apart from the line containing 'cpuString'
-    if (!cpuFound && parser.find(QRegExp(cpuString)) != -1) {
+    if (!cpuFound && parser.find(TQRegExp(cpuString)) != -1) {
       output = parser;
       cpuFound = true;
     }
   }
 
-  QStringList cpuList = QStringList::split(' ', output);
+  TQStringList cpuList = TQStringList::split(' ', output);
 
   if (!cpuList.isEmpty()) {
     cpu.name = cpuList[0].stripWhiteSpace();
@@ -308,8 +308,8 @@ CpuView::CpuList CpuView::createList()
   CpuList list;
 
   int number = 0;
-  QStringList cpus = config()->readListEntry("Cpus");
-  QStringList::ConstIterator it;
+  TQStringList cpus = config()->readListEntry("Cpus");
+  TQStringList::ConstIterator it;
   for (it = cpus.begin(); it != cpus.end(); ++it) {
     list.append(Cpu((*it), config()->readEntry(CPU_NAME(number),
        "%T"), number));
@@ -364,63 +364,63 @@ KSim::Progress *CpuView::addLabel()
 CpuConfig::CpuConfig(KSim::PluginObject *parent, const char *name)
    : KSim::PluginPage(parent, name)
 {
-  QVBoxLayout * mainLayout = new QVBoxLayout( this );
+  TQVBoxLayout * mainLayout = new TQVBoxLayout( this );
   mainLayout->setSpacing( 6 );
 
   m_listView = new KListView(this);
   m_listView->addColumn(i18n("Available CPUs"));
   m_listView->addColumn(i18n("Chart Format"));
   m_listView->setAllColumnsShowFocus(true);
-  m_listView->setSelectionMode(QListView::Single);
-  connect( m_listView, SIGNAL( doubleClicked( QListViewItem * ) ),
-     SLOT( modify( QListViewItem * ) ) );
+  m_listView->setSelectionMode(TQListView::Single);
+  connect( m_listView, TQT_SIGNAL( doubleClicked( TQListViewItem * ) ),
+     TQT_SLOT( modify( TQListViewItem * ) ) );
 
   mainLayout->addWidget( m_listView );
 
-  QHBoxLayout * layout = new QHBoxLayout;
+  TQHBoxLayout * layout = new QHBoxLayout;
   layout->setSpacing( 6 );
 
-  QSpacerItem * spacer = new QSpacerItem( 20, 20,
-     QSizePolicy::Expanding, QSizePolicy::Minimum );
+  TQSpacerItem * spacer = new TQSpacerItem( 20, 20,
+     TQSizePolicy::Expanding, TQSizePolicy::Minimum );
   layout->addItem(spacer);
 
-  m_modify = new QPushButton( this );
+  m_modify = new TQPushButton( this );
   m_modify->setText( i18n( "Modify..." ) );
-  connect( m_modify, SIGNAL( clicked() ), SLOT( modify() ) );
+  connect( m_modify, TQT_SIGNAL( clicked() ), TQT_SLOT( modify() ) );
   layout->addWidget( m_modify );
   mainLayout->addLayout( layout );
 
-  m_legendBox = new QGroupBox(this);
+  m_legendBox = new TQGroupBox(this);
   m_legendBox->setColumnLayout(0, Qt::Vertical);
   m_legendBox->setTitle(i18n("Chart Legend"));
   m_legendBox->layout()->setSpacing(0);
   m_legendBox->layout()->setMargin(0);
 
-  m_legendLayout = new QVBoxLayout(m_legendBox->layout());
+  m_legendLayout = new TQVBoxLayout(m_legendBox->layout());
   m_legendLayout->setAlignment(Qt::AlignTop);
   m_legendLayout->setSpacing(6);
   m_legendLayout->setMargin(11);
 
-  m_totalNiceLabel = new QLabel(i18n("%T - Total CPU time (sys + user + nice)"), m_legendBox);
+  m_totalNiceLabel = new TQLabel(i18n("%T - Total CPU time (sys + user + nice)"), m_legendBox);
   m_legendLayout->addWidget(m_totalNiceLabel);
 
-  m_totalLabel = new QLabel(i18n("%t - Total CPU time (sys + user)"), m_legendBox);
+  m_totalLabel = new TQLabel(i18n("%t - Total CPU time (sys + user)"), m_legendBox);
   m_legendLayout->addWidget(m_totalLabel);
 
-  m_sysLabel = new QLabel(i18n("%s - Total sys time"), m_legendBox);
+  m_sysLabel = new TQLabel(i18n("%s - Total sys time"), m_legendBox);
   m_legendLayout->addWidget(m_sysLabel);
 
-  m_userLabel = new QLabel(i18n("%u - Total user time"), m_legendBox);
+  m_userLabel = new TQLabel(i18n("%u - Total user time"), m_legendBox);
   m_legendLayout->addWidget(m_userLabel);
 
-  m_niceLabel = new QLabel(i18n("%n - Total nice time"), m_legendBox);
+  m_niceLabel = new TQLabel(i18n("%n - Total nice time"), m_legendBox);
   m_legendLayout->addWidget(m_niceLabel);
 
   mainLayout->addWidget( m_legendBox );
 
   for (uint i = 0; i < addCpus(); ++i)
   {
-    QCheckListItem *item = new QCheckListItem(m_listView, i18n("cpu %1").arg(i), QCheckListItem::CheckBox);
+    TQCheckListItem *item = new TQCheckListItem(m_listView, i18n("cpu %1").arg(i), TQCheckListItem::CheckBox);
     item->setText(1, "%T");
   }
 }
@@ -432,13 +432,13 @@ CpuConfig::~CpuConfig()
 void CpuConfig::readConfig()
 {
   config()->setGroup("CpuPlugin");
-  QStringList enabledCpus(config()->readListEntry("Cpus"));
+  TQStringList enabledCpus(config()->readListEntry("Cpus"));
 
   int cpuNum = 0;
-  QStringList::ConstIterator it;
+  TQStringList::ConstIterator it;
   for (it = enabledCpus.begin(); it != enabledCpus.end(); ++it) {
-    if (QCheckListItem *item =
-          static_cast<QCheckListItem *>(m_listView->findItem((*it), 0))) {
+    if (TQCheckListItem *item =
+          static_cast<TQCheckListItem *>(m_listView->findItem((*it), 0))) {
       item->setOn(true);
       item->setText(1, config()->readEntry(CPU_NAME(cpuNum), "%T"));
     }
@@ -451,10 +451,10 @@ void CpuConfig::saveConfig()
   config()->setGroup("CpuPlugin");
 
   int cpuNum = 0;
-  QStringList enabledCpus;
-  for (QListViewItemIterator it(m_listView); it.current(); ++it) {
+  TQStringList enabledCpus;
+  for (TQListViewItemIterator it(m_listView); it.current(); ++it) {
     config()->writeEntry(CPU_NAME(cpuNum), it.current()->text(1));
-    if (static_cast<QCheckListItem *>(it.current())->isOn())
+    if (static_cast<TQCheckListItem *>(it.current())->isOn())
       enabledCpus.append(it.current()->text(0));
     ++cpuNum;
   }
@@ -465,18 +465,18 @@ void CpuConfig::saveConfig()
 uint CpuConfig::addCpus()
 {
 #ifdef Q_OS_LINUX
-  QStringList output;
-  QString parser;
-  QFile file("/proc/stat");
+  TQStringList output;
+  TQString parser;
+  TQFile file("/proc/stat");
   if (!file.open(IO_ReadOnly))
     return 0;
 
   // Parse the proc file
-  QTextStream procStream(&file);
+  TQTextStream procStream(&file);
   while (!procStream.atEnd()) {
     parser = procStream.readLine();
-    if (QRegExp("cpu").search(parser, 0) != -1
-          && QRegExp("cpu0").search(parser, 0) == -1) {
+    if (TQRegExp("cpu").search(parser, 0) != -1
+          && TQRegExp("cpu0").search(parser, 0) == -1) {
       output.append(parser);
     }
   }
@@ -495,13 +495,13 @@ uint CpuConfig::addCpus()
 #endif
 }
 
-void CpuConfig::modify( QListViewItem * item )
+void CpuConfig::modify( TQListViewItem * item )
 {
   if ( !item )
     return;
 
   bool ok = false;
-  QString text = KInputDialog::getText( i18n( "Modify CPU Format" ), i18n( "Chart format:" ),
+  TQString text = KInputDialog::getText( i18n( "Modify CPU Format" ), i18n( "Chart format:" ),
      item->text( 1 ), &ok, this );
 
   if ( ok )

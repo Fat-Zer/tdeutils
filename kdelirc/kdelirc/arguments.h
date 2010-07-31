@@ -13,17 +13,17 @@
 #ifndef ARGUMENTS_H
 #define ARGUMENTS_H
 
-#include <qvaluelist.h>
-#include <qvariant.h>
+#include <tqvaluelist.h>
+#include <tqvariant.h>
 
 /**
 @author Gav Wood
 */
 
-class Arguments : public QValueList<QVariant>
+class Arguments : public TQValueList<TQVariant>
 {
 public:
-	const QString toString() const;
+	const TQString toString() const;
 
 	Arguments();
 	~Arguments();

@@ -25,7 +25,7 @@
 class QTimer;
 class KPCMCIA;
 
-#include <qmemarray.h>
+#include <tqmemarray.h>
 
 #include <sys/types.h>
 
@@ -45,12 +45,12 @@ protected:
    int _fd;
 
    int _interrupt;
-   QString _device, _ports;
-   QString _module;
-   QString _cardname;
-   QString _type;
+   TQString _device, _ports;
+   TQString _module;
+   TQString _cardname;
+   TQString _type;
    int _vcc, _vpp, _vpp2;
-   QString _stabPath;
+   TQString _stabPath;
    int _iotype;
    int _inttype;
    int _cfgbase;
@@ -141,27 +141,27 @@ public:
    /**
     *    Return the card name
     */
-   inline QString& name() { return _cardname; }
+   inline TQString& name() { return _cardname; }
 
    /**
     *    Return the port range
     */
-   inline QString& ports() { return _ports; }
+   inline TQString& ports() { return _ports; }
 
    /**
     *    Return the device name
     */
-   inline QString& device() { return _device; }
+   inline TQString& device() { return _device; }
 
    /**
     *    Return the device type  (ie network, modem, etc)
     */
-   inline QString& type() { return _type; }
+   inline TQString& type() { return _type; }
 
    /**
     *    Return the driver (module) name
     */
-   inline QString& driver() { return _module; }
+   inline TQString& driver() { return _module; }
 
    /**
     *    Refresh the card information - return < 0 on error.
@@ -176,7 +176,7 @@ private:
 
 
 
-class KPCMCIA : public QObject {
+class KPCMCIA : public TQObject {
 Q_OBJECT 
 public:
 
@@ -198,12 +198,12 @@ public slots:
 
 private:
   int _refreshSpeed;
-  QTimer *_timer;
-  QMemArray<KPCMCIACard *> *_cards;
+  TQTimer *_timer;
+  TQMemArray<KPCMCIACard *> *_cards;
   int _cardCnt;
   bool _haveCardServices;
   int _maxSlots;
-  QString _stabPath;
+  TQString _stabPath;
   
 };
 

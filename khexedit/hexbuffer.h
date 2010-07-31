@@ -28,14 +28,14 @@
 #include <iostream>
 #include <time.h>
 
-#include <qbitarray.h> 
-#include <qdatetime.h> 
-#include <qfile.h>
-#include <qfont.h>
-#include <qptrlist.h>
-#include <qpainter.h>
-#include <qstring.h>
-#include <qtextstream.h>
+#include <tqbitarray.h> 
+#include <tqdatetime.h> 
+#include <tqfile.h>
+#include <tqfont.h>
+#include <tqptrlist.h>
+#include <tqpainter.h>
+#include <tqstring.h>
+#include <tqtextstream.h>
 
 #include <kapplication.h>
 
@@ -51,8 +51,8 @@
 
 struct SSearchControl
 {
-  QByteArray key;
-  QByteArray val;
+  TQByteArray key;
+  TQByteArray val;
   uint keyType;
   bool fromCursor;
   bool inSelection;
@@ -84,7 +84,7 @@ struct SFilterControl
   int execute( uchar *dest, uchar *src, uint size );
 
 
-  QByteArray operand;
+  TQByteArray operand;
   int rotate[2];
   Operation  operation;
   bool fromCursor;
@@ -96,7 +96,7 @@ struct SFilterControl
 struct SInsertData
 {
   uint size;
-  QByteArray pattern;
+  TQByteArray pattern;
   uint offset;
   bool repeatPattern;
   bool onCursor;
@@ -121,15 +121,15 @@ struct SExportRange
 struct SExportText
 {
   SExportRange range;
-  QString destFile;
+  TQString destFile;
 };
 
 
 struct SExportHtml
 {
   SExportRange range;
-  QString package;
-  QString prefix;
+  TQString package;
+  TQString prefix;
   uint linePerPage;
   uint topCaption;
   uint bottomCaption;
@@ -154,12 +154,12 @@ struct SExportCArray
   };
     
   const char *printFormatted( const char *b, uint maxSize ) const;
-  QString variableName( uint range ) const;
+  TQString variableName( uint range ) const;
   int elementSize( void ) const;
 
   SExportRange range;
-  QString destFile;
-  QString arrayName;
+  TQString destFile;
+  TQString arrayName;
   int  elementType;
   uint elementPerLine;
   bool unsignedAsHexadecimal;
@@ -176,7 +176,7 @@ struct SStatisticControl
 
   uint documentSize;
   uint occurrence[256];
-  QString documentName;
+  TQString documentName;
 };
 
 
@@ -233,9 +233,9 @@ class CStringCollectControl
       mList.setAutoDelete( true );
     }
 
-    int add( uint offset, const QByteArray &a )
+    int add( uint offset, const TQByteArray &a )
     {
-      QString *s = new QString();
+      TQString *s = new TQString();
       if( s == 0 ) 
       { 
 	return( Err_NoMemory ); 
@@ -250,7 +250,7 @@ class CStringCollectControl
 	s->sprintf( "%04x:%04x", offset>>16, offset&0x0000FFFF );
       }
 
-      *s += QString( a );
+      *s += TQString( a );
 
       mList.append( s );
       return( Err_Success );
@@ -266,7 +266,7 @@ class CStringCollectControl
       mList.clear();
     }
     
-    const QString *get( uint index )
+    const TQString *get( uint index )
     {
       return( mList.at( index ) );
     }
@@ -276,7 +276,7 @@ class CStringCollectControl
       return( mList.count() );
     }
 
-    QPtrList<QString> &list( void )
+    TQPtrList<TQString> &list( void )
     {
       return( mList );
     }
@@ -287,7 +287,7 @@ class CStringCollectControl
     bool allow8bit;
 
   private:
-    QPtrList<QString> mList;
+    TQPtrList<TQString> mList;
 };
 
 
@@ -1079,7 +1079,7 @@ class CHexBuffer : public QByteArray
 
     bool matchWidth( uint width );
 
-    void setNonPrintChar( QChar nonPrintChar );
+    void setNonPrintChar( TQChar nonPrintChar );
     void setShowCursor( bool showCursor );
     void setDisableCursor( bool disableCursor );
     void setCursorShapeModifier( bool alwaysBlock, bool thickInsert );
@@ -1096,37 +1096,37 @@ class CHexBuffer : public QByteArray
 
     bool setCursorPosition( int x, int y, bool init, bool cellLevel );
 
-    int  readFile( QFile &file, const QString &url, CProgress &p );
-    int  insertFile( QFile &file, CProgress &p );
-    int  writeFile( QFile &file, CProgress &p );
-    int  newFile( const QString &url );
+    int  readFile( TQFile &file, const TQString &url, CProgress &p );
+    int  insertFile( TQFile &file, CProgress &p );
+    int  writeFile( TQFile &file, CProgress &p );
+    int  newFile( const TQString &url );
     void closeFile( void );
-    void registerDiskModifyTime( const QFile &file );
+    void registerDiskModifyTime( const TQFile &file );
 
     bool changedOnDisk( void );
 
-    void drawText( QPainter &paint, uint line, int sx, int x, int w );
-    void drawText( QPainter &paint, uint line, int x1, int x2, int y, 
+    void drawText( TQPainter &paint, uint line, int sx, int x, int w );
+    void drawText( TQPainter &paint, uint line, int x1, int x2, int y, 
 		   bool useBlackWhite );
 
-    void drawHeader( QPainter &paint, int sx, int width, int y, bool isFooter,
+    void drawHeader( TQPainter &paint, int sx, int width, int y, bool isFooter,
 		     const SPageHeader &header,const SPagePosition &position );
-    int  headerHeight( QPainter &paint );
-    int  headerMargin( QPainter &paint );
+    int  headerHeight( TQPainter &paint );
+    int  headerMargin( TQPainter &paint );
 
-    bool inputAtCursor( QChar c );
-    int  inputAtCursor( const QByteArray &buf, uint oldSize );
+    bool inputAtCursor( TQChar c );
+    int  inputAtCursor( const TQByteArray &buf, uint oldSize );
     bool removeAtCursor( bool beforeCursor );
  
     int  locateRange( const SExportRange &range, uint &start, uint &stop );
     int  exportText( const SExportText &ex, CProgress &p );
     int  exportHtml( const SExportHtml &ex, CProgress &p );
     int  exportCArray( const SExportCArray &ex, CProgress &p );
-    int  copySelectedText( QByteArray &array, int columnSegment=VisibleColumn);
-    int  copyAllText( QByteArray &array );
-    int  copyText( QByteArray &array, const SExportRange &range, 
+    int  copySelectedText( TQByteArray &array, int columnSegment=VisibleColumn);
+    int  copyAllText( TQByteArray &array );
+    int  copyText( TQByteArray &array, const SExportRange &range, 
 		   int columnSegment );
-    int  copySelectedData( QByteArray &array );
+    int  copySelectedData( TQByteArray &array );
 
     uint numPage( CHexPrinter &printer );
     int  print( CHexPrinter &printer, CProgress &p );
@@ -1154,12 +1154,12 @@ class CHexBuffer : public QByteArray
     void doAction( CHexAction *action );
 
     inline SCursorState &cursorState( void );
-    inline void valueOnCursor( QByteArray &buf, uint size );
+    inline void valueOnCursor( TQByteArray &buf, uint size );
     inline SFileState &fileState( void );
     inline const SDisplayLayout &layout( void );
 
     inline const SDisplayInputMode &inputMode( void );
-    inline QPtrList<SCursorOffset> &bookmarkList( void );
+    inline TQPtrList<SCursorOffset> &bookmarkList( void );
 
     inline bool documentPresent( void );
     inline bool modified( void );
@@ -1169,11 +1169,11 @@ class CHexBuffer : public QByteArray
     inline const SEncodeState &encoding( void );
     inline bool losslessEncoding( CConversion::EMode mode );
 
-    inline QString &url( void );
+    inline TQString &url( void );
     bool hasFileName( void );
-    inline void setUrl( const QString &url );
+    inline void setUrl( const TQString &url );
     inline void setModified( bool modified );
-    inline const QDateTime &diskModifyTime( void );
+    inline const TQDateTime &diskModifyTime( void );
     
 
 
@@ -1185,9 +1185,9 @@ class CHexBuffer : public QByteArray
     inline int  unitWidth( void );
     inline int  numLines( void );
     inline int  totalHeight( void );
-    inline const QFont &font( void );
+    inline const TQFont &font( void );
     inline SCursor *textCursor( void );
-    inline const QColor &backgroundColor( void );
+    inline const TQColor &backgroundColor( void );
     inline int  startX( void );
     inline int  startY( void );
     inline void setStartX( int val );
@@ -1239,10 +1239,10 @@ class CHexBuffer : public QByteArray
     void computeNumLines( void );
     void cursorCompute( void );
 
-    void drawSelection( QPainter &paint, QColor &color, uint start, uint stop, 
+    void drawSelection( TQPainter &paint, TQColor &color, uint start, uint stop, 
 			int sx );
-    int  drawBookmarks(QPainter &paint, uint line, int startx);
-    void drawCursor( QPainter &paint, uint line, int startx, bool onBookmark );
+    int  drawBookmarks(TQPainter &paint, uint line, int startx);
+    void drawCursor( TQPainter &paint, uint line, int startx, bool onBookmark );
 
     void recordStart( SCursor &cursor );
     void recordReplace( SCursor &cursor, uint size, char *data, uint dataSize);
@@ -1251,7 +1251,7 @@ class CHexBuffer : public QByteArray
     int  scanData( SSearchControl &sc, bool init );
     int  initScanData( SSearchControl &sc );
 
-    inline const QColor &foregroundColor( uint column );
+    inline const TQColor &foregroundColor( uint column );
     inline int  printDummyCell( char *buf, unsigned char data );
     inline int  printHexadecimalBigCell( char *buf, unsigned char data );
     inline int  printHexadecimalSmallCell( char *buf, unsigned char data );
@@ -1277,27 +1277,27 @@ class CHexBuffer : public QByteArray
     void inputSound( void );
     void fatalSound( void );
 
-    int printHtmlDataPage( const QString &tocName, 
-			   const QStringList &fileNames, uint index, 
+    int printHtmlDataPage( const TQString &tocName, 
+			   const TQStringList &fileNames, uint index, 
 			   const SExportHtml &ex, uint line, uint numLine );
-    void printHtmlCaption( QTextStream &os, uint captionType, uint curPage,
+    void printHtmlCaption( TQTextStream &os, uint captionType, uint curPage,
 			   uint numPage );
-    void printHtmlNavigator( QTextStream &os, const QString *next, 
-			     const QString *prev, const QString *toc );
-    void printHtmlTocPage( const QString &tocName, 
-			   const QString &linkName,
-			   const QStringList &fileNames, 
-			   const QStringList &offsets, uint numPage );
-    int printHtmlHeader( QTextStream &os, bool isFront );
-    int printHtmlTable( QTextStream &os, uint line, uint numLine, bool bw );
-    int printHtmlLine( QTextStream &os, uint offset, bool isPrimary, bool bw );
+    void printHtmlNavigator( TQTextStream &os, const TQString *next, 
+			     const TQString *prev, const TQString *toc );
+    void printHtmlTocPage( const TQString &tocName, 
+			   const TQString &linkName,
+			   const TQStringList &fileNames, 
+			   const TQStringList &offsets, uint numPage );
+    int printHtmlHeader( TQTextStream &os, bool isFront );
+    int printHtmlTable( TQTextStream &os, uint line, uint numLine, bool bw );
+    int printHtmlLine( TQTextStream &os, uint offset, bool isPrimary, bool bw );
 
   signals:
     void fileSize( uint size );
 
   private:
-    QString mUrl;
-    QDateTime mDiskModifyTime;
+    TQString mUrl;
+    TQDateTime mDiskModifyTime;
     SDisplayLayout mLayout;
     SDisplayColor mColor;
     SDisplayFontInfo mFontInfo;
@@ -1349,9 +1349,9 @@ class CHexBuffer : public QByteArray
 
     uint mUndoLimit;
     uint mUndoIndex;
-    QPtrList<CHexActionGroup> mUndoList;
-    QPtrList<SCursorOffset> mBookmarkList;
-    QBitArray mBookmarkMap;
+    TQPtrList<CHexActionGroup> mUndoList;
+    TQPtrList<SCursorOffset> mBookmarkList;
+    TQBitArray mBookmarkMap;
 
     PrintCellFunc   printCell;
     PrintOffsetFunc printOffset;
@@ -1401,7 +1401,7 @@ inline SCursorState &CHexBuffer::cursorState( void )
 }
 
 
-inline void CHexBuffer::valueOnCursor( QByteArray &buf, uint size )
+inline void CHexBuffer::valueOnCursor( TQByteArray &buf, uint size )
 {
   int offset = cursorOffset();
   if( offset + size >= mDocumentSize )
@@ -1429,7 +1429,7 @@ inline const SDisplayInputMode &CHexBuffer::inputMode( void )
   return( mInputMode );
 }
 
-inline QPtrList<SCursorOffset> &CHexBuffer::bookmarkList( void )
+inline TQPtrList<SCursorOffset> &CHexBuffer::bookmarkList( void )
 {
   return( mBookmarkList );
 }
@@ -1502,7 +1502,7 @@ inline bool CHexBuffer::losslessEncoding( CConversion::EMode mode )
   return( mEncode.lossless(mode) );
 }
 
-inline QString &CHexBuffer::url( void )
+inline TQString &CHexBuffer::url( void )
 {
   return( mUrl );
 }
@@ -1512,12 +1512,12 @@ inline bool CHexBuffer::documentPresent( void )
   return( size() == 0 ? false : true );
 }
 
-inline void CHexBuffer::setUrl( const QString &url )
+inline void CHexBuffer::setUrl( const TQString &url )
 {
   mUrl = url;
 }
 
-inline const QDateTime &CHexBuffer::diskModifyTime( void )
+inline const TQDateTime &CHexBuffer::diskModifyTime( void )
 {
   return( mDiskModifyTime );
 }
@@ -1527,7 +1527,7 @@ inline uint CHexBuffer::calculateLine( uint offset )
   return( mLayout.lineSize == 0 ? 0 : offset / mLayout.lineSize );
 }
 
-inline const QColor &CHexBuffer::foregroundColor( uint column )  
+inline const TQColor &CHexBuffer::foregroundColor( uint column )  
 {
   if( column > mLayout.lineSize )
   {
@@ -1999,7 +1999,7 @@ inline int CHexBuffer::totalHeight( void )
   return( mNumLines * (mFontHeight+mLayout.horzGridWidth) );
 }
 
-inline const QFont &CHexBuffer::font( void )
+inline const TQFont &CHexBuffer::font( void )
 {
   return( mFontInfo.font );
 }
@@ -2009,7 +2009,7 @@ inline SCursor *CHexBuffer::textCursor( void )
   return( &mCursor );
 }
 
-inline const QColor &CHexBuffer::backgroundColor( void )
+inline const TQColor &CHexBuffer::backgroundColor( void )
 {
   return( documentPresent() == true ? mColor.textBg : mColor.inactiveBg );
 }

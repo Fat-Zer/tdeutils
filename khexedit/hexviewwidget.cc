@@ -20,8 +20,8 @@
 
 #include <iostream>
 
-#include <qclipboard.h>
-#include <qdrawutil.h>
+#include <tqclipboard.h>
+#include <tqdrawutil.h>
 
 
 #include <kglobalsettings.h>
@@ -80,7 +80,7 @@ void CDragManager::setup( int x, int y )
   mPending = true;
 }
 
-bool CDragManager::start( QMouseEvent *e )
+bool CDragManager::start( TQMouseEvent *e )
 {
   if( mPending == false )
   {
@@ -131,7 +131,7 @@ bool CDragManager::clear( void )
   return( true );
 }
 
-void CDragManager::timerEvent( QTimerEvent *e )
+void CDragManager::timerEvent( TQTimerEvent *e )
 {
   if( e->timerId() == mTimerId )
   {
@@ -167,9 +167,9 @@ void CDragManager::setupTimer( void )
 //
 // This widget will use the entire space of the parent widget
 //
-CHexViewWidget::CHexViewWidget( QWidget *parent, const char *name,
+CHexViewWidget::CHexViewWidget( TQWidget *parent, const char *name,
 				CHexBuffer *hexBuffer )
-  : QFrame( parent, name,
+  : TQFrame( parent, name,
 	    #ifdef USE_NORTHWEST_GRAVITY
 	    Qt::WStaticContents
 	    #else
@@ -190,19 +190,19 @@ CHexViewWidget::CHexViewWidget( QWidget *parent, const char *name,
   // I tried to do a
   // "while( mHorzScroll->isVisible() ) { mHorzScroll->hide(); }"
   // but then the loop never ended. The "CScrollBar" emits a "hidden()"
-  // signal whenever is receives a QHideEvent.
+  // signal whenever is receives a TQHideEvent.
   //
 
-  mVertScroll = new CScrollBar( QScrollBar::Vertical, this );
+  mVertScroll = new CScrollBar( TQScrollBar::Vertical, this );
   if( mVertScroll == 0 ) { return; }
-  mHorzScroll = new CScrollBar( QScrollBar::Horizontal, this );
+  mHorzScroll = new CScrollBar( TQScrollBar::Horizontal, this );
   if( mHorzScroll == 0 ) { return; }
-  mCorner = new QWidget( this );
+  mCorner = new TQWidget( this );
   if( mCorner == 0 ) { return; }
-  connect( mHorzScroll, SIGNAL(valueChanged(int)), SLOT(changeXPos(int)) );
-  connect( mVertScroll, SIGNAL(valueChanged(int)), SLOT(changeYPos(int)) );
-  connect( mHorzScroll, SIGNAL(hidden()), SLOT(update()) );
-  connect( mVertScroll, SIGNAL(hidden()), SLOT(update()) );
+  connect( mHorzScroll, TQT_SIGNAL(valueChanged(int)), TQT_SLOT(changeXPos(int)) );
+  connect( mVertScroll, TQT_SIGNAL(valueChanged(int)), TQT_SLOT(changeYPos(int)) );
+  connect( mHorzScroll, TQT_SIGNAL(hidden()), TQT_SLOT(update()) );
+  connect( mVertScroll, TQT_SIGNAL(hidden()), TQT_SLOT(update()) );
   mHorzScroll->hide();
   mVertScroll->hide();
 
@@ -213,9 +213,9 @@ CHexViewWidget::CHexViewWidget( QWidget *parent, const char *name,
   #else
   mDragManager->setActivateMode( CDragManager::Timer );
   #endif
-  connect( mDragManager, SIGNAL(startDrag(bool)), SLOT(startDrag(bool)) );
+  connect( mDragManager, TQT_SIGNAL(startDrag(bool)), TQT_SLOT(startDrag(bool)) );
 
-  setFrameStyle( QFrame::WinPanel|QFrame::Sunken );
+  setFrameStyle( TQFrame::WinPanel|TQFrame::Sunken );
   setWFlags( WResizeNoErase );
   setFocusPolicy( StrongFocus );
 
@@ -247,7 +247,7 @@ CHexViewWidget::~CHexViewWidget( void )
 }
 
 
-int CHexViewWidget::readFile( QFile &file, const QString &url, CProgress &p )
+int CHexViewWidget::readFile( TQFile &file, const TQString &url, CProgress &p )
 {
   int errCode = mHexBuffer->readFile( file, url, p );
   if( errCode != Err_Success )
@@ -260,7 +260,7 @@ int CHexViewWidget::readFile( QFile &file, const QString &url, CProgress &p )
 }
 
 
-int CHexViewWidget::insertFile( QFile &file, CProgress &p )
+int CHexViewWidget::insertFile( TQFile &file, CProgress &p )
 {
   int errCode = mHexBuffer->insertFile( file, p );
   if( errCode != Err_Success )
@@ -277,7 +277,7 @@ int CHexViewWidget::insertFile( QFile &file, CProgress &p )
 }
 
 
-int CHexViewWidget::newFile( const QString &url )
+int CHexViewWidget::newFile( const TQString &url )
 {
   int errCode = mHexBuffer->newFile( url );
   if( errCode != Err_Success )
@@ -290,7 +290,7 @@ int CHexViewWidget::newFile( const QString &url )
 }
 
 
-int CHexViewWidget::writeFile( QFile &file, CProgress &p )
+int CHexViewWidget::writeFile( TQFile &file, CProgress &p )
 {
   int errCode = mHexBuffer->writeFile( file, p );
   if( errCode == Err_Success )
@@ -392,7 +392,7 @@ void CHexViewWidget::changeXPos( int p )
   }
   else
   {
-    QWidget::update();
+    TQWidget::update();
   }
 
   //
@@ -420,7 +420,7 @@ void CHexViewWidget::changeYPos( int p )
   }
   else
   {
-    QWidget::update();
+    TQWidget::update();
   }
 
   //
@@ -438,8 +438,8 @@ void CHexViewWidget::changeYPos( int p )
 
 void CHexViewWidget::clipboardChanged( void )
 {
-  disconnect(QApplication::clipboard(),SIGNAL(dataChanged()),
-	     this,SLOT(clipboardChanged()));
+  disconnect(TQApplication::clipboard(),TQT_SIGNAL(dataChanged()),
+	     this,TQT_SLOT(clipboardChanged()));
   unselect();
 }
 
@@ -481,7 +481,7 @@ void CHexViewWidget::insert( SInsertData &id )
     return;
   }
 
-  QByteArray buf( id.size );
+  TQByteArray buf( id.size );
   if( buf.isNull() == true )
   {
     return;
@@ -513,7 +513,7 @@ void CHexViewWidget::insert( SInsertData &id )
 }
 
 
-void CHexViewWidget::insert( const QByteArray &buf )
+void CHexViewWidget::insert( const TQByteArray &buf )
 {
   if( mHexBuffer->documentPresent() == false )
   {
@@ -534,7 +534,7 @@ void CHexViewWidget::insert( const QByteArray &buf )
 }
 
 
-void CHexViewWidget::append( const QByteArray &buf )
+void CHexViewWidget::append( const TQByteArray &buf )
 {
   if( mHexBuffer->documentPresent() == false )
   {
@@ -556,7 +556,7 @@ void CHexViewWidget::append( const QByteArray &buf )
 }
 
 
-void CHexViewWidget::valueOnCursor( QByteArray &buf, uint size )
+void CHexViewWidget::valueOnCursor( TQByteArray &buf, uint size )
 {
   mHexBuffer->valueOnCursor( buf, size );
 }
@@ -702,14 +702,14 @@ void CHexViewWidget::updateView( bool redraw, bool fixCursor )
 
   if( redraw == true )
   {
-    QWidget::update();
+    TQWidget::update();
   }
 }
 
 
-void CHexViewWidget::setPalette( const QPalette &p )
+void CHexViewWidget::setPalette( const TQPalette &p )
 {
-  QWidget::setPalette( p );
+  TQWidget::setPalette( p );
   mCorner->setPalette( p );
   mVertScroll->setPalette( p );
   mHorzScroll->setPalette( p );
@@ -779,7 +779,7 @@ void CHexViewWidget::setMisc( SDisplayMisc &misc )
 				     misc.bookmarkEditor );
   if( mHexBuffer->documentPresent() == true )
   {
-    QWidget::update();
+    TQWidget::update();
   }
 }
 
@@ -934,14 +934,14 @@ int CHexViewWidget::exportCArray( const SExportCArray &ex, CProgress &p )
 
 void CHexViewWidget::startDrag( bool asText )
 {
-  QByteArray buf;
+  TQByteArray buf;
   if( asText == true )
   {
     if( mHexBuffer->copySelectedText( buf ) != Err_Success )
     {
       return;
     }
-    QDragObject *d = new QTextDrag( buf.data(), this );
+    TQDragObject *d = new TQTextDrag( buf.data(), this );
     d->dragCopy();
   }
   else
@@ -950,7 +950,7 @@ void CHexViewWidget::startDrag( bool asText )
     {
       return;
     }
-    QDragObject *d = new CHexDrag( buf, this );
+    TQDragObject *d = new CHexDrag( buf, this );
     d->dragCopy();
   }
 }
@@ -959,13 +959,13 @@ void CHexViewWidget::startDrag( bool asText )
 
 void CHexViewWidget::copy( void )
 {
-  QByteArray buf;
+  TQByteArray buf;
   if( mHexBuffer->copySelectedData( buf ) != Err_Success )
   {
     return;
   }
-  disconnect(QApplication::clipboard(),SIGNAL(dataChanged()),
-	     this,SLOT(clipboardChanged()));
+  disconnect(TQApplication::clipboard(),TQT_SIGNAL(dataChanged()),
+	     this,TQT_SLOT(clipboardChanged()));
   //
   // Note: Do no give the CHexDrag a parent != 0. The clipboard
   // owns the current dragdata and will destroy it on exit or
@@ -974,45 +974,45 @@ void CHexViewWidget::copy( void )
   // is destroyed. We will then have a double destroy situation
   // when the app. is closed (=> segfault).
   //
-  QApplication::clipboard()->setData(new CHexDrag( buf ));
-  connect(QApplication::clipboard(),SIGNAL(dataChanged()),
-	  this,SLOT(clipboardChanged()));
+  TQApplication::clipboard()->setData(new CHexDrag( buf ));
+  connect(TQApplication::clipboard(),TQT_SIGNAL(dataChanged()),
+	  this,TQT_SLOT(clipboardChanged()));
 }
 
 
 void CHexViewWidget::copyText( int columnSegment )
 {
-  QByteArray buf;
+  TQByteArray buf;
   if( mHexBuffer->copySelectedText( buf, columnSegment ) != Err_Success )
   {
     return;
   }
 
-  disconnect(QApplication::clipboard(),SIGNAL(dataChanged()),
-	     this,SLOT(clipboardChanged()));
-  QApplication::clipboard()->setText( buf.data() );
-  connect(QApplication::clipboard(),SIGNAL(dataChanged()),
-	  this,SLOT(clipboardChanged()));
+  disconnect(TQApplication::clipboard(),TQT_SIGNAL(dataChanged()),
+	     this,TQT_SLOT(clipboardChanged()));
+  TQApplication::clipboard()->setText( buf.data() );
+  connect(TQApplication::clipboard(),TQT_SIGNAL(dataChanged()),
+	  this,TQT_SLOT(clipboardChanged()));
 }
 
 
 
 void CHexViewWidget::paste( void )
 {
-  QMimeSource *data = QApplication::clipboard()->data();
+  TQMimeSource *data = TQApplication::clipboard()->data();
   if( data != 0 )
   {
-    QByteArray buf;
+    TQByteArray buf;
     if( CHexDrag::decode( data, buf ) == true )
     {
       insert( buf );
       return;
     }
 
-    QString text;
-    if( QTextDrag::decode( data, text ) == true )
+    TQString text;
+    if( TQTextDrag::decode( data, text ) == true )
     {
-      QByteArray buf;
+      TQByteArray buf;
       if( mClipConvert.decode( buf, text ) == true )
       {
 	insert( buf );
@@ -1082,15 +1082,15 @@ void CHexViewWidget::addBookmark( int position )
 
 
 
-int CHexViewWidget::bookmarkMenu( const QString &title )
+int CHexViewWidget::bookmarkMenu( const TQString &title )
 {
-  QPtrList<SCursorOffset> &list = mHexBuffer->bookmarkList();
+  TQPtrList<SCursorOffset> &list = mHexBuffer->bookmarkList();
   if( list.count() == 0 )
   {
     return( -1 );
   }
 
-  QString text;
+  TQString text;
   KPopupMenu *popup = new KPopupMenu(  0 );
   popup->insertTitle( title );
   for( uint i=0; i < list.count(); i++ )
@@ -1099,12 +1099,12 @@ int CHexViewWidget::bookmarkMenu( const QString &title )
     if( p == 0 ) { continue; }
 
     text.sprintf("%04X:%04X", p->offset>>16, p->offset&0x0000FFFF );
-    text.prepend( QString("[%1] %2: ").arg(i+1).arg(i18n("Offset")) );
+    text.prepend( TQString("[%1] %2: ").arg(i+1).arg(i18n("Offset")) );
     popup->insertItem( text, i );
   }
 
-  QSize s(popup->sizeHint());
-  QPoint center( (width()-s.width())/2, (height()-s.height())/2 );
+  TQSize s(popup->sizeHint());
+  TQPoint center( (width()-s.width())/2, (height()-s.height())/2 );
   int position = popup->exec( mapToGlobal(center) );
   delete popup;
 
@@ -1121,7 +1121,7 @@ void CHexViewWidget::removeBookmark( bool all )
     {
       return;
     }
-    QWidget::update(); // Redraw visisble area.
+    TQWidget::update(); // Redraw visisble area.
   }
   else
   {
@@ -1149,7 +1149,7 @@ void CHexViewWidget::removeBookmark( bool all )
 
 void CHexViewWidget::replaceBookmark( void )
 {
-  QPtrList<SCursorOffset> &list = mHexBuffer->bookmarkList();
+  TQPtrList<SCursorOffset> &list = mHexBuffer->bookmarkList();
   if( list.count() == 0 )
   {
     return;
@@ -1166,7 +1166,7 @@ void CHexViewWidget::replaceBookmark( void )
 
 void CHexViewWidget::gotoBookmark( uint position )
 {
-  QPtrList<SCursorOffset> &list = mHexBuffer->bookmarkList();
+  TQPtrList<SCursorOffset> &list = mHexBuffer->bookmarkList();
   if( position >= list.count() )
   {
     return;
@@ -1186,7 +1186,7 @@ void CHexViewWidget::gotoBookmark( uint position )
 
 void CHexViewWidget::gotoNextBookmark( bool next )
 {
-  QPtrList<SCursorOffset> &list = mHexBuffer->bookmarkList();
+  TQPtrList<SCursorOffset> &list = mHexBuffer->bookmarkList();
   uint offset = mHexBuffer->cursorOffset();
   uint diff   = ~0;
 
@@ -1298,7 +1298,7 @@ void CHexViewWidget::benchmark( void )
 
 
 
-void CHexViewWidget::resizeEvent( QResizeEvent * )
+void CHexViewWidget::resizeEvent( TQResizeEvent * )
 {
   setTextBufferSize();
 
@@ -1330,7 +1330,7 @@ void CHexViewWidget::resizeEvent( QResizeEvent * )
     #ifdef USE_NORTHWEST_GRAVITY
     if( w != dataWidth() )
     {
-      QWidget::update();
+      TQWidget::update();
     }
     else
     {
@@ -1342,7 +1342,7 @@ void CHexViewWidget::resizeEvent( QResizeEvent * )
 
 
 
-void CHexViewWidget::paintEvent( QPaintEvent *e )
+void CHexViewWidget::paintEvent( TQPaintEvent *e )
 {
   paintText( e->rect(), true );
 }
@@ -1356,14 +1356,14 @@ void CHexViewWidget::updateFrameSize( void )
   int h = height() - (mHorzScroll->isVisible() ? mScrollBarSize : 0);
   if( h < 0 ) { h = 0; }
 
-  setFrameRect( QRect(0,0,w,h) );
+  setFrameRect( TQRect(0,0,w,h) );
 }
 
 
 
 void CHexViewWidget::paintFrame( void )
 {
-  QPainter paint;
+  TQPainter paint;
   paint.begin( this );
   drawFrame( &paint );
   paint.end();
@@ -1371,7 +1371,7 @@ void CHexViewWidget::paintFrame( void )
 
 
 
-void CHexViewWidget::drawFrame( QPainter *p )
+void CHexViewWidget::drawFrame( TQPainter *p )
 {
   //
   // 2000-01-10 Espen Sand
@@ -1379,21 +1379,21 @@ void CHexViewWidget::drawFrame( QPainter *p )
   // accepts a drop. The setPalette() function causes quite a bit of flicker
   // in the scrollbars (even when PropagationMode is NoChildren), so I
   // draw the frame manually when it can accept a drop. Note that the
-  // code below is for the frame shape "QFrame::WinPanel|QFrame::Plain"
+  // code below is for the frame shape "TQFrame::WinPanel|TQFrame::Plain"
   //
   if( mDropHighlight == true )
   {
-    qDrawPlainRect( p, frameRect(), QColor("SteelBlue2"), lineWidth() );
+    qDrawPlainRect( p, frameRect(), TQColor("SteelBlue2"), lineWidth() );
   }
   else
   {
-    QFrame::drawFrame(p); // Use standard drawFrame
+    TQFrame::drawFrame(p); // Use standard drawFrame
   }
 }
 
 
 
-void CHexViewWidget::keyPressEvent( QKeyEvent *e )
+void CHexViewWidget::keyPressEvent( TQKeyEvent *e )
 {
   SCursorConfig cc;
   cc.state = e->state();
@@ -1514,7 +1514,7 @@ void CHexViewWidget::keyPressEvent( QKeyEvent *e )
 }
 
 
-void CHexViewWidget::keyReleaseEvent( QKeyEvent *e )
+void CHexViewWidget::keyReleaseEvent( TQKeyEvent *e )
 {
   if( ( e->state() & ShiftButton ) && shiftButtonState() == false )
   {
@@ -1528,7 +1528,7 @@ void CHexViewWidget::keyReleaseEvent( QKeyEvent *e )
 }
 
 
-void CHexViewWidget::mousePressEvent( QMouseEvent *e )
+void CHexViewWidget::mousePressEvent( TQMouseEvent *e )
 {
   //
   // The RMB popup menu is managed by the KContextMenuManager
@@ -1557,7 +1557,7 @@ void CHexViewWidget::mousePressEvent( QMouseEvent *e )
 
 }
 
-void CHexViewWidget::mouseMoveEvent( QMouseEvent *e )
+void CHexViewWidget::mouseMoveEvent( TQMouseEvent *e )
 {
   if( e->state() & LeftButton )
   {
@@ -1569,7 +1569,7 @@ void CHexViewWidget::mouseMoveEvent( QMouseEvent *e )
   }
 }
 
-void CHexViewWidget::mouseReleaseEvent( QMouseEvent *e )
+void CHexViewWidget::mouseReleaseEvent( TQMouseEvent *e )
 {
   //
   // The RMB popup menu is managed by the KContextMenuManager
@@ -1606,18 +1606,18 @@ void CHexViewWidget::mouseReleaseEvent( QMouseEvent *e )
 
 
 
-void CHexViewWidget::wheelEvent( QWheelEvent *e )
+void CHexViewWidget::wheelEvent( TQWheelEvent *e )
 {
   if( mVertScroll->isVisible() == true )
   {
-    QApplication::sendEvent( mVertScroll, e );
+    TQApplication::sendEvent( mVertScroll, e );
   }
 }
 
 
-void CHexViewWidget::dragEnterEvent( QDragEnterEvent *e )
+void CHexViewWidget::dragEnterEvent( TQDragEnterEvent *e )
 {
-  if( QTextDrag::canDecode(e) || CHexDrag::canDecode(e) ||
+  if( TQTextDrag::canDecode(e) || CHexDrag::canDecode(e) ||
       KURLDrag::canDecode(e))
   {
     e->accept();
@@ -1626,17 +1626,17 @@ void CHexViewWidget::dragEnterEvent( QDragEnterEvent *e )
 }
 
 
-void CHexViewWidget::dragLeaveEvent( QDragLeaveEvent * )
+void CHexViewWidget::dragLeaveEvent( TQDragLeaveEvent * )
 {
   setDropHighlight( false );
 }
 
 
-void CHexViewWidget::dragMoveEvent( QDragMoveEvent *e )
+void CHexViewWidget::dragMoveEvent( TQDragMoveEvent *e )
 {
   //
   // Move the cursor if we are dragging (readable) text or binary
-  // data. Note: the QTextDrag::canDecode() will return true if we
+  // data. Note: the TQTextDrag::canDecode() will return true if we
   // are dragging a file so we have to test for KURLDrag::canDecode()
   // first.
   //
@@ -1646,7 +1646,7 @@ void CHexViewWidget::dragMoveEvent( QDragMoveEvent *e )
     return;
   }
 
-  if( QTextDrag::canDecode(e) == true || CHexDrag::canDecode(e) == true )
+  if( TQTextDrag::canDecode(e) == true || CHexDrag::canDecode(e) == true )
   {
     int x = startX() + e->pos().x();
     int y = startY() + e->pos().y();
@@ -1660,9 +1660,9 @@ void CHexViewWidget::dragMoveEvent( QDragMoveEvent *e )
 }
 
 
-void CHexViewWidget::dropEvent( QDropEvent *e )
+void CHexViewWidget::dropEvent( TQDropEvent *e )
 {
-  QMimeSource &m = *(QDropEvent*)e;
+  TQMimeSource &m = *(TQDropEvent*)e;
   setDropHighlight( false );
 
   KURL::List list;
@@ -1679,15 +1679,15 @@ void CHexViewWidget::dropEvent( QDropEvent *e )
     return;
   }
 
-  QByteArray buf;
+  TQByteArray buf;
   if( CHexDrag::decode( &m, buf ) == true )
   {
     insert( buf );
     return;
   }
 
-  QString text;
-  if( QTextDrag::decode( &m, text ) == true )
+  TQString text;
+  if( TQTextDrag::decode( &m, text ) == true )
   {
     bool success = mClipConvert.decode( buf, text );
     if( success == true )
@@ -1700,7 +1700,7 @@ void CHexViewWidget::dropEvent( QDropEvent *e )
 }
 
 
-void CHexViewWidget::showEvent( QShowEvent * )
+void CHexViewWidget::showEvent( TQShowEvent * )
 {
   // Currently we do nothing here.
 }
@@ -1708,7 +1708,7 @@ void CHexViewWidget::showEvent( QShowEvent * )
 
 
 
-void CHexViewWidget::timerEvent( QTimerEvent *e )
+void CHexViewWidget::timerEvent( TQTimerEvent *e )
 {
   if( e->timerId() == mCursorTimerId )
   {
@@ -1740,13 +1740,13 @@ void CHexViewWidget::timerEvent( QTimerEvent *e )
   }
 }
 
-void CHexViewWidget::focusInEvent( QFocusEvent * )
+void CHexViewWidget::focusInEvent( TQFocusEvent * )
 {
   setupCursorTimer();
   paintCursor( CHexBuffer::cursor_curr );
 }
 
-void CHexViewWidget::focusOutEvent( QFocusEvent * )
+void CHexViewWidget::focusOutEvent( TQFocusEvent * )
 {
   if( mCursor.focusMode != SDisplayCursor::ignore )
   {
@@ -1893,14 +1893,14 @@ void CHexViewWidget::redrawLines( uint docLine, int numLine )
   int t = docLine * lineHeight - startY() + frameWidth();
   if( mEditMode == CHexBuffer::EditInsert )
   {
-    QRect r = contentsRect();
+    TQRect r = contentsRect();
     r.setTop( t );
     paintText( contentsRect().intersect( r ), false );
   }
   else
   {
     int h = (numLine + (startY() % lineHeight ? 1 : 0)) * lineHeight;
-    QRect r( contentsRect().left(), t, contentsRect().width(), h );
+    TQRect r( contentsRect().left(), t, contentsRect().width(), h );
     paintText( contentsRect().intersect( r ), false );
   }
 }
@@ -1915,14 +1915,14 @@ void CHexViewWidget::redrawFromOffset( uint offset, bool finishWindow )
   int t = docLine * lineHeight - startY() + frameWidth();
   if( finishWindow == true )
   {
-    QRect r = contentsRect();
+    TQRect r = contentsRect();
     r.setTop( t );
     paintText( contentsRect().intersect( r ), false );
   }
   else
   {
     int h = t + lineHeight;
-    QRect r( contentsRect().left(), t, contentsRect().width(), h );
+    TQRect r( contentsRect().left(), t, contentsRect().width(), h );
     paintText( contentsRect().intersect( r ), false );
   }
 }
@@ -1930,9 +1930,9 @@ void CHexViewWidget::redrawFromOffset( uint offset, bool finishWindow )
 
 
 
-void CHexViewWidget::paintText( const QRect &rect, bool expand )
+void CHexViewWidget::paintText( const TQRect &rect, bool expand )
 {
-  QRect r = rect;
+  TQRect r = rect;
 
   if( expand == true )
   {
@@ -1957,7 +1957,7 @@ void CHexViewWidget::paintText( const QRect &rect, bool expand )
   if( r.right() > maxX ) { r.setRight( maxX ); }
   if( r.bottom() > maxY ) { r.setBottom( maxY ); }
 
-  QPainter paint( &mTextBuffer );
+  TQPainter paint( &mTextBuffer );
   paint.setFont( mHexBuffer->font() );
 
   int lineHeight = mHexBuffer->lineHeight();
@@ -1999,7 +1999,7 @@ void CHexViewWidget::paintText( const QRect &rect, bool expand )
 
 void CHexViewWidget::paintCursor( int cursorMode )
 {
-  QPainter paint;
+  TQPainter paint;
   paint.begin( &mTextBuffer );
   paint.setFont( mHexBuffer->font() );
 
@@ -2233,7 +2233,7 @@ void CHexViewWidget::cursorBackspace( SCursorConfig &/*cc*/ )
 }
 
 
-void CHexViewWidget::cursorInput( QChar c )
+void CHexViewWidget::cursorInput( TQChar c )
 {
   uint cursorLine = mHexBuffer->cursorLine();
   bool success = mHexBuffer->inputAtCursor( c );
@@ -2269,15 +2269,15 @@ void CHexViewWidget::setDropHighlight( bool dropHighlight )
   {
     //
     // 2000-01-10 Espen Sand
-    // Highlight. I have reimplemented QFrame::drawFrame(QPainter *)
+    // Highlight. I have reimplemented TQFrame::drawFrame(TQPainter *)
     // to support a custom frame color. I assume the frame shape is
-    // "QFrame::WinPanel|QFrame::Plain" in that function.
+    // "TQFrame::WinPanel|TQFrame::Plain" in that function.
     //
-    setFrameStyle( QFrame::WinPanel|QFrame::Plain );
+    setFrameStyle( TQFrame::WinPanel|TQFrame::Plain );
   }
   else
   {
-    setFrameStyle( QFrame::WinPanel|QFrame::Sunken );
+    setFrameStyle( TQFrame::WinPanel|TQFrame::Sunken );
   }
 }
 

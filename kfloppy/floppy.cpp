@@ -22,13 +22,13 @@
 */
 
 
-#include <qlayout.h>
-#include <qcheckbox.h>
-#include <qlabel.h>
-#include <qcursor.h>
-#include <qradiobutton.h>
-#include <qbuttongroup.h>
-#include <qwhatsthis.h>
+#include <tqlayout.h>
+#include <tqcheckbox.h>
+#include <tqlabel.h>
+#include <tqcursor.h>
+#include <tqradiobutton.h>
+#include <tqbuttongroup.h>
+#include <tqwhatsthis.h>
 
 #include <kconfig.h>
 
@@ -48,7 +48,7 @@
 #include "floppy.h"
 #include "format.h"
 
-FloppyData::FloppyData(QWidget * parent, const char * name)
+FloppyData::FloppyData(TQWidget * parent, const char * name)
  : KDialog( parent, name ),
 	formatActions(0L), m_canLowLevel(false), m_canZeroOut( false )
 {
@@ -57,17 +57,17 @@ FloppyData::FloppyData(QWidget * parent, const char * name)
 	//abort = false;
 	blocks = 0;
 
-        QVBoxLayout* ml = new QVBoxLayout( this, 10 );
+        TQVBoxLayout* ml = new TQVBoxLayout( this, 10 );
 
-        QHBoxLayout* h1 = new QHBoxLayout( ml );
+        TQHBoxLayout* h1 = new TQHBoxLayout( ml );
 
-        QVBoxLayout* v1 = new QVBoxLayout( h1 );
+        TQVBoxLayout* v1 = new TQVBoxLayout( h1 );
         h1->addSpacing( 5 );
 
-        QGridLayout* g1 = new QGridLayout( v1, 3, 2 );
+        TQGridLayout* g1 = new TQGridLayout( v1, 3, 2 );
 
         deviceComboBox = new KComboBox( false, this, "ComboBox_1" );
-        label1 = new QLabel( deviceComboBox, i18n("Floppy &drive:"), this );
+        label1 = new TQLabel( deviceComboBox, i18n("Floppy &drive:"), this );
         g1->addWidget( label1, 0, 0, AlignLeft );
         g1->addWidget( deviceComboBox, 0, 1 );
 
@@ -77,14 +77,14 @@ FloppyData::FloppyData(QWidget * parent, const char * name)
         deviceComboBox->insertItem(i18n("Primary"));
 	deviceComboBox->insertItem(i18n("Secondary"));
 
-	const QString deviceWhatsThis = i18n("<qt>Select the floppy drive.</qt>");
+	const TQString deviceWhatsThis = i18n("<qt>Select the floppy drive.</qt>");
 	
-	QWhatsThis::add(label1, deviceWhatsThis);
-	QWhatsThis::add(deviceComboBox, deviceWhatsThis);
+	TQWhatsThis::add(label1, deviceWhatsThis);
+	TQWhatsThis::add(deviceComboBox, deviceWhatsThis);
 
         
         densityComboBox = new KComboBox( false, this, "ComboBox_1" );
-        label2 = new QLabel( densityComboBox, i18n("&Size:"), this);
+        label2 = new TQLabel( densityComboBox, i18n("&Size:"), this);
         g1->addWidget( label2, 1, 0, AlignLeft );
         g1->addWidget( densityComboBox, 1, 1 );
 
@@ -96,34 +96,34 @@ FloppyData::FloppyData(QWidget * parent, const char * name)
 	densityComboBox->insertItem(i18n("5.25\" 1.2MB"));
 	densityComboBox->insertItem(i18n("5.25\" 360KB"));
 
-	const QString densityWhatsThis = 
+	const TQString densityWhatsThis = 
 	    i18n("<qt>This allows you to select the "
 	         "floppy disk's size and density.</qt>");
 	
-	QWhatsThis::add(label2, densityWhatsThis);
-	QWhatsThis::add(densityComboBox, densityWhatsThis);
+	TQWhatsThis::add(label2, densityWhatsThis);
+	TQWhatsThis::add(densityComboBox, densityWhatsThis);
 
 
         filesystemComboBox = new KComboBox( false, this, "ComboBox_2" );
-        label3 = new QLabel( filesystemComboBox, i18n("F&ile system:"), this);
+        label3 = new TQLabel( filesystemComboBox, i18n("F&ile system:"), this);
         g1->addWidget( label3, 2, 0, AlignLeft );
         g1->addWidget( filesystemComboBox, 2, 1 );
 	g1->setColStretch(1, 1);
 
 #if defined(ANY_LINUX)
-        QWhatsThis::add( label3,
+        TQWhatsThis::add( label3,
             i18n( "Linux", "KFloppy supports three file formats under Linux: MS-DOS, Ext2, and Minix" ) );
 #elif defined(ANY_BSD)
-        QWhatsThis::add( label3,
+        TQWhatsThis::add( label3,
             i18n( "BSD", "KFloppy supports three file formats under BSD: MS-DOS, UFS, and Ext2" ) );
 #endif
         // If you modify the user visible string, change them also (far) below
 
-        QString userFeedBack;
+        TQString userFeedBack;
         uint numFileSystems = 0;
 
 #if defined(ANY_LINUX)
-        QWhatsThis::add( filesystemComboBox,
+        TQWhatsThis::add( filesystemComboBox,
             i18n( "Linux", "KFloppy supports three file formats under Linux: MS-DOS, Ext2, and Minix" ) );
         if (FATFilesystem::runtimeCheck()) {
             filesystemComboBox->insertItem(i18n("DOS"));
@@ -152,7 +152,7 @@ FloppyData::FloppyData(QWidget * parent, const char * name)
             userFeedBack += i18n( "Linux", "Program mkfs.minix <b>not found</b>. Minix formatting <b>not available</b>" );
         }
 #elif defined(ANY_BSD)
-        QWhatsThis::add( filesystemComboBox,
+        TQWhatsThis::add( filesystemComboBox,
             i18n( "BSD", "KFloppy supports two file formats under BSD: MS-DOS and UFS" ) );
         if (FATFilesystem::runtimeCheck()) {
             filesystemComboBox->insertItem(i18n("DOS"));
@@ -184,20 +184,20 @@ FloppyData::FloppyData(QWidget * parent, const char * name)
 
         v1->addSpacing( 10 );
 
-        buttongroup = new QButtonGroup( 3, Qt::Vertical, i18n("&Formatting"), this, "ButtonGroup_1" );
+        buttongroup = new TQButtonGroup( 3, Qt::Vertical, i18n("&Formatting"), this, "ButtonGroup_1" );
 
 
-        quick = new QRadioButton( i18n( "Q&uick format" ), buttongroup, "RadioButton_2" );
-        QWhatsThis::add( quick,
+        quick = new TQRadioButton( i18n( "Q&uick format" ), buttongroup, "RadioButton_2" );
+        TQWhatsThis::add( quick,
             i18n("<qt>Quick format is only a high-level format:"
                 " it creates only a file system.</qt>") );
 
-	zerooutformat = new QRadioButton( i18n( "&Zero out and quick format"), buttongroup, "RadioButton_ZeroOutFormat" );
-        QWhatsThis::add( zerooutformat,
+	zerooutformat = new TQRadioButton( i18n( "&Zero out and quick format"), buttongroup, "RadioButton_ZeroOutFormat" );
+        TQWhatsThis::add( zerooutformat,
             i18n("<qt>This first erases the floppy by writing zeros and then it creates the file system.</qt>") );
 	
-        fullformat = new QRadioButton( i18n( "Fu&ll format"), buttongroup, "RadioButton_3" );
-        QWhatsThis::add( fullformat,
+        fullformat = new TQRadioButton( i18n( "Fu&ll format"), buttongroup, "RadioButton_3" );
+        TQWhatsThis::add( fullformat,
             i18n("Full format is a low-level and high-level format. It erases everything on the disk.") );
 
         v1->addWidget( buttongroup );
@@ -226,23 +226,23 @@ FloppyData::FloppyData(QWidget * parent, const char * name)
             userFeedBack += i18n( "Program dd <b>not found</b>. Zeroing-out <b>disabled</b>." );
         }
         
-	verifylabel = new QCheckBox( this, "CheckBox_Integrity" );
+	verifylabel = new TQCheckBox( this, "CheckBox_Integrity" );
 	verifylabel->setText(i18n( "&Verify integrity" ));
 	verifylabel->setChecked(true);
 	v1->addWidget( verifylabel, AlignLeft );
-        QWhatsThis::add( verifylabel,
+        TQWhatsThis::add( verifylabel,
             i18n("<qt>Check this if you want the floppy disk to be checked after formatting."
             " Please note that the floppy will be checked twice if you have selected full formatting.</qt>") );
 
-	labellabel = new QCheckBox( this, "Checkbox_Label" );
+	labellabel = new TQCheckBox( this, "Checkbox_Label" );
 	labellabel->setText(i18n( "Volume la&bel:") );
 	labellabel->setChecked(true);
         v1->addWidget( labellabel, AlignLeft );
-        QWhatsThis::add( labellabel,
+        TQWhatsThis::add( labellabel,
             i18n("<qt>Check this if you want a volume label for your floppy."
             " Please note that Minix does not support labels at all.</qt>") );
 
-        QHBoxLayout* h2 = new QHBoxLayout( v1 );
+        TQHBoxLayout* h2 = new TQHBoxLayout( v1 );
         h2->addSpacing( 20 );
 
 	lineedit = new KLineEdit( this, "Lineedit" );
@@ -250,23 +250,23 @@ FloppyData::FloppyData(QWidget * parent, const char * name)
 	lineedit->setText(i18n( "Volume label, maximal 11 characters", "KDE Floppy" ) );
 	lineedit->setMaxLength(11);
         h2->addWidget( lineedit, AlignRight );
-        QWhatsThis::add( lineedit,
+        TQWhatsThis::add( lineedit,
             i18n("<qt>This is for the volume label."
             " Due to a limitation of MS-DOS the label can only be 11 characters long."
             " Please note that Minix does not support labels, whatever you enter here.</qt>") );
 
-	connect(labellabel,SIGNAL(toggled(bool)),lineedit,SLOT(setEnabled(bool)));
+	connect(labellabel,TQT_SIGNAL(toggled(bool)),lineedit,TQT_SLOT(setEnabled(bool)));
 
-	QVBoxLayout* v3 = new QVBoxLayout( h1 );
+	TQVBoxLayout* v3 = new TQVBoxLayout( h1 );
 
 	formatbutton = new KPushButton( this, "PushButton_3" );
 	formatbutton->setText(i18n( "&Format") );
 	formatbutton->setAutoRepeat( false );
         if (!numFileSystems)
             formatbutton->setDisabled(false); // We have not any helper program for creating any file system
-	connect(formatbutton,SIGNAL(clicked()),this,SLOT(format()));
+	connect(formatbutton,TQT_SIGNAL(clicked()),this,TQT_SLOT(format()));
         v3->addWidget( formatbutton );
-        QWhatsThis::add( formatbutton,
+        TQWhatsThis::add( formatbutton,
             i18n("<qt>Click here to start formatting.</qt>") );
 
         v3->addStretch( 1 );
@@ -281,18 +281,18 @@ FloppyData::FloppyData(QWidget * parent, const char * name)
 
 	quitbutton = new KPushButton( KStdGuiItem::quit(), this );
 	quitbutton->setAutoRepeat( false );
-	connect(quitbutton,SIGNAL(clicked()),this,SLOT(quit()));
+	connect(quitbutton,TQT_SIGNAL(clicked()),this,TQT_SLOT(quit()));
 	 v3->addWidget( quitbutton );
 
         ml->addSpacing( 10 );
 
-	frame = new QLabel( this, "NewsWindow" );
-	frame->setFrameStyle(QFrame::Panel | QFrame::Sunken);
+	frame = new TQLabel( this, "NewsWindow" );
+	frame->setFrameStyle(TQFrame::Panel | TQFrame::Sunken);
 	frame->setAlignment(WordBreak|ExpandTabs);
-        QWhatsThis::add( frame,
+        TQWhatsThis::add( frame,
             i18n("<qt>This is the status window, where error messages are displayed.</qt>") );
 
-        QString frameText( userFeedBack );
+        TQString frameText( userFeedBack );
         frameText.prepend( "<qt>" );
         frameText.append( "</qt>" );
         frame->setText( frameText );
@@ -303,14 +303,14 @@ FloppyData::FloppyData(QWidget * parent, const char * name)
         progress->setDisabled( true );
         ml->addWidget( progress );
 
-	QWhatsThis::add(progress,
+	TQWhatsThis::add(progress,
 			i18n("<qt>Shows progress of the format.</qt>"));
 
 	readSettings();
 	setWidgets();
 
     if (!numFileSystems) {
-        QString errorMessage;
+        TQString errorMessage;
         errorMessage += "<qt>";
         errorMessage += i18n("KFloppy cannot find any of the needed programs for creating file systems; please check your installation.<br><br>Log:");
         errorMessage += "<br>";
@@ -326,12 +326,12 @@ FloppyData::~FloppyData()
   delete formatActions;
 }
 
-void FloppyData::closeEvent(QCloseEvent*)
+void FloppyData::closeEvent(TQCloseEvent*)
 {
   quit();
 }
 
-void FloppyData::keyPressEvent(QKeyEvent *e)
+void FloppyData::keyPressEvent(TQKeyEvent *e)
 {
 	switch(e->key()) {
 	case Qt::Key_F1:
@@ -388,21 +388,21 @@ bool FloppyData::findDevice()
   return true;
 }
 
-bool FloppyData::setInitialDevice(const QString& dev)
+bool FloppyData::setInitialDevice(const TQString& dev)
 {
 
-  QString newDevice = dev;
+  TQString newDevice = dev;
 
   KURL url( newDevice );
   if( url.isValid() && ( url.protocol() == "media" || url.protocol() == "system" ) ) {
-    QString name = url.fileName();
+    TQString name = url.fileName();
 
     DCOPRef mediamanager( "kded", "mediamanager" );
-    DCOPReply reply = mediamanager.call("properties(QString)", name);
+    DCOPReply reply = mediamanager.call("properties(TQString)", name);
     if (!reply.isValid()) {
       kdError() << "Invalid reply from mediamanager" << endl;
     } else {
-      QStringList properties = reply;
+      TQStringList properties = reply;
       newDevice = properties[5];
     }
   }
@@ -433,7 +433,7 @@ void FloppyData::setEnabled(bool b)
   if (b)
 	unsetCursor();
   else
-	setCursor(QCursor(WaitCursor));
+	setCursor(TQCursor(WaitCursor));
   label1->setEnabled(b);
   deviceComboBox->setEnabled(b);
   label2->setEnabled(b);
@@ -481,7 +481,7 @@ void FloppyData::format(){
 
   frame->clear();
 
-    const QString currentComboBoxDevice (  deviceComboBox->currentText() );
+    const TQString currentComboBoxDevice (  deviceComboBox->currentText() );
     const bool userDevice = ( currentComboBoxDevice.startsWith ("/dev/") );
 
 #ifdef ANY_BSD
@@ -524,7 +524,7 @@ void FloppyData::format(){
   setEnabled(false);
 
         // Erase text box
-        frame->setText( QString::null );
+        frame->setText( TQString::null );
 
     if ( !userDevice )
     {
@@ -538,10 +538,10 @@ void FloppyData::format(){
 	if (formatActions) delete formatActions;
 	formatActions = new KFActionQueue(this);
 
-	connect(formatActions,SIGNAL(status(const QString &,int)),
-		this,SLOT(formatStatus(const QString &,int)));
-	connect(formatActions,SIGNAL(done(KFAction *,bool)),
-		this,SLOT(reset()));
+	connect(formatActions,TQT_SIGNAL(status(const TQString &,int)),
+		this,TQT_SLOT(formatStatus(const TQString &,int)));
+	connect(formatActions,TQT_SIGNAL(done(KFAction *,bool)),
+		this,TQT_SLOT(reset()));
 
 	if ( quick->isChecked())
 	{
@@ -642,12 +642,12 @@ void FloppyData::format(){
 	formatActions->exec();
 }
 
-void FloppyData::formatStatus(const QString &s,int p)
+void FloppyData::formatStatus(const TQString &s,int p)
 {
     kdDebug(2002) << "FloppyData::formatStatus: " << s << " : "  << p << endl;
 	if (!s.isEmpty())
         {
-            const QString oldText ( frame->text() );
+            const TQString oldText ( frame->text() );
             if ( oldText.isEmpty() )
             {
                 frame->setText( s );

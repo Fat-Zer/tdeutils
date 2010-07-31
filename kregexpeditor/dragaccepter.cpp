@@ -18,7 +18,7 @@
 #include "dragaccepter.h"
 #include "concwidget.h"
 
-#include <qpainter.h>
+#include <tqpainter.h>
 
 DragAccepter::DragAccepter(RegExpEditorWindow* editorWindow, RegExpWidget *parent,
                            const char *name)
@@ -28,14 +28,14 @@ DragAccepter::DragAccepter(RegExpEditorWindow* editorWindow, RegExpWidget *paren
   setAcceptDrops(TRUE);
 }
 
-QSize DragAccepter::sizeHint() const
+TQSize DragAccepter::sizeHint() const
 {
-  return QSize(10,10);
+  return TQSize(10,10);
 }
 
-void DragAccepter::paintEvent(QPaintEvent *e)
+void DragAccepter::paintEvent(TQPaintEvent *e)
 {
-  QPainter painter(this);
+  TQPainter painter(this);
   drawPossibleSelection( painter, size() );
 
   if ( _drawLine )
@@ -44,7 +44,7 @@ void DragAccepter::paintEvent(QPaintEvent *e)
   RegExpWidget::paintEvent(e);
 }
 
-void DragAccepter::mousePressEvent ( QMouseEvent* event )
+void DragAccepter::mousePressEvent ( TQMouseEvent* event )
 {
   if ( event->button() == RightButton ) {
     _editorWindow->showRMBMenu( _editorWindow->hasSelection() );
@@ -54,7 +54,7 @@ void DragAccepter::mousePressEvent ( QMouseEvent* event )
   }
 }
 
-void DragAccepter::mouseReleaseEvent( QMouseEvent* event )
+void DragAccepter::mouseReleaseEvent( TQMouseEvent* event )
 {
   if ( _editorWindow->isPasteing() && event->button() == LeftButton ) {
     RegExp* regexp = _editorWindow->pasteData();
@@ -82,7 +82,7 @@ void DragAccepter::mouseReleaseEvent( QMouseEvent* event )
     }
     else {
       RegExpWidget *child = WidgetFactory::createWidget( _editorWindow,
-                                                         dynamic_cast<QWidget*>(parent()),
+                                                         dynamic_cast<TQWidget*>(parent()),
                                                          _editorWindow->insertType() );
       if ( child ) {
         RegExpWidget *w = dynamic_cast<RegExpWidget*>(parent());
@@ -98,13 +98,13 @@ void DragAccepter::mouseReleaseEvent( QMouseEvent* event )
 }
 
 
-void DragAccepter::dragEnterEvent(QDragEnterEvent *event)
+void DragAccepter::dragEnterEvent(TQDragEnterEvent *event)
 {
   bool selfDrag = (  event->source() && event->source()->topLevelWidget() == topLevelWidget() && _isSelected );
   event->accept(RegExpWidgetDrag::canDecode( event ) && !selfDrag );
 }
 
-void DragAccepter::dropEvent(QDropEvent *event)
+void DragAccepter::dropEvent(TQDropEvent *event)
 {
   // The widget will be reparent afterward or part of it will, so no need to give
   // it a parent here.
@@ -119,7 +119,7 @@ void DragAccepter::dropEvent(QDropEvent *event)
   RegExpWidget *rew = dynamic_cast<RegExpWidget*>(parent());
   if (rew)
     rew->addNewConcChild(this, elm);
-  QWidget *w = dynamic_cast<QWidget*>(parent());
+  TQWidget *w = dynamic_cast<TQWidget*>(parent());
   if (w)
     w->update();
   _editorWindow->updateContent( this );

@@ -17,7 +17,7 @@
 
 
 // qt specific
-#include <qevent.h>
+#include <tqevent.h>
 // lib specific
 #include "kdatabuffer.h"
 #include "kbufferranges.h"
@@ -34,7 +34,7 @@ KNavigator::KNavigator( KHexEdit* HE, KController *P )
 {
 }
 
-bool KNavigator::handleKeyPress( QKeyEvent *KeyEvent )
+bool KNavigator::handleKeyPress( TQKeyEvent *KeyEvent )
 {
   bool KeyUsed = true;
 

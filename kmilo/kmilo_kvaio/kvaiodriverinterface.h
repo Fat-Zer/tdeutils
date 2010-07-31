@@ -18,7 +18,7 @@
 #ifndef KVAIO_DRIVERINTERFACE_H
 #define KVAIO_DRIVERINTERFACE_H
 
-#include <qobject.h>
+#include <tqobject.h>
 
 class QTimer;
 
@@ -35,7 +35,7 @@ class KVaioDriverInterface : public QObject
 {
     Q_OBJECT
 public:
-    KVaioDriverInterface(QObject *parent=0);
+    KVaioDriverInterface(TQObject *parent=0);
     bool connectToDriver(bool listen = true);
     void disconnectFromDriver();
     /** Return the current display brightness, a value between 0 and
@@ -51,7 +51,7 @@ public slots:
 protected:
     int mFd;
     fd_set mRfds;
-    QSocketNotifier *mNotifier;
+    TQSocketNotifier *mNotifier;
 signals:
     void vaioEvent(int);
     // void brightnessChanged(int);

@@ -25,12 +25,12 @@
 #ifndef __PCMCIACONFIG_H__
 #define __PCMCIACONFIG_H__
 
-#include <qdialog.h>
-#include <qpushbutton.h>
-#include <qlabel.h>
-#include <qlcdnumber.h>
-#include <qradiobutton.h>
-#include <qbuttongroup.h>
+#include <tqdialog.h>
+#include <tqpushbutton.h>
+#include <tqlabel.h>
+#include <tqlcdnumber.h>
+#include <tqradiobutton.h>
+#include <tqbuttongroup.h>
 
 #include <kapplication.h>
 #include <knuminput.h>
@@ -42,13 +42,13 @@ class PcmciaConfig : public KCModule
 {
   Q_OBJECT
 public:
-  PcmciaConfig( QWidget *parent=0, const char* name=0);
+  PcmciaConfig( TQWidget *parent=0, const char* name=0);
 
   void save( void );
   void load();
   void defaults();
 
-  virtual QString quickHelp() const;
+  virtual TQString quickHelp() const;
 
 private slots:
 
@@ -58,10 +58,10 @@ private slots:
 private:
   void GetSettings( void );
 
-  QLabel *label0;
-  QLabel *label1;
-  QLabel *label0_text;
-  QLabel *label1_text;
+  TQLabel *label0;
+  TQLabel *label1;
+  TQLabel *label0_text;
+  TQLabel *label1_text;
                                
 
 };

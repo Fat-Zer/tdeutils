@@ -21,9 +21,9 @@
 #include "kmultiformlistboxfactory.h"
 #include "kmultiformlistbox-shower.h"
 #include "kmultiformlistboxentry.h"
-#include <qptrlist.h>
-#include <qlayout.h>
-#include <qscrollview.h>
+#include <tqptrlist.h>
+#include <tqlayout.h>
+#include <tqscrollview.h>
 
 #ifdef QT_ONLY
   #include "compat.h"
@@ -34,8 +34,8 @@
 class QDataStream;
 
 
-typedef QPtrList<KMultiFormListBoxEntry> KMultiFormListBoxEntryList ;
-typedef QPtrList<QWidget> WidgetList;
+typedef TQPtrList<KMultiFormListBoxEntry> KMultiFormListBoxEntryList ;
+typedef TQPtrList<TQWidget> WidgetList;
 class KMultiFormListBoxMultiVisible;
 
 /**
@@ -60,7 +60,7 @@ class KMultiFormListBoxMultiVisible;
 
  @author Jesper Kjær Pedersen <blackie@kde.org>
  **/
-class KMultiFormListBox : public QWidget {
+class KMultiFormListBox : public TQWidget {
 
 Q_OBJECT
 
@@ -75,8 +75,8 @@ public:
    **/
   KMultiFormListBox(KMultiFormListBoxFactory *factory,
                     KMultiFormListBoxType tp=Windowed,
-										QWidget *parent = 0, bool showUpDownButtons = true,
-										bool showHelpButton = true, QString addButtonText = i18n("Add"),
+										TQWidget *parent = 0, bool showUpDownButtons = true,
+										bool showHelpButton = true, TQString addButtonText = i18n("Add"),
 										const char *name = 0);
 
   /**
@@ -91,10 +91,10 @@ public:
   void append(KMultiFormListBoxEntry *);
 
   /** write data out to stream */
-  void toStream( QDataStream& stream ) const;
+  void toStream( TQDataStream& stream ) const;
 
   /** reads data in from stream */
-  void fromStream( QDataStream& stream );
+  void fromStream( TQDataStream& stream );
 
 public slots:
 

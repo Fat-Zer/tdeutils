@@ -40,33 +40,33 @@
 #include <kprocess.h>
 
 // other Qt headers:
-#include <qlayout.h>
-#include <qlabel.h>
-#include <qcheckbox.h>
-#include <qhbox.h>
-#include <qvgroupbox.h>
-#include <qhgroupbox.h>
-#include <qgrid.h>
-#include <qpushbutton.h>
-#include <qtooltip.h>
+#include <tqlayout.h>
+#include <tqlabel.h>
+#include <tqcheckbox.h>
+#include <tqhbox.h>
+#include <tqvgroupbox.h>
+#include <tqhgroupbox.h>
+#include <tqgrid.h>
+#include <tqpushbutton.h>
+#include <tqtooltip.h>
 extern void wake_laptop_daemon();
 
-AcpiConfig::AcpiConfig (QWidget * parent, const char *name)
+AcpiConfig::AcpiConfig (TQWidget * parent, const char *name)
   : KCModule(parent, name)
 {
     KGlobal::locale()->insertCatalogue("klaptopdaemon"); // For translation of klaptopdaemon messages
 
     config =  new KConfig("kcmlaptoprc");
 
-    QVBoxLayout *top_layout = new QVBoxLayout( this, KDialog::marginHint(),
+    TQVBoxLayout *top_layout = new TQVBoxLayout( this, KDialog::marginHint(),
 					       KDialog::spacingHint() );
 
-    QLabel *tmp_label = new QLabel( i18n("This panel provides information about your system's ACPI implementation "
+    TQLabel *tmp_label = new TQLabel( i18n("This panel provides information about your system's ACPI implementation "
 					 "and lets you have access to some of the extra features provided by ACPI"), this );
     tmp_label->setAlignment( Qt::WordBreak );
     top_layout->addWidget( tmp_label );
 
-    tmp_label = new QLabel( i18n("NOTE: the Linux ACPI implementation is still a 'work in progress'. "
+    tmp_label = new TQLabel( i18n("NOTE: the Linux ACPI implementation is still a 'work in progress'. "
 				"Some features, in particular suspend and hibernate are not yet available "
 				"under 2.4 - and under 2.5 some particular ACPI implementations are still "
 				"unstable, these check boxes let you only enable the things that work reliably. "
@@ -76,37 +76,37 @@ AcpiConfig::AcpiConfig (QWidget * parent, const char *name)
     tmp_label->setAlignment( Qt::WordBreak );
     top_layout->addWidget( tmp_label );
 
-    tmp_label = new QLabel( i18n("Some changes made on this page may require you to quit the laptop panel "
+    tmp_label = new TQLabel( i18n("Some changes made on this page may require you to quit the laptop panel "
 				"and start it again to take effect"), this );
     tmp_label->setAlignment( Qt::WordBreak );
     top_layout->addWidget( tmp_label );
 
     bool can_enable = laptop_portable::has_acpi(1);	// is helper ready
-    enableStandby = new QCheckBox( i18n("Enable standby"), this );
+    enableStandby = new TQCheckBox( i18n("Enable standby"), this );
     top_layout->addWidget( enableStandby );
-    QToolTip::add( enableStandby, i18n( "If checked this box enables transitions to the 'standby' state - a temporary powered down state" ) );
+    TQToolTip::add( enableStandby, i18n( "If checked this box enables transitions to the 'standby' state - a temporary powered down state" ) );
     enableStandby->setEnabled(can_enable);
-    connect( enableStandby, SIGNAL(clicked()), this, SLOT(configChanged()) );
+    connect( enableStandby, TQT_SIGNAL(clicked()), this, TQT_SLOT(configChanged()) );
 
-    enableSuspend = new QCheckBox( i18n("Enable &suspend"), this );
+    enableSuspend = new TQCheckBox( i18n("Enable &suspend"), this );
     top_layout->addWidget( enableSuspend );
-    QToolTip::add( enableSuspend, i18n( "If checked this box enables transitions to the 'suspend' state - a semi-powered down state, sometimes called 'suspend-to-ram'" ) );
+    TQToolTip::add( enableSuspend, i18n( "If checked this box enables transitions to the 'suspend' state - a semi-powered down state, sometimes called 'suspend-to-ram'" ) );
     enableSuspend->setEnabled(can_enable);
-    connect( enableSuspend, SIGNAL(clicked()), this, SLOT(configChanged()) );
+    connect( enableSuspend, TQT_SIGNAL(clicked()), this, TQT_SLOT(configChanged()) );
 
-    QHBoxLayout *ll = new QHBoxLayout();
-    enableHibernate = new QCheckBox( i18n("Enable &hibernate"), this );
+    TQHBoxLayout *ll = new TQHBoxLayout();
+    enableHibernate = new TQCheckBox( i18n("Enable &hibernate"), this );
     ll->addWidget( enableHibernate );
-    QToolTip::add( enableHibernate, i18n( "If checked this box enables transitions to the 'hibernate' state - a powered down state, sometimes called 'suspend-to-disk'" ) );
+    TQToolTip::add( enableHibernate, i18n( "If checked this box enables transitions to the 'hibernate' state - a powered down state, sometimes called 'suspend-to-disk'" ) );
     enableHibernate->setEnabled(can_enable);
-    connect( enableHibernate, SIGNAL(clicked()), this, SLOT(configChanged()) );
+    connect( enableHibernate, TQT_SIGNAL(clicked()), this, TQT_SLOT(configChanged()) );
     if (laptop_portable::has_software_suspend()) {
 	ll->addStretch(1);
-    	enableSoftwareSuspendHibernate = new QCheckBox( i18n("Use software suspend for hibernate"), this );
+    	enableSoftwareSuspendHibernate = new TQCheckBox( i18n("Use software suspend for hibernate"), this );
     	ll->addWidget( enableSoftwareSuspendHibernate );
-    	QToolTip::add( enableSoftwareSuspendHibernate, i18n( "If checked this box enables transitions to the 'hibernate' state - a powered down state, sometimes called 'suspend-to-disk' - the kernel 'Software Suspend' mechanism will be used instead of using ACPI directly" ) );
+    	TQToolTip::add( enableSoftwareSuspendHibernate, i18n( "If checked this box enables transitions to the 'hibernate' state - a powered down state, sometimes called 'suspend-to-disk' - the kernel 'Software Suspend' mechanism will be used instead of using ACPI directly" ) );
     	enableSoftwareSuspendHibernate->setEnabled(laptop_portable::has_software_suspend(2));
-    	connect( enableSoftwareSuspendHibernate, SIGNAL(clicked()), this, SLOT(configChanged()) );
+    	connect( enableSoftwareSuspendHibernate, TQT_SIGNAL(clicked()), this, TQT_SLOT(configChanged()) );
     } else {
         enableSoftwareSuspendHibernate = 0;
     }
@@ -114,19 +114,19 @@ AcpiConfig::AcpiConfig (QWidget * parent, const char *name)
 
     top_layout->addLayout(ll);
 
-    enablePerformance = new QCheckBox( i18n("Enable &performance profiles"), this );
+    enablePerformance = new TQCheckBox( i18n("Enable &performance profiles"), this );
     top_layout->addWidget( enablePerformance );
-    QToolTip::add( enablePerformance, i18n( "If checked this box enables access to ACPI performance profiles - usually OK in 2.4 and later" ) );
+    TQToolTip::add( enablePerformance, i18n( "If checked this box enables access to ACPI performance profiles - usually OK in 2.4 and later" ) );
     enablePerformance->setEnabled(can_enable);
-    connect( enablePerformance, SIGNAL(clicked()), this, SLOT(configChanged()) );
+    connect( enablePerformance, TQT_SIGNAL(clicked()), this, TQT_SLOT(configChanged()) );
 
-    enableThrottle = new QCheckBox( i18n("Enable &CPU throttling"), this );
+    enableThrottle = new TQCheckBox( i18n("Enable &CPU throttling"), this );
     top_layout->addWidget( enableThrottle );
-    QToolTip::add( enableThrottle, i18n( "If checked this box enables access to ACPI throttle speed changes - usually OK in 2.4 and later" ) );
+    TQToolTip::add( enableThrottle, i18n( "If checked this box enables access to ACPI throttle speed changes - usually OK in 2.4 and later" ) );
     enableThrottle->setEnabled(can_enable);
-    connect( enableThrottle, SIGNAL(clicked()), this, SLOT(configChanged()) );
+    connect( enableThrottle, TQT_SIGNAL(clicked()), this, TQT_SLOT(configChanged()) );
 
-    tmp_label = new QLabel(i18n("If the above boxes are disabled then there is no 'helper' "
+    tmp_label = new TQLabel(i18n("If the above boxes are disabled then there is no 'helper' "
 				"application set up to help change ACPI states, there are two "
 				"ways you can enable this application, either make the file "
 				"/proc/acpi/sleep writeable by anyone every time your system boots "
@@ -134,10 +134,10 @@ AcpiConfig::AcpiConfig (QWidget * parent, const char *name)
 				"set-uid root"), this );
     tmp_label->setAlignment( Qt::WordBreak );
     top_layout->addWidget( tmp_label );
-    ll = new QHBoxLayout();
-    QPushButton *setupButton = new QPushButton(i18n("Setup Helper Application"), this);
-    connect( setupButton, SIGNAL(clicked()), this, SLOT(setupHelper()) );
-    QToolTip::add( setupButton, i18n( "This button can be used to enable the ACPI helper application" ) );
+    ll = new TQHBoxLayout();
+    TQPushButton *setupButton = new TQPushButton(i18n("Setup Helper Application"), this);
+    connect( setupButton, TQT_SIGNAL(clicked()), this, TQT_SLOT(setupHelper()) );
+    TQToolTip::add( setupButton, i18n( "This button can be used to enable the ACPI helper application" ) );
     ll->addStretch(2);
     ll->addWidget(setupButton);
     ll->addStretch(8);
@@ -145,7 +145,7 @@ AcpiConfig::AcpiConfig (QWidget * parent, const char *name)
 
 
     top_layout->addStretch(1);
-    top_layout->addWidget( new QLabel( i18n("Version: %1").arg(LAPTOP_VERSION), this), 0, Qt::AlignRight );
+    top_layout->addWidget( new TQLabel( i18n("Version: %1").arg(LAPTOP_VERSION), this), 0, Qt::AlignRight );
 
 
     load();      
@@ -158,15 +158,15 @@ AcpiConfig::~AcpiConfig()
 
 #include "checkcrc.h"
 #include "crcresult.h"
-#include <qfile.h>
+#include <tqfile.h>
 
 void AcpiConfig::setupHelper()
 {
 	unsigned long len, crc;
-	QString helper = KStandardDirs::findExe("klaptop_acpi_helper");
-	checkcrc(QFile::encodeName(helper), len, crc);
+	TQString helper = KStandardDirs::findExe("klaptop_acpi_helper");
+	checkcrc(TQFile::encodeName(helper), len, crc);
 
-	QString kdesu = KStandardDirs::findExe("kdesu");
+	TQString kdesu = KStandardDirs::findExe("kdesu");
 	if (!kdesu.isEmpty()) {
 		int rc = KMessageBox::warningContinueCancel(0,
 				i18n("You will need to supply a root password "
@@ -263,7 +263,7 @@ void AcpiConfig::configChanged()
 }
 
 
-QString AcpiConfig::quickHelp() const
+TQString AcpiConfig::quickHelp() const
 {
   return i18n("<h1>ACPI Setup</h1>This module allows you to configure ACPI for your system");
 }

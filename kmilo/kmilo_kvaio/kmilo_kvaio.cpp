@@ -26,8 +26,8 @@
 #include "kvaio.h"
 #include "kmilointerface.h"
 
-KMiloKVaio::KMiloKVaio(QObject *parent, const char *name,
-		       const QStringList& args)
+KMiloKVaio::KMiloKVaio(TQObject *parent, const char *name,
+		       const TQStringList& args)
     : Monitor(parent, name, args),
       m_kvaio(0)
 {

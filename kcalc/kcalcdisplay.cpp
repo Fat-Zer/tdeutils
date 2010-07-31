@@ -27,9 +27,9 @@
 #include <stdlib.h>
 #include <ctype.h>
 
-#include <qclipboard.h>
-#include <qpainter.h>
-#include <qregexp.h>
+#include <tqclipboard.h>
+#include <tqpainter.h>
+#include <tqregexp.h>
 
 #include <kglobal.h>
 #include <klocale.h>
@@ -39,22 +39,22 @@
 #include "kcalcdisplay.moc"
 
 
-KCalcDisplay::KCalcDisplay(QWidget *parent, const char *name)
-  :QLabel(parent,name), _beep(false), _groupdigits(false), _button(0), _lit(false),
+KCalcDisplay::KCalcDisplay(TQWidget *parent, const char *name)
+  :TQLabel(parent,name), _beep(false), _groupdigits(false), _button(0), _lit(false),
    _num_base(NB_DECIMAL), _precision(9),
    _fixed_precision(-1), _display_amount(0),
-   selection_timer(new QTimer)
+   selection_timer(new TQTimer)
 {
-	setFrameStyle(QFrame::WinPanel | QFrame::Sunken);
+	setFrameStyle(TQFrame::WinPanel | TQFrame::Sunken);
 	setAlignment(AlignRight | AlignVCenter);
 	setFocus();
-	setFocusPolicy(QWidget::StrongFocus);
-	setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed, false);
+	setFocusPolicy(TQWidget::StrongFocus);
+	setSizePolicy(TQSizePolicy::Expanding, TQSizePolicy::Fixed, false);
 
-	connect(this, SIGNAL(clicked()), this, SLOT(slotDisplaySelected()));
+	connect(this, TQT_SIGNAL(clicked()), this, TQT_SLOT(slotDisplaySelected()));
 
-	connect(selection_timer, SIGNAL(timeout()),
-		this, SLOT(slotSelectionTimedOut()));
+	connect(selection_timer, TQT_SIGNAL(timeout()),
+		this, TQT_SLOT(slotSelectionTimedOut()));
 
 	sendEvent(EventReset);
 }
@@ -71,7 +71,7 @@ bool KCalcDisplay::sendEvent(Event const event)
 	case EventReset:
 		_display_amount = 0;
 		_str_int = "0";
-		_str_int_exp = QString::null;
+		_str_int_exp = TQString::null;
 
 		_eestate = false;
 		_period = false;
@@ -102,16 +102,16 @@ void KCalcDisplay::slotCut(void)
 
 void KCalcDisplay::slotCopy(void)
 {
-	QString txt = QLabel::text();
+	TQString txt = TQLabel::text();
 	if (_num_base == NB_HEX)
 		txt.prepend( "0x" );
-	(QApplication::clipboard())->setText(txt, QClipboard::Clipboard);
-	(QApplication::clipboard())->setText(txt, QClipboard::Selection);
+	(TQApplication::clipboard())->setText(txt, QClipboard::Clipboard);
+	(TQApplication::clipboard())->setText(txt, QClipboard::Selection);
 }
 
 void KCalcDisplay::slotPaste(bool bClipboard)
 {
-	QString tmp_str = (QApplication::clipboard())->text(bClipboard ? QClipboard::Clipboard : QClipboard::Selection);
+	TQString tmp_str = (TQApplication::clipboard())->text(bClipboard ? QClipboard::Clipboard : QClipboard::Selection);
 
 	if (tmp_str.isNull())
 	{
@@ -173,14 +173,14 @@ void KCalcDisplay::slotSelectionTimedOut(void)
 
 void KCalcDisplay::invertColors()
 {
-	QColor tmp_col(paletteBackgroundColor());
+	TQColor tmp_col(paletteBackgroundColor());
 	setPaletteBackgroundColor(paletteForegroundColor());
 	setPaletteForegroundColor(tmp_col);
 }
 
 
 
-void KCalcDisplay::mousePressEvent(QMouseEvent *e)
+void KCalcDisplay::mousePressEvent(TQMouseEvent *e)
 {
 	if(e->button() == LeftButton) {
 		_lit = !_lit;
@@ -223,10 +223,10 @@ KNumber const & KCalcDisplay::getAmount(void) const
 
 bool KCalcDisplay::setAmount(KNumber const & new_amount)
 {
-	QString display_str;
+	TQString display_str;
 
 	_str_int = "0";
-	_str_int_exp = QString::null;
+	_str_int_exp = TQString::null;
 	_period = false;
 	_neg_sign = false;
 	_eestate = false;
@@ -236,7 +236,7 @@ bool KCalcDisplay::setAmount(KNumber const & new_amount)
 		_display_amount = new_amount.integerPart();
 		unsigned long long int tmp_workaround = static_cast<unsigned long long int>(_display_amount);
 
-		display_str = QString::number(tmp_workaround, _num_base).upper();
+		display_str = TQString::number(tmp_workaround, _num_base).upper();
 	}
 	else // _num_base == NB_DECIMAL || new_amount.type() ==
 	     // KNumber::SpecialType
@@ -246,9 +246,9 @@ bool KCalcDisplay::setAmount(KNumber const & new_amount)
 		display_str = _display_amount.toQString(KCalcSettings::precision(), _fixed_precision);
 #if 0
 		else if (_display_amount > 1.0e+16)
-			display_str = QCString().sprintf(PRINT_LONG_BIG, _precision + 1, _display_amount);
+			display_str = TQCString().sprintf(PRINT_LONG_BIG, _precision + 1, _display_amount);
 		else
-			display_str = QCString().sprintf(PRINT_LONG_BIG, _precision, _display_amount);
+			display_str = TQCString().sprintf(PRINT_LONG_BIG, _precision, _display_amount);
 #endif
 	}
 
@@ -257,9 +257,9 @@ bool KCalcDisplay::setAmount(KNumber const & new_amount)
 	
 }
 
-void KCalcDisplay::setText(QString const &string)
+void KCalcDisplay::setText(TQString const &string)
 {
-	QString localizedString = string;
+	TQString localizedString = string;
 
 	// If we aren't in decimal mode, we don't need to modify the string
 	if (_num_base == NB_DECIMAL  &&  _groupdigits)
@@ -273,18 +273,18 @@ void KCalcDisplay::setText(QString const &string)
 	  } else
 	    localizedString = KGlobal::locale()->formatNumber(string, false, 0); // Note: rounding happened already above!
 
-	QLabel::setText(localizedString);
+	TQLabel::setText(localizedString);
 	emit changedText(localizedString);
 }
 
-QString KCalcDisplay::text() const
+TQString KCalcDisplay::text() const
 {
 	if (_num_base != NB_DECIMAL)
-		return QLabel::text();
-	QString display_str = _display_amount.toQString(KCalcSettings::precision());
+		return TQLabel::text();
+	TQString display_str = _display_amount.toQString(KCalcSettings::precision());
 
 	return display_str;
-	//	return QCString().sprintf(PRINT_LONG_BIG, 40, _display_amount);
+	//	return TQCString().sprintf(PRINT_LONG_BIG, 40, _display_amount);
 }
 
 /* change representation of display to new base (i.e. binary, decimal,
@@ -321,7 +321,7 @@ int KCalcDisplay::setBase(NumBase new_base)
 	return _num_base;
 }
 
-void KCalcDisplay::setStatusText(uint i, const QString& text)
+void KCalcDisplay::setStatusText(uint i, const TQString& text)
 {
 	if (i < NUM_STATUS_TEXT)
 		_str_status[i] = text;
@@ -331,7 +331,7 @@ void KCalcDisplay::setStatusText(uint i, const QString& text)
 bool KCalcDisplay::updateDisplay(void)
 {
 	// Put sign in front.
-	QString tmp_string;
+	TQString tmp_string;
 	if(_neg_sign == true)
 		tmp_string = "-" + _str_int;
 	else
@@ -577,16 +577,16 @@ bool KCalcDisplay::changeSign(void)
 	return true;
 }
 
-void KCalcDisplay::drawContents(QPainter *p)
+void KCalcDisplay::drawContents(TQPainter *p)
 {
-	QLabel::drawContents(p);
+	TQLabel::drawContents(p);
 
 	// draw the status texts using half of the normal
 	// font size but not smaller than 7pt
-	QFont f(font());
+	TQFont f(font());
 	f.setPointSize(QMAX((f.pointSize() / 2), 7));
 	p->setFont(f);
-	QFontMetrics fm(f);
+	TQFontMetrics fm(f);
 	uint w = fm.width("_____");
 	uint h = fm.height();
 
@@ -598,11 +598,11 @@ void KCalcDisplay::drawContents(QPainter *p)
 
 // Return the QLabel's normal size hint vertically expanded
 // by half the font height to make room for the status texts
-QSize KCalcDisplay::sizeHint() const
+TQSize KCalcDisplay::sizeHint() const
 {
-	QFont f(font());
+	TQFont f(font());
 	f.setPointSize(QMAX((f.pointSize() / 2), 7));
-	QFontMetrics fm(f);
-	return QLabel::sizeHint() + QSize(0, fm.height());
+	TQFontMetrics fm(f);
+	return TQLabel::sizeHint() + TQSize(0, fm.height());
 }
 

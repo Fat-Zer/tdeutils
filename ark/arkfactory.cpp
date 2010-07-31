@@ -38,20 +38,20 @@ ArkFactory::~ArkFactory()
     s_instance = 0L;
 }
 
-KParts::Part * ArkFactory::createPartObject( QWidget *parentWidget,
-                  const char *widgetName, QObject *parent,
+KParts::Part * ArkFactory::createPartObject( TQWidget *parentWidget,
+                  const char *widgetName, TQObject *parent,
                   const char *name, const char *classname,
-                  const QStringList &args )
+                  const TQStringList &args )
 {
     bool readWrite = false; // for e.g. Browser/View or KParts::ReadOnlyPart
-    if ( QCString( classname ) == "KParts::ReadWritePart" 
-         || QCString( classname ) == "ArkPart" )
+    if ( TQCString( classname ) == "KParts::ReadWritePart" 
+         || TQCString( classname ) == "ArkPart" )
     {
             readWrite = true;
     }
     ArkPart* obj = new ArkPart( parentWidget, widgetName, parent, name,
                                 args, readWrite );
-        //kdDebug( 1601 ) << "classname is: " << QCString( classname ) << endl;
+        //kdDebug( 1601 ) << "classname is: " << TQCString( classname ) << endl;
         return obj;
 }
 

@@ -37,7 +37,7 @@ extern "C" {
 #include "./sonypi.h"
 }
 
-#include <qsocketnotifier.h>
+#include <tqsocketnotifier.h>
 #include <kdebug.h>
 
 // Taken from Stelian Pop's spicctrl utility:
@@ -64,8 +64,8 @@ extern "C" {
 #define SONYPI_IOCGBLUE         _IOR('v', 8, __u8)
 #define SONYPI_IOCSBLUE         _IOW('v', 9, __u8)
 
-KVaioDriverInterface::KVaioDriverInterface(QObject *parent)
-    : QObject(parent),
+KVaioDriverInterface::KVaioDriverInterface(TQObject *parent)
+    : TQObject(parent),
       mFd(0),
       mNotifier(0)
 {
@@ -90,8 +90,8 @@ bool KVaioDriverInterface::connectToDriver(bool listen)
 
     if(listen)
         {
-            mNotifier = new QSocketNotifier(mFd,  QSocketNotifier::Read, this);
-            connect(mNotifier, SIGNAL(activated(int)), SLOT(socketActivated(int)));
+            mNotifier = new TQSocketNotifier(mFd,  TQSocketNotifier::Read, this);
+            connect(mNotifier, TQT_SIGNAL(activated(int)), TQT_SLOT(socketActivated(int)));
         }
     return true;
 }

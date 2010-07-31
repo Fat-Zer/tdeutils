@@ -56,10 +56,10 @@ class KwikDisk : public KSystemTray
       void aboutToHide();
 
    private:
-      void mousePressEvent(QMouseEvent *);
-      void timerEvent(QTimerEvent *);
-      void enterEvent(QEvent *);
-      void leaveEvent(QEvent *);
+      void mousePressEvent(TQMouseEvent *);
+      void timerEvent(TQTimerEvent *);
+      void enterEvent(TQEvent *);
+      void leaveEvent(TQEvent *);
 
       void setUpdateFrequency(int frequency);
 

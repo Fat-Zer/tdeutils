@@ -19,7 +19,7 @@
 #include "systemtray.h"
 
 
-#include <qobject.h>
+#include <tqobject.h>
 #include <kiconloader.h>
 #include <klocale.h>
 #include <kwinmodule.h>
@@ -27,16 +27,16 @@
 #include <kdebug.h>
 #include <kwin.h>
 
-#include <qpopupmenu.h>
-#include <qdragobject.h>
-#include <qlayout.h>
-#include <qstringlist.h>
-#include <qpixmap.h>
+#include <tqpopupmenu.h>
+#include <tqdragobject.h>
+#include <tqlayout.h>
+#include <tqstringlist.h>
+#include <tqpixmap.h>
 
 #include <X11/Xlib.h>
 
-Systemtray::Systemtray(QWidget* parent)
-  : QWidget(parent,0,0)
+Systemtray::Systemtray(TQWidget* parent)
+  : TQWidget(parent,0,0)
 {
   setBackgroundOrigin(ParentOrigin);
   setBackgroundMode(FixedPixmap);
@@ -54,20 +54,20 @@ int Systemtray::getTraySize() {
 	return (int) kwin_module->systemTrayWindows().size();
 }
 
-void Systemtray::updateBackgroundPixmap ( const QPixmap & pixmap) {
+void Systemtray::updateBackgroundPixmap ( const TQPixmap & pixmap) {
   QXEmbed *emb;
   setPaletteBackgroundPixmap (pixmap);
     for (emb = m_Wins.first(); emb != 0L; emb = m_Wins.next()) {
 
     //Stupid stupid stupid work around for annoying bug
     //QXEmbed ignores setBackgroundOrigin(AncestorOrigin)....
-    QPixmap bug = QPixmap(emb->size());
+    TQPixmap bug = TQPixmap(emb->size());
     bitBlt(&bug, 0, 0, &pixmap, emb->parentWidget()->x()+emb->x(),  emb->parentWidget()->y()+emb->y(), emb->width(), emb->height(),Qt::CopyROP, false);
     emb->setPaletteBackgroundPixmap (bug);
 
   }
 
-    QPoint topPoint = mapToGlobal(QPoint(0,0));
+    TQPoint topPoint = mapToGlobal(TQPoint(0,0));
     Window hack = XCreateSimpleWindow(qt_xdisplay(), winId(), 0,0, width(), height(), 0, 0, 0);
     XRaiseWindow(qt_xdisplay(), hack);
     XMapWindow(qt_xdisplay(), hack);
@@ -84,8 +84,8 @@ void Systemtray::initSystray( void )
 
   kwin_module = new KWinModule();
   systemTrayWindows = kwin_module->systemTrayWindows();
-  QValueList<WId>::ConstIterator end(systemTrayWindows.end());
-  for (QValueList<WId>::ConstIterator it = systemTrayWindows.begin(); it!=end; ++it)
+  TQValueList<WId>::ConstIterator end(systemTrayWindows.end());
+  for (TQValueList<WId>::ConstIterator it = systemTrayWindows.begin(); it!=end; ++it)
   {
     no_of_systray_windows++;
     QXEmbed *emb;
@@ -95,7 +95,7 @@ void Systemtray::initSystray( void )
 
     emb->setAutoDelete(false);
 
-    connect(emb, SIGNAL(embeddedWindowDestroyed()), SLOT(updateTrayWindows()));
+    connect(emb, TQT_SIGNAL(embeddedWindowDestroyed()), TQT_SLOT(updateTrayWindows()));
 
     m_Wins.append(emb);
 
@@ -107,12 +107,12 @@ void Systemtray::initSystray( void )
 
   updateTrayWindows();
 
-  connect(kwin_module, SIGNAL(systemTrayWindowAdded(WId)), SLOT(systemTrayWindowAdded(WId)));
-  connect(kwin_module, SIGNAL(systemTrayWindowRemoved(WId)), SLOT(systemTrayWindowRemoved(WId)));
+  connect(kwin_module, TQT_SIGNAL(systemTrayWindowAdded(WId)), TQT_SLOT(systemTrayWindowAdded(WId)));
+  connect(kwin_module, TQT_SIGNAL(systemTrayWindowRemoved(WId)), TQT_SLOT(systemTrayWindowRemoved(WId)));
 
-  QCString screenstr;
+  TQCString screenstr;
   screenstr.setNum(qt_xscreen());
-  QCString trayatom = "_NET_SYSTEM_TRAY_S" + screenstr;
+  TQCString trayatom = "_NET_SYSTEM_TRAY_S" + screenstr;
 
   net_system_tray_selection = XInternAtom( display, trayatom, false );
   net_system_tray_opcode = XInternAtom( display, "_NET_SYSTEM_TRAY_OPCODE", false );
@@ -206,7 +206,7 @@ void Systemtray::systemTrayWindowAdded( WId w )
   emb->setAutoDelete(false);
   //emb->setBackgroundMode(X11ParentRelative);
   emb->setBackgroundMode(FixedPixmap);
-  connect(emb, SIGNAL(embeddedWindowDestroyed()), SLOT(updateTrayWindows()));
+  connect(emb, TQT_SIGNAL(embeddedWindowDestroyed()), TQT_SLOT(updateTrayWindows()));
   m_Wins.append(emb);
 
   emb->embed(w);

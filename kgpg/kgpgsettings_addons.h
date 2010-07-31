@@ -17,7 +17,7 @@
 
 public:
    static
-   QString defaultKey()
+   TQString defaultKey()
    {
      if (self()->mDefaultKey.isEmpty())
      {
@@ -29,7 +29,7 @@ public:
    }
    
    static
-   void setDefaultKey(const QString &_defaultKey)
+   void setDefaultKey(const TQString &_defaultKey)
    {
      self()->mDefaultKey = _defaultKey;
      KgpgInterface::setGpgSetting("default-key",_defaultKey.right(8),gpgConfigPath());
@@ -38,4 +38,4 @@ public:
    }
    
 private:
-   QString mDefaultKey;
+   TQString mDefaultKey;

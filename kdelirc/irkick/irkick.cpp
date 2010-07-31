@@ -7,12 +7,12 @@
 
 // This program is free software.
 
-#include <qwidget.h>
-#include <qdialog.h>
-#include <qtooltip.h>
-#include <qregexp.h>
-#include <qtimer.h>
-#include <qevent.h>
+#include <tqwidget.h>
+#include <tqdialog.h>
+#include <tqtooltip.h>
+#include <tqregexp.h>
+#include <tqtimer.h>
+#include <tqevent.h>
 
 #include <kdeversion.h>
 #include <kapplication.h>
@@ -42,12 +42,12 @@
 #include "profileserver.h"
 #include "irkick.h"
 
-void IRKTrayIcon::mousePressEvent(QMouseEvent *e)
+void IRKTrayIcon::mousePressEvent(TQMouseEvent *e)
 {
-	KSystemTray::mousePressEvent(new QMouseEvent(QEvent::MouseButtonPress, e->pos(), e->globalPos(), e->button() == LeftButton ? RightButton : e->button(), e->state()));
+	KSystemTray::mousePressEvent(new TQMouseEvent(TQEvent::MouseButtonPress, e->pos(), e->globalPos(), e->button() == LeftButton ? RightButton : e->button(), e->state()));
 }
 
-IRKick::IRKick(const QCString &obj) : QObject(), DCOPObject(obj), npApp(QString::null)
+IRKick::IRKick(const TQCString &obj) : TQObject(), DCOPObject(obj), npApp(TQString::null)
 {
     kapp->dcopClient()->setDefaultObject(obj);
 	theClient = new KLircClient();
@@ -55,28 +55,28 @@ IRKick::IRKick(const QCString &obj) : QObject(), DCOPObject(obj), npApp(QString:
 	theTrayIcon = new IRKTrayIcon();
 	if(theClient->isConnected())
 	{	theTrayIcon->setPixmap(SmallIcon("irkick"));
-		QToolTip::add(theTrayIcon, i18n("KDE Lirc Server: Ready."));
+		TQToolTip::add(theTrayIcon, i18n("KDE Lirc Server: Ready."));
 	}
 	else
 	{	theTrayIcon->setPixmap(SmallIcon("irkickoff"));
-		QToolTip::add(theTrayIcon, i18n("KDE Lirc Server: No infra-red remote controls found."));
-		QTimer::singleShot(10000, this, SLOT(checkLirc()));
+		TQToolTip::add(theTrayIcon, i18n("KDE Lirc Server: No infra-red remote controls found."));
+		TQTimer::singleShot(10000, this, TQT_SLOT(checkLirc()));
 	}
-	theFlashOff = new QTimer(theTrayIcon);
-	connect(theFlashOff, SIGNAL(timeout()), SLOT(flashOff()));
+	theFlashOff = new TQTimer(theTrayIcon);
+	connect(theFlashOff, TQT_SIGNAL(timeout()), TQT_SLOT(flashOff()));
 
 	theResetCount = 0;
 	slotReloadConfiguration();
-	connect(theClient, SIGNAL(connectionClosed()), this, SLOT(slotClosed()));
-	connect(theClient, SIGNAL(remotesRead()), this, SLOT(resetModes()));
-	connect(theClient, SIGNAL(commandReceived(const QString &, const QString &, int)), this, SLOT(gotMessage(const QString &, const QString &, int)));
+	connect(theClient, TQT_SIGNAL(connectionClosed()), this, TQT_SLOT(slotClosed()));
+	connect(theClient, TQT_SIGNAL(remotesRead()), this, TQT_SLOT(resetModes()));
+	connect(theClient, TQT_SIGNAL(commandReceived(const TQString &, const TQString &, int)), this, TQT_SLOT(gotMessage(const TQString &, const TQString &, int)));
 
 	theTrayIcon->contextMenu()->changeTitle(0, "IRKick");
-	theTrayIcon->contextMenu()->insertItem(SmallIcon( "configure" ), i18n("&Configure..."), this, SLOT(slotConfigure()));
+	theTrayIcon->contextMenu()->insertItem(SmallIcon( "configure" ), i18n("&Configure..."), this, TQT_SLOT(slotConfigure()));
 	theTrayIcon->contextMenu()->insertSeparator();
 	theTrayIcon->contextMenu()->insertItem(SmallIcon( "help" ), KStdGuiItem::help().text(), (new KHelpMenu(theTrayIcon, KGlobal::instance()->aboutData()))->menu());
-	theTrayIcon->actionCollection()->action("file_quit")->disconnect(SIGNAL(activated()));
-	connect(theTrayIcon->actionCollection()->action("file_quit"), SIGNAL(activated()), SLOT(doQuit()));
+	theTrayIcon->actionCollection()->action("file_quit")->disconnect(TQT_SIGNAL(activated()));
+	connect(theTrayIcon->actionCollection()->action("file_quit"), TQT_SIGNAL(activated()), TQT_SLOT(doQuit()));
 
 	theTrayIcon->show();
 }
@@ -84,7 +84,7 @@ IRKick::IRKick(const QCString &obj) : QObject(), DCOPObject(obj), npApp(QString:
 IRKick::~IRKick()
 {
 	delete theTrayIcon;
-	for(QMap<QString,IRKTrayIcon *>::iterator i = currentModeIcons.begin(); i != currentModeIcons.end(); ++i)
+	for(TQMap<TQString,IRKTrayIcon *>::iterator i = currentModeIcons.begin(); i != currentModeIcons.end(); ++i)
 		if(*i) delete *i;
 }
 
@@ -92,7 +92,7 @@ void IRKick::slotClosed()
 {
 	theTrayIcon->setPixmap(SmallIcon("irkickoff"));
 	KPassivePopup::message("IRKick", i18n("The infrared system has severed its connection. Remote controls are no longer available."), SmallIcon("irkick"), theTrayIcon);
-	QTimer::singleShot(1000, this, SLOT(checkLirc()));
+	TQTimer::singleShot(1000, this, TQT_SLOT(checkLirc()));
 }
 
 void IRKick::checkLirc()
@@ -103,7 +103,7 @@ void IRKick::checkLirc()
 			theTrayIcon->setPixmap(SmallIcon("irkick"));
 		}
 		else
-			QTimer::singleShot(10000, this, SLOT(checkLirc()));
+			TQTimer::singleShot(10000, this, TQT_SLOT(checkLirc()));
 }
 
 void IRKick::flashOff()
@@ -130,8 +130,8 @@ void IRKick::resetModes()
 	if(!theResetCount)
 		allModes.generateNulls(theClient->remotes());
 
-	QStringList remotes = theClient->remotes();
-	for(QStringList::iterator i = remotes.begin(); i != remotes.end(); ++i)
+	TQStringList remotes = theClient->remotes();
+	for(TQStringList::iterator i = remotes.begin(); i != remotes.end(); ++i)
 	{	currentModes[*i] = allModes.getDefault(*i).name();
 		if(theResetCount && currentModeIcons[*i]) delete currentModeIcons[*i];
 		currentModeIcons[*i] = 0;
@@ -157,7 +157,7 @@ void IRKick::slotConfigure()
 
 void IRKick::updateModeIcons()
 {
-	for(QMap<QString,QString>::iterator i = currentModes.begin(); i != currentModes.end(); ++i)
+	for(TQMap<TQString,TQString>::iterator i = currentModes.begin(); i != currentModes.end(); ++i)
 	{	Mode mode = allModes.getMode(i.key(), i.data());
 		if(mode.iconFile().isNull() || mode.iconFile().isEmpty())
 		{	if(currentModeIcons[i.key()])
@@ -173,12 +173,12 @@ void IRKick::updateModeIcons()
 				currentModeIcons[i.key()]->actionCollection()->action("file_quit")->setEnabled(false);
 			}
 			currentModeIcons[i.key()]->setPixmap(KIconLoader().loadIcon(mode.iconFile(), KIcon::Panel));
-			QToolTip::add(currentModeIcons[i.key()], mode.remoteName() + ": <b>" + mode.name() + "</b>");
+			TQToolTip::add(currentModeIcons[i.key()], mode.remoteName() + ": <b>" + mode.name() + "</b>");
 		}
 	}
 }
 
-bool IRKick::getPrograms(const IRAction &action, QStringList &programs)
+bool IRKick::getPrograms(const IRAction &action, TQStringList &programs)
 {
 	DCOPClient *theDC = KApplication::dcopClient();
 	programs.clear();
@@ -189,23 +189,23 @@ bool IRKick::getPrograms(const IRAction &action, QStringList &programs)
 	}
 	else
 	{
-		QRegExp r = QRegExp("^" + action.program() + "-(\\d+)$");
+		TQRegExp r = TQRegExp("^" + action.program() + "-(\\d+)$");
 		// find all instances...
 		QCStringList buf = theDC->registeredApplications();
 		for(QCStringList::iterator i = buf.begin(); i != buf.end(); ++i)
 		{
-			QString program = QString::fromUtf8(*i);
+			TQString program = TQString::fromUtf8(*i);
 			if(program.contains(r))
 				programs += program;
 		}
 		if(programs.size() > 1 && action.ifMulti() == IM_DONTSEND)
 			return false;
 		else if(programs.size() > 1 && action.ifMulti() == IM_SENDTOTOP)
-		{	QValueList<WId> s = KWinModule().stackingOrder();
+		{	TQValueList<WId> s = KWinModule().stackingOrder();
 			// go through all the (ordered) window pids
-			for(QValueList<WId>::iterator i = s.fromLast(); i != s.end(); i--)
+			for(TQValueList<WId>::iterator i = s.fromLast(); i != s.end(); i--)
 			{	int p = KWin::info(*i).pid;
-				QString id = action.program() + "-" + QString().setNum(p);
+				TQString id = action.program() + "-" + TQString().setNum(p);
 				if(programs.contains(id))
 				{	programs.clear();
 					programs += id;
@@ -215,11 +215,11 @@ bool IRKick::getPrograms(const IRAction &action, QStringList &programs)
 			while(programs.size() > 1) programs.remove(programs.begin());
 		}
 		else if(programs.size() > 1 && action.ifMulti() == IM_SENDTOBOTTOM)
-		{	QValueList<WId> s = KWinModule().stackingOrder();
+		{	TQValueList<WId> s = KWinModule().stackingOrder();
 			// go through all the (ordered) window pids
-			for(QValueList<WId>::iterator i = s.begin(); i != s.end(); ++i)
+			for(TQValueList<WId>::iterator i = s.begin(); i != s.end(); ++i)
 			{	int p = KWin::info(*i).pid;
-				QString id = action.program() + "-" + QString().setNum(p);
+				TQString id = action.program() + "-" + TQString().setNum(p);
 				if(programs.contains(id))
 				{	programs.clear();
 					programs += id;
@@ -235,13 +235,13 @@ bool IRKick::getPrograms(const IRAction &action, QStringList &programs)
 void IRKick::executeAction(const IRAction &action)
 {
 	DCOPClient *theDC = KApplication::dcopClient();
-	QStringList programs;
+	TQStringList programs;
 
 	if(!getPrograms(action, programs)) return;
 
 	// if programs.size()==0 here, then the app is definately not running.
 	if(action.autoStart() && !programs.size())
-	{	QString sname = ProfileServer::profileServer()->getServiceName(action.program());
+	{	TQString sname = ProfileServer::profileServer()->getServiceName(action.program());
 		if(!sname.isNull())
 		{
 			KPassivePopup::message("IRKick", i18n("Starting <b>%1</b>...").arg(action.application()), SmallIcon("irkick"), theTrayIcon);
@@ -252,20 +252,20 @@ void IRKick::executeAction(const IRAction &action)
 
 	if(!getPrograms(action, programs)) return;
 
-	for(QStringList::iterator i = programs.begin(); i != programs.end(); ++i)
-	{	const QString &program = *i;
+	for(TQStringList::iterator i = programs.begin(); i != programs.end(); ++i)
+	{	const TQString &program = *i;
 		if(theDC->isApplicationRegistered(program.utf8()))
-		{	QByteArray data; QDataStream arg(data, IO_WriteOnly);
+		{	TQByteArray data; TQDataStream arg(data, IO_WriteOnly);
 			kdDebug() << "Sending data (" << program << ", " << action.object() << ", " << action.method().prototypeNR() << endl;
 			for(Arguments::const_iterator j = action.arguments().begin(); j != action.arguments().end(); ++j)
 			{	kdDebug() << "Got argument..." << endl;
 				switch((*j).type())
-				{	case QVariant::Int: arg << (*j).toInt(); break;
-					case QVariant::CString: arg << (*j).toCString(); break;
-					case QVariant::StringList: arg << (*j).toStringList(); break;
-					case QVariant::UInt: arg << (*j).toUInt(); break;
-					case QVariant::Bool: arg << (*j).toBool(); break;
-					case QVariant::Double: arg << (*j).toDouble(); break;
+				{	case TQVariant::Int: arg << (*j).toInt(); break;
+					case TQVariant::CString: arg << (*j).toCString(); break;
+					case TQVariant::StringList: arg << (*j).toStringList(); break;
+					case TQVariant::UInt: arg << (*j).toUInt(); break;
+					case TQVariant::Bool: arg << (*j).toBool(); break;
+					case TQVariant::Double: arg << (*j).toDouble(); break;
 					default: arg << (*j).toString(); break;
 				}
 			}
@@ -274,17 +274,17 @@ void IRKick::executeAction(const IRAction &action)
 	}
 }
 
-void IRKick::gotMessage(const QString &theRemote, const QString &theButton, int theRepeatCounter)
+void IRKick::gotMessage(const TQString &theRemote, const TQString &theButton, int theRepeatCounter)
 {
 	kdDebug() << "Got message: " << theRemote << ": " << theButton << " (" << theRepeatCounter << ")" << endl;
 	theTrayIcon->setPixmap(SmallIcon("irkickflash"));
 	theFlashOff->start(200, true);
 	if(!npApp.isNull())
 	{
-		QString theApp = npApp;
-		npApp = QString::null;
+		TQString theApp = npApp;
+		npApp = TQString::null;
 		// send notifier by DCOP to npApp/npModule/npMethod(theRemote, theButton);
-		QByteArray data; QDataStream arg(data, IO_WriteOnly);
+		TQByteArray data; TQDataStream arg(data, IO_WriteOnly);
 		arg << theRemote << theButton;
 		KApplication::dcopClient()->send(theApp.utf8(), npModule.utf8(), npMethod.utf8(), data);
 	}
@@ -321,7 +321,7 @@ void IRKick::gotMessage(const QString &theRemote, const QString &theButton, int 
 	}
 }
 
-void IRKick::stealNextPress(QString app, QString module, QString method)
+void IRKick::stealNextPress(TQString app, TQString module, TQString method)
 {
 	npApp = app;
 	npModule = module;
@@ -330,7 +330,7 @@ void IRKick::stealNextPress(QString app, QString module, QString method)
 
 void IRKick::dontStealNextPress()
 {
-	npApp = QString::null;
+	npApp = TQString::null;
 }
 
 #include "irkick.moc"

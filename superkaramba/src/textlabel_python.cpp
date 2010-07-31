@@ -27,7 +27,7 @@
 #endif
 
 #include <Python.h>
-#include <qobject.h>
+#include <tqobject.h>
 #include "karamba.h"
 #include "textlabel.h"
 #include "meter_python.h"
@@ -43,7 +43,7 @@ PyObject* py_createText(PyObject *, PyObject *args)
     return NULL;
   TextLabel *tmp =
       new TextLabel((karamba*)widget, (int)x, (int)y, (int)w, (int)h);
-  tmp->setValue(PyString2QString(text));
+  tmp->setValue(PyString2TQString(text));
   tmp->setTextProps(((karamba*)widget)->getDefaultTextProps());
   ((karamba*)widget)->meterList->append(tmp);
   return (Py_BuildValue((char*)"l", (long)tmp));
@@ -230,6 +230,6 @@ PyObject* py_setTextScroll(PyObject *, PyObject *args)
     return NULL;
   if (!checkKarambaAndMeter(widget, textSensor, "TextLabel"))
     return NULL;
-  ((TextLabel*)textSensor)->setScroll(type, QPoint(x,y), gap, pause);
+  ((TextLabel*)textSensor)->setScroll(type, TQPoint(x,y), gap, pause);
   return Py_BuildValue((char*)"l", 1);
 }

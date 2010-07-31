@@ -33,8 +33,8 @@ class MonitorDialog : public MonitorDialogBase
 {
     Q_OBJECT
 public:
-    MonitorDialog( const HostConfigMap &hosts, QWidget *parent, const char *name = 0 );
-    MonitorDialog( const MonitorConfig &monitor, const HostConfigMap &hosts, QWidget *parent, const char *name = 0 );
+    MonitorDialog( const HostConfigMap &hosts, TQWidget *parent, const char *name = 0 );
+    MonitorDialog( const MonitorConfig &monitor, const HostConfigMap &hosts, TQWidget *parent, const char *name = 0 );
 
     MonitorConfig monitorConfig() const;
 

@@ -514,7 +514,7 @@ bool KarambaPython::widgetClosed(karamba* k)
   return callObject("widgetClosed", pArgs);
 }
 
-bool KarambaPython::menuOptionChanged(karamba* k, QString key, bool value)
+bool KarambaPython::menuOptionChanged(karamba* k, TQString key, bool value)
 {
   PyObject* pArgs = Py_BuildValue((char*)"(lsi)", k, key.ascii(), (int)value);
   return callObject("menuOptionChanged", pArgs);
@@ -532,7 +532,7 @@ bool KarambaPython::meterClicked(karamba* k, Meter* meter, int button)
   return callObject("meterClicked", pArgs);
 }
 
-bool KarambaPython::meterClicked(karamba* k, QString anchor, int button)
+bool KarambaPython::meterClicked(karamba* k, TQString anchor, int button)
 {
   PyObject* pArgs = Py_BuildValue((char*)"(lsi)", k, anchor.ascii(), button);
   return callObject("meterClicked", pArgs);
@@ -545,7 +545,7 @@ bool KarambaPython::widgetClicked(karamba* k, int x, int y, int button)
 }
 
 bool KarambaPython::keyPressed(karamba* k, const Meter* meter,
-                               const QString& text)
+                               const TQString& text)
 {
   PyObject* pArgs = Py_BuildValue((char*)"(lls)", k, meter, text.ucs2());
   return callObject("keyPressed", pArgs);
@@ -599,7 +599,7 @@ bool KarambaPython::commandFinished(karamba* k, int pid)
   return callObject("commandFinished", pArgs);
 }
 
-bool KarambaPython::itemDropped(karamba* k, QString text, int x, int y)
+bool KarambaPython::itemDropped(karamba* k, TQString text, int x, int y)
 {
   PyObject* pArgs = Py_BuildValue((char*)"(lOii)", k, QString2PyString(text), x, y);
   return callObject("itemDropped", pArgs);

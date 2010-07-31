@@ -18,7 +18,7 @@
 *****************************************************************************/
 
 
-void NewMode::slotTextChanged( const QString &newText )
+void NewMode::slotTextChanged( const TQString &newText )
 {
     kPushButton6->setEnabled(newText != "");
 }

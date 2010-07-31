@@ -28,16 +28,16 @@
 
 #include <kdialog.h>
 
-#include <qlayout.h>
+#include <tqlayout.h>
 
 #include "kcmdf.h"
 
-KDiskFreeWidget::KDiskFreeWidget( QWidget *parent, const char *name )
+KDiskFreeWidget::KDiskFreeWidget( TQWidget *parent, const char *name )
  : KCModule( parent, name )
 {
   setButtons(Help);
 
-  QVBoxLayout *topLayout = new QVBoxLayout( this, 0, KDialog::spacingHint() );
+  TQVBoxLayout *topLayout = new TQVBoxLayout( this, 0, KDialog::spacingHint() );
 
   mKdf = new KDFWidget( this, "kdf", false );
   topLayout->addWidget( mKdf );
@@ -48,7 +48,7 @@ KDiskFreeWidget::~KDiskFreeWidget()
   mKdf->applySettings();
 }
 
-QString KDiskFreeWidget::quickHelp() const
+TQString KDiskFreeWidget::quickHelp() const
 {
     return i18n("<h3>Hardware Information</h3><br> All the information modules return information"
     " about a certain aspect of your computer hardware or your operating system."
@@ -57,7 +57,7 @@ QString KDiskFreeWidget::quickHelp() const
 
 extern "C"
 {
-  KDE_EXPORT KCModule* create_kdf( QWidget *parent, const char * /*name*/ )
+  KDE_EXPORT KCModule* create_kdf( TQWidget *parent, const char * /*name*/ )
   {
     return new KDiskFreeWidget( parent , "kdf" );
   }

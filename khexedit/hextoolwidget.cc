@@ -22,81 +22,81 @@
 #include <klocale.h>
 
 #include "hextoolwidget.h"
-#include <qlabel.h>
-#include <qlayout.h>
-#include <qlineedit.h>
-#include <qcheckbox.h>
-#include <qcombobox.h>
+#include <tqlabel.h>
+#include <tqlayout.h>
+#include <tqlineedit.h>
+#include <tqcheckbox.h>
+#include <tqcombobox.h>
 
 
-CHexToolWidget::CHexToolWidget( QWidget *parent, const char *name )
-  : QFrame( parent, name )
+CHexToolWidget::CHexToolWidget( TQWidget *parent, const char *name )
+  : TQFrame( parent, name )
 {
-  setFrameStyle( QFrame::Panel | QFrame::Raised );
+  setFrameStyle( TQFrame::Panel | TQFrame::Raised );
   setLineWidth( 1 );
 
-  QString text;
-  mUtilBox = new QGridLayout( this, 5, 4, KDialog::marginHint(), KDialog::spacingHint() );
+  TQString text;
+  mUtilBox = new TQGridLayout( this, 5, 4, KDialog::marginHint(), KDialog::spacingHint() );
   mUtilBox->setColStretch( 3, 10 );
 
-  QString msg1[4] =
+  TQString msg1[4] =
   {
     i18n("Signed 8 bit:"), i18n("Unsigned 8 bit:"),
     i18n("Signed 16 bit:"), i18n("Unsigned 16 bit:")
   };
 
-  QString msg2[4] =
+  TQString msg2[4] =
   {
     i18n("Signed 32 bit:"), i18n("Unsigned 32 bit:"),
     i18n("32 bit float:"), i18n("64 bit float:")
   };
 
-  QString msg3[4] =
+  TQString msg3[4] =
   {
     i18n("Hexadecimal:"), i18n("Octal:"),
     i18n("Binary:"), i18n("Text:")
   };
 
-  QGridLayout *ValuesBox = new QGridLayout( this, 4, 6, 0, KDialog::spacingHint() );
+  TQGridLayout *ValuesBox = new TQGridLayout( this, 4, 6, 0, KDialog::spacingHint() );
   ValuesBox->setColStretch( 2, 10 );
   ValuesBox->setColStretch( 5, 10 );
 
   for( int i=0; i<4; i++ )
   {
-    QLabel *Label = new QLabel( msg1[i], this );
+    TQLabel *Label = new TQLabel( msg1[i], this );
     Label->setAlignment( AlignRight|AlignVCenter );
     ValuesBox->addWidget( Label, i, 0 );
 
-    mText1[i] = new QLineEdit( this );
+    mText1[i] = new TQLineEdit( this );
     mText1[i]->setReadOnly( true );
     mText1[i]->setAlignment( AlignRight );
     ValuesBox->addWidget( mText1[i], i, 1 );
 
-    Label = new QLabel( msg2[i], this );
+    Label = new TQLabel( msg2[i], this );
     Label->setAlignment( AlignRight|AlignVCenter );
     ValuesBox->addWidget( Label, i, 3 );
 
-    mText2[i] = new QLineEdit( this );
+    mText2[i] = new TQLineEdit( this );
     mText2[i]->setReadOnly( true );
     mText2[i]->setAlignment( AlignRight );
     ValuesBox->addWidget( mText2[i], i, 4 );
 
-    Label = new QLabel( msg3[i], this );
+    Label = new TQLabel( msg3[i], this );
     Label->setAlignment( AlignRight|AlignVCenter );
     mUtilBox->addWidget( Label, i, 1 );
 
-    mText3[i] = new QLineEdit( this );
+    mText3[i] = new TQLineEdit( this );
     mText3[i]->setReadOnly( true );
     mText3[i]->setAlignment( AlignRight );
     mUtilBox->addWidget( mText3[i], i, 2 );
   }
 
-  QBoxLayout * SettingsBox = new QHBoxLayout( this, 0, KDialog::spacingHint() );
+  TQBoxLayout * SettingsBox = new TQHBoxLayout( this, 0, KDialog::spacingHint() );
 
   text = i18n("Show little endian decoding");
-  mCheckIntelFormat = new QCheckBox( text, this );
+  mCheckIntelFormat = new TQCheckBox( text, this );
   mCheckIntelFormat->setMinimumSize( mCheckIntelFormat->sizeHint() );
-  connect( mCheckIntelFormat, SIGNAL(clicked()), this, SLOT(intelFormat()) );
+  connect( mCheckIntelFormat, TQT_SIGNAL(clicked()), this, TQT_SLOT(intelFormat()) );
   SettingsBox->addWidget( mCheckIntelFormat, 0, AlignVCenter );
   mCheckIntelFormat->setChecked( // default value to please endian system users
 #ifdef WORDS_BIGENDIAN
@@ -108,9 +108,9 @@ CHexToolWidget::CHexToolWidget( QWidget *parent, const char *name )
   // TODO: make this a pulldown box, adding PDP endianess
 
   text = i18n("Show unsigned as hexadecimal");
-  mCheckHexadecimal = new QCheckBox( text, this );
+  mCheckHexadecimal = new TQCheckBox( text, this );
   mCheckHexadecimal->setMinimumSize( mCheckHexadecimal->sizeHint() );
-  connect( mCheckHexadecimal, SIGNAL(clicked()), this, SLOT(unsignedFormat()) );
+  connect( mCheckHexadecimal, TQT_SIGNAL(clicked()), this, TQT_SLOT(unsignedFormat()) );
   SettingsBox->addWidget( mCheckHexadecimal, 0, AlignVCenter );
 
   mUtilBox->addMultiCellLayout( ValuesBox,   0, 3, 0, 0, AlignLeft|AlignVCenter );
@@ -119,11 +119,11 @@ CHexToolWidget::CHexToolWidget( QWidget *parent, const char *name )
   //
   // Variable bitwidth. Based on Craig Graham's work.
   //
-  QLabel *bitLabel = new QLabel( i18n("Stream length:"), this );
+  TQLabel *bitLabel = new TQLabel( i18n("Stream length:"), this );
   bitLabel->setAlignment( AlignRight|AlignVCenter );
   mUtilBox->addWidget( bitLabel, 4, 1 );
 
-  mBitCombo = new QComboBox( false, this );
+  mBitCombo = new TQComboBox( false, this );
   text = i18n("Fixed 8 Bit" );
   mBitCombo->insertItem( text );
   for( int i=0; i<16; i++ )
@@ -133,7 +133,7 @@ CHexToolWidget::CHexToolWidget( QWidget *parent, const char *name )
     mBitCombo->insertItem( text );
   }
   mBitCombo->setMinimumSize( mBitCombo->sizeHint() );
-  connect( mBitCombo, SIGNAL(activated(int)), SLOT(bitWidthChanged(int)));
+  connect( mBitCombo, TQT_SIGNAL(activated(int)), TQT_SLOT(bitWidthChanged(int)));
   mUtilBox->addWidget( mBitCombo, 4, 2 );
 
 	/* load font metrics */
@@ -141,8 +141,8 @@ CHexToolWidget::CHexToolWidget( QWidget *parent, const char *name )
 
   mUtilBox->activate();
 
-  connect( kapp, SIGNAL( kdisplayFontChanged() ),
-	   SLOT( fontChanged() ) );
+  connect( kapp, TQT_SIGNAL( kdisplayFontChanged() ),
+	   TQT_SLOT( fontChanged() ) );
 
   mCursorState.valid = false;
   mViewHexCaps = true;
@@ -253,7 +253,7 @@ void CHexToolWidget::cursorChanged( SCursorState &state )
 {
   if( state.valid == true )
   {
-    QString buf;
+    TQString buf;
     // change by Kossebau[03.11.2003]:
     // checking for system endianess, using the compiler for the byte interpretation and cutting bloaded code
     // TODO: add PDP endianess
@@ -332,7 +332,7 @@ void CHexToolWidget::cursorChanged( SCursorState &state )
         bitBuf[7-i] = (data&(1<<i)) ? '1' : '0';
 
       bitBuf[8] = 0;
-      mText3[2]->setText( QString(bitBuf) );
+      mText3[2]->setText( TQString(bitBuf) );
     }
     else
     {
@@ -348,20 +348,20 @@ void CHexToolWidget::cursorChanged( SCursorState &state )
       for( int i = 0; i<numBits; i++ )
         bitBuf[numBits-i-1] = (data&(1L<<i)) ? '1' : '0';
       bitBuf[numBits] = 0;
-      mText3[2]->setText( QString(bitBuf) );
+      mText3[2]->setText( TQString(bitBuf) );
     }
 
     // Fix by Sergey A. Sukiyazov
     unsigned char data[2] = { 0, 0 };
     data[0] = state.charValid == false ? '.' :
       (char)((unsigned char)state.data[0]&0xff );
-    buf = QString::fromLocal8Bit( (const char *)data );
+    buf = TQString::fromLocal8Bit( (const char *)data );
 
     mText3[3]->setText( buf );
   }
   else
   {
-    QString str;
+    TQString str;
     for( int i=0; i<4; i++)
     {
       mText1[i]->setText( str );
@@ -376,7 +376,7 @@ void CHexToolWidget::cursorChanged( SCursorState &state )
 
 void CHexToolWidget::fontChanged( void )
 {
-  QFontMetrics fm( mText1[0]->font() );
+  TQFontMetrics fm( mText1[0]->font() );
   int W1 = fm.width( "XXXXXXXX" );
   int W2 = fm.width( "XXXXXXXXXXXX" );
   int W3 = fm.width( "888888888888888888" );
@@ -401,13 +401,13 @@ void CHexToolWidget::unsignedFormat( void )
 }
 
 
-void CHexToolWidget::resizeEvent( QResizeEvent */*e*/ )
+void CHexToolWidget::resizeEvent( TQResizeEvent */*e*/ )
 {
 }
 
 
 
-void CHexToolWidget::closeEvent( QCloseEvent *e )
+void CHexToolWidget::closeEvent( TQCloseEvent *e )
 {
   e->accept();
   emit closed();

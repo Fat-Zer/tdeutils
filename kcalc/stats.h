@@ -26,7 +26,7 @@
 #ifndef KSTATS_H
 #define KSTATS_H
 
-#include <qvaluevector.h>
+#include <tqvaluevector.h>
 #include "knumber.h"
 
 class KStats {
@@ -50,7 +50,7 @@ public:
 	bool     error();
 
 private:
-    QValueVector<KNumber> mData;
+    TQValueVector<KNumber> mData;
     bool error_flag;
 
 };

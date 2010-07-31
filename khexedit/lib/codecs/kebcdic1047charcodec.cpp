@@ -96,7 +96,7 @@ static unsigned char EBCDICChars[256] =
 static const char KEBCDIC1047CharCodecName[] = "EBCDIC 1047";
 
 
-bool KEBCDIC1047CharCodec::encode( char *D, const QChar &C ) const
+bool KEBCDIC1047CharCodec::encode( char *D, const TQChar &C ) const
 {
   int I = C.unicode();
   // not in range?
@@ -109,16 +109,16 @@ bool KEBCDIC1047CharCodec::encode( char *D, const QChar &C ) const
 
 KHEChar KEBCDIC1047CharCodec::decode( char Byte ) const
 {
-  return QChar(UnicodeChars[(unsigned char)Byte]);
+  return TQChar(UnicodeChars[(unsigned char)Byte]);
 }
 
-const QString& KEBCDIC1047CharCodec::name() const
+const TQString& KEBCDIC1047CharCodec::name() const
 {
   return codecName();
 }
 
-const QString& KEBCDIC1047CharCodec::codecName()
+const TQString& KEBCDIC1047CharCodec::codecName()
 {
-  static const QString Name( QString::fromLatin1(KEBCDIC1047CharCodecName) );
+  static const TQString Name( TQString::fromLatin1(KEBCDIC1047CharCodecName) );
   return Name;
 }

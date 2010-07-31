@@ -58,7 +58,7 @@ class MntConfigWidget : public QWidget
     };
 
   public:
-    MntConfigWidget( QWidget *parent=0, const char *name=0, bool init=false );
+    MntConfigWidget( TQWidget *parent=0, const char *name=0, bool init=false );
     ~MntConfigWidget();
 
   public slots:
@@ -70,29 +70,29 @@ class MntConfigWidget : public QWidget
 
   private slots:
     void readDFDone( void );
-    void clicked( QListViewItem *item );
+    void clicked( TQListViewItem *item );
     void selectMntFile( void );
     void selectUmntFile( void );
-    void iconChangedButton(QString);
-    void iconChanged( const QString & );
-    void mntCmdChanged( const QString & );
-    void umntCmdChanged( const QString & );
+    void iconChangedButton(TQString);
+    void iconChanged( const TQString & );
+    void mntCmdChanged( const TQString & );
+    void umntCmdChanged( const TQString & );
 
   protected:       
-    void closeEvent( QCloseEvent * );
+    void closeEvent( TQCloseEvent * );
 
   private:
     CListView   *mList;
-    QGroupBox   *mGroupBox;
-    QLineEdit   *mIconLineEdit;
-    QLineEdit   *mMountLineEdit;
-    QLineEdit   *mUmountLineEdit;
-    QPushButton *mMountButton;
-    QPushButton *mUmountButton;
+    TQGroupBox   *mGroupBox;
+    TQLineEdit   *mIconLineEdit;
+    TQLineEdit   *mMountLineEdit;
+    TQLineEdit   *mUmountLineEdit;
+    TQPushButton *mMountButton;
+    TQPushButton *mUmountButton;
     KIconButton *mIconButton;
     DiskList    mDiskList;
     bool        mInitializing;
-    QMemArray<QListViewItem*> mDiskLookup;
+    TQMemArray<TQListViewItem*> mDiskLookup;
 
   signals:
     void configChanged();

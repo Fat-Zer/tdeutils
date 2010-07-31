@@ -73,11 +73,11 @@ void TextLabel::setTextProps( TextField* t )
 void TextLabel::calculateTextSize()
 {
   int tmp;
-  QFontMetrics fm(font);
+  TQFontMetrics fm(font);
   lineHeight = fm.height();
   textSize.setWidth(0);
   textSize.setHeight(lineHeight * value.count());
-  QStringList::Iterator it = value.begin();
+  TQStringList::Iterator it = value.begin();
   while(it != value.end())
   {
     tmp = fm.width(*it);
@@ -87,35 +87,35 @@ void TextLabel::calculateTextSize()
   }
 }
 
-void TextLabel::setValue( QString text)
+void TextLabel::setValue( TQString text)
 {
-    value = QStringList::split('\n',text);
+    value = TQStringList::split('\n',text);
     calculateTextSize();
 }
 
 void TextLabel::setValue( long v)
 {
-    value = QStringList( QString::number( v ) );
+    value = TQStringList( TQString::number( v ) );
     calculateTextSize();
 }
 
-void TextLabel::setBGColor(QColor clr)
+void TextLabel::setBGColor(TQColor clr)
 {
     bgColor = clr;
 }
 
-QColor TextLabel::getBGColor() const
+TQColor TextLabel::getBGColor() const
 {
     return bgColor;
 }
 
-void TextLabel::setFont(QString f)
+void TextLabel::setFont(TQString f)
 {
     font.setFamily(f);
     calculateTextSize();
 }
 
-QString TextLabel::getFont() const
+TQString TextLabel::getFont() const
 {
     return font.family();
 }
@@ -131,9 +131,9 @@ int TextLabel::getFontSize() const
     return font.pixelSize();
 }
 
-void TextLabel::setAlignment( QString align )
+void TextLabel::setAlignment( TQString align )
 {
-    QString a = align.upper();
+    TQString a = align.upper();
     if( a == "LEFT" || a.isEmpty() )
         alignment = Qt::AlignLeft;
     if( a == "RIGHT" )
@@ -142,7 +142,7 @@ void TextLabel::setAlignment( QString align )
         alignment = Qt::AlignHCenter;
 }
 
-QString TextLabel::getAlignment() const
+TQString TextLabel::getAlignment() const
 {
     if( alignment == Qt::AlignHCenter )
         return "CENTER";
@@ -172,10 +172,10 @@ int TextLabel::getShadow() const
     return shadow;
 }
 
-void TextLabel::setScroll(char* type, QPoint speed, int gap, int pause)
+void TextLabel::setScroll(char* type, TQPoint speed, int gap, int pause)
 {
   ScrollType t = TextLabel::ScrollNone;
-  QString a = type;
+  TQString a = type;
   a = a.upper();
   if(a == "NONE")
     t = TextLabel::ScrollNone;
@@ -188,7 +188,7 @@ void TextLabel::setScroll(char* type, QPoint speed, int gap, int pause)
   setScroll(t, speed, gap, pause);
 }
 
-void TextLabel::setScroll(ScrollType type, QPoint speed, int gap, int pause)
+void TextLabel::setScroll(ScrollType type, TQPoint speed, int gap, int pause)
 {
   scrollType = type;
   scrollSpeed = speed;
@@ -207,13 +207,13 @@ void TextLabel::setScroll(ScrollType type, QPoint speed, int gap, int pause)
         x = -1 * textSize.height();
       else if(speed.y() < 0)
         x = getHeight()-1;
-      scrollPos = QPoint(x,y);
+      scrollPos = TQPoint(x,y);
       break;
     }
     case ScrollNone:
     case ScrollBackAndForth:
     default:
-      scrollPos = QPoint(0,0);
+      scrollPos = TQPoint(0,0);
       break;
   }
   scrollGap = gap;
@@ -221,8 +221,8 @@ void TextLabel::setScroll(ScrollType type, QPoint speed, int gap, int pause)
   pauseCounter = 1;
 }
 
-int TextLabel::drawText(QPainter *p, int x, int y, int width, int height,
-                        QString text)
+int TextLabel::drawText(TQPainter *p, int x, int y, int width, int height,
+                        TQString text)
 {
   if( shadow != 0)
   {
@@ -235,8 +235,8 @@ int TextLabel::drawText(QPainter *p, int x, int y, int width, int height,
   return 0;
 }
 
-bool TextLabel::calculateScrollCoords(QRect meterRect, QRect &textRect,
-                                        QPoint &next, int &x, int &y)
+bool TextLabel::calculateScrollCoords(TQRect meterRect, TQRect &textRect,
+                                        TQPoint &next, int &x, int &y)
 {
   if(scrollType == ScrollBackAndForth &&
      (scrollSpeed.x() != 0 && textSize.width() < getWidth() ||
@@ -251,11 +251,11 @@ bool TextLabel::calculateScrollCoords(QRect meterRect, QRect &textRect,
     scrollPos += scrollSpeed;
 
     // -1 | 0 | 1
-    QPoint direction(scrollSpeed.x()/abs((scrollSpeed.x() == 0)?
+    TQPoint direction(scrollSpeed.x()/abs((scrollSpeed.x() == 0)?
                        1:scrollSpeed.x()),
                      scrollSpeed.y()/abs((scrollSpeed.y() == 0)?
                        1:scrollSpeed.y()));
-    next = QPoint(-1 * direction.x() * (scrollGap + textSize.width()),
+    next = TQPoint(-1 * direction.x() * (scrollGap + textSize.width()),
                   -1 * direction.y() * (scrollGap + textSize.height()));
     textRect.setCoords(x, y, x + textSize.width(), y + textSize.height());
 
@@ -287,7 +287,7 @@ bool TextLabel::calculateScrollCoords(QRect meterRect, QRect &textRect,
   return true;
 }
 
-void TextLabel::mUpdate(QPainter *p)
+void TextLabel::mUpdate(TQPainter *p)
 {
   if (hidden != 1)
   {
@@ -297,9 +297,9 @@ void TextLabel::mUpdate(QPainter *p)
     int y = getY();
     int width = getWidth();
     int height = getHeight();
-    QRect meterRect(x, y, width, height);
-    QRect textRect;
-    QPoint next;
+    TQRect meterRect(x, y, width, height);
+    TQRect textRect;
+    TQPoint next;
 
     p->setFont(font);
     if(scrollType != ScrollNone)
@@ -313,7 +313,7 @@ void TextLabel::mUpdate(QPainter *p)
       width = textSize.width();
       height = textSize.height();
     }
-    QStringList::Iterator it = value.begin();
+    TQStringList::Iterator it = value.begin();
     while(it != value.end() && (row <= height || height == -1 ))
     {
       drawText(p, x, y + i, width, height, *it);
@@ -337,11 +337,11 @@ void TextLabel::mUpdate(QPainter *p)
   }
 }
 
-bool TextLabel::click(QMouseEvent* e)
+bool TextLabel::click(TQMouseEvent* e)
 {
     if (getBoundingBox().contains(e -> x(), e -> y()) && isEnabled())
     {
-        QString program;
+        TQString program;
         if (e -> button() == Qt::LeftButton)
         {
             program = leftButtonAction;
@@ -367,9 +367,9 @@ bool TextLabel::click(QMouseEvent* e)
     return false;
 }
 
-void TextLabel::attachClickArea(QString leftMouseButton,
-                                QString middleMouseButton,
-                                QString rightMouseButton)
+void TextLabel::attachClickArea(TQString leftMouseButton,
+                                TQString middleMouseButton,
+                                TQString rightMouseButton)
 {
     leftButtonAction = leftMouseButton;
     middleButtonAction = middleMouseButton;

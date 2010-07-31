@@ -23,23 +23,23 @@
 static const char *mediaString = "application/octet-stream";
 
 
-CHexDrag::CHexDrag( const QByteArray &data, QWidget *dragSource,
+CHexDrag::CHexDrag( const TQByteArray &data, TQWidget *dragSource,
 		    const char *name )
-  :QDragObject(dragSource,name)
+  :TQDragObject(dragSource,name)
 {
   setData( data );
   prepPixmap();
 }
 
 
-CHexDrag::CHexDrag( QWidget *dragSource, const char *name )
-  :QDragObject(dragSource,name)
+CHexDrag::CHexDrag( TQWidget *dragSource, const char *name )
+  :TQDragObject(dragSource,name)
 {
   prepPixmap();
 }
 
 
-void CHexDrag::setData( const QByteArray &data )
+void CHexDrag::setData( const TQByteArray &data )
 {
   mData = data;
 }
@@ -53,9 +53,9 @@ void CHexDrag::prepPixmap(void)
   //
   /*
   KIconLoader &loader = *KGlobal::iconLoader();
-  QPixmap pix = loader.loadIcon( "binary.xpm" );
+  TQPixmap pix = loader.loadIcon( "binary.xpm" );
 
-  QPoint hotspot( pix.width()-20,pix.height()/2 );
+  TQPoint hotspot( pix.width()-20,pix.height()/2 );
   setPixmap( pix, hotspot ); 
   */
 }
@@ -75,7 +75,7 @@ const char *CHexDrag::format( int i ) const
 }
 
 
-QByteArray CHexDrag::encodedData( const char *fmt ) const
+TQByteArray CHexDrag::encodedData( const char *fmt ) const
 {
   if( fmt != 0 )
   {
@@ -85,18 +85,18 @@ QByteArray CHexDrag::encodedData( const char *fmt ) const
     }
   }
 
-  QByteArray buf;
+  TQByteArray buf;
   return( buf );
 }
 
 
-bool CHexDrag::canDecode( const QMimeSource *e )
+bool CHexDrag::canDecode( const TQMimeSource *e )
 {
   return( e->provides(mediaString) );
 }
 
 
-bool CHexDrag::decode( const QMimeSource *e, QByteArray &dest )
+bool CHexDrag::decode( const TQMimeSource *e, TQByteArray &dest )
 {
   dest = e->encodedData(mediaString);
   return( dest.size() == 0 ? false : true );

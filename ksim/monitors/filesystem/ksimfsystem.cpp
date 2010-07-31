@@ -21,11 +21,11 @@
 
 #include <config.h>
 
-#include <qlayout.h>
-#include <qvaluelist.h>
-#include <qtimer.h>
-#include <qfile.h>
-#include <qregexp.h>
+#include <tqlayout.h>
+#include <tqvaluelist.h>
+#include <tqtimer.h>
+#include <tqfile.h>
+#include <tqregexp.h>
 
 #include <kdebug.h>
 #include <klocale.h>
@@ -64,7 +64,7 @@ KSim::PluginPage *PluginModule::createConfigPage(const char *className)
 
 void PluginModule::showAbout()
 {
-  QString version = kapp->aboutData()->version();
+  TQString version = kapp->aboutData()->version();
 
   KAboutData aboutData(instanceName(),
      I18N_NOOP("KSim FileSystem Plugin"), version.latin1(),
@@ -86,10 +86,10 @@ Fsystem::Fsystem(KSim::PluginObject *parent, const char *name)
    KSim::PluginView(parent, name)
 {
   config()->setGroup("Fsystem");
-  QVBoxLayout *vbLayout = new QVBoxLayout(this);
+  TQVBoxLayout *vbLayout = new TQVBoxLayout(this);
   vbLayout->setAutoAdd(true);
 
-  QSpacerItem *item = new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Expanding);
+  TQSpacerItem *item = new TQSpacerItem(0, 0, TQSizePolicy::Expanding, TQSizePolicy::Expanding);
   vbLayout->addItem(item);
 
   m_mountEntries = makeList(config()->readListEntry("mountEntries"));
@@ -99,8 +99,8 @@ Fsystem::Fsystem(KSim::PluginObject *parent, const char *name)
 
   createFreeInfo();
 
-  m_updateTimer = new QTimer(this);
-  connect(m_updateTimer, SIGNAL(timeout()), SLOT(updateFS()));
+  m_updateTimer = new TQTimer(this);
+  connect(m_updateTimer, TQT_SIGNAL(timeout()), TQT_SLOT(updateFS()));
   m_updateTimer->start(config()->readNumEntry("updateValue", 60) * 1000);
 }
 
@@ -155,7 +155,7 @@ void Fsystem::createFreeInfo()
     m_widget->setValue(i, total - free);
     if (m_showPercentage)
       m_widget->setText(i, ((*it).second.isEmpty() ? (*it).first : (*it).second)
-         + " - " + QString::number(percent) + "%");
+         + " - " + TQString::number(percent) + "%");
     else
       m_widget->setText(i, ((*it).second.isEmpty() ? (*it).first : (*it).second));
     i++;
@@ -179,20 +179,20 @@ void Fsystem::updateFS()
     m_widget->setValue(i, total - free);
     if (m_showPercentage)
       m_widget->setText(i, ((*it).second.isEmpty() ? (*it).first : (*it).second)
-         + " - " + QString::number(percent) + "%");
+         + " - " + TQString::number(percent) + "%");
     else
       m_widget->setText(i, ((*it).second.isEmpty() ? (*it).first : (*it).second));
     i++;
   }
 }
 
-Fsystem::MountEntryList Fsystem::makeList(const QStringList &list) const
+Fsystem::MountEntryList Fsystem::makeList(const TQStringList &list) const
 {
   MountEntryList newList;
-  QStringList splitList;
-  QStringList::ConstIterator it;
+  TQStringList splitList;
+  TQStringList::ConstIterator it;
   for (it = list.begin(); it != list.end(); ++it) {
-    splitList = QStringList::split(":", (*it));
+    splitList = TQStringList::split(":", (*it));
     newList.append(qMakePair(splitList[0], splitList[1]));
   }
 

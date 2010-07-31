@@ -32,10 +32,10 @@
 #include <kstandarddirs.h>
 #include <klocale.h>
 #include <kio/netaccess.h>
-#include <qtextstream.h>
-#include <qfileinfo.h>
-#include <qdom.h>
-#include <qdir.h>
+#include <tqtextstream.h>
+#include <tqfileinfo.h>
+#include <tqdom.h>
+#include <tqdir.h>
 
 class ZipFile
 {
@@ -44,7 +44,7 @@ class ZipFile
       m_zip(0), m_file(0)
     {
     }
-    void setFile(const QString& filename)
+    void setFile(const TQString& filename)
     {
       m_filename = filename;
       if(filename.isEmpty())
@@ -60,7 +60,7 @@ class ZipFile
       }
       m_file = static_cast<const KArchiveFile*>(entry);
     }
-    void setZip(const QString& zipfile)
+    void setZip(const TQString& zipfile)
     {
       closeZip();
 
@@ -93,7 +93,7 @@ class ZipFile
       }
     }
 
-    QByteArray data()
+    TQByteArray data()
     {
       if(m_file)
         return m_file->data();
@@ -101,7 +101,7 @@ class ZipFile
       {
         if(!m_filename.isEmpty())
           qDebug("Error reading file %s from zip", m_filename.ascii());
-        return QByteArray();
+        return TQByteArray();
       }
     }
 
@@ -113,7 +113,7 @@ class ZipFile
   private:
     KZip* m_zip;
     const KArchiveFile* m_file;
-    QString m_filename;
+    TQString m_filename;
     const KArchiveDirectory* m_dir;
 };
 
@@ -143,7 +143,7 @@ bool ThemeFile::open()
     m_ba = m_zip->data();
     if(m_ba.size() > 0)
     {
-      m_stream = new QTextStream(m_ba, IO_ReadOnly);
+      m_stream = new TQTextStream(m_ba, IO_ReadOnly);
       result = true;
     }
   }
@@ -153,7 +153,7 @@ bool ThemeFile::open()
 
     if(m_fl.open(IO_ReadOnly|IO_Translate))
     {
-      m_stream = new QTextStream(&m_fl);        // use a text stream
+      m_stream = new TQTextStream(&m_fl);        // use a text stream
       result = true;
     }
   }
@@ -166,7 +166,7 @@ bool ThemeFile::nextLine(LineParser& parser)
 
   if(m_stream)
   {
-    QString result = m_stream->readLine();
+    TQString result = m_stream->readLine();
 
     if(result.isNull())
       return false;
@@ -196,13 +196,13 @@ bool ThemeFile::isValid() const
 
 bool ThemeFile::exists() const
 {
-  QFileInfo file(m_file);
+  TQFileInfo file(m_file);
   return file.exists();
 }
 
-QPixmap ThemeFile::icon() const
+TQPixmap ThemeFile::icon() const
 {
-  return QPixmap(readThemeFile(m_icon));
+  return TQPixmap(readThemeFile(m_icon));
 }
 
 bool ThemeFile::set(const KURL &url)
@@ -219,8 +219,8 @@ bool ThemeFile::set(const KURL &url)
       return false;
     }
 
-    QDir themeDir(locateLocal("appdata", "themes/", true));
-    QFileInfo localFile = themeDir.filePath(url.fileName());
+    TQDir themeDir(locateLocal("appdata", "themes/", true));
+    TQFileInfo localFile = themeDir.filePath(url.fileName());
 
     if(localFile.exists())
     {
@@ -242,14 +242,14 @@ bool ThemeFile::set(const KURL &url)
   else
   {
     if(url.directory().isEmpty() || url.directory() == "/")
-      m_file = canonicalFile(QDir::current().filePath(url.fileName()));
+      m_file = canonicalFile(TQDir::current().filePath(url.fileName()));
     else
       m_file = canonicalFile(url.path());
     if(!exists())
       return false;
   }
 
-  QFileInfo fi(m_file);
+  TQFileInfo fi(m_file);
 
   m_name = fi.baseName( TRUE );
   m_theme = m_name + ".theme";
@@ -270,7 +270,7 @@ bool ThemeFile::set(const KURL &url)
   }
   parseXml();
 
-  QFileInfo fimo(m_python);
+  TQFileInfo fimo(m_python);
   if(m_python.isEmpty())
     fimo.setFile(m_theme);
   else
@@ -285,15 +285,15 @@ void ThemeFile::parseXml()
 {
   if(!fileExists("maindata.xml"))
     return;
-  QByteArray ba = readThemeFile("maindata.xml");
-  QDomDocument doc("superkaramba_theme");
+  TQByteArray ba = readThemeFile("maindata.xml");
+  TQDomDocument doc("superkaramba_theme");
   doc.setContent(ba);
-  QDomElement element = doc.documentElement();
+  TQDomElement element = doc.documentElement();
 
-  QDomNode n = element.firstChild();
+  TQDomNode n = element.firstChild();
   while(!n.isNull())
   {
-    QDomElement e = n.toElement();
+    TQDomElement e = n.toElement();
     if(!e.isNull())
     {
       if(e.tagName() == "name")
@@ -327,22 +327,22 @@ void ThemeFile::parseXml()
 
 bool ThemeFile::canUninstall() const
 {
-  QFileInfo fi(file());
-  if(fi.permission(QFileInfo::WriteUser) ||
-     fi.permission(QFileInfo::WriteGroup) ||
-     fi.permission(QFileInfo::WriteOther))
+  TQFileInfo fi(file());
+  if(fi.permission(TQFileInfo::WriteUser) ||
+     fi.permission(TQFileInfo::WriteGroup) ||
+     fi.permission(TQFileInfo::WriteOther))
     return true;
   return false;
 }
 
-bool ThemeFile::isThemeFile(const QString& filename) const
+bool ThemeFile::isThemeFile(const TQString& filename) const
 {
-  QFileInfo fileInfo(filename);
+  TQFileInfo fileInfo(filename);
 
   return fileInfo.isRelative();
 }
 
-bool ThemeFile::fileExists(const QString& filename) const
+bool ThemeFile::fileExists(const TQString& filename) const
 {
   if(isThemeFile(filename))
   {
@@ -352,17 +352,17 @@ bool ThemeFile::fileExists(const QString& filename) const
       return m_zip->exists();
     }
     else
-      return QFileInfo(path() + "/" + filename).exists();
+      return TQFileInfo(path() + "/" + filename).exists();
   }
   else
-    return QFileInfo(filename).exists();
+    return TQFileInfo(filename).exists();
 }
 
-QByteArray ThemeFile::readThemeFile(const QString& filename) const
+TQByteArray ThemeFile::readThemeFile(const TQString& filename) const
 {
-  //QTime time;
+  //TQTime time;
   //time.start();
-  QByteArray ba;
+  TQByteArray ba;
 
   if(isZipTheme())
   {
@@ -371,7 +371,7 @@ QByteArray ThemeFile::readThemeFile(const QString& filename) const
   }
   else
   {
-    QFile file(path() + "/" + filename);
+    TQFile file(path() + "/" + filename);
 
     if(file.open(IO_ReadOnly))
     {
@@ -384,9 +384,9 @@ QByteArray ThemeFile::readThemeFile(const QString& filename) const
   return ba;
 }
 
-bool ThemeFile::isZipFile(const QString& filename)
+bool ThemeFile::isZipFile(const TQString& filename)
 {
-  QFile file(filename);
+  TQFile file(filename);
 
   if(file.open(IO_ReadOnly))
   {
@@ -406,9 +406,9 @@ bool ThemeFile::pythonModuleExists() const
   return (!m_python.isEmpty() && fileExists(m_python + ".py"));
 }
 
-QString ThemeFile::canonicalFile(const QString& file)
+TQString ThemeFile::canonicalFile(const TQString& file)
 {
   // Get absolute path with NO symlinks
-  QFileInfo fi(file);
-  return QDir(fi.dir().canonicalPath()).filePath(fi.fileName());
+  TQFileInfo fi(file);
+  return TQDir(fi.dir().canonicalPath()).filePath(fi.fileName());
 }

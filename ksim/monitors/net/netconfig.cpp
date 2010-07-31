@@ -17,9 +17,9 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#include <qpushbutton.h>
-#include <qlayout.h>
-#include <qcursor.h>
+#include <tqpushbutton.h>
+#include <tqlayout.h>
+#include <tqcursor.h>
 
 #include <klistview.h>
 #include <ksimpleconfig.h>
@@ -40,7 +40,7 @@ NetConfig::NetConfig(KSim::PluginObject *parent, const char *name)
   m_yes = i18n("yes");
   m_no = i18n("no");
 
-  QVBoxLayout *mainLayout = new QVBoxLayout(this);
+  TQVBoxLayout *mainLayout = new TQVBoxLayout(this);
   mainLayout->setSpacing(6);
 
   usingBox = new KListView(this);
@@ -49,33 +49,33 @@ NetConfig::NetConfig(KSim::PluginObject *parent, const char *name)
   usingBox ->addColumn(i18n("Commands"));
   usingBox->setAllColumnsShowFocus(true);
 
-  connect(usingBox, SIGNAL(contextMenu(KListView *,
-     QListViewItem *, const QPoint &)),
-     SLOT(menu(KListView *, QListViewItem *, const QPoint &)));
-  connect(usingBox, SIGNAL(doubleClicked(QListViewItem *)),
-     SLOT(modifyItem(QListViewItem *)));
+  connect(usingBox, TQT_SIGNAL(contextMenu(KListView *,
+     TQListViewItem *, const TQPoint &)),
+     TQT_SLOT(menu(KListView *, TQListViewItem *, const TQPoint &)));
+  connect(usingBox, TQT_SIGNAL(doubleClicked(TQListViewItem *)),
+     TQT_SLOT(modifyItem(TQListViewItem *)));
   mainLayout->addWidget(usingBox);
 
   layout = new QHBoxLayout;
   layout->setSpacing(6);
 
-  QSpacerItem *spacer = new QSpacerItem(20, 20,
-     QSizePolicy::Expanding, QSizePolicy::Minimum);
+  TQSpacerItem *spacer = new TQSpacerItem(20, 20,
+     TQSizePolicy::Expanding, TQSizePolicy::Minimum);
   layout->addItem(spacer);
 
-  insertButton = new QPushButton(this);
+  insertButton = new TQPushButton(this);
   insertButton->setText(i18n("Add..."));
-  connect(insertButton, SIGNAL(clicked()), SLOT(showNetDialog()));
+  connect(insertButton, TQT_SIGNAL(clicked()), TQT_SLOT(showNetDialog()));
   layout->addWidget(insertButton);
 
-  modifyButton = new QPushButton(this);
+  modifyButton = new TQPushButton(this);
   modifyButton->setText(i18n("Modify..."));
-  connect(modifyButton, SIGNAL(clicked()), SLOT(modifyCurrent()));
+  connect(modifyButton, TQT_SIGNAL(clicked()), TQT_SLOT(modifyCurrent()));
   layout->addWidget(modifyButton);
 
-  removeButton = new QPushButton(this);
+  removeButton = new TQPushButton(this);
   removeButton->setText(i18n("Remove"));
-  connect(removeButton, SIGNAL(clicked()), SLOT(removeCurrent()));
+  connect(removeButton, TQT_SIGNAL(clicked()), TQT_SLOT(removeCurrent()));
   layout->addWidget(removeButton);
 
   mainLayout->addLayout(layout);
@@ -93,7 +93,7 @@ void NetConfig::saveConfig()
   Network::List::Iterator it;
   for( it = m_networkList.begin(); it != m_networkList.end(); ++it )
   {
-    config()->setGroup( "device-" + QString::number( i ) );
+    config()->setGroup( "device-" + TQString::number( i ) );
     config()->writeEntry( "deviceName", ( *it ).name() );
     config()->writeEntry( "showTimer", ( *it ).showTimer() );
     config()->writeEntry( "deviceFormat", ( *it ).format() );
@@ -117,12 +117,12 @@ void NetConfig::readConfig()
 
   for ( int i = 0; i < deviceAmount; ++i )
   {
-    if ( !config()->hasGroup( "device-" + QString::number( i ) ) )
+    if ( !config()->hasGroup( "device-" + TQString::number( i ) ) )
     {
       continue;
     }
 
-    config()->setGroup("device-" + QString::number(i));
+    config()->setGroup("device-" + TQString::number(i));
 
     m_networkList.append( Network( config()->readEntry( "deviceName" ),
        config()->readEntry( "deviceFormat" ),
@@ -131,16 +131,16 @@ void NetConfig::readConfig()
        config()->readEntry( "cCommand" ),
        config()->readEntry( "dCommand" ) ) );
 
-    (void) new QListViewItem( usingBox,
+    (void) new TQListViewItem( usingBox,
        config()->readEntry( "deviceName" ),
        boolToString( config()->readBoolEntry( "showTimer" ) ),
        boolToString( config()->readBoolEntry( "commands" ) ) );
   }
 }
 
-void NetConfig::menu(KListView *, QListViewItem *item, const QPoint &)
+void NetConfig::menu(KListView *, TQListViewItem *item, const TQPoint &)
 {
-  aboutMenu = new QPopupMenu(this);
+  aboutMenu = new TQPopupMenu(this);
 
   if (item) {
     aboutMenu->insertItem(i18n("&Add Net Device"), 3);
@@ -155,7 +155,7 @@ void NetConfig::menu(KListView *, QListViewItem *item, const QPoint &)
     aboutMenu->setItemEnabled(2, false);
   }
 
-  switch (aboutMenu->exec(QCursor::pos())) {
+  switch (aboutMenu->exec(TQCursor::pos())) {
     case 1:
       removeItem(item);
       break;
@@ -170,7 +170,7 @@ void NetConfig::menu(KListView *, QListViewItem *item, const QPoint &)
   delete aboutMenu;
 }
 
-void NetConfig::modifyItem(QListViewItem *item)
+void NetConfig::modifyItem(TQListViewItem *item)
 {
   if (!item)
     return;
@@ -211,13 +211,13 @@ void NetConfig::modifyItem(QListViewItem *item)
   delete netDialog;
 }
 
-void NetConfig::removeItem(QListViewItem *item)
+void NetConfig::removeItem(TQListViewItem *item)
 {
   if (!item)
     return;
 
   int result = KMessageBox::warningContinueCancel(0, i18n("Are you sure you "
-     "want to remove the net interface '%1'?").arg(item->text(0)), QString::null, KStdGuiItem::del());
+     "want to remove the net interface '%1'?").arg(item->text(0)), TQString::null, KStdGuiItem::del());
 
   if (result == KMessageBox::Cancel)
     return;
@@ -229,7 +229,7 @@ void NetConfig::removeItem(QListViewItem *item)
     if ( item->text( 0 ) == ( *it ).name() )
     {
       m_networkList.remove( it );
-      if ( config()->deleteGroup( "device-" + QString::number( i ) ) )
+      if ( config()->deleteGroup( "device-" + TQString::number( i ) ) )
         kdDebug(2003) << "device-" << i << " was deleted" << endl;
 
       break;
@@ -281,13 +281,13 @@ void NetConfig::getStats()
      netDialog->cCommand(),
      netDialog->dCommand() ) );
 
-  (void) new QListViewItem( usingBox,
+  (void) new TQListViewItem( usingBox,
      netDialog->deviceName(),
      boolToString( netDialog->timer() ),
      boolToString( netDialog->commands() ) );
 }
 
-const QString &NetConfig::boolToString(bool value) const
+const TQString &NetConfig::boolToString(bool value) const
 {
   if (value)
     return m_yes;

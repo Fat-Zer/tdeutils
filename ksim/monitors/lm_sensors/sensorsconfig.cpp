@@ -29,21 +29,21 @@
 #include <kdebug.h>
 #include <kinputdialog.h>
 
-#include <qtimer.h>
-#include <qlabel.h>
-#include <qlayout.h>
-#include <qcheckbox.h>
-#include <qcursor.h>
-#include <qpopupmenu.h>
-#include <qpushbutton.h>
+#include <tqtimer.h>
+#include <tqlabel.h>
+#include <tqlayout.h>
+#include <tqcheckbox.h>
+#include <tqcursor.h>
+#include <tqpopupmenu.h>
+#include <tqpushbutton.h>
 
 class SensorViewItem : public QCheckListItem
 {
   public:
-    SensorViewItem(QListView *parent, const QString &text1,
-       const QString &text2, const QString &text3,
-       const QString &text4)
-       : QCheckListItem(parent, text1, CheckBox)
+    SensorViewItem(TQListView *parent, const TQString &text1,
+       const TQString &text2, const TQString &text3,
+       const TQString &text4)
+       : TQCheckListItem(parent, text1, CheckBox)
     {
       setText(1, text2);
       setText(2, text3);
@@ -54,7 +54,7 @@ class SensorViewItem : public QCheckListItem
 SensorsConfig::SensorsConfig(KSim::PluginObject *parent, const char *name)
    : KSim::PluginPage(parent, name)
 {
-  m_layout = new QGridLayout(this);
+  m_layout = new TQGridLayout(this);
   m_layout->setSpacing(6);
   m_neverShown = true;
 
@@ -67,36 +67,36 @@ SensorsConfig::SensorsConfig(KSim::PluginObject *parent, const char *name)
   m_sensorView->setColumnWidth(1, 60);
   m_sensorView->setColumnWidth(2, 80);
   m_sensorView->setAllColumnsShowFocus(true);
-  connect(m_sensorView, SIGNAL(contextMenu(KListView *,
-     QListViewItem *, const QPoint &)), this, SLOT(menu(KListView *,
-     QListViewItem *, const QPoint &)));
+  connect(m_sensorView, TQT_SIGNAL(contextMenu(KListView *,
+     TQListViewItem *, const TQPoint &)), this, TQT_SLOT(menu(KListView *,
+     TQListViewItem *, const TQPoint &)));
 
-  connect( m_sensorView, SIGNAL( doubleClicked( QListViewItem * ) ),
-     SLOT( modify( QListViewItem * ) ) );
+  connect( m_sensorView, TQT_SIGNAL( doubleClicked( TQListViewItem * ) ),
+     TQT_SLOT( modify( TQListViewItem * ) ) );
 
   m_layout->addMultiCellWidget(m_sensorView, 1, 1, 0, 3);
 
-  m_modify = new QPushButton( this );
+  m_modify = new TQPushButton( this );
   m_modify->setText( i18n( "Modify..." ) );
-  connect( m_modify, SIGNAL( clicked() ), SLOT( modify() ) );
+  connect( m_modify, TQT_SIGNAL( clicked() ), TQT_SLOT( modify() ) );
   m_layout->addMultiCellWidget( m_modify, 2, 2, 3, 3 );
 
-  m_fahrenBox = new QCheckBox(i18n("Display Fahrenheit"), this);
+  m_fahrenBox = new TQCheckBox(i18n("Display Fahrenheit"), this);
   m_layout->addMultiCellWidget(m_fahrenBox, 3, 3, 0, 3);
 
-  m_updateLabel = new QLabel(this);
+  m_updateLabel = new TQLabel(this);
   m_updateLabel->setText(i18n("Update interval:"));
-  m_updateLabel->setSizePolicy(QSizePolicy(QSizePolicy::Fixed,
-     QSizePolicy::Fixed));
+  m_updateLabel->setSizePolicy(TQSizePolicy(TQSizePolicy::Fixed,
+     TQSizePolicy::Fixed));
   m_layout->addMultiCellWidget(m_updateLabel, 4, 4, 0, 0);
 
   m_sensorSlider = new KIntSpinBox(this);
   m_layout->addMultiCellWidget(m_sensorSlider, 4, 4, 1, 1);
 
-  QLabel *intervalLabel = new QLabel(this);
+  TQLabel *intervalLabel = new TQLabel(this);
   intervalLabel->setText(i18n("seconds"));
-  intervalLabel->setSizePolicy(QSizePolicy(QSizePolicy::Fixed,
-     QSizePolicy::Fixed));
+  intervalLabel->setSizePolicy(TQSizePolicy(TQSizePolicy::Fixed,
+     TQSizePolicy::Fixed));
   m_layout->addMultiCellWidget(intervalLabel, 4, 4, 2, 2);
 }
 
@@ -110,10 +110,10 @@ void SensorsConfig::saveConfig()
   config()->writeEntry("sensorUpdateValue", m_sensorSlider->value());
   config()->writeEntry("displayFahrenheit", m_fahrenBox->isChecked());
 
-  for (QListViewItemIterator it(m_sensorView); it.current(); ++it) {
+  for (TQListViewItemIterator it(m_sensorView); it.current(); ++it) {
     config()->setGroup("Sensors");
     config()->writeEntry(it.current()->text(2),
-       QString::number(static_cast<QCheckListItem *>(it.current())->isOn())
+       TQString::number(static_cast<TQCheckListItem *>(it.current())->isOn())
        + ":" + it.current()->text(1));
   }
 }
@@ -124,25 +124,25 @@ void SensorsConfig::readConfig()
   m_fahrenBox->setChecked(config()->readBoolEntry("displayFahrenheit", false));
   m_sensorSlider->setValue(config()->readNumEntry("sensorUpdateValue", 15));
 
-  QStringList names;
-  for (QListViewItemIterator it(m_sensorView); it.current(); ++it) {
+  TQStringList names;
+  for (TQListViewItemIterator it(m_sensorView); it.current(); ++it) {
     config()->setGroup("Sensors");
-    names = QStringList::split(":", config()->readEntry(it.current()->text(2), "0:"));
+    names = TQStringList::split(":", config()->readEntry(it.current()->text(2), "0:"));
     if (!names[1].isNull())
       it.current()->setText(1, names[1]);
-    static_cast<QCheckListItem *>(it.current())->setOn(names[0].toInt());
+    static_cast<TQCheckListItem *>(it.current())->setOn(names[0].toInt());
   }
 }
 
-void SensorsConfig::menu(KListView *, QListViewItem *, const QPoint &)
+void SensorsConfig::menu(KListView *, TQListViewItem *, const TQPoint &)
 {
-  m_popupMenu = new QPopupMenu(this);
+  m_popupMenu = new TQPopupMenu(this);
 
   m_popupMenu->insertItem(i18n("Select All"), 1);
   m_popupMenu->insertItem(i18n("Unselect All"), 2);
   m_popupMenu->insertItem(i18n("Invert Selection"), 3);
 
-  switch (m_popupMenu->exec(QCursor::pos())) {
+  switch (m_popupMenu->exec(TQCursor::pos())) {
     case 1:
       selectAll();
       break;
@@ -159,20 +159,20 @@ void SensorsConfig::menu(KListView *, QListViewItem *, const QPoint &)
 
 void SensorsConfig::selectAll()
 {
-  for (QListViewItemIterator it(m_sensorView); it.current(); ++it)
-    static_cast<QCheckListItem *>(it.current())->setOn(true);
+  for (TQListViewItemIterator it(m_sensorView); it.current(); ++it)
+    static_cast<TQCheckListItem *>(it.current())->setOn(true);
 }
 
 void SensorsConfig::unSelectAll()
 {
-  for (QListViewItemIterator it(m_sensorView); it.current(); ++it)
-    static_cast<QCheckListItem *>(it.current())->setOn(false);
+  for (TQListViewItemIterator it(m_sensorView); it.current(); ++it)
+    static_cast<TQCheckListItem *>(it.current())->setOn(false);
 }
 
 void SensorsConfig::invertSelect()
 {
-  for (QListViewItemIterator it(m_sensorView); it.current(); ++it) {
-    QCheckListItem *item = static_cast<QCheckListItem *>(it.current());
+  for (TQListViewItemIterator it(m_sensorView); it.current(); ++it) {
+    TQCheckListItem *item = static_cast<TQCheckListItem *>(it.current());
     if (item->isOn())
       item->setOn(false);
     else
@@ -185,8 +185,8 @@ void SensorsConfig::initSensors()
   const SensorList &sensorList = SensorBase::self()->sensorsList();
 
   int i = 0;
-  QString label;
-  QStringList sensorInfo;
+  TQString label;
+  TQStringList sensorInfo;
   SensorList::ConstIterator it;
   for (it = sensorList.begin(); it != sensorList.end(); ++it) {
     label.sprintf("%02i", ++i);
@@ -195,23 +195,23 @@ void SensorsConfig::initSensors()
        (*it).sensorValue() + (*it).sensorUnit());
   }
 
-  QStringList names;
-  for (QListViewItemIterator it(m_sensorView); it.current(); ++it) {
+  TQStringList names;
+  for (TQListViewItemIterator it(m_sensorView); it.current(); ++it) {
     config()->setGroup("Sensors");
-    names = QStringList::split(":", config()->readEntry(it.current()->text(2), "0:"));
+    names = TQStringList::split(":", config()->readEntry(it.current()->text(2), "0:"));
     if (!names[1].isNull())
       it.current()->setText(1, names[1]);
-    static_cast<QCheckListItem *>(it.current())->setOn(names[0].toInt());
+    static_cast<TQCheckListItem *>(it.current())->setOn(names[0].toInt());
   }
 }
 
-void SensorsConfig::modify( QListViewItem * item )
+void SensorsConfig::modify( TQListViewItem * item )
 {
   if ( !item )
     return;
 
   bool ok = false;
-  QString text = KInputDialog::getText( i18n( "Modify Sensor Label" ), i18n( "Sensor label:" ),
+  TQString text = KInputDialog::getText( i18n( "Modify Sensor Label" ), i18n( "Sensor label:" ),
      item->text( 1 ), &ok, this );
 
   if ( ok )
@@ -223,7 +223,7 @@ void SensorsConfig::modify()
   modify( m_sensorView->selectedItem() );
 }
 
-void SensorsConfig::showEvent(QShowEvent *)
+void SensorsConfig::showEvent(TQShowEvent *)
 {
   if (m_neverShown) {
     initSensors();
@@ -233,7 +233,7 @@ void SensorsConfig::showEvent(QShowEvent *)
     const SensorList &list = SensorBase::self()->sensorsList();
     SensorList::ConstIterator it;
     for (it = list.begin(); it != list.end(); ++it) {
-      QListViewItem *item = m_sensorView->findItem((*it).sensorName(), 1);
+      TQListViewItem *item = m_sensorView->findItem((*it).sensorName(), 1);
       if (item)
         item->setText(3, (*it).sensorValue() + (*it).sensorUnit());
     }

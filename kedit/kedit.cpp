@@ -25,10 +25,10 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-#include <qlayout.h>
-#include <qtimer.h>
-#include <qpaintdevicemetrics.h>
-#include <qpainter.h>
+#include <tqlayout.h>
+#include <tqtimer.h>
+#include <tqpaintdevicemetrics.h>
+#include <tqpainter.h>
 
 #include <kaboutdata.h>
 #include <kaction.h>
@@ -56,25 +56,25 @@
 #include <kdebug.h>
 
 
-QPtrList<TopLevel> *TopLevel::windowList = 0;
+TQPtrList<TopLevel> *TopLevel::windowList = 0;
 
 int default_open =  TopLevel::OPEN_READWRITE;
 
-TopLevel::TopLevel (QWidget *, const char *name)
+TopLevel::TopLevel (TQWidget *, const char *name)
   : KMainWindow ( 0,name ), kspellconfigOptions(0),
   eframe(0), newWindow(false), kspell(0)
 {
   if (!windowList)
   {
-     windowList = new QPtrList<TopLevel>;
+     windowList = new TQPtrList<TopLevel>;
      windowList->setAutoDelete( FALSE );
   }
   windowList->append( this );
 
-  statusbar_timer = new QTimer(this);
-  connect(statusbar_timer, SIGNAL(timeout()),this,SLOT(timer_slot()));
+  statusbar_timer = new TQTimer(this);
+  connect(statusbar_timer, TQT_SIGNAL(timeout()),this,TQT_SLOT(timer_slot()));
 
-  connect(kapp,SIGNAL(kdisplayPaletteChanged()),this,SLOT(set_colors()));
+  connect(kapp,TQT_SIGNAL(kdisplayPaletteChanged()),this,TQT_SLOT(set_colors()));
 
   setupStatusBar();
   setupActions();
@@ -84,7 +84,7 @@ TopLevel::TopLevel (QWidget *, const char *name)
   setupEditWidget();
 
   if (!initialGeometrySet())
-    resize( QSize(550, 400).expandedTo(minimumSizeHint()));
+    resize( TQSize(550, 400).expandedTo(minimumSizeHint()));
   setupGUI(ToolBar | Keys | StatusBar | Create);
   setAutoSaveSettings();
 
@@ -107,24 +107,24 @@ void TopLevel::setupEditWidget()
     eframe = new KEdit (this, "eframe");
     eframe->setOverwriteEnabled(true);
 
-    connect(eframe, SIGNAL(CursorPositionChanged()),this,
-           SLOT(statusbar_slot()));
-    connect(eframe, SIGNAL(toggle_overwrite_signal()),this,
-           SLOT(toggle_overwrite()));
-    connect(eframe, SIGNAL(gotUrlDrop(QDropEvent*)), this,
-           SLOT(urlDrop_slot(QDropEvent*)));
-    connect(eframe, SIGNAL(undoAvailable(bool)),undoAction,
-           SLOT(setEnabled(bool)));
-    connect(eframe, SIGNAL(redoAvailable(bool)),redoAction,
-           SLOT(setEnabled(bool)));
-    connect(eframe, SIGNAL(copyAvailable(bool)),cutAction,
-           SLOT(setEnabled(bool)));
-    connect(eframe, SIGNAL(copyAvailable(bool)),copyAction,
-           SLOT(setEnabled(bool)));
-    connect( eframe, SIGNAL(selectionChanged()),this,
-           SLOT(slotSelectionChanged()));
-    connect( eframe, SIGNAL(modificationChanged( bool)),
-           SLOT(setFileCaption()));
+    connect(eframe, TQT_SIGNAL(CursorPositionChanged()),this,
+           TQT_SLOT(statusbar_slot()));
+    connect(eframe, TQT_SIGNAL(toggle_overwrite_signal()),this,
+           TQT_SLOT(toggle_overwrite()));
+    connect(eframe, TQT_SIGNAL(gotUrlDrop(TQDropEvent*)), this,
+           TQT_SLOT(urlDrop_slot(TQDropEvent*)));
+    connect(eframe, TQT_SIGNAL(undoAvailable(bool)),undoAction,
+           TQT_SLOT(setEnabled(bool)));
+    connect(eframe, TQT_SIGNAL(redoAvailable(bool)),redoAction,
+           TQT_SLOT(setEnabled(bool)));
+    connect(eframe, TQT_SIGNAL(copyAvailable(bool)),cutAction,
+           TQT_SLOT(setEnabled(bool)));
+    connect(eframe, TQT_SIGNAL(copyAvailable(bool)),copyAction,
+           TQT_SLOT(setEnabled(bool)));
+    connect( eframe, TQT_SIGNAL(selectionChanged()),this,
+           TQT_SLOT(slotSelectionChanged()));
+    connect( eframe, TQT_SIGNAL(modificationChanged( bool)),
+           TQT_SLOT(setFileCaption()));
 
     undoAction->setEnabled(false);
     redoAction->setEnabled(false);
@@ -137,16 +137,16 @@ void TopLevel::setupEditWidget()
 
   if( Prefs::wrapMode() == Prefs::EnumWrapMode::FixedColumnWrap )
   {
-    eframe->setWordWrap(QMultiLineEdit::FixedColumnWidth);
+    eframe->setWordWrap(TQMultiLineEdit::FixedColumnWidth);
     eframe->setWrapColumnOrWidth(Prefs::wrapColumn());
   }
   else if( Prefs::wrapMode() == Prefs::EnumWrapMode::SoftWrap )
   {
-    eframe->setWordWrap(QMultiLineEdit::WidgetWidth);
+    eframe->setWordWrap(TQMultiLineEdit::WidgetWidth);
   }
   else
   {
-    eframe->setWordWrap(QMultiLineEdit::NoWrap);
+    eframe->setWordWrap(TQMultiLineEdit::NoWrap);
   }
 
   eframe->setFont( Prefs::font() );
@@ -165,20 +165,20 @@ void TopLevel::setupEditWidget()
   right_mouse_button = new QPopupMenu;
 
   right_mouse_button->insertItem (i18n("Open..."),
-				  this, 	SLOT(file_open()));
+				  this, 	TQT_SLOT(file_open()));
   right_mouse_button->insertItem (SmallIcon("filesave"),i18n("Save"),
-				  this, 	SLOT(file_save()));
+				  this, 	TQT_SLOT(file_save()));
   right_mouse_button->insertItem (SmallIcon("filesaveas"),i18n("Save As..."),
-				  this, SLOT(file_save_as()));
+				  this, TQT_SLOT(file_save_as()));
   right_mouse_button->insertSeparator(-1);
   right_mouse_button->insertItem(i18n("Copy"),
-				 this, SLOT(copy()));
+				 this, TQT_SLOT(copy()));
   right_mouse_button->insertItem(i18n("Paste"),
-				 this, SLOT(paste()));
+				 this, TQT_SLOT(paste()));
   right_mouse_button->insertItem(i18n("Cut"),
-				 this, SLOT(cut()));
+				 this, TQT_SLOT(cut()));
   right_mouse_button->insertItem(i18n("Select All"),
-				 this, SLOT(select_all()));
+				 this, TQT_SLOT(select_all()));
   eframe->installRBPopup(right_mouse_button);
   */
 }
@@ -195,42 +195,42 @@ void TopLevel::slotSelectionChanged()
 void TopLevel::setupActions()
 {
     // setup File menu
-    KStdAction::openNew(this, SLOT(file_new()), actionCollection());
-    KStdAction::open(this, SLOT(file_open()), actionCollection());
-    recent = KStdAction::openRecent(this, SLOT(openRecent(const KURL&)),
+    KStdAction::openNew(this, TQT_SLOT(file_new()), actionCollection());
+    KStdAction::open(this, TQT_SLOT(file_open()), actionCollection());
+    recent = KStdAction::openRecent(this, TQT_SLOT(openRecent(const KURL&)),
                                           actionCollection());
-    KStdAction::save(this, SLOT(file_save()), actionCollection());
-    KStdAction::saveAs(this, SLOT(file_save_as()), actionCollection());
-    KStdAction::close(this, SLOT(file_close()), actionCollection());
-    KStdAction::print(this, SLOT(print()), actionCollection());
-    KStdAction::mail(this, SLOT(mail()), actionCollection());
-    KStdAction::quit(this, SLOT(close()), actionCollection());
+    KStdAction::save(this, TQT_SLOT(file_save()), actionCollection());
+    KStdAction::saveAs(this, TQT_SLOT(file_save_as()), actionCollection());
+    KStdAction::close(this, TQT_SLOT(file_close()), actionCollection());
+    KStdAction::print(this, TQT_SLOT(print()), actionCollection());
+    KStdAction::mail(this, TQT_SLOT(mail()), actionCollection());
+    KStdAction::quit(this, TQT_SLOT(close()), actionCollection());
 
     // setup edit menu
-    undoAction = KStdAction::undo(this, SLOT(undo()), actionCollection());
-    redoAction = KStdAction::redo(this, SLOT(redo()), actionCollection());
-    cutAction = KStdAction::cut(this, SLOT(cut()), actionCollection());
-    copyAction = KStdAction::copy(this, SLOT(copy()), actionCollection());
-    KStdAction::pasteText(this, SLOT(paste()), actionCollection());
-    KStdAction::selectAll(this, SLOT(select_all()), actionCollection());
-    KStdAction::find(this, SLOT(search()), actionCollection());
-    KStdAction::findNext(this, SLOT(search_again()), actionCollection());
-    KStdAction::replace(this, SLOT(replace()), actionCollection());
+    undoAction = KStdAction::undo(this, TQT_SLOT(undo()), actionCollection());
+    redoAction = KStdAction::redo(this, TQT_SLOT(redo()), actionCollection());
+    cutAction = KStdAction::cut(this, TQT_SLOT(cut()), actionCollection());
+    copyAction = KStdAction::copy(this, TQT_SLOT(copy()), actionCollection());
+    KStdAction::pasteText(this, TQT_SLOT(paste()), actionCollection());
+    KStdAction::selectAll(this, TQT_SLOT(select_all()), actionCollection());
+    KStdAction::find(this, TQT_SLOT(search()), actionCollection());
+    KStdAction::findNext(this, TQT_SLOT(search_again()), actionCollection());
+    KStdAction::replace(this, TQT_SLOT(replace()), actionCollection());
 
-    (void)new KAction(i18n("&Insert File..."), 0, this, SLOT(file_insert()),
+    (void)new KAction(i18n("&Insert File..."), 0, this, TQT_SLOT(file_insert()),
                       actionCollection(), "insert_file");
-    (void)new KAction(i18n("In&sert Date"), 0, this, SLOT(insertDate()),
+    (void)new KAction(i18n("In&sert Date"), 0, this, TQT_SLOT(insertDate()),
                       actionCollection(), "insert_date");
-    (void)new KAction(i18n("Cl&ean Spaces"), 0, this, SLOT(clean_space()),
+    (void)new KAction(i18n("Cl&ean Spaces"), 0, this, TQT_SLOT(clean_space()),
                       actionCollection(), "clean_spaces");
 
     // setup Tools menu
-    KStdAction::spelling(this, SLOT(spellcheck()), actionCollection());
+    KStdAction::spelling(this, TQT_SLOT(spellcheck()), actionCollection());
 
     // setup Go menu
-    KStdAction::gotoLine(this, SLOT(gotoLine()), actionCollection());
+    KStdAction::gotoLine(this, TQT_SLOT(gotoLine()), actionCollection());
 
-    KStdAction::preferences(this, SLOT(showSettings()), actionCollection());
+    KStdAction::preferences(this, TQT_SLOT(showSettings()), actionCollection());
 }
 
 void TopLevel::setupStatusBar()
@@ -263,10 +263,10 @@ void TopLevel::saveProperties(KConfig* config)
 
   if(eframe->isModified())
   {
-    QString name = m_url.url();
+    TQString name = m_url.url();
     if (name.isEmpty())
-       name = QString("kedit%1-%2").arg(getpid()).arg((long)this);
-    QString tmplocation = kapp->tempSaveName(m_url.url());
+       name = TQString("kedit%1-%2").arg(getpid()).arg((long)this);
+    TQString tmplocation = kapp->tempSaveName(m_url.url());
     config->writeEntry("saved_to",tmplocation);
     saveFile(tmplocation, false, m_url.fileEncoding());
   }
@@ -275,9 +275,9 @@ void TopLevel::saveProperties(KConfig* config)
 
 void TopLevel::readProperties(KConfig* config){
     KURL url = config->readPathEntry("url");
-    QString filename = config->readPathEntry("saved_to");
+    TQString filename = config->readPathEntry("saved_to");
 
-    QString encoding = url.fileEncoding();
+    TQString encoding = url.fileEncoding();
     int modified = config->readNumEntry("modified",0);
     int line = config->readNumEntry("current_line", 0);
     int col = config->readNumEntry("current_column", 0);
@@ -340,8 +340,8 @@ void TopLevel::insertDate(){
 
   int line, column;
 
-  QString string;
-  QDate dt = QDate::currentDate();
+  TQString string;
+  TQDate dt = TQDate::currentDate();
   string = KGlobal::locale()->formatDate(dt);
 
   eframe->getCursorPosition(&line,&column);
@@ -391,19 +391,19 @@ void TopLevel::spellcheck()
 
   initSpellConfig();
   kspell = new KSpell(this, i18n("Spellcheck"), this,
-	SLOT( spell_started(KSpell *)), kspellconfigOptions);
+	TQT_SLOT( spell_started(KSpell *)), kspellconfigOptions);
 
-  connect (kspell, SIGNAL ( death()),
-          this, SLOT ( spell_finished( )));
+  connect (kspell, TQT_SIGNAL ( death()),
+          this, TQT_SLOT ( spell_finished( )));
 
-  connect (kspell, SIGNAL (progress (unsigned int)),
-          this, SLOT (spell_progress (unsigned int)));
-  connect (kspell, SIGNAL (misspelling (const QString &, const QStringList &, unsigned int)),
-          eframe, SLOT (misspelling (const QString &, const QStringList &, unsigned int)));
-  connect (kspell, SIGNAL (corrected (const QString &, const QString &, unsigned int)),
-          eframe, SLOT (corrected (const QString &, const QString &, unsigned int)));
-  connect (kspell, SIGNAL (done(const QString&)),
-		 this, SLOT (spell_done(const QString&)));
+  connect (kspell, TQT_SIGNAL (progress (unsigned int)),
+          this, TQT_SLOT (spell_progress (unsigned int)));
+  connect (kspell, TQT_SIGNAL (misspelling (const TQString &, const TQStringList &, unsigned int)),
+          eframe, TQT_SLOT (misspelling (const TQString &, const TQStringList &, unsigned int)));
+  connect (kspell, TQT_SIGNAL (corrected (const TQString &, const TQString &, unsigned int)),
+          eframe, TQT_SLOT (corrected (const TQString &, const TQString &, unsigned int)));
+  connect (kspell, TQT_SIGNAL (done(const TQString&)),
+		 this, TQT_SLOT (spell_done(const TQString&)));
 }
 
 
@@ -417,14 +417,14 @@ void TopLevel::spell_started( KSpell *)
 
 void TopLevel::spell_progress (unsigned int percent)
 {
-  QString s;
+  TQString s;
   s = i18n("Spellcheck:  %1% complete").arg(percent);
 
   statusBar()->changeItem (s, ID_GENERAL);
 }
 
 
-void TopLevel::spell_done(const QString& newtext)
+void TopLevel::spell_done(const TQString& newtext)
 {
   eframe->spellcheck_stop();
   if (kspell->dlgResult() == 0)
@@ -441,7 +441,7 @@ void TopLevel::spell_done(const QString& newtext)
 
 // Replace ISpell with the name of the actual spell checker.
 // TODO: Use %1 in the original string instead when string freeze is over.
-QString TopLevel::replaceISpell(QString msg, int client)
+TQString TopLevel::replaceISpell(TQString msg, int client)
 {
   switch(client)
   {
@@ -479,7 +479,7 @@ void TopLevel::file_open( void )
     while( 1 )
   {
     KURL url = KTextFileDialog::getOpenURLwithEncoding(
-		QString::null, QString::null, this,
+		TQString::null, TQString::null, this,
 		i18n("Open File"));
     if( url.isEmpty() )
     {
@@ -514,7 +514,7 @@ void TopLevel::file_open( void )
       toplevel = this;
     }
 
-    QString tmpfile;
+    TQString tmpfile;
     KIO::NetAccess::download( url, tmpfile, toplevel );
 
     int result = toplevel->openFile( tmpfile, 0, url.fileEncoding());
@@ -549,14 +549,14 @@ void TopLevel::file_insert()
   while( 1 )
   {
     KURL url = KTextFileDialog::getOpenURLwithEncoding(
-        QString::null, QString::null, this,
+        TQString::null, TQString::null, this,
 	i18n("Insert File"), "", KStdGuiItem::insert().text());
     if( url.isEmpty() )
     {
       return;
     }
 
-    QString tmpfile;
+    TQString tmpfile;
     KIO::NetAccess::download( url, tmpfile, this );
     int result = openFile( tmpfile, OPEN_INSERT, url.fileEncoding(), true );
     KIO::NetAccess::removeTempFile( tmpfile );
@@ -594,10 +594,10 @@ bool TopLevel::queryClose()
   if ( !eframe->isModified() )
      return true;
 
-  QString msg = i18n(""
+  TQString msg = i18n(""
         "This document has been modified.\n"
         "Would you like to save it?" );
-  switch( KMessageBox::warningYesNoCancel( this, msg, QString::null,
+  switch( KMessageBox::warningYesNoCancel( this, msg, TQString::null,
                        KStdGuiItem::save(), KStdGuiItem::discard() ) )
   {
      case KMessageBox::Yes: // Save, then exit
@@ -618,7 +618,7 @@ bool TopLevel::queryClose()
                     msg = i18n(""
 	                "Could not save the file.\n"
 	                "Exit anyways?");
-                    switch( KMessageBox::warningContinueCancel( this, msg, QString::null, KStdGuiItem::quit() ) )
+                    switch( KMessageBox::warningContinueCancel( this, msg, TQString::null, KStdGuiItem::quit() ) )
                     {
                      case KMessageBox::Continue:
                               return true; // Exit.
@@ -658,9 +658,9 @@ void TopLevel::file_close()
 {
   if( eframe->isModified() )
   {
-    QString msg = i18n("This document has been modified.\n"
+    TQString msg = i18n("This document has been modified.\n"
                        "Would you like to save it?" );
-    switch( KMessageBox::warningYesNoCancel( this, msg, QString::null,
+    switch( KMessageBox::warningYesNoCancel( this, msg, TQString::null,
                            KStdGuiItem::save(), KStdGuiItem::discard() ) )
     {
       case KMessageBox::Yes: // Save, then close
@@ -698,14 +698,14 @@ void TopLevel::file_save()
   result =  saveURL(m_url); // error messages are handled by saveFile
 
   if ( result == KEDIT_OK ){
-     QString string;
+     TQString string;
      string = i18n("Wrote: %1").arg(m_caption);
      setGeneralStatusField(string);
   }
 }
 
 
-void TopLevel::setGeneralStatusField(const QString &text){
+void TopLevel::setGeneralStatusField(const TQString &text){
 
     statusbar_timer->stop();
 
@@ -721,7 +721,7 @@ void TopLevel::file_save_as()
   while(true)
   {
      u = KTextFileDialog::getSaveURLwithEncoding(
-                 m_url.url(), QString::null, this,
+                 m_url.url(), TQString::null, this,
                  i18n("Save File As"),
                  m_url.fileEncoding());
 
@@ -748,7 +748,7 @@ void TopLevel::file_save_as()
     {
       m_url = u;
       setFileCaption();
-      QString string = i18n("Saved as: %1").arg(m_caption);
+      TQString string = i18n("Saved as: %1").arg(m_caption);
       setGeneralStatusField(string);
       recent->addURL( u );
     }
@@ -761,34 +761,34 @@ void TopLevel::mail()
   //
   // Default subject string
   //
-  QString defaultsubject = name();
+  TQString defaultsubject = name();
   int index = defaultsubject.findRev('/');
   if( index != -1)
     defaultsubject = defaultsubject.right(defaultsubject.length() - index - 1 );
 
-  kapp->invokeMailer( QString::null, QString::null, QString::null,
+  kapp->invokeMailer( TQString::null, TQString::null, TQString::null,
        defaultsubject, eframe->text() );
 }
 
 /*
 void TopLevel::fancyprint(){
 
-  QPrinter prt;
+  TQPrinter prt;
   char buf[200];
   if ( prt.setup(0) ) {
 
     int y =10;
-    QPainter p;
+    TQPainter p;
     p.begin( &prt );
     p.setFont( eframe->font() );
-    QFontMetrics fm = p.fontMetrics();
+    TQFontMetrics fm = p.fontMetrics();
 
     int numlines = eframe->numLines();
     for(int i = 0; i< numlines; i++){
       y += fm.ascent();
-      QString line;
+      TQString line;
       line = eframe->textLine(i);
-      line.replace( QRegExp("\t"), "        " );
+      line.replace( TQRegExp("\t"), "        " );
       strncpy(buf,line.local8Bit(),160);
       for (int j = 0 ; j <150; j++){
 	if (!isprint(buf[j]))
@@ -833,7 +833,7 @@ void TopLevel::showSettings()
   initSpellConfig();
   KConfigDialog* dialog = new SettingsDialog(this, "settings", Prefs::self(), kspellconfigOptions);
 
-  connect(dialog, SIGNAL(settingsChanged()), this, SLOT(updateSettings()));
+  connect(dialog, TQT_SIGNAL(settingsChanged()), this, TQT_SLOT(updateSettings()));
   dialog->show();
 }
 
@@ -859,7 +859,7 @@ void TopLevel::setFileCaption()
   {
      if (m_url.isLocalFile())
      {
-         if (QDir::currentDirPath() == m_url.directory())
+         if (TQDir::currentDirPath() == m_url.directory())
             m_caption = m_url.fileName();
          else
             m_caption = m_url.path();
@@ -867,12 +867,12 @@ void TopLevel::setFileCaption()
      else
      {
          KURL url(m_url);
-         url.setQuery(QString::null);
+         url.setQuery(TQString::null);
          m_caption = url.prettyURL();
      }
-     QString encoding = m_url.fileEncoding();
+     TQString encoding = m_url.fileEncoding();
      if (!encoding.isEmpty())
-        m_caption += QString(" (%1)").arg(encoding);
+        m_caption += TQString(" (%1)").arg(encoding);
   }
   setCaption(m_caption, eframe->isModified());
 }
@@ -884,7 +884,7 @@ void TopLevel::gotoLine() {
 
 void TopLevel::statusbar_slot(){
 
-  QString linenumber;
+  TQString linenumber;
 
   linenumber = i18n("Line: %1 Col: %2")
 		     .arg(eframe->currentLine() + 1)
@@ -896,16 +896,16 @@ void TopLevel::statusbar_slot(){
 void TopLevel::print()
 {
     bool aborted = false;
-    QString headerLeft = i18n("Date: %1").arg(KGlobal::locale()->formatDate(QDate::currentDate(),true));
-    QString headerMid = i18n("File: %1").arg(m_caption);
-    QString headerRight;
+    TQString headerLeft = i18n("Date: %1").arg(KGlobal::locale()->formatDate(TQDate::currentDate(),true));
+    TQString headerMid = i18n("File: %1").arg(m_caption);
+    TQString headerRight;
 
-    QFont printFont = eframe->font();
-    QFont headerFont(printFont);
+    TQFont printFont = eframe->font();
+    TQFont headerFont(printFont);
     headerFont.setBold(true);
 
-    QFontMetrics printFontMetrics(printFont);
-    QFontMetrics headerFontMetrics(headerFont);
+    TQFontMetrics printFontMetrics(printFont);
+    TQFontMetrics headerFontMetrics(headerFont);
 
     KPrinter *printer = new KPrinter;
     if(printer->setup(this, i18n("Print %1").arg(m_caption))) {
@@ -915,10 +915,10 @@ void TopLevel::print()
         if ( !m_caption.isEmpty() )
 	    printer->setDocName(m_caption);
 
-        QPainter *p = new QPainter;
+        TQPainter *p = new QPainter;
         p->begin( printer );
 
-        QPaintDeviceMetrics metrics( printer );
+        TQPaintDeviceMetrics metrics( printer );
 
         int dy = 0;
 
@@ -932,15 +932,15 @@ void TopLevel::print()
 
 
         while(true) {
-           headerRight = QString("#%1").arg(page);
+           headerRight = TQString("#%1").arg(page);
            dy = headerFontMetrics.lineSpacing();
-           QRect body( 0, dy*2,  metrics.width(), metrics.height()-dy*2);
+           TQRect body( 0, dy*2,  metrics.width(), metrics.height()-dy*2);
 
            p->drawText(0, 0, metrics.width(), dy, Qt::AlignLeft, headerLeft);
            p->drawText(0, 0, metrics.width(), dy, Qt::AlignHCenter, headerMid);
            p->drawText(0, 0, metrics.width(), dy, Qt::AlignRight, headerRight);
 
-           QPen pen;
+           TQPen pen;
            pen.setWidth(3);
            p->setPen(pen);
 
@@ -948,18 +948,18 @@ void TopLevel::print()
 
            int y = dy*2;
            while(lineCount < maxLineCount) {
-              QString text = eframe->textLine(lineCount);
+              TQString text = eframe->textLine(lineCount);
               if( text.isEmpty() )
                 text = " ";	// don't ignore empty lines
-              QRect r = p->boundingRect(0, y, body.width(), body.height(),
-			QPainter::ExpandTabs | QPainter::WordBreak, text);
+              TQRect r = p->boundingRect(0, y, body.width(), body.height(),
+			TQPainter::ExpandTabs | TQPainter::WordBreak, text);
 
               dy = r.height();
 
               if (y+dy > metrics.height()) break;
 
               p->drawText(0, y, metrics.width(), metrics.height() - y,
-                        QPainter::ExpandTabs | QPainter::WordBreak, text);
+                        TQPainter::ExpandTabs | TQPainter::WordBreak, text);
 
               y += dy;
               lineCount++;
@@ -1017,9 +1017,9 @@ int TopLevel::saveURL( const KURL& _url )
 }
 
 
-int TopLevel::openFile( const QString& _filename, int _mode, const QString &encoding, bool _undoAction )
+int TopLevel::openFile( const TQString& _filename, int _mode, const TQString &encoding, bool _undoAction )
 {
-  QFileInfo info(_filename);
+  TQFileInfo info(_filename);
 
   if(info.isDir())
   {
@@ -1035,7 +1035,7 @@ int TopLevel::openFile( const QString& _filename, int _mode, const QString &enco
      return KEDIT_RETRY;
   }
 
-  QFile file(_filename);
+  TQFile file(_filename);
 
   if(!file.open(IO_ReadOnly))
   {
@@ -1043,12 +1043,12 @@ int TopLevel::openFile( const QString& _filename, int _mode, const QString &enco
      return KEDIT_RETRY;
   }
 
-  QTextStream stream(&file);
-  QTextCodec *codec;
+  TQTextStream stream(&file);
+  TQTextCodec *codec;
   if (!encoding.isEmpty())
-    codec = QTextCodec::codecForName(encoding.latin1());
+    codec = TQTextCodec::codecForName(encoding.latin1());
   else
-    codec = QTextCodec::codecForLocale();
+    codec = TQTextCodec::codecForLocale();
   stream.setCodec(codec);
 
   if ((_mode & OPEN_INSERT) == 0)
@@ -1069,9 +1069,9 @@ int TopLevel::openFile( const QString& _filename, int _mode, const QString &enco
 }
 
 
-int TopLevel::saveFile( const QString& _filename, bool backup, const QString& encoding )
+int TopLevel::saveFile( const TQString& _filename, bool backup, const TQString& encoding )
 {
-  QFileInfo info(_filename);
+  TQFileInfo info(_filename);
   bool bSoftWrap = (Prefs::wrapMode() == Prefs::EnumWrapMode::SoftWrap);
 
   if(info.isDir())
@@ -1080,7 +1080,7 @@ int TopLevel::saveFile( const QString& _filename, bool backup, const QString& en
      return KEDIT_RETRY;
   }
 
-  if (backup && Prefs::backupCopies() && QFile::exists(_filename))
+  if (backup && Prefs::backupCopies() && TQFile::exists(_filename))
   {
      if (!KSaveFile::backupFile(_filename))
      {
@@ -1092,19 +1092,19 @@ int TopLevel::saveFile( const QString& _filename, bool backup, const QString& en
   // links when saving. Most applications don't care about this, but an
   // editor is supposed to preserve such things.
 
-  QFile file(_filename);
+  TQFile file(_filename);
   if(!file.open(IO_WriteOnly))
   {
      KMessageBox::sorry(this, i18n("Unable to write to file."));
      return KEDIT_RETRY;
   }
 
-  QTextStream textStream(&file);
-  QTextCodec *codec;
+  TQTextStream textStream(&file);
+  TQTextCodec *codec;
   if (!encoding.isEmpty())
-    codec = QTextCodec::codecForName(encoding.latin1());
+    codec = TQTextCodec::codecForName(encoding.latin1());
   else
-    codec = QTextCodec::codecForLocale();
+    codec = TQTextCodec::codecForLocale();
   textStream.setCodec(codec);
 
   eframe->saveText( &textStream, bSoftWrap );
@@ -1124,14 +1124,14 @@ void TopLevel::openURL( const KURL& _url, int _mode )
 {
     if ( !_url.isValid() )
     {
-        QString string;
+        TQString string;
         string = i18n( "Malformed URL\n%1").arg(_url.url());
 
         KMessageBox::sorry(this, string);
         return;
     }
 
-    QString target;
+    TQString target;
     int result = KEDIT_OK;
     if (KIO::NetAccess::download(_url, target, this))
     {
@@ -1155,17 +1155,17 @@ void TopLevel::openURL( const KURL& _url, int _mode )
     }
 }
 
-void TopLevel::urlDrop_slot(QDropEvent* e) {
+void TopLevel::urlDrop_slot(TQDropEvent* e) {
 
   dropEvent(e);
 }
 
-void TopLevel::dragEnterEvent(QDragEnterEvent* e)
+void TopLevel::dragEnterEvent(TQDragEnterEvent* e)
 {
   e->accept(KURLDrag::canDecode(e));
 }
 
-void TopLevel::dropEvent(QDropEvent* e)
+void TopLevel::dropEvent(TQDropEvent* e)
 {
 
     KURL::List list;
@@ -1204,19 +1204,19 @@ void TopLevel::timer_slot(){
 
 void TopLevel::set_colors()
 {
-  QPalette mypalette = (eframe->palette()).copy();
+  TQPalette mypalette = (eframe->palette()).copy();
 
-  QColorGroup ncgrp( mypalette.active() );
+  TQColorGroup ncgrp( mypalette.active() );
 
   if (Prefs::customColor())
   {
-     ncgrp.setColor(QColorGroup::Text, Prefs::textColor());
-     ncgrp.setColor(QColorGroup::Base, Prefs::backgroundColor());
+     ncgrp.setColor(TQColorGroup::Text, Prefs::textColor());
+     ncgrp.setColor(TQColorGroup::Base, Prefs::backgroundColor());
   }
   else
   {
-     ncgrp.setColor(QColorGroup::Text, KGlobalSettings::textColor());
-     ncgrp.setColor(QColorGroup::Base, KGlobalSettings::baseColor());
+     ncgrp.setColor(TQColorGroup::Text, KGlobalSettings::textColor());
+     ncgrp.setColor(TQColorGroup::Base, KGlobalSettings::baseColor());
   }
 
   mypalette.setActive(ncgrp);
@@ -1288,9 +1288,9 @@ extern "C" KDE_EXPORT int kdemain (int argc, char **argv)
 		have_top_window = false;
 		KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
 
-		const QString encoding = args->getOption("encoding");
+		const TQString encoding = args->getOption("encoding");
 		const bool doEncoding = args->isSet("encoding") &&
-		                        QTextCodec::codecForName(encoding.latin1());
+		                        TQTextCodec::codecForName(encoding.latin1());
 
 		for(int i = 0; i < args->count(); i++)
 		{
@@ -1317,14 +1317,14 @@ extern "C" KDE_EXPORT int kdemain (int argc, char **argv)
 	return a.exec ();
 }
 
-SettingsDialog::SettingsDialog(QWidget *parent, const char *name,KConfigSkeleton *config, KSpellConfig *_spellConfig)
+SettingsDialog::SettingsDialog(TQWidget *parent, const char *name,KConfigSkeleton *config, KSpellConfig *_spellConfig)
  : KConfigDialog(parent, name, config),
  spellConfig(_spellConfig), spellConfigChanged(false)
 {
   // Font
-  QWidget *font = new QWidget(0, "FontSetting");
-  QVBoxLayout *topLayout = new QVBoxLayout(font, 0, KDialog::spacingHint());
-  KFontChooser *mFontChooser = new KFontChooser(font, "kcfg_Font", false, QStringList(), false, 6);
+  TQWidget *font = new TQWidget(0, "FontSetting");
+  TQVBoxLayout *topLayout = new TQVBoxLayout(font, 0, KDialog::spacingHint());
+  KFontChooser *mFontChooser = new KFontChooser(font, "kcfg_Font", false, TQStringList(), false, 6);
   topLayout->addWidget(mFontChooser);
   addPage(font, i18n("Font"), "fonts", i18n("Editor Font"));
 
@@ -1335,7 +1335,7 @@ SettingsDialog::SettingsDialog(QWidget *parent, const char *name,KConfigSkeleton
   // Spelling
   addPage(spellConfig, i18n("Spelling"),
   	  "spellcheck", i18n("Spelling Checker"));
-  connect(spellConfig, SIGNAL(configChanged()), this, SLOT(slotSpellConfigChanged()));
+  connect(spellConfig, TQT_SIGNAL(configChanged()), this, TQT_SLOT(slotSpellConfigChanged()));
 
   // Miscellaneous
   Misc *miscOptions = new Misc(0, "MiscSettings");

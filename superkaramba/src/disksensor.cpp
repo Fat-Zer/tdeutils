@@ -9,19 +9,19 @@
  ***************************************************************************/
 #include "disksensor.h"
 
-#include <qfile.h>
-#include <qtextstream.h>
-#include <qstring.h>
-#include <qregexp.h>
+#include <tqfile.h>
+#include <tqtextstream.h>
+#include <tqstring.h>
+#include <tqregexp.h>
 #include <kprocess.h>
 #include <kprocio.h>
 
 DiskSensor::DiskSensor( int msec ) : Sensor( msec )
 {
-    connect(&ksp, SIGNAL(receivedStdout(KProcess *, char *, int )),
-            this,SLOT(receivedStdout(KProcess *, char *, int )));
-    connect(&ksp, SIGNAL(processExited(KProcess *)),
-            this,SLOT(processExited( KProcess * )));
+    connect(&ksp, TQT_SIGNAL(receivedStdout(KProcess *, char *, int )),
+            this,TQT_SLOT(receivedStdout(KProcess *, char *, int )));
+    connect(&ksp, TQT_SIGNAL(processExited(KProcess *)),
+            this,TQT_SLOT(processExited( KProcess * )));
 
     // update values on startup
     ksp.clearArguments();
@@ -32,38 +32,38 @@ DiskSensor::DiskSensor( int msec ) : Sensor( msec )
 DiskSensor::~DiskSensor()
 {}
 
-long DiskSensor::getFreeSpace(QString mntPt) const
+long DiskSensor::getFreeSpace(TQString mntPt) const
 {
-    QRegExp rx( "^\\S*\\s*\\d+\\s+\\d+\\s+(\\d+)");
+    TQRegExp rx( "^\\S*\\s*\\d+\\s+\\d+\\s+(\\d+)");
     rx.search(mntMap[mntPt]);
     return rx.cap(1).toLong();
 }
 
-long DiskSensor::getUsedSpace(QString mntPt) const
+long DiskSensor::getUsedSpace(TQString mntPt) const
 {
-    QRegExp rx( "^\\S*\\s*\\d+\\s+(\\d+)\\s+\\d+");
+    TQRegExp rx( "^\\S*\\s*\\d+\\s+(\\d+)\\s+\\d+");
     rx.search(mntMap[mntPt]);
     return rx.cap(1).toLong();
 }
 
-long DiskSensor::getTotalSpace(QString mntPt) const
+long DiskSensor::getTotalSpace(TQString mntPt) const
 {
 
-    QRegExp rx( "^\\S*\\s*(\\d+)\\s+\\d+\\s+\\d+");
+    TQRegExp rx( "^\\S*\\s*(\\d+)\\s+\\d+\\s+\\d+");
     rx.search(mntMap[mntPt]);
 
     return rx.cap(1).toLong();
 
 }
 
-int DiskSensor::getPercentUsed(QString mntPt) const
+int DiskSensor::getPercentUsed(TQString mntPt) const
 {
-    QRegExp rx( "\\s+(\\d+)%\\s+");
+    TQRegExp rx( "\\s+(\\d+)%\\s+");
     rx.search(mntMap[mntPt]);
     return rx.cap(1).toInt();
 }
 
-int DiskSensor::getPercentFree(QString mntPt) const
+int DiskSensor::getPercentFree(TQString mntPt) const
 {
     return ( 100 - getPercentUsed( mntPt ) );
 }
@@ -72,17 +72,17 @@ void DiskSensor::receivedStdout(KProcess *, char *buffer, int len )
 {
 
     buffer[len] = 0;
-    sensorResult += QString( QCString(buffer) );
+    sensorResult += TQString( TQCString(buffer) );
 
 }
 
 void DiskSensor::processExited(KProcess *)
 {
-    QStringList stringList = QStringList::split('\n',sensorResult);
+    TQStringList stringList = TQStringList::split('\n',sensorResult);
     sensorResult = "";
-    QStringList::Iterator it = stringList.begin();
-    //QRegExp rx( "^(/dev/).*(/\\S*)$");
-    QRegExp rx( ".*\\s+(/\\S*)$");
+    TQStringList::Iterator it = stringList.begin();
+    //TQRegExp rx( "^(/dev/).*(/\\S*)$");
+    TQRegExp rx( ".*\\s+(/\\S*)$");
 
     while( it != stringList.end())
     {
@@ -95,12 +95,12 @@ void DiskSensor::processExited(KProcess *)
     }
     stringList.clear();
 
-    QString format;
-    QString mntPt;
+    TQString format;
+    TQString mntPt;
     SensorParams *sp;
     Meter *meter;
 
-    QObjectListIt lit( *objList );
+    TQObjectListIt lit( *objList );
     while (lit != 0)
     {
         sp = (SensorParams*)(*lit);
@@ -114,31 +114,31 @@ void DiskSensor::processExited(KProcess *)
         {
             format = "%u";
         }
-        format.replace( QRegExp("%fp", false),QString::number(getPercentFree(mntPt)));
-        format.replace( QRegExp("%fg",false),
-                        QString::number(getFreeSpace(mntPt)/(1024*1024)));
-        format.replace( QRegExp("%fkb",false),
-                        QString::number(getFreeSpace(mntPt)*8) );
-        format.replace( QRegExp("%fk",false),
-                        QString::number(getFreeSpace(mntPt)) );
-        format.replace( QRegExp("%f", false),QString::number(getFreeSpace(mntPt)/1024));
+        format.replace( TQRegExp("%fp", false),TQString::number(getPercentFree(mntPt)));
+        format.replace( TQRegExp("%fg",false),
+                        TQString::number(getFreeSpace(mntPt)/(1024*1024)));
+        format.replace( TQRegExp("%fkb",false),
+                        TQString::number(getFreeSpace(mntPt)*8) );
+        format.replace( TQRegExp("%fk",false),
+                        TQString::number(getFreeSpace(mntPt)) );
+        format.replace( TQRegExp("%f", false),TQString::number(getFreeSpace(mntPt)/1024));
         
-        format.replace( QRegExp("%up", false),QString::number(getPercentUsed(mntPt)));
-        format.replace( QRegExp("%ug",false),
-                        QString::number(getUsedSpace(mntPt)/(1024*1024)));
-        format.replace( QRegExp("%ukb",false),
-                        QString::number(getUsedSpace(mntPt)*8) );
-        format.replace( QRegExp("%uk",false),
-                        QString::number(getUsedSpace(mntPt)) );
-        format.replace( QRegExp("%u", false),QString::number(getUsedSpace(mntPt)/1024));
+        format.replace( TQRegExp("%up", false),TQString::number(getPercentUsed(mntPt)));
+        format.replace( TQRegExp("%ug",false),
+                        TQString::number(getUsedSpace(mntPt)/(1024*1024)));
+        format.replace( TQRegExp("%ukb",false),
+                        TQString::number(getUsedSpace(mntPt)*8) );
+        format.replace( TQRegExp("%uk",false),
+                        TQString::number(getUsedSpace(mntPt)) );
+        format.replace( TQRegExp("%u", false),TQString::number(getUsedSpace(mntPt)/1024));
 
-        format.replace( QRegExp("%tg",false),
-                        QString::number(getTotalSpace(mntPt)/(1024*1024)));
-        format.replace( QRegExp("%tkb",false),
-                        QString::number(getTotalSpace(mntPt)*8));
-        format.replace( QRegExp("%tk",false),
-                        QString::number(getTotalSpace(mntPt)));
-        format.replace( QRegExp("%t", false),QString::number(getTotalSpace(mntPt)/1024));
+        format.replace( TQRegExp("%tg",false),
+                        TQString::number(getTotalSpace(mntPt)/(1024*1024)));
+        format.replace( TQRegExp("%tkb",false),
+                        TQString::number(getTotalSpace(mntPt)*8));
+        format.replace( TQRegExp("%tk",false),
+                        TQString::number(getTotalSpace(mntPt)));
+        format.replace( TQRegExp("%t", false),TQString::number(getTotalSpace(mntPt)/1024));
         meter->setValue(format);
         ++lit;
     }
@@ -160,9 +160,9 @@ void DiskSensor::setMaxValue( SensorParams *sp )
 {
     Meter *meter;
     meter = sp->getMeter();
-    const QString mntPt = sp->getParam( "MOUNTPOINT" );
+    const TQString mntPt = sp->getParam( "MOUNTPOINT" );
 
-    QString f;
+    TQString f;
     f = sp->getParam("FORMAT");
     if( f == "%fp" || f == "%up" )
         meter->setMax( 100 );

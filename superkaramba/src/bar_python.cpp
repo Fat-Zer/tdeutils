@@ -25,7 +25,7 @@
 #endif
 
 #include <Python.h>
-#include <qobject.h>
+#include <tqobject.h>
 #include "karamba.h"
 #include "meter.h"
 #include "meter_python.h"

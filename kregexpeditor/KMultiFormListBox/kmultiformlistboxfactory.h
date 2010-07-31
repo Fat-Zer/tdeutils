@@ -18,7 +18,7 @@
 // -------------------------------- includes ------------------------------
 #ifndef __kmultiformlistboxfactory
 #define __kmultiformlistboxfactory
-#include <qobject.h>
+#include <tqobject.h>
 #include "kwidgetstreamer.h"
 class KMultiFormListBoxEntry;
 //-------------------------------------------------------------------------
@@ -52,18 +52,18 @@ public:
      @return A fresh @ref KMultiFormListBoxEntry to be used in an instance of the
      @ref KMultiFormListBox class.
   **/
-  virtual KMultiFormListBoxEntry *create(QWidget *parent) = 0;
+  virtual KMultiFormListBoxEntry *create(TQWidget *parent) = 0;
 
   /**
      This method is used to get a separator between the elements in an @ref
      KMultiFormListBox. The widget returned from this method will be owned by the
      caller.
 
-     @param parent A pointer to the parent of the QWidget returned.
+     @param parent A pointer to the parent of the TQWidget returned.
      @return A widget which must be used as a separator between the @ref
      KMultiFormListBoxEntry elements in an @ref KMultiFormListBox.
   **/
-  virtual QWidget *separator(QWidget *parent);
+  virtual TQWidget *separator(TQWidget *parent);
 };
 
 #endif /* kmultiformlistbox */

@@ -18,43 +18,43 @@
 ///////////////////////////////////////////////             code for new key generation
 
 
-#include <qwhatsthis.h>
-#include <qlayout.h>
-#include <qlabel.h>
-#include <qvbox.h>
+#include <tqwhatsthis.h>
+#include <tqlayout.h>
+#include <tqlabel.h>
+#include <tqvbox.h>
 #include <kcombobox.h>
 #include <klineedit.h>
-#include <qcheckbox.h>
-#include <qbuttongroup.h>
-#include <qhbuttongroup.h>
-#include <qvbuttongroup.h>
+#include <tqcheckbox.h>
+#include <tqbuttongroup.h>
+#include <tqhbuttongroup.h>
+#include <tqvbuttongroup.h>
 #include <kmessagebox.h>
 #include <klocale.h>
 
 #include "keygener.h"
 
 ///////////////////////   main window
-keyGenerate::keyGenerate(QWidget *parent, const char *name):KDialogBase( parent, name, true,i18n("Key Generation"),Apply | Ok | Cancel)
+keyGenerate::keyGenerate(TQWidget *parent, const char *name):KDialogBase( parent, name, true,i18n("Key Generation"),Apply | Ok | Cancel)
 {
         expert=false;
         setButtonApply(i18n("Expert Mode"));
 
-        QWidget *page = new QWidget(this);
-        QVBoxLayout *vbox=new QVBoxLayout(page);
+        TQWidget *page = new TQWidget(this);
+        TQVBoxLayout *vbox=new TQVBoxLayout(page);
 
-        QVButtonGroup *bgroup1=new QVButtonGroup(i18n("Generate Key Pair"),page);
+        TQVButtonGroup *bgroup1=new TQVButtonGroup(i18n("Generate Key Pair"),page);
 
-        (void) new QLabel(i18n("Name:"),bgroup1);
+        (void) new TQLabel(i18n("Name:"),bgroup1);
         kname=new KLineEdit("",bgroup1);
         kname->setFocus();
-        (void) new QLabel(i18n("Email:"),bgroup1);
+        (void) new TQLabel(i18n("Email:"),bgroup1);
         mail=new KLineEdit("",bgroup1);
 
-        (void) new QLabel(i18n("Comment (optional):"),bgroup1);
+        (void) new TQLabel(i18n("Comment (optional):"),bgroup1);
         comment=new KLineEdit("",bgroup1);
 
-        (void) new QLabel(i18n("Expiration:"),bgroup1);
-        QHButtonGroup *bgroup=new  QHButtonGroup(bgroup1);
+        (void) new TQLabel(i18n("Expiration:"),bgroup1);
+        TQHButtonGroup *bgroup=new  TQHButtonGroup(bgroup1);
         numb=new KLineEdit("0",bgroup);
         numb->setMaxLength(4);
         numb->setDisabled(true);
@@ -65,9 +65,9 @@ keyGenerate::keyGenerate(QWidget *parent, const char *name):KDialogBase( parent,
         keyexp->insertItem(i18n("Months"),3);
         keyexp->insertItem(i18n("Years"),4);
         keyexp->setMinimumSize(keyexp->sizeHint());
-        connect(keyexp,SIGNAL(activated(int)),this,SLOT(activateexp(int)));
+        connect(keyexp,TQT_SIGNAL(activated(int)),this,TQT_SLOT(activateexp(int)));
 
-        (void) new QLabel(i18n("Key size:"),bgroup1);
+        (void) new TQLabel(i18n("Key size:"),bgroup1);
         keysize = new KComboBox(bgroup1);
         keysize->insertItem("768");
         keysize->insertItem("1024");
@@ -76,7 +76,7 @@ keyGenerate::keyGenerate(QWidget *parent, const char *name):KDialogBase( parent,
         keysize->setCurrentItem("1024");
         keysize->setMinimumSize(keysize->sizeHint());
 
-        (void) new QLabel(i18n("Algorithm:"),bgroup1);
+        (void) new TQLabel(i18n("Algorithm:"),bgroup1);
         keykind = new KComboBox(bgroup1);
         keykind->insertItem("DSA & ElGamal");
         keykind->insertItem("RSA");
@@ -90,11 +90,11 @@ keyGenerate::keyGenerate(QWidget *parent, const char *name):KDialogBase( parent,
 
 void keyGenerate::slotOk()
 {
-        if (QString(kname->text()).stripWhiteSpace().isEmpty()) {
+        if (TQString(kname->text()).stripWhiteSpace().isEmpty()) {
                 KMessageBox::sorry(this,i18n("You must give a name."));
                 return;
         }
-        QString vmail=mail->text();
+        TQString vmail=mail->text();
 	if (vmail.isEmpty())
 	{
 	if (KMessageBox::warningContinueCancel(this,i18n("You are about to create a key with no email address"))!=KMessageBox::Continue) return;
@@ -126,12 +126,12 @@ bool keyGenerate::getmode()
 }
 
 
-QString keyGenerate::getkeytype()
+TQString keyGenerate::getkeytype()
 {
         return(keykind->currentText());
 }
 
-QString keyGenerate::getkeysize()
+TQString keyGenerate::getkeysize()
 {
         return(keysize->currentText());
 }
@@ -141,7 +141,7 @@ int keyGenerate::getkeyexp()
         return(keyexp->currentItem());
 }
 
-QString keyGenerate::getkeynumb()
+TQString keyGenerate::getkeynumb()
 {
         if (numb->text()!=NULL)
                 return(numb->text());
@@ -149,7 +149,7 @@ QString keyGenerate::getkeynumb()
                 return ("");
 }
 
-QString keyGenerate::getkeyname()
+TQString keyGenerate::getkeyname()
 {
         if (kname->text()!=NULL)
                 return(kname->text());
@@ -157,7 +157,7 @@ QString keyGenerate::getkeyname()
                 return ("");
 }
 
-QString keyGenerate::getkeymail()
+TQString keyGenerate::getkeymail()
 {
         if (mail->text()!=NULL)
                 return(mail->text());
@@ -165,7 +165,7 @@ QString keyGenerate::getkeymail()
                 return ("");
 }
 
-QString keyGenerate::getkeycomm()
+TQString keyGenerate::getkeycomm()
 {
         if (comment->text()!=NULL)
                 return(comment->text());

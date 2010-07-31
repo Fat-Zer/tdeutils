@@ -24,7 +24,7 @@
 #include "dialog.h"
 #include "hexvalidator.h"
 #include "searchbar.h"
-#include <qpushbutton.h>
+#include <tqpushbutton.h>
 
 // crappy X11 headers
 #undef KeyPress
@@ -51,43 +51,43 @@ static const char * close_xpm[] = {
 "                ",
 "                "};
 
-CSearchBar::CSearchBar( QWidget *parent, const char *name, WFlags f )
-  :QFrame( parent, name, f )
+CSearchBar::CSearchBar( TQWidget *parent, const char *name, WFlags f )
+  :TQFrame( parent, name, f )
 {
-  setFrameStyle( QFrame::Panel | QFrame::Raised );
+  setFrameStyle( TQFrame::Panel | TQFrame::Raised );
   setLineWidth( 1 );
 
-  mTypeCombo = new QComboBox( this );
-  connect( mTypeCombo, SIGNAL(activated(int)), SLOT(selectorChanged(int)) );
-  QStringList list;
+  mTypeCombo = new TQComboBox( this );
+  connect( mTypeCombo, TQT_SIGNAL(activated(int)), TQT_SLOT(selectorChanged(int)) );
+  TQStringList list;
   list << i18n("Hex") << i18n("Dec") << i18n("Oct") << i18n("Bin")
        << i18n("Txt");
   mTypeCombo->insertStringList( list );
 
-  mInputEdit = new QLineEdit( this );
-  connect( mInputEdit, SIGNAL(textChanged(const QString&)),
-	   SLOT(textChanged(const QString&)) );
+  mInputEdit = new TQLineEdit( this );
+  connect( mInputEdit, TQT_SIGNAL(textChanged(const TQString&)),
+	   TQT_SLOT(textChanged(const TQString&)) );
   mValidator = new CHexValidator( this, CHexValidator::regularText );
   mInputEdit->setValidator( mValidator );
 
-  mFindButton = new QPushButton( i18n("Find"), this );
+  mFindButton = new TQPushButton( i18n("Find"), this );
   mFindButton->setAutoDefault(false);
-  connect( mFindButton, SIGNAL(clicked()), this, SLOT(start()) );
-  connect(mInputEdit,SIGNAL(returnPressed()),mFindButton,SLOT(animateClick()));
+  connect( mFindButton, TQT_SIGNAL(clicked()), this, TQT_SLOT(start()) );
+  connect(mInputEdit,TQT_SIGNAL(returnPressed()),mFindButton,TQT_SLOT(animateClick()));
   mFindButton->setFixedHeight( mTypeCombo->sizeHint().height() );
 
-  mBackwards = new QCheckBox( i18n("Backwards"), this );
-  mIgnoreCase = new QCheckBox( i18n("Ignore case"), this );
+  mBackwards = new TQCheckBox( i18n("Backwards"), this );
+  mIgnoreCase = new TQCheckBox( i18n("Ignore case"), this );
 
-  mCloseButton = new QPushButton( this );
+  mCloseButton = new TQPushButton( this );
   mCloseButton->setAutoDefault(false);
-  mCloseButton->setPixmap( QPixmap( close_xpm ) );
-  connect( mCloseButton, SIGNAL(clicked()), this, SLOT(hideWidget()) );
+  mCloseButton->setPixmap( TQPixmap( close_xpm ) );
+  connect( mCloseButton, TQT_SIGNAL(clicked()), this, TQT_SLOT(hideWidget()) );
 
   //
   // Make layout
   //
-  QHBoxLayout *hlay = new QHBoxLayout( this, 4, 6 );
+  TQHBoxLayout *hlay = new TQHBoxLayout( this, 4, 6 );
   hlay->addWidget( mTypeCombo );
   hlay->addWidget( mInputEdit );
   hlay->addWidget( mFindButton );
@@ -105,21 +105,21 @@ CSearchBar::CSearchBar( QWidget *parent, const char *name, WFlags f )
 
 //
 // Espen 2000-04-21
-// Qt 2.1: Seems like the QLineEdit::returnPressed() does not work when
+// Qt 2.1: Seems like the TQLineEdit::returnPressed() does not work when
 // I install a validator. So I catch the event manually
 //
-bool CSearchBar::eventFilter( QObject *o, QEvent *e )
+bool CSearchBar::eventFilter( TQObject *o, TQEvent *e )
 {
-  if( o == mInputEdit && e->type() == QEvent::KeyPress )
+  if( o == mInputEdit && e->type() == TQEvent::KeyPress )
   {
-    QKeyEvent *ke = (QKeyEvent*)e;
+    TQKeyEvent *ke = (TQKeyEvent*)e;
     if( ke->key() == Key_Return )
     {
       mFindButton->animateClick();
       return true;
     }
   }
-  return QFrame::eventFilter( o, e );
+  return TQFrame::eventFilter( o, e );
 }
 
 //
@@ -143,7 +143,7 @@ void CSearchBar::selectorChanged( int index )
 }
 
 
-void CSearchBar::textChanged( const QString &text )
+void CSearchBar::textChanged( const TQString &text )
 {
   mFindString[ mTypeCombo->currentItem() ] = text;
   mValidator->convert( mFindData, mFindString[ mTypeCombo->currentItem() ] );
@@ -162,7 +162,7 @@ void CSearchBar::start( void )
 {
   if( mFindData.isEmpty() == true )
   {
-    showEntryFailure( this, QString("") );
+    showEntryFailure( this, TQString("") );
     return;
   }
 
@@ -178,9 +178,9 @@ void CSearchBar::start( void )
 }
 
 
-void CSearchBar::showEvent( QShowEvent *e )
+void CSearchBar::showEvent( TQShowEvent *e )
 {
-  QFrame::showEvent(e);
+  TQFrame::showEvent(e);
   mInputEdit->setFocus();
 }
 

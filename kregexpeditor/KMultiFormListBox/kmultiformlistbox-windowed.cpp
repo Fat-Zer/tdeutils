@@ -27,59 +27,59 @@
 #include "widgetwindow.h"
 #include "windowlistboxitem.h"
 
-KMultiFormListBoxWindowed::KMultiFormListBoxWindowed(KMultiFormListBoxFactory *factory, QWidget *parent,
+KMultiFormListBoxWindowed::KMultiFormListBoxWindowed(KMultiFormListBoxFactory *factory, TQWidget *parent,
 																	 bool showUpDownButtons, bool showHelpButton,
-																	 QString addButtonText,const char *name)
-  : QWidget( parent, name )
+																	 TQString addButtonText,const char *name)
+  : TQWidget( parent, name )
 {
-  _layout = new QVBoxLayout(this);
+  _layout = new TQVBoxLayout(this);
 
-	QHBoxLayout *innerLayout = new QHBoxLayout();
+	TQHBoxLayout *innerLayout = new TQHBoxLayout();
 	_layout->addLayout(innerLayout);
 
   _listbox = new KListBox(this,"listbox");
-  _listbox->setSelectionMode(QListBox::Single);
+  _listbox->setSelectionMode(TQListBox::Single);
   innerLayout->addWidget(_listbox);
 
-  QVBoxLayout *buttons = new QVBoxLayout();
+  TQVBoxLayout *buttons = new TQVBoxLayout();
   innerLayout->addLayout(buttons);
 
-  QPushButton *but = new QPushButton(addButtonText, this,"Add Button");
+  TQPushButton *but = new TQPushButton(addButtonText, this,"Add Button");
   buttons->addWidget(but,0);
-  connect(but, SIGNAL(clicked()), this, SLOT(addNewElement()));
+  connect(but, TQT_SIGNAL(clicked()), this, TQT_SLOT(addNewElement()));
 
-  but = new QPushButton(i18n("Edit"), this,"Edit Button");
+  but = new TQPushButton(i18n("Edit"), this,"Edit Button");
   buttons->addWidget(but,0);
-  connect(but,SIGNAL(clicked()), this, SLOT(slotEditSelected()));
-  connect(_listbox, SIGNAL(doubleClicked(QListBoxItem *)), this, SLOT(slotEditSelected(QListBoxItem *)));
+  connect(but,TQT_SIGNAL(clicked()), this, TQT_SLOT(slotEditSelected()));
+  connect(_listbox, TQT_SIGNAL(doubleClicked(TQListBoxItem *)), this, TQT_SLOT(slotEditSelected(TQListBoxItem *)));
 	_buttonList.append(but);
 
-  but = new QPushButton(i18n("Delete"), this, "Delete Button");
+  but = new TQPushButton(i18n("Delete"), this, "Delete Button");
   buttons->addWidget(but,0);
-  connect(but, SIGNAL(clicked()), this, SLOT(slotDeleteEntry()));
+  connect(but, TQT_SIGNAL(clicked()), this, TQT_SLOT(slotDeleteEntry()));
 	_buttonList.append(but);
 
-  but = new QPushButton(i18n("Copy"), this, "Copy Button");
+  but = new TQPushButton(i18n("Copy"), this, "Copy Button");
   buttons->addWidget(but,0);
-  connect(but, SIGNAL(clicked()), this, SLOT(slotCopySelected()));
+  connect(but, TQT_SIGNAL(clicked()), this, TQT_SLOT(slotCopySelected()));
 	_buttonList.append(but);
 
 	if (showUpDownButtons) {
-		but = new QPushButton(i18n("Up"), this, "Up Button");
+		but = new TQPushButton(i18n("Up"), this, "Up Button");
 		buttons->addWidget(but, 0);
-		connect(but, SIGNAL(clicked()), this, SLOT(slotMoveItemUp()));
+		connect(but, TQT_SIGNAL(clicked()), this, TQT_SLOT(slotMoveItemUp()));
 		_buttonList.append(but);
 
-		but = new QPushButton(i18n("Down"), this, "Down Button");
+		but = new TQPushButton(i18n("Down"), this, "Down Button");
 		buttons->addWidget(but, 0);
-		connect(but, SIGNAL(clicked()), this, SLOT(slotMoveItemDown()));
+		connect(but, TQT_SIGNAL(clicked()), this, TQT_SLOT(slotMoveItemDown()));
 		_buttonList.append(but);
 	}
 
 	if (showHelpButton) {
 		but = new KPushButton(KStdGuiItem::help(), this, "Help Button");
 		buttons->addWidget(but, 0);
-		connect(but, SIGNAL(clicked()), this, SIGNAL(showHelp()));
+		connect(but, TQT_SIGNAL(clicked()), this, TQT_SIGNAL(showHelp()));
 	}
 
   buttons->addStretch(1);
@@ -98,7 +98,7 @@ KMultiFormListBoxEntryList KMultiFormListBoxWindowed::elements()
   return list;
 }
 
-void KMultiFormListBoxWindowed::delElement(QWidget */*elm*/)
+void KMultiFormListBoxWindowed::delElement(TQWidget */*elm*/)
 {
     // kdDebug() << "KMultiFormListBoxWindowed::delElement NOT YET IMPLEMENTED"<<endl;
 	// TODO
@@ -121,9 +121,9 @@ void KMultiFormListBoxWindowed::addNewElement()
 {
 	// kdDebug() << "addNewElement " << _factory << "," << _listbox << endl;
 
-  QWidget *widget = new WidgetWindow(_factory, _listbox);
+  TQWidget *widget = new WidgetWindow(_factory, _listbox);
 	widget->show();
-	connect(widget, SIGNAL(finished()), this, SLOT(slotUpdateButtonState()));
+	connect(widget, TQT_SIGNAL(finished()), this, TQT_SLOT(slotUpdateButtonState()));
 }
 
 void KMultiFormListBoxWindowed::addElement()
@@ -132,7 +132,7 @@ void KMultiFormListBoxWindowed::addElement()
 	slotUpdateButtonState();
 }
 
-void KMultiFormListBoxWindowed::slotEditSelected(QListBoxItem *item)
+void KMultiFormListBoxWindowed::slotEditSelected(TQListBoxItem *item)
 {
   ((WindowListboxItem *) item)->displayWidget();
 }

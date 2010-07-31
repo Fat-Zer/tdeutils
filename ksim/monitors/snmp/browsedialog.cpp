@@ -19,7 +19,7 @@
 
 #include "browsedialog.h"
 
-#include <qlabel.h>
+#include <tqlabel.h>
 
 #include <klistview.h>
 #include <kguiitem.h>
@@ -29,7 +29,7 @@
 
 using namespace KSim::Snmp;
 
-BrowseDialog::BrowseDialog( const HostConfig &hostConfig, const QString &currentOid, QWidget *parent, const char *name )
+BrowseDialog::BrowseDialog( const HostConfig &hostConfig, const TQString &currentOid, TQWidget *parent, const char *name )
     : BrowseDialogBase( parent, name ), m_host( hostConfig )
 {
     stop->setGuiItem( KGuiItem( i18n( "&Stop" ), "stop" ) );
@@ -44,7 +44,7 @@ BrowseDialog::BrowseDialog( const HostConfig &hostConfig, const QString &current
     nextWalk();
 }
 
-QString BrowseDialog::selectedObjectIdentifier() const
+TQString BrowseDialog::selectedObjectIdentifier() const
 {
     return selectedObject->text();
 }
@@ -66,13 +66,13 @@ void BrowseDialog::insertBrowseItem( const Walker::Result &result )
         return;
     }
 
-    QListViewItem *i = new QListViewItem( browserContents, browserContents->lastItem(), result.identifierString, result.dataString );
+    TQListViewItem *i = new TQListViewItem( browserContents, browserContents->lastItem(), result.identifierString, result.dataString );
     applyFilter( i );
 }
 
 void BrowseDialog::applyFilter()
 {
-    for ( QListViewItem *i = browserContents->firstChild();
+    for ( TQListViewItem *i = browserContents->firstChild();
           i; i = i->nextSibling() )
         applyFilter( i );
 }
@@ -84,7 +84,7 @@ void BrowseDialog::nextWalk()
     if ( baseOids.isEmpty() )
         return;
 
-    QString baseOidString = baseOids.pop();
+    TQString baseOidString = baseOids.pop();
     Identifier id = Identifier::fromString( baseOidString );
     if ( id.isNull() )
         return;
@@ -96,10 +96,10 @@ void BrowseDialog::startWalk( const Identifier &startOid )
     stopWalker();
 
     m_walker = new Walker( m_host, startOid, this );
-    connect( m_walker, SIGNAL( resultReady( const Walker::Result & ) ),
-             this, SLOT( insertBrowseItem( const Walker::Result & ) ) );
-    connect( m_walker, SIGNAL( finished() ),
-             this, SLOT( nextWalk() ) );
+    connect( m_walker, TQT_SIGNAL( resultReady( const Walker::Result & ) ),
+             this, TQT_SLOT( insertBrowseItem( const Walker::Result & ) ) );
+    connect( m_walker, TQT_SIGNAL( finished() ),
+             this, TQT_SLOT( nextWalk() ) );
 
     stop->setEnabled( true );
 }
@@ -109,10 +109,10 @@ void BrowseDialog::stopWalker()
     if ( !m_walker )
         return;
 
-    disconnect( m_walker, SIGNAL( resultReady( const Walker::Result & ) ),
-                this, SLOT( insertBrowseItem( const Walker::Result & ) ) );
-    disconnect( m_walker, SIGNAL( finished() ),
-                this, SLOT( nextWalk() ) );
+    disconnect( m_walker, TQT_SIGNAL( resultReady( const Walker::Result & ) ),
+                this, TQT_SLOT( insertBrowseItem( const Walker::Result & ) ) );
+    disconnect( m_walker, TQT_SIGNAL( finished() ),
+                this, TQT_SLOT( nextWalk() ) );
 
     m_walker->deleteLater();
     m_walker = 0;
@@ -120,14 +120,14 @@ void BrowseDialog::stopWalker()
     stop->setEnabled( false );
 }
 
-void BrowseDialog::objectSelected( QListViewItem *item )
+void BrowseDialog::objectSelected( TQListViewItem *item )
 {
     selectedObject->setText( item->text( 0 ) );
 }
 
-void BrowseDialog::applyFilter( QListViewItem *item )
+void BrowseDialog::applyFilter( TQListViewItem *item )
 {
-    QString filterText = filter->text();
+    TQString filterText = filter->text();
 
     if ( filterText.isEmpty() ) {
         item->setVisible( true );

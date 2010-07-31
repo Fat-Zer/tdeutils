@@ -21,13 +21,13 @@
 using namespace KHE;
 
 
-void KBinaryByteCodec::encode( QString &Digits, unsigned int Pos, const unsigned char Char ) const
+void KBinaryByteCodec::encode( TQString &Digits, unsigned int Pos, const unsigned char Char ) const
 {
   for( unsigned char M=1<<7; M>0; M>>=1 )
     Digits.at(Pos++) = (Char & M) ? '1' : '0';
 }
 
-void KBinaryByteCodec::encodeShort( QString &Digits, unsigned int Pos, unsigned char Char ) const
+void KBinaryByteCodec::encodeShort( TQString &Digits, unsigned int Pos, unsigned char Char ) const
 {
   unsigned char M = 1<<7;
   // find first set bit

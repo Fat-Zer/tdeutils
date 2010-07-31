@@ -40,34 +40,34 @@ class KTextFileDialog : public KFileDialog
   Q_OBJECT
 
  public:
-    KTextFileDialog(const QString& startDir, const QString& filter,
-		    QWidget *parent, const char *name,
+    KTextFileDialog(const TQString& startDir, const TQString& filter,
+		    TQWidget *parent, const char *name,
 		    bool modal);
 
     ~KTextFileDialog();
 
     static KURL getOpenURLwithEncoding(
-         const QString& startDir = QString::null,
-	 const QString& filter= QString::null,
-	 QWidget *parent= 0,
-	 const QString& caption = QString::null,
-	 const QString& encoding = QString::null,
-	 const QString& buttonText = QString::null);
+         const TQString& startDir = TQString::null,
+	 const TQString& filter= TQString::null,
+	 TQWidget *parent= 0,
+	 const TQString& caption = TQString::null,
+	 const TQString& encoding = TQString::null,
+	 const TQString& buttonText = TQString::null);
 
     static KURL getSaveURLwithEncoding(
-	 const QString& dir, const QString& filter,
-	 QWidget *parent,
-	 const QString& caption,
-	 const QString& encoding = QString::null);
+	 const TQString& dir, const TQString& filter,
+	 TQWidget *parent,
+	 const TQString& caption,
+	 const TQString& encoding = TQString::null);
 
-    QString &encoding() { return enc; }
-    void setEncoding(const QString& encoding);
+    TQString &encoding() { return enc; }
+    void setEncoding(const TQString& encoding);
 
   protected slots:
     void slotShowEncCombo();
 
   private:
-   QString enc;
+   TQString enc;
 };
 
 

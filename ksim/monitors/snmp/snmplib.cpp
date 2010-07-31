@@ -44,9 +44,9 @@ SnmpLib::~SnmpLib()
 ClassLocker<SnmpLib> &SnmpLib::self()
 {
     if ( !s_self ) {
-        static QMutex singletonGuard;
+        static TQMutex singletonGuard;
 
-        QMutexLocker locker( &singletonGuard );
+        TQMutexLocker locker( &singletonGuard );
         if ( !s_self )
             sd.setObject( s_self, new SnmpLib );
     }

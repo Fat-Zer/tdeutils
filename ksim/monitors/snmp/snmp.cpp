@@ -23,7 +23,7 @@
 #include "snmplib.h"
 #include "value_p.h"
 
-#include <qmutex.h>
+#include <tqmutex.h>
 
 #include <assert.h>
 
@@ -53,30 +53,30 @@ static const struct EnumStringMapInfo
     { 0, 0, 0 }
 };
 
-static QStringList allStrings( const EnumStringMapInfo *array )
+static TQStringList allStrings( const EnumStringMapInfo *array )
 {
-    QStringList result;
+    TQStringList result;
     for ( uint i = 0; array[ i ].stringValue; ++i )
-        result << QString::fromLatin1( array[ i ].stringValue );
+        result << TQString::fromLatin1( array[ i ].stringValue );
     return result;
 }
 
-static QString enumToString( const EnumStringMapInfo *array, int value )
+static TQString enumToString( const EnumStringMapInfo *array, int value )
 {
     for ( uint i = 0; array[ i ].stringValue; ++i )
         if ( array[ i ].enumValue == value )
-            return QString::fromLatin1( array[ i ].stringValue );
+            return TQString::fromLatin1( array[ i ].stringValue );
 
     assert( false );
-    return QString::null;
+    return TQString::null;
 }
 
-static int stringToEnum( const EnumStringMapInfo *array, QString string, bool *ok )
+static int stringToEnum( const EnumStringMapInfo *array, TQString string, bool *ok )
 {
     string = string.lower();
     uint i;
     for ( i = 0; array[ i ].stringValue; ++i )
-        if ( QString::fromLatin1( array[ i ].stringValue ).lower() == string ) {
+        if ( TQString::fromLatin1( array[ i ].stringValue ).lower() == string ) {
             if ( ok ) *ok = true;
             return array[ i ].enumValue;
         }
@@ -108,62 +108,62 @@ int KSim::Snmp::snmpSecurityLevelToSnmpLibConstant( SecurityLevel secLevel )
     return extractSnmpLibConstant( securityLevelStrings, secLevel );
 }
 
-QStringList KSim::Snmp::allSnmpVersions()
+TQStringList KSim::Snmp::allSnmpVersions()
 {
     return allStrings( snmpVersionStrings );
 }
 
-QString KSim::Snmp::snmpVersionToString( SnmpVersion version )
+TQString KSim::Snmp::snmpVersionToString( SnmpVersion version )
 {
     return enumToString( snmpVersionStrings, version );
 }
 
-SnmpVersion KSim::Snmp::stringToSnmpVersion( QString string, bool *ok )
+SnmpVersion KSim::Snmp::stringToSnmpVersion( TQString string, bool *ok )
 {
     return static_cast<SnmpVersion>( stringToEnum( snmpVersionStrings, string, ok ) );
 }
 
-QStringList KSim::Snmp::allSecurityLevels()
+TQStringList KSim::Snmp::allSecurityLevels()
 {
     return allStrings( securityLevelStrings );
 }
 
-QString KSim::Snmp::securityLevelToString( SecurityLevel level )
+TQString KSim::Snmp::securityLevelToString( SecurityLevel level )
 {
     return enumToString( securityLevelStrings, level );
 }
 
-SecurityLevel KSim::Snmp::stringToSecurityLevel( QString string, bool *ok )
+SecurityLevel KSim::Snmp::stringToSecurityLevel( TQString string, bool *ok )
 {
     return static_cast<SecurityLevel>( stringToEnum( securityLevelStrings, string, ok ) );
 }
 
-QStringList KSim::Snmp::allAuthenticationProtocols()
+TQStringList KSim::Snmp::allAuthenticationProtocols()
 {
     return allStrings( authenticationProtocolStrings );
 }
 
-QString KSim::Snmp::authenticationProtocolToString( AuthenticationProtocol proto )
+TQString KSim::Snmp::authenticationProtocolToString( AuthenticationProtocol proto )
 {
     return enumToString( authenticationProtocolStrings, proto );
 }
 
-AuthenticationProtocol KSim::Snmp::stringToAuthenticationProtocol( QString string, bool *ok )
+AuthenticationProtocol KSim::Snmp::stringToAuthenticationProtocol( TQString string, bool *ok )
 {
     return static_cast<AuthenticationProtocol>( stringToEnum( authenticationProtocolStrings, string, ok ) );
 }
 
-QStringList KSim::Snmp::allPrivacyProtocols()
+TQStringList KSim::Snmp::allPrivacyProtocols()
 {
     return allStrings( privacyProtocolStrings );
 }
 
-QString KSim::Snmp::privacyProtocolToString( PrivacyProtocol proto )
+TQString KSim::Snmp::privacyProtocolToString( PrivacyProtocol proto )
 {
     return enumToString( privacyProtocolStrings, proto );
 }
 
-PrivacyProtocol KSim::Snmp::stringToPrivacyProtocol( QString string, bool *ok )
+PrivacyProtocol KSim::Snmp::stringToPrivacyProtocol( TQString string, bool *ok )
 {
     return static_cast<PrivacyProtocol>( stringToEnum( privacyProtocolStrings, string, ok ) );
 }
@@ -288,14 +288,14 @@ int KSim::Snmp::sessionErrorCode( netsnmp_session &session )
     return errorCode;
 }
 
-static QString messageForErrorCode( int errorCode )
+static TQString messageForErrorCode( int errorCode )
 {
     if ( errorCode >= SNMPERR_MAX && errorCode <= SNMPERR_GENERR )
-        return QString::fromLatin1( SnmpLib::self()->snmp_api_errstring( errorCode ) );
+        return TQString::fromLatin1( SnmpLib::self()->snmp_api_errstring( errorCode ) );
     if ( errorCode >= SNMP_ERR_NOERROR && errorCode <= MAX_SNMP_ERR )
-        return QString::fromLatin1( SnmpLib::self()->snmp_errstring( errorCode ) );
+        return TQString::fromLatin1( SnmpLib::self()->snmp_errstring( errorCode ) );
 
-    return QString::null;
+    return TQString::null;
 }
 
 ErrorInfo::ErrorInfo()

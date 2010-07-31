@@ -40,7 +40,7 @@ class KSim::Plugin::Private
     ~Private()
     {
       kdDebug(2003) << "Deleting " << (plugin ?
-         plugin->name() : QString("Null"))
+         plugin->name() : TQString("Null"))
          << " objects." << endl;
 
       // Remember to delete the objects we own
@@ -57,10 +57,10 @@ class KSim::Plugin::Private
     bool deref() { return !--count; }
 
     uint count;
-    QString name;
-    QPixmap icon;
-    QCString libName;
-    QString filename;
+    TQString name;
+    TQPixmap icon;
+    TQCString libName;
+    TQString filename;
     KSim::PluginObject *plugin;
     KSim::PluginView *view;
     KSim::PluginPage *page;
@@ -155,24 +155,24 @@ bool KSim::Plugin::isNull() const
   return !d;
 }
 
-const QString &KSim::Plugin::name() const
+const TQString &KSim::Plugin::name() const
 {
-  return d ? d->name : QString::null;
+  return d ? d->name : TQString::null;
 }
 
-QPixmap KSim::Plugin::icon() const
+TQPixmap KSim::Plugin::icon() const
 {
-  return d ? d->icon : QPixmap();
+  return d ? d->icon : TQPixmap();
 }
 
-QCString KSim::Plugin::libName() const
+TQCString KSim::Plugin::libName() const
 {
-  return d ? d->libName : QCString();
+  return d ? d->libName : TQCString();
 }
 
-const QString &KSim::Plugin::fileName() const
+const TQString &KSim::Plugin::fileName() const
 {
-  return d ? d->filename : QString::null;
+  return d ? d->filename : TQString::null;
 }
 
 KSim::PluginObject *KSim::Plugin::plugin() const

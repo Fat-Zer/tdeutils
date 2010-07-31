@@ -34,26 +34,26 @@ struct HostConfig
     HostConfig( KConfigBase &config )
     { load( config ); }
 
-    QString name; // hostname
+    TQString name; // hostname
     ushort port;
 
     SnmpVersion version;
 
-    QString community;
+    TQString community;
 
-    QString securityName;
+    TQString securityName;
 
     SecurityLevel securityLevel;
 
     struct
     {
         AuthenticationProtocol protocol;
-        QString key;
+        TQString key;
     } authentication;
     struct
     {
         PrivacyProtocol protocol;
-        QString key;
+        TQString key;
     } privacy;
 
     bool load( KConfigBase &config );
@@ -65,17 +65,17 @@ struct HostConfig
     { return name == rhs.name; }
 
 private:
-    static void writeIfNotEmpty( KConfigBase &config, const QString &name, const QString &value );
+    static void writeIfNotEmpty( KConfigBase &config, const TQString &name, const TQString &value );
 };
 
-struct HostConfigMap : public QMap< QString, HostConfig >
+struct HostConfigMap : public TQMap< TQString, HostConfig >
 {
     HostConfigMap() {}
-    HostConfigMap( const QMap< QString, HostConfig > &rhs )
-        : QMap< QString, HostConfig >( rhs ) {}
+    HostConfigMap( const TQMap< TQString, HostConfig > &rhs )
+        : TQMap< TQString, HostConfig >( rhs ) {}
 
-    void load( KConfigBase &config, const QStringList &hosts );
-    QStringList save( KConfigBase &config ) const;
+    void load( KConfigBase &config, const TQStringList &hosts );
+    TQStringList save( KConfigBase &config ) const;
 };
 
 }

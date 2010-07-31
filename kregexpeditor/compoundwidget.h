@@ -32,18 +32,18 @@ class QCheckBox;
 class CompoundDetailWindow :public QWidget
 {
 public:
-  CompoundDetailWindow(QWidget* parent, const char* name = 0);
-  QString title() const;
-  QString description() const;
+  CompoundDetailWindow(TQWidget* parent, const char* name = 0);
+  TQString title() const;
+  TQString description() const;
   bool allowReplace() const;
-  void setTitle( QString );
-  void setDescription( QString );
+  void setTitle( TQString );
+  void setDescription( TQString );
   void setAllowReplace( bool );
 
 private:
-  QLineEdit* _title;
-  QMultiLineEdit* _description;
-  QCheckBox* _allowReplace;
+  TQLineEdit* _title;
+  TQMultiLineEdit* _description;
+  TQCheckBox* _allowReplace;
 };
 
 
@@ -62,23 +62,23 @@ class CompoundWidget :public SingleContainerWidget
 Q_OBJECT
 
 public:
-  CompoundWidget( RegExpEditorWindow* editorWindow, QWidget* parent,
+  CompoundWidget( RegExpEditorWindow* editorWindow, TQWidget* parent,
                   const char* name = 0);
   CompoundWidget( CompoundRegExp* regexp, RegExpEditorWindow* editorWindow,
-                  QWidget* parent, const char* name = 0);
+                  TQWidget* parent, const char* name = 0);
 
   virtual bool updateSelection( bool parentSelected );
-  virtual QSize sizeHint() const;
+  virtual TQSize sizeHint() const;
   virtual RegExp* regExp() const;
   virtual RegExpType type() const { return COMPOUND; }
   virtual int edit();
 
 protected:
-  virtual void paintEvent( QPaintEvent *e );
-  virtual void mousePressEvent( QMouseEvent* e );
-  virtual void mouseReleaseEvent( QMouseEvent* e);
+  virtual void paintEvent( TQPaintEvent *e );
+  virtual void mousePressEvent( TQMouseEvent* e );
+  virtual void mouseReleaseEvent( TQMouseEvent* e);
   void init();
-  QPixmap getIcon( const QString& name );
+  TQPixmap getIcon( const TQString& name );
 
 protected slots:
   void slotConfigCanceled();
@@ -86,16 +86,16 @@ protected slots:
 
 private:
   bool _hidden;
-  QPixmap _up, _down;
-  mutable QSize _pixmapSize;
-  mutable QPoint _pixmapPos;
+  TQPixmap _up, _down;
+  mutable TQSize _pixmapSize;
+  mutable TQPoint _pixmapPos;
 
   KDialogBase* _configWindow;
   CompoundDetailWindow* _content;
 
-  mutable QSize _textSize;
-  mutable QSize _childSize;
-  QByteArray _backup;
+  mutable TQSize _textSize;
+  mutable TQSize _childSize;
+  TQByteArray _backup;
 
   int _backRefId;
 };

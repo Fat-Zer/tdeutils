@@ -18,12 +18,12 @@
 #define KHEXEDIT_HELPER
 
 // qt specific
-#include <qcolor.h>
+#include <tqcolor.h>
 // lib specific
 #include <khechar.h>
 
 // temporary solution until syntax highlighting is implemented
-static inline QColor colorForChar( const KHE::KHEChar Byte )
+static inline TQColor colorForChar( const KHE::KHEChar Byte )
 {
   return Byte.isUndefined() ? Qt::yellow : Byte.isPunct() ? Qt::red : Byte.isPrint() ? Qt::black : Qt::blue;
 }

@@ -19,17 +19,17 @@ class dcopIface : virtual public DCOPObject
 public:
 
 k_dcop:
-    virtual ASYNC openTheme(QString file) = 0;
-    virtual ASYNC openNamedTheme(QString file, QString name, bool is_sub_theme) = 0;
-    virtual ASYNC closeTheme(QString name) = 0;
+    virtual ASYNC openTheme(TQString file) = 0;
+    virtual ASYNC openNamedTheme(TQString file, TQString name, bool is_sub_theme) = 0;
+    virtual ASYNC closeTheme(TQString name) = 0;
     virtual ASYNC quit() = 0;
     virtual ASYNC hideSystemTray(bool hide) = 0;
     virtual ASYNC showThemeDialog() = 0;
 
-    virtual int themeAdded(QString appId, QString file) = 0;
-    virtual ASYNC themeClosed(QString appId, QString file, int instance) = 0;
-    virtual ASYNC themeNotify(QString name, QString text) = 0;
-    virtual ASYNC setIncomingData(QString name, QString obj) = 0;
+    virtual int themeAdded(TQString appId, TQString file) = 0;
+    virtual ASYNC themeClosed(TQString appId, TQString file, int instance) = 0;
+    virtual ASYNC themeNotify(TQString name, TQString text) = 0;
+    virtual ASYNC setIncomingData(TQString name, TQString obj) = 0;
     virtual bool isMainKaramba() = 0;
 
 };

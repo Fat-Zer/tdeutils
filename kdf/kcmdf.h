@@ -28,17 +28,17 @@
 #include "mntconfig.h"
 
 #include <kcmodule.h>
-#include <qtabwidget.h>
+#include <tqtabwidget.h>
 
 class KDiskFreeWidget : public KCModule
 {
   Q_OBJECT
   
   public:
-    KDiskFreeWidget( QWidget *parent=0, const char *name=0 );
+    KDiskFreeWidget( TQWidget *parent=0, const char *name=0 );
     ~KDiskFreeWidget();
 
-    QString quickHelp() const;
+    TQString quickHelp() const;
 
   private:
     KDFWidget *mKdf;

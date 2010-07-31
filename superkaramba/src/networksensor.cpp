@@ -16,7 +16,7 @@
 
 #include "networksensor.h"
 
-NetworkSensor::NetworkSensor( QString dev, int interval ):Sensor( interval )
+NetworkSensor::NetworkSensor( TQString dev, int interval ):Sensor( interval )
 {
    device = dev.lower();
 
@@ -50,7 +50,7 @@ NetworkSensor::NetworkSensor( QString dev, int interval ):Sensor( interval )
       sysctl(name, 6, (void*)&if_mib, (size_t*)&if_miblen, (void*)NULL, (size_t)0);
 
       /* We found the right interface? */
-      if (QString(if_mib.ifmd_name) == device) {
+      if (TQString(if_mib.ifmd_name) == device) {
          if_number = i;
          break;
       }
@@ -96,11 +96,11 @@ void NetworkSensor::getInOutBytes ( unsigned long &in,unsigned long &out) const
       out = 0;
    }
 #else
-    QFile file("/proc/net/dev");
-    QString line;
+    TQFile file("/proc/net/dev");
+    TQString line;
     if ( file.open(IO_ReadOnly | IO_Translate) )
     {
-        QTextStream t( &file );        // use a text stream
+        TQTextStream t( &file );        // use a text stream
         line = t.readLine();
         while(line !=0 && !line.contains(device))
         {
@@ -108,7 +108,7 @@ void NetworkSensor::getInOutBytes ( unsigned long &in,unsigned long &out) const
         }
         if ( line.contains( device ) )
         {
-            QRegExp rx( "\\W+"+device+":\\D*(\\d+)(?:\\D+\\d+){7}\\D+(\\d+)", false);
+            TQRegExp rx( "\\W+"+device+":\\D*(\\d+)(?:\\D+\\d+){7}\\D+(\\d+)", false);
             rx.search(line);
             in = rx.cap(1).toULong();
             out = rx.cap(2).toULong();
@@ -128,8 +128,8 @@ void NetworkSensor::update()
 {
     SensorParams *sp;
     Meter *meter;
-    QObjectListIt it( *objList );
-    QString format;
+    TQObjectListIt it( *objList );
+    TQString format;
     int decimals;
 
     unsigned long inB, outB;
@@ -148,11 +148,11 @@ void NetworkSensor::update()
             format = "%in";
         }
 
-        format.replace( QRegExp("%inkb", false), QString::number( ((inB - receivedBytes)*8)/delay, 'f', decimals ) );
-        format.replace( QRegExp("%in", false), QString::number( (inB - receivedBytes)/delay, 'f', decimals ) );
+        format.replace( TQRegExp("%inkb", false), TQString::number( ((inB - receivedBytes)*8)/delay, 'f', decimals ) );
+        format.replace( TQRegExp("%in", false), TQString::number( (inB - receivedBytes)/delay, 'f', decimals ) );
 
-        format.replace( QRegExp("%outkb", false), QString::number( ((outB - transmittedBytes)*8)/delay, 'f', decimals ) );
-        format.replace( QRegExp("%out", false), QString::number( (outB - transmittedBytes)/delay, 'f', decimals ) );
+        format.replace( TQRegExp("%outkb", false), TQString::number( ((outB - transmittedBytes)*8)/delay, 'f', decimals ) );
+        format.replace( TQRegExp("%out", false), TQString::number( (outB - transmittedBytes)/delay, 'f', decimals ) );
 
         meter->setValue( format );
         ++it;

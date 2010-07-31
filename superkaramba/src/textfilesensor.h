@@ -24,11 +24,11 @@
 
 
 #include <sensor.h>
-#include <qfile.h>
-#include <qtextstream.h>
-#include <qstring.h>
-#include <qtextcodec.h>
-#include <qvaluevector.h>
+#include <tqfile.h>
+#include <tqtextstream.h>
+#include <tqstring.h>
+#include <tqtextcodec.h>
+#include <tqvaluevector.h>
 /**
  *
  * Hans Karlsson
@@ -38,15 +38,15 @@ class TextFileSensor : public Sensor
 
 Q_OBJECT
 public:
-    TextFileSensor( const QString &fileName, bool rdf, int interval, const QString &encoding=QString::null );
+    TextFileSensor( const TQString &fileName, bool rdf, int interval, const TQString &encoding=TQString::null );
 
     ~TextFileSensor();
 
     void update();
 
 private:
-QTextCodec *codec;
-QString fileName;
+TQTextCodec *codec;
+TQString fileName;
 bool rdf;
 };
 

@@ -26,7 +26,7 @@
 
 class PowerBookMonitor : public KMilo::Monitor {
 	public:
-		PowerBookMonitor(QObject *parent, const char *name, const QStringList&);
+		PowerBookMonitor(TQObject *parent, const char *name, const TQStringList&);
 		virtual ~PowerBookMonitor();
 
 		virtual bool init();

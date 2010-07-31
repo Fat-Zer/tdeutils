@@ -46,15 +46,15 @@
 #include <kwin.h>
 #include <krun.h>
 
-#include <qfile.h>
-#include <qbitmap.h>
-#include <qtimer.h>
-#include <qlayout.h>
-#include <qobjectlist.h>
-#include <qpainter.h>
-#include <qcursor.h>
-#include <qpopupmenu.h>
-#include <qvbox.h>
+#include <tqfile.h>
+#include <tqbitmap.h>
+#include <tqtimer.h>
+#include <tqlayout.h>
+#include <tqobjectlist.h>
+#include <tqpainter.h>
+#include <tqcursor.h>
+#include <tqpopupmenu.h>
+#include <tqvbox.h>
 
 #include <unistd.h>
 #include <sys/param.h>
@@ -66,7 +66,7 @@
 KSim::MainView::MainView(KConfig *config,
    bool loadPlugins, KSim::PanelExtension *topLevel,
    const char *name) : DCOPObject("KSim"),
-   QWidget(topLevel, name)
+   TQWidget(topLevel, name)
 {
   // create the local "themes" and "monitors" dirs
   makeDirs();
@@ -90,7 +90,7 @@ KSim::MainView::MainView(KConfig *config,
 
   kdDebug(2003) << "loadPlugins: " << loadPlugins << endl;
 
-  m_subLayout = new QVBoxLayout(this);
+  m_subLayout = new TQVBoxLayout(this);
 
   m_topFrame = new KSim::Frame(KSim::Types::TopFrame, this);
   m_subLayout->addWidget(m_topFrame);
@@ -101,11 +101,11 @@ KSim::MainView::MainView(KConfig *config,
   m_leftFrame = new KSim::Frame(KSim::Types::LeftFrame, this);
   m_sizeLayout->addWidget(m_leftFrame);
 
-  m_pluginLayout = new QBoxLayout(QBoxLayout::TopToBottom);
+  m_pluginLayout = new TQBoxLayout(TQBoxLayout::TopToBottom);
   m_sizeLayout->addLayout(m_pluginLayout);
 
-  QVBoxLayout *vb = new QVBoxLayout;
-  QSpacerItem *item = new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Expanding);
+  TQVBoxLayout *vb = new QVBoxLayout;
+  TQSpacerItem *item = new TQSpacerItem(0, 0, TQSizePolicy::Expanding, TQSizePolicy::Expanding);
   vb->addItem(item);
   
   m_hostLabel = new KSim::Label(KSim::Types::Host, this);
@@ -118,7 +118,7 @@ KSim::MainView::MainView(KConfig *config,
   if (gethostname(hostName, sizeof(hostName)))
     m_hostLabel->setText(i18n("Unknown"));
   else {
-    QCString host(hostName);
+    TQCString host(hostName);
     int dotLocation = host.find(".");
     if (!m_config->displayFqdn() && dotLocation != -1)
       host.truncate(dotLocation);
@@ -127,7 +127,7 @@ KSim::MainView::MainView(KConfig *config,
   }
 
   vb = new QVBoxLayout;
-  item = new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Expanding);
+  item = new TQSpacerItem(0, 0, TQSizePolicy::Expanding, TQSizePolicy::Expanding);
   vb->addItem(item);
   m_sysinfo = new KSim::Sysinfo(m_config, this);
   vb->addWidget(m_sysinfo);
@@ -140,8 +140,8 @@ KSim::MainView::MainView(KConfig *config,
   m_sizeLayout->addWidget(m_rightFrame);
 
   connect(&KSim::PluginLoader::self(),
-     SIGNAL(pluginLoaded(const KSim::Plugin &)),
-     this, SLOT(addMonitor(const KSim::Plugin &)));
+     TQT_SIGNAL(pluginLoaded(const KSim::Plugin &)),
+     this, TQT_SLOT(addMonitor(const KSim::Plugin &)));
 
   KSim::ThemeLoader::self().themeColours(this);
 
@@ -150,7 +150,7 @@ KSim::MainView::MainView(KConfig *config,
     addPlugins();
   }
   
-  connect(&m_maskTimer, SIGNAL(timeout()), SLOT(slotMaskMainView()));
+  connect(&m_maskTimer, TQT_SIGNAL(timeout()), TQT_SLOT(slotMaskMainView()));
 }
 
 KSim::MainView::~MainView()
@@ -161,7 +161,7 @@ KSim::MainView::~MainView()
 void KSim::MainView::show()
 {
   maskMainView();
-  QWidget::show();
+  TQWidget::show();
 }
 
 void KSim::MainView::cleanup()
@@ -182,12 +182,12 @@ KSim::Config *KSim::MainView::config() const
 
 void KSim::MainView::makeDirs()
 {
-  QString homeDir = locateLocal("data", "ksim");
-  QString themeDir = homeDir + QString::fromLatin1("/themes");
-  QString monitorDir = homeDir + QString::fromLatin1("/monitors");
+  TQString homeDir = locateLocal("data", "ksim");
+  TQString themeDir = homeDir + TQString::fromLatin1("/themes");
+  TQString monitorDir = homeDir + TQString::fromLatin1("/monitors");
 
   // return true if the dirs already exist
-  if (QFile::exists(themeDir) && QFile::exists(monitorDir))
+  if (TQFile::exists(themeDir) && TQFile::exists(monitorDir))
     return;
 
   bool themeCreated = KStandardDirs::makeDir(themeDir);
@@ -200,7 +200,7 @@ void KSim::MainView::makeDirs()
   }
 }
 
-const QString &KSim::MainView::hostname() const
+const TQString &KSim::MainView::hostname() const
 {
   return m_hostLabel->text();
 }
@@ -221,29 +221,29 @@ void KSim::MainView::maskMainView()
     return;
   }
   
-  QBitmap topPixmap(*m_topFrame->background()->mask());
-  QBitmap leftPixmap(*m_leftFrame->background()->mask());
-  QBitmap rightPixmap(*m_rightFrame->background()->mask());
-  QBitmap bottomPixmap(*m_bottomFrame->background()->mask());
+  TQBitmap topPixmap(*m_topFrame->background()->mask());
+  TQBitmap leftPixmap(*m_leftFrame->background()->mask());
+  TQBitmap rightPixmap(*m_rightFrame->background()->mask());
+  TQBitmap bottomPixmap(*m_bottomFrame->background()->mask());
 
-  QSize insideSize(m_pluginLayout->geometry().size());
+  TQSize insideSize(m_pluginLayout->geometry().size());
 
   // make a cleared bigrect where we can put our pixmap masks on
-  QBitmap bigBitmap(topLevelWidget()->size(), true);
+  TQBitmap bigBitmap(topLevelWidget()->size(), true);
 
   // better return if our bitmap is null so we can avoid crashes
   if (bigBitmap.isNull())
     return;
 
-  QPoint ofs = mapTo(topLevelWidget(), QPoint(0,0));
+  TQPoint ofs = mapTo(topLevelWidget(), TQPoint(0,0));
   int ofsX = ofs.x();
   int ofsY = ofs.y();
 
-  QPainter painter;
+  TQPainter painter;
   painter.begin(&bigBitmap);
   painter.setBrush(color1);
   painter.setPen(color1);
-  QRect rect = m_pluginLayout->geometry();
+  TQRect rect = m_pluginLayout->geometry();
   rect.moveBy(ofsX, ofsY);
   painter.drawRect(rect);
   painter.drawPixmap(ofsX, ofsY, topPixmap);
@@ -330,8 +330,8 @@ void KSim::MainView::reparseConfig(bool emitReload,
 
 void KSim::MainView::addPlugins()
 {
-  QStringList locatedFiles = KGlobal::dirs()->findAllResources("data", "ksim/monitors/*.desktop");
-  QStringList::ConstIterator it;
+  TQStringList locatedFiles = KGlobal::dirs()->findAllResources("data", "ksim/monitors/*.desktop");
+  TQStringList::ConstIterator it;
   for (it = locatedFiles.begin(); it != locatedFiles.end(); ++it)
   {
     const KDesktopFile kdf(*it, true);
@@ -356,7 +356,7 @@ void KSim::MainView::addMonitor(const KSim::Plugin &plugin)
   if (!plugin.view())
     return;
 
-  plugin.view()->reparent(this, 0, QPoint(0, 0), true);
+  plugin.view()->reparent(this, 0, TQPoint(0, 0), true);
   KSim::ThemeLoader::self().themeColours(plugin.view());
 
 //  int location = m_config->monitorLocation(plugin.libName());
@@ -371,20 +371,20 @@ void KSim::MainView::addMonitor(const KSim::Plugin &plugin)
 //  kdDebug(2003) << "m_oldLocation: " << m_oldLocation << endl;
 //  kdDebug(2003) << "location: " << location << endl;
   m_pluginLayout->addWidget(plugin.view());
-  connect(plugin.view(), SIGNAL(runCommand(const QCString &)),
-     SLOT(runCommand(const QCString &)));
+  connect(plugin.view(), TQT_SIGNAL(runCommand(const TQCString &)),
+     TQT_SLOT(runCommand(const TQCString &)));
 
 //  if (location > m_oldLocation)
 //    m_oldLocation = location;
 }
 
-void KSim::MainView::runCommand(const QCString &name)
+void KSim::MainView::runCommand(const TQCString &name)
 {
   if (name.isNull())
     return;
 
   kdDebug(2003) << "runCommand(" << name.mid(5) << ")" << endl;
-  QString exec = m_config->monitorCommand(name.mid(5));
+  TQString exec = m_config->monitorCommand(name.mid(5));
   kdDebug(2003) << "exec is " << exec << endl;
   KRun::runCommand(exec);
 }
@@ -393,21 +393,21 @@ void KSim::MainView::preferences()
 {
   if (m_prefDialog == 0L) {
     m_prefDialog = new KSim::ConfigDialog(m_config, this, "m_prefDialog");
-    connect(m_prefDialog, SIGNAL(reparse(bool, const KSim::ChangedPluginList &)),
-       this, SLOT(reparseConfig(bool, const KSim::ChangedPluginList &)));
+    connect(m_prefDialog, TQT_SIGNAL(reparse(bool, const KSim::ChangedPluginList &)),
+       this, TQT_SLOT(reparseConfig(bool, const KSim::ChangedPluginList &)));
   }
 
   m_prefDialog->exec();
   destroyPref();
 }
 
-void KSim::MainView::resizeEvent(QResizeEvent *re)
+void KSim::MainView::resizeEvent(TQResizeEvent *re)
 {
-  QWidget::resizeEvent(re);
+  TQWidget::resizeEvent(re);
   m_maskTimer.start(0, true);
 }
 
-void KSim::MainView::paletteChange(const QPalette &)
+void KSim::MainView::paletteChange(const TQPalette &)
 {
   // Call true here to fool the KSim::Base pointers to
   // think our theme changed, we can afford todo this
@@ -430,16 +430,16 @@ void KSim::MainView::destroyPref()
   }
 }
 
-QSize KSim::MainView::sizeHint(KPanelExtension::Position p, QSize) const
+TQSize KSim::MainView::sizeHint(KPanelExtension::Position p, TQSize) const
 {
   int width = 0;
   int height = 0;
   
-  QLayoutItem *child;
-  for( QLayoutIterator it = m_pluginLayout->iterator();
+  TQLayoutItem *child;
+  for( TQLayoutIterator it = m_pluginLayout->iterator();
        (child = it.current()) != 0; ++it)
   {
-     QSize sz = child->minimumSize();
+     TQSize sz = child->minimumSize();
      if ((p == KPanelExtension::Right) || (p == KPanelExtension::Left))
      {
         width = QMAX(width, sz.width());
@@ -455,13 +455,13 @@ QSize KSim::MainView::sizeHint(KPanelExtension::Position p, QSize) const
   width += m_leftFrame->minimumWidth() + m_rightFrame->minimumWidth();
   height += m_topFrame->minimumHeight() + m_bottomFrame->minimumHeight();
 
-  return QSize(width, height);
+  return TQSize(width, height);
 }
 
 void KSim::MainView::positionChange(KPanelExtension::Orientation o)
 {
   if (o == KPanelExtension::Vertical)
-     m_pluginLayout->setDirection(QBoxLayout::TopToBottom);
+     m_pluginLayout->setDirection(TQBoxLayout::TopToBottom);
   else
-     m_pluginLayout->setDirection(QBoxLayout::LeftToRight);
+     m_pluginLayout->setDirection(TQBoxLayout::LeftToRight);
 }

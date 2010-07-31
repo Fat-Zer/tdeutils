@@ -11,14 +11,14 @@
 #define CPUSENSOR_H
 #include "sensor.h"
 
-#include <qfile.h>
-#include <qregexp.h>
+#include <tqfile.h>
+#include <tqregexp.h>
 
 class CPUSensor :  public Sensor
 {
     Q_OBJECT
 public:
-    CPUSensor( QString cpuNbr, int interval );
+    CPUSensor( TQString cpuNbr, int interval );
     ~CPUSensor();
     void update();
     void setMaxValue( SensorParams *sp );
@@ -37,7 +37,7 @@ private:
     int idle;
 
     void getTicks (long &u,long &s,long &n,long &i);
-    QString cpuNbr;
+    TQString cpuNbr;
 
 };
 

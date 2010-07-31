@@ -13,7 +13,7 @@
 #ifndef EDITACTION_H
 #define EDITACTION_H
 
-#include <qstring.h>
+#include <tqstring.h>
 
 #include "iractions.h"
 #include "editactionbase.h"
@@ -27,11 +27,11 @@ class EditAction : public EditActionBase
 {
 	Q_OBJECT
 	IRAIt theAction;
-	QMap<QString, QString> applicationMap, functionMap;
-	QMap<QString, QString> nameProgramMap;
-	QMap<QString, bool> uniqueProgramMap;
+	TQMap<TQString, TQString> applicationMap, functionMap;
+	TQMap<TQString, TQString> nameProgramMap;
+	TQMap<TQString, bool> uniqueProgramMap;
 	Arguments arguments;
-	QString program;
+	TQString program;
 	bool isUnique;
 
 public:
@@ -48,7 +48,7 @@ public:
 	virtual void updateDCOPObjects();
 	virtual void updateDCOPFunctions();
 
-	EditAction(IRAIt action, QWidget *parent = 0, const char *name = 0);
+	EditAction(IRAIt action, TQWidget *parent = 0, const char *name = 0);
 	~EditAction();
 };
 

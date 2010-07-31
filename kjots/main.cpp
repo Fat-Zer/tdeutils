@@ -66,7 +66,7 @@ int main( int argc, char **argv )
   config->setGroup("kjots");
   if (config->hasKey("EFontFamily")) {
     // read old font and create it
-    QFont font( config->readEntry("EFontFamily"),
+    TQFont font( config->readEntry("EFontFamily"),
                 config->readNumEntry("EFontSize", 12),
                 config->readNumEntry("EFontWeight", 0),
                 config->readNumEntry("EFontItalic", 0));
@@ -89,7 +89,7 @@ int main( int argc, char **argv )
     }
   }
 
-  a.setMainWidget( (QWidget *) jots );
+  a.setMainWidget( (TQWidget *) jots );
   jots->show();
   jots->resize(jots->size());
   return a.exec();

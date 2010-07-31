@@ -24,9 +24,9 @@
 #define _KMILOD_H_
 
 #include <kdedmodule.h>
-#include <qstring.h>
-#include <qtimer.h>
-#include <qptrlist.h>
+#include <tqstring.h>
+#include <tqtimer.h>
+#include <tqptrlist.h>
 #include "monitor.h"
 #include "displayskin.h"
 
@@ -38,7 +38,7 @@ class KMiloD : public KDEDModule {
 	Q_OBJECT
 	K_DCOP
 	public:
-		KMiloD(const QCString &name);
+		KMiloD(const TQCString &name);
 		virtual ~KMiloD();
 
 	k_dcop:
@@ -49,10 +49,10 @@ class KMiloD : public KDEDModule {
 		virtual int pollMilliSeconds() const;
 		virtual bool setPollMilliSeconds(int ms);
 
-		virtual void displayText(const QString& text);
-		virtual void displayText(const QString& text, const QPixmap& customPixmap);
-		virtual void displayProgress(const QString& text, int progress, const QPixmap& customPixmap);
-		virtual void displayProgress(const QString& text, int progress);
+		virtual void displayText(const TQString& text);
+		virtual void displayText(const TQString& text, const TQPixmap& customPixmap);
+		virtual void displayProgress(const TQString& text, int progress, const TQPixmap& customPixmap);
+		virtual void displayProgress(const TQString& text, int progress);
 
 		virtual void reconfigure();
 
@@ -60,9 +60,9 @@ class KMiloD : public KDEDModule {
 		virtual void doTimer();
 
 	private:
-		QTimer _timer;
+		TQTimer _timer;
 		int _interval;
-		QPtrList<Monitor> _monitors;
+		TQPtrList<Monitor> _monitors;
 		DisplaySkin *_display;
 		KMiloInterface *_miface;
 };

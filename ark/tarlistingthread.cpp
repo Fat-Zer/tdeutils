@@ -20,8 +20,8 @@
 */
 
 
-#include <qstring.h>
-#include <qapplication.h>
+#include <tqstring.h>
+#include <tqapplication.h>
 
 #include <karchive.h>
 #include <ktar.h>
@@ -78,8 +78,8 @@ static char *makeAccessString(mode_t mode)
 	return buffer;
 }
 
-TarListingThread::TarListingThread( QObject *parent, const QString& filename )
-	: QThread(), m_parent( parent )
+TarListingThread::TarListingThread( TQObject *parent, const TQString& filename )
+	: TQThread(), m_parent( parent )
 {
 	Q_ASSERT( m_parent );
 	m_archive = new KTar( filename );
@@ -95,32 +95,32 @@ void TarListingThread::run()
 {
 	if (!m_archive->open( IO_ReadOnly ))
 	{
-		ListingEvent *ev = new ListingEvent( QStringList(), ListingEvent::Error );
+		ListingEvent *ev = new ListingEvent( TQStringList(), ListingEvent::Error );
 		qApp->postEvent( m_parent, ev );
 		return;
 	}
 	
-	processDir( m_archive->directory(), QString() );
+	processDir( m_archive->directory(), TQString() );
 	
-	// Send an empty QStringList in an Event to signal the listing end.
-	ListingEvent *ev = new ListingEvent( QStringList(), ListingEvent::ListingFinished );
+	// Send an empty TQStringList in an Event to signal the listing end.
+	ListingEvent *ev = new ListingEvent( TQStringList(), ListingEvent::ListingFinished );
 	qApp->postEvent( m_parent, ev );
 }
 
-void TarListingThread::processDir( const KTarDirectory *tardir, const QString & root )
+void TarListingThread::processDir( const KTarDirectory *tardir, const TQString & root )
 {
-	QStringList list = tardir->entries();
+	TQStringList list = tardir->entries();
 	
-	QStringList::const_iterator itEnd = list.constEnd();
+	TQStringList::const_iterator itEnd = list.constEnd();
 
-	for ( QStringList::const_iterator it = list.constBegin(); it != itEnd; ++it )
+	for ( TQStringList::const_iterator it = list.constBegin(); it != itEnd; ++it )
 	{
 		const KTarEntry* tarEntry = tardir->entry((*it));
 		if (!tarEntry)
 			continue;
 
-		QStringList col_list;
-		QString name;
+		TQStringList col_list;
+		TQString name;
 		if (root.isEmpty() || root.isNull())
 			name = tarEntry->name();
 		else
@@ -128,7 +128,7 @@ void TarListingThread::processDir( const KTarDirectory *tardir, const QString & 
 		if ( !tarEntry->isFile() )
 			name += '/';
 		col_list.append( name );
-		QString perms = makeAccessString(tarEntry->permissions());
+		TQString perms = makeAccessString(tarEntry->permissions());
 		if (!tarEntry->isFile())
 			perms = "d" + perms;
 		else if (!tarEntry->symlink().isEmpty())
@@ -138,13 +138,13 @@ void TarListingThread::processDir( const KTarDirectory *tardir, const QString & 
 		col_list.append(perms);
 		col_list.append( tarEntry->user() );
 		col_list.append( tarEntry->group() );
-		QString strSize = "0";
+		TQString strSize = "0";
 		if (tarEntry->isFile())
 		{
 			strSize.sprintf("%d", ((KTarFile *)tarEntry)->size());
 		}
 		col_list.append(strSize);
-		QString timestamp = tarEntry->datetime().toString(ISODate);
+		TQString timestamp = tarEntry->datetime().toString(ISODate);
 		col_list.append(timestamp);
 		col_list.append(tarEntry->symlink());
 		

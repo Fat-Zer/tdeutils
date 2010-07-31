@@ -16,7 +16,7 @@
 
 
 // qt specific
-#include <qstring.h>
+#include <tqstring.h>
 // lib specific
 #include "kbordercoltextexport.h"
 
@@ -31,17 +31,17 @@ int KBorderColTextExport::charsPerLine() const
   return BorderColumnTEWidth;
 }
 
-void KBorderColTextExport::printFirstLine( QString &T, int /*Line*/ ) const
+void KBorderColTextExport::printFirstLine( TQString &T, int /*Line*/ ) const
 {
   print( T );
 }
 
-void KBorderColTextExport::printNextLine( QString &T ) const
+void KBorderColTextExport::printNextLine( TQString &T ) const
 {
   print( T );
 }
 
-void KBorderColTextExport::print( QString &T ) const
+void KBorderColTextExport::print( TQString &T ) const
 {
   T.append( " | " );
 }

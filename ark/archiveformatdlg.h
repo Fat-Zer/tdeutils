@@ -29,8 +29,8 @@ class ArchiveFormatDlg: public KDialogBase
 {
     Q_OBJECT
 public:
-    ArchiveFormatDlg( QWidget * parent, const QString & defaultType );
-    QString mimeType();
+    ArchiveFormatDlg( TQWidget * parent, const TQString & defaultType );
+    TQString mimeType();
 
 private:
     KComboBox * m_combo;

@@ -219,7 +219,7 @@ class KHEXEDIT_EXPORT KDataBuffer
       */
     virtual int rfind( const char*, int Length, int Pos = -1 ) const = 0;
 
-/*     virtual int find( const QString &expr, bool cs, bool wo, bool forward = true, int *index = 0 ); */
+/*     virtual int find( const TQString &expr, bool cs, bool wo, bool forward = true, int *index = 0 ); */
 };
 
 

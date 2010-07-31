@@ -24,7 +24,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #ifndef __charselectapplet_h__
 #define __charselectapplet_h__
 
-#include <qmap.h>
+#include <tqmap.h>
 
 #include <kpanelapplet.h>
 #include <kdialogbase.h>
@@ -38,19 +38,19 @@ class ConfigDialog : public KDialogBase
     Q_OBJECT
 
 public:
-    ConfigDialog(QWidget* parent = 0, const char* name = 0);
+    ConfigDialog(TQWidget* parent = 0, const char* name = 0);
 
-    void setCharacters(const QString& s) { _characterInput->setText(s); }
+    void setCharacters(const TQString& s) { _characterInput->setText(s); }
     void setCellWidth(int w) { _widthSpinBox->setValue(w); }
     void setCellHeight(int h) { _heightSpinBox->setValue(h); }
 
-    QString characters() { return _characterInput->text(); }
+    TQString characters() { return _characterInput->text(); }
     int cellWidth() { return _widthSpinBox->value(); }
     int cellHeight() { return _heightSpinBox->value(); }
 
 private:
-    QSpinBox  *_widthSpinBox;
-    QSpinBox  *_heightSpinBox;
+    TQSpinBox  *_widthSpinBox;
+    TQSpinBox  *_heightSpinBox;
     KLineEdit *_characterInput;
 };
 
@@ -59,25 +59,25 @@ class CharTable : public QFrame
     Q_OBJECT
 
 public:
-    CharTable(QWidget* parent = 0, const char* name = 0);
+    CharTable(TQWidget* parent = 0, const char* name = 0);
 
     void setRowsAndColumns(int, int);
 
-    void setCharacters(const QString&);
-    QString characters();
+    void setCharacters(const TQString&);
+    TQString characters();
 
 protected:
-    void paintEvent(QPaintEvent*);
-    void resizeEvent(QResizeEvent*);
-    void mousePressEvent(QMouseEvent*);
-    void mouseMoveEvent(QMouseEvent*);
+    void paintEvent(TQPaintEvent*);
+    void resizeEvent(TQResizeEvent*);
+    void mousePressEvent(TQMouseEvent*);
+    void mouseMoveEvent(TQMouseEvent*);
 
-    void paintCell(QPainter*, int, int);
+    void paintCell(TQPainter*, int, int);
     void repaintCell(int, int);
     void selectCell(int row, int col);
 
-    void insertString(QString s);
-    void insertChar(QChar c);
+    void insertString(TQString s);
+    void insertChar(TQChar c);
 
     int findRow(int y);
     int findCol(int x);
@@ -89,7 +89,7 @@ private:
     int _activeRow, _activeCol;
     int _cWidth, _cHeight;
     int _charcount;
-    QMap<int, QChar> _map;
+    TQMap<int, TQChar> _map;
 };
 
 class CharSelectApplet : public KPanelApplet
@@ -97,8 +97,8 @@ class CharSelectApplet : public KPanelApplet
     Q_OBJECT
 
 public:
-    CharSelectApplet(const QString& configFile, Type t = Stretch, int actions = 0,
-                     QWidget *parent = 0, const char *name = 0);
+    CharSelectApplet(const TQString& configFile, Type t = Stretch, int actions = 0,
+                     TQWidget *parent = 0, const char *name = 0);
 
     int widthForHeight(int height) const;
     int heightForWidth(int width) const;

@@ -33,16 +33,16 @@ class AceArch : public Arch
 {
 	Q_OBJECT
 	public:
-		AceArch( ArkWidget *, const QString & );
+		AceArch( ArkWidget *, const TQString & );
 		virtual ~AceArch();
 
 		virtual void open();
 		virtual void create();
 
-		virtual void addFile( const QStringList & );
-		virtual void addDir( const QString & );
+		virtual void addFile( const TQStringList & );
+		virtual void addDir( const TQString & );
 
-		virtual void remove( QStringList * );
+		virtual void remove( TQStringList * );
 		virtual void unarchFileInternal( );
 
 	private slots:

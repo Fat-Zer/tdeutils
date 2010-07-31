@@ -39,26 +39,26 @@ bool RepeatRegExp::check( ErrorMap& map, bool first, bool last )
     return ( _lower == 0 );
 }
 
-QDomNode RepeatRegExp::toXml( QDomDocument* doc ) const
+TQDomNode RepeatRegExp::toXml( TQDomDocument* doc ) const
 {
-    QDomElement top = doc->createElement( QString::fromLocal8Bit("Repeat") );
-    top.setAttribute( QString::fromLocal8Bit("lower"), _lower );
-    top.setAttribute( QString::fromLocal8Bit("upper"), _upper );
+    TQDomElement top = doc->createElement( TQString::fromLocal8Bit("Repeat") );
+    top.setAttribute( TQString::fromLocal8Bit("lower"), _lower );
+    top.setAttribute( TQString::fromLocal8Bit("upper"), _upper );
     top.appendChild( _child->toXml( doc ) );
     return top;
 }
 
-bool RepeatRegExp::load( QDomElement top, const QString& version )
+bool RepeatRegExp::load( TQDomElement top, const TQString& version )
 {
-    Q_ASSERT( top.tagName() == QString::fromLocal8Bit( "Repeat" ) );
-    QString lower = top.attribute( QString::fromLocal8Bit("lower"), QString::fromLocal8Bit("0") );
-    QString upper = top.attribute( QString::fromLocal8Bit("upper"), QString::fromLocal8Bit("0") );
+    Q_ASSERT( top.tagName() == TQString::fromLocal8Bit( "Repeat" ) );
+    TQString lower = top.attribute( TQString::fromLocal8Bit("lower"), TQString::fromLocal8Bit("0") );
+    TQString upper = top.attribute( TQString::fromLocal8Bit("upper"), TQString::fromLocal8Bit("0") );
     bool ok;
     _lower = lower.toInt( &ok );
     if ( !ok ) {
         KMessageBox::sorry( 0, i18n("<p>Value for attribute <b>%1</b> was not an integer for element "
                                     "<b>%2</b></p><p>It contained the value <b>%3</b></p>")
-                            .arg(QString::fromLatin1("lower")).arg(QString::fromLatin1("Repeat")).arg(lower),
+                            .arg(TQString::fromLatin1("lower")).arg(TQString::fromLatin1("Repeat")).arg(lower),
                             i18n("Error While Loading From XML File") ) ;
         _lower = 0;
     }
@@ -66,7 +66,7 @@ bool RepeatRegExp::load( QDomElement top, const QString& version )
     if ( !ok ) {
         KMessageBox::sorry( 0, i18n("<p>Value for attribute <b>%1</b> was not an integer for element "
                                     "<b>%2</b></p><p>It contained the value <b>%3</b></p>")
-                            .arg(QString::fromLatin1("upper")).arg(QString::fromLatin1("Repeat")).arg(upper),
+                            .arg(TQString::fromLatin1("upper")).arg(TQString::fromLatin1("Repeat")).arg(upper),
                             i18n("Error While Loading From XML File") ) ;
         _upper = -1;
     }

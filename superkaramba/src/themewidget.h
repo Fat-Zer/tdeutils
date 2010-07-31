@@ -31,7 +31,7 @@ class ThemeWidget : public ThemeWidgetLayout
 {
     Q_OBJECT
   public:
-    ThemeWidget(QWidget *parent = 0, const char *name = 0);
+    ThemeWidget(TQWidget *parent = 0, const char *name = 0);
     ThemeWidget(ThemeFile* tf);
     ~ThemeWidget();
 
@@ -41,8 +41,8 @@ class ThemeWidget : public ThemeWidgetLayout
     int  instances() const { return m_instancePool.count(); };
     void removeInstance(int instance);
 
-    void setDescriptionText(QString text);
-    void setHeaderText(QString text);
+    void setDescriptionText(TQString text);
+    void setHeaderText(TQString text);
     void showButton(bool show);
 
   protected:
@@ -51,7 +51,7 @@ class ThemeWidget : public ThemeWidgetLayout
 
   private:
     ThemeFile* m_themeFile;
-    QValueList<int> m_instancePool;
+    TQValueList<int> m_instancePool;
 };
 
 #endif

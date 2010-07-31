@@ -25,10 +25,10 @@
 #ifndef __KDFWIDGET_H__
 #define __KDFWIDGET_H__
 
-#include <qmemarray.h>
-#include <qglobal.h>
-#include <qstring.h>
-#include <qlistview.h>
+#include <tqmemarray.h>
+#include <tqglobal.h>
+#include <tqstring.h>
+#include <tqlistview.h>
 
 #include "disks.h"
 #include "disklist.h"
@@ -46,7 +46,7 @@ class KPopupMenu;
 class CTabEntry
 {
   public:
-    CTabEntry( const QString &res, const QString &name, bool visible,
+    CTabEntry( const TQString &res, const TQString &name, bool visible,
 	       uint width )
     {
       mRes     = res;
@@ -58,8 +58,8 @@ class CTabEntry
     ~CTabEntry( void ) { }
 
 
-    QString mRes;
-    QString mName;
+    TQString mRes;
+    TQString mName;
     bool mVisible;
     uint mWidth;
 };
@@ -75,9 +75,9 @@ class CTabEntry
 class CListViewItem : public QListViewItem
 {
   public:
-    CListViewItem ( CListView * parent, QListViewItem * after );
+    CListViewItem ( CListView * parent, TQListViewItem * after );
  
-    virtual int compare ( QListViewItem* i, int col, bool) const;
+    virtual int compare ( TQListViewItem* i, int col, bool) const;
     	
     void    setKeys ( int kb_size, int kb_avail, float percent_full ) ;
 
@@ -107,7 +107,7 @@ class KDFWidget : public QWidget
     };
 
   public:
-    KDFWidget( QWidget *parent=0, const char *name=0, bool init=false);
+    KDFWidget( TQWidget *parent=0, const char *name=0, bool init=false);
     ~KDFWidget( void );
 
   public slots:
@@ -120,30 +120,30 @@ class KDFWidget : public QWidget
   
   private slots:
     void criticallyFull( DiskEntry *disk );
-    void rightButtonPressed( QListViewItem *item, const QPoint &p, int );
-    void rightButtonClicked( QListViewItem *item, const QPoint &p, int );
-    void popupMenu( QListViewItem *item, const QPoint &p );
+    void rightButtonPressed( TQListViewItem *item, const TQPoint &p, int );
+    void rightButtonClicked( TQListViewItem *item, const TQPoint &p, int );
+    void popupMenu( TQListViewItem *item, const TQPoint &p );
     void setUpdateFrequency( int frequency );
     void columnSizeChanged( int column, int, int newSize );
     void updateDiskBarPixmaps( void );
     void invokeHelp( void );
 
   protected:
-    void timerEvent( QTimerEvent * );
-    void closeEvent( QCloseEvent * );
-    void resizeEvent( QResizeEvent * );
+    void timerEvent( TQTimerEvent * );
+    void closeEvent( TQCloseEvent * );
+    void resizeEvent( TQResizeEvent * );
 
   private:
     void makeColumns( void );
-    DiskEntry *selectedDisk( QListViewItem *item=0 );
+    DiskEntry *selectedDisk( TQListViewItem *item=0 );
 
   private:
     bool readingDF;
-    QMemArray<CTabEntry*> mTabProp;
+    TQMemArray<CTabEntry*> mTabProp;
     CListView     *mList;
     COptionDialog *mOptionDialog;
     KPopupMenu    *mPopup;
-    QTimer        *mTimer;
+    TQTimer        *mTimer;
     DiskList   mDiskList;
     bool       mIsTopLevel;
     CStdOption mStd;

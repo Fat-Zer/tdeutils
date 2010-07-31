@@ -32,7 +32,7 @@ class KCharEditor : public KEditor
     KCharEditor( KCharColumn *CC, KBufferCursor *BC, KHexEdit *HE, KController *P );
 
   public: // KEditor API
-    virtual bool handleKeyPress( QKeyEvent *KeyEvent );
+    virtual bool handleKeyPress( TQKeyEvent *KeyEvent );
 
   protected:
     KCharColumn *CharColumn;

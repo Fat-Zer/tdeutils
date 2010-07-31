@@ -22,7 +22,7 @@
 #include "karamba.h"
 #include "kdebug.h"
 
-SKLineEdit::SKLineEdit(QWidget *w, Input *i) : QLineEdit(w), m_input(i)
+SKLineEdit::SKLineEdit(TQWidget *w, Input *i) : TQLineEdit(w), m_input(i)
 {
   frameColor = Qt::gray;
   setBackgroundColor(Qt::white);
@@ -32,37 +32,37 @@ SKLineEdit::~SKLineEdit()
 {
 }
 
-void SKLineEdit::drawFrame(QPainter *p)
+void SKLineEdit::drawFrame(TQPainter *p)
 {
   p->setPen(frameColor);
   p->drawRect(frameRect());
 }
 
-void SKLineEdit::drawContents(QPainter *p)
+void SKLineEdit::drawContents(TQPainter *p)
 {
-  QLineEdit::drawContents(p);
+  TQLineEdit::drawContents(p);
 }
 
-void SKLineEdit::setFrameColor(QColor c)
+void SKLineEdit::setFrameColor(TQColor c)
 {
   frameColor = c;
   repaint();
 }
 
-void SKLineEdit::setBackgroundColor(QColor c)
+void SKLineEdit::setBackgroundColor(TQColor c)
 {
-  QLineEdit::setBackgroundColor(c);
+  TQLineEdit::setBackgroundColor(c);
   repaint();
 }
 
-QColor SKLineEdit::getFrameColor() const
+TQColor SKLineEdit::getFrameColor() const
 {
   return frameColor;
 }
 
-void SKLineEdit::keyPressEvent(QKeyEvent* e)
+void SKLineEdit::keyPressEvent(TQKeyEvent* e)
 {
-  QLineEdit::keyPressEvent(e);
+  TQLineEdit::keyPressEvent(e);
 
   if(!e->text().isEmpty())
   {
@@ -71,9 +71,9 @@ void SKLineEdit::keyPressEvent(QKeyEvent* e)
   }
 }
 
-void SKLineEdit::keyReleaseEvent(QKeyEvent* e)
+void SKLineEdit::keyReleaseEvent(TQKeyEvent* e)
 {
-  QLineEdit::keyReleaseEvent(e);
+  TQLineEdit::keyReleaseEvent(e);
 }
 
 Input* SKLineEdit::getInput()

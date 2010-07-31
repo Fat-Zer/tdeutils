@@ -31,10 +31,10 @@
 #include "kvaio.h"
 #include "kmilointerface.h"
 
-#include <qlabel.h>
-#include <qcstring.h>
-#include <qevent.h>
-#include <qdatastream.h>
+#include <tqlabel.h>
+#include <tqcstring.h>
+#include <tqevent.h>
+#include <tqdatastream.h>
 #include <kmainwindow.h>
 #include <klocale.h>
 #include <kdebug.h>
@@ -56,9 +56,9 @@ extern "C" {
 
 
 KVaio::KVaio(KMiloKVaio *parent, const char* name)
-    : QObject(parent, name),
+    : TQObject(parent, name),
       mDisp(0),
-      mTimer (new QTimer (this) )
+      mTimer (new TQTimer (this) )
 {
     myparent = parent;
     
@@ -70,8 +70,8 @@ KVaio::KVaio(KMiloKVaio *parent, const char* name)
         kdDebug() << "KVaio: Cannot connect to driver." << endl;
     } else {
         kdDebug() << "KVaio: Connected to SonyPI driver." << endl;
-        connect(mDriver, SIGNAL(vaioEvent(int)), SLOT(slotVaioEvent(int)));
-	connect (mTimer, SIGNAL (timeout ()), SLOT (slotTimeout() ) );
+        connect(mDriver, TQT_SIGNAL(vaioEvent(int)), TQT_SLOT(slotVaioEvent(int)));
+	connect (mTimer, TQT_SIGNAL (timeout ()), TQT_SLOT (slotTimeout() ) );
 	mTimer->start (10000, true);
     }
 
@@ -126,8 +126,8 @@ KVaio::~KVaio()
 
 void KVaio::slotVaioEvent(int event)
 {
-    QString text;
-    QTextStream stream(text, IO_WriteOnly);
+    TQString text;
+    TQTextStream stream(text, IO_WriteOnly);
 
     switch(event)
     {
@@ -174,14 +174,14 @@ void KVaio::slotVaioEvent(int event)
     }
 }
 
-bool KVaio::showTextMsg(const QString& msg)
+bool KVaio::showTextMsg(const TQString& msg)
 {
     return myparent->showTextMsg(msg);    
 }
 
 
 
-bool KVaio::showProgressMsg(const QString& msg, int value)
+bool KVaio::showProgressMsg(const TQString& msg, int value)
 {
     m_progress = value;
     return myparent->showProgressMsg(msg,value);
@@ -193,9 +193,9 @@ void KVaio::blankScreen()
     
     if (isKScreensaverAvailable()) {
     
-        QByteArray data, replyData;
-        QDataStream arg(data, IO_WriteOnly);
-        QCString replyType;
+        TQByteArray data, replyData;
+        TQDataStream arg(data, IO_WriteOnly);
+        TQCString replyType;
 
 	/* Set the screensave to BlankOnly mode */
 	blankonly = true;
@@ -223,9 +223,9 @@ void KVaio::blankScreen()
 
 void KVaio::suspendToDisk()
 {
-        QByteArray data, replyData;
-        QDataStream arg(data, IO_WriteOnly);
-        QCString replyType;
+        TQByteArray data, replyData;
+        TQDataStream arg(data, IO_WriteOnly);
+        TQCString replyType;
 
 	mClient.call("kpowersave","KPowersaveIface","do_suspendToDisk()",
 			data, replyType, replyData) ;
@@ -340,8 +340,8 @@ bool KVaio::showBatteryStatus ( bool force )
     bool displayBatteryMsg = false;
     bool displayACStatus = false;
 
-    QString text, acMsg;
-    QTextStream stream(text, IO_WriteOnly);
+    TQString text, acMsg;
+    TQTextStream stream(text, IO_WriteOnly);
 
     // -----
     // only display on startup if mReportPowerStatus is true:
@@ -584,7 +584,7 @@ void KVaio::mute()
     m_mute = !m_mute;
 
     int newVolume;
-    QString muteText;
+    TQString muteText;
     if (m_mute)
     {
             m_oldVolume = m_volume;

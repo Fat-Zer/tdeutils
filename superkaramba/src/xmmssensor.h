@@ -14,9 +14,9 @@
 #include <config.h>
 #endif
 
-#include <qdatetime.h>
-#include <qregexp.h>
-#include <qtextcodec.h>
+#include <tqdatetime.h>
+#include <tqregexp.h>
+#include <tqtextcodec.h>
 
 #include "sensor.h"
 
@@ -24,14 +24,14 @@ class XMMSSensor :  public Sensor
 {
     Q_OBJECT
 public:
-    XMMSSensor( int interval, const QString &encoding=QString::null );
+    XMMSSensor( int interval, const TQString &encoding=TQString::null );
     ~XMMSSensor();
     void update();
     void setMaxValue( SensorParams *);
     bool hasXMMS() const;
 
 private:
-    QTextCodec *codec;
+    TQTextCodec *codec;
 
     class XMMS;
     XMMS *xmms;

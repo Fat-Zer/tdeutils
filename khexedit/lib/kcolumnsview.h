@@ -19,10 +19,10 @@
 #define KHE_KCOLUMNSVIEW_H
 
 // qt specific
-#include <qptrlist.h>
-#include <qwidget.h>
-#include <qpixmap.h>
-#include <qscrollview.h>
+#include <tqptrlist.h>
+#include <tqwidget.h>
+#include <tqpixmap.h>
+#include <tqscrollview.h>
 // lib specific
 #include "kadds.h"
 #include "ksection.h" // TODO: think about moving this out of the public API
@@ -46,12 +46,12 @@ class KColumnsView : public QScrollView
    friend class KColumn;
 
   public:
-    KColumnsView( /*bool R = false,*/ QWidget *parent=0, const char *name=0, WFlags Flags=0 );
+    KColumnsView( /*bool R = false,*/ TQWidget *parent=0, const char *name=0, WFlags Flags=0 );
     virtual ~KColumnsView();
 
   public: // drawing
-    virtual void paintEmptyArea( QPainter *p, int cx, int cy, int cw, int ch );
-    virtual void drawContents( QPainter *p, int cx, int cy, int cw, int ch );
+    virtual void paintEmptyArea( TQPainter *p, int cx, int cy, int cw, int ch );
+    virtual void drawContents( TQPainter *p, int cx, int cy, int cw, int ch );
 
   public: // data-wise sizes
     /** returns the number of all lines */
@@ -65,7 +65,7 @@ class KColumnsView : public QScrollView
     /** returns the height of each line */
     KPixelY lineHeight() const;
     /** returns the size of all visible columns together */
-    QSize totalViewSize() const;
+    TQSize totalViewSize() const;
     /** returns the width of all visible columns together */
     KPixelX totalWidth() const;
     /** returns the height of all lines together */
@@ -116,12 +116,12 @@ class KColumnsView : public QScrollView
 
   private:
     /** hiding it*/
-    void drawContents( QPainter* );
+    void drawContents( TQPainter* );
 
 
   protected: // calculated
     /** collection of all the columns. All columns will be autodeleted. */
-    QPtrList<KColumn> Columns;
+    TQPtrList<KColumn> Columns;
     /** the number of lines which the column view has */
     int NoOfLines;
     /** the height of each line in pixels */
@@ -135,7 +135,7 @@ class KColumnsView : public QScrollView
     // TODO: do we really want this?
     bool HorizontalGrid;
     /** Buffer where each line is drawn to before it is copied onto the screen */
-    QPixmap  LineBuffer;
+    TQPixmap  LineBuffer;
 //    bool Reversed;
 
   private:
@@ -161,7 +161,7 @@ inline KSection KColumnsView::visibleLines( KPixelYs YPixels ) const
 inline KPixelY KColumnsView::totalHeight()   const { return NoOfLines*LineHeight; }
 inline KPixelX KColumnsView::totalWidth()    const { return TotalWidth; }
 
-inline QSize KColumnsView::totalViewSize()   const { return QSize( totalWidth(), totalHeight() ); }
+inline TQSize KColumnsView::totalViewSize()   const { return TQSize( totalWidth(), totalHeight() ); }
 
 }
 

@@ -1,8 +1,8 @@
-#include <qlabel.h>
+#include <tqlabel.h>
 #include <kactivelabel.h>
 #include <kconfig.h>
-#include <qvgroupbox.h>
-#include <qstringlist.h>
+#include <tqvgroupbox.h>
+#include <tqstringlist.h>
 
 #ifndef PORTABLE_H
 #define PORTABLE_H
@@ -71,10 +71,10 @@ public:
 	static int has_brightness();		// returns 1 if this computer can set tyhe back panel brightness
 	static void set_brightness(bool blank, int val);	// val = 0-255 255 brightest, 0 means dimmest (if !blank it must be still visible), 
 	static int get_brightness();		// returns 0-255 brightness, -1 if you can't
-	static QString cpu_frequency();		// Returns the cpu freq.
-	static KActiveLabel *no_power_management_explanation(QWidget *parent);
-	static QLabel *how_to_do_suspend_resume(QWidget *parent);
-	static QLabel *pcmcia_info(int x, QWidget *parent);
+	static TQString cpu_frequency();		// Returns the cpu freq.
+	static KActiveLabel *no_power_management_explanation(TQWidget *parent);
+	static TQLabel *how_to_do_suspend_resume(TQWidget *parent);
+	static TQLabel *pcmcia_info(int x, TQWidget *parent);
 
 	/**
 	 * Put this computer into standby mode.
@@ -95,10 +95,10 @@ public:
 	static void invoke_hibernation();
 
 	static struct power_result poll_battery_state();
-	static void get_battery_status(int &num_batteries, QStringList &names, QStringList &state, QStringList &values); // get multiple battery status
+	static void get_battery_status(int &num_batteries, TQStringList &names, TQStringList &state, TQStringList &values); // get multiple battery status
 	static bool has_lav();			// true if the following returns a valid value
 	static float get_load_average();	// current short term load average
-	static void extra_config(QWidget *parent, KConfig *config, QVBoxLayout *layout);
+	static void extra_config(TQWidget *parent, KConfig *config, TQVBoxLayout *layout);
 	static void acpi_set_mask(bool standby, bool suspend, bool hibernate, bool perf, bool throttle);	
 	static void apm_set_mask(bool standby, bool suspend);
 	static void software_suspend_set_mask(bool hibernate);
@@ -112,14 +112,14 @@ public:
 	 * limits).
 	 * @return True if this system provides performance profiles.
 	 */
-	static bool get_system_performance(bool force, int &current, QStringList &s, bool *&active);
+	static bool get_system_performance(bool force, int &current, TQStringList &s, bool *&active);
 
 	/**
 	 * Set performance profile.
 	 * @param val - Name of the performance profile as provided by 
 	 * get_system_performance().
 	 */
-	static void set_system_performance(QString val);
+	static void set_system_performance(TQString val);
 
 	/**
 	 * Get a list of available throttling levels.
@@ -130,14 +130,14 @@ public:
 	 * for ACPI limits).
 	 * @return True if this system provides throttling levels.
 	 */
-	static bool get_system_throttling(bool force, int &current, QStringList &s, bool *&active); 
+	static bool get_system_throttling(bool force, int &current, TQStringList &s, bool *&active); 
 
 	/**
 	 * Set throttling level.
 	 * @param val - Name of the throttling level as provided by 
 	 * get_system_throttling().
 	 */
-	static void set_system_throttling(QString val);
+	static void set_system_throttling(TQString val);
 
 	enum LaptopButton {LidButton=0, PowerButton};
 	static bool has_button(LaptopButton p);	// true if we have support for a particular button

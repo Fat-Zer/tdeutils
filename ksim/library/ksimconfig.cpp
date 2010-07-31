@@ -57,40 +57,40 @@ void KSim::Config::setWidth(int width)
   mainConfig->sync();
 }
 
-bool KSim::Config::enabledMonitor(const QString &entry) const
+bool KSim::Config::enabledMonitor(const TQString &entry) const
 {
   mainConfig->setGroup("Monitors");
   return mainConfig->readBoolEntry(entry, false);
 }
 
-void KSim::Config::setEnabledMonitor(const QString &entry, bool enabled)
+void KSim::Config::setEnabledMonitor(const TQString &entry, bool enabled)
 {
   mainConfig->setGroup("Monitors");
   mainConfig->writeEntry(entry, enabled);
   mainConfig->sync();
 }
 
-QString KSim::Config::monitorCommand(const QString &entry) const
+TQString KSim::Config::monitorCommand(const TQString &entry) const
 {
   mainConfig->setGroup("Monitors");
   return mainConfig->readPathEntry(entry + "_command");
 }
 
-void KSim::Config::setMonitorCommand(const QString &entry,
-   const QString &command)
+void KSim::Config::setMonitorCommand(const TQString &entry,
+   const TQString &command)
 {
   mainConfig->setGroup("Monitors");
   mainConfig->writePathEntry(entry + "_command", command);
   mainConfig->sync();
 }
 
-int KSim::Config::monitorLocation(const QString &entry)
+int KSim::Config::monitorLocation(const TQString &entry)
 {
   mainConfig->setGroup("Monitors");
   return mainConfig->readNumEntry(entry + "_location", -1);
 }
 
-void KSim::Config::setMonitorLocation(const QString &entry, int location)
+void KSim::Config::setMonitorLocation(const TQString &entry, int location)
 {
   mainConfig->setGroup("Monitors");
   mainConfig->writeEntry(entry + "_location", location);
@@ -149,33 +149,33 @@ void KSim::Config::setStayOnTop(bool stayOnTop)
   mainConfig->sync();
 }
 
-QPoint KSim::Config::position(const QPoint &defaultPos) const
+TQPoint KSim::Config::position(const TQPoint &defaultPos) const
 {
   mainConfig->setGroup("Misc");
   return mainConfig->readPointEntry("ksimPosition", &defaultPos);
 }
 
-void KSim::Config::setPosition(const QPoint &pos)
+void KSim::Config::setPosition(const TQPoint &pos)
 {
   mainConfig->setGroup("Misc");
   mainConfig->writeEntry("ksimPosition", pos);
   mainConfig->sync();
 }
 
-QSize KSim::Config::graphSize() const
+TQSize KSim::Config::graphSize() const
 {
   mainConfig->setGroup("Misc");
   return mainConfig->readSizeEntry("GraphSize");
 }
 
-void KSim::Config::setGraphSize(const QSize &size)
+void KSim::Config::setGraphSize(const TQSize &size)
 {
   mainConfig->setGroup("Misc");
   mainConfig->writeEntry("GraphSize", size);
   mainConfig->sync();
 }
 
-QString KSim::Config::uptimeFormat() const
+TQString KSim::Config::uptimeFormat() const
 {
   return uptimeFormatList()[uptimeItem()];
 }
@@ -186,13 +186,13 @@ int KSim::Config::uptimeItem() const
   return mainConfig->readNumEntry("UptimeItem", 0);
 }
 
-QStringList KSim::Config::uptimeFormatList() const
+TQStringList KSim::Config::uptimeFormatList() const
 {
   mainConfig->setGroup("Misc");
   return mainConfig->readListEntry("UptimeFormat");
 }
 
-void KSim::Config::setUptimeFormat(const QStringList &uptimeFormat)
+void KSim::Config::setUptimeFormat(const TQStringList &uptimeFormat)
 {
   mainConfig->setGroup("Misc");
   mainConfig->writeEntry("UptimeFormat", uptimeFormat);
@@ -206,7 +206,7 @@ void KSim::Config::setUptimeItem(int item)
   mainConfig->sync();
 }
 
-QString KSim::Config::memoryFormat() const
+TQString KSim::Config::memoryFormat() const
 {
   return memoryFormatList()[memoryItem()];
 }
@@ -217,13 +217,13 @@ int KSim::Config::memoryItem() const
   return mainConfig->readNumEntry("MemoryItem", 0);
 }
 
-QStringList KSim::Config::memoryFormatList() const
+TQStringList KSim::Config::memoryFormatList() const
 {
   mainConfig->setGroup("Misc");
   return mainConfig->readListEntry("MemoryFormat");
 }
 
-void KSim::Config::setMemoryFormat(const QStringList &memoryFormat)
+void KSim::Config::setMemoryFormat(const TQStringList &memoryFormat)
 {
   mainConfig->setGroup("Misc");
   mainConfig->writeEntry("MemoryFormat", memoryFormat);
@@ -237,7 +237,7 @@ void KSim::Config::setMemoryItem(int item)
   mainConfig->sync();
 }
 
-QString KSim::Config::swapFormat() const
+TQString KSim::Config::swapFormat() const
 {
   mainConfig->setGroup("Misc");
   return swapFormatList()[swapItem()];
@@ -249,13 +249,13 @@ int KSim::Config::swapItem() const
   return mainConfig->readNumEntry("SwapItem", 0);
 }
 
-QStringList KSim::Config::swapFormatList() const
+TQStringList KSim::Config::swapFormatList() const
 {
   mainConfig->setGroup("Misc");
   return mainConfig->readListEntry("SwapFormat");
 }
 
-void KSim::Config::setSwapFormat(const QStringList &swapFormat)
+void KSim::Config::setSwapFormat(const TQStringList &swapFormat)
 {
   mainConfig->setGroup("Misc");
   mainConfig->writeEntry("SwapFormat", swapFormat);
@@ -360,17 +360,17 @@ void KSim::Config::setShowProcs(bool procs)
   mainConfig->sync();
 }
 
-QString KSim::Config::themeUrl() const
+TQString KSim::Config::themeUrl() const
 {
   return KSim::ThemeLoader::currentUrl();
 }
 
-QString KSim::Config::themeName() const
+TQString KSim::Config::themeName() const
 {
   return KSim::ThemeLoader::currentName();
 }
 
-void KSim::Config::setThemeName(const QString &name)
+void KSim::Config::setThemeName(const TQString &name)
 {
   mainConfig->setGroup("Theme");
   mainConfig->writeEntry("Name", name);
@@ -389,12 +389,12 @@ void KSim::Config::setThemeAlt(int alt)
   mainConfig->sync();
 }
 
-QFont KSim::Config::themeFont() const
+TQFont KSim::Config::themeFont() const
 {
   return KSim::ThemeLoader::currentFont();
 }
 
-void KSim::Config::setThemeFont(const QFont &font)
+void KSim::Config::setThemeFont(const TQFont &font)
 {
   mainConfig->setGroup("Theme");
   mainConfig->writeEntry("Font", font);

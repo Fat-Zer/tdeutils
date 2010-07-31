@@ -24,7 +24,7 @@
 
 #include "textregexp.h"
 
-TextRegExp::TextRegExp( bool selected, QString text) :RegExp( selected )
+TextRegExp::TextRegExp( bool selected, TQString text) :RegExp( selected )
 {
 	_text = text;
 }
@@ -35,34 +35,34 @@ bool TextRegExp::check( ErrorMap&, bool, bool )
 }
 
 
-void TextRegExp::append( QString str )
+void TextRegExp::append( TQString str )
 {
     _text.append( str );
 }
 
-QDomNode TextRegExp::toXml( QDomDocument* doc ) const
+TQDomNode TextRegExp::toXml( TQDomDocument* doc ) const
 {
-    QDomElement top = doc->createElement(QString::fromLocal8Bit("Text"));
-    QDomText text = doc->createTextNode( _text );
+    TQDomElement top = doc->createElement(TQString::fromLocal8Bit("Text"));
+    TQDomText text = doc->createTextNode( _text );
     top.appendChild( text );
     return top;
 }
 
-bool TextRegExp::load( QDomElement top, const QString& /*version*/)
+bool TextRegExp::load( TQDomElement top, const TQString& /*version*/)
 {
-    Q_ASSERT( top.tagName() == QString::fromLocal8Bit( "Text" ) );
+    Q_ASSERT( top.tagName() == TQString::fromLocal8Bit( "Text" ) );
     if ( top.hasChildNodes() ) {
-        QDomNode child = top.firstChild();
+        TQDomNode child = top.firstChild();
         if ( ! child.isText() ) {
             KMessageBox::sorry( 0, i18n("<p>Element <b>Text</b> did not contain any textual data.</p>"),
                                 i18n("Error While Loading From XML File") ) ;
             return false;
         }
-        QDomText txtNode = child.toText();
+        TQDomText txtNode = child.toText();
         _text = txtNode.data();
     }
     else {
-        _text = QString::fromLatin1( "" );
+        _text = TQString::fromLatin1( "" );
     }
 
     return true;

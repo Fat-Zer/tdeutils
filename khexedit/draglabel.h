@@ -21,11 +21,11 @@
 #ifndef _DRAG_SOURCE_H_
 #define _DRAG_SOURCE_H_
 
-#include <qdropsite.h>
-#include <qlabel.h>
-#include <qbitmap.h>
-#include <qstring.h>
-#include <qstrlist.h>
+#include <tqdropsite.h>
+#include <tqlabel.h>
+#include <tqbitmap.h>
+#include <tqstring.h>
+#include <tqstrlist.h>
 
 class KURLDrag;
 
@@ -34,26 +34,26 @@ class CDragLabel: public QLabel
   Q_OBJECT
 
   public:
-    CDragLabel( QWidget *parent );
+    CDragLabel( TQWidget *parent );
     ~CDragLabel( void );
 
-    void setUrl( const QString &url );
-    void setDragMask( const QPixmap pix );
+    void setUrl( const TQString &url );
+    void setDragMask( const TQPixmap pix );
 
   protected:
-    void mousePressEvent( QMouseEvent * );
-    void mouseMoveEvent( QMouseEvent * );
-    void mouseReleaseEvent( QMouseEvent * );
+    void mousePressEvent( TQMouseEvent * );
+    void mouseMoveEvent( TQMouseEvent * );
+    void mouseReleaseEvent( TQMouseEvent * );
 
   private:
     void prepPixmap( KURLDrag &uriDrag );
 
   private:
     bool    mValid;
-    QString mUrl;
-    QBitmap mDragMask;
+    TQString mUrl;
+    TQBitmap mDragMask;
     bool    mDragPending;
-    QPoint  mDragOrigin;
+    TQPoint  mDragOrigin;
 
 };
 

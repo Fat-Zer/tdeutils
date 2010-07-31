@@ -18,18 +18,18 @@ ClickArea::ClickArea(karamba* k, int x, int y, int w, int h )
         : Meter(k, x, y, w, h )
 {
     value = "";
-    rect = QRect( x, y, w, h );
+    rect = TQRect( x, y, w, h );
 }
 
 ClickArea::~ClickArea()
 {}
 
 
-bool ClickArea::click( QMouseEvent *e )
+bool ClickArea::click( TQMouseEvent *e )
 {
     if( rect.contains( e->x(), e->y() ) )
     {
-        //qDebug(QString::number(e->type()));
+        //qDebug(TQString::number(e->type()));
 	//KShellProcess ksp;
         if( e->button() != Qt::LeftButton )
 			return false;
@@ -42,9 +42,9 @@ bool ClickArea::click( QMouseEvent *e )
 	}
 	else
 	{
-		QString program;
+		TQString program;
 		program = onClick;
-		program.replace( QRegExp("%v", false), value );
+		program.replace( TQRegExp("%v", false), value );
 
 		if( !program.isEmpty() )
 		{
@@ -56,30 +56,30 @@ bool ClickArea::click( QMouseEvent *e )
     return false;
 }
 
-void ClickArea::setOnClick( QString oc )
+void ClickArea::setOnClick( TQString oc )
 {
     onClick = oc;
 }
 
-void ClickArea::setServiceOnClick( QString name , QString exec, QString icon )
+void ClickArea::setServiceOnClick( TQString name , TQString exec, TQString icon )
 {
     svc_name = name;
     svc_onClick = exec;
     svc_icon = icon;
 }
 
-void ClickArea::setOnMiddleClick( QString oc )
+void ClickArea::setOnMiddleClick( TQString oc )
 {
     onMiddleClick = oc;
 }
 
 
-QRect ClickArea::getRectangle()
+TQRect ClickArea::getRectangle()
 {
     return rect;
 }
 
-void ClickArea::mUpdate( QPainter *p )
+void ClickArea::mUpdate( TQPainter *p )
 {
 
     p->drawRect(boundingBox);
@@ -90,12 +90,12 @@ void ClickArea::mUpdate( QPainter *p )
 void ClickArea::setValue( long v)
 {
 
-    setValue( QString::number( v ) );
+    setValue( TQString::number( v ) );
 
 }
 
 
-void ClickArea::setValue( QString v )
+void ClickArea::setValue( TQString v )
 {
     value = v;
 }

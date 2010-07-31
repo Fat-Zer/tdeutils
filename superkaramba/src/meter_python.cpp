@@ -13,7 +13,7 @@
 #endif
 
 #include <Python.h>
-#include <qobject.h>
+#include <tqobject.h>
 #include "karamba.h"
 #include "karambaapp.h"
 #include "meter.h"
@@ -36,7 +36,7 @@ bool checkKaramba(long widget)
   }
   if (!karambaApp->hasKaramba((karamba*)widget))
   {
-    QString tmp;
+    TQString tmp;
 
     tmp.sprintf("no %x widget found.", (unsigned int)widget);
     PyErr_SetString(PyExc_ValueError, tmp.ascii());
@@ -54,15 +54,15 @@ bool checkMeter(long widget, long meter, const char* type)
   }
   if (!((karamba*)widget)->hasMeter((Meter*)meter))
   {
-    QString tmp;
+    TQString tmp;
 
     tmp.sprintf("widget does not have meter %x.", (unsigned int)meter);
     PyErr_SetString(PyExc_ValueError, tmp.ascii());
     return false;
   }
-  if (!((QObject*)meter)->isA(type))
+  if (!((TQObject*)meter)->isA(type))
   {
-    QString tmp;
+    TQString tmp;
 
     tmp.sprintf("meter is not type of %s.", type);
     PyErr_SetString(PyExc_TypeError, tmp.ascii());
@@ -78,21 +78,21 @@ bool checkKarambaAndMeter(long widget, long meter, const char* type)
 
 // This just throws awya extra bytes.
 // I guess there is a better way to do this...
-QString fromUcs4(Q_UINT32* ucs4)
+TQString fromUcs4(Q_UINT32* ucs4)
 {
-  QString result = "";
+  TQString result = "";
   while(*ucs4 != 0)
   {
-    result += QChar((Q_UINT16)*ucs4);
+    result += TQChar((Q_UINT16)*ucs4);
     ++ucs4;
   }
   return result;
 }
 
-// Converts a Python String to a QString with Unicode support
-QString PyString2QString(PyObject* text)
+// Converts a Python String to a TQString with Unicode support
+TQString PyString2TQString(PyObject* text)
 {
-    QString qtext;
+    TQString qtext;
     if (PyString_CheckExact(text))
     {
         char* t = PyString_AsString(text);
@@ -104,7 +104,7 @@ QString PyString2QString(PyObject* text)
         if(sizeof(Py_UNICODE) == 4)
           qtext = fromUcs4((Q_UINT32*)t);
         else
-          qtext = QString::fromUcs2((Q_UINT16*)t);
+          qtext = TQString::fromUcs2((Q_UINT16*)t);
     }
     else
     {
@@ -113,8 +113,8 @@ QString PyString2QString(PyObject* text)
     return qtext;
 }
 
-// Converts a QString to a Python String with Unicode support
-PyObject* QString2PyString(QString string)
+// Converts a TQString to a Python String with Unicode support
+PyObject* QString2PyString(TQString string)
 {
   PyObject *pyString;
 
@@ -157,7 +157,7 @@ PyObject* QString2PyString(QString string)
 long getMeter(long widget, char* name)
 {
   karamba* theme = (karamba*)widget;
-  QObjectListIt it( *theme->meterList ); // iterate over meters
+  TQObjectListIt it( *theme->meterList ); // iterate over meters
 
   while ( it != 0 )
   {
@@ -168,7 +168,7 @@ long getMeter(long widget, char* name)
   return 0;
 }
 
-PyObject* py_getThemeMeter(PyObject *, PyObject *args, QString type)
+PyObject* py_getThemeMeter(PyObject *, PyObject *args, TQString type)
 {
   long widget, meter;
   char* name;
@@ -184,7 +184,7 @@ PyObject* py_getThemeMeter(PyObject *, PyObject *args, QString type)
   return (Py_BuildValue((char*)"l", meter));
 }
 
-PyObject* py_getSize(PyObject *, PyObject *args, QString type)
+PyObject* py_getSize(PyObject *, PyObject *args, TQString type)
 {
   long widget;
   long meter;
@@ -196,7 +196,7 @@ PyObject* py_getSize(PyObject *, PyObject *args, QString type)
                                 ((Meter*)meter)->getHeight());
 }
 
-PyObject* py_resize(PyObject *, PyObject *args, QString type)
+PyObject* py_resize(PyObject *, PyObject *args, TQString type)
 {
   long widget, meter, x, y;
   if (!PyArg_ParseTuple(args, (char*)"llll", &widget, &meter, &x, &y))
@@ -208,7 +208,7 @@ PyObject* py_resize(PyObject *, PyObject *args, QString type)
   return Py_BuildValue((char*)"l", 1);
 }
 
-PyObject* py_getPos(PyObject *, PyObject *args, QString type)
+PyObject* py_getPos(PyObject *, PyObject *args, TQString type)
 {
   long widget, meter;
   if (!PyArg_ParseTuple(args, (char*)"ll", &widget, &meter))
@@ -219,7 +219,7 @@ PyObject* py_getPos(PyObject *, PyObject *args, QString type)
                                 ((Meter*)meter)->getY());
 }
 
-PyObject* py_move(PyObject *, PyObject *args, QString type)
+PyObject* py_move(PyObject *, PyObject *args, TQString type)
 {
   long widget, meter, x, y;
   if (!PyArg_ParseTuple(args, (char*)"llll", &widget, &meter, &x, &y))
@@ -232,7 +232,7 @@ PyObject* py_move(PyObject *, PyObject *args, QString type)
   return Py_BuildValue((char*)"l", 1);
 }
 
-PyObject* py_hide(PyObject *, PyObject *args, QString type)
+PyObject* py_hide(PyObject *, PyObject *args, TQString type)
 {
   long widget, meter;
   if (!PyArg_ParseTuple(args, (char*)"ll", &widget, &meter))
@@ -243,7 +243,7 @@ PyObject* py_hide(PyObject *, PyObject *args, QString type)
   return Py_BuildValue((char*)"l", 1);
 }
 
-PyObject* py_show(PyObject *, PyObject *args, QString type)
+PyObject* py_show(PyObject *, PyObject *args, TQString type)
 {
   long widget, meter;
   if (!PyArg_ParseTuple(args, (char*)"ll", &widget, &meter))
@@ -254,7 +254,7 @@ PyObject* py_show(PyObject *, PyObject *args, QString type)
   return Py_BuildValue((char*)"l", 1);
 }
 
-PyObject* py_getValue(PyObject *, PyObject *args, QString type)
+PyObject* py_getValue(PyObject *, PyObject *args, TQString type)
 {
   long widget, meter;
   if (!PyArg_ParseTuple(args, (char*)"ll", &widget, &meter))
@@ -264,7 +264,7 @@ PyObject* py_getValue(PyObject *, PyObject *args, QString type)
   return Py_BuildValue((char*)"l", ((Meter*)meter)->getValue());
 }
 
-PyObject* py_setValue(PyObject *, PyObject *args, QString type)
+PyObject* py_setValue(PyObject *, PyObject *args, TQString type)
 {
   long widget, meter, l;
   if (!PyArg_ParseTuple(args, (char*)"lll", &widget, &meter, &l))
@@ -275,7 +275,7 @@ PyObject* py_setValue(PyObject *, PyObject *args, QString type)
   return Py_BuildValue((char*)"l", ((long)meter));
 }
 
-PyObject* py_getStringValue(PyObject *, PyObject *args, QString type)
+PyObject* py_getStringValue(PyObject *, PyObject *args, TQString type)
 {
   long widget, meter;
   if (!PyArg_ParseTuple(args, (char*)"ll", &widget, &meter))
@@ -286,7 +286,7 @@ PyObject* py_getStringValue(PyObject *, PyObject *args, QString type)
       QString2PyString(((Meter*)meter)->getStringValue()));
 }
 
-PyObject* py_setStringValue(PyObject *, PyObject *args, QString type)
+PyObject* py_setStringValue(PyObject *, PyObject *args, TQString type)
 {
   long widget, meter;
   PyObject* s;
@@ -296,11 +296,11 @@ PyObject* py_setStringValue(PyObject *, PyObject *args, QString type)
     return NULL;
   if (!checkKarambaAndMeter(widget, meter, type.ascii()))
     return NULL;
-  ((Meter*)meter)->setValue(PyString2QString(s));
+  ((Meter*)meter)->setValue(PyString2TQString(s));
   return Py_BuildValue((char*)"l", ((long)meter));
 }
 
-PyObject* py_getMinMax(PyObject *, PyObject *args, QString type)
+PyObject* py_getMinMax(PyObject *, PyObject *args, TQString type)
 {
   long widget, meter;
   if (!PyArg_ParseTuple(args, (char*)"ll", &widget, &meter))
@@ -311,7 +311,7 @@ PyObject* py_getMinMax(PyObject *, PyObject *args, QString type)
                                 ((Meter*)meter)->getMax());
 }
 
-PyObject* py_setMinMax(PyObject *, PyObject *args, QString type)
+PyObject* py_setMinMax(PyObject *, PyObject *args, TQString type)
 {
   long widget, meter, x, y;
   if (!PyArg_ParseTuple(args, (char*)"llll", &widget, &meter, &x, &y))
@@ -323,10 +323,10 @@ PyObject* py_setMinMax(PyObject *, PyObject *args, QString type)
   return Py_BuildValue((char*)"l", 1);
 }
 
-PyObject* py_getSensor(PyObject *, PyObject *args, QString type)
+PyObject* py_getSensor(PyObject *, PyObject *args, TQString type)
 {
   long widget, meter;
-  QString s;
+  TQString s;
   if (!PyArg_ParseTuple(args, (char*)"ll", &widget, &meter))
     return NULL;
   if (!checkKarambaAndMeter(widget, meter, type.ascii()))
@@ -335,7 +335,7 @@ PyObject* py_getSensor(PyObject *, PyObject *args, QString type)
                        ((karamba*)widget)->getSensor((Meter*)meter).ascii());
 }
 
-PyObject* py_setSensor(PyObject *, PyObject *args, QString type)
+PyObject* py_setSensor(PyObject *, PyObject *args, TQString type)
 {
   long widget, meter;
   char* s;
@@ -348,7 +348,7 @@ PyObject* py_setSensor(PyObject *, PyObject *args, QString type)
   return Py_BuildValue((char*)"l", 1);
 }
 
-PyObject* py_setColor(PyObject *, PyObject *args, QString type)
+PyObject* py_setColor(PyObject *, PyObject *args, TQString type)
 {
   long widget, meter;
   long r, g, b;
@@ -356,18 +356,18 @@ PyObject* py_setColor(PyObject *, PyObject *args, QString type)
     return NULL;
   if (!checkKarambaAndMeter(widget, meter, type.ascii()))
     return NULL;
-  ((Meter*)meter)->setColor(QColor(r, g, b));
+  ((Meter*)meter)->setColor(TQColor(r, g, b));
   return Py_BuildValue((char*)"l", 1);
 }
 
-PyObject* py_getColor(PyObject *, PyObject *args, QString type)
+PyObject* py_getColor(PyObject *, PyObject *args, TQString type)
 {
   long widget, meter;
   if (!PyArg_ParseTuple(args, (char*)"ll", &widget, &meter))
     return NULL;
   if (!checkKarambaAndMeter(widget, meter, type.ascii()))
     return NULL;
-  QColor color = ((Meter*)meter)->getColor();
+  TQColor color = ((Meter*)meter)->getColor();
   return Py_BuildValue((char*)"(i,i,i)", color.red(), color.green(), color.blue());
 }
 

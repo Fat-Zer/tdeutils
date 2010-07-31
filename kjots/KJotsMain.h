@@ -23,8 +23,8 @@
 #ifndef KJotsMain_included
 #define KJotsMain_included
 
-#include <qlayout.h>
-#include <qpushbutton.h>
+#include <tqlayout.h>
+#include <tqpushbutton.h>
 
 #include <kdialogbase.h>
 #include <kmainwindow.h>
@@ -86,8 +86,8 @@ class KJotsMain : public KMainWindow
     public:
         KJotsMain( const char* name = 0 );
 
-        QString currentBookmarkTitle();
-        QString currentBookmarkURL();
+        TQString currentBookmarkTitle();
+        TQString currentBookmarkURL();
 
     public:
         void updateCaption();
@@ -111,12 +111,12 @@ class KJotsMain : public KMainWindow
         void slotQuit();
         void slotFindSuccessful();
 
-        void jumpToEntry(QListViewItem* entry, bool=false);
+        void jumpToEntry(TQListViewItem* entry, bool=false);
 
-        void slotExpandBook(QListViewItem* item);
-        void slotCollapseBook(QListViewItem* item);
-        void slotItemRenamed(QListViewItem*,const QString&,int);
-        void slotItemMoved(QListViewItem*,QListViewItem*,QListViewItem*);
+        void slotExpandBook(TQListViewItem* item);
+        void slotCollapseBook(TQListViewItem* item);
+        void slotItemRenamed(TQListViewItem*,const TQString&,int);
+        void slotItemMoved(TQListViewItem*,TQListViewItem*,TQListViewItem*);
         void writeBook();
         void writeBookToHTML();
         void saveBookToFile(bool plainText);
@@ -130,12 +130,12 @@ class KJotsMain : public KMainWindow
         void prevPage();
 
         // handling page changes in the listview
-        void showListviewContextMenu(KListView* l, QListViewItem* i, const QPoint& p);
-        void linkClicked(const QString&);
+        void showListviewContextMenu(KListView* l, TQListViewItem* i, const TQPoint& p);
+        void linkClicked(const TQString&);
         void autoSave(void);
 
         // bookmarks
-        void jumpToBookmark(const QString& page);
+        void jumpToBookmark(const TQString& page);
 
     protected:
         void saveProperties();
@@ -145,16 +145,16 @@ class KJotsMain : public KMainWindow
         KJotsBook* currentBook();
         KJotsPage* currentPage();
 
-        QHBoxLayout   *bg_top_layout;
-        QButtonGroup  *bg_top;
+        TQHBoxLayout   *bg_top_layout;
+        TQButtonGroup  *bg_top;
         KJotsEdit   *me_text;
         KTextBrowser *roTextView;
         KListView     *subjectList;
         KJotsEntryBase *currentEntry;
-        QSplitter *splitter;
-        QWidgetStack *textStack;
-        QFont m_font;
-        QTimer*  m_autosaveTimer;
+        TQSplitter *splitter;
+        TQWidgetStack *textStack;
+        TQFont m_font;
+        TQTimer*  m_autosaveTimer;
         bool invalidMoveFlag; //!< Used to fix a race condition. See Bug #109299
 
         KAction* actions[ACTION_MAX];

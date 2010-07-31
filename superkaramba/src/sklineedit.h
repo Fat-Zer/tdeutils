@@ -21,36 +21,36 @@
 #ifndef SKLINEEDIT_H
 #define SKLINEEDIT_H
 
-#include <qlineedit.h>
-#include <qwidget.h>
-#include <qevent.h>
-#include <qpainter.h>
-#include <qcolor.h>
+#include <tqlineedit.h>
+#include <tqwidget.h>
+#include <tqevent.h>
+#include <tqpainter.h>
+#include <tqcolor.h>
 
 class Input;
 
 class SKLineEdit : public QLineEdit
 {
   public:
-    SKLineEdit(QWidget *w, Input *i);
+    SKLineEdit(TQWidget *w, Input *i);
     ~SKLineEdit();
 
-    void drawFrame(QPainter *p);
-    void drawContents(QPainter *p);
+    void drawFrame(TQPainter *p);
+    void drawContents(TQPainter *p);
 
-    void setFrameColor(QColor c);
-    QColor getFrameColor() const;
+    void setFrameColor(TQColor c);
+    TQColor getFrameColor() const;
 
-    void setBackgroundColor(QColor c);
+    void setBackgroundColor(TQColor c);
     
     Input* getInput();
 
   protected:
-    virtual void keyReleaseEvent(QKeyEvent* e);
-    virtual void keyPressEvent(QKeyEvent* e);
+    virtual void keyReleaseEvent(TQKeyEvent* e);
+    virtual void keyPressEvent(TQKeyEvent* e);
 
   private:
-    QColor frameColor;
+    TQColor frameColor;
     Input* m_input;
 };
 

@@ -22,7 +22,7 @@
 
 #include "progress.h"
 #include <kdemacros.h>
-#include <qpixmap.h>
+#include <tqpixmap.h>
 
 namespace KSim
 {
@@ -49,7 +49,7 @@ namespace KSim
        * @param parent is the parent widget
        * @param name is the object instance name
        */
-      Led(Type type, const QString &imageName);
+      Led(Type type, const TQString &imageName);
       /**
        * destructor for KSim::Led.
        */
@@ -70,11 +70,11 @@ namespace KSim
       /**
        * sets the image of the led
        */
-      void setPixmap(const QString &);
+      void setPixmap(const TQString &);
       /**
        * @return the location of the filename
        */
-      const QString &fileName() const;
+      const TQString &fileName() const;
       /**
        * @return true if the led is on
        */
@@ -116,8 +116,8 @@ namespace KSim
        * @param parent is the parent widget
        * @see KSim::ThemeLoader
        */
-      LedLabel(int max, int type, const QString &label,
-            QWidget *parent, const char *name = 0, WFlags fl = 0);
+      LedLabel(int max, int type, const TQString &label,
+            TQWidget *parent, const char *name = 0, WFlags fl = 0);
       /**
        * Constructs a KSim::LedLabel.
        *
@@ -126,7 +126,7 @@ namespace KSim
        * @param parent is the parent widget
        * @see KSim::ThemeLoader
        */
-      LedLabel(int max, int type, QWidget *parent,
+      LedLabel(int max, int type, TQWidget *parent,
              const char *name = 0, WFlags fl = 0);
       /**
        * Constructs a KSim::LedLabel.
@@ -135,7 +135,7 @@ namespace KSim
        * @param parent is the parent widget
        * @see KSim::ThemeLoader
        */
-      LedLabel(int max, QWidget *parent,
+      LedLabel(int max, TQWidget *parent,
              const char *name = 0, WFlags fl = 0);
       /**
        * destructor for KSim::LedLabel.
@@ -149,7 +149,7 @@ namespace KSim
       /**
        * reimplemented for internal reasons
        */
-      virtual QSize sizeHint() const;
+      virtual TQSize sizeHint() const;
 
     public slots:
       /**
@@ -176,11 +176,11 @@ namespace KSim
       /**
        * reimplemented for internal reasons
        */
-      virtual void paintEvent(QPaintEvent *);
+      virtual void paintEvent(TQPaintEvent *);
       /**
        * reimplemented for internal reasons
        */
-      virtual void resizeEvent(QResizeEvent *);
+      virtual void resizeEvent(TQResizeEvent *);
 
     private:
       void layoutLeds();

@@ -28,14 +28,14 @@
 #include <kaction.h>
 #include <kactioncollection.h>
 
-#include <qlabel.h>
-#include <qapplication.h>
-#include <qvaluelist.h>
+#include <tqlabel.h>
+#include <tqapplication.h>
+#include <tqvaluelist.h>
 
-SearchBar::SearchBar( QWidget* parent, KActionCollection* aC, const char * name )
+SearchBar::SearchBar( TQWidget* parent, KActionCollection* aC, const char * name )
 	: KListViewSearchLine( parent, 0, name )
 {
-	KAction *resetSearch = new KAction( i18n( "Reset Search" ), QApplication::reverseLayout() ? "clear_left" : "locationbar_erase", 0, this, SLOT( clear() ), aC, "reset_search" );
+	KAction *resetSearch = new KAction( i18n( "Reset Search" ), TQApplication::reverseLayout() ? "clear_left" : "locationbar_erase", 0, this, TQT_SLOT( clear() ), aC, "reset_search" );
 
 	resetSearch->plug( parent );
 	resetSearch->setWhatsThis( i18n( "Reset Search\n"

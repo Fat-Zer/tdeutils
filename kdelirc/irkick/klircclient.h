@@ -13,10 +13,10 @@
 #ifndef KLIRCCLIENT_H
 #define KLIRCCLIENT_H
 
-#include <qobject.h>
-#include <qmap.h>
-#include <qstring.h>
-#include <qstringlist.h>
+#include <tqobject.h>
+#include <tqmap.h>
+#include <tqstring.h>
+#include <tqstringlist.h>
 
 class QSocket;
 class QSocketNotifier;
@@ -32,14 +32,14 @@ class KLircClient: public QObject
 
 private:
 	struct lirc_config *theConfig;
-	QSocket *theSocket;
-	QSocketNotifier *theNotifier;
-	QMap<QString, QStringList> theRemotes;
+	TQSocket *theSocket;
+	TQSocketNotifier *theNotifier;
+	TQMap<TQString, TQStringList> theRemotes;
 	bool listIsUpToDate;
 
 	void updateRemotes();
-	void sendCommand(const QString &command);
-	const QString readLine();
+	void sendCommand(const TQString &command);
+	const TQString readLine();
 
 private slots:
 	void slotRead();
@@ -62,7 +62,7 @@ signals:
 	 * The repeat counter starts with 0 and increases
 	 * every time this signal is emitted.
 	 */
-	void commandReceived(const QString &remote, const QString &button, int repeatCounter);
+	void commandReceived(const TQString &remote, const TQString &button, int repeatCounter);
 
 	/**
 	 * Emitted when the Lirc connection is closed.
@@ -91,14 +91,14 @@ public:
 	 *
 	 * @returns said list.
 	 */
-	const QStringList remotes() const;
+	const TQStringList remotes() const;
 
 	/**
 	 * Retrieve list of buttons of a praticular remote control.
 	 *
 	 * @returns said list.
 	 */
-	const QStringList buttons(const QString &theRemote) const;
+	const TQStringList buttons(const TQString &theRemote) const;
 
 	/**
 	 * Connects to lirc.
@@ -107,7 +107,7 @@ public:
 	 */
 	bool connectToLirc();
 
-	KLircClient(QWidget *parent = 0, const char *name = 0);
+	KLircClient(TQWidget *parent = 0, const char *name = 0);
 	~KLircClient();
 };
 

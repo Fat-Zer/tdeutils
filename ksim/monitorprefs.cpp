@@ -29,7 +29,7 @@
 #include <ksimconfig.h>
 #include <pluginloader.h>
 
-KSim::MonitorPrefs::MonitorPrefs(QWidget *parent, const char *name)
+KSim::MonitorPrefs::MonitorPrefs(TQWidget *parent, const char *name)
     : KListView(parent, name)
 {
   addColumn(i18n("Monitor"));
@@ -42,15 +42,15 @@ KSim::MonitorPrefs::MonitorPrefs(QWidget *parent, const char *name)
   setDragEnabled(true);
   setAcceptDrops(true);
   setAllColumnsShowFocus(true);
-  setSelectionMode(QListView::Single);
+  setSelectionMode(TQListView::Single);
 
   // Scan for .desktop files and enter them into the KListView
   m_locatedFiles = KGlobal::dirs()->findAllResources("data", "ksim/monitors/*.desktop");
   m_locatedFiles.sort();
-  QStringList::ConstIterator it;
+  TQStringList::ConstIterator it;
   for (it = m_locatedFiles.begin(); it != m_locatedFiles.end(); ++it) {
     KDesktopFile file((*it), true);
-    (void)(new QCheckListItem(this, file.readName(), QCheckListItem::CheckBox))->setText(1, file.readComment());
+    (void)(new TQCheckListItem(this, file.readName(), TQCheckListItem::CheckBox))->setText(1, file.readComment());
   }
 
   sort();
@@ -63,11 +63,11 @@ KSim::MonitorPrefs::~MonitorPrefs()
 
 void KSim::MonitorPrefs::saveConfig(KSim::Config *config)
 {
-  QCheckListItem *item;
-  QStringList::ConstIterator it;
+  TQCheckListItem *item;
+  TQStringList::ConstIterator it;
   for (it = m_locatedFiles.begin(); it != m_locatedFiles.end(); ++it) {
     KSim::PluginInfo info = KSim::PluginLoader::self().findPluginInfo((*it));
-    item = static_cast<QCheckListItem *>(findItem(info.name(), 0));
+    item = static_cast<TQCheckListItem *>(findItem(info.name(), 0));
     config->setEnabledMonitor(info.libName(), item->isOn());
     config->setMonitorCommand(info.libName(), item->text(2));
     config->setMonitorLocation(info.libName(), itemIndex(item));
@@ -77,15 +77,15 @@ void KSim::MonitorPrefs::saveConfig(KSim::Config *config)
 void KSim::MonitorPrefs::readConfig(KSim::Config *config)
 {
   int location;
-  QCheckListItem *origItem;
-  QStringList::ConstIterator it;
+  TQCheckListItem *origItem;
+  TQStringList::ConstIterator it;
   for (it = m_locatedFiles.begin(); it != m_locatedFiles.end(); ++it) {
     KSim::PluginInfo info = KSim::PluginLoader::self().findPluginInfo((*it));
     location = config->monitorLocation(info.libName());
-    origItem = static_cast<QCheckListItem *>(findItem(info.name(), 0));
+    origItem = static_cast<TQCheckListItem *>(findItem(info.name(), 0));
     origItem->setOn(config->enabledMonitor(info.libName()));
     origItem->setText(2, config->monitorCommand(info.libName()));
-    if (QListViewItem *item = itemAtIndex(location)) {
+    if (TQListViewItem *item = itemAtIndex(location)) {
       if (location) {
         origItem->moveItem(item->itemAbove());
       }

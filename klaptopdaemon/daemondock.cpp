@@ -24,9 +24,9 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <qcursor.h>
+#include <tqcursor.h>
 
-#include <qslider.h>
+#include <tqslider.h>
 #include <klocale.h>
 #include <kpopupmenu.h>
 #include <dcopclient.h>
@@ -41,10 +41,10 @@
 #include <kconfig.h>
 #include <kglobalsettings.h>
 #include <kmessagebox.h>
-#include <qvbox.h>
-#include <qstringlist.h>
-#include <qbitmap.h>
-#include <qpainter.h>
+#include <tqvbox.h>
+#include <tqstringlist.h>
+#include <tqbitmap.h>
+#include <tqpainter.h>
 #include <kiconeffect.h>
 extern void wake_laptop_daemon();
 
@@ -73,48 +73,48 @@ laptop_dock::SetupPopup()
     int can_standby = laptop_portable::has_standby();
     int can_suspend = laptop_portable::has_suspend();
     int can_hibernate = laptop_portable::has_hibernation();
-    QStringList profile_list;
+    TQStringList profile_list;
     int current_profile;
     bool *active_list;
     bool has_performance = laptop_portable::get_system_performance(0, current_profile, profile_list, active_list);
-    QStringList throttle_list;
+    TQStringList throttle_list;
     int current_throttle;
     bool has_throttle = laptop_portable::get_system_throttling(0, current_throttle, throttle_list, active_list);
-    rightPopup->insertItem(SmallIcon("configure"), i18n("&Configure KLaptop..."), this, SLOT(invokeSetup()));
+    rightPopup->insertItem(SmallIcon("configure"), i18n("&Configure KLaptop..."), this, TQT_SLOT(invokeSetup()));
 
     if (has_brightness)
-	rightPopup->insertItem(i18n("Screen Brightness..."), this, SLOT(invokeBrightness()));
+	rightPopup->insertItem(i18n("Screen Brightness..."), this, TQT_SLOT(invokeBrightness()));
     if (has_performance) {
-	performance_popup = new QPopupMenu(0, "performance");
+	performance_popup = new TQPopupMenu(0, "performance");
 	performance_popup->setCheckable(1);
 	rightPopup->insertItem(i18n("Performance Profile..."), performance_popup);
-	connect( performance_popup, SIGNAL( activated( int ) ), this, SLOT( activate_performance( int ) ) );
-	connect( performance_popup, SIGNAL( aboutToShow() ),    this, SLOT( fill_performance() ) );
+	connect( performance_popup, TQT_SIGNAL( activated( int ) ), this, TQT_SLOT( activate_performance( int ) ) );
+	connect( performance_popup, TQT_SIGNAL( aboutToShow() ),    this, TQT_SLOT( fill_performance() ) );
     } else {
 	performance_popup = 0;
     }
     if (has_throttle) {
-	throttle_popup = new QPopupMenu(0, "throttle");
+	throttle_popup = new TQPopupMenu(0, "throttle");
 	throttle_popup->setCheckable(1);
 	rightPopup->insertItem(i18n("CPU Throttling..."), throttle_popup);
-	connect( throttle_popup, SIGNAL( activated( int ) ), this, SLOT( activate_throttle( int ) ) );
-	connect( throttle_popup, SIGNAL( aboutToShow() ),    this, SLOT( fill_throttle() ) );
+	connect( throttle_popup, TQT_SIGNAL( activated( int ) ), this, TQT_SLOT( activate_throttle( int ) ) );
+	connect( throttle_popup, TQT_SIGNAL( aboutToShow() ),    this, TQT_SLOT( fill_throttle() ) );
     } else {
 	throttle_popup = 0;
     }
 
     if (can_standby || can_suspend || can_hibernate) {
     	rightPopup->insertSeparator();
-    	if (can_standby) rightPopup->insertItem(i18n("Standby..."), this, SLOT(invokeStandby()));
-	//	if (can_suspend) rightPopup->insertItem(i18n("&Lock && Suspend..."), this, SLOT(invokeLockSuspend()));
-    	if (can_suspend) rightPopup->insertItem(i18n("&Suspend..."), this, SLOT(invokeLockSuspend()));
-	//        if (can_hibernate) rightPopup->insertItem(i18n("&Lock && Hibernate..."), this, SLOT(invokeLockHibernation()));
-	if (can_hibernate) rightPopup->insertItem(i18n("&Hibernate..."), this, SLOT(invokeLockHibernation()));
+    	if (can_standby) rightPopup->insertItem(i18n("Standby..."), this, TQT_SLOT(invokeStandby()));
+	//	if (can_suspend) rightPopup->insertItem(i18n("&Lock && Suspend..."), this, TQT_SLOT(invokeLockSuspend()));
+    	if (can_suspend) rightPopup->insertItem(i18n("&Suspend..."), this, TQT_SLOT(invokeLockSuspend()));
+	//        if (can_hibernate) rightPopup->insertItem(i18n("&Lock && Hibernate..."), this, TQT_SLOT(invokeLockHibernation()));
+	if (can_hibernate) rightPopup->insertItem(i18n("&Hibernate..."), this, TQT_SLOT(invokeLockHibernation()));
     }
 
     rightPopup->insertSeparator();
-    rightPopup->insertItem(i18n("&Hide Monitor"), this, SLOT(slotHide()));
-    rightPopup->insertItem(SmallIcon("exit"), KStdGuiItem::quit().text(), this, SLOT(slotQuit()));
+    rightPopup->insertItem(i18n("&Hide Monitor"), this, TQT_SLOT(slotHide()));
+    rightPopup->insertItem(SmallIcon("exit"), KStdGuiItem::quit().text(), this, TQT_SLOT(slotQuit()));
 }
 
 laptop_dock::~laptop_dock()
@@ -139,13 +139,13 @@ laptop_dock::fill_throttle()
 {
     throttle_popup->clear();
     int current;
-    QStringList list;
+    TQStringList list;
     bool *active_list;
     bool has_throttle = laptop_portable::get_system_throttling(1, current, list, active_list);
     if (!has_throttle && !list.empty())
 	    return;
     int n=0;
-    for (QValueListIterator<QString> i = list.begin();i != list.end();i++) {
+    for (TQValueListIterator<TQString> i = list.begin();i != list.end();i++) {
 	throttle_popup->insertItem(*i, n);
     	throttle_popup->setItemEnabled(n, active_list[n]);
     	n++;
@@ -164,13 +164,13 @@ laptop_dock::fill_performance()
 {
     performance_popup->clear();
     int current;
-    QStringList list;
+    TQStringList list;
     bool *active_list;
     bool has_performance = laptop_portable::get_system_performance(1, current, list, active_list);
     if (!has_performance && !list.empty())
 	    return;
     int n=0;
-    for (QValueListIterator<QString> i = list.begin();i != list.end();i++) {
+    for (TQValueListIterator<TQString> i = list.begin();i != list.end();i++) {
 	performance_popup->insertItem(*i, n);
     	performance_popup->setItemEnabled(n, active_list[n]);
 	n++;
@@ -195,24 +195,24 @@ laptop_dock::invokeBrightness()
 		brightness = 255;
 
 	if (brightness_widget == 0) {
-		brightness_widget = new QVBox(0L, "Brightness", WStyle_Customize | WType_Popup);
-		brightness_widget->setFrameStyle(QFrame::PopupPanel);
+		brightness_widget = new TQVBox(0L, "Brightness", WStyle_Customize | WType_Popup);
+		brightness_widget->setFrameStyle(TQFrame::PopupPanel);
 		brightness_widget->setMargin(KDialog::marginHint());
-		brightness_slider = new QSlider(0, 255, 16, 255-brightness, Qt::Vertical, brightness_widget, 0);
+		brightness_slider = new TQSlider(0, 255, 16, 255-brightness, Qt::Vertical, brightness_widget, 0);
 		brightness_slider->setMinimumHeight(40);
 		brightness_slider->setMinimumWidth(15);
-		connect(brightness_slider, SIGNAL(valueChanged(int)), this, SLOT(invokeBrightnessSlider(int)));
+		connect(brightness_slider, TQT_SIGNAL(valueChanged(int)), this, TQT_SLOT(invokeBrightnessSlider(int)));
 		brightness_widget->resize(brightness_widget->sizeHint());
 	} else {
 		brightness_slider->setValue(255-brightness);
 	}
 	if (!brightness_widget->isVisible()) {
-		QRect desktop = KGlobalSettings::desktopGeometry(this);
+		TQRect desktop = KGlobalSettings::desktopGeometry(this);
 		int sw = desktop.width();
 		int sh = desktop.height();
 		int sx = desktop.x();
 		int sy = desktop.y();
-		QPoint pos = QCursor::pos();
+		TQPoint pos = TQCursor::pos();
 		int x = pos.x();
 		int y = pos.y();
 		y -= brightness_widget->geometry().height();
@@ -233,7 +233,7 @@ laptop_dock::invokeBrightness()
 
 void laptop_dock::slotGoRoot(int /*id*/) {
 #ifdef NOTDEF
-	QString kdesu = KStandardDirs::findExe("kdesu");
+	TQString kdesu = KStandardDirs::findExe("kdesu");
 	if (!kdesu.isEmpty()) {
 		int rc = KMessageBox::warningContinueCancel(0,
 				i18n("You will need to supply a root password "
@@ -251,8 +251,8 @@ void laptop_dock::slotGoRoot(int /*id*/) {
 			*_rootProcess << "root";
 			//*_rootProcess << "--nonewdcop";
 			*_rootProcess << KStandardDirs::findExe("klaptopdaemon");
-			connect(_rootProcess, SIGNAL(processExited(KProcess*)),
-				this, SLOT(rootExited(KProcess*)));
+			connect(_rootProcess, TQT_SIGNAL(processExited(KProcess*)),
+				this, TQT_SLOT(rootExited(KProcess*)));
 			_rootProcess->start(KProcess::NotifyOnExit);
 			// We should disable this menu item here now.
 		}
@@ -268,7 +268,7 @@ void laptop_dock::slotGoRoot(int /*id*/) {
 
 
 void laptop_dock::slotHide() {
-	int confirm = KMessageBox::questionYesNo(0, i18n("Are you sure you want to hide the battery monitor? Your battery will still be monitored in the background."), QString::null, i18n("Hide Monitor"), i18n("Do Not Hide"), "hideConfirm");
+	int confirm = KMessageBox::questionYesNo(0, i18n("Are you sure you want to hide the battery monitor? Your battery will still be monitored in the background."), TQString::null, i18n("Hide Monitor"), i18n("Do Not Hide"), "hideConfirm");
 
 	if (confirm != KMessageBox::Yes)
 		return;
@@ -286,12 +286,12 @@ void laptop_dock::slotHide() {
 
 
 void laptop_dock::slotQuit() {
-	int confirm = KMessageBox::questionYesNo(0, i18n("Are you sure you want to quit the battery monitor?"), QString::null, KStdGuiItem::quit(), KStdGuiItem::cancel(), "quitConfirm");
+	int confirm = KMessageBox::questionYesNo(0, i18n("Are you sure you want to quit the battery monitor?"), TQString::null, KStdGuiItem::quit(), KStdGuiItem::cancel(), "quitConfirm");
 
 	if (confirm != KMessageBox::Yes)
 		return;
 
-	confirm = KMessageBox::questionYesNo(0, i18n("Do you wish to disable the battery monitor from starting in the future?"), QString::null, i18n("Disable"), i18n("Keep Enabled"), "restartMonitor");
+	confirm = KMessageBox::questionYesNo(0, i18n("Do you wish to disable the battery monitor from starting in the future?"), TQString::null, i18n("Disable"), i18n("Keep Enabled"), "restartMonitor");
 
 	if (confirm == KMessageBox::Yes) {
 		// just tell ourselves to hide the battery
@@ -360,19 +360,19 @@ KPCMCIAInfo *f =  new KPCMCIAInfo(_pcmcia);
    f->showTab(_displayActions[id]->num());
 }
 
-void laptop_dock::mousePressEvent( QMouseEvent *event )
+void laptop_dock::mousePressEvent( TQMouseEvent *event )
 {
  	if(event->button() == LeftButton) {
-		QPopupMenu *popup = new QPopupMenu(0, "popup");
+		TQPopupMenu *popup = new TQPopupMenu(0, "popup");
 
 		if (!pdaemon->exists()) {
 			popup->insertItem(i18n("Power Manager Not Found"));
 		} else {
-			QString tmp;
+			TQString tmp;
 
 			if (pdaemon->val >= 0) {
 				if (pdaemon->left >= 0) {
-					QString num3;
+					TQString num3;
 					num3.setNum(pdaemon->left%60);
 					num3 = num3.rightJustify(2, '0');
 					tmp = i18n("%1:%2 hours left").arg(pdaemon->left/60).arg(num3);
@@ -399,7 +399,7 @@ void laptop_dock::mousePressEvent( QMouseEvent *event )
 		 *        - show the cpu profile and current frequency
 		 */
 		if (laptop_portable::has_cpufreq()) {
-			QString speed = laptop_portable::cpu_frequency();
+			TQString speed = laptop_portable::cpu_frequency();
 			if (!speed.isEmpty()) {
 				popup->insertSeparator();
 				popup->insertItem(i18n("CPU: %1").arg(speed));
@@ -410,7 +410,7 @@ void laptop_dock::mousePressEvent( QMouseEvent *event )
                  *        ADD the PCMCIA entries here
                  */
                 if (_pcmcia && _pcmcia->haveCardServices()) {
-                   QString slotname = i18n("Slot %1"); // up here so we only construct it once
+                   TQString slotname = i18n("Slot %1"); // up here so we only construct it once
                    int id;
                    popup->insertSeparator();
                    _ejectActions.clear();
@@ -419,30 +419,30 @@ void laptop_dock::mousePressEvent( QMouseEvent *event )
                    _suspendActions.clear();
                    _resumeActions.clear();
                    _displayActions.clear();
-                   id = popup->insertItem(i18n("Card Slots..."), this, SLOT(slotDisplayAction(int)));
+                   id = popup->insertItem(i18n("Card Slots..."), this, TQT_SLOT(slotDisplayAction(int)));
                    _displayActions.insert(id, _pcmcia->getCard(0));
                    for (int i = 0; i < _pcmcia->getCardCount(); i++) {
                       KPCMCIACard *thiscard;
                       thiscard = _pcmcia->getCard(i);
                       if (thiscard && (thiscard->present())) {
-                         QPopupMenu *thisSub = new QPopupMenu(popup, thiscard->name().latin1());
-                         id = thisSub->insertItem(i18n("Details..."), this, SLOT(slotDisplayAction(int)));
+                         TQPopupMenu *thisSub = new TQPopupMenu(popup, thiscard->name().latin1());
+                         id = thisSub->insertItem(i18n("Details..."), this, TQT_SLOT(slotDisplayAction(int)));
                          _displayActions.insert(id, thiscard);
 
                          // add the actions
-                         QPopupMenu *actionsSub = new QPopupMenu(thisSub, "actions");
-                         id = actionsSub->insertItem(i18n("Eject"), this, SLOT(slotEjectAction(int)));
+                         TQPopupMenu *actionsSub = new TQPopupMenu(thisSub, "actions");
+                         id = actionsSub->insertItem(i18n("Eject"), this, TQT_SLOT(slotEjectAction(int)));
                          actionsSub->setItemEnabled(id, !(thiscard->status() & CARD_STATUS_BUSY));
                          _ejectActions.insert(id, thiscard);
-                         id = actionsSub->insertItem(i18n("Suspend"), this, SLOT(slotSuspendAction(int)));
+                         id = actionsSub->insertItem(i18n("Suspend"), this, TQT_SLOT(slotSuspendAction(int)));
                          actionsSub->setItemEnabled(id, !(thiscard->status() & (CARD_STATUS_SUSPEND|CARD_STATUS_BUSY)));
                          _suspendActions.insert(id, thiscard);
-                         id = actionsSub->insertItem(i18n("Resume"), this, SLOT(slotResumeAction(int)));
+                         id = actionsSub->insertItem(i18n("Resume"), this, TQT_SLOT(slotResumeAction(int)));
                          actionsSub->setItemEnabled(id, (thiscard->status() & CARD_STATUS_SUSPEND));
                          _resumeActions.insert(id, thiscard);
-                         id = actionsSub->insertItem(i18n("Reset"), this, SLOT(slotResetAction(int)));
+                         id = actionsSub->insertItem(i18n("Reset"), this, TQT_SLOT(slotResetAction(int)));
                          _resetActions.insert(id, thiscard);
-                         id = actionsSub->insertItem(i18n("Insert"), this, SLOT(slotInsertAction(int)));
+                         id = actionsSub->insertItem(i18n("Insert"), this, TQT_SLOT(slotInsertAction(int)));
                          _insertActions.insert(id, thiscard);
                          actionsSub->setItemEnabled(id, !(thiscard->status() & (CARD_STATUS_READY|CARD_STATUS_SUSPEND)));
                          thisSub->insertItem(i18n("Actions"), actionsSub);
@@ -463,11 +463,11 @@ void laptop_dock::mousePressEvent( QMouseEvent *event )
 			popup->insertItem(i18n("Enable PCMCIA"));
 		}
 
-		popup->popup(QCursor::pos());
+		popup->popup(TQCursor::pos());
 	}
 
 }
-void laptop_dock::mouseReleaseEvent( QMouseEvent *e )
+void laptop_dock::mouseReleaseEvent( TQMouseEvent *e )
 {
     if ( !rect().contains( e->pos() ) )
         return;
@@ -489,7 +489,7 @@ void laptop_dock::mouseReleaseEvent( QMouseEvent *e )
         break;
     }
 }
-void laptop_dock::showEvent( QShowEvent * )
+void laptop_dock::showEvent( TQShowEvent * )
 {
 
 }
@@ -537,7 +537,7 @@ laptop_dock::reload_icon()
 {
 	// we will try to deduce the pixmap (or gif) name now.  it will
 	// vary depending on the dock and power
-	QString pixmap_name;
+	TQString pixmap_name;
 
 	if (!pdaemon->exists())
 		pixmap_name = pdaemon->noBatteryIcon();
@@ -567,9 +567,9 @@ void laptop_dock::displayPixmap()
 
 	// at this point, we have the file to display.  so display it
 
-	QImage image = pm.convertToImage();
-	const QBitmap *bmmask = pm.mask();
-	QImage mask;
+	TQImage image = pm.convertToImage();
+	const TQBitmap *bmmask = pm.mask();
+	TQImage mask;
 	if (bmmask)
 		mask = bmmask->convertToImage();
 
@@ -623,8 +623,8 @@ void laptop_dock::displayPixmap()
 	}
 quit:
         
-        QString tmp;
-        QString levelString;
+        TQString tmp;
+        TQString levelString;
         
 	if (!pdaemon->exists()) {
 		tmp = i18n("Laptop power management not available");
@@ -637,7 +637,7 @@ quit:
 		} else if (pdaemon->val >= 0) {
                         levelString.sprintf ("%i%%", pdaemon->val);
 			if (pdaemon->left >= 0) {
-				QString num3;
+				TQString num3;
 				num3.setNum(pdaemon->left%60);
 				num3 = num3.rightJustify(2, '0');
 				tmp = i18n("Plugged in - %1% charged (%2:%3 hours left)")
@@ -654,7 +654,7 @@ quit:
 		if (pdaemon->val >= 0) {
                         levelString.sprintf ("%i%%", pdaemon->val);
 			if (pdaemon->left >= 0) {
-				QString num3;
+				TQString num3;
 				num3.setNum(pdaemon->left%60);
 				num3 = num3.rightJustify(2, '0');
 				tmp = i18n("Running on batteries - %1% charged (%2:%3 hours left)")
@@ -690,13 +690,13 @@ quit:
             int oldPixmapWidth = image.size().width();
             int oldPixmapHeight = image.size().height();
             
-            QFont percentageFont = KGlobalSettings::generalFont();
+            TQFont percentageFont = KGlobalSettings::generalFont();
             percentageFont.setBold(true);
         
             // decrease the size of the font for the number of unread messages if the
             // number doesn't fit into the available space
             float percentageFontSize = percentageFont.pointSizeFloat();
-            QFontMetrics qfm( percentageFont );
+            TQFontMetrics qfm( percentageFont );
             int width = qfm.width( levelString );
             if( width > oldPixmapWidth )
             {
@@ -710,38 +710,38 @@ quit:
             // reason text that is drawn on a transparent pixmap is invisible
             // (apparently the alpha channel isn't changed when the text is drawn).
             // Therefore I have to draw the text on a solid background and then remove
-            // the background by making it transparent with QPixmap::setMask. This
+            // the background by making it transparent with TQPixmap::setMask. This
             // involves the slow createHeuristicMask() function (from the API docs:
-            // "This function is slow because it involves transformation to a QImage,
-            // non-trivial computations and a transformation back to a QBitmap."). Then
-            // I have to convert the resulting QPixmap to a QImage in order to overlay
+            // "This function is slow because it involves transformation to a TQImage,
+            // non-trivial computations and a transformation back to a TQBitmap."). Then
+            // I have to convert the resulting TQPixmap to a TQImage in order to overlay
             // the light KMail icon with the number (because KIconEffect::overlay only
-            // works with QImage). Finally the resulting QImage has to be converted
-            // back to a QPixmap.
+            // works with TQImage). Finally the resulting TQImage has to be converted
+            // back to a TQPixmap.
             // That's a lot of work for overlaying the KMail icon with the number of
             // unread messages, but every other approach I tried failed miserably.
             //                                                           IK, 2003-09-22
-            QPixmap percentagePixmap( oldPixmapWidth, oldPixmapHeight );
+            TQPixmap percentagePixmap( oldPixmapWidth, oldPixmapHeight );
             percentagePixmap.fill( Qt::white );
-            QPainter p( &percentagePixmap );
+            TQPainter p( &percentagePixmap );
             p.setFont( percentageFont );
             p.setPen( Qt::black );
             p.drawText( percentagePixmap.rect(), Qt::AlignCenter, levelString );
             percentagePixmap.setMask( percentagePixmap.createHeuristicMask() );
-            QImage percentageImage = percentagePixmap.convertToImage();
+            TQImage percentageImage = percentagePixmap.convertToImage();
         
             // Overlay the light KMail icon with the number image
-            QImage iconWithPercentageImage = image.copy();
+            TQImage iconWithPercentageImage = image.copy();
             KIconEffect::overlay( iconWithPercentageImage, percentageImage );
         
-            QPixmap iconWithPercentage;
+            TQPixmap iconWithPercentage;
             iconWithPercentage.convertFromImage( iconWithPercentageImage );
             
             setPixmap( iconWithPercentage );
         }
         else
         {
-            QPixmap q;
+            TQPixmap q;
             q.convertFromImage(image);
             if (bmmask)
                     q.setMask(*bmmask);
@@ -749,7 +749,7 @@ quit:
         }
         adjustSize();
             
-        QToolTip::add(this, tmp);
+        TQToolTip::add(this, tmp);
 }
 
 #include "daemondock.moc"

@@ -23,7 +23,7 @@
 #include <ksimconfig.h>
 #include <common.h>
 
-#include <qlayout.h>
+#include <tqlayout.h>
 
 #include <kaboutapplication.h>
 #include <kbugreport.h>
@@ -35,7 +35,7 @@
 
 extern "C"
 {
-  KDE_EXPORT KPanelExtension *init(QWidget *parent, const QString &configFile)
+  KDE_EXPORT KPanelExtension *init(TQWidget *parent, const TQString &configFile)
   {
     KGlobal::locale()->insertCatalogue("ksim");
     return new KSim::PanelExtension(configFile, KPanelExtension::Normal,
@@ -45,8 +45,8 @@ extern "C"
   }
 }
 
-KSim::PanelExtension::PanelExtension(const QString &configFile,
-   Type type, int actions, QWidget *parent, const char *name)
+KSim::PanelExtension::PanelExtension(const TQString &configFile,
+   Type type, int actions, TQWidget *parent, const char *name)
    : KPanelExtension(configFile, type, actions, parent, name)
 {
   m_dcopClient = new DCOPClient;
@@ -75,12 +75,12 @@ KSim::PanelExtension::~PanelExtension()
   delete m_dcopClient;
 }
 
-QSize KSim::PanelExtension::sizeHint(Position p, QSize maxSize) const
+TQSize KSim::PanelExtension::sizeHint(Position p, TQSize maxSize) const
 {
   return m_view->sizeHint(p, maxSize);
 }
 
-void KSim::PanelExtension::resizeEvent(QResizeEvent *)
+void KSim::PanelExtension::resizeEvent(TQResizeEvent *)
 {
   m_view->resize(size());
 }

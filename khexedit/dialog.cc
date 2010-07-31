@@ -22,10 +22,10 @@
 #include <iostream>
 #include <limits.h>
 
-#include <qbuttongroup.h>
-#include <qfileinfo.h>
-#include <qlayout.h>
-#include <qvalidator.h>
+#include <tqbuttongroup.h>
+#include <tqfileinfo.h>
+#include <tqlayout.h>
+#include <tqvalidator.h>
 
 #include <kfiledialog.h>
 #include <klocale.h>
@@ -34,47 +34,47 @@
 #include <kstdguiitem.h>
 
 #include "dialog.h"
-#include <qpushbutton.h>
+#include <tqpushbutton.h>
 
-static const QStringList &formatStrings( void );
-static const QStringList &operationStrings( void );
+static const TQStringList &formatStrings( void );
+static const TQStringList &operationStrings( void );
 
 
-CGotoDialog::CGotoDialog( QWidget *parent, const char *name, bool modal )
+CGotoDialog::CGotoDialog( TQWidget *parent, const char *name, bool modal )
   :KDialogBase( Plain, i18n("Goto Offset"), Ok|Cancel, Ok, parent, name,
 		modal )
 {
-  QVBoxLayout *topLayout = new QVBoxLayout( plainPage(), 0, spacingHint() );
+  TQVBoxLayout *topLayout = new TQVBoxLayout( plainPage(), 0, spacingHint() );
   if( topLayout == 0 ) { return; }
 
-  QVBoxLayout *vbox = new QVBoxLayout();
+  TQVBoxLayout *vbox = new TQVBoxLayout();
   if( vbox == 0 ) { return; }
   topLayout->addLayout( vbox );
 
-  mComboBox = new QComboBox( true, plainPage() );
+  mComboBox = new TQComboBox( true, plainPage() );
   if( mComboBox == 0 ) { return; }
   mComboBox->setMaxCount( 10 );
-  mComboBox->setInsertionPolicy( QComboBox::AtTop );
+  mComboBox->setInsertionPolicy( TQComboBox::AtTop );
   mComboBox->setMinimumWidth( fontMetrics().maxWidth()*17 );
 
-  QLabel *label = new QLabel( mComboBox, i18n("O&ffset:"), plainPage() );
+  TQLabel *label = new TQLabel( mComboBox, i18n("O&ffset:"), plainPage() );
   if( label == 0 ) { return; }
 
   vbox->addWidget( label );
   vbox->addWidget( mComboBox );
 
-  QButtonGroup *group = new QButtonGroup( i18n("Options"), plainPage() );
+  TQButtonGroup *group = new TQButtonGroup( i18n("Options"), plainPage() );
   if( group == 0 ) { return; }
   topLayout->addWidget( group, 10 );
 
-  QGridLayout *gbox = new QGridLayout( group, 4, 2, spacingHint() );
+  TQGridLayout *gbox = new TQGridLayout( group, 4, 2, spacingHint() );
   if( gbox == 0 ) { return; }
   gbox->addRowSpacing( 0, fontMetrics().lineSpacing() );
-  mCheckFromCursor = new QCheckBox( i18n("&From cursor"), group );
+  mCheckFromCursor = new TQCheckBox( i18n("&From cursor"), group );
   gbox->addWidget( mCheckFromCursor, 1, 0 );
-  mCheckBackward = new QCheckBox( i18n("&Backwards"), group );
+  mCheckBackward = new TQCheckBox( i18n("&Backwards"), group );
   gbox->addWidget( mCheckBackward, 1, 1 );
-  mCheckVisible = new QCheckBox( i18n("&Stay visible"), group );
+  mCheckVisible = new TQCheckBox( i18n("&Stay visible"), group );
   gbox->addWidget( mCheckVisible, 2, 0 );
   gbox->setRowStretch( 3, 10 );
 
@@ -99,7 +99,7 @@ CGotoDialog::~CGotoDialog( void )
 
 
 
-void CGotoDialog::showEvent( QShowEvent *e )
+void CGotoDialog::showEvent( TQShowEvent *e )
 {
   KDialogBase::showEvent(e);
   mComboBox->setFocus();
@@ -118,7 +118,7 @@ void CGotoDialog::slotOk( void )
   bool success = stringToOffset( mComboBox->currentText(), offset );
   if( success == false )
   {
-    showEntryFailure( this, QString("") );
+    showEntryFailure( this, TQString("") );
     return;
   }
 
@@ -174,61 +174,61 @@ void CGotoDialog::slotOk( void )
 
 
 
-CFindDialog::CFindDialog( QWidget *parent, const char *name, bool modal )
+CFindDialog::CFindDialog( TQWidget *parent, const char *name, bool modal )
   :KDialogBase( Plain, i18n("Find"), Ok|Cancel, Ok, parent, name, modal )
 {
 
-  QVBoxLayout *topLayout = new QVBoxLayout( plainPage(), 0, spacingHint() );
+  TQVBoxLayout *topLayout = new TQVBoxLayout( plainPage(), 0, spacingHint() );
   if( topLayout == 0 ) { return; }
 
-  QVBoxLayout *vbox = new QVBoxLayout();
+  TQVBoxLayout *vbox = new TQVBoxLayout();
   if( vbox == 0 ) { return; }
   topLayout->addLayout( vbox );
 
-  mSelector = new QComboBox( false, plainPage() );
+  mSelector = new TQComboBox( false, plainPage() );
   if( mSelector == 0 ) { return; }
   mSelector->setMinimumWidth( fontMetrics().maxWidth()*17 );
   mSelector->insertStringList( formatStrings() );
-  connect( mSelector, SIGNAL(activated(int)), SLOT(selectorChanged(int)) );
+  connect( mSelector, TQT_SIGNAL(activated(int)), TQT_SLOT(selectorChanged(int)) );
 
-  QLabel *label = new QLabel( mSelector, i18n("Fo&rmat:"), plainPage() );
+  TQLabel *label = new TQLabel( mSelector, i18n("Fo&rmat:"), plainPage() );
   if( label == 0 ) { return; }
 
   vbox->addWidget( label );
   vbox->addWidget( mSelector );
 
-  mInput = new QLineEdit( plainPage() );
+  mInput = new TQLineEdit( plainPage() );
   if( mInput == 0 ) { return; }
   mInput->setMinimumWidth( fontMetrics().maxWidth()*17 );
-  connect( mInput, SIGNAL(textChanged(const QString&)),
-	   SLOT(inputChanged(const QString&)) );
+  connect( mInput, TQT_SIGNAL(textChanged(const TQString&)),
+	   TQT_SLOT(inputChanged(const TQString&)) );
   mFindValidator = new CHexValidator( this, CHexValidator::regularText );
   if( mFindValidator == 0 ) { return; }
   mInput->setValidator( mFindValidator );
 
-  label = new QLabel( mInput, i18n("F&ind:"), plainPage() );
+  label = new TQLabel( mInput, i18n("F&ind:"), plainPage() );
   if( label == 0 ) { return; }
 
   vbox->addWidget( label );
   vbox->addWidget( mInput );
 
-  QButtonGroup *group = new QButtonGroup( i18n("Options"), plainPage() );
+  TQButtonGroup *group = new TQButtonGroup( i18n("Options"), plainPage() );
   if( group == 0 ) { return; }
   topLayout->addWidget( group, 10 );
 
-  QGridLayout *gbox = new QGridLayout( group, 5, 2, spacingHint() );
+  TQGridLayout *gbox = new TQGridLayout( group, 5, 2, spacingHint() );
   if( gbox == 0 ) { return; }
   gbox->addRowSpacing( 0, fontMetrics().lineSpacing() );
 
-  mCheckFromCursor = new QCheckBox( i18n("&From cursor"), group );
+  mCheckFromCursor = new TQCheckBox( i18n("&From cursor"), group );
   gbox->addWidget( mCheckFromCursor, 1, 0 );
-  mCheckBackward = new QCheckBox( i18n("&Backwards"), group );
+  mCheckBackward = new TQCheckBox( i18n("&Backwards"), group );
   gbox->addWidget( mCheckBackward, 1, 1 );
-  mCheckInSelection = new QCheckBox( i18n("&In selection"), group );
+  mCheckInSelection = new TQCheckBox( i18n("&In selection"), group );
   gbox->addWidget( mCheckInSelection, 2, 0 );
-  mCheckUseNavigator = new QCheckBox( i18n("&Use navigator"),group);
+  mCheckUseNavigator = new TQCheckBox( i18n("&Use navigator"),group);
   gbox->addWidget( mCheckUseNavigator, 2, 1 );
-  mCheckIgnoreCase = new QCheckBox( i18n("Ignore c&ase"),group);
+  mCheckIgnoreCase = new TQCheckBox( i18n("Ignore c&ase"),group);
   gbox->addWidget( mCheckIgnoreCase, 3, 0 );
   gbox->setRowStretch( 4, 10 );
 
@@ -268,7 +268,7 @@ void CFindDialog::selectorChanged( int index )
 }
 
 
-void CFindDialog::inputChanged( const QString &text )
+void CFindDialog::inputChanged( const TQString &text )
 {
   mFindString[ mSelector->currentItem() ] = text;
   mFindValidator->convert( mFindData,
@@ -277,7 +277,7 @@ void CFindDialog::inputChanged( const QString &text )
 }
 
 
-void CFindDialog::showEvent( QShowEvent *e )
+void CFindDialog::showEvent( TQShowEvent *e )
 {
   KDialogBase::showEvent(e);
   mInput->setFocus();
@@ -294,7 +294,7 @@ void CFindDialog::slotOk( void )
 {
   if( isEmpty() == true )
   {
-    showEntryFailure( this, QString("") );
+    showEntryFailure( this, TQString("") );
     return;
   }
 
@@ -315,7 +315,7 @@ void CFindDialog::findAgain( EOperation operation )
 {
   if( isEmpty() == true )
   {
-    showEntryFailure( this, QString("") );
+    showEntryFailure( this, TQString("") );
     return;
   }
 
@@ -343,29 +343,29 @@ void CFindDialog::findAgain( EOperation operation )
 
 
 
-CFindNavigatorDialog::CFindNavigatorDialog( QWidget *parent, const char *name,
+CFindNavigatorDialog::CFindNavigatorDialog( TQWidget *parent, const char *name,
 					     bool modal )
   :KDialogBase( Plain, i18n("Find (Navigator)"), User3|User2|User1|Close,
 		User2, parent, name, modal, true, i18n("New &Key"),
 		i18n("&Next"), i18n("&Previous") )
 {
-  QString text;
-  QBoxLayout *topLayout = new QVBoxLayout( plainPage(), 0, spacingHint() );
+  TQString text;
+  TQBoxLayout *topLayout = new TQVBoxLayout( plainPage(), 0, spacingHint() );
   if( topLayout == 0 ) { return; }
 
   topLayout->addSpacing( spacingHint() ); // A little bit extra space
 
-  QHBoxLayout *hbox = new QHBoxLayout();
+  TQHBoxLayout *hbox = new TQHBoxLayout();
   if( hbox == 0 ) { return; }
   topLayout->addLayout( hbox );
 
   text = i18n("Searching for:");
-  QLabel *label = new QLabel( text, plainPage() );
+  TQLabel *label = new TQLabel( text, plainPage() );
   hbox->addWidget( label );
 
-  mKey = new QLineEdit( plainPage() );
+  mKey = new TQLineEdit( plainPage() );
   mKey->setMinimumWidth( fontMetrics().width("M") * 20 );
-  mKey->setFocusPolicy( QWidget::NoFocus );
+  mKey->setFocusPolicy( TQWidget::NoFocus );
   hbox->addWidget( mKey );
 
   topLayout->addSpacing( spacingHint() ); // A little bit extra space
@@ -391,7 +391,7 @@ void CFindNavigatorDialog::defineData( SSearchControl &sc )
 
   if( mSearchControl.keyType == 0 )
   {
-    QString str;
+    TQString str;
     for( uint i=0; i<mSearchControl.key.size(); i++ )
     {
       str += mSearchControl.key[i];
@@ -401,19 +401,19 @@ void CFindNavigatorDialog::defineData( SSearchControl &sc )
   }
   else if( mSearchControl.keyType == 1 )
   {
-    QString str("0x ");
+    TQString str("0x ");
     for( uint i=0; i<mSearchControl.key.size(); i++ )
     {
-      str += QString().sprintf("%02X ", (unsigned char)mSearchControl.key[i]);
+      str += TQString().sprintf("%02X ", (unsigned char)mSearchControl.key[i]);
     }
     mKey->setText( str );
   }
   else if( mSearchControl.keyType == 2 )
   {
-    QString str;
+    TQString str;
     for( uint i=0; i<mSearchControl.key.size(); i++ )
     {
-      str += QString().sprintf("%03o ", (unsigned char)mSearchControl.key[i]);
+      str += TQString().sprintf("%03o ", (unsigned char)mSearchControl.key[i]);
     }
     mKey->setText( str );
   }
@@ -422,7 +422,7 @@ void CFindNavigatorDialog::defineData( SSearchControl &sc )
     char buf[10];
     memset( buf, 0, sizeof( buf ) ); buf[8] = ' ';
 
-    QString str;
+    TQString str;
     for( uint i=0; i<mSearchControl.key.size(); i++ )
     {
       unsigned char data = (unsigned char)mSearchControl.key[i];
@@ -481,95 +481,95 @@ void CFindNavigatorDialog::done( int resultCode )
 
 
 
-CReplaceDialog::CReplaceDialog( QWidget *parent, const char *name, bool modal )
+CReplaceDialog::CReplaceDialog( TQWidget *parent, const char *name, bool modal )
   :KDialogBase( Plain, i18n("Find & Replace"), Ok|Cancel, Ok,
 		parent, name, modal )
 {
-  QString text;
-  QVBoxLayout *topLayout = new QVBoxLayout( plainPage(), 0, spacingHint() );
+  TQString text;
+  TQVBoxLayout *topLayout = new TQVBoxLayout( plainPage(), 0, spacingHint() );
   if( topLayout == 0 ) { return; }
 
-  QVBoxLayout *vbox = new QVBoxLayout();
+  TQVBoxLayout *vbox = new TQVBoxLayout();
   if( vbox == 0 ) { return; }
   topLayout->addLayout( vbox );
 
 
-  mFindSelector = new QComboBox( false, plainPage() );
+  mFindSelector = new TQComboBox( false, plainPage() );
   if( mFindSelector == 0 ) { return; }
   mFindSelector->setMinimumWidth( fontMetrics().maxWidth()*17 );
   mFindSelector->insertStringList( formatStrings() );
-  connect( mFindSelector, SIGNAL(activated(int)),
-	   SLOT(findSelectorChanged(int)) );
+  connect( mFindSelector, TQT_SIGNAL(activated(int)),
+	   TQT_SLOT(findSelectorChanged(int)) );
 
   text = i18n("Fo&rmat (find):");
-  QLabel *label = new QLabel( mFindSelector, text, plainPage() );
+  TQLabel *label = new TQLabel( mFindSelector, text, plainPage() );
   if( label == 0 ) { return; }
 
   vbox->addWidget( label );
   vbox->addWidget( mFindSelector );
 
-  mFindInput = new QLineEdit( plainPage() );
+  mFindInput = new TQLineEdit( plainPage() );
   if( mFindInput == 0 ) { return; }
   mFindInput->setMinimumWidth( fontMetrics().maxWidth()*17 );
   mFindValidator = new CHexValidator( this, CHexValidator::regularText );
   if( mFindValidator == 0 ) { return; }
   mFindInput->setValidator( mFindValidator );
-  connect( mFindInput, SIGNAL(textChanged(const QString&)),
-	   SLOT(findInputChanged(const QString&)) );
+  connect( mFindInput, TQT_SIGNAL(textChanged(const TQString&)),
+	   TQT_SLOT(findInputChanged(const TQString&)) );
 
-  label = new QLabel( mFindInput, i18n("F&ind:"), plainPage() );
+  label = new TQLabel( mFindInput, i18n("F&ind:"), plainPage() );
   if( label == 0 ) { return; }
 
   vbox->addWidget( label );
   vbox->addWidget( mFindInput  );
 
-  mReplaceSelector = new QComboBox( false, plainPage() );
+  mReplaceSelector = new TQComboBox( false, plainPage() );
   if( mReplaceSelector == 0 ) { return; }
   mReplaceSelector->setMinimumWidth( fontMetrics().maxWidth()*17 );
   mReplaceSelector->insertStringList( formatStrings() );
-  connect( mReplaceSelector, SIGNAL(activated(int)),
-	   SLOT(replaceSelectorChanged(int)) );
+  connect( mReplaceSelector, TQT_SIGNAL(activated(int)),
+	   TQT_SLOT(replaceSelectorChanged(int)) );
 
   text = i18n("For&mat (replace):");
-  label = new QLabel( mReplaceSelector, text, plainPage() );
+  label = new TQLabel( mReplaceSelector, text, plainPage() );
   if( label == 0 ) { return; }
   label->setFixedHeight( label->sizeHint().height() );
 
   vbox->addWidget( label );
   vbox->addWidget( mReplaceSelector );
 
-  mReplaceInput = new QLineEdit( plainPage() );
+  mReplaceInput = new TQLineEdit( plainPage() );
   if( mReplaceInput == 0 ) { return; }
   mReplaceInput->setMinimumWidth( fontMetrics().maxWidth()*17 );
   mReplaceValidator = new CHexValidator( this, CHexValidator::regularText );
   if( mReplaceValidator == 0 ) { return; }
   mReplaceInput->setValidator( mReplaceValidator );
-  connect( mReplaceInput, SIGNAL(textChanged(const QString&)),
-	   SLOT(replaceInputChanged(const QString&)) );
+  connect( mReplaceInput, TQT_SIGNAL(textChanged(const TQString&)),
+	   TQT_SLOT(replaceInputChanged(const TQString&)) );
 
-  label = new QLabel( mReplaceInput, i18n("Rep&lace:"), plainPage() );
+  label = new TQLabel( mReplaceInput, i18n("Rep&lace:"), plainPage() );
   if( label == 0 ) { return; }
   label->setFixedHeight( label->sizeHint().height() );
 
   vbox->addWidget( label );
   vbox->addWidget( mReplaceInput );
 
-  QButtonGroup *group = new QButtonGroup( i18n("Options"), plainPage() );
+  TQButtonGroup *group = new TQButtonGroup( i18n("Options"), plainPage() );
   if( group == 0 ) { return; }
   topLayout->addWidget( group, 10 );
 
-  QGridLayout *gbox = new QGridLayout( group, 5, 2, spacingHint() );
+  TQGridLayout *gbox = new TQGridLayout( group, 5, 2, spacingHint() );
   if( gbox == 0 ) { return; }
   gbox->addRowSpacing( 0, fontMetrics().lineSpacing() );
-  mCheckFromCursor = new QCheckBox( i18n("&From cursor"), group );
+  mCheckFromCursor = new TQCheckBox( i18n("&From cursor"), group );
   gbox->addWidget( mCheckFromCursor, 1, 0 );
-  mCheckBackward = new QCheckBox( i18n("&Backwards"), group );
+  mCheckBackward = new TQCheckBox( i18n("&Backwards"), group );
   gbox->addWidget( mCheckBackward, 1, 1 );
-  mCheckInSelection = new QCheckBox( i18n("&In selection"), group );
+  mCheckInSelection = new TQCheckBox( i18n("&In selection"), group );
   gbox->addWidget( mCheckInSelection, 2, 0 );
-  mCheckPrompt = new QCheckBox( i18n("&Prompt"), group );
+  mCheckPrompt = new TQCheckBox( i18n("&Prompt"), group );
   gbox->addWidget( mCheckPrompt, 2, 1 );
-  mCheckIgnoreCase = new QCheckBox( i18n("Ignore c&ase"), group );
+  mCheckIgnoreCase = new TQCheckBox( i18n("Ignore c&ase"), group );
   gbox->addWidget( mCheckIgnoreCase, 3, 0 );
   gbox->setRowStretch( 4, 10 );
 
@@ -613,7 +613,7 @@ void CReplaceDialog::findSelectorChanged( int index )
 }
 
 
-void CReplaceDialog::findInputChanged( const QString &text )
+void CReplaceDialog::findInputChanged( const TQString &text )
 {
   mFindString[ mFindSelector->currentItem() ] = text;
   mFindValidator->convert( mFindData,
@@ -629,7 +629,7 @@ void CReplaceDialog::replaceSelectorChanged( int index )
 }
 
 
-void CReplaceDialog::replaceInputChanged( const QString &text )
+void CReplaceDialog::replaceInputChanged( const TQString &text )
 {
   mReplaceString[ mReplaceSelector->currentItem() ] = text;
   mReplaceValidator->convert( mReplaceData,
@@ -637,7 +637,7 @@ void CReplaceDialog::replaceInputChanged( const QString &text )
 }
 
 
-void CReplaceDialog::showEvent( QShowEvent *e )
+void CReplaceDialog::showEvent( TQShowEvent *e )
 {
   KDialogBase::showEvent(e);
   mFindInput->setFocus();
@@ -648,7 +648,7 @@ void CReplaceDialog::slotOk( void )
 {
   if( mFindData.isEmpty() == true )
   {
-    showEntryFailure( this, QString("") );
+    showEntryFailure( this, TQString("") );
     return;
   }
 
@@ -676,20 +676,20 @@ void CReplaceDialog::slotOk( void )
 
 
 
-CReplacePromptDialog::CReplacePromptDialog( QWidget *parent, const char *name,
+CReplacePromptDialog::CReplacePromptDialog( TQWidget *parent, const char *name,
 					     bool modal )
   :KDialogBase( Plain, i18n("Find & Replace"), User3|User2|User1|Close,
 		User2, parent, name, modal, true, i18n("Replace &All"),
 		i18n("Do Not Replace"), i18n("Replace"))
 {
-  QString text;
-  QBoxLayout *topLayout = new QVBoxLayout( plainPage(), 0, spacingHint() );
+  TQString text;
+  TQBoxLayout *topLayout = new TQVBoxLayout( plainPage(), 0, spacingHint() );
   if( topLayout == 0 ) { return; }
 
   topLayout->addSpacing( spacingHint() ); // A little bit extra space
 
   text = i18n("Replace marked data at cursor position?");
-  QLabel* label = new QLabel( text, plainPage() );
+  TQLabel* label = new TQLabel( text, plainPage() );
   topLayout->addWidget( label );
 
   topLayout->addSpacing( spacingHint() ); // A little bit extra space
@@ -757,39 +757,39 @@ void CReplacePromptDialog::done( int returnCode )
 
 
 
-CFilterDialog::CFilterDialog( QWidget *parent, const char *name, bool modal )
+CFilterDialog::CFilterDialog( TQWidget *parent, const char *name, bool modal )
   :KDialogBase( Plain, i18n("Binary Filter"), Ok|Cancel, Ok,
 		parent, name, modal )
 {
-  QString text;
-  QVBoxLayout *topLayout = new QVBoxLayout( plainPage(), 0, spacingHint() );
+  TQString text;
+  TQVBoxLayout *topLayout = new TQVBoxLayout( plainPage(), 0, spacingHint() );
   if( topLayout == 0 ) { return; }
 
-  QVBoxLayout *vbox = new QVBoxLayout();
+  TQVBoxLayout *vbox = new TQVBoxLayout();
   if( vbox == 0 ) { return; }
   topLayout->addLayout( vbox );
 
 
-  mOperationSelector = new QComboBox( false, plainPage() );
+  mOperationSelector = new TQComboBox( false, plainPage() );
   if( mOperationSelector == 0 ) { return; }
   mOperationSelector->setMinimumWidth( fontMetrics().maxWidth()*17 );
   mOperationSelector->insertStringList( operationStrings() );
-  connect( mOperationSelector, SIGNAL(activated(int)),
-	   SLOT(operationSelectorChanged(int)) );
+  connect( mOperationSelector, TQT_SIGNAL(activated(int)),
+	   TQT_SLOT(operationSelectorChanged(int)) );
 
   text = i18n("O&peration:");
-  QLabel *label = new QLabel( mOperationSelector, text, plainPage() );
+  TQLabel *label = new TQLabel( mOperationSelector, text, plainPage() );
   if( label == 0 ) { return; }
 
   vbox->addWidget( label );
   vbox->addWidget( mOperationSelector );
 
   KSeparator *separator = new KSeparator( plainPage() );
-  separator->setOrientation( QFrame::HLine );
+  separator->setOrientation( TQFrame::HLine );
   vbox->addWidget( separator );
 
 
-  mWidgetStack = new QWidgetStack( plainPage(), "pagestack" );
+  mWidgetStack = new TQWidgetStack( plainPage(), "pagestack" );
   if( mWidgetStack == 0 ) { return; }
   vbox->addWidget( mWidgetStack );
 
@@ -800,20 +800,20 @@ CFilterDialog::CFilterDialog( QWidget *parent, const char *name, bool modal )
   mWidgetStack->raiseWidget( (int)OperandPage );
 
 
-  QButtonGroup *group = new QButtonGroup( i18n("Options"), plainPage() );
+  TQButtonGroup *group = new TQButtonGroup( i18n("Options"), plainPage() );
   if( group == 0 ) { return; }
   topLayout->addWidget( group, 10 );
 
-  QGridLayout *gbox = new QGridLayout( group, 4, 2, spacingHint() );
+  TQGridLayout *gbox = new TQGridLayout( group, 4, 2, spacingHint() );
   if( gbox == 0 ) { return; }
   gbox->addRowSpacing( 0, fontMetrics().lineSpacing() );
-  mCheckFromCursor = new QCheckBox( i18n("&From cursor"), group );
+  mCheckFromCursor = new TQCheckBox( i18n("&From cursor"), group );
   gbox->addWidget( mCheckFromCursor, 1, 0 );
-  mCheckBackward = new QCheckBox( i18n("&Backwards"), group );
+  mCheckBackward = new TQCheckBox( i18n("&Backwards"), group );
   gbox->addWidget( mCheckBackward, 1, 1 );
-  mCheckInSelection = new QCheckBox( i18n("&In selection"), group );
+  mCheckInSelection = new TQCheckBox( i18n("&In selection"), group );
   gbox->addWidget( mCheckInSelection, 2, 0 );
-  mCheckVisible = new QCheckBox( i18n("&Stay visible"), group );
+  mCheckVisible = new TQCheckBox( i18n("&Stay visible"), group );
   gbox->addWidget( mCheckVisible, 2, 1 );
   gbox->setRowStretch( 3, 10 );
 }
@@ -827,7 +827,7 @@ CFilterDialog::~CFilterDialog( void )
 
 void CFilterDialog::makeEmptyLayout( void )
 {
-  QFrame *page = new QFrame( plainPage() );
+  TQFrame *page = new TQFrame( plainPage() );
   if( page == 0 ) { return; }
   mWidgetStack->addWidget( page, EmptyPage );
 }
@@ -835,40 +835,40 @@ void CFilterDialog::makeEmptyLayout( void )
 
 void CFilterDialog::makeOperandLayout( void )
 {
-  QString text;
+  TQString text;
 
-  QFrame *page = new QFrame( plainPage() );
+  TQFrame *page = new TQFrame( plainPage() );
   if( page == 0 ) { return; }
   mWidgetStack->addWidget( page, OperandPage );
 
-  QVBoxLayout *vbox = new QVBoxLayout( page, 0, spacingHint() );
+  TQVBoxLayout *vbox = new TQVBoxLayout( page, 0, spacingHint() );
   if( vbox == 0 ) { return; }
 
-  mOperandSelector = new QComboBox( false, page );
+  mOperandSelector = new TQComboBox( false, page );
   if( mOperandSelector == 0 ) { return; }
   mOperandSelector->setFixedHeight( mOperandSelector->sizeHint().height());
   mOperandSelector->setMinimumWidth( fontMetrics().width("M")*20 );
   mOperandSelector->insertStringList( formatStrings() );
-  connect( mOperandSelector, SIGNAL(activated(int)),
-	   SLOT(operandSelectorChanged(int)) );
+  connect( mOperandSelector, TQT_SIGNAL(activated(int)),
+	   TQT_SLOT(operandSelectorChanged(int)) );
 
   text = i18n("Fo&rmat (operand):");
-  mOperandFormatLabel = new QLabel( mOperandSelector, text, page );
+  mOperandFormatLabel = new TQLabel( mOperandSelector, text, page );
   if( mOperandFormatLabel == 0 ) { return; }
 
   vbox->addWidget( mOperandFormatLabel );
   vbox->addWidget( mOperandSelector );
 
-  mOperandInput = new QLineEdit( page );
+  mOperandInput = new TQLineEdit( page );
   if( mOperandInput == 0 ) { return; }
   mOperandInput->setMinimumWidth( fontMetrics().width("M") * 20 );
   mOperandValidator = new CHexValidator( this, CHexValidator::regularText );
   if( mOperandValidator == 0 ) { return; }
   mOperandInput->setValidator( mOperandValidator );
-  connect( mOperandInput, SIGNAL(textChanged(const QString&)),
-	   SLOT(operandInputChanged(const QString&)) );
+  connect( mOperandInput, TQT_SIGNAL(textChanged(const TQString&)),
+	   TQT_SLOT(operandInputChanged(const TQString&)) );
 
-  mOperandInputLabel = new QLabel( mOperandInput, i18n("O&perand:"), page );
+  mOperandInputLabel = new TQLabel( mOperandInput, i18n("O&perand:"), page );
   if( mOperandInputLabel == 0 ) { return; }
 
   vbox->addWidget( mOperandInputLabel );
@@ -879,17 +879,17 @@ void CFilterDialog::makeOperandLayout( void )
 
 void CFilterDialog::makeBitSwapLayout( void )
 {
-  QString text;
+  TQString text;
 
-  QFrame *page = new QFrame( plainPage() );
+  TQFrame *page = new TQFrame( plainPage() );
   if( page == 0 ) { return; }
   mWidgetStack->addWidget( page, BitSwapPage );
 
-  QVBoxLayout *vbox = new QVBoxLayout( page, 0, spacingHint() );
+  TQVBoxLayout *vbox = new TQVBoxLayout( page, 0, spacingHint() );
   if( vbox == 0 ) { return; }
 
   text = i18n("Swap rule");
-  QLabel *label = new QLabel( text, page );
+  TQLabel *label = new TQLabel( text, page );
   if( label == 0 ) { return; }
   label->setFixedHeight( label->sizeHint().height() );
   vbox->addWidget( label );
@@ -897,13 +897,13 @@ void CFilterDialog::makeBitSwapLayout( void )
   mByteWidget = new CByteWidget( page );
   vbox->addWidget( mByteWidget );
 
-  QHBoxLayout *hbox = new QHBoxLayout( 0 );
+  TQHBoxLayout *hbox = new TQHBoxLayout( 0 );
   vbox->addLayout( hbox );
 
   text = i18n("&Reset");
-  QPushButton *resetButton = new QPushButton( text, page );
+  TQPushButton *resetButton = new TQPushButton( text, page );
   resetButton->setFixedHeight( resetButton->sizeHint().height() );
-  connect( resetButton, SIGNAL(clicked()), mByteWidget, SLOT(reset()) );
+  connect( resetButton, TQT_SIGNAL(clicked()), mByteWidget, TQT_SLOT(reset()) );
 
   hbox->addWidget( resetButton );
   hbox->addStretch( 10 );
@@ -912,34 +912,34 @@ void CFilterDialog::makeBitSwapLayout( void )
 
 void CFilterDialog::makeRotateLayout( void )
 {
-  QString text;
+  TQString text;
 
-  QFrame *page = new QFrame( plainPage() );
+  TQFrame *page = new TQFrame( plainPage() );
   if( page == 0 ) { return; }
   mWidgetStack->addWidget( page, RotatePage );
 
-  QVBoxLayout *vbox = new QVBoxLayout( page, 0, spacingHint() );
+  TQVBoxLayout *vbox = new TQVBoxLayout( page, 0, spacingHint() );
   if( vbox == 0 ) { return; }
 
-  mGroupSpin = new QSpinBox( page );
+  mGroupSpin = new TQSpinBox( page );
   if( mGroupSpin == 0 ) { return; }
   mGroupSpin->setMinimumWidth( fontMetrics().width("M")*20 );
   mGroupSpin->setRange(1, INT_MAX );
 
   text = i18n("&Group size [bytes]");
-  QLabel *label = new QLabel( mGroupSpin, text, page );
+  TQLabel *label = new TQLabel( mGroupSpin, text, page );
   if( label == 0 ) { return; }
 
   vbox->addWidget( label );
   vbox->addWidget( mGroupSpin );
 
-  mBitSpin = new QSpinBox( page );
+  mBitSpin = new TQSpinBox( page );
   if( mBitSpin == 0 ) { return; }
   mBitSpin->setMinimumWidth( fontMetrics().width("M")*20 );
   mBitSpin->setRange(INT_MIN, INT_MAX);
 
   text = i18n("S&hift size [bits]");
-  label = new QLabel( mBitSpin, text, page );
+  label = new TQLabel( mBitSpin, text, page );
   if( label == 0 ) { return; }
 
   vbox->addWidget( label );
@@ -948,7 +948,7 @@ void CFilterDialog::makeRotateLayout( void )
 
 
 
-void CFilterDialog::showEvent( QShowEvent *e )
+void CFilterDialog::showEvent( TQShowEvent *e )
 {
   KDialogBase::showEvent(e);
   mOperandInput->setFocus();
@@ -966,7 +966,7 @@ void CFilterDialog::slotOk( void )
     case SFilterControl::OperandXorData:
       if( mOperandData.isEmpty() == true )
       {
-	showEntryFailure( this, QString("") );
+	showEntryFailure( this, TQString("") );
 	return;
       }
       fc.operand = mOperandData;
@@ -982,7 +982,7 @@ void CFilterDialog::slotOk( void )
       fc.rotate[1] = mBitSpin->value();
       if( fc.rotate[1] == 0 )
       {
-	QString msg = i18n("Shift size is zero.");
+	TQString msg = i18n("Shift size is zero.");
 	showEntryFailure( this, msg );
 	return;
       }
@@ -991,7 +991,7 @@ void CFilterDialog::slotOk( void )
     case SFilterControl::SwapBits:
       if( mByteWidget->flag( fc.operand ) == false )
       {
-	QString msg = i18n("Swap rule does not define any swapping.");
+	TQString msg = i18n("Swap rule does not define any swapping.");
 	showEntryFailure( this, msg );
 	return;
       }
@@ -1031,7 +1031,7 @@ void CFilterDialog::operandSelectorChanged( int index )
 }
 
 
-void CFilterDialog::operandInputChanged( const QString &text )
+void CFilterDialog::operandInputChanged( const TQString &text )
 {
   mOperandString[ mOperandSelector->currentItem() ] = text;
   mOperandValidator->convert( mOperandData,
@@ -1066,84 +1066,84 @@ void CFilterDialog::operationSelectorChanged( int index )
 
 
 
-CInsertDialog::CInsertDialog( QWidget *parent, const char *name, bool modal )
+CInsertDialog::CInsertDialog( TQWidget *parent, const char *name, bool modal )
   :KDialogBase( Plain, i18n("Insert Pattern"), Ok|Cancel, Ok,
 		parent, name, modal )
 {
   setButtonOKText(i18n("&Insert"));
 
-  QString text;
-  QVBoxLayout *topLayout = new QVBoxLayout( plainPage(), 0, spacingHint() );
+  TQString text;
+  TQVBoxLayout *topLayout = new TQVBoxLayout( plainPage(), 0, spacingHint() );
   if( topLayout == 0 ) { return; }
 
-  QVBoxLayout *vbox = new QVBoxLayout();
+  TQVBoxLayout *vbox = new TQVBoxLayout();
   if( vbox == 0 ) { return; }
   topLayout->addLayout( vbox );
 
-  mSizeBox = new QSpinBox( plainPage() );
+  mSizeBox = new TQSpinBox( plainPage() );
   if( mSizeBox == 0 ) { return; }
   mSizeBox->setMinimumWidth( fontMetrics().maxWidth()*17 );
   mSizeBox->setRange( 1, INT_MAX );
   mSizeBox->setValue( 1 );
 
-  QLabel *label = new QLabel( mSizeBox, i18n("&Size:"), plainPage() );
+  TQLabel *label = new TQLabel( mSizeBox, i18n("&Size:"), plainPage() );
   if( label == 0 ) { return; }
 
   vbox->addWidget( label );
   vbox->addWidget( mSizeBox );
 
-  mPatternSelector = new QComboBox( false, plainPage() );
+  mPatternSelector = new TQComboBox( false, plainPage() );
   if( mPatternSelector == 0 ) { return; }
   mPatternSelector->setMinimumWidth( fontMetrics().maxWidth()*17 );
   mPatternSelector->insertStringList( formatStrings() );
-  connect( mPatternSelector, SIGNAL(activated(int)),
-	   SLOT(patternSelectorChanged(int)) );
+  connect( mPatternSelector, TQT_SIGNAL(activated(int)),
+	   TQT_SLOT(patternSelectorChanged(int)) );
 
   text = i18n("Fo&rmat (pattern):");
-  label = new QLabel( mPatternSelector, text, plainPage() );
+  label = new TQLabel( mPatternSelector, text, plainPage() );
   if( label == 0 ) { return; }
 
   vbox->addWidget( label );
   vbox->addWidget( mPatternSelector );
 
-  mPatternInput = new QLineEdit( plainPage() );
+  mPatternInput = new TQLineEdit( plainPage() );
   if( mPatternInput == 0 ) { return; }
   mPatternInput->setMinimumWidth( fontMetrics().maxWidth()*17 );
   mPatternValidator = new CHexValidator( this, CHexValidator::regularText );
   if( mPatternValidator == 0 ) { return; }
   mPatternInput->setValidator( mPatternValidator );
-  connect( mPatternInput, SIGNAL(textChanged(const QString&)),
-	   SLOT(patternInputChanged(const QString&)) );
+  connect( mPatternInput, TQT_SIGNAL(textChanged(const TQString&)),
+	   TQT_SLOT(patternInputChanged(const TQString&)) );
 
-  label = new QLabel( mPatternInput, i18n("&Pattern:"), plainPage() );
+  label = new TQLabel( mPatternInput, i18n("&Pattern:"), plainPage() );
   if( label == 0 ) { return; }
 
   vbox->addWidget( label );
   vbox->addWidget( mPatternInput );
 
-  mOffsetInput = new QLineEdit( plainPage() );
+  mOffsetInput = new TQLineEdit( plainPage() );
   mOffsetInput->setMinimumWidth( fontMetrics().maxWidth()*17 );
 
-  mOffsetLabel = new QLabel( mOffsetInput, i18n("&Offset:"), plainPage() );
+  mOffsetLabel = new TQLabel( mOffsetInput, i18n("&Offset:"), plainPage() );
   if( mOffsetLabel == 0 ) { return; }
 
   vbox->addWidget( mOffsetLabel );
   vbox->addWidget( mOffsetInput );
 
-  QButtonGroup *group = new QButtonGroup( i18n("Options"), plainPage() );
+  TQButtonGroup *group = new TQButtonGroup( i18n("Options"), plainPage() );
   if( group == 0 ) { return; }
   topLayout->addWidget( group, 10 );
 
 
-  QGridLayout *gbox = new QGridLayout( group, 4, 2, spacingHint() );
+  TQGridLayout *gbox = new TQGridLayout( group, 4, 2, spacingHint() );
   if( gbox == 0 ) { return; }
   gbox->addRowSpacing( 0, fontMetrics().lineSpacing() );
 
-  mCheckPattern = new QCheckBox( i18n("R&epeat pattern"), group );
+  mCheckPattern = new TQCheckBox( i18n("R&epeat pattern"), group );
   gbox->addWidget( mCheckPattern, 1, 0 );
-  mCheckOnCursor = new QCheckBox( i18n("&Insert on cursor position"), group );
+  mCheckOnCursor = new TQCheckBox( i18n("&Insert on cursor position"), group );
   gbox->addWidget( mCheckOnCursor, 2, 0 );
-  connect( mCheckOnCursor, SIGNAL(clicked()), SLOT(cursorCheck()) );
+  connect( mCheckOnCursor, TQT_SIGNAL(clicked()), TQT_SLOT(cursorCheck()) );
   gbox->setRowStretch( 3, 10 );
 
   KConfig &config = *kapp->config();
@@ -1168,7 +1168,7 @@ CInsertDialog::~CInsertDialog( void )
 }
 
 
-void CInsertDialog::showEvent( QShowEvent *e )
+void CInsertDialog::showEvent( TQShowEvent *e )
 {
   KDialogBase::showEvent(e);
   mPatternInput->setFocus();
@@ -1182,7 +1182,7 @@ void CInsertDialog::patternSelectorChanged( int index )
 }
 
 
-void CInsertDialog::patternInputChanged( const QString &text )
+void CInsertDialog::patternInputChanged( const TQString &text )
 {
   mPatternString[ mPatternSelector->currentItem() ] = text;
   mPatternValidator->convert( mPatternData,
@@ -1194,7 +1194,7 @@ void CInsertDialog::slotOk( void )
 {
   if( mPatternData.isEmpty() == true )
   {
-    showEntryFailure( this, QString("") );
+    showEntryFailure( this, TQString("") );
     return;
   }
 
@@ -1209,7 +1209,7 @@ void CInsertDialog::slotOk( void )
     bool success = stringToOffset( mOffsetInput->text(), id.offset );
     if( success == false )
     {
-      showEntryFailure( this, QString("") );
+      showEntryFailure( this, TQString("") );
       return;
     }
   }
@@ -1229,15 +1229,15 @@ void CInsertDialog::cursorCheck( void )
 
 
 
-void centerDialog( QWidget *widget, QWidget *centerParent )
+void centerDialog( TQWidget *widget, TQWidget *centerParent )
 {
   if( centerParent == 0 || widget == 0 )
   {
     return;
   }
 
-  QPoint point = centerParent->mapToGlobal( QPoint(0,0) );
-  QRect pos    = centerParent->geometry();
+  TQPoint point = centerParent->mapToGlobal( TQPoint(0,0) );
+  TQRect pos    = centerParent->geometry();
 
   widget->setGeometry( point.x() + pos.width()/2  - widget->width()/2,
 		       point.y() + pos.height()/2 - widget->height()/2,
@@ -1245,15 +1245,15 @@ void centerDialog( QWidget *widget, QWidget *centerParent )
 }
 
 
-void centerDialogBottom( QWidget *widget, QWidget *centerParent )
+void centerDialogBottom( TQWidget *widget, TQWidget *centerParent )
 {
   if( centerParent == 0 || widget == 0 )
   {
     return;
   }
 
-  QPoint point = centerParent->mapToGlobal( QPoint(0,0) );
-  QRect pos    = centerParent->geometry();
+  TQPoint point = centerParent->mapToGlobal( TQPoint(0,0) );
+  TQRect pos    = centerParent->geometry();
 
   widget->setGeometry( point.x() + pos.width()/2  - widget->width()/2,
 		       point.y() + pos.height() - widget->height(),
@@ -1261,7 +1261,7 @@ void centerDialogBottom( QWidget *widget, QWidget *centerParent )
 }
 
 
-void comboMatchText( QComboBox *combo, const QString &text )
+void comboMatchText( TQComboBox *combo, const TQString &text )
 {
   for( int i=0; i < combo->count(); i++ )
   {
@@ -1278,9 +1278,9 @@ void comboMatchText( QComboBox *combo, const QString &text )
 
 
 
-void showEntryFailure( QWidget *parent, const QString &msg )
+void showEntryFailure( TQWidget *parent, const TQString &msg )
 {
-  QString message;
+  TQString message;
   message += i18n("Your request can not be processed.");
   message += "\n";
   if( msg.isNull() == true || msg.isEmpty() == true )
@@ -1295,34 +1295,34 @@ void showEntryFailure( QWidget *parent, const QString &msg )
 }
 
 
-bool verifyFileDestnation( QWidget *parent, const QString &title,
-			   const QString &path )
+bool verifyFileDestnation( TQWidget *parent, const TQString &title,
+			   const TQString &path )
 {
   if( path.isEmpty() == true )
   {
-    QString msg = i18n("You must specify a destination file.");
+    TQString msg = i18n("You must specify a destination file.");
     KMessageBox::sorry( parent, msg, title );
     return( false );
   }
 
-  QFileInfo info( path );
+  TQFileInfo info( path );
   if( info.exists() == true )
   {
     if( info.isDir() == true )
     {
-      QString msg = i18n("You have specified an existing folder.");
+      TQString msg = i18n("You have specified an existing folder.");
       KMessageBox::sorry( parent, msg, title );
       return( false );
     }
 
     if( info.isWritable() == false )
     {
-      QString msg = i18n("You do not have write permission to this file.");
+      TQString msg = i18n("You do not have write permission to this file.");
       KMessageBox::sorry( parent, msg, title );
       return( false );
     }
 
-    QString msg = i18n( ""
+    TQString msg = i18n( ""
       "You have specified an existing file.\n"
       "Overwrite current file?" );
     int reply = KMessageBox::warningContinueCancel( parent, msg, title, i18n("Overwrite") );
@@ -1337,7 +1337,7 @@ bool verifyFileDestnation( QWidget *parent, const QString &title,
 
 
 
-bool stringToOffset( const QString & text, uint &offset )
+bool stringToOffset( const TQString & text, uint &offset )
 {
   if( text.isEmpty() )
   {
@@ -1393,9 +1393,9 @@ bool stringToOffset( const QString & text, uint &offset )
 }
 
 
-static const QStringList &formatStrings( void )
+static const TQStringList &formatStrings( void )
 {
-  static QStringList list;
+  static TQStringList list;
   if( list.isEmpty() == true )
   {
     list.append( i18n( "Hexadecimal" ) );
@@ -1408,9 +1408,9 @@ static const QStringList &formatStrings( void )
 }
 
 
-static const QStringList &operationStrings( void )
+static const TQStringList &operationStrings( void )
 {
-  static QStringList list;
+  static TQStringList list;
   if( list.isEmpty() == true )
   {
     list.append( i18n( "operand AND data" ) );

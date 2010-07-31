@@ -26,7 +26,7 @@
 #define __BRIGHTNESSCONFIG_H__
 
 #include <kcmodule.h>
-#include <qstring.h>
+#include <tqstring.h>
 
 class QWidget;
 class QSpinBox;
@@ -43,7 +43,7 @@ class ProfileConfig : public KCModule
 {
   Q_OBJECT
 public:
-  ProfileConfig( QWidget *parent=0, const char* name=0);
+  ProfileConfig( TQWidget *parent=0, const char* name=0);
   ~ProfileConfig( );     
 
   void save( void );
@@ -51,7 +51,7 @@ public:
   void load(bool useDefaults);
   void defaults();
 
-  virtual QString quickHelp() const;
+  virtual TQString quickHelp() const;
 
 private slots:
 
@@ -68,11 +68,11 @@ private slots:
 private:
 	KConfig *config;
 
-	QCheckBox *pon, *performance_on, *throttle_on;
-	QSlider *son;
+	TQCheckBox *pon, *performance_on, *throttle_on;
+	TQSlider *son;
 	KComboBox *performance_val_on, *throttle_val_on;
-	QCheckBox *poff, *performance_off, *throttle_off;
-	QSlider *soff;
+	TQCheckBox *poff, *performance_off, *throttle_off;
+	TQSlider *soff;
 	KComboBox *performance_val_off, *throttle_val_off;
 
 

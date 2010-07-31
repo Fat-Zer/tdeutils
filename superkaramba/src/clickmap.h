@@ -27,17 +27,17 @@ public:
     ClickMap(karamba* k, int x, int y, int w, int h);
     ~ClickMap();
 
-    virtual bool click( QMouseEvent* );
-    void mUpdate( QPainter* );
-    void setValue( QString );
+    virtual bool click( TQMouseEvent* );
+    void mUpdate( TQPainter* );
+    void setValue( TQString );
     void setValue( long );
     void setTextProps( TextField * );
 
 private:
     TextField text;
 
-    QStringList links;
-    QStringList displays;
+    TQStringList links;
+    TQStringList displays;
 };
 
 #endif

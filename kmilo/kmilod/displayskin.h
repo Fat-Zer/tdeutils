@@ -25,8 +25,8 @@
 
 #include <kdemacros.h>
 
-#include <qstring.h>
-#include <qpixmap.h>
+#include <tqstring.h>
+#include <tqpixmap.h>
 
 namespace KMilo {
 
@@ -37,9 +37,9 @@ class KDE_EXPORT DisplaySkin {
 
 		virtual void clear() = 0;
 
-		virtual void displayText(const QString& text,const QPixmap& customPixmap=QPixmap()) = 0;
-		virtual void displayProgress(const QString& text,
-						int percent, const QPixmap& customPixmap=QPixmap()) = 0;
+		virtual void displayText(const TQString& text,const TQPixmap& customPixmap=TQPixmap()) = 0;
+		virtual void displayProgress(const TQString& text,
+						int percent, const TQPixmap& customPixmap=TQPixmap()) = 0;
 };
 
 }

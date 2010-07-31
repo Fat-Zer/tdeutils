@@ -26,8 +26,8 @@ class KSimSensorsIface : virtual public DCOPObject
 {
   K_DCOP
   k_dcop:
-    virtual QString sensorValue(const QString &sensorType,
-      const QString &sensorName) = 0;
+    virtual TQString sensorValue(const TQString &sensorType,
+      const TQString &sensorName) = 0;
 };
 
 #endif // KSIMSENSORSIFACE_H

@@ -38,9 +38,9 @@ void Modes::loadFromConfig(KConfig &theConfig)
 		theDefaults[i.key()] = theConfig.readEntry("Default" + i.key());
 }
 
-void Modes::generateNulls(const QStringList &theRemotes)
+void Modes::generateNulls(const TQStringList &theRemotes)
 {
-	for(QStringList::const_iterator i = theRemotes.begin(); i != theRemotes.end(); ++i)
+	for(TQStringList::const_iterator i = theRemotes.begin(); i != theRemotes.end(); ++i)
 	{	if(!contains(*i) || !operator[](*i).contains("")) operator[](*i)[""] = Mode(*i, "");
 		if(!theDefaults.contains(*i)) theDefaults[*i].isEmpty();
 	}
@@ -55,9 +55,9 @@ bool Modes::isDefault(const Mode &mode) const
 	return false;
 }
 
-const Mode Modes::getDefault(const QString &remote) const
+const Mode Modes::getDefault(const TQString &remote) const
 {
-//	if(theDefaults[remote] == QString())
+//	if(theDefaults[remote] == TQString())
 //		return Mode(remote, "");
 	if(contains(remote))
 		if(operator[](remote).contains(theDefaults[remote]))
@@ -71,7 +71,7 @@ void Modes::purgeAllModes(KConfig &theConfig)
 {
 	int numModes = theConfig.readNumEntry("Modes");
 	for(int i = 0; i < numModes; i++)
-	{	QString Prefix = "Mode" + QString().setNum(i);
+	{	TQString Prefix = "Mode" + TQString().setNum(i);
 		theConfig.deleteEntry(Prefix + "Name");
 		theConfig.deleteEntry(Prefix + "Remote");
 	}
@@ -82,26 +82,26 @@ void Modes::saveToConfig(KConfig &theConfig)
 	int index = 0;
 	purgeAllModes(theConfig);
 	for(iterator i = begin(); i != end(); ++i)
-		for(QMap<QString, Mode>::iterator j = (*i).begin(); j != (*i).end(); ++j,index++)
+		for(TQMap<TQString, Mode>::iterator j = (*i).begin(); j != (*i).end(); ++j,index++)
 			(*j).saveToConfig(theConfig, index);
 	theConfig.writeEntry("Modes", index);
 
 	for(iterator i = begin(); i != end(); ++i)
-		if(theDefaults[i.key()] == QString())
+		if(theDefaults[i.key()] == TQString())
 			theConfig.writeEntry("Default" + i.key(), "");
 		else
 			theConfig.writeEntry("Default" + i.key(), theDefaults[i.key()]);
 }
 
-const Mode &Modes::getMode(const QString &remote, const QString &mode) const
+const Mode &Modes::getMode(const TQString &remote, const TQString &mode) const
 {
 	return operator[](remote)[mode];
 }
 
-ModeList Modes::getModes(const QString &remote) const
+ModeList Modes::getModes(const TQString &remote) const
 {
 	ModeList ret;
-	for(QMap<QString, Mode>::const_iterator i = operator[](remote).begin(); i != operator[](remote).end(); ++i)
+	for(TQMap<TQString, Mode>::const_iterator i = operator[](remote).begin(); i != operator[](remote).end(); ++i)
 		ret += *i;
 	return ret;
 }
@@ -117,7 +117,7 @@ void Modes::add(const Mode &mode)
 	operator[](mode.remote())[mode.name()] = mode;
 }
 
-void Modes::rename(Mode &mode, const QString name)
+void Modes::rename(Mode &mode, const TQString name)
 {
 	bool was = isDefault(mode);
 	erase(mode);

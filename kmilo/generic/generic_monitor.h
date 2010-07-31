@@ -36,7 +36,7 @@
 
 namespace KMilo {
 
-// now the key data (from kkeyserver_x11.h and $QTDIR/include/qnamespace.h)
+// now the key data (from kkeyserver_x11.h and $QTDIR/include/tqnamespace.h)
 struct ShortcutInfo
 {
 	const char* name;
@@ -50,7 +50,7 @@ class GenericMonitor : public Monitor
 	Q_OBJECT
 
 public:
-	GenericMonitor(QObject *parent, const char *name, const QStringList&);
+	GenericMonitor(TQObject *parent, const char *name, const TQStringList&);
 	virtual ~GenericMonitor();
 
 	virtual bool init();
@@ -82,7 +82,7 @@ private:
 	bool retrieveMute();
 	bool retrieveVolume();
 	void displayVolume();
-	void launch(QString configKey, QString defaultApplication);
+	void launch(TQString configKey, TQString defaultApplication);
 
 	KGlobalAccel *ga;
 	KConfig* config;

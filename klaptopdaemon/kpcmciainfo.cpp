@@ -21,9 +21,9 @@
 
 
 
-#include <qtabwidget.h>
-#include <qlayout.h>
-#include <qtimer.h>
+#include <tqtabwidget.h>
+#include <tqlayout.h>
+#include <tqtimer.h>
 #include <kstatusbar.h>
 #include <klocale.h>
 #include <kpushbutton.h>
@@ -36,14 +36,14 @@
 #include "kpcmciainfo.h"
 
 
-KPCMCIAInfo::KPCMCIAInfo(KPCMCIA *pcmcia, QWidget *parent, const char *name)
+KPCMCIAInfo::KPCMCIAInfo(KPCMCIA *pcmcia, TQWidget *parent, const char *name)
   : KDialog(parent, name, false), _pcmcia(pcmcia) {
 
   setMinimumSize(300,400);
 
-  _mainGrid = new QGridLayout(this, 9, 5);
+  _mainGrid = new TQGridLayout(this, 9, 5);
 
-  _mainTab = new QTabWidget(this);
+  _mainTab = new TQTabWidget(this);
   _mainGrid->addMultiCellWidget(_mainTab, 0, 6, 0, 4);
   _mainGrid->setRowStretch(0, 1);
   _mainGrid->setRowStretch(1, 1);
@@ -60,7 +60,7 @@ KPCMCIAInfo::KPCMCIAInfo(KPCMCIA *pcmcia, QWidget *parent, const char *name)
   _mainTab->resize(KDialog::sizeHint());
   resize(KDialog::sizeHint());
 
-  connect(_pcmcia, SIGNAL(cardUpdated(int)), this, SLOT(updateCard(int)));
+  connect(_pcmcia, TQT_SIGNAL(cardUpdated(int)), this, TQT_SLOT(updateCard(int)));
 
   _sb = new KStatusBar(this);
   _sb->insertItem(i18n("Ready."), 0, 1, true);
@@ -68,12 +68,12 @@ KPCMCIAInfo::KPCMCIAInfo(KPCMCIA *pcmcia, QWidget *parent, const char *name)
   _mainGrid->addMultiCellWidget(_sb, 8, 8, 0, 4);
   _mainGrid->setRowStretch(8, 0);
 
-  _updateButton = new QPushButton(i18n("&Update"), this);
+  _updateButton = new TQPushButton(i18n("&Update"), this);
   _mainGrid->addWidget(_updateButton, 7, 3);
-  connect(_updateButton, SIGNAL(pressed()), this, SLOT(update()));
+  connect(_updateButton, TQT_SIGNAL(pressed()), this, TQT_SLOT(update()));
   _closeButton = new KPushButton(KStdGuiItem::close(), this);
   _mainGrid->addWidget(_closeButton, 7, 4);
-  connect(_closeButton, SIGNAL(pressed()), this, SLOT(slotClose()));
+  connect(_closeButton, TQT_SIGNAL(pressed()), this, TQT_SLOT(slotClose()));
   _mainGrid->setRowStretch(7, 0);
 
   show();
@@ -96,15 +96,15 @@ void KPCMCIAInfo::slotResetStatus() {
 }
 
 
-void KPCMCIAInfo::statusNotice(const QString& text, int life) {
+void KPCMCIAInfo::statusNotice(const TQString& text, int life) {
    _sb->changeItem(text, 0);
    if (life > 0)
-      QTimer::singleShot(life, this, SLOT(slotResetStatus()));
+      TQTimer::singleShot(life, this, TQT_SLOT(slotResetStatus()));
 }
 
 
 
-void KPCMCIAInfo::slotTabSetStatus(const QString& text) {
+void KPCMCIAInfo::slotTabSetStatus(const TQString& text) {
    statusNotice(text);
 }
 
@@ -131,10 +131,10 @@ void KPCMCIAInfo::prepareCards() {
   }
 
   for (int i = 0; i < _pcmcia->getCardCount(); i++) {
-     QString tabname = i18n("Card Slot %1");
+     TQString tabname = i18n("Card Slot %1");
      KPCMCIAInfoPage *tp = new KPCMCIAInfoPage(_pcmcia->getCard(i), _mainTab);
-     connect(this, SIGNAL(updateNow()), tp, SLOT(update()));
-     connect(tp, SIGNAL(setStatusBar(const QString&)), this, SLOT(slotTabSetStatus(const QString&)));
+     connect(this, TQT_SIGNAL(updateNow()), tp, TQT_SLOT(update()));
+     connect(tp, TQT_SIGNAL(setStatusBar(const TQString&)), this, TQT_SLOT(slotTabSetStatus(const TQString&)));
      tp->resize(_mainTab->sizeHint());
      _mainTab->addTab(tp, tabname.arg(i+1));
      _pages.insert(i, tp);
@@ -149,42 +149,42 @@ void KPCMCIAInfo::prepareCards() {
 ///////////////////////////////////////////////////////////////////////////
 
 
-KPCMCIAInfoPage::KPCMCIAInfoPage(KPCMCIACard *card, QWidget *parent, const char *name)
-  : QFrame(parent, name), _card(card) {
-  _mainGrid = new QGridLayout(this, 10, 10);
+KPCMCIAInfoPage::KPCMCIAInfoPage(KPCMCIACard *card, TQWidget *parent, const char *name)
+  : TQFrame(parent, name), _card(card) {
+  _mainGrid = new TQGridLayout(this, 10, 10);
   if (!_card) {
       // display an error
   } else {
-      _card_name = new QLabel(this);
+      _card_name = new TQLabel(this);
       _mainGrid->addMultiCellWidget(_card_name, 0, 0, 0, 5);
-      _card_type = new QLabel(this);
+      _card_type = new TQLabel(this);
       _mainGrid->addMultiCellWidget(_card_type, 0, 0, 6, 9);
-      _card_driver = new QLabel(this);
+      _card_driver = new TQLabel(this);
       _mainGrid->addMultiCellWidget(_card_driver, 1, 1, 0, 4);
-      _card_irq = new QLabel(this);
+      _card_irq = new TQLabel(this);
       _mainGrid->addMultiCellWidget(_card_irq, 2, 2, 0, 3);
-      _card_io = new QLabel(this);
+      _card_io = new TQLabel(this);
       _mainGrid->addMultiCellWidget(_card_io, 3, 3, 0, 6);
-      _card_dev = new QLabel(this);
+      _card_dev = new TQLabel(this);
       _mainGrid->addMultiCellWidget(_card_dev, 4, 4, 0, 4);
-      _card_vcc = new QLabel(this);
+      _card_vcc = new TQLabel(this);
       _mainGrid->addMultiCellWidget(_card_vcc, 5, 5, 0, 2);
-      _card_vpp = new QLabel(this);
+      _card_vpp = new TQLabel(this);
       _mainGrid->addMultiCellWidget(_card_vpp, 5, 5, 5, 9);
-      _card_bus = new QLabel(this);
+      _card_bus = new TQLabel(this);
       _mainGrid->addMultiCellWidget(_card_bus, 6, 6, 0, 4);
-      _card_cfgbase = new QLabel(this);
+      _card_cfgbase = new TQLabel(this);
       _mainGrid->addMultiCellWidget(_card_cfgbase, 6, 6, 5, 9);
 
-      _card_ej_ins = new QPushButton(i18n("&Eject"), this);
-      _card_sus_res = new QPushButton(i18n("&Suspend"), this);
-      _card_reset = new QPushButton(i18n("&Reset"), this);
+      _card_ej_ins = new TQPushButton(i18n("&Eject"), this);
+      _card_sus_res = new TQPushButton(i18n("&Suspend"), this);
+      _card_reset = new TQPushButton(i18n("&Reset"), this);
       _mainGrid->addWidget(_card_ej_ins, 9, 5);
       _mainGrid->addWidget(_card_sus_res, 9, 6);
       _mainGrid->addWidget(_card_reset, 9, 7);
-      connect(_card_reset, SIGNAL(pressed()), this, SLOT(slotResetCard()));
-      connect(_card_sus_res, SIGNAL(pressed()), this, SLOT(slotSuspendResume()));
-      connect(_card_ej_ins, SIGNAL(pressed()), this, SLOT(slotInsertEject()));
+      connect(_card_reset, TQT_SIGNAL(pressed()), this, TQT_SLOT(slotResetCard()));
+      connect(_card_sus_res, TQT_SIGNAL(pressed()), this, TQT_SLOT(slotSuspendResume()));
+      connect(_card_ej_ins, TQT_SIGNAL(pressed()), this, TQT_SLOT(slotInsertEject()));
 
       update();
   }
@@ -231,7 +231,7 @@ void KPCMCIAInfoPage::slotSuspendResume() {
 
 void KPCMCIAInfoPage::update() {
    if (_card) {
-      QString tmp;
+      TQString tmp;
       _card_name->setText(_card->name());
       _card_name->resize(_card_name->sizeHint());
       tmp = i18n("Card type: %1 ");
@@ -241,7 +241,7 @@ void KPCMCIAInfoPage::update() {
       _card_driver->setText(tmp.arg(_card->driver()));
       _card_driver->resize(_card_driver->sizeHint());
       tmp = i18n("IRQ: %1%2");
-      QString tmp2;
+      TQString tmp2;
       switch (_card->intType()) {
       case 1:
         tmp2 = i18n(" (used for memory)");

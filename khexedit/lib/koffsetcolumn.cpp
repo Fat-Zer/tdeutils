@@ -15,7 +15,7 @@
  ***************************************************************************/
 
 // qt specific
-#include "qpainter.h"
+#include "tqpainter.h"
 // lib specific
 #include "kcolumnsview.h"
 #include "koffsetcolumn.h"
@@ -40,36 +40,36 @@ KOffsetColumn::~KOffsetColumn()
 }
 
 
-void KOffsetColumn::paintLine( QPainter *P, int Line )
+void KOffsetColumn::paintLine( TQPainter *P, int Line )
 {
-  const QColor &ButtonColor = View->colorGroup().button();
-  P->fillRect( 0,0,width(),LineHeight, QBrush(ButtonColor,Qt::SolidPattern) );
+  const TQColor &ButtonColor = View->colorGroup().button();
+  P->fillRect( 0,0,width(),LineHeight, TQBrush(ButtonColor,Qt::SolidPattern) );
 
   printFunction()( CodedOffset,FirstLineOffset+Delta*Line );
-  P->drawText( 0, DigitBaseLine, QString().append(CodedOffset) );
+  P->drawText( 0, DigitBaseLine, TQString().append(CodedOffset) );
 }
 
 
-void KOffsetColumn::paintFirstLine( QPainter *P, KPixelXs, int FirstLine )
+void KOffsetColumn::paintFirstLine( TQPainter *P, KPixelXs, int FirstLine )
 {
   PaintLine = FirstLine;
   paintLine( P, PaintLine++ );
 }
 
 
-void KOffsetColumn::paintNextLine( QPainter *P )
+void KOffsetColumn::paintNextLine( TQPainter *P )
 {
   paintLine( P, PaintLine++ );
 }
 
 
 
-void KOffsetColumn::paintEmptyColumn( QPainter *P, KPixelXs Xs, KPixelYs Ys )
+void KOffsetColumn::paintEmptyColumn( TQPainter *P, KPixelXs Xs, KPixelYs Ys )
 {
   Xs.restrictTo( XSpan );
 
-  const QColor &ButtonColor = View->colorGroup().button();
-  P->fillRect( Xs.start(), Ys.start(), Xs.width(), Ys.width(), QBrush(ButtonColor,Qt::SolidPattern) );
+  const TQColor &ButtonColor = View->colorGroup().button();
+  P->fillRect( Xs.start(), Ys.start(), Xs.width(), Ys.width(), TQBrush(ButtonColor,Qt::SolidPattern) );
 }
 
 void KOffsetColumn::setFormat( KOffsetFormat::KFormat F )

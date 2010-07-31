@@ -7,7 +7,7 @@
  *   the Free Software Foundation; either version 2 of the License, or     *
  *   (at your option) any later version.                                   *
  ***************************************************************************/
-#include <qglobal.h>
+#include <tqglobal.h>
 
 #if defined __FreeBSD__
 #include <sys/time.h>
@@ -65,16 +65,16 @@ void UptimeSensor::update()
                 secs = uptime % 60;
         }
 #else
-    QFile file("/proc/uptime");
-    QString line;
+    TQFile file("/proc/uptime");
+    TQString line;
     if ( file.open(IO_ReadOnly | IO_Translate) )
     {
         // file opened successfully
-        QTextStream t( &file );        // use a text stream
+        TQTextStream t( &file );        // use a text stream
         line = t.readLine();         // line of text excluding '\n'
         file.close();
 
-        QRegExp rx( "^\\d+" );
+        TQRegExp rx( "^\\d+" );
         rx.search(line);
         int uptime = rx.cap(0).toInt();
         int days = uptime / 86400;
@@ -86,11 +86,11 @@ void UptimeSensor::update()
         int secs = uptime;
 #endif
 
-        QString format;
+        TQString format;
         SensorParams *sp;
         Meter *meter;
 
-        QObjectListIt it( *objList );
+        TQObjectListIt it( *objList );
         while (it != 0)
         {
             sp = (SensorParams*)(*it);
@@ -101,13 +101,13 @@ void UptimeSensor::update()
             {
                 format = "%dd %h:%M";
             }
-            format.replace( QRegExp("%d"), QString::number(days));
-            format.replace( QRegExp("%H"), QString::number(hours).rightJustify(2,'0'));
-            format.replace( QRegExp("%M"), QString::number(mins).rightJustify(2,'0'));
-            format.replace( QRegExp("%S"), QString::number(secs).rightJustify(2,'0'));
-            format.replace( QRegExp("%h"), QString::number(hours));
-            format.replace( QRegExp("%m"), QString::number(mins));
-            format.replace( QRegExp("%s"), QString::number(secs));
+            format.replace( TQRegExp("%d"), TQString::number(days));
+            format.replace( TQRegExp("%H"), TQString::number(hours).rightJustify(2,'0'));
+            format.replace( TQRegExp("%M"), TQString::number(mins).rightJustify(2,'0'));
+            format.replace( TQRegExp("%S"), TQString::number(secs).rightJustify(2,'0'));
+            format.replace( TQRegExp("%h"), TQString::number(hours));
+            format.replace( TQRegExp("%m"), TQString::number(mins));
+            format.replace( TQRegExp("%s"), TQString::number(secs));
 
             meter->setValue(format);
             ++it;

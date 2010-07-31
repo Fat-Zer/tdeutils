@@ -28,7 +28,7 @@
 #endif
 
 #include <Python.h>
-#include <qobject.h>
+#include <tqobject.h>
 #include "karamba.h"
 #include "meter.h"
 #include "meter_python.h"
@@ -45,7 +45,7 @@ PyObject* py_createInputBox(PyObject *, PyObject *args)
     return NULL;
 
   Input *tmp = new Input((karamba*)widget, (int)x, (int)y, (int)w, (int)h);
-  tmp->setValue(PyString2QString(text));
+  tmp->setValue(PyString2TQString(text));
   tmp->setTextProps(((karamba*)widget)->getDefaultTextProps());
   ((karamba*)widget)->meterList->append(tmp);
   tmp->show();
@@ -153,7 +153,7 @@ PyObject* py_setInputBoxFontColor(PyObject *, PyObject *args)
   if (!checkKarambaAndMeter(widget, inputBox, "Input"))
     return NULL;
 
-  ((Input*)inputBox)->setFontColor(QColor(r, g, b));
+  ((Input*)inputBox)->setFontColor(TQColor(r, g, b));
   return Py_BuildValue((char*)"l", 1);
 }
 
@@ -166,7 +166,7 @@ PyObject* py_getInputBoxFontColor(PyObject *, PyObject *args)
   if (!checkKarambaAndMeter(widget, inputBox, "Input"))
     return NULL;
 
-  QColor color = ((Input*)inputBox)->getFontColor();
+  TQColor color = ((Input*)inputBox)->getFontColor();
   return Py_BuildValue((char*)"(i,i,i)", color.red(), color.green(), color.blue());
 }
 
@@ -180,7 +180,7 @@ PyObject* py_setInputBoxSelectionColor(PyObject *, PyObject *args)
   if (!checkKarambaAndMeter(widget, inputBox, "Input"))
     return NULL;
 
-  ((Input*)inputBox)->setSelectionColor(QColor(r, g, b));
+  ((Input*)inputBox)->setSelectionColor(TQColor(r, g, b));
   return Py_BuildValue((char*)"l", 1);
 }
 
@@ -193,7 +193,7 @@ PyObject* py_getInputBoxSelectionColor(PyObject *, PyObject *args)
   if (!checkKarambaAndMeter(widget, inputBox, "Input"))
     return NULL;
 
-  QColor color = ((Input*)inputBox)->getSelectionColor();
+  TQColor color = ((Input*)inputBox)->getSelectionColor();
   return Py_BuildValue((char*)"(i,i,i)", color.red(), color.green(), color.blue());
 }
 
@@ -207,7 +207,7 @@ PyObject* py_setInputBoxBGColor(PyObject *, PyObject *args)
   if (!checkKarambaAndMeter(widget, inputBox, "Input"))
     return NULL;
 
-  ((Input*)inputBox)->setBGColor(QColor(r, g, b));
+  ((Input*)inputBox)->setBGColor(TQColor(r, g, b));
   return Py_BuildValue((char*)"l", 1);
 }
 
@@ -220,7 +220,7 @@ if (!PyArg_ParseTuple(args, (char*)"ll:getInputBoxBackgroundColor", &widget, &in
   if (!checkKarambaAndMeter(widget, inputBox, "Input"))
     return NULL;
 
-  QColor color = ((Input*)inputBox)->getBGColor();
+  TQColor color = ((Input*)inputBox)->getBGColor();
   return Py_BuildValue((char*)"(i,i,i)", color.red(), color.green(), color.blue());
 }
 
@@ -234,7 +234,7 @@ if (!PyArg_ParseTuple(args, (char*)"lllll:changeInputBoxFrameColor", &widget, &i
   if (!checkKarambaAndMeter(widget, inputBox, "Input"))
     return NULL;
 
-  ((Input*)inputBox)->setColor(QColor(r, g, b));
+  ((Input*)inputBox)->setColor(TQColor(r, g, b));
   return Py_BuildValue((char*)"l", 1);
 }
 
@@ -247,7 +247,7 @@ if (!PyArg_ParseTuple(args, (char*)"ll:getInputBoxFrameColor", &widget, &inputBo
   if (!checkKarambaAndMeter(widget, inputBox, "Input"))
     return NULL;
 
-  QColor color = ((Input*)inputBox)->getColor();
+  TQColor color = ((Input*)inputBox)->getColor();
   return Py_BuildValue((char*)"(i,i,i)", color.red(), color.green(), color.blue());
 }
 
@@ -261,7 +261,7 @@ if (!PyArg_ParseTuple(args, (char*)"lllll:changeInputBoxSelectedTextColor", &wid
   if (!checkKarambaAndMeter(widget, inputBox, "Input"))
     return NULL;
 
-  ((Input*)inputBox)->setSelectedTextColor(QColor(r, g, b));
+  ((Input*)inputBox)->setSelectedTextColor(TQColor(r, g, b));
   return Py_BuildValue((char*)"l", 1);
 }
 
@@ -274,7 +274,7 @@ if (!PyArg_ParseTuple(args, (char*)"ll:getInputBoxSelectedTextColor", &widget, &
   if (!checkKarambaAndMeter(widget, inputBox, "Input"))
     return NULL;
 
-  QColor color = ((Input*)inputBox)->getSelectedTextColor();
+  TQColor color = ((Input*)inputBox)->getSelectedTextColor();
   return Py_BuildValue((char*)"(i,i,i)", color.red(), color.green(), color.blue());
 }
 
@@ -346,9 +346,9 @@ PyObject* py_getInputFocus(PyObject *, PyObject *args)
   // FocusWidget() returns the currently focused line edit,
   // but unfortunately we need an 'Input' object here.
   //
-  QWidget *obj = ((karamba*)widget)->focusWidget();
+  TQWidget *obj = ((karamba*)widget)->focusWidget();
   
-  if(obj->isA("QLineEdit")) // SKLineEdit is no Q_Object, but QLineEdit can only be here as a SKLineEdit
+  if(obj->isA("TQLineEdit")) // SKLineEdit is no Q_Object, but TQLineEdit can only be here as a SKLineEdit
     return Py_BuildValue((char*)"l", ((SKLineEdit*)obj)->getInput());
   
   return Py_BuildValue((char*)"l", 0);

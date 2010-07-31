@@ -19,8 +19,8 @@
 #define KHE_KBIGBUFFER_H
 
 // qt specific
-#include <qvaluevector.h>
-#include <qfile.h>
+#include <tqvaluevector.h>
+#include <tqfile.h>
 // lib specific
 #include "kdatabuffer.h"
 #include "khexedit_export.h"
@@ -35,7 +35,7 @@ namespace KHE {
 
 class KHEXEDIT_EXPORT KBigBuffer : public KDataBuffer
 {
-    typedef QValueVector<char *> KPageOfChar;
+    typedef TQValueVector<char *> KPageOfChar;
 
   public:
     /** default is only 50*4k = 200k memory image */
@@ -63,12 +63,12 @@ class KHEXEDIT_EXPORT KBigBuffer : public KDataBuffer
     virtual int find( const char*KeyData, int Length, KSection Section ) const;
     virtual int rfind( const char*, int Length, int Pos = -1 ) const;
 
-/*     virtual int find( const QString &expr, bool cs, bool wo, bool forward = true, int *index = 0 ); */
+/*     virtual int find( const TQString &expr, bool cs, bool wo, bool forward = true, int *index = 0 ); */
 
   public:
     void setReadOnly( bool RO = true );
     bool isOpen() const;
-    bool open (const QString& filename );
+    bool open (const TQString& filename );
     bool close();
 
   protected:
@@ -78,7 +78,7 @@ class KHEXEDIT_EXPORT KBigBuffer : public KDataBuffer
 
   protected:
     /** */
-    mutable QFile File;
+    mutable TQFile File;
     /**  */
     bool ReadOnly:1;
     bool IsOpen:1;

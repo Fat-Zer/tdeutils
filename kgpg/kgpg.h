@@ -28,9 +28,9 @@
 #include <kurl.h>
 #include <kshortcut.h>
 
-#include <qlabel.h>
-#include <qstringlist.h>
-#include <qclipboard.h>
+#include <tqlabel.h>
+#include <tqstringlist.h>
+#include <tqclipboard.h>
 
 
 class QPopupMenu;
@@ -46,7 +46,7 @@ class MyView : public QLabel
         Q_OBJECT
 
 public:
-        MyView( QWidget *parent = 0, const char *name = 0);
+        MyView( TQWidget *parent = 0, const char *name = 0);
         ~MyView();
 
         KURL droppedUrl;
@@ -56,9 +56,9 @@ public:
 	QClipboard::Mode clipboardMode;
 
 private:
-        QPopupMenu *droppopup,*udroppopup;
+        TQPopupMenu *droppopup,*udroppopup;
         KAboutData   *_aboutData;
-        QStringList customDecrypt;
+        TQStringList customDecrypt;
         KgpgWizard *wiz;
         KPassivePopup *pop;
         KTempFile *kgpgFolderExtract;
@@ -66,7 +66,7 @@ private:
 	popupPublic *dialogue;
 
 public slots:
-	void busyMessage(QString mssge,bool reset=false);
+	void busyMessage(TQString mssge,bool reset=false);
         void  encryptDroppedFile();
         void  decryptDroppedFile();
         void  slotVerifyFile();
@@ -77,9 +77,9 @@ public slots:
         void  clipEncrypt();
         void  shredDroppedFile();
         void encryptDroppedFolder();
-        void startFolderEncode(QStringList selec,QStringList encryptOptions,bool ,bool symetric);
+        void startFolderEncode(TQStringList selec,TQStringList encryptOptions,bool ,bool symetric);
         void  slotFolderFinished(KURL);
-        void  slotFolderFinishedError(QString errmsge);
+        void  slotFolderFinishedError(TQString errmsge);
 	void  encryptFiles(KURL::List urls);
 	void installShred();
 
@@ -89,33 +89,33 @@ private slots:
 	void  slotWizardChange();
         void  slotSaveOptionsPath();
         void  slotGenKey();
-        void importSignature(QString ID);
-        void slotSetClip(QString newtxt);
+        void importSignature(TQString ID);
+        void slotSetClip(TQString newtxt);
 	void slotPassiveClip();
-        void encryptClipboard(QStringList selec,QStringList encryptOptions,bool,bool symmetric);
+        void encryptClipboard(TQStringList selec,TQStringList encryptOptions,bool,bool symmetric);
         void help();
         void about();
         void firstRun();
         void readOptions();
         void  droppedfile (KURL::List);
-        void  droppedtext (QString inputText, bool allowEncrypt=true);
+        void  droppedtext (TQString inputText, bool allowEncrypt=true);
         void  unArchive();
         void slotSetCompression(int cp);
 	void  decryptNextFile();
 
 protected:
-        virtual void dragEnterEvent(QDragEnterEvent *);
-        virtual void  dropEvent (QDropEvent*);
+        virtual void dragEnterEvent(TQDragEnterEvent *);
+        virtual void  dropEvent (TQDropEvent*);
 
 protected slots:
 
 
 signals:
-	void setFont(QFont);
+	void setFont(TQFont);
         void readAgain2();
 	void createNewKey();
-	void updateDefault(QString);
-	void importedKeys(QStringList);
+	void updateDefault(TQString);
+	void importedKeys(TQStringList);
 };
 
 class kgpgapplet : public KSystemTray//KUniqueApplication
@@ -123,7 +123,7 @@ class kgpgapplet : public KSystemTray//KUniqueApplication
         Q_OBJECT
 
 public:
-        kgpgapplet( QWidget *parent = 0, const char *name = 0);
+        kgpgapplet( TQWidget *parent = 0, const char *name = 0);
         /** destructor */
         ~kgpgapplet();
         MyView *w;
@@ -161,7 +161,7 @@ private:
 
 private slots:
         void slotHandleQuit();
-	void wizardOver(QString defaultKeyId);
+	void wizardOver(TQString defaultKeyId);
 };
 
 #endif // KGPGAPPLET_H

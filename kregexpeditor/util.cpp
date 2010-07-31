@@ -19,22 +19,22 @@
 #include "util.h"
 #include <kiconloader.h>
 #include <kstandarddirs.h>
-QPixmap Util::getKRegExpEditorIcon( const QString& name )
+TQPixmap Util::getKRegExpEditorIcon( const TQString& name )
 {
 #ifdef QT_ONLY
-    QPixmap pix;
+    TQPixmap pix;
     pix.convertFromImage( qembed_findImage(name) );
     return pix;
 #else
-  return KGlobal::iconLoader()->loadIcon(locate("data", QString::fromLatin1("kregexpeditor/pics/") +name ),
+  return KGlobal::iconLoader()->loadIcon(locate("data", TQString::fromLatin1("kregexpeditor/pics/") +name ),
                                          KIcon::Toolbar );
 #endif
 }
 
-QPixmap Util::getSystemIcon( const QString& name )
+TQPixmap Util::getSystemIcon( const TQString& name )
 {
 #ifdef QT_ONLY
-    QPixmap pix;
+    TQPixmap pix;
     pix.convertFromImage( qembed_findImage( name ) );
     return pix;
 #else
@@ -44,12 +44,12 @@ QPixmap Util::getSystemIcon( const QString& name )
 
 }
 
-QIconSet Util::getSystemIconSet( const QString& name )
+TQIconSet Util::getSystemIconSet( const TQString& name )
 {
 #ifdef QT_ONLY
-    QPixmap pix;
+    TQPixmap pix;
     pix.convertFromImage( qembed_findImage( name ) );
-    return QIconSet( pix );
+    return TQIconSet( pix );
 #else
   KIconLoader loader;
   return loader.loadIconSet( name, KIcon::Toolbar);

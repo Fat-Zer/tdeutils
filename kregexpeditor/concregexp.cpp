@@ -55,20 +55,20 @@ RegExp* ConcRegExp::lastRegExp()
         return list.at( list.count()-1);
 }
 
-QDomNode ConcRegExp::toXml( QDomDocument* doc ) const
+TQDomNode ConcRegExp::toXml( TQDomDocument* doc ) const
 {
-    QDomElement top = doc->createElement( QString::fromLocal8Bit("Concatenation") );
+    TQDomElement top = doc->createElement( TQString::fromLocal8Bit("Concatenation") );
     for ( RegExpListIt it(list); *it; ++it ) {
         top.appendChild( (*it)->toXml( doc ) );
     }
     return top;
 }
 
-bool ConcRegExp::load( QDomElement top, const QString& version )
+bool ConcRegExp::load( TQDomElement top, const TQString& version )
 {
-    Q_ASSERT( top.tagName() == QString::fromLocal8Bit( "Concatenation" ) );
+    Q_ASSERT( top.tagName() == TQString::fromLocal8Bit( "Concatenation" ) );
 
-    for ( QDomNode child = top.firstChild(); !child.isNull(); child = child.nextSibling() ) {
+    for ( TQDomNode child = top.firstChild(); !child.isNull(); child = child.nextSibling() ) {
         if ( ! child.isElement() )
             continue; // User might have added a comment.
 
@@ -84,7 +84,7 @@ bool ConcRegExp::operator==( const RegExp& other ) const
 {
     // TODO: Merge with AltnRegExp::operator==
     if ( list.count() == 1 )
-        return ( other == *(const_cast< QPtrList<RegExp>& >(list).at(0)) );
+        return ( other == *(const_cast< TQPtrList<RegExp>& >(list).at(0)) );
 
     if ( other.type() != type() )
         return false;

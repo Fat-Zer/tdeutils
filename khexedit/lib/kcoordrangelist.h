@@ -19,13 +19,13 @@
 #define KHE_KCOORDRANGELIST_H
 
 // qt specific
-#include <qvaluelist.h>
+#include <tqvaluelist.h>
 // lib specific
 #include "kcoordrange.h"
 
 namespace KHE {
 
-typedef QValueList<KCoordRange> KCoordRangeBasicList;
+typedef TQValueList<KCoordRange> KCoordRangeBasicList;
 /**
 @author Friedrich W. H.  Kossebau
 */

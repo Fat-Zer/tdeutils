@@ -33,7 +33,7 @@ wake_laptop_daemon()
         if (!dclient || (!dclient->isAttached() && !dclient->attach())) 
 		return;
 
-	QByteArray data;
-	QDataStream arg( data, IO_WriteOnly );
+	TQByteArray data;
+	TQDataStream arg( data, IO_WriteOnly );
 	(void) dclient->send( "kded", "klaptopdaemon", "restart()", data );
 }

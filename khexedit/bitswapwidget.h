@@ -21,9 +21,9 @@
 #ifndef _BITSWAP_WIDGET_H_
 #define _BITSWAP_WIDGET_H_
 
-#include <qlabel.h>
-#include <qlayout.h> 
-#include <qstring.h> 
+#include <tqlabel.h>
+#include <tqlayout.h> 
+#include <tqstring.h> 
 
 
 class CDigitLabel : public QLabel
@@ -31,24 +31,24 @@ class CDigitLabel : public QLabel
   Q_OBJECT
 
   public:
-    CDigitLabel( QWidget *parent, uint digit = 0, const char *name=0 );
+    CDigitLabel( TQWidget *parent, uint digit = 0, const char *name=0 );
     ~CDigitLabel( void );
 
-    virtual QSize sizeHint() const;
+    virtual TQSize sizeHint() const;
     inline uint value( void );
 
   signals:
-    void stepCell( const QObject *obj, bool next );
-    void valueChanged( const QObject *obj, uint newVal, bool after );
+    void stepCell( const TQObject *obj, bool next );
+    void valueChanged( const TQObject *obj, uint newVal, bool after );
 
   public slots:
     void setValue( uint digit, bool notify );
     void setDotPosition( uint dotPosition );
 
   protected:  
-    void paletteChange( const QPalette & );
-    void drawContents( QPainter * );
-    virtual void keyPressEvent( QKeyEvent *e );
+    void paletteChange( const TQPalette & );
+    void drawContents( TQPainter * );
+    virtual void keyPressEvent( TQKeyEvent *e );
 
   private:
     void initialize( void );
@@ -72,23 +72,23 @@ class CByteWidget : public QWidget
   Q_OBJECT
 
   public:
-    CByteWidget( QWidget *parent, const char *name=0 );
+    CByteWidget( TQWidget *parent, const char *name=0 );
     ~CByteWidget( void );
 
-    bool flag( QByteArray &buf );
+    bool flag( TQByteArray &buf );
 
   public slots:
     void reset( void );
 
   private slots:
-    void stepCell( const QObject *obj, bool next );
-    void valueChanged( const QObject *obj, uint newVal, bool after );
+    void stepCell( const TQObject *obj, bool next );
+    void valueChanged( const TQObject *obj, uint newVal, bool after );
     
   private:
-    void setBuddy( const QObject *obj );
+    void setBuddy( const TQObject *obj );
 
   private:
-    QHBoxLayout *mHBox;
+    TQHBoxLayout *mHBox;
     CDigitLabel *mDigit[8];
 };
 

@@ -21,28 +21,28 @@
 
 #include "kmultiformlistbox-multivisible.h"
 #include "ccp.h"
-#include <qobjectlist.h>
-#include <qpopupmenu.h>
+#include <tqobjectlist.h>
+#include <tqpopupmenu.h>
 #ifdef QT_ONLY
   #include "compat.h"
 #else
   #include <klocale.h>
 #endif
 
-CCP::CCP(KMultiFormListBoxMultiVisible *ee_, KMultiFormListBoxEntry *eee_) : QObject() {
+CCP::CCP(KMultiFormListBoxMultiVisible *ee_, KMultiFormListBoxEntry *eee_) : TQObject() {
   ee = ee_;
   eee = eee_;
   install(eee);
 }
 
-void CCP::install(QObject *elm)
+void CCP::install(TQObject *elm)
 {
   elm->installEventFilter(this);
-  const QObjectList *children = elm->children();
+  const TQObjectList *children = elm->children();
   if (children) {
-    QObjectListIt it = QObjectListIt(*children);
+    TQObjectListIt it = TQObjectListIt(*children);
 
-    while (QObject *child=it.current()) {
+    while (TQObject *child=it.current()) {
       if (child->inherits("KMultiFormListBoxMultiVisible")) {
         // Stop if the widget is an KMultiFormListBox, as this widget has its own cut/copy/paste
       }
@@ -55,17 +55,17 @@ void CCP::install(QObject *elm)
 }
 
 // This function post the Cut/Copy/Paste menu
-bool CCP::eventFilter(QObject *, QEvent *event)
+bool CCP::eventFilter(TQObject *, TQEvent *event)
 {
-  if (event->type() != QEvent::MouseButtonPress ||
-      ((QMouseEvent *) event)->button() != RightButton ||
-      ((QMouseEvent *) event)->state() != QEvent::ControlButton) {
+  if (event->type() != TQEvent::MouseButtonPress ||
+      ((TQMouseEvent *) event)->button() != RightButton ||
+      ((TQMouseEvent *) event)->state() != TQEvent::ControlButton) {
     return false;
   }
 
-  QPoint pos = ((QMouseEvent *) event)->globalPos();
+  TQPoint pos = ((TQMouseEvent *) event)->globalPos();
 
-  QPopupMenu *menu = new QPopupMenu();
+  TQPopupMenu *menu = new TQPopupMenu();
   menu->insertItem(i18n("Cut"),1);
   menu->insertItem(i18n("Copy"),2);
   menu->insertItem(i18n("Paste"),3);

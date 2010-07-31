@@ -20,9 +20,9 @@
 #ifndef BASELIST_H
 #define BASELIST_H
 
-#include <qptrlist.h>
+#include <tqptrlist.h>
 #include <common.h>
-#include <qapplication.h>
+#include <tqapplication.h>
 
 namespace KSim
 {
@@ -32,7 +32,7 @@ namespace KSim
       static void add(KSim::Base *object)
       {
         if (!m_baseList) {
-          m_baseList = new QPtrList<KSim::Base>;
+          m_baseList = new TQPtrList<KSim::Base>;
           m_baseList->setAutoDelete(false);
           
           // Make sure our m_baseList instance gets
@@ -63,7 +63,7 @@ namespace KSim
         if (!m_baseList)
           return;
 
-        QPtrListIterator<KSim::Base> object(*m_baseList);
+        TQPtrListIterator<KSim::Base> object(*m_baseList);
         for (; object.current(); ++object) {
           // Call processEvents() so our ui doesn't block
           if (!object.current()->isThemeConfigOnly() || themeChanged) {
@@ -89,9 +89,9 @@ namespace KSim
         m_baseList = 0L;
       }
 
-      static QPtrList<KSim::Base> *m_baseList;
+      static TQPtrList<KSim::Base> *m_baseList;
   };
 
-  QPtrList<KSim::Base> *BaseList::m_baseList = 0L;
+  TQPtrList<KSim::Base> *BaseList::m_baseList = 0L;
 }
 #endif // BASELIST_H

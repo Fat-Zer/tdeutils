@@ -20,10 +20,10 @@
 
 #include <limits.h>
 
-#include <qlabel.h>
-#include <qheader.h>
-#include <qlayout.h>
-#include <qspinbox.h>
+#include <tqlabel.h>
+#include <tqheader.h>
+#include <tqlayout.h>
+#include <tqspinbox.h>
 
 #include <kglobalsettings.h>
 #include <klocale.h>
@@ -32,16 +32,16 @@
 #include "chartabledialog.h"
 
 
-CCharTableDialog::CCharTableDialog( QWidget *parent, const char *name,
+CCharTableDialog::CCharTableDialog( TQWidget *parent, const char *name,
 				    bool modal )
   :KDialogBase( Plain, i18n("Character Table"), Help|User1|Cancel, User1,
 		parent, name, modal, true, KStdGuiItem::insert())
 {
   updateGeometry();
-  setHelp( "khexedit/khexedit.html", QString::null );
+  setHelp( "khexedit/khexedit.html", TQString::null );
 
-  QString text;
-  QVBoxLayout *topLayout = new QVBoxLayout( plainPage(), 0, spacingHint() );
+  TQString text;
+  TQVBoxLayout *topLayout = new TQVBoxLayout( plainPage(), 0, spacingHint() );
   if( topLayout == 0 ) { return; }
 
   mCharacterList = new CListView( plainPage(), "characterList" );
@@ -52,27 +52,27 @@ CCharTableDialog::CCharTableDialog( QWidget *parent, const char *name,
   mCharacterList->addColumn( i18n("Binary") );
   mCharacterList->addColumn( i18n("Text") );
   mCharacterList->setAllColumnsShowFocus( true );
-  mCharacterList->setFrameStyle( QFrame::WinPanel + QFrame::Sunken );
+  mCharacterList->setFrameStyle( TQFrame::WinPanel + TQFrame::Sunken );
   mCharacterList->setSorting( -1 );
 
   //
   // I am setting the min. size below
   //
-  //connect( mCharacterList, SIGNAL(doubleClicked(QListViewItem *) ),
-  //SLOT(startAssign(QListViewItem *)));
+  //connect( mCharacterList, TQT_SIGNAL(doubleClicked(TQListViewItem *) ),
+  //TQT_SLOT(startAssign(TQListViewItem *)));
 
   topLayout->addWidget( mCharacterList, 10 );
 
-  QHBoxLayout *hbox = new QHBoxLayout();
+  TQHBoxLayout *hbox = new TQHBoxLayout();
   if( hbox == 0 ) { return; }
   topLayout->addLayout( hbox );
 
   text = i18n("Insert this number of characters:");
-  QLabel *label = new QLabel( text, plainPage() );
+  TQLabel *label = new TQLabel( text, plainPage() );
   label->setFixedWidth( label->sizeHint().width() );
   hbox->addWidget( label );
 
-  mInputCountSpin = new QSpinBox( plainPage(), "spin" );
+  mInputCountSpin = new TQSpinBox( plainPage(), "spin" );
   mInputCountSpin->setMinimumWidth( fontMetrics().maxWidth()*7 );
   mInputCountSpin->setRange( 1, INT_MAX );
   mInputCountSpin->setValue( 1 );
@@ -106,8 +106,8 @@ const char *printBinary( uint val )
 
 void CCharTableDialog::createListData( void )
 {
-  QString d, h, o, b, c;
-  QListViewItem *item = 0;
+  TQString d, h, o, b, c;
+  TQListViewItem *item = 0;
 
   char buf[10];
   memset( buf, 0, sizeof( buf ) );
@@ -119,16 +119,16 @@ void CCharTableDialog::createListData( void )
     o.sprintf("%03o", i );
     b.sprintf("%s", printBinary(i) );
 
-    if( QChar((char)i).isPrint() == true )
+    if( TQChar((char)i).isPrint() == true )
     {
-      c = QChar((char)i);
+      c = TQChar((char)i);
     }
     else
     {
-      c = QChar('.');
+      c = TQChar('.');
     }
 
-    item = new QListViewItem( mCharacterList, item, d, h, o, b, c );
+    item = new TQListViewItem( mCharacterList, item, d, h, o, b, c );
     if( i == 0 )
     {
       mCharacterList->setSelected( item, true );
@@ -140,7 +140,7 @@ void CCharTableDialog::createListData( void )
 
 void CCharTableDialog::slotUser1( void ) // Insert
 {
- QListViewItem *item = mCharacterList->selectedItem();
+ TQListViewItem *item = mCharacterList->selectedItem();
  if( item != 0 )
  {
    startAssign( item );
@@ -148,9 +148,9 @@ void CCharTableDialog::slotUser1( void ) // Insert
 
 }
 
-void CCharTableDialog::startAssign( QListViewItem *item )
+void CCharTableDialog::startAssign( TQListViewItem *item )
 {
-  QByteArray buf;
+  TQByteArray buf;
   if( buf.fill( item->text(0).toInt(), mInputCountSpin->value() ) == false )
   {
     return;
@@ -161,7 +161,7 @@ void CCharTableDialog::startAssign( QListViewItem *item )
 
 void CCharTableDialog::setColumnWidth( void )
 {
-  const QFontMetrics &fm = mCharacterList->fontMetrics();
+  const TQFontMetrics &fm = mCharacterList->fontMetrics();
   int w0, w1, w2, w3, w4;
 
   w0 = -fm.minLeftBearing() - fm.minRightBearing() + 8 + fm.maxWidth();
@@ -195,13 +195,13 @@ void CCharTableDialog::setColumnWidth( void )
 }
 
 
-void CCharTableDialog::resizeEvent( QResizeEvent * )
+void CCharTableDialog::resizeEvent( TQResizeEvent * )
 {
   setColumnWidth();
 }
 
 
-void CCharTableDialog::showEvent( QShowEvent *e )
+void CCharTableDialog::showEvent( TQShowEvent *e )
 {
   KDialogBase::showEvent(e);
   setColumnWidth();

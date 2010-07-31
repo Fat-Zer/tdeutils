@@ -24,8 +24,8 @@
 #include <unistd.h>
 #include <stdlib.h>
 
-#include <qtimer.h>
-#include <qregexp.h>
+#include <tqtimer.h>
+#include <tqregexp.h>
 
 #include <klocale.h>
 #include <kprocess.h>
@@ -34,13 +34,13 @@
 
 #include "format.h"
 
-static QString extPath = QString::null;
+static TQString extPath = TQString::null;
 
-/* static */ QString findExecutable(const QString &e)
+/* static */ TQString findExecutable(const TQString &e)
 {
 	if (extPath.isEmpty())
 	{
-		QString path = getenv("PATH");
+		TQString path = getenv("PATH");
 		if (!path.isEmpty()) path.append(":");
 		path.append("/usr/sbin:/sbin");
 		extPath = path;
@@ -51,8 +51,8 @@ static QString extPath = QString::null;
 
 
 
-KFAction::KFAction(QObject *parent) :
-	QObject(parent)
+KFAction::KFAction(TQObject *parent) :
+	TQObject(parent)
 {
 	DEBUGSETUP;
 }
@@ -76,10 +76,10 @@ KFAction::~KFAction()
 class KFActionQueue_p
 {
 public:
-	QPtrList<KFAction> list;
+	TQPtrList<KFAction> list;
 } ;
 
-KFActionQueue::KFActionQueue(QObject *parent) :
+KFActionQueue::KFActionQueue(TQObject *parent) :
 	KFAction(parent),
 	d(new KFActionQueue_p)
 {
@@ -146,12 +146,12 @@ void KFActionQueue::queue(KFAction *p)
 	else
 	{
 		kdDebug(KFAREA) << "Running action " << next->name() << endl;
-		QObject::connect(next,SIGNAL(done(KFAction *,bool)),
-			this,SLOT(actionDone(KFAction *,bool)));
+		TQObject::connect(next,TQT_SIGNAL(done(KFAction *,bool)),
+			this,TQT_SLOT(actionDone(KFAction *,bool)));
 		// Propagate signals
-		QObject::connect(next,SIGNAL(status(const QString &,int)),
-			this,SIGNAL(status(const QString &,int)));
-		QTimer::singleShot(0,next,SLOT(exec()));
+		TQObject::connect(next,TQT_SIGNAL(status(const TQString &,int)),
+			this,TQT_SIGNAL(status(const TQString &,int)));
+		TQTimer::singleShot(0,next,TQT_SLOT(exec()));
 	}
 }
 
@@ -232,7 +232,7 @@ fdinfo fdtable[] =
 } ;
 
 
-FloppyAction::FloppyAction(QObject *p) :
+FloppyAction::FloppyAction(TQObject *p) :
 	KFAction(p),
 	deviceInfo(0L),
 	theProcess(0L)
@@ -249,7 +249,7 @@ void FloppyAction::quit()
 	KFAction::quit();
 }
 
-bool FloppyAction::configureDevice( const QString& newDeviceName )
+bool FloppyAction::configureDevice( const TQString& newDeviceName )
 {
     deviceInfo = 0; // We have not any idea what the device is
     deviceName = newDeviceName;
@@ -262,7 +262,7 @@ bool FloppyAction::configureDevice(int drive,int density)
 	const char *devicename = 0L;
 
 	deviceInfo=0L;
-	deviceName = QString::null;
+	deviceName = TQString::null;
 
 	if ((drive<0) || (drive>1))
 	{
@@ -311,7 +311,7 @@ bool FloppyAction::configureDevice(int drive,int density)
 
 	if (!devicename)
 	{
-		const QString str = i18n(
+		const TQString str = i18n(
 			"Cannot access %1\nMake sure that the device exists and that "
 			"you have write permission to it.").arg(deviceinfo->devices[0]);
 		emit status(str,-1);
@@ -338,7 +338,7 @@ void FloppyAction::processDone(KProcess *p)
 	{
 	        if (p->exitStatus() == 0)
 	        {
-			emit status(QString::null,100);
+			emit status(TQString::null,100);
 			emit done(this,true);
 		}
 		else
@@ -358,7 +358,7 @@ void FloppyAction::processStdOut(KProcess *, char *b, int l)
 {
 	Q_UNUSED(b);
 	Q_UNUSED(l);
-	kdDebug(KFAREA) << "stdout:" << QString::fromLatin1(b,l) << endl;
+	kdDebug(KFAREA) << "stdout:" << TQString::fromLatin1(b,l) << endl;
 }
 
 void FloppyAction::processStdErr(KProcess *p, char *b, int l)
@@ -370,12 +370,12 @@ bool FloppyAction::startProcess()
 {
 	DEBUGSETUP;
 
-	connect(theProcess,SIGNAL(processExited(KProcess *)),
-		this,SLOT(processDone(KProcess *)));
-	connect(theProcess,SIGNAL(receivedStdout(KProcess *,char *,int)),
-		this,SLOT(processStdOut(KProcess *,char *,int)));
-	connect(theProcess,SIGNAL(receivedStderr(KProcess *,char *,int)),
-		this,SLOT(processStdErr(KProcess *,char *,int)));
+	connect(theProcess,TQT_SIGNAL(processExited(KProcess *)),
+		this,TQT_SLOT(processDone(KProcess *)));
+	connect(theProcess,TQT_SIGNAL(receivedStdout(KProcess *,char *,int)),
+		this,TQT_SLOT(processStdOut(KProcess *,char *,int)));
+	connect(theProcess,TQT_SIGNAL(receivedStderr(KProcess *,char *,int)),
+		this,TQT_SLOT(processStdErr(KProcess *,char *,int)));
 
         theProcess->setEnvironment( "LC_ALL", "C" ); // We need the untranslated output of the tool
 	return theProcess->start(KProcess::NotifyOnExit,
@@ -383,14 +383,14 @@ bool FloppyAction::startProcess()
 }
 
 
-/* static */ QString FDFormat::fdformatName = QString::null;
+/* static */ TQString FDFormat::fdformatName = TQString::null;
 
-FDFormat::FDFormat(QObject *p) :
+FDFormat::FDFormat(TQObject *p) :
 	FloppyAction(p),
 	doVerify(true)
 {
 	DEBUGSETUP;
-	theProcessName = QString::fromLatin1("fdformat");
+	theProcessName = TQString::fromLatin1("fdformat");
 	setName("FDFormat");
 }
 
@@ -441,7 +441,7 @@ bool FDFormat::configure(bool v)
 	*theProcess
 		<< "-y"
 		<< "-f"
-		<< QString::number(deviceInfo->blocks) ;
+		<< TQString::number(deviceInfo->blocks) ;
 #elif defined(ANY_LINUX)
 	// No Linux-specific flags
 #endif
@@ -467,13 +467,13 @@ bool FDFormat::configure(bool v)
 void FDFormat::processStdOut(KProcess *, char *b, int l)
 {
 	DEBUGSETUP;
-	QString s;
+	TQString s;
 
 #ifdef ANY_BSD
 	if (b[0]=='F')
 	{
 		formatTrackCount++;
-		emit status(QString::null,
+		emit status(TQString::null,
 			formatTrackCount * 100 / deviceInfo->tracks);
 	}
 	else if (b[0]=='E')
@@ -482,7 +482,7 @@ void FDFormat::processStdOut(KProcess *, char *b, int l)
 	}
 	else
 	{
-		s = QString::fromLatin1(b,l);
+		s = TQString::fromLatin1(b,l);
 		if (s.contains("ioctl(FD_FORM)"))
 		{
                     emit status (i18n(
@@ -499,9 +499,9 @@ void FDFormat::processStdOut(KProcess *, char *b, int l)
 		DEBUGS(s);
 	}
 #elif defined(ANY_LINUX)
-	s = QString::fromLatin1(b,l);
+	s = TQString::fromLatin1(b,l);
 	DEBUGS(s);
-        QRegExp regexp( "([0-9]+)" );
+        TQRegExp regexp( "([0-9]+)" );
         if ( s.startsWith( "bad data at cyl" ) || ( s.find( "Problem reading cylinder" ) != -1 ) )
         {
             if ( regexp.search( s ) > -1 )
@@ -542,7 +542,7 @@ void FDFormat::processStdOut(KProcess *, char *b, int l)
             const int p = regexp.cap(1).toInt();
             if ((p>=0) && (p<deviceInfo->tracks))
             {
-                    emit status(QString::null,
+                    emit status(TQString::null,
                             p * 100 / deviceInfo->tracks);
             }
         }
@@ -551,13 +551,13 @@ void FDFormat::processStdOut(KProcess *, char *b, int l)
 }
 
 
-/* static */ QString DDZeroOut::m_ddName = QString::null;
+/* static */ TQString DDZeroOut::m_ddName = TQString::null;
 
-DDZeroOut::DDZeroOut(QObject *p) :
+DDZeroOut::DDZeroOut(TQObject *p) :
     FloppyAction(p)
 {
     kdDebug(KFAREA) << (__PRETTY_FUNCTION__) << endl;
-    theProcessName = QString::fromLatin1("dd");
+    theProcessName = TQString::fromLatin1("dd");
     setName("DD");
 }
 
@@ -617,15 +617,15 @@ void DDZeroOut::processDone(KProcess *p)
      *
      * ### TODO: really check if the exit is not on an other error and then abort the formatting
      */
-    emit status(QString::null,100);
+    emit status(TQString::null,100);
     emit done(this,true);
 }
 
 
 
-/* static */ QString FATFilesystem::newfs_fat = QString::null ;
+/* static */ TQString FATFilesystem::newfs_fat = TQString::null ;
 
-FATFilesystem::FATFilesystem(QObject *parent) :
+FATFilesystem::FATFilesystem(TQObject *parent) :
 	FloppyAction(parent)
 {
 	DEBUGSETUP;
@@ -649,14 +649,14 @@ FATFilesystem::FATFilesystem(QObject *parent) :
 	return !newfs_fat.isEmpty();
 }
 
-bool FATFilesystem::configure(bool v,bool l,const QString &lbl)
+bool FATFilesystem::configure(bool v,bool l,const TQString &lbl)
 {
 	doVerify=v;
 	doLabel=l;
 	if (l)
 		label=lbl.simplifyWhiteSpace();
 	else
-		label=QString::null;
+		label=TQString::null;
 
 	return true;
 }
@@ -689,7 +689,7 @@ void FATFilesystem::exec()
 
 	*p << newfs_fat;
 #ifdef ANY_BSD
-	*p << "-f" << QString::number(deviceInfo->blocks);
+	*p << "-f" << TQString::number(deviceInfo->blocks);
 	if (doLabel)
 	{
 		*p << "-L" << label ;
@@ -720,7 +720,7 @@ void FATFilesystem::processStdOut(KProcess *, char *b, int l)
 #ifdef ANY_BSD
     // ### TODO: do some checks
 #elif defined(ANY_LINUX)
-    QString s ( QString::fromLatin1( b, l ) );
+    TQString s ( TQString::fromLatin1( b, l ) );
     kdDebug(KFAREA) << s << endl;
     if (s.find("mounted file system")!=-1) // "/dev/fd0 contains a mounted file system
     {
@@ -747,9 +747,9 @@ void FATFilesystem::processStdOut(KProcess *, char *b, int l)
 
 #ifdef ANY_BSD
 
-/* static */ QString UFSFilesystem::newfs = QString::null ;
+/* static */ TQString UFSFilesystem::newfs = TQString::null ;
 
-UFSFilesystem::UFSFilesystem(QObject *parent) :
+UFSFilesystem::UFSFilesystem(TQObject *parent) :
 	FloppyAction(parent)
 {
 	DEBUGSETUP;
@@ -792,7 +792,7 @@ void UFSFilesystem::exec()
         
         // ### TODO: is it still needed? (FreeBSD 5.3's man page says: "For backward compatibility.")
         if ( deviceInfo )
-           *p << "-T" << QString("fd%1").arg(deviceInfo->blocks);
+           *p << "-T" << TQString("fd%1").arg(deviceInfo->blocks);
 
         *p << deviceName;
 
@@ -806,9 +806,9 @@ void UFSFilesystem::exec()
 
 
 
-/* static */ QString Ext2Filesystem::newfs = QString::null ;
+/* static */ TQString Ext2Filesystem::newfs = TQString::null ;
 
-Ext2Filesystem::Ext2Filesystem(QObject *parent) :
+Ext2Filesystem::Ext2Filesystem(TQObject *parent) :
 	FloppyAction(parent)
 {
 	DEBUGSETUP;
@@ -826,7 +826,7 @@ Ext2Filesystem::Ext2Filesystem(QObject *parent) :
 	return !newfs.isEmpty();
 }
 
-bool Ext2Filesystem::configure(bool v,bool l,const QString &lbl)
+bool Ext2Filesystem::configure(bool v,bool l,const TQString &lbl)
 {
 	doVerify=v;
 	doLabel=l;
@@ -836,7 +836,7 @@ bool Ext2Filesystem::configure(bool v,bool l,const QString &lbl)
 	}
 	else
 	{
-		label=QString::null;
+		label=TQString::null;
 	}
 
 	return true;
@@ -886,7 +886,7 @@ void Ext2Filesystem::processStdOut(KProcess *, char *b, int l)
 #ifdef ANY_BSD
     // ### TODO: do some checks
 #elif defined(ANY_LINUX)
-    QString s ( QString::fromLatin1( b, l ) );
+    TQString s ( TQString::fromLatin1( b, l ) );
     kdDebug(KFAREA) << s << endl;
     if (s.find("mounted")!=-1) // "/dev/fd0 is mounted; will not make a filesystem here!"
     {
@@ -904,9 +904,9 @@ void Ext2Filesystem::processStdOut(KProcess *, char *b, int l)
 
 
 #ifdef ANY_LINUX
-/* static */ QString MinixFilesystem::newfs = QString::null ;
+/* static */ TQString MinixFilesystem::newfs = TQString::null ;
 
-MinixFilesystem::MinixFilesystem(QObject *parent) :
+MinixFilesystem::MinixFilesystem(TQObject *parent) :
 	FloppyAction(parent)
 {
 	DEBUGSETUP;
@@ -924,7 +924,7 @@ MinixFilesystem::MinixFilesystem(QObject *parent) :
 	return !newfs.isEmpty();
 }
 
-bool MinixFilesystem::configure(bool v,bool l,const QString &lbl)
+bool MinixFilesystem::configure(bool v,bool l,const TQString &lbl)
 {
 	doVerify=v;
 	doLabel=l;
@@ -934,7 +934,7 @@ bool MinixFilesystem::configure(bool v,bool l,const QString &lbl)
 	}
 	else
 	{
-		label=QString::null;
+		label=TQString::null;
 	}
 
 	return true;
@@ -977,7 +977,7 @@ void MinixFilesystem::exec()
 
 void MinixFilesystem::processStdOut(KProcess *, char *b, int l)
 {
-    QString s ( QString::fromLatin1( b, l ) );
+    TQString s ( TQString::fromLatin1( b, l ) );
     kdDebug(KFAREA) << s << endl;
     if (s.find("mounted")!=-1) // "mkfs.minix: /dev/fd0 is mounted; will not make a filesystem here!"
     {

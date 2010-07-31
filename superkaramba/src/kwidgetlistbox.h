@@ -20,43 +20,43 @@
 #ifndef KWIDGETLISTBOX_H
 #define KWIDGETLISTBOX_H
 
-#include <qtable.h>
+#include <tqtable.h>
 
 /**
 @author See README for the list of authors
 */
 
-typedef bool (*show_callback) (int index, QWidget* widget, void* data);
+typedef bool (*show_callback) (int index, TQWidget* widget, void* data);
 
 class KWidgetListbox : public QTable
 {
     Q_OBJECT
 
   public:
-    KWidgetListbox(QWidget *parent = 0, const char *name = 0);
+    KWidgetListbox(TQWidget *parent = 0, const char *name = 0);
     ~KWidgetListbox();
 
-    int insertItem(QWidget* item, int index = -1);
-    void setSelected(QWidget* item);
+    int insertItem(TQWidget* item, int index = -1);
+    void setSelected(TQWidget* item);
     void setSelected(int index);
-    void removeItem(QWidget* item);
+    void removeItem(TQWidget* item);
     void removeItem(int index);
     void clear();
     int selected() const;
-    QWidget* selectedItem() const;
-    QWidget* item(int index) const;
-    int index(QWidget* itm) const;
+    TQWidget* selectedItem() const;
+    TQWidget* item(int index) const;
+    int index(TQWidget* itm) const;
     uint count() const { return numRows(); };
 
     void showItems(show_callback func = 0, void* data = 0);
 
-    void paintCell(QPainter* p, int row, int col, const QRect& cr,
-                   bool selected, const QColorGroup& cg);
+    void paintCell(TQPainter* p, int row, int col, const TQRect& cr,
+                   bool selected, const TQColorGroup& cg);
   protected:
     void setItemColors(int index, bool even);
     void updateColors();
     bool even(int index);
-    virtual void showEvent(QShowEvent* e);
+    virtual void showEvent(TQShowEvent* e);
 
   protected slots:
     void selectionChanged(int row, int col);

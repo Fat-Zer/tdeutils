@@ -20,11 +20,11 @@
 //  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 //
 
-#include <qdir.h>
-#include <qpainter.h>
-#include <qpaintdevicemetrics.h>
-#include <qtextcodec.h>
-#include <qdom.h>
+#include <tqdir.h>
+#include <tqpainter.h>
+#include <tqpaintdevicemetrics.h>
+#include <tqtextcodec.h>
+#include <tqdom.h>
 
 #include <kapplication.h>
 #include <kiconloader.h>
@@ -44,7 +44,7 @@
 #include "kjotsentry.h"
 
 // helper functions for HTML output
-QString prepForHTML(QString text)
+TQString prepForHTML(TQString text)
 {
     text.replace("<", "&lt;");
     text.replace(">", "&gt;");
@@ -52,15 +52,15 @@ QString prepForHTML(QString text)
     return text;
 }
 
-QString htmlHeader(const QString& title, QTextCodec* codec)
+TQString htmlHeader(const TQString& title, TQTextCodec* codec)
 {
-    QString head = "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=";
+    TQString head = "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=";
     head+=codec->mimeName();
     head+="\" ><title>" + prepForHTML(title) + "</title></head><body>";
     return head;
 }
 
-QString htmlFooter()
+TQString htmlFooter()
 {
     return "</body></html>";
 }
@@ -69,7 +69,7 @@ QString htmlFooter()
 // KJotsEntryBase
 //
 
-KJotsEntryBase::KJotsEntryBase(KListView* parent, QListViewItem* after=0)
+KJotsEntryBase::KJotsEntryBase(KListView* parent, TQListViewItem* after=0)
     :KListViewItem(parent,after)
 {
     m_id = 0;
@@ -77,7 +77,7 @@ KJotsEntryBase::KJotsEntryBase(KListView* parent, QListViewItem* after=0)
     m_parent = 0;
 }
 
-KJotsEntryBase::KJotsEntryBase(KListViewItem* parent, QListViewItem* after=0)
+KJotsEntryBase::KJotsEntryBase(KListViewItem* parent, TQListViewItem* after=0)
     :KListViewItem(parent,after)
 {
     m_id = 0;
@@ -85,12 +85,12 @@ KJotsEntryBase::KJotsEntryBase(KListViewItem* parent, QListViewItem* after=0)
     m_parent = dynamic_cast<KJotsBook*>(parent);
 }
 
-void KJotsEntryBase::setSubject(const QString& subj)
+void KJotsEntryBase::setSubject(const TQString& subj)
 {
     setText(0, subj);
 }
 
-void KJotsEntryBase::setText(int column, const QString& text)
+void KJotsEntryBase::setText(int column, const TQString& text)
 {
     if (column == 0 && text.isEmpty())
         KListViewItem::setText(0, defaultSubject());
@@ -105,7 +105,7 @@ void KJotsEntryBase::setText(int column, const QString& text)
 */
 void KJotsEntryBase::resetParent() 
 { 
-    m_parent = dynamic_cast<KJotsBook*>(QListViewItem::parent()); 
+    m_parent = dynamic_cast<KJotsBook*>(TQListViewItem::parent()); 
 }
 
 /*! 
@@ -139,14 +139,14 @@ void KJotsEntryBase::setId(Q_UINT64 id)
     This function should ONLY be called when saving the file, as it performs
     other functions than generating XML.
 */
-void KJotsEntryBase::generateXml( QDomDocument &doc, QDomElement &parent )
+void KJotsEntryBase::generateXml( TQDomDocument &doc, TQDomElement &parent )
 {
-    QDomElement title = doc.createElement( "Title" );
+    TQDomElement title = doc.createElement( "Title" );
     title.appendChild( doc.createTextNode( subject() ));
     parent.appendChild( title );
 
-    QDomElement id = doc.createElement( "ID" );
-    QString id_string;
+    TQDomElement id = doc.createElement( "ID" );
+    TQString id_string;
     id_string.setNum(m_id);
     id.appendChild( doc.createTextNode(id_string) );
     parent.appendChild( id );
@@ -158,7 +158,7 @@ void KJotsEntryBase::generateXml( QDomDocument &doc, QDomElement &parent )
 /*!
     Parses through XML data for settings inherent to the base class. 
 */
-void KJotsEntryBase::parseXml( QDomElement &e )
+void KJotsEntryBase::parseXml( TQDomElement &e )
 {
     if ( !e.isNull() ) 
     {
@@ -180,15 +180,15 @@ void KJotsEntryBase::parseXml( QDomElement &e )
     \brief Draws the Title box when printing.
     This is a helper function for the derived classes. Code consolidation==the good.
 */
-int KJotsEntryBase::printTitleBox(QString title, KPrinter& printer, QPainter& painter, int y)
+int KJotsEntryBase::printTitleBox(TQString title, KPrinter& printer, TQPainter& painter, int y)
 {
-    QPaintDeviceMetrics metrics( &printer );
+    TQPaintDeviceMetrics metrics( &printer );
     int maxWidth = metrics.width();
     int maxHeight = metrics.height();
 
-    QRect r = painter.boundingRect(0, y,
+    TQRect r = painter.boundingRect(0, y,
               maxWidth, maxHeight,
-              QPainter::ExpandTabs | QPainter::WordBreak | QPainter::AlignHCenter,
+              TQPainter::ExpandTabs | TQPainter::WordBreak | TQPainter::AlignHCenter,
               title);
     y += 10;
 
@@ -206,7 +206,7 @@ int KJotsEntryBase::printTitleBox(QString title, KPrinter& printer, QPainter& pa
     r.setRight(maxWidth);
     painter.drawRect(r);
     painter.drawText(0, y, maxWidth, maxHeight - y,
-            QPainter::ExpandTabs | QPainter::WordBreak | QPainter::AlignHCenter,
+            TQPainter::ExpandTabs | TQPainter::WordBreak | TQPainter::AlignHCenter,
             title);
     y += r.height() + 15;
 
@@ -217,13 +217,13 @@ int KJotsEntryBase::printTitleBox(QString title, KPrinter& printer, QPainter& pa
 // KJotsBook
 //
 
-KJotsBook::KJotsBook(KListView* parent, QListViewItem* after)
+KJotsBook::KJotsBook(KListView* parent, TQListViewItem* after)
     : KJotsEntryBase(parent, after)
 {
     init();
 }
 
-KJotsBook::KJotsBook(KListViewItem* parent, QListViewItem* after)
+KJotsBook::KJotsBook(KListViewItem* parent, TQListViewItem* after)
     : KJotsEntryBase(parent, after)
 {
     init();
@@ -245,7 +245,7 @@ void KJotsBook::init()
     m_open = false;
     m_saveProgressDialog = 0;
     setExpandable(true);
-    setPixmap(0, kapp->iconLoader()->loadIcon(QString("contents"),KIcon::Small));
+    setPixmap(0, kapp->iconLoader()->loadIcon(TQString("contents"),KIcon::Small));
 }
 
 /*!
@@ -255,18 +255,18 @@ void KJotsBook::init()
     This function does a cursory check to see if this looks like it is a KJots file.
     It's a little too quick and dirty for my taste, but seems to work OK.
 */
-bool KJotsBook::isBookFile(const QString& filename)
+bool KJotsBook::isBookFile(const TQString& filename)
 {
-    QFile folder(filename);
+    TQFile folder(filename);
     bool test = false;
 
     if ( folder.exists() )
     {
         if ( folder.open(IO_ReadWrite) )
         {
-            QTextStream st(static_cast<QIODevice*>(&folder));
-            st.setEncoding( KJotsSettings::unicode() ? QTextStream::UnicodeUTF8 : QTextStream::Locale );
-            QString buf = st.readLine().stripWhiteSpace();
+            TQTextStream st(static_cast<TQIODevice*>(&folder));
+            st.setEncoding( KJotsSettings::unicode() ? TQTextStream::UnicodeUTF8 : TQTextStream::Locale );
+            TQString buf = st.readLine().stripWhiteSpace();
 
             //Check for new-style book. Not very pretty, but it is faster than loading the DOM.
             if (buf == "<!DOCTYPE KJots>")
@@ -290,7 +290,7 @@ bool KJotsBook::isBookFile(const QString& filename)
     \brief Reads a book in from a disk file.
     This function is only called for root-level books.
 */
-bool KJotsBook::openBook(const QString& filename)
+bool KJotsBook::openBook(const TQString& filename)
 {
     if ( !m_open ) //sanity check
     {
@@ -302,25 +302,25 @@ bool KJotsBook::openBook(const QString& filename)
             addPage();
             m_open = true;
         } else {
-            QFile file(m_fileName);
+            TQFile file(m_fileName);
     
             if ( file.exists() && file.open(IO_ReadWrite) ) //TODO: Implement read-only mode?
             {
-                QTextStream st(static_cast<QIODevice*>(&file));
-                st.setEncoding(  KJotsSettings::unicode() ? QTextStream::UnicodeUTF8 : QTextStream::Locale );
-                QString data = st.read();
+                TQTextStream st(static_cast<TQIODevice*>(&file));
+                st.setEncoding(  KJotsSettings::unicode() ? TQTextStream::UnicodeUTF8 : TQTextStream::Locale );
+                TQString data = st.read();
 
-                QDomDocument doc( "KJots" );
+                TQDomDocument doc( "KJots" );
                 if ( doc.setContent( data ) ) 
                 {
-                    QDomElement docElem = doc.documentElement();
+                    TQDomElement docElem = doc.documentElement();
             
                     if ( docElem.tagName() == "KJots" )
                     {
-                        QDomNode n = docElem.firstChild();
+                        TQDomNode n = docElem.firstChild();
                         while( !n.isNull() ) 
                         {
-                            QDomElement e = n.toElement(); // try to convert the node to an element.
+                            TQDomElement e = n.toElement(); // try to convert the node to an element.
                             if( !e.isNull() && e.tagName() == "KJotsBook" ) 
                             {
                                     parseXml(e);
@@ -334,7 +334,7 @@ bool KJotsBook::openBook(const QString& filename)
                     file.reset();
                     if ( loadOldBook(file) ) 
                     {
-                        QFileInfo fi( file );
+                        TQFileInfo fi( file );
                         setSubject(fi.fileName());
                     }
                 }
@@ -354,7 +354,7 @@ bool KJotsBook::openBook(const QString& filename)
             if ( !m_fileName.isEmpty() && !m_fileName.endsWith(".book") )
             {
                 //some old books have incorrect names. So we save a new copy, then kill the old file
-                m_fileName = QString::null; //trick ourselves into thinking we're a new book
+                m_fileName = TQString::null; //trick ourselves into thinking we're a new book
                 saveBook();
                 file.remove();
             }
@@ -386,11 +386,11 @@ bool KJotsBook::openBook(const QString& filename)
     This is a function for files made from older KJots versions. It could probably be removed
     at some point in the future. CREATION DATE: 2005/05/30 
 */
-bool KJotsBook::loadOldBook(QFile &file)
+bool KJotsBook::loadOldBook(TQFile &file)
 {
-    QTextStream st(static_cast<QIODevice*>(&file));
-    st.setEncoding(  KJotsSettings::unicode() ? QTextStream::UnicodeUTF8 : QTextStream::Locale );
-    QString buf = st.readLine();
+    TQTextStream st(static_cast<TQIODevice*>(&file));
+    st.setEncoding(  KJotsSettings::unicode() ? TQTextStream::UnicodeUTF8 : TQTextStream::Locale );
+    TQString buf = st.readLine();
 
     if (buf.left(9) != "\\NewEntry")
     {
@@ -399,7 +399,7 @@ bool KJotsBook::loadOldBook(QFile &file)
     }
 
     KJotsPage *entry = 0;
-    QString body;
+    TQString body;
 
     bool quit=false;
 
@@ -412,8 +412,8 @@ bool KJotsBook::loadOldBook(QFile &file)
                 entry->setBody(body);
             }
 
-            body = QString::null;
-            QString title = buf.mid(10, buf.length());
+            body = TQString::null;
+            TQString title = buf.mid(10, buf.length());
 
             // now catch the page id
             buf = st.readLine();
@@ -461,17 +461,17 @@ void KJotsBook::saveBook(void)
         m_fileName = temp.name();
     }
 
-    QFile file(m_fileName);
+    TQFile file(m_fileName);
     if (file.open(IO_WriteOnly | IO_Truncate)) 
     {
-        QDomDocument doc("KJots");
-        QDomElement root = doc.createElement( "KJots" );
+        TQDomDocument doc("KJots");
+        TQDomElement root = doc.createElement( "KJots" );
         doc.appendChild( root );
 
         this->generateXml( doc, root ); //recursive
 
-        QTextStream st((QIODevice *) &file);
-        st.setEncoding(  KJotsSettings::unicode() ? QTextStream::UnicodeUTF8 : QTextStream::Locale );
+        TQTextStream st((TQIODevice *) &file);
+        st.setEncoding(  KJotsSettings::unicode() ? TQTextStream::UnicodeUTF8 : TQTextStream::Locale );
         st << doc.toString();
 
         file.close();
@@ -487,14 +487,14 @@ void KJotsBook::saveBook(void)
 */
 void KJotsBook::deleteBook()
 {
-    QFile::remove(m_fileName);
-    m_fileName = QString::null;
+    TQFile::remove(m_fileName);
+    m_fileName = TQString::null;
 }
 
 void KJotsBook::rename()
 {
     bool ok;
-    QString name = KInputDialog::getText(i18n( "Rename Book" ),
+    TQString name = KInputDialog::getText(i18n( "Rename Book" ),
                                          i18n( "Book name:" ),
                                          subject(), &ok, listView());
     if (ok)
@@ -514,13 +514,13 @@ void KJotsBook::rename()
     \brief Initiated when the user chooses to save this to a file.
     This function gets everything ready to go to save to the disk.
 */
-void KJotsBook::saveToFile(KURL url, bool plainText, const QString& encoding)
+void KJotsBook::saveToFile(KURL url, bool plainText, const TQString& encoding)
 {
     if (url.isEmpty() || m_saveInProgress)
         return;
 
     m_saveToPlainText = plainText;
-    m_saveEncoding = QTextCodec::codecForName(encoding.ascii());
+    m_saveEncoding = TQTextCodec::codecForName(encoding.ascii());
     KIO::TransferJob* job = KIO::put(url, -1, true, false, false);
 
     if (!job)
@@ -541,8 +541,8 @@ void KJotsBook::saveToFile(KURL url, bool plainText, const QString& encoding)
     m_saveProgressDialog->showCancelButton(false);
     m_saveProgressDialog->setAutoClose(true);
 
-    connect(job, SIGNAL(dataReq(KIO::Job*, QByteArray&)), SLOT(saveDataReq(KIO::Job*, QByteArray&)));
-    connect(job, SIGNAL(result( KIO::Job *)), SLOT(slotSaveResult( KIO::Job *)));
+    connect(job, TQT_SIGNAL(dataReq(KIO::Job*, TQByteArray&)), TQT_SLOT(saveDataReq(KIO::Job*, TQByteArray&)));
+    connect(job, TQT_SIGNAL(result( KIO::Job *)), TQT_SLOT(slotSaveResult( KIO::Job *)));
 
     m_saveInProgress = true;
 }
@@ -551,11 +551,11 @@ void KJotsBook::saveToFile(KURL url, bool plainText, const QString& encoding)
     \brief Pumps out data when saving to a file.
     This function pumps out page data during a disk save. 
 */
-void KJotsBook::saveDataReq(KIO::Job* /* job */, QByteArray& data)
+void KJotsBook::saveDataReq(KIO::Job* /* job */, TQByteArray& data)
 {
     if (!m_saveInProgress) return; //sanity check
 
-    QTextStream stream(data, IO_WriteOnly);
+    TQTextStream stream(data, IO_WriteOnly);
     stream.setCodec(m_saveEncoding);
 
     if (!m_saveToPlainText)
@@ -588,10 +588,10 @@ void KJotsBook::slotSaveResult(KIO::Job *)
 */
 KJotsPage* KJotsBook::addPage()
 {
-    QListViewItem *after = 0;
+    TQListViewItem *after = 0;
 
     // append new pages
-    QListViewItem* tmp = firstChild();
+    TQListViewItem* tmp = firstChild();
     while (tmp)
     {
         after = tmp;
@@ -606,7 +606,7 @@ KJotsPage* KJotsBook::addPage()
 /*!
     \brief Called when the user wants to print the book.
 */
-void KJotsBook::print(QFont& defaultFont)
+void KJotsBook::print(TQFont& defaultFont)
 {
     KPrinter printer;
     printer.setDocName(subject());
@@ -618,7 +618,7 @@ void KJotsBook::print(QFont& defaultFont)
         return;
     }
 
-    QPainter painter(&printer);
+    TQPainter painter(&printer);
     painter.setFont(defaultFont);
     print(printer, painter, 0);
 
@@ -628,7 +628,7 @@ void KJotsBook::print(QFont& defaultFont)
 /*!
     \brief Prints this book.
 */
-int KJotsBook::print(KPrinter& printer, QPainter& painter, int y)
+int KJotsBook::print(KPrinter& printer, TQPainter& painter, int y)
 {
     y = printTitleBox(subject(), printer, painter, y);
 
@@ -642,7 +642,7 @@ int KJotsBook::print(KPrinter& printer, QPainter& painter, int y)
     return y;
 }
 
-QString KJotsBook::defaultSubject()
+TQString KJotsBook::defaultSubject()
 {
     return i18n("Untitled Book");
 }
@@ -672,14 +672,14 @@ bool KJotsBook::isDirty()
     \brief Creates XML code and performs necessary tasks to save file.
     This function should ONLY be called when saving the file.
 */
-void KJotsBook::generateXml( QDomDocument &doc, QDomElement &parent )
+void KJotsBook::generateXml( TQDomDocument &doc, TQDomElement &parent )
 {
-    QDomElement book = doc.createElement( "KJotsBook" );
+    TQDomElement book = doc.createElement( "KJotsBook" );
     parent.appendChild( book );
 
     KJotsEntryBase::generateXml(doc, book); //let the base class save important stuff
 
-    QDomElement open = doc.createElement( "Open" );
+    TQDomElement open = doc.createElement( "Open" );
     open.appendChild( this->isOpen() ? doc.createTextNode("1") : doc.createTextNode("0") );
     book.appendChild( open );
 
@@ -690,7 +690,7 @@ void KJotsBook::generateXml( QDomDocument &doc, QDomElement &parent )
         entry = dynamic_cast<KJotsEntryBase*>(entry->nextSibling());
     }
 
-    if ( !m_fileName.isEmpty() && QListViewItem::parent() )
+    if ( !m_fileName.isEmpty() && TQListViewItem::parent() )
     {
         //Hmmmm... We were originally loaded from a file, but now we have a parent, so
         //we must have been moved into another tree. Remove the old file now that we
@@ -704,16 +704,16 @@ void KJotsBook::generateXml( QDomDocument &doc, QDomElement &parent )
 /*!
     Parses through XML code from a file.
 */
-void KJotsBook::parseXml( QDomElement &me )
+void KJotsBook::parseXml( TQDomElement &me )
 {
     KJotsEntryBase *lastEntry = 0; //keep track of the last entry inserted for speed
 
     if ( me.tagName() == "KJotsBook" )
     {
-        QDomNode n = me.firstChild();
+        TQDomNode n = me.firstChild();
         while( !n.isNull() ) 
         {
-            QDomElement e = n.toElement(); // try to convert the node to an element.
+            TQDomElement e = n.toElement(); // try to convert the node to an element.
             if ( !e.isNull() ) 
             {
                 if ( e.tagName() == "KJotsPage" ) 
@@ -754,16 +754,16 @@ void KJotsBook::parseXml( QDomElement &me )
     \brief Returns an HTML Table of contents for this book.
     This is a helper function for generateHtml().
 */
-QString KJotsBook::getToc()
+TQString KJotsBook::getToc()
 {
-    QString toc;
+    TQString toc;
 
     toc += "<ul>";
 
     KJotsEntryBase *entry = dynamic_cast<KJotsEntryBase*>(firstChild());
     while ( entry ) {
-        QString htmlSubject = prepForHTML(entry->subject());
-        toc += QString("<li><a href=\"#%1\">").arg(entry->id()) + htmlSubject + "</a></li>";
+        TQString htmlSubject = prepForHTML(entry->subject());
+        toc += TQString("<li><a href=\"#%1\">").arg(entry->id()) + htmlSubject + "</a></li>";
 
         KJotsBook *book = dynamic_cast<KJotsBook*>(entry);
         if ( book ) toc += book->getToc();
@@ -780,20 +780,20 @@ QString KJotsBook::getToc()
     \param top Pointer to the "starting point" of this tree.
     \param diskMode Files saved to disk have a slightly different format.
 */
-QString KJotsBook::generateHtml( KJotsEntryBase* top, bool diskMode )
+TQString KJotsBook::generateHtml( KJotsEntryBase* top, bool diskMode )
 {
-    QString toc, body;
-    QString htmlTitle = prepForHTML(subject());
+    TQString toc, body;
+    TQString htmlTitle = prepForHTML(subject());
 
     if ( top == this )
     {
-        toc = QString("<h1><a name=\"%1\">%2</a></h1>").arg(id()).arg(htmlTitle);
+        toc = TQString("<h1><a name=\"%1\">%2</a></h1>").arg(id()).arg(htmlTitle);
     } else {
         if ( diskMode )
         {
-            toc = QString("<h2><a name=\"%1\">%2</a></h2>").arg(id()).arg(htmlTitle);
+            toc = TQString("<h2><a name=\"%1\">%2</a></h2>").arg(id()).arg(htmlTitle);
         } else {
-            toc = QString("<h2><a name=\"%1\" href=\"%2\">%3</a></h2>").arg(id()).arg(id()).arg(htmlTitle);
+            toc = TQString("<h2><a name=\"%1\" href=\"%2\">%3</a></h2>").arg(id()).arg(id()).arg(htmlTitle);
         }
     }
 
@@ -818,15 +818,15 @@ QString KJotsBook::generateHtml( KJotsEntryBase* top, bool diskMode )
     This functions output moderately formatted text when the user chooses to save as
     a text file. 
 */
-QString KJotsBook::generateText( void )
+TQString KJotsBook::generateText( void )
 {
-    QString out;
+    TQString out;
 
     //Print Fancy Text header
-    QString line, buf;
+    TQString line, buf;
     line.fill('#', subject().length() + 2);
     line += "\n";
-    out = line + QString("# ") + subject() + QString("\n") + line;
+    out = line + TQString("# ") + subject() + TQString("\n") + line;
 
     KJotsEntryBase* entry = dynamic_cast<KJotsEntryBase*>(firstChild());
     while ( entry )
@@ -843,13 +843,13 @@ QString KJotsBook::generateText( void )
 // KJotsPage
 //
 
-KJotsPage::KJotsPage(KJotsBook* parent, QListViewItem *after)
+KJotsPage::KJotsPage(KJotsBook* parent, TQListViewItem *after)
     : KJotsEntryBase(parent,after),
     m_editor(0)
 {
     m_isBook = false;
     m_paraPos = m_indexPos = 0;
-    setPixmap(0, kapp->iconLoader()->loadIcon(QString("edit"), KIcon::Small));
+    setPixmap(0, kapp->iconLoader()->loadIcon(TQString("edit"), KIcon::Small));
 }
 
 KJotsPage::~KJotsPage()
@@ -879,7 +879,7 @@ void KJotsPage::initNewPage(void)
 /*!
     \brief Return the text of this page.
 */
-QString KJotsPage::body()
+TQString KJotsPage::body()
 {
     //if we're being edited we want the current text, not whatever we saved before.
     if ( m_editor && m_editor->edited() )
@@ -895,7 +895,7 @@ QString KJotsPage::body()
 /*!
     \brief Sets the text of this page.
 */
-void KJotsPage::setBody(const QString& text)
+void KJotsPage::setBody(const TQString& text)
 {
     assert ( !m_editor ); //m_editor should *never* be set.
     m_text = text;
@@ -905,7 +905,7 @@ void KJotsPage::rename()
 {
     bool ok;
 
-    QString name = KInputDialog::getText(i18n( "Rename Page" ),
+    TQString name = KInputDialog::getText(i18n( "Rename Page" ),
                                          i18n( "Page title:" ),
                                          subject(), &ok, listView() );
 
@@ -926,21 +926,21 @@ void KJotsPage::rename()
     \brief Initiated when the user chooses to save this to a file.
     This function gets everything ready to go to save to the disk.
 */
-void KJotsPage::saveToFile(KURL url, bool plainText, const QString& encoding)
+void KJotsPage::saveToFile(KURL url, bool plainText, const TQString& encoding)
 {
     if (url.isEmpty() || m_saveInProgress)
         return;
 
     m_saveToPlainText = plainText;
-    m_saveEncoding = QTextCodec::codecForName(encoding.ascii());
+    m_saveEncoding = TQTextCodec::codecForName(encoding.ascii());
     KIO::TransferJob* job = KIO::put(url, -1, true, false, false);
     if (!job)
     {
         return;
     }
 
-    connect(job, SIGNAL(dataReq(KIO::Job*, QByteArray&)), SLOT(saveDataReq(KIO::Job*, QByteArray&)));
-    connect(job, SIGNAL(result( KIO::Job *)), SLOT(slotSaveResult( KIO::Job *)));
+    connect(job, TQT_SIGNAL(dataReq(KIO::Job*, TQByteArray&)), TQT_SLOT(saveDataReq(KIO::Job*, TQByteArray&)));
+    connect(job, TQT_SIGNAL(result( KIO::Job *)), TQT_SLOT(slotSaveResult( KIO::Job *)));
     m_saveInProgress = true;
 }
 
@@ -950,11 +950,11 @@ void KJotsPage::saveToFile(KURL url, bool plainText, const QString& encoding)
 
     \todo This should be augmented to cycle in case of REALLY long pages.
 */
-void KJotsPage::saveDataReq(KIO::Job* /* job */, QByteArray& data)
+void KJotsPage::saveDataReq(KIO::Job* /* job */, TQByteArray& data)
 {
     if (!m_saveInProgress) return; //sanity check
 
-    QTextStream stream(data, IO_WriteOnly);
+    TQTextStream stream(data, IO_WriteOnly);
     stream.setCodec(m_saveEncoding);
 
     if ( !m_saveToPlainText ) 
@@ -980,11 +980,11 @@ void KJotsPage::slotSaveResult(KIO::Job *)
     /* if (job->error() != 0) {} */
 }
 
-void KJotsPage::print(QFont& defaultFont)
+void KJotsPage::print(TQFont& defaultFont)
 {
     KJotsEntryBase* book = dynamic_cast<KJotsEntryBase*>(KListViewItem::parent());
 
-    QString docName = book->subject();
+    TQString docName = book->subject();
     if (!subject().isNull())
     {
         docName += ": " + subject();
@@ -997,7 +997,7 @@ void KJotsPage::print(QFont& defaultFont)
 
     if (printer.setup(listView(), i18n("Print: %1").arg(docName)))
     {
-        QPainter painter( &printer );
+        TQPainter painter( &printer );
         painter.setFont(defaultFont);
         print(printer, painter, 0);
         painter.end();
@@ -1007,26 +1007,26 @@ void KJotsPage::print(QFont& defaultFont)
 /*!
     \brief Prints this page.
 */
-int KJotsPage::print(KPrinter& printer, QPainter& painter, int y)
+int KJotsPage::print(KPrinter& printer, TQPainter& painter, int y)
 {
-    QPaintDeviceMetrics metrics( &printer );
+    TQPaintDeviceMetrics metrics( &printer );
     int maxWidth = metrics.width();
     int maxHeight = metrics.height();
     //TODO: Is it really necessary to copy the entire body when printing?
-    QStringList paragraphs = QStringList::split(QChar('\n'), body(), true);
+    TQStringList paragraphs = TQStringList::split(TQChar('\n'), body(), true);
 
     y = printTitleBox(subject(), printer, painter, y);
 
-    for (QStringList::iterator para = paragraphs.begin();
+    for (TQStringList::iterator para = paragraphs.begin();
          para != paragraphs.end();
          ++para)
     {
         //Watch for blank lines inserted as spacers.
         if ( (*para).isNull() ) *para = " ";
 
-        QRect r = painter.boundingRect(0, y,
+        TQRect r = painter.boundingRect(0, y,
                                        maxWidth, maxHeight,
-                                       QPainter::ExpandTabs | QPainter::WordBreak,
+                                       TQPainter::ExpandTabs | TQPainter::WordBreak,
                                        *para);
 
         if ((y + r.height()) > maxHeight)
@@ -1036,7 +1036,7 @@ int KJotsPage::print(KPrinter& printer, QPainter& painter, int y)
         }
 
         painter.drawText(0, y, maxWidth, maxHeight - y,
-                QPainter::ExpandTabs | QPainter::WordBreak,
+                TQPainter::ExpandTabs | TQPainter::WordBreak,
                 *para);
         y += r.height();
     }
@@ -1048,7 +1048,7 @@ int KJotsPage::print(KPrinter& printer, QPainter& painter, int y)
     \brief Get the default title of this page.
     \note This is only used by initNewPage(); it could probably be removed.
 */
-QString KJotsPage::defaultSubject()
+TQString KJotsPage::defaultSubject()
 {
     int page = 0;
 
@@ -1116,15 +1116,15 @@ bool KJotsPage::isDirty()
 /*!
     \brief Creates XML code and performs necessary tasks to save file.
     This function should ONLY be called when saving the file.
-*/void KJotsPage::generateXml( QDomDocument &doc, QDomElement &parent )
+*/void KJotsPage::generateXml( TQDomDocument &doc, TQDomElement &parent )
 {
-    QDomElement page = doc.createElement( "KJotsPage" );
+    TQDomElement page = doc.createElement( "KJotsPage" );
     parent.appendChild( page );
 
     KJotsEntryBase::generateXml(doc, page); //let the base class save important stuff
 
-    QDomElement text = doc.createElement( "Text" );
-    QString saveText = body();
+    TQDomElement text = doc.createElement( "Text" );
+    TQString saveText = body();
     if ( saveText.contains("]]>") ) {
         saveText.replace("]]>","]]&gt;");
         text.setAttribute("fixed", "1");
@@ -1138,19 +1138,19 @@ bool KJotsPage::isDirty()
 /*!
     Parses through XML code from a file.
 */
-void KJotsPage::parseXml( QDomElement &me )
+void KJotsPage::parseXml( TQDomElement &me )
 {
     if ( me.tagName() == "KJotsPage" )
     {
-        QDomNode n = me.firstChild();
+        TQDomNode n = me.firstChild();
         while( !n.isNull() ) 
         {
-            QDomElement e = n.toElement(); // try to convert the node to an element.
+            TQDomElement e = n.toElement(); // try to convert the node to an element.
             if ( !e.isNull() ) 
             {
                 if ( e.tagName() == "Text" ) 
                 {
-                    QString bodyText = e.text();
+                    TQString bodyText = e.text();
                     if ( e.hasAttribute("fixed") ) 
                     {
                         bodyText.replace("]]&gt;", "]]>");
@@ -1175,32 +1175,32 @@ void KJotsPage::parseXml( QDomElement &me )
     \param top This tells us that we are the toplevel.
     \param diskMode Files saved to disk have a slightly different format.
 */
-QString KJotsPage::generateHtml( KJotsEntryBase *top, bool diskMode )
+TQString KJotsPage::generateHtml( KJotsEntryBase *top, bool diskMode )
 {
-    QString html;
-    QString htmlSubject = prepForHTML(subject());
+    TQString html;
+    TQString htmlSubject = prepForHTML(subject());
 
     if ( top == this || diskMode ) {
-        html += QString("<h3><a name=\"%1\">%2</a></h3>").arg(id()).arg(htmlSubject);
+        html += TQString("<h3><a name=\"%1\">%2</a></h3>").arg(id()).arg(htmlSubject);
     } else {
-        html += QString("<h3><a name=\"%1\" href=\"%2\">%3</a></h3>").arg(id()).arg(id()).arg(htmlSubject);
+        html += TQString("<h3><a name=\"%1\" href=\"%2\">%3</a></h3>").arg(id()).arg(id()).arg(htmlSubject);
     }
     html += prepForHTML(body());
 
     html += "<br><table border=1><tr>";
-    html += QString("<td><a href=\"#%1\">%2</a></td>").arg(id()).arg(subject());
+    html += TQString("<td><a href=\"#%1\">%2</a></td>").arg(id()).arg(subject());
 
     if ( top != this ) 
     {
         KJotsBook *parent = parentBook();
         while ( parent )
         {
-            html += QString("<td><a href=\"#%1\">%2</a></td>").arg(parent->id()).arg(parent->subject());
+            html += TQString("<td><a href=\"#%1\">%2</a></td>").arg(parent->id()).arg(parent->subject());
             if ( parent == top ) break;
             parent = parent->parentBook();
         }
     }
-    html += QString("</tr></table>");
+    html += TQString("</tr></table>");
 
     if ( top != this ) html += "<hr>";
     return html;
@@ -1213,15 +1213,15 @@ QString KJotsPage::generateHtml( KJotsEntryBase *top, bool diskMode )
     This functions output moderately formatted text when the user chooses to save as
     a text file. 
 */
-QString KJotsPage::generateText( void )
+TQString KJotsPage::generateText( void )
 {
-    QString out;
+    TQString out;
 
     //Print Fancy Text header
-    QString line, buf;
+    TQString line, buf;
     line.fill('#', subject().length() + 2);
     line += "\n";
-    out = line + QString("# ") + subject() + QString("\n") + line;
+    out = line + TQString("# ") + subject() + TQString("\n") + line;
 
     out += body();
 

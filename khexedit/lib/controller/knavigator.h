@@ -34,7 +34,7 @@ class KNavigator : public KController
     KNavigator( KHexEdit *HE, KController *P );
 
   public: // KEditor API
-    virtual bool handleKeyPress( QKeyEvent *KeyEvent );
+    virtual bool handleKeyPress( TQKeyEvent *KeyEvent );
 
   protected:
     /** moves the cursor according to the action, handles all drawing */

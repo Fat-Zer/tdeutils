@@ -18,10 +18,10 @@
 #ifndef __limitedcharlineedit
 #define __limitedcharlineedit
 
-#include <qlineedit.h>
+#include <tqlineedit.h>
 
 /**
-   QLineEdit which only accepts a prespecified number of character.
+   TQLineEdit which only accepts a prespecified number of character.
    @internal
 */
 class LimitedCharLineEdit :public QLineEdit
@@ -29,10 +29,10 @@ class LimitedCharLineEdit :public QLineEdit
 public:
   enum Mode { NORMAL = 0, HEX = 1, OCT = 2 };
 
-	LimitedCharLineEdit(Mode mode, QWidget* parent, const char *name = 0);
+	LimitedCharLineEdit(Mode mode, TQWidget* parent, const char *name = 0);
 
 protected:
-  virtual void keyPressEvent ( QKeyEvent * );
+  virtual void keyPressEvent ( TQKeyEvent * );
 
 private:
   Mode _mode;

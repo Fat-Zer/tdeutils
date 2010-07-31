@@ -23,7 +23,7 @@
 #include "monitorconfig.h"
 #include "session.h"
 
-#include <qthread.h>
+#include <tqthread.h>
 
 namespace KSim
 {
@@ -31,11 +31,11 @@ namespace KSim
 namespace Snmp
 {
 
-class Monitor : public QObject, public QThread
+class Monitor : public TQObject, public QThread
 {
     Q_OBJECT
 public:
-    Monitor( const HostConfig &host, const Identifier &oid, int refresh, QObject *parent = 0, const char *name = 0 );
+    Monitor( const HostConfig &host, const Identifier &oid, int refresh, TQObject *parent = 0, const char *name = 0 );
     virtual ~Monitor();
 
 signals:
@@ -46,8 +46,8 @@ signals:
 
 protected:
     virtual void run();
-    virtual void customEvent( QCustomEvent *ev );
-    virtual void timerEvent( QTimerEvent *ev );
+    virtual void customEvent( TQCustomEvent *ev );
+    virtual void timerEvent( TQTimerEvent *ev );
 
 private slots:
     void performSnmpRequest();

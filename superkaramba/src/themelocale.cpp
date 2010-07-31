@@ -33,9 +33,9 @@
 #include <kconfig.h>
 #include <kglobal.h>
 #include <klocale.h>
-#include <qbuffer.h>
-#include <qglobal.h>
-#include <qiodevice.h>
+#include <tqbuffer.h>
+#include <tqglobal.h>
+#include <tqiodevice.h>
 #include <stdlib.h>
 
 #ifdef HAVE_SYS_TYPES_H
@@ -108,7 +108,7 @@ struct string_desc
   nls_uint32 offset;
 };
 
-void tl_nl_load_domain(QIODevice* device, int size,
+void tl_nl_load_domain(TQIODevice* device, int size,
                        struct sk_kde_loaded_l10nfile *domain_file);
 char* tl_nl_find_msg(const struct sk_kde_loaded_l10nfile *domain_file,
                      const char *msgid);
@@ -134,13 +134,13 @@ void ThemeLocale::unload()
   }
 }
 
-QString ThemeLocale::translate(QString text) const
+TQString ThemeLocale::translate(TQString text) const
 {
   if(text == 0)
-    return QString::null;
+    return TQString::null;
   if(m_domain.data)
   {
-    QString result = QString::fromUtf8(tl_nl_find_msg(&m_domain, text.ascii()));
+    TQString result = TQString::fromUtf8(tl_nl_find_msg(&m_domain, text.ascii()));
     if(result.isEmpty())
       return text;
     else
@@ -149,19 +149,19 @@ QString ThemeLocale::translate(QString text) const
   return text;
 }
 
-void ThemeLocale::setLanguage(const QStringList &languages)
+void ThemeLocale::setLanguage(const TQStringList &languages)
 {
   unload();
-  for(QStringList::ConstIterator it = languages.begin();
+  for(TQStringList::ConstIterator it = languages.begin();
       it != languages.end();
       ++it)
   {
-    QString file =
-        QString("locale/%1/LC_MESSAGES/%2.mo").arg(*it).arg(m_theme->mo());
+    TQString file =
+        TQString("locale/%1/LC_MESSAGES/%2.mo").arg(*it).arg(m_theme->mo());
 
     if(m_theme->fileExists(file))
     {
-      QBuffer buffer(m_theme->readThemeFile(file));
+      TQBuffer buffer(m_theme->readThemeFile(file));
       tl_nl_load_domain(&buffer, buffer.size(), &m_domain);
       m_language = *it;
       return;
@@ -169,29 +169,29 @@ void ThemeLocale::setLanguage(const QStringList &languages)
   }
 }
 
-QStringList ThemeLocale::languageList()
+TQStringList ThemeLocale::languageList()
 {
   KConfig* config = KGlobal::instance()->config();
   // Reset the list and add the new languages
-  QStringList languageList;
+  TQStringList languageList;
   languageList +=
-      QStringList::split(':', QFile::decodeName(::getenv("KDE_LANG")));
+      TQStringList::split(':', TQFile::decodeName(::getenv("KDE_LANG")));
 
   languageList += config->readListEntry("Language", ':');
 
   // same order as setlocale use
   // HPB: Only run splitLocale on the environment variables..
-  QStringList langs;
+  TQStringList langs;
 
-  langs << QFile::decodeName(::getenv("LC_ALL"));
-  langs << QFile::decodeName(::getenv("LC_MESSAGES"));
-  langs << QFile::decodeName(::getenv("LANG"));
+  langs << TQFile::decodeName(::getenv("LC_ALL"));
+  langs << TQFile::decodeName(::getenv("LC_MESSAGES"));
+  langs << TQFile::decodeName(::getenv("LANG"));
 
-  for(QStringList::Iterator it = langs.begin();
+  for(TQStringList::Iterator it = langs.begin();
       it != langs.end();
       ++it )
   {
-    QString ln, ct, chrset;
+    TQString ln, ct, chrset;
     KLocale::splitLocale(*it, ln, ct, chrset);
     /*
     We don't use these in zip themes...
@@ -206,8 +206,8 @@ QStringList ThemeLocale::languageList()
   }
   languageList += langs;
   // Remove empty strings
-  QStringList::Iterator end( languageList.end() );
-  for(QStringList::Iterator it=languageList.begin(); it!=end;)
+  TQStringList::Iterator end( languageList.end() );
+  for(TQStringList::Iterator it=languageList.begin(); it!=end;)
   {
     if((*it).isEmpty())
       it = languageList.remove(it);
@@ -330,7 +330,7 @@ hash_string (const char *str_param)
 
 /* Load the message catalogs specified by device.  If it is no valid
    message catalog do nothing.  */
-void tl_nl_load_domain (QIODevice* device, int size,
+void tl_nl_load_domain (TQIODevice* device, int size,
                          struct sk_kde_loaded_l10nfile *domain_file)
 {
   struct mo_file_header *data = (struct mo_file_header *) -1;

@@ -21,7 +21,7 @@
 #ifndef _HEX_VALIDATOR_H_
 #define _HEX_VALIDATOR_H_
 
-#include <qvalidator.h> 
+#include <tqvalidator.h> 
 
 class CHexValidator: public QValidator
 {
@@ -38,12 +38,12 @@ class CHexValidator: public QValidator
     };
 
   public:
-    CHexValidator( QWidget *parent, EState state, const char *name = 0 );
+    CHexValidator( TQWidget *parent, EState state, const char *name = 0 );
     ~CHexValidator( void );
-    QValidator::State validate( QString &string, int &pos ) const;
+    TQValidator::State validate( TQString &string, int &pos ) const;
     void setState( EState state );
-    void convert( QByteArray &dest, const QString &src );
-    void format( QString &dest, const QByteArray &src );
+    void convert( TQByteArray &dest, const TQString &src );
+    void format( TQString &dest, const TQByteArray &src );
 
   private:
     /**
@@ -52,7 +52,7 @@ class CHexValidator: public QValidator
      *
      * e.g. zeroExtend( "32", 3 ) => "032"
      */
-    QString zeroExtend( const QString &src, unsigned destLen ) const;
+    TQString zeroExtend( const TQString &src, unsigned destLen ) const;
 
     EState mState;
 

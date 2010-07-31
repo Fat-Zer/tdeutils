@@ -20,21 +20,21 @@
 #ifndef FILESYSTEMSTATS_H
 #define FILESYSTEMSTATS_H
 
-#include <qstring.h>
-#include <qvaluelist.h>
+#include <tqstring.h>
+#include <tqvaluelist.h>
 
 namespace FilesystemStats
 {
   struct Entry
   {
-    QString dir;
-    QString fsname;
-    QString type;
+    TQString dir;
+    TQString fsname;
+    TQString type;
   };
 
-  typedef QValueList<Entry> List;
+  typedef TQValueList<Entry> List;
   List readEntries();
-  bool readStats( const QString &, int &, int & );
+  bool readStats( const TQString &, int &, int & );
 
 }
 #endif

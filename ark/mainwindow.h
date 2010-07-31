@@ -25,9 +25,9 @@
 #define ARKMAINWINDOW_H
 
 // QT includes
-#include <qstring.h>
-#include <qpopupmenu.h>
-#include <qtimer.h>
+#include <tqstring.h>
+#include <tqpopupmenu.h>
+#include <tqtimer.h>
 
 // KDE includes
 #include <kmainwindow.h>
@@ -42,12 +42,12 @@ MainWindow: public KParts::MainWindow
 {
     Q_OBJECT
 public:
-    MainWindow( QWidget *parent=0, const char *name=0 );
+    MainWindow( TQWidget *parent=0, const char *name=0 );
     virtual ~MainWindow();
 
     void setExtractOnly ( bool b );
     void extractTo( const KURL & targetDirectory, const KURL & archive, bool guessName );
-    void addToArchive( const KURL::List & filesToAdd, const QString & cwd = QString::null,
+    void addToArchive( const KURL::List & filesToAdd, const TQString & cwd = TQString::null,
                        const KURL & archive = KURL(), bool askForName = false );
 
 public slots:
@@ -65,7 +65,7 @@ public slots:
     virtual void saveProperties( KConfig* config );
     virtual void readProperties( KConfig* config );
     void slotSaveProperties();
-    void slotArchivePopup( const QPoint &pPoint);
+    void slotArchivePopup( const TQPoint &pPoint);
     void slotRemoveRecentURL( const KURL &url );
     void slotAddRecentURL( const KURL &url );
     void slotFixActionState( const bool & bHaveFiles );
@@ -81,14 +81,14 @@ private: // methods
     void setupActions();
     void setupMenuBar();
 
-    void newCaption(const QString & filename);
+    void newCaption(const TQString & filename);
     bool arkAlreadyOpen( const KURL & url );
 
-    KURL getOpenURL( bool addOnly = false , const QString & caption = QString::null,
-                     const QString & startDir = QString::null,
-                     const QString & suggestedName = QString::null );
+    KURL getOpenURL( bool addOnly = false , const TQString & caption = TQString::null,
+                     const TQString & startDir = TQString::null,
+                     const TQString & suggestedName = TQString::null );
 
-    void startProgressDialog( const QString & text );
+    void startProgressDialog( const TQString & text );
 
 private slots:
     void slotProgress();
@@ -106,7 +106,7 @@ private: // data
 
     //progress dialog for konqs service menus / commmand line
     KProgressDialog *progressDialog;
-    QTimer *timer;
+    TQTimer *timer;
 };
 
 #endif /* ARKMAINWINDOW_H*/

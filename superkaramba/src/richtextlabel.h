@@ -12,13 +12,13 @@
 #define RICHTEXTLABEL_H
 
 #include "meter.h"
-#include <qstring.h>
-#include <qsimplerichtext.h>
-#include <qpainter.h>
-#include <qfont.h>
-#include <qfontmetrics.h>
-#include <qrect.h>
-#include <qsize.h>
+#include <tqstring.h>
+#include <tqsimplerichtext.h>
+#include <tqpainter.h>
+#include <tqfont.h>
+#include <tqfontmetrics.h>
+#include <tqrect.h>
+#include <tqsize.h>
 #include "karamba.h"
 
 class RichTextLabel : public Meter
@@ -29,36 +29,36 @@ class RichTextLabel : public Meter
     RichTextLabel(karamba* k, int x, int y, int w, int h);
     ~RichTextLabel();
 
-    void setText(QString text, bool linkUnderline = false);
-    void setValue(QString text);
+    void setText(TQString text, bool linkUnderline = false);
+    void setValue(TQString text);
     void setValue(long v);
-    QString getStringValue() { return source; };
+    TQString getStringValue() { return source; };
 
-    void setFont(QString font);
-    QString getFont() const;
+    void setFont(TQString font);
+    TQString getFont() const;
     void setFontSize(int);
     int getFontSize() const;
     void setFixedPitch(bool);
     bool getFixedPitch() const;
     void setTextProps( TextField* t );
-    void setColorGroup(const QColorGroup &colorg);
-    const QColorGroup &getColorGroup() const;
+    void setColorGroup(const TQColorGroup &colorg);
+    const TQColorGroup &getColorGroup() const;
     void setWidth(int width);
 
     virtual bool insideActiveArea(int, int);
 
-    virtual bool click(QMouseEvent*);
-    virtual void mUpdate(QPainter*);
+    virtual bool click(TQMouseEvent*);
+    virtual void mUpdate(TQPainter*);
 
-    QString anchorAt(int, int);
+    TQString anchorAt(int, int);
 
   private:
-    QSimpleRichText* text;
-    QString source;
-    QFont font;
-    QColorGroup colorGrp;
+    TQSimpleRichText* text;
+    TQString source;
+    TQFont font;
+    TQColorGroup colorGrp;
     bool underlineLinks;
-    QSize originalSize;
+    TQSize originalSize;
 };
 
 #endif

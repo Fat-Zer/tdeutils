@@ -42,38 +42,38 @@ class ThemesDlg : public ThemesLayout
     Q_OBJECT
 
   public:
-    ThemesDlg(QWidget *parent = 0, const char *name = 0);
+    ThemesDlg(TQWidget *parent = 0, const char *name = 0);
     ~ThemesDlg();
 
-    int addTheme(const QString &appId, const QString &file);
-    void removeTheme(const QString &appId, const QString &file, int instance);
-    int addThemeToList(const QString &file);
-    void addSkzThemeToDialog(const QString &file);
-    void addThemeToDialog(const KArchiveDirectory *archiveDir, const QString& destDir);
-    void writeNewStuffConfig(const QString &file);
+    int addTheme(const TQString &appId, const TQString &file);
+    void removeTheme(const TQString &appId, const TQString &file, int instance);
+    int addThemeToList(const TQString &file);
+    void addSkzThemeToDialog(const TQString &file);
+    void addThemeToDialog(const KArchiveDirectory *archiveDir, const TQString& destDir);
+    void writeNewStuffConfig(const TQString &file);
     void configSanityCheck();
-    bool isDownloaded(const QString &path);
+    bool isDownloaded(const TQString &path);
     void saveUserAddedThemes();
-    QStringList runningThemes();
+    TQStringList runningThemes();
 
   protected slots:
     virtual void addToDesktop();
     virtual void selectionChanged(int);
     virtual void openLocalTheme();
     virtual void getNewStuff();
-    virtual void search(const QString& text);
+    virtual void search(const TQString& text);
     virtual void uninstall();
 
   protected:
-    static bool filter(int index, QWidget* widget, void* data);
+    static bool filter(int index, TQWidget* widget, void* data);
     void populateListbox();
-    int themeIndex(QString file);
-    QStringList themes();
+    int themeIndex(TQString file);
+    TQStringList themes();
 
 #ifdef HAVE_KNEWSTUFF
   private:
     SKNewStuff *mNewStuff;
-    QStringList m_newStuffStatus;
+    TQStringList m_newStuffStatus;
 #endif
 };
 

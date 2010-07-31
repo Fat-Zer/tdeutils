@@ -11,8 +11,8 @@
 //
 //
 
-#include <qfile.h>
-#include <qxml.h>
+#include <tqfile.h>
+#include <tqxml.h>
 
 #include <kglobal.h>
 #include <kstandarddirs.h>
@@ -34,8 +34,8 @@ ProfileServer::~ProfileServer()
 
 void ProfileServer::loadProfiles()
 {
-	QStringList theFiles = KGlobal::dirs()->findAllResources("data", "profiles/*.profile.xml");
-	for(QStringList::iterator i = theFiles.begin(); i != theFiles.end(); ++i)
+	TQStringList theFiles = KGlobal::dirs()->findAllResources("data", "profiles/*.profile.xml");
+	for(TQStringList::iterator i = theFiles.begin(); i != theFiles.end(); ++i)
 	{	kdDebug() << "Found data file: " << *i << endl;
 		Profile *p = new Profile();
 		p->loadFromFile(*i);
@@ -52,27 +52,27 @@ Profile::Profile()
 	theActions.setAutoDelete(true);
 }
 
-const ProfileAction *Profile::searchClass(const QString &c) const
+const ProfileAction *Profile::searchClass(const TQString &c) const
 {
-	for(QDictIterator<ProfileAction> i(theActions); i.current(); ++i)
+	for(TQDictIterator<ProfileAction> i(theActions); i.current(); ++i)
 		if(i.current()->getClass() == c) return i;
 	return 0;
 }
 
-void Profile::loadFromFile(const QString &fileName)
+void Profile::loadFromFile(const TQString &fileName)
 {
 	charBuffer = "";
 	curPA = 0;
 	curPAA = 0;
 
-	QFile xmlFile(fileName);
-	QXmlInputSource source(&xmlFile);
-	QXmlSimpleReader reader;
+	TQFile xmlFile(fileName);
+	TQXmlInputSource source(&xmlFile);
+	TQXmlSimpleReader reader;
 	reader.setContentHandler(this);
 	reader.parse(source);
 }
 
-const ProfileAction *ProfileServer::getAction(const QString &appId, const QString &actionId) const
+const ProfileAction *ProfileServer::getAction(const TQString &appId, const TQString &actionId) const
 {
 	if(theProfiles[appId])
 		if(theProfiles[appId]->theActions[actionId])
@@ -80,25 +80,25 @@ const ProfileAction *ProfileServer::getAction(const QString &appId, const QStrin
 	return 0;
 }
 
-const QString &ProfileServer::getServiceName(const QString &appId) const
+const TQString &ProfileServer::getServiceName(const TQString &appId) const
 {
 	if(theProfiles[appId])
 		return theProfiles[appId]->serviceName();
-	return QString::null;
+	return TQString::null;
 }
 
-const ProfileAction *ProfileServer::getAction(const QString &appId, const QString &objId, const QString &prototype) const
+const ProfileAction *ProfileServer::getAction(const TQString &appId, const TQString &objId, const TQString &prototype) const
 {
 	return getAction(appId, objId + "::" + prototype);
 }
 
-bool Profile::characters(const QString &data)
+bool Profile::characters(const TQString &data)
 {
 	charBuffer += data;
 	return true;
 }
 
-bool Profile::startElement(const QString &, const QString &, const QString &name, const QXmlAttributes &attributes)
+bool Profile::startElement(const TQString &, const TQString &, const TQString &name, const TQXmlAttributes &attributes)
 {
 	if(name == "profile")
 	{	theId = attributes.value("id");
@@ -130,7 +130,7 @@ bool Profile::startElement(const QString &, const QString &, const QString &name
 	return true;
 }
 
-bool Profile::endElement(const QString &, const QString &, const QString &name)
+bool Profile::endElement(const TQString &, const TQString &, const TQString &name)
 {
 	if(name == "name")
 		if(curPA)

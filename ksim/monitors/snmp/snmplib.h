@@ -25,7 +25,7 @@
 #include <net-snmp/net-snmp-config.h>
 #include <net-snmp/net-snmp-includes.h>
 
-#include <qmutex.h>
+#include <tqmutex.h>
 
 template <class> class KStaticDeleter;
 
@@ -39,13 +39,13 @@ template <class T>
 class ClassLocker
 {
 public:
-    ClassLocker( QMutex *guard, T *obj )
+    ClassLocker( TQMutex *guard, T *obj )
         : m_guard( guard ), m_obj( obj )
     {}
 
     struct ClassLockerHelper
     {
-        ClassLockerHelper( QMutex *guard, T *obj )
+        ClassLockerHelper( TQMutex *guard, T *obj )
             : m_guard( guard ), m_obj( obj ), m_locked( false )
         {}
 
@@ -63,7 +63,7 @@ public:
         }
 
     private:
-        QMutex *m_guard;
+        TQMutex *m_guard;
         T *m_obj;
         bool m_locked;
     };
@@ -77,7 +77,7 @@ private:
     ClassLocker( const ClassLocker & );
     ClassLocker &operator=( const ClassLocker & );
 
-    QMutex *m_guard;
+    TQMutex *m_guard;
     T *m_obj;
 };
 
@@ -127,7 +127,7 @@ private:
     SnmpLib();
     ~SnmpLib();
 
-    QMutex m_guard;
+    TQMutex m_guard;
     ClassLocker<SnmpLib> *m_lockHelper;
 
     static SnmpLib *s_self;

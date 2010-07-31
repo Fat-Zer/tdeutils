@@ -40,9 +40,9 @@ class SKNewStuff : public KNewStuff
   public:
     SKNewStuff( ThemesDlg * );
 
-    bool install( const QString &fileName );
-    bool createUploadFile( const QString &fileName );
-    QString downloadDestination( KNS::Entry *entry );
+    bool install( const TQString &fileName );
+    bool createUploadFile( const TQString &fileName );
+    TQString downloadDestination( KNS::Entry *entry );
 
   private:
     ThemesDlg *mDlg;

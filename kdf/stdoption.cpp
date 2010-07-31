@@ -31,7 +31,7 @@
 
 #include "stdoption.h"
 
-QString CStdOption::mDefaultFileManager = "kfmclient openURL %m";
+TQString CStdOption::mDefaultFileManager = "kfmclient openURL %m";
 int CStdOption::mDefaultUpdateFrequency = 60;
 
 CStdOption::CStdOption( void )
@@ -82,7 +82,7 @@ void CStdOption::writeDefaultFileManager( void )
 
 
 
-QString CStdOption::fileManager( void )
+TQString CStdOption::fileManager( void )
 {
   return( mFileManager );
 }
@@ -115,7 +115,7 @@ void CStdOption::setDefault( void )
 }
 
 
-void CStdOption::setFileManager( const QString &fileManager )
+void CStdOption::setFileManager( const TQString &fileManager )
 {
   mFileManager = fileManager;
 }

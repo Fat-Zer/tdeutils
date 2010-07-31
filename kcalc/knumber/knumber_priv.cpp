@@ -23,8 +23,8 @@
 #ifdef HAVE_STDLIB_H
 #include <stdlib.h>
 #endif
-#include <qregexp.h>
-#include <qstring.h>
+#include <tqregexp.h>
+#include <tqstring.h>
 
 #include "knumber_priv.h"
 
@@ -115,7 +115,7 @@ _knumfloat::_knumfloat(_knumber const & num)
 
 
 
-_knumerror::_knumerror(QString const & num)
+_knumerror::_knumerror(TQString const & num)
 {
   if (num == "nan")
     _error = UndefinedNumber;
@@ -125,20 +125,20 @@ _knumerror::_knumerror(QString const & num)
     _error = MinusInfinity;
 }
 
-_knuminteger::_knuminteger(QString const & num)
+_knuminteger::_knuminteger(TQString const & num)
 {
   mpz_init(_mpz);
   mpz_set_str(_mpz, num.ascii(), 10);
 }
 
-_knumfraction::_knumfraction(QString const & num)
+_knumfraction::_knumfraction(TQString const & num)
 {
   mpq_init(_mpq);
-  if (QRegExp("^[+-]?\\d+(\\.\\d*)?(e[+-]?\\d+)?$").exactMatch(num)) {
+  if (TQRegExp("^[+-]?\\d+(\\.\\d*)?(e[+-]?\\d+)?$").exactMatch(num)) {
     // my hand-made conversion is terrible
     // first me convert the mantissa
     unsigned long int digits_after_dot = ((num.section( '.', 1, 1)).section('e', 0, 0)).length();
-    QString tmp_num = num.section('e', 0, 0).remove('.');
+    TQString tmp_num = num.section('e', 0, 0).remove('.');
     mpq_set_str(_mpq, tmp_num.ascii(), 10);
     mpz_t tmp_int;
     mpz_init(tmp_int);
@@ -163,7 +163,7 @@ _knumfraction::_knumfraction(QString const & num)
   mpq_canonicalize(_mpq);
 }
 
-_knumfloat::_knumfloat(QString const & num)
+_knumfloat::_knumfloat(TQString const & num)
 {
   mpf_init(_mpf);
   mpf_set_str(_mpf, num.ascii(), 10);
@@ -178,51 +178,51 @@ _knuminteger const & _knuminteger::operator = (_knuminteger const & num)
   return *this;
 }
 
-QString const _knumerror::ascii(int prec) const
+TQString const _knumerror::ascii(int prec) const
 {
   static_cast<void>(prec);
 
   switch(_error) {
   case UndefinedNumber:
-    return QString("nan");
+    return TQString("nan");
   case Infinity:
-    return QString("inf");
+    return TQString("inf");
   case MinusInfinity:
-    return QString("-inf");
+    return TQString("-inf");
   default:
-    return QString::null;
+    return TQString::null;
   }
 }
 
-QString const _knuminteger::ascii(int prec) const
+TQString const _knuminteger::ascii(int prec) const
 {
   static_cast<void>(prec);
   char *tmp_ptr;
 
   gmp_asprintf(&tmp_ptr, "%Zd", _mpz);
-  QString ret_str = tmp_ptr;
+  TQString ret_str = tmp_ptr;
 
   free(tmp_ptr);
   return ret_str;
 }
 
-QString const _knumfraction::ascii(int prec) const
+TQString const _knumfraction::ascii(int prec) const
 {
   static_cast<void>(prec);
   char *tmp_ptr = mpq_get_str(0, 10, _mpq);
-  QString ret_str = tmp_ptr;
+  TQString ret_str = tmp_ptr;
 
   free(tmp_ptr);
 
   return ret_str;
 }
 
-QString const _knumfloat::ascii(int prec) const
+TQString const _knumfloat::ascii(int prec) const
 {
-  QString ret_str;
+  TQString ret_str;
   char *tmp_ptr;
   if (prec > 0)
-    gmp_asprintf(&tmp_ptr, ("%." + QString().setNum(prec) + "Fg").ascii(), _mpf);
+    gmp_asprintf(&tmp_ptr, ("%." + TQString().setNum(prec) + "Fg").ascii(), _mpf);
   else
     gmp_asprintf(&tmp_ptr, "%Fg", _mpf);
 

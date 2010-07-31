@@ -17,11 +17,11 @@
  **/
 #ifndef __selectablelineedit
 #define __selectablelineedit
-#include <qlineedit.h>
+#include <tqlineedit.h>
 class RegExpWidget;
 
 /**
-   A specialized QLineEdit for use in @ref TextWidget.
+   A specialized TQLineEdit for use in @ref TextWidget.
 
    This widget has two main features:
    @li when the @ref TextWidget which contains it is selected, then the
@@ -36,9 +36,9 @@ class SelectableLineEdit :public QLineEdit
 Q_OBJECT
 
 public:
-  SelectableLineEdit( RegExpWidget* owner, QWidget* parent = 0, const char* name = 0);
+  SelectableLineEdit( RegExpWidget* owner, TQWidget* parent = 0, const char* name = 0);
   void setSelected( bool selected );
-  virtual QSize sizeHint() const;
+  virtual TQSize sizeHint() const;
 
 protected slots:
   void slotKeyPressed();

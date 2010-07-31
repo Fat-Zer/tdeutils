@@ -38,7 +38,7 @@ class CFileInfoDialog : public KDialogBase
   Q_OBJECT
   
   public:
-    CFileInfoDialog( QWidget *parent=0, const char *name=0,bool modal=false );
+    CFileInfoDialog( TQWidget *parent=0, const char *name=0,bool modal=false );
     ~CFileInfoDialog( void );
 
     void setStatistics( void );
@@ -52,9 +52,9 @@ class CFileInfoDialog : public KDialogBase
     virtual void slotUser1( void );
 
   protected:
-    virtual void resizeEvent( QResizeEvent * );
-    virtual void showEvent( QShowEvent * );
-    virtual void timerEvent( QTimerEvent * );
+    virtual void resizeEvent( TQResizeEvent * );
+    virtual void showEvent( TQShowEvent * );
+    virtual void timerEvent( TQTimerEvent * );
 
   private:
     void setColumnWidth( void );
@@ -66,9 +66,9 @@ class CFileInfoDialog : public KDialogBase
     bool mBusy;
     bool mDirty;
     CListView *mFrequencyList;
-    QLabel *mFileNameLabel;
-    QLabel *mFileSizeLabel;
-    QLabel *mDirtyLabel;
+    TQLabel *mFileNameLabel;
+    TQLabel *mFileSizeLabel;
+    TQLabel *mDirtyLabel;
 };
 
 #endif

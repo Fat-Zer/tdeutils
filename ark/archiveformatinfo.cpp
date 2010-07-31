@@ -29,7 +29,7 @@
 #include <kdesktopfile.h>
 #include <kfilterdev.h>
 
-#include <qfile.h>
+#include <tqfile.h>
 
 ArchiveFormatInfo * ArchiveFormatInfo::m_pSelf = 0;
 
@@ -83,7 +83,7 @@ void ArchiveFormatInfo::buildFormatInfos()
     addFormatInfo( ACE_FORMAT, "application/x-ace", ".ace" );
 }
 
-void ArchiveFormatInfo::addFormatInfo( ArchType type, QString mime, QString stdExt )
+void ArchiveFormatInfo::addFormatInfo( ArchType type, TQString mime, TQString stdExt )
 {
     FormatInfo & info = find( type );
 
@@ -101,10 +101,10 @@ void ArchiveFormatInfo::addFormatInfo( ArchType type, QString mime, QString stdE
 }
 
 
-QString ArchiveFormatInfo::filter()
+TQString ArchiveFormatInfo::filter()
 {
-    QStringList allExtensions;
-    QString filter;
+    TQStringList allExtensions;
+    TQString filter;
     InfoList::Iterator it;
     for ( it = m_formatInfos.begin(); it != m_formatInfos.end(); ++it )
     {
@@ -116,9 +116,9 @@ QString ArchiveFormatInfo::filter()
             + filter;
 }
 
-const QStringList ArchiveFormatInfo::supportedMimeTypes( bool includeCompressed )
+const TQStringList ArchiveFormatInfo::supportedMimeTypes( bool includeCompressed )
 {
-    QStringList list;
+    TQStringList list;
 
     InfoList::Iterator end = m_formatInfos.end();
     for ( InfoList::Iterator it = m_formatInfos.begin(); it != end; ++it )
@@ -132,9 +132,9 @@ const QStringList ArchiveFormatInfo::supportedMimeTypes( bool includeCompressed 
     return list;
 }
 
-QStringList ArchiveFormatInfo::allDescriptions()
+TQStringList ArchiveFormatInfo::allDescriptions()
 {
-    QStringList descriptions;
+    TQStringList descriptions;
     InfoList::Iterator it;
     for ( it = m_formatInfos.begin(); it != m_formatInfos.end(); ++it )
         descriptions += (*it).allDescriptions;
@@ -153,10 +153,10 @@ ArchiveFormatInfo::FormatInfo & ArchiveFormatInfo::find( ArchType type )
     return ( *m_formatInfos.append( info ) );
 }
 
-ArchType ArchiveFormatInfo::archTypeByExtension( const QString & archname )
+ArchType ArchiveFormatInfo::archTypeByExtension( const TQString & archname )
 {
     InfoList::Iterator it = m_formatInfos.begin();
-    QStringList::Iterator ext;
+    TQStringList::Iterator ext;
     for( ; it != m_formatInfos.end(); ++it )
     {
         ext = (*it).extensions.begin();
@@ -167,7 +167,7 @@ ArchType ArchiveFormatInfo::archTypeByExtension( const QString & archname )
     return UNKNOWN_FORMAT;
 }
 
-ArchType ArchiveFormatInfo::archTypeForMimeType( const QString & mimeType )
+ArchType ArchiveFormatInfo::archTypeForMimeType( const TQString & mimeType )
 {
     InfoList::Iterator it = m_formatInfos.begin();
     for( ; it != m_formatInfos.end(); ++it )
@@ -186,10 +186,10 @@ ArchType ArchiveFormatInfo::archTypeForURL( const KURL & url )
     if( url.isEmpty() )
         return UNKNOWN_FORMAT;
 
-    if( !QFile::exists( url.path() ) )
+    if( !TQFile::exists( url.path() ) )
         return archTypeByExtension( url.path() );
 
-    QString mimeType = KMimeType::findByURL( url, 0, true, true )->name();
+    TQString mimeType = KMimeType::findByURL( url, 0, true, true )->name();
     kdDebug( 1601 ) << "find by url: " << mimeType << endl;
     if( mimeType == KMimeType::defaultMimeType() )
     {
@@ -205,13 +205,13 @@ ArchType ArchiveFormatInfo::archTypeForURL( const KURL & url )
 }
 
 
-QString ArchiveFormatInfo::findMimeType( const KURL & url )
+TQString ArchiveFormatInfo::findMimeType( const KURL & url )
 {
-    QString mimeType = KMimeType::findByURL( url )->name();
+    TQString mimeType = KMimeType::findByURL( url )->name();
     if ( mimeType != "application/x-bzip2" && mimeType != "application/x-gzip" )
         return mimeType;
 
-    QIODevice * dev = KFilterDev::deviceForFile( url.path(), mimeType );
+    TQIODevice * dev = KFilterDev::deviceForFile( url.path(), mimeType );
     if ( !dev )
         return mimeType;
 
@@ -232,7 +232,7 @@ QString ArchiveFormatInfo::findMimeType( const KURL & url )
     return mimeType;
 }
 
-QString ArchiveFormatInfo::mimeTypeForDescription( const QString & description )
+TQString ArchiveFormatInfo::mimeTypeForDescription( const TQString & description )
 {
     InfoList::Iterator it = m_formatInfos.begin();
     int index;
@@ -242,10 +242,10 @@ QString ArchiveFormatInfo::mimeTypeForDescription( const QString & description )
         if ( index != -1 )
             return (* (*it).mimeTypes.at( index ) );
     }
-    return QString::null;
+    return TQString::null;
 }
 
-QString ArchiveFormatInfo::descriptionForMimeType( const QString & mimeType )
+TQString ArchiveFormatInfo::descriptionForMimeType( const TQString & mimeType )
 {
     InfoList::Iterator it = m_formatInfos.begin();
     int index;
@@ -255,10 +255,10 @@ QString ArchiveFormatInfo::descriptionForMimeType( const QString & mimeType )
         if ( index != -1 )
             return (* (*it).allDescriptions.at( index ) );
     }
-    return QString::null;
+    return TQString::null;
 }
 
-QString ArchiveFormatInfo::defaultExtension( const QString & mimeType )
+TQString ArchiveFormatInfo::defaultExtension( const TQString & mimeType )
 {
     InfoList::Iterator it = m_formatInfos.begin();
     int index;
@@ -268,7 +268,7 @@ QString ArchiveFormatInfo::defaultExtension( const QString & mimeType )
         if ( index != -1 )
             return (* (*it).defaultExtensions.at( index ) );
     }
-    return QString::null;
+    return TQString::null;
 }
 
 bool ArchiveFormatInfo::wasUnknownExtension()

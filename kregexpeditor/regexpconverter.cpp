@@ -27,11 +27,11 @@
 #include "positionregexp.h"
 #include "repeatregexp.h"
 #include "textregexp.h"
-#include <qtextedit.h>
+#include <tqtextedit.h>
 #include "regexphighlighter.h"
 
 RegExpConverter* RegExpConverter::_current = 0;
-RegExp* RegExpConverter::parse( const QString&, bool* ok )
+RegExp* RegExpConverter::parse( const TQString&, bool* ok )
 {
     ok = false;
     return new DotRegExp( false ); // This method should never be called.
@@ -39,7 +39,7 @@ RegExp* RegExpConverter::parse( const QString&, bool* ok )
 
 // This function needs to be called toStr rather than toString, as it is not possible to
 // over load function across inheritance!
-QString RegExpConverter::toStr( RegExp* regexp, bool markSelection )
+TQString RegExpConverter::toStr( RegExp* regexp, bool markSelection )
 {
     switch (regexp->type()) {
     case RegExp::CONC: return toString( static_cast<ConcRegExp*>( regexp ), markSelection);
@@ -53,13 +53,13 @@ QString RegExpConverter::toStr( RegExp* regexp, bool markSelection )
     case RegExp::TEXTRANGE: return toString( static_cast<TextRangeRegExp*>( regexp ), markSelection );
     }
     qWarning("We shouldn't get here!");
-    return QString::fromLatin1( "" );
+    return TQString::fromLatin1( "" );
 }
 
 
-QString RegExpConverter::escape( QString text, QValueList<QChar> chars, QChar escapeChar) const
+TQString RegExpConverter::escape( TQString text, TQValueList<TQChar> chars, TQChar escapeChar) const
 {
-	QString res;
+	TQString res;
 	for (unsigned int i=0; i<text.length(); i++) {
 		for (unsigned int j=0; j<chars.count(); j++) {
 			if ( text.at(i) == (chars[j]) ) {
@@ -74,9 +74,9 @@ QString RegExpConverter::escape( QString text, QValueList<QChar> chars, QChar es
 }
 
 /**
-   Returns a QSyntaxHighlighter to be used in the virifyer widget.
+   Returns a TQSyntaxHighlighter to be used in the virifyer widget.
 */
-RegexpHighlighter* RegExpConverter::highlighter( QTextEdit* )
+RegexpHighlighter* RegExpConverter::highlighter( TQTextEdit* )
 {
     return 0;
 }

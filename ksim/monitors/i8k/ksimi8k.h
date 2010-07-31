@@ -68,14 +68,14 @@ class I8KView : public KSim::PluginView
 
   private:
 
-    QString m_unit;
+    TQString m_unit;
     int m_interval;
 
     KSim::Label *m_fan1Label, *m_fan2Label, *m_tempLabel;
-    QTimer *m_timer;
+    TQTimer *m_timer;
     FILE *m_procFile;
-    QTextIStream *m_procStream;
-    QRegExp *m_reData;
+    TQTextIStream *m_procStream;
+    TQRegExp *m_reData;
 };
 
 class I8KConfig : public KSim::PluginPage
@@ -92,7 +92,7 @@ class I8KConfig : public KSim::PluginPage
 
   private:
 
-    QCheckBox *m_unit;
+    TQCheckBox *m_unit;
     KIntNumInput *m_interval;
 };
 

@@ -19,8 +19,8 @@
  */
 
 
-#include <qlabel.h>
-#include <qlayout.h>
+#include <tqlabel.h>
+#include <tqlayout.h>
 
 #include <klocale.h>
 
@@ -28,14 +28,14 @@
 #include "hexvalidator.h"
 
 
-CValidateLineEdit::CValidateLineEdit( QWidget *parent, int validateType,
+CValidateLineEdit::CValidateLineEdit( TQWidget *parent, int validateType,
 				      const char *name )
-  :QLineEdit( parent, name ), mBusy(false)
+  :TQLineEdit( parent, name ), mBusy(false)
 {
   mValidator = new CHexValidator( this, (CHexValidator::EState)validateType );
   setValidator( mValidator );
-  connect( this, SIGNAL(textChanged(const QString &)),
-	   this, SLOT(convertText(const QString &)) );
+  connect( this, TQT_SIGNAL(textChanged(const TQString &)),
+	   this, TQT_SLOT(convertText(const TQString &)) );
 }
 
 
@@ -44,20 +44,20 @@ CValidateLineEdit::~CValidateLineEdit( void )
 }
 
 
-void CValidateLineEdit::setData( const QByteArray &buf )
+void CValidateLineEdit::setData( const TQByteArray &buf )
 {
   if( mBusy == false )
   {
-    QString text;
+    TQString text;
     mValidator->format( text, buf );
     setText( text );
   }
 }
 
 
-void CValidateLineEdit::convertText( const QString &text )
+void CValidateLineEdit::convertText( const TQString &text )
 {
-  QByteArray buf;
+  TQByteArray buf;
   mValidator->convert( buf, text );
   mBusy = true; // Don't update while editing
   emit dataChanged( buf );
@@ -66,27 +66,27 @@ void CValidateLineEdit::convertText( const QString &text )
 
 
 
-CConverterDialog::CConverterDialog( QWidget *parent, const char *name, 
+CConverterDialog::CConverterDialog( TQWidget *parent, const char *name, 
 				    bool modal )
   :KDialogBase( parent, name, modal, i18n("Converter"), Cancel|User2|User1, 
 		Cancel, true, KStdGuiItem::clear(), i18n("&On Cursor") )
 {
-  QWidget *page = new QWidget( this );
+  TQWidget *page = new TQWidget( this );
   setMainWidget( page );
 
-  QGridLayout *topLayout = new QGridLayout( page, 6, 2, 0, spacingHint() );
+  TQGridLayout *topLayout = new TQGridLayout( page, 6, 2, 0, spacingHint() );
   topLayout->setRowStretch( 5, 10 );
   topLayout->setColStretch( 1, 10 );
 
-  QLabel *label = new QLabel( i18n("Hexadecimal:"), page );
+  TQLabel *label = new TQLabel( i18n("Hexadecimal:"), page );
   topLayout->addWidget( label, 0, 0 );
-  label = new QLabel( i18n("Decimal:"), page );
+  label = new TQLabel( i18n("Decimal:"), page );
   topLayout->addWidget( label, 1, 0 );
-  label = new QLabel( i18n("Octal:"), page );
+  label = new TQLabel( i18n("Octal:"), page );
   topLayout->addWidget( label, 2, 0 );
-  label = new QLabel( i18n("Binary:"), page );
+  label = new TQLabel( i18n("Binary:"), page );
   topLayout->addWidget( label, 3, 0 );
-  label = new QLabel( i18n("Text:"), page );
+  label = new TQLabel( i18n("Text:"), page );
   topLayout->addWidget( label, 4, 0 );
 
   mHexInput = new CValidateLineEdit( page, CHexValidator::hexadecimal );
@@ -101,16 +101,16 @@ CConverterDialog::CConverterDialog( QWidget *parent, const char *name,
   mTxtInput = new CValidateLineEdit( page, CHexValidator::regularText );
   topLayout->addWidget( mTxtInput, 4, 1 );
 
-  connect( mHexInput, SIGNAL(dataChanged(const QByteArray &)),
-	   this, SLOT(setData(const QByteArray &)) );
-  connect( mDecInput, SIGNAL(dataChanged(const QByteArray &)),
-	   this, SLOT(setData(const QByteArray &)) );
-  connect( mOctInput, SIGNAL(dataChanged(const QByteArray &)),
-	   this, SLOT(setData(const QByteArray &)) );
-  connect( mBinInput, SIGNAL(dataChanged(const QByteArray &)),
-	   this, SLOT(setData(const QByteArray &)) );
-  connect( mTxtInput, SIGNAL(dataChanged(const QByteArray &)),
-	   this, SLOT(setData(const QByteArray &)) );
+  connect( mHexInput, TQT_SIGNAL(dataChanged(const TQByteArray &)),
+	   this, TQT_SLOT(setData(const TQByteArray &)) );
+  connect( mDecInput, TQT_SIGNAL(dataChanged(const TQByteArray &)),
+	   this, TQT_SLOT(setData(const TQByteArray &)) );
+  connect( mOctInput, TQT_SIGNAL(dataChanged(const TQByteArray &)),
+	   this, TQT_SLOT(setData(const TQByteArray &)) );
+  connect( mBinInput, TQT_SIGNAL(dataChanged(const TQByteArray &)),
+	   this, TQT_SLOT(setData(const TQByteArray &)) );
+  connect( mTxtInput, TQT_SIGNAL(dataChanged(const TQByteArray &)),
+	   this, TQT_SLOT(setData(const TQByteArray &)) );
 
 }
 
@@ -120,14 +120,14 @@ CConverterDialog::~CConverterDialog( void )
 }
 
 
-void CConverterDialog::showEvent( QShowEvent *e )  
+void CConverterDialog::showEvent( TQShowEvent *e )  
 {
   KDialogBase::showEvent(e);
   mHexInput->setFocus();
 }
 
 
-void CConverterDialog::setData( const QByteArray &data )
+void CConverterDialog::setData( const TQByteArray &data )
 {
   mHexInput->blockSignals(true);
   mDecInput->blockSignals(true);
@@ -148,13 +148,13 @@ void CConverterDialog::setData( const QByteArray &data )
 
 void CConverterDialog::slotUser1( void ) // Clear
 {
-  QByteArray buf;
+  TQByteArray buf;
   setData( buf );
 }
 
 void CConverterDialog::slotUser2( void ) // On Cursor
 {
-  QByteArray buf;
+  TQByteArray buf;
   emit probeCursorValue( buf, 1 );
   setData( buf );
 }

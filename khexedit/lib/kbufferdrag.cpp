@@ -16,8 +16,8 @@
 
 
 // qt specific
-#include <qcstring.h>
-#include <qtextcodec.h>
+#include <tqcstring.h>
+#include <tqtextcodec.h>
 // kde specific
 #include <kglobal.h>
 #include <klocale.h>
@@ -43,11 +43,11 @@ static const char TextPlainLocalStub[] = "text/plain;charset=";
 // creates the name for the local text/plain
 static const char *localTextPlain()
 {
-  static QCString TextPlainLocal;
+  static TQCString TextPlainLocal;
 
   if( TextPlainLocal.isNull() )
   {
-    TextPlainLocal = QCString(KGlobal::locale()->encoding()).lower();
+    TextPlainLocal = TQCString(KGlobal::locale()->encoding()).lower();
     // remove the whitespaces
     int s;
     while( (s=TextPlainLocal.find(' ')) >= 0 )
@@ -60,18 +60,18 @@ static const char *localTextPlain()
 }
 
 // tries to create a codec by the given charset description
-static QTextCodec* codecForCharset( const QCString& Desc )
+static TQTextCodec* codecForCharset( const TQCString& Desc )
 {
   int i = Desc.find( "charset=" );
   if( i >= 0 )
   {
-    QCString CharSetName = Desc.mid( i+8 );
+    TQCString CharSetName = Desc.mid( i+8 );
     // remove any further attributes
     if( (i=CharSetName.find( ';' )) >= 0 )
       CharSetName = CharSetName.left( i );
 
     // try to find codec
-    return QTextCodec::codecForName( CharSetName );
+    return TQTextCodec::codecForName( CharSetName );
   }
   // no charset=, use locale
   return KGlobal::locale()->codecForEncoding();
@@ -79,11 +79,11 @@ static QTextCodec* codecForCharset( const QCString& Desc )
 
 
 
-KBufferDrag::KBufferDrag( const QByteArray &D, KCoordRange Range,
+KBufferDrag::KBufferDrag( const TQByteArray &D, KCoordRange Range,
                           const KOffsetColumn *OC, const KValueColumn *HC, const KCharColumn *TC,
-                          QChar SC, QChar UC, const QString &CN,
-                          QWidget *Source, const char *Name )
-  :QDragObject( Source, Name ),
+                          TQChar SC, TQChar UC, const TQString &CN,
+                          TQWidget *Source, const char *Name )
+  :TQDragObject( Source, Name ),
    CoordRange( Range ),
    NoOfCol( 0 ),
    SubstituteChar( SC ),
@@ -119,7 +119,7 @@ KBufferDrag::~KBufferDrag()
 
 
 
-void KBufferDrag::setData( const QByteArray &D )
+void KBufferDrag::setData( const TQByteArray &D )
 {
   Data = D;
 }
@@ -135,7 +135,7 @@ const char *KBufferDrag::format( int i ) const
 }
 
 
-QByteArray KBufferDrag::encodedData( const char *Format ) const
+TQByteArray KBufferDrag::encodedData( const char *Format ) const
 {
   if( Format != 0 )
   {
@@ -146,19 +146,19 @@ QByteArray KBufferDrag::encodedData( const char *Format ) const
     // plain text wanted?
     if( qstrncmp(Format,TextPlain,10) == 0 )
     {
-      QCString Output;
-      QTextCodec *TextCodec = codecForCharset( QCString(Format).lower() );
+      TQCString Output;
+      TQTextCodec *TextCodec = codecForCharset( TQCString(Format).lower() );
       if( TextCodec == 0 )
         return Output;
 
-      QString Text;
+      TQString Text;
       // plain copy?
       if( NoOfCol == 0 )
       {
         // duplicate the data and substitute all non-printable items with a space
         KCharCodec *CharCodec = KCharCodec::createCodec( CodecName );
-        static const QChar Tab('\t');
-        static const QChar Return('\n');
+        static const TQChar Tab('\t');
+        static const TQChar Return('\n');
         uint Size = Data.size();
         Text.setLength( Size );
 
@@ -201,20 +201,20 @@ QByteArray KBufferDrag::encodedData( const char *Format ) const
       // fix end
       //if( TextCodec->mibEnum() != 1000 )
       //{
-        // Don't include NUL in size (QCString::resize() adds NUL)
-      //  ((QByteArray&)Output).resize( Output.length() );
+        // Don't include NUL in size (TQCString::resize() adds NUL)
+      //  ((TQByteArray&)Output).resize( Output.length() );
       //}
       return Output;
     }
   }
 
   // return empty dummy
-  return QByteArray();
+  return TQByteArray();
 }
 
 
 
-bool KBufferDrag::canDecode( const QMimeSource* Source )
+bool KBufferDrag::canDecode( const TQMimeSource* Source )
 {
   bool c =( Source->provides(OctetStream) /*|| Source->provides(TextPlain)*/ );
   return c;
@@ -222,7 +222,7 @@ bool KBufferDrag::canDecode( const QMimeSource* Source )
 }
 
 
-bool KBufferDrag::decode( const QMimeSource* Source, QByteArray &Dest )
+bool KBufferDrag::decode( const TQMimeSource* Source, TQByteArray &Dest )
 {
 //   Dest = Source->encodedData( MediaString );
 //   return Dest.size() != 0;

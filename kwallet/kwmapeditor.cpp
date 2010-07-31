@@ -26,20 +26,20 @@
 #include <kstdaction.h>
 #include <kwin.h>
 
-#include <qapplication.h>
-#include <qclipboard.h>
-#include <qpushbutton.h>
-#include <qtextedit.h>
+#include <tqapplication.h>
+#include <tqclipboard.h>
+#include <tqpushbutton.h>
+#include <tqtextedit.h>
 
-KWMapEditor::KWMapEditor(QMap<QString,QString>& map, QWidget *parent, const char *name)
-: QTable(0, 3, parent, name), _map(map) {
+KWMapEditor::KWMapEditor(TQMap<TQString,TQString>& map, TQWidget *parent, const char *name)
+: TQTable(0, 3, parent, name), _map(map) {
 	_ac = new KActionCollection(this);
-	_copyAct = KStdAction::copy(this, SLOT(copy()), _ac);
-	connect(this, SIGNAL(valueChanged(int,int)), this, SIGNAL(dirty()));
-	connect(this, SIGNAL(contextMenuRequested(int,int,const QPoint&)),
-		this, SLOT(contextMenu(int,int,const QPoint&)));
-	setSelectionMode(QTable::NoSelection);
-	horizontalHeader()->setLabel(0, QString::null);
+	_copyAct = KStdAction::copy(this, TQT_SLOT(copy()), _ac);
+	connect(this, TQT_SIGNAL(valueChanged(int,int)), this, TQT_SIGNAL(dirty()));
+	connect(this, TQT_SIGNAL(contextMenuRequested(int,int,const TQPoint&)),
+		this, TQT_SLOT(contextMenu(int,int,const TQPoint&)));
+	setSelectionMode(TQTable::NoSelection);
+	horizontalHeader()->setLabel(0, TQString::null);
 	horizontalHeader()->setLabel(1, i18n("Key"));
 	horizontalHeader()->setLabel(2, i18n("Value"));
 	setColumnWidth(0, 20); // FIXME: this is arbitrary
@@ -56,14 +56,14 @@ void KWMapEditor::reload() {
 	if ((row = numRows()) < _map.count()) {
 		insertRows(row, _map.count() - row);
 		for (int x = row; x < numRows(); ++x) {
-			QPushButton *b = new QPushButton("X", this);
-			connect(b, SIGNAL(clicked()), this, SLOT(erase()));
+			TQPushButton *b = new TQPushButton("X", this);
+			connect(b, TQT_SIGNAL(clicked()), this, TQT_SLOT(erase()));
 			setCellWidget(x, 0, b);
 		}
 	}
 
 	row = 0;
-	for (QMap<QString,QString>::Iterator it = _map.begin(); it != _map.end(); ++it) {
+	for (TQMap<TQString,TQString>::Iterator it = _map.begin(); it != _map.end(); ++it) {
 		setText(row, 1, it.key());
 		setText(row, 2, it.data());
 		row++;
@@ -76,7 +76,7 @@ KWMapEditor::~KWMapEditor() {
 
 
 void KWMapEditor::erase() {
-	const QObject *o = sender();
+	const TQObject *o = sender();
 	for (int i = 0; i < numRows(); i++) {
 		if (cellWidget(i, 0) == o) {
 			removeRow(i);
@@ -100,8 +100,8 @@ void KWMapEditor::saveMap() {
 void KWMapEditor::addEntry() {
 	int x = numRows();
 	insertRows(x, 1);
-	QPushButton *b = new QPushButton("X", this);
-	connect(b, SIGNAL(clicked()), this, SLOT(erase()));
+	TQPushButton *b = new TQPushButton("X", this);
+	connect(b, TQT_SIGNAL(clicked()), this, TQT_SLOT(erase()));
 	setCellWidget(x, 0, b);
 	ensureCellVisible(x, 1);
 	setCurrentCell(x, 1);
@@ -114,68 +114,68 @@ void KWMapEditor::emitDirty() {
 }
 
 
-void KWMapEditor::contextMenu(int row, int col, const QPoint& pos) {
+void KWMapEditor::contextMenu(int row, int col, const TQPoint& pos) {
 	_contextRow = row;
 	_contextCol = col;
 	KPopupMenu *m = new KPopupMenu(this);
-	m->insertItem(i18n("&New Entry"), this, SLOT(addEntry()));
+	m->insertItem(i18n("&New Entry"), this, TQT_SLOT(addEntry()));
 	_copyAct->plug(m);
 	m->popup(pos);
 }
 
 
 void KWMapEditor::copy() {
-	QApplication::clipboard()->setText(text(_contextRow, 2));
+	TQApplication::clipboard()->setText(text(_contextRow, 2));
 }
 
 
-class InlineEditor : public QTextEdit {
+class InlineEditor : public TQTextEdit {
 	public:
 		InlineEditor(KWMapEditor *p, int row, int col) 
-		  : QTextEdit(), _p(p), row(row), col(col) { 
+		  : TQTextEdit(), _p(p), row(row), col(col) { 
 			setWFlags(WStyle_NoBorder | WDestructiveClose); 
 			KWin::setType(winId(), NET::Override);
-			connect(p, SIGNAL(destroyed()), SLOT(close()));
+			connect(p, TQT_SIGNAL(destroyed()), TQT_SLOT(close()));
  		}
 		virtual ~InlineEditor() { if (!_p) return; _p->setText(row, col, text()); _p->emitDirty(); }
 
 	protected:
-		virtual void focusOutEvent(QFocusEvent*) { 
-			if (QFocusEvent::reason() == QFocusEvent::Popup) {
-				QWidget *focusW = qApp->focusWidget();
+		virtual void focusOutEvent(TQFocusEvent*) { 
+			if (TQFocusEvent::reason() == TQFocusEvent::Popup) {
+				TQWidget *focusW = qApp->focusWidget();
 				if (focusW && focusW == popup) {
 					return;
 				}
 			}
 			close(); 
 		}
-		virtual void keyPressEvent(QKeyEvent *e) {
+		virtual void keyPressEvent(TQKeyEvent *e) {
 			if (e->key() == Qt::Key_Escape) {
 				e->accept();
 				close();
 			} else {
 				e->ignore();
-				QTextEdit::keyPressEvent(e);
+				TQTextEdit::keyPressEvent(e);
 			}
 		}
-		virtual QPopupMenu *createPopupMenu(const QPoint &p) {
-			popup = QTextEdit::createPopupMenu(p);
+		virtual TQPopupMenu *createPopupMenu(const TQPoint &p) {
+			popup = TQTextEdit::createPopupMenu(p);
 			return popup;
 		}
-		QGuardedPtr<KWMapEditor> _p;
+		TQGuardedPtr<KWMapEditor> _p;
 		int row, col;
-		QGuardedPtr<QPopupMenu> popup;
+		TQGuardedPtr<TQPopupMenu> popup;
 };
 
 
-QWidget *KWMapEditor::beginEdit(int row, int col, bool replace) {
+TQWidget *KWMapEditor::beginEdit(int row, int col, bool replace) {
 	//kdDebug(2300) << "EDIT COLUMN " << col << endl;
 	if (col != 2) {
-		return QTable::beginEdit(row, col, replace);
+		return TQTable::beginEdit(row, col, replace);
 	}
 
-	QRect geo = cellGeometry(row, col);
-	QTextEdit *e = new InlineEditor(this, row, col);
+	TQRect geo = cellGeometry(row, col);
+	TQTextEdit *e = new InlineEditor(this, row, col);
 	e->setText(text(row, col));
 	e->move(mapToGlobal(geo.topLeft()));
 	e->resize(geo.width() * 2, geo.height() * 3);

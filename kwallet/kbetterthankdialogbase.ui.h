@@ -25,7 +25,7 @@ void KBetterThanKDialogBase::clicked()
 }
 
 
-void KBetterThanKDialogBase::setLabel( const QString & label )
+void KBetterThanKDialogBase::setLabel( const TQString & label )
 {
     _label->setText(label);
 }
@@ -45,6 +45,6 @@ void KBetterThanKDialogBase::accept()
 
 void KBetterThanKDialogBase::reject()
 {
-    QDialog::reject();
+    TQDialog::reject();
     setResult(4);
 }

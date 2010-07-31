@@ -26,58 +26,58 @@
 #endif
 
 #include "auxbuttons.h"
-#include <qlayout.h>
-#include <qwhatsthis.h>
-#include <qtooltip.h>
-#include <qtoolbutton.h>
+#include <tqlayout.h>
+#include <tqwhatsthis.h>
+#include <tqtooltip.h>
+#include <tqtoolbutton.h>
 #include "util.h"
 
-AuxButtons::AuxButtons( QWidget* parent, const char* name = 0)
-  :QDockWindow( QDockWindow::InDock, parent, name)
+AuxButtons::AuxButtons( TQWidget* parent, const char* name = 0)
+  :TQDockWindow( TQDockWindow::InDock, parent, name)
 {
-  QBoxLayout* layout = boxLayout();
+  TQBoxLayout* layout = boxLayout();
 
-  _undo = new QToolButton( this );
-  _undo->setIconSet( Util::getSystemIconSet(QString::fromLatin1("undo") ) );
+  _undo = new TQToolButton( this );
+  _undo->setIconSet( Util::getSystemIconSet(TQString::fromLatin1("undo") ) );
   layout->addWidget( _undo );
-  connect( _undo, SIGNAL(clicked()), this, SIGNAL(undo()) );
-  QToolTip::add( _undo, i18n( "Undo" ) );
+  connect( _undo, TQT_SIGNAL(clicked()), this, TQT_SIGNAL(undo()) );
+  TQToolTip::add( _undo, i18n( "Undo" ) );
 
-  _redo = new QToolButton( this );
-  _redo->setIconSet( Util::getSystemIconSet(QString::fromLatin1("redo") ) );
+  _redo = new TQToolButton( this );
+  _redo->setIconSet( Util::getSystemIconSet(TQString::fromLatin1("redo") ) );
   layout->addWidget( _redo );
-  connect( _redo, SIGNAL(clicked()), this, SIGNAL(redo()) );
-  QToolTip::add( _redo, i18n( "Redo" ) );
+  connect( _redo, TQT_SIGNAL(clicked()), this, TQT_SIGNAL(redo()) );
+  TQToolTip::add( _redo, i18n( "Redo" ) );
 
-  _cut = new QToolButton( this );
-  _cut->setIconSet( Util::getSystemIconSet(QString::fromLatin1("editcut") ) );
+  _cut = new TQToolButton( this );
+  _cut->setIconSet( Util::getSystemIconSet(TQString::fromLatin1("editcut") ) );
   layout->addWidget( _cut );
-  connect( _cut, SIGNAL(clicked()), this, SIGNAL(cut()) );
-  QToolTip::add( _cut, i18n( "Cut" ) );
+  connect( _cut, TQT_SIGNAL(clicked()), this, TQT_SIGNAL(cut()) );
+  TQToolTip::add( _cut, i18n( "Cut" ) );
 
-  _copy = new QToolButton( this );
-  _copy->setIconSet( Util::getSystemIconSet(QString::fromLatin1("editcopy") ) );
+  _copy = new TQToolButton( this );
+  _copy->setIconSet( Util::getSystemIconSet(TQString::fromLatin1("editcopy") ) );
   layout->addWidget( _copy );
-  connect( _copy, SIGNAL(clicked()), this, SIGNAL(copy()) );
-  QToolTip::add( _copy, i18n( "Copy" ) );
+  connect( _copy, TQT_SIGNAL(clicked()), this, TQT_SIGNAL(copy()) );
+  TQToolTip::add( _copy, i18n( "Copy" ) );
 
-  _paste = new QToolButton( this );
-  _paste->setIconSet( Util::getSystemIconSet(QString::fromLatin1("editpaste")) );
+  _paste = new TQToolButton( this );
+  _paste->setIconSet( Util::getSystemIconSet(TQString::fromLatin1("editpaste")) );
   layout->addWidget( _paste );
-  connect( _paste, SIGNAL(clicked()), this, SIGNAL(paste()) );
-  QToolTip::add( _paste, i18n( "Paste" ) );
+  connect( _paste, TQT_SIGNAL(clicked()), this, TQT_SIGNAL(paste()) );
+  TQToolTip::add( _paste, i18n( "Paste" ) );
 
-  _save = new QToolButton( this );
-  _save->setIconSet( Util::getSystemIconSet(QString::fromLatin1("filesave")) );
+  _save = new TQToolButton( this );
+  _save->setIconSet( Util::getSystemIconSet(TQString::fromLatin1("filesave")) );
   layout->addWidget( _save );
-  connect( _save, SIGNAL(clicked()), this, SIGNAL(save()) );
-  QToolTip::add( _save, i18n( "Save" ) );
+  connect( _save, TQT_SIGNAL(clicked()), this, TQT_SIGNAL(save()) );
+  TQToolTip::add( _save, i18n( "Save" ) );
 
 
-  QToolButton* button = new QToolButton(this);
-  button->setPixmap( Util::getSystemIcon( QString::fromLatin1("contexthelp") ) );
+  TQToolButton* button = new TQToolButton(this);
+  button->setPixmap( Util::getSystemIcon( TQString::fromLatin1("contexthelp") ) );
   layout->addWidget( button );
-  connect(button, SIGNAL(clicked()), this, SLOT(slotEnterWhatsThis()));
+  connect(button, TQT_SIGNAL(clicked()), this, TQT_SLOT(slotEnterWhatsThis()));
 
   _undo->setEnabled( false );
   _redo->setEnabled( false );
@@ -86,7 +86,7 @@ AuxButtons::AuxButtons( QWidget* parent, const char* name = 0)
 
 void AuxButtons::slotEnterWhatsThis()
 {
-  QWhatsThis::enterWhatsThisMode ();
+  TQWhatsThis::enterWhatsThisMode ();
 }
 
 void AuxButtons::slotCanUndo( bool b )

@@ -22,13 +22,13 @@
  */
 
 
-#include <qdir.h>
+#include <tqdir.h>
 #include <unistd.h>
 #include <time.h>
-#include <qmovie.h>
-#include <qptrlist.h>
-#include <qfileinfo.h>
-#include <qimage.h>
+#include <tqmovie.h>
+#include <tqptrlist.h>
+#include <tqfileinfo.h>
+#include <tqimage.h>
 #include <kdelibs_export.h>
 
 class KDE_EXPORT daemon_state
@@ -44,9 +44,9 @@ public:
 	bool	has_performance;
 	bool	has_throttle;
 
-	QString noBatteryIcon;
-	QString chargeIcon;
-	QString noChargeIcon;
+	TQString noBatteryIcon;
+	TQString chargeIcon;
+	TQString noChargeIcon;
 
 	//
 	//	power out actions
@@ -71,9 +71,9 @@ public:
 	bool	logout[2];
 	bool	shutdown[2];
 	bool    runCommand[2];
-	QString runCommandPath[2];
+	TQString runCommandPath[2];
 	bool    playSound[2];
-	QString playSoundPath[2];
+	TQString playSoundPath[2];
 	bool    notify[2];
 	bool    do_suspend[2];
 	bool    do_hibernate[2];
@@ -112,12 +112,12 @@ public:
 	// performance
 	
 	bool performance_pon, performance_poff;
-	QString performance_val_on, performance_val_off;
+	TQString performance_val_on, performance_val_off;
 
 	// throttle
 	
 	bool throttle_pon, throttle_poff;
-	QString throttle_val_on, throttle_val_off;
+	TQString throttle_val_on, throttle_val_off;
 
 	// button triggered stuff
   	int button_lid;
@@ -128,12 +128,12 @@ public:
   	int button_power_bright_val;
   	bool button_lid_performance_enabled;
   	bool button_power_performance_enabled;
-  	QString button_lid_performance_val;
-  	QString button_power_performance_val;
+  	TQString button_lid_performance_val;
+  	TQString button_power_performance_val;
   	bool button_lid_throttle_enabled;
   	bool button_power_throttle_enabled;
-  	QString button_lid_throttle_val;
-  	QString button_power_throttle_val;
+  	TQString button_lid_throttle_val;
+  	TQString button_power_throttle_val;
 	bool enable_lid_button;
 	bool enable_power_button;
 

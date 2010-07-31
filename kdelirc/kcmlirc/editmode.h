@@ -23,10 +23,10 @@ class EditMode : public EditModeBase
 	Q_OBJECT
 
 public:
-	void slotCheckText(const QString &newText);
+	void slotCheckText(const TQString &newText);
 	void slotClearIcon();
 
-	EditMode(QWidget *parent = 0, const char *name = 0, bool modal = false, WFlags fl = 0);
+	EditMode(TQWidget *parent = 0, const char *name = 0, bool modal = false, WFlags fl = 0);
 	~EditMode();
 };
 

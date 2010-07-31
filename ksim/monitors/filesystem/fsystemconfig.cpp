@@ -28,18 +28,18 @@
 #include <knuminput.h>
 #include <kdebug.h>
 
-#include <qcheckbox.h>
-#include <qlayout.h>
-#include <qtooltip.h>
-#include <qlabel.h>
-#include <qwhatsthis.h>
+#include <tqcheckbox.h>
+#include <tqlayout.h>
+#include <tqtooltip.h>
+#include <tqlabel.h>
+#include <tqwhatsthis.h>
 
 class FSysViewItem : public QCheckListItem
 {
   public:
-    FSysViewItem(QListView *parent, const QString &text1,
-       const QString &text2, const QString &text3)
-        : QCheckListItem(parent, text1, CheckBox)
+    FSysViewItem(TQListView *parent, const TQString &text1,
+       const TQString &text2, const TQString &text3)
+        : TQCheckListItem(parent, text1, CheckBox)
     {
       setText(1, text2);
       setText(2, text3);
@@ -49,7 +49,7 @@ class FSysViewItem : public QCheckListItem
 FsystemConfig::FsystemConfig(KSim::PluginObject *parent, const char *name)
    : KSim::PluginPage(parent, name)
 {
-  m_mainLayout = new QGridLayout(this);
+  m_mainLayout = new TQGridLayout(this);
   m_mainLayout->setSpacing(6);
 
   m_availableMounts = new KListView(this);
@@ -58,32 +58,32 @@ FsystemConfig::FsystemConfig(KSim::PluginObject *parent, const char *name)
   m_availableMounts->addColumn(i18n("Type"));
   m_mainLayout->addMultiCellWidget(m_availableMounts, 0, 0, 0, 3);
 
-  m_showPercentage = new QCheckBox(this);
+  m_showPercentage = new TQCheckBox(this);
   m_showPercentage->setText(i18n("Show percentage"));
   m_mainLayout->addMultiCellWidget(m_showPercentage, 1, 1, 0, 3);
 
-  m_splitNames = new QCheckBox(this);
+  m_splitNames = new TQCheckBox(this);
   m_splitNames->setText(i18n("Display short mount point names"));
-  QWhatsThis::add(m_splitNames, i18n("This option shortens the text"
+  TQWhatsThis::add(m_splitNames, i18n("This option shortens the text"
      " to shrink down a mount point. E.G: a mount point /home/myuser"
      " would become myuser."));
   m_mainLayout->addMultiCellWidget(m_splitNames, 2, 2, 0, 3);
 
-  m_intervalLabel = new QLabel(this);
+  m_intervalLabel = new TQLabel(this);
   m_intervalLabel->setText( i18n("Update interval:"));
-  m_intervalLabel->setSizePolicy(QSizePolicy(QSizePolicy::Fixed,
-     QSizePolicy::Fixed));
+  m_intervalLabel->setSizePolicy(TQSizePolicy(TQSizePolicy::Fixed,
+     TQSizePolicy::Fixed));
   m_mainLayout->addMultiCellWidget(m_intervalLabel, 3, 3, 0, 0);
 
   m_updateTimer = new KIntSpinBox(this);
   m_updateTimer->setValue(60);
-  QToolTip::add(m_updateTimer, i18n("0 means no update"));
+  TQToolTip::add(m_updateTimer, i18n("0 means no update"));
   m_mainLayout->addMultiCellWidget(m_updateTimer, 3, 3, 1, 1);
 
-  QLabel *intervalLabel = new QLabel(this);
+  TQLabel *intervalLabel = new TQLabel(this);
   intervalLabel->setText(i18n("seconds"));
-  intervalLabel->setSizePolicy(QSizePolicy(QSizePolicy::Fixed,
-     QSizePolicy::Fixed));
+  intervalLabel->setSizePolicy(TQSizePolicy(TQSizePolicy::Fixed,
+     TQSizePolicy::Fixed));
   m_mainLayout->addMultiCellWidget(intervalLabel, 3, 3, 2, 2);
 
   m_entries = FilesystemStats::readEntries();
@@ -104,10 +104,10 @@ void FsystemConfig::readConfig()
   if (!m_availableMounts->childCount())
     return;
 
-  QStringList list = config()->readListEntry("mountEntries");
-  for (QListViewItemIterator it(m_availableMounts); it.current(); ++it) {
-    QString string = it.current()->text(0) + ":" + splitString(it.current()->text(0));
-    static_cast<QCheckListItem *>(it.current())->setOn(list.contains(string) > 0);
+  TQStringList list = config()->readListEntry("mountEntries");
+  for (TQListViewItemIterator it(m_availableMounts); it.current(); ++it) {
+    TQString string = it.current()->text(0) + ":" + splitString(it.current()->text(0));
+    static_cast<TQCheckListItem *>(it.current())->setOn(list.contains(string) > 0);
   }
 }
 
@@ -118,16 +118,16 @@ void FsystemConfig::saveConfig()
   config()->writeEntry("updateValue", m_updateTimer->value());
   config()->writeEntry("ShortenEntries", m_splitNames->isChecked());
 
-  QStringList list;
-  for (QListViewItemIterator it(m_availableMounts); it.current(); ++it) {
-    if (static_cast<QCheckListItem *>(it.current())->isOn())
+  TQStringList list;
+  for (TQListViewItemIterator it(m_availableMounts); it.current(); ++it) {
+    if (static_cast<TQCheckListItem *>(it.current())->isOn())
       list.append(it.current()->text(0) + ":" + splitString(it.current()->text(0)));
   }
 
   config()->writeEntry("mountEntries", list);
 }
 
-void FsystemConfig::showEvent(QShowEvent *)
+void FsystemConfig::showEvent(TQShowEvent *)
 {
   // FIXME: Maybe this is the slow method of doing this?
   // Eitherway, i need to find a way to only update the list
@@ -166,19 +166,19 @@ void FsystemConfig::getStats()
     return;
 
   config()->setGroup("Fsystem");
-  QStringList list = config()->readListEntry("mountEntries");
-  for (QListViewItemIterator it(m_availableMounts); it.current(); ++it) {
-    QString string = it.current()->text(0) + ":" + splitString(it.current()->text(0));
-    static_cast<QCheckListItem *>(it.current())->setOn(list.contains(string) > 0);
+  TQStringList list = config()->readListEntry("mountEntries");
+  for (TQListViewItemIterator it(m_availableMounts); it.current(); ++it) {
+    TQString string = it.current()->text(0) + ":" + splitString(it.current()->text(0));
+    static_cast<TQCheckListItem *>(it.current())->setOn(list.contains(string) > 0);
   }
 }
 
-QString FsystemConfig::splitString(const QString &string) const
+TQString FsystemConfig::splitString(const TQString &string) const
 {
   if (string == "/" || !m_splitNames->isChecked())
     return string;
 
   int location = string.findRev("/");
-  QString newString(string);
+  TQString newString(string);
   return newString.remove(0, location + 1);
 }

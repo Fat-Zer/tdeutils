@@ -21,28 +21,28 @@
 #ifndef _CONVERTER_DIALOG_H_
 #define _CONVERTER_DIALOG_H_
 
-#include <qlineedit.h>
+#include <tqlineedit.h>
 #include <kdialogbase.h>
 
 class CHexValidator;
 
 
-class CValidateLineEdit : public QLineEdit 
+class CValidateLineEdit : public TQLineEdit 
 {
   Q_OBJECT
    
   public:
-    CValidateLineEdit( QWidget *parent, int validateType, const char *name=0 );
+    CValidateLineEdit( TQWidget *parent, int validateType, const char *name=0 );
     ~CValidateLineEdit( void );
 
   public slots:
-    void setData( const QByteArray &buf );
+    void setData( const TQByteArray &buf );
 
   private slots:
-    void convertText( const QString &text );
+    void convertText( const TQString &text );
 
   signals:
-    void dataChanged( const QByteArray &buf );
+    void dataChanged( const TQByteArray &buf );
 
   private:
     bool mBusy;
@@ -55,21 +55,21 @@ class CConverterDialog : public KDialogBase
   Q_OBJECT
   
   public:
-    CConverterDialog( QWidget *parent, const char *name=0, bool modal=true );
+    CConverterDialog( TQWidget *parent, const char *name=0, bool modal=true );
     ~CConverterDialog( void );
     
   protected:
-    void showEvent( QShowEvent *e );
+    void showEvent( TQShowEvent *e );
 
   protected slots:
     virtual void slotUser1( void );
     virtual void slotUser2( void );
 
   private slots:
-    void setData( const QByteArray &data );
+    void setData( const TQByteArray &data );
 
   signals:
-    void probeCursorValue( QByteArray &buf, uint size );
+    void probeCursorValue( TQByteArray &buf, uint size );
 
   private:
     CValidateLineEdit *mHexInput;

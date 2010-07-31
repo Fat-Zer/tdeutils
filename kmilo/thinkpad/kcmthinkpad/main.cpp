@@ -22,12 +22,12 @@
  *
  */
 
-#include <qlabel.h>
-#include <qlayout.h>
-#include <qcheckbox.h>
-#include <qspinbox.h>
-#include <qfile.h>
-#include <qbuttongroup.h>
+#include <tqlabel.h>
+#include <tqlayout.h>
+#include <tqcheckbox.h>
+#include <tqspinbox.h>
+#include <tqfile.h>
+#include <tqbuttongroup.h>
 
 #include <dcopclient.h>
 #include <kgenericfactory.h>
@@ -49,12 +49,12 @@
 #include "main.h"
 #include "main.moc"
 
-typedef KGenericFactory<KCMThinkpadModule, QWidget> KCMThinkpadModuleFactory;
+typedef KGenericFactory<KCMThinkpadModule, TQWidget> KCMThinkpadModuleFactory;
 K_EXPORT_COMPONENT_FACTORY( kcm_thinkpad, KCMThinkpadModuleFactory("kcmthinkpad"))
 
 #define CONFIG_FILE "kmilodrc"
 
-KCMThinkpadModule::KCMThinkpadModule(QWidget* parent, const char* name, const QStringList&)
+KCMThinkpadModule::KCMThinkpadModule(TQWidget* parent, const char* name, const TQStringList&)
 	: KCModule(KCMThinkpadModuleFactory::instance(), parent, name) {
 	KAboutData* about =
 		new KAboutData(I18N_NOOP("kcmthinkpad"),
@@ -68,7 +68,7 @@ KCMThinkpadModule::KCMThinkpadModule(QWidget* parent, const char* name, const QS
 			 "jr@jriddell.org");
 	setAboutData( about );
 
-	QVBoxLayout* layout = new QVBoxLayout(this);
+	TQVBoxLayout* layout = new TQVBoxLayout(this);
 	m_KCMThinkpadGeneral = new KCMThinkpadGeneral(this);
 	layout->addWidget( m_KCMThinkpadGeneral );
 	layout->addStretch();
@@ -97,7 +97,7 @@ KCMThinkpadModule::KCMThinkpadModule(QWidget* parent, const char* name, const QS
 							  "R30/R31 models, or using a custom volume "
 							  "change step is disabled."));
 #else
-	QFile nvramFile(m_nvramFile);
+	TQFile nvramFile(m_nvramFile);
 	if ( nvramFile.open(IO_ReadOnly) )  {
 		m_nvramReadable = true;
 		nvramFile.close();
@@ -122,7 +122,7 @@ KCMThinkpadModule::KCMThinkpadModule(QWidget* parent, const char* name, const QS
 		m_KCMThinkpadGeneral->tlOff->setText(i18n("Thinkpad Buttons KMilo Plugin Ready For Configuration"));
 	}
 
-	connect( m_KCMThinkpadGeneral, SIGNAL(changed()), SLOT(changed()));
+	connect( m_KCMThinkpadGeneral, TQT_SIGNAL(changed()), TQT_SLOT(changed()));
 
 }
 
@@ -146,8 +146,8 @@ void KCMThinkpadModule::save() {
 	config.sync();
 
 	if (client.attach()) {
-		QByteArray data, replyData;
-		QCString replyType;
+		TQByteArray data, replyData;
+		TQCString replyType;
 
 		if (!client.call("kded", "kmilod", "reconfigure()", data, replyType, replyData))  {
 			kdDebug() << "KCMThinkpad::showTextMsg: "

@@ -19,7 +19,7 @@
 #define KHE_KCURSOR_H
 
 
-#include <qpixmap.h>
+#include <tqpixmap.h>
 
 #include "kadds.h"
 
@@ -42,23 +42,23 @@ class KCursor
     void setShape( KPixelX X, KPixelX W );
 
   public: // access
-    const QPixmap &onPixmap() const;
-    const QPixmap &offPixmap() const;
+    const TQPixmap &onPixmap() const;
+    const TQPixmap &offPixmap() const;
     KPixelX cursorX() const;
     KPixelX cursorW() const;
 
 
   protected:
-    QPixmap OnPixmap;
-    QPixmap OffPixmap;
+    TQPixmap OnPixmap;
+    TQPixmap OffPixmap;
 
     KPixelX CursorX;
     KPixelX CursorW;
 };
 
 
-inline const QPixmap &KCursor::onPixmap()  const { return OnPixmap; }
-inline const QPixmap &KCursor::offPixmap() const { return OffPixmap; }
+inline const TQPixmap &KCursor::onPixmap()  const { return OnPixmap; }
+inline const TQPixmap &KCursor::offPixmap() const { return OffPixmap; }
 
 inline KPixelX KCursor::cursorX() const { return CursorX; }
 inline KPixelX KCursor::cursorW() const { return CursorW; }

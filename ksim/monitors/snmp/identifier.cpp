@@ -62,7 +62,7 @@ Identifier::~Identifier()
     delete d;
 }
 
-Identifier Identifier::fromString( const QString &name, bool *ok )
+Identifier Identifier::fromString( const TQString &name, bool *ok )
 {
     Identifier res;
     res.d->length = MAX_OID_LEN;
@@ -79,7 +79,7 @@ Identifier Identifier::fromString( const QString &name, bool *ok )
     return res;
 }
 
-QString Identifier::toString( PrintFlags flags ) const
+TQString Identifier::toString( PrintFlags flags ) const
 {
     size_t buflen = 256;
     size_t outlen = 0;
@@ -87,7 +87,7 @@ QString Identifier::toString( PrintFlags flags ) const
 
     u_char *buf = ( u_char* )calloc( buflen, 1 );
     if ( !buf )
-        return QString::null;
+        return TQString::null;
 
     int oldOutpuFormat = SnmpLib::self()->netsnmp_ds_get_int( NETSNMP_DS_LIBRARY_ID, NETSNMP_DS_LIB_OID_OUTPUT_FORMAT );
     SnmpLib::self()->netsnmp_ds_set_int( NETSNMP_DS_LIBRARY_ID, NETSNMP_DS_LIB_OID_OUTPUT_FORMAT, 
@@ -100,10 +100,10 @@ QString Identifier::toString( PrintFlags flags ) const
 
     if ( overflow ) {
         free( buf );
-        return QString::null;
+        return TQString::null;
     }
 
-    QString result = QString::fromAscii( ( char* )buf );
+    TQString result = TQString::fromAscii( ( char* )buf );
 
     free( buf );
 

@@ -36,13 +36,13 @@ namespace KSim
   {
     Q_OBJECT
     public:
-      PanelExtension( const QString & configFile, Type type,
-         int actions, QWidget * parent, const char * name);
+      PanelExtension( const TQString & configFile, Type type,
+         int actions, TQWidget * parent, const char * name);
 
       ~PanelExtension();
 
-      QSize sizeHint( Position, QSize maxSize ) const;
-      void resizeEvent(QResizeEvent *);
+      TQSize sizeHint( Position, TQSize maxSize ) const;
+      void resizeEvent(TQResizeEvent *);
       Position preferedPosition() const;
 
       void reparse();
@@ -59,7 +59,7 @@ namespace KSim
 
     private:
       KSim::MainView * m_view;
-      QBoxLayout * m_layout;
+      TQBoxLayout * m_layout;
       KAboutData * m_aboutData;
       DCOPClient * m_dcopClient;
   };

@@ -27,7 +27,7 @@
 #endif
 
 #include <Python.h>
-#include <qobject.h>
+#include <tqobject.h>
 #include "karamba.h"
 #include "richtextlabel.h"
 #include "meter_python.h"
@@ -43,7 +43,7 @@ PyObject* py_createRichText(PyObject *, PyObject *args)
   if (!checkKaramba(widget))
     return NULL;
   RichTextLabel *tmp = new RichTextLabel((karamba*)widget);
-  tmp->setText(PyString2QString(text), underline);
+  tmp->setText(PyString2TQString(text), underline);
   tmp->setTextProps(((karamba*)widget)->getDefaultTextProps());
   ((karamba*)widget)->meterList->append(tmp);
   ((karamba*)widget)->clickList->append(tmp);

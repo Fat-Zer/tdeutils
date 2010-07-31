@@ -30,8 +30,8 @@
 #include <string>
 
 // QT includes
-#include <qfile.h>
-#include <qdir.h>
+#include <tqfile.h>
+#include <tqdir.h>
 
 // KDE includes
 #include <kdebug.h>
@@ -50,7 +50,7 @@
 #include "arkutils.h"
 #include "filelistview.h"
 
-RarArch::RarArch( ArkWidget *_gui, const QString & _fileName )
+RarArch::RarArch( ArkWidget *_gui, const TQString & _fileName )
   : Arch( _gui, _fileName )
 {
   // Check if rar is available
@@ -87,26 +87,26 @@ RarArch::RarArch( ArkWidget *_gui, const QString & _fileName )
   m_isFirstLine = true;
 }
 
-bool RarArch::processLine( const QCString &line )
+bool RarArch::processLine( const TQCString &line )
 {
   if ( m_isFirstLine )
   {
-    m_entryFilename = QString::fromLocal8Bit( line );
+    m_entryFilename = TQString::fromLocal8Bit( line );
     m_entryFilename.remove( 0, 1 );
     m_isFirstLine = false;
     return true;
   }
 
-  QStringList list;
+  TQStringList list;
 
-  QStringList l2 = QStringList::split( ' ', line );
+  TQStringList l2 = TQStringList::split( ' ', line );
 
   list << m_entryFilename; // filename
   list << l2[ 0 ]; // size
   list << l2[ 1 ]; // packed
   list << l2[ 2 ]; // ratio
 
-  QStringList date =  QStringList::split( '-', l2[ 3 ] );
+  TQStringList date =  TQStringList::split( '-', l2[ 3 ] );
   list << ArkUtils::fixYear( date[ 2 ].latin1() ) + '-' + date[ 1 ] + '-' + date [ 0 ] + ' ' + l2[4]; // date
   list << l2[ 5 ]; // attributes
   list << l2[ 6 ]; // crc
@@ -137,17 +137,17 @@ void RarArch::open()
 
   *kp << m_filename;
 
-  connect( kp, SIGNAL( receivedStdout(KProcess*, char*, int) ),
-           SLOT( slotReceivedTOC(KProcess*, char*, int) ) );
-  connect( kp, SIGNAL( receivedStderr(KProcess*, char*, int) ),
-           SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
-  connect( kp, SIGNAL( processExited(KProcess*) ),
-           SLOT( slotOpenExited(KProcess*) ) );
+  connect( kp, TQT_SIGNAL( receivedStdout(KProcess*, char*, int) ),
+           TQT_SLOT( slotReceivedTOC(KProcess*, char*, int) ) );
+  connect( kp, TQT_SIGNAL( receivedStderr(KProcess*, char*, int) ),
+           TQT_SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
+  connect( kp, TQT_SIGNAL( processExited(KProcess*) ),
+           TQT_SLOT( slotOpenExited(KProcess*) ) );
 
   if ( !kp->start( KProcess::NotifyOnExit, KProcess::AllOutput ) )
   {
     KMessageBox::error( 0, i18n( "Could not start a subprocess." ) );
-    emit sigOpen( this, false, QString::null, 0 );
+    emit sigOpen( this, false, TQString::null, 0 );
   }
 }
 
@@ -173,17 +173,17 @@ void RarArch::create()
                   Arch::Extract | Arch::Delete | Arch::Add | Arch::View );
 }
 
-void RarArch::addDir( const QString & _dirName )
+void RarArch::addDir( const TQString & _dirName )
 {
   if ( !_dirName.isEmpty() )
   {
-    QStringList list;
+    TQStringList list;
     list.append( _dirName );
     addFile( list );
   }
 }
 
-void RarArch::addFile( const QStringList & urls )
+void RarArch::addFile( const TQStringList & urls )
 {
   KProcess *kp = m_currentProcess = new KProcess;
 
@@ -203,21 +203,21 @@ void RarArch::addFile( const QStringList & urls )
   *kp << m_filename;
 
   KURL dir( urls.first() );
-  QDir::setCurrent( dir.directory() );
+  TQDir::setCurrent( dir.directory() );
 
-  QStringList::ConstIterator iter;
+  TQStringList::ConstIterator iter;
   for ( iter = urls.begin(); iter != urls.end(); ++iter )
   {
     KURL url( *iter );
     *kp << url.fileName();
   }
 
-  connect( kp, SIGNAL( receivedStdout(KProcess*, char*, int) ),
-           SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
-  connect( kp, SIGNAL( receivedStderr(KProcess*, char*, int) ),
-           SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
-  connect( kp, SIGNAL( processExited(KProcess*) ),
-           SLOT( slotAddExited(KProcess*) ) );
+  connect( kp, TQT_SIGNAL( receivedStdout(KProcess*, char*, int) ),
+           TQT_SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
+  connect( kp, TQT_SIGNAL( receivedStderr(KProcess*, char*, int) ),
+           TQT_SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
+  connect( kp, TQT_SIGNAL( processExited(KProcess*) ),
+           TQT_SLOT( slotAddExited(KProcess*) ) );
 
   if ( !kp->start( KProcess::NotifyOnExit, KProcess::AllOutput ) )
   {
@@ -260,7 +260,7 @@ void RarArch::unarchFileInternal()
   // and we then extract everything in the archive.
   if ( m_fileList )
   {
-    QStringList::Iterator it;
+    TQStringList::Iterator it;
     for ( it = m_fileList->begin(); it != m_fileList->end(); ++it )
     {
       *kp << (*it);
@@ -269,12 +269,12 @@ void RarArch::unarchFileInternal()
 
   *kp << m_destDir ;
 
-  connect( kp, SIGNAL( receivedStdout(KProcess*, char*, int) ),
-           SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
-  connect( kp, SIGNAL( receivedStderr(KProcess*, char*, int) ),
-           SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
-  connect( kp, SIGNAL( processExited(KProcess*) ),
-           SLOT( slotExtractExited(KProcess*) ) );
+  connect( kp, TQT_SIGNAL( receivedStdout(KProcess*, char*, int) ),
+           TQT_SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
+  connect( kp, TQT_SIGNAL( receivedStderr(KProcess*, char*, int) ),
+           TQT_SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
+  connect( kp, TQT_SIGNAL( processExited(KProcess*) ),
+           TQT_SLOT( slotExtractExited(KProcess*) ) );
 
   if ( !kp->start( KProcess::NotifyOnExit, KProcess::AllOutput ) )
   {
@@ -288,7 +288,7 @@ bool RarArch::passwordRequired()
     return m_lastShellOutput.findRev("password incorrect ?)")+1;
 }
 
-void RarArch::remove( QStringList *list )
+void RarArch::remove( TQStringList *list )
 {
   if ( !list )
     return;
@@ -298,19 +298,19 @@ void RarArch::remove( QStringList *list )
 
   *kp << m_archiver_program << "d" << m_filename;
 
-  QStringList::Iterator it;
+  TQStringList::Iterator it;
   for ( it = list->begin(); it != list->end(); ++it )
   {
-    QString str = *it;
+    TQString str = *it;
     *kp << str;
   }
 
-  connect( kp, SIGNAL( receivedStdout(KProcess*, char*, int) ),
-           SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
-  connect( kp, SIGNAL( receivedStderr(KProcess*, char*, int) ),
-           SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
-  connect( kp, SIGNAL( processExited(KProcess*) ),
-           SLOT( slotDeleteExited(KProcess*) ) );
+  connect( kp, TQT_SIGNAL( receivedStdout(KProcess*, char*, int) ),
+           TQT_SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
+  connect( kp, TQT_SIGNAL( receivedStderr(KProcess*, char*, int) ),
+           TQT_SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
+  connect( kp, TQT_SIGNAL( processExited(KProcess*) ),
+           TQT_SLOT( slotDeleteExited(KProcess*) ) );
 
   if ( !kp->start( KProcess::NotifyOnExit, KProcess::AllOutput ) )
   {

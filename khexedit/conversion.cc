@@ -41,9 +41,9 @@ const SEncodeState &CConversion::state( void )
   return( mState );
 }
 
-QString CConversion::names( unsigned int index )
+TQString CConversion::names( unsigned int index )
 {
-  static const QString strings[4] = 
+  static const TQString strings[4] = 
   {
     i18n("Default encoding", "Default"),
     i18n("EBCDIC"),
@@ -298,7 +298,7 @@ void CConversion::setMode( EMode cnvMode )
 
 
 
-int CConversion::convert( QByteArray &buf, EMode newMode, CProgress &p )
+int CConversion::convert( TQByteArray &buf, EMode newMode, CProgress &p )
 {
   if( newMode == mode() )
   {
@@ -316,7 +316,7 @@ int CConversion::convert( QByteArray &buf, EMode newMode, CProgress &p )
   //
   // Make backup
   //
-  const QByteArray tmp( buf.copy() );
+  const TQByteArray tmp( buf.copy() );
   if( tmp.isEmpty() )
   {
     p.finish();

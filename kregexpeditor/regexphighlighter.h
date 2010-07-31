@@ -18,18 +18,18 @@
 
 #ifndef REGEXPHIGHLIGHTER_H
 #define REGEXPHIGHLIGHTER_H
-#include <qsyntaxhighlighter.h>
+#include <tqsyntaxhighlighter.h>
 
 class RegexpHighlighter :public QSyntaxHighlighter
 {
 public:
-    RegexpHighlighter( QTextEdit* edit );
-    void setRegExp( const QString& regexp );
+    RegexpHighlighter( TQTextEdit* edit );
+    void setRegExp( const TQString& regexp );
     void setCaseSensitive( bool );
     void setMinimal( bool );
 
 protected:
-    QString _regexp;
+    TQString _regexp;
     bool _caseSensitive, _minimal;
 
 };

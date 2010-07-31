@@ -55,14 +55,14 @@ class KColumn
       * @param cw
       * @param FirstLine no of the first of the range of lines to paint
       */
-    virtual void paintFirstLine( QPainter *P, KPixelXs Xs, int FirstLine );
+    virtual void paintFirstLine( TQPainter *P, KPixelXs Xs, int FirstLine );
     /** the actual painting call for a column's line.
       * The default implementation simply paints the background
       */
-    virtual void paintNextLine( QPainter *P );
+    virtual void paintNextLine( TQPainter *P );
 
     /** */
-    virtual void paintEmptyColumn( QPainter *P, KPixelXs Xs, KPixelYs Ys );
+    virtual void paintEmptyColumn( TQPainter *P, KPixelXs Xs, KPixelYs Ys );
 
   public: // modification access
     /** sets starting point of the column */
@@ -92,7 +92,7 @@ class KColumn
     /** sets width of the column */
     void setWidth( KPixelX W );
     /** */
-    void paintBlankLine( QPainter *P ) const;
+    void paintBlankLine( TQPainter *P ) const;
 
   protected: // general column data
     /** pointer to the view */

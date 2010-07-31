@@ -32,30 +32,30 @@ class TextWidget : public RegExpWidget
     Q_OBJECT
 
 public:
-    TextWidget(RegExpEditorWindow* editorWindow, QWidget *parent,
+    TextWidget(RegExpEditorWindow* editorWindow, TQWidget *parent,
                const char *name = 0);
     TextWidget( TextRegExp* regexp,  RegExpEditorWindow* editorWindow,
-                QWidget* parent, const char* name = 0);
-    virtual QSize sizeHint() const;
+                TQWidget* parent, const char* name = 0);
+    virtual TQSize sizeHint() const;
 	virtual RegExp* regExp() const;
     virtual RegExpType type() const { return TEXT; }
     virtual void updateAll();
     virtual void selectWidget( bool );
 
 protected:
-    void init( const QString& text );
-    virtual void paintEvent( QPaintEvent *e );
+    void init( const TQString& text );
+    virtual void paintEvent( TQPaintEvent *e );
     virtual bool updateSelection( bool parentSelected );
     virtual void clearSelection();
-    virtual bool eventFilter( QObject*, QEvent* );
+    virtual bool eventFilter( TQObject*, TQEvent* );
 
 protected slots:
     void slotUpdate();
 
 private:
-    QString text;
+    TQString text;
     SelectableLineEdit *_edit;
-    QSize textSize, boxSize, editSize;
+    TQSize textSize, boxSize, editSize;
 };
 
 

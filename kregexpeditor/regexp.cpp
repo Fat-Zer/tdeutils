@@ -28,7 +28,7 @@ RegExp::RegExp( bool selected ) : _parent(0), _destructing( false ), _selected( 
 RegExp::~RegExp()
 {
   _destructing = true;
-  for ( QPtrListIterator<RegExp> it(_children); *it; ++it ) {
+  for ( TQPtrListIterator<RegExp> it(_children); *it; ++it ) {
     delete *it;
   }
   if ( _parent )
@@ -54,9 +54,9 @@ void RegExp::setParent( RegExp* parent )
   _parent = parent;
 }
 
-RegExp* RegExp::readRegExp( QDomElement top, const QString& version )
+RegExp* RegExp::readRegExp( TQDomElement top, const TQString& version )
 {
-  for ( QDomNode node = top.firstChild(); !node.isNull(); node = node.nextSibling() ) {
+  for ( TQDomNode node = top.firstChild(); !node.isNull(); node = node.nextSibling() ) {
     if (!node.isElement() )
       continue; // skip past comments
     RegExp* regexp = WidgetFactory::createRegExp(node.toElement(), version );
@@ -65,17 +65,17 @@ RegExp* RegExp::readRegExp( QDomElement top, const QString& version )
   return 0;
 }
 
-QString RegExp::toXmlString() const
+TQString RegExp::toXmlString() const
 {
-  QDomDocument doc;
-  doc.setContent( QString::fromLatin1( "<RegularExpression/>" ) );
-  QDomNode top = doc.documentElement();
-  top.toElement().setAttribute(QString::fromLocal8Bit("version"), KRegExpEditorGUI::version);
+  TQDomDocument doc;
+  doc.setContent( TQString::fromLatin1( "<RegularExpression/>" ) );
+  TQDomNode top = doc.documentElement();
+  top.toElement().setAttribute(TQString::fromLocal8Bit("version"), KRegExpEditorGUI::version);
 
-  QDomNode elm = toXml( &doc );
+  TQDomNode elm = toXml( &doc );
 
   top.appendChild( elm );
-  QString xmlString = QString::fromLocal8Bit("<?xml version=\"1.0\" encoding=\"utf-8\" ?>\n<!DOCTYPE RegularExpression PUBLIC \"-//KDE//KRegexpEditor DTD 1.0//EN\" \"http://www.blackie.dk/kreg.dtd\">\n") + doc.toString();
+  TQString xmlString = TQString::fromLocal8Bit("<?xml version=\"1.0\" encoding=\"utf-8\" ?>\n<!DOCTYPE RegularExpression PUBLIC \"-//KDE//KRegexpEditor DTD 1.0//EN\" \"http://www.blackie.dk/kreg.dtd\">\n") + doc.toString();
 
   return xmlString;
 }

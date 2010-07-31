@@ -26,8 +26,8 @@
 #include <krun.h>
 #include <kurl.h>
 
-#include <qfile.h>
-#include <qdir.h>
+#include <tqfile.h>
+#include <tqdir.h>
 
 #include "kmilointerface.h"
 
@@ -42,7 +42,7 @@
 
 namespace KMilo {
 
-AsusMonitor::AsusMonitor(QObject* parent, const char* name, const QStringList& args): Monitor(parent, name, args)
+AsusMonitor::AsusMonitor(TQObject* parent, const char* name, const TQStringList& args): Monitor(parent, name, args)
 {
 }
 
@@ -69,7 +69,7 @@ bool AsusMonitor::init()
 	}
 #else
 	// we need to read the /proc file system and store the current values into a struct
-	QDir dir("/proc/acpi/asus");
+	TQDir dir("/proc/acpi/asus");
 	if (!dir.exists())
 	{
 		kdDebug() << "/proc/acpi/asus doesn't exist, check that the asus_acpi module is loaded" << endl;
@@ -172,22 +172,22 @@ bool AsusMonitor::readProc(asus_state_struct* asus_state)
 	if ( sysctl(video_mib, 4, &value, &value_len, NULL, 0) != -1 )
 		asus_state->display = value;
 #else
-	asus_state->brightness = readProcEntry(QString("brn"));
-	//asus_state->lcd = readProcEntry(QString("lcd"));
+	asus_state->brightness = readProcEntry(TQString("brn"));
+	//asus_state->lcd = readProcEntry(TQString("lcd"));
 	//disabled because it does not yet work on my S5200N (asus_acpi bug)
-	//asus_state->display = readProcEntry(QString("disp"));
+	//asus_state->display = readProcEntry(TQString("disp"));
 	//FIXME
 #endif
 	return true;
 }
 
-int AsusMonitor::readProcEntry(const QString &name)
+int AsusMonitor::readProcEntry(const TQString &name)
 {
-	QFile f(QString("/proc/acpi/asus/%1").arg(name).local8Bit());
+	TQFile f(TQString("/proc/acpi/asus/%1").arg(name).local8Bit());
 
 	if (f.open(IO_ReadOnly))
 	{
-		QString line;
+		TQString line;
 		if (f.readLine(line, 1024) > 0)
 		{
 			line = line.stripWhiteSpace();

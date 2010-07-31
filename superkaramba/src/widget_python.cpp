@@ -27,7 +27,7 @@
 #endif
 
 #include <Python.h>
-#include <qobject.h>
+#include <tqobject.h>
 #include "karamba.h"
 #include "meter.h"
 #include "meter_python.h"
@@ -62,9 +62,9 @@ PyObject* py_get_widget_position(PyObject *, PyObject *args)
 long createWidgetMask(long widget, char* path)
 {
   karamba* currTheme = (karamba*)widget;
-  QBitmap bm;
-  QString maskpath;
-  QString rootPath;
+  TQBitmap bm;
+  TQString maskpath;
+  TQString rootPath;
   rootPath.setAscii(currTheme->theme().path().ascii());
 
   currTheme->clearMask();
@@ -74,7 +74,7 @@ long createWidgetMask(long widget, char* path)
 
   if(currTheme->theme().isZipTheme())
   {
-    QByteArray ba = currTheme->theme().readThemeFile(path);
+    TQByteArray ba = currTheme->theme().readThemeFile(path);
     bm.loadFromData(ba);
   }
   else

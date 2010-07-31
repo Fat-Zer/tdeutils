@@ -53,7 +53,7 @@ class SensorsView : public KSim::PluginView, public KSimSensorsIface
     ~SensorsView();
 
     virtual void reparseConfig();
-    virtual QString sensorValue(const QString &, const QString &);
+    virtual TQString sensorValue(const TQString &, const TQString &);
 
   private slots:
     void updateSensors(const SensorList &);
@@ -65,7 +65,7 @@ class SensorsView : public KSim::PluginView, public KSimSensorsIface
     {
       public:
         SensorItem() : id(-1), label(0) {}
-        SensorItem(int i, const QString &na)
+        SensorItem(int i, const TQString &na)
            : id(i), name(na), label(0) {}
         ~SensorItem() { delete label; }
 
@@ -81,11 +81,11 @@ class SensorsView : public KSim::PluginView, public KSimSensorsIface
         }
 
         int id;
-        QString name;
+        TQString name;
         KSim::Label *label;
     };
 
-    typedef QValueList<SensorItem> SensorItemList;
+    typedef TQValueList<SensorItem> SensorItemList;
     SensorItemList m_sensorItemList;
 };
 #endif

@@ -23,8 +23,8 @@
 #include "ksim.h"
 #include "themetypes.h"
 
-KSim::Frame::Frame(int type, QWidget *parent, const char *name)
-   : QWidget (parent, name)
+KSim::Frame::Frame(int type, TQWidget *parent, const char *name)
+   : TQWidget (parent, name)
 {
   setType(type);
 
@@ -62,15 +62,15 @@ void KSim::Frame::configureObject(bool repaintWidget)
     update();
 }
 
-void KSim::Frame::paintEvent(QPaintEvent *)
+void KSim::Frame::paintEvent(TQPaintEvent *)
 {
   bitBlt(this, 0, 0, &m_background);
 }
 
-void KSim::Frame::resizeEvent(QResizeEvent *ev)
+void KSim::Frame::resizeEvent(TQResizeEvent *ev)
 {
   m_background.convertFromImage(m_image.smoothScale(ev->size()));
-  QWidget::resizeEvent(ev);
+  TQWidget::resizeEvent(ev);
 }
 
 void KSim::Frame::setFrameHeight(int height)

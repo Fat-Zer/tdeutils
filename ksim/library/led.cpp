@@ -20,10 +20,10 @@
 #include "led.h"
 #include "led.moc"
 
-#include <qimage.h>
-#include <qpainter.h>
-#include <qfile.h>
-#include <qbitmap.h>
+#include <tqimage.h>
+#include <tqpainter.h>
+#include <tqfile.h>
+#include <tqbitmap.h>
 
 #include <kdebug.h>
 #include <kpixmapsplitter.h>
@@ -35,13 +35,13 @@ class KSim::Led::Private
 {
   public:
     KPixmapSplitter splitter;
-    QPixmap pixmap;
-    QString imageName;
+    TQPixmap pixmap;
+    TQString imageName;
     KSim::Led::Type type;
     bool toggled;
 };
 
-KSim::Led::Led() : QPixmap()
+KSim::Led::Led() : TQPixmap()
 {
   d = new Private;
 
@@ -52,7 +52,7 @@ KSim::Led::Led() : QPixmap()
   setOff();
 }
 
-KSim::Led::Led(Type type, const QString &imageName) : QPixmap()
+KSim::Led::Led(Type type, const TQString &imageName) : TQPixmap()
 {
   d = new Private;
 
@@ -74,7 +74,7 @@ void KSim::Led::setOn(bool force)
     return;
 
   // Return if our pixmap is null
-  QRect rect = d->splitter.coordinates(d->type == First ? 1 : 3);
+  TQRect rect = d->splitter.coordinates(d->type == First ? 1 : 3);
   if (d->pixmap.isNull() || rect.isEmpty()) {
     resize(12, 8);
     fill(Qt::white);
@@ -82,12 +82,12 @@ void KSim::Led::setOn(bool force)
   }
 
   if (d->pixmap.mask() && !d->pixmap.mask()->isNull()) {
-    QBitmap mask(rect.size());
-    bitBlt(&mask, QPoint(0, 0), d->pixmap.mask(), rect, CopyROP);
+    TQBitmap mask(rect.size());
+    bitBlt(&mask, TQPoint(0, 0), d->pixmap.mask(), rect, CopyROP);
     setMask(mask);
   }
 
-  bitBlt(this, QPoint(0, 0), &d->pixmap, rect, CopyROP);
+  bitBlt(this, TQPoint(0, 0), &d->pixmap, rect, CopyROP);
   d->toggled = true;
 }
 
@@ -97,7 +97,7 @@ void KSim::Led::setOff(bool force)
     return;
 
   // Return if our pixmap is null
-  QRect rect = d->splitter.coordinates(d->type == First ? 0 : 2);
+  TQRect rect = d->splitter.coordinates(d->type == First ? 0 : 2);
   if (d->pixmap.isNull() || rect.isEmpty()) {
     resize(12, 8);
     fill(Qt::white);
@@ -105,12 +105,12 @@ void KSim::Led::setOff(bool force)
   }
 
   if (d->pixmap.mask() && !d->pixmap.mask()->isNull()) {
-    QBitmap mask(rect.size());
-    bitBlt(&mask, QPoint(0, 0), d->pixmap.mask(), rect, CopyROP);
+    TQBitmap mask(rect.size());
+    bitBlt(&mask, TQPoint(0, 0), d->pixmap.mask(), rect, CopyROP);
     setMask(mask);
   }
 
-  bitBlt(this, QPoint(0, 0), &d->pixmap, rect, CopyROP);
+  bitBlt(this, TQPoint(0, 0), &d->pixmap, rect, CopyROP);
   d->toggled = false;
 }
 
@@ -122,28 +122,28 @@ void KSim::Led::toggle()
     setOn();
 }
 
-void KSim::Led::setPixmap(const QString &imageName)
+void KSim::Led::setPixmap(const TQString &imageName)
 {
   if (imageName == d->imageName)
     return;
 
-  QImage image(imageName);
+  TQImage image(imageName);
 
   if (image.width() >= 19)
     image = image.smoothScale(19, image.height());
 
   KSim::ThemeLoader::self().reColourImage(image);
   d->pixmap.convertFromImage(image);
-  QSize size(image.width(), image.height() / 4);
+  TQSize size(image.width(), image.height() / 4);
 
   d->splitter.setPixmap(d->pixmap);
   d->splitter.setItemSize(size);
 
   resize(size);
-  setMask(QBitmap());
+  setMask(TQBitmap());
 }
 
-const QString &KSim::Led::fileName() const
+const TQString &KSim::Led::fileName() const
 {
   return d->imageName;
 }
@@ -179,12 +179,12 @@ class KSim::LedLabel::Private
   public:
     KSim::Led receiveLed;
     KSim::Led sendLed;
-    QPoint sendPoint;
-    QPoint receivePoint;
+    TQPoint sendPoint;
+    TQPoint receivePoint;
 };
 
-KSim::LedLabel::LedLabel(int max, int type, const QString &label,
-   QWidget *parent, const char *name, WFlags fl)
+KSim::LedLabel::LedLabel(int max, int type, const TQString &label,
+   TQWidget *parent, const char *name, WFlags fl)
    : KSim::Progress(max, type, Panel, parent, name, fl)
 {
   init();
@@ -192,14 +192,14 @@ KSim::LedLabel::LedLabel(int max, int type, const QString &label,
 }
 
 KSim::LedLabel::LedLabel(int max, int type,
-   QWidget *parent, const char *name, WFlags fl)
+   TQWidget *parent, const char *name, WFlags fl)
    : KSim::Progress(max, type, Panel, parent, name, fl)
 {
   init();
 }
 
 KSim::LedLabel::LedLabel(int max, 
-   QWidget *parent, const char *name, WFlags fl)
+   TQWidget *parent, const char *name, WFlags fl)
    : KSim::Progress(max, KSim::Types::None,
    Panel, parent, name, fl)
 {
@@ -215,7 +215,7 @@ void KSim::LedLabel::configureObject(bool reapaintWidget)
 {
   KSim::Progress::configureObject(false);
 
-  QPixmap pixmap = themeLoader().current().splitPixmap(KSim::Theme::KrellPanel, 0, false);
+  TQPixmap pixmap = themeLoader().current().splitPixmap(KSim::Theme::KrellPanel, 0, false);
   if (pixmap.isNull())
     pixmap = themeLoader().current().splitPixmap(KSim::Theme::KrellSlider);
 
@@ -234,9 +234,9 @@ void KSim::LedLabel::configureObject(bool reapaintWidget)
     update();
 }
 
-QSize KSim::LedLabel::sizeHint() const
+TQSize KSim::LedLabel::sizeHint() const
 {
-  QSize hint(Progress::sizeHint());
+  TQSize hint(Progress::sizeHint());
 
   if (d->sendLed.height() > hint.height())
     hint.setHeight(d->sendLed.height());
@@ -303,14 +303,14 @@ void KSim::LedLabel::drawLeds()
   bitBlt(this, d->receivePoint, &d->receiveLed);
 }
 
-void KSim::LedLabel::paintEvent(QPaintEvent *ev)
+void KSim::LedLabel::paintEvent(TQPaintEvent *ev)
 {
   KSim::Label::paintEvent(ev);
   drawLeds();
   KSim::Progress::drawMeter();
 }
 
-void KSim::LedLabel::resizeEvent(QResizeEvent *ev)
+void KSim::LedLabel::resizeEvent(TQResizeEvent *ev)
 {
   KSim::Progress::resizeEvent(ev);
   layoutLeds();
@@ -328,11 +328,11 @@ void KSim::LedLabel::layoutLeds()
   d->receivePoint.setX((d->sendPoint.x() - d->receiveLed.width()) - 3);
   d->receivePoint.setY(ledHeight - (d->receiveLed.height() / 2));
 
-  QRect location = textLocation();
+  TQRect location = textLocation();
   location.setWidth(d->receivePoint.x());
   setTextLocation(location);
 
-  QRect shadow = shadowLocation();
+  TQRect shadow = shadowLocation();
   shadow.setWidth(d->receivePoint.x() + 3);
   setShadowLocation(shadow);
 

@@ -27,7 +27,7 @@
 class TextRegExp :public RegExp
 {
 public:
-	TextRegExp( bool selected, QString text = QString::null);
+	TextRegExp( bool selected, TQString text = TQString::null);
 
     virtual bool check( ErrorMap&, bool first, bool last );
     virtual int precedence() const {
@@ -36,15 +36,15 @@ public:
         else
             return 4;
     }
-    QString text() const { return _text; }
-    virtual QDomNode toXml( QDomDocument* doc ) const;
-    virtual bool load( QDomElement, const QString& version );
-    void append( QString str);
+    TQString text() const { return _text; }
+    virtual TQDomNode toXml( TQDomDocument* doc ) const;
+    virtual bool load( TQDomElement, const TQString& version );
+    void append( TQString str);
     virtual RegExpType type() const { return TEXT;}
     virtual bool operator==( const RegExp& other ) const;
 
 private:
-	QString _text;
+	TQString _text;
 };
 
 #endif // __textregexp_h

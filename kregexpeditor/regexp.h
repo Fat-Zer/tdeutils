@@ -18,8 +18,8 @@
 #ifndef REGEXP_H
 #define REGEXP_H
 
-#include <qdom.h>
-#include <qptrlist.h>
+#include <tqdom.h>
+#include <tqptrlist.h>
 
 class CompoundRegExp;
 class ErrorMap;
@@ -35,9 +35,9 @@ public:
 	virtual ~RegExp();
 
     virtual int precedence() const = 0;
-    virtual QDomNode toXml( QDomDocument* doc ) const = 0;
-    virtual bool load( QDomElement, const QString& version ) = 0;
-    QString toXmlString() const;
+    virtual TQDomNode toXml( TQDomDocument* doc ) const = 0;
+    virtual bool load( TQDomElement, const TQString& version ) = 0;
+    TQString toXmlString() const;
 
     void check( ErrorMap& );
     virtual bool check( ErrorMap&, bool first, bool last ) = 0;
@@ -55,18 +55,18 @@ public:
     void setSelected( bool b ) { _selected = b; }
 
 protected:
-    RegExp* readRegExp( QDomElement top, const QString& version );
+    RegExp* readRegExp( TQDomElement top, const TQString& version );
 
 private:
     RegExp() {} // disable
-    QPtrList<RegExp> _children;
+    TQPtrList<RegExp> _children;
     RegExp* _parent;
     bool _destructing;
     bool _selected;
 };
 
-typedef QPtrList<RegExp> RegExpList;
-typedef QPtrListIterator<RegExp> RegExpListIt;
+typedef TQPtrList<RegExp> RegExpList;
+typedef TQPtrListIterator<RegExp> RegExpListIt;
 
 #endif // REGEXP_H
 

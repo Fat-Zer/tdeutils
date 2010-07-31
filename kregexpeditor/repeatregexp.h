@@ -31,8 +31,8 @@ public:
 
     virtual bool check( ErrorMap&, bool first, bool last );
     virtual int precedence() const { return 3;}
-    virtual QDomNode toXml( QDomDocument* doc ) const;
-    virtual bool load( QDomElement, const QString& version );
+    virtual TQDomNode toXml( TQDomDocument* doc ) const;
+    virtual bool load( TQDomElement, const TQString& version );
     int min() const { return _lower; }
     int max() const { return _upper; }
     RegExp* child() const { return _child; }

@@ -24,13 +24,13 @@
 
 #include "indexWindow.h"
 #include <iostream>
-#include <qlayout.h>
+#include <tqlayout.h>
 
-indexWindow::indexWindow() : QWidget(0,"", WStyle_Customize | WType_Popup)
+indexWindow::indexWindow() : TQWidget(0,"", WStyle_Customize | WType_Popup)
 {
-  lb = new QListBox(this);
-  connect(lb,SIGNAL(selected(int)), this, SLOT(lbSelected(int)));
-  QHBoxLayout *lay = new QHBoxLayout(this);
+  lb = new TQListBox(this);
+  connect(lb,TQT_SIGNAL(selected(int)), this, TQT_SLOT(lbSelected(int)));
+  TQHBoxLayout *lay = new TQHBoxLayout(this);
   lay->addWidget(lb);
   lbFinish = false;
 }
@@ -50,20 +50,20 @@ void indexWindow::finish(int index)
 }
 
 
-void indexWindow::insertItem(QString txt)
+void indexWindow::insertItem(TQString txt)
 {
   lb->insertItem(txt);
 }
 
-void indexWindow::hideEvent(QHideEvent *h)
+void indexWindow::hideEvent(TQHideEvent *h)
 {
-  QWidget::hideEvent(h);
+  TQWidget::hideEvent(h);
   if (!lbFinish)
     finish(-1);
 }
 
 
-int indexWindow::exec(const QPoint & /*start*/, int /*width*/)
+int indexWindow::exec(const TQPoint & /*start*/, int /*width*/)
 {
     // This code is not xinerama safe, on the other hand this part of the widget
     // is not used in KRegExpEditor. This is part of a widget which has
@@ -76,7 +76,7 @@ int indexWindow::exec(const QPoint & /*start*/, int /*width*/)
   int elm_h = lb->item(0)->height(lb) * lb->count();
   elm_h += 2*lb->frameWidth();
 
-  QWidget *desktop = QApplication::desktop();
+  TQWidget *desktop = TQApplication::desktop();
   int desktop_h = desktop->height();
   int rest_h = desktop_h - start.y();
   int below_h = QMAX(rest_h, 200);

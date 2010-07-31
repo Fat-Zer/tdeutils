@@ -20,12 +20,12 @@
 #ifndef KSIMDISK_H
 #define KSIMDISK_H
 
-#include <qvaluelist.h>
+#include <tqvaluelist.h>
 #include <pluginmodule.h>
 #include <stdio.h>
-#include <qptrlist.h>
-#include <qstringlist.h>
-#include <qvaluevector.h>
+#include <tqptrlist.h>
+#include <tqstringlist.h>
+#include <tqvaluevector.h>
 
 class QTextStream;
 class QTimer;
@@ -94,7 +94,7 @@ class DiskView : public KSim::PluginView
           return *this;
         }
 
-        QString name;
+        TQString name;
         int major;
         int minor;
         unsigned long total;
@@ -104,27 +104,27 @@ class DiskView : public KSim::PluginView
         unsigned long writeBlocks;
     };
 
-    typedef QValueList<DiskData> DiskList;
+    typedef TQValueList<DiskData> DiskList;
     typedef QPair<KSim::Chart *, KSim::Progress *> DiskPair;
 
     void updateData(DiskList &disks);
-    QString diskName( int, int ) const;
+    TQString diskName( int, int ) const;
     DiskPair *addDisk();
-    DiskData findDiskData(const DiskList& diskList, QString diskName);
+    DiskData findDiskData(const DiskList& diskList, TQString diskName);
 
     void init();
     void cleanup();
 
-    QValueVector<QPair<DiskData, DiskData> > m_data;
-    QTimer *m_timer;
+    TQValueVector<QPair<DiskData, DiskData> > m_data;
+    TQTimer *m_timer;
     bool m_bLinux24;
     FILE *m_procFile;
-    QTextStream *m_procStream;
-    QVBoxLayout *m_layout;
-    QPtrList<DiskPair> m_diskList;
+    TQTextStream *m_procStream;
+    TQVBoxLayout *m_layout;
+    TQPtrList<DiskPair> m_diskList;
     int m_firstTime;
     bool m_useSeperatly;
-    QStringList m_list;
+    TQStringList m_list;
     bool m_addAll;
 };
 
@@ -143,12 +143,12 @@ class DiskConfig : public KSim::PluginPage
     void removeItem();
 
   private:
-    QVBoxLayout *m_layout;
+    TQVBoxLayout *m_layout;
     KListView *m_listview;
-    QPushButton *m_add;
-    QPushButton *m_remove;
-    QVButtonGroup *m_buttonBox;
-    QRadioButton *m_totalButton;
-    QRadioButton *m_bothButton;
+    TQPushButton *m_add;
+    TQPushButton *m_remove;
+    TQVButtonGroup *m_buttonBox;
+    TQRadioButton *m_totalButton;
+    TQRadioButton *m_bothButton;
 };
 #endif

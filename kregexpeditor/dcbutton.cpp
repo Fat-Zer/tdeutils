@@ -23,13 +23,13 @@
 
 #include "dcbutton.h"
 
-DoubleClickButton::DoubleClickButton( QPixmap pixmap, QWidget* parent, const char* name )
-  : QToolButton( parent, name ? name : "DoubleClickButton" )
+DoubleClickButton::DoubleClickButton( TQPixmap pixmap, TQWidget* parent, const char* name )
+  : TQToolButton( parent, name ? name : "DoubleClickButton" )
 {
   setPixmap( pixmap );
 }
 
-void DoubleClickButton::mouseDoubleClickEvent( QMouseEvent* )
+void DoubleClickButton::mouseDoubleClickEvent( TQMouseEvent* )
 {
   emit doubleClicked();
 }

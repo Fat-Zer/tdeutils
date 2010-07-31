@@ -28,7 +28,7 @@
 #ifndef _D_LABEL_H_
 #define _D_LABEL_H_
 
-#include <qvaluevector.h>
+#include <tqvaluevector.h>
 #include "kcalcdisplay.h"
 
 class CalcEngine;
@@ -40,7 +40,7 @@ class DispLogic : public KCalcDisplay
 Q_OBJECT
 
 public:
-	DispLogic(QWidget *parent, const char *name,
+	DispLogic(TQWidget *parent, const char *name,
 		  KActionCollection *coll);
 	~DispLogic();
 
@@ -54,7 +54,7 @@ private slots:
 	void history_forward(void);
 
 private:
-	QValueVector<KNumber> _history_list;
+	TQValueVector<KNumber> _history_list;
 	int _history_index;
 
 	KAction *_forward;

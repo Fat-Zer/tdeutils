@@ -18,7 +18,7 @@
 #ifndef drag_h
 #define drag_h
 
-#include <qdragobject.h>
+#include <tqdragobject.h>
 
 class RegExp;
 class RegExpWidget;
@@ -31,13 +31,13 @@ class RegExpEditorWindow;
 class RegExpWidgetDrag :public QDragObject
 {
 public:
-  RegExpWidgetDrag( RegExp* regexp , QWidget* dragSource);
+  RegExpWidgetDrag( RegExp* regexp , TQWidget* dragSource);
   ~RegExpWidgetDrag();
   virtual const char * format ( int i = 0 ) const;
-  virtual QByteArray encodedData ( const char * ) const;
-  static bool canDecode(QDragMoveEvent* event);
-  static RegExpWidget* decode(QDropEvent* event, RegExpEditorWindow* window,
-                              QWidget* parent);
+  virtual TQByteArray encodedData ( const char * ) const;
+  static bool canDecode(TQDragMoveEvent* event);
+  static RegExpWidget* decode(TQDropEvent* event, RegExpEditorWindow* window,
+                              TQWidget* parent);
 private:
   RegExp* _regexp;
 };

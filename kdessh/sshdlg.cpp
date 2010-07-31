@@ -13,18 +13,18 @@
 #include "sshdlg.h"
 
 
-KDEsshDialog::KDEsshDialog(QCString host, QCString user, QCString stub,
-	QString prompt, bool enableKeep)
+KDEsshDialog::KDEsshDialog(TQCString host, TQCString user, TQCString stub,
+	TQString prompt, bool enableKeep)
     : KPasswordDialog(Password, enableKeep, 0)
 {
     m_Host = host;
     m_User = user;
     m_Stub = stub;
 
-    setCaption(QString::fromLatin1("%1@%2").arg(m_User).arg(m_Host));
+    setCaption(TQString::fromLatin1("%1@%2").arg(m_User).arg(m_Host));
 
     // Make the prompt a little more polite :-)
-    if (prompt.lower().left(6) == QString::fromLatin1("enter "))
+    if (prompt.lower().left(6) == TQString::fromLatin1("enter "))
 	prompt.remove(0, 6);
     int pos = prompt.find(':');
     if (pos != -1)

@@ -35,17 +35,17 @@
 #include <kcombobox.h>
 #include <knuminput.h>
 
-#include <qlayout.h>
-#include <qvbuttongroup.h>
-#include <qspinbox.h>
-#include <qradiobutton.h>
-#include <qcheckbox.h>
-#include <qhbox.h>
-#include <qslider.h>
-#include <qtooltip.h>
+#include <tqlayout.h>
+#include <tqvbuttongroup.h>
+#include <tqspinbox.h>
+#include <tqradiobutton.h>
+#include <tqcheckbox.h>
+#include <tqhbox.h>
+#include <tqslider.h>
+#include <tqtooltip.h>
 extern void wake_laptop_daemon();
 
-PowerConfig::PowerConfig (QWidget * parent, const char *name)
+PowerConfig::PowerConfig (TQWidget * parent, const char *name)
   : KCModule(parent, name),
     nopowerBox(0),
     nopowerStandby(0),
@@ -84,16 +84,16 @@ PowerConfig::PowerConfig (QWidget * parent, const char *name)
   apm = laptop_portable::has_power_management();
   config =  new KConfig("kcmlaptoprc");
   int can_brightness = laptop_portable::has_brightness();
-    QStringList throttle_list;
+    TQStringList throttle_list;
     int current_throttle;
     bool *active_list;
     bool has_throttle = laptop_portable::get_system_throttling(0, current_throttle, throttle_list, active_list);
-    QStringList performance_list;
+    TQStringList performance_list;
     int current_performance;
     bool has_performance = laptop_portable::get_system_performance(0, current_performance, performance_list, active_list);
 
   if (!apm && !can_brightness && !has_throttle && !has_performance) {
-    QVBoxLayout *top_layout = new QVBoxLayout(this, KDialog::marginHint(),
+    TQVBoxLayout *top_layout = new TQVBoxLayout(this, KDialog::marginHint(),
 					      KDialog::spacingHint());
 
     KActiveLabel* explain = laptop_portable::no_power_management_explanation(this);
@@ -108,200 +108,200 @@ PowerConfig::PowerConfig (QWidget * parent, const char *name)
     if (!can_standby && !can_suspend && !can_hibernate && !can_brightness && !has_throttle && !has_performance)
       apm = 0;
     if (!apm) {
-      QVBoxLayout *top_layout = new QVBoxLayout(this, KDialog::marginHint(),
+      TQVBoxLayout *top_layout = new TQVBoxLayout(this, KDialog::marginHint(),
 						KDialog::spacingHint());
 
-      QLabel* explain = laptop_portable::how_to_do_suspend_resume(this);
+      TQLabel* explain = laptop_portable::how_to_do_suspend_resume(this);
       top_layout->addWidget(explain);
 
       top_layout->addStretch(1);
     } else {
-      QVBoxLayout *top_layout = new QVBoxLayout(this, KDialog::marginHint(),
+      TQVBoxLayout *top_layout = new TQVBoxLayout(this, KDialog::marginHint(),
 						KDialog::spacingHint());
-      QHBoxLayout *hlay = new QHBoxLayout( top_layout );
+      TQHBoxLayout *hlay = new TQHBoxLayout( top_layout );
 
-      nopowerBox = new QVButtonGroup(i18n("Not Powered"), this);
-      QToolTip::add( nopowerBox, i18n( "Options in this box apply when the laptop is unplugged from the wall and has been idle for a while" ) );
+      nopowerBox = new TQVButtonGroup(i18n("Not Powered"), this);
+      TQToolTip::add( nopowerBox, i18n( "Options in this box apply when the laptop is unplugged from the wall and has been idle for a while" ) );
       nopowerBox->layout()->setSpacing( KDialog::spacingHint() );
       hlay->addWidget( nopowerBox );
 
       if (can_standby) {
-	nopowerStandby = new QRadioButton(i18n("Standb&y"), nopowerBox);
-        QToolTip::add( nopowerStandby, i18n( "Causes the laptop to change to a standby temporary-low power state" ) );
+	nopowerStandby = new TQRadioButton(i18n("Standb&y"), nopowerBox);
+        TQToolTip::add( nopowerStandby, i18n( "Causes the laptop to change to a standby temporary-low power state" ) );
       }
       if (can_suspend) {
-	nopowerSuspend = new QRadioButton(i18n("&Suspend"), nopowerBox);
-        QToolTip::add( nopowerSuspend, i18n( "Causes the laptop to change to a suspend 'save-to-ram' state" ) );
+	nopowerSuspend = new TQRadioButton(i18n("&Suspend"), nopowerBox);
+        TQToolTip::add( nopowerSuspend, i18n( "Causes the laptop to change to a suspend 'save-to-ram' state" ) );
       }
       if (can_hibernate) {
-	nopowerHibernate = new QRadioButton(i18n("H&ibernate"), nopowerBox);
-        QToolTip::add( nopowerHibernate, i18n( "Causes the laptop to change to a hibernate 'save-to-disk' state" ) );
+	nopowerHibernate = new TQRadioButton(i18n("H&ibernate"), nopowerBox);
+        TQToolTip::add( nopowerHibernate, i18n( "Causes the laptop to change to a hibernate 'save-to-disk' state" ) );
       }
       if (can_suspend||can_standby||can_hibernate)
-        nopowerOff = new QRadioButton(i18n("None"), nopowerBox);
+        nopowerOff = new TQRadioButton(i18n("None"), nopowerBox);
       if (can_brightness) {
-		nopowerBrightness = new QCheckBox(i18n("Brightness"), nopowerBox);
-        	QToolTip::add( nopowerBrightness, i18n( "Enables changing the laptop's back panel brightness" ) );
-		QWidget *wp = new QWidget(nopowerBox);
-	        QHBoxLayout *xl = new QHBoxLayout( wp);
-		xl->addWidget(new QLabel("-", wp));
-		nopowerValBrightness = new QSlider(0, 255, 16, 255, Qt::Horizontal, wp);
-        	QToolTip::add( nopowerValBrightness, i18n( "How bright to change the back panel" ) );
+		nopowerBrightness = new TQCheckBox(i18n("Brightness"), nopowerBox);
+        	TQToolTip::add( nopowerBrightness, i18n( "Enables changing the laptop's back panel brightness" ) );
+		TQWidget *wp = new TQWidget(nopowerBox);
+	        TQHBoxLayout *xl = new TQHBoxLayout( wp);
+		xl->addWidget(new TQLabel("-", wp));
+		nopowerValBrightness = new TQSlider(0, 255, 16, 255, Qt::Horizontal, wp);
+        	TQToolTip::add( nopowerValBrightness, i18n( "How bright to change the back panel" ) );
 		nopowerValBrightness->setEnabled(0);
-		connect(nopowerValBrightness, SIGNAL(valueChanged(int)), this, SLOT(changed()));
-		connect(nopowerBrightness, SIGNAL(toggled(bool)), nopowerValBrightness, SLOT(setEnabled(bool)));
+		connect(nopowerValBrightness, TQT_SIGNAL(valueChanged(int)), this, TQT_SLOT(changed()));
+		connect(nopowerBrightness, TQT_SIGNAL(toggled(bool)), nopowerValBrightness, TQT_SLOT(setEnabled(bool)));
 		xl->addWidget(nopowerValBrightness);
-		xl->addWidget(new QLabel("+", wp));
+		xl->addWidget(new TQLabel("+", wp));
 		xl->addStretch(1);
       } 
       if (has_performance) {
-		nopowerPerformance = new QCheckBox(i18n("System performance"), nopowerBox);
-        	QToolTip::add( nopowerPerformance, i18n( "Enables changing the laptop's performance profile" ) );
+		nopowerPerformance = new TQCheckBox(i18n("System performance"), nopowerBox);
+        	TQToolTip::add( nopowerPerformance, i18n( "Enables changing the laptop's performance profile" ) );
 
-		QWidget *wp = new QWidget(nopowerBox);
-	        QHBoxLayout *xl = new QHBoxLayout( wp);
+		TQWidget *wp = new TQWidget(nopowerBox);
+	        TQHBoxLayout *xl = new TQHBoxLayout( wp);
     		nopowerValPerformance = new KComboBox(0, wp);
-        	QToolTip::add( nopowerValPerformance, i18n( "Which profile to change it to" ) );
+        	TQToolTip::add( nopowerValPerformance, i18n( "Which profile to change it to" ) );
 		nopowerValPerformance->insertStringList(performance_list);
     		nopowerValPerformance->setEnabled(0);
-		connect(nopowerValPerformance, SIGNAL(activated(int)), this, SLOT(changed()));
-		connect(nopowerPerformance, SIGNAL(toggled(bool)), nopowerValPerformance, SLOT(setEnabled(bool)));
+		connect(nopowerValPerformance, TQT_SIGNAL(activated(int)), this, TQT_SLOT(changed()));
+		connect(nopowerPerformance, TQT_SIGNAL(toggled(bool)), nopowerValPerformance, TQT_SLOT(setEnabled(bool)));
 		xl->addWidget(nopowerValPerformance);
 		xl->addStretch(1);
       } 
       if (has_throttle) {
-		nopowerThrottle = new QCheckBox(i18n("CPU throttle"), nopowerBox);
-        	QToolTip::add( nopowerThrottle, i18n( "Enables throttling the laptop's CPU" ) );
+		nopowerThrottle = new TQCheckBox(i18n("CPU throttle"), nopowerBox);
+        	TQToolTip::add( nopowerThrottle, i18n( "Enables throttling the laptop's CPU" ) );
 
-		QWidget *wp = new QWidget(nopowerBox);
-	        QHBoxLayout *xl = new QHBoxLayout( wp);
+		TQWidget *wp = new TQWidget(nopowerBox);
+	        TQHBoxLayout *xl = new TQHBoxLayout( wp);
     		nopowerValThrottle = new KComboBox(0, wp);
-        	QToolTip::add( nopowerValThrottle, i18n( "How much to throttle the laptop's CPU" ) );
+        	TQToolTip::add( nopowerValThrottle, i18n( "How much to throttle the laptop's CPU" ) );
 		nopowerValThrottle->insertStringList(throttle_list);
     		nopowerValThrottle->setEnabled(0);
-		connect(nopowerValThrottle, SIGNAL(activated(int)), this, SLOT(changed()));
-		connect(nopowerThrottle, SIGNAL(toggled(bool)), nopowerValThrottle, SLOT(setEnabled(bool)));
+		connect(nopowerValThrottle, TQT_SIGNAL(activated(int)), this, TQT_SLOT(changed()));
+		connect(nopowerThrottle, TQT_SIGNAL(toggled(bool)), nopowerValThrottle, TQT_SLOT(setEnabled(bool)));
 		xl->addWidget(nopowerValThrottle);
 		xl->addStretch(1);
       } 
 
 
-      connect(nopowerBox, SIGNAL(clicked(int)), this, SLOT(changed()));
+      connect(nopowerBox, TQT_SIGNAL(clicked(int)), this, TQT_SLOT(changed()));
 
       bool can_lav = laptop_portable::has_lav();
-      QHBox *hbox;
+      TQHBox *hbox;
       if (can_lav) {
-      	  hbox = new QHBox( nopowerBox );
-          noenablelav = new QCheckBox(i18n("Don't act if LAV is >"), hbox);
-          connect(noenablelav, SIGNAL(clicked()), this, SLOT(changed()));
+      	  hbox = new TQHBox( nopowerBox );
+          noenablelav = new TQCheckBox(i18n("Don't act if LAV is >"), hbox);
+          connect(noenablelav, TQT_SIGNAL(clicked()), this, TQT_SLOT(changed()));
           noeditlav = new KDoubleSpinBox(0.0, 10.0, 0.0, 0.1, 1, hbox);
-          QToolTip::add( noeditlav, i18n( "If enabled and the system load average is greater than this value none of the above options will be applied" ) );
-          connect(noeditlav, SIGNAL(valueChanged(double)), this, SLOT(changed()));
-          connect(noenablelav, SIGNAL(toggled(bool)), noeditlav, SLOT(setEnabled(bool)));
+          TQToolTip::add( noeditlav, i18n( "If enabled and the system load average is greater than this value none of the above options will be applied" ) );
+          connect(noeditlav, TQT_SIGNAL(valueChanged(double)), this, TQT_SLOT(changed()));
+          connect(noenablelav, TQT_SIGNAL(toggled(bool)), noeditlav, TQT_SLOT(setEnabled(bool)));
       }
 
-      hbox = new QHBox( nopowerBox );
-      QLabel* noedlabel = new QLabel(i18n("&Wait for:"), hbox);
-      noeditwait = new QSpinBox( 1, 60*24 /*1 day*/, 1, hbox );
-      QToolTip::add( noeditwait, i18n( "How long the computer has to be idle before these values take effect" ) );
+      hbox = new TQHBox( nopowerBox );
+      TQLabel* noedlabel = new TQLabel(i18n("&Wait for:"), hbox);
+      noeditwait = new TQSpinBox( 1, 60*24 /*1 day*/, 1, hbox );
+      TQToolTip::add( noeditwait, i18n( "How long the computer has to be idle before these values take effect" ) );
       noeditwait->setSuffix( i18n("keep short, unit in spinbox", "min") );
       noedlabel->setBuddy( noeditwait );
       hbox->setStretchFactor( noeditwait, 1 );
-      connect( noeditwait, SIGNAL(valueChanged(int)), this, SLOT(changed()));
+      connect( noeditwait, TQT_SIGNAL(valueChanged(int)), this, TQT_SLOT(changed()));
 
 
 	///////////////////////////////////////////////////////////////
 
 
-      powerBox = new QVButtonGroup(i18n("Powered"), this);
+      powerBox = new TQVButtonGroup(i18n("Powered"), this);
       powerBox->layout()->setSpacing( KDialog::spacingHint() );
-      QToolTip::add( powerBox, i18n( "Options in this box apply when the laptop is plugged into the wall and has been idle for a while" ) );
+      TQToolTip::add( powerBox, i18n( "Options in this box apply when the laptop is plugged into the wall and has been idle for a while" ) );
       hlay->addWidget( powerBox );
 
       if (can_standby) {
-	powerStandby = new QRadioButton(i18n("Sta&ndby"), powerBox);
-        QToolTip::add( powerStandby, i18n( "Causes the laptop to change to a standby temporary-low power state" ) );
+	powerStandby = new TQRadioButton(i18n("Sta&ndby"), powerBox);
+        TQToolTip::add( powerStandby, i18n( "Causes the laptop to change to a standby temporary-low power state" ) );
       }
       if (can_suspend) {
-	powerSuspend = new QRadioButton(i18n("S&uspend"), powerBox);
-        QToolTip::add( powerSuspend, i18n( "Causes the laptop to change to a suspend 'save-to-ram' state" ) );
+	powerSuspend = new TQRadioButton(i18n("S&uspend"), powerBox);
+        TQToolTip::add( powerSuspend, i18n( "Causes the laptop to change to a suspend 'save-to-ram' state" ) );
       }
       if (can_hibernate) {
-	powerHibernate = new QRadioButton(i18n("Hi&bernate"), powerBox);
-        QToolTip::add( powerHibernate, i18n( "Causes the laptop to change to a hibernate 'save-to-disk' state" ) );
+	powerHibernate = new TQRadioButton(i18n("Hi&bernate"), powerBox);
+        TQToolTip::add( powerHibernate, i18n( "Causes the laptop to change to a hibernate 'save-to-disk' state" ) );
       }
       if (can_suspend||can_standby||can_hibernate)
-      	powerOff = new QRadioButton(i18n("None"), powerBox);
+      	powerOff = new TQRadioButton(i18n("None"), powerBox);
       if (can_brightness) {
-		powerBrightness = new QCheckBox(i18n("Brightness"), powerBox);
-        	QToolTip::add( powerBrightness, i18n( "Enables changing the laptop's back panel brightness" ) );
-		QWidget *wp = new QWidget(powerBox);
-	        QHBoxLayout *xl = new QHBoxLayout( wp);
-		xl->addWidget(new QLabel("-", wp));
-		powerValBrightness = new QSlider(0, 255, 16, 255, Qt::Horizontal, wp);
-        	QToolTip::add( powerValBrightness, i18n( "How bright to change the back panel" ) );
+		powerBrightness = new TQCheckBox(i18n("Brightness"), powerBox);
+        	TQToolTip::add( powerBrightness, i18n( "Enables changing the laptop's back panel brightness" ) );
+		TQWidget *wp = new TQWidget(powerBox);
+	        TQHBoxLayout *xl = new TQHBoxLayout( wp);
+		xl->addWidget(new TQLabel("-", wp));
+		powerValBrightness = new TQSlider(0, 255, 16, 255, Qt::Horizontal, wp);
+        	TQToolTip::add( powerValBrightness, i18n( "How bright to change the back panel" ) );
 		powerValBrightness->setEnabled(0);
-		connect(powerValBrightness, SIGNAL(valueChanged(int)), this, SLOT(changed()));
-		connect(powerBrightness, SIGNAL(toggled(bool)), powerValBrightness, SLOT(setEnabled(bool)));
+		connect(powerValBrightness, TQT_SIGNAL(valueChanged(int)), this, TQT_SLOT(changed()));
+		connect(powerBrightness, TQT_SIGNAL(toggled(bool)), powerValBrightness, TQT_SLOT(setEnabled(bool)));
 		xl->addWidget(powerValBrightness);
-		xl->addWidget(new QLabel("+", wp));
+		xl->addWidget(new TQLabel("+", wp));
 		xl->addStretch(1);
       }
       if (has_performance) {
-		powerPerformance = new QCheckBox(i18n("System performance"), powerBox);
-        	QToolTip::add( powerPerformance, i18n( "Enables changing the laptop's performance profile" ) );
+		powerPerformance = new TQCheckBox(i18n("System performance"), powerBox);
+        	TQToolTip::add( powerPerformance, i18n( "Enables changing the laptop's performance profile" ) );
 
-		QWidget *wp = new QWidget(powerBox);
-	        QHBoxLayout *xl = new QHBoxLayout( wp);
+		TQWidget *wp = new TQWidget(powerBox);
+	        TQHBoxLayout *xl = new TQHBoxLayout( wp);
     		powerValPerformance = new KComboBox(0, wp);
-        	QToolTip::add( powerValPerformance, i18n( "Which profile to change it to" ) );
+        	TQToolTip::add( powerValPerformance, i18n( "Which profile to change it to" ) );
 		powerValPerformance->insertStringList(performance_list);
     		powerValPerformance->setEnabled(0);
-		connect(powerValPerformance, SIGNAL(activated(int)), this, SLOT(changed()));
-		connect(powerPerformance, SIGNAL(toggled(bool)), powerValPerformance, SLOT(setEnabled(bool)));
+		connect(powerValPerformance, TQT_SIGNAL(activated(int)), this, TQT_SLOT(changed()));
+		connect(powerPerformance, TQT_SIGNAL(toggled(bool)), powerValPerformance, TQT_SLOT(setEnabled(bool)));
 		xl->addWidget(powerValPerformance);
 		xl->addStretch(1);
       } 
       if (has_throttle) {
-		powerThrottle = new QCheckBox(i18n("CPU throttle"), powerBox);
-        	QToolTip::add( powerThrottle, i18n( "Enables throttling the laptop's CPU" ) );
+		powerThrottle = new TQCheckBox(i18n("CPU throttle"), powerBox);
+        	TQToolTip::add( powerThrottle, i18n( "Enables throttling the laptop's CPU" ) );
 
-		QWidget *wp = new QWidget(powerBox);
-	        QHBoxLayout *xl = new QHBoxLayout( wp);
+		TQWidget *wp = new TQWidget(powerBox);
+	        TQHBoxLayout *xl = new TQHBoxLayout( wp);
     		powerValThrottle = new KComboBox(0, wp);
-        	QToolTip::add( powerValThrottle, i18n( "How much to throttle the laptop's CPU" ) );
+        	TQToolTip::add( powerValThrottle, i18n( "How much to throttle the laptop's CPU" ) );
 		powerValThrottle->insertStringList(throttle_list);
     		powerValThrottle->setEnabled(0);
-		connect(powerValThrottle, SIGNAL(activated(int)), this, SLOT(changed()));
-		connect(powerThrottle, SIGNAL(toggled(bool)), powerValThrottle, SLOT(setEnabled(bool)));
+		connect(powerValThrottle, TQT_SIGNAL(activated(int)), this, TQT_SLOT(changed()));
+		connect(powerThrottle, TQT_SIGNAL(toggled(bool)), powerValThrottle, TQT_SLOT(setEnabled(bool)));
 		xl->addWidget(powerValThrottle);
 		xl->addStretch(1);
       } 
 
-      connect(powerBox, SIGNAL(clicked(int)), this, SLOT(changed()));
+      connect(powerBox, TQT_SIGNAL(clicked(int)), this, TQT_SLOT(changed()));
 
       if (can_lav) {
-          hbox = new QHBox( powerBox );
-          enablelav = new QCheckBox(i18n("Don't act if LAV is >"), hbox);
-          connect( enablelav, SIGNAL(clicked()), this, SLOT(changed()));
+          hbox = new TQHBox( powerBox );
+          enablelav = new TQCheckBox(i18n("Don't act if LAV is >"), hbox);
+          connect( enablelav, TQT_SIGNAL(clicked()), this, TQT_SLOT(changed()));
           editlav = new KDoubleSpinBox(0.0, 10.0, 0.0, 0.1, 1, hbox);
-          QToolTip::add( editlav, i18n( "If enabled and the system load average is greater than this value none of the above options will be applied" ) );
-          connect( editlav, SIGNAL(valueChanged(double)), this, SLOT(changed()));
-          connect( enablelav, SIGNAL(toggled(bool)), editlav, SLOT(setEnabled(bool)) );
+          TQToolTip::add( editlav, i18n( "If enabled and the system load average is greater than this value none of the above options will be applied" ) );
+          connect( editlav, TQT_SIGNAL(valueChanged(double)), this, TQT_SLOT(changed()));
+          connect( enablelav, TQT_SIGNAL(toggled(bool)), editlav, TQT_SLOT(setEnabled(bool)) );
       }
 
-      hbox = new QHBox( powerBox );
-      QLabel* edlabel = new QLabel(i18n("Wai&t for:"), hbox);
-      editwait = new QSpinBox( 1, 60*24 /*1 day*/, 1, hbox );
-      QToolTip::add( editwait, i18n( "How long the computer has to be idle before these values take effect" ) );
+      hbox = new TQHBox( powerBox );
+      TQLabel* edlabel = new TQLabel(i18n("Wai&t for:"), hbox);
+      editwait = new TQSpinBox( 1, 60*24 /*1 day*/, 1, hbox );
+      TQToolTip::add( editwait, i18n( "How long the computer has to be idle before these values take effect" ) );
       editwait->setSuffix( i18n("keep short, unit in spinbox", "min") );
       edlabel->setBuddy( editwait );
       hbox->setStretchFactor( editwait, 1 );
-      connect( editwait, SIGNAL(valueChanged(int)), this, SLOT(changed()));
+      connect( editwait, TQT_SIGNAL(valueChanged(int)), this, TQT_SLOT(changed()));
 
       hlay->addStretch(1);
 
-      QLabel* explain = new QLabel(i18n("This panel configures the behavior of the automatic power-down feature - "
+      TQLabel* explain = new TQLabel(i18n("This panel configures the behavior of the automatic power-down feature - "
 					"it works as a sort of extreme screen saver. You can configure different "
 					"timeouts and types of behavior depending on whether or not your laptop is "
 					"plugged in to the mains supply."), this );
@@ -309,7 +309,7 @@ PowerConfig::PowerConfig (QWidget * parent, const char *name)
       top_layout->addWidget(explain);
 
       if (can_standby) {
-	QLabel* explain3 = new QLabel(i18n("Different laptops may respond to 'standby' in different ways - in many "
+	TQLabel* explain3 = new TQLabel(i18n("Different laptops may respond to 'standby' in different ways - in many "
 					"it is only a temporary state and may not be useful for you."), this);
 	explain3->setAlignment( Qt::WordBreak );
 	top_layout->addWidget(explain3, 0, Qt::AlignLeft);
@@ -317,7 +317,7 @@ PowerConfig::PowerConfig (QWidget * parent, const char *name)
 
       top_layout->addStretch(1);
 
-      top_layout->addWidget( new QLabel( i18n("Version: %1").arg(LAPTOP_VERSION), this ), 0, Qt::AlignRight );
+      top_layout->addWidget( new TQLabel( i18n("Version: %1").arg(LAPTOP_VERSION), this ), 0, Qt::AlignRight );
     }
   }
 
@@ -576,7 +576,7 @@ void PowerConfig::setPower(int p, int np)
 }
 
 
-QString PowerConfig::quickHelp() const
+TQString PowerConfig::quickHelp() const
 {
   return i18n("<h1>Laptop Power Control</h1>This module allows you to "
 	"control the power settings of your laptop and set timouts that will trigger "

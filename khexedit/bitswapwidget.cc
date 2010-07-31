@@ -18,14 +18,14 @@
  *
  */
 
-#include <qpainter.h>
+#include <tqpainter.h>
  
 #include <kglobalsettings.h>
 
 #include "bitswapwidget.h"
 
-CDigitLabel::CDigitLabel( QWidget *parent, uint digit, const char *name )
-  :QLabel(parent, name), mDigit( digit ), mDotPosition( 0 )
+CDigitLabel::CDigitLabel( TQWidget *parent, uint digit, const char *name )
+  :TQLabel(parent, name), mDigit( digit ), mDotPosition( 0 )
 {
   setFocusPolicy( StrongFocus );
   initialize();
@@ -38,13 +38,13 @@ CDigitLabel::~CDigitLabel( void )
 
 void CDigitLabel::initialize( void )
 {
-  QFont font( KGlobalSettings::generalFont() );
+  TQFont font( KGlobalSettings::generalFont() );
   font.setBold( true );
   setFont( font );
 }
 
 
-void CDigitLabel::paletteChange( const QPalette & )
+void CDigitLabel::paletteChange( const TQPalette & )
 {
   update();
 }
@@ -81,10 +81,10 @@ void CDigitLabel::setDotPosition( uint dotPosition )
 
 
 
-QSize CDigitLabel::sizeHint( void ) const
+TQSize CDigitLabel::sizeHint( void ) const
 {
   int h = fontMetrics().height();
-  QSize s( h, h ); // Retangular
+  TQSize s( h, h ); // Retangular
   return( s );
 }
  
@@ -92,9 +92,9 @@ QSize CDigitLabel::sizeHint( void ) const
 #include <stdio.h>
 
 
-void CDigitLabel::drawContents( QPainter *p )
+void CDigitLabel::drawContents( TQPainter *p )
 {
-  QRect cr = contentsRect();
+  TQRect cr = contentsRect();
 
   if( hasFocus() == true )
   {
@@ -130,7 +130,7 @@ void CDigitLabel::drawContents( QPainter *p )
     */
   }
 
-  QString text;
+  TQString text;
   text.setNum( mDigit );
   p->drawText( 0, 0, cr.width(), cr.height(), alignment(), text );
 
@@ -139,7 +139,7 @@ void CDigitLabel::drawContents( QPainter *p )
 }
 
 
-void CDigitLabel::keyPressEvent( QKeyEvent *e )  
+void CDigitLabel::keyPressEvent( TQKeyEvent *e )  
 {
   switch ( e->key() ) 
   {
@@ -174,22 +174,22 @@ void CDigitLabel::keyPressEvent( QKeyEvent *e )
 
 
 
-CByteWidget::CByteWidget( QWidget *parent, const char *name )
-  :QWidget(parent, name)
+CByteWidget::CByteWidget( TQWidget *parent, const char *name )
+  :TQWidget(parent, name)
 {
-  mHBox = new QHBoxLayout( this, 0 );
+  mHBox = new TQHBoxLayout( this, 0 );
   
   for( uint i=0; i<8; i++ )
   {
     mDigit[i] = new CDigitLabel( this, 7-i );
     mDigit[i]->setLineWidth( 1 );
     mDigit[i]->setFixedSize( mDigit[i]->sizeHint()*2 );
-    mDigit[i]->setFrameStyle( QFrame::Panel | QFrame::Sunken );
+    mDigit[i]->setFrameStyle( TQFrame::Panel | TQFrame::Sunken );
     mDigit[i]->setAlignment( AlignCenter );
-    connect( mDigit[i], SIGNAL(stepCell(const QObject *, bool )),
-	     this, SLOT(stepCell(const QObject *, bool )));
-    connect( mDigit[i], SIGNAL(valueChanged(const QObject *, uint, bool )),
-	     this, SLOT(valueChanged(const QObject *, uint, bool )));
+    connect( mDigit[i], TQT_SIGNAL(stepCell(const TQObject *, bool )),
+	     this, TQT_SLOT(stepCell(const TQObject *, bool )));
+    connect( mDigit[i], TQT_SIGNAL(valueChanged(const TQObject *, uint, bool )),
+	     this, TQT_SLOT(valueChanged(const TQObject *, uint, bool )));
     mHBox->addWidget( mDigit[i] );
   }
 
@@ -202,7 +202,7 @@ CByteWidget::~CByteWidget( void )
   delete mHBox;
 }
 
-void CByteWidget::stepCell( const QObject *obj, bool next )
+void CByteWidget::stepCell( const TQObject *obj, bool next )
 {
   for( uint i=0; i<8; i++ )
   {
@@ -222,7 +222,7 @@ void CByteWidget::stepCell( const QObject *obj, bool next )
 
 
 
-void CByteWidget::valueChanged( const QObject *obj, uint val, bool after )
+void CByteWidget::valueChanged( const TQObject *obj, uint val, bool after )
 {
   if( after == false )
   {
@@ -278,7 +278,7 @@ void CByteWidget::reset( void )
 }
 
 
-void CByteWidget::setBuddy( const QObject *obj )
+void CByteWidget::setBuddy( const TQObject *obj )
 {
   for( uint i=0; i<8; i++ )
   {
@@ -298,7 +298,7 @@ void CByteWidget::setBuddy( const QObject *obj )
 
 
 
-bool CByteWidget::flag( QByteArray &buf )
+bool CByteWidget::flag( TQByteArray &buf )
 {
   bool swapPresent = false;
   uint i, j;

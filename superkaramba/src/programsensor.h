@@ -12,23 +12,23 @@
 #include "sensor.h"
 #include <kprocess.h>
 #include <kprocio.h>
-#include <qstring.h>
-#include <qstringlist.h>
-#include <qvaluevector.h>
-#include <qtextcodec.h>
+#include <tqstring.h>
+#include <tqstringlist.h>
+#include <tqvaluevector.h>
+#include <tqtextcodec.h>
 class ProgramSensor :  public Sensor
 {
     Q_OBJECT
 public:
-    ProgramSensor(const QString &programName, int msec=1000, QString encoding="" );
+    ProgramSensor(const TQString &programName, int msec=1000, TQString encoding="" );
     ~ProgramSensor();
     void update();
 
 private:
-    QTextCodec *codec;
+    TQTextCodec *codec;
     KShellProcess ksp;
-    QString programName;
-    QString sensorResult;
+    TQString programName;
+    TQString sensorResult;
 
 public slots:
     void receivedStdout(KProcess *proc, char *buffer, int buflen);

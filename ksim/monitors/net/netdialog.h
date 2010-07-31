@@ -20,7 +20,7 @@
 #ifndef NETDIALOG_H
 #define NETDIALOG_H
 
-#include <qtabdialog.h>
+#include <tqtabdialog.h>
 
 class QVBoxLayout;
 class QGridLayout;
@@ -36,50 +36,50 @@ class NetDialog : public QTabDialog
 {
   Q_OBJECT
   public:
-    NetDialog(QWidget *parent, const char *name = 0);
+    NetDialog(TQWidget *parent, const char *name = 0);
     ~NetDialog();
 
-    const QString deviceName() const;
+    const TQString deviceName() const;
     bool timer();
-    const QString format() const;
+    const TQString format() const;
     bool commands();
-    const QString cCommand() const;
-    const QString dCommand() const;
+    const TQString cCommand() const;
+    const TQString dCommand() const;
     bool okClicked() { return m_clicked; }
 
   public slots:
-    void setDeviceName(const QString &);
+    void setDeviceName(const TQString &);
     void setShowTimer(bool);
-    void setFormat(const QString &);
+    void setFormat(const TQString &);
     void setShowCommands(bool);
-    void setCCommand(const QString &);
-    void setDCommand(const QString &);
+    void setCCommand(const TQString &);
+    void setDCommand(const TQString &);
 
   private slots:
     void sendClicked();
 
   private:
-    QStringList createList() const;
+    TQStringList createList() const;
 
     bool m_clicked;
-    QWidget *m_generalTab;
-    QLabel *m_deviceLabel;
+    TQWidget *m_generalTab;
+    TQLabel *m_deviceLabel;
     KComboBox *m_deviceCombo;
-    QGroupBox *m_timerBox;
-    QCheckBox *m_showTimer;
+    TQGroupBox *m_timerBox;
+    TQCheckBox *m_showTimer;
     KLineEdit *m_timerEdit;
-    QLabel *m_hFormat;
-    QLabel *m_mFormat;
-    QLabel *m_sFormat;
-    QWidget *m_commandTab;
-    QCheckBox *m_enableCommands;
-    QLabel *m_cCommand;
+    TQLabel *m_hFormat;
+    TQLabel *m_mFormat;
+    TQLabel *m_sFormat;
+    TQWidget *m_commandTab;
+    TQCheckBox *m_enableCommands;
+    TQLabel *m_cCommand;
     KURLRequester *m_connectRequester;
-    QLabel *m_dCommand;
+    TQLabel *m_dCommand;
     KURLRequester *m_disconnectRequester;
 
-    QGridLayout *m_generalLayout;
-    QVBoxLayout *m_timerBoxLayout;
-    QGridLayout *m_commandLayout;
+    TQGridLayout *m_generalLayout;
+    TQVBoxLayout *m_timerBoxLayout;
+    TQGridLayout *m_commandLayout;
 };
 #endif // NETDIALOG_H

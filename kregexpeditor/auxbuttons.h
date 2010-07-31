@@ -18,7 +18,7 @@
 #ifndef AUXBUTTONS_H
 #define AUXBUTTONS_H
 
-#include <qdockwindow.h>
+#include <tqdockwindow.h>
 class QComboBox;
 class QLabel;
 class QToolButton;
@@ -28,7 +28,7 @@ class AuxButtons :public QDockWindow
     Q_OBJECT
 
 public:
-    AuxButtons( QWidget* parent, const char* name );
+    AuxButtons( TQWidget* parent, const char* name );
 
 signals:
     void undo();
@@ -48,12 +48,12 @@ public slots:
     void slotCanSave( bool );
 
 private:
-    QToolButton* _undo;
-    QToolButton* _redo;
-    QToolButton* _cut;
-    QToolButton* _copy;
-    QToolButton* _paste;
-    QToolButton* _save;
+    TQToolButton* _undo;
+    TQToolButton* _redo;
+    TQToolButton* _cut;
+    TQToolButton* _copy;
+    TQToolButton* _paste;
+    TQToolButton* _save;
 };
 
 

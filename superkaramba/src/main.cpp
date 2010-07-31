@@ -21,15 +21,15 @@
  ****************************************************************************/
 
 #include <karambaapp.h>
-#include <qobject.h>
+#include <tqobject.h>
 
 #include <kaboutdata.h>
 #include <kcmdlineargs.h>
 #include <klocale.h>
 #include <kconfig.h>
 #include <kmainwindow.h>
-#include <qfileinfo.h>
-#include <qstringlist.h>
+#include <tqfileinfo.h>
+#include <tqstringlist.h>
 #include <kconfig.h>
 #include <kstandarddirs.h>
 #include <kdeversion.h>
@@ -104,7 +104,7 @@ int main(int argc, char **argv)
     KarambaSessionManaged ksm;
     //karamba *mainWin = 0;
     KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
-    QStringList lst;
+    TQStringList lst;
     int ret = 0;
 
     // Create ~/.superkaramba if necessary
@@ -114,7 +114,7 @@ int main(int argc, char **argv)
 
     KarambaApplication app;
 
-    QString mainAppId = app.getMainKaramba();
+    TQString mainAppId = app.getMainKaramba();
     if(!mainAppId.isEmpty())
     {
       app.initDcopStub(mainAppId.ascii());
@@ -128,7 +128,7 @@ int main(int argc, char **argv)
 
     KarambaApplication::unlockKaramba();
 
-    app.connect(qApp,SIGNAL(lastWindowClosed()),qApp,SLOT(quit()));
+    app.connect(qApp,TQT_SIGNAL(lastWindowClosed()),qApp,TQT_SLOT(quit()));
 
     // Try to restore a previous session if applicable.
     app.checkPreviousSession(app, lst);

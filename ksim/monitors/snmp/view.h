@@ -42,8 +42,8 @@ public:
     virtual void reparseConfig();
 
 private:
-    QPtrList<QWidget> m_widgets;
-    QBoxLayout *m_layout;
+    TQPtrList<TQWidget> m_widgets;
+    TQBoxLayout *m_layout;
 };
 
 }

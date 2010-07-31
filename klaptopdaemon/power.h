@@ -26,7 +26,7 @@
 #define __POWERCONFIG_H__
 
 #include <kcmodule.h>
-#include <qstring.h>
+#include <tqstring.h>
 
 class QWidget;
 class QSlider;
@@ -42,14 +42,14 @@ class PowerConfig : public KCModule
 {
   Q_OBJECT
 public:
-  PowerConfig( QWidget *parent=0, const char* name=0);
+  PowerConfig( TQWidget *parent=0, const char* name=0);
     ~PowerConfig();
   void save( void );
   void load();
   void load(bool useDefaults);
   void defaults();
 
-  virtual QString quickHelp() const;
+  virtual TQString quickHelp() const;
 
 
 private:
@@ -58,37 +58,37 @@ private:
   int  getNoPower();
   void setPower( int, int );
 
-  QButtonGroup *nopowerBox;
-  QRadioButton *nopowerStandby, *nopowerSuspend, *nopowerOff, *nopowerHibernate;
-  QCheckBox *nopowerBrightness;
-  QSlider *nopowerValBrightness;
-  QCheckBox *nopowerThrottle;
+  TQButtonGroup *nopowerBox;
+  TQRadioButton *nopowerStandby, *nopowerSuspend, *nopowerOff, *nopowerHibernate;
+  TQCheckBox *nopowerBrightness;
+  TQSlider *nopowerValBrightness;
+  TQCheckBox *nopowerThrottle;
   KComboBox *nopowerValThrottle;
-  QCheckBox *nopowerPerformance;
+  TQCheckBox *nopowerPerformance;
   KComboBox *nopowerValPerformance;
-  QButtonGroup *powerBox;
-  QRadioButton *powerStandby, *powerSuspend, *powerOff, *powerHibernate;
-  QCheckBox *powerBrightness;
-  QSlider *powerValBrightness;
-  QCheckBox *powerThrottle;
+  TQButtonGroup *powerBox;
+  TQRadioButton *powerStandby, *powerSuspend, *powerOff, *powerHibernate;
+  TQCheckBox *powerBrightness;
+  TQSlider *powerValBrightness;
+  TQCheckBox *powerThrottle;
   KComboBox *powerValThrottle;
-  QCheckBox *powerPerformance;
+  TQCheckBox *powerPerformance;
   KComboBox *powerValPerformance;
-  QSpinBox *noeditwait;
-  QSpinBox *editwait;
-  QCheckBox *enablelav;
-  QCheckBox *noenablelav;
+  TQSpinBox *noeditwait;
+  TQSpinBox *editwait;
+  TQCheckBox *enablelav;
+  TQCheckBox *noenablelav;
   KDoubleSpinBox *noeditlav;
   KDoubleSpinBox *editlav;
   int edit_wait, noedit_wait;
   int power_bright_val, nopower_bright_val;
   bool nopower_bright_enabled, power_bright_enabled;
   bool nopower_throttle_enabled, power_throttle_enabled;
-  QString nopower_throttle_val, power_throttle_val;
+  TQString nopower_throttle_val, power_throttle_val;
   bool nopower_performance_enabled, power_performance_enabled;
   bool lav_enabled, nolav_enabled;
   float edit_lav, noedit_lav;
-  QString nopower_performance_val, power_performance_val;
+  TQString nopower_performance_val, power_performance_val;
 
   KConfig *config;
   int power, nopower, apm;

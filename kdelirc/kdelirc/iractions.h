@@ -13,10 +13,10 @@
 #ifndef IRACTIONS_H
 #define IRACTIONS_H
 
-#include <qvaluelist.h>
-#include <qpair.h>
-#include <qstring.h>
-#include <qmap.h>
+#include <tqvaluelist.h>
+#include <tqpair.h>
+#include <tqstring.h>
+#include <tqmap.h>
 
 #include "iraction.h"
 #include "mode.h"
@@ -27,22 +27,22 @@
 
 class KConfig;
 
-typedef QValueListIterator<IRAction> IRAIt;
-typedef QValueList<IRAIt> IRAItList;
+typedef TQValueListIterator<IRAction> IRAIt;
+typedef TQValueList<IRAIt> IRAItList;
 
-class IRActions: protected QValueList<IRAction>
+class IRActions: protected TQValueList<IRAction>
 {
 private:
 	void purgeAllBindings(KConfig &theConfig);
 
 public:
 	IRAIt addAction(const IRAction &theAction);
-	IRAItList findByButton(const QString &remote, const QString &button);
+	IRAItList findByButton(const TQString &remote, const TQString &button);
 	IRAItList findByMode(const Mode &mode);
-	IRAItList findByModeButton(const Mode &mode, const QString &button);
+	IRAItList findByModeButton(const Mode &mode, const TQString &button);
 
-	void erase(const IRAIt &action) { QValueList<IRAction>::erase(action); }
-	void renameMode(const Mode &mode, const QString &to);
+	void erase(const IRAIt &action) { TQValueList<IRAction>::erase(action); }
+	void renameMode(const Mode &mode, const TQString &to);
 
 	void loadFromConfig(KConfig &theConfig);
 	void saveToConfig(KConfig &theConfig);

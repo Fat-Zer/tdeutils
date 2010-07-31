@@ -22,9 +22,9 @@
 #include "kmultiformlistbox-multivisible.h"
 #include "kmultiformlistbox-windowed.h"
 
-KMultiFormListBox::KMultiFormListBox( KMultiFormListBoxFactory *factory, KMultiFormListBoxType tp, QWidget *parent,
-																		  bool showUpDownButtons, bool showHelpButton, QString addButtonText,
-																		  const char *name )  : QWidget( parent, name )
+KMultiFormListBox::KMultiFormListBox( KMultiFormListBoxFactory *factory, KMultiFormListBoxType tp, TQWidget *parent,
+																		  bool showUpDownButtons, bool showHelpButton, TQString addButtonText,
+																		  const char *name )  : TQWidget( parent, name )
 {
 	switch ( tp ) {
 
@@ -38,9 +38,9 @@ KMultiFormListBox::KMultiFormListBox( KMultiFormListBoxFactory *factory, KMultiF
 		break;
 	}
 
-  QWidget *widget = theWidget->qWidget();
+  TQWidget *widget = theWidget->qWidget();
 
-  QHBoxLayout *layout = new QHBoxLayout( this );
+  TQHBoxLayout *layout = new TQHBoxLayout( this );
 	_factory = factory;
   layout->addWidget( widget );
 }
@@ -72,15 +72,15 @@ void KMultiFormListBox::slotChangeFace( KMultiFormListBoxType /*newFace*/ )
 	//					<< "Please let me (blackie@kde.org) know that you need it, and I'll work on it" << endl;
 }
 
-void KMultiFormListBox::toStream( QDataStream& stream ) const
+void KMultiFormListBox::toStream( TQDataStream& stream ) const
 {
   const KMultiFormListBoxEntryList elms = elements();
   stream << elms.count();
-  for ( QPtrListIterator<KMultiFormListBoxEntry> it(elms); *it; ++it)
+  for ( TQPtrListIterator<KMultiFormListBoxEntry> it(elms); *it; ++it)
     _factory->toStream( *it, stream );
 }
 
-void KMultiFormListBox::fromStream( QDataStream& stream )
+void KMultiFormListBox::fromStream( TQDataStream& stream )
 {
   unsigned int fromCount, toCount;
   stream >> fromCount;
@@ -96,7 +96,7 @@ void KMultiFormListBox::fromStream( QDataStream& stream )
   }
 
   KMultiFormListBoxEntryList elms = elements();
-  for (QPtrListIterator<KMultiFormListBoxEntry> it(elms); *it; ++it)
+  for (TQPtrListIterator<KMultiFormListBoxEntry> it(elms); *it; ++it)
     _factory->fromStream( stream, *it );
 }
 

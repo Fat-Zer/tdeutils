@@ -39,18 +39,18 @@
 #include <ksystemtray.h>
 #include <kwallet.h>
 
-#include <qaccel.h>
-#include <qguardedptr.h>
-#include <qptrstack.h>
-#include <qregexp.h>
-#include <qtimer.h>
-#include <qtooltip.h>
+#include <tqaccel.h>
+#include <tqguardedptr.h>
+#include <tqptrstack.h>
+#include <tqregexp.h>
+#include <tqtimer.h>
+#include <tqtooltip.h>
 
-KWalletManager::KWalletManager(QWidget *parent, const char *name, WFlags f)
+KWalletManager::KWalletManager(TQWidget *parent, const char *name, WFlags f)
 : KMainWindow(parent, name, f), DCOPObject("KWalletManager") {
 	KGlobal::dirs()->addResourceType("kwallet", "share/apps/kwallet");
 	_kwalletdLaunch = false;
-	QAccel *accel = new QAccel(this, "kwalletmanager");
+	TQAccel *accel = new TQAccel(this, "kwalletmanager");
 
 	KApplication::dcopClient()->setQtBridgeEnabled(false);
 	_shuttingDown = false;
@@ -60,15 +60,15 @@ KWalletManager::KWalletManager(QWidget *parent, const char *name, WFlags f)
 	if (walletConfigGroup.readBoolEntry("Launch Manager", true)) {
 		_tray = new KSystemTray(this, "kwalletmanager tray");
 		_tray->setPixmap(loadSystemTrayIcon("wallet_closed"));
-		QToolTip::add(_tray, i18n("KDE Wallet: No wallets open."));
-		connect(_tray, SIGNAL(quitSelected()), SLOT(shuttingDown()));
-		QStringList wl = KWallet::Wallet::walletList();
+		TQToolTip::add(_tray, i18n("KDE Wallet: No wallets open."));
+		connect(_tray, TQT_SIGNAL(quitSelected()), TQT_SLOT(shuttingDown()));
+		TQStringList wl = KWallet::Wallet::walletList();
 		bool isOpen = false;
-		for (QStringList::Iterator it = wl.begin(); it != wl.end(); ++it) {
+		for (TQStringList::Iterator it = wl.begin(); it != wl.end(); ++it) {
 			if (KWallet::Wallet::isOpen(*it)) {
 				_tray->setPixmap(loadSystemTrayIcon("wallet_open"));
-				QToolTip::remove(_tray);
-				QToolTip::add(_tray, i18n("KDE Wallet: A wallet is open."));
+				TQToolTip::remove(_tray);
+				TQToolTip::add(_tray, i18n("KDE Wallet: A wallet is open."));
 				isOpen = true;
 				break;
 			}
@@ -76,7 +76,7 @@ KWalletManager::KWalletManager(QWidget *parent, const char *name, WFlags f)
 		if (!isOpen && kapp->isRestored()) {
 			delete _tray;
 			_tray = 0L;
-			QTimer::singleShot( 0, kapp, SLOT( quit()));
+			TQTimer::singleShot( 0, kapp, TQT_SLOT( quit()));
 			return;
 		}
 	} else {
@@ -84,8 +84,8 @@ KWalletManager::KWalletManager(QWidget *parent, const char *name, WFlags f)
 	}
 
 	_iconView = new KWalletIconView(this, "kwalletmanager icon view");
-	connect(_iconView, SIGNAL(executed(QIconViewItem*)), this, SLOT(openWallet(QIconViewItem*)));
-	connect(_iconView, SIGNAL(contextMenuRequested(QIconViewItem*, const QPoint&)), this, SLOT(contextMenu(QIconViewItem*, const QPoint&)));
+	connect(_iconView, TQT_SIGNAL(executed(TQIconViewItem*)), this, TQT_SLOT(openWallet(TQIconViewItem*)));
+	connect(_iconView, TQT_SIGNAL(contextMenuRequested(TQIconViewItem*, const TQPoint&)), this, TQT_SLOT(contextMenu(TQIconViewItem*, const TQPoint&)));
 
 	updateWalletDisplay();
 	setCentralWidget(_iconView);
@@ -94,18 +94,18 @@ KWalletManager::KWalletManager(QWidget *parent, const char *name, WFlags f)
 	_dcopRef = new DCOPRef("kded", "kwalletd");
 	_dcopRef->dcopClient()->setNotifications(true);
 	connect(_dcopRef->dcopClient(),
-		SIGNAL(applicationRemoved(const QCString&)),
+		TQT_SIGNAL(applicationRemoved(const TQCString&)),
 		this,
-		SLOT(possiblyRescan(const QCString&)));
+		TQT_SLOT(possiblyRescan(const TQCString&)));
 	connect(_dcopRef->dcopClient(),
-		SIGNAL(applicationRegistered(const QCString&)),
+		TQT_SIGNAL(applicationRegistered(const TQCString&)),
 		this,
-		SLOT(possiblyRescan(const QCString&)));
+		TQT_SLOT(possiblyRescan(const TQCString&)));
 
 	connectDCOPSignal(_dcopRef->app(), _dcopRef->obj(), "allWalletsClosed()", "allWalletsClosed()", false);
-	connectDCOPSignal(_dcopRef->app(), _dcopRef->obj(), "walletClosed(QString)", "updateWalletDisplay()", false);
-	connectDCOPSignal(_dcopRef->app(), _dcopRef->obj(), "walletOpened(QString)", "aWalletWasOpened()", false);
-	connectDCOPSignal(_dcopRef->app(), _dcopRef->obj(), "walletDeleted(QString)", "updateWalletDisplay()", false);
+	connectDCOPSignal(_dcopRef->app(), _dcopRef->obj(), "walletClosed(TQString)", "updateWalletDisplay()", false);
+	connectDCOPSignal(_dcopRef->app(), _dcopRef->obj(), "walletOpened(TQString)", "aWalletWasOpened()", false);
+	connectDCOPSignal(_dcopRef->app(), _dcopRef->obj(), "walletDeleted(TQString)", "updateWalletDisplay()", false);
 	connectDCOPSignal(_dcopRef->app(), _dcopRef->obj(), "walletListDirty()", "updateWalletDisplay()", false);
 
 	// FIXME: slight race - a wallet can open, then we get launched, but the
@@ -113,27 +113,27 @@ KWalletManager::KWalletManager(QWidget *parent, const char *name, WFlags f)
 	//        open.  Must check that a wallet is still open here.
 
 	new KAction(i18n("&New Wallet..."), "kwalletmanager", 0, this,
-			SLOT(createWallet()), actionCollection(),
+			TQT_SLOT(createWallet()), actionCollection(),
 			"wallet_create");
 	KAction *act = new KAction(i18n("Configure &Wallet..."), "configure",
-			0, this, SLOT(setupWallet()), actionCollection(),
+			0, this, TQT_SLOT(setupWallet()), actionCollection(),
 			"wallet_settings");
 	if (_tray) {
 		act->plug(_tray->contextMenu());
 	}
 	act = new KAction(i18n("Close &All Wallets"), 0, 0, this,
-			SLOT(closeAllWallets()), actionCollection(),
+			TQT_SLOT(closeAllWallets()), actionCollection(),
 			"close_all_wallets");
 	if (_tray) {
 		act->plug(_tray->contextMenu());
 	}
-	KStdAction::quit(this, SLOT(shuttingDown()), actionCollection());
-	KStdAction::keyBindings(guiFactory(), SLOT(configureShortcuts()),
+	KStdAction::quit(this, TQT_SLOT(shuttingDown()), actionCollection());
+	KStdAction::keyBindings(guiFactory(), TQT_SLOT(configureShortcuts()),
 actionCollection());
 
 	createGUI("kwalletmanager.rc");
-	accel->connectItem(accel->insertItem(Key_Return), this, SLOT(openWallet()));
-	accel->connectItem(accel->insertItem(Key_Delete), this, SLOT(deleteWallet()));
+	accel->connectItem(accel->insertItem(Key_Return), this, TQT_SLOT(openWallet()));
+	accel->connectItem(accel->insertItem(Key_Delete), this, TQT_SLOT(deleteWallet()));
 
 	if (_tray) {
 		_tray->show();
@@ -173,18 +173,18 @@ bool KWalletManager::queryClose() {
 void KWalletManager::aWalletWasOpened() {
 	if (_tray) {
 		_tray->setPixmap(loadSystemTrayIcon("wallet_open"));
-		QToolTip::remove(_tray);
-		QToolTip::add(_tray, i18n("KDE Wallet: A wallet is open."));
+		TQToolTip::remove(_tray);
+		TQToolTip::add(_tray, i18n("KDE Wallet: A wallet is open."));
 	}
 	updateWalletDisplay();
 }
 
 
 void KWalletManager::updateWalletDisplay() {
-QStringList wl = KWallet::Wallet::walletList();
-QPtrStack<QIconViewItem> trash;
+TQStringList wl = KWallet::Wallet::walletList();
+TQPtrStack<TQIconViewItem> trash;
 
-	for (QIconViewItem *item = _iconView->firstItem(); item; item = item->nextItem()) {
+	for (TQIconViewItem *item = _iconView->firstItem(); item; item = item->nextItem()) {
 		if (!wl.contains(item->text())) {
 			trash.push(item);
 		}
@@ -193,7 +193,7 @@ QPtrStack<QIconViewItem> trash;
 	trash.setAutoDelete(true);
 	trash.clear();
 
-	for (QStringList::Iterator i = wl.begin(); i != wl.end(); ++i) {
+	for (TQStringList::Iterator i = wl.begin(); i != wl.end(); ++i) {
 		if (!_iconView->findItem(*i)) {
 			// FIXME: if KWallet::Wallet::isOpen(*i) then show
 			//        a different icon!
@@ -205,21 +205,21 @@ QPtrStack<QIconViewItem> trash;
 }
 
 
-void KWalletManager::contextMenu(QIconViewItem *item, const QPoint& pos) {
+void KWalletManager::contextMenu(TQIconViewItem *item, const TQPoint& pos) {
 	if (item) {
-		QGuardedPtr<KWalletPopup> popupMenu = new KWalletPopup(item->text(), this);
-		connect(popupMenu, SIGNAL(walletOpened(const QString&)), this, SLOT(openWallet(const QString&)));
-		connect(popupMenu, SIGNAL(walletClosed(const QString&)), this, SLOT(closeWallet(const QString&)));
-		connect(popupMenu, SIGNAL(walletDeleted(const QString&)), this, SLOT(deleteWallet(const QString&)));
-		connect(popupMenu, SIGNAL(walletChangePassword(const QString&)), this, SLOT(changeWalletPassword(const QString&)));
-		connect(popupMenu, SIGNAL(walletCreated()), this, SLOT(createWallet()));
+		TQGuardedPtr<KWalletPopup> popupMenu = new KWalletPopup(item->text(), this);
+		connect(popupMenu, TQT_SIGNAL(walletOpened(const TQString&)), this, TQT_SLOT(openWallet(const TQString&)));
+		connect(popupMenu, TQT_SIGNAL(walletClosed(const TQString&)), this, TQT_SLOT(closeWallet(const TQString&)));
+		connect(popupMenu, TQT_SIGNAL(walletDeleted(const TQString&)), this, TQT_SLOT(deleteWallet(const TQString&)));
+		connect(popupMenu, TQT_SIGNAL(walletChangePassword(const TQString&)), this, TQT_SLOT(changeWalletPassword(const TQString&)));
+		connect(popupMenu, TQT_SIGNAL(walletCreated()), this, TQT_SLOT(createWallet()));
 		popupMenu->exec(pos);
 		delete popupMenu;
 	}
 }
 
 
-void KWalletManager::deleteWallet(const QString& walletName) {
+void KWalletManager::deleteWallet(const TQString& walletName) {
 	int rc = KMessageBox::warningContinueCancel(this, i18n("Are you sure you wish to delete the wallet '%1'?").arg(walletName),"",KStdGuiItem::del());
 	if (rc != KMessageBox::Continue) {
 		return;
@@ -232,10 +232,10 @@ void KWalletManager::deleteWallet(const QString& walletName) {
 }
 
 
-void KWalletManager::closeWallet(const QString& walletName) {
+void KWalletManager::closeWallet(const TQString& walletName) {
 	int rc = KWallet::Wallet::closeWallet(walletName, false);
 	if (rc != 0) {
-		rc = KMessageBox::warningYesNo(this, i18n("Unable to close wallet cleanly. It is probably in use by other applications. Do you wish to force it closed?"), QString::null, i18n("Force Closure"), i18n("Do Not Force"));
+		rc = KMessageBox::warningYesNo(this, i18n("Unable to close wallet cleanly. It is probably in use by other applications. Do you wish to force it closed?"), TQString::null, i18n("Force Closure"), i18n("Do Not Force"));
 		if (rc == KMessageBox::Yes) {
 			rc = KWallet::Wallet::closeWallet(walletName, true);
 			if (rc != 0) {
@@ -248,16 +248,16 @@ void KWalletManager::closeWallet(const QString& walletName) {
 }
 
 
-void KWalletManager::changeWalletPassword(const QString& walletName) {
+void KWalletManager::changeWalletPassword(const TQString& walletName) {
 	KWallet::Wallet::changePassword(walletName);
 }
 
 
-void KWalletManager::openWalletFile(const QString& path) {
+void KWalletManager::openWalletFile(const TQString& path) {
 	KWalletEditor *we = new KWalletEditor(path, true, this, "Wallet Editor");
 	if (we->isOpen()) {
-		connect(we, SIGNAL(editorClosed(KMainWindow*)),
-			this, SLOT(editorClosed(KMainWindow*)));
+		connect(we, TQT_SIGNAL(editorClosed(KMainWindow*)),
+			this, TQT_SLOT(editorClosed(KMainWindow*)));
 		we->show();
 	} else {
 		KMessageBox::sorry(this, i18n("Error opening wallet %1.").arg(path));
@@ -267,24 +267,24 @@ void KWalletManager::openWalletFile(const QString& path) {
 
 
 void KWalletManager::openWallet() {
-	QIconViewItem *item = _iconView->currentItem();
+	TQIconViewItem *item = _iconView->currentItem();
 	openWallet(item);
 }
 
 void KWalletManager::deleteWallet() {
-	QIconViewItem *item = _iconView->currentItem();
+	TQIconViewItem *item = _iconView->currentItem();
 	if (item) {
 		deleteWallet(item->text());
 	}
 }
 
 
-void KWalletManager::openWallet(const QString& walletName) {
+void KWalletManager::openWallet(const TQString& walletName) {
 	openWallet(walletName, false);
 }
 
 
-void KWalletManager::openWallet(const QString& walletName, bool newWallet) {
+void KWalletManager::openWallet(const TQString& walletName, bool newWallet) {
 	// Don't allow a wallet to open in two windows
 	for (KMainWindow *w = _windows.first(); w; w = _windows.next()) {
 		KWalletEditor *e = static_cast<KWalletEditor*>(w);
@@ -297,8 +297,8 @@ void KWalletManager::openWallet(const QString& walletName, bool newWallet) {
 	KWalletEditor *we = new KWalletEditor(walletName, false, this, "Wallet Editor");
 	we->setNewWallet(newWallet);
 	if (we->isOpen()) {
-		connect(we, SIGNAL(editorClosed(KMainWindow*)),
-			this, SLOT(editorClosed(KMainWindow*)));
+		connect(we, TQT_SIGNAL(editorClosed(KMainWindow*)),
+			this, TQT_SLOT(editorClosed(KMainWindow*)));
 		we->show();
 		_windows.append(we);
 	} else if (!newWallet) {
@@ -308,7 +308,7 @@ void KWalletManager::openWallet(const QString& walletName, bool newWallet) {
 }
 
 
-void KWalletManager::openWallet(QIconViewItem *item) {
+void KWalletManager::openWallet(TQIconViewItem *item) {
 	if (item) {
 		openWallet(item->text());
 	}
@@ -318,8 +318,8 @@ void KWalletManager::openWallet(QIconViewItem *item) {
 void KWalletManager::allWalletsClosed() {
 	if (_tray) {
 		_tray->setPixmap(loadSystemTrayIcon("wallet_closed"));
-		QToolTip::remove(_tray);
-		QToolTip::add(_tray, i18n("KDE Wallet: No wallets open."));
+		TQToolTip::remove(_tray);
+		TQToolTip::add(_tray, i18n("KDE Wallet: No wallets open."));
 	}
 	possiblyQuit();
 }
@@ -342,7 +342,7 @@ void KWalletManager::editorClosed(KMainWindow* e) {
 }
 
 
-void KWalletManager::possiblyRescan(const QCString& app) {
+void KWalletManager::possiblyRescan(const TQCString& app) {
 	if (app == "kded") {
 		updateWalletDisplay();
 	}
@@ -350,21 +350,21 @@ void KWalletManager::possiblyRescan(const QCString& app) {
 
 
 void KWalletManager::createWallet() {
-	QString n;
+	TQString n;
 	bool ok;
 	// FIXME: support international names
-	QRegExp regexp("^[A-Za-z0-9]+[A-Za-z0-9_\\s\\-]*$");
-	QString txt = i18n("Please choose a name for the new wallet:");
+	TQRegExp regexp("^[A-Za-z0-9]+[A-Za-z0-9_\\s\\-]*$");
+	TQString txt = i18n("Please choose a name for the new wallet:");
 
 	if (!KWallet::Wallet::isEnabled()) {
-		// FIXME: KMessageBox::warningYesNo(this, i1_8n("KWallet is not enabled.  Do you want to enable it?"), QString::null, i18n("Enable"), i18n("Keep Disabled"));
+		// FIXME: KMessageBox::warningYesNo(this, i1_8n("KWallet is not enabled.  Do you want to enable it?"), TQString::null, i18n("Enable"), i18n("Keep Disabled"));
 		return;
 	}
 
 	do {
 		n = KInputDialog::getText(i18n("New Wallet"),
 				txt,
-				QString::null,
+				TQString::null,
 				&ok,
 				this);
 
@@ -373,11 +373,11 @@ void KWalletManager::createWallet() {
 		}
 
 		if (_iconView->findItem(n)) {
-			int rc = KMessageBox::questionYesNo(this, i18n("Sorry, that wallet already exists. Try a new name?"), QString::null, i18n("Try New"), i18n("Do Not Try"));
+			int rc = KMessageBox::questionYesNo(this, i18n("Sorry, that wallet already exists. Try a new name?"), TQString::null, i18n("Try New"), i18n("Do Not Try"));
 			if (rc == KMessageBox::Yes) {
 				continue;
 			}
-			n = QString::null;
+			n = TQString::null;
 		} else if (regexp.exactMatch(n)) {
 			break;
 		} else {
@@ -408,7 +408,7 @@ void KWalletManager::closeAllWallets() {
 }
 
 
-QPixmap KWalletManager::loadSystemTrayIcon(const QString &icon) {
+TQPixmap KWalletManager::loadSystemTrayIcon(const TQString &icon) {
 #if KDE_IS_VERSION(3, 1, 90)
 	return KSystemTray::loadIcon(icon);
 #else

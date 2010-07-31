@@ -18,7 +18,7 @@
 #ifndef __indexWindow
 #define __indexWindow
 
-#include <qlistbox.h>
+#include <tqlistbox.h>
 
 /**
    Post a toplevel listbox synchronously.
@@ -29,12 +29,12 @@
    This widget takes care of posting this listbox, and ensuring that the
    user can not do anything else before he has chosen an element.
 
-   This widget resembles the behavior of @ref QPopupMenu, the difference
-   is, however, that the QPopupMenu can not handle that the elements in the
+   This widget resembles the behavior of @ref TQPopupMenu, the difference
+   is, however, that the TQPopupMenu can not handle that the elements in the
    menu exceed the size of the screen. This widget can.
 
-   In the future this widget may be replaced with the QPopupMenu if the
-   QPopupMenu can handle this situation. But for now - it works!
+   In the future this widget may be replaced with the TQPopupMenu if the
+   TQPopupMenu can handle this situation. But for now - it works!
 
    @internal
 **/
@@ -49,7 +49,7 @@ public:
      This method inserts an element into the listbox which is shown when
      the @ref exec method is invoked.
   **/
-  void insertItem(QString txt);
+  void insertItem(TQString txt);
 
   /**
      This function shows the index window with the elements inserted using
@@ -63,17 +63,17 @@ public:
      @return The index of the element chosen, or -1 if no element has been
      chosen.
   **/
-  int exec(const QPoint &start, int width);
+  int exec(const TQPoint &start, int width);
 
 protected:
   void finish(int retVal);
-  virtual void hideEvent(QHideEvent *h);
+  virtual void hideEvent(TQHideEvent *h);
 
 protected slots:
   void lbSelected(int);
 
 private:
-  QListBox *lb;
+  TQListBox *lb;
   bool lbFinish;
   int itemSelected;
 

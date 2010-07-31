@@ -12,8 +12,8 @@
 #define RSSSENSOR_H
 
 #include <sensor.h>
-#include <qstring.h>
-#include <qtextcodec.h>
+#include <tqstring.h>
+#include <tqtextcodec.h>
 
 /**
  *
@@ -23,16 +23,16 @@ class RssSensor : public Sensor
 {
     Q_OBJECT
 public:
-    RssSensor( const QString &source, int interval, const QString &format, const QString &encoding=QString::null );
+    RssSensor( const TQString &source, int interval, const TQString &format, const TQString &encoding=TQString::null );
 
     ~RssSensor();
 
     void update();
 private:
-    QTextCodec *codec;
-    QString source;
-    QString format;
-    QString encoding;
+    TQTextCodec *codec;
+    TQString source;
+    TQString format;
+    TQString encoding;
 
 };
 

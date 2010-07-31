@@ -20,8 +20,8 @@
 #ifndef THEMELOCALE_H
 #define THEMELOCALE_H
 
-#include <qstring.h>
-#include <qstringlist.h>
+#include <tqstring.h>
+#include <tqstringlist.h>
 
 class ThemeFile;
 
@@ -42,16 +42,16 @@ class ThemeLocale
     ThemeLocale(ThemeFile* theme);
     ~ThemeLocale();
 
-    QString translate(QString text) const;
-    void setLanguage(const QStringList &languages);
-    QString language() const { return m_language; };
+    TQString translate(TQString text) const;
+    void setLanguage(const TQStringList &languages);
+    TQString language() const { return m_language; };
 
-    static QStringList languageList();
+    static TQStringList languageList();
 
   private:
     sk_kde_loaded_l10nfile m_domain;
     ThemeFile* m_theme;
-    QString m_language;
+    TQString m_language;
 
     void unload();
 };

@@ -19,10 +19,10 @@
 #define KGPGINTERFACE_H
 
 
-#include <qobject.h>
+#include <tqobject.h>
 #include <kdialogbase.h>
 #include <kurl.h>
-#include <qdatetime.h>
+#include <tqdatetime.h>
 
 class QLabel;
 class KProcIO;
@@ -58,7 +58,7 @@ public slots:
          * @param Options String with the wanted gpg options. ex: "--armor"
          * @param symetrical bool whether the encryption should be symmetrical.
          */
-        void KgpgEncryptFile(QStringList encryptKeys,KURL srcUrl,KURL destUrl,QStringList Options=QString::null,bool symetrical=false);
+        void KgpgEncryptFile(TQStringList encryptKeys,KURL srcUrl,KURL destUrl,TQStringList Options=TQString::null,bool symetrical=false);
 
         /**Encrypt file function
          * @param userIDs the key user identification.
@@ -66,14 +66,14 @@ public slots:
          * @param destUrl Kurl for the decrypted file.
          * @param chances int number of trials left for decryption (used only as an info displayed in the password dialog)
          */
-        void KgpgDecryptFile(KURL srcUrl,KURL destUrl,QStringList Options=QStringList());
+        void KgpgDecryptFile(KURL srcUrl,KURL destUrl,TQStringList Options=TQStringList());
 
         /**Sign file function
-         * @param keyID QString the signing key ID.
+         * @param keyID TQString the signing key ID.
          * @param srcUrl Kurl of the file to sign.
          * @param Options String with the wanted gpg options. ex: "--armor"
          */
-        void KgpgSignFile(QString keyID,KURL srcUrl,QStringList Options=QStringList());
+        void KgpgSignFile(TQString keyID,KURL srcUrl,TQStringList Options=TQStringList());
 
         /**Verify file function
          * @param sigUrl Kurl of the signature file.
@@ -81,7 +81,7 @@ public slots:
          */
         void KgpgVerifyFile(KURL sigUrl,KURL srcUrl=KURL()) ;
 
-	void KgpgVerifyText(QString text);
+	void KgpgVerifyText(TQString text);
 	void slotverifyread(KProcIO *p);
 	void slotverifyresult(KProcess*);
 	
@@ -91,77 +91,77 @@ public slots:
          */
         void importKeyURL(KURL url);
         /**Import key function
-         * @param keystr QString containing th key. Allows public & secret key import.
+         * @param keystr TQString containing th key. Allows public & secret key import.
         */
-        void importKey(QString keystr);
+        void importKey(TQString keystr);
 
         /**Key signature function
-         * @param keyID QString the ID of the key to be signed
-         * @param signKeyID QString the ID of the signing key
-         * @param signKeyMail QString the name of the signing key (only used to prompt user for passphrase)
+         * @param keyID TQString the ID of the key to be signed
+         * @param signKeyID TQString the ID of the signing key
+         * @param signKeyMail TQString the name of the signing key (only used to prompt user for passphrase)
          * @param local bool should the signature be local
          */
-        void KgpgSignKey(QString keyID,QString signKeyID,QString signKeyMail=QString::null,bool local=false,int checking=0);
+        void KgpgSignKey(TQString keyID,TQString signKeyID,TQString signKeyMail=TQString::null,bool local=false,int checking=0);
 
         /**Key signature deletion function
-         * @param keyID QString the ID of the key
-         * @param signKeyID QString the ID of the signature key
+         * @param keyID TQString the ID of the key
+         * @param signKeyID TQString the ID of the signature key
          */
-        void KgpgDelSignature(QString keyID,QString signKeyID);
+        void KgpgDelSignature(TQString keyID,TQString signKeyID);
 
         /**Encrypt text function
-         * @param text QString text to be encrypted.
+         * @param text TQString text to be encrypted.
          * @param userIDs the recipients key id's.
          * @param Options String with the wanted gpg options. ex: "--armor"
          * returns the encrypted text or empty string if encyption failed
          */
-        void KgpgEncryptText(QString text,QStringList userIDs, QStringList Options=QString::null);
+        void KgpgEncryptText(TQString text,TQStringList userIDs, TQStringList Options=TQString::null);
 
         /**Decrypt text function
-        * @param text QString text to be decrypted.
-        * @param userID QString the name of the decryption key (only used to prompt user for passphrase)
+        * @param text TQString text to be decrypted.
+        * @param userID TQString the name of the decryption key (only used to prompt user for passphrase)
         */
-	//static QString KgpgDecryptText(QString text,QString userID);
-	void KgpgDecryptText(QString text,QStringList Options=QString::null);
+	//static TQString KgpgDecryptText(TQString text,TQString userID);
+	void KgpgDecryptText(TQString text,TQStringList Options=TQString::null);
 	void txtdecryptfin(KProcess *);
 
 	/**Extract list of photographic user id's
         * @param keyID the recipients key id's.
         */
-	void KgpgGetPhotoList(QString keyID);
+	void KgpgGetPhotoList(TQString keyID);
 
 	void getOutput(KProcess *, char *data, int );
 	void getCmdOutput(KProcess *p, char *data, int );
 
-	QString getKey(QStringList IDs, bool attributes);
+	TQString getKey(TQStringList IDs, bool attributes);
 
-        void KgpgKeyExpire(QString keyID,QDate date,bool unlimited);
-        void KgpgTrustExpire(QString keyID,int keyTrust);
-	void KgpgChangePass(QString keyID);
+        void KgpgKeyExpire(TQString keyID,TQDate date,bool unlimited);
+        void KgpgTrustExpire(TQString keyID,int keyTrust);
+	void KgpgChangePass(TQString keyID);
 
-	void KgpgRevokeKey(QString keyID,QString revokeUrl,int reason,QString description);
+	void KgpgRevokeKey(TQString keyID,TQString revokeUrl,int reason,TQString description);
 	void revokeover(KProcess *);
 	void revokeprocess(KProcIO *p);
-	void KgpgDeletePhoto(QString keyID,QString uid);
-	void KgpgAddPhoto(QString keyID,QString imagePath);
+	void KgpgDeletePhoto(TQString keyID,TQString uid);
+	void KgpgAddPhoto(TQString keyID,TQString imagePath);
 
-	void KgpgAddUid(QString keyID,QString name,QString email,QString comment);
+	void KgpgAddUid(TQString keyID,TQString name,TQString email,TQString comment);
 	
-        void KgpgDecryptFileToText(KURL srcUrl,QStringList Options);
-	void KgpgSignText(QString text,QString userIDs, QStringList Options);
+        void KgpgDecryptFileToText(KURL srcUrl,TQStringList Options);
+	void KgpgSignText(TQString text,TQString userIDs, TQStringList Options);
 
-        static QString getGpgSetting(QString name,QString configFile);
-	static QString getGpgMultiSetting(QString name,QString configFile);
-        static void setGpgSetting(QString name,QString ID,QString url);
-	static void setGpgMultiSetting(QString name,QStringList values,QString url);
-        static bool getGpgBoolSetting(QString name,QString configFile);
-	static void setGpgBoolSetting(QString name,bool enable,QString url);
-        static QStringList getGpgGroupNames(QString configFile);
-	static QStringList getGpgGroupSetting(QString name,QString configFile);
-	static void setGpgGroupSetting(QString name,QStringList values, QString configFile);
-	static void delGpgGroup(QString name, QString configFile);
-	static QString checkForUtf8(QString txt);
-	static QString checkForUtf8bis(QString txt);
+        static TQString getGpgSetting(TQString name,TQString configFile);
+	static TQString getGpgMultiSetting(TQString name,TQString configFile);
+        static void setGpgSetting(TQString name,TQString ID,TQString url);
+	static void setGpgMultiSetting(TQString name,TQStringList values,TQString url);
+        static bool getGpgBoolSetting(TQString name,TQString configFile);
+	static void setGpgBoolSetting(TQString name,bool enable,TQString url);
+        static TQStringList getGpgGroupNames(TQString configFile);
+	static TQStringList getGpgGroupSetting(TQString name,TQString configFile);
+	static void setGpgGroupSetting(TQString name,TQStringList values, TQString configFile);
+	static void delGpgGroup(TQString name, TQString configFile);
+	static TQString checkForUtf8(TQString txt);
+	static TQString checkForUtf8bis(TQString txt);
 	static int getGpgVersion();
 
 
@@ -196,7 +196,7 @@ private slots:
         /**
                 * Checks the number of uid's for a key-> if greater than one, key signature will switch to konsole mode
                 */
-        int checkuid(QString KeyID);
+        int checkuid(TQString KeyID);
 
         /**
                 * Reads output of the delete signature process
@@ -259,7 +259,7 @@ private slots:
 	void photoreadover(KProcess *);
 	void photoreadprocess(KProcIO *p);
 	bool isPhotoId(int uid);
-	void updateIDs(QString txtString);
+	void updateIDs(TQString txtString);
 	
 	void txtsignprocess(KProcIO *p);
 	void txtsignfin(KProcess *);
@@ -269,13 +269,13 @@ private slots:
 
 signals:
 
-	void missingSignature(QString);
-	void verifyOver(QString,QString);
+	void missingSignature(TQString);
+	void verifyOver(TQString,TQString);
 
 	/**
                *  emitted when a txt decryption failed. returns log output
                */
-	void txtdecryptionfailed(QString);
+	void txtdecryptionfailed(TQString);
 	/**
                *  emitted when a txt encryption starts.
                */
@@ -284,15 +284,15 @@ signals:
 	/**
                *  emitted when a txt decryption finished. returns decrypted text
                */
-	void txtdecryptionfinished(QString);
+	void txtdecryptionfinished(TQString);
         /**
                *  emitted when a txt encryption finished. returns encrypted text
                */
-        void txtencryptionfinished(QString);
+        void txtencryptionfinished(TQString);
         /**
                *  emitted when an error occurred
                */
-        void errormessage(QString);
+        void errormessage(TQString);
         /**
                 *  true if encryption successful, false on error.
                 */
@@ -313,7 +313,7 @@ signals:
         /**
                 *  emitted when the process starts
                 */
-        void processstarted(QString);
+        void processstarted(TQString);
         /**
                 *  true if decryption successful, false on error.
                 */
@@ -325,7 +325,7 @@ signals:
         /**
                 *  true if import successful, false on error.
                 */
-        void importfinished(QStringList);
+        void importfinished(TQStringList);
         /**
                 *  true if verify successful, false on error.
                 */
@@ -333,51 +333,51 @@ signals:
         /**
                 *  emmitted if signature key is missing & user want to import it from keyserver
                 */
-        void verifyquerykey(QString ID);
+        void verifyquerykey(TQString ID);
         /**
                 *  true if signature successful, false on error.
                 */
         void signfinished();
 	void delPhotoFinished();
-	void delPhotoError(QString);
+	void delPhotoError(TQString);
 	
 	void addPhotoFinished();
-	void addPhotoError(QString);
+	void addPhotoError(TQString);
 	void refreshOrphaned();
 	
 	void addUidFinished();
-	void addUidError(QString);
+	void addUidError(TQString);
 	
         void trustfinished();
-	void revokecertificate(QString);
-	void revokeurl(QString);
+	void revokecertificate(TQString);
+	void revokeurl(TQString);
         void expirationFinished(int);
-	void signalPhotoList(QStringList);
+	void signalPhotoList(TQStringList);
 	void passwordChanged();
 	
-	void txtSignOver(QString);
+	void txtSignOver(TQString);
 
 
 private:
         /**
         * @internal structure for communication
         */
-        QString message,tempKeyFile,userIDs,output,keyString,txtToEncrypt,log;
-        QCString passphrase;
+        TQString message,tempKeyFile,userIDs,output,keyString,txtToEncrypt,log;
+        TQCString passphrase;
         bool deleteSuccess,konsLocal,anonymous,decfinished,decok,badmdc,revokeSuccess,addSuccess,delSuccess;
 	bool signmiss;
-	QString signID;
+	TQString signID;
         int signSuccess,expSuccess,trustValue,konsChecked;
         int step,signb,sigsearch,expirationDelay;
-        QString konsSignKey, konsKeyID,errMessage;
+        TQString konsSignKey, konsKeyID,errMessage;
 	int revokeReason,photoCount;
-	QString revokeDescription,certificateUrl,photoUrl;
-	QStringList photoList;
-	QString uidName, uidEmail, uidComment;
+	TQString revokeDescription,certificateUrl,photoUrl;
+	TQStringList photoList;
+	TQString uidName, uidEmail, uidComment;
         KURL sourceFile;
-	QString decryptUrl;
+	TQString decryptUrl;
 
-	QString gpgOutput;
+	TQString gpgOutput;
 	
         /**
          * @internal structure for the file information
@@ -390,14 +390,14 @@ class  Md5Widget :public KDialogBase
 {
         Q_OBJECT
 public:
-        Md5Widget(QWidget *parent=0, const char *name=0,KURL url=KURL());
+        Md5Widget(TQWidget *parent=0, const char *name=0,KURL url=KURL());
         ~Md5Widget();
 public slots:
         void slotApply();
 private:
-        QString mdSum;
+        TQString mdSum;
         KLed *KLed1;
-        QLabel *TextLabel1_2;
+        TQLabel *TextLabel1_2;
 };
 
 #endif // KGPGINTERFACE_HKGPGINTERFACE_H

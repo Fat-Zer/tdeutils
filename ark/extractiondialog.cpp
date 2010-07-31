@@ -29,12 +29,12 @@
 
 #include "extractiondialog.h"
 
-#include <qvbox.h>
-#include <qhbox.h>
-#include <qhbuttongroup.h>
-#include <qlabel.h>
-#include <qradiobutton.h>
-#include <qlayout.h>
+#include <tqvbox.h>
+#include <tqhbox.h>
+#include <tqhbuttongroup.h>
+#include <tqlabel.h>
+#include <tqradiobutton.h>
+#include <tqlayout.h>
 
 #include <klocale.h>
 #include <kglobal.h>
@@ -51,11 +51,11 @@
 #include "arkutils.h"
 #include "settings.h"
 
-ExtractionDialog::ExtractionDialog( QWidget *parent, const char *name,
+ExtractionDialog::ExtractionDialog( TQWidget *parent, const char *name,
                                     bool enableSelected,
                                     const KURL& defaultExtractionDir,
-                                    const QString &prefix,
-                                    const QString &archiveName )
+                                    const TQString &prefix,
+                                    const TQString &archiveName )
 	: KDialogBase( parent, name, true, i18n( "Extract" ), Ok | Cancel, Ok ),
 	  m_selectedButton( 0 ), m_allButton( 0 ),
 	  m_selectedOnly( enableSelected ), m_extractionDirectory( defaultExtractionDir ),
@@ -66,37 +66,37 @@ ExtractionDialog::ExtractionDialog( QWidget *parent, const char *name,
 		setCaption( i18n( "Extract Files From %1" ).arg( archiveName ) );
 	}
 
-	QVBox *vbox = makeVBoxMainWidget();
+	TQVBox *vbox = makeVBoxMainWidget();
 
-	QHBox *header = new QHBox( vbox );
+	TQHBox *header = new TQHBox( vbox );
 	header->layout()->setSpacing( 10 );
 
-	QLabel *icon = new QLabel( header );
+	TQLabel *icon = new TQLabel( header );
 	icon->setPixmap( DesktopIcon( "ark_extract" ) );
-	icon->setSizePolicy( QSizePolicy::Fixed, QSizePolicy::Minimum );
+	icon->setSizePolicy( TQSizePolicy::Fixed, TQSizePolicy::Minimum );
 
 	if ( enableSelected )
 	{
-		QVBox *whichFiles = new QVBox( header );
+		TQVBox *whichFiles = new TQVBox( header );
 		whichFiles->layout()->setSpacing( 6 );
-		new QLabel( QString( "<qt><b><font size=\"+1\">%1</font></b></qt>" )
+		new TQLabel( TQString( "<qt><b><font size=\"+1\">%1</font></b></qt>" )
 		            .arg( i18n( "Extract:" ) ), whichFiles );
-		QHButtonGroup *filesGroup = new QHButtonGroup( whichFiles );
-		m_selectedButton = new QRadioButton( i18n( "Selected files only" ), filesGroup );
-		m_allButton      = new QRadioButton( i18n( "All files" ), filesGroup );
+		TQHButtonGroup *filesGroup = new TQHButtonGroup( whichFiles );
+		m_selectedButton = new TQRadioButton( i18n( "Selected files only" ), filesGroup );
+		m_allButton      = new TQRadioButton( i18n( "All files" ), filesGroup );
 
 		m_selectedButton->setChecked( true );
 	}
 	else
 	{
-		new QLabel( QString( "<qt><b><font size=\"+2\">%1</font></b></qt>" )
+		new TQLabel( TQString( "<qt><b><font size=\"+2\">%1</font></b></qt>" )
 		            .arg( i18n( "Extract all files" ) ), header );
 	}
 
-	QHBox *destDirBox = new QHBox( vbox );
+	TQHBox *destDirBox = new TQHBox( vbox );
 
-	QLabel *destFolderLabel = new QLabel( i18n( "Destination folder: " ), destDirBox );
-	destFolderLabel->setSizePolicy( QSizePolicy::Minimum, QSizePolicy::Fixed );
+	TQLabel *destFolderLabel = new TQLabel( i18n( "Destination folder: " ), destDirBox );
+	destFolderLabel->setSizePolicy( TQSizePolicy::Minimum, TQSizePolicy::Fixed );
 
 	KHistoryCombo *combobox = new KHistoryCombo( true, destDirBox );
 	combobox->setPixmapProvider( new KURLPixmapProvider );
@@ -108,10 +108,10 @@ ExtractionDialog::ExtractionDialog( QWidget *parent, const char *name,
 	comp->setCompletionMode( KGlobalSettings::CompletionAuto );
 	combobox->setCompletionObject( comp );
 	combobox->setMaxCount( 20 );
-	combobox->setInsertionPolicy( QComboBox::AtTop );
+	combobox->setInsertionPolicy( TQComboBox::AtTop );
 
 	m_urlRequester = new KURLRequester( combobox, destDirBox );
-	m_urlRequester->setSizePolicy( QSizePolicy::Expanding, QSizePolicy::Fixed );
+	m_urlRequester->setSizePolicy( TQSizePolicy::Expanding, TQSizePolicy::Fixed );
 	m_urlRequester->setMode( KFile::Directory );
 
 	if (!defaultExtractionDir.prettyURL().isEmpty() )
@@ -119,12 +119,12 @@ ExtractionDialog::ExtractionDialog( QWidget *parent, const char *name,
 		m_urlRequester->setKURL( defaultExtractionDir.prettyURL() + prefix );
 	}
 
-	m_viewFolderAfterExtraction = new QCheckBox( i18n( "Open destination folder after extraction" ), vbox );
+	m_viewFolderAfterExtraction = new TQCheckBox( i18n( "Open destination folder after extraction" ), vbox );
 	m_viewFolderAfterExtraction->setChecked( ArkSettings::openDestinationFolder() );
 
-	connect( combobox, SIGNAL( returnPressed( const QString& ) ), combobox, SLOT( addToHistory( const QString& ) ) );
-	connect( combobox->lineEdit(), SIGNAL( textChanged( const QString& ) ),
-	         this, SLOT( extractDirChanged( const QString & ) ) );
+	connect( combobox, TQT_SIGNAL( returnPressed( const TQString& ) ), combobox, TQT_SLOT( addToHistory( const TQString& ) ) );
+	connect( combobox->lineEdit(), TQT_SIGNAL( textChanged( const TQString& ) ),
+	         this, TQT_SLOT( extractDirChanged( const TQString & ) ) );
 }
 
 ExtractionDialog::~ExtractionDialog()
@@ -142,10 +142,10 @@ void ExtractionDialog::accept()
 	//if p isn't local KIO and friends will complain later on
 	if ( p.isLocalFile() )
 	{
-		QFileInfo fi( p.path() );
+		TQFileInfo fi( p.path() );
 		if ( !fi.isDir() && !fi.exists() )
 		{
-			QString ltext = i18n( "Create folder %1?").arg(p.path());
+			TQString ltext = i18n( "Create folder %1?").arg(p.path());
 			int createDir =  KMessageBox::questionYesNo( this, ltext, i18n( "Missing Folder" ) , i18n("Create Folder"), i18n("Do Not Create"));
 			if( createDir == 4 )
 			{
@@ -170,7 +170,7 @@ void ExtractionDialog::accept()
 	m_selectedOnly = m_selectedButton == 0? false : m_selectedButton->isChecked();
 
 	// Determine what exactly should be added to the extraction combo list
-	QString historyURL = p.prettyURL();
+	TQString historyURL = p.prettyURL();
 	if ( historyURL == KURL( m_defaultExtractionDir + m_prefix ).prettyURL() )
 	{
 		historyURL = m_defaultExtractionDir;
@@ -186,7 +186,7 @@ void ExtractionDialog::accept()
 	KDialogBase::accept();
 }
 
-void ExtractionDialog::extractDirChanged(const QString &text )
+void ExtractionDialog::extractDirChanged(const TQString &text )
 {
 	enableButtonOK(!text.isEmpty());
 }

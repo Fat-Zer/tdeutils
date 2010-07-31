@@ -35,7 +35,7 @@ class KValueColTextExport : public KBufferColTextExport
     virtual ~KValueColTextExport();
 
   protected:
-    virtual void print( QString &T ) const;
+    virtual void print( TQString &T ) const;
 
 
   protected:

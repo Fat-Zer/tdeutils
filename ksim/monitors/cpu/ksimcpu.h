@@ -67,7 +67,7 @@ class CpuView : public KSim::PluginView
       public:
         CpuData() { user = nice = sys = idle = 0; }
 
-        QString name;
+        TQString name;
         unsigned long user;
         unsigned long nice;
         unsigned long sys;
@@ -96,8 +96,8 @@ class CpuView : public KSim::PluginView
           m_label = 0;
         }
 
-        Cpu(const QString &name,
-           const QString &format,
+        Cpu(const TQString &name,
+           const TQString &format,
            int number)
            : m_name(name),
            m_format(format),
@@ -139,7 +139,7 @@ class CpuView : public KSim::PluginView
           return m_old;
         }
 
-        const QString &format() const
+        const TQString &format() const
         {
           return m_format;
         }
@@ -169,14 +169,14 @@ class CpuView : public KSim::PluginView
       private:
         CpuData m_data;
         CpuData m_old;
-        QString m_name;
-        QString m_format;
+        TQString m_name;
+        TQString m_format;
         KSim::Chart *m_chart;
         KSim::Progress *m_label;
         int m_num;
     };
 
-    typedef QValueList<Cpu> CpuList;
+    typedef TQValueList<Cpu> CpuList;
     void updateCpu(CpuData &cpu, int cpuNumber);
     CpuList createList();
 
@@ -186,14 +186,14 @@ class CpuView : public KSim::PluginView
     KSim::Chart *addChart();
     KSim::Progress *addLabel();
 
-    QTimer *m_timer;
-    QVBoxLayout *m_mainLayout;
+    TQTimer *m_timer;
+    TQVBoxLayout *m_mainLayout;
     bool m_firstTime;
     CpuList m_cpus;
 
 #ifdef __linux__
     FILE *m_procFile;
-    QTextStream *m_procStream;
+    TQTextStream *m_procStream;
 #endif
 };
 
@@ -208,21 +208,21 @@ class CpuConfig : public KSim::PluginPage
     virtual void readConfig();
 
   private slots:
-    void modify( QListViewItem * );
+    void modify( TQListViewItem * );
     void modify();
 
   private:
     uint addCpus();
 
     KListView *m_listView;
-    QGroupBox *m_legendBox;
-    QLabel *m_totalNiceLabel;
-    QLabel *m_totalLabel;
-    QLabel *m_sysLabel;
-    QLabel *m_userLabel;
-    QLabel *m_niceLabel;
-    QVBoxLayout *m_legendLayout;
+    TQGroupBox *m_legendBox;
+    TQLabel *m_totalNiceLabel;
+    TQLabel *m_totalLabel;
+    TQLabel *m_sysLabel;
+    TQLabel *m_userLabel;
+    TQLabel *m_niceLabel;
+    TQVBoxLayout *m_legendLayout;
 
-    QPushButton * m_modify;
+    TQPushButton * m_modify;
 };
 #endif

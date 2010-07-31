@@ -40,7 +40,7 @@ class KValueColumn : public KBufferColumn
     virtual ~KValueColumn();
 
   public:
-    void paintEditedByte( QPainter *P, char Byte, const QString &EditBuffer );
+    void paintEditedByte( TQPainter *P, char Byte, const TQString &EditBuffer );
 
   public: // modification access
     /**
@@ -61,11 +61,11 @@ class KValueColumn : public KBufferColumn
 
 
   protected: // KBufferColumn API
-    virtual void drawByte( QPainter *P, char Byte, KHEChar B, const QColor &Color ) const;
+    virtual void drawByte( TQPainter *P, char Byte, KHEChar B, const TQColor &Color ) const;
     virtual void recalcByteWidth();
 
   protected:
-    void drawCode( QPainter *P, const QString &Code, const QColor &Color ) const;
+    void drawCode( TQPainter *P, const TQString &Code, const TQColor &Color ) const;
 
   protected: // set data
     /** */
@@ -77,7 +77,7 @@ class KValueColumn : public KBufferColumn
 
   protected: // buffered data
     /** buffer to hold the formatted coding */
-    mutable QString CodedByte;
+    mutable TQString CodedByte;
     /** calculated: Offset in pixels of the second half of the binary */
     KPixelX BinaryHalfOffset;
 };

@@ -24,7 +24,7 @@
 
 */
 
-#include <qdir.h>
+#include <tqdir.h>
 
 #include <kglobal.h>
 #include <klocale.h>
@@ -40,7 +40,7 @@
 #include "arkutils.h"
 #include "filelistview.h"
 
-SevenZipArch::SevenZipArch( ArkWidget *gui, const QString &filename )
+SevenZipArch::SevenZipArch( ArkWidget *gui, const TQString &filename )
   : Arch( gui, filename ), m_nameColumnPos( -1 )
 {
   // Check if 7z is available
@@ -64,13 +64,13 @@ SevenZipArch::SevenZipArch( ArkWidget *gui, const QString &filename )
   m_dateCol = 3;
   m_numCols = 5;
 
-  m_archCols.append( new ArchColumns( 5, QRegExp( "[0-2][0-9][0-9][0-9]" ), 4 ) ); // Year
-  m_archCols.append( new ArchColumns( 6, QRegExp( "[01][0-9]" ), 2 ) ); // Month
-  m_archCols.append( new ArchColumns( 7, QRegExp( "[0-3][0-9]" ), 2 ) ); // Day
-  m_archCols.append( new ArchColumns( 8, QRegExp( "[0-9:]+" ), 8 ) ); // Time
-  m_archCols.append( new ArchColumns( 4, QRegExp( "[^\\s]+" ) ) ); // Attributes
-  m_archCols.append( new ArchColumns( 1, QRegExp( "[0-9]+" ) ) ); // Size
-  m_archCols.append( new ArchColumns( 2, QRegExp( "[0-9]+" ), 64, true ) ); // Compressed Size
+  m_archCols.append( new ArchColumns( 5, TQRegExp( "[0-2][0-9][0-9][0-9]" ), 4 ) ); // Year
+  m_archCols.append( new ArchColumns( 6, TQRegExp( "[01][0-9]" ), 2 ) ); // Month
+  m_archCols.append( new ArchColumns( 7, TQRegExp( "[0-3][0-9]" ), 2 ) ); // Day
+  m_archCols.append( new ArchColumns( 8, TQRegExp( "[0-9:]+" ), 8 ) ); // Time
+  m_archCols.append( new ArchColumns( 4, TQRegExp( "[^\\s]+" ) ) ); // Attributes
+  m_archCols.append( new ArchColumns( 1, TQRegExp( "[0-9]+" ) ) ); // Size
+  m_archCols.append( new ArchColumns( 2, TQRegExp( "[0-9]+" ), 64, true ) ); // Compressed Size
 }
 
 SevenZipArch::~SevenZipArch()
@@ -100,17 +100,17 @@ void SevenZipArch::open()
   KProcess *kp = m_currentProcess = new KProcess;
   *kp << m_archiver_program << "l" << m_filename;
 
-  connect( kp, SIGNAL( receivedStdout(KProcess*, char*, int) ),
-           SLOT( slotReceivedTOC(KProcess*, char*, int) ) );
-  connect( kp, SIGNAL( receivedStderr(KProcess*, char*, int) ),
-           SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
-  connect( kp, SIGNAL( processExited(KProcess*) ),
-           SLOT( slotOpenExited(KProcess*) ) );
+  connect( kp, TQT_SIGNAL( receivedStdout(KProcess*, char*, int) ),
+           TQT_SLOT( slotReceivedTOC(KProcess*, char*, int) ) );
+  connect( kp, TQT_SIGNAL( receivedStderr(KProcess*, char*, int) ),
+           TQT_SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
+  connect( kp, TQT_SIGNAL( processExited(KProcess*) ),
+           TQT_SLOT( slotOpenExited(KProcess*) ) );
 
   if ( !kp->start( KProcess::NotifyOnExit, KProcess::AllOutput ) )
   {
     KMessageBox::error( 0, i18n( "Could not start a subprocess." ) );
-    emit sigOpen( this, false, QString::null, 0 );
+    emit sigOpen( this, false, TQString::null, 0 );
   }
 }
 
@@ -120,7 +120,7 @@ void SevenZipArch::create()
                   Arch::Extract | Arch::Delete | Arch::Add | Arch::View );
 }
 
-void SevenZipArch::addFile( const QStringList & urls )
+void SevenZipArch::addFile( const TQStringList & urls )
 {
   KProcess *kp = m_currentProcess = new KProcess;
 
@@ -128,23 +128,23 @@ void SevenZipArch::addFile( const QStringList & urls )
   *kp << m_archiver_program << "a" ;
 
   KURL url( urls.first() );
-  QDir::setCurrent( url.directory() );
+  TQDir::setCurrent( url.directory() );
 
   *kp << m_filename;
 
-  QStringList::ConstIterator iter;
+  TQStringList::ConstIterator iter;
   for ( iter = urls.begin(); iter != urls.end(); ++iter )
   {
     KURL url( *iter );
     *kp << url.fileName();
   }
 
-  connect( kp, SIGNAL( receivedStdout(KProcess*, char*, int) ),
-           SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
-  connect( kp, SIGNAL( receivedStderr(KProcess*, char*, int) ),
-           SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
-  connect( kp, SIGNAL( processExited(KProcess*) ),
-           SLOT( slotAddExited(KProcess*) ) );
+  connect( kp, TQT_SIGNAL( receivedStdout(KProcess*, char*, int) ),
+           TQT_SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
+  connect( kp, TQT_SIGNAL( receivedStderr(KProcess*, char*, int) ),
+           TQT_SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
+  connect( kp, TQT_SIGNAL( processExited(KProcess*) ),
+           TQT_SLOT( slotAddExited(KProcess*) ) );
 
   if ( !kp->start( KProcess::NotifyOnExit, KProcess::AllOutput ) )
   {
@@ -153,17 +153,17 @@ void SevenZipArch::addFile( const QStringList & urls )
   }
 }
 
-void SevenZipArch::addDir( const QString & dirName )
+void SevenZipArch::addDir( const TQString & dirName )
 {
   if ( !dirName.isEmpty() )
   {
-    QStringList list;
+    TQStringList list;
     list.append( dirName );
     addFile( list );
   }
 }
 
-void SevenZipArch::remove( QStringList *list )
+void SevenZipArch::remove( TQStringList *list )
 {
   if ( !list )
     return;
@@ -173,18 +173,18 @@ void SevenZipArch::remove( QStringList *list )
 
   *kp << m_archiver_program << "d" << m_filename;
 
-  QStringList::Iterator it;
+  TQStringList::Iterator it;
   for ( it = list->begin(); it != list->end(); ++it )
   {
     *kp << *it;
   }
 
-  connect( kp, SIGNAL( receivedStdout(KProcess*, char*, int) ),
-           SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
-  connect( kp, SIGNAL( receivedStderr(KProcess*, char*, int) ),
-           SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
-  connect( kp, SIGNAL( processExited(KProcess*) ),
-           SLOT( slotDeleteExited(KProcess*) ) );
+  connect( kp, TQT_SIGNAL( receivedStdout(KProcess*, char*, int) ),
+           TQT_SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
+  connect( kp, TQT_SIGNAL( receivedStderr(KProcess*, char*, int) ),
+           TQT_SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
+  connect( kp, TQT_SIGNAL( processExited(KProcess*) ),
+           TQT_SLOT( slotDeleteExited(KProcess*) ) );
 
   if ( !kp->start( KProcess::NotifyOnExit, KProcess::AllOutput ) )
   {
@@ -218,7 +218,7 @@ void SevenZipArch::unarchFileInternal( )
   // and we then extract everything in the archive.
   if ( m_fileList )
   {
-    QStringList::Iterator it;
+    TQStringList::Iterator it;
     for ( it = m_fileList->begin(); it != m_fileList->end(); ++it )
     {
       *kp << (*it);
@@ -227,12 +227,12 @@ void SevenZipArch::unarchFileInternal( )
 
   *kp << "-o" + m_destDir ;
 
-  connect( kp, SIGNAL( receivedStdout(KProcess*, char*, int) ),
-           SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
-  connect( kp, SIGNAL( receivedStderr(KProcess*, char*, int) ),
-           SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
-  connect( kp, SIGNAL( processExited(KProcess*) ),
-           SLOT( slotExtractExited(KProcess*) ) );
+  connect( kp, TQT_SIGNAL( receivedStdout(KProcess*, char*, int) ),
+           TQT_SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
+  connect( kp, TQT_SIGNAL( receivedStderr(KProcess*, char*, int) ),
+           TQT_SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
+  connect( kp, TQT_SIGNAL( processExited(KProcess*) ),
+           TQT_SLOT( slotExtractExited(KProcess*) ) );
 
   if ( !kp->start( KProcess::NotifyOnExit, KProcess::AllOutput ) )
   {
@@ -241,10 +241,10 @@ void SevenZipArch::unarchFileInternal( )
   }
 }
 
-bool SevenZipArch::processLine( const QCString& _line )
+bool SevenZipArch::processLine( const TQCString& _line )
 {
-  QCString line( _line );
-  QString columns[ 11 ];
+  TQCString line( _line );
+  TQString columns[ 11 ];
   unsigned int pos = 0;
   int strpos, len;
 
@@ -252,7 +252,7 @@ bool SevenZipArch::processLine( const QCString& _line )
   line.truncate( m_nameColumnPos );
 
   // Go through our columns, try to pick out data, return silently on failure
-  for ( QPtrListIterator <ArchColumns>col( m_archCols ); col.current(); ++col )
+  for ( TQPtrListIterator <ArchColumns>col( m_archCols ); col.current(); ++col )
   {
     ArchColumns *curCol = *col;
 
@@ -278,14 +278,14 @@ bool SevenZipArch::processLine( const QCString& _line )
 
   if ( m_dateCol >= 0 )
   {
-    QString year = ( m_repairYear >= 0 ) ?
+    TQString year = ( m_repairYear >= 0 ) ?
                    ArkUtils::fixYear( columns[ m_repairYear ].ascii())
                    : columns[ m_fixYear ];
-    QString month = ( m_repairMonth >= 0 ) ?
-                   QString( "%1" )
+    TQString month = ( m_repairMonth >= 0 ) ?
+                   TQString( "%1" )
                    .arg( ArkUtils::getMonth( columns[ m_repairMonth ].ascii() ) )
                    : columns[ m_fixMonth ];
-    QString timestamp = QString::fromLatin1( "%1-%2-%3 %4" )
+    TQString timestamp = TQString::fromLatin1( "%1-%2-%3 %4" )
                         .arg( year )
                         .arg( month )
                         .arg( columns[ m_fixDay ] )
@@ -294,7 +294,7 @@ bool SevenZipArch::processLine( const QCString& _line )
     columns[ m_dateCol ] = timestamp;
   }
 
-  QStringList list;
+  TQStringList list;
 
   for ( int i = 0; i < m_numCols; ++i )
   {

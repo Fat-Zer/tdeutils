@@ -37,8 +37,8 @@ class KMiloKVaio : public KMilo::Monitor {
 //	Q_OBJECT
 
 	public:
-		KMiloKVaio(QObject *parent, 
-			   const char *name, const QStringList&);
+		KMiloKVaio(TQObject *parent, 
+			   const char *name, const TQStringList&);
 		virtual ~KMiloKVaio();
 
 		virtual bool init();
@@ -48,11 +48,11 @@ class KMiloKVaio : public KMilo::Monitor {
 		virtual void reconfigure(KConfig*);
 
 
-		bool showTextMsg(const QString& msg) {
+		bool showTextMsg(const TQString& msg) {
 		    _interface->displayText(msg); 
 		    return true;
 		}
-		bool showProgressMsg(const QString& msg, int progress) {
+		bool showProgressMsg(const TQString& msg, int progress) {
 		    _interface->displayProgress(msg,progress);
 		    return true;
 		}

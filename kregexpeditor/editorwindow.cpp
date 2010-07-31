@@ -31,21 +31,21 @@
 
 #include "editorwindow.h"
 #include "concwidget.h"
-#include <qlayout.h>
-#include <qpainter.h>
-#include <qaccel.h>
-#include <qcursor.h>
-#include <qclipboard.h>
-#include <qpopupmenu.h>
+#include <tqlayout.h>
+#include <tqpainter.h>
+#include <tqaccel.h>
+#include <tqcursor.h>
+#include <tqclipboard.h>
+#include <tqpopupmenu.h>
 #include "regexp.h"
 #include "userdefinedregexps.h"
-#include <qfileinfo.h>
+#include <tqfileinfo.h>
 
-RegExpEditorWindow::RegExpEditorWindow( QWidget *parent, const char *name)
-    : QWidget(parent, name, Qt::WPaintUnclipped)
+RegExpEditorWindow::RegExpEditorWindow( TQWidget *parent, const char *name)
+    : TQWidget(parent, name, Qt::WPaintUnclipped)
 {
     _top = new ConcWidget(this, this);
-    _layout = new QHBoxLayout( this);
+    _layout = new TQHBoxLayout( this);
     _layout->addWidget(_top);
     _top->setToplevel();
     _undrawSelection = false;
@@ -54,16 +54,16 @@ RegExpEditorWindow::RegExpEditorWindow( QWidget *parent, const char *name)
     _pasteInAction = false;
     _pasteData = 0;
 
-    QAccel* accel = new QAccel( this );
-    accel->connectItem( accel->insertItem( CTRL+Key_C ), this, SLOT( slotCopy() ) );
-    accel->connectItem( accel->insertItem( CTRL+Key_X ), this, SLOT( slotCut() ) );
-    accel->connectItem( accel->insertItem( Key_Delete ), this, SLOT( slotCut() ) );
-    accel->connectItem( accel->insertItem( Key_BackSpace ), this, SLOT( slotCut() ) );
-    accel->connectItem( accel->insertItem( CTRL+Key_V ), this, SLOT( slotStartPasteAction() ) );
-    accel->connectItem( accel->insertItem( Key_Escape ), this, SLOT( slotEndActions() ) );
-    accel->connectItem( accel->insertItem( CTRL+Key_S ), this, SLOT( slotSave() ) );
+    TQAccel* accel = new TQAccel( this );
+    accel->connectItem( accel->insertItem( CTRL+Key_C ), this, TQT_SLOT( slotCopy() ) );
+    accel->connectItem( accel->insertItem( CTRL+Key_X ), this, TQT_SLOT( slotCut() ) );
+    accel->connectItem( accel->insertItem( Key_Delete ), this, TQT_SLOT( slotCut() ) );
+    accel->connectItem( accel->insertItem( Key_BackSpace ), this, TQT_SLOT( slotCut() ) );
+    accel->connectItem( accel->insertItem( CTRL+Key_V ), this, TQT_SLOT( slotStartPasteAction() ) );
+    accel->connectItem( accel->insertItem( Key_Escape ), this, TQT_SLOT( slotEndActions() ) );
+    accel->connectItem( accel->insertItem( CTRL+Key_S ), this, TQT_SLOT( slotSave() ) );
 
-    connect( this, SIGNAL( change() ), this, SLOT( emitVerifyRegExp() ) );
+    connect( this, TQT_SIGNAL( change() ), this, TQT_SLOT( emitVerifyRegExp() ) );
 }
 
 RegExp* RegExpEditorWindow::regExp() const
@@ -71,41 +71,41 @@ RegExp* RegExpEditorWindow::regExp() const
 	return _top->regExp();
 }
 
-void  RegExpEditorWindow::mousePressEvent ( QMouseEvent* event )
+void  RegExpEditorWindow::mousePressEvent ( TQMouseEvent* event )
 {
     setFocus();
     updateContent( 0 );
 
     _start = event->pos();
-    _lastPoint = QPoint(0,0);
+    _lastPoint = TQPoint(0,0);
 
     if ( pointSelected( event->globalPos() ) ) {
         _isDndOperation = true;
     }
     else {
         _isDndOperation = false;
-        _selection = QRect();
+        _selection = TQRect();
         _top->updateSelection( false );
 
-        QWidget::mousePressEvent( event );
+        TQWidget::mousePressEvent( event );
     }
     grabMouse();
 }
 
-bool RegExpEditorWindow::pointSelected( QPoint p ) const
+bool RegExpEditorWindow::pointSelected( TQPoint p ) const
 {
-    QRect rect = _top->selectionRect();
+    TQRect rect = _top->selectionRect();
     return rect.contains(p);
 }
 
-void RegExpEditorWindow::mouseMoveEvent ( QMouseEvent* event )
+void RegExpEditorWindow::mouseMoveEvent ( TQMouseEvent* event )
 {
     if ( _isDndOperation ) {
-        if ( ( _start - event->pos() ).manhattanLength() > QApplication::startDragDistance() ) {
+        if ( ( _start - event->pos() ).manhattanLength() > TQApplication::startDragDistance() ) {
             RegExp* regexp = _top->selection();
             if ( !regexp )
                 return;
-            QDragObject *d = new RegExpWidgetDrag( regexp, this );
+            TQDragObject *d = new RegExpWidgetDrag( regexp, this );
             delete regexp;
 
             bool del = d->drag();
@@ -120,13 +120,13 @@ void RegExpEditorWindow::mouseMoveEvent ( QMouseEvent* event )
         }
     }
     else {
-        QPainter p( this );
+        TQPainter p( this );
         p.setRasterOp( Qt::NotROP );
         p.setPen( Qt::DotLine );
 
         // remove last selection rectangle
         if ( ! _lastPoint.isNull() && _undrawSelection ) {
-            p.drawRect(QRect(_start, _lastPoint));
+            p.drawRect(TQRect(_start, _lastPoint));
         }
 
         // Note this line must come after the old rect has been removed
@@ -136,25 +136,25 @@ void RegExpEditorWindow::mouseMoveEvent ( QMouseEvent* event )
         _top->updateSelection( false );
         emit scrolling( event->pos() );
 
-        p.drawRect(QRect(_start, event->pos()));
+        p.drawRect(TQRect(_start, event->pos()));
         _undrawSelection = true;
         _lastPoint = event->pos();
 
-        _selection = QRect(mapToGlobal(_start), mapToGlobal(_lastPoint)).normalize();
+        _selection = TQRect(mapToGlobal(_start), mapToGlobal(_lastPoint)).normalize();
     }
 }
 
-void RegExpEditorWindow::mouseReleaseEvent( QMouseEvent *event)
+void RegExpEditorWindow::mouseReleaseEvent( TQMouseEvent *event)
 {
     releaseMouse();
-    QWidget::mouseReleaseEvent( event);
+    TQWidget::mouseReleaseEvent( event);
 
     // remove last selection rectangle
-    QPainter p( this );
+    TQPainter p( this );
     p.setRasterOp( Qt::NotROP );
     p.setPen( Qt::DotLine );
     if ( ! _lastPoint.isNull() ) {
-        p.drawRect(QRect(_start, _lastPoint));
+        p.drawRect(TQRect(_start, _lastPoint));
     }
     _top->validateSelection();
     _top->updateAll();
@@ -164,9 +164,9 @@ void RegExpEditorWindow::mouseReleaseEvent( QMouseEvent *event)
     }
 }
 
-bool RegExpEditorWindow::selectionOverlap( QPoint pos, QSize size ) const
+bool RegExpEditorWindow::selectionOverlap( TQPoint pos, TQSize size ) const
 {
-    QRect child(pos, size);
+    TQRect child(pos, size);
 
     return (_selection.intersects(child) && ! child.contains(_selection));
 }
@@ -226,35 +226,35 @@ void RegExpEditorWindow::slotDeleteSelection()
     updateContent( 0 );
 }
 
-void RegExpEditorWindow::updateContent( QWidget* focusChild)
+void RegExpEditorWindow::updateContent( TQWidget* focusChild)
 {
-    QPoint p(0,0);
+    TQPoint p(0,0);
     if ( focusChild )
-        p = focusChild->mapTo( this, QPoint(0,0) );
+        p = focusChild->mapTo( this, TQPoint(0,0) );
 
     _top->update();
     emit contentChanged( p );
 }
 
-QSize RegExpEditorWindow::sizeHint() const
+TQSize RegExpEditorWindow::sizeHint() const
 {
     return _top->sizeHint();
 }
 
-void RegExpEditorWindow::paintEvent( QPaintEvent* event )
+void RegExpEditorWindow::paintEvent( TQPaintEvent* event )
 {
-    QWidget::paintEvent( event );
+    TQWidget::paintEvent( event );
     _undrawSelection = false;
 }
 
 void RegExpEditorWindow::slotCut()
 {
-    cut( QCursor::pos() );
+    cut( TQCursor::pos() );
     emit change();
     emit canSave( _top->hasAnyChildren() );
 }
 
-void RegExpEditorWindow::cut( QPoint pos )
+void RegExpEditorWindow::cut( TQPoint pos )
 {
     cutCopyAux( pos );
     slotDeleteSelection();
@@ -262,17 +262,17 @@ void RegExpEditorWindow::cut( QPoint pos )
 
 void RegExpEditorWindow::slotCopy()
 {
-    copy( QCursor::pos() );
+    copy( TQCursor::pos() );
 }
 
-void RegExpEditorWindow::copy( QPoint pos )
+void RegExpEditorWindow::copy( TQPoint pos )
 {
     cutCopyAux( pos );
     clearSelection( true );
 }
 
 
-void RegExpEditorWindow::cutCopyAux( QPoint pos )
+void RegExpEditorWindow::cutCopyAux( TQPoint pos )
 {
     if ( !hasSelection() ) {
         RegExpWidget* widget = _top->widgetUnderPoint( pos, true );
@@ -298,9 +298,9 @@ void RegExpEditorWindow::cutCopyAux( QPoint pos )
 
 void RegExpEditorWindow::slotStartPasteAction()
 {
-    QByteArray data = qApp->clipboard()->data()->encodedData( "KRegExpEditor/widgetdrag" );
-    QTextStream stream( data, IO_ReadOnly );
-    QString str = stream.read();
+    TQByteArray data = qApp->clipboard()->data()->encodedData( "KRegExpEditor/widgetdrag" );
+    TQTextStream stream( data, IO_ReadOnly );
+    TQString str = stream.read();
 
     RegExp* regexp = WidgetFactory::createRegExp( str );
     if ( regexp )
@@ -318,17 +318,17 @@ void RegExpEditorWindow::showRMBMenu( bool enableCutCopy )
     enum CHOICES { CUT, COPY, PASTE, SAVE, EDIT };
 
     if ( !_menu ) {
-        _menu = new QPopupMenu( 0 );
-        _menu->insertItem(getIcon(QString::fromLocal8Bit("editcut")),
+        _menu = new TQPopupMenu( 0 );
+        _menu->insertItem(getIcon(TQString::fromLocal8Bit("editcut")),
                           i18n("C&ut"), CUT);
-        _menu->insertItem(getIcon(QString::fromLocal8Bit("editcopy")),
+        _menu->insertItem(getIcon(TQString::fromLocal8Bit("editcopy")),
                           i18n("&Copy"), COPY);
-        _menu->insertItem(getIcon(QString::fromLocal8Bit("editpaste")),
+        _menu->insertItem(getIcon(TQString::fromLocal8Bit("editpaste")),
                           i18n("&Paste"), PASTE);
         _menu->insertSeparator();
-        _menu->insertItem(getIcon(QString::fromLocal8Bit("edit")),
+        _menu->insertItem(getIcon(TQString::fromLocal8Bit("edit")),
                           i18n("&Edit"), EDIT);
-        _menu->insertItem(getIcon(QString::fromLocal8Bit("filesave")),
+        _menu->insertItem(getIcon(TQString::fromLocal8Bit("filesave")),
                           i18n("&Save Regular Expression..."), SAVE);
     }
 
@@ -342,11 +342,11 @@ void RegExpEditorWindow::showRMBMenu( bool enableCutCopy )
 
     _menu->setItemEnabled( SAVE, _top->hasAnyChildren() );
 
-    RegExpWidget* editWidget = _top->findWidgetToEdit( QCursor::pos() );
+    RegExpWidget* editWidget = _top->findWidgetToEdit( TQCursor::pos() );
 
     _menu->setItemEnabled( EDIT, editWidget  );
 
-    QPoint pos = QCursor::pos();
+    TQPoint pos = TQCursor::pos();
     int choice = _menu->exec( pos );
     switch ( choice ) {
     case COPY: copy( pos ); break;
@@ -366,29 +366,29 @@ void RegExpEditorWindow::applyRegExpToSelection( RegExpType tp )
 
 void RegExpEditorWindow::slotSave()
 {
-    QString dir = WidgetWinItem::path();
-    QString txt;
+    TQString dir = WidgetWinItem::path();
+    TQString txt;
 
 #ifdef QT_ONLY
     txt = QInputDialog::getText( tr("Name for regexp"), tr("Enter name:") );
     if ( txt.isNull() )
         return;
 #else
-    KLineEditDlg dlg(i18n("Enter name:"), QString::null, this);
+    KLineEditDlg dlg(i18n("Enter name:"), TQString::null, this);
     dlg.setCaption(i18n("Name for Regular Expression"));
     if (!dlg.exec()) return;
     txt = dlg.text();
 #endif
 
-    QString fileName = dir + QString::fromLocal8Bit("/") + txt + QString::fromLocal8Bit(".regexp");
-    QFileInfo finfo( fileName );
+    TQString fileName = dir + TQString::fromLocal8Bit("/") + txt + TQString::fromLocal8Bit(".regexp");
+    TQFileInfo finfo( fileName );
     if ( finfo.exists() ) {
-        int answer = KMessageBox::warningContinueCancel( this, i18n("<p>Overwrite named regular expression <b>%1</b></p>").arg(txt), QString::null, i18n("Overwrite"));
+        int answer = KMessageBox::warningContinueCancel( this, i18n("<p>Overwrite named regular expression <b>%1</b></p>").arg(txt), TQString::null, i18n("Overwrite"));
         if ( answer != KMessageBox::Continue )
             return;
     }
 
-    QFile file( fileName );
+    TQFile file( fileName );
     if ( ! file.open(IO_WriteOnly) ) {
         KMessageBox::sorry( this, i18n("Could not open file for writing: %1").arg(fileName) );
         return;
@@ -396,10 +396,10 @@ void RegExpEditorWindow::slotSave()
 
     // Convert to XML.
     RegExp* regexp = _top->regExp();
-    QString xml = regexp->toXmlString();
+    TQString xml = regexp->toXmlString();
     delete regexp;
 
-    QTextStream stream(&file);
+    TQTextStream stream(&file);
     stream << xml;
 
     file.close();
@@ -429,7 +429,7 @@ void RegExpEditorWindow::slotSetRegExp( RegExp* regexp )
 
 void RegExpEditorWindow::updateCursorUnderPoint()
 {
-    RegExpWidget* widget = _top->widgetUnderPoint( QCursor::pos(), false );
+    RegExpWidget* widget = _top->widgetUnderPoint( TQCursor::pos(), false );
     if ( widget )
         widget->updateCursorShape();
 }
@@ -440,10 +440,10 @@ void RegExpEditorWindow::emitVerifyRegExp()
 }
 
 
-QIconSet RegExpEditorWindow::getIcon( const QString& name )
+TQIconSet RegExpEditorWindow::getIcon( const TQString& name )
 {
 #ifdef QT_ONLY
-    QPixmap pix;
+    TQPixmap pix;
     pix.convertFromImage( qembed_findImage( name ) );
     return pix;
 #else

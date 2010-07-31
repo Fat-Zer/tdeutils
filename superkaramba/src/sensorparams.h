@@ -22,8 +22,8 @@
 #define SENSORPARAMS_H
 
 #include "meter.h"
-#include <qstring.h>
-#include <qmap.h>
+#include <tqstring.h>
+#include <tqmap.h>
 /**
  *
  * Hans Karlsson
@@ -35,13 +35,13 @@ public:
 
     ~SensorParams();
 
-    void addParam( const QString &name, const QString &value);
-    QString getParam( const QString& ) const;
+    void addParam( const TQString &name, const TQString &value);
+    TQString getParam( const TQString& ) const;
 
     Meter* getMeter() const;
 private:
 Meter *meter;
-QMap<QString,QString> params;
+TQMap<TQString,TQString> params;
 
 };
 

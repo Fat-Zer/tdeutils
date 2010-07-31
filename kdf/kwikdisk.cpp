@@ -31,9 +31,9 @@
 
 #include <stdlib.h>
 
-#include <qpen.h>
-#include <qbitmap.h>
-#include <qpainter.h>
+#include <tqpen.h>
+#include <tqbitmap.h>
+#include <tqpainter.h>
 
 #include <kmainwindow.h>
 #include <klocale.h>
@@ -69,11 +69,11 @@ KwikDisk::KwikDisk()
    setPixmap(KSystemTray::loadIcon("kdf"));
    show();
 
-   connect( &m_diskList, SIGNAL(readDFDone()), this, SLOT(updateDFDone()) );
-   connect( &m_diskList, SIGNAL(criticallyFull(DiskEntry*)),
-            this, SLOT(criticallyFull(DiskEntry*)) );
+   connect( &m_diskList, TQT_SIGNAL(readDFDone()), this, TQT_SLOT(updateDFDone()) );
+   connect( &m_diskList, TQT_SIGNAL(criticallyFull(DiskEntry*)),
+            this, TQT_SLOT(criticallyFull(DiskEntry*)) );
 
-   connect( contextMenu(), SIGNAL(aboutToHide()), this, SLOT(aboutToHide()) );
+   connect( contextMenu(), TQT_SIGNAL(aboutToHide()), this, TQT_SLOT(aboutToHide()) );
 
    loadSettings();
    updateDF();
@@ -86,19 +86,19 @@ void KwikDisk::aboutToHide()
       m_menuVisible = FALSE;
 }
 
-void KwikDisk::enterEvent(QEvent *)
+void KwikDisk::enterEvent(TQEvent *)
 {
    kdDebug() << k_funcinfo << endl;
    m_inside = TRUE;
 }
 
-void KwikDisk::leaveEvent(QEvent *)
+void KwikDisk::leaveEvent(TQEvent *)
 {
    kdDebug() << k_funcinfo << endl;
    m_inside = FALSE;
 }
 
-void KwikDisk::mousePressEvent(QMouseEvent *me)
+void KwikDisk::mousePressEvent(TQMouseEvent *me)
 {
    kdDebug() << k_funcinfo << endl;
 
@@ -146,7 +146,7 @@ void KwikDisk::setUpdateFrequency(int frequency)
  * popup menu is about to become visible. Note: A current visible popup
  * will not be updated now.
  */
-void KwikDisk::timerEvent(QTimerEvent *)
+void KwikDisk::timerEvent(TQTimerEvent *)
 {
    kdDebug() << k_funcinfo << endl;
    m_dirty = TRUE;
@@ -175,20 +175,20 @@ void KwikDisk::updateDFDone()
    for( DiskEntry *disk = m_diskList.first(); disk != 0; disk = m_diskList.next() )
    {
       // FIXME: tool tips are unused atm
-      QString toolTipText = i18n("%1 (%2) %3 on %4")
+      TQString toolTipText = i18n("%1 (%2) %3 on %4")
          .arg( disk->mounted() ? i18n("Unmount") : i18n("Mount"))
          .arg(disk->fsType()).arg(disk->deviceName()).arg(disk->mountPoint());
 
-      QString entryName = disk->mountPoint();
+      TQString entryName = disk->mountPoint();
       if( disk->mounted() )
       {
-         entryName += QString("\t\t\t[%1]").arg(disk->prettyKBAvail());
+         entryName += TQString("\t\t\t[%1]").arg(disk->prettyKBAvail());
       }
-      int id = contextMenu()->insertItem("", this, SLOT(toggleMount(int)) );
+      int id = contextMenu()->insertItem("", this, TQT_SLOT(toggleMount(int)) );
       contextMenu()->setItemParameter(id, itemNo);
       itemNo++;
 
-      QPixmap *pix = new QPixmap(KSystemTray::loadIcon(disk->iconName()));
+      TQPixmap *pix = new TQPixmap(KSystemTray::loadIcon(disk->iconName()));
 
       if( getuid() !=0 && disk->mountOptions().find("user",0, false) == -1 )
       {
@@ -197,25 +197,25 @@ void KwikDisk::updateDFDone()
          //
          // 2000-01-23 Espen Sand
          // Careful here: If the mask has not been defined we can
-         // not use QPixmap::mask() because it returns 0 => segfault
+         // not use TQPixmap::mask() because it returns 0 => segfault
          //
          if( pix->mask() != 0 )
          {
-            QBitmap *bm = new QBitmap(*(pix->mask()));
+            TQBitmap *bm = new TQBitmap(*(pix->mask()));
             if( bm != 0 )
             {
-               QPainter qp( bm );
-               qp.setPen(QPen(white,1));
+               TQPainter qp( bm );
+               qp.setPen(TQPen(white,1));
                qp.drawRect(0,0,bm->width(),bm->height());
                qp.end();
                pix->setMask(*bm);
             }
-            QPainter qp( pix );
-            qp.setPen(QPen(red,1));
+            TQPainter qp( pix );
+            qp.setPen(TQPen(red,1));
             qp.drawRect(0,0,pix->width(),pix->height());
             qp.end();
          }
-         contextMenu()->disconnectItem(id,disk,SLOT(toggleMount()));
+         contextMenu()->disconnectItem(id,disk,TQT_SLOT(toggleMount()));
          toolTipText = i18n("You must login as root to mount this disk");
       }
 
@@ -226,21 +226,21 @@ void KwikDisk::updateDFDone()
 
    contextMenu()->insertItem(
       KSystemTray::loadIcon("kdf"),
-      i18n("&Start KDiskFree"), this, SLOT(startKDF()),0);
+      i18n("&Start KDiskFree"), this, TQT_SLOT(startKDF()),0);
 
    contextMenu()->insertItem(
       KSystemTray::loadIcon("configure"),
-      i18n("&Configure KwikDisk..."), this, SLOT(changeSettings()),0);
+      i18n("&Configure KwikDisk..."), this, TQT_SLOT(changeSettings()),0);
 
    contextMenu()->insertItem(
       KSystemTray::loadIcon("help"),
-      KStdGuiItem::help().text(), this, SLOT(invokeHelp()),0);
+      KStdGuiItem::help().text(), this, TQT_SLOT(invokeHelp()),0);
 
    contextMenu()->insertSeparator();
 
    contextMenu()->insertItem(
       KSystemTray::loadIcon("exit"),
-      KStdGuiItem::quit().text(), this, SIGNAL(quitSelected()) );
+      KStdGuiItem::quit().text(), this, TQT_SIGNAL(quitSelected()) );
 }
 
 void KwikDisk::toggleMount(int item)
@@ -263,7 +263,7 @@ void KwikDisk::toggleMount(int item)
       kdDebug() << "opening filemanager" << endl;
       if( m_options.fileManager().isEmpty() == false )
       {
-         QString cmd = m_options.fileManager();
+         TQString cmd = m_options.fileManager();
          int pos = cmd.find("%m");
          if( pos > 0 )
          {
@@ -273,7 +273,7 @@ void KwikDisk::toggleMount(int item)
          {
             cmd += " " + KProcess::quote(disk->mountPoint()) +" &";
          }
-         system( QFile::encodeName(cmd) );
+         system( TQFile::encodeName(cmd) );
       }
    }
    m_dirty = TRUE;
@@ -285,7 +285,7 @@ void KwikDisk::criticallyFull(DiskEntry *disk)
 
    if( m_options.popupIfFull() == true )
    {
-      QString msg = i18n("Device [%1] on [%2] is getting critically full!")
+      TQString msg = i18n("Device [%1] on [%2] is getting critically full!")
                     .arg(disk->deviceName()).arg(disk->mountPoint());
       KMessageBox::sorry( this, msg, i18n("Warning"));
    }
@@ -297,8 +297,8 @@ void KwikDisk::changeSettings()
    {
       m_optionDialog = new COptionDialog(this, "options", FALSE);
       if( !m_optionDialog ) return;
-      connect(m_optionDialog, SIGNAL(valueChanged()),
-                        this, SLOT(loadSettings()));
+      connect(m_optionDialog, TQT_SIGNAL(valueChanged()),
+                        this, TQT_SLOT(loadSettings()));
    }
    m_optionDialog->show();
 }
@@ -335,7 +335,7 @@ int main(int argc, char **argv)
    KwikDisk *mainWin = 0;
 
    mainWin = new KwikDisk;
-   QObject::connect(mainWin, SIGNAL(quitSelected()), &app, SLOT(quit()));
+   TQObject::connect(mainWin, TQT_SIGNAL(quitSelected()), &app, TQT_SLOT(quit()));
 
    // mainWin has WDestructiveClose flag by default, so it will delete itself.
    return app.exec();

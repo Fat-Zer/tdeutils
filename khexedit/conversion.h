@@ -21,7 +21,7 @@
 #ifndef _CONVERSION_H_
 #define _CONVERSION_H_
 
-#include <qstring.h> 
+#include <tqstring.h> 
 
 #include "progress.h"
 
@@ -29,7 +29,7 @@
 struct SEncodeState
 {
   unsigned int mode;
-  QString name;
+  TQString name;
 };
 
 
@@ -46,7 +46,7 @@ class CConversion
   public:
     CConversion( void );
 
-    int  convert( QByteArray &buf, EMode mode, CProgress &p );
+    int  convert( TQByteArray &buf, EMode mode, CProgress &p );
     bool lossless( EMode cnvMode );
 
     EMode mode( void );
@@ -58,7 +58,7 @@ class CConversion
     }
 
   private:
-    QString names( unsigned int index );
+    TQString names( unsigned int index );
     const unsigned char *tables( EMode cnvMode );
     void setMode( EMode cnvMode );
 

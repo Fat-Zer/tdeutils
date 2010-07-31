@@ -29,7 +29,7 @@
 #include <stdlib.h>
 #include <fcntl.h>
 
-#include <qtimer.h>
+#include <tqtimer.h>
 
 #include <kconfig.h>
 #include <klocale.h>
@@ -41,8 +41,8 @@
 #include <sys/ioctl.h>
 #include <kmessagebox.h>
 #include <dcopclient.h>
-#include <qsocketnotifier.h>
-#include <qcursor.h>
+#include <tqsocketnotifier.h>
+#include <tqcursor.h>
 
 
 #include <unistd.h>
@@ -52,11 +52,11 @@ daemon_state::daemon_state()
 {
 	exists = laptop_portable::has_power_management();
 	has_brightness = laptop_portable::has_brightness();
-    	QStringList profile_list;
+    	TQStringList profile_list;
     	int current_profile;
 	bool *active_list;
     	has_performance = laptop_portable::get_system_performance(0, current_profile, profile_list, active_list);
-    	QStringList throttle_list;
+    	TQStringList throttle_list;
     	int current_throttle;
     	has_throttle = laptop_portable::get_system_throttling(0, current_throttle, throttle_list, active_list);
 
@@ -96,11 +96,11 @@ void daemon_state::load()
 
 	exists = laptop_portable::has_power_management();
 	has_brightness = laptop_portable::has_brightness();
-    	QStringList profile_list;
+    	TQStringList profile_list;
     	int current_profile;
 	bool *active_list;
     	has_performance = laptop_portable::get_system_performance(0, current_profile, profile_list, active_list);
-    	QStringList throttle_list;
+    	TQStringList throttle_list;
     	int current_throttle;
     	has_throttle = laptop_portable::get_system_throttling(0, current_throttle, throttle_list, active_list);
 

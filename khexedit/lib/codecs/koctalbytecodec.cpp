@@ -21,7 +21,7 @@
 using namespace KHE;
 
 
-void KOctalByteCodec::encode( QString &Digits, unsigned int Pos, unsigned char Char ) const
+void KOctalByteCodec::encode( TQString &Digits, unsigned int Pos, unsigned char Char ) const
 {
   Digits.at(Pos++) = '0'+(Char>>6);
   Digits.at(Pos++) = '0'+((Char>>3)&0x07);
@@ -29,7 +29,7 @@ void KOctalByteCodec::encode( QString &Digits, unsigned int Pos, unsigned char C
 }
 
 
-void KOctalByteCodec::encodeShort( QString &Digits, unsigned int Pos, unsigned char Char ) const
+void KOctalByteCodec::encodeShort( TQString &Digits, unsigned int Pos, unsigned char Char ) const
 {
   unsigned char C;
   if( (C = (Char>>6)&0x07) )

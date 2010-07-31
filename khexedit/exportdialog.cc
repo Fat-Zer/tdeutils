@@ -19,8 +19,8 @@
  */
 
 #include <limits.h>
-#include <qbuttongroup.h>
-#include <qlineedit.h> 
+#include <tqbuttongroup.h>
+#include <tqlineedit.h> 
 
 #include <kfiledialog.h>
 #include <klocale.h>
@@ -28,14 +28,14 @@
 
 #include "dialog.h"
 #include "exportdialog.h"
-#include <qpushbutton.h>
+#include <tqpushbutton.h>
 
 
-CExportDialog::CExportDialog( QWidget *parent, char *name, bool modal )
+CExportDialog::CExportDialog( TQWidget *parent, char *name, bool modal )
   :KDialogBase( Tabbed, i18n("Export Document"), Help|Ok|Cancel, Ok,
 		parent, name,  modal )
 {
-  setHelp( "khexedit/khexedit.html", QString::null );
+  setHelp( "khexedit/khexedit.html", TQString::null );
 
   mFrame[ page_destination ] = addPage( i18n("Destination") );
   mFrame[ page_option ] = addPage( i18n("Options") );
@@ -46,7 +46,7 @@ CExportDialog::CExportDialog( QWidget *parent, char *name, bool modal )
   mConfig = 0;
   readConfiguration();
 
-  QString path = mDestination.fileInput->text();
+  TQString path = mDestination.fileInput->text();
   int index = path.findRev( '/' );
   if( index != -1 ) { mWorkDir = path.left( index+1 ); }
 }
@@ -59,7 +59,7 @@ CExportDialog::~CExportDialog( void )
 }
 
 
-void CExportDialog::showEvent( QShowEvent *e )
+void CExportDialog::showEvent( TQShowEvent *e )
 {
   KDialogBase::showEvent(e);
   showPage(0);
@@ -71,7 +71,7 @@ void CExportDialog::readConfiguration( void )
 {
   if( mConfig != 0 ) { return; }
 
-  mConfig = new KSimpleConfig( QString("hexexport") );
+  mConfig = new KSimpleConfig( TQString("hexexport") );
   if( mConfig == 0 ) { return; }
 
   mConfig->setGroup( "Destination" );
@@ -83,7 +83,7 @@ void CExportDialog::readConfiguration( void )
   mConfig->setGroup( "Option" );
   val = mConfig->readNumEntry( "HtmlLine", 80 );
   mHtml.lineSpin->setValue( val );
-  QString text = mConfig->readEntry( "HtmlPrefix", "table" );
+  TQString text = mConfig->readEntry( "HtmlPrefix", "table" );
   mHtml.prefixInput->setText( text );
   val = mConfig->readNumEntry( "HtmlHeader", 1 );
   mHtml.topCombo->setCurrentItem( val < 0 || val >= 4 ? 0 : val );
@@ -148,113 +148,113 @@ void CExportDialog::writeConfiguration( void )
 
 void CExportDialog::setupDestinationPage( void )
 {
-  QString text;
-  QFrame *page = mFrame[ page_destination ];
+  TQString text;
+  TQFrame *page = mFrame[ page_destination ];
 
-  QVBoxLayout *topLayout = new QVBoxLayout( page, 0, spacingHint() );  
+  TQVBoxLayout *topLayout = new TQVBoxLayout( page, 0, spacingHint() );  
   if( topLayout == 0 ) { return; }
 
-  QStringList formatList;
+  TQStringList formatList;
   formatList.append( i18n("Plain Text") );
   formatList.append( i18n("HTML Tables") );
   formatList.append( i18n("Rich Text (RTF)") );
   formatList.append( i18n("C Array") );
 
-  mDestination.formatCombo = new QComboBox( false, page );
+  mDestination.formatCombo = new TQComboBox( false, page );
   mDestination.formatCombo->insertStringList( formatList );
   mDestination.formatCombo->setMinimumWidth( fontMetrics().maxWidth()*10 );
-  connect( mDestination.formatCombo, SIGNAL(activated(int)),
-	   SLOT(formatChanged(int)) );
+  connect( mDestination.formatCombo, TQT_SIGNAL(activated(int)),
+	   TQT_SLOT(formatChanged(int)) );
 
   text = i18n("&Format:");
-  QLabel *label = new QLabel( mDestination.formatCombo, text, page );
+  TQLabel *label = new TQLabel( mDestination.formatCombo, text, page );
   topLayout->addWidget( label );
   topLayout->addWidget( mDestination.formatCombo );
 
-  QHBoxLayout *hbox = new QHBoxLayout();
+  TQHBoxLayout *hbox = new TQHBoxLayout();
   topLayout->addLayout( hbox );
 
   text = i18n("&Destination:");
-  label = new QLabel( text, page );
+  label = new TQLabel( text, page );
   hbox->addWidget( label );
  
   text = i18n("(Package folder)"); 
-  mDestination.fileExtraLabel = new QLabel( text, page );
+  mDestination.fileExtraLabel = new TQLabel( text, page );
   hbox->addWidget( mDestination.fileExtraLabel, 10, AlignLeft|AlignVCenter );
 
-  hbox = new QHBoxLayout();
+  hbox = new TQHBoxLayout();
   topLayout->addLayout( hbox );
 
-  mDestination.fileInput = new QLineEdit( page );
+  mDestination.fileInput = new TQLineEdit( page );
   hbox->addWidget( mDestination.fileInput );
-  connect(mDestination.fileInput, SIGNAL(textChanged ( const QString & )),this,SLOT(destinationChanged(const QString &)));
+  connect(mDestination.fileInput, TQT_SIGNAL(textChanged ( const TQString & )),this,TQT_SLOT(destinationChanged(const TQString &)));
   text = i18n("Choose...");
-  QPushButton *browseButton = new QPushButton( text, page, "browse" );
+  TQPushButton *browseButton = new TQPushButton( text, page, "browse" );
   hbox->addWidget( browseButton );
-  connect( browseButton, SIGNAL(clicked()), SLOT(browserClicked()) );
+  connect( browseButton, TQT_SIGNAL(clicked()), TQT_SLOT(browserClicked()) );
   mDestination.fileInput->setMinimumWidth( fontMetrics().maxWidth()*15 );
 
   label->setBuddy(mDestination.fileInput);
 
-  hbox = new QHBoxLayout();
+  hbox = new TQHBoxLayout();
   topLayout->addLayout( hbox, 10 );
 
-  mDestination.rangeBox = new QButtonGroup( i18n("Export Range"), page );
+  mDestination.rangeBox = new TQButtonGroup( i18n("Export Range"), page );
   hbox->addWidget( mDestination.rangeBox );
 
-  QButtonGroup *group = mDestination.rangeBox; // convenience
+  TQButtonGroup *group = mDestination.rangeBox; // convenience
 
-  QVBoxLayout *vbox = new QVBoxLayout( group, spacingHint() );  
+  TQVBoxLayout *vbox = new TQVBoxLayout( group, spacingHint() );  
   vbox->addSpacing( fontMetrics().lineSpacing() );
   
-  QRadioButton *radio1 = new QRadioButton( i18n("&Everything"), group );
+  TQRadioButton *radio1 = new TQRadioButton( i18n("&Everything"), group );
   radio1->setFixedSize( radio1->sizeHint() );
   mDestination.rangeBox->insert( radio1, 0 );
   vbox->addWidget( radio1, 0, AlignLeft );
 
-  QRadioButton *radio2 = new QRadioButton( i18n("&Selection"), group );
+  TQRadioButton *radio2 = new TQRadioButton( i18n("&Selection"), group );
   radio2->setFixedSize( radio2->sizeHint() );
   mDestination.rangeBox->insert( radio2, 1 );
   vbox->addWidget( radio2, 0, AlignLeft );
 
-  QRadioButton *radio3 = new QRadioButton( i18n("&Range"), group );
+  TQRadioButton *radio3 = new TQRadioButton( i18n("&Range"), group );
   radio3->setFixedSize( radio3->sizeHint() );
   mDestination.rangeBox->insert( radio3, 2 );
   vbox->addWidget( radio3, 0, AlignLeft );
 
-  QGridLayout *gbox = new QGridLayout( 2, 2, spacingHint() );
+  TQGridLayout *gbox = new TQGridLayout( 2, 2, spacingHint() );
   vbox->addLayout( gbox );
 
-  mDestination.fromInput = new QLineEdit( group );
+  mDestination.fromInput = new TQLineEdit( group );
   text = i18n("&From offset:");
-  mDestination.fromLabel = new QLabel( mDestination.fromInput, text, group );
+  mDestination.fromLabel = new TQLabel( mDestination.fromInput, text, group );
   gbox->addWidget( mDestination.fromLabel, 0, 0 );
   gbox->addWidget( mDestination.fromInput, 0, 1 );
 
-  mDestination.toInput = new QLineEdit( group );
+  mDestination.toInput = new TQLineEdit( group );
   text = i18n("&To offset:");
-  mDestination.toLabel = new QLabel( mDestination.toInput, text, group );
+  mDestination.toLabel = new TQLabel( mDestination.toInput, text, group );
   gbox->addWidget( mDestination.toLabel, 1, 0 );
   gbox->addWidget( mDestination.toInput, 1, 1 );
 
-  connect( group, SIGNAL(clicked(int)), SLOT(rangeChanged(int)) );
+  connect( group, TQT_SIGNAL(clicked(int)), TQT_SLOT(rangeChanged(int)) );
   group->setButton(0);
   rangeChanged(0);
   enableButtonOK( !mDestination.fileInput->text().isEmpty() );
 }
 
-void CExportDialog::destinationChanged(const QString &_text)
+void CExportDialog::destinationChanged(const TQString &_text)
 {
   enableButtonOK( !_text.isEmpty() );
 }
 
 void CExportDialog::setupOptionPage( void )
 {
-  QFrame *page = mFrame[ page_option ];
-  QVBoxLayout *topLayout = new QVBoxLayout( page, 0, spacingHint() );  
+  TQFrame *page = mFrame[ page_option ];
+  TQVBoxLayout *topLayout = new TQVBoxLayout( page, 0, spacingHint() );  
   if( topLayout == 0 ) { return; }
 
-  mOptionStack = new QWidgetStack( page, "stack" );
+  mOptionStack = new TQWidgetStack( page, "stack" );
   if( mOptionStack == 0 ) { return; }
   topLayout->addWidget( mOptionStack );
 
@@ -264,100 +264,100 @@ void CExportDialog::setupOptionPage( void )
   makeCArrayOption();
   mOptionStack->raiseWidget( (int)option_text );
 
-  QSize size = mOptionStack->sizeHint();
-  size += QSize(spacingHint()*2, spacingHint()*2);
+  TQSize size = mOptionStack->sizeHint();
+  size += TQSize(spacingHint()*2, spacingHint()*2);
   page->setMinimumSize( size ); 
 }
 
 
 void CExportDialog::makeTextOption( void )
 {
-  QFrame *page = new QFrame( mFrame[ page_option ] );
+  TQFrame *page = new TQFrame( mFrame[ page_option ] );
   if( page == 0 ) { return; }
   mOptionStack->addWidget( page, option_text );
 
-  QVBoxLayout *topLayout = new QVBoxLayout( page, 0, spacingHint() );
-  QString text = i18n("No options for this format.");
-  QLabel *label = new QLabel( text, page );
+  TQVBoxLayout *topLayout = new TQVBoxLayout( page, 0, spacingHint() );
+  TQString text = i18n("No options for this format.");
+  TQLabel *label = new TQLabel( text, page );
   topLayout->addWidget( label, 0, AlignCenter );
 }
 
 
 void CExportDialog::makeHtmlOption( void )
 {
-  QFrame *page = new QFrame( mFrame[ page_option ] );
+  TQFrame *page = new TQFrame( mFrame[ page_option ] );
   if( page == 0 ) { return; }
   mOptionStack->addWidget( page, option_html );
 
-  QString text;
-  QVBoxLayout *topLayout = new QVBoxLayout( page, 0, spacingHint() );  
+  TQString text;
+  TQVBoxLayout *topLayout = new TQVBoxLayout( page, 0, spacingHint() );  
   if( topLayout == 0 ) { return; }
 
   text = i18n("HTML Options (one table per page)");
-  QLabel *label = new QLabel( text, page );
+  TQLabel *label = new TQLabel( text, page );
   topLayout->addWidget( label );
 
-  QFrame *hline = new QFrame( page );
-  hline->setFrameStyle( QFrame::Sunken | QFrame::HLine );
+  TQFrame *hline = new TQFrame( page );
+  hline->setFrameStyle( TQFrame::Sunken | TQFrame::HLine );
   topLayout->addWidget( hline );
 
-  QFrame *frame = new QFrame( page );
+  TQFrame *frame = new TQFrame( page );
   if( frame == 0 ) { return; }  
   topLayout->addWidget( frame );
 
-  QGridLayout *gbox = new QGridLayout( frame, 4, 2, 0, spacingHint() );
+  TQGridLayout *gbox = new TQGridLayout( frame, 4, 2, 0, spacingHint() );
   if( gbox == 0 ) { return; }
   gbox->setColStretch( 1, 10 );  
 
-  mHtml.lineSpin = new QSpinBox( frame );
+  mHtml.lineSpin = new TQSpinBox( frame );
   mHtml.lineSpin->setMinimumWidth( fontMetrics().maxWidth()*10 );
   mHtml.lineSpin->setRange( 5, INT_MAX );
   gbox->addWidget( mHtml.lineSpin, 0, 1 );
   
   text = i18n("&Lines per table:");
-  label = new QLabel( mHtml.lineSpin, text, frame );
+  label = new TQLabel( mHtml.lineSpin, text, frame );
   gbox->addWidget( label, 0, 0 );
 
-  mHtml.prefixInput = new QLineEdit( frame, "prefix" );
+  mHtml.prefixInput = new TQLineEdit( frame, "prefix" );
   mHtml.prefixInput->setMinimumWidth( fontMetrics().maxWidth()*10 );
   gbox->addWidget( mHtml.prefixInput, 1, 1 );
 
   text = i18n("Filename &prefix (in package):");
-  label = new QLabel( mHtml.prefixInput, text, frame );
+  label = new TQLabel( mHtml.prefixInput, text, frame );
   gbox->addWidget( label, 1, 0 );
 
-  QStringList headerList;
+  TQStringList headerList;
   headerList.append( i18n("None") );
   headerList.append( i18n("Filename with Path") );
   headerList.append( i18n("Filename") );
   headerList.append( i18n("Page Number") );
 
-  mHtml.topCombo = new QComboBox( false, frame );
+  mHtml.topCombo = new TQComboBox( false, frame );
   mHtml.topCombo->insertStringList( headerList );
   gbox->addWidget( mHtml.topCombo, 2, 1 );
 
   text = i18n("Header &above text:");
-  label = new QLabel( mHtml.topCombo, text, frame );
+  label = new TQLabel( mHtml.topCombo, text, frame );
   gbox->addWidget( label, 2, 0 );
 
-  mHtml.bottomCombo = new QComboBox( false, frame );
+  mHtml.bottomCombo = new TQComboBox( false, frame );
   mHtml.bottomCombo->insertStringList( headerList );
   gbox->addWidget( mHtml.bottomCombo, 3, 1 );
 
   text = i18n("&Footer below text:");
-  label = new QLabel( mHtml.bottomCombo, text, frame );
+  label = new TQLabel( mHtml.bottomCombo, text, frame );
   gbox->addWidget( label, 3, 0 );
 
   text = i18n("Link \"index.html\" to &table of contents file");
-  mHtml.symlinkCheck = new QCheckBox( text, page );
+  mHtml.symlinkCheck = new TQCheckBox( text, page );
   topLayout->addWidget( mHtml.symlinkCheck );
 
   text = i18n("&Include navigator bar");
-  mHtml.navigatorCheck = new QCheckBox( text, page );
+  mHtml.navigatorCheck = new TQCheckBox( text, page );
   topLayout->addWidget( mHtml.navigatorCheck );
 
   text = i18n("&Use black and white only");
-  mHtml.bwCheck = new QCheckBox( text, page );
+  mHtml.bwCheck = new TQCheckBox( text, page );
   topLayout->addWidget( mHtml.bwCheck );
 
   topLayout->addStretch(10);
@@ -366,44 +366,44 @@ void CExportDialog::makeHtmlOption( void )
 
 void CExportDialog::makeRtfOption( void )
 {
-  QFrame *page = new QFrame( mFrame[ page_option ] );
+  TQFrame *page = new TQFrame( mFrame[ page_option ] );
   if( page == 0 ) { return; }
   mOptionStack->addWidget( page, option_rtf );
 
-  QVBoxLayout *topLayout = new QVBoxLayout( page, 0, spacingHint() );
-  QString text = i18n("No options for this format.");
-  QLabel *label = new QLabel( text, page );
+  TQVBoxLayout *topLayout = new TQVBoxLayout( page, 0, spacingHint() );
+  TQString text = i18n("No options for this format.");
+  TQLabel *label = new TQLabel( text, page );
   topLayout->addWidget( label, 0, AlignCenter );
 }
 
 
 void CExportDialog::makeCArrayOption( void )
 {
-  QFrame *page = new QFrame( mFrame[ page_option ] );
+  TQFrame *page = new TQFrame( mFrame[ page_option ] );
   mOptionStack->addWidget( page, option_carray );
 
-  QString text;
-  QVBoxLayout *topLayout = new QVBoxLayout( page, 0, spacingHint() );  
+  TQString text;
+  TQVBoxLayout *topLayout = new TQVBoxLayout( page, 0, spacingHint() );  
 
   text = i18n("C Array Options");
-  QLabel *label = new QLabel( text, page );
+  TQLabel *label = new TQLabel( text, page );
   topLayout->addWidget( label, 0, AlignLeft );
 
-  QFrame *hline = new QFrame( page );
-  hline->setFrameStyle( QFrame::Sunken | QFrame::HLine );
+  TQFrame *hline = new TQFrame( page );
+  hline->setFrameStyle( TQFrame::Sunken | TQFrame::HLine );
   topLayout->addWidget( hline );
 
-  QGridLayout *gbox = new QGridLayout( 3, 2, spacingHint() );
+  TQGridLayout *gbox = new TQGridLayout( 3, 2, spacingHint() );
   topLayout->addLayout( gbox );
   gbox->setColStretch( 1, 10 );
 
-  mArray.nameInput = new QLineEdit( page );
+  mArray.nameInput = new TQLineEdit( page );
   gbox->addWidget( mArray.nameInput, 0, 1 );
   text = i18n("Array name:"); 
-  label = new QLabel( mArray.nameInput, text, page );
+  label = new TQLabel( mArray.nameInput, text, page );
   gbox->addWidget( label, 0, 0 );
 
-  QStringList typeList;
+  TQStringList typeList;
   typeList.append( i18n("char") );
   typeList.append( i18n("unsigned char") );
   typeList.append( i18n("short") );
@@ -412,24 +412,24 @@ void CExportDialog::makeCArrayOption( void )
   typeList.append( i18n("unsigned int") );
   typeList.append( i18n("float") );
   typeList.append( i18n("double") );
-  mArray.typeCombo = new QComboBox( false, page );
+  mArray.typeCombo = new TQComboBox( false, page );
   mArray.typeCombo->insertStringList( typeList );
   mArray.typeCombo->setMinimumWidth( fontMetrics().maxWidth()*10 );
   gbox->addWidget( mArray.typeCombo, 1, 1 );
   text = i18n("Element type:"); 
-  label = new QLabel( mArray.typeCombo, text, page );
+  label = new TQLabel( mArray.typeCombo, text, page );
   gbox->addWidget( label, 1, 0 );
   
-  mArray.lineSizeSpin = new QSpinBox( page );
+  mArray.lineSizeSpin = new TQSpinBox( page );
   mArray.lineSizeSpin->setMinimumWidth( fontMetrics().maxWidth()*10 );
   mArray.lineSizeSpin->setRange( 1, INT_MAX );
   gbox->addWidget( mArray.lineSizeSpin, 2, 1 );
   text = i18n("Elements per line:"); 
-  label = new QLabel( mArray.lineSizeSpin, text, page );
+  label = new TQLabel( mArray.lineSizeSpin, text, page );
   gbox->addWidget( label, 2, 0 );
 
   text = i18n("Print unsigned values as hexadecimal");
-  mArray.hexadecimalCheck = new QCheckBox( text, page );
+  mArray.hexadecimalCheck = new TQCheckBox( text, page );
   topLayout->addWidget( mArray.hexadecimalCheck );
 
   topLayout->addStretch(10);
@@ -459,7 +459,7 @@ void CExportDialog::rangeChanged( int id )
 
 void CExportDialog::browserClicked( void )
 {
-  QString url;
+  TQString url;
   if( mDestination.formatCombo->currentItem() == option_html )
   {
     url = KFileDialog::getExistingDirectory( mWorkDir, topLevelWidget() );
@@ -485,7 +485,7 @@ void CExportDialog::browserClicked( void )
 
 void CExportDialog::slotOk( void )
 {
-  QString path( mDestination.fileInput->text() );
+  TQString path( mDestination.fileInput->text() );
 
   int format = mDestination.formatCombo->currentItem();
   if( format == option_text )
@@ -499,7 +499,7 @@ void CExportDialog::slotOk( void )
     uint mode;
     if( collectRange( mode, e.range.start, e.range.stop ) == false )
     {
-      showEntryFailure( this, QString("") );
+      showEntryFailure( this, TQString("") );
       return;
     }
     e.range.mode = (SExportRange::EMode)mode; // FIXME
@@ -514,25 +514,25 @@ void CExportDialog::slotOk( void )
     uint mode;
     if( collectRange( mode, e.range.start, e.range.stop ) == false )
     {
-      showEntryFailure( this, QString("") );
+      showEntryFailure( this, TQString("") );
       return;
     }
     e.range.mode = (SExportRange::EMode)mode; // FIXME
 
-    const QString str = mHtml.prefixInput->text().stripWhiteSpace();
+    const TQString str = mHtml.prefixInput->text().stripWhiteSpace();
     mHtml.prefixInput->setText( str );
     if( mHtml.prefixInput->text().isEmpty() == true )
     {
       mHtml.prefixInput->setText( "table" );
     }
 
-    const QString prefix = mHtml.prefixInput->text();
+    const TQString prefix = mHtml.prefixInput->text();
     for( uint i=0; i<prefix.length(); i++ )
     {
-      QChar c = prefix[i];
+      TQChar c = prefix[i];
       if( c.isSpace() == true || c.isPunct() == true )
       {
-	QString msg = i18n("The filename prefix can not contain empty letters "
+	TQString msg = i18n("The filename prefix can not contain empty letters "
 	  "or punctuation marks.");
 	KMessageBox::sorry( this, msg, i18n("Export Document") );
 	return;
@@ -558,7 +558,7 @@ void CExportDialog::slotOk( void )
   }
   else if( format == option_rtf )
   {
-    QString msg = i18n("This format is not yet supported.");
+    TQString msg = i18n("This format is not yet supported.");
     KMessageBox::sorry( this, msg );
   }
   else if( format == option_carray )
@@ -572,7 +572,7 @@ void CExportDialog::slotOk( void )
     uint mode;
     if( collectRange( mode, e.range.start, e.range.stop ) == false )
     {
-      showEntryFailure( this, QString("") );
+      showEntryFailure( this, TQString("") );
       return;
     }
     e.range.mode = (SExportRange::EMode)mode; // FIXME
@@ -591,7 +591,7 @@ void CExportDialog::slotOk( void )
 
 bool CExportDialog::collectRange( uint &mode, uint &start, uint &stop )
 {
-  QButton *b = mDestination.rangeBox->selected();
+  TQButton *b = mDestination.rangeBox->selected();
   if( b == 0 )
   {
     return( false );
@@ -629,24 +629,24 @@ bool CExportDialog::collectRange( uint &mode, uint &start, uint &stop )
 // This one will attempt to create a directory if 'path'
 // specifies a nonexistent name.
 //
-bool CExportDialog::verifyPackage( const QString &path )
+bool CExportDialog::verifyPackage( const TQString &path )
 {
-  const QString title = i18n("Export Document");
+  const TQString title = i18n("Export Document");
 
   if( path.isEmpty() == true )
   {
-    QString msg = i18n("You must specify a destination.");
+    TQString msg = i18n("You must specify a destination.");
     KMessageBox::sorry( this, msg, title );
     return( false );
   }
 
-  QFileInfo info( path );
+  TQFileInfo info( path );
   if( info.exists() == false )
   {
-    QDir directory;
+    TQDir directory;
     if( directory.mkdir( path ) == false )
     {
-      QString msg;
+      TQString msg;
       msg += i18n("Unable to create a new folder");
       msg += "\n";
       msg += path;
@@ -658,7 +658,7 @@ bool CExportDialog::verifyPackage( const QString &path )
   {
     if( info.isDir() == false ) 
     {
-      QString msg = i18n("You have specified an existing file");
+      TQString msg = i18n("You have specified an existing file");
       KMessageBox::sorry( this, msg, title );
       return( false );
     }
@@ -666,17 +666,17 @@ bool CExportDialog::verifyPackage( const QString &path )
     {
       if( info.isWritable() == false ) 
       {
-	QString msg = i18n( ""
+	TQString msg = i18n( ""
           "You do not have write permission to this folder.");
 	KMessageBox::sorry( this, msg, title );
 	return( false );
       }
 
-      const QString prefix = mHtml.prefixInput->text();
-      QString f1 = QString("%1%2.html").arg(prefix).arg("00000000");
-      QString f2 = QString("%1%2.html").arg(prefix).arg("99999999");
+      const TQString prefix = mHtml.prefixInput->text();
+      TQString f1 = TQString("%1%2.html").arg(prefix).arg("00000000");
+      TQString f2 = TQString("%1%2.html").arg(prefix).arg("99999999");
 
-      QString msg = i18n( ""
+      TQString msg = i18n( ""
         "You have specified an existing folder.\n"
 	"If you continue, any existing file in the range "
 	"\"%1\" to \"%2\" can be lost.\n"

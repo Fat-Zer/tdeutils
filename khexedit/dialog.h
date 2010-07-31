@@ -26,15 +26,15 @@
 #endif 
 
 
-#include <qcheckbox.h>
-#include <qcombobox.h>
-#include <qdialog.h>
-#include <qlabel.h>
-#include <qlineedit.h>
-#include <qradiobutton.h>
-#include <qspinbox.h>
-#include <qstring.h>
-#include <qwidgetstack.h>
+#include <tqcheckbox.h>
+#include <tqcombobox.h>
+#include <tqdialog.h>
+#include <tqlabel.h>
+#include <tqlineedit.h>
+#include <tqradiobutton.h>
+#include <tqspinbox.h>
+#include <tqstring.h>
+#include <tqwidgetstack.h>
 
 #include <kdialogbase.h>
 
@@ -42,10 +42,10 @@
 #include "hexbuffer.h"
 #include "hexvalidator.h"
 
-const int repYes      = QDialog::Accepted; 
+const int repYes      = TQDialog::Accepted; 
 const int repNo       = 11;
 const int repAll      = 12;
-const int repClose    = QDialog::Rejected; 
+const int repClose    = TQDialog::Rejected; 
 const int repNext     = 13;
 const int repPrevious = 14;
 const int repNewKey   = 15;
@@ -66,11 +66,11 @@ class CGotoDialog : public KDialogBase
   Q_OBJECT
   
   public:
-    CGotoDialog( QWidget *parent, const char *name = 0, bool modal = false );
+    CGotoDialog( TQWidget *parent, const char *name = 0, bool modal = false );
     ~CGotoDialog( void );
 
   protected:
-    virtual void showEvent( QShowEvent *e );
+    virtual void showEvent( TQShowEvent *e );
 
   private slots:
     void slotOk( void );
@@ -79,10 +79,10 @@ class CGotoDialog : public KDialogBase
     void gotoOffset( uint offset, uint bit, bool fromCursor, bool forward );
 
   private:
-    QComboBox *mComboBox;
-    QCheckBox *mCheckBackward;
-    QCheckBox *mCheckFromCursor;
-    QCheckBox *mCheckVisible;
+    TQComboBox *mComboBox;
+    TQCheckBox *mCheckBackward;
+    TQCheckBox *mCheckFromCursor;
+    TQCheckBox *mCheckVisible;
 };
 
 
@@ -100,7 +100,7 @@ class CFindDialog : public KDialogBase
     };
 
   public:
-    CFindDialog( QWidget *parent=0, const char *name=0, bool modal=false );
+    CFindDialog( TQWidget *parent=0, const char *name=0, bool modal=false );
     ~CFindDialog( void );
     bool isEmpty( void );
 
@@ -108,27 +108,27 @@ class CFindDialog : public KDialogBase
     void findAgain( EOperation operation );
 
   protected:
-    virtual void showEvent( QShowEvent *e );
+    virtual void showEvent( TQShowEvent *e );
 
   private slots:
     void slotOk( void );
     void selectorChanged( int index );
-    void inputChanged( const QString &text );
+    void inputChanged( const TQString &text );
 
   signals: 
     void findData( SSearchControl &sc, uint mode, bool navigator );
 
   private:
-    QComboBox *mSelector;
-    QLineEdit *mInput;
-    QCheckBox *mCheckBackward;
-    QCheckBox *mCheckFromCursor;
-    QCheckBox *mCheckInSelection;
-    QCheckBox *mCheckUseNavigator;
-    QCheckBox *mCheckIgnoreCase;
+    TQComboBox *mSelector;
+    TQLineEdit *mInput;
+    TQCheckBox *mCheckBackward;
+    TQCheckBox *mCheckFromCursor;
+    TQCheckBox *mCheckInSelection;
+    TQCheckBox *mCheckUseNavigator;
+    TQCheckBox *mCheckIgnoreCase;
 
-    QString    mFindString[5];
-    QByteArray mFindData;
+    TQString    mFindString[5];
+    TQByteArray mFindData;
     CHexValidator *mFindValidator;
 };
 
@@ -139,7 +139,7 @@ class CFindNavigatorDialog : public KDialogBase
   Q_OBJECT
   
   public:
-    CFindNavigatorDialog( QWidget *parent=0, const char *name=0, 
+    CFindNavigatorDialog( TQWidget *parent=0, const char *name=0, 
 			  bool modal=false );
     ~CFindNavigatorDialog( void );
     void defineData( SSearchControl &sc );
@@ -158,7 +158,7 @@ class CFindNavigatorDialog : public KDialogBase
     void makeKey( void );
 
   private:
-    QLineEdit *mKey;
+    TQLineEdit *mKey;
     SSearchControl mSearchControl;
 };
 
@@ -168,38 +168,38 @@ class CReplaceDialog : public KDialogBase
   Q_OBJECT
   
   public:
-    CReplaceDialog( QWidget *parent=0, const char *name=0, bool modal=false );
+    CReplaceDialog( TQWidget *parent=0, const char *name=0, bool modal=false );
     ~CReplaceDialog( void );
 
   protected:
-    virtual void showEvent( QShowEvent *e );
+    virtual void showEvent( TQShowEvent *e );
 
   private slots:
     void slotOk( void );
     void findSelectorChanged( int index );
-    void findInputChanged( const QString &text );
+    void findInputChanged( const TQString &text );
     void replaceSelectorChanged( int index );
-    void replaceInputChanged( const QString &text );
+    void replaceInputChanged( const TQString &text );
 
   signals:
     void replaceData( SSearchControl &sc, uint mode );
 
   private:
-    QComboBox *mFindSelector;
-    QComboBox *mReplaceSelector;
-    QLineEdit *mFindInput;
-    QLineEdit *mReplaceInput;
+    TQComboBox *mFindSelector;
+    TQComboBox *mReplaceSelector;
+    TQLineEdit *mFindInput;
+    TQLineEdit *mReplaceInput;
 
-    QCheckBox *mCheckBackward;
-    QCheckBox *mCheckFromCursor;
-    QCheckBox *mCheckInSelection;
-    QCheckBox *mCheckPrompt;
-    QCheckBox *mCheckIgnoreCase;
+    TQCheckBox *mCheckBackward;
+    TQCheckBox *mCheckFromCursor;
+    TQCheckBox *mCheckInSelection;
+    TQCheckBox *mCheckPrompt;
+    TQCheckBox *mCheckIgnoreCase;
 
-    QString    mFindString[5];
-    QString    mReplaceString[5];
-    QByteArray mFindData;
-    QByteArray mReplaceData;
+    TQString    mFindString[5];
+    TQString    mReplaceString[5];
+    TQByteArray mFindData;
+    TQByteArray mReplaceData;
     CHexValidator *mFindValidator;
     CHexValidator *mReplaceValidator;
 };
@@ -211,7 +211,7 @@ class CReplacePromptDialog : public KDialogBase
   Q_OBJECT
   
   public:
-    CReplacePromptDialog( QWidget *parent=0, const char *name=0, 
+    CReplacePromptDialog( TQWidget *parent=0, const char *name=0, 
 			  bool modal=false );
     ~CReplacePromptDialog( void );
     void defineData( SSearchControl &sc );
@@ -249,11 +249,11 @@ class CFilterDialog : public KDialogBase
     };
 
   public:
-    CFilterDialog( QWidget *parent=0, const char *name=0, bool modal=false );
+    CFilterDialog( TQWidget *parent=0, const char *name=0, bool modal=false );
     ~CFilterDialog( void );
 
   protected:
-    virtual void showEvent( QShowEvent *e );
+    virtual void showEvent( TQShowEvent *e );
 
   private:
     void makeEmptyLayout( void );
@@ -264,30 +264,30 @@ class CFilterDialog : public KDialogBase
   private slots:
     void slotOk( void );
     void operandSelectorChanged( int index );
-    void operandInputChanged( const QString &text );
+    void operandInputChanged( const TQString &text );
     void operationSelectorChanged( int index );
 
   signals:
     void filterData( SFilterControl &fc );
 
   private:
-    QWidgetStack *mWidgetStack;
-    QLabel    *mOperandFormatLabel;
-    QLabel    *mOperandInputLabel;
-    QComboBox *mOperandSelector;
-    QLineEdit *mOperandInput;
-    QComboBox *mOperationSelector;
-    QSpinBox  *mGroupSpin;
-    QSpinBox  *mBitSpin;
+    TQWidgetStack *mWidgetStack;
+    TQLabel    *mOperandFormatLabel;
+    TQLabel    *mOperandInputLabel;
+    TQComboBox *mOperandSelector;
+    TQLineEdit *mOperandInput;
+    TQComboBox *mOperationSelector;
+    TQSpinBox  *mGroupSpin;
+    TQSpinBox  *mBitSpin;
     CByteWidget *mByteWidget;
 
-    QCheckBox *mCheckBackward;
-    QCheckBox *mCheckFromCursor;
-    QCheckBox *mCheckInSelection;
-    QCheckBox *mCheckVisible;
+    TQCheckBox *mCheckBackward;
+    TQCheckBox *mCheckFromCursor;
+    TQCheckBox *mCheckInSelection;
+    TQCheckBox *mCheckVisible;
 
-    QString    mOperandString[5];
-    QByteArray mOperandData;
+    TQString    mOperandString[5];
+    TQByteArray mOperandData;
     CHexValidator *mOperandValidator;
 };
 
@@ -299,46 +299,46 @@ class CInsertDialog : public KDialogBase
   Q_OBJECT
   
   public:
-    CInsertDialog( QWidget *parent=0, const char *name=0, bool modal=false );
+    CInsertDialog( TQWidget *parent=0, const char *name=0, bool modal=false );
     ~CInsertDialog( void );
 
   protected:
-    virtual void showEvent( QShowEvent *e );
+    virtual void showEvent( TQShowEvent *e );
 
   private slots:
     void slotOk( void );
     void cursorCheck( void );
     void patternSelectorChanged( int index );
-    void patternInputChanged( const QString &text );
+    void patternInputChanged( const TQString &text );
 
   signals:
     void execute( SInsertData &id );
 
   private:
-    QSpinBox *mSizeBox;
-    QLabel *mOffsetLabel;
-    QComboBox *mPatternSelector;
-    QLineEdit *mPatternInput;
-    QLineEdit *mOffsetInput;
-    QCheckBox *mCheckPattern;
-    QCheckBox *mCheckOnCursor;
+    TQSpinBox *mSizeBox;
+    TQLabel *mOffsetLabel;
+    TQComboBox *mPatternSelector;
+    TQLineEdit *mPatternInput;
+    TQLineEdit *mOffsetInput;
+    TQCheckBox *mCheckPattern;
+    TQCheckBox *mCheckOnCursor;
 
-    QString    mPatternString[5];
-    QByteArray mPatternData;
+    TQString    mPatternString[5];
+    TQByteArray mPatternData;
     CHexValidator *mPatternValidator;
 };
 
 
 
 
-void centerDialog( QWidget *widget, QWidget *centerParent );
-void centerDialogBottom( QWidget *widget, QWidget *centerParent );
-void comboMatchText( QComboBox *combo, const QString &text );
-bool stringToOffset( const QString & text, uint &offset );
+void centerDialog( TQWidget *widget, TQWidget *centerParent );
+void centerDialogBottom( TQWidget *widget, TQWidget *centerParent );
+void comboMatchText( TQComboBox *combo, const TQString &text );
+bool stringToOffset( const TQString & text, uint &offset );
 
-void showEntryFailure( QWidget *parent, const QString &msg );
-bool verifyFileDestnation( QWidget *parent, const QString &title, 
-			   const QString &path );
+void showEntryFailure( TQWidget *parent, const TQString &msg );
+bool verifyFileDestnation( TQWidget *parent, const TQString &title, 
+			   const TQString &path );
 
 
 

@@ -45,18 +45,18 @@ class CColorListBox : public KListBox
   Q_OBJECT
 
   public:
-    CColorListBox( QWidget *parent=0, const char * name=0, WFlags f=0 );
-    void setColor( uint index, const QColor &color );
-    const QColor color( uint index );
+    CColorListBox( TQWidget *parent=0, const char * name=0, WFlags f=0 );
+    void setColor( uint index, const TQColor &color );
+    const TQColor color( uint index );
 
   public slots:
     virtual void setEnabled( bool state );
 
   protected:
-    void dragEnterEvent( QDragEnterEvent *e );
-    void dragLeaveEvent( QDragLeaveEvent *e );
-    void dragMoveEvent( QDragMoveEvent *e );
-    void dropEvent( QDropEvent *e );
+    void dragEnterEvent( TQDragEnterEvent *e );
+    void dragLeaveEvent( TQDragLeaveEvent *e );
+    void dragMoveEvent( TQDragMoveEvent *e );
+    void dropEvent( TQDropEvent *e );
 
   private slots:
     void newColor( int index );
@@ -72,17 +72,17 @@ class CColorListBox : public KListBox
 class CColorListItem : public QListBoxItem
 {
   public:
-    CColorListItem( const QString &text, const QColor &color=Qt::black );
-    const QColor &color( void );
-    void  setColor( const QColor &color );
+    CColorListItem( const TQString &text, const TQColor &color=Qt::black );
+    const TQColor &color( void );
+    void  setColor( const TQColor &color );
   
   protected:
-    virtual void paint( QPainter * );
-    virtual int height( const QListBox * ) const;
-    virtual int width( const QListBox * ) const;
+    virtual void paint( TQPainter * );
+    virtual int height( const TQListBox * ) const;
+    virtual int width( const TQListBox * ) const;
 
   private:
-    QColor mColor;
+    TQColor mColor;
     int mBoxWidth;
 };
 
@@ -105,7 +105,7 @@ class COptionDialog : public KDialogBase
       page_max
     };
 
-    COptionDialog( QWidget *parent = 0, char *name = 0, bool modal = false );
+    COptionDialog( TQWidget *parent = 0, char *name = 0, bool modal = false );
     ~COptionDialog( void );
 
     void setLayout( SDisplayLayout &layout, SDisplayLine &line );
@@ -117,7 +117,7 @@ class COptionDialog : public KDialogBase
     void setState( SDisplayState &state );
 
   protected:  
-    virtual void showEvent( QShowEvent *e );
+    virtual void showEvent( TQShowEvent *e );
 
   protected slots:
     void slotModeSelectorChanged( int index );
@@ -138,33 +138,33 @@ class COptionDialog : public KDialogBase
   private:
     struct SLayoutWidgets
     {
-      QComboBox *formatCombo;
-      QSpinBox  *lineSizeSpin;
-      QSpinBox  *columnSizeSpin;
-      QCheckBox *lockLineCheck;
-      QCheckBox *lockColumnCheck;
-      QCheckBox *columnCheck;
-      QComboBox *gridCombo;
-      QLabel    *leftSepLabel;
-      QLabel    *rightSepLabel;
-      QSpinBox  *leftSepWidthSpin;
-      QSpinBox  *rightSepWidthSpin;
-      QSpinBox  *separatorSpin;
-      QSpinBox  *edgeSpin;
-      QLabel    *columnSepLabel;
-      QSpinBox  *columnSepSpin;
+      TQComboBox *formatCombo;
+      TQSpinBox  *lineSizeSpin;
+      TQSpinBox  *columnSizeSpin;
+      TQCheckBox *lockLineCheck;
+      TQCheckBox *lockColumnCheck;
+      TQCheckBox *columnCheck;
+      TQComboBox *gridCombo;
+      TQLabel    *leftSepLabel;
+      TQLabel    *rightSepLabel;
+      TQSpinBox  *leftSepWidthSpin;
+      TQSpinBox  *rightSepWidthSpin;
+      TQSpinBox  *separatorSpin;
+      TQSpinBox  *edgeSpin;
+      TQLabel    *columnSepLabel;
+      TQSpinBox  *columnSepSpin;
 
     };
     struct SCursorWidgets 
     {
-      QCheckBox *blinkCheck;
-      QSpinBox  *blinkSpin;
-      QLabel    *blinkLabel;  
-      QCheckBox *blockCheck;
-      QCheckBox *thickCheck;
-      QRadioButton *stopRadio;
-      QRadioButton *hideRadio;
-      QRadioButton *nothingRadio;
+      TQCheckBox *blinkCheck;
+      TQSpinBox  *blinkSpin;
+      TQLabel    *blinkLabel;  
+      TQCheckBox *blockCheck;
+      TQCheckBox *thickCheck;
+      TQRadioButton *stopRadio;
+      TQRadioButton *hideRadio;
+      TQRadioButton *nothingRadio;
     };
     struct SColorWidgets
     {
@@ -190,38 +190,38 @@ class COptionDialog : public KDialogBase
 	MAX_COLOR
       };
 
-      QCheckBox     *checkSystem;
+      TQCheckBox     *checkSystem;
       CColorListBox *colorList; 
     };
     struct SFontWidgets
     {
-      QCheckBox    *checkSystem;
+      TQCheckBox    *checkSystem;
       KFontChooser *chooser;
-      QLineEdit    *nonPrintInput;
+      TQLineEdit    *nonPrintInput;
     };
     struct SFileWidgets
     {
-      QComboBox *openCombo;
-      QCheckBox *gotoOffsetCheck;
-      QCheckBox *reloadOffsetCheck;
-      QCheckBox *writeProtectCheck;
-      QCheckBox *backupCheck;
-      QCheckBox *discardRecentCheck;
+      TQComboBox *openCombo;
+      TQCheckBox *gotoOffsetCheck;
+      TQCheckBox *reloadOffsetCheck;
+      TQCheckBox *writeProtectCheck;
+      TQCheckBox *backupCheck;
+      TQCheckBox *discardRecentCheck;
     };
     struct SMiscWidgets
     {
-      QSpinBox  *undoSpin;
-      QCheckBox *inputCheck;
-      QCheckBox *fatalCheck;
-      QCheckBox *autoCheck;
-      QCheckBox *insertCheck;
-      QCheckBox *confirmWrapCheck;
-      QCheckBox *cursorJumpCheck;
-      QCheckBox *thresholdCheck;
-      QCheckBox *bookmarkColumnCheck;
-      QCheckBox *bookmarkEditorCheck;
-      QLabel    *thresholdLabel;
-      QSpinBox  *thresholdSpin;
+      TQSpinBox  *undoSpin;
+      TQCheckBox *inputCheck;
+      TQCheckBox *fatalCheck;
+      TQCheckBox *autoCheck;
+      TQCheckBox *insertCheck;
+      TQCheckBox *confirmWrapCheck;
+      TQCheckBox *cursorJumpCheck;
+      TQCheckBox *thresholdCheck;
+      TQCheckBox *bookmarkColumnCheck;
+      TQCheckBox *bookmarkEditorCheck;
+      TQLabel    *thresholdLabel;
+      TQSpinBox  *thresholdSpin;
     };
 
   private:

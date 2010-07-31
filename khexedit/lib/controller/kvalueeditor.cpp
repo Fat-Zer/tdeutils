@@ -16,7 +16,7 @@
 
 
 // qt specific
-#include <qevent.h>
+#include <tqevent.h>
 // lib specific
 #include "kvaluecolumn.h"
 #include "kbufferranges.h"
@@ -36,7 +36,7 @@ KValueEditor::KValueEditor( KValueColumn *VC, KBufferCursor *BC, KHexEdit* HE, K
 }
 
 
-bool KValueEditor::handleKeyPress( QKeyEvent *KeyEvent )
+bool KValueEditor::handleKeyPress( TQKeyEvent *KeyEvent )
 {
   bool KeyUsed = true;
 
@@ -79,7 +79,7 @@ bool KValueEditor::handleKeyPress( QKeyEvent *KeyEvent )
         if( KeyEvent->text().length() > 0
             && ( !(KeyEvent->state()&( Qt::ControlButton | Qt::AltButton | Qt::MetaButton )) ) )
         {
-          QChar C = KeyEvent->text()[0];
+          TQChar C = KeyEvent->text()[0];
           // no usable char?
           if( !C.isLetterOrNumber() )
           {

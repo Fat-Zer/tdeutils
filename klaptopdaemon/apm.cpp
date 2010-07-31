@@ -41,32 +41,32 @@
 #include <kprocess.h>
 
 // other Qt headers:
-#include <qlayout.h>
-#include <qlabel.h>
-#include <qcheckbox.h>
-#include <qhbox.h>
-#include <qvgroupbox.h>
-#include <qgrid.h>
-#include <qpushbutton.h>
-#include <qtooltip.h>
+#include <tqlayout.h>
+#include <tqlabel.h>
+#include <tqcheckbox.h>
+#include <tqhbox.h>
+#include <tqvgroupbox.h>
+#include <tqgrid.h>
+#include <tqpushbutton.h>
+#include <tqtooltip.h>
 extern void wake_laptop_daemon();
 
-ApmConfig::ApmConfig (QWidget * parent, const char *name)
+ApmConfig::ApmConfig (TQWidget * parent, const char *name)
   : KCModule(parent, name)
 {
     KGlobal::locale()->insertCatalogue("klaptopdaemon"); // For translation of klaptopdaemon messages
 
     config =  new KConfig("kcmlaptoprc");
 
-    QVBoxLayout *top_layout = new QVBoxLayout( this, KDialog::marginHint(),
+    TQVBoxLayout *top_layout = new TQVBoxLayout( this, KDialog::marginHint(),
 					       KDialog::spacingHint() );
 
-    QLabel *tmp_label = new QLabel( i18n("This panel lets you configure your APM system and lets "
+    TQLabel *tmp_label = new TQLabel( i18n("This panel lets you configure your APM system and lets "
 					"you have access to some of the extra features provided by it"), this );
     tmp_label->setAlignment( Qt::WordBreak );
     top_layout->addWidget( tmp_label );
     
-    tmp_label = new QLabel( i18n("NOTE: some APM implementations have buggy suspend/standby "
+    tmp_label = new TQLabel( i18n("NOTE: some APM implementations have buggy suspend/standby "
 				"implementations. You should test these features very gingerly - save "
 				"all your work, check them on and try a suspend/standby from "
 				"the popup menu on the battery icon in the panel if it fails to come "
@@ -74,28 +74,28 @@ ApmConfig::ApmConfig (QWidget * parent, const char *name)
     tmp_label->setAlignment( Qt::WordBreak );
     top_layout->addWidget( tmp_label );
 
-    tmp_label = new QLabel( i18n("Some changes made on this page may require you to quit the laptop panel "
+    tmp_label = new TQLabel( i18n("Some changes made on this page may require you to quit the laptop panel "
 				"and start it again to take effect"), this );
     tmp_label->setAlignment( Qt::WordBreak );
     top_layout->addWidget( tmp_label );
 
     bool can_enable = laptop_portable::has_apm(1);	// is helper ready
-    enableStandby = new QCheckBox( i18n("Enable standby"), this );
+    enableStandby = new TQCheckBox( i18n("Enable standby"), this );
     top_layout->addWidget( enableStandby );
-    QToolTip::add( enableStandby, i18n( "If checked this box enables transitions to the 'standby' state - a temporary powered down state" ) );
+    TQToolTip::add( enableStandby, i18n( "If checked this box enables transitions to the 'standby' state - a temporary powered down state" ) );
     enableStandby->setEnabled(can_enable);
-    connect( enableStandby, SIGNAL(clicked()), this, SLOT(configChanged()) );
+    connect( enableStandby, TQT_SIGNAL(clicked()), this, TQT_SLOT(configChanged()) );
 
-    enableSuspend = new QCheckBox( i18n("Enable &suspend"), this );
+    enableSuspend = new TQCheckBox( i18n("Enable &suspend"), this );
     top_layout->addWidget( enableSuspend );
-    QToolTip::add( enableSuspend, i18n( "If checked this box enables transitions to the 'suspend' state - a semi-powered down state, sometimes called 'suspend-to-ram'" ) );
+    TQToolTip::add( enableSuspend, i18n( "If checked this box enables transitions to the 'suspend' state - a semi-powered down state, sometimes called 'suspend-to-ram'" ) );
     enableSuspend->setEnabled(can_enable);
-    connect( enableSuspend, SIGNAL(clicked()), this, SLOT(configChanged()) );
+    connect( enableSuspend, TQT_SIGNAL(clicked()), this, TQT_SLOT(configChanged()) );
     apm_name = "/usr/bin/apm";
     if (::access(apm_name, F_OK) != 0 && ::access("/usr/sbin/apm", F_OK) == 0) 
 	    apm_name = "/usr/sbin/apm";
 
-    tmp_label = new QLabel(i18n("If the above boxes are disabled then there is no 'helper' "
+    tmp_label = new TQLabel(i18n("If the above boxes are disabled then there is no 'helper' "
 				"application set up to help change APM states, there are two "
 				"ways you can enable this application, either make the file "
 				"/proc/apm writeable by anyone every time your system boots "
@@ -103,35 +103,35 @@ ApmConfig::ApmConfig (QWidget * parent, const char *name)
 				"set-uid root").arg(apm_name), this );
     tmp_label->setAlignment( Qt::WordBreak );
     top_layout->addWidget( tmp_label );
-    QHBoxLayout *ll = new QHBoxLayout(top_layout);
-    QPushButton *setupButton = new QPushButton(i18n("Setup Helper Application"), this);
-    connect( setupButton, SIGNAL(clicked()), this, SLOT(setupHelper()) );
-    QToolTip::add( setupButton, i18n( "This button can be used to enable the APM helper application" ) );
+    TQHBoxLayout *ll = new TQHBoxLayout(top_layout);
+    TQPushButton *setupButton = new TQPushButton(i18n("Setup Helper Application"), this);
+    connect( setupButton, TQT_SIGNAL(clicked()), this, TQT_SLOT(setupHelper()) );
+    TQToolTip::add( setupButton, i18n( "This button can be used to enable the APM helper application" ) );
     ll->addStretch(2);
     ll->addWidget(setupButton);
     ll->addStretch(8);
     if (laptop_portable::has_software_suspend()) {
-	tmp_label = new QLabel( i18n("Your system seems to have 'Software Suspend' installed, this can "
+	tmp_label = new TQLabel( i18n("Your system seems to have 'Software Suspend' installed, this can "
 				"be used to hibernate or 'suspend to disk' your system if you want "
 				"to use this for hibernation check the box below"), this );
 	tmp_label->setAlignment( Qt::WordBreak );
 	top_layout->addWidget( tmp_label );
-     	enableSoftwareSuspendHibernate = new QCheckBox( i18n("Enable software suspend for hibernate"), this );
+     	enableSoftwareSuspendHibernate = new TQCheckBox( i18n("Enable software suspend for hibernate"), this );
     	top_layout->addWidget( enableSoftwareSuspendHibernate );
-    	QToolTip::add( enableSoftwareSuspendHibernate, i18n( "If checked this box enables transitions to the 'hibernate' state using the 'Software Suspend' mechanism" ) );
+    	TQToolTip::add( enableSoftwareSuspendHibernate, i18n( "If checked this box enables transitions to the 'hibernate' state using the 'Software Suspend' mechanism" ) );
     	enableSoftwareSuspendHibernate->setEnabled(laptop_portable::has_software_suspend(2));
-    	connect( enableSoftwareSuspendHibernate, SIGNAL(clicked()), this, SLOT(configChanged()) );
-	tmp_label = new QLabel( i18n("If the above box is disabled then you need to be logged in "
+    	connect( enableSoftwareSuspendHibernate, TQT_SIGNAL(clicked()), this, TQT_SLOT(configChanged()) );
+	tmp_label = new TQLabel( i18n("If the above box is disabled then you need to be logged in "
 				"as root or need a helper application to invoke the Software "
 				"Suspend utility - KDE provides a utility to do this, if you "
 				"wish to use it you must make it set-uid root, the button "
 				"below will do this for you"), this );
 	tmp_label->setAlignment( Qt::WordBreak );
 	top_layout->addWidget( tmp_label );
-        ll = new QHBoxLayout(this);
-        QPushButton *setupSSButton = new QPushButton(i18n("Setup SS Helper Application"), this);
-        connect( setupSSButton, SIGNAL(clicked()), this, SLOT(setupHelper2()) );
-        QToolTip::add( setupSSButton, i18n( "This button can be used to enable the Software Suspend helper application" ) );
+        ll = new TQHBoxLayout(this);
+        TQPushButton *setupSSButton = new TQPushButton(i18n("Setup SS Helper Application"), this);
+        connect( setupSSButton, TQT_SIGNAL(clicked()), this, TQT_SLOT(setupHelper2()) );
+        TQToolTip::add( setupSSButton, i18n( "This button can be used to enable the Software Suspend helper application" ) );
         ll->addStretch(2);
         ll->addWidget(setupSSButton);
         ll->addStretch(8);
@@ -141,7 +141,7 @@ ApmConfig::ApmConfig (QWidget * parent, const char *name)
 
 
     top_layout->addStretch(1);
-    top_layout->addWidget( new QLabel( i18n("Version: %1").arg(LAPTOP_VERSION), this), 0, Qt::AlignRight );
+    top_layout->addWidget( new TQLabel( i18n("Version: %1").arg(LAPTOP_VERSION), this), 0, Qt::AlignRight );
 
 
     load();      
@@ -154,7 +154,7 @@ ApmConfig::~ApmConfig()
 
 void ApmConfig::setupHelper()
 {
-	QString kdesu = KStandardDirs::findExe("kdesu");
+	TQString kdesu = KStandardDirs::findExe("kdesu");
 	if (!kdesu.isEmpty()) {
 		int rc = KMessageBox::warningContinueCancel(0,
 				i18n("You will need to supply a root password "
@@ -166,11 +166,11 @@ void ApmConfig::setupHelper()
 			proc << kdesu;
 			proc << "-u";
 			proc << "root";
-			proc <<  QString("dpkg-statoverride --update --add root root 6755 ")+apm_name;
+			proc <<  TQString("dpkg-statoverride --update --add root root 6755 ")+apm_name;
 			proc.start(KProcess::Block);	// run it sync so has_apm below sees the results
 		}
 	} else {
-		KMessageBox::sorry(0, i18n("%1 cannot be enabled because kdesu cannot be found.  Please make sure that it is installed correctly.").arg(QString(apm_name)),
+		KMessageBox::sorry(0, i18n("%1 cannot be enabled because kdesu cannot be found.  Please make sure that it is installed correctly.").arg(TQString(apm_name)),
 				i18n("KLaptopDaemon"));
 	}
 	laptop_portable::apm_set_mask(enablestandby, enablesuspend);
@@ -185,10 +185,10 @@ void ApmConfig::setupHelper()
 void ApmConfig::setupHelper2()	// we use the acpi helper to do software suspend
 {
 	unsigned long len, crc;
-	QString helper = KStandardDirs::findExe("klaptop_acpi_helper");
+	TQString helper = KStandardDirs::findExe("klaptop_acpi_helper");
 	checkcrc(helper.latin1(), len, crc);
 
-	QString kdesu = KStandardDirs::findExe("kdesu");
+	TQString kdesu = KStandardDirs::findExe("kdesu");
 	if (!kdesu.isEmpty()) {
 		int rc = KMessageBox::warningContinueCancel(0,
 				i18n("You will need to supply a root password "
@@ -266,7 +266,7 @@ void ApmConfig::configChanged()
 }
 
 
-QString ApmConfig::quickHelp() const
+TQString ApmConfig::quickHelp() const
 {
   return i18n("<h1>APM Setup</h1>This module allows you to configure APM for your system");
 }

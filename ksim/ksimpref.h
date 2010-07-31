@@ -41,29 +41,29 @@ namespace KSim
   {
     public:
       ChangedPlugin() : m_name(0) {}
-      ChangedPlugin(bool enabled, const QCString &libname,
-          const QString &name, const QString &file) : m_enabled(enabled),
+      ChangedPlugin(bool enabled, const TQCString &libname,
+          const TQString &name, const TQString &file) : m_enabled(enabled),
           m_libname(libname), m_name(name), m_file(file) {}
-      ChangedPlugin(bool enabled, const QCString &libname,
-          const QString &name, const QString &file, bool oldState)
+      ChangedPlugin(bool enabled, const TQCString &libname,
+          const TQString &name, const TQString &file, bool oldState)
           : m_enabled(enabled), m_libname(libname), m_name(name),
           m_file(file), m_oldState(oldState) {}
 
       bool isEnabled() const { return m_enabled; }
       bool isDifferent() const { return m_enabled != m_oldState; }
-      const QCString &libName() const { return m_libname; }
-      const QString &name() const { return m_name; }
-      const QString &filename() const { return m_file; }
+      const TQCString &libName() const { return m_libname; }
+      const TQString &name() const { return m_name; }
+      const TQString &filename() const { return m_file; }
 
     private:
      bool m_enabled;
-     QCString m_libname;
-     QString m_name;
-     QString m_file;
+     TQCString m_libname;
+     TQString m_name;
+     TQString m_file;
      bool m_oldState;
   };
 
-  class ChangedPluginList : public QValueList<ChangedPlugin>
+  class ChangedPluginList : public TQValueList<ChangedPlugin>
   {
     public:
       ChangedPluginList() {}
@@ -74,12 +74,12 @@ namespace KSim
   {
     Q_OBJECT
     public:
-      ConfigDialog(KSim::Config *config, QWidget *parent, const char *name = 0);
+      ConfigDialog(KSim::Config *config, TQWidget *parent, const char *name = 0);
       ~ConfigDialog();
 
     public slots:
-      void removePage(const QCString &name);
-      void createPage(const QCString &name); // overload
+      void removePage(const TQCString &name);
+      void createPage(const TQCString &name); // overload
       void createPage(const KSim::Plugin &plugin);
 
     signals:
@@ -96,7 +96,7 @@ namespace KSim
       void disableButtons();
 
     private:
-      const KSim::ChangedPlugin &findPlugin(const QString &name) const;
+      const KSim::ChangedPlugin &findPlugin(const TQString &name) const;
 
       ChangedPluginList m_currentPlugins;
       KSim::MonitorPrefs *m_monPage;

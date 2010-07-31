@@ -19,15 +19,15 @@
 #ifndef UTIL_H
 #define UTIL_H
 
-#include <qpixmap.h>
-#include <qiconset.h>
+#include <tqpixmap.h>
+#include <tqiconset.h>
 
 class Util
 {
 public:
-    static QPixmap getKRegExpEditorIcon( const QString& name );
-    static QPixmap getSystemIcon( const QString& name );
-    static QIconSet getSystemIconSet( const QString& name );
+    static TQPixmap getKRegExpEditorIcon( const TQString& name );
+    static TQPixmap getSystemIcon( const TQString& name );
+    static TQIconSet getSystemIconSet( const TQString& name );
 };
 
 #endif // UTIL_H

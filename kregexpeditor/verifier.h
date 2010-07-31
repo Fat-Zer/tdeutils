@@ -17,7 +17,7 @@
  **/
 #ifndef VERIFIER_H
 #define VERIFIER_H
-#include <qtextedit.h>
+#include <tqtextedit.h>
 #include "regexphighlighter.h"
 class QTimer;
 class QProgressDialog;
@@ -27,11 +27,11 @@ class Verifier :public QTextEdit
 {
 Q_OBJECT
 public:
-    Verifier( QWidget* parent, const char* name = 0 );
+    Verifier( TQWidget* parent, const char* name = 0 );
     void setHighlighter( RegexpHighlighter* );
 
 public slots:
-    void verify( const QString& regexp );
+    void verify( const TQString& regexp );
     void clearRegexp();
     void setCaseSensitive( bool );
     void setMinimal( bool );

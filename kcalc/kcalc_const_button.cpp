@@ -19,7 +19,7 @@
 
 */
 
-#include <qstring.h>
+#include <tqstring.h>
 
 
 #include <kcmenumngr.h>
@@ -31,7 +31,7 @@
 #include "kcalc_settings.h"
 
 
-KCalcConstButton::KCalcConstButton(QWidget *parent, int but_num, const char * name)
+KCalcConstButton::KCalcConstButton(TQWidget *parent, int but_num, const char * name)
   : KCalcButton(parent, name), _button_num(but_num)
 {
   addMode(ModeInverse, "Store", i18n("Write display data into memory"));
@@ -40,8 +40,8 @@ KCalcConstButton::KCalcConstButton(QWidget *parent, int but_num, const char * na
 }
 
 
-KCalcConstButton::KCalcConstButton(const QString &label, QWidget *parent, int but_num,
-                                   const char * name, const QString &tooltip)
+KCalcConstButton::KCalcConstButton(const TQString &label, TQWidget *parent, int but_num,
+                                   const char * name, const TQString &tooltip)
   : KCalcButton(label, parent, name, tooltip), _button_num(but_num)
 {
   addMode(ModeInverse, "Store", i18n("Write display data into memory"));
@@ -49,15 +49,15 @@ KCalcConstButton::KCalcConstButton(const QString &label, QWidget *parent, int bu
   initPopupMenu();
 }
 
-QString KCalcConstButton::constant(void) const
+TQString KCalcConstButton::constant(void) const
 {
   return KCalcSettings::valueConstant(_button_num);
 }
 
 void KCalcConstButton::setLabelAndTooltip(void)
 {
-  QString new_label = QString("C") + QString().setNum(_button_num + 1);
-  QString new_tooltip;
+  TQString new_label = TQString("C") + TQString().setNum(_button_num + 1);
+  TQString new_tooltip;
   
   new_label = (KCalcSettings::nameConstant(_button_num).isNull() ? new_label : KCalcSettings::nameConstant(_button_num));
   
@@ -74,8 +74,8 @@ void KCalcConstButton::initPopupMenu(void)
   _popup->insertItem(i18n("Set Name"), 0);
   _popup->insertItem(i18n("Choose From List"), tmp_menu, 1);
   
-  connect(_popup, SIGNAL(activated(int)), SLOT(slotConfigureButton(int)));
-  connect(tmp_menu, SIGNAL(activated(int)), SLOT(slotChooseScientificConst(int)));
+  connect(_popup, TQT_SIGNAL(activated(int)), TQT_SLOT(slotConfigureButton(int)));
+  connect(tmp_menu, TQT_SIGNAL(activated(int)), TQT_SLOT(slotChooseScientificConst(int)));
 
   KContextMenuManager::insert(this, _popup);
 }
@@ -85,7 +85,7 @@ void KCalcConstButton::slotConfigureButton(int option)
   if (option == 0)
     {
       bool yes_no;
-      QString input = KInputDialog::text(i18n("New Name for Constant"), i18n("New name:"),
+      TQString input = KInputDialog::text(i18n("New Name for Constant"), i18n("New name:"),
 					 text(), &yes_no, this, "nameUserConstants-Dialog");
       if(yes_no) {
 	KCalcSettings::setNameConstant(_button_num, input);

@@ -23,14 +23,14 @@
 #ifndef _DEFAULTSKIN_H_
 #define _DEFAULTSKIN_H_
 
-#include <qstring.h>
-#include <qobject.h>
-#include <qtimer.h>
+#include <tqstring.h>
+#include <tqobject.h>
+#include <tqtimer.h>
 #include "displayskin.h"
 
 class DefaultWidget;
 
-class DefaultSkin : public QObject, public KMilo::DisplaySkin {
+class DefaultSkin : public TQObject, public KMilo::DisplaySkin {
 	Q_OBJECT
 	public:
 		DefaultSkin();
@@ -39,9 +39,9 @@ class DefaultSkin : public QObject, public KMilo::DisplaySkin {
 		virtual void clear();
 		virtual void reconfigure( KConfig *config );
 
-		virtual void displayText(const QString& text, const QPixmap& customPixmap=QPixmap());
-		virtual void displayProgress(const QString& text,
-						int percent, const QPixmap& customPixmap=QPixmap());
+		virtual void displayText(const TQString& text, const TQPixmap& customPixmap=TQPixmap());
+		virtual void displayProgress(const TQString& text,
+						int percent, const TQPixmap& customPixmap=TQPixmap());
 
 	private slots:
 		void timeout();
@@ -50,7 +50,7 @@ class DefaultSkin : public QObject, public KMilo::DisplaySkin {
 		void show();
 
 		DefaultWidget *_widget;
-		QTimer _timer;
+		TQTimer _timer;
 };
 
 

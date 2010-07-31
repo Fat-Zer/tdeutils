@@ -17,8 +17,8 @@
  **/
 #ifndef __USERDEFINEDREGEXPS_H
 #define __USERDEFINEDREGEXPS_H
-#include <qdockwindow.h>
-#include <qlistview.h>
+#include <tqdockwindow.h>
+#include <tqlistview.h>
 
 #include "compoundregexp.h"
 
@@ -30,43 +30,43 @@ class UserDefinedRegExps :public QDockWindow
 Q_OBJECT
 
 public:
-  UserDefinedRegExps( QWidget *parent, const char *name = 0 );
-  const QPtrList<CompoundRegExp> regExps() const;
+  UserDefinedRegExps( TQWidget *parent, const char *name = 0 );
+  const TQPtrList<CompoundRegExp> regExps() const;
 
 public slots:
   void slotSelectNewAction();
 
 protected slots:
-  void slotLoad(QListViewItem* item);
-  void slotEdit( QListViewItem* item, const QPoint& pos );
+  void slotLoad(TQListViewItem* item);
+  void slotEdit( TQListViewItem* item, const TQPoint& pos );
   void slotPopulateUserRegexps();
   void slotUnSelect();
 
 protected:
-  void createItems( const QString& title, const QString& dir, bool usersRegExp );
+  void createItems( const TQString& title, const TQString& dir, bool usersRegExp );
 
 signals:
   void load( RegExp* );
 
 private:
-  QListView* _userDefined;
-  QPtrList<CompoundRegExp> _regExps;
+  TQListView* _userDefined;
+  TQPtrList<CompoundRegExp> _regExps;
 };
 
 class WidgetWinItem :public QListViewItem
 {
 public:
-  WidgetWinItem( QString name, RegExp* regexp, bool users, QListViewItem* parent );
-  static QString path();
+  WidgetWinItem( TQString name, RegExp* regexp, bool users, TQListViewItem* parent );
+  static TQString path();
 
-  QString fileName() const;
+  TQString fileName() const;
   RegExp* regExp() const;
-  QString name() const;
-  void setName( const QString& );
+  TQString name() const;
+  void setName( const TQString& );
   bool isUsersRegExp() const { return _usersRegExp; }
 
 private:
-  QString _name;
+  TQString _name;
   RegExp* _regexp;
   bool _usersRegExp;
 };

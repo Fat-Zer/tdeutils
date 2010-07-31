@@ -22,19 +22,19 @@
 
 #include "selectablelineedit.h"
 
-SelectableLineEdit::SelectableLineEdit( RegExpWidget* owner, QWidget* parent, const char* name)
-  : QLineEdit( parent, name ), _owner(owner)
+SelectableLineEdit::SelectableLineEdit( RegExpWidget* owner, TQWidget* parent, const char* name)
+  : TQLineEdit( parent, name ), _owner(owner)
 {
-  connect( this, SIGNAL( textChanged( const QString & ) ), this,
-           SLOT( slotKeyPressed() ) );
+  connect( this, TQT_SIGNAL( textChanged( const TQString & ) ), this,
+           TQT_SLOT( slotKeyPressed() ) );
   setAcceptDrops( false );
 }
 
 void SelectableLineEdit::setSelected( bool selected )
 {
   if ( selected ) {
-    QPalette pal = palette().copy();
-    pal.setBrush( QColorGroup::Base, gray );
+    TQPalette pal = palette().copy();
+    pal.setBrush( TQColorGroup::Base, gray );
     setPalette( pal );
   }
   else {
@@ -43,27 +43,27 @@ void SelectableLineEdit::setSelected( bool selected )
   repaint();
 }
 
-QSize SelectableLineEdit::sizeHint() const
+TQSize SelectableLineEdit::sizeHint() const
 {
-  int frameWidth = frame() ? 8 : 4; // from QLineEdit source
-  QFontMetrics metrics = fontMetrics();
+  int frameWidth = frame() ? 8 : 4; // from TQLineEdit source
+  TQFontMetrics metrics = fontMetrics();
   int actualSize = metrics.width( text() );
   int charWidth = metrics.maxWidth();
-  int height = QLineEdit::sizeHint().height();
+  int height = TQLineEdit::sizeHint().height();
 
   int width;
   if ( hasFocus() )
     width = actualSize+6*charWidth + frameWidth;
   else
     width = QMAX(actualSize, charWidth) + frameWidth;
-  return QSize( width , height );
+  return TQSize( width , height );
 }
 
 void SelectableLineEdit::slotKeyPressed()
 {
-  int frameWidth = frame() ? 8 : 4; // from QLineEdit source
+  int frameWidth = frame() ? 8 : 4; // from TQLineEdit source
 
-  QFontMetrics metrics = fontMetrics();
+  TQFontMetrics metrics = fontMetrics();
   int actualSize = metrics.width( text() );
 
   if ( actualSize > size().width()-frameWidth ) {

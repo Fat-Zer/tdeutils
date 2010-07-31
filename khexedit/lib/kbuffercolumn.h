@@ -55,28 +55,28 @@ class KBufferColumn : public KColumn
 
 
   public: // KColumn-API
-    virtual void paintFirstLine( QPainter *P, KPixelXs Xs, int FirstLine );
-    virtual void paintNextLine( QPainter *P );
+    virtual void paintFirstLine( TQPainter *P, KPixelXs Xs, int FirstLine );
+    virtual void paintNextLine( TQPainter *P );
 
   public:
     void preparePainting( KPixelXs Xs );
 
   public:
-    void paintLine( QPainter *P, int Line );
-    void paintPositions( QPainter *P, int Line, KSection Positions );
+    void paintLine( TQPainter *P, int Line );
+    void paintPositions( TQPainter *P, int Line, KSection Positions );
     /** paints a cursor based on the type of the byte.
       * @param Index Index of the byte to paint the cursor for. If -1 a space is used as char.
       */
-    void paintCursor( QPainter *P, int Index );
+    void paintCursor( TQPainter *P, int Index );
     /** paints the byte with background.
       * @param Index Index of the byte to paint. If -1 only the background is painted.
       */
-    void paintByte( QPainter *P, int Index );
+    void paintByte( TQPainter *P, int Index );
     /** paints the byte with background and a frame around.
       * @param Index Index of the byte to paint the frame for. If -1 a space is used as char.
       * @param Style the style of the framing
       */
-    void paintFramedByte( QPainter *P, int Index, KFrameStyle Style );
+    void paintFramedByte( TQPainter *P, int Index, KFrameStyle Style );
 
 
   public: // modification access
@@ -165,17 +165,17 @@ class KBufferColumn : public KColumn
 
   protected: // API to be refined
     /** default implementation simply prints the byte as ASCII */
-    virtual void drawByte( QPainter *P, char Byte, KHEChar B, const QColor &Color ) const;
+    virtual void drawByte( TQPainter *P, char Byte, KHEChar B, const TQColor &Color ) const;
     /** default implementation sets byte width to one digit width */
     virtual void recalcByteWidth();
 
 
   protected:
-    void paintGrid( QPainter *P, KSection Range );
-    void paintPlain( QPainter *P, KSection Positions, int Index );
-    void paintSelection( QPainter *P, KSection Positions, int Index, int Flag );
-    void paintMarking( QPainter *P, KSection Positions, int Index, int Flag );
-    void paintRange( QPainter *P, const QColor &Color, KSection Positions, int Flag );
+    void paintGrid( TQPainter *P, KSection Range );
+    void paintPlain( TQPainter *P, KSection Positions, int Index );
+    void paintSelection( TQPainter *P, KSection Positions, int Index, int Flag );
+    void paintMarking( TQPainter *P, KSection Positions, int Index, int Flag );
+    void paintRange( TQPainter *P, const TQColor &Color, KSection Positions, int Flag );
 
     bool isSelected( KSection Range, KSection *Selection, unsigned int *Flag ) const;
     bool isMarked( KSection Range, KSection *Marking, unsigned int *Flag ) const;

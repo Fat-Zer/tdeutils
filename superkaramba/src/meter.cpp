@@ -27,7 +27,7 @@ Meter::~Meter()
 {
 }
 
-bool Meter::click(QMouseEvent*)
+bool Meter::click(TQMouseEvent*)
 {
   return false;
 }
@@ -38,7 +38,7 @@ void Meter::setSize(int ix, int iy, int iw, int ih)
   recalculateValue();
 }
 
-void Meter::setThemePath( QString path )
+void Meter::setThemePath( TQString path )
 {
 	  themePath = path;
 }
@@ -88,7 +88,7 @@ void Meter::setHeight(int height)
   recalculateValue();
 }
 
-QRect Meter::getBoundingBox()
+TQRect Meter::getBoundingBox()
 {
   return boundingBox;
 }

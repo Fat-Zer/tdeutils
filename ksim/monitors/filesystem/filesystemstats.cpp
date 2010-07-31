@@ -19,9 +19,9 @@
 
 #include "filesystemstats.h"
 
-#include <qglobal.h>
-#include <qfile.h>
-#include <qstringlist.h>
+#include <tqglobal.h>
+#include <tqfile.h>
+#include <tqstringlist.h>
 
 #include <kdebug.h>
 
@@ -184,16 +184,16 @@ FilesystemStats::List FilesystemStats::readEntries()
 #endif
 
 #ifdef USE_FAILSAFE
-  QFile file( QString::fromLatin1( _PATH_MOUNTED ) );
+  TQFile file( TQString::fromLatin1( _PATH_MOUNTED ) );
 
   if ( !file.open( IO_ReadOnly ) )
     return list;
 
-  QTextStream stream( &file );
+  TQTextStream stream( &file );
 
   while ( !stream.atEnd() )
   {
-    QStringList line = QStringList::split( " ", stream.readLine() );
+    TQStringList line = TQStringList::split( " ", stream.readLine() );
 
     Entry entry;
     entry.dir = line[1].stripWhiteSpace();
@@ -206,10 +206,10 @@ FilesystemStats::List FilesystemStats::readEntries()
   return list;
 }
 
-bool FilesystemStats::readStats( const QString & mntPoint, int & totalBlocks, int & freeBlocks )
+bool FilesystemStats::readStats( const TQString & mntPoint, int & totalBlocks, int & freeBlocks )
 {
   ksim_statfs sysStats;
-  if ( fsystemStats( QFile::encodeName( mntPoint ).data(), sysStats ) < 0 )
+  if ( fsystemStats( TQFile::encodeName( mntPoint ).data(), sysStats ) < 0 )
   {
     kdError() << "While reading filesystem information for " << mntPoint << endl;
     totalBlocks = 0;

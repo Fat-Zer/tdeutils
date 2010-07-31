@@ -43,7 +43,7 @@ namespace KSim
        * @param label is the text that will be displayed
        * @param parent is the parent widget
        */
-      Progress(int maxValue, QWidget *parent,
+      Progress(int maxValue, TQWidget *parent,
          const char *name = 0, WFlags fl = 0);
       /**
        * constructs a KSim::Progress
@@ -54,8 +54,8 @@ namespace KSim
        * @param label is the text that will be displayed
        * @param parent is the parent widget
        */
-      Progress(int maxValue, int type, const QString &label,
-           QWidget *parent, const char *name = 0, WFlags fl = 0);
+      Progress(int maxValue, int type, const TQString &label,
+           TQWidget *parent, const char *name = 0, WFlags fl = 0);
       /**
        * constructs a KSim::Progress
        *
@@ -66,8 +66,8 @@ namespace KSim
        * @param value is the initial value to be displayed
        * @param parent is the parent widget
        */
-      Progress(int maxValue, int type, const QString &label,
-           int value, QWidget *parent, const char *name = 0,
+      Progress(int maxValue, int type, const TQString &label,
+           int value, TQWidget *parent, const char *name = 0,
            WFlags fl = 0);
       /**
        * constructs a KSim::Progress
@@ -77,7 +77,7 @@ namespace KSim
        * @param type is the theme type
        * @param parent is the parent widget
        */
-      Progress(int maxValue, int type, QWidget *parent,
+      Progress(int maxValue, int type, TQWidget *parent,
            const char *name = 0, WFlags fl = 0);
       /**
        * constructs a KSim::Progress
@@ -90,7 +90,7 @@ namespace KSim
        */
       Progress(int maxValue, int type,
            ProgressType progressType,
-           QWidget *parent, const char *name = 0,
+           TQWidget *parent, const char *name = 0,
            WFlags fl = 0);
       /**
        * destructs KSim::Chart
@@ -113,7 +113,7 @@ namespace KSim
       /**
        * @return the area that the progress meter will be drawn
        */
-      const QRect &rectOrigin() const;
+      const TQRect &rectOrigin() const;
       /**
        * reimplemented for internal reasons
        */
@@ -121,7 +121,7 @@ namespace KSim
       /**
        * reimplemented for internal reasons
        */
-      virtual QSize sizeHint() const;
+      virtual TQSize sizeHint() const;
 
     public slots:
       /**
@@ -146,11 +146,11 @@ namespace KSim
       /**
        * sets the area that the progess bar will be drawn
        */
-      void setOrigin(const QRect &);
+      void setOrigin(const TQRect &);
       /**
        * sets the progress bar pixmap
        */
-      void setMeterPixmap(const QPixmap &);
+      void setMeterPixmap(const TQPixmap &);
       /**
        * @return the pixel position where the meter should be drawn
        */
@@ -158,11 +158,11 @@ namespace KSim
       /**
        * reimplemented for internal reasons
        */
-      virtual void paintEvent(QPaintEvent *);
+      virtual void paintEvent(TQPaintEvent *);
       /**
        * reimplemented for internal reasons
        */
-      virtual void resizeEvent(QResizeEvent *);
+      virtual void resizeEvent(TQResizeEvent *);
       /**
        * paints the meter image onto the widget
        */

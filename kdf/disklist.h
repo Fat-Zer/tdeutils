@@ -31,7 +31,7 @@
 //#include <kcontrol.h>
 
 // defines the os-type
-#include <qglobal.h>
+#include <tqglobal.h>
 
 #include "disks.h"
 
@@ -55,8 +55,8 @@
 #define SEPARATOR "|"
 
 /***************************************************************************/
-typedef QPtrList<DiskEntry>		DisksBase;
-typedef QPtrListIterator<DiskEntry>	DisksIterator;
+typedef TQPtrList<DiskEntry>		DisksBase;
+typedef TQPtrListIterator<DiskEntry>	DisksIterator;
 
 /***************************************************************************/
 class Disks : public DisksBase
@@ -96,7 +96,7 @@ private:
 class DiskList : public QObject
 {  Q_OBJECT
 public:
-   DiskList( QObject *parent=0, const char *name=0 );
+   DiskList( TQObject *parent=0, const char *name=0 );
  ~DiskList();
    int readFSTAB();
    int readDF();
@@ -106,7 +106,7 @@ public:
    DiskEntry* next() {return disks->next();}
    uint count() { return disks->count(); }
 
-   void deleteAllMountedAt(const QString &mountpoint);
+   void deleteAllMountedAt(const TQString &mountpoint);
    void setUpdatesDisabled(bool disable);
    
 signals:
@@ -126,7 +126,7 @@ private:
 
   Disks            *disks;
   KProcess         *dfProc;
-  QString           dfStringErrOut;
+  TQString           dfStringErrOut;
   bool              readingDFStdErrOut;
   KConfig           *config;
   bool              updatesDisabled;

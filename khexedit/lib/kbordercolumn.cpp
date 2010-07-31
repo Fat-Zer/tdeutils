@@ -16,8 +16,8 @@
 
 
 // qt specific
-#include <qpainter.h>
-#include <qstyle.h>
+#include <tqpainter.h>
+#include <tqstyle.h>
 // lib specific
 #include "kcolumnsview.h"
 #include "kbordercolumn.h"
@@ -41,7 +41,7 @@ KBorderColumn::~KBorderColumn()
 }
 
 
-void KBorderColumn::paintLine( QPainter *P )
+void KBorderColumn::paintLine( TQPainter *P )
 {
   if( LineHeight > 0 )
   {
@@ -49,7 +49,7 @@ void KBorderColumn::paintLine( QPainter *P )
 
     if( Middle )
     {
-      int GridColor = View->style().styleHint( QStyle::SH_Table_GridLineColor, View );
+      int GridColor = View->style().styleHint( TQStyle::SH_Table_GridLineColor, View );
       P->setPen( GridColor != -1 ? (QRgb)GridColor : View->colorGroup().mid() );
       P->drawLine( LineX, 0, LineX, LineHeight-1 ) ;
     }
@@ -57,25 +57,25 @@ void KBorderColumn::paintLine( QPainter *P )
 }
 
 
-void KBorderColumn::paintFirstLine( QPainter *P, KPixelXs , int )
+void KBorderColumn::paintFirstLine( TQPainter *P, KPixelXs , int )
 {
   paintLine( P );
 }
 
 
-void KBorderColumn::paintNextLine( QPainter *P )
+void KBorderColumn::paintNextLine( TQPainter *P )
 {
   paintLine( P );
 }
 
-void KBorderColumn::paintEmptyColumn( QPainter *P, KPixelXs Xs, KPixelYs Ys )
+void KBorderColumn::paintEmptyColumn( TQPainter *P, KPixelXs Xs, KPixelYs Ys )
 {
   KColumn::paintEmptyColumn( P,Xs,Ys );
 
   KPixelX LX = x() + LineX;
   if( Middle && Xs.includes(LX) )
   {
-    int GridColor = View->style().styleHint( QStyle::SH_Table_GridLineColor, View );
+    int GridColor = View->style().styleHint( TQStyle::SH_Table_GridLineColor, View );
     P->setPen( GridColor != -1 ? (QRgb)GridColor : View->colorGroup().mid() );
     P->drawLine( LX, Ys.start(), LX, Ys.end() ) ;
   }

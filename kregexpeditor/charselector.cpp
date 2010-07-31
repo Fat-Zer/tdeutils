@@ -26,41 +26,41 @@
 #include "charselector.h"
 #include "limitedcharlineedit.h"
 #include "regexpconverter.h"
-#include <qlayout.h>
-#include <qwidgetstack.h>
-#include <qcombobox.h>
+#include <tqlayout.h>
+#include <tqwidgetstack.h>
+#include <tqcombobox.h>
 
 /**
    In the class CharSelector, three LimitedCharLineEdit are used.
-   These widgets are all used in a QWidgetStack. The LimitedCharLineEdit
-   class is basically a QLineEdit, which is limited to a certain
-   number of characters. This conflicts with the QWidgetStack, as this
+   These widgets are all used in a TQWidgetStack. The LimitedCharLineEdit
+   class is basically a TQLineEdit, which is limited to a certain
+   number of characters. This conflicts with the TQWidgetStack, as this
    class expects the widgets on the stack to take up all space.
    StackContainer fills in this gab.
 */
 class StackContainer :public QWidget
 {
 public:
-    StackContainer( QWidget* child, QWidget* parent ) : QWidget( parent )
+    StackContainer( TQWidget* child, TQWidget* parent ) : TQWidget( parent )
         {
-            QHBoxLayout* layout = new QHBoxLayout( this );
-            child->reparent( this, QPoint(0,0), false );
+            TQHBoxLayout* layout = new TQHBoxLayout( this );
+            child->reparent( this, TQPoint(0,0), false );
             layout->addWidget( child );
             layout->addStretch( 1 );
         }
 };
 
-CharSelector::CharSelector( QWidget* parent, const char* name )
-    :QWidget( parent, name ), _oldIndex(0)
+CharSelector::CharSelector( TQWidget* parent, const char* name )
+    :TQWidget( parent, name ), _oldIndex(0)
 {
-  QStringList items;
-  QHBoxLayout* layout = new QHBoxLayout( this, 0, 6 );
+  TQStringList items;
+  TQHBoxLayout* layout = new TQHBoxLayout( this, 0, 6 );
 
-  _type = new QComboBox( this, "_type" );
+  _type = new TQComboBox( this, "_type" );
   items << i18n("Normal Character")
         << i18n("Unicode Char in Hex.")
         << i18n("Unicode Char in Oct.")
-        << QString::fromLatin1("----")
+        << TQString::fromLatin1("----")
         << i18n("The Bell Character (\\a)")
         << i18n("The Form Feed Character (\\f)")
         << i18n("The Line Feed Character (\\n)")
@@ -70,7 +70,7 @@ CharSelector::CharSelector( QWidget* parent, const char* name )
   _type->insertStringList( items );
   layout->addWidget( _type );
 
-  _stack = new QWidgetStack( this, "_stack" );
+  _stack = new TQWidgetStack( this, "_stack" );
   layout->addWidget( _stack );
 
   _normal = new LimitedCharLineEdit( LimitedCharLineEdit::NORMAL, 0, "_normal" );
@@ -84,7 +84,7 @@ CharSelector::CharSelector( QWidget* parent, const char* name )
 
   _stack->raiseWidget( 0 );
 
-  connect( _type, SIGNAL( activated( int ) ), this, SLOT(slotNewItem( int ) ) );
+  connect( _type, TQT_SIGNAL( activated( int ) ), this, TQT_SLOT(slotNewItem( int ) ) );
 }
 
 void CharSelector::slotNewItem( int which )
@@ -110,7 +110,7 @@ void CharSelector::slotNewItem( int which )
     _oldIndex = which;
 }
 
-void CharSelector::setText( QString text )
+void CharSelector::setText( TQString text )
 {
     // This is the best I can do about missing character range features, unless all of
     // textrangeregexp is to be reworked. The problem is that textrangeregexp only allows to
@@ -119,26 +119,26 @@ void CharSelector::setText( QString text )
     bool enabled = ( RegExpConverter::current()->features() & RegExpConverter::ExtRange );
     _type->setEnabled( enabled );
 
-  if ( text.at(0) == QChar('\\') ) {
-    if ( text.at(1) == QChar('x') ) {
+  if ( text.at(0) == TQChar('\\') ) {
+    if ( text.at(1) == TQChar('x') ) {
       _hex->setText(text.mid(2));
       slotNewItem( 1 );
     }
-    else if ( text.at(1) == QChar('0') ) {
+    else if ( text.at(1) == TQChar('0') ) {
       _oct->setText(text.mid(2));
       slotNewItem( 2 );
     }
-    else if ( text.at(1) == QChar('a') )
+    else if ( text.at(1) == TQChar('a') )
       slotNewItem(4);
-    else if ( text.at(1) == QChar('f') )
+    else if ( text.at(1) == TQChar('f') )
       slotNewItem(5);
-    else if ( text.at(1) == QChar('n') )
+    else if ( text.at(1) == TQChar('n') )
       slotNewItem(6);
-    else if ( text.at(1) == QChar('r') )
+    else if ( text.at(1) == TQChar('r') )
       slotNewItem(7);
-    else if ( text.at(1) == QChar('t') )
+    else if ( text.at(1) == TQChar('t') )
       slotNewItem(8);
-    else if ( text.at(1) == QChar('v') )
+    else if ( text.at(1) == TQChar('v') )
       slotNewItem(9);
     else {
       qWarning("Warning %s:%d Unknown escape %s", __FILE__, __LINE__, text.latin1() );
@@ -157,29 +157,29 @@ bool CharSelector::isEmpty() const
     ( _type->currentItem() == 2 && _oct->text().isEmpty() );
 }
 
-QString CharSelector::text() const
+TQString CharSelector::text() const
 {
   switch ( _type->currentItem() ) {
   case 0: // Normal Character
     return _normal->text();
   case 1: // Hex
-    return QString::fromLocal8Bit("\\x") + _hex->text();
+    return TQString::fromLocal8Bit("\\x") + _hex->text();
   case 2: // Oct
-      return QString::fromLocal8Bit("\\0") + _oct->text();
+      return TQString::fromLocal8Bit("\\0") + _oct->text();
   case 3: // The seperator
     break;
   case 4:
-    return QString::fromLatin1("\\a");
+    return TQString::fromLatin1("\\a");
   case 5:
-    return QString::fromLatin1("\\f");
+    return TQString::fromLatin1("\\f");
   case 6:
-    return QString::fromLatin1("\\n");
+    return TQString::fromLatin1("\\n");
   case 7:
-    return QString::fromLatin1("\\r");
+    return TQString::fromLatin1("\\r");
   case 8:
-    return QString::fromLatin1("\\t");
+    return TQString::fromLatin1("\\t");
   case 9:
-    return QString::fromLatin1("\\v");
+    return TQString::fromLatin1("\\v");
   }
-  return QString::null;
+  return TQString::null;
 }

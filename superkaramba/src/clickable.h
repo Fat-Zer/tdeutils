@@ -11,9 +11,9 @@
 #ifndef CLICKABLE_H
 #define CLICKABLE_H
 
-#include <qstring.h>
-#include <qrect.h>
-#include <qevent.h>
+#include <tqstring.h>
+#include <tqrect.h>
+#include <tqevent.h>
 
 
 /**
@@ -27,19 +27,19 @@ public:
 
     virtual ~Clickable();
 
-    virtual void click( QMouseEvent* ) = 0;
+    virtual void click( TQMouseEvent* ) = 0;
     /*
-    void setOnClick( QString );
-    void setOnMiddleClick( QString );
+    void setOnClick( TQString );
+    void setOnMiddleClick( TQString );
     */
 
-    virtual QRect getBoundingBox();
+    virtual TQRect getBoundingBox();
 
 protected:
-    QRect boundingBox;
+    TQRect boundingBox;
     /*
-    QString onClick;
-    QString onMiddleClick;
+    TQString onClick;
+    TQString onMiddleClick;
     */
 };
 

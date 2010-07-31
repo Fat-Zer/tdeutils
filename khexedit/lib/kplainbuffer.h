@@ -65,7 +65,7 @@ class KPlainBuffer : public KDataBuffer
     virtual int find( const char*KeyData, int Length, KSection Section ) const;
     virtual int rfind( const char*, int Length, int Pos = -1 ) const;
 
-/*     virtual int find( const QString &expr, bool cs, bool wo, bool forward = true, int *index = 0 ); */
+/*     virtual int find( const TQString &expr, bool cs, bool wo, bool forward = true, int *index = 0 ); */
 
   public:
     void setReadOnly( bool RO = true );

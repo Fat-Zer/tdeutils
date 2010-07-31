@@ -28,8 +28,8 @@
 #endif
 
 #include <Python.h>
-#include <qglobal.h>
-#include <qobject.h>
+#include <tqglobal.h>
+#include <tqobject.h>
 
 #include <kglobal.h>
 #include <klocale.h>
@@ -75,9 +75,9 @@ PyObject* py_run_command(PyObject*, PyObject* args)
       lst == NULL || !PyList_Check(lst))
       return NULL;
 
-  QString n;
-  QString c;
-  QString i;
+  TQString n;
+  TQString c;
+  TQString i;
 
   n.setAscii(name);
   c.setAscii(command);
@@ -88,7 +88,7 @@ PyObject* py_run_command(PyObject*, PyObject* args)
 
   for (int i = 0; i < PyList_Size(lst); i++)
   {
-    l.append(PyString2QString(PyList_GetItem(lst, i)));
+    l.append(PyString2TQString(PyList_GetItem(lst, i)));
   }
   KRun::run(svc, l);
   return Py_BuildValue("l", 1);
@@ -101,7 +101,7 @@ PyObject* py_execute_command(PyObject *, PyObject* args)
 
   if (!PyArg_ParseTuple(args, (char*)"O:execute", &s))
       return NULL;
-  return Py_BuildValue((char*)"l", KRun::runCommand(PyString2QString(s)));
+  return Py_BuildValue((char*)"l", KRun::runCommand(PyString2TQString(s)));
 }
 
 // Runs a command, returns 0 if it could not start command
@@ -112,7 +112,7 @@ PyObject* py_execute_command_interactive(PyObject *, PyObject* args)
   //  return NULL;
 
   int numLines;       /* how many lines we passed for parsing */
-  QString line;       /* pointer to the line as a string */
+  TQString line;       /* pointer to the line as a string */
 
   PyObject * listObj; /* the list of strings */
   PyObject * strObj;  /* one string in the list */
@@ -142,26 +142,26 @@ PyObject* py_execute_command_interactive(PyObject *, PyObject* args)
     strObj = PyList_GetItem(listObj, i); /* Can't fail */
 
     /* make it a string */
-    line = PyString2QString(strObj);
+    line = PyString2TQString(strObj);
 
     /* now do the parsing */
     *(currTheme->currProcess) << line;
 
   }
-  QApplication::connect(currTheme->currProcess,
-                        SIGNAL(processExited(KProcess *)),
+  TQApplication::connect(currTheme->currProcess,
+                        TQT_SIGNAL(processExited(KProcess *)),
                         currTheme,
-                        SLOT(processExited(KProcess *)));
-  QApplication::connect(currTheme->currProcess,
-                        SIGNAL(receivedStdout(KProcess *, char *, int)),
+                        TQT_SLOT(processExited(KProcess *)));
+  TQApplication::connect(currTheme->currProcess,
+                        TQT_SIGNAL(receivedStdout(KProcess *, char *, int)),
                         currTheme,
-                        SLOT(receivedStdout(KProcess *, char *, int)));
+                        TQT_SLOT(receivedStdout(KProcess *, char *, int)));
   currTheme->currProcess->start(KProcess::NotifyOnExit, KProcess::Stdout);
 
   return Py_BuildValue((char*)"l", (int)(currTheme->currProcess->pid()));
 }
 
-long attachClickArea(long widget, long meter, QString LeftButton, QString MiddleButton, QString RightButton)
+long attachClickArea(long widget, long meter, TQString LeftButton, TQString MiddleButton, TQString RightButton)
 {
   karamba* currTheme = (karamba*) widget;
   Meter* currMeter = (Meter*) meter;
@@ -212,7 +212,7 @@ PyObject* py_attach_clickArea(PyObject*, PyObject* args, PyObject* dict)
     return NULL;
   if (!checkKaramba(widget))
     return NULL;
-  QString lB, mB, rB;
+  TQString lB, mB, rB;
   if (LeftButton != NULL)
   {
       lB.setAscii(LeftButton);
@@ -342,7 +342,7 @@ PyObject* py_read_theme_file(PyObject *, PyObject *args)
   if (!checkKaramba(widget))
     return NULL;
   karamba* k = (karamba*)widget;
-  QByteArray ba = k->theme().readThemeFile(file);
+  TQByteArray ba = k->theme().readThemeFile(file);
   return PyString_FromStringAndSize(ba.data(), ba.size());
 }
 
@@ -363,9 +363,9 @@ long createServiceClickArea(long widget, long x, long y, long w, long h, char *n
 
   karamba* currTheme = (karamba*)widget;
   ClickArea *tmp = new ClickArea( currTheme, x, y, w, h );
-  QString n;
-  QString e;
-  QString i;
+  TQString n;
+  TQString e;
+  TQString i;
 
   n.setAscii(name);
   e.setAscii(exec);
@@ -381,7 +381,7 @@ long createClickArea(long widget, long x, long y, long w, long h, char* text) {
 
   karamba* currTheme = (karamba*)widget;
   ClickArea *tmp = new ClickArea(currTheme, x, y, w, h );
-  QString onclick;
+  TQString onclick;
 
   onclick.setAscii(text);
 
@@ -428,7 +428,7 @@ static long callTheme(long widget, char* path, char *str)
   karamba* currTheme = (karamba*) widget;
 
   if (currTheme)
-    currTheme->callTheme(QString(path), QString(str));
+    currTheme->callTheme(TQString(path), TQString(str));
 
   return (long)currTheme;
 }
@@ -438,19 +438,19 @@ static long setIncomingData(long widget, char* path, char *obj)
   karamba* currTheme = (karamba*) widget;
 
   if (currTheme)
-    currTheme->setIncomingData(QString(path), QString(obj));
+    currTheme->setIncomingData(TQString(path), TQString(obj));
 
   return (long)currTheme;
 }
 
-static QString getIncomingData(long widget)
+static TQString getIncomingData(long widget)
 {
   karamba* currTheme = (karamba*) widget;
 
   if (currTheme)
     return currTheme->getIncomingData();
 
-  return QString("");
+  return TQString("");
 }
 
 /*
@@ -461,16 +461,16 @@ static QString getIncomingData(long widget)
  */
 long openNamedTheme(char* path, char *name, bool is_sub_theme) {
 
-  QString filename;
+  TQString filename;
   karamba* currTheme = 0;
 
   filename.setAscii(path);
 
-  QFileInfo file( filename );
+  TQFileInfo file( filename );
 
   if( file.exists() )
   {
-      QCString prettyName(name);
+      TQCString prettyName(name);
       KarambaApplication* app = (KarambaApplication*)qApp;
       if (!app->themeExists(prettyName))
       {
@@ -486,16 +486,16 @@ long openNamedTheme(char* path, char *name, bool is_sub_theme) {
 long openTheme(char* path)
 {
 
-  QString filename;
+  TQString filename;
   karamba* currTheme = 0;
 
   filename.setAscii(path);
 
-  QFileInfo file( filename );
+  TQFileInfo file( filename );
 
   if( file.exists() )
     {
-      currTheme = new karamba( filename, QString() );
+      currTheme = new karamba( filename, TQString() );
       currTheme->show();
     }
 
@@ -582,7 +582,7 @@ int translateAll(long widget, int x, int y)
 {
   karamba* currTheme = (karamba*)widget;
 
-  QObjectListIt it2( *currTheme->meterList ); // iterate over meters
+  TQObjectListIt it2( *currTheme->meterList ); // iterate over meters
 
   while ( it2 != 0 )
   {
@@ -660,7 +660,7 @@ PyObject* py_hide(PyObject *, PyObject *args)
 #include <sys/sockio.h>
 #endif
 /* now a method we need to expose to Python */
-QString getIp(char *device_name)
+TQString getIp(char *device_name)
 {
   int i, sd, numdevs;
   struct ifconf ifc_conf;
@@ -668,7 +668,7 @@ QString getIp(char *device_name)
   struct ifreq *devptr;
   int ifc_conf_buf_size;
   static struct in_addr host;
-  QString retval;
+  TQString retval;
 
   retval = "Disconnected";
 

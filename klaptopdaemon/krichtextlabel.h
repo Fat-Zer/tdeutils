@@ -19,12 +19,12 @@
 #ifndef KRICHTEXTLABEL_H
 #define KRICHTEXTLABEL_H
 
-#include <qlabel.h>
+#include <tqlabel.h>
 
 #include <kdelibs_export.h>
 
 /**
- * @short A replacement for QLabel that supports richtext and proper layout management
+ * @short A replacement for TQLabel that supports richtext and proper layout management
  *
  * @author Waldo Bastian <bastian@kde.org>
  */
@@ -32,25 +32,25 @@
 /*
  * QLabel
  */
-class KDEUI_EXPORT KRichTextLabel : public QLabel {
+class KDEUI_EXPORT KRichTextLabel : public TQLabel {
   Q_OBJECT
 
 public:
   /**
    * Default constructor.
    */
-  KRichTextLabel( QWidget *parent, const char *name = 0 );
-  KRichTextLabel( const QString &text, QWidget *parent, const char *name = 0 );
+  KRichTextLabel( TQWidget *parent, const char *name = 0 );
+  KRichTextLabel( const TQString &text, TQWidget *parent, const char *name = 0 );
 
   int defaultWidth() const { return m_defaultWidth; }
   void setDefaultWidth(int defaultWidth);
 
-  virtual QSize minimumSizeHint() const;
-  virtual QSize sizeHint() const;
-  QSizePolicy sizePolicy() const;
+  virtual TQSize minimumSizeHint() const;
+  virtual TQSize sizeHint() const;
+  TQSizePolicy sizePolicy() const;
 
 public slots:
-  void setText( const QString & );
+  void setText( const TQString & );
 
 protected:
   int m_defaultWidth;

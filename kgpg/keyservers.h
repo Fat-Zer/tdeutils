@@ -32,7 +32,7 @@ class keyServer : public KDialogBase
 {
         Q_OBJECT
 public:
-        keyServer(QWidget *parent=0, const char *name=0,bool modal=false,bool autoClose=false);
+        keyServer(TQWidget *parent=0, const char *name=0,bool modal=false,bool autoClose=false);
         ~keyServer();
 	keyServerWidget *page;
 
@@ -51,20 +51,20 @@ public slots:
         void slotimportread(KProcIO *p);
         void slotprocread(KProcIO *p);
         void slotPreExport();
-	void slotExport(QStringList keyIds);
+	void slotExport(TQStringList keyIds);
         void preimport();
         void slotsearchresult(KProcess *);
         void slotEnableProxyI(bool on);
         void slotEnableProxyE(bool on);
         void handleQuit();
-    	void slotTextChanged( const QString &text);
+    	void slotTextChanged( const TQString &text);
 
 private:
 
-        QDialog *importpop;
+        TQDialog *importpop;
         KSimpleConfig *config;
         uint keyNumbers;
-        QString readmessage;
+        TQString readmessage;
         KProcIO *importproc,*exportproc;
 	KProcIO *searchproc;
         searchRes *listpop;
@@ -74,7 +74,7 @@ private:
 	KDialogBase *dialogServer;
 	
 signals:
-	void importFinished(QString);
+	void importFinished(TQString);
 };
 
 #endif // KEYSERVERS_H

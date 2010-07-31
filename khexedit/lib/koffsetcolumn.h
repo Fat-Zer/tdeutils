@@ -36,9 +36,9 @@ class KOffsetColumn : public KColumn
     virtual ~KOffsetColumn();
 
   public:  // KColumn API
-    virtual void paintFirstLine( QPainter *P, KPixelXs Xs, int FirstLine );
-    virtual void paintNextLine( QPainter *P );
-    virtual void paintEmptyColumn( QPainter *P, KPixelXs Xs, KPixelYs Ys );
+    virtual void paintFirstLine( TQPainter *P, KPixelXs Xs, int FirstLine );
+    virtual void paintNextLine( TQPainter *P );
+    virtual void paintEmptyColumn( TQPainter *P, KPixelXs Xs, KPixelYs Ys );
 
 
   public:
@@ -62,7 +62,7 @@ class KOffsetColumn : public KColumn
     /** recalculates all x values */
     void recalcX();
     /** paints full line */
-    void paintLine( QPainter *P, int Line );
+    void paintLine( TQPainter *P, int Line );
 
 
   protected: // user settings

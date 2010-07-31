@@ -20,7 +20,7 @@
 #include "probedialog.h"
 #include "monitor.h"
 
-#include <qtimer.h>
+#include <tqtimer.h>
 
 #include <klocale.h>
 #include <kdebug.h>
@@ -38,8 +38,8 @@ static const char * const probeIdentifiers[] =
     0
 };
 
-ProbeDialog::ProbeDialog( const HostConfig &hostConfig, QWidget *parent, const char *name )
-    : KProgressDialog( parent, name, i18n( "SNMP Host Probe" ), QString::null, true /* modal */ ),
+ProbeDialog::ProbeDialog( const HostConfig &hostConfig, TQWidget *parent, const char *name )
+    : KProgressDialog( parent, name, i18n( "SNMP Host Probe" ), TQString::null, true /* modal */ ),
       m_host( hostConfig ), m_currentMonitor( 0 ), m_canceled( false )
 {
     setLabel( i18n( "Probing for common object identifiers..." ) );
@@ -59,7 +59,7 @@ ProbeDialog::ProbeDialog( const HostConfig &hostConfig, QWidget *parent, const c
 
 void ProbeDialog::done( int code )
 {
-    if ( code == QDialog::Rejected && m_currentMonitor ) {
+    if ( code == TQDialog::Rejected && m_currentMonitor ) {
         setLabel( "Probe aborted. Waiting for job to finish..." );
         m_canceled = true;
         return;
@@ -79,10 +79,10 @@ void ProbeDialog::probeOne()
     delete m_currentMonitor;
     m_currentMonitor = new Monitor( m_host, oid, 0 /* no refresh */, this );
 
-    connect( m_currentMonitor, SIGNAL( newData( const Identifier &, const Value & ) ),
-             this, SLOT( probeResult( const Identifier &, const Value & ) ) );
-    connect( m_currentMonitor, SIGNAL( error( const Identifier &, const ErrorInfo & ) ),
-             this, SLOT( probeError( const Identifier &, const ErrorInfo & ) ) );
+    connect( m_currentMonitor, TQT_SIGNAL( newData( const Identifier &, const Value & ) ),
+             this, TQT_SLOT( probeResult( const Identifier &, const Value & ) ) );
+    connect( m_currentMonitor, TQT_SIGNAL( error( const Identifier &, const ErrorInfo & ) ),
+             this, TQT_SLOT( probeError( const Identifier &, const ErrorInfo & ) ) );
 }
 
 void ProbeDialog::probeResult( const Identifier &oid, const Value &value )
@@ -106,9 +106,9 @@ void ProbeDialog::nextProbe()
     progressBar()->setProgress( progressBar()->totalSteps() - m_probeOIDs.count() );
 
     if ( m_canceled )
-        KProgressDialog::done( QDialog::Rejected );
+        KProgressDialog::done( TQDialog::Rejected );
     else
-        QTimer::singleShot( 0, this, SLOT( probeOne() ) );
+        TQTimer::singleShot( 0, this, TQT_SLOT( probeOne() ) );
 }
 
 #include "probedialog.moc"

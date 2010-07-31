@@ -17,11 +17,11 @@
  **/
 #include "kwidgetstreamer.h"
 #include "kmultiformlistbox.h"
-#include <qobjectlist.h>
-#include <qvariant.h>
+#include <tqobjectlist.h>
+#include <tqvariant.h>
 
 
-void KWidgetStreamer::toStream(const QObject* from, QDataStream& stream )
+void KWidgetStreamer::toStream(const TQObject* from, TQDataStream& stream )
 {
   if ( from->inherits("KMultiFormListBox") ) {
     // Hmm, we'll trust Qt that this dynamic_cast won't fail!
@@ -31,7 +31,7 @@ void KWidgetStreamer::toStream(const QObject* from, QDataStream& stream )
   propertyToStream( from, stream );
 }
 
-void KWidgetStreamer::fromStream( QDataStream& stream, QObject* to )
+void KWidgetStreamer::fromStream( TQDataStream& stream, TQObject* to )
 {
   if ( to->inherits("KMultiFormListBox") ) {
     // Hmm, we'll trust Qt that this dynamic_cast won't fail!
@@ -42,17 +42,17 @@ void KWidgetStreamer::fromStream( QDataStream& stream, QObject* to )
 }
 
 
-void KWidgetStreamer::propertyToStream( const QObject* from, QDataStream& stream )
+void KWidgetStreamer::propertyToStream( const TQObject* from, TQDataStream& stream )
 {
   // Only handle widgets. Alternatives to widgets are layouts, validators, timers, etc.
-  if ( ! from->inherits("QWidget") )
+  if ( ! from->inherits("TQWidget") )
     return;
 
   // Serializing all the children (if any).
-  const QObjectList* children = from->children();
+  const TQObjectList* children = from->children();
   if ( children ) {
     stream <<  children->count();
-    for ( QObjectListIt it = QObjectListIt(*children); *it; ++it ) {
+    for ( TQObjectListIt it = TQObjectListIt(*children); *it; ++it ) {
       toStream( *it, stream );
     }
   }
@@ -62,11 +62,11 @@ void KWidgetStreamer::propertyToStream( const QObject* from, QDataStream& stream
 
   // Now stream out properties
   for ( PropertyMapIt mapIt = _map.begin(); mapIt != _map.end(); mapIt++ ) {
-    QString tp = mapIt.key();
+    TQString tp = mapIt.key();
     PropertyList list = mapIt.data();
     if ( from->inherits( tp.latin1() ) ) {
       for ( PropertyListIt it = list.begin(); it != list.end(); ++it ) {
-        QVariant prop = from->property( (*it).latin1() );
+        TQVariant prop = from->property( (*it).latin1() );
         if ( ! prop.isValid() )
           qWarning("Invalid property: %s:%s", tp.latin1(), (*it).latin1() );
 
@@ -77,20 +77,20 @@ void KWidgetStreamer::propertyToStream( const QObject* from, QDataStream& stream
 }
 
 
-void KWidgetStreamer::propertyFromStream( QDataStream& stream, QObject* to )
+void KWidgetStreamer::propertyFromStream( TQDataStream& stream, TQObject* to )
 {
   // Only handle widgets. Alternatives to widgets are layouts, validators, timers, etc.
-  if ( ! to->inherits("QWidget") )
+  if ( ! to->inherits("TQWidget") )
     return;
 
   // Stream in all the children (if any)
-  const QObjectList* children = to->children();
+  const TQObjectList* children = to->children();
   unsigned int count;
 
   stream >> count;
   if ( children ) {
     Q_ASSERT( count == children->count() );
-    for ( QObjectListIt it = QObjectListIt(*children); *it; ++it )
+    for ( TQObjectListIt it = TQObjectListIt(*children); *it; ++it )
       fromStream( stream, *it );
   }
   else {
@@ -99,11 +99,11 @@ void KWidgetStreamer::propertyFromStream( QDataStream& stream, QObject* to )
 
   // Now stream in properties
   for ( PropertyMapIt mapIt = _map.begin(); mapIt != _map.end(); mapIt++ ) {
-    QString tp = mapIt.key();
+    TQString tp = mapIt.key();
     PropertyList list = mapIt.data();
     if ( to->inherits( tp.latin1() ) ) {
       for ( PropertyListIt it = list.begin(); it != list.end(); ++it ) {
-         QVariant value;
+         TQVariant value;
         stream >> value;
         to->setProperty((*it).latin1(), value);
       }
@@ -113,65 +113,65 @@ void KWidgetStreamer::propertyFromStream( QDataStream& stream, QObject* to )
 
 KWidgetStreamer::KWidgetStreamer ()
 {
-  QStringList l;
+  TQStringList l;
 
   // QCheckBox
   l.clear();
-  l << QString::fromLatin1("enabled")
-    << QString::fromLatin1("checked") << QString::fromLatin1("tristate");
-  _map.insert(QString::fromLatin1("QCheckBox"), l);
+  l << TQString::fromLatin1("enabled")
+    << TQString::fromLatin1("checked") << TQString::fromLatin1("tristate");
+  _map.insert(TQString::fromLatin1("TQCheckBox"), l);
 
   // QComboBox
   l.clear();
-  l << QString::fromLatin1("enabled")
-    << QString::fromLatin1("editable") << QString::fromLatin1("currentItem")
-    << QString::fromLatin1("maxCount") << QString::fromLatin1("insertionPolicy")
-    << QString::fromLatin1("autoCompletion");
-  _map.insert(QString::fromLatin1("QComboBox"), l);
+  l << TQString::fromLatin1("enabled")
+    << TQString::fromLatin1("editable") << TQString::fromLatin1("currentItem")
+    << TQString::fromLatin1("maxCount") << TQString::fromLatin1("insertionPolicy")
+    << TQString::fromLatin1("autoCompletion");
+  _map.insert(TQString::fromLatin1("TQComboBox"), l);
 
   // QDial
   l.clear();
-  l << QString::fromLatin1("enabled")
-    << QString::fromLatin1("tracking") << QString::fromLatin1("wrapping")
-    << QString::fromLatin1("value");
-  _map.insert(QString::fromLatin1("QDial"), l);
+  l << TQString::fromLatin1("enabled")
+    << TQString::fromLatin1("tracking") << TQString::fromLatin1("wrapping")
+    << TQString::fromLatin1("value");
+  _map.insert(TQString::fromLatin1("TQDial"), l);
 
   // QLCDNumber
   l.clear();
-  l << QString::fromLatin1("enabled")
-    << QString::fromLatin1("numDigits") << QString::fromLatin1("mode")
-    << QString::fromLatin1("segmentStyle") << QString::fromLatin1("value");
-  _map.insert(QString::fromLatin1("QLCDNumber"), l);
+  l << TQString::fromLatin1("enabled")
+    << TQString::fromLatin1("numDigits") << TQString::fromLatin1("mode")
+    << TQString::fromLatin1("segmentStyle") << TQString::fromLatin1("value");
+  _map.insert(TQString::fromLatin1("TQLCDNumber"), l);
 
   // QLineEdit
   l.clear();
-  l << QString::fromLatin1("enabled")
-    << QString::fromLatin1("text") << QString::fromLatin1("maxLength")
-    << QString::fromLatin1("echoMode") << QString::fromLatin1("alignment");
-  _map.insert(QString::fromLatin1("QLineEdit"), l);
+  l << TQString::fromLatin1("enabled")
+    << TQString::fromLatin1("text") << TQString::fromLatin1("maxLength")
+    << TQString::fromLatin1("echoMode") << TQString::fromLatin1("alignment");
+  _map.insert(TQString::fromLatin1("TQLineEdit"), l);
 
   // QMultiLineEdit
   l.clear();
-  l << QString::fromLatin1("enabled")
-    << QString::fromLatin1("text")
-    << QString::fromLatin1("alignment");
-  _map.insert(QString::fromLatin1("QTextEdit"), l);
+  l << TQString::fromLatin1("enabled")
+    << TQString::fromLatin1("text")
+    << TQString::fromLatin1("alignment");
+  _map.insert(TQString::fromLatin1("TQTextEdit"), l);
 
   // QRadioButton
   l.clear();
-  l << QString::fromLatin1("enabled")
-    << QString::fromLatin1("checked");
-  _map.insert(QString::fromLatin1("QRadioButton"), l);
+  l << TQString::fromLatin1("enabled")
+    << TQString::fromLatin1("checked");
+  _map.insert(TQString::fromLatin1("TQRadioButton"), l);
 
   // QSlider
   l.clear();
-  l << QString::fromLatin1("enabled")
-    << QString::fromLatin1("value");
-  _map.insert(QString::fromLatin1("QSlider"), l);
+  l << TQString::fromLatin1("enabled")
+    << TQString::fromLatin1("value");
+  _map.insert(TQString::fromLatin1("TQSlider"), l);
 
   // QSpinBox
   l.clear();
-  l << QString::fromLatin1("enabled")
-    << QString::fromLatin1("value");
-  _map.insert(QString::fromLatin1("QSpinBox"), l);
+  l << TQString::fromLatin1("enabled")
+    << TQString::fromLatin1("value");
+  _map.insert(TQString::fromLatin1("TQSpinBox"), l);
 }

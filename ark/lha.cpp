@@ -35,8 +35,8 @@
 #include <string.h>
 
 // QT includes
-#include <qfile.h>
-#include <qdir.h>
+#include <tqfile.h>
+#include <tqdir.h>
 
 // KDE includes
 #include <kdebug.h>
@@ -52,7 +52,7 @@
 #include "arkutils.h"
 #include "filelistview.h"
 
-LhaArch::LhaArch( ArkWidget *_gui, const QString & _fileName )
+LhaArch::LhaArch( ArkWidget *_gui, const TQString & _fileName )
   : Arch( _gui, _fileName )
 {
   m_archiver_program = "lha";
@@ -61,7 +61,7 @@ LhaArch::LhaArch( ArkWidget *_gui, const QString & _fileName )
   m_headerString = "----";
 }
 
-bool LhaArch::processLine( const QCString &line )
+bool LhaArch::processLine( const TQCString &line )
 {
   const char *_line = ( const char * ) line;
   char columns[13][80];
@@ -95,13 +95,13 @@ bool LhaArch::processLine( const QCString &line )
   }
 
   // make the time stamp sortable
-  QString massagedTimeStamp = ArkUtils::getTimeStamp( columns[6], columns[7],
+  TQString massagedTimeStamp = ArkUtils::getTimeStamp( columns[6], columns[7],
                                                       columns[8] );
   strlcpy( columns[6], massagedTimeStamp.ascii(), sizeof( columns[6] ) );
 
   // see if there was a link in filename
-  QString file = filename;
-  QString name, link;
+  TQString file = filename;
+  TQString name, link;
   bool bLink = false;
   int pos = file.find( " -> " );
   if ( pos != -1 )
@@ -115,12 +115,12 @@ bool LhaArch::processLine( const QCString &line )
     name = file;
   }
 
-  QStringList list;
+  TQStringList list;
   list.append( name );
 
   for ( int i = 0; i < 7; i++ )
   {
-    list.append( QString::fromLocal8Bit( columns[i] ) );
+    list.append( TQString::fromLocal8Bit( columns[i] ) );
   }
 
   if ( bLink )
@@ -144,17 +144,17 @@ void LhaArch::open()
 
   KProcess *kp = m_currentProcess = new KProcess;
   *kp << m_archiver_program << "v" << m_filename;
-  connect( kp, SIGNAL( receivedStdout(KProcess*, char*, int) ),
-           SLOT( slotReceivedTOC(KProcess*, char*, int) ) );
-  connect( kp, SIGNAL( receivedStderr(KProcess*, char*, int) ),
-           SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
-  connect( kp, SIGNAL( processExited(KProcess*) ),
-           SLOT( slotOpenExited(KProcess*) ) );
+  connect( kp, TQT_SIGNAL( receivedStdout(KProcess*, char*, int) ),
+           TQT_SLOT( slotReceivedTOC(KProcess*, char*, int) ) );
+  connect( kp, TQT_SIGNAL( receivedStderr(KProcess*, char*, int) ),
+           TQT_SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
+  connect( kp, TQT_SIGNAL( processExited(KProcess*) ),
+           TQT_SLOT( slotOpenExited(KProcess*) ) );
 
   if ( !kp->start( KProcess::NotifyOnExit, KProcess::AllOutput ) )
   {
     KMessageBox::error( 0, i18n( "Could not start a subprocess." ) );
-    emit sigOpen( this, false, QString::null, 0 );
+    emit sigOpen( this, false, TQString::null, 0 );
   }
 }
 
@@ -180,23 +180,23 @@ void LhaArch::create()
                   Arch::Extract | Arch::Delete | Arch::Add | Arch::View );
 }
 
-void LhaArch::addDir( const QString & dirName )
+void LhaArch::addDir( const TQString & dirName )
 {
   if ( !dirName.isEmpty() )
   {
-    QStringList list;
+    TQStringList list;
     list.append( dirName );
     addFile( list );
   }
 }
 
-void LhaArch::addFile( const QStringList &urls )
+void LhaArch::addFile( const TQStringList &urls )
 {
   KProcess *kp = m_currentProcess = new KProcess;
   kp->clearArguments();
   *kp << m_archiver_program;
 
-  QString strOptions;
+  TQString strOptions;
   if ( ArkSettings::replaceOnlyWithNewer() )
     strOptions = "u";
   else
@@ -205,21 +205,21 @@ void LhaArch::addFile( const QStringList &urls )
   *kp << strOptions << m_filename;
 
   KURL url( urls.first() );
-  QDir::setCurrent( url.directory() );
+  TQDir::setCurrent( url.directory() );
 
-  QStringList::ConstIterator iter;
+  TQStringList::ConstIterator iter;
   for ( iter = urls.begin(); iter != urls.end(); ++iter )
   {
     KURL fileURL( *iter );
     *kp << fileURL.fileName();
   }
 
-  connect( kp, SIGNAL( receivedStdout(KProcess*, char*, int) ),
-           SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
-  connect( kp, SIGNAL( receivedStderr(KProcess*, char*, int) ),
-           SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
-  connect( kp, SIGNAL( processExited(KProcess*) ),
-           SLOT( slotAddExited(KProcess*) ) );
+  connect( kp, TQT_SIGNAL( receivedStdout(KProcess*, char*, int) ),
+           TQT_SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
+  connect( kp, TQT_SIGNAL( receivedStderr(KProcess*, char*, int) ),
+           TQT_SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
+  connect( kp, TQT_SIGNAL( processExited(KProcess*) ),
+           TQT_SLOT( slotAddExited(KProcess*) ) );
 
   if ( !kp->start( KProcess::NotifyOnExit, KProcess::AllOutput ) )
   {
@@ -248,19 +248,19 @@ void LhaArch::unarchFileInternal()
   // and we then extract everything in the archive.
   if ( m_fileList )
   {
-    QStringList::Iterator it;
+    TQStringList::Iterator it;
     for ( it = m_fileList->begin(); it != m_fileList->end(); ++it )
     {
       *kp << ( *it );
     }
   }
 
-  connect( kp, SIGNAL( receivedStdout(KProcess*, char*, int) ),
-           SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
-  connect( kp, SIGNAL( receivedStderr(KProcess*, char*, int) ),
-           SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
-  connect( kp, SIGNAL( processExited(KProcess*) ),
-           SLOT( slotExtractExited(KProcess*) ) );
+  connect( kp, TQT_SIGNAL( receivedStdout(KProcess*, char*, int) ),
+           TQT_SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
+  connect( kp, TQT_SIGNAL( receivedStderr(KProcess*, char*, int) ),
+           TQT_SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
+  connect( kp, TQT_SIGNAL( processExited(KProcess*) ),
+           TQT_SLOT( slotExtractExited(KProcess*) ) );
 
   if ( !kp->start( KProcess::NotifyOnExit, KProcess::AllOutput ) )
   {
@@ -269,7 +269,7 @@ void LhaArch::unarchFileInternal()
   }
 }
 
-void LhaArch::remove( QStringList *list )
+void LhaArch::remove( TQStringList *list )
 {
   if ( !list )
     return;
@@ -279,18 +279,18 @@ void LhaArch::remove( QStringList *list )
 
   *kp << m_archiver_program << "df" << m_filename;
 
-  QStringList::Iterator it;
+  TQStringList::Iterator it;
   for ( it = list->begin(); it != list->end(); ++it )
   {
     *kp << ( *it );
   }
 
-  connect( kp, SIGNAL( receivedStdout(KProcess*, char*, int) ),
-           SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
-  connect( kp, SIGNAL( receivedStderr(KProcess*, char*, int) ),
-           SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
-  connect( kp, SIGNAL( processExited(KProcess*) ),
-           SLOT( slotDeleteExited(KProcess*) ) );
+  connect( kp, TQT_SIGNAL( receivedStdout(KProcess*, char*, int) ),
+           TQT_SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
+  connect( kp, TQT_SIGNAL( receivedStderr(KProcess*, char*, int) ),
+           TQT_SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
+  connect( kp, TQT_SIGNAL( processExited(KProcess*) ),
+           TQT_SLOT( slotDeleteExited(KProcess*) ) );
 
   if ( !kp->start( KProcess::NotifyOnExit, KProcess::AllOutput ) )
   {

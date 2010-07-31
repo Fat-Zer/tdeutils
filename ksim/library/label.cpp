@@ -22,13 +22,13 @@
 #include <ksimconfig.h>
 #include "themetypes.h"
 
-#include <qpainter.h>
-#include <qstyle.h>
-#include <qstylesheet.h>
-#include <qsimplerichtext.h>
-#include <qcursor.h>
-#include <qpixmap.h>
-#include <qimage.h>
+#include <tqpainter.h>
+#include <tqstyle.h>
+#include <tqstylesheet.h>
+#include <tqsimplerichtext.h>
+#include <tqcursor.h>
+#include <tqpixmap.h>
+#include <tqimage.h>
 
 #include <themeloader.h>
 #include <kdebug.h>
@@ -39,31 +39,31 @@
 class KSim::Label::Private
 {
   public:
-    QColor mColour;
-    QColor sColour;
-    QRect loc;
-    QRect shad;
-    QString text;
-    QImage meterImage;
-    QPixmap background;
-    QPixmap sidePixmap;
+    TQColor mColour;
+    TQColor sColour;
+    TQRect loc;
+    TQRect shad;
+    TQString text;
+    TQImage meterImage;
+    TQPixmap background;
+    TQPixmap sidePixmap;
     bool showShadow;
 };
 
-KSim::Label::Label(QWidget *parent, const char *name, WFlags fl)
-   : QWidget(parent, name, fl)
+KSim::Label::Label(TQWidget *parent, const char *name, WFlags fl)
+   : TQWidget(parent, name, fl)
 {
   initWidget(KSim::Types::None);
 }
 
-KSim::Label::Label(int type, QWidget *parent, const char *name, 
-   WFlags fl) : QWidget(parent, name, fl)
+KSim::Label::Label(int type, TQWidget *parent, const char *name, 
+   WFlags fl) : TQWidget(parent, name, fl)
 {
   initWidget(type);
 }
 
-KSim::Label::Label(int type, const QString &text, QWidget *parent,
-   const char *name, WFlags fl) : QWidget(parent, name, fl)
+KSim::Label::Label(int type, const TQString &text, TQWidget *parent,
+   const char *name, WFlags fl) : TQWidget(parent, name, fl)
 {
   initWidget(type);
   setText(text);
@@ -74,43 +74,43 @@ KSim::Label::~Label()
   delete d;
 }
 
-const QString &KSim::Label::text() const
+const TQString &KSim::Label::text() const
 {
   return d->text;
 }
 
 void KSim::Label::configureObject(bool repaintWidget)
 {
-  QString image = themeLoader().current().meterPixmap(type(), false);
+  TQString image = themeLoader().current().meterPixmap(type(), false);
   if (image.isEmpty())
     image = themeLoader().current().panelPixmap(type());
 
   d->meterImage.load(image);
   KSim::ThemeLoader::self().reColourImage(d->meterImage);
   d->background = d->meterImage.smoothScale(size());
-  QSize oldSize = sizeHint();
+  TQSize oldSize = sizeHint();
 
   setConfigValues();
   relayoutLabel(oldSize, repaintWidget);
 }
 
-void KSim::Label::setPixmap(const QPixmap &pixmap)
+void KSim::Label::setPixmap(const TQPixmap &pixmap)
 {
   if (pixmap.serialNumber() == d->sidePixmap.serialNumber())
     return;
 
-  QSize oldSize = sizeHint();
+  TQSize oldSize = sizeHint();
   d->sidePixmap = pixmap;
 
   relayoutLabel(oldSize);
 }
 
-const QPixmap &KSim::Label::pixmap() const
+const TQPixmap &KSim::Label::pixmap() const
 {
   return d->sidePixmap;
 }
 
-QSize KSim::Label::sizeHint() const
+TQSize KSim::Label::sizeHint() const
 {
   int width = fontMetrics().size(SingleLine, text()).width();
   if (!pixmap().isNull())
@@ -120,25 +120,25 @@ QSize KSim::Label::sizeHint() const
   if (!pixmap().isNull() && pixmap().height() > height)
     height = pixmap().height();
 
-  return QSize(width, height);
+  return TQSize(width, height);
 }
 
-QSize KSim::Label::minimumSizeHint() const
+TQSize KSim::Label::minimumSizeHint() const
 {
   return sizeHint();
 }
 
 void KSim::Label::clear()
 {
-  setText(QString::null);
+  setText(TQString::null);
 }
 
-void KSim::Label::setText(const QString &text)
+void KSim::Label::setText(const TQString &text)
 {
   if (text == d->text)
     return; // If the text is the same, no need to repaint etc
 
-  QSize oldSize = sizeHint();
+  TQSize oldSize = sizeHint();
   // set the text of our widget and repaint
   d->text = text;
   relayoutLabel(oldSize);
@@ -160,29 +160,29 @@ bool KSim::Label::showShadow() const
   return d->showShadow;
 }
 
-void KSim::Label::setTextColour(const QColor &color)
+void KSim::Label::setTextColour(const TQColor &color)
 {
   d->mColour = color;
 }
 
-const QColor &KSim::Label::textColour() const
+const TQColor &KSim::Label::textColour() const
 {
   return d->mColour;
 }
 
-void KSim::Label::setShadowColour(const QColor &color)
+void KSim::Label::setShadowColour(const TQColor &color)
 {
   d->sColour = color;
 }
 
-const QColor &KSim::Label::shadowColour() const
+const TQColor &KSim::Label::shadowColour() const
 {
   return d->sColour;
 }
 
 void KSim::Label::setConfigValues()
 {
-  QFont newFont = font();
+  TQFont newFont = font();
   bool repaint = themeLoader().current().fontColours(this,
      newFont, d->mColour, d->sColour, d->showShadow);
 
@@ -193,9 +193,9 @@ void KSim::Label::setConfigValues()
     update();
 }
 
-void KSim::Label::paintEvent(QPaintEvent *)
+void KSim::Label::paintEvent(TQPaintEvent *)
 {
-  QPainter painter;
+  TQPainter painter;
   painter.begin(this);
 
   // paint our background pixmap onto the widget
@@ -212,7 +212,7 @@ void KSim::Label::paintEvent(QPaintEvent *)
   painter.end();
 }
 
-void KSim::Label::resizeEvent(QResizeEvent *ev)
+void KSim::Label::resizeEvent(TQResizeEvent *ev)
 {
   // set the location of where the shadow'ed text will be drawn
   d->shad.setWidth(ev->size().width() + 3);
@@ -225,10 +225,10 @@ void KSim::Label::resizeEvent(QResizeEvent *ev)
   d->background = d->meterImage.smoothScale(ev->size());
 }
 
-void KSim::Label::drawText(QPainter *painter, const QRect &rect,
-   const QColor &color, const QString &text)
+void KSim::Label::drawText(TQPainter *painter, const TQRect &rect,
+   const TQColor &color, const TQString &text)
 {
-  QRect location(rect);
+  TQRect location(rect);
   if (!pixmap().isNull())
     location.setX(pixmap().width() + 5);
    
@@ -236,39 +236,39 @@ void KSim::Label::drawText(QPainter *painter, const QRect &rect,
       0, text, -1, &color);
 }
 
-void KSim::Label::drawPixmap(QPainter *painter, const QRect &rect,
-   const QPixmap &pixmap)
+void KSim::Label::drawPixmap(TQPainter *painter, const TQRect &rect,
+   const TQPixmap &pixmap)
 {
-  QRect location(rect);
+  TQRect location(rect);
   location.setWidth(pixmap.width());
 
   style().drawItem(painter, location, AlignCenter, colorGroup(), true,
-    pixmap.isNull() ? 0 : &pixmap, QString::null);
+    pixmap.isNull() ? 0 : &pixmap, TQString::null);
 }
 
-void KSim::Label::setTextLocation(const QRect &rect)
+void KSim::Label::setTextLocation(const TQRect &rect)
 {
   d->loc = rect;
 }
 
-const QRect &KSim::Label::textLocation() const
+const TQRect &KSim::Label::textLocation() const
 {
   return d->loc;
 }
 
-void KSim::Label::setShadowLocation(const QRect &rect)
+void KSim::Label::setShadowLocation(const TQRect &rect)
 {
   d->shad = rect;
 }
 
-const QRect &KSim::Label::shadowLocation() const
+const TQRect &KSim::Label::shadowLocation() const
 {
   return d->shad;
 }
 
-void KSim::Label::setThemePixmap(const QString &image)
+void KSim::Label::setThemePixmap(const TQString &image)
 {
-  QSize oldSize = sizeHint();
+  TQSize oldSize = sizeHint();
   d->meterImage.reset();
   d->meterImage.load(image);
   KSim::ThemeLoader::self().reColourImage(d->meterImage);
@@ -276,7 +276,7 @@ void KSim::Label::setThemePixmap(const QString &image)
   relayoutLabel(oldSize);
 }
 
-void KSim::Label::relayoutLabel(const QSize &old, bool repaint)
+void KSim::Label::relayoutLabel(const TQSize &old, bool repaint)
 {
   if (sizeHint() != old) {
     updateGeometry();
@@ -294,8 +294,8 @@ void KSim::Label::initWidget(int type)
 
   // try to reduce flicker as much as possible
   setBackgroundMode(NoBackground);
-  setSizePolicy(QSizePolicy(QSizePolicy::MinimumExpanding,
-     QSizePolicy::Fixed));
+  setSizePolicy(TQSizePolicy(TQSizePolicy::MinimumExpanding,
+     TQSizePolicy::Fixed));
 
   configureObject();
 }

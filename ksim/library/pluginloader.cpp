@@ -28,7 +28,7 @@
 #include <kstandarddirs.h>
 #include <kmessagebox.h>
 
-#include <qstringlist.h>
+#include <tqstringlist.h>
 
 class KSim::PluginInfo::Private
 {
@@ -39,17 +39,17 @@ KSim::PluginInfo::~PluginInfo()
 {
 }
 
-const QString &KSim::PluginInfo::name() const
+const TQString &KSim::PluginInfo::name() const
 {
   return m_name;
 }
 
-QCString KSim::PluginInfo::libName(bool includePrefix) const
+TQCString KSim::PluginInfo::libName(bool includePrefix) const
 {
   return (includePrefix ? "ksim_" + m_libName : m_libName);
 }
 
-const QString &KSim::PluginInfo::location() const
+const TQString &KSim::PluginInfo::location() const
 {
   return m_location;
 }
@@ -63,8 +63,8 @@ class KSim::PluginLoader::Private
   public:
     typedef KSim::PluginObject *(PluginPtr)(const char *);
     KSim::PluginList pluginList;
-    QString error;
-    QString lib;
+    TQString error;
+    TQString lib;
     bool lastLoaded;
     static const char *const ksimString;
 };
@@ -119,7 +119,7 @@ bool KSim::PluginLoader::loadPlugin(const KDesktopFile &file)
   return true;
 }
 
-bool KSim::PluginLoader::unloadPlugin(const QCString &name)
+bool KSim::PluginLoader::unloadPlugin(const TQCString &name)
 {
   if (name.isEmpty())
     return false;
@@ -156,7 +156,7 @@ bool KSim::PluginLoader::isLoaded(const KSim::Plugin &info) const
   return isLoaded(info.libName());
 }
 
-bool KSim::PluginLoader::isLoaded(const QCString &library) const
+bool KSim::PluginLoader::isLoaded(const TQCString &library) const
 {
   if (library.isEmpty())
     return false;
@@ -164,15 +164,15 @@ bool KSim::PluginLoader::isLoaded(const QCString &library) const
   return !find(library).isNull();
 }
 
-KSim::PluginInfo KSim::PluginLoader::findPluginInfo(const QString &name,
+KSim::PluginInfo KSim::PluginLoader::findPluginInfo(const TQString &name,
    SearchType type) const
 {
-  QString location;
+  TQString location;
 
   switch (type) {
     case Name: {
-      QStringList files = KGlobal::dirs()->findAllResources("data", "ksim/monitors/*.desktop");
-      QStringList::ConstIterator it;
+      TQStringList files = KGlobal::dirs()->findAllResources("data", "ksim/monitors/*.desktop");
+      TQStringList::ConstIterator it;
       for (it = files.begin(); it != files.end(); ++it) {
         KDesktopFile file((*it));
         if (file.readName() == name) {
@@ -183,8 +183,8 @@ KSim::PluginInfo KSim::PluginLoader::findPluginInfo(const QString &name,
       break;
     }
     case LibName: {
-      QStringList files = KGlobal::dirs()->findAllResources("data", "ksim/monitors/*.desktop");
-      QStringList::ConstIterator it;
+      TQStringList files = KGlobal::dirs()->findAllResources("data", "ksim/monitors/*.desktop");
+      TQStringList::ConstIterator it;
       for (it = files.begin(); it != files.end(); ++it) {
         KDesktopFile file((*it));
         if (file.readEntry("X-KSIM-LIBRARY") == name) {
@@ -211,12 +211,12 @@ KSim::PluginInfo KSim::PluginLoader::findPluginInfo(const QString &name,
   return info;
 }
 
-KSim::Plugin &KSim::PluginLoader::find(const QCString &libName)
+KSim::Plugin &KSim::PluginLoader::find(const TQCString &libName)
 {
   if (libName.isEmpty())
     return KSim::Plugin::null;
 
-  QCString library(libName);
+  TQCString library(libName);
   if (libName.find(Private::ksimString) == -1)
     library.prepend(Private::ksimString);
 
@@ -229,12 +229,12 @@ KSim::Plugin &KSim::PluginLoader::find(const QCString &libName)
   return KSim::Plugin::null;
 }
 
-const KSim::Plugin &KSim::PluginLoader::find(const QCString &libName) const
+const KSim::Plugin &KSim::PluginLoader::find(const TQCString &libName) const
 {
   if (libName.isEmpty())
     return KSim::Plugin::null;
 
-  QCString library(libName);
+  TQCString library(libName);
   if (libName.find(Private::ksimString) == -1)
     library.prepend(Private::ksimString);
 
@@ -277,7 +277,7 @@ KSim::Plugin &KSim::PluginLoader::plugin()
   return (d->lastLoaded ? d->pluginList.last() : KSim::Plugin::null);
 }
 
-KSim::PluginLoader::PluginLoader() : QObject(0, "PluginLoader")
+KSim::PluginLoader::PluginLoader() : TQObject(0, "PluginLoader")
 {
   d = new KSim::PluginLoader::Private;
   d->lastLoaded = false;
@@ -294,20 +294,20 @@ void KSim::PluginLoader::cleanup()
 
 KSim::PluginLoader::ErrorCode KSim::PluginLoader::createPlugin(const KDesktopFile &file)
 {
-  d->error = QString::null;
-  QCString pluginName(file.readEntry("X-KSIM-LIBRARY").local8Bit());
+  d->error = TQString::null;
+  TQCString pluginName(file.readEntry("X-KSIM-LIBRARY").local8Bit());
   if (pluginName.isEmpty())
     return EmptyLibName;
 
-  QCString libName(Private::ksimString + pluginName);
+  TQCString libName(Private::ksimString + pluginName);
   KLibrary *library = KLibLoader::self()->library(libName);
   if (!library)
     return LibNotFound;
 
-  QCString symbol("init_plugin");
+  TQCString symbol("init_plugin");
   if (Private::PluginPtr *create = (Private::PluginPtr *)(library->symbol(symbol))) {
     d->pluginList.append(KSim::Plugin(create(pluginName), file));
-    d->lib = QString::null;
+    d->lib = TQString::null;
     d->lastLoaded = true;
   }
   else {

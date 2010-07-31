@@ -22,8 +22,8 @@
 #define _HEX_EDIT_STATE_H_
 
 #include <kapplication.h>
-#include <qfont.h> 
-#include <qpalette.h>
+#include <tqfont.h> 
+#include <tqpalette.h>
 #include <kglobalsettings.h>
 
 
@@ -137,7 +137,7 @@ class SDisplayLayout
       }
     }
   
-    QString modeStrings( uint index )
+    TQString modeStrings( uint index )
     {
       if( index == hexadecimal )
       {
@@ -166,23 +166,23 @@ class SDisplayLayout
     }
 
 
-    QString primaryModeString( void )
+    TQString primaryModeString( void )
     {
       return( modeStrings( primaryMode > textOnly ? 
 			   hexadecimal : primaryMode ));
     }
 
-    QString secondaryModeString( void )
+    TQString secondaryModeString( void )
     {
       return( modeStrings( secondaryMode == textOnly ? textOnly : hide ) );
     }
 
-    QString offsetModeString( void )
+    TQString offsetModeString( void )
     {
       return( modeStrings( offsetMode == hexadecimal ? hexadecimal : hide ) );
     }
 
-    QString gridModeString( void )
+    TQString gridModeString( void )
     {
       if( horzGridWidth == 0 && vertGridWidth == 0 )
       {
@@ -202,7 +202,7 @@ class SDisplayLayout
       }
     }
 
-    void setPrimaryMode( const QString & str )
+    void setPrimaryMode( const TQString & str )
     {
       if( str.isNull() || str == "hexadecimal" )
       {
@@ -230,7 +230,7 @@ class SDisplayLayout
       }
     }
 
-    void setSecondaryMode( const QString & str )
+    void setSecondaryMode( const TQString & str )
     {
       if( str.isNull() || str == "textOnly" )
       {
@@ -242,7 +242,7 @@ class SDisplayLayout
       }
     }
 
-    void setOffsetMode( const QString & str )
+    void setOffsetMode( const TQString & str )
     {
       if( str.isNull() || str == "hexadecimal" )
       {
@@ -254,7 +254,7 @@ class SDisplayLayout
       }
     }
 
-    void setGridMode( const QString & str )
+    void setGridMode( const TQString & str )
     {
       if( str.isNull() || str == "none" )
       {
@@ -322,7 +322,7 @@ class SDisplayCursor
       thickInsertShape = true;
     }
 
-    QString modeStrings( uint index )
+    TQString modeStrings( uint index )
     {
       if( index == hide )
       {
@@ -338,12 +338,12 @@ class SDisplayCursor
       }
     }
 
-    QString focusModeString( void )
+    TQString focusModeString( void )
     {
       return( modeStrings( focusMode > ignore ? stopBlinking : focusMode ));
     }
 
-    void setFocusMode( const QString & str )
+    void setFocusMode( const TQString & str )
     {
       if( str.isNull() || str == "hide" )
       {
@@ -401,25 +401,25 @@ class SDisplayColor
     }
 
     bool useSystemColor;
-    QColor offsetBg;
-    QColor textBg;
-    QColor secondTextBg;
-    QColor inactiveBg;
-    QColor selectBg;
-    QColor selectFg;
-    QColor markBg;
-    QColor markFg;
-    QColor primaryFg[2];
-    QColor offsetFg;
-    QColor secondaryFg;
-    QColor nonPrintFg;
-    QColor gridFg;
-    QColor leftSeparatorFg;
-    QColor rightSeparatorFg;
-    QColor cursorBg;
-    QColor cursorFg;
-    QColor bookmarkBg;
-    QColor bookmarkFg;
+    TQColor offsetBg;
+    TQColor textBg;
+    TQColor secondTextBg;
+    TQColor inactiveBg;
+    TQColor selectBg;
+    TQColor selectFg;
+    TQColor markBg;
+    TQColor markFg;
+    TQColor primaryFg[2];
+    TQColor offsetFg;
+    TQColor secondaryFg;
+    TQColor nonPrintFg;
+    TQColor gridFg;
+    TQColor leftSeparatorFg;
+    TQColor rightSeparatorFg;
+    TQColor cursorBg;
+    TQColor cursorFg;
+    TQColor bookmarkBg;
+    TQColor bookmarkFg;
 };
 
 
@@ -434,8 +434,8 @@ class SDisplayFontInfo
       return( *this );
     }
 
-    QFont font;
-    QChar nonPrintChar;
+    TQFont font;
+    TQChar nonPrintChar;
 };
 
 class SDisplayFont
@@ -449,8 +449,8 @@ class SDisplayFont
     }
 
     bool  useSystemFont;
-    QFont localFont;
-    QChar nonPrintChar;
+    TQFont localFont;
+    TQChar nonPrintChar;
 };
   
 
@@ -487,7 +487,7 @@ class  SDisplayMisc
     }
 
 
-    QString fileStrings( uint index )
+    TQString fileStrings( uint index )
     {
       if( index == mostRecent )
       {
@@ -504,12 +504,12 @@ class  SDisplayMisc
     }
 
 
-    QString openFileString( void )
+    TQString openFileString( void )
     {
       return( fileStrings( openFile > allRecent ? none : openFile ));
     }
 
-    void setOpenFile( const QString &str )
+    void setOpenFile( const TQString &str )
     {
       if( str.isNull() == true || str == "none" )
       {

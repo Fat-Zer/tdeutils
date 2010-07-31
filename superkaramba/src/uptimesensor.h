@@ -11,11 +11,11 @@
 #define UPTIMESENSOR_H
 #include "sensor.h"
 
-#include <qfile.h>
-#include <qtextstream.h>
-#include <qstring.h>
-#include <qregexp.h>
-#include <qdatetime.h>
+#include <tqfile.h>
+#include <tqtextstream.h>
+#include <tqstring.h>
+#include <tqregexp.h>
+#include <tqdatetime.h>
 
 class UptimeSensor :  public Sensor
 {

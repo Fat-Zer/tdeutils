@@ -22,35 +22,35 @@
 #include "textwidget.h"
 #include "textregexp.h"
 #include "selectablelineedit.h"
-#include <qlayout.h>
+#include <tqlayout.h>
 
-TextWidget::TextWidget(RegExpEditorWindow* editorWindow, QWidget *parent,
+TextWidget::TextWidget(RegExpEditorWindow* editorWindow, TQWidget *parent,
                        const char *name)
   :RegExpWidget(editorWindow, parent, name)
 {
-  init( QString::fromLocal8Bit("") );
+  init( TQString::fromLocal8Bit("") );
 }
 
 TextWidget::TextWidget( TextRegExp* regexp,  RegExpEditorWindow* editorWindow,
-            QWidget* parent, const char* name )
+            TQWidget* parent, const char* name )
   : RegExpWidget( editorWindow, parent, name )
 {
   init(regexp->text());
 }
 
-void TextWidget::init( const QString& txt )
+void TextWidget::init( const TQString& txt )
 {
-  QHBoxLayout *lay = new QHBoxLayout(this);
+  TQHBoxLayout *lay = new TQHBoxLayout(this);
   _edit = new SelectableLineEdit( this, this, "TextWidget::edit" );
-  _edit->setDragEnabled( false ); //otherwise QLineEdit::mouseMoveEvent will set the cursor over and over again.
+  _edit->setDragEnabled( false ); //otherwise TQLineEdit::mouseMoveEvent will set the cursor over and over again.
   lay->addWidget(_edit);
 
   _edit->setText( txt );
 
-  connect( _edit, SIGNAL( parentPleaseUpdate() ), this, SLOT(slotUpdate()) );
+  connect( _edit, TQT_SIGNAL( parentPleaseUpdate() ), this, TQT_SLOT(slotUpdate()) );
   setFocusProxy( _edit );
   _edit->installEventFilter( this );
-  connect( _edit, SIGNAL( textChanged( const QString & ) ), _editorWindow, SLOT( emitChange() ) );
+  connect( _edit, TQT_SIGNAL( textChanged( const TQString & ) ), _editorWindow, TQT_SLOT( emitChange() ) );
 }
 
 
@@ -60,18 +60,18 @@ void TextWidget::slotUpdate()
   // widget may not be enough for the parent to change size, and in that
   // case the parent would not repaint, and the text widget would not be
   // resized.
-  QWidget *p = static_cast<QWidget*>(parent());
+  TQWidget *p = static_cast<TQWidget*>(parent());
   if (p)
     p->repaint();
   _editorWindow->updateContent( this );
 }
 
-QSize TextWidget::sizeHint() const
+TQSize TextWidget::sizeHint() const
 {
   return _edit->sizeHint();
 }
 
-void TextWidget::paintEvent( QPaintEvent *e)
+void TextWidget::paintEvent( TQPaintEvent *e)
 {
   RegExpWidget::paintEvent(e);
 }
@@ -107,32 +107,32 @@ RegExp* TextWidget::regExp() const
 	return new TextRegExp( isSelected(), _edit->text() );
 }
 
-bool TextWidget::eventFilter( QObject*, QEvent* event)
+bool TextWidget::eventFilter( TQObject*, TQEvent* event)
 {
     // This is an event filter (in contrast to methods in SelectableLineEdit),
     // otherwise lots of functions would need to be exported from TextWidget.
-    if ( event->type() == QEvent::MouseButtonRelease ) {
+    if ( event->type() == TQEvent::MouseButtonRelease ) {
         if ( _editorWindow->isInserting() ) {
             if ( acceptWidgetInsert( _editorWindow->insertType() ) ) {
-                mouseReleaseEvent( static_cast<QMouseEvent*>(event) );
+                mouseReleaseEvent( static_cast<TQMouseEvent*>(event) );
             }
             return true;
         }
     }
-    else if ( event->type() == QEvent::MouseButtonPress ) {
+    else if ( event->type() == TQEvent::MouseButtonPress ) {
         if ( _editorWindow->isInserting() ) {
             return true;
         }
         else  if ( isSelected() ) {
-            QMouseEvent* e = static_cast<QMouseEvent*>( event );
-            QMouseEvent ev( event->type(), mapTo(_editorWindow, e->pos()),
+            TQMouseEvent* e = static_cast<TQMouseEvent*>( event );
+            TQMouseEvent ev( event->type(), mapTo(_editorWindow, e->pos()),
                             e->button(), e->state());
-            QApplication::sendEvent( _editorWindow, &ev );
+            TQApplication::sendEvent( _editorWindow, &ev );
             return true;
         }
     }
 
-    else if ( event->type() == QEvent::Enter ) {
+    else if ( event->type() == TQEvent::Enter ) {
         if ( _editorWindow->isInserting() ) {
             if ( acceptWidgetInsert( _editorWindow->insertType() ) ) {
                 _edit->setCursor(crossCursor);
@@ -148,7 +148,7 @@ bool TextWidget::eventFilter( QObject*, QEvent* event)
             _edit->setCursor( ibeamCursor );
         }
     }
-    else if ( event->type() == QEvent::MouseButtonDblClick &&  _editorWindow->isInserting() ) {
+    else if ( event->type() == TQEvent::MouseButtonDblClick &&  _editorWindow->isInserting() ) {
         return true;
     }
     return false;

@@ -32,7 +32,7 @@
 #include <string.h>
 
 // QT includes
-#include <qdir.h>
+#include <tqdir.h>
 
 // KDE includes
 #include <kdebug.h>
@@ -45,7 +45,7 @@
 #include "settings.h"
 #include "ar.h"
 
-ArArch::ArArch( ArkWidget *_gui, const QString & _fileName )
+ArArch::ArArch( ArkWidget *_gui, const TQString & _fileName )
   : Arch(_gui, _fileName )
 {
   m_archiver_program = m_unarchiver_program = "ar";
@@ -56,14 +56,14 @@ ArArch::ArArch( ArkWidget *_gui, const QString & _fileName )
   m_numCols = 5;
   m_dateCol = 4; m_fixYear = 8; m_repairMonth = 5; m_fixDay = 6; m_fixTime = 7;
 
-  m_archCols.append(new ArchColumns(1, QRegExp("[a-zA-Z-]+"), 12)); // Perms
-  m_archCols.append(new ArchColumns(2, QRegExp("[^\\s]+"), 128)); //User/grp
-  m_archCols.append(new ArchColumns(3, QRegExp("[0-9]+"))); // Size
-  m_archCols.append(new ArchColumns(5, QRegExp("[a-zA-Z]+"), 4)); // Month
-  m_archCols.append(new ArchColumns(6, QRegExp("[0-9]+"), 2)); // Day
-  m_archCols.append(new ArchColumns(7, QRegExp("[0-9:]+"), 6)); // Time
-  m_archCols.append(new ArchColumns(8, QRegExp("[0-9]+"), 5)); // Year
-  m_archCols.append(new ArchColumns(0, QRegExp("[^\\s][^\\n]+"), 4096));// File
+  m_archCols.append(new ArchColumns(1, TQRegExp("[a-zA-Z-]+"), 12)); // Perms
+  m_archCols.append(new ArchColumns(2, TQRegExp("[^\\s]+"), 128)); //User/grp
+  m_archCols.append(new ArchColumns(3, TQRegExp("[0-9]+"))); // Size
+  m_archCols.append(new ArchColumns(5, TQRegExp("[a-zA-Z]+"), 4)); // Month
+  m_archCols.append(new ArchColumns(6, TQRegExp("[0-9]+"), 2)); // Day
+  m_archCols.append(new ArchColumns(7, TQRegExp("[0-9:]+"), 6)); // Time
+  m_archCols.append(new ArchColumns(8, TQRegExp("[0-9]+"), 5)); // Year
+  m_archCols.append(new ArchColumns(0, TQRegExp("[^\\s][^\\n]+"), 4096));// File
 
   kdDebug(1601) << "ArArch constructor" << endl;
 }
@@ -89,18 +89,18 @@ void ArArch::open()
 
   KProcess *kp = m_currentProcess = new KProcess;
   *kp << m_archiver_program << "vt" << m_filename;
-  connect( kp, SIGNAL(receivedStdout(KProcess*, char*, int)),
-	   this, SLOT(slotReceivedTOC(KProcess*, char*, int)));
-  connect( kp, SIGNAL(receivedStderr(KProcess*, char*, int)),
-	   this, SLOT(slotReceivedOutput(KProcess*, char*, int)));
+  connect( kp, TQT_SIGNAL(receivedStdout(KProcess*, char*, int)),
+	   this, TQT_SLOT(slotReceivedTOC(KProcess*, char*, int)));
+  connect( kp, TQT_SIGNAL(receivedStderr(KProcess*, char*, int)),
+	   this, TQT_SLOT(slotReceivedOutput(KProcess*, char*, int)));
 
-  connect( kp, SIGNAL(processExited(KProcess*)), this,
-	   SLOT(slotOpenExited(KProcess*)));
+  connect( kp, TQT_SIGNAL(processExited(KProcess*)), this,
+	   TQT_SLOT(slotOpenExited(KProcess*)));
 
   if (kp->start(KProcess::NotifyOnExit, KProcess::AllOutput) == false)
     {
       KMessageBox::error( 0, i18n("Could not start a subprocess.") );
-      emit sigOpen(this, false, QString::null, 0 );
+      emit sigOpen(this, false, TQString::null, 0 );
     }
   kdDebug(1601) << "-ArArch::open" << endl;
 }
@@ -111,10 +111,10 @@ void ArArch::create()
   kp->clearArguments();
   *kp << m_archiver_program << "c" << m_filename;
 
-  connect( kp, SIGNAL(receivedStdout(KProcess*, char*, int)),
-	   this, SLOT(slotReceivedOutput(KProcess*, char*, int)));
-  connect( kp, SIGNAL(receivedStderr(KProcess*, char*, int)),
-	   this, SLOT(slotReceivedOutput(KProcess*, char*, int)));
+  connect( kp, TQT_SIGNAL(receivedStdout(KProcess*, char*, int)),
+	   this, TQT_SLOT(slotReceivedOutput(KProcess*, char*, int)));
+  connect( kp, TQT_SIGNAL(receivedStderr(KProcess*, char*, int)),
+	   this, TQT_SLOT(slotReceivedOutput(KProcess*, char*, int)));
 
   if (kp->start(KProcess::Block) == false)
     {
@@ -129,7 +129,7 @@ void ArArch::create()
 		   | Arch::View);
 }
 
-void ArArch::addFile( const QStringList &urls )
+void ArArch::addFile( const TQStringList &urls )
 {
   kdDebug(1601) << "+ArArch::addFile" << endl;
   KProcess *kp = m_currentProcess = new KProcess;
@@ -143,22 +143,22 @@ void ArArch::addFile( const QStringList &urls )
 
   *kp << m_filename;
 
-  QStringList::ConstIterator iter;
+  TQStringList::ConstIterator iter;
   KURL url( urls.first() );
-  QDir::setCurrent( url.directory() );
+  TQDir::setCurrent( url.directory() );
   for (iter = urls.begin(); iter != urls.end(); ++iter )
   {
     KURL fileURL( *iter );
     *kp << fileURL.fileName();
   }
 
-  connect( kp, SIGNAL(receivedStdout(KProcess*, char*, int)),
-	   this, SLOT(slotReceivedOutput(KProcess*, char*, int)));
-  connect( kp, SIGNAL(receivedStderr(KProcess*, char*, int)),
-	   this, SLOT(slotReceivedOutput(KProcess*, char*, int)));
+  connect( kp, TQT_SIGNAL(receivedStdout(KProcess*, char*, int)),
+	   this, TQT_SLOT(slotReceivedOutput(KProcess*, char*, int)));
+  connect( kp, TQT_SIGNAL(receivedStderr(KProcess*, char*, int)),
+	   this, TQT_SLOT(slotReceivedOutput(KProcess*, char*, int)));
 
-  connect( kp, SIGNAL(processExited(KProcess*)), this,
-	   SLOT(slotAddExited(KProcess*)));
+  connect( kp, TQT_SIGNAL(processExited(KProcess*)), this,
+	   TQT_SLOT(slotAddExited(KProcess*)));
 
   if (kp->start(KProcess::NotifyOnExit, KProcess::AllOutput) == false)
     {
@@ -175,7 +175,7 @@ void ArArch::unarchFileInternal()
   // if m_destDir is empty, abort with error.
 
   kdDebug(1601) << "+ArArch::unarchFile" << endl;
-  QString dest;
+  TQString dest;
 
   if (m_destDir.isEmpty() || m_destDir.isNull())
     {
@@ -187,7 +187,7 @@ void ArArch::unarchFileInternal()
   // ar has no option to specify the destination directory
   // so I have to change to it.
 
-  bool ret = QDir::setCurrent(dest);
+  bool ret = TQDir::setCurrent(dest);
  // I already checked the validity of the dir before coming here
   Q_ASSERT(ret);
 
@@ -202,20 +202,20 @@ void ArArch::unarchFileInternal()
   // and we then extract everything in the archive.
   if (m_fileList)
     {
-      for ( QStringList::Iterator it = m_fileList->begin();
+      for ( TQStringList::Iterator it = m_fileList->begin();
 	    it != m_fileList->end(); ++it )
 	{
 	  *kp << (*it);
 	}
     }
 
-  connect( kp, SIGNAL(receivedStdout(KProcess*, char*, int)),
-	   this, SLOT(slotReceivedOutput(KProcess*, char*, int)));
-  connect( kp, SIGNAL(receivedStderr(KProcess*, char*, int)),
-	   this, SLOT(slotReceivedOutput(KProcess*, char*, int)));
+  connect( kp, TQT_SIGNAL(receivedStdout(KProcess*, char*, int)),
+	   this, TQT_SLOT(slotReceivedOutput(KProcess*, char*, int)));
+  connect( kp, TQT_SIGNAL(receivedStderr(KProcess*, char*, int)),
+	   this, TQT_SLOT(slotReceivedOutput(KProcess*, char*, int)));
 
-  connect( kp, SIGNAL(processExited(KProcess*)), this,
-	   SLOT(slotExtractExited(KProcess*)));
+  connect( kp, TQT_SIGNAL(processExited(KProcess*)), this,
+	   TQT_SLOT(slotExtractExited(KProcess*)));
 
   if (kp->start(KProcess::NotifyOnExit, KProcess::AllOutput) == false)
     {
@@ -224,7 +224,7 @@ void ArArch::unarchFileInternal()
     }
 }
 
-void ArArch::remove(QStringList *list)
+void ArArch::remove(TQStringList *list)
 {
   kdDebug(1601) << "+ArArch::remove" << endl;
 
@@ -235,20 +235,20 @@ void ArArch::remove(QStringList *list)
   kp->clearArguments();
 
   *kp << m_archiver_program << "d" << m_filename;
-  for ( QStringList::Iterator it = list->begin();
+  for ( TQStringList::Iterator it = list->begin();
 	it != list->end(); ++it )
     {
-      QString str = *it;
+      TQString str = *it;
       *kp << str;
     }
 
-  connect( kp, SIGNAL(receivedStdout(KProcess*, char*, int)),
-	   this, SLOT(slotReceivedOutput(KProcess*, char*, int)));
-  connect( kp, SIGNAL(receivedStderr(KProcess*, char*, int)),
-	   this, SLOT(slotReceivedOutput(KProcess*, char*, int)));
+  connect( kp, TQT_SIGNAL(receivedStdout(KProcess*, char*, int)),
+	   this, TQT_SLOT(slotReceivedOutput(KProcess*, char*, int)));
+  connect( kp, TQT_SIGNAL(receivedStderr(KProcess*, char*, int)),
+	   this, TQT_SLOT(slotReceivedOutput(KProcess*, char*, int)));
 
-  connect( kp, SIGNAL(processExited(KProcess*)), this,
-	   SLOT(slotDeleteExited(KProcess*)));
+  connect( kp, TQT_SIGNAL(processExited(KProcess*)), this,
+	   TQT_SLOT(slotDeleteExited(KProcess*)));
 
   if (kp->start(KProcess::NotifyOnExit, KProcess::AllOutput) == false)
     {

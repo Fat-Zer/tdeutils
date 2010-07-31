@@ -43,26 +43,26 @@
 #include <krichtextlabel.h>
 
 // other Qt headers:
-#include <qlayout.h>
-#include <qlabel.h>
-#include <qcheckbox.h>
-#include <qhbox.h>
-#include <qvgroupbox.h>
-#include <qgrid.h>
-#include <qpushbutton.h>
-#include <qslider.h>
-#include <qtooltip.h>
+#include <tqlayout.h>
+#include <tqlabel.h>
+#include <tqcheckbox.h>
+#include <tqhbox.h>
+#include <tqvgroupbox.h>
+#include <tqgrid.h>
+#include <tqpushbutton.h>
+#include <tqslider.h>
+#include <tqtooltip.h>
 
 extern void wake_laptop_daemon();
 
-SonyConfig::SonyConfig(QWidget * parent, const char *name)
+SonyConfig::SonyConfig(TQWidget * parent, const char *name)
   : KCModule(parent, name)
 {
     KGlobal::locale()->insertCatalogue("klaptopdaemon"); // For translation of klaptopdaemon messages
 
     config =  new KConfig("kcmlaptoprc");
 
-    QVBoxLayout *top_layout = new QVBoxLayout( this, KDialog::marginHint(),
+    TQVBoxLayout *top_layout = new TQVBoxLayout( this, KDialog::marginHint(),
 					       KDialog::spacingHint() );
 
     // TODO: remove linefeed from string, can't do it right now coz we have a string freeze
@@ -70,15 +70,15 @@ SonyConfig::SonyConfig(QWidget * parent, const char *name)
 		    	"'sonypi' device for your laptop - you should not enable the options below if you\nalso "
 			"use the 'sonypid' program in your system").replace("\n", " "), this));
 
-    enableScrollBar = new QCheckBox( i18n("Enable &scroll bar"), this );
-    QToolTip::add( enableScrollBar, i18n( "When checked this box enables the scrollbar so that it works under KDE" ) );
+    enableScrollBar = new TQCheckBox( i18n("Enable &scroll bar"), this );
+    TQToolTip::add( enableScrollBar, i18n( "When checked this box enables the scrollbar so that it works under KDE" ) );
     top_layout->addWidget( enableScrollBar );
-    connect( enableScrollBar, SIGNAL(clicked()), this, SLOT(configChanged()) );
+    connect( enableScrollBar, TQT_SIGNAL(clicked()), this, TQT_SLOT(configChanged()) );
 
-    enableMiddleEmulation = new QCheckBox( i18n("&Emulate middle mouse button with scroll bar press"), this );
-    QToolTip::add( enableMiddleEmulation, i18n( "When checked this box enables pressing the scroll bar to act in the same way as pressing the middle button on a 3 button mouse" ) );
+    enableMiddleEmulation = new TQCheckBox( i18n("&Emulate middle mouse button with scroll bar press"), this );
+    TQToolTip::add( enableMiddleEmulation, i18n( "When checked this box enables pressing the scroll bar to act in the same way as pressing the middle button on a 3 button mouse" ) );
     top_layout->addWidget( enableMiddleEmulation );
-    connect( enableMiddleEmulation, SIGNAL(clicked()), this, SLOT(configChanged()) );
+    connect( enableMiddleEmulation, TQT_SIGNAL(clicked()), this, TQT_SLOT(configChanged()) );
 
     if (::access("/dev/sonypi", R_OK) != 0) {
 	enableMiddleEmulation->setEnabled(0);
@@ -87,10 +87,10 @@ SonyConfig::SonyConfig(QWidget * parent, const char *name)
         // TODO: remove linefeed from string, can't do it right now coz we have a string freeze
     	top_layout->addWidget(new KRichTextLabel(i18n("The /dev/sonypi is not accessable, if you wish to use the above features its\n"
 					      "protections need to be changed. Clicking on the button below will change them\n").replace("\n", " "), this));
-        QHBoxLayout *ll = new QHBoxLayout();
-        QPushButton *setupButton = new QPushButton(i18n("Setup /dev/sonypi"), this);
-        connect( setupButton, SIGNAL(clicked()), this, SLOT(setupHelper()) );
-        QToolTip::add( setupButton, i18n( "This button can be used to enable the sony specific features" ) );
+        TQHBoxLayout *ll = new TQHBoxLayout();
+        TQPushButton *setupButton = new TQPushButton(i18n("Setup /dev/sonypi"), this);
+        connect( setupButton, TQT_SIGNAL(clicked()), this, TQT_SLOT(setupHelper()) );
+        TQToolTip::add( setupButton, i18n( "This button can be used to enable the sony specific features" ) );
         ll->addStretch(2);
         ll->addWidget(setupButton);
         ll->addStretch(8);
@@ -99,7 +99,7 @@ SonyConfig::SonyConfig(QWidget * parent, const char *name)
     
 
     top_layout->addStretch(1);
-    top_layout->addWidget( new QLabel( i18n("Version: %1").arg(LAPTOP_VERSION), this), 0, Qt::AlignRight );
+    top_layout->addWidget( new TQLabel( i18n("Version: %1").arg(LAPTOP_VERSION), this), 0, Qt::AlignRight );
 
 
     load();      
@@ -107,7 +107,7 @@ SonyConfig::SonyConfig(QWidget * parent, const char *name)
 
 void SonyConfig::setupHelper()
 {
-	QString kdesu = KStandardDirs::findExe("kdesu");
+	TQString kdesu = KStandardDirs::findExe("kdesu");
 	if (!kdesu.isEmpty()) {
 		int rc = KMessageBox::warningContinueCancel(0,
 				i18n("You will need to supply a root password "
@@ -182,7 +182,7 @@ void SonyConfig::configChanged()
 }
 
 
-QString SonyConfig::quickHelp() const
+TQString SonyConfig::quickHelp() const
 {
   return i18n("<h1>Sony Laptop Hardware Setup</h1>This module allows you to configure "
 	"some Sony laptop hardware for your system");

@@ -29,7 +29,7 @@ KHexEditBrowserExtension::KHexEditBrowserExtension( KHexEditPart *P )
   : KParts::BrowserExtension( P, "khexeditpartbrowserextension" ),
   HexEditPart( P )
 {
-  connect( HexEditPart->HexEdit, SIGNAL( selectionChanged() ), this, SLOT( slotSelectionChanged() ) );
+  connect( HexEditPart->HexEdit, TQT_SIGNAL( selectionChanged() ), this, TQT_SLOT( slotSelectionChanged() ) );
 }
 
 void KHexEditBrowserExtension::copy()
@@ -44,7 +44,7 @@ void KHexEditBrowserExtension::slotSelectionChanged()
 }
 
 
-void KHexEditBrowserExtension::saveState( QDataStream &stream )
+void KHexEditBrowserExtension::saveState( TQDataStream &stream )
 {
   KParts::BrowserExtension::saveState( stream );
 
@@ -59,7 +59,7 @@ void KHexEditBrowserExtension::saveState( QDataStream &stream )
 }
 
 
-void KHexEditBrowserExtension::restoreState( QDataStream &stream )
+void KHexEditBrowserExtension::restoreState( TQDataStream &stream )
 {
   KParts::BrowserExtension::restoreState( stream );
 
@@ -67,7 +67,7 @@ void KHexEditBrowserExtension::restoreState( QDataStream &stream )
   int VisibleBufferColumns;
   int ResizeStyle;
   int Coding;
-  QString EncodingName;
+  TQString EncodingName;
   int ShowUnprintable;
   int x, y;
   int Position;

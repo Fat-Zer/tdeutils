@@ -10,20 +10,20 @@
 // Copyright: See COPYING file that comes with this distribution
 //
 //
-#include <qwidget.h>
+#include <tqwidget.h>
 
 #include <kdebug.h>
 
 #include "modeslist.h"
 
-ModesList::ModesList(QWidget *parent, const char *name) : KListView(parent, name)
+ModesList::ModesList(TQWidget *parent, const char *name) : KListView(parent, name)
 {
 	setAcceptDrops(true);
 	setDropVisualizer(false);
 	setDropHighlighter(true);
 }
 
-bool ModesList::acceptDrag(QDropEvent *) const
+bool ModesList::acceptDrag(TQDropEvent *) const
 {
 	// TODO: make safer by checking source/mime type
 	// TODO: make safer by only allowing drops on the correct remote control's modes

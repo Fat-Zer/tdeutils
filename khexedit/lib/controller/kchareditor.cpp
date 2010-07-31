@@ -16,7 +16,7 @@
 
 
 // qt specific
-#include <qevent.h>
+#include <tqevent.h>
 // lib specific
 #include "kcharcolumn.h"
 #include "kcharcodec.h"
@@ -34,17 +34,17 @@ KCharEditor::KCharEditor( KCharColumn *CC, KBufferCursor *BC, KHexEdit *HE, KCon
 }
 
 
-bool KCharEditor::handleKeyPress( QKeyEvent *KeyEvent )
+bool KCharEditor::handleKeyPress( TQKeyEvent *KeyEvent )
 {
   bool KeyUsed = false;
   // some input that should be inserted?
   if( KeyEvent->text().length() > 0
       && !(KeyEvent->state()&( Qt::ControlButton | Qt::AltButton | Qt::MetaButton )) )
   {
-    QChar C = KeyEvent->text()[0];
+    TQChar C = KeyEvent->text()[0];
     if( C.isPrint() )
     {
-      QByteArray D( 1 );
+      TQByteArray D( 1 );
       if( CharColumn->codec()->encode(&D[0],C) )
       {
         //         clearUndoRedoInfo = false;

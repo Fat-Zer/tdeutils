@@ -20,10 +20,10 @@
 #ifndef WALKER_H
 #define WALKER_H
 
-#include <qthread.h>
-#include <qobject.h>
-#include <qmutex.h>
-#include <qvaluelist.h>
+#include <tqthread.h>
+#include <tqobject.h>
+#include <tqmutex.h>
+#include <tqvaluelist.h>
 
 #include "session.h"
 
@@ -33,11 +33,11 @@ namespace KSim
 namespace Snmp
 {
 
-class Walker : public QObject, public QThread
+class Walker : public TQObject, public QThread
 {
     Q_OBJECT
 public:
-    Walker( const HostConfig &host, const Identifier &startOid, QObject *parent, const char *name = 0 );
+    Walker( const HostConfig &host, const Identifier &startOid, TQObject *parent, const char *name = 0 );
     virtual ~Walker();
 
     struct Result
@@ -45,9 +45,9 @@ public:
         Result() : success( false ) {}
         bool success;
         Identifier oid;
-        QString identifierString;
+        TQString identifierString;
         Value data;
-        QString dataString;
+        TQString dataString;
         ErrorInfo error;
     };
 
@@ -57,17 +57,17 @@ signals:
 
 protected:
     virtual void run();
-    virtual void timerEvent( QTimerEvent *ev );
-    virtual void customEvent( QCustomEvent *ev );
+    virtual void timerEvent( TQTimerEvent *ev );
+    virtual void customEvent( TQCustomEvent *ev );
 
 private:
-    typedef QValueList<Result *> ResultList;
+    typedef TQValueList<Result *> ResultList;
 
     ResultList m_results;
-    QMutex m_resultGuard;
+    TQMutex m_resultGuard;
 
     bool m_stop;
-    QMutex m_stopGuard;
+    TQMutex m_stopGuard;
 
     Identifier m_oid;
     int m_timerId;

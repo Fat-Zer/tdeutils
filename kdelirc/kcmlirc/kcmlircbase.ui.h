@@ -23,7 +23,7 @@ void KCMLircBase::init()
 {
 	delete theModes;
 	modeLayout->removeItem(modeButtonLayout);
-	theModes = new ModesList(dynamic_cast<QWidget *>(modeLayout->parent()), "theModes");
+	theModes = new ModesList(dynamic_cast<TQWidget *>(modeLayout->parent()), "theModes");
 	theModes->addColumn(i18n("Remote Control"));
 	theModes->addColumn(i18n("Default"));
 	theModes->addColumn(i18n("Icon"));

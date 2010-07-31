@@ -24,14 +24,14 @@
 using namespace KHE;
 
 
-KBytesEdit::KBytesEdit( char *D, int DS_, int RS_, bool KM, QWidget *Parent, const char *Name, WFlags F )
+KBytesEdit::KBytesEdit( char *D, int DS_, int RS_, bool KM, TQWidget *Parent, const char *Name, WFlags F )
  : KHexEdit( 0L, Parent, Name, F ),
    AutoDelete( false )
 {
   setData( D, DS_, RS_, KM );
 }
 
-KBytesEdit::KBytesEdit( char *D, int DS_, QWidget *Parent, const char *Name, WFlags F )
+KBytesEdit::KBytesEdit( char *D, int DS_, TQWidget *Parent, const char *Name, WFlags F )
  : KHexEdit( 0L, Parent, Name, F ),
    AutoDelete( false )
 {
@@ -39,7 +39,7 @@ KBytesEdit::KBytesEdit( char *D, int DS_, QWidget *Parent, const char *Name, WFl
 }
 
 
-KBytesEdit::KBytesEdit( QWidget *Parent, const char *Name, WFlags F )
+KBytesEdit::KBytesEdit( TQWidget *Parent, const char *Name, WFlags F )
  : KHexEdit( 0L, Parent, Name, F ),
    AutoDelete( false )
 {

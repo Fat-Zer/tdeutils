@@ -18,8 +18,8 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include <qlabel.h>
-#include <qvbox.h>
+#include <tqlabel.h>
+#include <tqvbox.h>
 
 #include <klocale.h>
 #include <kcharsets.h>
@@ -30,9 +30,9 @@
 
 #include "ktextfiledlg.h"
 
-KTextFileDialog::KTextFileDialog(const QString& startDir,
-				 const QString& filter,
-				 QWidget *parent, const char* name,
+KTextFileDialog::KTextFileDialog(const TQString& startDir,
+				 const TQString& filter,
+				 TQWidget *parent, const char* name,
 				 bool modal)
   : KFileDialog(startDir, filter, parent, name, modal)
 {
@@ -40,14 +40,14 @@ KTextFileDialog::KTextFileDialog(const QString& startDir,
   // insert encoding action into toolbar
   KSelectAction *mEncoding = new KSelectAction(
       i18n( "Set &Encoding" ), 0, this,
-      SLOT( slotSetEncoding() ), this,
+      TQT_SLOT( slotSetEncoding() ), this,
       "encoding" );
 
-  QStringList encodings = KGlobal::charsets()->descriptiveEncodingNames();
+  TQStringList encodings = KGlobal::charsets()->descriptiveEncodingNames();
   encodings.prepend( i18n( "Default encoding" ) );
   mEncoding->setItems( encodings );
   mEncoding->setCurrentItem(0);
-  QStringList::Iterator it;
+  TQStringList::Iterator it;
   int i = 0;
   for( it = encodings.begin(); it != encodings.end(); ++it) {
       if ( (*it).contains( encodingStr ) ) {
@@ -63,9 +63,9 @@ KTextFileDialog::KTextFileDialog(const QString& startDir,
 
   KAction* mEncoding = new KAction(
       i18n("Select Encoding..."), 0,
-      this, SLOT( slotShowEncCombo() ), this, "encoding");
+      this, TQT_SLOT( slotShowEncCombo() ), this, "encoding");
 
-  mEncoding->setIcon( QString::fromLatin1("charset") );
+  mEncoding->setIcon( TQString::fromLatin1("charset") );
 
   KToolBar *tb = toolBar();
   mEncoding->plug( tb, pathComboIndex() - 1 );
@@ -73,7 +73,7 @@ KTextFileDialog::KTextFileDialog(const QString& startDir,
 
 KTextFileDialog::~KTextFileDialog() {}
 
-void KTextFileDialog::setEncoding(const QString& encoding) {
+void KTextFileDialog::setEncoding(const TQString& encoding) {
   enc = encoding;
 }
 
@@ -84,30 +84,30 @@ void KTextFileDialog::slotShowEncCombo()
   // Modal widget asking the user about charset
   //
   KDialogBase *encDlg;
-  QLabel *label;
-  QComboBox *encCombo;
-  QVBox *vbox;
+  TQLabel *label;
+  TQComboBox *encCombo;
+  TQVBox *vbox;
 
   // Create widgets, and display using geometry management
   encDlg = new KDialogBase( this,
 			    "Encoding Dialog", true, i18n("Select Encoding"),
 			    KDialogBase::Ok | KDialogBase::Cancel );
-  vbox = new QVBox( encDlg );
+  vbox = new TQVBox( encDlg );
   vbox->setSpacing( KDialog::spacingHint() );
   encDlg->setMainWidget( vbox );
-  label = new QLabel( vbox );
+  label = new TQLabel( vbox );
   label->setAlignment( AlignLeft | AlignVCenter );
   label->setText(i18n("Select encoding for text file: "));
 
-  encCombo = new QComboBox(vbox);
-  encCombo->setInsertionPolicy(QComboBox::NoInsertion);
+  encCombo = new TQComboBox(vbox);
+  encCombo->setInsertionPolicy(TQComboBox::NoInsertion);
   encCombo->insertItem(i18n("Default Encoding"));
 
-  QStringList encodings = KGlobal::charsets()->descriptiveEncodingNames();
+  TQStringList encodings = KGlobal::charsets()->descriptiveEncodingNames();
   encodings.prepend( i18n( "Default encoding" ) );
   encCombo->insertStringList( encodings );
   encCombo->setCurrentItem(0);
-  QStringList::Iterator it;
+  TQStringList::Iterator it;
   int i = 1;
   for( it = encodings.begin(); it != encodings.end(); ++it) {
 
@@ -119,14 +119,14 @@ void KTextFileDialog::slotShowEncCombo()
     i++;
   }
 
-  connect( encDlg->actionButton( KDialogBase::Ok ), SIGNAL(clicked()),
-	   encDlg, SLOT(accept()) );
-  connect( encDlg->actionButton( KDialogBase::Cancel ), SIGNAL(clicked()),
-	   encDlg, SLOT(reject()) );
+  connect( encDlg->actionButton( KDialogBase::Ok ), TQT_SIGNAL(clicked()),
+	   encDlg, TQT_SLOT(accept()) );
+  connect( encDlg->actionButton( KDialogBase::Cancel ), TQT_SIGNAL(clicked()),
+	   encDlg, TQT_SLOT(reject()) );
 
   encDlg->setMinimumSize( 300, 120);
 
-  if ( encDlg->exec() == QDialog::Accepted ) {
+  if ( encDlg->exec() == TQDialog::Accepted ) {
     // set encoding
     if (encCombo->currentItem() == 0) { // Default
       setEncoding("");
@@ -142,12 +142,12 @@ void KTextFileDialog::slotShowEncCombo()
 
 
 KURL KTextFileDialog::getOpenURLwithEncoding(
-     const QString& startDir,
-     const QString& filter,
-     QWidget *parent,
-     const QString& caption,
-     const QString& encoding,
-     const QString& buttontext)
+     const TQString& startDir,
+     const TQString& filter,
+     TQWidget *parent,
+     const TQString& caption,
+     const TQString& encoding,
+     const TQString& buttontext)
 {
   KTextFileDialog dlg(startDir, filter, parent, "filedialog", true);
   dlg.setEncoding(encoding);
@@ -174,10 +174,10 @@ KURL KTextFileDialog::getOpenURLwithEncoding(
 }
 
 KURL KTextFileDialog::getSaveURLwithEncoding(
-       const QString& dir, const QString& filter,
-       QWidget *parent,
-       const QString& caption,
-       const QString& encoding)
+       const TQString& dir, const TQString& filter,
+       TQWidget *parent,
+       const TQString& caption,
+       const TQString& encoding)
 {
   KTextFileDialog dlg(dir, filter, parent, "filedialog", true);
   dlg.setEncoding(encoding);

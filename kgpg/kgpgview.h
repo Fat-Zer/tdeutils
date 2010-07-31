@@ -30,7 +30,7 @@ class QDragEnterEvent;
 //class KgpgDoc;
 
 /** The KgpgView class provides the view widget for the KgpgApp instance.
- * The View instance inherits QWidget as a base class and represents the view object of a KTMainWindow. As KgpgView is part of the
+ * The View instance inherits TQWidget as a base class and represents the view object of a KTMainWindow. As KgpgView is part of the
  * docuement-view model, it needs a reference to the document object connected with it by the KgpgApp class to manipulate and display
  * the document structure provided by the KgpgDoc class.
  *
@@ -43,25 +43,25 @@ class MyEditor : public KTextEdit
         Q_OBJECT
 
 public:
-        MyEditor( QWidget *parent = 0, const char *name = 0);
+        MyEditor( TQWidget *parent = 0, const char *name = 0);
 private:
-        QString message,messages,tempFile;
+        TQString message,messages,tempFile;
 public slots:
-        void slotDecodeFile(QString);
+        void slotDecodeFile(TQString);
         void slotDroppedFile(KURL url);
-        void slotProcessResult(QStringList iKeys);
-	bool slotCheckContent(QString fileToCheck, bool checkForPgpMessage=true);
+        void slotProcessResult(TQStringList iKeys);
+	bool slotCheckContent(TQString fileToCheck, bool checkForPgpMessage=true);
 
 protected:
-        void contentsDragEnterEvent( QDragEnterEvent *e );
-        void contentsDropEvent( QDropEvent *e );
+        void contentsDragEnterEvent( TQDragEnterEvent *e );
+        void contentsDropEvent( TQDropEvent *e );
 	
 private slots:
-	void editorUpdateDecryptedtxt(QString newtxt);
-	void editorFailedDecryptedtxt(QString newtxt);
+	void editorUpdateDecryptedtxt(TQString newtxt);
+	void editorFailedDecryptedtxt(TQString newtxt);
 
 signals:
-	void refreshImported(QStringList);
+	void refreshImported(TQStringList);
 };
 
 
@@ -71,7 +71,7 @@ class KgpgView : public QWidget
         friend class MyEditor;
 public:
         /** Constructor for the main view */
-        KgpgView(QWidget *parent = 0, const char *name=0);
+        KgpgView(TQWidget *parent = 0, const char *name=0);
         /** Destructor for the main view */
         ~KgpgView();
 
@@ -82,34 +82,34 @@ public:
          */
         //  KgpgDoc *getDocument() const;
 
-        //        QTextEdit  *editor;
+        //        TQTextEdit  *editor;
 
         MyEditor *editor;
         KURL fselected;
 	bool windowAutoClose;
 
         /** contains the implementation for printing functionality */
-        //    void print(QPrinter *pPrinter);
+        //    void print(TQPrinter *pPrinter);
 
-        QPushButton *bouton1,*bouton2,*bouton0;
+        TQPushButton *bouton1,*bouton2,*bouton0;
 private:
-        QString messages;
+        TQString messages;
 
 public slots:
         void slotdecode();
 	void clearSign();
 
 private slots:
-	void slotVerifyResult(QString mssge,QString log);
-	void slotSignResult(QString signResult);
-	void slotAskForImport(QString ID);
+	void slotVerifyResult(TQString mssge,TQString log);
+	void slotSignResult(TQString signResult);
+	void slotAskForImport(TQString ID);
         void popuppublic();
         void modified();
-        void encodetxt(QStringList selec,QStringList encryptOptions,bool, bool symmetric);
-        void updatetxt(QString);
-	void updateDecryptedtxt(QString newtxt);
-	void failedDecryptedtxt(QString newtxt);
-	bool checkForUtf8(QString text);
+        void encodetxt(TQStringList selec,TQStringList encryptOptions,bool, bool symmetric);
+        void updatetxt(TQString);
+	void updateDecryptedtxt(TQString newtxt);
+	void failedDecryptedtxt(TQString newtxt);
+	bool checkForUtf8(TQString text);
 	
 signals:
 	void resetEncoding(bool);

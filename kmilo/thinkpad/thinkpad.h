@@ -83,7 +83,7 @@ typedef struct {
  */
 class ThinkPadMonitor : public Monitor {
 	public:
-		ThinkPadMonitor(QObject *parent, const char *name, const QStringList&);
+		ThinkPadMonitor(TQObject *parent, const char *name, const TQStringList&);
 		virtual ~ThinkPadMonitor();
 
 		/**
@@ -109,7 +109,7 @@ class ThinkPadMonitor : public Monitor {
 		 * Reimplemented from KMilo::Monitor.
 		 * Not used, we just set the message ourselves using _interface->displayText()
 		 */
-		virtual QString message() const;
+		virtual TQString message() const;
 	protected:
 		/**
 		 * Reimplemented from KMilo::Monitor.
@@ -136,7 +136,7 @@ class ThinkPadMonitor : public Monitor {
 		 * Displays paramater message followed by 'on' or
 		 * 'off' depending on state
 		 */
-		void showToggleMessage(QString onMessage, QString offMessage, bool state);
+		void showToggleMessage(TQString onMessage, TQString offMessage, bool state);
 
 		/**
 		 * Returned by progress()
@@ -146,7 +146,7 @@ class ThinkPadMonitor : public Monitor {
 		/**
 		 * The file to read data from, default is /dev/nvram
 		 */
-		QString m_nvramFile;
+		TQString m_nvramFile;
 
 		/**
 		 * Some thinkpads change volume in hardware, others we
@@ -168,27 +168,27 @@ class ThinkPadMonitor : public Monitor {
 		/**
 		 * Thinkpad button
 		 */
-		QString m_buttonThinkpad;
+		TQString m_buttonThinkpad;
 
 		/**
 		 * Home button
 		 */
-		QString m_buttonHome;
+		TQString m_buttonHome;
 
 		/**
 		 * Search button
 		 */
-		QString m_buttonSearch;
+		TQString m_buttonSearch;
 
 		/**
 		 * Mail button
 		 */
-		QString m_buttonMail;
+		TQString m_buttonMail;
 
 		/**
 		 * Zoom button
 		 */
-		QString m_buttonZoom;
+		TQString m_buttonZoom;
 
 		/**
 		 * Used for changing the volume if m_softwareVolume is true

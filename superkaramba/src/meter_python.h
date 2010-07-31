@@ -19,26 +19,26 @@ bool checkKaramba(long widget);
 bool checkMeter(long widget, long meter, const char* type);
 bool checkKarambaAndMeter(long widget, long meter, const char* type);
 
-QString PyString2QString(PyObject* text);
-PyObject* QString2PyString(QString string);
+TQString PyString2TQString(PyObject* text);
+PyObject* QString2PyString(TQString string);
 
-PyObject* py_getThemeMeter(PyObject *self, PyObject *args, QString type);
-PyObject* py_getSize(PyObject *self, PyObject *args, QString type);
-PyObject* py_resize(PyObject *self, PyObject *args, QString type);
-PyObject* py_getPos(PyObject *self, PyObject *args, QString type);
-PyObject* py_move(PyObject *self, PyObject *args, QString type);
-PyObject* py_hide(PyObject *self, PyObject *args, QString type);
-PyObject* py_show(PyObject *self, PyObject *args, QString type);
-PyObject* py_getValue(PyObject *self, PyObject *args, QString type);
-PyObject* py_setValue(PyObject *self, PyObject *args, QString type);
-PyObject* py_getStringValue(PyObject *self, PyObject *args, QString type);
-PyObject* py_setStringValue(PyObject *self, PyObject *args, QString type);
-PyObject* py_getMinMax(PyObject *self, PyObject *args, QString type);
-PyObject* py_setMinMax(PyObject *self, PyObject *args, QString type);
-PyObject* py_getSensor(PyObject *self, PyObject *args, QString type);
-PyObject* py_setSensor(PyObject *self, PyObject *args, QString type);
-PyObject* py_getColor(PyObject *self, PyObject *args, QString type);
-PyObject* py_setColor(PyObject *self, PyObject *args, QString type);
+PyObject* py_getThemeMeter(PyObject *self, PyObject *args, TQString type);
+PyObject* py_getSize(PyObject *self, PyObject *args, TQString type);
+PyObject* py_resize(PyObject *self, PyObject *args, TQString type);
+PyObject* py_getPos(PyObject *self, PyObject *args, TQString type);
+PyObject* py_move(PyObject *self, PyObject *args, TQString type);
+PyObject* py_hide(PyObject *self, PyObject *args, TQString type);
+PyObject* py_show(PyObject *self, PyObject *args, TQString type);
+PyObject* py_getValue(PyObject *self, PyObject *args, TQString type);
+PyObject* py_setValue(PyObject *self, PyObject *args, TQString type);
+PyObject* py_getStringValue(PyObject *self, PyObject *args, TQString type);
+PyObject* py_setStringValue(PyObject *self, PyObject *args, TQString type);
+PyObject* py_getMinMax(PyObject *self, PyObject *args, TQString type);
+PyObject* py_setMinMax(PyObject *self, PyObject *args, TQString type);
+PyObject* py_getSensor(PyObject *self, PyObject *args, TQString type);
+PyObject* py_setSensor(PyObject *self, PyObject *args, TQString type);
+PyObject* py_getColor(PyObject *self, PyObject *args, TQString type);
+PyObject* py_setColor(PyObject *self, PyObject *args, TQString type);
 
 #endif // METER_PYTHON_H
 

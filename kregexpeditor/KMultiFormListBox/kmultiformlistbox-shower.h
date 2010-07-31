@@ -20,7 +20,7 @@
 
 // -------------------------------- includes ------------------------------
 //-------------------------------------------------------------------------
-typedef QPtrList<KMultiFormListBoxEntry> KMultiFormListBoxEntryList ;
+typedef TQPtrList<KMultiFormListBoxEntry> KMultiFormListBoxEntryList ;
 
 /**
    Abstract class defining the interface for widgets showing a number of @ref KMultiFormListBoxEntry.
@@ -35,14 +35,14 @@ public:
   /** Appends the given argument to the list */
   virtual void append(KMultiFormListBoxEntry *) = 0;
 
-  /** Return the element as a QWidget */
-	virtual QWidget* qWidget() = 0;
+  /** Return the element as a TQWidget */
+	virtual TQWidget* qWidget() = 0;
 
   /** Adds an empty element. */
   virtual void addElement() = 0;
 
   /** Deletes an element at the given index. */
-	virtual void delElement(QWidget *) = 0;
+	virtual void delElement(TQWidget *) = 0;
 
   /** Deletes any element from the list */
 	virtual void delAnElement() = 0;

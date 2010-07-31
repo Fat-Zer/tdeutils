@@ -21,23 +21,23 @@
 
 #include "statusbarprogress.h"
 
-#include <qpainter.h>
+#include <tqpainter.h>
 
 #include <kapplication.h>
 #include <kglobalsettings.h>
 #include <klocale.h>
-#include <qstyle.h>
+#include <tqstyle.h>
 
-CStatusBarProgress::CStatusBarProgress( QWidget *parent, const char *name )
-  : QFrame(parent, name), QRangeControl(0, 100, 1, 10, 0),
+CStatusBarProgress::CStatusBarProgress( TQWidget *parent, const char *name )
+  : TQFrame(parent, name), TQRangeControl(0, 100, 1, 10, 0),
     mOrientation( Horizontal )
 {
   initialize();
 }
 
 CStatusBarProgress::CStatusBarProgress( Orientation orientation,
-					QWidget *parent, const char *name )
-  : QFrame(parent, name), QRangeControl(0, 100, 1, 10, 0),
+					TQWidget *parent, const char *name )
+  : TQFrame(parent, name), TQRangeControl(0, 100, 1, 10, 0),
     mOrientation( orientation )
 {
   initialize();
@@ -45,8 +45,8 @@ CStatusBarProgress::CStatusBarProgress( Orientation orientation,
 
 CStatusBarProgress::CStatusBarProgress( int minValue, int maxValue, int value,
 					Orientation orientation,
-					QWidget *parent, const char *name )
-  : QFrame(parent, name), QRangeControl(minValue, maxValue, 1, 10, value),
+					TQWidget *parent, const char *name )
+  : TQFrame(parent, name), TQRangeControl(minValue, maxValue, 1, 10, value),
     mOrientation(orientation)
 {
   initialize();
@@ -72,7 +72,7 @@ void CStatusBarProgress::initialize( void )
   mTextColor    = palette().active().text();
   setBackgroundColor( palette().active().background() );
 
-  QFont font( KGlobalSettings::generalFont() );
+  TQFont font( KGlobalSettings::generalFont() );
   font.setBold( true );
   setFont( font );
 
@@ -81,7 +81,7 @@ void CStatusBarProgress::initialize( void )
 }
 
 
-void CStatusBarProgress::setBarPixmap( const QPixmap &pixmap )
+void CStatusBarProgress::setBarPixmap( const TQPixmap &pixmap )
 {
   if( pixmap.isNull() == true )
   {
@@ -89,10 +89,10 @@ void CStatusBarProgress::setBarPixmap( const QPixmap &pixmap )
   }
 
   delete mBarPixmap;
-  mBarPixmap = new QPixmap( pixmap );
+  mBarPixmap = new TQPixmap( pixmap );
 }
 
-void CStatusBarProgress::setBarColor( const QColor &color )
+void CStatusBarProgress::setBarColor( const TQColor &color )
 {
   mBarColor = color;
   delete mBarPixmap;
@@ -120,7 +120,7 @@ void CStatusBarProgress::setOrientation( Orientation orientation )
 void CStatusBarProgress::setValue(int value)
 {
   mCurPage = mMaxPage = -1;
-  QRangeControl::setValue(value);
+  TQRangeControl::setValue(value);
 }
 
 void CStatusBarProgress::setValue( int curPage, int maxPage )
@@ -128,14 +128,14 @@ void CStatusBarProgress::setValue( int curPage, int maxPage )
   if( curPage <= 0 || maxPage <= 0 || curPage > maxPage )
   {
     mCurPage = mMaxPage = -1;
-    QRangeControl::setValue(0);
+    TQRangeControl::setValue(0);
   }
   else
   {
     mCurPage = curPage;
     mMaxPage = maxPage;
     float fraction = (float)curPage/(float)maxPage;
-    QRangeControl::setValue( (int)(fraction*100.0) );
+    TQRangeControl::setValue( (int)(fraction*100.0) );
   }
 }
 
@@ -149,7 +149,7 @@ void CStatusBarProgress::setTextEnabled( bool state )
   }
 }
 
-void CStatusBarProgress::setText( const QString &msg )
+void CStatusBarProgress::setText( const TQString &msg )
 {
   mMsg = msg;
   if( mTextEnabled == true )
@@ -161,12 +161,12 @@ void CStatusBarProgress::setText( const QString &msg )
 
 
 
-const QColor & CStatusBarProgress::barColor( void ) const
+const TQColor & CStatusBarProgress::barColor( void ) const
 {
   return( mBarColor );
 }
 
-const QPixmap * CStatusBarProgress::barPixmap( void ) const
+const TQPixmap * CStatusBarProgress::barPixmap( void ) const
 {
   return( mBarPixmap );
 }
@@ -176,9 +176,9 @@ bool CStatusBarProgress::textEnabled( void ) const
   return( mTextEnabled );
 }
 
-QSize CStatusBarProgress::sizeHint( void ) const
+TQSize CStatusBarProgress::sizeHint( void ) const
 {
-  QSize s( size() );
+  TQSize s( size() );
 
   if( orientation() == CStatusBarProgress::Vertical )
   {
@@ -232,19 +232,19 @@ void CStatusBarProgress::adjustStyle( void )
   switch( style().SH_GUIStyle)
   {
     case WindowsStyle:
-      setFrameStyle( QFrame::NoFrame );
+      setFrameStyle( TQFrame::NoFrame );
     break;
 
     case MotifStyle:
     default:
-      setFrameStyle( QFrame::Panel|QFrame::Sunken );
+      setFrameStyle( TQFrame::Panel|TQFrame::Sunken );
       setLineWidth( 1 );
     break;
   }
   update();
 }
 
-void CStatusBarProgress::paletteChange( const QPalette & )
+void CStatusBarProgress::paletteChange( const TQPalette & )
 {
   mBarColor     = palette().active().highlight();
   mBarTextColor = palette().active().highlightedText();
@@ -252,14 +252,14 @@ void CStatusBarProgress::paletteChange( const QPalette & )
   setBackgroundColor( palette().active().background() );
 }
 
-void CStatusBarProgress::drawText( QPainter *p )
+void CStatusBarProgress::drawText( TQPainter *p )
 {
-  QRect r(contentsRect());
-  QString s;
+  TQRect r(contentsRect());
+  TQString s;
 
   if( mMsg.isEmpty() == true )
   {
-    s = QString("%1%").arg(recalcValue(100));
+    s = TQString("%1%").arg(recalcValue(100));
   }
   else
   {
@@ -280,11 +280,11 @@ void CStatusBarProgress::drawText( QPainter *p )
   p->drawText( r, AlignCenter, s );
 }
 
-void CStatusBarProgress::drawContents(QPainter *p)
+void CStatusBarProgress::drawContents(TQPainter *p)
 {
-  QRect cr = contentsRect(), er = cr;
+  TQRect cr = contentsRect(), er = cr;
   fr = cr;
-  QBrush fb(mBarColor), eb(backgroundColor() );
+  TQBrush fb(mBarColor), eb(backgroundColor() );
 
   if( mBarPixmap != 0 )
   {
@@ -323,7 +323,7 @@ void CStatusBarProgress::drawContents(QPainter *p)
       {
 	fr.setHeight(cr.height() - 2 * margin);
 	fr.setWidth((int)(0.67 * fr.height()));
-	fr.moveTopLeft(QPoint(cr.left() + margin, cr.top() + margin));
+	fr.moveTopLeft(TQPoint(cr.left() + margin, cr.top() + margin));
 	dx = fr.width() + margin;
 	dy = 0;
 	max = (cr.width() - margin) / (fr.width() + margin) + 1;
@@ -333,7 +333,7 @@ void CStatusBarProgress::drawContents(QPainter *p)
       {
 	fr.setWidth(cr.width() - 2 * margin);
 	fr.setHeight((int)(0.67 * fr.width()));
-	fr.moveBottomLeft(QPoint(cr.left() + margin, cr.bottom() - margin));
+	fr.moveBottomLeft(TQPoint(cr.left() + margin, cr.bottom() - margin));
 	dx = 0;
 	dy = - (fr.height() + margin);
 	max = (cr.height() - margin) / (fr.height() + margin) + 1;
@@ -366,7 +366,7 @@ void CStatusBarProgress::drawContents(QPainter *p)
 }
 
 
-void CStatusBarProgress::mousePressEvent( QMouseEvent */*e*/ )
+void CStatusBarProgress::mousePressEvent( TQMouseEvent */*e*/ )
 {
   emit pressed();
 }

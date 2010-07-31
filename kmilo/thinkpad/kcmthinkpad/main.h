@@ -33,7 +33,7 @@ class KCMThinkpadModule : public KCModule {
 	Q_OBJECT
 
  public:
-	KCMThinkpadModule(QWidget* parent, const char* name, const QStringList&);
+	KCMThinkpadModule(TQWidget* parent, const char* name, const TQStringList&);
 
 	void save();
 	void load();
@@ -41,7 +41,7 @@ class KCMThinkpadModule : public KCModule {
 	void defaults();
  private:
 	KCMThinkpadGeneral* m_KCMThinkpadGeneral;
-	QString m_nvramFile;
+	TQString m_nvramFile;
 	bool m_nvramReadable;
 	bool m_nvramWriteable;
 };

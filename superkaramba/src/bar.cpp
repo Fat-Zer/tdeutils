@@ -24,14 +24,14 @@ Bar::~Bar()
 {
 }
 
-bool Bar::setImage(QString fileName)
+bool Bar::setImage(TQString fileName)
 {
-  QFileInfo fileInfo(fileName);
+  TQFileInfo fileInfo(fileName);
   bool res = false;
 
   if(m_karamba->theme().isThemeFile(fileName))
   {
-    QByteArray ba = m_karamba->theme().readThemeFile(fileName);
+    TQByteArray ba = m_karamba->theme().readThemeFile(fileName);
     res = pixmap.loadFromData(ba);
   }
   else
@@ -85,7 +85,7 @@ void Bar::setValue( long v )
   }
 }
 
-void Bar::setValue(QString v)
+void Bar::setValue(TQString v)
 {
   setValue((long)(v.toDouble() + 0.5));
 }
@@ -107,7 +107,7 @@ void Bar::setVertical(bool b)
   vertical = b;
 }
 
-void Bar::mUpdate(QPainter *p)
+void Bar::mUpdate(TQPainter *p)
 {
   int x, y, width, height;
   x = getX();

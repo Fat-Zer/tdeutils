@@ -32,7 +32,7 @@ class ChartMonitor : public KSim::Chart
 {
     Q_OBJECT
 public:
-    ChartMonitor( const MonitorConfig &config, QWidget *parent, const char *name = 0 );
+    ChartMonitor( const MonitorConfig &config, TQWidget *parent, const char *name = 0 );
 
 public slots:
     void setData( const Value &data );

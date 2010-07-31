@@ -102,7 +102,7 @@ int KBigBuffer::rfind( const char*, int /*Length*/, int /*Pos*/ ) const { return
 
 
 
-bool KBigBuffer::open( const QString& FileName )
+bool KBigBuffer::open( const TQString& FileName )
 {
   // clear old data
   if( isOpen() && !close() ) // only occurs if close somehow fails.

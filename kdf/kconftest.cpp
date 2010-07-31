@@ -32,8 +32,8 @@
 
 
 #include <iostream>
-#include <qstring.h>
-#include <qdict.h>
+#include <tqstring.h>
+#include <tqdict.h>
 #include <kconfig.h>
 #include <kdebug.h>
 #include <kapplication.h>
@@ -52,15 +52,15 @@ main(int argc, char ** argv)
  KApplication app;
  KConfig * cfg = kapp->config();
 
- QDict<char> dict;
+ TQDict<char> dict;
 
  dict.insert("Blah", "Arse");
  dict.insert("Blah", "Smack");
  dict.insert("Blah", "Monkey");
 
- QDictIterator<char> it(dict);
+ TQDictIterator<char> it(dict);
 
- QString key = "TestConfigItem";
+ TQString key = "TestConfigItem";
 
  for (; it.current(); ++it) {
 

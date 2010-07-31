@@ -30,7 +30,7 @@
 #include <kcmdlineargs.h>
 #include <klocale.h>
 #include <unistd.h>
-#include <qfile.h>
+#include <tqfile.h>
 #include <errno.h>
 
 
@@ -43,7 +43,7 @@ ArkApplication *ArkApplication::mInstance = NULL;
 // to make sure an archive isn't opened twice in different windows
 // Now, readlink only gives one level so this function recurses.
 
-static QString resolveFilename(const QString & _arkname)
+static TQString resolveFilename(const TQString & _arkname)
 {
 	char *buff;
 	int nread;
@@ -52,7 +52,7 @@ static QString resolveFilename(const QString & _arkname)
 	while ( true )
 	{
 		buff = new char[BUFSIZ*iter];
-		nread = readlink( QFile::encodeName(_arkname), buff, BUFSIZ);
+		nread = readlink( TQFile::encodeName(_arkname), buff, BUFSIZ);
 		if (-1 == nread)
 		{
 			if ( EINVAL == errno )  // not a symbolic link. Stopping condition.
@@ -78,7 +78,7 @@ static QString resolveFilename(const QString & _arkname)
       else
 		{
 			buff[nread] = '\0';  // readlink doesn't null terminate
-			QString name = QFile::decodeName( buff );
+			TQString name = TQFile::decodeName( buff );
 			delete [] buff;
 			
 			// watch out for relative pathnames
@@ -162,7 +162,7 @@ ArkApplication::newInstance()
     {
         bool oneFile = (args->count() == 2 ) ;
 
-        QString extension = args->arg( 0 );
+        TQString extension = args->arg( 0 );
         KURL archiveName = args->url( 1 );  // the filename
 
         // if more than one file -> use directory name
@@ -234,7 +234,7 @@ ArkApplication::newInstance()
 void
 ArkApplication::addOpenArk(const KURL & _arkname, MainWindow *_ptr)
 {
-    QString realName;
+    TQString realName;
     if( _arkname.isLocalFile() )
     {
         realName = resolveFilename( _arkname.path() );  // follow symlink
@@ -250,7 +250,7 @@ ArkApplication::addOpenArk(const KURL & _arkname, MainWindow *_ptr)
 void
 ArkApplication::removeOpenArk(const KURL & _arkname)
 {
-    QString realName;
+    TQString realName;
     if ( _arkname.isLocalFile() )
         realName = resolveFilename( _arkname.path() );  // follow symlink
     else
@@ -265,7 +265,7 @@ ArkApplication::raiseArk(const KURL & _arkname)
 {
     kdDebug( 1601 ) << "ArkApplication::raiseArk " << endl;
     MainWindow *window;
-    QString realName;
+    TQString realName;
     if( _arkname.isLocalFile() )
         realName = resolveFilename(_arkname.path());  // follow symlink
     else
@@ -282,7 +282,7 @@ ArkApplication::raiseArk(const KURL & _arkname)
 bool
 ArkApplication::isArkOpenAlready(const KURL & _arkname)
 {
-    QString realName;
+    TQString realName;
     if ( _arkname.isLocalFile() )
         realName = resolveFilename(_arkname.path());  // follow symlink
     else

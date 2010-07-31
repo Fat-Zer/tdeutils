@@ -19,15 +19,15 @@
  */
 
 #include <klocale.h>
-#include <qlayout.h>
+#include <tqlayout.h>
 #include "hexmanagerwidget.h"
 #include "searchbar.h"
 
-CHexManagerWidget::CHexManagerWidget( QWidget *parent, const char *name,
+CHexManagerWidget::CHexManagerWidget( TQWidget *parent, const char *name,
 				      EConversionPosition conversionPosition,
 				      EPosition tabBarPosition,
 				      EPosition searchBarPosition )
-  : QWidget( parent, name )
+  : TQWidget( parent, name )
 {
   mValid = false;
 
@@ -38,18 +38,18 @@ CHexManagerWidget::CHexManagerWidget( QWidget *parent, const char *name,
 
   mConverter = new CHexToolWidget( this );
 
-  connect( mEditor->view(), SIGNAL(fileName(const QString &, bool)),
-	   this, SLOT( addName(const QString &)));
-  connect( mEditor->view(), SIGNAL( fileClosed(const QString &)),
-	   this, SLOT( removeName(const QString &)));
-  connect( mEditor->view(),SIGNAL(fileRename(const QString &,const QString &)),
-	   this, SLOT(changeName(const QString &,const QString &)));
-  connect( mEditor->view(), SIGNAL( cursorChanged( SCursorState & ) ),
-	   mConverter, SLOT( cursorChanged( SCursorState & ) ) );
-  connect( mConverter, SIGNAL( closed(void) ),
-	   this, SIGNAL( conversionClosed(void) ) );
-  connect( mTabBar, SIGNAL(selected(const QString &)),
-	   this, SLOT(open(const QString &)));
+  connect( mEditor->view(), TQT_SIGNAL(fileName(const TQString &, bool)),
+	   this, TQT_SLOT( addName(const TQString &)));
+  connect( mEditor->view(), TQT_SIGNAL( fileClosed(const TQString &)),
+	   this, TQT_SLOT( removeName(const TQString &)));
+  connect( mEditor->view(),TQT_SIGNAL(fileRename(const TQString &,const TQString &)),
+	   this, TQT_SLOT(changeName(const TQString &,const TQString &)));
+  connect( mEditor->view(), TQT_SIGNAL( cursorChanged( SCursorState & ) ),
+	   mConverter, TQT_SLOT( cursorChanged( SCursorState & ) ) );
+  connect( mConverter, TQT_SIGNAL( closed(void) ),
+	   this, TQT_SIGNAL( conversionClosed(void) ) );
+  connect( mTabBar, TQT_SIGNAL(selected(const TQString &)),
+	   this, TQT_SLOT(open(const TQString &)));
 
   mValid = true;
   setConversionVisibility( conversionPosition );
@@ -71,7 +71,7 @@ void CHexManagerWidget::updateLayout( void )
   if( mValid == false ) { return; }
 
   delete layout();
-  QVBoxLayout *vlay = new QVBoxLayout( this, 0, 0 );
+  TQVBoxLayout *vlay = new TQVBoxLayout( this, 0, 0 );
 
   if( mSearchBar && mSearchBarPosition == AboveEditor )
   {
@@ -125,9 +125,9 @@ void CHexManagerWidget::setConversionVisibility( EConversionPosition position )
   }
   else if( mConversionPosition == Float )
   {
-    QPoint point = mapToGlobal( QPoint(0,0) );
-    QRect  rect  = geometry();
-    QPoint p;
+    TQPoint point = mapToGlobal( TQPoint(0,0) );
+    TQRect  rect  = geometry();
+    TQPoint p;
 
     p.setX(point.x() + rect.width()/2 - mConverter->minimumSize().width()/2);
     p.setY(point.y() + rect.height()/2 - mConverter->minimumSize().height()/2);
@@ -139,7 +139,7 @@ void CHexManagerWidget::setConversionVisibility( EConversionPosition position )
   {
     mConversionPosition = Embed;
     uint utilHeight = mConverter->minimumSize().height();
-    QPoint p( 0, height() - utilHeight );
+    TQPoint p( 0, height() - utilHeight );
     mConverter->reparent( this, 0, p, true );
   }
 
@@ -154,11 +154,11 @@ void CHexManagerWidget::setTabBarPosition( EPosition position )
   {
     if( mTabPosition == AboveEditor )
     {
-      mTabBar->setShape( QTabBar::RoundedAbove );
+      mTabBar->setShape( TQTabBar::RoundedAbove );
     }
     else
     {
-      mTabBar->setShape( QTabBar::RoundedBelow );
+      mTabBar->setShape( TQTabBar::RoundedBelow );
     }
     mTabBar->show();
   }
@@ -179,11 +179,11 @@ void CHexManagerWidget::setSearchBarPosition( EPosition position )
     if( mSearchBar == 0 )
     {
       mSearchBar = new CSearchBar( this );
-      connect( mSearchBar, SIGNAL(hidden()), this, SLOT(searchBarHidden()) );
-      connect( mSearchBar, SIGNAL(findData(SSearchControl &, uint, bool)),
-	       mEditor, SLOT(findData(SSearchControl &, uint, bool)) );
-      connect( editor()->view(), SIGNAL( cursorChanged( SCursorState & ) ),
-	       mSearchBar, SLOT( cursorMoved() ) );
+      connect( mSearchBar, TQT_SIGNAL(hidden()), this, TQT_SLOT(searchBarHidden()) );
+      connect( mSearchBar, TQT_SIGNAL(findData(SSearchControl &, uint, bool)),
+	       mEditor, TQT_SLOT(findData(SSearchControl &, uint, bool)) );
+      connect( editor()->view(), TQT_SIGNAL( cursorChanged( SCursorState & ) ),
+	       mSearchBar, TQT_SLOT( cursorMoved() ) );
     }
     mSearchBar->show();
   }
@@ -207,7 +207,7 @@ void CHexManagerWidget::searchBarHidden( void )
 }
 
 
-void CHexManagerWidget::addName( const QString &name )
+void CHexManagerWidget::addName( const TQString &name )
 {
   if( name.isEmpty() == true )
   {
@@ -222,7 +222,7 @@ void CHexManagerWidget::addName( const QString &name )
 }
 
 
-void CHexManagerWidget::removeName( const QString &name )
+void CHexManagerWidget::removeName( const TQString &name )
 {
   mTabBar->removeName( name );
   if( mTabBar->isVisible() == true && mTabBar->count() == 0 )
@@ -232,14 +232,14 @@ void CHexManagerWidget::removeName( const QString &name )
 }
 
 
-void CHexManagerWidget::changeName( const QString &curName,
-				    const QString &newName )
+void CHexManagerWidget::changeName( const TQString &curName,
+				    const TQString &newName )
 {
   mTabBar->changeName( curName, newName );
 }
 
 
-void CHexManagerWidget::open( const QString &name )
+void CHexManagerWidget::open( const TQString &name )
 {
   mEditor->open( name, false, 0 );
 }
@@ -258,21 +258,21 @@ int CHexManagerWidget::preferredWidth( void )
 
 
 
-CTabBar::CTabBar( QWidget *parent, char *name )
-  :QTabBar( parent, name )
+CTabBar::CTabBar( TQWidget *parent, char *name )
+  :TQTabBar( parent, name )
 {
-  connect( this, SIGNAL(selected(int)), this, SLOT(slotSelected(int)) );
+  connect( this, TQT_SIGNAL(selected(int)), this, TQT_SLOT(slotSelected(int)) );
 }
 
 
-void CTabBar::addName( const QString &name )
+void CTabBar::addName( const TQString &name )
 {
-  QString n( name.right(name.length()-name.findRev('/')-1) );
+  TQString n( name.right(name.length()-name.findRev('/')-1) );
 
-  QTab *t = find( n );
+  TQTab *t = find( n );
   if( t == 0 )
   {
-    t = new QTab();
+    t = new TQTab();
     t->setText( n);
     int id = addTab( t );
     mFileList.append( CFileKey(name,id) );
@@ -281,16 +281,16 @@ void CTabBar::addName( const QString &name )
 }
 
 
-void CTabBar::removeName( const QString &name )
+void CTabBar::removeName( const TQString &name )
 {
-  QString n( name.right(name.length()-name.findRev('/')-1) );
-  QTab *t = find(n);
+  TQString n( name.right(name.length()-name.findRev('/')-1) );
+  TQTab *t = find(n);
   if( t == 0 )
   {
     return;
   }
 
-  QValueList<CFileKey>::Iterator it;
+  TQValueList<CFileKey>::Iterator it;
   for( it = mFileList.begin(); it != mFileList.end(); ++it )
   {
     if( (*it).id() == t->identifier() )
@@ -304,21 +304,21 @@ void CTabBar::removeName( const QString &name )
 }
 
 
-void CTabBar::changeName( const QString &curName, const QString &newName )
+void CTabBar::changeName( const TQString &curName, const TQString &newName )
 {
-  QString n( curName.right(curName.length()-curName.findRev('/')-1) );
-  QTab *t = find(n);
+  TQString n( curName.right(curName.length()-curName.findRev('/')-1) );
+  TQTab *t = find(n);
   if( t == 0 )
   {
     return;
   }
 
-  QValueList<CFileKey>::Iterator it;
+  TQValueList<CFileKey>::Iterator it;
   for( it = mFileList.begin(); it != mFileList.end(); ++it )
   {
     if( (*it).id() == t->identifier() )
     {
-      QString m( newName.right(newName.length()-newName.findRev('/')-1) );
+      TQString m( newName.right(newName.length()-newName.findRev('/')-1) );
       t->setText(m);
 
       mFileList.remove(it);
@@ -331,10 +331,10 @@ void CTabBar::changeName( const QString &curName, const QString &newName )
 }
 
 
-QTab *CTabBar::find( const QString &name )
+TQTab *CTabBar::find( const TQString &name )
 {
-  QPtrList<QTab> &list = *tabList();
-  for( QTab *t = list.first(); t != 0; t = list.next() )
+  TQPtrList<TQTab> &list = *tabList();
+  for( TQTab *t = list.first(); t != 0; t = list.next() )
   {
     if( t->text() == name )
     {
@@ -354,7 +354,7 @@ int CTabBar::count( void )
 
 void CTabBar::slotSelected( int id )
 {
-  QValueList<CFileKey>::Iterator it;
+  TQValueList<CFileKey>::Iterator it;
   for( it = mFileList.begin(); it != mFileList.end(); ++it )
   {
     if( (*it).id() == id )

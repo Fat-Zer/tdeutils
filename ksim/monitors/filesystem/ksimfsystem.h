@@ -65,11 +65,11 @@ class Fsystem : public KSim::PluginView, public FsystemIface
     void updateFS();
 
   private:
-    typedef QValueList<QPair<QString, QString> > MountEntryList;
-    MountEntryList makeList(const QStringList &list) const;
+    typedef TQValueList<QPair<TQString, TQString> > MountEntryList;
+    MountEntryList makeList(const TQStringList &list) const;
 
     FilesystemWidget *m_widget;
-    QTimer *m_updateTimer;
+    TQTimer *m_updateTimer;
     MountEntryList m_mountEntries;
     bool m_showPercentage;
 };

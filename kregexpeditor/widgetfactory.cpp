@@ -46,7 +46,7 @@ bool WidgetFactory::isContainer( RegExpType tp )
   return ( tp == REPEAT || tp == ALTN || tp == COMPOUND );
 }
 
-RegExpWidget* WidgetFactory::createWidget( RegExpEditorWindow* win, QWidget* parent,
+RegExpWidget* WidgetFactory::createWidget( RegExpEditorWindow* win, TQWidget* parent,
                                            RegExpType type )
 {
   RegExpWidget* widget = 0;
@@ -80,7 +80,7 @@ RegExpWidget* WidgetFactory::createWidget( RegExpEditorWindow* win, QWidget* par
     return 0;
   }
 
-  if ( widget->edit() == QDialog::Rejected ) {
+  if ( widget->edit() == TQDialog::Rejected ) {
     delete widget;
     return 0;
   }
@@ -88,7 +88,7 @@ RegExpWidget* WidgetFactory::createWidget( RegExpEditorWindow* win, QWidget* par
 }
 
 RegExpWidget* WidgetFactory::createWidget( RegExp* regexp, RegExpEditorWindow* editorWindow,
-                                           QWidget* parent )
+                                           TQWidget* parent )
 {
   if ( regexp == 0 ) {
     qFatal("%s:%d Regexp is 0", __FILE__, __LINE__ );
@@ -131,35 +131,35 @@ RegExpWidget* WidgetFactory::createWidget( RegExp* regexp, RegExpEditorWindow* e
   return 0;
 }
 
-RegExp* WidgetFactory::createRegExp( QDomElement node, const QString& version )
+RegExp* WidgetFactory::createRegExp( TQDomElement node, const TQString& version )
 {
-  QString tag = node.tagName();
+  TQString tag = node.tagName();
   RegExp* regexp;
-  if ( tag == QString::fromLocal8Bit( "TextRange" ) )
+  if ( tag == TQString::fromLocal8Bit( "TextRange" ) )
     regexp = new TextRangeRegExp( false );
-  else if ( tag == QString::fromLocal8Bit( "Text" ) )
+  else if ( tag == TQString::fromLocal8Bit( "Text" ) )
     regexp = new TextRegExp( false );
-  else if ( tag == QString::fromLocal8Bit( "Concatenation" ) )
+  else if ( tag == TQString::fromLocal8Bit( "Concatenation" ) )
     regexp = new ConcRegExp( false );
-  else if ( tag == QString::fromLocal8Bit( "Alternatives" ) )
+  else if ( tag == TQString::fromLocal8Bit( "Alternatives" ) )
     regexp = new AltnRegExp( false );
-  else if ( tag == QString::fromLocal8Bit( "BegLine" ) )
+  else if ( tag == TQString::fromLocal8Bit( "BegLine" ) )
     regexp = new PositionRegExp( false, PositionRegExp::BEGLINE );
-  else if ( tag == QString::fromLocal8Bit( "EndLine" ) )
+  else if ( tag == TQString::fromLocal8Bit( "EndLine" ) )
     regexp = new PositionRegExp( false, PositionRegExp::ENDLINE );
-  else if ( tag == QString::fromLocal8Bit( "WordBoundary" ) )
+  else if ( tag == TQString::fromLocal8Bit( "WordBoundary" ) )
     regexp = new PositionRegExp( false, PositionRegExp::WORDBOUNDARY );
-  else if ( tag == QString::fromLocal8Bit( "NonWordBoundary" ) )
+  else if ( tag == TQString::fromLocal8Bit( "NonWordBoundary" ) )
     regexp = new PositionRegExp( false, PositionRegExp::NONWORDBOUNDARY );
-  else if ( tag == QString::fromLocal8Bit( "PositiveLookAhead" ) )
+  else if ( tag == TQString::fromLocal8Bit( "PositiveLookAhead" ) )
     regexp = new LookAheadRegExp( false, LookAheadRegExp::POSITIVE );
-  else if ( tag == QString::fromLocal8Bit( "NegativeLookAhead" ) )
+  else if ( tag == TQString::fromLocal8Bit( "NegativeLookAhead" ) )
     regexp = new LookAheadRegExp( false, LookAheadRegExp::NEGATIVE );
-  else if ( tag == QString::fromLocal8Bit( "Compound" ) )
+  else if ( tag == TQString::fromLocal8Bit( "Compound" ) )
     regexp = new CompoundRegExp( false );
-  else if ( tag == QString::fromLocal8Bit( "AnyChar" ) )
+  else if ( tag == TQString::fromLocal8Bit( "AnyChar" ) )
     regexp = new DotRegExp( false );
-  else if ( tag == QString::fromLocal8Bit( "Repeat" ) )
+  else if ( tag == TQString::fromLocal8Bit( "Repeat" ) )
     regexp = new RepeatRegExp( false );
   else {
     KMessageBox::sorry( 0, i18n("<p>Unknown tag while reading XML. Tag was <b>%1</b></p>").arg(tag),
@@ -178,9 +178,9 @@ RegExp* WidgetFactory::createRegExp( QDomElement node, const QString& version )
   return 0;
 }
 
-RegExp* WidgetFactory::createRegExp( QString str )
+RegExp* WidgetFactory::createRegExp( TQString str )
 {
-  QDomDocument doc;
+  TQDomDocument doc;
   bool ok = doc.setContent( str );
   if ( !ok ) {
     KMessageBox::sorry( 0, i18n("Error while loading regular expression from XML. Most probably the regular expression had unmatched tags."),
@@ -189,16 +189,16 @@ RegExp* WidgetFactory::createRegExp( QString str )
 
 
   // Read the RegularExpression element, and extract the version.
-  QDomElement top = doc.documentElement();
-  if (! (top.tagName() == QString::fromLocal8Bit("RegularExpression")) ) {
-    KMessageBox::sorry( 0, i18n("<p>XML file did not contain a <b>%1</b> tag.</p>").arg(QString::fromLatin1("RegularExpression")),
+  TQDomElement top = doc.documentElement();
+  if (! (top.tagName() == TQString::fromLocal8Bit("RegularExpression")) ) {
+    KMessageBox::sorry( 0, i18n("<p>XML file did not contain a <b>%1</b> tag.</p>").arg(TQString::fromLatin1("RegularExpression")),
                         i18n("Error While Loading From XML File") ) ;
   }
-  QString version = top.attribute( QString::fromLocal8Bit("version"), KRegExpEditorGUI::version );
-  QDomNode child = top.firstChild();
+  TQString version = top.attribute( TQString::fromLocal8Bit("version"), KRegExpEditorGUI::version );
+  TQDomNode child = top.firstChild();
   if ( ! child.isElement() ) {
     KMessageBox::sorry( 0, i18n("<p>Error while reading XML file. The element just below the tag "
-                                "<b>%1</b> was not an element.</p>").arg(QString::fromLatin1("RegularExpression")),
+                                "<b>%1</b> was not an element.</p>").arg(TQString::fromLatin1("RegularExpression")),
                         i18n("Error While Loading From XML File") ) ;
   }
 

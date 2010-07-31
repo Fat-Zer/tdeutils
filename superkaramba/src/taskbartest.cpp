@@ -27,8 +27,8 @@
 #include <klocale.h>
 #include <kconfig.h>
 
-#include <qfileinfo.h>
-#include <qstringlist.h>
+#include <tqfileinfo.h>
+#include <tqstringlist.h>
 
 #include <iostream.h>
 
@@ -95,7 +95,7 @@ int main(int argc, char **argv)
 //         {
 //             if( args->arg(i) != "" )
 //             {
-//                 QFileInfo file( args->arg(i) );
+//                 TQFileInfo file( args->arg(i) );
 //                 //qDebug( file.dirPath(true) );
 //                 if( file.exists() && !file.isDir() )
 //                 {
@@ -125,11 +125,11 @@ int main(int argc, char **argv)
 //     }
 //     else
 //     {
-//         QStringList fileNames;
-//         fileNames = KFileDialog::getOpenFileNames(QString::null, "*.theme", 0, "Open configurations");
-//         for ( QStringList::Iterator it = fileNames.begin(); it != fileNames.end(); ++it )
+//         TQStringList fileNames;
+//         fileNames = KFileDialog::getOpenFileNames(TQString::null, "*.theme", 0, "Open configurations");
+//         for ( TQStringList::Iterator it = fileNames.begin(); it != fileNames.end(); ++it )
 //         {
-//             QFileInfo file( *it );
+//             TQFileInfo file( *it );
 //             if( file.exists() && !file.isDir() )
 //             {
 //                 mainWin = new karamba( *it );

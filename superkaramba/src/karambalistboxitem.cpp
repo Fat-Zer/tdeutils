@@ -20,6 +20,6 @@
  ****************************************************************************/
 #include "karambalistboxitem.h"
 
-KarambaListBoxItem::KarambaListBoxItem( QListBox* listbox, const QString & text ) : QListBoxText(listbox, text) {
+KarambaListBoxItem::KarambaListBoxItem( TQListBox* listbox, const TQString & text ) : TQListBoxText(listbox, text) {
 
 }

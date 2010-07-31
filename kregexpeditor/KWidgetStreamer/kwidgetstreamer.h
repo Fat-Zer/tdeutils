@@ -17,10 +17,10 @@
  **/
 #ifndef __kwidgetstreamer
 #define __kwidgetstreamer
-#include <qmap.h>
-#include <qptrlist.h>
-#include <qstringlist.h>
-#include <qobject.h>
+#include <tqmap.h>
+#include <tqptrlist.h>
+#include <tqstringlist.h>
+#include <tqobject.h>
 
 /**
    This class defines methods for streaming widget data.
@@ -32,12 +32,12 @@
    inherit from this class and override @ref toStream and @ref fromStream.
 
    The following example shows how you can avoid streaming
-   <tt>numDigits</tt> for a QLCDNumber. The same approach applies if you
+   <tt>numDigits</tt> for a TQLCDNumber. The same approach applies if you
    want to add extra properties to be streamed.
    <pre>
    KWidgetStreamer streamer;
    KWidgetStreamer::PropertyMap& map = streamer.propertyMap();
-   KWidgetStreamer::PropertyList& list = *map.find("QLCDNumber");
+   KWidgetStreamer::PropertyList& list = *map.find("TQLCDNumber");
    list.remove("numDigits");
    </pre>
 **/
@@ -45,23 +45,23 @@ class KWidgetStreamer
 {
 
 public:
-  typedef QStringList PropertyList;
-  typedef QMap< QString, PropertyList > PropertyMap;
-  typedef QMap< QString, PropertyList >::ConstIterator PropertyMapIt;
-  typedef QStringList::Iterator PropertyListIt;
+  typedef TQStringList PropertyList;
+  typedef TQMap< TQString, PropertyList > PropertyMap;
+  typedef TQMap< TQString, PropertyList >::ConstIterator PropertyMapIt;
+  typedef TQStringList::Iterator PropertyListIt;
 
   KWidgetStreamer();
   virtual ~KWidgetStreamer() {}
 
-  virtual void toStream(const QObject* from, QDataStream& stream );
-  virtual void fromStream(QDataStream& stream, QObject* to);
+  virtual void toStream(const TQObject* from, TQDataStream& stream );
+  virtual void fromStream(TQDataStream& stream, TQObject* to);
 
   PropertyMap& propertyMap() { return _map; }
 
 
 protected:
-  void propertyToStream( const QObject* from, QDataStream& stream );
-  void propertyFromStream( QDataStream& stream, QObject* to );
+  void propertyToStream( const TQObject* from, TQDataStream& stream );
+  void propertyFromStream( TQDataStream& stream, TQObject* to );
 
 private:
   PropertyMap _map;

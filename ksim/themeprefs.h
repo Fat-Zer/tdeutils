@@ -21,7 +21,7 @@
 #define THEMEIMPL_H
 
 #include <kurl.h>
-#include <qwidget.h>
+#include <tqwidget.h>
 
 class QListViewItem;
 class QGridLayout;
@@ -41,7 +41,7 @@ namespace KSim
   {
     public:
       ThemeInfo() : name(0), url(0), alternatives(0) {}
-      ThemeInfo(const QString &name, const KURL &url, int alts=0)
+      ThemeInfo(const TQString &name, const KURL &url, int alts=0)
          : name(name), url(url), alternatives(alts) {}
 
       bool operator==(const ThemeInfo &rhs) const
@@ -66,18 +66,18 @@ namespace KSim
         return *this;
       }
 
-      QString name;
+      TQString name;
       KURL url;
       int alternatives;
   };
 
-  typedef QValueList<ThemeInfo> ThemeInfoList;
+  typedef TQValueList<ThemeInfo> ThemeInfoList;
 
   class ThemePrefs : public QWidget
   {
     Q_OBJECT
     public:
-      ThemePrefs(QWidget *parent, const char *name=0);
+      ThemePrefs(TQWidget *parent, const char *name=0);
       ~ThemePrefs();
 
     public slots:
@@ -87,12 +87,12 @@ namespace KSim
     private slots:
       void setCurrentTheme(const ThemeInfo &);
       void setThemeAlts(int);
-      void openURL(const QString &);
+      void openURL(const TQString &);
       void insertItems(const ThemeInfoList &);
       void clear();
       void completed();
-      void selectItem(QListViewItem *item);
-      void readThemes(const QString &);
+      void selectItem(TQListViewItem *item);
+      void readThemes(const TQString &);
       void showFontDialog(int);
 
     private:
@@ -100,16 +100,16 @@ namespace KSim
       KURLLabel *m_urlLabel;
       KIntSpinBox *m_altTheme;
       KComboBox *m_fontsCombo;
-      QLabel *m_label;
-      QLabel *m_authorLabel;
+      TQLabel *m_label;
+      TQLabel *m_authorLabel;
       KSqueezedTextLabel *m_authLabel;
-      QLabel *m_alternateLabel;
-      QLabel *m_fontLabel;
+      TQLabel *m_alternateLabel;
+      TQLabel *m_fontLabel;
       KSeparator *m_line;
       ThemeInfo m_currentTheme;
-      QFont m_font;
+      TQFont m_font;
       ThemeInfoList m_themeList;
-      QGridLayout *m_themeLayout;
+      TQGridLayout *m_themeLayout;
   };
 }
 #endif

@@ -34,14 +34,14 @@ class HostDialog : public HostDialogBase
 {
     Q_OBJECT
 public:
-    HostDialog( QWidget *parent, const char *name = 0 );
-    HostDialog( const HostConfig &src, QWidget *parent, const char *name = 0 );
+    HostDialog( TQWidget *parent, const char *name = 0 );
+    HostDialog( const HostConfig &src, TQWidget *parent, const char *name = 0 );
 
     HostConfig settings() const;
 
 private slots:
-    void showSnmpAuthenticationDetailsForVersion( const QString &versionStr  );
-    void enableDisabledAuthenticationAndPrivacyElementsForSecurityLevel( const QString &levelStr );
+    void showSnmpAuthenticationDetailsForVersion( const TQString &versionStr  );
+    void enableDisabledAuthenticationAndPrivacyElementsForSecurityLevel( const TQString &levelStr );
     void checkValidity();
     void testHost();
 

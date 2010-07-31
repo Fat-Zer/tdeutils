@@ -20,12 +20,12 @@
 
 #include <ctype.h>
 #include <stdio.h>
-#include <qwidget.h>
+#include <tqwidget.h>
 #include "hexvalidator.h"
 
-CHexValidator::CHexValidator( QWidget *parent, EState state,
+CHexValidator::CHexValidator( TQWidget *parent, EState state,
 			      const char *name )
-  :QValidator( parent, name )
+  :TQValidator( parent, name )
 {
   setState( state );
 }
@@ -34,7 +34,7 @@ CHexValidator::~CHexValidator( void )
 {
 }
 
-QValidator::State CHexValidator::validate( QString &string, int &/*pos*/ ) const
+TQValidator::State CHexValidator::validate( TQString &string, int &/*pos*/ ) const
 {
   if( mState == hexadecimal )
   {
@@ -43,10 +43,10 @@ QValidator::State CHexValidator::validate( QString &string, int &/*pos*/ ) const
       int val = string[i].latin1();
       if( isxdigit( val ) == 0 && isspace( val ) == 0 )
       {
-	return( QValidator::Invalid );
+	return( TQValidator::Invalid );
       }
     }
-    return( QValidator::Valid );
+    return( TQValidator::Valid );
   }
   if( mState == decimal )
   {
@@ -55,10 +55,10 @@ QValidator::State CHexValidator::validate( QString &string, int &/*pos*/ ) const
       int val = string[i].latin1();
       if( isdigit( val ) == 0 && isspace( val ) == 0 )
       {
-	return( QValidator::Invalid );
+	return( TQValidator::Invalid );
       }
     }
-    return( QValidator::Valid );
+    return( TQValidator::Valid );
   }
   else if( mState == octal )
   {
@@ -68,10 +68,10 @@ QValidator::State CHexValidator::validate( QString &string, int &/*pos*/ ) const
       if( (isdigit( val ) == 0 || val == '8' || val == '9') &&
 	  isspace( val ) == 0 )
       {
-	return( QValidator::Invalid );
+	return( TQValidator::Invalid );
       }
     }
-    return( QValidator::Valid );
+    return( TQValidator::Valid );
   }
   else if( mState == binary )
   {
@@ -80,18 +80,18 @@ QValidator::State CHexValidator::validate( QString &string, int &/*pos*/ ) const
       int val = string[i].latin1();
       if( val != '0' && val != '1' && isspace( val ) == 0 )
       {
-	return( QValidator::Invalid );
+	return( TQValidator::Invalid );
       }
     }
-    return( QValidator::Valid );
+    return( TQValidator::Valid );
   }
   else if( mState == regularText )
   {
-    return( QValidator::Valid );
+    return( TQValidator::Valid );
   }
   else
   {
-    return( QValidator::Invalid );
+    return( TQValidator::Invalid );
   }
 
 }
@@ -103,7 +103,7 @@ void CHexValidator::setState( EState state )
 }
 
 
-void CHexValidator::convert( QByteArray &dest, const QString &src )
+void CHexValidator::convert( TQByteArray &dest, const TQString &src )
 {
   uint value;
   uint k=0;
@@ -286,29 +286,29 @@ void CHexValidator::convert( QByteArray &dest, const QString &src )
 
 
 
-void CHexValidator::format( QString &dest, const QByteArray &src )
+void CHexValidator::format( TQString &dest, const TQByteArray &src )
 {
   for( uint i=0; i<src.size(); ++i )
   {
     unsigned char srcCh = (unsigned char)src[i];
-    QString formattedCh;
+    TQString formattedCh;
 
     switch( mState )
     {
       case hexadecimal:
-        formattedCh = zeroExtend( QString::number( srcCh, 16 ), 2 );
+        formattedCh = zeroExtend( TQString::number( srcCh, 16 ), 2 );
         break;
       case decimal:
-        formattedCh = zeroExtend( QString::number( srcCh, 10), 3 );
+        formattedCh = zeroExtend( TQString::number( srcCh, 10), 3 );
         break;
       case octal:
-        formattedCh = zeroExtend( QString::number( srcCh, 8), 3 );
+        formattedCh = zeroExtend( TQString::number( srcCh, 8), 3 );
         break;
       case binary:
-        formattedCh = zeroExtend( QString::number( srcCh, 2), 8 );
+        formattedCh = zeroExtend( TQString::number( srcCh, 2), 8 );
         break;
       case regularText:
-        formattedCh = QString( QChar( srcCh ) );
+        formattedCh = TQString( TQChar( srcCh ) );
         break;
     }
 
@@ -317,12 +317,12 @@ void CHexValidator::format( QString &dest, const QByteArray &src )
 }
 
 
-QString CHexValidator::zeroExtend( const QString &src, unsigned destLen) const
+TQString CHexValidator::zeroExtend( const TQString &src, unsigned destLen) const
 {
   if( src.length() >= destLen )
     return src;
 
-  QString zeroes;
+  TQString zeroes;
   zeroes.fill( '0', destLen - src.length() );
   return zeroes + src;
 }

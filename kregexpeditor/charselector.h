@@ -18,7 +18,7 @@
 #ifndef CHARSELECTOR_H
 #define CHARSELECTOR_H
 
-#include <qwidget.h>
+#include <tqwidget.h>
 
 class QComboBox;
 class QWidgetStack;
@@ -29,9 +29,9 @@ class CharSelector :public QWidget
     Q_OBJECT
 
 public:
-    CharSelector( QWidget* parent, const char* name = 0 );
-    QString text() const;
-    void setText( QString text );
+    CharSelector( TQWidget* parent, const char* name = 0 );
+    TQString text() const;
+    void setText( TQString text );
     bool isEmpty() const;
 
 protected:
@@ -41,8 +41,8 @@ private slots:
     void slotNewItem( int which );
 
 private:
-    QComboBox* _type;
-    QWidgetStack* _stack;
+    TQComboBox* _type;
+    TQWidgetStack* _stack;
     LimitedCharLineEdit* _normal;
     LimitedCharLineEdit* _hex;
     LimitedCharLineEdit* _oct;

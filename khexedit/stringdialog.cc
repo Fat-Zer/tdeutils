@@ -18,11 +18,11 @@
  *
  */
 
-#include <qcheckbox.h>
-#include <qlabel.h>
-#include <qlayout.h>
-#include <qlineedit.h>
-#include <qspinbox.h>
+#include <tqcheckbox.h>
+#include <tqlabel.h>
+#include <tqlayout.h>
+#include <tqlineedit.h>
+#include <tqspinbox.h>
 
 #include <kconfig.h>
 #include <kglobalsettings.h>
@@ -31,58 +31,58 @@
 
 #include "listview.h"
 #include "stringdialog.h"
-#include <qpushbutton.h>
+#include <tqpushbutton.h>
 
 
-CStringDialog::CStringDialog( QWidget *parent, const char *name, bool modal )
+CStringDialog::CStringDialog( TQWidget *parent, const char *name, bool modal )
   : KDialogBase( Plain, i18n("Extract Strings"), Help|User1|Cancel, User1,
 		 parent, name, modal, true, i18n("&Update") ),
   mMaxLength(0), mBusy(false), mDirty(false)
 {
-  setHelp( "khexedit/khexedit.html", QString::null );
+  setHelp( "khexedit/khexedit.html", TQString::null );
 
-  QString text;
-  QVBoxLayout *topLayout = new QVBoxLayout( plainPage(), 0, spacingHint() );
+  TQString text;
+  TQVBoxLayout *topLayout = new TQVBoxLayout( plainPage(), 0, spacingHint() );
 
-  QGridLayout *glay = new QGridLayout( 3, 3, spacingHint() );
+  TQGridLayout *glay = new TQGridLayout( 3, 3, spacingHint() );
   topLayout->addLayout( glay );
   glay->setColStretch( 1, 10 );
 
-  mLengthSpin = new QSpinBox( plainPage() );
+  mLengthSpin = new TQSpinBox( plainPage() );
   mLengthSpin->setMinimumWidth( fontMetrics().maxWidth()*17 );
   mLengthSpin->setRange( 1, 1000000 );
   mLengthSpin->setValue( 4 );
   glay->addMultiCellWidget( mLengthSpin, 0, 0, 1, 2 );
 
   text = i18n("&Minimum length:");
-  QLabel *label = new QLabel( mLengthSpin, text, plainPage() );
+  TQLabel *label = new TQLabel( mLengthSpin, text, plainPage() );
   glay->addWidget( label, 0, 0, AlignRight );
 
-  mFilter = new QLineEdit( plainPage() );
+  mFilter = new TQLineEdit( plainPage() );
   mFilter->setMinimumWidth( fontMetrics().maxWidth()*17 );
   mFilter->setText("*");
   glay->addWidget( mFilter, 1, 1 );
 
   text = i18n("&Filter:");
-  label = new QLabel( mFilter, text, plainPage() );
+  label = new TQLabel( mFilter, text, plainPage() );
   glay->addWidget( label, 1, 0, AlignRight );
 
-  QPushButton *useButton = new QPushButton( plainPage(), "use" );
+  TQPushButton *useButton = new TQPushButton( plainPage(), "use" );
   useButton->setText( i18n("&Use") );
   useButton->setAutoDefault( false );
-  connect( useButton, SIGNAL(clicked()),this,SLOT(slotUser1()) );
+  connect( useButton, TQT_SIGNAL(clicked()),this,TQT_SLOT(slotUser1()) );
   glay->addWidget( useButton, 1, 2 );
 
-  QWidget *helper = new QWidget( plainPage() );
+  TQWidget *helper = new TQWidget( plainPage() );
   glay->addMultiCellWidget( helper, 2, 2, 1, 2 );
-  QHBoxLayout *hlay = new QHBoxLayout( helper, 0, spacingHint() );
+  TQHBoxLayout *hlay = new TQHBoxLayout( helper, 0, spacingHint() );
 
   text = i18n("&Ignore case");
-  mIgnoreCaseCheck = new QCheckBox( text, helper );
+  mIgnoreCaseCheck = new TQCheckBox( text, helper );
   hlay->addWidget( mIgnoreCaseCheck );
 
   text = i18n("Show offset as &decimal");
-  mOffsetDecimalCheck = new QCheckBox( text, helper );
+  mOffsetDecimalCheck = new TQCheckBox( text, helper );
   hlay->addWidget( mOffsetDecimalCheck );
 
   hlay->addStretch(10);
@@ -95,33 +95,33 @@ CStringDialog::CStringDialog( QWidget *parent, const char *name, bool modal )
   mStringList->addColumn( i18n("Offset") );
   mStringList->addColumn( i18n("String") );
   mStringList->setAllColumnsShowFocus( true );
-  mStringList->setFrameStyle( QFrame::WinPanel + QFrame::Sunken );
+  mStringList->setFrameStyle( TQFrame::WinPanel + TQFrame::Sunken );
 
-  connect( mStringList, SIGNAL(selectionChanged()),
-	   SLOT(selectionChanged()));
+  connect( mStringList, TQT_SIGNAL(selectionChanged()),
+	   TQT_SLOT(selectionChanged()));
   topLayout->addWidget( mStringList, 10 );
 
-  hlay = new QHBoxLayout( topLayout );
+  hlay = new TQHBoxLayout( topLayout );
 
   text = i18n("Number of strings:");
-  label = new QLabel( text, plainPage() );
+  label = new TQLabel( text, plainPage() );
   hlay->addWidget( label, AlignLeft );
 
-  mListSizeLabel = new QLabel( QString(), plainPage() );
+  mListSizeLabel = new TQLabel( TQString(), plainPage() );
   mListSizeLabel->setFixedWidth( fontMetrics().maxWidth()*10 );
   hlay->addWidget( mListSizeLabel, AlignLeft|AlignHCenter );
 
   text = i18n("Displayed:");
-  label = new QLabel( text, plainPage() );
+  label = new TQLabel( text, plainPage() );
   hlay->addWidget( label, AlignLeft );
 
-  mDisplaySizeLabel = new QLabel( QString(""), plainPage() );
+  mDisplaySizeLabel = new TQLabel( TQString(""), plainPage() );
   mDisplaySizeLabel->setFixedWidth( fontMetrics().maxWidth()*10 );
   hlay->addWidget( mDisplaySizeLabel, AlignLeft|AlignHCenter);
 
   hlay->addStretch( 10 );
 
-  mDirtyLabel = new QLabel( plainPage() );
+  mDirtyLabel = new TQLabel( plainPage() );
   topLayout->addWidget( mDirtyLabel );
 
   readConfiguration();
@@ -141,7 +141,7 @@ CStringDialog::~CStringDialog( void )
 }
 
 
-void CStringDialog::showEvent( QShowEvent *e )
+void CStringDialog::showEvent( TQShowEvent *e )
 {
   KDialogBase::showEvent(e);
   mLengthSpin->setFocus();
@@ -194,7 +194,7 @@ void CStringDialog::slotUser1( void ) // Start
 
   if( mRegExp.isValid() == false )
   {
-    QString msg = i18n(""
+    TQString msg = i18n(""
       "The filter expression you have specified is illegal. "
       "You must specify a valid regular expression.\n"
       "Continue without filter?");
@@ -218,10 +218,10 @@ void CStringDialog::slotUser1( void ) // Start
 }
 
 
-void CStringDialog::startGoto( QListViewItem *item )
+void CStringDialog::startGoto( TQListViewItem *item )
 {
-  QString str_offset = item->text(0);
-  QString string = item->text(1);
+  TQString str_offset = item->text(0);
+  TQString string = item->text(1);
 
   uint offset;
   if( stringData().decimalOffset == true )
@@ -275,11 +275,11 @@ void CStringDialog::selectionChanged()
 }
 
 
-void CStringDialog::timerEvent( QTimerEvent * )
+void CStringDialog::timerEvent( TQTimerEvent * )
 {
   killTimers();
 
-  QListViewItem *item = mStringList->currentItem();
+  TQListViewItem *item = mStringList->currentItem();
   if( item == 0 )
   {
     slotUser1();
@@ -289,7 +289,7 @@ void CStringDialog::timerEvent( QTimerEvent * )
 }
 
 
-void CStringDialog::resizeEvent( QResizeEvent * )
+void CStringDialog::resizeEvent( TQResizeEvent * )
 {
   setColumnWidth();
 }
@@ -303,8 +303,8 @@ int CStringDialog::updateList( CProgress &p )
 
   int offsetLen = stringData().offsetLen();
 
-  QPtrList<QString> &list = stringData().list();
-  for( const QString *str = list.first(); str != 0; str = list.next() )
+  TQPtrList<TQString> &list = stringData().list();
+  for( const TQString *str = list.first(); str != 0; str = list.next() )
   {
     appendListItem( *str, offsetLen );
     mMaxLength = QMAX( mMaxLength, str->length() );
@@ -361,19 +361,19 @@ void CStringDialog::enableList( bool state )
 }
 
 
-void CStringDialog::appendListItem( const QString &str, uint offsetLen )
+void CStringDialog::appendListItem( const TQString &str, uint offsetLen )
 {
   if( mRegExp.search ( str, offsetLen ) != -1 )
   {
-    new QListViewItem( mStringList, str.left(offsetLen), str.mid(offsetLen) );
+    new TQListViewItem( mStringList, str.left(offsetLen), str.mid(offsetLen) );
   }
 }
 
 
 void CStringDialog::updateListInfo( void )
 {
-  mListSizeLabel->setText( QString("%1").arg(mStringData.count()) );
-  mDisplaySizeLabel->setText( QString("%1").arg(mStringList->childCount()) );
+  mListSizeLabel->setText( TQString("%1").arg(mStringData.count()) );
+  mDisplaySizeLabel->setText( TQString("%1").arg(mStringList->childCount()) );
   setColumnWidth();
 }
 
@@ -381,7 +381,7 @@ void CStringDialog::updateListInfo( void )
 
 void CStringDialog::setColumnWidth( void )
 {
-  const QFontMetrics &fm = mStringList->fontMetrics();
+  const TQFontMetrics &fm = mStringList->fontMetrics();
 
   if( mStringData.count() == 0 )
   {

@@ -20,15 +20,15 @@
 #include "netdialog.h"
 #include "netdialog.moc"
 
-#include <qcheckbox.h>
-#include <qgroupbox.h>
-#include <qlabel.h>
-#include <qpushbutton.h>
-#include <qtabwidget.h>
-#include <qwidget.h>
-#include <qlayout.h>
-#include <qfile.h>
-#include <qregexp.h>
+#include <tqcheckbox.h>
+#include <tqgroupbox.h>
+#include <tqlabel.h>
+#include <tqpushbutton.h>
+#include <tqtabwidget.h>
+#include <tqwidget.h>
+#include <tqlayout.h>
+#include <tqfile.h>
+#include <tqregexp.h>
 
 #include <klocale.h>
 #include <kcombobox.h>
@@ -49,29 +49,29 @@
 
 #include <string.h>
 
-NetDialog::NetDialog(QWidget *parent, const char *name)
-   : QTabDialog(parent, name, true)
+NetDialog::NetDialog(TQWidget *parent, const char *name)
+   : TQTabDialog(parent, name, true)
 {
   m_clicked = false;
   setCaption(kapp->makeStdCaption(i18n("Network Interface")));
 
-  m_generalTab = new QWidget(this);
-  m_generalLayout = new QGridLayout(m_generalTab);
+  m_generalTab = new TQWidget(this);
+  m_generalLayout = new TQGridLayout(m_generalTab);
   m_generalLayout->setSpacing(6);
   m_generalLayout->setMargin(11);
 
-  m_deviceLabel = new QLabel(m_generalTab);
+  m_deviceLabel = new TQLabel(m_generalTab);
   m_deviceLabel->setText(i18n("Interface:"));
   m_generalLayout->addMultiCellWidget(m_deviceLabel, 0, 0, 0, 0);
 
   m_deviceCombo = new KComboBox(true, m_generalTab);
-  m_deviceCombo->setSizePolicy(QSizePolicy(QSizePolicy::Preferred,
-     QSizePolicy::Fixed));
+  m_deviceCombo->setSizePolicy(TQSizePolicy(TQSizePolicy::Preferred,
+     TQSizePolicy::Fixed));
   m_deviceCombo->setFocus();
   m_deviceCombo->setDuplicatesEnabled(false);
   m_generalLayout->addMultiCellWidget(m_deviceCombo, 0, 0, 1, 1);
 
-  QStringList output(createList());
+  TQStringList output(createList());
   if (output.isEmpty()) {
     m_deviceCombo->insertItem("ppp0");
     m_deviceCombo->insertItem("eth0");
@@ -79,16 +79,16 @@ NetDialog::NetDialog(QWidget *parent, const char *name)
   else
     m_deviceCombo->insertStringList(output);
 
-  QSpacerItem *deviceSpacer = new QSpacerItem(20, 20,
-     QSizePolicy::Expanding, QSizePolicy::Fixed);
+  TQSpacerItem *deviceSpacer = new TQSpacerItem(20, 20,
+     TQSizePolicy::Expanding, TQSizePolicy::Fixed);
   m_generalLayout->addMultiCell(deviceSpacer, 0, 0, 2, 2);
 
-  m_timerBox = new QGroupBox(m_generalTab);
+  m_timerBox = new TQGroupBox(m_generalTab);
   m_timerBox->setTitle(i18n("Timer"));
   m_timerBox->setColumnLayout(0, Qt::Vertical);
   m_timerBox->layout()->setSpacing(0);
   m_timerBox->layout()->setMargin(0);
-  m_timerBoxLayout = new QVBoxLayout(m_timerBox->layout());
+  m_timerBoxLayout = new TQVBoxLayout(m_timerBox->layout());
   m_timerBoxLayout->setAlignment(Qt::AlignTop);
   m_timerBoxLayout->setSpacing(6);
   m_timerBoxLayout->setMargin(11);
@@ -97,77 +97,77 @@ NetDialog::NetDialog(QWidget *parent, const char *name)
   m_timerEdit->setText("hh:mm:ss");
   m_timerEdit->setEnabled(false);
 
-  m_showTimer = new QCheckBox(m_timerBox);
+  m_showTimer = new TQCheckBox(m_timerBox);
   m_showTimer->setText(i18n("Show timer"));
-  connect(m_showTimer, SIGNAL(toggled(bool)),
-      m_timerEdit, SLOT(setEnabled(bool)));
+  connect(m_showTimer, TQT_SIGNAL(toggled(bool)),
+      m_timerEdit, TQT_SLOT(setEnabled(bool)));
   m_timerBoxLayout->addWidget(m_showTimer);
   m_timerBoxLayout->addWidget(m_timerEdit);
 
-  m_hFormat = new QLabel(m_timerBox);
+  m_hFormat = new TQLabel(m_timerBox);
   m_hFormat->setText(i18n("hh - Total hours online"));
   m_timerBoxLayout->addWidget(m_hFormat);
 
-  m_mFormat = new QLabel(m_timerBox);
+  m_mFormat = new TQLabel(m_timerBox);
   m_mFormat->setText(i18n("mm - Total minutes online"));
   m_timerBoxLayout->addWidget(m_mFormat);
 
-  m_sFormat = new QLabel(m_timerBox);
+  m_sFormat = new TQLabel(m_timerBox);
   m_sFormat->setText(i18n("ss - Total seconds online"));
   m_timerBoxLayout->addWidget(m_sFormat);
   m_generalLayout->addMultiCellWidget(m_timerBox, 1, 1, 0, 2);
 
-  QSpacerItem *spacer = new QSpacerItem(20, 20,
-      QSizePolicy::Minimum, QSizePolicy::Expanding);
+  TQSpacerItem *spacer = new TQSpacerItem(20, 20,
+      TQSizePolicy::Minimum, TQSizePolicy::Expanding);
   m_generalLayout->addMultiCell(spacer, 2, 2, 0, 0);
   addTab(m_generalTab, i18n("General"));
 
-  m_commandTab = new QWidget(this);
-  m_commandLayout = new QGridLayout(m_commandTab);
+  m_commandTab = new TQWidget(this);
+  m_commandLayout = new TQGridLayout(m_commandTab);
   m_commandLayout->setSpacing(6);
   m_commandLayout->setMargin(11);
 
-  m_enableCommands = new QCheckBox(m_commandTab);
+  m_enableCommands = new TQCheckBox(m_commandTab);
   m_enableCommands->setText(i18n("Enable connect/disconnect"));
   m_commandLayout->addMultiCellWidget(m_enableCommands, 0, 0, 0, 2);
 
-  m_cCommand = new QLabel(m_commandTab);
+  m_cCommand = new TQLabel(m_commandTab);
   m_cCommand->setText(i18n("Connect command:"));
   m_commandLayout->addMultiCellWidget(m_cCommand, 1, 1, 0, 0);
 
   m_connectRequester = new KURLRequester(m_commandTab);
   m_connectRequester->setMinimumSize(145, 0);
   m_connectRequester->setEnabled(false);
-  connect(m_enableCommands, SIGNAL(toggled(bool)),
-      m_connectRequester, SLOT(setEnabled(bool)));
+  connect(m_enableCommands, TQT_SIGNAL(toggled(bool)),
+      m_connectRequester, TQT_SLOT(setEnabled(bool)));
   m_commandLayout->addMultiCellWidget(m_connectRequester, 1, 1, 1, 2);
 
-  m_dCommand = new QLabel(m_commandTab);
+  m_dCommand = new TQLabel(m_commandTab);
   m_dCommand->setText(i18n("Disconnect command:"));
   m_commandLayout->addMultiCellWidget(m_dCommand, 2, 2, 0, 0);
 
   m_disconnectRequester = new KURLRequester(m_commandTab);
   m_disconnectRequester->setMinimumSize(145, 0);
   m_disconnectRequester->setEnabled(false);
-  connect(m_enableCommands, SIGNAL(toggled(bool)),
-      m_disconnectRequester, SLOT(setEnabled(bool)));
+  connect(m_enableCommands, TQT_SIGNAL(toggled(bool)),
+      m_disconnectRequester, TQT_SLOT(setEnabled(bool)));
   m_commandLayout->addMultiCellWidget(m_disconnectRequester, 2, 2, 1, 2);
 
-  QSpacerItem *commandSpacer = new QSpacerItem(20, 20,
-      QSizePolicy::Minimum, QSizePolicy::Expanding);
+  TQSpacerItem *commandSpacer = new TQSpacerItem(20, 20,
+      TQSizePolicy::Minimum, TQSizePolicy::Expanding);
   m_commandLayout->addItem(commandSpacer);
   addTab(m_commandTab, i18n("Commands"));
 
   setOkButton(KStdGuiItem::ok().text());
   setCancelButton(KStdGuiItem::cancel().text());
-  connect(this, SIGNAL(applyButtonPressed()), SLOT(sendClicked()));
+  connect(this, TQT_SIGNAL(applyButtonPressed()), TQT_SLOT(sendClicked()));
 }
 
 NetDialog::~NetDialog()
 {
 }
 
-const QString NetDialog::deviceName() const
+const TQString NetDialog::deviceName() const
 {
   return m_deviceCombo->currentText();
 }
@@ -177,7 +177,7 @@ bool NetDialog::timer()
   return m_showTimer->isChecked();
 }
 
-const QString NetDialog::format() const
+const TQString NetDialog::format() const
 {
   return m_timerEdit->text();
 }
@@ -187,17 +187,17 @@ bool NetDialog::commands()
   return m_enableCommands->isChecked();
 }
 
-const QString NetDialog::cCommand() const
+const TQString NetDialog::cCommand() const
 {
   return m_connectRequester->url();
 }
 
-const QString NetDialog::dCommand() const
+const TQString NetDialog::dCommand() const
 {
   return m_disconnectRequester->url();
 }
 
-void NetDialog::setDeviceName(const QString &text)
+void NetDialog::setDeviceName(const TQString &text)
 {
   m_deviceCombo->setCurrentItem(text, true);
 }
@@ -207,7 +207,7 @@ void NetDialog::setShowTimer(bool value)
   m_showTimer->setChecked(value);
 }
 
-void NetDialog::setFormat(const QString &format)
+void NetDialog::setFormat(const TQString &format)
 {
   m_timerEdit->setText(format);
 }
@@ -217,12 +217,12 @@ void NetDialog::setShowCommands(bool value)
   m_enableCommands->setChecked(value);
 }
 
-void NetDialog::setCCommand(const QString &text)
+void NetDialog::setCCommand(const TQString &text)
 {
   m_connectRequester->setURL(text);
 }
 
-void NetDialog::setDCommand(const QString &text)
+void NetDialog::setDCommand(const TQString &text)
 {
   m_disconnectRequester->setURL(text);
 }
@@ -233,28 +233,28 @@ void NetDialog::sendClicked()
   kdDebug(2003) << "ok was clicked" << endl;
 }
 
-QStringList NetDialog::createList() const
+TQStringList NetDialog::createList() const
 {
 #ifdef __linux__
-  QFile file("/proc/net/dev");
+  TQFile file("/proc/net/dev");
   if (!file.open(IO_ReadOnly))
-    return QStringList();
+    return TQStringList();
 
-  QStringList output;
-  QTextStream textStream(&file);
+  TQStringList output;
+  TQTextStream textStream(&file);
   while (!textStream.atEnd())
     output.append(textStream.readLine());
 
   if (output.isEmpty())
-    return QStringList();
+    return TQStringList();
 
   output.pop_front();
   output.pop_front();
 
-  QStringList::Iterator it;
-  QStringList list;
+  TQStringList::Iterator it;
+  TQStringList list;
   for (it = output.begin(); it != output.end(); ++it) {
-    list = QStringList::split(' ', (*it));
+    list = TQStringList::split(' ', (*it));
     (*it) = list[0].stripWhiteSpace();
     (*it).truncate((*it).find(':'));
   }
@@ -263,7 +263,7 @@ QStringList NetDialog::createList() const
 #endif
 
 #ifdef __FreeBSD__
-  QStringList output;
+  TQStringList output;
   int mib[] = { CTL_NET, PF_ROUTE, 0, 0, NET_RT_IFLIST, 0 };
   char *buf = 0;
   int alloc = 0;
@@ -274,19 +274,19 @@ QStringList NetDialog::createList() const
   char s[32];
 
   if (sysctl(mib, 6, NULL, &needed, NULL, 0) < 0)
-    return QStringList();
+    return TQStringList();
 
   if (alloc < needed) {
     buf = new char[needed];
 
     if (buf == NULL)
-      return QStringList();
+      return TQStringList();
 
     alloc = needed;
   }
 
   if (sysctl(mib, 6, buf, &needed, NULL, 0) < 0)
-    return QStringList();
+    return TQStringList();
 
   lim = buf + needed;
 
@@ -294,7 +294,7 @@ QStringList NetDialog::createList() const
   while (next < lim) {
     ifm = (struct if_msghdr *)next;
     if (ifm->ifm_type != RTM_IFINFO)
-      return QStringList();
+      return TQStringList();
 
     next += ifm->ifm_msglen;
 

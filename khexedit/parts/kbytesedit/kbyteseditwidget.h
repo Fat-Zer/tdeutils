@@ -19,7 +19,7 @@
 #define KBYTESEDITWIDGET_H
 
 // qt specific
-#include <qwidget.h>
+#include <tqwidget.h>
 // kde specific
 #include <khexedit/byteseditinterface.h>
 #include <khexedit/valuecolumninterface.h>
@@ -38,7 +38,7 @@ class KBytesEdit;
    @author Friedrich W. H. Kossebau <Friedrich.W.H@Kossebau.de>
    @version 0.1
  **/
-class KBytesEditWidget : public QWidget, public KHE::BytesEditInterface,
+class KBytesEditWidget : public TQWidget, public KHE::BytesEditInterface,
                          public KHE::ValueColumnInterface, public KHE::CharColumnInterface,
                          public KHE::ZoomInterface, public KHE::ClipboardInterface
 {
@@ -46,7 +46,7 @@ class KBytesEditWidget : public QWidget, public KHE::BytesEditInterface,
 
   public:
     /** constructor API as demanded by KGenericFactory */
-    KBytesEditWidget( QWidget *parent, const char *name, const QStringList & = QStringList() );
+    KBytesEditWidget( TQWidget *parent, const char *name, const TQStringList & = TQStringList() );
 
   public: // bytesedit interface
     /** hands over to the editor a new byte array.
@@ -133,7 +133,7 @@ class KBytesEditWidget : public QWidget, public KHE::BytesEditInterface,
     /** sets the substitute character for "unprintable" chars
       * returns true if there was a change
       */
-    virtual void setSubstituteChar( QChar SC );
+    virtual void setSubstituteChar( TQChar SC );
     /** sets the encoding of the char column. Default is KHE::LocalEncoding.
       * If the encoding is not available the format will not be changed. */
     virtual void setEncoding( KEncoding C );
@@ -142,13 +142,13 @@ class KBytesEditWidget : public QWidget, public KHE::BytesEditInterface,
       */
     virtual bool showUnprintable() const;
     /** returns the actually used substitute character for "unprintable" chars, default is '.' */
-    virtual QChar substituteChar() const;
+    virtual TQChar substituteChar() const;
     /** */
     virtual KEncoding encoding()   const;
 
   public: // edit interface
     /** */
-    virtual void insert( const QByteArray &D );
+    virtual void insert( const TQByteArray &D );
     /** de-/selects all data */
     virtual void selectAll( bool select );
     /** returns true if there is a selected range in the array */

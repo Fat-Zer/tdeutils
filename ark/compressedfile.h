@@ -45,19 +45,19 @@ class CompressedFile : public Arch
 {
   Q_OBJECT
 public:
-  CompressedFile( ArkWidget *_gui, const QString & _fileName, const QString &_openAsMimeType );
+  CompressedFile( ArkWidget *_gui, const TQString & _fileName, const TQString &_openAsMimeType );
   virtual ~CompressedFile();
 
   virtual void open();
   virtual void create();
 
-  virtual void addFile( const QStringList& );
-  virtual void addDir(const QString &) { }
+  virtual void addFile( const TQStringList& );
+  virtual void addDir(const TQString &) { }
 
-  virtual void remove(QStringList *);
+  virtual void remove(TQStringList *);
   virtual void unarchFileInternal();
 
-  QString tempFileName(){ return m_tmpfile; }
+  TQString tempFileName(){ return m_tmpfile; }
 
 private slots:
   void slotUncompressDone(KProcess *);
@@ -68,13 +68,13 @@ private:
   void initExtract( bool, bool, bool );
   void setHeaders();
   void initData();
-  QString extension();
+  TQString extension();
 
-  QString m_openAsMimeType;
+  TQString m_openAsMimeType;
   KTempDir * m_tempDirectory;
-  QString m_tmpdir;
-  QString m_tmpfile;
-  QStringList m_defaultExtensions;
+  TQString m_tmpdir;
+  TQString m_tmpfile;
+  TQStringList m_defaultExtensions;
 
   // for use with addFile
   FILE *fd;

@@ -20,16 +20,16 @@
 
 #include <limits.h>
 
-#include <qvbox.h>
-#include <qvbuttongroup.h>
-#include <qpainter.h>
+#include <tqvbox.h>
+#include <tqvbuttongroup.h>
+#include <tqpainter.h>
 
-#include <qcheckbox.h>
-#include <qlayout.h>
-#include <qlabel.h>
-#include <qradiobutton.h>
-#include <qspinbox.h>
-#include <qwhatsthis.h>
+#include <tqcheckbox.h>
+#include <tqlayout.h>
+#include <tqlabel.h>
+#include <tqradiobutton.h>
+#include <tqspinbox.h>
+#include <tqwhatsthis.h>
 
 #include <kcolordialog.h>
 #include <kcolordrag.h>
@@ -39,22 +39,22 @@
 #include <kglobalsettings.h>
 
 #include "optiondialog.h"
-#include <qpushbutton.h>
-#include <qcombobox.h>
+#include <tqpushbutton.h>
+#include <tqcombobox.h>
 
 #if 0
-#include <qobjectlist.h>
-static void enableWidget( QWidget *w, bool state )
+#include <tqobjectlist.h>
+static void enableWidget( TQWidget *w, bool state )
 {
   if( w->children() )
   {
-    QObjectList *l = (QObjectList*)w->children(); // silence please
+    TQObjectList *l = (TQObjectList*)w->children(); // silence please
     for( uint i=0; i < l->count(); i++ )
     {
-      QObject *o = l->at(i);
+      TQObject *o = l->at(i);
       if( o->isWidgetType() )
       {
-	enableWidget( (QWidget*)o, state );
+	enableWidget( (TQWidget*)o, state );
       }
     }
   }
@@ -64,11 +64,11 @@ static void enableWidget( QWidget *w, bool state )
 
 
 
-COptionDialog::COptionDialog( QWidget *parent, char *name, bool modal )
+COptionDialog::COptionDialog( TQWidget *parent, char *name, bool modal )
   :KDialogBase( IconList, i18n("Configure"), Help|Default|Apply|Ok|Cancel,
 		Ok, parent, name, modal, true )
 {
-  setHelp( "khexedit/khexedit.html", QString::null );
+  setHelp( "khexedit/khexedit.html", TQString::null );
 
   setupLayoutPage();
   setupCursorPage();
@@ -91,7 +91,7 @@ void COptionDialog::slotChanged()
   configChanged = true;
 }
 
-void COptionDialog::showEvent( QShowEvent *e )
+void COptionDialog::showEvent( TQShowEvent *e )
 {
   KDialogBase::showEvent(e);
   showPage(0);
@@ -101,148 +101,148 @@ void COptionDialog::showEvent( QShowEvent *e )
 
 void COptionDialog::setupLayoutPage( void )
 {
-  QString text;
-  QFrame *page = addPage( i18n("Layout"), i18n("Data Layout in Editor"),
+  TQString text;
+  TQFrame *page = addPage( i18n("Layout"), i18n("Data Layout in Editor"),
 			  BarIcon("khexedit", KIcon::SizeMedium ) );
 
-  QGridLayout *gbox = new QGridLayout( page, 15, 2, 0, spacingHint() );
+  TQGridLayout *gbox = new TQGridLayout( page, 15, 2, 0, spacingHint() );
   gbox->setColStretch( 1, 10 );
 
-  mLayout.formatCombo  = new QComboBox( false, page );
-  QStringList modeList;
+  mLayout.formatCombo  = new TQComboBox( false, page );
+  TQStringList modeList;
   modeList.append( i18n("Hexadecimal Mode") );
   modeList.append( i18n("Decimal Mode") );
   modeList.append( i18n("Octal Mode") );
   modeList.append( i18n("Binary Mode") );
   modeList.append( i18n("Text Only Mode") );
   mLayout.formatCombo->insertStringList( modeList );
-  connect( mLayout.formatCombo, SIGNAL(activated(int)),
-	   SLOT(slotModeSelectorChanged(int)) );
-  connect( mLayout.formatCombo, SIGNAL(activated(int)),
-    SLOT(slotChanged()) );
+  connect( mLayout.formatCombo, TQT_SIGNAL(activated(int)),
+	   TQT_SLOT(slotModeSelectorChanged(int)) );
+  connect( mLayout.formatCombo, TQT_SIGNAL(activated(int)),
+    TQT_SLOT(slotChanged()) );
   gbox->addWidget( mLayout.formatCombo, 0, 1 );
 
   //
   // I am setting the min. width for one widget in the second column
   // This widtk will be used by every widget in this column.
   //
-  mLayout.lineSizeSpin = new QSpinBox( page );
+  mLayout.lineSizeSpin = new TQSpinBox( page );
   mLayout.lineSizeSpin->setMinimumWidth( fontMetrics().width("M") * 10 );
   mLayout.lineSizeSpin->setRange( 1, 10000 );
-  connect( mLayout.lineSizeSpin, SIGNAL(valueChanged(int)),
-	   SLOT(slotLineSizeChanged(int) ) );
-  connect( mLayout.lineSizeSpin, SIGNAL(valueChanged(int)),
-    SLOT(slotChanged()) );
+  connect( mLayout.lineSizeSpin, TQT_SIGNAL(valueChanged(int)),
+	   TQT_SLOT(slotLineSizeChanged(int) ) );
+  connect( mLayout.lineSizeSpin, TQT_SIGNAL(valueChanged(int)),
+    TQT_SLOT(slotChanged()) );
   gbox->addWidget( mLayout.lineSizeSpin, 1, 1 );
 
-  mLayout.columnSizeSpin = new QSpinBox( page );
+  mLayout.columnSizeSpin = new TQSpinBox( page );
   mLayout.columnSizeSpin->setRange( 1, 10000 );
-  connect( mLayout.columnSizeSpin, SIGNAL(valueChanged(int)),
-	   SLOT(slotColumnSizeChanged(int) ) );
-  connect( mLayout.columnSizeSpin, SIGNAL(valueChanged(int)),
-    SLOT(slotChanged() ) );
+  connect( mLayout.columnSizeSpin, TQT_SIGNAL(valueChanged(int)),
+	   TQT_SLOT(slotColumnSizeChanged(int) ) );
+  connect( mLayout.columnSizeSpin, TQT_SIGNAL(valueChanged(int)),
+    TQT_SLOT(slotChanged() ) );
   gbox->addWidget( mLayout.columnSizeSpin, 2, 1 );
 
   text = i18n("Default l&ine size [bytes]:");
-  QLabel *label = new QLabel( mLayout.lineSizeSpin, text, page );
+  TQLabel *label = new TQLabel( mLayout.lineSizeSpin, text, page );
   gbox->addWidget( label, 1, 0 );
 
   text = i18n("Colu&mn size [bytes]:");
-  label = new QLabel( mLayout.columnSizeSpin, text, page );
+  label = new TQLabel( mLayout.columnSizeSpin, text, page );
   gbox->addWidget( label, 2, 0 );
 
-  QFrame *hline = new QFrame( page );
-  hline->setFrameStyle( QFrame::Sunken | QFrame::HLine );
+  TQFrame *hline = new TQFrame( page );
+  hline->setFrameStyle( TQFrame::Sunken | TQFrame::HLine );
   gbox->addMultiCellWidget( hline, 3, 3, 0, 1 );
 
   text = i18n("Line size is &fixed (use scrollbar when required)");
-  mLayout.lockLineCheck = new QCheckBox( text, page );
+  mLayout.lockLineCheck = new TQCheckBox( text, page );
   gbox->addMultiCellWidget( mLayout.lockLineCheck, 4, 4, 0, 1, AlignLeft );
-  connect( mLayout.lockLineCheck, SIGNAL(toggled(bool)),
-    SLOT(slotChanged()) );
+  connect( mLayout.lockLineCheck, TQT_SIGNAL(toggled(bool)),
+    TQT_SLOT(slotChanged()) );
 
   text = i18n("Loc&k column at end of line (when column size>1)");
-  mLayout.lockColumnCheck = new QCheckBox( text, page );
+  mLayout.lockColumnCheck = new TQCheckBox( text, page );
   gbox->addMultiCellWidget( mLayout.lockColumnCheck, 5, 5, 0, 1 );
-  connect( mLayout.lockColumnCheck, SIGNAL(toggled(bool)),
-    SLOT(slotChanged()) );
+  connect( mLayout.lockColumnCheck, TQT_SIGNAL(toggled(bool)),
+    TQT_SLOT(slotChanged()) );
 
-  hline = new QFrame( page );
-  hline->setFrameStyle( QFrame::Sunken | QFrame::HLine );
+  hline = new TQFrame( page );
+  hline->setFrameStyle( TQFrame::Sunken | TQFrame::HLine );
   gbox->addMultiCellWidget( hline, 6, 6, 0, 1 );
 
-  QStringList gridList;
+  TQStringList gridList;
   gridList.append( i18n("None") );
   gridList.append( i18n("Vertical Only") );
   gridList.append( i18n("Horizontal Only") );
   gridList.append( i18n("Both Directions") );
 
-  mLayout.gridCombo = new QComboBox( false, page );
+  mLayout.gridCombo = new TQComboBox( false, page );
   mLayout.gridCombo->insertStringList( gridList );
-  connect( mLayout.gridCombo, SIGNAL(activated(int)),
-    SLOT(slotChanged()) );
+  connect( mLayout.gridCombo, TQT_SIGNAL(activated(int)),
+    TQT_SLOT(slotChanged()) );
 
   text = i18n("&Gridlines between text:");
-  label = new QLabel( mLayout.gridCombo, text, page );
+  label = new TQLabel( mLayout.gridCombo, text, page );
 
   gbox->addWidget( label, 7, 0 );
   gbox->addWidget( mLayout.gridCombo, 7, 1 );
 
-  mLayout.leftSepWidthSpin = new QSpinBox( page );
+  mLayout.leftSepWidthSpin = new TQSpinBox( page );
   mLayout.leftSepWidthSpin->setRange( 0, 20 );
   gbox->addWidget( mLayout.leftSepWidthSpin, 8, 1 );
-  connect( mLayout.leftSepWidthSpin, SIGNAL(valueChanged(int)),
-    SLOT(slotChanged()) );
+  connect( mLayout.leftSepWidthSpin, TQT_SIGNAL(valueChanged(int)),
+    TQT_SLOT(slotChanged()) );
 
-  mLayout.rightSepWidthSpin = new QSpinBox( page );
+  mLayout.rightSepWidthSpin = new TQSpinBox( page );
   mLayout.rightSepWidthSpin->setRange( 0, 20 );
   gbox->addWidget( mLayout.rightSepWidthSpin, 9, 1 );
-  connect( mLayout.rightSepWidthSpin, SIGNAL(valueChanged(int)),
-    SLOT(slotChanged()) );
+  connect( mLayout.rightSepWidthSpin, TQT_SIGNAL(valueChanged(int)),
+    TQT_SLOT(slotChanged()) );
 
   text = i18n("&Left separator width [pixels]:");
-  mLayout.leftSepLabel = new QLabel( mLayout.leftSepWidthSpin, text, page );
+  mLayout.leftSepLabel = new TQLabel( mLayout.leftSepWidthSpin, text, page );
   gbox->addWidget( mLayout.leftSepLabel, 8, 0 );
 
   text = i18n("&Right separator width [pixels]:");
-  mLayout.rightSepLabel = new QLabel( mLayout.rightSepWidthSpin, text, page );
+  mLayout.rightSepLabel = new TQLabel( mLayout.rightSepWidthSpin, text, page );
   gbox->addWidget( mLayout.rightSepLabel, 9, 0 );
 
-  mLayout.separatorSpin = new QSpinBox( page );
+  mLayout.separatorSpin = new TQSpinBox( page );
   mLayout.separatorSpin->setRange( 0, 20 );
   gbox->addWidget( mLayout.separatorSpin, 10, 1 );
-  connect( mLayout.separatorSpin, SIGNAL(valueChanged(int)),
-    SLOT(slotChanged()) );
+  connect( mLayout.separatorSpin, TQT_SIGNAL(valueChanged(int)),
+    TQT_SLOT(slotChanged()) );
 
-  mLayout.edgeSpin = new QSpinBox( page );
+  mLayout.edgeSpin = new TQSpinBox( page );
   mLayout.edgeSpin->setRange( 0, 20 );
   gbox->addWidget( mLayout.edgeSpin, 11, 1 );
-  connect( mLayout.edgeSpin, SIGNAL(valueChanged(int)),
-    SLOT(slotChanged()) );
+  connect( mLayout.edgeSpin, TQT_SIGNAL(valueChanged(int)),
+    TQT_SLOT(slotChanged()) );
 
   text = i18n("&Separator margin width [pixels]:");
-  label = new QLabel( mLayout.separatorSpin, text, page );
+  label = new TQLabel( mLayout.separatorSpin, text, page );
   gbox->addWidget( label, 10, 0 );
 
   text = i18n("&Edge margin width [pixels]:");
-  label = new QLabel( mLayout.edgeSpin, text, page );
+  label = new TQLabel( mLayout.edgeSpin, text, page );
   gbox->addWidget( label, 11, 0 );
 
   text = i18n("Column separation is e&qual to one character");
-  mLayout.columnCheck = new QCheckBox( text, page );
+  mLayout.columnCheck = new TQCheckBox( text, page );
   gbox->addMultiCellWidget( mLayout.columnCheck, 12, 12, 0, 1, AlignLeft );
-  connect( mLayout.columnCheck, SIGNAL(toggled(bool)),
-	   SLOT( slotColumnSepCheck(bool)));
-  connect( mLayout.columnCheck, SIGNAL(toggled(bool)),
-    SLOT( slotChanged()));
+  connect( mLayout.columnCheck, TQT_SIGNAL(toggled(bool)),
+	   TQT_SLOT( slotColumnSepCheck(bool)));
+  connect( mLayout.columnCheck, TQT_SIGNAL(toggled(bool)),
+    TQT_SLOT( slotChanged()));
 
-  mLayout.columnSepSpin = new QSpinBox( page );
+  mLayout.columnSepSpin = new TQSpinBox( page );
   mLayout.columnSepSpin->setRange( 1, 100 );
-  connect( mLayout.columnSepSpin, SIGNAL(valueChanged(int)),
-    SLOT(slotChanged()) );
+  connect( mLayout.columnSepSpin, TQT_SIGNAL(valueChanged(int)),
+    TQT_SLOT(slotChanged()) );
 
   text = i18n("Column separa&tion [pixels]:");
-  mLayout.columnSepLabel = new QLabel( mLayout.columnSepSpin, text, page );
+  mLayout.columnSepLabel = new TQLabel( mLayout.columnSepSpin, text, page );
 
   gbox->addWidget( mLayout.columnSepLabel, 13, 0 );
   gbox->addWidget( mLayout.columnSepSpin, 13, 1 );
@@ -253,65 +253,65 @@ void COptionDialog::setupLayoutPage( void )
 
 void COptionDialog::setupCursorPage( void )
 {
-  QString text;
-  QFrame *page = addPage( i18n("Cursor"),
+  TQString text;
+  TQFrame *page = addPage( i18n("Cursor"),
     i18n("Cursor Behavior (only valid for editor)"),
     BarIcon("mouse", KIcon::SizeMedium ) );
-  QVBoxLayout *topLayout = new QVBoxLayout( page, 0, spacingHint() );
+  TQVBoxLayout *topLayout = new TQVBoxLayout( page, 0, spacingHint() );
 
-  QVButtonGroup *group = new QVButtonGroup( i18n("Blinking"), page );
+  TQVButtonGroup *group = new TQVButtonGroup( i18n("Blinking"), page );
   group->layout()->setMargin( spacingHint() );
   topLayout->addWidget( group );
 
   text = i18n("Do not b&link");
-  mCursor.blinkCheck = new QCheckBox( i18n("Do not b&link"), group );
-  connect( mCursor.blinkCheck, SIGNAL(toggled(bool)),
-	   SLOT( slotBlinkIntervalCheck(bool)));
-  connect( mCursor.blinkCheck, SIGNAL(toggled(bool)),
-    SLOT( slotChanged()));
+  mCursor.blinkCheck = new TQCheckBox( i18n("Do not b&link"), group );
+  connect( mCursor.blinkCheck, TQT_SIGNAL(toggled(bool)),
+	   TQT_SLOT( slotBlinkIntervalCheck(bool)));
+  connect( mCursor.blinkCheck, TQT_SIGNAL(toggled(bool)),
+    TQT_SLOT( slotChanged()));
 
-  QHBox *hbox = new QHBox( group );
-  mCursor.blinkLabel = new QLabel( i18n("&Blink interval [ms]:" ), hbox );
-  mCursor.blinkSpin = new QSpinBox( hbox );
+  TQHBox *hbox = new TQHBox( group );
+  mCursor.blinkLabel = new TQLabel( i18n("&Blink interval [ms]:" ), hbox );
+  mCursor.blinkSpin = new TQSpinBox( hbox );
   mCursor.blinkSpin->setMinimumWidth( fontMetrics().width("M") * 10 );
   mCursor.blinkSpin->setRange( 100, 1000 );
   mCursor.blinkSpin->setSteps( 100, 100 );
   mCursor.blinkSpin->setValue( 500 );
   mCursor.blinkLabel->setBuddy(mCursor.blinkSpin);
-  connect( mCursor.blinkSpin, SIGNAL(valueChanged(int)),
-    SLOT( slotChanged()));
+  connect( mCursor.blinkSpin, TQT_SIGNAL(valueChanged(int)),
+    TQT_SLOT( slotChanged()));
 
-  group = new QVButtonGroup( i18n("Shape"), page );
+  group = new TQVButtonGroup( i18n("Shape"), page );
   group->layout()->setMargin( spacingHint() );
   topLayout->addWidget( group );
 
   text = i18n("Always &use block (rectangular) cursor");
-  mCursor.blockCheck = new QCheckBox( text, group );
-  connect( mCursor.blockCheck, SIGNAL(toggled(bool)),
-	   SLOT( slotBlockCursorCheck(bool)));
-  connect( mCursor.blockCheck, SIGNAL(toggled(bool)),
-    SLOT( slotChanged()));
+  mCursor.blockCheck = new TQCheckBox( text, group );
+  connect( mCursor.blockCheck, TQT_SIGNAL(toggled(bool)),
+	   TQT_SLOT( slotBlockCursorCheck(bool)));
+  connect( mCursor.blockCheck, TQT_SIGNAL(toggled(bool)),
+    TQT_SLOT( slotChanged()));
   text = i18n("Use &thick cursor in insert mode");
-  mCursor.thickCheck = new QCheckBox( text, group );
-  connect( mCursor.thickCheck, SIGNAL(toggled(bool)),
-    SLOT( slotChanged()));
+  mCursor.thickCheck = new TQCheckBox( text, group );
+  connect( mCursor.thickCheck, TQT_SIGNAL(toggled(bool)),
+    TQT_SLOT( slotChanged()));
 
   text = i18n("Cursor Behavior When Editor Loses Focus");
-  group = new QVButtonGroup( text, page );
+  group = new TQVButtonGroup( text, page );
   group->layout()->setMargin( spacingHint() );
   topLayout->addWidget( group );
 
   text = i18n("&Stop blinking (if blinking is enabled)");
-  mCursor.stopRadio = new QRadioButton( text, group, "radio1" );
-  mCursor.hideRadio = new QRadioButton( i18n("H&ide"), group, "radio2" );
+  mCursor.stopRadio = new TQRadioButton( text, group, "radio1" );
+  mCursor.hideRadio = new TQRadioButton( i18n("H&ide"), group, "radio2" );
   text = i18n("Do &nothing");
-  mCursor.nothingRadio = new QRadioButton( text, group, "radio3" );
-  connect( mCursor.stopRadio, SIGNAL(toggled(bool)),
-    SLOT( slotChanged()));
-  connect( mCursor.hideRadio, SIGNAL(toggled(bool)),
-    SLOT( slotChanged()));
-  connect( mCursor.nothingRadio, SIGNAL(toggled(bool)),
-    SLOT( slotChanged()));
+  mCursor.nothingRadio = new TQRadioButton( text, group, "radio3" );
+  connect( mCursor.stopRadio, TQT_SIGNAL(toggled(bool)),
+    TQT_SLOT( slotChanged()));
+  connect( mCursor.hideRadio, TQT_SIGNAL(toggled(bool)),
+    TQT_SLOT( slotChanged()));
+  connect( mCursor.nothingRadio, TQT_SIGNAL(toggled(bool)),
+    TQT_SLOT( slotChanged()));
 
   topLayout->addStretch(10);
 }
@@ -319,26 +319,26 @@ void COptionDialog::setupCursorPage( void )
 
 void COptionDialog::setupColorPage( void )
 {
-  QString text;
-  QFrame *page = addPage( i18n("Colors"),
+  TQString text;
+  TQFrame *page = addPage( i18n("Colors"),
     i18n("Editor Colors (system selection color is always used)"),
     BarIcon("colorize", KIcon::SizeMedium ) );
 
-  QVBoxLayout *topLayout = new QVBoxLayout( page, 0, spacingHint() );
+  TQVBoxLayout *topLayout = new TQVBoxLayout( page, 0, spacingHint() );
 
   text = i18n("&Use system colors (as chosen in Control Center)");
-  mColor.checkSystem = new QCheckBox( text, page );
-  connect( mColor.checkSystem, SIGNAL(toggled(bool)),
-	   SLOT( slotColorSystem(bool)));
-  connect( mColor.checkSystem, SIGNAL(toggled(bool)),
-    SLOT( slotChanged()));
+  mColor.checkSystem = new TQCheckBox( text, page );
+  connect( mColor.checkSystem, TQT_SIGNAL(toggled(bool)),
+	   TQT_SLOT( slotColorSystem(bool)));
+  connect( mColor.checkSystem, TQT_SIGNAL(toggled(bool)),
+    TQT_SLOT( slotChanged()));
   topLayout->addWidget( mColor.checkSystem );
 
-  QFrame *hline = new QFrame( page );
-  hline->setFrameStyle( QFrame::Sunken | QFrame::HLine );
+  TQFrame *hline = new TQFrame( page );
+  hline->setFrameStyle( TQFrame::Sunken | TQFrame::HLine );
   topLayout->addWidget( hline );
 
-  QStringList modeList;
+  TQStringList modeList;
   modeList.append( i18n("First, Third ... Line Background") );
   modeList.append( i18n("Second, Fourth ... Line Background") );
   modeList.append( i18n("Offset Background") );
@@ -365,54 +365,54 @@ void COptionDialog::setupColorPage( void )
     mColor.colorList->insertItem( listItem );
   }
   mColor.colorList->setCurrentItem(0);
-  connect( mColor.colorList, SIGNAL( dataChanged() ), this, SLOT( slotChanged() ) );
+  connect( mColor.colorList, TQT_SIGNAL( dataChanged() ), this, TQT_SLOT( slotChanged() ) );
 }
 
 
 void COptionDialog::setupFontPage( void )
 {
-  QString text;
-  QFrame *page = addPage( i18n("Font"),
+  TQString text;
+  TQFrame *page = addPage( i18n("Font"),
     i18n("Font Selection (editor can only use a fixed font)"),
     BarIcon("fonts", KIcon::SizeMedium ) );
 
-  QVBoxLayout *topLayout = new QVBoxLayout( page, 0, spacingHint() );
+  TQVBoxLayout *topLayout = new TQVBoxLayout( page, 0, spacingHint() );
 
   text = i18n("&Use system font (as chosen in Control Center)");
-  mFont.checkSystem = new QCheckBox( text, page );
-  connect( mFont.checkSystem, SIGNAL(toggled(bool)),
-	   this, SLOT( slotFontSystem(bool)));
-  connect( mFont.checkSystem, SIGNAL(toggled(bool)),
-    this, SLOT( slotChanged()));
+  mFont.checkSystem = new TQCheckBox( text, page );
+  connect( mFont.checkSystem, TQT_SIGNAL(toggled(bool)),
+	   this, TQT_SLOT( slotFontSystem(bool)));
+  connect( mFont.checkSystem, TQT_SIGNAL(toggled(bool)),
+    this, TQT_SLOT( slotChanged()));
   topLayout->addWidget( mFont.checkSystem );
 
-  QFrame *hline = new QFrame( page );
-  hline->setFrameStyle( QFrame::Sunken | QFrame::HLine );
+  TQFrame *hline = new TQFrame( page );
+  hline->setFrameStyle( TQFrame::Sunken | TQFrame::HLine );
   topLayout->addWidget( hline );
 
-  mFont.chooser = new KFontChooser( page, "font", true, QStringList(), false, 4 );
+  mFont.chooser = new KFontChooser( page, "font", true, TQStringList(), false, 4 );
   topLayout->addWidget( mFont.chooser );
-  QFont fixFont( KGlobalSettings::fixedFont() );
+  TQFont fixFont( KGlobalSettings::fixedFont() );
   fixFont.setBold(true);
   mFont.chooser->setFont( fixFont, true );
   mFont.chooser->setSampleText( i18n("KHexEdit editor font") );
-  connect( mFont.chooser, SIGNAL(fontSelected(const QFont &)),
-    this, SLOT( slotChanged()));
+  connect( mFont.chooser, TQT_SIGNAL(fontSelected(const TQFont &)),
+    this, TQT_SLOT( slotChanged()));
 
-  hline = new QFrame( page );
-  hline->setFrameStyle( QFrame::Sunken | QFrame::HLine );
+  hline = new TQFrame( page );
+  hline->setFrameStyle( TQFrame::Sunken | TQFrame::HLine );
   topLayout->addWidget( hline );
 
-  QHBoxLayout *hbox = new QHBoxLayout();
+  TQHBoxLayout *hbox = new TQHBoxLayout();
   topLayout->addLayout( hbox );
 
-  mFont.nonPrintInput = new QLineEdit( page );
+  mFont.nonPrintInput = new TQLineEdit( page );
   mFont.nonPrintInput->setMaxLength( 1 );
-  connect( mFont.nonPrintInput, SIGNAL(textChanged(const QString &)),
-    this, SLOT( slotChanged()));
+  connect( mFont.nonPrintInput, TQT_SIGNAL(textChanged(const TQString &)),
+    this, TQT_SLOT( slotChanged()));
 
   text = i18n("&Map non printable characters to:");
-  QLabel *nonPrintLabel = new QLabel( mFont.nonPrintInput, text, page );
+  TQLabel *nonPrintLabel = new TQLabel( mFont.nonPrintInput, text, page );
 
   hbox->addWidget( nonPrintLabel, 0, AlignLeft );
   hbox->addSpacing( spacingHint() );
@@ -424,88 +424,88 @@ void COptionDialog::setupFontPage( void )
 
 void COptionDialog::setupFilePage( void )
 {
-  QString text;
-  QFrame *page = addPage( i18n("Files"), i18n("File Management"),
+  TQString text;
+  TQFrame *page = addPage( i18n("Files"), i18n("File Management"),
 			  BarIcon("kmultiple", KIcon::SizeMedium ) );
 
-  QVBoxLayout *topLayout = new QVBoxLayout( page, 0, spacingHint() );
+  TQVBoxLayout *topLayout = new TQVBoxLayout( page, 0, spacingHint() );
 
-  QGridLayout *gbox = new QGridLayout( 2, 2, spacingHint() );
+  TQGridLayout *gbox = new TQGridLayout( 2, 2, spacingHint() );
   topLayout->addLayout( gbox );
 
-  mFile.openCombo = new QComboBox( false, page );
-  QStringList modeList;
+  mFile.openCombo = new TQComboBox( false, page );
+  TQStringList modeList;
   modeList.append( i18n("None") );
   modeList.append( i18n("Most Recent Document") );
   modeList.append( i18n("All Recent Documents") );
   mFile.openCombo->insertStringList( modeList );
   mFile.openCombo->setMinimumWidth( mFile.openCombo->sizeHint().width() );
-  connect( mFile.openCombo, SIGNAL(activated(int)),
-    this, SLOT( slotChanged()));
+  connect( mFile.openCombo, TQT_SIGNAL(activated(int)),
+    this, TQT_SLOT( slotChanged()));
 
   text = i18n("Open doc&uments on startup:");
-  QLabel *label = new QLabel( mFile.openCombo, text, page );
+  TQLabel *label = new TQLabel( mFile.openCombo, text, page );
 
   gbox->addWidget( label, 0, 0 );
   gbox->addWidget( mFile.openCombo, 0, 1 );
 
   text = i18n("&Jump to previous cursor position on startup");
-  mFile.gotoOffsetCheck = new QCheckBox( text, page );
+  mFile.gotoOffsetCheck = new TQCheckBox( text, page );
   // ### TODO: this is currently not available.
   mFile.gotoOffsetCheck->setChecked( false );
   mFile.gotoOffsetCheck->setEnabled( false );
   // ### END
   topLayout->addWidget( mFile.gotoOffsetCheck, 0, AlignLeft );
-  connect( mFile.gotoOffsetCheck, SIGNAL(toggled(bool)),
-    this, SLOT( slotChanged()));
+  connect( mFile.gotoOffsetCheck, TQT_SIGNAL(toggled(bool)),
+    this, TQT_SLOT( slotChanged()));
 
-  QFrame *hline = new QFrame( page );
-  hline->setFrameStyle( QFrame::Sunken | QFrame::HLine );
+  TQFrame *hline = new TQFrame( page );
+  hline->setFrameStyle( TQFrame::Sunken | TQFrame::HLine );
   topLayout->addWidget( hline );
 
   text = i18n("Open document with &write protection enabled");
-  mFile.writeProtectCheck = new QCheckBox( text, page );
+  mFile.writeProtectCheck = new TQCheckBox( text, page );
   topLayout->addWidget( mFile.writeProtectCheck, 0, AlignLeft );
-  connect( mFile.writeProtectCheck, SIGNAL(toggled(bool)),
-    this, SLOT( slotChanged()));
+  connect( mFile.writeProtectCheck, TQT_SIGNAL(toggled(bool)),
+    this, TQT_SLOT( slotChanged()));
 
   text = i18n("&Keep cursor position after reloading document");
-  mFile.reloadOffsetCheck = new QCheckBox( text, page );
+  mFile.reloadOffsetCheck = new TQCheckBox( text, page );
   topLayout->addWidget( mFile.reloadOffsetCheck, 0, AlignLeft );
-  connect( mFile.reloadOffsetCheck, SIGNAL(toggled(bool)),
-    this, SLOT( slotChanged()));
+  connect( mFile.reloadOffsetCheck, TQT_SIGNAL(toggled(bool)),
+    this, TQT_SLOT( slotChanged()));
 
   text = i18n("&Make a backup when saving document");
-  mFile.backupCheck = new QCheckBox( text, page );
+  mFile.backupCheck = new TQCheckBox( text, page );
   topLayout->addWidget( mFile.backupCheck, 0, AlignLeft );
-  connect( mFile.backupCheck, SIGNAL(toggled(bool)),
-    this, SLOT( slotChanged()));
+  connect( mFile.backupCheck, TQT_SIGNAL(toggled(bool)),
+    this, TQT_SLOT( slotChanged()));
 
-  hline = new QFrame( page );
-  hline->setFrameStyle( QFrame::Sunken | QFrame::HLine );
+  hline = new TQFrame( page );
+  hline->setFrameStyle( TQFrame::Sunken | TQFrame::HLine );
   topLayout->addWidget( hline );
 
   text = i18n("Don't &save \"Recent\" document list on exit");
-  mFile.discardRecentCheck = new QCheckBox( text, page );
+  mFile.discardRecentCheck = new TQCheckBox( text, page );
   topLayout->addWidget( mFile.discardRecentCheck, 0, AlignLeft );
-  QWhatsThis::add( mFile.discardRecentCheck,
+  TQWhatsThis::add( mFile.discardRecentCheck,
                    i18n( "Clicking this check box makes KHexEdit forget his recent document list "
                           "when the program is closed.\n"
                           "Note: it will not erase any document of the recent document list "
                           "created by KDE." ) );
-  connect( mFile.discardRecentCheck, SIGNAL(toggled(bool)),
-    this, SLOT( slotChanged()));
+  connect( mFile.discardRecentCheck, TQT_SIGNAL(toggled(bool)),
+    this, TQT_SLOT( slotChanged()));
 
   text = i18n("Cl&ear \"Recent\" Document List");
-  QPushButton *discardRecentButton = new QPushButton( page );
+  TQPushButton *discardRecentButton = new TQPushButton( page );
   discardRecentButton->setText( text );
-  QWhatsThis::add( discardRecentButton,
+  TQWhatsThis::add( discardRecentButton,
                    i18n( "Clicking this button makes KHexEdit forget his recent document list.\n"
                           "Note: it will not erase any document of the recent document list "
                           "created by KDE." ) );
   topLayout->addWidget( discardRecentButton, 0, AlignCenter );
-  connect( discardRecentButton, SIGNAL(clicked()),
-	   SIGNAL(removeRecentFiles()) );
+  connect( discardRecentButton, TQT_SIGNAL(clicked()),
+	   TQT_SIGNAL(removeRecentFiles()) );
 
   topLayout->addStretch(10);
 }
@@ -514,101 +514,101 @@ void COptionDialog::setupFilePage( void )
 
 void COptionDialog::setupMiscPage( void )
 {
-  QString text;
-  QLabel *label;
+  TQString text;
+  TQLabel *label;
 
-  QFrame *page = addPage( i18n("Miscellaneous"), i18n("Various Properties"),
+  TQFrame *page = addPage( i18n("Miscellaneous"), i18n("Various Properties"),
 			  BarIcon("gear", KIcon::SizeMedium ) );
 
-  QVBoxLayout *topLayout = new QVBoxLayout( page, 0, spacingHint() );
+  TQVBoxLayout *topLayout = new TQVBoxLayout( page, 0, spacingHint() );
 
 
   text = i18n("Auto&matic copy to clipboard when selection is ready");
-  mMisc.autoCheck = new QCheckBox( text, page );
+  mMisc.autoCheck = new TQCheckBox( text, page );
   topLayout->addWidget( mMisc.autoCheck, 0, AlignLeft );
-  connect( mMisc.autoCheck, SIGNAL(toggled(bool)),
-    this, SLOT( slotChanged()));
+  connect( mMisc.autoCheck, TQT_SIGNAL(toggled(bool)),
+    this, TQT_SLOT( slotChanged()));
 
   text = i18n("&Editor starts in \"insert\" mode" );
-  mMisc.insertCheck = new QCheckBox( text, page );
+  mMisc.insertCheck = new TQCheckBox( text, page );
   topLayout->addWidget( mMisc.insertCheck, 0, AlignLeft );
-  connect( mMisc.insertCheck, SIGNAL(toggled(bool)),
-    this, SLOT( slotChanged()));
+  connect( mMisc.insertCheck, TQT_SIGNAL(toggled(bool)),
+    this, TQT_SLOT( slotChanged()));
 
   text = i18n("Confirm &wrapping (to beginning or end) during search");
-  mMisc.confirmWrapCheck = new QCheckBox( text, page );
+  mMisc.confirmWrapCheck = new TQCheckBox( text, page );
   topLayout->addWidget( mMisc.confirmWrapCheck, 0, AlignLeft );
-  connect( mMisc.confirmWrapCheck, SIGNAL(toggled(bool)),
-    this, SLOT( slotChanged()));
+  connect( mMisc.confirmWrapCheck, TQT_SIGNAL(toggled(bool)),
+    this, TQT_SLOT( slotChanged()));
 
   text = i18n("Cursor jumps to &nearest byte when moved");
-  mMisc.cursorJumpCheck = new QCheckBox( text, page );
+  mMisc.cursorJumpCheck = new TQCheckBox( text, page );
   topLayout->addWidget( mMisc.cursorJumpCheck, 0, AlignLeft );
-  connect( mMisc.cursorJumpCheck, SIGNAL(toggled(bool)),
-    this, SLOT( slotChanged()));
+  connect( mMisc.cursorJumpCheck, TQT_SIGNAL(toggled(bool)),
+    this, TQT_SLOT( slotChanged()));
 
-  QVButtonGroup *group = new QVButtonGroup( i18n("Sounds"), page );
+  TQVButtonGroup *group = new TQVButtonGroup( i18n("Sounds"), page );
   group->layout()->setMargin( spacingHint() );
   topLayout->addWidget( group );
   text = i18n("Make sound on data &input (eg. typing) failure");
-  mMisc.inputCheck = new QCheckBox( text, group );
-  connect( mMisc.inputCheck, SIGNAL(toggled(bool)),
-    this, SLOT( slotChanged()));
+  mMisc.inputCheck = new TQCheckBox( text, group );
+  connect( mMisc.inputCheck, TQT_SIGNAL(toggled(bool)),
+    this, TQT_SLOT( slotChanged()));
   text = i18n("Make sound on &fatal failure");
-  mMisc.fatalCheck = new QCheckBox( text, group );
-  connect( mMisc.fatalCheck, SIGNAL(toggled(bool)),
-    this, SLOT( slotChanged()));
+  mMisc.fatalCheck = new TQCheckBox( text, group );
+  connect( mMisc.fatalCheck, TQT_SIGNAL(toggled(bool)),
+    this, TQT_SLOT( slotChanged()));
 
-  group = new QVButtonGroup( i18n("Bookmark Visibility"), page );
+  group = new TQVButtonGroup( i18n("Bookmark Visibility"), page );
   group->layout()->setMargin( spacingHint() );
   topLayout->addWidget( group );
   text = i18n("Use visible bookmarks in the offset column");
-  mMisc.bookmarkColumnCheck = new QCheckBox( text, group );
-  connect( mMisc.bookmarkColumnCheck, SIGNAL(toggled(bool)),
-    this, SLOT( slotChanged()));
+  mMisc.bookmarkColumnCheck = new TQCheckBox( text, group );
+  connect( mMisc.bookmarkColumnCheck, TQT_SIGNAL(toggled(bool)),
+    this, TQT_SLOT( slotChanged()));
   text = i18n("Use visible bookmarks in the editor fields");
-  mMisc.bookmarkEditorCheck = new QCheckBox( text, group );
-  connect( mMisc.bookmarkEditorCheck, SIGNAL(toggled(bool)),
-    this, SLOT( slotChanged()));
+  mMisc.bookmarkEditorCheck = new TQCheckBox( text, group );
+  connect( mMisc.bookmarkEditorCheck, TQT_SIGNAL(toggled(bool)),
+    this, TQT_SLOT( slotChanged()));
 
   text = i18n("Confirm when number of printed pages will e&xceed limit");
-  mMisc.thresholdCheck = new QCheckBox( text, page );
-  connect( mMisc.thresholdCheck, SIGNAL(clicked()),
-	   SLOT( slotThresholdConfirm()));
-  connect( mMisc.thresholdCheck, SIGNAL(toggled(bool)),
-    this, SLOT( slotChanged()));
+  mMisc.thresholdCheck = new TQCheckBox( text, page );
+  connect( mMisc.thresholdCheck, TQT_SIGNAL(clicked()),
+	   TQT_SLOT( slotThresholdConfirm()));
+  connect( mMisc.thresholdCheck, TQT_SIGNAL(toggled(bool)),
+    this, TQT_SLOT( slotChanged()));
   topLayout->addWidget( mMisc.thresholdCheck, 0, AlignLeft );
 
-  QGridLayout *glay = new QGridLayout( 3, 3 );
+  TQGridLayout *glay = new TQGridLayout( 3, 3 );
   glay->setColStretch(2,10);
   topLayout->addLayout( glay );
 
-  mMisc.thresholdSpin = new QSpinBox( page );
+  mMisc.thresholdSpin = new TQSpinBox( page );
   mMisc.thresholdSpin->setMinimumWidth( fontMetrics().width("M") * 10 );
   mMisc.thresholdSpin->setRange( 5, INT_MAX );
   mMisc.thresholdSpin->setSteps( 5, 5 );
   mMisc.thresholdSpin->setValue( 5 );
-  connect( mMisc.thresholdSpin, SIGNAL(valueChanged(int)),
-    this, SLOT( slotChanged()));
+  connect( mMisc.thresholdSpin, TQT_SIGNAL(valueChanged(int)),
+    this, TQT_SLOT( slotChanged()));
 
   text = i18n("&Threshold [pages]:" );
-  mMisc.thresholdLabel = new QLabel( mMisc.thresholdSpin, text, page );
+  mMisc.thresholdLabel = new TQLabel( mMisc.thresholdSpin, text, page );
 
   glay->addWidget( mMisc.thresholdLabel, 0, 0 );
   glay->addWidget( mMisc.thresholdSpin, 0, 1 );
 
-  QFrame *hline = new QFrame( page );
-  hline->setFrameStyle( QFrame::Sunken | QFrame::HLine );
+  TQFrame *hline = new TQFrame( page );
+  hline->setFrameStyle( TQFrame::Sunken | TQFrame::HLine );
   glay->addMultiCellWidget( hline, 1, 1, 0, 2 );
 
-  mMisc.undoSpin = new QSpinBox( page );
+  mMisc.undoSpin = new TQSpinBox( page );
   mMisc.undoSpin->setRange( 10, 10000 );
   mMisc.undoSpin->setSteps( 5, 5 );
   mMisc.undoSpin->setValue( 50 );
-  connect( mMisc.undoSpin, SIGNAL(valueChanged(int)),
-    this, SLOT( slotChanged()));
+  connect( mMisc.undoSpin, TQT_SIGNAL(valueChanged(int)),
+    this, TQT_SLOT( slotChanged()));
 
-  label = new QLabel( mMisc.undoSpin, i18n("&Undo limit:"), page );
+  label = new TQLabel( mMisc.undoSpin, i18n("&Undo limit:"), page );
   glay->addWidget( label, 2, 0 );
   glay->addWidget( mMisc.undoSpin, 2, 1 );
 
@@ -838,7 +838,7 @@ void COptionDialog::slotApply( void )
       f.useSystemFont = mFont.checkSystem->isChecked();
       f.localFont = mFont.chooser->font();
 
-      QString nonPrintText = mFont.nonPrintInput->text();
+      TQString nonPrintText = mFont.nonPrintInput->text();
       if( nonPrintText.isEmpty() )
       {
 	f.nonPrintChar = ' ';
@@ -965,7 +965,7 @@ void COptionDialog::setFont( SDisplayFont &font )
 
   mFont.checkSystem->setChecked( font.useSystemFont );
   mFont.chooser->setFont( font.localFont, true );
-  QString buf = font.nonPrintChar;
+  TQString buf = font.nonPrintChar;
   mFont.nonPrintInput->setText( buf );
 }
 
@@ -1050,10 +1050,10 @@ SDisplayCursor::EFocusMode COptionDialog::cursorFocusMode( void )
 
 
 
-CColorListBox::CColorListBox( QWidget *parent, const char *name, WFlags f )
+CColorListBox::CColorListBox( TQWidget *parent, const char *name, WFlags f )
   :KListBox( parent, name, f ), mCurrentOnDragEnter(-1)
 {
-  connect( this, SIGNAL(selected(int)), this, SLOT(newColor(int)) );
+  connect( this, TQT_SIGNAL(selected(int)), this, TQT_SLOT(newColor(int)) );
   setAcceptDrops( true);
 }
 
@@ -1065,7 +1065,7 @@ void CColorListBox::setEnabled( bool state )
     return;
   }
 
-  QListBox::setEnabled( state );
+  TQListBox::setEnabled( state );
   for( uint i=0; i<count(); i++ )
   {
     updateItem( i );
@@ -1073,7 +1073,7 @@ void CColorListBox::setEnabled( bool state )
 }
 
 
-void CColorListBox::setColor( uint index, const QColor &color )
+void CColorListBox::setColor( uint index, const TQColor &color )
 {
   if( index < count() )
   {
@@ -1084,7 +1084,7 @@ void CColorListBox::setColor( uint index, const QColor &color )
 }
 
 
-const QColor CColorListBox::color( uint index )
+const TQColor CColorListBox::color( uint index )
 {
   if( index < count() )
   {
@@ -1107,8 +1107,8 @@ void CColorListBox::newColor( int index )
 
   if( (uint)index < count() )
   {
-    QColor c = color( index );
-    if( KColorDialog::getColor( c, this ) != QDialog::Rejected )
+    TQColor c = color( index );
+    if( KColorDialog::getColor( c, this ) != TQDialog::Rejected )
     {
       setColor( index, c );
       emit dataChanged();
@@ -1117,7 +1117,7 @@ void CColorListBox::newColor( int index )
 }
 
 
-void CColorListBox::dragEnterEvent( QDragEnterEvent *e )
+void CColorListBox::dragEnterEvent( TQDragEnterEvent *e )
 {
   if( KColorDrag::canDecode(e) && isEnabled() )
   {
@@ -1132,7 +1132,7 @@ void CColorListBox::dragEnterEvent( QDragEnterEvent *e )
 }
 
 
-void CColorListBox::dragLeaveEvent( QDragLeaveEvent * )
+void CColorListBox::dragLeaveEvent( TQDragLeaveEvent * )
 {
   if( mCurrentOnDragEnter != -1 )
   {
@@ -1142,7 +1142,7 @@ void CColorListBox::dragLeaveEvent( QDragLeaveEvent * )
 }
 
 
-void CColorListBox::dragMoveEvent( QDragMoveEvent *e )
+void CColorListBox::dragMoveEvent( TQDragMoveEvent *e )
 {
   if( KColorDrag::canDecode(e) && isEnabled() )
   {
@@ -1155,9 +1155,9 @@ void CColorListBox::dragMoveEvent( QDragMoveEvent *e )
 }
 
 
-void CColorListBox::dropEvent( QDropEvent *e )
+void CColorListBox::dropEvent( TQDropEvent *e )
 {
-  QColor color;
+  TQColor color;
   if( KColorDrag::decode( e, color ) )
   {
     int index = currentItem();
@@ -1173,28 +1173,28 @@ void CColorListBox::dropEvent( QDropEvent *e )
 
 
 
-CColorListItem::CColorListItem( const QString &text, const QColor &color )
-  : QListBoxItem(), mColor( color ), mBoxWidth( 30 )
+CColorListItem::CColorListItem( const TQString &text, const TQColor &color )
+  : TQListBoxItem(), mColor( color ), mBoxWidth( 30 )
 {
   setText( text );
 }
 
 
-const QColor &CColorListItem::color( void )
+const TQColor &CColorListItem::color( void )
 {
   return( mColor );
 }
 
 
-void CColorListItem::setColor( const QColor &color )
+void CColorListItem::setColor( const TQColor &color )
 {
   mColor = color;
 }
 
 
-void CColorListItem::paint( QPainter *p )
+void CColorListItem::paint( TQPainter *p )
 {
-  QFontMetrics fm = p->fontMetrics();
+  TQFontMetrics fm = p->fontMetrics();
   int h = fm.height();
 
   p->drawText( mBoxWidth+3*2, fm.ascent() + fm.leading()/2, text() );
@@ -1205,13 +1205,13 @@ void CColorListItem::paint( QPainter *p )
 }
 
 
-int CColorListItem::height(const QListBox *lb ) const
+int CColorListItem::height(const TQListBox *lb ) const
 {
   return( lb->fontMetrics().lineSpacing()+1 );
 }
 
 
-int CColorListItem::width(const QListBox *lb ) const
+int CColorListItem::width(const TQListBox *lb ) const
 {
   return( mBoxWidth + lb->fontMetrics().width( text() ) + 6 );
 }

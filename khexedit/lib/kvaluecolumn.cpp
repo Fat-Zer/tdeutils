@@ -16,7 +16,7 @@
 
 
 // qt specific
-#include <qpainter.h>
+#include <tqpainter.h>
 // lib specific
 #include "kcolumnsview.h"
 #include "kbuffercursor.h"
@@ -101,26 +101,26 @@ void KValueColumn::recalcByteWidth()
 
 
 // perhaps sometimes there will be a grammar
-void KValueColumn::paintEditedByte( QPainter *P, char Byte, const QString &EditBuffer )
+void KValueColumn::paintEditedByte( TQPainter *P, char Byte, const TQString &EditBuffer )
 {
   KHEChar B = Codec->decode( Byte );
 
-  const QColorGroup &CG = View->colorGroup();
+  const TQColorGroup &CG = View->colorGroup();
 
-  P->fillRect( 0,0,ByteWidth,LineHeight, QBrush(colorForChar(B),Qt::SolidPattern) );
+  P->fillRect( 0,0,ByteWidth,LineHeight, TQBrush(colorForChar(B),Qt::SolidPattern) );
 
   drawCode( P, EditBuffer, CG.base() );
 }
 
 
-void KValueColumn::drawByte( QPainter *P, char Byte, KHEChar /*B*/, const QColor &Color ) const
+void KValueColumn::drawByte( TQPainter *P, char Byte, KHEChar /*B*/, const TQColor &Color ) const
 {
   ByteCodec->encode( CodedByte, 0, Byte );
   drawCode( P, CodedByte, Color );
 }
 
 
-void KValueColumn::drawCode( QPainter *P, const QString &Code, const QColor &Color ) const
+void KValueColumn::drawCode( TQPainter *P, const TQString &Code, const TQColor &Color ) const
 {
   P->setPen( Color );
   if( Coding == BinaryCoding )

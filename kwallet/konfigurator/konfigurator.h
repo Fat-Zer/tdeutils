@@ -29,7 +29,7 @@ class QListViewItem;
 class KWalletConfig : public KCModule {
 	Q_OBJECT
 	public:
-		KWalletConfig(QWidget *parent = 0L, const char *name = 0L, const QStringList& = QStringList());
+		KWalletConfig(TQWidget *parent = 0L, const char *name = 0L, const TQStringList& = TQStringList());
 		virtual ~KWalletConfig();
 
 		void load();
@@ -37,7 +37,7 @@ class KWalletConfig : public KCModule {
 		void save();
 		void defaults();
 
-		QString quickHelp() const;
+		TQString quickHelp() const;
 
 	public slots:
 		void configChanged();
@@ -45,9 +45,9 @@ class KWalletConfig : public KCModule {
 		void newLocalWallet();
 		void newNetworkWallet();
 		void updateWalletLists();
-		QString newWallet();
+		TQString newWallet();
 		void deleteEntry();
-		void contextMenuRequested(QListViewItem *item, const QPoint& pos, int col);
+		void contextMenuRequested(TQListViewItem *item, const TQPoint& pos, int col);
 
 	private:
 		WalletConfigWidget *_wcw;

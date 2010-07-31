@@ -18,7 +18,7 @@
 #ifndef widgetfactory
 #define widgetfactory
 
-#include <qdom.h>
+#include <tqdom.h>
 
 class RegExpWidget;
 class RegExpEditorWindow;
@@ -47,12 +47,12 @@ enum RegExpType {
 class WidgetFactory
 {
 public:
-  static RegExpWidget* createWidget( RegExpEditorWindow* editorWindow, QWidget* parent,
+  static RegExpWidget* createWidget( RegExpEditorWindow* editorWindow, TQWidget* parent,
                                      RegExpType type );
   static RegExpWidget* createWidget( RegExp* regexp, RegExpEditorWindow* editorWindow,
-                                     QWidget* parent );
-  static RegExp* createRegExp( QDomElement node, const QString& version );
-  static RegExp* createRegExp( QString str );
+                                     TQWidget* parent );
+  static RegExp* createRegExp( TQDomElement node, const TQString& version );
+  static RegExp* createRegExp( TQString str );
   static bool isContainer( RegExpType );
 };
 

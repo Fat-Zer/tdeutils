@@ -38,7 +38,7 @@
 
   @internal
 **/
-class CCP :public  QObject {
+class CCP :public  TQObject {
 
 private:
   friend class KMultiFormListBoxMultiVisible;
@@ -48,8 +48,8 @@ private:
   **/
   CCP(KMultiFormListBoxMultiVisible *,KMultiFormListBoxEntry *);
 
-  void install(QObject *);
-  bool eventFilter(QObject *, QEvent *);
+  void install(TQObject *);
+  bool eventFilter(TQObject *, TQEvent *);
 
   // Instance variables.
 

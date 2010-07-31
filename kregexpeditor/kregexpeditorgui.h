@@ -34,16 +34,16 @@ class KRegExpEditorPrivate;
    @author Jesper Kjær Pedersen <blackie@kde.org>
    @version 0.1
  **/
-class KDE_EXPORT KRegExpEditorGUI  :public QWidget, public KRegExpEditorInterface
+class KDE_EXPORT KRegExpEditorGUI  :public TQWidget, public KRegExpEditorInterface
 {
   Q_OBJECT
-  Q_PROPERTY( QString regexp READ regExp WRITE setRegExp )
+  Q_PROPERTY( TQString regexp READ regExp WRITE setRegExp )
 public:
-  KRegExpEditorGUI( QWidget *parent, const char *name = 0,
-	            const QStringList & = QStringList() );
-  virtual QString regExp() const;
+  KRegExpEditorGUI( TQWidget *parent, const char *name = 0,
+	            const TQStringList & = TQStringList() );
+  virtual TQString regExp() const;
 
-  static const QString version;
+  static const TQString version;
 
 signals:
   /** This signal tells whether undo is available. */
@@ -54,9 +54,9 @@ signals:
 public slots:
   virtual void redo();
   virtual void undo();
-  virtual void setRegExp( const QString &regexp );
-  virtual void doSomething( QString method, void* arguments );
-  virtual void setMatchText( const QString& );
+  virtual void setRegExp( const TQString &regexp );
+  virtual void doSomething( TQString method, void* arguments );
+  virtual void setMatchText( const TQString& );
   void showHelp();
 
 private:
@@ -66,11 +66,11 @@ private:
 class KDE_EXPORT KRegExpEditorGUIDialog : public KDialogBase, public KRegExpEditorInterface
 {
     Q_OBJECT
-    Q_PROPERTY( QString regexp READ regExp WRITE setRegExp )
+    Q_PROPERTY( TQString regexp READ regExp WRITE setRegExp )
 public:
-    KRegExpEditorGUIDialog( QWidget *parent, const char *name, const QStringList &args );
+    KRegExpEditorGUIDialog( TQWidget *parent, const char *name, const TQStringList &args );
 
-    virtual QString regExp() const;
+    virtual TQString regExp() const;
 
 signals:
   /** This signal tells whether undo is available. */
@@ -81,9 +81,9 @@ signals:
 public slots:
   virtual void redo();
   virtual void undo();
-  virtual void setRegExp( const QString &regexp );
-  virtual void doSomething( QString method, void* arguments );
-  virtual void setMatchText( const QString& );
+  virtual void setRegExp( const TQString &regexp );
+  virtual void doSomething( TQString method, void* arguments );
+  virtual void setMatchText( const TQString& );
 
 private:
     KRegExpEditorGUI *_editor;

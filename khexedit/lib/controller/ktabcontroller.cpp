@@ -16,7 +16,7 @@
 
 
 // qt specific
-#include <qevent.h>
+#include <tqevent.h>
 // lib specific
 #include "kvaluecolumn.h"
 #include "kcharcolumn.h"
@@ -33,7 +33,7 @@ KTabController::KTabController( KHexEdit* HE, KController *P )
 }
 
 
-bool KTabController::handleKeyPress( QKeyEvent *KeyEvent )
+bool KTabController::handleKeyPress( TQKeyEvent *KeyEvent )
 {
   bool KeyUsed = false;
 

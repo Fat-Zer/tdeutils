@@ -20,9 +20,9 @@
 #ifndef SENSORBASE_H
 #define SENSORBASE_H
 
-#include <qobject.h>
-#include <qvaluelist.h>
-#include <qcstring.h>
+#include <tqobject.h>
+#include <tqvaluelist.h>
+#include <tqcstring.h>
 
 class QTimer;
 class KLibrary;
@@ -32,11 +32,11 @@ class SensorInfo
   public:
     SensorInfo() {}
     SensorInfo(int id, 
-       const QString &sensorValue, 
-       const QString &sensorName, 
-       const QString &sensorType,
-       const QString &chipsetName, 
-       const QString &sensorUnit)
+       const TQString &sensorValue, 
+       const TQString &sensorName, 
+       const TQString &sensorType,
+       const TQString &chipsetName, 
+       const TQString &sensorUnit)
        : m_id(id), m_sensor(sensorValue),
        m_sensorName(sensorName),
        m_sensorType(sensorType), 
@@ -50,41 +50,41 @@ class SensorInfo
     /**
      * @return the current value, eg: 5000
      */
-    const QString &sensorValue() const { return m_sensor; }
+    const TQString &sensorValue() const { return m_sensor; }
     /**
      * @return the sensor name, eg: temp1, fan2
      */
-    const QString &sensorName() const { return m_sensorName; }
+    const TQString &sensorName() const { return m_sensorName; }
     /**
      * @return the sensor type name, eg: w83782d
      */
-    const QString &sensorType() const { return m_sensorType; }
+    const TQString &sensorType() const { return m_sensorType; }
     /**
      * @return the chipset name, eg: w83782d-i2c-0-2d
      */
-    const QString &chipsetName() const { return m_chipsetName; }
+    const TQString &chipsetName() const { return m_chipsetName; }
     /**
      * @return the unit name, eg: RPM, °C or °F if display fahrenheit is enabled
      */
-    const QString &sensorUnit() const { return m_sensorUnit; }
+    const TQString &sensorUnit() const { return m_sensorUnit; }
 
   private:
     int m_id;
-    QString m_sensor;
-    QString m_sensorName;
-    QString m_sensorType;
-    QString m_chipsetName;
-    QString m_sensorUnit;
+    TQString m_sensor;
+    TQString m_sensorName;
+    TQString m_sensorType;
+    TQString m_chipsetName;
+    TQString m_sensorUnit;
 };
 
-class SensorList : public QValueList<SensorInfo>
+class SensorList : public TQValueList<SensorInfo>
 {
   public:
     SensorList() {}
     SensorList(const SensorList &sensorList) 
-       : QValueList<SensorInfo>(sensorList) {}
-    SensorList(const QValueList<SensorInfo> &sensorList) 
-       : QValueList<SensorInfo>(sensorList) {}
+       : TQValueList<SensorInfo>(sensorList) {}
+    SensorList(const TQValueList<SensorInfo> &sensorList) 
+       : TQValueList<SensorInfo>(sensorList) {}
     SensorList(const SensorInfo &sensor) { append(sensor); }
 };
 
@@ -144,15 +144,15 @@ class SensorBase : public QObject
 
     bool init();
     float toFahrenheit(float value);
-    QString sensorType(const QString &name);
-    QString chipsetString(const ChipName *c);
-    float formatValue(const QString &label, float value);
-    QString formatString(const QString &label, float value);
+    TQString sensorType(const TQString &name);
+    TQString chipsetString(const ChipName *c);
+    float formatValue(const TQString &label, float value);
+    TQString formatString(const TQString &label, float value);
 
     SensorList m_sensorList;
-    QTimer *m_updateTimer;
+    TQTimer *m_updateTimer;
     KLibrary *m_library;
-    QCString m_libLocation;
+    TQCString m_libLocation;
     bool m_loaded;
     bool m_fahrenheit;
 

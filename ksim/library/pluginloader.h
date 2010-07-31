@@ -21,7 +21,7 @@
 #define PLUGINLOADER_H
 
 #include "pluginglobal.h"
-#include <qobject.h>
+#include <tqobject.h>
 
 #include <kdemacros.h>
 
@@ -36,22 +36,22 @@ namespace KSim
       /**
        * @return the name of the plugin
        */
-      const QString &name() const;
+      const TQString &name() const;
       /**
        * @return the library name of the plugin
        */
-      QCString libName(bool includePrefix = false) const;
+      TQCString libName(bool includePrefix = false) const;
       /**
        * @return the location of the desktop file
        */
-      const QString &location() const;
+      const TQString &location() const;
 
     private:
       PluginInfo();
 
-      QString m_name;
-      QString m_location;
-      QCString m_libName;
+      TQString m_name;
+      TQString m_location;
+      TQCString m_libName;
 
       class Private;
       Private *d;
@@ -89,7 +89,7 @@ namespace KSim
       /**
        * unloads a loaded plugin and removes plugin entries from pluginList()
        */
-      bool unloadPlugin(const QCString &name);
+      bool unloadPlugin(const TQCString &name);
       /**
        * unloads all loaded plugins
        */
@@ -103,14 +103,14 @@ namespace KSim
       /**
        * returns true if library is loaded
        */
-      bool isLoaded(const QCString &library) const;
+      bool isLoaded(const TQCString &library) const;
       /**
        * finds the plugins desktopfile and returns information
        * on the plugin
        * @return a KSim::PluginInfo object
        * @see KSim::PluginInfo
        */
-      KSim::PluginInfo findPluginInfo(const QString &name,
+      KSim::PluginInfo findPluginInfo(const TQString &name,
          SearchType type = DesktopFile) const;
       /**
        * looks through the list of loaded plugins and returns
@@ -122,11 +122,11 @@ namespace KSim
        * @return a KSim::Plugin object
        * @see KSim::Plugin
        */
-      KSim::Plugin &find(const QCString &libName);
+      KSim::Plugin &find(const TQCString &libName);
       /**
        * convenience function, see the above function for details.
        */
-      const KSim::Plugin &find(const QCString &libName) const;
+      const KSim::Plugin &find(const TQCString &libName) const;
       /**
        * equivalent to find(info.libName());
        */

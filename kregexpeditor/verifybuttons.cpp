@@ -17,7 +17,7 @@
  **/
 #ifdef QT_ONLY
 #include "compat.h"
-#include <qfiledialog.h>
+#include <tqfiledialog.h>
 #include "images.h"
 #else
 #include <klocale.h>
@@ -29,72 +29,72 @@
 #endif
 
 #include "verifybuttons.h"
-#include <qtooltip.h>
-#include <qlayout.h>
-#include <qwhatsthis.h>
+#include <tqtooltip.h>
+#include <tqlayout.h>
+#include <tqwhatsthis.h>
 #include "qtregexpconverter.h"
 #include "emacsregexpconverter.h"
-#include <qtoolbutton.h>
+#include <tqtoolbutton.h>
 #include "util.h"
-#include <qpopupmenu.h>
-#include <qaction.h>
+#include <tqpopupmenu.h>
+#include <tqaction.h>
 
-VerifyButtons::VerifyButtons( QWidget* parent, const char* name )
-    :QDockWindow( QDockWindow::InDock, parent, name ), _configMenu( 0 )
+VerifyButtons::VerifyButtons( TQWidget* parent, const char* name )
+    :TQDockWindow( TQDockWindow::InDock, parent, name ), _configMenu( 0 )
 {
-    QBoxLayout* layout = boxLayout();
+    TQBoxLayout* layout = boxLayout();
 
-    _verify =  new QToolButton(this);
-    QIconSet icon = Util::getSystemIconSet( QString::fromLatin1("spellcheck"));
+    _verify =  new TQToolButton(this);
+    TQIconSet icon = Util::getSystemIconSet( TQString::fromLatin1("spellcheck"));
     _verify->setIconSet( icon );
-    QToolTip::add( _verify, i18n( "Verify regular expression" ) );
-    QWhatsThis::add( _verify, i18n("Shows what part of the regular expression is being matched in the <i>verifier window</i>."
+    TQToolTip::add( _verify, i18n( "Verify regular expression" ) );
+    TQWhatsThis::add( _verify, i18n("Shows what part of the regular expression is being matched in the <i>verifier window</i>."
                                    "(The window below the graphical editor window)."));
     layout->addWidget( _verify );
-    connect( _verify, SIGNAL( clicked() ), this, SIGNAL( verify() ) );
+    connect( _verify, TQT_SIGNAL( clicked() ), this, TQT_SIGNAL( verify() ) );
 
-    QToolButton* button = new QToolButton(this);
-    button->setPixmap( Util::getSystemIcon( QString::fromLatin1("fileopen")) );
+    TQToolButton* button = new TQToolButton(this);
+    button->setPixmap( Util::getSystemIcon( TQString::fromLatin1("fileopen")) );
     layout->addWidget( button );
-    connect(button, SIGNAL(clicked()), this, SLOT(loadText()));
-    QToolTip::add( button, i18n("Load text in the verifier window") );
+    connect(button, TQT_SIGNAL(clicked()), this, TQT_SLOT(loadText()));
+    TQToolTip::add( button, i18n("Load text in the verifier window") );
 
-    button = new QToolButton(this);
-    button->setPixmap( Util::getSystemIcon( QString::fromLatin1("package_settings")) );
+    button = new TQToolButton(this);
+    button->setPixmap( Util::getSystemIcon( TQString::fromLatin1("package_settings")) );
     layout->addWidget( button );
-    connect(button, SIGNAL(clicked()), this, SLOT(configure()));
-    QToolTip::add( button, i18n("Settings") );
+    connect(button, TQT_SIGNAL(clicked()), this, TQT_SLOT(configure()));
+    TQToolTip::add( button, i18n("Settings") );
 
     // It is currently not possible to ask for the paragraph being highlighted, thefore scrolling to next/prev match
     // do not work. Enable this when they work.
-    // _first = new QToolButton( QString::fromLatin1("<<"), this);
+    // _first = new TQToolButton( TQString::fromLatin1("<<"), this);
     // layout->addWidget( _first );
-    // connect(_first, SIGNAL(clicked()), this, SIGNAL( gotoFirst()));
+    // connect(_first, TQT_SIGNAL(clicked()), this, TQT_SIGNAL( gotoFirst()));
     // _first->setFixedWidth( 25 );
     //
-    // _prev = new QToolButton(QString::fromLatin1("<"), this);
+    // _prev = new TQToolButton(TQString::fromLatin1("<"), this);
     // layout->addWidget( _prev );
-    // connect(_prev, SIGNAL(clicked()), this, SIGNAL( gotoPrev()));
+    // connect(_prev, TQT_SIGNAL(clicked()), this, TQT_SIGNAL( gotoPrev()));
     // _prev->setFixedWidth( 20 );
     //
-    // _next = new QToolButton(QString::fromLatin1(">"), this);
+    // _next = new TQToolButton(TQString::fromLatin1(">"), this);
     // layout->addWidget( _next );
-    // connect(_next, SIGNAL(clicked()), this, SIGNAL( gotoNext()));
+    // connect(_next, TQT_SIGNAL(clicked()), this, TQT_SIGNAL( gotoNext()));
     // _next->setFixedWidth( 20 );
     //
-    // _last = new QToolButton(QString::fromLatin1(">>"), this);
+    // _last = new TQToolButton(TQString::fromLatin1(">>"), this);
     // layout->addWidget( _last );
-    // connect(_last, SIGNAL(clicked()), this, SIGNAL( gotoLast()));
+    // connect(_last, TQT_SIGNAL(clicked()), this, TQT_SIGNAL( gotoLast()));
     // _last->setFixedWidth( 25 );
 
     // Same as above
-//  QLabel* label = new QLabel( i18n("Matches: "), this );
+//  TQLabel* label = new TQLabel( i18n("Matches: "), this );
 //  layout->addWidget( label );
-//  _matches = new QLabel(i18n("-"), this );
+//  _matches = new TQLabel(i18n("-"), this );
 //  layout->addWidget( _matches );
-//  QString txt = i18n( "Shows number of times regular expression matches the text in the verifier window");
-//  QToolTip::add( label, txt );
-//  QToolTip::add( _matches, txt );
+//  TQString txt = i18n( "Shows number of times regular expression matches the text in the verifier window");
+//  TQToolTip::add( label, txt );
+//  TQToolTip::add( _matches, txt );
 
     _verify->setEnabled( false );
 
@@ -102,23 +102,23 @@ VerifyButtons::VerifyButtons( QWidget* parent, const char* name )
 
     // Qt
     RegExpConverter* converter = new QtRegExpConverter();
-    _converters.append( qMakePair( converter, static_cast<QAction*>( 0 ) ) );
-    QString qtConverterName = converter->name();
+    _converters.append( qMakePair( converter, static_cast<TQAction*>( 0 ) ) );
+    TQString qtConverterName = converter->name();
 
     // Emacs
     converter = new EmacsRegExpConverter();
-    _converters.append( qMakePair( converter, static_cast<QAction*>( 0 )  ) );
+    _converters.append( qMakePair( converter, static_cast<TQAction*>( 0 )  ) );
 
 
     // -------------------------------------------------- Initialize the config menu
-    _configMenu = new QPopupMenu( this, "config menu" );
+    _configMenu = new TQPopupMenu( this, "config menu" );
 
     // Auto Verify
-    QAction* autoVerify = new QAction( i18n("Verify on the Fly"), 0, this );
+    TQAction* autoVerify = new TQAction( i18n("Verify on the Fly"), 0, this );
     autoVerify->setToggleAction( true );
     autoVerify->setOn( true );
-    connect( autoVerify, SIGNAL( toggled( bool ) ), this, SLOT( updateVerifyButton( bool ) ) );
-    connect( autoVerify, SIGNAL( toggled( bool ) ), this, SIGNAL( autoVerify( bool ) ) );
+    connect( autoVerify, TQT_SIGNAL( toggled( bool ) ), this, TQT_SLOT( updateVerifyButton( bool ) ) );
+    connect( autoVerify, TQT_SIGNAL( toggled( bool ) ), this, TQT_SIGNAL( autoVerify( bool ) ) );
     autoVerify->addTo( _configMenu );
     autoVerify->setToolTip( i18n( "Toggle on-the-fly verification of regular expression" ) );
     autoVerify->setWhatsThis( i18n( "Enabling this option will make the verifier update for each edit. "
@@ -126,19 +126,19 @@ VerifyButtons::VerifyButtons( QWidget* parent, const char* name )
                                     "complex or matches a lot of time, this may be very slow."));
 
     // RegExp Languages
-    QPopupMenu* languages = new QPopupMenu( _configMenu );
+    TQPopupMenu* languages = new TQPopupMenu( _configMenu );
     _languageId = _configMenu->insertItem( i18n("RegExp Language"), languages );
 
-    QActionGroup* grp = new QActionGroup( this );
-    for( QValueList< QPair<RegExpConverter*,QAction*> >::Iterator it = _converters.begin(); it != _converters.end(); ++it ) {
-        QString name = (*it).first->name();
-        QAction* action = new QAction( name, 0, this );
+    TQActionGroup* grp = new TQActionGroup( this );
+    for( TQValueList< QPair<RegExpConverter*,TQAction*> >::Iterator it = _converters.begin(); it != _converters.end(); ++it ) {
+        TQString name = (*it).first->name();
+        TQAction* action = new TQAction( name, 0, this );
         action->setToggleAction( true );
         grp->add( action );
         (*it).second = action;
     }
     grp->addTo( languages );
-    connect( grp, SIGNAL( selected( QAction* ) ), this, SLOT( slotChangeSyntax( QAction* ) ) );
+    connect( grp, TQT_SIGNAL( selected( TQAction* ) ), this, TQT_SLOT( slotChangeSyntax( TQAction* ) ) );
     _configMenu->setItemEnabled( _languageId, false );
 
     // Select the Qt converter by default
@@ -154,7 +154,7 @@ void VerifyButtons::updateVerifyButton( bool b )
 
 void VerifyButtons::loadText()
 {
-    QString fileName = KFileDialog::getOpenFileName(QString::null, QString::null, this);
+    TQString fileName = KFileDialog::getOpenFileName(TQString::null, TQString::null, this);
     if ( !fileName.isNull() ) {
         emit loadVerifyText( fileName );
     }
@@ -179,21 +179,21 @@ void VerifyButtons::setMatchCount( int /*count*/ )
 // currently this is not possible due to limitation in QSyntaxHighlighter
 /*
   if ( count == -1 )
-  _matches->setText( QString::fromLatin1("-") );
+  _matches->setText( TQString::fromLatin1("-") );
   else
-  _matches->setText( QString::number( count ) );
+  _matches->setText( TQString::number( count ) );
 */
 }
 
-void VerifyButtons::slotChangeSyntax( QAction* action )
+void VerifyButtons::slotChangeSyntax( TQAction* action )
 {
     emit changeSyntax( action->menuText()  );
 }
 
-RegExpConverter* VerifyButtons::setSyntax( const QString& which)
+RegExpConverter* VerifyButtons::setSyntax( const TQString& which)
 {
-    for( QValueList< QPair<RegExpConverter*, QAction*> >::Iterator it = _converters.begin(); it != _converters.end(); ++it ) {
-        QString name = (*it).first->name();
+    for( TQValueList< QPair<RegExpConverter*, TQAction*> >::Iterator it = _converters.begin(); it != _converters.end(); ++it ) {
+        TQString name = (*it).first->name();
         if ( name == which ) {
             (*it).second->setOn( true );
             return (*it).first;
@@ -205,7 +205,7 @@ RegExpConverter* VerifyButtons::setSyntax( const QString& which)
 
 void VerifyButtons::configure()
 {
-    _configMenu->exec( QCursor::pos() );
+    _configMenu->exec( TQCursor::pos() );
 }
 
 void VerifyButtons::setAllowNonQtSyntax( bool b )

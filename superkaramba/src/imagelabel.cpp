@@ -21,9 +21,9 @@
 *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 ****************************************************************************/
 
-#include <qpixmap.h>
-#include <qtimer.h>
-#include <qtooltip.h>
+#include <tqpixmap.h>
+#include <tqtimer.h>
+#include <tqtooltip.h>
 #include <kpixmapeffect.h>
 #include <kdebug.h>
 #include <kimageeffect.h>
@@ -39,7 +39,7 @@ Effect::Effect(ImageLabel* img, int msec) :
   if (msec > 0)
   {
     // remove the effect after the given time
-    //QTimer::singleShot (millisec, myImage, SLOT(slotEffectExpired()));
+    //TQTimer::singleShot (millisec, myImage, TQT_SLOT(slotEffectExpired()));
     //timer -> changeInterval(millisec);
     millisec = msec;
   }
@@ -57,7 +57,7 @@ void Effect::startTimer()
 {
   if (millisec > 0)
   {
-    QTimer::singleShot (millisec, myImage, SLOT(slotEffectExpired()));
+    TQTimer::singleShot (millisec, myImage, TQT_SLOT(slotEffectExpired()));
     millisec = 0;
   }
 }
@@ -77,7 +77,7 @@ KPixmap Intensity::apply(KPixmap pixmap)
 }
 
 // ChannelIntensity
-ChannelIntensity::ChannelIntensity(ImageLabel* img, float r, QString c,
+ChannelIntensity::ChannelIntensity(ImageLabel* img, float r, TQString c,
                                    int millisec) :
   Effect(img, millisec)
 {
@@ -151,13 +151,13 @@ ImageLabel::~ImageLabel()
   }
   if(!old_tip_rect.isNull())
   {
-    QToolTip::remove(m_karamba, old_tip_rect);
+    TQToolTip::remove(m_karamba, old_tip_rect);
   }
 }
 
 void ImageLabel::setValue(long v)
 {
- setValue( QString::number( v ) );
+ setValue( TQString::number( v ) );
 }
 
 void ImageLabel::show()
@@ -227,7 +227,7 @@ void ImageLabel::applyTransformations(bool useSmoothScale)
     if (doRotate)
     {
         // KDE and QT seem to miss a high quality image rotation
-        QWMatrix rotMat;
+        TQWMatrix rotMat;
         rotMat.rotate(rot_angle);
         pixmap = pixmap.xForm(rotMat);
     }
@@ -242,7 +242,7 @@ void ImageLabel::applyTransformations(bool useSmoothScale)
         {
             double widthFactor = ((double)scale_w) / ((double)pixmap.width());
             double heightFactor = ((double)scale_h) / ((double)pixmap.height());
-            QWMatrix scaleMat;
+            TQWMatrix scaleMat;
             scaleMat.scale(widthFactor, heightFactor);
             pixmap = pixmap.xForm(scaleMat);
         }
@@ -257,7 +257,7 @@ void ImageLabel::applyTransformations(bool useSmoothScale)
 
 void ImageLabel::slotCopyResult(KIO::Job* job)
 {
-  QString tempFile = ((KIO::FileCopyJob*)job)->destURL().path();
+  TQString tempFile = ((KIO::FileCopyJob*)job)->destURL().path();
   if(job->error() == 0)
   {
     setValue(tempFile);
@@ -272,30 +272,30 @@ void ImageLabel::slotCopyResult(KIO::Job* job)
   KIO::NetAccess::removeTempFile(tempFile);
 }
 
-void ImageLabel::setValue(QString fn)
+void ImageLabel::setValue(TQString fn)
 {
   // use the first line
-  QStringList sList = QStringList::split( "\n", fn );
-  QString fileName = *sList.begin();
+  TQStringList sList = TQStringList::split( "\n", fn );
+  TQString fileName = *sList.begin();
   KURL url(fileName);
-  QRegExp rx("^[a-zA-Z]{1,5}:/",false);
+  TQRegExp rx("^[a-zA-Z]{1,5}:/",false);
   bool protocol = (rx.search(fileName)!=-1)?true:false;
-  QPixmap pm;
+  TQPixmap pm;
 
   if(protocol && url.isLocalFile() == false)
   {
     KTempFile tmpFile;
     KIO::FileCopyJob* copy = KIO::file_copy(fileName, tmpFile.name(), 0600,
                                             true, false, false);
-    connect(copy, SIGNAL(result(KIO::Job*)),
-            this, SLOT(slotCopyResult(KIO::Job*)));
+    connect(copy, TQT_SIGNAL(result(KIO::Job*)),
+            this, TQT_SLOT(slotCopyResult(KIO::Job*)));
     return;
   }
   else
   {
     if(m_karamba->theme().isThemeFile(fileName))
     {
-      QByteArray ba = m_karamba->theme().readThemeFile(fileName);
+      TQByteArray ba = m_karamba->theme().readThemeFile(fileName);
       pm.loadFromData(ba);
     }
     else
@@ -309,9 +309,9 @@ void ImageLabel::setValue(QString fn)
 
 //Matthew Kay: a new version of setValue to be used by createTaskIcon()
 /**
- * set the internal pixmap of this image to the given QPixmap pix
+ * set the internal pixmap of this image to the given TQPixmap pix
  */
-void ImageLabel::setValue(QPixmap& pix)
+void ImageLabel::setValue(TQPixmap& pix)
 {
   realpixmap = KPixmap(pix);
   pixmap = realpixmap;
@@ -320,10 +320,10 @@ void ImageLabel::setValue(QPixmap& pix)
 
   pixmapWidth = pixmap.width();
   pixmapHeight = pixmap.height();
-  rect_off = QRect(getX(),getY(),pixmapWidth,pixmapHeight);
+  rect_off = TQRect(getX(),getY(),pixmapWidth,pixmapHeight);
 }
 
-void ImageLabel::mUpdate(QPainter* p, int backgroundUpdate)
+void ImageLabel::mUpdate(TQPainter* p, int backgroundUpdate)
 {
   if (backgroundUpdate == 1)
   {
@@ -337,9 +337,9 @@ void ImageLabel::mUpdate(QPainter* p, int backgroundUpdate)
       {
         //Blend this image with a color
 
-        QImage image = pixmap.convertToImage();
+        TQImage image = pixmap.convertToImage();
 
-        QImage result = KImageEffect::blend(QColor(255,0,0), image, 0.5f);
+        TQImage result = KImageEffect::blend(TQColor(255,0,0), image, 0.5f);
         p->drawImage(getX(),getY(),result);
 
         //p->drawRect(boundingBox);
@@ -353,7 +353,7 @@ void ImageLabel::mUpdate(QPainter* p, int backgroundUpdate)
   }
 }
 
-void ImageLabel::mUpdate(QPainter* p)
+void ImageLabel::mUpdate(TQPainter* p)
 {
   //only draw image if not hidden
   if (hidden == 0 && background == 0)
@@ -367,9 +367,9 @@ void ImageLabel::mUpdate(QPainter* p)
     {
       //Blend this image with a color
 
-      QImage image = pixmap.convertToImage();
+      TQImage image = pixmap.convertToImage();
 
-      QImage result = KImageEffect::blend(QColor(255,0,0), image, 0.5f);
+      TQImage result = KImageEffect::blend(TQColor(255,0,0), image, 0.5f);
       p->drawImage(getX(),getY(),result);
 
       //p->drawRect(boundingBox);
@@ -382,11 +382,11 @@ void ImageLabel::mUpdate(QPainter* p)
   }
 }
 
-bool ImageLabel::click(QMouseEvent* e)
+bool ImageLabel::click(TQMouseEvent* e)
 {
     if (getBoundingBox().contains(e -> x(), e -> y()) && isEnabled())
     {
-        QString program;
+        TQString program;
         if (e -> button() == Qt::LeftButton)
         {
             program = leftButtonAction;
@@ -412,7 +412,7 @@ bool ImageLabel::click(QMouseEvent* e)
     return false;
 }
 
-void ImageLabel::parseImages(QString fn, QString fn_roll, int _xoff,
+void ImageLabel::parseImages(TQString fn, TQString fn_roll, int _xoff,
                              int _yoff, int _xon, int _yon)
 {
   //fn = filename;
@@ -424,12 +424,12 @@ void ImageLabel::parseImages(QString fn, QString fn_roll, int _xoff,
   yon = _yon;
 
   // use the first line
-  QStringList sList = QStringList::split( "\n", fn );
-  QString fileName = *sList.begin();
-  QFileInfo fileInfo( fileName );
-  QString path;
+  TQStringList sList = TQStringList::split( "\n", fn );
+  TQString fileName = *sList.begin();
+  TQFileInfo fileInfo( fileName );
+  TQString path;
 
-  QRegExp rx("^http://",false);
+  TQRegExp rx("^http://",false);
   bool fileOnNet = (rx.search(fileName)!=-1)?true:false;
 
 
@@ -444,7 +444,7 @@ void ImageLabel::parseImages(QString fn, QString fn_roll, int _xoff,
 
   if ( fileOnNet )
   {
-    QString tmpFile;
+    TQString tmpFile;
 #if defined(KDE_3_2)
     if(KIO::NetAccess::download(KURL(path), tmpFile, karambaApp->parentWindow()))
 #else
@@ -468,15 +468,15 @@ void ImageLabel::parseImages(QString fn, QString fn_roll, int _xoff,
   pixmapOffWidth = pixmap.width();
   pixmapOffHeight = pixmap.height();
 
-  rect_off = QRect(xoff,yoff,pixmapWidth,pixmapHeight);
+  rect_off = TQRect(xoff,yoff,pixmapWidth,pixmapHeight);
 /////////////////////////////
   if (fn_roll.isEmpty())
     return;
 
   rollover=true;
-  sList = QStringList::split( "\n", fn_roll );
+  sList = TQStringList::split( "\n", fn_roll );
   fileName = *sList.begin();
-  fileInfo = QFileInfo( fileName );
+  fileInfo = TQFileInfo( fileName );
 
   fileOnNet = (rx.search(fileName)!=-1)?true:false;
 
@@ -492,7 +492,7 @@ void ImageLabel::parseImages(QString fn, QString fn_roll, int _xoff,
 
   if ( fileOnNet )
   {
-    QString tmpFile;
+    TQString tmpFile;
 #if defined(KDE_3_2)
     if(KIO::NetAccess::download(KURL(path), tmpFile, karambaApp->parentWindow()))
 #else
@@ -515,7 +515,7 @@ void ImageLabel::parseImages(QString fn, QString fn_roll, int _xoff,
   pixmapOnWidth = pixmap_on.width();
   pixmapOnHeight = pixmap_on.height();
 
-  rect_on = QRect(xon,yon,pixmapOnWidth,pixmapOnHeight);
+  rect_on = TQRect(xon,yon,pixmapOnWidth,pixmapOnHeight);
 }
 
 void ImageLabel::setBackground(int b)
@@ -523,7 +523,7 @@ void ImageLabel::setBackground(int b)
   background = b;
 }
 
-void ImageLabel::rolloverImage(QMouseEvent *e)
+void ImageLabel::rolloverImage(TQMouseEvent *e)
 {
   if (!rollover)
     return;
@@ -560,11 +560,11 @@ void ImageLabel::rolloverImage(QMouseEvent *e)
   }
 }
 
-void ImageLabel::setTooltip(QString txt)
+void ImageLabel::setTooltip(TQString txt)
 {
-  QRect rect(getX(),getY(),pixmapWidth,pixmapHeight);
-  QToolTip::add(m_karamba, rect, txt);
-  old_tip_rect = QRect(rect.topLeft(), rect.bottomRight());
+  TQRect rect(getX(),getY(),pixmapWidth,pixmapHeight);
+  TQToolTip::add(m_karamba, rect, txt);
+  old_tip_rect = TQRect(rect.topLeft(), rect.bottomRight());
 }
 
 
@@ -590,7 +590,7 @@ void ImageLabel::intensity(float ratio, int millisec)
   applyTransformations();
 }
 
-void ImageLabel::channelIntensity(float ratio, QString channel, int millisec)
+void ImageLabel::channelIntensity(float ratio, TQString channel, int millisec)
 {
   if (imageEffect != 0)
   {
@@ -620,9 +620,9 @@ void ImageLabel::slotEffectExpired()
   m_karamba -> externalStep();
 }
 
-void ImageLabel::attachClickArea(QString leftMouseButton,
-                                 QString  middleMouseButton,
-                                 QString rightMouseButton)
+void ImageLabel::attachClickArea(TQString leftMouseButton,
+                                 TQString  middleMouseButton,
+                                 TQString rightMouseButton)
 {
     leftButtonAction = leftMouseButton;
     middleButtonAction = middleMouseButton;

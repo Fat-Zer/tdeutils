@@ -21,12 +21,12 @@
 #include "probedialog.h"
 #include "proberesultdialog.h"
 
-#include <qcombobox.h>
-#include <qwidgetstack.h>
+#include <tqcombobox.h>
+#include <tqwidgetstack.h>
 #include <klineedit.h>
-#include <qlabel.h>
-#include <qpushbutton.h>
-#include <qspinbox.h>
+#include <tqlabel.h>
+#include <tqpushbutton.h>
+#include <tqspinbox.h>
 
 #include <klocale.h>
 #include <kmessagebox.h>
@@ -35,14 +35,14 @@
 
 using namespace KSim::Snmp;
 
-HostDialog::HostDialog( QWidget *parent, const char *name )
+HostDialog::HostDialog( TQWidget *parent, const char *name )
     : HostDialogBase( parent, name )
 {
     init();
     port->setValue( 161 );
 }
 
-HostDialog::HostDialog( const HostConfig &src, QWidget *parent, const char *name )
+HostDialog::HostDialog( const HostConfig &src, TQWidget *parent, const char *name )
     : HostDialogBase( parent, name )
 {
     init( src );
@@ -79,7 +79,7 @@ HostConfig HostDialog::settings() const
     return result;
 }
 
-void HostDialog::showSnmpAuthenticationDetailsForVersion( const QString &versionStr )
+void HostDialog::showSnmpAuthenticationDetailsForVersion( const TQString &versionStr )
 {
     bool ok = false;
     SnmpVersion version = stringToSnmpVersion( versionStr, &ok );
@@ -88,7 +88,7 @@ void HostDialog::showSnmpAuthenticationDetailsForVersion( const QString &version
     authenticationDetails->raiseWidget( version == SnmpVersion3 ? snmpV3Page : snmpV1Page );
 }
 
-void HostDialog::enableDisabledAuthenticationAndPrivacyElementsForSecurityLevel( const QString &levelStr )
+void HostDialog::enableDisabledAuthenticationAndPrivacyElementsForSecurityLevel( const TQString &levelStr )
 {
     bool ok = false;
     SecurityLevel level = stringToSecurityLevel( levelStr, &ok );

@@ -23,9 +23,9 @@
  *   kardinfo   Copyright 1999, Mirko Sucker <mirko.sucker@unibw-hamburg.de>
  */
 
-#include <qtimer.h>
-#include <qfile.h>
-#include <qregexp.h>
+#include <tqtimer.h>
+#include <tqfile.h>
+#include <tqregexp.h>
 
 #include <klocale.h>
 #include <kinstance.h>
@@ -169,13 +169,13 @@ tv.tv_sec = 0;  tv.tv_usec = 0;
       *   Read in the stab file.
       */
      if (!stat(_stabPath.latin1(), &sb) && sb.st_mtime >= _last) {
-        QFile f(_stabPath.latin1());
+        TQFile f(_stabPath.latin1());
 
         if (f.open(IO_ReadOnly)) {
-          QTextStream ts(&f);
+          TQTextStream ts(&f);
           bool foundit = false;
-          QString _thisreg = "^Socket %1: ";
-          QRegExp thisreg ( _thisreg.arg(_num) );
+          TQString _thisreg = "^Socket %1: ";
+          TQRegExp thisreg ( _thisreg.arg(_num) );
 
           if (flock(f.handle(), LOCK_SH)) return updated;
 
@@ -183,7 +183,7 @@ tv.tv_sec = 0;  tv.tv_usec = 0;
 
           // find the card
           while(!foundit) {
-            QString s;
+            TQString s;
             if (ts.eof()) break;
             s = ts.readLine();
             if (s.contains(thisreg)) {
@@ -196,27 +196,27 @@ tv.tv_sec = 0;  tv.tv_usec = 0;
 
           // read it in
           if (foundit && !ts.eof()) {  // FIXME: ts.eof() is a bad error!!
-            QString s = ts.readLine();
+            TQString s = ts.readLine();
             int end;
             s.simplifyWhiteSpace();
 
-            end = s.find(QRegExp("[ \r\t\n]"));
+            end = s.find(TQRegExp("[ \r\t\n]"));
             s = s.remove(0, end+1);
 
-            end = s.find(QRegExp("[ \r\t\n]"));
+            end = s.find(TQRegExp("[ \r\t\n]"));
             _type = s;
             _type.truncate(end);
             s = s.remove(0, end+1);
 
-            end = s.find(QRegExp("[ \r\t\n]"));
+            end = s.find(TQRegExp("[ \r\t\n]"));
             _module = s;
             _module.truncate(end);
             s = s.remove(0, end+1);
 
-            end = s.find(QRegExp("[ \r\t\n]"));
+            end = s.find(TQRegExp("[ \r\t\n]"));
             s = s.remove(0, end+1);
 
-            end = s.find(QRegExp("[ \r\t\n]"));
+            end = s.find(TQRegExp("[ \r\t\n]"));
             _device = s;
             _device.truncate(end);
             s = s.remove(0, end+1);
@@ -366,9 +366,9 @@ KPCMCIA::KPCMCIA(int maxSlots, const char *stabpath) : _maxSlots(maxSlots),
 _refreshSpeed = 750;
 
 _haveCardServices = false;
-_timer = new QTimer(this);
-connect(_timer, SIGNAL(timeout()), this, SLOT(updateCardInfo()));
-_cards = new QMemArray<KPCMCIACard *>(_maxSlots+1);
+_timer = new TQTimer(this);
+connect(_timer, TQT_SIGNAL(timeout()), this, TQT_SLOT(updateCardInfo()));
+_cards = new TQMemArray<KPCMCIACard *>(_maxSlots+1);
 _cardCnt = 0;
 
 
@@ -496,19 +496,19 @@ bool KPCMCIA::haveCardServices() {
 
 #ifdef __linux__
 static int lookupDevice(const char *x) {
-QFile df("/proc/devices");
-QString thisreg;
+TQFile df("/proc/devices");
+TQString thisreg;
 
    thisreg = "^[0-9]+ %1$";
    thisreg = thisreg.arg(x);
 
    if (df.open(IO_ReadOnly)) {
-      QTextStream t(&df);
-      QString s;
+      TQTextStream t(&df);
+      TQString s;
       while (!t.eof()) {
          s = t.readLine();
 
-         if (s.contains(QRegExp(thisreg))) {
+         if (s.contains(TQRegExp(thisreg))) {
             int n = (s.left(3).stripWhiteSpace()).toInt();
             df.close();
             return n;
@@ -520,8 +520,8 @@ return -1;
 }
 
 static int openDevice(dev_t dev) {
-QString tmp_path = locateLocal("tmp", KGlobal::instance()->instanceName());
-QString ext = "_socket%1";
+TQString tmp_path = locateLocal("tmp", KGlobal::instance()->instanceName());
+TQString ext = "_socket%1";
 
   tmp_path += ext.arg((int)dev);
 

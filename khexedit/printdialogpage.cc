@@ -18,20 +18,20 @@
  *
  */
 
-#include <qlayout.h>
-#include <qbuttongroup.h>
-#include <qspinbox.h>
-#include <qlabel.h>
-#include <qcheckbox.h>
-#include <qstringlist.h>
-#include <qcombobox.h>
+#include <tqlayout.h>
+#include <tqbuttongroup.h>
+#include <tqspinbox.h>
+#include <tqlabel.h>
+#include <tqcheckbox.h>
+#include <tqstringlist.h>
+#include <tqcombobox.h>
 
 #include <klocale.h>
 
 
 #include "printdialogpage.h"
 
-LayoutDialogPage::LayoutDialogPage( QWidget *parent, const char *name )
+LayoutDialogPage::LayoutDialogPage( TQWidget *parent, const char *name )
  : KPrintDialogPage( parent, name )
 {
   mConfig = 0;
@@ -52,21 +52,21 @@ LayoutDialogPage::~LayoutDialogPage( void )
 
 void LayoutDialogPage::setupLayoutPage( void )
 {
-  QString text;
-  QVBoxLayout *topLayout = new QVBoxLayout( this, 0, 6 /*KDialog::mSpacingSize*/ );
+  TQString text;
+  TQVBoxLayout *topLayout = new TQVBoxLayout( this, 0, 6 /*KDialog::mSpacingSize*/ );
   if( topLayout == 0 ) { return; }
 
   text = i18n("Margins [millimeter]");
-  QButtonGroup *group = new QButtonGroup( text, this );
+  TQButtonGroup *group = new TQButtonGroup( text, this );
   if( group == 0 ) { return; }
   topLayout->addWidget( group );
 
-  QGridLayout *gbox = new QGridLayout( group, 3, 6, 6 /*KDialog::mSpacingSize*/ );
+  TQGridLayout *gbox = new TQGridLayout( group, 3, 6, 6 /*KDialog::mSpacingSize*/ );
   if( gbox == 0 ) { return; }
   gbox->addRowSpacing( 0, group->fontMetrics().height() );
   gbox->setColStretch( 5, 10 );
 
-  QString name[4];
+  TQString name[4];
   int i;
 
   name[0] = i18n("&Top:");
@@ -76,14 +76,14 @@ void LayoutDialogPage::setupLayoutPage( void )
 
   for( i=0; i<4; i++ )
   {
-    mLayout.marginSpin[i] = new QSpinBox( group );
+    mLayout.marginSpin[i] = new TQSpinBox( group );
     mLayout.marginSpin[i]->setFixedHeight(
       mLayout.marginSpin[i]->sizeHint().height() );
     mLayout.marginSpin[i]->setMinimumWidth(
       mLayout.marginSpin[i]->fontMetrics().width("M")*10 );
     mLayout.marginSpin[i]->setRange( 0, INT_MAX );
 
-    QLabel *label = new QLabel( mLayout.marginSpin[i], name[i], group );
+    TQLabel *label = new TQLabel( mLayout.marginSpin[i], name[i], group );
     label->setFixedHeight( mLayout.marginSpin[i]->sizeHint().height() );
     label->setFixedWidth( label->sizeHint().width() );
 
@@ -100,13 +100,13 @@ void LayoutDialogPage::setupLayoutPage( void )
   }
   
   text = i18n("Draw h&eader above text");
-  mLayout.headerCheck = new QCheckBox( text, this );
+  mLayout.headerCheck = new TQCheckBox( text, this );
   mLayout.headerCheck->setFixedSize( mLayout.headerCheck->sizeHint() );
-  connect( mLayout.headerCheck, SIGNAL( toggled(bool)),
-	   SLOT( slotDrawHeader(bool)));
+  connect( mLayout.headerCheck, TQT_SIGNAL( toggled(bool)),
+	   TQT_SLOT( slotDrawHeader(bool)));
   topLayout->addWidget( mLayout.headerCheck, 0, AlignLeft );
 
-  gbox = new QGridLayout( 5, 6, 0 );
+  gbox = new TQGridLayout( 5, 6, 0 );
   if( gbox == 0 ) { return; }
   topLayout->addLayout( gbox );
 
@@ -120,26 +120,26 @@ void LayoutDialogPage::setupLayoutPage( void )
   name[2] = i18n("Right:");
   name[3] = i18n("Border:");
 
-  QStringList textList;
+  TQStringList textList;
   textList.append(i18n("None"));
   textList.append(i18n("Date & Time"));
   textList.append(i18n("Page Number"));
   textList.append(i18n("Filename"));
 
-  QStringList lineList;
+  TQStringList lineList;
   lineList.append(i18n("None"));
   lineList.append(i18n("Single Line"));
   lineList.append(i18n("Rectangle"));
 
   for( i=0; i<4; i++ )
   {
-    mLayout.headerCombo[i] = new QComboBox( false, this );
+    mLayout.headerCombo[i] = new TQComboBox( false, this );
     mLayout.headerCombo[i]->setFixedHeight(
       mLayout.headerCombo[i]->sizeHint().height() );
     mLayout.headerCombo[i]->setMinimumWidth(
       mLayout.headerCombo[i]->fontMetrics().width("M")*10 );
  
-    mLayout.headerLabel[i] = new QLabel( mLayout.headerCombo[i], name[i],
+    mLayout.headerLabel[i] = new TQLabel( mLayout.headerCombo[i], name[i],
 					 this );
     mLayout.headerLabel[i]->setFixedHeight( 
       mLayout.headerLabel[i]->sizeHint().height() );
@@ -162,13 +162,13 @@ void LayoutDialogPage::setupLayoutPage( void )
 
 
   text = i18n("Draw &footer below text");
-  mLayout.footerCheck = new QCheckBox( text, this );
+  mLayout.footerCheck = new TQCheckBox( text, this );
   mLayout.footerCheck->setFixedSize( mLayout.footerCheck->sizeHint() );
-  connect( mLayout.footerCheck, SIGNAL( toggled(bool)),
-	   SLOT( slotDrawFooter(bool)));
+  connect( mLayout.footerCheck, TQT_SIGNAL( toggled(bool)),
+	   TQT_SLOT( slotDrawFooter(bool)));
   topLayout->addWidget( mLayout.footerCheck, 0, AlignLeft );
 
-  gbox = new QGridLayout( 5, 6, 0 );
+  gbox = new TQGridLayout( 5, 6, 0 );
   if( gbox == 0 ) { return; }
   topLayout->addLayout( gbox );
 
@@ -179,13 +179,13 @@ void LayoutDialogPage::setupLayoutPage( void )
 
   for( i=0; i<4; i++ )
   {
-    mLayout.footerCombo[i] = new QComboBox( false, this );
+    mLayout.footerCombo[i] = new TQComboBox( false, this );
     mLayout.footerCombo[i]->setFixedHeight(
       mLayout.footerCombo[i]->sizeHint().height() );
     mLayout.footerCombo[i]->setMinimumWidth(
       mLayout.footerCombo[i]->fontMetrics().width("M")*10 );
 
-    mLayout.footerLabel[i] = new QLabel( mLayout.footerCombo[i], name[i], 
+    mLayout.footerLabel[i] = new TQLabel( mLayout.footerCombo[i], name[i], 
 					 this );
     mLayout.footerLabel[i]->setFixedHeight( 
       mLayout.footerLabel[i]->sizeHint().height() );
@@ -223,7 +223,7 @@ void LayoutDialogPage::readConfiguration( void )
 {
   if( mConfig != 0 ) { return; }
 
-  mConfig = new KSimpleConfig( QString("hexprinter") );
+  mConfig = new KSimpleConfig( TQString("hexprinter") );
   if( mConfig == 0 ) { return; }
 
   mConfig->setGroup( "PageLayout" );
@@ -300,16 +300,16 @@ void LayoutDialogPage::writeConfiguration( void )
 }
 
 
-QString LayoutDialogPage::headerText( uint index )
+TQString LayoutDialogPage::headerText( uint index )
 {
-  static const QString text[4] = {"None","DateTime","PageNumber","FileName"};
+  static const TQString text[4] = {"None","DateTime","PageNumber","FileName"};
   return( text[ index > 3 ? 0 : index ] );
 }
 
 
-int LayoutDialogPage::headerTextIndex( const QString & headerText )
+int LayoutDialogPage::headerTextIndex( const TQString & headerText )
 {
-  static const QString text[4] = {"None","DateTime","PageNumber","FileName"};
+  static const TQString text[4] = {"None","DateTime","PageNumber","FileName"};
   if( headerText != 0 )
   {
     for( int i=0; i<4; i++ )
@@ -321,16 +321,16 @@ int LayoutDialogPage::headerTextIndex( const QString & headerText )
 }
 
 
-QString LayoutDialogPage::headerLine( uint index )
+TQString LayoutDialogPage::headerLine( uint index )
 {
-  static const QString text[3] = {"None","SingleLine","Rectangle"};
+  static const TQString text[3] = {"None","SingleLine","Rectangle"};
   return( text[ index > 2 ? 0 : index ] );
 }
 
 
-int LayoutDialogPage::headerLineIndex( const QString & headerLine )
+int LayoutDialogPage::headerLineIndex( const TQString & headerLine )
 {
-  static const QString text[3] = {"None","SingleLine","Rectangle"};
+  static const TQString text[3] = {"None","SingleLine","Rectangle"};
   if( headerLine != 0 )
   {
     for( int i=0; i<3; i++ )
@@ -362,24 +362,24 @@ void LayoutDialogPage::slotDrawFooter( bool state )
 }
 
 
-void LayoutDialogPage::getOptions( QMap<QString,QString>& opts, bool /*incldef*/ )
+void LayoutDialogPage::getOptions( TQMap<TQString,TQString>& opts, bool /*incldef*/ )
 {
-   opts[ "kde-khexedit-topmarginmm" ]    = QString::number( mLayout.marginSpin[0]->value() );
-   opts[ "kde-khexedit-bottommarginmm" ] = QString::number( mLayout.marginSpin[1]->value() );
-   opts[ "kde-khexedit-leftmarginmm" ]   = QString::number( mLayout.marginSpin[2]->value() );
-   opts[ "kde-khexedit-rightmarginmm" ]  = QString::number( mLayout.marginSpin[3]->value() );
+   opts[ "kde-khexedit-topmarginmm" ]    = TQString::number( mLayout.marginSpin[0]->value() );
+   opts[ "kde-khexedit-bottommarginmm" ] = TQString::number( mLayout.marginSpin[1]->value() );
+   opts[ "kde-khexedit-leftmarginmm" ]   = TQString::number( mLayout.marginSpin[2]->value() );
+   opts[ "kde-khexedit-rightmarginmm" ]  = TQString::number( mLayout.marginSpin[3]->value() );
 
    opts[ "kde-khexedit-headercheck" ]  = (mLayout.headerCheck->isChecked() ? "true" : "false");
-   opts[ "kde-khexedit-headercombo0" ] = QString::number( mLayout.headerCombo[0]->currentItem() );
-   opts[ "kde-khexedit-headercombo1" ] = QString::number( mLayout.headerCombo[1]->currentItem() );
-   opts[ "kde-khexedit-headercombo2" ] = QString::number( mLayout.headerCombo[2]->currentItem() );
-   opts[ "kde-khexedit-headercombo3" ] = QString::number( mLayout.headerCombo[3]->currentItem() );
+   opts[ "kde-khexedit-headercombo0" ] = TQString::number( mLayout.headerCombo[0]->currentItem() );
+   opts[ "kde-khexedit-headercombo1" ] = TQString::number( mLayout.headerCombo[1]->currentItem() );
+   opts[ "kde-khexedit-headercombo2" ] = TQString::number( mLayout.headerCombo[2]->currentItem() );
+   opts[ "kde-khexedit-headercombo3" ] = TQString::number( mLayout.headerCombo[3]->currentItem() );
 
    opts[ "kde-khexedit-footercheck" ]  = (mLayout.footerCheck->isChecked() ? "true" : "false");
-   opts[ "kde-khexedit-footercombo0" ] = QString::number( mLayout.footerCombo[0]->currentItem() );
-   opts[ "kde-khexedit-footercombo1" ] = QString::number( mLayout.footerCombo[1]->currentItem() );
-   opts[ "kde-khexedit-footercombo2" ] = QString::number( mLayout.footerCombo[2]->currentItem() );
-   opts[ "kde-khexedit-footercombo3" ] = QString::number( mLayout.footerCombo[3]->currentItem() );
+   opts[ "kde-khexedit-footercombo0" ] = TQString::number( mLayout.footerCombo[0]->currentItem() );
+   opts[ "kde-khexedit-footercombo1" ] = TQString::number( mLayout.footerCombo[1]->currentItem() );
+   opts[ "kde-khexedit-footercombo2" ] = TQString::number( mLayout.footerCombo[2]->currentItem() );
+   opts[ "kde-khexedit-footercombo3" ] = TQString::number( mLayout.footerCombo[3]->currentItem() );
 }
 
 

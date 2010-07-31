@@ -41,9 +41,9 @@ class NetConfig : public KSim::PluginPage
     virtual void readConfig();
 
   private slots:
-    void menu(KListView *, QListViewItem *, const QPoint &);
-    void modifyItem(QListViewItem *);
-    void removeItem(QListViewItem *);
+    void menu(KListView *, TQListViewItem *, const TQPoint &);
+    void modifyItem(TQListViewItem *);
+    void removeItem(TQListViewItem *);
     void removeCurrent();
     void modifyCurrent();
     void showNetDialog();
@@ -51,17 +51,17 @@ class NetConfig : public KSim::PluginPage
 
   private:
     // Couldnt think of a better name for this :)
-    const QString &boolToString(bool) const;
+    const TQString &boolToString(bool) const;
 
-    QHBoxLayout *layout;
-    QPushButton *insertButton;
-    QPushButton *removeButton;
-    QPushButton *modifyButton;
+    TQHBoxLayout *layout;
+    TQPushButton *insertButton;
+    TQPushButton *removeButton;
+    TQPushButton *modifyButton;
     KListView *usingBox;
     NetDialog *netDialog;
     Network::List m_networkList;
-    QString m_yes;
-    QString m_no;
-    QPopupMenu *aboutMenu;
+    TQString m_yes;
+    TQString m_no;
+    TQPopupMenu *aboutMenu;
 };
 #endif

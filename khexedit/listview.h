@@ -28,10 +28,10 @@ class CListView : public KListView
   Q_OBJECT
 
   public:
-    CListView( QWidget *parent=0, const char *name=0, int visibleItem=10 );
+    CListView( TQWidget *parent=0, const char *name=0, int visibleItem=10 );
     
     void setVisibleItem( int visibleItem, bool updateSize=true );
-    virtual QSize sizeHint( void ) const; 
+    virtual TQSize sizeHint( void ) const; 
 
   private:
     int mVisibleItem;

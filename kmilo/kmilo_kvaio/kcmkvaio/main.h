@@ -33,7 +33,7 @@ class KVaioModule : public KCModule
     Q_OBJECT
 
 public:
-    KVaioModule(QWidget *parent, const char *name, const QStringList &);
+    KVaioModule(TQWidget *parent, const char *name, const TQStringList &);
 
     void  save();
     void  load();
@@ -46,7 +46,7 @@ protected slots:
 private:
     KCMKVaioGeneral *mKVaioGeneral;
     KVaioDriverInterface *mDriver;
-    QTimer *mTimer;
+    TQTimer *mTimer;
     bool mDriverAvailable;
 };
 

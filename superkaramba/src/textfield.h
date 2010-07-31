@@ -10,9 +10,9 @@
 
 #ifndef TEXTFIELD_H
 #define TEXTFIELD_H
-#include <qstring.h>
-#include <qcolor.h>
-#include <qfont.h>
+#include <tqstring.h>
+#include <tqcolor.h>
+#include <tqfont.h>
 
 /**
  *
@@ -28,29 +28,29 @@ public:
     TextField& operator=(const TextField& );
 
     void setFontSize( int );
-    void setColor(QColor clr);
-    void setBGColor(QColor clr);
-    void setFont( const QString& );
+    void setColor(TQColor clr);
+    void setBGColor(TQColor clr);
+    void setFont( const TQString& );
     void setAlignment( int );
-    void setAlignment( const QString& );
+    void setAlignment( const TQString& );
     void setFixedPitch( bool );
     void setShadow( int );
 
     int getFontSize() const;
-    QColor getColor() const;
-    QColor getBGColor() const;
-    QString getFont() const;
+    TQColor getColor() const;
+    TQColor getBGColor() const;
+    TQString getFont() const;
     int getAlignment() const;
-    QString getAlignmentAsString() const;
+    TQString getAlignmentAsString() const;
     bool getFixedPitch() const;
     int getShadow() const;
     int getLineHeight() const;
 
 protected:
     int alignment;
-    QFont font;
-    QColor color;
-    QColor bgColor;
+    TQFont font;
+    TQColor color;
+    TQColor bgColor;
     int shadow;
     int lineHeight;
 

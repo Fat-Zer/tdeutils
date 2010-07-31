@@ -34,22 +34,22 @@ class popupPublic : public KDialogBase //QDialog
         Q_OBJECT
 public:
 
-        popupPublic(QWidget *parent=0, const char *name=0,QString sfile="",bool filemode=false,KShortcut goDefaultKey=QKeySequence(CTRL+Qt::Key_Home));
+        popupPublic(TQWidget *parent=0, const char *name=0,TQString sfile="",bool filemode=false,KShortcut goDefaultKey=TQKeySequence(CTRL+Qt::Key_Home));
 	~popupPublic();
         KListView *keysList;
-        QCheckBox *CBarmor,*CBuntrusted,*CBshred,*CBsymmetric,*CBhideid;
+        TQCheckBox *CBarmor,*CBuntrusted,*CBshred,*CBsymmetric,*CBhideid;
         bool fmode,trusted;
-        QPixmap keyPair,keySingle,keyGroup;
-        QString seclist;
-	QStringList untrustedList;
+        TQPixmap keyPair,keySingle,keyGroup;
+        TQString seclist;
+	TQStringList untrustedList;
 
 private:
         KConfig *config;
-        QButtonGroup *boutonboxoptions;
-        QString customOptions;
+        TQButtonGroup *boutonboxoptions;
+        TQString customOptions;
 
 private slots:
-        void customOpts(const QString &);
+        void customOpts(const TQString &);
         void slotprocread(KProcIO *);
         void slotpreselect();
         void refreshkeys();
@@ -67,7 +67,7 @@ protected slots:
 virtual void slotOk();
 	
 signals:
-        void selectedKey(QStringList ,QStringList,bool,bool);
+        void selectedKey(TQStringList ,TQStringList,bool,bool);
 	void keyListFilled();
 
 };

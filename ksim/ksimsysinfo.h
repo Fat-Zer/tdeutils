@@ -20,7 +20,7 @@
 #ifndef SYSINFO_H
 #define SYSINFO_H
 
-#include <qwidget.h>
+#include <tqwidget.h>
 #include <dcopobject.h>
 
 class QTimer;
@@ -31,19 +31,19 @@ namespace KSim
   class Label;
   class Progress;
 
-  class Sysinfo : public QWidget, virtual public DCOPObject
+  class Sysinfo : public TQWidget, virtual public DCOPObject
   {
     Q_OBJECT
     K_DCOP
     public:
-      Sysinfo(KSim::Config *config, QWidget *parent=0,
+      Sysinfo(KSim::Config *config, TQWidget *parent=0,
          const char *name=0, WFlags fl=0);
       ~Sysinfo();
 
     k_dcop:
-      QString uptime() const;
-      QString memInfo() const;
-      QString swapInfo() const;
+      TQString uptime() const;
+      TQString memInfo() const;
+      TQString swapInfo() const;
 
     public slots:
       void clockUptimeUpdate();
@@ -60,9 +60,9 @@ namespace KSim
       KSim::Progress *m_memLabel;
       KSim::Progress *m_swapLabel;
       //KSimLabel *m_procsLabel;
-      QVBoxLayout *m_layout;
-      QTimer *m_timer;
-      QTimer *m_sysTimer;
+      TQVBoxLayout *m_layout;
+      TQTimer *m_timer;
+      TQTimer *m_sysTimer;
       KSim::Config *m_config;
       long m_totalUptime;
   };

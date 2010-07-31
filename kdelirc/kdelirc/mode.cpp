@@ -16,11 +16,11 @@
 #include "modes.h"
 #include "mode.h"
 
-Mode::Mode() : theName(QString::null)
+Mode::Mode() : theName(TQString::null)
 {
 }
 
-Mode::Mode(const QString &remote, const QString &name, const QString &iconFile)
+Mode::Mode(const TQString &remote, const TQString &name, const TQString &iconFile)
 {
 	theRemote = remote;
 	theName = name;
@@ -33,17 +33,17 @@ Mode::~Mode()
 
 const Mode &Mode::loadFromConfig(KConfig &theConfig, int index)
 {
-	QString Prefix = "Mode" + QString().setNum(index);
+	TQString Prefix = "Mode" + TQString().setNum(index);
 	theName = theConfig.readEntry(Prefix + "Name");
 	theRemote = theConfig.readEntry(Prefix + "Remote");
 	theIconFile = theConfig.readEntry(Prefix + "IconFile");
-	if(theIconFile.isEmpty()) theIconFile = QString::null;
+	if(theIconFile.isEmpty()) theIconFile = TQString::null;
 	return *this;
 }
 
 void Mode::saveToConfig(KConfig &theConfig, int index)
 {
-	QString Prefix = "Mode" + QString().setNum(index);
+	TQString Prefix = "Mode" + TQString().setNum(index);
 	theConfig.writeEntry(Prefix + "Name", theName);
 	theConfig.writeEntry(Prefix + "Remote", theRemote);
 	theConfig.writeEntry(Prefix + "IconFile", theIconFile);

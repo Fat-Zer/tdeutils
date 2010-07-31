@@ -26,15 +26,15 @@
 
 #include "meter.h"
 #include <kpixmap.h>
-#include <qimage.h>
-#include <qpixmap.h>
-#include <qpainter.h>
-#include <qstring.h>
-#include <qstringlist.h>
+#include <tqimage.h>
+#include <tqpixmap.h>
+#include <tqpainter.h>
+#include <tqstring.h>
+#include <tqstringlist.h>
 #include <kurl.h>
 #include <kio/netaccess.h>
-#include <qregexp.h>
-#include <qtimer.h>
+#include <tqregexp.h>
+#include <tqtimer.h>
 #include "karamba.h"
 
 class ImageLabel;
@@ -78,7 +78,7 @@ private:
 class ChannelIntensity : public Effect
 {
 public:
-  ChannelIntensity(ImageLabel*, float r, QString c, int millisec);
+  ChannelIntensity(ImageLabel*, float r, TQString c, int millisec);
 
   KPixmap apply(KPixmap pixmap);
 
@@ -105,38 +105,38 @@ public:
   ImageLabel(karamba* k, int ix,int iy,int iw,int ih );
   ImageLabel(karamba* k);
   ~ImageLabel();
-  void setValue( QString imagePath );
+  void setValue( TQString imagePath );
 
   void setValue( long );
-  void setValue( QPixmap& );
-  QString getStringValue() { return imagePath; };
+  void setValue( TQPixmap& );
+  TQString getStringValue() { return imagePath; };
   void scale( int, int );
   void smoothScale( int, int );
 
   void rotate(int);
   void removeImageTransformations();
-  void mUpdate( QPainter * );
-  void mUpdate( QPainter *, int );
+  void mUpdate( TQPainter * );
+  void mUpdate( TQPainter *, int );
   
-  void rolloverImage(QMouseEvent *e);
-  void parseImages( QString fn, QString fn_roll, int, int, int, int );
+  void rolloverImage(TQMouseEvent *e);
+  void parseImages( TQString fn, TQString fn_roll, int, int, int, int );
   virtual void show();
   virtual void hide();
 
-  void setTooltip(QString txt);
+  void setTooltip(TQString txt);
   int cblend;
   int background;
   // Pixmap Effects
   void removeEffects();
   void intensity(float ratio, int millisec);
-  void channelIntensity(float ratio, QString channel, int millisec);
+  void channelIntensity(float ratio, TQString channel, int millisec);
   void toGray(int millisec);
   void setBackground(int b);
 
-  void attachClickArea(QString leftMouseButton, QString middleMouseButton,
-                       QString rightMouseButton);
+  void attachClickArea(TQString leftMouseButton, TQString middleMouseButton,
+                       TQString rightMouseButton);
 
-  virtual bool click(QMouseEvent*);
+  virtual bool click(TQMouseEvent*);
 
 private slots:
 
@@ -165,27 +165,27 @@ private:
   Effect* imageEffect;
 
   // Scale Matrix
-  //QWMatrix scaleMat;
+  //TQWMatrix scaleMat;
   int scale_w;
   int scale_h;
   // Rotation Matrix
-  //QWMatrix rotMat;
+  //TQWMatrix rotMat;
   int rot_angle;
 
   KPixmap pixmap;
   KPixmap realpixmap;
 
-  QRect rect_off, rect_on;
-  QRect old_tip_rect;
+  TQRect rect_off, rect_on;
+  TQRect old_tip_rect;
 
   bool zoomed;
-  //QString fn, fn_roll;
+  //TQString fn, fn_roll;
   bool rollover;
   KPixmap pixmap_off;
   KPixmap pixmap_on;
   int xoff,xon;
   int yoff,yon;
-  QString imagePath;
+  TQString imagePath;
 };
 
 #endif // IMAGELABEL_H

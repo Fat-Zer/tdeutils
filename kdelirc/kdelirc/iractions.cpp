@@ -28,11 +28,11 @@ void IRActions::purgeAllBindings(KConfig &theConfig)
 {
 	int numBindings = theConfig.readNumEntry("Bindings");
 	for(int i = 0; i < numBindings; i++)
-	{	QString Binding = "Binding" + QString().setNum(i);
+	{	TQString Binding = "Binding" + TQString().setNum(i);
 		int numArguments = theConfig.readNumEntry(Binding + "Arguments");
 		for(int j = 0; j < numArguments; j++)
-		{	theConfig.deleteEntry(Binding + "Argument" + QString().setNum(j));
-			theConfig.deleteEntry(Binding + "ArgumentType" + QString().setNum(j));
+		{	theConfig.deleteEntry(Binding + "Argument" + TQString().setNum(j));
+			theConfig.deleteEntry(Binding + "ArgumentType" + TQString().setNum(j));
 		}
 		theConfig.deleteEntry(Binding + "Arguments"); theConfig.deleteEntry(Binding + "Program");
 		theConfig.deleteEntry(Binding + "Object"); theConfig.deleteEntry(Binding + "Method");
@@ -55,7 +55,7 @@ IRAIt IRActions::addAction(const IRAction &theAction)
 	return append(theAction);
 }
 
-IRAItList IRActions::findByButton(const QString &remote, const QString &button)
+IRAItList IRActions::findByButton(const TQString &remote, const TQString &button)
 {
 	IRAItList ret;
 	for(iterator i = begin(); i != end(); ++i)
@@ -64,7 +64,7 @@ IRAItList IRActions::findByButton(const QString &remote, const QString &button)
 	return ret;
 }
 
-void IRActions::renameMode(const Mode &mode, const QString &to)
+void IRActions::renameMode(const Mode &mode, const TQString &to)
 {
 	for(iterator i = begin(); i != end(); ++i)
 	{	if((*i).remote() == mode.remote() && (*i).mode() == mode.name()) (*i).setMode(to);
@@ -80,7 +80,7 @@ IRAItList IRActions::findByMode(const Mode &mode)
 	return ret;
 }
 
-IRAItList IRActions::findByModeButton(const Mode &mode, const QString &button)
+IRAItList IRActions::findByModeButton(const Mode &mode, const TQString &button)
 {
 	IRAItList ret;
 	for(iterator i = begin(); i != end(); ++i)

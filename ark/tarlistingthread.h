@@ -22,9 +22,9 @@
 #ifndef TARLISTINGTHREAD_H
 #define TARLISTINGTHREAD_H
 
-#include <qthread.h>
-#include <qstringlist.h>
-#include <qevent.h>
+#include <tqthread.h>
+#include <tqstringlist.h>
+#include <tqevent.h>
 
 class QString;
 class KArchive;
@@ -33,31 +33,31 @@ class ListingEvent: public QCustomEvent
 {
 	public:
 		enum Status { Normal, Error, ListingFinished };
-		ListingEvent( const QStringList& data, Status st = Normal )
-			: QCustomEvent( 65442 ), m_data( data ), m_status( st ) {}
+		ListingEvent( const TQStringList& data, Status st = Normal )
+			: TQCustomEvent( 65442 ), m_data( data ), m_status( st ) {}
 		
-		const QStringList& columns() const { return m_data; }
+		const TQStringList& columns() const { return m_data; }
 		Status status() const { return m_status; }
 		
 	private:
-		QStringList m_data;
+		TQStringList m_data;
 		Status      m_status;
 };
 
 class TarListingThread: public QThread
 {
 	public:
-		TarListingThread( QObject *parent, const QString& filename );
+		TarListingThread( TQObject *parent, const TQString& filename );
 		~TarListingThread();
 	
 	protected:
 		void run();
 	
 	private:
-		void processDir( const KTarDirectory *tardir, const QString & root );
+		void processDir( const KTarDirectory *tardir, const TQString & root );
 		
 		KArchive *m_archive;
-		QObject  *m_parent;
+		TQObject  *m_parent;
 };
 
 #endif // TARLISTINGTHREAD_H

@@ -11,8 +11,8 @@
 #ifndef _KCMLIRC_H_
 #define _KCMLIRC_H_
 
-#include <qstringlist.h>
-#include <qmap.h>
+#include <tqstringlist.h>
+#include <tqmap.h>
 
 #include <kcmodule.h>
 
@@ -37,16 +37,16 @@ private:
 	KCMLircBase *theKCMLircBase;
 	IRActions allActions;
 	Modes allModes;
-	QMap<QListViewItem *, IRAIt > actionMap;
-	QMap<QListViewItem *, Mode> modeMap;
-	QMap<QListViewItem *, QString> profileMap, remoteMap;
+	TQMap<TQListViewItem *, IRAIt > actionMap;
+	TQMap<TQListViewItem *, Mode> modeMap;
+	TQMap<TQListViewItem *, TQString> profileMap, remoteMap;
 
-	void autoPopulate(const Profile &profile, const Remote &remote, const QString &mode);
+	void autoPopulate(const Profile &profile, const Remote &remote, const TQString &mode);
 
 public slots:
 	void updateActions();
-	void updateModesStatus(QListViewItem *);
-	void updateActionsStatus(QListViewItem *);
+	void updateModesStatus(TQListViewItem *);
+	void updateActionsStatus(TQListViewItem *);
 	void updateModes();
 	void updateExtensions();
 	void updateInformation();
@@ -57,8 +57,8 @@ public slots:
 	void slotAddActions();
 	void slotEditAction();
 	void slotRemoveAction();
-	void slotDrop(KListView *, QDropEvent *, QListViewItem *, QListViewItem *after);
-	void slotRenamed(QListViewItem *item);
+	void slotDrop(KListView *, TQDropEvent *, TQListViewItem *, TQListViewItem *after);
+	void slotRenamed(TQListViewItem *item);
 	void slotEditMode();
 
 
@@ -66,9 +66,9 @@ public slots:
 k_dcop:
 // MOC_SKIP_END
 	// now just used as a proxy to AddAction class
-	virtual void gotButton(QString remote, QString button);
+	virtual void gotButton(TQString remote, TQString button);
 signals:
-	void haveButton(const QString &remote, const QString &button);
+	void haveButton(const TQString &remote, const TQString &button);
 
 public:
 	virtual void load();
@@ -76,7 +76,7 @@ public:
 	virtual void defaults();
 	virtual void configChanged();
 
-	KCMLirc(QWidget *parent = 0, const char *name = 0, QStringList args = QStringList());
+	KCMLirc(TQWidget *parent = 0, const char *name = 0, TQStringList args = TQStringList());
 	~KCMLirc();
 };
 

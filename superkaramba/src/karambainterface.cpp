@@ -11,7 +11,7 @@
 #include "karamba.h"
 #include "karambainterface.h"
 #include <kdebug.h>
-#include "qwidgetlist.h"
+#include "tqwidgetlist.h"
 #include "themesdlg.h"
 
 KarambaIface::KarambaIface(): DCOPObject("KarambaIface")
@@ -22,17 +22,17 @@ KarambaIface::~KarambaIface()
 {
 }
 
-karamba* KarambaIface::getKaramba(QString name)
+karamba* KarambaIface::getKaramba(TQString name)
 {
-  QWidgetList *list = QApplication::allWidgets();
-  QWidgetListIt it(*list);  // iterate over the widgets
-  QWidget* w;
+  TQWidgetList *list = TQApplication::allWidgets();
+  TQWidgetListIt it(*list);  // iterate over the widgets
+  TQWidget* w;
   karamba* result = 0;
 
   while ( (w=it.current()) != 0 )  // for each widget...
   {
     ++it;
-    if (QString(w->name()).startsWith("karamba"))
+    if (TQString(w->name()).startsWith("karamba"))
     {
       karamba* k = (karamba*) w;
       //if(k->prettyName == name)
@@ -49,15 +49,15 @@ karamba* KarambaIface::getKaramba(QString name)
 
 ThemesDlg* KarambaIface::getThemeWnd()
 {
-  QWidgetList  *list = QApplication::allWidgets();
-  QWidgetListIt it( *list );         // iterate over the widgets
-  QWidget* w;
+  TQWidgetList  *list = TQApplication::allWidgets();
+  TQWidgetListIt it( *list );         // iterate over the widgets
+  TQWidget* w;
   ThemesDlg* result = 0;
 
   while ( (w=it.current()) != 0 ) // for each widget...
   {
     ++it;
-    if (QString(w->name()) == "ThemesLayout")
+    if (TQString(w->name()) == "ThemesLayout")
     {
       result = (ThemesDlg*) w;
       break;
@@ -67,25 +67,25 @@ ThemesDlg* KarambaIface::getThemeWnd()
   return result;
 }
 
-void KarambaIface::openTheme(QString filename)
+void KarambaIface::openTheme(TQString filename)
 {
-  QFileInfo file(filename);
+  TQFileInfo file(filename);
   if(file.exists())
   {
-    (new karamba(filename, QString()))->show();
+    (new karamba(filename, TQString()))->show();
   }
 }
 
-void KarambaIface::openNamedTheme(QString filename, QString name, bool is_sub_theme)
+void KarambaIface::openNamedTheme(TQString filename, TQString name, bool is_sub_theme)
 {
-	QFileInfo file(filename);
+	TQFileInfo file(filename);
 	if(file.exists())
 	{
 		(new karamba(filename, name, false, -1, is_sub_theme))->show();
 	}
 }
 
-void KarambaIface::closeTheme(QString name)
+void KarambaIface::closeTheme(TQString name)
 {
   kdDebug() << "KarambaIface::closeTheme: " << name << endl;
   karamba* k;
@@ -97,7 +97,7 @@ void KarambaIface::closeTheme(QString name)
   }
 }
 
-int KarambaIface::themeAdded(QString appId, QString file)
+int KarambaIface::themeAdded(TQString appId, TQString file)
 {
   ThemesDlg* tw = getThemeWnd();
   if(tw)
@@ -105,7 +105,7 @@ int KarambaIface::themeAdded(QString appId, QString file)
   return -1;
 }
 
-void KarambaIface::themeNotify(QString name, QString text)
+void KarambaIface::themeNotify(TQString name, TQString text)
 {
   karamba* k = getKaramba(name);
   if(k)
@@ -114,7 +114,7 @@ void KarambaIface::themeNotify(QString name, QString text)
   }
 }
 
-void KarambaIface::setIncomingData(QString name, QString text)
+void KarambaIface::setIncomingData(TQString name, TQString text)
 {
   karamba* k = getKaramba(name);
   if(k)
@@ -123,7 +123,7 @@ void KarambaIface::setIncomingData(QString name, QString text)
   }
 }
 
-void KarambaIface::themeClosed(QString appId, QString file, int instance)
+void KarambaIface::themeClosed(TQString appId, TQString file, int instance)
 {
   ThemesDlg* tw = getThemeWnd();
   if(tw)

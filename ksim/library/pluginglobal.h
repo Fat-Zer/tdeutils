@@ -20,9 +20,9 @@
 #ifndef PLUGINGLOBAL_H
 #define PLUGINGLOBAL_H
 
-#include <qstring.h>
-#include <qpixmap.h>
-#include <qvaluelist.h>
+#include <tqstring.h>
+#include <tqpixmap.h>
+#include <tqvaluelist.h>
 
 #include <kdemacros.h>
 
@@ -93,19 +93,19 @@ namespace KSim
        * @return the name of the plugin, NOT the library name
        * @see #libName
        */
-      const QString &name() const;
+      const TQString &name() const;
       /**
        * @return the icon of the plugin
        */
-      QPixmap icon() const;
+      TQPixmap icon() const;
       /**
        * @return library name of the plugin
        */
-      QCString libName() const;
+      TQCString libName() const;
       /**
        * @return path to the .desktop file
        */
-      const QString &fileName() const;
+      const TQString &fileName() const;
       /**
        * @return the plugin object
        */
@@ -135,22 +135,22 @@ namespace KSim
    * use pluginList() from KSim::PluginLoader instead
    * @author Robbie Ward <linuxphreak@gmx.co.uk>
    */
-  class KDE_EXPORT PluginList : public QValueList<Plugin>
+  class KDE_EXPORT PluginList : public TQValueList<Plugin>
   {
     public:
       /**
        * constructs a null list
        */
-      PluginList() : QValueList<Plugin>() {}
+      PluginList() : TQValueList<Plugin>() {}
       /**
        * constructs a copy of @p list
        */
-      PluginList(const PluginList &list) : QValueList<Plugin>(list) {}
+      PluginList(const PluginList &list) : TQValueList<Plugin>(list) {}
       /**
        * constructs a copy of @p list
        */
-      PluginList(const QValueList<Plugin> &list)
-             : QValueList<Plugin>(list) {}
+      PluginList(const TQValueList<Plugin> &list)
+             : TQValueList<Plugin>(list) {}
       /**
        * constructs a list with just one item
        */

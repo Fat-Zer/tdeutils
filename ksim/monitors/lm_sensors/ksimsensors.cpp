@@ -27,7 +27,7 @@
 #include <kaboutdata.h>
 #include <kconfig.h>
 
-#include <qlayout.h>
+#include <tqlayout.h>
 
 #include <label.h>
 #include <themetypes.h>
@@ -58,7 +58,7 @@ KSim::PluginPage *PluginModule::createConfigPage(const char *className)
 
 void PluginModule::showAbout()  
 {
-  QString version = kapp->aboutData()->version();
+  TQString version = kapp->aboutData()->version();
 
   KAboutData aboutData(instanceName(),
      I18N_NOOP("KSim Sensors Plugin"), version.latin1(),
@@ -75,10 +75,10 @@ SensorsView::SensorsView(KSim::PluginObject *parent, const char *name)
    : DCOPObject("sensors"), KSim::PluginView(parent, name)
 {
   config()->setGroup("Sensors");
-  (new QVBoxLayout(this))->setAutoAdd(true);
+  (new TQVBoxLayout(this))->setAutoAdd(true);
 
-  connect(SensorBase::self(), SIGNAL(updateSensors(const SensorList &)),
-     this, SLOT(updateSensors(const SensorList &)));
+  connect(SensorBase::self(), TQT_SIGNAL(updateSensors(const SensorList &)),
+     this, TQT_SLOT(updateSensors(const SensorList &)));
 
   insertSensors();
 }
@@ -95,8 +95,8 @@ void SensorsView::reparseConfig()
   SensorBase::self()->setDisplayFahrenheit(displayFahrenheit);
   SensorBase::self()->setUpdateSpeed(updateVal * 1000);
 
-  QString label;
-  QStringList names;
+  TQString label;
+  TQStringList names;
   SensorItemList sensorItemList;
   const SensorList &list = SensorBase::self()->sensorsList();
 
@@ -104,7 +104,7 @@ void SensorsView::reparseConfig()
   for (it = list.begin(); it != list.end(); ++it) {
     config()->setGroup("Sensors");
     label = (*it).sensorType() + "/" + (*it).sensorName();
-    names = QStringList::split(':', config()->readEntry(label));
+    names = TQStringList::split(':', config()->readEntry(label));
     if (names[0] == "1")
       sensorItemList.append(SensorItem((*it).sensorId(), names[1]));
   }
@@ -122,8 +122,8 @@ void SensorsView::insertSensors(bool createList)
   const SensorList &list = SensorBase::self()->sensorsList();
 
   if (createList) {
-    QString label;
-    QStringList names;
+    TQString label;
+    TQStringList names;
 
     config()->setGroup("Sensors");
     bool displayFahrenheit = config()->readBoolEntry("displayFahrenheit", false);
@@ -134,7 +134,7 @@ void SensorsView::insertSensors(bool createList)
     SensorList::ConstIterator it;
     for (it = list.begin(); it != list.end(); ++it) {
       label = (*it).sensorType() + "/" + (*it).sensorName();
-      names = QStringList::split(':', config()->readEntry(label));
+      names = TQStringList::split(':', config()->readEntry(label));
       if (names[0] == "1")
         m_sensorItemList.append(SensorItem((*it).sensorId(), names[1]));
     }
@@ -167,12 +167,12 @@ void SensorsView::updateSensors(const SensorList &sensorList)
   }
 }
 
-QString SensorsView::sensorValue(const QString &sensor,
-    const QString &label1)
+TQString SensorsView::sensorValue(const TQString &sensor,
+    const TQString &label1)
 {
   const SensorList &list = SensorBase::self()->sensorsList();
   config()->setGroup("Sensors");
-  QStringList names = QStringList::split(':',
+  TQStringList names = TQStringList::split(':',
      config()->readEntry(sensor + "/" + label1));
 
   if (names[0] == "0" || list.isEmpty())
@@ -181,7 +181,7 @@ QString SensorsView::sensorValue(const QString &sensor,
   SensorList::ConstIterator it;
   for (it = list.begin(); it != list.end(); ++it) {
     if (sensor == (*it).sensorType() && label1 == (*it).sensorName()) {
-      return names[1] + QString(": ") + (*it).sensorValue() + (*it).sensorUnit();
+      return names[1] + TQString(": ") + (*it).sensorValue() + (*it).sensorUnit();
     }
   }
 

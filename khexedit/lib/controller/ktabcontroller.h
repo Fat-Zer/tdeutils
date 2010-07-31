@@ -32,7 +32,7 @@ class KTabController : public KController
     KTabController( KHexEdit *HE, KController *P );
 
   public: // API
-    virtual bool handleKeyPress( QKeyEvent *KeyEvent );
+    virtual bool handleKeyPress( TQKeyEvent *KeyEvent );
 
   public:
     bool tabChangesFocus() const;

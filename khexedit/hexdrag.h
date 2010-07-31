@@ -22,31 +22,31 @@
 #define _HEX_DRAG_H_
 
 
-#include <qdragobject.h>
-#include <qstring.h>
+#include <tqdragobject.h>
+#include <tqstring.h>
 
 class CHexDrag : public QDragObject
 {
   Q_OBJECT
 
   public:
-    CHexDrag( const QByteArray &data, QWidget *dragSource = 0, 
+    CHexDrag( const TQByteArray &data, TQWidget *dragSource = 0, 
 	      const char *name = 0 );
-    CHexDrag( QWidget *dragSource = 0, const char *name = 0 );
+    CHexDrag( TQWidget *dragSource = 0, const char *name = 0 );
 
-    void setData( const QByteArray &data );
+    void setData( const TQByteArray &data );
     const char* format ( int i ) const; 
-    QByteArray encodedData( const char *fmt ) const;
+    TQByteArray encodedData( const char *fmt ) const;
 
 
-    static bool canDecode( const QMimeSource *e );  
-    static bool decode( const QMimeSource *e, QByteArray &dest );  
+    static bool canDecode( const TQMimeSource *e );  
+    static bool decode( const TQMimeSource *e, TQByteArray &dest );  
 
   private:
     void prepPixmap( void );
 
   private:
-    QByteArray mData;
+    TQByteArray mData;
 
 };
 

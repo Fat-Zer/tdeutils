@@ -21,8 +21,8 @@
 #include <kdebug.h>
 #include <kglobalsettings.h>
 
-KWidgetListbox::KWidgetListbox(QWidget *parent, const char *name)
- : QTable(parent, name)
+KWidgetListbox::KWidgetListbox(TQWidget *parent, const char *name)
+ : TQTable(parent, name)
 {
   setNumRows(0);
   setNumCols(1);
@@ -31,12 +31,12 @@ KWidgetListbox::KWidgetListbox(QWidget *parent, const char *name)
   setTopMargin(0);
   horizontalHeader()->hide();
   verticalHeader()->hide();
-  setSelectionMode(QTable::NoSelection);
-  setFocusStyle(QTable::FollowStyle);
-  connect(this, SIGNAL(currentChanged(int, int)),
-          this, SLOT(selectionChanged(int, int)));
-  setHScrollBarMode(QScrollView::AlwaysOff);
-  setVScrollBarMode(QScrollView::Auto);
+  setSelectionMode(TQTable::NoSelection);
+  setFocusStyle(TQTable::FollowStyle);
+  connect(this, TQT_SIGNAL(currentChanged(int, int)),
+          this, TQT_SLOT(selectionChanged(int, int)));
+  setHScrollBarMode(TQScrollView::AlwaysOff);
+  setVScrollBarMode(TQScrollView::Auto);
 }
 
 KWidgetListbox::~KWidgetListbox()
@@ -51,7 +51,7 @@ void KWidgetListbox::clear()
   setNumRows(0);
 }
 
-int KWidgetListbox::insertItem(QWidget* item, int index)
+int KWidgetListbox::insertItem(TQWidget* item, int index)
 {
   int row;
 
@@ -69,7 +69,7 @@ int KWidgetListbox::insertItem(QWidget* item, int index)
   return row;
 }
 
-void KWidgetListbox::setSelected(QWidget* item)
+void KWidgetListbox::setSelected(TQWidget* item)
 {
   setSelected(index(item));
 }
@@ -81,7 +81,7 @@ void KWidgetListbox::selectionChanged(int row, int col)
   emit selected(row);
 }
 
-void KWidgetListbox::removeItem(QWidget* item)
+void KWidgetListbox::removeItem(TQWidget* item)
 {
   removeItem(index(item));
 }
@@ -102,17 +102,17 @@ int KWidgetListbox::selected() const
   return currentRow();
 }
 
-QWidget* KWidgetListbox::selectedItem() const
+TQWidget* KWidgetListbox::selectedItem() const
 {
   return item(selected());
 }
 
-QWidget* KWidgetListbox::item(int index) const
+TQWidget* KWidgetListbox::item(int index) const
 {
   return cellWidget(index, 0);
 }
 
-int KWidgetListbox::index(QWidget* itm) const
+int KWidgetListbox::index(TQWidget* itm) const
 {
   for(int i = 0; i < numRows(); ++i)
     if(item(i) == itm)
@@ -148,7 +148,7 @@ void KWidgetListbox::updateColors()
 
 void KWidgetListbox::setItemColors(int index, bool even)
 {
-  QWidget* itm = item(index);
+  TQWidget* itm = item(index);
 
   if(index == selected())
   {
@@ -185,14 +185,14 @@ void KWidgetListbox::showItems(show_callback func, void* data)
   updateColors();
 }
 
-void KWidgetListbox::showEvent(QShowEvent*)
+void KWidgetListbox::showEvent(TQShowEvent*)
 {
   //kdDebug() << k_funcinfo << endl;
   repaintContents(false);
 }
 
-void KWidgetListbox::paintCell(QPainter*, int, int, const QRect&,
-                               bool, const QColorGroup&)
+void KWidgetListbox::paintCell(TQPainter*, int, int, const TQRect&,
+                               bool, const TQColorGroup&)
 {
   //kdDebug() << k_funcinfo << endl;
 }

@@ -21,9 +21,9 @@
 using namespace KHE;
 
 
-static const QChar BigDigit[16] =
+static const TQChar BigDigit[16] =
 { '0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F' };
-static const QChar SmallDigit[16] =
+static const TQChar SmallDigit[16] =
 { '0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f' };
 
 
@@ -39,13 +39,13 @@ bool KHexadecimalByteCodec::setSmallDigits( bool S )
 bool KHexadecimalByteCodec::smallDigits() const { return Digit != BigDigit; }
 
 
-void KHexadecimalByteCodec::encode( QString &Digits, unsigned int Pos, unsigned char Char ) const
+void KHexadecimalByteCodec::encode( TQString &Digits, unsigned int Pos, unsigned char Char ) const
 {
   Digits.at(Pos++) = Digit[Char>>4];
   Digits.at(Pos) = Digit[Char&0x0F];
 }
 
-void KHexadecimalByteCodec::encodeShort( QString &Digits, unsigned int Pos, unsigned char Char ) const
+void KHexadecimalByteCodec::encodeShort( TQString &Digits, unsigned int Pos, unsigned char Char ) const
 {
   unsigned char C;
   if( (C = (Char>>4)) )

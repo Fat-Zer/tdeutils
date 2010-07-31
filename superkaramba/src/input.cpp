@@ -24,7 +24,7 @@
 Input::Input(karamba* k, int x, int y, int w, int h):
   Meter(k, x, y, w, h)
 {
-  edit = new SKLineEdit((QWidget*)k, this);
+  edit = new SKLineEdit((TQWidget*)k, this);
   edit->setGeometry(x,y,w,h);
 }
 
@@ -33,38 +33,38 @@ Input::~Input()
   delete edit;
 }
 
-void Input::mUpdate(QPainter*)
+void Input::mUpdate(TQPainter*)
 {
   edit->repaint();
 }
 
-void Input::setValue(QString text)
+void Input::setValue(TQString text)
 {
   edit->setText(text);
 }
 
-QString Input::getStringValue() const
+TQString Input::getStringValue() const
 {
   return edit->text();
 }
 
-void Input::setBGColor(QColor c)
+void Input::setBGColor(TQColor c)
 {
   edit->setBackgroundColor(c);
 }
 
-void Input::setColor(QColor c)
+void Input::setColor(TQColor c)
 {
   Meter::setColor(c);
   edit->setFrameColor(c);
 }
 
-QColor Input::getBGColor() const
+TQColor Input::getBGColor() const
 {
   return edit->backgroundColor();
 }
 
-QColor Input::getColor() const
+TQColor Input::getColor() const
 {
   return edit->getFrameColor();
 }
@@ -111,53 +111,53 @@ void Input::setHeight(int ih)
   edit->setGeometry(getX(), getY(), getWidth(), ih);
 }
 
-void Input::setFont(QString f)
+void Input::setFont(TQString f)
 {
   font.setFamily(f);
   edit->setFont(font);
 }
 
-QString Input::getFont() const
+TQString Input::getFont() const
 {
   return font.family();
 }
 
-void Input::setFontColor(QColor fontColor)
+void Input::setFontColor(TQColor fontColor)
 {
-  QPalette palette = edit->palette();
-  palette.setColor(QColorGroup::Text, fontColor);
+  TQPalette palette = edit->palette();
+  palette.setColor(TQColorGroup::Text, fontColor);
   edit->setPalette(palette);
 }
 
-QColor Input::getFontColor() const
+TQColor Input::getFontColor() const
 {
-  const QColorGroup &color = edit->colorGroup();
+  const TQColorGroup &color = edit->colorGroup();
   return color.text();
 }
 
-void Input::setSelectionColor(QColor selectionColor)
+void Input::setSelectionColor(TQColor selectionColor)
 {
-  QPalette palette = edit->palette();
-  palette.setColor(QColorGroup::Highlight, selectionColor);
+  TQPalette palette = edit->palette();
+  palette.setColor(TQColorGroup::Highlight, selectionColor);
   edit->setPalette(palette);
 }
 
-QColor Input::getSelectionColor() const
+TQColor Input::getSelectionColor() const
 {
-  const QColorGroup &color = edit->colorGroup();
+  const TQColorGroup &color = edit->colorGroup();
   return color.highlight();
 }
 
-void Input::setSelectedTextColor(QColor selectedTextColor)
+void Input::setSelectedTextColor(TQColor selectedTextColor)
 {
-  QPalette palette = edit->palette();
-  palette.setColor(QColorGroup::HighlightedText, selectedTextColor);
+  TQPalette palette = edit->palette();
+  palette.setColor(TQColorGroup::HighlightedText, selectedTextColor);
   edit->setPalette(palette);
 }
 
-QColor Input::getSelectedTextColor() const
+TQColor Input::getSelectedTextColor() const
 {
-  const QColorGroup &color = edit->colorGroup();
+  const TQColorGroup &color = edit->colorGroup();
   return color.highlightedText();
 }
 

@@ -32,7 +32,7 @@ class KController
     KController( KHexEdit *HE, KController *P );
 
   public: // KController API
-    virtual bool handleKeyPress( QKeyEvent *KeyEvent );
+    virtual bool handleKeyPress( TQKeyEvent *KeyEvent );
 
   protected:
     KController *Parent;

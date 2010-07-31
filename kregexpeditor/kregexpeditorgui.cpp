@@ -29,24 +29,24 @@
 // #include <unistd.h> // DO I need this?
 #include <stdio.h>
 #include "kregexpeditorprivate.h"
-#include <qlayout.h>
+#include <tqlayout.h>
 
-const QString KRegExpEditorGUI::version = QString::fromLocal8Bit("1.0");
+const TQString KRegExpEditorGUI::version = TQString::fromLocal8Bit("1.0");
 
 
-KRegExpEditorGUI::KRegExpEditorGUI(QWidget *parent, const char *name,
-	                           const QStringList & )
-  : QWidget( parent, name)
+KRegExpEditorGUI::KRegExpEditorGUI(TQWidget *parent, const char *name,
+	                           const TQStringList & )
+  : TQWidget( parent, name)
 {
-  QHBoxLayout* layout = new QHBoxLayout( this, 6 );
+  TQHBoxLayout* layout = new TQHBoxLayout( this, 6 );
   _editor = new KRegExpEditorPrivate( this, "_editor" );
   layout->addWidget( _editor );
-  connect( _editor, SIGNAL( canUndo(bool) ), this, SIGNAL( canUndo(bool) ) );
-  connect( _editor, SIGNAL( canRedo(bool) ), this, SIGNAL( canRedo(bool) ) );
-  connect( _editor, SIGNAL( changes(bool) ), this, SIGNAL( changes(bool) ) );
+  connect( _editor, TQT_SIGNAL( canUndo(bool) ), this, TQT_SIGNAL( canUndo(bool) ) );
+  connect( _editor, TQT_SIGNAL( canRedo(bool) ), this, TQT_SIGNAL( canRedo(bool) ) );
+  connect( _editor, TQT_SIGNAL( changes(bool) ), this, TQT_SIGNAL( changes(bool) ) );
 }
 
-QString KRegExpEditorGUI::regExp() const
+TQString KRegExpEditorGUI::regExp() const
 {
   return _editor->regexp();
 }
@@ -61,41 +61,41 @@ void KRegExpEditorGUI::undo()
   _editor->slotUndo();
 }
 
-void KRegExpEditorGUI::setRegExp( const QString &regexp )
+void KRegExpEditorGUI::setRegExp( const TQString &regexp )
 {
   _editor->slotSetRegexp( regexp );
 }
 
-KRegExpEditorGUIDialog::KRegExpEditorGUIDialog( QWidget *parent,
+KRegExpEditorGUIDialog::KRegExpEditorGUIDialog( TQWidget *parent,
                                                 const char *name,
-                                                const QStringList & )
+                                                const TQStringList & )
   : KDialogBase( KDialogBase::Plain, i18n("Regular Expression Editor"),
                  KDialogBase::Ok | KDialogBase::Cancel | KDialogBase::Help, KDialogBase::Ok,
                  parent, name ? name : "KRegExpDialog" )
 {
-  QFrame* frame = plainPage();
-  QVBoxLayout* layout = new QVBoxLayout( frame, 6 );
+  TQFrame* frame = plainPage();
+  TQVBoxLayout* layout = new TQVBoxLayout( frame, 6 );
   layout->setAutoAdd( true );
   _editor = new KRegExpEditorGUI( frame );
 
-  connect( _editor, SIGNAL( canUndo(bool) ), this, SIGNAL( canUndo(bool) ) );
-  connect( _editor, SIGNAL( canRedo(bool) ), this, SIGNAL( canRedo(bool) ) );
-  connect( _editor, SIGNAL( changes(bool) ), this, SIGNAL( changes(bool) ) );
+  connect( _editor, TQT_SIGNAL( canUndo(bool) ), this, TQT_SIGNAL( canUndo(bool) ) );
+  connect( _editor, TQT_SIGNAL( canRedo(bool) ), this, TQT_SIGNAL( canRedo(bool) ) );
+  connect( _editor, TQT_SIGNAL( changes(bool) ), this, TQT_SIGNAL( changes(bool) ) );
   resize( 640, 400 );
 
-  setHelp( QString::null, QString::fromLocal8Bit( "KRegExpEditor" ) );
+  setHelp( TQString::null, TQString::fromLocal8Bit( "KRegExpEditor" ) );
 #ifdef QT_ONLY
-  connect( this, SIGNAL( helpClicked() ), _editor, SLOT( showHelp() ) );
+  connect( this, TQT_SIGNAL( helpClicked() ), _editor, TQT_SLOT( showHelp() ) );
 #endif
 }
 
 
-QString KRegExpEditorGUIDialog::regExp() const
+TQString KRegExpEditorGUIDialog::regExp() const
 {
     return _editor->regExp();
 }
 
-void KRegExpEditorGUIDialog::setRegExp( const QString &regexp )
+void KRegExpEditorGUIDialog::setRegExp( const TQString &regexp )
 {
     _editor->setRegExp( regexp );
 }
@@ -110,23 +110,23 @@ void KRegExpEditorGUIDialog::undo()
   _editor->undo();
 }
 
-void KRegExpEditorGUIDialog::doSomething( QString method, void* arguments )
+void KRegExpEditorGUIDialog::doSomething( TQString method, void* arguments )
 {
     _editor->doSomething( method, arguments );
 }
 
-void KRegExpEditorGUI::doSomething( QString method, void* arguments )
+void KRegExpEditorGUI::doSomething( TQString method, void* arguments )
 {
-    if ( method == QString::fromLatin1( "setCaseSensitive" ) ) {
+    if ( method == TQString::fromLatin1( "setCaseSensitive" ) ) {
         _editor->setCaseSensitive( (bool) arguments );
     }
-    else if ( method == QString::fromLatin1("setMinimal") ) {
+    else if ( method == TQString::fromLatin1("setMinimal") ) {
         _editor->setMinimal( (bool) arguments );
     }
-    else if ( method == QString::fromLatin1("setSyntax") ) {
-        _editor->setSyntax( *((QString*) arguments) );
+    else if ( method == TQString::fromLatin1("setSyntax") ) {
+        _editor->setSyntax( *((TQString*) arguments) );
     }
-    else if ( method == QString::fromLatin1("setAllowNonQtSyntax") ) {
+    else if ( method == TQString::fromLatin1("setAllowNonQtSyntax") ) {
         _editor->setAllowNonQtSyntax( (bool) arguments );
     }
     else {
@@ -134,12 +134,12 @@ void KRegExpEditorGUI::doSomething( QString method, void* arguments )
     }
 }
 
-void KRegExpEditorGUIDialog::setMatchText( const QString& txt )
+void KRegExpEditorGUIDialog::setMatchText( const TQString& txt )
 {
     _editor->setMatchText( txt );
 }
 
-void KRegExpEditorGUI::setMatchText( const QString& txt )
+void KRegExpEditorGUI::setMatchText( const TQString& txt )
 {
     _editor->setMatchText( txt );
 }
@@ -150,7 +150,7 @@ void KRegExpEditorGUI::showHelp()
 #ifdef QT_ONLY
     _editor->showHelp();
 #else
-    kapp->invokeHelp( QString::null, QString::fromLocal8Bit( "KRegExpEditor" ) );
+    kapp->invokeHelp( TQString::null, TQString::fromLocal8Bit( "KRegExpEditor" ) );
 #endif
 }
 

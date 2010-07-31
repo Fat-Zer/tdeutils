@@ -33,16 +33,16 @@
 #include "debug.h"
 #include "zip.moc"
 
-#include <qcheckbox.h>
-#include <qlayout.h>
-#include <qtimer.h>
-#include <qwhatsthis.h>
+#include <tqcheckbox.h>
+#include <tqlayout.h>
+#include <tqtimer.h>
+#include <tqwhatsthis.h>
 
 #include <klocale.h>
 #include <kprocess.h>
 #include <kconfig.h>
 
-ZipFormat::ZipFormat(QWidget *w,const char *n) :
+ZipFormat::ZipFormat(TQWidget *w,const char *n) :
 	DiskFormat(w,n),
 	zeroWholeDisk(0L),
 	p(0L),
@@ -51,15 +51,15 @@ ZipFormat::ZipFormat(QWidget *w,const char *n) :
 {
 	DEBUGSETUP;
 
-	QGridLayout *grid = new QGridLayout(this,1,1,10);
+	TQGridLayout *grid = new TQGridLayout(this,1,1,10);
 
-	zeroWholeDisk = new QCheckBox(i18n("Zero entire disk"),this);
-	QWhatsThis::add(zeroWholeDisk,
+	zeroWholeDisk = new TQCheckBox(i18n("Zero entire disk"),this);
+	TQWhatsThis::add(zeroWholeDisk,
 		i18n("Try to write zeroes to the entire disk "
 			"before adding a filesystem, in order "
 			"to check the disk's integrity."));
 	grid->addWidget(zeroWholeDisk,0,0);
-	enableSoftUpdates = new QCheckBox(i18n("Enable softupdates"),this);
+	enableSoftUpdates = new TQCheckBox(i18n("Enable softupdates"),this);
 	grid->addWidget(enableSoftUpdates,1,0);
 
 	// Remember the stretch at the bottom to clear
@@ -90,8 +90,8 @@ FilesystemList ZipFormat::FSLabels() const
 	return !newfs.isEmpty() && !dd.isEmpty();
 }
 
-/* static */ QString ZipFormat::dd;
-/* static */ QString ZipFormat::newfs;
+/* static */ TQString ZipFormat::dd;
+/* static */ TQString ZipFormat::newfs;
 
 /* virtual slot */ void ZipFormat::setEnabled(bool b)
 {
@@ -141,16 +141,16 @@ void ZipFormat::quit()
 	p = new KProcess();
 
 	if (statusTimer) delete statusTimer;
-	statusTimer = new QTimer(this);
+	statusTimer = new TQTimer(this);
 
-	connect(p,SIGNAL(processExited(KProcess *)),
-		this,SLOT(transition()));
-	connect(p,SIGNAL(receivedStdout(KProcess *,char *,int)),
-		this,SLOT(processResult(KProcess *,char *,int)));
-	connect(p,SIGNAL(receivedStderr(KProcess *,char *,int)),
-		this,SLOT(processResult(KProcess *,char *,int)));
-	connect(statusTimer,SIGNAL(timeout()),
-		this,SLOT(statusRequest()));
+	connect(p,TQT_SIGNAL(processExited(KProcess *)),
+		this,TQT_SLOT(transition()));
+	connect(p,TQT_SIGNAL(receivedStdout(KProcess *,char *,int)),
+		this,TQT_SLOT(processResult(KProcess *,char *,int)));
+	connect(p,TQT_SIGNAL(receivedStderr(KProcess *,char *,int)),
+		this,TQT_SLOT(processResult(KProcess *,char *,int)));
+	connect(statusTimer,TQT_SIGNAL(timeout()),
+		this,TQT_SLOT(statusRequest()));
 
 	transition();
 }
@@ -173,8 +173,8 @@ void ZipFormat::transition()
 			// Zeroing whole disk takes about 2 min.
 			// No point in making a dizzy display of it.
 			statusTimer->start(10000);
-			QTimer::singleShot(1000,this,
-				SLOT(statusRequest()));
+			TQTimer::singleShot(1000,this,
+				TQT_SLOT(statusRequest()));
 			totalBlocks=12288; // 196608 * 512b = 12288 * 8192b ;
 		}
 		else
@@ -188,7 +188,7 @@ void ZipFormat::transition()
 			<< "if=/dev/zero"
 			<< "of=/dev/afd0c"
 			<< "bs=8192" ;
-		*p << QString("count=%1").arg(totalBlocks);
+		*p << TQString("count=%1").arg(totalBlocks);
 		if (!p->start(KProcess::NotifyOnExit,KProcess::AllOutput))
 		{
 			emit statusMessage(i18n("Cannot start dd to zero disk."));
@@ -250,8 +250,8 @@ void ZipFormat::processResult(KProcess *, char *b, int l)
 	DEBUGSETUP;
 
 #ifdef DEBUG
-	QString o = QString::fromLatin1(b,l);
-	DEBUGS(QString("  %1").arg(o).latin1());
+	TQString o = TQString::fromLatin1(b,l);
+	DEBUGS(TQString("  %1").arg(o).latin1());
 #endif
 
 	switch(formatStep)
@@ -283,7 +283,7 @@ void ZipFormat::processResult(KProcess *, char *b, int l)
 			//
 			emit setProgress(1);
 
-			// QString myBuf = QString::fromLatin1(b, l);
+			// TQString myBuf = TQString::fromLatin1(b, l);
 			// DEBUGS(myBuf.latin1());
 		}
 		break;

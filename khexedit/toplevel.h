@@ -25,7 +25,7 @@
 #include <config.h>
 #endif
 
-#include <qptrlist.h>
+#include <tqptrlist.h>
 #include <kapplication.h>
 #include <kstdaccel.h>
 #include <kmainwindow.h>
@@ -135,15 +135,15 @@ class KHexEdit : public KMainWindow
 
 //     KAction *favorites;
 
-    QPtrList< KAction > bookmarkList;
-    QSignalMapper *bookmarkMapper;
+    TQPtrList< KAction > bookmarkList;
+    TQSignalMapper *bookmarkMapper;
   };
 
   public:
     KHexEdit( void );
     ~KHexEdit( void );
 
-    inline void addStartupFile( const QString &fileName );
+    inline void addStartupFile( const TQString &fileName );
     inline void setStartupOffset( uint offset );
 
   public slots:
@@ -158,14 +158,14 @@ class KHexEdit : public KMainWindow
     void fileState( SFileState &state );
     void layoutChanged( const SDisplayLayout &layout );
     void inputModeChanged( const SDisplayInputMode &mode );
-    void bookmarkChanged( QPtrList<SCursorOffset> &list );
-    void removeRecentFile( const QString &fileName );
-    void renameRecentFile( const QString &curName, const QString &newName );
+    void bookmarkChanged( TQPtrList<SCursorOffset> &list );
+    void removeRecentFile( const TQString &fileName );
+    void renameRecentFile( const TQString &curName, const TQString &newName );
 
-    void setupCaption( const QString &url );
-    void fileActive( const QString &url, bool onDisk );
-    void fileRename( const QString &curName, const QString &newName );
-    void fileClosed( const QString &url );
+    void setupCaption( const TQString &url );
+    void fileActive( const TQString &url, bool onDisk );
+    void fileRename( const TQString &curName, const TQString &newName );
+    void fileClosed( const TQString &url );
     void readConfiguration( void );
     void writeConfiguration( void );
     void editMode( CHexBuffer::EEditMode editMode );
@@ -200,21 +200,21 @@ protected:
   private:
     void setupActions( void );
     void setupStatusBar( void );
-    void open( QStringList &fileList, QStringList &offsetList );
+    void open( TQStringList &fileList, TQStringList &offsetList );
     void initialize( bool openFiles );
-    void addRecentFile( const QString &fileName );
+    void addRecentFile( const TQString &fileName );
     bool closeAllWindow( void );
     void setUndoState( uint undoState );
     void setSelectionState( uint selectionOffset, uint selectionSize );
     void setSelectionText( uint selectionOffset, uint selectionSize );
-    void addDocument( const QString &fileName );
-    void removeDocument( const QString &fileName );
-    void renameDocument( const QString &curName, const QString &newName );
-    void setTickedDocument( const QString &fileName );
+    void addDocument( const TQString &fileName );
+    void removeDocument( const TQString &fileName );
+    void renameDocument( const TQString &curName, const TQString &newName );
+    void setTickedDocument( const TQString &fileName );
 
     void writeConfiguration( KConfig &config );
     void readConfiguration( KConfig &config );
-    bool eventFilter( QObject *obj, QEvent *event );
+    bool eventFilter( TQObject *obj, TQEvent *event );
 
     int acceleratorNumKey( uint index );
     inline CHexEditorWidget *editor( void );
@@ -222,12 +222,12 @@ protected:
     inline CHexViewWidget *hexView( void );
 
   private:
-    static QPtrList<KHexEdit> mWindowList;
+    static TQPtrList<KHexEdit> mWindowList;
     CHexManagerWidget *mManager;
-    QStringList mDocumentList;
+    TQStringList mDocumentList;
 
-    QStringList mStartupFileList;   ///< Files to automatically open on startup
-    QStringList mStartupOffsetList; ///< Start offset for those files.
+    TQStringList mStartupFileList;   ///< Files to automatically open on startup
+    TQStringList mStartupOffsetList; ///< Start offset for those files.
     uint mStartupOffset; ///< Value read from the command line
 
     SActionList mAction;
@@ -245,10 +245,10 @@ protected:
 };
 
 
-inline void KHexEdit::addStartupFile( const QString &fileName )
+inline void KHexEdit::addStartupFile( const TQString &fileName )
 {
   mStartupFileList.prepend( fileName );
-  mStartupOffsetList.prepend( QString("%1").arg(mStartupOffset,0,16) );
+  mStartupOffsetList.prepend( TQString("%1").arg(mStartupOffset,0,16) );
   mStartupOffset = 0;
 }
 

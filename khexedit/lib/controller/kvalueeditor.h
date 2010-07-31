@@ -39,7 +39,7 @@ class KValueEditor: public KEditor
     virtual ~KValueEditor();
 
   public: // KEditor API
-    virtual bool handleKeyPress( QKeyEvent *KeyEvent );
+    virtual bool handleKeyPress( TQKeyEvent *KeyEvent );
 
   public:
     void reset();
@@ -62,7 +62,7 @@ class KValueEditor: public KEditor
     /** stores the old byte value */
     unsigned char OldValue;
     /** buffer with the  */
-    QString ByteBuffer;
+    TQString ByteBuffer;
 };
 
 inline KValueEditor::~KValueEditor() {}

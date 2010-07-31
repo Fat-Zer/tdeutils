@@ -25,11 +25,11 @@
 #define THEMEFILE_H
 
 #include <kurl.h>
-#include <qstring.h>
-#include <qcstring.h>
-#include <qpixmap.h>
-#include <qfile.h>
-#include <qvaluevector.h>
+#include <tqstring.h>
+#include <tqcstring.h>
+#include <tqpixmap.h>
+#include <tqfile.h>
+#include <tqvaluevector.h>
 
 class LineParser;
 class QTextStream;
@@ -42,31 +42,31 @@ class ZipFile;
 class ThemeFile
 {
   public:
-    typedef QValueVector<ThemeFile> List;
+    typedef TQValueVector<ThemeFile> List;
 
     ThemeFile(const KURL& url = KURL());
     ~ThemeFile();
 
     bool isZipTheme() const { return m_zipTheme; };
-    const QString& name() const { return m_name; };
-    const QString& version() const { return m_version; };
-    const QString& license() const { return m_license; };
-    const QString& id() const { return m_id; };
-    const QString& mo() const { return m_mo; };
-    const QString& file() const { return m_file; };
-    const QString& pythonModule() const { return m_python; };
+    const TQString& name() const { return m_name; };
+    const TQString& version() const { return m_version; };
+    const TQString& license() const { return m_license; };
+    const TQString& id() const { return m_id; };
+    const TQString& mo() const { return m_mo; };
+    const TQString& file() const { return m_file; };
+    const TQString& pythonModule() const { return m_python; };
     bool pythonModuleExists() const;
-    const QString& path() const { return m_path; };
-    const QString& description() const { return m_description; };
-    const QString& author() const { return m_author; };
-    const QString& authorEmail() const { return m_authorEmail; };
-    const QString& homepage() const { return m_homepage; };
-    QPixmap icon() const;
+    const TQString& path() const { return m_path; };
+    const TQString& description() const { return m_description; };
+    const TQString& author() const { return m_author; };
+    const TQString& authorEmail() const { return m_authorEmail; };
+    const TQString& homepage() const { return m_homepage; };
+    TQPixmap icon() const;
     bool exists() const;
-    bool isThemeFile(const QString& filename) const;
+    bool isThemeFile(const TQString& filename) const;
     bool isValid() const;
-    QByteArray readThemeFile(const QString& filename) const;
-    bool fileExists(const QString& filename) const;
+    TQByteArray readThemeFile(const TQString& filename) const;
+    bool fileExists(const TQString& filename) const;
     const ThemeLocale* locale() const { return m_locale; };
     bool canUninstall() const;
 
@@ -75,31 +75,31 @@ class ThemeFile
     bool nextLine(LineParser& parser);
     bool close();
 
-    static bool isZipFile(const QString& filename);
-    static QString canonicalFile(const QString& file);
+    static bool isZipFile(const TQString& filename);
+    static TQString canonicalFile(const TQString& file);
 
   private:
     void parseXml();
-    void mkdir(QDir dir);
+    void mkdir(TQDir dir);
 
-    QString m_path;
+    TQString m_path;
     bool m_zipTheme;
-    QString m_file;
-    QString m_id;
-    QString m_mo;
-    QString m_name;
-    QString m_theme;
-    QString m_python;
-    QString m_icon;
-    QString m_version;
-    QString m_license;
-    QTextStream* m_stream;
-    QByteArray m_ba;
-    QFile m_fl;
-    QString m_description;
-    QString m_author;
-    QString m_authorEmail;
-    QString m_homepage;
+    TQString m_file;
+    TQString m_id;
+    TQString m_mo;
+    TQString m_name;
+    TQString m_theme;
+    TQString m_python;
+    TQString m_icon;
+    TQString m_version;
+    TQString m_license;
+    TQTextStream* m_stream;
+    TQByteArray m_ba;
+    TQFile m_fl;
+    TQString m_description;
+    TQString m_author;
+    TQString m_authorEmail;
+    TQString m_homepage;
     ThemeLocale* m_locale;
     ZipFile* m_zip;
 };

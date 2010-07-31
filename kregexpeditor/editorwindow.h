@@ -20,9 +20,9 @@
 
 #include "drag.h"
 #include "widgetfactory.h"
-#include <qmultilineedit.h>
-#include <qlabel.h>
-#include <qiconset.h>
+#include <tqmultilineedit.h>
+#include <tqlabel.h>
+#include <tqiconset.h>
 class RegExp;
 class RegExpWidget;
 class QHBoxLayout;
@@ -48,7 +48,7 @@ class RegExpEditorWindow :public QWidget
     Q_OBJECT
 
 public:
-    RegExpEditorWindow(QWidget *parent, const char *name = 0);
+    RegExpEditorWindow(TQWidget *parent, const char *name = 0);
 
     /**
        Returns an object which represent the regular expression "drawn" in
@@ -64,12 +64,12 @@ public:
        Note this method is only valid while doing rubber-band
        selection. Afterwards, use @ref pointSelected instead.
     */
-    bool selectionOverlap( QPoint globalPos, QSize size ) const;
+    bool selectionOverlap( TQPoint globalPos, TQSize size ) const;
 
     /**
        returns true if `pos' lays on top of a widget that is selected.
     */
-    bool pointSelected( QPoint pos ) const;
+    bool pointSelected( TQPoint pos ) const;
 
     /**
        returns true if the editor has a selection.
@@ -86,7 +86,7 @@ public:
        invoked update on the top widget, and ensures that `focusChild' is
        visible. It's valid for `focusChild' to be 0.
     */
-    void updateContent(QWidget* focusChild);
+    void updateContent(TQWidget* focusChild);
 
     RegExp* pasteData() { return _pasteData; }
     bool isPasteing() const { return _pasteInAction; }
@@ -109,7 +109,7 @@ public:
     */
     void showRMBMenu( bool enableCutCopy );
 
-    virtual QSize sizeHint() const;
+    virtual TQSize sizeHint() const;
 
 public slots:
 
@@ -180,13 +180,13 @@ signals:
 
        If focusPoint is non-null then this point should be made visible
     */
-    void contentChanged( QPoint focusPoint );
+    void contentChanged( TQPoint focusPoint );
 
     /**
        This signal is emitted whenever mouse is being dragged in the editor
        window. `focusPoint' is the mouse' current position.
     */
-    void scrolling( QPoint focusPoint );
+    void scrolling( TQPoint focusPoint );
 
     /**
        see @ref RegExpScrolledEditorWindow::doneEditing
@@ -214,31 +214,31 @@ signals:
 
 
 protected:
-    virtual void mousePressEvent ( QMouseEvent* event );
-    virtual void mouseMoveEvent ( QMouseEvent* event );
-    virtual void mouseReleaseEvent( QMouseEvent *event);
-    virtual void paintEvent( QPaintEvent* event );
+    virtual void mousePressEvent ( TQMouseEvent* event );
+    virtual void mouseMoveEvent ( TQMouseEvent* event );
+    virtual void mouseReleaseEvent( TQMouseEvent *event);
+    virtual void paintEvent( TQPaintEvent* event );
 
 protected slots:
     virtual void emitVerifyRegExp();
 
 private:
-    void cutCopyAux( QPoint pos );
-    void copy( QPoint pos );
-    void cut( QPoint pos );
+    void cutCopyAux( TQPoint pos );
+    void copy( TQPoint pos );
+    void cut( TQPoint pos );
 
 private:
     /** This points to the top @ref RegExpWidget in the editor window. */
 	ConcWidget *_top;
 
     /** This points to the layout manager for the editor window */
-    QHBoxLayout* _layout;
+    TQHBoxLayout* _layout;
 
     /** Start point and last point draw. Used when doing rubber band selection  */
-    QPoint _start, _lastPoint;
+    TQPoint _start, _lastPoint;
 
     /** The area which the rubber band selection is over */
-    QRect _selection;
+    TQRect _selection;
 
     /**
         True when a rubber band selection rectangle is drawn, and need to be
@@ -259,9 +259,9 @@ private:
     RegExp* _pasteData;
 
     /** Popup menu used for RMB */
-    QPopupMenu* _menu;
+    TQPopupMenu* _menu;
 
-    QIconSet getIcon( const QString& name );
+    TQIconSet getIcon( const TQString& name );
 
     bool _isDndOperation;
 };

@@ -23,12 +23,12 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #include <math.h>
 
-#include <qlayout.h>
-#include <qpainter.h>
-#include <qclipboard.h>
-#include <qvbox.h>
-#include <qspinbox.h>
-#include <qlabel.h>
+#include <tqlayout.h>
+#include <tqpainter.h>
+#include <tqclipboard.h>
+#include <tqvbox.h>
+#include <tqspinbox.h>
+#include <tqlabel.h>
 
 #include <klocale.h>
 #include <kglobal.h>
@@ -41,7 +41,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 extern "C"
 {
-    KDE_EXPORT KPanelApplet* init(QWidget *parent, const QString& configFile)
+    KDE_EXPORT KPanelApplet* init(TQWidget *parent, const TQString& configFile)
     {
         KGlobal::locale()->insertCatalogue("kcharselectapplet");
         return new CharSelectApplet(configFile, KPanelApplet::Normal,
@@ -54,8 +54,8 @@ static int cell_width = 16;
 static int cell_height = 16;
 static int char_count = 0;
 
-CharSelectApplet::CharSelectApplet(const QString& configFile, Type type, int actions,
-                               QWidget *parent, const char *name)
+CharSelectApplet::CharSelectApplet(const TQString& configFile, Type type, int actions,
+                               TQWidget *parent, const char *name)
     : KPanelApplet(configFile, type, actions, parent, name),
       _aboutData(0), _configDialog(0)
 {
@@ -64,10 +64,10 @@ CharSelectApplet::CharSelectApplet(const QString& configFile, Type type, int act
     c->setGroup("General");
     cell_width = c->readNumEntry("CellWidth", cell_width);
     cell_height = c->readNumEntry("CellHeight", cell_height);
-    QString characters = c->readEntry("Characters", "ÄäÖöÜüß©®§");
+    TQString characters = c->readEntry("Characters", "ÄäÖöÜüß©®§");
 
     // setup layout
-    QHBoxLayout *_layout = new QHBoxLayout(this);
+    TQHBoxLayout *_layout = new TQHBoxLayout(this);
     _layout->setAutoAdd(true);
 
     // setup table view
@@ -118,7 +118,7 @@ void CharSelectApplet::preferences()
     _configDialog->setCharacters(_table->characters());
     _configDialog->setCellWidth(cell_width);
     _configDialog->setCellHeight(cell_height);
-    _configDialog->setInitialSize(QSize(300, 100));
+    _configDialog->setInitialSize(TQSize(300, 100));
     _configDialog->exec();
 
     cell_width = _configDialog->cellWidth();
@@ -151,14 +151,14 @@ void CharSelectApplet::about()
     dialog.exec();
 }
 
-CharTable::CharTable(QWidget* parent, const char* name)
-    : QFrame(parent, name), _rows(2), _cols(2),
+CharTable::CharTable(TQWidget* parent, const char* name)
+    : TQFrame(parent, name), _rows(2), _cols(2),
       _activeRow(-1), _activeCol(-1),
       _cWidth(cell_width), _cHeight(cell_height)
 {
-    setFrameStyle(QFrame::StyledPanel | QFrame::Sunken);
-    setFocusPolicy(QWidget::NoFocus);
-    setBackgroundMode(QWidget::NoBackground);
+    setFrameStyle(TQFrame::StyledPanel | TQFrame::Sunken);
+    setFocusPolicy(TQWidget::NoFocus);
+    setBackgroundMode(TQWidget::NoBackground);
 }
 
 void CharTable::setRowsAndColumns(int r, int c)
@@ -167,27 +167,27 @@ void CharTable::setRowsAndColumns(int r, int c)
     _cols = c;
 }
 
-void CharTable::insertChar(QChar c)
+void CharTable::insertChar(TQChar c)
 {
     _map.insert(char_count++, c);
 }
 
-void CharTable::insertString(QString s)
+void CharTable::insertString(TQString s)
 {
     for (unsigned int i = 0; i < s.length(); i++)
         insertChar(s[i]);
 }
 
-void CharTable::setCharacters(const QString& characters)
+void CharTable::setCharacters(const TQString& characters)
 {
     _map.clear();
     char_count = 0;
     insertString(characters);
 }
 
-QString CharTable::characters()
+TQString CharTable::characters()
 {
-    QString characters;
+    TQString characters;
     for (int r = 0; r <_rows; r++)
         for (int c = 0; c <_cols; c++)
             characters += _map[c + r * _cols];
@@ -205,15 +205,15 @@ int CharTable::findCol(int x)
     return x / _cWidth;
 }
 
-void CharTable::resizeEvent(QResizeEvent*)
+void CharTable::resizeEvent(TQResizeEvent*)
 {
     _cWidth = contentsRect().width() / _cols;
     _cHeight = contentsRect().height() / _rows;
 }
 
-void CharTable::paintEvent(QPaintEvent* e)
+void CharTable::paintEvent(TQPaintEvent* e)
 {
-    QPainter p(this);
+    TQPainter p(this);
 
     int xoffset = contentsRect().x();
     int yoffset = contentsRect().y();
@@ -225,12 +225,12 @@ void CharTable::paintEvent(QPaintEvent* e)
             paintCell(&p, r, c);
         }
     }
-    QFrame::paintEvent(e);
+    TQFrame::paintEvent(e);
 }
 
 void CharTable::repaintCell(int r, int c)
 {
-    QPainter p(this);
+    TQPainter p(this);
 
     int xoffset = contentsRect().x();
     int yoffset = contentsRect().y();
@@ -240,7 +240,7 @@ void CharTable::repaintCell(int r, int c)
     paintCell(&p, r, c);
 }
 
-void CharTable::paintCell(QPainter* p, int row, int col)
+void CharTable::paintCell(TQPainter* p, int row, int col)
 {
     int w = _cWidth;
     int h = _cHeight;
@@ -251,28 +251,28 @@ void CharTable::paintCell(QPainter* p, int row, int col)
 
     // draw background
     if (active) {
-	p->setBrush(QBrush(colorGroup().highlight()));
+	p->setBrush(TQBrush(colorGroup().highlight()));
 	p->setPen(NoPen);
 	p->drawRect(0, 0, w, h);
 	p->setPen(colorGroup().highlightedText());
     }
     else {
-	p->setBrush(QBrush(colorGroup().base()));
+	p->setBrush(TQBrush(colorGroup().base()));
 	p->setPen(NoPen);
 	p->drawRect(0, 0, w, h);
 	p->setPen(colorGroup().text());
     }
 
     // set font
-    QFont f = font();
+    TQFont f = font();
     f.setPixelSize(10);
     p->setFont(f);
 
     // draw char
-    p->drawText(0, 0, x2, y2, AlignHCenter | AlignVCenter, QString(_map[col + row * _cols]));
+    p->drawText(0, 0, x2, y2, AlignHCenter | AlignVCenter, TQString(_map[col + row * _cols]));
 }
 
-void CharTable::mousePressEvent(QMouseEvent *e)
+void CharTable::mousePressEvent(TQMouseEvent *e)
 {
     int row = findRow(e->y());
     if (row == -1) return;
@@ -283,7 +283,7 @@ void CharTable::mousePressEvent(QMouseEvent *e)
     selectCell(row, col);
 }
 
-void CharTable::mouseMoveEvent(QMouseEvent *e)
+void CharTable::mouseMoveEvent(TQMouseEvent *e)
 {
     if(!(e->state() & (LeftButton | RightButton | MidButton))) return;
 
@@ -310,16 +310,16 @@ void CharTable::selectCell(int row, int col)
     repaintCell(oldRow, oldCol);
     repaintCell(_activeRow, _activeCol);
 
-    QClipboard *cb = QApplication::clipboard();
-    QObject::disconnect( cb, SIGNAL(dataChanged()), this, SLOT(clearCell()) );
-    QString text = QString(_map[col + row * _cols]);
+    QClipboard *cb = TQApplication::clipboard();
+    TQObject::disconnect( cb, TQT_SIGNAL(dataChanged()), this, TQT_SLOT(clearCell()) );
+    TQString text = TQString(_map[col + row * _cols]);
     bool oldMode = cb->selectionModeEnabled();
     cb->setSelectionMode( true );
     cb->setText( text );
     cb->setSelectionMode( false );
     cb->setText( text );
     cb->setSelectionMode(  oldMode );
-    QObject::connect( cb, SIGNAL(dataChanged()), this, SLOT(clearCell()) );
+    TQObject::connect( cb, TQT_SIGNAL(dataChanged()), this, TQT_SLOT(clearCell()) );
 }
 
 void CharTable::clearCell()
@@ -332,27 +332,27 @@ void CharTable::clearCell()
 
     repaintCell(oldRow, oldCol);
     
-    QObject::disconnect( QApplication::clipboard(), SIGNAL(dataChanged()), this, SLOT(clearCell()) );
+    TQObject::disconnect( TQApplication::clipboard(), TQT_SIGNAL(dataChanged()), this, TQT_SLOT(clearCell()) );
 }
 
 
-ConfigDialog::ConfigDialog(QWidget* parent, const char* name)
+ConfigDialog::ConfigDialog(TQWidget* parent, const char* name)
     : KDialogBase(parent, name, true, i18n("Configuration"),
                   Ok | Cancel, Ok, true)
 {
-    QVBox *page = makeVBoxMainWidget();
+    TQVBox *page = makeVBoxMainWidget();
 
-    QHBox *whbox = new QHBox(page);
-    QHBox *hhbox = new QHBox(page);
-    QHBox *chbox = new QHBox(page);
+    TQHBox *whbox = new TQHBox(page);
+    TQHBox *hhbox = new TQHBox(page);
+    TQHBox *chbox = new TQHBox(page);
 
-    QLabel *wlabel = new QLabel(i18n("Cell width:"), whbox);
-    QLabel *hlabel = new QLabel(i18n("Cell height:"), hhbox);
-    (void) new QLabel(i18n("Characters:"), chbox);
+    TQLabel *wlabel = new TQLabel(i18n("Cell width:"), whbox);
+    TQLabel *hlabel = new TQLabel(i18n("Cell height:"), hhbox);
+    (void) new TQLabel(i18n("Characters:"), chbox);
 
-    _widthSpinBox = new QSpinBox(whbox);
+    _widthSpinBox = new TQSpinBox(whbox);
     _widthSpinBox->setMinValue(1); 
-    _heightSpinBox = new QSpinBox(hhbox);
+    _heightSpinBox = new TQSpinBox(hhbox);
     _heightSpinBox->setMinValue(1);
     _characterInput = new KLineEdit(chbox);
 

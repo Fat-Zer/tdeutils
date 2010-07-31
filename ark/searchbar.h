@@ -23,7 +23,7 @@
 
 #include <klistviewsearchline.h>
 
-#include <qwidget.h>
+#include <tqwidget.h>
 
 class KListView;
 class KComboBox;
@@ -33,7 +33,7 @@ class SearchBar: public KListViewSearchLine
 {
 	Q_OBJECT
 	public:
-		SearchBar( QWidget* parent, KActionCollection* aC, const char * name = 0 );
+		SearchBar( TQWidget* parent, KActionCollection* aC, const char * name = 0 );
 		~SearchBar();
 };
 

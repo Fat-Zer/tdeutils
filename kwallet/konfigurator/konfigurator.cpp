@@ -30,17 +30,17 @@
 #include <kpopupmenu.h>
 #include <kwallet.h>
 
-#include <qcheckbox.h>
-#include <qcombobox.h>
-#include <qlayout.h>
-#include <qlistview.h>
-#include <qpushbutton.h>
-#include <qspinbox.h>
+#include <tqcheckbox.h>
+#include <tqcombobox.h>
+#include <tqlayout.h>
+#include <tqlistview.h>
+#include <tqpushbutton.h>
+#include <tqspinbox.h>
 
-typedef KGenericFactory<KWalletConfig, QWidget> KWalletFactory;
+typedef KGenericFactory<KWalletConfig, TQWidget> KWalletFactory;
 K_EXPORT_COMPONENT_FACTORY(kcm_kwallet, KWalletFactory("kcmkwallet"))
 
-KWalletConfig::KWalletConfig(QWidget *parent, const char *name, const QStringList&)
+KWalletConfig::KWalletConfig(TQWidget *parent, const char *name, const TQStringList&)
 : KCModule(KWalletFactory::instance(), parent, name) {
 
 	KAboutData *about =
@@ -53,24 +53,24 @@ KWalletConfig::KWalletConfig(QWidget *parent, const char *name, const QStringLis
 
 	_cfg = new KConfig("kwalletrc", false, false);
 
-	QVBoxLayout *vbox = new QVBoxLayout(this, 0, KDialog::spacingHint());
+	TQVBoxLayout *vbox = new TQVBoxLayout(this, 0, KDialog::spacingHint());
 	vbox->add(_wcw = new WalletConfigWidget(this));
 
-	connect(_wcw->_enabled, SIGNAL(clicked()), this, SLOT(configChanged()));
-	connect(_wcw->_launchManager, SIGNAL(clicked()), this, SLOT(configChanged()));
-	connect(_wcw->_autocloseManager, SIGNAL(clicked()), this, SLOT(configChanged()));
-	connect(_wcw->_autoclose, SIGNAL(clicked()), this, SLOT(configChanged()));
-	connect(_wcw->_closeIdle, SIGNAL(clicked()), this, SLOT(configChanged()));
-	connect(_wcw->_openPrompt, SIGNAL(clicked()), this, SLOT(configChanged()));
-	connect(_wcw->_screensaverLock, SIGNAL(clicked()), this, SLOT(configChanged()));
-	connect(_wcw->_localWalletSelected, SIGNAL(clicked()), this, SLOT(configChanged()));
-	connect(_wcw->_idleTime, SIGNAL(valueChanged(int)), this, SLOT(configChanged()));
-	connect(_wcw->_launch, SIGNAL(clicked()), this, SLOT(launchManager()));
-	connect(_wcw->_newWallet, SIGNAL(clicked()), this, SLOT(newNetworkWallet()));
-	connect(_wcw->_newLocalWallet, SIGNAL(clicked()), this, SLOT(newLocalWallet()));
-	connect(_wcw->_localWallet, SIGNAL(activated(int)), this, SLOT(configChanged()));
-	connect(_wcw->_defaultWallet, SIGNAL(activated(int)), this, SLOT(configChanged()));
-	connect(_wcw->_accessList, SIGNAL(contextMenuRequested(QListViewItem*, const QPoint&, int)), this, SLOT(contextMenuRequested(QListViewItem*, const QPoint&, int)));
+	connect(_wcw->_enabled, TQT_SIGNAL(clicked()), this, TQT_SLOT(configChanged()));
+	connect(_wcw->_launchManager, TQT_SIGNAL(clicked()), this, TQT_SLOT(configChanged()));
+	connect(_wcw->_autocloseManager, TQT_SIGNAL(clicked()), this, TQT_SLOT(configChanged()));
+	connect(_wcw->_autoclose, TQT_SIGNAL(clicked()), this, TQT_SLOT(configChanged()));
+	connect(_wcw->_closeIdle, TQT_SIGNAL(clicked()), this, TQT_SLOT(configChanged()));
+	connect(_wcw->_openPrompt, TQT_SIGNAL(clicked()), this, TQT_SLOT(configChanged()));
+	connect(_wcw->_screensaverLock, TQT_SIGNAL(clicked()), this, TQT_SLOT(configChanged()));
+	connect(_wcw->_localWalletSelected, TQT_SIGNAL(clicked()), this, TQT_SLOT(configChanged()));
+	connect(_wcw->_idleTime, TQT_SIGNAL(valueChanged(int)), this, TQT_SLOT(configChanged()));
+	connect(_wcw->_launch, TQT_SIGNAL(clicked()), this, TQT_SLOT(launchManager()));
+	connect(_wcw->_newWallet, TQT_SIGNAL(clicked()), this, TQT_SLOT(newNetworkWallet()));
+	connect(_wcw->_newLocalWallet, TQT_SIGNAL(clicked()), this, TQT_SLOT(newLocalWallet()));
+	connect(_wcw->_localWallet, TQT_SIGNAL(activated(int)), this, TQT_SLOT(configChanged()));
+	connect(_wcw->_defaultWallet, TQT_SIGNAL(activated(int)), this, TQT_SLOT(configChanged()));
+	connect(_wcw->_accessList, TQT_SIGNAL(contextMenuRequested(TQListViewItem*, const TQPoint&, int)), this, TQT_SLOT(contextMenuRequested(TQListViewItem*, const TQPoint&, int)));
 
 	_wcw->_accessList->setAllColumnsShowFocus(true);
 	updateWalletLists();
@@ -90,14 +90,14 @@ KWalletConfig::~KWalletConfig() {
 
 
 void KWalletConfig::updateWalletLists() {
-	QString p1, p2;
+	TQString p1, p2;
 	p1 = _wcw->_localWallet->currentText();
 	p2 = _wcw->_defaultWallet->currentText();
 
 	_wcw->_localWallet->clear();
 	_wcw->_defaultWallet->clear();
 
-	QStringList wl = KWallet::Wallet::walletList();
+	TQStringList wl = KWallet::Wallet::walletList();
 	_wcw->_localWallet->insertStringList(wl);
 	_wcw->_defaultWallet->insertStringList(wl);
 
@@ -111,22 +111,22 @@ void KWalletConfig::updateWalletLists() {
 }
 
 
-QString KWalletConfig::newWallet() {
+TQString KWalletConfig::newWallet() {
 	bool ok;
 
-	QString n = KInputDialog::getText(i18n("New Wallet"),
+	TQString n = KInputDialog::getText(i18n("New Wallet"),
 			i18n("Please choose a name for the new wallet:"),
-			QString::null,
+			TQString::null,
 			&ok,
 			this);
 
 	if (!ok) {
-		return QString::null;
+		return TQString::null;
 	}
 
 	KWallet::Wallet *w = KWallet::Wallet::openWallet(n);
 	if (!w) {
-		return QString::null;
+		return TQString::null;
 	}
 
 	delete w;
@@ -135,7 +135,7 @@ QString KWalletConfig::newWallet() {
 
 
 void KWalletConfig::newLocalWallet() {
-	QString n = newWallet();
+	TQString n = newWallet();
 	if (n.isEmpty()) {
 		return;
 	}
@@ -149,7 +149,7 @@ void KWalletConfig::newLocalWallet() {
 
 
 void KWalletConfig::newNetworkWallet() {
-	QString n = newWallet();
+	TQString n = newWallet();
 	if (n.isEmpty()) {
 		return;
 	}
@@ -205,29 +205,29 @@ void KWalletConfig::load(bool useDefaults) {
 	}
 	_wcw->_accessList->clear();
 	_cfg->setGroup("Auto Deny");
-	QStringList denykeys = _cfg->entryMap("Auto Deny").keys();
+	TQStringList denykeys = _cfg->entryMap("Auto Deny").keys();
 	_cfg->setGroup("Auto Allow");
-	QStringList keys = _cfg->entryMap("Auto Allow").keys();
-	for (QStringList::Iterator i = keys.begin(); i != keys.end(); ++i) {
+	TQStringList keys = _cfg->entryMap("Auto Allow").keys();
+	for (TQStringList::Iterator i = keys.begin(); i != keys.end(); ++i) {
 		_cfg->setGroup("Auto Allow");
-		QStringList apps = _cfg->readListEntry(*i);
+		TQStringList apps = _cfg->readListEntry(*i);
 		_cfg->setGroup("Auto Deny");
-		QStringList denyapps = _cfg->readListEntry(*i);
+		TQStringList denyapps = _cfg->readListEntry(*i);
 		denykeys.remove(*i);
-		QListViewItem *lvi = new QListViewItem(_wcw->_accessList, *i);
-		for (QStringList::Iterator j = apps.begin(); j != apps.end(); ++j) {
-			new QListViewItem(lvi, QString::null, *j, i18n("Always Allow"));
+		TQListViewItem *lvi = new TQListViewItem(_wcw->_accessList, *i);
+		for (TQStringList::Iterator j = apps.begin(); j != apps.end(); ++j) {
+			new TQListViewItem(lvi, TQString::null, *j, i18n("Always Allow"));
 		}
-		for (QStringList::Iterator j = denyapps.begin(); j != denyapps.end(); ++j) {
-			new QListViewItem(lvi, QString::null, *j, i18n("Always Deny"));
+		for (TQStringList::Iterator j = denyapps.begin(); j != denyapps.end(); ++j) {
+			new TQListViewItem(lvi, TQString::null, *j, i18n("Always Deny"));
 		}
 	}
 	_cfg->setGroup("Auto Deny");
-	for (QStringList::Iterator i = denykeys.begin(); i != denykeys.end(); ++i) {
-		QStringList denyapps = _cfg->readListEntry(*i);
-		QListViewItem *lvi = new QListViewItem(_wcw->_accessList, *i);
-		for (QStringList::Iterator j = denyapps.begin(); j != denyapps.end(); ++j) {
-			new QListViewItem(lvi, QString::null, *j, i18n("Always Deny"));
+	for (TQStringList::Iterator i = denykeys.begin(); i != denykeys.end(); ++i) {
+		TQStringList denyapps = _cfg->readListEntry(*i);
+		TQListViewItem *lvi = new TQListViewItem(_wcw->_accessList, *i);
+		for (TQStringList::Iterator j = denyapps.begin(); j != denyapps.end(); ++j) {
+			new TQListViewItem(lvi, TQString::null, *j, i18n("Always Deny"));
 		}
 	}
 	emit changed(useDefaults);
@@ -262,9 +262,9 @@ void KWalletConfig::save() {
 	_cfg->deleteGroup("Auto Allow");
 	_cfg->deleteGroup("Auto Deny");
 	_cfg->setGroup("Auto Allow");
-	for (QListViewItem *i = _wcw->_accessList->firstChild(); i; i = i->nextSibling()) {
-		QStringList al;
-		for (QListViewItem *j = i->firstChild(); j; j = j->nextSibling()) {
+	for (TQListViewItem *i = _wcw->_accessList->firstChild(); i; i = i->nextSibling()) {
+		TQStringList al;
+		for (TQListViewItem *j = i->firstChild(); j; j = j->nextSibling()) {
 			if (j->text(2) == i18n("Always Allow")) {
 				al << j->text(1);
 			}
@@ -273,9 +273,9 @@ void KWalletConfig::save() {
 	}
 
 	_cfg->setGroup("Auto Deny");
-	for (QListViewItem *i = _wcw->_accessList->firstChild(); i; i = i->nextSibling()) {
-		QStringList al;
-		for (QListViewItem *j = i->firstChild(); j; j = j->nextSibling()) {
+	for (TQListViewItem *i = _wcw->_accessList->firstChild(); i; i = i->nextSibling()) {
+		TQStringList al;
+		for (TQListViewItem *j = i->firstChild(); j; j = j->nextSibling()) {
 			if (j->text(2) == i18n("Always Deny")) {
 				al << j->text(1);
 			}
@@ -295,24 +295,24 @@ void KWalletConfig::defaults() {
 }
 
 
-QString KWalletConfig::quickHelp() const {
+TQString KWalletConfig::quickHelp() const {
 	return i18n("This configuration module allows you to configure the KDE wallet system.");
 }
 
 
-void KWalletConfig::contextMenuRequested(QListViewItem *item, const QPoint& pos, int col) {
+void KWalletConfig::contextMenuRequested(TQListViewItem *item, const TQPoint& pos, int col) {
 	Q_UNUSED(col)
 	if (item && item->parent()) {
 		KPopupMenu *m = new KPopupMenu(this);
 		m->insertTitle(item->parent()->text(0));
-		m->insertItem(i18n("&Delete"), this, SLOT(deleteEntry()), Key_Delete);
+		m->insertItem(i18n("&Delete"), this, TQT_SLOT(deleteEntry()), Key_Delete);
 		m->popup(pos);
 	}
 }
 
 
 void KWalletConfig::deleteEntry() {
-	QListViewItem *item = _wcw->_accessList->selectedItem();
+	TQListViewItem *item = _wcw->_accessList->selectedItem();
 	if (item) {
 		delete item;
 		emit changed(true);

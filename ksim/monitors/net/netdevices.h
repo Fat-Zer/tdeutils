@@ -42,7 +42,7 @@ class NetData
 class Network
 {
   public:
-    typedef QValueList<Network> List;
+    typedef TQValueList<Network> List;
 
     Network()
     {
@@ -54,12 +54,12 @@ class Network
       m_max = 0;
     }
 
-    Network( const QString & name,
-       const QString & format,
+    Network( const TQString & name,
+       const TQString & format,
        bool timer,
        bool commands,
-       const QString & cCommand,
-       const QString & dCommand )
+       const TQString & cCommand,
+       const TQString & dCommand )
        : m_name( name ),
        m_format( format ),
        m_timer( timer ),
@@ -144,7 +144,7 @@ class Network
       return m_max;
     }
 
-    const QString & name() const
+    const TQString & name() const
     {
       return m_name;
     }
@@ -154,7 +154,7 @@ class Network
       return m_timer;
     }
 
-    const QString & format() const
+    const TQString & format() const
     {
       return m_format;
     }
@@ -164,18 +164,18 @@ class Network
       return m_commands;
     }
 
-    const QString & connectCommand() const
+    const TQString & connectCommand() const
     {
       return m_cCommand;
     }
 
-    const QString & disconnectCommand() const
+    const TQString & disconnectCommand() const
     {
       return m_dCommand;
     }
 
     void setDisplay( KSim::Chart * chart, KSim::LedLabel * led,
-       KSim::Label * label, QPopupMenu * popup )
+       KSim::Label * label, TQPopupMenu * popup )
     {
       m_chart = chart;
       m_led = led;
@@ -201,17 +201,17 @@ class Network
   private:
     NetData m_data;
     NetData m_old;
-    QString m_name;
-    QString m_format;
+    TQString m_name;
+    TQString m_format;
     bool m_timer;
     bool m_commands;
-    QString m_cCommand;
-    QString m_dCommand;
+    TQString m_cCommand;
+    TQString m_dCommand;
 
     KSim::Chart * m_chart;
     KSim::LedLabel * m_led;
     KSim::Label * m_label;
-    QPopupMenu * m_popup;
+    TQPopupMenu * m_popup;
 
     int m_max;
 };

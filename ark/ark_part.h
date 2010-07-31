@@ -30,7 +30,7 @@
 #include <kaction.h>
 #include <kprogress.h>
 
-#include <qlabel.h>
+#include <tqlabel.h>
 
 class KAboutData;
 class KPushButton;
@@ -63,9 +63,9 @@ public:
     KPushButton* cancelButton() const { return m_cancelButton; }
 
 public slots:
-    void slotSetStatusBarSelectedFiles( const QString & text );
-    void slotSetStatusBarText( const QString & text );
-    void slotSetBusy( const QString & text, bool showCancelButton = false, bool detailedProgress = false );
+    void slotSetStatusBarSelectedFiles( const TQString & text );
+    void slotSetStatusBarText( const TQString & text );
+    void slotSetBusy( const TQString & text, bool showCancelButton = false, bool detailedProgress = false );
     void slotSetReady();
     void slotProgress();
 
@@ -74,12 +74,12 @@ protected:
 
 private:
     bool m_bBusy;
-    QLabel *m_pStatusLabelSelect; // How many files are selected
-    QLabel *m_pStatusLabelTotal;  // How many files in archive
-    QLabel *m_pBusyText;
+    TQLabel *m_pStatusLabelSelect; // How many files are selected
+    TQLabel *m_pStatusLabelTotal;  // How many files in archive
+    TQLabel *m_pBusyText;
     KPushButton *m_cancelButton; // Cancel an operation
     KProgress *m_pProgressBar;
-    QTimer *m_pTimer;
+    TQTimer *m_pTimer;
 };
 
 
@@ -87,8 +87,8 @@ class ArkPart: public KParts::ReadWritePart
 {
     Q_OBJECT
 public:
-    ArkPart( QWidget *parentWidget, const char *widgetName, QObject *parent,
-             const char *name, const QStringList &, bool readWrite );
+    ArkPart( TQWidget *parentWidget, const char *widgetName, TQObject *parent,
+             const char *name, const TQStringList &, bool readWrite );
     virtual ~ArkPart();
 
     static KAboutData* createAboutData();
@@ -96,14 +96,14 @@ public:
 public slots:
     void fixEnables();//rename to slotFixEnables()...
     void disableActions();
-    void slotFilePopup( const QPoint & pPoint );
+    void slotFilePopup( const TQPoint & pPoint );
     void file_save_as();
     bool saveFile();
     bool openURL( const KURL & url );
     bool closeURL();
     void transferStarted( KIO::Job * );
     void transferCompleted();
-    void transferCanceled( const QString& errMsg );
+    void transferCanceled( const TQString& errMsg );
     void progressInformation( KIO::Job *, unsigned long );
     void cancelTransfer();
 

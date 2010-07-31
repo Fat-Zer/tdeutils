@@ -18,7 +18,7 @@
 #define KHE_KHECHAR_H
 
 // qt specific
-#include <qstring.h>
+#include <tqstring.h>
 
 namespace KHE
 {
@@ -26,8 +26,8 @@ namespace KHE
 class KHEChar : public QChar
 {
   public:
-    KHEChar( QChar C );
-    KHEChar( QChar C, bool U );
+    KHEChar( TQChar C );
+    KHEChar( TQChar C, bool U );
   public:
     bool isUndefined() const;
   protected:
@@ -35,8 +35,8 @@ class KHEChar : public QChar
     bool IsUndefined:1;
 };
 
-inline KHEChar::KHEChar( QChar C ) : QChar( C ), IsUndefined( false ) {}
-inline KHEChar::KHEChar( QChar C, bool U ) : QChar( C ), IsUndefined( U ) {}
+inline KHEChar::KHEChar( TQChar C ) : TQChar( C ), IsUndefined( false ) {}
+inline KHEChar::KHEChar( TQChar C, bool U ) : TQChar( C ), IsUndefined( U ) {}
 inline bool KHEChar::isUndefined() const { return IsUndefined; }
 
 }

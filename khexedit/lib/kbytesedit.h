@@ -73,7 +73,7 @@ class KHEXEDIT_EXPORT KBytesEdit : public KHexEdit
       * @param Name name for this widget
       * @param F flags
       */
-    KBytesEdit( char *D, int DS_, int RS_, bool KM, QWidget *Parent = 0, const char *Name = 0, WFlags F = 0 );
+    KBytesEdit( char *D, int DS_, int RS_, bool KM, TQWidget *Parent = 0, const char *Name = 0, WFlags F = 0 );
     /** hands over to the editor a new byte array.
       * If there exists an old one and autodelete is set the old one gets deleted.
       * @param D pointer to memory
@@ -81,7 +81,7 @@ class KHEXEDIT_EXPORT KBytesEdit : public KHexEdit
       * @param RS_ real size of the memory
       * @param KM keep the memory on resize (RS_ is the maximum size)
       */
-    KBytesEdit( char *D, int DS_, QWidget *Parent = 0, const char *Name = 0, WFlags F = 0 );
+    KBytesEdit( char *D, int DS_, TQWidget *Parent = 0, const char *Name = 0, WFlags F = 0 );
     /** hands over to the editor a new byte array.
       * If there exists an old one and autodelete is set the old one gets deleted.
       * @param D pointer to memory
@@ -89,7 +89,7 @@ class KHEXEDIT_EXPORT KBytesEdit : public KHexEdit
       * @param RS_ real size of the memory
       * @param KM keep the memory on resize (RS_ is the maximum size)
       */
-    KBytesEdit( QWidget *Parent = 0, const char *Name = 0, WFlags F = 0 );
+    KBytesEdit( TQWidget *Parent = 0, const char *Name = 0, WFlags F = 0 );
     virtual ~KBytesEdit();
 
 

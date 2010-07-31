@@ -10,8 +10,8 @@
 #ifndef ADDACTION_H
 #define ADDACTION_H
 
-#include <qvaluelist.h>
-#include <qpair.h>
+#include <tqvaluelist.h>
+#include <tqpair.h>
 
 #include <addactionbase.h>
 
@@ -39,7 +39,7 @@ public slots:
 
 	// connected to KCMLirc class to receive DCOP calls to tell it what button has been pressed
 	virtual void updateForPageChange();
-	virtual void updateButton(const QString &remote, const QString &button);
+	virtual void updateButton(const TQString &remote, const TQString &button);
 	virtual void updateButtons();
 	virtual void updateFunctions();
 	virtual void updateObjects();
@@ -52,21 +52,21 @@ public slots:
 
 public:
 	Arguments theArguments;
-	QString program;
+	TQString program;
 	bool isUnique;
 
-	static const QStringList getFunctions(const QString app, const QString obj);
-	void updateArgument(QListViewItem *theItem);
+	static const TQStringList getFunctions(const TQString app, const TQString obj);
+	void updateArgument(TQListViewItem *theItem);
 	void requestNextPress();
 	void cancelRequest();
 
-	QMap<QListViewItem *, QString> profileMap;
-	QMap<QListViewItem *, QString> profileFunctionMap;
-	QMap<QListViewItem *, QString> buttonMap;
-	QMap<QListViewItem *, bool> uniqueProgramMap;
-	QMap<QListViewItem *, QString> nameProgramMap;
+	TQMap<TQListViewItem *, TQString> profileMap;
+	TQMap<TQListViewItem *, TQString> profileFunctionMap;
+	TQMap<TQListViewItem *, TQString> buttonMap;
+	TQMap<TQListViewItem *, bool> uniqueProgramMap;
+	TQMap<TQListViewItem *, TQString> nameProgramMap;
 
-	AddAction(QWidget *parent, const char *name, const Mode &mode);
+	AddAction(TQWidget *parent, const char *name, const Mode &mode);
 	~AddAction();
 };
 

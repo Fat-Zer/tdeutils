@@ -27,9 +27,9 @@
 */
 
 // Qt includes
-#include <qpainter.h>
-#include <qwhatsthis.h>
-#include <qheader.h>
+#include <tqpainter.h>
+#include <tqwhatsthis.h>
+#include <tqheader.h>
 
 // KDE includes
 #include <klocale.h>
@@ -47,26 +47,26 @@
 
 FileLVI::FileLVI( KListView* lv )
 	: KListViewItem( lv ), m_fileSize( 0 ), m_packedFileSize( 0 ),
-	  m_ratio( 0 ), m_timeStamp( QDateTime() ), m_entryName( QString() )
+	  m_ratio( 0 ), m_timeStamp( TQDateTime() ), m_entryName( TQString() )
 {
 
 }
 
 FileLVI::FileLVI( KListViewItem* lvi )
 	: KListViewItem( lvi ), m_fileSize( 0 ), m_packedFileSize( 0 ),
-	  m_ratio( 0 ), m_timeStamp( QDateTime() ), m_entryName( QString() )
+	  m_ratio( 0 ), m_timeStamp( TQDateTime() ), m_entryName( TQString() )
 {
 }
 
-QString FileLVI::key( int column, bool ascending ) const
+TQString FileLVI::key( int column, bool ascending ) const
 {
 	if ( column == 0 )
 		return fileName();
 	else
-		return QListViewItem::key( column, ascending );
+		return TQListViewItem::key( column, ascending );
 }
 
-int FileLVI::compare( QListViewItem * i, int column, bool ascending ) const
+int FileLVI::compare( TQListViewItem * i, int column, bool ascending ) const
 {
 	FileLVI * item = static_cast< FileLVI * >( i );
 
@@ -119,12 +119,12 @@ int FileLVI::compare( QListViewItem * i, int column, bool ascending ) const
 	}
 }
 
-void FileLVI::setText( int column, const QString &text )
+void FileLVI::setText( int column, const TQString &text )
 {
 	columnName colName = ( static_cast< FileListView * > ( listView() ) )->nameOfColumn( column );
 	if ( column == 0 )
 	{
-		QString name = text;
+		TQString name = text;
 		if ( name.endsWith( "/" ) )
 			name = name.left( name.length() - 1 );
 		if ( name.startsWith( "/" ) )
@@ -132,18 +132,18 @@ void FileLVI::setText( int column, const QString &text )
 		int pos = name.findRev( '/' );
 		if ( pos != -1 )
 			name = name.right( name.length() - pos - 1 );
-		QListViewItem::setText( column, name );
+		TQListViewItem::setText( column, name );
 		m_entryName = text;
 	}
 	else if ( colName == sizeCol )
 	{
 		m_fileSize = text.toULongLong();
-		QListViewItem::setText( column, KIO::convertSize( m_fileSize ) );
+		TQListViewItem::setText( column, KIO::convertSize( m_fileSize ) );
 	}
 	else if ( colName == packedStrCol )
 	{
 		m_packedFileSize = text.toULongLong();
-		QListViewItem::setText( column, KIO::convertSize( m_packedFileSize ) );
+		TQListViewItem::setText( column, KIO::convertSize( m_packedFileSize ) );
 	}
 	else if ( colName == ratioStrCol )
 	{
@@ -152,25 +152,25 @@ void FileLVI::setText( int column, const QString &text )
 			m_ratio = text.left(l).toDouble();
 		else
 			m_ratio = text.toDouble();
-		QListViewItem::setText( column, i18n( "Packed Ratio", "%1 %" )
+		TQListViewItem::setText( column, i18n( "Packed Ratio", "%1 %" )
 		                                .arg(KGlobal::locale()->formatNumber( m_ratio, 1 ) )
 		                      );
 	}
 	else if ( colName == timeStampStrCol )
 	{
 		if ( text.isEmpty() )
-			QListViewItem::setText(column, text);
+			TQListViewItem::setText(column, text);
 		else
 		{
-			m_timeStamp = QDateTime::fromString( text, ISODate );
-			QListViewItem::setText( column, KGlobal::locale()->formatDateTime( m_timeStamp ) );
+			m_timeStamp = TQDateTime::fromString( text, ISODate );
+			TQListViewItem::setText( column, KGlobal::locale()->formatDateTime( m_timeStamp ) );
 		}
 	}
 	else
-		QListViewItem::setText(column, text);
+		TQListViewItem::setText(column, text);
 }
 
-static FileLVI* folderLVI( KListViewItem *parent, const QString& name )
+static FileLVI* folderLVI( KListViewItem *parent, const TQString& name )
 {
 	FileLVI *folder = new FileLVI( parent );
 
@@ -181,7 +181,7 @@ static FileLVI* folderLVI( KListViewItem *parent, const QString& name )
 	return folder;
 }
 
-static FileLVI* folderLVI( KListView *parent, const QString& name )
+static FileLVI* folderLVI( KListView *parent, const TQString& name )
 {
 	FileLVI *folder = new FileLVI( parent );
 	folder->setText( 0, name );
@@ -194,10 +194,10 @@ static FileLVI* folderLVI( KListView *parent, const QString& name )
 /////////////////////////////////////////////////////////////////////
 
 
-FileListView::FileListView(QWidget *parent, const char* name)
+FileListView::FileListView(TQWidget *parent, const char* name)
 	: KListView(parent, name)
 {
-	QWhatsThis::add( this,
+	TQWhatsThis::add( this,
 	                 i18n( "This area is for displaying information about the files contained within an archive." )
 	               );
 
@@ -212,7 +212,7 @@ FileListView::FileListView(QWidget *parent, const char* name)
 	m_pressed = false;
 }
 
-int FileListView::addColumn ( const QString & label, int width )
+int FileListView::addColumn ( const TQString & label, int width )
 {
 	int index = KListView::addColumn( label, width );
 	if ( label == SIZE_COLUMN.first )
@@ -254,9 +254,9 @@ columnName FileListView::nameOfColumn( int index )
 	return m_columnMap[ index ];
 }
 
-QStringList FileListView::selectedFilenames()
+TQStringList FileListView::selectedFilenames()
 {
-	QStringList files;
+	TQStringList files;
 
 	FileLVI *item = static_cast<FileLVI*>( firstChild() );
 
@@ -299,11 +299,11 @@ QStringList FileListView::selectedFilenames()
 	return files;
 }
 
-QStringList FileListView::fileNames()
+TQStringList FileListView::fileNames()
 {
-	QStringList files;
+	TQStringList files;
 
-	QListViewItemIterator it( this );
+	TQListViewItemIterator it( this );
 	while ( it.current() )
 	{
 		FileLVI *item = static_cast<FileLVI*>( it.current() );
@@ -329,9 +329,9 @@ bool FileListView::isSelectionEmpty()
 }
 
 void
-FileListView::contentsMousePressEvent(QMouseEvent *e)
+FileListView::contentsMousePressEvent(TQMouseEvent *e)
 {
-	if( e->button()==QMouseEvent::LeftButton )
+	if( e->button()==TQMouseEvent::LeftButton )
 	{
 		m_pressed = true;
 		m_presspos = e->pos();
@@ -341,14 +341,14 @@ FileListView::contentsMousePressEvent(QMouseEvent *e)
 }
 
 void
-FileListView::contentsMouseReleaseEvent(QMouseEvent *e)
+FileListView::contentsMouseReleaseEvent(TQMouseEvent *e)
 {
 	m_pressed = false;
 	KListView::contentsMouseReleaseEvent(e);
 }
 
 void
-FileListView::contentsMouseMoveEvent(QMouseEvent *e)
+FileListView::contentsMouseMoveEvent(TQMouseEvent *e)
 {
 	if(!m_pressed)
 	{
@@ -361,20 +361,20 @@ FileListView::contentsMouseMoveEvent(QMouseEvent *e)
 		{
 			return;
 		}
-		QStringList dragFiles = selectedFilenames();
+		TQStringList dragFiles = selectedFilenames();
 		emit startDragRequest( dragFiles );
 		KListView::contentsMouseMoveEvent(e);
 	}
 }
 
 FileLVI*
-FileListView::item(const QString& filename) const
+FileListView::item(const TQString& filename) const
 {
 	FileLVI * flvi = (FileLVI*) firstChild();
 
 	while (flvi)
 	{
-		QString curFilename = flvi->fileName();
+		TQString curFilename = flvi->fileName();
 		if (curFilename == filename)
 			return flvi;
 		flvi = (FileLVI*) flvi->nextSibling();
@@ -383,7 +383,7 @@ FileListView::item(const QString& filename) const
 	return 0;
 }
 
-void FileListView::addItem( const QStringList & entries )
+void FileListView::addItem( const TQStringList & entries )
 {
 	FileLVI *flvi, *parent = findParent( entries[0] );
 	if ( parent )
@@ -394,7 +394,7 @@ void FileListView::addItem( const QStringList & entries )
 
 	int i = 0;
 
-	for (QStringList::ConstIterator it = entries.begin(); it != entries.end(); ++it)
+	for (TQStringList::ConstIterator it = entries.begin(); it != entries.end(); ++it)
 	{
 		flvi->setText(i, *it);
 		++i;
@@ -406,12 +406,12 @@ void FileListView::addItem( const QStringList & entries )
 
 void FileListView::selectAll()
 {
-	QListView::selectAll( true );
+	TQListView::selectAll( true );
 }
 
 void FileListView::unselectAll()
 {
-	QListView::selectAll( false );
+	TQListView::selectAll( false );
 }
 
 void FileListView::setHeaders( const ColumnList& columns )
@@ -422,12 +422,12 @@ void FileListView::setHeaders( const ColumnList& columns )
 	      it != columns.constEnd();
 	      ++it )
 	{
-		QPair< QString, Qt::AlignmentFlags > pair = *it;
+		QPair< TQString, Qt::AlignmentFlags > pair = *it;
 		int colnum = addColumn( pair.first );
 		setColumnAlignment( colnum, pair.second );
 	}
 	
-	setResizeMode( QListView::LastColumn );
+	setResizeMode( TQListView::LastColumn );
 
 	header()->show();
 }
@@ -445,7 +445,7 @@ int FileListView::totalFiles()
 {
 	int numFiles = 0;
 
-	QListViewItemIterator it( this );
+	TQListViewItemIterator it( this );
 	while ( it.current() )
 	{
 		if ( it.current()->childCount() == 0 )
@@ -460,7 +460,7 @@ int FileListView::selectedFilesCount()
 {
 	int numFiles = 0;
 
-	QListViewItemIterator it( this, QListViewItemIterator::Selected );
+	TQListViewItemIterator it( this, TQListViewItemIterator::Selected );
 	while ( it.current() )
 	{
 		++numFiles;
@@ -474,7 +474,7 @@ KIO::filesize_t FileListView::totalSize()
 {
 	KIO::filesize_t size = 0;
 
-	QListViewItemIterator it(this);
+	TQListViewItemIterator it(this);
 	while ( it.current() )
 	{
 		FileLVI *item = static_cast<FileLVI*>( it.current() );
@@ -489,7 +489,7 @@ KIO::filesize_t FileListView::selectedSize()
 {
 	KIO::filesize_t size = 0;
 
-	QListViewItemIterator it( this, QListViewItemIterator::Selected );
+	TQListViewItemIterator it( this, TQListViewItemIterator::Selected );
 	while ( it.current() )
 	{
 		FileLVI *item = static_cast<FileLVI*>( it.current() );
@@ -500,9 +500,9 @@ KIO::filesize_t FileListView::selectedSize()
 	return size;
 }
 
-FileLVI* FileListView::findParent( const QString& fullname )
+FileLVI* FileListView::findParent( const TQString& fullname )
 {
-	QString name = fullname;
+	TQString name = fullname;
 
 	if ( name.endsWith( "/" ) )
 		name = name.left( name.length() -1 );
@@ -513,11 +513,11 @@ FileLVI* FileListView::findParent( const QString& fullname )
 		return static_cast< FileLVI* >( 0 );
 
 	// Get a list of ancestors
-	QString parentFullname = name.left( name.findRev( '/' ) );
-	QStringList ancestorList = QStringList::split( '/', parentFullname );
+	TQString parentFullname = name.left( name.findRev( '/' ) );
+	TQStringList ancestorList = TQStringList::split( '/', parentFullname );
 
 	// Checks if the listview contains the first item in the list of ancestors
-	QListViewItem *item = firstChild();
+	TQListViewItem *item = firstChild();
 	while ( item )
 	{
 		if ( item->text( 0 ) == ancestorList[0] )
@@ -536,7 +536,7 @@ FileLVI* FileListView::findParent( const QString& fullname )
 
 	while ( ancestorList.count() > 0 )
 	{
-		QString name = ancestorList[0];
+		TQString name = ancestorList[0];
 
 		FileLVI *parent = static_cast< FileLVI*>( item );
 		item = parent->firstChild();
@@ -559,10 +559,10 @@ FileLVI* FileListView::findParent( const QString& fullname )
 	return static_cast< FileLVI* >( item );
 }
 
-QStringList FileListView::childrenOf( FileLVI* parent )
+TQStringList FileListView::childrenOf( FileLVI* parent )
 {
 	Q_ASSERT( parent );
-	QStringList children;
+	TQStringList children;
 
 	FileLVI *item = static_cast<FileLVI*>( parent->firstChild() );
 

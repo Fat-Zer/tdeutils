@@ -21,7 +21,7 @@
 #ifndef _HEX_CLIPBOARD_H_
 #define _HEX_CLIPBOARD_H_
 
-#include <qstring.h> 
+#include <tqstring.h> 
 
 class CHexClipboard
 {
@@ -29,11 +29,11 @@ class CHexClipboard
     CHexClipboard( void );
     ~CHexClipboard( void );
 
-    bool encode( QByteArray &dst, QByteArray &src );
-    bool decode( QByteArray &dst, QString &src );
+    bool encode( TQByteArray &dst, TQByteArray &src );
+    bool decode( TQByteArray &dst, TQString &src );
 
   private:
-    bool plainDecode( QByteArray &dst, QString &src );
+    bool plainDecode( TQByteArray &dst, TQString &src );
 };
 
 

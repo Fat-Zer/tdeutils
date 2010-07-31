@@ -18,9 +18,9 @@
 #ifndef __kmultiformlistboxentry
 #define __kmultiformlistboxentry
 
-#include <qpoint.h>
-#include <qwidget.h>
-#include <qpushbutton.h>
+#include <tqpoint.h>
+#include <tqwidget.h>
+#include <tqpushbutton.h>
 
 /**
    This widget must be the base class for an entry widget used in the @ref
@@ -30,7 +30,7 @@
    The KMultiFormListBox widget features a fast scrolling mechanism through the Idx
    button. If you want to use this in you KMultiFormListBox, then you must do the
    following:
-   @li Create a @ref QPushButton as a sub-widget to your KMultiFormListBoxEntry.
+   @li Create a @ref TQPushButton as a sub-widget to your KMultiFormListBoxEntry.
    @li Override the @ref indexButton method to return your QPushButton
    @li Override the @ref idxString to return a @ref QString
    with a textual representation of the content in this KMultiFormListBoxEntry. This
@@ -50,16 +50,16 @@ class KMultiFormListBoxEntry : public QWidget
   Q_OBJECT
 
 public:
-  KMultiFormListBoxEntry(QWidget *parent, const char *name) : QWidget(parent,name) {}
+  KMultiFormListBoxEntry(TQWidget *parent, const char *name) : TQWidget(parent,name) {}
 
-  virtual QPushButton *indexButton() { return 0; }
-  virtual QWidget *valueWidget() { return 0; }
+  virtual TQPushButton *indexButton() { return 0; }
+  virtual TQWidget *valueWidget() { return 0; }
 
-  virtual void indexWindowPos(QPoint *start, int *width); // both variables are return values.
+  virtual void indexWindowPos(TQPoint *start, int *width); // both variables are return values.
 
   // This function must return a string representing the KMultiFormListBox. This is
   // used when showing the fast-search menu available from the `Idx' button.
-  virtual QString idxString() { return QString::fromLatin1(""); }
+  virtual TQString idxString() { return TQString::fromLatin1(""); }
 
 public slots:
   void acceptIndexButton();

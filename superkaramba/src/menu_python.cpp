@@ -27,7 +27,7 @@
 #endif
 
 #include <Python.h>
-#include <qobject.h>
+#include <tqobject.h>
 #include "karamba.h"
 #include "meter.h"
 #include "meter_python.h"
@@ -40,8 +40,8 @@ long createMenu(long widget)
   KPopupMenu* tmp = new KPopupMenu(currTheme);
   currTheme->menuList->append (tmp );
 
-  currTheme->connect(tmp, SIGNAL(activated(int)), currTheme,
-                     SLOT(passMenuItemClicked(int)));
+  currTheme->connect(tmp, TQT_SIGNAL(activated(int)), currTheme,
+                     TQT_SLOT(passMenuItemClicked(int)));
 
   return (long)tmp;
 }
@@ -99,7 +99,7 @@ PyObject* py_delete_menu(PyObject *, PyObject *args)
   return Py_BuildValue((char*)"l", deleteMenu(widget, menu));
 }
 
-long addMenuItem(long widget, long menu, QString text, QString icon)
+long addMenuItem(long widget, long menu, TQString text, TQString icon)
 {
   karamba* currTheme = (karamba*)widget;
   KPopupMenu* tmp = (KPopupMenu*)menu;
@@ -119,10 +119,10 @@ PyObject* py_add_menu_item(PyObject *, PyObject *args)
   PyObject* t;
   if (!PyArg_ParseTuple(args, (char*)"llOs:addMenuItem", &widget, &menu, &t, &i))
     return NULL;
-  QString icon;
-  QString text;
+  TQString icon;
+  TQString text;
   icon.setAscii(i);
-  text = PyString2QString(t);
+  text = PyString2TQString(t);
   return Py_BuildValue((char*)"l", addMenuItem(widget, menu, text, icon));
 }
 
@@ -181,7 +181,7 @@ long popupMenu(long widget, long menu, long x, long y)
 
   if(menuExists(currTheme,tmp))
   {
-    tmp->popup(currTheme->mapToGlobal( QPoint(x,y) ));
+    tmp->popup(currTheme->mapToGlobal( TQPoint(x,y) ));
     return 1;
   }
   else

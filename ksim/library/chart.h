@@ -20,7 +20,7 @@
 #ifndef KSIM__CHART_H
 #define KSIM__CHART_H
 
-#include <qwidget.h>
+#include <tqwidget.h>
 #include "common.h"
 
 #include <kdemacros.h>
@@ -33,7 +33,7 @@ namespace KSim
    * provides a graph displaying data onscreen using gkrellm themes
    * @author Robbie Ward <linuxphreak@gmx.co.uk>
    */
-  class KDE_EXPORT Chart : public QWidget, public KSim::Base
+  class KDE_EXPORT Chart : public TQWidget, public KSim::Base
   {
     Q_OBJECT
     public:
@@ -49,7 +49,7 @@ namespace KSim
        * @param parent is the parent widget
        */
       Chart(bool displayMeter, int maxValue,
-         const QString &title, QWidget *parent,
+         const TQString &title, TQWidget *parent,
          const char *name = 0, WFlags fl = 0);
       /**
        * Constructs a KSim::Chart.
@@ -60,7 +60,7 @@ namespace KSim
        * @param parent is the parent widget
        */
       Chart(bool displayMeter, int maxValue,
-         QWidget *parent, const char *name = 0,
+         TQWidget *parent, const char *name = 0,
          WFlags fl = 0);
       /**
        * destructs KSim::Chart
@@ -70,11 +70,11 @@ namespace KSim
       /**
        * returns the current text of the chart
        */
-      const QString &text(DataType type) const;
+      const TQString &text(DataType type) const;
       /**
        * @return the title of the chart
        */
-      const QString &title() const;
+      const TQString &title() const;
       /**
        * @return true if the meter is enabled
        */
@@ -108,11 +108,11 @@ namespace KSim
       /**
        * reimplemented for internal reasons
        */
-      QSize sizeHint() const;
+      TQSize sizeHint() const;
       /**
        * reimplemented for internal reasons
        */
-      QSize minimumSizeHint() const;
+      TQSize minimumSizeHint() const;
 
       void disableAutomaticUpdates();
 
@@ -125,7 +125,7 @@ namespace KSim
        * sets the title of the chart, this function returns if
        * the optional krell widget is disabled
        */
-      void setTitle(const QString &);
+      void setTitle(const TQString &);
       /**
        * turns the meter on and off
        */
@@ -133,7 +133,7 @@ namespace KSim
       /**
        * sets the current text that apears in the top left hand corner
        */
-      void setText(const QString &in, const QString &out = QString::null);
+      void setText(const TQString &in, const TQString &out = TQString::null);
       /**
        * Sets the minimum value the graph will display
        */
@@ -157,10 +157,10 @@ namespace KSim
        */
       virtual void extraTypeCall();
 
-      QColor chartColour(const DataType &dataType, int x = 1, int y = 1) const;
-      virtual void paintEvent(QPaintEvent *);
-      virtual void fontChange(const QFont &);
-      virtual void resizeEvent(QResizeEvent *re);
+      TQColor chartColour(const DataType &dataType, int x = 1, int y = 1) const;
+      virtual void paintEvent(TQPaintEvent *);
+      virtual void fontChange(const TQFont &);
+      virtual void resizeEvent(TQResizeEvent *re);
 
     protected slots:
       void updateDisplay();
@@ -169,12 +169,12 @@ namespace KSim
       void buildPixmaps();
       int yLocation(int) const;
       void drawChart();
-      QSize chartSize() const;
-      QBitmap drawMask(QPainter *);
-      void drawIn(QPainter *, int, int, bool = false);
-      void drawOut(QPainter *, int, int, bool = false);
+      TQSize chartSize() const;
+      TQBitmap drawMask(TQPainter *);
+      void drawIn(TQPainter *, int, int, bool = false);
+      void drawOut(TQPainter *, int, int, bool = false);
       int range(int) const;
-      void init(bool, int, const QString &);
+      void init(bool, int, const TQString &);
 
       class Timer;
       class Private;

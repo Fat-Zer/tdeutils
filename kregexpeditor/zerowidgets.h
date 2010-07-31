@@ -27,19 +27,19 @@
 class ZeroWidget :public RegExpWidget
 {
 public:
-  ZeroWidget(QString text, RegExpEditorWindow* editorWindow, QWidget *parent,
+  ZeroWidget(TQString text, RegExpEditorWindow* editorWindow, TQWidget *parent,
              const char *name = 0);
   virtual void addNewChild(DragAccepter *accepter, RegExpWidget *child);
-  virtual QSize sizeHint() const;
+  virtual TQSize sizeHint() const;
 
 protected:
-  virtual void paintEvent( QPaintEvent *e );
+  virtual void paintEvent( TQPaintEvent *e );
 
 private:
-  QString _text;
+  TQString _text;
 
-  mutable QSize _textSize;
-  mutable QSize _boxSize;
+  mutable TQSize _textSize;
+  mutable TQSize _boxSize;
 };
 
 
@@ -51,7 +51,7 @@ private:
 class AnyCharWidget :public ZeroWidget
 {
 public:
-  AnyCharWidget(RegExpEditorWindow* editorWindow, QWidget *parent,
+  AnyCharWidget(RegExpEditorWindow* editorWindow, TQWidget *parent,
                 const char *label = 0);
 
 	virtual RegExp* regExp() const;
@@ -68,7 +68,7 @@ public:
 class BegLineWidget : public ZeroWidget
 {
 public:
-  BegLineWidget(RegExpEditorWindow* editorWindow, QWidget *parent,
+  BegLineWidget(RegExpEditorWindow* editorWindow, TQWidget *parent,
                 const char *name = 0);
 	virtual RegExp* regExp() const;
   virtual RegExpType type() const { return BEGLINE; }
@@ -84,7 +84,7 @@ public:
 class EndLineWidget : public ZeroWidget
 {
 public:
-  EndLineWidget(RegExpEditorWindow* editorWindow, QWidget *parent,
+  EndLineWidget(RegExpEditorWindow* editorWindow, TQWidget *parent,
                 const char *name = 0);
 	virtual RegExp* regExp() const;
   virtual RegExpType type() const { return ENDLINE; }
@@ -99,7 +99,7 @@ public:
 class WordBoundaryWidget : public ZeroWidget
 {
 public:
-  WordBoundaryWidget(RegExpEditorWindow* editorWindow, QWidget *parent,
+  WordBoundaryWidget(RegExpEditorWindow* editorWindow, TQWidget *parent,
                      const char *name = 0);
 	virtual RegExp* regExp() const;
   virtual RegExpType type() const { return WORDBOUNDARY; }
@@ -115,7 +115,7 @@ public:
 class NonWordBoundaryWidget : public ZeroWidget
 {
 public:
-  NonWordBoundaryWidget(RegExpEditorWindow* editorWindow, QWidget *parent,
+  NonWordBoundaryWidget(RegExpEditorWindow* editorWindow, TQWidget *parent,
                         const char *name = 0);
 	virtual RegExp* regExp() const;
   virtual RegExpType type() const { return NONWORDBOUNDARY; }

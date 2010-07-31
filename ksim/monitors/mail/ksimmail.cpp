@@ -19,9 +19,9 @@
 
 // $Id$
 
-#include <qbitmap.h>
-#include <qlayout.h>
-#include <qtimer.h>
+#include <tqbitmap.h>
+#include <tqlayout.h>
+#include <tqtimer.h>
 
 #include <kaboutapplication.h>
 #include <kdebug.h>
@@ -69,7 +69,7 @@ void MailPlugin::showAbout()
 MailView::MailView( KSim::PluginObject* parent, const char* name )
 	: KSim::PluginView( parent, name )
 {
-	QVBoxLayout* layout = new QVBoxLayout( this );
+	TQVBoxLayout* layout = new TQVBoxLayout( this );
 
 	MailLabel* label = new MailLabel( this );
 	layout->addWidget( label, 0, AlignHCenter );
@@ -87,13 +87,13 @@ void MailView::updateDisplay()
 {
 }
 
-MailLabel::MailLabel( QWidget* parent )
+MailLabel::MailLabel( TQWidget* parent )
 	: KSim::Label( KSim::Types::Mail, parent )
 {
 //	label->setPixmap( KSim::ThemeLoader::self().current().krellMail() );
 	configureObject( false );
-	QTimer* timer = new QTimer( this );
-	connect( timer, SIGNAL( timeout() ), SLOT( animation() ) );
+	TQTimer* timer = new TQTimer( this );
+	connect( timer, TQT_SIGNAL( timeout() ), TQT_SLOT( animation() ) );
 	timer->start( 100 );
 }
 
@@ -115,7 +115,7 @@ void MailLabel::configureObject( bool repaint )
 	KSim::Label::configureObject( repaint );
 }
 
-void MailLabel::paintEvent( QPaintEvent* e )
+void MailLabel::paintEvent( TQPaintEvent* e )
 {
 	KSim::Label::paintEvent( e );
 }
@@ -127,13 +127,13 @@ void MailLabel::animation()
 	if ( f++ >= m_frames ) f = 1;
 }
 
-QPixmap MailLabel::frame( const QPixmap& source, int number ) const
+TQPixmap MailLabel::frame( const TQPixmap& source, int number ) const
 {
-	QPixmap result( source.width(), source.height() / m_frames );
+	TQPixmap result( source.width(), source.height() / m_frames );
 	bitBlt( &result, 0, 0, &source, 0, number * source.height() / m_frames );
 	if ( source.mask() )
 	{
-		QBitmap mask( result.size() );
+		TQBitmap mask( result.size() );
 		bitBlt( &mask, 0, 0, source.mask(), 0, number * source.height() / m_frames );
 		result.setMask( mask );
 	}

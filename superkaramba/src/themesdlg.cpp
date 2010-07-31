@@ -42,16 +42,16 @@
 #include <kapplication.h>
 #include <kiconloader.h>
 #include <klocale.h>
-#include <qlineedit.h>
-#include <qtable.h>
-#include <qdir.h>
-#include <qlabel.h>
-#include <qcombobox.h>
-#include <qptrlist.h>
+#include <tqlineedit.h>
+#include <tqtable.h>
+#include <tqdir.h>
+#include <tqlabel.h>
+#include <tqcombobox.h>
+#include <tqptrlist.h>
 #include <kio/job.h>
 #include <kprotocolinfo.h>
 
-ThemesDlg::ThemesDlg(QWidget *parent, const char *name)
+ThemesDlg::ThemesDlg(TQWidget *parent, const char *name)
  : ThemesLayout(parent, name)
 {
   populateListbox();
@@ -75,18 +75,18 @@ ThemesDlg::~ThemesDlg()
 void ThemesDlg::saveUserAddedThemes()
 {
   KStandardDirs ksd;
-  QStringList t = themes();
-  QStringList dirs = ksd.findDirs("data", QString(kapp->name()) + "/themes");
-  QStringList::Iterator it = t.begin();
+  TQStringList t = themes();
+  TQStringList dirs = ksd.findDirs("data", TQString(kapp->name()) + "/themes");
+  TQStringList::Iterator it = t.begin();
   bool remove;
 
   while(it != t.end())
   {
     remove = false;
-    QStringList::Iterator jtend( dirs.end() );
-    for(QStringList::Iterator jt = dirs.begin(); jt != jtend; ++jt)
+    TQStringList::Iterator jtend( dirs.end() );
+    for(TQStringList::Iterator jt = dirs.begin(); jt != jtend; ++jt)
     {
-      if(QFileInfo(*it).dir().path() + "/" == *jt)
+      if(TQFileInfo(*it).dir().path() + "/" == *jt)
       {
         remove = true;
         break;
@@ -101,9 +101,9 @@ void ThemesDlg::saveUserAddedThemes()
   SuperKarambaSettings::writeConfig();
 }
 
-QStringList ThemesDlg::themes()
+TQStringList ThemesDlg::themes()
 {
-  QStringList result;
+  TQStringList result;
   ThemeWidget* w;
 
   for(uint i = 2; i < tableThemes->count(); ++i)
@@ -118,9 +118,9 @@ QStringList ThemesDlg::themes()
 void ThemesDlg::populateListbox()
 {
   ThemeWidget* item;
-  QDir dir;
-  QStringList dirs;
-  QStringList t;
+  TQDir dir;
+  TQStringList dirs;
+  TQStringList t;
   KStandardDirs ksd;
 
   tableThemes->clear();
@@ -134,8 +134,8 @@ void ThemesDlg::populateListbox()
   item->buttonGo->setText(i18n("New Stuff..."));
 #ifdef HAVE_KNEWSTUFF
   item->buttonGo->setEnabled(true);
-  connect(item->buttonGo, SIGNAL(clicked()),
-          this, SLOT(getNewStuff()));
+  connect(item->buttonGo, TQT_SIGNAL(clicked()),
+          this, TQT_SLOT(getNewStuff()));
 #else
   item->buttonGo->setEnabled(false);
 #endif
@@ -148,28 +148,28 @@ void ThemesDlg::populateListbox()
   item->setDescriptionText(i18n("Add local theme to the list."));
   item->buttonGo->setProperty("stdItem", 18);
   item->buttonGo->setText(i18n("Open..."));
-  connect(item->buttonGo, SIGNAL(clicked()),
-          this, SLOT(openLocalTheme()));
+  connect(item->buttonGo, TQT_SIGNAL(clicked()),
+          this, TQT_SLOT(openLocalTheme()));
   tableThemes->insertItem(item);
 
-  dirs = ksd.findDirs("data", QString(kapp->name()) + "/themes");
+  dirs = ksd.findDirs("data", TQString(kapp->name()) + "/themes");
   // Get custom dirs from config here?
-  QStringList::Iterator itend( dirs.end() );
-  for(QStringList::Iterator it = dirs.begin(); it != itend; ++it )
+  TQStringList::Iterator itend( dirs.end() );
+  for(TQStringList::Iterator it = dirs.begin(); it != itend; ++it )
   {
     dir.setPath(*it);
     t = dir.entryList("*.skz; *.theme");
-    for(QStringList::Iterator it = t.begin(); it != t.end(); ++it )
+    for(TQStringList::Iterator it = t.begin(); it != t.end(); ++it )
     {
       item = new ThemeWidget(new ThemeFile(dir.filePath(*it)));
       tableThemes->insertItem(item);
       item->buttonGo->setText(i18n("Uninstall"));
-      connect(item->buttonGo, SIGNAL(clicked()),
-              this, SLOT(uninstall()));
+      connect(item->buttonGo, TQT_SIGNAL(clicked()),
+              this, TQT_SLOT(uninstall()));
     }
   }
   t = SuperKarambaSettings::userAddedThemes();
-  for(QStringList::Iterator it = t.begin(); it != t.end(); ++it )
+  for(TQStringList::Iterator it = t.begin(); it != t.end(); ++it )
   {
     ThemeFile* file = new ThemeFile(*it);
 
@@ -178,8 +178,8 @@ void ThemesDlg::populateListbox()
       item = new ThemeWidget(file);
       tableThemes->insertItem(item);
       item->buttonGo->setText(i18n("Uninstall"));
-      connect(item->buttonGo, SIGNAL(clicked()),
-              this, SLOT(uninstall()));
+      connect(item->buttonGo, TQT_SIGNAL(clicked()),
+              this, TQT_SLOT(uninstall()));
     }
     else
       delete file;
@@ -195,22 +195,22 @@ void ThemesDlg::addToDesktop()
     ThemeFile* tf = w->themeFile();
     if(tf)
     {
-      (new karamba(tf->file(), QString()))->show();
+      (new karamba(tf->file(), TQString()))->show();
     }
   }
 }
 
 void ThemesDlg::openLocalTheme()
 {
-  QStringList fileNames;
+  TQStringList fileNames;
   fileNames = KFileDialog::getOpenFileNames(":<themes>",
                   i18n("*.theme *.skz|Themes"),
                   this, i18n("Open Themes"));
-  for(QStringList::Iterator it = fileNames.begin(); it != fileNames.end(); ++it)
+  for(TQStringList::Iterator it = fileNames.begin(); it != fileNames.end(); ++it)
   {
     ThemeFile file(*it);
     if(file.isValid())
-      (new karamba(*it, QString()))->show();
+      (new karamba(*it, TQString()))->show();
   }
 }
 
@@ -220,7 +220,7 @@ void ThemesDlg::getNewStuff()
   KConfig* config = KGlobal::config();
   config->setGroup("KNewStuff");
   config->writePathEntry("ProvidersUrl",
-      QString::fromLatin1("http://download.kde.org/khotnewstuff/karamba-providers.xml"));
+      TQString::fromLatin1("http://download.kde.org/khotnewstuff/karamba-providers.xml"));
   config->sync();
   m_newStuffStatus = config->entryMap("KNewStuffStatus").keys();
   //This check is b/c KNewStuff will download, throw an error, 
@@ -250,7 +250,7 @@ void ThemesDlg::selectionChanged(int index)
       w->showButton(true);
 }
 
-int ThemesDlg::themeIndex(QString file)
+int ThemesDlg::themeIndex(TQString file)
 {
   ThemeWidget* w;
   file = ThemeFile::canonicalFile(file);
@@ -265,7 +265,7 @@ int ThemesDlg::themeIndex(QString file)
   return -1;
 }
 
-void ThemesDlg::addSkzThemeToDialog(const QString &file)
+void ThemesDlg::addSkzThemeToDialog(const TQString &file)
 {
   kdDebug() << "addSkzThemeToDialog(): file = " << file << endl;
   addThemeToList(file);
@@ -273,13 +273,13 @@ void ThemesDlg::addSkzThemeToDialog(const QString &file)
 }
 
 void ThemesDlg::addThemeToDialog(const KArchiveDirectory *archiveDir,
-                           const QString& destDir)
+                           const TQString& destDir)
 {
   kdDebug() << "addThemeToDialog(): destDir = " << destDir << endl;
-  QStringList entries = archiveDir->entries();
+  TQStringList entries = archiveDir->entries();
 
-  QStringList::Iterator end( entries.end() );
-  for(QStringList::Iterator it = entries.begin(); it != end; ++it)
+  TQStringList::Iterator end( entries.end() );
+  for(TQStringList::Iterator it = entries.begin(); it != end; ++it)
   {
     if(archiveDir->entry(*it)->isDirectory())
     {
@@ -288,7 +288,7 @@ void ThemesDlg::addThemeToDialog(const KArchiveDirectory *archiveDir,
     }
     else
     {
-      QFileInfo fi(*it);
+      TQFileInfo fi(*it);
       if(fi.extension( FALSE ) == "theme")
       {
         addThemeToList(destDir + *it);
@@ -298,13 +298,13 @@ void ThemesDlg::addThemeToDialog(const KArchiveDirectory *archiveDir,
   }
 }
 
-void ThemesDlg::writeNewStuffConfig(const QString &file)
+void ThemesDlg::writeNewStuffConfig(const TQString &file)
 {
 #ifdef HAVE_KNEWSTUFF
   KConfig* config = KGlobal::config();
-  QStringList keys = config->entryMap("KNewStuffStatus").keys();
+  TQStringList keys = config->entryMap("KNewStuffStatus").keys();
 
-  for(QStringList::Iterator it = m_newStuffStatus.begin();
+  for(TQStringList::Iterator it = m_newStuffStatus.begin();
       it != m_newStuffStatus.end(); ++it)
   {
     keys.remove(*it);
@@ -322,20 +322,20 @@ void ThemesDlg::configSanityCheck()
 {
 #ifdef HAVE_KNEWSTUFF
   KConfig* config = KGlobal::config();
-  QStringList statusKeys = config->entryMap("KNewStuffStatus").keys();
-  QStringList nameKeys = config->entryMap("KNewStuffNames").keys();
-  QStringList removeList;
+  TQStringList statusKeys = config->entryMap("KNewStuffStatus").keys();
+  TQStringList nameKeys = config->entryMap("KNewStuffNames").keys();
+  TQStringList removeList;
 
-  for(QStringList::Iterator it = statusKeys.begin();
+  for(TQStringList::Iterator it = statusKeys.begin();
       it != statusKeys.end(); ++it)
   {
-    QString keyName(*it);
+    TQString keyName(*it);
     bool removeKey = true;
     config->setGroup("KNewStuffNames");
-    for(QStringList::Iterator it2 = nameKeys.begin();
+    for(TQStringList::Iterator it2 = nameKeys.begin();
         it2 != nameKeys.end(); ++it2)
     {
-      QString tempName(config->readEntry(*it2));
+      TQString tempName(config->readEntry(*it2));
       if( tempName.compare(keyName) == 0)
       {
         removeKey = false;
@@ -353,7 +353,7 @@ void ThemesDlg::configSanityCheck()
 #endif
 }
 
-int ThemesDlg::addThemeToList(const QString &file)
+int ThemesDlg::addThemeToList(const TQString &file)
 {
   kdDebug() << "addThemeToList() file: " << file << endl;
   int i = themeIndex(file);
@@ -363,14 +363,14 @@ int ThemesDlg::addThemeToList(const QString &file)
 
     i = tableThemes->insertItem(item);
     item->buttonGo->setText(i18n("Uninstall"));
-    connect(item->buttonGo, SIGNAL(clicked()),
-            this, SLOT(uninstall()));
+    connect(item->buttonGo, TQT_SIGNAL(clicked()),
+            this, TQT_SLOT(uninstall()));
   }
   tableThemes->setSelected(i);
   return i;
 }
 
-int ThemesDlg::addTheme(const QString& , const QString &file)
+int ThemesDlg::addTheme(const TQString& , const TQString &file)
 {
   int i = addThemeToList(file);
   int result = -1;
@@ -382,7 +382,7 @@ int ThemesDlg::addTheme(const QString& , const QString &file)
   return result;
 }
 
-void ThemesDlg::removeTheme(const QString&, const QString& file, int instance)
+void ThemesDlg::removeTheme(const TQString&, const TQString& file, int instance)
 {
   int i = themeIndex(file);
 
@@ -392,12 +392,12 @@ void ThemesDlg::removeTheme(const QString&, const QString& file, int instance)
   karambaApp->buildToolTip();
 }
 
-void ThemesDlg::search(const QString&)
+void ThemesDlg::search(const TQString&)
 {
   tableThemes->showItems(&filter, this);
 }
 
-bool ThemesDlg::filter(int index, QWidget* widget, void* data)
+bool ThemesDlg::filter(int index, TQWidget* widget, void* data)
 {
   if(index < 2)
     return true;
@@ -409,7 +409,7 @@ bool ThemesDlg::filter(int index, QWidget* widget, void* data)
     if(w->instances() == 0)
       return false;
 
-  QString searchText = dlg->editSearch->text().lower();
+  TQString searchText = dlg->editSearch->text().lower();
   if(searchText.isEmpty())
   {
     return true;
@@ -424,7 +424,7 @@ bool ThemesDlg::filter(int index, QWidget* widget, void* data)
   return false;
 }
 
-bool ThemesDlg::isDownloaded( const QString& path )
+bool ThemesDlg::isDownloaded( const TQString& path )
 {
   kdDebug() << "isDownloaded path: " << path << endl;
   KConfig* config = KGlobal::config();
@@ -438,7 +438,7 @@ void ThemesDlg::uninstall()
   ThemeFile* tf = w->themeFile();
   KURL trash("trash:/");
   KURL theme(tf->file());
-  QString tempPath(tf->path());
+  TQString tempPath(tf->path());
 
   karambaApp->dcopIface()->closeTheme(tf->name());
   if(!KProtocolInfo::isKnownProtocol(trash))
@@ -450,8 +450,8 @@ void ThemesDlg::uninstall()
     //Don't move it to the trash if it is a local theme
     if(isDownloaded(tempPath))
     {
-      QFileInfo remPath(tf->path());
-      QDir remDir(remPath.dir());
+      TQFileInfo remPath(tf->path());
+      TQDir remDir(remPath.dir());
       remDir.cdUp();
       kdDebug() << "moving " << remDir.path() << " to the trash" << endl;
       KIO::move(remDir.path(), trash);
@@ -460,7 +460,7 @@ void ThemesDlg::uninstall()
     
     //some themes have multiple .theme files
     //find all .themes that could be listed in the dialog for the directory removed
-    QPtrList<ThemeWidget> list;
+    TQPtrList<ThemeWidget> list;
     for(uint i = 2; i < tableThemes->count(); ++i)
     {
       ThemeWidget* tempW = static_cast<ThemeWidget*>(tableThemes->item(i));
@@ -480,7 +480,7 @@ void ThemesDlg::uninstall()
     // Remove theme from KNewStuffStatus
     KConfig* config = KGlobal::config();
     config->setGroup("KNewStuffNames");
-    QString name = config->readEntry(tempPath);
+    TQString name = config->readEntry(tempPath);
     if(!name.isEmpty())
     {
       kdDebug() << "removing " << tempPath << " under KNewStuffNames from superkarambarc" 
@@ -500,8 +500,8 @@ void ThemesDlg::uninstall()
     kdDebug() << "encountered skz theme" << endl;
     if(isDownloaded(theme.path()))
     {
-      QFileInfo remPath(theme.path());
-      QDir remDir(remPath.dir());
+      TQFileInfo remPath(theme.path());
+      TQDir remDir(remPath.dir());
       kdDebug() << "moving " << remDir.path() << " to the trash" << endl;
       KIO::move(remDir.path(), trash);
     }
@@ -510,7 +510,7 @@ void ThemesDlg::uninstall()
     // Remove theme from KNewStuffStatus
     KConfig* config = KGlobal::config();
     config->setGroup("KNewStuffNames");
-    QString name = config->readEntry(theme.path());
+    TQString name = config->readEntry(theme.path());
     if(!name.isEmpty())
     {
       kdDebug() << "removing " << theme.path() << " from superkarambarc" << endl;
@@ -525,9 +525,9 @@ void ThemesDlg::uninstall()
   selectionChanged(tableThemes->selected());
 }
 
-QStringList ThemesDlg::runningThemes()
+TQStringList ThemesDlg::runningThemes()
 {
-  QStringList list;
+  TQStringList list;
   ThemeWidget* w;
 
   for(uint i = 2; i < tableThemes->count(); ++i)

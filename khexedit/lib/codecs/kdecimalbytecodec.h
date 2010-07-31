@@ -41,9 +41,9 @@ class KDecimalByteCodec : public KByteCodec
     virtual unsigned char digitsFilledLimit() const { return 26; }
 
     /** encodes the Char and writes the result to */
-    virtual void encode( QString &Digits, unsigned  int Pos, const unsigned char Char ) const;
+    virtual void encode( TQString &Digits, unsigned  int Pos, const unsigned char Char ) const;
     /** */
-    virtual void encodeShort( QString &Digits, unsigned  int Pos, const unsigned char Char ) const;
+    virtual void encodeShort( TQString &Digits, unsigned  int Pos, const unsigned char Char ) const;
     /** */
     virtual bool appendDigit( unsigned char *Byte, const unsigned char Digit ) const;
     /** */

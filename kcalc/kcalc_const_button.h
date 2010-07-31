@@ -34,12 +34,12 @@ Q_OBJECT
 
   public:
 
-  KCalcConstButton(QWidget *parent, int but_num, const char * name = 0);
+  KCalcConstButton(TQWidget *parent, int but_num, const char * name = 0);
   
-  KCalcConstButton(const QString &label, QWidget *parent, int but_num, const char * name = 0,
-		   const QString &tooltip = QString());
+  KCalcConstButton(const TQString &label, TQWidget *parent, int but_num, const char * name = 0,
+		   const TQString &tooltip = TQString());
 
-  QString constant(void) const;
+  TQString constant(void) const;
 
   void setLabelAndTooltip(void);
 

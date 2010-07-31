@@ -34,19 +34,19 @@ bool LookAheadRegExp::check( ErrorMap& map, bool , bool last )
 }
 
 
-QDomNode LookAheadRegExp::toXml( QDomDocument* doc ) const
+TQDomNode LookAheadRegExp::toXml( TQDomDocument* doc ) const
 {
-    QDomElement top;
+    TQDomElement top;
     if ( _tp == POSITIVE )
-        top = doc->createElement( QString::fromLocal8Bit("PositiveLookAhead") );
+        top = doc->createElement( TQString::fromLocal8Bit("PositiveLookAhead") );
     else
-        top = doc->createElement( QString::fromLocal8Bit("NegativeLookAhead") );
+        top = doc->createElement( TQString::fromLocal8Bit("NegativeLookAhead") );
 
     top.appendChild( _child->toXml( doc ) );
     return top;
 }
 
-bool LookAheadRegExp::load( QDomElement top, const QString& version )
+bool LookAheadRegExp::load( TQDomElement top, const TQString& version )
 {
     _child = readRegExp( top, version );
     if ( _child ) {

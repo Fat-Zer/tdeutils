@@ -22,8 +22,8 @@
 
 using namespace KSim::Snmp;
 
-ChartMonitor::ChartMonitor( const MonitorConfig &config, QWidget *parent, const char *name )
-    : KSim::Chart( true /* displayMeter */, 0, QString::null, parent, name ),
+ChartMonitor::ChartMonitor( const MonitorConfig &config, TQWidget *parent, const char *name )
+    : KSim::Chart( true /* displayMeter */, 0, TQString::null, parent, name ),
       m_lastValue( 0 ), m_config( config ), m_firstSampleReceived( false )
 {
     setTitle( m_config.name );

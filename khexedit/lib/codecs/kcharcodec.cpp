@@ -23,9 +23,9 @@
 using namespace KHE;
 
 
-QStringList KCharCodec::CodecNames;
+TQStringList KCharCodec::CodecNames;
 
-const QStringList &KCharCodec::codecNames()
+const TQStringList &KCharCodec::codecNames()
 {
   // first call?
   if( CodecNames.isEmpty() )
@@ -38,7 +38,7 @@ const QStringList &KCharCodec::codecNames()
 }
 
 
-KCharCodec *KCharCodec::createCodec( const QString &Name )
+KCharCodec *KCharCodec::createCodec( const TQString &Name )
 {
   KCharCodec *Codec = 0;
 

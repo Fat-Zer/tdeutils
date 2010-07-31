@@ -19,7 +19,7 @@
 
 #include "walker.h"
 
-#include <qapplication.h>
+#include <tqapplication.h>
 
 #include <functional>
 #include <algorithm>
@@ -38,8 +38,8 @@ namespace
 
 static const uint walkerRefresh = 0;
 
-Walker::Walker( const HostConfig &host, const Identifier &startOid, QObject *parent, const char *name )
-    : QObject( parent, name ), m_stop( false ), m_oid( startOid ), m_session( host )
+Walker::Walker( const HostConfig &host, const Identifier &startOid, TQObject *parent, const char *name )
+    : TQObject( parent, name ), m_stop( false ), m_oid( startOid ), m_session( host )
 {
     m_timerId = startTimer( walkerRefresh );
     start();
@@ -51,8 +51,8 @@ Walker::~Walker()
     m_stop = true;
     m_stopGuard.unlock();
 
-    if ( QThread::running() )
-        QThread::wait();
+    if ( TQThread::running() )
+        TQThread::wait();
 
     std::for_each( m_results.begin(), m_results.end(), Deleter<Result *>() );
 }
@@ -82,10 +82,10 @@ void Walker::run()
     }
 
     // cause finished signal to be emitted
-    QApplication::postEvent( this, new QCustomEvent( QEvent::User ) );
+    TQApplication::postEvent( this, new TQCustomEvent( TQEvent::User ) );
 }
 
-void Walker::timerEvent( QTimerEvent *ev )
+void Walker::timerEvent( TQTimerEvent *ev )
 {
     if ( ev->timerId() != m_timerId )
         return;
@@ -105,13 +105,13 @@ void Walker::timerEvent( QTimerEvent *ev )
         delete result;
     }
 
-    if ( !QThread::running() && !result ) {
+    if ( !TQThread::running() && !result ) {
         killTimer( m_timerId );
         m_timerId = 0;
     }
 }
 
-void Walker::customEvent( QCustomEvent * )
+void Walker::customEvent( TQCustomEvent * )
 {
     emit finished();
 }

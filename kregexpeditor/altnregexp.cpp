@@ -43,20 +43,20 @@ bool AltnRegExp::check( ErrorMap& map, bool first, bool last )
     return possibleEmpty;
 }
 
-QDomNode AltnRegExp::toXml( QDomDocument* doc ) const
+TQDomNode AltnRegExp::toXml( TQDomDocument* doc ) const
 {
-    QDomElement top = doc->createElement( QString::fromLocal8Bit( "Alternatives" ) );
+    TQDomElement top = doc->createElement( TQString::fromLocal8Bit( "Alternatives" ) );
     for ( RegExpListIt it(list); *it; ++it ) {
         top.appendChild( (*it)->toXml( doc ) );
     }
     return top;
 }
 
-bool AltnRegExp::load( QDomElement top, const QString& version )
+bool AltnRegExp::load( TQDomElement top, const TQString& version )
 {
-    Q_ASSERT( top.tagName() == QString::fromLocal8Bit( "Alternatives" ) );
+    Q_ASSERT( top.tagName() == TQString::fromLocal8Bit( "Alternatives" ) );
 
-    for ( QDomNode child = top.firstChild(); !child.isNull(); child = child.nextSibling() ) {
+    for ( TQDomNode child = top.firstChild(); !child.isNull(); child = child.nextSibling() ) {
         if ( ! child.isElement() )
             continue; // User might have added a comment.
 

@@ -18,13 +18,13 @@
  *
  */
 
-#include <qheader.h>
+#include <tqheader.h>
 
 
 #include "listview.h"
 
 
-CListView::CListView( QWidget *parent, const char *name, int visibleItem )
+CListView::CListView( TQWidget *parent, const char *name, int visibleItem )
   :KListView( parent, name ),  mVisibleItem(QMAX( 1, visibleItem ))
 {
   setVisibleItem(visibleItem);
@@ -35,15 +35,15 @@ void CListView::setVisibleItem( int visibleItem, bool updateSize )
   mVisibleItem = QMAX( 1, visibleItem );
   if( updateSize == true )
   {
-    QSize s = sizeHint();
+    TQSize s = sizeHint();
     setMinimumSize( s.width() + verticalScrollBar()->sizeHint().width() + 
 		    lineWidth() * 2, s.height() );
   }
 }
 
-QSize CListView::sizeHint( void ) const
+TQSize CListView::sizeHint( void ) const
 {
-  QSize s = QListView::sizeHint();
+  TQSize s = TQListView::sizeHint();
   
   int h = fontMetrics().height() + 2*itemMargin();
   if( h % 2 > 0 ) { h++; }

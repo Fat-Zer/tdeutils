@@ -26,8 +26,8 @@
 #endif 
 
 
-#include <qvariant.h>
-#include <qptrdict.h> 
+#include <tqvariant.h>
+#include <tqptrdict.h> 
 #include <kapplication.h>
 
 #include "hexbuffer.h"
@@ -70,14 +70,14 @@ class CHexEditorWidget : public QWidget
     };
 
   public:
-    CHexEditorWidget( QWidget *parent = 0, const char *name = 0 );
+    CHexEditorWidget( TQWidget *parent = 0, const char *name = 0 );
     ~CHexEditorWidget( void );
 
     void initialize( void );
     void writeConfiguration( KConfig &config );
     void readConfiguration( KConfig &config );
 
-    bool isOpen( const QString &url, uint &offset );
+    bool isOpen( const TQString &url, uint &offset );
     bool modified( void );
     
     inline int defaultTextWidth( void );
@@ -91,11 +91,11 @@ class CHexEditorWidget : public QWidget
     inline bool gotoReloadOffset( void );
 
   signals:
-    void errorLoadFile( const QString &url );
+    void errorLoadFile( const TQString &url );
     void setProgress( int percent );
     void setProgress( int curPage, int maxPage );
     void enableProgressText( bool state );
-    void setProgressText( const QString &msg );
+    void setProgressText( const TQString &msg );
     void operationChanged( bool state );
     void removeRecentFiles( void );
 
@@ -105,9 +105,9 @@ class CHexEditorWidget : public QWidget
     void setOctalMode( void );
     void setTextMode( void );
     void setBinaryMode( void );
-    void open( const QString &url, bool reloadWhenChanged, uint offset );
+    void open( const TQString &url, bool reloadWhenChanged, uint offset );
     void newFile( void );
-    void newFile( const QByteArray &data );
+    void newFile( const TQByteArray &data );
     void stepFile( bool next );
     void open( void );
     void insertFile( void );
@@ -191,28 +191,28 @@ class CHexEditorWidget : public QWidget
     void collectStatistics( SStatisticControl &sc );
 
   protected:
-    void resizeEvent( QResizeEvent *e );
+    void resizeEvent( TQResizeEvent *e );
 
   private:
-    bool selectDocument( const QString &url, bool reloadWhenChanged );
+    bool selectDocument( const TQString &url, bool reloadWhenChanged );
     bool querySave( void );
     int  readURL( const KURL &url, bool insert );
-    void writeURL( QString &url );
-    bool readFile( const QString &diskPath, const QString &url, bool insert );
-    bool writeFile( const QString &diskPath );
-    void saveWorkingDirectory( const QString &url );
+    void writeURL( TQString &url );
+    bool readFile( const TQString &diskPath, const TQString &url, bool insert );
+    bool writeFile( const TQString &diskPath );
+    void saveWorkingDirectory( const TQString &url );
 
     bool confirmPrintPageNumber( CHexPrinter &printer );
 
-    CHexBuffer *documentItem( const QString &url );
-    CHexBuffer *documentItem( const QString &url, bool next );
+    CHexBuffer *documentItem( const TQString &url );
+    CHexBuffer *documentItem( const TQString &url, bool next );
     bool createBuffer( void );
     void removeBuffer( void );
 
-    bool askWrap( bool fwd, const QString &header );
+    bool askWrap( bool fwd, const TQString &header );
     bool canFind( bool showError );
     void hideReplacePrompt( void );
-    bool modifiedByAlien( const QString &url );
+    bool modifiedByAlien( const TQString &url );
     void enableInputLock( bool inputLock );
 
     int  prepareProgressData( EProgressMode mode );
@@ -221,10 +221,10 @@ class CHexEditorWidget : public QWidget
     bool busy( bool showWarning );
 
   private:
-    QString  mWorkDir; // Remembers last directroy used by file dialogs 
+    TQString  mWorkDir; // Remembers last directroy used by file dialogs 
  
     uint mUntitledCount;
-    QPtrList<CHexBuffer> mDocumentList;
+    TQPtrList<CHexBuffer> mDocumentList;
     SDisplayState mDisplayState;
 
     CProgress     mProgressData;

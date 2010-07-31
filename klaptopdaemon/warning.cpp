@@ -33,18 +33,18 @@
 #include <kapplication.h>
 #include <kcombobox.h>
 
-#include <qlayout.h>
-#include <qcheckbox.h>
-#include <qspinbox.h>
-#include <qslider.h>
-#include <qhbox.h>
-#include <qvbuttongroup.h>
-#include <qradiobutton.h>
-#include <qtooltip.h>
+#include <tqlayout.h>
+#include <tqcheckbox.h>
+#include <tqspinbox.h>
+#include <tqslider.h>
+#include <tqhbox.h>
+#include <tqvbuttongroup.h>
+#include <tqradiobutton.h>
+#include <tqtooltip.h>
 
 extern void wake_laptop_daemon();
 
-WarningConfig::WarningConfig (int t, QWidget * parent, const char *name)
+WarningConfig::WarningConfig (int t, TQWidget * parent, const char *name)
   : KCModule(parent, name),
     checkSuspend(0),
     checkStandby(0),
@@ -59,7 +59,7 @@ WarningConfig::WarningConfig (int t, QWidget * parent, const char *name)
   my_load(0);
 
   if (!apm) {
-    QVBoxLayout *top_layout = new QVBoxLayout( this, KDialog::marginHint(),
+    TQVBoxLayout *top_layout = new TQVBoxLayout( this, KDialog::marginHint(),
 					       KDialog::spacingHint() );
 	
     KActiveLabel* explain = laptop_portable::no_power_management_explanation(this);
@@ -67,7 +67,7 @@ WarningConfig::WarningConfig (int t, QWidget * parent, const char *name)
 
     top_layout->addStretch(1);
   } else {
-    QGridLayout *grid = new QGridLayout( this, 11, 2, /* rows x cols */
+    TQGridLayout *grid = new TQGridLayout( this, 11, 2, /* rows x cols */
 					 KDialog::marginHint(),
 					 KDialog::spacingHint() );
     grid->setColStretch( 1, 1 );
@@ -75,87 +75,87 @@ WarningConfig::WarningConfig (int t, QWidget * parent, const char *name)
     int curRow = 0;
     // setup the trigger stuff:
     if (type) { 
-        checkCriticalTime = new QCheckBox( i18n("Critical &trigger:"), this );
-        checkCriticalPercent = new QCheckBox( i18n("Critical &trigger:"), this );
-        editCriticalTime = new QSpinBox(1, 60*24, 1, this);
+        checkCriticalTime = new TQCheckBox( i18n("Critical &trigger:"), this );
+        checkCriticalPercent = new TQCheckBox( i18n("Critical &trigger:"), this );
+        editCriticalTime = new TQSpinBox(1, 60*24, 1, this);
         editCriticalTime->setSuffix(i18n("keep short, unit in spinbox", "min"));
-        QToolTip::add(editCriticalTime, i18n("When this amount of battery life is left the actions below will be triggered"));
-        editCriticalPercent = new QSpinBox(1, 100, 1, this);
+        TQToolTip::add(editCriticalTime, i18n("When this amount of battery life is left the actions below will be triggered"));
+        editCriticalPercent = new TQSpinBox(1, 100, 1, this);
         editCriticalPercent->setSuffix(i18n("keep short, unit in spinbox", "%"));
-        QToolTip::add(editCriticalPercent, i18n("When this amount of battery life is left the actions below will be triggered"));
+        TQToolTip::add(editCriticalPercent, i18n("When this amount of battery life is left the actions below will be triggered"));
         grid->addWidget(checkCriticalTime, curRow, 0);
         grid->addWidget(editCriticalTime, curRow++, Qt::AlignLeft);
         grid->addWidget(checkCriticalPercent, curRow, 0);
         grid->addWidget(editCriticalPercent, curRow++, Qt::AlignLeft);
 
-        connect(editCriticalTime, SIGNAL(valueChanged(int)), this, SLOT(configChanged()));
-        connect(editCriticalPercent, SIGNAL(valueChanged(int)), this, SLOT(configChanged()));
-        connect(checkCriticalTime, SIGNAL(toggled(bool)), this, SLOT(configChanged()));
-        connect(checkCriticalPercent, SIGNAL(toggled(bool)), this, SLOT(configChanged()));
-        connect(checkCriticalTime, SIGNAL(toggled(bool)), this, SLOT(checkCriticalTimeChanged(bool)));
-        connect(checkCriticalPercent, SIGNAL(toggled(bool)), this, SLOT(checkCriticalPercentChanged(bool)));
+        connect(editCriticalTime, TQT_SIGNAL(valueChanged(int)), this, TQT_SLOT(configChanged()));
+        connect(editCriticalPercent, TQT_SIGNAL(valueChanged(int)), this, TQT_SLOT(configChanged()));
+        connect(checkCriticalTime, TQT_SIGNAL(toggled(bool)), this, TQT_SLOT(configChanged()));
+        connect(checkCriticalPercent, TQT_SIGNAL(toggled(bool)), this, TQT_SLOT(configChanged()));
+        connect(checkCriticalTime, TQT_SIGNAL(toggled(bool)), this, TQT_SLOT(checkCriticalTimeChanged(bool)));
+        connect(checkCriticalPercent, TQT_SIGNAL(toggled(bool)), this, TQT_SLOT(checkCriticalPercentChanged(bool)));
     } else {
-        checkLowTime = new QCheckBox( i18n("Low &trigger:"), this );
-        checkLowPercent = new QCheckBox( i18n("Low &trigger:"), this );        
-        editLowTime = new QSpinBox(1, 60*24, 1, this);
+        checkLowTime = new TQCheckBox( i18n("Low &trigger:"), this );
+        checkLowPercent = new TQCheckBox( i18n("Low &trigger:"), this );        
+        editLowTime = new TQSpinBox(1, 60*24, 1, this);
         editLowTime->setSuffix(i18n("keep short, unit in spinbox", "min"));
-        QToolTip::add(editLowTime, i18n("When this amount of battery life is left the actions below will be triggered"));
-        editLowPercent = new QSpinBox(1, 100, 1, this);
+        TQToolTip::add(editLowTime, i18n("When this amount of battery life is left the actions below will be triggered"));
+        editLowPercent = new TQSpinBox(1, 100, 1, this);
         editLowPercent->setSuffix(i18n("keep short, unit in spinbox", "%"));
-        QToolTip::add(editLowPercent, i18n("When this amount of battery life is left the actions below will be triggered"));
+        TQToolTip::add(editLowPercent, i18n("When this amount of battery life is left the actions below will be triggered"));
         grid->addWidget(checkLowTime, curRow, 0);
         grid->addWidget(editLowTime, curRow++, Qt::AlignLeft);
         grid->addWidget(checkLowPercent, curRow, 0);
         grid->addWidget(editLowPercent, curRow++, Qt::AlignLeft);
         
-        connect(editLowTime, SIGNAL(valueChanged(int)), this, SLOT(configChanged()));
-        connect(editLowPercent, SIGNAL(valueChanged(int)), this, SLOT(configChanged()));
-        connect(checkLowTime, SIGNAL(toggled(bool)), this, SLOT(configChanged()));
-        connect(checkLowPercent, SIGNAL(toggled(bool)), this, SLOT(configChanged()));
-        connect(checkLowTime, SIGNAL(toggled(bool)), this, SLOT(checkLowTimeChanged(bool)));
-        connect(checkLowPercent, SIGNAL(toggled(bool)), this, SLOT(checkLowPercentChanged(bool)));
+        connect(editLowTime, TQT_SIGNAL(valueChanged(int)), this, TQT_SLOT(configChanged()));
+        connect(editLowPercent, TQT_SIGNAL(valueChanged(int)), this, TQT_SLOT(configChanged()));
+        connect(checkLowTime, TQT_SIGNAL(toggled(bool)), this, TQT_SLOT(configChanged()));
+        connect(checkLowPercent, TQT_SIGNAL(toggled(bool)), this, TQT_SLOT(configChanged()));
+        connect(checkLowTime, TQT_SIGNAL(toggled(bool)), this, TQT_SLOT(checkLowTimeChanged(bool)));
+        connect(checkLowPercent, TQT_SIGNAL(toggled(bool)), this, TQT_SLOT(checkLowPercentChanged(bool)));
     }
 
     
     // setup the Run Command stuff
-    checkRunCommand = new QCheckBox(i18n("Run &command:"), this);
+    checkRunCommand = new TQCheckBox(i18n("Run &command:"), this);
     grid->addWidget(checkRunCommand, curRow, 0);
 
     editRunCommand = new KURLRequester( this );
     editRunCommand->setEnabled(false);
-    connect( checkRunCommand, SIGNAL(toggled(bool)),
-	     editRunCommand,  SLOT(setEnabled(bool)) );
-    connect( checkRunCommand, SIGNAL(clicked()),
-	     this, SLOT(configChanged()) );
-    connect( editRunCommand, SIGNAL(textChanged(const QString&)),
-	     this, SLOT(configChanged()) );
+    connect( checkRunCommand, TQT_SIGNAL(toggled(bool)),
+	     editRunCommand,  TQT_SLOT(setEnabled(bool)) );
+    connect( checkRunCommand, TQT_SIGNAL(clicked()),
+	     this, TQT_SLOT(configChanged()) );
+    connect( editRunCommand, TQT_SIGNAL(textChanged(const TQString&)),
+	     this, TQT_SLOT(configChanged()) );
     grid->addWidget(editRunCommand, curRow++, 1);
-    QToolTip::add( editRunCommand, i18n( "This command will be run when the battery gets low" ) );
+    TQToolTip::add( editRunCommand, i18n( "This command will be run when the battery gets low" ) );
 
     // setup the Play Sound stuff
-    checkPlaySound = new QCheckBox(i18n("&Play sound:"), this);
+    checkPlaySound = new TQCheckBox(i18n("&Play sound:"), this);
     grid->addWidget(checkPlaySound, curRow, 0);
 
     editPlaySound = new KURLRequester( this );
     editPlaySound->setEnabled(false);
-    connect( checkPlaySound, SIGNAL(toggled(bool)),
-	     editPlaySound,  SLOT(setEnabled(bool)) );
-    connect( checkPlaySound, SIGNAL(clicked()),
-	     this, SLOT(configChanged()) );
-    connect( editPlaySound, SIGNAL(textChanged(const QString&)),
-	     this, SLOT(configChanged()) );
+    connect( checkPlaySound, TQT_SIGNAL(toggled(bool)),
+	     editPlaySound,  TQT_SLOT(setEnabled(bool)) );
+    connect( checkPlaySound, TQT_SIGNAL(clicked()),
+	     this, TQT_SLOT(configChanged()) );
+    connect( editPlaySound, TQT_SIGNAL(textChanged(const TQString&)),
+	     this, TQT_SLOT(configChanged()) );
     grid->addWidget(editPlaySound, curRow++, 1);
-    QToolTip::add( editPlaySound, i18n( "This sound will play when the battery gets low" ) );
+    TQToolTip::add( editPlaySound, i18n( "This sound will play when the battery gets low" ) );
 
     // setup the System Sound stuff
-    checkBeep = new QCheckBox(i18n("System &beep"), this);
+    checkBeep = new TQCheckBox(i18n("System &beep"), this);
     grid->addWidget(checkBeep, curRow++, 0);
-    connect(checkBeep, SIGNAL(clicked()), this, SLOT(configChanged()));
-    QToolTip::add( checkBeep, i18n( "The system will beep if this is enabled" ) );
+    connect(checkBeep, TQT_SIGNAL(clicked()), this, TQT_SLOT(configChanged()));
+    TQToolTip::add( checkBeep, i18n( "The system will beep if this is enabled" ) );
 
-    checkNotify = new QCheckBox(i18n("&Notify"), this);
+    checkNotify = new TQCheckBox(i18n("&Notify"), this);
     grid->addWidget(checkNotify, curRow++, 0);
-    connect(checkNotify, SIGNAL(clicked()), this, SLOT(configChanged()));
+    connect(checkNotify, TQT_SIGNAL(clicked()), this, TQT_SLOT(configChanged()));
 
     int can_suspend = laptop_portable::has_suspend();
     int can_standby = laptop_portable::has_standby();
@@ -163,43 +163,43 @@ WarningConfig::WarningConfig (int t, QWidget * parent, const char *name)
     int can_brightness = laptop_portable::has_brightness();
 
     if (can_brightness) {
-      checkBrightness = new QCheckBox(i18n("Panel b&rightness"), this);
+      checkBrightness = new TQCheckBox(i18n("Panel b&rightness"), this);
       checkBrightness->setMinimumSize(checkBrightness->sizeHint());
-      QToolTip::add( checkBrightness, i18n( "If enabled the back panel brightness will change" ) );
+      TQToolTip::add( checkBrightness, i18n( "If enabled the back panel brightness will change" ) );
       grid->addWidget(checkBrightness, curRow, 0);
-      connect(checkBrightness, SIGNAL(toggled(bool)), this, SLOT(brightness_changed(bool)));
-      QHBoxLayout *v = new QHBoxLayout();
-      v->addWidget(new QLabel("-", this));
-      valueBrightness = new QSlider(0, 255, 16, 160, Qt::Horizontal, this);
-      QToolTip::add( valueBrightness, i18n( "How bright or dim to make the back panel" ) );
+      connect(checkBrightness, TQT_SIGNAL(toggled(bool)), this, TQT_SLOT(brightness_changed(bool)));
+      TQHBoxLayout *v = new TQHBoxLayout();
+      v->addWidget(new TQLabel("-", this));
+      valueBrightness = new TQSlider(0, 255, 16, 160, Qt::Horizontal, this);
+      TQToolTip::add( valueBrightness, i18n( "How bright or dim to make the back panel" ) );
       valueBrightness->setMaximumWidth(70);
       v->addWidget(valueBrightness);
-      v->addWidget(new QLabel("+", this));
+      v->addWidget(new TQLabel("+", this));
       v->addStretch(1);
       grid->addLayout(v, curRow, 1);
       valueBrightness->setEnabled(0);
-      connect(valueBrightness, SIGNAL(valueChanged(int)), this, SLOT(configChanged()));
+      connect(valueBrightness, TQT_SIGNAL(valueChanged(int)), this, TQT_SLOT(configChanged()));
       ++curRow;
     } else {
       checkBrightness = 0;
       valueBrightness = 0;
     }
-    QStringList performance_list;
+    TQStringList performance_list;
     int current_performance;
     bool *active_list;
     bool has_performance = laptop_portable::get_system_performance(0, current_performance, performance_list, active_list);
     if (has_performance) {
-    	performance = new QCheckBox(i18n("System performance"), this);
-        QToolTip::add( performance, i18n( "If enabled the laptop's power performance profile will change" ) );
+    	performance = new TQCheckBox(i18n("System performance"), this);
+        TQToolTip::add( performance, i18n( "If enabled the laptop's power performance profile will change" ) );
         grid->addWidget(performance, curRow, 0);
-    	connect (performance, SIGNAL(toggled(bool)), this, SLOT(performance_changed(bool)));
+    	connect (performance, TQT_SIGNAL(toggled(bool)), this, TQT_SLOT(performance_changed(bool)));
 
-        QHBoxLayout *v = new QHBoxLayout();
+        TQHBoxLayout *v = new TQHBoxLayout();
     	performance_val = new KComboBox(0, this);
 	performance_val->insertStringList(performance_list);
     	performance_val->setEnabled(0);
-    	connect (performance_val, SIGNAL(activated(int)), this, SLOT(configChanged()));
-        QToolTip::add( performance_val, i18n( "The performance profile to change to" ) );
+    	connect (performance_val, TQT_SIGNAL(activated(int)), this, TQT_SLOT(configChanged()));
+        TQToolTip::add( performance_val, i18n( "The performance profile to change to" ) );
 	v->addWidget(performance_val);
 	v->addStretch(1);
         grid->addLayout(v, curRow, 1);
@@ -208,21 +208,21 @@ WarningConfig::WarningConfig (int t, QWidget * parent, const char *name)
         performance = 0;
         performance_val = 0;
     }
-    QStringList throttle_list;
+    TQStringList throttle_list;
     int current_throttle;
     bool has_throttle = laptop_portable::get_system_throttling(0, current_throttle, throttle_list, active_list);
     if (has_throttle) {
-    	throttle = new QCheckBox(i18n("CPU throttling"), this);
-        QToolTip::add( throttle, i18n( "If enabled the CPU performance will be throttled" ) );
+    	throttle = new TQCheckBox(i18n("CPU throttling"), this);
+        TQToolTip::add( throttle, i18n( "If enabled the CPU performance will be throttled" ) );
         grid->addWidget(throttle, curRow, 0);
-    	connect (throttle, SIGNAL(toggled(bool)), this, SLOT(throttle_changed(bool)));
+    	connect (throttle, TQT_SIGNAL(toggled(bool)), this, TQT_SLOT(throttle_changed(bool)));
 
-        QHBoxLayout *v = new QHBoxLayout();
+        TQHBoxLayout *v = new TQHBoxLayout();
     	throttle_val = new KComboBox(0, this);
 	throttle_val->insertStringList(throttle_list);
     	throttle_val->setEnabled(0);
-    	connect (throttle_val, SIGNAL(activated(int)), this, SLOT(configChanged()));
-        QToolTip::add( throttle_val, i18n( "How much to throttle the CPU performance by" ) );
+    	connect (throttle_val, TQT_SIGNAL(activated(int)), this, TQT_SLOT(configChanged()));
+        TQToolTip::add( throttle_val, i18n( "How much to throttle the CPU performance by" ) );
 	v->addWidget(throttle_val);
 	v->addStretch(1);
         grid->addLayout(v, curRow, 1);
@@ -234,47 +234,47 @@ WarningConfig::WarningConfig (int t, QWidget * parent, const char *name)
 
 
 
-    QVButtonGroup *b = new QVButtonGroup(i18n("System State Change"), this);
-    QToolTip::add( b, i18n( "You may choose one of the following to occur when the battery gets low" ) );
+    TQVButtonGroup *b = new TQVButtonGroup(i18n("System State Change"), this);
+    TQToolTip::add( b, i18n( "You may choose one of the following to occur when the battery gets low" ) );
     b->layout()->setSpacing( KDialog::spacingHint() );
     if (can_standby) {
-      checkStandby = new QRadioButton(i18n("Standb&y"), b);
-      QToolTip::add( checkStandby, i18n( "Move the system into the standby state - a temporary lower power state" ) );
+      checkStandby = new TQRadioButton(i18n("Standb&y"), b);
+      TQToolTip::add( checkStandby, i18n( "Move the system into the standby state - a temporary lower power state" ) );
       checkStandby->setMinimumSize(checkStandby->sizeHint());
-      connect(checkStandby, SIGNAL(clicked()), this, SLOT(configChanged()));
+      connect(checkStandby, TQT_SIGNAL(clicked()), this, TQT_SLOT(configChanged()));
     }
     if (can_suspend) {
-      checkSuspend = new QRadioButton(i18n("&Suspend"), b);
-      QToolTip::add( checkSuspend, i18n( "Move the system into the suspend state - also known as 'save-to-ram'" ) );
+      checkSuspend = new TQRadioButton(i18n("&Suspend"), b);
+      TQToolTip::add( checkSuspend, i18n( "Move the system into the suspend state - also known as 'save-to-ram'" ) );
       checkSuspend->setMinimumSize(checkSuspend->sizeHint());
-      connect(checkSuspend, SIGNAL(clicked()), this, SLOT(configChanged()));
+      connect(checkSuspend, TQT_SIGNAL(clicked()), this, TQT_SLOT(configChanged()));
     }
     if (can_hibernate) {
-      checkHibernate = new QRadioButton(i18n("H&ibernate"), b);
-      QToolTip::add( checkHibernate, i18n( "Move the system into the hibernate state - also known as 'save-to-disk'" ) );
+      checkHibernate = new TQRadioButton(i18n("H&ibernate"), b);
+      TQToolTip::add( checkHibernate, i18n( "Move the system into the hibernate state - also known as 'save-to-disk'" ) );
       checkHibernate->setMinimumSize(checkHibernate->sizeHint());
-      connect(checkHibernate, SIGNAL(clicked()), this, SLOT(configChanged()));
+      connect(checkHibernate, TQT_SIGNAL(clicked()), this, TQT_SLOT(configChanged()));
     }
     // setup the logout option
-    checkLogout = new QRadioButton(i18n("&Logout"), b);
-    connect(checkLogout, SIGNAL(clicked()), this, SLOT(configChanged()));
+    checkLogout = new TQRadioButton(i18n("&Logout"), b);
+    connect(checkLogout, TQT_SIGNAL(clicked()), this, TQT_SLOT(configChanged()));
     // setup the shutdown option
-    checkShutdown = new QRadioButton(i18n("System power off"), b);
-    QToolTip::add( checkShutdown, i18n( "Power the laptop off" ) );
-    connect(checkShutdown, SIGNAL(clicked()), this, SLOT(configChanged()));
+    checkShutdown = new TQRadioButton(i18n("System power off"), b);
+    TQToolTip::add( checkShutdown, i18n( "Power the laptop off" ) );
+    connect(checkShutdown, TQT_SIGNAL(clicked()), this, TQT_SLOT(configChanged()));
     
-    checkNone = new QRadioButton(i18n("&None"), b);
-    connect(checkNone, SIGNAL(clicked()), this, SLOT(configChanged()));
+    checkNone = new TQRadioButton(i18n("&None"), b);
+    connect(checkNone, TQT_SIGNAL(clicked()), this, TQT_SLOT(configChanged()));
 
     grid->addMultiCellWidget(b, curRow, curRow, 0, 1, Qt::AlignLeft|Qt::AlignTop);
     curRow++;
 
 
-    QLabel* explain;
+    TQLabel* explain;
     if (type) {
-      explain = new QLabel(i18n("This panel controls how and when you receive warnings that your battery power is going to run out VERY VERY soon."), this);
+      explain = new TQLabel(i18n("This panel controls how and when you receive warnings that your battery power is going to run out VERY VERY soon."), this);
     } else {
-      explain = new QLabel(i18n("This panel controls how and when you receive warnings that your battery power is about to run out"), this);
+      explain = new TQLabel(i18n("This panel controls how and when you receive warnings that your battery power is about to run out"), this);
     }
     explain->setAlignment( Qt::WordBreak );
     grid->addMultiCellWidget(explain, curRow, curRow, 0, 1);
@@ -282,13 +282,13 @@ WarningConfig::WarningConfig (int t, QWidget * parent, const char *name)
 
     if (!can_suspend && !can_standby && !can_hibernate) {
       // display help text:
-      QLabel* note = laptop_portable::how_to_do_suspend_resume(this);
+      TQLabel* note = laptop_portable::how_to_do_suspend_resume(this);
       grid->addMultiCellWidget(note, curRow, curRow, 0, 1);
       ++curRow;
     }
     grid->setRowStretch(curRow++, 1);
 
-    grid->addWidget(new QLabel( i18n("Version: %1").arg(LAPTOP_VERSION), this),
+    grid->addWidget(new TQLabel( i18n("Version: %1").arg(LAPTOP_VERSION), this),
 		    curRow, 1, Qt::AlignRight);
 
   }
@@ -560,7 +560,7 @@ void WarningConfig::enablePlaySound(bool enable)
 
 void WarningConfig::browseRunCommand()
 {
-  KURL url = KFileDialog::getOpenURL(QString::null, QString::null, this  );
+  KURL url = KFileDialog::getOpenURL(TQString::null, TQString::null, this  );
   
   if( url.isEmpty() )
     return;
@@ -577,7 +577,7 @@ void WarningConfig::browseRunCommand()
 
 void WarningConfig::browsePlaySound()
 {
-  KURL url = KFileDialog::getOpenURL(QString::null, QString::null, this  );
+  KURL url = KFileDialog::getOpenURL(TQString::null, TQString::null, this  );
   
   if( url.isEmpty() )
     return;
@@ -593,7 +593,7 @@ void WarningConfig::browsePlaySound()
 }
 #endif
 
-QString WarningConfig::quickHelp() const
+TQString WarningConfig::quickHelp() const
 {
   return i18n("<h1>Low battery Warning</h1>This module allows you to "
 	"set an alarm in case your battery's charge is about to run out.");

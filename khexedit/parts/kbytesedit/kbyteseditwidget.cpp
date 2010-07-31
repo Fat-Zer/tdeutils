@@ -16,7 +16,7 @@
 
 
 // qt specific
-#include <qlayout.h>
+#include <tqlayout.h>
 // kde specific
 #include <klocale.h>
 #include <kgenericfactory.h>
@@ -26,14 +26,14 @@
 #include "kbyteseditwidget.h"
 
 
-KBytesEditWidget::KBytesEditWidget( QWidget *parent, const char *name, const QStringList & )
-  : QWidget( parent, name)
+KBytesEditWidget::KBytesEditWidget( TQWidget *parent, const char *name, const TQStringList & )
+  : TQWidget( parent, name)
 {
-  QHBoxLayout* Layout = new QHBoxLayout( this );
+  TQHBoxLayout* Layout = new TQHBoxLayout( this );
   BytesEdit = new KHE::KBytesEdit( this, "BytesEdit" );
   Layout->addWidget( BytesEdit );
-//   connect( _editor, SIGNAL( canUndo(bool) ), this, SIGNAL( canUndo(bool) ) );
-  connect( BytesEdit, SIGNAL(copyAvailable( bool )), this, SIGNAL(copyAvailable( bool )) );
+//   connect( _editor, TQT_SIGNAL( canUndo(bool) ), this, TQT_SIGNAL( canUndo(bool) ) );
+  connect( BytesEdit, TQT_SIGNAL(copyAvailable( bool )), this, TQT_SIGNAL(copyAvailable( bool )) );
 }
 
 
@@ -144,7 +144,7 @@ void KBytesEditWidget::setShowUnprintable( bool SU )
   BytesEdit->setShowUnprintable( SU );
 }
 
-void KBytesEditWidget::setSubstituteChar( QChar SC )
+void KBytesEditWidget::setSubstituteChar( TQChar SC )
 {
   BytesEdit->setSubstituteChar( SC );
 }
@@ -230,7 +230,7 @@ bool KBytesEditWidget::showUnprintable() const
   return BytesEdit->showUnprintable();
 }
 
-QChar KBytesEditWidget::substituteChar() const
+TQChar KBytesEditWidget::substituteChar() const
 {
   return BytesEdit->substituteChar();
 }
@@ -253,7 +253,7 @@ void KBytesEditWidget::repaintRange( int i1, int i2 )
 }
 
 
-void KBytesEditWidget::insert( const QByteArray &D )
+void KBytesEditWidget::insert( const TQByteArray &D )
 {
   BytesEdit->insert( D );
 }

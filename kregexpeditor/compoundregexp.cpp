@@ -25,7 +25,7 @@
 #include "compoundregexp.h"
 #include "widgetfactory.h"
 
-CompoundRegExp::CompoundRegExp( bool selected, const QString& title, const QString& description, bool hidden,
+CompoundRegExp::CompoundRegExp( bool selected, const TQString& title, const TQString& description, bool hidden,
                                 bool allowReplace, RegExp* child)
     : RegExp( selected ), _title( title ), _description( description ), _hidden( hidden ), _allowReplace( allowReplace ), _child( child )
 {
@@ -38,21 +38,21 @@ bool CompoundRegExp::check( ErrorMap& map, bool first, bool last )
     return _child->check( map, first, last );
 }
 
-QDomNode CompoundRegExp::toXml( QDomDocument* doc ) const
+TQDomNode CompoundRegExp::toXml( TQDomDocument* doc ) const
 {
-    QDomElement top = doc->createElement( QString::fromLocal8Bit( "Compound" ) );
+    TQDomElement top = doc->createElement( TQString::fromLocal8Bit( "Compound" ) );
     if (_hidden)
-        top.setAttribute( QString::fromLocal8Bit("hidden"), true );
+        top.setAttribute( TQString::fromLocal8Bit("hidden"), true );
     if ( _allowReplace )
-        top.setAttribute( QString::fromLocal8Bit("allowReplace"), true );
+        top.setAttribute( TQString::fromLocal8Bit("allowReplace"), true );
 
-    QDomElement title = doc->createElement( QString::fromLocal8Bit( "Title" ) );
-    QDomText titleTxt = doc->createTextNode( _title );
+    TQDomElement title = doc->createElement( TQString::fromLocal8Bit( "Title" ) );
+    TQDomText titleTxt = doc->createTextNode( _title );
     title.appendChild( titleTxt );
     top.appendChild( title );
 
-    QDomElement description = doc->createElement( QString::fromLocal8Bit( "Description" ) );
-    QDomText descriptionTxt = doc->createTextNode( _description );
+    TQDomElement description = doc->createElement( TQString::fromLocal8Bit( "Description" ) );
+    TQDomText descriptionTxt = doc->createTextNode( _description );
     description.appendChild( descriptionTxt );
     top.appendChild( description );
 
@@ -62,30 +62,30 @@ QDomNode CompoundRegExp::toXml( QDomDocument* doc ) const
 }
 
 
-bool CompoundRegExp::load( QDomElement top, const QString& version )
+bool CompoundRegExp::load( TQDomElement top, const TQString& version )
 {
-    Q_ASSERT( top.tagName() == QString::fromLocal8Bit("Compound") );
-    QString str = top.attribute( QString::fromLocal8Bit( "hidden" ), QString::fromLocal8Bit("0") );
-    _hidden = true; // alway hidden. (str == QString::fromLocal8Bit("1") );
+    Q_ASSERT( top.tagName() == TQString::fromLocal8Bit("Compound") );
+    TQString str = top.attribute( TQString::fromLocal8Bit( "hidden" ), TQString::fromLocal8Bit("0") );
+    _hidden = true; // alway hidden. (str == TQString::fromLocal8Bit("1") );
 
-    str = top.attribute( QString::fromLocal8Bit( "allowReplace" ), QString::fromLocal8Bit("0") );
-    _allowReplace = (str == QString::fromLocal8Bit("1") );
+    str = top.attribute( TQString::fromLocal8Bit( "allowReplace" ), TQString::fromLocal8Bit("0") );
+    _allowReplace = (str == TQString::fromLocal8Bit("1") );
 
-    for ( QDomNode node = top.firstChild(); !node.isNull(); node = node.nextSibling() ) {
+    for ( TQDomNode node = top.firstChild(); !node.isNull(); node = node.nextSibling() ) {
         if ( !node.isElement() )
             continue; // skip past comments.
-        QString txt;
-        QDomElement child = node.toElement();
-        QDomNode txtNode = child.firstChild();
+        TQString txt;
+        TQDomElement child = node.toElement();
+        TQDomNode txtNode = child.firstChild();
         if ( txtNode.isText() )
             txt = txtNode.toText().data();
-        if ( child.tagName() == QString::fromLocal8Bit( "Title" ) ) {
+        if ( child.tagName() == TQString::fromLocal8Bit( "Title" ) ) {
             if ( txt.isEmpty() )
                 _title = txt;
             else
                 _title = i18n(txt.utf8());
         }
-        else if ( child.tagName() == QString::fromLocal8Bit( "Description" ) ) {
+        else if ( child.tagName() == TQString::fromLocal8Bit( "Description" ) ) {
             if ( txt.isEmpty() )
                 _description = txt;
             else

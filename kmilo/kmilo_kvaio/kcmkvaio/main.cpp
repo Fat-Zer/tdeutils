@@ -19,11 +19,11 @@
  *
  */
 
-#include <qlabel.h>
-#include <qlayout.h>
-#include <qcheckbox.h>
-#include <qtimer.h>
-#include <qslider.h>
+#include <tqlabel.h>
+#include <tqlayout.h>
+#include <tqcheckbox.h>
+#include <tqtimer.h>
+#include <tqslider.h>
 
 #include <dcopclient.h>
 #include <kgenericfactory.h>
@@ -40,13 +40,13 @@
 #include "main.h"
 #include "main.moc"
 
-typedef KGenericFactory<KVaioModule, QWidget> KVaioModuleFactory;
+typedef KGenericFactory<KVaioModule, TQWidget> KVaioModuleFactory;
 K_EXPORT_COMPONENT_FACTORY( kcm_kvaio, KVaioModuleFactory("kcmkvaio"))
 
 #define CONFIG_FILE "kmilodrc"
 
 
-KVaioModule::KVaioModule(QWidget *parent, const char *name, const QStringList &)
+KVaioModule::KVaioModule(TQWidget *parent, const char *name, const TQStringList &)
     : KCModule(KVaioModuleFactory::instance(), parent, name)
 {
     KAboutData *about =
@@ -61,14 +61,14 @@ KVaioModule::KVaioModule(QWidget *parent, const char *name, const QStringList &)
                      "mirko@kde.org");
     setAboutData( about );
 
-    QVBoxLayout *layout = new QVBoxLayout(this);
+    TQVBoxLayout *layout = new TQVBoxLayout(this);
     mKVaioGeneral = new KCMKVaioGeneral(this);
     layout->addWidget( mKVaioGeneral );
     layout->addStretch();
 
     mDriver = new KVaioDriverInterface(this);
     mDriverAvailable = mDriver->connectToDriver(false);
-    mTimer = new QTimer(this);
+    mTimer = new TQTimer(this);
     mTimer->start(231);
 
     load();
@@ -82,10 +82,10 @@ KVaioModule::KVaioModule(QWidget *parent, const char *name, const QStringList &)
         // mKVaioGeneral->frameMain->setEnabled (true);
     }
 
-    connect(mKVaioGeneral, SIGNAL(changed()),
-            SLOT(changed()));
-    connect(mTimer, SIGNAL(timeout()), SLOT(timeout()));
-    connect(mDriver, SIGNAL (vaioEvent(int)), SLOT (vaioEvent(int) ) );
+    connect(mKVaioGeneral, TQT_SIGNAL(changed()),
+            TQT_SLOT(changed()));
+    connect(mTimer, TQT_SIGNAL(timeout()), TQT_SLOT(timeout()));
+    connect(mDriver, TQT_SIGNAL (vaioEvent(int)), TQT_SLOT (vaioEvent(int) ) );
 }
 
 void KVaioModule::save()
@@ -108,8 +108,8 @@ void KVaioModule::save()
 
     if(mClient.attach())
     {
-        QByteArray data, replyData;
-        QCString replyType;
+        TQByteArray data, replyData;
+        TQCString replyType;
 
         if (!mClient.call("kded", "kmilod", "reconfigure()",
                           data, replyType, replyData))

@@ -13,7 +13,7 @@
 #ifndef IRACTION_H
 #define IRACTION_H
 
-#include <qstring.h>
+#include <tqstring.h>
 
 #include "prototype.h"
 #include "arguments.h"
@@ -27,7 +27,7 @@ class KConfig;
 
 class IRAction
 {
-	QString theProgram, theObject, theRemote, theButton, theMode;
+	TQString theProgram, theObject, theRemote, theButton, theMode;
 	Prototype theMethod;
 	Arguments theArguments;
 	bool theRepeat, theAutoStart, theDoBefore, theDoAfter;
@@ -40,49 +40,49 @@ public:
 	void saveToConfig(KConfig &theConfig, int index) const;
 
 	// may be changed to a profile-based representation in the future.
-	const QString function() const;
-	const QString application() const;
-	const QString buttonName() const;
-	const QString remoteName() const;
-	const QString notes() const;
+	const TQString function() const;
+	const TQString application() const;
+	const TQString buttonName() const;
+	const TQString remoteName() const;
+	const TQString notes() const;
 
 	// bog standard raw DCOP stuff
-	const QString &program() const { return theProgram; }
-	const QString &object() const { return theObject; }
+	const TQString &program() const { return theProgram; }
+	const TQString &object() const { return theObject; }
 	const Prototype &method() const { return theMethod; }
-	const QString &remote() const { return theRemote; }
-	const QString &mode() const { return theMode; }
-	const QString &button() const { return theButton; }
+	const TQString &remote() const { return theRemote; }
+	const TQString &mode() const { return theMode; }
+	const TQString &button() const { return theButton; }
 	const Arguments arguments() const { if(theProgram != "" && theObject != "") return theArguments; return Arguments(); }
 	const bool repeat() const { return theRepeat; }
 	const bool autoStart() const { return theAutoStart; }
 	const IfMulti ifMulti() const { return theIfMulti; }
 	const bool unique() const { return theUnique; }
 
-	const QString &modeChange() const { return theObject; }
+	const TQString &modeChange() const { return theObject; }
 	const bool doBefore() const { return theDoBefore; }
 	const bool doAfter() const { return theDoAfter; }
 
 	bool isModeChange() const { return theProgram == ""; }
 	bool isJustStart() const { return theProgram != "" && theObject == ""; }
 
-	void setProgram(const QString &newProgram) { theProgram = newProgram; }
-	void setObject(const QString &newObject) { theObject = newObject; }
+	void setProgram(const TQString &newProgram) { theProgram = newProgram; }
+	void setObject(const TQString &newObject) { theObject = newObject; }
 	void setMethod(const Prototype &newMethod) { theMethod = newMethod; }
-	void setRemote(const QString &newRemote) { theRemote = newRemote; }
-	void setMode(const QString &newMode) { theMode = newMode; }
-	void setButton(const QString &newButton) { theButton = newButton; }
+	void setRemote(const TQString &newRemote) { theRemote = newRemote; }
+	void setMode(const TQString &newMode) { theMode = newMode; }
+	void setButton(const TQString &newButton) { theButton = newButton; }
 	void setArguments(const Arguments &newArguments) { theArguments = newArguments; }
 	void setRepeat(bool newRepeat) { theRepeat = newRepeat; }
 	void setDoBefore(bool a) { theDoBefore = a; }
 	void setDoAfter(bool a) { theDoAfter = a; }
 	void setAutoStart(bool newAutoStart) { theAutoStart = newAutoStart; }
-	void setModeChange(const QString &a) { theObject = a; }
+	void setModeChange(const TQString &a) { theObject = a; }
 	void setIfMulti(const IfMulti a) { theIfMulti = a; }
 	void setUnique(const bool a) { theUnique = a; }
 
-	IRAction(const QString &newProgram, const QString &newObject, const QString &newMethod, const Arguments &newArguments, const QString &newRemote, const QString &newMode, const QString &newButton, const bool newRepeat, const bool newAutoStart, const bool newDoBefore, const bool newDoAfter, const bool newUnique, const IfMulti newIfMulti);
-	IRAction() { theProgram = QString::null; }
+	IRAction(const TQString &newProgram, const TQString &newObject, const TQString &newMethod, const Arguments &newArguments, const TQString &newRemote, const TQString &newMode, const TQString &newButton, const bool newRepeat, const bool newAutoStart, const bool newDoBefore, const bool newDoAfter, const bool newUnique, const IfMulti newIfMulti);
+	IRAction() { theProgram = TQString::null; }
 };
 
 #endif

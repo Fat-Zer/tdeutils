@@ -28,9 +28,9 @@
 #define __BATTERYCONFIG_H__
 
 #include <kcmodule.h>
-#include <qstring.h>
-#include <qpixmap.h>
-#include <qptrlist.h>
+#include <tqstring.h>
+#include <tqpixmap.h>
+#include <tqptrlist.h>
 
 class QWidget;
 class QSpinBox;
@@ -46,7 +46,7 @@ class BatteryConfig : public KCModule
 {
   Q_OBJECT
 public:
-  BatteryConfig( QWidget *parent=0, const char* name=0);
+  BatteryConfig( TQWidget *parent=0, const char* name=0);
   ~BatteryConfig( );     
 
   void save( void );
@@ -54,7 +54,7 @@ public:
   void load(bool useDefaults);
   void defaults();
 
-  virtual QString quickHelp() const;
+  virtual TQString quickHelp() const;
 
 private slots:
 
@@ -65,15 +65,15 @@ private slots:
   void BatteryStateUpdate();
 
 private:
-	void timerEvent(QTimerEvent *);
-	void ConvertIcon(int percent, QPixmap &pm, QPixmap &result);
+	void timerEvent(TQTimerEvent *);
+	void ConvertIcon(int percent, TQPixmap &pm, TQPixmap &result);
 	KConfig *config;
 
-        QSpinBox* editPoll;
-        QCheckBox* runMonitor;
-        QCheckBox* showLevel;
-        QCheckBox* notifyMe;
-	QCheckBox* blankSaver;
+        TQSpinBox* editPoll;
+        TQCheckBox* runMonitor;
+        TQCheckBox* showLevel;
+        TQCheckBox* notifyMe;
+	TQCheckBox* blankSaver;
         bool            enablemonitor;
         bool            showlevel;
         bool            enablequitmenu;
@@ -85,13 +85,13 @@ private:
         KIconButton *buttonNoBattery;
         KIconButton *buttonNoCharge;
         KIconButton *buttonCharge;
-        QString nobattery, nochargebattery, chargebattery;
-	QPushButton *startMonitor;
+        TQString nobattery, nochargebattery, chargebattery;
+	TQPushButton *startMonitor;
         bool    apm;
         int poll_time;       
 
-	QPtrList<QLabel> batt_label_1, batt_label_2, batt_label_3;
-	QPixmap battery_pm, battery_nopm;
+	TQPtrList<TQLabel> batt_label_1, batt_label_2, batt_label_3;
+	TQPixmap battery_pm, battery_nopm;
 
     	KInstance *instance;
 };

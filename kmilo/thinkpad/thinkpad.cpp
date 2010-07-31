@@ -43,7 +43,7 @@
 
 namespace KMilo {
 
-ThinkPadMonitor::ThinkPadMonitor(QObject* parent, const char* name, const QStringList& args): Monitor(parent, name, args) {
+ThinkPadMonitor::ThinkPadMonitor(TQObject* parent, const char* name, const TQStringList& args): Monitor(parent, name, args) {
 	m_progress = 0;
 	m_volume = 50;  //set in retrieveVolume()
 }
@@ -265,7 +265,7 @@ int ThinkPadMonitor::progress() const {
 	return m_progress;
 }
 
-QString ThinkPadMonitor::message() const {
+TQString ThinkPadMonitor::message() const {
 	//unused
 	//return i18n("yer maw!");
 	return "";
@@ -426,8 +426,8 @@ void ThinkPadMonitor::clearStruct(thinkpad_state_struct& thinkpad_state)  {
 	thinkpad_state.bluetooth_toggle = 0;
 }
 
-void ThinkPadMonitor::showToggleMessage(QString onMessage, QString offMessage, bool state) {
-		QString message;
+void ThinkPadMonitor::showToggleMessage(TQString onMessage, TQString offMessage, bool state) {
+		TQString message;
 		if (state)  {
 			message = onMessage;
 		} else {

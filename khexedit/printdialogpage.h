@@ -35,10 +35,10 @@ class LayoutDialogPage : public KPrintDialogPage
  Q_OBJECT
 
  public:
-    LayoutDialogPage( QWidget *parent = 0, const char *name = 0 );
+    LayoutDialogPage( TQWidget *parent = 0, const char *name = 0 );
     ~LayoutDialogPage( void );
 
-    void getOptions( QMap<QString,QString>& opts, bool incldef = false );
+    void getOptions( TQMap<TQString,TQString>& opts, bool incldef = false );
 
  private slots:
    void slotDrawHeader( bool state );
@@ -50,20 +50,20 @@ class LayoutDialogPage : public KPrintDialogPage
    void readConfiguration( void );
    void writeConfiguration( void );
 
-   QString headerText( uint index );
-   QString headerLine( uint index );
-   int headerTextIndex( const QString & headerText );
-   int headerLineIndex( const QString & headerLine );
+   TQString headerText( uint index );
+   TQString headerLine( uint index );
+   int headerTextIndex( const TQString & headerText );
+   int headerLineIndex( const TQString & headerLine );
 
    struct SLayoutWidgets
    {
-     QSpinBox     *marginSpin[4];
-     QCheckBox    *headerCheck;
-     QCheckBox    *footerCheck;
-     QLabel       *headerLabel[4];
-     QComboBox    *headerCombo[4];
-     QLabel       *footerLabel[4];
-     QComboBox    *footerCombo[4];
+     TQSpinBox     *marginSpin[4];
+     TQCheckBox    *headerCheck;
+     TQCheckBox    *footerCheck;
+     TQLabel       *headerLabel[4];
+     TQComboBox    *headerCombo[4];
+     TQLabel       *footerLabel[4];
+     TQComboBox    *footerCombo[4];
    };
 
    KSimpleConfig *mConfig;

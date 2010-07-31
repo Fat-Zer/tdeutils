@@ -23,16 +23,16 @@
 #ifndef _KCALC_CONST_MENU_H
 #define _KCALC_CONST_MENU_H
 
-#include <qpopupmenu.h>
-#include <qstring.h>
+#include <tqpopupmenu.h>
+#include <tqstring.h>
 
 enum ConstantCategory {Mathematics = 1, Electromagnetic = 2, Nuclear = 4, Thermodynamics = 8, Gravitation = 16};
 
 struct science_constant{
-  QString label;
+  TQString label;
   const char * name;
-  QString whatsthis;
-  QString value;
+  TQString whatsthis;
+  TQString value;
   ConstantCategory category;
 };
 
@@ -41,7 +41,7 @@ class KCalcConstMenu : public QPopupMenu
 Q_OBJECT 
 
  public:
-  KCalcConstMenu(QWidget * parent = 0, const char * name = 0);
+  KCalcConstMenu(TQWidget * parent = 0, const char * name = 0);
 
   static const struct science_constant Constants[];
 

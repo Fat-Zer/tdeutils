@@ -8,11 +8,11 @@
  *   (at your option) any later version.                                   *
  ***************************************************************************/
 #include "memsensor.h"
-#include <qfile.h>
-#include <qglobal.h>
-#include <qtextstream.h>
-#include <qstring.h>
-#include <qregexp.h>
+#include <tqfile.h>
+#include <tqglobal.h>
+#include <tqtextstream.h>
+#include <tqstring.h>
+#include <tqregexp.h>
 
 #ifdef Q_OS_FREEBSD
 #include <sys/time.h>
@@ -56,10 +56,10 @@ MemSensor::MemSensor(int msec) : Sensor(msec)
 # if defined(Q_OS_FREEBSD) && defined(__FreeBSD_version) && __FreeBSD_version >= 500018
     kd = kvm_open("/dev/null", "/dev/null", "/dev/null", O_RDONLY, "kvm_open");
 # elif defined Q_OS_FREEBSD
-    connect(&ksp, SIGNAL(receivedStdout(KProcess *, char *, int )),
-            this,SLOT(receivedStdout(KProcess *, char *, int )));
-    connect(&ksp, SIGNAL(processExited(KProcess *)),
-            this,SLOT(processExited( KProcess * )));
+    connect(&ksp, TQT_SIGNAL(receivedStdout(KProcess *, char *, int )),
+            this,TQT_SLOT(receivedStdout(KProcess *, char *, int )));
+    connect(&ksp, TQT_SIGNAL(processExited(KProcess *)),
+            this,TQT_SLOT(processExited( KProcess * )));
 
     swapTotal = swapUsed = 0;
 
@@ -79,7 +79,7 @@ MemSensor::~MemSensor()
 void MemSensor::receivedStdout(KProcess *, char *buffer, int len )
 {
     buffer[len] = 0;
-    sensorResult += QString( QCString(buffer) );
+    sensorResult += TQString( TQCString(buffer) );
 }
 #else
 void MemSensor::receivedStdout(KProcess *, char *, int)
@@ -90,9 +90,9 @@ void MemSensor::receivedStdout(KProcess *, char *, int)
 void MemSensor::processExited(KProcess *)
 {
 #ifdef Q_OS_FREEBSD
-    QStringList stringList = QStringList::split('\n',sensorResult);
+    TQStringList stringList = TQStringList::split('\n',sensorResult);
     sensorResult = "";
-    QStringList itemsList = QStringList::split(' ', stringList[1]);
+    TQStringList itemsList = TQStringList::split(' ', stringList[1]);
 
     swapUsed = itemsList[2].toInt();
     swapTotal = itemsList[1].toInt();
@@ -108,7 +108,7 @@ int MemSensor::getMemTotal()
     sysctlbyname("hw.physmem", &mem, &size, NULL, 0);
     return (mem / 1024);
 #else
-    QRegExp rx( "MemTotal:\\s*(\\d+)" );
+    TQRegExp rx( "MemTotal:\\s*(\\d+)" );
     rx.search( meminfo );
     return ( rx.cap(1).toInt() );
 #endif
@@ -132,7 +132,7 @@ int MemSensor::getMemFree()
     sysctl(mib,2,&uvmexp,&ssize,NULL,0);
     return pagetok(uvmexp.free);
 #else
-    QRegExp rx( "MemFree:\\s*(\\d+)" );
+    TQRegExp rx( "MemFree:\\s*(\\d+)" );
     rx.search( meminfo );
     return ( rx.cap(1).toInt() );
 #endif
@@ -153,7 +153,7 @@ int MemSensor::getBuffers()
     sysctlbyname("vm.bufmem", &buf_mem, &size, NULL, 0);
     return (buf_mem / 1024);
 #else
-    QRegExp rx( "Buffers:\\s*(\\d+)" );
+    TQRegExp rx( "Buffers:\\s*(\\d+)" );
     rx.search( meminfo );
     return ( rx.cap(1).toInt() );
 #endif
@@ -170,8 +170,8 @@ int MemSensor::getCached()
 #elif defined(Q_OS_NETBSD)
     return 0;
 #else
-    QRegExp rx1( "Cached:\\s*(\\d+)" );
-    QRegExp rx2( "SwapCached:\\s*(\\d+)" );
+    TQRegExp rx1( "Cached:\\s*(\\d+)" );
+    TQRegExp rx2( "SwapCached:\\s*(\\d+)" );
     rx1.search( meminfo );
     rx2.search( meminfo );
     return ( rx1.cap(1).toInt() + rx2.cap(1).toInt() );
@@ -215,7 +215,7 @@ int MemSensor::getSwapTotal()
     }
     return STotal;
 #else
-    QRegExp rx( "SwapTotal:\\s*(\\d+)" );
+    TQRegExp rx( "SwapTotal:\\s*(\\d+)" );
     rx.search( meminfo );
     return ( rx.cap(1).toInt() );
 #endif
@@ -260,7 +260,7 @@ int MemSensor::getSwapFree()
     }
     return SFree;
 #else
-    QRegExp rx( "SwapFree:\\s*(\\d+)" );
+    TQRegExp rx( "SwapFree:\\s*(\\d+)" );
     rx.search( meminfo );
     return ( rx.cap(1).toInt() );
 #endif
@@ -275,11 +275,11 @@ void MemSensor::readValues()
     ksp.start( KProcess::NotifyOnExit,KProcIO::Stdout);
 # endif
 #else
-    QFile file("/proc/meminfo");
-    QString line;
+    TQFile file("/proc/meminfo");
+    TQString line;
     if ( file.open(IO_ReadOnly | IO_Translate) )
     {
-        QTextStream t( &file );        // use a text stream
+        TQTextStream t( &file );        // use a text stream
         meminfo = t.read();
         file.close();
     }
@@ -289,10 +289,10 @@ void MemSensor::readValues()
 void MemSensor::update()
 {
     readValues();
-    QString format;
+    TQString format;
     SensorParams *sp;
     Meter *meter;
-    QObjectListIt it( *objList );
+    TQObjectListIt it( *objList );
 #if defined(Q_OS_FREEBSD) && !(defined(__FreeBSD_version) && __FreeBSD_version >= 500018)
     bool set = false;
 #endif
@@ -318,17 +318,17 @@ void MemSensor::update()
             format = "%um";
         }
 
-        format.replace( QRegExp("%fmb", false), QString::number( (int)(( totalMem - usedMemNoBuffers)/1024.0+0.5)));
-        format.replace( QRegExp("%fm", false), QString::number( (int)( ( totalMem - usedMem  )/1024.0+0.5) ));
+        format.replace( TQRegExp("%fmb", false), TQString::number( (int)(( totalMem - usedMemNoBuffers)/1024.0+0.5)));
+        format.replace( TQRegExp("%fm", false), TQString::number( (int)( ( totalMem - usedMem  )/1024.0+0.5) ));
 
-        format.replace( QRegExp("%umb", false), QString::number( (int)((usedMemNoBuffers)/1024.0+0.5)));
-        format.replace( QRegExp("%um", false), QString::number( (int)((usedMem)/1024.0+0.5 )));
+        format.replace( TQRegExp("%umb", false), TQString::number( (int)((usedMemNoBuffers)/1024.0+0.5)));
+        format.replace( TQRegExp("%um", false), TQString::number( (int)((usedMem)/1024.0+0.5 )));
 
-        format.replace( QRegExp("%tm", false), QString::number( (int)( (totalMem)/1024.0+0.5)));
+        format.replace( TQRegExp("%tm", false), TQString::number( (int)( (totalMem)/1024.0+0.5)));
 
-        format.replace( QRegExp("%fs", false), QString::number( (int)((totalSwap - usedSwap)/1024.0+0.5)));
-        format.replace( QRegExp("%us", false), QString::number( (int)(usedSwap/1024.0+0.5)));
-        format.replace( QRegExp("%ts", false), QString::number( (int)(totalSwap/1024.0+0.5)));
+        format.replace( TQRegExp("%fs", false), TQString::number( (int)((totalSwap - usedSwap)/1024.0+0.5)));
+        format.replace( TQRegExp("%us", false), TQString::number( (int)(usedSwap/1024.0+0.5)));
+        format.replace( TQRegExp("%ts", false), TQString::number( (int)(totalSwap/1024.0+0.5)));
 
         meter->setValue(format);
         ++it;
@@ -343,7 +343,7 @@ void MemSensor::setMaxValue( SensorParams *sp )
 {
     Meter *meter;
     meter = sp->getMeter();
-    QString f;
+    TQString f;
     f = sp->getParam("FORMAT");
 
     if (f.length() == 0 )

@@ -20,7 +20,7 @@
 #ifndef KSIM__LABEL_H
 #define KSIM__LABEL_H
 
-#include <qwidget.h>
+#include <tqwidget.h>
 #include "common.h"
 
 #include <kdemacros.h>
@@ -34,7 +34,7 @@ namespace KSim
    * @short Label widget
    * @author Robbie Ward <linuxphreak@gmx.co.uk>
    */
-  class KDE_EXPORT Label : public QWidget, public KSim::Base
+  class KDE_EXPORT Label : public TQWidget, public KSim::Base
   {
     Q_OBJECT
     public:
@@ -50,7 +50,7 @@ namespace KSim
        * To create a KSim::Label with the normal theme look
        * @see KSim::ThemeLoader
        */
-      Label(QWidget *parent, const char *name = 0, WFlags fl = 0);
+      Label(TQWidget *parent, const char *name = 0, WFlags fl = 0);
       /**
        * Constructs a KSimLabel.
        *
@@ -62,10 +62,10 @@ namespace KSim
        *  KSim::Label *label = new KSim::Label(KSim::Types::None, this);
        * </pre>
        * To create a KSim::Label with the normal theme look,
-       * NOTE: this is the same as the KSim::Label(QWidget *, const char *, WFlags) ctor
+       * NOTE: this is the same as the KSim::Label(TQWidget *, const char *, WFlags) ctor
        * @see KSim::ThemeLoader
        */
-      Label(int type, QWidget *parent, const char *name = 0, WFlags fl = 0);
+      Label(int type, TQWidget *parent, const char *name = 0, WFlags fl = 0);
       /**
        * Constructs a KSim::Label.
        *
@@ -80,8 +80,8 @@ namespace KSim
        * To create a KSim::Label with the theme look of host
        * @see KSim::ThemeLoader
        */
-      Label(int type, const QString &text,
-           QWidget *parent, const char *name = 0, WFlags fl = 0);
+      Label(int type, const TQString &text,
+           TQWidget *parent, const char *name = 0, WFlags fl = 0);
       /**
        * destructs KSim::Label.
        */
@@ -91,7 +91,7 @@ namespace KSim
        * returns the current text of the label
        * @see #setText
        */
-      const QString &text() const;
+      const TQString &text() const;
       /**
        * recreates the labels look & feel
        */
@@ -99,19 +99,19 @@ namespace KSim
       /**
        * sets a pixmap for the label
        */
-      void setPixmap(const QPixmap &pixmap);
+      void setPixmap(const TQPixmap &pixmap);
       /**
        * @return the side pixmap
        */
-      const QPixmap &pixmap() const;
+      const TQPixmap &pixmap() const;
       /**
        * reimplemented for internal reasons
        */
-      virtual QSize sizeHint() const;
+      virtual TQSize sizeHint() const;
       /**
        * reimplemented for internal reasons
        */
-      virtual QSize minimumSizeHint() const;
+      virtual TQSize minimumSizeHint() const;
 
     public slots:
       /**
@@ -122,7 +122,7 @@ namespace KSim
        * sets the current label of the widget to @ref text
        * @see text()
        */
-      void setText(const QString &text);
+      void setText(const TQString &text);
 
     protected:
       /**
@@ -140,19 +140,19 @@ namespace KSim
       /**
        * Set the text color
        */
-      void setTextColour(const QColor &color);
+      void setTextColour(const TQColor &color);
       /**
        * @return the text color
        */
-      const QColor &textColour() const;
+      const TQColor &textColour() const;
       /**
        * Set the shadow color
        */
-      void setShadowColour(const QColor &color);
+      void setShadowColour(const TQColor &color);
       /**
        * @return the shadow color
        */
-      const QColor &shadowColour() const;
+      const TQColor &shadowColour() const;
       /**
        * Set the config values depending on the chart type
        */
@@ -160,42 +160,42 @@ namespace KSim
       /**
        * reimplemented for internal reasons
        */
-      virtual void paintEvent(QPaintEvent *);
+      virtual void paintEvent(TQPaintEvent *);
       /**
        * reimplemented for internal reasons
        */
-      virtual void resizeEvent(QResizeEvent *);
+      virtual void resizeEvent(TQResizeEvent *);
       /**
        * draw the text onto the label
        */
-      void drawText(QPainter *painter, const QRect &rect,
-          const QColor &color, const QString &text);
+      void drawText(TQPainter *painter, const TQRect &rect,
+          const TQColor &color, const TQString &text);
       /**
        * draw the pixmap onto the label
        */
-      void drawPixmap(QPainter *painter,
-          const QRect &rect, const QPixmap &pixmap);
+      void drawPixmap(TQPainter *painter,
+          const TQRect &rect, const TQPixmap &pixmap);
       /**
        * sets the location of the text
        */
-      void setTextLocation(const QRect &rect);
+      void setTextLocation(const TQRect &rect);
       /**
        * @return the location of the text
        */
-      const QRect &textLocation() const;
+      const TQRect &textLocation() const;
       /**
        * sets the location of the shadow text
        */
-      void setShadowLocation(const QRect &rect);
+      void setShadowLocation(const TQRect &rect);
       /**
        * @return the location of the shadow text
        */
-      const QRect &shadowLocation() const;
+      const TQRect &shadowLocation() const;
       /**
        * sets the background image to be painted
        */
-      void setThemePixmap(const QString &image);
-      void relayoutLabel(const QSize &old, bool repaint = true);
+      void setThemePixmap(const TQString &image);
+      void relayoutLabel(const TQSize &old, bool repaint = true);
 
     private:
       /**

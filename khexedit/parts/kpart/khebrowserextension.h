@@ -39,8 +39,8 @@ class KHexEditBrowserExtension : public KParts::BrowserExtension
     KHexEditBrowserExtension( KHexEditPart *P );
 
   public: // KParts::BrowserExtension API
-    virtual void saveState( QDataStream &stream );
-    virtual void restoreState( QDataStream &stream );
+    virtual void saveState( TQDataStream &stream );
+    virtual void restoreState( TQDataStream &stream );
 
   public slots:
     /** copy text to clipboard */

@@ -18,12 +18,12 @@
 
 #include "regexphighlighter.h"
 
-RegexpHighlighter::RegexpHighlighter( QTextEdit* edit )
-    :QSyntaxHighlighter( edit ), _caseSensitive( false ), _minimal( false )
+RegexpHighlighter::RegexpHighlighter( TQTextEdit* edit )
+    :TQSyntaxHighlighter( edit ), _caseSensitive( false ), _minimal( false )
 {
 }
 
-void RegexpHighlighter::setRegExp( const QString& regexp )
+void RegexpHighlighter::setRegExp( const TQString& regexp )
 {
     _regexp = regexp;
 }

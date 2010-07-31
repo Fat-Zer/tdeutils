@@ -36,8 +36,8 @@ public:
 
     virtual bool check( ErrorMap&, bool first, bool last );
     virtual int precedence() const { return 2;}
-    virtual QDomNode toXml( QDomDocument* doc ) const;
-    virtual bool load( QDomElement, const QString& version );
+    virtual TQDomNode toXml( TQDomDocument* doc ) const;
+    virtual bool load( TQDomElement, const TQString& version );
     virtual RegExpType type() const {return CONC; }
     virtual bool operator==( const RegExp& other ) const;
     virtual void replacePart( CompoundRegExp* replacement );

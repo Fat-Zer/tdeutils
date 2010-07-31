@@ -23,7 +23,7 @@
 
 #include <label.h>
 
-#include <qlayout.h>
+#include <tqlayout.h>
 
 #include <kconfig.h>
 
@@ -32,7 +32,7 @@ using namespace KSim::Snmp;
 View::View( Plugin *parent, const char *name )
     : KSim::PluginView( parent, name )
 {
-    m_layout = new QVBoxLayout( this );
+    m_layout = new TQVBoxLayout( this );
 
     reparseConfig();
 }
@@ -49,8 +49,8 @@ void View::reparseConfig()
 
     KConfig &cfg = *config();
     cfg.setGroup( "General" );
-    QStringList allHosts = cfg.readListEntry( "Hosts" );
-    QStringList monitors = cfg.readListEntry( "Monitors" );
+    TQStringList allHosts = cfg.readListEntry( "Hosts" );
+    TQStringList monitors = cfg.readListEntry( "Monitors" );
 
     HostConfigMap hosts;
     hosts.load( cfg, allHosts );
@@ -63,7 +63,7 @@ void View::reparseConfig()
 
         MonitorConfig monitorConfig = *it;
 
-        QWidget *w = monitorConfig.createMonitorWidget( this );
+        TQWidget *w = monitorConfig.createMonitorWidget( this );
         if ( !w )
             continue;
 

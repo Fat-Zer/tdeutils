@@ -29,7 +29,7 @@
 #ifndef EXTRACTIONDIALOG_H
 #define EXTRACTIONDIALOG_H
 
-#include <qcheckbox.h>
+#include <tqcheckbox.h>
 
 #include <kurl.h>
 #include <kdialogbase.h>
@@ -45,11 +45,11 @@ class ExtractionDialog : public KDialogBase
 		/**
 		 * Constructor.
 		 */
-		ExtractionDialog( QWidget *parent = 0, const char *name = 0,
+		ExtractionDialog( TQWidget *parent = 0, const char *name = 0,
 		                  bool enableSelected = true,
 		                  const KURL &defaultExtractionDir = KURL(),
-		                  const QString &prefix = QString(),
-		                  const QString &archiveName = QString::null );
+		                  const TQString &prefix = TQString(),
+		                  const TQString &archiveName = TQString::null );
 
 		/**
 		 * Destructor.
@@ -77,19 +77,19 @@ class ExtractionDialog : public KDialogBase
 
 	public slots:
 		void accept();
-		void extractDirChanged( const QString & );
+		void extractDirChanged( const TQString & );
 
 
 
 	private:
-		QRadioButton  *m_selectedButton;
-		QRadioButton  *m_allButton;
-		QCheckBox     *m_viewFolderAfterExtraction;
+		TQRadioButton  *m_selectedButton;
+		TQRadioButton  *m_allButton;
+		TQCheckBox     *m_viewFolderAfterExtraction;
 		bool           m_selectedOnly;
 		KURL           m_extractionDirectory;
 		KURLRequester *m_urlRequester;
-		QString        m_defaultExtractionDir;
-		QString        m_prefix;
+		TQString        m_defaultExtractionDir;
+		TQString        m_prefix;
 };
 
 #endif //  EXTRACTIONDIALOG_H

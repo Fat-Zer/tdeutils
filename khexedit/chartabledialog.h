@@ -37,26 +37,26 @@ class CCharTableDialog : public KDialogBase
   Q_OBJECT
   
   public:
-    CCharTableDialog( QWidget *parent=0, const char *name=0,bool modal=false );
+    CCharTableDialog( TQWidget *parent=0, const char *name=0,bool modal=false );
     ~CCharTableDialog( void );
 
   signals:
-    void assign( const QByteArray &buf );
+    void assign( const TQByteArray &buf );
 
   protected slots:
     virtual void slotUser1( void );
-    virtual void startAssign( QListViewItem * );
+    virtual void startAssign( TQListViewItem * );
 
   protected:
-    virtual void resizeEvent( QResizeEvent *e );
-    virtual void showEvent( QShowEvent *e );
+    virtual void resizeEvent( TQResizeEvent *e );
+    virtual void showEvent( TQShowEvent *e );
 
   private:
     void createListData( void );
     void setColumnWidth( void );
 
   private:
-    QSpinBox  *mInputCountSpin;
+    TQSpinBox  *mInputCountSpin;
     CListView *mCharacterList;
 };
 

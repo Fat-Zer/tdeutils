@@ -17,23 +17,23 @@
 
 #include <stdlib.h>
 
-#include <qfile.h>
-#include <qcheckbox.h>
+#include <tqfile.h>
+#include <tqcheckbox.h>
 #include <kapplication.h>
 #include <kiconloader.h>
 #include <kcombobox.h>
 #include <kdialogbase.h>
 #include <kmessagebox.h>
-#include <qtextcodec.h>
-#include <qlayout.h>
-#include <qlabel.h>
-#include <qdialog.h>
-#include <qpushbutton.h>
-#include <qbuttongroup.h>
-#include <qhbuttongroup.h>
-#include <qvbuttongroup.h>
-#include <qregexp.h>
-#include <qcursor.h>
+#include <tqtextcodec.h>
+#include <tqlayout.h>
+#include <tqlabel.h>
+#include <tqdialog.h>
+#include <tqpushbutton.h>
+#include <tqbuttongroup.h>
+#include <tqhbuttongroup.h>
+#include <tqvbuttongroup.h>
+#include <tqregexp.h>
+#include <tqcursor.h>
 
 #include <klocale.h>
 #include <kprocess.h>
@@ -52,7 +52,7 @@
 #include "detailedconsole.h"
 #include "keyservers.h"
 
-keyServer::keyServer(QWidget *parent, const char *name,bool modal,bool autoClose):KDialogBase( Swallow, i18n("Key Server"), Close, Close, parent, name,modal)
+keyServer::keyServer(TQWidget *parent, const char *name,bool modal,bool autoClose):KDialogBase( Swallow, i18n("Key Server"), Close, Close, parent, name,modal)
 {
 	autoCloseWindow=autoClose;
 	config=new KSimpleConfig ("kgpgrc");
@@ -62,15 +62,15 @@ keyServer::keyServer(QWidget *parent, const char *name,bool modal,bool autoClose
         syncCombobox();
         page->kLEimportid->setFocus();
 
-        connect(page->Buttonimport,SIGNAL(clicked()),this,SLOT(slotImport()));
-        connect(page->Buttonsearch,SIGNAL(clicked()),this,SLOT(slotSearch()));
-        connect(page->Buttonexport,SIGNAL(clicked()),this,SLOT(slotPreExport()));
-        connect(this,SIGNAL(okClicked()),this,SLOT(slotOk()));
+        connect(page->Buttonimport,TQT_SIGNAL(clicked()),this,TQT_SLOT(slotImport()));
+        connect(page->Buttonsearch,TQT_SIGNAL(clicked()),this,TQT_SLOT(slotSearch()));
+        connect(page->Buttonexport,TQT_SIGNAL(clicked()),this,TQT_SLOT(slotPreExport()));
+        connect(this,TQT_SIGNAL(okClicked()),this,TQT_SLOT(slotOk()));
 
-        connect(page->cBproxyI,SIGNAL(toggled(bool)),this,SLOT(slotEnableProxyI(bool)));
-        connect(page->cBproxyE,SIGNAL(toggled(bool)),this,SLOT(slotEnableProxyE(bool)));
+        connect(page->cBproxyI,TQT_SIGNAL(toggled(bool)),this,TQT_SLOT(slotEnableProxyI(bool)));
+        connect(page->cBproxyE,TQT_SIGNAL(toggled(bool)),this,TQT_SLOT(slotEnableProxyE(bool)));
 
-        connect(page->kLEimportid,  SIGNAL( textChanged ( const QString & )), this,  SLOT( slotTextChanged( const QString &)));
+        connect(page->kLEimportid,  TQT_SIGNAL( textChanged ( const TQString & )), this,  TQT_SLOT( slotTextChanged( const TQString &)));
 	page->cBproxyI->setChecked(KGpgSettings::useProxy());
         page->cBproxyE->setChecked(KGpgSettings::useProxy());
         const char *httpproxy = getenv("http_proxy");
@@ -82,9 +82,9 @@ keyServer::keyServer(QWidget *parent, const char *name,bool modal,bool autoClose
         }
 
 
-        KProcIO *encid=new KProcIO(QTextCodec::codecForLocale());
+        KProcIO *encid=new KProcIO(TQTextCodec::codecForLocale());
         *encid << "gpg"<<"--no-secmem-warning"<<"--no-tty"<<"--with-colon"<<"--list-keys";
-        QObject::connect(encid, SIGNAL(readReady(KProcIO *)),this, SLOT(slotprocread(KProcIO *)));
+        TQObject::connect(encid, TQT_SIGNAL(readReady(KProcIO *)),this, TQT_SLOT(slotprocread(KProcIO *)));
         encid->start(KProcess::NotifyOnExit,true);
         page->Buttonimport->setEnabled( !page->kLEimportid->text().isEmpty());
         page->Buttonsearch->setEnabled( !page->kLEimportid->text().isEmpty());
@@ -96,7 +96,7 @@ keyServer::~keyServer()
 {}
 
 
-void keyServer::slotTextChanged( const QString &text)
+void keyServer::slotTextChanged( const TQString &text)
 {
     page->Buttonimport->setEnabled( !text.isEmpty());
     page->Buttonsearch->setEnabled( !text.isEmpty());
@@ -118,13 +118,13 @@ void keyServer::slotprocread(KProcIO *p)
 {
         ///////////////////////////////////////////////////////////////// extract  encryption keys
         bool dead;
-        QString tst;
-	//QPixmap pixkeySingle(KGlobal::iconLoader()->loadIcon("kgpg_key1",KIcon::Small,20));
+        TQString tst;
+	//TQPixmap pixkeySingle(KGlobal::iconLoader()->loadIcon("kgpg_key1",KIcon::Small,20));
         while (p->readln(tst)!=-1) {
                 //tst=tst.stripWhiteSpace();
                 if (tst.startsWith("pub")) {
-                        const QString trust=tst.section(':',1,1);
-                        QString id=QString("0x"+tst.section(':',4,4).right(8));
+                        const TQString trust=tst.section(':',1,1);
+                        TQString id=TQString("0x"+tst.section(':',4,4).right(8));
                         switch( trust[0] ) {
                         case 'i':
                                 dead=true;
@@ -171,22 +171,22 @@ void keyServer::slotSearch()
 	dialogServer->setButtonText(KDialogBase::Ok,i18n("&Import"));
 	dialogServer->enableButtonOK(false);
 	listpop=new searchRes();
-	listpop->kLVsearch->setColumnWidthMode(0,QListView::Manual);
-	listpop->kLVsearch->setColumnWidthMode(1,QListView::Manual);
+	listpop->kLVsearch->setColumnWidthMode(0,TQListView::Manual);
+	listpop->kLVsearch->setColumnWidthMode(1,TQListView::Manual);
 	listpop->kLVsearch->setColumnWidth(0,150);
 	listpop->kLVsearch->setColumnWidth(1,130);
         listpop->statusText->setText(i18n("Connecting to the server..."));
-        connect(listpop->kLVsearch,SIGNAL(selectionChanged()),this,SLOT(transferKeyID()));
-        connect(dialogServer,SIGNAL(okClicked()),this,SLOT(preimport()));
-        connect(listpop->kLVsearch,SIGNAL(doubleClicked(QListViewItem *,const QPoint &,int)),dialogServer,SIGNAL(okClicked()));
+        connect(listpop->kLVsearch,TQT_SIGNAL(selectionChanged()),this,TQT_SLOT(transferKeyID()));
+        connect(dialogServer,TQT_SIGNAL(okClicked()),this,TQT_SLOT(preimport()));
+        connect(listpop->kLVsearch,TQT_SIGNAL(doubleClicked(TQListViewItem *,const TQPoint &,int)),dialogServer,TQT_SIGNAL(okClicked()));
 
-        connect(dialogServer,SIGNAL(closeClicked()),this,SLOT(handleQuit()));
-        connect( listpop , SIGNAL( destroyed() ) , this, SLOT( abortSearch()));
+        connect(dialogServer,TQT_SIGNAL(closeClicked()),this,TQT_SLOT(handleQuit()));
+        connect( listpop , TQT_SIGNAL( destroyed() ) , this, TQT_SLOT( abortSearch()));
         count=0;
         cycle=false;
-        readmessage=QString::null;
-        searchproc=new KProcIO(QTextCodec::codecForLocale());
-        QString keyserv=page->kCBimportks->currentText();
+        readmessage=TQString::null;
+        searchproc=new KProcIO(TQTextCodec::codecForLocale());
+        TQString keyserv=page->kCBimportks->currentText();
         *searchproc<<"gpg"<<"--utf8-strings";
         if (page->cBproxyI->isChecked()) {
                 searchproc->setEnvironment("http_proxy",page->kLEproxyI->text());
@@ -196,10 +196,10 @@ void keyServer::slotSearch()
         *searchproc<<"--keyserver"<<keyserv<<"--command-fd=0"<<"--status-fd=2"<<"--search-keys"<<page->kLEimportid->text().stripWhiteSpace();
 
         keyNumbers=0;
-        QObject::connect(searchproc, SIGNAL(processExited(KProcess *)),this, SLOT(slotsearchresult(KProcess *)));
-        QObject::connect(searchproc, SIGNAL(readReady(KProcIO *)),this, SLOT(slotsearchread(KProcIO *)));
+        TQObject::connect(searchproc, TQT_SIGNAL(processExited(KProcess *)),this, TQT_SLOT(slotsearchresult(KProcess *)));
+        TQObject::connect(searchproc, TQT_SIGNAL(readReady(KProcIO *)),this, TQT_SLOT(slotsearchread(KProcIO *)));
         searchproc->start(KProcess::NotifyOnExit,true);
-	QApplication::setOverrideCursor(QCursor(Qt::BusyCursor));
+	TQApplication::setOverrideCursor(TQCursor(Qt::BusyCursor));
 	dialogServer->setMainWidget(listpop);
 	listpop->setMinimumSize(listpop->sizeHint());
 	listpop->setMinimumWidth(550);
@@ -210,7 +210,7 @@ void keyServer::handleQuit()
 {
 	if (searchproc->isRunning())
 	{
-	    QApplication::restoreOverrideCursor();
+	    TQApplication::restoreOverrideCursor();
 	    disconnect(searchproc,0,0,0);
 	    searchproc->kill();
 	}
@@ -242,9 +242,9 @@ void keyServer::transferKeyID()
 {
         if (!listpop->kLVsearch->firstChild())
                 return;
-        QString kid,keysToSearch;
+        TQString kid,keysToSearch;
 	listpop->kLEID->clear();
-	QPtrList< QListViewItem >searchList=listpop->kLVsearch->selectedItems();
+	TQPtrList< TQListViewItem >searchList=listpop->kLVsearch->selectedItems();
 
 	for ( uint i = 0; i < searchList.count(); ++i )
 	{
@@ -257,9 +257,9 @@ void keyServer::transferKeyID()
 
 void keyServer::slotsearchresult(KProcess *)
 {
-        QString nb;
+        TQString nb;
 	dialogServer->enableButtonOK(true);
-	QApplication::restoreOverrideCursor();
+	TQApplication::restoreOverrideCursor();
         nb=nb.setNum(keyNumbers);
         //listpop->kLVsearch->setColumnText(0,i18n("Found %1 matching keys").arg(nb));
         listpop->statusText->setText(i18n("Found %1 matching keys").arg(nb));
@@ -273,10 +273,10 @@ void keyServer::slotsearchresult(KProcess *)
 
 void keyServer::slotsearchread(KProcIO *p)
 {
-        QString required;
-	QString keymail,keyname;
+        TQString required;
+	TQString keymail,keyname;
         while (p->readln(required,true)!=-1) {
-                //required=QString::fromUtf8(required);
+                //required=TQString::fromUtf8(required);
 
                 if (required.find("keysearch.prompt")!=-1) {
                         if (count<4)
@@ -285,39 +285,39 @@ void keyServer::slotsearchread(KProcIO *p)
                                 p->writeStdin("Q");
                                 p->closeWhenDone();
                         }
-                        required=QString::null;
+                        required=TQString::null;
                 }
 
                 if (required.find("GOT_IT")!=-1) {
                         count++;
-                        required=QString::null;
+                        required=TQString::null;
                 }
 
                 if (required.find("(")==0) {
                         cycle=true;
-			QString fullname=required.remove(0,required.find(")")+1).stripWhiteSpace();
+			TQString fullname=required.remove(0,required.find(")")+1).stripWhiteSpace();
 			if (fullname.find("<")!=-1) {
 	                keymail=fullname.section('<',-1,-1);
 			if (keymail.endsWith(">")) keymail.truncate(keymail.length()-1);
                 	keyname=fullname.section('<',0,0);
         		} else {
-                	keymail=QString::null;
+                	keymail=TQString::null;
 			keyname=fullname;
 		        }
-                        kitem=new KListViewItem(listpop->kLVsearch,keyname,keymail,QString::null,QString::null);
+                        kitem=new KListViewItem(listpop->kLVsearch,keyname,keymail,TQString::null,TQString::null);
                         keyNumbers++;
                         count=0;
-                        required=QString::null;
+                        required=TQString::null;
                 }
 
                 if ((cycle) && (!required.isEmpty())) {
-                        QString subkey=required.stripWhiteSpace();
+                        TQString subkey=required.stripWhiteSpace();
 			if (subkey.find(" key ")!=-1 && subkey.at(0).isDigit ())
 			{
-                        QString kid=subkey.section(",",0,0).stripWhiteSpace();
+                        TQString kid=subkey.section(",",0,0).stripWhiteSpace();
                         kid=kid.right(8);
 			kitem->setText(3,kid);
-			QString creation=subkey.section("created",1,1);
+			TQString creation=subkey.section("created",1,1);
 			if (creation.startsWith(":")) creation=creation.right(creation.length()-1);
 			kitem->setText(2,creation);
 			cycle=false;
@@ -329,29 +329,29 @@ void keyServer::slotsearchread(KProcIO *p)
         	        if (keymail.endsWith(">")) keymail.truncate(keymail.length()-1);
                 	keyname=subkey.section('<',0,0);
         		} else {
-                	keymail=QString::null;
+                	keymail=TQString::null;
 			keyname=subkey;
 		        }
-			KListViewItem *subk = new KListViewItem(kitem,keyname,keymail,QString::null,QString::null);
+			KListViewItem *subk = new KListViewItem(kitem,keyname,keymail,TQString::null,TQString::null);
 			subk->setSelectable(false);
 			}
-                        required=QString::null;
+                        required=TQString::null;
                 }
         }
 }
 
 void keyServer::slotPreExport()
 {
-	slotExport(QStringList(page->kCBexportkey->currentText().section(':', 0, 0)));
+	slotExport(TQStringList(page->kCBexportkey->currentText().section(':', 0, 0)));
 }
 
-void keyServer::slotExport(QStringList keyIds)
+void keyServer::slotExport(TQStringList keyIds)
 {
         if (page->kCBexportks->currentText().isEmpty())
                 return;
-        readmessage=QString::null;
-        exportproc=new KProcIO(QTextCodec::codecForLocale());
-        QString keyserv=page->kCBexportks->currentText();
+        readmessage=TQString::null;
+        exportproc=new KProcIO(TQTextCodec::codecForLocale());
+        TQString keyserv=page->kCBexportks->currentText();
 
         *exportproc<<"gpg"<<"--utf8-strings";
 	if (!page->exportAttributes->isChecked())
@@ -364,27 +364,27 @@ void keyServer::slotExport(QStringList keyIds)
                 *exportproc<<	"--keyserver-options"<<"no-honor-http-proxy";
         *exportproc << "--status-fd=2" << "--keyserver" << keyserv << "--send-keys" << keyIds;
 
-        QObject::connect(exportproc, SIGNAL(processExited(KProcess *)),this, SLOT(slotexportresult(KProcess *)));
-        QObject::connect(exportproc, SIGNAL(readReady(KProcIO *)),this, SLOT(slotimportread(KProcIO *)));
+        TQObject::connect(exportproc, TQT_SIGNAL(processExited(KProcess *)),this, TQT_SLOT(slotexportresult(KProcess *)));
+        TQObject::connect(exportproc, TQT_SIGNAL(readReady(KProcIO *)),this, TQT_SLOT(slotimportread(KProcIO *)));
         exportproc->start(KProcess::NotifyOnExit,true);
-	QApplication::setOverrideCursor(QCursor(Qt::BusyCursor));
-        importpop = new QDialog( this,0,true,Qt::WDestructiveClose);
-        QVBoxLayout *vbox=new QVBoxLayout(importpop,3);
-        QLabel *tex=new QLabel(importpop);
+	TQApplication::setOverrideCursor(TQCursor(Qt::BusyCursor));
+        importpop = new TQDialog( this,0,true,Qt::WDestructiveClose);
+        TQVBoxLayout *vbox=new TQVBoxLayout(importpop,3);
+        TQLabel *tex=new TQLabel(importpop);
         tex->setText(i18n("<b>Connecting to the server...</b>"));
-        QPushButton *Buttonabort=new QPushButton(i18n("&Abort"),importpop);
+        TQPushButton *Buttonabort=new TQPushButton(i18n("&Abort"),importpop);
         vbox->addWidget(tex);
         vbox->addWidget(Buttonabort);
         importpop->setMinimumWidth(250);
         importpop->adjustSize();
         importpop->show();
-        connect(importpop,SIGNAL(destroyed ()),this,SLOT(abortExport()));
-	connect(Buttonabort,SIGNAL(clicked ()),importpop,SLOT(close()));
+        connect(importpop,TQT_SIGNAL(destroyed ()),this,TQT_SLOT(abortExport()));
+	connect(Buttonabort,TQT_SIGNAL(clicked ()),importpop,TQT_SLOT(close()));
 }
 
 void keyServer::abortExport()
 {
-	QApplication::restoreOverrideCursor();
+	TQApplication::restoreOverrideCursor();
         if (exportproc->isRunning())
 	{
 	    disconnect(exportproc,0,0,0);
@@ -394,7 +394,7 @@ void keyServer::abortExport()
 
 void keyServer::slotexportresult(KProcess*)
 {
-	QApplication::restoreOverrideCursor();
+	TQApplication::restoreOverrideCursor();
         KMessageBox::information(0,readmessage);
         if (importpop)
                 delete importpop;
@@ -409,9 +409,9 @@ void keyServer::slotImport()
                 KMessageBox::sorry(this,i18n("You must enter a search string."));
                 return;
         }
-        readmessage=QString::null;
-        importproc=new KProcIO(QTextCodec::codecForLocale());
-        QString keyserv=page->kCBimportks->currentText();
+        readmessage=TQString::null;
+        importproc=new KProcIO(TQTextCodec::codecForLocale());
+        TQString keyserv=page->kCBimportks->currentText();
 
         *importproc<<"gpg"<<"--utf8-strings";
         if (page->cBproxyI->isChecked()) {
@@ -421,56 +421,56 @@ void keyServer::slotImport()
                 *importproc<<	"--keyserver-options"<<"no-honor-http-proxy";
 
         *importproc<<"--status-fd=2"<<"--keyserver"<<keyserv<<"--recv-keys";
-        QString keyNames=page->kLEimportid->text();
+        TQString keyNames=page->kLEimportid->text();
         keyNames=keyNames.stripWhiteSpace();
         keyNames=keyNames.simplifyWhiteSpace();
         while (!keyNames.isEmpty()) {
-                QString fkeyNames=keyNames.section(' ',0,0);
+                TQString fkeyNames=keyNames.section(' ',0,0);
                 keyNames.remove(0,fkeyNames.length());
                 keyNames=keyNames.stripWhiteSpace();
-                *importproc<<QFile::encodeName(fkeyNames);
+                *importproc<<TQFile::encodeName(fkeyNames);
         }
 
-        QObject::connect(importproc, SIGNAL(processExited(KProcess *)),this, SLOT(slotimportresult(KProcess *)));
-        QObject::connect(importproc, SIGNAL(readReady(KProcIO *)),this, SLOT(slotimportread(KProcIO *)));
+        TQObject::connect(importproc, TQT_SIGNAL(processExited(KProcess *)),this, TQT_SLOT(slotimportresult(KProcess *)));
+        TQObject::connect(importproc, TQT_SIGNAL(readReady(KProcIO *)),this, TQT_SLOT(slotimportread(KProcIO *)));
         importproc->start(KProcess::NotifyOnExit,true);
 	importproc->closeWhenDone();
-	QApplication::setOverrideCursor(QCursor(Qt::BusyCursor));
-        importpop = new QDialog( this,0,true,Qt::WDestructiveClose);
-        QVBoxLayout *vbox=new QVBoxLayout(importpop,3);
-        QLabel *tex=new QLabel(importpop);
+	TQApplication::setOverrideCursor(TQCursor(Qt::BusyCursor));
+        importpop = new TQDialog( this,0,true,Qt::WDestructiveClose);
+        TQVBoxLayout *vbox=new TQVBoxLayout(importpop,3);
+        TQLabel *tex=new TQLabel(importpop);
         tex->setText(i18n("<b>Connecting to the server...</b>"));
-        QPushButton *Buttonabort=new QPushButton(i18n("&Abort"),importpop);
+        TQPushButton *Buttonabort=new TQPushButton(i18n("&Abort"),importpop);
         vbox->addWidget(tex);
         vbox->addWidget(Buttonabort);
         importpop->setMinimumWidth(250);
         importpop->adjustSize();
         importpop->show();
-	connect(Buttonabort,SIGNAL(clicked()),importpop,SLOT(close()));
-	connect(importpop,SIGNAL(destroyed ()),this,SLOT(abortImport()));
+	connect(Buttonabort,TQT_SIGNAL(clicked()),importpop,TQT_SLOT(close()));
+	connect(importpop,TQT_SIGNAL(destroyed ()),this,TQT_SLOT(abortImport()));
 }
 
 void keyServer::abortImport()
 {
-	QApplication::restoreOverrideCursor();
+	TQApplication::restoreOverrideCursor();
 	if (importproc->isRunning())
 	{
 	    disconnect(importproc,0,0,0);
 	    importproc->kill();
-	    emit importFinished(QString::null);
+	    emit importFinished(TQString::null);
 	}
 	if (autoCloseWindow) close();
 }
 
 void keyServer::slotimportresult(KProcess*)
 {
-	QApplication::restoreOverrideCursor();
-        QString importedNb,importedNbSucess,importedNbProcess,resultMessage, parsedOutput,importedNbUnchanged,importedNbSig;
-	QString notImportesNbSec,importedNbMissing,importedNbRSA,importedNbUid,importedNbSub,importedNbRev,readNbSec;
-	QString importedNbSec,dupNbSec;
+	TQApplication::restoreOverrideCursor();
+        TQString importedNb,importedNbSucess,importedNbProcess,resultMessage, parsedOutput,importedNbUnchanged,importedNbSig;
+	TQString notImportesNbSec,importedNbMissing,importedNbRSA,importedNbUid,importedNbSub,importedNbRev,readNbSec;
+	TQString importedNbSec,dupNbSec;
 
         parsedOutput=readmessage;
-	QStringList importedKeys;
+	TQStringList importedKeys;
 
         while (parsedOutput.find("IMPORTED")!=-1) {
                 parsedOutput.remove(0,parsedOutput.find("IMPORTED")+8);
@@ -521,7 +521,7 @@ void keyServer::slotimportresult(KProcess*)
         } else
                 resultMessage=i18n("No key imported... \nCheck detailed log for more infos");
 
-	QString lastID=QString("0x"+importedKeys.last().section(" ",0,0).right(8));
+	TQString lastID=TQString("0x"+importedKeys.last().section(" ",0,0).right(8));
 	if (!lastID.isEmpty())
 	{
 	//kdDebug(2100)<<"++++++++++imported key"<<lastID<<endl;
@@ -539,7 +539,7 @@ void keyServer::slotimportresult(KProcess*)
 
 void keyServer::slotimportread(KProcIO *p)
 {
-        QString required;
+        TQString required;
         while (p->readln(required,true)!=-1)
                 readmessage+=required+"\n";
 }
@@ -547,9 +547,9 @@ void keyServer::slotimportread(KProcIO *p)
 void keyServer::syncCombobox()
 {
         config->setGroup("Servers");
-        QString serverList=config->readEntry("Server_List");
+        TQString serverList=config->readEntry("Server_List");
 
-        QString optionsServer=KgpgInterface::getGpgSetting("keyserver", KGpgSettings::gpgConfigPath());
+        TQString optionsServer=KgpgInterface::getGpgSetting("keyserver", KGpgSettings::gpgConfigPath());
 
 	page->kCBexportks->clear();
 	page->kCBimportks->clear();
@@ -561,8 +561,8 @@ void keyServer::syncCombobox()
 	else if ( serverList.isEmpty() )
 		serverList = "hkp://wwwkeys.eu.pgp.net,hkp://search.keyserver.net,hkp://wwwkeys.pgp.net,hkp://pgp.dtype.org,hkp://wwwkeys.us.pgp.net"; // same as ini kgpgoptions.cpp
 	
-	page->kCBexportks->insertStringList(QStringList::split(",",serverList));
-	page->kCBimportks->insertStringList(QStringList::split(",",serverList));
+	page->kCBexportks->insertStringList(TQStringList::split(",",serverList));
+	page->kCBimportks->insertStringList(TQStringList::split(",",serverList));
 }
 
 void keyServer::slotOk()

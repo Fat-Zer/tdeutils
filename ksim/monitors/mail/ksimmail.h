@@ -53,23 +53,23 @@ class MailLabel : public KSim::Label
 {
 	Q_OBJECT
 public:
-	MailLabel( QWidget* parent );
+	MailLabel( TQWidget* parent );
 	virtual ~MailLabel();
 
 	virtual void configureObject( bool );
 
 protected:
-	virtual void paintEvent( QPaintEvent* );
+	virtual void paintEvent( TQPaintEvent* );
 
 private slots:
 	void animation();
 
 private:
-	QPixmap frame( const QPixmap& source, int number ) const;
+	TQPixmap frame( const TQPixmap& source, int number ) const;
 
 private:
-	QPixmap m_envelope;
-	QPixmap m_penguin;
+	TQPixmap m_envelope;
+	TQPixmap m_penguin;
 	int m_frames;
 	int m_delay;
 };

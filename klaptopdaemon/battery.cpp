@@ -39,19 +39,19 @@
 #include <krichtextlabel.h>
 
 // other Qt headers:
-#include <qlayout.h>
-#include <qlabel.h>
-#include <qcheckbox.h>
-#include <qhbox.h>
-#include <qvgroupbox.h>
-#include <qhgroupbox.h>
-#include <qgrid.h>
-#include <qpushbutton.h>
-#include <qtooltip.h>
+#include <tqlayout.h>
+#include <tqlabel.h>
+#include <tqcheckbox.h>
+#include <tqhbox.h>
+#include <tqvgroupbox.h>
+#include <tqhgroupbox.h>
+#include <tqgrid.h>
+#include <tqpushbutton.h>
+#include <tqtooltip.h>
 extern void wake_laptop_daemon();
 
 
-BatteryConfig::BatteryConfig (QWidget * parent, const char *name)
+BatteryConfig::BatteryConfig (TQWidget * parent, const char *name)
   : KCModule(parent, name),
     editPoll(0),
     iconloader(0),
@@ -65,30 +65,30 @@ BatteryConfig::BatteryConfig (QWidget * parent, const char *name)
     config =  new KConfig("kcmlaptoprc");
     instance = new KInstance("klaptopdaemon");
 
-    QVBoxLayout *top_layout = new QVBoxLayout( this, KDialog::marginHint(),
+    TQVBoxLayout *top_layout = new TQVBoxLayout( this, KDialog::marginHint(),
 					       KDialog::spacingHint() );
 
     // do we show the monitor
-    runMonitor = new QCheckBox( i18n("&Show battery monitor"), this );
+    runMonitor = new TQCheckBox( i18n("&Show battery monitor"), this );
     top_layout->addWidget( runMonitor );
-    QToolTip::add( runMonitor, i18n( "This box enables the battery state icon in the panel" ) );
-    connect( runMonitor, SIGNAL(clicked()), this, SLOT(configChanged()) );
-    connect( runMonitor, SIGNAL(clicked()), this, SLOT(runMonitorChanged()) );
+    TQToolTip::add( runMonitor, i18n( "This box enables the battery state icon in the panel" ) );
+    connect( runMonitor, TQT_SIGNAL(clicked()), this, TQT_SLOT(configChanged()) );
+    connect( runMonitor, TQT_SIGNAL(clicked()), this, TQT_SLOT(runMonitorChanged()) );
 
     // show also the battery level percentage
-    showLevel = new QCheckBox( i18n("Show battery level percentage"), this );
+    showLevel = new TQCheckBox( i18n("Show battery level percentage"), this );
     top_layout->addWidget( showLevel );
-    QToolTip::add( showLevel, i18n( "This box enables a text message near the battery state icon containing battery level percentage" ) );
-    connect( showLevel, SIGNAL(clicked()), this, SLOT(configChanged()) );
+    TQToolTip::add( showLevel, i18n( "This box enables a text message near the battery state icon containing battery level percentage" ) );
+    connect( showLevel, TQT_SIGNAL(clicked()), this, TQT_SLOT(configChanged()) );
     
-    notifyMe = new QCheckBox( i18n("&Notify me whenever my battery becomes fully charged"), this );
+    notifyMe = new TQCheckBox( i18n("&Notify me whenever my battery becomes fully charged"), this );
     top_layout->addWidget( notifyMe );
-    QToolTip::add( notifyMe, i18n( "This box enables a dialog box that pops up when your battery becomes fully charged" ) );
-    connect( notifyMe, SIGNAL(clicked()), this, SLOT(configChanged()) );
+    TQToolTip::add( notifyMe, i18n( "This box enables a dialog box that pops up when your battery becomes fully charged" ) );
+    connect( notifyMe, TQT_SIGNAL(clicked()), this, TQT_SLOT(configChanged()) );
 
-    blankSaver = new QCheckBox( i18n("&Use a blank screen saver when running on battery"), this );
+    blankSaver = new TQCheckBox( i18n("&Use a blank screen saver when running on battery"), this );
     top_layout->addWidget( blankSaver );
-    connect( blankSaver, SIGNAL(clicked()), this, SLOT(configChanged()) );
+    connect( blankSaver, TQT_SIGNAL(clicked()), this, TQT_SLOT(configChanged()) );
 
     if (!apm) {
       top_layout->addWidget( laptop_portable::no_power_management_explanation(this) );
@@ -96,72 +96,72 @@ BatteryConfig::BatteryConfig (QWidget * parent, const char *name)
       iconloader = new KIconLoader("klaptopdaemon");
 
       // the poll time (in seconds)
-      QHBox *hb = new QHBox( this );
+      TQHBox *hb = new TQHBox( this );
       hb->setSpacing( KDialog::spacingHint() );
       top_layout->addWidget( hb );
 
-      QLabel* poll_label = new QLabel( i18n("&Check status every:"), hb );
-      editPoll = new QSpinBox( 1, 3600, 1, hb ); // min,max,step
-      QToolTip::add( editPoll, i18n( "Choose how responsive the laptop software will be when it checks the battery status" ) );
+      TQLabel* poll_label = new TQLabel( i18n("&Check status every:"), hb );
+      editPoll = new TQSpinBox( 1, 3600, 1, hb ); // min,max,step
+      TQToolTip::add( editPoll, i18n( "Choose how responsive the laptop software will be when it checks the battery status" ) );
       editPoll->setSuffix( i18n("keep short, unit in spinbox", "sec") );
       poll_label->setBuddy( editPoll );
-      connect( editPoll, SIGNAL(valueChanged(int)),
-	       this, SLOT(configChanged()) );
-      QWidget* spacer = new QWidget( hb );
+      connect( editPoll, TQT_SIGNAL(valueChanged(int)),
+	       this, TQT_SLOT(configChanged()) );
+      TQWidget* spacer = new TQWidget( hb );
       hb->setStretchFactor( spacer, 1 );
 
       // group box to hold the icons together
-      QVGroupBox* icons_groupbox = new QVGroupBox( i18n("Select Battery Icons"), this );
+      TQVGroupBox* icons_groupbox = new TQVGroupBox( i18n("Select Battery Icons"), this );
       icons_groupbox->layout()->setSpacing( KDialog::spacingHint() );
       top_layout->addWidget( icons_groupbox, 0, Qt::AlignLeft );
 
       // layout to hold the icons inside the groupbox
-      QGrid *icon_grid = new QGrid( 3 /*cols*/, icons_groupbox );
+      TQGrid *icon_grid = new TQGrid( 3 /*cols*/, icons_groupbox );
       icon_grid->setSpacing( KDialog::spacingHint() );
 
       buttonNoBattery = new KIconButton( iconloader, icon_grid );
       buttonNoCharge  = new KIconButton( iconloader, icon_grid );
       buttonCharge    = new KIconButton( iconloader, icon_grid );
-      (void)new QLabel( buttonNoBattery, i18n("No &battery"), icon_grid);
-      (void)new QLabel( buttonNoCharge, i18n("&Not charging"), icon_grid);
-      (void)new QLabel( buttonCharge, i18n("Char&ging"), icon_grid);
+      (void)new TQLabel( buttonNoBattery, i18n("No &battery"), icon_grid);
+      (void)new TQLabel( buttonNoCharge, i18n("&Not charging"), icon_grid);
+      (void)new TQLabel( buttonCharge, i18n("Char&ging"), icon_grid);
       buttonNoBattery->setIconType( KIcon::NoGroup, KIcon::Any, 1);
       buttonNoCharge->setIconType( KIcon::NoGroup, KIcon::Any, 1);
       buttonCharge->setIconType( KIcon::NoGroup, KIcon::Any, 1);
-      connect(buttonNoBattery, SIGNAL(iconChanged(QString)), this, SLOT(iconChanged()));
-      connect(buttonNoCharge, SIGNAL(iconChanged(QString)), this, SLOT(iconChanged()));
-      connect(buttonCharge, SIGNAL(iconChanged(QString)), this, SLOT(configChanged()));
+      connect(buttonNoBattery, TQT_SIGNAL(iconChanged(TQString)), this, TQT_SLOT(iconChanged()));
+      connect(buttonNoCharge, TQT_SIGNAL(iconChanged(TQString)), this, TQT_SLOT(iconChanged()));
+      connect(buttonCharge, TQT_SIGNAL(iconChanged(TQString)), this, TQT_SLOT(configChanged()));
 
 
       int num_batteries;
-      QStringList battery_names, battery_states, battery_values;
+      TQStringList battery_names, battery_states, battery_values;
       laptop_portable::get_battery_status(num_batteries, battery_names, battery_states, battery_values);
       if (num_batteries > 0) {
-	    QHBoxLayout *hl = new QHBoxLayout();
+	    TQHBoxLayout *hl = new TQHBoxLayout();
 	    top_layout->addLayout(hl);
 
-	    QHGroupBox *hb = new QHGroupBox(i18n("Current Battery Status"), this);
+	    TQHGroupBox *hb = new TQHGroupBox(i18n("Current Battery Status"), this);
 	    for (int i = 0; i < num_batteries; i++) {
 
-		QWidget *wp;
+		TQWidget *wp;
 		if (num_batteries == 1) {
-			wp = new QWidget(hb);
+			wp = new TQWidget(hb);
 		} else {
-			wp = new QVGroupBox(battery_names[i], hb);
+			wp = new TQVGroupBox(battery_names[i], hb);
 		}
-	    	QVBoxLayout *vb = new QVBoxLayout(wp);
+	    	TQVBoxLayout *vb = new TQVBoxLayout(wp);
 
-		QLabel *l;
+		TQLabel *l;
 
-		l = new QLabel(wp);					// icon indicating state
+		l = new TQLabel(wp);					// icon indicating state
 		vb->addWidget(l);
 		batt_label_1.append(l);
 
-		l = new QLabel(QString(""), wp);
+		l = new TQLabel(TQString(""), wp);
 		vb->addWidget(l);
 		batt_label_2.append(l);
 
-		l = new QLabel(QString(""), wp);
+		l = new TQLabel(TQString(""), wp);
 		vb->addWidget(l);
 		batt_label_3.append(l);
 	    }	
@@ -171,14 +171,14 @@ BatteryConfig::BatteryConfig (QWidget * parent, const char *name)
       }
 
       // TODO: remove linefeed from string, can't do it right now coz we have a string freeze
-      QLabel* explain = new KRichTextLabel( i18n("This panel controls whether the battery status monitor\nappears in the system tray and what it looks like.").replace("\n"," "), this);
+      TQLabel* explain = new KRichTextLabel( i18n("This panel controls whether the battery status monitor\nappears in the system tray and what it looks like.").replace("\n"," "), this);
       top_layout->addWidget(explain, 0);
       laptop_portable::extra_config(this, config, top_layout);
     }
 
     top_layout->addStretch(1);
-    startMonitor = new QPushButton( i18n("&Start Battery Monitor"), this);
-    connect(startMonitor, SIGNAL(clicked()), this, SLOT(slotStartMonitor()));
+    startMonitor = new TQPushButton( i18n("&Start Battery Monitor"), this);
+    connect(startMonitor, TQT_SIGNAL(clicked()), this, TQT_SLOT(slotStartMonitor()));
     top_layout->addWidget( startMonitor, 0, Qt::AlignRight );
 
     load();
@@ -271,7 +271,7 @@ void BatteryConfig::configChanged()
 }
 
 
-QString BatteryConfig::quickHelp() const
+TQString BatteryConfig::quickHelp() const
 {
   return i18n("<h1>Laptop Battery</h1>This module allows you to monitor "
 	"your batteries. To make use of this module, you must have power management system software "
@@ -283,14 +283,14 @@ void BatteryConfig::slotStartMonitor()
 {
 	wake_laptop_daemon();
 	if (!enablemonitor) {
-		KMessageBox::information(0, i18n("<qt>The battery monitor has been started, but the tray icon is currently disabled.  You can make it appear by selecting the <b>Show battery monitor</b> entry on this page and applying your changes.</qt>"), QString::null, "howToEnableMonitor");
+		KMessageBox::information(0, i18n("<qt>The battery monitor has been started, but the tray icon is currently disabled.  You can make it appear by selecting the <b>Show battery monitor</b> entry on this page and applying your changes.</qt>"), TQString::null, "howToEnableMonitor");
 	}
 }
 
 void
-BatteryConfig::ConvertIcon(int percent, QPixmap &pm, QPixmap &result)
+BatteryConfig::ConvertIcon(int percent, TQPixmap &pm, TQPixmap &result)
 {
-	QImage image = pm.convertToImage();
+	TQImage image = pm.convertToImage();
 
 	int w = image.width();
 	int h = image.height();
@@ -347,12 +347,12 @@ void
 BatteryConfig::BatteryStateUpdate()
 {
     int num_batteries;
-    QStringList battery_names, battery_states, battery_values;
+    TQStringList battery_names, battery_states, battery_values;
     laptop_portable::get_battery_status(num_batteries, battery_names, battery_states, battery_values);
     if (num_batteries > 0) {
 	    for (int i = 0; i < num_batteries; i++) {
 		if (battery_states[i] == "yes") {
-			QPixmap result;
+			TQPixmap result;
 			ConvertIcon(battery_values[i].toInt(), battery_pm, result);
 			batt_label_1.at(i)->setPixmap(result);
 
@@ -380,7 +380,7 @@ void BatteryConfig::iconChanged()
     BatteryStateUpdate();
 }
 
-void BatteryConfig::timerEvent(QTimerEvent *)
+void BatteryConfig::timerEvent(TQTimerEvent *)
 {
     BatteryStateUpdate();
 }

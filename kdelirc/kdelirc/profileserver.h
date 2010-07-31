@@ -13,12 +13,12 @@
 #ifndef PROFILESERVER_H
 #define PROFILESERVER_H
 
-#include <qpair.h>
-#include <qstring.h>
-#include <qvaluelist.h>
-#include <qmap.h>
-#include <qxml.h>
-#include <qdict.h>
+#include <tqpair.h>
+#include <tqstring.h>
+#include <tqvaluelist.h>
+#include <tqmap.h>
+#include <tqxml.h>
+#include <tqdict.h>
 
 /**
 @author Gav Wood
@@ -33,19 +33,19 @@ class Profile;
 
 class ProfileActionArgument
 {
-	QString theComment, theType;
+	TQString theComment, theType;
 	Range theRange;
-	QString theDefault;		// should be QVariant?
+	TQString theDefault;		// should be QVariant?
 	const ProfileAction *parent;
 
 	friend class Profile;
 public:
-	const QString &comment() const { return theComment; }
-	void setComment(const QString &a) { theComment = a; }
-	const QString &type() const { return theType; }
-	void setType(const QString &a) { theType = a; }
-	const QString &getDefault() const { return theDefault; }
-	void setDefault(const QString &a) { theDefault = a; }
+	const TQString &comment() const { return theComment; }
+	void setComment(const TQString &a) { theComment = a; }
+	const TQString &type() const { return theType; }
+	void setType(const TQString &a) { theType = a; }
+	const TQString &getDefault() const { return theDefault; }
+	void setDefault(const TQString &a) { theDefault = a; }
 	const Range &range() const { return theRange; }
 	void setRange(const Range &a) { theRange = a; }
 
@@ -55,31 +55,31 @@ public:
 
 class ProfileAction
 {
-	QString theObjId, thePrototype, theName, theComment, theClass;
+	TQString theObjId, thePrototype, theName, theComment, theClass;
 	float theMultiplier;
 	const Profile *parent;
 	bool theRepeat, theAutoStart;
-	QValueList<ProfileActionArgument> theArguments;
+	TQValueList<ProfileActionArgument> theArguments;
 
 	friend class Profile;
 public:
-	const QString &objId() const { return theObjId; }
-	void setObjId(const QString &a) { theObjId = a; }
-	const QString &prototype() const { return thePrototype; }
-	void setPrototype(const QString &a) { thePrototype = a; }
-	const QString &name() const { return theName; }
-	void setName(const QString &a) { theName = a; }
-	const QString &comment() const { return theComment; }
-	void setComment(const QString &a) { theComment = a; }
-	const QString &getClass() const { return theClass; }
-	void setClass(const QString &a) { theClass = a; }
+	const TQString &objId() const { return theObjId; }
+	void setObjId(const TQString &a) { theObjId = a; }
+	const TQString &prototype() const { return thePrototype; }
+	void setPrototype(const TQString &a) { thePrototype = a; }
+	const TQString &name() const { return theName; }
+	void setName(const TQString &a) { theName = a; }
+	const TQString &comment() const { return theComment; }
+	void setComment(const TQString &a) { theComment = a; }
+	const TQString &getClass() const { return theClass; }
+	void setClass(const TQString &a) { theClass = a; }
 	const float multiplier() const { return theMultiplier; }
 	void setMultiplier(const float a) { theMultiplier = a; }
 	bool repeat() const { return theRepeat; }
 	void setRepeat(bool a) { theRepeat = a; }
 	bool autoStart() const { return theAutoStart; }
 	void setAutoStart(bool a) { theAutoStart = a; }
-	const QValueList<ProfileActionArgument> &arguments() const { return theArguments; }
+	const TQValueList<ProfileActionArgument> &arguments() const { return theArguments; }
 
 	const Profile *profile() const { return parent; }
 	void setProfile(const Profile *a) { parent = a; }
@@ -87,37 +87,37 @@ public:
 
 class Profile : public QXmlDefaultHandler
 {
-	QString theId, theName, theAuthor, theServiceName;
+	TQString theId, theName, theAuthor, theServiceName;
 	IfMulti theIfMulti;
 	bool theUnique;
-	QString charBuffer;
+	TQString charBuffer;
 
 	ProfileAction *curPA;
 	ProfileActionArgument *curPAA;
-	QDict<ProfileAction> theActions;		// objid+"::"+prototype => ProfileAction
+	TQDict<ProfileAction> theActions;		// objid+"::"+prototype => ProfileAction
 
 	friend class ProfileServer;
 public:
-	bool characters(const QString &data);
-	bool startElement(const QString &, const QString &, const QString &name, const QXmlAttributes &attributes);
-	bool endElement(const QString &, const QString &, const QString &name);
+	bool characters(const TQString &data);
+	bool startElement(const TQString &, const TQString &, const TQString &name, const TQXmlAttributes &attributes);
+	bool endElement(const TQString &, const TQString &, const TQString &name);
 
-	const QString &id() const { return theId; }
-	void setId(const QString &a) { theId = a; }
-	const QString &name() const { return theName; }
-	void setName(const QString &a) { theName = a; }
-	const QString &author() const { return theAuthor; }
-	void setAuthor(const QString &a) { theAuthor = a; }
+	const TQString &id() const { return theId; }
+	void setId(const TQString &a) { theId = a; }
+	const TQString &name() const { return theName; }
+	void setName(const TQString &a) { theName = a; }
+	const TQString &author() const { return theAuthor; }
+	void setAuthor(const TQString &a) { theAuthor = a; }
 	const bool unique() const { return theUnique; }
 	void setUnique(const bool a) { theUnique = a; }
 	const IfMulti ifMulti() const { return theIfMulti; }
 	void setIfMulti(const IfMulti a) { theIfMulti = a; }
-	const QString &serviceName() const { if(theServiceName != QString::null) return theServiceName; return theName; }
-	void setServiceName(const QString &a) { theServiceName = a; }
-	const QDict<ProfileAction> &actions() const { return theActions; }
-	const ProfileAction *searchClass(const QString &c) const;
+	const TQString &serviceName() const { if(theServiceName != TQString::null) return theServiceName; return theName; }
+	void setServiceName(const TQString &a) { theServiceName = a; }
+	const TQDict<ProfileAction> &actions() const { return theActions; }
+	const ProfileAction *searchClass(const TQString &c) const;
 
-	void loadFromFile(const QString &fileName);
+	void loadFromFile(const TQString &fileName);
 
 	Profile();
 };
@@ -126,14 +126,14 @@ class ProfileServer
 {
 	static ProfileServer *theInstance;
 	void loadProfiles();
-	QDict<Profile> theProfiles;			// id => Profile
+	TQDict<Profile> theProfiles;			// id => Profile
 
 public:
 	static ProfileServer *profileServer() { if(!theInstance) theInstance = new ProfileServer(); return theInstance; }
-	const QDict<Profile> profiles() const { return theProfiles; }
-	const ProfileAction *getAction(const QString &appId, const QString &objId, const QString &prototype) const;
-	const ProfileAction *getAction(const QString &appId, const QString &actionId) const;
-	const QString &getServiceName(const QString &appId) const;
+	const TQDict<Profile> profiles() const { return theProfiles; }
+	const ProfileAction *getAction(const TQString &appId, const TQString &objId, const TQString &prototype) const;
+	const ProfileAction *getAction(const TQString &appId, const TQString &actionId) const;
+	const TQString &getServiceName(const TQString &appId) const;
 
 	ProfileServer();
 	~ProfileServer();

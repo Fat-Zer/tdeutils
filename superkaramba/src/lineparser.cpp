@@ -21,9 +21,9 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  ****************************************************************************/
 #include "lineparser.h"
-#include <qregexp.h>
+#include <tqregexp.h>
 
-LineParser::LineParser(const QString& line)
+LineParser::LineParser(const TQString& line)
 {
   set(line);
 }
@@ -32,42 +32,42 @@ LineParser::~LineParser()
 {
 }
 
-void LineParser::set(const QString& line)
+void LineParser::set(const TQString& line)
 {
-  QRegExp rx("^\\s*(\\S+)");
+  TQRegExp rx("^\\s*(\\S+)");
   m_line = line;
 
   rx.search(m_line);
   m_meter = rx.cap(1).upper();
 }
 
-int LineParser::getInt(QString w, int def) const
+int LineParser::getInt(TQString w, int def) const
 {
-  QRegExp rx( "\\W+" + w +"=([-]?\\d+)", false );
+  TQRegExp rx( "\\W+" + w +"=([-]?\\d+)", false );
   if (rx.search(m_line) != -1)
     return rx.cap(1).toInt();
   else
     return def;
 }
 
-QColor LineParser::getColor(QString w, QColor def) const
+TQColor LineParser::getColor(TQString w, TQColor def) const
 {
-  QRegExp rx( "\\W+" + w + "=([-]?\\d+),([-]?\\d+),([-]?\\d+)", false );
+  TQRegExp rx( "\\W+" + w + "=([-]?\\d+),([-]?\\d+),([-]?\\d+)", false );
   if (rx.search(m_line) != -1)
-    return QColor(rx.cap(1).toInt(), rx.cap(2).toInt(), rx.cap(3).toInt());
+    return TQColor(rx.cap(1).toInt(), rx.cap(2).toInt(), rx.cap(3).toInt());
   else
     return def;
 }
 
-QString LineParser::getString(QString w, QString def) const
+TQString LineParser::getString(TQString w, TQString def) const
 {
-  QString result;
-  QRegExp rx( "\\W+" + w + "=\"([^\"]*)\"", false );
+  TQString result;
+  TQRegExp rx( "\\W+" + w + "=\"([^\"]*)\"", false );
 
   bool found = (rx.search(m_line)==-1)?false:true;
   if (rx.cap(1).isEmpty())
   {
-    rx = QRegExp(w + "=(\\S+)", false);
+    rx = TQRegExp(w + "=(\\S+)", false);
     found = (rx.search(m_line)==-1)?false:true;
     result = rx.cap(1);
   }
@@ -81,9 +81,9 @@ QString LineParser::getString(QString w, QString def) const
     return def;
 }
 
-bool LineParser::getBoolean(QString w, bool def) const
+bool LineParser::getBoolean(TQString w, bool def) const
 {
-  QString boolean = getString(w, "-").lower();
+  TQString boolean = getString(w, "-").lower();
   if(boolean == "-")
     return def;
   else if (boolean == "true") // true / false

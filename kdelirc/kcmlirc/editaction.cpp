@@ -10,13 +10,13 @@
 // Copyright: See COPYING file that comes with this distribution
 //
 //
-#include <qregexp.h>
-#include <qlabel.h>
-#include <qradiobutton.h>
-#include <qcombobox.h>
-#include <qcheckbox.h>
-#include <qwidgetstack.h>
-#include <qbuttongroup.h>
+#include <tqregexp.h>
+#include <tqlabel.h>
+#include <tqradiobutton.h>
+#include <tqcombobox.h>
+#include <tqcheckbox.h>
+#include <tqwidgetstack.h>
+#include <tqbuttongroup.h>
 
 #include <kdebug.h>
 #include <klineedit.h>
@@ -35,7 +35,7 @@
 #include "editaction.h"
 #include "addaction.h"
 
-EditAction::EditAction(IRAIt action, QWidget *parent, const char *name) : EditActionBase(parent, name)
+EditAction::EditAction(IRAIt action, TQWidget *parent, const char *name) : EditActionBase(parent, name)
 {
 	theAction = action;
 
@@ -151,16 +151,16 @@ void EditAction::updateArguments()
 		theArguments->clear();
 		const ProfileAction *a = ProfileServer::profileServer()->getAction(applicationMap[theApplications->currentText()], functionMap[theFunctions->currentText()]);
 		if(!a) { arguments.clear(); return; }
-		const QValueList<ProfileActionArgument> &p = a->arguments();
+		const TQValueList<ProfileActionArgument> &p = a->arguments();
 		if(p.count() != arguments.count())
 		{	arguments.clear();
 			for(unsigned i = 0; i < p.count(); i++)
-				arguments.append(QVariant(""));
+				arguments.append(TQVariant(""));
 		}
 		theArguments->setEnabled(p.count());
 		for(unsigned i = 0; i < p.count(); i++)
 		{	theArguments->insertItem(p[i].comment() + " (" + p[i].type() + ")");
-			arguments[i].cast(QVariant::nameToType(p[i].type().utf8()));
+			arguments[i].cast(TQVariant::nameToType(p[i].type().utf8()));
 		}
 		if(p.count()) updateArgument(0); else updateArgument(-1);
 	}
@@ -171,12 +171,12 @@ void EditAction::updateArguments()
 		if(p.count() != arguments.count())
 		{	arguments.clear();
 			for(unsigned i = 0; i < p.count(); i++)
-				arguments.append(QVariant(""));
+				arguments.append(TQVariant(""));
 		}
 		theArguments->setEnabled(p.count());
 		for(unsigned i = 0; i < p.count(); i++)
-		{	theArguments->insertItem(QString().setNum(i + 1) + ": " + (p.name(i).isEmpty() ? p.type(i) : p.name(i) + " (" + p.type(i) + ")"));
-			arguments[i].cast(QVariant::nameToType(p.type(i).utf8()));
+		{	theArguments->insertItem(TQString().setNum(i + 1) + ": " + (p.name(i).isEmpty() ? p.type(i) : p.name(i) + " (" + p.type(i) + ")"));
+			arguments[i].cast(TQVariant::nameToType(p.type(i).utf8()));
 		}
 		if(p.count()) updateArgument(0); else updateArgument(-1);
 	}
@@ -216,22 +216,22 @@ void EditAction::slotParameterChanged()
 	kdDebug() << type << endl;
 	switch(type)
 	{
-	case QVariant::Int: case QVariant::UInt:
+	case TQVariant::Int: case TQVariant::UInt:
 		arguments[theArguments->currentItem()].asInt() = theValueIntNumInput->value();
 		break;
-	case QVariant::Double:
+	case TQVariant::Double:
 		arguments[theArguments->currentItem()].asDouble() = theValueDoubleNumInput->value();
 		break;
-	case QVariant::Bool:
+	case TQVariant::Bool:
 		arguments[theArguments->currentItem()].asBool() = theValueCheckBox->isChecked();
 		break;
-	case QVariant::StringList:
+	case TQVariant::StringList:
 		arguments[theArguments->currentItem()].asStringList() = theValueEditListBox->items();
 		break;
 	default:
 		arguments[theArguments->currentItem()].asString() = theValueLineEdit->text();
 	}
-	arguments[theArguments->currentItem()].cast(QVariant::Type(type));
+	arguments[theArguments->currentItem()].cast(TQVariant::Type(type));
 	kdDebug() << "out: " << arguments[theArguments->currentItem()].toString() << endl;
 
 }
@@ -242,21 +242,21 @@ void EditAction::updateArgument(int index)
 	if(index >= 0)
 	{	switch(arguments[index].type())
 		{
-		case QVariant::Int: case QVariant::UInt:
+		case TQVariant::Int: case TQVariant::UInt:
 			theValue->raiseWidget(2);
 			theValueIntNumInput->setValue(arguments[index].toInt());
 			break;
-		case QVariant::Double:
+		case TQVariant::Double:
 			theValue->raiseWidget(3);
 			theValueDoubleNumInput->setValue(arguments[index].toDouble());
 			break;
-		case QVariant::Bool:
+		case TQVariant::Bool:
 			theValue->raiseWidget(1);
 			theValueCheckBox->setChecked(arguments[index].toBool());
 			break;
-		case QVariant::StringList:
+		case TQVariant::StringList:
 		{	theValue->raiseWidget(4);
-			QStringList backup = arguments[index].toStringList();
+			TQStringList backup = arguments[index].toStringList();
 			// backup needed because calling clear will kill what ever has been saved.
 			theValueEditListBox->clear();
 			theValueEditListBox->insertStringList(backup);
@@ -284,8 +284,8 @@ void EditAction::updateApplications()
 	theApplications->clear();
 	applicationMap.clear();
 
-	QDict<Profile> dict = theServer->profiles();
-	QDictIterator<Profile> i(dict);
+	TQDict<Profile> dict = theServer->profiles();
+	TQDictIterator<Profile> i(dict);
 	for(; i.current(); ++i)
 	{	theApplications->insertItem(i.current()->name());
 		applicationMap[i.current()->name()] = i.currentKey();
@@ -302,8 +302,8 @@ void EditAction::updateFunctions()
 
 	const Profile *p = theServer->profiles()[applicationMap[theApplications->currentText()]];
 
-	QDict<ProfileAction> dict = p->actions();
-	for(QDictIterator<ProfileAction> i(dict); i.current(); ++i)
+	TQDict<ProfileAction> dict = p->actions();
+	for(TQDictIterator<ProfileAction> i(dict); i.current(); ++i)
 	{	theFunctions->insertItem(i.current()->name());
 		functionMap[i.current()->name()] = i.currentKey();
 	}
@@ -312,21 +312,21 @@ void EditAction::updateFunctions()
 
 void EditAction::updateDCOPApplications()
 {
-	QStringList names;
+	TQStringList names;
 
 	theDCOPApplications->clear();
 	DCOPClient *theClient = KApplication::kApplication()->dcopClient();
 	QCStringList theApps = theClient->registeredApplications();
 	for(QCStringList::iterator i = theApps.begin(); i != theApps.end(); ++i)
 	{
-		if(!QString(*i).find("anonymous")) continue;
-		QRegExp r("(.*)-[0-9]+");
-		QString name = r.exactMatch(QString(*i)) ? r.cap(1) : *i;
+		if(!TQString(*i).find("anonymous")) continue;
+		TQRegExp r("(.*)-[0-9]+");
+		TQString name = r.exactMatch(TQString(*i)) ? r.cap(1) : *i;
 		if(names.contains(name)) continue;
 		names += name;
 
 		theDCOPApplications->insertItem(name);
-		uniqueProgramMap[name] = name == QString(*i);
+		uniqueProgramMap[name] = name == TQString(*i);
 		nameProgramMap[name] = *i;
 
 
@@ -343,7 +343,7 @@ void EditAction::updateDCOPObjects()
 	if(!theObjects.size() && theDCOPApplications->currentText() == (*theAction).program()) theDCOPObjects->insertItem((*theAction).object());
 	for(QCStringList::iterator j = theObjects.begin(); j != theObjects.end(); ++j)
 		if(*j != "ksycoca" && *j != "qt" && AddAction::getFunctions(nameProgramMap[theDCOPApplications->currentText()], *j).count())
-			theDCOPObjects->insertItem(QString::fromUtf8(*j));
+			theDCOPObjects->insertItem(TQString::fromUtf8(*j));
 	updateDCOPFunctions();
 }
 
@@ -351,9 +351,9 @@ void EditAction::updateDCOPFunctions()
 {
 	theDCOPFunctions->clear();
 	if(theDCOPApplications->currentText().isNull() || theDCOPApplications->currentText().isEmpty()) return;
-	QStringList functions = AddAction::getFunctions(nameProgramMap[theDCOPApplications->currentText()], theDCOPObjects->currentText());
+	TQStringList functions = AddAction::getFunctions(nameProgramMap[theDCOPApplications->currentText()], theDCOPObjects->currentText());
 	if(!functions.size() && theDCOPApplications->currentText() == (*theAction).program()) theDCOPFunctions->insertItem((*theAction).method().prototype());
-	for(QStringList::iterator i = functions.begin(); i != functions.end(); ++i)
+	for(TQStringList::iterator i = functions.begin(); i != functions.end(); ++i)
 		theDCOPFunctions->insertItem(*i);
 	updateArguments();
 }

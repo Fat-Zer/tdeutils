@@ -24,7 +24,7 @@
 #include <kconfig.h>
 #include "karambasessionmanaged.h"
 #include "karamba.h"
-#include "qwidgetlist.h"
+#include "tqwidgetlist.h"
 
 bool KarambaSessionManaged::saveState(QSessionManager&)
 {
@@ -32,20 +32,20 @@ bool KarambaSessionManaged::saveState(QSessionManager&)
 
   config->setGroup("General Options");
 
-  QString openThemes="";
+  TQString openThemes="";
 
-  QWidgetList  *list = QApplication::allWidgets();
-  QWidgetListIt it( *list );         // iterate over the widgets
-  QWidget * w;
+  TQWidgetList  *list = TQApplication::allWidgets();
+  TQWidgetListIt it( *list );         // iterate over the widgets
+  TQWidget * w;
   while ( (w=it.current()) != 0 ) // for each widget...
   {
     ++it;
-    if (QString(w->name()).startsWith("karamba"))
+    if (TQString(w->name()).startsWith("karamba"))
     {
       karamba* k = (karamba*) w;
       if (k->isSubTheme())
         continue;
-      openThemes += QFileInfo(k->theme().file()).absFilePath();
+      openThemes += TQFileInfo(k->theme().file()).absFilePath();
       k->writeConfigData();
       openThemes += ";";
     }

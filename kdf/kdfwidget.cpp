@@ -23,17 +23,17 @@
 
 //
 // 1999-11-29 Espen Sand
-// Converted to QLayout and QListView + cleanups
+// Converted to TQLayout and TQListView + cleanups
 // 1999-12-05 Espen Sand
 // Usage bars should work again.
 //
 
 #include <stdlib.h>
 
-#include <qheader.h>
-#include <qtimer.h>
-#include <qlayout.h>
-#include <qpainter.h>
+#include <tqheader.h>
+#include <tqtimer.h>
+#include <tqlayout.h>
+#include <tqpainter.h>
 
 #include <kapplication.h>
 #include <kcmenumngr.h>
@@ -56,13 +56,13 @@ static bool GUI;
 
 /**************************************************************/
 
-CListViewItem::CListViewItem( CListView * parent, QListViewItem * after )
-  :QListViewItem( parent, after )
+CListViewItem::CListViewItem( CListView * parent, TQListViewItem * after )
+  :TQListViewItem( parent, after )
 {}
 
-int CListViewItem::compare ( QListViewItem *i, int column, bool ) const
+int CListViewItem::compare ( TQListViewItem *i, int column, bool ) const
 {
-  QString tmp;
+  TQString tmp;
 
   CListViewItem *c = static_cast<CListViewItem*>(i);
 
@@ -92,13 +92,13 @@ void CListViewItem::setKeys (int kb_size, int kb_avail, float percent_full)
 
 /**************************************************************/
 
-KDFWidget::KDFWidget( QWidget *parent, const char *name, bool init )
-  : QWidget(parent, name), mOptionDialog(0), mPopup(0), mTimer(0)
+KDFWidget::KDFWidget( TQWidget *parent, const char *name, bool init )
+  : TQWidget(parent, name), mOptionDialog(0), mPopup(0), mTimer(0)
 {
-  connect(&mDiskList , SIGNAL(readDFDone() ),
-           this, SLOT (updateDFDone()) );
-  connect(&mDiskList , SIGNAL(criticallyFull(DiskEntry*)),
-           this, SLOT (criticallyFull(DiskEntry*)) );
+  connect(&mDiskList , TQT_SIGNAL(readDFDone() ),
+           this, TQT_SLOT (updateDFDone()) );
+  connect(&mDiskList , TQT_SIGNAL(criticallyFull(DiskEntry*)),
+           this, TQT_SLOT (criticallyFull(DiskEntry*)) );
 
   mTabProp.resize(8);
   mTabProp[0] = new CTabEntry( "Icon", i18n("Icon"), true, 32);
@@ -114,24 +114,24 @@ KDFWidget::KDFWidget( QWidget *parent, const char *name, bool init )
   GUI = !init;
   if( GUI )
   {
-    QVBoxLayout *topLayout = new QVBoxLayout( this, 0, 0 );
+    TQVBoxLayout *topLayout = new TQVBoxLayout( this, 0, 0 );
     mList = new CListView( this, "list" );
     topLayout->addWidget( mList );
 
     mList->setAllColumnsShowFocus( true );
-    mList->setFrameStyle( QFrame::WinPanel + QFrame::Sunken );
+    mList->setFrameStyle( TQFrame::WinPanel + TQFrame::Sunken );
     mList->setShowSortIndicator(true);
     connect( mList,
-      SIGNAL( rightButtonPressed( QListViewItem *, const QPoint &, int )),
-      this, SLOT( rightButtonPressed( QListViewItem *, const QPoint &, int )));
+      TQT_SIGNAL( rightButtonPressed( TQListViewItem *, const TQPoint &, int )),
+      this, TQT_SLOT( rightButtonPressed( TQListViewItem *, const TQPoint &, int )));
     connect( mList,
-      SIGNAL( rightButtonClicked( QListViewItem *, const QPoint &, int )),
-      this, SLOT( rightButtonClicked( QListViewItem *, const QPoint &, int )));
-    connect( mList->header(), SIGNAL(sizeChange(int, int, int)),
-      this, SLOT(columnSizeChanged(int, int, int)) );
+      TQT_SIGNAL( rightButtonClicked( TQListViewItem *, const TQPoint &, int )),
+      this, TQT_SLOT( rightButtonClicked( TQListViewItem *, const TQPoint &, int )));
+    connect( mList->header(), TQT_SIGNAL(sizeChange(int, int, int)),
+      this, TQT_SLOT(columnSizeChanged(int, int, int)) );
     makeColumns();
 
-    mIsTopLevel = QString(parent->className()) == "KDFTopLevel" ? true : false;
+    mIsTopLevel = TQString(parent->className()) == "KDFTopLevel" ? true : false;
   }
 
   loadSettings();
@@ -183,7 +183,7 @@ void KDFWidget::makeColumns( void )
 
 
 /******************************************************************/
-void KDFWidget::closeEvent(QCloseEvent *)
+void KDFWidget::closeEvent(TQCloseEvent *)
 {
   applySettings();
   kapp->quit();
@@ -266,8 +266,8 @@ void KDFWidget::settingsBtnClicked( void )
     {
       mOptionDialog = new COptionDialog( this, "options", false );
       if( mOptionDialog == 0 ) { return; }
-      connect( mOptionDialog, SIGNAL(valueChanged()),
-	       this, SLOT(settingsChanged()) );
+      connect( mOptionDialog, TQT_SIGNAL(valueChanged()),
+	       this, TQT_SLOT(settingsChanged()) );
     }
     mOptionDialog->show();
   }
@@ -293,7 +293,7 @@ void KDFWidget::setUpdateFrequency( int frequency )
 /***************************************************************************
   * Update (reread) all disk-dependencies
 **/
-void KDFWidget::timerEvent(QTimerEvent *)
+void KDFWidget::timerEvent(TQTimerEvent *)
 {
   updateDF();
 }
@@ -329,7 +329,7 @@ void KDFWidget::updateDFDone( void ){
   for( DiskEntry *disk=mDiskList.first(); disk!=0; disk=mDiskList.next() )
   {
     i++;
-    QString size, percent;
+    TQString size, percent;
     if( disk->kBSize() > 0 )
     {
       percent = KGlobal::locale()->formatNumber(disk->percentFull(), 1) + '%';
@@ -362,7 +362,7 @@ void KDFWidget::updateDFDone( void ){
 /***************************************************************************
   * Update display
 **/
-void KDFWidget::resizeEvent( QResizeEvent * )
+void KDFWidget::resizeEvent( TQResizeEvent * )
 {
    updateDiskBarPixmaps();
 }
@@ -376,7 +376,7 @@ void KDFWidget::criticallyFull( DiskEntry *disk )
 {
   if( mStd.popupIfFull() == true )
   {
-    QString msg = i18n("Device [%1] on [%2] is getting critically full!").
+    TQString msg = i18n("Device [%1] on [%2] is getting critically full!").
       arg(disk->deviceName()).arg(disk->mountPoint());
     KMessageBox::sorry( this, msg, i18n("Warning"));
   }
@@ -386,7 +386,7 @@ void KDFWidget::criticallyFull( DiskEntry *disk )
 /**************************************************************************
   * find correct disk related to list item
 **/
-DiskEntry *KDFWidget::selectedDisk( QListViewItem *item )
+DiskEntry *KDFWidget::selectedDisk( TQListViewItem *item )
 {
   if( item == 0 )
   {
@@ -426,7 +426,7 @@ DiskEntry *KDFWidget::selectedDisk( QListViewItem *item )
   //  return(0);
 }
 
-void KDFWidget::rightButtonPressed( QListViewItem *item, const QPoint &p, int )
+void KDFWidget::rightButtonPressed( TQListViewItem *item, const TQPoint &p, int )
 {
   if( KContextMenuManager::showOnButtonPress() == true )
   {
@@ -435,7 +435,7 @@ void KDFWidget::rightButtonPressed( QListViewItem *item, const QPoint &p, int )
 }
 
 
-void KDFWidget::rightButtonClicked( QListViewItem *item, const QPoint &p, int )
+void KDFWidget::rightButtonClicked( TQListViewItem *item, const TQPoint &p, int )
 {
   if( KContextMenuManager::showOnButtonPress() == false )
   {
@@ -447,7 +447,7 @@ void KDFWidget::rightButtonClicked( QListViewItem *item, const QPoint &p, int )
 /**************************************************************************
   * pops up and asks for mount/umount right-clicked device
 **/
-void KDFWidget::popupMenu( QListViewItem *item, const QPoint &p )
+void KDFWidget::popupMenu( TQListViewItem *item, const TQPoint &p )
 {
   if (mPopup) //The user may even be able to popup another menu while this open is active...
        return;
@@ -514,7 +514,7 @@ void KDFWidget::popupMenu( QListViewItem *item, const QPoint &p )
     kdDebug() << "opening filemanager" << endl;
     if(  mStd.fileManager().isEmpty() == false )
     {
-      QString cmd = mStd.fileManager();
+      TQString cmd = mStd.fileManager();
       int pos = cmd.find("%m");
       if( pos > 0 )
       {
@@ -524,7 +524,7 @@ void KDFWidget::popupMenu( QListViewItem *item, const QPoint &p )
       {
 	cmd += " " + KProcess::quote(disk->mountPoint()) +" &";
       }
-      system( QFile::encodeName(cmd) );
+      system( TQFile::encodeName(cmd) );
     }
   }
   
@@ -567,7 +567,7 @@ void KDFWidget::updateDiskBarPixmaps( void )
   }
 
   int i=0;
-  for(QListViewItem *it=mList->firstChild(); it!=0;it=it->nextSibling(),i++ )
+  for(TQListViewItem *it=mList->firstChild(); it!=0;it=it->nextSibling(),i++ )
   {
     // I can't get find() to work. The Disks::compareItems(..) is
     // never called.
@@ -601,14 +601,14 @@ void KDFWidget::updateDiskBarPixmaps( void )
       int w = mList->columnWidth(usageCol)-2;
       if( w <= 0 ) { continue; }
 
-      QPixmap *pix = new QPixmap( w, h );
+      TQPixmap *pix = new TQPixmap( w, h );
       if( pix == 0 ) { continue; }
 
       pix->fill(white);
-      QPainter p(pix);
+      TQPainter p(pix);
       p.setPen(black);
       p.drawRect(0,0,w,h);
-      QColor c;
+      TQColor c;
       if ( (disk->iconName().find("cdrom") != -1)
 	   || (disk->iconName().find("writer") != -1) )
 	c = gray;
@@ -631,8 +631,8 @@ void KDFWidget::columnSizeChanged( int, int, int )
 
   if( mTimer == 0 )
   {
-    mTimer = new QTimer( this );
-    connect( mTimer, SIGNAL(timeout()), this, SLOT(updateDiskBarPixmaps()) );
+    mTimer = new TQTimer( this );
+    connect( mTimer, TQT_SIGNAL(timeout()), this, TQT_SLOT(updateDiskBarPixmaps()) );
   }
   else if( mTimer->isActive() == true )
   {

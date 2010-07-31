@@ -15,15 +15,15 @@
  *                                                                         *
  ***************************************************************************/
 
-#include <qhbox.h>
-#include <qvbox.h>
+#include <tqhbox.h>
+#include <tqvbox.h>
 
 #include <klocale.h>
 #include <kapplication.h>
 #include <kconfig.h>
 #include <kmessagebox.h>
 #include <krun.h>
-#include <qfile.h>
+#include <tqfile.h>
 #include <kpassivepopup.h>
 #include <kiconloader.h>
 #include "kgpglibrary.h"
@@ -31,7 +31,7 @@
 #include "kgpginterface.h"
 #include <kio/renamedlg.h>
 
-KgpgLibrary::KgpgLibrary(QWidget *parent, bool pgpExtension)
+KgpgLibrary::KgpgLibrary(TQWidget *parent, bool pgpExtension)
 {
         if (pgpExtension)
                 extension=".pgp";
@@ -45,16 +45,16 @@ KgpgLibrary::~KgpgLibrary()
 {}
 
 
-void KgpgLibrary::slotFileEnc(KURL::List urls,QStringList opts,QStringList defaultKey,KShortcut goDefaultKey)
+void KgpgLibrary::slotFileEnc(KURL::List urls,TQStringList opts,TQStringList defaultKey,KShortcut goDefaultKey)
 {
         /////////////////////////////////////////////////////////////////////////  encode file file
         if (!urls.empty()) {
                 urlselecteds=urls;
                 if (defaultKey.isEmpty()) {
-			QString fileNames=urls.first().fileName();
+			TQString fileNames=urls.first().fileName();
 			if (urls.count()>1) fileNames+=",...";
                         popupPublic *dialogue=new popupPublic(0,"Public keys",fileNames,true,goDefaultKey);
-                        connect(dialogue,SIGNAL(selectedKey(QStringList,QStringList,bool,bool)),this,SLOT(startencode(QStringList,QStringList,bool,bool)));
+                        connect(dialogue,TQT_SIGNAL(selectedKey(TQStringList,TQStringList,bool,bool)),this,TQT_SLOT(startencode(TQStringList,TQStringList,bool,bool)));
                         dialogue->exec();
                         delete dialogue;
                 } else
@@ -62,7 +62,7 @@ void KgpgLibrary::slotFileEnc(KURL::List urls,QStringList opts,QStringList defau
         }
 }
 
-void KgpgLibrary::startencode(QStringList encryptKeys,QStringList encryptOptions,bool shred,bool symetric)
+void KgpgLibrary::startencode(TQStringList encryptKeys,TQStringList encryptOptions,bool shred,bool symetric)
 {
 	popIsActive=false;
         //KURL::List::iterator it;
@@ -75,7 +75,7 @@ void KgpgLibrary::startencode(QStringList encryptKeys,QStringList encryptOptions
 }
 
 
-void KgpgLibrary::fastencode(KURL &fileToCrypt,QStringList selec,QStringList encryptOptions,bool symetric)
+void KgpgLibrary::fastencode(KURL &fileToCrypt,TQStringList selec,TQStringList encryptOptions,bool symetric)
 {
         //////////////////              encode from file
         if ((selec.isEmpty()) && (!symetric)) {
@@ -89,14 +89,14 @@ void KgpgLibrary::fastencode(KURL &fileToCrypt,QStringList selec,QStringList enc
         else
                 dest.setPath(urlselected.path()+extension);
 
-        QFile fgpg(dest.path());
+        TQFile fgpg(dest.path());
 
         if (fgpg.exists()) {
-			KIO::RenameDlg *over=new KIO::RenameDlg(0,i18n("File Already Exists"),QString::null,dest.path(),KIO::M_OVERWRITE);
-		    	if (over->exec()==QDialog::Rejected)
+			KIO::RenameDlg *over=new KIO::RenameDlg(0,i18n("File Already Exists"),TQString::null,dest.path(),KIO::M_OVERWRITE);
+		    	if (over->exec()==TQDialog::Rejected)
 	    		{
                 	delete over;
-			emit systemMessage(QString::null,true);
+			emit systemMessage(TQString::null,true);
                 	return;
             		}
 	    		dest=over->newDestURL();
@@ -111,20 +111,20 @@ void KgpgLibrary::fastencode(KURL &fileToCrypt,QStringList selec,QStringList enc
         cryptFileProcess->KgpgEncryptFile(selec,urlselected,dest,encryptOptions,symetric);
          if (!popIsActive) 
 	{
-	//connect(cryptFileProcess,SIGNAL(processstarted(QString)),this,SLOT(processpopup2(QString)));
+	//connect(cryptFileProcess,TQT_SIGNAL(processstarted(TQString)),this,TQT_SLOT(processpopup2(TQString)));
 	popIsActive=true;	
 	}
-	connect(cryptFileProcess,SIGNAL(encryptionfinished(KURL)),this,SLOT(processenc(KURL)));
-        connect(cryptFileProcess,SIGNAL(errormessage(QString)),this,SLOT(processencerror(QString)));
+	connect(cryptFileProcess,TQT_SIGNAL(encryptionfinished(KURL)),this,TQT_SLOT(processenc(KURL)));
+        connect(cryptFileProcess,TQT_SIGNAL(errormessage(TQString)),this,TQT_SLOT(processencerror(TQString)));
 }
 
-void KgpgLibrary::processpopup2(QString fileName)
+void KgpgLibrary::processpopup2(TQString fileName)
 {
         
 	//pop->setTimeout(0);
         pop->setView(i18n("Processing encryption (%1)").arg(fileName),i18n("Please wait..."),KGlobal::iconLoader()->loadIcon("kgpg",KIcon::Desktop));
         pop->show();
-        /*QRect qRect(QApplication::desktop()->screenGeometry());
+        /*TQRect qRect(TQApplication::desktop()->screenGeometry());
         int iXpos=qRect.width()/2-pop->width()/2;
         int iYpos=qRect.height()/2-pop->height()/2;
         pop->move(iXpos,iYpos);*/
@@ -134,7 +134,7 @@ void KgpgLibrary::processpopup2(QString fileName)
 void KgpgLibrary::shredpreprocessenc(KURL fileToShred)
 {
 	popIsActive=false;
-	emit systemMessage(QString::null);
+	emit systemMessage(TQString::null);
 	shredprocessenc(fileToShred);
 }
 
@@ -144,16 +144,16 @@ emit systemMessage(i18n("Shredding %n file","Shredding %n files",filesToShred.co
 
 KIO::Job *job;
 job = KIO::del( filesToShred, true );
-connect( job, SIGNAL( result( KIO::Job * ) ),SLOT( slotShredResult( KIO::Job * ) ) );	
+connect( job, TQT_SIGNAL( result( KIO::Job * ) ),TQT_SLOT( slotShredResult( KIO::Job * ) ) );	
 }
 
 void KgpgLibrary::slotShredResult( KIO::Job * job )
 {
-    emit systemMessage(QString::null);
+    emit systemMessage(TQString::null);
     if (job && job->error())
     {
-    job->showErrorDialog( (QWidget*)parent() );
-    emit systemMessage(QString::null,true);
+    job->showErrorDialog( (TQWidget*)parent() );
+    emit systemMessage(TQString::null,true);
     KPassivePopup::message(i18n("KGpg Error"),i18n("Process halted, not all files were shredded."),KGlobal::iconLoader()->loadIcon("kgpg",KIcon::Desktop),panel,"kgpg_error",0);
     }
 }
@@ -161,42 +161,42 @@ void KgpgLibrary::slotShredResult( KIO::Job * job )
 
 void KgpgLibrary::processenc(KURL)
 {
-	emit systemMessage(QString::null);
+	emit systemMessage(TQString::null);
 	if (_shred) shredprocessenc(urlselecteds.first());
 	urlselecteds.pop_front ();
 	if (urlselecteds.count()>0)
 	fastencode(urlselecteds.first(),_encryptKeys,_encryptOptions,_symetric);
 }
 
-void KgpgLibrary::processencerror(QString mssge)
+void KgpgLibrary::processencerror(TQString mssge)
 {
 	popIsActive=false;
-	emit systemMessage(QString::null,true);
+	emit systemMessage(TQString::null,true);
 	KMessageBox::detailedSorry(panel,i18n("<b>Process halted</b>.<br>Not all files were encrypted."),mssge);
 }
 
 
 
-void KgpgLibrary::slotFileDec(KURL srcUrl,KURL destUrl,QStringList customDecryptOption)
+void KgpgLibrary::slotFileDec(KURL srcUrl,KURL destUrl,TQStringList customDecryptOption)
 {
         //////////////////////////////////////////////////////////////////    decode file from konqueror or menu
         KgpgInterface *decryptFileProcess=new KgpgInterface();
         pop = new KPassivePopup();
 	urlselected=srcUrl;
         decryptFileProcess->KgpgDecryptFile(srcUrl,destUrl,customDecryptOption);
-        connect(decryptFileProcess,SIGNAL(processaborted(bool)),this,SLOT(processdecover()));
-        connect(decryptFileProcess,SIGNAL(processstarted(QString)),this,SLOT(processpopup(QString)));
-        connect(decryptFileProcess,SIGNAL(decryptionfinished()),this,SLOT(processdecover()));
-        connect(decryptFileProcess,SIGNAL(errormessage(QString)),this,SLOT(processdecerror(QString)));
+        connect(decryptFileProcess,TQT_SIGNAL(processaborted(bool)),this,TQT_SLOT(processdecover()));
+        connect(decryptFileProcess,TQT_SIGNAL(processstarted(TQString)),this,TQT_SLOT(processpopup(TQString)));
+        connect(decryptFileProcess,TQT_SIGNAL(decryptionfinished()),this,TQT_SLOT(processdecover()));
+        connect(decryptFileProcess,TQT_SIGNAL(errormessage(TQString)),this,TQT_SLOT(processdecerror(TQString)));
 }
 
-void KgpgLibrary::processpopup(QString fileName)
+void KgpgLibrary::processpopup(TQString fileName)
 {
 	emit systemMessage(i18n("Decrypting %1").arg(fileName));
 	pop->setTimeout(0);
         pop->setView(i18n("Processing decryption"),i18n("Please wait..."),KGlobal::iconLoader()->loadIcon("kgpg",KIcon::Desktop));
         pop->show();
-        QRect qRect(QApplication::desktop()->screenGeometry());
+        TQRect qRect(TQApplication::desktop()->screenGeometry());
         int iXpos=qRect.width()/2-pop->width()/2;
         int iYpos=qRect.height()/2-pop->height()/2;
         pop->move(iXpos,iYpos);
@@ -204,21 +204,21 @@ void KgpgLibrary::processpopup(QString fileName)
 
 void KgpgLibrary::processdecover()
 {
-	emit systemMessage(QString::null);
+	emit systemMessage(TQString::null);
 	delete pop;
         emit decryptionOver();
 }
 
 
-void KgpgLibrary::processdecerror(QString mssge)
+void KgpgLibrary::processdecerror(TQString mssge)
 {
 	delete pop;
-	emit systemMessage(QString::null);
+	emit systemMessage(TQString::null);
         ///// test if file is a public key
-        QFile qfile(QFile::encodeName(urlselected.path()));
+        TQFile qfile(TQFile::encodeName(urlselected.path()));
         if (qfile.open(IO_ReadOnly)) {
-                QTextStream t( &qfile );
-                QString result(t.read());
+                TQTextStream t( &qfile );
+                TQString result(t.read());
                 qfile.close();
                 //////////////     if  pgp data found, decode it
                 if (result.startsWith("-----BEGIN PGP PUBLIC KEY BLOCK")) {//////  dropped file is a public key, ask for import
@@ -228,7 +228,7 @@ void KgpgLibrary::processdecerror(QString mssge)
                         else {
                                 KgpgInterface *importKeyProcess=new KgpgInterface();
                                 importKeyProcess->importKeyURL(urlselected);
-				connect(importKeyProcess,SIGNAL(importfinished(QStringList)),this,SIGNAL(importOver(QStringList)));
+				connect(importKeyProcess,TQT_SIGNAL(importfinished(TQStringList)),this,TQT_SIGNAL(importOver(TQStringList)));
                                 return;
                         }
                 } else if (result.startsWith("-----BEGIN PGP PRIVATE KEY BLOCK")) {//////  dropped file is a public key, ask for import

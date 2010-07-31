@@ -22,7 +22,7 @@
 
 #include <kconfigbase.h>
 
-#include <qmap.h>
+#include <tqmap.h>
 
 
 namespace KSim
@@ -32,24 +32,24 @@ namespace Snmp
 {
 
 enum SnmpVersion { SnmpVersion1, SnmpVersion2c, SnmpVersion3, SnmpLastVersion };
-QStringList allSnmpVersions();
-QString snmpVersionToString( SnmpVersion version );
-SnmpVersion stringToSnmpVersion( QString string, bool *ok = 0 );
+TQStringList allSnmpVersions();
+TQString snmpVersionToString( SnmpVersion version );
+SnmpVersion stringToSnmpVersion( TQString string, bool *ok = 0 );
 
 enum SecurityLevel { NoAuthPriv, AuthNoPriv, AuthPriv, LastSecurityLevel };
-QStringList allSecurityLevels();
-QString securityLevelToString( SecurityLevel level );
-SecurityLevel stringToSecurityLevel( QString string, bool *ok = 0 );
+TQStringList allSecurityLevels();
+TQString securityLevelToString( SecurityLevel level );
+SecurityLevel stringToSecurityLevel( TQString string, bool *ok = 0 );
 
 enum AuthenticationProtocol { MD5Auth, SHA1Auth, LastAuthenticationProtocol };
-QStringList allAuthenticationProtocols();
-QString authenticationProtocolToString( AuthenticationProtocol proto );
-AuthenticationProtocol stringToAuthenticationProtocol( QString string, bool *ok = 0 );
+TQStringList allAuthenticationProtocols();
+TQString authenticationProtocolToString( AuthenticationProtocol proto );
+AuthenticationProtocol stringToAuthenticationProtocol( TQString string, bool *ok = 0 );
 
 enum PrivacyProtocol { DESPrivacy };
-QStringList allPrivacyProtocols();
-QString privacyProtocolToString( PrivacyProtocol proto );
-PrivacyProtocol stringToPrivacyProtocol( QString string, bool *ok = 0 );
+TQStringList allPrivacyProtocols();
+TQString privacyProtocolToString( PrivacyProtocol proto );
+PrivacyProtocol stringToPrivacyProtocol( TQString string, bool *ok = 0 );
 
 class ErrorInfo
 {
@@ -149,11 +149,11 @@ public:
     ErrorInfo( ErrorType error );
 
     ErrorType errorCode() const { return m_errorCode; }
-    QString errorMessage() const { return m_errorMessage; }
+    TQString errorMessage() const { return m_errorMessage; }
 
 private:
     ErrorType m_errorCode;
-    QString m_errorMessage;
+    TQString m_errorMessage;
 };
 
 }

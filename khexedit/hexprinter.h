@@ -22,7 +22,7 @@
 #define _HEX_PRINTER_H_
 
 #include <kprinter.h>
-#include <qpaintdevicemetrics.h>
+#include <tqpaintdevicemetrics.h>
 
 struct SPageSize
 {

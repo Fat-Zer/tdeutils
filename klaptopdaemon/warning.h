@@ -27,7 +27,7 @@
 #define __WARNINGCONFIG_H__
 
 #include <kcmodule.h>
-#include <qstring.h>
+#include <tqstring.h>
 
 class QWidget;
 class KConfig;
@@ -42,14 +42,14 @@ class WarningConfig : public KCModule
 {
   Q_OBJECT
 public:
-  WarningConfig(int x, QWidget *parent=0, const char* name=0);
+  WarningConfig(int x, TQWidget *parent=0, const char* name=0);
   ~WarningConfig();
   void save( void );
   void load();
   void load(bool useDefaults);
   void defaults();
 
-  virtual QString quickHelp() const;
+  virtual TQString quickHelp() const;
 
 private slots:
   void configChanged();
@@ -68,36 +68,36 @@ private:
  
   KURLRequester* editRunCommand;
   KURLRequester* editPlaySound;
-  QCheckBox* checkLowTime;
-  QCheckBox* checkLowPercent;
-  QCheckBox* checkCriticalTime;
-  QCheckBox* checkCriticalPercent;
-  QSpinBox* editLowTime;
-  QSpinBox* editLowPercent;
-  QSpinBox* editCriticalTime;
-  QSpinBox* editCriticalPercent;
+  TQCheckBox* checkLowTime;
+  TQCheckBox* checkLowPercent;
+  TQCheckBox* checkCriticalTime;
+  TQCheckBox* checkCriticalPercent;
+  TQSpinBox* editLowTime;
+  TQSpinBox* editLowPercent;
+  TQSpinBox* editCriticalTime;
+  TQSpinBox* editCriticalPercent;
  
-  QCheckBox *checkRunCommand;
-  QCheckBox *checkPlaySound;
-  QCheckBox *checkBeep;
-  QCheckBox *checkNotify;
-  QCheckBox *checkBrightness;
-  QSlider   *valueBrightness;
-  QCheckBox *performance, *throttle;
+  TQCheckBox *checkRunCommand;
+  TQCheckBox *checkPlaySound;
+  TQCheckBox *checkBeep;
+  TQCheckBox *checkNotify;
+  TQCheckBox *checkBrightness;
+  TQSlider   *valueBrightness;
+  TQCheckBox *performance, *throttle;
   KComboBox *performance_val, *throttle_val;
-  QRadioButton *checkNone;
-  QRadioButton *checkShutdown;
-  QRadioButton *checkLogout;
-  QRadioButton *checkSuspend;
-  QRadioButton *checkStandby;
-  QRadioButton *checkHibernate;
+  TQRadioButton *checkNone;
+  TQRadioButton *checkShutdown;
+  TQRadioButton *checkLogout;
+  TQRadioButton *checkSuspend;
+  TQRadioButton *checkStandby;
+  TQRadioButton *checkHibernate;
  
   bool    apm, runcommand, playsound, beep, notify, do_suspend, do_standby, do_hibernate, logout, shutdown, do_brightness;
   bool	  do_performance, do_throttle;
   bool    time_based_action_low, time_based_action_critical;
-  QString val_performance, val_throttle;
+  TQString val_performance, val_throttle;
   int 	  val_brightness;
-  QString runcommand_val, sound_val;
+  TQString runcommand_val, sound_val;
   int     low_val_time, low_val_percent, critical_val_time, critical_val_percent;
   int     have_time, type;
 };

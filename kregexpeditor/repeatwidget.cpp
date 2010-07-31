@@ -26,16 +26,16 @@
 #include "repeatwidget.h"
 #include "concwidget.h"
 #include "repeatregexp.h"
-#include <qpainter.h>
-#include <qcursor.h>
-#include <qspinbox.h>
-#include <qradiobutton.h>
-#include <qlayout.h>
-#include <qgrid.h>
-#include <qvbuttongroup.h>
+#include <tqpainter.h>
+#include <tqcursor.h>
+#include <tqspinbox.h>
+#include <tqradiobutton.h>
+#include <tqlayout.h>
+#include <tqgrid.h>
+#include <tqvbuttongroup.h>
 #include "kwidgetstreamer.h"
 
-RepeatWidget::RepeatWidget(RegExpEditorWindow* editorWindow, QWidget *parent,
+RepeatWidget::RepeatWidget(RegExpEditorWindow* editorWindow, TQWidget *parent,
                            const char *name)
   : SingleContainerWidget(editorWindow, parent, name ? name : "RepeatWidget")
 {
@@ -44,7 +44,7 @@ RepeatWidget::RepeatWidget(RegExpEditorWindow* editorWindow, QWidget *parent,
 }
 
 RepeatWidget::RepeatWidget( RepeatRegExp* regexp, RegExpEditorWindow* editorWindow,
-                            QWidget* parent, const char* name )
+                            TQWidget* parent, const char* name )
   :SingleContainerWidget( editorWindow, parent, name )
 {
   init();
@@ -80,36 +80,36 @@ void RepeatWidget::init()
                                    KDialogBase::Ok | KDialogBase::Cancel);
   _content = new RepeatRangeWindow( _configWindow );
   _configWindow->setMainWidget( _content );
-  connect( _configWindow, SIGNAL( cancelClicked() ), this, SLOT( slotConfigCanceled() ) );
-  connect(_configWindow, SIGNAL(finished()), this, SLOT(slotConfigWindowClosed()));
+  connect( _configWindow, TQT_SIGNAL( cancelClicked() ), this, TQT_SLOT( slotConfigCanceled() ) );
+  connect(_configWindow, TQT_SIGNAL(finished()), this, TQT_SLOT(slotConfigWindowClosed()));
 }
 
 
-QSize RepeatWidget::sizeHint() const
+TQSize RepeatWidget::sizeHint() const
 {
   // TODO: Merge with LookAheadWidget::sizeHint
-  QFontMetrics metrics = fontMetrics();
+  TQFontMetrics metrics = fontMetrics();
   _textSize = metrics.size( 0, _content->text() );
 
   _childSize = _child->sizeHint();
 
   int height = _textSize.height() + bdSize + _childSize.height() + bdSize + 2*pw;
   int width  = 2 * pw + QMAX(_childSize.width(), 4*bdSize + _textSize.width());
-  return QSize(width,height);
+  return TQSize(width,height);
 }
 
-void RepeatWidget::paintEvent( QPaintEvent *e )
+void RepeatWidget::paintEvent( TQPaintEvent *e )
 {
   // TODO: Merge with LookAheadWidget::paintEvent
-  QSize mySize = sizeHint();
-  QPainter painter(this);
+  TQSize mySize = sizeHint();
+  TQPainter painter(this);
 
   drawPossibleSelection( painter, mySize );
 
   // move the child to its position and resize it.
   _child->move(pw,_textSize.height()+bdSize);
-  QSize curChildSize = _child->size();
-  QSize newChildSize = QSize(mySize.width() - 2*pw, _childSize.height());
+  TQSize curChildSize = _child->size();
+  TQSize newChildSize = TQSize(mySize.width() - 2*pw, _childSize.height());
   if ( curChildSize != newChildSize ) {
     _child->resize(newChildSize);
     // I resized the child, so give it a chance to relect thus.
@@ -149,7 +149,7 @@ void RepeatWidget::slotConfigWindowClosed()
 
 void RepeatWidget::slotConfigCanceled()
 {
-  QDataStream stream( _backup, IO_ReadOnly );
+  TQDataStream stream( _backup, IO_ReadOnly );
   KWidgetStreamer streamer;
   streamer.fromStream( stream, _content );
   repaint();
@@ -157,9 +157,9 @@ void RepeatWidget::slotConfigCanceled()
 
 int RepeatWidget::edit()
 {
-  _configWindow->move(QCursor::pos() - QPoint(_configWindow->sizeHint().width()/2,
+  _configWindow->move(TQCursor::pos() - TQPoint(_configWindow->sizeHint().width()/2,
                                               _configWindow->sizeHint().height()/2)  );
-  QDataStream stream( _backup, IO_WriteOnly );
+  TQDataStream stream( _backup, IO_WriteOnly );
   KWidgetStreamer streamer;
   streamer.toStream( _content, stream );
 
@@ -167,23 +167,23 @@ int RepeatWidget::edit()
 }
 
 //--------------------------------------------------------------------------------
-RepeatRangeWindow::RepeatRangeWindow( QWidget* parent, const char* name )
-  : QVBox( parent, name ? name : "RepeatRangeWindow" )
+RepeatRangeWindow::RepeatRangeWindow( TQWidget* parent, const char* name )
+  : TQVBox( parent, name ? name : "RepeatRangeWindow" )
 {
   setSpacing( 6 );
 
-  _group = new QVButtonGroup( i18n("Times to Match"), this, "groupbox" );
+  _group = new TQVButtonGroup( i18n("Times to Match"), this, "groupbox" );
 
   // Any number of times
-  QRadioButton* radioBut = new QRadioButton(i18n("Any number of times (including zero times)"),
+  TQRadioButton* radioBut = new TQRadioButton(i18n("Any number of times (including zero times)"),
                                             _group,
                                             "RepeatRangeWindow::choice any times");
 
   _group->insert(radioBut, ANY);
 
-  QWidget* container = new QWidget( _group );
-  QHBoxLayout* lay = new QHBoxLayout( container );
-  QGrid* grid = new QGrid( 3, container );
+  TQWidget* container = new TQWidget( _group );
+  TQHBoxLayout* lay = new TQHBoxLayout( container );
+  TQGrid* grid = new TQGrid( 3, container );
   grid->setSpacing( 5 );
 
   lay->addWidget( grid );
@@ -194,38 +194,38 @@ RepeatRangeWindow::RepeatRangeWindow( QWidget* parent, const char* name )
   createLine( grid, i18n( "Exactly" ), &_exactlyTimes, EXACTLY );
 
   // from ___ to ___ times
-  radioBut = new QRadioButton(i18n( "From" ), grid, "RepeatRangeWindow::from");
+  radioBut = new TQRadioButton(i18n( "From" ), grid, "RepeatRangeWindow::from");
   _group->insert( radioBut, MINMAX );
 
-  _rangeFrom = new QSpinBox( 1, 999, 1, grid);
+  _rangeFrom = new TQSpinBox( 1, 999, 1, grid);
 
-  QHBox* box = new QHBox( grid );
+  TQHBox* box = new TQHBox( grid );
   box->setSpacing( 5 );
 
-  (void) new QLabel(i18n( "to" ), box);
-  _rangeTo = new QSpinBox( 1, 999, 1, box );
-  (void) new QLabel( i18n( "time(s)" ), box );
+  (void) new TQLabel(i18n( "to" ), box);
+  _rangeTo = new TQSpinBox( 1, 999, 1, box );
+  (void) new TQLabel( i18n( "time(s)" ), box );
 
-  connect( _rangeFrom, SIGNAL( valueChanged( int ) ), this, SLOT( slotUpdateMaxVal( int ) ) );
-  connect( _rangeTo, SIGNAL( valueChanged( int ) ), this, SLOT( slotUpdateMinVal( int ) ) );
+  connect( _rangeFrom, TQT_SIGNAL( valueChanged( int ) ), this, TQT_SLOT( slotUpdateMaxVal( int ) ) );
+  connect( _rangeTo, TQT_SIGNAL( valueChanged( int ) ), this, TQT_SLOT( slotUpdateMinVal( int ) ) );
 
   // set a default button.
   _group->setButton(ANY);
   slotItemChange( ANY );
 
 
-  connect( _group, SIGNAL( clicked( int ) ), this, SLOT( slotItemChange( int ) ) );
+  connect( _group, TQT_SIGNAL( clicked( int ) ), this, TQT_SLOT( slotItemChange( int ) ) );
 }
 
 
-void RepeatRangeWindow::createLine( QWidget* parent, QString text, QSpinBox** spin, REPEATTYPE tp )
+void RepeatRangeWindow::createLine( TQWidget* parent, TQString text, TQSpinBox** spin, REPEATTYPE tp )
 {
 
-  QRadioButton* radioBut = new QRadioButton(text, parent);
-  *spin = new QSpinBox( 1, 999, 1, parent);
+  TQRadioButton* radioBut = new TQRadioButton(text, parent);
+  *spin = new TQSpinBox( 1, 999, 1, parent);
   (*spin)->setValue(1);
 
-  (void) new QLabel(i18n("time(s)"), parent);
+  (void) new TQLabel(i18n("time(s)"), parent);
   _group->insert(radioBut, tp);
 }
 
@@ -263,7 +263,7 @@ void RepeatRangeWindow::slotUpdateMaxVal( int minVal )
   }
 }
 
-QString RepeatRangeWindow::text()
+TQString RepeatRangeWindow::text()
 {
   switch ( _group->id(_group->selected()) ) {
   case ANY: return i18n("Repeated Any Number of Times");
@@ -274,7 +274,7 @@ QString RepeatRangeWindow::text()
                  .arg( _rangeFrom->value() ).arg( _rangeTo->value() );
   }
   qFatal("Fall through!");
-  return QString::fromLocal8Bit("");
+  return TQString::fromLocal8Bit("");
 }
 
 int RepeatRangeWindow::min()

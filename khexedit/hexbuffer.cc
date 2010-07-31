@@ -24,7 +24,7 @@
 #include <time.h>
 #include <unistd.h>
 
-#include <qfileinfo.h>
+#include <tqfileinfo.h>
 
 #include <klocale.h>
 #include <kglobal.h>
@@ -37,7 +37,7 @@
 //
 // There are some comments marked with a "// ##" at various places.
 // These indicate a patch from Sergey A. Sukiyazov which I have applied
-// "as is" for now. The number of QString::fromLocal8Bit in this modification
+// "as is" for now. The number of TQString::fromLocal8Bit in this modification
 // indicates that I should perhaps modify code elsewhere as well 
 // (espen 2000-11-26)
 //
@@ -430,7 +430,7 @@ const char *SExportCArray::printFormatted( const char *b, uint maxSize ) const
 }
 
 
-QString SExportCArray::variableName( uint range ) const
+TQString SExportCArray::variableName( uint range ) const
 {
   const char *typeString[] =
   {
@@ -447,7 +447,7 @@ QString SExportCArray::variableName( uint range ) const
   uint es = elementSize();
   uint numElement = range / es + ((range % es) ? 1 : 0);
 
-  return( QString("%1 %2[%2]").arg(typeString[elementType]).
+  return( TQString("%1 %2[%2]").arg(typeString[elementType]).
 	  arg(arrayName).arg(numElement) );
 }
 
@@ -510,7 +510,7 @@ SFileState CHexBuffer::mFileState;
 
 
 CHexBuffer::CHexBuffer( void )
-  :QByteArray()
+  :TQByteArray()
 {
   mColorIndex   = 0;
   mPrintBuf     = 0;
@@ -748,7 +748,7 @@ bool CHexBuffer::matchWidth( uint width )
 }
 
 
-void CHexBuffer::setNonPrintChar( QChar nonPrintChar )
+void CHexBuffer::setNonPrintChar( TQChar nonPrintChar )
 {
   mFontInfo.nonPrintChar = nonPrintChar;
 }
@@ -913,7 +913,7 @@ void CHexBuffer::setBookmarkVisibility( bool showInColumn, bool showInEditor )
   mShowBookmarkInEditor = showInEditor;
 }
 
-int CHexBuffer::writeFile( QFile &file, CProgress &p )
+int CHexBuffer::writeFile( TQFile &file, CProgress &p )
 {
   uint offset = 0;
   uint remaining = documentSize();
@@ -950,7 +950,7 @@ int CHexBuffer::writeFile( QFile &file, CProgress &p )
 }
 
 
-int CHexBuffer::readFile( QFile &file, const QString &url, CProgress &p )
+int CHexBuffer::readFile( TQFile &file, const TQString &url, CProgress &p )
 {
   if( resize( file.size() + 100 ) == false )
   {
@@ -1010,7 +1010,7 @@ int CHexBuffer::readFile( QFile &file, const QString &url, CProgress &p )
 }
 
 
-int CHexBuffer::insertFile( QFile &file, CProgress &p )
+int CHexBuffer::insertFile( TQFile &file, CProgress &p )
 {
   if( file.size() == 0 )
   {
@@ -1018,7 +1018,7 @@ int CHexBuffer::insertFile( QFile &file, CProgress &p )
     return( Err_Success );
   }
 
-  QByteArray array( file.size() );
+  TQByteArray array( file.size() );
   if( array.isNull() == true )
   {
     p.finish();
@@ -1062,7 +1062,7 @@ int CHexBuffer::insertFile( QFile &file, CProgress &p )
 }
 
 
-int CHexBuffer::newFile( const QString &url )
+int CHexBuffer::newFile( const TQString &url )
 {
   if( resize( 100 ) == 0 )
   {
@@ -1090,7 +1090,7 @@ void CHexBuffer::closeFile( void )
   setDocumentSize(0);
   mDocumentModified = false;
 
-  QString emptyUrl;
+  TQString emptyUrl;
   setUrl( emptyUrl );
 
   mSelect.reset();
@@ -1100,9 +1100,9 @@ void CHexBuffer::closeFile( void )
 }
 
 
-void CHexBuffer::registerDiskModifyTime( const QFile &file )
+void CHexBuffer::registerDiskModifyTime( const TQFile &file )
 {
-  QFileInfo fileInfo( file );
+  TQFileInfo fileInfo( file );
   mDiskModifyTime = fileInfo.lastModified();
 }
 
@@ -1111,18 +1111,18 @@ void CHexBuffer::registerDiskModifyTime( const QFile &file )
 void CHexBuffer::setFont( const SDisplayFontInfo &fontInfo )
 {
   mFontInfo = fontInfo;
-  QFontMetrics fm( mFontInfo.font );
+  TQFontMetrics fm( mFontInfo.font );
   mFontHeight = fm.height();
   mFontAscent = fm.ascent();
   computeLineWidth();
 
   for( int i=0; i < 256; i++ )
   {
-    mCharValid[i] = QChar(i).isPrint();
+    mCharValid[i] = TQChar(i).isPrint();
   }
 
   /*
-  QFontInfo info( mFontInfo.font );
+  TQFontInfo info( mFontInfo.font );
   puts("CHexBuffer mCharValid broken");
 
   KCharset charset( info.charSet() );
@@ -1154,7 +1154,7 @@ int CHexBuffer::setEncoding( CConversion::EMode mode, CProgress &p )
 
 void CHexBuffer::computeLineWidth( void )
 {
-  QFontMetrics fm( mFontInfo.font );
+  TQFontMetrics fm( mFontInfo.font );
   mUnitWidth  = fm.width( "M" );
 
   if( mLayout.primaryMode == SDisplayLayout::textOnly )
@@ -1335,7 +1335,7 @@ void CHexBuffer::computeNumLines( void )
 
 
 
-void CHexBuffer::drawSelection( QPainter &paint, QColor &color, uint start,
+void CHexBuffer::drawSelection( TQPainter &paint, TQColor &color, uint start,
 				uint stop, int sx )
 {
   if( start >= stop ) { return; }
@@ -1371,7 +1371,7 @@ void CHexBuffer::drawSelection( QPainter &paint, QColor &color, uint start,
 
 
 
-void CHexBuffer::drawText( QPainter &paint, uint line, int sx, int x1, int x2 )
+void CHexBuffer::drawText( TQPainter &paint, uint line, int sx, int x1, int x2 )
 {
   uint fileOffset = line * mLayout.lineSize;
   if( documentPresent() == false || mLoadingData == true )
@@ -1488,7 +1488,7 @@ void CHexBuffer::drawText( QPainter &paint, uint line, int sx, int x1, int x2 )
       // ## paint.drawText(offset,mFontAscent,&mPrintBuf[mOffsetIndex],
       // mOffsetSize);
       paint.drawText( offset, mFontAscent, 
-		      QString::fromLocal8Bit(&mPrintBuf[mOffsetIndex]),
+		      TQString::fromLocal8Bit(&mPrintBuf[mOffsetIndex]),
 		      mOffsetSize );
     }
     offset += s0;
@@ -1500,7 +1500,7 @@ void CHexBuffer::drawText( QPainter &paint, uint line, int sx, int x1, int x2 )
       int s2 = mLayout.leftSeparatorWidth + mLayout.separatorMarginWidth;
       if( x1 < offset + s2 && x2 >= offset )
       {
-	QPen pen( mColor.leftSeparatorFg, mLayout.leftSeparatorWidth );
+	TQPen pen( mColor.leftSeparatorFg, mLayout.leftSeparatorWidth );
 	paint.setPen( pen );
 	int center = offset + mLayout.leftSeparatorWidth/2;
 	paint.drawLine( center, 0, center, lineHeight() );
@@ -1541,7 +1541,7 @@ void CHexBuffer::drawText( QPainter &paint, uint line, int sx, int x1, int x2 )
 
       // ## paint.drawText( localOffset, mFontAscent, mPrintBuf, mNumCell );
       paint.drawText( localOffset, mFontAscent, 
-		      QString::fromLocal8Bit(mPrintBuf), mNumCell );
+		      TQString::fromLocal8Bit(mPrintBuf), mNumCell );
     }
     localOffset += s;
 
@@ -1568,7 +1568,7 @@ void CHexBuffer::drawText( QPainter &paint, uint line, int sx, int x1, int x2 )
       int s = mLayout.separatorMarginWidth + mLayout.rightSeparatorWidth;
       if( x1 < offset + s && x2 >= offset )
       {
-	QPen pen( mColor.rightSeparatorFg, mLayout.rightSeparatorWidth );
+	TQPen pen( mColor.rightSeparatorFg, mLayout.rightSeparatorWidth );
 	paint.setPen( pen );
 	int center = offset + mLayout.rightSeparatorWidth/2;
 	paint.drawLine( center, 0, center, lineHeight() );
@@ -1601,7 +1601,7 @@ void CHexBuffer::drawText( QPainter &paint, uint line, int sx, int x1, int x2 )
 
 	// ## paint.drawText( offset, mFontAscent, mPrintBuf, 1 );
 	paint.drawText( offset, mFontAscent, 
-			QString::fromLocal8Bit(mPrintBuf), 1 );
+			TQString::fromLocal8Bit(mPrintBuf), 1 );
       }
       offset += s;
     }
@@ -1630,7 +1630,7 @@ void CHexBuffer::drawText( QPainter &paint, uint line, int sx, int x1, int x2 )
     int s1 = s0 + mLayout.separatorMarginWidth + mLayout.edgeMarginWidth - sx;
     if( x1 < s1 && x2 > 0 )
     {
-      QColor bg = mShowBookmarkInOffsetColumn &&
+      TQColor bg = mShowBookmarkInOffsetColumn &&
 	(bookmarkPosition & BookmarkOnLine) ?
 	mColor.bookmarkBg : mColor.offsetBg;
       if( outsideText == true )
@@ -1655,7 +1655,7 @@ void CHexBuffer::drawText( QPainter &paint, uint line, int sx, int x1, int x2 )
       // ## paint.drawText(offset,mFontAscent,&mPrintBuf[mOffsetIndex],
       // mOffsetSize);
       paint.drawText( offset, mFontAscent, 
-		      QString::fromLocal8Bit(&mPrintBuf[mOffsetIndex]),
+		      TQString::fromLocal8Bit(&mPrintBuf[mOffsetIndex]),
 		      mOffsetSize );
     }
 
@@ -1668,7 +1668,7 @@ void CHexBuffer::drawText( QPainter &paint, uint line, int sx, int x1, int x2 )
       int s2 = mLayout.leftSeparatorWidth + mLayout.separatorMarginWidth;
       if( x1 < offset + s2 && x2 >= offset )
       {
-	QPen pen( mColor.leftSeparatorFg, mLayout.leftSeparatorWidth );
+	TQPen pen( mColor.leftSeparatorFg, mLayout.leftSeparatorWidth );
 	paint.setPen( pen );
 	int center = offset + mLayout.leftSeparatorWidth/2;
 	paint.drawLine( center, 0, center, lineHeight() );
@@ -1694,7 +1694,7 @@ void CHexBuffer::drawText( QPainter &paint, uint line, int sx, int x1, int x2 )
 
 
 
-void CHexBuffer::drawText( QPainter &paint, uint line, int x1, int x2, int y,
+void CHexBuffer::drawText( TQPainter &paint, uint line, int x1, int x2, int y,
 			   bool useBlackWhite )
 {
   uint fileOffset = line * mLayout.lineSize;
@@ -1722,7 +1722,7 @@ void CHexBuffer::drawText( QPainter &paint, uint line, int x1, int x2, int y,
 
   if( mLayout.horzGridWidth > 0 && outsideText == false )
   {
-    QPen pen( useBlackWhite == true ? Qt::black : mColor.gridFg,
+    TQPen pen( useBlackWhite == true ? Qt::black : mColor.gridFg,
 	      mLayout.horzGridWidth );
     paint.setPen( pen );
     paint.drawLine( x1, y+mFontHeight, x2+x1, y+mFontHeight );
@@ -1758,7 +1758,7 @@ void CHexBuffer::drawText( QPainter &paint, uint line, int x1, int x2, int y,
       // ## paint.drawText( offset, mFontAscent+y, &mPrintBuf[mOffsetIndex],
       // mOffsetSize );
       paint.drawText( offset, mFontAscent+y, 
-		      QString::fromLocal8Bit(&mPrintBuf[mOffsetIndex]), 
+		      TQString::fromLocal8Bit(&mPrintBuf[mOffsetIndex]), 
  		      mOffsetSize );
     }
     offset += s1;
@@ -1768,7 +1768,7 @@ void CHexBuffer::drawText( QPainter &paint, uint line, int x1, int x2, int y,
       offset += mLayout.separatorMarginWidth;
 
       int s2 = mLayout.leftSeparatorWidth + mLayout.separatorMarginWidth;
-      QPen pen( useBlackWhite == true ? Qt::black : mColor.leftSeparatorFg,
+      TQPen pen( useBlackWhite == true ? Qt::black : mColor.leftSeparatorFg,
 		mLayout.leftSeparatorWidth );
       paint.setPen( pen );
       int center = offset + mLayout.leftSeparatorWidth/2;
@@ -1797,14 +1797,14 @@ void CHexBuffer::drawText( QPainter &paint, uint line, int x1, int x2, int y,
     }
     // ## paint.drawText( localOffset, mFontAscent+y, mPrintBuf, mNumCell );
     paint.drawText( localOffset, mFontAscent+y, 
-		    QString::fromLocal8Bit(mPrintBuf), mNumCell );
+		    TQString::fromLocal8Bit(mPrintBuf), mNumCell );
     localOffset += s;
 
     if( mLayout.vertGridWidth > 0 && i+1 < dataSize )
     {
       if( (i+1) % mLayout.columnSize == 0 )
       {
-	QPen pen( useBlackWhite == true ? Qt::black : mColor.gridFg,
+	TQPen pen( useBlackWhite == true ? Qt::black : mColor.gridFg,
 		  mLayout.vertGridWidth );
 	paint.setPen( pen );
 	int x = localOffset - (mSplitWidth+1) / 2;
@@ -1822,7 +1822,7 @@ void CHexBuffer::drawText( QPainter &paint, uint line, int x1, int x2, int y,
     {
       offset += mLayout.separatorMarginWidth;
       int s = mLayout.separatorMarginWidth + mLayout.rightSeparatorWidth;
-      QPen pen( useBlackWhite == true ? Qt::black : mColor.rightSeparatorFg,
+      TQPen pen( useBlackWhite == true ? Qt::black : mColor.rightSeparatorFg,
 		mLayout.rightSeparatorWidth );
       paint.setPen( pen );
       int center = offset + mLayout.rightSeparatorWidth/2;
@@ -1849,7 +1849,7 @@ void CHexBuffer::drawText( QPainter &paint, uint line, int x1, int x2, int y,
       }
       // ## paint.drawText( offset, mFontAscent+y, mPrintBuf, 1 );
       paint.drawText( offset, mFontAscent+y, 
-		      QString::fromLocal8Bit(mPrintBuf), 1 );
+		      TQString::fromLocal8Bit(mPrintBuf), 1 );
       offset += s;
     }
   }
@@ -1857,22 +1857,22 @@ void CHexBuffer::drawText( QPainter &paint, uint line, int x1, int x2, int y,
 }
 
 
-int CHexBuffer::headerHeight( QPainter &paint )
+int CHexBuffer::headerHeight( TQPainter &paint )
 {
-  QFont font( paint.font() );
+  TQFont font( paint.font() );
   paint.setFont( KGlobalSettings::generalFont() );
-  const QFontMetrics &fm = paint.fontMetrics();
+  const TQFontMetrics &fm = paint.fontMetrics();
 
   int height = fm.height();
   paint.setFont( font );
   return( height );
 }
 
-int CHexBuffer::headerMargin( QPainter &paint )
+int CHexBuffer::headerMargin( TQPainter &paint )
 {
-  QFont font( paint.font() );
+  TQFont font( paint.font() );
   paint.setFont( KGlobalSettings::generalFont() );
-  const QFontMetrics &fm = paint.fontMetrics();
+  const TQFontMetrics &fm = paint.fontMetrics();
 
   int margin = fm.height() / 2;
   paint.setFont( font );
@@ -1880,13 +1880,13 @@ int CHexBuffer::headerMargin( QPainter &paint )
 }
 
 
-void CHexBuffer::drawHeader( QPainter &paint, int sx, int width, int y,
+void CHexBuffer::drawHeader( TQPainter &paint, int sx, int width, int y,
 			     bool isFooter, const SPageHeader &header,
 			     const SPagePosition &position )
 {
-  QFont font( paint.font() );
+  TQFont font( paint.font() );
   paint.setFont( KGlobalSettings::generalFont() );
-  const QFontMetrics &fm = paint.fontMetrics();
+  const TQFontMetrics &fm = paint.fontMetrics();
 
   paint.fillRect( sx, y, width, fm.height(), Qt::white );
   paint.setPen( Qt::black );
@@ -1908,15 +1908,15 @@ void CHexBuffer::drawHeader( QPainter &paint, int sx, int width, int y,
 
   int pos[3] =
   {
-    QPainter::AlignLeft, QPainter::AlignHCenter, QPainter::AlignRight
+    TQPainter::AlignLeft, TQPainter::AlignHCenter, TQPainter::AlignRight
   };
 
-  QString msg;
+  TQString msg;
   for( int i=0; i<3; i++ )
   {
     if( header.pos[i] == SPageHeader::DateTime )
     {
-      QDateTime datetime;
+      TQDateTime datetime;
       datetime.setTime_t( position.now );
       msg = KGlobal::locale()->formatDateTime(datetime);
     }
@@ -1935,10 +1935,10 @@ void CHexBuffer::drawHeader( QPainter &paint, int sx, int width, int y,
       continue;
     }
 
-    if( 0 && pos[i] == QPainter::AlignRight )
+    if( 0 && pos[i] == TQPainter::AlignRight )
     {
-      //const QFontMetrics &f = QFontMetrics( KGlobalSettings::generalFont() );
-      //QRect r = paint.boundingRect(sx, y, width, fm.height(), pos[i], msg );
+      //const TQFontMetrics &f = TQFontMetrics( KGlobalSettings::generalFont() );
+      //TQRect r = paint.boundingRect(sx, y, width, fm.height(), pos[i], msg );
       //printf("R: %d, %d, %d, %d\n", r.x(), r.y(), r.width(), r.height() );
 
       int x = sx + width - /*r.width();*/ fm.width(msg);
@@ -1960,7 +1960,7 @@ void CHexBuffer::drawHeader( QPainter &paint, int sx, int width, int y,
 
 
 
-int CHexBuffer::drawBookmarks( QPainter &paint, uint line, int startx )
+int CHexBuffer::drawBookmarks( TQPainter &paint, uint line, int startx )
 {
   if( documentPresent() == false || mLoadingData == true )
   {
@@ -1969,8 +1969,8 @@ int CHexBuffer::drawBookmarks( QPainter &paint, uint line, int startx )
 
   uint start = line*mLayout.lineSize;
   uint stop  = start+mLayout.lineSize;
-  QColor bg  = mColor.bookmarkBg;
-  QColor fg  = mColor.bookmarkFg;
+  TQColor bg  = mColor.bookmarkBg;
+  TQColor fg  = mColor.bookmarkFg;
 
   int bookmarkPosition = 0;
 
@@ -2019,14 +2019,14 @@ int CHexBuffer::drawBookmarks( QPainter &paint, uint line, int startx )
       paint.setPen( flag == 0 ? fg : mColor.nonPrintFg );
       // ## paint.drawText( x1-startx, mFontAscent, mPrintBuf, mNumCell );
       paint.drawText( x1-startx, mFontAscent, 
-		      QString::fromLocal8Bit(mPrintBuf), mNumCell );
+		      TQString::fromLocal8Bit(mPrintBuf), mNumCell );
       if( mLayout.secondaryMode != SDisplayLayout::hide )
       {
 	flag = printAsciiCell( mPrintBuf, c );
 	paint.setPen( flag == 0 ? fg : mColor.nonPrintFg );
 	// ## paint.drawText( x2-startx, mFontAscent, mPrintBuf, 1 );	
 	paint.drawText( x2-startx, mFontAscent, 
-			QString::fromLocal8Bit(mPrintBuf), 1 );
+			TQString::fromLocal8Bit(mPrintBuf), 1 );
       }
     }
   }
@@ -2036,7 +2036,7 @@ int CHexBuffer::drawBookmarks( QPainter &paint, uint line, int startx )
 
 
 
-void CHexBuffer::drawCursor( QPainter &paint, uint line, int startx,
+void CHexBuffer::drawCursor( TQPainter &paint, uint line, int startx,
 			     bool onBookmark )
 {
   if( documentPresent() == false || mLoadingData == true )
@@ -2049,7 +2049,7 @@ void CHexBuffer::drawCursor( QPainter &paint, uint line, int startx,
   //
   // Draw the cursor in primary edit area.
   //
-  QColor bg, fg;
+  TQColor bg, fg;
   bool useFg;
   if( mMark.inside( c.offset ) == true )
   {
@@ -2070,8 +2070,8 @@ void CHexBuffer::drawCursor( QPainter &paint, uint line, int startx,
     useFg = false; // Can be true later.
   }
 
-  QColor cbg = mColor.cursorBg;
-  QColor cfg = mColor.cursorFg;
+  TQColor cbg = mColor.cursorBg;
+  TQColor cfg = mColor.cursorFg;
 
   //
   // Fill in the general backround color
@@ -2144,7 +2144,7 @@ void CHexBuffer::drawCursor( QPainter &paint, uint line, int startx,
       // ## paint.drawText( c.x1-startx, mFontAscent, &mPrintBuf[c.cell],
       // mNumCell-c.cell );
       paint.drawText( c.x1-startx, mFontAscent, 
-		      QString::fromLocal8Bit(&mPrintBuf[c.cell]), 
+		      TQString::fromLocal8Bit(&mPrintBuf[c.cell]), 
  		      mNumCell-c.cell );
     }
 
@@ -2153,7 +2153,7 @@ void CHexBuffer::drawCursor( QPainter &paint, uint line, int startx,
       paint.setPen( flag == 0 || useFg == true ? fg : mColor.nonPrintFg );
       // ## paint.drawText( c.x1 - startx, mFontAscent, &mPrintBuf[c.cell], 1);
       paint.drawText( c.x1 - startx, mFontAscent, 
-		      QString::fromLocal8Bit(&mPrintBuf[c.cell]), 1 );
+		      TQString::fromLocal8Bit(&mPrintBuf[c.cell]), 1 );
     }
   }
 
@@ -2261,14 +2261,14 @@ void CHexBuffer::drawCursor( QPainter &paint, uint line, int startx,
       paint.setPen( flag == 0 ? mColor.bookmarkFg : mColor.nonPrintFg );
       // ## paint.drawText( c.x2-startx, mFontAscent, mPrintBuf, 1 );
       paint.drawText( c.x2-startx, mFontAscent, 
-		      QString::fromLocal8Bit(mPrintBuf), 1 );
+		      TQString::fromLocal8Bit(mPrintBuf), 1 );
     }
     if( transparent == false || onBookmark == false )
     {
       paint.setPen( flag == 0 || useFg == true ? fg : mColor.nonPrintFg );
       // ## paint.drawText( c.x2 - startx, mFontAscent, mPrintBuf, 1 );
       paint.drawText( c.x2 - startx, mFontAscent, 
-		      QString::fromLocal8Bit(mPrintBuf), 1 );
+		      TQString::fromLocal8Bit(mPrintBuf), 1 );
     }
   }
 
@@ -2507,7 +2507,7 @@ bool CHexBuffer::setCursorPosition( int x, int y, bool init, bool cellLevel )
 
 
 
-bool CHexBuffer::inputAtCursor( QChar c )
+bool CHexBuffer::inputAtCursor( TQChar c )
 {
   if( documentPresent() == false || mInputMode.noInput() == true )
   {
@@ -2552,7 +2552,7 @@ bool CHexBuffer::inputAtCursor( QChar c )
   {
     // ## if( THIS_FPTR(inputCell)( &dest, c.latin1(), mCursor.curr.cell ) 
     //== false )
-    if( THIS_FPTR(inputCell)( &dest, QString(c).local8Bit()[0], 
+    if( THIS_FPTR(inputCell)( &dest, TQString(c).local8Bit()[0], 
 			      mCursor.curr.cell ) == false )
     {
       inputSound();
@@ -2562,7 +2562,7 @@ bool CHexBuffer::inputAtCursor( QChar c )
   else if( mActiveEditor == edit_secondary )
   {
     // ## if( inputAscii( &dest, c.latin1(), mCursor.curr.cell ) == false )
-    if( !inputAscii( &dest, QString(c).local8Bit()[0], mCursor.curr.cell ) )
+    if( !inputAscii( &dest, TQString(c).local8Bit()[0], mCursor.curr.cell ) )
     {
       inputSound();
       return( false );
@@ -2584,7 +2584,7 @@ bool CHexBuffer::inputAtCursor( QChar c )
 
 
 
-int CHexBuffer::inputAtCursor( const QByteArray &buf, uint oldSize )
+int CHexBuffer::inputAtCursor( const TQByteArray &buf, uint oldSize )
 {
   if( documentPresent() == false )
   {
@@ -2716,7 +2716,7 @@ int CHexBuffer::exportText( const SExportText &ex, CProgress &p )
     return( errCode );
   }
 
-  QFile file( ex.destFile );
+  TQFile file( ex.destFile );
   if( file.open( IO_WriteOnly ) == false )
   {
     p.finish();
@@ -2740,7 +2740,7 @@ int CHexBuffer::exportText( const SExportText &ex, CProgress &p )
   uint bytePerLine = mOffsetSize + 1 + (mNumCell + 2)*mLayout.lineSize + 1;
   uint linePerStep = 20;
 
-  QByteArray array( bytePerLine * linePerStep + 1 ); // Line is 0 terminated
+  TQByteArray array( bytePerLine * linePerStep + 1 ); // Line is 0 terminated
   if( array.isEmpty() == true )
   {
     p.finish();
@@ -2817,21 +2817,21 @@ int CHexBuffer::exportHtml( const SExportHtml &ex, CProgress &p )
   uint numFiles    = remaining/linePerPage + (remaining%linePerPage ? 1 : 0);
   uint fileCount   = 0;
 
-  QStringList fileNames, offsets;
-  QString name, offset;
+  TQStringList fileNames, offsets;
+  TQString name, offset;
   for( uint i=0; i < numFiles; i++ )
   {
     name.sprintf( "%08d.html", i+1 );
-    fileNames.append( QString("%1/%2%3").arg(ex.package).arg(ex.prefix).
+    fileNames.append( TQString("%1/%2%3").arg(ex.package).arg(ex.prefix).
 		      arg(name));
   }
   name.sprintf( "%08d.html", 0 );
-  QString tocName =QString("%1/%2%3").arg(ex.package).arg(ex.prefix).arg(name);
+  TQString tocName =TQString("%1/%2%3").arg(ex.package).arg(ex.prefix).arg(name);
 
-  QString linkName;
+  TQString linkName;
   if( ex.symLink == true )
   {
-    linkName = QString("%1/%2").arg(ex.package).arg("index.html");
+    linkName = TQString("%1/%2").arg(ex.package).arg("index.html");
   }
 
   while( remaining  > 0 )
@@ -2849,7 +2849,7 @@ int CHexBuffer::exportHtml( const SExportHtml &ex, CProgress &p )
 
     THIS_FPTR(printOffset)( mPrintBuf, (startLine-1)*mLayout.lineSize );
     mPrintBuf[mOffsetSize]=0;
-    offset += QString(" %1 [%2]").arg(i18n("to")).arg(mPrintBuf);
+    offset += TQString(" %1 [%2]").arg(i18n("to")).arg(mPrintBuf);
     offsets.append(offset);
 
     if( p.expired() == true )
@@ -2881,7 +2881,7 @@ int CHexBuffer::exportCArray( const SExportCArray &ex, CProgress &p )
     return( errCode );
   }
 
-  QFile file( ex.destFile );
+  TQFile file( ex.destFile );
   if( file.open( IO_WriteOnly ) == false )
   {
     p.finish();
@@ -2903,7 +2903,7 @@ int CHexBuffer::exportCArray( const SExportCArray &ex, CProgress &p )
   uint elementSize = ex.elementSize();
   uint elementOnThisLine = 0;
 
-  QTextStream dest( &file );
+  TQTextStream dest( &file );
 
   dest << ex.variableName(stop-start).latin1() << "={" << endl;
   for( unsigned int i=start; i<stop; i+=elementSize )
@@ -2942,7 +2942,7 @@ int CHexBuffer::exportCArray( const SExportCArray &ex, CProgress &p )
 
 
 
-int CHexBuffer::copySelectedText( QByteArray &array, int columnSegment )
+int CHexBuffer::copySelectedText( TQByteArray &array, int columnSegment )
 {
   SExportRange range;
   range.mode = SExportRange::Selection;
@@ -2950,7 +2950,7 @@ int CHexBuffer::copySelectedText( QByteArray &array, int columnSegment )
 }
 
 
-int CHexBuffer::copyAllText( QByteArray &array )
+int CHexBuffer::copyAllText( TQByteArray &array )
 {
   SExportRange range;
   range.mode = SExportRange::All;
@@ -2958,7 +2958,7 @@ int CHexBuffer::copyAllText( QByteArray &array )
 }
 
 
-int CHexBuffer::copyText( QByteArray &array, const SExportRange &range,
+int CHexBuffer::copyText( TQByteArray &array, const SExportRange &range,
 			  int columnSegment )
 {
   uint start, stop;
@@ -3010,7 +3010,7 @@ int CHexBuffer::copyText( QByteArray &array, const SExportRange &range,
 }
 
 
-int CHexBuffer::copySelectedData( QByteArray &array )
+int CHexBuffer::copySelectedData( TQByteArray &array )
 {
   uint start = mSelect.start();
   uint stop  = mSelect.stop();
@@ -3036,7 +3036,7 @@ int CHexBuffer::copySelectedData( QByteArray &array )
 
 uint CHexBuffer::numPage( CHexPrinter &printer )
 {
-  QPainter paint( &printer );
+  TQPainter paint( &printer );
   paint.setFont( font() );
 
   SPageMargin margin = printer.pageMargin();
@@ -3074,7 +3074,7 @@ int CHexBuffer::print( CHexPrinter &printer, CProgress &p )
 {
   printer.setDocName( mUrl );
 
-  QPainter paint( &printer );
+  TQPainter paint( &printer );
   paint.setFont( font() );
 
   SPageMargin margin = printer.pageMargin();
@@ -4251,7 +4251,7 @@ int CHexBuffer::filter( SFilterControl &fc )
   }
 
   if( start >= stop ) { return( Err_IllegalRange ); }
-  QByteArray buf( stop - start );
+  TQByteArray buf( stop - start );
   if( buf.isEmpty() == true ) { return( Err_NoMemory ); }
 
   int errCode = fc.execute((uchar*)&buf[0],(uchar*)&data()[start],buf.size());
@@ -4284,7 +4284,7 @@ int CHexBuffer::collectStrings( CStringCollectControl &sc )
     {
       if( on == true && i-start >= sc.minLength )
       {
-	QByteArray a( i-start );
+	TQByteArray a( i-start );
 	for( uint j=0; j<(i-start); a[j]=data()[start+j], j++ );
 	sc.add( start, a );
       }
@@ -4299,7 +4299,7 @@ int CHexBuffer::collectStrings( CStringCollectControl &sc )
 
   if( on == true && i-start >= sc.minLength )
   {
-    QByteArray a( i-start );
+    TQByteArray a( i-start );
     for( uint j=0; j<(i-start); a[j]=data()[start+j], j++ );
     sc.add( start, a );
   }
@@ -4668,7 +4668,7 @@ int CHexBuffer::resizeBuffer( uint newSize )
 
   if( newSize >= size() )
   {
-    QByteArray tmp;
+    TQByteArray tmp;
     tmp.duplicate( data(), size() );
     if( tmp.isNull() == true )
     {
@@ -4692,7 +4692,7 @@ void CHexBuffer::inputSound( void )
 {
   if( mInputErrorSound == true )
   {
-    KNotifyClient::beep( QObject::tr("Edit operation failed") );
+    KNotifyClient::beep( TQObject::tr("Edit operation failed") );
   }
 }
 
@@ -4701,13 +4701,13 @@ void CHexBuffer::fatalSound( void )
 {
   if( mFatalErrorSound == true )
   {
-    KNotifyClient::beep( QObject::tr("Could not allocate memory") );
+    KNotifyClient::beep( TQObject::tr("Could not allocate memory") );
   }
 }
 
 
-int CHexBuffer::printHtmlDataPage( const QString &tocName,
-				   const QStringList &fileNames, uint index,
+int CHexBuffer::printHtmlDataPage( const TQString &tocName,
+				   const TQStringList &fileNames, uint index,
 				   const SExportHtml &ex,
 				   uint line, uint numLine )
 {
@@ -4721,16 +4721,16 @@ int CHexBuffer::printHtmlDataPage( const QString &tocName,
     index = fileNames.count()-1;
   }
 
-  QFile file( fileNames[index] );
+  TQFile file( fileNames[index] );
   if( file.open( IO_WriteOnly ) == false )
   {
     return( Err_OperationAborted );
   }
 
-  QTextStream os( &file );
-  const QString *next = index+1 >= fileNames.count() ? 0 : &fileNames[index+1];
-  const QString *prev = index == 0 ? 0 : &fileNames[index-1];
-  const QString *toc  = tocName.length() == 0 ? 0 : &tocName;
+  TQTextStream os( &file );
+  const TQString *next = index+1 >= fileNames.count() ? 0 : &fileNames[index+1];
+  const TQString *prev = index == 0 ? 0 : &fileNames[index-1];
+  const TQString *toc  = tocName.length() == 0 ? 0 : &tocName;
 
   printHtmlHeader( os, true );
   if( ex.navigator == true )
@@ -4752,10 +4752,10 @@ int CHexBuffer::printHtmlDataPage( const QString &tocName,
 }
 
 
-void CHexBuffer::printHtmlTocPage( const QString &tocName,
-				   const QString &linkName,
-				   const QStringList &fileNames,
-				   const QStringList &offsets,
+void CHexBuffer::printHtmlTocPage( const TQString &tocName,
+				   const TQString &linkName,
+				   const TQStringList &fileNames,
+				   const TQStringList &offsets,
 				   uint numPage )
 {
   if( numPage == 0 || fileNames.count() == 0 )
@@ -4767,13 +4767,13 @@ void CHexBuffer::printHtmlTocPage( const QString &tocName,
     numPage = fileNames.count() - 1;
   }
 
-  QFile file( tocName );
+  TQFile file( tocName );
   if( file.open( IO_WriteOnly ) == false )
   {
     return;
   }
 
-  QTextStream os( &file );
+  TQTextStream os( &file );
   printHtmlHeader( os, true );
 
   os << "<P ALIGN=\"CENTER\">" << endl;
@@ -4785,7 +4785,7 @@ void CHexBuffer::printHtmlTocPage( const QString &tocName,
   os << "<P ALIGN=\"CENTER\"><TT>" << endl;
   for( uint i=0; i<=numPage; i++ )
   {
-    QString n( fileNames[i].right( fileNames[i].length() -
+    TQString n( fileNames[i].right( fileNames[i].length() -
 				   fileNames[i].findRev('/') - 1) );
     os << "<A HREF=\"" << n << "\">" << i18n("Page") << i+1;
     os << "</A>";
@@ -4802,7 +4802,7 @@ void CHexBuffer::printHtmlTocPage( const QString &tocName,
     // Make a symlink. We ignore any error here. I don't consider
     // it to be fatal.
     //
-    QString n( tocName.right( tocName.length() - tocName.findRev('/') - 1) );
+    TQString n( tocName.right( tocName.length() - tocName.findRev('/') - 1) );
     symlink( n.latin1(), linkName.latin1() );
   }
 
@@ -4810,10 +4810,10 @@ void CHexBuffer::printHtmlTocPage( const QString &tocName,
 
 
 
-void CHexBuffer::printHtmlCaption( QTextStream &os, uint captionType,
+void CHexBuffer::printHtmlCaption( TQTextStream &os, uint captionType,
 				   uint curPage, uint numPage )
 {
-  QString caption;
+  TQString caption;
   switch( captionType )
   {
     case 0:
@@ -4842,8 +4842,8 @@ void CHexBuffer::printHtmlCaption( QTextStream &os, uint captionType,
 
 
 
-void CHexBuffer::printHtmlNavigator( QTextStream &os, const QString *next,
-				     const QString *prev, const QString *toc )
+void CHexBuffer::printHtmlNavigator( TQTextStream &os, const TQString *next,
+				     const TQString *prev, const TQString *toc )
 {
   os << "<TABLE BORDER=\"0\" CELLSPACING=\"0\" WIDTH=\"100%\">" << endl;
   os << "<TR>" << endl;
@@ -4854,7 +4854,7 @@ void CHexBuffer::printHtmlNavigator( QTextStream &os, const QString *next,
   }
   else
   {
-    QString n( next->right( next->length() - next->findRev('/') - 1) );
+    TQString n( next->right( next->length() - next->findRev('/') - 1) );
     os << "<A HREF=\"" << n << "\">" << i18n("Next") << "</A>" << " ";
   }
 
@@ -4864,7 +4864,7 @@ void CHexBuffer::printHtmlNavigator( QTextStream &os, const QString *next,
   }
   else
   {
-    QString p( prev->right( prev->length() - prev->findRev('/') - 1) );
+    TQString p( prev->right( prev->length() - prev->findRev('/') - 1) );
     os << "<A HREF=\"" << p << "\">" << i18n("Previous") << "</A>" << " ";
   }
 
@@ -4874,7 +4874,7 @@ void CHexBuffer::printHtmlNavigator( QTextStream &os, const QString *next,
   }
   else
   {
-    QString t( toc->right( toc->length() - toc->findRev('/') - 1) );
+    TQString t( toc->right( toc->length() - toc->findRev('/') - 1) );
     os << "<A HREF=\"" << t << "\">" << i18n("Contents");
     os << "</A>" << " ";
   }
@@ -4891,7 +4891,7 @@ void CHexBuffer::printHtmlNavigator( QTextStream &os, const QString *next,
 }
 
 
-int CHexBuffer::printHtmlHeader( QTextStream &os, bool isFront )
+int CHexBuffer::printHtmlHeader( TQTextStream &os, bool isFront )
 {
   if( isFront == true )
   {
@@ -4910,11 +4910,11 @@ int CHexBuffer::printHtmlHeader( QTextStream &os, bool isFront )
 }
 
 
-int CHexBuffer::printHtmlTable( QTextStream &os, uint line, uint numLine,
+int CHexBuffer::printHtmlTable( TQTextStream &os, uint line, uint numLine,
 				bool bw )
 {
   uint i;
-  QColor color;
+  TQColor color;
 
 
   int numCol = 1;
@@ -4969,13 +4969,13 @@ int CHexBuffer::printHtmlTable( QTextStream &os, uint line, uint numLine,
 }
 
 
-int CHexBuffer::printHtmlLine( QTextStream &os, uint line, bool isPrimary,
+int CHexBuffer::printHtmlLine( TQTextStream &os, uint line, bool isPrimary,
 			       bool bw )
 {
   uint offset  = line * mLayout.lineSize;
-  QColor prevColor;
+  TQColor prevColor;
 
-  QColor color;
+  TQColor color;
   if( bw == true )
   {
     color = Qt::white;

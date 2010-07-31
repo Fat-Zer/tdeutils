@@ -26,12 +26,12 @@ bool DotRegExp::check( ErrorMap&, bool, bool )
     return false;
 }
 
-QDomNode DotRegExp::toXml( QDomDocument* doc ) const
+TQDomNode DotRegExp::toXml( TQDomDocument* doc ) const
 {
-    return doc->createElement( QString::fromLocal8Bit("AnyChar") );
+    return doc->createElement( TQString::fromLocal8Bit("AnyChar") );
 }
 
-bool DotRegExp::load( QDomElement /* top */, const QString& /*version*/ )
+bool DotRegExp::load( TQDomElement /* top */, const TQString& /*version*/ )
 {
     // Nothing to do
     return true;

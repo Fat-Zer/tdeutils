@@ -29,14 +29,14 @@ class QLineEdit;
 class QCheckBox;
 
 #include "hexbuffer.h"
-#include <qframe.h>
+#include <tqframe.h>
 
 class CHexToolWidget : public QFrame
 {
   Q_OBJECT
 
   public:
-    CHexToolWidget( QWidget *parent = 0, const char *name = 0 );
+    CHexToolWidget( TQWidget *parent = 0, const char *name = 0 );
     ~CHexToolWidget( void );
 
     void writeConfiguration( KConfig &config );
@@ -44,8 +44,8 @@ class CHexToolWidget : public QFrame
     unsigned long bitValue( SCursorState &state, int n );
 
   protected:
-    void resizeEvent( QResizeEvent *e );
-    void closeEvent( QCloseEvent *e );
+    void resizeEvent( TQResizeEvent *e );
+    void closeEvent( TQCloseEvent *e );
 
   public slots:
     void cursorChanged( SCursorState &state );
@@ -64,13 +64,13 @@ class CHexToolWidget : public QFrame
     SCursorState mCursorState;
     bool mViewHexCaps;
 
-    QGridLayout *mUtilBox;
-    QLineEdit *mText1[4];
-    QLineEdit *mText2[4];
-    QLineEdit *mText3[4];
-    QCheckBox *mCheckIntelFormat;
-    QCheckBox *mCheckHexadecimal;
-    QComboBox *mBitCombo;
+    TQGridLayout *mUtilBox;
+    TQLineEdit *mText1[4];
+    TQLineEdit *mText2[4];
+    TQLineEdit *mText3[4];
+    TQCheckBox *mCheckIntelFormat;
+    TQCheckBox *mCheckHexadecimal;
+    TQComboBox *mBitCombo;
 };
 
 

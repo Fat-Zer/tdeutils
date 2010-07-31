@@ -35,20 +35,20 @@ namespace Snmp
 class HostItem : public QListViewItem
 {
 public:
-    HostItem( QListView *parent, const KSim::Snmp::HostConfig &src )
-        : QListViewItem( parent, QString::null, QString::null, QString::null )
+    HostItem( TQListView *parent, const KSim::Snmp::HostConfig &src )
+        : TQListViewItem( parent, TQString::null, TQString::null, TQString::null )
     {
         setFromHostConfig( src );
     }
 
-    HostItem( QListView *parent )
-        : QListViewItem( parent, QString::null, QString::null, QString::null )
+    HostItem( TQListView *parent )
+        : TQListViewItem( parent, TQString::null, TQString::null, TQString::null )
     {}
 
     void setFromHostConfig( const KSim::Snmp::HostConfig &src )
     {
         setText( 0, src.name );
-        setText( 1, QString::number( src.port ) );
+        setText( 1, TQString::number( src.port ) );
         setText( 2, snmpVersionToString( src.version ) );
     }
 };
@@ -56,14 +56,14 @@ public:
 class MonitorItem : public QListViewItem
 {
 public:
-    MonitorItem( QListView *parent, const KSim::Snmp::MonitorConfig &monitor )
-        : QListViewItem( parent, QString::null, QString::null, QString::null )
+    MonitorItem( TQListView *parent, const KSim::Snmp::MonitorConfig &monitor )
+        : TQListViewItem( parent, TQString::null, TQString::null, TQString::null )
     {
         setFromMonitor( monitor );
     }
 
-    MonitorItem( QListView *parent )
-        : QListViewItem( parent, QString::null, QString::null, QString::null )
+    MonitorItem( TQListView *parent )
+        : TQListViewItem( parent, TQString::null, TQString::null, TQString::null )
     {}
 
     void setFromMonitor( const KSim::Snmp::MonitorConfig &monitor )
@@ -97,14 +97,14 @@ private slots:
     void disableOrEnableSomeWidgets();
 
 private:
-    void removeMonitors( QStringList monitors );
+    void removeMonitors( TQStringList monitors );
 
     void removeAllHostGroups();
     void removeAllMonitorGroups();
-    void removeConfigGroups( const QString &prefix );
+    void removeConfigGroups( const TQString &prefix );
     void fillGui();
 
-    QStringList monitorsForHost( const HostConfig &host ) const;
+    TQStringList monitorsForHost( const HostConfig &host ) const;
 
     ConfigWidget *m_page;
     KSim::Snmp::HostConfigMap m_hosts;

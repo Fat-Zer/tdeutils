@@ -18,7 +18,7 @@
 #ifndef __scrolledEditorWindow
 #define __scrolledEditorWindow
 
-#include <qhbox.h>
+#include <tqhbox.h>
 class QScrollView;
 class RegExpEditorWindow;
 class RegExp;
@@ -31,7 +31,7 @@ class RegExpScrolledEditorWindow :public QWidget
 {
     Q_OBJECT
 public:
-    RegExpScrolledEditorWindow( QWidget *parent = 0, const char* name = 0);
+    RegExpScrolledEditorWindow( TQWidget *parent = 0, const char* name = 0);
     RegExp* regExp();
 
 private:
@@ -39,7 +39,7 @@ private:
 
 
 protected:
-    virtual void resizeEvent( QResizeEvent* );
+    virtual void resizeEvent( TQResizeEvent* );
 
 public slots:
     void slotSetRegExp( RegExp* );
@@ -53,8 +53,8 @@ public slots:
     void slotPaste();
 
 protected slots:
-    void slotUpdateContentSize( QPoint focusPoint );
-    void slotScroll( QPoint focusPoint );
+    void slotUpdateContentSize( TQPoint focusPoint );
+    void slotScroll( TQPoint focusPoint );
 
     signals:
     /**
@@ -86,7 +86,7 @@ protected slots:
 
 private:
     RegExpEditorWindow* _editorWindow;
-    QScrollView* _scrollView;
+    TQScrollView* _scrollView;
 };
 
 #endif // __scrolledEditorWindow

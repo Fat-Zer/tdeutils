@@ -27,7 +27,7 @@
 
 
 // Qt includes
-#include <qdir.h>
+#include <tqdir.h>
 
 // KDE includes
 #include <kdebug.h>
@@ -41,7 +41,7 @@
 #include "settings.h"
 
 
-ZipArch::ZipArch( ArkWidget *_gui, const QString & _fileName )
+ZipArch::ZipArch( ArkWidget *_gui, const TQString & _fileName )
   : Arch(  _gui, _fileName )
 {
   m_archiver_program = "zip";
@@ -54,16 +54,16 @@ ZipArch::ZipArch( ArkWidget *_gui, const QString & _fileName )
   m_dateCol = 5;
   m_numCols = 7;
 
-  m_archCols.append( new ArchColumns( 1, QRegExp( "[0-9]+" ) ) );
-  m_archCols.append( new ArchColumns( 2, QRegExp( "[^\\s]+" ) ) );
-  m_archCols.append( new ArchColumns( 3, QRegExp( "[0-9]+" ) ) );
-  m_archCols.append( new ArchColumns( 4, QRegExp( "[0-9.]+%" ) ) );
-  m_archCols.append( new ArchColumns( 7, QRegExp( "[01][0-9]" ), 2 ) );
-  m_archCols.append( new ArchColumns( 8, QRegExp( "[0-3][0-9]" ), 2 ) );
-  m_archCols.append( new ArchColumns( 9, QRegExp( "[0-9][0-9]" ), 2 ) );
-  m_archCols.append( new ArchColumns( 10, QRegExp( "[0-9:]+" ), 6 ) );
-  m_archCols.append( new ArchColumns( 6, QRegExp( "[a-fA-F0-9]+ {2}" ) ) );
-  m_archCols.append( new ArchColumns( 0, QRegExp( "[^\\n]+" ), 4096 ) );
+  m_archCols.append( new ArchColumns( 1, TQRegExp( "[0-9]+" ) ) );
+  m_archCols.append( new ArchColumns( 2, TQRegExp( "[^\\s]+" ) ) );
+  m_archCols.append( new ArchColumns( 3, TQRegExp( "[0-9]+" ) ) );
+  m_archCols.append( new ArchColumns( 4, TQRegExp( "[0-9.]+%" ) ) );
+  m_archCols.append( new ArchColumns( 7, TQRegExp( "[01][0-9]" ), 2 ) );
+  m_archCols.append( new ArchColumns( 8, TQRegExp( "[0-3][0-9]" ), 2 ) );
+  m_archCols.append( new ArchColumns( 9, TQRegExp( "[0-9][0-9]" ), 2 ) );
+  m_archCols.append( new ArchColumns( 10, TQRegExp( "[0-9:]+" ), 6 ) );
+  m_archCols.append( new ArchColumns( 6, TQRegExp( "[a-fA-F0-9]+ {2}" ) ) );
+  m_archCols.append( new ArchColumns( 0, TQRegExp( "[^\\n]+" ), 4096 ) );
 
 }
 
@@ -93,17 +93,17 @@ void ZipArch::open()
 
   *kp << m_unarchiver_program << "-v" << m_filename;
 
-  connect( kp, SIGNAL( receivedStdout(KProcess*, char*, int) ),
-           SLOT( slotReceivedTOC(KProcess*, char*, int) ) );
-  connect( kp, SIGNAL( receivedStderr(KProcess*, char*, int) ),
-           SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
-  connect( kp, SIGNAL( processExited(KProcess*) ),
-           SLOT( slotOpenExited(KProcess*) ) );
+  connect( kp, TQT_SIGNAL( receivedStdout(KProcess*, char*, int) ),
+           TQT_SLOT( slotReceivedTOC(KProcess*, char*, int) ) );
+  connect( kp, TQT_SIGNAL( receivedStderr(KProcess*, char*, int) ),
+           TQT_SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
+  connect( kp, TQT_SIGNAL( processExited(KProcess*) ),
+           TQT_SLOT( slotOpenExited(KProcess*) ) );
 
   if ( !kp->start( KProcess::NotifyOnExit, KProcess::AllOutput ) )
   {
     KMessageBox::error( 0, i18n( "Could not start a subprocess." ) );
-    emit sigOpen( this, false, QString::null, 0 );
+    emit sigOpen( this, false, TQString::null, 0 );
   }
 }
 
@@ -114,7 +114,7 @@ void ZipArch::create()
                  Arch::Extract | Arch::Delete | Arch::Add | Arch::View );
 }
 
-void ZipArch::addDir( const QString & _dirName )
+void ZipArch::addDir( const TQString & _dirName )
 {
   if ( !_dirName.isEmpty() )
   {
@@ -122,14 +122,14 @@ void ZipArch::addDir( const QString & _dirName )
     // must be true for add directory - otherwise why would user try?
     ArkSettings::setRarRecurseSubdirs( true );
 
-    QStringList list;
+    TQStringList list;
     list.append( _dirName );
     addFile( list );
     ArkSettings::setRarRecurseSubdirs( bOldRecVal ); // reset to old val
   }
 }
 
-void ZipArch::addFile( const QStringList &urls )
+void ZipArch::addFile( const TQStringList &urls )
 {
   KProcess *kp = m_currentProcess = new KProcess;
   kp->clearArguments();
@@ -156,21 +156,21 @@ void ZipArch::addFile( const QStringList &urls )
 
   *kp << m_filename;
 
-  QStringList::ConstIterator iter;
+  TQStringList::ConstIterator iter;
   KURL url( urls.first() );
-  QDir::setCurrent( url.directory() );
+  TQDir::setCurrent( url.directory() );
   for ( iter = urls.begin(); iter != urls.end(); ++iter )
   {
     KURL fileURL( *iter );
     *kp << fileURL.fileName();
   }
 
-  connect( kp, SIGNAL( receivedStdout(KProcess*, char*, int) ),
-           SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
-  connect( kp, SIGNAL( receivedStderr(KProcess*, char*, int) ),
-           SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
-  connect( kp, SIGNAL( processExited(KProcess*) ),
-           SLOT( slotAddExited(KProcess*) ) );
+  connect( kp, TQT_SIGNAL( receivedStdout(KProcess*, char*, int) ),
+           TQT_SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
+  connect( kp, TQT_SIGNAL( receivedStderr(KProcess*, char*, int) ),
+           TQT_SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
+  connect( kp, TQT_SIGNAL( processExited(KProcess*) ),
+           TQT_SLOT( slotAddExited(KProcess*) ) );
 
   if ( !kp->start( KProcess::NotifyOnExit, KProcess::AllOutput ) )
   {
@@ -214,7 +214,7 @@ void ZipArch::unarchFileInternal()
   // and we then extract everything in the archive.
   if ( m_fileList )
   {
-    QStringList::Iterator it;
+    TQStringList::Iterator it;
 
     for ( it = m_fileList->begin(); it != m_fileList->end(); ++it )
     {
@@ -224,12 +224,12 @@ void ZipArch::unarchFileInternal()
 
   *kp << "-d" << m_destDir;
 
-  connect( kp, SIGNAL( receivedStdout(KProcess*, char*, int) ),
-           SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
-  connect( kp, SIGNAL( receivedStderr(KProcess*, char*, int) ),
-           SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
-  connect( kp, SIGNAL( processExited(KProcess*) ),
-           SLOT( slotExtractExited(KProcess*) ) );
+  connect( kp, TQT_SIGNAL( receivedStdout(KProcess*, char*, int) ),
+           TQT_SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
+  connect( kp, TQT_SIGNAL( receivedStderr(KProcess*, char*, int) ),
+           TQT_SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
+  connect( kp, TQT_SIGNAL( processExited(KProcess*) ),
+           TQT_SLOT( slotExtractExited(KProcess*) ) );
 
   if ( !kp->start( KProcess::NotifyOnExit, KProcess::AllOutput ) )
   {
@@ -243,7 +243,7 @@ bool ZipArch::passwordRequired()
     return m_lastShellOutput.findRev("unable to get password\n")!=-1 || m_lastShellOutput.endsWith("password inflating\n") || m_lastShellOutput.findRev("password incorrect--reenter:")!=-1 || m_lastShellOutput.endsWith("incorrect password\n");
 }
 
-void ZipArch::remove( QStringList *list )
+void ZipArch::remove( TQStringList *list )
 {
   if ( !list )
     return;
@@ -253,19 +253,19 @@ void ZipArch::remove( QStringList *list )
 
   *kp << m_archiver_program << "-d" << m_filename;
 
-  QStringList::Iterator it;
+  TQStringList::Iterator it;
   for ( it = list->begin(); it != list->end(); ++it )
   {
-    QString str = *it;
+    TQString str = *it;
     *kp << str;
   }
 
-  connect( kp, SIGNAL( receivedStdout(KProcess*, char*, int) ),
-           SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
-  connect( kp, SIGNAL( receivedStderr(KProcess*, char*, int) ),
-           SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
-  connect( kp, SIGNAL( processExited(KProcess*) ),
-           SLOT( slotDeleteExited(KProcess*) ) );
+  connect( kp, TQT_SIGNAL( receivedStdout(KProcess*, char*, int) ),
+           TQT_SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
+  connect( kp, TQT_SIGNAL( receivedStderr(KProcess*, char*, int) ),
+           TQT_SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
+  connect( kp, TQT_SIGNAL( processExited(KProcess*) ),
+           TQT_SLOT( slotDeleteExited(KProcess*) ) );
 
   if ( !kp->start( KProcess::NotifyOnExit, KProcess::AllOutput ) )
   {

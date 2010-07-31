@@ -26,7 +26,7 @@
 #define __BUTTONSCONFIG_H__
 
 #include <kcmodule.h>
-#include <qstring.h>
+#include <tqstring.h>
 
 class QWidget;
 class QSlider;
@@ -41,14 +41,14 @@ class ButtonsConfig : public KCModule
 {
   Q_OBJECT
 public:
-  ButtonsConfig( QWidget *parent=0, const char* name=0);
+  ButtonsConfig( TQWidget *parent=0, const char* name=0);
     ~ButtonsConfig();
   void save( void );
   void load();
   void load(bool useDefaults);
   void defaults();
 
-  virtual QString quickHelp() const;
+  virtual TQString quickHelp() const;
 
 private slots:
 
@@ -61,28 +61,28 @@ private:
   int  getLid();
   void setPower( int, int );
 
-  QButtonGroup *lidBox;
-  QRadioButton *lidStandby, *lidSuspend, *lidOff, *lidHibernate, *lidShutdown, *lidLogout;
-  QCheckBox *lidBrightness;
-  QSlider *lidValBrightness;
-  QCheckBox *lidThrottle;
+  TQButtonGroup *lidBox;
+  TQRadioButton *lidStandby, *lidSuspend, *lidOff, *lidHibernate, *lidShutdown, *lidLogout;
+  TQCheckBox *lidBrightness;
+  TQSlider *lidValBrightness;
+  TQCheckBox *lidThrottle;
   KComboBox *lidValThrottle;
-  QCheckBox *lidPerformance;
+  TQCheckBox *lidPerformance;
   KComboBox *lidValPerformance;
-  QButtonGroup *powerBox;
-  QRadioButton *powerStandby, *powerSuspend, *powerOff, *powerHibernate, *powerShutdown, *powerLogout;
-  QCheckBox *powerBrightness;
-  QSlider *powerValBrightness;
-  QCheckBox *powerThrottle;
+  TQButtonGroup *powerBox;
+  TQRadioButton *powerStandby, *powerSuspend, *powerOff, *powerHibernate, *powerShutdown, *powerLogout;
+  TQCheckBox *powerBrightness;
+  TQSlider *powerValBrightness;
+  TQCheckBox *powerThrottle;
   KComboBox *powerValThrottle;
-  QCheckBox *powerPerformance;
+  TQCheckBox *powerPerformance;
   KComboBox *powerValPerformance;
   int power_bright_val, lid_bright_val;
   bool lid_bright_enabled, power_bright_enabled;
   bool lid_throttle_enabled, power_throttle_enabled;
-  QString lid_throttle_val, power_throttle_val;
+  TQString lid_throttle_val, power_throttle_val;
   bool lid_performance_enabled, power_performance_enabled;
-  QString lid_performance_val, power_performance_val;
+  TQString lid_performance_val, power_performance_val;
 
   KConfig *config;
   int power, lid, apm;

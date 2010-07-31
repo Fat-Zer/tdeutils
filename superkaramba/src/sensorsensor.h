@@ -2,11 +2,11 @@
 #ifndef SENSORSENSOR_H
 #define SENSORSENSOR_H
 
-#include <qstring.h>
-#include <qtextcodec.h>
-#include <qmap.h>
-#include <qstringlist.h>
-#include <qregexp.h>
+#include <tqstring.h>
+#include <tqtextcodec.h>
+#include <tqmap.h>
+#include <tqstringlist.h>
+#include <tqregexp.h>
 #include <kprocess.h>
 #include <kprocio.h>
 
@@ -30,13 +30,13 @@ public:
 
 private:
     KShellProcess ksp;
-    QString extraParams;
+    TQString extraParams;
 
-    QMap<QString,QString> sensorMap;
+    TQMap<TQString,TQString> sensorMap;
 #ifdef __FreeBSD__
-    QMap<QString,QString> sensorMapBSD;
+    TQMap<TQString,TQString> sensorMapBSD;
 #endif
-    QString sensorResult;
+    TQString sensorResult;
 
 private slots:
     void receivedStdout(KProcess *, char *buffer, int);

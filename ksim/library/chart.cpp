@@ -20,13 +20,13 @@
 #include "chart.h"
 #include "chart.moc"
 
-#include <qrect.h>
-#include <qpainter.h>
-#include <qimage.h>
-#include <qcolor.h>
-#include <qtimer.h>
-#include <qvaluelist.h>
-#include <qbitmap.h>
+#include <tqrect.h>
+#include <tqpainter.h>
+#include <tqimage.h>
+#include <tqcolor.h>
+#include <tqtimer.h>
+#include <tqvaluelist.h>
+#include <tqbitmap.h>
 
 #include <kdebug.h>
 #include <klocale.h>
@@ -49,8 +49,8 @@ class KSim::Chart::Timer
         qAddPostRoutine(cleanup);
       }
 
-      QObject::connect(m_timer, SIGNAL(timeout()),
-         chart, SLOT(updateDisplay()));
+      TQObject::connect(m_timer, TQT_SIGNAL(timeout()),
+         chart, TQT_SLOT(updateDisplay()));
     }
 
     static void disconnect(KSim::Chart *chart)
@@ -58,8 +58,8 @@ class KSim::Chart::Timer
       if (!m_timer)
         return;
 
-      QObject::disconnect(m_timer, SIGNAL(timeout()),
-         chart, SLOT(updateDisplay()));
+      TQObject::disconnect(m_timer, TQT_SIGNAL(timeout()),
+         chart, TQT_SLOT(updateDisplay()));
     }
 
   private:
@@ -72,50 +72,50 @@ class KSim::Chart::Timer
       m_timer = 0;
     }
     
-    static QTimer *m_timer;
+    static TQTimer *m_timer;
 };
 
-QTimer *KSim::Chart::Timer::m_timer = 0;
+TQTimer *KSim::Chart::Timer::m_timer = 0;
 
 class KSim::Chart::Private
 {
   public:
     typedef QPair<int, int> ValuePair;
 
-    QSize size;
+    TQSize size;
     int type;
     bool showShadow;
     bool showKrell;
-    QString inText;
-    QString outText;
-    QString title;
-    QPixmap chartPixmap;
-    QPixmap gridPixmap;
-    QPixmap graphData;
-    QColor mColour;
-    QColor sColour;
-    QColor dataInColour;
-    QColor dataOutColour;
+    TQString inText;
+    TQString outText;
+    TQString title;
+    TQPixmap chartPixmap;
+    TQPixmap gridPixmap;
+    TQPixmap graphData;
+    TQColor mColour;
+    TQColor sColour;
+    TQColor dataInColour;
+    TQColor dataOutColour;
     Chart::LabelType labelType;
     KSim::Label *krell;
     // first will be data In and second will be data out
-    QValueList<ValuePair> values;
-    QValueList<int> maxValues;
+    TQValueList<ValuePair> values;
+    TQValueList<int> maxValues;
     int minValue;
     int maxValue;
     bool variableGraphs;
 };
 
 KSim::Chart::Chart(bool showKrell, int maxValue,
-   const QString &title, QWidget *parent, const char *name,
-   WFlags fl) : QWidget(parent, name, fl)
+   const TQString &title, TQWidget *parent, const char *name,
+   WFlags fl) : TQWidget(parent, name, fl)
 {
   init(showKrell, maxValue, title);
 }
 
 KSim::Chart::Chart(bool showKrell, int maxValue,
-   QWidget *parent, const char *name, WFlags fl)
-   : QWidget(parent, name, fl)
+   TQWidget *parent, const char *name, WFlags fl)
+   : TQWidget(parent, name, fl)
 {
   init(showKrell, maxValue, i18n("None"));
 }
@@ -126,7 +126,7 @@ KSim::Chart::~Chart()
   delete d;
 }
 
-const QString &KSim::Chart::text(DataType type) const
+const TQString &KSim::Chart::text(DataType type) const
 {
   if (type == DataIn)
     return d->inText;
@@ -134,7 +134,7 @@ const QString &KSim::Chart::text(DataType type) const
   return d->outText;
 }
 
-const QString &KSim::Chart::title() const
+const TQString &KSim::Chart::title() const
 {
   return d->title;
 }
@@ -206,7 +206,7 @@ KSim::Chart::LabelType KSim::Chart::labelType() const
 
 void KSim::Chart::buildPixmaps()
 {
-  QImage image(themeLoader().current().chartPixmap());
+  TQImage image(themeLoader().current().chartPixmap());
   KSim::ThemeLoader::self().reColourImage(image);
   d->chartPixmap.convertFromImage(image.smoothScale(chartSize()));
 
@@ -251,7 +251,7 @@ void KSim::Chart::buildPixmaps()
 
 void KSim::Chart::configureObject(bool repaintWidget)
 {
-  QSize oldSize = sizeHint();
+  TQSize oldSize = sizeHint();
   KSim::Config::config()->setGroup("Misc");
   d->size = KSim::Config::config()->readSizeEntry("GraphSize");
 
@@ -279,21 +279,21 @@ void KSim::Chart::configureObject(bool repaintWidget)
     update();
 }
 
-QSize KSim::Chart::sizeHint() const
+TQSize KSim::Chart::sizeHint() const
 {
   return d->size;
 }
 
-QSize KSim::Chart::minimumSizeHint() const
+TQSize KSim::Chart::minimumSizeHint() const
 {
   return sizeHint();
 }
 
-void KSim::Chart::resizeEvent(QResizeEvent *re)
+void KSim::Chart::resizeEvent(TQResizeEvent *re)
 {
   if (d->chartPixmap.size() != chartSize())
     buildPixmaps();
-  QWidget::resizeEvent(re);
+  TQWidget::resizeEvent(re);
 }
 
 void KSim::Chart::disableAutomaticUpdates()
@@ -308,7 +308,7 @@ void KSim::Chart::clear()
   updateDisplay();
 }
 
-void KSim::Chart::setTitle(const QString &name)
+void KSim::Chart::setTitle(const TQString &name)
 {
   if (d->krell) {
     d->title = name;
@@ -331,7 +331,7 @@ void KSim::Chart::setDisplayMeter(bool value)
   }
 }
 
-void KSim::Chart::setText(const QString &in, const QString &out)
+void KSim::Chart::setText(const TQString &in, const TQString &out)
 {
   bool repaint = false;
 
@@ -406,7 +406,7 @@ void KSim::Chart::setValue(int valueIn, int valueOut)
 
 void KSim::Chart::setConfigValues()
 {
-  QFont newFont = font();
+  TQFont newFont = font();
   bool repaint = themeLoader().current().fontColours(this,
      newFont, d->mColour, d->sColour, d->showShadow);
 
@@ -422,7 +422,7 @@ void KSim::Chart::extraTypeCall()
   setConfigValues();
 }
 
-QColor KSim::Chart::chartColour(const DataType &dataType, int, int) const
+TQColor KSim::Chart::chartColour(const DataType &dataType, int, int) const
 {
   switch (dataType) {
     case DataIn:
@@ -433,19 +433,19 @@ QColor KSim::Chart::chartColour(const DataType &dataType, int, int) const
       break;
   }
 
-  return QColor(); // avoid a g++ warning
+  return TQColor(); // avoid a g++ warning
 }
 
-void KSim::Chart::paintEvent(QPaintEvent *)
+void KSim::Chart::paintEvent(TQPaintEvent *)
 {
   if (d->krell && labelType() == Led) {
     static_cast<KSim::LedLabel *>(d->krell)->setOff(KSim::Led::First);
     static_cast<KSim::LedLabel *>(d->krell)->setOff(KSim::Led::Second);
   }
 
-  const QSize &size = chartSize();
-  QPixmap pixmap(size);
-  QPainter painter;
+  const TQSize &size = chartSize();
+  TQPixmap pixmap(size);
+  TQPainter painter;
   painter.begin(&pixmap, this);
 
   int location = size.height() / 5;
@@ -476,7 +476,7 @@ void KSim::Chart::paintEvent(QPaintEvent *)
   bitBlt(this, 0, 0, &pixmap);
 }
 
-void KSim::Chart::fontChange(const QFont &)
+void KSim::Chart::fontChange(const TQFont &)
 {
   if (d->krell)
     d->krell->setFont(font());
@@ -510,7 +510,7 @@ void KSim::Chart::drawChart()
 
   if (d->variableGraphs) {
     int maxValue = 0;
-    QValueList<int>::ConstIterator max;
+    TQValueList<int>::ConstIterator max;
     for (max = d->maxValues.begin(); max != d->maxValues.end(); ++max) {
       if ((*max) > maxValue)
         maxValue = (*max);
@@ -519,12 +519,12 @@ void KSim::Chart::drawChart()
     setMaxValue(maxValue);
   }
 
-  QPainter painter;
+  TQPainter painter;
   d->graphData.setMask(drawMask(&painter));
   painter.begin(&d->graphData, this);
 
   int position = width() - 1;
-  QValueList<Private::ValuePair>::ConstIterator it;
+  TQValueList<Private::ValuePair>::ConstIterator it;
   for (it = d->values.begin(); it != d->values.end(); ++it) {
     // Draw the data In lines first if its higher than the data out lines
     if ((*it).first >= (*it).second) {
@@ -541,23 +541,23 @@ void KSim::Chart::drawChart()
   painter.end();
 }
 
-QSize KSim::Chart::chartSize() const
+TQSize KSim::Chart::chartSize() const
 {
-  QSize sz(size());
+  TQSize sz(size());
   if (d->krell && d->showKrell)
     sz.setHeight(sz.height() - d->krell->height());
 
   return sz;
 }
 
-QBitmap KSim::Chart::drawMask(QPainter *painter)
+TQBitmap KSim::Chart::drawMask(TQPainter *painter)
 {
-  QBitmap bitmap(chartSize(), true);
+  TQBitmap bitmap(chartSize(), true);
   painter->begin(&bitmap, this);
   painter->setPen(color1);
 
   int position = width() - 1;
-  QValueList<Private::ValuePair>::ConstIterator it;
+  TQValueList<Private::ValuePair>::ConstIterator it;
   for (it = d->values.begin(); it != d->values.end(); ++it) {
     drawIn(painter, (*it).first, position, true);
     drawOut(painter, (*it).second, position, true);
@@ -569,7 +569,7 @@ QBitmap KSim::Chart::drawMask(QPainter *painter)
   return bitmap;
 }
 
-void KSim::Chart::drawIn(QPainter *painter, int value, int pos, bool dontSet)
+void KSim::Chart::drawIn(TQPainter *painter, int value, int pos, bool dontSet)
 {
   if (!dontSet) {
     painter->setPen(chartColour(DataIn));
@@ -581,7 +581,7 @@ void KSim::Chart::drawIn(QPainter *painter, int value, int pos, bool dontSet)
      pos, d->graphData.size().height() - location);
 }
 
-void KSim::Chart::drawOut(QPainter *painter, int value, int pos, bool dontSet)
+void KSim::Chart::drawOut(TQPainter *painter, int value, int pos, bool dontSet)
 {
   if (!dontSet) {
     painter->setPen(chartColour(DataOut));
@@ -604,11 +604,11 @@ int KSim::Chart::range(int value) const
   return value;
 }
 
-void KSim::Chart::init(bool krell, int maxValue, const QString &title)
+void KSim::Chart::init(bool krell, int maxValue, const TQString &title)
 {
   setConfigString("StyleChart");
   setThemeConfigOnly(false);
-  setSizePolicy(QSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::Fixed));
+  setSizePolicy(TQSizePolicy(TQSizePolicy::MinimumExpanding, TQSizePolicy::Fixed));
 
   d = new Private;
   KSim::Config::config()->setGroup("Misc");

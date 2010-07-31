@@ -20,8 +20,8 @@
 #ifndef KSIMFRAME_H
 #define KSIMFRAME_H
 
-#include <qwidget.h>
-#include <qimage.h>
+#include <tqwidget.h>
+#include <tqimage.h>
 #include <common.h>
 
 namespace KSim
@@ -31,19 +31,19 @@ namespace KSim
   /**
    * @internal
    */
-  class Frame : public QWidget, public KSim::Base
+  class Frame : public TQWidget, public KSim::Base
   {
     Q_OBJECT
     public:
-      Frame(int type, QWidget *parent, const char *name = 0);
+      Frame(int type, TQWidget *parent, const char *name = 0);
       ~Frame();
 
-      const QPixmap *const background() const { return &m_background; }
+      const TQPixmap *const background() const { return &m_background; }
       virtual void configureObject(bool repaintWidget=true);
 
     protected:
-      virtual void paintEvent(QPaintEvent *);
-      virtual void resizeEvent(QResizeEvent *);
+      virtual void paintEvent(TQPaintEvent *);
+      virtual void resizeEvent(TQResizeEvent *);
 
     private:
       // helper functions to make
@@ -53,11 +53,11 @@ namespace KSim
 
       int m_origWidth;
       int m_origHeight;
-      QPoint m_globalBottomRight;
-      QPoint m_globalTopLeft;
-      QPoint m_origPos;
-      QImage m_image;
-      QPixmap m_background;
+      TQPoint m_globalBottomRight;
+      TQPoint m_globalTopLeft;
+      TQPoint m_origPos;
+      TQImage m_image;
+      TQPixmap m_background;
   };
 }
 #endif

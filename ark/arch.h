@@ -49,12 +49,12 @@
 #ifndef ARCH_H
 #define ARCH_H
 
-#include <qobject.h>
-#include <qptrlist.h> // Some very annoying hackery in arkwidgetpart
-#include <qregexp.h>
-#include <qstring.h>
+#include <tqobject.h>
+#include <tqptrlist.h> // Some very annoying hackery in arkwidgetpart
+#include <tqregexp.h>
+#include <tqstring.h>
 #include <kurl.h>
-#include <qpair.h>
+#include <tqpair.h>
 
 class QCString;
 class QStringList;
@@ -67,7 +67,7 @@ enum ArchType { UNKNOWN_FORMAT, ZIP_FORMAT, TAR_FORMAT, AA_FORMAT,
                 LHA_FORMAT, RAR_FORMAT, ZOO_FORMAT, COMPRESSED_FORMAT,
                 SEVENZIP_FORMAT, ACE_FORMAT };
 
-typedef QValueList< QPair< QString, Qt::AlignmentFlags > > ColumnList;
+typedef TQValueList< QPair< TQString, Qt::AlignmentFlags > > ColumnList;
 
 /**
  * Pure virtual base class for archives - provides a framework as well as
@@ -86,23 +86,23 @@ class Arch : public QObject
     struct ArchColumns
     {
       int colRef; // Which column to load to in processLine
-      QRegExp pattern;
+      TQRegExp pattern;
       int maxLength;
       bool optional;
 
-      ArchColumns( int col, QRegExp reg, int length = 64, bool opt = false );
+      ArchColumns( int col, TQRegExp reg, int length = 64, bool opt = false );
     };
 
   public:
-    Arch( ArkWidget *_viewer, const QString & _fileName );
+    Arch( ArkWidget *_viewer, const TQString & _fileName );
     virtual ~Arch();
 
     virtual void open() = 0;
     virtual void create() = 0;
-    virtual void remove( QStringList * ) = 0;
+    virtual void remove( TQStringList * ) = 0;
 
-    virtual void addFile( const QStringList & ) = 0;
-    virtual void addDir( const QString & ) = 0;
+    virtual void addFile( const TQStringList & ) = 0;
+    virtual void addDir( const TQString & ) = 0;
 
     // unarch the files in m_fileList or all files if m_fileList is empty.
     // if m_destDir is empty, abort with error.
@@ -111,10 +111,10 @@ class Arch : public QObject
     // returns true if a password is required
     virtual bool passwordRequired() { return false; }
 
-    void unarchFile( QStringList *, const QString & _destDir,
+    void unarchFile( TQStringList *, const TQString & _destDir,
                              bool viewFriendly = false );
 
-    QString fileName() const { return m_filename; }
+    TQString fileName() const { return m_filename; }
 
     enum EditProperties{ Add = 1, Delete = 2, Extract = 4,
                          View = 8, Integrity = 16 };
@@ -127,28 +127,28 @@ class Arch : public QObject
     void resetError() { m_error = false; }
 
     // check to see if the utility exists in the PATH of the user
-    void verifyUtilityIsAvailable( const QString &,
-                                   const QString & = QString::null );
+    void verifyUtilityIsAvailable( const TQString &,
+                                   const TQString & = TQString::null );
 
-    void verifyCompressUtilityIsAvailable( const QString &utility );
+    void verifyCompressUtilityIsAvailable( const TQString &utility );
 
-    void verifyUncompressUtilityIsAvailable( const QString &utility );
+    void verifyUncompressUtilityIsAvailable( const TQString &utility );
 
     bool archUtilityIsAvailable() { return m_bArchUtilityIsAvailable; }
 
     bool unarchUtilityIsAvailable() { return m_bUnarchUtilityIsAvailable; }
 
-    QString getArchUtility() { return m_archiver_program; }
+    TQString getArchUtility() { return m_archiver_program; }
 
-    QString getUnarchUtility() { return m_unarchiver_program; }
+    TQString getUnarchUtility() { return m_unarchiver_program; }
 
-    void appendShellOutputData( const char * data ) { m_lastShellOutput.append( QString::fromLocal8Bit( data ) ); }
+    void appendShellOutputData( const char * data ) { m_lastShellOutput.append( TQString::fromLocal8Bit( data ) ); }
     void clearShellOutput() { m_lastShellOutput.truncate( 0 ); }
-    const QString& getLastShellOutput() const { return m_lastShellOutput; }
+    const TQString& getLastShellOutput() const { return m_lastShellOutput; }
 
     static Arch *archFactory( ArchType aType, ArkWidget *parent,
-                              const QString &filename,
-                              const QString &openAsMimeType = QString::null );
+                              const TQString &filename,
+                              const TQString &openAsMimeType = TQString::null );
 
   protected slots:
     void slotOpenExited( KProcess* );
@@ -158,21 +158,21 @@ class Arch : public QObject
 
     void slotReceivedOutput( KProcess *, char*, int );
 
-    virtual bool processLine( const QCString &line );
+    virtual bool processLine( const TQCString &line );
     virtual void slotReceivedTOC( KProcess *, char *, int );
 
   signals:
-    void sigOpen( Arch * archive, bool success, const QString &filename, int );
-    void sigCreate( Arch *, bool, const QString &, int );
+    void sigOpen( Arch * archive, bool success, const TQString &filename, int );
+    void sigCreate( Arch *, bool, const TQString &, int );
     void sigDelete( bool );
     void sigExtract( bool );
     void sigAdd( bool );
     void headers( const ColumnList& columns );
 
   protected:  // data
-    QString m_filename;
-    QString m_lastShellOutput;
-    QCString m_buffer;
+    TQString m_filename;
+    TQString m_lastShellOutput;
+    TQCString m_buffer;
     ArkWidget *m_gui;
     bool m_bReadOnly; // for readonly archives
     bool m_error;
@@ -186,20 +186,20 @@ class Arch : public QObject
     // set to whether if the uncompressing utility is in the user's PATH
     bool m_bUnarchUtilityIsAvailable;
 
-    QString m_archiver_program;
-    QString m_unarchiver_program;
+    TQString m_archiver_program;
+    TQString m_unarchiver_program;
 
     // Archive parsing information
-    QCString m_headerString;
+    TQCString m_headerString;
     bool m_header_removed, m_finished;
-    QPtrList<ArchColumns> m_archCols;
+    TQPtrList<ArchColumns> m_archCols;
     int m_numCols, m_dateCol, m_fixYear, m_fixMonth, m_fixDay, m_fixTime;
     int m_repairYear, m_repairMonth, m_repairTime;
     KProcess *m_currentProcess;
-    QStringList *m_fileList;
-    QString m_destDir;
+    TQStringList *m_fileList;
+    TQString m_destDir;
     bool m_viewFriendly;
-    QCString m_password;
+    TQCString m_password;
 };
 
 // Columns

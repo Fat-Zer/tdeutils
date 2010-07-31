@@ -24,15 +24,15 @@
 #include <klistviewsearchline.h>
 
 #include <kactionclasses.h> 
-#include <qclipboard.h>
+#include <tqclipboard.h>
 
 #include "dcopiface.h"
 
-#include <qptrlist.h>
-#include <qstringlist.h>
+#include <tqptrlist.h>
+#include <tqstringlist.h>
 #include <kurl.h>
 
-#include <qcheckbox.h>
+#include <tqcheckbox.h>
 #include <kmainwindow.h>
 
 class QPushButton;
@@ -53,16 +53,16 @@ class KSelectAction;
 
 struct gpgKey
 {
-        QString gpgkeymail;
-        QString gpgkeyname;
-        QString gpgkeyid;
-        QString gpgkeytrust;
-        QString gpgkeyvalidity;
-        QString gpgkeysize;
-        QString gpgkeycreation;
-        QString gpgkeyexpiration;
-        QString gpgkeyalgo;
-        QPixmap trustpic;
+        TQString gpgkeymail;
+        TQString gpgkeyname;
+        TQString gpgkeyid;
+        TQString gpgkeytrust;
+        TQString gpgkeyvalidity;
+        TQString gpgkeysize;
+        TQString gpgkeycreation;
+        TQString gpgkeyexpiration;
+        TQString gpgkeyalgo;
+        TQPixmap trustpic;
 };
 
 class KgpgSelKey : public KDialogBase
@@ -70,20 +70,20 @@ class KgpgSelKey : public KDialogBase
         Q_OBJECT
 
 public:
-        KgpgSelKey( QWidget *parent = 0, const char *name = 0,bool allowMultipleSelection=false, QString preselected=QString::null);
+        KgpgSelKey( TQWidget *parent = 0, const char *name = 0,bool allowMultipleSelection=false, TQString preselected=TQString::null);
         KListView *keysListpr;
-        QPixmap keyPair;
-        QCheckBox *local;
-        QVBoxLayout *vbox;
-        QWidget *page;
+        TQPixmap keyPair;
+        TQCheckBox *local;
+        TQVBoxLayout *vbox;
+        TQWidget *page;
 private slots:
         void slotOk();
         void slotpreOk();
-        void slotSelect(QListViewItem *item);
+        void slotSelect(TQListViewItem *item);
 
 public slots:
-        QString getkeyID();
-        QString getkeyMail();
+        TQString getkeyID();
+        TQString getkeyMail();
 };
 
 
@@ -93,19 +93,19 @@ class KeyView : public KListView
         Q_OBJECT
         friend class listKeys;
 public:
-        KeyView( QWidget *parent = 0, const char *name = 0);
+        KeyView( TQWidget *parent = 0, const char *name = 0);
         bool displayPhoto,displayOnlySecret,displayDisabled;
         int previewSize;
-	QString secretList;
-	QPixmap trustbad;
+	TQString secretList;
+	TQPixmap trustbad;
 	
 private:
 
-        QString orphanList;
-        QString photoKeysList;
-        QPixmap pixkeyPair, pixkeySingle, pixkeyGroup, pixsignature, pixuserid, pixuserphoto;
-	QPixmap trustunknown, trustrevoked, trustgood, pixRevoke, pixkeyOrphan;
-        QListViewItem *itemToOpen;
+        TQString orphanList;
+        TQString photoKeysList;
+        TQPixmap pixkeyPair, pixkeySingle, pixkeyGroup, pixsignature, pixuserid, pixuserphoto;
+	TQPixmap trustunknown, trustrevoked, trustgood, pixRevoke, pixkeyOrphan;
+        TQListViewItem *itemToOpen;
         KTempFile *kgpgphototmp;
         int groupNb;
 
@@ -114,44 +114,44 @@ public slots:
         void slotAddColumn(int c);
 
 private slots:
-	void refreshTrust(int color,QColor newColor);
+	void refreshTrust(int color,TQColor newColor);
         void  droppedfile (KURL);
         void refreshkeylist();
-        gpgKey extractKey(QString keyColon);
-        void expandKey(QListViewItem *item);
-        void expandGroup(QListViewItem *item);
-        void refreshcurrentkey(QListViewItem *current);
-        void refreshcurrentkey(QString currentID);
+        gpgKey extractKey(TQString keyColon);
+        void expandKey(TQListViewItem *item);
+        void expandGroup(TQListViewItem *item);
+        void refreshcurrentkey(TQListViewItem *current);
+        void refreshcurrentkey(TQString currentID);
         void refreshselfkey();
         void refreshgroups();
-        void insertOrphanedKeys(QStringList orpans);
-        void insertOrphan(QString currentID);
-        QPixmap slotGetPhoto(QString photoId,bool mini=false);
-        void slotReloadKeys(QStringList keyIDs);
+        void insertOrphanedKeys(TQStringList orpans);
+        void insertOrphan(TQString currentID);
+        TQPixmap slotGetPhoto(TQString photoId,bool mini=false);
+        void slotReloadKeys(TQStringList keyIDs);
         void slotReloadOrphaned();
 
 signals:
-        void statusMessage(QString,int,bool keep=false);
+        void statusMessage(TQString,int,bool keep=false);
 
 protected:
         virtual void startDrag();
-        virtual void contentsDragMoveEvent(QDragMoveEvent *e);
-        virtual void  contentsDropEvent (QDropEvent*);
+        virtual void contentsDragMoveEvent(TQDragMoveEvent *e);
+        virtual void  contentsDropEvent (TQDropEvent*);
 };
 
 class mySearchLine: public KListViewSearchLine
 {
     Q_OBJECT
 public:
-    mySearchLine(QWidget *parent = 0, KeyView *listView = 0, const char *name = 0);
+    mySearchLine(TQWidget *parent = 0, KeyView *listView = 0, const char *name = 0);
     virtual ~mySearchLine();
 private:
  KeyView *searchListView;    
     
 public slots:
-virtual void updateSearch(const QString &s = QString::null);
+virtual void updateSearch(const TQString &s = TQString::null);
 protected:
-virtual bool itemMatches(const QListViewItem *item, const QString & s)  const;
+virtual bool itemMatches(const TQListViewItem *item, const TQString & s)  const;
 };
 
 
@@ -161,13 +161,13 @@ class listKeys : public KMainWindow, virtual public KeyInterface
         Q_OBJECT
 
 public:
-        listKeys(QWidget *parent=0, const char *name=0);
+        listKeys(TQWidget *parent=0, const char *name=0);
         ~listKeys();
-        QLabel *keyPhoto;
+        TQLabel *keyPhoto;
         KeyView *keysList2;
-        QPopupMenu *popup,*popupsec,*popupout,*popupsig,*popupgroup,*popupphoto,*popupuid,*popuporphan;
-        QString message;
-        QStringList keynames;
+        TQPopupMenu *popup,*popupsec,*popupout,*popupsig,*popupgroup,*popupphoto,*popupuid,*popuporphan;
+        TQString message;
+        TQStringList keynames;
         KPassivePopup *pop;
         KToggleAction *sTrust,*sCreat,*sExpi,*sSize;
         KSelectAction *photoProps;
@@ -175,45 +175,45 @@ public:
 	KgpgApp *s_kgpgEditor;
 
 private:
-        QPushButton *bouton1,*bouton2,*bouton0;
-        QString tempKeyFile,newKeyMail,newKeyName,newkeyFinger,newkeyID;
+        TQPushButton *bouton1,*bouton2,*bouton0;
+        TQString tempKeyFile,newKeyMail,newKeyName,newkeyFinger,newkeyID;
 	KListViewSearchLine* listViewSearch;	
         bool continueSearch;
         bool showPhoto;
         keyServer *kServer;
         KTempFile *kgpgtmp;
         KAction *importSignatureKey,*importAllSignKeys,*signKey,*refreshKey;
-        QPtrList<QListViewItem> signList,keysList;
+        TQPtrList<TQListViewItem> signList,keysList;
         uint globalCount,keyCount;
         int globalChecked;
         bool globalisLocal,showTipOfDay;
-        QString globalkeyMail,globalkeyID,searchString;
+        TQString globalkeyMail,globalkeyID,searchString;
         long searchOptions;
         groupEdit *gEdit;
         KgpgInterface *revKeyProcess;
         KDialogBase *addUidWidget;
         QClipboard::Mode clipboardMode;
-        QTimer *statusbarTimer;
+        TQTimer *statusbarTimer;
 
 
 protected:
-        void closeEvent( QCloseEvent * e );
-        bool eventFilter( QObject *, QEvent *e );
+        void closeEvent( TQCloseEvent * e );
+        bool eventFilter( TQObject *, TQEvent *e );
 
 public slots:
         void slotgenkey();
         void refreshkey();
         void readAllOptions();
-        void showKeyInfo(QString keyID);
+        void showKeyInfo(TQString keyID);
         void findKey();
         void findFirstKey();
         void findNextKey();
-        void slotSetDefaultKey(QString newID);
+        void slotSetDefaultKey(TQString newID);
 
 private slots:
         void quitApp();
         void  slotOpenEditor();
-        void changeMessage(QString,int, bool keep=false);
+        void changeMessage(TQString,int, bool keep=false);
         void statusBarTimeout();
         void slotShowTrust();
         void slotShowSize();
@@ -224,8 +224,8 @@ private slots:
         void slotGotoDefaultKey();
         void slotDelUid();
         void slotAddUid();
-        void slotAddUidEnable(const QString & name);
-        void slotGpgError(QString errortxt);
+        void slotAddUidEnable(const TQString & name);
+        void slotGpgError(TQString errortxt);
         void slotUpdatePhoto();
         void slotDeletePhoto();
         void slotAddPhoto();
@@ -233,10 +233,10 @@ private slots:
         void slotShowPhoto();
         void readgenprocess(KProcIO *p);
         void newKeyDone(KProcess *);
-        void slotrevoke(QString keyID,QString revokeUrl,int reason,QString description);
+        void slotrevoke(TQString keyID,TQString revokeUrl,int reason,TQString description);
         void revokeWidget();
-        void doFilePrint(QString url);
-        void doPrint(QString txt);
+        void doFilePrint(TQString url);
+        void doPrint(TQString txt);
         void checkList();
         void signLoop();
         void slotManpage();
@@ -244,13 +244,13 @@ private slots:
         void showKeyServer();
 	void showKeyManager();
         void slotReadFingerProcess(KProcIO *p);
-        void slotProcessExportMail(QString keys);
-        void slotProcessExportClip(QString keys);
+        void slotProcessExportMail(TQString keys);
+        void slotProcessExportClip(TQString keys);
         void readOptions();
         void genover(KProcess *p);
         void showOptions();
         void slotSetDefKey();
-        void slotSetDefaultKey(QListViewItem *newdef);
+        void slotSetDefaultKey(TQListViewItem *newdef);
         void annule();
         void confirmdeletekey();
         void deletekey();
@@ -258,8 +258,8 @@ private slots:
         void signkey();
         void delsignkey();
         void preimportsignkey();
-        bool importRemoteKey(QString keyID);
-        void importsignkey(QString importKeyId);
+        bool importRemoteKey(TQString keyID);
+        void importsignkey(TQString importKeyId);
         void importallsignkey();
         void importfinished();
         void signatureResult(int success);
@@ -267,7 +267,7 @@ private slots:
         void listsigns();
         void slotexport();
         void slotexportsec();
-        void slotmenu(QListViewItem *,const QPoint &,int);
+        void slotmenu(TQListViewItem *,const TQPoint &,int);
         void slotPreImportKey();
         void slotedit();
         void addToKAB();
@@ -275,12 +275,12 @@ private slots:
         void editGroup();
         void groupAdd();
         void groupRemove();
-        void groupInit(QStringList keysGroup);
+        void groupInit(TQStringList keysGroup);
         void groupChange();
         void createNewGroup();
         void deleteGroup();
-        void slotImportRevoke(QString url);
-        void slotImportRevokeTxt(QString revokeText);
+        void slotImportRevoke(TQString url);
+        void slotImportRevokeTxt(TQString revokeText);
         void refreshKeyFromServer();
         void refreshFinished();
         void slotregenerate();
@@ -289,9 +289,9 @@ private slots:
 	
 signals:
         void readAgainOptions();
-        void certificate(QString);
+        void certificate(TQString);
         void closeAsked();
-        void fontChanged(QFont);
+        void fontChanged(TQFont);
 	void encryptFiles(KURL::List);
 	void installShredder();
 

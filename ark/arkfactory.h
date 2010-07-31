@@ -29,10 +29,10 @@ public:
     ArkFactory() : KParts::Factory() {}
     virtual ~ArkFactory();
     virtual KParts::Part *createPartObject(
-        QWidget *parentWidget = 0,const char *widgetName = 0,
-        QObject *parent = 0, const char *name = 0,
+        TQWidget *parentWidget = 0,const char *widgetName = 0,
+        TQObject *parent = 0, const char *name = 0,
         const char *classname = "KParts::Part",
-        const QStringList &args = QStringList() );
+        const TQStringList &args = TQStringList() );
     static KInstance* instance();
    private:
     static KInstance* s_instance;

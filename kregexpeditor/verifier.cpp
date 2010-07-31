@@ -24,7 +24,7 @@
 
 #include "verifier.h"
 
-Verifier::Verifier( QWidget* parent, const char* name ) : QTextEdit( parent, name )
+Verifier::Verifier( TQWidget* parent, const char* name ) : TQTextEdit( parent, name )
     /* QT_ANCHOR_DO_NOT_WORK: ,_current( 0 ) */
 {
     _highlighter = 0;
@@ -34,7 +34,7 @@ Verifier::Verifier( QWidget* parent, const char* name ) : QTextEdit( parent, nam
 /**
    Update text edit to show matches of regular expression
 */
-void Verifier::verify( const QString& reg )
+void Verifier::verify( const TQString& reg )
 {
     if ( _highlighter ) {
         _highlighter->setRegExp( reg );
@@ -49,7 +49,7 @@ void Verifier::verify( const QString& reg )
 void Verifier::clearRegexp()
 {
     if ( _highlighter ) {
-        _highlighter->setRegExp( QString::null );
+        _highlighter->setRegExp( TQString::null );
         _highlighter->rehighlight();
     }
 }
@@ -97,7 +97,7 @@ void Verifier::setMinimal( bool b )
 //
 // void Verifier::gotoNum( int which )
 // {
-//     QString anchor = QString::fromLatin1("match%1").arg(which);
+//     TQString anchor = TQString::fromLatin1("match%1").arg(which);
 //     scrollToAnchor( anchor );
 //     _current = which;
 //     emit currentChanged( _current );

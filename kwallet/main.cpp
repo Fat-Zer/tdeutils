@@ -26,8 +26,8 @@
 #include <kstandarddirs.h>
 #include <kuniqueapplication.h>
 
-#include <qfile.h>
-#include <qfileinfo.h>
+#include <tqfile.h>
+#include <tqfileinfo.h>
 
 #include "kwalletmanager.h"
 
@@ -84,9 +84,9 @@ int main(int argc, char **argv) {
 	}
 
 	for (int i = 0; i < args->count(); ++i) {
-		QString fn = QFileInfo(args->arg(i)).absFilePath();
+		TQString fn = TQFileInfo(args->arg(i)).absFilePath();
 		KMimeType::Ptr ptr;
-		if (QFile::exists(fn) &&
+		if (TQFile::exists(fn) &&
 			(ptr = KMimeType::findByFileContent(fn)) &&
 			ptr->is("application/x-kde-wallet")) {
 			wm.openWalletFile(fn);

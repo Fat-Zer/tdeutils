@@ -115,7 +115,7 @@ class KDE_EXPORT KNumber
 
   KNumber(KNumber const & num);
   
-  KNumber(QString const & num);
+  KNumber(TQString const & num);
   
   ~KNumber()
   {
@@ -142,7 +142,7 @@ class KDE_EXPORT KNumber
   static void setDefaultFloatOutput(bool flag);
 
   /**
-   * Set whether a number constructed from a QString should be
+   * Set whether a number constructed from a TQString should be
    * initialized as a fraction or as a float, e.g. "1.01" would be
    * treated as 101/100, if this flag is set to true.
    *
@@ -168,7 +168,7 @@ class KDE_EXPORT KNumber
   static void setSplitoffIntegerForFractionOutput(bool flag);
 
   /**
-   * Return a QString representing the KNumber.
+   * Return a TQString representing the KNumber.
    *
    * @param width This number specifies the maximal length of the
    * output, before the method switches to exponential notation and
@@ -179,7 +179,7 @@ class KDE_EXPORT KNumber
    * is ignored.
    *
    */
-  QString const toQString(int width = -1, int prec = -1) const;
+  TQString const toQString(int width = -1, int prec = -1) const;
   
   /**
    * Compute the absolute value, i.e. @p x.abs() returns the value

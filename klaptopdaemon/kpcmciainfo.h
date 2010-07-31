@@ -24,7 +24,7 @@
 #define _KPCMCIAINFO_H
 
 #include <kdialog.h>
-#include <qframe.h>
+#include <tqframe.h>
 
 class KPCMCIA;
 class KPCMCIACard;
@@ -35,37 +35,37 @@ class QGridLayout;
 class QPushButton;
 class KPushButton;
 
-#include <qmap.h>
+#include <tqmap.h>
 
 class KPCMCIAInfo : public KDialog {
 Q_OBJECT
 public:
 
-  KPCMCIAInfo(KPCMCIA *pcmcia, QWidget *parent = NULL, const char *name = 0);
+  KPCMCIAInfo(KPCMCIA *pcmcia, TQWidget *parent = NULL, const char *name = 0);
   virtual ~KPCMCIAInfo();
 
   void showTab(int num);
-  void statusNotice(const QString& text, int life = 1500);
+  void statusNotice(const TQString& text, int life = 1500);
 
 public slots:
   void slotClose();
   void update();
   void updateCard(int num);
   void slotResetStatus();
-  void slotTabSetStatus(const QString& text);
+  void slotTabSetStatus(const TQString& text);
 
 signals:
   void updateNow();
 
 private:
-  QFrame        *_mainFrame;
-  QTabWidget    *_mainTab;
-  QGridLayout   *_mainGrid;
+  TQFrame        *_mainFrame;
+  TQTabWidget    *_mainTab;
+  TQGridLayout   *_mainGrid;
   KPCMCIA       *_pcmcia;
-  QMap<int,KPCMCIAInfoPage*> _pages;
+  TQMap<int,KPCMCIAInfoPage*> _pages;
   KStatusBar    *_sb;
   KPushButton   *_closeButton;
-  QPushButton   *_updateButton;
+  TQPushButton   *_updateButton;
 
 
   void prepareCards();
@@ -75,10 +75,10 @@ private:
 class QLabel;
 
 
-class KPCMCIAInfoPage : public QFrame {
+class KPCMCIAInfoPage : public TQFrame {
 Q_OBJECT
 public:
-  KPCMCIAInfoPage(KPCMCIACard *card, QWidget *parent = NULL, const char *name = 0);
+  KPCMCIAInfoPage(KPCMCIACard *card, TQWidget *parent = NULL, const char *name = 0);
   virtual ~KPCMCIAInfoPage();
 
 public slots:
@@ -88,27 +88,27 @@ public slots:
   void slotSuspendResume();
 
 signals:
-  void setStatusBar(const QString&);
+  void setStatusBar(const TQString&);
 
 private:
 
   KPCMCIACard   *_card;
-  QGridLayout   *_mainGrid;
+  TQGridLayout   *_mainGrid;
 
-  QLabel        *_card_name;
-  QLabel        *_card_type;
-  QLabel        *_card_irq;
-  QLabel        *_card_io;
-  QLabel        *_card_dev;
-  QLabel        *_card_driver;
-  QLabel        *_card_vcc;
-  QLabel        *_card_vpp;
-  QLabel        *_card_cfgbase;
-  QLabel        *_card_bus;
+  TQLabel        *_card_name;
+  TQLabel        *_card_type;
+  TQLabel        *_card_irq;
+  TQLabel        *_card_io;
+  TQLabel        *_card_dev;
+  TQLabel        *_card_driver;
+  TQLabel        *_card_vcc;
+  TQLabel        *_card_vpp;
+  TQLabel        *_card_cfgbase;
+  TQLabel        *_card_bus;
 
-  QPushButton   *_card_ej_ins;
-  QPushButton   *_card_sus_res;
-  QPushButton   *_card_reset;
+  TQPushButton   *_card_ej_ins;
+  TQPushButton   *_card_sus_res;
+  TQPushButton   *_card_reset;
 
 };
 

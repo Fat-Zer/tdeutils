@@ -24,7 +24,7 @@
 #include <net-snmp/net-snmp-config.h>
 #include <net-snmp/net-snmp-includes.h>
 
-#include <qvariant.h>
+#include <tqvariant.h>
 
 #include "identifier.h"
 
@@ -48,9 +48,9 @@ struct ValueImpl
     ValueImpl( variable_list *var );
 
     Value::Type type;
-    QVariant data;
+    TQVariant data;
     Identifier oid;
-    QHostAddress addr;
+    TQHostAddress addr;
     Q_UINT64 ctr64;
 };
 

@@ -39,20 +39,20 @@ class LhaArch : public Arch
 {
   Q_OBJECT
   public:
-    LhaArch( ArkWidget *, const QString & );
+    LhaArch( ArkWidget *, const TQString & );
     virtual ~LhaArch() { }
 
     virtual void open();
     virtual void create();
 
-    virtual void addFile( const QStringList & );
-    virtual void addDir( const QString & );
+    virtual void addFile( const TQStringList & );
+    virtual void addDir( const TQString & );
 
-    virtual void remove( QStringList * );
+    virtual void remove( TQStringList * );
     virtual void unarchFileInternal();
 
   protected slots:
-    virtual bool processLine( const QCString &line );
+    virtual bool processLine( const TQCString &line );
 
   private:
     void setHeaders();

@@ -24,8 +24,8 @@
 
 #include "regexpwidget.h"
 #include <iostream>
-#include <qpainter.h>
-#include <qcursor.h>
+#include <tqpainter.h>
+#include <tqcursor.h>
 #include "concwidget.h"
 #include "dragaccepter.h"
 
@@ -33,9 +33,9 @@ const int RegExpWidget::pw = 1;
 const int RegExpWidget::bdSize = 5;
 const int RegExpWidget::space = 5;
 
-RegExpWidget::RegExpWidget(RegExpEditorWindow* editorWindow, QWidget *parent,
+RegExpWidget::RegExpWidget(RegExpEditorWindow* editorWindow, TQWidget *parent,
                            const char *name)
-  : QWidget(parent, name ? name : "RegExpWidget", WNoMousePropagation ),
+  : TQWidget(parent, name ? name : "RegExpWidget", WNoMousePropagation ),
     _editorWindow( editorWindow ),  _isSelected( false ), _isToplevel( false )
 {
 }
@@ -59,7 +59,7 @@ void RegExpWidget::setConcChild(ConcWidget *)
 bool RegExpWidget::updateSelection(bool parentSelected)
 {
   bool selected = ( parentSelected ||
-                    _editorWindow->selectionOverlap( mapToGlobal( QPoint(0,0) ), size() ) )
+                    _editorWindow->selectionOverlap( mapToGlobal( TQPoint(0,0) ), size() ) )
     && !_isToplevel;
 
   if ( _isSelected != selected ) {
@@ -71,10 +71,10 @@ bool RegExpWidget::updateSelection(bool parentSelected)
   return false;
 }
 
-void RegExpWidget::drawPossibleSelection( QPainter& painter, QSize mySize )
+void RegExpWidget::drawPossibleSelection( TQPainter& painter, TQSize mySize )
 {
   if ( _isSelected ) {
-    painter.fillRect( 0, 0, mySize.width(), mySize.height(), QBrush( gray ) );
+    painter.fillRect( 0, 0, mySize.width(), mySize.height(), TQBrush( gray ) );
   }
 }
 
@@ -114,22 +114,22 @@ int RegExpWidget::edit()
   return 0; // Compiler shut up
 }
 
-void RegExpWidget::mousePressEvent ( QMouseEvent* event )
+void RegExpWidget::mousePressEvent ( TQMouseEvent* event )
 {
   if ( _editorWindow->isPasteing() || _editorWindow->isInserting() )
     return;
 
   if ( event->button() == LeftButton ) {
-    if ( ! _editorWindow->pointSelected( QCursor::pos() ) ) {
+    if ( ! _editorWindow->pointSelected( TQCursor::pos() ) ) {
       _editorWindow->clearSelection( true );
       if ( dynamic_cast<DragAccepter*>(this) == 0 && dynamic_cast<ConcWidget*>(this) == 0 ) {
         selectWidget( true );
       }
     }
 
-    QMouseEvent ev( event->type(), mapTo(_editorWindow, event->pos()),
+    TQMouseEvent ev( event->type(), mapTo(_editorWindow, event->pos()),
                     event->button(), event->state());
-    QApplication::sendEvent( _editorWindow, &ev );
+    TQApplication::sendEvent( _editorWindow, &ev );
   }
   else if ( event->button() == RightButton ) {
     _editorWindow->showRMBMenu( true );
@@ -139,10 +139,10 @@ void RegExpWidget::mousePressEvent ( QMouseEvent* event )
   // and thus sends the event to the parent - given that the following line is in.
   // It doesn't make any change to leave it out.
   // 25 Oct. 2001 19:03 -- Jesper K. Pedersen
-  //  QWidget::mousePressEvent( event );
+  //  TQWidget::mousePressEvent( event );
 }
 
-void RegExpWidget::mouseReleaseEvent( QMouseEvent* )
+void RegExpWidget::mouseReleaseEvent( TQMouseEvent* )
 {
   if ( _editorWindow->isInserting() && acceptWidgetInsert( _editorWindow->insertType() ) ) {
     if ( !_editorWindow->hasSelection() )
@@ -156,20 +156,20 @@ void RegExpWidget::mouseReleaseEvent( QMouseEvent* )
   }
 }
 
-QRect RegExpWidget::selectionRect() const
+TQRect RegExpWidget::selectionRect() const
 {
-  return QRect( mapToGlobal( QPoint(0,0) ), size() );
+  return TQRect( mapToGlobal( TQPoint(0,0) ), size() );
 }
 
 
-void RegExpWidget::enterEvent( QEvent * )
+void RegExpWidget::enterEvent( TQEvent * )
 {
   updateCursorShape();
 }
 
 void RegExpWidget::updateCursorShape()
 {
-  QCursor cursor;
+  TQCursor cursor;
 
   if ( _editorWindow->isPasteing() ) {
     if ( acceptWidgetPaste() )
@@ -205,9 +205,9 @@ bool RegExpWidget::acceptWidgetInsert( RegExpType tp ) const
   return WidgetFactory::isContainer( tp );
 }
 
-RegExpWidget* RegExpWidget::widgetUnderPoint( QPoint globalPos, bool )
+RegExpWidget* RegExpWidget::widgetUnderPoint( TQPoint globalPos, bool )
 {
-  if ( QRect(mapToGlobal( QPoint(0,0) ), size() ).contains( globalPos ) )
+  if ( TQRect(mapToGlobal( TQPoint(0,0) ), size() ).contains( globalPos ) )
     return this;
   else
     return 0;

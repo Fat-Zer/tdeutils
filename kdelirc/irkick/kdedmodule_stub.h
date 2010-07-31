@@ -14,7 +14,7 @@
 #define __KDEDMODULE_STUB__
 
 #include <dcopstub.h>
-#include <qobject.h>
+#include <tqobject.h>
 #include <dcopobject.h>
 #include <dcopref.h>
 #include <ksharedptr.h>
@@ -23,8 +23,8 @@
 class KDEDModule_stub : virtual public DCOPStub
 {
 public:
-    KDEDModule_stub( const QCString& app, const QCString& id );
-    KDEDModule_stub( DCOPClient* client, const QCString& app, const QCString& id );
+    KDEDModule_stub( const TQCString& app, const TQCString& id );
+    KDEDModule_stub( DCOPClient* client, const TQCString& app, const TQCString& id );
     explicit KDEDModule_stub( const DCOPRef& ref );
 protected:
     KDEDModule_stub() : DCOPStub( never_use ) {};

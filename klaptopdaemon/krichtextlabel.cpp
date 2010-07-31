@@ -18,35 +18,35 @@
 
 #include "krichtextlabel.h"
 
-#include <qtooltip.h>
-#include <qstylesheet.h>
-#include <qsimplerichtext.h>
+#include <tqtooltip.h>
+#include <tqstylesheet.h>
+#include <tqsimplerichtext.h>
 
 #include <kglobalsettings.h>
 
-static QString qrichtextify( const QString& text )
+static TQString qrichtextify( const TQString& text )
 {
   if ( text.isEmpty() || text[0] == '<' )
     return text;
 
-  QStringList lines = QStringList::split('\n', text);
-  for(QStringList::Iterator it = lines.begin(); it != lines.end(); ++it)
+  TQStringList lines = TQStringList::split('\n', text);
+  for(TQStringList::Iterator it = lines.begin(); it != lines.end(); ++it)
   {
-    *it = QStyleSheet::convertFromPlainText( *it, QStyleSheetItem::WhiteSpaceNormal );
+    *it = TQStyleSheet::convertFromPlainText( *it, TQStyleSheetItem::WhiteSpaceNormal );
   }
 
-  return lines.join(QString::null);
+  return lines.join(TQString::null);
 }
 
-KRichTextLabel::KRichTextLabel( const QString &text , QWidget *parent, const char *name )
- : QLabel ( parent, name ) {
+KRichTextLabel::KRichTextLabel( const TQString &text , TQWidget *parent, const char *name )
+ : TQLabel ( parent, name ) {
   m_defaultWidth = QMIN(400, KGlobalSettings::desktopGeometry(this).width()*2/5);
   setAlignment( Qt::WordBreak );
   setText(text);
 }
 
-KRichTextLabel::KRichTextLabel( QWidget *parent, const char *name )
- : QLabel ( parent, name ) {
+KRichTextLabel::KRichTextLabel( TQWidget *parent, const char *name )
+ : TQLabel ( parent, name ) {
   m_defaultWidth = QMIN(400, KGlobalSettings::desktopGeometry(this).width()*2/5);
   setAlignment( Qt::WordBreak );
 }
@@ -57,17 +57,17 @@ void KRichTextLabel::setDefaultWidth(int defaultWidth)
   updateGeometry();
 }
 
-QSizePolicy KRichTextLabel::sizePolicy() const
+TQSizePolicy KRichTextLabel::sizePolicy() const
 {
-  return QSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::Minimum, false);
+  return TQSizePolicy(TQSizePolicy::MinimumExpanding, TQSizePolicy::Minimum, false);
 }
 
-QSize KRichTextLabel::minimumSizeHint() const
+TQSize KRichTextLabel::minimumSizeHint() const
 {
-  QString qt_text = qrichtextify( text() );
+  TQString qt_text = qrichtextify( text() );
   int pref_width = 0;
   int pref_height = 0;
-  QSimpleRichText rt(qt_text, font());
+  TQSimpleRichText rt(qt_text, font());
   pref_width = m_defaultWidth;
   rt.setWidth(pref_width);
   int used_width = rt.widthUsed();
@@ -94,16 +94,16 @@ QSize KRichTextLabel::minimumSizeHint() const
       pref_width = used_width;
   }
 
-  return QSize(pref_width, rt.height());
+  return TQSize(pref_width, rt.height());
 }
 
-QSize KRichTextLabel::sizeHint() const
+TQSize KRichTextLabel::sizeHint() const
 {
   return minimumSizeHint();
 }
 
-void KRichTextLabel::setText( const QString &text ) {
-  QLabel::setText(text);
+void KRichTextLabel::setText( const TQString &text ) {
+  TQLabel::setText(text);
 }
 
 void KRichTextLabel::virtual_hook( int, void* )

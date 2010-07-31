@@ -26,7 +26,7 @@
 #include <config.h>
 #endif
 
-#include <qtimer.h>
+#include <tqtimer.h>
 
 #include <dcopclient.h>
 #include <dcopref.h>
@@ -57,7 +57,7 @@ class KVaio : public QObject
 {
     Q_OBJECT
 public:
-//    KVaio(QObject *parent = 0, const char *name =0);
+//    KVaio(TQObject *parent = 0, const char *name =0);
     KVaio(KMiloKVaio *parent = 0, const char *name =0);
 
     virtual ~KVaio();
@@ -71,8 +71,8 @@ protected:
     DCOPClient mClient;
     bool isKScreensaverAvailable();
     bool isKMiloDAvailable();
-    bool showTextMsg(const QString& msg);
-    bool showProgressMsg(const QString& msg, int progress);
+    bool showTextMsg(const TQString& msg);
+    bool showProgressMsg(const TQString& msg, int progress);
     bool showBatteryStatus ( bool force = false);
 protected slots:
     void slotVaioEvent(int);
@@ -107,7 +107,7 @@ private:
     bool mReportUnknownEvents;
     bool mReportPowerStatus;
     bool mShowPowerStatusOnBackButton;
-    QTimer *mTimer;
+    TQTimer *mTimer;
 };
 
 #endif // _KVAIO_H

@@ -30,7 +30,7 @@
 #include "mainwindow.h"
 
 // QT includes
-#include <qdict.h>
+#include <tqdict.h>
 
 // KDE includes
 #include <kuniqueapplication.h>
@@ -41,7 +41,7 @@ class QStringList;
 class EqualKey
 {
 	public:
-		bool operator()(const QString & str1, const QString & str2) const
+		bool operator()(const TQString & str1, const TQString & str2) const
 		{
 			return (str1 == str2);
 		}
@@ -78,14 +78,14 @@ class ArkApplication : public KUniqueApplication
 		ArkApplication();
 
 	private:
-		QWidget *m_mainwidget;  // to be the parent of all ArkWidgets
+		TQWidget *m_mainwidget;  // to be the parent of all ArkWidgets
 		int m_windowCount;
 
-		QStringList openArksList;
+		TQStringList openArksList;
 
 		// a hash to obtain the window associated with a filename.
-		// given a QString key, you get an ArkWidget * pointer.
-		QDict<MainWindow> m_windowsHash;
+		// given a TQString key, you get an ArkWidget * pointer.
+		TQDict<MainWindow> m_windowsHash;
 
 		static ArkApplication *mInstance;
 };

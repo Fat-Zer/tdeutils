@@ -8,9 +8,9 @@
 #define kcharselectdia_h
 
 
-#include <qlayout.h>
-#include <qlineedit.h>
-#include <qclipboard.h>
+#include <tqlayout.h>
+#include <tqlineedit.h>
+#include <tqclipboard.h>
 
 #include <kpushbutton.h>
 #include <kcharselect.h>
@@ -27,33 +27,33 @@ class KCharSelectDia : public KMainWindow
   Q_OBJECT
 
 public:
-  KCharSelectDia(QWidget *parent,const char *name,const QChar &_chr,const QString &_font,int _tableNum, bool direction);
+  KCharSelectDia(TQWidget *parent,const char *name,const TQChar &_chr,const TQString &_font,int _tableNum, bool direction);
 
-  static bool selectChar(QString &_font,QChar &_chr,int _tableNum);
+  static bool selectChar(TQString &_font,TQChar &_chr,int _tableNum);
 
   int chr() { return vChr; }
-  QString font() { return vFont; }
+  TQString font() { return vFont; }
 
 protected:
-  void closeEvent(QCloseEvent *) { _exit(); }
+  void closeEvent(TQCloseEvent *) { _exit(); }
 
-  QGridLayout *grid;
+  TQGridLayout *grid;
   KCharSelect *charSelect;
-  QLineEdit   *lined;
+  TQLineEdit   *lined;
   KPushButton *bClip,*bClear;
   KPushButton *bHelp;
 
-  QChar vChr;
-  QString vFont;
+  TQChar vChr;
+  TQString vFont;
   int pointSize;
   bool entryDirection;
 
 protected slots:
-  void charChanged(const QChar &_chr);
-  void fontSelected(const QString &_font);
+  void charChanged(const TQChar &_chr);
+  void fontSelected(const TQString &_font);
   void add()
   { add(vChr); }
-  void add(const QChar &_chr);
+  void add(const TQChar &_chr);
   void toClip();
   void toClipUTF8();
   void toClipHTML();

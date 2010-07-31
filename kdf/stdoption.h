@@ -27,7 +27,7 @@
 #ifndef _STD_OPTION_H_
 #define _STD_OPTION_H_
 
-#include <qstring.h>
+#include <tqstring.h>
 
 class CStdOption
 {
@@ -39,22 +39,22 @@ class CStdOption
     void writeConfiguration( void );
     void writeDefaultFileManager( void );
 
-    QString fileManager( void );
+    TQString fileManager( void );
 
     int     updateFrequency( void );
     bool    popupIfFull( void );
     bool    openFileManager( void );
 
     void setDefault( void );
-    void setFileManager( const QString &fileManager );
+    void setFileManager( const TQString &fileManager );
     void setUpdateFrequency( int frequency );
     void setPopupIfFull( bool popupIfFull );
     void setOpenFileManager( bool openFileManagerOnMount );
 
   private:
-    static QString mDefaultFileManager;
+    static TQString mDefaultFileManager;
     static int mDefaultUpdateFrequency;
-    QString mFileManager;
+    TQString mFileManager;
     int     mUpdateFrequency;
     bool    mPopupIfFull;
     bool    mOpenFileManagerOnMount;

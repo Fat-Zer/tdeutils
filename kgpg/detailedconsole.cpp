@@ -16,10 +16,10 @@
  ***************************************************************************/
 
 
-#include <qlayout.h>
-#include <qlabel.h>
-#include <qvgroupbox.h>
-#include <qtextedit.h>
+#include <tqlayout.h>
+#include <tqlabel.h>
+#include <tqvgroupbox.h>
+#include <tqtextedit.h>
 
 #include <kmessagebox.h>
 #include <klocale.h>
@@ -30,18 +30,18 @@
 #include "detailedconsole.h"
 
 
-KDetailedConsole::KDetailedConsole(QWidget *parent, const char *name,const QString &boxLabel,const QString &errormessage)
+KDetailedConsole::KDetailedConsole(TQWidget *parent, const char *name,const TQString &boxLabel,const TQString &errormessage)
     : KDialogBase(parent,name,true,i18n("Sorry"),KDialogBase::Details|KDialogBase::Ok|KDialogBase::Cancel, KDialogBase::Ok)
 {
-        QWidget *page = new QWidget( this );
+        TQWidget *page = new TQWidget( this );
         setMainWidget(page);
-        QVBoxLayout *vbox=new QVBoxLayout(page,0, spacingHint() );
+        TQVBoxLayout *vbox=new TQVBoxLayout(page,0, spacingHint() );
 
-        QLabel *lab1=new QLabel(page);
+        TQLabel *lab1=new TQLabel(page);
         lab1->setText(boxLabel);
 
-        QVGroupBox *detailsGroup = new QVGroupBox( i18n("Details"), page);
-        (void) new QLabel(errormessage,detailsGroup);
+        TQVGroupBox *detailsGroup = new TQVGroupBox( i18n("Details"), page);
+        (void) new TQLabel(errormessage,detailsGroup);
         //labdetails->setMinimumSize(labdetails->sizeHint());
         setDetailsWidget(detailsGroup);
         vbox->addWidget(lab1);
@@ -51,12 +51,12 @@ KDetailedConsole::KDetailedConsole(QWidget *parent, const char *name,const QStri
 KDetailedConsole::~KDetailedConsole()
 {}
 
-KDetailedInfo::KDetailedInfo(QWidget *parent, const char *name , const QString &boxLabel,const QString &errormessage,QStringList keysList)
+KDetailedInfo::KDetailedInfo(TQWidget *parent, const char *name , const TQString &boxLabel,const TQString &errormessage,TQStringList keysList)
     : KDialogBase(Swallow, i18n("Info"),KDialogBase::Details|KDialogBase::Ok, KDialogBase::Ok,parent,name,true)
 {
 	bool checkboxResult;
-	KMessageBox::createKMessageBox(this, QMessageBox::Information,
-                       boxLabel, keysList,QString::null,&checkboxResult, 0,errormessage);
+	KMessageBox::createKMessageBox(this, TQMessageBox::Information,
+                       boxLabel, keysList,TQString::null,&checkboxResult, 0,errormessage);
 }
 
 KDetailedInfo::~KDetailedInfo()

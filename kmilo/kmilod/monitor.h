@@ -23,10 +23,10 @@
 #ifndef _MONITOR_H_
 #define _MONITOR_H_
 
-#include <qstring.h>
-#include <qstringlist.h>
-#include <qpixmap.h>
-#include <qobject.h>
+#include <tqstring.h>
+#include <tqstringlist.h>
+#include <tqpixmap.h>
+#include <tqobject.h>
 
 #include <kdemacros.h>
 
@@ -35,9 +35,9 @@ class KConfig;
 namespace KMilo {
 class KMiloInterface;
 
-class KDE_EXPORT Monitor : public QObject {
+class KDE_EXPORT Monitor : public TQObject {
 	public:
-		Monitor(QObject *parent, const char *name, const QStringList&);
+		Monitor(TQObject *parent, const char *name, const TQStringList&);
 		virtual ~Monitor();
 
 		/**
@@ -73,13 +73,13 @@ class KDE_EXPORT Monitor : public QObject {
 		 * Message displayed for DisplayType's that are not int
 		 * measurable ( DisplayType::Tap for example )
 		 */
-		virtual QString message() const;
+		virtual TQString message() const;
 
 		/**
 		 * Custom pixmap that can be displayed be the themes
 		 * when displaying the DisplayType.
 		 */
-		virtual QPixmap customPixmap() const;
+		virtual TQPixmap customPixmap() const;
 
 		bool shouldPoll() const { return _poll; }
 

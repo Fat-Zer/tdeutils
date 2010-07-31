@@ -10,13 +10,13 @@
 #ifndef TEXTLABEL_H
 #define TEXTLABEL_H
 #include "meter.h"
-#include <qstring.h>
-#include <qpainter.h>
-#include <qcolor.h>
-#include <qfont.h>
-#include <qfontmetrics.h>
-#include <qstringlist.h>
-#include <qrect.h>
+#include <tqstring.h>
+#include <tqpainter.h>
+#include <tqcolor.h>
+#include <tqfont.h>
+#include <tqfontmetrics.h>
+#include <tqstringlist.h>
+#include <tqrect.h>
 
 #include "textfield.h"
 
@@ -32,55 +32,55 @@ public:
     ~TextLabel();
 
     void setTextProps( TextField* );
-    void setValue( QString );
+    void setValue( TQString );
     void setValue( long );
-    //virtual QString getStringValue() const { return value.join("\n"); };
-    QString getStringValue() const { return value.join("\n"); };
+    //virtual TQString getStringValue() const { return value.join("\n"); };
+    TQString getStringValue() const { return value.join("\n"); };
     void setFontSize( int );
-    void setBGColor(QColor clr);
-    void setFont( QString );
-    void setAlignment( QString );
+    void setBGColor(TQColor clr);
+    void setFont( TQString );
+    void setAlignment( TQString );
     void setFixedPitch( bool );
     void setShadow( int );
-    void mUpdate( QPainter * );
+    void mUpdate( TQPainter * );
 
     virtual void show();
     virtual void hide();
     int getFontSize() const;
-    QColor getBGColor() const;
-    QString getFont() const;
-    QString getAlignment() const;
+    TQColor getBGColor() const;
+    TQString getFont() const;
+    TQString getAlignment() const;
     bool getFixedPitch() const;
     int getShadow() const;
-    void setScroll(ScrollType type, QPoint speed, int gap, int pause);
-    void setScroll(char* type, QPoint speed, int gap, int pause);
+    void setScroll(ScrollType type, TQPoint speed, int gap, int pause);
+    void setScroll(char* type, TQPoint speed, int gap, int pause);
 
-    void attachClickArea(QString leftMouseButton, QString middleMouseButton,
-                         QString rightMouseButton);
+    void attachClickArea(TQString leftMouseButton, TQString middleMouseButton,
+                         TQString rightMouseButton);
 
-    virtual bool click(QMouseEvent*);
+    virtual bool click(TQMouseEvent*);
 
 private:
     int alignment;
     int clip;
-    QStringList value;
-    QFont font;
-    QColor bgColor;
+    TQStringList value;
+    TQFont font;
+    TQColor bgColor;
     int lineHeight;
-    QSize textSize;
+    TQSize textSize;
     int shadow;
     TextField text;
-    QPoint scrollSpeed;
-    QPoint scrollPos;
+    TQPoint scrollSpeed;
+    TQPoint scrollPos;
     int scrollGap;
     int scrollPause;
     int pauseCounter;
     ScrollType scrollType;
 
-    int drawText(QPainter *p, int x, int y, int width, int height,
-                 QString text);
-    bool calculateScrollCoords(QRect meterRect, QRect &textRect,
-                               QPoint &next, int &x, int &y);
+    int drawText(TQPainter *p, int x, int y, int width, int height,
+                 TQString text);
+    bool calculateScrollCoords(TQRect meterRect, TQRect &textRect,
+                               TQPoint &next, int &x, int &y);
     void calculateTextSize();
 };
 

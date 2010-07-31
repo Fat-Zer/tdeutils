@@ -27,7 +27,7 @@
 #endif
 
 #include <Python.h>
-#include <qobject.h>
+#include <tqobject.h>
 #include "karamba.h"
 #include "imagelabel.h"
 #include "meter_python.h"
@@ -37,8 +37,8 @@
 ImageLabel* createImageLabel(karamba *theme, long x, long y,
                              char* path, bool bg)
 {
-  QString file;
-  //QString fakefile;
+  TQString file;
+  //TQString fakefile;
 
   /*tmp->setThemePath(theme->themePath);*/
   //FIXME: This is an ugly hack to ensure a unique reference
@@ -124,8 +124,8 @@ PyObject* py_createTaskIcon(PyObject *, PyObject *args)
     qWarning("Task not found.");
     return (long)NULL ;
   }
-  //retrieve the QPixmap that represents this image
-  QPixmap iconPixmap = KWin::icon(currTask->window());
+  //retrieve the TQPixmap that represents this image
+  TQPixmap iconPixmap = KWin::icon(currTask->window());
 
   ImageLabel *tmp = createImageLabel((karamba*)widget, x, y, 0, 0);
   tmp->setValue(iconPixmap);
@@ -326,6 +326,6 @@ PyObject* py_addImageTooltip(PyObject *, PyObject *args)
     return NULL;
   if (!checkKarambaAndMeter(widget, meter, "ImageLabel"))
     return NULL;
-  ((ImageLabel*)meter)->setTooltip(PyString2QString(t));
+  ((ImageLabel*)meter)->setTooltip(PyString2TQString(t));
   return Py_BuildValue((char*)"l", 1);
 }

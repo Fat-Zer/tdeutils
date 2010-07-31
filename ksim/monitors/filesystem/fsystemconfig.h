@@ -41,18 +41,18 @@ class FsystemConfig : public KSim::PluginPage
     virtual void readConfig();
 
   protected:
-    void showEvent(QShowEvent *);
+    void showEvent(TQShowEvent *);
 
   private:
     void getStats();
-    QString splitString(const QString &string) const;
+    TQString splitString(const TQString &string) const;
 
-    QCheckBox *m_showPercentage;
-    QCheckBox *m_splitNames;
-    QLabel *m_intervalLabel;
+    TQCheckBox *m_showPercentage;
+    TQCheckBox *m_splitNames;
+    TQLabel *m_intervalLabel;
     KIntSpinBox *m_updateTimer;
     KListView *m_availableMounts;
-    QGridLayout *m_mainLayout;
+    TQGridLayout *m_mainLayout;
     FilesystemStats::List m_entries;
 };
 #endif // FILESYSTEM_H

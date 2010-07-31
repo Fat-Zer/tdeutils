@@ -26,7 +26,7 @@
 #define __SONYCONFIG_H__
 
 #include <kcmodule.h>
-#include <qstring.h>
+#include <tqstring.h>
 
 class QWidget;
 class QSpinBox;
@@ -42,7 +42,7 @@ class SonyConfig : public KCModule
 {
   Q_OBJECT
 public:
-  SonyConfig( QWidget *parent=0, const char* name=0);
+  SonyConfig( TQWidget *parent=0, const char* name=0);
   ~SonyConfig( );     
 
   void save( void );
@@ -50,7 +50,7 @@ public:
   void load(bool useDefaults);
   void defaults();
 
-  virtual QString quickHelp() const;
+  virtual TQString quickHelp() const;
 
 private slots:
 
@@ -61,9 +61,9 @@ private slots:
 private:
 	KConfig *config;
 
-	QCheckBox *enableScrollBar;
+	TQCheckBox *enableScrollBar;
 	bool enablescrollbar;
-	QCheckBox *enableMiddleEmulation;
+	TQCheckBox *enableMiddleEmulation;
 	bool middleemulation;
 };
 

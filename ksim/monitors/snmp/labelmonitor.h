@@ -34,7 +34,7 @@ class LabelMonitor : public KSim::Label
 {
     Q_OBJECT
 public:
-    LabelMonitor( const MonitorConfig &config, QWidget *parent, const char *name = 0 );
+    LabelMonitor( const MonitorConfig &config, TQWidget *parent, const char *name = 0 );
 
 public slots:
     void setData( const Value &data );

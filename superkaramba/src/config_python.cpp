@@ -27,14 +27,14 @@
 #endif
 
 #include <Python.h>
-#include <qobject.h>
+#include <tqobject.h>
 #include "karamba.h"
 #include "meter.h"
 #include "meter_python.h"
 #include "config_python.h"
 
 // API-Function addMenuConfigOption
-long addMenuConfigOption(long widget, QString key, QString name)
+long addMenuConfigOption(long widget, TQString key, TQString name)
 {
   karamba* currTheme = (karamba*)widget;
 
@@ -54,14 +54,14 @@ PyObject* py_add_menu_config_option(PyObject *, PyObject *args)
   if (!checkKaramba(widget))
     return NULL;
 
-  QString k, n;
+  TQString k, n;
   k.setAscii(key);
-  n = PyString2QString(name);
+  n = PyString2TQString(name);
 
   return Py_BuildValue((char*)"l", addMenuConfigOption(widget, k, n));
 }
 
-long setMenuConfigOption(long widget, QString key, bool value)
+long setMenuConfigOption(long widget, TQString key, bool value)
 {
   karamba* currTheme = (karamba*)widget;
 
@@ -79,13 +79,13 @@ PyObject* py_set_menu_config_option(PyObject *, PyObject *args)
   if (!checkKaramba(widget))
     return NULL;
 
-  QString k;
+  TQString k;
   k.setAscii(key);
 
   return Py_BuildValue((char*)"l", setMenuConfigOption(widget, k, (bool)value));
 }
 
-long readMenuConfigOption(long widget, QString key)
+long readMenuConfigOption(long widget, TQString key)
 {
   karamba* currTheme = (karamba*)widget;
 
@@ -102,14 +102,14 @@ PyObject* py_read_menu_config_option(PyObject *, PyObject *args)
   if (!checkKaramba(widget))
     return NULL;
 
-  QString k;
+  TQString k;
   k.setAscii(key);
 
   return Py_BuildValue((char*)"l", readMenuConfigOption(widget, k));
 }
 
 // API-Function writeConfigEntry
-long writeConfigEntry(long widget, QString key, QString value)
+long writeConfigEntry(long widget, TQString key, TQString value)
 {
   karamba* currTheme = (karamba*)widget;
 
@@ -129,7 +129,7 @@ PyObject* py_write_config_entry(PyObject *, PyObject *args)
     return NULL;
   if (!checkKaramba(widget))
     return NULL;
-  QString k, v;
+  TQString k, v;
   k.setAscii(key);
   v.setAscii(value);
 
@@ -137,7 +137,7 @@ PyObject* py_write_config_entry(PyObject *, PyObject *args)
 }
 
 // API-Function readConfigEntry
-QVariant readConfigEntry(long widget, QString key)
+TQVariant readConfigEntry(long widget, TQString key)
 {
   karamba* currTheme = (karamba*)widget;
 
@@ -153,11 +153,11 @@ PyObject* py_read_config_entry(PyObject *, PyObject *args)
     return NULL;
   if (!checkKaramba(widget))
     return NULL;
-  QString k;
+  TQString k;
   k.setAscii(key);
 
-  QVariant entry = readConfigEntry(widget, k);
-  QString type;
+  TQVariant entry = readConfigEntry(widget, k);
+  TQString type;
   type.setAscii(entry.typeName());
 
   if (type == "Bool")
@@ -172,7 +172,7 @@ PyObject* py_read_config_entry(PyObject *, PyObject *args)
     return Py_BuildValue((char*)"l", i);
   }
 
-  if (type == "QString")
+  if (type == "TQString")
   {
     return Py_BuildValue((char*)"s", entry.toString().ascii());
   }

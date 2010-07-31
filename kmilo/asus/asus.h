@@ -42,7 +42,7 @@ typedef struct
  */
 class AsusMonitor: public Monitor {
 	public:
-		AsusMonitor(QObject *parent, const char *name, const QStringList&);
+		AsusMonitor(TQObject *parent, const char *name, const TQStringList&);
 		virtual ~AsusMonitor();
 
 		/**
@@ -72,7 +72,7 @@ class AsusMonitor: public Monitor {
 		asus_state_struct asus_state;
 
 		bool readProc(asus_state_struct* );
-		int readProcEntry(const QString &);
+		int readProcEntry(const TQString &);
 
 		void clearStruct(asus_state_struct& asus_state);
 

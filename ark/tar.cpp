@@ -49,9 +49,9 @@
 #include <stdlib.h>
 
 // Qt includes
-#include <qdir.h>
-#include <qregexp.h>
-#include <qeventloop.h>
+#include <tqdir.h>
+#include <tqregexp.h>
+#include <tqeventloop.h>
 
 // KDE includes
 #include <kapplication.h>
@@ -74,13 +74,13 @@
 #include "tarlistingthread.h"
 
 TarArch::TarArch( ArkWidget *_gui,
-                  const QString & _filename, const QString & _openAsMimeType)
+                  const TQString & _filename, const TQString & _openAsMimeType)
   : Arch( _gui, _filename), m_tmpDir( 0 ), createTmpInProgress(false),
     updateInProgress(false), deleteInProgress(false), fd(0),
     m_pTmpProc( 0 ), m_pTmpProc2( 0 ), failed( false ), 
     m_dotslash( false ), m_listingThread( 0 )
 {
-    m_filesToAdd = m_filesToRemove = QStringList();
+    m_filesToAdd = m_filesToRemove = TQStringList();
     m_archiver_program = m_unarchiver_program = ArkSettings::tarExe();
     verifyCompressUtilityIsAvailable( m_archiver_program );
     verifyUncompressUtilityIsAvailable( m_unarchiver_program );
@@ -106,12 +106,12 @@ TarArch::TarArch( ArkWidget *_gui,
     {
         compressed = true;
         m_tmpDir = new KTempDir( _gui->tmpDir()
-                                 + QString::fromLatin1( "temp_tar" ) );
+                                 + TQString::fromLatin1( "temp_tar" ) );
         m_tmpDir->setAutoDelete( true );
         m_tmpDir->qDir()->cd( m_tmpDir->name() );
         // build the temp file name
         KTempFile *pTempFile = new KTempFile( m_tmpDir->name(),
-                QString::fromLatin1(".tar") );
+                TQString::fromLatin1(".tar") );
 
         tmpfile = pTempFile->name();
         delete pTempFile;
@@ -143,7 +143,7 @@ void TarArch::updateArch()
   if (compressed)
     {
       updateInProgress = true;
-      int f_desc = KDE_open(QFile::encodeName(m_filename), O_CREAT | O_TRUNC | O_WRONLY, 0666);
+      int f_desc = KDE_open(TQFile::encodeName(m_filename), O_CREAT | O_TRUNC | O_WRONLY, 0666);
       if (f_desc != -1)
           fd = fdopen( f_desc, "w" );
       else
@@ -163,13 +163,13 @@ void TarArch::updateArch()
           *kp << "cat" << tmpfile;
 
 
-      connect(kp, SIGNAL(receivedStdout(KProcess*, char*, int)),
-              this, SLOT(updateProgress( KProcess *, char *, int )));
-      connect( kp, SIGNAL(receivedStderr(KProcess*, char*, int)),
-               (Arch *)this, SLOT(slotReceivedOutput(KProcess*, char*, int)));
+      connect(kp, TQT_SIGNAL(receivedStdout(KProcess*, char*, int)),
+              this, TQT_SLOT(updateProgress( KProcess *, char *, int )));
+      connect( kp, TQT_SIGNAL(receivedStderr(KProcess*, char*, int)),
+               (Arch *)this, TQT_SLOT(slotReceivedOutput(KProcess*, char*, int)));
 
-      connect(kp, SIGNAL(processExited(KProcess *)),
-               this, SLOT(updateFinished(KProcess *)) );
+      connect(kp, TQT_SIGNAL(processExited(KProcess *)),
+               this, TQT_SLOT(updateFinished(KProcess *)) );
 
       if ( !fd || kp->start(KProcess::NotifyOnExit, flag) == false)
         {
@@ -197,46 +197,46 @@ void TarArch::updateProgress( KProcess * _proc, char *_buffer, int _bufflen )
 
 
 
-QString TarArch::getCompressor()
+TQString TarArch::getCompressor()
 {
     if ( m_fileMimeType == "application/x-tarz" )
-        return QString( "compress" );
+        return TQString( "compress" );
 
     if ( m_fileMimeType == "application/x-tgz" )
-        return QString( "gzip" );
+        return TQString( "gzip" );
 
     if (  m_fileMimeType == "application/x-tbz" )
-        return QString( "bzip2" );
+        return TQString( "bzip2" );
 
     if( m_fileMimeType == "application/x-tzo" )
-        return QString( "lzop" );
+        return TQString( "lzop" );
 
-    return QString::null;
+    return TQString::null;
 }
 
 
-QString TarArch::getUnCompressor()
+TQString TarArch::getUnCompressor()
 {
     if ( m_fileMimeType == "application/x-tarz" )
-        return QString( "uncompress" );
+        return TQString( "uncompress" );
 
     if ( m_fileMimeType == "application/x-tgz" )
-        return QString( "gunzip" );
+        return TQString( "gunzip" );
 
     if (  m_fileMimeType == "application/x-tbz" )
-        return QString( "bunzip2" );
+        return TQString( "bunzip2" );
 
     if( m_fileMimeType == "application/x-tzo" )
-        return QString( "lzop" );
+        return TQString( "lzop" );
 
-    return QString::null;
+    return TQString::null;
 }
 
 void
 TarArch::open()
 {
     if ( compressed )
-        QFile::remove(tmpfile); // just to make sure
+        TQFile::remove(tmpfile); // just to make sure
     setHeaders();
 
     clearShellOutput();
@@ -260,12 +260,12 @@ TarArch::open()
     m_header_removed = false;
     m_finished = false;
 
-    connect(kp, SIGNAL(processExited(KProcess *)),
-            this, SLOT(slotListingDone(KProcess *)));
-    connect(kp, SIGNAL(receivedStdout(KProcess*, char*, int)),
-        this, SLOT(slotReceivedOutput( KProcess *, char *, int )));
-    connect( kp, SIGNAL(receivedStderr(KProcess*, char*, int)),
-        this, SLOT(slotReceivedOutput(KProcess*, char*, int)));
+    connect(kp, TQT_SIGNAL(processExited(KProcess *)),
+            this, TQT_SLOT(slotListingDone(KProcess *)));
+    connect(kp, TQT_SIGNAL(receivedStdout(KProcess*, char*, int)),
+        this, TQT_SLOT(slotReceivedOutput( KProcess *, char *, int )));
+    connect( kp, TQT_SIGNAL(receivedStderr(KProcess*, char*, int)),
+        this, TQT_SLOT(slotReceivedOutput(KProcess*, char*, int)));
 
     if (kp->start(KProcess::NotifyOnExit, KProcess::AllOutput) == false)
     {
@@ -282,7 +282,7 @@ TarArch::open()
     }
     else
     {
-        connect( this, SIGNAL( createTempDone() ), this, SLOT( openFirstCreateTempDone() ) );
+        connect( this, TQT_SIGNAL( createTempDone() ), this, TQT_SLOT( openFirstCreateTempDone() ) );
         createTmp();
     }
 }
@@ -292,7 +292,7 @@ void TarArch::openFirstCreateTempDone()
     if ( compressed && ( m_fileMimeType != "application/x-tgz" )
             && ( m_fileMimeType != "application/x-tbz" ) )
     {
-        disconnect( this, SIGNAL( createTempDone() ), this, SLOT( openFirstCreateTempDone() ) );
+        disconnect( this, TQT_SIGNAL( createTempDone() ), this, TQT_SLOT( openFirstCreateTempDone() ) );
     }
 
     Q_ASSERT( !m_listingThread );
@@ -302,19 +302,19 @@ void TarArch::openFirstCreateTempDone()
 
 void TarArch::slotListingDone(KProcess *_kp)
 {
-  const QString list = getLastShellOutput();
+  const TQString list = getLastShellOutput();
   FileListView *flv = m_gui->fileList();
   if (flv!=NULL && flv->totalFiles()>0)
   {
-    const QString firstfile = ((FileLVI *) flv->firstChild())->fileName();
-    if (list.find(QRegExp(QString("\\s\\./%1[/\\n]").arg(firstfile)))>=0)
+    const TQString firstfile = ((FileLVI *) flv->firstChild())->fileName();
+    if (list.find(TQRegExp(TQString("\\s\\./%1[/\\n]").arg(firstfile)))>=0)
     {
       m_dotslash = true;
       kdDebug(1601) << k_funcinfo << "archive has dot-slash" << endl;
     }
     else
     {
-      if (list.find(QRegExp(QString("\\s%1[/\\n]").arg(firstfile)))>=0)
+      if (list.find(TQRegExp(TQString("\\s%1[/\\n]").arg(firstfile)))>=0)
       {
         // archive doesn't have dot-slash
         m_dotslash = false;
@@ -356,15 +356,15 @@ void TarArch::createTmp()
 {
     if ( compressed )
     {
-        if ( !QFile::exists(tmpfile) )
+        if ( !TQFile::exists(tmpfile) )
         {
-            QString strUncompressor = getUnCompressor();
+            TQString strUncompressor = getUnCompressor();
             // at least lzop doesn't want to pipe zerosize/nonexistent files
-            QFile originalFile( m_filename );
+            TQFile originalFile( m_filename );
             if ( strUncompressor != "gunzip" && strUncompressor !="bunzip2" &&
                 ( !originalFile.exists() || originalFile.size() == 0 ) )
             {
-                QFile temp( tmpfile );
+                TQFile temp( tmpfile );
                 temp.open( IO_ReadWrite );
                 temp.close();
                 emit createTempDone();
@@ -372,7 +372,7 @@ void TarArch::createTmp()
             }
             // the tmpfile does not yet exist, so we create it.
             createTmpInProgress = true;
-            int f_desc = KDE_open(QFile::encodeName(tmpfile), O_CREAT | O_TRUNC | O_WRONLY, 0666);
+            int f_desc = KDE_open(TQFile::encodeName(tmpfile), O_CREAT | O_TRUNC | O_WRONLY, 0666);
             if (f_desc != -1)
                 fd = fdopen( f_desc, "w" );
             else
@@ -394,16 +394,16 @@ void TarArch::createTmp()
             }
             *kp << "-c" << m_filename;
 
-            connect(kp, SIGNAL(processExited(KProcess *)),
-                    this, SLOT(createTmpFinished(KProcess *)));
-            connect(kp, SIGNAL(receivedStdout(KProcess*, char*, int)),
-                    this, SLOT(createTmpProgress( KProcess *, char *, int )));
-            connect( kp, SIGNAL(receivedStderr(KProcess*, char*, int)),
-                    this, SLOT(slotReceivedOutput(KProcess*, char*, int)));
+            connect(kp, TQT_SIGNAL(processExited(KProcess *)),
+                    this, TQT_SLOT(createTmpFinished(KProcess *)));
+            connect(kp, TQT_SIGNAL(receivedStdout(KProcess*, char*, int)),
+                    this, TQT_SLOT(createTmpProgress( KProcess *, char *, int )));
+            connect( kp, TQT_SIGNAL(receivedStderr(KProcess*, char*, int)),
+                    this, TQT_SLOT(slotReceivedOutput(KProcess*, char*, int)));
             if (kp->start(KProcess::NotifyOnExit, flag ) == false)
             {
                 KMessageBox::error(0, i18n("Unable to fork a decompressor"));
-		emit sigOpen( this, false, QString::null, 0 );
+		emit sigOpen( this, false, TQString::null, 0 );
             }
         }
         else
@@ -436,13 +436,13 @@ void TarArch::createTmpProgress( KProcess * _proc, char *_buffer, int _bufflen )
     }
 }
 
-void TarArch::deleteOldFiles(const QStringList &urls, bool bAddOnlyNew)
+void TarArch::deleteOldFiles(const TQStringList &urls, bool bAddOnlyNew)
   // because tar is broken. Used when appending: see addFile.
 {
-  QStringList list;
-  QString str;
+  TQStringList list;
+  TQString str;
 
-  QStringList::ConstIterator iter;
+  TQStringList::ConstIterator iter;
   for (iter = urls.begin(); iter != urls.end(); ++iter )
   {
     KURL url( *iter );
@@ -457,9 +457,9 @@ void TarArch::deleteOldFiles(const QStringList &urls, bool bAddOnlyNew)
       // old. Otherwise we aren't adding it anyway, so we can go on to the next
       // file with a "continue".
 
-      QFileInfo fileInfo( url.path() );
-      QDateTime addFileMTime = fileInfo.lastModified();
-      QDateTime oldFileMTime = lv->timeStamp();
+      TQFileInfo fileInfo( url.path() );
+      TQDateTime addFileMTime = fileInfo.lastModified();
+      TQDateTime oldFileMTime = lv->timeStamp();
 
       kdDebug(1601) << "Old file: " << oldFileMTime.date().year() << '-' <<
         oldFileMTime.date().month() << '-' << oldFileMTime.date().day() <<
@@ -489,7 +489,7 @@ void TarArch::deleteOldFiles(const QStringList &urls, bool bAddOnlyNew)
 }
 
 
-void TarArch::addFile( const QStringList&  urls )
+void TarArch::addFile( const TQStringList&  urls )
 {
   m_filesToAdd = urls;
   // tar is broken. If you add a file that's already there, it gives you
@@ -499,23 +499,23 @@ void TarArch::addFile( const QStringList&  urls )
   // first. So we'll first delete all the old files matching the names of
   // those in urls.
   m_bNotifyWhenDeleteFails = false;
-  connect( this, SIGNAL( removeDone() ), this, SLOT( deleteOldFilesDone() ) );
+  connect( this, TQT_SIGNAL( removeDone() ), this, TQT_SLOT( deleteOldFilesDone() ) );
   deleteOldFiles(urls, ArkSettings::replaceOnlyWithNewer());
 }
 
 void TarArch::deleteOldFilesDone()
 {
-  disconnect( this, SIGNAL( removeDone() ), this, SLOT( deleteOldFilesDone() ) );
+  disconnect( this, TQT_SIGNAL( removeDone() ), this, TQT_SLOT( deleteOldFilesDone() ) );
   m_bNotifyWhenDeleteFails = true;
 
-  connect( this, SIGNAL( createTempDone() ), this, SLOT( addFileCreateTempDone() ) );
+  connect( this, TQT_SIGNAL( createTempDone() ), this, TQT_SLOT( addFileCreateTempDone() ) );
   createTmp();
 }
 
 void TarArch::addFileCreateTempDone()
 {
-  disconnect( this, SIGNAL( createTempDone() ), this, SLOT( addFileCreateTempDone() ) );
-  QStringList * urls = &m_filesToAdd;
+  disconnect( this, TQT_SIGNAL( createTempDone() ), this, TQT_SLOT( addFileCreateTempDone() ) );
+  TQStringList * urls = &m_filesToAdd;
 
   KProcess *kp = m_currentProcess = new KProcess;
   *kp << m_archiver_program;
@@ -530,9 +530,9 @@ void TarArch::addFileCreateTempDone()
   else
     *kp << m_filename;
 
-  QStringList::ConstIterator iter;
+  TQStringList::ConstIterator iter;
   KURL url( urls->first() );
-  QDir::setCurrent( url.directory() );
+  TQDir::setCurrent( url.directory() );
   for (iter = urls->begin(); iter != urls->end(); ++iter )
   {
     KURL fileURL( *iter );
@@ -540,20 +540,20 @@ void TarArch::addFileCreateTempDone()
   }
 
   // debugging info
-  QValueList<QCString> list = kp->args();
-  QValueList<QCString>::Iterator strTemp;
+  TQValueList<TQCString> list = kp->args();
+  TQValueList<TQCString>::Iterator strTemp;
   for ( strTemp=list.begin(); strTemp != list.end(); ++strTemp )
     {
       kdDebug(1601) << *strTemp << " " << endl;
     }
 
-  connect( kp, SIGNAL(receivedStdout(KProcess*, char*, int)),
-           this, SLOT(slotReceivedOutput(KProcess*, char*, int)));
-  connect( kp, SIGNAL(receivedStderr(KProcess*, char*, int)),
-           this, SLOT(slotReceivedOutput(KProcess*, char*, int)));
+  connect( kp, TQT_SIGNAL(receivedStdout(KProcess*, char*, int)),
+           this, TQT_SLOT(slotReceivedOutput(KProcess*, char*, int)));
+  connect( kp, TQT_SIGNAL(receivedStderr(KProcess*, char*, int)),
+           this, TQT_SLOT(slotReceivedOutput(KProcess*, char*, int)));
 
-  connect( kp, SIGNAL(processExited(KProcess*)), this,
-           SLOT(slotAddFinished(KProcess*)));
+  connect( kp, TQT_SIGNAL(processExited(KProcess*)), this,
+           TQT_SLOT(slotAddFinished(KProcess*)));
 
   if (kp->start(KProcess::NotifyOnExit, KProcess::AllOutput) == false)
     {
@@ -564,13 +564,13 @@ void TarArch::addFileCreateTempDone()
 
 void TarArch::slotAddFinished(KProcess *_kp)
 {
-  disconnect( _kp, SIGNAL(processExited(KProcess*)), this,
-              SLOT(slotAddFinished(KProcess*)));
+  disconnect( _kp, TQT_SIGNAL(processExited(KProcess*)), this,
+              TQT_SLOT(slotAddFinished(KProcess*)));
   m_pTmpProc = _kp;
-  m_filesToAdd = QStringList();
+  m_filesToAdd = TQStringList();
   if ( compressed )
   {
-    connect( this, SIGNAL( updateDone() ), this, SLOT( addFinishedUpdateDone() ) );
+    connect( this, TQT_SIGNAL( updateDone() ), this, TQT_SLOT( addFinishedUpdateDone() ) );
     updateArch();
   }
   else
@@ -580,14 +580,14 @@ void TarArch::slotAddFinished(KProcess *_kp)
 void TarArch::addFinishedUpdateDone()
 {
   if ( compressed )
-    disconnect( this, SIGNAL( updateDone() ), this, SLOT( addFinishedUpdateDone() ) );
+    disconnect( this, TQT_SIGNAL( updateDone() ), this, TQT_SLOT( addFinishedUpdateDone() ) );
   Arch::slotAddExited( m_pTmpProc ); // this will delete _kp
   m_pTmpProc = NULL;
 }
 
 void TarArch::unarchFileInternal()
 {
-  QString dest;
+  TQString dest;
 
   if (m_destDir.isEmpty() || m_destDir.isNull())
     {
@@ -596,7 +596,7 @@ void TarArch::unarchFileInternal()
     }
   else dest = m_destDir;
 
-  QString tmp;
+  TQString tmp;
 
   KProcess *kp = m_currentProcess = new KProcess;
   kp->clearArguments();
@@ -605,7 +605,7 @@ void TarArch::unarchFileInternal()
   if (compressed)
     *kp << "--use-compress-program="+getUnCompressor();
 
-  QString options = "-x";
+  TQString options = "-x";
   if (!ArkSettings::extractOverwrite())
     options += "k";
   if (ArkSettings::preservePerms())
@@ -619,20 +619,20 @@ void TarArch::unarchFileInternal()
   // and we then extract everything in the archive.
   if (m_fileList)
     {
-      for ( QStringList::Iterator it = m_fileList->begin();
+      for ( TQStringList::Iterator it = m_fileList->begin();
             it != m_fileList->end(); ++it )
         {
-            *kp << QString(m_dotslash ? "./" : "")+(*it);
+            *kp << TQString(m_dotslash ? "./" : "")+(*it);
         }
     }
 
-  connect( kp, SIGNAL(receivedStdout(KProcess*, char*, int)),
-           this, SLOT(slotReceivedOutput(KProcess*, char*, int)));
-  connect( kp, SIGNAL(receivedStderr(KProcess*, char*, int)),
-           this, SLOT(slotReceivedOutput(KProcess*, char*, int)));
+  connect( kp, TQT_SIGNAL(receivedStdout(KProcess*, char*, int)),
+           this, TQT_SLOT(slotReceivedOutput(KProcess*, char*, int)));
+  connect( kp, TQT_SIGNAL(receivedStderr(KProcess*, char*, int)),
+           this, TQT_SLOT(slotReceivedOutput(KProcess*, char*, int)));
 
-  connect( kp, SIGNAL(processExited(KProcess*)), this,
-           SLOT(slotExtractExited(KProcess*)));
+  connect( kp, TQT_SIGNAL(processExited(KProcess*)), this,
+           TQT_SLOT(slotExtractExited(KProcess*)));
 
   if (kp->start(KProcess::NotifyOnExit, KProcess::AllOutput) == false)
     {
@@ -642,19 +642,19 @@ void TarArch::unarchFileInternal()
 
 }
 
-void TarArch::remove(QStringList *list)
+void TarArch::remove(TQStringList *list)
 {
   deleteInProgress = true;
   m_filesToRemove = *list;
-  connect( this, SIGNAL( createTempDone() ), this, SLOT( removeCreateTempDone() ) );
+  connect( this, TQT_SIGNAL( createTempDone() ), this, TQT_SLOT( removeCreateTempDone() ) );
   createTmp();
 }
 
 void TarArch::removeCreateTempDone()
 {
-  disconnect( this, SIGNAL( createTempDone() ), this, SLOT( removeCreateTempDone() ) );
+  disconnect( this, TQT_SIGNAL( createTempDone() ), this, TQT_SLOT( removeCreateTempDone() ) );
 
-  QString name, tmp;
+  TQString name, tmp;
   KProcess *kp = m_currentProcess = new KProcess;
   kp->clearArguments();
   *kp << m_archiver_program << "--delete" << "-f" ;
@@ -663,20 +663,20 @@ void TarArch::removeCreateTempDone()
   else
     *kp << m_filename;
 
-  QStringList::Iterator it = m_filesToRemove.begin();
+  TQStringList::Iterator it = m_filesToRemove.begin();
   for ( ; it != m_filesToRemove.end(); ++it )
     {
-        *kp << QString(m_dotslash ? "./" : "")+(*it);
+        *kp << TQString(m_dotslash ? "./" : "")+(*it);
     }
-  m_filesToRemove = QStringList();
+  m_filesToRemove = TQStringList();
 
-  connect( kp, SIGNAL(receivedStdout(KProcess*, char*, int)),
-           this, SLOT(slotReceivedOutput(KProcess*, char*, int)));
-  connect( kp, SIGNAL(receivedStderr(KProcess*, char*, int)),
-           this, SLOT(slotReceivedOutput(KProcess*, char*, int)));
+  connect( kp, TQT_SIGNAL(receivedStdout(KProcess*, char*, int)),
+           this, TQT_SLOT(slotReceivedOutput(KProcess*, char*, int)));
+  connect( kp, TQT_SIGNAL(receivedStderr(KProcess*, char*, int)),
+           this, TQT_SLOT(slotReceivedOutput(KProcess*, char*, int)));
 
-  connect( kp, SIGNAL(processExited(KProcess*)), this,
-           SLOT(slotDeleteExited(KProcess*)));
+  connect( kp, TQT_SIGNAL(processExited(KProcess*)), this,
+           TQT_SLOT(slotDeleteExited(KProcess*)));
 
   if (kp->start(KProcess::NotifyOnExit, KProcess::AllOutput) == false)
     {
@@ -690,7 +690,7 @@ void TarArch::slotDeleteExited(KProcess *_kp)
   m_pTmpProc2 = _kp;
   if ( compressed )
   {
-    connect( this, SIGNAL( updateDone() ), this, SLOT( removeUpdateDone() ) );
+    connect( this, TQT_SIGNAL( updateDone() ), this, TQT_SLOT( removeUpdateDone() ) );
     updateArch();
   }
   else
@@ -700,7 +700,7 @@ void TarArch::slotDeleteExited(KProcess *_kp)
 void TarArch::removeUpdateDone()
 {
   if ( compressed )
-    disconnect( this, SIGNAL( updateDone() ), this, SLOT( removeUpdateDone() ) );
+    disconnect( this, TQT_SIGNAL( updateDone() ), this, TQT_SLOT( removeUpdateDone() ) );
 
   deleteInProgress = false;
   emit removeDone();
@@ -708,9 +708,9 @@ void TarArch::removeUpdateDone()
   m_pTmpProc = NULL;
 }
 
-void TarArch::addDir(const QString & _dirName)
+void TarArch::addDir(const TQString & _dirName)
 {
-  QStringList list;
+  TQStringList list;
   list.append(_dirName);
   addFile(list);
 }
@@ -742,7 +742,7 @@ void TarArch::updateFinished( KProcess *_kp )
   emit updateDone();
 }
 
-void TarArch::customEvent( QCustomEvent *ev )
+void TarArch::customEvent( TQCustomEvent *ev )
 {
   if ( ev->type() == 65442 )
   {
@@ -757,7 +757,7 @@ void TarArch::customEvent( QCustomEvent *ev )
         m_listingThread->wait();
         delete m_listingThread;
         m_listingThread = 0;
-        emit sigOpen( this, false, QString::null, 0 );
+        emit sigOpen( this, false, TQString::null, 0 );
         break;
 
       case ListingEvent::ListingFinished:

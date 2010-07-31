@@ -32,12 +32,12 @@ class KEBCDIC1047CharCodec : public KCharCodec
 
   public: // KCharCodec API
     virtual KHEChar decode( char Byte ) const;
-    virtual bool encode( char *D, const QChar &C ) const;
-    virtual const QString& name() const;
+    virtual bool encode( char *D, const TQChar &C ) const;
+    virtual const TQString& name() const;
 
   public:
     static KEBCDIC1047CharCodec *create();
-    static const QString& codecName();
+    static const TQString& codecName();
 };
 
 

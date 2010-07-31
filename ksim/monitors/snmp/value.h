@@ -20,7 +20,7 @@
 #ifndef VALUE_H
 #define VALUE_H
 
-#include <qhostaddress.h>
+#include <tqhostaddress.h>
 
 namespace KSim
 {
@@ -65,9 +65,9 @@ public:
     Value( uint val, Type type );
     Value( float val );
     Value( double val );
-    Value( const QByteArray &data );
+    Value( const TQByteArray &data );
     Value( const Identifier &oid );
-    Value( const QHostAddress &address );
+    Value( const TQHostAddress &address );
     Value( Q_UINT64 counter );
 
     Value( const Value &rhs );
@@ -81,18 +81,18 @@ public:
     int toInt() const;
     uint toUInt() const;
     double toDouble() const;
-    const QByteArray toByteArray() const;
+    const TQByteArray toByteArray() const;
     const Identifier toOID() const;
-    const QHostAddress toIpAddress() const;
+    const TQHostAddress toIpAddress() const;
     uint toCounter() const;
     uint toGauge() const;
     int toTimeTicks() const;
     Q_UINT64 toCounter64() const;
 
-    QString toString( int conversionFlags = 0 ) const;
+    TQString toString( int conversionFlags = 0 ) const;
 
 private:
-    static QString formatTimeTicks( int ticks, int conversionFlags );
+    static TQString formatTimeTicks( int ticks, int conversionFlags );
 
     ValueImpl *d;
 };

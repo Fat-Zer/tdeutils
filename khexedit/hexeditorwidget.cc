@@ -47,8 +47,8 @@
 
 
 
-CHexEditorWidget::CHexEditorWidget( QWidget *parent, const char *name )
-  : QWidget( parent, name )
+CHexEditorWidget::CHexEditorWidget( TQWidget *parent, const char *name )
+  : TQWidget( parent, name )
 {
   CHexBuffer *hexBuffer = new CHexBuffer;
   if( hexBuffer == 0 ) { return; }
@@ -60,16 +60,16 @@ CHexEditorWidget::CHexEditorWidget( QWidget *parent, const char *name )
   mHexView = new CHexViewWidget( this, "hexview", hexBuffer );
   if( mHexView == 0 || mHexView->widgetValid() == false ) { return; }
 
-  connect( mHexView, SIGNAL(pleaseOpenNewFile()), SLOT( newFile()) );
-  connect( mHexView, SIGNAL(pleaseOpenFile( const QString&, bool, uint )),
-	   SLOT( open(const QString&, bool, uint)) );
-  connect( mHexView, SIGNAL(pleaseStepFile(bool)), SLOT( stepFile(bool)) );
-  connect( kapp, SIGNAL( kdisplayFontChanged() ), SLOT( fontChanged() ) );
-  connect( kapp, SIGNAL( kdisplayPaletteChanged() ),SLOT( paletteChanged()) );
-  connect( mHexView, SIGNAL( layoutChanged( const SDisplayLayout & ) ),
-	   SLOT( layoutChanged( const SDisplayLayout & ) ) );
-  connect( mHexView, SIGNAL( inputModeChanged( const SDisplayInputMode & ) ),
-	   this, SLOT( inputModeChanged( const SDisplayInputMode & ) ) );
+  connect( mHexView, TQT_SIGNAL(pleaseOpenNewFile()), TQT_SLOT( newFile()) );
+  connect( mHexView, TQT_SIGNAL(pleaseOpenFile( const TQString&, bool, uint )),
+	   TQT_SLOT( open(const TQString&, bool, uint)) );
+  connect( mHexView, TQT_SIGNAL(pleaseStepFile(bool)), TQT_SLOT( stepFile(bool)) );
+  connect( kapp, TQT_SIGNAL( kdisplayFontChanged() ), TQT_SLOT( fontChanged() ) );
+  connect( kapp, TQT_SIGNAL( kdisplayPaletteChanged() ),TQT_SLOT( paletteChanged()) );
+  connect( mHexView, TQT_SIGNAL( layoutChanged( const SDisplayLayout & ) ),
+	   TQT_SLOT( layoutChanged( const SDisplayLayout & ) ) );
+  connect( mHexView, TQT_SIGNAL( inputModeChanged( const SDisplayInputMode & ) ),
+	   this, TQT_SLOT( inputModeChanged( const SDisplayInputMode & ) ) );
 
   mHexView->setFocus();
   setBackgroundColor( palette().active().base() );
@@ -379,7 +379,7 @@ void CHexEditorWidget::readConfiguration( KConfig &config )
 
 
 
-void CHexEditorWidget::resizeEvent( QResizeEvent *e )
+void CHexEditorWidget::resizeEvent( TQResizeEvent *e )
 {
   mHexView->resize( e->size().width(), e->size().height() );
 }
@@ -557,7 +557,7 @@ void CHexEditorWidget::setTextMode( void )
 
 
 
-void CHexEditorWidget::saveWorkingDirectory( const QString &url )
+void CHexEditorWidget::saveWorkingDirectory( const TQString &url )
 {
   if( url.isEmpty() == true )
   {
@@ -580,7 +580,7 @@ void CHexEditorWidget::newFile( void )
     return;
   }
 
-  QString url = i18n("Untitled %1").arg( mUntitledCount );
+  TQString url = i18n("Untitled %1").arg( mUntitledCount );
 
   //
   // If the url is already present in the document list (should not happen),
@@ -604,7 +604,7 @@ void CHexEditorWidget::newFile( void )
   int errCode = mHexView->newFile( url );
   if( errCode != Err_Success )
   {
-    QString msg = i18n("Unable to create new document.");
+    TQString msg = i18n("Unable to create new document.");
     KMessageBox::sorry( topLevelWidget(), msg, i18n("Operation Failed") );
     return;
   }
@@ -615,7 +615,7 @@ void CHexEditorWidget::newFile( void )
 
 
 
-void CHexEditorWidget::newFile( const QByteArray &data )
+void CHexEditorWidget::newFile( const TQByteArray &data )
 {
   newFile();
   mHexView->append( data );
@@ -631,7 +631,7 @@ void CHexEditorWidget::open()
   if( file.isEmpty() )
     return;
 
-  QString url = file.url();
+  TQString url = file.url();
 
   saveWorkingDirectory( url );
 
@@ -665,7 +665,7 @@ void CHexEditorWidget::open()
 
 
 
-void CHexEditorWidget::open( const QString &url, bool reloadWhenChanged,
+void CHexEditorWidget::open( const TQString &url, bool reloadWhenChanged,
 			     uint offset )
 {
   if( busy( true ) == true )
@@ -727,7 +727,7 @@ void CHexEditorWidget::stepFile( bool next )
 
 
 
-bool CHexEditorWidget::isOpen( const QString &url, uint &offset )
+bool CHexEditorWidget::isOpen( const TQString &url, uint &offset )
 {
   CHexBuffer *hexBuffer = documentItem( url );
   if( hexBuffer == 0 )
@@ -739,7 +739,7 @@ bool CHexEditorWidget::isOpen( const QString &url, uint &offset )
 }
 
 
-bool CHexEditorWidget::selectDocument( const QString &url,
+bool CHexEditorWidget::selectDocument( const TQString &url,
 				       bool reloadWhenChanged )
 {
   CHexBuffer *hexBuffer = documentItem( url );
@@ -764,7 +764,7 @@ bool CHexEditorWidget::selectDocument( const QString &url,
 
 void CHexEditorWidget::insertFile( void )
 {
-  KFileDialog fdlg(mWorkDir, QString::null, topLevelWidget(), 0, TRUE);
+  KFileDialog fdlg(mWorkDir, TQString::null, topLevelWidget(), 0, TRUE);
   fdlg.setOperationMode( KFileDialog::Opening );
   fdlg.okButton()->setGuiItem( KStdGuiItem::insert() );
   fdlg.setCaption(i18n("Insert File"));
@@ -781,7 +781,7 @@ void CHexEditorWidget::insertFile( void )
     return;
   }
 
-  QString url = file.path();
+  TQString url = file.path();
 
   saveWorkingDirectory( url );
 
@@ -865,10 +865,10 @@ bool CHexEditorWidget::querySave( void )
     return( true );
   }
 
-  QString msg = i18n(""
+  TQString msg = i18n(""
     "The current document has been modified.\n"
     "Do you want to save it?" );
-  int reply = KMessageBox::warningYesNoCancel( topLevelWidget(), msg, QString::null, KStdGuiItem::save(), KStdGuiItem::discard() );
+  int reply = KMessageBox::warningYesNoCancel( topLevelWidget(), msg, TQString::null, KStdGuiItem::save(), KStdGuiItem::discard() );
   if( reply == KMessageBox::Yes )
   {
     return( save() );
@@ -897,8 +897,8 @@ bool CHexEditorWidget::backup( void )
     return( false );
   }
 
-  const QString currentName = kurl.path();
-  QString backupName = currentName + '~';
+  const TQString currentName = kurl.path();
+  TQString backupName = currentName + '~';
 
   int errCode = rename( currentName.latin1(), backupName.latin1() );
   if( errCode != 0 )
@@ -930,7 +930,7 @@ bool CHexEditorWidget::save( void )
   {
     if( modifiedByAlien( mHexView->url() ) == true )
     {
-      QString msg = i18n(""
+      TQString msg = i18n(""
        "Current document has been changed on disk.\n"
        "If you save now, those changes will be lost.\n"
        "Proceed?" );
@@ -978,12 +978,12 @@ bool CHexEditorWidget::saveAs( void )
 
     if( url.isLocalFile() )
     {
-      QString name( url.path() );
-      QFileInfo info( name );
+      TQString name( url.path() );
+      TQFileInfo info( name );
 
       if( info.exists() )
       {
-	QString msg = i18n(""
+	TQString msg = i18n(""
           "A document with this name already exists.\n"
           "Do you want to overwrite it?" );
 	int reply = KMessageBox::warningContinueCancel( topLevelWidget(), msg,
@@ -996,7 +996,7 @@ bool CHexEditorWidget::saveAs( void )
     }
   }
 
-  QString symbolicName( url.url() );
+  TQString symbolicName( url.url() );
 //  KURL::decode( symbolicName );
 
   mHexView->setUrl( symbolicName );
@@ -1020,14 +1020,14 @@ void CHexEditorWidget::reload( void )
 
   if( mHexView->urlValid() == false )
   {
-    QString msg = i18n( "The current document does not exist on the disk." );
+    TQString msg = i18n( "The current document does not exist on the disk." );
     KMessageBox::sorry( topLevelWidget(), msg, i18n("Reload") );
     return;
   }
 
   if( mHexView->modified() == true )
   {
-    QString msg;
+    TQString msg;
     if( modifiedByAlien( mHexView->url() ) == true )
     {
       msg = i18n( "The current document has changed on the disk and "
@@ -1047,7 +1047,7 @@ void CHexEditorWidget::reload( void )
     }
   }
 
-  QString url( mHexView->url() );
+  TQString url( mHexView->url() );
   uint offset = mHexView->offset();
 
   //mHexView->closeFile();
@@ -1108,7 +1108,7 @@ void CHexEditorWidget::printPostscript( CHexPrinter &printer )
   // No i18n() on this one!
   // Constants come from config.h
   //
-  QString creator( PACKAGE );
+  TQString creator( PACKAGE );
   creator += " ";
   creator += VERSION;
 
@@ -1120,7 +1120,7 @@ void CHexEditorWidget::printPostscript( CHexPrinter &printer )
     errCode = mHexView->print( printer, mProgressData );
   }
 
-  QString msg = i18n("Could not print data.\n");
+  TQString msg = i18n("Could not print data.\n");
   msg += hexError( errCode );
 
   if( errCode != Err_Success )
@@ -1140,7 +1140,7 @@ bool CHexEditorWidget::confirmPrintPageNumber( CHexPrinter &printer )
 
     if( numPageSelected > mDisplayState.misc.thresholdValue )
     {
-      QString msg = i18n(
+      TQString msg = i18n(
         "<qt>Print threshold exceeded.<br>"
         "You are about to print one page.<br>"
 	"Proceed?</qt>",
@@ -1167,12 +1167,12 @@ void CHexEditorWidget::exportDialog( void )
   {
     mExportDialog = new CExportDialog( topLevelWidget(), 0, false );
     if( mExportDialog == 0 ) { return; }
-    connect( mExportDialog, SIGNAL( exportText(const SExportText &)),
-	     this, SLOT( exportText( const SExportText &)) );
-    connect( mExportDialog, SIGNAL( exportHtml(const SExportHtml &)),
-	     this, SLOT( exportHtml( const SExportHtml &)) );
-    connect( mExportDialog, SIGNAL( exportCArray(const SExportCArray &)),
-	     this, SLOT( exportCArray( const SExportCArray &)) );
+    connect( mExportDialog, TQT_SIGNAL( exportText(const SExportText &)),
+	     this, TQT_SLOT( exportText( const SExportText &)) );
+    connect( mExportDialog, TQT_SIGNAL( exportHtml(const SExportHtml &)),
+	     this, TQT_SLOT( exportHtml( const SExportHtml &)) );
+    connect( mExportDialog, TQT_SIGNAL( exportCArray(const SExportCArray &)),
+	     this, TQT_SLOT( exportCArray( const SExportCArray &)) );
   }
   mExportDialog->show();
 }
@@ -1189,7 +1189,7 @@ void CHexEditorWidget::exportText( const SExportText &ex )
 
   if( errCode != Err_Success )
   {
-    QString msg = i18n("Unable to export data.\n");
+    TQString msg = i18n("Unable to export data.\n");
     msg += hexError( errCode );
     KMessageBox::sorry( topLevelWidget(), msg, i18n("Export") );
   }
@@ -1206,7 +1206,7 @@ void CHexEditorWidget::exportHtml( const SExportHtml &ex )
 
   if( errCode != Err_Success )
   {
-    QString msg = i18n("Unable to export data.\n");
+    TQString msg = i18n("Unable to export data.\n");
     msg += hexError( errCode );
     KMessageBox::sorry( topLevelWidget(), msg, i18n("Export") );
   }
@@ -1223,7 +1223,7 @@ void CHexEditorWidget::exportCArray( const SExportCArray &ex )
 
   if( errCode != Err_Success )
   {
-    QString msg = i18n("Unable to export data.\n");
+    TQString msg = i18n("Unable to export data.\n");
     msg += hexError( errCode );
     KMessageBox::sorry( topLevelWidget(), msg, i18n("Export") );
   }
@@ -1234,7 +1234,7 @@ void CHexEditorWidget::encode( CConversion::EMode mode )
 {
   if( mHexView->losslessEncoding( mode ) == false )
   {
-    QString msg = i18n(""
+    TQString msg = i18n(""
       "The encoding you have selected is not reversible.\n"
       "If you revert to the original encoding later, there is no "
       "guarantee that the data can be restored to the original state.");
@@ -1256,7 +1256,7 @@ void CHexEditorWidget::encode( CConversion::EMode mode )
 
   if( errCode != Err_Success )
   {
-    QString msg = i18n("Could not encode data.\n");
+    TQString msg = i18n("Could not encode data.\n");
     msg += hexError( errCode );
     KMessageBox::sorry( topLevelWidget(), msg, i18n("Encode") );
   }
@@ -1409,7 +1409,7 @@ void CHexEditorWidget::removeAllBookmark( void )
 {
   if( mHexView->bookmarkCount() > 0 )
   {
-    QString msg = i18n(""
+    TQString msg = i18n(""
       "Deleted bookmarks can not be restored.\n"
       "Proceed?" );
     int reply = KMessageBox::warningContinueCancel( topLevelWidget(), msg );
@@ -1449,8 +1449,8 @@ void CHexEditorWidget::gotoOffset( void )
   {
     mGotoDialog = new CGotoDialog( topLevelWidget(), 0, false );
     if( mGotoDialog == 0 ) { return; }
-    connect( mGotoDialog, SIGNAL(gotoOffset( uint, uint, bool, bool )),
-	     mHexView, SLOT(gotoOffset( uint, uint, bool, bool )) );
+    connect( mGotoDialog, TQT_SIGNAL(gotoOffset( uint, uint, bool, bool )),
+	     mHexView, TQT_SLOT(gotoOffset( uint, uint, bool, bool )) );
   }
   mGotoDialog->show();
 }
@@ -1468,8 +1468,8 @@ void CHexEditorWidget::find( void )
     mFindDialog = new CFindDialog( topLevelWidget(), 0, false );
     if( mFindDialog == 0 ) { return; }
     connect( mFindDialog,
-	     SIGNAL(findData(SSearchControl &, uint, bool)),
-	     SLOT(findData(SSearchControl &, uint, bool)) );
+	     TQT_SIGNAL(findData(SSearchControl &, uint, bool)),
+	     TQT_SLOT(findData(SSearchControl &, uint, bool)) );
   }
   mFindDialog->show();
 }
@@ -1525,7 +1525,7 @@ void CHexEditorWidget::findData( SSearchControl &sc, uint mode, bool navigator)
 
   if( mode == Find_First )
   {
-    QString msg = i18n( "Search key not found in document." );
+    TQString msg = i18n( "Search key not found in document." );
     KMessageBox::sorry( topLevelWidget(), msg, i18n("Find") );
   }
 }
@@ -1559,14 +1559,14 @@ void CHexEditorWidget::findPrevious( void )
 }
 
 
-bool CHexEditorWidget::askWrap( bool fwd, const QString &header )
+bool CHexEditorWidget::askWrap( bool fwd, const TQString &header )
 {
   if( mDisplayState.misc.confirmWrap == false )
   {
     return( true ); // Never ask the user
   }
 
-  QString msg;
+  TQString msg;
   if( fwd == true )
   {
     msg += i18n(""
@@ -1591,7 +1591,7 @@ bool CHexEditorWidget::canFind( bool showError )
   {
     if( showError == true )
     {
-      QString msg = i18n(""
+      TQString msg = i18n(""
         "Your request can not be processed.\n"
         "No search pattern defined." );
       KMessageBox::sorry( topLevelWidget(), msg, i18n("Find") );
@@ -1616,10 +1616,10 @@ void CHexEditorWidget::findNavigator( SSearchControl &sc )
     mFindNavigatorDialog = new CFindNavigatorDialog(topLevelWidget(),0,false);
     if( mFindNavigatorDialog == 0 ) { return; }
     connect( mFindNavigatorDialog,
-	     SIGNAL(findData(SSearchControl &, uint, bool)),
-	     SLOT(findData(SSearchControl &, uint, bool)) );
-    connect( mFindNavigatorDialog, SIGNAL(makeKey(void)),
-	     SLOT(find()) );
+	     TQT_SIGNAL(findData(SSearchControl &, uint, bool)),
+	     TQT_SLOT(findData(SSearchControl &, uint, bool)) );
+    connect( mFindNavigatorDialog, TQT_SIGNAL(makeKey(void)),
+	     TQT_SLOT(find()) );
   }
   if( mFindNavigatorDialog->isVisible() == false )
   {
@@ -1639,8 +1639,8 @@ void CHexEditorWidget::replace( void )
     mReplaceDialog = new CReplaceDialog( topLevelWidget(), 0, false );
     if( mReplaceDialog == 0 ) { return; }
     connect( mReplaceDialog,
-	     SIGNAL( replaceData( SSearchControl &, uint)),
-	     SLOT( replaceData( SSearchControl &, uint)));
+	     TQT_SIGNAL( replaceData( SSearchControl &, uint)),
+	     TQT_SLOT( replaceData( SSearchControl &, uint)));
   }
   mReplaceDialog->show();
 }
@@ -1729,8 +1729,8 @@ void CHexEditorWidget::replacePrompt( SSearchControl &sc )
     mReplacePromptDialog = new CReplacePromptDialog(topLevelWidget(), 0,false);
     if( mReplacePromptDialog == 0 ) { return; }
     connect( mReplacePromptDialog,
-	     SIGNAL( replaceData( SSearchControl &, uint)),
-	     SLOT( replaceData( SSearchControl &, uint)));
+	     TQT_SIGNAL( replaceData( SSearchControl &, uint)),
+	     TQT_SLOT( replaceData( SSearchControl &, uint)));
   }
   if( mReplacePromptDialog->isVisible() == false )
   {
@@ -1756,7 +1756,7 @@ void CHexEditorWidget::replaceResult( SSearchControl &sc )
 
   if( sc.match == false )
   {
-    QString msg;
+    TQString msg;
     if( sc.inSelection == true )
     {
       msg += i18n( "Search key not found in selected area." );
@@ -1769,7 +1769,7 @@ void CHexEditorWidget::replaceResult( SSearchControl &sc )
   }
   else
   {
-    const QString msg = i18n(
+    const TQString msg = i18n(
       "<qt>Operation complete.<br><br>One replacement was made.</qt>",
       "<qt>Operation complete.<br><br>%n replacements were made.</qt>", sc.numReplace );
     KMessageBox::information( topLevelWidget(), msg, i18n("Find & Replace"));
@@ -1783,8 +1783,8 @@ void CHexEditorWidget::insertPattern( void )
   {
     mInsertDialog = new CInsertDialog( topLevelWidget(), 0, false );
     if( mInsertDialog == 0 ) { return; }
-    connect( mInsertDialog, SIGNAL(execute( SInsertData & )),
-	     mHexView, SLOT(insert( SInsertData & )) );
+    connect( mInsertDialog, TQT_SIGNAL(execute( SInsertData & )),
+	     mHexView, TQT_SLOT(insert( SInsertData & )) );
   }
   mInsertDialog->show();
 }
@@ -1792,7 +1792,7 @@ void CHexEditorWidget::insertPattern( void )
 
 void CHexEditorWidget::encoding( void )
 {
-  QString msg = i18n(""
+  TQString msg = i18n(""
     "Not available yet!\n"
     "Define your own encoding" );
   KMessageBox::sorry( topLevelWidget(), msg, i18n("Encoding") );
@@ -1805,13 +1805,13 @@ void CHexEditorWidget::strings( void )
   {
     mStringDialog = new CStringDialog( topLevelWidget(), 0, false );
     if( mStringDialog == 0 ) { return; }
-    connect( mStringDialog, SIGNAL(markText( uint, uint, bool )),
-	     mHexView, SLOT(setMark( uint, uint, bool )) );
-    connect( mStringDialog, SIGNAL(collect()), SLOT(collectStrings()) );
-    connect( mHexView, SIGNAL(fileName( const QString &, bool ) ),
-	     mStringDialog, SLOT( removeList() ) );
-    connect( mHexView, SIGNAL(dataChanged()),
-	     mStringDialog, SLOT(setDirty()) );
+    connect( mStringDialog, TQT_SIGNAL(markText( uint, uint, bool )),
+	     mHexView, TQT_SLOT(setMark( uint, uint, bool )) );
+    connect( mStringDialog, TQT_SIGNAL(collect()), TQT_SLOT(collectStrings()) );
+    connect( mHexView, TQT_SIGNAL(fileName( const TQString &, bool ) ),
+	     mStringDialog, TQT_SLOT( removeList() ) );
+    connect( mHexView, TQT_SIGNAL(dataChanged()),
+	     mStringDialog, TQT_SLOT(setDirty()) );
   }
   mStringDialog->show();
 }
@@ -1828,7 +1828,7 @@ void CHexEditorWidget::collectStrings( void )
 
   if( errCode != Err_Success && errCode != Err_Stop )
   {
-    QString msg = i18n("Could not collect strings.\n");
+    TQString msg = i18n("Could not collect strings.\n");
     msg += hexError( errCode );
     KMessageBox::sorry( topLevelWidget(), msg, i18n("Collect Strings") );
   }
@@ -1839,7 +1839,7 @@ void CHexEditorWidget::collectStrings( void )
 
 void CHexEditorWidget::recordView( void )
 {
-  QString msg = i18n(""
+  TQString msg = i18n(""
    "Not available yet!\n"
    "Define a record (structure) and fill it with data from the document." );
   KMessageBox::sorry( topLevelWidget(), msg, i18n("Record Viewer") );
@@ -1851,8 +1851,8 @@ void CHexEditorWidget::filter( void )
   {
     mFilterDialog = new CFilterDialog( topLevelWidget(), 0, false );
     if( mFilterDialog == 0 ) { return; }
-    connect( mFilterDialog, SIGNAL(filterData( SFilterControl & )),
-	     mHexView, SLOT(filter( SFilterControl & )) );
+    connect( mFilterDialog, TQT_SIGNAL(filterData( SFilterControl & )),
+	     mHexView, TQT_SLOT(filter( SFilterControl & )) );
   }
   mFilterDialog->show();
 }
@@ -1864,8 +1864,8 @@ void CHexEditorWidget::chart( void )
   {
     mCharTableDialog = new CCharTableDialog( topLevelWidget(), 0, false );
     if( mCharTableDialog == 0 ) { return; }
-    connect( mCharTableDialog, SIGNAL(assign( const QByteArray & )),
-	     mHexView, SLOT(insert( const QByteArray & )) );
+    connect( mCharTableDialog, TQT_SIGNAL(assign( const TQByteArray & )),
+	     mHexView, TQT_SLOT(insert( const TQByteArray & )) );
   }
   mCharTableDialog->show();
 }
@@ -1876,8 +1876,8 @@ void CHexEditorWidget::converter( void )
   if( mConverterDialog == 0 )
   {
     mConverterDialog = new CConverterDialog( this, "converter", false );
-    connect( mConverterDialog, SIGNAL(probeCursorValue(QByteArray &, uint)),
-	     mHexView, SLOT(valueOnCursor(QByteArray &, uint)) );
+    connect( mConverterDialog, TQT_SIGNAL(probeCursorValue(TQByteArray &, uint)),
+	     mHexView, TQT_SLOT(valueOnCursor(TQByteArray &, uint)) );
   }
   mConverterDialog->show();
 }
@@ -1889,10 +1889,10 @@ void CHexEditorWidget::statistics( void )
   {
     mFileInfoDialog = new CFileInfoDialog( topLevelWidget(), 0, false );
     if( mFileInfoDialog == 0 ) { return; }
-    connect( mFileInfoDialog, SIGNAL(collectStatistic(SStatisticControl &)),
-	     SLOT(collectStatistics(SStatisticControl &)));
-    connect( mHexView, SIGNAL(dataChanged()),
-	     mFileInfoDialog, SLOT(setDirty()) );
+    connect( mFileInfoDialog, TQT_SIGNAL(collectStatistic(SStatisticControl &)),
+	     TQT_SLOT(collectStatistics(SStatisticControl &)));
+    connect( mHexView, TQT_SIGNAL(dataChanged()),
+	     mFileInfoDialog, TQT_SLOT(setDirty()) );
   }
   mFileInfoDialog->show();
 }
@@ -1914,7 +1914,7 @@ void CHexEditorWidget::collectStatistics( SStatisticControl &sc )
   {
     mFileInfoDialog->setStatistics(); // Default values
 
-    QString msg = i18n("Could not collect document statistics.\n");
+    TQString msg = i18n("Could not collect document statistics.\n");
     msg += hexError( errCode );
     KMessageBox::sorry( topLevelWidget(), msg,
 			i18n("Collect Document Statistics") );
@@ -1930,20 +1930,20 @@ void CHexEditorWidget::options( void )
     mOptionDialog = new COptionDialog( topLevelWidget(), 0, false );
     if( mOptionDialog == 0 ) { return; }
 
-    connect( mOptionDialog, SIGNAL(lineSizeChoice(const SDisplayLine &)),
-	     SLOT(setLineSize(const SDisplayLine &)) );
-    connect( mOptionDialog, SIGNAL(layoutChoice(const SDisplayLayout &)),
-	     SLOT(setLayout(const SDisplayLayout &)) );
-    connect( mOptionDialog, SIGNAL(fontChoice(const SDisplayFont &)),
-	     SLOT(setFont(const SDisplayFont &)) );
-    connect( mOptionDialog, SIGNAL(colorChoice(const SDisplayColor &)),
-	     SLOT(setColor(const SDisplayColor &)) );
-    connect( mOptionDialog, SIGNAL(cursorChoice(const SDisplayCursor &)),
-	     SLOT(setCursor(const SDisplayCursor &)) );
-    connect( mOptionDialog, SIGNAL(miscChoice(const SDisplayMisc &)),
-	     SLOT(setMisc(const SDisplayMisc &)) );
-    connect( mOptionDialog, SIGNAL(removeRecentFiles()),
-	     SIGNAL(removeRecentFiles()) );
+    connect( mOptionDialog, TQT_SIGNAL(lineSizeChoice(const SDisplayLine &)),
+	     TQT_SLOT(setLineSize(const SDisplayLine &)) );
+    connect( mOptionDialog, TQT_SIGNAL(layoutChoice(const SDisplayLayout &)),
+	     TQT_SLOT(setLayout(const SDisplayLayout &)) );
+    connect( mOptionDialog, TQT_SIGNAL(fontChoice(const SDisplayFont &)),
+	     TQT_SLOT(setFont(const SDisplayFont &)) );
+    connect( mOptionDialog, TQT_SIGNAL(colorChoice(const SDisplayColor &)),
+	     TQT_SLOT(setColor(const SDisplayColor &)) );
+    connect( mOptionDialog, TQT_SIGNAL(cursorChoice(const SDisplayCursor &)),
+	     TQT_SLOT(setCursor(const SDisplayCursor &)) );
+    connect( mOptionDialog, TQT_SIGNAL(miscChoice(const SDisplayMisc &)),
+	     TQT_SLOT(setMisc(const SDisplayMisc &)) );
+    connect( mOptionDialog, TQT_SIGNAL(removeRecentFiles()),
+	     TQT_SIGNAL(removeRecentFiles()) );
   }
   if( mOptionDialog->isVisible() == false )
   {
@@ -1956,7 +1956,7 @@ void CHexEditorWidget::options( void )
 
 void CHexEditorWidget::favorites( void )
 {
-  QString msg = i18n(""
+  TQString msg = i18n(""
     "Not available yet!\n"
     "Save or retrive your favorite layout" );
   KMessageBox::sorry( topLevelWidget(), msg, i18n("Profiles") );
@@ -1978,7 +1978,7 @@ int CHexEditorWidget::readURL( const KURL &url, bool insert )
   //
   if( !url.isValid() )
   {
-    QString msg = i18n("Malformed URL\n%1").arg( url.url() );
+    TQString msg = i18n("Malformed URL\n%1").arg( url.url() );
     KMessageBox::sorry( topLevelWidget(), msg, i18n("Read URL") );
     return( Err_IllegalArgument );
   }
@@ -1986,7 +1986,7 @@ int CHexEditorWidget::readURL( const KURL &url, bool insert )
   //
   // 3) Load the file.
   //
-  QString tmpfile;
+  TQString tmpfile;
   if ( !KIO::NetAccess::download( url, tmpfile, this ) )
     return Err_ReadFailed;
 
@@ -1998,7 +1998,7 @@ int CHexEditorWidget::readURL( const KURL &url, bool insert )
 }
 
 
-void CHexEditorWidget::writeURL( QString &url )
+void CHexEditorWidget::writeURL( TQString &url )
 {
   KURL kurl( url );
   if( kurl.isLocalFile() )
@@ -2012,13 +2012,13 @@ void CHexEditorWidget::writeURL( QString &url )
     if( !KIO::NetAccess::upload(tf.name(),url,this) )
     {
       mHexView->setModified( modified );
-      QString msg = i18n("Could not save remote file.");
+      TQString msg = i18n("Could not save remote file.");
       KMessageBox::sorry( topLevelWidget(), msg, i18n("Write Failure") );
     }
   }
 }
 
-bool CHexEditorWidget::modifiedByAlien( const QString &url )
+bool CHexEditorWidget::modifiedByAlien( const TQString &url )
 {
   KURL kurl( url );
   if( kurl.isLocalFile() == false )
@@ -2026,7 +2026,7 @@ bool CHexEditorWidget::modifiedByAlien( const QString &url )
     return( false );
   }
 
-  QFileInfo fileInfo( kurl.path() );
+  TQFileInfo fileInfo( kurl.path() );
   if( fileInfo.exists() == false )
   {
     return( false );
@@ -2042,36 +2042,36 @@ bool CHexEditorWidget::modifiedByAlien( const QString &url )
 
 
 
-bool CHexEditorWidget::readFile( const QString &diskPath, const QString &url,
+bool CHexEditorWidget::readFile( const TQString &diskPath, const TQString &url,
 				 bool insert )
 {
 
-  QFileInfo info( diskPath );
+  TQFileInfo info( diskPath );
   if( info.exists() == false )
   {
-    const QString msg = i18n("The specified file does not exist.\n%1").arg( diskPath );
+    const TQString msg = i18n("The specified file does not exist.\n%1").arg( diskPath );
     KMessageBox::sorry( topLevelWidget(), msg, i18n("Read") );
     return( false );
   }
 
   if( info.isDir() == true )
   {
-    const QString msg = i18n("You have specified a folder.\n%1").arg( diskPath );
+    const TQString msg = i18n("You have specified a folder.\n%1").arg( diskPath );
     KMessageBox::sorry( topLevelWidget(), msg, i18n("Read") );
     return( false );
   }
 
   if( info.isReadable() == false )
   {
-    const QString msg = i18n("You do not have read permission to this file.\n%1").arg( diskPath );
+    const TQString msg = i18n("You do not have read permission to this file.\n%1").arg( diskPath );
     KMessageBox::sorry( topLevelWidget(), msg, i18n("Read") );
     return( false );
   }
 
-  QFile file( diskPath );
+  TQFile file( diskPath );
   if( file.open( IO_ReadOnly | IO_Raw ) == false )
   {
-    const QString msg = i18n("An error occurred while trying to open the file.\n%1").arg( diskPath );
+    const TQString msg = i18n("An error occurred while trying to open the file.\n%1").arg( diskPath );
     KMessageBox::sorry( topLevelWidget(), msg, i18n("Read") );
     return( false );
   }
@@ -2099,8 +2099,8 @@ bool CHexEditorWidget::readFile( const QString &diskPath, const QString &url,
 
   if( errCode != Err_Success )
   {
-    QString header = insert == true ? i18n("Insert") : i18n("Read");
-    QString msg = i18n("Could not read file.\n");
+    TQString header = insert == true ? i18n("Insert") : i18n("Read");
+    TQString msg = i18n("Could not read file.\n");
     msg += hexError( errCode );
     KMessageBox::sorry( topLevelWidget(), msg, header );
   }
@@ -2112,30 +2112,30 @@ bool CHexEditorWidget::readFile( const QString &diskPath, const QString &url,
 
 
 
-bool CHexEditorWidget::writeFile( const QString &diskPath )
+bool CHexEditorWidget::writeFile( const TQString &diskPath )
 {
-  QFileInfo info( diskPath );
+  TQFileInfo info( diskPath );
   if( info.exists() == true )
   {
     if( info.isDir() == true )
     {
-      QString msg = i18n("You have specified a folder.");
+      TQString msg = i18n("You have specified a folder.");
       KMessageBox::sorry( topLevelWidget(), msg, i18n("Write Failure") );
       return( false );
     }
 
     if( info.isWritable() == false )
     {
-      QString msg = i18n("You do not have write permission.");
+      TQString msg = i18n("You do not have write permission.");
       KMessageBox::sorry( topLevelWidget(), msg, i18n("Write Failure") );
       return( false );
     }
   }
 
-  QFile file( diskPath );
+  TQFile file( diskPath );
   if( file.open( IO_WriteOnly | IO_Raw | IO_Truncate ) == false )
   {
-    QString msg = i18n("An error occurred while trying to open the file.");
+    TQString msg = i18n("An error occurred while trying to open the file.");
     KMessageBox::sorry( topLevelWidget(), msg, i18n("Write Failure") );
     return( false );
   }
@@ -2147,7 +2147,7 @@ bool CHexEditorWidget::writeFile( const QString &diskPath )
   }
   if( errCode != Err_Success )
   {
-    QString msg = i18n("Could not write data to disk.\n");
+    TQString msg = i18n("Could not write data to disk.\n");
     msg += hexError( errCode );
     KMessageBox::sorry( topLevelWidget(), msg, i18n("Write Failure") );
   }
@@ -2157,9 +2157,9 @@ bool CHexEditorWidget::writeFile( const QString &diskPath )
 }
 
 
-CHexBuffer *CHexEditorWidget::documentItem( const QString &url )
+CHexBuffer *CHexEditorWidget::documentItem( const TQString &url )
 {
-  QString symbolicName( url );
+  TQString symbolicName( url );
 //  KURL::decode( symbolicName );
 
   for( CHexBuffer *hexBuffer = mDocumentList.first(); hexBuffer != 0;
@@ -2175,14 +2175,14 @@ CHexBuffer *CHexEditorWidget::documentItem( const QString &url )
 }
 
 
-CHexBuffer *CHexEditorWidget::documentItem( const QString &url, bool next )
+CHexBuffer *CHexEditorWidget::documentItem( const TQString &url, bool next )
 {
   if( mDocumentList.count() <= 1 )
   {
     return( 0 );
   }
 
-  QString symbolicName( url );
+  TQString symbolicName( url );
 //  KURL::decode( symbolicName );
 
   if( next == true )
@@ -2229,7 +2229,7 @@ bool CHexEditorWidget::createBuffer( void )
   CHexBuffer *hexBuffer = new CHexBuffer;
   if( hexBuffer == 0 )
   {
-    QString msg = i18n( "Can not create text buffer.\n" );
+    TQString msg = i18n( "Can not create text buffer.\n" );
     msg += hexError( Err_NoMemory );
     KMessageBox::error( topLevelWidget(), msg, i18n("Loading Failed" ) );
     return( false );
@@ -2304,7 +2304,7 @@ int CHexEditorWidget::prepareProgressData( EProgressMode mode )
   mProgressStop = false;
   enableInputLock( true );
 
-  static QString names[] =
+  static TQString names[] =
   {
     i18n("Reading"),
     i18n("Writing"),
@@ -2317,7 +2317,7 @@ int CHexEditorWidget::prepareProgressData( EProgressMode mode )
   };
 
   mProgressData.define( progressReceiver, this );
-  emit setProgressText( QString(names[mode]) );
+  emit setProgressText( TQString(names[mode]) );
   emit operationChanged( true );
 
   return( Err_Success );
@@ -2368,7 +2368,7 @@ int CHexEditorWidget::progressParse( const SProgressData &pd )
     return( Err_Success );
   }
 
-  QString msg, header;
+  TQString msg, header;
   switch( mProgressMode )
   {
     case pg_read:
@@ -2429,7 +2429,7 @@ bool CHexEditorWidget::busy( bool showWarning )
 {
   if( mProgressBusy == true && showWarning == true )
   {
-    QString msg = i18n("Could not finish operation.\n");
+    TQString msg = i18n("Could not finish operation.\n");
     msg += hexError( Err_Busy );
     KMessageBox::sorry( topLevelWidget(), msg );
   }

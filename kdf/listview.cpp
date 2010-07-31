@@ -24,17 +24,17 @@
 // 2) Provide a pixmap collection
 //
 
-#include <qbitmap.h>
-#include <qheader.h>
-#include <qpainter.h>
+#include <tqbitmap.h>
+#include <tqheader.h>
+#include <tqpainter.h>
 
 #include <kiconloader.h>
 
 #include "listview.h"
 
-template class QDict<QPixmap>;
+template class TQDict<TQPixmap>;
 
-CListView::CListView( QWidget *parent, const char *name, int visibleItem )
+CListView::CListView( TQWidget *parent, const char *name, int visibleItem )
   :KListView( parent, name ),  mVisibleItem(QMAX( 1, visibleItem ))
 {
   setVisibleItem(visibleItem);
@@ -46,15 +46,15 @@ void CListView::setVisibleItem( int visibleItem, bool updateSize )
   mVisibleItem = QMAX( 1, visibleItem );
   if( updateSize == true )
   {
-    QSize s = sizeHint();
+    TQSize s = sizeHint();
     setMinimumSize( s.width() + verticalScrollBar()->sizeHint().width() +
 		    lineWidth() * 2, s.height() );
   }
 }
 
-QSize CListView::sizeHint( void ) const
+TQSize CListView::sizeHint( void ) const
 {
-  QSize s = QListView::sizeHint();
+  TQSize s = TQListView::sizeHint();
 
   int h = fontMetrics().height() + 2*itemMargin();
   if( h % 2 > 0 ) { h++; }
@@ -65,34 +65,34 @@ QSize CListView::sizeHint( void ) const
 
 
 
-const QPixmap &CListView::icon( const QString &iconName, bool drawBorder )
+const TQPixmap &CListView::icon( const TQString &iconName, bool drawBorder )
 {
-  QPixmap *pix = mPixDict[ iconName ];
+  TQPixmap *pix = mPixDict[ iconName ];
   if( pix == 0 )
   {
-    pix = new QPixmap( SmallIcon( iconName ) );
+    pix = new TQPixmap( SmallIcon( iconName ) );
 
     if( drawBorder == true )
     {
       //
       // 2000-01-23 Espen Sand
       // Careful here: If the mask has not been defined we can
-      // not use QPixmap::mask() because it returns 0 => segfault
+      // not use TQPixmap::mask() because it returns 0 => segfault
       //
       if( pix->mask() != 0 )
       {
-	QBitmap *bm = new QBitmap(*(pix->mask()));
+	TQBitmap *bm = new TQBitmap(*(pix->mask()));
 	if( bm != 0 )
 	{
-	  QPainter qp(bm);
-	  qp.setPen(QPen(white,1));
+	  TQPainter qp(bm);
+	  qp.setPen(TQPen(white,1));
 	  qp.drawRect(0,0,bm->width(),bm->height());
 	  qp.end();
 	  pix->setMask(*bm);
 	}
 
-	QPainter qp(pix);
-	qp.setPen(QPen(red,1));
+	TQPainter qp(pix);
+	qp.setPen(TQPen(red,1));
 	qp.drawRect(0,0,pix->width(),pix->height());
 	qp.end();
         delete bm;

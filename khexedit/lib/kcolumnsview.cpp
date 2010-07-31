@@ -18,7 +18,7 @@
 //#include <kdebug.h>
 
 // qt specific
-#include <qpainter.h>
+#include <tqpainter.h>
 // lib specific
 #include "kcolumn.h"
 #include "kcolumnsview.h"
@@ -28,8 +28,8 @@ using namespace KHE;
 
 static bool DefaultHorizontalGrid = false;
 
-KColumnsView::KColumnsView( /*bool R,*/ QWidget *Parent, const char *Name, WFlags Flags )
- : QScrollView( Parent, Name, Flags | WRepaintNoErase /*| WStaticContents*/ ),
+KColumnsView::KColumnsView( /*bool R,*/ TQWidget *Parent, const char *Name, WFlags Flags )
+ : TQScrollView( Parent, Name, Flags | WRepaintNoErase /*| WStaticContents*/ ),
    NoOfLines( 0 ),
    LineHeight( 0 ),
    TotalWidth( 0 ),
@@ -136,13 +136,13 @@ void KColumnsView::repaintView()
 }
 
 
-void KColumnsView::paintEmptyArea( QPainter *P, int cx ,int cy, int cw, int ch)
+void KColumnsView::paintEmptyArea( TQPainter *P, int cx ,int cy, int cw, int ch)
 {
   P->fillRect( cx, cy, cw, ch, backgroundBrush() );
 }
 
 
-void KColumnsView::drawContents( QPainter *P, int cx, int cy, int cw, int ch )
+void KColumnsView::drawContents( TQPainter *P, int cx, int cy, int cw, int ch )
 {
   //kdDebug(1501) << "drawContents(" << cx<<","<<cw<<"#"<<cy<<","<<ch<<")\n";
   KPixelXs AffectedXs( cx, cw, true );
@@ -152,7 +152,7 @@ void KColumnsView::drawContents( QPainter *P, int cx, int cy, int cw, int ch )
     KPixelYs AffectedYs( cy, ch, true );
 
     // collect affected columns
-    QPtrList<KColumn> RedrawColumns;
+    TQPtrList<KColumn> RedrawColumns;
     for( KColumn *C=Columns.first(); C; C=Columns.next() )
       if( C->isVisible() && C->overlaps(AffectedXs) )
         RedrawColumns.append( C );
@@ -166,7 +166,7 @@ void KColumnsView::drawContents( QPainter *P, int cx, int cy, int cw, int ch )
 
       if( AffectedLines.isValid() )
       {
-        QPainter Paint;
+        TQPainter Paint;
         Paint.begin( &LineBuffer, this );
 
         // starting painting with the first line
@@ -231,6 +231,6 @@ void KColumnsView::drawContents( QPainter *P, int cx, int cy, int cw, int ch )
 }
 
 // Implemented to get rid of a compiler warning
-void KColumnsView::drawContents( QPainter * ) {}
+void KColumnsView::drawContents( TQPainter * ) {}
 
 #include "kcolumnsview.moc"

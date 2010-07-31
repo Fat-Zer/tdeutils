@@ -28,21 +28,21 @@
 
 typedef struct _DefStruct
 {
-	QColor forecolor;
-	QColor backcolor;
-	QColor numberButtonColor;
-	QColor functionButtonColor;
-	QColor statButtonColor;
-	QColor hexButtonColor;
-	QColor memoryButtonColor;
-	QColor operationButtonColor;
+	TQColor forecolor;
+	TQColor backcolor;
+	TQColor numberButtonColor;
+	TQColor functionButtonColor;
+	TQColor statButtonColor;
+	TQColor hexButtonColor;
+	TQColor memoryButtonColor;
+	TQColor operationButtonColor;
 
 	int precision;
 	int fixedprecision;
 	bool fixed;
 	bool beep;
 	bool capres;
-	QFont font;
+	TQFont font;
 } DefStruct;
 
 #endif // _CONF_VALUES_H_

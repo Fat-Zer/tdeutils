@@ -24,7 +24,7 @@
 #include "kjotsbookmarks.h"
 
 KJotsBookmarks::KJotsBookmarks(KJotsMain* parent, const char* name)
-    : QObject(parent, name),
+    : TQObject(parent, name),
       m_kjots(parent)
 {
 }
@@ -33,17 +33,17 @@ KJotsBookmarks::~KJotsBookmarks()
 {
 }
 
-void KJotsBookmarks::openBookmarkURL(const QString& page)
+void KJotsBookmarks::openBookmarkURL(const TQString& page)
 {
     emit openPage(page);
 }
 
-QString KJotsBookmarks::currentURL() const
+TQString KJotsBookmarks::currentURL() const
 {
     return m_kjots->currentBookmarkURL();
 }
 
-QString KJotsBookmarks::currentTitle() const
+TQString KJotsBookmarks::currentTitle() const
 {
     return m_kjots->currentBookmarkTitle();
 }

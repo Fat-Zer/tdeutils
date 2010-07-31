@@ -15,7 +15,7 @@
  *                                                                         *
  ***************************************************************************/
 
-#include <qstring.h>
+#include <tqstring.h>
 #include <kmessagebox.h>
 
 
@@ -55,7 +55,7 @@ int main(int argc, char *argv[])
         KUniqueApplication::addCmdLineOptions();
 
 
-        //KMessageBox::sorry(0,"nombre: "+QString::number(i));
+        //KMessageBox::sorry(0,"nombre: "+TQString::number(i));
 
         if (!KUniqueApplication::start())
                 return 0;

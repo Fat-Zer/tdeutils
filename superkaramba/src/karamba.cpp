@@ -42,16 +42,16 @@
 #include <kparts/componentfactory.h>
 #include <kparts/part.h>
 
-#include <qdir.h>
-#include <qwidgetlist.h>
+#include <tqdir.h>
+#include <tqwidgetlist.h>
 
 // Menu IDs
 #define EDITSCRIPT 1
 #define THEMECONF  2
 
-karamba::karamba(QString fn, QString name, bool reloading, int instance,
+karamba::karamba(TQString fn, TQString name, bool reloading, int instance,
     bool sub_theme):
-    QWidget(0,"karamba", Qt::WGroupLeader | WStyle_Customize |
+    TQWidget(0,"karamba", Qt::WGroupLeader | WStyle_Customize |
             WRepaintNoErase| WStyle_NoBorder | WDestructiveClose  ),
     meterList(0), imageList(0), clickList(0), kpop(0), widgetMask(0),
     config(0), kWinModule(0), tempUnit('C'), m_instance(instance),
@@ -77,7 +77,7 @@ karamba::karamba(QString fn, QString name, bool reloading, int instance,
   if(!m_theme.set(url))
   {
     setFixedSize(0, 0);
-    QTimer::singleShot(100, this, SLOT(killWidget()));
+    TQTimer::singleShot(100, this, TQT_SLOT(killWidget()));
     return;
   }
   // Add self to list of open themes
@@ -85,23 +85,23 @@ karamba::karamba(QString fn, QString name, bool reloading, int instance,
   karambaApp->addKaramba(this, reloading);
 
   if(prettyName.isEmpty())
-    prettyName = QString("%1 - %2").arg(m_theme.name()).arg(m_instance);
+    prettyName = TQString("%1 - %2").arg(m_theme.name()).arg(m_instance);
 
   kdDebug() << "Starting theme: " << m_theme.name()
             << " pretty name: " << prettyName << endl;
-  QString qName = "karamba - " + prettyName;
+  TQString qName = "karamba - " + prettyName;
   setName(qName.ascii());
 
   KDirWatch *dirWatch = KDirWatch::self();
-  connect(dirWatch, SIGNAL( dirty( const QString & ) ),
-          SLOT( slotFileChanged( const QString & ) ) );
+  connect(dirWatch, TQT_SIGNAL( dirty( const TQString & ) ),
+          TQT_SLOT( slotFileChanged( const TQString & ) ) );
 
   if(!dirWatch->contains(m_theme.file()))
     dirWatch->addFile(m_theme.file());
 
   if(!m_theme.isZipTheme() && m_theme.pythonModuleExists())
   {
-    QString pythonFile = m_theme.path() + "/" + m_theme.pythonModule() + ".py";
+    TQString pythonFile = m_theme.path() + "/" + m_theme.pythonModule() + ".py";
     if(!dirWatch->contains(pythonFile))
       dirWatch->addFile(pythonFile);
   }
@@ -109,15 +109,15 @@ karamba::karamba(QString fn, QString name, bool reloading, int instance,
   widgetUpdate = true;
 
   // Creates KConfig Object
-  QString instanceString;
+  TQString instanceString;
   if(m_instance > 1)
-    instanceString = QString("-%1").arg(m_instance);
-  QString cfg = QDir::home().absPath() + "/.superkaramba/"
+    instanceString = TQString("-%1").arg(m_instance);
+  TQString cfg = TQDir::home().absPath() + "/.superkaramba/"
       + m_theme.id() + instanceString + ".rc";
   kdDebug() << cfg << endl;
-  QFile themeConfigFile(cfg);
+  TQFile themeConfigFile(cfg);
   // Tests if config file Exists
-  if (!QFileInfo(themeConfigFile).exists())
+  if (!TQFileInfo(themeConfigFile).exists())
   {
     // Create config file
     themeConfigFile.open(IO_ReadWrite);
@@ -132,7 +132,7 @@ karamba::karamba(QString fn, QString name, bool reloading, int instance,
   if(m_theme.pythonModuleExists())
   {
     kdDebug() << "Loading python module: " << m_theme.pythonModule() << endl;
-    QTimer::singleShot(0, this, SLOT(initPythonInterface()));
+    TQTimer::singleShot(0, this, TQT_SLOT(initPythonInterface()));
   }
 
   widgetMask = 0;
@@ -142,22 +142,22 @@ karamba::karamba(QString fn, QString name, bool reloading, int instance,
   kWinModule = new KWinModule();
   desktop = 0;
 
-  connect( kWinModule,SIGNAL(currentDesktopChanged(int)), this,
-           SLOT(currentDesktopChanged(int)) );
-  connect( kapp, SIGNAL(backgroundChanged(int)), this,
-           SLOT(currentWallpaperChanged(int)));
+  connect( kWinModule,TQT_SIGNAL(currentDesktopChanged(int)), this,
+           TQT_SLOT(currentDesktopChanged(int)) );
+  connect( kapp, TQT_SIGNAL(backgroundChanged(int)), this,
+           TQT_SLOT(currentWallpaperChanged(int)));
 
   // Setup of the Task Manager Callbacks
-  connect(&taskManager, SIGNAL(activeTaskChanged(Task*)), this,
-           SLOT(activeTaskChanged(Task*)) );
-  connect(&taskManager, SIGNAL(taskAdded(Task*)), this,
-           SLOT(taskAdded(Task*)) );
-  connect(&taskManager, SIGNAL(taskRemoved(Task*)), this,
-           SLOT(taskRemoved(Task*)) );
-  connect(&taskManager, SIGNAL(startupAdded(Startup*)), this,
-           SLOT(startupAdded(Startup*)) );
-  connect(&taskManager, SIGNAL(startupRemoved(Startup*)), this,
-           SLOT(startupRemoved(Startup*)) );
+  connect(&taskManager, TQT_SIGNAL(activeTaskChanged(Task*)), this,
+           TQT_SLOT(activeTaskChanged(Task*)) );
+  connect(&taskManager, TQT_SIGNAL(taskAdded(Task*)), this,
+           TQT_SLOT(taskAdded(Task*)) );
+  connect(&taskManager, TQT_SIGNAL(taskRemoved(Task*)), this,
+           TQT_SLOT(taskRemoved(Task*)) );
+  connect(&taskManager, TQT_SIGNAL(startupAdded(Startup*)), this,
+           TQT_SLOT(startupAdded(Startup*)) );
+  connect(&taskManager, TQT_SIGNAL(startupRemoved(Startup*)), this,
+           TQT_SLOT(startupRemoved(Startup*)) );
 
   themeConfMenu = new KPopupMenu( this);
   themeConfMenu -> setCheckable(true);
@@ -171,17 +171,17 @@ karamba::karamba(QString fn, QString name, bool reloading, int instance,
   toDesktopMenu -> setCheckable(true);
   mid = toDesktopMenu -> insertItem (i18n("&All Desktops"),
                                      dslot = new DesktopChangeSlot(this,0),
-                                     SLOT(receive()));
+                                     TQT_SLOT(receive()));
   dslot->setMenuId(mid);
 
   toDesktopMenu -> insertSeparator();
   for (int ndesktop=1; ndesktop <= kWinModule->numberOfDesktops(); ndesktop++)
   {
-    QString name = i18n("Desktop &");
+    TQString name = i18n("Desktop &");
     name += ('0' + ndesktop);
 
     mid = toDesktopMenu -> insertItem (name,
-        dslot = new DesktopChangeSlot(this, ndesktop), SLOT(receive()));
+        dslot = new DesktopChangeSlot(this, ndesktop), TQT_SLOT(receive()));
     dslot->setMenuId(mid);
   }
 
@@ -193,11 +193,11 @@ karamba::karamba(QString fn, QString name, bool reloading, int instance,
   menuAccColl = new KActionCollection( this );
 
   kpop->insertItem( SmallIconSet("reload"),i18n("Update"), this,
-                    SLOT(updateSensors()), Key_F5 );
+                    TQT_SLOT(updateSensors()), Key_F5 );
   toggleLocked = new KToggleAction (  i18n("Toggle &Locked Position"),
                                       SmallIconSet("locked"),
                                       CTRL+Key_L, this,
-                                      SLOT( slotToggleLocked() ),
+                                      TQT_SLOT( slotToggleLocked() ),
                                       accColl, "Locked position" );
   accColl->insert(toggleLocked);
   toggleLocked -> setChecked(true);
@@ -206,7 +206,7 @@ karamba::karamba(QString fn, QString name, bool reloading, int instance,
 
   toggleFastTransforms = new KToggleAction(i18n("Use &Fast Image Scaling"),
                          CTRL+Key_F, this,
-                         SLOT( slotToggleFastTransforms() ),
+                         TQT_SLOT( slotToggleFastTransforms() ),
                          accColl, "Fast transformations");
 
   accColl->insert(toggleFastTransforms);
@@ -221,9 +221,9 @@ karamba::karamba(QString fn, QString name, bool reloading, int instance,
   kpop->insertItem(i18n("To Des&ktop"), toDesktopMenu);
 
   kpop->insertItem( SmallIconSet("reload3"),i18n("&Reload Theme"),this,
-                    SLOT(reloadConfig()), CTRL+Key_R );
+                    TQT_SLOT(reloadConfig()), CTRL+Key_R );
   kpop->insertItem( SmallIconSet("fileclose"),i18n("&Close This Theme"), this,
-                    SLOT(killWidget()), CTRL+Key_C );
+                    TQT_SLOT(killWidget()), CTRL+Key_C );
 
   if(!SuperKarambaSettings::showSysTray())
     showMenuExtension();
@@ -239,14 +239,14 @@ karamba::karamba(QString fn, QString name, bool reloading, int instance,
   fixedPosition = false;
   defaultTextField = new TextField();
 
-  meterList = new QObjectList();
+  meterList = new TQObjectList();
   meterList->setAutoDelete( true );
-  sensorList = new QObjectList();
+  sensorList = new TQObjectList();
   sensorList->setAutoDelete( true );
-  clickList = new QObjectList();
-  timeList = new QObjectList();
-  imageList = new QObjectList();
-  menuList = new QObjectList();
+  clickList = new TQObjectList();
+  timeList = new TQObjectList();
+  imageList = new TQObjectList();
+  menuList = new TQObjectList();
   menuList->setAutoDelete( true );
 
   client = kapp->dcopClient();
@@ -262,12 +262,12 @@ karamba::karamba(QString fn, QString name, bool reloading, int instance,
   if( !parseConfig() )
   {
     setFixedSize(0,0);
-    QTimer::singleShot( 100, this, SLOT(killWidget()) );
+    TQTimer::singleShot( 100, this, TQT_SLOT(killWidget()) );
     qWarning("Could not read config file.");
   }
   else
   {
-    kroot = new KarambaRootPixmap((QWidget*)this);
+    kroot = new KarambaRootPixmap((TQWidget*)this);
     kroot->start();
   }
 
@@ -314,7 +314,7 @@ karamba::karamba(QString fn, QString name, bool reloading, int instance,
   this->setMouseTracking(true);
 
 
-  setFocusPolicy(QWidget::StrongFocus);
+  setFocusPolicy(TQWidget::StrongFocus);
 }
 
 karamba::~karamba()
@@ -378,14 +378,14 @@ bool karamba::parseConfig()
 
   if(m_theme.open())
   {
-    QValueStack<QPoint> offsetStack;
+    TQValueStack<TQPoint> offsetStack;
     LineParser lineParser;
     int x=0;
     int y=0;
     int w=0;
     int h=0;
 
-    offsetStack.push(QPoint(0,0));
+    offsetStack.push(TQPoint(0,0));
 
     while(m_theme.nextLine(lineParser))
     {
@@ -412,7 +412,7 @@ bool karamba::parseConfig()
 
         if(lineParser.getBoolean("RIGHT"))
         {
-          QDesktopWidget *d = QApplication::desktop();
+          TQDesktopWidget *d = TQApplication::desktop();
           x = d->width() - w;
         }
         else if(lineParser.getBoolean("LEFT"))
@@ -422,7 +422,7 @@ bool karamba::parseConfig()
 
         if(lineParser.getBoolean("BOTTOM"))
         {
-          QDesktopWidget *d = QApplication::desktop();
+          TQDesktopWidget *d = TQApplication::desktop();
           y = d->height() - h;
         }
         else if(lineParser.getBoolean("TOP"))
@@ -431,7 +431,7 @@ bool karamba::parseConfig()
         }
 
         move(x,y);
-        //pm = QPixmap(size());
+        //pm = TQPixmap(size());
 
         if(lineParser.getBoolean("ONTOP"))
         {
@@ -480,7 +480,7 @@ bool karamba::parseConfig()
 
         if(lineParser.getBoolean("BOTTOMBAR"))
         {
-          int dh = QApplication::desktop()->height();
+          int dh = TQApplication::desktop()->height();
           move( x, dh - h );
           KWin::setStrut( winId(), 0, 0, 0, h );
           toggleLocked->setChecked( true );
@@ -490,7 +490,7 @@ bool karamba::parseConfig()
 
         if(lineParser.getBoolean("RIGHTBAR"))
         {
-          int dw = QApplication::desktop()->width();
+          int dw = TQApplication::desktop()->width();
           move( dw - w, y );
           KWin::setStrut( winId(), 0, w, 0, 0 );
           toggleLocked->setChecked( true );
@@ -507,12 +507,12 @@ bool karamba::parseConfig()
           toggleLocked->setEnabled(false);
         }
 
-        QString path = lineParser.getString("MASK");
+        TQString path = lineParser.getString("MASK");
 
-        QFileInfo info(path);
-        QString absPath;
-        QBitmap bmMask;
-        QByteArray ba;
+        TQFileInfo info(path);
+        TQString absPath;
+        TQBitmap bmMask;
+        TQByteArray ba;
         if( info.isRelative() )
         {
           absPath.setAscii(m_theme.path().ascii());
@@ -537,25 +537,25 @@ bool karamba::parseConfig()
         m_interval = lineParser.getInt("INTERVAL");
         m_interval = (m_interval == 0) ? 1000 : m_interval;
 
-        QString temp = lineParser.getString("TEMPUNIT", "C").upper();
+        TQString temp = lineParser.getString("TEMPUNIT", "C").upper();
         tempUnit = temp.ascii()[0];
         foundKaramba = true;
       }
 
       if(lineParser.meter() == "THEME")
       {
-        QString path = lineParser.getString("PATH");
-        QFileInfo info(path);
+        TQString path = lineParser.getString("PATH");
+        TQFileInfo info(path);
         if( info.isRelative())
           path = m_theme.path() +"/" + path;
-        (new karamba( path, QString() ))->show();
+        (new karamba( path, TQString() ))->show();
       }
 
       if(lineParser.meter() == "<GROUP>")
       {
         int offsetX = offsetStack.top().x();
         int offsetY = offsetStack.top().y();
-        offsetStack.push( QPoint( offsetX + lineParser.getInt("X"),
+        offsetStack.push( TQPoint( offsetX + lineParser.getInt("X"),
                                   offsetY + lineParser.getInt("Y")));
       }
 
@@ -585,12 +585,12 @@ bool karamba::parseConfig()
 
       if(lineParser.meter() == "IMAGE")
       {
-        QString file = lineParser.getString("PATH");
-        QString file_roll = lineParser.getString("PATHROLL");
+        TQString file = lineParser.getString("PATH");
+        TQString file_roll = lineParser.getString("PATHROLL");
         int xon = lineParser.getInt("XROLL");
         int yon = lineParser.getInt("YROLL");
-        QString tiptext = lineParser.getString("TOOLTIP");
-        QString name = lineParser.getString("NAME");
+        TQString tiptext = lineParser.getString("TOOLTIP");
+        TQString name = lineParser.getString("NAME");
         bool bg = lineParser.getBoolean("BACKGROUND");
         xon = ( xon <= 0 ) ? x:xon;
         yon = ( yon <= 0 ) ? y:yon;
@@ -605,7 +605,7 @@ bool karamba::parseConfig()
         if (!tiptext.isEmpty())
           tmp->setTooltip(tiptext);
 
-        connect(tmp, SIGNAL(pixmapLoaded()), this, SLOT(externalStep()));
+        connect(tmp, TQT_SIGNAL(pixmapLoaded()), this, TQT_SLOT(externalStep()));
         setSensor(lineParser, (Meter*) tmp );
         meterList->append (tmp );
         imageList->append (tmp );
@@ -617,9 +617,9 @@ bool karamba::parseConfig()
         defaultTextField = new TextField( );
 
         defaultTextField->setColor(lineParser.getColor("COLOR",
-                                   QColor("black")));
+                                   TQColor("black")));
         defaultTextField->setBGColor(lineParser.getColor("BGCOLOR",
-                                     QColor("white")));
+                                     TQColor("white")));
         defaultTextField->setFont(lineParser.getString("FONT", "Helvetica"));
         defaultTextField->setFontSize(lineParser.getInt("FONTSIZE", 12));
         defaultTextField->setAlignment(lineParser.getString("ALIGN",
@@ -664,7 +664,7 @@ bool karamba::parseConfig()
           tmp->setValue(
               m_theme.locale()->translate(lineParser.getString("VALUE")));
 
-          QString name = lineParser.getString("NAME");
+          TQString name = lineParser.getString("NAME");
           if (!name.isEmpty())
             tmp->setName(name.ascii());
 
@@ -698,7 +698,7 @@ bool karamba::parseConfig()
           tmp->setWidth(w);
           tmp->setHeight(h);
 
-          QString name = lineParser.getString("NAME");
+          TQString name = lineParser.getString("NAME");
           if (!name.isEmpty())
             tmp->setName(name.ascii());
 
@@ -711,7 +711,7 @@ bool karamba::parseConfig()
         {
           Input *tmp = new Input(this, x, y, w, h);
 
-          QString name = lineParser.getString("NAME");
+          TQString name = lineParser.getString("NAME");
           if (!name.isEmpty())
             tmp->setName(name.ascii());
 
@@ -732,7 +732,7 @@ bool karamba::parseConfig()
         tmp->setMax(lineParser.getInt("MAX", 100));
         tmp->setMin(lineParser.getInt("MIN", 0));
         tmp->setValue(lineParser.getInt("VALUE"));
-        QString name = lineParser.getString("NAME");
+        TQString name = lineParser.getString("NAME");
         if (!name.isEmpty())
           tmp->setName(name.ascii());
         setSensor(lineParser, (Meter*)tmp );
@@ -746,7 +746,7 @@ bool karamba::parseConfig()
         Graph *tmp = new Graph(this, x, y, w, h, points);
         tmp->setMax(lineParser.getInt("MAX", 100));
         tmp->setMin(lineParser.getInt("MIN", 0));
-        QString name = lineParser.getString("NAME");
+        TQString name = lineParser.getString("NAME");
         if (!name.isEmpty())
           tmp->setName(name.ascii());
 
@@ -788,14 +788,14 @@ bool karamba::parseConfig()
 
 void karamba::start()
 {
-  m_sysTimer = new QTimer(this);
+  m_sysTimer = new TQTimer(this);
 
-  connect(m_sysTimer, SIGNAL(timeout()), SLOT(step()));
+  connect(m_sysTimer, TQT_SIGNAL(timeout()), TQT_SLOT(step()));
 
   m_sysTimer->start(m_interval);
 
     //Start the widget running
-  QTimer::singleShot( 0, this, SLOT(step()) );
+  TQTimer::singleShot( 0, this, TQT_SLOT(step()) );
 
   if( !(onTop || managed) )
     lowerTimer.start();
@@ -818,7 +818,7 @@ void karamba::makePassive()
   if(managed)
     return;
 
-  QObject *meter;
+  TQObject *meter;
   for (meter = meterList->first(); meter; meter = meterList->next())
   {
     if((meter)->isA("Input"))
@@ -847,7 +847,7 @@ void karamba::reloadConfig()
   writeConfigData();
   if(m_theme.exists())
   {
-    QFileInfo fileInfo( m_theme.file() );
+    TQFileInfo fileInfo( m_theme.file() );
     (new karamba(m_theme.file(), fileInfo.baseName(), true, m_instance))->show();
   }
   closeTheme(true);
@@ -872,8 +872,8 @@ void karamba::initPythonInterface()
 void karamba::editConfig()
 {
   //qDebug("karamba::editConfig");
-  QFileInfo fileInfo( m_theme.file() );
-  QString path;
+  TQFileInfo fileInfo( m_theme.file() );
+  TQString path;
 
   if( fileInfo.isRelative() )
   {
@@ -890,8 +890,8 @@ void karamba::editConfig()
 void karamba::editScript()
 {
   //qDebug("karamba::editScript");
-  QFileInfo fileInfo( m_theme.file() );
-  QString path;
+  TQFileInfo fileInfo( m_theme.file() );
+  TQString path;
 
   if( fileInfo.isRelative() )
   {
@@ -899,16 +899,16 @@ void karamba::editScript()
   }
   else
   {
-      path = QFileInfo(m_theme.file()).dirPath() + "/" + m_theme.name() + ".py";
+      path = TQFileInfo(m_theme.file()).dirPath() + "/" + m_theme.name() + ".py";
   }
   KRun::runURL( KURL( path ), "text/plain" );
 }
 
-QString karamba::findSensorFromMap(Sensor* sensor)
+TQString karamba::findSensorFromMap(Sensor* sensor)
 {
   //qDebug("karamba::findSensorFromMap");
-  QMap<QString,Sensor*>::ConstIterator it;
-  QMap<QString,Sensor*>::ConstIterator end( sensorMap.end() );
+  TQMap<TQString,Sensor*>::ConstIterator it;
+  TQMap<TQString,Sensor*>::ConstIterator end( sensorMap.end() );
   for ( it = sensorMap.begin(); it != end; ++it )
   {
     if (it.data() == sensor)
@@ -920,7 +920,7 @@ QString karamba::findSensorFromMap(Sensor* sensor)
 Sensor* karamba::findSensorFromList(Meter* meter)
 {
   //qDebug("karamba::findSensorFromList");
-  QObjectListIt it( *sensorList ); // iterate over meters
+  TQObjectListIt it( *sensorList ); // iterate over meters
 
   while ( it != 0 )
   {
@@ -931,10 +931,10 @@ Sensor* karamba::findSensorFromList(Meter* meter)
   return NULL;
 }
 
-QString karamba::getSensor(Meter* meter)
+TQString karamba::getSensor(Meter* meter)
 {
   //qDebug("karamba::getSensor");
-  QString s;
+  TQString s;
   Sensor* sensor = findSensorFromList(meter);
   if (sensor)
     s = findSensorFromMap(sensor);
@@ -951,7 +951,7 @@ void karamba::deleteMeterFromSensors(Meter* meter)
     sensor->deleteMeter(meter);
     if (sensor->isEmpty())
     {
-      QString s = findSensorFromMap(sensor);
+      TQString s = findSensorFromMap(sensor);
       sensorMap.erase(s);
       sensorList->removeRef(sensor);
     }
@@ -965,11 +965,11 @@ void karamba::setSensor(const LineParser& lineParser, Meter* meter)
 
   deleteMeterFromSensors(meter);
 
-  QString sens = lineParser.getString("SENSOR").upper();
+  TQString sens = lineParser.getString("SENSOR").upper();
 
   if( sens == "CPU" )
   {
-    QString cpuNbr = lineParser.getString("CPU");
+    TQString cpuNbr = lineParser.getString("CPU");
     sensor = sensorMap["CPU"+cpuNbr];
     if (sensor == 0)
     {
@@ -1015,12 +1015,12 @@ void karamba::setSensor(const LineParser& lineParser, Meter* meter)
       int interval = lineParser.getInt("INTERVAL");
       interval = (interval == 0)?5000:interval;
       sensor = ( sensorMap["DISK"] = new DiskSensor( interval ) );
-      connect( sensor, SIGNAL(initComplete()), this, SLOT(externalStep()) );
+      connect( sensor, TQT_SIGNAL(initComplete()), this, TQT_SLOT(externalStep()) );
       sensorList->append( sensor );
     }
     // meter->setMax( ((DiskSensor*)sensor)->getTotalSpace(mntPt)/1024 );
     SensorParams *sp = new SensorParams(meter);
-    QString mntPt = lineParser.getString("MOUNTPOINT");
+    TQString mntPt = lineParser.getString("MOUNTPOINT");
     if( mntPt.isEmpty()  )
     {
         mntPt = "/";
@@ -1042,7 +1042,7 @@ void karamba::setSensor(const LineParser& lineParser, Meter* meter)
   {
     int interval = lineParser.getInt("INTERVAL");
     interval = (interval == 0)?2000:interval;
-    QString device = lineParser.getString("DEVICE");
+    TQString device = lineParser.getString("DEVICE");
     sensor = sensorMap["NETWORK"+device];
     if (sensor == 0)
     {
@@ -1094,21 +1094,21 @@ void karamba::setSensor(const LineParser& lineParser, Meter* meter)
 
   if( sens == "TEXTFILE" )
   {
-    QString path = lineParser.getString("PATH");
+    TQString path = lineParser.getString("PATH");
     bool rdf = lineParser.getBoolean("RDF");
     sensor = sensorMap["TEXTFILE"+path];
     if (sensor == 0)
     {
       int interval = lineParser.getInt("INTERVAL");
       interval = ( interval == 0 )?60000:interval;
-      QString encoding = lineParser.getString("ENCODING");
+      TQString encoding = lineParser.getString("ENCODING");
 
       sensor = ( sensorMap["TEXTFILE"+path] =
                    new TextFileSensor( path, rdf, interval, encoding ) );
       sensorList->append( sensor );
     }
     SensorParams *sp = new SensorParams(meter);
-    sp->addParam("LINE",QString::number(lineParser.getInt("LINE")));
+    sp->addParam("LINE",TQString::number(lineParser.getInt("LINE")));
     sensor->addMeter(sp);
   }
 
@@ -1141,7 +1141,7 @@ void karamba::setSensor(const LineParser& lineParser, Meter* meter)
     {
       int interval = lineParser.getInt("INTERVAL");
       interval = (interval == 0)?1000:interval;
-      QString encoding = lineParser.getString("ENCODING");
+      TQString encoding = lineParser.getString("ENCODING");
 
       sensor = ( sensorMap["XMMS"] = new XMMSSensor( interval, encoding ) );
       sensorList->append( sensor );
@@ -1174,28 +1174,28 @@ void karamba::setSensor(const LineParser& lineParser, Meter* meter)
 
   if( sens == "PROGRAM")
   {
-    QString progName = lineParser.getString("PROGRAM");
+    TQString progName = lineParser.getString("PROGRAM");
     sensor = sensorMap["PROGRAM"+progName];
     if (sensor == 0)
     {
       int interval = lineParser.getInt("INTERVAL");
       interval = (interval == 0)?3600000:interval;
-      QString encoding = lineParser.getString("ENCODING");
+      TQString encoding = lineParser.getString("ENCODING");
 
       sensor = (sensorMap["PROGRAM"+progName] =
                   new ProgramSensor( progName, interval, encoding ) );
       sensorList->append( sensor );
     }
     SensorParams *sp = new SensorParams(meter);
-    sp->addParam( "LINE", QString::number(lineParser.getInt("LINE")));
+    sp->addParam( "LINE", TQString::number(lineParser.getInt("LINE")));
     sp->addParam( "THEMAPATH", m_theme.path() );
     sensor->addMeter(sp);
   }
 
   if( sens == "RSS" )
   {
-    QString source = lineParser.getString("SOURCE");
-    QString format =
+    TQString source = lineParser.getString("SOURCE");
+    TQString format =
         m_theme.locale()->translate(lineParser.getString("FORMAT").ascii());
 
     sensor = sensorMap["RSS"+source];
@@ -1203,7 +1203,7 @@ void karamba::setSensor(const LineParser& lineParser, Meter* meter)
     {
       int interval = lineParser.getInt( "INTERVAL");
       interval = ( interval == 0 )?60000:interval;
-      QString encoding = lineParser.getString("ENCODING");
+      TQString encoding = lineParser.getString("ENCODING");
 
       sensor = ( sensorMap["RSS"+source] =
                    new RssSensor( source, interval, format, encoding ) );
@@ -1216,39 +1216,39 @@ void karamba::setSensor(const LineParser& lineParser, Meter* meter)
 
   if (sensor != 0)
   {
-    QTimer::singleShot( 0, sensor, SLOT(update()) );
+    TQTimer::singleShot( 0, sensor, TQT_SLOT(update()) );
     sensor->start();
   }
 }
 
-void karamba::slotFileChanged( const QString & file)
+void karamba::slotFileChanged( const TQString & file)
 {
   //kdDebug() << "fileChanged: " << file << endl;
 
-  QString pythonFile = m_theme.path() + "/" + m_theme.pythonModule() + ".py";
+  TQString pythonFile = m_theme.path() + "/" + m_theme.pythonModule() + ".py";
 
   if(file == m_theme.file() || file == pythonFile)
     reloadConfig();
 }
 
-void karamba::passMenuOptionChanged(QString key, bool value)
+void karamba::passMenuOptionChanged(TQString key, bool value)
 {
   //Everything below is to call the python callback function
   if (pythonIface && pythonIface->isExtensionLoaded())
     pythonIface->menuOptionChanged(this, key, value);
 }
 
-void karamba::setIncomingData(QString theme, QString obj)
+void karamba::setIncomingData(TQString theme, TQString obj)
 {
   KarambaApplication* app = (KarambaApplication*)qApp;
 
   kdDebug() << "karamba::setIncomingData " << theme << obj << endl;
-   //QByteArray data;
-   //QDataStream dataStream( data, IO_WriteOnly );
+   //TQByteArray data;
+   //TQDataStream dataStream( data, IO_WriteOnly );
    //dataStream << theme;
    //dataStream << txt;
 
-   //kapp->dcopClient()->send( app->dcopClient()->appId(), "KarambaIface", "themeNotify(QString,QString)", data );
+   //kapp->dcopClient()->send( app->dcopClient()->appId(), "KarambaIface", "themeNotify(TQString,TQString)", data );
 
   DCOPClient *c = kapp->dcopClient();
   if (!c->isAttached())
@@ -1258,17 +1258,17 @@ void karamba::setIncomingData(QString theme, QString obj)
     app->dcopStub()->setIncomingData(theme, obj);
 }
 
-void karamba::callTheme(QString theme, QString txt)
+void karamba::callTheme(TQString theme, TQString txt)
 {
   KarambaApplication* app = (KarambaApplication*)qApp;
   kdDebug() << "karamba::callTheme " << theme << txt << endl;
   //qWarning("karamba::callTheme");
-   //QByteArray data;
-   //QDataStream dataStream( data, IO_WriteOnly );
+   //TQByteArray data;
+   //TQDataStream dataStream( data, IO_WriteOnly );
    //dataStream << theme;
    //dataStream << txt;
 
-   //kapp->dcopClient()->send( app->dcopClient()->appId(), "KarambaIface", "themeNotify(QString,QString)", data );
+   //kapp->dcopClient()->send( app->dcopClient()->appId(), "KarambaIface", "themeNotify(TQString,TQString)", data );
 
   DCOPClient *c = kapp->dcopClient();
   if (!c->isAttached())
@@ -1278,7 +1278,7 @@ void karamba::callTheme(QString theme, QString txt)
     app->dcopStub()->themeNotify(theme, txt);
 }
 
-void karamba::themeNotify(QString theme, QString txt)
+void karamba::themeNotify(TQString theme, TQString txt)
 {
   kdDebug() << "karamba::themeNotify" << theme << txt << endl;
   if (pythonIface->isExtensionLoaded())
@@ -1287,7 +1287,7 @@ void karamba::themeNotify(QString theme, QString txt)
   }
 }
 
-void karamba::meterClicked(QMouseEvent* e, Meter* meter)
+void karamba::meterClicked(TQMouseEvent* e, Meter* meter)
 {
   //qWarning("karamba::meterClicked");
   if (pythonIface && pythonIface->isExtensionLoaded() && haveUpdated)
@@ -1319,10 +1319,10 @@ void karamba::changeInterval(int interval)
     m_sysTimer->changeInterval(interval);
 }
 
-void karamba::passClick(QMouseEvent *e)
+void karamba::passClick(TQMouseEvent *e)
 {
   //qDebug("karamba::passClick");
-  QObjectListIt it2( *timeList ); // iterate over meters
+  TQObjectListIt it2( *timeList ); // iterate over meters
   while ( it2 != 0 )
   {
     (( DateSensor* ) *it2)->toggleCalendar( e );
@@ -1332,8 +1332,8 @@ void karamba::passClick(QMouseEvent *e)
 
   // We create a temporary click list here because original
   // can change during the loop (infinite loop Bug 994359)
-  QObjectList clickListTmp(*clickList);
-  QObjectListIt it(clickListTmp);
+  TQObjectList clickListTmp(*clickList);
+  TQObjectListIt it(clickListTmp);
   while (it != 0)
   {
     Meter* meter = (Meter*)(*it);
@@ -1362,7 +1362,7 @@ void karamba::passClick(QMouseEvent *e)
   }
 }
 
-void karamba::passWheelClick( QWheelEvent *e )
+void karamba::passWheelClick( TQWheelEvent *e )
 {
   //qDebug("karamba::passWheelClick");
   //Everything below is to call the python callback function
@@ -1379,10 +1379,10 @@ void karamba::passWheelClick( QWheelEvent *e )
     // can change during the loop (infinite loop Bug 994359)
     if (want_meter_wheel_event)
     {
-      QObjectList clickListTmp(*clickList);
-      QObjectListIt it(clickListTmp);
+      TQObjectList clickListTmp(*clickList);
+      TQObjectListIt it(clickListTmp);
 
-      QMouseEvent fakeEvent(QEvent::MouseButtonPress, e->pos(), e->globalPos(), button, e->state());
+      TQMouseEvent fakeEvent(TQEvent::MouseButtonPress, e->pos(), e->globalPos(), button, e->state());
 
       while (it != 0)
       {
@@ -1410,10 +1410,10 @@ void karamba::passWheelClick( QWheelEvent *e )
 
 void karamba::management_popup( void )
 {
-  kpop->popup(QCursor::pos());
+  kpop->popup(TQCursor::pos());
 }
 
-void karamba::mousePressEvent( QMouseEvent *e )
+void karamba::mousePressEvent( TQMouseEvent *e )
 {
   //qDebug("karamba::mousePressEvent");
   if( e->button() == RightButton && !want_right_button )
@@ -1430,19 +1430,19 @@ void karamba::mousePressEvent( QMouseEvent *e )
   }
 }
 
-void karamba::wheelEvent( QWheelEvent *e )
+void karamba::wheelEvent( TQWheelEvent *e )
 {
   //qDebug("karamba::wheelEvent");
   passWheelClick( e );
 }
 
-void karamba::mouseReleaseEvent( QMouseEvent *e )
+void karamba::mouseReleaseEvent( TQMouseEvent *e )
 {
   //qDebug("karamba::mouseReleaseEvent");
   clickPos = e->pos();
 }
 
-void karamba::mouseDoubleClickEvent( QMouseEvent *e )
+void karamba::mouseDoubleClickEvent( TQMouseEvent *e )
 {
   //qDebug("karamba::mouseDoubleClickEvent");
   if( !toggleLocked -> isChecked() )
@@ -1451,19 +1451,19 @@ void karamba::mouseDoubleClickEvent( QMouseEvent *e )
   }
 }
 
-void karamba::keyPressEvent(QKeyEvent *e)
+void karamba::keyPressEvent(TQKeyEvent *e)
 {
   //qDebug("karamba::keyPressEvent");
   keyPressed(e->text(), 0);
 }
 
-void karamba::keyPressed(const QString& s, const Meter* meter)
+void karamba::keyPressed(const TQString& s, const Meter* meter)
 {
   if (pythonIface && pythonIface->isExtensionLoaded())
     pythonIface->keyPressed(this, meter, s);
 }
 
-void karamba::mouseMoveEvent( QMouseEvent *e )
+void karamba::mouseMoveEvent( TQMouseEvent *e )
 {
   //qDebug("karamba::mouseMoveEvent");
   if( e->state() !=  0 && e->state() < 16 && !toggleLocked -> isChecked() )
@@ -1473,7 +1473,7 @@ void karamba::mouseMoveEvent( QMouseEvent *e )
   else
   {
     // Change cursor over ClickArea
-    QObjectListIt it(*clickList);
+    TQObjectListIt it(*clickList);
     bool insideArea = false;
 
     while (it != 0)
@@ -1497,7 +1497,7 @@ void karamba::mouseMoveEvent( QMouseEvent *e )
         setCursor( ArrowCursor );
     }
 
-    QObjectListIt image_it( *imageList);        // iterate over image sensors
+    TQObjectListIt image_it( *imageList);        // iterate over image sensors
     while ( image_it != 0 )
     {
       ((ImageLabel*) *image_it)->rolloverImage(e);
@@ -1526,7 +1526,7 @@ void karamba::mouseMoveEvent( QMouseEvent *e )
   }
 }
 
-void karamba::closeEvent ( QCloseEvent *  qc)
+void karamba::closeEvent ( TQCloseEvent *  qc)
 {
   //qDebug("karamba::closeEvent");
   qc->accept();
@@ -1534,7 +1534,7 @@ void karamba::closeEvent ( QCloseEvent *  qc)
   //  delete this;
 }
 
-void karamba::paintEvent ( QPaintEvent *e)
+void karamba::paintEvent ( TQPaintEvent *e)
 {
   //kdDebug() << k_funcinfo << pm.size() << endl;
   if(pm.width() == 0)
@@ -1547,20 +1547,20 @@ void karamba::paintEvent ( QPaintEvent *e)
       lowerTimer.restart();
     }
   }
-  QRect rect = e->rect();
+  TQRect rect = e->rect();
   bitBlt(this,rect.topLeft(),&pm,rect,Qt::CopyROP);
 }
 
 void karamba::updateSensors()
 {
   //qDebug("karamba::updateSensors");
-  QObjectListIt it( *sensorList ); // iterate over meters
+  TQObjectListIt it( *sensorList ); // iterate over meters
   while ( it != 0 )
   {
     ((Sensor*) *it)->update();
     ++it;
   }
-  QTimer::singleShot( 500, this, SLOT(step()) );
+  TQTimer::singleShot( 500, this, TQT_SLOT(step()) );
 }
 
 void karamba::updateBackground(KSharedPixmap* kpm)
@@ -1574,14 +1574,14 @@ void karamba::updateBackground(KSharedPixmap* kpm)
     themeStarted = true;
     start();
   }
-  background = QPixmap(*kpm);
+  background = TQPixmap(*kpm);
 
-  QPixmap buffer = QPixmap(size());
+  TQPixmap buffer = TQPixmap(size());
 
-  pm = QPixmap(size());
+  pm = TQPixmap(size());
   buffer.fill(Qt::black);
 
-  QObjectListIt it( *imageList ); // iterate over meters
+  TQObjectListIt it( *imageList ); // iterate over meters
   p.begin(&buffer);
   bitBlt(&buffer,0,0,&background,0,Qt::CopyROP);
 
@@ -1598,12 +1598,12 @@ void karamba::updateBackground(KSharedPixmap* kpm)
   bitBlt(&pm,0,0,&buffer,0,Qt::CopyROP);
   background = pm;
 
-  QPixmap buffer2 = QPixmap(size());
+  TQPixmap buffer2 = TQPixmap(size());
 
-  pm = QPixmap(size());
+  pm = TQPixmap(size());
   buffer2.fill(Qt::black);
 
-  QObjectListIt it2( *meterList ); // iterate over meters
+  TQObjectListIt it2( *meterList ); // iterate over meters
   p.begin(&buffer2);
   bitBlt(&buffer2,0,0,&background,0,Qt::CopyROP);
 
@@ -1643,12 +1643,12 @@ void karamba::externalStep()
   //kdDebug() << k_funcinfo << pm.size() << endl;
   if (widgetUpdate)
   {
-    QPixmap buffer = QPixmap(size());
+    TQPixmap buffer = TQPixmap(size());
 
-    pm = QPixmap(size());
+    pm = TQPixmap(size());
     buffer.fill(Qt::black);
 
-    QObjectListIt it( *meterList ); // iterate over meters
+    TQObjectListIt it( *meterList ); // iterate over meters
     p.begin(&buffer);
     bitBlt(&buffer,0,0,&background,0,Qt::CopyROP);
 
@@ -1669,11 +1669,11 @@ void karamba::step()
   //kdDebug() << k_funcinfo << pm.size() << endl;
   if (widgetUpdate && haveUpdated)
   {
-    pm = QPixmap(size());
-    QPixmap buffer = QPixmap(size());
+    pm = TQPixmap(size());
+    TQPixmap buffer = TQPixmap(size());
     buffer.fill(Qt::black);
 
-    QObjectListIt it( *meterList ); // iterate over meters
+    TQObjectListIt it( *meterList ); // iterate over meters
     p.begin(&buffer);
 
     bitBlt(&buffer,0,0,&background,0,Qt::CopyROP);
@@ -1731,7 +1731,7 @@ void karamba::slotToggleFastTransforms()
   //    }
   //    else
   //    {
-  //     QPixmap ok_disabled;
+  //     TQPixmap ok_disabled;
   //            toggleFastTransforms -> setIconSet(ok_disabled);
   //    }
   //config.setGroup("internal");
@@ -1766,7 +1766,7 @@ void karamba::writeConfigData()
   //         m_theme.name().ascii());
 }
 
-void karamba::slotToggleConfigOption(QString key, bool value)
+void karamba::slotToggleConfigOption(TQString key, bool value)
 {
   //qDebug("karamba::slotToggleConfigOption");
   config -> setGroup("config menu");
@@ -1774,21 +1774,21 @@ void karamba::slotToggleConfigOption(QString key, bool value)
   passMenuOptionChanged(key, value);
 }
 
-void karamba::addMenuConfigOption(QString key, QString name)
+void karamba::addMenuConfigOption(TQString key, TQString name)
 {
   //qDebug("karamba::addMenuConfigOption");
   kpop -> setItemEnabled(THEMECONF, true);
 
   SignalBridge* action = new SignalBridge(this, key, menuAccColl);
   KToggleAction* confItem = new KToggleAction (name, KShortcut::null(),
-                                               action, SLOT(receive()),
+                                               action, TQT_SLOT(receive()),
                                                menuAccColl, key.ascii());
   confItem -> setName(key.ascii());
 
   menuAccColl -> insert(confItem);
 
-  connect(action, SIGNAL( enabled(QString, bool) ),
-          this, SLOT( slotToggleConfigOption(QString, bool) ));
+  connect(action, TQT_SIGNAL( enabled(TQString, bool) ),
+          this, TQT_SLOT( slotToggleConfigOption(TQString, bool) ));
 
   config -> setGroup("config menu");
   confItem -> setChecked(config -> readBoolEntry(key));
@@ -1798,7 +1798,7 @@ void karamba::addMenuConfigOption(QString key, QString name)
   numberOfConfMenuItems++;
 }
 
-bool karamba::setMenuConfigOption(QString key, bool value)
+bool karamba::setMenuConfigOption(TQString key, bool value)
 {
   //qDebug("karamba::setMenuConfigOption");
   KToggleAction* menuAction = ((KToggleAction*)menuAccColl -> action(key.ascii()));
@@ -1814,7 +1814,7 @@ bool karamba::setMenuConfigOption(QString key, bool value)
   }
 }
 
-bool karamba::readMenuConfigOption(QString key)
+bool karamba::readMenuConfigOption(TQString key)
 {
   //qDebug("karamba::readMenuConfigOption");
   KToggleAction* menuAction = ((KToggleAction*)menuAccColl -> action(key.ascii()));
@@ -1929,28 +1929,28 @@ void karamba::readProperties(KConfig* config)
 {
   //qDebug("karamba::readProperties");
   config->setGroup("session");
-  QString atheme = config->readEntry("theme");
+  TQString atheme = config->readEntry("theme");
 }
 
 //Register types of events that can be dragged on our widget
-void karamba::dragEnterEvent(QDragEnterEvent* event)
+void karamba::dragEnterEvent(TQDragEnterEvent* event)
 {
   //qDebug("karamba::dragEnterEvent");
-  event->accept(QTextDrag::canDecode(event));
+  event->accept(TQTextDrag::canDecode(event));
 }
 
 //Handle the drop part of a drag and drop event.
-void karamba::dropEvent(QDropEvent* event)
+void karamba::dropEvent(TQDropEvent* event)
 {
   //qDebug("karamba::dropEvent");
-  QString text;
+  TQString text;
 
-  if ( QTextDrag::decode(event, text) )
+  if ( TQTextDrag::decode(event, text) )
   {
     //Everything below is to call the python callback function
     if (pythonIface && pythonIface->isExtensionLoaded())
     {
-      const QPoint &p = event->pos();
+      const TQPoint &p = event->pos();
       pythonIface->itemDropped(this, text, p.x(), p.y());
     }
   }
@@ -1992,8 +1992,8 @@ void karamba::toggleWidgetUpdate( bool b)
     widgetUpdate = b;
 }
 
-SignalBridge::SignalBridge(QObject* parent, QString name, KActionCollection* ac)
-  : QObject(parent, name.ascii()), collection(ac)
+SignalBridge::SignalBridge(TQObject* parent, TQString name, KActionCollection* ac)
+  : TQObject(parent, name.ascii()), collection(ac)
 {
   setName(name.ascii());
 }
@@ -2004,8 +2004,8 @@ void SignalBridge::receive()
 isChecked());
 }
 
-DesktopChangeSlot::DesktopChangeSlot(QObject *parent, int id)
-    : QObject(parent, "")
+DesktopChangeSlot::DesktopChangeSlot(TQObject *parent, int id)
+    : TQObject(parent, "")
 {
   desktopid = id;
 }
@@ -2035,16 +2035,16 @@ void karamba::showMenuExtension()
 
   trayMenuToggleId = kglobal->insertItem(SmallIconSet("superkaramba"),
                                          i18n("Show System Tray Icon"), this,
-                                         SLOT(slotToggleSystemTray()),
+                                         TQT_SLOT(slotToggleSystemTray()),
                                          CTRL+Key_S);
 
   trayMenuThemeId = kglobal->insertItem(SmallIconSet("knewstuff"),
                                         i18n("&Manage Themes..."), this,
-                                        SLOT(slotShowTheme()), CTRL+Key_M);
+                                        TQT_SLOT(slotShowTheme()), CTRL+Key_M);
 
   trayMenuQuitId = kglobal->insertItem(SmallIconSet("exit"),
                                        i18n("&Quit SuperKaramba"), this,
-                                       SLOT(slotQuit()), CTRL+Key_Q);
+                                       TQT_SLOT(slotQuit()), CTRL+Key_Q);
 
   kglobal->polish();
 

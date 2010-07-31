@@ -24,8 +24,8 @@
 #ifndef _KEDIT_H_
 #define _KEDIT_H_
 
-#include <qtextcodec.h>
-#include <qptrdict.h>
+#include <tqtextcodec.h>
+#include <tqptrdict.h>
 
 #include "version.h"
 
@@ -61,7 +61,7 @@ public:
 	   OPEN_INSERT 		= 4,
 	   OPEN_NEW             = 8 };
 
-    TopLevel( QWidget *parent=0, const char *name=0 );
+    TopLevel( TQWidget *parent=0, const char *name=0 );
     ~TopLevel();
 
     /**
@@ -69,14 +69,14 @@ public:
      *
      * @return KEDIT_OK on success
      */
-    int openFile( const QString& _filename, int _mode, const QString &encoding, bool _undoAction = false );
+    int openFile( const TQString& _filename, int _mode, const TQString &encoding, bool _undoAction = false );
 
     /**
      * Saves the edit widget to a file.
      *
      * @return KEDIT_OK on success
      */
-    int saveFile( const QString& _filename, bool backup, const QString &encoding);
+    int saveFile( const TQString& _filename, bool backup, const TQString &encoding);
 
     /**
      * Works like openFile but is able to open remote files
@@ -102,8 +102,8 @@ public:
     void setUrl(const KURL &url) { m_url = url; }
 
     /// List of all windows
-    static QPtrList<TopLevel> *windowList;
-    //QPopupMenu *right_mouse_button;
+    static TQPtrList<TopLevel> *windowList;
+    //TQPopupMenu *right_mouse_button;
 
     bool queryExit( void );
     bool queryClose( void );
@@ -122,11 +122,11 @@ public:  // Should not be!
     KEdit *eframe;
 private:
     KURL m_url;
-    QString m_caption;
+    TQString m_caption;
 
     bool newWindow;
     int statusID, toolID, indentID;
-    QTimer *statusbar_timer;
+    TQTimer *statusbar_timer;
     KRecentFilesAction *recent;
     KAction *cutAction;
     KAction *copyAction;
@@ -143,9 +143,9 @@ private:
      * The source, the destination of the copy, and the open mode
      * for each job being run (job ptr is the dict key).
      */
-    QPtrDict <QString> m_sNet;
-    QPtrDict <QString> m_sLocal;
-    QPtrDict <int> m_openMode;
+    TQPtrDict <TQString> m_sNet;
+    TQPtrDict <TQString> m_sLocal;
+    TQPtrDict <int> m_openMode;
 
     // Session management
     void saveProperties(KConfig*);
@@ -155,7 +155,7 @@ public slots:
     void openRecent(const KURL&);
     void gotoLine();
     void mail();
-    void setGeneralStatusField(const QString &string);
+    void setGeneralStatusField(const TQString &string);
     void undo();
     void redo();
     void copy();
@@ -183,31 +183,31 @@ public slots:
     void spellcheck();
     void spell_started ( KSpell *);
     void spell_progress (unsigned int percent);
-    void spell_done(const QString&);
+    void spell_done(const TQString&);
     void spell_finished();
 
-    void urlDrop_slot(QDropEvent* e);
+    void urlDrop_slot(TQDropEvent* e);
 
     void set_colors();
 
 protected:
     /// Drag and Drop
-    void dragEnterEvent(QDragEnterEvent* e);
-    void dropEvent(QDropEvent* e);
+    void dragEnterEvent(TQDragEnterEvent* e);
+    void dropEvent(TQDropEvent* e);
 
 private slots:
     void updateSettings();
     void readSettings();
     void showSettings();
     void slotSelectionChanged();
-    QString replaceISpell(QString msg, int client);
+    TQString replaceISpell(TQString msg, int client);
 };
 
 class SettingsDialog: public KConfigDialog {
 Q_OBJECT
 
 public:
-  SettingsDialog(QWidget *parent, const char *name,KConfigSkeleton *config, KSpellConfig *_spellConfig);
+  SettingsDialog(TQWidget *parent, const char *name,KConfigSkeleton *config, KSpellConfig *_spellConfig);
   
 protected slots:
   void updateSettings();

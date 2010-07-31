@@ -10,11 +10,11 @@
 #ifndef DISKSENSOR_H
 #define DISKSENSOR_H
 #include "sensor.h"
-#include <qmap.h>
-#include <qstring.h>
-#include <qtextcodec.h>
-#include <qregexp.h>
-#include <qstringlist.h>
+#include <tqmap.h>
+#include <tqstring.h>
+#include <tqtextcodec.h>
+#include <tqregexp.h>
+#include <tqstringlist.h>
 #include <kprocess.h>
 class DiskSensor :  public Sensor
 {
@@ -26,17 +26,17 @@ public:
   void setMaxValue( SensorParams *sp );
 
 private:
-  long getFreeSpace(QString mntPt) const;
-  long getUsedSpace(QString mntPt) const;
-  long getTotalSpace(QString mntPt) const;
-  int getPercentUsed(QString mntPt) const;
-  int getPercentFree(QString mntPt) const;
+  long getFreeSpace(TQString mntPt) const;
+  long getUsedSpace(TQString mntPt) const;
+  long getTotalSpace(TQString mntPt) const;
+  int getPercentUsed(TQString mntPt) const;
+  int getPercentFree(TQString mntPt) const;
 
   KShellProcess ksp;
-  QString sensorResult;
+  TQString sensorResult;
 
-  QMap<QString,QString> mntMap;
-  QStringList stringList;
+  TQMap<TQString,TQString> mntMap;
+  TQStringList stringList;
 
   int init;
 

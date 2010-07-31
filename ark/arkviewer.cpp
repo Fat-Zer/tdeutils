@@ -29,20 +29,20 @@
 #include <kglobal.h>
 #include <kiconloader.h>
 
-#include <qvbox.h>
-#include <qlayout.h>
-#include <qlabel.h>
-#include <qframe.h>
-#include <qurl.h>
+#include <tqvbox.h>
+#include <tqlayout.h>
+#include <tqlabel.h>
+#include <tqframe.h>
+#include <tqurl.h>
 
 
-ArkViewer::ArkViewer( QWidget * parent, const char * name )
-	: KDialogBase( parent, name, false, QString::null, Close ), m_part( 0 )
+ArkViewer::ArkViewer( TQWidget * parent, const char * name )
+	: KDialogBase( parent, name, false, TQString::null, Close ), m_part( 0 )
 {
-	m_widget = new QVBox( this );
+	m_widget = new TQVBox( this );
 	m_widget->layout()->setSpacing( 10 );
 
-	connect( this, SIGNAL( finished() ), this, SLOT( slotFinished() ) );
+	connect( this, TQT_SIGNAL( finished() ), this, TQT_SLOT( slotFinished() ) );
 
 	setMainWidget( m_widget );
 }
@@ -65,28 +65,28 @@ bool ArkViewer::view( const KURL& filename )
 
 	setCaption( filename.fileName() );
 
-	QSize size = configDialogSize( "ArkViewer" );
+	TQSize size = configDialogSize( "ArkViewer" );
 	if (size.width() < 200)
-		size = QSize(560, 400);
+		size = TQSize(560, 400);
 	setInitialSize( size );
 
-	QFrame *header = new QFrame( m_widget );
-	QHBoxLayout *headerLayout = new QHBoxLayout( header );
+	TQFrame *header = new TQFrame( m_widget );
+	TQHBoxLayout *headerLayout = new TQHBoxLayout( header );
 	headerLayout->setAutoAdd( true );
 
-	QLabel *iconLabel = new QLabel( header );
+	TQLabel *iconLabel = new TQLabel( header );
 	iconLabel->setPixmap( mimetype->pixmap( KIcon::Desktop ) );
-	iconLabel->setSizePolicy( QSizePolicy::Fixed, QSizePolicy::Minimum );
+	iconLabel->setSizePolicy( TQSizePolicy::Fixed, TQSizePolicy::Minimum );
 
-	QVBox *headerRight = new QVBox( header );
-	new QLabel( QString( "<qt><b>%1</b></qt>" )
+	TQVBox *headerRight = new TQVBox( header );
+	new TQLabel( TQString( "<qt><b>%1</b></qt>" )
 	                     .arg( filename.fileName() ), headerRight
 	          );
-	new QLabel( mimetype->comment(), headerRight );
+	new TQLabel( mimetype->comment(), headerRight );
 
-	header->setSizePolicy( QSizePolicy::Expanding, QSizePolicy::Maximum );
+	header->setSizePolicy( TQSizePolicy::Expanding, TQSizePolicy::Maximum );
 
-	m_part = KParts::ComponentFactory::createPartInstanceFromQuery<KParts::ReadOnlyPart>( mimetype->name(), QString::null, m_widget, 0, this );
+	m_part = KParts::ComponentFactory::createPartInstanceFromQuery<KParts::ReadOnlyPart>( mimetype->name(), TQString::null, m_widget, 0, this );
 
 	if ( m_part )
 	{

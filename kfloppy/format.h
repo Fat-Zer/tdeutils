@@ -54,7 +54,7 @@
 */
 
 #include "debug.h"
-#include <qobject.h>
+#include <tqobject.h>
 
 /**
  * \brief Abstract base class of actions to be undertaken.
@@ -68,7 +68,7 @@ class KFAction : public QObject
 Q_OBJECT
 
 public:
-	KFAction(QObject *parent = 0L);
+	KFAction(TQObject *parent = 0L);
 	virtual ~KFAction();
 	
 public slots:
@@ -99,12 +99,12 @@ signals:
 	 * indicates the action's progress (if that can be determined)
 	 * and sending -1 leaves the visible indicator unchanged.
 	 */
-	void status(const QString &msg, int progress);
+	void status(const TQString &msg, int progress);
 
         /** error() displays a box. It interrupts
 	 * the user's work and should be used with care.
 	 */
-	void error(const QString &msg, const QString &details);
+	void error(const TQString &msg, const TQString &details);
 } ;
 
 
@@ -117,7 +117,7 @@ class KFActionQueue : public KFAction
 Q_OBJECT
 
 public:
-	KFActionQueue(QObject *parent = 0L);
+	KFActionQueue(TQObject *parent = 0L);
 	virtual ~KFActionQueue();
 	
 	/**
@@ -176,7 +176,7 @@ class FloppyAction : public KFAction
 Q_OBJECT
 
 public:
-	FloppyAction(QObject *parent = 0L);
+	FloppyAction(TQObject *parent = 0L);
 	
 	/**
 	 * Kills the running process, if one exists.
@@ -206,11 +206,11 @@ public:
          *
          * \note It does not work for each type of FloppyAction yet
          */
-        bool configureDevice( const QString& newDeviceName );
+        bool configureDevice( const TQString& newDeviceName );
         
 protected:
 	fdinfo *deviceInfo;      ///< Configuration info (Pointer into list of "/dev/..." entries)
-	QString deviceName;  ///< Name of the device
+	TQString deviceName;  ///< Name of the device
 
 protected slots:
         /**
@@ -232,7 +232,7 @@ protected slots:
 	
 protected:
 	KProcess *theProcess;
-	QString theProcessName;  ///< human-readable
+	TQString theProcessName;  ///< human-readable
 
 	/**
 	 * Sets up connections, calls KProcess::run().
@@ -249,7 +249,7 @@ protected:
 class FDFormat : public FloppyAction
 {
 public:
-	FDFormat(QObject *parent = 0L);
+	FDFormat(TQObject *parent = 0L);
 	
 	virtual void exec();
 
@@ -273,7 +273,7 @@ public:
 	virtual void processStdOut(KProcess *, char *,int);
 
 protected:
-	static QString fdformatName;    ///< path to executable.
+	static TQString fdformatName;    ///< path to executable.
 	int formatTrackCount;    ///< How many tracks formatted.
 	bool doVerify;
 } ;
@@ -285,7 +285,7 @@ protected:
 class DDZeroOut : public FloppyAction
 {
 public:
-    DDZeroOut(QObject *parent = 0L);
+    DDZeroOut(TQObject *parent = 0L);
 
     virtual void exec();
 
@@ -305,7 +305,7 @@ protected:
      */
     virtual void processDone(KProcess *);
 protected:
-    static QString m_ddName;    ///< path to executable.
+    static TQString m_ddName;    ///< path to executable.
 } ;
 
 
@@ -315,7 +315,7 @@ protected:
 class FATFilesystem : public FloppyAction
 {
 public:
-	FATFilesystem(QObject *parent = 0L);
+	FATFilesystem(TQObject *parent = 0L);
 	
 	virtual void exec();
 	
@@ -327,16 +327,16 @@ public:
 	 * verify with @p verify. Disks can be labeled (@p label) with the
 	 * remaining parameters (@p l).
 	 */	
-	bool configure(bool verify, bool label, const QString &l);
+	bool configure(bool verify, bool label, const TQString &l);
 	
         /// Parse output
         virtual void processStdOut(KProcess*, char* b, int l);
         
 protected:
-	static QString newfs_fat;
+	static TQString newfs_fat;
 	
 	bool doVerify,doLabel;
-	QString label;
+	TQString label;
 	
 } ;
 
@@ -346,23 +346,23 @@ protected:
 class Ext2Filesystem : public FloppyAction
 {
 public:
-	Ext2Filesystem(QObject *parent = 0L);
+	Ext2Filesystem(TQObject *parent = 0L);
 	
 	virtual void exec();
 	
 	static bool runtimeCheck();
 	
 	/// Same args as FATFilesystem::configure
-	bool configure(bool verify, bool label, const QString &l);
+	bool configure(bool verify, bool label, const TQString &l);
 
         /// Parse output
         virtual void processStdOut(KProcess*, char* b, int l);
 	
 protected:
-	static QString newfs;
+	static TQString newfs;
 	
 	bool doVerify,doLabel;
-	QString label;
+	TQString label;
 } ;
 
 #ifdef ANY_BSD
@@ -374,17 +374,17 @@ protected:
 class UFSFilesystem : public FloppyAction
 {
 public:
-	UFSFilesystem(QObject *parent = 0L);
+	UFSFilesystem(TQObject *parent = 0L);
 	
 	virtual void exec();
 	
 	static bool runtimeCheck();
 	
 protected:
-	static QString newfs;
+	static TQString newfs;
 	
 	bool doVerify,doLabel;
-	QString label;
+	TQString label;
 } ;
 #endif
 
@@ -396,22 +396,22 @@ protected:
 class MinixFilesystem : public FloppyAction
 {
 public:
-	MinixFilesystem(QObject *parent = 0L);
+	MinixFilesystem(TQObject *parent = 0L);
 	
 	virtual void exec();
 	
 	static bool runtimeCheck();
 	
 	/// Same args as FATFilesystem::configure
-	bool configure(bool verify, bool label, const QString &l);
+	bool configure(bool verify, bool label, const TQString &l);
         
         /// Parse output
         virtual void processStdOut(KProcess*, char* b, int l);
 protected:
-	static QString newfs;
+	static TQString newfs;
 	
 	bool doVerify,doLabel;
-	QString label;
+	TQString label;
 } ;
 #endif
 
@@ -420,7 +420,7 @@ protected:
  * and in /sbin and /usr/sbin.
  */
 
-QString findExecutable(const QString &);
+TQString findExecutable(const TQString &);
 
 #endif
 

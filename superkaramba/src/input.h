@@ -24,12 +24,12 @@
 #include <meter.h>
 #include <sklineedit.h>
 
-#include <qpainter.h>
-#include <qcolor.h>
-#include <qlineedit.h>
-#include <qwidget.h>
-#include <qstring.h>
-#include <qfont.h>
+#include <tqpainter.h>
+#include <tqcolor.h>
+#include <tqlineedit.h>
+#include <tqwidget.h>
+#include <tqstring.h>
+#include <tqfont.h>
 
 #include "textfield.h"
 
@@ -42,21 +42,21 @@ public:
 
   ~Input();
 
-  void mUpdate(QPainter *p);
+  void mUpdate(TQPainter *p);
 
-  void setValue(QString text);
-  QString getStringValue() const;
+  void setValue(TQString text);
+  TQString getStringValue() const;
 
-  void setBGColor(QColor c);
-  QColor getBGColor() const;
-  void setColor(QColor c);
-  QColor getColor() const;
-  void setFontColor(QColor fontColor);
-  QColor getFontColor() const;
-  void setSelectionColor(QColor selectionColor);
-  QColor getSelectionColor() const;
-  void setSelectedTextColor(QColor selectedTextColor);
-  QColor getSelectedTextColor() const;
+  void setBGColor(TQColor c);
+  TQColor getBGColor() const;
+  void setColor(TQColor c);
+  TQColor getColor() const;
+  void setFontColor(TQColor fontColor);
+  TQColor getFontColor() const;
+  void setSelectionColor(TQColor selectionColor);
+  TQColor getSelectionColor() const;
+  void setSelectedTextColor(TQColor selectedTextColor);
+  TQColor getSelectedTextColor() const;
   void setTextProps(TextField*);
 
   void hide();
@@ -68,8 +68,8 @@ public:
   void setWidth(int iw);
   void setHeight(int ih);
 
-  void setFont(QString f);
-  QString getFont() const;
+  void setFont(TQString f);
+  TQString getFont() const;
   void setFontSize(int size);
   int getFontSize() const;
   
@@ -78,7 +78,7 @@ public:
 
 private:
   SKLineEdit *edit;
-  QFont font;
+  TQFont font;
 };
 
 #endif

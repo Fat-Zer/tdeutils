@@ -27,27 +27,27 @@
 @author See README for the list of authors
 */
 
-#include <qstring.h>
-#include <qcolor.h>
+#include <tqstring.h>
+#include <tqcolor.h>
 
 class LineParser
 {
   public:
-    LineParser(const QString& line = QString::null);
+    LineParser(const TQString& line = TQString::null);
     ~LineParser();
 
-    void set(const QString& line);
+    void set(const TQString& line);
 
-    int getInt(QString w, int def = 0) const;
-    QColor getColor(QString w, QColor def = QColor()) const;
-    QString getString(QString w, QString def = QString()) const;
-    bool getBoolean(QString w, bool def = false) const;
+    int getInt(TQString w, int def = 0) const;
+    TQColor getColor(TQString w, TQColor def = TQColor()) const;
+    TQString getString(TQString w, TQString def = TQString()) const;
+    bool getBoolean(TQString w, bool def = false) const;
 
-    const QString& meter() const { return m_meter; };
+    const TQString& meter() const { return m_meter; };
 
   private:
-    QString m_line;
-    QString m_meter;
+    TQString m_line;
+    TQString m_meter;
 };
 
 #endif

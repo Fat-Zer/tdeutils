@@ -20,8 +20,8 @@
 #ifndef KSIMVIEW_H
 #define KSIMVIEW_H
 
-#include <qwidget.h>
-#include <qtimer.h>
+#include <tqwidget.h>
+#include <tqtimer.h>
 
 #include <dcopobject.h>
 
@@ -46,7 +46,7 @@ namespace KSim
   class ConfigDialog;
   class ChangedPluginList;
 
-  class KDE_EXPORT MainView : public QWidget, virtual public DCOPObject
+  class KDE_EXPORT MainView : public TQWidget, virtual public DCOPObject
   {
     Q_OBJECT
     K_DCOP
@@ -62,11 +62,11 @@ namespace KSim
       KSim::Config *config() const;
       void makeDirs();
 
-      QSize sizeHint(KPanelExtension::Position, QSize maxSize) const;
+      TQSize sizeHint(KPanelExtension::Position, TQSize maxSize) const;
       void positionChange(KPanelExtension::Orientation);
 
     k_dcop:
-      const QString &hostname() const;
+      const TQString &hostname() const;
       virtual void maskMainView();
 
     signals:
@@ -78,13 +78,13 @@ namespace KSim
       void addPlugin(const KDesktopFile &, bool force = false);
       void removePlugin(const KDesktopFile &);
       void addMonitor(const KSim::Plugin &);
-      void runCommand(const QCString &);
+      void runCommand(const TQCString &);
       void preferences();
       void slotMaskMainView();
 
     protected:
-      virtual void resizeEvent(QResizeEvent *);
-      virtual void paletteChange(const QPalette &);
+      virtual void resizeEvent(TQResizeEvent *);
+      virtual void paletteChange(const TQPalette &);
 
     private slots:
       void destroyPref();
@@ -101,12 +101,12 @@ namespace KSim
       KSim::PanelExtension *m_topLevel;
       KSim::Config *m_config;
       KSim::ConfigDialog *m_prefDialog;
-      QHBoxLayout *m_sizeLayout;
-      QVBoxLayout *m_subLayout;
-      QBoxLayout *m_pluginLayout;
-      QPoint m_mousePoint;
+      TQHBoxLayout *m_sizeLayout;
+      TQVBoxLayout *m_subLayout;
+      TQBoxLayout *m_pluginLayout;
+      TQPoint m_mousePoint;
       int m_oldLocation;
-      QTimer m_maskTimer;
+      TQTimer m_maskTimer;
   };
 }
 #endif // KSIMVIEW_H

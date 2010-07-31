@@ -26,7 +26,7 @@
 #define __ACPICONFIG_H__
 
 #include <kcmodule.h>
-#include <qstring.h>
+#include <tqstring.h>
 
 class QWidget;
 class QSpinBox;
@@ -41,7 +41,7 @@ class AcpiConfig : public KCModule
 {
   Q_OBJECT
 public:
-  AcpiConfig( QWidget *parent=0, const char* name=0);
+  AcpiConfig( TQWidget *parent=0, const char* name=0);
   ~AcpiConfig( );     
 
   void save( void );
@@ -49,7 +49,7 @@ public:
   void load( bool useDefaults );
   void defaults();
 
-  virtual QString quickHelp() const;
+  virtual TQString quickHelp() const;
 
 private slots:
 
@@ -59,12 +59,12 @@ private slots:
 private:
   KConfig *config;
 
-  QCheckBox *enableHibernate;
-  QCheckBox *enableSuspend;
-  QCheckBox *enableStandby;
-  QCheckBox *enablePerformance;
-  QCheckBox *enableThrottle;
-  QCheckBox *enableSoftwareSuspendHibernate;
+  TQCheckBox *enableHibernate;
+  TQCheckBox *enableSuspend;
+  TQCheckBox *enableStandby;
+  TQCheckBox *enablePerformance;
+  TQCheckBox *enableThrottle;
+  TQCheckBox *enableSoftwareSuspendHibernate;
   bool enablestandby, enablesuspend, enablehibernate, enableperformance, enablethrottle, enablesoftwaresuspend;
 };
 

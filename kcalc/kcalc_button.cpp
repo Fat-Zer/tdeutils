@@ -20,32 +20,32 @@
 
 */
 
-#include <qsimplerichtext.h>
-#include <qtooltip.h>
-#include <qpainter.h>
+#include <tqsimplerichtext.h>
+#include <tqtooltip.h>
+#include <tqpainter.h>
 
 
-#include "qdom.h"
+#include "tqdom.h"
 
 #include "kcalc_button.h"
 
 
-KCalcButton::KCalcButton(QWidget * parent, const char * name)
+KCalcButton::KCalcButton(TQWidget * parent, const char * name)
   : KPushButton(parent, name), _show_accel_mode(false),
     _mode_flags(ModeNormal)
 {
   setAutoDefault(false);
 }
 
-KCalcButton::KCalcButton(const QString &label, QWidget * parent,
-			 const char * name, const QString &tooltip)
+KCalcButton::KCalcButton(const TQString &label, TQWidget * parent,
+			 const char * name, const TQString &tooltip)
   : KPushButton(label, parent, name), _show_accel_mode(false), _mode_flags(ModeNormal)
 {
   setAutoDefault(false);
   addMode(ModeNormal, label, tooltip);
 }
 
-void KCalcButton::addMode(ButtonModeFlags mode, QString label, QString tooltip, bool is_label_richtext)
+void KCalcButton::addMode(ButtonModeFlags mode, TQString label, TQString tooltip, bool is_label_richtext)
 {
   if (_mode.contains(mode)) _mode.remove(mode);
 
@@ -69,14 +69,14 @@ void KCalcButton::slotSetMode(ButtonModeFlags mode, bool flag)
 
   if (_mode.contains(new_mode)) {
     // save accel, because setting label erases accel
-    QKeySequence _accel = accel();
+    TQKeySequence _accel = accel();
 
     if(_mode[new_mode].is_label_richtext)
       _label = _mode[new_mode].label;
     else
       setText(_mode[new_mode].label);
-	QToolTip::remove(this);
-    QToolTip::add(this, _mode[new_mode].tooltip);
+	TQToolTip::remove(this);
+    TQToolTip::add(this, _mode[new_mode].tooltip);
     _mode_flags = new_mode;
 
     // restore accel
@@ -90,7 +90,7 @@ void KCalcButton::slotSetMode(ButtonModeFlags mode, bool flag)
   update();
 }
 
-static QString escape(QString str)
+static TQString escape(TQString str)
 {
   str.replace('&', "&&");
   return str;
@@ -102,10 +102,10 @@ void KCalcButton::slotSetAccelDisplayMode(bool flag)
   _show_accel_mode = flag;
 
   // save accel, because setting label erases accel
-  QKeySequence _accel = accel();
+  TQKeySequence _accel = accel();
   
   if (flag == true) {
-    setText(escape(QString(accel())));
+    setText(escape(TQString(accel())));
   } else {
     setText(_mode[_mode_flags].label);
   }
@@ -114,17 +114,17 @@ void KCalcButton::slotSetAccelDisplayMode(bool flag)
   setAccel(_accel);
 }
 
-void KCalcButton::paintLabel(QPainter *paint)
+void KCalcButton::paintLabel(TQPainter *paint)
 {
   if (_mode[_mode_flags].is_label_richtext) {
-    QSimpleRichText _text(_label, font());
+    TQSimpleRichText _text(_label, font());
     _text.draw(paint, width()/2-_text.width()/2, 0, childrenRegion(), colorGroup());
   } else {
     KPushButton::drawButtonLabel(paint);
   }
 }
 
-void KCalcButton::drawButtonLabel(QPainter *paint)
+void KCalcButton::drawButtonLabel(TQPainter *paint)
 {
   if (_show_accel_mode) {
     KPushButton::drawButtonLabel(paint);
@@ -134,7 +134,7 @@ void KCalcButton::drawButtonLabel(QPainter *paint)
 }
 
 
-void KSquareButton::paintLabel(QPainter *paint)
+void KSquareButton::paintLabel(TQPainter *paint)
 {
   int w = width();
   int w2 = w/2 - 13;
@@ -155,7 +155,7 @@ void KSquareButton::paintLabel(QPainter *paint)
   }
 }
 
-void KSquareButton::drawButtonLabel(QPainter *paint)
+void KSquareButton::drawButtonLabel(TQPainter *paint)
 {
   if (_show_accel_mode) {
     KPushButton::drawButtonLabel(paint);

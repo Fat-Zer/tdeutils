@@ -10,13 +10,13 @@
 #ifndef METER_H
 #define METER_H
 
-#include <qpixmap.h>
-#include <qpainter.h>
-#include <qstring.h>
-#include <qstringlist.h>
-#include <qobject.h>
+#include <tqpixmap.h>
+#include <tqpainter.h>
+#include <tqstring.h>
+#include <tqstringlist.h>
+#include <tqobject.h>
 
-#include <qfileinfo.h>
+#include <tqfileinfo.h>
 
 class karamba;
 
@@ -44,55 +44,55 @@ public:
   virtual long getMax() { return minValue; };
   virtual long getMin() { return maxValue; };
 
-  void setThemePath( QString );
+  void setThemePath( TQString );
 
-  virtual void mUpdate(QPainter *)=0 ;
+  virtual void mUpdate(TQPainter *)=0 ;
 
   virtual void setValue(long) {};
   virtual long getValue() { return -1; };
-  virtual void setValue(QString) {};
-  virtual QString getStringValue() const { return QString::null; };
+  virtual void setValue(TQString) {};
+  virtual TQString getStringValue() const { return TQString::null; };
   virtual void recalculateValue() {};
 
-  virtual void setColor(QColor clr) { color = clr; };
-  virtual QColor getColor() { return color; };
+  virtual void setColor(TQColor clr) { color = clr; };
+  virtual TQColor getColor() { return color; };
 
   virtual void show() { hidden = 0; };
   virtual void hide() { hidden = 1; };
 
-  QRect getBoundingBox();
+  TQRect getBoundingBox();
 
   // true when given coordinate point is inside the meters
   // active reagion and meter is enabled
   virtual bool insideActiveArea(int, int);
 
   // returns true when callback meterClicked should be called.
-  virtual bool click( QMouseEvent* );
+  virtual bool click( TQMouseEvent* );
 
   void setEnabled(bool);
   bool isEnabled();
 
   /*
-  void setOnClick( QString );
-  void setOnMiddleClick( QString );
+  void setOnClick( TQString );
+  void setOnMiddleClick( TQString );
   */
 
 protected: // Protected attributes
-  QString themePath;
+  TQString themePath;
 
-  QRect boundingBox;
+  TQRect boundingBox;
 
   // Actions to execute when clicked on meter
-  QString leftButtonAction;
-  QString middleButtonAction;
-  QString rightButtonAction;
+  TQString leftButtonAction;
+  TQString middleButtonAction;
+  TQString rightButtonAction;
 
   bool clickable;
   int hidden;
   long minValue;
   long maxValue;
 
-  QColor color;
+  TQColor color;
   karamba* m_karamba;
 };
 

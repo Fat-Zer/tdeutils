@@ -18,9 +18,9 @@
  *
  */
 
-#include <qheader.h>
-#include <qlabel.h>
-#include <qlayout.h>
+#include <tqheader.h>
+#include <tqlabel.h>
+#include <tqlayout.h>
 
 #include <kglobalsettings.h>
 #include <kglobal.h>
@@ -33,15 +33,15 @@
 class CStatisticListViewItem : public QListViewItem
 {
   public:
-    CStatisticListViewItem( QListView * parent, QListViewItem * after,
-                            QString label1, QString label2, QString label3, QString label4,
-                            QString label5, QString label6, QString label7, int i, int o)
-    : QListViewItem( parent, after, label1, label2, label3, label4, label5, label6, label7),
+    CStatisticListViewItem( TQListView * parent, TQListViewItem * after,
+                            TQString label1, TQString label2, TQString label3, TQString label4,
+                            TQString label5, TQString label6, TQString label7, int i, int o)
+    : TQListViewItem( parent, after, label1, label2, label3, label4, label5, label6, label7),
       item( i ),
       occurrence( o )
     {}
 
-    virtual int compare( QListViewItem *i, int col, bool ascending/*Qt doc says: ignore this one*/ ) const
+    virtual int compare( TQListViewItem *i, int col, bool ascending/*Qt doc says: ignore this one*/ ) const
     {
       // occurrence column (or the percent one)?
       if( col == 5 || col == 6 )
@@ -57,7 +57,7 @@ class CStatisticListViewItem : public QListViewItem
       }
       // default
       else
-        return QListViewItem::compare(i,col,ascending);
+        return TQListViewItem::compare(i,col,ascending);
     }
 
   protected:
@@ -69,33 +69,33 @@ class CStatisticListViewItem : public QListViewItem
 
 
 
-CFileInfoDialog::CFileInfoDialog( QWidget *parent,const char *name,bool modal)
+CFileInfoDialog::CFileInfoDialog( TQWidget *parent,const char *name,bool modal)
   :KDialogBase( Plain, i18n("Statistics"), Help|User1|Cancel, User1,
 		parent, name, modal, true, i18n("&Update") ),
    mBusy(false), mDirty(false)
 {
-  setHelp( "khexedit/khexedit.html", QString::null );
+  setHelp( "khexedit/khexedit.html", TQString::null );
 
-  QString text;
-  QVBoxLayout *topLayout = new QVBoxLayout( plainPage(), 0, spacingHint() );
+  TQString text;
+  TQVBoxLayout *topLayout = new TQVBoxLayout( plainPage(), 0, spacingHint() );
   if( topLayout == 0 ) { return; }
 
 
-  QGridLayout *gbox = new QGridLayout( 2, 2, spacingHint() );
+  TQGridLayout *gbox = new TQGridLayout( 2, 2, spacingHint() );
   if( gbox == 0 ) { return; }
   topLayout->addLayout( gbox );
   gbox->setColStretch( 1, 10 );
 
   text = i18n("File name: ");
-  QLabel *label = new QLabel( text, plainPage() );
+  TQLabel *label = new TQLabel( text, plainPage() );
   gbox->addWidget( label, 0, 0 );
 
   text = i18n("Size [bytes]: ");
-  label = new QLabel( text, plainPage() );
+  label = new TQLabel( text, plainPage() );
   gbox->addWidget( label, 1, 0 );
 
-  mFileNameLabel = new QLabel( plainPage() );
-  mFileSizeLabel = new QLabel( plainPage() );
+  mFileNameLabel = new TQLabel( plainPage() );
+  mFileSizeLabel = new TQLabel( plainPage() );
   gbox->addWidget( mFileNameLabel, 0, 1 );
   gbox->addWidget( mFileSizeLabel, 1, 1 );
 
@@ -110,10 +110,10 @@ CFileInfoDialog::CFileInfoDialog( QWidget *parent,const char *name,bool modal)
   mFrequencyList->addColumn( i18n("Occurrence") );
   mFrequencyList->addColumn( i18n("Percent") );
   mFrequencyList->setAllColumnsShowFocus( true );
-  mFrequencyList->setFrameStyle( QFrame::WinPanel + QFrame::Sunken );
+  mFrequencyList->setFrameStyle( TQFrame::WinPanel + TQFrame::Sunken );
   topLayout->addWidget( mFrequencyList, 10 );
 
-  mDirtyLabel = new QLabel( plainPage() );
+  mDirtyLabel = new TQLabel( plainPage() );
   mDirtyLabel->setFixedHeight( fontMetrics().height() );
   topLayout->addWidget( mDirtyLabel );
 
@@ -189,9 +189,9 @@ void CFileInfoDialog::setStatistics() // Default
   mFileNameLabel->clear();
   mFileSizeLabel->clear();
 
-  static const QString u("?");
-  QString d, h, o, b, c;
-  QListViewItem *item = 0;
+  static const TQString u("?");
+  TQString d, h, o, b, c;
+  TQListViewItem *item = 0;
 
   char buf[10];
   memset( buf, 0, sizeof( buf ) );
@@ -203,8 +203,8 @@ void CFileInfoDialog::setStatistics() // Default
     o.sprintf("%03o", i );
     b.sprintf("%s", printBin(i) );
 
-    const QChar _i((char)i);
-    c = _i.isPrint() ? _i : QChar('.'); 
+    const TQChar _i((char)i);
+    c = _i.isPrint() ? _i : TQChar('.'); 
 
     item = new CStatisticListViewItem( mFrequencyList, item, h, d, o, b, c, u, u, i, -1 );
     if( i == 0 )
@@ -221,8 +221,8 @@ void CFileInfoDialog::setStatistics( SStatisticControl &sc )
   mFileNameLabel->setText( sc.documentName );
   mFileSizeLabel->setText( KGlobal::locale()->formatNumber(sc.documentSize, 0) );
 
-  QString d, h, o, b, c, n, p;
-  QListViewItem *item = 0;
+  TQString d, h, o, b, c, n, p;
+  TQListViewItem *item = 0;
 
   uint size, pre, i;
   // find width of occurrence
@@ -239,17 +239,17 @@ void CFileInfoDialog::setStatistics( SStatisticControl &sc )
     o.sprintf("%03o", i );
     b.sprintf("%s", printBin(i) );
 
-    n = QString("%1").arg( sc.occurrence[i], pre );
+    n = TQString("%1").arg( sc.occurrence[i], pre );
     if( sc.documentSize == 0 )
       p = "0.00";
     else
     {
       double val = 100.0*((double)sc.occurrence[i]/(double)sc.documentSize);
-      p = QString("%1").arg( val, 6, 'f', 2 );
+      p = TQString("%1").arg( val, 6, 'f', 2 );
     }
 
-    const QChar _i((char)i);
-    c = _i.isPrint() ? _i : QChar('.'); 
+    const TQChar _i((char)i);
+    c = _i.isPrint() ? _i : TQChar('.'); 
 
     item = new CStatisticListViewItem( mFrequencyList, item, h, d, o, b, c, n, p, i, sc.occurrence[i] );
     if( i == 0 )
@@ -261,7 +261,7 @@ void CFileInfoDialog::setStatistics( SStatisticControl &sc )
 
 void CFileInfoDialog::setColumnWidth( void )
 {
-  const QFontMetrics &fm = mFrequencyList->fontMetrics();
+  const TQFontMetrics &fm = mFrequencyList->fontMetrics();
   int w0, w1, w2, w3, w4;
 
   w0 = -fm.minLeftBearing() - fm.minRightBearing() + 8 + fm.maxWidth();
@@ -305,13 +305,13 @@ void CFileInfoDialog::setColumnWidth( void )
 }
 
 
-void CFileInfoDialog::resizeEvent( QResizeEvent * )
+void CFileInfoDialog::resizeEvent( TQResizeEvent * )
 {
   setColumnWidth();
 }
 
 
-void CFileInfoDialog::showEvent( QShowEvent *e )
+void CFileInfoDialog::showEvent( TQShowEvent *e )
 {
   KDialogBase::showEvent(e);
   setColumnWidth();
@@ -319,7 +319,7 @@ void CFileInfoDialog::showEvent( QShowEvent *e )
 }
 
 
-void CFileInfoDialog::timerEvent( QTimerEvent * )
+void CFileInfoDialog::timerEvent( TQTimerEvent * )
 {
   killTimers();
   slotUser1();

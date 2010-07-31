@@ -22,7 +22,7 @@
 */
 
 // QT includes
-#include <qlayout.h>
+#include <tqlayout.h>
 
 // KDE includes
 #include <kdebug.h>
@@ -45,7 +45,7 @@
 #include "archiveformatinfo.h"
 #include "arkwidget.h"
 
-MainWindow::MainWindow( QWidget * /*parent*/, const char *name )
+MainWindow::MainWindow( TQWidget * /*parent*/, const char *name )
 	: KParts::MainWindow(), progressDialog( 0 )
 {
     setXMLFile( "arkui.rc" );
@@ -58,29 +58,29 @@ MainWindow::MainWindow( QWidget * /*parent*/, const char *name )
         setStandardToolBarMenuEnabled( true );
         setupActions();
 
-        connect( m_part->widget(), SIGNAL( request_file_quit() ), this, SLOT(  file_quit() ) );
-        connect( KParts::BrowserExtension::childObject( m_part ), SIGNAL( openURLRequestDelayed
+        connect( m_part->widget(), TQT_SIGNAL( request_file_quit() ), this, TQT_SLOT(  file_quit() ) );
+        connect( KParts::BrowserExtension::childObject( m_part ), TQT_SIGNAL( openURLRequestDelayed
                                               ( const KURL &, const KParts::URLArgs & ) ),
-                 m_part, SLOT( openURL( const KURL & ) ) );
+                 m_part, TQT_SLOT( openURL( const KURL & ) ) );
 
         m_widget->setArchivePopupEnabled( true );
-        connect( m_part->widget(), SIGNAL( signalArchivePopup( const QPoint & ) ), this,
-                 SLOT( slotArchivePopup( const QPoint & ) ) );
+        connect( m_part->widget(), TQT_SIGNAL( signalArchivePopup( const TQPoint & ) ), this,
+                 TQT_SLOT( slotArchivePopup( const TQPoint & ) ) );
 
-        connect( m_part, SIGNAL( removeRecentURL( const KURL & ) ), this,
-                 SLOT( slotRemoveRecentURL( const KURL & ) ) );
-        connect( m_part, SIGNAL( addRecentURL( const KURL & ) ), this,
-                 SLOT( slotAddRecentURL( const KURL & ) ) );
-        connect( m_part, SIGNAL( fixActionState( const bool & ) ), this,
-                 SLOT( slotFixActionState( const bool & ) ) );
-        connect( m_widget, SIGNAL( disableAllActions() ), this,
-                 SLOT( slotDisableActions() ) );
+        connect( m_part, TQT_SIGNAL( removeRecentURL( const KURL & ) ), this,
+                 TQT_SLOT( slotRemoveRecentURL( const KURL & ) ) );
+        connect( m_part, TQT_SIGNAL( addRecentURL( const KURL & ) ), this,
+                 TQT_SLOT( slotAddRecentURL( const KURL & ) ) );
+        connect( m_part, TQT_SIGNAL( fixActionState( const bool & ) ), this,
+                 TQT_SLOT( slotFixActionState( const bool & ) ) );
+        connect( m_widget, TQT_SIGNAL( disableAllActions() ), this,
+                 TQT_SLOT( slotDisableActions() ) );
 
         ArkApplication::getInstance()->addWindow();
-        connect( m_widget, SIGNAL( removeOpenArk( const  KURL &) ), this,
-                 SLOT( slotRemoveOpenArk( const KURL & ) ) );
-        connect( m_widget, SIGNAL( addOpenArk( const  KURL & ) ), this,
-                 SLOT( slotAddOpenArk( const KURL & ) ) );
+        connect( m_widget, TQT_SIGNAL( removeOpenArk( const  KURL &) ), this,
+                 TQT_SLOT( slotRemoveOpenArk( const KURL & ) ) );
+        connect( m_widget, TQT_SIGNAL( addOpenArk( const  KURL & ) ), this,
+                 TQT_SLOT( slotAddOpenArk( const KURL & ) ) );
 
         setCentralWidget( m_part->widget() );
         createGUI( m_part );
@@ -110,23 +110,23 @@ void
 MainWindow::setupActions()
 {
     newWindowAction = new KAction(i18n("New &Window"), "window_new", KShortcut(), this,
-                                  SLOT(file_newWindow()), actionCollection(), "new_window");
+                                  TQT_SLOT(file_newWindow()), actionCollection(), "new_window");
 
-    newArchAction = KStdAction::openNew(this, SLOT(file_new()), actionCollection());
-    openAction = KStdAction::open(this, SLOT(file_open()), actionCollection());
+    newArchAction = KStdAction::openNew(this, TQT_SLOT(file_new()), actionCollection());
+    openAction = KStdAction::open(this, TQT_SLOT(file_open()), actionCollection());
 
     reloadAction = new KAction(i18n("Re&load"), "reload", KStdAccel::shortcut( KStdAccel::Reload ), this,
-                               SLOT(file_reload()), actionCollection(), "reload_arch");
-    closeAction = KStdAction::close(this, SLOT(file_close()), actionCollection(), "file_close");
+                               TQT_SLOT(file_reload()), actionCollection(), "reload_arch");
+    closeAction = KStdAction::close(this, TQT_SLOT(file_close()), actionCollection(), "file_close");
 
-    recent = KStdAction::openRecent(this, SLOT(openURL(const KURL&)), actionCollection());
+    recent = KStdAction::openRecent(this, TQT_SLOT(openURL(const KURL&)), actionCollection());
     recent->loadEntries(kapp->config());
 
     createStandardStatusBarAction();
 
-    KStdAction::quit(this, SLOT(window_close()), actionCollection());
-    KStdAction::configureToolbars(this, SLOT(editToolbars()), actionCollection());
-    KStdAction::keyBindings(this, SLOT( slotConfigureKeyBindings()), actionCollection());
+    KStdAction::quit(this, TQT_SLOT(window_close()), actionCollection());
+    KStdAction::configureToolbars(this, TQT_SLOT(editToolbars()), actionCollection());
+    KStdAction::keyBindings(this, TQT_SLOT( slotConfigureKeyBindings()), actionCollection());
 
     openAction->setEnabled( true );
     recent->setEnabled( true );
@@ -177,9 +177,9 @@ MainWindow::file_reload()
 void
 MainWindow::editToolbars()
 {
-    saveMainWindowSettings( KGlobal::config(), QString::fromLatin1("MainWindow") );
+    saveMainWindowSettings( KGlobal::config(), TQString::fromLatin1("MainWindow") );
     KEditToolbar dlg( factory(), this );
-    connect(&dlg, SIGNAL( newToolbarConfig() ), this, SLOT( slotNewToolbarConfig() ));
+    connect(&dlg, TQT_SIGNAL( newToolbarConfig() ), this, TQT_SLOT( slotNewToolbarConfig() ));
     dlg.exec();
 }
 
@@ -187,7 +187,7 @@ void
 MainWindow::slotNewToolbarConfig()
 {
     createGUI( m_part );
-    applyMainWindowSettings( KGlobal::config(), QString::fromLatin1("MainWindow") );
+    applyMainWindowSettings( KGlobal::config(), TQString::fromLatin1("MainWindow") );
 }
 
 void
@@ -202,7 +202,7 @@ MainWindow::slotConfigureKeyBindings()
 }
 
 void
-MainWindow::slotArchivePopup( const QPoint &pPoint)
+MainWindow::slotArchivePopup( const TQPoint &pPoint)
 {
     static_cast<KPopupMenu *>(factory()->container("archive_popup", this))->popup(pPoint);
 }
@@ -240,29 +240,29 @@ MainWindow::openURL( const KURL & url, bool tempFile )
 }
 
 KURL
-MainWindow::getOpenURL( bool addOnly, const QString & caption,
-                               const QString & startDir, const QString & suggestedName )
+MainWindow::getOpenURL( bool addOnly, const TQString & caption,
+                               const TQString & startDir, const TQString & suggestedName )
 {
     kdDebug( 1601 ) << "startDir is: " << startDir << endl;
-    QWidget * forceFormatWidget = new QWidget( this );
-    QHBoxLayout * l = new QHBoxLayout( forceFormatWidget );
+    TQWidget * forceFormatWidget = new TQWidget( this );
+    TQHBoxLayout * l = new TQHBoxLayout( forceFormatWidget );
 
-    QLabel * label = new QLabel( forceFormatWidget );
+    TQLabel * label = new TQLabel( forceFormatWidget );
     label->setText( i18n( "Open &as:" ) );
     label->adjustSize();
 
     KComboBox * combo = new KComboBox( forceFormatWidget );
 
-    QStringList list;
+    TQStringList list;
     list = ArchiveFormatInfo::self()->allDescriptions();
     list.sort();
     list.prepend( i18n( "Autodetect (default)" ) );
     combo->insertStringList( list );
 
-    QString filter = ArchiveFormatInfo::self()->filter();
+    TQString filter = ArchiveFormatInfo::self()->filter();
     if ( !suggestedName.isEmpty() )
     {
-        filter = QString::null;
+        filter = TQString::null;
         combo->setCurrentItem( list.findIndex( ArchiveFormatInfo::self()->descriptionForMimeType(
                                  KMimeType::findByPath( suggestedName, 0, true )->name() ) ) );
     }
@@ -272,7 +272,7 @@ MainWindow::getOpenURL( bool addOnly, const QString & caption,
     l->addWidget( label );
     l->addWidget( combo, 1 );
 
-    QString dir;
+    TQString dir;
     if ( addOnly )
         dir = startDir;
     else
@@ -296,7 +296,7 @@ MainWindow::getOpenURL( bool addOnly, const QString & caption,
         m_widget->setOpenAsMimeType(
             ArchiveFormatInfo::self()->mimeTypeForDescription( combo->currentText() ) );
     else
-        m_widget->setOpenAsMimeType( QString::null );
+        m_widget->setOpenAsMimeType( TQString::null );
 
     return url;
 }
@@ -355,7 +355,7 @@ MainWindow::saveProperties( KConfig* config )
 void
 MainWindow::readProperties( KConfig* config )
 {
-    QString file = config->readPathEntry("SMOpenedFile");
+    TQString file = config->readPathEntry("SMOpenedFile");
     kdDebug(1601) << "ArkWidget::readProperties( KConfig* config ) file=" << file << endl;
     if ( !file.isEmpty() )
         openURL( KURL::fromPathOrURL( file ) );
@@ -402,7 +402,7 @@ MainWindow::extractTo( const KURL & targetDirectory, const KURL & archive, bool 
 }
 
 void
-MainWindow::addToArchive( const KURL::List & filesToAdd, const QString & /*cwd*/,
+MainWindow::addToArchive( const KURL::List & filesToAdd, const TQString & /*cwd*/,
                                  const KURL & archive, bool askForName )
 {
     KURL archiveFile;
@@ -416,7 +416,7 @@ MainWindow::addToArchive( const KURL::List & filesToAdd, const QString & /*cwd*/
         // like: /dira> ark -add /dirb/file, but well...
         KURL cwdURL;
         cwdURL.setPath( filesToAdd.first().path() );
-        QString dir = cwdURL.directory( false );
+        TQString dir = cwdURL.directory( false );
 
         archiveFile = getOpenURL( true, i18n( "Select Archive to Add Files To" ),
                                   dir /*cwd*/, archive.fileName() );
@@ -443,10 +443,10 @@ MainWindow::addToArchive( const KURL::List & filesToAdd, const QString & /*cwd*/
 }
 
 void
-MainWindow::startProgressDialog( const QString & text )
+MainWindow::startProgressDialog( const TQString & text )
 {
     if ( !progressDialog )
-        progressDialog = new KProgressDialog( this, "progress_dialog", QString::null, text, false );
+        progressDialog = new KProgressDialog( this, "progress_dialog", TQString::null, text, false );
     else
         progressDialog->setLabel( text );
 
@@ -458,14 +458,14 @@ MainWindow::startProgressDialog( const QString & text )
     progressDialog->progressBar()->setTotalSteps( 0 );
     progressDialog->progressBar()->setPercentageVisible( false );
 
-//    progressDialog->setInitialSize( QSize(200,100), true );
+//    progressDialog->setInitialSize( TQSize(200,100), true );
     progressDialog->setMinimumDuration( 500 );
     progressDialog->show();
     KDialog::centerOnScreen( progressDialog );
-    connect( progressDialog, SIGNAL( cancelClicked() ), this, SLOT( window_close() ) );
+    connect( progressDialog, TQT_SIGNAL( cancelClicked() ), this, TQT_SLOT( window_close() ) );
 
-    timer = new QTimer( this );
-    connect( timer, SIGNAL( timeout() ), this, SLOT( slotProgress() ) );
+    timer = new TQTimer( this );
+    connect( timer, TQT_SIGNAL( timeout() ), this, TQT_SLOT( slotProgress() ) );
 
     timer->start( 200, false );
 }

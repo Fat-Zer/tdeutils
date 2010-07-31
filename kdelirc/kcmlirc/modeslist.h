@@ -26,8 +26,8 @@ class ModesList : public KListView
 {
 	Q_OBJECT
 public:
-	virtual bool acceptDrag(QDropEvent *) const;
-	ModesList(QWidget *parent = 0, const char *name = 0);
+	virtual bool acceptDrag(TQDropEvent *) const;
+	ModesList(TQWidget *parent = 0, const char *name = 0);
 };
 
 #endif

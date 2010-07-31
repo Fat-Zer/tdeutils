@@ -22,8 +22,8 @@
 
 #include <config.h>
 
-#include <qregexp.h>
-#include <qstring.h>
+#include <tqregexp.h>
+#include <tqstring.h>
 
 #include "knumber.h"
 
@@ -94,17 +94,17 @@ KNumber::KNumber(KNumber const & num)
 }
 
 
-KNumber::KNumber(QString const & num)
+KNumber::KNumber(TQString const & num)
 {
-  if (QRegExp("^(inf|-inf|nan)$").exactMatch(num))
+  if (TQRegExp("^(inf|-inf|nan)$").exactMatch(num))
     _num = new _knumerror(num);
-  else if (QRegExp("^[+-]?\\d+$").exactMatch(num))
+  else if (TQRegExp("^[+-]?\\d+$").exactMatch(num))
     _num = new _knuminteger(num);
-  else if (QRegExp("^[+-]?\\d+/\\d+$").exactMatch(num)) {
+  else if (TQRegExp("^[+-]?\\d+/\\d+$").exactMatch(num)) {
     _num = new _knumfraction(num);
     simplifyRational();
   }
-  else if (QRegExp("^[+-]?\\d+(\\.\\d*)?(e[+-]?\\d+)?$").exactMatch(num))
+  else if (TQRegExp("^[+-]?\\d+(\\.\\d*)?(e[+-]?\\d+)?$").exactMatch(num))
     if (_fraction_input == true) {
       _num = new _knumfraction(num);
       simplifyRational();
@@ -228,7 +228,7 @@ KNumber & KNumber::operator -=(KNumber const &arg)
 }
 
 // increase the digit at 'position' by one
-static void _inc_by_one(QString &str, int position)
+static void _inc_by_one(TQString &str, int position)
 {
   for (int i = position; i >= 0; i--)
     {
@@ -274,7 +274,7 @@ static void _inc_by_one(QString &str, int position)
 }
 
 // Cut off if more digits in fractional part than 'precision'
-static void _round(QString &str, int precision)
+static void _round(TQString &str, int precision)
 {
   int decimalSymbolPos = str.find('.');
 
@@ -287,7 +287,7 @@ static void _round(QString &str, int precision)
       }
 
   // fill up with more than enough zeroes (in case fractional part too short)
-  str.append(QString().fill('0', precision));
+  str.append(TQString().fill('0', precision));
 
   // Now decide whether to round up or down
   char last_char = str[decimalSymbolPos + precision + 1].latin1();
@@ -319,11 +319,11 @@ static void _round(QString &str, int precision)
   if (precision == 0) str = str.section('.', 0, 0);
 }
 
-static QString roundNumber(const QString &numStr, int precision)
+static TQString roundNumber(const TQString &numStr, int precision)
 {
-  QString tmpString = numStr;
+  TQString tmpString = numStr;
   if (precision < 0  ||
-      ! QRegExp("^[+-]?\\d+(\\.\\d+)*(e[+-]?\\d+)?$").exactMatch(tmpString))
+      ! TQRegExp("^[+-]?\\d+(\\.\\d+)*(e[+-]?\\d+)?$").exactMatch(tmpString))
     return numStr;
 
 
@@ -333,12 +333,12 @@ static QString roundNumber(const QString &numStr, int precision)
 
 
   // Split off exponential part (including 'e'-symbol)
-  QString mantString = tmpString.section('e', 0, 0,
-					 QString::SectionCaseInsensitiveSeps);
-  QString expString = tmpString.section('e', 1, 1,
-					QString::SectionCaseInsensitiveSeps |
-					QString::SectionIncludeLeadingSep);
-  if (expString.length() == 1) expString = QString();
+  TQString mantString = tmpString.section('e', 0, 0,
+					 TQString::SectionCaseInsensitiveSeps);
+  TQString expString = tmpString.section('e', 1, 1,
+					TQString::SectionCaseInsensitiveSeps |
+					TQString::SectionIncludeLeadingSep);
+  if (expString.length() == 1) expString = TQString();
 
 
   _round(mantString, precision);
@@ -349,9 +349,9 @@ static QString roundNumber(const QString &numStr, int precision)
 }
 
 
-QString const KNumber::toQString(int width, int prec) const
+TQString const KNumber::toQString(int width, int prec) const
 {
-  QString tmp_str;
+  TQString tmp_str;
 
   if (*this == Zero) // important to avoid infinite loops below
     return "0";
@@ -363,7 +363,7 @@ QString const KNumber::toQString(int width, int prec) const
       tmp_str = (KNumber("1.0")*(*this)).toQString(width, -1);
       _fraction_input = tmp_bool;
     } else
-      tmp_str = QString(_num->ascii());
+      tmp_str = TQString(_num->ascii());
     break;
   case FractionType:
     if (_float_output) {
@@ -376,13 +376,13 @@ QString const KNumber::toQString(int width, int prec) const
 	// split off integer part
 	KNumber int_part = this->integerPart();
 	if (int_part == Zero)
-	  tmp_str = QString(_num->ascii());
+	  tmp_str = TQString(_num->ascii());
 	else if (int_part < Zero)
 	  tmp_str = int_part.toQString() + " " + (int_part - *this)._num->ascii();
 	else
 	  tmp_str = int_part.toQString() + " " + (*this - int_part)._num->ascii();
       } else
-	tmp_str = QString(_num->ascii());
+	tmp_str = TQString(_num->ascii());
 
       if (width > 0  &&  tmp_str.length() > width) {
 	//result needs to be cut-off
@@ -396,13 +396,13 @@ QString const KNumber::toQString(int width, int prec) const
     break;
   case FloatType:
     if (width > 0)
-      tmp_str = QString(_num->ascii(width));
+      tmp_str = TQString(_num->ascii(width));
     else
       // rough estimate for  maximal decimal precision (10^3 = 2^10)
-      tmp_str = QString(_num->ascii(3*mpf_get_default_prec()/10));
+      tmp_str = TQString(_num->ascii(3*mpf_get_default_prec()/10));
     break;
   default:
-    return QString(_num->ascii());
+    return TQString(_num->ascii());
   }
   
   if (prec >= 0)

@@ -19,7 +19,7 @@
 #define KHE_KHEXEDIT_H
 
 // qt specific
-#include <qclipboard.h>
+#include <tqclipboard.h>
 // lib specific
 // #include "khe.h"
 #include "khexedit_export.h"
@@ -91,7 +91,7 @@ class KHEXEDIT_EXPORT KHexEdit : public KColumnsView
   Q_PROPERTY( bool TabChangesFocus READ tabChangesFocus WRITE setTabChangesFocus )
 
   //Q_PROPERTY( bool hasSelectedData READ hasSelectedData )
-  //Q_PROPERTY( QByteArray SelectedData READ selectedData )
+  //Q_PROPERTY( TQByteArray SelectedData READ selectedData )
   Q_PROPERTY( KResizeStyle ResizeStyle READ resizeStyle WRITE setResizeStyle )
   Q_PROPERTY( int StartOffset READ startOffset WRITE setStartOffset )
   Q_PROPERTY( int FirstLineOffset READ firstLineOffset WRITE setFirstLineOffset )
@@ -105,7 +105,7 @@ class KHEXEDIT_EXPORT KHexEdit : public KColumnsView
   Q_PROPERTY( int BinaryGapWidth READ binaryGapWidth WRITE setBinaryGapWidth )
   // char column
   Q_PROPERTY( bool ShowUnprintable READ showUnprintable WRITE setShowUnprintable )
-  Q_PROPERTY( QChar SubstituteChar READ substituteChar WRITE setSubstituteChar )
+  Q_PROPERTY( TQChar SubstituteChar READ substituteChar WRITE setSubstituteChar )
 
   public:
     enum KResizeStyle { NoResize=0, LockGrouping=1, FullSizeUsage=2, MaxResizeStyleId=0xFF };
@@ -117,20 +117,20 @@ class KHEXEDIT_EXPORT KHexEdit : public KColumnsView
 
 
   public:
-    KHexEdit( KDataBuffer *Buffer = 0, QWidget *Parent = 0, const char *Name = 0, WFlags F = 0 );
+    KHexEdit( KDataBuffer *Buffer = 0, TQWidget *Parent = 0, const char *Name = 0, WFlags F = 0 );
     virtual ~KHexEdit();
 
 
   public: // KColumnsView API
-    virtual void drawContents( QPainter *p, int cx, int cy, int cw, int ch );
+    virtual void drawContents( TQPainter *p, int cx, int cy, int cw, int ch );
 
-  public: // QWidget API
-//    void focusInEvent( QFocusEvent *FocusEvent ); // TODO: why don't these work?
-//    void focusOutEvent( QFocusEvent *FocusEvent );
-    virtual bool eventFilter( QObject *O, QEvent *E );
+  public: // TQWidget API
+//    void focusInEvent( TQFocusEvent *FocusEvent ); // TODO: why don't these work?
+//    void focusOutEvent( TQFocusEvent *FocusEvent );
+    virtual bool eventFilter( TQObject *O, TQEvent *E );
 
-    virtual QSize sizeHint() const;
-    virtual QSize minimumSizeHint() const;
+    virtual TQSize sizeHint() const;
+    virtual TQSize minimumSizeHint() const;
 
 
   public: // value access
@@ -171,9 +171,9 @@ class KHEXEDIT_EXPORT KHexEdit : public KColumnsView
     /** gives the used substitute character for "unprintable" chars, default is '.'
       * @return substitute character 
       */
-    QChar substituteChar() const;
+    TQChar substituteChar() const;
     /** returns the actually used undefined character for "undefined" chars, default is '?' */
-    QChar undefinedChar() const;
+    TQChar undefinedChar() const;
     /**
       * @return encoding used in the char column
       */
@@ -181,7 +181,7 @@ class KHEXEDIT_EXPORT KHexEdit : public KColumnsView
     /**
      * @return name of the encoding used in the char column
      */
-    const QString &encodingName() const;
+    const TQString &encodingName() const;
 
   public: // logic value service
     /** calculates the number of bytes per line that fit into a widget with the given size
@@ -190,12 +190,12 @@ class KHEXEDIT_EXPORT KHexEdit : public KColumnsView
       * @param TestSize Size the widget might have
       * @return number of bytes per line that fit into a widget with the given size
       */
-    int fittingBytesPerLine( const QSize &TestSize ) const;
+    int fittingBytesPerLine( const TQSize &TestSize ) const;
     /** detects the index of the byte at the given point
       * @param Point in viewport coordinate system
       * @return index of the byte that covers the point
       */
-    int indexByPoint(const QPoint &Point ) const;
+    int indexByPoint(const TQPoint &Point ) const;
 
   public:
     /** returns true if there is a selected range in the array */
@@ -203,7 +203,7 @@ class KHEXEDIT_EXPORT KHexEdit : public KColumnsView
     /** 
       * @return deep copy of the selected data 
       */
-    QByteArray selectedData() const;
+    TQByteArray selectedData() const;
     KSection selection() const;
 
   public: // modification access
@@ -212,7 +212,7 @@ class KHEXEDIT_EXPORT KHexEdit : public KColumnsView
       */
     void setCursorPosition( int Index, bool Behind=false );
     /** puts the cursor in the column at the pos of Point (in absolute coord), does not handle the drawing */
-    void placeCursor( const QPoint &Point );
+    void placeCursor( const TQPoint &Point );
     /***/
     void setCursorColumn( KBufferColumnId );
 //    void repaintByte( int row, int column, bool Erase = true );
@@ -294,11 +294,11 @@ class KHEXEDIT_EXPORT KHexEdit : public KColumnsView
     /** sets the substitute character for "unprintable" chars
       * returns true if there was a change
       */
-    void setSubstituteChar( QChar SC );
+    void setSubstituteChar( TQChar SC );
     /** sets the undefined character for "undefined" chars
      * returns true if there was a change
      */
-    void setUndefinedChar( QChar UC );
+    void setUndefinedChar( TQChar UC );
     /** sets the encoding of the char column. Default is KHE::LocalEncoding.
       * If the encoding is not available the format will not be changed. */
     void setEncoding( KEncoding C );
@@ -306,7 +306,7 @@ class KHEXEDIT_EXPORT KHexEdit : public KColumnsView
       * If the encoding is not available the format will not be changed.
       * @param Encoding name of the encoding
       */
-    void setEncoding( const QString& Encoding );
+    void setEncoding( const TQString& Encoding );
 
   // interaction
     /** de-/selects all data */
@@ -318,7 +318,7 @@ class KHEXEDIT_EXPORT KHexEdit : public KColumnsView
     /** removes the selected data, takes care of the cursor */
     virtual void removeSelectedData();
     /** inserts */
-    virtual void insert( const QByteArray &D );
+    virtual void insert( const TQByteArray &D );
 
   // clipboard interaction
     virtual void copy();
@@ -361,22 +361,22 @@ class KHEXEDIT_EXPORT KHexEdit : public KColumnsView
     void bufferChanged( int StartIndex, int EndIndex );
 
 
-  protected: // QWidget API
-    virtual void keyPressEvent( QKeyEvent *KeyEvent );
-    virtual void resizeEvent( QResizeEvent *ResizeEvent );
-    virtual void showEvent( QShowEvent *e );
+  protected: // TQWidget API
+    virtual void keyPressEvent( TQKeyEvent *KeyEvent );
+    virtual void resizeEvent( TQResizeEvent *ResizeEvent );
+    virtual void showEvent( TQShowEvent *e );
 
-  protected: // QScrollView API
-    virtual void contentsMousePressEvent( QMouseEvent *e );
-    virtual void contentsMouseReleaseEvent( QMouseEvent * e );
-    virtual void contentsMouseMoveEvent( QMouseEvent *e );
-    virtual void contentsMouseDoubleClickEvent( QMouseEvent * e );
-    virtual void contentsDragEnterEvent( QDragEnterEvent *e );
-    virtual void contentsDragMoveEvent( QDragMoveEvent *e );
-    virtual void contentsDragLeaveEvent( QDragLeaveEvent * );
-    virtual void contentsDropEvent( QDropEvent *e );
-    virtual void contentsWheelEvent( QWheelEvent *e );
-//    virtual void contentsContextMenuEvent( QContextMenuEvent *e );
+  protected: // TQScrollView API
+    virtual void contentsMousePressEvent( TQMouseEvent *e );
+    virtual void contentsMouseReleaseEvent( TQMouseEvent * e );
+    virtual void contentsMouseMoveEvent( TQMouseEvent *e );
+    virtual void contentsMouseDoubleClickEvent( TQMouseEvent * e );
+    virtual void contentsDragEnterEvent( TQDragEnterEvent *e );
+    virtual void contentsDragMoveEvent( TQDragMoveEvent *e );
+    virtual void contentsDragLeaveEvent( TQDragLeaveEvent * );
+    virtual void contentsDropEvent( TQDropEvent *e );
+    virtual void contentsWheelEvent( TQWheelEvent *e );
+//    virtual void contentsContextMenuEvent( TQContextMenuEvent *e );
 
   protected: // KColumnsView API
     virtual void setNoOfLines( int NewNoOfLines );
@@ -403,23 +403,23 @@ class KHEXEDIT_EXPORT KHexEdit : public KColumnsView
     /** recreates the cursor pixmaps and paints active and inactive cursors if doable */
     void updateCursor();
     void createCursorPixmaps();
-    void pointPainterToCursor( QPainter &Painter, const KBufferColumn &Column ) const;
+    void pointPainterToCursor( TQPainter &Painter, const KBufferColumn &Column ) const;
     /** draws the blinking cursor or removes it */
     void paintActiveCursor( bool CursorOn );
     void paintInactiveCursor( bool CursorOn );
     void paintLine( KBufferColumn *C, int Line, KSection Positions );
 
   protected: // partial operations
-    void handleMouseMove( const QPoint& Point );
-    KBufferDrag *dragObject( QWidget *Parent = 0 ) const;
-    void pasteFromSource( QMimeSource *Source );
+    void handleMouseMove( const TQPoint& Point );
+    KBufferDrag *dragObject( TQWidget *Parent = 0 ) const;
+    void pasteFromSource( TQMimeSource *Source );
     /** removes the section from the databuffer and updates all affected values */
     KSection removeData( KSection Indizes );
     /** sets ChangedRange to the range of VisibleRange that is actually changed
       * @return true if there was a change within the visible range
       */
     bool hasChanged( const KCoordRange &VisibleRange, KCoordRange *ChangedRange ) const;
-    void handleInternalDrag( QDropEvent *e );
+    void handleInternalDrag( TQDropEvent *e );
 
   protected:
     /** recalcs all dependant values with the actual NoOfBytesPerLine  */
@@ -443,8 +443,8 @@ class KHEXEDIT_EXPORT KHexEdit : public KColumnsView
     /** */
     void startDrag();
 
-  protected slots: // QWidget API
-    virtual void fontChange( const QFont &OldFont );
+  protected slots: // TQWidget API
+    virtual void fontChange( const TQFont &OldFont );
 
 
   protected:
@@ -484,14 +484,14 @@ class KHEXEDIT_EXPORT KHexEdit : public KColumnsView
 
   protected:
     /** Timer that controls the blinking of the cursor */
-    QTimer *CursorBlinkTimer;
+    TQTimer *CursorBlinkTimer;
     /** Timer that triggers ensureCursorVisible function calls */
-    QTimer *ScrollTimer;
-/*     QTimer *ChangeIntervalTimer, */
+    TQTimer *ScrollTimer;
+/*     TQTimer *ChangeIntervalTimer, */
     /** Timer to start a drag */
-    QTimer *DragStartTimer;
+    TQTimer *DragStartTimer;
     /** timer to measure whether the time between a double click and the following counts for a tripleclick */
-    QTimer *TrippleClickTimer;
+    TQTimer *TrippleClickTimer;
 
     /** object to store the blinking cursor pixmaps */
     KCursor *CursorPixmaps;
@@ -500,11 +500,11 @@ class KHEXEDIT_EXPORT KHexEdit : public KColumnsView
 
   protected:
     /** point at which the current double click happended (used by TrippleClick) */
-    QPoint DoubleClickPoint;
+    TQPoint DoubleClickPoint;
     /** line in which the current double click happended (used by TrippleClick) */
     int DoubleClickLine;
     /** point at which the current dragging started */
-    QPoint DragStartPoint;
+    TQPoint DragStartPoint;
     /** */
     QClipboard::Mode ClipboardMode;
     /** font size as set by user (used for zooming) */

@@ -21,9 +21,9 @@
 #ifndef TESTCARDAPPLET_H
 #define TESTCARDAPPLET_H
 
-#include <qobject.h>
-#include <qpixmap.h>
-#include <qptrlist.h>
+#include <tqobject.h>
+#include <tqpixmap.h>
+#include <tqptrlist.h>
 #include <qxembed.h>
 
 class KWinModule;
@@ -35,10 +35,10 @@ class Systemtray : public QWidget
 {
     Q_OBJECT
 public:
-    Systemtray(QWidget* parent);
+    Systemtray(TQWidget* parent);
     ~Systemtray();
     
-    void updateBackgroundPixmap ( const QPixmap & );
+    void updateBackgroundPixmap ( const TQPixmap & );
 
     int getCurrentWindowCount();
 
@@ -56,9 +56,9 @@ signals:
 
 private:
     KWinModule *kwin_module;
-    QValueList<WId> systemTrayWindows;
+    TQValueList<WId> systemTrayWindows;
 
-    QPtrList<QXEmbed> m_Wins;
+    TQPtrList<QXEmbed> m_Wins;
 
     Atom net_system_tray_selection;
     Atom net_system_tray_opcode;

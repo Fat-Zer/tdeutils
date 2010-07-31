@@ -26,7 +26,7 @@
 #define __MAIN_H__
 
 
-#include <qtabwidget.h>
+#include <tqtabwidget.h>
 
 
 #include <kcmodule.h>
@@ -47,12 +47,12 @@ class LaptopModule : public KCModule
 
 public:
 
-  LaptopModule(QWidget *parent, const char *name);
+  LaptopModule(TQWidget *parent, const char *name);
 
   void load();
   void save();
   void defaults();
-  QString quickHelp() const;
+  TQString quickHelp() const;
 
 
 
@@ -63,7 +63,7 @@ protected slots:
 
 private:
 
-  QTabWidget   *tab;
+  TQTabWidget   *tab;
 
   WarningConfig 	*warning;
   WarningConfig 	*critical;

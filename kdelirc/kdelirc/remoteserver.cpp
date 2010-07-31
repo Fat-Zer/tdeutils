@@ -11,8 +11,8 @@
 //
 //
 
-#include <qfile.h>
-#include <qxml.h>
+#include <tqfile.h>
+#include <tqxml.h>
 
 #include <kglobal.h>
 #include <kstandarddirs.h>
@@ -34,8 +34,8 @@ RemoteServer::~RemoteServer()
 
 void RemoteServer::loadRemotes()
 {
-	QStringList theFiles = KGlobal::dirs()->findAllResources("data", "remotes/*.remote.xml");
-	for(QStringList::iterator i = theFiles.begin(); i != theFiles.end(); ++i)
+	TQStringList theFiles = KGlobal::dirs()->findAllResources("data", "remotes/*.remote.xml");
+	for(TQStringList::iterator i = theFiles.begin(); i != theFiles.end(); ++i)
 	{	kdDebug() << "Found data file: " << *i << endl;
 		Remote *p = new Remote();
 		p->loadFromFile(*i);
@@ -52,25 +52,25 @@ Remote::~Remote()
 {
 }
 
-void Remote::loadFromFile(const QString &fileName)
+void Remote::loadFromFile(const TQString &fileName)
 {
 	charBuffer = "";
 	curRB = 0;
 
-	QFile xmlFile(fileName);
-	QXmlInputSource source(&xmlFile);
-	QXmlSimpleReader reader;
+	TQFile xmlFile(fileName);
+	TQXmlInputSource source(&xmlFile);
+	TQXmlSimpleReader reader;
 	reader.setContentHandler(this);
 	reader.parse(source);
 }
 
-bool Remote::characters(const QString &data)
+bool Remote::characters(const TQString &data)
 {
 	charBuffer += data;
 	return true;
 }
 
-bool Remote::startElement(const QString &, const QString &, const QString &name, const QXmlAttributes &attributes)
+bool Remote::startElement(const TQString &, const TQString &, const TQString &name, const TQXmlAttributes &attributes)
 {
 	if(name == "remote")
 		theId = theName = attributes.value("id");
@@ -89,7 +89,7 @@ bool Remote::startElement(const QString &, const QString &, const QString &name,
 	return true;
 }
 
-bool Remote::endElement(const QString &, const QString &, const QString &name)
+bool Remote::endElement(const TQString &, const TQString &, const TQString &name)
 {
 	if(name == "name")
 		if(curRB)

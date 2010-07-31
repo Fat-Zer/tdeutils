@@ -24,7 +24,7 @@
 #include "walletwidget.h"
 #include <kwallet.h>
 #include <kmainwindow.h>
-#include <qstringlist.h>
+#include <tqstringlist.h>
 
 class KAction;
 class QIconViewItem;
@@ -38,7 +38,7 @@ class KWalletEditor : public KMainWindow {
 	Q_OBJECT
 
 	public:
-		KWalletEditor(const QString& wallet, bool isPath, QWidget *parent = 0, const char* name = 0);
+		KWalletEditor(const TQString& wallet, bool isPath, TQWidget *parent = 0, const char* name = 0);
 		virtual ~KWalletEditor();
 
 		bool isOpen() const { return _w != 0L; }
@@ -53,10 +53,10 @@ class KWalletEditor : public KMainWindow {
 	private slots:
 		void layout();
 		void updateFolderList(bool checkEntries = false);
-		void entrySelectionChanged(QListViewItem *item);
-		void listItemRenamed(QListViewItem *, int, const QString&);
-		void listContextMenuRequested(QListViewItem *item, const QPoint& pos, int col);
-		void updateEntries(const QString& folder);
+		void entrySelectionChanged(TQListViewItem *item);
+		void listItemRenamed(TQListViewItem *, int, const TQString&);
+		void listContextMenuRequested(TQListViewItem *item, const TQPoint& pos, int col);
+		void updateEntries(const TQString& folder);
 
 		void newEntry();
 		void renameEntry();
@@ -86,7 +86,7 @@ class KWalletEditor : public KMainWindow {
 		void editorClosed(KMainWindow*);
 
 	public:
-		QString _walletName;
+		TQString _walletName;
 
 	private:
 		void createActions();
@@ -98,12 +98,12 @@ class KWalletEditor : public KMainWindow {
 		KAction *_newFolderAction, *_deleteFolderAction;
 		KAction *_passwordAction, *_exportAction, *_saveAsAction, *_mergeAction, *_importAction;
 		KAction *_copyPassAction;
-		QLabel*_details;
-		QString _currentFolder;
-		QMap<QString,QString> _currentMap; // save memory by storing
+		TQLabel*_details;
+		TQString _currentFolder;
+		TQMap<TQString,TQString> _currentMap; // save memory by storing
 						   // only the most recent map.
 		KWMapEditor *_mapEditor;
-		QCheckBox *_mapEditorShowHide;
+		TQCheckBox *_mapEditorShowHide;
 		bool _newWallet;
 };
 

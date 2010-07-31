@@ -23,11 +23,11 @@
 
 #include "defaultwidget.h"
 
-#include <qprogressbar.h>
-#include <qwidget.h>
-#include <qwidgetstack.h>
-#include <qlabel.h>
-#include <qapplication.h>
+#include <tqprogressbar.h>
+#include <tqwidget.h>
+#include <tqwidgetstack.h>
+#include <tqlabel.h>
+#include <tqapplication.h>
 
 #include <kwin.h>
 #include <netwm.h>
@@ -39,10 +39,10 @@
 
 
 DefaultSkin::DefaultSkin() {
-	connect(&_timer, SIGNAL(timeout()), this, SLOT(timeout()));
+	connect(&_timer, TQT_SIGNAL(timeout()), this, TQT_SLOT(timeout()));
 
 	_widget = new DefaultWidget(0, "Screen Indicator", Qt::WX11BypassWM);
-	_widget->setFocusPolicy(QWidget::NoFocus);
+	_widget->setFocusPolicy(TQWidget::NoFocus);
 
 	KWin::setOnAllDesktops(_widget->winId(), true);
 	KWin::setState( _widget->winId(), NET::StaysOnTop | NET::Sticky
@@ -65,11 +65,11 @@ void DefaultSkin::reconfigure( KConfig *config ) {
 	
 	config->setGroup("DefaultSkin");
 	
-	QFont *defaultFont = new QFont("Sans", 10, QFont::Bold );
-	QSize *defaultSize = new QSize( 80, 30 );
-	QColor *defaultpaletteForegroundColor = new QColor( 200, 200, 200 );
-	QColor *defaultpaletteBackgroundColor = new QColor( 100, 100, 100 );
-	QFont *defaultProgressFont = new QFont("Sans", 8, QFont::Bold );
+	TQFont *defaultFont = new TQFont("Sans", 10, TQFont::Bold );
+	TQSize *defaultSize = new TQSize( 80, 30 );
+	TQColor *defaultpaletteForegroundColor = new TQColor( 200, 200, 200 );
+	TQColor *defaultpaletteBackgroundColor = new TQColor( 100, 100, 100 );
+	TQFont *defaultProgressFont = new TQFont("Sans", 8, TQFont::Bold );
 	
 	_widget->resize( config->readSizeEntry("Size", defaultSize ) );
 	_widget->setFont( config->readFontEntry("Font", defaultFont ) );
@@ -98,20 +98,20 @@ void DefaultSkin::clear() {
 
 void DefaultSkin::show() {
 #if KDE_IS_VERSION(3,1,90)
-	QRect r =  KGlobalSettings::splashScreenDesktopGeometry();
+	TQRect r =  KGlobalSettings::splashScreenDesktopGeometry();
 #else
-	QRect r = QApplication::desktop()->geometry();
+	TQRect r = TQApplication::desktop()->geometry();
 #endif
 	//	_label->resize(_label->minimumSizeHint());
 	//	_widget->resize(_label->minimumSizeHint());
 	_widget->move(r.center() -
-			QPoint(_widget->width()/2, _widget->height()/2));
+			TQPoint(_widget->width()/2, _widget->height()/2));
 	_widget->show();
 	_timer.start(750, true);
 }
 
 
-void DefaultSkin::displayText(const QString& text, const QPixmap& customPixmap) {
+void DefaultSkin::displayText(const TQString& text, const TQPixmap& customPixmap) {
 	Q_UNUSED(customPixmap)
 	_timer.stop();
 	_widget->_widgetStack->raiseWidget(0);
@@ -120,7 +120,7 @@ void DefaultSkin::displayText(const QString& text, const QPixmap& customPixmap) 
 }
 
 
-void DefaultSkin::displayProgress(const QString& text, int percent, const QPixmap& customPixmap) {
+void DefaultSkin::displayProgress(const TQString& text, int percent, const TQPixmap& customPixmap) {
 	Q_UNUSED(customPixmap)
 	_timer.stop();
 	_widget->_progressText->setText(text);

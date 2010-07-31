@@ -36,7 +36,7 @@ class QVBox;
 class QSlider;
 class KPopupMenu;
 
-#include <qmap.h>
+#include <tqmap.h>
 
 class laptop_dock : public KSystemTray {
 
@@ -47,9 +47,9 @@ public:
   ~laptop_dock();
   void displayPixmap();
 
-  void mousePressEvent( QMouseEvent * ); 
-  void mouseReleaseEvent( QMouseEvent * ); 
-  void showEvent( QShowEvent * );  
+  void mousePressEvent( TQMouseEvent * ); 
+  void mouseReleaseEvent( TQMouseEvent * ); 
+  void showEvent( TQShowEvent * );  
   void reload_icon();
 
   inline void setPCMCIA(KPCMCIA *p) { _pcmcia = p; }
@@ -86,14 +86,14 @@ private slots:
 
 private:
   int brightness;
-  QVBox *brightness_widget;
-  QSlider *brightness_slider;
+  TQVBox *brightness_widget;
+  TQSlider *brightness_slider;
   laptop_daemon *pdaemon;
   QPixmap	pm;
   QPopupMenu	*performance_popup, *throttle_popup;
   int	 	current_code;
   KPCMCIA       *_pcmcia;
-  QMap<int,KPCMCIACard *> _ejectActions,
+  TQMap<int,KPCMCIACard *> _ejectActions,
                           _suspendActions,
                           _resumeActions,
                           _resetActions,

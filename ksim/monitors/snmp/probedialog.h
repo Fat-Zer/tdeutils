@@ -20,7 +20,7 @@
 #ifndef PROBEDIALOG_H
 #define PROBEDIALOG_H
 
-#include <qvaluestack.h>
+#include <tqvaluestack.h>
 
 #include <kprogress.h>
 
@@ -39,7 +39,7 @@ class ProbeDialog : public KProgressDialog
 {
     Q_OBJECT
 public:
-    ProbeDialog( const HostConfig &hostConfig, QWidget *parent, const char *name = 0 );
+    ProbeDialog( const HostConfig &hostConfig, TQWidget *parent, const char *name = 0 );
 
     struct ProbeResult
     {
@@ -56,7 +56,7 @@ public:
         bool success;
         ErrorInfo errorInfo;
     };
-    typedef QValueList<ProbeResult> ProbeResultList;
+    typedef TQValueList<ProbeResult> ProbeResultList;
 
     ProbeResultList probeResults() const { return m_results; }
 
@@ -72,7 +72,7 @@ private:
     void nextProbe();
 
     HostConfig m_host;
-    QValueStack<Identifier> m_probeOIDs;
+    TQValueStack<Identifier> m_probeOIDs;
     Monitor *m_currentMonitor;
 
     ProbeResultList m_results;

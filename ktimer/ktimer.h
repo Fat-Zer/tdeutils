@@ -19,25 +19,25 @@
 #ifndef KTIMER_H_INCLUDED
 #define KTIMER_H_INCLUDED
 
-#include <qdialog.h>
-#include <qwidget.h>
+#include <tqdialog.h>
+#include <tqwidget.h>
 #include <kprocess.h>
 #include <kconfig.h>
 
 #include "prefwidget.h"
 
 
-class KTimerJob : public QObject {
+class KTimerJob : public TQObject {
  Q_OBJECT
 
  public:
-    KTimerJob( QObject *parent=0, const char *name=0 );
+    KTimerJob( TQObject *parent=0, const char *name=0 );
     virtual ~KTimerJob();
 
     enum States { Stopped, Paused, Started };
 
     unsigned delay();
-    QString command();
+    TQString command();
     bool loop();
     bool oneInstance();
     unsigned value();
@@ -45,13 +45,13 @@ class KTimerJob : public QObject {
     void *user();
     void setUser( void *user );
 
-    void load( KConfig *cfg, const QString& grp );
-    void save( KConfig *cfg, const QString& grp );
+    void load( KConfig *cfg, const TQString& grp );
+    void save( KConfig *cfg, const TQString& grp );
 
  public slots:
     void setDelay( unsigned sec );
     void setDelay( int sec ) { setDelay( (unsigned)sec ); };
-    void setCommand( const QString &cmd );
+    void setCommand( const TQString &cmd );
     void setLoop( bool loop );
     void setOneInstance( bool one );
     void setValue( unsigned value );
@@ -65,7 +65,7 @@ class KTimerJob : public QObject {
  signals:
     void stateChanged( KTimerJob *job, States state );
     void delayChanged( KTimerJob *job, unsigned sec );
-    void commandChanged( KTimerJob *job, const QString &cmd );
+    void commandChanged( KTimerJob *job, const TQString &cmd );
     void loopChanged( KTimerJob *job, bool loop );
     void oneInstanceChanged( KTimerJob *job, bool one );
     void valueChanged( KTimerJob *job, unsigned value );
@@ -91,13 +91,13 @@ class KTimerPref : public PrefWidget
 {
     Q_OBJECT
  public:
-    KTimerPref( QWidget *parent=0, const char *name = 0 );
+    KTimerPref( TQWidget *parent=0, const char *name = 0 );
     virtual ~KTimerPref();
 
  protected slots:
     void add();
     void remove();
-    void currentChanged( QListViewItem * );
+    void currentChanged( TQListViewItem * );
 
     void saveJobs( KConfig *cfg );
     void loadJobs( KConfig *cfg );

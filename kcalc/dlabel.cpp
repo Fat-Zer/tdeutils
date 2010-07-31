@@ -23,7 +23,7 @@
 
 */
 
-#include <qglobal.h>
+#include <tqglobal.h>
 #include <kactioncollection.h>
 #include <kstdaction.h>
 
@@ -34,14 +34,14 @@
 
 
 
-DispLogic::DispLogic(QWidget *parent, const char *name,
+DispLogic::DispLogic(TQWidget *parent, const char *name,
 		     KActionCollection *coll)
   :KCalcDisplay(parent,name), _history_index(0)
 {
 	KNumber::setDefaultFloatOutput(true);
 	KNumber::setDefaultFractionalInput(true);
-	_back = KStdAction::undo(this, SLOT(history_back()), coll);
-	_forward = KStdAction::redo(this, SLOT(history_forward()), coll);
+	_back = KStdAction::undo(this, TQT_SLOT(history_back()), coll);
+	_forward = KStdAction::redo(this, TQT_SLOT(history_forward()), coll);
 
 	_forward->setEnabled(false);
 	_back->setEnabled(false);
@@ -53,11 +53,11 @@ DispLogic::~DispLogic()
 
 void DispLogic::changeSettings()
 {
-	QPalette pal = palette();
+	TQPalette pal = palette();
 
-	pal.setColor(QColorGroup::Text, KCalcSettings::foreColor());
-	pal.setColor(QColorGroup::Foreground, KCalcSettings::foreColor());
-	pal.setColor(QColorGroup::Background, KCalcSettings::backColor());
+	pal.setColor(TQColorGroup::Text, KCalcSettings::foreColor());
+	pal.setColor(TQColorGroup::Foreground, KCalcSettings::foreColor());
+	pal.setColor(TQColorGroup::Background, KCalcSettings::backColor());
 
 	setPalette(pal);
 	setBackgroundColor(KCalcSettings::backColor());

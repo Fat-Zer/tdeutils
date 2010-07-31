@@ -47,7 +47,7 @@ class _knumber
 
   virtual NumType type(void) const = 0;
 
-  virtual QString const ascii(int prec = -1) const = 0;
+  virtual TQString const ascii(int prec = -1) const = 0;
 
   virtual _knumber * abs(void) const = 0;
   virtual _knumber * intPart(void) const = 0;
@@ -79,7 +79,7 @@ class _knumerror : public _knumber
   
   _knumerror(_knumber const & num);
 
-  _knumerror(const QString & num);
+  _knumerror(const TQString & num);
 
   //virtual ~_knumerror() { }
 
@@ -92,7 +92,7 @@ class _knumerror : public _knumber
 
   virtual NumType type(void) const {return SpecialType;}
 
-  virtual QString const ascii(int prec = -1) const;
+  virtual TQString const ascii(int prec = -1) const;
 
   virtual _knumber * abs(void) const;
   virtual _knumber * intPart(void) const;
@@ -150,7 +150,7 @@ class _knuminteger : public _knumber
 
   _knuminteger(_knumber const & num);
 
-  _knuminteger(const QString & num);
+  _knuminteger(const TQString & num);
 
   virtual ~_knuminteger()
   {
@@ -166,7 +166,7 @@ class _knuminteger : public _knumber
 
   virtual NumType type(void) const {return IntegerType;}
 
-  virtual QString const ascii(int prec = -1) const;
+  virtual TQString const ascii(int prec = -1) const;
 
   virtual _knumber * abs(void) const;
   virtual _knumber * intPart(void) const;
@@ -213,7 +213,7 @@ class _knumfraction : public _knumber
 
   _knumfraction(_knumber const & num);
   
-  _knumfraction(QString const & num);
+  _knumfraction(TQString const & num);
 
   virtual ~_knumfraction()
   {
@@ -227,7 +227,7 @@ class _knumfraction : public _knumber
 
   virtual NumType type(void) const {return FractionType;}
 
-  virtual QString const ascii(int prec = -1) const;
+  virtual TQString const ascii(int prec = -1) const;
   
   bool isInteger(void) const;
 
@@ -267,7 +267,7 @@ class _knumfloat : public _knumber
   
   _knumfloat(_knumber const & num);
 
-  _knumfloat(QString const & num);
+  _knumfloat(TQString const & num);
   
   virtual ~_knumfloat()
   {
@@ -281,7 +281,7 @@ class _knumfloat : public _knumber
 
   virtual NumType type(void) const {return FloatType;}
 
-  virtual QString const ascii(int prec = -1) const;
+  virtual TQString const ascii(int prec = -1) const;
 
   virtual _knumber * abs(void) const;
   virtual _knumber * intPart(void) const;

@@ -19,7 +19,7 @@
 
 #include "proberesultdialog.h"
 
-#include <qlabel.h>
+#include <tqlabel.h>
 
 #include <klocale.h>
 #include <klistview.h>
@@ -27,7 +27,7 @@
 using namespace KSim::Snmp;
 
 ProbeResultDialog::ProbeResultDialog( const HostConfig &hostConfig, const ProbeDialog::ProbeResultList &probeResults, 
-                                      QWidget *parent, const char *name )
+                                      TQWidget *parent, const char *name )
         : ProbeResultDialogBase( parent, name )
 {
     info->setText( i18n( "Results of scanning host %1:" ).arg( hostConfig.name ) );
@@ -39,14 +39,14 @@ ProbeResultDialog::ProbeResultDialog( const HostConfig &hostConfig, const ProbeD
 
 void ProbeResultDialog::addResultItem( const ProbeDialog::ProbeResult &result )
 {
-    QListViewItem *item = new QListViewItem( probeResultView );
+    TQListViewItem *item = new TQListViewItem( probeResultView );
 
     item->setText( 0, result.oid.toString() );
 
     if ( result.success )
         item->setText( 1, result.value.toString( Value::TimeTicksWithSeconds ) );
     else
-        item->setText( 1, QString( "ERROR: " ) + result.errorInfo.errorMessage() );
+        item->setText( 1, TQString( "ERROR: " ) + result.errorInfo.errorMessage() );
 }
 
 #include "proberesultdialog.moc"

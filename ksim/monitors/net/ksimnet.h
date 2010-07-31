@@ -58,29 +58,29 @@ class NetView : public KSim::PluginView
     void runDisconnectCommand(int);
 
   protected:
-    bool eventFilter(QObject *, QEvent *);
+    bool eventFilter(TQObject *, TQEvent *);
 
   private:
     Network::List createList() const;
 
     KSim::Chart *addChart();
-    KSim::LedLabel *addLedLabel(const QString &device);
+    KSim::LedLabel *addLedLabel(const TQString &device);
     KSim::Label *addLabel();
-    QPopupMenu *addPopupMenu(const QString &device, int value);
+    TQPopupMenu *addPopupMenu(const TQString &device, int value);
 
-    void netStatistics(const QString &device, NetData &data);
-    bool isOnline(const QString &device);
+    void netStatistics(const TQString &device, NetData &data);
+    bool isOnline(const TQString &device);
 
     void showMenu(int i);
 
     bool m_firstTime;
     Network::List m_networkList;
-    QTimer *m_netTimer;
-    QTimer *m_lightTimer;
-    QVBoxLayout *m_netLayout;
+    TQTimer *m_netTimer;
+    TQTimer *m_lightTimer;
+    TQVBoxLayout *m_netLayout;
 #ifdef __linux__
     FILE *m_procFile;
-    QTextStream *m_procStream;
+    TQTextStream *m_procStream;
 #endif
 #ifdef __FreeBSD__
     char *m_buf;

@@ -13,25 +13,25 @@
 
 Clickable::Clickable( int x, int y, int w, int h )
 {
-    boundingBox = QRect( x, y, w, h );
+    boundingBox = TQRect( x, y, w, h );
 }
 
 Clickable::~Clickable()
 {}
 
 /*
-void Clickable::setOnClick( QString oc )
+void Clickable::setOnClick( TQString oc )
 {
     onClick = oc;
 }
 
-void Clickable::setOnMiddleClick( QString oc )
+void Clickable::setOnMiddleClick( TQString oc )
 {
     onMiddleClick = oc;
 }
 */
 
-QRect Clickable::getBoundingBox()
+TQRect Clickable::getBoundingBox()
 {
     return boundingBox;
 }

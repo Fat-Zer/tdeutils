@@ -26,10 +26,10 @@
 #endif 
 
 
-#include <qframe.h>
-#include <qpixmap.h> 
-#include <qpopupmenu.h> 
-#include <qscrollbar.h> 
+#include <tqframe.h>
+#include <tqpixmap.h> 
+#include <tqpopupmenu.h> 
+#include <tqscrollbar.h> 
 
 #include <kapplication.h>
 #include <kcmenumngr.h>
@@ -42,8 +42,8 @@ class CScrollBar : public QScrollBar
   Q_OBJECT
  
   public:
-    CScrollBar( Orientation o, QWidget *parent, const char *name = 0 )
-      : QScrollBar( o, parent, name )
+    CScrollBar( Orientation o, TQWidget *parent, const char *name = 0 )
+      : TQScrollBar( o, parent, name )
     {
     } 
   
@@ -51,7 +51,7 @@ class CScrollBar : public QScrollBar
     void hidden( void );
   
   protected:
-    virtual void hideEvent( QHideEvent * )
+    virtual void hideEvent( TQHideEvent * )
     {
       emit hidden();
     }
@@ -73,11 +73,11 @@ class CDragManager : public QWidget
     CDragManager( void );
     void setActivateMode( EDragActivateMode mode );
     void setup( int x, int y );
-    bool start( QMouseEvent *e );
+    bool start( TQMouseEvent *e );
     bool clear( void );
 
   protected:
-    virtual void timerEvent( QTimerEvent *e );
+    virtual void timerEvent( TQTimerEvent *e );
 
   private:
     void removeTimer( void );
@@ -90,7 +90,7 @@ class CDragManager : public QWidget
     EDragActivateMode mActivateMode;
     bool   mPending;
     int    mTimerId;
-    QPoint mOrigin;
+    TQPoint mOrigin;
 };
 
 
@@ -100,14 +100,14 @@ class CHexViewWidget : public QFrame
   Q_OBJECT
 
   public:
-    CHexViewWidget( QWidget *parent, const char *name, CHexBuffer *hexBuffer );
+    CHexViewWidget( TQWidget *parent, const char *name, CHexBuffer *hexBuffer );
     ~CHexViewWidget( void );
     inline bool widgetValid( void );
 
-    int  readFile( QFile &file, const QString &url, CProgress &p );
-    int  insertFile( QFile &file, CProgress &p );
-    int  writeFile( QFile &file, CProgress &p );
-    int  newFile( const QString &url );
+    int  readFile( TQFile &file, const TQString &url, CProgress &p );
+    int  insertFile( TQFile &file, CProgress &p );
+    int  writeFile( TQFile &file, CProgress &p );
+    int  newFile( const TQString &url );
     void closeFile( void );
     void initFile( void );
     void setBuffer( CHexBuffer *hexBuffer );
@@ -135,7 +135,7 @@ class CHexViewWidget : public QFrame
     void gotoNextBookmark( bool next );
     void benchmark( void );
 
-    virtual void setPalette( const QPalette & );
+    virtual void setPalette( const TQPalette & );
     void setInputMode( SDisplayInputMode &mode );
     void setLayout( SDisplayLayout &layout );
     void setCursor( const SDisplayCursor &cursor, bool updateDisplay );
@@ -155,8 +155,8 @@ class CHexViewWidget : public QFrame
     int  collectStatistic( SStatisticControl &sc, CProgress &p );
 
 
-    inline void setPopupMenu( QPopupMenu *popupMenu );
-    inline void setDocumentMenu( QPopupMenu *popupMenu );
+    inline void setPopupMenu( TQPopupMenu *popupMenu );
+    inline void setDocumentMenu( TQPopupMenu *popupMenu );
     inline bool insertMode( void );
     inline int  scrollBarWidth( void );
     inline int  dataWidth( void );
@@ -165,21 +165,21 @@ class CHexViewWidget : public QFrame
     inline uint bookmarkCount( void );
     inline bool modified( void );
     inline void setModified( bool modified );
-    inline const QDateTime &diskModifyTime( void );
+    inline const TQDateTime &diskModifyTime( void );
     inline bool losslessEncoding( CConversion::EMode mode );
     inline const SEncodeState &encoding( void );
     inline bool documentPresent( void );
     inline bool urlValid( void );
-    inline QString &url( void );
-    inline void setUrl( QString &url );
+    inline TQString &url( void );
+    inline void setUrl( TQString &url );
     inline const CHexBuffer *hexBuffer( void );
 
   public slots:
     void filter( SFilterControl &fc );
     void insert( SInsertData &id );
-    void insert( const QByteArray &buf );
-    void append( const QByteArray &buf );
-    void valueOnCursor( QByteArray &buf, uint size );
+    void insert( const TQByteArray &buf );
+    void append( const TQByteArray &buf );
+    void valueOnCursor( TQByteArray &buf, uint size );
     void paletteChanged( void );
     void fontChanged( void );
     void gotoOffset( uint offset, uint bit, bool fromCursor, bool forward );
@@ -188,23 +188,23 @@ class CHexViewWidget : public QFrame
     void setDropHighlight( bool mode );
 
   protected:
-    virtual void drawFrame( QPainter *p );
-    virtual void paintEvent( QPaintEvent *e );
-    virtual void resizeEvent( QResizeEvent *e );
-    virtual void keyPressEvent( QKeyEvent *e );
-    virtual void keyReleaseEvent( QKeyEvent *e );
-    virtual void mousePressEvent( QMouseEvent *e );
-    virtual void mouseMoveEvent( QMouseEvent *e );
-    virtual void wheelEvent( QWheelEvent * );
-    virtual void mouseReleaseEvent( QMouseEvent *e );
-    virtual void dragEnterEvent( QDragEnterEvent *e );
-    virtual void dragLeaveEvent( QDragLeaveEvent *e );
-    virtual void dragMoveEvent( QDragMoveEvent *e );
-    virtual void dropEvent( QDropEvent *e );
-    virtual void showEvent( QShowEvent * );
-    virtual void timerEvent( QTimerEvent *e );
-    virtual void focusInEvent( QFocusEvent *e );
-    virtual void focusOutEvent( QFocusEvent *e );
+    virtual void drawFrame( TQPainter *p );
+    virtual void paintEvent( TQPaintEvent *e );
+    virtual void resizeEvent( TQResizeEvent *e );
+    virtual void keyPressEvent( TQKeyEvent *e );
+    virtual void keyReleaseEvent( TQKeyEvent *e );
+    virtual void mousePressEvent( TQMouseEvent *e );
+    virtual void mouseMoveEvent( TQMouseEvent *e );
+    virtual void wheelEvent( TQWheelEvent * );
+    virtual void mouseReleaseEvent( TQMouseEvent *e );
+    virtual void dragEnterEvent( TQDragEnterEvent *e );
+    virtual void dragLeaveEvent( TQDragLeaveEvent *e );
+    virtual void dragMoveEvent( TQDragMoveEvent *e );
+    virtual void dropEvent( TQDropEvent *e );
+    virtual void showEvent( TQShowEvent * );
+    virtual void timerEvent( TQTimerEvent *e );
+    virtual void focusInEvent( TQFocusEvent *e );
+    virtual void focusOutEvent( TQFocusEvent *e );
 
   protected slots:
     void changeXPos( int pos );
@@ -217,17 +217,17 @@ class CHexViewWidget : public QFrame
     void dataChanged( void );
     void layoutChanged( const SDisplayLayout &layout );
     void inputModeChanged( const SDisplayInputMode &mode );
-    void bookmarkChanged( QPtrList<SCursorOffset> &list );
+    void bookmarkChanged( TQPtrList<SCursorOffset> &list );
     void editMode( CHexBuffer::EEditMode editMode );
     void encodingChanged( const SEncodeState &state );
     void textWidth( uint width );
-    void fileName( const QString &url, bool onDisk );
-    void fileRename( const QString &curName, const QString &newName );
-    void fileClosed( const QString &url );
+    void fileName( const TQString &url, bool onDisk );
+    void fileRename( const TQString &curName, const TQString &newName );
+    void fileClosed( const TQString &url );
 
     void pleaseOpenNewFile( void );
     void pleaseStepFile( bool next );
-    void pleaseOpenFile(const QString &url,bool reloadWhenChanged,uint offset);
+    void pleaseOpenFile(const TQString &url,bool reloadWhenChanged,uint offset);
 
   private:
     void setSelection( uint offset, bool init );
@@ -242,7 +242,7 @@ class CHexViewWidget : public QFrame
     void redrawInterval( uint start, uint stop );
     void redrawLines( uint docLine, int numLine );
     void redrawFromOffset( uint offset, bool finishWindow );
-    void paintText( const QRect &r, bool expand );
+    void paintText( const TQRect &r, bool expand );
     void paintCursor( int cursorMode );
     
 
@@ -259,9 +259,9 @@ class CHexViewWidget : public QFrame
     void cursorInsert( SCursorConfig &cc );
     void cursorDelete( SCursorConfig &cc );
     void cursorBackspace( SCursorConfig &cc );
-    void cursorInput( QChar c );
+    void cursorInput( TQChar c );
 
-    int  bookmarkMenu( const QString &title );
+    int  bookmarkMenu( const TQString &title );
 
     static inline bool shiftButtonState( void );
 
@@ -283,17 +283,17 @@ class CHexViewWidget : public QFrame
   private:
     CScrollBar *mVertScroll;
     CScrollBar *mHorzScroll;
-    QWidget    *mCorner;
+    TQWidget    *mCorner;
   
     CHexBuffer *mHexBuffer;
-    QPixmap    mTextBuffer;
+    TQPixmap    mTextBuffer;
     SDisplayLayout   mLayout; 
     SDisplayCursor   mCursor;
     SDisplayColor    mColor;
     SDisplayFontInfo mFontInfo;
     SDisplayMisc     mMisc;
 
-    QPopupMenu *mDocumentMenu;
+    TQPopupMenu *mDocumentMenu;
 
     int  mScrollBarSize;
     CHexBuffer::EEditMode mEditMode;
@@ -367,13 +367,13 @@ inline void CHexViewWidget::setupCursorTimer( void )
   mHexBuffer->setShowCursor( mShowCursor );
 }
 
-inline void CHexViewWidget::setPopupMenu( QPopupMenu *popupMenu )
+inline void CHexViewWidget::setPopupMenu( TQPopupMenu *popupMenu )
 {
   KContextMenuManager::insert( this, popupMenu );
 }
 
 
-inline void CHexViewWidget::setDocumentMenu( QPopupMenu *popupMenu )
+inline void CHexViewWidget::setDocumentMenu( TQPopupMenu *popupMenu )
 {
   mDocumentMenu = popupMenu;
 }
@@ -517,7 +517,7 @@ inline uint CHexViewWidget::offset( void )
 
 inline uint CHexViewWidget::bookmarkCount( void )
 {
-  const QPtrList<SCursorOffset> &list = mHexBuffer->bookmarkList();
+  const TQPtrList<SCursorOffset> &list = mHexBuffer->bookmarkList();
   return( list.count() );
 }
 
@@ -532,7 +532,7 @@ inline void CHexViewWidget::setModified( bool modified )
   emit fileState( mHexBuffer->fileState() );
 }
 
-inline const QDateTime &CHexViewWidget::diskModifyTime( void )
+inline const TQDateTime &CHexViewWidget::diskModifyTime( void )
 {
   return( mHexBuffer->diskModifyTime() );
 }
@@ -557,12 +557,12 @@ inline bool CHexViewWidget::urlValid( void )
   return( mHexBuffer->hasFileName() );
 }
 
-inline QString &CHexViewWidget::url( void )
+inline TQString &CHexViewWidget::url( void )
 {
   return( mHexBuffer->url() );
 }
 
-inline void CHexViewWidget::setUrl( QString &url )
+inline void CHexViewWidget::setUrl( TQString &url )
 {
   if( mHexBuffer->url() != url )
   {

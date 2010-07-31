@@ -21,14 +21,14 @@
 #include "identifier.h"
 #include "browsedialog.h"
 
-#include <qcombobox.h>
-#include <qlineedit.h>
-#include <qspinbox.h>
-#include <qpushbutton.h>
-#include <qradiobutton.h>
-#include <qbuttongroup.h>
-#include <qcheckbox.h>
-#include <qlabel.h>
+#include <tqcombobox.h>
+#include <tqlineedit.h>
+#include <tqspinbox.h>
+#include <tqpushbutton.h>
+#include <tqradiobutton.h>
+#include <tqbuttongroup.h>
+#include <tqcheckbox.h>
+#include <tqlabel.h>
 
 #include <klocale.h>
 #include <kpushbutton.h>
@@ -37,13 +37,13 @@
 
 using namespace KSim::Snmp;
 
-MonitorDialog::MonitorDialog( const HostConfigMap &hosts, QWidget *parent, const char *name )
+MonitorDialog::MonitorDialog( const HostConfigMap &hosts, TQWidget *parent, const char *name )
     : MonitorDialogBase( parent, name ), m_hosts( hosts )
 {
     init();
 }
 
-MonitorDialog::MonitorDialog( const MonitorConfig &monitor, const HostConfigMap &hosts, QWidget *parent, const char *name )
+MonitorDialog::MonitorDialog( const MonitorConfig &monitor, const HostConfigMap &hosts, TQWidget *parent, const char *name )
     : MonitorDialogBase( parent, name ), m_hosts( hosts )
 {
     init( monitor );
@@ -86,7 +86,7 @@ void MonitorDialog::checkValues()
     labelOptions->setEnabled( currentDisplayTypeIsLabel );
     chartOptions->setEnabled( !currentDisplayTypeIsLabel );
 
-    QString statusText;
+    TQString statusText;
 
     if ( monitorName->text().isEmpty() )
         statusText = i18n( "Please enter a name for this monitor" );
@@ -126,7 +126,7 @@ void MonitorDialog::init( const MonitorConfig &monitor )
 
     host->clear();
 
-    QStringList allHosts;
+    TQStringList allHosts;
     for ( HostConfigMap::ConstIterator it = m_hosts.begin(); it != m_hosts.end(); ++it )
         allHosts << it.key();
 

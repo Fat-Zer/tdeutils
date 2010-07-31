@@ -35,7 +35,7 @@ MonitorConfig::MonitorConfig()
 
 bool MonitorConfig::load( KConfigBase &config, const HostConfigMap &hosts )
 {
-    QString hostName = config.readEntry( "Host" );
+    TQString hostName = config.readEntry( "Host" );
     if ( hostName.isEmpty() )
         return false;
 
@@ -93,9 +93,9 @@ void MonitorConfig::save( KConfigBase &config ) const
         config.writeEntry( "DisplayCurrentValueInline", displayCurrentValueInline );
 }
 
-QWidget *MonitorConfig::createMonitorWidget( QWidget *parent, const char *name )
+TQWidget *MonitorConfig::createMonitorWidget( TQWidget *parent, const char *name )
 {
-    QWidget *w;
+    TQWidget *w;
 
     int refresh = refreshInterval.seconds * 1000 + refreshInterval.minutes * 60 * 1000;
     Identifier id = Identifier::fromString( oid );
@@ -108,23 +108,23 @@ QWidget *MonitorConfig::createMonitorWidget( QWidget *parent, const char *name )
         w = new ChartMonitor( *this, parent, name );
 
     Monitor *monitor = new Monitor( host, id, refresh, w );
-    QObject::connect( monitor, SIGNAL( newData( const Value & ) ),
-                      w, SLOT( setData( const Value & ) ) );
+    TQObject::connect( monitor, TQT_SIGNAL( newData( const Value & ) ),
+                      w, TQT_SLOT( setData( const Value & ) ) );
     return w;
 }
 
-QString KSim::Snmp::monitorDisplayTypeToString( MonitorConfig::DisplayType type )
+TQString KSim::Snmp::monitorDisplayTypeToString( MonitorConfig::DisplayType type )
 {
     switch ( type )
     {
-        case MonitorConfig::Label: return QString::fromLatin1( "Label" );
-        case MonitorConfig::Chart: return QString::fromLatin1( "Chart" );
+        case MonitorConfig::Label: return TQString::fromLatin1( "Label" );
+        case MonitorConfig::Chart: return TQString::fromLatin1( "Chart" );
         default: assert( false );
     };
-    return QString::null;
+    return TQString::null;
 }
 
-MonitorConfig::DisplayType KSim::Snmp::stringToMonitorDisplayType( QString string, bool *ok )
+MonitorConfig::DisplayType KSim::Snmp::stringToMonitorDisplayType( TQString string, bool *ok )
 {
     string = string.lower();
     if ( string == "chart" ) {
@@ -142,17 +142,17 @@ MonitorConfig::DisplayType KSim::Snmp::stringToMonitorDisplayType( QString strin
     return MonitorConfig::Chart;
 }
 
-QStringList KSim::Snmp::allDisplayTypes()
+TQStringList KSim::Snmp::allDisplayTypes()
 {
     // !!! keep order with enum
-    return QStringList() << "Label" << "Chart";
+    return TQStringList() << "Label" << "Chart";
 }
 
-void MonitorConfigMap::load( KConfigBase &config, const QStringList &names, const HostConfigMap &hosts )
+void MonitorConfigMap::load( KConfigBase &config, const TQStringList &names, const HostConfigMap &hosts )
 {
     clear();
 
-    for ( QStringList::ConstIterator it = names.begin(); it != names.end(); ++it ) {
+    for ( TQStringList::ConstIterator it = names.begin(); it != names.end(); ++it ) {
         config.setGroup( "Monitor " + *it );
 
         MonitorConfig monitor;
@@ -163,12 +163,12 @@ void MonitorConfigMap::load( KConfigBase &config, const QStringList &names, cons
     }
 }
 
-QStringList MonitorConfigMap::save( KConfigBase &config ) const
+TQStringList MonitorConfigMap::save( KConfigBase &config ) const
 {
-    QStringList names;
+    TQStringList names;
 
     for ( ConstIterator it = begin(); it != end(); ++it ) {
-        QString name = it.key();
+        TQString name = it.key();
 
         names << name;
 

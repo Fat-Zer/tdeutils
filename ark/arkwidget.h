@@ -33,7 +33,7 @@
 #include <kio/job.h>
 #include <ktempdir.h>
 
-#include <qvbox.h>
+#include <tqvbox.h>
 #include "arch.h"
 
 class QPoint;
@@ -60,7 +60,7 @@ class ArkWidget : public QVBox
 {
     Q_OBJECT
 public:
-    ArkWidget( QWidget *parent=0, const char *name=0 );
+    ArkWidget( TQWidget *parent=0, const char *name=0 );
     virtual ~ArkWidget();
 
     bool isArchiveOpen() const { return m_bIsArchiveOpen; }
@@ -70,12 +70,12 @@ public:
     void setArkInstanceId( int aid ) { m_arkInstanceId = aid; }
 
     void cleanArkTmpDir();
-    virtual QString getArchName() const { return m_strArchName; }
+    virtual TQString getArchName() const { return m_strArchName; }
 
     const KURL& realURL() const { return m_realURL; }
     void setRealURL( const KURL& url ) { m_realURL = url; }
 
-    QString tmpDir() const { return m_tmpDir ? m_tmpDir->name() : QString::null; }
+    TQString tmpDir() const { return m_tmpDir ? m_tmpDir->name() : TQString::null; }
 
     FileListView * fileList() const { return m_fileListView; }
     SearchBar    * searchBar() const { return m_searchBar; }
@@ -89,13 +89,13 @@ public:
     void closeArch();
 
     virtual void setExtractOnly(bool extOnly) { m_extractOnly = extOnly; }
-    virtual void deleteAfterUse( const QString& path );
+    virtual void deleteAfterUse( const TQString& path );
     bool allowedArchiveName( const KURL & u );
     bool file_save_as( const KURL & u );
     virtual KURL getSaveAsFileName();
-    virtual void setOpenAsMimeType( const QString & mimeType );
-    QString & openAsMimeType(){ return m_openAsMimeType; }
-    void prepareViewFiles( const QStringList & fileList );
+    virtual void setOpenAsMimeType( const TQString & mimeType );
+    TQString & openAsMimeType(){ return m_openAsMimeType; }
+    void prepareViewFiles( const TQStringList & fileList );
     virtual void setArchivePopupEnabled( bool b );
 
     virtual void extractTo( const KURL & targetDirectory, const KURL & archive, bool bGuessName );
@@ -121,12 +121,12 @@ protected slots:
     void slotOpenWith();
     void action_edit();
 
-    void doPopup(QListViewItem *, const QPoint &, int); // right-click menus
-    void viewFile(QListViewItem*); // doubleClick view files
+    void doPopup(TQListViewItem *, const TQPoint &, int); // right-click menus
+    void viewFile(TQListViewItem*); // doubleClick view files
 
     void slotSelectionChanged();
-    void slotOpen(Arch *, bool, const QString &, int);
-    void slotCreate(Arch *, bool, const QString &, int);
+    void slotOpen(Arch *, bool, const TQString &, int);
+    void slotCreate(Arch *, bool, const TQString &, int);
     void slotDeleteDone(bool);
     void slotExtractDone(bool);
     void slotExtractRemoteDone(KIO::Job *job);
@@ -135,17 +135,17 @@ protected slots:
 signals:
     void openURLRequest( const KURL & url );
     void request_file_quit();
-    void setBusy( const QString & );
+    void setBusy( const TQString & );
     void setReady();
     void fixActions();
     void disableAllActions();
-    void signalFilePopup( const QPoint & pPoint );
-    void signalArchivePopup( const QPoint & pPoint );
-    void setStatusBarText( const QString & text );
-    void setStatusBarSelectedFiles( const QString & text );
+    void signalFilePopup( const TQPoint & pPoint );
+    void signalArchivePopup( const TQPoint & pPoint );
+    void setStatusBarText( const TQString & text );
+    void setStatusBarSelectedFiles( const TQString & text );
     void removeRecentURL( const KURL & url );
     void addRecentURL( const KURL & url );
-    void setWindowCaption( const QString &caption );
+    void setWindowCaption( const TQString &caption );
     void removeOpenArk( const KURL & );
     void addOpenArk( const KURL & );
     void createDone( bool );
@@ -156,9 +156,9 @@ signals:
 protected:
 
     // DND
-    void dragMoveEvent(QDragMoveEvent *e);
-    void dropEvent(QDropEvent* event);
-    void dropAction(QStringList & list);
+    void dragMoveEvent(TQDragMoveEvent *e);
+    void dropEvent(TQDropEvent* event);
+    void dropAction(TQStringList & list);
 
 private: // methods
     // disabling/enabling of buttons and menu items
@@ -168,7 +168,7 @@ private: // methods
     void disableAll();
     void updateStatusSelection();
     void updateStatusTotals();
-    void addFile(QStringList *list);
+    void addFile(TQStringList *list);
     void removeDownloadedFiles();
 
     // make sure that str is a local file/dir
@@ -177,31 +177,31 @@ private: // methods
     // ask user whether to create a real archive from a compressed file
     // returns filename if so. Otherwise, empty.
     KURL askToCreateRealArchive();
-    Arch * getNewArchive( const QString & _fileName, const QString& _mimetype = QString() );
-    void createRealArchive( const QString &strFilename,
-                            const QStringList & filesToAdd = QStringList() );
-    KURL getCreateFilename( const QString & _caption,
-                            const QString & _defaultMimeType = QString::null,
+    Arch * getNewArchive( const TQString & _fileName, const TQString& _mimetype = TQString() );
+    void createRealArchive( const TQString &strFilename,
+                            const TQStringList & filesToAdd = TQStringList() );
+    KURL getCreateFilename( const TQString & _caption,
+                            const TQString & _defaultMimeType = TQString::null,
                             bool allowCompressed = true,
-                            const QString & _suggestedName = QString::null );
+                            const TQString & _suggestedName = TQString::null );
 
-    bool reportExtractFailures(const QString & _dest, QStringList *_list);
-    QStringList existingFiles( const QString & _dest, QStringList & _list );
+    bool reportExtractFailures(const TQString & _dest, TQStringList *_list);
+    TQStringList existingFiles( const TQString & _dest, TQStringList & _list );
 
     void extractOnlyOpenDone();
     void extractRemoteInitiateMoving( const KURL & target );
     void editStart();
 
-    void busy( const QString & text );
+    void busy( const TQString & text );
     void holdBusy();
     void resumeBusy();
     void ready();
 
     //suggests an extract directory based on archive name
-    const QString guessName( const KURL & archive );
+    const TQString guessName( const KURL & archive );
 
 private slots:
-    void startDrag( const QStringList & fileList );
+    void startDrag( const TQStringList & fileList );
     void startDragSlotExtractDone( bool );
     void editSlotExtractDone();
     void editSlotAddDone( bool success );
@@ -209,7 +209,7 @@ private slots:
     void openWithSlotExtractDone( bool success );
 
     void createRealArchiveSlotCreate( Arch * newArch, bool success,
-                                      const QString & fileName, int nbr );
+                                      const TQString & fileName, int nbr );
     void createRealArchiveSlotAddDone( bool success );
     void createRealArchiveSlotAddFilesDone( bool success );
 
@@ -227,14 +227,14 @@ private slots:
     void addToArchiveSlotAddDone( bool success );
 
 protected:
-    void arkWarning(const QString& msg);
-    void arkError(const QString& msg);
+    void arkWarning(const TQString& msg);
+    void arkError(const TQString& msg);
 
-    void newCaption(const QString& filename);
+    void newCaption(const TQString& filename);
     void createFileListView();
 
-    bool createArchive(const QString & name);
-    void openArchive(const QString & name);
+    bool createArchive(const TQString & name);
+    void openArchive(const TQString & name);
 
     void showCurrentFile();
 
@@ -245,10 +245,10 @@ private: // data
     bool m_settingsAltered;
 
     // for use in the edit methods: the url.
-    QString m_strFileToView;
+    TQString m_strFileToView;
 
     // the compressed file to be added into the new archive
-    QString m_compressedFile;
+    TQString m_compressedFile;
 
     // Set to true if we are doing an "Extract to Folder"
     bool m_extractOnly;
@@ -263,15 +263,15 @@ private: // data
     KURL m_viewURL;
 
     // the mimetype the user wants to open this archive as
-    QString m_openAsMimeType;
+    TQString m_openAsMimeType;
 
     // if they're dragging in files, this is the temporary list for when
     // we have to create an archive:
-    QStringList *m_pTempAddList;
+    TQStringList *m_pTempAddList;
 
     KRun *m_pKRunPtr;
 
-    QStringList mpDownloadedList;
+    TQStringList mpDownloadedList;
 
     bool m_bArchivePopupEnabled;
 
@@ -293,7 +293,7 @@ private: // data
     SearchBar * m_searchBar;
 
     Arch   * arch;
-    QString  m_strArchName;
+    TQString  m_strArchName;
     KURL     m_realURL;
     KURL     m_url;
     ArchType m_archType;
@@ -309,9 +309,9 @@ private: // data
     bool m_bIsSimpleCompressedFile;
     bool m_bDropSourceIsSelf;
 
-    QStringList mDragFiles;
-    QStringList *m_extractList;
-    QStringList *m_viewList;
+    TQStringList mDragFiles;
+    TQStringList *m_extractList;
+    TQStringList *m_viewList;
     KTempDir *m_tmpDir;
 };
 

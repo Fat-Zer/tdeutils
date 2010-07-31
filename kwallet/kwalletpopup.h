@@ -21,14 +21,14 @@
 #define KWALLETPOPUP_H
 
 #include <kpopupmenu.h>
-#include <qmap.h>
-#include <qstring.h>
+#include <tqmap.h>
+#include <tqstring.h>
 
 class KWalletPopup : public KPopupMenu {
 	Q_OBJECT
 
 	public:
-		KWalletPopup(const QString& wallet, QWidget *parent = 0, const char* name = 0);
+		KWalletPopup(const TQString& wallet, TQWidget *parent = 0, const char* name = 0);
 		virtual ~KWalletPopup();
 
 	public slots:
@@ -40,15 +40,15 @@ class KWalletPopup : public KPopupMenu {
 		void disconnectApp(int);
 
 	signals:
-		void walletOpened(const QString& walletName);
-		void walletClosed(const QString& walletName);
-		void walletDeleted(const QString& walletName);
+		void walletOpened(const TQString& walletName);
+		void walletClosed(const TQString& walletName);
+		void walletDeleted(const TQString& walletName);
 		void walletCreated();
-		void walletChangePassword(const QString& walletName);
+		void walletChangePassword(const TQString& walletName);
 
 	private:
-		QString _walletName;
-		QMap<int,QString> _appMap;
+		TQString _walletName;
+		TQMap<int,TQString> _appMap;
 };
 
 #endif

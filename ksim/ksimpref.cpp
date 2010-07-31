@@ -33,11 +33,11 @@
 #include <kstandarddirs.h>
 #include <kmessagebox.h>
 
-#include <qhbox.h>
-#include <qframe.h>
+#include <tqhbox.h>
+#include <tqframe.h>
 
 KSim::ConfigDialog::ConfigDialog(KSim::Config *config,
-   QWidget *parent, const char *name)
+   TQWidget *parent, const char *name)
    : KDialogBase(TreeList, i18n("Configure"),
    Help | Ok | Apply | Close, Ok, parent, name, true, true)
 {
@@ -47,53 +47,53 @@ KSim::ConfigDialog::ConfigDialog(KSim::Config *config,
 
   m_config = config;
 
-  setFolderIcon(QStringList(' ' + i18n("Plugins")),
+  setFolderIcon(TQStringList(' ' + i18n("Plugins")),
      BarIcon("folder", KIcon::SizeSmall));
-  setFolderIcon(QStringList(' ' + i18n("Miscellaneous")),
+  setFolderIcon(TQStringList(' ' + i18n("Miscellaneous")),
      BarIcon("misc", KIcon::SizeSmall));
 
-  QFrame *monitors = addHBoxPage(' ' + i18n("Monitors"),
+  TQFrame *monitors = addHBoxPage(' ' + i18n("Monitors"),
      i18n("Monitors Installed"), BarIcon("ksim", KIcon::SizeSmall));
   m_monPage = new KSim::MonitorPrefs(monitors);
 
-  QStringList list;
+  TQStringList list;
   list << ' ' + i18n("Miscellaneous") << ' ' + i18n("General");
-  QFrame *general = addHBoxPage(list, i18n("General Options"),
+  TQFrame *general = addHBoxPage(list, i18n("General Options"),
      SmallIcon("misc"));
   m_generalPage = new KSim::GeneralPrefs(general);
   list.clear();
 
   list << ' ' + i18n("Miscellaneous") << ' ' + i18n("Clock");
-  QFrame *clock = addHBoxPage(list, i18n("Clock Options"),
-     QPixmap(locate("data", "ksim/pics/clock.png")));
+  TQFrame *clock = addHBoxPage(list, i18n("Clock Options"),
+     TQPixmap(locate("data", "ksim/pics/clock.png")));
   m_clockPage = new KSim::ClockPrefs(clock);
   list.clear();
 
   list << ' ' + i18n("Miscellaneous") << ' ' + i18n("Uptime");
-  QFrame *uptime = addHBoxPage(list, i18n("Uptime Options"),
-     QPixmap(locate("data", "ksim/pics/uptime.png")));
+  TQFrame *uptime = addHBoxPage(list, i18n("Uptime Options"),
+     TQPixmap(locate("data", "ksim/pics/uptime.png")));
   m_uptimePage = new KSim::UptimePrefs(uptime);
   list.clear();
 
   list << ' ' + i18n("Miscellaneous") << ' ' + i18n("Memory");
-  QFrame *memory = addHBoxPage(list, i18n("Memory Options"),
+  TQFrame *memory = addHBoxPage(list, i18n("Memory Options"),
      SmallIcon("memory"));
   m_memoryPage = new KSim::MemoryPrefs(memory);
   list.clear();
 
   list << ' ' + i18n("Miscellaneous") << ' ' + i18n("Swap");
-  QFrame *swap = addHBoxPage(list, i18n("Swap Options"),
+  TQFrame *swap = addHBoxPage(list, i18n("Swap Options"),
      SmallIcon("hdd_unmount"));
   m_swapPage = new KSim::SwapPrefs(swap);
 
-  QFrame *theme = addHBoxPage(' ' + i18n("Themes"),
+  TQFrame *theme = addHBoxPage(' ' + i18n("Themes"),
      i18n("Theme Selector"), BarIcon("folder_image", KIcon::SizeSmall));
   m_themePage = new KSim::ThemePrefs(theme);
 
-  connect(this, SIGNAL(applyClicked()), SLOT(savePrefs()));
-  connect(this, SIGNAL(okClicked()), SLOT(closePrefs()));
-  connect(this, SIGNAL(closeClicked()), SLOT(loadPluginConfig()));
-  connect(parent, SIGNAL(reload()), SLOT(reload()));
+  connect(this, TQT_SIGNAL(applyClicked()), TQT_SLOT(savePrefs()));
+  connect(this, TQT_SIGNAL(okClicked()), TQT_SLOT(closePrefs()));
+  connect(this, TQT_SIGNAL(closeClicked()), TQT_SLOT(loadPluginConfig()));
+  connect(parent, TQT_SIGNAL(reload()), TQT_SLOT(reload()));
 
   KSim::PluginList::ConstIterator it;
   const KSim::PluginList &pluginList = KSim::PluginLoader::self().pluginList();
@@ -117,7 +117,7 @@ void KSim::ConfigDialog::reload()
   enableButtons();
 }
 
-void KSim::ConfigDialog::removePage(const QCString &name)
+void KSim::ConfigDialog::removePage(const TQCString &name)
 {
   const KSim::Plugin &plugin = KSim::PluginLoader::self().find(name);
   if (plugin.isNull() || !plugin.configPage()) {
@@ -126,18 +126,18 @@ void KSim::ConfigDialog::removePage(const QCString &name)
     return;
   }
 
-  QWidget *frame = plugin.configPage()->parentWidget();
+  TQWidget *frame = plugin.configPage()->parentWidget();
   // reparent the widget if the parent is not null
   if (frame) {
     plugin.configPage()->hide();
-    plugin.configPage()->reparent(0, QPoint(0, 0), false);
+    plugin.configPage()->reparent(0, TQPoint(0, 0), false);
     // delete the frame so it removes the page from the config dialog
     delete frame;
     kdDebug(2003) << "removing " << name << " from KSimPref" << endl;
   }
 }
 
-void KSim::ConfigDialog::createPage(const QCString &name)
+void KSim::ConfigDialog::createPage(const TQCString &name)
 {
   const KSim::Plugin &plugin = KSim::PluginLoader::self().find(name);
   createPage(plugin);
@@ -154,17 +154,17 @@ void KSim::ConfigDialog::createPage(const KSim::Plugin &plugin)
 
   kdDebug(2003) << "adding " << plugin.libName() << " to KSimPref" << endl;
 
-  QStringList list;
+  TQStringList list;
   list << ' ' + i18n("Plugins") << ' ' + plugin.name();
-  QFrame *pluginFrame = addHBoxPage(list, i18n("%1 Options").arg(plugin.name()),
+  TQFrame *pluginFrame = addHBoxPage(list, i18n("%1 Options").arg(plugin.name()),
      plugin.icon());
 
-  plugin.configPage()->reparent(pluginFrame, QPoint(0, 0), true);
+  plugin.configPage()->reparent(pluginFrame, TQPoint(0, 0), true);
   plugin.configPage()->readConfig();
 
 // TODO: implement this correctly one day
-//  connect (info.configPage(), SIGNAL(pageChanged()),
-//     this, SLOT(enableButtons()));
+//  connect (info.configPage(), TQT_SIGNAL(pageChanged()),
+//     this, TQT_SLOT(enableButtons()));
 }
 
 void KSim::ConfigDialog::savePrefs()
@@ -185,8 +185,8 @@ void KSim::ConfigDialog::saveConfig(bool reload)
   m_themePage->saveConfig(m_config);
 
   ChangedPluginList changedPlugins;
-  for (QListViewItemIterator it(m_monPage); it.current(); ++it) {
-    QCheckListItem *item = static_cast<QCheckListItem *>(it.current());
+  for (TQListViewItemIterator it(m_monPage); it.current(); ++it) {
+    TQCheckListItem *item = static_cast<TQCheckListItem *>(it.current());
     KSim::PluginInfo info = KSim::PluginLoader::self().findPluginInfo(item->text(0),
        KSim::PluginLoader::Name);
     changedPlugins.append(ChangedPlugin(item->isOn(),
@@ -211,8 +211,8 @@ void KSim::ConfigDialog::readConfig()
   m_themePage->readConfig(m_config);
 
   m_currentPlugins.clear();
-  for (QListViewItemIterator it(m_monPage); it.current(); ++it) {
-    QCheckListItem *item = static_cast<QCheckListItem *>(it.current());
+  for (TQListViewItemIterator it(m_monPage); it.current(); ++it) {
+    TQCheckListItem *item = static_cast<TQCheckListItem *>(it.current());
     KSim::PluginInfo info = KSim::PluginLoader::self().findPluginInfo(item->text(0),
        KSim::PluginLoader::Name);
     m_currentPlugins.append(ChangedPlugin(item->isOn(),
@@ -248,7 +248,7 @@ void KSim::ConfigDialog::disableButtons()
   enableButtonOK(false);
 }
 
-const KSim::ChangedPlugin &KSim::ConfigDialog::findPlugin(const QString &name) const
+const KSim::ChangedPlugin &KSim::ConfigDialog::findPlugin(const TQString &name) const
 {
   ChangedPluginList::ConstIterator it;
   for (it = m_currentPlugins.begin(); it != m_currentPlugins.end(); ++it) {

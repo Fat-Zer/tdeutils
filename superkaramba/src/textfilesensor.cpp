@@ -8,9 +8,9 @@
  *   (at your option) any later version.                                   *
  ***************************************************************************/
 #include "textfilesensor.h"
-#include "qdom.h"
+#include "tqdom.h"
 
-TextFileSensor::TextFileSensor( const QString &fn, bool iRdf, int interval, const QString &encoding )
+TextFileSensor::TextFileSensor( const TQString &fn, bool iRdf, int interval, const TQString &encoding )
         : Sensor( interval )
 {
     fileName = fn;
@@ -18,12 +18,12 @@ TextFileSensor::TextFileSensor( const QString &fn, bool iRdf, int interval, cons
 
     if( !encoding.isEmpty() )
     {
-        codec = QTextCodec::codecForName( encoding.ascii() );
+        codec = TQTextCodec::codecForName( encoding.ascii() );
         if ( codec == 0)
-            codec = QTextCodec::codecForLocale();
+            codec = TQTextCodec::codecForLocale();
     }
     else
-        codec = QTextCodec::codecForLocale();
+        codec = TQTextCodec::codecForLocale();
 }
 
 TextFileSensor::~TextFileSensor()
@@ -31,30 +31,30 @@ TextFileSensor::~TextFileSensor()
 
 void TextFileSensor::update()
 {
-    QValueVector<QString> lines;
-    QFile file(fileName);
-    QString line;
+    TQValueVector<TQString> lines;
+    TQFile file(fileName);
+    TQString line;
     if ( file.open(IO_ReadOnly | IO_Translate) )
     {
         if (rdf)
         {
-            QDomDocument doc;
+            TQDomDocument doc;
             if ( !doc.setContent( &file ) )
             {
                 file.close();
                 return;
             }
-            QDomElement docElem = doc.documentElement();
-            QDomNode n = docElem.firstChild();
+            TQDomElement docElem = doc.documentElement();
+            TQDomNode n = docElem.firstChild();
             if (!n.isNull())
             {
-                QDomNodeList titles = docElem.elementsByTagName( "title" );
-                QDomNodeList links = docElem.elementsByTagName( "link" );
+                TQDomNodeList titles = docElem.elementsByTagName( "title" );
+                TQDomNodeList links = docElem.elementsByTagName( "link" );
 
                 uint i;
                 for ( i = 0; i < titles.count(); ++i )
                 {
-                    QDomElement element = titles.item( i ).toElement();
+                    TQDomElement element = titles.item( i ).toElement();
                     lines.push_back(element.text());
 
                     element = links.item( i ).toElement();
@@ -64,7 +64,7 @@ void TextFileSensor::update()
         }
         else
         {
-            QTextStream t( &file );        // use a text stream
+            TQTextStream t( &file );        // use a text stream
             while( (line = t.readLine()) !=0 )
             {
                 lines.push_back(line);
@@ -78,7 +78,7 @@ void TextFileSensor::update()
     Meter *meter;
 
     int count = (int) lines.size();
-    QObjectListIt it( *objList );
+    TQObjectListIt it( *objList );
     while (it != 0)
     {
         sp = (SensorParams*)(*it);
@@ -95,7 +95,7 @@ void TextFileSensor::update()
 
         if ( lineNbr == 0 )
         {
-            QString text;
+            TQString text;
             for( int i=0; i < count; i++ )
             {
                 text += lines[i] + "\n";

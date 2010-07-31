@@ -38,7 +38,7 @@ public:
     Session( const HostConfig &snmpHostConfig );
     ~Session();
 
-    bool snmpGet( const QString &identifier, Value &value, ErrorInfo *error = 0 );
+    bool snmpGet( const TQString &identifier, Value &value, ErrorInfo *error = 0 );
     bool snmpGet( const Identifier &identifier, Value &value, ErrorInfo *error = 0 );
     bool snmpGet( const IdentifierList &identifiers, ValueMap &variables, ErrorInfo *error = 0 );
 

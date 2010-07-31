@@ -109,7 +109,7 @@ void HostConfig::save( KConfigBase &config ) const
     writeIfNotEmpty( config, "PrivPassphrase", KStringHandler::obscure( privacy.key ) );
 }
 
-void HostConfig::writeIfNotEmpty( KConfigBase &config, const QString &name, const QString &value )
+void HostConfig::writeIfNotEmpty( KConfigBase &config, const TQString &name, const TQString &value )
 {
     if ( value.isEmpty() )
         return;
@@ -117,11 +117,11 @@ void HostConfig::writeIfNotEmpty( KConfigBase &config, const QString &name, cons
     config.writeEntry( name, value );
 }
 
-void HostConfigMap::load( KConfigBase &config, const QStringList &hosts )
+void HostConfigMap::load( KConfigBase &config, const TQStringList &hosts )
 {
     clear();
 
-    for ( QStringList::ConstIterator it = hosts.begin(); it != hosts.end(); ++it ) {
+    for ( TQStringList::ConstIterator it = hosts.begin(); it != hosts.end(); ++it ) {
         config.setGroup( "Host " + *it );
 
         HostConfig src;
@@ -132,12 +132,12 @@ void HostConfigMap::load( KConfigBase &config, const QStringList &hosts )
     }
 }
 
-QStringList HostConfigMap::save( KConfigBase &config ) const
+TQStringList HostConfigMap::save( KConfigBase &config ) const
 {
-    QStringList hostList;
+    TQStringList hostList;
 
     for ( ConstIterator it = begin(); it != end(); ++it ) {
-        QString host = it.key();
+        TQString host = it.key();
 
         hostList << host;
 

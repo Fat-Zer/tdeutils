@@ -20,7 +20,7 @@
 
 #ifdef QT_ONLY
   #include "compat.h"
-  #include <qtextbrowser.h>
+  #include <tqtextbrowser.h>
 #else
   # include <ktextbrowser.h>
 #endif
@@ -28,8 +28,8 @@
 class InfoPage :public KTextBrowser
 {
 public:
-  InfoPage( QWidget* parent, const char* name );
-  virtual void setSource ( const QString& name );
+  InfoPage( TQWidget* parent, const char* name );
+  virtual void setSource ( const TQString& name );
 };
 
 

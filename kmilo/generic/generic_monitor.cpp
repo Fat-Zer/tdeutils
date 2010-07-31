@@ -33,16 +33,16 @@
 
 #include "generic_monitor.h"
 #include "kmilointerface.h"
-#include <qmessagebox.h>
-#include <qfile.h>
-#include <qdir.h>
+#include <tqmessagebox.h>
+#include <tqfile.h>
+#include <tqdir.h>
 
 #define CONFIG_FILE "kmilodrc"
 
 
 using namespace KMilo;
 
-GenericMonitor::GenericMonitor(QObject *parent, const char *name, const QStringList& args)
+GenericMonitor::GenericMonitor(TQObject *parent, const char *name, const TQStringList& args)
 : Monitor(parent, name, args)
 {
 	_poll = false;
@@ -79,23 +79,23 @@ bool GenericMonitor::init()
 		return false; // exit early if we are not supposed to run
 
 	static const ShortcutInfo shortcuts[] = {
- 		{ "Search", KShortcut("XF86Search"), SLOT(launchSearch()) },
- 		{ "Home Folder", KShortcut("XF86MyComputer"), SLOT(launchHomeFolder()) },
- 		{ "Mail", KShortcut("XF86Mail"), SLOT(launchMail()) },
- 		{ "Audio Media", KShortcut("XF86AudioMedia"), SLOT(launchMusic()) },
- 		{ "Music", KShortcut("XF86Music"), SLOT(launchMusic()) },
- 		{ "Browser", KShortcut("XF86WWW"), SLOT(launchBrowser()) },
- 		{ "Calculator", KShortcut("XF86Calculator"), SLOT(launchCalculator()) },
- 		{ "Terminal", KShortcut("XF86Terminal"), SLOT(launchTerminal()) },
- 		{ "Eject", KShortcut("XF86Eject"), SLOT(eject()) },
- 		{ "Help", KShortcut("XF86Launch0"), SLOT(launchHelp()) },
-		{ "Light Bulb", KShortcut("XF86LightBulb"), SLOT(lightBulb()) },
-		{ "Battery", KShortcut("XF86LaunchB"), SLOT(pmBattery()) },
-		{ "FastVolumeUp", Qt::Key_VolumeUp, SLOT(fastVolumeUp()) },
-		{ "FastVolumeDown", Qt::Key_VolumeDown, SLOT(fastVolumeDown()) },
-		{ "SlowVolumeUp", Qt::CTRL+Qt::Key_VolumeUp, SLOT(slowVolumeUp()) },
-		{ "SlowVolumeDown", Qt::CTRL+Qt::Key_VolumeDown, SLOT(slowVolumeDown()) },
-		{ "Mute", KShortcut("XF86AudioMute"), SLOT(mute()) }
+ 		{ "Search", KShortcut("XF86Search"), TQT_SLOT(launchSearch()) },
+ 		{ "Home Folder", KShortcut("XF86MyComputer"), TQT_SLOT(launchHomeFolder()) },
+ 		{ "Mail", KShortcut("XF86Mail"), TQT_SLOT(launchMail()) },
+ 		{ "Audio Media", KShortcut("XF86AudioMedia"), TQT_SLOT(launchMusic()) },
+ 		{ "Music", KShortcut("XF86Music"), TQT_SLOT(launchMusic()) },
+ 		{ "Browser", KShortcut("XF86WWW"), TQT_SLOT(launchBrowser()) },
+ 		{ "Calculator", KShortcut("XF86Calculator"), TQT_SLOT(launchCalculator()) },
+ 		{ "Terminal", KShortcut("XF86Terminal"), TQT_SLOT(launchTerminal()) },
+ 		{ "Eject", KShortcut("XF86Eject"), TQT_SLOT(eject()) },
+ 		{ "Help", KShortcut("XF86Launch0"), TQT_SLOT(launchHelp()) },
+		{ "Light Bulb", KShortcut("XF86LightBulb"), TQT_SLOT(lightBulb()) },
+		{ "Battery", KShortcut("XF86LaunchB"), TQT_SLOT(pmBattery()) },
+		{ "FastVolumeUp", Qt::Key_VolumeUp, TQT_SLOT(fastVolumeUp()) },
+		{ "FastVolumeDown", Qt::Key_VolumeDown, TQT_SLOT(fastVolumeDown()) },
+		{ "SlowVolumeUp", Qt::CTRL+Qt::Key_VolumeUp, TQT_SLOT(slowVolumeUp()) },
+		{ "SlowVolumeDown", Qt::CTRL+Qt::Key_VolumeDown, TQT_SLOT(slowVolumeDown()) },
+		{ "Mute", KShortcut("XF86AudioMute"), TQT_SLOT(mute()) }
 	};
 
 	ga = new KGlobalAccel(this, "miloGenericAccel");
@@ -105,7 +105,7 @@ bool GenericMonitor::init()
 	for (int i = 0; i < len; i++) {
 		si = shortcuts[i];
 
-		ga->insert(si.name, QString::null, QString::null,
+		ga->insert(si.name, TQString::null, TQString::null,
 							 si.symbol, si.symbol,
 							 this,
 							 si.slot, false);
@@ -310,7 +310,7 @@ void GenericMonitor::mute()
 		return;
 
 	m_mute = !m_mute;
-	QString muteText;
+	TQString muteText;
 	if (m_mute)
 	{
 		muteText = i18n("Mute on");
@@ -335,9 +335,9 @@ Monitor::DisplayType GenericMonitor::poll()
 	return m_displayType;
 }
 
-void GenericMonitor::launch(QString configKey, QString defaultApplication)
+void GenericMonitor::launch(TQString configKey, TQString defaultApplication)
 {
-	QString application = config->readEntry(configKey, defaultApplication);
+	TQString application = config->readEntry(configKey, defaultApplication);
 	KProcess proc;
 	proc << application;
 	proc.start(KProcess::DontCare);
@@ -361,7 +361,7 @@ void GenericMonitor::launchSearch()
 
 void GenericMonitor::launchHomeFolder()
 {
-	QString home = QDir::home().path();
+	TQString home = TQDir::home().path();
 	KProcess proc;
 	proc << "kfmclient" << "exec" << home;
 	proc.start(KProcess::DontCare);

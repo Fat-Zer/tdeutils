@@ -19,7 +19,7 @@
 #define KEYINFOWIDGET_H
 
 #include <kdialogbase.h>
-#include <qpixmap.h>
+#include <tqpixmap.h>
 
 class KTempFile;
 class QLabel;
@@ -36,7 +36,7 @@ class KgpgKeyInfo : public KDialogBase
 
 public:
 
-	KgpgKeyInfo( QWidget *parent = 0, const char *name = 0,QString sigkey=0);
+	KgpgKeyInfo( TQWidget *parent = 0, const char *name = 0,TQString sigkey=0);
 	~KgpgKeyInfo();
 	KeyProperties *prop;
 
@@ -47,35 +47,35 @@ private slots:
 	void slotChangeExp();
 	void slotEnableDate(bool isOn);
 	void slotChangeDate();
-	void slotCheckDate(QDate date);
+	void slotCheckDate(TQDate date);
 	void openPhoto();
-	void slotSetPhoto(const QPixmap &pix);
+	void slotSetPhoto(const TQPixmap &pix);
 	void finishphotoreadprocess(KProcIO *p);
 	void slotMainImageRead(KProcess *);
-	void slotSetMainPhoto(QStringList list);
-	void reloadMainPhoto(const QString &uid);
+	void slotSetMainPhoto(TQStringList list);
+	void reloadMainPhoto(const TQString &uid);
 	void slotInfoPasswordChanged();
 	void slotInfoExpirationChanged(int res);
 	void slotInfoTrustChanged();
 	void slotChangeTrust(int newTrust);
-	void loadKey(QString Keyid);
+	void loadKey(TQString Keyid);
 	void slotDisableKey(bool isOn);
 
 private:
         KTempFile *kgpginfotmp;
-        QLabel *keyinfoPhoto;
-        QString displayedKeyID;
-        QString expirationDate;
+        TQLabel *keyinfoPhoto;
+        TQString displayedKeyID;
+        TQString expirationDate;
         bool hasPhoto,keyWasChanged;
 	KDialogBase *chdate;
-	QCheckBox *kb;
+	TQCheckBox *kb;
 	KDatePicker *kdt;
 	int counter;
 
 signals:
 	
-	void signalPhotoId(const QPixmap&);
-	void changeMainPhoto(const QPixmap&);
+	void signalPhotoId(const TQPixmap&);
+	void changeMainPhoto(const TQPixmap&);
 	void keyNeedsRefresh();
 
 };

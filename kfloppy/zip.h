@@ -49,7 +49,7 @@ class ZipFormat : public DiskFormat
 Q_OBJECT
 
 public:
-	ZipFormat(QWidget *w, const char *n);
+	ZipFormat(TQWidget *w, const char *n);
 
 	// All the virtuals we need to make
 	// a concrete DiskFormat class. See
@@ -68,17 +68,17 @@ public:
 	static bool runtimeCheck();
 
 protected:
-	QCheckBox *zeroWholeDisk;
-	QCheckBox *enableSoftUpdates;
+	TQCheckBox *zeroWholeDisk;
+	TQCheckBox *enableSoftUpdates;
 
-	static QString newfs,dd;
+	static TQString newfs,dd;
 
 	KProcess *p;	///< dd or newfs, doing the real work
 	int formatStep;	///< keeps track of what phase we are in
 
 	// Variables for the zeroing phase
 	int totalBlocks;
-	QTimer *statusTimer;
+	TQTimer *statusTimer;
 
 protected slots:
 	/**

@@ -24,19 +24,19 @@
 #include <kapplication.h>
 #include <kaboutdata.h>
 #include <kdebug.h>
-#include <qregexp.h>
-#include <qpopupmenu.h>
+#include <tqregexp.h>
+#include <tqpopupmenu.h>
 #include <kconfig.h>
 
 
 class KSim::PluginObject::Private
 {
   public:
-    QCString name;
-    QString configName;
+    TQCString name;
+    TQString configName;
 };
 
-KSim::PluginObject::PluginObject(const QCString &name)
+KSim::PluginObject::PluginObject(const TQCString &name)
 {
   d = new PluginObject::Private;
   d->name = name;
@@ -53,12 +53,12 @@ const char *KSim::PluginObject::instanceName() const
   return kapp->aboutData()->appName();
 }
 
-const QCString &KSim::PluginObject::name() const
+const TQCString &KSim::PluginObject::name() const
 {
   return d->name;
 }
 
-void KSim::PluginObject::setConfigFileName(const QString &name)
+void KSim::PluginObject::setConfigFileName(const TQString &name)
 {
   if (d->configName == name)
     return;
@@ -68,7 +68,7 @@ void KSim::PluginObject::setConfigFileName(const QString &name)
     d->configName.prepend("ksim_");
 }
 
-const QString &KSim::PluginObject::configFileName() const
+const TQString &KSim::PluginObject::configFileName() const
 {
   return d->configName;
 }
@@ -81,7 +81,7 @@ class KSim::PluginPage::Private
 };
 
 KSim::PluginPage::PluginPage(KSim::PluginObject *parent, const char *name)
-   : QWidget(0, name)
+   : TQWidget(0, name)
 {
   d = new PluginPage::Private;
   d->parent = parent;
@@ -112,18 +112,18 @@ class KSim::PluginView::Private
 {
   public:
     PluginObject *parent;
-    QPopupMenu *popupMenu;
+    TQPopupMenu *popupMenu;
     KConfig *config;
 };
 
 KSim::PluginView::PluginView(KSim::PluginObject *parent, const char *name)
-   : QWidget(0, name)
+   : TQWidget(0, name)
 {
   d = new PluginView::Private;
   d->parent = parent;
-  d->popupMenu = new QPopupMenu(this);
+  d->popupMenu = new TQPopupMenu(this);
   d->popupMenu->insertItem(i18n("About"), this,
-     SLOT(showAbout()), 0, -1, 0);
+     TQT_SLOT(showAbout()), 0, -1, 0);
 
   if (parent && !parent->configFileName().isEmpty())
     d->config = new KConfig(parent->configFileName() + "rc");
@@ -147,7 +147,7 @@ KConfig *KSim::PluginView::config() const
   return d->config;
 }
 
-QPopupMenu *KSim::PluginView::menu() const
+TQPopupMenu *KSim::PluginView::menu() const
 {
   return d->popupMenu;
 }
@@ -157,9 +157,9 @@ void KSim::PluginView::doCommand()
   emit runCommand(name());
 }
 
-void KSim::PluginView::mousePressEvent(QMouseEvent *ev)
+void KSim::PluginView::mousePressEvent(TQMouseEvent *ev)
 {
-  if (ev->button() == QMouseEvent::LeftButton)
+  if (ev->button() == TQMouseEvent::LeftButton)
     doCommand();
 }
 

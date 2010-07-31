@@ -33,17 +33,17 @@ ShowDesktop* ShowDesktop::the()
 }
 
 ShowDesktop::ShowDesktop()
-  : QObject()
+  : TQObject()
   , showingDesktop( false )
   , kWinModule( 0 )
 {
     kWinModule = new KWinModule( this );
 
     // on desktop changes or when a window is deiconified, we abort the show desktop mode
-    connect( kWinModule, SIGNAL(currentDesktopChanged(int)),
-             SLOT(slotCurrentDesktopChanged(int)));
-    connect( kWinModule, SIGNAL(windowChanged(WId,unsigned int)),
-             SLOT(slotWindowChanged(WId,unsigned int)));
+    connect( kWinModule, TQT_SIGNAL(currentDesktopChanged(int)),
+             TQT_SLOT(slotCurrentDesktopChanged(int)));
+    connect( kWinModule, TQT_SIGNAL(windowChanged(WId,unsigned int)),
+             TQT_SLOT(slotWindowChanged(WId,unsigned int)));
 }
 
 void ShowDesktop::slotCurrentDesktopChanged(int)
@@ -91,9 +91,9 @@ void ShowDesktop::showDesktop( bool b )
     if ( b ) {
         // this code should move to KWin after supporting NETWM1.2
         iconifiedList.clear();
-        const QValueList<WId> windows = kWinModule->windows();
-        QValueList<WId>::ConstIterator it;
-        QValueList<WId>::ConstIterator end( windows.end() );
+        const TQValueList<WId> windows = kWinModule->windows();
+        TQValueList<WId>::ConstIterator it;
+        TQValueList<WId>::ConstIterator end( windows.end() );
         for ( it=windows.begin(); it!=end; ++it ) {
             WId w = *it;
             NETWinInfo info( qt_xdisplay(), w, qt_xrootwin(),
@@ -107,13 +107,13 @@ void ShowDesktop::showDesktop( bool b )
         }
         // find first, hide later, otherwise transients may get minimized
         // with the window they're transient for
-        QValueList<WId>::ConstIterator endInconifiedList( iconifiedList.end() );
+        TQValueList<WId>::ConstIterator endInconifiedList( iconifiedList.end() );
         for ( it=iconifiedList.begin(); it!=endInconifiedList; ++it ) {
             KWin::iconifyWindow( *it, false );
         }
     } else {
-        QValueList<WId>::ConstIterator it;
-        QValueList<WId>::ConstIterator end( iconifiedList.end() );
+        TQValueList<WId>::ConstIterator it;
+        TQValueList<WId>::ConstIterator end( iconifiedList.end() );
         for ( it=iconifiedList.begin(); it!=end; ++it ) {
             KWin::deIconifyWindow( *it, false  );
         }

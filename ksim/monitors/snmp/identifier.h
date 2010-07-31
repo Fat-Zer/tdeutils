@@ -20,9 +20,9 @@
 #ifndef IDENTIFIER_H
 #define IDENTIFIER_H
 
-#include <qstring.h>
-#include <qvaluelist.h>
-#include <qmap.h>
+#include <tqstring.h>
+#include <tqvaluelist.h>
+#include <tqmap.h>
 
 #include "value.h"
 
@@ -46,9 +46,9 @@ public:
     Identifier &operator=( const Identifier &rhs );
     ~Identifier();
 
-    static Identifier fromString( const QString &name, bool *ok = 0 );
+    static Identifier fromString( const TQString &name, bool *ok = 0 );
 
-    QString toString( PrintFlags flags = PrintAscii ) const;
+    TQString toString( PrintFlags flags = PrintAscii ) const;
 
     bool isNull() const;
 
@@ -61,8 +61,8 @@ private:
     Data *d;
 };
 
-typedef QValueList<Identifier> IdentifierList;
-typedef QMap<Identifier, Value> ValueMap;
+typedef TQValueList<Identifier> IdentifierList;
+typedef TQMap<Identifier, Value> ValueMap;
 
 }
 }

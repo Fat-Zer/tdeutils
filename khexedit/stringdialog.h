@@ -31,7 +31,7 @@ class QLineEdit;
 class QListView;
 class QSpinBox;
 
-#include <qregexp.h> 
+#include <tqregexp.h> 
 #include <kdialogbase.h>
 
 class CListView;
@@ -43,7 +43,7 @@ class CStringDialog : public KDialogBase
   Q_OBJECT
   
   public:
-    CStringDialog( QWidget *parent=0, const char *name = 0, bool modal=false );
+    CStringDialog( TQWidget *parent=0, const char *name = 0, bool modal=false );
     ~CStringDialog( void );
 
     int  updateList( CProgress &p ); 
@@ -61,17 +61,17 @@ class CStringDialog : public KDialogBase
 
   protected slots:
     virtual void slotUser1( void );
-    virtual void startGoto( QListViewItem * );
+    virtual void startGoto( TQListViewItem * );
     virtual void selectionChanged( );
 
   protected:
-    virtual void timerEvent( QTimerEvent *e );
-    virtual void resizeEvent( QResizeEvent *e );
-    virtual void showEvent( QShowEvent *e );
+    virtual void timerEvent( TQTimerEvent *e );
+    virtual void resizeEvent( TQResizeEvent *e );
+    virtual void showEvent( TQShowEvent *e );
 
   private:
     void enableList( bool state );
-    void appendListItem( const QString &str, uint offsetSize );
+    void appendListItem( const TQString &str, uint offsetSize );
     void updateListInfo( void );
     void setColumnWidth( void );
     void readConfiguration( void );
@@ -79,19 +79,19 @@ class CStringDialog : public KDialogBase
 
   private:
     CStringCollectControl mStringData;
-    QRegExp mRegExp;
+    TQRegExp mRegExp;
     uint mMaxLength;
     bool mBusy;
     bool mDirty;
 
-    QSpinBox  *mLengthSpin;
-    QLineEdit *mFilter;
-    QCheckBox *mIgnoreCaseCheck;
-    QCheckBox *mOffsetDecimalCheck;
+    TQSpinBox  *mLengthSpin;
+    TQLineEdit *mFilter;
+    TQCheckBox *mIgnoreCaseCheck;
+    TQCheckBox *mOffsetDecimalCheck;
     CListView *mStringList;
-    QLabel    *mListSizeLabel;
-    QLabel    *mDisplaySizeLabel;
-    QLabel    *mDirtyLabel;
+    TQLabel    *mListSizeLabel;
+    TQLabel    *mDisplaySizeLabel;
+    TQLabel    *mDirtyLabel;
 };
 
 

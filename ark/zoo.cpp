@@ -32,8 +32,8 @@
 #include <string.h>
 
 // QT includes
-#include <qfile.h>
-#include <qdir.h>
+#include <tqfile.h>
+#include <tqdir.h>
 
 // KDE includes
 #include <kdebug.h>
@@ -49,9 +49,9 @@
 #include "arkutils.h"
 #include "filelistview.h"
 
-static QString fixTime( const QString &_strTime );
+static TQString fixTime( const TQString &_strTime );
 
-ZooArch::ZooArch( ArkWidget *gui, const QString & fileName )
+ZooArch::ZooArch( ArkWidget *gui, const TQString & fileName )
   : Arch( gui, fileName )
 {
   m_archiver_program = m_unarchiver_program = "zoo";
@@ -61,7 +61,7 @@ ZooArch::ZooArch( ArkWidget *gui, const QString & fileName )
   m_headerString = "----";
 }
 
-bool ZooArch::processLine( const QCString &line )
+bool ZooArch::processLine( const TQCString &line )
 {
   const char *_line = ( const char * )line;
   char columns[11][80];
@@ -74,9 +74,9 @@ bool ZooArch::processLine( const QCString &line )
           columns[1], columns[0], columns[2], columns[3], columns[7],
           columns[8], columns[9], columns[4], columns[10], filename );
 
-  QString year = ArkUtils::fixYear( columns[8] );
+  TQString year = ArkUtils::fixYear( columns[8] );
 
-  QString strDate;
+  TQString strDate;
   strDate.sprintf( "%s-%.2d-%.2d", year.utf8().data(),
                    ArkUtils::getMonth( columns[7] ), atoi( columns[3] ) );
 
@@ -86,12 +86,12 @@ bool ZooArch::processLine( const QCString &line )
   strlcat( columns[3], " ", sizeof( columns[3] ) );
   strlcat( columns[3], fixTime( columns[4] ).ascii(), sizeof( columns[3] ) );
 
-  QStringList list;
-  list.append( QFile::decodeName( filename ) );
+  TQStringList list;
+  list.append( TQFile::decodeName( filename ) );
 
   for ( int i=0; i<4; i++ )
   {
-    list.append( QString::fromLocal8Bit( columns[i] ) );
+    list.append( TQString::fromLocal8Bit( columns[i] ) );
   }
 
   m_gui->fileList()->addItem( list ); // send to GUI
@@ -110,17 +110,17 @@ void ZooArch::open()
 
   KProcess *kp = m_currentProcess = new KProcess;
   *kp << m_archiver_program << "l" << m_filename;
-  connect( kp, SIGNAL( receivedStdout(KProcess*, char*, int) ),
-           SLOT( slotReceivedTOC(KProcess*, char*, int) ) );
-  connect( kp, SIGNAL( receivedStderr(KProcess*, char*, int) ),
-           SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
-  connect( kp, SIGNAL( processExited(KProcess*) ),
-           SLOT( slotOpenExited(KProcess*) ) );
+  connect( kp, TQT_SIGNAL( receivedStdout(KProcess*, char*, int) ),
+           TQT_SLOT( slotReceivedTOC(KProcess*, char*, int) ) );
+  connect( kp, TQT_SIGNAL( receivedStderr(KProcess*, char*, int) ),
+           TQT_SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
+  connect( kp, TQT_SIGNAL( processExited(KProcess*) ),
+           TQT_SLOT( slotOpenExited(KProcess*) ) );
 
   if ( !kp->start( KProcess::NotifyOnExit, KProcess::AllOutput ) )
   {
     KMessageBox::error( 0, i18n( "Could not start a subprocess." ) );
-    emit sigOpen( this, false, QString::null, 0 );
+    emit sigOpen( this, false, TQString::null, 0 );
   }
 }
 
@@ -143,17 +143,17 @@ void ZooArch::create()
                   Arch::Extract | Arch::Delete | Arch::Add | Arch::View);
 }
 
-void ZooArch::addDir( const QString & _dirName )
+void ZooArch::addDir( const TQString & _dirName )
 {
   if ( ! _dirName.isEmpty() )
   {
-    QStringList list;
+    TQStringList list;
     list.append( _dirName );
     addFile( list );
   }
 }
 
-void ZooArch::addFile( const QStringList &urls )
+void ZooArch::addFile( const TQStringList &urls )
 {
   KProcess *kp = m_currentProcess = new KProcess;
   kp->clearArguments();
@@ -167,9 +167,9 @@ void ZooArch::addFile( const QStringList &urls )
   *kp << m_filename;
 
   KURL url( urls.first() );
-  QDir::setCurrent( url.directory() );
+  TQDir::setCurrent( url.directory() );
 
-  QStringList::ConstIterator iter;
+  TQStringList::ConstIterator iter;
 
   for ( iter = urls.begin(); iter != urls.end(); ++iter )
   {
@@ -177,12 +177,12 @@ void ZooArch::addFile( const QStringList &urls )
     *kp << fileURL.fileName();
   }
 
-  connect( kp, SIGNAL( receivedStdout(KProcess*, char*, int) ),
-           SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
-  connect( kp, SIGNAL( receivedStderr(KProcess*, char*, int) ),
-           SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
-  connect( kp, SIGNAL( processExited(KProcess*) ),
-           SLOT( slotAddExited(KProcess*) ) );
+  connect( kp, TQT_SIGNAL( receivedStdout(KProcess*, char*, int) ),
+           TQT_SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
+  connect( kp, TQT_SIGNAL( receivedStderr(KProcess*, char*, int) ),
+           TQT_SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
+  connect( kp, TQT_SIGNAL( processExited(KProcess*) ),
+           TQT_SLOT( slotAddExited(KProcess*) ) );
 
   if ( !kp->start( KProcess::NotifyOnExit, KProcess::AllOutput ) )
   {
@@ -205,7 +205,7 @@ void ZooArch::unarchFileInternal()
   // zoo has no option to specify the destination directory
   // so we have to change to it.
 
-  bool ret = QDir::setCurrent( m_destDir );
+  bool ret = TQDir::setCurrent( m_destDir );
   // We already checked the validity of the dir before coming here
   Q_ASSERT(ret);
 
@@ -229,19 +229,19 @@ void ZooArch::unarchFileInternal()
   // and we then extract everything in the archive.
   if (m_fileList)
   {
-    QStringList::Iterator it;
+    TQStringList::Iterator it;
     for ( it = m_fileList->begin(); it != m_fileList->end(); ++it )
     {
       *kp << (*it);
     }
   }
 
-  connect( kp, SIGNAL( receivedStdout(KProcess*, char*, int) ),
-           SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
-  connect( kp, SIGNAL( receivedStderr(KProcess*, char*, int) ),
-           SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
-  connect( kp, SIGNAL( processExited(KProcess*) ),
-           SLOT( slotExtractExited(KProcess*) ) );
+  connect( kp, TQT_SIGNAL( receivedStdout(KProcess*, char*, int) ),
+           TQT_SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
+  connect( kp, TQT_SIGNAL( receivedStderr(KProcess*, char*, int) ),
+           TQT_SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
+  connect( kp, TQT_SIGNAL( processExited(KProcess*) ),
+           TQT_SLOT( slotExtractExited(KProcess*) ) );
 
   if ( !kp->start( KProcess::NotifyOnExit, KProcess::AllOutput ) )
   {
@@ -250,7 +250,7 @@ void ZooArch::unarchFileInternal()
   }
 }
 
-void ZooArch::remove( QStringList *list )
+void ZooArch::remove( TQStringList *list )
 {
   if (!list)
     return;
@@ -260,19 +260,19 @@ void ZooArch::remove( QStringList *list )
 
   *kp << m_archiver_program << "D" << m_filename;
 
-  QStringList::Iterator it;
+  TQStringList::Iterator it;
   for ( it = list->begin(); it != list->end(); ++it )
   {
-    QString str = *it;
+    TQString str = *it;
     *kp << str;
   }
 
-  connect( kp, SIGNAL( receivedStdout(KProcess*, char*, int) ),
-           SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
-  connect( kp, SIGNAL( receivedStderr(KProcess*, char*, int) ),
-           SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
-  connect( kp, SIGNAL( processExited(KProcess*) ),
-           SLOT( slotDeleteExited(KProcess*) ) );
+  connect( kp, TQT_SIGNAL( receivedStdout(KProcess*, char*, int) ),
+           TQT_SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
+  connect( kp, TQT_SIGNAL( receivedStderr(KProcess*, char*, int) ),
+           TQT_SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
+  connect( kp, TQT_SIGNAL( processExited(KProcess*) ),
+           TQT_SLOT( slotDeleteExited(KProcess*) ) );
 
   if ( !kp->start( KProcess::NotifyOnExit, KProcess::AllOutput ) )
   {
@@ -281,17 +281,17 @@ void ZooArch::remove( QStringList *list )
   }
 }
 
-QString fixTime( const QString &_strTime )
+TQString fixTime( const TQString &_strTime )
 {
   // it may have come from a different time zone... get rid of trailing
   // +3 or -3 etc.
-  QString strTime = _strTime;
+  TQString strTime = _strTime;
 
   if ( strTime.contains("+") || strTime.contains("-") )
   {
-    QCharRef c = strTime.at( 8 );
+    TQCharRef c = strTime.at( 8 );
     int offset = strTime.right( strTime.length() - 9 ).toInt();
-    QString strHour = strTime.left( 2 );
+    TQString strHour = strTime.left( 2 );
     int nHour = strHour.toInt();
     if ( c == '+' || c == '-' )
     {

@@ -35,12 +35,12 @@ class KBorderColumn : public KColumn
     ~KBorderColumn();
 
   public: // KColumn-API
-    virtual void paintFirstLine( QPainter *P, KPixelXs Xs, int FirstLine );
-    virtual void paintNextLine( QPainter *P );
-    virtual void paintEmptyColumn( QPainter *P, KPixelXs Xs, KPixelYs Ys );
+    virtual void paintFirstLine( TQPainter *P, KPixelXs Xs, int FirstLine );
+    virtual void paintNextLine( TQPainter *P );
+    virtual void paintEmptyColumn( TQPainter *P, KPixelXs Xs, KPixelYs Ys );
 
   protected:
-   virtual void paintLine( QPainter *P );
+   virtual void paintLine( TQPainter *P );
 
   protected:
     /** true if we are between two columns and should show a line */

@@ -16,7 +16,7 @@
  *  Boston, MA 02110-1301, USA.
  **/
 #include "limitedcharlineedit.h"
-#include <qvalidator.h>
+#include <tqvalidator.h>
 
 /**
    @internal
@@ -25,22 +25,22 @@
 class Validator :public QValidator
 {
 public:
-  Validator( LimitedCharLineEdit::Mode mode, QWidget* parent )
-    :QValidator( parent, "Validator" ), _mode(mode)
+  Validator( LimitedCharLineEdit::Mode mode, TQWidget* parent )
+    :TQValidator( parent, "Validator" ), _mode(mode)
   {
   }
 
-  virtual QValidator::State validate( QString& txt, int & /*pos*/ ) const
+  virtual TQValidator::State validate( TQString& txt, int & /*pos*/ ) const
   {
     if ( _mode == LimitedCharLineEdit::NORMAL ||
          (_mode == LimitedCharLineEdit::HEX &&
-          QRegExp(QString::fromLocal8Bit("^[0-9A-Fa-f]*$")).search( txt ) != -1) ||
+          TQRegExp(TQString::fromLocal8Bit("^[0-9A-Fa-f]*$")).search( txt ) != -1) ||
          (_mode == LimitedCharLineEdit::OCT &&
-          QRegExp(QString::fromLocal8Bit("^[0-7]*$")).search( txt ) != -1 ) ) {
-      return QValidator::Acceptable;
+          TQRegExp(TQString::fromLocal8Bit("^[0-7]*$")).search( txt ) != -1 ) ) {
+      return TQValidator::Acceptable;
     }
     else {
-      return QValidator::Invalid;
+      return TQValidator::Invalid;
     }
   }
 
@@ -49,15 +49,15 @@ private:
 };
 
 
-void LimitedCharLineEdit::keyPressEvent ( QKeyEvent *event )
+void LimitedCharLineEdit::keyPressEvent ( TQKeyEvent *event )
 {
-  QLineEdit::keyPressEvent( event );
+  TQLineEdit::keyPressEvent( event );
   if ( text().length() == _count && !event->text().isNull() )
     focusNextPrevChild(true);
 }
 
-LimitedCharLineEdit::LimitedCharLineEdit( Mode mode, QWidget* parent, const char* name )
-	:QLineEdit( parent, name ), _mode(mode)
+LimitedCharLineEdit::LimitedCharLineEdit( Mode mode, TQWidget* parent, const char* name )
+	:TQLineEdit( parent, name ), _mode(mode)
 {
   if ( mode == NORMAL )
     _count = 1;

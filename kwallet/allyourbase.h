@@ -39,11 +39,11 @@ enum KWalletListItemClasses {
 
 class KWalletEntryItem : public KListViewItem {
 	public:
-		KWalletEntryItem(KWallet::Wallet *w, QListViewItem* parent, const QString& ename);
+		KWalletEntryItem(KWallet::Wallet *w, TQListViewItem* parent, const TQString& ename);
 		virtual ~KWalletEntryItem();
 
-		const QString& oldName() { return _oldName; }
-		QString currentName() { return text(0); }
+		const TQString& oldName() { return _oldName; }
+		TQString currentName() { return text(0); }
 
 		void clearOldName() { _oldName = text(0); }
 		virtual int rtti() const;
@@ -52,20 +52,20 @@ class KWalletEntryItem : public KListViewItem {
 		KWallet::Wallet *_wallet;
 
 	private:
-		QString _oldName;
+		TQString _oldName;
 };
 
 class KWalletContainerItem : public KListViewItem {
 	public:
-		KWalletContainerItem(QListViewItem* parent, const QString& name,
+		KWalletContainerItem(TQListViewItem* parent, const TQString& name,
 		    KWallet::Wallet::EntryType type);
 		virtual ~KWalletContainerItem();
 
 	public:
 		virtual int rtti() const;
 		KWallet::Wallet::EntryType type();
-		bool contains(const QString& itemKey);
-		QListViewItem* getItem(const QString& itemKey);
+		bool contains(const TQString& itemKey);
+		TQListViewItem* getItem(const TQString& itemKey);
 
 	private:
 		KWallet::Wallet::EntryType _type;
@@ -73,101 +73,101 @@ class KWalletContainerItem : public KListViewItem {
 
 class KWalletFolderItem : public KListViewItem {
 	public:
-		KWalletFolderItem(KWallet::Wallet *w, QListView* parent, 
-			const QString& name, int entries);
+		KWalletFolderItem(KWallet::Wallet *w, TQListView* parent, 
+			const TQString& name, int entries);
 		virtual ~KWalletFolderItem();
 
-		virtual bool acceptDrop(const QMimeSource *mime) const;
+		virtual bool acceptDrop(const TQMimeSource *mime) const;
 		virtual int rtti() const;
 
-		QString name() const;
+		TQString name() const;
 		void refresh();
 		KWalletContainerItem* getContainer(KWallet::Wallet::EntryType type);
-		QPixmap getFolderIcon(KIcon::Group group);
-		bool contains(const QString& itemKey);
-		QListViewItem* getItem(const QString& itemKey);
+		TQPixmap getFolderIcon(KIcon::Group group);
+		bool contains(const TQString& itemKey);
+		TQListViewItem* getItem(const TQString& itemKey);
 
 	public:
 		KWallet::Wallet *_wallet;
 
 	private:
-		QString _name;
+		TQString _name;
 		int _entries;
 };
 
 class KWalletEntryList : public KListView {
 	Q_OBJECT
 	public:
-		KWalletEntryList(QWidget *parent, const char *name = 0L);
+		KWalletEntryList(TQWidget *parent, const char *name = 0L);
 		virtual ~KWalletEntryList();
 
-		bool existsFolder(const QString& name);
-		KWalletFolderItem* getFolder(const QString& name);
-		void contentsDropEvent(QDropEvent *e);
-		void contentsDragEnterEvent(QDragEnterEvent *e);
+		bool existsFolder(const TQString& name);
+		KWalletFolderItem* getFolder(const TQString& name);
+		void contentsDropEvent(TQDropEvent *e);
+		void contentsDragEnterEvent(TQDragEnterEvent *e);
 		void setWallet(KWallet::Wallet *w);
 
 	protected:
-		void itemDropped(QDropEvent *e, QListViewItem *item);
-		virtual QDragObject *dragObject();
-		virtual bool acceptDrag (QDropEvent* event) const;
+		void itemDropped(TQDropEvent *e, TQListViewItem *item);
+		virtual TQDragObject *dragObject();
+		virtual bool acceptDrag (TQDropEvent* event) const;
 
 	private:
-		static KWalletFolderItem *getItemFolder(QListViewItem *item);
+		static KWalletFolderItem *getItemFolder(TQListViewItem *item);
 	
 	public:
 		KWallet::Wallet *_wallet;
 };
 
-class KWalletItem : public QIconViewItem {
+class KWalletItem : public TQIconViewItem {
 	public:
-		KWalletItem(QIconView *parent, const QString& walletName);
+		KWalletItem(TQIconView *parent, const TQString& walletName);
 		virtual ~KWalletItem();
 
-		virtual bool acceptDrop(const QMimeSource *mime) const;
+		virtual bool acceptDrop(const TQMimeSource *mime) const;
 
 	protected:
-		virtual void dropped(QDropEvent *e, const QValueList<QIconDragItem>& lst); 
+		virtual void dropped(TQDropEvent *e, const TQValueList<TQIconDragItem>& lst); 
 };
 
 
 class KWalletIconView : public KIconView {
 	Q_OBJECT
 	public:
-		KWalletIconView(QWidget *parent, const char *name = 0L);
+		KWalletIconView(TQWidget *parent, const char *name = 0L);
 		virtual ~KWalletIconView();
 
 	protected slots:
-		virtual void slotDropped(QDropEvent *e, const QValueList<QIconDragItem>& lst);
+		virtual void slotDropped(TQDropEvent *e, const TQValueList<TQIconDragItem>& lst);
 
 	protected:
-		virtual QDragObject *dragObject();
-		virtual void contentsMousePressEvent(QMouseEvent *e);
-		QPoint _mousePos;
+		virtual TQDragObject *dragObject();
+		virtual void contentsMousePressEvent(TQMouseEvent *e);
+		TQPoint _mousePos;
 };
 
 
-inline QDataStream& operator<<(QDataStream& str, const KWalletEntryItem& w) {
-	QString name = w.text(0);
+inline TQDataStream& operator<<(TQDataStream& str, const KWalletEntryItem& w) {
+	TQString name = w.text(0);
 	str << name;
 	KWallet::Wallet::EntryType et = w._wallet->entryType(name);
 	str << long(et);
-	QByteArray a;
+	TQByteArray a;
 	w._wallet->readEntry(name, a);
 	str << a;
 	return str;
 }
 
-inline QDataStream& operator<<(QDataStream& str, const KWalletFolderItem& w) {
-	QString oldFolder = w._wallet->currentFolder();
+inline TQDataStream& operator<<(TQDataStream& str, const KWalletFolderItem& w) {
+	TQString oldFolder = w._wallet->currentFolder();
 	str << w.name();
 	w._wallet->setFolder(w.name());
-	QStringList entries = w._wallet->entryList();
-	for (QStringList::Iterator it = entries.begin(); it != entries.end(); ++it) {
+	TQStringList entries = w._wallet->entryList();
+	for (TQStringList::Iterator it = entries.begin(); it != entries.end(); ++it) {
 		str << *it;
 		KWallet::Wallet::EntryType et = w._wallet->entryType(*it);
 		str << long(et);
-		QByteArray a;
+		TQByteArray a;
 		w._wallet->readEntry(*it, a);
 		str << a;
 	}

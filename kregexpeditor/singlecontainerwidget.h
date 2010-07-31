@@ -27,7 +27,7 @@ class SingleContainerWidget :public RegExpWidget
 Q_OBJECT
 
 public:
-  SingleContainerWidget( RegExpEditorWindow* editorWindow, QWidget* parent,
+  SingleContainerWidget( RegExpEditorWindow* editorWindow, TQWidget* parent,
                          const char* name = 0);
 
   virtual bool updateSelection( bool parentSelected );
@@ -37,9 +37,9 @@ public:
   virtual void applyRegExpToSelection( RegExpType type );
   virtual RegExp* selection() const;
   virtual bool validateSelection() const;
-  virtual QRect selectionRect() const;
-  virtual RegExpWidget* widgetUnderPoint( QPoint globalPos, bool justVisibleWidgets );
-  virtual RegExpWidget* findWidgetToEdit( QPoint globalPos );
+  virtual TQRect selectionRect() const;
+  virtual RegExpWidget* widgetUnderPoint( TQPoint globalPos, bool justVisibleWidgets );
+  virtual RegExpWidget* findWidgetToEdit( TQPoint globalPos );
   virtual void setConcChild( ConcWidget* child );
   virtual void selectWidget( bool sel );
   virtual void updateAll();

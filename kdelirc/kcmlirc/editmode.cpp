@@ -16,7 +16,7 @@
 
 #include "editmode.h"
 
-EditMode::EditMode(QWidget *parent, const char *name, bool modal, WFlags fl) : EditModeBase(parent, name, modal, fl)
+EditMode::EditMode(TQWidget *parent, const char *name, bool modal, WFlags fl) : EditModeBase(parent, name, modal, fl)
 {
 	theIcon->setIconType(KIcon::Panel, KIcon::Any);
 }
@@ -30,7 +30,7 @@ void EditMode::slotClearIcon()
 	theIcon->resetIcon();
 }
 
-void EditMode::slotCheckText(const QString &newText)
+void EditMode::slotCheckText(const TQString &newText)
 {
 	theOK->setEnabled(!newText.isEmpty());
 }

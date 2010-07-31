@@ -33,35 +33,35 @@ private:
 
 public:
     static ArchiveFormatInfo * self();
-    QString filter();
-    const QStringList supportedMimeTypes( bool includeCompressed = true );
-    QStringList allDescriptions();
-    ArchType archTypeForMimeType( const QString & mimeType );
-    ArchType archTypeByExtension( const QString & archname );
+    TQString filter();
+    const TQStringList supportedMimeTypes( bool includeCompressed = true );
+    TQStringList allDescriptions();
+    ArchType archTypeForMimeType( const TQString & mimeType );
+    ArchType archTypeByExtension( const TQString & archname );
     ArchType archTypeForURL( const KURL & url );
-    QString mimeTypeForDescription( const QString & description );
-    QString findMimeType( const KURL & url );
-    QString descriptionForMimeType( const QString & mimeType );
-    QString defaultExtension( const QString & mimeType );
+    TQString mimeTypeForDescription( const TQString & description );
+    TQString findMimeType( const KURL & url );
+    TQString descriptionForMimeType( const TQString & mimeType );
+    TQString defaultExtension( const TQString & mimeType );
     bool wasUnknownExtension();
 
 private:
     void buildFormatInfos();
-    void addFormatInfo( ArchType type, QString mime, QString stdExt );
+    void addFormatInfo( ArchType type, TQString mime, TQString stdExt );
 
     struct FormatInfo
     {
-        QStringList extensions;
-        QStringList mimeTypes;
-        QStringList allDescriptions;
-        QStringList defaultExtensions;
-        QString description;
+        TQStringList extensions;
+        TQStringList mimeTypes;
+        TQStringList allDescriptions;
+        TQStringList defaultExtensions;
+        TQString description;
         enum ArchType type;
     };
 
     FormatInfo & find ( ArchType type );
 
-    typedef QValueList<FormatInfo> InfoList;
+    typedef TQValueList<FormatInfo> InfoList;
     InfoList m_formatInfos;
 
     bool m_lastExtensionUnknown;

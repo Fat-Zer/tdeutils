@@ -57,22 +57,22 @@ class TarArch : public Arch
 {
 	Q_OBJECT
 	public:
-		TarArch( ArkWidget *_gui, const QString & _filename,
-		         const QString & _openAsMimeType );
+		TarArch( ArkWidget *_gui, const TQString & _filename,
+		         const TQString & _openAsMimeType );
 		virtual ~TarArch();
 
 		virtual void open();
 		virtual void create();
 
-		virtual void addFile( const QStringList & );
-		virtual void addDir( const QString & );
-		virtual void remove( QStringList* );
+		virtual void addFile( const TQStringList & );
+		virtual void addDir( const TQString & );
+		virtual void remove( TQStringList* );
 		virtual void unarchFileInternal();
 
 		virtual int getEditFlag();
 
-		QString getCompressor();
-		QString getUnCompressor();
+		TQString getCompressor();
+		TQString getUnCompressor();
 
 	public slots:
 		void updateProgress( KProcess *_kp, char *_buffer, int _bufflen );
@@ -98,21 +98,21 @@ class TarArch : public Arch
 		void removeUpdateDone();
 		
 	protected:
-		void customEvent( QCustomEvent * );
+		void customEvent( TQCustomEvent * );
 
 	private:  // methods
 		void updateArch();
 		void createTmp();
 		void setHeaders();
-		void processDir( const KTarDirectory *tardir, const QString & root );
-		void deleteOldFiles( const QStringList &list, bool bAddOnlyNew );
-		QString getEntry( const QString & filename );
+		void processDir( const KTarDirectory *tardir, const TQString & root );
+		void deleteOldFiles( const TQStringList &list, bool bAddOnlyNew );
+		TQString getEntry( const TQString & filename );
 
 	private: // data
 		// if the tar is compressed, this is the temporary uncompressed tar.
 		KTempDir * m_tmpDir;
-		QString tmpfile;
-		QString m_fileMimeType;
+		TQString tmpfile;
+		TQString m_fileMimeType;
 		bool compressed;
 
 		// for use with createTmp and updateArch
@@ -122,8 +122,8 @@ class TarArch : public Arch
 		// for use with deleteOldFiles
 		bool deleteInProgress;
 		FILE *fd;
-		QStringList m_filesToAdd;
-		QStringList m_filesToRemove;
+		TQStringList m_filesToAdd;
+		TQStringList m_filesToRemove;
 		KProcess * m_pTmpProc;
 		KProcess * m_pTmpProc2;
 		bool failed;

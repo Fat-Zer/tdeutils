@@ -21,8 +21,8 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#include <qfileinfo.h>
-#include <qdir.h>
+#include <tqfileinfo.h>
+#include <tqdir.h>
 
 #include <kglobal.h>
 #include <kdebug.h>
@@ -56,23 +56,23 @@ void DiskEntry::init()
  // BackgroundProcesses ****************************************
 
  sysProc = new KShellProcess(); Q_CHECK_PTR(sysProc);
- connect( sysProc, SIGNAL(receivedStdout(KProcess *, char *, int) ),
-        this, SLOT (receivedSysStdErrOut(KProcess *, char *, int)) );
- connect( sysProc, SIGNAL(receivedStderr(KProcess *, char *, int) ),
-        this, SLOT (receivedSysStdErrOut(KProcess *, char *, int)) );
+ connect( sysProc, TQT_SIGNAL(receivedStdout(KProcess *, char *, int) ),
+        this, TQT_SLOT (receivedSysStdErrOut(KProcess *, char *, int)) );
+ connect( sysProc, TQT_SIGNAL(receivedStderr(KProcess *, char *, int) ),
+        this, TQT_SLOT (receivedSysStdErrOut(KProcess *, char *, int)) );
  readingSysStdErrOut=FALSE;
 
 
 }
 
-DiskEntry::DiskEntry(QObject *parent, const char *name)
- : QObject (parent, name)
+DiskEntry::DiskEntry(TQObject *parent, const char *name)
+ : TQObject (parent, name)
 {
   init();
 }
 
-DiskEntry::DiskEntry(const QString & deviceName, QObject *parent, const char *name)
- : QObject (parent, name)
+DiskEntry::DiskEntry(const TQString & deviceName, TQObject *parent, const char *name)
+ : TQObject (parent, name)
 {
   init();
 
@@ -94,7 +94,7 @@ int DiskEntry::toggleMount()
 
 int DiskEntry::mount()
 {
-  QString cmdS=mntcmd;
+  TQString cmdS=mntcmd;
   if (cmdS.isEmpty()) // generate default mount cmd
     if (getuid()!=0 ) // user mountable
       {
@@ -104,13 +104,13 @@ int DiskEntry::mount()
       {
       // FreeBSD's mount(8) is picky: -o _must_ go before
       // the device and mountpoint.
-      cmdS=QString::fromLatin1("mount -t%t -o%o %d %m");
+      cmdS=TQString::fromLatin1("mount -t%t -o%o %d %m");
       }
 
-  cmdS.replace(QString::fromLatin1("%d"),deviceName());
-  cmdS.replace(QString::fromLatin1("%m"),mountPoint());
-  cmdS.replace(QString::fromLatin1("%t"),fsType());
-  cmdS.replace(QString::fromLatin1("%o"),mountOptions());
+  cmdS.replace(TQString::fromLatin1("%d"),deviceName());
+  cmdS.replace(TQString::fromLatin1("%m"),mountPoint());
+  cmdS.replace(TQString::fromLatin1("%t"),fsType());
+  cmdS.replace(TQString::fromLatin1("%o"),mountOptions());
 
   kdDebug() << "mount-cmd: [" << cmdS << "]" << endl;
   int e=sysCall(cmdS);
@@ -122,12 +122,12 @@ int DiskEntry::mount()
 int DiskEntry::umount()
 {
   kdDebug() << "umounting" << endl;
-  QString cmdS=umntcmd;
+  TQString cmdS=umntcmd;
   if (cmdS.isEmpty()) // generate default umount cmd
       cmdS="umount %d";
 
-  cmdS.replace(QString::fromLatin1("%d"),deviceName());
-  cmdS.replace(QString::fromLatin1("%m"),mountPoint());
+  cmdS.replace(TQString::fromLatin1("%d"),deviceName());
+  cmdS.replace(TQString::fromLatin1("%m"),mountPoint());
 
   kdDebug() << "umount-cmd: [" << cmdS << "]" << endl;
   int e=sysCall(cmdS);
@@ -142,7 +142,7 @@ int DiskEntry::remount()
   if (mntcmd.isEmpty() && umntcmd.isEmpty() // default mount/umount commands
       && (getuid()==0)) // you are root
     {
-    QString oldOpt=options;
+    TQString oldOpt=options;
     if (options.isEmpty())
        options="remount";
     else
@@ -157,17 +157,17 @@ int DiskEntry::remount()
   }
 }
 
-void DiskEntry::setMountCommand(const QString & mnt)
+void DiskEntry::setMountCommand(const TQString & mnt)
 {
   mntcmd=mnt;
 }
 
-void DiskEntry::setUmountCommand(const QString & umnt)
+void DiskEntry::setUmountCommand(const TQString & umnt)
 {
   umntcmd=umnt;
 }
 
-void DiskEntry::setIconName(const QString & iconName)
+void DiskEntry::setIconName(const TQString & iconName)
 {
   iconSetByUser=TRUE;
   icoName=iconName;
@@ -179,9 +179,9 @@ void DiskEntry::setIconName(const QString & iconName)
   emit iconNameChanged();
 }
 
-QString DiskEntry::iconName()
+TQString DiskEntry::iconName()
 {
-  QString iconName=icoName;
+  TQString iconName=icoName;
   if (iconSetByUser) {
     mounted() ? iconName+="_mount" : iconName+="_unmount";
    return iconName;
@@ -189,9 +189,9 @@ QString DiskEntry::iconName()
    return guessIconName();
 }
 
-QString DiskEntry::guessIconName()
+TQString DiskEntry::guessIconName()
 {
-  QString iconName;
+  TQString iconName;
     // try to be intelligent
     if (-1!=mountPoint().find("cdrom",0,FALSE)) iconName+="cdrom";
     else if (-1!=deviceName().find("cdrom",0,FALSE)) iconName+="cdrom";
@@ -222,7 +222,7 @@ QString DiskEntry::guessIconName()
 /***************************************************************************
   * starts a command on the underlying system via /bin/sh
 **/
-int DiskEntry::sysCall(const QString & command)
+int DiskEntry::sysCall(const TQString & command)
 {
   if (readingSysStdErrOut || sysProc->isRunning() )  return -1;
 
@@ -243,7 +243,7 @@ int DiskEntry::sysCall(const QString & command)
 **/
 void DiskEntry::receivedSysStdErrOut(KProcess *, char *data, int len)
 {
-  QString tmp = QString::fromLocal8Bit(data, len);
+  TQString tmp = TQString::fromLocal8Bit(data, len);
   sysStringErrOut.append(tmp);
 }
 
@@ -256,19 +256,19 @@ float DiskEntry::percentFull() const
    }
 }
 
-void DiskEntry::setDeviceName(const QString & deviceName)
+void DiskEntry::setDeviceName(const TQString & deviceName)
 {
  device=deviceName;
  emit deviceNameChanged();
 }
 
-QString DiskEntry::deviceRealName() const
+TQString DiskEntry::deviceRealName() const
 {
- QFileInfo inf( device );
- QDir dir( inf.dirPath( true ) );
- QString relPath = inf.fileName();
+ TQFileInfo inf( device );
+ TQDir dir( inf.dirPath( true ) );
+ TQString relPath = inf.fileName();
  if ( inf.isSymLink() ) {
-  QString link = inf.readLink();
+  TQString link = inf.readLink();
   if ( link.startsWith( "/" ) )
     return link;
   relPath = link;
@@ -276,25 +276,25 @@ QString DiskEntry::deviceRealName() const
  return dir.canonicalPath() + "/" + relPath;
 }
 
-void DiskEntry::setMountPoint(const QString & mountPoint)
+void DiskEntry::setMountPoint(const TQString & mountPoint)
 {
   mountedOn=mountPoint;
  emit mountPointChanged();
 }
 
-QString DiskEntry::realMountPoint() const
+TQString DiskEntry::realMountPoint() const
 {
- QDir dir( mountedOn );
+ TQDir dir( mountedOn );
  return dir.canonicalPath();
 }
 
-void DiskEntry::setMountOptions(const QString & mountOptions)
+void DiskEntry::setMountOptions(const TQString & mountOptions)
 {
  options=mountOptions;
  emit mountOptionsChanged();
 }
 
-void DiskEntry::setFsType(const QString & fsType)
+void DiskEntry::setFsType(const TQString & fsType)
 {
   type=fsType;
   emit fsTypeChanged();

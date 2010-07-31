@@ -25,8 +25,8 @@
 #ifndef __KDFCONFIG_H__
 #define __KDFCONFIG_H__
 
-#include <qmemarray.h>
-#include <qstring.h>
+#include <tqmemarray.h>
+#include <tqstring.h>
 
 #include "stdoption.h"
 
@@ -46,7 +46,7 @@ class KDFConfigWidget : public QWidget
   class CTabName
   {
     public:
-      CTabName( const QString &res, const QString &name )
+      CTabName( const TQString &res, const TQString &name )
       {
         mRes     = res;
         mName    = name;
@@ -54,12 +54,12 @@ class KDFConfigWidget : public QWidget
       CTabName( void ) { }
       ~CTabName( void ) { }
 
-      QString mRes;
-      QString mName;
+      TQString mRes;
+      TQString mName;
   };
 
   public:
-    KDFConfigWidget( QWidget *parent=0, const char *name=0, bool init=false);
+    KDFConfigWidget( TQWidget *parent=0, const char *name=0, bool init=false);
     ~KDFConfigWidget();
 
   public slots:
@@ -71,19 +71,19 @@ class KDFConfigWidget : public QWidget
     void slotChanged();
 
   private slots:
-    void toggleListText( QListViewItem *item, const QPoint &, int column );
+    void toggleListText( TQListViewItem *item, const TQPoint &, int column );
 
   protected:
-    void closeEvent( QCloseEvent * );
+    void closeEvent( TQCloseEvent * );
 
   private:
-    QMemArray<CTabName*> mTabName;
+    TQMemArray<CTabName*> mTabName;
     CListView  *mList;
-    QScrollBar *mScroll;
-    QLCDNumber *mLCD;
-    QLineEdit  *mFileManagerEdit;
-    QCheckBox  *mOpenMountCheck;
-    QCheckBox  *mPopupFullCheck;
+    TQScrollBar *mScroll;
+    TQLCDNumber *mLCD;
+    TQLineEdit  *mFileManagerEdit;
+    TQCheckBox  *mOpenMountCheck;
+    TQCheckBox  *mPopupFullCheck;
     CStdOption mStd;
 
   signals:

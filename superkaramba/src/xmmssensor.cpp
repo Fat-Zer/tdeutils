@@ -10,14 +10,14 @@
 #include "xmmssensor.h"
 
 #ifdef HAVE_XMMS
-#include <qlibrary.h>
+#include <tqlibrary.h>
 
 class XMMSSensor::XMMS
 {
 public:
     XMMS() : libxmms( 0 )
     {
-        libxmms = new QLibrary( "xmms.so.1" );
+        libxmms = new TQLibrary( "xmms.so.1" );
         if ( !libxmms->load() )
         {
             delete libxmms;
@@ -101,7 +101,7 @@ public:
     }
 
 private:
-    QLibrary* libxmms;
+    TQLibrary* libxmms;
 
     bool (*xmms_remote_is_running)(int);
     bool (*xmms_remote_is_playing)(int);
@@ -124,17 +124,17 @@ public:
 #endif // HAVE_XMMS
 
 
-XMMSSensor::XMMSSensor( int interval, const QString &encoding )
+XMMSSensor::XMMSSensor( int interval, const TQString &encoding )
     : Sensor( interval ), xmms( 0 )
 {
      if( !encoding.isEmpty() )
     {
-        codec = QTextCodec::codecForName( encoding.ascii() );
+        codec = TQTextCodec::codecForName( encoding.ascii() );
         if ( codec == 0)
-            codec = QTextCodec::codecForLocale();
+            codec = TQTextCodec::codecForLocale();
     }
     else
-        codec = QTextCodec::codecForLocale();
+        codec = TQTextCodec::codecForLocale();
 
     xmms = new XMMS();
 
@@ -146,15 +146,15 @@ XMMSSensor::~XMMSSensor()
 
 void XMMSSensor::update()
 {
-    QString format;
+    TQString format;
     SensorParams *sp;
     Meter *meter;
-    QObjectListIt it( *objList );
+    TQObjectListIt it( *objList );
 
 #ifdef HAVE_XMMS
 
     int pos;
-    QString title;
+    TQString title;
     int songLength = 0;
     int currentTime = 0;
     bool isPlaying = false;
@@ -165,7 +165,7 @@ void XMMSSensor::update()
         isPlaying = xmms->isPlaying(0);
         pos = xmms->getPlaylistPos(0);
         qDebug("unicode start");
-        title = codec->toUnicode( QCString( xmms->getPlaylistTitle( 0, pos ) )  );
+        title = codec->toUnicode( TQCString( xmms->getPlaylistTitle( 0, pos ) )  );
         qDebug("unicode end");
         if( title.isEmpty() )
             title = "XMMS";
@@ -210,19 +210,19 @@ void XMMSSensor::update()
                 {
 
 
-                    format.replace( QRegExp("%title", false), title );
+                    format.replace( TQRegExp("%title", false), title );
 
-                    format.replace( QRegExp("%length", false), QTime( 0,0,0 ).
+                    format.replace( TQRegExp("%length", false), TQTime( 0,0,0 ).
                                     addMSecs( songLength )
                                     .toString( "h:mm:ss" ) );
 
-                    format.replace( QRegExp("%time", false), QTime( 0,0,0 ).
+                    format.replace( TQRegExp("%time", false), TQTime( 0,0,0 ).
                                     addMSecs( currentTime )
                                     .toString( "h:mm:ss" ) );
 
                     if( isPlaying  )
                     {
-                        format.replace( QRegExp("%remain", false), QTime( 0,0,0 ).
+                        format.replace( TQRegExp("%remain", false), TQTime( 0,0,0 ).
                                         addMSecs( songLength )
                                         .addMSecs(-currentTime )
                                         .toString( "h:mm:ss" ) );
@@ -230,7 +230,7 @@ void XMMSSensor::update()
 
                     else
                     {
-                        format.replace( QRegExp("%remain", false), QTime( 0,0,0 ).toString("h:mm:ss" ) );
+                        format.replace( TQRegExp("%remain", false), TQTime( 0,0,0 ).toString("h:mm:ss" ) );
                     }
                     meter->setValue(format);
                 }
@@ -251,7 +251,7 @@ void XMMSSensor::setMaxValue( SensorParams *sp)
 {
     Meter *meter;
     meter = sp->getMeter();
-    QString f;
+    TQString f;
     f = sp->getParam("FORMAT");
 
     if ( f == "%full" )

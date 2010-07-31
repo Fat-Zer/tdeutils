@@ -30,7 +30,7 @@ class ArkViewer : public KDialogBase
 	Q_OBJECT
 
 	public:
-		ArkViewer( QWidget* parent = 0, const char * name = 0 );
+		ArkViewer( TQWidget* parent = 0, const char * name = 0 );
 		~ArkViewer();
 
 		bool view( const KURL& filename );
@@ -40,7 +40,7 @@ class ArkViewer : public KDialogBase
 
 	private:
 		KParts::ReadOnlyPart *m_part;
-		QWidget *m_widget;
+		TQWidget *m_widget;
 };
 
 #endif // ARKVIEWER_H

@@ -9,14 +9,14 @@
  ***************************************************************************/
 
 #include "textfield.h"
-#include <qfontmetrics.h>
+#include <tqfontmetrics.h>
 #include <kdebug.h>
 
 TextField::TextField( )
 {
   setFontSize(12);
-  setColor(QColor(192, 192, 192));
-  setBGColor(QColor(0, 0, 0));
+  setColor(TQColor(192, 192, 192));
+  setBGColor(TQColor(0, 0, 0));
   setFont("Helvetica");
   setAlignment(Qt::AlignLeft);
   setFixedPitch(false);
@@ -58,35 +58,35 @@ TextField& TextField::operator=(const TextField& rhs)
     return *this;
 }
 
-void TextField::setColor(QColor clr)
+void TextField::setColor(TQColor clr)
 {
   color = clr;
 }
 
-QColor TextField::getColor() const
+TQColor TextField::getColor() const
 {
     return color;
 }
 
-void TextField::setBGColor(QColor clr)
+void TextField::setBGColor(TQColor clr)
 {
     bgColor = clr;
 }
 
-QColor TextField::getBGColor() const
+TQColor TextField::getBGColor() const
 {
     return bgColor;
 }
 
 
-void TextField::setFont(const QString &f)
+void TextField::setFont(const TQString &f)
 {
     font.setFamily(f);
-    lineHeight = QFontMetrics(font).height();
+    lineHeight = TQFontMetrics(font).height();
 }
 
 
-QString TextField::getFont() const
+TQString TextField::getFont() const
 {
     return font.family();
 }
@@ -94,7 +94,7 @@ QString TextField::getFont() const
 void TextField::setFontSize(int size)
 {
     font.setPointSize(size);
-    lineHeight = QFontMetrics(font).height();
+    lineHeight = TQFontMetrics(font).height();
 }
 
 int TextField::getFontSize() const
@@ -102,9 +102,9 @@ int TextField::getFontSize() const
     return font.pointSize();
 }
 
-void TextField::setAlignment( const QString &align )
+void TextField::setAlignment( const TQString &align )
 {
-    QString a = align.upper();
+    TQString a = align.upper();
     if( a == "LEFT" || a.isEmpty() )
         alignment = Qt::AlignLeft;
     if( a == "RIGHT" )
@@ -123,7 +123,7 @@ int TextField::getAlignment() const
     return alignment;
 }
 
-QString TextField::getAlignmentAsString() const
+TQString TextField::getAlignmentAsString() const
 {
     if( alignment == Qt::AlignHCenter )
         return "CENTER";

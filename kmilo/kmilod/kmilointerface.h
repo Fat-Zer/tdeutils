@@ -23,28 +23,28 @@
 #ifndef _KMILOI_H_
 #define _KMILOI_H_
 
-#include <qobject.h>
-#include <qstring.h>
+#include <tqobject.h>
+#include <tqstring.h>
 #include "kmilod.h"
 
 namespace KMilo {
 
 // FIXME: make put the methods into .cpp file when the header is installed.
-class KMiloInterface : public QObject {
+class KMiloInterface : public TQObject {
 	Q_OBJECT
 	public:
-		KMiloInterface(KMiloD *p) : QObject() { _p = p; }
+		KMiloInterface(KMiloD *p) : TQObject() { _p = p; }
 		virtual ~KMiloInterface() {}
 
 	public slots:
 		int pollMilliSeconds() const { return _p->pollMilliSeconds(); }
 		bool setPollMilliSeconds(int ms) { return _p->setPollMilliSeconds(ms); }
 
-		void displayText(const QString& text) { _p->displayText(text); }
-		void displayText(const QString& text, const QPixmap& customPixmap) { _p->displayText(text, customPixmap); }
+		void displayText(const TQString& text) { _p->displayText(text); }
+		void displayText(const TQString& text, const TQPixmap& customPixmap) { _p->displayText(text, customPixmap); }
 
-		void displayProgress(const QString& text, int progress, const QPixmap& customPixmap) { _p->displayProgress(text, progress, customPixmap); }
-		void displayProgress(const QString& text, int progress) { _p->displayProgress(text, progress); }
+		void displayProgress(const TQString& text, int progress, const TQPixmap& customPixmap) { _p->displayProgress(text, progress, customPixmap); }
+		void displayProgress(const TQString& text, int progress) { _p->displayProgress(text, progress); }
 
 		void reconfigure() { _p->reconfigure(); }
 

@@ -58,10 +58,10 @@ namespace KSim
     /**
      * @return the ThemeType enum as a QString
      */
-    inline QString typeToString(int type, bool incSlash = true)
+    inline TQString typeToString(int type, bool incSlash = true)
     {
       if (type == Types::None)
-        return QString::null;
+        return TQString::null;
 
       // This array MUST be in the same order
       // as the ThemeType enum
@@ -72,9 +72,9 @@ namespace KSim
         "uptime", "net", "inet", 0
       };
 
-      QString returnString;
+      TQString returnString;
       returnString.setLatin1(typeNames[type]);
-      return incSlash ? returnString + QString::fromLatin1("/") : returnString;
+      return incSlash ? returnString + TQString::fromLatin1("/") : returnString;
     }
   }
 }

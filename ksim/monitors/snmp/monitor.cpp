@@ -19,26 +19,26 @@
 
 #include "monitor.h"
 
-#include <qtimer.h>
-#include <qapplication.h>
+#include <tqtimer.h>
+#include <tqapplication.h>
 
 using namespace KSim::Snmp;
 
-Monitor::Monitor( const HostConfig &host, const Identifier &oid, int refresh, QObject *parent, const char *name )
-    : QObject( parent, name ), m_oid( oid ), m_session( host )
+Monitor::Monitor( const HostConfig &host, const Identifier &oid, int refresh, TQObject *parent, const char *name )
+    : TQObject( parent, name ), m_oid( oid ), m_session( host )
 {
     if ( refresh > 0 )
         m_timerId = startTimer( refresh );
     else
         m_timerId = -1;
 
-    QTimer::singleShot( 0, this, SLOT( performSnmpRequest() ) );
+    TQTimer::singleShot( 0, this, TQT_SLOT( performSnmpRequest() ) );
 }
 
 Monitor::~Monitor()
 {
-    if ( QThread::running() )
-        QThread::wait();
+    if ( TQThread::running() )
+        TQThread::wait();
 }
 
 void Monitor::run()
@@ -48,13 +48,13 @@ void Monitor::run()
     result->oid = m_oid;
     result->success = performSyncSnmpRequest( result->data, &result->error );
 
-    QCustomEvent *ev = new QCustomEvent( QEvent::User, result );
-    QApplication::postEvent( this, ev );
+    TQCustomEvent *ev = new TQCustomEvent( TQEvent::User, result );
+    TQApplication::postEvent( this, ev );
 }
 
-void Monitor::customEvent( QCustomEvent *ev )
+void Monitor::customEvent( TQCustomEvent *ev )
 {
-    if ( ev->type() != QEvent::User )
+    if ( ev->type() != TQEvent::User )
         return;
 
     AsyncSnmpQueryResult *result = reinterpret_cast<AsyncSnmpQueryResult *>( ev->data() );
@@ -69,7 +69,7 @@ void Monitor::customEvent( QCustomEvent *ev )
     delete result;
 }
 
-void Monitor::timerEvent( QTimerEvent *ev )
+void Monitor::timerEvent( TQTimerEvent *ev )
 {
     if ( ev->timerId() != m_timerId )
         return;
@@ -79,7 +79,7 @@ void Monitor::timerEvent( QTimerEvent *ev )
 
 void Monitor::performSnmpRequest()
 {
-    if ( QThread::running() )
+    if ( TQThread::running() )
         return;
 
     start();

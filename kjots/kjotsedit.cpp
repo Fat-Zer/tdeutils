@@ -20,9 +20,9 @@
 //  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 //
 
-#include <qpainter.h>
-#include <qpaintdevicemetrics.h>
-#include <qcursor.h>
+#include <tqpainter.h>
+#include <tqpaintdevicemetrics.h>
+#include <tqcursor.h>
 
 #include <kpopupmenu.h>
 #include <keditcl.h>
@@ -36,16 +36,16 @@
 //----------------------------------------------------------------------
 // MYMULTIEDIT
 //----------------------------------------------------------------------
-KJotsEdit::KJotsEdit (QWidget* parent, const char* name)
+KJotsEdit::KJotsEdit (TQWidget* parent, const char* name)
     : KEdit(parent, name),
     m_entry(0)
 {
     // no rich text until printing and other such issues are worked out
     setTextFormat(Qt::PlainText);
-    setWordWrap(QTextEdit::WidgetWidth);
+    setWordWrap(TQTextEdit::WidgetWidth);
     setLinkUnderline(true);
     web_menu = new KPopupMenu(this);;
-    web_menu->insertItem(i18n("Open URL"), this, SLOT(openUrl()) );
+    web_menu->insertItem(i18n("Open URL"), this, TQT_SLOT(openUrl()) );
 }
 
 KJotsEdit::~KJotsEdit()
@@ -53,7 +53,7 @@ KJotsEdit::~KJotsEdit()
 
 }
 
-void KJotsEdit::mousePressEvent( QMouseEvent *e )
+void KJotsEdit::mousePressEvent( TQMouseEvent *e )
 {
     if(e->button() == RightButton &&
             hasSelectedText())
@@ -62,7 +62,7 @@ void KJotsEdit::mousePressEvent( QMouseEvent *e )
 
         if(url.isValid())
         {
-            web_menu->popup(QCursor::pos());
+            web_menu->popup(TQCursor::pos());
             return;
         }
     }
@@ -82,7 +82,7 @@ void KJotsEdit::openUrl()
     }
 }
 
-void KJotsEdit::print(QString title)
+void KJotsEdit::print(TQString title)
 {
     KPrinter printer;
     printer.setDocName(title);
@@ -91,19 +91,19 @@ void KJotsEdit::print(QString title)
 
     if (printer.setup(this))
     {
-        QFont printFont = font();
-        QPainter painter( &printer );
-        QPaintDeviceMetrics metrics( &printer );
+        TQFont printFont = font();
+        TQPainter painter( &printer );
+        TQPaintDeviceMetrics metrics( &printer );
         int y = 0;
         int maxWidth = metrics.width();
         int maxHeight = metrics.height();
-        QString currentParagraph;
+        TQString currentParagraph;
 
         for (int paragraphCount = 0; paragraphCount < paragraphs(); ++paragraphCount )
         {
             currentParagraph = text(paragraphCount);
-            QRect r = painter.boundingRect(0, y, maxWidth, maxHeight,
-                    QPainter::ExpandTabs | QPainter::WordBreak,
+            TQRect r = painter.boundingRect(0, y, maxWidth, maxHeight,
+                    TQPainter::ExpandTabs | TQPainter::WordBreak,
                     currentParagraph);
 
             if ((y + r.height()) > maxHeight)
@@ -113,7 +113,7 @@ void KJotsEdit::print(QString title)
             }
 
             painter.drawText(0, y, maxWidth, maxHeight - y,
-                    QPainter::ExpandTabs | QPainter::WordBreak,
+                    TQPainter::ExpandTabs | TQPainter::WordBreak,
                     currentParagraph);
             y += r.height();
         }

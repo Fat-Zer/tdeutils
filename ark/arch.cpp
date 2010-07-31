@@ -31,8 +31,8 @@
 #include <time.h>
 
 // QT includes
-#include <qapplication.h>
-#include <qfile.h>
+#include <tqapplication.h>
+#include <tqfile.h>
 
 // KDE includes
 #include <kdebug.h>
@@ -60,12 +60,12 @@
 #include "sevenzip.h"
 #include "ace.h"
 
-Arch::ArchColumns::ArchColumns( int col, QRegExp reg, int length, bool opt )
+Arch::ArchColumns::ArchColumns( int col, TQRegExp reg, int length, bool opt )
   : colRef( col ), pattern( reg ), maxLength( length ), optional( opt )
 {
 }
 
-Arch::Arch( ArkWidget *gui, const QString &filename )
+Arch::Arch( ArkWidget *gui, const TQString &filename )
   : m_filename( filename ), m_buffer( "" ), m_gui( gui ),
     m_bReadOnly( false ), m_bNotifyWhenDeleteFails( true ),
     m_header_removed( false ), m_finished( false ),
@@ -83,18 +83,18 @@ Arch::~Arch()
 }
 
 //Check if a compress utility exists
-void Arch::verifyCompressUtilityIsAvailable( const QString &utility )
+void Arch::verifyCompressUtilityIsAvailable( const TQString &utility )
 {
   // see if the utility is in the PATH of the user.
-  QString cmd = KGlobal::dirs()->findExe( utility );
+  TQString cmd = KGlobal::dirs()->findExe( utility );
   m_bArchUtilityIsAvailable = !cmd.isEmpty();
 }
 
 //Check if a utility can uncompress files
-void Arch::verifyUncompressUtilityIsAvailable( const QString &utility )
+void Arch::verifyUncompressUtilityIsAvailable( const TQString &utility )
 {
   // see if the utility is in the PATH of the user.
-  QString cmd = KGlobal::dirs()->findExe( utility );
+  TQString cmd = KGlobal::dirs()->findExe( utility );
   m_bUnarchUtilityIsAvailable = !cmd.isEmpty();
 }
 
@@ -106,7 +106,7 @@ void Arch::slotOpenExited( KProcess* _kp )
   {
     if ( passwordRequired() )
     {
-        QString msg;
+        TQString msg;
         if ( !m_password.isEmpty() )
             msg = i18n("The password was incorrect. ");
         if (KPasswordDialog::getPassword( m_password, msg+i18n("You must enter a password to open the file:") ) == KPasswordDialog::Accepted )
@@ -118,7 +118,7 @@ void Arch::slotOpenExited( KProcess* _kp )
             return;
         }
         m_password = "";
-        emit sigOpen( this, false, QString::null, 0 );
+        emit sigOpen( this, false, TQString::null, 0 );
         delete _kp;
         _kp = m_currentProcess = 0;
         return;
@@ -140,7 +140,7 @@ void Arch::slotOpenExited( KProcess* _kp )
     emit sigOpen( this, true, m_filename,
                   Arch::Extract | Arch::Delete | Arch::Add | Arch::View );
   else
-    emit sigOpen( this, false, QString::null, 0 );
+    emit sigOpen( this, false, TQString::null, 0 );
 
   delete _kp;
   _kp = m_currentProcess = 0;
@@ -152,13 +152,13 @@ void Arch::slotDeleteExited( KProcess *_kp )
 
   if ( !success )
   {
-    QApplication::restoreOverrideCursor();
+    TQApplication::restoreOverrideCursor();
 
-    QString msg = i18n( "The deletion operation failed." );
+    TQString msg = i18n( "The deletion operation failed." );
 
     if ( !getLastShellOutput().isNull() )
     {
-      QStringList list = QStringList::split( "\n", getLastShellOutput() );
+      TQStringList list = TQStringList::split( "\n", getLastShellOutput() );
       KMessageBox::errorList( m_gui, msg, list );
       clearShellOutput();
     }
@@ -181,7 +181,7 @@ void Arch::slotExtractExited( KProcess *_kp )
   {
     if ( passwordRequired() )
     {
-        QString msg;
+        TQString msg;
         if ( !m_password.isEmpty() )
             msg = i18n("The password was incorrect. ");
         if (KPasswordDialog::getPassword( m_password, msg+i18n("You must enter a password to extract the file:") ) == KPasswordDialog::Accepted )
@@ -200,14 +200,14 @@ void Arch::slotExtractExited( KProcess *_kp )
     }
     else if ( m_password.isEmpty() || _kp->exitStatus() > 1 )
     {
-        QApplication::restoreOverrideCursor();
+        TQApplication::restoreOverrideCursor();
 
-        QString msg = i18n( "The extraction operation failed." );
+        TQString msg = i18n( "The extraction operation failed." );
 
         if ( !getLastShellOutput().isNull() )
         {
-            //getLastShellOutput() is a QString. errorList is expecting QStringLists to show in multiple lines
-            QStringList list = QStringList::split( "\n", getLastShellOutput() );
+            //getLastShellOutput() is a TQString. errorList is expecting QStringLists to show in multiple lines
+            TQStringList list = TQStringList::split( "\n", getLastShellOutput() );
             KMessageBox::errorList( m_gui, msg, list );
             clearShellOutput();
         }
@@ -223,7 +223,7 @@ void Arch::slotExtractExited( KProcess *_kp )
   emit sigExtract( success );
 }
 
-void Arch::unarchFile( QStringList *fileList, const QString & destDir,
+void Arch::unarchFile( TQStringList *fileList, const TQString & destDir,
                          bool viewFriendly )
 {
     m_fileList = fileList;
@@ -238,13 +238,13 @@ void Arch::slotAddExited( KProcess *_kp )
 
   if( !success )
   {
-    QApplication::restoreOverrideCursor();
+    TQApplication::restoreOverrideCursor();
 
-    QString msg = i18n( "The addition operation failed." );
+    TQString msg = i18n( "The addition operation failed." );
 
     if ( !getLastShellOutput().isNull() )
     {
-      QStringList list = QStringList::split( "\n", getLastShellOutput() );
+      TQStringList list = TQStringList::split( "\n", getLastShellOutput() );
       KMessageBox::errorList( m_gui, msg, list );
       clearShellOutput();
     }
@@ -288,7 +288,7 @@ void Arch::slotReceivedTOC( KProcess*, char* data, int length )
 
     data[ lfChar ] = '\0';
 
-    m_buffer.append( QString::fromUtf8(data + startChar).latin1() );
+    m_buffer.append( TQString::fromUtf8(data + startChar).latin1() );
 
     data[ lfChar ] = '\n';
     startChar = lfChar + 1;
@@ -327,14 +327,14 @@ void Arch::slotReceivedTOC( KProcess*, char* data, int length )
   data[ length ] = c;
 }
 
-bool Arch::processLine( const QCString &line )
+bool Arch::processLine( const TQCString &line )
 {
-  QString columns[ 11 ];
+  TQString columns[ 11 ];
   unsigned int pos = 0;
   int strpos, len;
 
   // Go through our columns, try to pick out data, return silently on failure
-  for ( QPtrListIterator <ArchColumns>col( m_archCols ); col.current(); ++col )
+  for ( TQPtrListIterator <ArchColumns>col( m_archCols ); col.current(); ++col )
   {
     ArchColumns *curCol = *col;
 
@@ -354,20 +354,20 @@ bool Arch::processLine( const QCString &line )
 
     pos = strpos + len;
 
-    columns[curCol->colRef] = QString::fromLocal8Bit( line.mid(strpos, len) );
+    columns[curCol->colRef] = TQString::fromLocal8Bit( line.mid(strpos, len) );
   }
 
 
   if ( m_dateCol >= 0 )
   {
-    QString year = ( m_repairYear >= 0 ) ?
+    TQString year = ( m_repairYear >= 0 ) ?
                    ArkUtils::fixYear( columns[ m_repairYear ].ascii())
                    : columns[ m_fixYear ];
-    QString month = ( m_repairMonth >= 0 ) ?
-                   QString( "%1" )
+    TQString month = ( m_repairMonth >= 0 ) ?
+                   TQString( "%1" )
                    .arg( ArkUtils::getMonth( columns[ m_repairMonth ].ascii() ) )
                    : columns[ m_fixMonth ];
-    QString timestamp = QString::fromLatin1( "%1-%2-%3 %4" )
+    TQString timestamp = TQString::fromLatin1( "%1-%2-%3 %4" )
                         .arg( year )
                         .arg( month )
                         .arg( columns[ m_fixDay ] )
@@ -376,7 +376,7 @@ bool Arch::processLine( const QCString &line )
     columns[ m_dateCol ] = timestamp;
   }
 
-  QStringList list;
+  TQStringList list;
 
   for ( int i = 0; i < m_numCols; ++i )
   {
@@ -390,8 +390,8 @@ bool Arch::processLine( const QCString &line )
 
 
 Arch *Arch::archFactory( ArchType aType,
-                         ArkWidget *parent, const QString &filename,
-                         const QString &openAsMimeType )
+                         ArkWidget *parent, const TQString &filename,
+                         const TQString &openAsMimeType )
 {
   switch( aType )
   {

@@ -23,7 +23,7 @@
 #include "concwidget.h"
 
 SingleContainerWidget::SingleContainerWidget(RegExpEditorWindow* editorWindow,
-                                             QWidget* parent, const char* name)
+                                             TQWidget* parent, const char* name)
   : RegExpWidget( editorWindow, parent, name )
 {
 }
@@ -73,15 +73,15 @@ bool SingleContainerWidget::validateSelection() const
   return _child->validateSelection();
 }
 
-QRect SingleContainerWidget::selectionRect() const
+TQRect SingleContainerWidget::selectionRect() const
 {
   if ( _isSelected )
-    return QRect( mapToGlobal( QPoint(0,0) ), size() );
+    return TQRect( mapToGlobal( TQPoint(0,0) ), size() );
   else
     return _child->selectionRect();
 }
 
-RegExpWidget* SingleContainerWidget::widgetUnderPoint( QPoint globalPos, bool justVisibleWidgets )
+RegExpWidget* SingleContainerWidget::widgetUnderPoint( TQPoint globalPos, bool justVisibleWidgets )
 {
   RegExpWidget* wid = _child->widgetUnderPoint( globalPos, justVisibleWidgets );
   if ( wid )
@@ -93,12 +93,12 @@ RegExpWidget* SingleContainerWidget::widgetUnderPoint( QPoint globalPos, bool ju
   }
 }
 
-RegExpWidget* SingleContainerWidget::findWidgetToEdit( QPoint globalPos )
+RegExpWidget* SingleContainerWidget::findWidgetToEdit( TQPoint globalPos )
 {
   RegExpWidget* wid = _child->findWidgetToEdit( globalPos );
   if ( wid )
     return wid;
-  else if ( QRect(mapToGlobal(QPoint(0,0)), size()).contains( globalPos ) )
+  else if ( TQRect(mapToGlobal(TQPoint(0,0)), size()).contains( globalPos ) )
     return this;
   else
     return 0;

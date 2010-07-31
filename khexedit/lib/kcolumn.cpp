@@ -16,7 +16,7 @@
 
  
 // qt specific
-#include <qpainter.h>
+#include <tqpainter.h>
 // lib specific
 #include "kcolumnsview.h"
 #include "kcolumn.h"
@@ -34,26 +34,26 @@ KColumn::KColumn( KColumnsView *V )
 }
 
 
-void KColumn::paintFirstLine( QPainter *P, KPixelXs, int /*FirstLine*/ )
+void KColumn::paintFirstLine( TQPainter *P, KPixelXs, int /*FirstLine*/ )
 {
   paintBlankLine( P );
 }
 
 
-void KColumn::paintNextLine( QPainter *P )
+void KColumn::paintNextLine( TQPainter *P )
 {
   paintBlankLine( P );
 }
 
 
-void KColumn::paintBlankLine( QPainter *P ) const
+void KColumn::paintBlankLine( TQPainter *P ) const
 {
   if( LineHeight > 0 )
     P->fillRect( 0,0,width(),LineHeight, View->backgroundBrush() );
 }
 
 
-void KColumn::paintEmptyColumn( QPainter *P, KPixelXs Xs, KPixelYs Ys )
+void KColumn::paintEmptyColumn( TQPainter *P, KPixelXs Xs, KPixelYs Ys )
 {
   Xs.restrictTo( XSpan );
   P->fillRect( Xs.start(), Ys.start(), Xs.width(), Ys.width(), View->backgroundBrush() );

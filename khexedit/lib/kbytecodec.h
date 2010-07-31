@@ -19,7 +19,7 @@
 #define KHE_KBYTECODEC_H
 
 #include "khe.h"
-#include <qstring.h>
+#include <tqstring.h>
 
 namespace KHE
 {
@@ -49,9 +49,9 @@ class KByteCodec
     virtual unsigned char digitsFilledLimit() const = 0;
 
     /** encodes the Char and writes the result to */
-    virtual void encode( QString &Digits, unsigned  int Pos, const unsigned char Char ) const = 0;
+    virtual void encode( TQString &Digits, unsigned  int Pos, const unsigned char Char ) const = 0;
     /** */
-    virtual void encodeShort( QString &Digits, unsigned  int Pos, const unsigned char Char ) const = 0;
+    virtual void encodeShort( TQString &Digits, unsigned  int Pos, const unsigned char Char ) const = 0;
 
     /** */
     virtual bool appendDigit( unsigned char *Byte, const unsigned char Digit ) const = 0;
@@ -65,7 +65,7 @@ class KByteCodec
 
   public:
     /** */
-    uint decode( unsigned char *Char, const QString &Digits, uint Pos ) const;
+    uint decode( unsigned char *Char, const TQString &Digits, uint Pos ) const;
 };
 
 }

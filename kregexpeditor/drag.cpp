@@ -20,8 +20,8 @@
 #include "regexpconverter.h"
 #include "widgetfactory.h"
 
-RegExpWidgetDrag::RegExpWidgetDrag( RegExp* regexp, QWidget* dragSource )
-  : QDragObject( dragSource ), _regexp( regexp->clone() )
+RegExpWidgetDrag::RegExpWidgetDrag( RegExp* regexp, TQWidget* dragSource )
+  : TQDragObject( dragSource ), _regexp( regexp->clone() )
 {
 }
 
@@ -31,17 +31,17 @@ RegExpWidgetDrag::~RegExpWidgetDrag()
 }
 
 
-bool RegExpWidgetDrag::canDecode( QDragMoveEvent* event )
+bool RegExpWidgetDrag::canDecode( TQDragMoveEvent* event )
 {
   return event->provides( "KRegExpEditor/widgetdrag" );
 }
 
-RegExpWidget* RegExpWidgetDrag::decode(QDropEvent* event, RegExpEditorWindow* window,
-                                       QWidget* parent)
+RegExpWidget* RegExpWidgetDrag::decode(TQDropEvent* event, RegExpEditorWindow* window,
+                                       TQWidget* parent)
 {
-  QByteArray payload = event->encodedData("KRegExpEditor/widgetdrag" );
-  QTextStream stream( payload, IO_ReadOnly );
-  QString str = stream.read();
+  TQByteArray payload = event->encodedData("KRegExpEditor/widgetdrag" );
+  TQTextStream stream( payload, IO_ReadOnly );
+  TQString str = stream.read();
   RegExp* regexp = WidgetFactory::createRegExp( str );
   RegExpWidget* widget = WidgetFactory::createWidget( regexp, window, parent );
   delete regexp;
@@ -58,15 +58,15 @@ const char * RegExpWidgetDrag::format ( int i ) const
     return 0;
 }
 
-QByteArray RegExpWidgetDrag::encodedData ( const char* format ) const
+TQByteArray RegExpWidgetDrag::encodedData ( const char* format ) const
 {
-  QByteArray data;
-  QTextStream stream( data, IO_WriteOnly );
-  if ( QString::fromLocal8Bit( format ).startsWith(QString::fromLocal8Bit( "KRegExpEditor/widgetdrag" ) ) ) {
-    QString xml = _regexp->toXmlString();
+  TQByteArray data;
+  TQTextStream stream( data, IO_WriteOnly );
+  if ( TQString::fromLocal8Bit( format ).startsWith(TQString::fromLocal8Bit( "KRegExpEditor/widgetdrag" ) ) ) {
+    TQString xml = _regexp->toXmlString();
     stream << xml;
   }
-  else if ( QString::fromLocal8Bit( format ).startsWith(QString::fromLocal8Bit( "text/plain" ) ) ) {
+  else if ( TQString::fromLocal8Bit( format ).startsWith(TQString::fromLocal8Bit( "text/plain" ) ) ) {
       stream << RegExpConverter::current()->toStr( _regexp, false );
   }
   else {

@@ -19,7 +19,7 @@
 
 #include <Python.h>
 #include "task_python.h"
-#include <qobject.h>
+#include <tqobject.h>
 #include <kservicegroup.h>
 #include "karamba.h"
 #include "svcgrp_python.h"
@@ -122,7 +122,7 @@ static PyObject *getServiceGroups(const char *rel_path)
 
 		KServiceGroup::List sl = root->entries(true, excludeNoDisplay_, true, detailed_ && !detailedNamesFirst_);
 
-		QStringList suppressGenericNames = root->suppressGenericNames();
+		TQStringList suppressGenericNames = root->suppressGenericNames();
 
 		KServiceGroup::List::ConstIterator it = sl.begin();
 		for (; it != sl.end(); ++it)

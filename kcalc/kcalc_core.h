@@ -26,7 +26,7 @@
 #define _KCALC_CORE_H
 
 #include "stats.h"
-#include <qvaluestack.h>
+#include <tqvaluestack.h>
 #include "knumber.h"
 
 #define		POS_ZERO	 1e-19L	 /* What we consider zero is */
@@ -153,7 +153,7 @@ class CalcEngine
   // into the stack, each time the user opens one.  When a bracket is
   // closed, everything in the stack is evaluated until the first
   // marker "FUNC_BRACKET" found.
-  QValueStack<_node> _stack;
+  TQValueStack<_node> _stack;
 
   KNumber _last_number;
 

@@ -38,7 +38,7 @@ KValueColTextExport::~KValueColTextExport()
 
 
 
-void KValueColTextExport::print( QString &T ) const
+void KValueColTextExport::print( TQString &T ) const
 {
   int p = 0;
   int pEnd = NoOfBytesPerLine;
@@ -48,7 +48,7 @@ void KValueColTextExport::print( QString &T ) const
   if( PrintLine == CoordRange.end().line() )
     pEnd = CoordRange.end().pos()+1;
 
-  QString E;
+  TQString E;
   E.setLength( ByteCodec->encodingWidth() );
   // draw individual chars
   uint e = 0;

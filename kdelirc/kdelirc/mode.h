@@ -13,7 +13,7 @@
 #ifndef MODE_H
 #define MODE_H
 
-#include <qstring.h>
+#include <tqstring.h>
 
 #include "remoteserver.h"
 
@@ -25,17 +25,17 @@ class KConfig;
 
 class Mode
 {
-	QString theName, theRemote, theIconFile;
+	TQString theName, theRemote, theIconFile;
 
 public:
-	void setName(const QString &a) { theName = a; }
-	void setRemote(const QString &a) { theRemote = a; }
-	void setIconFile(const QString &a) { theIconFile = a; }
+	void setName(const TQString &a) { theName = a; }
+	void setRemote(const TQString &a) { theRemote = a; }
+	void setIconFile(const TQString &a) { theIconFile = a; }
 
-	const QString &name() const { return theName; }
-	const QString &remote() const { return theRemote; }
-	const QString &iconFile() const { return theIconFile; }
-	const QString &remoteName() const { return RemoteServer::remoteServer()->getRemoteName(theRemote); }
+	const TQString &name() const { return theName; }
+	const TQString &remote() const { return theRemote; }
+	const TQString &iconFile() const { return theIconFile; }
+	const TQString &remoteName() const { return RemoteServer::remoteServer()->getRemoteName(theRemote); }
 
 	const Mode &loadFromConfig(KConfig &theConfig, int index);
 	void saveToConfig(KConfig &theConfig, int index);
@@ -43,7 +43,7 @@ public:
 	bool operator==(const Mode &mode) const { return mode.theName == theName && mode.theRemote == theRemote; }
 
 	Mode();
-	Mode(const QString &remote, const QString &name, const QString &iconFile = QString::null);
+	Mode(const TQString &remote, const TQString &name, const TQString &iconFile = TQString::null);
 	~Mode();
 };
 

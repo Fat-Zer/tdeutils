@@ -24,13 +24,13 @@
 
 //
 // 1999-11-29 Espen Sand
-// Converted to QLayout and QListView + cleanups
+// Converted to TQLayout and TQListView + cleanups
 //
 
-#include <qgroupbox.h>
-#include <qheader.h>
-#include <qlayout.h>
-#include <qlineedit.h>
+#include <tqgroupbox.h>
+#include <tqheader.h>
+#include <tqlayout.h>
+#include <tqlineedit.h>
 
 #undef Unsorted
 
@@ -47,8 +47,8 @@ static bool GUI;
 #endif
 
 
-MntConfigWidget::MntConfigWidget(QWidget *parent, const char *name, bool init)
-  : QWidget(parent, name)
+MntConfigWidget::MntConfigWidget(TQWidget *parent, const char *name, bool init)
+  : TQWidget(parent, name)
 {
   mInitializing = false;
 
@@ -59,10 +59,10 @@ MntConfigWidget::MntConfigWidget(QWidget *parent, const char *name, bool init)
     mDiskList.readFSTAB();
     mDiskList.readDF();
     mInitializing = true;
-    connect( &mDiskList,SIGNAL(readDFDone()),this,SLOT(readDFDone()));
+    connect( &mDiskList,TQT_SIGNAL(readDFDone()),this,TQT_SLOT(readDFDone()));
 
-    QString text;
-    QVBoxLayout *topLayout = new QVBoxLayout( this, 0, KDialog::spacingHint());
+    TQString text;
+    TQVBoxLayout *topLayout = new TQVBoxLayout( this, 0, KDialog::spacingHint());
 
     mList = new CListView( this, "list", 8 );
     mList->setAllColumnsShowFocus( true );
@@ -71,69 +71,69 @@ MntConfigWidget::MntConfigWidget(QWidget *parent, const char *name, bool init)
     mList->addColumn( i18n("Mount Point") );
     mList->addColumn( i18n("Mount Command") );
     mList->addColumn( i18n("Unmount Command") );
-    mList->setFrameStyle( QFrame::WinPanel + QFrame::Sunken );
-    connect( mList, SIGNAL(selectionChanged(QListViewItem *)),
-	     this, SLOT(clicked(QListViewItem *)));
+    mList->setFrameStyle( TQFrame::WinPanel + TQFrame::Sunken );
+    connect( mList, TQT_SIGNAL(selectionChanged(TQListViewItem *)),
+	     this, TQT_SLOT(clicked(TQListViewItem *)));
 
     topLayout->addWidget( mList );
 
-    text = QString("%1: %2  %3: %4").
+    text = TQString("%1: %2  %3: %4").
       arg(mList->header()->label(DEVCOL)).
       arg(i18n("None")).
       arg(mList->header()->label(MNTPNTCOL)).
       arg(i18n("None"));
-    mGroupBox = new QGroupBox( text, this );
+    mGroupBox = new TQGroupBox( text, this );
     Q_CHECK_PTR(mGroupBox);
     topLayout->addWidget(mGroupBox);
 
-    QGridLayout *gl = new QGridLayout(mGroupBox, 3, 4, KDialog::spacingHint());
+    TQGridLayout *gl = new TQGridLayout(mGroupBox, 3, 4, KDialog::spacingHint());
     if( gl == 0 ) { return; }
     gl->addRowSpacing( 0, fontMetrics().lineSpacing() );
 
-    mIconLineEdit = new QLineEdit(mGroupBox);
+    mIconLineEdit = new TQLineEdit(mGroupBox);
     Q_CHECK_PTR(mIconLineEdit);
     mIconLineEdit->setMinimumWidth( fontMetrics().maxWidth()*10 );
-    connect( mIconLineEdit, SIGNAL(textChanged(const QString&)),
-	     this,SLOT(iconChanged(const QString&)));
-    connect( mIconLineEdit, SIGNAL(textChanged(const QString&)),
-	     this,SLOT(slotChanged()));
+    connect( mIconLineEdit, TQT_SIGNAL(textChanged(const TQString&)),
+	     this,TQT_SLOT(iconChanged(const TQString&)));
+    connect( mIconLineEdit, TQT_SIGNAL(textChanged(const TQString&)),
+	     this,TQT_SLOT(slotChanged()));
     gl->addWidget( mIconLineEdit, 2, 0 );
 
     mIconButton = new KIconButton(mGroupBox);
     mIconButton->setIconType(KIcon::Small, KIcon::Device);
     Q_CHECK_PTR(mIconButton);
     mIconButton->setFixedWidth( mIconButton->sizeHint().height() );
-    connect(mIconButton,SIGNAL(iconChanged(QString)),this,SLOT(iconChangedButton(QString)));
+    connect(mIconButton,TQT_SIGNAL(iconChanged(TQString)),this,TQT_SLOT(iconChangedButton(TQString)));
     gl->addWidget( mIconButton, 2, 1 );
 
     //Mount
-    mMountButton = new QPushButton( i18n("Get Mount Command"), mGroupBox );
+    mMountButton = new TQPushButton( i18n("Get Mount Command"), mGroupBox );
     Q_CHECK_PTR(mMountButton);
-    connect(mMountButton,SIGNAL(clicked()),this,SLOT(selectMntFile()));
+    connect(mMountButton,TQT_SIGNAL(clicked()),this,TQT_SLOT(selectMntFile()));
     gl->addWidget( mMountButton, 1, 2 );
 
-    mMountLineEdit = new QLineEdit(mGroupBox);
+    mMountLineEdit = new TQLineEdit(mGroupBox);
     Q_CHECK_PTR(mMountLineEdit);
     mMountLineEdit->setMinimumWidth( fontMetrics().maxWidth()*10 );
-    connect(mMountLineEdit,SIGNAL(textChanged(const QString&)),
-	    this,SLOT(mntCmdChanged(const QString&)));
-    connect( mMountLineEdit, SIGNAL(textChanged(const QString&)),
-	     this,SLOT(slotChanged()));
+    connect(mMountLineEdit,TQT_SIGNAL(textChanged(const TQString&)),
+	    this,TQT_SLOT(mntCmdChanged(const TQString&)));
+    connect( mMountLineEdit, TQT_SIGNAL(textChanged(const TQString&)),
+	     this,TQT_SLOT(slotChanged()));
     gl->addWidget( mMountLineEdit, 1, 3 );
 
     //Umount
-    mUmountButton = new QPushButton(i18n("Get Unmount Command"), mGroupBox );
+    mUmountButton = new TQPushButton(i18n("Get Unmount Command"), mGroupBox );
     Q_CHECK_PTR( mUmountButton );
-    connect(mUmountButton,SIGNAL(clicked()),this,SLOT(selectUmntFile()));
+    connect(mUmountButton,TQT_SIGNAL(clicked()),this,TQT_SLOT(selectUmntFile()));
     gl->addWidget( mUmountButton, 2, 2 );
 
-    mUmountLineEdit=new QLineEdit(mGroupBox);
+    mUmountLineEdit=new TQLineEdit(mGroupBox);
     Q_CHECK_PTR(mUmountLineEdit);
     mUmountLineEdit->setMinimumWidth( fontMetrics().maxWidth()*10 );
-    connect(mUmountLineEdit,SIGNAL(textChanged(const QString&)),
-	    this,SLOT(umntCmdChanged(const QString&)));
-    connect( mUmountLineEdit, SIGNAL(textChanged(const QString&)),
-	     this,SLOT(slotChanged()));
+    connect(mUmountLineEdit,TQT_SIGNAL(textChanged(const TQString&)),
+	    this,TQT_SLOT(umntCmdChanged(const TQString&)));
+    connect( mUmountLineEdit, TQT_SIGNAL(textChanged(const TQString&)),
+	     this,TQT_SLOT(slotChanged()));
     gl->addWidget( mUmountLineEdit, 2, 3 );
 
   }
@@ -161,10 +161,10 @@ void MntConfigWidget::readDFDone( void )
   mDiskLookup.resize(mDiskList.count());
 
   int i=0;
-  QListViewItem *item = 0;
+  TQListViewItem *item = 0;
   for( DiskEntry *disk=mDiskList.first(); disk!=0; disk=mDiskList.next(),++i )
   {
-     item = new QListViewItem( mList, item, QString::null, disk->deviceName(),
+     item = new TQListViewItem( mList, item, TQString::null, disk->deviceName(),
       disk->mountPoint(), disk->mountCommand(), disk->umountCommand() );
      item->setPixmap( ICONCOL, SmallIcon( disk->iconName() ) );
      mDiskLookup[i] = item;
@@ -203,7 +203,7 @@ void MntConfigWidget::loadSettings( void )
       resize(w,h);
     }
 
-    QListViewItem *item = mList->selectedItem();
+    TQListViewItem *item = mList->selectedItem();
     if( item != 0 )
     {
       clicked( item );
@@ -212,17 +212,17 @@ void MntConfigWidget::loadSettings( void )
 }
 
 
-void MntConfigWidget::clicked( QListViewItem *item )
+void MntConfigWidget::clicked( TQListViewItem *item )
 {
   mGroupBox->setEnabled( true );
-  mGroupBox->setTitle( QString("%1: %2  %3: %4").
+  mGroupBox->setTitle( TQString("%1: %2  %3: %4").
     arg(mList->header()->label(DEVCOL)).
     arg(item->text(DEVCOL)).
     arg(mList->header()->label(MNTPNTCOL)).
     arg(item->text(MNTPNTCOL)) );
 
 
-  const QPixmap *pix = item->pixmap(ICONCOL);
+  const TQPixmap *pix = item->pixmap(ICONCOL);
   if( pix != 0 )
   {
     mIconButton->setPixmap( *pix );
@@ -245,17 +245,17 @@ void MntConfigWidget::clicked( QListViewItem *item )
 }
 
 
-void MntConfigWidget::iconChangedButton(QString iconName)
+void MntConfigWidget::iconChangedButton(TQString iconName)
 {
   iconChanged(iconName);
 }
-void MntConfigWidget::iconChanged(const QString &iconName)
+void MntConfigWidget::iconChanged(const TQString &iconName)
 {
   if( iconName.findRev('_') == 0 ||
       (iconName.right(iconName.length()-iconName.findRev('_'))!="_mount" &&
       iconName.right(iconName.length()-iconName.findRev('_'))!="_unmount"))
     {
-      QString msg = i18n(""
+      TQString msg = i18n(""
 			 "This filename is not valid: %1\n"
 			 "It must end with "
 			 "\"_mount\" or \"_unmount\".").arg(iconName);
@@ -263,7 +263,7 @@ void MntConfigWidget::iconChanged(const QString &iconName)
       return;
     }
 
-  QListViewItem *item = mList->selectedItem();
+  TQListViewItem *item = mList->selectedItem();
   for(unsigned i=0 ; i < mDiskList.count() ; ++i) 
     {
       if (mDiskLookup[i] == item) 
@@ -314,9 +314,9 @@ void MntConfigWidget::selectUmntFile()
   mUmountLineEdit->setText( url.path() );
 }
 
-void MntConfigWidget::mntCmdChanged( const QString &data )
+void MntConfigWidget::mntCmdChanged( const TQString &data )
 {
-  QListViewItem *item = mList->selectedItem();
+  TQListViewItem *item = mList->selectedItem();
   for(unsigned  i=0 ; i < mDiskList.count() ; ++i) 
     {
       if (mDiskLookup[i] == item)
@@ -333,9 +333,9 @@ void MntConfigWidget::mntCmdChanged( const QString &data )
 }
 
 
-void MntConfigWidget::umntCmdChanged( const QString &data )
+void MntConfigWidget::umntCmdChanged( const TQString &data )
 {
-  QListViewItem *item = mList->selectedItem();
+  TQListViewItem *item = mList->selectedItem();
   for(unsigned i=0 ; i < mDiskList.count() ; ++i) 
     {
     if (mDiskLookup[i] == item) 
@@ -352,7 +352,7 @@ void MntConfigWidget::umntCmdChanged( const QString &data )
 }
 
 
-void MntConfigWidget::closeEvent(QCloseEvent *)
+void MntConfigWidget::closeEvent(TQCloseEvent *)
 {
 }
 

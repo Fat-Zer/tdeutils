@@ -17,15 +17,15 @@ class KDEsshDialog
     Q_OBJECT
 
 public:
-    KDEsshDialog(QCString host, QCString user, QCString stub, 
-	    QString prompt, bool enableKeep);
+    KDEsshDialog(TQCString host, TQCString user, TQCString stub, 
+	    TQString prompt, bool enableKeep);
     ~KDEsshDialog();
 
 protected:
     bool checkPassword(const char *password);
     
 private:
-    QCString m_User, m_Host, m_Stub;
+    TQCString m_User, m_Host, m_Stub;
 };
     
 

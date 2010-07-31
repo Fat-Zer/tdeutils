@@ -28,7 +28,7 @@ KController::KController( KHexEdit* HE, KController *P )
 {
 }
 
-bool KController::handleKeyPress( QKeyEvent *KeyEvent )
+bool KController::handleKeyPress( TQKeyEvent *KeyEvent )
 {
   return Parent ? Parent->handleKeyPress( KeyEvent ) : false;
 }

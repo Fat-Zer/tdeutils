@@ -11,17 +11,17 @@
 #define DATESENSOR_H
 #include "sensor.h"
 #include "sensorparams.h"
-#include <qdatetime.h>
+#include <tqdatetime.h>
 #include <kdatepicker.h>
-#include <qvbox.h>
+#include <tqvbox.h>
 
 class DatePicker : public QVBox
 {
 public:
-	DatePicker(QWidget*);
+	DatePicker(TQWidget*);
 private:
 	KDatePicker *picker;
-	void keyReleaseEvent(QKeyEvent *e);
+	void keyReleaseEvent(TQKeyEvent *e);
 };
 
 class DateSensor :  public Sensor
@@ -31,8 +31,8 @@ public:
   DateSensor( int interval );
   ~DateSensor();
 
-  void toggleCalendar(QMouseEvent *ev);
-  void mousePressEvent(QMouseEvent *ev);
+  void toggleCalendar(TQMouseEvent *ev);
+  void mousePressEvent(TQMouseEvent *ev);
   void update();
 
 protected slots:

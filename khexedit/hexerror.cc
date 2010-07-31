@@ -22,12 +22,12 @@
 
 #include "hexerror.h"
 
-static QString message;
+static TQString message;
 
 
-const QString &hexError( int index )
+const TQString &hexError( int index )
 {
-  static QString messages[ Err_MAXERROR - Err_NoData ] = 
+  static TQString messages[ Err_MAXERROR - Err_NoData ] = 
   {
     i18n("No data"),                                    // Err_NoData
     i18n("Insufficient memory"),                        // Err_NoMemory

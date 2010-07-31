@@ -25,12 +25,12 @@
 #ifndef __DISKS_H__
 #define __DISKS_H__
 
-#include <qobject.h>
-#include <qstring.h>
-#include <qlabel.h>
-#include <qpushbutton.h>
-#include <qprogressbar.h>
-#include <qfile.h>
+#include <tqobject.h>
+#include <tqstring.h>
+#include <tqlabel.h>
+#include <tqpushbutton.h>
+#include <tqprogressbar.h>
+#include <tqfile.h>
 
 #include <kio/global.h>
 #include <kprogress.h>
@@ -41,17 +41,17 @@ class DiskEntry : public QObject
 {
   Q_OBJECT
 public:
-  DiskEntry(QObject *parent=0, const char *name=0);
-  DiskEntry(const QString & deviceName, QObject *parent=0, const char *name=0);
+  DiskEntry(TQObject *parent=0, const char *name=0);
+  DiskEntry(const TQString & deviceName, TQObject *parent=0, const char *name=0);
   ~DiskEntry();
-  QString lastSysError() {return sysStringErrOut; }
-  QString deviceName() const { return device; }
+  TQString lastSysError() {return sysStringErrOut; }
+  TQString deviceName() const { return device; }
   // The real device (in case deviceName() is a symlink)
-  QString deviceRealName() const;
-  QString mountPoint() const { return mountedOn; }
-  QString mountOptions() const { return options; }
+  TQString deviceRealName() const;
+  TQString mountPoint() const { return mountedOn; }
+  TQString mountOptions() const { return options; }
   // The real device (in case deviceName() is a symlink)
-  QString realMountPoint() const;
+  TQString realMountPoint() const;
   /**
    * sets the used mountCommand for the actual DiskEntry.
    * @param mntcmd   is a string containing the executable file and
@@ -63,7 +63,7 @@ public:
    *                 all this information is gained from the objects' data
    *                 if no mountCommand is set it defaults to "mount %d"
    **/
-  QString mountCommand() const { return mntcmd; }
+  TQString mountCommand() const { return mntcmd; }
   /**
    * sets the used umountCommand for the actual DiskEntry.
    * @param mntcmd   is a string containing the executable file and
@@ -73,17 +73,17 @@ public:
    *                 all this information is gained from the objects' data
    *                 if no umountCommand is set it defaults to "umount %d"
    **/
-  QString umountCommand() const { return umntcmd; }
-  QString fsType() const { return type; }
+  TQString umountCommand() const { return umntcmd; }
+  TQString fsType() const { return type; }
   bool mounted() const { return isMounted; }
   int kBSize() const { return size; }
-  QString iconName();
-  QString realIconName() { return icoName; }
-  QString prettyKBSize() const { return KIO::convertSizeFromKB(size); }
+  TQString iconName();
+  TQString realIconName() { return icoName; }
+  TQString prettyKBSize() const { return KIO::convertSizeFromKB(size); }
   int kBUsed() const { return used; }
-  QString prettyKBUsed() const { return KIO::convertSizeFromKB(used); }
+  TQString prettyKBUsed() const { return KIO::convertSizeFromKB(used); }
   int kBAvail() const  { return avail; }
-  QString prettyKBAvail() const { return KIO::convertSizeFromKB(avail); }
+  TQString prettyKBAvail() const { return KIO::convertSizeFromKB(avail); }
   float percentFull() const;
 
 signals:
@@ -104,32 +104,32 @@ public slots:
   int mount();
   int umount();
   int remount();
-  void setMountCommand(const QString & mnt);
-  void setUmountCommand(const QString & umnt);
-  void setDeviceName(const QString & deviceName);
-  void setMountPoint(const QString & mountPoint);
-  void setIconName(const QString & iconName);
-  void setMountOptions(const QString & mountOptions);
-  void setFsType(const QString & fsType);
+  void setMountCommand(const TQString & mnt);
+  void setUmountCommand(const TQString & umnt);
+  void setDeviceName(const TQString & deviceName);
+  void setMountPoint(const TQString & mountPoint);
+  void setIconName(const TQString & iconName);
+  void setMountOptions(const TQString & mountOptions);
+  void setFsType(const TQString & fsType);
   void setMounted(bool nowMounted);
   void setKBSize(int kb_size);
   void setKBUsed(int kb_used);
   void setKBAvail(int kb_avail);
-  QString guessIconName();
+  TQString guessIconName();
 
 private slots:
    void receivedSysStdErrOut(KProcess *, char *data, int len);
 
 private:
   void init();
-  int sysCall(const QString & command);
-  QString prettyPrint(int kBValue) const;
+  int sysCall(const TQString & command);
+  TQString prettyPrint(int kBValue) const;
 
   KShellProcess     *sysProc;
-  QString           sysStringErrOut;
+  TQString           sysStringErrOut;
   bool              readingSysStdErrOut;
 
-  QString     device,
+  TQString     device,
               type,
               mountedOn,
               options,

@@ -19,8 +19,8 @@
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 //
-#include <qheader.h>
-#include <qwidgetstack.h>
+#include <tqheader.h>
+#include <tqwidgetstack.h>
 
 #include <kio/netaccess.h>
 
@@ -63,23 +63,23 @@ KJotsMain::KJotsMain(const char* name)
     //
     // Main widget
     //
-    QWidget* f_main = new QFrame( this, "Frame_0" );
+    TQWidget* f_main = new TQFrame( this, "Frame_0" );
     setCentralWidget(f_main);
 
-    splitter = new QSplitter(f_main);
+    splitter = new TQSplitter(f_main);
     splitter->setOpaqueResize( KGlobalSettings::opaqueResize() );
 
     // the subject list
     subjectList = new KListView(splitter, "subjectList");
     subjectList->setRootIsDecorated(true);
-    subjectList->setSizePolicy(QSizePolicy(QSizePolicy::Preferred, QSizePolicy::Expanding));
+    subjectList->setSizePolicy(TQSizePolicy(TQSizePolicy::Preferred, TQSizePolicy::Expanding));
     subjectList->setMinimumWidth(subjectList->fontMetrics().maxWidth() * 10 + 5);
     subjectList->addColumn(i18n("Pages"));
     subjectList->setFullWidth(true);
-    subjectList->setHScrollBarMode(QScrollView::AlwaysOff);
-    subjectList->setDefaultRenameAction(QListView::Accept);
+    subjectList->setHScrollBarMode(TQScrollView::AlwaysOff);
+    subjectList->setDefaultRenameAction(TQListView::Accept);
     subjectList->setSorting(-1);
-    subjectList->setAlternateBackground(QColor());
+    subjectList->setAlternateBackground(TQColor());
     subjectList->header()->hide();
     subjectList->setDragEnabled(true);
     subjectList->setAcceptDrops(true);
@@ -87,90 +87,90 @@ KJotsMain::KJotsMain(const char* name)
     subjectList->setItemsRenameable(true);
     subjectList->setRenameable(0,true);
 
-    textStack = new QWidgetStack(splitter);
+    textStack = new TQWidgetStack(splitter);
 
     me_text = new KJotsEdit(textStack, "me_text");
-    me_text->setFocusPolicy(QWidget::StrongFocus);
+    me_text->setFocusPolicy(TQWidget::StrongFocus);
     me_text->setEnabled(false);
     textStack->addWidget(me_text);
-    connect(me_text, SIGNAL(findSuccessful()), this, SLOT(slotFindSuccessful()));
+    connect(me_text, TQT_SIGNAL(findSuccessful()), this, TQT_SLOT(slotFindSuccessful()));
 
     roTextView = new KTextBrowser(textStack, "roTextView", true);
     textStack->addWidget(roTextView);
 
-    QVBoxLayout *bookGrid = new QVBoxLayout(f_main, KDialog::marginHint(), KDialog::spacingHint());
+    TQVBoxLayout *bookGrid = new TQVBoxLayout(f_main, KDialog::marginHint(), KDialog::spacingHint());
     bookGrid->addWidget(splitter, 0, 0);
     bookGrid->setMargin(0);
-    splitter->setSizePolicy(QSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding, 2, 1));
+    splitter->setSizePolicy(TQSizePolicy(TQSizePolicy::Expanding, TQSizePolicy::Expanding, 2, 1));
 
     // create actions
-    actions[ACTION_NEXT_BOOK] = new KAction(i18n("Next Book"), QString::null, CTRL + Key_D, this,
-            SLOT(nextBook()), actionCollection(), "go_next_book");
-    actions[ACTION_PREV_BOOK] = new KAction(i18n("Previous Book"), QString::null, CTRL + SHIFT + Key_D, this,
-            SLOT(prevBook()), actionCollection(), "go_prev_book");
-    actions[ACTION_NEXT_PAGE] = new KAction(i18n("Next Page"), QString::null, CTRL + Key_PageDown, this,
-            SLOT(nextPage()), actionCollection(), "go_next_page");
-    actions[ACTION_PREV_PAGE] = new KAction(i18n("Previous Page"), QString::null, CTRL + Key_PageUp, this,
-            SLOT(prevPage()), actionCollection(), "go_prev_page");
+    actions[ACTION_NEXT_BOOK] = new KAction(i18n("Next Book"), TQString::null, CTRL + Key_D, this,
+            TQT_SLOT(nextBook()), actionCollection(), "go_next_book");
+    actions[ACTION_PREV_BOOK] = new KAction(i18n("Previous Book"), TQString::null, CTRL + SHIFT + Key_D, this,
+            TQT_SLOT(prevBook()), actionCollection(), "go_prev_book");
+    actions[ACTION_NEXT_PAGE] = new KAction(i18n("Next Page"), TQString::null, CTRL + Key_PageDown, this,
+            TQT_SLOT(nextPage()), actionCollection(), "go_next_page");
+    actions[ACTION_PREV_PAGE] = new KAction(i18n("Previous Page"), TQString::null, CTRL + Key_PageUp, this,
+            TQT_SLOT(prevPage()), actionCollection(), "go_prev_page");
 
-    actions[ACTION_NEW_PAGE] = KStdAction::openNew(this, SLOT(newEntry()), actionCollection());
+    actions[ACTION_NEW_PAGE] = KStdAction::openNew(this, TQT_SLOT(newEntry()), actionCollection());
     actions[ACTION_NEW_PAGE]->setText(i18n("&New Page"));
     actions[ACTION_NEW_BOOK] = new KAction(i18n("New &Book..."), "contents", CTRL + SHIFT + Key_N, this,
-            SLOT(createNewBook()), actionCollection(), "new_book");
+            TQT_SLOT(createNewBook()), actionCollection(), "new_book");
 
     exportPageMenu = new KActionMenu(i18n("Export Page"), actionCollection(), "save_page_to");
-    actions[ACTION_PAGE2TEXT] = new KAction(i18n("To Text File..."), QString::null, 0, this,
-            SLOT(writePage()), actionCollection(), "save_page_to_ascii");
+    actions[ACTION_PAGE2TEXT] = new KAction(i18n("To Text File..."), TQString::null, 0, this,
+            TQT_SLOT(writePage()), actionCollection(), "save_page_to_ascii");
     actions[ACTION_PAGE2TEXT]->plug(exportPageMenu->popupMenu());
-    actions[ACTION_PAGE2HTML] = new KAction(i18n("To HTML File..."), QString::null, 0, this,
-            SLOT(writePageToHTML()), actionCollection(), "save_page_to_html");
+    actions[ACTION_PAGE2HTML] = new KAction(i18n("To HTML File..."), TQString::null, 0, this,
+            TQT_SLOT(writePageToHTML()), actionCollection(), "save_page_to_html");
     actions[ACTION_PAGE2HTML]->plug(exportPageMenu->popupMenu());
 
     exportBookMenu = new KActionMenu(i18n("Export Book"), actionCollection(), "save_book_to");
-    actions[ACTION_BOOK2TEXT] = new KAction(i18n("To Text File..."), QString::null, 0, this,
-            SLOT(writeBook()), actionCollection(), "save_book_to_ascii");
+    actions[ACTION_BOOK2TEXT] = new KAction(i18n("To Text File..."), TQString::null, 0, this,
+            TQT_SLOT(writeBook()), actionCollection(), "save_book_to_ascii");
     actions[ACTION_BOOK2TEXT]->plug(exportBookMenu->popupMenu());
-    actions[ACTION_BOOK2HTML] = new KAction(i18n("To HTML File..."), QString::null, 0, this,
-            SLOT(writeBookToHTML()), actionCollection(), "save_book_to_html");
+    actions[ACTION_BOOK2HTML] = new KAction(i18n("To HTML File..."), TQString::null, 0, this,
+            TQT_SLOT(writeBookToHTML()), actionCollection(), "save_book_to_html");
     actions[ACTION_BOOK2HTML]->plug(exportBookMenu->popupMenu());
 
     actions[ACTION_DELETE_PAGE] = new KAction(i18n("&Delete Page"), "editdelete", CTRL + Key_Delete, this,
-            SLOT(deleteEntry()), actionCollection(), "del_page");
+            TQT_SLOT(deleteEntry()), actionCollection(), "del_page");
     actions[ACTION_DELETE_BOOK] = new KAction(i18n("Delete Boo&k"), "editdelete", CTRL + SHIFT + Key_Delete, this,
-            SLOT(deleteBook()), actionCollection(), "del_folder");
+            TQT_SLOT(deleteBook()), actionCollection(), "del_folder");
 
     actions[ACTION_MANUAL_SAVE] = new KAction(i18n("Manual Save"), 0, KStdAccel::save(),
-                         this, SLOT(autoSave()), actionCollection(), "manual_save");
-    actions[ACTION_PRINT] = KStdAction::print(this, SLOT(slotPrint()), actionCollection());
-    actions[ACTION_QUIT] = KStdAction::quit(this, SLOT(slotQuit()), actionCollection());
+                         this, TQT_SLOT(autoSave()), actionCollection(), "manual_save");
+    actions[ACTION_PRINT] = KStdAction::print(this, TQT_SLOT(slotPrint()), actionCollection());
+    actions[ACTION_QUIT] = KStdAction::quit(this, TQT_SLOT(slotQuit()), actionCollection());
 
-    actions[ACTION_CUT] = KStdAction::cut(me_text, SLOT(cut()), actionCollection());
-    connect(me_text, SIGNAL(copyAvailable(bool)), actions[ACTION_CUT], SLOT(setEnabled(bool)));
+    actions[ACTION_CUT] = KStdAction::cut(me_text, TQT_SLOT(cut()), actionCollection());
+    connect(me_text, TQT_SIGNAL(copyAvailable(bool)), actions[ACTION_CUT], TQT_SLOT(setEnabled(bool)));
     actions[ACTION_CUT]->setEnabled(false);
-    actions[ACTION_COPY]  = KStdAction::copy(me_text, SLOT(copy()), actionCollection());
-    connect(me_text, SIGNAL(copyAvailable(bool)), actions[ACTION_COPY], SLOT(setEnabled(bool)));
+    actions[ACTION_COPY]  = KStdAction::copy(me_text, TQT_SLOT(copy()), actionCollection());
+    connect(me_text, TQT_SIGNAL(copyAvailable(bool)), actions[ACTION_COPY], TQT_SLOT(setEnabled(bool)));
     actions[ACTION_COPY]->setEnabled(false);
     actions[ACTION_PASTE2TITLE] = new KAction(i18n("Copy &into Page Title"), "editcopy", CTRL+Key_T, this,
-            SLOT(copySelection()), actionCollection(), "copyIntoTitle");
-    connect(me_text, SIGNAL(copyAvailable(bool)), actions[ACTION_PASTE2TITLE], SLOT(setEnabled(bool)));
+            TQT_SLOT(copySelection()), actionCollection(), "copyIntoTitle");
+    connect(me_text, TQT_SIGNAL(copyAvailable(bool)), actions[ACTION_PASTE2TITLE], TQT_SLOT(setEnabled(bool)));
     actions[ACTION_PASTE2TITLE]->setEnabled(false);
-    actions[ACTION_PASTE]  = KStdAction::pasteText(me_text, SLOT(paste()), actionCollection());
+    actions[ACTION_PASTE]  = KStdAction::pasteText(me_text, TQT_SLOT(paste()), actionCollection());
 
-    actions[ACTION_FIND] = KStdAction::find( this, SLOT( slotSearch() ), actionCollection() );
-    actions[ACTION_FIND_NEXT] = KStdAction::findNext( this, SLOT( slotRepeatSearch() ), actionCollection() );
+    actions[ACTION_FIND] = KStdAction::find( this, TQT_SLOT( slotSearch() ), actionCollection() );
+    actions[ACTION_FIND_NEXT] = KStdAction::findNext( this, TQT_SLOT( slotRepeatSearch() ), actionCollection() );
     actions[ACTION_FIND_NEXT]->setEnabled(false);
-    actions[ACTION_REPLACE] = KStdAction::replace( this, SLOT( slotReplace() ), actionCollection() );
+    actions[ACTION_REPLACE] = KStdAction::replace( this, TQT_SLOT( slotReplace() ), actionCollection() );
 
-    actions[ACTION_RENAME] = new KAction(i18n("Rename..."), QString::null, CTRL + Key_M, this,
-            SLOT(slotRenameEntry()), actionCollection(), "rename_entry");
+    actions[ACTION_RENAME] = new KAction(i18n("Rename..."), TQString::null, CTRL + Key_M, this,
+            TQT_SLOT(slotRenameEntry()), actionCollection(), "rename_entry");
     actions[ACTION_INSERT_DATE] = new KAction(i18n("Insert Date"), "date", CTRL + Key_I, this,
-            SLOT(insertDate()), actionCollection(), "insert_date");
+            TQT_SLOT(insertDate()), actionCollection(), "insert_date");
 
-    KStdAction::preferences(this, SLOT(configure()), actionCollection());
+    KStdAction::preferences(this, TQT_SLOT(configure()), actionCollection());
 
     bookmarkMenu = new KActionMenu(i18n("&Bookmarks"), "bookmarks", actionCollection(), "bookmarks");
     KJotsBookmarks* bookmarks = new KJotsBookmarks(this);
-    connect(bookmarks, SIGNAL(openPage(const QString&)), SLOT(jumpToBookmark(const QString&)));
+    connect(bookmarks, TQT_SIGNAL(openPage(const TQString&)), TQT_SLOT(jumpToBookmark(const TQString&)));
     new KBookmarkMenu(KBookmarkManager::managerForFile(locateLocal("appdata","bookmarks.xml")),
                       bookmarks, bookmarkMenu->popupMenu(),
                       actionCollection(), true);
@@ -186,7 +186,7 @@ KJotsMain::KJotsMain(const char* name)
     }
     */
 
-    m_autosaveTimer = new QTimer(this, "autosave_timer");
+    m_autosaveTimer = new TQTimer(this, "autosave_timer");
 
     //
     // Set startup size.
@@ -204,25 +204,25 @@ KJotsMain::KJotsMain(const char* name)
     updateConfiguration();
     updateMenu();
 
-    QTimer::singleShot(0, this, SLOT(slotSetupInterface()));
+    TQTimer::singleShot(0, this, TQT_SLOT(slotSetupInterface()));
 
     //connect new slots
-    connect(subjectList, SIGNAL(selectionChanged(QListViewItem*)),
-            this, SLOT(jumpToEntry(QListViewItem*)));
-    connect(subjectList, SIGNAL(moved(QListViewItem*, QListViewItem*, QListViewItem*)),
-            this, SLOT(slotItemMoved(QListViewItem*, QListViewItem*, QListViewItem*)));
-    connect(subjectList, SIGNAL(expanded(QListViewItem*)),
-            this, SLOT(slotExpandBook(QListViewItem*)));
-    connect(subjectList, SIGNAL(collapsed(QListViewItem*)),
-            this, SLOT(slotCollapseBook(QListViewItem*)));
-    connect(subjectList, SIGNAL(contextMenu(KListView*,QListViewItem*,const QPoint&)),
-            this, SLOT(showListviewContextMenu(KListView*,QListViewItem*,const QPoint&)));
-    connect(subjectList, SIGNAL(itemRenamed(QListViewItem*,const QString&,int)),
-            this, SLOT(slotItemRenamed(QListViewItem*,const QString&,int)));
-    connect(roTextView, SIGNAL(urlClick(const QString&)),
-            this, SLOT(linkClicked(const QString&)));
-    connect(m_autosaveTimer, SIGNAL(timeout()),
-            this, SLOT(autoSave()));
+    connect(subjectList, TQT_SIGNAL(selectionChanged(TQListViewItem*)),
+            this, TQT_SLOT(jumpToEntry(TQListViewItem*)));
+    connect(subjectList, TQT_SIGNAL(moved(TQListViewItem*, TQListViewItem*, TQListViewItem*)),
+            this, TQT_SLOT(slotItemMoved(TQListViewItem*, TQListViewItem*, TQListViewItem*)));
+    connect(subjectList, TQT_SIGNAL(expanded(TQListViewItem*)),
+            this, TQT_SLOT(slotExpandBook(TQListViewItem*)));
+    connect(subjectList, TQT_SIGNAL(collapsed(TQListViewItem*)),
+            this, TQT_SLOT(slotCollapseBook(TQListViewItem*)));
+    connect(subjectList, TQT_SIGNAL(contextMenu(KListView*,TQListViewItem*,const TQPoint&)),
+            this, TQT_SLOT(showListviewContextMenu(KListView*,TQListViewItem*,const TQPoint&)));
+    connect(subjectList, TQT_SIGNAL(itemRenamed(TQListViewItem*,const TQString&,int)),
+            this, TQT_SLOT(slotItemRenamed(TQListViewItem*,const TQString&,int)));
+    connect(roTextView, TQT_SIGNAL(urlClick(const TQString&)),
+            this, TQT_SLOT(linkClicked(const TQString&)));
+    connect(m_autosaveTimer, TQT_SIGNAL(timeout()),
+            this, TQT_SLOT(autoSave()));
 }
 
 void KJotsMain::slotSetupInterface()
@@ -243,16 +243,16 @@ void KJotsMain::slotSetupInterface()
 */
 void KJotsMain::loadBooks()
 {
-    QDir dir(locateLocal("appdata",""));
-    QStringList files = dir.entryList(QDir::Files|QDir::Readable);
+    TQDir dir(locateLocal("appdata",""));
+    TQStringList files = dir.entryList(TQDir::Files|TQDir::Readable);
     Q_UINT64 currentSelection = KJotsSettings::currentSelection();
 
     //TODO: Eventually we can make use of the ".book" extension here, but for 
     //right now (2005/06/04) there's just too much legacy data out there.
 
-    for (QStringList::Iterator it = files.begin(); it != files.end(); it++)
+    for (TQStringList::Iterator it = files.begin(); it != files.end(); it++)
     {
-        QString filepath = dir.absFilePath(*it);
+        TQString filepath = dir.absFilePath(*it);
 
         if (!KJotsBook::isBookFile(filepath) )
         {
@@ -263,7 +263,7 @@ void KJotsMain::loadBooks()
         book->openBook(filepath);
     }
 
-    QListViewItemIterator it( subjectList );
+    TQListViewItemIterator it( subjectList );
     while ( it.current() ) {
         KJotsEntryBase *entry = dynamic_cast<KJotsEntryBase*>(it.current());
         if ( entry && entry->id() == currentSelection )
@@ -283,8 +283,8 @@ bool KJotsMain::createNewBook()
 {
     bool ok;
 
-    QString name = KInputDialog::getText( i18n( "New Book" ),
-        i18n( "Book name:" ), QString::null, &ok, this );
+    TQString name = KInputDialog::getText( i18n( "New Book" ),
+        i18n( "Book name:" ), TQString::null, &ok, this );
 
     if (!ok)
         return false;
@@ -315,7 +315,7 @@ void KJotsMain::deleteBook()
     if (!b)
         return;
 
-    QString msg = i18n("<qt>Are you sure you want to delete the <strong>%1</strong> book?</qt>");
+    TQString msg = i18n("<qt>Are you sure you want to delete the <strong>%1</strong> book?</qt>");
     int result = KMessageBox::warningContinueCancel(topLevelWidget(), msg.arg(b->subject()), i18n("Delete Book"),KStdGuiItem::del());
 
     if (result!=KMessageBox::Continue)
@@ -399,7 +399,7 @@ void KJotsMain::configure()
     confPageMisc* cpMisc = new confPageMisc(0, "Autosave");
     dialog->addPage(cpMisc, i18n("Autosave"), "misc");
 
-    connect(dialog, SIGNAL(settingsChanged()), this, SLOT(updateConfiguration()));
+    connect(dialog, TQT_SIGNAL(settingsChanged()), this, TQT_SLOT(updateConfiguration()));
 
     dialog->show();
 }
@@ -573,7 +573,7 @@ void KJotsMain::slotQuit()
 
 void KJotsMain::insertDate()
 {
-  me_text->insert(KGlobal::locale()->formatDateTime(QDateTime::currentDateTime(), true) + " ");
+  me_text->insert(KGlobal::locale()->formatDateTime(TQDateTime::currentDateTime(), true) + " ");
 }
 
 void KJotsMain::updateMenu()
@@ -654,7 +654,7 @@ void KJotsMain::slotFindSuccessful()
     actions[ACTION_FIND_NEXT]->setEnabled(true);
 }
 
-void KJotsMain::showListviewContextMenu(KListView*, QListViewItem* i, const QPoint& p)
+void KJotsMain::showListviewContextMenu(KListView*, TQListViewItem* i, const TQPoint& p)
 {
     if ( invalidMoveFlag ) return; //Prevent race condition
     KActionMenu* am = new KActionMenu(this);
@@ -692,7 +692,7 @@ void KJotsMain::showListviewContextMenu(KListView*, QListViewItem* i, const QPoi
     KTextBrowser doesn't handle anchor links itself, so we have to take
     care of those, too.
 */
-void KJotsMain::linkClicked(const QString& link)
+void KJotsMain::linkClicked(const TQString& link)
 {
     if (link[0] == '#')
     {
@@ -702,7 +702,7 @@ void KJotsMain::linkClicked(const QString& link)
     }
 
     Q_UINT64 target = link.toULongLong();
-    QListViewItemIterator it( subjectList );
+    TQListViewItemIterator it( subjectList );
     while ( it.current() ) {
         KJotsEntryBase *entry = dynamic_cast<KJotsEntryBase*>(it.current());
         if ( entry && entry->id() == target )
@@ -743,7 +743,7 @@ void KJotsMain::saveProperties()
 /*!
     \brief Called when a book is opened/expanded/whatever.
 */
-void KJotsMain::slotExpandBook(QListViewItem *item)
+void KJotsMain::slotExpandBook(TQListViewItem *item)
 {
     KJotsEntryBase *entry = dynamic_cast<KJotsEntryBase*>(item);
     if ( entry ) entry->setDirty(true);
@@ -752,7 +752,7 @@ void KJotsMain::slotExpandBook(QListViewItem *item)
 /*!
     \brief Called when a book is closed/collapsed/whatever.
 */
-void KJotsMain::slotCollapseBook(QListViewItem *item)
+void KJotsMain::slotCollapseBook(TQListViewItem *item)
 {
     KJotsEntryBase *entry = dynamic_cast<KJotsEntryBase*>(item);
     if ( entry ) entry->setDirty(true);
@@ -761,10 +761,10 @@ void KJotsMain::slotCollapseBook(QListViewItem *item)
 /*!
     Returns the name of the active book or page.
 */
-QString KJotsMain::currentBookmarkTitle()
+TQString KJotsMain::currentBookmarkTitle()
 {
-    QString title;
-    QListViewItem *item = subjectList->currentItem();
+    TQString title;
+    TQListViewItem *item = subjectList->currentItem();
 
     while ( item )
     {
@@ -785,9 +785,9 @@ QString KJotsMain::currentBookmarkTitle()
 /*!
     Returns a bookmark that identifies the active book or page.
 */
-QString KJotsMain::currentBookmarkURL()
+TQString KJotsMain::currentBookmarkURL()
 {
-    QString url;
+    TQString url;
     KJotsEntryBase *entry = dynamic_cast<KJotsEntryBase*>(subjectList->currentItem());
 
     if ( entry )
@@ -802,13 +802,13 @@ QString KJotsMain::currentBookmarkURL()
     Accepts a bookmark from the bookmark manager and jumps to the given entry.
     \param bookmark The bookmark.
 */
-void KJotsMain::jumpToBookmark(const QString& bookmark)
+void KJotsMain::jumpToBookmark(const TQString& bookmark)
 {
     Q_UINT64 id = bookmark.toULongLong();
 
     if ( id )
     {
-        QListViewItemIterator it( subjectList );
+        TQListViewItemIterator it( subjectList );
         while ( it.current() ) {
             KJotsEntryBase *entry = dynamic_cast<KJotsEntryBase*>(it.current());
             if ( entry && entry->id() == id )
@@ -825,13 +825,13 @@ void KJotsMain::jumpToBookmark(const QString& bookmark)
         //in the future. CREATION DATE: 2005/06/10
 
         KMessageBox::information(this, 
-            i18n("This bookmark is from an older version of KJots and is not fully supported. It may or may not work. You should delete and recreate this bookmark."), QString::null, "oldBookmarkWarning"); 
+            i18n("This bookmark is from an older version of KJots and is not fully supported. It may or may not work. You should delete and recreate this bookmark."), TQString::null, "oldBookmarkWarning"); 
 
         int slash = bookmark.findRev('/');
 
         if (slash != -1)
         {
-            QString bookName = bookmark.left(slash);
+            TQString bookName = bookmark.left(slash);
             int pageNo = bookmark.mid(slash+1).toInt();
             int pageCount = 0;
 
@@ -865,7 +865,7 @@ void KJotsMain::jumpToBookmark(const QString& bookmark)
                     {
                         if ( ++pageCount == pageNo )
                         {
-                            static_cast<QListViewItem*>(entry)->parent()->setOpen(true);
+                            static_cast<TQListViewItem*>(entry)->parent()->setOpen(true);
                             subjectList->ensureItemVisible(entry);
                             subjectList->setSelected(entry, true);
                             jumpToEntry(entry);
@@ -885,11 +885,11 @@ void KJotsMain::jumpToBookmark(const QString& bookmark)
 */
 void KJotsMain::nextBook()
 {
-    QListViewItem *item = subjectList->currentItem();
+    TQListViewItem *item = subjectList->currentItem();
     if ( !item ) return; //sanity check
 
-    QListViewItemIterator it ( item );
-    QListViewItemIterator start ( it );
+    TQListViewItemIterator it ( item );
+    TQListViewItemIterator start ( it );
 
     do {
         it++;
@@ -897,7 +897,7 @@ void KJotsMain::nextBook()
         //if we iterate off the list, start over again.
         if ( !it.current() )
         {
-            it = QListViewItemIterator ( subjectList );
+            it = TQListViewItemIterator ( subjectList );
         }
 
         if ( it.current() == start.current() ) return; //Bail out if we loop.
@@ -915,20 +915,20 @@ void KJotsMain::nextBook()
 void KJotsMain::prevBook()
 {
     //Don't get caught by parent book.
-    QListViewItem *startingPoint = subjectList->currentItem();
+    TQListViewItem *startingPoint = subjectList->currentItem();
     if ( !startingPoint ) return; //sanity check
 
     if ( dynamic_cast<KJotsPage*>(startingPoint) )
         startingPoint = startingPoint->parent();
 
-    QListViewItemIterator it ( startingPoint );
+    TQListViewItemIterator it ( startingPoint );
     do {
         it--;
 
         //if we iterate off the list, start over again.
         if ( !it.current() )
         {
-            it = QListViewItemIterator ( subjectList->lastItem() );
+            it = TQListViewItemIterator ( subjectList->lastItem() );
         }
 
         if ( it.current() == startingPoint ) return; //Bail out if we loop.
@@ -945,11 +945,11 @@ void KJotsMain::prevBook()
 */
 void KJotsMain::nextPage()
 {
-    QListViewItem *item = subjectList->currentItem();
+    TQListViewItem *item = subjectList->currentItem();
     if ( !item ) return; //sanity check
 
-    QListViewItemIterator it ( item );
-    QListViewItemIterator start ( it );
+    TQListViewItemIterator it ( item );
+    TQListViewItemIterator start ( it );
 
     do {
         it++;
@@ -957,7 +957,7 @@ void KJotsMain::nextPage()
         //if we iterate off the list, start over again.
         if ( !it.current() )
         {
-            it = QListViewItemIterator ( subjectList );
+            it = TQListViewItemIterator ( subjectList );
         }
 
         if ( it.current() == start.current() ) return; //Bail out if we loop.
@@ -974,11 +974,11 @@ void KJotsMain::nextPage()
 */
 void KJotsMain::prevPage()
 {
-    QListViewItem *item = subjectList->currentItem();
+    TQListViewItem *item = subjectList->currentItem();
     if ( !item ) return; //sanity check
 
-    QListViewItemIterator it ( item );
-    QListViewItemIterator start ( it );
+    TQListViewItemIterator it ( item );
+    TQListViewItemIterator start ( it );
 
     do {
         it--;
@@ -986,7 +986,7 @@ void KJotsMain::prevPage()
         //if we iterate off the list, start over again.
         if ( !it.current() )
         {
-            it = QListViewItemIterator ( subjectList->lastItem() );
+            it = TQListViewItemIterator ( subjectList->lastItem() );
         }
 
         if ( it.current() == start.current() ) return; //Bail out if we loop.
@@ -998,7 +998,7 @@ void KJotsMain::prevPage()
     return;
 }
 
-void KJotsMain::jumpToEntry(QListViewItem* entry, bool force)
+void KJotsMain::jumpToEntry(TQListViewItem* entry, bool force)
 {
     //This won't lose data or anything; but it does reset the cursor postion and waste cycles.
     if (currentEntry == entry && !force)
@@ -1014,7 +1014,7 @@ void KJotsMain::jumpToEntry(QListViewItem* entry, bool force)
         me_text->setEntry(0); //clear any old data
 
         KJotsBook* book = static_cast<KJotsBook*>(entry);
-        QString html = book->generateHtml(book, false);
+        TQString html = book->generateHtml(book, false);
 
         roTextView->setText(html);
         roTextView->setCursorPosition(0, 0);
@@ -1037,8 +1037,8 @@ void KJotsMain::jumpToEntry(QListViewItem* entry, bool force)
 */
 void KJotsMain::updateCaption()
 {
-    QString caption;
-    QListViewItem *item = subjectList->currentItem();
+    TQString caption;
+    TQListViewItem *item = subjectList->currentItem();
 
     while ( item )
     {
@@ -1057,7 +1057,7 @@ void KJotsMain::updateCaption()
     return;
 }
 
-void KJotsMain::slotItemRenamed(QListViewItem* item, const QString& str, int  /*col*/)
+void KJotsMain::slotItemRenamed(TQListViewItem* item, const TQString& str, int  /*col*/)
 {
     KJotsEntryBase* entry = dynamic_cast<KJotsEntryBase*>(item);
 
@@ -1075,7 +1075,7 @@ void KJotsMain::slotItemRenamed(QListViewItem* item, const QString& str, int  /*
     \warning The whole drag-n-drop reordering system is completely booched.
     Tread lightly and test well when modifying things here.
 */
-void KJotsMain::slotItemMoved(QListViewItem *item, QListViewItem* afterFirst, QListViewItem */*afterNow*/ )
+void KJotsMain::slotItemMoved(TQListViewItem *item, TQListViewItem* afterFirst, TQListViewItem */*afterNow*/ )
 {
     KJotsEntryBase *entry = dynamic_cast<KJotsEntryBase*>(item);
 
@@ -1083,7 +1083,7 @@ void KJotsMain::slotItemMoved(QListViewItem *item, QListViewItem* afterFirst, QL
     //previous sibling, not just the entry directly above it.
     if ( afterFirst && afterFirst->parent() != entry->parentBook() )
     {
-        QListViewItemIterator it ( afterFirst );
+        TQListViewItemIterator it ( afterFirst );
         afterFirst = 0;
 
         //Rewind backwards up the tree...
@@ -1119,7 +1119,7 @@ void KJotsMain::slotItemMoved(QListViewItem *item, QListViewItem* afterFirst, QL
                                        i18n("All pages must be inside a book. "
                                             "Would you like to create a new book to put the page in, "
                                             "or would you prefer to not move the page at all?"),
-                                       QString::null,
+                                       TQString::null,
                                        i18n("Create New Book"), i18n("Do Not Move Page")) ==
             KMessageBox::No ||
             !createNewBook())

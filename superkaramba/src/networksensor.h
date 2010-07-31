@@ -12,9 +12,9 @@
 
 #include "sensor.h"
 
-#include <qdatetime.h>
-#include <qfile.h>
-#include <qregexp.h>
+#include <tqdatetime.h>
+#include <tqfile.h>
+#include <tqregexp.h>
 #ifdef __FreeBSD__
 #include <sys/types.h>
 #include <sys/socket.h>
@@ -26,7 +26,7 @@ class NetworkSensor :  public Sensor
 {
     Q_OBJECT
 public:
-    NetworkSensor( QString device, int interval );
+    NetworkSensor( TQString device, int interval );
     ~NetworkSensor();
     void update();
 
@@ -34,8 +34,8 @@ public:
 private:
     unsigned long receivedBytes;
     unsigned long transmittedBytes;
-    QTime netTimer;
-    QString device;
+    TQTime netTimer;
+    TQString device;
 #ifdef __FreeBSD__
     int if_number;
     ifmibdata if_mib;

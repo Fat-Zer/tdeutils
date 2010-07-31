@@ -18,7 +18,7 @@
 #ifndef __REGEXPBUTTONS_H
 #define __REGEXPBUTTONS_H
 
-#include <qdockwindow.h>
+#include <tqdockwindow.h>
 #include "widgetfactory.h"
 class DoubleClickButton;
 class QButtonGroup;
@@ -31,11 +31,11 @@ class RegExpButtons :public QDockWindow
     Q_OBJECT
 
 public:
-    RegExpButtons( QWidget *parent, const char *name = 0 );
+    RegExpButtons( TQWidget *parent, const char *name = 0 );
     void setFeatures( int features );
 
 protected:
-    DoubleClickButton* insert(RegExpType tp, const char* file, QString tooltip, QString whatsthis);
+    DoubleClickButton* insert(RegExpType tp, const char* file, TQString tooltip, TQString whatsthis);
 
 public slots:
     void slotSelectNewAction();
@@ -50,13 +50,13 @@ signals:
     void doSelect();
 
 private:
-    QButtonGroup* _grp;
-    QToolButton* _selectBut;
-    QToolButton* _wordBoundary;
-    QToolButton* _nonWordBoundary;
-    QToolButton* _posLookAhead;
-    QToolButton* _negLookAhead;
-    QSignalMapper* _mapper; // single click Mapper.
+    TQButtonGroup* _grp;
+    TQToolButton* _selectBut;
+    TQToolButton* _wordBoundary;
+    TQToolButton* _nonWordBoundary;
+    TQToolButton* _posLookAhead;
+    TQToolButton* _negLookAhead;
+    TQSignalMapper* _mapper; // single click Mapper.
 
     /**
        This variable is true if the use wishes to continue editing in the

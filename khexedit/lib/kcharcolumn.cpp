@@ -18,7 +18,7 @@
 // c specific
 #include <ctype.h>
 // qt specific
-#include <qpainter.h>
+#include <tqpainter.h>
 // kde specific
 #include <kcharsets.h>
 #include <klocale.h>
@@ -33,8 +33,8 @@
 using namespace KHE;
 
 static const bool      DefaultShowUnprintable = false;
-static const QChar     DefaultSubstituteChar =  (char)'.';
-static const QChar     DefaultUndefinedChar =   (char)'?';
+static const TQChar     DefaultSubstituteChar =  (char)'.';
+static const TQChar     DefaultUndefinedChar =   (char)'?';
 
 
 KCharColumn::KCharColumn( KColumnsView *CV, KDataBuffer *B, KBufferLayout *L, KBufferRanges *R )
@@ -51,10 +51,10 @@ KCharColumn::~KCharColumn()
 {
 }
 
-void KCharColumn::drawByte( QPainter *P, char /*Byte*/, KHEChar B, const QColor &Color ) const
+void KCharColumn::drawByte( TQPainter *P, char /*Byte*/, KHEChar B, const TQColor &Color ) const
 {
   // make a drawable String out of it
-  QString BS( B.isUndefined() ? KHEChar(UndefinedChar) : ( !(ShowUnprintable || B.isPrint()) ? KHEChar(SubstituteChar) : B ));
+  TQString BS( B.isUndefined() ? KHEChar(UndefinedChar) : ( !(ShowUnprintable || B.isPrint()) ? KHEChar(SubstituteChar) : B ));
 
   P->setPen( Color );
   P->drawText( 0, DigitBaseLine, BS );

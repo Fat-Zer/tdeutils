@@ -16,15 +16,15 @@
  *  Boston, MA 02110-1301, USA.
  **/
 #include "qtregexphighlighter.h"
-#include <qregexp.h>
-QtRegexpHighlighter::QtRegexpHighlighter( QTextEdit* editor )
+#include <tqregexp.h>
+QtRegexpHighlighter::QtRegexpHighlighter( TQTextEdit* editor )
     :RegexpHighlighter( editor ), _editor( editor )
 {
 }
 
-int QtRegexpHighlighter::highlightParagraph( const QString & text, int endStateOfLastPara )
+int QtRegexpHighlighter::highlightParagraph( const TQString & text, int endStateOfLastPara )
 {
-    QRegExp regexp( _regexp );
+    TQRegExp regexp( _regexp );
     regexp.setCaseSensitive( _caseSensitive );
     regexp.setMinimal( _minimal );
 
@@ -35,7 +35,7 @@ int QtRegexpHighlighter::highlightParagraph( const QString & text, int endStateO
     }
 
     // ------------------------------ Process with the regular expression.
-    QColor colors[] = { Qt::red, Qt::blue };
+    TQColor colors[] = { Qt::red, Qt::blue };
     int color = endStateOfLastPara;
     if ( color < 0 || color > 1 )
         color = 0;
@@ -55,7 +55,7 @@ int QtRegexpHighlighter::highlightParagraph( const QString & text, int endStateO
         if ( start != index )
             setFormat( index, start-index, colors[color] );
 
-        QFont font = _editor->font();
+        TQFont font = _editor->font();
         font.setUnderline( true );
         font.setPointSize( (int) (font.pointSize() * 1.3) );
         setFormat( start, length, font, colors[color] );

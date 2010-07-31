@@ -18,7 +18,7 @@
 #ifndef VERIFYBUTTONS_H
 #define VERIFYBUTTONS_H
 
-#include <qdockwindow.h>
+#include <tqdockwindow.h>
 #include "regexpconverter.h"
 class QToolButton;
 class QLabel;
@@ -30,14 +30,14 @@ class VerifyButtons :public QDockWindow
     Q_OBJECT
 
 public:
-    VerifyButtons( QWidget* parent, const char* name );
-    RegExpConverter* setSyntax( const QString& );
+    VerifyButtons( TQWidget* parent, const char* name );
+    RegExpConverter* setSyntax( const TQString& );
     void setAllowNonQtSyntax( bool );
 
 signals:
     void verify();
     void autoVerify( bool );
-    void loadVerifyText( const QString& );
+    void loadVerifyText( const TQString& );
 
     // Qt anchors do not work for <pre>...</pre>, thefore scrolling to next/prev match
     // do not work. Enable this when they work.
@@ -46,7 +46,7 @@ signals:
     // void gotoNext();
     // void gotoLast();
 
-    void changeSyntax( const QString& );
+    void changeSyntax( const TQString& );
 
 public slots:
     //     void enableForwardButtons( bool );
@@ -56,23 +56,23 @@ public slots:
 protected slots:
     void updateVerifyButton( bool );
     void loadText();
-    void slotChangeSyntax( QAction* action );
+    void slotChangeSyntax( TQAction* action );
     void configure();
 
 private:
-    QToolButton* _verify;
-    QLabel* _matches;
-    QPopupMenu* _configMenu;
+    TQToolButton* _verify;
+    TQLabel* _matches;
+    TQPopupMenu* _configMenu;
     int _languageId;
 
     // Qt anchors do not work for <pre>...</pre>, thefore scrolling to next/prev match
     // do not work. Enable this when they work.
-    // QToolButton* _first;
-    // QToolButton* _prev;
-    // QToolButton* _next;
-    // QToolButton* _last;
+    // TQToolButton* _first;
+    // TQToolButton* _prev;
+    // TQToolButton* _next;
+    // TQToolButton* _last;
 
-    QValueList< QPair<RegExpConverter*,QAction*> > _converters;
+    TQValueList< QPair<RegExpConverter*,TQAction*> > _converters;
 };
 
 

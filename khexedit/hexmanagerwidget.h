@@ -25,9 +25,9 @@
 #include <config.h>
 #endif 
 
-#include <qtabbar.h>
-#include <qvaluelist.h> 
-#include <qwidget.h>
+#include <tqtabbar.h>
+#include <tqvaluelist.h> 
+#include <tqwidget.h>
 
 #include "hexeditorwidget.h"
 #include "hextoolwidget.h"
@@ -38,7 +38,7 @@ class CSearchBar;
 class CFileKey
 {
   public:
-    CFileKey( const QString &fname, int fid )
+    CFileKey( const TQString &fname, int fid )
     {
       mFilename = fname;
       mId       = fid;
@@ -54,7 +54,7 @@ class CFileKey
     {
     }
 
-    QString filename( void ) const 
+    TQString filename( void ) const 
     { 
       return( mFilename );
     }
@@ -65,7 +65,7 @@ class CFileKey
     }
 
   private:
-    QString mFilename;
+    TQString mFilename;
     int     mId;
 };
 
@@ -77,23 +77,23 @@ class CTabBar : public QTabBar
   Q_OBJECT
 
   public:
-    CTabBar( QWidget *parent=0, char *name=0 );
-    void addName( const QString &name );
-    void removeName( const QString &name );
-    void changeName( const QString &curName, const QString &newName );
+    CTabBar( TQWidget *parent=0, char *name=0 );
+    void addName( const TQString &name );
+    void removeName( const TQString &name );
+    void changeName( const TQString &curName, const TQString &newName );
     int  count( void );
 
   protected slots:
     void slotSelected( int id );
 
   private:
-    QTab *find( const QString &name );
+    TQTab *find( const TQString &name );
 
   private:
-    QValueList<CFileKey> mFileList;
+    TQValueList<CFileKey> mFileList;
 
   signals:
-    void selected( const QString &filename );
+    void selected( const TQString &filename );
 };
 
 
@@ -117,7 +117,7 @@ class CHexManagerWidget : public QWidget
     };      
 
   public:
-    CHexManagerWidget( QWidget *parent = 0, const char *name = 0, 
+    CHexManagerWidget( TQWidget *parent = 0, const char *name = 0, 
 		       EConversionPosition state = Embed,
 		       EPosition tabBarPosition = HideItem,
 		       EPosition searchBarPosition = HideItem );
@@ -136,12 +136,12 @@ class CHexManagerWidget : public QWidget
     void setConversionVisibility( EConversionPosition position );
     void setTabBarPosition( EPosition position );
     void setSearchBarPosition( EPosition position );
-    void addName( const QString &name );
-    void removeName( const QString &name );
-    void changeName( const QString &curName, const QString &newName );
+    void addName( const TQString &name );
+    void removeName( const TQString &name );
+    void changeName( const TQString &curName, const TQString &newName );
     
   protected slots:
-    void open( const QString &name );
+    void open( const TQString &name );
     void searchBarHidden( void );
     
   private:

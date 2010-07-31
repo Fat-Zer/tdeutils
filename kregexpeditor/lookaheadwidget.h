@@ -25,27 +25,27 @@ class LookAheadWidget :public SingleContainerWidget
 {
     Q_OBJECT
 public:
-    LookAheadWidget( RegExpEditorWindow* editorWindow, RegExpType tp, QWidget* parent, const char* name = 0 );
+    LookAheadWidget( RegExpEditorWindow* editorWindow, RegExpType tp, TQWidget* parent, const char* name = 0 );
     LookAheadWidget( LookAheadRegExp* regexp, RegExpEditorWindow* editorWindow, RegExpType tp,
-                     QWidget* parent, const char* name = 0);
+                     TQWidget* parent, const char* name = 0);
 
  	virtual RegExp* regExp() const;
  	virtual RegExpType type() const { return _tp; }
-    virtual QSize sizeHint() const;
-    virtual RegExpWidget* findWidgetToEdit( QPoint globalPos );
+    virtual TQSize sizeHint() const;
+    virtual RegExpWidget* findWidgetToEdit( TQPoint globalPos );
 
 
 protected:
     void init();
-    virtual void paintEvent( QPaintEvent *e );
+    virtual void paintEvent( TQPaintEvent *e );
 
 
 private:
     RegExpType _tp;
-    QString _text;
+    TQString _text;
 
-    mutable QSize _textSize;
-    mutable QSize _childSize;
+    mutable TQSize _textSize;
+    mutable TQSize _childSize;
 };
 
 #endif // __lookaheadwidget

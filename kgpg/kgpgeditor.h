@@ -24,7 +24,7 @@
 
 #include <kmainwindow.h>
 
-#include <qstringlist.h>
+#include <tqstringlist.h>
 #include <kurl.h>
 
 class KPassivePopup;
@@ -42,18 +42,18 @@ class KgpgApp : public KMainWindow
 public:
         /** construtor of KgpgApp, calls all init functions to create the application.
          */
-        KgpgApp(QWidget *parent=0, const char *name=0,WFlags f = 0,KShortcut goHome=QKeySequence(CTRL+Qt::Key_Home),bool mainWindow=false);
+        KgpgApp(TQWidget *parent=0, const char *name=0,WFlags f = 0,KShortcut goHome=TQKeySequence(CTRL+Qt::Key_Home),bool mainWindow=false);
         ~KgpgApp();
         /** opens a file specified by commandline option
          */
-        void openDocumentFile(const KURL& url,QString encoding=QString::null);
+        void openDocumentFile(const KURL& url,TQString encoding=TQString::null);
         void openEncryptedDocumentFile(const KURL& url);
         /** returns a pointer to the current document connected to the KTMainWindow instance and is used by
          * the View class to access the document object's methods
          */
         KURL Docname;
         int version;
-        QString messages;
+        TQString messages;
         KgpgView *view;
 	KShortcut goDefaultKey;
 
@@ -63,7 +63,7 @@ protected:
         void saveOptions();
         void initActions();
         void initView();
-        void closeEvent( QCloseEvent * e );
+        void closeEvent( TQCloseEvent * e );
 
 private slots:
         //void slotOptions();
@@ -86,34 +86,34 @@ private slots:
         void slotSignFile(KURL url);
         void slotVerifyFile(KURL url);
         void slotPreVerifyFile();
-        void importSignatureKey(QString ID);
+        void importSignatureKey(TQString ID);
 
         void slotundo();
         void slotredo();
 	void slotSetCharset();
-	bool checkEncoding(QTextCodec *codec);
+	bool checkEncoding(TQTextCodec *codec);
 	void slotOptions();
 	void slotKeyManager();
 
 
 public slots:
-	void slotSetFont(QFont myFont);
+	void slotSetFont(TQFont myFont);
 	void closeWindow();
 
 
 private:
 
-        QStringList customDecrypt;
+        TQStringList customDecrypt;
 	//KToggleAction *encodingAction ;
         KURL urlselected;
         KAction* fileSave, *editUndo, *editRedo;
 	KComboBox *fontCombo;
 	bool isMainWindow;
-	QString textEncoding;
+	TQString textEncoding;
 
 signals:
 
-void refreshImported(QStringList);
+void refreshImported(TQStringList);
 void openChangeFont();
 void openConfigDialog();
 void encryptFiles(KURL::List fileList);

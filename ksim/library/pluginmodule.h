@@ -20,7 +20,7 @@
 #ifndef PLUGINMODULE_H
 #define PLUGINMODULE_H
 
-#include <qwidget.h>
+#include <tqwidget.h>
 
 #include <kdemacros.h>
 
@@ -56,7 +56,7 @@ namespace KSim
       /**
        * constructor for PluginObject
        */
-      PluginObject(const QCString &name);
+      PluginObject(const TQCString &name);
       /**
        * destructor for PluginObject
        */
@@ -83,16 +83,16 @@ namespace KSim
       /**
        * @return the name of the plugin
        */
-      const QCString &name() const;
+      const TQCString &name() const;
       /**
        * sets the configuration file name to @p name
        */
-      void setConfigFileName(const QString &name);
+      void setConfigFileName(const TQString &name);
       /**
        * @return the config filename the plugin should use
        * or name() if the filename hasn't been set
        */
-      const QString &configFileName() const;
+      const TQString &configFileName() const;
 
     private:
       PluginObject();
@@ -180,7 +180,7 @@ namespace KSim
       /**
        * the plugins popup menu
        */
-      QPopupMenu *menu() const;
+      TQPopupMenu *menu() const;
       /**
        * reimplement to recreate your view when KSim requests this
        */
@@ -188,10 +188,10 @@ namespace KSim
       void doCommand();
 
     signals:
-      void runCommand(const QCString &);
+      void runCommand(const TQCString &);
 
     protected:
-      virtual void mousePressEvent(QMouseEvent *);
+      virtual void mousePressEvent(TQMouseEvent *);
       PluginObject *parentPlugin() const;
 
     private slots:

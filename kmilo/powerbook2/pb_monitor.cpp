@@ -45,12 +45,12 @@ extern "C" {
 }
 
 #define BUFFERLEN	200
-const QString tpmodes[] = { I18N_NOOP("No Tap"), I18N_NOOP("Tap"), I18N_NOOP("Drag"), I18N_NOOP("Lock") };
+const TQString tpmodes[] = { I18N_NOOP("No Tap"), I18N_NOOP("Tap"), I18N_NOOP("Drag"), I18N_NOOP("Lock") };
 
 namespace KMilo {
 
-PowerBookMonitor::PowerBookMonitor(QObject *parent, const char *name,
-                                   const QStringList& args)
+PowerBookMonitor::PowerBookMonitor(TQObject *parent, const char *name,
+                                   const TQStringList& args)
 	: Monitor(parent, name, args),
 		m_progress( 0 )
 {
@@ -79,7 +79,7 @@ Monitor::DisplayType PowerBookMonitor::poll()
 	Monitor::DisplayType rc = None;
 	// Drain the queue, send the last message
 	struct tagitem* tag = readMessage();
-	m_message = QString::null;
+	m_message = TQString::null;
 	while ( tag && tag->tag != TAG_END ) {
 		switch ( tag->tag ) {
 		case TAG_VOLUME:
@@ -97,7 +97,7 @@ Monitor::DisplayType PowerBookMonitor::poll()
 		case TAG_TPMODE:
 			{
 				rc = Monitor::Tap;
-				QString marg =  tpmodes[ tag->data & 3 ];
+				TQString marg =  tpmodes[ tag->data & 3 ];
 				m_message = i18n( "Operating mode set to: %1." ).arg( marg );
 			}
 			break;
@@ -120,7 +120,7 @@ int PowerBookMonitor::progress() const
 	return m_progress;
 }
 
-QString PowerBookMonitor::message() const
+TQString PowerBookMonitor::message() const
 {
 	return m_message;
 }

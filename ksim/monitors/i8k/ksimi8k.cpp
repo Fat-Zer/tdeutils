@@ -19,13 +19,13 @@
 
 #include "ksimi8k.h"
 
-#include <qlayout.h>
-#include <qtimer.h>
-#include <qfile.h>
-#include <qtextstream.h>
-#include <qregexp.h>
-#include <qlabel.h>
-#include <qcheckbox.h>
+#include <tqlayout.h>
+#include <tqtimer.h>
+#include <tqfile.h>
+#include <tqtextstream.h>
+#include <tqregexp.h>
+#include <tqlabel.h>
+#include <tqcheckbox.h>
 
 #include <label.h>
 #include <klocale.h>
@@ -59,7 +59,7 @@ KSim::PluginPage *I8KPlugin::createConfigPage(const char *className)
 
 void I8KPlugin::showAbout()
 {
-  QString version = kapp->aboutData()->version();
+  TQString version = kapp->aboutData()->version();
 
   KAboutData aboutData(instanceName(),
      I18N_NOOP("KSim I8K Plugin"), version.latin1(),
@@ -78,9 +78,9 @@ I8KView::I8KView(KSim::PluginObject *parent, const char *name)
 {
   initGUI();
 
-  m_timer = new QTimer( this );
+  m_timer = new TQTimer( this );
 
-  m_reData = new QRegExp( "\\S+\\s+\\S+\\s+\\S+\\s+(\\d+)\\s+\\S+"
+  m_reData = new TQRegExp( "\\S+\\s+\\S+\\s+\\S+\\s+(\\d+)\\s+\\S+"
         "\\s+\\S+\\s+(\\d+)\\s+(\\d+)\\s+\\S+\\s+\\S+" );
 
   openStream();
@@ -119,9 +119,9 @@ void I8KView::openStream()
 
   if ( ( m_procFile = fopen( "/proc/i8k", "r" ) ) )
   {
-    m_procStream = new QTextIStream( m_procFile );
+    m_procStream = new TQTextIStream( m_procFile );
     disconnect( m_timer, 0, 0, 0 );
-    connect( m_timer, SIGNAL( timeout() ), SLOT( updateView() ) );
+    connect( m_timer, TQT_SIGNAL( timeout() ), TQT_SLOT( updateView() ) );
     m_timer->start( m_interval*1000 );
 
     kdDebug( 2003 ) << "i8k: Success" << endl;
@@ -130,7 +130,7 @@ void I8KView::openStream()
   {
     // i8k module is not loaded. Try again after 30 secs.
     disconnect( m_timer, 0, 0, 0 );
-    connect( m_timer, SIGNAL( timeout() ), SLOT( openStream() ) );
+    connect( m_timer, TQT_SIGNAL( timeout() ), TQT_SLOT( openStream() ) );
     m_timer->start( 30*1000 );
     kdDebug( 2003 ) << "i8k: Failed...retry after 30 secs" << endl;
   }
@@ -151,7 +151,7 @@ void I8KView::closeStream()
 
 void I8KView::initGUI()
 {
-  QVBoxLayout *layout = new QVBoxLayout( this );
+  TQVBoxLayout *layout = new TQVBoxLayout( this );
 
   m_fan1Label = new KSim::Label( this );
   m_fan2Label = new KSim::Label( this );
@@ -171,7 +171,7 @@ void I8KView::updateView()
   {
     fseek( m_procFile, 0L, SEEK_SET );
 
-    QString line = m_procStream->read();
+    TQString line = m_procStream->read();
 
     if ( line.isEmpty() )
     {
@@ -183,7 +183,7 @@ void I8KView::updateView()
 
     if ( m_reData->search( line ) > -1 )
     {
-      QStringList matches = m_reData->capturedTexts();
+      TQStringList matches = m_reData->capturedTexts();
 
       cputemp = matches[ 1 ].toInt();
       leftspeed = matches[ 2 ].toInt();
@@ -211,14 +211,14 @@ void I8KView::updateView()
 I8KConfig::I8KConfig(KSim::PluginObject *parent, const char *name)
    : KSim::PluginPage(parent, name)
 {
-  m_unit = new QCheckBox( i18n( "Show temperature in Fahrenheit" ),
+  m_unit = new TQCheckBox( i18n( "Show temperature in Fahrenheit" ),
         this );
-  QLabel *label = new QLabel( i18n( "Update interval:" ), this );
+  TQLabel *label = new TQLabel( i18n( "Update interval:" ), this );
   m_interval = new KIntNumInput( this );
   m_interval->setRange( 2, 60, 1, true );
   m_interval->setSuffix( i18n( " sec" ) );
 
-  QGridLayout *layout = new QGridLayout( this, 3, 2, 0, 
+  TQGridLayout *layout = new TQGridLayout( this, 3, 2, 0, 
       KDialog::spacingHint() );
 
   layout->addMultiCellWidget( m_unit, 0, 0, 0, 1 );
@@ -236,7 +236,7 @@ void I8KConfig::readConfig()
 {
   config()->setGroup("I8KPlugin");
 
-  QString unit = config()->readEntry( "Unit", "C" );
+  TQString unit = config()->readEntry( "Unit", "C" );
   int interval = config()->readNumEntry( "Interval", 5 );
 
   m_unit->setChecked( unit == "F" );

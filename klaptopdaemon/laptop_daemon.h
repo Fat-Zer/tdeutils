@@ -25,28 +25,28 @@
 
 #include "daemon_state.h"
 
-#include <qdir.h>
+#include <tqdir.h>
 #include <unistd.h>
 #include <time.h>
-#include <qmovie.h>
-#include <qptrlist.h>
-#include <qfileinfo.h>
-#include <qimage.h>
+#include <tqmovie.h>
+#include <tqptrlist.h>
+#include <tqfileinfo.h>
+#include <tqimage.h>
 
 #include <kiconloader.h>
 #include <kprocess.h>
 //#include <kaudio.h>
-#include <qtooltip.h>
+#include <tqtooltip.h>
 
 #include <X11/Xlib.h>
 #include <X11/extensions/XTest.h>
 
-#include <qsocketnotifier.h>
+#include <tqsocketnotifier.h>
 
 
 
 #include <kdebug.h>
-#include <qthread.h>
+#include <tqthread.h>
 
 #include "kpcmcia.h"
 
@@ -58,7 +58,7 @@
 class laptop_daemon;
 class XWidget;
 
-class ButtonThread : public QThread {
+class ButtonThread : public TQThread {
 public:
 	ButtonThread() { quitting = 0; }
 	void sethandle(laptop_daemon *h) { handle = h; }
@@ -76,13 +76,13 @@ class laptop_daemon: public KDEDModule
 	Q_OBJECT
 	K_DCOP
 public:
-    	laptop_daemon(const QCString& obj);
+    	laptop_daemon(const TQCString& obj);
     	~laptop_daemon();
         void 	setPollInterval(const int poll=60);
 	void 	SetBrightness(bool blank, int v);	// routine to do it
 	int	GetBrightness() { return brightness; }
-	void    SetThrottle(QString v);
-	void    SetPerformance(QString v);
+	void    SetThrottle(TQString v);
+	void    SetPerformance(TQString v);
 	void	ButtonThreadInternals();
 k_dcop:
 	void	restart();
@@ -90,7 +90,7 @@ k_dcop:
 signals:
         void 	signal_checkBattery();
 protected:
-	 void 	timerEvent(QTimerEvent *);
+	 void 	timerEvent(TQTimerEvent *);
 protected slots:
 	void 	checkBatteryNow();
 	void 	timerDone();
@@ -125,9 +125,9 @@ public:
 	int	left;
 	bool	x11Event(XEvent *event);
 	bool	exists() { return s.exists; }
-	QString noBatteryIcon() { return s.noBatteryIcon; }
-	QString chargeIcon() { return s.chargeIcon; }
-	QString noChargeIcon() { return s.noChargeIcon; }
+	TQString noBatteryIcon() { return s.noBatteryIcon; }
+	TQString chargeIcon() { return s.chargeIcon; }
+	TQString noChargeIcon() { return s.noChargeIcon; }
 protected:
 	int	triggered[2];
 
@@ -147,7 +147,7 @@ protected:
 	
 	int  sony_fd;			// file desc form open /dev/sonypi
 	Display *sony_disp;		// X display
-	QSocketNotifier *sony_notifier; // how we know data is waiting
+	TQSocketNotifier *sony_notifier; // how we know data is waiting
 
 	// brightness 
 	
@@ -165,19 +165,19 @@ protected:
 	bool	need_wait;			// undo sleep stuff
 	bool	saved_brightness, saved_throttle, saved_performance;
 	int	saved_brightness_val;
-	QString saved_performance_val, saved_throttle_val;
-	QTimer  *wake_timer;		// the timer for the above running
+	TQString saved_performance_val, saved_throttle_val;
+	TQTimer  *wake_timer;		// the timer for the above running
 	QPoint	wakepos;		// the mouse pos at the beginning of time
 	void	WakeUpAuto();
-	QTimer  *backoffTimer;		// backoff
+	TQTimer  *backoffTimer;		// backoff
 
 	bool	power_button_off;			// imagined state of the power button
 	bool 	button_bright_saved;			// saved button state
 	int 	button_bright_val;
 	bool	button_saved_performance;
-	QString button_saved_performance_val;
+	TQString button_saved_performance_val;
 	bool 	button_saved_throttle;
-	QString button_saved_throttle_val;
+	TQString button_saved_throttle_val;
 
 	daemon_state	s;			// saved daemon state from config file
 

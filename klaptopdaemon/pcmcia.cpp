@@ -26,8 +26,8 @@
 #include <sys/stat.h>
 #include <stdlib.h>
 
-#include <qfileinfo.h> 
-#include <qlayout.h>
+#include <tqfileinfo.h> 
+#include <tqlayout.h>
 
 #include <kglobal.h>
 #include <klocale.h>
@@ -37,7 +37,7 @@
 #include "portable.h"
 #include "version.h"
 
-PcmciaConfig::PcmciaConfig (QWidget * parent, const char *name)
+PcmciaConfig::PcmciaConfig (TQWidget * parent, const char *name)
   : KCModule(parent, name)
 {
        KAboutData *about =
@@ -56,8 +56,8 @@ PcmciaConfig::PcmciaConfig (QWidget * parent, const char *name)
        label1_text = laptop_portable::pcmcia_info(3, this);
 	
 
-       QVBoxLayout *top_layout = new QVBoxLayout(this, 15, 5);
-        QGridLayout *top_grid = new QGridLayout(2, 2);
+       TQVBoxLayout *top_layout = new TQVBoxLayout(this, 15, 5);
+        TQGridLayout *top_grid = new TQGridLayout(2, 2);
         top_layout->addLayout(top_grid);
 
         top_grid->setColStretch(0, 0);
@@ -78,12 +78,12 @@ PcmciaConfig::PcmciaConfig (QWidget * parent, const char *name)
 
         top_layout->addStretch(1);
 
-        QHBoxLayout *v1 = new QHBoxLayout;
+        TQHBoxLayout *v1 = new QHBoxLayout;
         top_layout->addLayout(v1, 0);
         v1->addStretch(1);
-        QString s1 = LAPTOP_VERSION;
-        QString s2 = i18n("Version: ")+s1;
-        QLabel* vers = new QLabel(s2, this);
+        TQString s1 = LAPTOP_VERSION;
+        TQString s2 = i18n("Version: ")+s1;
+        TQLabel* vers = new TQLabel(s2, this);
         vers->setMinimumSize(vers->sizeHint());
         v1->addWidget(vers, 0);
 
@@ -113,7 +113,7 @@ void PcmciaConfig::changed()
 }
 
 
-QString PcmciaConfig::quickHelp() const
+TQString PcmciaConfig::quickHelp() const
 {
   return i18n("<h1>PCMCIA Config</h1>This module shows information about "
 	"the PCMCIA cards in your system, if there are PCMCIA cards.");

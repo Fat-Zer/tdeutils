@@ -36,17 +36,17 @@ void WidgetWindow::init(KMultiFormListBoxFactory *factory, KListBox *lb, KMultiF
   listbox = lb;
   myFact = factory;
 
-  QFrame *frame = plainPage();
-  QHBoxLayout *lay = new QHBoxLayout(frame,0,-1,"WidgetWindow::init::lay");
+  TQFrame *frame = plainPage();
+  TQHBoxLayout *lay = new TQHBoxLayout(frame,0,-1,"WidgetWindow::init::lay");
 
   if (widget != 0) {
     myWidget = widget;
-    widget->reparent(frame, 0, QPoint(0,0));
+    widget->reparent(frame, 0, TQPoint(0,0));
   }
   else {
     myWidget = factory->create(frame);
   }
-  QDataStream stream( _backup, IO_WriteOnly );
+  TQDataStream stream( _backup, IO_WriteOnly );
   myFact->toStream( myWidget, stream );
 
   lay->addWidget(myWidget);
@@ -85,7 +85,7 @@ void WidgetWindow::slotCancel()
       deleteLater();
   }
   else {
-    QDataStream stream( _backup, IO_ReadOnly );
+    TQDataStream stream( _backup, IO_ReadOnly );
     myFact->fromStream( stream, myWidget );
   }
   KDialogBase::slotCancel();
@@ -94,10 +94,10 @@ void WidgetWindow::slotCancel()
 WidgetWindow *WidgetWindow::clone()
 {
   WidgetWindow *item = new WidgetWindow(myFact, listbox);
-  QByteArray data;
-  QDataStream ws( data, IO_WriteOnly );
+  TQByteArray data;
+  TQDataStream ws( data, IO_WriteOnly );
   myFact->toStream( myWidget, ws );
-  QDataStream rs( data, IO_ReadOnly );
+  TQDataStream rs( data, IO_ReadOnly );
   myFact->fromStream( rs, item->myWidget );
 
   item->slotOk();
@@ -106,7 +106,7 @@ WidgetWindow *WidgetWindow::clone()
 
 void WidgetWindow::display()
 {
-  QDataStream stream( _backup, IO_WriteOnly);
+  TQDataStream stream( _backup, IO_WriteOnly);
   myFact->toStream( myWidget, stream );
   show();
 }

@@ -29,7 +29,7 @@
 #include <fcntl.h>
 
 // Qt includes
-#include <qdir.h>
+#include <tqdir.h>
 
 // KDE includes
 #include <kdebug.h>
@@ -53,21 +53,21 @@
 
 // encapsulates the idea of a compressed file
 
-CompressedFile::CompressedFile( ArkWidget *_gui, const QString & _fileName, const QString & _openAsMimeType )
+CompressedFile::CompressedFile( ArkWidget *_gui, const TQString & _fileName, const TQString & _openAsMimeType )
   : Arch( _gui, _fileName )
 {
   m_tempDirectory = NULL;
   m_openAsMimeType = _openAsMimeType;
   kdDebug(1601) << "CompressedFile constructor" << endl;
   m_tempDirectory = new KTempDir( _gui->tmpDir()
-                          + QString::fromLatin1( "compressed_file_temp" ) );
+                          + TQString::fromLatin1( "compressed_file_temp" ) );
   m_tempDirectory->setAutoDelete( true );
   m_tmpdir = m_tempDirectory->name();
   initData();
   verifyCompressUtilityIsAvailable( m_archiver_program );
   verifyUncompressUtilityIsAvailable( m_unarchiver_program );
 
-  if (!QFile::exists(_fileName))
+  if (!TQFile::exists(_fileName))
   {
     KMessageBox::information(0,
               i18n("You are creating a simple compressed archive which contains only one input file.\n"
@@ -97,10 +97,10 @@ void CompressedFile::setHeaders()
 
 void CompressedFile::initData()
 {
-    m_unarchiver_program = QString::null;
-    m_archiver_program = QString::null;
+    m_unarchiver_program = TQString::null;
+    m_archiver_program = TQString::null;
 
-    QString mimeType;
+    TQString mimeType;
     if ( !m_openAsMimeType.isNull() )
         mimeType = m_openAsMimeType;
     else
@@ -138,12 +138,12 @@ void CompressedFile::initData()
 
 }
 
-QString CompressedFile::extension()
+TQString CompressedFile::extension()
 {
-  QStringList::Iterator it = m_defaultExtensions.begin();
+  TQStringList::Iterator it = m_defaultExtensions.begin();
   for( ; it != m_defaultExtensions.end(); ++it )
     if( m_filename.endsWith( *it ) )
-        return QString::null;
+        return TQString::null;
   return m_defaultExtensions.first();
 }
 
@@ -190,17 +190,17 @@ void CompressedFile::open()
 
   kdDebug(1601) << "Command is " << m_unarchiver_program << " " << m_tmpfile<< endl;
 
-  connect( kp, SIGNAL(receivedStdout(KProcess*, char*, int)),
-	   this, SLOT(slotReceivedOutput(KProcess*, char*, int)));
-  connect( kp, SIGNAL(receivedStderr(KProcess*, char*, int)),
-	   this, SLOT(slotReceivedOutput(KProcess*, char*, int)));
-  connect( kp, SIGNAL(processExited(KProcess*)), this,
-	   SLOT(slotUncompressDone(KProcess*)));
+  connect( kp, TQT_SIGNAL(receivedStdout(KProcess*, char*, int)),
+	   this, TQT_SLOT(slotReceivedOutput(KProcess*, char*, int)));
+  connect( kp, TQT_SIGNAL(receivedStderr(KProcess*, char*, int)),
+	   this, TQT_SLOT(slotReceivedOutput(KProcess*, char*, int)));
+  connect( kp, TQT_SIGNAL(processExited(KProcess*)), this,
+	   TQT_SLOT(slotUncompressDone(KProcess*)));
 
   if (kp->start(KProcess::NotifyOnExit, KProcess::AllOutput) == false)
     {
       KMessageBox::error( 0, i18n("Could not start a subprocess.") );
-      emit sigOpen(this, false, QString::null, 0 );
+      emit sigOpen(this, false, TQString::null, 0 );
     }
 
   kdDebug(1601) << "-CompressedFile::open" << endl;
@@ -223,12 +223,12 @@ void CompressedFile::slotUncompressDone(KProcess *_kp)
 
   if ( !bSuccess )
   {
-      emit sigOpen( this, false, QString::null, 0 );
+      emit sigOpen( this, false, TQString::null, 0 );
       return;
   }
 
-  QDir dir( m_tmpdir );
-  QStringList lst( dir.entryList() );
+  TQDir dir( m_tmpdir );
+  TQStringList lst( dir.entryList() );
   lst.remove( ".." );
   lst.remove( "." );
   KURL url;
@@ -237,7 +237,7 @@ void CompressedFile::slotUncompressDone(KProcess *_kp)
   KIO::UDSEntry udsInfo;
   KIO::NetAccess::stat( url, udsInfo, m_gui );
   KFileItem fileItem( udsInfo, url );
-  QStringList list;
+  TQStringList list;
   list << fileItem.name();
   list << fileItem.permissionsString();
   list << fileItem.user();
@@ -256,7 +256,7 @@ void CompressedFile::create()
 		  | Arch::View);
 }
 
-void CompressedFile::addFile( const QStringList &urls )
+void CompressedFile::addFile( const TQStringList &urls )
 {
   // only used for adding ONE file to an EMPTY gzip file, i.e., one that
   // has just been created
@@ -269,7 +269,7 @@ void CompressedFile::addFile( const QStringList &urls )
   KURL url = KURL::fromPathOrURL(urls.first());
   Q_ASSERT(url.isLocalFile());
 
-  QString file;
+  TQString file;
   file = url.path();
 
   KProcess proc;
@@ -291,18 +291,18 @@ void CompressedFile::addFile( const QStringList &urls )
   if ( m_archiver_program == "lzop")
     kp->setUsePty( KProcess::Stdin, false );
 
-  QString compressor = m_archiver_program;
+  TQString compressor = m_archiver_program;
 
   *kp << compressor << "-c" << file;
 
-  connect( kp, SIGNAL(receivedStdout(KProcess*, char*, int)),
-	   this, SLOT(slotAddInProgress(KProcess*, char*, int)));
-  connect( kp, SIGNAL(receivedStderr(KProcess*, char*, int)),
-	   this, SLOT(slotReceivedOutput(KProcess*, char*, int)));
-  connect( kp, SIGNAL(processExited(KProcess*)), this,
-	   SLOT(slotAddDone(KProcess*)));
+  connect( kp, TQT_SIGNAL(receivedStdout(KProcess*, char*, int)),
+	   this, TQT_SLOT(slotAddInProgress(KProcess*, char*, int)));
+  connect( kp, TQT_SIGNAL(receivedStderr(KProcess*, char*, int)),
+	   this, TQT_SLOT(slotReceivedOutput(KProcess*, char*, int)));
+  connect( kp, TQT_SIGNAL(processExited(KProcess*)), this,
+	   TQT_SLOT(slotAddDone(KProcess*)));
 
-  int f_desc = KDE_open(QFile::encodeName(m_filename), O_CREAT | O_TRUNC | O_WRONLY, 0666);
+  int f_desc = KDE_open(TQFile::encodeName(m_filename), O_CREAT | O_TRUNC | O_WRONLY, 0666);
   if (f_desc != -1)
       fd = fdopen( f_desc, "w" );
   else
@@ -340,7 +340,7 @@ void CompressedFile::unarchFileInternal()
 {
   if (m_destDir != m_tmpdir)
     {
-      QString dest;
+      TQString dest;
       if (m_destDir.isEmpty() || m_destDir.isNull())
       {
           kdError(1601) << "There was no extract directory given." << endl;
@@ -356,14 +356,14 @@ void CompressedFile::unarchFileInternal()
   emit sigExtract(true);
 }
 
-void CompressedFile::remove(QStringList *)
+void CompressedFile::remove(TQStringList *)
 {
   kdDebug(1601) << "+CompressedFile::remove" << endl;
-  QFile::remove(m_tmpfile);
+  TQFile::remove(m_tmpfile);
 
   // do not delete but truncate the compressed file in case someone
   // does a reload and finds it no longer exists!
-  truncate(QFile::encodeName(m_filename), 0);
+  truncate(TQFile::encodeName(m_filename), 0);
 
   m_tmpfile = "";
   emit sigDelete(true);

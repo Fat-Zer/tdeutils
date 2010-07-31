@@ -14,7 +14,7 @@
 #ifndef __IRKICK_H
 #define __IRKICK_H
 
-#include <qstring.h>
+#include <tqstring.h>
 
 #include <ksystemtray.h>
 #include <kdedmodule.h>
@@ -30,30 +30,30 @@ class QMouseEvent;
 
 class IRKTrayIcon: public KSystemTray
 {
-	void mousePressEvent(QMouseEvent *e);
+	void mousePressEvent(TQMouseEvent *e);
 
 public:
 	KPopupMenu* contextMenu() const { return KSystemTray::contextMenu(); }
 	KActionCollection* actionCollection() { return KSystemTray::actionCollection(); }
 
-	IRKTrayIcon(QWidget *parent = 0, const char *name = 0): KSystemTray(parent, name) {}
+	IRKTrayIcon(TQWidget *parent = 0, const char *name = 0): KSystemTray(parent, name) {}
 };
 
-class IRKick: public QObject, public DCOPObject
+class IRKick: public TQObject, public DCOPObject
 {
 	Q_OBJECT
 	K_DCOP
 
-	QString npApp, npModule, npMethod;
-	QMap<QString, QString> currentModes;
-	QMap<QString, IRKTrayIcon *> currentModeIcons;
+	TQString npApp, npModule, npMethod;
+	TQMap<TQString, TQString> currentModes;
+	TQMap<TQString, IRKTrayIcon *> currentModeIcons;
 	IRActions allActions;
 	int theResetCount;
 	Modes allModes;
 
 	IRKTrayIcon *theTrayIcon;
 	KAboutData *aboutData;
-	QTimer *theFlashOff;
+	TQTimer *theFlashOff;
 
 	void updateModeIcons();
 
@@ -82,23 +82,23 @@ k_dcop:
 	 *
 	 * @returns said list.
 	 */
-	virtual const QStringList remotes() { return theClient->remotes(); }
+	virtual const TQStringList remotes() { return theClient->remotes(); }
 
 	/**
 	 * Retrieve list of buttons of a praticular remote control.
 	 *
 	 * @returns said list.
 	 */
-	virtual const QStringList buttons(QString theRemote) { return theClient->buttons(theRemote); }
+	virtual const TQStringList buttons(TQString theRemote) { return theClient->buttons(theRemote); }
 
 	/**
 	 * Sends next keypress to given application by DCOP.
 	 *
 	 * @param The receiving application.
 	 * @param The receiving application module.
-	 * @param The method name. Must have two QString parameters.
+	 * @param The method name. Must have two TQString parameters.
 	 */
-	virtual void stealNextPress(QString app, QString module, QString method);
+	virtual void stealNextPress(TQString app, TQString module, TQString method);
 
 	/**
 	 * Cancels the proceedings of the previous stealNextPress call, if any.
@@ -111,7 +111,7 @@ k_dcop:
 	virtual void reloadConfiguration() { slotReloadConfiguration(); }
 
 private slots:
-	void gotMessage(const QString &theRemote, const QString &theButton, int theRepeatCounter);
+	void gotMessage(const TQString &theRemote, const TQString &theButton, int theRepeatCounter);
 	void resetModes();
 	void doQuit();
 	void flashOff();
@@ -122,10 +122,10 @@ private slots:
 	void slotClosed();
 private:
 	void executeAction(const IRAction &action);
-	bool getPrograms(const IRAction &action, QStringList &populous);
+	bool getPrograms(const IRAction &action, TQStringList &populous);
 
 public:
-	IRKick(const QCString &obj);
+	IRKick(const TQCString &obj);
 	virtual ~IRKick();
 };
 

@@ -10,9 +10,9 @@
 #ifndef MEMSENSOR_H
 #define MEMSENSOR_H
 #include "sensor.h"
-#include <qglobal.h>
-#include <qstring.h>
-#include <qregexp.h>
+#include <tqglobal.h>
+#include <tqstring.h>
+#include <tqregexp.h>
 #include <kprocess.h>
 
 #ifdef __FreeBSD__
@@ -39,14 +39,14 @@ public:
 
   void update();
   void setMaxValue( SensorParams *sp );
-  QString getMemLine();
+  TQString getMemLine();
 
 private:
-  QString meminfo;
+  TQString meminfo;
   void readValues();
 #if defined(Q_OS_FREEBSD) || defined(Q_OS_NETBSD)
   int pageshift;           /* log base 2 of the pagesize */
-  QString sensorResult;
+  TQString sensorResult;
   int swapTotal;
   int swapUsed;
 # if defined(Q_OS_FREEBSD) && defined(__FreeBSD_version) && __FreeBSD_version >= 500018

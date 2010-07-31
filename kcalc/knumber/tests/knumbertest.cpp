@@ -6,29 +6,29 @@
 #include <stdio.h>
 
 #include <iostream>
-#include <qstring.h>
+#include <tqstring.h>
 
 #include "knumbertest.h"
 
-QString const  numtypeToString(KNumber::NumType arg)
+TQString const  numtypeToString(KNumber::NumType arg)
 {
   switch(arg) {
   case KNumber::SpecialType:
-    return QString("Special");
+    return TQString("Special");
   case KNumber::IntegerType:
-    return QString("Integer");
+    return TQString("Integer");
   case KNumber::FractionType:
-    return QString("Fraction");
+    return TQString("Fraction");
   case KNumber::FloatType:
-    return QString("Float");
+    return TQString("Float");
   default:
-    return QString("Unknown:") + QString::number(static_cast<int>(arg));
+    return TQString("Unknown:") + TQString::number(static_cast<int>(arg));
 
   }
 }
 
-void checkResult(QString const &string, KNumber const & result,
-		 QString const & desired_string, KNumber::NumType desired)
+void checkResult(TQString const &string, KNumber const & result,
+		 TQString const & desired_string, KNumber::NumType desired)
 {
   std::cout << "Testing result of: " << string.ascii() <<
     " should give " << desired_string.ascii() << " and gives " <<
@@ -47,7 +47,7 @@ void checkResult(QString const &string, KNumber const & result,
   exit(1);
 }
 
-void checkTruth(QString const &string, bool computation,
+void checkTruth(TQString const &string, bool computation,
 		bool desired_result)
 {
   std::cout << "Testing truth of: " << string.ascii() <<
@@ -64,7 +64,7 @@ void checkTruth(QString const &string, bool computation,
 }
 
 
-void checkType(QString const &string, KNumber::NumType test_arg,
+void checkType(TQString const &string, KNumber::NumType test_arg,
 	       KNumber::NumType desired)
 {
   std::cout << "Testing type of: " << string.ascii() << " should give " <<

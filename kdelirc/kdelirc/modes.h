@@ -13,10 +13,10 @@
 #ifndef MODES_H
 #define MODES_H
 
-#include <qstring.h>
-#include <qmap.h>
-#include <qpair.h>
-#include <qvaluelist.h>
+#include <tqstring.h>
+#include <tqmap.h>
+#include <tqpair.h>
+#include <tqvaluelist.h>
 
 #include "mode.h"
 
@@ -26,21 +26,21 @@
 
 class KConfig;
 
-typedef QValueList<Mode> ModeList;
+typedef TQValueList<Mode> ModeList;
 
-class Modes : protected QMap<QString, QMap<QString, Mode> >
+class Modes : protected TQMap<TQString, TQMap<TQString, Mode> >
 {
 	void purgeAllModes(KConfig &theConfig);
-	QMap<QString, QString> theDefaults;
+	TQMap<TQString, TQString> theDefaults;
 
 public:
 	void loadFromConfig(KConfig &theConfig);
 	void saveToConfig(KConfig &theConfig);
-	void generateNulls(const QStringList &theRemotes);
+	void generateNulls(const TQStringList &theRemotes);
 
-	const Mode &getMode(const QString &remote, const QString &mode) const;
-	ModeList getModes(const QString &remote) const;
-	const Mode getDefault(const QString &remote) const;
+	const Mode &getMode(const TQString &remote, const TQString &mode) const;
+	ModeList getModes(const TQString &remote) const;
+	const Mode getDefault(const TQString &remote) const;
 	bool isDefault(const Mode &mode) const;
 
 	/**
@@ -53,7 +53,7 @@ public:
 	void add(const Mode &mode);
 
 	// dont use this without renaming all the modes in the actions!!!
-	void rename(Mode &mode, const QString name);
+	void rename(Mode &mode, const TQString name);
 
 	Modes();
 	~Modes();

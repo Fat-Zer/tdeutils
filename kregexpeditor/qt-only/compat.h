@@ -18,15 +18,15 @@
 
 #ifndef COMPAT_H
 #define COMPAT_H
-#include <qobject.h>
-#include <qmessagebox.h>
-#include <qlayout.h>
-#include <qpushbutton.h>
-#include <qinputdialog.h>
-#include <qframe.h>
+#include <tqobject.h>
+#include <tqmessagebox.h>
+#include <tqlayout.h>
+#include <tqpushbutton.h>
+#include <tqinputdialog.h>
+#include <tqframe.h>
 
-QString i18n( const QString& a);
-QString i18n( const QString& a, const QString& b);
+TQString i18n( const TQString& a);
+TQString i18n( const TQString& a, const TQString& b);
 #define isatty(x) 0
 
 #define KTextBrowser QTextBrowser
@@ -42,18 +42,18 @@ public:
     enum ButtonCode {Ok = 1, Cancel, Help};
     enum DialogType { Plain };
 
-    KDialogBase ( int dialogFace, const QString &caption, int buttonMask,
+    KDialogBase ( int dialogFace, const TQString &caption, int buttonMask,
                   ButtonCode defaultButton,
-                  QWidget *parent=0, const char *name=0, bool modal=true );
+                  TQWidget *parent=0, const char *name=0, bool modal=true );
 
-    KDialogBase( QWidget* parent, const char* name = 0, bool modal = true,
-                 const QString& caption = QString::null,
+    KDialogBase( TQWidget* parent, const char* name = 0, bool modal = true,
+                 const TQString& caption = TQString::null,
                  int buttonMask = 0 );
 
-    void init( int buttonMask, ButtonCode /*defaultButton*/, const QString& caption );
-    void setMainWidget( QWidget* top );
-    QFrame* plainPage();
-    void setHelp( const QString&, const QString& ) {}
+    void init( int buttonMask, ButtonCode /*defaultButton*/, const TQString& caption );
+    void setMainWidget( TQWidget* top );
+    TQFrame* plainPage();
+    void setHelp( const TQString&, const TQString& ) {}
 
 public slots:
     void slotOk();
@@ -66,7 +66,7 @@ signals:
     void helpClicked();
 
 private:
-    QVBoxLayout* _layout;
+    TQVBoxLayout* _layout;
 };
 
 class KMessageBox :public QMessageBox
@@ -74,11 +74,11 @@ class KMessageBox :public QMessageBox
     Q_OBJECT
 public:
     enum ButtonCode { Ok = 1, Cancel = 2, Yes = 3, No = 4, Continue = 5 };
-    static int  warningYesNo (QWidget *parent, const QString &text,
-                              const QString &caption = QString::null );
-    static int information( QWidget* parent, const QString& text, const QString& caption = QString::null,
-                            const QString& /*dontShowAgainName*/ = QString::null );
-    static int sorry( QWidget* parent, const QString& text, const QString& caption = QString::null );
+    static int  warningYesNo (TQWidget *parent, const TQString &text,
+                              const TQString &caption = TQString::null );
+    static int information( TQWidget* parent, const TQString& text, const TQString& caption = TQString::null,
+                            const TQString& /*dontShowAgainName*/ = TQString::null );
+    static int sorry( TQWidget* parent, const TQString& text, const TQString& caption = TQString::null );
 };
 
 #endif /* COMPAT_H */

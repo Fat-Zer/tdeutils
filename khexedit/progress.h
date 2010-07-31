@@ -22,7 +22,7 @@
 #ifndef _PROGRESS_H_
 #define _PROGRESS_H_
 
-#include <qdatetime.h> 
+#include <tqdatetime.h> 
 #include "hexerror.h"
 
 
@@ -122,7 +122,7 @@ class CProgress
   private:
     ProgressFunc mProgressFunc;
     void *mClientData;
-    QTime mInterruptTimer;
+    TQTime mInterruptTimer;
 };
 
 #endif

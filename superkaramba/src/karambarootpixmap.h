@@ -10,7 +10,7 @@
 #ifndef KARAMBAROOTPIXMAP_H
 #define KARAMBAROOTPIXMAP_H
 
-#include <qwidget.h>
+#include <tqwidget.h>
 #include <krootpixmap.h>
 #include <ksharedpixmap.h>
 
@@ -23,7 +23,7 @@ class KarambaRootPixmap : public KRootPixmap
 {
 public:
     //KarambaRootPixmap();
-    KarambaRootPixmap( QWidget *);
+    KarambaRootPixmap( TQWidget *);
 
     ~KarambaRootPixmap();
 
@@ -31,7 +31,7 @@ public:
 void  updateBackground ( KSharedPixmap * );
 
 private:
-QWidget *widget;
+TQWidget *widget;
 
 
 };

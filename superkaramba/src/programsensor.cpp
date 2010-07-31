@@ -9,26 +9,26 @@
  ***************************************************************************/
 #include "programsensor.h"
 
-#include <qstringlist.h>
-ProgramSensor::ProgramSensor(const QString &progName, int interval, QString encoding )
+#include <tqstringlist.h>
+ProgramSensor::ProgramSensor(const TQString &progName, int interval, TQString encoding )
         : Sensor( interval )
 {
      if( !encoding.isEmpty())
     {
-        codec = QTextCodec::codecForName( encoding.ascii() );
+        codec = TQTextCodec::codecForName( encoding.ascii() );
         if ( codec == 0)
-            codec = QTextCodec::codecForLocale();
+            codec = TQTextCodec::codecForLocale();
     }
     else
-        codec = QTextCodec::codecForLocale();
+        codec = TQTextCodec::codecForLocale();
 
 
     programName = progName;
     //update();
-    connect(&ksp, SIGNAL(receivedStdout(KProcess *, char *, int )),
-            this,SLOT(receivedStdout(KProcess *, char *, int )));
-    connect(&ksp, SIGNAL(processExited(KProcess *)),
-            this,SLOT(processExited( KProcess * )));
+    connect(&ksp, TQT_SIGNAL(receivedStdout(KProcess *, char *, int )),
+            this,TQT_SLOT(receivedStdout(KProcess *, char *, int )));
+    connect(&ksp, TQT_SIGNAL(processExited(KProcess *)),
+            this,TQT_SLOT(processExited( KProcess * )));
 }
 
 ProgramSensor::~ProgramSensor()
@@ -37,7 +37,7 @@ ProgramSensor::~ProgramSensor()
 void ProgramSensor::receivedStdout(KProcess *, char *buffer, int len)
 {
     buffer[len] = 0;
-    sensorResult += codec->toUnicode( QCString(buffer) );
+    sensorResult += codec->toUnicode( TQCString(buffer) );
 }
 
 void ProgramSensor::processExited(KProcess *)
@@ -45,16 +45,16 @@ void ProgramSensor::processExited(KProcess *)
     int lineNbr;
     SensorParams *sp;
     Meter *meter;
-    QValueVector<QString> lines;
-    QStringList stringList = QStringList::split('\n',sensorResult,true);
-    QStringList::ConstIterator end( stringList.end() );
-    for ( QStringList::ConstIterator it = stringList.begin(); it != end; ++it )
+    TQValueVector<TQString> lines;
+    TQStringList stringList = TQStringList::split('\n',sensorResult,true);
+    TQStringList::ConstIterator end( stringList.end() );
+    for ( TQStringList::ConstIterator it = stringList.begin(); it != end; ++it )
     {
         lines.push_back(*it);
     }
 
     int count = (int) lines.size();
-    QObjectListIt it( *objList );
+    TQObjectListIt it( *objList );
     while (it != 0)
     {
         sp = (SensorParams*)(*it);

@@ -51,7 +51,7 @@ enum EHexError
   Err_MAXERROR         // Must be the last
 };
 
-const QString &hexError( int index );
+const TQString &hexError( int index );
 
 
 #endif

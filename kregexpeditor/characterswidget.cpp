@@ -30,16 +30,16 @@
 #include "myfontmetrics.h"
 #include "regexpconverter.h"
 
-#include <qpainter.h>
-#include <qgrid.h>
+#include <tqpainter.h>
+#include <tqgrid.h>
 #include <iostream>
-#include <qhgroupbox.h>
-#include <qcursor.h>
-#include <qcheckbox.h>
+#include <tqhgroupbox.h>
+#include <tqcursor.h>
+#include <tqcheckbox.h>
 
 CharacterEdits* CharactersWidget::_configWindow = 0;
 
-CharactersWidget::CharactersWidget(RegExpEditorWindow* editorWindow, QWidget *parent,
+CharactersWidget::CharactersWidget(RegExpEditorWindow* editorWindow, TQWidget *parent,
                                    const char *name)
     : RegExpWidget(editorWindow, parent, name)
 {
@@ -47,7 +47,7 @@ CharactersWidget::CharactersWidget(RegExpEditorWindow* editorWindow, QWidget *pa
 }
 
 CharactersWidget::CharactersWidget( TextRangeRegExp* regexp, RegExpEditorWindow* editorWindow,
-                                    QWidget* parent, const char* name )
+                                    TQWidget* parent, const char* name )
     : RegExpWidget( editorWindow, parent, name )
 {
     _regexp = dynamic_cast<TextRangeRegExp*>( regexp->clone() );
@@ -60,27 +60,27 @@ CharactersWidget::~CharactersWidget()
 }
 
 
-QSize CharactersWidget::sizeHint() const
+TQSize CharactersWidget::sizeHint() const
 {
-    QFontMetrics metrics = fontMetrics();
+    TQFontMetrics metrics = fontMetrics();
     _textSize = HackCalculateFontSize(metrics, title());
     //  _textSize = metrics.size(0, title());
 
-    QSize headerSize = QSize(_textSize.width() + 4 * bdSize,
+    TQSize headerSize = TQSize(_textSize.width() + 4 * bdSize,
                              _textSize.height());
 
     _contentSize = HackCalculateFontSize(metrics,text());
     //  _contentSize = metrics.size(0, text());
 
-    return QSize(QMAX(headerSize.width(), bdSize + _contentSize.width() + bdSize+ 2*pw),
+    return TQSize(QMAX(headerSize.width(), bdSize + _contentSize.width() + bdSize+ 2*pw),
                  headerSize.height() + bdSize + _contentSize.height() + bdSize + 2*pw);
 }
 
-void CharactersWidget::paintEvent(QPaintEvent *e)
+void CharactersWidget::paintEvent(TQPaintEvent *e)
 {
-    QSize mySize = sizeHint();
+    TQSize mySize = sizeHint();
 
-    QPainter painter(this);
+    TQPainter painter(this);
     drawPossibleSelection( painter, mySize );
 
     int center = _textSize.height()/2;
@@ -116,9 +116,9 @@ RegExp* CharactersWidget::regExp() const
     return r;
 }
 
-QString CharactersWidget::text() const
+TQString CharactersWidget::text() const
 {
-    QString res = QString::fromLatin1("");
+    TQString res = TQString::fromLatin1("");
 
     if (_regexp->wordChar())
         res += i18n("- A word character\n");
@@ -139,28 +139,28 @@ QString CharactersWidget::text() const
         res += i18n("- A non-space character\n");
 
     // Single characters
-    QStringList chars = _regexp->chars();
+    TQStringList chars = _regexp->chars();
     if ( !chars.isEmpty() ) {
-        QString str = chars.join( QString::fromLocal8Bit(", ") );
-        res += QString::fromLocal8Bit("- ") + str + QString::fromLocal8Bit("\n");
+        TQString str = chars.join( TQString::fromLocal8Bit(", ") );
+        res += TQString::fromLocal8Bit("- ") + str + TQString::fromLocal8Bit("\n");
     }
 
     // Ranges characters
-    QPtrList<StringPair> range = _regexp->range();
-    for ( QPtrListIterator<StringPair> it( range ); *it; ++it ) {
+    TQPtrList<StringPair> range = _regexp->range();
+    for ( TQPtrListIterator<StringPair> it( range ); *it; ++it ) {
         StringPair* elm = static_cast<StringPair*>(*it);
         if (elm) {
-            QString fromText = elm->first();
-            QString toText = elm->second();
+            TQString fromText = elm->first();
+            TQString toText = elm->second();
 
-            res += QString::fromLocal8Bit("- ") + i18n("from ") + fromText + i18n(" to ") + toText + QString::fromLocal8Bit("\n");
+            res += TQString::fromLocal8Bit("- ") + i18n("from ") + fromText + i18n(" to ") + toText + TQString::fromLocal8Bit("\n");
         }
     }
     return res.left(res.length()-1);
 }
 
 
-QString CharactersWidget::title() const
+TQString CharactersWidget::title() const
 {
     if (_regexp->negate())
         return i18n("Any Character Except");
@@ -169,9 +169,9 @@ QString CharactersWidget::title() const
 }
 
 
-RegExpWidget* CharactersWidget::findWidgetToEdit( QPoint globalPos )
+RegExpWidget* CharactersWidget::findWidgetToEdit( TQPoint globalPos )
 {
-    if ( QRect(mapToGlobal(QPoint(0,0)), size()).contains( globalPos ) )
+    if ( TQRect(mapToGlobal(TQPoint(0,0)), size()).contains( globalPos ) )
         return this;
     else
         return 0;
@@ -180,26 +180,26 @@ RegExpWidget* CharactersWidget::findWidgetToEdit( QPoint globalPos )
 int CharactersWidget::edit()
 {
     if ( _configWindow == 0 ) {
-        QApplication::setOverrideCursor( WaitCursor );
+        TQApplication::setOverrideCursor( WaitCursor );
         // No parent here, as this window should continue to exists.
         _configWindow = new CharacterEdits( 0, "CharactersWidget::_configWindow" );
-        QApplication::restoreOverrideCursor();
+        TQApplication::restoreOverrideCursor();
     }
 
-    _configWindow->move(QCursor::pos() - QPoint(_configWindow->sizeHint().width()/2,
+    _configWindow->move(TQCursor::pos() - TQPoint(_configWindow->sizeHint().width()/2,
                                                 _configWindow->sizeHint().height()/2));
     int ret = _configWindow->exec(_regexp );
-    if ( ret == QDialog::Accepted ) {
+    if ( ret == TQDialog::Accepted ) {
         _editorWindow->updateContent( 0 );
         update();
     }
     return ret;
 }
 
-void CharacterEdits::addCharacter( QString txt )
+void CharacterEdits::addCharacter( TQString txt )
 {
     KMultiFormListBoxEntryList list = _single->elements();
-    for ( QPtrListIterator<KMultiFormListBoxEntry> it(list); *it; ++it ) {
+    for ( TQPtrListIterator<KMultiFormListBoxEntry> it(list); *it; ++it ) {
         SingleEntry* entry = dynamic_cast<SingleEntry*>( *it );
         if ( entry && entry->isEmpty() ) {
             entry->setText( txt );
@@ -212,10 +212,10 @@ void CharacterEdits::addCharacter( QString txt )
     _single->append( entry );
 }
 
-void CharacterEdits::addRange( QString from, QString to )
+void CharacterEdits::addRange( TQString from, TQString to )
 {
     KMultiFormListBoxEntryList list = _range->elements();
-    for ( QPtrListIterator<KMultiFormListBoxEntry> it(list); *it; ++it ) {
+    for ( TQPtrListIterator<KMultiFormListBoxEntry> it(list); *it; ++it ) {
         RangeEntry* entry = dynamic_cast<RangeEntry*>( *it );
         if ( entry && entry->isEmpty() ) {
             entry->setFrom( from );
@@ -249,30 +249,30 @@ int CharacterEdits::exec( TextRangeRegExp* regexp )
     // Characters
 
     KMultiFormListBoxEntryList list1 = _single->elements();
-    for ( QPtrListIterator<KMultiFormListBoxEntry> it(list1); *it; ++it ) {
+    for ( TQPtrListIterator<KMultiFormListBoxEntry> it(list1); *it; ++it ) {
         SingleEntry* entry = dynamic_cast<SingleEntry*>( *it );
         if (entry)
-            entry->setText( QString::fromLocal8Bit("") );
+            entry->setText( TQString::fromLocal8Bit("") );
     }
-    QStringList list2 = regexp->chars();
-    for ( QStringList::Iterator it2( list2.begin() ); ! (*it2).isNull(); ++it2 ) {
+    TQStringList list2 = regexp->chars();
+    for ( TQStringList::Iterator it2( list2.begin() ); ! (*it2).isNull(); ++it2 ) {
         addCharacter( *it2 );
     }
 
     // Ranges
     KMultiFormListBoxEntryList list3 = _range->elements();
-    for ( QPtrListIterator<KMultiFormListBoxEntry> it3(list3); *it3; ++it3 ) {
+    for ( TQPtrListIterator<KMultiFormListBoxEntry> it3(list3); *it3; ++it3 ) {
         RangeEntry* entry = dynamic_cast<RangeEntry*>( *it3 );
         if (entry) {
-            entry->setFrom( QString::fromLocal8Bit("") );
-            entry->setTo( QString::fromLocal8Bit("") );
+            entry->setFrom( TQString::fromLocal8Bit("") );
+            entry->setTo( TQString::fromLocal8Bit("") );
         }
     }
 
-    QPtrList<StringPair> ranges = regexp->range();
-    for ( QPtrListIterator<StringPair> it4(ranges); *it4; ++it4 ) {
-        QString from = (*it4)->first();
-        QString to = (*it4)->second();
+    TQPtrList<StringPair> ranges = regexp->range();
+    for ( TQPtrListIterator<StringPair> it4(ranges); *it4; ++it4 ) {
+        TQString from = (*it4)->first();
+        TQString to = (*it4)->second();
         addRange(from,to);
     }
 
@@ -282,64 +282,64 @@ int CharacterEdits::exec( TextRangeRegExp* regexp )
 }
 
 
-CharacterEdits::CharacterEdits( QWidget *parent, const char *name)
+CharacterEdits::CharacterEdits( TQWidget *parent, const char *name)
   : KDialogBase( parent, name == 0 ? "CharacterEdits" : name, true,
                  i18n("Specify Characters"),
                  KDialogBase::Ok | KDialogBase::Cancel)
 {
-    QWidget* top = new QWidget( this );
-    QVBoxLayout *topLayout = new QVBoxLayout(top, 6);
+    TQWidget* top = new TQWidget( this );
+    TQVBoxLayout *topLayout = new TQVBoxLayout(top, 6);
     setMainWidget( top );
 
-    negate = new QCheckBox(i18n("Do not match the characters specified here"),
+    negate = new TQCheckBox(i18n("Do not match the characters specified here"),
                            top);
     topLayout->addWidget( negate );
 
 
     // The predefined box
-    QHGroupBox* predefined = new QHGroupBox(i18n("Predefined Character Ranges"),top);
+    TQHGroupBox* predefined = new TQHGroupBox(i18n("Predefined Character Ranges"),top);
     topLayout->addWidget(predefined);
-    QGrid* grid = new QGrid(3, predefined );
+    TQGrid* grid = new TQGrid(3, predefined );
 
-    wordChar = new QCheckBox(i18n("A word character"),grid);
-    digit = new QCheckBox(i18n("A digit character"),grid);
-    space = new QCheckBox(i18n("A space character"), grid);
+    wordChar = new TQCheckBox(i18n("A word character"),grid);
+    digit = new TQCheckBox(i18n("A digit character"),grid);
+    space = new TQCheckBox(i18n("A space character"), grid);
 
-    _nonWordChar = new QCheckBox(i18n("A non-word character"),grid);
-    _nonDigit = new QCheckBox(i18n("A non-digit character"),grid);
-    _nonSpace = new QCheckBox(i18n("A non-space character"), grid);
+    _nonWordChar = new TQCheckBox(i18n("A non-word character"),grid);
+    _nonDigit = new TQCheckBox(i18n("A non-digit character"),grid);
+    _nonSpace = new TQCheckBox(i18n("A non-space character"), grid);
 
     // Single characters
-    QVGroupBox* singleBox = new QVGroupBox(i18n("Single Characters"), top );
+    TQVGroupBox* singleBox = new TQVGroupBox(i18n("Single Characters"), top );
     topLayout->addWidget( singleBox );
     _single = new KMultiFormListBox(new SingleFactory(), KMultiFormListBox::MultiVisible,
                                     singleBox);
     _single->addElement(); _single->addElement(); _single->addElement();
 
-    QWidget* moreW = new QWidget( singleBox );
-    QHBoxLayout* moreLay = new QHBoxLayout( moreW );
-    QPushButton* more = new QPushButton( i18n("More Entries"), moreW );
+    TQWidget* moreW = new TQWidget( singleBox );
+    TQHBoxLayout* moreLay = new TQHBoxLayout( moreW );
+    TQPushButton* more = new TQPushButton( i18n("More Entries"), moreW );
     moreLay->addWidget( more );
     moreLay->addStretch( 1 );
 
-    connect(more,SIGNAL(clicked()), _single, SLOT(addElement()));
+    connect(more,TQT_SIGNAL(clicked()), _single, TQT_SLOT(addElement()));
 
     // Ranges
-    QVGroupBox* rangeBox = new QVGroupBox(i18n("Character Ranges"), top );
+    TQVGroupBox* rangeBox = new TQVGroupBox(i18n("Character Ranges"), top );
     topLayout->addWidget( rangeBox );
 
     _range = new KMultiFormListBox(new RangeFactory(), KMultiFormListBox::MultiVisible,
                                    rangeBox);
     _range->addElement(); _range->addElement(); _range->addElement();
 
-    moreW = new QWidget( rangeBox );
-    moreLay = new QHBoxLayout( moreW );
-    more = new QPushButton( i18n("More Entries"), moreW );
+    moreW = new TQWidget( rangeBox );
+    moreLay = new TQHBoxLayout( moreW );
+    more = new TQPushButton( i18n("More Entries"), moreW );
     moreLay->addWidget( more );
     moreLay->addStretch( 1 );
-    connect(more,SIGNAL(clicked()), _range, SLOT(addElement()));
+    connect(more,TQT_SIGNAL(clicked()), _range, TQT_SLOT(addElement()));
     // Buttons
-    connect(this, SIGNAL(okClicked()), this, SLOT(slotOK()));
+    connect(this, TQT_SIGNAL(okClicked()), this, TQT_SLOT(slotOK()));
 }
 
 void CharacterEdits::slotOK()
@@ -358,7 +358,7 @@ void CharacterEdits::slotOK()
 	// single characters
     _regexp->clearChars();
     KMultiFormListBoxEntryList list = _single->elements();
-    for ( QPtrListIterator<KMultiFormListBoxEntry> it( list ); *it; ++it ) {
+    for ( TQPtrListIterator<KMultiFormListBoxEntry> it( list ); *it; ++it ) {
         SingleEntry* entry = dynamic_cast<SingleEntry*>(*it);
         if ( entry && !entry->isEmpty() ) {
             _regexp->addCharacter( entry->text() );
@@ -368,7 +368,7 @@ void CharacterEdits::slotOK()
     // Ranges
     _regexp->clearRange();
     list = _range->elements();
-    for ( QPtrListIterator<KMultiFormListBoxEntry> it2( list ); *it2; ++it2 ) {
+    for ( TQPtrListIterator<KMultiFormListBoxEntry> it2( list ); *it2; ++it2 ) {
         RangeEntry* entry = dynamic_cast<RangeEntry*>(*it2);
         if ( entry && !entry->isEmpty() ) {
             _regexp->addRange( entry->fromText(), entry->toText() );
@@ -377,21 +377,21 @@ void CharacterEdits::slotOK()
 }
 
 
-SingleEntry::SingleEntry(QWidget* parent, const char* name )
+SingleEntry::SingleEntry(TQWidget* parent, const char* name )
     :KMultiFormListBoxEntry( parent, name )
 {
-    QHBoxLayout* layout = new QHBoxLayout( this, 3, 6 );
+    TQHBoxLayout* layout = new TQHBoxLayout( this, 3, 6 );
     _selector = new CharSelector( this );
     layout->addWidget( _selector );
     layout->addStretch(1);
 }
 
-QString SingleEntry::text() const
+TQString SingleEntry::text() const
 {
     return _selector->text();
 }
 
-void SingleEntry::setText( QString text )
+void SingleEntry::setText( TQString text )
 {
     _selector->setText( text );
 }
@@ -402,40 +402,40 @@ bool SingleEntry::isEmpty() const
 }
 
 
-RangeEntry::RangeEntry(QWidget* parent, const char* name )
+RangeEntry::RangeEntry(TQWidget* parent, const char* name )
     :KMultiFormListBoxEntry( parent, name )
 {
-    QHBoxLayout* layout = new QHBoxLayout( this, 3, 6 );
+    TQHBoxLayout* layout = new TQHBoxLayout( this, 3, 6 );
 
-    QLabel* label = new QLabel(i18n("From:"), this );
+    TQLabel* label = new TQLabel(i18n("From:"), this );
     _from = new CharSelector( this );
     layout->addWidget( label );
     layout->addWidget( _from );
 
     layout->addStretch(1);
 
-    label = new QLabel(i18n("end of range","To:"), this );
+    label = new TQLabel(i18n("end of range","To:"), this );
     _to = new CharSelector( this );
     layout->addWidget( label );
     layout->addWidget( _to );
 }
 
-QString RangeEntry::fromText() const
+TQString RangeEntry::fromText() const
 {
     return _from->text();
 }
 
-QString RangeEntry::toText() const
+TQString RangeEntry::toText() const
 {
     return _to->text();
 }
 
-void RangeEntry::setFrom( QString text )
+void RangeEntry::setFrom( TQString text )
 {
     _from->setText( text );
 }
 
-void RangeEntry::setTo( QString text )
+void RangeEntry::setTo( TQString text )
 {
     _to->setText( text );
 }

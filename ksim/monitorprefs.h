@@ -21,7 +21,7 @@
 #define MONITORPREFS_H
 
 #include <klistview.h>
-#include <qstringlist.h>
+#include <tqstringlist.h>
 
 namespace KSim
 {
@@ -31,7 +31,7 @@ namespace KSim
   {
     Q_OBJECT
     public:
-      MonitorPrefs(QWidget *parent, const char *name=0);
+      MonitorPrefs(TQWidget *parent, const char *name=0);
       ~MonitorPrefs();
 
     public slots:
@@ -39,7 +39,7 @@ namespace KSim
       void readConfig(KSim::Config *);
 
     private:
-      QStringList m_locatedFiles;
+      TQStringList m_locatedFiles;
   };
 }
 #endif

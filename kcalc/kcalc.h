@@ -63,7 +63,7 @@ class KCalculator : public KMainWindow
     Q_OBJECT
 
 public:
-	KCalculator(QWidget *parent = 0, const char *name = 0);
+	KCalculator(TQWidget *parent = 0, const char *name = 0);
 	~KCalculator();
 
 signals:
@@ -72,17 +72,17 @@ signals:
 	void switchShowAccels(bool);
 
 private:
-	virtual bool eventFilter( QObject *o, QEvent *e );
+	virtual bool eventFilter( TQObject *o, TQEvent *e );
 	void updateGeometry();
 	void setupMainActions(void);
 	void setupStatusbar(void);
-	QWidget *setupNumericKeys(QWidget *parent);
-	void setupLogicKeys(QWidget *parent);
-	void setupScientificKeys(QWidget *parent);
-	void setupStatisticKeys(QWidget *parent);
-	void setupConstantsKeys(QWidget *parent);
-	void keyPressEvent(QKeyEvent *e);
-	void keyReleaseEvent(QKeyEvent *e);
+	TQWidget *setupNumericKeys(TQWidget *parent);
+	void setupLogicKeys(TQWidget *parent);
+	void setupScientificKeys(TQWidget *parent);
+	void setupStatisticKeys(TQWidget *parent);
+	void setupConstantsKeys(TQWidget *parent);
+	void keyPressEvent(TQKeyEvent *e);
+	void keyReleaseEvent(TQKeyEvent *e);
 	void set_precision();
 	void set_style();
 	void resetBase(void) { (BaseChooseGroup->find(1))->animateClick();};
@@ -172,16 +172,16 @@ private:
 
 
 private:
-    QWidget *mSmallPage;
-    QWidget *mLargePage;
-    QWidget *mNumericPage;
+    TQWidget *mSmallPage;
+    TQWidget *mLargePage;
+    TQWidget *mNumericPage;
 
     DispLogic*	calc_display; // for historic reasons in "dlabel.h"
-    QRadioButton*	pbBaseChoose[4];
-    QPushButton*	pbAngleChoose;
-    QDict<KCalcButton>	pbStat;
-    QDict<KCalcButton>	pbScientific;
-    QDict<KCalcButton>	pbLogic;
+    TQRadioButton*	pbBaseChoose[4];
+    TQPushButton*	pbAngleChoose;
+    TQDict<KCalcButton>	pbStat;
+    TQDict<KCalcButton>	pbScientific;
+    TQDict<KCalcButton>	pbLogic;
     KCalcConstButton*	pbConstant[10];
     KCalcButton* 	pbAC;
     KCalcButton* 	pbAND;
@@ -215,21 +215,21 @@ private:
 			   // buttons would like to remove this, but
 			   // don't know how
 	
-    QHButtonGroup*      BaseChooseGroup;
+    TQHButtonGroup*      BaseChooseGroup;
     // NumButtonGroup: 0-9 = digits, 0xA-0xF = hex-keys
-    QButtonGroup* 	NumButtonGroup;
+    TQButtonGroup* 	NumButtonGroup;
     // ConstButtonGroup C1-C6
-    QButtonGroup*	ConstButtonGroup;
+    TQButtonGroup*	ConstButtonGroup;
 
     KToggleAction *actionStatshow;
     KToggleAction *actionScientificshow;
     KToggleAction *actionLogicshow;
     KToggleAction *actionConstantsShow;
 
-    QPtrList<KCalcButton> mFunctionButtonList;
-    QPtrList<KCalcButton> mStatButtonList;
-    QPtrList<KCalcButton> mMemButtonList;
-    QPtrList<KCalcButton> mOperationButtonList;
+    TQPtrList<KCalcButton> mFunctionButtonList;
+    TQPtrList<KCalcButton> mStatButtonList;
+    TQPtrList<KCalcButton> mMemButtonList;
+    TQPtrList<KCalcButton> mOperationButtonList;
 
     int				mInternalSpacing;
 

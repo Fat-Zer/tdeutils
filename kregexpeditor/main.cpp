@@ -18,7 +18,7 @@
 
 #ifdef QT_ONLY
   #include "compat.h"
-  #include <qapplication.h>
+  #include <tqapplication.h>
 #else
   #include <kaboutdata.h>
   #include <kapplication.h>
@@ -28,12 +28,12 @@
 #endif
 
 #include "kregexpeditorgui.h"
-#include <qlayout.h>
+#include <tqlayout.h>
 
 int main( int argc, char* argv[] )
 {
 #ifdef QT_ONLY
-    QApplication myapp( argc, argv );
+    TQApplication myapp( argc, argv );
 #else
     KAboutData aboutData( "kregexpeditor", I18N_NOOP("RegExp Editor"),
                           "1.0", I18N_NOOP("Editor for Regular Expressions"),
@@ -43,14 +43,14 @@ int main( int argc, char* argv[] )
     KApplication myapp;
 #endif
 
-    QDialog* top = new QDialog( 0 );
-    QVBoxLayout* lay = new QVBoxLayout( top, 6 );
+    TQDialog* top = new TQDialog( 0 );
+    TQVBoxLayout* lay = new TQVBoxLayout( top, 6 );
 
-    KRegExpEditorGUI* iface = new KRegExpEditorGUI( top, "_editor", QStringList() );
-    iface->doSomething( QString::fromLatin1("setAllowNonQtSyntax"), (bool*) true );
+    KRegExpEditorGUI* iface = new KRegExpEditorGUI( top, "_editor", TQStringList() );
+    iface->doSomething( TQString::fromLatin1("setAllowNonQtSyntax"), (bool*) true );
     lay->addWidget( iface );
 
-    QHBoxLayout* lay2 = new QHBoxLayout( lay, 6 );
+    TQHBoxLayout* lay2 = new TQHBoxLayout( lay, 6 );
     KPushButton* help = new KPushButton( KStdGuiItem::help(), top );
     KPushButton* quit = new KPushButton( KStdGuiItem::quit(), top );
 
@@ -58,11 +58,11 @@ int main( int argc, char* argv[] )
     lay2->addStretch(1);
     lay2->addWidget( quit );
 
-    QObject::connect( help, SIGNAL( clicked() ), iface, SLOT( showHelp() ) );
-    QObject::connect( quit, SIGNAL( clicked() ), qApp, SLOT( quit() ) );
+    TQObject::connect( help, TQT_SIGNAL( clicked() ), iface, TQT_SLOT( showHelp() ) );
+    TQObject::connect( quit, TQT_SIGNAL( clicked() ), qApp, TQT_SLOT( quit() ) );
 
     top->show();
-    QObject::connect( qApp, SIGNAL( lastWindowClosed() ), qApp, SLOT( quit() ) );
+    TQObject::connect( qApp, TQT_SIGNAL( lastWindowClosed() ), qApp, TQT_SLOT( quit() ) );
     myapp.exec();
 }
 

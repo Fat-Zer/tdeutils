@@ -30,20 +30,20 @@ class SevenZipArch : public Arch
 {
   Q_OBJECT
   public:
-    SevenZipArch( ArkWidget *, const QString & );
+    SevenZipArch( ArkWidget *, const TQString & );
     virtual ~SevenZipArch();
   
     virtual void open();
     virtual void create();
 
-    virtual void addFile( const QStringList & );
-    virtual void addDir( const QString & );
+    virtual void addFile( const TQStringList & );
+    virtual void addDir( const TQString & );
 
-    virtual void remove( QStringList * );
+    virtual void remove( TQStringList * );
     virtual void unarchFileInternal( );
 
   protected slots:
-    virtual bool processLine( const QCString& line );
+    virtual bool processLine( const TQCString& line );
     virtual void slotReceivedTOC( KProcess*, char*, int );
 
   private:

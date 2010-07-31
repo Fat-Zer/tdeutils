@@ -83,14 +83,14 @@ int main(int argc, char *argv[])
 	KCmdLineArgs::usage(i18n("No command or host specified."));
 
     // Check if ssh is available
-    if (KStandardDirs::findExe(QString::fromLatin1("ssh")).isEmpty())
+    if (KStandardDirs::findExe(TQString::fromLatin1("ssh")).isEmpty())
     {
 	kdError(1511) << "ssh not found\n";
 	exit(1);
     }
 
     // Get remote userid
-    QCString user = args->getOption("u");
+    TQCString user = args->getOption("u");
     if (user.isNull())
     {
 	struct passwd *pw = getpwuid(getuid());
@@ -103,11 +103,11 @@ int main(int argc, char *argv[])
     }
 
     // Remote stub location
-    QCString stub = args->getOption("s");
+    TQCString stub = args->getOption("s");
 
     // Get remote host, command
-    QCString host = args->arg(0);
-    QCString command = args->arg(1);
+    TQCString host = args->arg(0);
+    TQCString command = args->arg(1);
     for (int i=2; i<args->count(); i++)
     {
 	command += " ";
@@ -151,22 +151,22 @@ int main(int argc, char *argv[])
 
     // Read configuration
     KConfig *config = KGlobal::config();
-    config->setGroup(QString::fromLatin1("Passwords"));
-    int timeout = config->readNumEntry(QString::fromLatin1("Timeout"), defTimeout);
+    config->setGroup(TQString::fromLatin1("Passwords"));
+    int timeout = config->readNumEntry(TQString::fromLatin1("Timeout"), defTimeout);
 
     SshProcess proc(host, user);
     proc.setStub(stub);
     int needpw = proc.checkNeedPassword();
     if (needpw < 0)
     {
-	QString msg = i18n("Ssh returned with an error!\n"
+	TQString msg = i18n("Ssh returned with an error!\n"
 		"The error message is:\n\n");
 	msg += proc.error();
 	KMessageBox::error(0L, msg);
 	exit(1);
     }
 
-    QCString password;
+    TQCString password;
     if (needpw != 0)
     {
 	KDEsshDialog *dlg = new KDEsshDialog(host, user, stub,

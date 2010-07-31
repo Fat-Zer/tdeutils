@@ -91,7 +91,7 @@ int main( int argc, char **argv )
 
     if (args->isSet("offset"))
     {
-        QCString offsetStr = args->getOption("offset");
+        TQCString offsetStr = args->getOption("offset");
         uint _offset = parseDecimalOrHexadecimal(offsetStr.data() );
         hexEdit->setStartupOffset( _offset );
     }

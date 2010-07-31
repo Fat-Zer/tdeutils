@@ -31,10 +31,10 @@ class KJotsEdit : public KEdit
 {
     Q_OBJECT
     public:
-        KJotsEdit (QWidget* parent=0, const char* name=0);
+        KJotsEdit (TQWidget* parent=0, const char* name=0);
         ~KJotsEdit ();
 
-        void print(QString title = QString::null);
+        void print(TQString title = TQString::null);
         void setEntry(KJotsPage*);
 
     signals:
@@ -44,7 +44,7 @@ class KJotsEdit : public KEdit
           void openUrl();
 
     protected:
-        virtual void mousePressEvent (QMouseEvent *e);
+        virtual void mousePressEvent (TQMouseEvent *e);
 
         KPopupMenu *web_menu;
         KJotsPage *m_entry; //!< The entry we are editing. It needs to be kept informed.

@@ -19,7 +19,7 @@
 #define KHE_KBUFFERDRAG_H
 
 // qt specific
-#include <qdragobject.h>
+#include <tqdragobject.h>
 // lib specific
 #include "khe.h"
 #include "kcoordrange.h"
@@ -43,32 +43,32 @@ class KBufferDrag : public QDragObject
 
   public:
     // TODO: make this call somewhat more generic
-    KBufferDrag( const QByteArray &, KCoordRange Range,
+    KBufferDrag( const TQByteArray &, KCoordRange Range,
                  const KOffsetColumn *OC, const KValueColumn *HC, const KCharColumn *TC,
-                 QChar SC, QChar UC, const QString &CN,
-                 QWidget *Source = 0, const char *Name = 0 );
+                 TQChar SC, TQChar UC, const TQString &CN,
+                 TQWidget *Source = 0, const char *Name = 0 );
     ~KBufferDrag();
 
-  public: // QDragObject API
+  public: // TQDragObject API
     virtual const char *format( int i ) const;
-    virtual QByteArray encodedData( const char* ) const;
+    virtual TQByteArray encodedData( const char* ) const;
 
   public:
-    virtual void setData( const QByteArray &);
+    virtual void setData( const TQByteArray &);
 
   public:
-    static bool canDecode( const QMimeSource* Source );
-    static bool decode( const QMimeSource* Source, QByteArray &Dest );
+    static bool canDecode( const TQMimeSource* Source );
+    static bool decode( const TQMimeSource* Source, TQByteArray &Dest );
 
   protected:
-    QByteArray Data;
+    TQByteArray Data;
     KCoordRange CoordRange;
     /** collection of all the columns. All columns will be autodeleted. */
     KColTextExportPtr Columns[5];
     uint NoOfCol;
-    QChar SubstituteChar;
-    QChar UndefinedChar;
-    const QString &CodecName;
+    TQChar SubstituteChar;
+    TQChar UndefinedChar;
+    const TQString &CodecName;
 };
 
 }

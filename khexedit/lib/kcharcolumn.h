@@ -19,7 +19,7 @@
 #define KHE_KCHARCOLUMN_H
 
 // qt specific
-#include <qstring.h>
+#include <tqstring.h>
 // lib specific
 #include "kbuffercolumn.h"
 
@@ -52,11 +52,11 @@ class KCharColumn : public KBufferColumn
     /** sets the substitute character for "unprintable" chars
       * returns true if there was a change
       */
-    bool setSubstituteChar( QChar SC );
+    bool setSubstituteChar( TQChar SC );
     /** sets the undefined character for "undefined" chars
       * returns true if there was a change
       */
-    bool setUndefinedChar( QChar UC );
+    bool setUndefinedChar( TQChar UC );
 
 
   public: // value access
@@ -65,29 +65,29 @@ class KCharColumn : public KBufferColumn
       */
     bool showUnprintable() const;
     /** returns the actually used substitute character for "unprintable" chars, default is '.' */
-    QChar substituteChar() const;
+    TQChar substituteChar() const;
     /** returns the actually used undefined character for "undefined" chars, default is '?' */
-    QChar undefinedChar() const;
+    TQChar undefinedChar() const;
 
 
   protected: // KBufferColumn API
-    virtual void drawByte( QPainter *P, char Byte, KHEChar B, const QColor &Color ) const;
+    virtual void drawByte( TQPainter *P, char Byte, KHEChar B, const TQColor &Color ) const;
 
   protected:
     /** */
     bool ShowUnprintable;
     /** */
-    QChar SubstituteChar;
+    TQChar SubstituteChar;
     /** */
-    QChar UndefinedChar;
+    TQChar UndefinedChar;
 };
 
 
 inline bool KCharColumn::showUnprintable()  const { return ShowUnprintable; }
-inline QChar KCharColumn::substituteChar()  const { return SubstituteChar; }
-inline QChar KCharColumn::undefinedChar()   const { return UndefinedChar; }
+inline TQChar KCharColumn::substituteChar()  const { return SubstituteChar; }
+inline TQChar KCharColumn::undefinedChar()   const { return UndefinedChar; }
 
-inline bool KCharColumn::setSubstituteChar( QChar SC )
+inline bool KCharColumn::setSubstituteChar( TQChar SC )
 {
   if( SubstituteChar == SC )
     return false;
@@ -95,7 +95,7 @@ inline bool KCharColumn::setSubstituteChar( QChar SC )
   return true;
 }
 
-inline bool KCharColumn::setUndefinedChar( QChar UC )
+inline bool KCharColumn::setUndefinedChar( TQChar UC )
 {
   if( UndefinedChar == UC )
     return false;

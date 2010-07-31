@@ -22,7 +22,7 @@
 #include "value_p.h"
 #include "snmp_p.h"
 
-#include <qvariant.h>
+#include <tqvariant.h>
 
 #include <klocale.h>
 
@@ -35,22 +35,22 @@ ValueImpl::ValueImpl( variable_list *var )
     switch ( var->type ) {
         case ASN_INTEGER: {
                 type = Value::Int;
-                data = QVariant( static_cast<int>( *var->val.integer ) );
+                data = TQVariant( static_cast<int>( *var->val.integer ) );
                 break;
             }
         case ASN_UINTEGER: {
                 type = Value::UInt;
-                data = QVariant( static_cast<uint>( *var->val.integer ) );
+                data = TQVariant( static_cast<uint>( *var->val.integer ) );
                 break;
             }
         case ASN_OCTET_STR: {
                 type = Value::ByteArray;
-                QByteArray d;
+                TQByteArray d;
                 d.setRawData( reinterpret_cast<char *>( var->val.string ), var->val_len );
-                QByteArray copy = d;
+                TQByteArray copy = d;
                 copy.detach();
                 d.resetRawData( reinterpret_cast<char *>( var->val.string ), var->val_len );
-                data = QVariant( copy );
+                data = TQVariant( copy );
                 break;
             }
         case ASN_NULL: {
@@ -64,17 +64,17 @@ ValueImpl::ValueImpl( variable_list *var )
             }
         case ASN_IPADDRESS: {
                 type = Value::IpAddress;
-                addr = QHostAddress( static_cast<uint>( *var->val.integer ) );
+                addr = TQHostAddress( static_cast<uint>( *var->val.integer ) );
                 break;
            }
         case ASN_COUNTER: {
                 type = Value::Counter;
-                data = QVariant( static_cast<uint>( *var->val.integer ) );
+                data = TQVariant( static_cast<uint>( *var->val.integer ) );
                 break;
             }
         case ASN_GAUGE: {
                 type = Value::Gauge;
-                data = QVariant( static_cast<uint>( *var->val.integer ) );
+                data = TQVariant( static_cast<uint>( *var->val.integer ) );
                 break;
             }
        case ASN_COUNTER64: {
@@ -84,7 +84,7 @@ ValueImpl::ValueImpl( variable_list *var )
             }
         case ASN_TIMETICKS: {
                 type = Value::TimeTicks;
-                data = QVariant( static_cast<int>( *var->val.integer ) );
+                data = TQVariant( static_cast<int>( *var->val.integer ) );
                 break;
             }
         case SNMP_NOSUCHOBJECT: {
@@ -102,12 +102,12 @@ ValueImpl::ValueImpl( variable_list *var )
 #if defined( OPAQUE_SPECIAL_TYPES )
         case ASN_OPAQUE_FLOAT: {
                 type = Value::Double;
-                data = QVariant( static_cast<float>( *var->val.floatVal ) );
+                data = TQVariant( static_cast<float>( *var->val.floatVal ) );
                 break;
             }
         case ASN_OPAQUE_DOUBLE: {
                 type = Value::Double;
-                data = QVariant( static_cast<float>( *var->val.doubleVal ) );
+                data = TQVariant( static_cast<float>( *var->val.doubleVal ) );
                 break;
             }
 #endif
@@ -135,7 +135,7 @@ Value::Value( int val, Type type )
     assert( type == Int || type == TimeTicks );
 
     d->type = type;
-    d->data = QVariant( val );
+    d->data = TQVariant( val );
 }
 
 Value::Value( uint val, Type type )
@@ -145,21 +145,21 @@ Value::Value( uint val, Type type )
     assert( type == UInt || type == Counter || type == Gauge );
 
     d->type = type;
-    d->data = QVariant( val );
+    d->data = TQVariant( val );
 }
 
 Value::Value( double val )
 {
     d = new ValueImpl;
     d->type = Double;
-    d->data = QVariant( val );
+    d->data = TQVariant( val );
 }
 
-Value::Value( const QByteArray &data )
+Value::Value( const TQByteArray &data )
 {
     d = new ValueImpl;
     d->type = ByteArray;
-    d->data = QVariant( data );
+    d->data = TQVariant( data );
 }
 
 Value::Value( const KSim::Snmp::Identifier &oid )
@@ -169,7 +169,7 @@ Value::Value( const KSim::Snmp::Identifier &oid )
     d->oid = oid;
 }
 
-Value::Value( const QHostAddress &address )
+Value::Value( const TQHostAddress &address )
 {
     d = new ValueImpl;
     d->type = IpAddress;
@@ -240,7 +240,7 @@ double Value::toDouble() const
     return d->data.toDouble();
 }
 
-const QByteArray Value::toByteArray() const
+const TQByteArray Value::toByteArray() const
 {
     assert( d->type == ByteArray );
     return d->data.toByteArray();
@@ -252,7 +252,7 @@ const Identifier Value::toOID() const
     return d->oid;
 }
 
-const QHostAddress Value::toIpAddress() const
+const TQHostAddress Value::toIpAddress() const
 {
     assert( d->type == IpAddress );
     return d->addr;
@@ -279,31 +279,31 @@ Q_UINT64 Value::toCounter64() const
     return d->ctr64;
 }
 
-QString Value::toString( int conversionFlags ) const
+TQString Value::toString( int conversionFlags ) const
 {
     switch ( type() ) {
-        case Value::Int: return QString::number( toInt() );
+        case Value::Int: return TQString::number( toInt() );
         case Value::Gauge:
         case Value::Counter:
-        case Value::UInt: return QString::number( toUInt() );
-        case Value::Double: return QString::number( toDouble() );
-        case Value::Counter64: return QString::number( toCounter64() );
-        case Value::ByteArray: return QString::fromAscii( toByteArray().data(), toByteArray().size() );
+        case Value::UInt: return TQString::number( toUInt() );
+        case Value::Double: return TQString::number( toDouble() );
+        case Value::Counter64: return TQString::number( toCounter64() );
+        case Value::ByteArray: return TQString::fromAscii( toByteArray().data(), toByteArray().size() );
         case Value::IpAddress: return toIpAddress().toString();
         case Value::Oid: return toOID().toString();
         case Value::TimeTicks: return formatTimeTicks( toTimeTicks(), conversionFlags );
         // not using i18n here, because it may be called from within a worker thread, and I'm
         // not sure it makes sense to translate it anyway
-        case Value::NoSuchObject: return QString::fromLatin1( "No Such Object" );
-        case Value::NoSuchInstance: return QString::fromLatin1( "No Such Instance" );
-        case Value::EndOfMIBView: return QString::fromLatin1( "End Of MIB View" );
+        case Value::NoSuchObject: return TQString::fromLatin1( "No Such Object" );
+        case Value::NoSuchInstance: return TQString::fromLatin1( "No Such Instance" );
+        case Value::EndOfMIBView: return TQString::fromLatin1( "End Of MIB View" );
         case Value::Invalid:
-        case Value::Null: return QString::null;
+        case Value::Null: return TQString::null;
     }
-    return QString::null;
+    return TQString::null;
 }
 
-QString Value::formatTimeTicks( int ticks, int conversionFlags )
+TQString Value::formatTimeTicks( int ticks, int conversionFlags )
 {
     ticks /= 100;
 
@@ -316,15 +316,15 @@ QString Value::formatTimeTicks( int ticks, int conversionFlags )
     int minutes = ticks / 60;
     int seconds = ticks % 60;
 
-    QString result;
+    TQString result;
 
     if ( days > 0 )
-        result += QString::number( days ) + "d:";
+        result += TQString::number( days ) + "d:";
 
-    result += QString::fromAscii( "%1h:%2m" ).arg( hours ).arg( minutes );
+    result += TQString::fromAscii( "%1h:%2m" ).arg( hours ).arg( minutes );
 
     if ( conversionFlags & TimeTicksWithSeconds )
-        result += ":" + QString::number( seconds ) + "s";
+        result += ":" + TQString::number( seconds ) + "s";
 
     return result;
 }

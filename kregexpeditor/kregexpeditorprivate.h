@@ -18,8 +18,8 @@
 #ifndef kregexpeditorprivate_h
 #define kregexpeditorprivate_h
 
-#include <qlabel.h>
-#include <qptrstack.h>
+#include <tqlabel.h>
+#include <tqptrstack.h>
 #include "regexp.h"
 #include "errormap.h"
 class QTimer;
@@ -48,14 +48,14 @@ class KRegExpEditorPrivate  :public QWidget
     Q_OBJECT
 
 public:
-    KRegExpEditorPrivate( QWidget *parent, const char *name = 0 );
-    QString regexp();
+    KRegExpEditorPrivate( TQWidget *parent, const char *name = 0 );
+    TQString regexp();
     void setMinimal( bool );
     void setCaseSensitive( bool );
     void setAllowNonQtSyntax( bool );
 
 protected slots:
-    void slotUpdateEditor( const QString & );
+    void slotUpdateEditor( const TQString & );
     void slotUpdateLineEdit();
     void slotShowEditor();
     void slotTriggerUpdate();
@@ -63,14 +63,14 @@ protected slots:
     void maybeVerify();
     void doVerify();
     void setAutoVerify( bool );
-    void setVerifyText( const QString& fileName );
+    void setVerifyText( const TQString& fileName );
 
 public slots:
     void slotUndo();
     void slotRedo();
-    void slotSetRegexp( QString regexp );
-    void setMatchText( const QString& text );
-    void setSyntax( const QString& );
+    void slotSetRegexp( TQString regexp );
+    void setMatchText( const TQString& text );
+    void setSyntax( const TQString& );
     void showHelp();
 
 signals:
@@ -88,18 +88,18 @@ private:
     VerifyButtons* _verifyButtons;
     AuxButtons *_auxButtons;
     InfoPage* _info;
-    QLineEdit* _regexpEdit;
-    QSplitter* _editor;
+    TQLineEdit* _regexpEdit;
+    TQSplitter* _editor;
     bool _updating;
-    QLabel* _error;
-    QPtrStack<RegExp> _undoStack;
-    QPtrStack<RegExp> _redoStack;
+    TQLabel* _error;
+    TQPtrStack<RegExp> _undoStack;
+    TQPtrStack<RegExp> _redoStack;
     UserDefinedRegExps*  _userRegExps;
-    QTimer* _timer;
+    TQTimer* _timer;
     Verifier* _verifier;
     bool _autoVerify;
     ErrorMap _errorMap;
-    QToolButton *clearButton;
+    TQToolButton *clearButton;
 };
 
 #endif

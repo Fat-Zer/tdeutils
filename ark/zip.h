@@ -39,16 +39,16 @@ class ZipArch : public Arch
 {
   Q_OBJECT
   public:
-    ZipArch( ArkWidget *_gui, const QString & _fileName );
+    ZipArch( ArkWidget *_gui, const TQString & _fileName );
     virtual ~ZipArch() { }
 
     virtual void open();
     virtual void create();
 
-    virtual void addFile( const QStringList & );
-    virtual void addDir( const QString &  );
+    virtual void addFile( const TQStringList & );
+    virtual void addDir( const TQString &  );
 
-    virtual void remove( QStringList * );
+    virtual void remove( TQStringList * );
     virtual void unarchFileInternal();
     virtual bool passwordRequired();
   private:

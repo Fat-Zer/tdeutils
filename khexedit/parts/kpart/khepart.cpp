@@ -32,8 +32,8 @@ using namespace KHE;
 
 static const char RCFileName[] = "khexedit2partui.rc";
 
-KHexEditPart::KHexEditPart( QWidget *ParentWidget, const char *WidgetName,
-                            QObject *Parent, const char *Name,
+KHexEditPart::KHexEditPart( TQWidget *ParentWidget, const char *WidgetName,
+                            TQObject *Parent, const char *Name,
                             bool BrowserViewWanted )
  : KParts::ReadOnlyPart( Parent, Name )
 {
@@ -51,8 +51,8 @@ KHexEditPart::KHexEditPart( QWidget *ParentWidget, const char *WidgetName,
 
   if( CopyAction )
   {
-    connect( HexEdit, SIGNAL(copyAvailable(bool)), CopyAction,SLOT(setEnabled(bool)) );
-    connect( HexEdit, SIGNAL(selectionChanged()),  this,      SLOT(slotSelectionChanged()) );
+    connect( HexEdit, TQT_SIGNAL(copyAvailable(bool)), CopyAction,TQT_SLOT(setEnabled(bool)) );
+    connect( HexEdit, TQT_SIGNAL(selectionChanged()),  this,      TQT_SLOT(slotSelectionChanged()) );
     CopyAction->setEnabled( false );
   }
 
@@ -83,30 +83,30 @@ void KHexEditPart::setupActions( bool BrowserViewWanted )
 {
   KActionCollection *AC = actionCollection();
   // create our actions
-  CopyAction = BrowserViewWanted ? 0 : KStdAction::copy( HexEdit, SLOT(copy()), AC );
+  CopyAction = BrowserViewWanted ? 0 : KStdAction::copy( HexEdit, TQT_SLOT(copy()), AC );
 
-  KStdAction::selectAll( this, SLOT(slotSelectAll()), AC );
-  KStdAction::deselect(  this, SLOT(slotUnselect()),  AC );
+  KStdAction::selectAll( this, TQT_SLOT(slotSelectAll()), AC );
+  KStdAction::deselect(  this, TQT_SLOT(slotUnselect()),  AC );
 
   // value encoding
   CodingAction = new KSelectAction( i18n("&Value Coding"), 0, AC, "view_valuecoding" );
-  QStringList List;
+  TQStringList List;
   List.append( i18n("&Hexadecimal") );
   List.append( i18n("&Decimal")     );
   List.append( i18n("&Octal")       );
   List.append( i18n("&Binary")      );
   CodingAction->setItems( List );
-  connect( CodingAction, SIGNAL(activated(int)), this, SLOT(slotSetCoding(int)) );
+  connect( CodingAction, TQT_SIGNAL(activated(int)), this, TQT_SLOT(slotSetCoding(int)) );
 
   // document encoding
   EncodingAction = new KSelectAction( i18n("&Char Encoding"), 0, AC, "view_charencoding" );
   EncodingAction->setItems( KCharCodec::codecNames() );
-  connect( EncodingAction, SIGNAL(activated(int)), this, SLOT(slotSetEncoding(int)) );
+  connect( EncodingAction, TQT_SIGNAL(activated(int)), this, TQT_SLOT(slotSetEncoding(int)) );
 
-  ShowUnprintableAction = new KToggleAction( i18n("Show &Unprintable Chars (<32)"), 0, this, SLOT(slotSetShowUnprintable()), actionCollection(), "view_showunprintable" );
+  ShowUnprintableAction = new KToggleAction( i18n("Show &Unprintable Chars (<32)"), 0, this, TQT_SLOT(slotSetShowUnprintable()), actionCollection(), "view_showunprintable" );
 
-  KStdAction::zoomIn(  HexEdit, SLOT(zoomIn()),   actionCollection() );
-  KStdAction::zoomOut( HexEdit, SLOT(zoomOut()),  actionCollection() );
+  KStdAction::zoomIn(  HexEdit, TQT_SLOT(zoomIn()),   actionCollection() );
+  KStdAction::zoomOut( HexEdit, TQT_SLOT(zoomOut()),  actionCollection() );
 
   // resize style
   ResizeStyleAction = new KSelectAction( i18n("&Resize Style"), 0, AC, "resizestyle" );
@@ -115,9 +115,9 @@ void KHexEditPart::setupActions( bool BrowserViewWanted )
   List.append( i18n("&Lock Groups") );
   List.append( i18n("&Full Size Usage") );
   ResizeStyleAction->setItems( List );
-  connect( ResizeStyleAction, SIGNAL(activated(int)), this, SLOT(slotSetResizeStyle(int)) );
+  connect( ResizeStyleAction, TQT_SIGNAL(activated(int)), this, TQT_SLOT(slotSetResizeStyle(int)) );
 
-  ShowOffsetColumnAction = new KToggleAction( i18n("&Line Offset"), Key_F11, this, SLOT(slotToggleOffsetColumn()), AC, "view_lineoffset" );
+  ShowOffsetColumnAction = new KToggleAction( i18n("&Line Offset"), Key_F11, this, TQT_SLOT(slotToggleOffsetColumn()), AC, "view_lineoffset" );
 
   // show buffer columns
   ToggleColumnsAction = new KSelectAction( i18n("&Columns"), 0, AC, "togglecolumns" );
@@ -126,7 +126,7 @@ void KHexEditPart::setupActions( bool BrowserViewWanted )
   List.append( i18n("&Chars Column") );
   List.append( i18n("&Both Columns") );
   ToggleColumnsAction->setItems( List );
-  connect( ToggleColumnsAction, SIGNAL(activated(int)), this, SLOT(slotToggleValueCharColumns(int)) );
+  connect( ToggleColumnsAction, TQT_SIGNAL(activated(int)), this, TQT_SLOT(slotToggleValueCharColumns(int)) );
 
   fitActionSettings();
 

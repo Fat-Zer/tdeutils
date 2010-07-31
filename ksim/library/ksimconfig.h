@@ -20,9 +20,9 @@
 #ifndef KSIMCONFIG_H
 #define KSIMCONFIG_H
 
-#include <qstringlist.h>
-#include <qpoint.h>
-#include <qfont.h>
+#include <tqstringlist.h>
+#include <tqpoint.h>
+#include <tqfont.h>
 
 #include <kdemacros.h>
 
@@ -43,12 +43,12 @@ namespace KSim
 
       int width(int defaultWidth) const;
       void setWidth(int width);
-      bool enabledMonitor(const QString &) const;
-      void setEnabledMonitor(const QString &, bool);
-      QString monitorCommand(const QString &) const;
-      void setMonitorCommand(const QString &, const QString &);
-      int monitorLocation(const QString &);
-      void setMonitorLocation(const QString &, int);
+      bool enabledMonitor(const TQString &) const;
+      void setEnabledMonitor(const TQString &, bool);
+      TQString monitorCommand(const TQString &) const;
+      void setMonitorCommand(const TQString &, const TQString &);
+      int monitorLocation(const TQString &);
+      void setMonitorLocation(const TQString &, int);
       bool displayFqdn() const;
       void setDisplayFqdn(bool);
       bool showDock() const;
@@ -57,25 +57,25 @@ namespace KSim
       void setSavePos(bool);
       bool stayOnTop() const;
       void setStayOnTop(bool);
-      QPoint position(const QPoint &) const;
-      void setPosition(const QPoint &);
-      QSize graphSize() const;
-      void setGraphSize(const QSize &);
-      QString uptimeFormat() const;
-      void setUptimeFormat(const QStringList &);
+      TQPoint position(const TQPoint &) const;
+      void setPosition(const TQPoint &);
+      TQSize graphSize() const;
+      void setGraphSize(const TQSize &);
+      TQString uptimeFormat() const;
+      void setUptimeFormat(const TQStringList &);
       int uptimeItem() const;
       void setUptimeItem(int);
-      QStringList uptimeFormatList() const;
-      QString memoryFormat() const;
-      void setMemoryFormat(const QStringList &);
+      TQStringList uptimeFormatList() const;
+      TQString memoryFormat() const;
+      void setMemoryFormat(const TQStringList &);
       int memoryItem() const;
       void setMemoryItem(int);
-      QStringList memoryFormatList() const;
-      QString swapFormat() const;
-      void setSwapFormat(const QStringList &);
+      TQStringList memoryFormatList() const;
+      TQString swapFormat() const;
+      void setSwapFormat(const TQStringList &);
       int swapItem() const;
       void setSwapItem(int);
-      QStringList swapFormatList() const;
+      TQStringList swapFormatList() const;
       bool showTime() const;
       void setShowTime(bool);
       bool show24hour() const;
@@ -90,13 +90,13 @@ namespace KSim
       void setShowSwap(bool);
       bool showProcs() const;
       void setShowProcs(bool);
-      QString themeUrl() const;
-      QString themeName() const;
-      void setThemeName(const QString &);
+      TQString themeUrl() const;
+      TQString themeName() const;
+      void setThemeName(const TQString &);
       int themeAlt() const;
       void setThemeAlt(int);
-      QFont themeFont() const;
-      void setThemeFont(const QFont &);
+      TQFont themeFont() const;
+      void setThemeFont(const TQFont &);
       int themeFontItem() const;
       void setThemeFontItem(int);
       bool reColourThemes() const;

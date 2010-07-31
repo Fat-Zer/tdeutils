@@ -60,7 +60,7 @@ int main( int argc, char *argv[] )
   KCmdLineArgs::addCmdLineOptions( options );
 
   KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
-  QString device;
+  TQString device;
   if (args->count()) {
 	device = args->arg(0);
   }

@@ -40,11 +40,11 @@ struct Session::Data
 
     HostConfig source;
 
-    QCString host;
-    QCString community;
-    QCString securityName;
-    QCString authPassPhrase;
-    QCString privPassPhrase;
+    TQCString host;
+    TQCString community;
+    TQCString securityName;
+    TQCString authPassPhrase;
+    TQCString privPassPhrase;
 };
 
 Session::Session( const HostConfig &source )
@@ -212,7 +212,7 @@ bool Session::initialize( ErrorInfo *error )
     return true;
 }
 
-bool Session::snmpGet( const QString &identifier, Value &value, ErrorInfo *error )
+bool Session::snmpGet( const TQString &identifier, Value &value, ErrorInfo *error )
 {
     bool ok = false;
     Identifier oid = Identifier::fromString( identifier, &ok );

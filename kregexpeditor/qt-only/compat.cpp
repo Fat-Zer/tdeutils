@@ -18,62 +18,62 @@
 
 #include "compat.h"
 
-QString i18n( const QString& a) {
-    return QObject::tr(a);
+TQString i18n( const TQString& a) {
+    return TQObject::tr(a);
 }
 
-QString i18n( const QString& a, const QString& b) {
-    return QObject::tr(b,a);
+TQString i18n( const TQString& a, const TQString& b) {
+    return TQObject::tr(b,a);
 }
 
-KDialogBase::KDialogBase( int /*dialogFace*/, const QString &caption, int buttonMask,
-                          ButtonCode defaultButton, QWidget *parent, const char *name,
+KDialogBase::KDialogBase( int /*dialogFace*/, const TQString &caption, int buttonMask,
+                          ButtonCode defaultButton, TQWidget *parent, const char *name,
                           bool modal )
-    :QDialog( parent, name, modal )
+    :TQDialog( parent, name, modal )
 {
     init( buttonMask, defaultButton, caption );
 }
 
-KDialogBase::KDialogBase( QWidget* parent, const char* name, bool modal,
-                          const QString& caption, int buttonMask )
-        : QDialog( parent, name, modal )
+KDialogBase::KDialogBase( TQWidget* parent, const char* name, bool modal,
+                          const TQString& caption, int buttonMask )
+        : TQDialog( parent, name, modal )
 {
     init( buttonMask, Ok, caption );
 }
 
-void KDialogBase::init( int buttonMask, ButtonCode /*defaultButton*/, const QString& caption )
+void KDialogBase::init( int buttonMask, ButtonCode /*defaultButton*/, const TQString& caption )
 {
     setCaption( caption );
-    _layout = new QVBoxLayout( this, 6 );
-    QHBoxLayout* buts = new QHBoxLayout( _layout, 6 );
-    QPushButton* but;
+    _layout = new TQVBoxLayout( this, 6 );
+    TQHBoxLayout* buts = new TQHBoxLayout( _layout, 6 );
+    TQPushButton* but;
     if ( buttonMask & Help ) {
-        but = new QPushButton( tr("Help"), this );
+        but = new TQPushButton( tr("Help"), this );
         buts->addWidget( but );
-        connect( but, SIGNAL( clicked() ), this, SIGNAL( helpClicked() ) );
+        connect( but, TQT_SIGNAL( clicked() ), this, TQT_SIGNAL( helpClicked() ) );
     }
     buts->addStretch(1);
     if ( buttonMask & Ok ) {
-        but = new QPushButton( tr("OK"), this );
+        but = new TQPushButton( tr("OK"), this );
         buts->addWidget( but );
-        connect( but, SIGNAL( clicked() ), this, SLOT( slotOk() ) );
+        connect( but, TQT_SIGNAL( clicked() ), this, TQT_SLOT( slotOk() ) );
     }
     if ( buttonMask & Cancel ) {
-        but = new QPushButton( tr("Cancel"), this );
+        but = new TQPushButton( tr("Cancel"), this );
         buts->addWidget( but );
-        connect( but, SIGNAL( clicked() ), this, SLOT( slotCancel() ) );
+        connect( but, TQT_SIGNAL( clicked() ), this, TQT_SLOT( slotCancel() ) );
     }
 }
 
-void KDialogBase::setMainWidget( QWidget* top )
+void KDialogBase::setMainWidget( TQWidget* top )
 {
-    top->reparent( this, 0, QPoint(0,0) );
+    top->reparent( this, 0, TQPoint(0,0) );
     _layout->insertWidget( 0, top );
 }
 
-QFrame* KDialogBase::plainPage()
+TQFrame* KDialogBase::plainPage()
 {
-    QFrame* frame = new QFrame( this );
+    TQFrame* frame = new TQFrame( this );
     setMainWidget( frame );
     return frame;
 }
@@ -92,7 +92,7 @@ void KDialogBase::slotCancel()
     emit finished();
 }
 
-int KMessageBox::warningYesNo(QWidget *parent, const QString &text, const QString &caption )
+int KMessageBox::warningYesNo(TQWidget *parent, const TQString &text, const TQString &caption )
 {
     int code = warning( parent, caption, text, tr("No"), tr("Yes") );
     if ( code == 0 )
@@ -101,15 +101,15 @@ int KMessageBox::warningYesNo(QWidget *parent, const QString &text, const QStrin
         return No;
 }
 
-int KMessageBox::information( QWidget* parent, const QString& text, const QString& caption,
-                              const QString& /*dontShowAgainName*/ )
+int KMessageBox::information( TQWidget* parent, const TQString& text, const TQString& caption,
+                              const TQString& /*dontShowAgainName*/ )
 {
-    return QMessageBox::information( parent, caption, text );
+    return TQMessageBox::information( parent, caption, text );
 }
 
-int KMessageBox::sorry( QWidget* parent, const QString& text, const QString& caption )
+int KMessageBox::sorry( TQWidget* parent, const TQString& text, const TQString& caption )
 {
-    return QMessageBox::information( parent, caption, text );
+    return TQMessageBox::information( parent, caption, text );
 }
 
 

@@ -18,11 +18,11 @@
 #ifndef dcbutton
 #define dcbutton
 
-#include <qtoolbutton.h>
+#include <tqtoolbutton.h>
 class QMouseEvent;
 
 /**
-   QToolButton extended to emit a signal on double click.
+   TQToolButton extended to emit a signal on double click.
    @internal
 */
 class DoubleClickButton :public QToolButton
@@ -30,10 +30,10 @@ class DoubleClickButton :public QToolButton
 Q_OBJECT
 
 public:
-  DoubleClickButton( QPixmap pix, QWidget* parent, const char* name = 0);
+  DoubleClickButton( TQPixmap pix, TQWidget* parent, const char* name = 0);
 
 protected:
-  virtual void mouseDoubleClickEvent ( QMouseEvent * );
+  virtual void mouseDoubleClickEvent ( TQMouseEvent * );
 
 signals:
   void doubleClicked();

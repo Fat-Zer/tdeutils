@@ -26,16 +26,16 @@
 class CompoundRegExp :public RegExp
 {
 public:
-	CompoundRegExp( bool selected, const QString& title = QString::null,
-                    const QString& description = QString::null,
+	CompoundRegExp( bool selected, const TQString& title = TQString::null,
+                    const TQString& description = TQString::null,
                     bool hidden = false, bool allowReplace = false, RegExp* child = 0);
 
     virtual bool check( ErrorMap&, bool first, bool last );
     virtual int precedence() const { return _child->precedence();}
-    virtual QDomNode toXml( QDomDocument* doc ) const;
-    virtual bool load( QDomElement, const QString& version );
-    QString title() const { return _title; }
-    QString description() const { return _description; }
+    virtual TQDomNode toXml( TQDomDocument* doc ) const;
+    virtual bool load( TQDomElement, const TQString& version );
+    TQString title() const { return _title; }
+    TQString description() const { return _description; }
     RegExp* child() const { return _child; }
     bool hidden() const { return _hidden; }
     bool allowReplace() const { return _allowReplace; }
@@ -43,8 +43,8 @@ public:
     virtual bool operator==( const RegExp& other ) const;
 
 private:
-    QString _title;
-    QString _description;
+    TQString _title;
+    TQString _description;
     bool _hidden;
     bool _allowReplace;
 	RegExp* _child;

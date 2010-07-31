@@ -29,7 +29,7 @@
 #include <stdlib.h>
 #include <fcntl.h>
 
-#include <qtimer.h>
+#include <tqtimer.h>
 
 #include <kconfig.h>
 #include <klocale.h>
@@ -43,30 +43,30 @@
 #include <kmessagebox.h>
 #include <kpassivepopup.h>
 #include <dcopclient.h>
-#include <qsocketnotifier.h>
-#include <qcursor.h>
+#include <tqsocketnotifier.h>
+#include <tqcursor.h>
 
 #include <unistd.h>
 #include <sys/time.h>
 
 extern "C"
 {
-       KDE_EXPORT KDEDModule *create_klaptopdaemon(const QCString& name) {
+       KDE_EXPORT KDEDModule *create_klaptopdaemon(const TQCString& name) {
 		return new laptop_daemon(name);
         }
 }
 
 
-class XWidget: public QWidget {
+class XWidget: public TQWidget {
 public:
-	XWidget(laptop_daemon *p):QWidget(0) { pd = p; }
+	XWidget(laptop_daemon *p):TQWidget(0) { pd = p; }
 private:
 	bool x11Event(XEvent *event);
 	laptop_daemon *pd;
 };
 bool XWidget::x11Event(XEvent *event) { return pd->x11Event(event); }
 
-laptop_daemon::laptop_daemon(const QCString& obj): KDEDModule(obj)
+laptop_daemon::laptop_daemon(const TQCString& obj): KDEDModule(obj)
 {
 	xwidget = new XWidget(this);
 	xwidget->hide();
@@ -100,7 +100,7 @@ laptop_daemon::laptop_daemon(const QCString& obj): KDEDModule(obj)
 	sony_notifier = 0;
 	knownFullyCharged = 0;
 	sony_disp = 0;
-        connect(this, SIGNAL(signal_checkBattery()), SLOT(checkBatteryNow()));
+        connect(this, TQT_SIGNAL(signal_checkBattery()), TQT_SLOT(checkBatteryNow()));
 
 	//hasAudio = (audioServer.serverStatus() == 0) ? true : false;
 
@@ -113,8 +113,8 @@ laptop_daemon::laptop_daemon(const QCString& obj): KDEDModule(obj)
 	else _pcmcia = NULL;
 
 	if (_pcmcia)
-	        connect(_pcmcia, SIGNAL(cardUpdated(int)), this, SLOT(updatePCMCIA(int)));
-	connect( &autoLock, SIGNAL(timeout()), this, SLOT(timerDone()) );
+	        connect(_pcmcia, TQT_SIGNAL(cardUpdated(int)), this, TQT_SLOT(updatePCMCIA(int)));
+	connect( &autoLock, TQT_SIGNAL(timeout()), this, TQT_SLOT(timerDone()) );
 
 }
 
@@ -295,10 +295,10 @@ void laptop_daemon::restart()
 
 	if (s.sony_enablescrollbar||s.sony_middleemulation) {
 		if (sony_notifier == 0) {
-			sony_notifier = new QSocketNotifier( sony_fd, QSocketNotifier::Read, this );
+			sony_notifier = new TQSocketNotifier( sony_fd, TQSocketNotifier::Read, this );
 			if (sony_notifier)
-				QObject::connect( sony_notifier, SIGNAL(activated(int)),
-						                          this, SLOT(sonyDataReceived()) );
+				TQObject::connect( sony_notifier, TQT_SIGNAL(activated(int)),
+						                          this, TQT_SLOT(sonyDataReceived()) );
 		}
 	} else {
 		if (sony_notifier) {
@@ -311,8 +311,8 @@ void laptop_daemon::restart()
 
 void laptop_daemon::setBlankSaver(bool blanked)
 {
-	QByteArray ba;
-	QDataStream ds(ba, IO_WriteOnly);
+	TQByteArray ba;
+	TQDataStream ds(ba, IO_WriteOnly);
 	ds << bool(blanked);
 	// can't use kapp->dcopClient() because it breaks KUniqueApplication
 	DCOPClient c;
@@ -356,7 +356,7 @@ void laptop_daemon::timerDone()
 	if ((powered?s.power_performance_enabled[0]:s.power_performance_enabled[1])) {
 		need_wait = 1;
 		if (!saved_performance) {
-			QStringList profile_list;
+			TQStringList profile_list;
     			int current_profile;
 			bool *active_list;
     			if (laptop_portable::get_system_performance(1, current_profile, profile_list, active_list)) {
@@ -369,7 +369,7 @@ void laptop_daemon::timerDone()
 	if ((powered?s.power_throttle_enabled[0]:s.power_throttle_enabled[1])) {
 		need_wait = 1;
 		if (!saved_throttle) {
-			QStringList profile_list;
+			TQStringList profile_list;
     			int current_profile;
 			bool *active_list;
     			if (laptop_portable::get_system_throttling(1, current_profile, profile_list, active_list)) {
@@ -384,17 +384,17 @@ void laptop_daemon::timerDone()
 	// 	(many of the above things cause unexpected time discontinuities)
 	//
 	if (need_wait) {
-		wakepos.setX(QCursor::pos().x());
-		wakepos.setY(QCursor::pos().y());
+		wakepos.setX(TQCursor::pos().x());
+		wakepos.setY(TQCursor::pos().y());
 		if (!wake_timer) {
-			wake_timer = new QTimer(this);
-        		connect(wake_timer, SIGNAL(timeout()), this, SLOT(WakeCheck()));
+			wake_timer = new TQTimer(this);
+        		connect(wake_timer, TQT_SIGNAL(timeout()), this, TQT_SLOT(WakeCheck()));
 			wake_timer->start(1*1000, 1);
 		}
 	} else {
 		if (!backoffTimer) {
-			backoffTimer = new QTimer(this);
-        		connect(backoffTimer, SIGNAL(timeout()), this, SLOT(BackoffRestart()));
+			backoffTimer = new TQTimer(this);
+        		connect(backoffTimer, TQT_SIGNAL(timeout()), this, TQT_SLOT(BackoffRestart()));
 			backoffTimer->start(60*1000, 1);
 		}
 	}
@@ -422,7 +422,7 @@ laptop_daemon::WakeCheck()
 		wake_timer = 0;
 		return;
 	}
-	if (wakepos.x() != QCursor::pos().x() || wakepos.y() != QCursor::pos().y()) {
+	if (wakepos.x() != TQCursor::pos().x() || wakepos.y() != TQCursor::pos().y()) {
 		wake_timer->stop();
 		delete wake_timer;
 		wake_timer = 0;
@@ -720,7 +720,7 @@ void laptop_daemon::setPollInterval(const int interval)
         }
 }
 
-void laptop_daemon::timerEvent(QTimerEvent *)
+void laptop_daemon::timerEvent(TQTimerEvent *)
 {
         emit(signal_checkBattery());
 }
@@ -926,12 +926,12 @@ void laptop_daemon::SetBrightness(bool blank, int v)
 	laptop_portable::set_brightness(blank, v);
 }
 
-void laptop_daemon::SetThrottle(QString v)
+void laptop_daemon::SetThrottle(TQString v)
 {
 	laptop_portable::set_system_throttling(v);
 }
 
-void laptop_daemon::SetPerformance(QString v)
+void laptop_daemon::SetPerformance(TQString v)
 {
 	laptop_portable::set_system_performance(v);
 }
@@ -963,7 +963,7 @@ laptop_daemon::ButtonThreadInternals()
 			}
 			if (s.button_lid_performance_enabled) {
 				if (!button_saved_performance) {
-					QStringList profile_list;
+					TQStringList profile_list;
     					int current_profile;
 					bool *active_list;
     					if (laptop_portable::get_system_performance(1, current_profile, profile_list, active_list)) {
@@ -975,7 +975,7 @@ laptop_daemon::ButtonThreadInternals()
 			}
 			if (s.button_lid_throttle_enabled) {
 				if (!button_saved_throttle) {
-					QStringList profile_list;
+					TQStringList profile_list;
     					int current_profile;
 					bool *active_list;
     					if (laptop_portable::get_system_throttling(1, current_profile, profile_list, active_list)) {
@@ -1040,7 +1040,7 @@ laptop_daemon::ButtonThreadInternals()
 				}
 				if (s.button_power_performance_enabled) {
 					if (!button_saved_performance) {
-						QStringList profile_list;
+						TQStringList profile_list;
     						int current_profile;
 						bool *active_list;
     						if (laptop_portable::get_system_performance(1, current_profile, profile_list, active_list)) {
@@ -1052,7 +1052,7 @@ laptop_daemon::ButtonThreadInternals()
 				}
 				if (s.button_power_throttle_enabled) {
 					if (!button_saved_throttle) {
-						QStringList profile_list;
+						TQStringList profile_list;
     						int current_profile;
 						bool *active_list;
     						if (laptop_portable::get_system_throttling(1, current_profile, profile_list, active_list)) {

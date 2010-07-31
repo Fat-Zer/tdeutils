@@ -87,7 +87,7 @@ CHexClipboard::~CHexClipboard( void )
 }
 
 
-bool CHexClipboard::encode( QByteArray &dst, QByteArray &src )
+bool CHexClipboard::encode( TQByteArray &dst, TQByteArray &src )
 {
   if( src.size() == 0 )
   {
@@ -165,7 +165,7 @@ bool CHexClipboard::encode( QByteArray &dst, QByteArray &src )
 
 
 
-bool CHexClipboard::decode( QByteArray &dst, QString &src )
+bool CHexClipboard::decode( TQByteArray &dst, TQString &src )
 {
   uint mimeSize = strlen( mimeHeader() );
   if( src.length() <= mimeSize )
@@ -240,7 +240,7 @@ bool CHexClipboard::decode( QByteArray &dst, QString &src )
 } 
 
 
-bool CHexClipboard::plainDecode( QByteArray &dst, QString &src )
+bool CHexClipboard::plainDecode( TQByteArray &dst, TQString &src )
 {
   dst.resize( src.length() );
   if( dst.isNull() == true )

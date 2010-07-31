@@ -22,7 +22,7 @@
 
 #include <kmainwindow.h>
 #include <dcopobject.h>
-#include <qptrlist.h>
+#include <tqptrlist.h>
 
 class KSystemTray;
 class KWalletIconView;
@@ -35,23 +35,23 @@ class KWalletManager : public KMainWindow, public DCOPObject {
 	K_DCOP
 
 	public:
-		KWalletManager(QWidget *parent = 0, const char* name = 0, WFlags f = 0);
+		KWalletManager(TQWidget *parent = 0, const char* name = 0, WFlags f = 0);
 		virtual ~KWalletManager();
 
-                QPixmap loadSystemTrayIcon(const QString &icon);
+                TQPixmap loadSystemTrayIcon(const TQString &icon);
 
 		void kwalletdLaunch();
 
 	public slots:
 		void createWallet();
-		void deleteWallet(const QString& walletName);
-		void closeWallet(const QString& walletName);
-		void changeWalletPassword(const QString& walletName);
-		void openWallet(const QString& walletName);
-		void openWallet(const QString& walletName, bool newWallet);
-		void openWalletFile(const QString& path);
-		void openWallet(QIconViewItem *item);
-		void contextMenu(QIconViewItem *item, const QPoint& pos);
+		void deleteWallet(const TQString& walletName);
+		void closeWallet(const TQString& walletName);
+		void changeWalletPassword(const TQString& walletName);
+		void openWallet(const TQString& walletName);
+		void openWallet(const TQString& walletName, bool newWallet);
+		void openWalletFile(const TQString& path);
+		void openWallet(TQIconViewItem *item);
+		void contextMenu(TQIconViewItem *item, const TQPoint& pos);
 
 	protected:
 		virtual bool queryClose();
@@ -66,7 +66,7 @@ class KWalletManager : public KMainWindow, public DCOPObject {
 		void shuttingDown();
 		void possiblyQuit();
 		void editorClosed(KMainWindow* e);
-		void possiblyRescan(const QCString& app);
+		void possiblyRescan(const TQCString& app);
 		void setupWallet();
 		void openWallet();
 		void deleteWallet();
@@ -77,7 +77,7 @@ class KWalletManager : public KMainWindow, public DCOPObject {
 		bool _shuttingDown;
 		KWalletIconView *_iconView;
 		DCOPRef *_dcopRef;
-		QPtrList<KMainWindow> _windows;
+		TQPtrList<KMainWindow> _windows;
 		bool _kwalletdLaunch;
 };
 

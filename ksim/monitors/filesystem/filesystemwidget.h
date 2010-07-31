@@ -22,7 +22,7 @@
 
 #include <progress.h>
 
-#include <qptrlist.h>
+#include <tqptrlist.h>
 
 class KProcess;
 class QVBoxLayout;
@@ -31,16 +31,16 @@ class FilesystemWidget : public QWidget
 {
   Q_OBJECT
   public:
-    FilesystemWidget(QWidget *parent, const char *name);
+    FilesystemWidget(TQWidget *parent, const char *name);
     ~FilesystemWidget();
 
-    void append(int, const QString &);
-    void setText(uint, const QString &);
+    void append(int, const TQString &);
+    void setText(uint, const TQString &);
     void setValue(uint, int);
     void clear();
 
   protected:
-    bool eventFilter(QObject *, QEvent *);
+    bool eventFilter(TQObject *, TQEvent *);
 
   private slots:
     void receivedStderr(KProcess *, char *, int);
@@ -51,28 +51,28 @@ class FilesystemWidget : public QWidget
     {
       public:
         Filesystem();
-        Filesystem(KSim::Progress *, const QString &);
+        Filesystem(KSim::Progress *, const TQString &);
         ~Filesystem();
 
         KSim::Progress *display() const;
-        const QString &mountPoint() const;
-        const QString &text() const;
+        const TQString &mountPoint() const;
+        const TQString &text() const;
         int value() const;
 
-        void setText(const QString &);
+        void setText(const TQString &);
         void setValue(int);
 
-        QString m_mountPoint;
+        TQString m_mountPoint;
         KSim::Progress *m_display;
     };
 
-    void createProcess(const QString &, const QString &);
+    void createProcess(const TQString &, const TQString &);
     void showMenu(uint);
 
-    typedef QPtrList<Filesystem> ProgressList;
+    typedef TQPtrList<Filesystem> ProgressList;
     ProgressList m_list;
-    QVBoxLayout *m_layout;
+    TQVBoxLayout *m_layout;
     KProcess *m_process;
-    QString m_stderrString;
+    TQString m_stderrString;
 };
 #endif

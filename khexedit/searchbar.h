@@ -20,7 +20,7 @@
 #ifndef _SEARCHBAR_H_
 #define _SEARCHBAR_H_
 
-#include <qframe.h>
+#include <tqframe.h>
 
 #include "hexbuffer.h"
 
@@ -35,19 +35,19 @@ class CSearchBar : public QFrame
   Q_OBJECT
   
   public:
-    CSearchBar( QWidget *parent=0, const char *name=0, WFlags f=0 );
-    virtual bool eventFilter( QObject *o, QEvent *e );
+    CSearchBar( TQWidget *parent=0, const char *name=0, WFlags f=0 );
+    virtual bool eventFilter( TQObject *o, TQEvent *e );
 
   public slots:
     void cursorMoved();
 
   protected:
-    virtual void showEvent( QShowEvent * );
+    virtual void showEvent( TQShowEvent * );
 
   private slots:
     void hideWidget();
     void selectorChanged( int index );
-    void textChanged( const QString &text );
+    void textChanged( const TQString &text );
     void start();
 
   signals:
@@ -55,15 +55,15 @@ class CSearchBar : public QFrame
     void findData( SSearchControl &sc, uint mode, bool navigator );
 
   private:
-    QPushButton *mCloseButton;
-    QPushButton *mFindButton;
-    QComboBox   *mTypeCombo;
-    QLineEdit   *mInputEdit;
-    QCheckBox   *mBackwards;
-    QCheckBox   *mIgnoreCase;
+    TQPushButton *mCloseButton;
+    TQPushButton *mFindButton;
+    TQComboBox   *mTypeCombo;
+    TQLineEdit   *mInputEdit;
+    TQCheckBox   *mBackwards;
+    TQCheckBox   *mIgnoreCase;
 
-    QString       mFindString[5];
-    QByteArray    mFindData;
+    TQString       mFindString[5];
+    TQByteArray    mFindData;
     CHexValidator *mValidator;
     uint          mSearchMode;
 };

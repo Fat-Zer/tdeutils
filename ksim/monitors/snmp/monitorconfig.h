@@ -41,11 +41,11 @@ struct MonitorConfig
 
     bool isNull() const { return name.isEmpty() || host.isNull(); }
 
-    QWidget *createMonitorWidget( QWidget *parent, const char *name = 0 );
+    TQWidget *createMonitorWidget( TQWidget *parent, const char *name = 0 );
 
     HostConfig host;
-    QString name;
-    QString oid;
+    TQString name;
+    TQString oid;
     struct
     {
         uint minutes;
@@ -54,26 +54,26 @@ struct MonitorConfig
     DisplayType display;
 
     bool useCustomFormatString;
-    QString customFormatString;
+    TQString customFormatString;
 
     bool displayCurrentValueInline;
 };
 
-struct MonitorConfigMap : public QMap< QString, MonitorConfig >
+struct MonitorConfigMap : public TQMap< TQString, MonitorConfig >
 {
     MonitorConfigMap() {}
-    MonitorConfigMap( const QMap< QString, MonitorConfig > &rhs )
-        : QMap< QString, MonitorConfig >( rhs ) {}
+    MonitorConfigMap( const TQMap< TQString, MonitorConfig > &rhs )
+        : TQMap< TQString, MonitorConfig >( rhs ) {}
 
-    void load( KConfigBase &config, const QStringList &names, const HostConfigMap &hosts );
-    QStringList save( KConfigBase &config ) const;
+    void load( KConfigBase &config, const TQStringList &names, const HostConfigMap &hosts );
+    TQStringList save( KConfigBase &config ) const;
 };
 
-typedef QValueList<MonitorConfig> MonitorConfigList;
+typedef TQValueList<MonitorConfig> MonitorConfigList;
 
-QString monitorDisplayTypeToString( MonitorConfig::DisplayType type );
-MonitorConfig::DisplayType stringToMonitorDisplayType( QString string, bool *ok = 0 );
-QStringList allDisplayTypes();
+TQString monitorDisplayTypeToString( MonitorConfig::DisplayType type );
+MonitorConfig::DisplayType stringToMonitorDisplayType( TQString string, bool *ok = 0 );
+TQStringList allDisplayTypes();
 
 }
 

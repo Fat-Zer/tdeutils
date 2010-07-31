@@ -36,16 +36,16 @@ static const char version[] = "v0.5";
 
 
 /***************************************************************/
-KDFTopLevel::KDFTopLevel(QWidget *, const char *name)
+KDFTopLevel::KDFTopLevel(TQWidget *, const char *name)
   : KMainWindow(0, name)
 {
   kdf = new KDFWidget(this,"kdf",FALSE);
   Q_CHECK_PTR(kdf);
-  (void) new KAction( i18n( "&Update" ), 0, kdf, SLOT( updateDF() ), actionCollection(), "updatedf" );
+  (void) new KAction( i18n( "&Update" ), 0, kdf, TQT_SLOT( updateDF() ), actionCollection(), "updatedf" );
 
-  KStdAction::quit(this, SLOT(close()), actionCollection());
-  KStdAction::preferences(kdf, SLOT(settingsBtnClicked()), actionCollection());
-  KStdAction::keyBindings(guiFactory(), SLOT(configureShortcuts()), 
+  KStdAction::quit(this, TQT_SLOT(close()), actionCollection());
+  KStdAction::preferences(kdf, TQT_SLOT(settingsBtnClicked()), actionCollection());
+  KStdAction::keyBindings(guiFactory(), TQT_SLOT(configureShortcuts()), 
 actionCollection());
   setCentralWidget(kdf);
   //  kdf->setMinimumSize(kdf->sizeHint());

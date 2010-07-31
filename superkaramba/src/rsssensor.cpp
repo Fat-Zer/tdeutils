@@ -10,12 +10,12 @@
 
 #include "karambaapp.h"
 #include "rsssensor.h"
-#include <qdom.h>
-#include <qregexp.h>
+#include <tqdom.h>
+#include <tqregexp.h>
 #include <kurl.h>
 #include <kio/netaccess.h>
 
-RssSensor::RssSensor( const QString &src, int interval, const QString &form, const QString &enc)
+RssSensor::RssSensor( const TQString &src, int interval, const TQString &form, const TQString &enc)
     : Sensor(interval),
     source(src),
     format(form),
@@ -28,12 +28,12 @@ RssSensor::RssSensor( const QString &src, int interval, const QString &form, con
 
     if( !encoding.isEmpty() )
     {
-        codec = QTextCodec::codecForName( encoding.ascii() );
+        codec = TQTextCodec::codecForName( encoding.ascii() );
         if ( codec == 0)
-            codec = QTextCodec::codecForLocale();
+            codec = TQTextCodec::codecForLocale();
     }
     else
-        codec = QTextCodec::codecForLocale();
+        codec = TQTextCodec::codecForLocale();
 }
 
 RssSensor::~RssSensor()
@@ -42,9 +42,9 @@ RssSensor::~RssSensor()
 
 void RssSensor::update()
 {
-    QDomDocument doc;
-    QFile file;
-    QString tmpFile;
+    TQDomDocument doc;
+    TQFile file;
+    TQString tmpFile;
     bool OK = false;
 
 #if defined(KDE_3_3)
@@ -79,7 +79,7 @@ void RssSensor::update()
         SensorParams *sp;
         Meter *meter;
 
-        QObjectListIt it( *objList );
+        TQObjectListIt it( *objList );
         while (it != 0)
         {
             sp = (SensorParams*)(*it);
@@ -89,12 +89,12 @@ void RssSensor::update()
             // clickmap to reset its data lists
             meter->setValue(0);
 
-            QDomElement docElem = doc.documentElement();
-            QDomNode n = docElem.firstChild();
+            TQDomElement docElem = doc.documentElement();
+            TQDomNode n = docElem.firstChild();
             if (!n.isNull())
             {
-                QDomNodeList links = docElem.elementsByTagName( "link" );
-                QDomNodeList displays;
+                TQDomNodeList links = docElem.elementsByTagName( "link" );
+                TQDomNodeList displays;
                 if ( format.contains( "%d", false ) > 0 )
                 {
                     displays = docElem.elementsByTagName( "description" );
@@ -104,11 +104,11 @@ void RssSensor::update()
                     displays = docElem.elementsByTagName( "title" );
                 }
 
-                QRegExp rx("^http://", false );
+                TQRegExp rx("^http://", false );
                 for (uint i=1; i < displays.count(); ++i )
                 {
-                    QString dispTxt = displays.item( i ).toElement().text();
-                    QString linkTxt = links.item( i ).toElement().text();
+                    TQString dispTxt = displays.item( i ).toElement().text();
+                    TQString linkTxt = links.item( i ).toElement().text();
                     if( (rx.search(dispTxt) == -1) && (rx.search(linkTxt) != -1) )
                     {
                         meter->setValue( dispTxt );

@@ -28,7 +28,7 @@
 #include "snmp.h"
 #include "walker.h"
 
-#include <qvaluestack.h>
+#include <tqvaluestack.h>
 
 namespace KSim
 {
@@ -40,27 +40,27 @@ class BrowseDialog : public BrowseDialogBase
 {
     Q_OBJECT
 public:
-    BrowseDialog( const HostConfig &hostConfig, const QString &currentOid, QWidget *parent, const char *name = 0 );
+    BrowseDialog( const HostConfig &hostConfig, const TQString &currentOid, TQWidget *parent, const char *name = 0 );
 
-    QString selectedObjectIdentifier() const;
+    TQString selectedObjectIdentifier() const;
 
 protected:
     virtual void stopAllWalks();
     virtual void applyFilter();
-    virtual void objectSelected( QListViewItem *item );
+    virtual void objectSelected( TQListViewItem *item );
 
 private slots:
     void insertBrowseItem( const Walker::Result &browseResult );
     void nextWalk();
 
 private:
-    void applyFilter( QListViewItem *item );
+    void applyFilter( TQListViewItem *item );
     void startWalk( const Identifier &startOid );
     void stopWalker();
 
     HostConfig m_host;
     Walker *m_walker;
-    QValueStack<QString> baseOids;
+    TQValueStack<TQString> baseOids;
 };
 
 }

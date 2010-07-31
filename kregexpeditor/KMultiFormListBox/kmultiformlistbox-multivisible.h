@@ -32,7 +32,7 @@
 /**
    @internal
 */
-class KMultiFormListBoxMultiVisible :public QScrollView, KMultiFormListBoxShower {
+class KMultiFormListBoxMultiVisible :public TQScrollView, KMultiFormListBoxShower {
 
 Q_OBJECT
 
@@ -44,7 +44,7 @@ private:
 		 class which is repeated in the KMultiFormListBox
 		 @param parent A pointer to the parent widget
   */
-  KMultiFormListBoxMultiVisible(KMultiFormListBoxFactory *factory, QWidget *parent = 0, const char *name = 0);
+  KMultiFormListBoxMultiVisible(KMultiFormListBoxFactory *factory, TQWidget *parent = 0, const char *name = 0);
 
   /**
 		 @return The elements in the KMultiFormListBox
@@ -52,7 +52,7 @@ private:
   KMultiFormListBoxEntryList elements();
   void append(KMultiFormListBoxEntry *);
 
-  QWidget* qWidget() { return this; }
+  TQWidget* qWidget() { return this; }
 
 
 public slots:
@@ -109,11 +109,11 @@ protected:
 
   friend class CCP;
 
-  virtual void resizeEvent(QResizeEvent *);
-  void addElemBefore(KMultiFormListBoxEntry *newElm, QWidget *existing);
+  virtual void resizeEvent(TQResizeEvent *);
+  void addElemBefore(KMultiFormListBoxEntry *newElm, TQWidget *existing);
   void insertElmIntoWidget(KMultiFormListBoxEntry *elm, KMultiFormListBoxEntry *after);
   void showWidget(KMultiFormListBoxEntry *elm);
-  void delElement(QWidget *);
+  void delElement(TQWidget *);
   void delAnElement();
   void addElemBefore(KMultiFormListBoxEntry *newElm, KMultiFormListBoxEntry *existing);
   void updateClipperContent();
@@ -126,8 +126,8 @@ private:
 
   KMultiFormListBoxFactory *factory;
   WidgetList *elms;
-  QPushButton *addBut;
-  QByteArray clipboard;
+  TQPushButton *addBut;
+  TQByteArray clipboard;
 };
 
 

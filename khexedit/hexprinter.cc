@@ -107,7 +107,7 @@ void CHexPrinter::setPageFooter( bool enable, uint left, uint center,
 
 SPageMargin CHexPrinter::pageMargin( void )
 {
-  QPaintDeviceMetrics metric( this );
+  TQPaintDeviceMetrics metric( this );
   float f = (float)metric.width()/(float)metric.widthMM();
     
   SPageMargin margin;
@@ -128,7 +128,7 @@ SPageMargin CHexPrinter::pageMarginMM( void )
 
 SPageSize CHexPrinter::pageFullSize( void )
 {
-  QPaintDeviceMetrics metric( this );
+  TQPaintDeviceMetrics metric( this );
   SPageSize size;
   size.width = metric.width();
   size.height = metric.height();
@@ -139,7 +139,7 @@ SPageSize CHexPrinter::pageFullSize( void )
 
 SPageSize CHexPrinter::pageUsableSize( void )
 {
-  QPaintDeviceMetrics metric( this );
+  TQPaintDeviceMetrics metric( this );
   SPageMargin margin = pageMargin();
   SPageSize size;
 

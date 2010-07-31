@@ -22,10 +22,10 @@
 #ifndef _STATUSBAR_PROGRESS_H_
 #define _STATUSBAR_PROGRESS_H_
 
-#include <qframe.h>
-#include <qrangecontrol.h>
+#include <tqframe.h>
+#include <tqrangecontrol.h>
 
-class CStatusBarProgress : public QFrame, public QRangeControl 
+class CStatusBarProgress : public TQFrame, public TQRangeControl 
 {
   Q_OBJECT
 
@@ -46,18 +46,18 @@ class CStatusBarProgress : public QFrame, public QRangeControl
   /** 
   * Construct a default progress bar. Orientation is horizontal. 
   */
-  CStatusBarProgress(QWidget *parent=0, const char *name=0);
+  CStatusBarProgress(TQWidget *parent=0, const char *name=0);
 
   /** 
   * Construct a KProgress bar with an orientation. 
   */
-  CStatusBarProgress(Orientation, QWidget *parent=0, const char *name=0);
+  CStatusBarProgress(Orientation, TQWidget *parent=0, const char *name=0);
 
   /** 
   * Construct a KProgress bar with minimum, maximum and initial value. 
   */
   CStatusBarProgress(int minValue, int maxValue, int value, Orientation, 
-		     QWidget *parent=0, const char *name=0);
+		     TQWidget *parent=0, const char *name=0);
 	
   /** 
   * Destructor 
@@ -72,12 +72,12 @@ class CStatusBarProgress : public QFrame, public QRangeControl
   /** 
   * Set the color of the progress bar. 
   */
-  void setBarColor(const QColor &); 
+  void setBarColor(const TQColor &); 
   
   /** 
   * Set a pixmap to be shown in the progress bar. 
   */
-  void setBarPixmap(const QPixmap &);
+  void setBarPixmap(const TQPixmap &);
 
   /** 
   * Set the orientation of the progress bar. 
@@ -93,12 +93,12 @@ class CStatusBarProgress : public QFrame, public QRangeControl
   /** 
   * Retrieve the bar color. 
   */
-  const QColor &barColor() const;
+  const TQColor &barColor() const;
 
   /** 
   * Retrieve the bar pixmap. 
   */
-  const QPixmap *barPixmap() const;
+  const TQPixmap *barPixmap() const;
 
   /** 
   * Retrieve the orientation. 
@@ -114,7 +114,7 @@ class CStatusBarProgress : public QFrame, public QRangeControl
    * Returns the recommended width for vertical progress bars or
    * the recommended height for vertical progress bars
    */
-  virtual QSize sizeHint() const;
+  virtual TQSize sizeHint() const;
 	
 		
   public slots:
@@ -122,7 +122,7 @@ class CStatusBarProgress : public QFrame, public QRangeControl
     void setValue( int, int); 
     void advance( int );
     void setTextEnabled( bool state );
-    void setText( const QString &msg );
+    void setText( const TQString &msg );
 	
   signals:
     void percentageChanged(int);
@@ -132,26 +132,26 @@ class CStatusBarProgress : public QFrame, public QRangeControl
     void valueChange();
     void rangeChange();
     void styleChange( GUIStyle );
-    void paletteChange( const QPalette & );
-    void drawContents( QPainter * );
-    void mousePressEvent( QMouseEvent *e );
+    void paletteChange( const TQPalette & );
+    void drawContents( TQPainter * );
+    void mousePressEvent( TQMouseEvent *e );
 	
   private:
-    QPixmap     *mBarPixmap;
+    TQPixmap     *mBarPixmap;
     QColor	mBarColor;
     QColor	mBarTextColor;
     QColor	mTextColor;
-    QRect       fr;
+    TQRect       fr;
     BarStyle    mBarStyle;
     Orientation mOrientation;
     bool	mTextEnabled;
-    QString     mMsg;
+    TQString     mMsg;
     int         mCurPage;
     int         mMaxPage;
 
     void initialize( void );
     int recalcValue( int );
-    void drawText( QPainter * );
+    void drawText( TQPainter * );
     void adjustStyle( void );
 };
 

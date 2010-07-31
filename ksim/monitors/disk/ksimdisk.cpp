@@ -20,13 +20,13 @@
 #include "ksimdisk.h"
 #include "ksimdisk.moc"
 
-#include <qtextstream.h>
-#include <qregexp.h>
-#include <qtimer.h>
-#include <qlayout.h>
-#include <qradiobutton.h>
-#include <qvbuttongroup.h>
-#include <qpushbutton.h>
+#include <tqtextstream.h>
+#include <tqregexp.h>
+#include <tqtimer.h>
+#include <tqlayout.h>
+#include <tqradiobutton.h>
+#include <tqvbuttongroup.h>
+#include <tqpushbutton.h>
 
 #include <kdebug.h>
 #include <kaboutapplication.h>
@@ -90,7 +90,7 @@ KSim::PluginPage *DiskPlugin::createConfigPage(const char *className)
 
 void DiskPlugin::showAbout()
 {
-  QString version = kapp->aboutData()->version();
+  TQString version = kapp->aboutData()->version();
 
   KAboutData aboutData(instanceName(),
      I18N_NOOP("KSim Disk Plugin"), version.latin1(),
@@ -110,23 +110,23 @@ DiskView::DiskView(KSim::PluginObject *parent, const char *name)
   m_bLinux24 = true;
   m_procStream = 0L;
   if ((m_procFile = fopen("/proc/stat", "r")))
-    m_procStream = new QTextStream(m_procFile, IO_ReadOnly);
+    m_procStream = new TQTextStream(m_procFile, IO_ReadOnly);
 #endif
 
   config()->setGroup("DiskPlugin");
-  m_list = config()->readListEntry("Disks", QStringList() << "complete");
+  m_list = config()->readListEntry("Disks", TQStringList() << "complete");
   m_useSeperatly = config()->readBoolEntry("UseSeperatly", true);
 
   m_firstTime = 1;
   m_addAll = false;
-  m_layout = new QVBoxLayout(this);
-  QSpacerItem *item = new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Expanding);
+  m_layout = new TQVBoxLayout(this);
+  TQSpacerItem *item = new TQSpacerItem(0, 0, TQSizePolicy::Expanding, TQSizePolicy::Expanding);
   m_layout->addItem(item);
 
   init();
 
-  m_timer = new QTimer(this);
-  connect(m_timer, SIGNAL(timeout()), SLOT(updateDisplay()));
+  m_timer = new TQTimer(this);
+  connect(m_timer, TQT_SIGNAL(timeout()), TQT_SLOT(updateDisplay()));
   m_timer->start(DISK_SPEED);
   updateDisplay();
 }
@@ -144,7 +144,7 @@ DiskView::~DiskView()
 void DiskView::reparseConfig()
 {
   config()->setGroup("DiskPlugin");
-  QStringList list = config()->readListEntry("Disks", QStringList() << "complete");
+  TQStringList list = config()->readListEntry("Disks", TQStringList() << "complete");
   m_useSeperatly = config()->readBoolEntry("UseSeperatly", true);
 
   if (list != m_list) {
@@ -152,7 +152,7 @@ void DiskView::reparseConfig()
     m_timer->stop();
     cleanup();
 
-    QPtrListIterator<DiskPair> it(m_diskList);
+    TQPtrListIterator<DiskPair> it(m_diskList);
     for (; it.current(); ++it) {
       delete it.current()->first;
       delete it.current()->second;
@@ -165,7 +165,7 @@ void DiskView::reparseConfig()
   }
 }
 
-DiskView::DiskData DiskView::findDiskData(const DiskList& diskList, QString diskName)
+DiskView::DiskData DiskView::findDiskData(const DiskList& diskList, TQString diskName)
 {
   if (diskName == "complete")
      diskName = i18n("All Disks");
@@ -203,7 +203,7 @@ void DiskView::updateDisplay()
   }
 
   // merge all the disks into one
-  QPtrListIterator<DiskPair> it(m_diskList);
+  TQPtrListIterator<DiskPair> it(m_diskList);
   for (int i = 0; it.current(); ++it, ++i) {
     DiskData diskData = findDiskData(diskList, m_list[i]);
     m_data[i].second = m_data[i].first;
@@ -246,8 +246,8 @@ void DiskView::updateData(DiskList &disks)
   {
     // here we need a regexp to match something like:
     // (3,0):(108911,48080,1713380,60831,1102644)
-    QRegExp regexp("\\([0-9]+,[0-9]+\\):\\([0-9]+,[0-9]+,[0-9]+,[0-9]+,[0-9]+\\)");
-    QString content = m_procStream->read();
+    TQRegExp regexp("\\([0-9]+,[0-9]+\\):\\([0-9]+,[0-9]+,[0-9]+,[0-9]+,[0-9]+\\)");
+    TQString content = m_procStream->read();
     if (content.find("disk_io") == -1)
     {
        m_bLinux24 = false;
@@ -257,7 +257,7 @@ void DiskView::updateData(DiskList &disks)
        fclose(m_procFile);
        
        if ((m_procFile = fopen("/proc/diskstats", "r")))
-          m_procStream = new QTextStream(m_procFile, IO_ReadOnly);
+          m_procStream = new TQTextStream(m_procFile, IO_ReadOnly);
        
        updateData(disks);
        return;
@@ -266,11 +266,11 @@ void DiskView::updateData(DiskList &disks)
     while ((idx = regexp.search(content, idx)) != -1)
     {
       idx += regexp.matchedLength();
-      QString diskStr = regexp.cap(0);
+      TQString diskStr = regexp.cap(0);
       diskStr.replace(':', ',');
-      diskStr.replace(QRegExp("\\)?\\(?"), QString::null);
+      diskStr.replace(TQRegExp("\\)?\\(?"), TQString::null);
 
-      QStringList list = QStringList::split(',', diskStr);
+      TQStringList list = TQStringList::split(',', diskStr);
       if (list.count() < 7)
         continue;
 
@@ -322,14 +322,14 @@ void DiskView::updateData(DiskList &disks)
     //    (field 9) times the number of milliseconds spent doing I/O since the
     //    last update of this field.  This can provide an easy measure of both
     //    I/O completion time and the backlog that may be accumulating.
-    QString content = m_procStream->read();
-    QStringList lines = QStringList::split('\n', content);
+    TQString content = m_procStream->read();
+    TQStringList lines = TQStringList::split('\n', content);
 
-    for(QStringList::ConstIterator it = lines.begin();
+    for(TQStringList::ConstIterator it = lines.begin();
         it != lines.end(); ++it)
     {
-      QString diskStr = (*it).simplifyWhiteSpace();
-      QStringList list = QStringList::split(' ', diskStr);
+      TQString diskStr = (*it).simplifyWhiteSpace();
+      TQStringList list = TQStringList::split(' ', diskStr);
       if (list.count() < 14)
         continue;
 
@@ -391,7 +391,7 @@ void DiskView::updateData(DiskList &disks)
 
     DiskData diskData;
     diskData.name = device.device_name
-       + QString::number(device.unit_number);
+       + TQString::number(device.unit_number);
     diskData.major = device.device_number;
     diskData.minor = 0;
     diskData.total = readBlocks + writeBlocks;
@@ -407,26 +407,26 @@ void DiskView::updateData(DiskList &disks)
 #endif
 }
 
-QString DiskView::diskName( int major, int minor ) const
+TQString DiskView::diskName( int major, int minor ) const
 {
 #ifdef Q_OS_LINUX
-  QString returnValue;
+  TQString returnValue;
   switch ( major )
   {
     case IDE0_MAJOR:
-      returnValue.prepend(QString::fromLatin1("hda"));
+      returnValue.prepend(TQString::fromLatin1("hda"));
       break;
     case IDE1_MAJOR:
-      returnValue.prepend(QString::fromLatin1("hdc"));
+      returnValue.prepend(TQString::fromLatin1("hdc"));
       break;
     case IDE3_MAJOR:
-      returnValue.prepend(QString::fromLatin1("hde"));
+      returnValue.prepend(TQString::fromLatin1("hde"));
       break;
     case SCSI_DISK0_MAJOR:
-      returnValue.prepend(QString::fromLatin1("sda"));
+      returnValue.prepend(TQString::fromLatin1("sda"));
       break;
     case SCSI_GENERIC_MAJOR:
-      returnValue.prepend(QString::fromLatin1("sg0"));
+      returnValue.prepend(TQString::fromLatin1("sg0"));
       break;
   }
 
@@ -457,7 +457,7 @@ void DiskView::init()
 {
   m_data.resize(m_list.size());
 
-  QStringList::ConstIterator it;
+  TQStringList::ConstIterator it;
   for (it = m_list.begin(); it != m_list.end(); ++it) {
     if ((*it) == "complete")
       m_addAll = true;
@@ -475,42 +475,42 @@ void DiskView::cleanup()
 DiskConfig::DiskConfig(KSim::PluginObject *parent, const char *name)
    : KSim::PluginPage(parent, name)
 {
-  m_layout = new QVBoxLayout(this);
+  m_layout = new TQVBoxLayout(this);
   m_layout->setSpacing(6);
 
   m_listview = new KListView(this);
   m_listview->addColumn(i18n("Disks"));
   m_layout->addWidget(m_listview);
 
-  QHBoxLayout *layout = new QHBoxLayout;
+  TQHBoxLayout *layout = new QHBoxLayout;
   layout->setSpacing(6);
 
-  QSpacerItem *spacer = new QSpacerItem(20, 20,
-     QSizePolicy::Expanding, QSizePolicy::Minimum);
+  TQSpacerItem *spacer = new TQSpacerItem(20, 20,
+     TQSizePolicy::Expanding, TQSizePolicy::Minimum);
   layout->addItem(spacer);
 
-  m_add = new QPushButton(this);
+  m_add = new TQPushButton(this);
   m_add->setText(i18n("Add..."));
-  connect(m_add, SIGNAL(clicked()), SLOT(addItem()));
+  connect(m_add, TQT_SIGNAL(clicked()), TQT_SLOT(addItem()));
   layout->addWidget(m_add);
 
-  m_remove = new QPushButton(this);
+  m_remove = new TQPushButton(this);
   m_remove->setText(i18n("Remove"));
-  connect(m_remove, SIGNAL(clicked()), SLOT(removeItem()));
+  connect(m_remove, TQT_SIGNAL(clicked()), TQT_SLOT(removeItem()));
   layout->addWidget(m_remove);
   m_layout->addLayout(layout);
 
-  m_buttonBox = new QVButtonGroup(i18n("Disk Styles"), this);
+  m_buttonBox = new TQVButtonGroup(i18n("Disk Styles"), this);
   m_layout->addWidget(m_buttonBox);
 
-  m_totalButton = new QRadioButton(m_buttonBox);
+  m_totalButton = new TQRadioButton(m_buttonBox);
   m_totalButton->setText(i18n("Display the read and write data as one"));
-  m_bothButton = new QRadioButton(m_buttonBox);
+  m_bothButton = new TQRadioButton(m_buttonBox);
   m_bothButton->setText(i18n("Display the read and write data"
      "\nseparately as in/out data"));
 
-  QSpacerItem *vSpacer = new QSpacerItem(20, 20,
-     QSizePolicy::Minimum, QSizePolicy::Expanding);
+  TQSpacerItem *vSpacer = new TQSpacerItem(20, 20,
+     TQSizePolicy::Minimum, TQSizePolicy::Expanding);
   m_layout->addItem(vSpacer);
 }
 
@@ -522,20 +522,20 @@ void DiskConfig::readConfig()
 {
   config()->setGroup("DiskPlugin");
   m_buttonBox->setButton(config()->readBoolEntry("UseSeperatly", true));
-  QStringList list = config()->readListEntry("Disks");
+  TQStringList list = config()->readListEntry("Disks");
 
-  QStringList::ConstIterator it;
+  TQStringList::ConstIterator it;
   for (it = list.begin(); it != list.end(); ++it) {
-    QString text = ((*it) == "complete" ? i18n("All Disks") : (*it));
+    TQString text = ((*it) == "complete" ? i18n("All Disks") : (*it));
     if (!m_listview->findItem(text, 0))
-      new QListViewItem(m_listview, text);
+      new TQListViewItem(m_listview, text);
   }
 }
 
 void DiskConfig::saveConfig()
 {
-  QStringList list;
-  for (QListViewItemIterator it(m_listview); it.current(); ++it) {
+  TQStringList list;
+  for (TQListViewItemIterator it(m_listview); it.current(); ++it) {
     if (it.current()->text(0) == i18n("All Disks"))
       list.append("complete");
     else
@@ -550,14 +550,14 @@ void DiskConfig::saveConfig()
 void DiskConfig::addItem()
 {
   bool ok = false;
-  QString text = KInputDialog::getText(i18n("Add Disk Device"), i18n("Disk name:"),
-     QString::null, &ok, this);
+  TQString text = KInputDialog::getText(i18n("Add Disk Device"), i18n("Disk name:"),
+     TQString::null, &ok, this);
   
   if (text.startsWith("/dev/"))
     text = text.mid(5);
 
   if (ok)
-    new QListViewItem(m_listview, text);
+    new TQListViewItem(m_listview, text);
 }
 
 void DiskConfig::removeItem()
@@ -565,6 +565,6 @@ void DiskConfig::removeItem()
   if (!m_listview->selectedItem())
     return;
 
-  QListViewItem *item = m_listview->selectedItem();
+  TQListViewItem *item = m_listview->selectedItem();
   delete item;
 }

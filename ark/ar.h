@@ -42,16 +42,16 @@ class ArArch : public Arch
   Q_OBJECT
 public:
   ArArch( ArkWidget *_gui,
-	   const QString & _fileName );
+	   const TQString & _fileName );
   virtual ~ArArch() {}
 
   virtual void open();
   virtual void create();
 	
-  virtual void addFile( const QStringList & );
-  virtual void addDir(const QString &) {} // never gets called
+  virtual void addFile( const TQStringList & );
+  virtual void addDir(const TQString &) {} // never gets called
 
-  virtual void remove(QStringList *);
+  virtual void remove(TQStringList *);
   virtual void unarchFileInternal();
 
 private:

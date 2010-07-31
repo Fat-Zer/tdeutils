@@ -35,7 +35,7 @@ KEditor::KEditor( KBufferCursor *BC, KHexEdit* HE, KController *P )
 }
 
 
-bool KEditor::handleKeyPress( QKeyEvent *KeyEvent )
+bool KEditor::handleKeyPress( TQKeyEvent *KeyEvent )
 {
   bool clearUndoRedoInfo = true;
   bool ShiftPressed =  KeyEvent->state() & Qt::ShiftButton;

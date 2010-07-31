@@ -29,7 +29,7 @@ class KSim::Base::Private
   public:
     int type;
     bool theme;
-    QString string;
+    TQString string;
 };
 
 KSim::Base::Base()
@@ -76,12 +76,12 @@ int KSim::Base::type() const
   return d->type;
 }
 
-void KSim::Base::setConfigString(const QString &string)
+void KSim::Base::setConfigString(const TQString &string)
 {
   d->string = string;
 }
 
-const QString &KSim::Base::configString() const
+const TQString &KSim::Base::configString() const
 {
   return d->string;
 }

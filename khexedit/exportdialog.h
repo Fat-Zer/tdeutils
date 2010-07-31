@@ -57,46 +57,46 @@ class CExportDialog : public KDialogBase
       option_max
     };
 
-    CExportDialog( QWidget *parent = 0, char *name = 0, bool modal = false );
+    CExportDialog( TQWidget *parent = 0, char *name = 0, bool modal = false );
     ~CExportDialog( void );
     void writeConfiguration( void );
 
   protected:
-    void showEvent( QShowEvent *e );
+    void showEvent( TQShowEvent *e );
 
   protected slots:
     virtual void slotOk( void );
-  void  destinationChanged(const QString &);
+  void  destinationChanged(const TQString &);
   private:
     struct SDestinationWidgets
     {
-      QComboBox    *formatCombo;
-      QLabel       *fileExtraLabel;
-      QLineEdit    *fileInput;
-      QLabel       *fromLabel;
-      QLabel       *toLabel;
-      QButtonGroup *rangeBox;
-      QLineEdit    *fromInput;
-      QLineEdit    *toInput;
+      TQComboBox    *formatCombo;
+      TQLabel       *fileExtraLabel;
+      TQLineEdit    *fileInput;
+      TQLabel       *fromLabel;
+      TQLabel       *toLabel;
+      TQButtonGroup *rangeBox;
+      TQLineEdit    *fromInput;
+      TQLineEdit    *toInput;
     };
 
     struct SHtmlWidgets 
     {
-      QSpinBox  *lineSpin;
-      QLineEdit *prefixInput;
-      QComboBox *topCombo;
-      QComboBox *bottomCombo;
-      QCheckBox *navigatorCheck;
-      QCheckBox *symlinkCheck;
-      QCheckBox *bwCheck;
+      TQSpinBox  *lineSpin;
+      TQLineEdit *prefixInput;
+      TQComboBox *topCombo;
+      TQComboBox *bottomCombo;
+      TQCheckBox *navigatorCheck;
+      TQCheckBox *symlinkCheck;
+      TQCheckBox *bwCheck;
     };
 
     struct SArrayWidgets 
     {
-      QLineEdit *nameInput;
-      QComboBox *typeCombo;
-      QSpinBox  *lineSizeSpin;
-      QCheckBox *hexadecimalCheck;
+      TQLineEdit *nameInput;
+      TQComboBox *typeCombo;
+      TQSpinBox  *lineSizeSpin;
+      TQCheckBox *hexadecimalCheck;
     };
 
   private slots:
@@ -113,7 +113,7 @@ class CExportDialog : public KDialogBase
     void makeCArrayOption( void );
     void readConfiguration( void );
     bool collectRange( uint &mode, uint &start, uint &stop );
-    bool verifyPackage( const QString &path );
+    bool verifyPackage( const TQString &path );
     
   signals:
     void exportText( const SExportText &e );
@@ -121,14 +121,14 @@ class CExportDialog : public KDialogBase
     void exportCArray( const SExportCArray &e );
 
   private:
-    QFrame *mFrame[ page_max ];
-    QWidgetStack *mOptionStack;
+    TQFrame *mFrame[ page_max ];
+    TQWidgetStack *mOptionStack;
     SDestinationWidgets  mDestination;
     SHtmlWidgets  mHtml;
     SArrayWidgets mArray;
     KSimpleConfig *mConfig;
 
-    QString mWorkDir;
+    TQString mWorkDir;
 };
 
 

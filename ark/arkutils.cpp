@@ -70,13 +70,13 @@
 #include <klargefile.h>
 
 // Qt includes
-#include <qfile.h>
+#include <tqfile.h>
 
 #include "arkutils.h"
 
-QString ArkUtils::getTimeStamp(const QString &_month,
-                            const QString &_day,
-                            const QString &_yearOrTime)
+TQString ArkUtils::getTimeStamp(const TQString &_month,
+                            const TQString &_day,
+                            const TQString &_yearOrTime)
 {
   // Make the date format sortable.
   // Month is in _month, day is in _day.
@@ -99,7 +99,7 @@ QString ArkUtils::getTimeStamp(const QString &_month,
   int thisYear = now->tm_year + 1900;
   int thisMonth = now->tm_mon + 1;
 
-  QString year, timestamp;
+  TQString year, timestamp;
 
   if (_yearOrTime.contains(":"))
     // it has a timestamp so we have to figure out the year
@@ -118,7 +118,7 @@ QString ArkUtils::getTimeStamp(const QString &_month,
       timestamp = "??:??";
     }
 
-  QString retval;
+  TQString retval;
   retval.sprintf("%s-%.2d-%.2d %s",
                  year.utf8().data(), nMonth, nDay,
                  timestamp.utf8().data());
@@ -154,7 +154,7 @@ int ArkUtils::getYear(int theMonth, int thisYear, int thisMonth)
     return thisYear;
 }
 
-QString ArkUtils::fixYear(const QString& strYear)
+TQString ArkUtils::fixYear(const TQString& strYear)
 {
   // returns 4-digit year by guessing from two-char year string.
   // Remember: this is used for file timestamps. There probably aren't any
@@ -173,27 +173,27 @@ QString ArkUtils::fixYear(const QString& strYear)
     else
       y += 2000;
 
-    return QString::number( y );
+    return TQString::number( y );
   }
   else
-    return QString::null;
+    return TQString::null;
 }
 
 bool
-ArkUtils::haveDirPermissions( const QString &strFile )
+ArkUtils::haveDirPermissions( const TQString &strFile )
 {
-  return ( access( QFile::encodeName( strFile ), W_OK ) == 0 );
+  return ( access( TQFile::encodeName( strFile ), W_OK ) == 0 );
 }
 
 bool
-ArkUtils::diskHasSpace(const QString &dir, KIO::filesize_t size)
+ArkUtils::diskHasSpace(const TQString &dir, KIO::filesize_t size)
   // check if disk has enough space to accommodate (a) new file(s) of
   // the given size in the partition containing the given directory
 {
   kdDebug( 1601 ) << "diskHasSpace() " << "dir: " << dir << " Size: " << size << endl;
   
   struct STATFS buf;
-  if (STATFS(QFile::encodeName(dir), &buf) == 0)
+  if (STATFS(TQFile::encodeName(dir), &buf) == 0)
   {
     double nAvailable = (double)buf.f_bavail * buf.f_bsize;
     if ( nAvailable < (double)size )
@@ -212,17 +212,17 @@ ArkUtils::diskHasSpace(const QString &dir, KIO::filesize_t size)
 }
 
 KIO::filesize_t
-ArkUtils::getSizes(QStringList *list)
+ArkUtils::getSizes(TQStringList *list)
 {
   KIO::filesize_t sum = 0;
-  QString str;
+  TQString str;
   KDE_struct_stat st;
 
-  for ( QStringList::Iterator it = list->begin(); it != list->end(); ++it)
+  for ( TQStringList::Iterator it = list->begin(); it != list->end(); ++it)
   {
     str = *it;
     str = str.right(str.length()-5);
-    if (KDE_stat(QFile::encodeName(str), &st ) < 0)
+    if (KDE_stat(TQFile::encodeName(str), &st ) < 0)
        continue;
     sum += st.st_size;
   }

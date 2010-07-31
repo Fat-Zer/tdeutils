@@ -27,23 +27,23 @@
 class MultiContainerWidget :public RegExpWidget
 {
 public:
-  MultiContainerWidget( RegExpEditorWindow* editorWindow, QWidget* parent = 0,
+  MultiContainerWidget( RegExpEditorWindow* editorWindow, TQWidget* parent = 0,
                    const char* name = 0);
   virtual bool hasSelection() const;
   virtual void clearSelection();
   virtual void deleteSelection();
   virtual void addNewChild(DragAccepter *accepter, RegExpWidget *child);
   virtual bool updateSelection(bool parentSelected);
-  virtual QRect selectionRect() const;
-  virtual RegExpWidget* widgetUnderPoint( QPoint globalPos, bool justVisibleWidgets );
-  virtual RegExpWidget* findWidgetToEdit( QPoint globalPos );
+  virtual TQRect selectionRect() const;
+  virtual RegExpWidget* widgetUnderPoint( TQPoint globalPos, bool justVisibleWidgets );
+  virtual RegExpWidget* findWidgetToEdit( TQPoint globalPos );
   virtual void selectWidget( bool sel );
   virtual void updateAll();
   virtual void updateCursorRecursively();
 
 protected:
   void append( RegExpWidget* child );
-  QPtrList<RegExpWidget> _children;
+  TQPtrList<RegExpWidget> _children;
 };
 
 

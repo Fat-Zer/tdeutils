@@ -19,8 +19,8 @@
 #ifndef REGEXPCONVERTER_H
 #define REGEXPCONVERTER_H
 
-#include <qstring.h>
-#include <qvaluelist.h>
+#include <tqstring.h>
+#include <tqvaluelist.h>
 
 class QTextEdit;
 class AltnRegExp;
@@ -50,26 +50,26 @@ public:
     };
 
     virtual bool canParse() = 0;
-    virtual QString name() = 0;
+    virtual TQString name() = 0;
     virtual int features() = 0;
-    virtual RegExp* parse( const QString&, bool* ok );
-    QString toStr( RegExp*, bool markSelection );
-    virtual RegexpHighlighter* highlighter( QTextEdit* );
+    virtual RegExp* parse( const TQString&, bool* ok );
+    TQString toStr( RegExp*, bool markSelection );
+    virtual RegexpHighlighter* highlighter( TQTextEdit* );
 
     static void setCurrent( RegExpConverter* );
     static RegExpConverter* current();
 
 protected:
-    virtual QString toString( AltnRegExp*, bool markSelection ) = 0;
-    virtual QString toString( ConcRegExp*, bool markSelection ) = 0;
-    virtual QString toString( LookAheadRegExp*, bool markSelection ) = 0;
-    virtual QString toString( TextRangeRegExp*, bool markSelection ) = 0;
-    virtual QString toString( CompoundRegExp*, bool markSelection ) = 0;
-    virtual QString toString( DotRegExp*, bool markSelection ) = 0;
-    virtual QString toString( PositionRegExp*, bool markSelection ) = 0;
-    virtual QString toString( RepeatRegExp*, bool markSelection ) = 0;
-    virtual QString toString( TextRegExp*, bool markSelection ) = 0;
-    QString escape( QString text, QValueList<QChar> chars, QChar escapeChar) const;
+    virtual TQString toString( AltnRegExp*, bool markSelection ) = 0;
+    virtual TQString toString( ConcRegExp*, bool markSelection ) = 0;
+    virtual TQString toString( LookAheadRegExp*, bool markSelection ) = 0;
+    virtual TQString toString( TextRangeRegExp*, bool markSelection ) = 0;
+    virtual TQString toString( CompoundRegExp*, bool markSelection ) = 0;
+    virtual TQString toString( DotRegExp*, bool markSelection ) = 0;
+    virtual TQString toString( PositionRegExp*, bool markSelection ) = 0;
+    virtual TQString toString( RepeatRegExp*, bool markSelection ) = 0;
+    virtual TQString toString( TextRegExp*, bool markSelection ) = 0;
+    TQString escape( TQString text, TQValueList<TQChar> chars, TQChar escapeChar) const;
 
 private:
     static RegExpConverter* _current;

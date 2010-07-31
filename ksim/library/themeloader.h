@@ -20,11 +20,11 @@
 #ifndef THEMELOADER_H
 #define THEMELOADER_H
 
-#include <qstring.h>
-#include <qrect.h>
-#include <qcolor.h>
-#include <qfont.h>
-#include <qvaluelist.h>
+#include <tqstring.h>
+#include <tqrect.h>
+#include <tqcolor.h>
+#include <tqfont.h>
+#include <tqvaluelist.h>
 
 #include <kdemacros.h>
 
@@ -56,15 +56,15 @@ namespace KSim
       /**
        * @return the theme path
        */
-      const QString &path() const;
+      const TQString &path() const;
       /**
        * @return the name of the theme
        */
-      QString name() const;
+      TQString name() const;
       /**
        * @return the author of the theme
        */
-      QString author() const;
+      TQString author() const;
       /**
        * @return the set font item for the theme
        */
@@ -105,35 +105,35 @@ namespace KSim
       /**
        * @return a rect of the top frame border
        */
-      QRect frameTopBorder(const QRect &defValue = QRect()) const;
+      TQRect frameTopBorder(const TQRect &defValue = TQRect()) const;
       /**
        * @return a rect of the bottom frame border
        */
-      QRect frameBottomBorder(const QRect &defValue = QRect()) const;
+      TQRect frameBottomBorder(const TQRect &defValue = TQRect()) const;
       /**
        * @return a rect of the left frame border
        */
-      QRect frameLeftBorder(const QRect &defValue = QRect()) const;
+      TQRect frameLeftBorder(const TQRect &defValue = TQRect()) const;
       /**
        * @return a rect of the right frame border
        */
-      QRect frameRightBorder(const QRect &defValue = QRect()) const;
+      TQRect frameRightBorder(const TQRect &defValue = TQRect()) const;
       /**
        * @return the color of the chart in
        */
-      QColor chartInColour(const QColor &defValue = QColor()) const;
+      TQColor chartInColour(const TQColor &defValue = TQColor()) const;
       /**
        * @return the color of the chart in grid
        */
-      QColor chartInColourGrid(const QColor &defValue = QColor()) const;
+      TQColor chartInColourGrid(const TQColor &defValue = TQColor()) const;
       /**
        * @return the color of the chart out
        */
-      QColor chartOutColour(const QColor &defValue = QColor()) const;
+      TQColor chartOutColour(const TQColor &defValue = TQColor()) const;
       /**
        * @return the color of the chart out grid
        */
-      QColor chartOutColourGrid(const QColor &defValue = QColor()) const;
+      TQColor chartOutColourGrid(const TQColor &defValue = TQColor()) const;
       /**
        * if false then the grid lines should be drawn at the
        * top and bottom of the graphs
@@ -174,40 +174,40 @@ namespace KSim
       /**
        * @return the area for the slider panel
        */
-      QRect sliderPanel(const QRect &defValue = QRect()) const;
+      TQRect sliderPanel(const TQRect &defValue = TQRect()) const;
       /**
        * @return the area for the slider meter
        */
-      QRect sliderMeter(const QRect &defValue = QRect()) const;
+      TQRect sliderMeter(const TQRect &defValue = TQRect()) const;
       /**
        * @return the border for the timer label/button
        */
-      QRect timerBorder(const QRect &defValue = QRect()) const;
+      TQRect timerBorder(const TQRect &defValue = TQRect()) const;
       /**
        * @return the border for the panel button
       */
-      QRect buttonPanelBorder(const QRect &defValue = QRect()) const;
+      TQRect buttonPanelBorder(const TQRect &defValue = TQRect()) const;
       /**
        * @return the border for the meter button
        */
-      QRect buttonMeterBorder(const QRect &defValue = QRect()) const;
+      TQRect buttonMeterBorder(const TQRect &defValue = TQRect()) const;
       /**
        * @return the large font that the theme specifies
        */
-      QFont largeFont() const;
+      TQFont largeFont() const;
       /**
        * @return the normal font that the theme specifies
        */
-      QFont normalFont() const;
+      TQFont normalFont() const;
       /**
        * @return the small font that the theme specifies
        */
-      QFont smallFont() const;
+      TQFont smallFont() const;
       /**
        * @return the current font to be used
        * according to fontItem()
        */
-      QFont currentFont() const;
+      TQFont currentFont() const;
       /**
        * @return the meter image (bg_meter.[png|jpg|gif])
        * of the current theme, if type is specified then it will
@@ -218,14 +218,14 @@ namespace KSim
        * @param type is one of: none, apm, cal, clock, fs,
        * host, mail, mem, swap, timer, uptime
        */
-      QString meterPixmap(int type, bool useDefault = true) const;
+      TQString meterPixmap(int type, bool useDefault = true) const;
       /**
        * @return the meter image (bg_panel.[png|jpg|gif])
        * of the current theme, it will first look in the dir 'type'
        * if no image is found it will drop back a dir
        * @param type is one of: net, inet
        */
-      QString panelPixmap(int type, bool useDefault = true) const;
+      TQString panelPixmap(int type, bool useDefault = true) const;
       /**
        * @return the decal net leds image
        * (usually decal_net_leds.[png|jpg|gif]) of the
@@ -233,57 +233,57 @@ namespace KSim
        * if no image is found it will drop back a dir
        * @param type is one of: net, inet
        */
-      QString ledPixmap(int type, bool useDefault = true) const;
+      TQString ledPixmap(int type, bool useDefault = true) const;
       /**
        * @return the frame image of the current theme,
        * @param type is one of: top, bottom, left, right
        */
-      QString framePixmap(int type, bool useDefault = true) const;
+      TQString framePixmap(int type, bool useDefault = true) const;
       /**
        * @return the krell chart image (bg_chart.[png|jpg|gif])
        * of the current theme
        */
-      QString chartPixmap(bool useDefault = true) const;
+      TQString chartPixmap(bool useDefault = true) const;
       /**
        * @return the krell grid image (bg_grid.[png|jpg|gif])
        * of the current theme
        */
-      QString gridPixmap(bool useDefault = true) const;
+      TQString gridPixmap(bool useDefault = true) const;
       /**
        * @return the krell panel image (krell_panel.[png|jpg|gif])
        * of the current theme
        */
-      QString krellPanelPixmap(bool useDefault = true) const;
+      TQString krellPanelPixmap(bool useDefault = true) const;
       /**
        * @return the krell meter image (krell_meter.[png|jpg|gif])
        * of the current theme
        */
-      QString krellMeterPixmap(bool useDefault = true) const;
+      TQString krellMeterPixmap(bool useDefault = true) const;
       /**
        * @return the krell slider image (krell_slider.[png|jpg|gif])
        * of the current theme
        */
-      QString krellSliderPixmap(bool useDefault = true) const;
+      TQString krellSliderPixmap(bool useDefault = true) const;
       /**
        * @return the data in image (data_in.[png|jpg|gif])
        * of the current theme
        */
-      QString dataInPixmap(bool useDefault = true) const;
+      TQString dataInPixmap(bool useDefault = true) const;
       /**
        * @return the data out image (data_out.[png|jpg|gif])
        * of the current theme
        */
-      QString dataOutPixmap(bool useDefault = true) const;
+      TQString dataOutPixmap(bool useDefault = true) const;
       /**
        * @return the mail image (mail/decal_mail.[png|jpg|gif])
        * of the current theme
        */
-      QString mailPixmap(bool useDefault = true) const;
+      TQString mailPixmap(bool useDefault = true) const;
       /**
        * @return a segmant of an image, using @p itemNo to
        * get the segmant and from the ImageType @p type
        */
-      QPixmap splitPixmap(PixmapType type, uint itemNo = 0,
+      TQPixmap splitPixmap(PixmapType type, uint itemNo = 0,
          bool useDefault = true) const;
       /**
        * Same as the above function but returns an array of pixmaps
@@ -291,44 +291,44 @@ namespace KSim
        * limitAmount is -1 (default)
        * @return an array of pixmaps
        */
-      QValueList<QPixmap> pixmapToList(PixmapType type,
+      TQValueList<TQPixmap> pixmapToList(PixmapType type,
          int limitAmount = -1, bool useDefault = true) const;
       /**
        * returns the transparency level from the specified keys
        */
-      int transparency(const QString &, const QString &) const;
+      int transparency(const TQString &, const TQString &) const;
       /**
        * @return true if shadow text is enabled
        */
-      bool textShadow(const QString &, const QString &) const;
+      bool textShadow(const TQString &, const TQString &) const;
       /**
        * @return the shadow color (if any) for the specified keys
        */
-      QColor shadowColour(const QString &, const QString &) const;
+      TQColor shadowColour(const TQString &, const TQString &) const;
       /**
        * @return the text color for the specified keys
        */
-      QColor textColour(const QString &, const QString &) const;
+      TQColor textColour(const TQString &, const TQString &) const;
       /**
        * reads an entry and returns it as an int
        */
-      int readIntEntry(const QString &, const QString &) const;
+      int readIntEntry(const TQString &, const TQString &) const;
       /**
        * @return a rect from the specified keys
        */
-      QRect readRectEntry(const QString &, const QString &) const;
+      TQRect readRectEntry(const TQString &, const TQString &) const;
       /**
        * reads an entry from the specified keys
        */
-      QString readEntry(const QString &, const QString &) const;
+      TQString readEntry(const TQString &, const TQString &) const;
       /**
        * reads a color entry from the specified keys
        */
-      QString readColourEntry(const QString &, const QString &, int) const;
+      TQString readColourEntry(const TQString &, const TQString &, int) const;
       /**
        * reads a font entry from the specified keys
        */
-      QFont readFontEntry(const QString &, const QString &) const;
+      TQFont readFontEntry(const TQString &, const TQString &) const;
       /**
        * sets the font, textColour, shadowColour and showShadow to
        * the fonts and colours KSim should use depending on type and
@@ -340,8 +340,8 @@ namespace KSim
        *
        * example usage:
        * <pre>
-       *   QFont font;
-       *   QColor textColour, shadowColour;
+       *   TQFont font;
+       *   TQColor textColour, shadowColour;
        *   bool showShadow;
        *   if (KSim::ThemeLoader::self().current().fontColours(type(), configString(), font,
        *      textColour, shadowColour, showShadow)
@@ -356,35 +356,35 @@ namespace KSim
        * from, generally if you're calling this from a KSim::Base (or derived from)
        * object then use configString()
        */
-      bool fontColours(int type, const QString &string, QFont &font,
-         QColor &textColour, QColor &shadowColour, bool &showShadow) const;
+      bool fontColours(int type, const TQString &string, TQFont &font,
+         TQColor &textColour, TQColor &shadowColour, bool &showShadow) const;
       /**
        * convenience function.
        *
        * collects the theme type and config key from the base pointer
        */
-      bool fontColours(const KSim::Base *const base, QFont &font,
-         QColor &textColour, QColor &shadowColour, bool &showShadow) const;
+      bool fontColours(const KSim::Base *const base, TQFont &font,
+         TQColor &textColour, TQColor &shadowColour, bool &showShadow) const;
 
       Theme(const KSim::Theme &);
 
     private:
       Theme();
-      Theme(const QString &url, const QString &fileName, int alt,
-         const QValueVector<QString> &vector, const QStringList &list,
+      Theme(const TQString &url, const TQString &fileName, int alt,
+         const TQValueVector<TQString> &vector, const TQStringList &list,
          KConfig *globalReader);
-      void create(const QValueVector<QString> &, const QStringList &, KConfig *);
-      void init(const QString &url, const QString &fileName, int alt);
-      void reparse(const QString &url, const QString &fileName, int alt);
-      QString parseConfig(const QString &, const QString &);
-      QString loader(int, bool useDefault = true) const;
-      QString createType(int, const QString &) const;
+      void create(const TQValueVector<TQString> &, const TQStringList &, KConfig *);
+      void init(const TQString &url, const TQString &fileName, int alt);
+      void reparse(const TQString &url, const TQString &fileName, int alt);
+      TQString parseConfig(const TQString &, const TQString &);
+      TQString loader(int, bool useDefault = true) const;
+      TQString createType(int, const TQString &) const;
       void setRecolour(bool);
 
-      int internalNumEntry(const QString &, int) const;
-      QRect internalRectEntry(const QString &, const QRect &) const;
-      QColor internalColourEntry(const QString &, const QColor &) const;
-      QString internalStringEntry(const QString &, const QString &) const;
+      int internalNumEntry(const TQString &, int) const;
+      TQRect internalRectEntry(const TQString &, const TQRect &) const;
+      TQColor internalColourEntry(const TQString &, const TQColor &) const;
+      TQString internalStringEntry(const TQString &, const TQString &) const;
 
       class Private;
       Private *d;
@@ -422,24 +422,24 @@ namespace KSim
        * @param rcFile is the filename of the config file (optional)
        * @param alt is the theme alternative number (optional)
        */
-      KSim::Theme theme(const QString &url,
-         const QString &rcFile = "gkrellmrc", int alt = 0) const;
+      KSim::Theme theme(const TQString &url,
+         const TQString &rcFile = "gkrellmrc", int alt = 0) const;
       /**
        * re-colours an image to the current KDE
        * color scheme
        */
-      void reColourImage(QImage &image);
+      void reColourImage(TQImage &image);
       /**
        * changes some of the entries in the config file so kconfig
        * can handle the file better.
        * @return the location of the config file
        */
-      QString parseConfig(const QString &url, const QString &file);
+      TQString parseConfig(const TQString &url, const TQString &file);
       /**
        * change the dir structure of a theme directory
        * so KSim can understand them better
        */
-      void parseDir(const QString &url, int alt);
+      void parseDir(const TQString &url, int alt);
       /**
        * checks if the themeUrl entry is valid,
        * if not it then reverts the current theme
@@ -449,20 +449,20 @@ namespace KSim
       /**
        * sets the pallete of the current theme
        */
-      void themeColours(QWidget *);
+      void themeColours(TQWidget *);
       /**
        * @return current theme name
        */
-      static QString currentName();
+      static TQString currentName();
       /**
        * @return current theme url, if there is no current theme
        * then it will return the default theme
        */
-      static QString currentUrl();
+      static TQString currentUrl();
       /**
        * @return the default theme url
        */
-      static QString defaultUrl();
+      static TQString defaultUrl();
       /**
        * @return the current theme alternative
        */
@@ -475,11 +475,11 @@ namespace KSim
        * if this is set to -1 (the default) then the current alternative
        * will be used
        */
-      static QString alternativeAsString(int alt = -1);
+      static TQString alternativeAsString(int alt = -1);
       /**
        * @return the font of the theme if the theme font is set to custom
        */
-      static QFont currentFont();
+      static TQFont currentFont();
       /**
        * @return the font item of the theme, eg: 0 would be the small font
        */

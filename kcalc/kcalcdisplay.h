@@ -27,8 +27,8 @@
 #define _D_KCALCDISPLAY_H_
 
 #include <stdlib.h>
-#include <qlabel.h>
-#include <qtimer.h>
+#include <tqlabel.h>
+#include <tqtimer.h>
 #include "knumber.h"
 #include "kcalctype.h"
 
@@ -81,12 +81,12 @@ class KCalcDisplay : public QLabel
 Q_OBJECT
 
 public:
-	KCalcDisplay(QWidget *parent=0, const char *name=0);
+	KCalcDisplay(TQWidget *parent=0, const char *name=0);
 	~KCalcDisplay();
 
 protected:
-	void  mousePressEvent ( QMouseEvent *);
-	virtual void drawContents(QPainter *p);
+	void  mousePressEvent ( TQMouseEvent *);
+	virtual void drawContents(TQPainter *p);
 
 public:
 	enum Event {
@@ -105,11 +105,11 @@ public:
 	void setGroupDigits(bool flag);
 	void setFixedPrecision(int precision);
 	void setPrecision(int precision);
-	void setText(QString const &string);
-	QString text() const;
+	void setText(TQString const &string);
+	TQString text() const;
 	bool updateDisplay(void);
-	void setStatusText(uint i, const QString& text);
-	virtual QSize sizeHint() const;
+	void setStatusText(uint i, const TQString& text);
+	virtual TQSize sizeHint() const;
 private:
 	bool _beep;
 	bool _groupdigits;
@@ -129,15 +129,15 @@ private:
 	bool _eestate;
 	bool _period;
 	bool _neg_sign;
-	QString _str_int;
-	QString _str_int_exp;
-	QString _str_status[NUM_STATUS_TEXT];
+	TQString _str_int;
+	TQString _str_int_exp;
+	TQString _str_status[NUM_STATUS_TEXT];
 
-	QTimer* selection_timer;
+	TQTimer* selection_timer;
 
 signals:
 	void clicked(void);
-	void changedText(QString const &);
+	void changedText(TQString const &);
 
 public slots:
 	void slotCut(void);

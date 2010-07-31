@@ -24,16 +24,16 @@
 
 //
 // 1999-11-29 Espen Sand
-// Converted to QLayout and QListView + cleanups
+// Converted to TQLayout and TQListView + cleanups
 //
 
 
-#include <qcheckbox.h>
-#include <qheader.h>
-#include <qlabel.h>
-#include <qlayout.h>
-#include <qlcdnumber.h>
-#include <qlineedit.h>
+#include <tqcheckbox.h>
+#include <tqheader.h>
+#include <tqlabel.h>
+#include <tqlayout.h>
+#include <tqlcdnumber.h>
+#include <tqlineedit.h>
 
 #include <kapplication.h>
 #include <kconfig.h>
@@ -50,8 +50,8 @@ static bool GUI;
 #endif
 
 
-KDFConfigWidget::KDFConfigWidget(QWidget *parent, const char *name, bool init)
-  : QWidget( parent, name)
+KDFConfigWidget::KDFConfigWidget(TQWidget *parent, const char *name, bool init)
+  : TQWidget( parent, name)
 {
 
   mTabName.resize(8);
@@ -68,24 +68,24 @@ KDFConfigWidget::KDFConfigWidget(QWidget *parent, const char *name, bool init)
   GUI = !init;
   if(GUI)
   {
-    QString text;
-    QVBoxLayout *topLayout = new QVBoxLayout( this, 0, KDialog::spacingHint());
+    TQString text;
+    TQVBoxLayout *topLayout = new TQVBoxLayout( this, 0, KDialog::spacingHint());
 
     mList = new CListView( this, "list", 1 );
     mList->setAllColumnsShowFocus(true);
-    mList->setFrameStyle( QFrame::WinPanel + QFrame::Sunken );
+    mList->setFrameStyle( TQFrame::WinPanel + TQFrame::Sunken );
     mList->header()->setMovingEnabled(false);
     for( uint i=0; i < mTabName.size(); i++ )
     {
       mList->addColumn( mTabName[i]->mName );
     }
-    connect( mList, SIGNAL(clicked(QListViewItem *, const QPoint &, int)),
-	     this, SLOT(toggleListText(QListViewItem *,const QPoint &,int)));
-    connect( mList, SIGNAL(clicked(QListViewItem *, const QPoint &, int)),
-	     this, SLOT(slotChanged()));
+    connect( mList, TQT_SIGNAL(clicked(TQListViewItem *, const TQPoint &, int)),
+	     this, TQT_SLOT(toggleListText(TQListViewItem *,const TQPoint &,int)));
+    connect( mList, TQT_SIGNAL(clicked(TQListViewItem *, const TQPoint &, int)),
+	     this, TQT_SLOT(slotChanged()));
     topLayout->addWidget( mList );
 
-    QListViewItem *mListItem = new QListViewItem( mList );
+    TQListViewItem *mListItem = new TQListViewItem( mList );
     for( uint i=mList->header()->count(); i>0; i-- )
     {
      mListItem->setText(i-1, i18n("visible") );
@@ -93,51 +93,51 @@ KDFConfigWidget::KDFConfigWidget(QWidget *parent, const char *name, bool init)
     }
     mList->setSelected( mListItem, true );
 
-    QGridLayout *gl = new QGridLayout( 2, 2 );
+    TQGridLayout *gl = new TQGridLayout( 2, 2 );
     topLayout->addLayout( gl );
     gl->setColStretch( 1, 10 );
 
-    mScroll = new QScrollBar( this );
+    mScroll = new TQScrollBar( this );
     Q_CHECK_PTR(mScroll);
-    mScroll->setOrientation( QScrollBar::Horizontal );
+    mScroll->setOrientation( TQScrollBar::Horizontal );
     mScroll->setSteps(1,20);
     mScroll->setRange(0, 180 );
     gl->addWidget( mScroll, 1, 1 );
-    connect(mScroll,SIGNAL(valueChanged(int)),this,SLOT(slotChanged()));
+    connect(mScroll,TQT_SIGNAL(valueChanged(int)),this,TQT_SLOT(slotChanged()));
 
-    mLCD = new QLCDNumber( this );
+    mLCD = new TQLCDNumber( this );
     Q_CHECK_PTR(mLCD);
     mLCD->setNumDigits( 3 );
-    mLCD->setSegmentStyle(QLCDNumber::Filled);
-    connect(mScroll,SIGNAL(valueChanged(int)),mLCD,SLOT(display(int)));
+    mLCD->setSegmentStyle(TQLCDNumber::Filled);
+    connect(mScroll,TQT_SIGNAL(valueChanged(int)),mLCD,TQT_SLOT(display(int)));
     gl->addMultiCellWidget( mLCD, 0, 1, 0, 0 );
 
     text = i18n("Update frequency [seconds]. The value 0 disables update" );
-    QLabel *label = new QLabel( text, this );
+    TQLabel *label = new TQLabel( text, this );
     Q_CHECK_PTR(label);
     gl->addWidget( label, 0, 1 );
 
 
-    label = new QLabel( i18n("File manager (e.g. konsole -e mc %m):") ,this);
+    label = new TQLabel( i18n("File manager (e.g. konsole -e mc %m):") ,this);
     Q_CHECK_PTR(label);
     topLayout->addWidget( label );
 
-    mFileManagerEdit = new QLineEdit( this );
+    mFileManagerEdit = new TQLineEdit( this );
     Q_CHECK_PTR(mFileManagerEdit);
     topLayout->addWidget( mFileManagerEdit );
-    connect(mFileManagerEdit,SIGNAL(textChanged (const QString &)),this,SLOT(slotChanged()));
+    connect(mFileManagerEdit,TQT_SIGNAL(textChanged (const TQString &)),this,TQT_SLOT(slotChanged()));
 
     text = i18n("Open file manager automatically on mount");
-    mOpenMountCheck = new QCheckBox(text, this );
+    mOpenMountCheck = new TQCheckBox(text, this );
     Q_CHECK_PTR(mOpenMountCheck);
     topLayout->addWidget( mOpenMountCheck );
-    connect(mOpenMountCheck,SIGNAL(toggled(bool)),this,SLOT(slotChanged()));
+    connect(mOpenMountCheck,TQT_SIGNAL(toggled(bool)),this,TQT_SLOT(slotChanged()));
 
     text = i18n("Pop up a window when a disk gets critically full");
-    mPopupFullCheck = new QCheckBox( text, this );
+    mPopupFullCheck = new TQCheckBox( text, this );
     Q_CHECK_PTR(mPopupFullCheck);
     topLayout->addWidget( mPopupFullCheck );
-    connect(mPopupFullCheck,SIGNAL(toggled(bool)),this,SLOT(slotChanged()));
+    connect(mPopupFullCheck,TQT_SIGNAL(toggled(bool)),this,TQT_SLOT(slotChanged()));
   }
 
   loadSettings();
@@ -153,7 +153,7 @@ KDFConfigWidget::~KDFConfigWidget()
 }
 
 
-void KDFConfigWidget::closeEvent(QCloseEvent *)
+void KDFConfigWidget::closeEvent(TQCloseEvent *)
 {
   applySettings();
   kapp->quit();
@@ -176,7 +176,7 @@ void KDFConfigWidget::applySettings( void )
     mStd.setOpenFileManager( mOpenMountCheck->isChecked() );
     mStd.writeConfiguration();
 
-    QListViewItem *item = mList->firstChild();
+    TQListViewItem *item = mList->firstChild();
     if( item != 0 )
     {
       for( int i=mList->header()->count(); i>0; i-- )
@@ -208,7 +208,7 @@ void KDFConfigWidget::loadSettings( void )
     mOpenMountCheck->setChecked( mStd.openFileManager() );
     mFileManagerEdit->setText( mStd.fileManager() );
 
-    QListViewItem *item = mList->firstChild();
+    TQListViewItem *item = mList->firstChild();
     if( item != 0 )
     {
       for( int i=mList->header()->count(); i>0; i-- )
@@ -232,7 +232,7 @@ void KDFConfigWidget::defaultsBtnClicked( void )
   mOpenMountCheck->setChecked( mStd.openFileManager() );
   mFileManagerEdit->setText( mStd.fileManager() );
 
-  QListViewItem *item = mList->firstChild();
+  TQListViewItem *item = mList->firstChild();
   if( item != 0 )
   {
     for( int i=mList->header()->count(); i>0; i-- )
@@ -245,11 +245,11 @@ void KDFConfigWidget::defaultsBtnClicked( void )
 }
 
 
-void KDFConfigWidget::toggleListText( QListViewItem *item, const QPoint &,
+void KDFConfigWidget::toggleListText( TQListViewItem *item, const TQPoint &,
 				      int column )
 {
   if (!item) return;
-  QString text = item->text( column );
+  TQString text = item->text( column );
   item->setText(column, text==i18n("visible")?i18n("hidden"):i18n("visible"));
   item->setPixmap( column, text==i18n("visible") ?  UserIcon ( "delete" )
                                    : UserIcon ( "tick" ) );

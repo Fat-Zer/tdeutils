@@ -29,8 +29,8 @@ namespace KHE
 class KColTextExport
 {
   public: // API
-    virtual void printFirstLine( QString &T, int Line ) const = 0;
-    virtual void printNextLine( QString &T ) const = 0;
+    virtual void printFirstLine( TQString &T, int Line ) const = 0;
+    virtual void printNextLine( TQString &T ) const = 0;
     /** tells how much chars per line are needed */
     virtual int charsPerLine() const = 0;
 };

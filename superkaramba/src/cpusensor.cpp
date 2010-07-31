@@ -8,7 +8,7 @@
  *   (at your option) any later version.                                   *
  ***************************************************************************/
 
-#include <qglobal.h>
+#include <tqglobal.h>
 
 #ifdef __FreeBSD__ 
 #include <sys/time.h>
@@ -26,11 +26,11 @@
 
 #include "cpusensor.h"
 
-CPUSensor::CPUSensor( QString cpu, int interval ) : 
+CPUSensor::CPUSensor( TQString cpu, int interval ) : 
   Sensor(interval), userTicks(0), sysTicks(0), niceTicks(0), idleTicks(0)
 {
     cpuNbr = cpu;
-    QRegExp rx("^\\d+$");
+    TQRegExp rx("^\\d+$");
     if( rx.search( cpu.lower() ) == -1)
         cpuNbr = "";
     cpuNbr = "cpu"+cpuNbr;
@@ -69,12 +69,12 @@ void CPUSensor::getTicks (long &u,long &s,long &n,long &i)
               i = cp_time[CP_IDLE];
       }
 #else
-    QFile file("/proc/stat");
-    QString line;
+    TQFile file("/proc/stat");
+    TQString line;
     if ( file.open(IO_ReadOnly | IO_Translate) )
     {
-        QTextStream t( &file );        // use a text stream
-        QRegExp rx( cpuNbr+"\\s+(\\d+)\\s+(\\d+)\\s+(\\d+)\\s+(\\d+)");
+        TQTextStream t( &file );        // use a text stream
+        TQRegExp rx( cpuNbr+"\\s+(\\d+)\\s+(\\d+)\\s+(\\d+)\\s+(\\d+)");
         line = t.readLine();
         rx.search( line );
         while( (line = t.readLine()) !=0 && rx.cap(0) == "" )
@@ -131,10 +131,10 @@ void CPUSensor::update()
 {
     SensorParams *sp;
     Meter *meter;
-    QString format;
+    TQString format;
     int load = getCPULoad();
 
-    QObjectListIt it( *objList );
+    TQObjectListIt it( *objList );
     while (it != 0)
     {
         sp = (SensorParams*)(*it);
@@ -145,12 +145,12 @@ void CPUSensor::update()
         {
             format = "%v";
         }
-        format.replace( QRegExp("%load", false), QString::number( load ) );
-        format.replace( QRegExp("%user", false), QString::number( user ) );
-        format.replace( QRegExp("%nice", false), QString::number( nice ) );
-        format.replace( QRegExp("%idle", false), QString::number( idle ) );
-        format.replace( QRegExp("%system", false), QString::number( system ) );
-        format.replace( QRegExp("%v", false), QString::number( load ) );
+        format.replace( TQRegExp("%load", false), TQString::number( load ) );
+        format.replace( TQRegExp("%user", false), TQString::number( user ) );
+        format.replace( TQRegExp("%nice", false), TQString::number( nice ) );
+        format.replace( TQRegExp("%idle", false), TQString::number( idle ) );
+        format.replace( TQRegExp("%system", false), TQString::number( system ) );
+        format.replace( TQRegExp("%v", false), TQString::number( load ) );
 
         meter->setValue( format );
         ++it;

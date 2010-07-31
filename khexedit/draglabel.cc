@@ -20,16 +20,16 @@
 
 #include <stdlib.h>
 
-#include <qbitmap.h>
-#include <qpainter.h>
+#include <tqbitmap.h>
+#include <tqpainter.h>
 
 #include <kurldrag.h>
 
 #include "draglabel.h"
 
 
-CDragLabel::CDragLabel( QWidget *parent )
-  : QLabel( "draglabel", parent, "kde toolbar widget" )
+CDragLabel::CDragLabel( TQWidget *parent )
+  : TQLabel( "draglabel", parent, "kde toolbar widget" )
 {
   mValid = true;
   mDragPending = false;
@@ -42,7 +42,7 @@ CDragLabel::~CDragLabel( void )
 }
 
 
-void CDragLabel::mousePressEvent( QMouseEvent *e )
+void CDragLabel::mousePressEvent( TQMouseEvent *e )
 {
   if( mValid == false || e->button() != LeftButton || mUrl.isEmpty() == true )
   {
@@ -54,7 +54,7 @@ void CDragLabel::mousePressEvent( QMouseEvent *e )
 }
 
 
-void CDragLabel::mouseMoveEvent( QMouseEvent *e )
+void CDragLabel::mouseMoveEvent( TQMouseEvent *e )
 {
   if( mDragPending == true )
   {
@@ -78,19 +78,19 @@ void CDragLabel::mouseMoveEvent( QMouseEvent *e )
   }
 }
 
-void CDragLabel::mouseReleaseEvent( QMouseEvent * )
+void CDragLabel::mouseReleaseEvent( TQMouseEvent * )
 {
   mDragPending = false;
 }
 
 
-void CDragLabel::setUrl( const QString &url )
+void CDragLabel::setUrl( const TQString &url )
 {
   mUrl = url;
 }
 
 
-void CDragLabel::setDragMask( const QPixmap pix )
+void CDragLabel::setDragMask( const TQPixmap pix )
 {
   mDragMask = pix;
 }
@@ -103,7 +103,7 @@ void CDragLabel::prepPixmap( KURLDrag &uriDrag )
     return;
   }
 
-  QString text;
+  TQString text;
   int index = mUrl.findRev( '/', mUrl.length() );
   if( index < 0 )
   {
@@ -115,16 +115,16 @@ void CDragLabel::prepPixmap( KURLDrag &uriDrag )
   }
 
   int sep = 2;
-  QRect rect = fontMetrics().boundingRect(text);
+  TQRect rect = fontMetrics().boundingRect(text);
   int w = pixmap()->width() + rect.width() + sep + 2;
   int h = fontMetrics().lineSpacing();
   if( pixmap()->height() > h ) { h = pixmap()->height(); }
 
-  QBitmap mask( w, h, TRUE );
-  QPixmap dragPixmap( w, h );
+  TQBitmap mask( w, h, TRUE );
+  TQPixmap dragPixmap( w, h );
   dragPixmap.fill( black );
 
-  QPainter p;
+  TQPainter p;
   p.begin( &mask );
   p.setPen( white );
   p.drawPixmap( 0, 0, mDragMask );
@@ -138,7 +138,7 @@ void CDragLabel::prepPixmap( KURLDrag &uriDrag )
 
   dragPixmap.setMask( mask );
 
-  QPoint hotspot( pixmap()->width(), pixmap()->height()/2 );
+  TQPoint hotspot( pixmap()->width(), pixmap()->height()/2 );
   uriDrag.setPixmap( dragPixmap, hotspot );
 }
 

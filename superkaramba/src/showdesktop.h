@@ -51,7 +51,7 @@ private:
 
     bool              showingDesktop;
     KWinModule*       kWinModule;
-    QValueList<WId>   iconifiedList;
+    TQValueList<WId>   iconifiedList;
 
 };
 

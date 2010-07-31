@@ -10,7 +10,7 @@
 #include "sensor.h"
 Sensor::Sensor(int iMsec)
 {
-    objList = new QObjectList();
+    objList = new TQObjectList();
     objList->setAutoDelete( true );
     msec = iMsec;
 }
@@ -19,7 +19,7 @@ void Sensor::start()
 {
     if (!timer.isActive())
     {
-        connect (&timer,SIGNAL(timeout()),this,SLOT(update()));
+        connect (&timer,TQT_SIGNAL(timeout()),this,TQT_SLOT(update()));
         timer.start( (msec == 0)?1000:msec);
     }
 }
@@ -37,7 +37,7 @@ void Sensor::addMeter( SensorParams *sp )
 
 SensorParams* Sensor::hasMeter( Meter *meter )
 {
-  QObjectListIt it( *objList );
+  TQObjectListIt it( *objList );
   while ( it != 0 )
     {
       if (((SensorParams*) *it)->getMeter() == meter)

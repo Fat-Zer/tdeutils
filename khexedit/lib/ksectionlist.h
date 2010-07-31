@@ -19,13 +19,13 @@
 #define KHE_KSECTIONLIST_H
 
 // qt specific
-#include <qvaluelist.h>
+#include <tqvaluelist.h>
 // lib specific
 #include "ksection.h"
 
 namespace KHE {
 
-typedef QValueList<KSection> KSectionBasicList;
+typedef TQValueList<KSection> KSectionBasicList;
 /**
 @author Friedrich W. H.  Kossebau
 */

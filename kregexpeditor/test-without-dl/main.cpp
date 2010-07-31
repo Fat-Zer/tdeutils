@@ -17,20 +17,20 @@
  **/
 #include <kapplication.h>
 #include <kcmdlineargs.h>
-#include <qfile.h>
+#include <tqfile.h>
 #include "../kregexpeditorgui.h"
 class ShootABug :public QObject
 {
 public:
-  virtual bool eventFilter( QObject* recv, QEvent* event )
+  virtual bool eventFilter( TQObject* recv, TQEvent* event )
   {
-    if ( event->type() == QEvent::MouseButtonPress &&
-         dynamic_cast<QMouseEvent*>(event)->state() == Qt::ControlButton ) {
+    if ( event->type() == TQEvent::MouseButtonPress &&
+         dynamic_cast<TQMouseEvent*>(event)->state() == Qt::ControlButton ) {
       // Ctrl + left mouse click.
 
       qDebug("----------------------------------------------------");
-      qDebug((QString("Widget name : ") + QString( recv->name() )).latin1() );
-      qDebug((QString("Widget class: ") + QString( recv->className() )).latin1() );
+      qDebug((TQString("Widget name : ") + TQString( recv->name() )).latin1() );
+      qDebug((TQString("Widget class: ") + TQString( recv->className() )).latin1() );
       qDebug("\nObject info:");
       recv->dumpObjectInfo();
       qDebug("\nObject tree:");
@@ -49,16 +49,16 @@ int main( int argc, char* argv[] )
 
   qApp->installEventFilter( new ShootABug() );
 
-  KRegExpEditorGUIDialog* iface = new KRegExpEditorGUIDialog( 0, "_editor", QStringList() );
-  iface->setRegExp( QString::fromLatin1( "#include" ) );
+  KRegExpEditorGUIDialog* iface = new KRegExpEditorGUIDialog( 0, "_editor", TQStringList() );
+  iface->setRegExp( TQString::fromLatin1( "#include" ) );
   iface->doSomething( "setMinimal", (void*) false );
-  iface->doSomething( "setSyntax", (void*) new QString( QString::fromLatin1( "Emacs" ) ) );
+  iface->doSomething( "setSyntax", (void*) new TQString( TQString::fromLatin1( "Emacs" ) ) );
   iface->doSomething( "setShowSyntaxCombo", (bool*) true );
 
-  QFile file("/packages/kde-src/kdeutils/kregexpeditor/test/main.cpp");
+  TQFile file("/packages/kde-src/kdeutils/kregexpeditor/test/main.cpp");
   file.open(IO_ReadOnly);
-  QTextStream stream( &file);
-  QString txt = stream.read();
+  TQTextStream stream( &file);
+  TQString txt = stream.read();
   iface->setMatchText( txt );
 
   iface->exec();

@@ -21,10 +21,10 @@
 
 #include <pluginmodule.h>
 
-#include <qlayout.h>
-#include <qpopupmenu.h>
-#include <qregexp.h>
-#include <qcursor.h>
+#include <tqlayout.h>
+#include <tqpopupmenu.h>
+#include <tqregexp.h>
+#include <tqcursor.h>
 
 #include <kprocess.h>
 #include <kmessagebox.h>
@@ -38,7 +38,7 @@ FilesystemWidget::Filesystem::Filesystem()
 }
 
 FilesystemWidget::Filesystem::Filesystem(KSim::Progress *display,
-   const QString &point)
+   const TQString &point)
 {
   m_display = display;
   m_mountPoint = point;
@@ -54,12 +54,12 @@ KSim::Progress *FilesystemWidget::Filesystem::display() const
   return m_display;
 }
 
-const QString &FilesystemWidget::Filesystem::mountPoint() const
+const TQString &FilesystemWidget::Filesystem::mountPoint() const
 {
   return m_mountPoint;
 }
 
-const QString &FilesystemWidget::Filesystem::text() const
+const TQString &FilesystemWidget::Filesystem::text() const
 {
   return m_display->text();
 }
@@ -69,7 +69,7 @@ int FilesystemWidget::Filesystem::value() const
   return m_display->value();
 }
 
-void FilesystemWidget::Filesystem::setText(const QString &text)
+void FilesystemWidget::Filesystem::setText(const TQString &text)
 {
   if (!m_display)
     return;
@@ -85,11 +85,11 @@ void FilesystemWidget::Filesystem::setValue(int value)
   m_display->setValue(value);
 }
 
-FilesystemWidget::FilesystemWidget(QWidget *parent, const char *name)
-   : QWidget(parent, name)
+FilesystemWidget::FilesystemWidget(TQWidget *parent, const char *name)
+   : TQWidget(parent, name)
 {
   m_list.setAutoDelete(true);
-  m_layout = new QVBoxLayout(this);
+  m_layout = new TQVBoxLayout(this);
   m_process = 0;
 }
 
@@ -98,7 +98,7 @@ FilesystemWidget::~FilesystemWidget()
   delete m_process;
 }
 
-void FilesystemWidget::append(int max, const QString &mountPoint)
+void FilesystemWidget::append(int max, const TQString &mountPoint)
 {
   KSim::Progress *progress = new KSim::Progress(max, this);
   progress->installEventFilter(this);
@@ -108,7 +108,7 @@ void FilesystemWidget::append(int max, const QString &mountPoint)
   m_list.append(new Filesystem(progress, mountPoint));
 }
 
-void FilesystemWidget::setText(uint id, const QString &text)
+void FilesystemWidget::setText(uint id, const TQString &text)
 {
   if (id > m_list.count())
     return;
@@ -129,14 +129,14 @@ void FilesystemWidget::clear()
   m_list.clear();
 }
 
-bool FilesystemWidget::eventFilter(QObject *o, QEvent *e)
+bool FilesystemWidget::eventFilter(TQObject *o, TQEvent *e)
 {
   if (!o->isA("KSim::Progress"))
-    return QWidget::eventFilter(o, e);
+    return TQWidget::eventFilter(o, e);
 
   KSim::Progress *progressBar = 0;
   int i = 0;
-  QPtrListIterator<Filesystem> it(m_list);
+  TQPtrListIterator<Filesystem> it(m_list);
   Filesystem *filesystem;
   while ((filesystem = it.current()) != 0) {
     ++it;
@@ -149,15 +149,15 @@ bool FilesystemWidget::eventFilter(QObject *o, QEvent *e)
     ++i;
   }
 
-  if (o == progressBar && e->type() == QEvent::MouseButtonPress)
+  if (o == progressBar && e->type() == TQEvent::MouseButtonPress)
   {
-    switch(static_cast<QMouseEvent *>(e)->button()) {
-      case QMouseEvent::RightButton:
+    switch(static_cast<TQMouseEvent *>(e)->button()) {
+      case TQMouseEvent::RightButton:
         showMenu(i);
         break;
       default:
         break;
-      case QMouseEvent::LeftButton:
+      case TQMouseEvent::LeftButton:
         if (parentWidget()->inherits("KSim::PluginView"))
           static_cast<KSim::PluginView *>(parentWidget())->doCommand();
         break;
@@ -166,7 +166,7 @@ bool FilesystemWidget::eventFilter(QObject *o, QEvent *e)
     return true;
   }
 
-  return QWidget::eventFilter(o, e);
+  return TQWidget::eventFilter(o, e);
 }
 
 void FilesystemWidget::receivedStderr(KProcess *, char *buffer, int length)
@@ -183,28 +183,28 @@ void FilesystemWidget::processExited(KProcess *)
   if (m_stderrString.isEmpty())
     return;
 
-  QStringList errorList = QStringList::split("\n", m_stderrString);
-  QString message = i18n("<qt>The following errors occurred:<ul>");
+  TQStringList errorList = TQStringList::split("\n", m_stderrString);
+  TQString message = i18n("<qt>The following errors occurred:<ul>");
 
-  QStringList::Iterator it;
+  TQStringList::Iterator it;
   for (it = errorList.begin(); it != errorList.end(); ++it) {
-    message += QString::fromLatin1("<li>%1</li>")
-       .arg((*it).replace(QRegExp("[u]?mount: "), QString::null));
+    message += TQString::fromLatin1("<li>%1</li>")
+       .arg((*it).replace(TQRegExp("[u]?mount: "), TQString::null));
   }
 
-  message += QString::fromLatin1("</ul></qt>");
+  message += TQString::fromLatin1("</ul></qt>");
   KMessageBox::sorry(0, message);
 }
 
-void FilesystemWidget::createProcess(const QString &command, const QString &point)
+void FilesystemWidget::createProcess(const TQString &command, const TQString &point)
 {
   m_process = new KProcess();
   connect(m_process,
-     SIGNAL(receivedStderr(KProcess *, char *, int)),
-     SLOT(receivedStderr(KProcess *, char *, int)));
+     TQT_SIGNAL(receivedStderr(KProcess *, char *, int)),
+     TQT_SLOT(receivedStderr(KProcess *, char *, int)));
   connect(m_process,
-     SIGNAL(processExited(KProcess *)),
-     SLOT(processExited(KProcess *)));
+     TQT_SIGNAL(processExited(KProcess *)),
+     TQT_SLOT(processExited(KProcess *)));
 
   (*m_process) << command << point;
   void(m_process->start(KProcess::NotifyOnExit, KProcess::Stderr));
@@ -215,11 +215,11 @@ void FilesystemWidget::showMenu(uint id)
   if (id > m_list.count())
     return;
 
-  QPopupMenu menu;
+  TQPopupMenu menu;
   menu.insertItem(SmallIcon("hdd_mount"), i18n("&Mount Device"), 1);
   menu.insertItem(SmallIcon("hdd_unmount"), i18n("&Unmount Device"), 2);
 
-  switch (menu.exec(QCursor::pos())) {
+  switch (menu.exec(TQCursor::pos())) {
     case 1:
       createProcess("mount", m_list.at(id)->mountPoint());
       break;

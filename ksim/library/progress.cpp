@@ -21,17 +21,17 @@
 #include "progress.moc"
 
 #include <kdebug.h>
-#include <qpainter.h>
-#include <qpixmap.h>
-#include <qimage.h>
+#include <tqpainter.h>
+#include <tqpixmap.h>
+#include <tqimage.h>
 
 #include <themeloader.h>
 
 class KSim::Progress::Private
 {
   public:
-    QPixmap meterPixmap;
-    QRect rectOrigin;
+    TQPixmap meterPixmap;
+    TQRect rectOrigin;
     ProgressType type;
     int krellDepth;
     int value;
@@ -40,7 +40,7 @@ class KSim::Progress::Private
 };
 
 KSim::Progress::Progress(int maxValue,
-   QWidget *parent, const char *name,
+   TQWidget *parent, const char *name,
    WFlags fl) : KSim::Label(parent, name, fl)
 {
   init(maxValue);
@@ -48,7 +48,7 @@ KSim::Progress::Progress(int maxValue,
 }
 
 KSim::Progress::Progress(int maxValue,
-   int type, const QString &label, QWidget *parent,
+   int type, const TQString &label, TQWidget *parent,
    const char *name, WFlags fl)
    : KSim::Label(type, label, parent, name, fl)
 {
@@ -57,8 +57,8 @@ KSim::Progress::Progress(int maxValue,
 }
 
 KSim::Progress::Progress(int maxValue,
-   int type, const QString &label, int value,
-   QWidget *parent, const char *name, WFlags fl)
+   int type, const TQString &label, int value,
+   TQWidget *parent, const char *name, WFlags fl)
    : KSim::Label(type, label, parent, name, fl)
 {
   init(maxValue, value);
@@ -66,7 +66,7 @@ KSim::Progress::Progress(int maxValue,
 }
 
 KSim::Progress::Progress(int maxValue,
-   int type, QWidget *parent,
+   int type, TQWidget *parent,
    const char *name, WFlags fl)
    : KSim::Label(type, parent, name, fl)
 {
@@ -76,7 +76,7 @@ KSim::Progress::Progress(int maxValue,
 
 KSim::Progress::Progress(int maxValue, int type,
    ProgressType progressType,
-   QWidget *parent, const char *name, WFlags fl)
+   TQWidget *parent, const char *name, WFlags fl)
    : KSim::Label(type, parent, name, fl)
 {
   init(maxValue, 0, progressType);
@@ -103,7 +103,7 @@ int KSim::Progress::maxValue() const
   return d->maxValue;
 }
 
-const QRect &KSim::Progress::rectOrigin() const
+const TQRect &KSim::Progress::rectOrigin() const
 {
   return d->rectOrigin;
 }
@@ -124,9 +124,9 @@ void KSim::Progress::configureObject(bool repaintWidget)
     update();
 }
 
-QSize KSim::Progress::sizeHint() const
+TQSize KSim::Progress::sizeHint() const
 {
-  QSize hint(Label::sizeHint());
+  TQSize hint(Label::sizeHint());
 
   if (d->meterPixmap.height() > hint.height())
     hint.setHeight(d->meterPixmap.height());
@@ -179,14 +179,14 @@ void KSim::Progress::setMaxValue(int maxValue)
   }
 }
 
-void KSim::Progress::setOrigin(const QRect &origin)
+void KSim::Progress::setOrigin(const TQRect &origin)
 {
   d->rectOrigin = origin;
 }
 
-void KSim::Progress::setMeterPixmap(const QPixmap &pixmap)
+void KSim::Progress::setMeterPixmap(const TQPixmap &pixmap)
 {
-  QSize oldSize = sizeHint();
+  TQSize oldSize = sizeHint();
   d->meterPixmap = pixmap;
   relayoutLabel(oldSize);
 }
@@ -204,13 +204,13 @@ int KSim::Progress::xLocation() const
   return returnValue;
 }
 
-void KSim::Progress::paintEvent(QPaintEvent *ev)
+void KSim::Progress::paintEvent(TQPaintEvent *ev)
 {
   KSim::Label::paintEvent(ev);
   drawMeter();
 }
 
-void KSim::Progress::resizeEvent(QResizeEvent *ev)
+void KSim::Progress::resizeEvent(TQResizeEvent *ev)
 {
   KSim::Label::resizeEvent(ev);
   setOrigin(rect());

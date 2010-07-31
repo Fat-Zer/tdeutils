@@ -26,9 +26,9 @@
 #include "lookaheadwidget.h"
 #include "lookaheadregexp.h"
 #include "concwidget.h"
-#include <qpainter.h>
+#include <tqpainter.h>
 
-LookAheadWidget::LookAheadWidget( RegExpEditorWindow* editorWindow, RegExpType tp, QWidget* parent, const char* name )
+LookAheadWidget::LookAheadWidget( RegExpEditorWindow* editorWindow, RegExpType tp, TQWidget* parent, const char* name )
   :SingleContainerWidget(editorWindow, parent, name ? name : "LookAheadWidget" ), _tp(tp)
 {
   _child = new ConcWidget( editorWindow, this );
@@ -36,7 +36,7 @@ LookAheadWidget::LookAheadWidget( RegExpEditorWindow* editorWindow, RegExpType t
 }
 
 LookAheadWidget::LookAheadWidget( LookAheadRegExp* regexp, RegExpEditorWindow* editorWindow, RegExpType tp,
-                                  QWidget* parent, const char* name )
+                                  TQWidget* parent, const char* name )
   :SingleContainerWidget( editorWindow, parent, name ? name : "LookAheadWidget" ), _tp(tp)
 {
   RegExpWidget* child = WidgetFactory::createWidget( regexp->child(), editorWindow, this );
@@ -60,24 +60,24 @@ RegExp* LookAheadWidget::regExp() const
                               _child->regExp() );
 }
 
-QSize LookAheadWidget::sizeHint() const
+TQSize LookAheadWidget::sizeHint() const
 {
   // TODO: Merge with RepeatWidget::sizeHint
-  QFontMetrics metrics = fontMetrics();
+  TQFontMetrics metrics = fontMetrics();
   _textSize = metrics.size( 0, _text );
 
   _childSize = _child->sizeHint();
 
   int height = _textSize.height() + bdSize + _childSize.height() + bdSize + 2*pw;
   int width  = 2 * pw + QMAX(_childSize.width(), 4*bdSize + _textSize.width());
-  return QSize(width,height);
+  return TQSize(width,height);
 }
 
-void LookAheadWidget::paintEvent( QPaintEvent *e )
+void LookAheadWidget::paintEvent( TQPaintEvent *e )
 {
   // TODO: Merge with RepeatWidget::paintEvent
-  QSize mySize = sizeHint();
-  QPainter painter(this);
+  TQSize mySize = sizeHint();
+  TQPainter painter(this);
 
   drawPossibleSelection( painter, mySize );
 
@@ -104,7 +104,7 @@ void LookAheadWidget::paintEvent( QPaintEvent *e )
   SingleContainerWidget::paintEvent(e);
 }
 
-RegExpWidget* LookAheadWidget::findWidgetToEdit( QPoint globalPos )
+RegExpWidget* LookAheadWidget::findWidgetToEdit( TQPoint globalPos )
 {
     return _child->findWidgetToEdit( globalPos );
 }

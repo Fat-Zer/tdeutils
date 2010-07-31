@@ -9,12 +9,12 @@
  ***************************************************************************/
 #ifndef SENSOR_H
 #define SENSOR_H
-#include <qstring.h>
-#include <qobject.h>
-#include <qobjectlist.h>
-#include <qstringlist.h>
-#include <qmap.h>
-#include <qtimer.h>
+#include <tqstring.h>
+#include <tqobject.h>
+#include <tqobjectlist.h>
+#include <tqstringlist.h>
+#include <tqmap.h>
+#include <tqtimer.h>
 
 #include "sensorparams.h"
 
@@ -34,10 +34,10 @@ public:
 
 private:
     int msec;
-    QTimer timer;
+    TQTimer timer;
 
 protected:
-    QObjectList *objList;
+    TQObjectList *objList;
 
 public slots:
     virtual void update()=0;

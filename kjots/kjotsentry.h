@@ -46,26 +46,26 @@ namespace KIO
     class Job;
 }
 
-class KJotsEntryBase : public QObject, public KListViewItem
+class KJotsEntryBase : public TQObject, public KListViewItem
 {
     Q_OBJECT
     public:
-        KJotsEntryBase(KListView*, QListViewItem*);
-        KJotsEntryBase(KListViewItem*, QListViewItem*);
+        KJotsEntryBase(KListView*, TQListViewItem*);
+        KJotsEntryBase(KListViewItem*, TQListViewItem*);
 
     public:
-        virtual void setSubject(const QString&);
-        QString subject() { return text(0); }
-        void setText(int,const QString&);
-        virtual void saveToFile(KURL, bool plainText, const QString& encoding) = 0;
-        virtual void print(QFont& defaultFont) = 0;
-        virtual int  print(KPrinter&, QPainter&, int) = 0;
-        virtual QString defaultSubject() = 0; //!< "subject" is the caption name
+        virtual void setSubject(const TQString&);
+        TQString subject() { return text(0); }
+        void setText(int,const TQString&);
+        virtual void saveToFile(KURL, bool plainText, const TQString& encoding) = 0;
+        virtual void print(TQFont& defaultFont) = 0;
+        virtual int  print(KPrinter&, TQPainter&, int) = 0;
+        virtual TQString defaultSubject() = 0; //!< "subject" is the caption name
         virtual void rename() = 0;
-        virtual void generateXml( QDomDocument&, QDomElement& );
-        virtual void parseXml( QDomElement& );
-        virtual QString generateHtml( KJotsEntryBase*, bool ) = 0;
-        virtual QString generateText( void ) = 0;
+        virtual void generateXml( TQDomDocument&, TQDomElement& );
+        virtual void parseXml( TQDomElement& );
+        virtual TQString generateHtml( KJotsEntryBase*, bool ) = 0;
+        virtual TQString generateText( void ) = 0;
 
         void setDirty(bool d) { m_dirty = d; } //!< Toggles the dirty flag.
         virtual bool isDirty() { return m_dirty; }; //!< Accessor for dirty flag.
@@ -80,7 +80,7 @@ class KJotsEntryBase : public QObject, public KListViewItem
         bool isPage() const { return !m_isBook; }
 
     protected:
-        int printTitleBox(QString, KPrinter&, QPainter&, int);
+        int printTitleBox(TQString, KPrinter&, TQPainter&, int);
 
         bool m_saveInProgress; //!< Toggled during a manual disk save.
         bool m_isBook; //!< used for speed and code clarity.
@@ -99,39 +99,39 @@ class KJotsBook : public KJotsEntryBase
 {
     Q_OBJECT
     public:
-        KJotsBook(KListView*, QListViewItem* after = 0);
-        KJotsBook(KListViewItem*, QListViewItem* after = 0);
+        KJotsBook(KListView*, TQListViewItem* after = 0);
+        KJotsBook(KListViewItem*, TQListViewItem* after = 0);
         ~KJotsBook();
 
-        static bool isBookFile(const QString& book);
-        bool openBook(const QString&);
+        static bool isBookFile(const TQString& book);
+        bool openBook(const TQString&);
         void saveBook();
         void deleteBook();
         void rename();
-        void saveToFile(KURL, bool plainText, const QString& encoding);
+        void saveToFile(KURL, bool plainText, const TQString& encoding);
         KJotsPage* addPage(); //!< Add a new page to this book.
-        void print(QFont& defaultFont);
-        int  print(KPrinter&, QPainter&, int);
+        void print(TQFont& defaultFont);
+        int  print(KPrinter&, TQPainter&, int);
         bool isDirty();
-        QString defaultSubject();
-        void generateXml( QDomDocument&, QDomElement& );
-        void parseXml( QDomElement& );
-        QString generateHtml( KJotsEntryBase*, bool );
-        QString generateText( void );
+        TQString defaultSubject();
+        void generateXml( TQDomDocument&, TQDomElement& );
+        void parseXml( TQDomElement& );
+        TQString generateHtml( KJotsEntryBase*, bool );
+        TQString generateText( void );
 
     protected slots:
-        void saveDataReq(KIO::Job* job, QByteArray& data);
+        void saveDataReq(KIO::Job* job, TQByteArray& data);
         void slotSaveResult(KIO::Job*);
 
     private:
-        QString getToc();
-        bool loadOldBook(QFile &);
+        TQString getToc();
+        bool loadOldBook(TQFile &);
         void init();
 
         bool m_open;
-        QString m_fileName;
+        TQString m_fileName;
         bool m_saveToPlainText;
-        QTextCodec* m_saveEncoding;
+        TQTextCodec* m_saveEncoding;
         KProgressDialog* m_saveProgressDialog;
 };
 
@@ -142,33 +142,33 @@ class KJotsPage : public KJotsEntryBase
 {
     Q_OBJECT
     public:
-        KJotsPage(KJotsBook* parent, QListViewItem* after = 0);
+        KJotsPage(KJotsBook* parent, TQListViewItem* after = 0);
         ~KJotsPage();
 
     public:
-        QString body();
-        void setBody(const QString&);
-        void saveToFile(KURL, bool plainText, const QString& encoding);
-        void print(QFont& defaultFont);
-        int  print(KPrinter&, QPainter&, int);
-        QString defaultSubject();
+        TQString body();
+        void setBody(const TQString&);
+        void saveToFile(KURL, bool plainText, const TQString& encoding);
+        void print(TQFont& defaultFont);
+        int  print(KPrinter&, TQPainter&, int);
+        TQString defaultSubject();
         void rename();
 
         void setEditor(KJotsEdit*);
         bool isDirty();
-        void generateXml( QDomDocument&, QDomElement& );
-        void parseXml( QDomElement& );
+        void generateXml( TQDomDocument&, TQDomElement& );
+        void parseXml( TQDomElement& );
         void initNewPage(void);
-        QString generateHtml( KJotsEntryBase*, bool );
-        QString generateText( void );
+        TQString generateHtml( KJotsEntryBase*, bool );
+        TQString generateText( void );
 
     protected slots:
-        void saveDataReq(KIO::Job* job, QByteArray& data);
+        void saveDataReq(KIO::Job* job, TQByteArray& data);
         void slotSaveResult(KIO::Job*);
 
     private:
-        QString m_text;
-        QTextCodec* m_saveEncoding;
+        TQString m_text;
+        TQTextCodec* m_saveEncoding;
         bool    m_saveToPlainText;
         KJotsEdit *m_editor; //!< ptr to editor if this is the active subject
         int m_paraPos; //< used to remrmber the cursor position

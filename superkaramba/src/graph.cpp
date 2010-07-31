@@ -9,7 +9,7 @@
  ***************************************************************************/
 
 #include "graph.h"
-#include <qstring.h>
+#include <tqstring.h>
 
 Graph::Graph(karamba* k, int x, int y, int w, int h, int nbrPts):
   Meter(k, x, y, w, h), lastValue(0)
@@ -46,12 +46,12 @@ void Graph::setValue( long v)
     ptPtr = (ptPtr + 1) % nbrPoints;
 }
 
-void Graph::setValue( QString v )
+void Graph::setValue( TQString v )
 {
   setValue((long)(v.toDouble() + 0.5));
 }
 
-void Graph::mUpdate(QPainter *p)
+void Graph::mUpdate(TQPainter *p)
 {
   if (hidden == 0)
   {

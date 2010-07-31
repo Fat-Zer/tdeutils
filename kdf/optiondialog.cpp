@@ -17,29 +17,29 @@
  *
  */
 
-#include <qlayout.h>
+#include <tqlayout.h>
 
 #include "kdfconfig.h"
 #include "mntconfig.h"
 #include "optiondialog.h"
 
-COptionDialog::COptionDialog( QWidget *parent, const char *name, bool modal )
+COptionDialog::COptionDialog( TQWidget *parent, const char *name, bool modal )
   :KDialogBase( Tabbed, i18n("Configure"), Help|Apply|Ok|Cancel, Ok,
 	        parent, name, modal )
 {
-  setHelp( "kcontrol/kdf/index.html", QString::null );
+  setHelp( "kcontrol/kdf/index.html", TQString::null );
 
-  QFrame *f1 = addPage( i18n("General Settings") );
-  QVBoxLayout *l1 = new QVBoxLayout( f1 );  
+  TQFrame *f1 = addPage( i18n("General Settings") );
+  TQVBoxLayout *l1 = new TQVBoxLayout( f1 );  
   mConf = new KDFConfigWidget( f1, "kdfconf" );
   l1->addWidget(mConf);
-  connect( mConf, SIGNAL( configChanged() ), this, SLOT( slotChanged() ) );
+  connect( mConf, TQT_SIGNAL( configChanged() ), this, TQT_SLOT( slotChanged() ) );
 
-  QFrame *f2 = addPage( i18n("Mount Commands") );
-  QVBoxLayout *l2 = new QVBoxLayout( f2 );
+  TQFrame *f2 = addPage( i18n("Mount Commands") );
+  TQVBoxLayout *l2 = new TQVBoxLayout( f2 );
   mMnt = new MntConfigWidget( f2, "mntconf");
   l2->addWidget(mMnt);
-  connect( mMnt, SIGNAL( configChanged() ), this, SLOT( slotChanged() ) );
+  connect( mMnt, TQT_SIGNAL( configChanged() ), this, TQT_SLOT( slotChanged() ) );
   enableButton( Apply, false );
   dataChanged = false;
 }

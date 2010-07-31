@@ -28,9 +28,9 @@
 #ifndef FILELISTVIEW_H
 #define FILELISTVIEW_H
 
-#include <qdatetime.h>
-#include <qpair.h>
-#include <qvaluelist.h>
+#include <tqdatetime.h>
+#include <tqpair.h>
+#include <tqvaluelist.h>
 
 #include <klistview.h>
 #include <kio/global.h>
@@ -51,50 +51,50 @@ class FileLVI : public KListViewItem
 		FileLVI( KListView* lv );
 		FileLVI( KListViewItem* lvi );
 
-		QString fileName() const { return m_entryName; }
+		TQString fileName() const { return m_entryName; }
 		KIO::filesize_t fileSize() const { return m_fileSize; }
 		KIO::filesize_t packedFileSize() const { return m_packedFileSize; }
 		double ratio() const { return m_ratio; }
-		QDateTime timeStamp() const { return m_timeStamp; }
+		TQDateTime timeStamp() const { return m_timeStamp; }
 
-		int compare ( QListViewItem * i, int col, bool ascending ) const;
-		virtual QString key( int column, bool ) const;
-		virtual void setText( int column, const QString &text );
+		int compare ( TQListViewItem * i, int col, bool ascending ) const;
+		virtual TQString key( int column, bool ) const;
+		virtual void setText( int column, const TQString &text );
 
 	private:
 		KIO::filesize_t m_fileSize;
 		KIO::filesize_t m_packedFileSize;
 		double    m_ratio;
-		QDateTime m_timeStamp;
-		QString   m_entryName;
+		TQDateTime m_timeStamp;
+		TQString   m_entryName;
 };
 
-typedef QValueList< QPair< QString, Qt::AlignmentFlags > > ColumnList;
+typedef TQValueList< QPair< TQString, Qt::AlignmentFlags > > ColumnList;
 
 class FileListView: public KListView
 {
 	Q_OBJECT
 	public:
-		FileListView( QWidget *parent = 0, const char* name = 0 );
+		FileListView( TQWidget *parent = 0, const char* name = 0 );
 
 		FileLVI *currentItem() {return ((FileLVI *) KListView::currentItem());}
 
 		/**
 		 * Returns the full names of the selected files.
 		 */
-		QStringList selectedFilenames();
+		TQStringList selectedFilenames();
 
 		/**
 		 * Return the full names of all files.
 		 */
-		QStringList fileNames();
+		TQStringList fileNames();
 
 		/**
 		 * Returns true if no file is selected
 		 */
 		bool isSelectionEmpty();
 
-		virtual int addColumn( const QString & label, int width = -1 );
+		virtual int addColumn( const TQString & label, int width = -1 );
 		virtual void removeColumn( int index );
 		columnName nameOfColumn( int index );
 
@@ -103,13 +103,13 @@ class FileListView: public KListView
 		 * @param filename The filename in question to reference in the archive
 		 * @return The requested file's FileLVI
 		 */
-		FileLVI* item(const QString& filename) const;
+		FileLVI* item(const TQString& filename) const;
 
 		/**
 		 * Adds a file and stats to the file listing
 		 * @param entries A stringlist of the entries for each column of the list.
 		 */
-		void addItem( const QStringList & entries );
+		void addItem( const TQStringList & entries );
 
 		/**
 		 * Returns the number of files in the archive.
@@ -143,20 +143,20 @@ class FileListView: public KListView
 		void clearHeaders();
 
 	signals:
-		void startDragRequest( const QStringList & fileList );
+		void startDragRequest( const TQStringList & fileList );
 
 	protected:
-		virtual void contentsMouseReleaseEvent( QMouseEvent *e );
-		virtual void contentsMousePressEvent( QMouseEvent *e );
-		virtual void contentsMouseMoveEvent( QMouseEvent *e );
+		virtual void contentsMouseReleaseEvent( TQMouseEvent *e );
+		virtual void contentsMousePressEvent( TQMouseEvent *e );
+		virtual void contentsMouseMoveEvent( TQMouseEvent *e );
 
 	private:
-		FileLVI* findParent( const QString& fullname );
-		QStringList childrenOf( FileLVI* parent );
+		FileLVI* findParent( const TQString& fullname );
+		TQStringList childrenOf( FileLVI* parent );
 
-		QMap<int, columnName> m_columnMap;
+		TQMap<int, columnName> m_columnMap;
 		bool m_pressed;
-		QPoint m_presspos;  // this will save the click pos to correctly recognize drag events
+		TQPoint m_presspos;  // this will save the click pos to correctly recognize drag events
 };
 
 #endif

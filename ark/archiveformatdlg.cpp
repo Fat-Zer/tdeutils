@@ -25,17 +25,17 @@
 
 #include <klocale.h>
 
-#include <qlabel.h>
-#include <qvbox.h>
+#include <tqlabel.h>
+#include <tqvbox.h>
 
-ArchiveFormatDlg::ArchiveFormatDlg( QWidget * parent, const QString & defaultType )
+ArchiveFormatDlg::ArchiveFormatDlg( TQWidget * parent, const TQString & defaultType )
                         :KDialogBase( parent, "archiveformatdialog", true,
                           i18n( "Choose Archive Format" ),
                           KDialogBase::Ok|KDialogBase::Cancel, KDialogBase::Ok),
                           m_combo( 0 )
 {
-    QString defaultDescription = ArchiveFormatInfo::self()->descriptionForMimeType( defaultType );
-    QString text;
+    TQString defaultDescription = ArchiveFormatInfo::self()->descriptionForMimeType( defaultType );
+    TQString text;
     if ( defaultDescription.isNull() )
         text = i18n( "This file appears to be of type %1,\n"
                      "which is not a supported archive format.\n"
@@ -47,24 +47,24 @@ ArchiveFormatDlg::ArchiveFormatDlg( QWidget * parent, const QString & defaultTyp
                     "If this is not correct, please choose "
                     "the appropriate format." ).arg( defaultDescription );
 
-    QVBox * page = makeVBoxMainWidget();
+    TQVBox * page = makeVBoxMainWidget();
 
-    QLabel * label;
-    label = new QLabel( text, page );
+    TQLabel * label;
+    label = new TQLabel( text, page );
 
     m_combo = new KComboBox( page );
-    QStringList list = ArchiveFormatInfo::self()->allDescriptions();
+    TQStringList list = ArchiveFormatInfo::self()->allDescriptions();
     list.sort();
     m_combo->insertStringList( list );
     m_combo->setCurrentItem( list.findIndex( defaultDescription ) );
 }
 
-QString ArchiveFormatDlg::mimeType()
+TQString ArchiveFormatDlg::mimeType()
 {
     if (m_combo && !m_combo->currentText().isEmpty())
         return ArchiveFormatInfo::self()->mimeTypeForDescription( m_combo->currentText() );
     else
-        return QString();
+        return TQString();
 }
 
 #include "archiveformatdlg.moc"

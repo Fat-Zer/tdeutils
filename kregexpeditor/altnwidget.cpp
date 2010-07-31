@@ -26,9 +26,9 @@
 #include "dragaccepter.h"
 #include "concwidget.h"
 #include "altnregexp.h"
-#include <qpainter.h>
+#include <tqpainter.h>
 
-AltnWidget::AltnWidget(RegExpEditorWindow* editorWindow, QWidget *parent,
+AltnWidget::AltnWidget(RegExpEditorWindow* editorWindow, TQWidget *parent,
                        const char *name)
   :MultiContainerWidget(editorWindow, parent, name == 0 ? "AltnWidget" : name)
 {
@@ -39,7 +39,7 @@ AltnWidget::AltnWidget(RegExpEditorWindow* editorWindow, QWidget *parent,
 }
 
 AltnWidget::AltnWidget( AltnRegExp* regexp, RegExpEditorWindow* editorWindow,
-            QWidget* parent, const char* name)
+            TQWidget* parent, const char* name)
   :MultiContainerWidget( editorWindow, parent, name )
 {
   DragAccepter *accepter = new DragAccepter(editorWindow, this);
@@ -75,15 +75,15 @@ void AltnWidget::setConcChild(ConcWidget *child)
 
 void AltnWidget::addNewConcChild(DragAccepter *accepter, ConcWidget *child)
 {
-  child->reparent(this, QPoint(0,0), false);
+  child->reparent(this, TQPoint(0,0), false);
   MultiContainerWidget::addNewChild( accepter, child );
   updateDrawLineInfo();
 }
 
 
-QSize AltnWidget::sizeHint() const
+TQSize AltnWidget::sizeHint() const
 {
-  QPtrListIterator<RegExpWidget> it(_children);
+  TQPtrListIterator<RegExpWidget> it(_children);
   // Skip the first child, as we only need half of the size of the first and the
   // last drag accepter. Does, however, not apply when there only is onw child.
   if ( _children.count() != 1 )
@@ -93,23 +93,23 @@ QSize AltnWidget::sizeHint() const
   _childrenHeight = 0;
 
   for ( ; *it ; ++it) {
-    QSize thisChildSize = (*it)->sizeHint();
+    TQSize thisChildSize = (*it)->sizeHint();
     _childrenWidth = QMAX(_childrenWidth, thisChildSize.width());
     _childrenHeight += thisChildSize.height();
   }
 
   // Now add the size of the header
-  QFontMetrics metrics = fontMetrics();
+  TQFontMetrics metrics = fontMetrics();
   _textSize = metrics.size(0,_text);
 
   int headerWidth = _textSize.width() + 2 * bdSize + 2;
 
   _childrenWidth = QMAX(_childrenWidth, headerWidth);
 
-  return QSize(_childrenWidth + 2*pw, _childrenHeight + _textSize.height() + 1*pw );
+  return TQSize(_childrenWidth + 2*pw, _childrenHeight + _textSize.height() + 1*pw );
 }
 
-void AltnWidget::paintEvent( QPaintEvent *e)
+void AltnWidget::paintEvent( TQPaintEvent *e)
 {
   Q_ASSERT( dynamic_cast<DragAccepter*>(_children.at(0)) );
   // if this fails, then I should check the location of the show()
@@ -118,9 +118,9 @@ void AltnWidget::paintEvent( QPaintEvent *e)
             dynamic_cast<DragAccepter*>(_children.at(_children.count()-1)) ) );
 
   int offset = 0;
-  QSize mySize = sizeHint();
+  TQSize mySize = sizeHint();
 
-  QPainter painter(this);
+  TQPainter painter(this);
   drawPossibleSelection( painter, mySize );
 
   //-------------------------------------- First draw the border and text
@@ -144,8 +144,8 @@ void AltnWidget::paintEvent( QPaintEvent *e)
 
     RegExpWidget* child = _children.at(i);
 
-    QSize childSize = child->sizeHint();
-    QSize curChildSize = child->size();
+    TQSize childSize = child->sizeHint();
+    TQSize curChildSize = child->size();
 
     //-------------------------------------- place the child
     int x = xOffset;
@@ -172,7 +172,7 @@ RegExp* AltnWidget::regExp() const
 {
 	AltnRegExp *regexp = new AltnRegExp( isSelected() );
 
-  QPtrListIterator<RegExpWidget> it(_children);
+  TQPtrListIterator<RegExpWidget> it(_children);
   ++it; // start with the second element
 	for ( ; *it; it+=2 ) {
     regexp->addRegExp( (*it)->regExp() );
@@ -197,7 +197,7 @@ RegExp* AltnWidget::selection() const
   if ( isSelected() )
     return regExp();
   else {
-    QPtrListIterator<RegExpWidget> it(_children);
+    TQPtrListIterator<RegExpWidget> it(_children);
     ++it; // Skip past DragAccepter
     for ( ; *it; it+=2 ) {
       if ( (*it)->hasSelection() ) {
@@ -216,7 +216,7 @@ bool AltnWidget::validateSelection() const
   }
 
   bool foundASelection = false;
-  QPtrListIterator<RegExpWidget> it(_children);
+  TQPtrListIterator<RegExpWidget> it(_children);
   ++it; // Skip past DragAccepter
   for ( ; *it; it+=2 ) {
     if ( (*it)->hasSelection() ) {

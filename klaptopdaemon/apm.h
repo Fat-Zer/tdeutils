@@ -26,7 +26,7 @@
 #define __APMCONFIG_H__
 
 #include <kcmodule.h>
-#include <qstring.h>
+#include <tqstring.h>
 
 class QWidget;
 class QSpinBox;
@@ -41,7 +41,7 @@ class ApmConfig : public KCModule
 {
   Q_OBJECT
 public:
-  ApmConfig( QWidget *parent=0, const char* name=0);
+  ApmConfig( TQWidget *parent=0, const char* name=0);
   ~ApmConfig( );     
 
   void save( void );
@@ -49,7 +49,7 @@ public:
   void load(bool useDefaults);
   void defaults();
 
-  virtual QString quickHelp() const;
+  virtual TQString quickHelp() const;
 
 private slots:
 
@@ -60,9 +60,9 @@ private slots:
 private:
 	KConfig *config;
 
-	QCheckBox *enableSuspend;
-	QCheckBox *enableStandby;
-	QCheckBox *enableSoftwareSuspendHibernate;
+	TQCheckBox *enableSuspend;
+	TQCheckBox *enableStandby;
+	TQCheckBox *enableSoftwareSuspendHibernate;
 	bool enablestandby, enablesuspend, enablesoftwaresuspend;
 	const char *apm_name;
 };

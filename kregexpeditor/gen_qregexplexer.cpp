@@ -451,7 +451,7 @@ char *yytext;
  *  Boston, MA 02110-1301, USA.
  **/
 #line 21 "qregexpparser.l"
-  #include <qstring.h>
+  #include <tqstring.h>
   #include "textrangeregexp.h"
   #include "gen_qregexpparser.hh"
 #ifdef QT_ONLY
@@ -770,7 +770,7 @@ YY_RULE_SETUP
 #line 77 "qregexpparser.l"
 {
                TextRangeRegExp* regexp = new TextRangeRegExp( false );
-               regexp->addCharacter( QString::fromLocal8Bit( yytext ) );
+               regexp->addCharacter( TQString::fromLocal8Bit( yytext ) );
                qregexplval.regexp = regexp;
                return TOK_CharClass;
              }
@@ -780,7 +780,7 @@ YY_RULE_SETUP
 #line 84 "qregexpparser.l"
 {
              TextRangeRegExp* regexp = new TextRangeRegExp( false ); 
-             regexp->addCharacter( QString::fromLocal8Bit(yytext) );
+             regexp->addCharacter( TQString::fromLocal8Bit(yytext) );
              qregexplval.regexp = regexp;
              return TOK_CharClass;
            }
@@ -790,7 +790,7 @@ YY_RULE_SETUP
 #line 90 "qregexpparser.l"
 {
              TextRangeRegExp* regexp = new TextRangeRegExp( false ); 
-             regexp->addCharacter( QString::fromLocal8Bit(yytext) );
+             regexp->addCharacter( TQString::fromLocal8Bit(yytext) );
              qregexplval.regexp = regexp;
              return TOK_CharClass;
            }
@@ -1774,7 +1774,7 @@ int main()
 #line 114 "qregexpparser.l"
 
 
-void setParseData( QString qstr ) {  
+void setParseData( TQString qstr ) {  
   const char* cstr;
   if ( qstr.isNull() ) 
     cstr = "";
@@ -1837,18 +1837,18 @@ void parseRange( char* txt, int* min, int* max )
 RegExp* parseCharClass( char* match )
 {
   TextRangeRegExp* res = new TextRangeRegExp( false );
-  QString txt = QString::fromLocal8Bit( match );
+  TQString txt = TQString::fromLocal8Bit( match );
   txt = txt.mid(1,txt.length()-2);
   
   unsigned int i = 0;
-  QChar ch = txt.at(i++);
-  QString pendingChar;
-  QString thisChar;
+  TQChar ch = txt.at(i++);
+  TQString pendingChar;
+  TQString thisChar;
   bool charPending = false;
   bool rangePending = false;
   bool flushPending = false;
   
-  if ( ch == QChar('^') ) {
+  if ( ch == TQChar('^') ) {
     res->setNegate( true );
     ch = txt.at(i++);
   }
@@ -1856,7 +1856,7 @@ RegExp* parseCharClass( char* match )
   do {
     // If a character is pending, and the next char is '-' then we are
     // possible looking at a range.
-    if ( ch == QChar('-') && charPending ) {
+    if ( ch == TQChar('-') && charPending ) {
       rangePending = true;
       ch = txt.at(i++);
       continue;
@@ -1870,44 +1870,44 @@ RegExp* parseCharClass( char* match )
       charPending = false;
     }
 
-    if ( ch == QChar('\\') ) {
+    if ( ch == TQChar('\\') ) {
       // Handle the cases where an escape character is specified.
       ch = txt.at(i++);
       
-      if ( ch == QChar('a') || ch == QChar('f') || ch == QChar('n') || ch == QChar('r') || ch == QChar('t') || ch == QChar('v') ) {
+      if ( ch == TQChar('a') || ch == TQChar('f') || ch == TQChar('n') || ch == TQChar('r') || ch == TQChar('t') || ch == TQChar('v') ) {
         // These are just seen as normal characters.
-        thisChar = QString::fromLocal8Bit("\\") + ch;
+        thisChar = TQString::fromLocal8Bit("\\") + ch;
       }
-      else if ( ch == QChar('d') ) {  
+      else if ( ch == TQChar('d') ) {  
         // The following characters represent character groups. If any of
         // these are seen in a range, then the range is ignored, thus [a-\s]
         // matches an 'a', a '-', and a space (\s means space).
         res->setDigit( true );
         flushPending = true;
       }
-      else if ( ch == QChar('D') ) {
+      else if ( ch == TQChar('D') ) {
         res->setNonDigit( true );
         flushPending = true;
       }
-      else if ( ch == QChar('s') ) {
+      else if ( ch == TQChar('s') ) {
         res->setSpace( true );
         flushPending = true;
       }
-      else if ( ch == QChar('S') ) {
+      else if ( ch == TQChar('S') ) {
         res->setNonSpace( true );
         flushPending = true;
       }
-      else if ( ch == QChar('w') ) {
+      else if ( ch == TQChar('w') ) {
         res->setWordChar( true );
         flushPending = true;
       }
-      else if ( ch == QChar('W') ) {
+      else if ( ch == TQChar('W') ) {
         res->setNonWordChar( true );
         flushPending = true;
       }
-      else if ( ch == QChar('x') || ch == QChar('X') ) { 
+      else if ( ch == TQChar('x') || ch == TQChar('X') ) { 
         // This is a hexidecimal character: \xHHHH
-        QString str;
+        TQString str;
         for ( int j=0; j<4; j++) {
           ch = txt.at(i++);
             if ( ch == 'a' || ch == 'A' || ch == 'b' || ch == 'B' || ch == 'c' || ch == 'C' || ch == 'd' || ch == 'D' || 
@@ -1918,11 +1918,11 @@ RegExp* parseCharClass( char* match )
             else
               i--;
         }
-        thisChar = QString::fromLocal8Bit("\\x") + str;
+        thisChar = TQString::fromLocal8Bit("\\x") + str;
       }
-      else if ( ch == QChar('0') ) {
+      else if ( ch == TQChar('0') ) {
         // This is an octal character
-        QString str;
+        TQString str;
         for ( int j=0; j<4; j++) {
           ch = txt.at(i++);
           if ( ch == '0' || ch == '1' || ch == '2' || ch == '3' || ch == '4' || ch == '5' || ch == '6' || ch == '7' )
@@ -1930,7 +1930,7 @@ RegExp* parseCharClass( char* match )
           else
             i--;
         }
-        thisChar = QString::fromLocal8Bit("\\x") + str ;
+        thisChar = TQString::fromLocal8Bit("\\x") + str ;
       }
       else {
         // Anything else escaped just means the character itself.
@@ -1951,7 +1951,7 @@ RegExp* parseCharClass( char* match )
       if ( charPending ) 
         res->addCharacter( pendingChar );
       if ( rangePending ) 
-        res->addCharacter( QString::fromLocal8Bit("-") );
+        res->addCharacter( TQString::fromLocal8Bit("-") );
       flushPending = false; 
       charPending = false;
       rangePending = false;
@@ -1969,12 +1969,12 @@ RegExp* parseCharClass( char* match )
     }
     ch = txt.at(i++);
   }
-  while ( ch != QChar(']') && i <= txt.length() );
+  while ( ch != TQChar(']') && i <= txt.length() );
 
   if ( charPending ) 
     res->addCharacter( pendingChar );
   if ( rangePending ) 
-    res->addCharacter( QString::fromLocal8Bit("-") );
+    res->addCharacter( TQString::fromLocal8Bit("-") );
 
   return res;
 }  

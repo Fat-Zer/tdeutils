@@ -22,35 +22,35 @@
 #include "scrollededitorwindow.h"
 #include "editorwindow.h"
 
-RegExpScrolledEditorWindow::RegExpScrolledEditorWindow( QWidget* parent, const char* name)
-    : QWidget(parent, name)
+RegExpScrolledEditorWindow::RegExpScrolledEditorWindow( TQWidget* parent, const char* name)
+    : TQWidget(parent, name)
 {
-    _scrollView = new QScrollView( this );
+    _scrollView = new TQScrollView( this );
     _editorWindow = new RegExpEditorWindow( _scrollView->viewport());
     _scrollView->addChild( _editorWindow );
-    _scrollView->setResizePolicy( QScrollView::Manual );
+    _scrollView->setResizePolicy( TQScrollView::Manual );
 
-    connect( _editorWindow, SIGNAL( contentChanged( QPoint ) ),
-             this, SLOT( slotUpdateContentSize( QPoint ) ) );
+    connect( _editorWindow, TQT_SIGNAL( contentChanged( TQPoint ) ),
+             this, TQT_SLOT( slotUpdateContentSize( TQPoint ) ) );
 
-    connect( _editorWindow, SIGNAL( scrolling( QPoint ) ),
-             this, SLOT( slotScroll( QPoint ) ) );
+    connect( _editorWindow, TQT_SIGNAL( scrolling( TQPoint ) ),
+             this, TQT_SLOT( slotScroll( TQPoint ) ) );
 
-    connect( _editorWindow, SIGNAL( doneEditing() ), this, SIGNAL( doneEditing() ) );
+    connect( _editorWindow, TQT_SIGNAL( doneEditing() ), this, TQT_SIGNAL( doneEditing() ) );
 
-    connect( _editorWindow, SIGNAL( change() ), this, SIGNAL( change() ) );
-    connect( _editorWindow, SIGNAL( savedRegexp() ), this, SIGNAL( savedRegexp() ) );
+    connect( _editorWindow, TQT_SIGNAL( change() ), this, TQT_SIGNAL( change() ) );
+    connect( _editorWindow, TQT_SIGNAL( savedRegexp() ), this, TQT_SIGNAL( savedRegexp() ) );
 
-    connect( _editorWindow, SIGNAL( anythingSelected(bool) ), this, SIGNAL( anythingSelected(bool) ) );
-    connect( _editorWindow, SIGNAL( anythingOnClipboard(bool) ), this, SIGNAL( anythingOnClipboard(bool) ) );
-    connect( _editorWindow, SIGNAL( canSave(bool) ), this, SIGNAL( canSave(bool) ) );
-    connect( _editorWindow, SIGNAL( verifyRegExp() ), this, SIGNAL( verifyRegExp() ) );
+    connect( _editorWindow, TQT_SIGNAL( anythingSelected(bool) ), this, TQT_SIGNAL( anythingSelected(bool) ) );
+    connect( _editorWindow, TQT_SIGNAL( anythingOnClipboard(bool) ), this, TQT_SIGNAL( anythingOnClipboard(bool) ) );
+    connect( _editorWindow, TQT_SIGNAL( canSave(bool) ), this, TQT_SIGNAL( canSave(bool) ) );
+    connect( _editorWindow, TQT_SIGNAL( verifyRegExp() ), this, TQT_SIGNAL( verifyRegExp() ) );
 }
 
 void RegExpScrolledEditorWindow::slotSetRegExp( RegExp* regexp )
 {
     _editorWindow->slotSetRegExp( regexp );
-    slotUpdateContentSize(QPoint());
+    slotUpdateContentSize(TQPoint());
 }
 
 void RegExpScrolledEditorWindow::slotInsertRegExp( int tp)
@@ -98,16 +98,16 @@ RegExp* RegExpScrolledEditorWindow::regExp()
     return _editorWindow->regExp();
 }
 
-void RegExpScrolledEditorWindow::resizeEvent( QResizeEvent *event )
+void RegExpScrolledEditorWindow::resizeEvent( TQResizeEvent *event )
 {
     _scrollView->resize( event->size() );
-    slotUpdateContentSize(QPoint());
+    slotUpdateContentSize(TQPoint());
 }
 
-void RegExpScrolledEditorWindow::slotUpdateContentSize( QPoint focusPoint )
+void RegExpScrolledEditorWindow::slotUpdateContentSize( TQPoint focusPoint )
 {
-    QSize childSize = _editorWindow->sizeHint();
-    QSize vpSize = _scrollView->viewportSize(10,10);
+    TQSize childSize = _editorWindow->sizeHint();
+    TQSize vpSize = _scrollView->viewportSize(10,10);
 
     bool change = false;
 
@@ -136,8 +136,8 @@ void RegExpScrolledEditorWindow::slotUpdateContentSize( QPoint focusPoint )
 
 
 // TODO: add timers, which will make the widget scroll when mouse is located
-// outside the QScrollView.
-void RegExpScrolledEditorWindow::slotScroll( QPoint focusPoint )
+// outside the TQScrollView.
+void RegExpScrolledEditorWindow::slotScroll( TQPoint focusPoint )
 {
     _scrollView->ensureVisible( focusPoint.x(), focusPoint.y() );
 }

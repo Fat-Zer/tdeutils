@@ -21,7 +21,7 @@
 using namespace KHE;
 
 
-void KDecimalByteCodec::encode( QString &Digits, unsigned int Pos, unsigned char Char ) const
+void KDecimalByteCodec::encode( TQString &Digits, unsigned int Pos, unsigned char Char ) const
 {
   unsigned char C = Char / 100;
   Digits.at(Pos++) = '0'+C;
@@ -33,7 +33,7 @@ void KDecimalByteCodec::encode( QString &Digits, unsigned int Pos, unsigned char
 }
 
 
-void KDecimalByteCodec::encodeShort( QString &Digits, unsigned int Pos, unsigned char Char ) const
+void KDecimalByteCodec::encodeShort( TQString &Digits, unsigned int Pos, unsigned char Char ) const
 {
   unsigned char C;
   if( (C = Char / 100) )

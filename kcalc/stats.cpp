@@ -64,7 +64,7 @@ void KStats::clearLast(void) {
 KNumber KStats::sum(void) {
 
 	KNumber result = 0;
-	QValueVector<KNumber>::iterator p;
+	TQValueVector<KNumber>::iterator p;
 
 	for(p = mData.begin(); p != mData.end(); ++p) {
 		result += *p;
@@ -94,7 +94,7 @@ KNumber KStats::median(void) {
 		return mData.at(0);
 
 	// need to copy mData-list, because sorting afterwards
-	QValueVector<KNumber> tmp_mData(mData);
+	TQValueVector<KNumber> tmp_mData(mData);
 	qHeapSort(tmp_mData);
 
 	if( bound & 1) {  // odd
@@ -113,7 +113,7 @@ KNumber KStats::std_kernel(void)
 {
 	KNumber result = KNumber::Zero;
 	KNumber _mean;
-	QValueVector<KNumber>::iterator p;
+	TQValueVector<KNumber>::iterator p;
 
 	_mean = mean();
 
@@ -128,7 +128,7 @@ KNumber KStats::std_kernel(void)
 KNumber KStats::sum_of_squares() {
 
 	KNumber result = 0;
-	QValueVector<KNumber>::iterator p;
+	TQValueVector<KNumber>::iterator p;
   
 	for(p = mData.begin(); p != mData.end(); ++p) {
 		result += ((*p) * (*p));

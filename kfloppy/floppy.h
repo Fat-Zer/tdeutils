@@ -46,7 +46,7 @@ class FloppyData : public KDialog
     Q_OBJECT
 
 public:
-    FloppyData(QWidget* parent = 0, const char * name = 0);
+    FloppyData(TQWidget* parent = 0, const char * name = 0);
     virtual ~FloppyData();
 
     /// Need to overload normal show() in order to mangle caption
@@ -54,18 +54,18 @@ public:
     /// Maps combobox selection to drive and density
     bool findDevice();
     /// set default device
-    bool setInitialDevice(const QString& dev);
+    bool setInitialDevice(const TQString& dev);
     /** Override closeEvent() in order to properly close
       the entire application.*/
-    void closeEvent(QCloseEvent*);
+    void closeEvent(TQCloseEvent*);
     /// Writing the user-visible settings.
     void writeSettings();
     /// Reading the user-visible settings.
     void readSettings();
     /// Map stored settings to widget status
     void setWidgets();
-    /// A kind of QString::find()
-    int findKeyWord(QString &, const QString &);
+    /// A kind of TQString::find()
+    int findKeyWord(TQString &, const TQString &);
     /// Enable/disable all UI elements
     void setEnabled(bool);
     
@@ -74,18 +74,18 @@ public slots:
       void format();
       void reset();
 
-      void formatStatus(const QString &,int);
+      void formatStatus(const TQString &,int);
       
 protected slots:
 
 private:
         int verifyconfig;
         int labelconfig;
-        QString labelnameconfig;
+        TQString labelnameconfig;
 	int quickformatconfig;
-	QString driveconfig;
-	QString densityconfig;
-	QString filesystemconfig;
+	TQString driveconfig;
+	TQString densityconfig;
+	TQString filesystemconfig;
 	KConfig *config;
 
 	int drive;
@@ -95,24 +95,24 @@ private:
 	bool formating;
 	//bool abort;
         
-	QGroupBox*       outerframe;
-        QLabel*       label1;
-        QLabel*       label2;        
-	QLabel*       label3;
-	QButtonGroup* buttongroup;
-	QCheckBox*    verifylabel;
-	QCheckBox*    labellabel;
-	QLineEdit*    lineedit;
-	QRadioButton* quick;
-        QRadioButton* zerooutformat;
+	TQGroupBox*       outerframe;
+        TQLabel*       label1;
+        TQLabel*       label2;        
+	TQLabel*       label3;
+	TQButtonGroup* buttongroup;
+	TQCheckBox*    verifylabel;
+	TQCheckBox*    labellabel;
+	TQLineEdit*    lineedit;
+	TQRadioButton* quick;
+        TQRadioButton* zerooutformat;
 	KPushButton* quitbutton;
 	KPushButton* helpbutton;
-	QRadioButton* fullformat;
+	TQRadioButton* fullformat;
 	KPushButton*  formatbutton;
-	QLabel* frame;
-	QComboBox* deviceComboBox;
-	QComboBox* filesystemComboBox;
-	QComboBox* densityComboBox;
+	TQLabel* frame;
+	TQComboBox* deviceComboBox;
+	TQComboBox* filesystemComboBox;
+	TQComboBox* densityComboBox;
 	KProgress* progress;
 	KHelpMenu* helpMenu;
 	
@@ -121,7 +121,7 @@ private:
         bool m_canLowLevel; ///< Low level formatting is possible (i.e. was fdformat found?)
         bool m_canZeroOut; ///< Is zero-out possible (i.e. was dd found?)
 protected:
-	void keyPressEvent(QKeyEvent *e);
+	void keyPressEvent(TQKeyEvent *e);
 
 };
 

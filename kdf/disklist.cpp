@@ -37,8 +37,8 @@
 /***************************************************************************
   * constructor
 **/
-DiskList::DiskList(QObject *parent, const char *name)
-    : QObject(parent,name)
+DiskList::DiskList(TQObject *parent, const char *name)
+    : TQObject(parent,name)
 {
    kdDebug() << k_funcinfo << endl;
 
@@ -53,10 +53,10 @@ DiskList::DiskList(QObject *parent, const char *name)
 
    // BackgroundProcesses ****************************************
    dfProc = new KProcess(); Q_CHECK_PTR(dfProc);
-   connect( dfProc, SIGNAL(receivedStdout(KProcess *, char *, int) ),
-      this, SLOT (receivedDFStdErrOut(KProcess *, char *, int)) );
-   connect(dfProc,SIGNAL(processExited(KProcess *) ),
-      this, SLOT(dfDone() ) );
+   connect( dfProc, TQT_SIGNAL(receivedStdout(KProcess *, char *, int) ),
+      this, TQT_SLOT (receivedDFStdErrOut(KProcess *, char *, int)) );
+   connect(dfProc,TQT_SIGNAL(processExited(KProcess *) ),
+      this, TQT_SLOT(dfDone() ) );
 
    readingDFStdErrOut=FALSE;
    config = kapp->config();
@@ -87,9 +87,9 @@ void DiskList::applySettings()
 {
   kdDebug() << k_funcinfo << endl;
 
-  QString oldgroup=config->group();
+  TQString oldgroup=config->group();
   config->setGroup("DiskList");
-  QString key;
+  TQString key;
   DiskEntry *disk;
   for (disk=disks->first();disk!=0;disk=disks->next()) {
    key.sprintf("Mount%s%s%s%s",SEPARATOR,disk->deviceName().latin1()
@@ -117,7 +117,7 @@ void DiskList::loadSettings()
   kdDebug() << k_funcinfo << endl;
 
   config->setGroup("DiskList");
-  QString key;
+  TQString key;
   DiskEntry *disk;
   for (disk=disks->first();disk!=0;disk=disks->next()) {
     key.sprintf("Mount%s%s%s%s",SEPARATOR,disk->deviceName().latin1()
@@ -130,14 +130,14 @@ void DiskList::loadSettings()
 
     key.sprintf("Icon%s%s%s%s",SEPARATOR,disk->deviceName().latin1()
 		,SEPARATOR,disk->mountPoint().latin1());
-    QString icon=config->readPathEntry(key);
+    TQString icon=config->readPathEntry(key);
     if (!icon.isEmpty()) disk->setIconName(icon);
  }
 }
 
 
-static QString expandEscapes(const QString& s) {
-QString rc;
+static TQString expandEscapes(const TQString& s) {
+TQString rc;
     for (unsigned int i = 0; i < s.length(); i++) {
         if (s[i] == '\\') {
             i++;
@@ -172,10 +172,10 @@ int DiskList::readFSTAB()
 
   if (readingDFStdErrOut || dfProc->isRunning()) return -1;
 
-QFile f(FSTAB);
+TQFile f(FSTAB);
   if ( f.open(IO_ReadOnly) ) {
-    QTextStream t (&f);
-    QString s;
+    TQTextStream t (&f);
+    TQString s;
     DiskEntry *disk;
 
     //disks->clear(); // ############
@@ -243,7 +243,7 @@ void DiskList::receivedDFStdErrOut(KProcess *, char *data, int len )
    */
    
 
-  QString tmp = QString::fromLatin1(data, len);
+  TQString tmp = TQString::fromLatin1(data, len);
   dfStringErrOut.append(tmp);
 }
 
@@ -283,12 +283,12 @@ void DiskList::dfDone()
   for ( DiskEntry *disk=disks->first(); disk != 0; disk=disks->next() )
     disk->setMounted(FALSE);  // set all devs unmounted
 
-  QTextStream t (dfStringErrOut, IO_ReadOnly);
-  QString s=t.readLine();
+  TQTextStream t (dfStringErrOut, IO_ReadOnly);
+  TQString s=t.readLine();
   if ( ( s.isEmpty() ) || ( s.left(10) != "Filesystem" ) )
     qFatal("Error running df command... got [%s]",s.latin1());
   while ( !t.atEnd() ) {
-    QString u,v;
+    TQString u,v;
     DiskEntry *disk;
     s=t.readLine();
     s=s.simplifyWhiteSpace();
@@ -361,7 +361,7 @@ void DiskList::dfDone()
 }
 
 
-void DiskList::deleteAllMountedAt(const QString &mountpoint)
+void DiskList::deleteAllMountedAt(const TQString &mountpoint)
 {
   kdDebug() << k_funcinfo << endl;
 
@@ -396,8 +396,8 @@ void DiskList::replaceDeviceEntry(DiskEntry *disk)
   //
   //int pos=disks->find(disk);
 
-  QString deviceRealName = disk->deviceRealName();
-  QString realMountPoint = disk->realMountPoint();
+  TQString deviceRealName = disk->deviceRealName();
+  TQString realMountPoint = disk->realMountPoint();
 
   int pos = -1;
   for( u_int i=0; i<disks->count(); i++ )
@@ -425,7 +425,7 @@ void DiskList::replaceDeviceEntry(DiskEntry *disk)
         // cachefs deviceNames have no / behind the host-column
 	// eg. /cache/cache/.cfs_mnt_points/srv:_home_jesus
 	//                                      ^    ^
-        QString odiskName = olddisk->deviceName();
+        TQString odiskName = olddisk->deviceName();
         int ci=odiskName.find(':'); // goto host-column
         while ((ci =odiskName.find('/',ci)) > 0) {
            odiskName.replace(ci,1,"_");
@@ -460,7 +460,7 @@ void DiskList::replaceDeviceEntry(DiskEntry *disk)
       if ( (-1!=olddisk->mountOptions().find("user")) &&
            (-1==disk->mountOptions().find("user")) ) {
           // add "user" option to new diskEntry
-          QString s=disk->mountOptions();
+          TQString s=disk->mountOptions();
           if (s.length()>0) s.append(",");
           s.append("user");
           disk->setMountOptions(s);

@@ -8,12 +8,12 @@
  *   (at your option) any later version.                                   *
  ***************************************************************************/
 
-#include <qregexp.h>
-#include <qlabel.h>
-#include <qradiobutton.h>
-#include <qwidgetstack.h>
-#include <qcheckbox.h>
-#include <qbuttongroup.h>
+#include <tqregexp.h>
+#include <tqlabel.h>
+#include <tqradiobutton.h>
+#include <tqwidgetstack.h>
+#include <tqcheckbox.h>
+#include <tqbuttongroup.h>
 
 #include <kdebug.h>
 #include <klineedit.h>
@@ -32,10 +32,10 @@
 #include "profileserver.h"
 #include "remoteserver.h"
 
-AddAction::AddAction(QWidget *parent, const char *name, const Mode &mode): AddActionBase(parent, name), theMode(mode)
+AddAction::AddAction(TQWidget *parent, const char *name, const Mode &mode): AddActionBase(parent, name), theMode(mode)
 {
-	connect(this, SIGNAL( selected(const QString &) ), SLOT( updateForPageChange() ));
-	connect(this, SIGNAL( selected(const QString &) ), SLOT( slotCorrectPage() ));
+	connect(this, TQT_SIGNAL( selected(const TQString &) ), TQT_SLOT( updateForPageChange() ));
+	connect(this, TQT_SIGNAL( selected(const TQString &) ), TQT_SLOT( slotCorrectPage() ));
 	curPage = 0;
 	updateProfiles();
 	updateButtons();
@@ -64,23 +64,23 @@ void AddAction::slotCorrectPage()
 	curPage = indexOf(currentPage());
 
 	if(curPage == 2 && theUseProfile->isChecked())
-		showPage(((QWizard *)this)->page(lastPage > 1 ? 1 : 3));
+		showPage(((TQWizard *)this)->page(lastPage > 1 ? 1 : 3));
 	if((curPage == 2 || curPage == 5) && theChangeMode->isChecked())
-		showPage(((QWizard *)this)->page(lastPage > 1 ? 1 : 6));
+		showPage(((TQWizard *)this)->page(lastPage > 1 ? 1 : 6));
 
 	if(curPage == 3 && theUseDCOP->isChecked())
-		showPage(((QWizard *)this)->page(lastPage == 4 ? 2 : 4));
+		showPage(((TQWizard *)this)->page(lastPage == 4 ? 2 : 4));
 
 	if(curPage == 4 && (
 	(theUseDCOP->isChecked() && theFunctions->currentItem() && !Prototype(theFunctions->currentItem()->text(2)).count()) ||
 	(theUseProfile->isChecked() && (theProfileFunctions->currentItem() && !theProfileFunctions->currentItem()->text(1).toInt() || theJustStart->isChecked()))
 	))
-		showPage(((QWizard *)this)->page(lastPage == 5 ? (theUseDCOP->isChecked() ? 2 : 3) : 5));
+		showPage(((TQWizard *)this)->page(lastPage == 5 ? (theUseDCOP->isChecked() ? 2 : 3) : 5));
 }
 
 void AddAction::requestNextPress()
 {
-	IRKick_stub("irkick", "IRKick").stealNextPress(DCOPClient::mainClient()->appId(), "KCMLirc", "gotButton(QString, QString)");
+	IRKick_stub("irkick", "IRKick").stealNextPress(DCOPClient::mainClient()->appId(), "KCMLirc", "gotButton(TQString, TQString)");
 }
 
 void AddAction::cancelRequest()
@@ -88,7 +88,7 @@ void AddAction::cancelRequest()
 	IRKick_stub("irkick", "IRKick").dontStealNextPress();
 }
 
-void AddAction::updateButton(const QString &remote, const QString &button)
+void AddAction::updateButton(const TQString &remote, const TQString &button)
 {
 	if(theMode.remote() == remote)
 	{	// note this isn't the "correct" way of doing it; really i should iterate throughg the items and try to find the item which when put through buttonMap[item] returns the current button name. but i cant be arsed.
@@ -109,9 +109,9 @@ void AddAction::updateButtons()
 	theButtons->clear();
 	buttonMap.clear();
 	IRKick_stub IRKick("irkick", "IRKick");
-	QStringList buttons = IRKick.buttons(theMode.remote());
-	for(QStringList::iterator j = buttons.begin(); j != buttons.end(); ++j)
-		buttonMap[new QListViewItem(theButtons, RemoteServer::remoteServer()->getButtonName(theMode.remote(), *j))] = *j;
+	TQStringList buttons = IRKick.buttons(theMode.remote());
+	for(TQStringList::iterator j = buttons.begin(); j != buttons.end(); ++j)
+		buttonMap[new TQListViewItem(theButtons, RemoteServer::remoteServer()->getButtonName(theMode.remote(), *j))] = *j;
 }
 
 void AddAction::updateForPageChange()
@@ -140,17 +140,17 @@ void AddAction::updateButtonStates()
 	}
 }
 
-const QStringList AddAction::getFunctions(const QString app, const QString obj)
+const TQStringList AddAction::getFunctions(const TQString app, const TQString obj)
 {
-	QStringList ret;
+	TQStringList ret;
 	DCOPClient *theClient = KApplication::kApplication()->dcopClient();
 	QCStringList theApps = theClient->remoteFunctions(app.utf8(), obj.utf8());
 	for(QCStringList::iterator i = theApps.begin(); i != theApps.end(); ++i)
 		if(	*i != "QCStringList interfaces()" &&
 			*i != "QCStringList functions()" &&
 			*i != "QCStringList objects()" &&
-			*i != "QCStringList find(QCString)" )
-			ret += QString::fromUtf8(*i);
+			*i != "QCStringList find(TQCString)" )
+			ret += TQString::fromUtf8(*i);
 	return ret;
 }
 
@@ -160,10 +160,10 @@ void AddAction::updateProfiles()
 	theProfiles->clear();
 	profileMap.clear();
 
-	QDict<Profile> dict = theServer->profiles();
-	QDictIterator<Profile> i(dict);
+	TQDict<Profile> dict = theServer->profiles();
+	TQDictIterator<Profile> i(dict);
 	for(; i.current(); ++i)
-		profileMap[new QListViewItem(theProfiles, i.current()->name())] = i.currentKey();
+		profileMap[new TQListViewItem(theProfiles, i.current()->name())] = i.currentKey();
 }
 
 void AddAction::updateOptions()
@@ -180,10 +180,10 @@ void AddAction::updateOptions()
 	else if(theUseDCOP->isChecked())
 	{
 		if(!theObjects->selectedItem()) return;
-		QListViewItem* i = theObjects->selectedItem()->parent();
+		TQListViewItem* i = theObjects->selectedItem()->parent();
 		if(!i) return;
 		isUnique = uniqueProgramMap[i];
-		QRegExp r("(.*)-[0-9]+");
+		TQRegExp r("(.*)-[0-9]+");
 		program = r.exactMatch(nameProgramMap[i]) ? r.cap(1) : nameProgramMap[i];
 		im = IM_DONTSEND;
 	}
@@ -213,9 +213,9 @@ void AddAction::updateProfileFunctions()
 	if(!theProfiles->currentItem()) return;
 
 	const Profile *p = theServer->profiles()[profileMap[theProfiles->currentItem()]];
-	QDict<ProfileAction> dict = p->actions();
-	for(QDictIterator<ProfileAction> i(dict); i.current(); ++i)
-		profileFunctionMap[new QListViewItem(theProfileFunctions, i.current()->name(), QString().setNum(i.current()->arguments().count()), i.current()->comment())] = i.currentKey();
+	TQDict<ProfileAction> dict = p->actions();
+	for(TQDictIterator<ProfileAction> i(dict); i.current(); ++i)
+		profileFunctionMap[new TQListViewItem(theProfileFunctions, i.current()->name(), TQString().setNum(i.current()->arguments().count()), i.current()->comment())] = i.currentKey();
 	updateParameters();
 	updateOptions();
 }
@@ -228,9 +228,9 @@ void AddAction::updateParameters()
 	{
 		Prototype p(theFunctions->currentItem()->text(2));
 		for(unsigned k = 0; k < p.count(); k++)
-		{	new KListViewItem(theParameters, p.name(k).isEmpty() ? i18n( "<anonymous>" ) : p.name(k), "", p.type(k), QString().setNum(k + 1));
-			theArguments.append(QVariant(""));
-			theArguments.back().cast(QVariant::nameToType(p.type(k).utf8()));
+		{	new KListViewItem(theParameters, p.name(k).isEmpty() ? i18n( "<anonymous>" ) : p.name(k), "", p.type(k), TQString().setNum(k + 1));
+			theArguments.append(TQVariant(""));
+			theArguments.back().cast(TQVariant::nameToType(p.type(k).utf8()));
 		}
 	}
 	else if(theUseProfile->isChecked() && theProfiles->currentItem())
@@ -243,10 +243,10 @@ void AddAction::updateParameters()
 		const ProfileAction *pa = p->actions()[profileFunctionMap[theProfileFunctions->currentItem()]];
 
 		int index = 1;
-		for(QValueList<ProfileActionArgument>::const_iterator i = pa->arguments().begin(); i != pa->arguments().end(); ++i, index++)
-		{	theArguments.append(QVariant((*i).getDefault()));
-			theArguments.back().cast(QVariant::nameToType((*i).type().utf8()));
-			new QListViewItem(theParameters, (*i).comment(), theArguments.back().toString(), (*i).type(), QString().setNum(index));
+		for(TQValueList<ProfileActionArgument>::const_iterator i = pa->arguments().begin(); i != pa->arguments().end(); ++i, index++)
+		{	theArguments.append(TQVariant((*i).getDefault()));
+			theArguments.back().cast(TQVariant::nameToType((*i).type().utf8()));
+			new TQListViewItem(theParameters, (*i).comment(), theArguments.back().toString(), (*i).type(), TQString().setNum(index));
 		}
 
 		// quicky update options too...
@@ -260,7 +260,7 @@ void AddAction::updateParameters()
 void AddAction::updateParameter()
 {
 	if(theParameters->currentItem())
-	{	QString type = theParameters->currentItem()->text(2);
+	{	TQString type = theParameters->currentItem()->text(2);
 		int index = theParameters->currentItem()->text(3).toInt() - 1;
 		if(type.find("int") != -1 || type.find("short") != -1 || type.find("long") != -1)
 		{	theValue->raiseWidget(2);
@@ -274,9 +274,9 @@ void AddAction::updateParameter()
 		{	theValue->raiseWidget(1);
 			theValueCheckBox->setChecked(theArguments[index].toBool());
 		}
-		else if(type.find("QStringList") != -1)
+		else if(type.find("TQStringList") != -1)
 		{	theValue->raiseWidget(4);
-			QStringList backup = theArguments[index].toStringList();
+			TQStringList backup = theArguments[index].toStringList();
 			// backup needed because calling clear will kill what ever has been saved.
 			theValueEditListBox->clear();
 			theValueEditListBox->insertStringList(backup);
@@ -306,31 +306,31 @@ void AddAction::slotParameterChanged()
 {
 	if(!theParameters->currentItem()) return;
 	int index = theParameters->currentItem()->text(3).toInt() - 1;
-	QString type = theParameters->currentItem()->text(2);
+	TQString type = theParameters->currentItem()->text(2);
 	if(type.find("int") != -1 || type.find("short") != -1 || type.find("long") != -1)
 		theArguments[index].asInt() = theValueIntNumInput->value();
 	else if(type.find("double") != -1 || type.find("float") != -1)
 		theArguments[index].asDouble() = theValueDoubleNumInput->value();
 	else if(type.find("bool") != -1)
 		theArguments[index].asBool() = theValueCheckBox->isChecked();
-	else if(type.find("QStringList") != -1)
+	else if(type.find("TQStringList") != -1)
 		theArguments[index].asStringList() = theValueEditListBox->items();
 	else
 		theArguments[index].asString() = theValueLineEdit->text();
 
-	theArguments[theParameters->currentItem()->text(3).toInt() - 1].cast(QVariant::nameToType(theParameters->currentItem()->text(2).utf8()));
+	theArguments[theParameters->currentItem()->text(3).toInt() - 1].cast(TQVariant::nameToType(theParameters->currentItem()->text(2).utf8()));
 	updateArgument(theParameters->currentItem());
 }
 
 // takes theArguments[theIndex] and puts it into theItem
-void AddAction::updateArgument(QListViewItem *theItem)
+void AddAction::updateArgument(TQListViewItem *theItem)
 {
 	theItem->setText(1, theArguments[theItem->text(3).toInt() - 1].toString());
 }
 
 void AddAction::updateObjects()
 {
-	QStringList names;
+	TQStringList names;
 	theObjects->clear();
 	uniqueProgramMap.clear();
 	nameProgramMap.clear();
@@ -339,15 +339,15 @@ void AddAction::updateObjects()
 	QCStringList theApps = theClient->registeredApplications();
 	for(QCStringList::iterator i = theApps.begin(); i != theApps.end(); ++i)
 	{
-		if(!QString(*i).find("anonymous")) continue;
-		if(!QString(*i).find(i18n( "anonymous" ))) continue;
-		QRegExp r("(.*)-[0-9]+");
-		QString name = r.exactMatch(QString(*i)) ? r.cap(1) : *i;
+		if(!TQString(*i).find("anonymous")) continue;
+		if(!TQString(*i).find(i18n( "anonymous" ))) continue;
+		TQRegExp r("(.*)-[0-9]+");
+		TQString name = r.exactMatch(TQString(*i)) ? r.cap(1) : *i;
 		if(names.contains(name)) continue;
 		names += name;
 
 		KListViewItem *a = new KListViewItem(theObjects, name);
-		uniqueProgramMap[a] = name == QString(*i);
+		uniqueProgramMap[a] = name == TQString(*i);
 		nameProgramMap[a] = *i;
 
 		QCStringList theObjects = theClient->remoteObjects(*i);
@@ -362,9 +362,9 @@ void AddAction::updateFunctions()
 {
 	theFunctions->clear();
 	if(theObjects->currentItem() && theObjects->currentItem()->parent())
-	{	QStringList functions = getFunctions(nameProgramMap[theObjects->currentItem()->parent()], theObjects->currentItem()->text(0));
-		for(QStringList::iterator i = functions.begin(); i != functions.end(); ++i)
-		{	Prototype p((QString)(*i));
+	{	TQStringList functions = getFunctions(nameProgramMap[theObjects->currentItem()->parent()], theObjects->currentItem()->text(0));
+		for(TQStringList::iterator i = functions.begin(); i != functions.end(); ++i)
+		{	Prototype p((TQString)(*i));
 			new KListViewItem(theFunctions, p.name(), p.argumentList(), *i);
 		}
 	}

@@ -23,14 +23,14 @@
 
 #include <kdebug.h>
 #include <klocale.h>
-#include <qglobal.h>
+#include <tqglobal.h>
 #include <klibloader.h>
 #include <kstandarddirs.h>
 #include <kconfig.h>
 
-#include <qtimer.h>
-#include <qfile.h>
-#include <qregexp.h>
+#include <tqtimer.h>
+#include <tqfile.h>
+#include <tqregexp.h>
 
 #include <stdio.h>
 
@@ -50,16 +50,16 @@ SensorBase *SensorBase::self()
   return m_self;
 }
 
-SensorBase::SensorBase() : QObject()
+SensorBase::SensorBase() : TQObject()
 {
   KSim::Config::config()->setGroup("Sensors");
-  QCString sensorsName("libsensors.so");
+  TQCString sensorsName("libsensors.so");
 
-  QStringList sensorLocations = KSim::Config::config()->readListEntry("sensorLocations");
+  TQStringList sensorLocations = KSim::Config::config()->readListEntry("sensorLocations");
 
-  QStringList::ConstIterator it;
+  TQStringList::ConstIterator it;
   for (it = sensorLocations.begin(); it != sensorLocations.end(); ++it) {
-    if (QFile::exists((*it).local8Bit() + sensorsName)) {
+    if (TQFile::exists((*it).local8Bit() + sensorsName)) {
       m_libLocation = (*it).local8Bit() + sensorsName;
       break;
     }
@@ -75,8 +75,8 @@ SensorBase::SensorBase() : QObject()
       m_hasNVControl = XNVCTRLQueryExtension(qt_xdisplay(), &eventBase, &errorBase) == True;
   }
 
-  m_updateTimer = new QTimer(this);
-  connect(m_updateTimer, SIGNAL(timeout()), SLOT(update()));
+  m_updateTimer = new TQTimer(this);
+  connect(m_updateTimer, TQT_SIGNAL(timeout()), TQT_SLOT(update()));
 }
 
 SensorBase::~SensorBase()
@@ -120,13 +120,13 @@ void SensorBase::update()
         m_label(*chip, sFeature->number, &name);
         m_feature(*chip, sFeature->number, &value);
 
-        float returnValue = formatValue(QString::fromUtf8(name), float(value));
-        QString label = formatString(QString::fromUtf8(name), returnValue);
-        QString chipset = chipsetString(chip);
+        float returnValue = formatValue(TQString::fromUtf8(name), float(value));
+        TQString label = formatString(TQString::fromUtf8(name), returnValue);
+        TQString chipset = chipsetString(chip);
 
         m_sensorList.append(SensorInfo(currentSensor++, label,
-           QString::fromUtf8(name), QString::fromUtf8(chip->prefix),
-           chipset, sensorType(QString::fromLatin1(name))));
+           TQString::fromUtf8(name), TQString::fromUtf8(chip->prefix),
+           chipset, sensorType(TQString::fromLatin1(name))));
       }
     }
   }
@@ -134,15 +134,15 @@ void SensorBase::update()
   if (m_hasNVControl) {
       int temp = 0;
       if (XNVCTRLQueryAttribute(qt_xdisplay(), qt_xscreen(), 0 /* not used? */, NV_CTRL_GPU_CORE_TEMPERATURE, &temp)) {
-          QString name = QString::fromLatin1("GPU Temp");
-          m_sensorList.append(SensorInfo(currentSensor++, QString::number(temp),
-                                         name, QString::null, QString::null, sensorType(name)));
+          TQString name = TQString::fromLatin1("GPU Temp");
+          m_sensorList.append(SensorInfo(currentSensor++, TQString::number(temp),
+                                         name, TQString::null, TQString::null, sensorType(name)));
       }
 
       if (XNVCTRLQueryAttribute(qt_xdisplay(), qt_xscreen(), 0 /* not used? */, NV_CTRL_AMBIENT_TEMPERATURE, &temp)) {
-          QString name = QString::fromLatin1("GPU Ambient Temp");
-          m_sensorList.append(SensorInfo(currentSensor++, QString::number(temp),
-                                         name, QString::null, QString::null, sensorType(name)));
+          TQString name = TQString::fromLatin1("GPU Ambient Temp");
+          m_sensorList.append(SensorInfo(currentSensor++, TQString::number(temp),
+                                         name, TQString::null, TQString::null, sensorType(name)));
       }
 
   }
@@ -210,34 +210,34 @@ bool SensorBase::init()
   return true;
 }
 
-QString SensorBase::sensorType(const QString &name)
+TQString SensorBase::sensorType(const TQString &name)
 {
   if (name.findRev("fan", -1, false) != -1)
     return i18n("Rounds per minute", " RPM");
 
   if (name.findRev("temp", -1, false) != -1)
     if (SensorBase::fahrenheit())
-      return QString::fromLatin1("°F");
+      return TQString::fromLatin1("°F");
     else
-      return QString::fromLatin1("°C");
+      return TQString::fromLatin1("°C");
 
-  if (name.findRev(QRegExp("[^\\+]?[^\\-]?V$")) != -1)
+  if (name.findRev(TQRegExp("[^\\+]?[^\\-]?V$")) != -1)
     return i18n("Volt", "V");
 
-  return QString::null;
+  return TQString::null;
 }
 
-QString SensorBase::chipsetString(const ChipName *c)
+TQString SensorBase::chipsetString(const ChipName *c)
 {
-  QString data = QString::fromUtf8(c->prefix);
+  TQString data = TQString::fromUtf8(c->prefix);
 
   if (c->bus == BusISA)
-    return QString().sprintf("%s-isa-%04x", data.utf8().data(), c->addr);
+    return TQString().sprintf("%s-isa-%04x", data.utf8().data(), c->addr);
 
-  return QString().sprintf("%s-i2c-%d-%02x", data.utf8().data(), c->bus, c->addr);
+  return TQString().sprintf("%s-i2c-%d-%02x", data.utf8().data(), c->bus, c->addr);
 }
 
-float SensorBase::formatValue(const QString &label, float value)
+float SensorBase::formatValue(const TQString &label, float value)
 {
   if (label.findRev("temp", -1, false) != -1)
       return toFahrenheit(value);
@@ -245,10 +245,10 @@ float SensorBase::formatValue(const QString &label, float value)
  return value;
 }
 
-QString SensorBase::formatString(const QString &label, float value)
+TQString SensorBase::formatString(const TQString &label, float value)
 {
   if (label.findRev("fan", -1, false) != -1)
-    return QString::number(value);
+    return TQString::number(value);
 
-  return QString::number(value,'f',2);
+  return TQString::number(value,'f',2);
 }

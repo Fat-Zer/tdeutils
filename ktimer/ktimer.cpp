@@ -16,15 +16,15 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#include <qtimer.h>
-#include <qtoolbutton.h>
-#include <qgroupbox.h>
-#include <qlistview.h>
-#include <qspinbox.h>
-#include <qlineedit.h>
-#include <qcheckbox.h>
-#include <qslider.h>
-#include <qlcdnumber.h>
+#include <tqtimer.h>
+#include <tqtoolbutton.h>
+#include <tqgroupbox.h>
+#include <tqlistview.h>
+#include <tqspinbox.h>
+#include <tqlineedit.h>
+#include <tqcheckbox.h>
+#include <tqslider.h>
+#include <tqlcdnumber.h>
 #include <kurlrequester.h>
 #include <klineedit.h>
 
@@ -34,20 +34,20 @@
 #include <kfiledialog.h>
 
 #include "ktimer.h"
-#include <qpushbutton.h>
+#include <tqpushbutton.h>
 
 
-class KTimerJobItem : public QListViewItem {
+class KTimerJobItem : public TQListViewItem {
 public:
-    KTimerJobItem( KTimerJob *job, QListView *parent )
-        : QListViewItem( parent ) {
+    KTimerJobItem( KTimerJob *job, TQListView *parent )
+        : TQListViewItem( parent ) {
         m_job = job;
         m_error = false;
         update();
     };
 
-    KTimerJobItem( KTimerJob *job, QListView *parent, QListViewItem *after )
-        : QListViewItem( parent, after ) {
+    KTimerJobItem( KTimerJob *job, TQListView *parent, TQListViewItem *after )
+        : TQListViewItem( parent, after ) {
         m_job = job;
         m_error = false;
         update();
@@ -65,14 +65,14 @@ public:
     }
 
     void update() {
-        setText( 0, QString::number(m_job->value()) );
+        setText( 0, TQString::number(m_job->value()) );
 
         if( m_error )
             setPixmap( 0, SmallIcon("stop") );
         else
-            setPixmap( 0, QPixmap() );
+            setPixmap( 0, TQPixmap() );
 
-        setText( 1, QString::number(m_job->delay()) );
+        setText( 1, TQString::number(m_job->delay()) );
 
         switch( m_job->state() ) {
             case KTimerJob::Stopped: setPixmap( 2, SmallIcon("player_stop") ); break;
@@ -94,10 +94,10 @@ private:
 
 struct KTimerPrefPrivate
 {
-    QPtrList<KTimerJob> jobs;
+    TQPtrList<KTimerJob> jobs;
 };
 
-KTimerPref::KTimerPref( QWidget *parent, const char *name )
+KTimerPref::KTimerPref( TQWidget *parent, const char *name )
     : PrefWidget( parent, name )
 {
     d = new KTimerPrefPrivate;
@@ -115,10 +115,10 @@ KTimerPref::KTimerPref( QWidget *parent, const char *name )
     tray->setPixmap( SmallIcon( "ktimer" ) );
 
     // connect
-    connect( m_add, SIGNAL(clicked()), SLOT(add()) );
-    connect( m_remove, SIGNAL(clicked()), SLOT(remove()) );
-    connect( m_list, SIGNAL(currentChanged(QListViewItem*)),
-             SLOT(currentChanged(QListViewItem*)) );
+    connect( m_add, TQT_SIGNAL(clicked()), TQT_SLOT(add()) );
+    connect( m_remove, TQT_SIGNAL(clicked()), TQT_SLOT(remove()) );
+    connect( m_list, TQT_SIGNAL(currentChanged(TQListViewItem*)),
+             TQT_SLOT(currentChanged(TQListViewItem*)) );
     loadJobs( kapp->config() );
 
     show();
@@ -137,16 +137,16 @@ void KTimerPref::add()
     KTimerJob *job = new KTimerJob;
     KTimerJobItem *item = new KTimerJobItem( job, m_list );
 
-    connect( job, SIGNAL(delayChanged(KTimerJob*,unsigned)),
-             SLOT(jobChanged(KTimerJob*)) );
-    connect( job, SIGNAL(valueChanged(KTimerJob*,unsigned)),
-             SLOT(jobChanged(KTimerJob*)) );
-    connect( job, SIGNAL(stateChanged(KTimerJob*,States)),
-             SLOT(jobChanged(KTimerJob*)) );
-    connect( job, SIGNAL(commandChanged(KTimerJob*,const QString&)),
-             SLOT(jobChanged(KTimerJob*)) );
-    connect( job, SIGNAL(finished(KTimerJob*,bool)),
-             SLOT(jobFinished(KTimerJob*,bool)) );
+    connect( job, TQT_SIGNAL(delayChanged(KTimerJob*,unsigned)),
+             TQT_SLOT(jobChanged(KTimerJob*)) );
+    connect( job, TQT_SIGNAL(valueChanged(KTimerJob*,unsigned)),
+             TQT_SLOT(jobChanged(KTimerJob*)) );
+    connect( job, TQT_SIGNAL(stateChanged(KTimerJob*,States)),
+             TQT_SLOT(jobChanged(KTimerJob*)) );
+    connect( job, TQT_SIGNAL(commandChanged(KTimerJob*,const TQString&)),
+             TQT_SLOT(jobChanged(KTimerJob*)) );
+    connect( job, TQT_SIGNAL(finished(KTimerJob*,bool)),
+             TQT_SLOT(jobFinished(KTimerJob*,bool)) );
 
     job->setUser( item );
 
@@ -166,7 +166,7 @@ void KTimerPref::remove()
 }
 
 
-void KTimerPref::currentChanged( QListViewItem *i )
+void KTimerPref::currentChanged( TQListViewItem *i )
 {
     KTimerJobItem *item = static_cast<KTimerJobItem*>(i);
     if( item ) {
@@ -185,22 +185,22 @@ void KTimerPref::currentChanged( QListViewItem *i )
         m_counter->disconnect();
         m_slider->disconnect();
 
-        connect( m_commandLine->lineEdit(), SIGNAL(textChanged(const QString &)),
-                 job, SLOT(setCommand(const QString &)) );
-        connect( m_delay, SIGNAL(valueChanged(int)),
-                 job, SLOT(setDelay(int)) );
-        connect( m_loop, SIGNAL(toggled(bool)),
-                 job, SLOT(setLoop(bool)) );
-        connect( m_one, SIGNAL(toggled(bool)),
-                 job, SLOT(setOneInstance(bool)) );
-        connect( m_stop, SIGNAL(clicked()),
-                 job, SLOT(stop()) );
-        connect( m_pause, SIGNAL(clicked()),
-                 job, SLOT(pause()) );
-        connect( m_start, SIGNAL(clicked()),
-                 job, SLOT(start()) );
-        connect( m_slider, SIGNAL(valueChanged(int)),
-                 job, SLOT(setValue(int)) );
+        connect( m_commandLine->lineEdit(), TQT_SIGNAL(textChanged(const TQString &)),
+                 job, TQT_SLOT(setCommand(const TQString &)) );
+        connect( m_delay, TQT_SIGNAL(valueChanged(int)),
+                 job, TQT_SLOT(setDelay(int)) );
+        connect( m_loop, TQT_SIGNAL(toggled(bool)),
+                 job, TQT_SLOT(setLoop(bool)) );
+        connect( m_one, TQT_SIGNAL(toggled(bool)),
+                 job, TQT_SLOT(setOneInstance(bool)) );
+        connect( m_stop, TQT_SIGNAL(clicked()),
+                 job, TQT_SLOT(stop()) );
+        connect( m_pause, TQT_SIGNAL(clicked()),
+                 job, TQT_SLOT(pause()) );
+        connect( m_start, TQT_SIGNAL(clicked()),
+                 job, TQT_SLOT(start()) );
+        connect( m_slider, TQT_SIGNAL(valueChanged(int)),
+                 job, TQT_SLOT(setValue(int)) );
 
         m_commandLine->lineEdit()->setText( job->command() );
         m_delay->setValue( job->delay() );
@@ -249,7 +249,7 @@ void KTimerPref::saveJobs( KConfig *cfg )
     int num = 0;
     KTimerJobItem *item = static_cast<KTimerJobItem*>(m_list->firstChild());
     while( item ) {
-        item->job()->save( cfg, QString("Job%1").arg( num ) );
+        item->job()->save( cfg, TQString("Job%1").arg( num ) );
         item = static_cast<KTimerJobItem*>(item->nextSibling());
         num++;
     }
@@ -269,18 +269,18 @@ void KTimerPref::loadJobs( KConfig *cfg )
             KTimerJob *job = new KTimerJob;
             KTimerJobItem *item = new KTimerJobItem( job, m_list );
 
-            connect( job, SIGNAL(delayChanged(KTimerJob*,unsigned)),
-                     SLOT(jobChanged(KTimerJob*)) );
-            connect( job, SIGNAL(valueChanged(KTimerJob*,unsigned)),
-                     SLOT(jobChanged(KTimerJob*)) );
-            connect( job, SIGNAL(stateChanged(KTimerJob*,States)),
-                     SLOT(jobChanged(KTimerJob*)) );
-            connect( job, SIGNAL(commandChanged(KTimerJob*,const QString&)),
-                     SLOT(jobChanged(KTimerJob*)) );
-            connect( job, SIGNAL(finished(KTimerJob*,bool)),
-                     SLOT(jobFinished(KTimerJob*,bool)) );
+            connect( job, TQT_SIGNAL(delayChanged(KTimerJob*,unsigned)),
+                     TQT_SLOT(jobChanged(KTimerJob*)) );
+            connect( job, TQT_SIGNAL(valueChanged(KTimerJob*,unsigned)),
+                     TQT_SLOT(jobChanged(KTimerJob*)) );
+            connect( job, TQT_SIGNAL(stateChanged(KTimerJob*,States)),
+                     TQT_SLOT(jobChanged(KTimerJob*)) );
+            connect( job, TQT_SIGNAL(commandChanged(KTimerJob*,const TQString&)),
+                     TQT_SLOT(jobChanged(KTimerJob*)) );
+            connect( job, TQT_SIGNAL(finished(KTimerJob*,bool)),
+                     TQT_SLOT(jobFinished(KTimerJob*,bool)) );
 
-            job->load( cfg, QString( "Job%1" ).arg(n) );
+            job->load( cfg, TQString( "Job%1" ).arg(n) );
 
             job->setUser( item );
     }
@@ -294,20 +294,20 @@ void KTimerPref::loadJobs( KConfig *cfg )
 
 struct KTimerJobPrivate {
     unsigned delay;
-    QString command;
+    TQString command;
     bool loop;
     bool oneInstance;
     unsigned value;
     KTimerJob::States state;
-    QPtrList<KProcess> processes;
+    TQPtrList<KProcess> processes;
     void *user;
 
-    QTimer *timer;
+    TQTimer *timer;
 };
 
 
-KTimerJob::KTimerJob( QObject *parent, const char *name )
-    : QObject( parent, name )
+KTimerJob::KTimerJob( TQObject *parent, const char *name )
+    : TQObject( parent, name )
 {
     d = new KTimerJobPrivate;
 
@@ -319,8 +319,8 @@ KTimerJob::KTimerJob( QObject *parent, const char *name )
     d->processes.setAutoDelete( true );
     d->user = 0;
 
-    d->timer = new QTimer( this );
-    connect( d->timer, SIGNAL(timeout()), SLOT(timeout()) );
+    d->timer = new TQTimer( this );
+    connect( d->timer, TQT_SIGNAL(timeout()), TQT_SLOT(timeout()) );
 }
 
 
@@ -330,7 +330,7 @@ KTimerJob::~KTimerJob()
 }
 
 
-void KTimerJob::load( KConfig *cfg, const QString& grp )
+void KTimerJob::load( KConfig *cfg, const TQString& grp )
 {
     cfg->setGroup( grp );
     cfg->writeEntry( "Delay", d->delay );
@@ -341,7 +341,7 @@ void KTimerJob::load( KConfig *cfg, const QString& grp )
 }
 
 
-void KTimerJob::save( KConfig *cfg, const QString& grp )
+void KTimerJob::save( KConfig *cfg, const TQString& grp )
 {
     cfg->setGroup( grp );
     setDelay( cfg->readNumEntry( "Delay", 100 ) );
@@ -384,13 +384,13 @@ void KTimerJob::setDelay( unsigned sec )
 }
 
 
-QString KTimerJob::command()
+TQString KTimerJob::command()
 {
     return d->command;
 }
 
 
-void KTimerJob::setCommand( const QString &cmd )
+void KTimerJob::setCommand( const TQString &cmd )
 {
     if( d->command!=cmd ) {
         d->command = cmd;
@@ -502,8 +502,8 @@ void KTimerJob::fire()
         KShellProcess *proc = new KShellProcess;
         (*proc) << d->command;
         d->processes.append( proc );
-        connect( proc, SIGNAL(processExited(KProcess*)),
-                 SLOT(processExited(KProcess*)) );
+        connect( proc, TQT_SIGNAL(processExited(KProcess*)),
+                 TQT_SLOT(processExited(KProcess*)) );
         bool ok = proc->start( KProcess::NotifyOnExit );
         emit fired( this );
         if( !ok ) {

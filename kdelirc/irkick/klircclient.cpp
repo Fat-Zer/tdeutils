@@ -19,12 +19,12 @@
 #include <sys/socket.h>
 #include <errno.h>
 
-#include <qwidget.h>
-#include <qdialog.h>
-#include <qtooltip.h>
-#include <qsocket.h>
-#include <qsocketnotifier.h>
-#include <qfile.h>
+#include <tqwidget.h>
+#include <tqdialog.h>
+#include <tqtooltip.h>
+#include <tqsocket.h>
+#include <tqsocketnotifier.h>
+#include <tqfile.h>
 
 #include <kapplication.h>
 #include <ksystemtray.h>
@@ -43,7 +43,7 @@
 #include "klircclient.h"
 
 
-KLircClient::KLircClient(QWidget *parent, const char *name) : QObject(parent, name), theSocket(0), listIsUpToDate(false)
+KLircClient::KLircClient(TQWidget *parent, const char *name) : TQObject(parent, name), theSocket(0), listIsUpToDate(false)
 {
 	connectToLirc();
 }
@@ -68,8 +68,8 @@ bool KLircClient::connectToLirc()
 
 	theSocket = new QSocket;
 	theSocket->setSocket(sock);
-	connect(theSocket, SIGNAL(readyRead()), SLOT(slotRead()));
-	connect(theSocket, SIGNAL(connectionClosed()), SLOT(slotClosed()));
+	connect(theSocket, TQT_SIGNAL(readyRead()), TQT_SLOT(slotRead()));
+	connect(theSocket, TQT_SIGNAL(connectionClosed()), TQT_SLOT(slotClosed()));
 	updateRemotes();
 	return true;
 }
@@ -87,16 +87,16 @@ void KLircClient::slotClosed()
 	emit connectionClosed();
 }
 
-const QStringList KLircClient::remotes() const
+const TQStringList KLircClient::remotes() const
 {
-	QStringList remotes;
-	for(QMap<QString, QStringList>::ConstIterator i = theRemotes.begin(); i != theRemotes.end(); ++i)
+	TQStringList remotes;
+	for(TQMap<TQString, TQStringList>::ConstIterator i = theRemotes.begin(); i != theRemotes.end(); ++i)
 		remotes.append(i.key());
 	remotes.sort();
 	return remotes;
 }
 
-const QStringList KLircClient::buttons(const QString &theRemote) const
+const TQStringList KLircClient::buttons(const TQString &theRemote) const
 {
 	return theRemotes[theRemote];
 }
@@ -105,7 +105,7 @@ void KLircClient::slotRead()
 {
 	while (theSocket->bytesAvailable())
 	{
-		QString line = readLine();
+		TQString line = readLine();
 		if (line == "BEGIN")
 		{
 			// BEGIN
@@ -133,7 +133,7 @@ void KLircClient::slotRead()
 					while (!line.isEmpty() && line != "END");
 					return;
 				}
-				QStringList remotes;
+				TQStringList remotes;
 				int count = readLine().toInt();
 				for (int i = 0; i < count; ++i)
 					remotes.append(readLine());
@@ -141,7 +141,7 @@ void KLircClient::slotRead()
 				while (!line.isEmpty() && line != "END");
 				if (line.isEmpty())
 					return; // abort on corrupt data
-				for (QStringList::ConstIterator it = remotes.begin(); it != remotes.end(); ++it)
+				for (TQStringList::ConstIterator it = remotes.begin(); it != remotes.end(); ++it)
 					sendCommand("LIST " + *it);
 				return;
 			}
@@ -154,13 +154,13 @@ void KLircClient::slotRead()
 					while (!line.isEmpty() && line != "END");
 					return;
 				}
-				QString remote = line.mid(5);
-				QStringList buttons;
+				TQString remote = line.mid(5);
+				TQStringList buttons;
 				int count = readLine().toInt();
 				for (int i = 0; i < count; ++i)
 				{
 					// <code> <name>
-					QString btn = readLine().mid(17);
+					TQString btn = readLine().mid(17);
 					if(btn.isNull()) break;
 					if(btn.startsWith("'") && btn.endsWith("'"))
 						btn = btn.mid(1, btn.length() - 2);
@@ -186,7 +186,7 @@ void KLircClient::slotRead()
 
 			pos = line.find(' ');
 			if (pos < 0) return;
-			QString btn = line.left(pos);
+			TQString btn = line.left(pos);
 			if(btn.startsWith("'") && btn.endsWith("'"))
 				btn = btn.mid(1, btn.length() - 2);
 			line.remove(0, pos + 1);
@@ -206,7 +206,7 @@ void KLircClient::updateRemotes()
 bool KLircClient::isConnected() const
 {
 	if(!theSocket) return false;
-	return theSocket->state() == QSocket::Connected;
+	return theSocket->state() == TQSocket::Connected;
 }
 
 bool KLircClient::haveFullList() const
@@ -214,7 +214,7 @@ bool KLircClient::haveFullList() const
 	return listIsUpToDate;
 }
 
-const QString KLircClient::readLine()
+const TQString KLircClient::readLine()
 {
 	if (!theSocket->canReadLine())
 	{	bool timeout;
@@ -223,18 +223,18 @@ const QString KLircClient::readLine()
 		theSocket->waitForMore(500, &timeout);
 		if (timeout)
 		{	// something's wrong. there ain't no line comin!
-			return QString::null;
+			return TQString::null;
 		}
 	}
-	QString line = theSocket->readLine();
+	TQString line = theSocket->readLine();
 	line.truncate(line.length() - 1);
 	return line;
 }
 
-void KLircClient::sendCommand(const QString &command)
+void KLircClient::sendCommand(const TQString &command)
 {
-	QString cmd = command + "\n";
-	theSocket->writeBlock(QFile::encodeName( cmd ), cmd.length());
+	TQString cmd = command + "\n";
+	theSocket->writeBlock(TQFile::encodeName( cmd ), cmd.length());
 }
 
 

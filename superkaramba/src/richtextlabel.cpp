@@ -20,7 +20,7 @@ RichTextLabel::RichTextLabel(karamba* k) :
     colorGrp(k->colorGroup()),
     underlineLinks(false)
 {
-  originalSize = QSize(0, 0);
+  originalSize = TQSize(0, 0);
 }
 
 RichTextLabel::RichTextLabel(karamba* k, int x, int y, int w, int h) :
@@ -31,7 +31,7 @@ RichTextLabel::RichTextLabel(karamba* k, int x, int y, int w, int h) :
     underlineLinks(false)
 {
   kdDebug() << k_funcinfo << x << ", " << y << ", " << w << ", " << h << endl;
-  originalSize = QSize(w, h);
+  originalSize = TQSize(w, h);
 }
 
 RichTextLabel::~RichTextLabel()
@@ -43,7 +43,7 @@ RichTextLabel::~RichTextLabel()
   }
 }
 
-void RichTextLabel::setText(QString t, bool linkUnderline)
+void RichTextLabel::setText(TQString t, bool linkUnderline)
 {
   source = t;
   if (text != 0)
@@ -58,8 +58,8 @@ void RichTextLabel::setText(QString t, bool linkUnderline)
     underlineLinks = linkUnderline;
   }
 
-  text = new QSimpleRichText(t, font, m_karamba->theme().path(),
-                             0,        // default QStyleSheet*
+  text = new TQSimpleRichText(t, font, m_karamba->theme().path(),
+                             0,        // default TQStyleSheet*
                              0,        // default QMimeSourceFactory
                              -1,       // no pageBreak
                              Qt::blue, // (has no effect) link Color
@@ -75,24 +75,24 @@ void RichTextLabel::setText(QString t, bool linkUnderline)
     setHeight(text->height());
 }
 
-void RichTextLabel::setValue(QString text)
+void RichTextLabel::setValue(TQString text)
 {
   setText(text);
 }
 
 void RichTextLabel::setValue(long v)
 {
-  setText(QString::number(v));
+  setText(TQString::number(v));
 }
 
-void RichTextLabel::setFont(QString f)
+void RichTextLabel::setFont(TQString f)
 {
   font.setFamily(f);
   if(text != 0)
     text->setDefaultFont(font);
 }
 
-QString RichTextLabel::getFont() const
+TQString RichTextLabel::getFont() const
 {
   return font.family();
 }
@@ -127,7 +127,7 @@ void RichTextLabel::setTextProps(TextField* t)
   {
     setFontSize(t->getFontSize());
     setFont(t->getFont());
-    colorGrp.setColor(QColorGroup::Text, t->getColor());
+    colorGrp.setColor(TQColorGroup::Text, t->getColor());
   }
 }
 
@@ -140,7 +140,7 @@ void RichTextLabel::setWidth(int width)
     setHeight(text->height());
 }
 
-void RichTextLabel::mUpdate(QPainter* p)
+void RichTextLabel::mUpdate(TQPainter* p)
 {
   if (hidden || text == 0)
   {
@@ -151,18 +151,18 @@ void RichTextLabel::mUpdate(QPainter* p)
   int y = getY();
   int w = getWidth();
   int h = getHeight();
-  QRect clipRect(x, y, w, h);
+  TQRect clipRect(x, y, w, h);
   text->draw(p, x, y, clipRect, colorGrp, 0 /* no background */);
 }
 
-bool RichTextLabel::click(QMouseEvent* e)
+bool RichTextLabel::click(TQMouseEvent* e)
 {
   if (hidden)
   {
     return false;
   }
-  QPoint point(e->x() - getX(), e->y() - getY());
-  QString anchor = text->anchorAt(point);
+  TQPoint point(e->x() - getX(), e->y() - getY());
+  TQString anchor = text->anchorAt(point);
   if (anchor[0] != '#')
   {
     if (e->button() == Qt::LeftButton)
@@ -178,10 +178,10 @@ bool RichTextLabel::click(QMouseEvent* e)
   }
 }
 
-QString RichTextLabel::anchorAt(int x, int y)
+TQString RichTextLabel::anchorAt(int x, int y)
 {
-  QPoint point(x - getX(), y - getY());
-  QString anchor = text->anchorAt(point);
+  TQPoint point(x - getX(), y - getY());
+  TQString anchor = text->anchorAt(point);
   if (anchor[0] == '#')
   {
     return anchor.remove(0, 1);
@@ -195,16 +195,16 @@ QString RichTextLabel::anchorAt(int x, int y)
 
 bool RichTextLabel::insideActiveArea(int x, int y)
 {
-  QPoint point(x - getX(), y - getY());
+  TQPoint point(x - getX(), y - getY());
   return text->anchorAt(point) != ""; // && text -> inText(point);
 }
 
-void RichTextLabel::setColorGroup(const QColorGroup &colorg)
+void RichTextLabel::setColorGroup(const TQColorGroup &colorg)
 {
   colorGrp = colorg;
 }
 
-const QColorGroup & RichTextLabel::getColorGroup() const
+const TQColorGroup & RichTextLabel::getColorGroup() const
 {
   return colorGrp;
 }

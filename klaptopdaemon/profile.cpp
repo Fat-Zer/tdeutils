@@ -41,26 +41,26 @@
 #include <kcombobox.h>
 
 // other Qt headers:
-#include <qlayout.h>
-#include <qlabel.h>
-#include <qcheckbox.h>
-#include <qhbox.h>
-#include <qvgroupbox.h>
-#include <qgrid.h>
-#include <qpushbutton.h>
-#include <qslider.h>
-#include <qtooltip.h>
+#include <tqlayout.h>
+#include <tqlabel.h>
+#include <tqcheckbox.h>
+#include <tqhbox.h>
+#include <tqvgroupbox.h>
+#include <tqgrid.h>
+#include <tqpushbutton.h>
+#include <tqslider.h>
+#include <tqtooltip.h>
 
 extern void wake_laptop_daemon();
 
-ProfileConfig::ProfileConfig(QWidget * parent, const char *name)
+ProfileConfig::ProfileConfig(TQWidget * parent, const char *name)
   : KCModule(parent, name)
 {
-    QStringList performance_list;
+    TQStringList performance_list;
     int current_performance;
     bool *active_list;
     bool has_performance = laptop_portable::get_system_performance(0, current_performance, performance_list, active_list);
-    QStringList throttle_list;
+    TQStringList throttle_list;
     int current_throttle;
     bool has_throttle = laptop_portable::get_system_throttling(0, current_throttle, throttle_list, active_list);
 
@@ -68,28 +68,28 @@ ProfileConfig::ProfileConfig(QWidget * parent, const char *name)
 
     config =  new KConfig("kcmlaptoprc");
 
-    QVBoxLayout *top_layout = new QVBoxLayout( this, KDialog::marginHint(),
+    TQVBoxLayout *top_layout = new TQVBoxLayout( this, KDialog::marginHint(),
 					       KDialog::spacingHint() );
 
-    QHBoxLayout *ll = new QHBoxLayout();
+    TQHBoxLayout *ll = new TQHBoxLayout();
 
-    QVGroupBox *gb = new QVGroupBox(i18n("Not Powered"), this);
-    QToolTip::add( gb, i18n( "Items in this box take effect whenever the laptop is unplugged from the wall" ) );
+    TQVGroupBox *gb = new TQVGroupBox(i18n("Not Powered"), this);
+    TQToolTip::add( gb, i18n( "Items in this box take effect whenever the laptop is unplugged from the wall" ) );
     if (laptop_portable::has_brightness()) {
-    	QWidget *wp = new QWidget(gb);
-    	QHBoxLayout *xl = new QHBoxLayout( wp);
-    	poff = new QCheckBox(i18n("Back panel brightness"), wp);
-        QToolTip::add( poff, i18n( "Enables the changing of the back panel brightness" ) );
+    	TQWidget *wp = new TQWidget(gb);
+    	TQHBoxLayout *xl = new TQHBoxLayout( wp);
+    	poff = new TQCheckBox(i18n("Back panel brightness"), wp);
+        TQToolTip::add( poff, i18n( "Enables the changing of the back panel brightness" ) );
 	xl->addWidget(poff);
-    	connect (poff, SIGNAL(toggled(bool)), this, SLOT(poff_changed(bool)));
+    	connect (poff, TQT_SIGNAL(toggled(bool)), this, TQT_SLOT(poff_changed(bool)));
 
-    	xl->addWidget(new QLabel("-", wp));
-    	soff = new QSlider(0, 255, 16, 160, Qt::Horizontal, wp);
+    	xl->addWidget(new TQLabel("-", wp));
+    	soff = new TQSlider(0, 255, 16, 160, Qt::Horizontal, wp);
     	soff->setEnabled(0);
-        QToolTip::add( soff, i18n( "How bright it should be when it is changed" ) );
-    	connect (soff, SIGNAL(valueChanged(int)), this, SLOT(configChanged()));
+        TQToolTip::add( soff, i18n( "How bright it should be when it is changed" ) );
+    	connect (soff, TQT_SIGNAL(valueChanged(int)), this, TQT_SLOT(configChanged()));
     	xl->addWidget(soff);
-    	xl->addWidget(new QLabel("+", wp));
+    	xl->addWidget(new TQLabel("+", wp));
     	xl->addStretch(1);
     } else {
 	poff = 0;
@@ -97,18 +97,18 @@ ProfileConfig::ProfileConfig(QWidget * parent, const char *name)
     }
 
     if (has_performance) {
-    	QWidget *wp = new QWidget(gb);
-    	QHBoxLayout *xl = new QHBoxLayout( wp);
-    	performance_off = new QCheckBox(i18n("System performance"), wp);
-        QToolTip::add( performance_off, i18n( "Enables the changing of the system performance profile" ) );
+    	TQWidget *wp = new TQWidget(gb);
+    	TQHBoxLayout *xl = new TQHBoxLayout( wp);
+    	performance_off = new TQCheckBox(i18n("System performance"), wp);
+        TQToolTip::add( performance_off, i18n( "Enables the changing of the system performance profile" ) );
 	xl->addWidget(performance_off);
-    	connect (performance_off, SIGNAL(toggled(bool)), this, SLOT(performance_off_changed(bool)));
+    	connect (performance_off, TQT_SIGNAL(toggled(bool)), this, TQT_SLOT(performance_off_changed(bool)));
 
     	performance_val_off = new KComboBox(0, wp);
-        QToolTip::add( performance_val_off, i18n( "The new system performance profile to change to" ) );
+        TQToolTip::add( performance_val_off, i18n( "The new system performance profile to change to" ) );
 	performance_val_off->insertStringList(performance_list);
     	performance_val_off->setEnabled(0);
-    	connect (performance_val_off, SIGNAL(activated(int)), this, SLOT(configChanged()));
+    	connect (performance_val_off, TQT_SIGNAL(activated(int)), this, TQT_SLOT(configChanged()));
     	xl->addWidget(performance_val_off);
     	xl->addStretch(1);
     } else {
@@ -116,18 +116,18 @@ ProfileConfig::ProfileConfig(QWidget * parent, const char *name)
         performance_val_off = 0;	 
     }
     if (has_throttle) {
-    	QWidget *wp = new QWidget(gb);
-    	QHBoxLayout *xl = new QHBoxLayout( wp);
-    	throttle_off = new QCheckBox(i18n("CPU throttling"), wp);
-        QToolTip::add( throttle_off, i18n( "Enables the throttling of the CPU performance" ) );
+    	TQWidget *wp = new TQWidget(gb);
+    	TQHBoxLayout *xl = new TQHBoxLayout( wp);
+    	throttle_off = new TQCheckBox(i18n("CPU throttling"), wp);
+        TQToolTip::add( throttle_off, i18n( "Enables the throttling of the CPU performance" ) );
 	xl->addWidget(throttle_off);
-    	connect (throttle_off, SIGNAL(toggled(bool)), this, SLOT(throttle_off_changed(bool)));
+    	connect (throttle_off, TQT_SIGNAL(toggled(bool)), this, TQT_SLOT(throttle_off_changed(bool)));
 
     	throttle_val_off = new KComboBox(0, wp);
 	throttle_val_off->insertStringList(throttle_list);
     	throttle_val_off->setEnabled(0);
-        QToolTip::add( throttle_val_off, i18n( "How much to throttle the CPU by" ) );
-    	connect (throttle_val_off, SIGNAL(activated(int)), this, SLOT(configChanged()));
+        TQToolTip::add( throttle_val_off, i18n( "How much to throttle the CPU by" ) );
+    	connect (throttle_val_off, TQT_SIGNAL(activated(int)), this, TQT_SLOT(configChanged()));
     	xl->addWidget(throttle_val_off);
     	xl->addStretch(1);
     } else {
@@ -137,41 +137,41 @@ ProfileConfig::ProfileConfig(QWidget * parent, const char *name)
 
     ll->addWidget(gb);
 
-    gb = new QVGroupBox(i18n("Powered"), this);
-    QToolTip::add( gb, i18n( "Items in this box take effect whenever the laptop is plugged into the wall" ) );
+    gb = new TQVGroupBox(i18n("Powered"), this);
+    TQToolTip::add( gb, i18n( "Items in this box take effect whenever the laptop is plugged into the wall" ) );
     if (laptop_portable::has_brightness()) {
-    	QWidget *wp = new QWidget(gb);
-    	QHBoxLayout *xl = new QHBoxLayout( wp);
-    	pon = new QCheckBox(i18n("Back panel brightness"), wp);
-        QToolTip::add( pon, i18n( "Enables the changing of the back panel brightness" ) );
+    	TQWidget *wp = new TQWidget(gb);
+    	TQHBoxLayout *xl = new TQHBoxLayout( wp);
+    	pon = new TQCheckBox(i18n("Back panel brightness"), wp);
+        TQToolTip::add( pon, i18n( "Enables the changing of the back panel brightness" ) );
 	xl->addWidget(pon);
-    	connect (pon, SIGNAL(toggled(bool)), this, SLOT(pon_changed(bool)));
+    	connect (pon, TQT_SIGNAL(toggled(bool)), this, TQT_SLOT(pon_changed(bool)));
 
-    	xl->addWidget(new QLabel("-", wp));
-    	son = new QSlider(0, 255, 16, 255, Qt::Horizontal, wp);
+    	xl->addWidget(new TQLabel("-", wp));
+    	son = new TQSlider(0, 255, 16, 255, Qt::Horizontal, wp);
     	son->setEnabled(0);
-        QToolTip::add( son, i18n( "How bright it should be when it is changed" ) );
-    	connect (son, SIGNAL(valueChanged(int)), this, SLOT(configChanged()));
+        TQToolTip::add( son, i18n( "How bright it should be when it is changed" ) );
+    	connect (son, TQT_SIGNAL(valueChanged(int)), this, TQT_SLOT(configChanged()));
     	xl->addWidget(son);
-    	xl->addWidget(new QLabel("+", wp));
+    	xl->addWidget(new TQLabel("+", wp));
     	xl->addStretch(1);
     } else {
 	pon = 0;
 	son = 0;
     }
     if (has_performance) {
-    	QWidget *wp = new QWidget(gb);
-    	QHBoxLayout *xl = new QHBoxLayout( wp);
-    	performance_on = new QCheckBox(i18n("System performance"), wp);
-        QToolTip::add( performance_on, i18n( "Enables the changing of the system performance profile" ) );
+    	TQWidget *wp = new TQWidget(gb);
+    	TQHBoxLayout *xl = new TQHBoxLayout( wp);
+    	performance_on = new TQCheckBox(i18n("System performance"), wp);
+        TQToolTip::add( performance_on, i18n( "Enables the changing of the system performance profile" ) );
 	xl->addWidget(performance_on);
-    	connect (performance_on, SIGNAL(toggled(bool)), this, SLOT(performance_on_changed(bool)));
+    	connect (performance_on, TQT_SIGNAL(toggled(bool)), this, TQT_SLOT(performance_on_changed(bool)));
 
     	performance_val_on = new KComboBox(0, wp);
 	performance_val_on->insertStringList(performance_list);
     	performance_val_on->setEnabled(0);
-        QToolTip::add( performance_val_on, i18n( "The new system performance profile to change to" ) );
-    	connect (performance_val_on, SIGNAL(activated(int)), this, SLOT(configChanged()));
+        TQToolTip::add( performance_val_on, i18n( "The new system performance profile to change to" ) );
+    	connect (performance_val_on, TQT_SIGNAL(activated(int)), this, TQT_SLOT(configChanged()));
     	xl->addWidget(performance_val_on);
     	xl->addStretch(1);
     } else {
@@ -179,18 +179,18 @@ ProfileConfig::ProfileConfig(QWidget * parent, const char *name)
         performance_val_on = 0;	 
     }
     if (has_throttle) {
-    	QWidget *wp = new QWidget(gb);
-    	QHBoxLayout *xl = new QHBoxLayout( wp);
-    	throttle_on = new QCheckBox(i18n("CPU throttle"), wp);
-        QToolTip::add( throttle_on, i18n( "Enables the throttling of the CPU performance" ) );
+    	TQWidget *wp = new TQWidget(gb);
+    	TQHBoxLayout *xl = new TQHBoxLayout( wp);
+    	throttle_on = new TQCheckBox(i18n("CPU throttle"), wp);
+        TQToolTip::add( throttle_on, i18n( "Enables the throttling of the CPU performance" ) );
 	xl->addWidget(throttle_on);
-    	connect (throttle_on, SIGNAL(toggled(bool)), this, SLOT(throttle_on_changed(bool)));
+    	connect (throttle_on, TQT_SIGNAL(toggled(bool)), this, TQT_SLOT(throttle_on_changed(bool)));
 
     	throttle_val_on = new KComboBox(0, wp);
 	throttle_val_on->insertStringList(throttle_list);
     	throttle_val_on->setEnabled(0);
-        QToolTip::add( throttle_val_on, i18n( "How much to throttle the CPU by" ) );
-    	connect (throttle_val_on, SIGNAL(activated(int)), this, SLOT(configChanged()));
+        TQToolTip::add( throttle_val_on, i18n( "How much to throttle the CPU by" ) );
+    	connect (throttle_val_on, TQT_SIGNAL(activated(int)), this, TQT_SLOT(configChanged()));
     	xl->addWidget(throttle_val_on);
     	xl->addStretch(1);
     } else {
@@ -202,18 +202,18 @@ ProfileConfig::ProfileConfig(QWidget * parent, const char *name)
     ll->addStretch(1);
 
     top_layout->addLayout(ll);
-    QLabel *tmp_label = new QLabel(i18n("This panel allows you to set default values for system attributes "
+    TQLabel *tmp_label = new TQLabel(i18n("This panel allows you to set default values for system attributes "
 					"so that they change when the laptop is plugged in to the wall or "
 					"running on batteries."), this );
     tmp_label->setAlignment( Qt::WordBreak );
     top_layout->addWidget( tmp_label );
 
-    tmp_label = new QLabel(i18n("You can also set options for these values that will be set by low battery "
+    tmp_label = new TQLabel(i18n("You can also set options for these values that will be set by low battery "
 				"conditions, or system inactivity in the other panels"), this );
     tmp_label->setAlignment( Qt::WordBreak );
     top_layout->addWidget( tmp_label );
     top_layout->addStretch(1);
-    top_layout->addWidget( new QLabel( i18n("Version: %1").arg(LAPTOP_VERSION), this), 0, Qt::AlignRight );
+    top_layout->addWidget( new TQLabel( i18n("Version: %1").arg(LAPTOP_VERSION), this), 0, Qt::AlignRight );
 
 
     load();      
@@ -330,7 +330,7 @@ void ProfileConfig::load(bool useDefaults)
 		v = 0;
 	}
 	if (performance_val_on) {
-		QString s = config->readEntry("PerformanceOnLevel", "");
+		TQString s = config->readEntry("PerformanceOnLevel", "");
 		int ind = 0;
 		for (int i = 0; i < performance_val_on->count(); i++)
 		if (performance_val_on->text(i) == s) {
@@ -347,7 +347,7 @@ void ProfileConfig::load(bool useDefaults)
 		v = 0;
 	}
 	if (performance_val_off) {
-		QString s = config->readEntry("PerformanceOffLevel", "");
+		TQString s = config->readEntry("PerformanceOffLevel", "");
 		int ind = 0;
 		for (int i = 0; i < performance_val_off->count(); i++)
 		if (performance_val_off->text(i) == s) {
@@ -364,7 +364,7 @@ void ProfileConfig::load(bool useDefaults)
 		v = 0;
 	}
 	if (throttle_val_on) {
-		QString s = config->readEntry("ThrottleOnLevel", "");
+		TQString s = config->readEntry("ThrottleOnLevel", "");
 		int ind = 0;
 		for (int i = 0; i < throttle_val_on->count(); i++)
 		if (throttle_val_on->text(i) == s) {
@@ -381,7 +381,7 @@ void ProfileConfig::load(bool useDefaults)
 		v = 0;
 	}
 	if (throttle_val_off) {
-		QString s = config->readEntry("ThrottleOffLevel", "");
+		TQString s = config->readEntry("ThrottleOffLevel", "");
 		int ind = 0;
 		for (int i = 0; i < throttle_val_off->count(); i++)
 		if (throttle_val_off->text(i) == s) {
@@ -406,7 +406,7 @@ void ProfileConfig::configChanged()
 }
 
 
-QString ProfileConfig::quickHelp() const
+TQString ProfileConfig::quickHelp() const
 {
   return i18n("<h1>Laptop Power Profile Setup</h1>This module allows you to configure default values for static laptop "
 	"system attributes that will change when the laptop is plugged in or unplugged from the wall.");

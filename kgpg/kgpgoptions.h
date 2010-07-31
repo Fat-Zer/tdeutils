@@ -40,9 +40,9 @@ class kgpgOptions : public KConfigDialog
 {
         Q_OBJECT
 public:
-        kgpgOptions(QWidget *parent=0, const char *name=0);
+        kgpgOptions(TQWidget *parent=0, const char *name=0);
         ~kgpgOptions();
-        QStringList names,ids;
+        TQStringList names,ids;
         Encryption *page1;
         Decryption *page2;
         UIConf *page3;
@@ -53,22 +53,22 @@ public:
         
 private:
         KConfig *config;
-        QString alwaysKeyID,alwaysKeyName;
+        TQString alwaysKeyID,alwaysKeyName;
         bool firstDisplay;
 	
-	QPixmap pixkeySingle,pixkeyDouble;
-        QString fileEncryptionKey;
-        QString gpgConfigPath;
-        QString keyServer,defaultServerList;
-        QString defaultKeyServer;
-	QFont startFont;
+	TQPixmap pixkeySingle,pixkeyDouble;
+        TQString fileEncryptionKey;
+        TQString gpgConfigPath;
+        TQString keyServer,defaultServerList;
+        TQString defaultKeyServer;
+	TQFont startFont;
         bool useAgent;
         bool defaultUseAgent;
         bool encryptToAlways;
         bool defaultEncryptToAlways;
-	QStringList serverList;
-	QString defaultConfigPath,defaultHomePath;
-	QColor keyGood,keyBad,keyUnknown,keyRev;
+	TQStringList serverList;
+	TQString defaultConfigPath,defaultHomePath;
+	TQColor keyGood,keyBad,keyUnknown,keyRev;
 
 private:
         bool hasChanged();
@@ -86,18 +86,18 @@ private slots:
 	void insertFileKey();
 
         void listkey();
-        QString namecode(QString kid);
-        QString idcode(QString kname);
-        void slotInstallDecrypt(QString mimetype);
-        void slotInstallSign(QString mimetype);
-        void slotRemoveMenu(QString menu);
+        TQString namecode(TQString kid);
+        TQString idcode(TQString kname);
+        void slotInstallDecrypt(TQString mimetype);
+        void slotInstallSign(TQString mimetype);
+        void slotRemoveMenu(TQString menu);
 	void slotChangeHome();
 signals:
         void updateDisplay();
         void settingsUpdated();
-	void changeFont(QFont);
+	void changeFont(TQFont);
 	void homeChanged();
-	void refreshTrust(int, QColor);
+	void refreshTrust(int, TQColor);
 	void installShredder();
 	void reloadKeyList();
 };

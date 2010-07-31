@@ -20,25 +20,25 @@
 #ifndef KWMAPEDITOR_H
 #define KWMAPEDITOR_H
 
-#include <qmap.h>
-#include <qstring.h>
-#include <qtable.h>
+#include <tqmap.h>
+#include <tqstring.h>
+#include <tqtable.h>
 
 class KAction;
 class KActionCollection;
 
-class KWMapEditor : public QTable {
+class KWMapEditor : public TQTable {
 	Q_OBJECT
 
 	public:
-		KWMapEditor(QMap<QString,QString>& map, QWidget *parent = 0, const char *name = 0);
+		KWMapEditor(TQMap<TQString,TQString>& map, TQWidget *parent = 0, const char *name = 0);
 		virtual ~KWMapEditor();
 
 	public slots:
 		void reload();
 		void saveMap();
 		void erase();
-		void contextMenu(int row, int col, const QPoint& pos);
+		void contextMenu(int row, int col, const TQPoint& pos);
 		void addEntry();
 		void emitDirty();
 
@@ -46,13 +46,13 @@ class KWMapEditor : public QTable {
 		void copy();
 
 	protected:
-		virtual QWidget *beginEdit(int row, int col, bool replace);
+		virtual TQWidget *beginEdit(int row, int col, bool replace);
 
 	signals:
 		void dirty();
 
 	private:
-		QMap<QString,QString>& _map;
+		TQMap<TQString,TQString>& _map;
 		int _contextRow, _contextCol;
 		KActionCollection *_ac;
 		KAction *_copyAct;

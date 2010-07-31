@@ -20,9 +20,9 @@
 
 #include "regexp.h"
 #include "pair.h"
-#include <qstringlist.h>
+#include <tqstringlist.h>
 
-typedef Pair<QString,QString> StringPair;
+typedef Pair<TQString,TQString> StringPair;
 
 /**
    Abstract syntax node for `text range' regular expression
@@ -35,12 +35,12 @@ public:
 	TextRangeRegExp( bool selected );
 	virtual ~TextRangeRegExp();
 
-	void addCharacter( QString ch );
-    QStringList chars() const { return _chars; }
+	void addCharacter( TQString ch );
+    TQStringList chars() const { return _chars; }
     void clearChars() { _chars.clear(); }
 
-	void addRange( QString from, QString to );
-    QPtrList<StringPair> range() const { return _ranges; }
+	void addRange( TQString from, TQString to );
+    TQPtrList<StringPair> range() const { return _ranges; }
     void clearRange() { _ranges.clear(); }
 
     void setNegate( bool set ) { _negate = set; }
@@ -61,15 +61,15 @@ public:
 
     virtual bool check( ErrorMap&, bool first, bool last );
     virtual int precedence() const { return 4;}
-    virtual QDomNode toXml( QDomDocument* doc ) const;
-    virtual bool load( QDomElement, const QString& version );
+    virtual TQDomNode toXml( TQDomDocument* doc ) const;
+    virtual bool load( TQDomElement, const TQString& version );
     virtual RegExpType type() const { return TEXTRANGE;}
     virtual bool operator==( const RegExp& other ) const;
 
 private:
 	bool _negate, _digit, _nonDigit, _space, _nonSpace, _wordChar, _nonWordChar;
-	QStringList _chars;
-	QPtrList<StringPair> _ranges;
+	TQStringList _chars;
+	TQPtrList<StringPair> _ranges;
 };
 
 #endif // __TEXTRANGEREGEXP_H

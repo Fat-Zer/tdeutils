@@ -19,9 +19,9 @@
 #include "concwidget.h"
 #include "dragaccepter.h"
 
-#include <qpainter.h>
+#include <tqpainter.h>
 
-ConcWidget::ConcWidget(RegExpEditorWindow* editorWindow, QWidget *parent,
+ConcWidget::ConcWidget(RegExpEditorWindow* editorWindow, TQWidget *parent,
                        const char *name)
   :MultiContainerWidget(editorWindow, parent, name == 0 ? "concwidget" : name)
 {
@@ -33,13 +33,13 @@ ConcWidget::ConcWidget(RegExpEditorWindow* editorWindow, QWidget *parent,
 
 
 ConcWidget::ConcWidget(RegExpEditorWindow* editorWindow, RegExpWidget *child,
-                       QWidget *parent, const char *name)
+                       TQWidget *parent, const char *name)
   :MultiContainerWidget(editorWindow, parent, name == 0 ? "concwidget" : name)
 {
   init();
   DragAccepter *accepter = new DragAccepter(editorWindow, this);
   _children.append(accepter);
-  child->reparent(this, QPoint(0,0), false);
+  child->reparent(this, TQPoint(0,0), false);
   addNewChild(accepter, child);
 }
 
@@ -52,13 +52,13 @@ ConcWidget::ConcWidget( RegExpEditorWindow* editorWindow, ConcWidget* origConc,
   for (unsigned int i = end; i >= start; i--) {
     RegExpWidget* child = origConc->_children.take( i );
     _children.prepend( child );
-    child->reparent( this, QPoint(0,0), false);
+    child->reparent( this, TQPoint(0,0), false);
   }
   _children.prepend( new DragAccepter(editorWindow, this) );
 }
 
 ConcWidget::ConcWidget( ConcRegExp* regexp, RegExpEditorWindow* editorWindow,
-            QWidget* parent, const char* name )
+            TQWidget* parent, const char* name )
   :MultiContainerWidget( editorWindow, parent, name == 0 ? "concwidget" : name )
 {
   init();
@@ -78,22 +78,22 @@ void ConcWidget::init()
 }
 
 
-QSize ConcWidget::sizeHint() const
+TQSize ConcWidget::sizeHint() const
 {
   int childrenWidth = 0;
   int childrenHeight = 0;
-  QPtrListIterator<RegExpWidget> it(_children);
+  TQPtrListIterator<RegExpWidget> it(_children);
 
   for ( ; *it; ++it) {
-    QSize thisChildSize = (*it)->sizeHint();
+    TQSize thisChildSize = (*it)->sizeHint();
     childrenWidth += thisChildSize.width();
     childrenHeight = QMAX(childrenHeight, thisChildSize.height());
   }
 
-  return QSize(childrenWidth, childrenHeight);
+  return TQSize(childrenWidth, childrenHeight);
 }
 
-void ConcWidget::paintEvent( QPaintEvent *e)
+void ConcWidget::paintEvent( TQPaintEvent *e)
 {
   Q_ASSERT( dynamic_cast<DragAccepter*>(_children.at(0)) );
   // if this fails, then I should check the location of the show()
@@ -106,8 +106,8 @@ void ConcWidget::paintEvent( QPaintEvent *e)
     _children.at(0)->setGeometry( 0, 0, size().width(), size().height() );
   }
   else {
-    QSize myReqSize = sizeHint();
-    QSize mySize(QMAX(myReqSize.width(), size().width()),
+    TQSize myReqSize = sizeHint();
+    TQSize mySize(QMAX(myReqSize.width(), size().width()),
                  QMAX(myReqSize.height(), size().height()));
 
     // If the widget needs less space than it can get then this space should
@@ -118,7 +118,7 @@ void ConcWidget::paintEvent( QPaintEvent *e)
       extra = (size().width() - myReqSize.width())/2;
     }
 
-    QPainter painter( this );
+    TQPainter painter( this );
 
     drawPossibleSelection( painter, mySize );
 
@@ -131,8 +131,8 @@ void ConcWidget::paintEvent( QPaintEvent *e)
         continue;
       RegExpWidget* child = _children.at(i);
 
-      QSize childSize = child->sizeHint();
-      QSize curChildSize = child->size();
+      TQSize childSize = child->sizeHint();
+      TQSize curChildSize = child->size();
 
       //----------------------------- first place the accepter
       int x = offset;
@@ -150,7 +150,7 @@ void ConcWidget::paintEvent( QPaintEvent *e)
       if ( accepter->isSelected() ) {
         y = (mySize.height()-_maxSelectedHeight)/2;
         h = _maxSelectedHeight;
-        painter.fillRect( x, y, w, h, QBrush( gray ) );
+        painter.fillRect( x, y, w, h, TQBrush( gray ) );
       }
 
       //-------------------------------------- place the child
@@ -170,7 +170,7 @@ void ConcWidget::paintEvent( QPaintEvent *e)
       if ( child->isSelected() ) {
         y = (mySize.height()-_maxSelectedHeight)/2;
         h = _maxSelectedHeight;
-        painter.fillRect( x, y, w, h, QBrush( gray ) );
+        painter.fillRect( x, y, w, h, TQBrush( gray ) );
       }
     }
 
@@ -187,7 +187,7 @@ void ConcWidget::paintEvent( QPaintEvent *e)
   MultiContainerWidget::paintEvent( e );
 }
 
-void ConcWidget::mousePressEvent ( QMouseEvent* event )
+void ConcWidget::mousePressEvent ( TQMouseEvent* event )
 {
   if ( event->button() == RightButton ) {
     _editorWindow->showRMBMenu( _editorWindow->hasSelection() );
@@ -212,7 +212,7 @@ void ConcWidget::sizeAccepter( DragAccepter* accepter, int height, int totHeight
 
 RegExp* ConcWidget::regExp() const
 {
-  QPtrListIterator<RegExpWidget> it( _children );
+  TQPtrListIterator<RegExpWidget> it( _children );
   ++it; // start with the second element.
 
   if ( _children.count() == 3 ) {
@@ -236,7 +236,7 @@ bool ConcWidget::updateSelection(bool parentSelected)
 
   _maxSelectedHeight = 0;
 
-  QPtrListIterator<RegExpWidget> it(_children);
+  TQPtrListIterator<RegExpWidget> it(_children);
   ++it; // Skip past the first DragAccepter
 	for ( ; *it; it +=2  ) {
     if ( (*it)->isSelected() ) {
@@ -287,7 +287,7 @@ void ConcWidget::applyRegExpToSelection( RegExpType type )
   if ( start == -1 ) {
     // No item selected at top level
 
-    QPtrListIterator<RegExpWidget> it(_children);
+    TQPtrListIterator<RegExpWidget> it(_children);
     ++it; // Skip past the first DragAccepter
     for ( ; *it ; it += 2 ) {
       if ( (*it)->hasSelection() ) {
@@ -306,7 +306,7 @@ void ConcWidget::applyRegExpToSelection( RegExpType type )
 
 
       subSequence->resize(0,0); // see note (1)
-      subSequence->reparent( newElm, QPoint(0,0), false);
+      subSequence->reparent( newElm, TQPoint(0,0), false);
       _children.insert( start, newElm );
       newElm->show();
     }
@@ -318,7 +318,7 @@ bool ConcWidget::isSelected() const
   // A ConcWidget should be considered selected when all its elements has been selected
   // otherwise empty ConcWidgets may be left behind when for example selection is deleted.
   bool allSelected = true;
-  QPtrListIterator<RegExpWidget> it(_children);
+  TQPtrListIterator<RegExpWidget> it(_children);
   ++it; // Skip past first DragAccepter.
   for ( ; *it && allSelected; it += 2 ) {
     allSelected = allSelected && (*it)->isSelected();
@@ -336,7 +336,7 @@ RegExp* ConcWidget::selection() const
   bool foundMoreThanOne = false;
   RegExp* regexp = 0;
 
-  QPtrListIterator<RegExpWidget> it(_children);
+  TQPtrListIterator<RegExpWidget> it(_children);
   ++it; // Skip past the first DragAccepter
   for ( ; (*it) ; it += 2 ) {
     if ( (*it)->hasSelection() ) {
@@ -373,10 +373,10 @@ void ConcWidget::addNewConcChild(DragAccepter *accepter, ConcWidget *other)
       // namely that every second element is a dragAccepter
       for ( unsigned int j = other->_children.count()-1; j > 0 ; j-=2 ) {
         RegExpWidget* newChildA = other->_children.take(j);
-        newChildA->reparent( this, QPoint(0,0), false);
+        newChildA->reparent( this, TQPoint(0,0), false);
         _children.insert( i+1, newChildA );
         RegExpWidget* newChildB = other->_children.take(j-1);
-        newChildB->reparent( this, QPoint(0,0), false);
+        newChildB->reparent( this, TQPoint(0,0), false);
         _children.insert( i+1, newChildB );
         newChildA->show();
         newChildB->show();
@@ -391,7 +391,7 @@ void ConcWidget::addNewConcChild(DragAccepter *accepter, ConcWidget *other)
 bool ConcWidget::validateSelection() const
 {
   bool cont = true;
-  QPtrListIterator<RegExpWidget> it(_children);
+  TQPtrListIterator<RegExpWidget> it(_children);
   ++it; // skip past the DragAccepter.
   for ( ; *it && cont; it += 2 ) {
     cont = (*it)->validateSelection();

@@ -23,12 +23,12 @@ NoatunSensor::~NoatunSensor()
 
 void NoatunSensor::update()
 {
-    QString format;
+    TQString format;
     SensorParams *sp;
     Meter *meter;
-    QObjectListIt it( *objList );
+    TQObjectListIt it( *objList );
 
-    QString title;
+    TQString title;
     int songLength = 0;
     int currentTime = 0;
 
@@ -77,17 +77,17 @@ void NoatunSensor::update()
                 else
 
                 {
-                   format.replace( QRegExp("%title", false), title );
-		   format.replace( QRegExp("%id", false), noatunID );
+                   format.replace( TQRegExp("%title", false), title );
+		   format.replace( TQRegExp("%id", false), noatunID );
 
-                    format.replace( QRegExp("%length", false), QTime( 0,0,0 ).
+                    format.replace( TQRegExp("%length", false), TQTime( 0,0,0 ).
                                     addMSecs( songLength )
                                     .toString( "h:mm:ss" ) );
 
-                    format.replace( QRegExp("%time", false), QTime( 0,0,0 ).
+                    format.replace( TQRegExp("%time", false), TQTime( 0,0,0 ).
                                     addMSecs( currentTime )
                                     .toString( "h:mm:ss" ) );
-                    format.replace( QRegExp("%remain", false), QTime( 0,0,0 ).
+                    format.replace( TQRegExp("%remain", false), TQTime( 0,0,0 ).
                                     addMSecs( songLength )
                                     .addMSecs(-currentTime )
                                     .toString( "h:mm:ss" ) );
@@ -109,9 +109,9 @@ void NoatunSensor::update()
 
 bool NoatunSensor::isRunning()
 {
-    QRegExp rx("(noatun)|(noatun-\\d+)");
+    TQRegExp rx("(noatun)|(noatun-\\d+)");
     QCStringList list = client->registeredApplications();
-    QValueList<QCString>::iterator it;
+    TQValueList<TQCString>::iterator it;
     it = list.begin();
     bool foundNoatun = false;
     noatunID = "noatun";
@@ -128,12 +128,12 @@ bool NoatunSensor::isRunning()
 }
 
 
-QString NoatunSensor::getTitle()
+TQString NoatunSensor::getTitle()
 {
-    QByteArray data, replyData;
-    QCString replyType;
-    QString result;
-    QDataStream arg(data, IO_WriteOnly);
+    TQByteArray data, replyData;
+    TQCString replyType;
+    TQString result;
+    TQDataStream arg(data, IO_WriteOnly);
     arg << 5;
     if (!client->call( noatunID, "Noatun", "title()",
                        data, replyType, replyData))
@@ -143,12 +143,12 @@ QString NoatunSensor::getTitle()
     }
     else
     {
-        QDataStream reply(replyData, IO_ReadOnly);
-        if (replyType == "QString")
+        TQDataStream reply(replyData, IO_ReadOnly);
+        if (replyType == "TQString")
         {
             reply >> result;
-            result.replace( QRegExp("_")," " );
-            result.replace( QRegExp(".mp3$"),"" );
+            result.replace( TQRegExp("_")," " );
+            result.replace( TQRegExp(".mp3$"),"" );
 
         }
         else
@@ -163,10 +163,10 @@ QString NoatunSensor::getTitle()
 
 int NoatunSensor::getTime()
 {
-    QByteArray data, replyData;
-    QCString replyType;
+    TQByteArray data, replyData;
+    TQCString replyType;
     int result;
-    QDataStream arg(data, IO_WriteOnly);
+    TQDataStream arg(data, IO_WriteOnly);
     arg << 5;
     if (!client->call( noatunID, "Noatun", "position()",
                        data, replyType, replyData))
@@ -176,7 +176,7 @@ int NoatunSensor::getTime()
     }
     else
     {
-        QDataStream reply(replyData, IO_ReadOnly);
+        TQDataStream reply(replyData, IO_ReadOnly);
         if (replyType == "int")
         {
             reply >> result;
@@ -193,10 +193,10 @@ int NoatunSensor::getTime()
 
 int NoatunSensor::getLength()
 {
-    QByteArray data, replyData;
-    QCString replyType;
+    TQByteArray data, replyData;
+    TQCString replyType;
     int result;
-    QDataStream arg(data, IO_WriteOnly);
+    TQDataStream arg(data, IO_WriteOnly);
     arg << 5;
     if (!client->call( noatunID, "Noatun", "length()",
                        data, replyType, replyData))
@@ -206,7 +206,7 @@ int NoatunSensor::getLength()
     }
     else
     {
-        QDataStream reply(replyData, IO_ReadOnly);
+        TQDataStream reply(replyData, IO_ReadOnly);
         if (replyType == "int")
         {
             reply >> result;
@@ -225,7 +225,7 @@ void NoatunSensor::setMaxValue( SensorParams *sp)
 {
     Meter *meter;
     meter = sp->getMeter();
-    QString f;
+    TQString f;
     f = sp->getParam("FORMAT");
 
     if ( f == "%full" )

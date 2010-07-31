@@ -22,10 +22,10 @@
 #include <kpushbutton.h>
 #include <kdebug.h>
 #include <klocale.h>
-#include <qlabel.h>
-#include <qlayout.h>
+#include <tqlabel.h>
+#include <tqlayout.h>
 
-ThemeWidget::ThemeWidget(QWidget *parent, const char *name)
+ThemeWidget::ThemeWidget(TQWidget *parent, const char *name)
   : ThemeWidgetLayout(parent, name), m_themeFile(0)
 {
   running->setText("");
@@ -35,10 +35,10 @@ ThemeWidget::ThemeWidget(QWidget *parent, const char *name)
 ThemeWidget::ThemeWidget(ThemeFile* tf)
   : m_themeFile(tf)
 {
-  QPixmap pixmap = m_themeFile->icon();
+  TQPixmap pixmap = m_themeFile->icon();
   if(!pixmap.isNull())
     icon->setPixmap(pixmap);
-  QString version;
+  TQString version;
   if(!m_themeFile->version().isEmpty())
     version = " - " + m_themeFile->version();
   themeName->setText(
@@ -80,12 +80,12 @@ void ThemeWidget::updateRunning()
     running->setText("");
 }
 
-void ThemeWidget::setDescriptionText(QString text)
+void ThemeWidget::setDescriptionText(TQString text)
 {
   description->setText(text);
 }
 
-void ThemeWidget::setHeaderText(QString text)
+void ThemeWidget::setHeaderText(TQString text)
 {
   themeName->setText(text);
 }

@@ -33,15 +33,15 @@
 static int mib[] = { CTL_NET, PF_ROUTE, 0, 0, NET_RT_IFLIST, 0 };
 #endif
 
-#include <qpushbutton.h>
-#include <qtextstream.h>
-#include <qfile.h>
-#include <qdatetime.h>
-#include <qlayout.h>
-#include <qtimer.h>
-#include <qregexp.h>
-#include <qcursor.h>
-#include <qpopupmenu.h>
+#include <tqpushbutton.h>
+#include <tqtextstream.h>
+#include <tqfile.h>
+#include <tqdatetime.h>
+#include <tqlayout.h>
+#include <tqtimer.h>
+#include <tqregexp.h>
+#include <tqcursor.h>
+#include <tqpopupmenu.h>
 
 #include <kdebug.h>
 #include <klocale.h>
@@ -84,7 +84,7 @@ KSim::PluginPage *NetPlugin::createConfigPage(const char *className)
 
 void NetPlugin::showAbout()
 {
-  QString version = kapp->aboutData()->version();
+  TQString version = kapp->aboutData()->version();
 
   KAboutData aboutData(instanceName(),
      I18N_NOOP("KSim Net Plugin"), version.latin1(),
@@ -105,7 +105,7 @@ NetView::NetView(KSim::PluginObject *parent, const char *name)
 #ifdef __linux__
   m_procStream = 0L;
   if ((m_procFile = fopen("/proc/net/dev", "r")))
-    m_procStream = new QTextStream(m_procFile, IO_ReadOnly);
+    m_procStream = new TQTextStream(m_procFile, IO_ReadOnly);
 #endif
 #ifdef __FreeBSD__
   m_buf = 0;
@@ -113,17 +113,17 @@ NetView::NetView(KSim::PluginObject *parent, const char *name)
 #endif
 
   m_firstTime = true;
-  m_netLayout = new QVBoxLayout(this);
+  m_netLayout = new TQVBoxLayout(this);
 
   m_networkList = createList();
   addDisplay();
 
-  m_netTimer = new QTimer(this);
-  connect(m_netTimer, SIGNAL(timeout()), SLOT(updateGraph()));
+  m_netTimer = new TQTimer(this);
+  connect(m_netTimer, TQT_SIGNAL(timeout()), TQT_SLOT(updateGraph()));
   m_netTimer->start(NET_UPDATE);
 
-  m_lightTimer = new QTimer(this);
-  connect(m_lightTimer, SIGNAL(timeout()), SLOT(updateLights()));
+  m_lightTimer = new TQTimer(this);
+  connect(m_lightTimer, TQT_SIGNAL(timeout()), TQT_SLOT(updateLights()));
   m_lightTimer->start(LED_UPDATE);
 
   updateGraph();
@@ -180,12 +180,12 @@ void NetView::addDisplay()
   {
     KSim::LedLabel *led = addLedLabel( ( *it ).name() );
     KSim::Label *label = ( ( *it ).showTimer() ? addLabel() : 0L );
-    QPopupMenu * popup = ( ( *it ).commandsEnabled() ?
+    TQPopupMenu * popup = ( ( *it ).commandsEnabled() ?
        addPopupMenu( ( *it ).name(), i ) : 0L );
     KSim::Chart *chart = addChart();
     //KSim::LedLabel *led = addLedLabel( ( *it ).name() );
     //KSim::Label *label = ( ( *it ).showTimer() ? addLabel() : 0L );
-    //QPopupMenu * popup = ( ( *it ).commandsEnabled() ?
+    //TQPopupMenu * popup = ( ( *it ).commandsEnabled() ?
        //addPopupMenu( ( *it ).name(), i ) : 0L );
 
     if ( ( *it ).commandsEnabled() )
@@ -262,12 +262,12 @@ Network::List NetView::createList() const
   Network::List list;
   for ( int i = 0; i < amount; ++i )
   {
-    if ( !config()->hasGroup( "device-" + QString::number( i ) ) )
+    if ( !config()->hasGroup( "device-" + TQString::number( i ) ) )
     {
       continue;
     }
 
-    config()->setGroup( "device-" + QString::number( i ) );
+    config()->setGroup( "device-" + TQString::number( i ) );
 
     list.append( Network( config()->readEntry( "deviceName" ),
        config()->readEntry( "deviceFormat" ),
@@ -341,10 +341,10 @@ void NetView::updateGraph()
   time_t start = 0;
   struct stat st;
 
-  QTime netTime;
-  QString timeDisplay;
-  QString pid( "/var/run/%1.pid" );
-  QString newPid;
+  TQTime netTime;
+  TQString timeDisplay;
+  TQString pid( "/var/run/%1.pid" );
+  TQString newPid;
 
   Network::List::Iterator it;
   for ( it = m_networkList.begin(); it != m_networkList.end(); ++it )
@@ -358,7 +358,7 @@ void NetView::updateGraph()
         timeDisplay = ( *it ).format();
         newPid = pid.arg( ( *it ).name() );
 
-        if ( QFile::exists( newPid ) && stat( QFile::encodeName( newPid ).data(), &st ) == 0 )
+        if ( TQFile::exists( newPid ) && stat( TQFile::encodeName( newPid ).data(), &st ) == 0 )
         {
           start = st.st_mtime;
 
@@ -391,8 +391,8 @@ void NetView::updateGraph()
       ( *it ).chart()->setValue( receiveDiff, sendDiff );
       ( *it ).setMaxValue( ( *it ).chart()->maxValue() );
 
-      QString receiveString = KGlobal::locale()->formatNumber( ( float ) receiveDiff / 1024.0, 1 );
-      QString sendString = KGlobal::locale()->formatNumber( ( float ) sendDiff / 1024.0, 1 );
+      TQString receiveString = KGlobal::locale()->formatNumber( ( float ) receiveDiff / 1024.0, 1 );
+      TQString sendString = KGlobal::locale()->formatNumber( ( float ) sendDiff / 1024.0, 1 );
 
       ( *it ).chart()->setText( i18n( "in: %1k" ).arg( receiveString ),
          i18n( "out: %1k" ).arg( sendString ) );
@@ -422,7 +422,7 @@ KSim::Chart *NetView::addChart()
   return chart;
 }
 
-KSim::LedLabel *NetView::addLedLabel(const QString &device)
+KSim::LedLabel *NetView::addLedLabel(const TQString &device)
 {
   KSim::LedLabel *ledLabel = new KSim::LedLabel(0, KSim::Types::Net,
      device, this);
@@ -440,20 +440,20 @@ KSim::Label *NetView::addLabel()
   return label;
 }
 
-QPopupMenu *NetView::addPopupMenu(const QString &device, int value)
+TQPopupMenu *NetView::addPopupMenu(const TQString &device, int value)
 {
-  QPopupMenu *popup = new QPopupMenu(this);
+  TQPopupMenu *popup = new TQPopupMenu(this);
   popup->insertItem(SmallIcon("network"), i18n("Connect"), this,
-     SLOT(runConnectCommand(int)), 0, 1);
+     TQT_SLOT(runConnectCommand(int)), 0, 1);
   popup->setItemParameter(1, value);
   popup->insertItem(SmallIcon("network"), i18n("Disconnect"), this,
-     SLOT(runDisconnectCommand(int)), 0, 2);
+     TQT_SLOT(runDisconnectCommand(int)), 0, 2);
   popup->setItemParameter(2, value);
   menu()->insertItem(device, popup, 100 + value);
   return popup;
 }
 
-void NetView::netStatistics(const QString &device, NetData &data)
+void NetView::netStatistics(const TQString &device, NetData &data)
 {
 #ifdef __linux__
   if (m_procFile == 0) {
@@ -462,8 +462,8 @@ void NetView::netStatistics(const QString &device, NetData &data)
     return;
   }
 
-  QString output;
-  QString parser;
+  TQString output;
+  TQString parser;
   // Parse the proc file
   while (!m_procStream->atEnd()) {
     parser = m_procStream->readLine();
@@ -480,8 +480,8 @@ void NetView::netStatistics(const QString &device, NetData &data)
 
   // make sure our output doesn't contain "eth0:11210107" so we dont
   // end up with netList[1] actually being netList[2]
-  output.replace(QRegExp(":"), " ");
-  QStringList netList = QStringList::split(' ', output);
+  output.replace(TQRegExp(":"), " ");
+  TQStringList netList = TQStringList::split(' ', output);
 
   data.in = netList[1].toULong();
   data.out = netList[9].toULong();
@@ -552,14 +552,14 @@ void NetView::netStatistics(const QString &device, NetData &data)
 #endif
 }
 
-bool NetView::isOnline(const QString &device)
+bool NetView::isOnline(const TQString &device)
 {
 #ifdef __linux__
-  QFile file("/proc/net/route");
+  TQFile file("/proc/net/route");
   if (!file.open(IO_ReadOnly))
     return -1;
 
-  return (QTextStream(&file).read().find(device) != -1 ? true : false);
+  return (TQTextStream(&file).read().find(device) != -1 ? true : false);
 #endif
 
 #ifdef __FreeBSD__
@@ -625,7 +625,7 @@ bool NetView::isOnline(const QString &device)
 }
 
 // EventFilter
-bool NetView::eventFilter( QObject * o, QEvent * e )
+bool NetView::eventFilter( TQObject * o, TQEvent * e )
 {
   // find out which interface we are
   int i = 0;
@@ -640,9 +640,9 @@ bool NetView::eventFilter( QObject * o, QEvent * e )
     ++i;
   }
 
-  if ( e->type() == QEvent::MouseButtonPress )
+  if ( e->type() == TQEvent::MouseButtonPress )
   {
-    if ( static_cast<QMouseEvent *>( e )->button() == QMouseEvent::RightButton )
+    if ( static_cast<TQMouseEvent *>( e )->button() == TQMouseEvent::RightButton )
     {
       showMenu(i);
     }
@@ -655,10 +655,10 @@ bool NetView::eventFilter( QObject * o, QEvent * e )
 
 void NetView::showMenu(int i) {
 
-  QPopupMenu menu;
+  TQPopupMenu menu;
   menu.insertItem( SmallIcon("network"), i18n("Connect"), 1);
   menu.insertItem( SmallIcon("network"), i18n("Disconnect"), 2);
-  switch (menu.exec(QCursor::pos())) {
+  switch (menu.exec(TQCursor::pos())) {
     case 1:
       runConnectCommand(i);
       break;

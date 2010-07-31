@@ -11,7 +11,7 @@
 //
 //
 
-#include <qvariant.h>
+#include <tqvariant.h>
 
 #include <kconfig.h>
 #include <klocale.h>
@@ -20,7 +20,7 @@
 #include "profileserver.h"
 #include "remoteserver.h"
 
-IRAction::IRAction(const QString &newProgram, const QString &newObject, const QString &newMethod, const Arguments &newArguments, const QString &newRemote, const QString &newMode, const QString &newButton, const bool newRepeat, const bool newAutoStart, const bool newDoBefore, const bool newDoAfter, const bool newUnique, const IfMulti newIfMulti)
+IRAction::IRAction(const TQString &newProgram, const TQString &newObject, const TQString &newMethod, const Arguments &newArguments, const TQString &newRemote, const TQString &newMode, const TQString &newButton, const bool newRepeat, const bool newAutoStart, const bool newDoBefore, const bool newDoAfter, const bool newUnique, const IfMulti newIfMulti)
 {
 	theProgram = newProgram;
 	theObject = newObject;
@@ -39,12 +39,12 @@ IRAction::IRAction(const QString &newProgram, const QString &newObject, const QS
 
 const IRAction &IRAction::loadFromConfig(KConfig &theConfig, int index)
 {
-	QString Binding = "Binding" + QString().setNum(index);
+	TQString Binding = "Binding" + TQString().setNum(index);
 	int numArguments = theConfig.readNumEntry(Binding + "Arguments");
 	theArguments.clear();
 	for(int j = 0; j < numArguments; j++)
-	{	QVariant::Type theType = (QVariant::Type)theConfig.readNumEntry(Binding + "ArgumentType" + QString().setNum(j), QVariant::String);
-		theArguments += theConfig.readPropertyEntry(Binding + "Argument" + QString().setNum(j), theType == QVariant::CString ? QVariant::String : theType);
+	{	TQVariant::Type theType = (TQVariant::Type)theConfig.readNumEntry(Binding + "ArgumentType" + TQString().setNum(j), TQVariant::String);
+		theArguments += theConfig.readPropertyEntry(Binding + "Argument" + TQString().setNum(j), theType == TQVariant::CString ? TQVariant::String : theType);
 		theArguments.last().cast(theType);
 	}
 
@@ -66,15 +66,15 @@ const IRAction &IRAction::loadFromConfig(KConfig &theConfig, int index)
 
 void IRAction::saveToConfig(KConfig &theConfig, int index) const
 {
-	QString Binding = "Binding" + QString().setNum(index);
+	TQString Binding = "Binding" + TQString().setNum(index);
 
 	theConfig.writeEntry(Binding + "Arguments", theArguments.count());
 	for(unsigned j = 0; j < theArguments.count(); j++)
-	{	QVariant arg = theArguments[j];
-		QVariant::Type preType = arg.type();
-		if(preType == QVariant::CString) arg.cast(QVariant::String);
-		theConfig.writeEntry(Binding + "Argument" + QString().setNum(j), arg);
-		theConfig.writeEntry(Binding + "ArgumentType" + QString().setNum(j), preType);
+	{	TQVariant arg = theArguments[j];
+		TQVariant::Type preType = arg.type();
+		if(preType == TQVariant::CString) arg.cast(TQVariant::String);
+		theConfig.writeEntry(Binding + "Argument" + TQString().setNum(j), arg);
+		theConfig.writeEntry(Binding + "ArgumentType" + TQString().setNum(j), preType);
 	}
 	theConfig.writeEntry(Binding + "Program", theProgram);
 	theConfig.writeEntry(Binding + "Object", theObject);
@@ -90,7 +90,7 @@ void IRAction::saveToConfig(KConfig &theConfig, int index) const
 	theConfig.writeEntry(Binding + "IfMulti", theIfMulti);
 }
 
-const QString IRAction::function() const
+const TQString IRAction::function() const
 {
 	ProfileServer *theServer = ProfileServer::profileServer();
 	if(theProgram.isEmpty())
@@ -111,24 +111,24 @@ const QString IRAction::function() const
 		}
 }
 
-const QString IRAction::notes() const
+const TQString IRAction::notes() const
 {
 
 	if(isModeChange())
-		return QString(theDoBefore ? i18n("Do actions before. ") : "") +
-			QString(theDoAfter ? i18n("Do actions after. ") : "");
+		return TQString(theDoBefore ? i18n("Do actions before. ") : "") +
+			TQString(theDoAfter ? i18n("Do actions after. ") : "");
 	else if(isJustStart())
 		return "";
 	else
-		return QString(theAutoStart ? i18n("Auto-start. ") : "")
-			+ QString(theRepeat ? i18n("Repeatable. ") : "")
-			+ QString(!theUnique ? (theIfMulti == IM_DONTSEND ? i18n("Do nothing if many instances. ")
+		return TQString(theAutoStart ? i18n("Auto-start. ") : "")
+			+ TQString(theRepeat ? i18n("Repeatable. ") : "")
+			+ TQString(!theUnique ? (theIfMulti == IM_DONTSEND ? i18n("Do nothing if many instances. ")
 						: theIfMulti == IM_SENDTOTOP ? i18n("Send to top instance. ")
 						: theIfMulti == IM_SENDTOBOTTOM ? i18n("Send to bottom instance. ") : i18n("Send to all instances. "))
 						: "");
 }
 
-const QString IRAction::application() const
+const TQString IRAction::application() const
 {
 	ProfileServer *theServer = ProfileServer::profileServer();
 	if(theProgram.isEmpty())
@@ -143,12 +143,12 @@ const QString IRAction::application() const
 	}
 }
 
-const QString IRAction::remoteName() const
+const TQString IRAction::remoteName() const
 {
 	return RemoteServer::remoteServer()->getRemoteName(theRemote);
 }
 
-const QString IRAction::buttonName() const
+const TQString IRAction::buttonName() const
 {
 	return RemoteServer::remoteServer()->getButtonName(theRemote, theButton);
 }

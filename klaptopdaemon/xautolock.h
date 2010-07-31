@@ -8,7 +8,7 @@
 #ifndef __XAUTOLOCK_H__
 #define __XAUTOLOCK_H__
 
-#include <qwidget.h>
+#include <tqwidget.h>
 
 #include <X11/Xlib.h>
 
@@ -62,7 +62,7 @@ signals:
     void timeout();
 
 protected:
-    virtual void timerEvent(QTimerEvent *ev);
+    virtual void timerEvent(TQTimerEvent *ev);
     virtual bool x11Event( XEvent* );
 
 protected:

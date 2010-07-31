@@ -27,7 +27,7 @@
 
 class KJotsMain;
 
-class KJotsBookmarks : public QObject, public KBookmarkOwner
+class KJotsBookmarks : public TQObject, public KBookmarkOwner
 {
     Q_OBJECT
 
@@ -35,12 +35,12 @@ class KJotsBookmarks : public QObject, public KBookmarkOwner
         KJotsBookmarks(KJotsMain* parent = 0, const char* name = 0);
         ~KJotsBookmarks();
 
-        virtual void openBookmarkURL(const QString& url);
-        virtual QString currentURL() const;
-        QString currentTitle() const;
+        virtual void openBookmarkURL(const TQString& url);
+        virtual TQString currentURL() const;
+        TQString currentTitle() const;
 
     signals:
-        void openPage(const QString& page);
+        void openPage(const TQString& page);
 
     private:
         KJotsMain* m_kjots;

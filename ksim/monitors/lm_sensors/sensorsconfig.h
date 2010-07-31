@@ -44,26 +44,26 @@ class SensorsConfig : public KSim::PluginPage
     void readConfig();
 
   private slots:
-    void menu(KListView *, QListViewItem *, const QPoint &);
+    void menu(KListView *, TQListViewItem *, const TQPoint &);
     void initSensors();
     void selectAll();
     void unSelectAll();
     void invertSelect();
 
-    void modify( QListViewItem * );
+    void modify( TQListViewItem * );
     void modify();
 
   protected:
-    void showEvent(QShowEvent *);
+    void showEvent(TQShowEvent *);
 
   private:
     bool m_neverShown;
-    QLabel *m_updateLabel;
+    TQLabel *m_updateLabel;
     KIntSpinBox *m_sensorSlider;
     KListView *m_sensorView;
-    QCheckBox *m_fahrenBox;
-    QGridLayout *m_layout;
-    QPopupMenu *m_popupMenu;
-    QPushButton * m_modify;
+    TQCheckBox *m_fahrenBox;
+    TQGridLayout *m_layout;
+    TQPopupMenu *m_popupMenu;
+    TQPushButton * m_modify;
 };
 #endif

@@ -34,7 +34,7 @@ class RegExpWidget :public QWidget
 Q_OBJECT
 
 public:
-  RegExpWidget(RegExpEditorWindow* editorWindow, QWidget *parent,
+  RegExpWidget(RegExpEditorWindow* editorWindow, TQWidget *parent,
                const char *label = 0);
 
   /*======================================================================
@@ -123,7 +123,7 @@ public:
   /**
      Returns the rectangle which makes up the selection.
   */
-  virtual QRect selectionRect() const;
+  virtual TQRect selectionRect() const;
 
   /** Selects the RegExp widget and all its chidlren*/
   virtual void selectWidget( bool sel );
@@ -155,13 +155,13 @@ public:
      Returns the regexp widget under point. If `justVisibleWidgets' is
      true, @ref ConcWidget is ignored. That is, a ConcWidget will not be returned.
   */
-  virtual RegExpWidget* widgetUnderPoint( QPoint globalPos, bool justVisibleWidgets );
+  virtual RegExpWidget* widgetUnderPoint( TQPoint globalPos, bool justVisibleWidgets );
 
   /**
      Returns the widget under point which can be edited. That is the
      "innermost" widget editable.
   */
-  virtual RegExpWidget* findWidgetToEdit( QPoint /* globalPos */) { return 0; }
+  virtual RegExpWidget* findWidgetToEdit( TQPoint /* globalPos */) { return 0; }
 
   /**
      Edits the current widget. That is, bring up the dialog, which is
@@ -172,7 +172,7 @@ public:
 
 protected:
   /** Draws a selection rectangle for the current widget.  */
-  virtual void drawPossibleSelection( QPainter& painter, QSize mySize);
+  virtual void drawPossibleSelection( TQPainter& painter, TQSize mySize);
 
   /** Returns true if the widget accepts paste actions. */
   virtual bool acceptWidgetPaste() const;
@@ -182,10 +182,10 @@ protected:
    */
   virtual bool acceptWidgetInsert( RegExpType ) const;
 
-  virtual void mousePressEvent ( QMouseEvent* event );
+  virtual void mousePressEvent ( TQMouseEvent* event );
 
-  virtual void mouseReleaseEvent( QMouseEvent* );
-  virtual void enterEvent( QEvent * );
+  virtual void mouseReleaseEvent( TQMouseEvent* );
+  virtual void enterEvent( TQEvent * );
 
   RegExpEditorWindow* _editorWindow;
 

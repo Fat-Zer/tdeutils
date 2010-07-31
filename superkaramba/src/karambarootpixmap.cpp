@@ -11,7 +11,7 @@
 #include "karambarootpixmap.h"
 #include "karamba.h"
 
-KarambaRootPixmap::KarambaRootPixmap(QWidget *w) :
+KarambaRootPixmap::KarambaRootPixmap(TQWidget *w) :
   KRootPixmap( w)
 {
   widget = w;

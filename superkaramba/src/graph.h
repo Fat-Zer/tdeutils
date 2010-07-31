@@ -12,8 +12,8 @@
 #define GRAPH_H
 
 #include "meter.h"
-#include <qpainter.h>
-#include <qcolor.h>
+#include <tqpainter.h>
+#include <tqcolor.h>
 
 class Graph : public Meter
 {
@@ -26,8 +26,8 @@ public:
 
   void setValue( long );
   long getValue() { return lastValue; };
-  void setValue( QString );
-  void mUpdate( QPainter * );
+  void setValue( TQString );
+  void mUpdate( TQPainter * );
 
 private:
   int lastValue;

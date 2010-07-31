@@ -19,7 +19,7 @@
 #define __repeatwidget
 
 #include "singlecontainerwidget.h"
-#include <qvbox.h>
+#include <tqvbox.h>
 class QButtonGroup;
 class KDialogBase;
 class QCheckBox;
@@ -37,8 +37,8 @@ Q_OBJECT
 public:
   enum REPEATTYPE {ANY, ATLEAST, ATMOST, EXACTLY, MINMAX};
 
-  RepeatRangeWindow( QWidget* parent, const char* name = 0 );
-  QString text();
+  RepeatRangeWindow( TQWidget* parent, const char* name = 0 );
+  TQString text();
   int min();
   int max();
   void set( REPEATTYPE tp, int min, int max );
@@ -50,14 +50,14 @@ protected slots:
 
 
 private:
-  void createLine( QWidget* parent, QString text, QSpinBox** spin, REPEATTYPE tp );
+  void createLine( TQWidget* parent, TQString text, TQSpinBox** spin, REPEATTYPE tp );
 
-  QSpinBox* _leastTimes;
-  QSpinBox* _mostTimes;
-  QSpinBox* _exactlyTimes;
-  QSpinBox* _rangeFrom;
-  QSpinBox* _rangeTo;
-  QButtonGroup* _group;
+  TQSpinBox* _leastTimes;
+  TQSpinBox* _mostTimes;
+  TQSpinBox* _exactlyTimes;
+  TQSpinBox* _rangeFrom;
+  TQSpinBox* _rangeTo;
+  TQButtonGroup* _group;
 };
 
 
@@ -73,18 +73,18 @@ class RepeatWidget :public SingleContainerWidget
 Q_OBJECT
 
 public:
-  RepeatWidget( RegExpEditorWindow* editorWindow, QWidget *parent,
+  RepeatWidget( RegExpEditorWindow* editorWindow, TQWidget *parent,
                const char *name = 0);
   RepeatWidget( RepeatRegExp* regexp, RegExpEditorWindow* editorWindow,
-              QWidget* parent, const char* name = 0);
+              TQWidget* parent, const char* name = 0);
   void init();
-  virtual QSize sizeHint() const;
+  virtual TQSize sizeHint() const;
 	virtual RegExp* regExp() const;
   virtual RegExpType type() const { return REPEAT; }
   virtual int edit();
 
 protected:
-  virtual void paintEvent( QPaintEvent *e );
+  virtual void paintEvent( TQPaintEvent *e );
 
 protected slots:
   void slotConfigCanceled();
@@ -94,9 +94,9 @@ private:
   KDialogBase* _configWindow;
   RepeatRangeWindow* _content;
 
-  mutable QSize _textSize;
-  mutable QSize _childSize;
-  QByteArray _backup;
+  mutable TQSize _textSize;
+  mutable TQSize _childSize;
+  TQByteArray _backup;
 };
 
 

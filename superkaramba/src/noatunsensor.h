@@ -12,10 +12,10 @@
 
 #include "sensor.h"
 #include <dcopclient.h>
-#include <qregexp.h>
-#include <qcstring.h>
-#include <qdatastream.h>
-#include <qstringlist.h>
+#include <tqregexp.h>
+#include <tqcstring.h>
+#include <tqdatastream.h>
+#include <tqstringlist.h>
 
 /**
 @author Hans Karlsson
@@ -33,16 +33,16 @@ public:
 
 
 private:
-    QCString noatunID;
+    TQCString noatunID;
 
     bool isRunning();
-    QString getTitle();
+    TQString getTitle();
     int getTime();
     int getLength();
 
 
     DCOPClient *client;
-    QCString appId;
+    TQCString appId;
 };
 
 #endif

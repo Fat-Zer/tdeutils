@@ -28,7 +28,7 @@
 #include "kmilod.h"
 #include "monitor.h"
 
-#include <qfile.h>
+#include <tqfile.h>
 
 #include <klocale.h>
 #include <kdebug.h>
@@ -43,13 +43,13 @@
 using namespace KMilo;
 
 extern "C" {
-   KDE_EXPORT KDEDModule *create_kmilod(const QCString &name) {
+   KDE_EXPORT KDEDModule *create_kmilod(const TQCString &name) {
 	   return new KMiloD(name);
    }
 }
 
 
-KMiloD::KMiloD(const QCString &name) : KDEDModule(name), _interval(100)
+KMiloD::KMiloD(const TQCString &name) : KDEDModule(name), _interval(100)
 {
 	_monitors.setAutoDelete(true);
 	_miface = new KMiloInterface(this);
@@ -80,7 +80,7 @@ KMiloD::KMiloD(const QCString &name) : KDEDModule(name), _interval(100)
 	}
 
 	// Start the timer
-	QObject::connect(&_timer, SIGNAL(timeout()), this, SLOT(doTimer()));
+	TQObject::connect(&_timer, TQT_SIGNAL(timeout()), this, TQT_SLOT(doTimer()));
 	if (shouldPoll) {
 		_timer.start(_interval);
 	}
@@ -192,21 +192,21 @@ void KMiloD::doTimer() {
 }
 
 
-void KMiloD::displayText(const QString& text) {
-	_display->displayText(text, QPixmap());
+void KMiloD::displayText(const TQString& text) {
+	_display->displayText(text, TQPixmap());
 }
 
 
-void KMiloD::displayText(const QString& text, const QPixmap& customPixmap) {
+void KMiloD::displayText(const TQString& text, const TQPixmap& customPixmap) {
 	_display->displayText(text, customPixmap);
 }
 
 
-void KMiloD::displayProgress(const QString& text, int progress) {
-	_display->displayProgress(text, progress, QPixmap());
+void KMiloD::displayProgress(const TQString& text, int progress) {
+	_display->displayProgress(text, progress, TQPixmap());
 }
 
-void KMiloD::displayProgress(const QString& text, int progress, const QPixmap& customPixmap ) {
+void KMiloD::displayProgress(const TQString& text, int progress, const TQPixmap& customPixmap ) {
 	_display->displayProgress(text, progress, customPixmap);
 }
 

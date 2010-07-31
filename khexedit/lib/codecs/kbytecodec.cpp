@@ -38,9 +38,9 @@ KByteCodec *KByteCodec::createCodec( KCoding C )
   return Codec;
 }
 
-unsigned int KByteCodec::decode( unsigned char *Char, const QString &Digits, uint Pos ) const
+unsigned int KByteCodec::decode( unsigned char *Char, const TQString &Digits, uint Pos ) const
 {
-  //kdDebug() << QString("KByteCodec::decode(%1,%2)").arg(Digits).arg(Pos) << endl;
+  //kdDebug() << TQString("KByteCodec::decode(%1,%2)").arg(Digits).arg(Pos) << endl;
   const uint P = Pos;
 
   // remove leading 0s

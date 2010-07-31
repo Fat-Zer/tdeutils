@@ -20,7 +20,7 @@
 
 #ifdef QT_ONLY
   #include "compat.h"
-  #include <qlistbox.h>
+  #include <tqlistbox.h>
 #else
   #include <kdialogbase.h>
   #include <klistbox.h>
@@ -51,7 +51,7 @@ protected slots:
 private:
   KMultiFormListBoxFactory *myFact;
   KMultiFormListBoxEntry *myWidget;
-  QByteArray _backup;
+  TQByteArray _backup;
   KListBox *listbox;
   WindowListboxItem *myListboxItem;
   bool initialShow;

@@ -37,7 +37,7 @@ class KEditor : public KController
     KEditor( KBufferCursor *BC, KHexEdit *HE, KController *P );
 
   public: // API
-    virtual bool handleKeyPress( QKeyEvent *KeyEvent );
+    virtual bool handleKeyPress( TQKeyEvent *KeyEvent );
 
   protected:
     /** executes keyboard Action \a Action. This is normally called by a key event handler. */

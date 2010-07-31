@@ -22,10 +22,10 @@
 #ifndef CLICKAREA_H
 #define CLICKAREA_H
 
-#include <qstring.h>
-#include <qrect.h>
-#include <qevent.h>
-#include <qregexp.h>
+#include <tqstring.h>
+#include <tqrect.h>
+#include <tqevent.h>
+#include <tqregexp.h>
 
 #include <kprocess.h>
 #include <kprocio.h>
@@ -45,25 +45,25 @@ public:
 
     ~ClickArea();
 
-    virtual bool click( QMouseEvent* );
-    void setOnClick( QString );
-    void setServiceOnClick( QString , QString, QString);
-    void setOnMiddleClick( QString );
+    virtual bool click( TQMouseEvent* );
+    void setOnClick( TQString );
+    void setServiceOnClick( TQString , TQString, TQString);
+    void setOnMiddleClick( TQString );
 
 
-    QRect getRectangle();
+    TQRect getRectangle();
 
-    void mUpdate( QPainter* );
+    void mUpdate( TQPainter* );
     void setValue( long );
-    void setValue( QString );
+    void setValue( TQString );
 
-    QRect rect;
-    QString onClick;
-    QString svc_onClick;
-    QString svc_name;
-    QString svc_icon;
-    QString onMiddleClick;
-    QString value;
+    TQRect rect;
+    TQString onClick;
+    TQString svc_onClick;
+    TQString svc_name;
+    TQString svc_icon;
+    TQString onMiddleClick;
+    TQString value;
 };
 
 #endif

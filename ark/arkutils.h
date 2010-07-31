@@ -32,7 +32,7 @@
 #ifndef ARKUTILS_H
 #define ARKUTILS_H
 
-#include <qstring.h>
+#include <tqstring.h>
 
 #include <kio/global.h>
 
@@ -43,14 +43,14 @@ namespace ArkUtils
 {
   int getYear(int theMonth, int thisYear, int thisMonth);
   int getMonth(const char *strMonth);
-  QString fixYear(const QString& strYear);
+  TQString fixYear(const TQString& strYear);
 
-  QString getTimeStamp(const QString &month,
-                       const QString &day,
-                       const QString &year);
-  bool haveDirPermissions(const QString &strFile);
-  bool diskHasSpace(const QString &dir, KIO::filesize_t size);
-  KIO::filesize_t getSizes(QStringList *list);
+  TQString getTimeStamp(const TQString &month,
+                       const TQString &day,
+                       const TQString &year);
+  bool haveDirPermissions(const TQString &strFile);
+  bool diskHasSpace(const TQString &dir, KIO::filesize_t size);
+  KIO::filesize_t getSizes(TQStringList *list);
 }
 
 #endif

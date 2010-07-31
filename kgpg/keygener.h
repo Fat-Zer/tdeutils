@@ -26,7 +26,7 @@ class keyGenerate : public KDialogBase
 {
         Q_OBJECT
 public:
-        keyGenerate(QWidget *parent=0, const char *name=0);
+        keyGenerate(TQWidget *parent=0, const char *name=0);
 
         KComboBox *keykind,*keysize,*keyexp;
         KLineEdit *numb,*comment,*kname,*mail;
@@ -37,12 +37,12 @@ public slots:
         void slotApply();
         void activateexp(int state);
         bool getmode();
-        QString getkeycomm();
-        QString getkeynumb();
-        QString getkeymail();
-        QString getkeyname();
-        QString getkeysize();
-        QString getkeytype();
+        TQString getkeycomm();
+        TQString getkeynumb();
+        TQString getkeymail();
+        TQString getkeyname();
+        TQString getkeysize();
+        TQString getkeytype();
         int getkeyexp();
 };
 

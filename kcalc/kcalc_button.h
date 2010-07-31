@@ -43,7 +43,7 @@ class ButtonMode
 {
 public:
   ButtonMode(void) {};
-  ButtonMode(QString &label, QString &tooltip, bool is_label_richtext)
+  ButtonMode(TQString &label, TQString &tooltip, bool is_label_richtext)
     : is_label_richtext(is_label_richtext), tooltip(tooltip)
   {
     if (is_label_richtext)
@@ -52,9 +52,9 @@ public:
       this->label = label;
   };
 
-  QString label;
+  TQString label;
   bool is_label_richtext;
-  QString tooltip;
+  TQString tooltip;
 };
 
 
@@ -63,27 +63,27 @@ class KCalcButton : public KPushButton
 Q_OBJECT
 
 public:
- KCalcButton(QWidget *parent, const char * name = 0); 
- KCalcButton(const QString &label, QWidget *parent, const char * name = 0,
-	     const QString &tooltip = QString());
+ KCalcButton(TQWidget *parent, const char * name = 0); 
+ KCalcButton(const TQString &label, TQWidget *parent, const char * name = 0,
+	     const TQString &tooltip = TQString());
 
- void addMode(ButtonModeFlags mode, QString label, QString tooltip, bool is_label_richtext = false);
+ void addMode(ButtonModeFlags mode, TQString label, TQString tooltip, bool is_label_richtext = false);
 
 public slots: 
   void slotSetMode(ButtonModeFlags mode, bool flag); 
   void slotSetAccelDisplayMode(bool flag);
 
 protected:
- virtual void drawButtonLabel(QPainter *paint);
- void paintLabel(QPainter *paint);
+ virtual void drawButtonLabel(TQPainter *paint);
+ void paintLabel(TQPainter *paint);
 
 protected:
  bool _show_accel_mode;
- QString _label;
+ TQString _label;
 
  ButtonModeFlags _mode_flags;
 
- QMap<ButtonModeFlags, ButtonMode> _mode;
+ TQMap<ButtonModeFlags, ButtonMode> _mode;
 };
 
 class KSquareButton : public KCalcButton
@@ -91,15 +91,15 @@ class KSquareButton : public KCalcButton
 Q_OBJECT
 
 public:
-  KSquareButton(QWidget *parent, const char * name = 0)
+  KSquareButton(TQWidget *parent, const char * name = 0)
     : KCalcButton(parent, name) { }; 
- KSquareButton(const QString &label, QWidget *parent, const char * name = 0,
-	       const QString &tooltip = QString())
+ KSquareButton(const TQString &label, TQWidget *parent, const char * name = 0,
+	       const TQString &tooltip = TQString())
    : KCalcButton(label, parent, name, tooltip) { };
 
 protected:
- virtual void drawButtonLabel(QPainter *paint);
- void paintLabel(QPainter *paint);
+ virtual void drawButtonLabel(TQPainter *paint);
+ void paintLabel(TQPainter *paint);
 };
 
 #endif  // _KCALC_BUTTON_H

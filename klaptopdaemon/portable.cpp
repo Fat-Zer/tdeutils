@@ -78,18 +78,18 @@
 #include <fcntl.h>
 #include <sys/ioctl.h>
 #include <dirent.h>
-#include <qpushbutton.h>
-#include <qdir.h>
-#include <qfile.h>
-#include <qfileinfo.h>
-#include <qstringlist.h>
-#include <qstring.h>
-#include <qobject.h>
-#include <qregexp.h>
-#include <qiodevice.h>
-#include <qlayout.h>
-#include <qvgroupbox.h>
-#include <qvaluevector.h>
+#include <tqpushbutton.h>
+#include <tqdir.h>
+#include <tqfile.h>
+#include <tqfileinfo.h>
+#include <tqstringlist.h>
+#include <tqstring.h>
+#include <tqobject.h>
+#include <tqregexp.h>
+#include <tqiodevice.h>
+#include <tqlayout.h>
+#include <tqvgroupbox.h>
+#include <tqvaluevector.h>
 
 #include <kactivelabel.h>
 #include <kconfig.h>
@@ -176,14 +176,14 @@ pmu_read(apm_info *ap)
 {
 	int bcnt = 0;
 	memset(ap, 0, sizeof(apm_info));
-	QFile f("/proc/pmu/info");
+	TQFile f("/proc/pmu/info");
 	if (!f.exists() || !f.open(IO_ReadOnly))
 		return 1;
 
 	while (!f.atEnd()) {
-		QString l;
+		TQString l;
 	       	f.readLine(l, 500);
-		QStringList ll = QStringList::split(':', l, false);
+		TQStringList ll = TQStringList::split(':', l, false);
 		if (ll[0].stripWhiteSpace() == "AC Power") {
 			ap->ac_line_status = ll[1].stripWhiteSpace().toInt();
 			//kdDebug() << "line status " << ap->ac_line_status << endl;
@@ -199,14 +199,14 @@ pmu_read(apm_info *ap)
 	int timerem = 0;
 	int maxcharge = 0;
 	for (int i = 0; i < bcnt; i++) {
-		QFile bf(QString("/proc/pmu/battery_%1").arg(i));
+		TQFile bf(TQString("/proc/pmu/battery_%1").arg(i));
 		if (!bf.exists() || !bf.open(IO_ReadOnly))
 			continue;
 
 		while(!bf.atEnd()) {
-			QString l;
+			TQString l;
 			bf.readLine(l, 500);
-			QStringList ll = QStringList::split(':', l, false);
+			TQStringList ll = TQStringList::split(':', l, false);
 			if (ll[0].stripWhiteSpace() == "charge") {
 				charge += ll[1].stripWhiteSpace().toInt();
 				//kdDebug() << "charge: " << charge << endl;
@@ -238,12 +238,12 @@ struct acpi_battery_info {
 	int cap_low;
 	int remaining;
 	int rate;
-	QString name;
-	QString state_file;
-	QString info_file;
+	TQString name;
+	TQString state_file;
+	TQString info_file;
 };
 
-static QValueVector<acpi_battery_info> acpi_batteries;
+static TQValueVector<acpi_battery_info> acpi_batteries;
 static int acpi_last_known=0;
 static int last_seed=1;	// increment this to force revaluation
 
@@ -321,8 +321,8 @@ readit:
 }
 
 static void acpi_read_batteries() {
-	QString buff;
-	QFile *f;
+	TQString buff;
+	TQFile *f;
 	static int test_count = 0;
 	bool skip = false;
 
@@ -330,11 +330,11 @@ static void acpi_read_batteries() {
 		acpi_battery_info& bat = acpi_batteries[i];
 		bool present = false;
 		if ((test_count==0 || acpi_last_known != last_seed) && !bat.info_file.isNull()) {
-			f = new QFile(bat.info_file);
+			f = new TQFile(bat.info_file);
 			if (f && f->exists() && f->open(IO_ReadOnly)) {
 				while(f->readLine(buff,1024) > 0) {
 					if (buff.contains("design capacity low:", false)) {
-						QRegExp rx("(\\d*)\\D*$");
+						TQRegExp rx("(\\d*)\\D*$");
 						rx.search(buff);
 						bat.cap_low = rx.cap(1).toInt();
 						if (bat.cap_low < 0)
@@ -342,7 +342,7 @@ static void acpi_read_batteries() {
 						continue;
 					}
 					if (buff.contains("last full capacity:", false)) {
-						QRegExp rx("(\\d*)\\D*$");
+						TQRegExp rx("(\\d*)\\D*$");
 						rx.search(buff);
 						bat.cap = rx.cap(1).toInt();
 						continue;
@@ -360,11 +360,11 @@ static void acpi_read_batteries() {
 			delete config;
 		}
 		if (!bat.state_file.isNull()) {
-			f = new QFile(bat.state_file);
+			f = new TQFile(bat.state_file);
 			if (f && f->exists() && f->open(IO_ReadOnly)) {
 				while(f->readLine(buff,1024) > 0) {
 					if (buff.contains("present rate:", false)) {
-						QRegExp rx("(\\d*)\\D*$");
+						TQRegExp rx("(\\d*)\\D*$");
 						rx.search(buff);
 						bat.rate = rx.cap(1).toInt();
 						if (bat.rate < 0)
@@ -373,7 +373,7 @@ static void acpi_read_batteries() {
 						continue;
 					}
 					if (buff.contains("remaining capacity:", false)) {
-						QRegExp rx("(\\d*)\\D*$");
+						TQRegExp rx("(\\d*)\\D*$");
 						rx.search(buff);
 						bat.remaining = rx.cap(1).toInt();
 						bat.remaining -= bat.cap_low;
@@ -558,7 +558,7 @@ has_pmu()
 		return val;
 	init = 1;
 	val = 1;
-	if (!QDir("/proc/pmu").exists()) {
+	if (!TQDir("/proc/pmu").exists()) {
 		val = 0;
 	}
 	return val;
@@ -637,8 +637,8 @@ has_acpi_power()
 	if (acpi_ac_status() >= 0)
 		acpi_ac_ok = 1;
 
-	QDir battdir("/proc/acpi/battery");
-	battdir.setFilter(QDir::Dirs);
+	TQDir battdir("/proc/acpi/battery");
+	battdir.setFilter(TQDir::Dirs);
 	if(!battdir.isReadable())
 		return(val = 0);
 	for(uint i = 0; !battdir[i].isNull(); ++i) {
@@ -646,9 +646,9 @@ has_acpi_power()
 			continue;
 		bool ok = 0;
 		acpi_battery_info bat = {0,0,0,0,0,0,0,0,0};
-		QString base = battdir.path() + "/" + battdir[i] + "/";
-		QString name(base + "state");
-		QFileInfo f(name);
+		TQString base = battdir.path() + "/" + battdir[i] + "/";
+		TQString name(base + "state");
+		TQFileInfo f(name);
 		if(f.isReadable()) {
 			bat.state_file = name;
 			ok = true;
@@ -689,16 +689,16 @@ has_acpi_sleep(int state)
 		known = last_seed;
 		mask = 0;
 
-		QFile p("/sys/power/state");
-		QFile f("/proc/acpi/sleep");
+		TQFile p("/sys/power/state");
+		TQFile f("/proc/acpi/sleep");
 
 		if (p.exists() && p.open(IO_ReadOnly)) {
-			QString l;
-			QTextStream t(&p);
+			TQString l;
+			TQTextStream t(&p);
 			l = t.readLine();
-			QStringList ll = QStringList::split(' ',l,false);
-			for (QValueListIterator<QString> i = ll.begin(); i!=ll.end(); i++) {
-				QString s = *i;
+			TQStringList ll = TQStringList::split(' ',l,false);
+			for (TQValueListIterator<TQString> i = ll.begin(); i!=ll.end(); i++) {
+				TQString s = *i;
 				
 				if (s.compare("standby")==0)
 				mask |= (1<<1);
@@ -710,12 +710,12 @@ has_acpi_sleep(int state)
 			p.close();
 		}
 		else if (f.exists() && f.open(IO_ReadOnly)) {
-			QString l;
-			QTextStream t(&f);
+			TQString l;
+			TQTextStream t(&f);
 			l = t.readLine();
-			QStringList ll = QStringList::split(' ',l,false);
-			for (QValueListIterator<QString> i = ll.begin(); i!=ll.end(); i++) {
-				QString s = *i;
+			TQStringList ll = TQStringList::split(' ',l,false);
+			for (TQValueListIterator<TQString> i = ll.begin(); i!=ll.end(); i++) {
+				TQString s = *i;
 				if (s[0] == 'S') {
 					int c = s[1].digitValue();
 					if (c >= 0 && c <= 9)
@@ -939,7 +939,7 @@ int laptop_portable::has_hibernation()
 //	to get any software they lack
 //
 
-KActiveLabel *laptop_portable::no_power_management_explanation(QWidget *parent)
+KActiveLabel *laptop_portable::no_power_management_explanation(TQWidget *parent)
 {
 	if (access("/proc/acpi", F_OK) == 0) {	// probably has default kernel ACPI installed
 		KActiveLabel* explain = new KActiveLabel(i18n("Your computer seems to have a partial ACPI installation. ACPI was probably enabled, but some of the sub-options were not - you need to enable at least 'AC Adaptor' and 'Control Method Battery' and then rebuild your kernel."), parent);
@@ -954,23 +954,23 @@ KActiveLabel *laptop_portable::no_power_management_explanation(QWidget *parent)
 //
 //	explain to the user what they need to do to get suspend/resume to work from user mode
 //
-QLabel *laptop_portable::how_to_do_suspend_resume(QWidget *parent)
+TQLabel *laptop_portable::how_to_do_suspend_resume(TQWidget *parent)
 {
 	if (::has_apm()) {
                 // TODO: remove linefeed from string, can't do it right now coz we have a string freeze
- 		QLabel* note = new KRichTextLabel(i18n("\nIf you make /usr/bin/apm setuid then you will also "
+ 		TQLabel* note = new KRichTextLabel(i18n("\nIf you make /usr/bin/apm setuid then you will also "
 						"be able to choose 'suspend' and 'standby' in the above "
 						"dialog - check out the help button below to find out "
-						"how to do this").replace("\n", QString::null), parent);
+						"how to do this").replace("\n", TQString::null), parent);
 		return(note);
 	}
 	if (::has_acpi()) {
                 // TODO: remove linefeed from string, can't do it right now coz we have a string freeze
- 		QLabel* note = new KRichTextLabel(i18n("\nYou may need to enable ACPI suspend/resume in the ACPI panel").replace("\n", QString::null), parent);
+ 		TQLabel* note = new KRichTextLabel(i18n("\nYou may need to enable ACPI suspend/resume in the ACPI panel").replace("\n", TQString::null), parent);
 		return(note);
 	}
         // TODO: remove linefeed from string, can't do it right now coz we have a string freeze
- 	QLabel* note = new KRichTextLabel(i18n("\nYour system does not support suspend/standby").replace("\n", QString::null), parent);
+ 	TQLabel* note = new KRichTextLabel(i18n("\nYour system does not support suspend/standby").replace("\n", TQString::null), parent);
 	return(note);
 }
 
@@ -1040,20 +1040,20 @@ void get_pcmcia_info()
 //	pcmcia support - this will be replaced by better - pcmcia support being worked on by
 //	others
 //
-QLabel *laptop_portable::pcmcia_info(int x, QWidget *parent)
+TQLabel *laptop_portable::pcmcia_info(int x, TQWidget *parent)
 {
 	if (x == 0) 
 		get_pcmcia_info();
 	if (!present) {
 		if (x == 1)
-      			return(new QLabel(i18n("No PCMCIA controller detected"), parent));
-      		return(new QLabel(i18n(""), parent));
+      			return(new TQLabel(i18n("No PCMCIA controller detected"), parent));
+      		return(new TQLabel(i18n(""), parent));
 	} else {
 		switch (x) {
-        	case 0: return(new QLabel(i18n("Card 0:"), parent));
-        	case 1: return(new QLabel(tmp0, parent));
-		case 2: return(new QLabel(i18n("Card 1:"), parent));
-        	default:return(new QLabel(tmp1, parent));  
+        	case 0: return(new TQLabel(i18n("Card 0:"), parent));
+        	case 1: return(new TQLabel(tmp0, parent));
+		case 2: return(new TQLabel(i18n("Card 1:"), parent));
+        	default:return(new TQLabel(tmp1, parent));  
 		}
 	}
 }
@@ -1162,18 +1162,18 @@ void laptop_portable::invoke_hibernation()
 }
 
 void
-laptop_portable::extra_config(QWidget *wp, KConfig *, QVBoxLayout *top_layout)
+laptop_portable::extra_config(TQWidget *wp, KConfig *, TQVBoxLayout *top_layout)
 {
 	if (laptop_portable::has_apm(1) || laptop_portable::has_acpi(1))
 		return;
 	if (laptop_portable::has_apm(0)) {
-      		QLabel* explain = new KRichTextLabel( i18n("Your system has APM installed but may not be able to use all "
+      		TQLabel* explain = new KRichTextLabel( i18n("Your system has APM installed but may not be able to use all "
 					           "of its features without further setup - look in the 'APM Config' "
 						   "tab for information about setting up APM for suspend and resume"), wp);
 		top_layout->addWidget(explain, 0);
 	}
 	if (laptop_portable::has_acpi(0)) {
-      		QLabel* explain = new KRichTextLabel( i18n("Your system has ACPI installed but may not be able to use all "
+      		TQLabel* explain = new KRichTextLabel( i18n("Your system has ACPI installed but may not be able to use all "
 					           "of its features without further setup - look in the 'ACPI Config' "
 						   "tab for information about setting up ACPI for suspend and resume"), wp);
       		top_layout->addWidget(explain, 0);
@@ -1205,7 +1205,7 @@ struct power_result laptop_portable::poll_battery_state()
 }
 
 void 
-laptop_portable::get_battery_status(int &num_batteries, QStringList &names, QStringList &state, QStringList &values)
+laptop_portable::get_battery_status(int &num_batteries, TQStringList &names, TQStringList &state, TQStringList &values)
 {
 	struct power_result r;
 
@@ -1226,7 +1226,7 @@ laptop_portable::get_battery_status(int &num_batteries, QStringList &names, QStr
 		for(unsigned int i = 0; i < acpi_batteries.count(); ++i) {
 			acpi_battery_info& bat = acpi_batteries[i];
 			names.append(bat.name);
-			values.append(QString("%1").arg(bat.percentage));
+			values.append(TQString("%1").arg(bat.percentage));
 			state.append(bat.present ? "yes" : "no");
 		}
 		return;
@@ -1238,7 +1238,7 @@ laptop_portable::get_battery_status(int &num_batteries, QStringList &names, QStr
 	r = poll_battery_state();
 	names.append("BAT1");
 	state.append("yes");
-	QString s;
+	TQString s;
 	s.setNum(r.percentage);
 	values.append(s);
 }
@@ -1247,7 +1247,7 @@ laptop_portable::get_battery_status(int &num_batteries, QStringList &names, QStr
 //
 //	returns the current system load average, -1 if none
 //	
-static QFile lav_file;
+static TQFile lav_file;
 static bool lav_inited=0;
 static bool lav_openok=0;
 
@@ -1273,10 +1273,10 @@ float laptop_portable::get_load_average()
 	if (!::has_lav())
 		return(-1);
 	lav_file.open( IO_ReadOnly );
-	QString l;
+	TQString l;
        	lav_file.readLine(l, 500);
 	lav_file.close();
-	QStringList ll = QStringList::split(' ', l, false);
+	TQStringList ll = TQStringList::split(' ', l, false);
 	l = ll[0];
 	bool ok;
 	float f = l.toFloat(&ok);
@@ -1300,17 +1300,17 @@ int laptop_portable::has_cpufreq() {
 }
 
 
-QString laptop_portable::cpu_frequency() {
-	QString rc;
-	QFile cf("/proc/cpufreq");
+TQString laptop_portable::cpu_frequency() {
+	TQString rc;
+	TQFile cf("/proc/cpufreq");
 	bool haveProfile = false;
 	
 	if (cf.exists() && cf.open(IO_ReadOnly)) {
 		while (!cf.atEnd()) {
-			QString l;
+			TQString l;
 		       	cf.readLine(l, 500);
 			if (l.left(3) == "CPU") {
-				QStringList ll = QStringList::split(' ', l, false);
+				TQStringList ll = TQStringList::split(' ', l, false);
 				rc = ll.last();
 				haveProfile = true;
 				break;
@@ -1319,13 +1319,13 @@ QString laptop_portable::cpu_frequency() {
 
 	}
 	if (haveProfile) {
-		QFile ci("/proc/cpuinfo");
+		TQFile ci("/proc/cpuinfo");
 		if (ci.exists() && ci.open(IO_ReadOnly)) {
 			while (!ci.atEnd()) {
-				QString l;
+				TQString l;
 	       			ci.readLine(l, 500);
-				QStringList ll =
-					QStringList::split(':',l,false);
+				TQStringList ll =
+					TQStringList::split(':',l,false);
 				if (ll.count() != 2)
 					continue;
 				if (ll.first().stripWhiteSpace() 
@@ -1334,7 +1334,7 @@ QString laptop_portable::cpu_frequency() {
 					break;
 				} else if (ll.first().stripWhiteSpace()
 						== "clock") {
-					rc = QString("%1 (%2)").arg(ll.last().stripWhiteSpace()).arg(rc);
+					rc = TQString("%1 (%2)").arg(ll.last().stripWhiteSpace()).arg(rc);
 					break;
 				}
 			}
@@ -1358,7 +1358,7 @@ acpi_helper_ok(bool type)
 	known[type] = last_seed;
 	known_res[type] = 0;
 	struct stat sb;
-	QString str = KStandardDirs::findExe("klaptop_acpi_helper");
+	TQString str = KStandardDirs::findExe("klaptop_acpi_helper");
 	if (str.isNull() || str.isEmpty())
 		return(0);
 	
@@ -1401,7 +1401,7 @@ apm_helper_ok(bool type)
 	known[type] = last_seed;
 	known_res[type] = 0;
 	struct stat sb;
-	QString str = "/usr/bin/apm";
+	TQString str = "/usr/bin/apm";
 	if (str.isNull() || str.isEmpty())
 		return(0);
 	if (stat(str.latin1(), &sb) < 0)
@@ -1508,15 +1508,15 @@ laptop_portable::get_brightness() // return a val 0-255, or -1 if you can't
 #define MAP_SIZE 20
 static int acpi_performance_map[MAP_SIZE];	// hidden acpi state map
 static bool acpi_performance_enable[MAP_SIZE];
-static QStringList performance_list;
-static QString acpi_performance_cpu;
+static TQStringList performance_list;
+static TQString acpi_performance_cpu;
 static int acpi_throttle_map[MAP_SIZE];
 static bool acpi_throttle_enable[MAP_SIZE];
-static QStringList throttle_list;
-static QString acpi_throttle_cpu;
+static TQStringList throttle_list;
+static TQString acpi_throttle_cpu;
 
 static bool
-get_acpi_list(char p, int *map, const char *dev, QStringList &list, int &index, QString &cpu, bool get_enable, bool *enable_list)
+get_acpi_list(char p, int *map, const char *dev, TQStringList &list, int &index, TQString &cpu, bool get_enable, bool *enable_list)
 {
 	DIR *dfd;
 	struct dirent *dp;
@@ -1531,19 +1531,19 @@ get_acpi_list(char p, int *map, const char *dev, QStringList &list, int &index, 
 			if (strcmp(dp->d_name, ".") == 0 ||
     		  	    strcmp(dp->d_name, "..") == 0)
 				continue;
-			QString name("/proc/acpi/processor/");
+			TQString name("/proc/acpi/processor/");
 			name += dp->d_name;
 			name += dev;
  	    		if (!(::access(name.latin1(), R_OK|W_OK)==0 && ::acpi_helper_ok(1)) &&
  	                    !(::access(name.latin1(), R_OK)==0 && ::acpi_helper_ok(0))) 
 				continue;
-			QFile f(name);
+			TQFile f(name);
 			if (f.exists() && f.open(IO_ReadOnly)) {
 				while (!f.atEnd() && i < MAP_SIZE) {
-					QString l;
+					TQString l;
       					f.readLine(l, 500);
-					QStringList ll = QStringList::split(':',l,false);
-					QString tag = ll[0].stripWhiteSpace();
+					TQStringList ll = TQStringList::split(':',l,false);
+					TQString tag = ll[0].stripWhiteSpace();
 					bool is_this = tag[0] == '*';
 					if (is_this) {
 						if (tag[1] != p)
@@ -1574,14 +1574,14 @@ get_acpi_list(char p, int *map, const char *dev, QStringList &list, int &index, 
 				// get the limit info if asked for
 				//
 				if (get_enable) {
-					name = QString("/proc/acpi/processor/")+dp->d_name+"/limit";
+					name = TQString("/proc/acpi/processor/")+dp->d_name+"/limit";
 					f.setName(name);
 					if (f.exists() && f.open(IO_ReadOnly)) {
 						while (!f.atEnd() && i < MAP_SIZE) {
-							QString l;
+							TQString l;
 							f.readLine(l, 500);
 							if (l.contains("active limit", false)) {
-								QRegExp rx(QString("%1(\\d+)").arg(p));
+								TQRegExp rx(TQString("%1(\\d+)").arg(p));
 								if (rx.search(l) >= 0) {
 									bool ok;
 									int min = rx.cap(1).toInt(&ok);
@@ -1610,15 +1610,15 @@ get_acpi_list(char p, int *map, const char *dev, QStringList &list, int &index, 
 #define CPUFREQ_25 2
 #define CPUFREQ_SYSFS 3
 
-static QString cpufreq_cpu = "";
-static QString cpufreq_minmax_frequency[2];
+static TQString cpufreq_cpu = "";
+static TQString cpufreq_minmax_frequency[2];
 
 // get CPUFreq scaling policies via the sysfs interface
-static int get_cpufreq_sysfs_state(QStringList &states, int &current, const QString cpu) {
-	QString cur, buffer;
+static int get_cpufreq_sysfs_state(TQStringList &states, int &current, const TQString cpu) {
+	TQString cur, buffer;
 
 	// read current scaling policy
-	QFile f("/sys/devices/system/cpu/" + cpu + "/cpufreq/scaling_governor");
+	TQFile f("/sys/devices/system/cpu/" + cpu + "/cpufreq/scaling_governor");
 	if(!f.exists() || !f.open(IO_ReadOnly) || f.atEnd())
 		return CPUFREQ_NONE;
 	f.readLine(buffer, 256);
@@ -1633,7 +1633,7 @@ static int get_cpufreq_sysfs_state(QStringList &states, int &current, const QStr
 	int count = 0;
 	if(!f.atEnd()) {
 		f.readLine(buffer, 1024);
-		QStringList l = QStringList::split(' ', buffer.stripWhiteSpace(), false);
+		TQStringList l = TQStringList::split(' ', buffer.stripWhiteSpace(), false);
 		for(unsigned int i = 0; i < l.size(); ++i, ++count) {
 			states.append(l[i].stripWhiteSpace());
 			if(states[i] == cur)
@@ -1649,16 +1649,16 @@ static int get_cpufreq_sysfs_state(QStringList &states, int &current, const QStr
 // sample output of cat /proc/cpufreq:
 //           minimum CPU frequency  -  maximum CPU frequency  -  policy
 // CPU  0       700000 kHz ( 70 %)  -    1000000 kHz (100 %)  -  powersave
-static int get_cpufreq_25_state(QStringList &states, int &current) {
+static int get_cpufreq_25_state(TQStringList &states, int &current) {
 	current = -1;
 	states.clear();
 
-	QFile f("/proc/cpufreq");
+	TQFile f("/proc/cpufreq");
 	if (f.exists() && f.open(IO_ReadOnly)) {
 		while (!f.atEnd()) {
-			QString l;
+			TQString l;
 			f.readLine(l, 1024);
-			QRegExp rx("CPU.*\\d+.*(\\d+).*-.*(\\d+).*-\\W*(\\w*)");
+			TQRegExp rx("CPU.*\\d+.*(\\d+).*-.*(\\d+).*-\\W*(\\w*)");
 			if (rx.search(l) >= 0) {
 				cpufreq_minmax_frequency[0] = rx.cap(1);
 				cpufreq_minmax_frequency[1] = rx.cap(2);
@@ -1684,12 +1684,12 @@ static int get_cpufreq_25_state(QStringList &states, int &current) {
 // get CPUFreq scaling policies via the 2.4 /proc interface
 // The old interface doesn't support policies yet, we only get the min and max frequency,
 // so we use these as performance states.
-static int get_cpufreq_24_state(QStringList &states, int &current, const QString cpu) {
-	QString buffer, cur;
+static int get_cpufreq_24_state(TQStringList &states, int &current, const TQString cpu) {
+	TQString buffer, cur;
 	states.clear();
 
 	// current frequency
-	QFile f("/proc/sys/cpu/" + cpu + "/speed");
+	TQFile f("/proc/sys/cpu/" + cpu + "/speed");
 	if(!f.exists() || !f.open(IO_ReadOnly) || f.atEnd())
 		return CPUFREQ_NONE;
 	f.readLine(buffer, 16);
@@ -1716,7 +1716,7 @@ static int get_cpufreq_24_state(QStringList &states, int &current, const QString
 // check for CPUFreq support and get a list of all available scaling policies
 // this method doesn't support multiple CPU's (neither does get_acpi_list() above), 
 // but this shouldn't be a problem on notebooks...
-static int get_cpufreq_state(bool force, QStringList &states, int &current) {
+static int get_cpufreq_state(bool force, TQStringList &states, int &current) {
 	static int known = -1;
 
 	// check wether we already know which interface to use
@@ -1737,8 +1737,8 @@ static int get_cpufreq_state(bool force, QStringList &states, int &current) {
 	}
 
 	// look for the CPUFreq sysfs interface first
-	QDir dir("/sys/devices/system/cpu");
-	dir.setFilter(QDir::Dirs);
+	TQDir dir("/sys/devices/system/cpu");
+	dir.setFilter(TQDir::Dirs);
 	if(dir.isReadable()) {
 		for(unsigned int i = 0; !dir[i].isNull(); ++i) {
 			if(dir[i] == "." || dir[i] == "..")
@@ -1755,7 +1755,7 @@ static int get_cpufreq_state(bool force, QStringList &states, int &current) {
 
 	// last chance: the /proc interface from the 2.4 kernel series
 	dir.setPath("/proc/sys/cpu");
-	dir.setFilter(QDir::Dirs);
+	dir.setFilter(TQDir::Dirs);
 	if(dir.isReadable()) {
 		for(unsigned int i = 0; !dir[i].isNull(); ++i) {
 			if(dir[i] == "." || dir[i] == "..")
@@ -1771,7 +1771,7 @@ static int get_cpufreq_state(bool force, QStringList &states, int &current) {
 }
 
 bool
-laptop_portable::get_system_performance(bool force, int &current, QStringList &s, bool *&active)	 // do something to help get system profiles from places like ACPI
+laptop_portable::get_system_performance(bool force, int &current, TQStringList &s, bool *&active)	 // do something to help get system profiles from places like ACPI
 {
 	if(!acpi_performance_enabled)
 		return false;
@@ -1804,7 +1804,7 @@ laptop_portable::get_system_performance(bool force, int &current, QStringList &s
 }
 
 bool
-laptop_portable::get_system_throttling(bool force, int &current, QStringList &s, bool *&active)   // do something to help get system throttling data from places like ACPI
+laptop_portable::get_system_throttling(bool force, int &current, TQStringList &s, bool *&active)   // do something to help get system throttling data from places like ACPI
 {
 	static int known=0;
 	static int index=0;
@@ -1828,7 +1828,7 @@ laptop_portable::get_system_throttling(bool force, int &current, QStringList &s,
 }
 
 void
-laptop_portable::set_system_performance(QString val)	// val = string given by get_system_performance above
+laptop_portable::set_system_performance(TQString val)	// val = string given by get_system_performance above
 {
 	if(!acpi_performance_enabled)
 		return;
@@ -1847,7 +1847,7 @@ laptop_portable::set_system_performance(QString val)	// val = string given by ge
 	if((result = get_cpufreq_state(false, performance_list, current))) {
 		if(performance_list[current] == val)
 			return;
-		QString tmp;
+		TQString tmp;
 		switch(result) {
 			case CPUFREQ_SYSFS:
 				invoke_acpi_helper("--cpufreq-sysfs", cpufreq_cpu.latin1(), val.latin1());
@@ -1867,7 +1867,7 @@ laptop_portable::set_system_performance(QString val)	// val = string given by ge
 }
 
 void
-laptop_portable::set_system_throttling(QString val)	// val = string given by get_system_throttle above
+laptop_portable::set_system_throttling(TQString val)	// val = string given by get_system_throttle above
 {
 	if (::has_acpi()) {
 		char tmp[20];
@@ -1883,10 +1883,10 @@ laptop_portable::set_system_throttling(QString val)	// val = string given by get
 	return;
 }
 
-static QString acpi_power_name, acpi_lid_name;	// names of paths to ACPI lid states
+static TQString acpi_power_name, acpi_lid_name;	// names of paths to ACPI lid states
 
 static bool
-acpi_check_button(const char *prefix, QString &result)
+acpi_check_button(const char *prefix, TQString &result)
 {
 	DIR *dfd;
 	struct dirent *dp;
@@ -1898,16 +1898,16 @@ acpi_check_button(const char *prefix, QString &result)
 			if (strcmp(dp->d_name, ".") == 0 ||
     		  	    strcmp(dp->d_name, "..") == 0)
 				continue;
-			QString name(prefix);
+			TQString name(prefix);
 			name += "/";
 			name += dp->d_name;
 			name += "/state";
  	                if (::access(name.latin1(), R_OK)!=0)
 				continue;
-			QFile f(name);
+			TQFile f(name);
 			if (f.exists() && f.open(IO_ReadOnly)) {
 				while (!f.atEnd()) {
-					QString l;
+					TQString l;
       					f.readLine(l, 500);
 					if (l.contains("state:")) {
 						result = name;
@@ -1959,7 +1959,7 @@ bool
 laptop_portable::get_button(LaptopButton l)	// true if a button is pressed
 {
 	if (::has_acpi()) {
-		QString name;
+		TQString name;
 		switch (l) {
 		case LidButton:
 			name = acpi_lid_name;
@@ -1971,12 +1971,12 @@ laptop_portable::get_button(LaptopButton l)	// true if a button is pressed
 			break;
 		}
 		if (!name.isEmpty()) {
-			QFile f(name);
+			TQFile f(name);
 			if (f.exists() && f.open(IO_ReadOnly)) {
 				while (!f.atEnd()) {
-					QString l;
+					TQString l;
 					f.readLine(l, 500);
-					QStringList ll = QStringList::split(':',l,false);
+					TQStringList ll = TQStringList::split(':',l,false);
 					if (ll[0].stripWhiteSpace() == "state") {
 						if (ll[1].stripWhiteSpace() == "open") {
 							f.close();
@@ -2015,8 +2015,8 @@ laptop_portable::get_button(LaptopButton l)	// true if a button is pressed
 #include <stdlib.h>
 #include <machine/apm_bios.h>
 #include <sys/stat.h>
-#include <qpushbutton.h>
-#include <qobject.h>
+#include <tqpushbutton.h>
+#include <tqobject.h>
 #include <kactivelabel.h>
 #include <kprocess.h>
 
@@ -2139,7 +2139,7 @@ int laptop_portable::has_hibernation()
 //	explain to the user what they need to do if has_power_management() returned 0
 //	to get any software they lack
 //
-KActiveLabel *laptop_portable::no_power_management_explanation(QWidget *parent)
+KActiveLabel *laptop_portable::no_power_management_explanation(TQWidget *parent)
 {
   int fd;
   KActiveLabel *explain;
@@ -2172,9 +2172,9 @@ KActiveLabel *laptop_portable::no_power_management_explanation(QWidget *parent)
 //
 //	explain to the user what they need to do to get suspend/resume to work from user mode
 //
-QLabel *laptop_portable::how_to_do_suspend_resume(QWidget *parent)
+TQLabel *laptop_portable::how_to_do_suspend_resume(TQWidget *parent)
 {
- 	QLabel* note = new QLabel(" ", parent);
+ 	TQLabel* note = new TQLabel(" ", parent);
 	return(note);
 }
 
@@ -2183,11 +2183,11 @@ QLabel *laptop_portable::how_to_do_suspend_resume(QWidget *parent)
 //	pcmcia support - this will be replaced by better - pcmcia support being worked on by
 //	others
 //
-QLabel *laptop_portable::pcmcia_info(int x, QWidget *parent)
+TQLabel *laptop_portable::pcmcia_info(int x, TQWidget *parent)
 {
       	if (x == 0)
-		return(new QLabel(i18n("No PCMCIA controller detected"), parent));
-      	return(new QLabel(i18n(""), parent));
+		return(new TQLabel(i18n("No PCMCIA controller detected"), parent));
+      	return(new TQLabel(i18n(""), parent));
 }
 //
 //	puts us into standby mode
@@ -2267,7 +2267,7 @@ laptop_portable::apm_set_mask(bool , bool )
 //	adds extra widgets to the battery panel
 //
 void
-laptop_portable::extra_config(QWidget * /*parent*/, KConfig * /*config*/, QVBoxLayout * /*layout*/)
+laptop_portable::extra_config(TQWidget * /*parent*/, KConfig * /*config*/, TQVBoxLayout * /*layout*/)
 {
 	// INSERT HERE
 }
@@ -2323,7 +2323,7 @@ int laptop_portable::has_cpufreq() {
 	return 0;
 }
 
-QString laptop_portable::cpu_frequency() {
+TQString laptop_portable::cpu_frequency() {
 	// INSERT HERE
 	return "";
 }
@@ -2349,7 +2349,7 @@ laptop_portable::get_brightness()
 }
 
 bool
-laptop_portable::get_system_performance(bool, int &current, QStringList &s, bool *&)	 // do something to help get system profiles from places like ACPI
+laptop_portable::get_system_performance(bool, int &current, TQStringList &s, bool *&)	 // do something to help get system profiles from places like ACPI
 {
 	// INSERT HERE
 	current = 0;
@@ -2358,7 +2358,7 @@ laptop_portable::get_system_performance(bool, int &current, QStringList &s, bool
 }
 
 bool
-laptop_portable::get_system_throttling(bool, int &current, QStringList &s, bool *&)   // do something to help get system throttling data from places like ACPI
+laptop_portable::get_system_throttling(bool, int &current, TQStringList &s, bool *&)   // do something to help get system throttling data from places like ACPI
 {
 	// INSERT HERE
 	current = 0;
@@ -2367,13 +2367,13 @@ laptop_portable::get_system_throttling(bool, int &current, QStringList &s, bool 
 }
 
 void
-laptop_portable::set_system_performance(QString)
+laptop_portable::set_system_performance(TQString)
 {
 	// INSERT HERE
 }
 
 void
-laptop_portable::set_system_throttling(QString)
+laptop_portable::set_system_throttling(TQString)
 {
 	// INSERT HERE
 }
@@ -2393,7 +2393,7 @@ laptop_portable::get_button(LaptopButton)	// true if a button is pressed
 }
 
 void
-laptop_portable::get_battery_status(int &num_batteries, QStringList &names, QStringList &state, QStringList &values) // get multiple battery status
+laptop_portable::get_battery_status(int &num_batteries, TQStringList &names, TQStringList &state, TQStringList &values) // get multiple battery status
 {
 	struct power_result r;
 
@@ -2411,7 +2411,7 @@ laptop_portable::get_battery_status(int &num_batteries, QStringList &names, QStr
 	r = poll_battery_state();
 	names.append("BAT1");
 	state.append("yes");
-	QString s;
+	TQString s;
 	s.setNum(r.percentage);
 	values.append(s);
 }
@@ -2544,7 +2544,7 @@ int laptop_portable::has_hibernation()
 //     explain to the user what they need to do if has_power_management() returned 0
 //     to get any software they lack
 //
-KActiveLabel *laptop_portable::no_power_management_explanation(QWidget *parent)
+KActiveLabel *laptop_portable::no_power_management_explanation(TQWidget *parent)
 {
   int fd;
   KActiveLabel *explain;
@@ -2577,10 +2577,10 @@ KActiveLabel *laptop_portable::no_power_management_explanation(QWidget *parent)
 //
 //     explain to the user what they need to do to get suspend/resume to work from user mode
 //
-QLabel *laptop_portable::how_to_do_suspend_resume(QWidget *parent)
+TQLabel *laptop_portable::how_to_do_suspend_resume(TQWidget *parent)
 {
 	// INSERT HERE
-       QLabel* note = new QLabel(" ", parent);
+       TQLabel* note = new TQLabel(" ", parent);
        return(note);
 }
 
@@ -2588,12 +2588,12 @@ QLabel *laptop_portable::how_to_do_suspend_resume(QWidget *parent)
 //     pcmcia support - this will be replaced by better - pcmcia support being worked on by
 //     others
 //
-QLabel *laptop_portable::pcmcia_info(int x, QWidget *parent)
+TQLabel *laptop_portable::pcmcia_info(int x, TQWidget *parent)
 {
 	// INSERT HERE
        if (x == 0)
-               return(new QLabel(i18n("No PCMCIA controller detected"), parent));
-       return(new QLabel(i18n(""), parent));
+               return(new TQLabel(i18n("No PCMCIA controller detected"), parent));
+       return(new TQLabel(i18n(""), parent));
 }
 
 //
@@ -2710,7 +2710,7 @@ int laptop_portable::has_cpufreq() {
 	return 0;
 }
 
-QString laptop_portable::cpu_frequency() {
+TQString laptop_portable::cpu_frequency() {
 	// INSERT HERE
 	return "";
 }
@@ -2736,7 +2736,7 @@ laptop_portable::get_brightness()
 }
 
 bool
-laptop_portable::get_system_throttling(bool, int &current, QStringList &s)   // do something to help get system throttling data from places like ACPI
+laptop_portable::get_system_throttling(bool, int &current, TQStringList &s)   // do something to help get system throttling data from places like ACPI
 {
 	// INSERT HERE
 	current = 0;
@@ -2745,13 +2745,13 @@ laptop_portable::get_system_throttling(bool, int &current, QStringList &s)   // 
 }
 
 void
-laptop_portable::set_system_performance(QString)
+laptop_portable::set_system_performance(TQString)
 {
 	// INSERT HERE
 }
 
 void
-laptop_portable::set_system_throttling(QString)
+laptop_portable::set_system_throttling(TQString)
 {
 	// INSERT HERE
 }
@@ -2771,7 +2771,7 @@ laptop_portable::get_button(LaptopButton)	// true if a button is pressed
 }
 
 void
-laptop_portable::get_battery_status(int &num_batteries, QStringList &names, QStringList &state, QStringList &values) // get multiple battery status
+laptop_portable::get_battery_status(int &num_batteries, TQStringList &names, TQStringList &state, TQStringList &values) // get multiple battery status
 {
 	struct power_result r;
 
@@ -2789,7 +2789,7 @@ laptop_portable::get_battery_status(int &num_batteries, QStringList &names, QStr
 	r = poll_battery_state();
 	names.append("BAT1");
 	state.append("yes");
-	QString s;
+	TQString s;
 	s.setNum(r.percentage);
 	values.append(s);
 }
@@ -2861,7 +2861,7 @@ int laptop_portable::has_hibernation()
 //	explain to the user what they need to do if has_power_management() returned 0
 //	to get any software they lack
 //
-KActiveLabel *laptop_portable::no_power_management_explanation(QWidget *parent)
+KActiveLabel *laptop_portable::no_power_management_explanation(TQWidget *parent)
 {
 	KActiveLabel* explain = new KActiveLabel(i18n("Your computer or operating system is not supported by the current version of the\nKDE laptop control panels. If you want help porting these panels to work with it\nplease contact paul@taniwha.com."), parent);
 	// INSERT HERE
@@ -2871,9 +2871,9 @@ KActiveLabel *laptop_portable::no_power_management_explanation(QWidget *parent)
 //
 //	explain to the user what they need to do to get suspend/resume to work from user mode
 //
-QLabel *laptop_portable::how_to_do_suspend_resume(QWidget *parent)
+TQLabel *laptop_portable::how_to_do_suspend_resume(TQWidget *parent)
 {
- 	QLabel* note = new QLabel(" ", parent);
+ 	TQLabel* note = new TQLabel(" ", parent);
 	// INSERT HERE
 	return(note);
 }
@@ -2883,12 +2883,12 @@ QLabel *laptop_portable::how_to_do_suspend_resume(QWidget *parent)
 //	pcmcia support - this will be replaced by better - pcmcia support being worked on by
 //	others
 //
-QLabel *laptop_portable::pcmcia_info(int x, QWidget *parent)
+TQLabel *laptop_portable::pcmcia_info(int x, TQWidget *parent)
 {
 	// INSERT HERE
       	if (x == 0)
-		return(new QLabel(i18n("No PCMCIA controller detected"), parent));
-      	return(new QLabel(i18n(""), parent));
+		return(new TQLabel(i18n("No PCMCIA controller detected"), parent));
+      	return(new TQLabel(i18n(""), parent));
 }
 //
 //	puts us into standby mode
@@ -2945,7 +2945,7 @@ int laptop_portable::has_apm(int)
 //	adds extra widgets to the battery panel
 //
 void
-laptop_portable::extra_config(QWidget *parent, KConfig *config, QVBoxLayout *layout)
+laptop_portable::extra_config(TQWidget *parent, KConfig *config, TQVBoxLayout *layout)
 {
 	// INSERT HERE
 }
@@ -2980,7 +2980,7 @@ int laptop_portable::has_cpufreq() {
 	return 0;
 }
 
-QString laptop_portable::cpu_frequency() {
+TQString laptop_portable::cpu_frequency() {
 	// INSERT HERE
 	return "";
 }
@@ -3006,7 +3006,7 @@ laptop_portable::get_brightness()
 }
 
 bool
-laptop_portable::get_system_performance(bool, int &current, QStringList &s, bool *&)	 // do something to help get system profiles from places like ACPI
+laptop_portable::get_system_performance(bool, int &current, TQStringList &s, bool *&)	 // do something to help get system profiles from places like ACPI
 {	
 	// INSERT HERE
 	current = 0;
@@ -3015,7 +3015,7 @@ laptop_portable::get_system_performance(bool, int &current, QStringList &s, bool
 }
 
 bool
-laptop_portable::get_system_throttling(bool, int &current, QStringList &s, bool *&)   // do something to help get system throttling data from places like ACPI
+laptop_portable::get_system_throttling(bool, int &current, TQStringList &s, bool *&)   // do something to help get system throttling data from places like ACPI
 {
 	// INSERT HERE
 	current = 0;
@@ -3024,13 +3024,13 @@ laptop_portable::get_system_throttling(bool, int &current, QStringList &s, bool 
 }
 
 void
-laptop_portable::set_system_performance(QString)
+laptop_portable::set_system_performance(TQString)
 {
 	// INSERT HERE
 }
 
 void
-laptop_portable::set_system_throttling(QString)
+laptop_portable::set_system_throttling(TQString)
 {
 	// INSERT HERE
 }
@@ -3050,7 +3050,7 @@ laptop_portable::get_button(LaptopButton)	// true if a button is pressed
 }
 
 void
-laptop_portable::get_battery_status(int &num_batteries, QStringList &names, QStringList &state, QStringList &values) // get multiple battery status
+laptop_portable::get_battery_status(int &num_batteries, TQStringList &names, TQStringList &state, TQStringList &values) // get multiple battery status
 {
 	struct power_result r;
 
@@ -3068,7 +3068,7 @@ laptop_portable::get_battery_status(int &num_batteries, QStringList &names, QStr
 	r = poll_battery_state();
 	names.append("BAT1");
 	state.append("yes");
-	QString s;
+	TQString s;
 	s.setNum(r.percentage);
 	values.append(s);
 }

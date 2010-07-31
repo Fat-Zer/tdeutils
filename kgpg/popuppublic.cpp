@@ -16,17 +16,17 @@
  ***************************************************************************/
 
 ////////////////////////////////////////////////////////   code  for choosing a public key from a list for encryption
-#include <qlayout.h>
-#include <qpushbutton.h>
-#include <qptrlist.h>
-#include <qwhatsthis.h>
-#include <qpainter.h>
-#include <qiconset.h>
-#include <qbuttongroup.h>
-#include <qcheckbox.h>
-#include <qhbuttongroup.h>
-#include <qtoolbutton.h>
-#include <qtextcodec.h>
+#include <tqlayout.h>
+#include <tqpushbutton.h>
+#include <tqptrlist.h>
+#include <tqwhatsthis.h>
+#include <tqpainter.h>
+#include <tqiconset.h>
+#include <tqbuttongroup.h>
+#include <tqcheckbox.h>
+#include <tqhbuttongroup.h>
+#include <tqtoolbutton.h>
+#include <tqtextcodec.h>
 
 #include <kdeversion.h>
 #include <klistview.h>
@@ -54,13 +54,13 @@
 class UpdateViewItem2 : public KListViewItem
 {
 public:
-        UpdateViewItem2(QListView *parent, QString name,QString mail,QString id,bool isDefault);
-        virtual void paintCell(QPainter *p, const QColorGroup &cg,int col, int width, int align);
-	virtual QString key(int c,bool ) const;
+        UpdateViewItem2(TQListView *parent, TQString name,TQString mail,TQString id,bool isDefault);
+        virtual void paintCell(TQPainter *p, const TQColorGroup &cg,int col, int width, int align);
+	virtual TQString key(int c,bool ) const;
 	bool def;
 };
 
-UpdateViewItem2::UpdateViewItem2(QListView *parent, QString name,QString mail,QString id,bool isDefault)
+UpdateViewItem2::UpdateViewItem2(TQListView *parent, TQString name,TQString mail,TQString id,bool isDefault)
                 : KListViewItem(parent)
 {
 def=isDefault;
@@ -70,29 +70,29 @@ def=isDefault;
 }
 
 
-void UpdateViewItem2::paintCell(QPainter *p, const QColorGroup &cg,int column, int width, int alignment)
+void UpdateViewItem2::paintCell(TQPainter *p, const TQColorGroup &cg,int column, int width, int alignment)
 {
         if ((def) && (column<2)) {
-                QFont font(p->font());
+                TQFont font(p->font());
                 font.setBold(true);
                 p->setFont(font);
         }
         KListViewItem::paintCell(p, cg, column, width, alignment);
 }
 
-QString UpdateViewItem2 :: key(int c,bool ) const
+TQString UpdateViewItem2 :: key(int c,bool ) const
 {
         return text(c).lower();
 }
 
 ///////////////  main view
 
-popupPublic::popupPublic(QWidget *parent, const char *name,QString sfile,bool filemode,KShortcut goDefaultKey):
+popupPublic::popupPublic(TQWidget *parent, const char *name,TQString sfile,bool filemode,KShortcut goDefaultKey):
 KDialogBase( Plain, i18n("Select Public Key"), Details | Ok | Cancel, Ok, parent, name,true)
 {
 
-	QWidget *page = plainPage();
-	QVBoxLayout *vbox=new QVBoxLayout(page,0,spacingHint());
+	TQWidget *page = plainPage();
+	TQVBoxLayout *vbox=new TQVBoxLayout(page,0,spacingHint());
 	vbox->setAutoAdd(true);
 
 	setButtonText(KDialogBase::Details,i18n("Options"));
@@ -109,18 +109,18 @@ KDialogBase( Plain, i18n("Select Public Key"), Details | Ok | Cancel, Ok, parent
         if (filemode) setCaption(i18n("Select Public Key for %1").arg(sfile));
         fmode=filemode;
 
-	QHButtonGroup *hBar=new QHButtonGroup(page);
-	//hBar->setFrameStyle(QFrame::NoFrame);
+	TQHButtonGroup *hBar=new TQHButtonGroup(page);
+	//hBar->setFrameStyle(TQFrame::NoFrame);
 	hBar->setMargin(0);
 
 #if KDE_IS_VERSION( 3, 2, 90 )
-	QToolButton *clearSearch = new QToolButton(hBar);
+	TQToolButton *clearSearch = new TQToolButton(hBar);
 	clearSearch->setTextLabel(i18n("Clear Search"), true);
-	clearSearch->setIconSet(SmallIconSet(QApplication::reverseLayout() ? "clear_left"
+	clearSearch->setIconSet(SmallIconSet(TQApplication::reverseLayout() ? "clear_left"
                                             : "locationbar_erase"));
-	(void) new QLabel(i18n("Search: "),hBar);
+	(void) new TQLabel(i18n("Search: "),hBar);
 	KListViewSearchLine* listViewSearch = new KListViewSearchLine(hBar);
-	connect(clearSearch, SIGNAL(pressed()), listViewSearch, SLOT(clear()));
+	connect(clearSearch, TQT_SIGNAL(pressed()), listViewSearch, TQT_SLOT(clear()));
 #endif
 
         keysList = new KListView( page );
@@ -138,54 +138,54 @@ KDialogBase( Plain, i18n("Select Public Key"), Details | Ok | Cancel, Ok, parent
         keysList->setFullWidth(true);
 	keysList->setAllColumnsShowFocus(true);
         keysList->setSelectionModeExt(KListView::Extended);
-	keysList->setColumnWidthMode(0,QListView::Manual);
-	keysList->setColumnWidthMode(1,QListView::Manual);
+	keysList->setColumnWidthMode(0,TQListView::Manual);
+	keysList->setColumnWidthMode(1,TQListView::Manual);
 	keysList->setColumnWidth(0,210);
 	keysList->setColumnWidth(1,210);
 
-        boutonboxoptions=new QButtonGroup(5,Qt::Vertical ,page,0);
+        boutonboxoptions=new TQButtonGroup(5,Qt::Vertical ,page,0);
 
 	KActionCollection *actcol=new KActionCollection(this);
-	(void) new KAction(i18n("&Go to Default Key"),goDefaultKey, this, SLOT(slotGotoDefaultKey()),actcol,"go_default_key");
+	(void) new KAction(i18n("&Go to Default Key"),goDefaultKey, this, TQT_SLOT(slotGotoDefaultKey()),actcol,"go_default_key");
 
 
-        CBarmor=new QCheckBox(i18n("ASCII armored encryption"),boutonboxoptions);
-        CBuntrusted=new QCheckBox(i18n("Allow encryption with untrusted keys"),boutonboxoptions);
-        CBhideid=new QCheckBox(i18n("Hide user id"),boutonboxoptions);
+        CBarmor=new TQCheckBox(i18n("ASCII armored encryption"),boutonboxoptions);
+        CBuntrusted=new TQCheckBox(i18n("Allow encryption with untrusted keys"),boutonboxoptions);
+        CBhideid=new TQCheckBox(i18n("Hide user id"),boutonboxoptions);
         setDetailsWidget(boutonboxoptions);
-        QWhatsThis::add
+        TQWhatsThis::add
                 (keysList,i18n("<b>Public keys list</b>: select the key that will be used for encryption."));
-        QWhatsThis::add
+        TQWhatsThis::add
                 (CBarmor,i18n("<b>ASCII encryption</b>: makes it possible to open the encrypted file/message in a text editor"));
-        QWhatsThis::add
+        TQWhatsThis::add
                 (CBhideid,i18n("<b>Hide user ID</b>: Do not put the keyid into encrypted packets. This option hides the receiver "
                                 "of the message and is a countermeasure against traffic analysis. It may slow down the decryption process because "
                                 "all available secret keys are tried."));
-        QWhatsThis::add
+        TQWhatsThis::add
                 (CBuntrusted,i18n("<b>Allow encryption with untrusted keys</b>: when you import a public key, it is usually "
                                   "marked as untrusted and you cannot use it unless you sign it in order to make it 'trusted'. Checking this "
                                   "box enables you to use any key, even if it has not be signed."));
 
         if (filemode) {
-		QWidget *parentBox=new QWidget(boutonboxoptions);
-		QHBoxLayout *shredBox=new QHBoxLayout(parentBox,0);
-		//shredBox->setFrameStyle(QFrame::NoFrame);
+		TQWidget *parentBox=new TQWidget(boutonboxoptions);
+		TQHBoxLayout *shredBox=new TQHBoxLayout(parentBox,0);
+		//shredBox->setFrameStyle(TQFrame::NoFrame);
 		//shredBox->setMargin(0);
-	       CBshred=new QCheckBox(i18n("Shred source file"),parentBox);
-                QWhatsThis::add
+	       CBshred=new TQCheckBox(i18n("Shred source file"),parentBox);
+                TQWhatsThis::add
                         (CBshred,i18n("<b>Shred source file</b>: permanently remove source file. No recovery will be possible"));
 
-		QString shredWhatsThis = i18n( "<qt><b>Shred source file:</b><br /><p>Checking this option will shred (overwrite several times before erasing) the files you have encrypted. This way, it is almost impossible that the source file is recovered.</p><p><b>But you must be aware that this is not secure</b> on all file systems, and that parts of the file may have been saved in a temporary file or in the spooler of your printer if you previously opened it in an editor or tried to print it. Only works on files (not on folders).</p></qt>");
+		TQString shredWhatsThis = i18n( "<qt><b>Shred source file:</b><br /><p>Checking this option will shred (overwrite several times before erasing) the files you have encrypted. This way, it is almost impossible that the source file is recovered.</p><p><b>But you must be aware that this is not secure</b> on all file systems, and that parts of the file may have been saved in a temporary file or in the spooler of your printer if you previously opened it in an editor or tried to print it. Only works on files (not on folders).</p></qt>");
 		  KActiveLabel *warn= new KActiveLabel( i18n("<a href=\"whatsthis:%1\">Read this before using shredding</a>").arg(shredWhatsThis),parentBox );
 		  shredBox->addWidget(CBshred);
 		  shredBox->addWidget(warn);
         }
 
-	        CBsymmetric=new QCheckBox(i18n("Symmetrical encryption"),boutonboxoptions);
-                QWhatsThis::add
+	        CBsymmetric=new TQCheckBox(i18n("Symmetrical encryption"),boutonboxoptions);
+                TQWhatsThis::add
                         (CBsymmetric,i18n("<b>Symmetrical encryption</b>: encryption does not use keys. You just need to give a password "
                                           "to encrypt/decrypt the file"));
-                QObject::connect(CBsymmetric,SIGNAL(toggled(bool)),this,SLOT(isSymetric(bool)));
+                TQObject::connect(CBsymmetric,TQT_SIGNAL(toggled(bool)),this,TQT_SLOT(isSymetric(bool)));
 
 	CBarmor->setChecked( KGpgSettings::asciiArmor() );
 	CBuntrusted->setChecked( KGpgSettings::allowUntrustedKeys() );
@@ -193,27 +193,27 @@ KDialogBase( Plain, i18n("Select Public Key"), Details | Ok | Cancel, Ok, parent
 	if (filemode) CBshred->setChecked( KGpgSettings::shredSource() );
 
         if (KGpgSettings::allowCustomEncryptionOptions()) {
-                QHButtonGroup *bGroup = new QHButtonGroup(page);
-                //bGroup->setFrameStyle(QFrame::NoFrame);
-                (void) new QLabel(i18n("Custom option:"),bGroup);
+                TQHButtonGroup *bGroup = new TQHButtonGroup(page);
+                //bGroup->setFrameStyle(TQFrame::NoFrame);
+                (void) new TQLabel(i18n("Custom option:"),bGroup);
                 KLineEdit *optiontxt=new KLineEdit(bGroup);
                 optiontxt->setText(customOptions);
-                QWhatsThis::add
+                TQWhatsThis::add
                         (optiontxt,i18n("<b>Custom option</b>: for experienced users only, allows you to enter a gpg command line option, like: '--armor'"));
-                QObject::connect(optiontxt,SIGNAL(textChanged ( const QString & )),this,SLOT(customOpts(const QString & )));
+                TQObject::connect(optiontxt,TQT_SIGNAL(textChanged ( const TQString & )),this,TQT_SLOT(customOpts(const TQString & )));
         }
-        QObject::connect(keysList,SIGNAL(doubleClicked(QListViewItem *,const QPoint &,int)),this,SLOT(slotOk()));
-//	QObject::connect(this,SIGNAL(okClicked()),this,SLOT(crypte()));
-        QObject::connect(CBuntrusted,SIGNAL(toggled(bool)),this,SLOT(refresh(bool)));
+        TQObject::connect(keysList,TQT_SIGNAL(doubleClicked(TQListViewItem *,const TQPoint &,int)),this,TQT_SLOT(slotOk()));
+//	TQObject::connect(this,TQT_SIGNAL(okClicked()),this,TQT_SLOT(crypte()));
+        TQObject::connect(CBuntrusted,TQT_SIGNAL(toggled(bool)),this,TQT_SLOT(refresh(bool)));
 
         char line[200]="\0";
         FILE *fp2;
-        seclist=QString::null;
+        seclist=TQString::null;
 
         fp2 = popen("gpg --no-secmem-warning --no-tty --with-colon --list-secret-keys ", "r");
         while ( fgets( line, sizeof(line), fp2))
         {
-            QString readLine=QString::fromUtf8(line);
+            TQString readLine=TQString::fromUtf8(line);
             if (readLine.startsWith("sec")) seclist+=", 0x"+readLine.section(":",4,4).right(8);
         }
         pclose(fp2);
@@ -238,7 +238,7 @@ accept();
 
 void popupPublic::enable()
 {
-        QListViewItem *current = keysList->firstChild();
+        TQListViewItem *current = keysList->firstChild();
         if (current==NULL)
                 return;
         current->setVisible(true);
@@ -252,7 +252,7 @@ void popupPublic::enable()
 void popupPublic::sort()
 {
         bool reselect=false;
-        QListViewItem *current = keysList->firstChild();
+        TQListViewItem *current = keysList->firstChild();
         if (current==NULL)
                 return;
 
@@ -276,7 +276,7 @@ void popupPublic::sort()
         }
 
 	if (reselect || !keysList->currentItem()->isVisible()) {
-                QListViewItem *firstvisible;
+                TQListViewItem *firstvisible;
                 firstvisible=keysList->firstChild();
                 while (firstvisible->isVisible()!=true) {
                         firstvisible=firstvisible->nextSibling();
@@ -297,14 +297,14 @@ void popupPublic::isSymetric(bool state)
 }
 
 
-void popupPublic::customOpts(const QString &str)
+void popupPublic::customOpts(const TQString &str)
 {
         customOptions=str;
 }
 
 void popupPublic::slotGotoDefaultKey()
 {
-    QListViewItem *myDefaulKey = keysList->findItem(KGpgSettings::defaultKey(),2);
+    TQListViewItem *myDefaulKey = keysList->findItem(KGpgSettings::defaultKey(),2);
     keysList->clearSelection();
     keysList->setCurrentItem(myDefaulKey);
     keysList->setSelected(myDefaulKey,true);
@@ -322,29 +322,29 @@ void popupPublic::refresh(bool state)
 void popupPublic::refreshkeys()
 {
 	keysList->clear();
-	QStringList groups= QStringList::split(",", KGpgSettings::groups());
+	TQStringList groups= TQStringList::split(",", KGpgSettings::groups());
 	if (!groups.isEmpty())
 	{
-		for ( QStringList::Iterator it = groups.begin(); it != groups.end(); ++it )
+		for ( TQStringList::Iterator it = groups.begin(); it != groups.end(); ++it )
 		{
-			if (!QString(*it).isEmpty())
+			if (!TQString(*it).isEmpty())
 			{
-				UpdateViewItem2 *item=new UpdateViewItem2(keysList,QString(*it),QString::null,QString::null,false);
+				UpdateViewItem2 *item=new UpdateViewItem2(keysList,TQString(*it),TQString::null,TQString::null,false);
 				item->setPixmap(0,keyGroup);
 			}
 		}
 	}
-        KProcIO *encid=new KProcIO(QTextCodec::codecForLocale());
+        KProcIO *encid=new KProcIO(TQTextCodec::codecForLocale());
         *encid << "gpg"<<"--no-secmem-warning"<<"--no-tty"<<"--with-colon"<<"--list-keys";
         /////////  when process ends, update dialog infos
-        QObject::connect(encid, SIGNAL(processExited(KProcess *)),this, SLOT(slotpreselect()));
-        QObject::connect(encid, SIGNAL(readReady(KProcIO *)),this, SLOT(slotprocread(KProcIO *)));
+        TQObject::connect(encid, TQT_SIGNAL(processExited(KProcess *)),this, TQT_SLOT(slotpreselect()));
+        TQObject::connect(encid, TQT_SIGNAL(readReady(KProcIO *)),this, TQT_SLOT(slotprocread(KProcIO *)));
         encid->start(KProcess::NotifyOnExit,true);
 }
 
 void popupPublic::slotpreselect()
 {
-QListViewItem *it=NULL;
+TQListViewItem *it=NULL;
 if (!keysList->firstChild()) return;
         if (fmode) it=keysList->findItem(KGpgSettings::defaultKey(),2);
 if (!trusted)
@@ -368,20 +368,20 @@ void popupPublic::slotprocread(KProcIO *p)
 {
         ///////////////////////////////////////////////////////////////// extract  encryption keys
         bool dead;
-        QString tst,keyname,keymail;
+        TQString tst,keyname,keymail;
 
-        QString defaultKey = KGpgSettings::defaultKey().right(8);
+        TQString defaultKey = KGpgSettings::defaultKey().right(8);
 
         while (p->readln(tst)!=-1) {
                 if (tst.startsWith("pub")) {
-			QStringList keyString=QStringList::split(":",tst,true);
+			TQStringList keyString=TQStringList::split(":",tst,true);
                         dead=false;
-                        const QString trust=keyString[1];
-                        QString val=keyString[6];
-                        QString id=QString("0x"+keyString[4].right(8));
+                        const TQString trust=keyString[1];
+                        TQString val=keyString[6];
+                        TQString id=TQString("0x"+keyString[4].right(8));
                         if (val.isEmpty())
                                 val=i18n("Unlimited");
-                        QString tr;
+                        TQString tr;
                         switch( trust[0] ) {
                         case 'o':
 				untrustedList<<id;
@@ -424,7 +424,7 @@ void popupPublic::slotprocread(KProcIO *p)
                 //if (keyname.find("(")!=-1)
                  //       keyname=keyname.section('(',0,0);
         } else {
-                keymail=QString::null;
+                keymail=TQString::null;
                 keyname=tst;//.section('(',0,0);
         }
                         if ((!dead) && (!tst.isEmpty())) {
@@ -447,9 +447,9 @@ void popupPublic::slotOk()
 {
         //////   emit selected data
 kdDebug(2100)<<"Ok pressed"<<endl;
-        QStringList selectedKeys;
-	QString userid;
-        QPtrList<QListViewItem> list=keysList->selectedItems();
+        TQStringList selectedKeys;
+	TQString userid;
+        TQPtrList<TQListViewItem> list=keysList->selectedItems();
 
         for ( uint i = 0; i < list.count(); ++i )
 	  if ( list.at(i) && list.at(i)->isVisible()) {
@@ -460,7 +460,7 @@ kdDebug(2100)<<"Ok pressed"<<endl;
                 return;
 	if (CBsymmetric->isChecked()) selectedKeys=NULL;
 kdDebug(2100)<<"Selected Key:"<<selectedKeys<<endl;
-        QStringList returnOptions;
+        TQStringList returnOptions;
         if (CBuntrusted->isChecked())
                 returnOptions<<"--always-trust";
         if (CBarmor->isChecked())
@@ -468,7 +468,7 @@ kdDebug(2100)<<"Selected Key:"<<selectedKeys<<endl;
         if (CBhideid->isChecked())
                 returnOptions<<"--throw-keyid";
         if ((KGpgSettings::allowCustomEncryptionOptions()) && (!customOptions.stripWhiteSpace().isEmpty()))
-                returnOptions.operator+ (QStringList::split(QString(" "),customOptions.simplifyWhiteSpace()));
+                returnOptions.operator+ (TQStringList::split(TQString(" "),customOptions.simplifyWhiteSpace()));
 	//hide();
         if (fmode)
                 emit selectedKey(selectedKeys,returnOptions,CBshred->isChecked(),CBsymmetric->isChecked());

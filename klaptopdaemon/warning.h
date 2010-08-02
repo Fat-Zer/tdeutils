@@ -29,13 +29,13 @@
 #include <kcmodule.h>
 #include <tqstring.h>
 
-class QWidget;
+class TQWidget;
 class KConfig;
 class KURLRequester;
-class QCheckBox;
-class QRadioButton;
-class QSpinBox;
-class QSlider;
+class TQCheckBox;
+class TQRadioButton;
+class TQSpinBox;
+class TQSlider;
 class KComboBox;
 
 class WarningConfig : public KCModule

@@ -21,9 +21,9 @@
 #include <tqdockwindow.h>
 #include "widgetfactory.h"
 class DoubleClickButton;
-class QButtonGroup;
-class QToolButton;
-class QSignalMapper;
+class TQButtonGroup;
+class TQToolButton;
+class TQSignalMapper;
 
 
 class RegExpButtons :public QDockWindow

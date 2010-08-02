@@ -24,11 +24,11 @@
 #include "netdevices.h"
 
 class NetDialog;
-class QPopupMenu;
-class QPushButton;
+class TQPopupMenu;
+class TQPushButton;
 class KListView;
-class QHBoxLayout;
-class QListViewItem;
+class TQHBoxLayout;
+class TQListViewItem;
 
 class NetConfig : public KSim::PluginPage
 {

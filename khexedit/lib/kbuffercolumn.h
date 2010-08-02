@@ -26,8 +26,8 @@
 #include "kbufferlayout.h"
 #include "ksection.h"
 
-class QPainter;
-class QColor;
+class TQPainter;
+class TQColor;
 
 namespace KHE
 {

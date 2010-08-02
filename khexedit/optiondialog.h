@@ -22,15 +22,15 @@
 #define _OPTION_DIALOG_H_
 
 
-class QComboBox;
-class QFrame;
-class QCheckBox;
-class QLabel;
-class QLineEdit;
+class TQComboBox;
+class TQFrame;
+class TQCheckBox;
+class TQLabel;
+class TQLineEdit;
 class QPushbutton;
-class QRadioButton;
-class QSpinBox;
-class QComboBox;
+class TQRadioButton;
+class TQSpinBox;
+class TQComboBox;
 class KFontChooser;
 
 

@@ -20,10 +20,10 @@
 
 #include "singlecontainerwidget.h"
 #include <tqvbox.h>
-class QButtonGroup;
+class TQButtonGroup;
 class KDialogBase;
-class QCheckBox;
-class QSpinBox;
+class TQCheckBox;
+class TQSpinBox;
 class RepeatRegExp;
 
 /**

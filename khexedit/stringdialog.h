@@ -25,11 +25,11 @@
 #include <config.h>
 #endif 
 
-class QCheckBox;
-class QLabel;
-class QLineEdit;
-class QListView;
-class QSpinBox;
+class TQCheckBox;
+class TQLabel;
+class TQLineEdit;
+class TQListView;
+class TQSpinBox;
 
 #include <tqregexp.h> 
 #include <kdialogbase.h>

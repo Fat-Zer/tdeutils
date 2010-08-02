@@ -1470,7 +1470,7 @@ ArkWidget::action_extract()
     bool bRedoExtract = false;
 
     // list of files to be extracted
-    m_extractList = new QStringList;
+    m_extractList = new TQStringList;
     if ( dlg->exec() )
     {
         //m_extractURL will always be the location the user chose to

@@ -32,14 +32,14 @@
 #include <tqpixmap.h>
 #include <tqptrlist.h>
 
-class QWidget;
-class QSpinBox;
+class TQWidget;
+class TQSpinBox;
 class KConfig;
-class QCheckBox;
+class TQCheckBox;
 class KIconLoader;
 class KIconButton;
-class QPushButton;
-class QLabel;
+class TQPushButton;
+class TQLabel;
 
 
 class BatteryConfig : public KCModule

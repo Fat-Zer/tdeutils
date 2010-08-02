@@ -20,10 +20,10 @@
 
 #include <tqdockwindow.h>
 #include "regexpconverter.h"
-class QToolButton;
-class QLabel;
-class QAction;
-class QPopupMenu;
+class TQToolButton;
+class TQLabel;
+class TQAction;
+class TQPopupMenu;
 
 class VerifyButtons :public QDockWindow
 {

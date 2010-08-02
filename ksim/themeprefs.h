@@ -23,9 +23,9 @@
 #include <kurl.h>
 #include <tqwidget.h>
 
-class QListViewItem;
-class QGridLayout;
-class QLabel;
+class TQListViewItem;
+class TQGridLayout;
+class TQLabel;
 class KListView;
 class KURLLabel;
 class KComboBox;

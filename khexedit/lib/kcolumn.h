@@ -23,7 +23,7 @@
 #include "kadds.h"
 #include "ksection.h"
 
-class QPainter;
+class TQPainter;
 
 namespace KHE
 {

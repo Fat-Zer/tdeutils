@@ -22,7 +22,7 @@
 
 #include "compoundregexp.h"
 
-class QPoint;
+class TQPoint;
 class RegExp;
 
 class UserDefinedRegExps :public QDockWindow

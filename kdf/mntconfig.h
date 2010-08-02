@@ -32,14 +32,14 @@
 #include "disks.h"
 #include "disklist.h"
 
-class QGroupBox;
-class QPushButton;
-class QRadioButton;
-class QLineEdit;
+class TQGroupBox;
+class TQPushButton;
+class TQRadioButton;
+class TQLineEdit;
 class KIconButton;
 
 class CListView;
-class QListViewItem;
+class TQListViewItem;
 
 /**************************************************************/
 

@@ -22,7 +22,7 @@
 
 class RegExpWidget;
 class RegExpEditorWindow;
-class QWidget;
+class TQWidget;
 class ConcWidget;
 class RegExp;
 

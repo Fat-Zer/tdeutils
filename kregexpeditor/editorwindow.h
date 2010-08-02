@@ -25,7 +25,7 @@
 #include <tqiconset.h>
 class RegExp;
 class RegExpWidget;
-class QHBoxLayout;
+class TQHBoxLayout;
 
 /** Widget representing the editor window of a regular expression editor.
 

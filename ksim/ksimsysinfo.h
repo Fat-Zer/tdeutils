@@ -23,8 +23,8 @@
 #include <tqwidget.h>
 #include <dcopobject.h>
 
-class QTimer;
-class QVBoxLayout;
+class TQTimer;
+class TQVBoxLayout;
 namespace KSim
 {
   class Config;

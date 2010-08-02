@@ -25,8 +25,8 @@
 #include <config.h>
 #endif 
 
-class QLabel;
-class QSpinBox;
+class TQLabel;
+class TQSpinBox;
 
 #include <kdialogbase.h>
 #include "listview.h"

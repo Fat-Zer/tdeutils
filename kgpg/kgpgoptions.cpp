@@ -58,7 +58,7 @@
 #include "conf_ui2.h"
 #include "conf_misc.h"
 
-class QTabWidget;
+class TQTabWidget;
 
 ///////////////////////   main window
 

@@ -24,9 +24,9 @@
 #include "netdevices.h"
 #include <stdio.h>
 
-class QTimer;
-class QVBoxLayout;
-class QTextStream;
+class TQTimer;
+class TQVBoxLayout;
+class TQTextStream;
 
 class NetPlugin : public KSim::PluginObject
 {

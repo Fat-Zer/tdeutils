@@ -36,7 +36,7 @@
 
 #include <kio/global.h>
 
-class QStringList;
+class TQStringList;
 
 // various functions for massaging timestamps
 namespace ArkUtils

@@ -23,7 +23,7 @@
 
 #include <kpanelextension.h>
 
-class QBoxLayout;
+class TQBoxLayout;
 class KAboutData;
 class KInstance;
 class DCOPClient;

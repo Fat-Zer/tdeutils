@@ -34,7 +34,7 @@
 class KEdit;
 class KSpell;
 class KSpellConfig;
-class QTimer;
+class TQTimer;
 class KAction;
 class KRecentFilesAction;
 

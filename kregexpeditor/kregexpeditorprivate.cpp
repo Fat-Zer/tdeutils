@@ -89,7 +89,7 @@ KRegExpEditorPrivate::KRegExpEditorPrivate(TQWidget *parent, const char *name)
 
   TQVBoxLayout *topLayout = new TQVBoxLayout( this, 0, 6, "KRegExpEditorPrivate::topLayout" );
   topLayout->addWidget( area );
-  TQHBoxLayout* rows = new QHBoxLayout; // I need to cal addLayout explicit to get stretching right.
+  TQHBoxLayout* rows = new TQHBoxLayout; // I need to cal addLayout explicit to get stretching right.
   topLayout->addLayout( rows, 1 );
 
   rows->addWidget( verArea1 );

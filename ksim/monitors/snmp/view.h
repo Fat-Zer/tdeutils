@@ -22,7 +22,7 @@
 
 #include <pluginmodule.h>
 
-class QBoxLayout;
+class TQBoxLayout;
 
 namespace KSim
 {

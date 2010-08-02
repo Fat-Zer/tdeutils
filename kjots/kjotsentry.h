@@ -34,10 +34,10 @@ class KURL;
 class KJotsPage;
 class KProgressDialog;
 class KJotsEdit;
-class QTextCodec;
-class QDomDocument;
-class QDomElement;
-class QFile;
+class TQTextCodec;
+class TQDomDocument;
+class TQDomElement;
+class TQFile;
 
 class KJotsBook;
 

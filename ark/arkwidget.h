@@ -36,13 +36,13 @@
 #include <tqvbox.h>
 #include "arch.h"
 
-class QPoint;
-class QString;
-class QStringList;
-class QLabel;
-class QListViewItem;
-class QDragMoveEvent;
-class QDropEvent;
+class TQPoint;
+class TQString;
+class TQStringList;
+class TQLabel;
+class TQListViewItem;
+class TQDragMoveEvent;
+class TQDropEvent;
 
 class KPopupMenu;
 class KProcess;

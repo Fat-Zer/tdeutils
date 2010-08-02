@@ -26,7 +26,7 @@
 
 class KSystemTray;
 class KWalletIconView;
-class QIconViewItem;
+class TQIconViewItem;
 class DCOPRef;
 
 

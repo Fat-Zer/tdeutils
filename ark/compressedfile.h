@@ -25,9 +25,9 @@
 #ifndef COMPRESSED_FILE_H
 #define COMPRESSED_FILE_H
 
-class QString;
-class QCString;
-class QStringList;
+class TQString;
+class TQCString;
+class TQStringList;
 class KProcess;
 class KTempDir;
 

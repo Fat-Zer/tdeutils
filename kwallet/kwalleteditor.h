@@ -27,9 +27,9 @@
 #include <tqstringlist.h>
 
 class KAction;
-class QIconViewItem;
-class QListViewItem;
-class QCheckBox;
+class TQIconViewItem;
+class TQListViewItem;
+class TQCheckBox;
 class KWalletFolderIconView;
 class KWalletEntryList;
 class KWMapEditor;

@@ -22,7 +22,7 @@
 #include <tqstring.h>
 #include <tqvaluelist.h>
 
-class QTextEdit;
+class TQTextEdit;
 class AltnRegExp;
 class ConcRegExp;
 class LookAheadRegExp;

@@ -23,7 +23,7 @@
 #include <kdialogbase.h>
 #include <kdelibs_export.h>
 
-class QFrame;
+class TQFrame;
 class KDesktopFile;
 namespace KSim
 {

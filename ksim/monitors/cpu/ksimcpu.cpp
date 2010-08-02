@@ -377,7 +377,7 @@ CpuConfig::CpuConfig(KSim::PluginObject *parent, const char *name)
 
   mainLayout->addWidget( m_listView );
 
-  TQHBoxLayout * layout = new QHBoxLayout;
+  TQHBoxLayout * layout = new TQHBoxLayout;
   layout->setSpacing( 6 );
 
   TQSpacerItem * spacer = new TQSpacerItem( 20, 20,

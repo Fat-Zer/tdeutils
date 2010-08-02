@@ -39,8 +39,8 @@
 
 #include "format.h"
 
-class QCheckBox;
-class QTimer;
+class TQCheckBox;
+class TQTimer;
 class KProcess;
 class KConfig;
 

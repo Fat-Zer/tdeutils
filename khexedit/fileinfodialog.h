@@ -26,7 +26,7 @@
 #include <config.h>
 #endif 
 
-class QLabel;
+class TQLabel;
 
 #include <kdialogbase.h>
 

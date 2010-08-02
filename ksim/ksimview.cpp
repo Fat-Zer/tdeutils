@@ -95,7 +95,7 @@ KSim::MainView::MainView(KConfig *config,
   m_topFrame = new KSim::Frame(KSim::Types::TopFrame, this);
   m_subLayout->addWidget(m_topFrame);
 
-  m_sizeLayout = new QHBoxLayout;
+  m_sizeLayout = new TQHBoxLayout;
   m_subLayout->addLayout(m_sizeLayout);
 
   m_leftFrame = new KSim::Frame(KSim::Types::LeftFrame, this);
@@ -104,7 +104,7 @@ KSim::MainView::MainView(KConfig *config,
   m_pluginLayout = new TQBoxLayout(TQBoxLayout::TopToBottom);
   m_sizeLayout->addLayout(m_pluginLayout);
 
-  TQVBoxLayout *vb = new QVBoxLayout;
+  TQVBoxLayout *vb = new TQVBoxLayout;
   TQSpacerItem *item = new TQSpacerItem(0, 0, TQSizePolicy::Expanding, TQSizePolicy::Expanding);
   vb->addItem(item);
   
@@ -126,7 +126,7 @@ KSim::MainView::MainView(KConfig *config,
     m_hostLabel->setText(host);
   }
 
-  vb = new QVBoxLayout;
+  vb = new TQVBoxLayout;
   item = new TQSpacerItem(0, 0, TQSizePolicy::Expanding, TQSizePolicy::Expanding);
   vb->addItem(item);
   m_sysinfo = new KSim::Sysinfo(m_config, this);

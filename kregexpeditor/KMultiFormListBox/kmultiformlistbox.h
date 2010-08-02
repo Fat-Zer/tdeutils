@@ -31,7 +31,7 @@
   #include <klocale.h>
 #endif
 
-class QDataStream;
+class TQDataStream;
 
 
 typedef TQPtrList<KMultiFormListBoxEntry> KMultiFormListBoxEntryList ;

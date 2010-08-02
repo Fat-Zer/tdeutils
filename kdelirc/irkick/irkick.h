@@ -26,7 +26,7 @@
 #include "iractions.h"
 #include "klircclient.h"
 
-class QMouseEvent;
+class TQMouseEvent;
 
 class IRKTrayIcon: public KSystemTray
 {

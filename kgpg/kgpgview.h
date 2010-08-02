@@ -25,7 +25,7 @@
 #include <ktextedit.h>
 #include <kurl.h>
 
-class QDragEnterEvent;
+class TQDragEnterEvent;
 
 //class KgpgDoc;
 

@@ -34,7 +34,7 @@
 #include <kurl.h>
 #include <kdialogbase.h>
 
-class QRadioButton;
+class TQRadioButton;
 
 class KURLRequester;
 

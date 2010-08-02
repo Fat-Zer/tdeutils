@@ -78,7 +78,7 @@ PcmciaConfig::PcmciaConfig (TQWidget * parent, const char *name)
 
         top_layout->addStretch(1);
 
-        TQHBoxLayout *v1 = new QHBoxLayout;
+        TQHBoxLayout *v1 = new TQHBoxLayout;
         top_layout->addLayout(v1, 0);
         v1->addStretch(1);
         TQString s1 = LAPTOP_VERSION;

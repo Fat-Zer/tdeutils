@@ -24,7 +24,7 @@
 
 #include "knumber_priv.h"
 
-class QString;
+class TQString;
 
 /**
   *

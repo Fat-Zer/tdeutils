@@ -29,8 +29,8 @@
 #include <kdialogbase.h>
 #include <kmainwindow.h>
 
-class QGroupBox;
-class QWidgetStack;
+class TQGroupBox;
+class TQWidgetStack;
 class KTextBrowser;
 class KAccel;
 class KJotsMain;
@@ -41,7 +41,7 @@ class KPopupMenu;
 class ConfigureDialog;
 class KEdFind;
 class KEdReplace;
-class QTimer;
+class TQTimer;
 class KAction;
 class KActionMenu;
 

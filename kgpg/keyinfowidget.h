@@ -22,9 +22,9 @@
 #include <tqpixmap.h>
 
 class KTempFile;
-class QLabel;
+class TQLabel;
 class KDialogBase;
-class QCheckBox;
+class TQCheckBox;
 class KDatePicker;
 class KeyProperties;
 class KProcess;

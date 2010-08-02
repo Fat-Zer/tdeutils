@@ -32,7 +32,7 @@
 #include <tqvaluevector.h>
 
 class LineParser;
-class QTextStream;
+class TQTextStream;
 class ThemeLocale;
 class ZipFile;
 

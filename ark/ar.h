@@ -30,9 +30,9 @@
 #ifndef ARARCH_H
 #define ARARCH_H
 
-class QString;
-class QCString;
-class QStringList;
+class TQString;
+class TQCString;
+class TQStringList;
 
 class Arch;
 class ArkWidget;

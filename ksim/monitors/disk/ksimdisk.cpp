@@ -482,7 +482,7 @@ DiskConfig::DiskConfig(KSim::PluginObject *parent, const char *name)
   m_listview->addColumn(i18n("Disks"));
   m_layout->addWidget(m_listview);
 
-  TQHBoxLayout *layout = new QHBoxLayout;
+  TQHBoxLayout *layout = new TQHBoxLayout;
   layout->setSpacing(6);
 
   TQSpacerItem *spacer = new TQSpacerItem(20, 20,

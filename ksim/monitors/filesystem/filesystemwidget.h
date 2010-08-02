@@ -25,7 +25,7 @@
 #include <tqptrlist.h>
 
 class KProcess;
-class QVBoxLayout;
+class TQVBoxLayout;
 
 class FilesystemWidget : public QWidget
 {

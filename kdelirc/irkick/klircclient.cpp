@@ -66,7 +66,7 @@ bool KLircClient::connectToLirc()
 		}
 	}
 
-	theSocket = new QSocket;
+	theSocket = new TQSocket;
 	theSocket->setSocket(sock);
 	connect(theSocket, TQT_SIGNAL(readyRead()), TQT_SLOT(slotRead()));
 	connect(theSocket, TQT_SIGNAL(connectionClosed()), TQT_SLOT(slotClosed()));

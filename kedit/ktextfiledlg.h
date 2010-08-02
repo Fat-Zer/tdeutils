@@ -23,9 +23,9 @@
 
 #include <kfiledialog.h>
 
-class QComboBox;
-class QTextCodec;
-class QString;
+class TQComboBox;
+class TQTextCodec;
+class TQString;
 class KURL;
 
 /**

@@ -30,8 +30,8 @@
 
 #include "arch.h"
 
-class QString;
-class QStringList;
+class TQString;
+class TQStringList;
 
 class ArkWidget;
 

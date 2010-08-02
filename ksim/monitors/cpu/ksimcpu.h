@@ -26,15 +26,15 @@
 
 #include <stdio.h>
 
-class QPushButton;
-class QTextStream;
-class QVBoxLayout;
-class QHBoxLayout;
-class QCheckBox;
-class QLabel;
-class QGroupBox;
-class QTimer;
-class QListViewItem;
+class TQPushButton;
+class TQTextStream;
+class TQVBoxLayout;
+class TQHBoxLayout;
+class TQCheckBox;
+class TQLabel;
+class TQGroupBox;
+class TQTimer;
+class TQListViewItem;
 class KListView;
 
 class CpuPlugin : public KSim::PluginObject

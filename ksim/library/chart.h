@@ -25,7 +25,7 @@
 
 #include <kdemacros.h>
 
-class QColor;
+class TQColor;
 
 namespace KSim
 {

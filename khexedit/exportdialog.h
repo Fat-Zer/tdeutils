@@ -22,14 +22,14 @@
 #define _EXPORT_DIALOG_H_
 
 
-class QButtonGroup;
-class QComboBox;
-class QCheckBox;
-class QFrame;
-class QLabel;
-class QLineEdit;
-class QSpinBox;
-class QWidgetStack;
+class TQButtonGroup;
+class TQComboBox;
+class TQCheckBox;
+class TQFrame;
+class TQLabel;
+class TQLineEdit;
+class TQSpinBox;
+class TQWidgetStack;
 class KSimpleConfig;
 
 #include <kdialogbase.h>

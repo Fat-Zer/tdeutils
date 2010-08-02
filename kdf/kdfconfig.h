@@ -30,12 +30,12 @@
 
 #include "stdoption.h"
 
-class QCheckBox;
-class QLabel;
-class QLCDNumber;
-class QLineEdit;
-class QListViewItem;
-class QScrollBar;
+class TQCheckBox;
+class TQLabel;
+class TQLCDNumber;
+class TQLineEdit;
+class TQListViewItem;
+class TQScrollBar;
 
 class CListView;
 

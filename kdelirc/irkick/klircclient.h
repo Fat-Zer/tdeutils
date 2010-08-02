@@ -18,8 +18,8 @@
 #include <tqstring.h>
 #include <tqstringlist.h>
 
-class QSocket;
-class QSocketNotifier;
+class TQSocket;
+class TQSocketNotifier;
 
 /**
 @author Malte Starostik

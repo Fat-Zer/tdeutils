@@ -26,7 +26,7 @@
 #include <tqstringlist.h>
 #include <tqevent.h>
 
-class QString;
+class TQString;
 class KArchive;
 
 class ListingEvent: public QCustomEvent

@@ -44,7 +44,7 @@ class KSim::Chart::Timer
     static void syncChart(KSim::Chart *chart)
     {
       if (!m_timer) {
-        m_timer = new QTimer;
+        m_timer = new TQTimer;
         m_timer->start(1000);
         qAddPostRoutine(cleanup);
       }

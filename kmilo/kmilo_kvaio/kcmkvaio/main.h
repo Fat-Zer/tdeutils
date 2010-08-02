@@ -25,7 +25,7 @@
 #include <kcmodule.h>
 #include "../kvaiodriverinterface.h"
 
-class QTimer;
+class TQTimer;
 class KCMKVaioGeneral;
 
 class KVaioModule : public KCModule

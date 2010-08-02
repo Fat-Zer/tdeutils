@@ -34,8 +34,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include <unistd.h>
 
 
-class QString;
-class QStrList;
+class TQString;
+class TQStrList;
 
 class KProcess;
 class KTempDir;

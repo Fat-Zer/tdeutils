@@ -22,7 +22,7 @@
 @author Gav Wood
 */
 
-class QListViewItem;
+class TQListViewItem;
 
 class AddAction : public AddActionBase
 {

@@ -26,13 +26,13 @@
 
 #include <kdialog.h>
 
-class QCheckBox;
-class QLineEdit;
-class QLabel;
-class QRadioButton;
-class QComboBox;
-class QButtonGroup;
-class QGroupBox;
+class TQCheckBox;
+class TQLineEdit;
+class TQLabel;
+class TQRadioButton;
+class TQComboBox;
+class TQButtonGroup;
+class TQGroupBox;
 
 class KProgress;
 class KConfig;

@@ -29,10 +29,10 @@
 class KPCMCIA;
 class KPCMCIACard;
 class KPCMCIAInfoPage;
-class QTabWidget;
+class TQTabWidget;
 class KStatusBar;
-class QGridLayout;
-class QPushButton;
+class TQGridLayout;
+class TQPushButton;
 class KPushButton;
 
 #include <tqmap.h>
@@ -72,7 +72,7 @@ private:
 };
 
 
-class QLabel;
+class TQLabel;
 
 
 class KPCMCIAInfoPage : public TQFrame {

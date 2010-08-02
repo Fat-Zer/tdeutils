@@ -27,13 +27,13 @@
 #include <tqstringlist.h>
 #include <tqvaluevector.h>
 
-class QTextStream;
-class QTimer;
+class TQTextStream;
+class TQTimer;
 class KListView;
-class QVBoxLayout;
-class QVButtonGroup;
-class QRadioButton;
-class QPushButton;
+class TQVBoxLayout;
+class TQVButtonGroup;
+class TQRadioButton;
+class TQPushButton;
 namespace KSim
 {
   class Chart;

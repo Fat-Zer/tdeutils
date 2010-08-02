@@ -162,7 +162,7 @@ void TopLevel::setupEditWidget()
   set_colors();
 
   /*
-  right_mouse_button = new QPopupMenu;
+  right_mouse_button = new TQPopupMenu;
 
   right_mouse_button->insertItem (i18n("Open..."),
 				  this, 	TQT_SLOT(file_open()));
@@ -915,7 +915,7 @@ void TopLevel::print()
         if ( !m_caption.isEmpty() )
 	    printer->setDocName(m_caption);
 
-        TQPainter *p = new QPainter;
+        TQPainter *p = new TQPainter;
         p->begin( printer );
 
         TQPaintDeviceMetrics metrics( printer );

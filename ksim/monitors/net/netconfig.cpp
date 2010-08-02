@@ -56,7 +56,7 @@ NetConfig::NetConfig(KSim::PluginObject *parent, const char *name)
      TQT_SLOT(modifyItem(TQListViewItem *)));
   mainLayout->addWidget(usingBox);
 
-  layout = new QHBoxLayout;
+  layout = new TQHBoxLayout;
   layout->setSpacing(6);
 
   TQSpacerItem *spacer = new TQSpacerItem(20, 20,

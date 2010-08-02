@@ -19,7 +19,7 @@
 #define __scrolledEditorWindow
 
 #include <tqhbox.h>
-class QScrollView;
+class TQScrollView;
 class RegExpEditorWindow;
 class RegExp;
 

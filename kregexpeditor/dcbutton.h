@@ -19,7 +19,7 @@
 #define dcbutton
 
 #include <tqtoolbutton.h>
-class QMouseEvent;
+class TQMouseEvent;
 
 /**
    TQToolButton extended to emit a signal on double click.

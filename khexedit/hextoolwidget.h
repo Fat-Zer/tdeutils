@@ -23,10 +23,10 @@
 
 #include <kconfig.h>
 
-class QGridLayout;
-class QComboBox;
-class QLineEdit;
-class QCheckBox;
+class TQGridLayout;
+class TQComboBox;
+class TQLineEdit;
+class TQCheckBox;
 
 #include "hexbuffer.h"
 #include <tqframe.h>

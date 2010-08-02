@@ -35,8 +35,8 @@
 // KDE includes
 #include <kuniqueapplication.h>
 
-class QString;
-class QStringList;
+class TQString;
+class TQStringList;
 
 class EqualKey
 {

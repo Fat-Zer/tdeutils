@@ -24,7 +24,7 @@
 #include <kurl.h>
 #include <tqdatetime.h>
 
-class QLabel;
+class TQLabel;
 class KProcIO;
 class KProcess;
 class KLed;

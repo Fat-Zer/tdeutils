@@ -56,8 +56,8 @@
 #include <kurl.h>
 #include <tqpair.h>
 
-class QCString;
-class QStringList;
+class TQCString;
+class TQStringList;
 class KProcess;
 
 class FileListView;

@@ -29,7 +29,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #include <kpanelapplet.h>
 #include <kdialogbase.h>
 
-class QSpinBox;
+class TQSpinBox;
 class KLineEdit;
 class KAboutData;
 

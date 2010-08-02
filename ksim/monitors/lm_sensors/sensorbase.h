@@ -24,7 +24,7 @@
 #include <tqvaluelist.h>
 #include <tqcstring.h>
 
-class QTimer;
+class TQTimer;
 class KLibrary;
 
 class SensorInfo

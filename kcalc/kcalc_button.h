@@ -35,7 +35,7 @@
 
 enum ButtonModeFlags {ModeNormal = 0, ModeInverse = 1, ModeHyperbolic = 2};
 
-class QDomNode;
+class TQDomNode;
 
 // Each kcalc button can be in one of several modes.
 // The following class describes label, tooltip etc. for each mode...

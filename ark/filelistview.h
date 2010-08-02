@@ -35,13 +35,13 @@
 #include <klistview.h>
 #include <kio/global.h>
 
-class QString;
-class QStringList;
-class QRect;
-class QPainter;
-class QColorGroup;
-class QMouseEvent;
-class QPoint;
+class TQString;
+class TQStringList;
+class TQRect;
+class TQPainter;
+class TQColorGroup;
+class TQMouseEvent;
+class TQPoint;
 
 enum columnName { sizeCol = 1 , packedStrCol, ratioStrCol, timeStampStrCol, otherCol };
 

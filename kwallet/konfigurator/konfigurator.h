@@ -24,7 +24,7 @@
 
 class KConfig;
 class WalletConfigWidget;
-class QListViewItem;
+class TQListViewItem;
 
 class KWalletConfig : public KCModule {
 	Q_OBJECT

@@ -22,10 +22,10 @@
 #ifndef _PRINT_DIALOG_PAGE_H_
 #define _PRINT_DIALOG_PAGE_H_
 
-class QCheckBox;
-class QComboBox;
-class QLabel;
-class QSpinBox;
+class TQCheckBox;
+class TQComboBox;
+class TQLabel;
+class TQSpinBox;
 
 #include <kdeprint/kprintdialogpage.h>
 #include <ksimpleconfig.h>

@@ -22,20 +22,20 @@
 #include <tqptrstack.h>
 #include "regexp.h"
 #include "errormap.h"
-class QTimer;
+class TQTimer;
 
 class RegExpScrolledEditorWindow;
-class QLineEdit;
+class TQLineEdit;
 class InfoPage;
 class UserDefinedRegExps;
-class QSplitter;
+class TQSplitter;
 class Verifier;
 class VerifyButtons;
 class AuxButtons;
 class RegExpLineEdit;
 class RegExpConverter;
 class RegExpButtons;
-class QToolButton;
+class TQToolButton;
 
 /**
    Widget used to build a regular expression

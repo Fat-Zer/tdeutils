@@ -22,16 +22,16 @@
 
 #include <pluginmodule.h>
 
-class QPushButton;
-class QCheckListItem;
-class QGridLayout;
-class QLabel;
+class TQPushButton;
+class TQCheckListItem;
+class TQGridLayout;
+class TQLabel;
 class KListView;
-class QListViewItem;
-class QPopupMenu;
+class TQListViewItem;
+class TQPopupMenu;
 class KIntSpinBox;
-class QCheckBox;
-class QTimer;
+class TQCheckBox;
+class TQTimer;
 
 class SensorsConfig : public KSim::PluginPage
 {

@@ -38,7 +38,7 @@
 
 class CListView;
 class COptionDialog;
-class QTimer;
+class TQTimer;
 class KPopupMenu;
 
 /**************************************************************/

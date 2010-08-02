@@ -23,10 +23,10 @@
 #include <kshortcut.h>
 
 
-class QPushButton;
-class QCheckBox;
+class TQPushButton;
+class TQCheckBox;
 class KListView;
-class QButtonGroup;
+class TQButtonGroup;
 class KProcIO;
 
 class popupPublic : public KDialogBase //QDialog

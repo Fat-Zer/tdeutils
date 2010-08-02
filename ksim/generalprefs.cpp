@@ -191,7 +191,7 @@ KSim::UptimePrefs::UptimePrefs(TQWidget *parent, const char *name)
      m_uptimeAdd, TQT_SLOT(setEnabled(bool)));
   m_mainLayout->addWidget(m_uptimeCheck);
 
-  m_subLayout = new QHBoxLayout;
+  m_subLayout = new TQHBoxLayout;
   m_subLayout->setSpacing(6);
 
   m_formatLabel = new TQLabel(this);
@@ -327,7 +327,7 @@ KSim::MemoryPrefs::MemoryPrefs(TQWidget *parent, const char *name)
      m_memoryAdd, TQT_SLOT(setEnabled(bool)));
   m_mainLayout->addWidget(m_memCheck);
 
-  m_subLayout = new QHBoxLayout;
+  m_subLayout = new TQHBoxLayout;
   m_subLayout->setSpacing(6);
 
   m_memFormat = new TQLabel(this);
@@ -472,7 +472,7 @@ KSim::SwapPrefs::SwapPrefs(TQWidget *parent, const char *name)
   connect(m_swapAdd, TQT_SIGNAL(clicked()), TQT_SLOT(insertSwapItem()));
   TQToolTip::add(m_swapAdd, i18n("Insert item"));
 
-  m_subLayout = new QHBoxLayout;
+  m_subLayout = new TQHBoxLayout;
   m_subLayout->setSpacing(6);
   connect(m_swapCheck, TQT_SIGNAL(toggled(bool)),
      m_swapCombo, TQT_SLOT(setEnabled(bool)));

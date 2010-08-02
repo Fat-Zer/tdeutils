@@ -25,7 +25,7 @@
 #ifndef KARAMBA_PYTHON_H
 #define KARAMBA_PYTHON_H
 
-class QString;
+class TQString;
 class KPopupMenu;
 class Task;
 class Startup;

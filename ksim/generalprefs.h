@@ -23,17 +23,17 @@
 #include <tqwidget.h>
 #include <tqiconset.h>
 
-class QVBoxLayout;
-class QHBoxLayout;
-class QGridLayout;
-class QCheckBox;
-class QGroupBox;
-class QLabel;
-class QLineEdit;
-class QTabWidget;
+class TQVBoxLayout;
+class TQHBoxLayout;
+class TQGridLayout;
+class TQCheckBox;
+class TQGroupBox;
+class TQLabel;
+class TQLineEdit;
+class TQTabWidget;
 class KComboBox;
-class QPopupMenu;
-class QPushButton;
+class TQPopupMenu;
+class TQPushButton;
 class KIntSpinBox;
 
 namespace KSim

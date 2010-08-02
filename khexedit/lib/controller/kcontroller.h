@@ -19,7 +19,7 @@
 #define KHE_KCONTROLLER_H
 
 
-class QKeyEvent;
+class TQKeyEvent;
 
 namespace KHE
 {

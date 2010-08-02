@@ -25,7 +25,7 @@
 
 class KPopupMenu;
 class FilesystemWidget;
-class QTimer;
+class TQTimer;
 
 /**
  * This class is the filesystem monitor plugin

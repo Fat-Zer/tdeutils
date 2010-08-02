@@ -19,9 +19,9 @@
 #define AUXBUTTONS_H
 
 #include <tqdockwindow.h>
-class QComboBox;
-class QLabel;
-class QToolButton;
+class TQComboBox;
+class TQLabel;
+class TQToolButton;
 
 class AuxButtons :public QDockWindow
 {

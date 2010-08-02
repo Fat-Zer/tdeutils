@@ -19,9 +19,9 @@
 #define VERIFIER_H
 #include <tqtextedit.h>
 #include "regexphighlighter.h"
-class QTimer;
-class QProgressDialog;
-class QLabel;
+class TQTimer;
+class TQProgressDialog;
+class TQLabel;
 class SyntaxHighlighter;
 class Verifier :public QTextEdit
 {

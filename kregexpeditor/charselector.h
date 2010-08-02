@@ -20,8 +20,8 @@
 
 #include <tqwidget.h>
 
-class QComboBox;
-class QWidgetStack;
+class TQComboBox;
+class TQWidgetStack;
 class LimitedCharLineEdit;
 
 class CharSelector :public QWidget

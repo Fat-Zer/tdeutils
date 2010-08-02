@@ -22,7 +22,7 @@
 #ifndef _KPCMCIA_H
 #define _KPCMCIA_H
 
-class QTimer;
+class TQTimer;
 class KPCMCIA;
 
 #include <tqmemarray.h>

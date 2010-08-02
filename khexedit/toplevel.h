@@ -34,7 +34,7 @@
 #include "hexmanagerwidget.h"
 #include "statusbarprogress.h"
 
-class QSignalMapper;
+class TQSignalMapper;
 class KAction;
 class KRecentFilesAction;
 class KRadioAction;

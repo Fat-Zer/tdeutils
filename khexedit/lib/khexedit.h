@@ -25,7 +25,7 @@
 #include "khexedit_export.h"
 #include "kcolumnsview.h"
 
-class QTimer;
+class TQTimer;
 
 namespace KHE
 {

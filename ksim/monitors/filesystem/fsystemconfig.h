@@ -25,10 +25,10 @@
 
 class KIntSpinBox;
 class KListView;
-class QGridLayout;
-class QCheckBox;
-class QLabel;
-class QListBoxItem;
+class TQGridLayout;
+class TQCheckBox;
+class TQLabel;
+class TQListBoxItem;
 
 class FsystemConfig : public KSim::PluginPage
 {

@@ -28,10 +28,10 @@
 #include <kpanelextension.h>
 #include <kdelibs_export.h>
 
-class QBoxLayout;
-class QHBoxLayout;
-class QVBoxLayout;
-class QPopupMenu;
+class TQBoxLayout;
+class TQHBoxLayout;
+class TQVBoxLayout;
+class TQPopupMenu;
 class KDesktopFile;
 class KConfig;
 

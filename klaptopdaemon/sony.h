@@ -28,14 +28,14 @@
 #include <kcmodule.h>
 #include <tqstring.h>
 
-class QWidget;
-class QSpinBox;
+class TQWidget;
+class TQSpinBox;
 class KConfig;
-class QCheckBox;
-class QSlider;
+class TQCheckBox;
+class TQSlider;
 class KIconLoader;
 class KIconButton;
-class QPushButton;
+class TQPushButton;
 
 
 class SonyConfig : public KCModule

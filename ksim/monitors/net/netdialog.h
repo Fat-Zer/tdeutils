@@ -22,12 +22,12 @@
 
 #include <tqtabdialog.h>
 
-class QVBoxLayout;
-class QGridLayout;
-class QCheckBox;
-class QGroupBox;
-class QLabel;
-class QWidget;
+class TQVBoxLayout;
+class TQGridLayout;
+class TQCheckBox;
+class TQGroupBox;
+class TQLabel;
+class TQWidget;
 class KComboBox;
 class KLineEdit;
 class KURLRequester;

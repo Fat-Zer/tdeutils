@@ -33,7 +33,7 @@
 #include <tqclipboard.h>
 
 
-class QPopupMenu;
+class TQPopupMenu;
 class KTempFile;
 class KAboutData;
 class KPassivePopup;

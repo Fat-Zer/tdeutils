@@ -22,9 +22,9 @@
 #include "iractions.h"
 #include "modes.h"
 
-class QListViewItem;
+class TQListViewItem;
 class KListView;
-class QDropEvent;
+class TQDropEvent;
 class Profile;
 class Remote;
 

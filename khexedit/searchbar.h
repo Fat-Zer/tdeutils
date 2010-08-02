@@ -24,10 +24,10 @@
 
 #include "hexbuffer.h"
 
-class QComboBox;
-class QLineEdit;
-class QPushButton;
-class QCheckBox;
+class TQComboBox;
+class TQLineEdit;
+class TQPushButton;
+class TQCheckBox;
 class CHexValidator;
 
 class CSearchBar : public QFrame

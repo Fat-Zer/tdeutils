@@ -28,13 +28,13 @@
 #include <kcmodule.h>
 #include <tqstring.h>
 
-class QWidget;
-class QSpinBox;
+class TQWidget;
+class TQSpinBox;
 class KConfig;
-class QCheckBox;
+class TQCheckBox;
 class KIconLoader;
 class KIconButton;
-class QPushButton;
+class TQPushButton;
 
 
 class ApmConfig : public KCModule

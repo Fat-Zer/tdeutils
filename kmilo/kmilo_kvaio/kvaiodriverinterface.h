@@ -20,7 +20,7 @@
 
 #include <tqobject.h>
 
-class QTimer;
+class TQTimer;
 
 extern "C"
 {
@@ -29,7 +29,7 @@ extern "C"
 #include "./sonypi.h"
 }
 
-class QSocketNotifier;
+class TQSocketNotifier;
 
 class KVaioDriverInterface : public QObject
 {

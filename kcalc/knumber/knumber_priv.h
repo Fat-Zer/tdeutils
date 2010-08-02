@@ -19,7 +19,7 @@
 #ifndef _KNUMBER_PRIV_H
 #define _KNUMBER_PRIV_H
 
-class QString;
+class TQString;
 
 #include <cstdio>
 #include <gmp.h>

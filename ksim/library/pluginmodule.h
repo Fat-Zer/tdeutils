@@ -24,7 +24,7 @@
 
 #include <kdemacros.h>
 
-class QPopupMenu;
+class TQPopupMenu;
 class KConfig;
 
 #define KSIM_INIT_PLUGIN(className) \

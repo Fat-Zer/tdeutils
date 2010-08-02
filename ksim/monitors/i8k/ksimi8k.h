@@ -24,10 +24,10 @@
 
 #include <pluginmodule.h>
 
-class QTimer;
-class QTextIStream;
-class QRegExp;
-class QCheckBox;
+class TQTimer;
+class TQTextIStream;
+class TQRegExp;
+class TQCheckBox;
 class KIntNumInput;
 
 namespace KSim

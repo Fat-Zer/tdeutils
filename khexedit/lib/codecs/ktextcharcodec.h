@@ -21,9 +21,9 @@
 
 #include "kcharcodec.h"
 
-class QTextCodec;
-class QTextDecoder;
-class QTextEncoder;
+class TQTextCodec;
+class TQTextDecoder;
+class TQTextEncoder;
 
 namespace KHE
 {

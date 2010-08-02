@@ -18,7 +18,7 @@
 #ifndef KHE_KCOLTEXTEXPORT_H
 #define KHE_KCOLTEXTEXPORT_H
 
-class QString;
+class TQString;
 
 namespace KHE
 {

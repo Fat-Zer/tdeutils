@@ -23,8 +23,8 @@
 // lib specific
 #include "kbuffercolumn.h"
 
-class QPainter;
-class QColor;
+class TQPainter;
+class TQColor;
 
 
 namespace KHE

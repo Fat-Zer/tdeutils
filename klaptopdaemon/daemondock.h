@@ -31,9 +31,9 @@
 class laptop_daemon;
 class KPCMCIA;
 class KPCMCIACard;
-class QPopupMenu;
-class QVBox;
-class QSlider;
+class TQPopupMenu;
+class TQVBox;
+class TQSlider;
 class KPopupMenu;
 
 #include <tqmap.h>

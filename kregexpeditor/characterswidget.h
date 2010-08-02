@@ -32,7 +32,7 @@ class KDialogBase;
 class CharacterEdits;
 class TextRangeRegExp;
 class CharSelector;
-class QCheckBox;
+class TQCheckBox;
 
 /**
    RegExp widget for charcter ranges.

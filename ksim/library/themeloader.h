@@ -28,10 +28,10 @@
 
 #include <kdemacros.h>
 
-class QStringList;
-template<class> class QValueVector;
+class TQStringList;
+template<class> class TQValueVector;
 class KConfig;
-class QWidget;
+class TQWidget;
 
 namespace KSim
 {

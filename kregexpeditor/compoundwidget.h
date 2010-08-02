@@ -17,10 +17,10 @@
  **/
 #ifndef compoundwidget
 #define compoundwidget
-class QLineEdit;
-class QMultiLineEdit;
+class TQLineEdit;
+class TQMultiLineEdit;
 class KDialogBase;
-class QCheckBox;
+class TQCheckBox;
 
 #include "singlecontainerwidget.h"
 #include "compoundregexp.h"

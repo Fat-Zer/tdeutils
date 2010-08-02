@@ -29,9 +29,9 @@
 
 #include "arch.h"
 
-class QString;
-class QCString;
-class QStringList;
+class TQString;
+class TQCString;
+class TQStringList;
 
 class ArkWidget;
 

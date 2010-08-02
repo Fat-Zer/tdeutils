@@ -24,11 +24,11 @@
 #ifndef KCALC_H
 #define KCALC_H
 
-class QPushButton;
-class QRadioButton;
-class QButtonGroup;
-class QHButtonGroup;
-class QWidget;
+class TQPushButton;
+class TQRadioButton;
+class TQButtonGroup;
+class TQHButtonGroup;
+class TQWidget;
 class DispLogic;
 class Constants;
 #include <kmainwindow.h>

@@ -35,15 +35,15 @@
 #include <tqcheckbox.h>
 #include <kmainwindow.h>
 
-class QPushButton;
-class QPopupMenu;
-class QLabel;
+class TQPushButton;
+class TQPopupMenu;
+class TQLabel;
 class QCheckbox;
 class KStatusBar;
 class KPassivePopup;
 class KProcess;
 class KProcIO;
-class QEvent;
+class TQEvent;
 class KTempFile;
 class KgpgApp;
 class keyServer;

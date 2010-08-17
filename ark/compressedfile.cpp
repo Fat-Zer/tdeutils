@@ -124,6 +124,18 @@ void CompressedFile::initData()
         m_archiver_program = "bzip2";
         m_defaultExtensions << ".bz2" << ".bz";
     }
+    if ( mimeType == "application/x-lzma" )
+    {
+        m_unarchiver_program = "unlzma";
+        m_archiver_program = "lzma";
+        m_defaultExtensions << ".lzma";
+    }
+    if ( mimeType == "application/x-xz" )
+    {
+        m_unarchiver_program = "unxz";
+        m_archiver_program = "xz";
+        m_defaultExtensions << ".xz";
+    }
     if ( mimeType == "application/x-lzop" )
     { m_unarchiver_program = "lzop";
         m_archiver_program = "lzop";

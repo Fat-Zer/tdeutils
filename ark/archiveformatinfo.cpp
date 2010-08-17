@@ -53,6 +53,9 @@ void ArchiveFormatInfo::buildFormatInfos()
   addFormatInfo( TAR_FORMAT, "application/x-tarz", ".tar.z" );
   addFormatInfo( TAR_FORMAT, "application/x-tbz", ".tar.bz2" );
   addFormatInfo( TAR_FORMAT, "application/x-tbz2", ".tar.bz2" );
+  addFormatInfo( TAR_FORMAT, "application/x-tlz", ".tar.lzma" );
+  addFormatInfo( TAR_FORMAT, "application/x-txz", ".tar.xz" );
+
   // x-tar as the last one to get its comment for all the others, too
   addFormatInfo( TAR_FORMAT, "application/x-tar", ".tar" );
 
@@ -65,6 +68,8 @@ void ArchiveFormatInfo::buildFormatInfos()
   addFormatInfo( COMPRESSED_FORMAT, "application/x-gzip", ".gz" );
   addFormatInfo( COMPRESSED_FORMAT, "application/x-bzip", ".bz" );
   addFormatInfo( COMPRESSED_FORMAT, "application/x-bzip2", ".bz2" );
+  addFormatInfo( COMPRESSED_FORMAT, "application/x-lzma", ".lzma" );
+  addFormatInfo( COMPRESSED_FORMAT, "application/x-xz", ".xz" );
   addFormatInfo( COMPRESSED_FORMAT, "application/x-lzop", ".lzo"  );
   addFormatInfo( COMPRESSED_FORMAT, "application/x-compress", ".Z" );
   find( COMPRESSED_FORMAT ).description = i18n( "Compressed File" );

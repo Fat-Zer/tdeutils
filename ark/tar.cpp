@@ -208,6 +208,12 @@ TQString TarArch::getCompressor()
     if (  m_fileMimeType == "application/x-tbz" )
         return TQString( "bzip2" );
 
+   if (  m_fileMimeType == "application/x-lzma" )
+       return TQString( "lzma" );
+
+   if (  m_fileMimeType == "application/x-xz" )
+       return TQString( "xz" );
+
     if( m_fileMimeType == "application/x-tzo" )
         return TQString( "lzop" );
 
@@ -225,6 +231,12 @@ TQString TarArch::getUnCompressor()
 
     if (  m_fileMimeType == "application/x-tbz" )
         return TQString( "bunzip2" );
+
+   if (  m_fileMimeType == "application/x-lzma" )
+       return TQString( "unlzma" );
+
+   if (  m_fileMimeType == "application/x-xz" )
+       return TQString( "unxz" );
 
     if( m_fileMimeType == "application/x-tzo" )
         return TQString( "lzop" );

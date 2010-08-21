@@ -208,10 +208,10 @@ TQString TarArch::getCompressor()
     if (  m_fileMimeType == "application/x-tbz" )
         return TQString( "bzip2" );
 
-   if (  m_fileMimeType == "application/x-lzma" )
+   if (  m_fileMimeType == "application/x-tlz" )
        return TQString( "lzma" );
 
-   if (  m_fileMimeType == "application/x-xz" )
+   if (  m_fileMimeType == "application/x-txz" )
        return TQString( "xz" );
 
     if( m_fileMimeType == "application/x-tzo" )
@@ -232,10 +232,10 @@ TQString TarArch::getUnCompressor()
     if (  m_fileMimeType == "application/x-tbz" )
         return TQString( "bunzip2" );
 
-   if (  m_fileMimeType == "application/x-lzma" )
+   if (  m_fileMimeType == "application/x-tlz" )
        return TQString( "unlzma" );
 
-   if (  m_fileMimeType == "application/x-xz" )
+   if (  m_fileMimeType == "application/x-txz" )
        return TQString( "unxz" );
 
     if( m_fileMimeType == "application/x-tzo" )
@@ -305,10 +305,13 @@ void TarArch::openFirstCreateTempDone()
             && ( m_fileMimeType != "application/x-tbz" ) )
     {
         disconnect( this, TQT_SIGNAL( createTempDone() ), this, TQT_SLOT( openFirstCreateTempDone() ) );
+        Q_ASSERT( !m_listingThread );
+        m_listingThread = new TarListingThread( this, tmpfile );
     }
-
-    Q_ASSERT( !m_listingThread );
-    m_listingThread = new TarListingThread( this, m_filename );
+    else {
+        Q_ASSERT( !m_listingThread );
+        m_listingThread = new TarListingThread( this, m_filename );
+    }
     m_listingThread->start();
 }
 

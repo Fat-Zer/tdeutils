@@ -32,6 +32,7 @@
 // QT includes
 #include <tqfile.h>
 #include <tqdir.h>
+#include <tqtextcodec.h>
 
 // KDE includes
 #include <kdebug.h>
@@ -89,9 +90,14 @@ RarArch::RarArch( ArkWidget *_gui, const TQString & _fileName )
 
 bool RarArch::processLine( const TQCString &line )
 {
+  TQString unicode_line;
+
+  TQTextCodec *codec = TQTextCodec::codecForLocale();
+  unicode_line = codec->toUnicode( line );
+
   if ( m_isFirstLine )
   {
-    m_entryFilename = TQString::fromLocal8Bit( line );
+    m_entryFilename = TQString::fromLocal8Bit( unicode_line );
     m_entryFilename.remove( 0, 1 );
     m_isFirstLine = false;
     return true;
@@ -99,7 +105,7 @@ bool RarArch::processLine( const TQCString &line )
 
   TQStringList list;
 
-  TQStringList l2 = TQStringList::split( ' ', line );
+  TQStringList l2 = TQStringList::split( ' ', unicode_line );
 
   list << m_entryFilename; // filename
   list << l2[ 0 ]; // size
@@ -253,8 +259,10 @@ void RarArch::unarchFileInternal()
   {
     *kp << "-o-";
   }
+  
+  TQTextCodec *codec = TQTextCodec::codecForLocale();
 
-  *kp << m_filename;
+  *kp << codec->fromUnicode(m_filename);
 
   // if the file list is empty, no filenames go on the command line,
   // and we then extract everything in the archive.
@@ -263,11 +271,11 @@ void RarArch::unarchFileInternal()
     TQStringList::Iterator it;
     for ( it = m_fileList->begin(); it != m_fileList->end(); ++it )
     {
-      *kp << (*it);
+      *kp << codec->fromUnicode(*it);
     }
   }
 
-  *kp << m_destDir ;
+  *kp << codec->fromUnicode(m_destDir);
 
   connect( kp, TQT_SIGNAL( receivedStdout(KProcess*, char*, int) ),
            TQT_SLOT( slotReceivedOutput(KProcess*, char*, int) ) );

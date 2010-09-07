@@ -28,6 +28,7 @@
 
 // Qt includes
 #include <tqdir.h>
+#include <tqtextcodec.h>
 
 // KDE includes
 #include <kdebug.h>
@@ -207,8 +208,10 @@ void ZipArch::unarchFileInternal()
     *kp << "-o";
   else
     *kp << "-n";
+  
+  TQTextCodec *codec = TQTextCodec::codecForLocale();
 
-  *kp << m_filename;
+  *kp << codec->fromUnicode(m_filename);
 
   // if the list is empty, no filenames go on the command line,
   // and we then extract everything in the archive.
@@ -218,11 +221,12 @@ void ZipArch::unarchFileInternal()
 
     for ( it = m_fileList->begin(); it != m_fileList->end(); ++it )
     {
-      *kp << (*it);
+      *kp << codec->fromUnicode(*it);
     }
   }
 
-  *kp << "-d" << m_destDir;
+  *kp << "-d";
+  *kp << codec->fromUnicode(m_destDir);
 
   connect( kp, TQT_SIGNAL( receivedStdout(KProcess*, char*, int) ),
            TQT_SLOT( slotReceivedOutput(KProcess*, char*, int) ) );

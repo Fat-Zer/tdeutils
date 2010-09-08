@@ -32,6 +32,7 @@
 // QT includes
 #include <tqfile.h>
 #include <tqdir.h>
+#include <tqtextcodec.h>
 
 // KDE includes
 #include <kdebug.h>

@@ -1533,7 +1533,7 @@ ArkWidget::action_extract()
                       it != selectedFiles.constEnd();
                       ++it )
                 {
-                    m_extractList->append( *it );
+                    m_extractList->append( TQFile::encodeName( *it ) );
                 }
 
                 if (!bOvwrt)

@@ -33,7 +33,6 @@
 // QT includes
 #include <tqapplication.h>
 #include <tqfile.h>
-#include <tqtextcodec.h>
 
 // KDE includes
 #include <kdebug.h>
@@ -331,20 +330,15 @@ void Arch::slotReceivedTOC( KProcess*, char* data, int length )
 bool Arch::processLine( const TQCString &line )
 {
   TQString columns[ 11 ];
-  TQString unicode_line;
   unsigned int pos = 0;
   int strpos, len;
-
-  TQTextCodec *codec = TQTextCodec::codecForLocale();
-  unicode_line = codec->toUnicode( line );
-
 
   // Go through our columns, try to pick out data, return silently on failure
   for ( TQPtrListIterator <ArchColumns>col( m_archCols ); col.current(); ++col )
   {
     ArchColumns *curCol = *col;
 
-    strpos = curCol->pattern.search( unicode_line, pos );
+    strpos = curCol->pattern.search( line, pos );
     len = curCol->pattern.matchedLength();
 
     if ( ( strpos == -1 ) || ( len > curCol->maxLength ) )
@@ -360,7 +354,7 @@ bool Arch::processLine( const TQCString &line )
 
     pos = strpos + len;
 
-    columns[curCol->colRef] = TQString::fromLocal8Bit( unicode_line.mid(strpos, len) );
+    columns[curCol->colRef] = TQString::fromLocal8Bit( line.mid(strpos, len) );
   }
 
 

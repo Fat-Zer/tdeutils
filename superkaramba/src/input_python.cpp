@@ -348,7 +348,7 @@ PyObject* py_getInputFocus(PyObject *, PyObject *args)
   //
   TQWidget *obj = ((karamba*)widget)->focusWidget();
   
-  if(obj->isA("TQLineEdit")) // SKLineEdit is no Q_Object, but TQLineEdit can only be here as a SKLineEdit
+  if(obj->isA(TQLINEEDIT_OBJECT_NAME_STRING)) // SKLineEdit is no Q_Object, but TQLineEdit can only be here as a SKLineEdit
     return Py_BuildValue((char*)"l", ((SKLineEdit*)obj)->getInput());
   
   return Py_BuildValue((char*)"l", 0);

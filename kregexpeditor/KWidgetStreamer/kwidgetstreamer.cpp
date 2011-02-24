@@ -45,7 +45,7 @@ void KWidgetStreamer::fromStream( TQDataStream& stream, TQObject* to )
 void KWidgetStreamer::propertyToStream( const TQObject* from, TQDataStream& stream )
 {
   // Only handle widgets. Alternatives to widgets are layouts, validators, timers, etc.
-  if ( ! from->inherits("TQWidget") )
+  if ( ! from->inherits(TQWIDGET_OBJECT_NAME_STRING) )
     return;
 
   // Serializing all the children (if any).
@@ -80,7 +80,7 @@ void KWidgetStreamer::propertyToStream( const TQObject* from, TQDataStream& stre
 void KWidgetStreamer::propertyFromStream( TQDataStream& stream, TQObject* to )
 {
   // Only handle widgets. Alternatives to widgets are layouts, validators, timers, etc.
-  if ( ! to->inherits("TQWidget") )
+  if ( ! to->inherits(TQWIDGET_OBJECT_NAME_STRING) )
     return;
 
   // Stream in all the children (if any)
@@ -119,7 +119,7 @@ KWidgetStreamer::KWidgetStreamer ()
   l.clear();
   l << TQString::fromLatin1("enabled")
     << TQString::fromLatin1("checked") << TQString::fromLatin1("tristate");
-  _map.insert(TQString::fromLatin1("TQCheckBox"), l);
+  _map.insert(TQString::fromLatin1(TQCHECKBOX_OBJECT_NAME_STRING), l);
 
   // QComboBox
   l.clear();
@@ -127,51 +127,51 @@ KWidgetStreamer::KWidgetStreamer ()
     << TQString::fromLatin1("editable") << TQString::fromLatin1("currentItem")
     << TQString::fromLatin1("maxCount") << TQString::fromLatin1("insertionPolicy")
     << TQString::fromLatin1("autoCompletion");
-  _map.insert(TQString::fromLatin1("TQComboBox"), l);
+  _map.insert(TQString::fromLatin1(TQCOMBOBOX_OBJECT_NAME_STRING), l);
 
   // QDial
   l.clear();
   l << TQString::fromLatin1("enabled")
     << TQString::fromLatin1("tracking") << TQString::fromLatin1("wrapping")
     << TQString::fromLatin1("value");
-  _map.insert(TQString::fromLatin1("TQDial"), l);
+  _map.insert(TQString::fromLatin1(TQDIAL_OBJECT_NAME_STRING), l);
 
   // QLCDNumber
   l.clear();
   l << TQString::fromLatin1("enabled")
     << TQString::fromLatin1("numDigits") << TQString::fromLatin1("mode")
     << TQString::fromLatin1("segmentStyle") << TQString::fromLatin1("value");
-  _map.insert(TQString::fromLatin1("TQLCDNumber"), l);
+  _map.insert(TQString::fromLatin1(TQLCDNUMBER_OBJECT_NAME_STRING), l);
 
   // QLineEdit
   l.clear();
   l << TQString::fromLatin1("enabled")
     << TQString::fromLatin1("text") << TQString::fromLatin1("maxLength")
     << TQString::fromLatin1("echoMode") << TQString::fromLatin1("alignment");
-  _map.insert(TQString::fromLatin1("TQLineEdit"), l);
+  _map.insert(TQString::fromLatin1(TQLINEEDIT_OBJECT_NAME_STRING), l);
 
   // QMultiLineEdit
   l.clear();
   l << TQString::fromLatin1("enabled")
     << TQString::fromLatin1("text")
     << TQString::fromLatin1("alignment");
-  _map.insert(TQString::fromLatin1("TQTextEdit"), l);
+  _map.insert(TQString::fromLatin1(TQTEXTEDIT_OBJECT_NAME_STRING), l);
 
   // QRadioButton
   l.clear();
   l << TQString::fromLatin1("enabled")
     << TQString::fromLatin1("checked");
-  _map.insert(TQString::fromLatin1("TQRadioButton"), l);
+  _map.insert(TQString::fromLatin1(TQRADIOBUTTON_OBJECT_NAME_STRING), l);
 
   // QSlider
   l.clear();
   l << TQString::fromLatin1("enabled")
     << TQString::fromLatin1("value");
-  _map.insert(TQString::fromLatin1("TQSlider"), l);
+  _map.insert(TQString::fromLatin1(TQSLIDER_OBJECT_NAME_STRING), l);
 
   // QSpinBox
   l.clear();
   l << TQString::fromLatin1("enabled")
     << TQString::fromLatin1("value");
-  _map.insert(TQString::fromLatin1("TQSpinBox"), l);
+  _map.insert(TQString::fromLatin1(TQSPINBOX_OBJECT_NAME_STRING), l);
 }

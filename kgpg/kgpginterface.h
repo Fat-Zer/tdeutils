@@ -33,10 +33,11 @@ class KLed;
  * Encrypt a file using gpg.
  */
 
-class KgpgInterface : public QObject
+class KgpgInterface : public TQObject
 {
 
         Q_OBJECT
+  TQ_OBJECT
 
 public:
         /**
@@ -58,7 +59,7 @@ public slots:
          * @param Options String with the wanted gpg options. ex: "--armor"
          * @param symetrical bool whether the encryption should be symmetrical.
          */
-        void KgpgEncryptFile(TQStringList encryptKeys,KURL srcUrl,KURL destUrl,TQStringList Options=TQString::null,bool symetrical=false);
+        void KgpgEncryptFile(TQStringList encryptKeys,KURL srcUrl,KURL destUrl,TQStringList Options=TQString(),bool symetrical=false);
 
         /**Encrypt file function
          * @param userIDs the key user identification.
@@ -101,7 +102,7 @@ public slots:
          * @param signKeyMail TQString the name of the signing key (only used to prompt user for passphrase)
          * @param local bool should the signature be local
          */
-        void KgpgSignKey(TQString keyID,TQString signKeyID,TQString signKeyMail=TQString::null,bool local=false,int checking=0);
+        void KgpgSignKey(TQString keyID,TQString signKeyID,TQString signKeyMail=TQString(),bool local=false,int checking=0);
 
         /**Key signature deletion function
          * @param keyID TQString the ID of the key
@@ -115,14 +116,14 @@ public slots:
          * @param Options String with the wanted gpg options. ex: "--armor"
          * returns the encrypted text or empty string if encyption failed
          */
-        void KgpgEncryptText(TQString text,TQStringList userIDs, TQStringList Options=TQString::null);
+        void KgpgEncryptText(TQString text,TQStringList userIDs, TQStringList Options=TQString());
 
         /**Decrypt text function
         * @param text TQString text to be decrypted.
         * @param userID TQString the name of the decryption key (only used to prompt user for passphrase)
         */
 	//static TQString KgpgDecryptText(TQString text,TQString userID);
-	void KgpgDecryptText(TQString text,TQStringList Options=TQString::null);
+	void KgpgDecryptText(TQString text,TQStringList Options=TQString());
 	void txtdecryptfin(KProcess *);
 
 	/**Extract list of photographic user id's
@@ -389,8 +390,9 @@ private:
 class  Md5Widget :public KDialogBase
 {
         Q_OBJECT
+  TQ_OBJECT
 public:
-        Md5Widget(TQWidget *parent=0, const char *name=0,KURL url=KURL());
+        Md5Widget(TQWidget *tqparent=0, const char *name=0,KURL url=KURL());
         ~Md5Widget();
 public slots:
         void slotApply();

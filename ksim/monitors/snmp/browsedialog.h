@@ -39,8 +39,9 @@ namespace Snmp
 class BrowseDialog : public BrowseDialogBase
 {
     Q_OBJECT
+  TQ_OBJECT
 public:
-    BrowseDialog( const HostConfig &hostConfig, const TQString &currentOid, TQWidget *parent, const char *name = 0 );
+    BrowseDialog( const HostConfig &hostConfig, const TQString &currentOid, TQWidget *tqparent, const char *name = 0 );
 
     TQString selectedObjectIdentifier() const;
 

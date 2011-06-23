@@ -32,11 +32,12 @@ class KComboBox;
 class KLineEdit;
 class KURLRequester;
 
-class NetDialog : public QTabDialog
+class NetDialog : public TQTabDialog
 {
   Q_OBJECT
+  TQ_OBJECT
   public:
-    NetDialog(TQWidget *parent, const char *name = 0);
+    NetDialog(TQWidget *tqparent, const char *name = 0);
     ~NetDialog();
 
     const TQString deviceName() const;

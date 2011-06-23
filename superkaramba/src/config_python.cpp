@@ -172,7 +172,7 @@ PyObject* py_read_config_entry(PyObject *, PyObject *args)
     return Py_BuildValue((char*)"l", i);
   }
 
-  if (type == "TQString")
+  if (type == TQSTRING_OBJECT_NAME_STRING)
   {
     return Py_BuildValue((char*)"s", entry.toString().ascii());
   }

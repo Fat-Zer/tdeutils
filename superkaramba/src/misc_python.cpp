@@ -167,7 +167,7 @@ long attachClickArea(long widget, long meter, TQString LeftButton, TQString Midd
   Meter* currMeter = (Meter*) meter;
 
   // Look if currMeter has an ClickArea attached.
-  bool meterAlreadyClickable = currTheme->clickList->containsRef(currMeter);
+  bool meterAlreadyClickable = currTheme->clickList->tqcontainsRef(currMeter);
 
   // if currMeter is of type ImageLabel*
   if (ImageLabel* image = dynamic_cast<ImageLabel*>(currMeter))
@@ -471,7 +471,7 @@ long openNamedTheme(char* path, char *name, bool is_sub_theme) {
   if( file.exists() )
   {
       TQCString prettyName(name);
-      KarambaApplication* app = (KarambaApplication*)qApp;
+      KarambaApplication* app = (KarambaApplication*)tqApp;
       if (!app->themeExists(prettyName))
       {
         currTheme = new karamba( filename, prettyName, false ,
@@ -507,7 +507,7 @@ PyObject* py_get_incoming_data(PyObject *, PyObject *args)
   long widget;
   if (!PyArg_ParseTuple(args, (char*)"l:getIncomingData", &widget))
     return NULL;
-  return Py_BuildValue((char*)"O", QString2PyString(getIncomingData(widget)));
+  return Py_BuildValue((char*)"O", TQString2PyString(getIncomingData(widget)));
 }
 
 PyObject* py_set_incoming_data(PyObject *, PyObject *args)
@@ -778,7 +778,7 @@ PyObject* py_get_ip(PyObject *, PyObject *args)
     return NULL;
   if (!checkKaramba(widget))
     return NULL;
-  return Py_BuildValue((char*)"O", QString2PyString(getIp(interface)));
+  return Py_BuildValue((char*)"O", TQString2PyString(getIp(interface)));
 }
 
 static void management_popup(long widget)

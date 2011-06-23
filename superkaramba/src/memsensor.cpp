@@ -318,17 +318,17 @@ void MemSensor::update()
             format = "%um";
         }
 
-        format.replace( TQRegExp("%fmb", false), TQString::number( (int)(( totalMem - usedMemNoBuffers)/1024.0+0.5)));
-        format.replace( TQRegExp("%fm", false), TQString::number( (int)( ( totalMem - usedMem  )/1024.0+0.5) ));
+        format.tqreplace( TQRegExp("%fmb", false), TQString::number( (int)(( totalMem - usedMemNoBuffers)/1024.0+0.5)));
+        format.tqreplace( TQRegExp("%fm", false), TQString::number( (int)( ( totalMem - usedMem  )/1024.0+0.5) ));
 
-        format.replace( TQRegExp("%umb", false), TQString::number( (int)((usedMemNoBuffers)/1024.0+0.5)));
-        format.replace( TQRegExp("%um", false), TQString::number( (int)((usedMem)/1024.0+0.5 )));
+        format.tqreplace( TQRegExp("%umb", false), TQString::number( (int)((usedMemNoBuffers)/1024.0+0.5)));
+        format.tqreplace( TQRegExp("%um", false), TQString::number( (int)((usedMem)/1024.0+0.5 )));
 
-        format.replace( TQRegExp("%tm", false), TQString::number( (int)( (totalMem)/1024.0+0.5)));
+        format.tqreplace( TQRegExp("%tm", false), TQString::number( (int)( (totalMem)/1024.0+0.5)));
 
-        format.replace( TQRegExp("%fs", false), TQString::number( (int)((totalSwap - usedSwap)/1024.0+0.5)));
-        format.replace( TQRegExp("%us", false), TQString::number( (int)(usedSwap/1024.0+0.5)));
-        format.replace( TQRegExp("%ts", false), TQString::number( (int)(totalSwap/1024.0+0.5)));
+        format.tqreplace( TQRegExp("%fs", false), TQString::number( (int)((totalSwap - usedSwap)/1024.0+0.5)));
+        format.tqreplace( TQRegExp("%us", false), TQString::number( (int)(usedSwap/1024.0+0.5)));
+        format.tqreplace( TQRegExp("%ts", false), TQString::number( (int)(totalSwap/1024.0+0.5)));
 
         meter->setValue(format);
         ++it;

@@ -22,8 +22,8 @@
 
 #include "monitor.h"
 
-KMilo::Monitor::Monitor(TQObject *parent, const char *name, const TQStringList&)
-: TQObject(parent, name) {
+KMilo::Monitor::Monitor(TQObject *tqparent, const char *name, const TQStringList&)
+: TQObject(tqparent, name) {
 	_poll = true;
 }
 
@@ -38,7 +38,7 @@ KMilo::Monitor::DisplayType KMilo::Monitor::poll() { return None; }
 
 int KMilo::Monitor::progress() const { return 42; }
 
-TQString KMilo::Monitor::message() const { return TQString::null; }
+TQString KMilo::Monitor::message() const { return TQString(); }
 TQPixmap KMilo::Monitor::customPixmap() const { return TQPixmap(); }
 bool KMilo::Monitor::init() { return true; }
 

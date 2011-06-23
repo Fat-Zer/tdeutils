@@ -28,7 +28,7 @@
  *
  * Hans Karlsson
  **/
-class SensorParams : public QObject
+class SensorParams : public TQObject
 {
 public:
     SensorParams( Meter* );

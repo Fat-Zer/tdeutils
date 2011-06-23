@@ -8,7 +8,7 @@
          http://www.kde.org
          http://www.hackerbuero.org $
    $ License: LGPL with the following explicit clarification:
-         This code may be linked against any version of the Qt toolkit
+         This code may be linked against any version of the TQt toolkit
          from Troll Tech, Norway. $
 
    $Id$
@@ -26,9 +26,9 @@
 #include "kvaio.h"
 #include "kmilointerface.h"
 
-KMiloKVaio::KMiloKVaio(TQObject *parent, const char *name,
+KMiloKVaio::KMiloKVaio(TQObject *tqparent, const char *name,
 		       const TQStringList& args)
-    : Monitor(parent, name, args),
+    : Monitor(tqparent, name, args),
       m_kvaio(0)
 {
     _poll = false;

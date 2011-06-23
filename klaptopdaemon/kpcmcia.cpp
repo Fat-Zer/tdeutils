@@ -175,7 +175,7 @@ tv.tv_sec = 0;  tv.tv_usec = 0;
           TQTextStream ts(&f);
           bool foundit = false;
           TQString _thisreg = "^Socket %1: ";
-          TQRegExp thisreg ( _thisreg.arg(_num) );
+          TQRegExp thisreg ( _thisreg.tqarg(_num) );
 
           if (flock(f.handle(), LOCK_SH)) return updated;
 
@@ -186,8 +186,8 @@ tv.tv_sec = 0;  tv.tv_usec = 0;
             TQString s;
             if (ts.eof()) break;
             s = ts.readLine();
-            if (s.contains(thisreg)) {
-               _cardname = s.right(s.length() - s.find(':') - 1);
+            if (s.tqcontains(thisreg)) {
+               _cardname = s.right(s.length() - s.tqfind(':') - 1);
                _cardname = _cardname.stripWhiteSpace();
                foundit = true;
                CHECK_CHANGED(oldValues, _cardname);
@@ -200,23 +200,23 @@ tv.tv_sec = 0;  tv.tv_usec = 0;
             int end;
             s.simplifyWhiteSpace();
 
-            end = s.find(TQRegExp("[ \r\t\n]"));
+            end = s.tqfind(TQRegExp("[ \r\t\n]"));
             s = s.remove(0, end+1);
 
-            end = s.find(TQRegExp("[ \r\t\n]"));
+            end = s.tqfind(TQRegExp("[ \r\t\n]"));
             _type = s;
             _type.truncate(end);
             s = s.remove(0, end+1);
 
-            end = s.find(TQRegExp("[ \r\t\n]"));
+            end = s.tqfind(TQRegExp("[ \r\t\n]"));
             _module = s;
             _module.truncate(end);
             s = s.remove(0, end+1);
 
-            end = s.find(TQRegExp("[ \r\t\n]"));
+            end = s.tqfind(TQRegExp("[ \r\t\n]"));
             s = s.remove(0, end+1);
 
-            end = s.find(TQRegExp("[ \r\t\n]"));
+            end = s.tqfind(TQRegExp("[ \r\t\n]"));
             _device = s;
             _device.truncate(end);
             s = s.remove(0, end+1);
@@ -500,7 +500,7 @@ TQFile df("/proc/devices");
 TQString thisreg;
 
    thisreg = "^[0-9]+ %1$";
-   thisreg = thisreg.arg(x);
+   thisreg = thisreg.tqarg(x);
 
    if (df.open(IO_ReadOnly)) {
       TQTextStream t(&df);
@@ -508,7 +508,7 @@ TQString thisreg;
       while (!t.eof()) {
          s = t.readLine();
 
-         if (s.contains(TQRegExp(thisreg))) {
+         if (s.tqcontains(TQRegExp(thisreg))) {
             int n = (s.left(3).stripWhiteSpace()).toInt();
             df.close();
             return n;
@@ -523,7 +523,7 @@ static int openDevice(dev_t dev) {
 TQString tmp_path = locateLocal("tmp", KGlobal::instance()->instanceName());
 TQString ext = "_socket%1";
 
-  tmp_path += ext.arg((int)dev);
+  tmp_path += ext.tqarg((int)dev);
 
   int rc = mknod(tmp_path.latin1(), (S_IFCHR | S_IREAD), dev);
   if (rc < 0) return -1;

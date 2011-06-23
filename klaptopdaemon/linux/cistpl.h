@@ -312,7 +312,7 @@ typedef struct cistpl_ide_interface_t {
 
 /* First feature byte */
 #define CISTPL_IDE_SILICON		0x04
-#define CISTPL_IDE_UNIQUE		0x08
+#define CISTPL_IDE_UNITQUE		0x08
 #define CISTPL_IDE_DUAL			0x10
 
 /* Second feature byte */
@@ -353,7 +353,7 @@ typedef struct cistpl_bar_t {
 typedef struct cistpl_config_t {
     u_char	last_idx;
     u_int	base;
-    u_int	rmask[4];
+    u_int	rtqmask[4];
     u_char	subtuples;
 } cistpl_config_t;
 
@@ -398,8 +398,8 @@ typedef struct cistpl_io_t {
 } cistpl_io_t;
 
 typedef struct cistpl_irq_t {
-    u_int	IRQInfo1;
-    u_int	IRQInfo2;
+    u_int	IRTQInfo1;
+    u_int	IRTQInfo2;
 } cistpl_irq_t;
 
 #define CISTPL_MEM_MAX_WIN	8

@@ -1,6 +1,6 @@
 <!DOCTYPE UI><UI version="3.2" stdsetdef="1">
 <class>AddUid</class>
-<widget class="QWidget">
+<widget class="TQWidget">
     <property name="name">
         <cstring>AddUid</cstring>
     </property>
@@ -34,7 +34,7 @@
                 <cstring>kLineEdit3</cstring>
             </property>
         </widget>
-        <widget class="QLabel" row="0" column="0">
+        <widget class="TQLabel" row="0" column="0">
             <property name="name">
                 <cstring>textLabel1</cstring>
             </property>
@@ -42,7 +42,7 @@
                 <string>Name (minimum 5 characters):</string>
             </property>
         </widget>
-        <widget class="QLabel" row="2" column="0">
+        <widget class="TQLabel" row="2" column="0">
             <property name="name">
                 <cstring>textLabel2</cstring>
             </property>
@@ -50,7 +50,7 @@
                 <string>Email:</string>
             </property>
         </widget>
-        <widget class="QLabel" row="4" column="0">
+        <widget class="TQLabel" row="4" column="0">
             <property name="name">
                 <cstring>textLabel3</cstring>
             </property>
@@ -60,5 +60,5 @@
         </widget>
     </grid>
 </widget>
-<layoutdefaults spacing="6" margin="11"/>
+<tqlayoutdefaults spacing="6" margin="11"/>
 </UI>

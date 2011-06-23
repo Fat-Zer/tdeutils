@@ -29,8 +29,8 @@
 
 using namespace KSim::Snmp;
 
-BrowseDialog::BrowseDialog( const HostConfig &hostConfig, const TQString &currentOid, TQWidget *parent, const char *name )
-    : BrowseDialogBase( parent, name ), m_host( hostConfig )
+BrowseDialog::BrowseDialog( const HostConfig &hostConfig, const TQString &currentOid, TQWidget *tqparent, const char *name )
+    : BrowseDialogBase( tqparent, name ), m_host( hostConfig )
 {
     stop->setGuiItem( KGuiItem( i18n( "&Stop" ), "stop" ) );
 
@@ -95,7 +95,7 @@ void BrowseDialog::startWalk( const Identifier &startOid )
 {
     stopWalker();
 
-    m_walker = new Walker( m_host, startOid, this );
+    m_walker = new Walker( m_host, startOid, TQT_TQOBJECT(this) );
     connect( m_walker, TQT_SIGNAL( resultReady( const Walker::Result & ) ),
              this, TQT_SLOT( insertBrowseItem( const Walker::Result & ) ) );
     connect( m_walker, TQT_SIGNAL( finished() ),
@@ -134,7 +134,7 @@ void BrowseDialog::applyFilter( TQListViewItem *item )
         return;
     }
 
-    if ( item->text( 0 ).find( filterText, 0 /*index*/, false /*case sensitive*/ ) == -1 ) {
+    if ( item->text( 0 ).tqfind( filterText, 0 /*index*/, false /*case sensitive*/ ) == -1 ) {
         item->setVisible( false );
         return;
     }

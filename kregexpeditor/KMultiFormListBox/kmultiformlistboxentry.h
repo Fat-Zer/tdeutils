@@ -31,8 +31,8 @@
    button. If you want to use this in you KMultiFormListBox, then you must do the
    following:
    @li Create a @ref TQPushButton as a sub-widget to your KMultiFormListBoxEntry.
-   @li Override the @ref indexButton method to return your QPushButton
-   @li Override the @ref idxString to return a @ref QString
+   @li Override the @ref indexButton method to return your TQPushButton
+   @li Override the @ref idxString to return a @ref TQString
    with a textual representation of the content in this KMultiFormListBoxEntry. This
    string will be used in the drop-down box which the user gets when he
    presses the Idx button.
@@ -45,12 +45,13 @@
    indexWindowPos method to return a start point for the drop down window and
    a width.
  **/
-class KMultiFormListBoxEntry : public QWidget
+class KMultiFormListBoxEntry : public TQWidget
 {
   Q_OBJECT
+  TQ_OBJECT
 
 public:
-  KMultiFormListBoxEntry(TQWidget *parent, const char *name) : TQWidget(parent,name) {}
+  KMultiFormListBoxEntry(TQWidget *tqparent, const char *name) : TQWidget(tqparent,name) {}
 
   virtual TQPushButton *indexButton() { return 0; }
   virtual TQWidget *valueWidget() { return 0; }
@@ -59,7 +60,7 @@ public:
 
   // This function must return a string representing the KMultiFormListBox. This is
   // used when showing the fast-search menu available from the `Idx' button.
-  virtual TQString idxString() { return TQString::fromLatin1(""); }
+  virtual TQString idxString() { return TQString::tqfromLatin1(""); }
 
 public slots:
   void acceptIndexButton();

@@ -35,7 +35,7 @@ Input::~Input()
 
 void Input::mUpdate(TQPainter*)
 {
-  edit->repaint();
+  edit->tqrepaint();
 }
 
 void Input::setValue(TQString text)
@@ -131,7 +131,7 @@ void Input::setFontColor(TQColor fontColor)
 
 TQColor Input::getFontColor() const
 {
-  const TQColorGroup &color = edit->colorGroup();
+  const TQColorGroup &color = edit->tqcolorGroup();
   return color.text();
 }
 
@@ -144,7 +144,7 @@ void Input::setSelectionColor(TQColor selectionColor)
 
 TQColor Input::getSelectionColor() const
 {
-  const TQColorGroup &color = edit->colorGroup();
+  const TQColorGroup &color = edit->tqcolorGroup();
   return color.highlight();
 }
 
@@ -157,7 +157,7 @@ void Input::setSelectedTextColor(TQColor selectedTextColor)
 
 TQColor Input::getSelectedTextColor() const
 {
-  const TQColorGroup &color = edit->colorGroup();
+  const TQColorGroup &color = edit->tqcolorGroup();
   return color.highlightedText();
 }
 

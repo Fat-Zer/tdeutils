@@ -18,7 +18,7 @@
 #ifndef characterswidget
 #define characterswidget
 
-#ifdef QT_ONLY
+#ifdef TQT_ONLY
 #include "compat.h"
 #else
 #include <kdialogbase.h>
@@ -41,12 +41,12 @@ class TQCheckBox;
 class CharactersWidget :public RegExpWidget
 {
 public:
-    CharactersWidget(RegExpEditorWindow* editorWindow, TQWidget *parent,
+    CharactersWidget(RegExpEditorWindow* editorWindow, TQWidget *tqparent,
                      const char *label = 0);
     CharactersWidget( TextRangeRegExp* regexp, RegExpEditorWindow* editorWindow,
-                      TQWidget* parent, const char* name = 0 );
+                      TQWidget* tqparent, const char* name = 0 );
     ~CharactersWidget();
-    virtual TQSize sizeHint() const;
+    virtual TQSize tqsizeHint() const;
 	virtual RegExp* regExp() const;
     virtual RegExpType type() const { return CHARSET; }
     virtual RegExpWidget* findWidgetToEdit( TQPoint globalPos );
@@ -72,7 +72,7 @@ private:
 class SingleEntry :public KMultiFormListBoxEntry
 {
 public:
-    SingleEntry(TQWidget* parent, const char* name = 0 );
+    SingleEntry(TQWidget* tqparent, const char* name = 0 );
     TQString text() const;
     void setText( TQString text );
     bool isEmpty() const;
@@ -87,7 +87,7 @@ private:
 class RangeEntry :public KMultiFormListBoxEntry
 {
 public:
-    RangeEntry(TQWidget* parent, const char* name = 0 );
+    RangeEntry(TQWidget* tqparent, const char* name = 0 );
     TQString fromText() const;
     TQString toText() const;
     void setFrom( TQString text );
@@ -103,7 +103,7 @@ private:
 class SingleFactory :public KMultiFormListBoxFactory
 {
 public:
-    KMultiFormListBoxEntry *create(TQWidget *parent) { return new SingleEntry( parent ); }
+    KMultiFormListBoxEntry *create(TQWidget *tqparent) { return new SingleEntry( tqparent ); }
     TQWidget *separator( TQWidget* ) { return 0; }
 };
 
@@ -113,7 +113,7 @@ public:
 class RangeFactory :public KMultiFormListBoxFactory
 {
 public:
-    KMultiFormListBoxEntry *create(TQWidget *parent) { return new RangeEntry( parent ); }
+    KMultiFormListBoxEntry *create(TQWidget *tqparent) { return new RangeEntry( tqparent ); }
     TQWidget *separator( TQWidget* ) { return 0; }
 };
 
@@ -123,8 +123,9 @@ public:
 class CharacterEdits : public KDialogBase
 {
     Q_OBJECT
+  TQ_OBJECT
 public:
-    CharacterEdits(TQWidget *parent = 0, const char *name = 0);
+    CharacterEdits(TQWidget *tqparent = 0, const char *name = 0);
 
 public slots:
     int exec( TextRangeRegExp* regexp );

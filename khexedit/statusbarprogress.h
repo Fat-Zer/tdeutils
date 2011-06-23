@@ -28,6 +28,7 @@
 class CStatusBarProgress : public TQFrame, public TQRangeControl 
 {
   Q_OBJECT
+  TQ_OBJECT
 
   public:
   /** 
@@ -46,18 +47,18 @@ class CStatusBarProgress : public TQFrame, public TQRangeControl
   /** 
   * Construct a default progress bar. Orientation is horizontal. 
   */
-  CStatusBarProgress(TQWidget *parent=0, const char *name=0);
+  CStatusBarProgress(TQWidget *tqparent=0, const char *name=0);
 
   /** 
   * Construct a KProgress bar with an orientation. 
   */
-  CStatusBarProgress(Orientation, TQWidget *parent=0, const char *name=0);
+  CStatusBarProgress(Orientation, TQWidget *tqparent=0, const char *name=0);
 
   /** 
   * Construct a KProgress bar with minimum, maximum and initial value. 
   */
   CStatusBarProgress(int minValue, int maxValue, int value, Orientation, 
-		     TQWidget *parent=0, const char *name=0);
+		     TQWidget *tqparent=0, const char *name=0);
 	
   /** 
   * Destructor 
@@ -81,7 +82,7 @@ class CStatusBarProgress : public TQFrame, public TQRangeControl
 
   /** 
   * Set the orientation of the progress bar. 
-  * Allowed values are Horizonzal and Vertical. 
+  * Allowed values are Horizonzal andQt::Vertical. 
   */
   void setOrientation(Orientation);
 	
@@ -114,7 +115,7 @@ class CStatusBarProgress : public TQFrame, public TQRangeControl
    * Returns the recommended width for vertical progress bars or
    * the recommended height for vertical progress bars
    */
-  virtual TQSize sizeHint() const;
+  virtual TQSize tqsizeHint() const;
 	
 		
   public slots:
@@ -138,9 +139,9 @@ class CStatusBarProgress : public TQFrame, public TQRangeControl
 	
   private:
     TQPixmap     *mBarPixmap;
-    QColor	mBarColor;
-    QColor	mBarTextColor;
-    QColor	mTextColor;
+    TQColor	mBarColor;
+    TQColor	mBarTextColor;
+    TQColor	mTextColor;
     TQRect       fr;
     BarStyle    mBarStyle;
     Orientation mOrientation;

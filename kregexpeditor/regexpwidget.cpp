@@ -16,7 +16,7 @@
  *  Boston, MA 02110-1301, USA.
  **/
 
-#ifdef QT_ONLY
+#ifdef TQT_ONLY
   #include "compat.h"
 #else
   #include "regexpwidget.moc"
@@ -33,9 +33,9 @@ const int RegExpWidget::pw = 1;
 const int RegExpWidget::bdSize = 5;
 const int RegExpWidget::space = 5;
 
-RegExpWidget::RegExpWidget(RegExpEditorWindow* editorWindow, TQWidget *parent,
+RegExpWidget::RegExpWidget(RegExpEditorWindow* editorWindow, TQWidget *tqparent,
                            const char *name)
-  : TQWidget(parent, name ? name : "RegExpWidget", WNoMousePropagation ),
+  : TQWidget(tqparent, name ? name : "RegExpWidget", WNoMousePropagation ),
     _editorWindow( editorWindow ),  _isSelected( false ), _isToplevel( false )
 {
 }
@@ -43,29 +43,29 @@ RegExpWidget::RegExpWidget(RegExpEditorWindow* editorWindow, TQWidget *parent,
 
 void RegExpWidget::addNewChild(DragAccepter *, RegExpWidget *)
 {
-  qFatal("This widget should not expect any children");
+  qFatal("This widget should not expect any tqchildren");
 }
 
 void RegExpWidget::addNewConcChild(DragAccepter *, ConcWidget *)
 {
-  qFatal("This widget should not expect any children");
+  qFatal("This widget should not expect any tqchildren");
 }
 
 void RegExpWidget::setConcChild(ConcWidget *)
 {
-  qFatal("This widget should not expect any children");
+  qFatal("This widget should not expect any tqchildren");
 }
 
-bool RegExpWidget::updateSelection(bool parentSelected)
+bool RegExpWidget::updateSelection(bool tqparentSelected)
 {
-  bool selected = ( parentSelected ||
+  bool selected = ( tqparentSelected ||
                     _editorWindow->selectionOverlap( mapToGlobal( TQPoint(0,0) ), size() ) )
     && !_isToplevel;
 
   if ( _isSelected != selected ) {
     // Selection state changed
     _isSelected = selected;
-    repaint();
+    tqrepaint();
     return true;
   }
   return false;
@@ -119,7 +119,7 @@ void RegExpWidget::mousePressEvent ( TQMouseEvent* event )
   if ( _editorWindow->isPasteing() || _editorWindow->isInserting() )
     return;
 
-  if ( event->button() == LeftButton ) {
+  if ( event->button() == Qt::LeftButton ) {
     if ( ! _editorWindow->pointSelected( TQCursor::pos() ) ) {
       _editorWindow->clearSelection( true );
       if ( dynamic_cast<DragAccepter*>(this) == 0 && dynamic_cast<ConcWidget*>(this) == 0 ) {
@@ -131,12 +131,12 @@ void RegExpWidget::mousePressEvent ( TQMouseEvent* event )
                     event->button(), event->state());
     TQApplication::sendEvent( _editorWindow, &ev );
   }
-  else if ( event->button() == RightButton ) {
+  else if ( event->button() == Qt::RightButton ) {
     _editorWindow->showRMBMenu( true );
   }
 
-  // currently (Qt3.0) it seems like qt do not accept that the accept flag is set,
-  // and thus sends the event to the parent - given that the following line is in.
+  // currently (TQt3.0) it seems like qt do not accept that the accept flag is set,
+  // and thus sends the event to the tqparent - given that the following line is in.
   // It doesn't make any change to leave it out.
   // 25 Oct. 2001 19:03 -- Jesper K. Pedersen
   //  TQWidget::mousePressEvent( event );
@@ -164,10 +164,10 @@ TQRect RegExpWidget::selectionRect() const
 
 void RegExpWidget::enterEvent( TQEvent * )
 {
-  updateCursorShape();
+  updatetqCursorShape();
 }
 
-void RegExpWidget::updateCursorShape()
+void RegExpWidget::updatetqCursorShape()
 {
   TQCursor cursor;
 
@@ -191,7 +191,7 @@ void RegExpWidget::updateCursorShape()
 
 void RegExpWidget::updateCursorRecursively()
 {
-  updateCursorShape();
+  updatetqCursorShape();
 }
 
 
@@ -207,7 +207,7 @@ bool RegExpWidget::acceptWidgetInsert( RegExpType tp ) const
 
 RegExpWidget* RegExpWidget::widgetUnderPoint( TQPoint globalPos, bool )
 {
-  if ( TQRect(mapToGlobal( TQPoint(0,0) ), size() ).contains( globalPos ) )
+  if ( TQRect(mapToGlobal( TQPoint(0,0) ), size() ).tqcontains( globalPos ) )
     return this;
   else
     return 0;

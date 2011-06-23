@@ -63,12 +63,13 @@
  * and push a bunch of actions on it, then run exec()
  * on the stack and wait for the done() signal.
 */
-class KFAction : public QObject
+class KFAction : public TQObject
 {
 Q_OBJECT
+  TQ_OBJECT
 
 public:
-	KFAction(TQObject *parent = 0L);
+	KFAction(TQObject *tqparent = 0L);
 	virtual ~KFAction();
 	
 public slots:
@@ -115,9 +116,10 @@ signals:
 class KFActionQueue : public KFAction
 {
 Q_OBJECT
+  TQ_OBJECT
 
 public:
-	KFActionQueue(TQObject *parent = 0L);
+	KFActionQueue(TQObject *tqparent = 0L);
 	virtual ~KFActionQueue();
 	
 	/**
@@ -174,9 +176,10 @@ class KProcess;
 class FloppyAction : public KFAction
 {
 Q_OBJECT
+  TQ_OBJECT
 
 public:
-	FloppyAction(TQObject *parent = 0L);
+	FloppyAction(TQObject *tqparent = 0L);
 	
 	/**
 	 * Kills the running process, if one exists.
@@ -249,7 +252,7 @@ protected:
 class FDFormat : public FloppyAction
 {
 public:
-	FDFormat(TQObject *parent = 0L);
+	FDFormat(TQObject *tqparent = 0L);
 	
 	virtual void exec();
 
@@ -285,7 +288,7 @@ protected:
 class DDZeroOut : public FloppyAction
 {
 public:
-    DDZeroOut(TQObject *parent = 0L);
+    DDZeroOut(TQObject *tqparent = 0L);
 
     virtual void exec();
 
@@ -315,7 +318,7 @@ protected:
 class FATFilesystem : public FloppyAction
 {
 public:
-	FATFilesystem(TQObject *parent = 0L);
+	FATFilesystem(TQObject *tqparent = 0L);
 	
 	virtual void exec();
 	
@@ -346,7 +349,7 @@ protected:
 class Ext2Filesystem : public FloppyAction
 {
 public:
-	Ext2Filesystem(TQObject *parent = 0L);
+	Ext2Filesystem(TQObject *tqparent = 0L);
 	
 	virtual void exec();
 	
@@ -374,7 +377,7 @@ protected:
 class UFSFilesystem : public FloppyAction
 {
 public:
-	UFSFilesystem(TQObject *parent = 0L);
+	UFSFilesystem(TQObject *tqparent = 0L);
 	
 	virtual void exec();
 	
@@ -396,7 +399,7 @@ protected:
 class MinixFilesystem : public FloppyAction
 {
 public:
-	MinixFilesystem(TQObject *parent = 0L);
+	MinixFilesystem(TQObject *tqparent = 0L);
 	
 	virtual void exec();
 	

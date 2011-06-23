@@ -38,7 +38,7 @@ public:
 	const TQString &id(void) const { return theId; }
 };
 
-class Remote : public QXmlDefaultHandler
+class Remote : public TQXmlDefaultHandler
 {
 	TQString theName, theId, theAuthor;
 	TQDict<RemoteButton> theButtons;

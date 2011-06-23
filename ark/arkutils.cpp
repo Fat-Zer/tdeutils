@@ -69,7 +69,7 @@
 #include <klocale.h>
 #include <klargefile.h>
 
-// Qt includes
+// TQt includes
 #include <tqfile.h>
 
 #include "arkutils.h"
@@ -101,7 +101,7 @@ TQString ArkUtils::getTimeStamp(const TQString &_month,
 
   TQString year, timestamp;
 
-  if (_yearOrTime.contains(":"))
+  if (_yearOrTime.tqcontains(":"))
     // it has a timestamp so we have to figure out the year
     {
       year.sprintf("%d", ArkUtils::getYear(nMonth, thisYear, thisMonth));
@@ -147,7 +147,7 @@ int ArkUtils::getMonth(const char *strMonth)
 
 int ArkUtils::getYear(int theMonth, int thisYear, int thisMonth)
 {
-  int monthDiff = QABS(thisMonth - theMonth);
+  int monthDiff = TQABS(thisMonth - theMonth);
   if (monthDiff > 6)
     return (thisYear - 1);
   else
@@ -176,7 +176,7 @@ TQString ArkUtils::fixYear(const TQString& strYear)
     return TQString::number( y );
   }
   else
-    return TQString::null;
+    return TQString();
 }
 
 bool

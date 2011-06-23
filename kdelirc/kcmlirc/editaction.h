@@ -26,6 +26,7 @@
 class EditAction : public EditActionBase
 {
 	Q_OBJECT
+  TQ_OBJECT
 	IRAIt theAction;
 	TQMap<TQString, TQString> applicationMap, functionMap;
 	TQMap<TQString, TQString> nameProgramMap;
@@ -48,7 +49,7 @@ public:
 	virtual void updateDCOPObjects();
 	virtual void updateDCOPFunctions();
 
-	EditAction(IRAIt action, TQWidget *parent = 0, const char *name = 0);
+	EditAction(IRAIt action, TQWidget *tqparent = 0, const char *name = 0);
 	~EditAction();
 };
 

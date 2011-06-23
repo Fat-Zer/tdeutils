@@ -26,7 +26,7 @@
 #include "karamba.h"
 #include "tqwidgetlist.h"
 
-bool KarambaSessionManaged::saveState(QSessionManager&)
+bool KarambaSessionManaged::saveState(TQSessionManager&)
 {
   KConfig* config = kapp->sessionConfig();
 
@@ -34,7 +34,7 @@ bool KarambaSessionManaged::saveState(QSessionManager&)
 
   TQString openThemes="";
 
-  TQWidgetList  *list = TQApplication::allWidgets();
+  TQWidgetList  *list = TQApplication::tqallWidgets();
   TQWidgetListIt it( *list );         // iterate over the widgets
   TQWidget * w;
   while ( (w=it.current()) != 0 ) // for each widget...
@@ -57,7 +57,7 @@ bool KarambaSessionManaged::saveState(QSessionManager&)
   return true;
 }
 
-bool KarambaSessionManaged::commitData(QSessionManager&)
+bool KarambaSessionManaged::commitData(TQSessionManager&)
 {
   return true;
 }

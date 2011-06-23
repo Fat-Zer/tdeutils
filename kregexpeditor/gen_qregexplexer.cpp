@@ -454,7 +454,7 @@ char *yytext;
   #include <tqstring.h>
   #include "textrangeregexp.h"
   #include "gen_qregexpparser.hh"
-#ifdef QT_ONLY
+#ifdef TQT_ONLY
   #include "compat.h"
 #endif
   void parseRange( char* txt, int* min, int* max );  

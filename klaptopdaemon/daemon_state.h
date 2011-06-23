@@ -56,9 +56,9 @@ public:
 	int	power_action[2];	// what to do when this action is triggered
 	int	power_brightness[2];	// which brightness level to switch to
 	bool	power_brightness_enabled[2];	// and whether to switch
-	QString	power_performance[2];	// which performance level to switch to
+	TQString	power_performance[2];	// which performance level to switch to
 	bool	power_performance_enabled[2];	// and whether to switch
-	QString	power_throttle[2];	// which throttling level to switch to
+	TQString	power_throttle[2];	// which throttling level to switch to
 	bool	power_throttle_enabled[2];	// and whether to switch
 	bool	lav_enabled[2];		// check LAV first
 	float	lav_val[2];		// don't act if higher than this
@@ -81,9 +81,9 @@ public:
 	bool	do_brightness[2];
 	int	val_brightness[2];
 	bool	do_performance[2];
-	QString	val_performance[2];
+	TQString	val_performance[2];
 	bool	do_throttle[2];
-	QString	val_throttle[2];
+	TQString	val_throttle[2];
         bool    time_based_action_low, time_based_action_critical;
 	int	low[4];
 	int	poll;			// how often to pol

@@ -48,13 +48,13 @@
 #include <kiconeffect.h>
 extern void wake_laptop_daemon();
 
-laptop_dock::laptop_dock( laptop_daemon* parent )
+laptop_dock::laptop_dock( laptop_daemon* tqparent )
   : KSystemTray()
 {
     setCaption(i18n("KLaptop Daemon"));
     KGlobal::locale()->insertCatalogue("klaptopdaemon"); // For translation of klaptopdaemon messages
     _pcmcia = NULL;
-    pdaemon = parent;
+    pdaemon = tqparent;
     current_code = -1;
     brightness_widget = 0;
     instance = new KInstance("klaptopdaemon");
@@ -202,7 +202,7 @@ laptop_dock::invokeBrightness()
 		brightness_slider->setMinimumHeight(40);
 		brightness_slider->setMinimumWidth(15);
 		connect(brightness_slider, TQT_SIGNAL(valueChanged(int)), this, TQT_SLOT(invokeBrightnessSlider(int)));
-		brightness_widget->resize(brightness_widget->sizeHint());
+		brightness_widget->resize(brightness_widget->tqsizeHint());
 	} else {
 		brightness_slider->setValue(255-brightness);
 	}
@@ -215,7 +215,7 @@ laptop_dock::invokeBrightness()
 		TQPoint pos = TQCursor::pos();
 		int x = pos.x();
 		int y = pos.y();
-		y -= brightness_widget->geometry().height();
+		y -= brightness_widget->tqgeometry().height();
 		int w = brightness_widget->width();
 		int h = brightness_widget->height();
 		if (x+w > sw)
@@ -268,7 +268,7 @@ void laptop_dock::slotGoRoot(int /*id*/) {
 
 
 void laptop_dock::slotHide() {
-	int confirm = KMessageBox::questionYesNo(0, i18n("Are you sure you want to hide the battery monitor? Your battery will still be monitored in the background."), TQString::null, i18n("Hide Monitor"), i18n("Do Not Hide"), "hideConfirm");
+	int confirm = KMessageBox::questionYesNo(0, i18n("Are you sure you want to hide the battery monitor? Your battery will still be monitored in the background."), TQString(), i18n("Hide Monitor"), i18n("Do Not Hide"), "hideConfirm");
 
 	if (confirm != KMessageBox::Yes)
 		return;
@@ -286,12 +286,12 @@ void laptop_dock::slotHide() {
 
 
 void laptop_dock::slotQuit() {
-	int confirm = KMessageBox::questionYesNo(0, i18n("Are you sure you want to quit the battery monitor?"), TQString::null, KStdGuiItem::quit(), KStdGuiItem::cancel(), "quitConfirm");
+	int confirm = KMessageBox::questionYesNo(0, i18n("Are you sure you want to quit the battery monitor?"), TQString(), KStdGuiItem::quit(), KStdGuiItem::cancel(), "quitConfirm");
 
 	if (confirm != KMessageBox::Yes)
 		return;
 
-	confirm = KMessageBox::questionYesNo(0, i18n("Do you wish to disable the battery monitor from starting in the future?"), TQString::null, i18n("Disable"), i18n("Keep Enabled"), "restartMonitor");
+	confirm = KMessageBox::questionYesNo(0, i18n("Do you wish to disable the battery monitor from starting in the future?"), TQString(), i18n("Disable"), i18n("Keep Enabled"), "restartMonitor");
 
 	if (confirm == KMessageBox::Yes) {
 		// just tell ourselves to hide the battery
@@ -362,7 +362,7 @@ KPCMCIAInfo *f =  new KPCMCIAInfo(_pcmcia);
 
 void laptop_dock::mousePressEvent( TQMouseEvent *event )
 {
- 	if(event->button() == LeftButton) {
+ 	if(event->button() == Qt::LeftButton) {
 		TQPopupMenu *popup = new TQPopupMenu(0, "popup");
 
 		if (!pdaemon->exists()) {
@@ -375,10 +375,10 @@ void laptop_dock::mousePressEvent( TQMouseEvent *event )
 					TQString num3;
 					num3.setNum(pdaemon->left%60);
 					num3 = num3.rightJustify(2, '0');
-					tmp = i18n("%1:%2 hours left").arg(pdaemon->left/60).arg(num3);
+					tmp = i18n("%1:%2 hours left").tqarg(pdaemon->left/60).tqarg(num3);
 				} else {
 					// no remaining time available
-					tmp = i18n("%1% charged").arg(pdaemon->val);
+					tmp = i18n("%1% charged").tqarg(pdaemon->val);
 				}
 			} else {
 				tmp = i18n("No Battery");
@@ -402,7 +402,7 @@ void laptop_dock::mousePressEvent( TQMouseEvent *event )
 			TQString speed = laptop_portable::cpu_frequency();
 			if (!speed.isEmpty()) {
 				popup->insertSeparator();
-				popup->insertItem(i18n("CPU: %1").arg(speed));
+				popup->insertItem(i18n("CPU: %1").tqarg(speed));
 			}
 		}
 
@@ -449,7 +449,7 @@ void laptop_dock::mousePressEvent( TQMouseEvent *event )
 
                          // add a few bits of information
                          thisSub->insertSeparator();
-                         thisSub->insertItem(slotname.arg(thiscard->num()+1));
+                         thisSub->insertItem(slotname.tqarg(thiscard->num()+1));
                          if (thiscard->status() & CARD_STATUS_READY)
                             thisSub->insertItem(i18n("Ready"));
                          if (thiscard->status() & CARD_STATUS_BUSY)
@@ -469,15 +469,15 @@ void laptop_dock::mousePressEvent( TQMouseEvent *event )
 }
 void laptop_dock::mouseReleaseEvent( TQMouseEvent *e )
 {
-    if ( !rect().contains( e->pos() ) )
+    if ( !TQT_TQRECT_OBJECT(rect()).tqcontains( e->pos() ) )
         return;
 
     switch ( e->button() ) {
-    case LeftButton:
+    case Qt::LeftButton:
         break;
-    case MidButton:
+    case Qt::MidButton:
         // fall through
-    case RightButton:
+    case Qt::RightButton:
 	{
 		KPopupMenu *menu = contextMenu();
         	contextMenuAboutToShow( menu );
@@ -519,7 +519,7 @@ void laptop_dock::invokeLockSuspend()
 {
   DCOPClient* client = kapp->dcopClient();
   if (client)
-      client->send("kdesktop", "KScreensaverIface", "lock()", "");
+      client->send("kdesktop", "KScreensaverIface", "lock()", TQString(""));
   laptop_portable::invoke_suspend();
 }
 
@@ -568,23 +568,23 @@ void laptop_dock::displayPixmap()
 	// at this point, we have the file to display.  so display it
 
 	TQImage image = pm.convertToImage();
-	const TQBitmap *bmmask = pm.mask();
-	TQImage mask;
-	if (bmmask)
-		mask = bmmask->convertToImage();
+	const TQBitmap *bmtqmask = pm.tqmask();
+	TQImage tqmask;
+	if (bmtqmask)
+		tqmask = bmtqmask->convertToImage();
 
 	int w = image.width();
 	int h = image.height();
 	int count = 0;
-	QRgb rgb;
+	TQRgb rgb;
 	int x, y;
 	for (x = 0; x < w; x++)
 	for (y = 0; y < h; y++)
-	if (!bmmask || mask.pixelIndex(x, y) != 0){
+	if (!bmtqmask || tqmask.pixelIndex(x, y) != 0){
 		rgb = image.pixel(x, y);
-		if (qRed(rgb) == 0xff &&
-		    qGreen(rgb) == 0xff &&
-		    qBlue(rgb) == 0xff)
+		if (tqRed(rgb) == 0xff &&
+		    tqGreen(rgb) == 0xff &&
+		    tqBlue(rgb) == 0xff)
 			count++;
 	}
 	int c = (count*pdaemon->val)/100;
@@ -597,7 +597,7 @@ void laptop_dock::displayPixmap()
 
 	if (c) {
 		uint ui;
-		QRgb blue = qRgb(0x00,0x00,0xff);
+		TQRgb blue = tqRgb(0x00,0x00,0xff);
 
 		if (image.depth() <= 8) {
 			ui = image.numColors();		// this fix thanks to Sven Krumpke
@@ -609,11 +609,11 @@ void laptop_dock::displayPixmap()
 
 		for (y = h-1; y >= 0; y--)
 		for (x = 0; x < w; x++)
-		if (!bmmask || mask.pixelIndex(x, y) != 0){
+		if (!bmtqmask || tqmask.pixelIndex(x, y) != 0){
 			rgb = image.pixel(x, y);
-			if (qRed(rgb) == 0xff &&
-		    	    qGreen(rgb) == 0xff &&
-		    	    qBlue(rgb) == 0xff) {
+			if (tqRed(rgb) == 0xff &&
+		    	    tqGreen(rgb) == 0xff &&
+		    	    tqBlue(rgb) == 0xff) {
 				image.setPixel(x, y, ui);
 				c--;
 				if (c <= 0)
@@ -641,10 +641,10 @@ quit:
 				num3.setNum(pdaemon->left%60);
 				num3 = num3.rightJustify(2, '0');
 				tmp = i18n("Plugged in - %1% charged (%2:%3 hours left)")
-					.arg(pdaemon->val).arg(pdaemon->left/60).arg(num3);
+					.tqarg(pdaemon->val).tqarg(pdaemon->left/60).tqarg(num3);
 			} else {
 				// no remaining time available
-				tmp = i18n("Plugged in - %1% charged").arg(pdaemon->val);
+				tmp = i18n("Plugged in - %1% charged").tqarg(pdaemon->val);
 			}
 		} else {
 			tmp = i18n("Plugged in - no battery");
@@ -658,9 +658,9 @@ quit:
 				num3.setNum(pdaemon->left%60);
 				num3 = num3.rightJustify(2, '0');
 				tmp = i18n("Running on batteries - %1% charged (%2:%3 hours left)")
-						.arg(pdaemon->val).arg(pdaemon->left/60).arg(num3);
+						.tqarg(pdaemon->val).tqarg(pdaemon->left/60).tqarg(num3);
 			} else {
-				tmp = i18n("Running on batteries - %1% charged").arg(pdaemon->val);
+				tmp = i18n("Running on batteries - %1% charged").tqarg(pdaemon->val);
 			}
 		} else {
 			// running without any power source...
@@ -708,7 +708,7 @@ quit:
             // and which has a transparent background.
             // Unfortunately this required the following twisted code because for some
             // reason text that is drawn on a transparent pixmap is invisible
-            // (apparently the alpha channel isn't changed when the text is drawn).
+            // (aptqparently the alpha channel isn't changed when the text is drawn).
             // Therefore I have to draw the text on a solid background and then remove
             // the background by making it transparent with TQPixmap::setMask. This
             // involves the slow createHeuristicMask() function (from the API docs:
@@ -722,11 +722,11 @@ quit:
             // unread messages, but every other approach I tried failed miserably.
             //                                                           IK, 2003-09-22
             TQPixmap percentagePixmap( oldPixmapWidth, oldPixmapHeight );
-            percentagePixmap.fill( Qt::white );
+            percentagePixmap.fill( TQt::white );
             TQPainter p( &percentagePixmap );
             p.setFont( percentageFont );
-            p.setPen( Qt::black );
-            p.drawText( percentagePixmap.rect(), Qt::AlignCenter, levelString );
+            p.setPen( TQt::black );
+            p.drawText( percentagePixmap.rect(), TQt::AlignCenter, levelString );
             percentagePixmap.setMask( percentagePixmap.createHeuristicMask() );
             TQImage percentageImage = percentagePixmap.convertToImage();
         
@@ -743,8 +743,8 @@ quit:
         {
             TQPixmap q;
             q.convertFromImage(image);
-            if (bmmask)
-                    q.setMask(*bmmask);
+            if (bmtqmask)
+                    q.setMask(*bmtqmask);
             setPixmap(q);
         }
         adjustSize();

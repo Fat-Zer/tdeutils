@@ -34,12 +34,13 @@ namespace KSim
   class Frame : public TQWidget, public KSim::Base
   {
     Q_OBJECT
+  TQ_OBJECT
     public:
-      Frame(int type, TQWidget *parent, const char *name = 0);
+      Frame(int type, TQWidget *tqparent, const char *name = 0);
       ~Frame();
 
       const TQPixmap *const background() const { return &m_background; }
-      virtual void configureObject(bool repaintWidget=true);
+      virtual void configureObject(bool tqrepaintWidget=true);
 
     protected:
       virtual void paintEvent(TQPaintEvent *);

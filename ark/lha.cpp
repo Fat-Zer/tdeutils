@@ -67,7 +67,7 @@ bool LhaArch::processLine( const TQCString &line )
   char columns[13][80];
   char filename[4096];
 
-  if ( line.contains( "[generic]" ) )
+  if ( line.tqcontains( "[generic]" ) )
   {
     sscanf( _line,
             " %79[]\\[generic] %79[0-9] %79[0-9] %79[0-9.%*] %10[-a-z0-9 ] %3[A-Za-z]%1[ ]%2[0-9 ]%1[ ]%5[ 0-9:]%1[ ]%4095[^\n]",
@@ -76,7 +76,7 @@ bool LhaArch::processLine( const TQCString &line )
             columns[9], filename );
     strcpy( columns[1], " " );
   }
-  else if ( line.contains( "[MS-DOS]" ) )
+  else if ( line.tqcontains( "[MS-DOS]" ) )
   {
     sscanf( _line,
             " %79[]\\[MS-DOS] %79[0-9] %79[0-9] %79[0-9.%*] %10[-a-z0-9 ] %3[A-Za-z]%1[ ]%2[0-9 ]%1[ ]%5[ 0-9:]%1[ ]%4095[^\n]",
@@ -103,7 +103,7 @@ bool LhaArch::processLine( const TQCString &line )
   TQString file = filename;
   TQString name, link;
   bool bLink = false;
-  int pos = file.find( " -> " );
+  int pos = file.tqfind( " -> " );
   if ( pos != -1 )
   {
     bLink = true;
@@ -154,7 +154,7 @@ void LhaArch::open()
   if ( !kp->start( KProcess::NotifyOnExit, KProcess::AllOutput ) )
   {
     KMessageBox::error( 0, i18n( "Could not start a subprocess." ) );
-    emit sigOpen( this, false, TQString::null, 0 );
+    emit sigOpen( this, false, TQString(), 0 );
   }
 }
 

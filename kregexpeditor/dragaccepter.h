@@ -30,9 +30,9 @@ class DragAccepter :public RegExpWidget
   friend class MultiContainerWidget;
 
 public:
-  DragAccepter(RegExpEditorWindow* editorWindow, RegExpWidget *parent,
+  DragAccepter(RegExpEditorWindow* editorWindow, RegExpWidget *tqparent,
                const char *name = 0);
-  TQSize sizeHint() const;
+  TQSize tqsizeHint() const;
 	virtual RegExp* regExp() const;
   virtual RegExpType type() const { return DRAGACCEPTER; }
   void setDrawLine( bool drawLine ) { _drawLine = drawLine; }

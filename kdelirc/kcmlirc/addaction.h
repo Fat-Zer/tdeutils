@@ -27,6 +27,7 @@ class TQListViewItem;
 class AddAction : public AddActionBase
 {
 	Q_OBJECT
+  TQ_OBJECT
 
 	int curPage;
 	Mode theMode;
@@ -66,7 +67,7 @@ public:
 	TQMap<TQListViewItem *, bool> uniqueProgramMap;
 	TQMap<TQListViewItem *, TQString> nameProgramMap;
 
-	AddAction(TQWidget *parent, const char *name, const Mode &mode);
+	AddAction(TQWidget *tqparent, const char *name, const Mode &mode);
 	~AddAction();
 };
 

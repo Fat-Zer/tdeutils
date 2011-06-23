@@ -69,13 +69,14 @@ class FileLVI : public KListViewItem
 		TQString   m_entryName;
 };
 
-typedef TQValueList< QPair< TQString, Qt::AlignmentFlags > > ColumnList;
+typedef TQValueList< TQPair< TQString, TQt::AlignmentFlags > > ColumnList;
 
 class FileListView: public KListView
 {
 	Q_OBJECT
+  TQ_OBJECT
 	public:
-		FileListView( TQWidget *parent = 0, const char* name = 0 );
+		FileListView( TQWidget *tqparent = 0, const char* name = 0 );
 
 		FileLVI *currentItem() {return ((FileLVI *) KListView::currentItem());}
 
@@ -152,7 +153,7 @@ class FileListView: public KListView
 
 	private:
 		FileLVI* findParent( const TQString& fullname );
-		TQStringList childrenOf( FileLVI* parent );
+		TQStringList tqchildrenOf( FileLVI* tqparent );
 
 		TQMap<int, columnName> m_columnMap;
 		bool m_pressed;

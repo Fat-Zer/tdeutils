@@ -28,7 +28,7 @@
 #include <stdlib.h>
 #include <fcntl.h>
 
-// Qt includes
+// TQt includes
 #include <tqdir.h>
 
 // KDE includes
@@ -60,7 +60,7 @@ CompressedFile::CompressedFile( ArkWidget *_gui, const TQString & _fileName, con
   m_openAsMimeType = _openAsMimeType;
   kdDebug(1601) << "CompressedFile constructor" << endl;
   m_tempDirectory = new KTempDir( _gui->tmpDir()
-                          + TQString::fromLatin1( "compressed_file_temp" ) );
+                          + TQString::tqfromLatin1( "compressed_file_temp" ) );
   m_tempDirectory->setAutoDelete( true );
   m_tmpdir = m_tempDirectory->name();
   initData();
@@ -97,8 +97,8 @@ void CompressedFile::setHeaders()
 
 void CompressedFile::initData()
 {
-    m_unarchiver_program = TQString::null;
-    m_archiver_program = TQString::null;
+    m_unarchiver_program = TQString();
+    m_archiver_program = TQString();
 
     TQString mimeType;
     if ( !m_openAsMimeType.isNull() )
@@ -155,7 +155,7 @@ TQString CompressedFile::extension()
   TQStringList::Iterator it = m_defaultExtensions.begin();
   for( ; it != m_defaultExtensions.end(); ++it )
     if( m_filename.endsWith( *it ) )
-        return TQString::null;
+        return TQString();
   return m_defaultExtensions.first();
 }
 
@@ -212,7 +212,7 @@ void CompressedFile::open()
   if (kp->start(KProcess::NotifyOnExit, KProcess::AllOutput) == false)
     {
       KMessageBox::error( 0, i18n("Could not start a subprocess.") );
-      emit sigOpen(this, false, TQString::null, 0 );
+      emit sigOpen(this, false, TQString(), 0 );
     }
 
   kdDebug(1601) << "-CompressedFile::open" << endl;
@@ -235,7 +235,7 @@ void CompressedFile::slotUncompressDone(KProcess *_kp)
 
   if ( !bSuccess )
   {
-      emit sigOpen( this, false, TQString::null, 0 );
+      emit sigOpen( this, false, TQString(), 0 );
       return;
   }
 
@@ -289,7 +289,7 @@ void CompressedFile::addFile( const TQStringList &urls )
   proc.start(KProcess::Block);
 
   m_tmpfile = file.right(file.length()
-			 - file.findRev("/")-1);
+			 - file.tqfindRev("/")-1);
   m_tmpfile = m_tmpdir + '/' + m_tmpfile;
 
   kdDebug(1601) << "Temp file name is " << m_tmpfile << endl;

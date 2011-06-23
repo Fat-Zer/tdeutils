@@ -50,20 +50,20 @@ class KSim::Label::Private
     bool showShadow;
 };
 
-KSim::Label::Label(TQWidget *parent, const char *name, WFlags fl)
-   : TQWidget(parent, name, fl)
+KSim::Label::Label(TQWidget *tqparent, const char *name, WFlags fl)
+   : TQWidget(tqparent, name, fl)
 {
   initWidget(KSim::Types::None);
 }
 
-KSim::Label::Label(int type, TQWidget *parent, const char *name, 
-   WFlags fl) : TQWidget(parent, name, fl)
+KSim::Label::Label(int type, TQWidget *tqparent, const char *name, 
+   WFlags fl) : TQWidget(tqparent, name, fl)
 {
   initWidget(type);
 }
 
-KSim::Label::Label(int type, const TQString &text, TQWidget *parent,
-   const char *name, WFlags fl) : TQWidget(parent, name, fl)
+KSim::Label::Label(int type, const TQString &text, TQWidget *tqparent,
+   const char *name, WFlags fl) : TQWidget(tqparent, name, fl)
 {
   initWidget(type);
   setText(text);
@@ -79,7 +79,7 @@ const TQString &KSim::Label::text() const
   return d->text;
 }
 
-void KSim::Label::configureObject(bool repaintWidget)
+void KSim::Label::configureObject(bool tqrepaintWidget)
 {
   TQString image = themeLoader().current().meterPixmap(type(), false);
   if (image.isEmpty())
@@ -88,10 +88,10 @@ void KSim::Label::configureObject(bool repaintWidget)
   d->meterImage.load(image);
   KSim::ThemeLoader::self().reColourImage(d->meterImage);
   d->background = d->meterImage.smoothScale(size());
-  TQSize oldSize = sizeHint();
+  TQSize oldSize = tqsizeHint();
 
   setConfigValues();
-  relayoutLabel(oldSize, repaintWidget);
+  retqlayoutLabel(oldSize, tqrepaintWidget);
 }
 
 void KSim::Label::setPixmap(const TQPixmap &pixmap)
@@ -99,10 +99,10 @@ void KSim::Label::setPixmap(const TQPixmap &pixmap)
   if (pixmap.serialNumber() == d->sidePixmap.serialNumber())
     return;
 
-  TQSize oldSize = sizeHint();
+  TQSize oldSize = tqsizeHint();
   d->sidePixmap = pixmap;
 
-  relayoutLabel(oldSize);
+  retqlayoutLabel(oldSize);
 }
 
 const TQPixmap &KSim::Label::pixmap() const
@@ -110,7 +110,7 @@ const TQPixmap &KSim::Label::pixmap() const
   return d->sidePixmap;
 }
 
-TQSize KSim::Label::sizeHint() const
+TQSize KSim::Label::tqsizeHint() const
 {
   int width = fontMetrics().size(SingleLine, text()).width();
   if (!pixmap().isNull())
@@ -123,25 +123,25 @@ TQSize KSim::Label::sizeHint() const
   return TQSize(width, height);
 }
 
-TQSize KSim::Label::minimumSizeHint() const
+TQSize KSim::Label::tqminimumSizeHint() const
 {
-  return sizeHint();
+  return tqsizeHint();
 }
 
 void KSim::Label::clear()
 {
-  setText(TQString::null);
+  setText(TQString());
 }
 
 void KSim::Label::setText(const TQString &text)
 {
   if (text == d->text)
-    return; // If the text is the same, no need to repaint etc
+    return; // If the text is the same, no need to tqrepaint etc
 
-  TQSize oldSize = sizeHint();
-  // set the text of our widget and repaint
+  TQSize oldSize = tqsizeHint();
+  // set the text of our widget and tqrepaint
   d->text = text;
-  relayoutLabel(oldSize);
+  retqlayoutLabel(oldSize);
 }
 
 void KSim::Label::extraTypeCall()
@@ -183,13 +183,13 @@ const TQColor &KSim::Label::shadowColour() const
 void KSim::Label::setConfigValues()
 {
   TQFont newFont = font();
-  bool repaint = themeLoader().current().fontColours(this,
+  bool tqrepaint = themeLoader().current().fontColours(this,
      newFont, d->mColour, d->sColour, d->showShadow);
 
   if (font() != newFont)
     setFont(newFont);
 
-  if (repaint)
+  if (tqrepaint)
     update();
 }
 
@@ -232,7 +232,7 @@ void KSim::Label::drawText(TQPainter *painter, const TQRect &rect,
   if (!pixmap().isNull())
     location.setX(pixmap().width() + 5);
    
-  style().drawItem(painter, location, AlignCenter, colorGroup(), true,
+  tqstyle().drawItem(painter, location, AlignCenter, tqcolorGroup(), true,
       0, text, -1, &color);
 }
 
@@ -242,8 +242,8 @@ void KSim::Label::drawPixmap(TQPainter *painter, const TQRect &rect,
   TQRect location(rect);
   location.setWidth(pixmap.width());
 
-  style().drawItem(painter, location, AlignCenter, colorGroup(), true,
-    pixmap.isNull() ? 0 : &pixmap, TQString::null);
+  tqstyle().drawItem(painter, location, AlignCenter, tqcolorGroup(), true,
+    pixmap.isNull() ? 0 : &pixmap, TQString());
 }
 
 void KSim::Label::setTextLocation(const TQRect &rect)
@@ -268,21 +268,21 @@ const TQRect &KSim::Label::shadowLocation() const
 
 void KSim::Label::setThemePixmap(const TQString &image)
 {
-  TQSize oldSize = sizeHint();
+  TQSize oldSize = tqsizeHint();
   d->meterImage.reset();
   d->meterImage.load(image);
   KSim::ThemeLoader::self().reColourImage(d->meterImage);
   d->background = d->meterImage.smoothScale(size());
-  relayoutLabel(oldSize);
+  retqlayoutLabel(oldSize);
 }
 
-void KSim::Label::relayoutLabel(const TQSize &old, bool repaint)
+void KSim::Label::retqlayoutLabel(const TQSize &old, bool tqrepaint)
 {
-  if (sizeHint() != old) {
+  if (tqsizeHint() != old) {
     updateGeometry();
   }
 
-  if (repaint)
+  if (tqrepaint)
     update();
 }
 
@@ -294,7 +294,7 @@ void KSim::Label::initWidget(int type)
 
   // try to reduce flicker as much as possible
   setBackgroundMode(NoBackground);
-  setSizePolicy(TQSizePolicy(TQSizePolicy::MinimumExpanding,
+  tqsetSizePolicy(TQSizePolicy(TQSizePolicy::MinimumExpanding,
      TQSizePolicy::Fixed));
 
   configureObject();

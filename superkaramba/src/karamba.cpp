@@ -51,7 +51,7 @@
 
 karamba::karamba(TQString fn, TQString name, bool reloading, int instance,
     bool sub_theme):
-    TQWidget(0,"karamba", Qt::WGroupLeader | WStyle_Customize |
+    TQWidget(0,"karamba", TQt::WGroupLeader | WStyle_Customize |
             WRepaintNoErase| WStyle_NoBorder | WDestructiveClose  ),
     meterList(0), imageList(0), clickList(0), kpop(0), widgetMask(0),
     config(0), kWinModule(0), tempUnit('C'), m_instance(instance),
@@ -70,7 +70,7 @@ karamba::karamba(TQString fn, TQString name, bool reloading, int instance,
 
   KURL url;
 
-  if(fn.find('/') == -1)
+  if(fn.tqfind('/') == -1)
     url.setFileName(fn);
   else
     url = fn;
@@ -85,7 +85,7 @@ karamba::karamba(TQString fn, TQString name, bool reloading, int instance,
   karambaApp->addKaramba(this, reloading);
 
   if(prettyName.isEmpty())
-    prettyName = TQString("%1 - %2").arg(m_theme.name()).arg(m_instance);
+    prettyName = TQString("%1 - %2").tqarg(m_theme.name()).tqarg(m_instance);
 
   kdDebug() << "Starting theme: " << m_theme.name()
             << " pretty name: " << prettyName << endl;
@@ -111,7 +111,7 @@ karamba::karamba(TQString fn, TQString name, bool reloading, int instance,
   // Creates KConfig Object
   TQString instanceString;
   if(m_instance > 1)
-    instanceString = TQString("-%1").arg(m_instance);
+    instanceString = TQString("-%1").tqarg(m_instance);
   TQString cfg = TQDir::home().absPath() + "/.superkaramba/"
       + m_theme.id() + instanceString + ".rc";
   kdDebug() << cfg << endl;
@@ -170,7 +170,7 @@ karamba::karamba(TQString fn, TQString name, bool reloading, int instance,
   toDesktopMenu = new KPopupMenu (this);
   toDesktopMenu -> setCheckable(true);
   mid = toDesktopMenu -> insertItem (i18n("&All Desktops"),
-                                     dslot = new DesktopChangeSlot(this,0),
+                                     dslot = new DesktopChangeSlot(TQT_TQOBJECT(this),0),
                                      TQT_SLOT(receive()));
   dslot->setMenuId(mid);
 
@@ -181,7 +181,7 @@ karamba::karamba(TQString fn, TQString name, bool reloading, int instance,
     name += ('0' + ndesktop);
 
     mid = toDesktopMenu -> insertItem (name,
-        dslot = new DesktopChangeSlot(this, ndesktop), TQT_SLOT(receive()));
+        dslot = new DesktopChangeSlot(TQT_TQOBJECT(this), ndesktop), TQT_SLOT(receive()));
     dslot->setMenuId(mid);
   }
 
@@ -196,7 +196,7 @@ karamba::karamba(TQString fn, TQString name, bool reloading, int instance,
                     TQT_SLOT(updateSensors()), Key_F5 );
   toggleLocked = new KToggleAction (  i18n("Toggle &Locked Position"),
                                       SmallIconSet("locked"),
-                                      CTRL+Key_L, this,
+                                      CTRL+Key_L, TQT_TQOBJECT(this),
                                       TQT_SLOT( slotToggleLocked() ),
                                       accColl, "Locked position" );
   accColl->insert(toggleLocked);
@@ -205,7 +205,7 @@ karamba::karamba(TQString fn, TQString name, bool reloading, int instance,
   toggleLocked->plug(kpop);
 
   toggleFastTransforms = new KToggleAction(i18n("Use &Fast Image Scaling"),
-                         CTRL+Key_F, this,
+                         CTRL+Key_F, TQT_TQOBJECT(this),
                          TQT_SLOT( slotToggleFastTransforms() ),
                          accColl, "Fast transformations");
 
@@ -252,7 +252,7 @@ karamba::karamba(TQString fn, TQString name, bool reloading, int instance,
   client = kapp->dcopClient();
   if (!client->isAttached())
     client->attach();
-  appId = client->registerAs(qApp->name());
+  appId = client->registerAs(tqApp->name());
 
 
   setBackgroundMode( NoBackground);
@@ -314,7 +314,7 @@ karamba::karamba(TQString fn, TQString name, bool reloading, int instance,
   this->setMouseTracking(true);
 
 
-  setFocusPolicy(TQWidget::StrongFocus);
+  setFocusPolicy(TQ_StrongFocus);
 }
 
 karamba::~karamba()
@@ -442,7 +442,7 @@ bool karamba::parseConfig()
         if(lineParser.getBoolean("MANAGED"))
         {
           managed = true;
-          reparent(0, Qt::WType_Dialog | WStyle_Customize | WStyle_NormalBorder
+          reparent(0, TQt::WType_Dialog | WStyle_Customize | WStyle_NormalBorder
                       |  WRepaintNoErase | WDestructiveClose, pos());
         }
         else
@@ -622,7 +622,7 @@ bool karamba::parseConfig()
                                      TQColor("white")));
         defaultTextField->setFont(lineParser.getString("FONT", "Helvetica"));
         defaultTextField->setFontSize(lineParser.getInt("FONTSIZE", 12));
-        defaultTextField->setAlignment(lineParser.getString("ALIGN",
+        defaultTextField->tqsetAlignment(lineParser.getString("ALIGN",
                                        "LEFT"));
         defaultTextField->setFixedPitch(lineParser.getBoolean("FIXEDPITCH",
                                         false));
@@ -647,7 +647,7 @@ bool karamba::parseConfig()
         tmpText->setFont(lineParser.getString("FONT", defTxt.getFont()));
         tmpText->setFontSize(lineParser.getInt("FONTSIZE",
                              defTxt.getFontSize()));
-        tmpText->setAlignment(lineParser.getString("ALIGN",
+        tmpText->tqsetAlignment(lineParser.getString("ALIGN",
                               defTxt.getAlignmentAsString()));
         tmpText->setFixedPitch(lineParser.getInt("FIXEDPITCH",
                                defTxt.getFixedPitch()));
@@ -1240,7 +1240,7 @@ void karamba::passMenuOptionChanged(TQString key, bool value)
 
 void karamba::setIncomingData(TQString theme, TQString obj)
 {
-  KarambaApplication* app = (KarambaApplication*)qApp;
+  KarambaApplication* app = (KarambaApplication*)tqApp;
 
   kdDebug() << "karamba::setIncomingData " << theme << obj << endl;
    //TQByteArray data;
@@ -1260,7 +1260,7 @@ void karamba::setIncomingData(TQString theme, TQString obj)
 
 void karamba::callTheme(TQString theme, TQString txt)
 {
-  KarambaApplication* app = (KarambaApplication*)qApp;
+  KarambaApplication* app = (KarambaApplication*)tqApp;
   kdDebug() << "karamba::callTheme " << theme << txt << endl;
   //qWarning("karamba::callTheme");
    //TQByteArray data;
@@ -1338,7 +1338,7 @@ void karamba::passClick(TQMouseEvent *e)
   {
     Meter* meter = (Meter*)(*it);
     // Check if meter is still in list
-    if (clickList->containsRef(meter) && meter->click(e))
+    if (clickList->tqcontainsRef(meter) && meter->click(e))
     {
       // callback
       meterClicked(e, meter);
@@ -1388,7 +1388,7 @@ void karamba::passWheelClick( TQWheelEvent *e )
       {
         Meter* meter = (Meter*)(*it);
         // Check if meter is still in list
-        if (clickList->containsRef(meter) && meter->click(&fakeEvent))
+        if (clickList->tqcontainsRef(meter) && meter->click(&fakeEvent))
         {
           if (RichTextLabel* richText = dynamic_cast<RichTextLabel*>(meter))
           {
@@ -1416,7 +1416,7 @@ void karamba::management_popup( void )
 void karamba::mousePressEvent( TQMouseEvent *e )
 {
   //qDebug("karamba::mousePressEvent");
-  if( e->button() == RightButton && !want_right_button )
+  if( e->button() == Qt::RightButton && !want_right_button )
   {
     management_popup();
   }
@@ -1513,13 +1513,13 @@ void karamba::mouseMoveEvent( TQMouseEvent *e )
     // This will work now, but only when you move at least
     // one pixel in any direction with your mouse.
     //if( e->button() == Qt::LeftButton )
-    if( e->state() == LeftButton)
+    if( e->state() == Qt::LeftButton)
       button = 1;
     //else if( e->button() == Qt::MidButton )
-    else if( e->state() == MidButton )
+    else if( e->state() == Qt::MidButton )
       button = 2;
     //else if( e->button() == Qt::RightButton )
-    else if( e->state() == RightButton )
+    else if( e->state() == Qt::RightButton )
       button = 3;
 
     pythonIface->widgetMouseMoved(this, e->x(), e->y(), button);
@@ -1548,7 +1548,7 @@ void karamba::paintEvent ( TQPaintEvent *e)
     }
   }
   TQRect rect = e->rect();
-  bitBlt(this,rect.topLeft(),&pm,rect,Qt::CopyROP);
+  bitBlt(this,rect.topLeft(),&pm,rect,TQt::CopyROP);
 }
 
 void karamba::updateSensors()
@@ -1579,11 +1579,11 @@ void karamba::updateBackground(KSharedPixmap* kpm)
   TQPixmap buffer = TQPixmap(size());
 
   pm = TQPixmap(size());
-  buffer.fill(Qt::black);
+  buffer.fill(TQt::black);
 
   TQObjectListIt it( *imageList ); // iterate over meters
   p.begin(&buffer);
-  bitBlt(&buffer,0,0,&background,0,Qt::CopyROP);
+  bitBlt(&buffer,0,0,&background,0,TQt::CopyROP);
 
   while ( it != 0 )
   {
@@ -1595,17 +1595,17 @@ void karamba::updateBackground(KSharedPixmap* kpm)
   }
   p.end();
 
-  bitBlt(&pm,0,0,&buffer,0,Qt::CopyROP);
+  bitBlt(&pm,0,0,&buffer,0,TQt::CopyROP);
   background = pm;
 
   TQPixmap buffer2 = TQPixmap(size());
 
   pm = TQPixmap(size());
-  buffer2.fill(Qt::black);
+  buffer2.fill(TQt::black);
 
   TQObjectListIt it2( *meterList ); // iterate over meters
   p.begin(&buffer2);
-  bitBlt(&buffer2,0,0,&background,0,Qt::CopyROP);
+  bitBlt(&buffer2,0,0,&background,0,TQt::CopyROP);
 
   while ( it2 != 0 )
   {
@@ -1614,18 +1614,18 @@ void karamba::updateBackground(KSharedPixmap* kpm)
   }
   p.end();
 
-  bitBlt(&pm,0,0,&buffer2,0,Qt::CopyROP);
+  bitBlt(&pm,0,0,&buffer2,0,TQt::CopyROP);
   if (systray != 0)
   {
     systray->updateBackgroundPixmap(buffer2);
   }
-  repaint();
+  tqrepaint();
 }
 
 void karamba::currentDesktopChanged( int i )
 {
   //qDebug("karamba::currentDesktopChanged");
-  kroot->repaint( true );
+  kroot->tqrepaint( true );
   if (pythonIface && pythonIface->isExtensionLoaded())
     pythonIface->desktopChanged(this, i);
 }
@@ -1633,7 +1633,7 @@ void karamba::currentDesktopChanged( int i )
 void karamba::currentWallpaperChanged(int i )
 {
   //qDebug("karamba::currentWallpaperChanged");
-  kroot->repaint( true );
+  kroot->tqrepaint( true );
   if (pythonIface && pythonIface->isExtensionLoaded())
     pythonIface->wallpaperChanged(this, i);
 }
@@ -1646,11 +1646,11 @@ void karamba::externalStep()
     TQPixmap buffer = TQPixmap(size());
 
     pm = TQPixmap(size());
-    buffer.fill(Qt::black);
+    buffer.fill(TQt::black);
 
     TQObjectListIt it( *meterList ); // iterate over meters
     p.begin(&buffer);
-    bitBlt(&buffer,0,0,&background,0,Qt::CopyROP);
+    bitBlt(&buffer,0,0,&background,0,TQt::CopyROP);
 
     while ( it != 0 )
     {
@@ -1659,8 +1659,8 @@ void karamba::externalStep()
     }
     p.end();
 
-    bitBlt(&pm,0,0,&buffer,0,Qt::CopyROP);
-    repaint();
+    bitBlt(&pm,0,0,&buffer,0,TQt::CopyROP);
+    tqrepaint();
   }
 }
 
@@ -1671,12 +1671,12 @@ void karamba::step()
   {
     pm = TQPixmap(size());
     TQPixmap buffer = TQPixmap(size());
-    buffer.fill(Qt::black);
+    buffer.fill(TQt::black);
 
     TQObjectListIt it( *meterList ); // iterate over meters
     p.begin(&buffer);
 
-    bitBlt(&buffer,0,0,&background,0,Qt::CopyROP);
+    bitBlt(&buffer,0,0,&background,0,TQt::CopyROP);
 
     while (it != 0)
     {
@@ -1685,7 +1685,7 @@ void karamba::step()
     }
     p.end();
 
-    bitBlt(&pm,0,0,&buffer,0,Qt::CopyROP);
+    bitBlt(&pm,0,0,&buffer,0,TQt::CopyROP);
     update();
   }
 
@@ -1779,7 +1779,7 @@ void karamba::addMenuConfigOption(TQString key, TQString name)
   //qDebug("karamba::addMenuConfigOption");
   kpop -> setItemEnabled(THEMECONF, true);
 
-  SignalBridge* action = new SignalBridge(this, key, menuAccColl);
+  SignalBridge* action = new SignalBridge(TQT_TQOBJECT(this), key, menuAccColl);
   KToggleAction* confItem = new KToggleAction (name, KShortcut::null(),
                                                action, TQT_SLOT(receive()),
                                                menuAccColl, key.ascii());
@@ -1992,8 +1992,8 @@ void karamba::toggleWidgetUpdate( bool b)
     widgetUpdate = b;
 }
 
-SignalBridge::SignalBridge(TQObject* parent, TQString name, KActionCollection* ac)
-  : TQObject(parent, name.ascii()), collection(ac)
+SignalBridge::SignalBridge(TQObject* tqparent, TQString name, KActionCollection* ac)
+  : TQObject(tqparent, name.ascii()), collection(ac)
 {
   setName(name.ascii());
 }
@@ -2004,15 +2004,15 @@ void SignalBridge::receive()
 isChecked());
 }
 
-DesktopChangeSlot::DesktopChangeSlot(TQObject *parent, int id)
-    : TQObject(parent, "")
+DesktopChangeSlot::DesktopChangeSlot(TQObject *tqparent, int id)
+    : TQObject(tqparent, "")
 {
   desktopid = id;
 }
 
 void DesktopChangeSlot::receive()
 {
-  karamba *k = (karamba *)parent();
+  karamba *k = (karamba *)tqparent();
 
   // XXX - check type cast
 

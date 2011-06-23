@@ -86,15 +86,15 @@ ChannelIntensity::ChannelIntensity(ImageLabel* img, float r, TQString c,
   ratio = (ratio < -1) ? -1 : ratio;
 
   channel = 0;
-  if (c.find("red", 0 , false))
+  if (c.tqfind("red", 0 , false))
   {
     channel = 0;
   }
-  else if (c.find("green", 0, false))
+  else if (c.tqfind("green", 0, false))
   {
     channel = 1;
   }
-  else if (c.find("blue", 0, false))
+  else if (c.tqfind("blue", 0, false))
   {
     channel = 2;
   }
@@ -384,7 +384,7 @@ void ImageLabel::mUpdate(TQPainter* p)
 
 bool ImageLabel::click(TQMouseEvent* e)
 {
-    if (getBoundingBox().contains(e -> x(), e -> y()) && isEnabled())
+    if (getBoundingBox().tqcontains(e -> x(), e -> y()) && isEnabled())
     {
         TQString program;
         if (e -> button() == Qt::LeftButton)
@@ -446,7 +446,7 @@ void ImageLabel::parseImages(TQString fn, TQString fn_roll, int _xoff,
   {
     TQString tmpFile;
 #if defined(KDE_3_2)
-    if(KIO::NetAccess::download(KURL(path), tmpFile, karambaApp->parentWindow()))
+    if(KIO::NetAccess::download(KURL(path), tmpFile, karambaApp->tqparentWindow()))
 #else
     if(KIO::NetAccess::download(KURL(path), tmpFile))
 #endif
@@ -494,7 +494,7 @@ void ImageLabel::parseImages(TQString fn, TQString fn_roll, int _xoff,
   {
     TQString tmpFile;
 #if defined(KDE_3_2)
-    if(KIO::NetAccess::download(KURL(path), tmpFile, karambaApp->parentWindow()))
+    if(KIO::NetAccess::download(KURL(path), tmpFile, karambaApp->tqparentWindow()))
 #else
     if(KIO::NetAccess::download(KURL(path), tmpFile))
 #endif
@@ -530,7 +530,7 @@ void ImageLabel::rolloverImage(TQMouseEvent *e)
 
   if (zoomed)
   {
-    if (!rect_off.contains(e->pos()))
+    if (!rect_off.tqcontains(e->pos()))
     {
       // rollover the image to the zoomed image
       //setValue(fn_roll);
@@ -545,7 +545,7 @@ void ImageLabel::rolloverImage(TQMouseEvent *e)
   }
   else
   {
-    if (rect_off.contains(e->pos()))
+    if (rect_off.tqcontains(e->pos()))
     {
       // rollover the image to the zoomed image
       //setValue(fn_roll);

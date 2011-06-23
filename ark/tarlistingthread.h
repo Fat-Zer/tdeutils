@@ -29,25 +29,25 @@
 class TQString;
 class KArchive;
 
-class ListingEvent: public QCustomEvent
+class ListingEvent: public TQCustomEvent
 {
 	public:
-		enum Status { Normal, Error, ListingFinished };
-		ListingEvent( const TQStringList& data, Status st = Normal )
+		enum tqStatus { Normal, Error, ListingFinished };
+		ListingEvent( const TQStringList& data, tqStatus st = Normal )
 			: TQCustomEvent( 65442 ), m_data( data ), m_status( st ) {}
 		
 		const TQStringList& columns() const { return m_data; }
-		Status status() const { return m_status; }
+		tqStatus status() const { return m_status; }
 		
 	private:
 		TQStringList m_data;
-		Status      m_status;
+		tqStatus      m_status;
 };
 
-class TarListingThread: public QThread
+class TarListingThread: public TQThread
 {
 	public:
-		TarListingThread( TQObject *parent, const TQString& filename );
+		TarListingThread( TQObject *tqparent, const TQString& filename );
 		~TarListingThread();
 	
 	protected:

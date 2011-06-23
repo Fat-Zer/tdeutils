@@ -87,7 +87,7 @@ TQString Identifier::toString( PrintFlags flags ) const
 
     u_char *buf = ( u_char* )calloc( buflen, 1 );
     if ( !buf )
-        return TQString::null;
+        return TQString();
 
     int oldOutpuFormat = SnmpLib::self()->netsnmp_ds_get_int( NETSNMP_DS_LIBRARY_ID, NETSNMP_DS_LIB_OID_OUTPUT_FORMAT );
     SnmpLib::self()->netsnmp_ds_set_int( NETSNMP_DS_LIBRARY_ID, NETSNMP_DS_LIB_OID_OUTPUT_FORMAT, 
@@ -100,7 +100,7 @@ TQString Identifier::toString( PrintFlags flags ) const
 
     if ( overflow ) {
         free( buf );
-        return TQString::null;
+        return TQString();
     }
 
     TQString result = TQString::fromAscii( ( char* )buf );

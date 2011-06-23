@@ -15,7 +15,7 @@
  *  the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  *  Boston, MA 02110-1301, USA.
  **/
-#ifndef QT_ONLY
+#ifndef TQT_ONLY
   #include "singlecontainerwidget.moc"
 #endif
 
@@ -23,17 +23,17 @@
 #include "concwidget.h"
 
 SingleContainerWidget::SingleContainerWidget(RegExpEditorWindow* editorWindow,
-                                             TQWidget* parent, const char* name)
-  : RegExpWidget( editorWindow, parent, name )
+                                             TQWidget* tqparent, const char* name)
+  : RegExpWidget( editorWindow, tqparent, name )
 {
 }
 
-bool SingleContainerWidget::updateSelection( bool parentSelected )
+bool SingleContainerWidget::updateSelection( bool tqparentSelected )
 {
-  bool changed = RegExpWidget::updateSelection( parentSelected );
+  bool changed = RegExpWidget::updateSelection( tqparentSelected );
   changed = _child->updateSelection( _isSelected ) && changed;
   if (changed)
-    repaint();
+    tqrepaint();
 
   return changed;
 }
@@ -98,7 +98,7 @@ RegExpWidget* SingleContainerWidget::findWidgetToEdit( TQPoint globalPos )
   RegExpWidget* wid = _child->findWidgetToEdit( globalPos );
   if ( wid )
     return wid;
-  else if ( TQRect(mapToGlobal(TQPoint(0,0)), size()).contains( globalPos ) )
+  else if ( TQRect(mapToGlobal(TQPoint(0,0)), size()).tqcontains( globalPos ) )
     return this;
   else
     return 0;
@@ -126,7 +126,7 @@ void SingleContainerWidget::updateAll()
 void SingleContainerWidget::updateCursorRecursively()
 {
   _child->updateCursorRecursively();
-  updateCursorShape();
+  updatetqCursorShape();
 }
 
 

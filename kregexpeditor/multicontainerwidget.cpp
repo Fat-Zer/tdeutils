@@ -19,16 +19,16 @@
 #include "dragaccepter.h"
 
 MultiContainerWidget::MultiContainerWidget( RegExpEditorWindow* editorWindow,
-                                            TQWidget* parent, const char* name)
-  :RegExpWidget( editorWindow, parent, name )
+                                            TQWidget* tqparent, const char* name)
+  :RegExpWidget( editorWindow, tqparent, name )
 {
 }
 
 void MultiContainerWidget::append( RegExpWidget* child )
 {
   child->reparent( this, TQPoint(0,0), false );
-  _children.append( child );
-  _children.append( new DragAccepter( _editorWindow, this ) );
+  _tqchildren.append( child );
+  _tqchildren.append( new DragAccepter( _editorWindow, this ) );
 }
 
 bool MultiContainerWidget::hasSelection() const
@@ -36,7 +36,7 @@ bool MultiContainerWidget::hasSelection() const
   if ( _isSelected )
     return true;
 
-  TQPtrListIterator<RegExpWidget> it(_children);
+  TQPtrListIterator<RegExpWidget> it(_tqchildren);
   ++it; // Move past the first dragAccepter
 	for ( ; *it;  it += 2 ) {
 		if ( (*it)->hasSelection() ) {
@@ -49,8 +49,8 @@ bool MultiContainerWidget::hasSelection() const
 void MultiContainerWidget::clearSelection()
 {
   _isSelected = false;
-	for ( unsigned int i = 0; i< _children.count(); i++ ) {
-		_children.at(i)->clearSelection();
+	for ( unsigned int i = 0; i< _tqchildren.count(); i++ ) {
+		_tqchildren.at(i)->clearSelection();
   }
 }
 
@@ -58,15 +58,15 @@ void MultiContainerWidget::clearSelection()
 void MultiContainerWidget::deleteSelection()
 {
   // run from the back to the front (which we do since we delete items on the run)
-  // When deleting children, delete the drag accepter to its right.
-  for ( int i = (int) _children.count()-2; i > 0; i -=2 ) {
+  // When deleting tqchildren, delete the drag accepter to its right.
+  for ( int i = (int) _tqchildren.count()-2; i > 0; i -=2 ) {
 
-    RegExpWidget* child = _children.at( i );
+    RegExpWidget* child = _tqchildren.at( i );
     if ( child->isSelected() ) {
-      delete _children.at( i+1 );
-      _children.remove( i+1 );
+      delete _tqchildren.at( i+1 );
+      _tqchildren.remove( i+1 );
       delete child;
-      _children.remove(i);
+      _tqchildren.remove(i);
     }
     else if ( child->hasSelection() ) {
       child->deleteSelection();
@@ -78,16 +78,16 @@ void MultiContainerWidget::deleteSelection()
 
 void MultiContainerWidget::addNewChild(DragAccepter *accepter, RegExpWidget *child)
 {
-  for ( unsigned int i=0; i<_children.count(); i+= 2 ) {
-    RegExpWidget *ch = _children.at( i );
+  for ( unsigned int i=0; i<_tqchildren.count(); i+= 2 ) {
+    RegExpWidget *ch = _tqchildren.at( i );
     if ( ch == accepter ) {
       // Insert the new child
-      _children.insert( i+1, child );
+      _tqchildren.insert( i+1, child );
 
       // Insert an accepter as the next element.
       DragAccepter *accepter = new DragAccepter( _editorWindow, this );
 
-      _children.insert( i+2, accepter );
+      _tqchildren.insert( i+2, accepter );
 
       // These two show's must come here otherwise a paintevent
       // will be invoked, where the invariant, that a accepter is located at
@@ -103,25 +103,25 @@ void MultiContainerWidget::addNewChild(DragAccepter *accepter, RegExpWidget *chi
   qFatal("Accepter not found in list");
 }
 
-bool MultiContainerWidget::updateSelection(bool parentSelected)
+bool MultiContainerWidget::updateSelection(bool tqparentSelected)
 {
   bool changed = false;
   bool isSel = _isSelected;
-  TQMemArray<bool> oldState(_children.count());
-  TQMemArray<bool> newState(_children.count());
+  TQMemArray<bool> oldState(_tqchildren.count());
+  TQMemArray<bool> newState(_tqchildren.count());
 
-  for (int i = 0; i< (int)_children.count();i++) {
-    oldState[i] = _children.at(i)->isSelected();
+  for (int i = 0; i< (int)_tqchildren.count();i++) {
+    oldState[i] = _tqchildren.at(i)->isSelected();
   }
 
- RegExpWidget::updateSelection( parentSelected );
+ RegExpWidget::updateSelection( tqparentSelected );
 
   int first;
   int last;
 
   // scan for the first selected item.
-  for (first = 1; first < (int) _children.count(); first+= 2 ) {
-    RegExpWidget* child = _children.at(first);
+  for (first = 1; first < (int) _tqchildren.count(); first+= 2 ) {
+    RegExpWidget* child = _tqchildren.at(first);
     changed = child->updateSelection( _isSelected ) || changed;
     newState[first] = child->isSelected();
     if ( child->isSelected() )
@@ -129,8 +129,8 @@ bool MultiContainerWidget::updateSelection(bool parentSelected)
   }
 
   // scan for the last selected item
-  for (last = _children.count()-2; last>first; last -= 2) {
-    RegExpWidget* child = _children.at(last);
+  for (last = _tqchildren.count()-2; last>first; last -= 2) {
+    RegExpWidget* child = _tqchildren.at(last);
     changed = child->updateSelection( _isSelected ) || changed;
     newState[last] = child->isSelected();
     if ( child->isSelected() )
@@ -139,18 +139,18 @@ bool MultiContainerWidget::updateSelection(bool parentSelected)
 
   // everything between first and last must be selected.
   for (int j = first+2; j<last; j+=2) {
-    RegExpWidget* child = _children.at(j);
+    RegExpWidget* child = _tqchildren.at(j);
 
    changed = child->updateSelection( true ) || changed;
     newState[j] = true;
   }
 
   // update drag accepters.
-  for (int k = 0; k< (int) _children.count(); k+=2) {
-    RegExpWidget* child = _children.at(k);
+  for (int k = 0; k< (int) _tqchildren.count(); k+=2) {
+    RegExpWidget* child = _tqchildren.at(k);
     bool select;
-    if ( k == 0 || k == (int)_children.count()-1) {
-      // The elements at the border is only selected if the parent is selected.
+    if ( k == 0 || k == (int)_tqchildren.count()-1) {
+      // The elements at the border is only selected if the tqparent is selected.
       select = _isSelected;
     }
     else {
@@ -164,12 +164,12 @@ bool MultiContainerWidget::updateSelection(bool parentSelected)
     if (accepter)
       accepter->_isSelected = select;
     if ( select != isChildSel )
-      child->repaint();
+      child->tqrepaint();
   }
 
   changed = changed || isSel != _isSelected;
   if ( changed ) {
-    repaint();
+    tqrepaint();
   }
 
   return changed;
@@ -183,7 +183,7 @@ TQRect MultiContainerWidget::selectionRect() const
     return TQRect( mapToGlobal( TQPoint(0,0) ), size() );
   else {
     TQRect res;
-    TQPtrListIterator<RegExpWidget> it(_children);
+    TQPtrListIterator<RegExpWidget> it(_tqchildren);
     ++it; // Move past the first dragAccepter
     for ( ; *it; it +=2 ) {
       if ( (*it)->hasSelection() ) {
@@ -192,10 +192,10 @@ TQRect MultiContainerWidget::selectionRect() const
           res = childSel;
         else {
           TQRect newRes;
-          newRes.setLeft( QMIN( res.left(), childSel.left() ) );
-          newRes.setTop( QMIN( res.top(), childSel.top() ) );
-          newRes.setRight( QMAX( res.right(), childSel.right() ) );
-          newRes.setBottom( QMAX( res.bottom(), childSel.bottom() ) );
+          newRes.setLeft( TQMIN( res.left(), childSel.left() ) );
+          newRes.setTop( TQMIN( res.top(), childSel.top() ) );
+          newRes.setRight( TQMAX( res.right(), childSel.right() ) );
+          newRes.setBottom( TQMAX( res.bottom(), childSel.bottom() ) );
           res = newRes;
         }
       }
@@ -216,8 +216,8 @@ RegExpWidget* MultiContainerWidget::widgetUnderPoint( TQPoint globalPos, bool ju
     incr = 1;
   }
 
-  for ( unsigned int i = start; i < _children.count(); i+=incr ) {
-    RegExpWidget* wid = _children.at(i)->widgetUnderPoint( globalPos, justVisibleWidgets );
+  for ( unsigned int i = start; i < _tqchildren.count(); i+=incr ) {
+    RegExpWidget* wid = _tqchildren.at(i)->widgetUnderPoint( globalPos, justVisibleWidgets );
     if ( wid )
       return wid;
   }
@@ -230,8 +230,8 @@ RegExpWidget* MultiContainerWidget::widgetUnderPoint( TQPoint globalPos, bool ju
 
 RegExpWidget* MultiContainerWidget::findWidgetToEdit( TQPoint globalPos )
 {
-  for ( unsigned int i = 1; i < _children.count(); i+=2 ) {
-    RegExpWidget* wid = _children.at(i)->findWidgetToEdit( globalPos );
+  for ( unsigned int i = 1; i < _tqchildren.count(); i+=2 ) {
+    RegExpWidget* wid = _tqchildren.at(i)->findWidgetToEdit( globalPos );
     if ( wid )
       return wid;
   }
@@ -241,7 +241,7 @@ RegExpWidget* MultiContainerWidget::findWidgetToEdit( TQPoint globalPos )
 void MultiContainerWidget::selectWidget( bool sel )
 {
   RegExpWidget::selectWidget( sel );
-  TQPtrListIterator<RegExpWidget> it(_children);
+  TQPtrListIterator<RegExpWidget> it(_tqchildren);
   for ( ; *it ; ++it ) {
     (*it)->selectWidget( sel );
   }
@@ -250,7 +250,7 @@ void MultiContainerWidget::selectWidget( bool sel )
 
 void MultiContainerWidget::updateAll()
 {
-  for ( TQPtrListIterator<RegExpWidget> it(_children); *it ; ++it ) {
+  for ( TQPtrListIterator<RegExpWidget> it(_tqchildren); *it ; ++it ) {
     (*it)->updateAll();
   }
   RegExpWidget::updateAll();
@@ -258,8 +258,8 @@ void MultiContainerWidget::updateAll()
 
 void MultiContainerWidget::updateCursorRecursively()
 {
-  for ( TQPtrListIterator<RegExpWidget> it(_children); *it ; ++it ) {
+  for ( TQPtrListIterator<RegExpWidget> it(_tqchildren); *it ; ++it ) {
     (*it)->updateCursorRecursively();
   }
-  updateCursorShape();
+  updatetqCursorShape();
 }

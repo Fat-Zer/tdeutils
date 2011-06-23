@@ -165,22 +165,22 @@ void CDragManager::setupTimer( void )
 
 
 //
-// This widget will use the entire space of the parent widget
+// This widget will use the entire space of the tqparent widget
 //
-CHexViewWidget::CHexViewWidget( TQWidget *parent, const char *name,
+CHexViewWidget::CHexViewWidget( TQWidget *tqparent, const char *name,
 				CHexBuffer *hexBuffer )
-  : TQFrame( parent, name,
+  : TQFrame( tqparent, name,
 	    #ifdef USE_NORTHWEST_GRAVITY
-	    Qt::WStaticContents
+	    TQt::WStaticContents
 	    #else
 	    0
 	    #endif
 	    ), mScrollBarSize( 16 )
 {
-  if( parent == 0 || hexBuffer == 0 ) { return; }
+  if( tqparent == 0 || hexBuffer == 0 ) { return; }
 
   //
-  // Qt 2.0:
+  // TQt 2.0:
   // -------
   // I use the "CScrollBar" because sometimes (very seldom) when I
   // do a mHorzScroll->hide() the mHorzScroll->isVisible() remains true
@@ -193,9 +193,9 @@ CHexViewWidget::CHexViewWidget( TQWidget *parent, const char *name,
   // signal whenever is receives a TQHideEvent.
   //
 
-  mVertScroll = new CScrollBar( TQScrollBar::Vertical, this );
+  mVertScroll = new CScrollBar( Qt::Vertical, this );
   if( mVertScroll == 0 ) { return; }
-  mHorzScroll = new CScrollBar( TQScrollBar::Horizontal, this );
+  mHorzScroll = new CScrollBar( Qt::Horizontal, this );
   if( mHorzScroll == 0 ) { return; }
   mCorner = new TQWidget( this );
   if( mCorner == 0 ) { return; }
@@ -217,7 +217,7 @@ CHexViewWidget::CHexViewWidget( TQWidget *parent, const char *name,
 
   setFrameStyle( TQFrame::WinPanel|TQFrame::Sunken );
   setWFlags( WResizeNoErase );
-  setFocusPolicy( StrongFocus );
+  setFocusPolicy( TQ_StrongFocus );
 
   mHexBuffer = hexBuffer;
   mHexBuffer->cursorReset();
@@ -233,7 +233,7 @@ CHexViewWidget::CHexViewWidget( TQWidget *parent, const char *name,
   setStartY(0);
 
   setAcceptDrops(true);
-  setDropHighlight(false); // Init state + frame shape
+  setDropHighlight(false); // Init state + frame tqshape
   setBackgroundColor( mHexBuffer->backgroundColor() );
 }
 
@@ -272,7 +272,7 @@ int CHexViewWidget::insertFile( TQFile &file, CProgress &p )
 
   emit dataChanged();
   emit cursorChanged( mHexBuffer->cursorState() );
-  emit layoutChanged( mLayout );
+  emit tqlayoutChanged( mLayout );
   return( Err_Success );
 }
 
@@ -371,7 +371,7 @@ void CHexViewWidget::setBuffer( CHexBuffer *hexBuffer )
   emit cursorChanged( mHexBuffer->cursorState() );
   emit fileState( mHexBuffer->fileState() );
   emit encodingChanged( mHexBuffer->encoding() );
-  emit layoutChanged( mLayout );
+  emit tqlayoutChanged( mLayout );
   emit inputModeChanged( mHexBuffer->inputMode() );
   emit fileName( mHexBuffer->url(), mHexBuffer->hasFileName() );
   emit bookmarkChanged( mHexBuffer->bookmarkList() );
@@ -386,7 +386,7 @@ void CHexViewWidget::changeXPos( int p )
   setStartX(p);
 
 
-  if( QABS(dx) < width() )
+  if( TQABS(dx) < width() )
   {
     scroll( dx, 0, contentsRect() );
   }
@@ -414,7 +414,7 @@ void CHexViewWidget::changeYPos( int p )
   int dy  = startY() - p;
   setStartY(p);
 
-  if( QABS( dy ) < height() )
+  if( TQABS( dy ) < height() )
   {
     scroll( 0, dy, contentsRect() );
   }
@@ -438,7 +438,7 @@ void CHexViewWidget::changeYPos( int p )
 
 void CHexViewWidget::clipboardChanged( void )
 {
-  disconnect(TQApplication::clipboard(),TQT_SIGNAL(dataChanged()),
+  disconnect(TQApplication::tqclipboard(),TQT_SIGNAL(dataChanged()),
 	     this,TQT_SLOT(clipboardChanged()));
   unselect();
 }
@@ -459,7 +459,7 @@ void CHexViewWidget::filter( SFilterControl &fc )
   int errCode = mHexBuffer->filter( fc );
   if( errCode == Err_Success )
   {
-    repaint();
+    tqrepaint();
     emit dataChanged();
     emit cursorChanged( mHexBuffer->cursorState() );
   }
@@ -629,7 +629,7 @@ void CHexViewWidget::updateView( bool redraw, bool fixCursor )
       tooMuchX += mScrollBarSize;
       if( horzScrollbarVisible == false && tooMuchX > 0 )
       {
-	// Horizontal scrollbar will be visible after all.
+	//Qt::Horizontal scrollbar will be visible after all.
 	editHeight -= mScrollBarSize;
 	tooMuchY += mScrollBarSize;
       }
@@ -716,13 +716,13 @@ void CHexViewWidget::setPalette( const TQPalette &p )
 }
 
 
-void CHexViewWidget::setLayout( SDisplayLayout &layout )
+void CHexViewWidget::setLayout( SDisplayLayout &tqlayout )
 {
-  mLayout = layout;
+  mLayout = tqlayout;
   mHexBuffer->setLayout( mLayout );
   updateWindow();
 
-  emit layoutChanged( mLayout );
+  emit tqlayoutChanged( mLayout );
   emit cursorChanged( mHexBuffer->cursorState() );
   emit textWidth( defaultWidth() );
 }
@@ -739,7 +739,7 @@ void CHexViewWidget::setCursor( const SDisplayCursor &cursor,
                                 bool /*updateDisplay*/ )
 {
   mCursor = cursor;
-  mHexBuffer->setCursorShapeModifier( cursor.alwaysBlockShape,
+  mHexBuffer->settqCursorShapeModifier( cursor.alwaysBlockShape,
 				      cursor.thickInsertShape );
   setupCursorTimer();
   redrawFromOffset( mHexBuffer->cursorOffset(), false );
@@ -752,7 +752,7 @@ void CHexViewWidget::setColor( const SDisplayColor &color,
   mHexBuffer->setColor( mColor );
   if( updateDisplay == true )
   {
-    repaint();
+    tqrepaint();
   }
 }
 
@@ -796,7 +796,7 @@ int CHexViewWidget::setEncoding( CConversion::EMode mode, CProgress &p )
   int errCode = mHexBuffer->setEncoding( mode, p );
   if( errCode == Err_Success )
   {
-    repaint();
+    tqrepaint();
     emit cursorChanged( mHexBuffer->cursorState() );
     emit encodingChanged( mHexBuffer->encoding() );
   }
@@ -964,18 +964,18 @@ void CHexViewWidget::copy( void )
   {
     return;
   }
-  disconnect(TQApplication::clipboard(),TQT_SIGNAL(dataChanged()),
+  disconnect(TQApplication::tqclipboard(),TQT_SIGNAL(dataChanged()),
 	     this,TQT_SLOT(clipboardChanged()));
   //
-  // Note: Do no give the CHexDrag a parent != 0. The clipboard
+  // Note: Do no give the CHexDrag a tqparent != 0. The clipboard
   // owns the current dragdata and will destroy it on exit or
-  // when it receives a new object. If the CHexDrag has a parent
-  // != 0, the CHexDrag object will be destroyed when the parent
+  // when it receives a new object. If the CHexDrag has a tqparent
+  // != 0, the CHexDrag object will be destroyed when the tqparent
   // is destroyed. We will then have a double destroy situation
   // when the app. is closed (=> segfault).
   //
-  TQApplication::clipboard()->setData(new CHexDrag( buf ));
-  connect(TQApplication::clipboard(),TQT_SIGNAL(dataChanged()),
+  TQApplication::tqclipboard()->setData(new CHexDrag( buf ));
+  connect(TQApplication::tqclipboard(),TQT_SIGNAL(dataChanged()),
 	  this,TQT_SLOT(clipboardChanged()));
 }
 
@@ -988,10 +988,10 @@ void CHexViewWidget::copyText( int columnSegment )
     return;
   }
 
-  disconnect(TQApplication::clipboard(),TQT_SIGNAL(dataChanged()),
+  disconnect(TQApplication::tqclipboard(),TQT_SIGNAL(dataChanged()),
 	     this,TQT_SLOT(clipboardChanged()));
-  TQApplication::clipboard()->setText( buf.data() );
-  connect(TQApplication::clipboard(),TQT_SIGNAL(dataChanged()),
+  TQApplication::tqclipboard()->setText( buf.data() );
+  connect(TQApplication::tqclipboard(),TQT_SIGNAL(dataChanged()),
 	  this,TQT_SLOT(clipboardChanged()));
 }
 
@@ -999,7 +999,7 @@ void CHexViewWidget::copyText( int columnSegment )
 
 void CHexViewWidget::paste( void )
 {
-  TQMimeSource *data = TQApplication::clipboard()->data();
+  TQMimeSource *data = TQApplication::tqclipboard()->data();
   if( data != 0 )
   {
     TQByteArray buf;
@@ -1099,11 +1099,11 @@ int CHexViewWidget::bookmarkMenu( const TQString &title )
     if( p == 0 ) { continue; }
 
     text.sprintf("%04X:%04X", p->offset>>16, p->offset&0x0000FFFF );
-    text.prepend( TQString("[%1] %2: ").arg(i+1).arg(i18n("Offset")) );
+    text.prepend( TQString("[%1] %2: ").tqarg(i+1).tqarg(i18n("Offset")) );
     popup->insertItem( text, i );
   }
 
-  TQSize s(popup->sizeHint());
+  TQSize s(popup->tqsizeHint());
   TQPoint center( (width()-s.width())/2, (height()-s.height())/2 );
   int position = popup->exec( mapToGlobal(center) );
   delete popup;
@@ -1379,7 +1379,7 @@ void CHexViewWidget::drawFrame( TQPainter *p )
   // accepts a drop. The setPalette() function causes quite a bit of flicker
   // in the scrollbars (even when PropagationMode is NoChildren), so I
   // draw the frame manually when it can accept a drop. Note that the
-  // code below is for the frame shape "TQFrame::WinPanel|TQFrame::Plain"
+  // code below is for the frame tqshape "TQFrame::WinPanel|TQFrame::Plain"
   //
   if( mDropHighlight == true )
   {
@@ -1505,7 +1505,7 @@ void CHexViewWidget::keyPressEvent( TQKeyEvent *e )
     default:
       if( (e->text()[0]).isPrint() == true )
       {
-	cursorInput( e->text()[0] );
+	cursorInput( TQString(e->text())[0] );
       }
     break;
   }
@@ -1534,7 +1534,7 @@ void CHexViewWidget::mousePressEvent( TQMouseEvent *e )
   // The RMB popup menu is managed by the KContextMenuManager
   //
 
-  if( e->button() == LeftButton )
+  if( e->button() == Qt::LeftButton )
   {
     if( e->state() & ControlButton )
     {
@@ -1550,7 +1550,7 @@ void CHexViewWidget::mousePressEvent( TQMouseEvent *e )
       setCursorPosition( e->x(), e->y(), true, cellLevel );
     }
   }
-  else if( e->button() == MidButton )
+  else if( e->button() == Qt::MidButton )
   {
     paste();
   }
@@ -1559,7 +1559,7 @@ void CHexViewWidget::mousePressEvent( TQMouseEvent *e )
 
 void CHexViewWidget::mouseMoveEvent( TQMouseEvent *e )
 {
-  if( e->state() & LeftButton )
+  if( e->state() & Qt::LeftButton )
   {
     if( mDragManager->start( e ) == false )
     {
@@ -1575,7 +1575,7 @@ void CHexViewWidget::mouseReleaseEvent( TQMouseEvent *e )
   // The RMB popup menu is managed by the KContextMenuManager
   //
 
-  if( e->button() == LeftButton )
+  if( e->button() == Qt::LeftButton )
   {
     if( e->state() & ControlButton )
     {
@@ -1670,7 +1670,7 @@ void CHexViewWidget::dropEvent( TQDropEvent *e )
   {
     //
     // This widget can not itself open a file so it will simply pass
-    // the request to a parent that can (hopefully) do this
+    // the request to a tqparent that can (hopefully) do this
     //
     for( KURL::List::ConstIterator it = list.begin(); it != list.end(); it++ )
     {
@@ -1860,7 +1860,7 @@ void CHexViewWidget::setCursorPosition(int x, int y, bool init, bool cellLevel)
 void CHexViewWidget::redrawInterval( uint startOffset, uint stopOffset )
 {
   //
-  // Can be improved, I repaint the entire line even if the offsets
+  // Can be improved, I tqrepaint the entire line even if the offsets
   // only specify one byte.
   //
   uint lineStart = mHexBuffer->calculateLine( startOffset );
@@ -1942,7 +1942,7 @@ void CHexViewWidget::paintText( const TQRect &rect, bool expand )
     #endif
   }
 
-  if( contentsRect().contains( r ) == false )
+  if( contentsRect().tqcontains( r ) == false )
   {
     paintFrame();
     if( r.left() < frameWidth() ) { r.setLeft( frameWidth() ); }
@@ -2270,7 +2270,7 @@ void CHexViewWidget::setDropHighlight( bool dropHighlight )
     //
     // 2000-01-10 Espen Sand
     // Highlight. I have reimplemented TQFrame::drawFrame(TQPainter *)
-    // to support a custom frame color. I assume the frame shape is
+    // to support a custom frame color. I assume the frame tqshape is
     // "TQFrame::WinPanel|TQFrame::Plain" in that function.
     //
     setFrameStyle( TQFrame::WinPanel|TQFrame::Plain );

@@ -30,19 +30,19 @@ class ConcRegExp;
 class ConcWidget :public MultiContainerWidget
 {
 public:
-  ConcWidget(RegExpEditorWindow* editorWindow, TQWidget *parent,
+  ConcWidget(RegExpEditorWindow* editorWindow, TQWidget *tqparent,
              const char *name = 0);
   ConcWidget(RegExpEditorWindow* editorWindow, RegExpWidget *child,
-             TQWidget *parent, const char *name=0);
+             TQWidget *tqparent, const char *name=0);
   ConcWidget( RegExpEditorWindow* editorWindow, ConcWidget* origConc,
               unsigned int start, unsigned int end);
   ConcWidget( ConcRegExp* regexp, RegExpEditorWindow* editorWindow,
-              TQWidget* parent, const char* name = 0);
+              TQWidget* tqparent, const char* name = 0);
   void init();
 
-  virtual TQSize sizeHint() const;
+  virtual TQSize tqsizeHint() const;
 	virtual RegExp* regExp() const;
-  virtual bool updateSelection(bool parentSelected);
+  virtual bool updateSelection(bool tqparentSelected);
   virtual bool isSelected() const;
 
   virtual void applyRegExpToSelection( RegExpType type );
@@ -52,7 +52,7 @@ public:
   virtual bool validateSelection() const;
   virtual bool acceptWidgetInsert( RegExpType ) const { return false; }
   virtual bool acceptWidgetPaste() const { return false; }
-  bool hasAnyChildren() { return _children.count() > 1; }
+  bool hasAnyChildren() { return _tqchildren.count() > 1; }
 
 protected:
   virtual void paintEvent( TQPaintEvent *e );

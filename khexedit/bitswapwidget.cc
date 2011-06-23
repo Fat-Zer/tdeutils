@@ -24,10 +24,10 @@
 
 #include "bitswapwidget.h"
 
-CDigitLabel::CDigitLabel( TQWidget *parent, uint digit, const char *name )
-  :TQLabel(parent, name), mDigit( digit ), mDotPosition( 0 )
+CDigitLabel::CDigitLabel( TQWidget *tqparent, uint digit, const char *name )
+  :TQLabel(tqparent, name), mDigit( digit ), mDotPosition( 0 )
 {
-  setFocusPolicy( StrongFocus );
+  setFocusPolicy( TQ_StrongFocus );
   initialize();
 }
 
@@ -56,7 +56,7 @@ void CDigitLabel::setValue( uint digit, bool notify )
   {
     if( notify == true )
     {
-      emit valueChanged( this, digit, false );
+      emit valueChanged( TQT_TQOBJECT(this), digit, false );
     }
 
     mDigit = digit;
@@ -64,7 +64,7 @@ void CDigitLabel::setValue( uint digit, bool notify )
 
     if( notify == true )
     {
-      emit valueChanged( this, mDigit, true );
+      emit valueChanged( TQT_TQOBJECT(this), mDigit, true );
     }
   }
 }
@@ -81,7 +81,7 @@ void CDigitLabel::setDotPosition( uint dotPosition )
 
 
 
-TQSize CDigitLabel::sizeHint( void ) const
+TQSize CDigitLabel::tqsizeHint( void ) const
 {
   int h = fontMetrics().height();
   TQSize s( h, h ); // Retangular
@@ -98,18 +98,18 @@ void CDigitLabel::drawContents( TQPainter *p )
 
   if( hasFocus() == true )
   {
-    p->fillRect( cr, palette().active().highlight() );
-    p->setPen( palette().active().highlightedText() );
+    p->fillRect( cr, tqpalette().active().highlight() );
+    p->setPen( tqpalette().active().highlightedText() );
   }
   else
   {
-    p->fillRect( cr, palette().active().base() );
-    p->setPen( palette().active().text() );
+    p->fillRect( cr, tqpalette().active().base() );
+    p->setPen( tqpalette().active().text() );
   }
 
   if( mDotPosition != 0 )
   {
-    p->fillRect( cr.x()+2, cr.y()+2, 5, 5, Qt::red ); // UL    
+    p->fillRect( cr.x()+2, cr.y()+2, 5, 5, TQt::red ); // UL    
     /*
     if( mDotPosition == 1 )
     {
@@ -132,7 +132,7 @@ void CDigitLabel::drawContents( TQPainter *p )
 
   TQString text;
   text.setNum( mDigit );
-  p->drawText( 0, 0, cr.width(), cr.height(), alignment(), text );
+  p->drawText( 0, 0, cr.width(), cr.height(), tqalignment(), text );
 
   
 
@@ -145,12 +145,12 @@ void CDigitLabel::keyPressEvent( TQKeyEvent *e )
   {
     case Key_Left:
     case Key_Up: 
-      emit stepCell( this, false );
+      emit stepCell( TQT_TQOBJECT(this), false );
     break;
 
     case Key_Right:
     case Key_Down:  
-      emit stepCell( this, true );
+      emit stepCell( TQT_TQOBJECT(this), true );
     break;
     
     case Key_Escape:
@@ -174,8 +174,8 @@ void CDigitLabel::keyPressEvent( TQKeyEvent *e )
 
 
 
-CByteWidget::CByteWidget( TQWidget *parent, const char *name )
-  :TQWidget(parent, name)
+CByteWidget::CByteWidget( TQWidget *tqparent, const char *name )
+  :TQWidget(tqparent, name)
 {
   mHBox = new TQHBoxLayout( this, 0 );
   
@@ -183,9 +183,9 @@ CByteWidget::CByteWidget( TQWidget *parent, const char *name )
   {
     mDigit[i] = new CDigitLabel( this, 7-i );
     mDigit[i]->setLineWidth( 1 );
-    mDigit[i]->setFixedSize( mDigit[i]->sizeHint()*2 );
+    mDigit[i]->setFixedSize( mDigit[i]->tqsizeHint()*2 );
     mDigit[i]->setFrameStyle( TQFrame::Panel | TQFrame::Sunken );
-    mDigit[i]->setAlignment( AlignCenter );
+    mDigit[i]->tqsetAlignment( AlignCenter );
     connect( mDigit[i], TQT_SIGNAL(stepCell(const TQObject *, bool )),
 	     this, TQT_SLOT(stepCell(const TQObject *, bool )));
     connect( mDigit[i], TQT_SIGNAL(valueChanged(const TQObject *, uint, bool )),
@@ -206,7 +206,7 @@ void CByteWidget::stepCell( const TQObject *obj, bool next )
 {
   for( uint i=0; i<8; i++ )
   {
-    if( obj == mDigit[i] )
+    if( TQT_BASE_OBJECT_CONST(obj) == TQT_BASE_OBJECT_CONST(mDigit[i]) )
     {
       if( next == true )
       {
@@ -228,7 +228,7 @@ void CByteWidget::valueChanged( const TQObject *obj, uint val, bool after )
   {
     for( uint i=0; i<8; i++ )
     {
-      if( obj == mDigit[i] )
+      if( TQT_BASE_OBJECT_CONST(obj) == TQT_BASE_OBJECT_CONST(mDigit[i]) )
       {
 	uint tmp = 7-mDigit[i]->value();
 	mDigit[tmp]->setValue( mDigit[i]->value(), false );
@@ -282,7 +282,7 @@ void CByteWidget::setBuddy( const TQObject *obj )
 {
   for( uint i=0; i<8; i++ )
   {
-    if( obj == mDigit[i] )
+    if( TQT_BASE_OBJECT_CONST(obj) == TQT_BASE_OBJECT_CONST(mDigit[i]) )
     {
       uint val = mDigit[i]->value();
       if( val < 8 )

@@ -43,7 +43,7 @@ public:
 	bool operator==(const Mode &mode) const { return mode.theName == theName && mode.theRemote == theRemote; }
 
 	Mode();
-	Mode(const TQString &remote, const TQString &name, const TQString &iconFile = TQString::null);
+	Mode(const TQString &remote, const TQString &name, const TQString &iconFile = TQString());
 	~Mode();
 };
 

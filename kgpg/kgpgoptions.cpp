@@ -62,8 +62,8 @@ class TQTabWidget;
 
 ///////////////////////   main window
 
-kgpgOptions::kgpgOptions(TQWidget *parent, const char *name)
- : KConfigDialog( parent, name, KGpgSettings::self())
+kgpgOptions::kgpgOptions(TQWidget *tqparent, const char *name)
+ : KConfigDialog( tqparent, name, KGpgSettings::self())
 {
 	defaultServerList="hkp://wwwkeys.eu.pgp.net ";
 	defaultServerList+=i18n("(Default)");
@@ -80,7 +80,7 @@ kgpgOptions::kgpgOptions(TQWidget *parent, const char *name)
 	else
 	{
                 if (TQFile(defaultHomePath+"gpg.conf").exists()) defaultConfigPath="gpg.conf";
-		else defaultConfigPath=TQString::null;
+		else defaultConfigPath=TQString();
 		}
 
 kdDebug(2100)<<"Adding pages"<<endl;
@@ -211,7 +211,7 @@ if (!gpgHome.endsWith("/")) gpgHome.append("/");
 		confFile.close();
 		}
 		}
-		else confPath=TQString::null;
+		else confPath=TQString();
 		}
 		}
 		page4->gpg_conf_path->setText(confPath);
@@ -278,9 +278,9 @@ void kgpgOptions::updateWidgetsDefault()
 	page4->gpg_conf_path->setText(defaultConfigPath);
 	page4->gpg_home_path->setText(defaultHomePath);
 
-	page4->kcfg_PubKeyringUrl->setURL(TQString::null);
+	page4->kcfg_PubKeyringUrl->setURL(TQString());
 	page4->kcfg_PubKeyring->setChecked(false);
-	page4->kcfg_PrivKeyringUrl->setURL(TQString::null);
+	page4->kcfg_PrivKeyringUrl->setURL(TQString());
 	page4->kcfg_PrivKeyring->setChecked(false);
 	page4->kcfg_OnlyAdditional->setChecked(false);
 
@@ -364,7 +364,7 @@ void kgpgOptions::updateSettings()
 	else
 	{
 	if (KgpgInterface::getGpgSetting("keyring", gpgConfigPath)!="") emitReload=true;
-	KgpgInterface::setGpgSetting("keyring",TQString::null, gpgConfigPath);
+	KgpgInterface::setGpgSetting("keyring",TQString(), gpgConfigPath);
 	}
 
 	if (page4->kcfg_PrivKeyring->isChecked())
@@ -375,7 +375,7 @@ void kgpgOptions::updateSettings()
 	else
 	{
 	if (KgpgInterface::getGpgSetting("secret-keyring", gpgConfigPath)!="") emitReload=true;
-	KgpgInterface::setGpgSetting("secret-keyring",TQString::null, gpgConfigPath);
+	KgpgInterface::setGpgSetting("secret-keyring",TQString(), gpgConfigPath);
 	}
 
 	emit changeFont(kfc->font());
@@ -416,7 +416,7 @@ void kgpgOptions::updateSettings()
 	for (uint i=0;i<page6->ServerBox->count();i++)
 	{
 	TQString currItem=page6->ServerBox->text(i);
-	if (currItem.find(" ")!=-1) // it is the default keyserver
+	if (currItem.tqfind(" ")!=-1) // it is the default keyserver
 	keyServer=currItem.section(" ",0,0);
 	else
 	{
@@ -500,7 +500,7 @@ TQString kgpgOptions::namecode(TQString kid)
                 if (TQString(ids[counter].right(8))==kid)
                         return names[counter];
 
-        return TQString::null;
+        return TQString();
 }
 
 
@@ -509,7 +509,7 @@ TQString kgpgOptions::idcode(TQString kname)
         for ( uint counter = 0; counter<names.count(); counter++ )
                 if (names[counter]==kname)
                         return TQString(ids[counter].right(8));
-        return TQString::null;
+        return TQString();
 }
 
 
@@ -538,7 +538,7 @@ void kgpgOptions::listkey()
                 tst=line;
                 if (tst.startsWith("pub")) {
                         name=KgpgInterface::checkForUtf8(tst.section(':',9,9));
-                        if ((!name.isEmpty()) && (trustedvals.find(tst.section(':',1,1))==-1)) {
+                        if ((!name.isEmpty()) && (trustedvals.tqfind(tst.section(':',1,1))==-1)) {
                                 counter++;
                                 //name=name.section('<',-1,-1);
                                 //  name=name.section('>',0,0);
@@ -546,7 +546,7 @@ void kgpgOptions::listkey()
                                 ids+=tst.section(':',4,4);
                                 if (tst.section(':',4,4).right(8)==alwaysKeyID)
                                         alwaysKeyName=tst.section(':',4,4).right(8)+":"+name;
-				if (issec.find(tst.section(':',4,4).right(8),0,FALSE)!=-1)
+				if (issec.tqfind(tst.section(':',4,4).right(8),0,FALSE)!=-1)
 				{
 //***                           page1->file_key->insertItem(pixkeyDouble,tst.section(':',4,4).right(8)+":"+name);
 //***                           page1->always_key->insertItem(pixkeyDouble,tst.section(':',4,4).right(8)+":"+name);
@@ -572,13 +572,13 @@ void kgpgOptions::slotAddKeyServer()
 TQString newServer=KInputDialog::getText(i18n("Add New Key Server"),i18n("Server URL:"));
 if (!newServer.isEmpty())
 page6->ServerBox->insertItem(newServer.stripWhiteSpace());
-page6->ServerBox->setSelected(page6->ServerBox->findItem(newServer.stripWhiteSpace()),true);
+page6->ServerBox->setSelected(page6->ServerBox->tqfindItem(newServer.stripWhiteSpace()),true);
 }
 
 void kgpgOptions::slotDelKeyServer()
 {
 bool defaultDeleted=false;
-if (page6->ServerBox->currentText().find(" ")!=-1) defaultDeleted=true;
+if (page6->ServerBox->currentText().tqfind(" ")!=-1) defaultDeleted=true;
 page6->ServerBox->removeItem(page6->ServerBox->currentItem());
 page6->ServerBox->setSelected(0,true);
 if (defaultDeleted) page6->ServerBox->changeItem(page6->ServerBox->currentText().section(" ",0,0)+" "+i18n("(Default)"),0);

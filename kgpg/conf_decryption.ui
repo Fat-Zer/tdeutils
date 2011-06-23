@@ -1,6 +1,6 @@
 <!DOCTYPE UI><UI version="3.2" stdsetdef="1">
 <class>Decryption</class>
-<widget class="QWidget">
+<widget class="TQWidget">
     <property name="name">
         <cstring>Decryption</cstring>
     </property>
@@ -40,14 +40,14 @@
             <property name="sizeType">
                 <enum>Expanding</enum>
             </property>
-            <property name="sizeHint">
+            <property name="tqsizeHint">
                 <size>
                     <width>21</width>
                     <height>155</height>
                 </size>
             </property>
         </spacer>
-        <widget class="QLabel" row="0" column="0">
+        <widget class="TQLabel" row="0" column="0">
             <property name="name">
                 <cstring>textLabel1_4_2</cstring>
             </property>
@@ -62,8 +62,8 @@
         </widget>
     </grid>
 </widget>
-<slots>
+<Q_SLOTS>
     <slot>use_agent_toggled( bool isOn )</slot>
-</slots>
-<layoutdefaults spacing="6" margin="11"/>
+</Q_SLOTS>
+<tqlayoutdefaults spacing="6" margin="11"/>
 </UI>

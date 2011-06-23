@@ -45,6 +45,7 @@ class KHexEdit;
 class KHexEditPart : public KParts::ReadOnlyPart
 {
     Q_OBJECT
+  TQ_OBJECT
 
     friend class KHexEditBrowserExtension;
 

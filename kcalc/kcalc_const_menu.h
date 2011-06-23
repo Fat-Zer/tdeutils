@@ -1,6 +1,6 @@
 /*
     KCalc, a scientific calculator for the X window system using the
-    Qt widget libraries, available at no cost at http://www.troll.no
+    TQt widget libraries, available at no cost at http://www.troll.no
 
     Copyright (C) 2004 Klaus Niederkruger
 
@@ -36,12 +36,12 @@ struct science_constant{
   ConstantCategory category;
 };
 
-class KCalcConstMenu : public QPopupMenu
+class KCalcConstMenu : public TQPopupMenu
 {
-Q_OBJECT 
+TQ_OBJECT 
 
  public:
-  KCalcConstMenu(TQWidget * parent = 0, const char * name = 0);
+  KCalcConstMenu(TQWidget * tqparent = 0, const char * name = 0);
 
   static const struct science_constant Constants[];
 

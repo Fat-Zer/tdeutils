@@ -32,13 +32,13 @@
 #include "chartabledialog.h"
 
 
-CCharTableDialog::CCharTableDialog( TQWidget *parent, const char *name,
+CCharTableDialog::CCharTableDialog( TQWidget *tqparent, const char *name,
 				    bool modal )
   :KDialogBase( Plain, i18n("Character Table"), Help|User1|Cancel, User1,
-		parent, name, modal, true, KStdGuiItem::insert())
+		tqparent, name, modal, true, KStdGuiItem::insert())
 {
   updateGeometry();
-  setHelp( "khexedit/khexedit.html", TQString::null );
+  setHelp( "khexedit/khexedit.html", TQString() );
 
   TQString text;
   TQVBoxLayout *topLayout = new TQVBoxLayout( plainPage(), 0, spacingHint() );
@@ -69,7 +69,7 @@ CCharTableDialog::CCharTableDialog( TQWidget *parent, const char *name,
 
   text = i18n("Insert this number of characters:");
   TQLabel *label = new TQLabel( text, plainPage() );
-  label->setFixedWidth( label->sizeHint().width() );
+  label->setFixedWidth( label->tqsizeHint().width() );
   hbox->addWidget( label );
 
   mInputCountSpin = new TQSpinBox( plainPage(), "spin" );

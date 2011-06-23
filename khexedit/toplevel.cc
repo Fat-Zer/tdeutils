@@ -18,7 +18,7 @@
  *
  */
 
-// kate: space-indent on; indent-width 2; replace-tabs on;
+// kate: space-indent on; indent-width 2; tqreplace-tabs on;
 
 #include <tqptrlist.h>
 #include <tqsignalmapper.h>
@@ -68,43 +68,43 @@ KHexEdit::KHexEdit( void )
   //
   // Prepare menus and status bar
   //
-  mAction.bookmarkMapper = new TQSignalMapper(this);
-  connect(mAction.bookmarkMapper, TQT_SIGNAL(mapped(int)), editor(), TQT_SLOT(gotoBookmark(int)));
+  mAction.bookmarkMapper = new TQSignalMapper(TQT_TQOBJECT(this));
+  connect(mAction.bookmarkMapper, TQT_SIGNAL(mapped(int)), TQT_TQOBJECT(editor()), TQT_SLOT(gotoBookmark(int)));
   setupActions();
   setupStatusBar();
 
   connect( hexView(), TQT_SIGNAL( cursorChanged( SCursorState & ) ),
-	   this, TQT_SLOT( cursorChanged( SCursorState & ) ) );
+	   TQT_TQOBJECT(this), TQT_SLOT( cursorChanged( SCursorState & ) ) );
   connect( hexView(), TQT_SIGNAL( editMode( CHexBuffer::EEditMode ) ),
-	   this, TQT_SLOT( editMode( CHexBuffer::EEditMode ) ) );
+	   TQT_TQOBJECT(this), TQT_SLOT( editMode( CHexBuffer::EEditMode ) ) );
   connect( hexView(), TQT_SIGNAL( encodingChanged( const SEncodeState &)),
-	   this, TQT_SLOT( encodingChanged( const SEncodeState & )) );
+	   TQT_TQOBJECT(this), TQT_SLOT( encodingChanged( const SEncodeState & )) );
   connect( hexView(), TQT_SIGNAL( textWidth( uint ) ),
-	   this, TQT_SLOT( textWidth( uint ) ) );
+	   TQT_TQOBJECT(this), TQT_SLOT( textWidth( uint ) ) );
   connect( hexView(), TQT_SIGNAL( fileState( SFileState & ) ),
-	   this, TQT_SLOT( fileState( SFileState & ) ) );
-  connect( hexView(), TQT_SIGNAL( layoutChanged( const SDisplayLayout & ) ),
-	   this, TQT_SLOT( layoutChanged( const SDisplayLayout & ) ) );
+	   TQT_TQOBJECT(this), TQT_SLOT( fileState( SFileState & ) ) );
+  connect( hexView(), TQT_SIGNAL( tqlayoutChanged( const SDisplayLayout & ) ),
+	   TQT_TQOBJECT(this), TQT_SLOT( tqlayoutChanged( const SDisplayLayout & ) ) );
   connect( hexView(), TQT_SIGNAL( inputModeChanged( const SDisplayInputMode & ) ),
-	   this, TQT_SLOT( inputModeChanged( const SDisplayInputMode & ) ) );
+	   TQT_TQOBJECT(this), TQT_SLOT( inputModeChanged( const SDisplayInputMode & ) ) );
   connect( hexView(), TQT_SIGNAL( bookmarkChanged( TQPtrList<SCursorOffset> &)),
-	   this, TQT_SLOT( bookmarkChanged( TQPtrList<SCursorOffset> & ) ) );
+	   TQT_TQOBJECT(this), TQT_SLOT( bookmarkChanged( TQPtrList<SCursorOffset> & ) ) );
   connect( hexView(), TQT_SIGNAL( fileName( const TQString &, bool ) ),
-	   this, TQT_SLOT( fileActive( const TQString &, bool ) ) );
+	   TQT_TQOBJECT(this), TQT_SLOT( fileActive( const TQString &, bool ) ) );
   connect( hexView(), TQT_SIGNAL( fileRename( const TQString &, const TQString & )),
-	   this, TQT_SLOT( fileRename( const TQString &, const TQString & ) ) );
+	   TQT_TQOBJECT(this), TQT_SLOT( fileRename( const TQString &, const TQString & ) ) );
   connect( hexView(), TQT_SIGNAL( fileClosed( const TQString & ) ),
-	   this, TQT_SLOT( fileClosed( const TQString & ) ) );
-  connect( editor(), TQT_SIGNAL( errorLoadFile( const TQString & ) ),
-	   this, TQT_SLOT( removeRecentFile( const TQString & ) ) );
-  connect( editor(), TQT_SIGNAL( operationChanged( bool ) ),
-	   this, TQT_SLOT( operationChanged( bool ) ) );
-  connect( editor(), TQT_SIGNAL( removeRecentFiles() ),
-	   this, TQT_SLOT( removeRecentFiles() ) );
+	   TQT_TQOBJECT(this), TQT_SLOT( fileClosed( const TQString & ) ) );
+  connect( TQT_TQOBJECT(editor()), TQT_SIGNAL( errorLoadFile( const TQString & ) ),
+	   TQT_TQOBJECT(this), TQT_SLOT( removeRecentFile( const TQString & ) ) );
+  connect( TQT_TQOBJECT(editor()), TQT_SIGNAL( operationChanged( bool ) ),
+	   TQT_TQOBJECT(this), TQT_SLOT( operationChanged( bool ) ) );
+  connect( TQT_TQOBJECT(editor()), TQT_SIGNAL( removeRecentFiles() ),
+	   TQT_TQOBJECT(this), TQT_SLOT( removeRecentFiles() ) );
   connect( mManager, TQT_SIGNAL( conversionClosed() ),
-	   this, TQT_SLOT(conversionClosed()) );
+	   TQT_TQOBJECT(this), TQT_SLOT(conversionClosed()) );
   connect( mManager, TQT_SIGNAL( searchBarClosed() ),
-	   this, TQT_SLOT(searchBarClosed()) );
+	   TQT_TQOBJECT(this), TQT_SLOT(searchBarClosed()) );
 
   //
   // Read configuration from file and set the default editor size.
@@ -125,68 +125,68 @@ KHexEdit::~KHexEdit( void )
 
 void KHexEdit::setupActions( void )
 {
-  KStdAction::openNew( editor(), TQT_SLOT(newFile()), actionCollection() );
-  KStdAction::open( editor(), TQT_SLOT(open()), actionCollection() );
+  KStdAction::openNew( TQT_TQOBJECT(editor()), TQT_SLOT(newFile()), actionCollection() );
+  KStdAction::open( TQT_TQOBJECT(editor()), TQT_SLOT(open()), actionCollection() );
   KStdAction::keyBindings(guiFactory(), TQT_SLOT(configureShortcuts()), 
 actionCollection());
    
   mAction.insert     = new KAction( i18n("&Insert..."), CTRL+Key_I,
-    editor(), TQT_SLOT(insertFile()), actionCollection(), "insert_file" );
-  mAction.openRecent = KStdAction::openRecent( this, TQT_SLOT( slotFileOpenRecent( const KURL& ) ), actionCollection() );
-  mAction.save       = KStdAction::save( editor(), TQT_SLOT(save()), actionCollection() );
-  mAction.saveAs     = KStdAction::saveAs( editor(), TQT_SLOT(saveAs()), actionCollection() );
-  mAction.revert     = KStdAction::revert( editor(), TQT_SLOT(reload()), actionCollection() );
-  //mAction.revert     = KStdAction::revert( this, TQT_SLOT(resizeTest()), actionCollection() );
+    TQT_TQOBJECT(editor()), TQT_SLOT(insertFile()), actionCollection(), "insert_file" );
+  mAction.openRecent = KStdAction::openRecent( TQT_TQOBJECT(this), TQT_SLOT( slotFileOpenRecent( const KURL& ) ), actionCollection() );
+  mAction.save       = KStdAction::save( TQT_TQOBJECT(editor()), TQT_SLOT(save()), actionCollection() );
+  mAction.saveAs     = KStdAction::saveAs( TQT_TQOBJECT(editor()), TQT_SLOT(saveAs()), actionCollection() );
+  mAction.revert     = KStdAction::revert( TQT_TQOBJECT(editor()), TQT_SLOT(reload()), actionCollection() );
+  //mAction.revert     = KStdAction::revert( TQT_TQOBJECT(this), TQT_SLOT(resizeTest()), actionCollection() );
 
-  mAction.close      = KStdAction::close( editor(), TQT_SLOT(close()), actionCollection() );
-  mAction.print      = KStdAction::print( editor(), TQT_SLOT(print()), actionCollection() );
+  mAction.close      = KStdAction::close( TQT_TQOBJECT(editor()), TQT_SLOT(close()), actionCollection() );
+  mAction.print      = KStdAction::print( TQT_TQOBJECT(editor()), TQT_SLOT(print()), actionCollection() );
   mAction.exportData = new KAction( i18n("E&xport..."), 0,
-    editor(), TQT_SLOT(exportDialog()), actionCollection(), "export" );
+    TQT_TQOBJECT(editor()), TQT_SLOT(exportDialog()), actionCollection(), "export" );
   mAction.cancel     = new KAction( i18n("&Cancel Operation"),
-    "stop", 0, editor(), TQT_SLOT(stop()), actionCollection(), "cancel" );
+    "stop", 0, TQT_TQOBJECT(editor()), TQT_SLOT(stop()), actionCollection(), "cancel" );
   mAction.readOnly   = new KToggleAction( i18n("&Read Only"),
-    0, editor(), TQT_SLOT(toggleWriteProtection()),actionCollection(), "read_only" );
+    0, TQT_TQOBJECT(editor()), TQT_SLOT(toggleWriteProtection()),actionCollection(), "read_only" );
   mAction.resizeLock = new KToggleAction( i18n("&Allow Resize"),
-   0, editor(), TQT_SLOT(toggleResizeLock()),actionCollection(), "resize_lock" );
+   0, TQT_TQOBJECT(editor()), TQT_SLOT(toggleResizeLock()),actionCollection(), "resize_lock" );
   mAction.newWindow  = new KAction( i18n("N&ew Window"),
-    0, this, TQT_SLOT(newWindow()),actionCollection(), "new_window" );
+    0, TQT_TQOBJECT(this), TQT_SLOT(newWindow()),actionCollection(), "new_window" );
   mAction.closeWindow= new KAction( i18n("Close &Window"),
-    0, this, TQT_SLOT(closeWindow()),actionCollection(), "close_window" );
-  mAction.quit       = KStdAction::quit( this, TQT_SLOT(closeProgram()), actionCollection() );
+    0, TQT_TQOBJECT(this), TQT_SLOT(closeWindow()),actionCollection(), "close_window" );
+  mAction.quit       = KStdAction::quit( TQT_TQOBJECT(this), TQT_SLOT(closeProgram()), actionCollection() );
 
-  mAction.undo       = KStdAction::undo(  editor(), TQT_SLOT(undo()), actionCollection() );
-  mAction.redo       = KStdAction::redo(  editor(), TQT_SLOT(redo()), actionCollection() );
-  mAction.cut        = KStdAction::cut(  editor(), TQT_SLOT(cut()), actionCollection() );
-  mAction.copy       = KStdAction::copy(  editor(), TQT_SLOT(copy()), actionCollection() );
-  mAction.paste      = KStdAction::paste(  editor(), TQT_SLOT(paste()), actionCollection() );
-  mAction.selectAll  = KStdAction::selectAll(editor(), TQT_SLOT(selectAll()),actionCollection() );
-  mAction.unselect   = KStdAction::deselect(editor(), TQT_SLOT(unselect()), actionCollection());
-  mAction.find       = KStdAction::find( editor(), TQT_SLOT(find()), actionCollection() );
-  mAction.findNext   = KStdAction::findNext(editor(), TQT_SLOT(findNext()), actionCollection() );
-  mAction.findPrev = KStdAction::findPrev(editor(),TQT_SLOT(findPrevious()),actionCollection() );
-  mAction.replace    = KStdAction::replace( editor(), TQT_SLOT(replace()), actionCollection() );
+  mAction.undo       = KStdAction::undo(      TQT_TQOBJECT(editor()), TQT_SLOT(undo()), actionCollection() );
+  mAction.redo       = KStdAction::redo(      TQT_TQOBJECT(editor()), TQT_SLOT(redo()), actionCollection() );
+  mAction.cut        = KStdAction::cut(       TQT_TQOBJECT(editor()), TQT_SLOT(cut()), actionCollection() );
+  mAction.copy       = KStdAction::copy(      TQT_TQOBJECT(editor()), TQT_SLOT(copy()), actionCollection() );
+  mAction.paste      = KStdAction::paste(     TQT_TQOBJECT(editor()), TQT_SLOT(paste()), actionCollection() );
+  mAction.selectAll  = KStdAction::selectAll( TQT_TQOBJECT(editor()), TQT_SLOT(selectAll()),actionCollection() );
+  mAction.unselect   = KStdAction::deselect(  TQT_TQOBJECT(editor()), TQT_SLOT(unselect()), actionCollection());
+  mAction.tqfind     = KStdAction::find(      TQT_TQOBJECT(editor()), TQT_SLOT(tqfind()), actionCollection() );
+  mAction.findNext   = KStdAction::findNext(  TQT_TQOBJECT(editor()), TQT_SLOT(findNext()), actionCollection() );
+  mAction.findPrev   = KStdAction::findPrev(  TQT_TQOBJECT(editor()),TQT_SLOT(findPrevious()),actionCollection() );
+  mAction.tqreplace  = KStdAction::replace(   TQT_TQOBJECT(editor()), TQT_SLOT(tqreplace()), actionCollection() );
   mAction.gotoOffset = new KAction( i18n("&Goto Offset..."), CTRL+Key_G,
-    editor(), TQT_SLOT(gotoOffset()),actionCollection(), "goto_offset" );
+    TQT_TQOBJECT(editor()), TQT_SLOT(gotoOffset()),actionCollection(), "goto_offset" );
   mAction.insertPattern = new KAction( i18n("&Insert Pattern..."), CTRL+Key_Insert,
-    editor(), TQT_SLOT(insertPattern()), actionCollection(), "insert_pattern" );
+    TQT_TQOBJECT(editor()), TQT_SLOT(insertPattern()), actionCollection(), "insert_pattern" );
 
   mAction.copyAsText = new KAction( i18n("Copy as &Text"), 0,
-    editor(), TQT_SLOT(copyText()), actionCollection(), "copy_as_text" );
+    TQT_TQOBJECT(editor()), TQT_SLOT(copyText()), actionCollection(), "copy_as_text" );
   mAction.pasteToNewFile = new KAction( i18n("Paste into New &File"), 0,
-    editor(), TQT_SLOT(pasteNewFile()), actionCollection(), "paste_into_new_file" );
+    TQT_TQOBJECT(editor()), TQT_SLOT(pasteNewFile()), actionCollection(), "paste_into_new_file" );
   mAction.pasteToNewWindow = new KAction( i18n("Paste into New &Window"), 0,
-    this, TQT_SLOT(pasteNewWindow()), actionCollection(), "paste_into_new_window" );
+    TQT_TQOBJECT(this), TQT_SLOT(pasteNewWindow()), actionCollection(), "paste_into_new_window" );
 
   mAction.hexadecimal = new KRadioAction( i18n("&Hexadecimal"),
-    0, this, TQT_SLOT(setDisplayMode()), actionCollection(), "mode_hex" );
+    0, TQT_TQOBJECT(this), TQT_SLOT(setDisplayMode()), actionCollection(), "mode_hex" );
   mAction.decimal     = new KRadioAction( i18n("&Decimal"),
-    0, this, TQT_SLOT(setDisplayMode()), actionCollection(), "mode_dec" );
+    0, TQT_TQOBJECT(this), TQT_SLOT(setDisplayMode()), actionCollection(), "mode_dec" );
   mAction.octal       = new KRadioAction( i18n("&Octal"),
-    0, this, TQT_SLOT(setDisplayMode()), actionCollection(), "mode_oct" );
+    0, TQT_TQOBJECT(this), TQT_SLOT(setDisplayMode()), actionCollection(), "mode_oct" );
   mAction.binary      = new KRadioAction( i18n("&Binary"),
-    0, this, TQT_SLOT(setDisplayMode()), actionCollection(), "mode_bin" );
+    0, TQT_TQOBJECT(this), TQT_SLOT(setDisplayMode()), actionCollection(), "mode_bin" );
   mAction.textOnly    = new KRadioAction( i18n("&Text"),
-    0, this, TQT_SLOT(setDisplayMode()), actionCollection(), "mode_text" );
+    0, TQT_TQOBJECT(this), TQT_SLOT(setDisplayMode()), actionCollection(), "mode_text" );
   mAction.hexadecimal->setExclusiveGroup( "displayMode" );
   mAction.decimal->setExclusiveGroup( "displayMode" );
   mAction.octal->setExclusiveGroup( "displayMode" );
@@ -194,104 +194,104 @@ actionCollection());
   mAction.textOnly->setExclusiveGroup( "displayMode" );
 
   mAction.showOffsetColumn = new KToggleAction( i18n("Show O&ffset Column"),
-    0, editor(), TQT_SLOT(toggleOffsetColumnVisibility()),actionCollection(), "show_offset_column" );
+    0, TQT_TQOBJECT(editor()), TQT_SLOT(toggleOffsetColumnVisibility()),actionCollection(), "show_offset_column" );
   mAction.showTextColumn = new KToggleAction( i18n("Show Te&xt Field"),
-    0, editor(), TQT_SLOT(toggleTextColumnVisibility()),actionCollection(), "show_text_field" );
+    0, TQT_TQOBJECT(editor()), TQT_SLOT(toggleTextColumnVisibility()),actionCollection(), "show_text_field" );
   mAction.offsetAsDecimal = new KToggleAction( i18n("Off&set as Decimal"),
-    0, editor(), TQT_SLOT(toggleOffsetAsDecimal()),actionCollection(), "offset_as_decimal" );
+    0, TQT_TQOBJECT(editor()), TQT_SLOT(toggleOffsetAsDecimal()),actionCollection(), "offset_as_decimal" );
   mAction.dataUppercase = new KToggleAction( i18n("&Upper Case (Data)"),
-    0, editor(), TQT_SLOT(toggleDataUppercase()),actionCollection(), "upper_case_data" );
+    0, TQT_TQOBJECT(editor()), TQT_SLOT(toggleDataUppercase()),actionCollection(), "upper_case_data" );
   mAction.offsetUppercase = new KToggleAction( i18n("Upper &Case (Offset)"),
-    0, editor(), TQT_SLOT(toggleOffsetUppercase()),actionCollection(), "upper_case_offset" );
+    0, TQT_TQOBJECT(editor()), TQT_SLOT(toggleOffsetUppercase()),actionCollection(), "upper_case_offset" );
 
   mAction.defaultEncoding = new KRadioAction( i18n("&Default encoding", "&Default"),
-    0, this, TQT_SLOT( setEncoding()), actionCollection(), "enc_default" );
+    0, TQT_TQOBJECT(this), TQT_SLOT( setEncoding()), actionCollection(), "enc_default" );
   mAction.usAsciiEncoding = new KRadioAction( i18n("US-&ASCII (7 bit)"),
-    0, this, TQT_SLOT( setEncoding()), actionCollection(), "enc_ascii");
+    0, TQT_TQOBJECT(this), TQT_SLOT( setEncoding()), actionCollection(), "enc_ascii");
   mAction.ebcdicEncoding  = new KRadioAction( i18n("&EBCDIC"),
-    0, this, TQT_SLOT( setEncoding()), actionCollection(), "enc_ebcdic" );
+    0, TQT_TQOBJECT(this), TQT_SLOT( setEncoding()), actionCollection(), "enc_ebcdic" );
 //   mAction.customEncoding  = new KAction( i18n("&Custom..."),
-//     0, editor(), TQT_SLOT( encoding()), actionCollection(), "enc_custom" );
+//     0, TQT_TQOBJECT(editor()), TQT_SLOT( encoding()), actionCollection(), "enc_custom" );
   mAction.defaultEncoding->setExclusiveGroup( "encodingMode" );
   mAction.usAsciiEncoding->setExclusiveGroup( "encodingMode" );
   mAction.ebcdicEncoding->setExclusiveGroup( "encodingMode" );
 
   mAction.strings = new KAction( i18n("&Extract Strings..."), 0,
-    editor(), TQT_SLOT(strings()), actionCollection(), "extract_strings" );
+    TQT_TQOBJECT(editor()), TQT_SLOT(strings()), actionCollection(), "extract_strings" );
 //   mAction.recordViewer = new KAction( i18n("&Record Viewer"), 0,
-//     editor(), TQT_SLOT(recordView()), actionCollection(), "record_viewer" );
+//     TQT_TQOBJECT(editor()), TQT_SLOT(recordView()), actionCollection(), "record_viewer" );
   mAction.filter = new KAction( i18n("&Binary Filter..."), 0,
-    editor(), TQT_SLOT(filter()), actionCollection(), "binary_filter" );
+    TQT_TQOBJECT(editor()), TQT_SLOT(filter()), actionCollection(), "binary_filter" );
   mAction.characterTable = new KAction( i18n("&Character Table"), 0,
-    editor(), TQT_SLOT(chart()), actionCollection(), "char_table" );
+    TQT_TQOBJECT(editor()), TQT_SLOT(chart()), actionCollection(), "char_table" );
   mAction.converter = new KAction( i18n("C&onverter"), 0,
-    editor(), TQT_SLOT(converter()), actionCollection(), "converter" );
+    TQT_TQOBJECT(editor()), TQT_SLOT(converter()), actionCollection(), "converter" );
   mAction.statistics = new KAction( i18n("&Statistics"), 0,
-    editor(), TQT_SLOT(statistics()), actionCollection(), "statistics" );
+    TQT_TQOBJECT(editor()), TQT_SLOT(statistics()), actionCollection(), "statistics" );
 
-  mAction.addBookmark = KStdAction::addBookmark( editor(),
+  mAction.addBookmark = KStdAction::addBookmark( TQT_TQOBJECT(editor()),
     TQT_SLOT(addBookmark()), actionCollection() );
   mAction.replaceBookmark = new KAction( i18n("&Replace Bookmark"), CTRL+Key_E,
-    editor(), TQT_SLOT(replaceBookmark()), actionCollection(), "replace_bookmark");
+    TQT_TQOBJECT(editor()), TQT_SLOT(replaceBookmark()), actionCollection(), "replace_bookmark");
   mAction.removeBookmark = new KAction( i18n("R&emove Bookmark"), CTRL+Key_U,
-    editor(), TQT_SLOT(removeBookmark()), actionCollection(), "remove_bookmark" );
+    TQT_TQOBJECT(editor()), TQT_SLOT(removeBookmark()), actionCollection(), "remove_bookmark" );
   mAction.removeAllBookmark = new KAction( i18n("Re&move All"), 0,
-    editor(), TQT_SLOT(removeAllBookmark()), actionCollection(), "remove_all_bookmarks" );
+    TQT_TQOBJECT(editor()), TQT_SLOT(removeAllBookmark()), actionCollection(), "remove_all_bookmarks" );
   mAction.nextBookmark = new KAction( i18n("Goto &Next Bookmark"),
-				      ALT+Key_Down, editor(),
+				      ALT+Key_Down, TQT_TQOBJECT(editor()),
 				      TQT_SLOT(gotoNextBookmark()), actionCollection(), "next_bookmark" );
   mAction.prevBookmark = new KAction( i18n("Goto &Previous Bookmark"),
-				      ALT+Key_Up, editor(),
+				      ALT+Key_Up, TQT_TQOBJECT(editor()),
 				      TQT_SLOT(gotoPrevBookmark()), actionCollection(), "prev_bookmark" );
 
   createStandardStatusBarAction();
   setStandardToolBarMenuEnabled(true);
   mAction.showFullPath  = new KToggleAction( i18n("Show F&ull Path"),
-    0, this, TQT_SLOT(showFullPath()), actionCollection(), "show_full_path" );
+    0, TQT_TQOBJECT(this), TQT_SLOT(showFullPath()), actionCollection(), "show_full_path" );
 
   mAction.tabHide = new KRadioAction( i18n("&Hide"),
-    0, this, TQT_SLOT(showDocumentTabs()), actionCollection(), "doctab_hide" );
+    0, TQT_TQOBJECT(this), TQT_SLOT(showDocumentTabs()), actionCollection(), "doctab_hide" );
   mAction.tabShowAboveEditor = new KRadioAction( i18n("&Above Editor"),
-    0, this, TQT_SLOT(showDocumentTabs()), actionCollection(), "doctab_above" );
+    0, TQT_TQOBJECT(this), TQT_SLOT(showDocumentTabs()), actionCollection(), "doctab_above" );
   mAction.tabShowBelowEditor = new KRadioAction( i18n("&Below Editor"),
-    0, this, TQT_SLOT(showDocumentTabs()), actionCollection(), "doctab_below" );
+    0, TQT_TQOBJECT(this), TQT_SLOT(showDocumentTabs()), actionCollection(), "doctab_below" );
   mAction.tabHide->setExclusiveGroup( "editorTab" );
   mAction.tabShowAboveEditor->setExclusiveGroup( "editorTab" );
   mAction.tabShowBelowEditor->setExclusiveGroup( "editorTab" );
 
   mAction.conversionHide  = new KRadioAction( i18n("&Hide"),
-    0, this, TQT_SLOT(showConversionField()), actionCollection(), "conversion_field_hide");
+    0, TQT_TQOBJECT(this), TQT_SLOT(showConversionField()), actionCollection(), "conversion_field_hide");
   mAction.conversionFloat = new KRadioAction( i18n("&Floating"),
-    0, this, TQT_SLOT(showConversionField()), actionCollection(), "conversion_field_float");
+    0, TQT_TQOBJECT(this), TQT_SLOT(showConversionField()), actionCollection(), "conversion_field_float");
   mAction.conversionEmbed = new KRadioAction( i18n("&Embed in Main Window"),
-    0, this, TQT_SLOT(showConversionField()), actionCollection(), "conversion_field_embed");
+    0, TQT_TQOBJECT(this), TQT_SLOT(showConversionField()), actionCollection(), "conversion_field_embed");
   mAction.conversionHide->setExclusiveGroup( "conversionField" );
   mAction.conversionFloat->setExclusiveGroup( "conversionField" );
   mAction.conversionEmbed->setExclusiveGroup( "conversionField" );
 
   mAction.searchHide = new KRadioAction( i18n("&Hide"),
-    0, this, TQT_SLOT(showSearchBar()), actionCollection(), "searchbar_hide" );
+    0, TQT_TQOBJECT(this), TQT_SLOT(showSearchBar()), actionCollection(), "searchbar_hide" );
   mAction.searchShowAboveEditor = new KRadioAction( i18n("&Above Editor"),
-    Key_F5, this, TQT_SLOT(showSearchBar()), actionCollection(), "searchbar_above" );
+    Key_F5, TQT_TQOBJECT(this), TQT_SLOT(showSearchBar()), actionCollection(), "searchbar_above" );
   mAction.searchShowBelowEditor = new KRadioAction( i18n("&Below Editor"),
-    Key_F6, this, TQT_SLOT(showSearchBar()), actionCollection(), "searchbar_below" );
+    Key_F6, TQT_TQOBJECT(this), TQT_SLOT(showSearchBar()), actionCollection(), "searchbar_below" );
   mAction.searchHide->setExclusiveGroup( "searchBar" );
   mAction.searchShowAboveEditor->setExclusiveGroup( "searchBar" );
   mAction.searchShowBelowEditor->setExclusiveGroup( "searchBar" );
 
-  KStdAction::saveOptions(this, TQT_SLOT(writeConfiguration()), actionCollection());
-  KStdAction::preferences(editor(),TQT_SLOT(options()),actionCollection() );
+  KStdAction::saveOptions(TQT_TQOBJECT(this), TQT_SLOT(writeConfiguration()), actionCollection());
+  KStdAction::preferences(TQT_TQOBJECT(editor()) ,TQT_SLOT(options()),actionCollection() );
 //   mAction.favorites = new KAction( i18n("P&rofiles..."), 0,
-//     editor(), TQT_SLOT(favorites()), actionCollection(), "favorites" );
+//     TQT_TQOBJECT(editor()), TQT_SLOT(favorites()), actionCollection(), "favorites" );
 
-  KStdAction::help( this, TQT_SLOT(appHelpActivated()), actionCollection() );
+  KStdAction::help( TQT_TQOBJECT(this), TQT_SLOT(appHelpActivated()), actionCollection() );
 
   mDragLabel = new CDragLabel(this);
   mDragLabel->setPixmap( UserIcon( "hexdrag" ) );
-  mDragLabel->setDragMask( UserIcon( "hexmask" ) );
+  mDragLabel->setDragMask( UserIcon( "hextqmask" ) );
   mDragLabel->setEnabled( false ); // Enabled once we open a document
   TQToolTip::add( mDragLabel, i18n("Drag document") );
- (void) new KWidgetAction(mDragLabel, i18n("Drag Document"), 0, editor(), TQT_SLOT(options()), actionCollection(), "drag_document");
+ (void) new KWidgetAction(mDragLabel, i18n("Drag Document"), 0, TQT_TQOBJECT(editor()), TQT_SLOT(options()), actionCollection(), "drag_document");
 
   createGUI("khexeditui.rc", false);
 
@@ -300,7 +300,7 @@ actionCollection());
 
   int id = 100;
   toolBar(0)->insertButton( MainBarIcon("lock"), id, TQT_SIGNAL(clicked()),
-    editor(), TQT_SLOT(toggleWriteProtection()), true,
+    TQT_TQOBJECT(editor()), TQT_SLOT(toggleWriteProtection()), true,
     i18n("Toggle write protection") );
   toolBar(0)->alignItemRight( id );
   mWriteProtectButton = toolBar(0)->getButton(id);
@@ -316,14 +316,14 @@ void KHexEdit::setupStatusBar( void )
 {
   CStatusBarProgress *progess = new CStatusBarProgress( statusBar() );
   statusBar()->addWidget( progess, 10 );
-  connect( progess, TQT_SIGNAL(pressed()), editor(), TQT_SLOT(stop()) );
-  connect( editor(), TQT_SIGNAL( setProgress( int ) ),
+  connect( progess, TQT_SIGNAL(pressed()), TQT_TQOBJECT(editor()), TQT_SLOT(stop()) );
+  connect( TQT_TQOBJECT(editor()), TQT_SIGNAL( setProgress( int ) ),
 	   progess, TQT_SLOT( setValue( int ) ) );
-  connect( editor(), TQT_SIGNAL( setProgress( int, int ) ),
+  connect( TQT_TQOBJECT(editor()), TQT_SIGNAL( setProgress( int, int ) ),
 	   progess, TQT_SLOT( setValue( int, int ) ) );
-  connect( editor(), TQT_SIGNAL( enableProgressText( bool ) ),
+  connect( TQT_TQOBJECT(editor()), TQT_SIGNAL( enableProgressText( bool ) ),
 	   progess, TQT_SLOT( setTextEnabled( bool ) ) );
-  connect( editor(), TQT_SIGNAL( setProgressText( const TQString & ) ),
+  connect( TQT_TQOBJECT(editor()), TQT_SIGNAL( setProgressText( const TQString & ) ),
 	   progess, TQT_SLOT( setText( const TQString & ) ) );
 
   statusBar()->insertFixedItem( i18n("Selection: 0000:0000 0000:0000"),
@@ -391,7 +391,7 @@ void KHexEdit::initialize( bool openFiles )
         maxItems = 1;
     for( unsigned int i = 1 ; i <= maxItems ; i++ )
     {
-        const TQString key = TQString( "File%1" ).arg( i );
+        const TQString key = TQString( "File%1" ).tqarg( i );
         const TQString value = config->readPathEntry( key );
     
         if (!value.isEmpty())
@@ -411,7 +411,7 @@ void KHexEdit::initialize( bool openFiles )
   // is displayed, then the editor will not be visible until the error
   // is confirmed and the (modal) dialog is closed.
   //
-  TQTimer::singleShot( 100, this, TQT_SLOT(delayedStartupOpen()) );
+  TQTimer::singleShot( 100, TQT_TQOBJECT(this), TQT_SLOT(delayedStartupOpen()) );
 }
 
 
@@ -479,7 +479,7 @@ void KHexEdit::addRecentFile( const TQString &fileName )
     return;
   }
 
-  if( fileName.contains( i18n( "Untitled" ), false ) )
+  if( fileName.tqcontains( i18n( "Untitled" ), false ) )
   {
     return;
   }
@@ -498,7 +498,7 @@ void KHexEdit::removeRecentFile( const TQString &fileName )
     return;
   }
 
-  if( fileName.contains( i18n( "Untitled" ), false ) )
+  if( fileName.tqcontains( i18n( "Untitled" ), false ) )
   {
     return;
   }
@@ -511,7 +511,7 @@ void KHexEdit::removeRecentFile( const TQString &fileName )
 
 void KHexEdit::renameRecentFile(const TQString &curName, const TQString &newName)
 {
-  if( curName.contains( i18n( "Untitled" ), false ) )
+  if( curName.tqcontains( i18n( "Untitled" ), false ) )
   {
     addRecentFile( newName );
   }
@@ -533,7 +533,7 @@ void KHexEdit::slotFileOpenRecent( const KURL& url )
   else
   {
     // ### TODO: support network transparency
-    KMessageBox::error( this, i18n("Non local recent file: %1").arg( url.prettyURL() ) );
+    KMessageBox::error( this, i18n("Non local recent file: %1").tqarg( url.prettyURL() ) );
   }
 }
 
@@ -545,7 +545,7 @@ KHexEdit *KHexEdit::newWindow( void )
   {
     TQString msg = i18n( "Can not create new window.\n" );
     msg += hexError( Err_NoMemory );
-    KMessageBox::error( topLevelWidget(), msg );
+    KMessageBox::error( tqtopLevelWidget(), msg );
     return(0);
   }
   hexEdit->show();
@@ -582,7 +582,7 @@ void KHexEdit::closeProgram( void )
 	TQString msg = i18n(""
 	  "There are windows with unsaved modified documents. "
 	  "If you quit now, these modifications will be lost.");
-	int reply = KMessageBox::warningContinueCancel( topLevelWidget(), msg, TQString::null, KStdGuiItem::quit() );
+	int reply = KMessageBox::warningContinueCancel( tqtopLevelWidget(), msg, TQString(), KStdGuiItem::quit() );
 	if( reply == KMessageBox::Continue )
 	{
 	  break;
@@ -755,11 +755,11 @@ void KHexEdit::cursorChanged( SCursorState &state )
   }
   else
   {
-    SDisplayLayout &layout = editor()->layout();
+    SDisplayLayout &tqlayout = editor()->tqlayout();
 
-    if( layout.offsetMode == SDisplayLayout::hexadecimal )
+    if( tqlayout.offsetMode == SDisplayLayout::hexadecimal )
     {
-      if( layout.offsetUpperCase == false )
+      if( tqlayout.offsetUpperCase == false )
       {
 	offset += TQString().sprintf( " %04x:%04x-%u", state.offset>>16,
 				     state.offset&0x0000FFFF, state.cell );
@@ -788,7 +788,7 @@ void KHexEdit::fileState( SFileState &state )
 {
   if( state.valid == true )
   {
-    statusBar()->changeItem( i18n("Size: %1").arg( state.size ), status_Size);
+    statusBar()->changeItem( i18n("Size: %1").tqarg( state.size ), status_Size);
     statusBar()->changeItem( state.modified ? "!" : "", status_Modified);
 
     if( mIsModified != state.modified )
@@ -807,23 +807,23 @@ void KHexEdit::fileState( SFileState &state )
 
 
 
-void KHexEdit::layoutChanged( const SDisplayLayout &layout )
+void KHexEdit::tqlayoutChanged( const SDisplayLayout &tqlayout )
 {
   KRadioAction *radioAction;
 
-  if( layout.primaryMode == SDisplayLayout::hexadecimal )
+  if( tqlayout.primaryMode == SDisplayLayout::hexadecimal )
   {
     radioAction = mAction.hexadecimal;
   }
-  else if( layout.primaryMode == SDisplayLayout::decimal )
+  else if( tqlayout.primaryMode == SDisplayLayout::decimal )
   {
     radioAction = mAction.decimal;
   }
-  else if( layout.primaryMode == SDisplayLayout::octal )
+  else if( tqlayout.primaryMode == SDisplayLayout::octal )
   {
     radioAction = mAction.octal;
   }
-  else if( layout.primaryMode == SDisplayLayout::binary )
+  else if( tqlayout.primaryMode == SDisplayLayout::binary )
   {
     radioAction = mAction.binary;
   }
@@ -841,15 +841,15 @@ void KHexEdit::layoutChanged( const SDisplayLayout &layout )
   mAction.dataUppercase->blockSignals(true);
   mAction.offsetUppercase->blockSignals(true);
 
-  mAction.showOffsetColumn->setChecked( layout.offsetVisible );
+  mAction.showOffsetColumn->setChecked( tqlayout.offsetVisible );
   mAction.showTextColumn->setEnabled(
-    layout.primaryMode != SDisplayLayout::textOnly );
+    tqlayout.primaryMode != SDisplayLayout::textOnly );
   mAction.showTextColumn->setChecked(
-    layout.secondaryMode != SDisplayLayout::hide );
+    tqlayout.secondaryMode != SDisplayLayout::hide );
   mAction.offsetAsDecimal->setChecked(
-    layout.offsetMode != SDisplayLayout::hexadecimal);
-  mAction.dataUppercase->setChecked( layout.primaryUpperCase );
-  mAction.offsetUppercase->setChecked( layout.offsetUpperCase );
+    tqlayout.offsetMode != SDisplayLayout::hexadecimal);
+  mAction.dataUppercase->setChecked( tqlayout.primaryUpperCase );
+  mAction.offsetUppercase->setChecked( tqlayout.offsetUpperCase );
 
   mAction.showOffsetColumn->blockSignals(false);
   mAction.showTextColumn->blockSignals(false);
@@ -857,23 +857,23 @@ void KHexEdit::layoutChanged( const SDisplayLayout &layout )
   mAction.dataUppercase->blockSignals(false);
   mAction.offsetUppercase->blockSignals(false);
 
-  if( layout.primaryMode == SDisplayLayout::hexadecimal )
+  if( tqlayout.primaryMode == SDisplayLayout::hexadecimal )
   {
     statusBar()->changeItem( i18n("Hex"), status_Layout );
   }
-  else if( layout.primaryMode == SDisplayLayout::decimal )
+  else if( tqlayout.primaryMode == SDisplayLayout::decimal )
   {
     statusBar()->changeItem( i18n("Dec"), status_Layout );
   }
-  else if( layout.primaryMode == SDisplayLayout::octal )
+  else if( tqlayout.primaryMode == SDisplayLayout::octal )
   {
     statusBar()->changeItem( i18n("Oct"), status_Layout );
   }
-  else if( layout.primaryMode == SDisplayLayout::binary )
+  else if( tqlayout.primaryMode == SDisplayLayout::binary )
   {
     statusBar()->changeItem( i18n("Bin"), status_Layout );
   }
-  else if( layout.primaryMode == SDisplayLayout::textOnly )
+  else if( tqlayout.primaryMode == SDisplayLayout::textOnly )
   {
     statusBar()->changeItem( i18n("Txt"), status_Layout );
   }
@@ -922,8 +922,8 @@ void KHexEdit::bookmarkChanged( TQPtrList<SCursorOffset> &list )
   for( SCursorOffset *p=list.first(); p!=0; p=list.next(), i++ )
   {
     offset.sprintf("%04X:%04X", p->offset>>16, p->offset&0x0000FFFF );
-    text = i18n("Offset: %1").arg(offset);
-    KAction *action = new KAction(text, 0, mAction.bookmarkMapper, TQT_SLOT(map()), this, text.latin1());
+    text = i18n("Offset: %1").tqarg(offset);
+    KAction *action = new KAction(text, 0, mAction.bookmarkMapper, TQT_SLOT(map()), TQT_TQOBJECT(this), text.latin1());
     int key = acceleratorNumKey( i );
     if( key > 0 )
     {
@@ -1021,7 +1021,7 @@ void KHexEdit::encodingChanged( const SEncodeState &encodeState )
 
   if( mSelectionSize == 0 )
   {
-    statusBar()->changeItem( i18n("Encoding: %1").arg(encodeState.name),
+    statusBar()->changeItem( i18n("Encoding: %1").tqarg(encodeState.name),
 			     status_Selection );
   }
 }
@@ -1186,7 +1186,7 @@ void KHexEdit::setSelectionText( uint selectionOffset, uint selectionSize )
   else
   {
     statusBar()->changeItem(
-      i18n("Encoding: %1").arg(hexView()->encoding().name), status_Selection);
+      i18n("Encoding: %1").tqarg(hexView()->encoding().name), status_Selection);
   }
 }
 
@@ -1232,7 +1232,7 @@ void KHexEdit::removeDocument( const TQString &fileName )
     {
       TQPopupMenu *documentMenu = (TQPopupMenu *)factory()->container("documents", this);
 
-      documentMenu->removeItemAt( mDocumentList.findIndex(*it) );
+      documentMenu->removeItemAt( mDocumentList.tqfindIndex(*it) );
       mDocumentList.remove( it );
 
       for( uint i=0; i < mDocumentList.count(); i++ )
@@ -1259,7 +1259,7 @@ void KHexEdit::renameDocument( const TQString &curName, const TQString &newName 
     if( *it == curName )
     {
       TQPopupMenu *documentMenu = (TQPopupMenu *)factory()->container("documents", this);
-      documentMenu->changeItem( newName, mDocumentList.findIndex(*it) );
+      documentMenu->changeItem( newName, mDocumentList.tqfindIndex(*it) );
       mDocumentList.insert( it, newName );
       mDocumentList.remove( it );
       return;

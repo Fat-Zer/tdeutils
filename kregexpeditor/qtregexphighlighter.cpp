@@ -28,14 +28,14 @@ int QtRegexpHighlighter::highlightParagraph( const TQString & text, int endState
     regexp.setCaseSensitive( _caseSensitive );
     regexp.setMinimal( _minimal );
 
-    setFormat( 0, text.length(), _editor->font(), Qt::black );
+    setFormat( 0, text.length(), _editor->font(), TQt::black );
 
     if ( !regexp.isValid() || regexp.isEmpty() ) {
         return 0;
     }
 
     // ------------------------------ Process with the regular expression.
-    TQColor colors[] = { Qt::red, Qt::blue };
+    TQColor colors[] = { TQt::red, TQt::blue };
     int color = endStateOfLastPara;
     if ( color < 0 || color > 1 )
         color = 0;
@@ -63,7 +63,7 @@ int QtRegexpHighlighter::highlightParagraph( const TQString & text, int endState
         if ( length + (start-index) != regexp.matchedLength() )
             setFormat( start+length, regexp.matchedLength()-length-(start-index), colors[color] );
 
-        index +=  QMAX( 1, regexp.matchedLength() ); // ensure progress when matching for example ^ or \b
+        index +=  TQMAX( 1, regexp.matchedLength() ); // ensure progress when matching for example ^ or \b
         color = (color+1)%2;
     }
     return color;

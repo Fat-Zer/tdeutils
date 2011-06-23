@@ -92,13 +92,13 @@ bool KSim::PluginLoader::loadPlugin(const KDesktopFile &file)
     case KSim::PluginLoader::EmptyLibName:
       KMessageBox::error(0, i18n("KSim was unable to load the plugin %1"
             " due to the X-KSIM-LIBRARY property being empty in the"
-            " plugins desktop file").arg(file.readName()));
+            " plugins desktop file").tqarg(file.readName()));
       return false;
       break;
     case KSim::PluginLoader::LibNotFound:
       KMessageBox::error(0, i18n("KSim was unable to load the plugin %1"
             " due to not being able to find the plugin, check that the plugin"
-            " is installed and is in your $KDEDIR/lib path").arg(file.readName()));
+            " is installed and is in your $KDEDIR/lib path").tqarg(file.readName()));
       return false;
       break;
     case KSim::PluginLoader::UnSymbols:
@@ -108,8 +108,8 @@ bool KSim::PluginLoader::loadPlugin(const KDesktopFile &file)
             " macro</li>\n<li>The plugin has been damaged or has"
             " some unresolved symbols</li>\n</ul> \nLast"
             " error message that occurred: \n%3</qt>")
-            .arg(d->lib.prepend("ksim_")).arg("KSIM_INIT_PLUGIN")
-            .arg(d->error));
+            .tqarg(d->lib.prepend("ksim_")).tqarg("KSIM_INIT_PLUGIN")
+            .tqarg(d->error));
       return false;
       break;
     default:
@@ -125,7 +125,7 @@ bool KSim::PluginLoader::unloadPlugin(const TQCString &name)
     return false;
 
   // see if our plugin is loaded
-  KSim::Plugin plugin = find(name);
+  KSim::Plugin plugin = tqfind(name);
   if (plugin.isNull())
     return false;
 
@@ -161,7 +161,7 @@ bool KSim::PluginLoader::isLoaded(const TQCString &library) const
   if (library.isEmpty())
     return false;
 
-  return !find(library).isNull();
+  return !tqfind(library).isNull();
 }
 
 KSim::PluginInfo KSim::PluginLoader::findPluginInfo(const TQString &name,
@@ -211,13 +211,13 @@ KSim::PluginInfo KSim::PluginLoader::findPluginInfo(const TQString &name,
   return info;
 }
 
-KSim::Plugin &KSim::PluginLoader::find(const TQCString &libName)
+KSim::Plugin &KSim::PluginLoader::tqfind(const TQCString &libName)
 {
   if (libName.isEmpty())
     return KSim::Plugin::null;
 
   TQCString library(libName);
-  if (libName.find(Private::ksimString) == -1)
+  if (libName.tqfind(Private::ksimString) == -1)
     library.prepend(Private::ksimString);
 
   KSim::PluginList::Iterator it;
@@ -229,13 +229,13 @@ KSim::Plugin &KSim::PluginLoader::find(const TQCString &libName)
   return KSim::Plugin::null;
 }
 
-const KSim::Plugin &KSim::PluginLoader::find(const TQCString &libName) const
+const KSim::Plugin &KSim::PluginLoader::tqfind(const TQCString &libName) const
 {
   if (libName.isEmpty())
     return KSim::Plugin::null;
 
   TQCString library(libName);
-  if (libName.find(Private::ksimString) == -1)
+  if (libName.tqfind(Private::ksimString) == -1)
     library.prepend(Private::ksimString);
 
   KSim::PluginList::ConstIterator it;
@@ -247,14 +247,14 @@ const KSim::Plugin &KSim::PluginLoader::find(const TQCString &libName) const
   return KSim::Plugin::null;
 }
 
-KSim::Plugin &KSim::PluginLoader::find(const KSim::PluginInfo &info)
+KSim::Plugin &KSim::PluginLoader::tqfind(const KSim::PluginInfo &info)
 {
-  return find(info.libName());
+  return tqfind(info.libName());
 }
 
-const KSim::Plugin &KSim::PluginLoader::find(const KSim::PluginInfo &info) const
+const KSim::Plugin &KSim::PluginLoader::tqfind(const KSim::PluginInfo &info) const
 {
-  return find(info.libName());
+  return tqfind(info.libName());
 }
 
 const KSim::PluginList &KSim::PluginLoader::pluginList() const
@@ -294,7 +294,7 @@ void KSim::PluginLoader::cleanup()
 
 KSim::PluginLoader::ErrorCode KSim::PluginLoader::createPlugin(const KDesktopFile &file)
 {
-  d->error = TQString::null;
+  d->error = TQString();
   TQCString pluginName(file.readEntry("X-KSIM-LIBRARY").local8Bit());
   if (pluginName.isEmpty())
     return EmptyLibName;
@@ -307,7 +307,7 @@ KSim::PluginLoader::ErrorCode KSim::PluginLoader::createPlugin(const KDesktopFil
   TQCString symbol("init_plugin");
   if (Private::PluginPtr *create = (Private::PluginPtr *)(library->symbol(symbol))) {
     d->pluginList.append(KSim::Plugin(create(pluginName), file));
-    d->lib = TQString::null;
+    d->lib = TQString();
     d->lastLoaded = true;
   }
   else {

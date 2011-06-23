@@ -1,6 +1,6 @@
 /*
     KCalc, a scientific calculator for the X window system using the
-    Qt widget libraries, available at no cost at http://www.troll.no
+    TQt widget libraries, available at no cost at http://www.troll.no
 
     Copyright (C) 1996 Bernd Johannes Wuebben
                        wuebben@math.cornell.edu
@@ -61,10 +61,11 @@ public:
 class KCalcButton : public KPushButton
 {
 Q_OBJECT
+  TQ_OBJECT
 
 public:
- KCalcButton(TQWidget *parent, const char * name = 0); 
- KCalcButton(const TQString &label, TQWidget *parent, const char * name = 0,
+ KCalcButton(TQWidget *tqparent, const char * name = 0); 
+ KCalcButton(const TQString &label, TQWidget *tqparent, const char * name = 0,
 	     const TQString &tooltip = TQString());
 
  void addMode(ButtonModeFlags mode, TQString label, TQString tooltip, bool is_label_richtext = false);
@@ -89,13 +90,14 @@ protected:
 class KSquareButton : public KCalcButton
 {
 Q_OBJECT
+  TQ_OBJECT
 
 public:
-  KSquareButton(TQWidget *parent, const char * name = 0)
-    : KCalcButton(parent, name) { }; 
- KSquareButton(const TQString &label, TQWidget *parent, const char * name = 0,
+  KSquareButton(TQWidget *tqparent, const char * name = 0)
+    : KCalcButton(tqparent, name) { }; 
+ KSquareButton(const TQString &label, TQWidget *tqparent, const char * name = 0,
 	       const TQString &tooltip = TQString())
-   : KCalcButton(label, parent, name, tooltip) { };
+   : KCalcButton(label, tqparent, name, tooltip) { };
 
 protected:
  virtual void drawButtonLabel(TQPainter *paint);

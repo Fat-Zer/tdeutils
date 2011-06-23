@@ -34,7 +34,7 @@ namespace KMilo {
 class PowerBookMonitor : public KMilo::Monitor
 {
 public:
-	PowerBookMonitor(TQObject *parent, const char *name, const TQStringList&);
+	PowerBookMonitor(TQObject *tqparent, const char *name, const TQStringList&);
 	virtual ~PowerBookMonitor();
 
 	virtual bool init();

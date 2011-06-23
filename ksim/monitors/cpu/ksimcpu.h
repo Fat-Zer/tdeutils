@@ -52,8 +52,9 @@ class CpuPlugin : public KSim::PluginObject
 class CpuView : public KSim::PluginView
 {
   Q_OBJECT
+  TQ_OBJECT
   public:
-    CpuView(KSim::PluginObject *parent, const char *name);
+    CpuView(KSim::PluginObject *tqparent, const char *name);
     ~CpuView();
 
     virtual void reparseConfig();
@@ -200,8 +201,9 @@ class CpuView : public KSim::PluginView
 class CpuConfig : public KSim::PluginPage
 {
   Q_OBJECT
+  TQ_OBJECT
   public:
-    CpuConfig(KSim::PluginObject *parent, const char *name);
+    CpuConfig(KSim::PluginObject *tqparent, const char *name);
     ~CpuConfig();
 
     virtual void saveConfig();

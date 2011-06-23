@@ -13,7 +13,7 @@ Table of Contents
 
 1.1. Where can I find SuperKaramba RPMs?
 1.2. When I try to compile, I get this error: "Python.h: No such file or directory"
-1.3. When I try to compile, I get this error: "cannot find -lselinux"
+1.3. When I try to compile, I get this error: "cannot tqfind -lselinux"
 1.4. After running ./configure,make, and make install, the superkaramba executable is not where I expected it to be. When I try to run superkaramba from the command line it says "command not found".
 
 
@@ -51,7 +51,7 @@ The SuperKaramba web site (http://netdragon.sourceforge.net) has a list of user-
 
 You will need to install the python-devel package. Once that package is installed you can ./configure and make again.
 
-1.3. When I try to compile, I get this error: "cannot find -lselinux"
+1.3. When I try to compile, I get this error: "cannot tqfind -lselinux"
 
 You will need to install the libselinux-devel package. Once that package is installed you can ./configure and make again.
 

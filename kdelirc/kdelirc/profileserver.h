@@ -26,7 +26,7 @@
 
 enum IfMulti {IM_DONTSEND, IM_SENDTOALL, IM_SENDTOTOP, IM_SENDTOBOTTOM};
 
-typedef QPair<int,int> Range;
+typedef TQPair<int,int> Range;
 
 class ProfileAction;
 class Profile;
@@ -35,8 +35,8 @@ class ProfileActionArgument
 {
 	TQString theComment, theType;
 	Range theRange;
-	TQString theDefault;		// should be QVariant?
-	const ProfileAction *parent;
+	TQString theDefault;		// should be TQVariant?
+	const ProfileAction *tqparent;
 
 	friend class Profile;
 public:
@@ -49,15 +49,15 @@ public:
 	const Range &range() const { return theRange; }
 	void setRange(const Range &a) { theRange = a; }
 
-	const ProfileAction *action() const { return parent; }
-	void setAction(const ProfileAction *a) { parent = a; }
+	const ProfileAction *action() const { return tqparent; }
+	void setAction(const ProfileAction *a) { tqparent = a; }
 };
 
 class ProfileAction
 {
 	TQString theObjId, thePrototype, theName, theComment, theClass;
 	float theMultiplier;
-	const Profile *parent;
+	const Profile *tqparent;
 	bool theRepeat, theAutoStart;
 	TQValueList<ProfileActionArgument> theArguments;
 
@@ -81,11 +81,11 @@ public:
 	void setAutoStart(bool a) { theAutoStart = a; }
 	const TQValueList<ProfileActionArgument> &arguments() const { return theArguments; }
 
-	const Profile *profile() const { return parent; }
-	void setProfile(const Profile *a) { parent = a; }
+	const Profile *profile() const { return tqparent; }
+	void setProfile(const Profile *a) { tqparent = a; }
 };
 
-class Profile : public QXmlDefaultHandler
+class Profile : public TQXmlDefaultHandler
 {
 	TQString theId, theName, theAuthor, theServiceName;
 	IfMulti theIfMulti;
@@ -112,7 +112,7 @@ public:
 	void setUnique(const bool a) { theUnique = a; }
 	const IfMulti ifMulti() const { return theIfMulti; }
 	void setIfMulti(const IfMulti a) { theIfMulti = a; }
-	const TQString &serviceName() const { if(theServiceName != TQString::null) return theServiceName; return theName; }
+	const TQString &serviceName() const { if(theServiceName != TQString()) return theServiceName; return theName; }
 	void setServiceName(const TQString &a) { theServiceName = a; }
 	const TQDict<ProfileAction> &actions() const { return theActions; }
 	const ProfileAction *searchClass(const TQString &c) const;

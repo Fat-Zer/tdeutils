@@ -18,7 +18,7 @@
 #ifndef __kmultiformlistboxwindowed
 #define __kmultiformlistboxwindowed
 
-#ifdef QT_ONLY
+#ifdef TQT_ONLY
   #include "compat.h"
   #include <tqlistbox.h>
 #else
@@ -38,11 +38,12 @@ class WindowListboxItem;
 class KMultiFormListBoxWindowed  :public TQWidget, KMultiFormListBoxShower {
 
 Q_OBJECT
+  TQ_OBJECT
 
 friend class KMultiFormListBox;
 
 private:
-  KMultiFormListBoxWindowed(KMultiFormListBoxFactory *factory, TQWidget *parent,
+  KMultiFormListBoxWindowed(KMultiFormListBoxFactory *factory, TQWidget *tqparent,
 														bool showUpDownButtons, bool showHelpButton, TQString addButtonText,
 														const char *name);
 

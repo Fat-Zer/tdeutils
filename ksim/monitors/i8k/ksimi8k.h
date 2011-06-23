@@ -50,8 +50,9 @@ class I8KPlugin : public KSim::PluginObject
 class I8KView : public KSim::PluginView
 {
   Q_OBJECT
+  TQ_OBJECT
   public:
-    I8KView(KSim::PluginObject *parent, const char *name);
+    I8KView(KSim::PluginObject *tqparent, const char *name);
     ~I8KView();
 
     virtual void reparseConfig();
@@ -81,8 +82,9 @@ class I8KView : public KSim::PluginView
 class I8KConfig : public KSim::PluginPage
 {
   Q_OBJECT
+  TQ_OBJECT
   public:
-    I8KConfig(KSim::PluginObject *parent, const char *name);
+    I8KConfig(KSim::PluginObject *tqparent, const char *name);
     ~I8KConfig();
 
     virtual void saveConfig();

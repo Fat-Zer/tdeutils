@@ -25,7 +25,7 @@ function replaceComments()
 }
 
 
-FOO=`find $SRCDIR -type f -name "*_python.h"`
+FOO=`tqfind $SRCDIR -type f -name "*_python.h"`
 
 for FILE in $FOO
 do

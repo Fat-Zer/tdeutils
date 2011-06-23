@@ -28,21 +28,21 @@
 #include <kwallet.h>
 #include <kstdguiitem.h>
 
-KWalletPopup::KWalletPopup(const TQString& wallet, TQWidget *parent, const char *name)
-: KPopupMenu(parent, name), _walletName(wallet) {
+KWalletPopup::KWalletPopup(const TQString& wallet, TQWidget *tqparent, const char *name)
+: KPopupMenu(tqparent, name), _walletName(wallet) {
 	insertTitle(wallet);
 	KActionCollection *ac = new KActionCollection(this, "kwallet context actions");
 	KAction *act;
 
-	act = new KAction(i18n("&New Wallet..."), 0, 0, this,
+	act = new KAction(i18n("&New Wallet..."), 0, 0, TQT_TQOBJECT(this),
 			TQT_SLOT(createWallet()), ac, "wallet_create");
 	act->plug(this);
 
-	act = new KAction(i18n("&Open..."), 0, Key_Return, this,
+	act = new KAction(i18n("&Open..."), 0, Key_Return, TQT_TQOBJECT(this),
 			TQT_SLOT(openWallet()), ac, "wallet_open");
 	act->plug(this);
 
-	act = new KAction(i18n("Change &Password..."), 0, 0, this,
+	act = new KAction(i18n("Change &Password..."), 0, 0, TQT_TQOBJECT(this),
 			TQT_SLOT(changeWalletPassword()), ac, "wallet_password");
 	act->plug(this);
 
@@ -60,14 +60,14 @@ KWalletPopup::KWalletPopup(const TQString& wallet, TQWidget *parent, const char 
 		insertItem(i18n("Disconnec&t"), pm);
 	}
 
-	act = KStdAction::close( this,
+	act = KStdAction::close( TQT_TQOBJECT(this),
 			TQT_SLOT(closeWallet()), ac, "wallet_close");
 	// FIXME: let's track this inside the manager so we don't need a dcop
 	//        roundtrip here.
 	act->setEnabled(KWallet::Wallet::isOpen(wallet));
 	act->plug(this);
 
-	act = new KAction(i18n("&Delete"), 0, Key_Delete, this,
+	act = new KAction(i18n("&Delete"), 0, Key_Delete, TQT_TQOBJECT(this),
 			TQT_SLOT(deleteWallet()), ac, "wallet_delete");
 	act->plug(this);
 }

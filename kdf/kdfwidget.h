@@ -3,7 +3,7 @@
  *
  * Copyright (c) 1998 Michael Kropfberger <michael.kropfberger@gmx.net>
  *
- * Requires the Qt widget libraries, available at no cost at
+ * Requires the TQt widget libraries, available at no cost at
  * http://www.troll.no/
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -72,10 +72,10 @@ class CTabEntry
 //    columns with a numeric value are sorted by numerical value.
 //
 
-class CListViewItem : public QListViewItem
+class CListViewItem : public TQListViewItem
 {
   public:
-    CListViewItem ( CListView * parent, TQListViewItem * after );
+    CListViewItem ( CListView * tqparent, TQListViewItem * after );
  
     virtual int compare ( TQListViewItem* i, int col, bool) const;
     	
@@ -89,9 +89,10 @@ class CListViewItem : public QListViewItem
 
 /**************************************************************/
 
-class KDFWidget : public QWidget
+class KDFWidget : public TQWidget
 {
   Q_OBJECT
+  TQ_OBJECT
 
   public:
     enum ColId
@@ -107,7 +108,7 @@ class KDFWidget : public QWidget
     };
 
   public:
-    KDFWidget( TQWidget *parent=0, const char *name=0, bool init=false);
+    KDFWidget( TQWidget *tqparent=0, const char *name=0, bool init=false);
     ~KDFWidget( void );
 
   public slots:

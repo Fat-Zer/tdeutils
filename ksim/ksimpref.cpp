@@ -37,9 +37,9 @@
 #include <tqframe.h>
 
 KSim::ConfigDialog::ConfigDialog(KSim::Config *config,
-   TQWidget *parent, const char *name)
+   TQWidget *tqparent, const char *name)
    : KDialogBase(TreeList, i18n("Configure"),
-   Help | Ok | Apply | Close, Ok, parent, name, true, true)
+   Help | Ok | Apply | Close, Ok, tqparent, name, true, true)
 {
   resize(466, 363);
   setShowIconsInTreeList(true);
@@ -93,7 +93,7 @@ KSim::ConfigDialog::ConfigDialog(KSim::Config *config,
   connect(this, TQT_SIGNAL(applyClicked()), TQT_SLOT(savePrefs()));
   connect(this, TQT_SIGNAL(okClicked()), TQT_SLOT(closePrefs()));
   connect(this, TQT_SIGNAL(closeClicked()), TQT_SLOT(loadPluginConfig()));
-  connect(parent, TQT_SIGNAL(reload()), TQT_SLOT(reload()));
+  connect(tqparent, TQT_SIGNAL(reload()), TQT_SLOT(reload()));
 
   KSim::PluginList::ConstIterator it;
   const KSim::PluginList &pluginList = KSim::PluginLoader::self().pluginList();
@@ -119,15 +119,15 @@ void KSim::ConfigDialog::reload()
 
 void KSim::ConfigDialog::removePage(const TQCString &name)
 {
-  const KSim::Plugin &plugin = KSim::PluginLoader::self().find(name);
+  const KSim::Plugin &plugin = KSim::PluginLoader::self().tqfind(name);
   if (plugin.isNull() || !plugin.configPage()) {
     KMessageBox::sorry(0, i18n("Failed to remove %1's config page due to the "
-       "plugin not being loaded or the config page has not been created").arg(name));
+       "plugin not being loaded or the config page has not been created").tqarg(name.data()));
     return;
   }
 
-  TQWidget *frame = plugin.configPage()->parentWidget();
-  // reparent the widget if the parent is not null
+  TQWidget *frame = plugin.configPage()->tqparentWidget();
+  // reparent the widget if the tqparent is not null
   if (frame) {
     plugin.configPage()->hide();
     plugin.configPage()->reparent(0, TQPoint(0, 0), false);
@@ -139,7 +139,7 @@ void KSim::ConfigDialog::removePage(const TQCString &name)
 
 void KSim::ConfigDialog::createPage(const TQCString &name)
 {
-  const KSim::Plugin &plugin = KSim::PluginLoader::self().find(name);
+  const KSim::Plugin &plugin = KSim::PluginLoader::self().tqfind(name);
   createPage(plugin);
 }
 
@@ -148,7 +148,7 @@ void KSim::ConfigDialog::createPage(const KSim::Plugin &plugin)
   if (plugin.isNull() || !plugin.configPage()) {
     KMessageBox::sorry(0, i18n("Failed to add %1's config page due to the plugin"
        " not being loaded or the config page has not been created")
-       .arg(plugin.libName()));
+       .tqarg(plugin.libName().data()));
     return;
   }
 
@@ -156,7 +156,7 @@ void KSim::ConfigDialog::createPage(const KSim::Plugin &plugin)
 
   TQStringList list;
   list << ' ' + i18n("Plugins") << ' ' + plugin.name();
-  TQFrame *pluginFrame = addHBoxPage(list, i18n("%1 Options").arg(plugin.name()),
+  TQFrame *pluginFrame = addHBoxPage(list, i18n("%1 Options").tqarg(plugin.name()),
      plugin.icon());
 
   plugin.configPage()->reparent(pluginFrame, TQPoint(0, 0), true);
@@ -193,7 +193,7 @@ void KSim::ConfigDialog::saveConfig(bool reload)
        info.libName(true), item->text(0), info.location(),
        findPlugin(item->text(0)).isEnabled()));
 
-    KSim::PluginLoader::self().find(info).setEnabled(item->isOn());
+    KSim::PluginLoader::self().tqfind(info).setEnabled(item->isOn());
   }
 
   m_currentPlugins = changedPlugins;

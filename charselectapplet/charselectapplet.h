@@ -36,9 +36,10 @@ class KAboutData;
 class ConfigDialog : public KDialogBase
 {
     Q_OBJECT
+  TQ_OBJECT
 
 public:
-    ConfigDialog(TQWidget* parent = 0, const char* name = 0);
+    ConfigDialog(TQWidget* tqparent = 0, const char* name = 0);
 
     void setCharacters(const TQString& s) { _characterInput->setText(s); }
     void setCellWidth(int w) { _widthSpinBox->setValue(w); }
@@ -54,12 +55,13 @@ private:
     KLineEdit *_characterInput;
 };
 
-class CharTable : public QFrame
+class CharTable : public TQFrame
 {
     Q_OBJECT
+  TQ_OBJECT
 
 public:
-    CharTable(TQWidget* parent = 0, const char* name = 0);
+    CharTable(TQWidget* tqparent = 0, const char* name = 0);
 
     void setRowsAndColumns(int, int);
 
@@ -73,7 +75,7 @@ protected:
     void mouseMoveEvent(TQMouseEvent*);
 
     void paintCell(TQPainter*, int, int);
-    void repaintCell(int, int);
+    void tqrepaintCell(int, int);
     void selectCell(int row, int col);
 
     void insertString(TQString s);
@@ -95,10 +97,11 @@ private:
 class CharSelectApplet : public KPanelApplet
 {
     Q_OBJECT
+  TQ_OBJECT
 
 public:
     CharSelectApplet(const TQString& configFile, Type t = Stretch, int actions = 0,
-                     TQWidget *parent = 0, const char *name = 0);
+                     TQWidget *tqparent = 0, const char *name = 0);
 
     int widthForHeight(int height) const;
     int heightForWidth(int width) const;

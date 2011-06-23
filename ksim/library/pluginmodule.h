@@ -111,14 +111,15 @@ namespace KSim
    * the config() to gain access to your config file
    * @author Robbie Ward <linuxphreak@gmx.co.uk>
    */
-  class KDE_EXPORT PluginPage : public QWidget
+  class KDE_EXPORT PluginPage : public TQWidget
   {
     Q_OBJECT
+  TQ_OBJECT
     public:
       /**
        * constructor for PluginPage
        */
-      PluginPage(KSim::PluginObject *parent, const char *name);
+      PluginPage(KSim::PluginObject *tqparent, const char *name);
       /**
        * destructor for PluginPage
        */
@@ -144,7 +145,7 @@ namespace KSim
       void pageChanged();
 
     protected:
-      PluginObject *parentPlugin() const;
+      PluginObject *tqparentPlugin() const;
 
     private:
       class Private;
@@ -159,14 +160,15 @@ namespace KSim
    * when apply or ok gets clicked in the config dialog
    * @author Robbie Ward <linuxphreak@gmx.co.uk>
    */
-  class KDE_EXPORT PluginView : public QWidget
+  class KDE_EXPORT PluginView : public TQWidget
   {
     Q_OBJECT
+  TQ_OBJECT
     public:
       /**
        * constructor for PluginView
        */
-      PluginView(KSim::PluginObject *parent, const char *name);
+      PluginView(KSim::PluginObject *tqparent, const char *name);
       /**
        * destructor for PluginView
        */
@@ -192,7 +194,7 @@ namespace KSim
 
     protected:
       virtual void mousePressEvent(TQMouseEvent *);
-      PluginObject *parentPlugin() const;
+      PluginObject *tqparentPlugin() const;
 
     private slots:
       void showAbout();

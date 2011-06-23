@@ -55,7 +55,7 @@ Bool XNVCTRLIsNvScreen (
  *  Sets the attribute to the given value.  The attributes and their
  *  possible values are listed in NVCtrl.h.
  *
- *  Not all attributes require the display_mask parameter; see
+ *  Not all attributes require the display_tqmask parameter; see
  *  NVCtrl.h for details.
  *
  *  Possible errors:
@@ -66,7 +66,7 @@ Bool XNVCTRLIsNvScreen (
 void XNVCTRLSetAttribute (
     Display *dpy,
     int screen,
-    unsigned int display_mask,
+    unsigned int display_tqmask,
     unsigned int attribute,
     int value
 );
@@ -78,7 +78,7 @@ void XNVCTRLSetAttribute (
  *  If XNVCTRLQueryAttribute returns True, value will contain the
  *  value of the specified attribute.
  *
- *  Not all attributes require the display_mask parameter; see
+ *  Not all attributes require the display_tqmask parameter; see
  *  NVCtrl.h for details.
  *
  *  Possible errors:
@@ -90,7 +90,7 @@ void XNVCTRLSetAttribute (
 Bool XNVCTRLQueryAttribute (
     Display *dpy,
     int screen,
-    unsigned int display_mask,
+    unsigned int display_tqmask,
     unsigned int attribute,
     int *value
 );
@@ -112,7 +112,7 @@ Bool XNVCTRLQueryAttribute (
 Bool XNVCTRLQueryStringAttribute (
     Display *dpy,
     int screen,
-    unsigned int display_mask,
+    unsigned int display_tqmask,
     unsigned int attribute,
     char **ptr
 );
@@ -129,7 +129,7 @@ Bool XNVCTRLQueryStringAttribute (
 Bool XNVCTRLQueryValidAttributeValues (
     Display *dpy,
     int screen,
-    unsigned int display_mask,
+    unsigned int display_tqmask,
     unsigned int attribute,                                 
     NVCTRLAttributeValidValuesRec *values
 );
@@ -166,7 +166,7 @@ typedef struct {
     Display *display;
     Time time;
     int screen;
-    unsigned int display_mask;
+    unsigned int display_tqmask;
     unsigned int attribute;
     int value;
 } XNVCtrlAttributeChangedEvent;

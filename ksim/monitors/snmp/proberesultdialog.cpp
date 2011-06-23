@@ -27,10 +27,10 @@
 using namespace KSim::Snmp;
 
 ProbeResultDialog::ProbeResultDialog( const HostConfig &hostConfig, const ProbeDialog::ProbeResultList &probeResults, 
-                                      TQWidget *parent, const char *name )
-        : ProbeResultDialogBase( parent, name )
+                                      TQWidget *tqparent, const char *name )
+        : ProbeResultDialogBase( tqparent, name )
 {
-    info->setText( i18n( "Results of scanning host %1:" ).arg( hostConfig.name ) );
+    info->setText( i18n( "Results of scanning host %1:" ).tqarg( hostConfig.name ) );
 
     for ( ProbeDialog::ProbeResultList::ConstIterator it = probeResults.begin();
           it != probeResults.end(); ++it )

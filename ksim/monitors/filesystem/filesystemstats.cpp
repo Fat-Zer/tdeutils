@@ -184,7 +184,7 @@ FilesystemStats::List FilesystemStats::readEntries()
 #endif
 
 #ifdef USE_FAILSAFE
-  TQFile file( TQString::fromLatin1( _PATH_MOUNTED ) );
+  TQFile file( TQString::tqfromLatin1( _PATH_MOUNTED ) );
 
   if ( !file.open( IO_ReadOnly ) )
     return list;

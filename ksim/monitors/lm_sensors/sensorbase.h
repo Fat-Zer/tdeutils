@@ -88,9 +88,10 @@ class SensorList : public TQValueList<SensorInfo>
     SensorList(const SensorInfo &sensor) { append(sensor); }
 };
 
-class SensorBase : public QObject
+class SensorBase : public TQObject
 {
   Q_OBJECT
+  TQ_OBJECT
   public:
     static SensorBase *self();
 

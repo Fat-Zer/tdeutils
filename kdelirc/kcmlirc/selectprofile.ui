@@ -1,6 +1,6 @@
 <!DOCTYPE UI><UI version="3.2" stdsetdef="1">
 <class>SelectProfile</class>
-<widget class="QDialog">
+<widget class="TQDialog">
     <property name="name">
         <cstring>SelectProfile</cstring>
     </property>
@@ -52,9 +52,9 @@
                 <enum>Horizontal</enum>
             </property>
         </widget>
-        <widget class="QLayoutWidget">
+        <widget class="TQLayoutWidget">
             <property name="name">
-                <cstring>layout47</cstring>
+                <cstring>tqlayout47</cstring>
             </property>
             <hbox>
                 <property name="name">
@@ -70,7 +70,7 @@
                     <property name="sizeType">
                         <enum>Expanding</enum>
                     </property>
-                    <property name="sizeHint">
+                    <property name="tqsizeHint">
                         <size>
                             <width>40</width>
                             <height>20</height>
@@ -119,7 +119,7 @@
         <slot>reject()</slot>
     </connection>
 </connections>
-<layoutdefaults spacing="6" margin="11"/>
+<tqlayoutdefaults spacing="6" margin="11"/>
 <includehints>
     <includehint>klistview.h</includehint>
     <includehint>kpushbutton.h</includehint>

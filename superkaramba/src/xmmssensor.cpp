@@ -164,9 +164,9 @@ void XMMSSensor::update()
     {
         isPlaying = xmms->isPlaying(0);
         pos = xmms->getPlaylistPos(0);
-        qDebug("unicode start");
+        qDebug("tqunicode start");
         title = codec->toUnicode( TQCString( xmms->getPlaylistTitle( 0, pos ) )  );
-        qDebug("unicode end");
+        qDebug("tqunicode end");
         if( title.isEmpty() )
             title = "XMMS";
 
@@ -210,19 +210,19 @@ void XMMSSensor::update()
                 {
 
 
-                    format.replace( TQRegExp("%title", false), title );
+                    format.tqreplace( TQRegExp("%title", false), title );
 
-                    format.replace( TQRegExp("%length", false), TQTime( 0,0,0 ).
+                    format.tqreplace( TQRegExp("%length", false), TQTime( 0,0,0 ).
                                     addMSecs( songLength )
                                     .toString( "h:mm:ss" ) );
 
-                    format.replace( TQRegExp("%time", false), TQTime( 0,0,0 ).
+                    format.tqreplace( TQRegExp("%time", false), TQTime( 0,0,0 ).
                                     addMSecs( currentTime )
                                     .toString( "h:mm:ss" ) );
 
                     if( isPlaying  )
                     {
-                        format.replace( TQRegExp("%remain", false), TQTime( 0,0,0 ).
+                        format.tqreplace( TQRegExp("%remain", false), TQTime( 0,0,0 ).
                                         addMSecs( songLength )
                                         .addMSecs(-currentTime )
                                         .toString( "h:mm:ss" ) );
@@ -230,7 +230,7 @@ void XMMSSensor::update()
 
                     else
                     {
-                        format.replace( TQRegExp("%remain", false), TQTime( 0,0,0 ).toString("h:mm:ss" ) );
+                        format.tqreplace( TQRegExp("%remain", false), TQTime( 0,0,0 ).toString("h:mm:ss" ) );
                     }
                     meter->setValue(format);
                 }

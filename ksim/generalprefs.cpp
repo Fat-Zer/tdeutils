@@ -40,8 +40,8 @@
 
 #include <ksimconfig.h>
 
-KSim::GeneralPrefs::GeneralPrefs(TQWidget *parent, const char *name)
-   : TQWidget(parent, name)
+KSim::GeneralPrefs::GeneralPrefs(TQWidget *tqparent, const char *name)
+   : TQWidget(tqparent, name)
 {
   m_mainLayout = new TQGridLayout(this);
   m_mainLayout->setSpacing(6);
@@ -50,7 +50,7 @@ KSim::GeneralPrefs::GeneralPrefs(TQWidget *parent, const char *name)
   m_sizeBox->setTitle(i18n("Graph Size"));
   m_sizeBox->setColumnLayout(0, Qt::Horizontal);
 
-  TQGridLayout *sizeBoxLayout = new TQGridLayout(m_sizeBox->layout());
+  TQGridLayout *sizeBoxLayout = new TQGridLayout(m_sizeBox->tqlayout());
   sizeBoxLayout->setSpacing(6);
 
   m_sizeHLabel = new TQLabel(m_sizeBox);
@@ -61,7 +61,7 @@ KSim::GeneralPrefs::GeneralPrefs(TQWidget *parent, const char *name)
   m_sizeHSpin->setValue(40);
   m_sizeHSpin->setMinValue(40);
   m_sizeHSpin->setMaxValue(200);
-  m_sizeHSpin->setSizePolicy(TQSizePolicy(TQSizePolicy::Preferred,
+  m_sizeHSpin->tqsetSizePolicy(TQSizePolicy(TQSizePolicy::Preferred,
      TQSizePolicy::Fixed));
   sizeBoxLayout->addWidget(m_sizeHSpin, 0, 1);
 
@@ -77,7 +77,7 @@ KSim::GeneralPrefs::GeneralPrefs(TQWidget *parent, const char *name)
   m_sizeWSpin->setValue(58);
   m_sizeWSpin->setMinValue(58);
   m_sizeWSpin->setMaxValue(200);
-  m_sizeWSpin->setSizePolicy(TQSizePolicy(TQSizePolicy::Preferred,
+  m_sizeWSpin->tqsetSizePolicy(TQSizePolicy(TQSizePolicy::Preferred,
      TQSizePolicy::Fixed));
   sizeBoxLayout->addWidget(m_sizeWSpin, 1, 1);
 
@@ -122,8 +122,8 @@ void KSim::GeneralPrefs::readConfig(KSim::Config *config)
   m_recolourThemes->setChecked(config->reColourThemes());
 }
 
-KSim::ClockPrefs::ClockPrefs(TQWidget *parent, const char *name)
-   : TQWidget(parent, name)
+KSim::ClockPrefs::ClockPrefs(TQWidget *tqparent, const char *name)
+   : TQWidget(tqparent, name)
 {
   m_mainLayout = new TQVBoxLayout(this);
   m_mainLayout->setSpacing(6);
@@ -157,8 +157,8 @@ void KSim::ClockPrefs::readConfig(KSim::Config *config)
   m_dateCheck->setChecked(config->showDate());
 }
 
-KSim::UptimePrefs::UptimePrefs(TQWidget *parent, const char *name)
-   : TQWidget(parent, name)
+KSim::UptimePrefs::UptimePrefs(TQWidget *tqparent, const char *name)
+   : TQWidget(tqparent, name)
 {
   m_addIcon = SmallIconSet("filenew");
   m_removeIcon = SmallIconSet("editdelete");
@@ -168,7 +168,7 @@ KSim::UptimePrefs::UptimePrefs(TQWidget *parent, const char *name)
 
   m_uptimeCombo = new KComboBox(true, this);
   m_uptimeCombo->setDuplicatesEnabled(false);
-  m_uptimeCombo->setSizePolicy(TQSizePolicy(TQSizePolicy::Expanding,
+  m_uptimeCombo->tqsetSizePolicy(TQSizePolicy(TQSizePolicy::Expanding,
      TQSizePolicy::Fixed));
   m_uptimeCombo->insertItem(i18n("%hh:%mm:%ss"));
   m_uptimeCombo->insertItem(i18n("%dd %h:%m"));
@@ -211,10 +211,10 @@ KSim::UptimePrefs::UptimePrefs(TQWidget *parent, const char *name)
   m_uptimeBox = new TQGroupBox(this);
   m_uptimeBox->setTitle(i18n("Uptime Legend"));
   m_uptimeBox->setColumnLayout(0, Qt::Vertical);
-  m_uptimeBox->layout()->setSpacing(0);
-  m_uptimeBox->layout()->setMargin(0);
-  m_boxLayout = new TQVBoxLayout(m_uptimeBox->layout());
-  m_boxLayout->setAlignment(Qt::AlignTop);
+  m_uptimeBox->tqlayout()->setSpacing(0);
+  m_uptimeBox->tqlayout()->setMargin(0);
+  m_boxLayout = new TQVBoxLayout(m_uptimeBox->tqlayout());
+  m_boxLayout->tqsetAlignment(TQt::AlignTop);
   m_boxLayout->setSpacing(6);
   m_boxLayout->setMargin(11);
 
@@ -294,8 +294,8 @@ void KSim::UptimePrefs::removeUptimeItem()
   m_uptimeCombo->setCurrentItem(currentItem - 1);
 }
 
-KSim::MemoryPrefs::MemoryPrefs(TQWidget *parent, const char *name)
-   : TQWidget(parent, name)
+KSim::MemoryPrefs::MemoryPrefs(TQWidget *tqparent, const char *name)
+   : TQWidget(tqparent, name)
 {
   m_addIcon = SmallIconSet("filenew");
   m_removeIcon = SmallIconSet("editdelete");
@@ -305,7 +305,7 @@ KSim::MemoryPrefs::MemoryPrefs(TQWidget *parent, const char *name)
 
   m_memCombo = new KComboBox(true, this);
   m_memCombo->setDuplicatesEnabled(false);
-  m_memCombo->setSizePolicy(TQSizePolicy(TQSizePolicy::Expanding,
+  m_memCombo->tqsetSizePolicy(TQSizePolicy(TQSizePolicy::Expanding,
      TQSizePolicy::Fixed));
   //m_memCombo->insertItem(i18n("%tM - %fM free"));
   //m_memCombo->insertItem(i18n("%tM - %uM used"));
@@ -347,10 +347,10 @@ KSim::MemoryPrefs::MemoryPrefs(TQWidget *parent, const char *name)
   m_memBox = new TQGroupBox(this);
   m_memBox->setTitle(i18n("Memory Legend"));
   m_memBox->setColumnLayout(0, Qt::Vertical);
-  m_memBox->layout()->setSpacing(0);
-  m_memBox->layout()->setMargin(0);
-  m_boxLayout = new TQVBoxLayout(m_memBox->layout());
-  m_boxLayout->setAlignment(Qt::AlignTop);
+  m_memBox->tqlayout()->setSpacing(0);
+  m_memBox->tqlayout()->setMargin(0);
+  m_boxLayout = new TQVBoxLayout(m_memBox->tqlayout());
+  m_boxLayout->tqsetAlignment(TQt::AlignTop);
   m_boxLayout->setSpacing(6);
   m_boxLayout->setMargin(11);
 
@@ -442,8 +442,8 @@ void KSim::MemoryPrefs::removeMemoryItem()
   m_memCombo->setCurrentItem(currentItem - 1);
 }
 
-KSim::SwapPrefs::SwapPrefs(TQWidget *parent, const char *name)
-   : TQWidget(parent, name)
+KSim::SwapPrefs::SwapPrefs(TQWidget *tqparent, const char *name)
+   : TQWidget(tqparent, name)
 {
   m_addIcon = SmallIconSet("filenew");
   m_removeIcon = SmallIconSet("editdelete");
@@ -458,7 +458,7 @@ KSim::SwapPrefs::SwapPrefs(TQWidget *parent, const char *name)
 
   m_swapCombo = new KComboBox(true, this);
   m_swapCombo->setDuplicatesEnabled(false);
-  m_swapCombo->setSizePolicy(TQSizePolicy(TQSizePolicy::Expanding,
+  m_swapCombo->tqsetSizePolicy(TQSizePolicy(TQSizePolicy::Expanding,
      TQSizePolicy::Fixed));
   //m_swapCombo->insertItem(i18n("%tM - %fM free"));
   //m_swapCombo->insertItem(i18n("%tM - %uM used"));
@@ -496,10 +496,10 @@ KSim::SwapPrefs::SwapPrefs(TQWidget *parent, const char *name)
   m_swapBox = new TQGroupBox(this);
   m_swapBox->setTitle(i18n("Swap Legend"));
   m_swapBox->setColumnLayout(0, Qt::Vertical);
-  m_swapBox->layout()->setSpacing(0);
-  m_swapBox->layout()->setMargin(0);
-  m_boxLayout = new TQVBoxLayout(m_swapBox->layout());
-  m_boxLayout->setAlignment(Qt::AlignTop);
+  m_swapBox->tqlayout()->setSpacing(0);
+  m_swapBox->tqlayout()->setMargin(0);
+  m_boxLayout = new TQVBoxLayout(m_swapBox->tqlayout());
+  m_boxLayout->tqsetAlignment(TQt::AlignTop);
   m_boxLayout->setSpacing(6);
   m_boxLayout->setMargin(11);
 

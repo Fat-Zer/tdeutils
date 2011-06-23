@@ -1,6 +1,6 @@
 <!DOCTYPE UI><UI version="3.3" stdsetdef="1">
 <class>MiscConf</class>
-<widget class="QWidget">
+<widget class="TQWidget">
     <property name="name">
         <cstring>MiscConf</cstring>
     </property>
@@ -19,11 +19,11 @@
         <property name="margin">
             <number>0</number>
         </property>
-        <widget class="QTabWidget">
+        <widget class="TQTabWidget">
             <property name="name">
                 <cstring>miscWidget</cstring>
             </property>
-            <widget class="QWidget">
+            <widget class="TQWidget">
                 <property name="name">
                     <cstring>tab</cstring>
                 </property>
@@ -34,7 +34,7 @@
                     <property name="name">
                         <cstring>unnamed</cstring>
                     </property>
-                    <widget class="QCheckBox" row="0" column="0">
+                    <widget class="TQCheckBox" row="0" column="0">
                         <property name="name">
                             <cstring>kcfg_AutoStart</cstring>
                         </property>
@@ -49,11 +49,11 @@
 &lt;p&gt;If checked KGpg will start automatically each time that KDE starts up.&lt;/p&gt;&lt;/qt&gt;</string>
                         </property>
                     </widget>
-                    <widget class="QCheckBox" row="1" column="0">
+                    <widget class="TQCheckBox" row="1" column="0">
                         <property name="name">
                             <cstring>kcfg_UseMouseSelection</cstring>
                         </property>
-                        <property name="minimumSize">
+                        <property name="tqminimumSize">
                             <size>
                                 <width>0</width>
                                 <height>0</height>
@@ -67,11 +67,11 @@
 			&lt;p&gt;If checked, clipboard operations in KGpg will use the selection clipboard, that means highlighting a text to copy, and middle button (or right+left together) to paste. If this option is not checked, the clipboard will work with Key shortcuts (Ctrl-c, Ctrl-v).&lt;/p&gt;&lt;/qt&gt; </string>
                         </property>
                     </widget>
-                    <widget class="QCheckBox" row="2" column="0">
+                    <widget class="TQCheckBox" row="2" column="0">
                         <property name="name">
                             <cstring>kcfg_RemoteFileWarn</cstring>
                         </property>
-                        <property name="minimumSize">
+                        <property name="tqminimumSize">
                             <size>
                                 <width>0</width>
                                 <height>0</height>
@@ -86,7 +86,7 @@
 			&lt;p&gt;&lt;/p&gt;&lt;/qt&gt;</string>
                         </property>
                     </widget>
-                    <widget class="QGroupBox" row="3" column="0">
+                    <widget class="TQGroupBox" row="3" column="0">
                         <property name="name">
                             <cstring>groupShred</cstring>
                         </property>
@@ -107,14 +107,14 @@
                                 <property name="sizeType">
                                     <enum>Expanding</enum>
                                 </property>
-                                <property name="sizeHint">
+                                <property name="tqsizeHint">
                                     <size>
                                         <width>91</width>
                                         <height>20</height>
                                     </size>
                                 </property>
                             </spacer>
-                            <widget class="QPushButton" row="2" column="1">
+                            <widget class="TQPushButton" row="2" column="1">
                                 <property name="name">
                                     <cstring>pushShredder</cstring>
                                 </property>
@@ -122,7 +122,7 @@
                                     <string>Install Shredder</string>
                                 </property>
                             </widget>
-                            <widget class="QLabel" row="0" column="0" rowspan="1" colspan="2">
+                            <widget class="TQLabel" row="0" column="0" rowspan="1" colspan="2">
                                 <property name="name">
                                     <cstring>textLabel6</cstring>
                                 </property>
@@ -132,18 +132,18 @@ It will shred (overwrite several times before erasing) the
 files you drop on it, making it almost impossible to recover
 the original file.</string>
                                 </property>
-                                <property name="alignment">
+                                <property name="tqalignment">
                                     <set>WordBreak|AlignJustify|AlignTop</set>
                                 </property>
                             </widget>
-                            <widget class="QLabel" row="1" column="0" rowspan="1" colspan="2">
+                            <widget class="TQLabel" row="1" column="0" rowspan="1" colspan="2">
                                 <property name="name">
                                     <cstring>shredInfo</cstring>
                                 </property>
                                 <property name="text">
                                     <string>textLabel5</string>
                                 </property>
-                                <property name="alignment">
+                                <property name="tqalignment">
                                     <set>AlignTop</set>
                                 </property>
                             </widget>
@@ -159,7 +159,7 @@ the original file.</string>
                         <property name="sizeType">
                             <enum>Expanding</enum>
                         </property>
-                        <property name="sizeHint">
+                        <property name="tqsizeHint">
                             <size>
                                 <width>20</width>
                                 <height>71</height>
@@ -168,7 +168,7 @@ the original file.</string>
                     </spacer>
                 </grid>
             </widget>
-            <widget class="QWidget">
+            <widget class="TQWidget">
                 <property name="name">
                     <cstring>TabPage</cstring>
                 </property>
@@ -179,7 +179,7 @@ the original file.</string>
                     <property name="name">
                         <cstring>unnamed</cstring>
                     </property>
-                    <widget class="QLabel" row="0" column="0">
+                    <widget class="TQLabel" row="0" column="0">
                         <property name="name">
                             <cstring>textLabel1_2</cstring>
                         </property>
@@ -187,7 +187,7 @@ the original file.</string>
                             <string>Left mouse click opens (restart KGpg to apply):</string>
                         </property>
                     </widget>
-                    <widget class="QComboBox" row="0" column="1">
+                    <widget class="TQComboBox" row="0" column="1">
                         <item>
                             <property name="text">
                                 <string>Key Manager</string>
@@ -220,14 +220,14 @@ the original file.</string>
                         <property name="sizeType">
                             <enum>Expanding</enum>
                         </property>
-                        <property name="sizeHint">
+                        <property name="tqsizeHint">
                             <size>
                                 <width>21</width>
                                 <height>91</height>
                             </size>
                         </property>
                     </spacer>
-                    <widget class="QGroupBox" row="1" column="0" rowspan="1" colspan="2">
+                    <widget class="TQGroupBox" row="1" column="0" rowspan="1" colspan="2">
                         <property name="name">
                             <cstring>groupBox11</cstring>
                         </property>
@@ -238,7 +238,7 @@ the original file.</string>
                             <property name="name">
                                 <cstring>unnamed</cstring>
                             </property>
-                            <widget class="QLabel" row="0" column="0">
+                            <widget class="TQLabel" row="0" column="0">
                                 <property name="name">
                                     <cstring>textLabel1</cstring>
                                 </property>
@@ -259,7 +259,7 @@ the original file.</string>
 					&lt;/qt&gt;</string>
                                 </property>
                             </widget>
-                            <widget class="QLabel" row="1" column="0">
+                            <widget class="TQLabel" row="1" column="0">
                                 <property name="name">
                                     <cstring>textLabel1_3</cstring>
                                 </property>
@@ -325,7 +325,7 @@ the original file.</string>
                             </widget>
                         </grid>
                     </widget>
-                    <widget class="QGroupBox" row="2" column="0" rowspan="1" colspan="2">
+                    <widget class="TQGroupBox" row="2" column="0" rowspan="1" colspan="2">
                         <property name="name">
                             <cstring>groupBox3</cstring>
                         </property>
@@ -336,7 +336,7 @@ the original file.</string>
                             <property name="name">
                                 <cstring>unnamed</cstring>
                             </property>
-                            <widget class="QLabel" row="0" column="0">
+                            <widget class="TQLabel" row="0" column="0">
                                 <property name="name">
                                     <cstring>textLabel1_3_2</cstring>
                                 </property>
@@ -349,7 +349,7 @@ the original file.</string>
 					&lt;/qt&gt;</string>
                                 </property>
                             </widget>
-                            <widget class="QLabel" row="1" column="0">
+                            <widget class="TQLabel" row="1" column="0">
                                 <property name="name">
                                     <cstring>textLabel1_2_2</cstring>
                                 </property>
@@ -409,5 +409,5 @@ the original file.</string>
         </widget>
     </vbox>
 </widget>
-<layoutdefaults spacing="6" margin="11"/>
+<tqlayoutdefaults spacing="6" margin="11"/>
 </UI>

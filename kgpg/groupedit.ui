@@ -1,6 +1,6 @@
 <!DOCTYPE UI><UI version="3.3" stdsetdef="1">
 <class>groupEdit</class>
-<widget class="QWidget">
+<widget class="TQWidget">
     <property name="name">
         <cstring>groupEdit</cstring>
     </property>
@@ -85,7 +85,7 @@
                 </color>
             </property>
         </widget>
-        <widget class="QLabel" row="0" column="0" rowspan="1" colspan="3">
+        <widget class="TQLabel" row="0" column="0" rowspan="1" colspan="3">
             <property name="name">
                 <cstring>textLabel1</cstring>
             </property>
@@ -101,7 +101,7 @@
                 <string>Available Trusted Keys</string>
             </property>
         </widget>
-        <widget class="QPushButton" row="2" column="1">
+        <widget class="TQPushButton" row="2" column="1">
             <property name="name">
                 <cstring>buttonAdd</cstring>
             </property>
@@ -109,7 +109,7 @@
                 <string></string>
             </property>
         </widget>
-        <widget class="QPushButton" row="2" column="2">
+        <widget class="TQPushButton" row="2" column="2">
             <property name="name">
                 <cstring>buttonRemove</cstring>
             </property>
@@ -127,7 +127,7 @@
             <property name="sizeType">
                 <enum>Expanding</enum>
             </property>
-            <property name="sizeHint">
+            <property name="tqsizeHint">
                 <size>
                     <width>71</width>
                     <height>20</height>
@@ -205,7 +205,7 @@
 </widget>
 <customwidgets>
 </customwidgets>
-<layoutdefaults spacing="6" margin="11"/>
+<tqlayoutdefaults spacing="6" margin="11"/>
 <includehints>
     <includehint>kactivelabel.h</includehint>
 </includehints>

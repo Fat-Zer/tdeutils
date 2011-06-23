@@ -38,27 +38,28 @@ class KURL;
 class KTextFileDialog : public KFileDialog
 {
   Q_OBJECT
+  TQ_OBJECT
 
  public:
     KTextFileDialog(const TQString& startDir, const TQString& filter,
-		    TQWidget *parent, const char *name,
+		    TQWidget *tqparent, const char *name,
 		    bool modal);
 
     ~KTextFileDialog();
 
     static KURL getOpenURLwithEncoding(
-         const TQString& startDir = TQString::null,
-	 const TQString& filter= TQString::null,
-	 TQWidget *parent= 0,
-	 const TQString& caption = TQString::null,
-	 const TQString& encoding = TQString::null,
-	 const TQString& buttonText = TQString::null);
+         const TQString& startDir = TQString(),
+	 const TQString& filter= TQString(),
+	 TQWidget *tqparent= 0,
+	 const TQString& caption = TQString(),
+	 const TQString& encoding = TQString(),
+	 const TQString& buttonText = TQString());
 
     static KURL getSaveURLwithEncoding(
 	 const TQString& dir, const TQString& filter,
-	 TQWidget *parent,
+	 TQWidget *tqparent,
 	 const TQString& caption,
-	 const TQString& encoding = TQString::null);
+	 const TQString& encoding = TQString());
 
     TQString &encoding() { return enc; }
     void setEncoding(const TQString& encoding);

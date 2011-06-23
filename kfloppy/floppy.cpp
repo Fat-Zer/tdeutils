@@ -48,8 +48,8 @@
 #include "floppy.h"
 #include "format.h"
 
-FloppyData::FloppyData(TQWidget * parent, const char * name)
- : KDialog( parent, name ),
+FloppyData::FloppyData(TQWidget * tqparent, const char * name)
+ : KDialog( tqparent, name ),
 	formatActions(0L), m_canLowLevel(false), m_canZeroOut( false )
 {
 
@@ -288,7 +288,7 @@ FloppyData::FloppyData(TQWidget * parent, const char * name)
 
 	frame = new TQLabel( this, "NewsWindow" );
 	frame->setFrameStyle(TQFrame::Panel | TQFrame::Sunken);
-	frame->setAlignment(WordBreak|ExpandTabs);
+	frame->tqsetAlignment(WordBreak|ExpandTabs);
         TQWhatsThis::add( frame,
             i18n("<qt>This is the status window, where error messages are displayed.</qt>") );
 
@@ -334,7 +334,7 @@ void FloppyData::closeEvent(TQCloseEvent*)
 void FloppyData::keyPressEvent(TQKeyEvent *e)
 {
 	switch(e->key()) {
-	case Qt::Key_F1:
+	case TQt::Key_F1:
 		kapp->invokeHelp();
 		break;
 	default:
@@ -497,7 +497,7 @@ void FloppyData::format(){
         if (KMessageBox::warningContinueCancel( this,
             i18n("<qt>Formatting will erase all data on the device:<br/><b>%1</b><br/>"
                 "(Please check the correctness of the device name.)<br/>"
-                "Are you sure you wish to proceed?</qt>").arg( currentComboBoxDevice )
+                "Are you sure you wish to proceed?</qt>").tqarg( currentComboBoxDevice )
                 , i18n("Proceed?") ) != KMessageBox::Continue)
             {
                 return;
@@ -524,7 +524,7 @@ void FloppyData::format(){
   setEnabled(false);
 
         // Erase text box
-        frame->setText( TQString::null );
+        frame->setText( TQString() );
 
     if ( !userDevice )
     {
@@ -536,10 +536,10 @@ void FloppyData::format(){
     }
 
 	if (formatActions) delete formatActions;
-	formatActions = new KFActionQueue(this);
+	formatActions = new KFActionQueue(TQT_TQOBJECT(this));
 
 	connect(formatActions,TQT_SIGNAL(status(const TQString &,int)),
-		this,TQT_SLOT(formatStatus(const TQString &,int)));
+		this,TQT_SLOT(formattqStatus(const TQString &,int)));
 	connect(formatActions,TQT_SIGNAL(done(KFAction *,bool)),
 		this,TQT_SLOT(reset()));
 
@@ -550,7 +550,7 @@ void FloppyData::format(){
 	}
         else if ( zerooutformat->isChecked() )
         {
-            DDZeroOut* f = new DDZeroOut( this );
+            DDZeroOut* f = new DDZeroOut( TQT_TQOBJECT(this) );
             if ( userDevice )
             {
                 f->configureDevice( currentComboBoxDevice );
@@ -569,7 +569,7 @@ void FloppyData::format(){
         }
         else
 	{
-		FDFormat *f = new FDFormat(this);
+		FDFormat *f = new FDFormat(TQT_TQOBJECT(this));
 		f->configureDevice(drive,blocks);
 		f->configure(verifylabel->isChecked());
 		formatActions->queue(f);
@@ -577,7 +577,7 @@ void FloppyData::format(){
 
 	if ( filesystemComboBox->currentText() == i18n("DOS") )
 	{
-		FATFilesystem *f = new FATFilesystem(this);
+		FATFilesystem *f = new FATFilesystem(TQT_TQOBJECT(this));
 		f->configure(verifylabel->isChecked(),
 			labellabel->isChecked(),
 			lineedit->text());
@@ -594,7 +594,7 @@ void FloppyData::format(){
 
 	else if ( filesystemComboBox->currentText() == i18n("ext2") )
 	{
-		Ext2Filesystem *f = new Ext2Filesystem(this);
+		Ext2Filesystem *f = new Ext2Filesystem(TQT_TQOBJECT(this));
 		f->configure(verifylabel->isChecked(),
 			labellabel->isChecked(),
 			lineedit->text());
@@ -612,7 +612,7 @@ void FloppyData::format(){
 #ifdef ANY_BSD
 	else if ( filesystemComboBox->currentText() == i18n("UFS") )
 	{
-		FloppyAction *f = new UFSFilesystem(this);
+		FloppyAction *f = new UFSFilesystem(TQT_TQOBJECT(this));
                 f->configureDevice(drive,blocks);
                 formatActions->queue(f);
 	}
@@ -621,7 +621,7 @@ void FloppyData::format(){
 #ifdef ANY_LINUX
 	else if ( filesystemComboBox->currentText() == i18n("Minix") )
 	{
-		MinixFilesystem *f = new MinixFilesystem(this);
+		MinixFilesystem *f = new MinixFilesystem(TQT_TQOBJECT(this));
 		f->configure(verifylabel->isChecked(),
 			labellabel->isChecked(),
 			lineedit->text());
@@ -642,9 +642,9 @@ void FloppyData::format(){
 	formatActions->exec();
 }
 
-void FloppyData::formatStatus(const TQString &s,int p)
+void FloppyData::formattqStatus(const TQString &s,int p)
 {
-    kdDebug(2002) << "FloppyData::formatStatus: " << s << " : "  << p << endl;
+    kdDebug(2002) << "FloppyData::formattqStatus: " << s << " : "  << p << endl;
 	if (!s.isEmpty())
         {
             const TQString oldText ( frame->text() );

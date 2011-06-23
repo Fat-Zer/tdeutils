@@ -16,7 +16,7 @@
  *  Boston, MA 02110-1301, USA.
  **/
 
-#ifdef QT_ONLY
+#ifdef TQT_ONLY
   #include "compat.h"
 #else
   #include <klocale.h>
@@ -46,15 +46,15 @@
 #include "verifybuttons.h"
 #include <tqwhatsthis.h>
 
-KRegExpEditorPrivate::KRegExpEditorPrivate(TQWidget *parent, const char *name)
-    : TQWidget(parent, name), _updating( false ), _autoVerify( true )
+KRegExpEditorPrivate::KRegExpEditorPrivate(TQWidget *tqparent, const char *name)
+    : TQWidget(tqparent, name), _updating( false ), _autoVerify( true )
 {
   setMinimumSize(730,300);
-  TQDockArea* area = new TQDockArea( Horizontal, TQDockArea::Normal, this );
+  TQDockArea* area = new TQDockArea(Qt::Horizontal, TQDockArea::Normal, this );
   area->setMinimumSize(2,2);
-  TQDockArea* verArea1 = new TQDockArea( Vertical, TQDockArea::Normal, this );
+  TQDockArea* verArea1 = new TQDockArea(Qt::Vertical, TQDockArea::Normal, this );
   verArea1->setMinimumSize(2,2);
-  TQDockArea* verArea2 = new TQDockArea( Vertical, TQDockArea::Reverse, this );
+  TQDockArea* verArea2 = new TQDockArea(Qt::Vertical, TQDockArea::Reverse, this );
   verArea2->setMinimumSize(2,2);
 
   // The DockWindows.
@@ -67,7 +67,7 @@ KRegExpEditorPrivate::KRegExpEditorPrivate(TQWidget *parent, const char *name)
                                        "you have developed and saved, and regular expressions shipped with the system." ));
 
   // Editor window
-  _editor = new TQSplitter( Vertical, this, "KRegExpEditorPrivate::_editor" );
+  _editor = new TQSplitter(Qt::Vertical, this, "KRegExpEditorPrivate::_editor" );
 
   _scrolledEditorWindow =
     new RegExpScrolledEditorWindow( _editor, "KRegExpEditorPrivate::_scrolledEditorWindow" );
@@ -138,7 +138,7 @@ KRegExpEditorPrivate::KRegExpEditorPrivate(TQWidget *parent, const char *name)
 
   // connect( _verifier, TQT_SIGNAL( countChanged( int ) ), _verifyButtons, TQT_SLOT( setMatchCount( int ) ) );
 
-  // Qt anchors do not work for <pre>...</pre>, thefore scrolling to next/prev match
+  // TQt anchors do not work for <pre>...</pre>, thefore scrolling to next/prev match
   // do not work. Enable this when they work.
   // connect( _verifyButtons, TQT_SIGNAL( gotoFirst() ), _verifier, TQT_SLOT( gotoFirst() ) );
   // connect( _verifyButtons, TQT_SIGNAL( gotoPrev() ), _verifier, TQT_SLOT( gotoPrev() ) );
@@ -154,31 +154,31 @@ KRegExpEditorPrivate::KRegExpEditorPrivate(TQWidget *parent, const char *name)
 
 
   // Line Edit
-  TQHBoxLayout* layout = new TQHBoxLayout( topLayout, 6 );
+  TQHBoxLayout* tqlayout = new TQHBoxLayout( topLayout, 6 );
   TQLabel* label = new TQLabel( i18n("ASCII syntax:"), this );
-  layout->addWidget( label );
+  tqlayout->addWidget( label );
   clearButton = new TQToolButton( this );
-  const TQString icon( TQString::fromLatin1( TQApplication::reverseLayout() ? "clear_left" : "locationbar_erase" ) );
+  const TQString icon( TQString::tqfromLatin1( TQApplication::reverseLayout() ? "clear_left" : "locationbar_erase" ) );
   TQIconSet clearIcon = SmallIconSet( icon );
   clearButton->setIconSet( clearIcon );
-  layout->addWidget( clearButton );
+  tqlayout->addWidget( clearButton );
   TQToolTip::add( clearButton, i18n("Clear expression") );
   _regexpEdit = new TQLineEdit( this );
-  layout->addWidget( _regexpEdit );
+  tqlayout->addWidget( _regexpEdit );
   TQWhatsThis::add( _regexpEdit, i18n( "This is the regular expression in ASCII syntax. You are likely only "
 				      "to be interested in this if you are a programmer, and need to "
 				      "develop a regular expression using TQRegExp.<p>"
                                       "You may develop your regular expression both by using the graphical "
 				      "editor, and by typing the regular expression in this line edit.") );
 
-#ifdef QT_ONLY
+#ifdef TQT_ONLY
   TQPixmap pix( "icons/error.png" );
 #else
-  TQPixmap pix = KGlobal::iconLoader()->loadIcon(locate("data", TQString::fromLatin1("kregexpeditor/pics/error.png") ), KIcon::Toolbar );
+  TQPixmap pix = KGlobal::iconLoader()->loadIcon(locate("data", TQString::tqfromLatin1("kregexpeditor/pics/error.png") ), KIcon::Toolbar );
 #endif
   _error = new TQLabel( this );
   _error->setPixmap( pix );
-  layout->addWidget( _error );
+  tqlayout->addWidget( _error );
   _error->hide();
 
   _timer = new TQTimer(this);
@@ -196,7 +196,7 @@ KRegExpEditorPrivate::KRegExpEditorPrivate(TQWidget *parent, const char *name)
   accel->connectItem( accel->insertItem( CTRL+Key_Z ), this, TQT_SLOT( slotUndo() ) );
   accel->connectItem( accel->insertItem( CTRL+Key_R ), this, TQT_SLOT( slotRedo() ) );
 
-  setSyntax( TQString::fromLatin1( "Qt" ) );
+  setSyntax( TQString::tqfromLatin1( "TQt" ) );
 }
 
 TQString KRegExpEditorPrivate::regexp()
@@ -371,7 +371,7 @@ void KRegExpEditorPrivate::setVerifyText( const TQString& fileName )
     _autoVerify = false;
     TQFile file( fileName );
     if ( !file.open( IO_ReadOnly ) ) {
-        KMessageBox::sorry(0, i18n("Could not open file '%1' for reading").arg( fileName ) );
+        KMessageBox::sorry(0, i18n("Could not open file '%1' for reading").tqarg( fileName ) );
     }
     else {
         TQTextStream s( &file );
@@ -401,11 +401,11 @@ void KRegExpEditorPrivate::setSyntax( const TQString& syntax )
     RegExpConverter::setCurrent( converter );
     if ( converter->canParse() ) {
         _regexpEdit->setReadOnly( false );
-        _regexpEdit->setBackgroundMode( Qt::PaletteBase );
+        _regexpEdit->setBackgroundMode( TQt::PaletteBase );
     }
     else {
         _regexpEdit->setReadOnly( true );
-        _regexpEdit->setBackgroundMode( Qt::PaletteBackground );
+        _regexpEdit->setBackgroundMode( TQt::PaletteBackground );
     }
     _regExpButtons->setFeatures( converter->features() );
     _verifier->setHighlighter( converter->highlighter(_verifier) );
@@ -418,7 +418,7 @@ void KRegExpEditorPrivate::showHelp()
     _editor->hide();
 }
 
-void KRegExpEditorPrivate::setAllowNonQtSyntax( bool b )
+void KRegExpEditorPrivate::setAllowNonTQtSyntax( bool b )
 {
-    _verifyButtons->setAllowNonQtSyntax( b );
+    _verifyButtons->setAllowNonTQtSyntax( b );
 }

@@ -33,8 +33,9 @@ class TQListViewItem;
 class NetConfig : public KSim::PluginPage
 {
   Q_OBJECT
+  TQ_OBJECT
   public:
-    NetConfig(KSim::PluginObject *parent, const char *name);
+    NetConfig(KSim::PluginObject *tqparent, const char *name);
     virtual ~NetConfig();
 
     virtual void saveConfig();
@@ -53,7 +54,7 @@ class NetConfig : public KSim::PluginPage
     // Couldnt think of a better name for this :)
     const TQString &boolToString(bool) const;
 
-    TQHBoxLayout *layout;
+    TQHBoxLayout *tqlayout;
     TQPushButton *insertButton;
     TQPushButton *removeButton;
     TQPushButton *modifyButton;

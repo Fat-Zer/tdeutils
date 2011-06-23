@@ -27,11 +27,12 @@
 class KProcess;
 class TQVBoxLayout;
 
-class FilesystemWidget : public QWidget
+class FilesystemWidget : public TQWidget
 {
   Q_OBJECT
+  TQ_OBJECT
   public:
-    FilesystemWidget(TQWidget *parent, const char *name);
+    FilesystemWidget(TQWidget *tqparent, const char *name);
     ~FilesystemWidget();
 
     void append(int, const TQString &);

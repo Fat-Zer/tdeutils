@@ -185,7 +185,7 @@ void KBufferColumn::recalcByteWidth()
 
 void KBufferColumn::recalcVerticalGridX()
 {
-  VerticalGridX = ByteWidth-1 + GroupSpacingWidth/2;
+ VerticalGridX = ByteWidth-1 + GroupSpacingWidth/2;
 }
 
 
@@ -395,7 +395,7 @@ void KBufferColumn::paintLine( TQPainter *P, int Line ) // TODO: could be remove
 
 void KBufferColumn::paintPositions( TQPainter *P, int Line, KSection Pos )
 {
-  const TQColorGroup &CG = View->colorGroup();
+  const TQColorGroup &CG = View->tqcolorGroup();
 
   // clear background
   unsigned int BlankFlag = (Pos.start()!=0?StartsBefore:0) | (Pos.end()!=LastPos?EndsLater:0);
@@ -427,13 +427,13 @@ void KBufferColumn::paintPositions( TQPainter *P, int Line, KSection Pos )
     // falls Marking nicht mehr gebuffert und noch zu erwarten
     if( HasMarking && Marking.endsBefore(IndizesPart.start()) )
     {
-      // erhebe nächste Markierung im Bereich
+      // erhebe nï¿½chste Markierung im Bereich
       HasMarking = isMarked( IndizesPart, &Marking, &MarkingFlag );
     }
     // falls Selection nicht mehr gebuffert und noch zu erwarten
     if( HasSelection && Selection.endsBefore(IndizesPart.start()) )
     {
-      // erhebe nächste Selection im Bereich
+      // erhebe nï¿½chste Selection im Bereich
       HasSelection = isSelected( IndizesPart, &Selection, &SelectionFlag );
     }
 
@@ -501,7 +501,7 @@ void KBufferColumn::paintPlain( TQPainter *P, KSection Positions, int Index )
 
 void KBufferColumn::paintSelection( TQPainter *P, KSection Positions, int Index, int Flag )
 {
-  const TQColorGroup &CG = View->colorGroup();
+  const TQColorGroup &CG = View->tqcolorGroup();
 
   paintRange( P, CG.highlight(), Positions, Flag );
 
@@ -524,7 +524,7 @@ void KBufferColumn::paintSelection( TQPainter *P, KSection Positions, int Index,
 
 void KBufferColumn::paintMarking( TQPainter *P, KSection Positions, int Index, int Flag )
 {
-  const TQColorGroup &CG = View->colorGroup();
+  const TQColorGroup &CG = View->tqcolorGroup();
 
   paintRange( P, CG.text(), Positions, Flag );
 
@@ -549,7 +549,7 @@ void KBufferColumn::paintMarking( TQPainter *P, KSection Positions, int Index, i
 void KBufferColumn::paintGrid( TQPainter *P, KSection Range )
 {
   int st = 0; // counter for spacing triggering
-  P->setPen( Qt::black );
+  P->setPen( TQt::black );
   // paint all the bytes affected
   for( int p=Range.start(); p<=Range.end(); ++p,++st )
   {
@@ -560,7 +560,7 @@ void KBufferColumn::paintGrid( TQPainter *P, KSection Range )
 
     // spacing behind byte and vertical grid enabled?
     if( st == SpacingTrigger && p != LastPos )
-      P->drawLine( VerticalGridX, 0, VerticalGridX, LineHeight-1 ) ;
+      P->drawLine(VerticalGridX, 0,VerticalGridX, LineHeight-1 ) ;
 
     P->translate( -x, 0 );
   }
@@ -572,7 +572,7 @@ void KBufferColumn::paintRange( TQPainter *P, const TQColor &Color, KSection Pos
   KPixelX RangeX = Flag & StartsBefore ? relRightXOfPos( Positions.start()-1 ) + 1 : relXOfPos( Positions.start() );
   KPixelX RangeW = (Flag & EndsLater ? relXOfPos( Positions.end()+1 ): relRightXOfPos( Positions.end() ) + 1)  - RangeX;
 
-  P->fillRect( RangeX,0,RangeW,LineHeight, TQBrush(Color,Qt::SolidPattern) );
+  P->fillRect( RangeX,0,RangeW,LineHeight, TQBrush(Color,TQt::SolidPattern) );
 }
 
 
@@ -581,9 +581,9 @@ void KBufferColumn::paintByte( TQPainter *P, int Index )
   char Byte = ( Index > -1 ) ? Buffer->datum( Index ) : EmptyByte;
   KHEChar B = Codec->decode( Byte );
 
-  const TQColorGroup &CG = View->colorGroup();
+  const TQColorGroup &CG = View->tqcolorGroup();
   TQColor Color = CG.text();
-  TQBrush Brush( CG.base(), Qt::SolidPattern );
+  TQBrush Brush( CG.base(), TQt::SolidPattern );
 
   if( Index > -1 )
   {
@@ -631,14 +631,14 @@ void KBufferColumn::paintCursor( TQPainter *P, int Index )
 {
   char Byte = ( Index > -1 ) ? Buffer->datum( Index ) : EmptyByte;
   KHEChar B = Codec->decode( Byte );
-  P->fillRect( 0, 0, ByteWidth, LineHeight, TQBrush(colorForChar(B),Qt::SolidPattern) );
+  P->fillRect( 0, 0, ByteWidth, LineHeight, TQBrush(colorForChar(B),TQt::SolidPattern) );
 }
 
 
 void KBufferColumn::drawByte( TQPainter *P, char /*Byte*/, KHEChar B, const TQColor &Color ) const
 {
   P->setPen( Color );
-  P->drawText( 0, DigitBaseLine, B );
+  P->drawText( 0, DigitBaseLine, TQString(B) );
 }
 
 

@@ -31,6 +31,7 @@ class Remote;
 class KCMLirc: public KCModule, virtual public DCOPObject
 {
 	Q_OBJECT
+//	TQ_OBJECT
 	K_DCOP
 
 private:
@@ -45,8 +46,8 @@ private:
 
 public slots:
 	void updateActions();
-	void updateModesStatus(TQListViewItem *);
-	void updateActionsStatus(TQListViewItem *);
+	void updateModestqStatus(TQListViewItem *);
+	void updateActionstqStatus(TQListViewItem *);
 	void updateModes();
 	void updateExtensions();
 	void updateInformation();
@@ -61,10 +62,11 @@ public slots:
 	void slotRenamed(TQListViewItem *item);
 	void slotEditMode();
 
-
-// MOC_SKIP_BEGIN
+#ifndef Q_MOC_RUN
+// QMOC_SKIP_BEGIN
 k_dcop:
-// MOC_SKIP_END
+// QMOC_SKIP_END
+#endif
 	// now just used as a proxy to AddAction class
 	virtual void gotButton(TQString remote, TQString button);
 signals:
@@ -76,7 +78,7 @@ public:
 	virtual void defaults();
 	virtual void configChanged();
 
-	KCMLirc(TQWidget *parent = 0, const char *name = 0, TQStringList args = TQStringList());
+	KCMLirc(TQWidget *tqparent = 0, const char *name = 0, TQStringList args = TQStringList());
 	~KCMLirc();
 };
 

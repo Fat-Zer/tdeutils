@@ -15,7 +15,7 @@
  *  the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  *  Boston, MA 02110-1301, USA.
  **/
-#ifdef QT_ONLY
+#ifdef TQT_ONLY
   #include "compat.h"
 #else
   #include <klocale.h>
@@ -127,7 +127,7 @@ bool TextRangeRegExp::load( TQDomElement top, const TQString& /*version*/ )
             addRange( from, to );
         }
         else {
-            KMessageBox::sorry( 0, i18n("<p>Invalid sub element to element <b>TextRange</b>. Tag was <b>%1</b></p>").arg(child.tagName()),
+            KMessageBox::sorry( 0, i18n("<p>Invalid sub element to element <b>TextRange</b>. Tag was <b>%1</b></p>").tqarg(child.tagName()),
                                 i18n("Error While Loading From XML File") ) ;
             return false;
         }

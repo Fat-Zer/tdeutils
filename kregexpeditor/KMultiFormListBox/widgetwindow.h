@@ -18,7 +18,7 @@
 #ifndef __configwindow
 #define __configwindow
 
-#ifdef QT_ONLY
+#ifdef TQT_ONLY
   #include "compat.h"
   #include <tqlistbox.h>
 #else

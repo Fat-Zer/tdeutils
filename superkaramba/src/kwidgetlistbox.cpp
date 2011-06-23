@@ -21,8 +21,8 @@
 #include <kdebug.h>
 #include <kglobalsettings.h>
 
-KWidgetListbox::KWidgetListbox(TQWidget *parent, const char *name)
- : TQTable(parent, name)
+KWidgetListbox::KWidgetListbox(TQWidget *tqparent, const char *name)
+ : TQTable(tqparent, name)
 {
   setNumRows(0);
   setNumCols(1);
@@ -188,7 +188,7 @@ void KWidgetListbox::showItems(show_callback func, void* data)
 void KWidgetListbox::showEvent(TQShowEvent*)
 {
   //kdDebug() << k_funcinfo << endl;
-  repaintContents(false);
+  tqrepaintContents(false);
 }
 
 void KWidgetListbox::paintCell(TQPainter*, int, int, const TQRect&,

@@ -22,11 +22,11 @@
    @internal
    A Validator for the @ref LimitedCharLineEdit
 */
-class Validator :public QValidator
+class Validator :public TQValidator
 {
 public:
-  Validator( LimitedCharLineEdit::Mode mode, TQWidget* parent )
-    :TQValidator( parent, "Validator" ), _mode(mode)
+  Validator( LimitedCharLineEdit::Mode mode, TQWidget* tqparent )
+    :TQValidator( TQT_TQOBJECT(tqparent), "Validator" ), _mode(mode)
   {
   }
 
@@ -56,8 +56,8 @@ void LimitedCharLineEdit::keyPressEvent ( TQKeyEvent *event )
     focusNextPrevChild(true);
 }
 
-LimitedCharLineEdit::LimitedCharLineEdit( Mode mode, TQWidget* parent, const char* name )
-	:TQLineEdit( parent, name ), _mode(mode)
+LimitedCharLineEdit::LimitedCharLineEdit( Mode mode, TQWidget* tqparent, const char* name )
+	:TQLineEdit( tqparent, name ), _mode(mode)
 {
   if ( mode == NORMAL )
     _count = 1;
@@ -67,7 +67,7 @@ LimitedCharLineEdit::LimitedCharLineEdit( Mode mode, TQWidget* parent, const cha
     _count = 4;
 
   setMaxLength( _count );
-  setFixedSize( fontMetrics().width('A')*5+5, sizeHint().height());
+  setFixedSize( fontMetrics().width('A')*5+5, tqsizeHint().height());
 
   setValidator( new Validator( mode, this ) );
 }

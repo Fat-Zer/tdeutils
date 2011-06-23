@@ -30,13 +30,14 @@ class TextRegExp;
 class TextWidget : public RegExpWidget
 {
     Q_OBJECT
+  TQ_OBJECT
 
 public:
-    TextWidget(RegExpEditorWindow* editorWindow, TQWidget *parent,
+    TextWidget(RegExpEditorWindow* editorWindow, TQWidget *tqparent,
                const char *name = 0);
     TextWidget( TextRegExp* regexp,  RegExpEditorWindow* editorWindow,
-                TQWidget* parent, const char* name = 0);
-    virtual TQSize sizeHint() const;
+                TQWidget* tqparent, const char* name = 0);
+    virtual TQSize tqsizeHint() const;
 	virtual RegExp* regExp() const;
     virtual RegExpType type() const { return TEXT; }
     virtual void updateAll();
@@ -45,7 +46,7 @@ public:
 protected:
     void init( const TQString& text );
     virtual void paintEvent( TQPaintEvent *e );
-    virtual bool updateSelection( bool parentSelected );
+    virtual bool updateSelection( bool tqparentSelected );
     virtual void clearSelection();
     virtual bool eventFilter( TQObject*, TQEvent* );
 

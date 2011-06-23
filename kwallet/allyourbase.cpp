@@ -38,9 +38,9 @@
 /****************
  *  KWalletFolderItem - ListView items to represent kwallet folders
  */
-KWalletFolderItem::KWalletFolderItem(KWallet::Wallet *w, TQListView* parent, const TQString &name, int entries)
-: KListViewItem(parent),_wallet(w),_name(name),_entries(entries) {
-	setText(0, TQString("%1 (%2)").arg(_name).arg(_entries));
+KWalletFolderItem::KWalletFolderItem(KWallet::Wallet *w, TQListView* tqparent, const TQString &name, int entries)
+: KListViewItem(tqparent),_wallet(w),_name(name),_entries(entries) {
+	setText(0, TQString("%1 (%2)").tqarg(_name).tqarg(_entries));
 	setRenameEnabled(0, false);
 	setDragEnabled(true);
 	setDropEnabled(true);
@@ -66,7 +66,7 @@ TQPixmap KWalletFolderItem::getFolderIcon(KIcon::Group group){
 void KWalletFolderItem::refresh() {
 	TQString saveFolder = _wallet->currentFolder();
 	_wallet->setFolder(_name);
-	setText(0, TQString("%1 (%2)").arg(_name).arg(_wallet->entryList().count()));
+	setText(0, TQString("%1 (%2)").tqarg(_name).tqarg(_wallet->entryList().count()));
 	_wallet->setFolder(saveFolder);
 }
 
@@ -83,7 +83,7 @@ KWalletContainerItem* KWalletFolderItem::getContainer(KWallet::Wallet::EntryType
 	return 0;
 }
 
-bool KWalletFolderItem::contains(const TQString& key) {
+bool KWalletFolderItem::tqcontains(const TQString& key) {
 	return (getItem(key) != 0);
 }
 
@@ -121,8 +121,8 @@ KWalletFolderItem::~KWalletFolderItem() {
  *  KWalletContainerItem - ListView items to represent kwallet containers, i.e.
  *  passwords, maps, ...
  */
-KWalletContainerItem::KWalletContainerItem(TQListViewItem* parent, const TQString &name, KWallet::Wallet::EntryType type)
-: KListViewItem(parent, name), _type(type) {
+KWalletContainerItem::KWalletContainerItem(TQListViewItem* tqparent, const TQString &name, KWallet::Wallet::EntryType type)
+: KListViewItem(tqparent, name), _type(type) {
 	setRenameEnabled(0, false);
 	setDragEnabled(true);
 }
@@ -138,7 +138,7 @@ KWallet::Wallet::EntryType KWalletContainerItem::type() {
 	return _type;
 }
 
-bool KWalletContainerItem::contains(const TQString& key) {
+bool KWalletContainerItem::tqcontains(const TQString& key) {
 	return getItem(key) != 0;
 }
 
@@ -154,8 +154,8 @@ TQListViewItem *KWalletContainerItem::getItem(const TQString& key) {
 /****************
  *  KWalletEntryItem - ListView items to represent kwallet entries
  */
-KWalletEntryItem::KWalletEntryItem(KWallet::Wallet *w, TQListViewItem* parent, const TQString& ename)
-: KListViewItem(parent, ename), _wallet(w), _oldName(ename) {
+KWalletEntryItem::KWalletEntryItem(KWallet::Wallet *w, TQListViewItem* tqparent, const TQString& ename)
+: KListViewItem(tqparent, ename), _wallet(w), _oldName(ename) {
 	setRenameEnabled(0, true);
 	setDragEnabled(true);
 }
@@ -170,8 +170,8 @@ KWalletEntryItem::~KWalletEntryItem() {
 /****************
  * KWalletItem - IconView items to represent wallets
  */
-KWalletItem::KWalletItem(TQIconView *parent, const TQString& walletName)
-: TQIconViewItem(parent, walletName, DesktopIcon("kwalletmanager")) {
+KWalletItem::KWalletItem(TQIconView *tqparent, const TQString& walletName)
+: TQIconViewItem(tqparent, walletName, DesktopIcon("kwalletmanager")) {
 }
 
 KWalletItem::~KWalletItem() {
@@ -183,7 +183,7 @@ bool KWalletItem::acceptDrop(const TQMimeSource *mime) const {
 }
 
 static bool decodeEntry(KWallet::Wallet *_wallet, TQDataStream& ds) {
-	Q_UINT32 magic;
+	TQ_UINT32 magic;
 	ds >> magic;
 	if (magic != KWALLETENTRYMAGIC) {
 		kdDebug() << "bad magic" << endl;
@@ -194,7 +194,7 @@ static bool decodeEntry(KWallet::Wallet *_wallet, TQDataStream& ds) {
 	KWallet::Wallet::EntryType et;
 	ds >> name;
 	if (_wallet->hasEntry(name)) {
-		int rc = KMessageBox::warningContinueCancel(0L, i18n("An entry by the name '%1' already exists. Would you like to continue?").arg(name));
+		int rc = KMessageBox::warningContinueCancel(0L, i18n("An entry by the name '%1' already exists. Would you like to continue?").tqarg(name));
 		if (rc == KMessageBox::Cancel) {
 			return false;
 		}
@@ -208,7 +208,7 @@ static bool decodeEntry(KWallet::Wallet *_wallet, TQDataStream& ds) {
 }
 
 static bool decodeFolder(KWallet::Wallet *_wallet, TQDataStream& ds) {
-	Q_UINT32 magic;
+	TQ_UINT32 magic;
 	ds >> magic;
 	if (magic != KWALLETFOLDERMAGIC) {
 		kdDebug() << "bad magic" << endl;
@@ -217,7 +217,7 @@ static bool decodeFolder(KWallet::Wallet *_wallet, TQDataStream& ds) {
 	TQString folder;
 	ds >> folder;
 	if (_wallet->hasFolder(folder)) {
-		int rc = KMessageBox::warningYesNoCancel(0L, i18n("A folder by the name '%1' already exists.  What would you like to do?").arg(folder), TQString::null, KStdGuiItem::cont(), i18n("Replace"));
+		int rc = KMessageBox::warningYesNoCancel(0L, i18n("A folder by the name '%1' already exists.  What would you like to do?").tqarg(folder), TQString(), KStdGuiItem::cont(), i18n("Replace"));
 		if (rc == KMessageBox::Cancel) {
 			return false;
 		}
@@ -263,7 +263,7 @@ void KWalletItem::dropped(TQDropEvent *e, const TQValueList<TQIconDragItem>& lst
 		TQDataStream *ds = 0L;
 
 		if (e->provides("application/x-kwallet-folder")) {
-			TQByteArray edata = e->encodedData("application/x-kwallet-folder");
+			TQByteArray edata = e->tqencodedData("application/x-kwallet-folder");
 			if (!edata.isEmpty()) {
 				ds = new TQDataStream(edata, IO_ReadOnly);
 			}
@@ -299,13 +299,13 @@ void KWalletItem::dropped(TQDropEvent *e, const TQValueList<TQIconDragItem>& lst
 		delete _wallet;
 
 		//delete the folder from the source if we were moving
-		Qt::ButtonState state = kapp->keyboardMouseState();
-		if (e->source() && e->source()->parent() &&
-			!strcmp(e->source()->parent()->className(), "KWalletEntryList") &&
-			!(state & Qt::ControlButton)) {
+		TQt::ButtonState state = kapp->keyboardMouseState();
+		if (e->source() && e->source()->tqparent() &&
+			!strcmp(e->source()->tqparent()->className(), "KWalletEntryList") &&
+			!(state & TQt::ControlButton)) {
 		
 			KWalletEntryList *el =
-				dynamic_cast<KWalletEntryList*>(e->source()->parent());
+				dynamic_cast<KWalletEntryList*>(e->source()->tqparent());
 			if (el) {
 				KWalletFolderItem *fi = 
 					dynamic_cast<KWalletFolderItem*>(el->selectedItem());
@@ -348,8 +348,8 @@ class KWalletFolderDrag : public TQStoredDrag {
 /****************
  *  KWalletEntryList - A listview to store wallet entries
  */
-KWalletEntryList::KWalletEntryList(TQWidget *parent, const char *name)
-: KListView(parent, name) {
+KWalletEntryList::KWalletEntryList(TQWidget *tqparent, const char *name)
+: KListView(tqparent, name) {
 	addColumn(i18n("Folders"));
 	setRootIsDecorated(true);
 	setDefaultRenameAction(Reject);
@@ -389,10 +389,10 @@ void KWalletEntryList::itemDropped(TQDropEvent *e, TQListViewItem *item) {
 	TQListViewItem *sel = 0L;
 
 	//detect if we are dragging from kwallet itself
-	if (e->source() && e->source()->parent() &&
-		!strcmp(e->source()->parent()->className(), "KWalletEntryList")) {
+	if (e->source() && e->source()->tqparent() &&
+		!strcmp(e->source()->tqparent()->className(), "KWalletEntryList")) {
 
-		el = dynamic_cast<KWalletEntryList*>(e->source()->parent());
+		el = dynamic_cast<KWalletEntryList*>(e->source()->tqparent());
 		if (!el) {
 			KMessageBox::error(this, i18n("An unexpected error occurred trying to drop the item"));
 		} else
@@ -401,13 +401,13 @@ void KWalletEntryList::itemDropped(TQDropEvent *e, TQListViewItem *item) {
 
 	if (e->provides("application/x-kwallet-entry")) {
 		//do nothing if we are in the same folder
-		if (sel && sel->parent()->parent() == 
+		if (sel && sel->tqparent()->tqparent() == 
 				KWalletEntryList::getItemFolder(item)) {
 			e->ignore();
 			return;
 		}
 		isEntry = true;
-		TQByteArray data = e->encodedData("application/x-kwallet-entry");
+		TQByteArray data = e->tqencodedData("application/x-kwallet-entry");
 		if (data.isEmpty()) {
 			e->ignore();
 			return;
@@ -420,7 +420,7 @@ void KWalletEntryList::itemDropped(TQDropEvent *e, TQListViewItem *item) {
 			return;
 		}
 		isEntry = false;
-		TQByteArray data = e->encodedData("application/x-kwallet-folder");
+		TQByteArray data = e->tqencodedData("application/x-kwallet-folder");
 		if (data.isEmpty()) {
 			e->ignore();
 			return;
@@ -444,7 +444,7 @@ void KWalletEntryList::itemDropped(TQDropEvent *e, TQListViewItem *item) {
 			file.open(IO_ReadOnly);
 			ds = new TQDataStream(&file);
 			//check magic to discover mime type
-			Q_UINT32 magic;
+			TQ_UINT32 magic;
 			(*ds) >> magic;
 			if (magic == KWALLETENTRYMAGIC) {
 				isEntry = true;
@@ -468,7 +468,7 @@ void KWalletEntryList::itemDropped(TQDropEvent *e, TQListViewItem *item) {
 		e->ignore();
 		return;
 	}
-	Qt::ButtonState state = kapp->keyboardMouseState();
+	TQt::ButtonState state = kapp->keyboardMouseState();
 	if (isEntry) {
 		if (!item) {
 			e->ignore();
@@ -489,7 +489,7 @@ void KWalletEntryList::itemDropped(TQDropEvent *e, TQListViewItem *item) {
 		delete(ds);
 		//delete source if we were moving, i.e., we are dragging
 		//from kwalletmanager and Control is not pressed
-		if (ok && el && !(state & Qt::ControlButton) && sel) {
+		if (ok && el && !(state & TQt::ControlButton) && sel) {
 			el->_wallet->removeEntry(sel->text(0));
 			delete sel;
 		}
@@ -499,7 +499,7 @@ void KWalletEntryList::itemDropped(TQDropEvent *e, TQListViewItem *item) {
 		delete ds;
 		//delete source if we were moving, i.e., we are dragging
 		//from kwalletmanager and Control is not pressed
-		if (ok && el && !(state & Qt::ControlButton) && sel) {
+		if (ok && el && !(state & TQt::ControlButton) && sel) {
 			KWalletFolderItem *fi = dynamic_cast<KWalletFolderItem *>(sel);
 			if (fi) {
 				el->_wallet->removeFolder(fi->name());
@@ -562,9 +562,9 @@ KWalletFolderItem *KWalletEntryList::getItemFolder(TQListViewItem *item) {
 		case KWalletFolderItemClass:
 			return dynamic_cast<KWalletFolderItem *>(item);
 		case KWalletContainerItemClass:
-			return dynamic_cast<KWalletFolderItem *>(item->parent());
+			return dynamic_cast<KWalletFolderItem *>(item->tqparent());
 		case KWalletEntryItemClass:
-			return dynamic_cast<KWalletFolderItem *>(item->parent()->parent());
+			return dynamic_cast<KWalletFolderItem *>(item->tqparent()->tqparent());
 	}
 	return 0;
 }
@@ -589,11 +589,11 @@ class KWalletIconDrag : public TQIconDrag {
 			return 0L;
 		}
 
-		TQByteArray encodedData(const char *mime) const {
+		TQByteArray tqencodedData(const char *mime) const {
 			TQByteArray a;
 			TQCString mimetype(mime);
 			if (mimetype == "application/x-qiconlist") {
-				return TQIconDrag::encodedData(mime);
+				return TQIconDrag::tqencodedData(mime);
 			} else if (mimetype == "text/uri-list") {
 				TQCString s = _urls.join("\r\n").latin1();
 				if (_urls.count() > 0) {
@@ -618,8 +618,8 @@ class KWalletIconDrag : public TQIconDrag {
 /****************
 *  *  KWalletIconView - An iconview to store wallets
 *   */
-KWalletIconView::KWalletIconView(TQWidget *parent, const char *name)
-: KIconView(parent, name) {
+KWalletIconView::KWalletIconView(TQWidget *tqparent, const char *name)
+: KIconView(tqparent, name) {
 	KGlobal::dirs()->addResourceType("kwallet", "share/apps/kwallet");
 	connect(this, TQT_SIGNAL(dropped(TQDropEvent*, const TQValueList<TQIconDragItem>&)), TQT_SLOT(slotDropped(TQDropEvent*, const TQValueList<TQIconDragItem>&)));
 }
@@ -638,7 +638,7 @@ void KWalletIconView::slotDropped(TQDropEvent *e, const TQValueList<TQIconDragIt
 		return;
 	}
 
-	TQByteArray edata = e->encodedData("text/uri-list");
+	TQByteArray edata = e->tqencodedData("text/uri-list");
 	TQCString urls = edata.data();
 
 	TQStringList ul = TQStringList::split("\r\n", urls);
@@ -668,7 +668,7 @@ void KWalletIconView::slotDropped(TQDropEvent *e, const TQValueList<TQIconDragIt
 
 void KWalletIconView::contentsMousePressEvent(TQMouseEvent *e) {
 	_mousePos = e->pos();
-	if (!findItem(_mousePos)) {
+	if (!tqfindItem(_mousePos)) {
 		clearSelection();
 	}
 	KIconView::contentsMousePressEvent( e );

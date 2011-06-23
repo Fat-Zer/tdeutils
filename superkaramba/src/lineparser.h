@@ -33,7 +33,7 @@
 class LineParser
 {
   public:
-    LineParser(const TQString& line = TQString::null);
+    LineParser(const TQString& line = TQString());
     ~LineParser();
 
     void set(const TQString& line);

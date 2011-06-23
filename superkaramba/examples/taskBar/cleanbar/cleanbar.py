@@ -43,9 +43,9 @@ i = 0
 for x in output:
         param = x.split()
         if (len(param) > 1):
-                if param[0].find("Width:") != -1:
+                if param[0].tqfind("Width:") != -1:
                         resX = int(param[1])
-                if param[0].find("Height:") != -1:
+                if param[0].tqfind("Height:") != -1:
                         resY = int(param[1])
 
 

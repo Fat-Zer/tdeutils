@@ -26,7 +26,7 @@
 #endif
 #endif
 
-#define karambaApp ((KarambaApplication*)qApp)
+#define karambaApp ((KarambaApplication*)tqApp)
 
 class karamba;
 class KarambaIface;
@@ -39,6 +39,7 @@ class KAboutData;
 class KarambaApplication : public KApplication
 {
     Q_OBJECT
+  TQ_OBJECT
 
     friend class KarambaIface;
 
@@ -47,7 +48,7 @@ class KarambaApplication : public KApplication
     KHelpMenu* m_helpMenu;
 
     void showKarambaMenuExtension(bool show = true);
-    void setToolTip(const TQString &tip = TQString::null);
+    void setToolTip(const TQString &tip = TQString());
 
   protected:
     KarambaIface* iface;
@@ -70,7 +71,7 @@ class KarambaApplication : public KApplication
     bool startThemes(TQStringList &lst);
     KarambaIface* dcopIface() { return iface; };
     dcopIface_stub* dcopStub() { return dcopIfaceStub; };
-    TQWidget* parentWindow() { return (TQWidget*)themeListWindow; };
+    TQWidget* tqparentWindow() { return (TQWidget*)themeListWindow; };
 
     void addKaramba(karamba* k, bool reloading = false);
     void deleteKaramba(karamba* k, bool reloading = false);

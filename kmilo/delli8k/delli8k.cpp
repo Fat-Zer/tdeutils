@@ -43,8 +43,8 @@
 namespace KMilo
 {
 
-DellI8kMonitor::DellI8kMonitor( TQObject* parent, const char* name, const TQStringList& args )
-    : Monitor( parent, name, args )
+DellI8kMonitor::DellI8kMonitor( TQObject* tqparent, const char* name, const TQStringList& args )
+    : Monitor( tqparent, name, args )
 {
 }
 

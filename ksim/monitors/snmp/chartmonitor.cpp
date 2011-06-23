@@ -22,8 +22,8 @@
 
 using namespace KSim::Snmp;
 
-ChartMonitor::ChartMonitor( const MonitorConfig &config, TQWidget *parent, const char *name )
-    : KSim::Chart( true /* displayMeter */, 0, TQString::null, parent, name ),
+ChartMonitor::ChartMonitor( const MonitorConfig &config, TQWidget *tqparent, const char *name )
+    : KSim::Chart( true /* displayMeter */, 0, TQString(), tqparent, name ),
       m_lastValue( 0 ), m_config( config ), m_firstSampleReceived( false )
 {
     setTitle( m_config.name );
@@ -32,7 +32,7 @@ ChartMonitor::ChartMonitor( const MonitorConfig &config, TQWidget *parent, const
 
 void ChartMonitor::setData( const Value &data )
 {
-    Q_UINT64 currentValue = convertToInt( data );
+    TQ_UINT64 currentValue = convertToInt( data );
 
     if ( data.isCounterType() ) {
         int diff = currentValue - m_lastValue;
@@ -50,12 +50,12 @@ void ChartMonitor::setData( const Value &data )
     updateDisplay();
     setValue( currentValue );
     if ( m_config.displayCurrentValueInline ) {
-        Q_UINT64 bytesPerSec = currentValue / ( m_config.refreshInterval.seconds + m_config.refreshInterval.minutes * 60 );
+        TQ_UINT64 bytesPerSec = currentValue / ( m_config.refreshInterval.seconds + m_config.refreshInterval.minutes * 60 );
         setText( KIO::convertSize( bytesPerSec ), 0 );
     }
 }
 
-Q_UINT64 ChartMonitor::convertToInt( const Value &data )
+TQ_UINT64 ChartMonitor::convertToInt( const Value &data )
 {
     switch ( data.type() ) {
         case Value::TimeTicks:

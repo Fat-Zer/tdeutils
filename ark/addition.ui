@@ -1,6 +1,6 @@
 <!DOCTYPE UI><UI version="3.3" stdsetdef="1">
 <class>Addition</class>
-<widget class="QWidget">
+<widget class="TQWidget">
     <property name="name">
         <cstring>Addition</cstring>
     </property>
@@ -16,7 +16,7 @@
         <property name="name">
             <cstring>unnamed</cstring>
         </property>
-        <widget class="QCheckBox">
+        <widget class="TQCheckBox">
             <property name="name">
                 <cstring>kcfg_replaceOnlyWithNewer</cstring>
             </property>
@@ -24,7 +24,7 @@
                 <string>Replace old files only &amp;with newer files</string>
             </property>
         </widget>
-        <widget class="QCheckBox">
+        <widget class="TQCheckBox">
             <property name="name">
                 <cstring>kcfg_forceMSDOS</cstring>
             </property>
@@ -32,7 +32,7 @@
                 <string>Force &amp;MS-DOS short filenames (Zip)</string>
             </property>
         </widget>
-        <widget class="QCheckBox">
+        <widget class="TQCheckBox">
             <property name="name">
                 <cstring>kcfg_convertLF2CRLF</cstring>
             </property>
@@ -40,7 +40,7 @@
                 <string>Translate &amp;LF to DOS CRLF (Zip)</string>
             </property>
         </widget>
-        <widget class="QCheckBox">
+        <widget class="TQCheckBox">
             <property name="name">
                 <cstring>kcfg_rarStoreSymlinks</cstring>
             </property>
@@ -48,7 +48,7 @@
                 <string>&amp;Store symlinks as links (Zip, Rar)</string>
             </property>
         </widget>
-        <widget class="QCheckBox">
+        <widget class="TQCheckBox">
             <property name="name">
                 <cstring>kcfg_rarRecurseSubdirs</cstring>
             </property>
@@ -66,7 +66,7 @@
             <property name="sizeType">
                 <enum>Expanding</enum>
             </property>
-            <property name="sizeHint">
+            <property name="tqsizeHint">
                 <size>
                     <width>20</width>
                     <height>51</height>
@@ -75,5 +75,5 @@
         </spacer>
     </vbox>
 </widget>
-<layoutdefaults spacing="6" margin="11"/>
+<tqlayoutdefaults spacing="6" margin="11"/>
 </UI>

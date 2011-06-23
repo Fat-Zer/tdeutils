@@ -48,7 +48,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-// Qt includes
+// TQt includes
 #include <tqdir.h>
 #include <tqregexp.h>
 #include <tqeventloop.h>
@@ -106,12 +106,12 @@ TarArch::TarArch( ArkWidget *_gui,
     {
         compressed = true;
         m_tmpDir = new KTempDir( _gui->tmpDir()
-                                 + TQString::fromLatin1( "temp_tar" ) );
+                                 + TQString::tqfromLatin1( "temp_tar" ) );
         m_tmpDir->setAutoDelete( true );
         m_tmpDir->qDir()->cd( m_tmpDir->name() );
         // build the temp file name
         KTempFile *pTempFile = new KTempFile( m_tmpDir->name(),
-                TQString::fromLatin1(".tar") );
+                TQString::tqfromLatin1(".tar") );
 
         tmpfile = pTempFile->name();
         delete pTempFile;
@@ -217,7 +217,7 @@ TQString TarArch::getCompressor()
     if( m_fileMimeType == "application/x-tzo" )
         return TQString( "lzop" );
 
-    return TQString::null;
+    return TQString();
 }
 
 
@@ -241,7 +241,7 @@ TQString TarArch::getUnCompressor()
     if( m_fileMimeType == "application/x-tzo" )
         return TQString( "lzop" );
 
-    return TQString::null;
+    return TQString();
 }
 
 void
@@ -322,14 +322,14 @@ void TarArch::slotListingDone(KProcess *_kp)
   if (flv!=NULL && flv->totalFiles()>0)
   {
     const TQString firstfile = ((FileLVI *) flv->firstChild())->fileName();
-    if (list.find(TQRegExp(TQString("\\s\\./%1[/\\n]").arg(firstfile)))>=0)
+    if (list.tqfind(TQRegExp(TQString("\\s\\./%1[/\\n]").tqarg(firstfile)))>=0)
     {
       m_dotslash = true;
       kdDebug(1601) << k_funcinfo << "archive has dot-slash" << endl;
     }
     else
     {
-      if (list.find(TQRegExp(TQString("\\s%1[/\\n]").arg(firstfile)))>=0)
+      if (list.tqfind(TQRegExp(TQString("\\s%1[/\\n]").tqarg(firstfile)))>=0)
       {
         // archive doesn't have dot-slash
         m_dotslash = false;
@@ -418,7 +418,7 @@ void TarArch::createTmp()
             if (kp->start(KProcess::NotifyOnExit, flag ) == false)
             {
                 KMessageBox::error(0, i18n("Unable to fork a decompressor"));
-		emit sigOpen( this, false, TQString::null, 0 );
+		emit sigOpen( this, false, TQString(), 0 );
             }
         }
         else
@@ -772,7 +772,7 @@ void TarArch::customEvent( TQCustomEvent *ev )
         m_listingThread->wait();
         delete m_listingThread;
         m_listingThread = 0;
-        emit sigOpen( this, false, TQString::null, 0 );
+        emit sigOpen( this, false, TQString(), 0 );
         break;
 
       case ListingEvent::ListingFinished:

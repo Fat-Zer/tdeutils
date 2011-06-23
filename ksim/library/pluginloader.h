@@ -61,9 +61,10 @@ namespace KSim
    * Provides a loader for the plugins
    * @author Robbie Ward <linuxphreak@gmx.co.uk>
    */
-  class KDE_EXPORT PluginLoader : public QObject
+  class KDE_EXPORT PluginLoader : public TQObject
   {
     Q_OBJECT
+  TQ_OBJECT
     friend class MainView;
     public:
       enum SearchType { Name = 0, DesktopFile, LibName };
@@ -122,19 +123,19 @@ namespace KSim
        * @return a KSim::Plugin object
        * @see KSim::Plugin
        */
-      KSim::Plugin &find(const TQCString &libName);
+      KSim::Plugin &tqfind(const TQCString &libName);
       /**
        * convenience function, see the above function for details.
        */
-      const KSim::Plugin &find(const TQCString &libName) const;
+      const KSim::Plugin &tqfind(const TQCString &libName) const;
       /**
-       * equivalent to find(info.libName());
+       * equivalent to tqfind(info.libName());
        */
-      KSim::Plugin &find(const KSim::PluginInfo &info);
+      KSim::Plugin &tqfind(const KSim::PluginInfo &info);
       /**
        * convenience function, see the above function for details.
        */
-      const KSim::Plugin &find(const KSim::PluginInfo &info) const;
+      const KSim::Plugin &tqfind(const KSim::PluginInfo &info) const;
       /**
        * provides plugin(), view(), config page and plugin information
        * @see KSim::Plugin KSim::PluginList

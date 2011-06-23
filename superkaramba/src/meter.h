@@ -20,9 +20,10 @@
 
 class karamba;
 
-class Meter : public QObject
+class Meter : public TQObject
 {
 Q_OBJECT
+  TQ_OBJECT
 public:
 
   Meter(karamba* k, int ix,int iy,int iw,int ih);
@@ -51,7 +52,7 @@ public:
   virtual void setValue(long) {};
   virtual long getValue() { return -1; };
   virtual void setValue(TQString) {};
-  virtual TQString getStringValue() const { return TQString::null; };
+  virtual TQString getStringValue() const { return TQString(); };
   virtual void recalculateValue() {};
 
   virtual void setColor(TQColor clr) { color = clr; };

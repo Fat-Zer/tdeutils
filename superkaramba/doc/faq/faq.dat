@@ -7,7 +7,7 @@
 <a>You will need to install the python-devel package. Once that package is installed you can ./configure and make again.
 
 <c>Installation
-<q>When I try to compile, I get this error: "cannot find -lselinux"
+<q>When I try to compile, I get this error: "cannot tqfind -lselinux"
 <a>You will need to install the libselinux-devel package. Once that package is installed you can ./configure and make again.
 
 <c>Installation

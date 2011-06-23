@@ -129,10 +129,10 @@ void KColumnsView::updateView()
 }
 
 
-void KColumnsView::repaintView()
+void KColumnsView::tqrepaintView()
 {
   resizeContents( totalWidth(), totalHeight() );
-  repaintContents( false );
+  tqrepaintContents( false );
 }
 
 
@@ -167,7 +167,7 @@ void KColumnsView::drawContents( TQPainter *P, int cx, int cy, int cw, int ch )
       if( AffectedLines.isValid() )
       {
         TQPainter Paint;
-        Paint.begin( &LineBuffer, this );
+        Paint.tqbegin( const_cast<TQPixmap*>(&LineBuffer), this );
 
         // starting painting with the first line
         KColumn *C = RedrawColumns.first();
@@ -198,7 +198,7 @@ void KColumnsView::drawContents( TQPainter *P, int cx, int cy, int cw, int ch )
             break;
 
           // to avoid flickers we first paint to the linebuffer
-          Paint.begin( &LineBuffer, this );
+          Paint.tqbegin( TQT_TQPAINTDEVICE(&LineBuffer), this );
 
           KColumn *C = RedrawColumns.first();
           Paint.translate( C->x(), 0 );

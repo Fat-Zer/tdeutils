@@ -24,8 +24,8 @@
 
 SKLineEdit::SKLineEdit(TQWidget *w, Input *i) : TQLineEdit(w), m_input(i)
 {
-  frameColor = Qt::gray;
-  setBackgroundColor(Qt::white);
+  frameColor = TQt::gray;
+  setBackgroundColor(TQt::white);
 }
 
 SKLineEdit::~SKLineEdit()
@@ -46,13 +46,13 @@ void SKLineEdit::drawContents(TQPainter *p)
 void SKLineEdit::setFrameColor(TQColor c)
 {
   frameColor = c;
-  repaint();
+  tqrepaint();
 }
 
 void SKLineEdit::setBackgroundColor(TQColor c)
 {
   TQLineEdit::setBackgroundColor(c);
-  repaint();
+  tqrepaint();
 }
 
 TQColor SKLineEdit::getFrameColor() const
@@ -66,7 +66,7 @@ void SKLineEdit::keyPressEvent(TQKeyEvent* e)
 
   if(!e->text().isEmpty())
   {
-    karamba* k = static_cast<karamba*>(parent());
+    karamba* k = static_cast<karamba*>(TQT_TQWIDGET(tqparent()));
     k->keyPressed(e->text(), m_input);
   }
 }

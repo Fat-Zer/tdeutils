@@ -3,7 +3,7 @@
  *
  * Copyright (c) 1999, 2003 Paul Campbell <paul@taniwha.com>
  *
- * Requires the Qt widget libraries, available at no cost at
+ * Requires the TQt widget libraries, available at no cost at
  * http://www.troll.no/
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -39,7 +39,7 @@
 #include <kstandarddirs.h>
 #include <kprocess.h>
 
-// other Qt headers:
+// other TQt headers:
 #include <tqlayout.h>
 #include <tqlabel.h>
 #include <tqcheckbox.h>
@@ -51,8 +51,8 @@
 #include <tqtooltip.h>
 extern void wake_laptop_daemon();
 
-AcpiConfig::AcpiConfig (TQWidget * parent, const char *name)
-  : KCModule(parent, name)
+AcpiConfig::AcpiConfig (TQWidget * tqparent, const char *name)
+  : KCModule(tqparent, name)
 {
     KGlobal::locale()->insertCatalogue("klaptopdaemon"); // For translation of klaptopdaemon messages
 
@@ -63,7 +63,7 @@ AcpiConfig::AcpiConfig (TQWidget * parent, const char *name)
 
     TQLabel *tmp_label = new TQLabel( i18n("This panel provides information about your system's ACPI implementation "
 					 "and lets you have access to some of the extra features provided by ACPI"), this );
-    tmp_label->setAlignment( Qt::WordBreak );
+    tmp_label->tqsetAlignment( TQt::WordBreak );
     top_layout->addWidget( tmp_label );
 
     tmp_label = new TQLabel( i18n("NOTE: the Linux ACPI implementation is still a 'work in progress'. "
@@ -73,12 +73,12 @@ AcpiConfig::AcpiConfig (TQWidget * parent, const char *name)
 				"You should test these features very gingerly - save all your work, check them "
 				"on and try a suspend/standby/hibernate from the popup menu on the battery icon "
 				"in the panel if it fails to come back successfully uncheck the box again."), this );
-    tmp_label->setAlignment( Qt::WordBreak );
+    tmp_label->tqsetAlignment( TQt::WordBreak );
     top_layout->addWidget( tmp_label );
 
     tmp_label = new TQLabel( i18n("Some changes made on this page may require you to quit the laptop panel "
 				"and start it again to take effect"), this );
-    tmp_label->setAlignment( Qt::WordBreak );
+    tmp_label->tqsetAlignment( TQt::WordBreak );
     top_layout->addWidget( tmp_label );
 
     bool can_enable = laptop_portable::has_acpi(1);	// is helper ready
@@ -132,7 +132,7 @@ AcpiConfig::AcpiConfig (TQWidget * parent, const char *name)
 				"/proc/acpi/sleep writeable by anyone every time your system boots "
 				"or use the button below to make the KDE ACPI helper application "
 				"set-uid root"), this );
-    tmp_label->setAlignment( Qt::WordBreak );
+    tmp_label->tqsetAlignment( TQt::WordBreak );
     top_layout->addWidget( tmp_label );
     ll = new TQHBoxLayout();
     TQPushButton *setupButton = new TQPushButton(i18n("Setup Helper Application"), this);
@@ -145,7 +145,7 @@ AcpiConfig::AcpiConfig (TQWidget * parent, const char *name)
 
 
     top_layout->addStretch(1);
-    top_layout->addWidget( new TQLabel( i18n("Version: %1").arg(LAPTOP_VERSION), this), 0, Qt::AlignRight );
+    top_layout->addWidget( new TQLabel( i18n("Version: %1").tqarg(LAPTOP_VERSION), this), 0, TQt::AlignRight );
 
 
     load();      
@@ -185,7 +185,7 @@ void AcpiConfig::setupHelper()
 		KMessageBox::sorry(0, i18n("The ACPI helper cannot be enabled because kdesu cannot be found.  Please make sure that it is installed correctly."),
 				i18n("KLaptopDaemon"));
 	}
-	laptop_portable::acpi_set_mask(enablestandby, enablesuspend, enablehibernate, enableperformance, enablethrottle);
+	laptop_portable::acpi_set_tqmask(enablestandby, enablesuspend, enablehibernate, enableperformance, enablethrottle);
     	bool can_enable = laptop_portable::has_acpi(1);	// is helper ready
     	enableStandby->setEnabled(can_enable);
     	enableSuspend->setEnabled(can_enable);
@@ -206,7 +206,7 @@ void AcpiConfig::save()
         enablesoftwaresuspend = (enableSoftwareSuspendHibernate?enableSoftwareSuspendHibernate->isChecked():0);
         enableperformance = enablePerformance->isChecked();
         enablethrottle = enableThrottle->isChecked();
-	laptop_portable::acpi_set_mask(enablestandby, enablesuspend, enablehibernate, enableperformance, enablethrottle);
+	laptop_portable::acpi_set_tqmask(enablestandby, enablesuspend, enablehibernate, enableperformance, enablethrottle);
 
         config->setGroup("AcpiDefault");
 

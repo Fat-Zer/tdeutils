@@ -39,7 +39,7 @@ bool MonitorConfig::load( KConfigBase &config, const HostConfigMap &hosts )
     if ( hostName.isEmpty() )
         return false;
 
-    HostConfigMap::ConstIterator hostIt = hosts.find( hostName );
+    HostConfigMap::ConstIterator hostIt = hosts.tqfind( hostName );
     if ( hostIt == hosts.end() )
         return false;
 
@@ -93,7 +93,7 @@ void MonitorConfig::save( KConfigBase &config ) const
         config.writeEntry( "DisplayCurrentValueInline", displayCurrentValueInline );
 }
 
-TQWidget *MonitorConfig::createMonitorWidget( TQWidget *parent, const char *name )
+TQWidget *MonitorConfig::createMonitorWidget( TQWidget *tqparent, const char *name )
 {
     TQWidget *w;
 
@@ -103,11 +103,11 @@ TQWidget *MonitorConfig::createMonitorWidget( TQWidget *parent, const char *name
         return 0;
 
     if ( display == Label )
-        w = new LabelMonitor( *this, parent, name );
+        w = new LabelMonitor( *this, tqparent, name );
     else
-        w = new ChartMonitor( *this, parent, name );
+        w = new ChartMonitor( *this, tqparent, name );
 
-    Monitor *monitor = new Monitor( host, id, refresh, w );
+    Monitor *monitor = new Monitor( host, id, refresh, TQT_TQOBJECT(w) );
     TQObject::connect( monitor, TQT_SIGNAL( newData( const Value & ) ),
                       w, TQT_SLOT( setData( const Value & ) ) );
     return w;
@@ -117,11 +117,11 @@ TQString KSim::Snmp::monitorDisplayTypeToString( MonitorConfig::DisplayType type
 {
     switch ( type )
     {
-        case MonitorConfig::Label: return TQString::fromLatin1( "Label" );
-        case MonitorConfig::Chart: return TQString::fromLatin1( "Chart" );
+        case MonitorConfig::Label: return TQString::tqfromLatin1( "Label" );
+        case MonitorConfig::Chart: return TQString::tqfromLatin1( "Chart" );
         default: assert( false );
     };
-    return TQString::null;
+    return TQString();
 }
 
 MonitorConfig::DisplayType KSim::Snmp::stringToMonitorDisplayType( TQString string, bool *ok )

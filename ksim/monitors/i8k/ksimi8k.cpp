@@ -72,8 +72,8 @@ void I8KPlugin::showAbout()
   KAboutApplication(&aboutData).exec();
 }
 
-I8KView::I8KView(KSim::PluginObject *parent, const char *name)
-   : KSim::PluginView(parent, name),
+I8KView::I8KView(KSim::PluginObject *tqparent, const char *name)
+   : KSim::PluginView(tqparent, name),
      m_timer( 0L ), m_procFile( 0L ), m_procStream( 0L )
 {
   initGUI();
@@ -151,15 +151,15 @@ void I8KView::closeStream()
 
 void I8KView::initGUI()
 {
-  TQVBoxLayout *layout = new TQVBoxLayout( this );
+  TQVBoxLayout *tqlayout = new TQVBoxLayout( this );
 
   m_fan1Label = new KSim::Label( this );
   m_fan2Label = new KSim::Label( this );
   m_tempLabel = new KSim::Label( this );
 
-  layout->addWidget( m_fan1Label );
-  layout->addWidget( m_fan2Label );
-  layout->addWidget( m_tempLabel );
+  tqlayout->addWidget( m_fan1Label );
+  tqlayout->addWidget( m_fan2Label );
+  tqlayout->addWidget( m_tempLabel );
 }
 
 void I8KView::updateView()
@@ -195,21 +195,21 @@ void I8KView::updateView()
   }
 
   if ( rightspeed > 0 )
-    m_fan1Label->setText( i18n( "Right fan: %1 RPM" ).arg( rightspeed ) );
+    m_fan1Label->setText( i18n( "Right fan: %1 RPM" ).tqarg( rightspeed ) );
   else
     m_fan1Label->setText( i18n( "Right fan: Off" ) );
 
   if ( leftspeed > 0 )
-    m_fan2Label->setText( i18n( "Left fan: %1 RPM" ).arg( leftspeed ) );
+    m_fan2Label->setText( i18n( "Left fan: %1 RPM" ).tqarg( leftspeed ) );
   else
     m_fan2Label->setText( i18n( "Left fan: Off" ) );
 
-  m_tempLabel->setText( i18n( "CPU temp: %1°%2" ).arg( cputemp )
-      .arg( m_unit ) );
+  m_tempLabel->setText( i18n( "CPU temp: %1°%2" ).tqarg( cputemp )
+      .tqarg( m_unit ) );
 }
 
-I8KConfig::I8KConfig(KSim::PluginObject *parent, const char *name)
-   : KSim::PluginPage(parent, name)
+I8KConfig::I8KConfig(KSim::PluginObject *tqparent, const char *name)
+   : KSim::PluginPage(tqparent, name)
 {
   m_unit = new TQCheckBox( i18n( "Show temperature in Fahrenheit" ),
         this );
@@ -218,14 +218,14 @@ I8KConfig::I8KConfig(KSim::PluginObject *parent, const char *name)
   m_interval->setRange( 2, 60, 1, true );
   m_interval->setSuffix( i18n( " sec" ) );
 
-  TQGridLayout *layout = new TQGridLayout( this, 3, 2, 0, 
+  TQGridLayout *tqlayout = new TQGridLayout( this, 3, 2, 0, 
       KDialog::spacingHint() );
 
-  layout->addMultiCellWidget( m_unit, 0, 0, 0, 1 );
-  layout->addWidget( label, 1, 0 );
-  layout->addWidget( m_interval, 1, 1 );
-  layout->setColStretch( 1, 1 );
-  layout->setRowStretch( 2, 1 );
+  tqlayout->addMultiCellWidget( m_unit, 0, 0, 0, 1 );
+  tqlayout->addWidget( label, 1, 0 );
+  tqlayout->addWidget( m_interval, 1, 1 );
+  tqlayout->setColStretch( 1, 1 );
+  tqlayout->setRowStretch( 2, 1 );
 }
 
 I8KConfig::~I8KConfig()

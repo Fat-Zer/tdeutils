@@ -32,6 +32,7 @@ namespace KMilo {
 // FIXME: make put the methods into .cpp file when the header is installed.
 class KMiloInterface : public TQObject {
 	Q_OBJECT
+  TQ_OBJECT
 	public:
 		KMiloInterface(KMiloD *p) : TQObject() { _p = p; }
 		virtual ~KMiloInterface() {}

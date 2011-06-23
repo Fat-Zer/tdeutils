@@ -304,38 +304,38 @@ struct SCursorConfig
 
   bool selectOn( void )
   {
-    return( state & Qt::ShiftButton );
+    return( state & TQt::ShiftButton );
   }
 
   bool removeSelection( void )
   {
-    return( state & Qt::ShiftButton ? false : true );
+    return( state & TQt::ShiftButton ? false : true );
   }
 
   void setKeepSelection( bool val )
   {
-    state = val == true ? state|Qt::ShiftButton : state&~Qt::ShiftButton;
+    state = val == true ? state|TQt::ShiftButton : state&~TQt::ShiftButton;
   }
   
   bool controlButton( void )
   {
-    return( state & Qt::ControlButton ? true : false );
+    return( state & TQt::ControlButton ? true : false );
   }
 
   bool shiftButton( void )
   {
-    return( state & Qt::ShiftButton ? true : false );
+    return( state & TQt::ShiftButton ? true : false );
   }
 
   bool altButton( void )
   {
-    return( state & Qt::AltButton ? true : false );
+    return( state & TQt::AltButton ? true : false );
   }
 
 
   void emulateControlButton( bool val )
   {
-    state = val == true ? state|Qt::ControlButton : state&~Qt::ControlButton;
+    state = val == true ? state|TQt::ControlButton : state&~TQt::ControlButton;
   }
 
   int state;
@@ -967,7 +967,7 @@ class CHexAction
   public:
     enum HexAction 
     { 
-      replace
+      tqreplace
     };
     
   public:
@@ -1031,7 +1031,7 @@ typedef bool (CHexBuffer::*InputCellFunc)( unsigned char *dest, int value,
 typedef void (CHexBuffer::*PrintOffsetFunc)( char *buf, uint offset );
 
 
-class CHexBuffer : public QByteArray
+class CHexBuffer : public TQByteArray
 {
   public:
     enum EColumn
@@ -1072,7 +1072,7 @@ class CHexBuffer : public QByteArray
     CHexBuffer( void );
     ~CHexBuffer( void );
 
-    int  setLayout( SDisplayLayout &layout );
+    int  setLayout( SDisplayLayout &tqlayout );
     void setColor( SDisplayColor &color );
     void setInputMode( SDisplayInputMode &mode );
     bool toggleEditor( void );
@@ -1082,7 +1082,7 @@ class CHexBuffer : public QByteArray
     void setNonPrintChar( TQChar nonPrintChar );
     void setShowCursor( bool showCursor );
     void setDisableCursor( bool disableCursor );
-    void setCursorShapeModifier( bool alwaysBlock, bool thickInsert );
+    void settqCursorShapeModifier( bool alwaysBlock, bool thickInsert );
     void setEditMode( EEditMode editMode );
     void setEditMode( EEditMode editMode, bool alwaysBlock, bool thickInsert );
     void setMaximumSize( uint size );
@@ -1156,7 +1156,7 @@ class CHexBuffer : public QByteArray
     inline SCursorState &cursorState( void );
     inline void valueOnCursor( TQByteArray &buf, uint size );
     inline SFileState &fileState( void );
-    inline const SDisplayLayout &layout( void );
+    inline const SDisplayLayout &tqlayout( void );
 
     inline const SDisplayInputMode &inputMode( void );
     inline TQPtrList<SCursorOffset> &bookmarkList( void );
@@ -1417,7 +1417,7 @@ inline void CHexBuffer::valueOnCursor( TQByteArray &buf, uint size )
 }
 
 
-inline const SDisplayLayout &CHexBuffer::layout( void )
+inline const SDisplayLayout &CHexBuffer::tqlayout( void )
 {
   return( mLayout );
 }
@@ -1531,7 +1531,7 @@ inline const TQColor &CHexBuffer::foregroundColor( uint column )
 {
   if( column > mLayout.lineSize )
   {
-    return( Qt::black );
+    return( TQt::black );
   }
   else
   {

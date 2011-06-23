@@ -41,15 +41,15 @@ KDFTopLevel::KDFTopLevel(TQWidget *, const char *name)
 {
   kdf = new KDFWidget(this,"kdf",FALSE);
   Q_CHECK_PTR(kdf);
-  (void) new KAction( i18n( "&Update" ), 0, kdf, TQT_SLOT( updateDF() ), actionCollection(), "updatedf" );
+  (void) new KAction( i18n( "&Update" ), 0, TQT_TQOBJECT(kdf), TQT_SLOT( updateDF() ), actionCollection(), "updatedf" );
 
-  KStdAction::quit(this, TQT_SLOT(close()), actionCollection());
-  KStdAction::preferences(kdf, TQT_SLOT(settingsBtnClicked()), actionCollection());
+  KStdAction::quit(TQT_TQOBJECT(this), TQT_SLOT(close()), actionCollection());
+  KStdAction::preferences(TQT_TQOBJECT(kdf), TQT_SLOT(settingsBtnClicked()), actionCollection());
   KStdAction::keyBindings(guiFactory(), TQT_SLOT(configureShortcuts()), 
 actionCollection());
   setCentralWidget(kdf);
-  //  kdf->setMinimumSize(kdf->sizeHint());
-  kdf->resize(kdf->sizeHint());
+  //  kdf->setMinimumSize(kdf->tqsizeHint());
+  kdf->resize(kdf->tqsizeHint());
   setupGUI(KMainWindow::Keys | StatusBar | Save | Create);
 }
 

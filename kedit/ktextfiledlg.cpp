@@ -32,9 +32,9 @@
 
 KTextFileDialog::KTextFileDialog(const TQString& startDir,
 				 const TQString& filter,
-				 TQWidget *parent, const char* name,
+				 TQWidget *tqparent, const char* name,
 				 bool modal)
-  : KFileDialog(startDir, filter, parent, name, modal)
+  : KFileDialog(startDir, filter, tqparent, name, modal)
 {
   /*
   // insert encoding action into toolbar
@@ -50,7 +50,7 @@ KTextFileDialog::KTextFileDialog(const TQString& startDir,
   TQStringList::Iterator it;
   int i = 0;
   for( it = encodings.begin(); it != encodings.end(); ++it) {
-      if ( (*it).contains( encodingStr ) ) {
+      if ( (*it).tqcontains( encodingStr ) ) {
       mEncoding->setCurrentItem( i );
       break;
       }
@@ -63,9 +63,9 @@ KTextFileDialog::KTextFileDialog(const TQString& startDir,
 
   KAction* mEncoding = new KAction(
       i18n("Select Encoding..."), 0,
-      this, TQT_SLOT( slotShowEncCombo() ), this, "encoding");
+      TQT_TQOBJECT(this), TQT_SLOT( slotShowEncCombo() ), TQT_TQOBJECT(this), "encoding");
 
-  mEncoding->setIcon( TQString::fromLatin1("charset") );
+  mEncoding->setIcon( TQString::tqfromLatin1("charset") );
 
   KToolBar *tb = toolBar();
   mEncoding->plug( tb, pathComboIndex() - 1 );
@@ -88,7 +88,7 @@ void KTextFileDialog::slotShowEncCombo()
   TQComboBox *encCombo;
   TQVBox *vbox;
 
-  // Create widgets, and display using geometry management
+  // Create widgets, and display using tqgeometry management
   encDlg = new KDialogBase( this,
 			    "Encoding Dialog", true, i18n("Select Encoding"),
 			    KDialogBase::Ok | KDialogBase::Cancel );
@@ -96,7 +96,7 @@ void KTextFileDialog::slotShowEncCombo()
   vbox->setSpacing( KDialog::spacingHint() );
   encDlg->setMainWidget( vbox );
   label = new TQLabel( vbox );
-  label->setAlignment( AlignLeft | AlignVCenter );
+  label->tqsetAlignment( AlignLeft | AlignVCenter );
   label->setText(i18n("Select encoding for text file: "));
 
   encCombo = new TQComboBox(vbox);
@@ -111,7 +111,7 @@ void KTextFileDialog::slotShowEncCombo()
   int i = 1;
   for( it = encodings.begin(); it != encodings.end(); ++it) {
 
-    if ( (*it).contains( encoding() ) ) {
+    if ( (*it).tqcontains( encoding() ) ) {
       encCombo->setCurrentItem( i );
       break;
     }
@@ -144,12 +144,12 @@ void KTextFileDialog::slotShowEncCombo()
 KURL KTextFileDialog::getOpenURLwithEncoding(
      const TQString& startDir,
      const TQString& filter,
-     TQWidget *parent,
+     TQWidget *tqparent,
      const TQString& caption,
      const TQString& encoding,
      const TQString& buttontext)
 {
-  KTextFileDialog dlg(startDir, filter, parent, "filedialog", true);
+  KTextFileDialog dlg(startDir, filter, tqparent, "filedialog", true);
   dlg.setEncoding(encoding);
   dlg.setOperationMode( Opening );
 
@@ -175,11 +175,11 @@ KURL KTextFileDialog::getOpenURLwithEncoding(
 
 KURL KTextFileDialog::getSaveURLwithEncoding(
        const TQString& dir, const TQString& filter,
-       TQWidget *parent,
+       TQWidget *tqparent,
        const TQString& caption,
        const TQString& encoding)
 {
-  KTextFileDialog dlg(dir, filter, parent, "filedialog", true);
+  KTextFileDialog dlg(dir, filter, tqparent, "filedialog", true);
   dlg.setEncoding(encoding);
   dlg.setOperationMode( Saving );
 

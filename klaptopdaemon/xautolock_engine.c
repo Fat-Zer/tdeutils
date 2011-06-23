@@ -74,7 +74,7 @@ xautolock_queryPointer (Display* d)
 {
   Window           dummyWin;         /* as it says                    */
   int              dummyInt;         /* as it says                    */
-  unsigned         mask;             /* modifier mask                 */
+  unsigned         tqmask;             /* modifier tqmask                 */
   int              rootX;            /* as it says                    */
   int              rootY;            /* as it says                    */
   int              corner;           /* corner index                  */
@@ -104,7 +104,7 @@ xautolock_queryPointer (Display* d)
   *  of pointer events.
   */
   if (!XQueryPointer (d, root, &root, &dummyWin, &rootX, &rootY,
-                      &dummyInt, &dummyInt, &mask))
+                      &dummyInt, &dummyInt, &tqmask))
   {
    /*
     *  Pointer has moved to another screen, so let's find out which one.
@@ -121,7 +121,7 @@ xautolock_queryPointer (Display* d)
 
   if (   rootX == prevRootX
       && rootY == prevRootY
-      && mask == prevMask)
+      && tqmask == prevMask)
   {
   xautolock_corner_t* corners = xautolock_corners;
    /*
@@ -186,7 +186,7 @@ xautolock_queryPointer (Display* d)
 #endif
     prevRootX = rootX;
     prevRootY = rootY;
-    prevMask = mask;
+    prevMask = tqmask;
 
     xautolock_resetTriggers ();
   }
@@ -224,7 +224,7 @@ evaluateTriggers (Display* d)
   *  when we are finally re-enabled.
   */
 #ifdef VMS
-  if (vmsStatus == 0)  
+  if (vmstqStatus == 0)  
   {
 #else /* VMS */
   if (lockerPid)
@@ -336,7 +336,7 @@ evaluateTriggers (Display* d)
       || now >= lockTrigger)
   {
 #ifdef VMS
-    if (vmsStatus != 0)
+    if (vmstqStatus != 0)
 #else /* VMS */
     if (!lockerPid)
 #endif /* VMS */
@@ -350,9 +350,9 @@ evaluateTriggers (Display* d)
         case 0:
           (void) close (ConnectionNumber (d));
 #ifdef VMS
-          vmsStatus = 0;
+          vmstqStatus = 0;
           lockerPid = lib$spawn ((lockNow ? &nowLockerDescr : &lockerDescr),
-	                         0, 0, &1, 0, 0, &vmsStatus);
+	                         0, 0, &1, 0, 0, &vmstqStatus);
 
 	  if (!(lockerPid & 1)) exit (lockerPid);
 
@@ -380,7 +380,7 @@ evaluateTriggers (Display* d)
           *  Nevertheless, simply resetting the screensaver is a
           *  convenience action that aids many xlock users, and doesn't
           *  harm anyone (*). The problem with older versions of xlock 
-	  *  is that they can be told to replace (= disable) the real
+	  *  is that they can be told to tqreplace (= disable) the real
 	  *  screensaver, but forget to reset that same screensaver if
 	  *  it was already active at the time xlock starts. I guess 
 	  *  xlock initially wasn't designed to be run without a user

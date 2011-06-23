@@ -42,7 +42,7 @@ typedef struct
  */
 class AsusMonitor: public Monitor {
 	public:
-		AsusMonitor(TQObject *parent, const char *name, const TQStringList&);
+		AsusMonitor(TQObject *tqparent, const char *name, const TQStringList&);
 		virtual ~AsusMonitor();
 
 		/**

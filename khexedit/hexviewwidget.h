@@ -37,13 +37,14 @@
 #include "hexclipboard.h"
 #include "hexbuffer.h"
 
-class CScrollBar : public QScrollBar
+class CScrollBar : public TQScrollBar
 {
   Q_OBJECT
+  TQ_OBJECT
  
   public:
-    CScrollBar( Orientation o, TQWidget *parent, const char *name = 0 )
-      : TQScrollBar( o, parent, name )
+    CScrollBar( Qt::Orientation o, TQWidget *tqparent, const char *name = 0 )
+      : TQScrollBar( o, tqparent, name )
     {
     } 
   
@@ -58,9 +59,10 @@ class CScrollBar : public QScrollBar
 };
    
 
-class CDragManager : public QWidget
+class CDragManager : public TQWidget
 {
   Q_OBJECT
+  TQ_OBJECT
     
   public:
     enum EDragActivateMode
@@ -95,12 +97,13 @@ class CDragManager : public QWidget
 
 
 
-class CHexViewWidget : public QFrame
+class CHexViewWidget : public TQFrame
 {
   Q_OBJECT
+  TQ_OBJECT
 
   public:
-    CHexViewWidget( TQWidget *parent, const char *name, CHexBuffer *hexBuffer );
+    CHexViewWidget( TQWidget *tqparent, const char *name, CHexBuffer *hexBuffer );
     ~CHexViewWidget( void );
     inline bool widgetValid( void );
 
@@ -137,7 +140,7 @@ class CHexViewWidget : public QFrame
 
     virtual void setPalette( const TQPalette & );
     void setInputMode( SDisplayInputMode &mode );
-    void setLayout( SDisplayLayout &layout );
+    void setLayout( SDisplayLayout &tqlayout );
     void setCursor( const SDisplayCursor &cursor, bool updateDisplay );
     void setColor( const SDisplayColor &color, bool updateDisplay );
     void setFont( const SDisplayFontInfo &fontInfo, bool updateDisplay );
@@ -215,7 +218,7 @@ class CHexViewWidget : public QFrame
     void cursorChanged( SCursorState &state );
     void fileState( SFileState &state );
     void dataChanged( void );
-    void layoutChanged( const SDisplayLayout &layout );
+    void tqlayoutChanged( const SDisplayLayout &tqlayout );
     void inputModeChanged( const SDisplayInputMode &mode );
     void bookmarkChanged( TQPtrList<SCursorOffset> &list );
     void editMode( CHexBuffer::EEditMode editMode );

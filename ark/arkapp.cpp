@@ -85,7 +85,7 @@ static TQString resolveFilename(const TQString & _arkname)
 			if (name.at(0) != '/')
 			{
 				// copy the path from _arkname
-				int index = _arkname.findRev('/');
+				int index = _arkname.tqfindRev('/');
 				name = _arkname.left(index + 1) + name;
 			}
 			kdDebug(1601) << "Now resolve " << name << endl;
@@ -243,7 +243,7 @@ ArkApplication::addOpenArk(const KURL & _arkname, MainWindow *_ptr)
     else
         realName = _arkname.prettyURL();
     openArksList.append(realName);
-    m_windowsHash.replace(realName, _ptr);
+    m_windowsHash.tqreplace(realName, _ptr);
     kdDebug(1601) << "Saved ptr " << _ptr << " added open ark: " << realName << endl;
 }
 
@@ -287,7 +287,7 @@ ArkApplication::isArkOpenAlready(const KURL & _arkname)
         realName = resolveFilename(_arkname.path());  // follow symlink
     else
         realName = _arkname.prettyURL();
-	return ( openArksList.findIndex(realName) != -1 );
+	return ( openArksList.tqfindIndex(realName) != -1 );
 }
 
 #include "arkapp.moc"

@@ -40,9 +40,10 @@ class KArchiveDirectory;
 class ThemesDlg : public ThemesLayout
 {
     Q_OBJECT
+  TQ_OBJECT
 
   public:
-    ThemesDlg(TQWidget *parent = 0, const char *name = 0);
+    ThemesDlg(TQWidget *tqparent = 0, const char *name = 0);
     ~ThemesDlg();
 
     int addTheme(const TQString &appId, const TQString &file);
@@ -73,7 +74,7 @@ class ThemesDlg : public ThemesLayout
 #ifdef HAVE_KNEWSTUFF
   private:
     SKNewStuff *mNewStuff;
-    TQStringList m_newStuffStatus;
+    TQStringList m_newStufftqStatus;
 #endif
 };
 

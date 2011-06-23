@@ -48,7 +48,7 @@ void RssSensor::update()
     bool OK = false;
 
 #if defined(KDE_3_3)
-    if(KIO::NetAccess::download(KURL(source), tmpFile, karambaApp->parentWindow()))
+    if(KIO::NetAccess::download(KURL(source), tmpFile, karambaApp->tqparentWindow()))
 #else
     if(KIO::NetAccess::download(KURL(source), tmpFile))
 #endif
@@ -95,7 +95,7 @@ void RssSensor::update()
             {
                 TQDomNodeList links = docElem.elementsByTagName( "link" );
                 TQDomNodeList displays;
-                if ( format.contains( "%d", false ) > 0 )
+                if ( format.tqcontains( "%d", false ) > 0 )
                 {
                     displays = docElem.elementsByTagName( "description" );
                 }

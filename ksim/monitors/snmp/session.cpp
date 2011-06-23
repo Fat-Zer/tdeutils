@@ -54,7 +54,7 @@ Session::Session( const HostConfig &source )
 
     d->source = source;
 
-    // unicode madness
+    // tqunicode madness
     d->host = source.name.ascii();
     d->community = source.community.ascii();
     d->securityName = source.securityName.ascii();
@@ -235,7 +235,7 @@ bool Session::snmpGet( const Identifier &identifier, Value &value, ErrorInfo *er
     if ( !snmpGet( ids, vars, error ) )
         return false;
 
-    ValueMap::ConstIterator it = vars.find( identifier );
+    ValueMap::ConstIterator it = vars.tqfind( identifier );
     if ( it == vars.end() ) {
         if ( error )
             *error = ErrorInfo( ErrorInfo::ErrMissingVariables );

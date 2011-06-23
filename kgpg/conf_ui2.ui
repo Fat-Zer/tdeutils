@@ -1,6 +1,6 @@
 <!DOCTYPE UI><UI version="3.3" stdsetdef="1">
 <class>UIConf</class>
-<widget class="QWidget">
+<widget class="TQWidget">
     <property name="name">
         <cstring>UIConf</cstring>
     </property>
@@ -19,11 +19,11 @@
         <property name="margin">
             <number>0</number>
         </property>
-        <widget class="QTabWidget" row="0" column="0">
+        <widget class="TQTabWidget" row="0" column="0">
             <property name="name">
                 <cstring>tabWidget3</cstring>
             </property>
-            <widget class="QWidget">
+            <widget class="TQWidget">
                 <property name="name">
                     <cstring>tab</cstring>
                 </property>
@@ -42,7 +42,7 @@
                             <string></string>
                         </property>
                     </widget>
-                    <widget class="QLabel" row="2" column="0">
+                    <widget class="TQLabel" row="2" column="0">
                         <property name="name">
                             <cstring>textLabel1_3_3</cstring>
                         </property>
@@ -65,7 +65,7 @@
                             </color>
                         </property>
                     </widget>
-                    <widget class="QLabel" row="0" column="0">
+                    <widget class="TQLabel" row="0" column="0">
                         <property name="name">
                             <cstring>textLabel1_4</cstring>
                         </property>
@@ -73,7 +73,7 @@
                             <string>Trusted keys:</string>
                         </property>
                     </widget>
-                    <widget class="QLabel" row="3" column="0">
+                    <widget class="TQLabel" row="3" column="0">
                         <property name="name">
                             <cstring>textLabel1_4_2</cstring>
                         </property>
@@ -81,7 +81,7 @@
                             <string>Expired/disabled keys:</string>
                         </property>
                     </widget>
-                    <widget class="QLabel" row="1" column="0">
+                    <widget class="TQLabel" row="1" column="0">
                         <property name="name">
                             <cstring>textLabel1_2_3</cstring>
                         </property>
@@ -129,7 +129,7 @@
                         <property name="sizeType">
                             <enum>Expanding</enum>
                         </property>
-                        <property name="sizeHint">
+                        <property name="tqsizeHint">
                             <size>
                                 <width>21</width>
                                 <height>210</height>
@@ -146,7 +146,7 @@
                         <property name="sizeType">
                             <enum>Expanding</enum>
                         </property>
-                        <property name="sizeHint">
+                        <property name="tqsizeHint">
                             <size>
                                 <width>140</width>
                                 <height>20</height>
@@ -155,7 +155,7 @@
                     </spacer>
                 </grid>
             </widget>
-            <widget class="QWidget">
+            <widget class="TQWidget">
                 <property name="name">
                     <cstring>TabPage</cstring>
                 </property>
@@ -168,7 +168,7 @@
 </widget>
 <customwidgets>
 </customwidgets>
-<layoutdefaults spacing="6" margin="11"/>
+<tqlayoutdefaults spacing="6" margin="11"/>
 <includehints>
     <includehint>kcolorbutton.h</includehint>
     <includehint>kcolorbutton.h</includehint>

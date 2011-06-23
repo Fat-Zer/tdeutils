@@ -3,7 +3,7 @@
  *
  * Copyright (c) 2002 Paul Campbell <paul@taniwha.com>
  *
- * Requires the Qt widget libraries, available at no cost at
+ * Requires the TQt widget libraries, available at no cost at
  * http://www.troll.no/
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -41,8 +41,9 @@ class TQPushButton;
 class SonyConfig : public KCModule
 {
   Q_OBJECT
+  TQ_OBJECT
 public:
-  SonyConfig( TQWidget *parent=0, const char* name=0);
+  SonyConfig( TQWidget *tqparent=0, const char* name=0);
   ~SonyConfig( );     
 
   void save( void );

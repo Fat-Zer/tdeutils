@@ -43,7 +43,7 @@
 
 namespace KMilo {
 
-ThinkPadMonitor::ThinkPadMonitor(TQObject* parent, const char* name, const TQStringList& args): Monitor(parent, name, args) {
+ThinkPadMonitor::ThinkPadMonitor(TQObject* tqparent, const char* name, const TQStringList& args): Monitor(tqparent, name, args) {
 	m_progress = 0;
 	m_volume = 50;  //set in retrieveVolume()
 }
@@ -445,7 +445,7 @@ void ThinkPadMonitor::reconfigure(KConfig* config) {
 	m_volumeStep = config->readNumEntry("volumeStep", defaultVolumeStep);
 	m_buttonThinkpad = config->readEntry("buttonThinkpad", "/usr/bin/konsole");
 	m_buttonHome = config->readEntry("buttonHome", "/usr/bin/konqueror");
-	m_buttonSearch = config->readEntry("buttonSearch", "/usr/bin/kfind");
+	m_buttonSearch = config->readEntry("buttonSearch", "/usr/bin/ktqfind");
 	m_buttonMail = config->readEntry("buttonMail", "/usr/bin/kmail");
 	m_buttonZoom = config->readEntry("buttonZoom", "/usr/bin/ksnapshot");
 }

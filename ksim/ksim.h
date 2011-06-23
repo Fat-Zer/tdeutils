@@ -35,13 +35,14 @@ namespace KSim
   class PanelExtension : public KPanelExtension
   {
     Q_OBJECT
+  TQ_OBJECT
     public:
       PanelExtension( const TQString & configFile, Type type,
-         int actions, TQWidget * parent, const char * name);
+         int actions, TQWidget * tqparent, const char * name);
 
       ~PanelExtension();
 
-      TQSize sizeHint( Position, TQSize maxSize ) const;
+      TQSize tqsizeHint( Position, TQSize maxSize ) const;
       void resizeEvent(TQResizeEvent *);
       Position preferedPosition() const;
 

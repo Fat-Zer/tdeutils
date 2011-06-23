@@ -36,17 +36,18 @@ class KgpgView;
 class KgpgApp : public KMainWindow
 {
         Q_OBJECT
+  TQ_OBJECT
 
         friend class KgpgView;
 
 public:
         /** construtor of KgpgApp, calls all init functions to create the application.
          */
-        KgpgApp(TQWidget *parent=0, const char *name=0,WFlags f = 0,KShortcut goHome=TQKeySequence(CTRL+Qt::Key_Home),bool mainWindow=false);
+        KgpgApp(TQWidget *tqparent=0, const char *name=0,WFlags f = 0,KShortcut goHome=TQKeySequence(CTRL+TQt::Key_Home),bool mainWindow=false);
         ~KgpgApp();
         /** opens a file specified by commandline option
          */
-        void openDocumentFile(const KURL& url,TQString encoding=TQString::null);
+        void openDocumentFile(const KURL& url,TQString encoding=TQString());
         void openEncryptedDocumentFile(const KURL& url);
         /** returns a pointer to the current document connected to the KTMainWindow instance and is used by
          * the View class to access the document object's methods

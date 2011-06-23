@@ -46,8 +46,8 @@
 class ThemeViewItem : public KListViewItem
 {
   public:
-    ThemeViewItem(TQListView *parent, const TQString &text,
-       const KURL &url) : KListViewItem(parent, text)
+    ThemeViewItem(TQListView *tqparent, const TQString &text,
+       const KURL &url) : KListViewItem(tqparent, text)
     {
       m_url = url;
     }
@@ -58,8 +58,8 @@ class ThemeViewItem : public KListViewItem
     KURL m_url;
 };
 
-KSim::ThemePrefs::ThemePrefs(TQWidget *parent, const char *name)
-   : TQWidget(parent, name)
+KSim::ThemePrefs::ThemePrefs(TQWidget *tqparent, const char *name)
+   : TQWidget(tqparent, name)
 {
   m_themeLayout = new TQGridLayout(this);
   m_themeLayout->setSpacing(6);
@@ -67,31 +67,31 @@ KSim::ThemePrefs::ThemePrefs(TQWidget *parent, const char *name)
   m_label = new TQLabel(this);
   m_label->setText(i18n("GKrellm theme support. To use"
      " gkrellm themes just untar the themes into the folder below"));
-  m_label->setAlignment(TQLabel::WordBreak |
+  m_label->tqsetAlignment(TQLabel::WordBreak |
      TQLabel::AlignVCenter | TQLabel::AlignLeft);
   m_themeLayout->addMultiCellWidget(m_label, 0, 0, 0, 4);
 
   TQString themeDir(locateLocal("data", "ksim"));
-  themeDir += TQString::fromLatin1("/themes");
+  themeDir += TQString::tqfromLatin1("/themes");
 
   m_urlLabel = new KURLLabel(this);
   m_urlLabel->setText(i18n("Open Konqueror in KSim's theme folder"));
-  m_urlLabel->setURL(TQString::fromLatin1("file://") + themeDir);
+  m_urlLabel->setURL(TQString::tqfromLatin1("file://") + themeDir);
   connect(m_urlLabel, TQT_SIGNAL(leftClickedURL(const TQString &)),
      this, TQT_SLOT(openURL(const TQString &)));
   m_themeLayout->addMultiCellWidget(m_urlLabel, 1, 1, 0, 4);
 
-  m_line = new KSeparator(Horizontal, this);
+  m_line = new KSeparator(Qt::Horizontal, this);
   m_themeLayout->addMultiCellWidget(m_line, 2, 2, 0, 4);
 
   m_authorLabel = new TQLabel(this);
-  m_authorLabel->setSizePolicy(TQSizePolicy(TQSizePolicy::Fixed,
+  m_authorLabel->tqsetSizePolicy(TQSizePolicy(TQSizePolicy::Fixed,
      TQSizePolicy::Minimum));
   m_authorLabel->setText(i18n("Author:"));
   m_themeLayout->addMultiCellWidget(m_authorLabel, 3, 3, 0, 0);
 
   m_authLabel = new KSqueezedTextLabel(this);
-  m_authLabel->setSizePolicy(TQSizePolicy(TQSizePolicy::Expanding,
+  m_authLabel->tqsetSizePolicy(TQSizePolicy(TQSizePolicy::Expanding,
      TQSizePolicy::Minimum));
   m_authLabel->setText(i18n("None"));
   m_themeLayout->addMultiCellWidget(m_authLabel, 3, 3, 1, 4);
@@ -105,7 +105,7 @@ KSim::ThemePrefs::ThemePrefs(TQWidget *parent, const char *name)
 
   m_alternateLabel = new TQLabel(this);
   m_alternateLabel->setText(i18n("Alternate themes:"));
-  m_alternateLabel->setAlignment(AlignVCenter | AlignRight);
+  m_alternateLabel->tqsetAlignment(AlignVCenter | AlignRight);
   m_themeLayout->addMultiCellWidget(m_alternateLabel, 5, 5, 0, 1);
 
   m_altTheme = new KIntSpinBox(this);
@@ -113,8 +113,8 @@ KSim::ThemePrefs::ThemePrefs(TQWidget *parent, const char *name)
 
   m_fontLabel = new TQLabel(this);
   m_fontLabel->setText(i18n("Font:"));
-  m_fontLabel->setAlignment(AlignVCenter | AlignRight);
-  m_fontLabel->setSizePolicy(TQSizePolicy(TQSizePolicy::Minimum,
+  m_fontLabel->tqsetAlignment(AlignVCenter | AlignRight);
+  m_fontLabel->tqsetSizePolicy(TQSizePolicy(TQSizePolicy::Minimum,
      TQSizePolicy::Fixed));
   m_themeLayout->addMultiCellWidget(m_fontLabel, 5, 5, 3, 3);
 
@@ -124,7 +124,7 @@ KSim::ThemePrefs::ThemePrefs(TQWidget *parent, const char *name)
   m_fontsCombo->insertItem(i18n("Large"));
   m_fontsCombo->insertItem(i18n("Custom"));
   m_fontsCombo->insertItem(i18n("Default"));
-  m_fontsCombo->setSizePolicy(TQSizePolicy(TQSizePolicy::Expanding,
+  m_fontsCombo->tqsetSizePolicy(TQSizePolicy(TQSizePolicy::Expanding,
      TQSizePolicy::Fixed));
   connect(m_fontsCombo, TQT_SIGNAL(activated(int)),
      this, TQT_SLOT(showFontDialog(int)));
@@ -221,7 +221,7 @@ void KSim::ThemePrefs::selectItem(TQListViewItem *item)
     return;
 
   ThemeViewItem *themeItem = static_cast<ThemeViewItem *>(item);
-  ThemeInfoList::ConstIterator it = qFind(m_themeList.begin(),
+  ThemeInfoList::ConstIterator it = tqFind(m_themeList.begin(),
      m_themeList.end(), ThemeInfo(themeItem->text(0), themeItem->url()));
 
   if (it == m_themeList.end())

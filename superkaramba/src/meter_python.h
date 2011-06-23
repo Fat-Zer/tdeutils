@@ -20,7 +20,7 @@ bool checkMeter(long widget, long meter, const char* type);
 bool checkKarambaAndMeter(long widget, long meter, const char* type);
 
 TQString PyString2TQString(PyObject* text);
-PyObject* QString2PyString(TQString string);
+PyObject* TQString2PyString(TQString string);
 
 PyObject* py_getThemeMeter(PyObject *self, PyObject *args, TQString type);
 PyObject* py_getSize(PyObject *self, PyObject *args, TQString type);

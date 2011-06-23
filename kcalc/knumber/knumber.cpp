@@ -276,7 +276,7 @@ static void _inc_by_one(TQString &str, int position)
 // Cut off if more digits in fractional part than 'precision'
 static void _round(TQString &str, int precision)
 {
-  int decimalSymbolPos = str.find('.');
+  int decimalSymbolPos = str.tqfind('.');
 
   if (decimalSymbolPos == -1)
     if (precision == 0)  return;
@@ -312,7 +312,7 @@ static void _round(TQString &str, int precision)
       break;
     }
 
-  decimalSymbolPos = str.find('.');
+  decimalSymbolPos = str.tqfind('.');
   str.truncate(decimalSymbolPos + precision + 1);
 
   // if precision == 0 delete also '.'
@@ -349,7 +349,7 @@ static TQString roundNumber(const TQString &numStr, int precision)
 }
 
 
-TQString const KNumber::toQString(int width, int prec) const
+TQString const KNumber::toTQString(int width, int prec) const
 {
   TQString tmp_str;
 
@@ -360,7 +360,7 @@ TQString const KNumber::toQString(int width, int prec) const
     if (width > 0) { //result needs to be cut-off
       bool tmp_bool = _fraction_input; // stupid work-around
       _fraction_input = false;
-      tmp_str = (KNumber("1.0")*(*this)).toQString(width, -1);
+      tmp_str = (KNumber("1.0")*(*this)).toTQString(width, -1);
       _fraction_input = tmp_bool;
     } else
       tmp_str = TQString(_num->ascii());
@@ -369,7 +369,7 @@ TQString const KNumber::toQString(int width, int prec) const
     if (_float_output) {
       bool tmp_bool = _fraction_input; // stupid work-around
       _fraction_input = false;
-      tmp_str = (KNumber("1.0")*(*this)).toQString(width, -1);
+      tmp_str = (KNumber("1.0")*(*this)).toTQString(width, -1);
       _fraction_input = tmp_bool;
     } else { // _float_output == false
       if(_splitoffinteger_output) {
@@ -378,9 +378,9 @@ TQString const KNumber::toQString(int width, int prec) const
 	if (int_part == Zero)
 	  tmp_str = TQString(_num->ascii());
 	else if (int_part < Zero)
-	  tmp_str = int_part.toQString() + " " + (int_part - *this)._num->ascii();
+	  tmp_str = int_part.toTQString() + " " + (int_part - *this)._num->ascii();
 	else
-	  tmp_str = int_part.toQString() + " " + (*this - int_part)._num->ascii();
+	  tmp_str = int_part.toTQString() + " " + (*this - int_part)._num->ascii();
       } else
 	tmp_str = TQString(_num->ascii());
 
@@ -388,7 +388,7 @@ TQString const KNumber::toQString(int width, int prec) const
 	//result needs to be cut-off
 	bool tmp_bool = _fraction_input; // stupid work-around
 	_fraction_input = false;
-	tmp_str = (KNumber("1.0")*(*this)).toQString(width, -1);
+	tmp_str = (KNumber("1.0")*(*this)).toTQString(width, -1);
 	_fraction_input = tmp_bool;
       }
     }

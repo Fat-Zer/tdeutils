@@ -15,7 +15,7 @@
  *  the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  *  Boston, MA 02110-1301, USA.
  **/
-#ifdef QT_ONLY
+#ifdef TQT_ONLY
   #include "compat.h"
 #else
   #include <klocale.h>
@@ -24,8 +24,8 @@
 
 #include "verifier.h"
 
-Verifier::Verifier( TQWidget* parent, const char* name ) : TQTextEdit( parent, name )
-    /* QT_ANCHOR_DO_NOT_WORK: ,_current( 0 ) */
+Verifier::Verifier( TQWidget* tqparent, const char* name ) : TQTextEdit( tqparent, name )
+    /* TQT_ANCHOR_DO_NOT_WORK: ,_current( 0 ) */
 {
     _highlighter = 0;
     setMinimumSize(1,1);
@@ -49,7 +49,7 @@ void Verifier::verify( const TQString& reg )
 void Verifier::clearRegexp()
 {
     if ( _highlighter ) {
-        _highlighter->setRegExp( TQString::null );
+        _highlighter->setRegExp( TQString() );
         _highlighter->rehighlight();
     }
 }
@@ -73,7 +73,7 @@ void Verifier::setMinimal( bool b )
         _highlighter->setMinimal( b );
 }
 
-// Qt anchors do not work for <pre>...</pre>, thefore scrolling to next/prev match
+// TQt anchors do not work for <pre>...</pre>, thefore scrolling to next/prev match
 // do not work. Enable this when they work.
 // void Verifier::gotoFirst()
 // {
@@ -97,7 +97,7 @@ void Verifier::setMinimal( bool b )
 //
 // void Verifier::gotoNum( int which )
 // {
-//     TQString anchor = TQString::fromLatin1("match%1").arg(which);
+//     TQString anchor = TQString::tqfromLatin1("match%1").tqarg(which);
 //     scrollToAnchor( anchor );
 //     _current = which;
 //     emit currentChanged( _current );

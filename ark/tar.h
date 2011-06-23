@@ -56,6 +56,7 @@ class TarListingThread;
 class TarArch : public Arch
 {
 	Q_OBJECT
+  TQ_OBJECT
 	public:
 		TarArch( ArkWidget *_gui, const TQString & _filename,
 		         const TQString & _openAsMimeType );

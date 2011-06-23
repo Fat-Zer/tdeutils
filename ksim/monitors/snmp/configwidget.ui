@@ -1,6 +1,6 @@
 <!DOCTYPE UI><UI version="3.1" stdsetdef="1">
 <class>KSim::Snmp::ConfigWidget</class>
-<widget class="QWidget">
+<widget class="TQWidget">
     <property name="name">
         <cstring>ConfigWidget</cstring>
     </property>
@@ -16,7 +16,7 @@
         <property name="name">
             <cstring>unnamed</cstring>
         </property>
-        <widget class="QGroupBox">
+        <widget class="TQGroupBox">
             <property name="name">
                 <cstring>hostGroup</cstring>
             </property>
@@ -27,7 +27,7 @@
                 <property name="name">
                     <cstring>unnamed</cstring>
                 </property>
-                <widget class="QPushButton" row="1" column="3">
+                <widget class="TQPushButton" row="1" column="3">
                     <property name="name">
                         <cstring>removeHost</cstring>
                     </property>
@@ -35,7 +35,7 @@
                         <string>Remove</string>
                     </property>
                 </widget>
-                <widget class="QPushButton" row="1" column="2">
+                <widget class="TQPushButton" row="1" column="2">
                     <property name="name">
                         <cstring>modifyHost</cstring>
                     </property>
@@ -43,7 +43,7 @@
                         <string>Modify...</string>
                     </property>
                 </widget>
-                <widget class="QPushButton" row="1" column="1">
+                <widget class="TQPushButton" row="1" column="1">
                     <property name="name">
                         <cstring>addHost</cstring>
                     </property>
@@ -102,7 +102,7 @@
                     <property name="sizeType">
                         <enum>Expanding</enum>
                     </property>
-                    <property name="sizeHint">
+                    <property name="tqsizeHint">
                         <size>
                             <width>141</width>
                             <height>20</height>
@@ -111,7 +111,7 @@
                 </spacer>
             </grid>
         </widget>
-        <widget class="QGroupBox">
+        <widget class="TQGroupBox">
             <property name="name">
                 <cstring>monitorGroup</cstring>
             </property>
@@ -122,7 +122,7 @@
                 <property name="name">
                     <cstring>unnamed</cstring>
                 </property>
-                <widget class="QPushButton" row="1" column="1">
+                <widget class="TQPushButton" row="1" column="1">
                     <property name="name">
                         <cstring>addMonitor</cstring>
                     </property>
@@ -130,7 +130,7 @@
                         <string>Add...</string>
                     </property>
                 </widget>
-                <widget class="QPushButton" row="1" column="2">
+                <widget class="TQPushButton" row="1" column="2">
                     <property name="name">
                         <cstring>modifyMonitor</cstring>
                     </property>
@@ -138,7 +138,7 @@
                         <string>Modify...</string>
                     </property>
                 </widget>
-                <widget class="QPushButton" row="1" column="3">
+                <widget class="TQPushButton" row="1" column="3">
                     <property name="name">
                         <cstring>removeMonitor</cstring>
                     </property>
@@ -156,7 +156,7 @@
                     <property name="sizeType">
                         <enum>Expanding</enum>
                     </property>
-                    <property name="sizeHint">
+                    <property name="tqsizeHint">
                         <size>
                             <width>121</width>
                             <height>20</height>
@@ -207,7 +207,7 @@
     <tabstop>modifyMonitor</tabstop>
     <tabstop>removeMonitor</tabstop>
 </tabstops>
-<layoutdefaults spacing="6" margin="11"/>
+<tqlayoutdefaults spacing="6" margin="11"/>
 <includehints>
     <includehint>klistview.h</includehint>
     <includehint>klistview.h</includehint>

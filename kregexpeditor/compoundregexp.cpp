@@ -16,7 +16,7 @@
  *  Boston, MA 02110-1301, USA.
  **/
 
-#ifdef QT_ONLY
+#ifdef TQT_ONLY
   #include "compat.h"
 #else
   #include <klocale.h>

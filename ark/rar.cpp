@@ -90,10 +90,10 @@ RarArch::RarArch( ArkWidget *_gui, const TQString & _fileName )
 
 bool RarArch::processLine( const TQCString &line )
 {
-  TQString unicode_line;
+  TQString tqunicode_line;
 
   TQTextCodec *codec = TQTextCodec::codecForLocale();
-  unicode_line = codec->toUnicode( line );
+  tqunicode_line = codec->toUnicode( line );
 
   if ( m_isFirstLine )
   {
@@ -153,7 +153,7 @@ void RarArch::open()
   if ( !kp->start( KProcess::NotifyOnExit, KProcess::AllOutput ) )
   {
     KMessageBox::error( 0, i18n( "Could not start a subprocess." ) );
-    emit sigOpen( this, false, TQString::null, 0 );
+    emit sigOpen( this, false, TQString(), 0 );
   }
 }
 
@@ -291,7 +291,7 @@ void RarArch::unarchFileInternal()
 
 bool RarArch::passwordRequired()
 {
-    return m_lastShellOutput.findRev("password incorrect ?)")+1;
+    return m_lastShellOutput.tqfindRev("password incorrect ?)")+1;
 }
 
 void RarArch::remove( TQStringList *list )

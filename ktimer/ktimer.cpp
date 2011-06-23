@@ -39,15 +39,15 @@
 
 class KTimerJobItem : public TQListViewItem {
 public:
-    KTimerJobItem( KTimerJob *job, TQListView *parent )
-        : TQListViewItem( parent ) {
+    KTimerJobItem( KTimerJob *job, TQListView *tqparent )
+        : TQListViewItem( tqparent ) {
         m_job = job;
         m_error = false;
         update();
     };
 
-    KTimerJobItem( KTimerJob *job, TQListView *parent, TQListViewItem *after )
-        : TQListViewItem( parent, after ) {
+    KTimerJobItem( KTimerJob *job, TQListView *tqparent, TQListViewItem *after )
+        : TQListViewItem( tqparent, after ) {
         m_job = job;
         m_error = false;
         update();
@@ -59,7 +59,7 @@ public:
 
     KTimerJob *job() { return m_job; };
 
-    void setStatus( bool error ) {
+    void settqStatus( bool error ) {
         m_error = error;
         update();
     }
@@ -97,8 +97,8 @@ struct KTimerPrefPrivate
     TQPtrList<KTimerJob> jobs;
 };
 
-KTimerPref::KTimerPref( TQWidget *parent, const char *name )
-    : PrefWidget( parent, name )
+KTimerPref::KTimerPref( TQWidget *tqparent, const char *name )
+    : PrefWidget( tqparent, name )
 {
     d = new KTimerPrefPrivate;
 
@@ -150,7 +150,7 @@ void KTimerPref::add()
 
     job->setUser( item );
 
-    // Qt drops currentChanged signals on first item (bug?)
+    // TQt drops currentChanged signals on first item (bug?)
     if( m_list->childCount()==1 )
       currentChanged( item );
 
@@ -239,7 +239,7 @@ void KTimerPref::jobChanged( KTimerJob *job )
 void KTimerPref::jobFinished( KTimerJob *job, bool error )
 {
     KTimerJobItem *item = static_cast<KTimerJobItem*>(job->user());
-    item->setStatus( error );
+    item->settqStatus( error );
     m_list->triggerUpdate();
 }
 
@@ -249,7 +249,7 @@ void KTimerPref::saveJobs( KConfig *cfg )
     int num = 0;
     KTimerJobItem *item = static_cast<KTimerJobItem*>(m_list->firstChild());
     while( item ) {
-        item->job()->save( cfg, TQString("Job%1").arg( num ) );
+        item->job()->save( cfg, TQString("Job%1").tqarg( num ) );
         item = static_cast<KTimerJobItem*>(item->nextSibling());
         num++;
     }
@@ -280,7 +280,7 @@ void KTimerPref::loadJobs( KConfig *cfg )
             connect( job, TQT_SIGNAL(finished(KTimerJob*,bool)),
                      TQT_SLOT(jobFinished(KTimerJob*,bool)) );
 
-            job->load( cfg, TQString( "Job%1" ).arg(n) );
+            job->load( cfg, TQString( "Job%1" ).tqarg(n) );
 
             job->setUser( item );
     }
@@ -306,8 +306,8 @@ struct KTimerJobPrivate {
 };
 
 
-KTimerJob::KTimerJob( TQObject *parent, const char *name )
-    : TQObject( parent, name )
+KTimerJob::KTimerJob( TQObject *tqparent, const char *name )
+    : TQObject( tqparent, name )
 {
     d = new KTimerJobPrivate;
 

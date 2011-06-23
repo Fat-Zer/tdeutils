@@ -35,6 +35,7 @@
 class KMultiFormListBoxMultiVisible :public TQScrollView, KMultiFormListBoxShower {
 
 Q_OBJECT
+  TQ_OBJECT
 
 friend class KMultiFormListBox;
 
@@ -42,9 +43,9 @@ private:
   /**
 		 @param factory A factory used to generate the instances of KMultiFormListBoxEntry
 		 class which is repeated in the KMultiFormListBox
-		 @param parent A pointer to the parent widget
+		 @param tqparent A pointer to the tqparent widget
   */
-  KMultiFormListBoxMultiVisible(KMultiFormListBoxFactory *factory, TQWidget *parent = 0, const char *name = 0);
+  KMultiFormListBoxMultiVisible(KMultiFormListBoxFactory *factory, TQWidget *tqparent = 0, const char *name = 0);
 
   /**
 		 @return The elements in the KMultiFormListBox

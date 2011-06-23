@@ -38,8 +38,8 @@ namespace
 
 static const uint walkerRefresh = 0;
 
-Walker::Walker( const HostConfig &host, const Identifier &startOid, TQObject *parent, const char *name )
-    : TQObject( parent, name ), m_stop( false ), m_oid( startOid ), m_session( host )
+Walker::Walker( const HostConfig &host, const Identifier &startOid, TQObject *tqparent, const char *name )
+    : TQObject( tqparent, name ), m_stop( false ), m_oid( startOid ), m_session( host )
 {
     m_timerId = startTimer( walkerRefresh );
     start();

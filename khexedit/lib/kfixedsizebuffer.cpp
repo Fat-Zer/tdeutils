@@ -89,7 +89,7 @@ int KFixedSizeBuffer::remove( KSection Remove )
 }
 
 
-unsigned int KFixedSizeBuffer::replace( KSection Remove, const char* D, unsigned int InputLength )
+unsigned int KFixedSizeBuffer::tqreplace( KSection Remove, const char* D, unsigned int InputLength )
 {
   // check all parameters
   if( Remove.startsBehind( Size-1 ) || (Remove.width()==0 && InputLength==0) )
@@ -214,7 +214,7 @@ int KFixedSizeBuffer::fill( const char FChar, int FillLength, unsigned int Pos )
 
 int KFixedSizeBuffer::compare( const KDataBuffer &Other, KSection OtherRange, unsigned int Pos )
 {
-  //kdDebug() << TQString("Pos: %1, OtherRange: (%3/%4)" ).arg(Pos).arg(OtherRange.start()).arg(OtherRange.end())
+  //kdDebug() << TQString("Pos: %1, OtherRange: (%3/%4)" ).tqarg(Pos).tqarg(OtherRange.start()).tqarg(OtherRange.end())
   //    << endl;
   // test other values
   if( OtherRange.startsBehind(Other.size()-1) )
@@ -245,14 +245,14 @@ int KFixedSizeBuffer::compare( const KDataBuffer &Other, KSection OtherRange, un
       ValueByLength = -1;
   }
   //kdDebug()
-  //    << TQString( "Range: (%1/%2), OtherRange: (%3/%4)" ).arg(Range.start()).arg(Range.end()).arg(OtherRange.start()).arg(OtherRange.end())
+  //    << TQString( "Range: (%1/%2), OtherRange: (%3/%4)" ).tqarg(Range.start()).tqarg(Range.end()).tqarg(OtherRange.start()).tqarg(OtherRange.end())
   //    << endl;
   int oi = OtherRange.start();
   for( int i=Range.start(); i<=Range.end(); ++i,++oi )
   {
     char OD = Other.datum(oi);
     char D = Data[i];
-    //kdDebug() << TQString("%1==%2").arg((int)D).arg((int)OD) << endl;
+    //kdDebug() << TQString("%1==%2").tqarg((int)D).tqarg((int)OD) << endl;
     if( OD == D )
       continue;
     return OD < D ? 1 : -1;
@@ -262,7 +262,7 @@ int KFixedSizeBuffer::compare( const KDataBuffer &Other, KSection OtherRange, un
 }
 
 
-int KFixedSizeBuffer::find(  const char*/*KeyData*/, int /*Length*/, KSection /*Section*/  ) const { return 0; }
+int KFixedSizeBuffer::tqfind(  const char*/*KeyData*/, int /*Length*/, KSection /*Section*/  ) const { return 0; }
 int KFixedSizeBuffer::rfind( const char*, int /*Length*/, int /*Pos*/ ) const { return 0; }
 
 

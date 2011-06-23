@@ -100,7 +100,7 @@ void ArArch::open()
   if (kp->start(KProcess::NotifyOnExit, KProcess::AllOutput) == false)
     {
       KMessageBox::error( 0, i18n("Could not start a subprocess.") );
-      emit sigOpen(this, false, TQString::null, 0 );
+      emit sigOpen(this, false, TQString(), 0 );
     }
   kdDebug(1601) << "-ArArch::open" << endl;
 }

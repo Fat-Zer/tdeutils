@@ -30,8 +30,8 @@
 #include "detailedconsole.h"
 
 
-KDetailedConsole::KDetailedConsole(TQWidget *parent, const char *name,const TQString &boxLabel,const TQString &errormessage)
-    : KDialogBase(parent,name,true,i18n("Sorry"),KDialogBase::Details|KDialogBase::Ok|KDialogBase::Cancel, KDialogBase::Ok)
+KDetailedConsole::KDetailedConsole(TQWidget *tqparent, const char *name,const TQString &boxLabel,const TQString &errormessage)
+    : KDialogBase(tqparent,name,true,i18n("Sorry"),KDialogBase::Details|KDialogBase::Ok|KDialogBase::Cancel, KDialogBase::Ok)
 {
         TQWidget *page = new TQWidget( this );
         setMainWidget(page);
@@ -42,7 +42,7 @@ KDetailedConsole::KDetailedConsole(TQWidget *parent, const char *name,const TQSt
 
         TQVGroupBox *detailsGroup = new TQVGroupBox( i18n("Details"), page);
         (void) new TQLabel(errormessage,detailsGroup);
-        //labdetails->setMinimumSize(labdetails->sizeHint());
+        //labdetails->setMinimumSize(labdetails->tqsizeHint());
         setDetailsWidget(detailsGroup);
         vbox->addWidget(lab1);
 
@@ -51,12 +51,12 @@ KDetailedConsole::KDetailedConsole(TQWidget *parent, const char *name,const TQSt
 KDetailedConsole::~KDetailedConsole()
 {}
 
-KDetailedInfo::KDetailedInfo(TQWidget *parent, const char *name , const TQString &boxLabel,const TQString &errormessage,TQStringList keysList)
-    : KDialogBase(Swallow, i18n("Info"),KDialogBase::Details|KDialogBase::Ok, KDialogBase::Ok,parent,name,true)
+KDetailedInfo::KDetailedInfo(TQWidget *tqparent, const char *name , const TQString &boxLabel,const TQString &errormessage,TQStringList keysList)
+    : KDialogBase(Swallow, i18n("Info"),KDialogBase::Details|KDialogBase::Ok, KDialogBase::Ok,tqparent,name,true)
 {
 	bool checkboxResult;
 	KMessageBox::createKMessageBox(this, TQMessageBox::Information,
-                       boxLabel, keysList,TQString::null,&checkboxResult, 0,errormessage);
+                       boxLabel, keysList,TQString(),&checkboxResult, 0,errormessage);
 }
 
 KDetailedInfo::~KDetailedInfo()

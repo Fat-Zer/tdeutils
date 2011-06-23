@@ -77,17 +77,17 @@ void NoatunSensor::update()
                 else
 
                 {
-                   format.replace( TQRegExp("%title", false), title );
-		   format.replace( TQRegExp("%id", false), noatunID );
+                   format.tqreplace( TQRegExp("%title", false), title );
+		   format.tqreplace( TQRegExp("%id", false), noatunID );
 
-                    format.replace( TQRegExp("%length", false), TQTime( 0,0,0 ).
+                    format.tqreplace( TQRegExp("%length", false), TQTime( 0,0,0 ).
                                     addMSecs( songLength )
                                     .toString( "h:mm:ss" ) );
 
-                    format.replace( TQRegExp("%time", false), TQTime( 0,0,0 ).
+                    format.tqreplace( TQRegExp("%time", false), TQTime( 0,0,0 ).
                                     addMSecs( currentTime )
                                     .toString( "h:mm:ss" ) );
-                    format.replace( TQRegExp("%remain", false), TQTime( 0,0,0 ).
+                    format.tqreplace( TQRegExp("%remain", false), TQTime( 0,0,0 ).
                                     addMSecs( songLength )
                                     .addMSecs(-currentTime )
                                     .toString( "h:mm:ss" ) );
@@ -144,11 +144,11 @@ TQString NoatunSensor::getTitle()
     else
     {
         TQDataStream reply(replyData, IO_ReadOnly);
-        if (replyType == "TQString")
+        if (replyType == TQSTRING_OBJECT_NAME_STRING)
         {
             reply >> result;
-            result.replace( TQRegExp("_")," " );
-            result.replace( TQRegExp(".mp3$"),"" );
+            result.tqreplace( TQRegExp("_")," " );
+            result.tqreplace( TQRegExp(".mp3$"),"" );
 
         }
         else

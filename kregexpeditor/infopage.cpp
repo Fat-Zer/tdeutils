@@ -15,7 +15,7 @@
  *  the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  *  Boston, MA 02110-1301, USA.
  **/
-#ifdef QT_ONLY
+#ifdef TQT_ONLY
   #include "compat.h"
 #else
   #include <klocale.h>
@@ -24,11 +24,11 @@
 
 #include "infopage.h"
 
-InfoPage::InfoPage( TQWidget* parent, const char* name )
-  :KTextBrowser( parent, name )
+InfoPage::InfoPage( TQWidget* tqparent, const char* name )
+  :KTextBrowser( tqparent, name )
 {
     TQString txt =
-        TQString::fromLatin1( "<qt>" ) +
+        TQString::tqfromLatin1( "<qt>" ) +
         i18n( "Translators, feel free to add yourself in the text below, asking for a postcard ;-), "
               "also feel free to add a section saying <h2>Translators</h2>. "
               "Kind regards, and thanks for your work - Jesper.",
@@ -58,14 +58,14 @@ InfoPage::InfoPage( TQWidget* parent, const char* name )
 
                  "<h2>Author</h2>"
                  "<a href=\"http://www.blackie.dk/\">Jesper K. Pedersen</a> &lt;<a href=\"mailto:blackie@kde.org\">blackie@kde.org</a>&gt;")
-           + TQString::fromLatin1( "</qt>" );
+           + TQString::tqfromLatin1( "</qt>" );
     setText( txt );
 }
 
 void InfoPage::setSource ( const TQString& name )
 {
-#ifdef QT_ONLY
-    mimeSourceFactory()->setFilePath( TQStringList() << TQString::fromLatin1("manual/"));
+#ifdef TQT_ONLY
+    mimeSourceFactory()->setFilePath( TQStringList() << TQString::tqfromLatin1("manual/"));
     TQString nm = name;
     if ( nm.endsWith("/") )
         nm = nm.left( nm.length()-1);

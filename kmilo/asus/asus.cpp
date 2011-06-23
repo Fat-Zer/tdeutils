@@ -42,7 +42,7 @@
 
 namespace KMilo {
 
-AsusMonitor::AsusMonitor(TQObject* parent, const char* name, const TQStringList& args): Monitor(parent, name, args)
+AsusMonitor::AsusMonitor(TQObject* tqparent, const char* name, const TQStringList& args): Monitor(tqparent, name, args)
 {
 }
 
@@ -183,7 +183,7 @@ bool AsusMonitor::readProc(asus_state_struct* asus_state)
 
 int AsusMonitor::readProcEntry(const TQString &name)
 {
-	TQFile f(TQString("/proc/acpi/asus/%1").arg(name).local8Bit());
+	TQFile f(TQString("/proc/acpi/asus/%1").tqarg(name).local8Bit());
 
 	if (f.open(IO_ReadOnly))
 	{

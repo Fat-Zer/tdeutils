@@ -2,7 +2,7 @@
     $Id$
 
     KCalc, a scientific calculator for the X window system using the
-    Qt widget libraries, available at no cost at http://www.troll.no
+    TQt widget libraries, available at no cost at http://www.troll.no
     
     Copyright (C) 1996 Bernd Johannes Wuebben   
                        wuebben@math.cornell.edu
@@ -39,17 +39,17 @@
 #include "kcalcdisplay.moc"
 
 
-KCalcDisplay::KCalcDisplay(TQWidget *parent, const char *name)
-  :TQLabel(parent,name), _beep(false), _groupdigits(false), _button(0), _lit(false),
+KCalcDisplay::KCalcDisplay(TQWidget *tqparent, const char *name)
+  :TQLabel(tqparent,name), _beep(false), _groupdigits(false), _button(0), _lit(false),
    _num_base(NB_DECIMAL), _precision(9),
    _fixed_precision(-1), _display_amount(0),
    selection_timer(new TQTimer)
 {
 	setFrameStyle(TQFrame::WinPanel | TQFrame::Sunken);
-	setAlignment(AlignRight | AlignVCenter);
+	tqsetAlignment(AlignRight | AlignVCenter);
 	setFocus();
-	setFocusPolicy(TQWidget::StrongFocus);
-	setSizePolicy(TQSizePolicy::Expanding, TQSizePolicy::Fixed, false);
+	setFocusPolicy(TQ_StrongFocus);
+	tqsetSizePolicy(TQSizePolicy::Expanding, TQSizePolicy::Fixed, false);
 
 	connect(this, TQT_SIGNAL(clicked()), this, TQT_SLOT(slotDisplaySelected()));
 
@@ -71,7 +71,7 @@ bool KCalcDisplay::sendEvent(Event const event)
 	case EventReset:
 		_display_amount = 0;
 		_str_int = "0";
-		_str_int_exp = TQString::null;
+		_str_int_exp = TQString();
 
 		_eestate = false;
 		_period = false;
@@ -105,13 +105,13 @@ void KCalcDisplay::slotCopy(void)
 	TQString txt = TQLabel::text();
 	if (_num_base == NB_HEX)
 		txt.prepend( "0x" );
-	(TQApplication::clipboard())->setText(txt, QClipboard::Clipboard);
-	(TQApplication::clipboard())->setText(txt, QClipboard::Selection);
+	(TQApplication::tqclipboard())->setText(txt, TQClipboard::Clipboard);
+	(TQApplication::tqclipboard())->setText(txt, TQClipboard::Selection);
 }
 
 void KCalcDisplay::slotPaste(bool bClipboard)
 {
-	TQString tmp_str = (TQApplication::clipboard())->text(bClipboard ? QClipboard::Clipboard : QClipboard::Selection);
+	TQString tmp_str = (TQApplication::tqclipboard())->text(bClipboard ? TQClipboard::Clipboard : TQClipboard::Selection);
 
 	if (tmp_str.isNull())
 	{
@@ -226,7 +226,7 @@ bool KCalcDisplay::setAmount(KNumber const & new_amount)
 	TQString display_str;
 
 	_str_int = "0";
-	_str_int_exp = TQString::null;
+	_str_int_exp = TQString();
 	_period = false;
 	_neg_sign = false;
 	_eestate = false;
@@ -243,7 +243,7 @@ bool KCalcDisplay::setAmount(KNumber const & new_amount)
 	{
 		_display_amount = new_amount;
 	
-		display_str = _display_amount.toQString(KCalcSettings::precision(), _fixed_precision);
+		display_str = _display_amount.toTQString(KCalcSettings::precision(), _fixed_precision);
 #if 0
 		else if (_display_amount > 1.0e+16)
 			display_str = TQCString().sprintf(PRINT_LONG_BIG, _precision + 1, _display_amount);
@@ -281,7 +281,7 @@ TQString KCalcDisplay::text() const
 {
 	if (_num_base != NB_DECIMAL)
 		return TQLabel::text();
-	TQString display_str = _display_amount.toQString(KCalcSettings::precision());
+	TQString display_str = _display_amount.toTQString(KCalcSettings::precision());
 
 	return display_str;
 	//	return TQCString().sprintf(PRINT_LONG_BIG, 40, _display_amount);
@@ -584,7 +584,7 @@ void KCalcDisplay::drawContents(TQPainter *p)
 	// draw the status texts using half of the normal
 	// font size but not smaller than 7pt
 	TQFont f(font());
-	f.setPointSize(QMAX((f.pointSize() / 2), 7));
+	f.setPointSize(TQMAX((f.pointSize() / 2), 7));
 	p->setFont(f);
 	TQFontMetrics fm(f);
 	uint w = fm.width("_____");
@@ -596,13 +596,13 @@ void KCalcDisplay::drawContents(TQPainter *p)
 	}
 }
 
-// Return the QLabel's normal size hint vertically expanded
+// Return the TQLabel's normal size hint vertically expanded
 // by half the font height to make room for the status texts
-TQSize KCalcDisplay::sizeHint() const
+TQSize KCalcDisplay::tqsizeHint() const
 {
 	TQFont f(font());
-	f.setPointSize(QMAX((f.pointSize() / 2), 7));
+	f.setPointSize(TQMAX((f.pointSize() / 2), 7));
 	TQFontMetrics fm(f);
-	return TQLabel::sizeHint() + TQSize(0, fm.height());
+	return TQLabel::tqsizeHint() + TQSize(0, fm.height());
 }
 

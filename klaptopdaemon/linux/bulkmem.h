@@ -71,7 +71,7 @@ typedef struct eraseq_hdr_t {
     eraseq_entry_t	*QueueEntryArray;
 } eraseq_hdr_t;
 
-#define ERASE_QUEUED		0x00
+#define ERASE_TQUEUED		0x00
 #define ERASE_IN_PROGRESS(n)	(((n) > 0) && ((n) < 0x80))
 #define ERASE_IDLE		0xff
 #define ERASE_PASSED		0xe0
@@ -125,25 +125,25 @@ typedef struct mtd_request_t {
     u_int	TransferLength;
     u_int	Function;
     u_long	MediaID;
-    u_int	Status;
+    u_int	tqStatus;
     u_int	Timeout;
 } mtd_request_t;
 
 /* Fields in MTD Function */
-#define MTD_REQ_ACTION		0x003
-#define MTD_REQ_ERASE		0x000
-#define MTD_REQ_READ		0x001
-#define MTD_REQ_WRITE		0x002
-#define MTD_REQ_COPY		0x003
-#define MTD_REQ_NOERASE		0x004
-#define MTD_REQ_VERIFY		0x008
-#define MTD_REQ_READY		0x010
-#define MTD_REQ_TIMEOUT		0x020
-#define MTD_REQ_LAST		0x040
-#define MTD_REQ_FIRST		0x080
-#define MTD_REQ_KERNEL		0x100
+#define MTD_RETQ_ACTION		0x003
+#define MTD_RETQ_ERASE		0x000
+#define MTD_RETQ_READ		0x001
+#define MTD_RETQ_WRITE		0x002
+#define MTD_RETQ_COPY		0x003
+#define MTD_RETQ_NOERASE		0x004
+#define MTD_RETQ_VERIFY		0x008
+#define MTD_RETQ_READY		0x010
+#define MTD_RETQ_TIMEOUT		0x020
+#define MTD_RETQ_LAST		0x040
+#define MTD_RETQ_FIRST		0x080
+#define MTD_RETQ_KERNEL		0x100
 
-/* Status codes */
+/* tqStatus codes */
 #define MTD_WAITREQ	0x00
 #define MTD_WAITTIMER	0x01
 #define MTD_WAITRDY	0x02

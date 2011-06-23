@@ -32,7 +32,7 @@ extern "C" {
 #include <X11/extensions/dpms.h>
 
 #ifndef HAVE_DPMSINFO_PROTO
-Status DPMSInfo ( Display *, CARD16 *, BOOL * );
+tqStatus DPMSInfo ( Display *, CARD16 *, BOOL * );
 #endif
 }
 #endif
@@ -246,14 +246,14 @@ bool XAutoLock::x11Event( XEvent* ev )
 // don't futher process key events that were received only because XAutoLock wants them
     if( ev->type == KeyPress && !ev->xkey.send_event
         && !xautolock_useXidle && !xautolock_useMit
-        && !TQWidget::find( ev->xkey.window ))
+        && !TQWidget::tqfind( ev->xkey.window ))
         return true;
     return false;
 }
 
 bool XAutoLock::ignoreWindow( WId w )
 {
-    if( w != qt_xrootwin() && TQWidget::find( w ))
+    if( w != qt_xrootwin() && TQWidget::tqfind( w ))
         return true;
     return false;
 }

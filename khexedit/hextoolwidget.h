@@ -31,12 +31,13 @@ class TQCheckBox;
 #include "hexbuffer.h"
 #include <tqframe.h>
 
-class CHexToolWidget : public QFrame
+class CHexToolWidget : public TQFrame
 {
   Q_OBJECT
+  TQ_OBJECT
 
   public:
-    CHexToolWidget( TQWidget *parent = 0, const char *name = 0 );
+    CHexToolWidget( TQWidget *tqparent = 0, const char *name = 0 );
     ~CHexToolWidget( void );
 
     void writeConfiguration( KConfig &config );

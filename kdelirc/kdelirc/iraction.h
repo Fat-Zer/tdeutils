@@ -82,7 +82,7 @@ public:
 	void setUnique(const bool a) { theUnique = a; }
 
 	IRAction(const TQString &newProgram, const TQString &newObject, const TQString &newMethod, const Arguments &newArguments, const TQString &newRemote, const TQString &newMode, const TQString &newButton, const bool newRepeat, const bool newAutoStart, const bool newDoBefore, const bool newDoAfter, const bool newUnique, const IfMulti newIfMulti);
-	IRAction() { theProgram = TQString::null; }
+	IRAction() { theProgram = TQString(); }
 };
 
 #endif

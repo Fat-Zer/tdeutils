@@ -15,16 +15,16 @@
  *  the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  *  Boston, MA 02110-1301, USA.
  **/
-#ifndef QT_ONLY
+#ifndef TQT_ONLY
   #include "kmultiformlistbox.moc"
 #endif
 
 #include "kmultiformlistbox-multivisible.h"
 #include "kmultiformlistbox-windowed.h"
 
-KMultiFormListBox::KMultiFormListBox( KMultiFormListBoxFactory *factory, KMultiFormListBoxType tp, TQWidget *parent,
+KMultiFormListBox::KMultiFormListBox( KMultiFormListBoxFactory *factory, KMultiFormListBoxType tp, TQWidget *tqparent,
 																		  bool showUpDownButtons, bool showHelpButton, TQString addButtonText,
-																		  const char *name )  : TQWidget( parent, name )
+																		  const char *name )  : TQWidget( tqparent, name )
 {
 	switch ( tp ) {
 
@@ -40,9 +40,9 @@ KMultiFormListBox::KMultiFormListBox( KMultiFormListBoxFactory *factory, KMultiF
 
   TQWidget *widget = theWidget->qWidget();
 
-  TQHBoxLayout *layout = new TQHBoxLayout( this );
+  TQHBoxLayout *tqlayout = new TQHBoxLayout( this );
 	_factory = factory;
-  layout->addWidget( widget );
+  tqlayout->addWidget( widget );
 }
 
 void KMultiFormListBox::append( KMultiFormListBoxEntry *element )
@@ -77,7 +77,7 @@ void KMultiFormListBox::toStream( TQDataStream& stream ) const
   const KMultiFormListBoxEntryList elms = elements();
   stream << elms.count();
   for ( TQPtrListIterator<KMultiFormListBoxEntry> it(elms); *it; ++it)
-    _factory->toStream( *it, stream );
+    _factory->toStream( TQT_TQOBJECT(*it), stream );
 }
 
 void KMultiFormListBox::fromStream( TQDataStream& stream )
@@ -97,7 +97,7 @@ void KMultiFormListBox::fromStream( TQDataStream& stream )
 
   KMultiFormListBoxEntryList elms = elements();
   for (TQPtrListIterator<KMultiFormListBoxEntry> it(elms); *it; ++it)
-    _factory->fromStream( stream, *it );
+    _factory->fromStream( stream, TQT_TQOBJECT(*it) );
 }
 
 

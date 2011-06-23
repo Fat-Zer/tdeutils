@@ -41,13 +41,14 @@ class
 MainWindow: public KParts::MainWindow
 {
     Q_OBJECT
+  TQ_OBJECT
 public:
-    MainWindow( TQWidget *parent=0, const char *name=0 );
+    MainWindow( TQWidget *tqparent=0, const char *name=0 );
     virtual ~MainWindow();
 
     void setExtractOnly ( bool b );
     void extractTo( const KURL & targetDirectory, const KURL & archive, bool guessName );
-    void addToArchive( const KURL::List & filesToAdd, const TQString & cwd = TQString::null,
+    void addToArchive( const KURL::List & filesToAdd, const TQString & cwd = TQString(),
                        const KURL & archive = KURL(), bool askForName = false );
 
 public slots:
@@ -84,9 +85,9 @@ private: // methods
     void newCaption(const TQString & filename);
     bool arkAlreadyOpen( const KURL & url );
 
-    KURL getOpenURL( bool addOnly = false , const TQString & caption = TQString::null,
-                     const TQString & startDir = TQString::null,
-                     const TQString & suggestedName = TQString::null );
+    KURL getOpenURL( bool addOnly = false , const TQString & caption = TQString(),
+                     const TQString & startDir = TQString(),
+                     const TQString & suggestedName = TQString() );
 
     void startProgressDialog( const TQString & text );
 

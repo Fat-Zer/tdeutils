@@ -110,7 +110,7 @@ void SevenZipArch::open()
   if ( !kp->start( KProcess::NotifyOnExit, KProcess::AllOutput ) )
   {
     KMessageBox::error( 0, i18n( "Could not start a subprocess." ) );
-    emit sigOpen( this, false, TQString::null, 0 );
+    emit sigOpen( this, false, TQString(), 0 );
   }
 }
 
@@ -283,13 +283,13 @@ bool SevenZipArch::processLine( const TQCString& _line )
                    : columns[ m_fixYear ];
     TQString month = ( m_repairMonth >= 0 ) ?
                    TQString( "%1" )
-                   .arg( ArkUtils::getMonth( columns[ m_repairMonth ].ascii() ) )
+                   .tqarg( ArkUtils::getMonth( columns[ m_repairMonth ].ascii() ) )
                    : columns[ m_fixMonth ];
-    TQString timestamp = TQString::fromLatin1( "%1-%2-%3 %4" )
-                        .arg( year )
-                        .arg( month )
-                        .arg( columns[ m_fixDay ] )
-                        .arg( columns[ m_fixTime ] );
+    TQString timestamp = TQString::tqfromLatin1( "%1-%2-%3 %4" )
+                        .tqarg( year )
+                        .tqarg( month )
+                        .tqarg( columns[ m_fixDay ] )
+                        .tqarg( columns[ m_fixTime ] );
 
     columns[ m_dateCol ] = timestamp;
   }
@@ -330,11 +330,11 @@ void SevenZipArch::slotReceivedTOC( KProcess*, char* data, int length )
     startChar = lfChar + 1;
 
     // Check if the header was found
-    if ( m_buffer.find( m_headerString ) != -1 )
+    if ( m_buffer.tqfind( m_headerString.data() ) != -1 )
     {
       if ( !m_header_removed )
       {
-        m_nameColumnPos = m_buffer.findRev( ' ' ) + 1;
+        m_nameColumnPos = m_buffer.tqfindRev( ' ' ) + 1;
         m_header_removed = true;
       }
       else

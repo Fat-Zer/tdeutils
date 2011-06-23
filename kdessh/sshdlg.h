@@ -15,6 +15,7 @@ class KDEsshDialog
     : public KPasswordDialog
 {
     Q_OBJECT
+  TQ_OBJECT
 
 public:
     KDEsshDialog(TQCString host, TQCString user, TQCString stub, 

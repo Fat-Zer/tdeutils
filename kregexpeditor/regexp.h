@@ -44,7 +44,7 @@ public:
 
     void addChild( RegExp* child );
     void removeChild( RegExp* child );
-    void setParent( RegExp* parent );
+    void setParent( RegExp* tqparent );
     RegExp* clone() const;
     virtual bool operator==( const RegExp& other ) const { return ( type() == other.type() ); }
 
@@ -59,7 +59,7 @@ protected:
 
 private:
     RegExp() {} // disable
-    TQPtrList<RegExp> _children;
+    TQPtrList<RegExp> _tqchildren;
     RegExp* _parent;
     bool _destructing;
     bool _selected;

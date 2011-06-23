@@ -26,8 +26,8 @@
 class CompoundRegExp :public RegExp
 {
 public:
-	CompoundRegExp( bool selected, const TQString& title = TQString::null,
-                    const TQString& description = TQString::null,
+	CompoundRegExp( bool selected, const TQString& title = TQString(),
+                    const TQString& description = TQString(),
                     bool hidden = false, bool allowReplace = false, RegExp* child = 0);
 
     virtual bool check( ErrorMap&, bool first, bool last );

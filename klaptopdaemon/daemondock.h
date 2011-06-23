@@ -41,9 +41,10 @@ class KPopupMenu;
 class laptop_dock : public KSystemTray {
 
   Q_OBJECT
+  TQ_OBJECT
 
 public:
-  laptop_dock(laptop_daemon* parent);
+  laptop_dock(laptop_daemon* tqparent);
   ~laptop_dock();
   void displayPixmap();
 
@@ -89,8 +90,8 @@ private:
   TQVBox *brightness_widget;
   TQSlider *brightness_slider;
   laptop_daemon *pdaemon;
-  QPixmap	pm;
-  QPopupMenu	*performance_popup, *throttle_popup;
+  TQPixmap	pm;
+  TQPopupMenu	*performance_popup, *throttle_popup;
   int	 	current_code;
   KPCMCIA       *_pcmcia;
   TQMap<int,KPCMCIACard *> _ejectActions,

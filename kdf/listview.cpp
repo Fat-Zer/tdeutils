@@ -20,7 +20,7 @@
 //
 // 1999-11-28 Espen Sand
 // The purpose of this class is:
-// 1) Easily set minimum number of visible items and to adjust the sizeHint()
+// 1) Easily set minimum number of visible items and to adjust the tqsizeHint()
 // 2) Provide a pixmap collection
 //
 
@@ -34,8 +34,8 @@
 
 template class TQDict<TQPixmap>;
 
-CListView::CListView( TQWidget *parent, const char *name, int visibleItem )
-  :KListView( parent, name ),  mVisibleItem(QMAX( 1, visibleItem ))
+CListView::CListView( TQWidget *tqparent, const char *name, int visibleItem )
+  :KListView( tqparent, name ),  mVisibleItem(TQMAX( 1, visibleItem ))
 {
   setVisibleItem(visibleItem);
   mPixDict.setAutoDelete(true);
@@ -43,23 +43,23 @@ CListView::CListView( TQWidget *parent, const char *name, int visibleItem )
 
 void CListView::setVisibleItem( int visibleItem, bool updateSize )
 {
-  mVisibleItem = QMAX( 1, visibleItem );
+  mVisibleItem = TQMAX( 1, visibleItem );
   if( updateSize == true )
   {
-    TQSize s = sizeHint();
-    setMinimumSize( s.width() + verticalScrollBar()->sizeHint().width() +
+    TQSize s = tqsizeHint();
+    setMinimumSize( s.width() + verticalScrollBar()->tqsizeHint().width() +
 		    lineWidth() * 2, s.height() );
   }
 }
 
-TQSize CListView::sizeHint( void ) const
+TQSize CListView::tqsizeHint( void ) const
 {
-  TQSize s = TQListView::sizeHint();
+  TQSize s = TQListView::tqsizeHint();
 
   int h = fontMetrics().height() + 2*itemMargin();
   if( h % 2 > 0 ) { h++; }
 
-  s.setHeight( h*mVisibleItem + lineWidth()*2 + header()->sizeHint().height());
+  s.setHeight( h*mVisibleItem + lineWidth()*2 + header()->tqsizeHint().height());
   return( s );
 }
 
@@ -76,12 +76,12 @@ const TQPixmap &CListView::icon( const TQString &iconName, bool drawBorder )
     {
       //
       // 2000-01-23 Espen Sand
-      // Careful here: If the mask has not been defined we can
-      // not use TQPixmap::mask() because it returns 0 => segfault
+      // Careful here: If the tqmask has not been defined we can
+      // not use TQPixmap::tqmask() because it returns 0 => segfault
       //
-      if( pix->mask() != 0 )
+      if( pix->tqmask() != 0 )
       {
-	TQBitmap *bm = new TQBitmap(*(pix->mask()));
+	TQBitmap *bm = new TQBitmap(*(pix->tqmask()));
 	if( bm != 0 )
 	{
 	  TQPainter qp(bm);
@@ -99,7 +99,7 @@ const TQPixmap &CListView::icon( const TQString &iconName, bool drawBorder )
 
       }
     }
-    mPixDict.replace( iconName, pix );
+    mPixDict.tqreplace( iconName, pix );
   }
 
   return( *pix );

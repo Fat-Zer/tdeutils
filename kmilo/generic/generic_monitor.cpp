@@ -42,8 +42,8 @@
 
 using namespace KMilo;
 
-GenericMonitor::GenericMonitor(TQObject *parent, const char *name, const TQStringList& args)
-: Monitor(parent, name, args)
+GenericMonitor::GenericMonitor(TQObject *tqparent, const char *name, const TQStringList& args)
+: Monitor(tqparent, name, args)
 {
 	_poll = false;
 	m_displayType = Monitor::None;
@@ -91,10 +91,10 @@ bool GenericMonitor::init()
  		{ "Help", KShortcut("XF86Launch0"), TQT_SLOT(launchHelp()) },
 		{ "Light Bulb", KShortcut("XF86LightBulb"), TQT_SLOT(lightBulb()) },
 		{ "Battery", KShortcut("XF86LaunchB"), TQT_SLOT(pmBattery()) },
-		{ "FastVolumeUp", Qt::Key_VolumeUp, TQT_SLOT(fastVolumeUp()) },
-		{ "FastVolumeDown", Qt::Key_VolumeDown, TQT_SLOT(fastVolumeDown()) },
-		{ "SlowVolumeUp", Qt::CTRL+Qt::Key_VolumeUp, TQT_SLOT(slowVolumeUp()) },
-		{ "SlowVolumeDown", Qt::CTRL+Qt::Key_VolumeDown, TQT_SLOT(slowVolumeDown()) },
+		{ "FastVolumeUp", TQt::Key_VolumeUp, TQT_SLOT(fastVolumeUp()) },
+		{ "FastVolumeDown", TQt::Key_VolumeDown, TQT_SLOT(fastVolumeDown()) },
+		{ "SlowVolumeUp", TQt::CTRL+TQt::Key_VolumeUp, TQT_SLOT(slowVolumeUp()) },
+		{ "SlowVolumeDown", TQt::CTRL+TQt::Key_VolumeDown, TQT_SLOT(slowVolumeDown()) },
 		{ "Mute", KShortcut("XF86AudioMute"), TQT_SLOT(mute()) }
 	};
 
@@ -105,7 +105,7 @@ bool GenericMonitor::init()
 	for (int i = 0; i < len; i++) {
 		si = shortcuts[i];
 
-		ga->insert(si.name, TQString::null, TQString::null,
+		ga->insert(si.name, TQString(), TQString(),
 							 si.symbol, si.symbol,
 							 this,
 							 si.slot, false);
@@ -218,10 +218,10 @@ void GenericMonitor::volumeChange(int direction, int step)
 	/* Following snippet of code may seem to be overcomplicated, but it works for both devices with
 	 * volume grain < 100 (32 tested) and devices with volume grain > 100 (256 tested) while preserving
 	 * accuracy for devices with fine grain and preserving usability for devices with rough grain. */
-	int userVisibleVolume = qRound(m_volume * 100.0 / (m_maxVolume - m_minVolume));
+	int userVisibleVolume = tqRound(m_volume * 100.0 / (m_maxVolume - m_minVolume));
 	userVisibleVolume += direction * step; // add requested volume step
 	long previousVolume = m_volume;
-	m_volume = qRound(m_minVolume + userVisibleVolume * (m_maxVolume - m_minVolume) / 100.0);
+	m_volume = tqRound(m_minVolume + userVisibleVolume * (m_maxVolume - m_minVolume) / 100.0);
 	if (m_volume == previousVolume) // if the change was rounded to zero
 		m_volume += direction;
 
@@ -240,7 +240,7 @@ void GenericMonitor::fastVolumeDown() { volumeChange(-1, m_volumeStepFast); }
 
 void GenericMonitor::displayVolume()
 {
-	_interface->displayProgress(i18n("Volume"), qRound(m_volume * 100.0 / (m_maxVolume - m_minVolume)));
+	_interface->displayProgress(i18n("Volume"), tqRound(m_volume * 100.0 / (m_maxVolume - m_minVolume)));
 
 	// If we got this far, the DCOP communication with kmix works,
 	// so we don't have to test the result.
@@ -248,7 +248,7 @@ void GenericMonitor::displayVolume()
 	kmixClient->send("setAbsoluteVolume", m_volumeDeviceIdx, m_volume);
 	if(m_extraDeviceIdx != -1)
 		// for simplicity, use relative volume rather that absolute (extra precision is not needed here)
-		kmixClient->send("setVolume", m_extraDeviceIdx, qRound(m_volume * 100.0 / (m_maxVolume - m_minVolume)));
+		kmixClient->send("setVolume", m_extraDeviceIdx, tqRound(m_volume * 100.0 / (m_maxVolume - m_minVolume)));
 
 	// if mute then unmute
 	if (m_mute)
@@ -356,7 +356,7 @@ void GenericMonitor::launchBrowser()
 
 void GenericMonitor::launchSearch()
 {
-	launch("search", "kfind");
+	launch("search", "ktqfind");
 }
 
 void GenericMonitor::launchHomeFolder()

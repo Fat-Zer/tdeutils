@@ -5,7 +5,7 @@
  * Copyright (c) 2002 Marc Mutz <mutz@kde.org>
  * Copyright (c) 2006 Flavio Castelli <flavio.castelli@gmail.com>
  *
- * Requires the Qt widget libraries, available at no cost at
+ * Requires the TQt widget libraries, available at no cost at
  * http://www.troll.no/
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -45,8 +45,9 @@ class TQLabel;
 class BatteryConfig : public KCModule
 {
   Q_OBJECT
+  TQ_OBJECT
 public:
-  BatteryConfig( TQWidget *parent=0, const char* name=0);
+  BatteryConfig( TQWidget *tqparent=0, const char* name=0);
   ~BatteryConfig( );     
 
   void save( void );

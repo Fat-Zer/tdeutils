@@ -33,9 +33,10 @@
 class KDiskFreeWidget : public KCModule
 {
   Q_OBJECT
+  TQ_OBJECT
   
   public:
-    KDiskFreeWidget( TQWidget *parent=0, const char *name=0 );
+    KDiskFreeWidget( TQWidget *tqparent=0, const char *name=0 );
     ~KDiskFreeWidget();
 
     TQString quickHelp() const;

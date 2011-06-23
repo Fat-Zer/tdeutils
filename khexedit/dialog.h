@@ -64,9 +64,10 @@ const uint Find_Next       = 7;
 class CGotoDialog : public KDialogBase 
 {
   Q_OBJECT
+  TQ_OBJECT
   
   public:
-    CGotoDialog( TQWidget *parent, const char *name = 0, bool modal = false );
+    CGotoDialog( TQWidget *tqparent, const char *name = 0, bool modal = false );
     ~CGotoDialog( void );
 
   protected:
@@ -90,6 +91,7 @@ class CGotoDialog : public KDialogBase
 class CFindDialog : public KDialogBase
 {
   Q_OBJECT
+  TQ_OBJECT
 
   public:
     enum EOperation
@@ -100,7 +102,7 @@ class CFindDialog : public KDialogBase
     };
 
   public:
-    CFindDialog( TQWidget *parent=0, const char *name=0, bool modal=false );
+    CFindDialog( TQWidget *tqparent=0, const char *name=0, bool modal=false );
     ~CFindDialog( void );
     bool isEmpty( void );
 
@@ -137,9 +139,10 @@ class CFindDialog : public KDialogBase
 class CFindNavigatorDialog : public KDialogBase
 {
   Q_OBJECT
+  TQ_OBJECT
   
   public:
-    CFindNavigatorDialog( TQWidget *parent=0, const char *name=0, 
+    CFindNavigatorDialog( TQWidget *tqparent=0, const char *name=0, 
 			  bool modal=false );
     ~CFindNavigatorDialog( void );
     void defineData( SSearchControl &sc );
@@ -166,9 +169,10 @@ class CFindNavigatorDialog : public KDialogBase
 class CReplaceDialog : public KDialogBase
 {
   Q_OBJECT
+  TQ_OBJECT
   
   public:
-    CReplaceDialog( TQWidget *parent=0, const char *name=0, bool modal=false );
+    CReplaceDialog( TQWidget *tqparent=0, const char *name=0, bool modal=false );
     ~CReplaceDialog( void );
 
   protected:
@@ -209,9 +213,10 @@ class CReplaceDialog : public KDialogBase
 class CReplacePromptDialog : public KDialogBase
 {
   Q_OBJECT
+  TQ_OBJECT
   
   public:
-    CReplacePromptDialog( TQWidget *parent=0, const char *name=0, 
+    CReplacePromptDialog( TQWidget *tqparent=0, const char *name=0, 
 			  bool modal=false );
     ~CReplacePromptDialog( void );
     void defineData( SSearchControl &sc );
@@ -238,6 +243,7 @@ class CReplacePromptDialog : public KDialogBase
 class CFilterDialog : public KDialogBase
 {
   Q_OBJECT
+  TQ_OBJECT
 
   public:
     enum EStackMode
@@ -249,7 +255,7 @@ class CFilterDialog : public KDialogBase
     };
 
   public:
-    CFilterDialog( TQWidget *parent=0, const char *name=0, bool modal=false );
+    CFilterDialog( TQWidget *tqparent=0, const char *name=0, bool modal=false );
     ~CFilterDialog( void );
 
   protected:
@@ -297,9 +303,10 @@ class CFilterDialog : public KDialogBase
 class CInsertDialog : public KDialogBase
 {
   Q_OBJECT
+  TQ_OBJECT
   
   public:
-    CInsertDialog( TQWidget *parent=0, const char *name=0, bool modal=false );
+    CInsertDialog( TQWidget *tqparent=0, const char *name=0, bool modal=false );
     ~CInsertDialog( void );
 
   protected:
@@ -336,8 +343,8 @@ void centerDialogBottom( TQWidget *widget, TQWidget *centerParent );
 void comboMatchText( TQComboBox *combo, const TQString &text );
 bool stringToOffset( const TQString & text, uint &offset );
 
-void showEntryFailure( TQWidget *parent, const TQString &msg );
-bool verifyFileDestnation( TQWidget *parent, const TQString &title, 
+void showEntryFailure( TQWidget *tqparent, const TQString &msg );
+bool verifyFileDestnation( TQWidget *tqparent, const TQString &title, 
 			   const TQString &path );
 
 

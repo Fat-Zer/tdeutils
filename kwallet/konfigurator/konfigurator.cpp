@@ -40,8 +40,8 @@
 typedef KGenericFactory<KWalletConfig, TQWidget> KWalletFactory;
 K_EXPORT_COMPONENT_FACTORY(kcm_kwallet, KWalletFactory("kcmkwallet"))
 
-KWalletConfig::KWalletConfig(TQWidget *parent, const char *name, const TQStringList&)
-: KCModule(KWalletFactory::instance(), parent, name) {
+KWalletConfig::KWalletConfig(TQWidget *tqparent, const char *name, const TQStringList&)
+: KCModule(KWalletFactory::instance(), tqparent, name) {
 
 	KAboutData *about =
 		new KAboutData(I18N_NOOP("kcmkwallet"),
@@ -101,11 +101,11 @@ void KWalletConfig::updateWalletLists() {
 	_wcw->_localWallet->insertStringList(wl);
 	_wcw->_defaultWallet->insertStringList(wl);
 
-	if (wl.contains(p1)) {
+	if (wl.tqcontains(p1)) {
 		_wcw->_localWallet->setCurrentText(p1);
 	}
 
-	if (wl.contains(p2)) {
+	if (wl.tqcontains(p2)) {
 		_wcw->_defaultWallet->setCurrentText(p2);
 	}
 }
@@ -116,17 +116,17 @@ TQString KWalletConfig::newWallet() {
 
 	TQString n = KInputDialog::getText(i18n("New Wallet"),
 			i18n("Please choose a name for the new wallet:"),
-			TQString::null,
+			TQString(),
 			&ok,
 			this);
 
 	if (!ok) {
-		return TQString::null;
+		return TQString();
 	}
 
 	KWallet::Wallet *w = KWallet::Wallet::openWallet(n);
 	if (!w) {
-		return TQString::null;
+		return TQString();
 	}
 
 	delete w;
@@ -216,10 +216,10 @@ void KWalletConfig::load(bool useDefaults) {
 		denykeys.remove(*i);
 		TQListViewItem *lvi = new TQListViewItem(_wcw->_accessList, *i);
 		for (TQStringList::Iterator j = apps.begin(); j != apps.end(); ++j) {
-			new TQListViewItem(lvi, TQString::null, *j, i18n("Always Allow"));
+			new TQListViewItem(lvi, TQString(), *j, i18n("Always Allow"));
 		}
 		for (TQStringList::Iterator j = denyapps.begin(); j != denyapps.end(); ++j) {
-			new TQListViewItem(lvi, TQString::null, *j, i18n("Always Deny"));
+			new TQListViewItem(lvi, TQString(), *j, i18n("Always Deny"));
 		}
 	}
 	_cfg->setGroup("Auto Deny");
@@ -227,7 +227,7 @@ void KWalletConfig::load(bool useDefaults) {
 		TQStringList denyapps = _cfg->readListEntry(*i);
 		TQListViewItem *lvi = new TQListViewItem(_wcw->_accessList, *i);
 		for (TQStringList::Iterator j = denyapps.begin(); j != denyapps.end(); ++j) {
-			new TQListViewItem(lvi, TQString::null, *j, i18n("Always Deny"));
+			new TQListViewItem(lvi, TQString(), *j, i18n("Always Deny"));
 		}
 	}
 	emit changed(useDefaults);
@@ -302,9 +302,9 @@ TQString KWalletConfig::quickHelp() const {
 
 void KWalletConfig::contextMenuRequested(TQListViewItem *item, const TQPoint& pos, int col) {
 	Q_UNUSED(col)
-	if (item && item->parent()) {
+	if (item && item->tqparent()) {
 		KPopupMenu *m = new KPopupMenu(this);
-		m->insertTitle(item->parent()->text(0));
+		m->insertTitle(item->tqparent()->text(0));
 		m->insertItem(i18n("&Delete"), this, TQT_SLOT(deleteEntry()), Key_Delete);
 		m->popup(pos);
 	}

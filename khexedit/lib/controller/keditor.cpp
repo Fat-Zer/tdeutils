@@ -38,9 +38,9 @@ KEditor::KEditor( KBufferCursor *BC, KHexEdit* HE, KController *P )
 bool KEditor::handleKeyPress( TQKeyEvent *KeyEvent )
 {
   bool clearUndoRedoInfo = true;
-  bool ShiftPressed =  KeyEvent->state() & Qt::ShiftButton;
-  bool ControlPressed = KeyEvent->state() & Qt::ControlButton;
-  bool AltPressed = KeyEvent->state() & Qt::AltButton;
+  bool ShiftPressed =  KeyEvent->state() & TQt::ShiftButton;
+  bool ControlPressed = KeyEvent->state() & TQt::ControlButton;
+  bool AltPressed = KeyEvent->state() & TQt::AltButton;
 
   bool KeyUsed = true;
   // we only care for cursor keys and the like, won't hardcode any other keys
@@ -49,7 +49,7 @@ bool KEditor::handleKeyPress( TQKeyEvent *KeyEvent )
   // in each command anyway
   switch( KeyEvent->key() )
   {
-    case Qt::Key_Delete:
+    case TQt::Key_Delete:
       if( ShiftPressed )
         HexEdit->cut();
       else if( HexEdit->BufferRanges->hasSelection() )
@@ -61,7 +61,7 @@ bool KEditor::handleKeyPress( TQKeyEvent *KeyEvent )
       }
       break;
 
-    case Qt::Key_Insert:
+    case TQt::Key_Insert:
       if( ShiftPressed )
         HexEdit->paste();
       else if( ControlPressed )
@@ -70,7 +70,7 @@ bool KEditor::handleKeyPress( TQKeyEvent *KeyEvent )
         HexEdit->setOverwriteMode( !HexEdit->OverWrite );
       break;
 
-    case Qt::Key_Backspace:
+    case TQt::Key_Backspace:
       if( AltPressed )
       {
         if( ControlPressed )
@@ -95,13 +95,13 @@ bool KEditor::handleKeyPress( TQKeyEvent *KeyEvent )
       doEditAction( ControlPressed ? WordBackspace : CharBackspace );
       clearUndoRedoInfo = false;
       break;
-    case Qt::Key_F16: // "Copy" key on Sun keyboards
+    case TQt::Key_F16: // "Copy" key on Sun keyboards
       HexEdit->copy();
       break;
-    case Qt::Key_F18: // "Paste" key on Sun keyboards
+    case TQt::Key_F18: // "Paste" key on Sun keyboards
       HexEdit->paste();
       break;
-    case Qt::Key_F20: // "Cut" key on Sun keyboards
+    case TQt::Key_F20: // "Cut" key on Sun keyboards
       HexEdit->cut();
       break;
 
@@ -187,7 +187,7 @@ void KEditor::doEditAction( KEditAction Action )
     }
   }
 
-  HexEdit->repaintChanged();
+  HexEdit->tqrepaintChanged();
   HexEdit->ensureCursorVisible();
 
   HexEdit->unpauseCursor();

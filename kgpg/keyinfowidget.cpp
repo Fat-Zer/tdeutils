@@ -43,7 +43,7 @@
 #include "kgpgsettings.h"
 #include "kgpginterface.h"
 
-KgpgKeyInfo::KgpgKeyInfo(TQWidget *parent, const char *name,TQString sigkey):KDialogBase( Swallow, i18n("Key Properties"), Close, Close, parent, name,true)
+KgpgKeyInfo::KgpgKeyInfo(TQWidget *tqparent, const char *name,TQString sigkey):KDialogBase( Swallow, i18n("Key Properties"), Close, Close, tqparent, name,true)
 {
 
         FILE *pass;
@@ -85,7 +85,7 @@ KgpgKeyInfo::KgpgKeyInfo(TQWidget *parent, const char *name,TQString sigkey):KDi
 	connect(prop->kCOwnerTrust,TQT_SIGNAL(activated (int)),this,TQT_SLOT(slotChangeTrust(int)));
 	connect(this,TQT_SIGNAL(changeMainPhoto(const TQPixmap&)),this,TQT_SLOT(slotSetPhoto(const TQPixmap&)));
 
-	//prop->setMinimumSize(prop->sizeHint());
+	//prop->setMinimumSize(prop->tqsizeHint());
 }
 
 void KgpgKeyInfo::slotDisableKey(bool isOn)
@@ -107,7 +107,7 @@ keyWasChanged=true;
 void KgpgKeyInfo::loadKey(TQString Keyid)
 {
 TQColor trustColor;
-TQString fingervalue=TQString::null;
+TQString fingervalue=TQString();
 FILE *pass;
 char line[200]="";
 TQString gpgOutput,fullID;
@@ -188,7 +188,7 @@ TQString gpgcmd="gpg --no-tty --no-secmem-warning --with-colon --with-fingerprin
                                 break;
                         }
 
-			if (gpgOutput.section(':',11,11).find("D",0,true)!=-1)  // disabled key
+			if (gpgOutput.section(':',11,11).tqfind("D",0,true)!=-1)  // disabled key
 			{
 				tr=i18n("Disabled");
 				trustColor=KGpgSettings::colorBad();
@@ -241,15 +241,15 @@ TQString gpgcmd="gpg --no-tty --no-secmem-warning --with-colon --with-fingerprin
                         }
                         prop->kCOwnerTrust->setCurrentItem(ownerTrust);
 
-                        if (fullname.find("<")!=-1) {
+                        if (fullname.tqfind("<")!=-1) {
                                 TQString kmail=fullname;
-				if (fullname.find(")")!=-1)
+				if (fullname.tqfind(")")!=-1)
 				kmail=kmail.section(')',1);
 				kmail=kmail.section('<',1);
 				kmail.truncate(kmail.length()-1);
-				if (kmail.find("<")!=-1) ////////  several email addresses in the same key
+				if (kmail.tqfind("<")!=-1) ////////  several email addresses in the same key
 				{
-				kmail=kmail.replace(">",";");
+				kmail=kmail.tqreplace(">",";");
 				kmail.remove("<");
 				}
 				prop->tLMail->setText("<qt><a href=mailto:"+kmail+">"+kmail+"</a></qt>");
@@ -257,7 +257,7 @@ TQString gpgcmd="gpg --no-tty --no-secmem-warning --with-colon --with-fingerprin
                                 prop->tLMail->setText(i18n("none"));
 
                         TQString kname=fullname.section('<',0,0);
-                        if (fullname.find("(")!=-1) {
+                        if (fullname.tqfind("(")!=-1) {
                                 kname=kname.section('(',0,0);
                                 TQString comment=fullname.section('(',1,1);
                                 comment=comment.section(')',0,0);
@@ -265,7 +265,7 @@ TQString gpgcmd="gpg --no-tty --no-secmem-warning --with-colon --with-fingerprin
                         } else
                                 prop->tLComment->setText(i18n("none"));
 
-			prop->tLName->setText("<qt><b>"+KgpgInterface::checkForUtf8(kname).replace(TQRegExp("<"),"&lt;")+"</b></qt>");
+			prop->tLName->setText("<qt><b>"+KgpgInterface::checkForUtf8(kname).tqreplace(TQRegExp("<"),"&lt;")+"</b></qt>");
 
                 }
 		if (gpgOutput.startsWith("fpr") && (fingervalue.isNull())) {
@@ -294,7 +294,7 @@ void KgpgKeyInfo::reloadMainPhoto(const TQString &uid)
                 kgpginfotmp->setAutoDelete(true);
                 TQString pgpgOutput="cp %i "+kgpginfotmp->name();
                 KProcIO *p=new KProcIO();
-                *p<<"gpg"<<"--no-tty"<<"--show-photos"<<"--photo-viewer"<<TQFile::encodeName(pgpgOutput);
+                *p<<"gpg"<<"--no-tty"<<"--show-photos"<<"--photo-viewer"<<TQString(TQFile::encodeName(pgpgOutput));
 		*p<<"--edit-key"<<displayedKeyID<<"uid"<<uid<<"showphoto";
 		TQObject::connect(p, TQT_SIGNAL(readReady(KProcIO *)),this, TQT_SLOT(finishphotoreadprocess(KProcIO *)));
                 TQObject::connect(p, TQT_SIGNAL(processExited(KProcess *)),this, TQT_SLOT(slotMainImageRead(KProcess *)));
@@ -321,7 +321,7 @@ void KgpgKeyInfo::slotSetPhoto(const TQPixmap &pix)
 {
 TQImage dup=pix.convertToImage();
 TQPixmap dup2;
-dup2.convertFromImage(dup.scale(prop->pLPhoto->width(),prop->pLPhoto->height(),TQImage::ScaleMin));
+dup2.convertFromImage(dup.scale(prop->pLPhoto->width(),prop->pLPhoto->height(),TQ_ScaleMin));
 prop->pLPhoto->setPixmap(dup2);
 }
 
@@ -330,10 +330,10 @@ prop->pLPhoto->setPixmap(dup2);
 
 void KgpgKeyInfo::finishphotoreadprocess(KProcIO *p)
 {
-        TQString required=TQString::null;
+        TQString required=TQString();
         while (p->readln(required,true)!=-1)
-		if (required.find("keyedit.prompt")!=-1) {
-                        p->writeStdin("quit");
+		if (required.tqfind("keyedit.prompt")!=-1) {
+                        p->writeStdin(TQString("quit"));
 			p->closeWhenDone();
 
                 }
@@ -346,7 +346,7 @@ void KgpgKeyInfo::openPhoto()
  			KService::Ptr ptr = offers.first();
  			//KMessageBox::sorry(0,ptr->desktopEntryName());
                         KProcIO *p=new KProcIO();
-                        *p<<"gpg"<<"--show-photos"<<"--photo-viewer"<<TQFile::encodeName(ptr->desktopEntryName()+" %i")<<"--list-keys"<<displayedKeyID;
+                        *p<<"gpg"<<"--show-photos"<<"--photo-viewer"<<TQString(TQFile::encodeName(ptr->desktopEntryName()+" %i"))<<"--list-keys"<<displayedKeyID;
                         p->start(KProcess::DontCare,true);
 }
 
@@ -378,14 +378,14 @@ chdate->show();
 
 void KgpgKeyInfo::slotCheckDate(TQDate date)
 {
-chdate->enableButtonOK(date>=TQDate::currentDate ());
+chdate->enableButtonOK(date>=TQDate::tqcurrentDate ());
 }
 
 void KgpgKeyInfo::slotChangeDate()
 {
 KgpgInterface *KeyExpirationProcess=new KgpgInterface();
 		if (kb->isChecked())
-                KeyExpirationProcess->KgpgKeyExpire(displayedKeyID,TQDate::currentDate(),true);
+                KeyExpirationProcess->KgpgKeyExpire(displayedKeyID,TQDate::tqcurrentDate(),true);
 		else
 		KeyExpirationProcess->KgpgKeyExpire(displayedKeyID,kdt->date(),false);
                 connect(KeyExpirationProcess,TQT_SIGNAL(expirationFinished(int)),this,TQT_SLOT(slotInfoExpirationChanged(int)));
@@ -401,7 +401,7 @@ chdate->enableButtonOK(true);
 else
 {
 kdt->setEnabled(true);
-chdate->enableButtonOK(kdt->date()>=TQDate::currentDate ());
+chdate->enableButtonOK(kdt->date()>=TQDate::tqcurrentDate ());
 }
 }
 
@@ -430,14 +430,14 @@ void KgpgKeyInfo::slotChangeTrust(int newTrust)
 
 void KgpgKeyInfo::slotInfoPasswordChanged()
 {
-KPassivePopup::message(i18n("Passphrase for the key was changed"),TQString::null,KGlobal::iconLoader()->loadIcon("kgpg",KIcon::Desktop),this);
+KPassivePopup::message(i18n("Passphrase for the key was changed"),TQString(),KGlobal::iconLoader()->loadIcon("kgpg",KIcon::Desktop),this);
 }
 
 void KgpgKeyInfo::slotInfoTrustChanged()
 {
 keyWasChanged=true;
 loadKey(displayedKeyID);
-//KPassivePopup::message(i18n("Owner trust of the key was changed"),TQString::null,KGlobal::iconLoader()->loadIcon("kgpg",KIcon::Desktop),this,0,600);
+//KPassivePopup::message(i18n("Owner trust of the key was changed"),TQString(),KGlobal::iconLoader()->loadIcon("kgpg",KIcon::Desktop),this,0,600);
 }
 
 void KgpgKeyInfo::slotInfoExpirationChanged(int res)

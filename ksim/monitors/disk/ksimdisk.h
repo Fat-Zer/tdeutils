@@ -55,8 +55,9 @@ class DiskPlugin : public KSim::PluginObject
 class DiskView : public KSim::PluginView
 {
   Q_OBJECT
+  TQ_OBJECT
   public:
-    DiskView(KSim::PluginObject *parent, const char *name);
+    DiskView(KSim::PluginObject *tqparent, const char *name);
     ~DiskView();
 
     virtual void reparseConfig();
@@ -105,7 +106,7 @@ class DiskView : public KSim::PluginView
     };
 
     typedef TQValueList<DiskData> DiskList;
-    typedef QPair<KSim::Chart *, KSim::Progress *> DiskPair;
+    typedef TQPair<KSim::Chart *, KSim::Progress *> DiskPair;
 
     void updateData(DiskList &disks);
     TQString diskName( int, int ) const;
@@ -115,7 +116,7 @@ class DiskView : public KSim::PluginView
     void init();
     void cleanup();
 
-    TQValueVector<QPair<DiskData, DiskData> > m_data;
+    TQValueVector<TQPair<DiskData, DiskData> > m_data;
     TQTimer *m_timer;
     bool m_bLinux24;
     FILE *m_procFile;
@@ -131,8 +132,9 @@ class DiskView : public KSim::PluginView
 class DiskConfig : public KSim::PluginPage
 {
   Q_OBJECT
+  TQ_OBJECT
   public:
-    DiskConfig(KSim::PluginObject *parent, const char *name);
+    DiskConfig(KSim::PluginObject *tqparent, const char *name);
     ~DiskConfig();
 
     virtual void saveConfig();

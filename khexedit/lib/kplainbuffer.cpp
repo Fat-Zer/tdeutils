@@ -72,7 +72,7 @@ int KPlainBuffer::insert( int Pos, const char* D, int Length )
   // check all parameters
   if( Length == 0 )
     return 0;
-  //kdDebug() << TQString("before: Size: %1, RawSize: %2").arg(Size).arg(RawSize) << endl;
+  //kdDebug() << TQString("before: Size: %1, RawSize: %2").tqarg(Size).tqarg(RawSize) << endl;
   // correct for appending
   if( Pos > (int)Size )
     Pos = Size;
@@ -82,7 +82,7 @@ int KPlainBuffer::insert( int Pos, const char* D, int Length )
   // copy new data to its place
   memcpy( &Data[Pos], D, Length );
 
-  //kdDebug() << TQString("after: Size: %1, RawSize: %2").arg(Size).arg(RawSize) << endl;
+  //kdDebug() << TQString("after: Size: %1, RawSize: %2").tqarg(Size).tqarg(RawSize) << endl;
 
   Modified = true;
   return Length;
@@ -108,7 +108,7 @@ int KPlainBuffer::remove( KSection Remove )
 }
 
 
-unsigned int KPlainBuffer::replace( KSection Remove, const char* D, unsigned int InputLength )
+unsigned int KPlainBuffer::tqreplace( KSection Remove, const char* D, unsigned int InputLength )
 {
   // check all parameters
   if( Remove.start() >= (int)Size || (Remove.width()==0 && InputLength==0) )
@@ -259,7 +259,7 @@ int KPlainBuffer::fill( const char FChar, int FillLength, unsigned int Pos )
 }
 
 
-int KPlainBuffer::find( const char* SearchString, int Length, KSection Section ) const  
+int KPlainBuffer::tqfind( const char* SearchString, int Length, KSection Section ) const  
 {
   Section.restrictEndTo( Size-1 );
 

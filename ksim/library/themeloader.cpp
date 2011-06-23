@@ -58,12 +58,12 @@ class KSim::Theme::Private
 
     TQString readOption(const TQString &entry,
        bool useGlobal = true,
-       const TQString &defValue = TQString::null)
+       const TQString &defValue = TQString())
     {
       TQString text;
       TQStringList::ConstIterator it;
       for (it = file.begin(); it != file.end(); ++it) {
-        if ((*it).find(entry) != -1) {
+        if ((*it).tqfind(entry) != -1) {
           text = TQStringList::split("=", (*it))[1].stripWhiteSpace();
         }
       }
@@ -73,7 +73,7 @@ class KSim::Theme::Private
 
       TQStringList::ConstIterator it2;
       for (it2 = dFile.begin(); it2 != dFile.end(); ++it) {
-        if ((*it2).find(entry) != -1) {
+        if ((*it2).tqfind(entry) != -1) {
           text = TQStringList::split("=", (*it2))[1].stripWhiteSpace();
         }
       }
@@ -135,13 +135,13 @@ TQString KSim::Theme::name() const
   if (name.endsWith("/"))
     name.remove(name.length() - 1, 1);
 
-  return name.remove(0, name.findRev("/") + 1);
+  return name.remove(0, name.tqfindRev("/") + 1);
 }
 
 TQString KSim::Theme::author() const
 {
   TQString author(d->readOption("author", false));
-  return author.replace(TQRegExp("\""), TQString::null);
+  return author.tqreplace(TQRegExp("\""), TQString());
 }
 
 int KSim::Theme::fontItem() const
@@ -217,7 +217,7 @@ TQRect KSim::Theme::frameRightBorder(const TQRect &defValue) const
 TQColor KSim::Theme::chartInColour(const TQColor &defValue) const
 {
   if (d->recolour)
-    return TQApplication::palette().active().background();
+    return TQApplication::tqpalette().active().background();
 
   return internalColourEntry("chart_in_color", defValue);
 }
@@ -230,7 +230,7 @@ TQColor KSim::Theme::chartInColourGrid(const TQColor &defValue) const
 TQColor KSim::Theme::chartOutColour(const TQColor &defValue) const
 {
   if (d->recolour)
-    return TQApplication::palette().active().background();
+    return TQApplication::tqpalette().active().background();
 
   return internalColourEntry("chart_out_color", defValue);
 }
@@ -312,37 +312,37 @@ TQRect KSim::Theme::buttonMeterBorder(const TQRect &defValue) const
 
 TQFont KSim::Theme::largeFont() const
 {
-  TQString font(internalStringEntry("large_font", TQString::null));
+  TQString font(internalStringEntry("large_font", TQString()));
 
   if (font.isEmpty())
     return TQApplication::font();
 
   TQFont themeFont;
-  themeFont.setRawName(font.replace(TQRegExp("\""), TQString::null));
+  themeFont.setRawName(font.tqreplace(TQRegExp("\""), TQString()));
   return themeFont;
 }
 
 TQFont KSim::Theme::normalFont() const
 {
-  TQString font(internalStringEntry("normal_font", TQString::null));
+  TQString font(internalStringEntry("normal_font", TQString()));
 
   if (font.isEmpty())
     return TQApplication::font();
 
   TQFont themeFont;
-  themeFont.setRawName(font.replace(TQRegExp("\""), TQString::null));
+  themeFont.setRawName(font.tqreplace(TQRegExp("\""), TQString()));
   return themeFont;
 }
 
 TQFont KSim::Theme::smallFont() const
 {
-  TQString font(internalStringEntry("small_font", TQString::null));
+  TQString font(internalStringEntry("small_font", TQString()));
 
   if (font.isEmpty())
     return TQApplication::font();
 
   TQFont themeFont;
-  themeFont.setRawName(font.replace(TQRegExp("\""), TQString::null));
+  themeFont.setRawName(font.tqreplace(TQRegExp("\""), TQString()));
   return themeFont;
 }
 
@@ -548,7 +548,7 @@ TQString KSim::Theme::mailPixmap(bool useDefault) const
 
   if (text.isNull() && useDefault)
     return KSim::ThemeLoader::defaultUrl()
-       + createType(KSim::Types::Mail, TQString::null) + file + ".png";
+       + createType(KSim::Types::Mail, TQString()) + file + ".png";
 
   return text;
 }
@@ -607,11 +607,11 @@ TQValueList<TQPixmap> KSim::Theme::pixmapToList(PixmapType type,
   for (int i = 0; i < (depth + 1); ++i) {
     newPixmap.fill();
 
-    if (pixmap.mask()) {
-      TQBitmap mask(newPixmap.size());
-      bitBlt(&mask, 0, 0, pixmap.mask(), xOffset, yOffset,
+    if (pixmap.tqmask()) {
+      TQBitmap tqmask(newPixmap.size());
+      bitBlt(&tqmask, 0, 0, pixmap.tqmask(), xOffset, yOffset,
          image.width() - xOffset, size);
-      newPixmap.setMask(mask);
+      newPixmap.setMask(tqmask);
     }
 
     bitBlt(&newPixmap, 0, 0, &pixmap, xOffset, yOffset,
@@ -644,7 +644,7 @@ bool KSim::Theme::textShadow(const TQString &itemType,
     return false;
 
   TQString shadow = readEntry(itemType, entry);
-  if (shadow.isEmpty() || shadow.findRev("none") != -1)
+  if (shadow.isEmpty() || shadow.tqfindRev("none") != -1)
     return false;
 
   return true;
@@ -683,7 +683,7 @@ TQString KSim::Theme::readEntry(const TQString &itemType,
    const TQString &entry) const
 {
   TQString entryName = itemType + " " + entry;
-  return internalStringEntry(entryName, TQString::null);
+  return internalStringEntry(entryName, TQString());
 }
 
 TQString KSim::Theme::readColourEntry(const TQString &itemType,
@@ -691,7 +691,7 @@ TQString KSim::Theme::readColourEntry(const TQString &itemType,
 {
   TQString color = readEntry(itemType, entry);
   if (color.isEmpty())
-    color = TQString::fromLatin1("#ffffff #ffffff");
+    color = TQString::tqfromLatin1("#ffffff #ffffff");
 
   return TQStringList::split(' ', color)[row];
 }
@@ -718,14 +718,14 @@ bool KSim::Theme::fontColours(int type, const TQString &string, TQFont &font,
    TQColor &text, TQColor &shadow, bool &showShadow) const
 {
   TQString key = KSim::Types::typeToString(type, false);
-  bool repaint = false;
+  bool tqrepaint = false;
 
   // set colours from the string 'key'
   if (!readEntry(string, key + ".textcolor").isEmpty()) {
     text= textColour(string, key + ".textcolor");
     shadow = shadowColour(string, key + ".textcolor");
     showShadow = textShadow(string, key + ".textcolor");
-    repaint = true;
+    tqrepaint = true;
   }
   else {
     text= textColour(string, "*.textcolor");
@@ -737,14 +737,14 @@ bool KSim::Theme::fontColours(int type, const TQString &string, TQFont &font,
   if (!readEntry(string, key + ".font").isEmpty()) {
     if (KSim::ThemeLoader::currentFontItem() != 3) {
       font = readFontEntry(string, key + ".font");
-      repaint = true;
+      tqrepaint = true;
     }
   }
   else {
     font = currentFont();
   }
 
-  return repaint;
+  return tqrepaint;
 }
 
 bool KSim::Theme::fontColours(const KSim::Base *const base, TQFont &font,
@@ -927,7 +927,7 @@ void KSim::ThemeLoader::reload()
   if (m_theme.d)
     m_theme.d->globalReader = d->globalReader;
 
-  TQString fileName = TQString::fromLatin1("gkrellmrc") + alternativeAsString();
+  TQString fileName = TQString::tqfromLatin1("gkrellmrc") + alternativeAsString();
   m_theme.reparse(currentUrl(), fileName, currentAlternative());
 }
 
@@ -948,31 +948,31 @@ void KSim::ThemeLoader::reColourImage(TQImage &image)
   if (!d->recolour || image.isNull())
     return;
 
-  TQColor color = TQApplication::palette().active().background();
+  TQColor color = TQApplication::tqpalette().active().background();
   TQImage output(image.width(), image.height(), 32);
   output.setAlphaBuffer(image.hasAlphaBuffer());
 
-  Q_UINT32 r = color.red();
-  Q_UINT32 g = color.green();
-  Q_UINT32 b = color.blue();
-  Q_UINT32 *write = reinterpret_cast<Q_UINT32 *>(output.bits());
-  Q_UINT32 *read  = reinterpret_cast<Q_UINT32 *>(image.bits());
+  TQ_UINT32 r = color.red();
+  TQ_UINT32 g = color.green();
+  TQ_UINT32 b = color.blue();
+  TQ_UINT32 *write = reinterpret_cast<TQ_UINT32 *>(output.bits());
+  TQ_UINT32 *read  = reinterpret_cast<TQ_UINT32 *>(image.bits());
   int size = image.width() * image.height();
 
   for (int pos = 0; pos < size; pos++)
   {
-    QRgb basePix = static_cast<QRgb>(*read);
+    TQRgb basePix = static_cast<TQRgb>(*read);
 
     // Here, we assume that source is really gray, so R=G=B=I
     // Use blue since it's very easy to extract.
-    Q_UINT32 i = qBlue(basePix);
+    TQ_UINT32 i = tqBlue(basePix);
 
-    Q_UINT32 cr = (r * i + 128) >> 8; // Fixed point..
-    Q_UINT32 cg = (g * i + 128) >> 8;
-    Q_UINT32 cb = (b * i + 128) >> 8;
+    TQ_UINT32 cr = (r * i + 128) >> 8; // Fixed point..
+    TQ_UINT32 cg = (g * i + 128) >> 8;
+    TQ_UINT32 cb = (b * i + 128) >> 8;
 
-    Q_UINT32 alpha = qAlpha(basePix);
-    *write = qRgba(cr, cg, cb, alpha);
+    TQ_UINT32 alpha = tqAlpha(basePix);
+    *write = tqRgba(cr, cg, cb, alpha);
     write++;
     read++;
   }
@@ -986,7 +986,7 @@ TQString KSim::ThemeLoader::parseConfig(const TQString &url,
   TQFile origFile(url + fileName);
 
   if (!origFile.open(IO_ReadOnly))
-    return TQString::null;
+    return TQString();
 
   TQTextStream origStream(&origFile);
   TQString text;
@@ -997,26 +997,26 @@ TQString KSim::ThemeLoader::parseConfig(const TQString &url,
   while (!origStream.atEnd()) {
     TQString line(origStream.readLine().simplifyWhiteSpace());
 
-    if (line.find(reg) == 0) // find the location of the * comments
+    if (line.tqfind(reg) == 0) // find the location of the * comments
       // replace all * comments with # comments so KConfig doesn't complain
-      line.replace(reg, "#");
+      line.tqreplace(reg, "#");
 
-    if (line.find("#") == -1) { // find the location of the string 'gkrellmms'
-      if (line.findRev("=") == -1) { // if found we check for the string '='
-        int numLoc = line.findRev(numbers);
+    if (line.tqfind("#") == -1) { // find the location of the string 'gkrellmms'
+      if (line.tqfindRev("=") == -1) { // if found we check for the string '='
+        int numLoc = line.tqfindRev(numbers);
         if (numLoc != -1)
           // if '=' doesn't exist we add one so KConfig doesn't complain
           line.insert(numLoc, " = ");
 
-        numLoc = line.findRev(number);
+        numLoc = line.tqfindRev(number);
         if (numLoc != -1)
           // if '=' doesn't exist we add one so KConfig doesn't complain
           line.insert(numLoc, " = ");
 
-        numLoc = line.findRev(minus);
+        numLoc = line.tqfindRev(minus);
         if (numLoc != -1)
           // replace the '-' with an '=' so KConfig doesn't get confused
-          line.replace(TQRegExp("-"), "=");
+          line.tqreplace(TQRegExp("-"), "=");
       }
     }
 
@@ -1036,9 +1036,9 @@ void KSim::ThemeLoader::parseDir(const TQString &url, int alt)
   {
     TQString homePath = TQDir::current().path();
     homePath = locateLocal( "data", "ksim" )
-       + TQString::fromLatin1( "/themes" )
+       + TQString::tqfromLatin1( "/themes" )
        + homePath.right( homePath.length()
-       - homePath.findRev( TQRegExp( "\\/" ),
+       - homePath.tqfindRev( TQRegExp( "\\/" ),
        homePath.length() ) );
 
     if ( !TQFile::exists( homePath ) )
@@ -1065,14 +1065,14 @@ void KSim::ThemeLoader::parseDir(const TQString &url, int alt)
   for (int i = 0; i < alternatives; ++i) {
     TQString altString = KSim::ThemeLoader::alternativeAsString(i);
     if (alternatives == 1 || i == 0)
-      altString = TQString::null;
+      altString = TQString();
 
     TQStringList::ConstIterator format;
     for (format = formats.begin(); format != formats.end(); ++format) {
       // go through the meters array and move the files to the correct dir/filename
       TQStringList::Iterator meter;
       for (meter = meters.begin(); meter != meters.end(); ++meter) {
-        TQString bgMeter = TQString::fromLatin1("bg_meter_");
+        TQString bgMeter = TQString::tqfromLatin1("bg_meter_");
         if (TQFile::exists(bgMeter + (*meter) + altString + "." +  (*format))) {
           if (KStandardDirs::makeDir(url + (*meter)))
             directory.rename(bgMeter + (*meter) + altString + "." + (*format),
@@ -1083,7 +1083,7 @@ void KSim::ThemeLoader::parseDir(const TQString &url, int alt)
       // go through the panels array and move the files to the correct dir/filename
       TQStringList::ConstIterator panel;
       for (panel = panels.begin(); panel != panels.end(); ++panel) {
-        TQString bgPanel = TQString::fromLatin1("bg_panel_");
+        TQString bgPanel = TQString::tqfromLatin1("bg_panel_");
         if (TQFile::exists(bgPanel + (*panel) + altString + "." + (*format))) {
           if (KStandardDirs::makeDir(url + (*panel)))
             directory.rename(bgPanel + (*panel) + altString + "." + (*format),
@@ -1092,13 +1092,13 @@ void KSim::ThemeLoader::parseDir(const TQString &url, int alt)
       }
 
       // fix stupid themes that have a bg_panel image in the host dir
-      TQString tempFile = TQString::fromLatin1("host/bg_panel");
+      TQString tempFile = TQString::tqfromLatin1("host/bg_panel");
       if (TQFile::exists(tempFile + altString + "." + (*format)))
         directory.rename(tempFile + altString + "." + (*format), "host/bg_meter"
            + altString + "." + (*format));
 
       // move decal_net_leds* to the net folder to be more consistant
-      tempFile = TQString::fromLatin1("decal_net_leds");
+      tempFile = TQString::tqfromLatin1("decal_net_leds");
       if (TQFile::exists(tempFile + altString + "." + (*format))) {
         if (KStandardDirs::makeDir(url + "net"))
           directory.rename(tempFile + altString + "." + (*format),
@@ -1159,7 +1159,7 @@ int KSim::ThemeLoader::currentAlternative()
 TQString KSim::ThemeLoader::alternativeAsString(int alt)
 {
   int alternative = (alt == -1 ? currentAlternative() : alt);
-  return (alternative == 0 ? TQString::null : TQString::fromLatin1("_")
+  return (alternative == 0 ? TQString() : TQString::tqfromLatin1("_")
      + TQString::number(alternative));
 }
 
@@ -1225,7 +1225,7 @@ KSim::ThemeLoader::ThemeLoader()
 
   m_theme.create(d->fileNames, d->imageTypes, d->globalReader);
 
-  TQString fileName = TQString::fromLatin1("gkrellmrc") + alternativeAsString();
+  TQString fileName = TQString::tqfromLatin1("gkrellmrc") + alternativeAsString();
   m_theme.init(currentUrl(), fileName, currentAlternative());
 
   reColourItems();

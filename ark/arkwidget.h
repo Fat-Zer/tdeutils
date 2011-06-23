@@ -56,11 +56,12 @@ class FileListView;
 class SearchBar;
 
 
-class ArkWidget : public QVBox
+class ArkWidget : public TQVBox
 {
     Q_OBJECT
+  TQ_OBJECT
 public:
-    ArkWidget( TQWidget *parent=0, const char *name=0 );
+    ArkWidget( TQWidget *tqparent=0, const char *name=0 );
     virtual ~ArkWidget();
 
     bool isArchiveOpen() const { return m_bIsArchiveOpen; }
@@ -75,7 +76,7 @@ public:
     const KURL& realURL() const { return m_realURL; }
     void setRealURL( const KURL& url ) { m_realURL = url; }
 
-    TQString tmpDir() const { return m_tmpDir ? m_tmpDir->name() : TQString::null; }
+    TQString tmpDir() const { return m_tmpDir ? m_tmpDir->name() : TQString(); }
 
     FileListView * fileList() const { return m_fileListView; }
     SearchBar    * searchBar() const { return m_searchBar; }
@@ -181,9 +182,9 @@ private: // methods
     void createRealArchive( const TQString &strFilename,
                             const TQStringList & filesToAdd = TQStringList() );
     KURL getCreateFilename( const TQString & _caption,
-                            const TQString & _defaultMimeType = TQString::null,
+                            const TQString & _defaultMimeType = TQString(),
                             bool allowCompressed = true,
-                            const TQString & _suggestedName = TQString::null );
+                            const TQString & _suggestedName = TQString() );
 
     bool reportExtractFailures(const TQString & _dest, TQStringList *_list);
     TQStringList existingFiles( const TQString & _dest, TQStringList & _list );

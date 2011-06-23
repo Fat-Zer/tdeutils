@@ -31,11 +31,11 @@
 #include <tqpushbutton.h>
 
 
-CExportDialog::CExportDialog( TQWidget *parent, char *name, bool modal )
+CExportDialog::CExportDialog( TQWidget *tqparent, char *name, bool modal )
   :KDialogBase( Tabbed, i18n("Export Document"), Help|Ok|Cancel, Ok,
-		parent, name,  modal )
+		tqparent, name,  modal )
 {
-  setHelp( "khexedit/khexedit.html", TQString::null );
+  setHelp( "khexedit/khexedit.html", TQString() );
 
   mFrame[ page_destination ] = addPage( i18n("Destination") );
   mFrame[ page_option ] = addPage( i18n("Options") );
@@ -47,7 +47,7 @@ CExportDialog::CExportDialog( TQWidget *parent, char *name, bool modal )
   readConfiguration();
 
   TQString path = mDestination.fileInput->text();
-  int index = path.findRev( '/' );
+  int index = path.tqfindRev( '/' );
   if( index != -1 ) { mWorkDir = path.left( index+1 ); }
 }
 
@@ -109,8 +109,8 @@ void CExportDialog::readConfiguration( void )
     }
   }
   val = mConfig->readNumEntry( "ArrayElementPerLine", 20 );
-  val = QMAX( val, mArray.lineSizeSpin->minValue() );  
-  val = QMIN( val, mArray.lineSizeSpin->maxValue() );
+  val = TQMAX( val, mArray.lineSizeSpin->minValue() );  
+  val = TQMIN( val, mArray.lineSizeSpin->maxValue() );
   mArray.lineSizeSpin->setValue( val );
   state = mConfig->readBoolEntry( "ArrayUnsignedAsHex", true );
   mArray.hexadecimalCheck->setChecked( state );
@@ -208,17 +208,17 @@ void CExportDialog::setupDestinationPage( void )
   vbox->addSpacing( fontMetrics().lineSpacing() );
   
   TQRadioButton *radio1 = new TQRadioButton( i18n("&Everything"), group );
-  radio1->setFixedSize( radio1->sizeHint() );
+  radio1->setFixedSize( radio1->tqsizeHint() );
   mDestination.rangeBox->insert( radio1, 0 );
   vbox->addWidget( radio1, 0, AlignLeft );
 
   TQRadioButton *radio2 = new TQRadioButton( i18n("&Selection"), group );
-  radio2->setFixedSize( radio2->sizeHint() );
+  radio2->setFixedSize( radio2->tqsizeHint() );
   mDestination.rangeBox->insert( radio2, 1 );
   vbox->addWidget( radio2, 0, AlignLeft );
 
   TQRadioButton *radio3 = new TQRadioButton( i18n("&Range"), group );
-  radio3->setFixedSize( radio3->sizeHint() );
+  radio3->setFixedSize( radio3->tqsizeHint() );
   mDestination.rangeBox->insert( radio3, 2 );
   vbox->addWidget( radio3, 0, AlignLeft );
 
@@ -264,7 +264,7 @@ void CExportDialog::setupOptionPage( void )
   makeCArrayOption();
   mOptionStack->raiseWidget( (int)option_text );
 
-  TQSize size = mOptionStack->sizeHint();
+  TQSize size = mOptionStack->tqsizeHint();
   size += TQSize(spacingHint()*2, spacingHint()*2);
   page->setMinimumSize( size ); 
 }
@@ -462,11 +462,11 @@ void CExportDialog::browserClicked( void )
   TQString url;
   if( mDestination.formatCombo->currentItem() == option_html )
   {
-    url = KFileDialog::getExistingDirectory( mWorkDir, topLevelWidget() );
+    url = KFileDialog::getExistingDirectory( mWorkDir, tqtopLevelWidget() );
   }
   else
   {
-    url = KFileDialog::getSaveFileName( mWorkDir, "*", topLevelWidget() );
+    url = KFileDialog::getSaveFileName( mWorkDir, "*", tqtopLevelWidget() );
   }
 
   if( url.isEmpty() )
@@ -474,7 +474,7 @@ void CExportDialog::browserClicked( void )
     return;
   }
   
-  int index = url.findRev( '/' );
+  int index = url.tqfindRev( '/' );
   if( index != -1 ) 
   { 
     mWorkDir = url.left( index+1 ); 
@@ -673,14 +673,14 @@ bool CExportDialog::verifyPackage( const TQString &path )
       }
 
       const TQString prefix = mHtml.prefixInput->text();
-      TQString f1 = TQString("%1%2.html").arg(prefix).arg("00000000");
-      TQString f2 = TQString("%1%2.html").arg(prefix).arg("99999999");
+      TQString f1 = TQString("%1%2.html").tqarg(prefix).tqarg("00000000");
+      TQString f2 = TQString("%1%2.html").tqarg(prefix).tqarg("99999999");
 
       TQString msg = i18n( ""
         "You have specified an existing folder.\n"
 	"If you continue, any existing file in the range "
 	"\"%1\" to \"%2\" can be lost.\n"
-	"Continue?").arg(f1).arg(f2);
+	"Continue?").tqarg(f1).tqarg(f2);
       int reply = KMessageBox::warningContinueCancel( this, msg, title );
       if( reply != KMessageBox::Continue )
       {

@@ -29,7 +29,7 @@
 #include <tqcursor.h>
 #include <tqapplication.h>
 // kde specific
-#ifndef QT_ONLY
+#ifndef TQT_ONLY
 #include <kglobalsettings.h>
 #endif
 // lib specific
@@ -78,7 +78,7 @@ KHexEdit::KHexEdit( KDataBuffer *Buffer, TQWidget *Parent, const char *Name, WFl
    TrippleClickTimer( new TQTimer(this) ),
    CursorPixmaps( new KCursor() ),
    Codec( 0 ),
-   ClipboardMode( QClipboard::Clipboard ),
+   ClipboardMode( TQClipboard::Clipboard ),
    ResizeStyle( DefaultResizeStyle ),
    Encoding( MaxEncodingId ), // forces update
    ReadOnly( false ),
@@ -94,7 +94,7 @@ KHexEdit::KHexEdit( KDataBuffer *Buffer, TQWidget *Parent, const char *Name, WFl
    InZooming( false ),
    d( 0 )
 {
-  // initalize layout
+  // initalize tqlayout
   if( DataBuffer )
     BufferLayout->setLength( DataBuffer->size() );
   BufferLayout->setNoOfLinesPerPage( noOfLinesPerPage() );
@@ -123,7 +123,7 @@ KHexEdit::KHexEdit( KDataBuffer *Buffer, TQWidget *Parent, const char *Name, WFl
 
   Controller = Navigator;
 
-#ifdef QT_ONLY
+#ifdef TQT_ONLY
   TQFont FixedFont( "fixed", 10 );
   FixedFont.setFixedPitch( true );
   setFont( FixedFont );
@@ -133,7 +133,7 @@ KHexEdit::KHexEdit( KDataBuffer *Buffer, TQWidget *Parent, const char *Name, WFl
 
   // get the full control
   viewport()->setFocusProxy( this );
-  viewport()->setFocusPolicy( WheelFocus );
+  viewport()->setFocusPolicy( TQ_WheelFocus );
 
   viewport()->installEventFilter( this );
   installEventFilter( this );
@@ -199,7 +199,7 @@ void KHexEdit::setOverwriteMode( bool OM )
   OverWrite = OM;
 
   // affected:
-  // cursor shape
+  // cursor tqshape
   bool ChangeCursor = !( CursorPaused || ValueEditor->isInEditMode() );
   if( ChangeCursor )
     pauseCursor();
@@ -478,7 +478,7 @@ void KHexEdit::zoomOut( int PointDec )
 {
   InZooming = true;
   TQFont F( font() );
-  F.setPointSize( QMAX( 1, TQFontInfo(F).pointSize() - PointDec ) );
+  F.setPointSize( TQMAX( 1, TQFontInfo(F).pointSize() - PointDec ) );
   setFont( F );
   InZooming = false;
 }
@@ -548,17 +548,17 @@ void KHexEdit::toggleOffsetColumn( bool Visible )
 }
 
 
-TQSize KHexEdit::sizeHint() const
+TQSize KHexEdit::tqsizeHint() const
 {
   return TQSize( totalWidth(), totalHeight() );
 }
 
 
-TQSize KHexEdit::minimumSizeHint() const
+TQSize KHexEdit::tqminimumSizeHint() const
 {
   // TODO: better minimal width (visibility!)
   return TQSize( OffsetColumn->visibleWidth()+FirstBorderColumn->visibleWidth()+SecondBorderColumn->visibleWidth()+valueColumn().byteWidth()+charColumn().byteWidth(),
-                lineHeight() + noOfLines()>1? style().pixelMetric(TQStyle::PM_ScrollBarExtent):0 );
+                lineHeight() + noOfLines()>1? tqstyle().tqpixelMetric(TQStyle::PM_ScrollBarExtent):0 );
 }
 
 
@@ -598,7 +598,7 @@ int KHexEdit::fittingBytesPerLine( const TQSize &NewSize ) const
 
   // check influence of dis-/appearing of the vertical scrollbar
   bool VerticalScrollbarIsVisible = verticalScrollBar()->isVisible();
-  KPixelX ScrollbarExtent = style().pixelMetric( TQStyle::PM_ScrollBarExtent );//verticalScrollBar()->width();
+  KPixelX ScrollbarExtent = tqstyle().tqpixelMetric( TQStyle::PM_ScrollBarExtent );//verticalScrollBar()->width();
 
   KPixelX AvailableWidth = FullWidth;
   if( VerticalScrollbarIsVisible )
@@ -737,7 +737,7 @@ bool KHexEdit::selectWord( /*unsigned TODO:change all unneeded signed into unsig
 
       BufferRanges->setFirstWordSelection( WordSection );
       BufferCursor->gotoIndex( WordSection.end()+1 );
-      repaintChanged();
+      tqrepaintChanged();
 
       unpauseCursor();
       return true;
@@ -757,7 +757,7 @@ void KHexEdit::select( KSection Section )
 
   BufferRanges->setSelection( Section );
   BufferCursor->gotoIndex( Section.end()+1 );
-  repaintChanged();
+  tqrepaintChanged();
 
   unpauseCursor();
 
@@ -781,7 +781,7 @@ void KHexEdit::selectAll( bool Select )
     BufferCursor->gotoEnd();
   }
 
-  repaintChanged();
+  tqrepaintChanged();
 
   unpauseCursor();
 
@@ -850,7 +850,7 @@ void KHexEdit::cut()
   if( !Drag )
     return;
 
-  TQApplication::clipboard()->setData( Drag, ClipboardMode );
+  TQApplication::tqclipboard()->setData( Drag, ClipboardMode );
 
   removeSelectedData();
 }
@@ -862,7 +862,7 @@ void KHexEdit::copy()
   if( !Drag )
     return;
 
-  TQApplication::clipboard()->setData( Drag, ClipboardMode );
+  TQApplication::tqclipboard()->setData( Drag, ClipboardMode );
 }
 
 
@@ -871,7 +871,7 @@ void KHexEdit::paste()
   if( isReadOnly() )
     return;
 
-  TQMimeSource *Source = TQApplication::clipboard()->data( ClipboardMode );
+  TQMimeSource *Source = TQApplication::tqclipboard()->data( ClipboardMode );
   pasteFromSource( Source );
 }
 
@@ -904,7 +904,7 @@ void KHexEdit::insert( const TQByteArray &D )
       // we restrict the replacement to the minimum length of selection and input
       ChangedRange = BufferRanges->selection();
       ChangedRange.restrictEndTo( ChangedRange.start()+D.size()-1 );
-      int W = DataBuffer->replace( ChangedRange, D.data(), ChangedRange.width() );
+      int W = DataBuffer->tqreplace( ChangedRange, D.data(), ChangedRange.width() );
       BufferCursor->gotoCIndex( ChangedRange.start()+W );
       BufferRanges->removeSelection();
     }
@@ -917,7 +917,7 @@ void KHexEdit::insert( const TQByteArray &D )
         ChangedRange.restrictEndTo( BufferLayout->length()-1 );
         if( ChangedRange.isValid() )
         {
-          int W = DataBuffer->replace( ChangedRange, D.data(), ChangedRange.width() );
+          int W = DataBuffer->tqreplace( ChangedRange, D.data(), ChangedRange.width() );
           BufferCursor->gotoNextByte( W );
         }
       }
@@ -930,7 +930,7 @@ void KHexEdit::insert( const TQByteArray &D )
       // replacing the selection
       KSection Selection = BufferRanges->selection();
       int OldLastIndex = BufferLayout->length() - 1;
-      int W = DataBuffer->replace( Selection, D.data(), D.size() );
+      int W = DataBuffer->tqreplace( Selection, D.data(), D.size() );
       updateLength();
       BufferCursor->gotoIndex( Selection.start() + W );
       if( W > 0 )
@@ -967,7 +967,7 @@ void KHexEdit::insert( const TQByteArray &D )
   if( Changed )
   {
     BufferRanges->addChangedRange( ChangedRange );
-    repaintChanged();
+    tqrepaintChanged();
   }
   ensureCursorVisible();
 
@@ -994,7 +994,7 @@ void KHexEdit::removeSelectedData()
   KSection ChangedRange = removeData( Selection );
   BufferRanges->removeSelection();
 
-  repaintChanged();
+  tqrepaintChanged();
 
   BufferCursor->gotoCIndex( Selection.start() );
 
@@ -1017,7 +1017,7 @@ KSection KHexEdit::removeData( KSection Indizes )
 //     if( !undoRedoInfo.valid() )
 //     {
 //       doc->selectionStart( selNum, undoRedoInfo.id, undoRedoInfo.index );
-//       undoRedoInfo.d->text = TQString::null;
+//       undoRedoInfo.d->text = TQString();
 //     }
 //     readFormats( c1, c2, undoRedoInfo.d->text, TRUE );
 //   }
@@ -1042,7 +1042,7 @@ void KHexEdit::updateLength()
 void KHexEdit::clipboardChanged()
 {
   // don't listen to selection changes
-  disconnect( TQApplication::clipboard(), TQT_SIGNAL(selectionChanged()), this, 0 );
+  disconnect( TQApplication::tqclipboard(), TQT_SIGNAL(selectionChanged()), this, 0 );
   selectAll( false );
 }
 
@@ -1059,7 +1059,7 @@ void KHexEdit::setCursorPosition( int Index, bool Behind )
   bool RangesModifed = BufferRanges->isModified();
   if( RangesModifed )
   {
-    repaintChanged();
+    tqrepaintChanged();
 
     viewport()->setCursor( isReadOnly() ? arrowCursor : ibeamCursor );
 
@@ -1178,7 +1178,7 @@ void KHexEdit::showEvent( TQShowEvent *e )
 
 bool KHexEdit::eventFilter( TQObject *O, TQEvent *E )
 {
-  if( O == this || O == viewport() )
+  if( TQT_BASE_OBJECT(O) == TQT_BASE_OBJECT(this) || TQT_BASE_OBJECT(O) == TQT_BASE_OBJECT(viewport()) )
   {
     if( E->type() == TQEvent::FocusIn )
     {
@@ -1192,16 +1192,16 @@ bool KHexEdit::eventFilter( TQObject *O, TQEvent *E )
 
 //   if( O == this && E->type() == TQEvent::PaletteChange )
 //   {
-//     TQColor old( viewport()->colorGroup().color(TQColorGroup::Text) );
+//     TQColor old( viewport()->tqcolorGroup().color(TQColorGroup::Text) );
 //
-//     if( old != colorGroup().color(TQColorGroup::Text) )
+//     if( old != tqcolorGroup().color(TQColorGroup::Text) )
 //     {
-//       TQColor c( colorGroup().color(TQColorGroup::Text) );
+//       TQColor c( tqcolorGroup().color(TQColorGroup::Text) );
 //       doc->setMinimumWidth( -1 );
 //       doc->setDefaultFormat( doc->formatCollection()->defaultFormat()->font(), c );
 //       lastFormatted = doc->firstParagraph();
 //       formatMore();
-//       repaintChanged();
+//       tqrepaintChanged();
 //     }
 //   }
 
@@ -1275,20 +1275,20 @@ void KHexEdit::createCursorPixmaps()
   int Index = BufferCursor->validIndex();
 
   TQPainter Paint;
-  Paint.begin( &CursorPixmaps->offPixmap(), this );
+  Paint.tqbegin( const_cast<TQPixmap*>(&CursorPixmaps->offPixmap()), this );
   activeColumn().paintByte( &Paint, Index );
   Paint.end();
 
-  Paint.begin( &CursorPixmaps->onPixmap(), this );
+  Paint.tqbegin( const_cast<TQPixmap*>(&CursorPixmaps->onPixmap()), this );
   activeColumn().paintCursor( &Paint, Index );
   Paint.end();
 
-  // calculat the shape
+  // calculat the tqshape
   KPixelX CursorX;
   KPixelX CursorW;
   if( BufferCursor->isBehind() )
   {
-    CursorX = QMAX( 0, CursorPixmaps->onPixmap().width()-InsertCursorWidth );
+    CursorX = TQMAX( 0, CursorPixmaps->onPixmap().width()-InsertCursorWidth );
     CursorW = InsertCursorWidth;
   }
   else
@@ -1397,12 +1397,12 @@ void KHexEdit::keyPressEvent( TQKeyEvent *KeyEvent )
 }
 
 
-void KHexEdit::repaintChanged()
+void KHexEdit::tqrepaintChanged()
 {
   if( !isUpdatesEnabled() || !viewport()->isUpdatesEnabled() || !BufferRanges->isModified() )
     return;
 
-  // TODO: we do this only to let the scrollview handle new or removed lines. overlaps with repaintRange
+  // TODO: we do this only to let the scrollview handle new or removed lines. overlaps with tqrepaintRange
   resizeContents( totalWidth(), totalHeight() );
 
   KPixelXs Xs( contentsX(), visibleWidth(), true );
@@ -1498,7 +1498,7 @@ void KHexEdit::paintLine( KBufferColumn *C, int Line, KSection Positions )
 
   // to avoid flickers we first paint to the linebuffer
   TQPainter Paint;
-  Paint.begin( &LineBuffer, this );
+  Paint.tqbegin( &LineBuffer, this );
 
   Paint.translate( C->x(), 0 );
   C->paintPositions( &Paint, Line, Positions );
@@ -1548,7 +1548,7 @@ void KHexEdit::contentsMousePressEvent( TQMouseEvent *e )
   pauseCursor( true );
 
   // care about a left button press?
-  if( e->button() == LeftButton )
+  if( e->button() == Qt::LeftButton )
   {
     MousePressed = true;
 
@@ -1559,7 +1559,7 @@ void KHexEdit::contentsMousePressEvent( TQMouseEvent *e )
       BufferRanges->setSelectionStart( BufferLayout->indexAtLineStart(DoubleClickLine) );
       BufferCursor->gotoLineEnd();
       BufferRanges->setSelectionEnd( BufferCursor->realIndex() );
-      repaintChanged();
+      tqrepaintChanged();
 
       unpauseCursor();
       return;
@@ -1601,12 +1601,12 @@ void KHexEdit::contentsMousePressEvent( TQMouseEvent *e )
 
     BufferRanges->removeFurtherSelections();
   }
-  else if( e->button() == MidButton )
+  else if( e->button() == Qt::MidButton )
     BufferRanges->removeSelection();
 
   if( BufferRanges->isModified() )
   {
-    repaintChanged();
+    tqrepaintChanged();
     viewport()->setCursor( isReadOnly() ? arrowCursor : ibeamCursor );
   }
 
@@ -1671,20 +1671,20 @@ void KHexEdit::contentsMouseReleaseEvent( TQMouseEvent *e )
     // was end of selection operation?
     else if( BufferRanges->hasSelection() )
     {
-      if( TQApplication::clipboard()->supportsSelection() )
+      if( TQApplication::tqclipboard()->supportsSelection() )
       {
-        ClipboardMode = QClipboard::Selection;
-        disconnect( TQApplication::clipboard(), TQT_SIGNAL(selectionChanged()), this, 0);
+        ClipboardMode = TQClipboard::Selection;
+        disconnect( TQApplication::tqclipboard(), TQT_SIGNAL(selectionChanged()), this, 0);
 
         copy();
 
-        connect( TQApplication::clipboard(), TQT_SIGNAL(selectionChanged()), this, TQT_SLOT(clipboardChanged()) );
-        ClipboardMode = QClipboard::Clipboard;
+        connect( TQApplication::tqclipboard(), TQT_SIGNAL(selectionChanged()), this, TQT_SLOT(clipboardChanged()) );
+        ClipboardMode = TQClipboard::Clipboard;
       }
     }
   }
   // middle mouse button paste?
-  else if( e->button() == MidButton && !isReadOnly() )
+  else if( e->button() == Qt::MidButton && !isReadOnly() )
   {
     pauseCursor();
 
@@ -1694,12 +1694,12 @@ void KHexEdit::contentsMouseReleaseEvent( TQMouseEvent *e )
     if( BufferRanges->hasSelection() && !BufferRanges->selectionIncludes(BufferCursor->index()) )
       BufferRanges->removeSelection();
 
-    ClipboardMode = QClipboard::Selection;
+    ClipboardMode = TQClipboard::Selection;
     paste();
-    ClipboardMode = QClipboard::Clipboard;
+    ClipboardMode = TQClipboard::Clipboard;
 
     // ensure selection changes to be drawn TODO: create a insert/pasteAtCursor that leaves out drawing
-    repaintChanged();
+    tqrepaintChanged();
 
     ensureCursorVisible();
     unpauseCursor();
@@ -1738,7 +1738,7 @@ void KHexEdit::contentsMouseDoubleClickEvent( TQMouseEvent *e )
     selectWord( Index );
 
     // as we already have a doubleclick maybe it is a tripple click
-    TrippleClickTimer->start( qApp->doubleClickInterval(), true );
+    TrippleClickTimer->start( tqApp->doubleClickInterval(), true );
     DoubleClickPoint = e->globalPos();
   }
 //  else
@@ -1803,7 +1803,7 @@ void KHexEdit::handleMouseMove( const TQPoint& Point ) // handles the move of th
   if( BufferRanges->selectionStarted() )
     BufferRanges->setSelectionEnd( BufferCursor->realIndex() );
 
-  repaintChanged();
+  tqrepaintChanged();
 
   unpauseCursor();
 }
@@ -1915,7 +1915,7 @@ void KHexEdit::handleInternalDrag( TQDropEvent *e )
     if( NewIndex != Selection.start() )
     {
       BufferCursor->gotoCIndex( NewIndex+Selection.width() );
-      ChangedRange.set( QMIN(InsertIndex,Selection.start()), QMAX(InsertIndex,Selection.end()) );
+      ChangedRange.set( TQMIN(InsertIndex,Selection.start()), TQMAX(InsertIndex,Selection.end()) );
     }
   }
   // is a copy
@@ -1933,7 +1933,7 @@ void KHexEdit::handleInternalDrag( TQDropEvent *e )
           ChangedRange.restrictEndTo( BufferLayout->length()-1 );
           if( ChangedRange.isValid() )
           {
-            int NoOfReplaced = DataBuffer->replace( ChangedRange, Data.data(), ChangedRange.width() );
+            int NoOfReplaced = DataBuffer->tqreplace( ChangedRange, Data.data(), ChangedRange.width() );
             BufferCursor->gotoNextByte( NoOfReplaced );
           }
         }
@@ -1953,7 +1953,7 @@ void KHexEdit::handleInternalDrag( TQDropEvent *e )
   BufferRanges->addChangedRange( ChangedRange );
   BufferRanges->removeSelection();
 
-  repaintChanged();
+  tqrepaintChanged();
   ensureCursorVisible();
 
   // open ui
@@ -2005,15 +2005,15 @@ void KHexEdit::contentsContextMenuEvent( TQContextMenuEvent *e )
   {
     selectAll();
     // if the clipboard support selections, put the newly selected text into the clipboard
-    if( TQApplication::clipboard()->supportsSelection() )
+    if( TQApplication::tqclipboard()->supportsSelection() )
     {
-      ClipboardMode = QClipboard::Selection;
-      disconnect( TQApplication::clipboard(), TQT_SIGNAL(selectionChanged()), this, 0);
+      ClipboardMode = TQClipboard::Selection;
+      disconnect( TQApplication::tqclipboard(), TQT_SIGNAL(selectionChanged()), this, 0);
 
       copy();
 
-      connect( TQApplication::clipboard(), TQT_SIGNAL(selectionChanged()), this, TQT_SLOT(clipboardChanged()) );
-      ClipboardMode = QClipboard::Clipboard;
+      connect( TQApplication::tqclipboard(), TQT_SIGNAL(selectionChanged()), this, TQT_SLOT(clipboardChanged()) );
+      ClipboardMode = TQClipboard::Clipboard;
     }
   }
   else if( r == d->id[IdUndo] )

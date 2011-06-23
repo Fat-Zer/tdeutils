@@ -19,6 +19,7 @@
 class DiskSensor :  public Sensor
 {
 Q_OBJECT
+  TQ_OBJECT
 public:
   DiskSensor(int msec );
   ~DiskSensor();

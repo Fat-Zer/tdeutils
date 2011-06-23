@@ -48,6 +48,7 @@ class CDragLabel;
 class KHexEdit : public KMainWindow
 {
   Q_OBJECT
+  TQ_OBJECT
 
   enum StatusBarId
   {
@@ -84,10 +85,10 @@ class KHexEdit : public KMainWindow
     KAction *paste;
     KAction *selectAll;
     KAction *unselect;
-    KAction *find;
+    KAction *tqfind;
     KAction *findNext;
     KAction *findPrev;
-    KAction *replace;
+    KAction *tqreplace;
     KAction *gotoOffset;
     KAction *insertPattern;
     KAction *copyAsText;
@@ -156,7 +157,7 @@ class KHexEdit : public KMainWindow
     void operationChanged( bool state );
     void cursorChanged( SCursorState &state );
     void fileState( SFileState &state );
-    void layoutChanged( const SDisplayLayout &layout );
+    void tqlayoutChanged( const SDisplayLayout &tqlayout );
     void inputModeChanged( const SDisplayInputMode &mode );
     void bookmarkChanged( TQPtrList<SCursorOffset> &list );
     void removeRecentFile( const TQString &fileName );
@@ -248,7 +249,7 @@ protected:
 inline void KHexEdit::addStartupFile( const TQString &fileName )
 {
   mStartupFileList.prepend( fileName );
-  mStartupOffsetList.prepend( TQString("%1").arg(mStartupOffset,0,16) );
+  mStartupOffsetList.prepend( TQString("%1").tqarg(mStartupOffset,0,16) );
   mStartupOffset = 0;
 }
 

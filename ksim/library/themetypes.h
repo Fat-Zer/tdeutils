@@ -56,12 +56,12 @@ namespace KSim
     };
 
     /**
-     * @return the ThemeType enum as a QString
+     * @return the ThemeType enum as a TQString
      */
     inline TQString typeToString(int type, bool incSlash = true)
     {
       if (type == Types::None)
-        return TQString::null;
+        return TQString();
 
       // This array MUST be in the same order
       // as the ThemeType enum
@@ -74,7 +74,7 @@ namespace KSim
 
       TQString returnString;
       returnString.setLatin1(typeNames[type]);
-      return incSlash ? returnString + TQString::fromLatin1("/") : returnString;
+      return incSlash ? returnString + TQString::tqfromLatin1("/") : returnString;
     }
   }
 }

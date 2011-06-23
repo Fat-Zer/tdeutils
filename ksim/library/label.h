@@ -37,11 +37,12 @@ namespace KSim
   class KDE_EXPORT Label : public TQWidget, public KSim::Base
   {
     Q_OBJECT
+  TQ_OBJECT
     public:
       /**
        * Constructs a KSim::Label.
        *
-       * @param parent is the parent widget
+       * @param tqparent is the tqparent widget
        *
        * Example usage:
        * <pre>
@@ -50,12 +51,12 @@ namespace KSim
        * To create a KSim::Label with the normal theme look
        * @see KSim::ThemeLoader
        */
-      Label(TQWidget *parent, const char *name = 0, WFlags fl = 0);
+      Label(TQWidget *tqparent, const char *name = 0, WFlags fl = 0);
       /**
        * Constructs a KSimLabel.
        *
        * @param type is the theme type
-       * @param parent is the parent widget
+       * @param tqparent is the tqparent widget
        *
        * Example usage:
        * <pre>
@@ -65,13 +66,13 @@ namespace KSim
        * NOTE: this is the same as the KSim::Label(TQWidget *, const char *, WFlags) ctor
        * @see KSim::ThemeLoader
        */
-      Label(int type, TQWidget *parent, const char *name = 0, WFlags fl = 0);
+      Label(int type, TQWidget *tqparent, const char *name = 0, WFlags fl = 0);
       /**
        * Constructs a KSim::Label.
        *
        * @param type is the theme type
        * @param text is the default text to display
-       * @param parent is the parent widget
+       * @param tqparent is the tqparent widget
        *
        * Example usage:
        * <pre>
@@ -81,7 +82,7 @@ namespace KSim
        * @see KSim::ThemeLoader
        */
       Label(int type, const TQString &text,
-           TQWidget *parent, const char *name = 0, WFlags fl = 0);
+           TQWidget *tqparent, const char *name = 0, WFlags fl = 0);
       /**
        * destructs KSim::Label.
        */
@@ -95,7 +96,7 @@ namespace KSim
       /**
        * recreates the labels look & feel
        */
-      virtual void configureObject(bool repaintWidget = true);
+      virtual void configureObject(bool tqrepaintWidget = true);
       /**
        * sets a pixmap for the label
        */
@@ -107,11 +108,11 @@ namespace KSim
       /**
        * reimplemented for internal reasons
        */
-      virtual TQSize sizeHint() const;
+      virtual TQSize tqsizeHint() const;
       /**
        * reimplemented for internal reasons
        */
-      virtual TQSize minimumSizeHint() const;
+      virtual TQSize tqminimumSizeHint() const;
 
     public slots:
       /**
@@ -195,7 +196,7 @@ namespace KSim
        * sets the background image to be painted
        */
       void setThemePixmap(const TQString &image);
-      void relayoutLabel(const TQSize &old, bool repaint = true);
+      void retqlayoutLabel(const TQSize &old, bool tqrepaint = true);
 
     private:
       /**

@@ -23,7 +23,7 @@
 #include "ccp.h"
 #include <tqobjectlist.h>
 #include <tqpopupmenu.h>
-#ifdef QT_ONLY
+#ifdef TQT_ONLY
   #include "compat.h"
 #else
   #include <klocale.h>
@@ -32,15 +32,15 @@
 CCP::CCP(KMultiFormListBoxMultiVisible *ee_, KMultiFormListBoxEntry *eee_) : TQObject() {
   ee = ee_;
   eee = eee_;
-  install(eee);
+  install(TQT_TQOBJECT(eee));
 }
 
 void CCP::install(TQObject *elm)
 {
   elm->installEventFilter(this);
-  const TQObjectList *children = elm->children();
-  if (children) {
-    TQObjectListIt it = TQObjectListIt(*children);
+  const TQObjectList tqchildren = elm->childrenListObject();
+  if (!tqchildren.isEmpty()) {
+    TQObjectListIt it = TQObjectListIt(tqchildren);
 
     while (TQObject *child=it.current()) {
       if (child->inherits("KMultiFormListBoxMultiVisible")) {
@@ -58,7 +58,7 @@ void CCP::install(TQObject *elm)
 bool CCP::eventFilter(TQObject *, TQEvent *event)
 {
   if (event->type() != TQEvent::MouseButtonPress ||
-      ((TQMouseEvent *) event)->button() != RightButton ||
+      ((TQMouseEvent *) event)->button() != Qt::RightButton ||
       ((TQMouseEvent *) event)->state() != TQEvent::ControlButton) {
     return false;
   }

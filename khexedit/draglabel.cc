@@ -28,12 +28,12 @@
 #include "draglabel.h"
 
 
-CDragLabel::CDragLabel( TQWidget *parent )
-  : TQLabel( "draglabel", parent, "kde toolbar widget" )
+CDragLabel::CDragLabel( TQWidget *tqparent )
+  : TQLabel( "draglabel", tqparent, "kde toolbar widget" )
 {
   mValid = true;
   mDragPending = false;
-  setBackgroundMode( Qt::PaletteButton );
+  setBackgroundMode( TQt::PaletteButton );
 }
 
 
@@ -44,7 +44,7 @@ CDragLabel::~CDragLabel( void )
 
 void CDragLabel::mousePressEvent( TQMouseEvent *e )
 {
-  if( mValid == false || e->button() != LeftButton || mUrl.isEmpty() == true )
+  if( mValid == false || e->button() != Qt::LeftButton || mUrl.isEmpty() == true )
   {
     return;
   }
@@ -104,7 +104,7 @@ void CDragLabel::prepPixmap( KURLDrag &uriDrag )
   }
 
   TQString text;
-  int index = mUrl.findRev( '/', mUrl.length() );
+  int index = mUrl.tqfindRev( '/', mUrl.length() );
   if( index < 0 )
   {
     text = mUrl;
@@ -120,12 +120,12 @@ void CDragLabel::prepPixmap( KURLDrag &uriDrag )
   int h = fontMetrics().lineSpacing();
   if( pixmap()->height() > h ) { h = pixmap()->height(); }
 
-  TQBitmap mask( w, h, TRUE );
+  TQBitmap tqmask( w, h, TRUE );
   TQPixmap dragPixmap( w, h );
   dragPixmap.fill( black );
 
   TQPainter p;
-  p.begin( &mask );
+  p.begin( &tqmask );
   p.setPen( white );
   p.drawPixmap( 0, 0, mDragMask );
   p.drawText( pixmap()->width()+sep, 0, w-pixmap()->width()+sep,
@@ -136,7 +136,7 @@ void CDragLabel::prepPixmap( KURLDrag &uriDrag )
   p.drawPixmap( 0, 0, *pixmap() );
   p.end();
 
-  dragPixmap.setMask( mask );
+  dragPixmap.setMask( tqmask );
 
   TQPoint hotspot( pixmap()->width(), pixmap()->height()/2 );
   uriDrag.setPixmap( dragPixmap, hotspot );

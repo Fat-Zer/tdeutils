@@ -48,6 +48,7 @@ namespace KIO { class Job; }
 class TopLevel : public KMainWindow
 {
     Q_OBJECT
+  TQ_OBJECT
 
 public:
     enum { KEDIT_OK 		= 0,
@@ -61,7 +62,7 @@ public:
 	   OPEN_INSERT 		= 4,
 	   OPEN_NEW             = 8 };
 
-    TopLevel( TQWidget *parent=0, const char *name=0 );
+    TopLevel( TQWidget *tqparent=0, const char *name=0 );
     ~TopLevel();
 
     /**
@@ -176,7 +177,7 @@ public slots:
     void file_save_as();
     void helpselected();
     void search();
-    void replace();
+    void tqreplace();
     void search_again();
     void toggle_overwrite();
 
@@ -205,9 +206,10 @@ private slots:
 
 class SettingsDialog: public KConfigDialog {
 Q_OBJECT
+  TQ_OBJECT
 
 public:
-  SettingsDialog(TQWidget *parent, const char *name,KConfigSkeleton *config, KSpellConfig *_spellConfig);
+  SettingsDialog(TQWidget *tqparent, const char *name,KConfigSkeleton *config, KSpellConfig *_spellConfig);
   
 protected slots:
   void updateSettings();

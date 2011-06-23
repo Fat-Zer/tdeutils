@@ -41,8 +41,8 @@
 DefaultSkin::DefaultSkin() {
 	connect(&_timer, TQT_SIGNAL(timeout()), this, TQT_SLOT(timeout()));
 
-	_widget = new DefaultWidget(0, "Screen Indicator", Qt::WX11BypassWM);
-	_widget->setFocusPolicy(TQWidget::NoFocus);
+	_widget = new DefaultWidget(0, "Screen Indicator", TQt::WX11BypassWM);
+	_widget->setFocusPolicy(TQ_NoFocus);
 
 	KWin::setOnAllDesktops(_widget->winId(), true);
 	KWin::setState( _widget->winId(), NET::StaysOnTop | NET::Sticky
@@ -100,10 +100,10 @@ void DefaultSkin::show() {
 #if KDE_IS_VERSION(3,1,90)
 	TQRect r =  KGlobalSettings::splashScreenDesktopGeometry();
 #else
-	TQRect r = TQApplication::desktop()->geometry();
+	TQRect r = TQApplication::desktop()->tqgeometry();
 #endif
-	//	_label->resize(_label->minimumSizeHint());
-	//	_widget->resize(_label->minimumSizeHint());
+	//	_label->resize(_label->tqminimumSizeHint());
+	//	_widget->resize(_label->tqminimumSizeHint());
 	_widget->move(r.center() -
 			TQPoint(_widget->width()/2, _widget->height()/2));
 	_widget->show();

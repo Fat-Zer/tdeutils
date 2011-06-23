@@ -3,7 +3,7 @@
  *
  * Copyright (c) 1999 Paul Campbell <paul@taniwha.com>
  *
- * Requires the Qt widget libraries, available at no cost at
+ * Requires the TQt widget libraries, available at no cost at
  * http://www.troll.no/
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -37,8 +37,8 @@
 #include "portable.h"
 #include "version.h"
 
-PcmciaConfig::PcmciaConfig (TQWidget * parent, const char *name)
-  : KCModule(parent, name)
+PcmciaConfig::PcmciaConfig (TQWidget * tqparent, const char *name)
+  : KCModule(tqparent, name)
 {
        KAboutData *about =
        new KAboutData(I18N_NOOP("kcmlaptop"),
@@ -84,7 +84,7 @@ PcmciaConfig::PcmciaConfig (TQWidget * parent, const char *name)
         TQString s1 = LAPTOP_VERSION;
         TQString s2 = i18n("Version: ")+s1;
         TQLabel* vers = new TQLabel(s2, this);
-        vers->setMinimumSize(vers->sizeHint());
+        vers->setMinimumSize(vers->tqsizeHint());
         v1->addWidget(vers, 0);
 
         top_layout->activate();          

@@ -143,7 +143,7 @@ Bool XNVCTRLIsNvScreen (
 void XNVCTRLSetAttribute (
     Display *dpy,
     int screen,
-    unsigned int display_mask,
+    unsigned int display_tqmask,
     unsigned int attribute,
     int value
 ){
@@ -157,7 +157,7 @@ void XNVCTRLSetAttribute (
     req->reqType = info->codes->major_opcode;
     req->nvReqType = X_nvCtrlSetAttribute;
     req->screen = screen;
-    req->display_mask = display_mask;
+    req->display_tqmask = display_tqmask;
     req->attribute = attribute;
     req->value = value;
     UnlockDisplay (dpy);
@@ -168,7 +168,7 @@ void XNVCTRLSetAttribute (
 Bool XNVCTRLQueryAttribute (
     Display *dpy,
     int screen,
-    unsigned int display_mask,
+    unsigned int display_tqmask,
     unsigned int attribute,
     int *value
 ){
@@ -187,7 +187,7 @@ Bool XNVCTRLQueryAttribute (
     req->reqType = info->codes->major_opcode;
     req->nvReqType = X_nvCtrlQueryAttribute;
     req->screen = screen;
-    req->display_mask = display_mask;
+    req->display_tqmask = display_tqmask;
     req->attribute = attribute;
     if (!_XReply (dpy, (xReply *) &rep, 0, xTrue)) {
         UnlockDisplay (dpy);
@@ -205,7 +205,7 @@ Bool XNVCTRLQueryAttribute (
 Bool XNVCTRLQueryStringAttribute (
     Display *dpy,
     int screen,
-    unsigned int display_mask,
+    unsigned int display_tqmask,
     unsigned int attribute,
     char **ptr
 ){
@@ -227,7 +227,7 @@ Bool XNVCTRLQueryStringAttribute (
     req->reqType = info->codes->major_opcode;
     req->nvReqType = X_nvCtrlQueryStringAttribute;
     req->screen = screen;
-    req->display_mask = display_mask;
+    req->display_tqmask = display_tqmask;
     req->attribute = attribute;
     if (!_XReply (dpy, (xReply *) &rep, 0, False)) {
         UnlockDisplay (dpy);
@@ -256,7 +256,7 @@ Bool XNVCTRLQueryStringAttribute (
 Bool XNVCTRLQueryValidAttributeValues (
     Display *dpy,
     int screen,
-    unsigned int display_mask,
+    unsigned int display_tqmask,
     unsigned int attribute,                                 
     NVCTRLAttributeValidValuesRec *values
 ){
@@ -277,7 +277,7 @@ Bool XNVCTRLQueryValidAttributeValues (
     req->reqType = info->codes->major_opcode;
     req->nvReqType = X_nvCtrlQueryValidAttributeValues;
     req->screen = screen;
-    req->display_mask = display_mask;
+    req->display_tqmask = display_tqmask;
     req->attribute = attribute;
     if (!_XReply (dpy, (xReply *) &rep, 0, xTrue)) {
         UnlockDisplay (dpy);
@@ -343,8 +343,8 @@ static Bool wire_to_event (Display *dpy, XEvent *host, xEvent *wire)
         re->attribute_changed.display = dpy;
         re->attribute_changed.time = event->u.attribute_changed.time;
         re->attribute_changed.screen = event->u.attribute_changed.screen;
-        re->attribute_changed.display_mask =
-            event->u.attribute_changed.display_mask;
+        re->attribute_changed.display_tqmask =
+            event->u.attribute_changed.display_tqmask;
         re->attribute_changed.attribute = event->u.attribute_changed.attribute;
         re->attribute_changed.value = event->u.attribute_changed.value;
         break;

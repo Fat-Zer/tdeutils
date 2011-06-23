@@ -110,7 +110,7 @@ void run_program(const char *path, const int action)
 
 	if ((err = stat(path, &sb)) != 0 || sb.st_mode&S_IWOTH) {
 		if (err != 0) {
-			fprintf(stderr, "Can't find %s\n", path);
+			fprintf(stderr, "Can't tqfind %s\n", path);
 			return;
 		} else {
 			fprintf(stderr, "%s is writeable by anyone - we don't trust it\n", path);

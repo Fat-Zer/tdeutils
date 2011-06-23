@@ -79,7 +79,7 @@ ValueImpl::ValueImpl( variable_list *var )
             }
        case ASN_COUNTER64: {
                 type = Value::Counter64;
-                ctr64 = ( ( ( Q_UINT64 )var->val.counter64->high ) << 32 ) | ( var->val.counter64->low );
+                ctr64 = ( ( ( TQ_UINT64 )var->val.counter64->high ) << 32 ) | ( var->val.counter64->low );
                 break;
             }
         case ASN_TIMETICKS: {
@@ -176,7 +176,7 @@ Value::Value( const TQHostAddress &address )
     d->addr = address;
 }
 
-Value::Value( Q_UINT64 counter )
+Value::Value( TQ_UINT64 counter )
 {
     d = new ValueImpl;
     d->type = Counter64;
@@ -273,7 +273,7 @@ int Value::toTimeTicks() const
     return toInt();
 }
 
-Q_UINT64 Value::toCounter64() const
+TQ_UINT64 Value::toCounter64() const
 {
     assert( d->type == Counter64 );
     return d->ctr64;
@@ -294,13 +294,13 @@ TQString Value::toString( int conversionFlags ) const
         case Value::TimeTicks: return formatTimeTicks( toTimeTicks(), conversionFlags );
         // not using i18n here, because it may be called from within a worker thread, and I'm
         // not sure it makes sense to translate it anyway
-        case Value::NoSuchObject: return TQString::fromLatin1( "No Such Object" );
-        case Value::NoSuchInstance: return TQString::fromLatin1( "No Such Instance" );
-        case Value::EndOfMIBView: return TQString::fromLatin1( "End Of MIB View" );
+        case Value::NoSuchObject: return TQString::tqfromLatin1( "No Such Object" );
+        case Value::NoSuchInstance: return TQString::tqfromLatin1( "No Such Instance" );
+        case Value::EndOfMIBView: return TQString::tqfromLatin1( "End Of MIB View" );
         case Value::Invalid:
-        case Value::Null: return TQString::null;
+        case Value::Null: return TQString();
     }
-    return TQString::null;
+    return TQString();
 }
 
 TQString Value::formatTimeTicks( int ticks, int conversionFlags )
@@ -321,7 +321,7 @@ TQString Value::formatTimeTicks( int ticks, int conversionFlags )
     if ( days > 0 )
         result += TQString::number( days ) + "d:";
 
-    result += TQString::fromAscii( "%1h:%2m" ).arg( hours ).arg( minutes );
+    result += TQString(TQString::fromAscii( "%1h:%2m" )).tqarg( hours ).tqarg( minutes );
 
     if ( conversionFlags & TimeTicksWithSeconds )
         result += ":" + TQString::number( seconds ) + "s";

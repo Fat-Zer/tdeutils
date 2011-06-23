@@ -21,7 +21,7 @@
 
 using namespace KHE;
 
-static Q_UINT16 UnicodeChars[256] =
+static TQ_UINT16 UnicodeChars[256] =
 {
   0x0000, 0x0001, 0x0002, 0x0003, 0x009C, 0x0009, 0x0086, 0x007F,
   0x0097, 0x008D, 0x008E, 0x000B, 0x000C, 0x000D, 0x000E, 0x000F,
@@ -98,7 +98,7 @@ static const char KEBCDIC1047CharCodecName[] = "EBCDIC 1047";
 
 bool KEBCDIC1047CharCodec::encode( char *D, const TQChar &C ) const
 {
-  int I = C.unicode();
+  int I = C.tqunicode();
   // not in range?
   if( 0x00FF < I )
     return false;
@@ -119,6 +119,6 @@ const TQString& KEBCDIC1047CharCodec::name() const
 
 const TQString& KEBCDIC1047CharCodec::codecName()
 {
-  static const TQString Name( TQString::fromLatin1(KEBCDIC1047CharCodecName) );
+  static const TQString Name( TQString::tqfromLatin1(KEBCDIC1047CharCodecName) );
   return Name;
 }

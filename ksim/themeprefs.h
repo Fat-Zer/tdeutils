@@ -73,11 +73,12 @@ namespace KSim
 
   typedef TQValueList<ThemeInfo> ThemeInfoList;
 
-  class ThemePrefs : public QWidget
+  class ThemePrefs : public TQWidget
   {
     Q_OBJECT
+  TQ_OBJECT
     public:
-      ThemePrefs(TQWidget *parent, const char *name=0);
+      ThemePrefs(TQWidget *tqparent, const char *name=0);
       ~ThemePrefs();
 
     public slots:

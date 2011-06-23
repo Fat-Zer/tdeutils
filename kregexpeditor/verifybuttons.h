@@ -25,21 +25,22 @@ class TQLabel;
 class TQAction;
 class TQPopupMenu;
 
-class VerifyButtons :public QDockWindow
+class VerifyButtons :public TQDockWindow
 {
     Q_OBJECT
+  TQ_OBJECT
 
 public:
-    VerifyButtons( TQWidget* parent, const char* name );
+    VerifyButtons( TQWidget* tqparent, const char* name );
     RegExpConverter* setSyntax( const TQString& );
-    void setAllowNonQtSyntax( bool );
+    void setAllowNonTQtSyntax( bool );
 
 signals:
     void verify();
     void autoVerify( bool );
     void loadVerifyText( const TQString& );
 
-    // Qt anchors do not work for <pre>...</pre>, thefore scrolling to next/prev match
+    // TQt anchors do not work for <pre>...</pre>, thefore scrolling to next/prev match
     // do not work. Enable this when they work.
     // void gotoFirst();
     // void gotoPrev();
@@ -65,14 +66,14 @@ private:
     TQPopupMenu* _configMenu;
     int _languageId;
 
-    // Qt anchors do not work for <pre>...</pre>, thefore scrolling to next/prev match
+    // TQt anchors do not work for <pre>...</pre>, thefore scrolling to next/prev match
     // do not work. Enable this when they work.
     // TQToolButton* _first;
     // TQToolButton* _prev;
     // TQToolButton* _next;
     // TQToolButton* _last;
 
-    TQValueList< QPair<RegExpConverter*,TQAction*> > _converters;
+    TQValueList< TQPair<RegExpConverter*,TQAction*> > _converters;
 };
 
 

@@ -83,16 +83,16 @@ void daemon_state::load()
         bool enablehibernate = config->readBoolEntry("EnableHibernate", false);
         bool enableperformance = config->readBoolEntry("EnablePerformance", false);
         bool enablethrottle = config->readBoolEntry("EnableThrottle", false);
-	laptop_portable::acpi_set_mask(enablestandby, enablesuspend, enablehibernate, enableperformance, enablethrottle);
+	laptop_portable::acpi_set_tqmask(enablestandby, enablesuspend, enablehibernate, enableperformance, enablethrottle);
 
     	config->setGroup("ApmDefault");
     	enablestandby = config->readBoolEntry("EnableStandby", false);
     	enablesuspend = config->readBoolEntry("EnableSuspend", false);
-    	laptop_portable::apm_set_mask(enablestandby, enablesuspend);
+    	laptop_portable::apm_set_tqmask(enablestandby, enablesuspend);
 
     	config->setGroup("SoftwareSuspendDefault");
     	enablehibernate = config->readBoolEntry("EnableHibernate", false);
-    	laptop_portable::software_suspend_set_mask(enablehibernate);
+    	laptop_portable::software_suspend_set_tqmask(enablehibernate);
 
 	exists = laptop_portable::has_power_management();
 	has_brightness = laptop_portable::has_brightness();

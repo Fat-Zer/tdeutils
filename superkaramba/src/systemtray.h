@@ -31,11 +31,12 @@ class KWinModule;
 typedef long unsigned int Atom;
 
 
-class Systemtray : public QWidget
+class Systemtray : public TQWidget
 {
     Q_OBJECT
+    TQ_OBJECT
 public:
-    Systemtray(TQWidget* parent);
+    Systemtray(TQWidget* tqparent);
     ~Systemtray();
     
     void updateBackgroundPixmap ( const TQPixmap & );
@@ -49,7 +50,7 @@ public slots:
     int getTraySize();
     void systemTrayWindowAdded( WId w );
     void systemTrayWindowRemoved( WId w );
-    void layoutSystray();
+    void tqlayoutSystray();
     
 signals:
     void updated();

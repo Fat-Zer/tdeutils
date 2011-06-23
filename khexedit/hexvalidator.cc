@@ -23,9 +23,9 @@
 #include <tqwidget.h>
 #include "hexvalidator.h"
 
-CHexValidator::CHexValidator( TQWidget *parent, EState state,
+CHexValidator::CHexValidator( TQWidget *tqparent, EState state,
 			      const char *name )
-  :TQValidator( parent, name )
+  :TQValidator( TQT_TQOBJECT(tqparent), name )
 {
   setState( state );
 }

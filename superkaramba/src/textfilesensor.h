@@ -37,8 +37,9 @@ class TextFileSensor : public Sensor
 {
 
 Q_OBJECT
+  TQ_OBJECT
 public:
-    TextFileSensor( const TQString &fileName, bool rdf, int interval, const TQString &encoding=TQString::null );
+    TextFileSensor( const TQString &fileName, bool rdf, int interval, const TQString &encoding=TQString() );
 
     ~TextFileSensor();
 

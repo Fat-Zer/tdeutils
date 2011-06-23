@@ -1,6 +1,6 @@
 /*
     kCalculator, a scientific calculator for the X window system using the
-    Qt widget libraries, available at no cost at http://www.troll.no
+    TQt widget libraries, available at no cost at http://www.troll.no
 
     The stack engine contained in this file was take from
     Martin Bartlett's xfrmcalc
@@ -209,7 +209,7 @@ CalcEngine::CalcEngine()
 
 	struct sigaction fpe_trap;
 
-	sigemptyset(&fpe_trap.sa_mask);
+	sigemptyset(&fpe_trap.sa_tqmask);
 	fpe_trap.sa_handler = &fpe_handler;
 #ifdef SA_RESTART
 	fpe_trap.sa_flags = SA_RESTART;

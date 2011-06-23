@@ -22,15 +22,15 @@
         <property name="name">
             <cstring>unnamed</cstring>
         </property>
-        <widget class="QLayoutWidget" row="0" column="0">
+        <widget class="TQLayoutWidget" row="0" column="0">
             <property name="name">
-                <cstring>layout2</cstring>
+                <cstring>tqlayout2</cstring>
             </property>
             <hbox>
                 <property name="name">
                     <cstring>unnamed</cstring>
                 </property>
-                <widget class="QLabel">
+                <widget class="TQLabel">
                     <property name="name">
                         <cstring>textLabel1</cstring>
                     </property>
@@ -38,7 +38,7 @@
                         <string>Filter:</string>
                     </property>
                 </widget>
-                <widget class="QLineEdit">
+                <widget class="TQLineEdit">
                     <property name="name">
                         <cstring>filter</cstring>
                     </property>
@@ -97,7 +97,7 @@
                 <bool>true</bool>
             </property>
         </widget>
-        <widget class="QLayoutWidget" row="3" column="0">
+        <widget class="TQLayoutWidget" row="3" column="0">
             <property name="name">
                 <cstring>Layout1</cstring>
             </property>
@@ -121,14 +121,14 @@
                     <property name="sizeType">
                         <enum>Expanding</enum>
                     </property>
-                    <property name="sizeHint">
+                    <property name="tqsizeHint">
                         <size>
                             <width>20</width>
                             <height>20</height>
                         </size>
                     </property>
                 </spacer>
-                <widget class="QPushButton">
+                <widget class="TQPushButton">
                     <property name="name">
                         <cstring>buttonOk</cstring>
                     </property>
@@ -142,7 +142,7 @@
                         <bool>true</bool>
                     </property>
                 </widget>
-                <widget class="QPushButton">
+                <widget class="TQPushButton">
                     <property name="name">
                         <cstring>buttonCancel</cstring>
                     </property>
@@ -155,15 +155,15 @@
                 </widget>
             </hbox>
         </widget>
-        <widget class="QLayoutWidget" row="2" column="0">
+        <widget class="TQLayoutWidget" row="2" column="0">
             <property name="name">
-                <cstring>layout4</cstring>
+                <cstring>tqlayout4</cstring>
             </property>
             <hbox>
                 <property name="name">
                     <cstring>unnamed</cstring>
                 </property>
-                <widget class="QLabel">
+                <widget class="TQLabel">
                     <property name="name">
                         <cstring>blah</cstring>
                     </property>
@@ -179,7 +179,7 @@
                         <string>Selected object:</string>
                     </property>
                 </widget>
-                <widget class="QLabel">
+                <widget class="TQLabel">
                     <property name="name">
                         <cstring>selectedObject</cstring>
                     </property>
@@ -205,7 +205,7 @@
                     <property name="sizeType">
                         <enum>Expanding</enum>
                     </property>
-                    <property name="sizeHint">
+                    <property name="tqsizeHint">
                         <size>
                             <width>71</width>
                             <height>20</height>
@@ -243,17 +243,17 @@
     </connection>
     <connection>
         <sender>browserContents</sender>
-        <signal>executed(QListViewItem*)</signal>
+        <signal>executed(TQListViewItem*)</signal>
         <receiver>MyDialog</receiver>
-        <slot>objectSelected(QListViewItem*)</slot>
+        <slot>objectSelected(TQListViewItem*)</slot>
     </connection>
 </connections>
-<slots>
+<Q_SLOTS>
     <slot access="protected">stopAllWalks()</slot>
     <slot access="protected">applyFilter()</slot>
-    <slot access="protected">objectSelected(QListViewItem *)</slot>
-</slots>
-<layoutdefaults spacing="6" margin="11"/>
+    <slot access="protected">objectSelected(TQListViewItem *)</slot>
+</Q_SLOTS>
+<tqlayoutdefaults spacing="6" margin="11"/>
 <includehints>
     <includehint>kdialog.h</includehint>
     <includehint>kpushbutton.h</includehint>

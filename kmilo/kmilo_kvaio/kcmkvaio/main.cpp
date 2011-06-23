@@ -46,8 +46,8 @@ K_EXPORT_COMPONENT_FACTORY( kcm_kvaio, KVaioModuleFactory("kcmkvaio"))
 #define CONFIG_FILE "kmilodrc"
 
 
-KVaioModule::KVaioModule(TQWidget *parent, const char *name, const TQStringList &)
-    : KCModule(KVaioModuleFactory::instance(), parent, name)
+KVaioModule::KVaioModule(TQWidget *tqparent, const char *name, const TQStringList &)
+    : KCModule(KVaioModuleFactory::instance(), tqparent, name)
 {
     KAboutData *about =
         new KAboutData(I18N_NOOP("kcmkvaio"),
@@ -61,12 +61,12 @@ KVaioModule::KVaioModule(TQWidget *parent, const char *name, const TQStringList 
                      "mirko@kde.org");
     setAboutData( about );
 
-    TQVBoxLayout *layout = new TQVBoxLayout(this);
+    TQVBoxLayout *tqlayout = new TQVBoxLayout(this);
     mKVaioGeneral = new KCMKVaioGeneral(this);
-    layout->addWidget( mKVaioGeneral );
-    layout->addStretch();
+    tqlayout->addWidget( mKVaioGeneral );
+    tqlayout->addStretch();
 
-    mDriver = new KVaioDriverInterface(this);
+    mDriver = new KVaioDriverInterface(TQT_TQOBJECT(this));
     mDriverAvailable = mDriver->connectToDriver(false);
     mTimer = new TQTimer(this);
     mTimer->start(231);
@@ -100,7 +100,7 @@ void KVaioModule::save()
 
     config.writeEntry("Report_Unknown_Events",
                       mKVaioGeneral->cbReportUnknownEvents->isChecked());
-    config.writeEntry("PeriodicallyReportPowerStatus",
+    config.writeEntry("PeriodicallyReportPowertqStatus",
 		      mKVaioGeneral->mCbPowerMsgs->isChecked() );
     config.writeEntry("PowerStatusOnBackButton",
 		      mKVaioGeneral->mCbBackButtonMsg->isChecked() );
@@ -139,7 +139,7 @@ void KVaioModule::load(bool useDefaults)
     mKVaioGeneral->cbReportUnknownEvents->setChecked
         (config.readBoolEntry("Report_Unknown_Events", false));
     mKVaioGeneral->mCbPowerMsgs->setChecked
-	(config.readBoolEntry("PeriodicallyReportPowerStatus", false) );
+	(config.readBoolEntry("PeriodicallyReportPowertqStatus", false) );
     mKVaioGeneral->mCbBackButtonMsg->setChecked
 	(config.readBoolEntry("PowerStatusOnBackButton", true) );
 
@@ -156,7 +156,7 @@ void KVaioModule::timeout()
     bool bat1Avail = false, bat2Avail = false, acConnected = false;
     int bat1Remaining = 0, bat1Max = 0, bat2Remaining = 0, bat2Max = 0;
 
-    if(mDriver->getBatteryStatus(bat1Avail, bat1Remaining, bat1Max,
+    if(mDriver->getBatterytqStatus(bat1Avail, bat1Remaining, bat1Max,
                                  bat2Avail, bat2Remaining, bat2Max,
                                  acConnected) )
     {

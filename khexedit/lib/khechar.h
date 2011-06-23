@@ -23,7 +23,7 @@
 namespace KHE
 {
 
-class KHEChar : public QChar
+class KHEChar : public TQChar
 {
   public:
     KHEChar( TQChar C );

@@ -83,7 +83,7 @@ int KBigBuffer::remove( KSection /*Section*/ )
   return 0;
 }
 
-unsigned int KBigBuffer::replace( KSection /*Section*/, const char*, unsigned int /*Length*/ )
+unsigned int KBigBuffer::tqreplace( KSection /*Section*/, const char*, unsigned int /*Length*/ )
 {
   return 0;
 }
@@ -95,8 +95,8 @@ int KBigBuffer::fill( char /*FillChar*/, int /*Length*/, unsigned int /*Pos*/ )
 
 
 int KBigBuffer::move( int /*DestPos*/, KSection /*SourceSection*/ ) { return 0; }
-//int KBigBuffer::find( const char*, int /*Length*/, int /*Pos*/ ) const  { return 0; }
-int KBigBuffer::find( const char*/*KeyData*/, int /*Length*/, KSection /*Section*/ ) const { return 0; }
+//int KBigBuffer::tqfind( const char*, int /*Length*/, int /*Pos*/ ) const  { return 0; }
+int KBigBuffer::tqfind( const char*/*KeyData*/, int /*Length*/, KSection /*Section*/ ) const { return 0; }
 
 int KBigBuffer::rfind( const char*, int /*Length*/, int /*Pos*/ ) const { return 0; }
 

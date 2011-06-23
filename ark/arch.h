@@ -67,15 +67,16 @@ enum ArchType { UNKNOWN_FORMAT, ZIP_FORMAT, TAR_FORMAT, AA_FORMAT,
                 LHA_FORMAT, RAR_FORMAT, ZOO_FORMAT, COMPRESSED_FORMAT,
                 SEVENZIP_FORMAT, ACE_FORMAT };
 
-typedef TQValueList< QPair< TQString, Qt::AlignmentFlags > > ColumnList;
+typedef TQValueList< TQPair< TQString, TQt::AlignmentFlags > > ColumnList;
 
 /**
  * Pure virtual base class for archives - provides a framework as well as
  * useful common functionality.
  */
-class Arch : public QObject
+class Arch : public TQObject
 {
   Q_OBJECT
+  TQ_OBJECT
 
   protected:
     /**
@@ -128,7 +129,7 @@ class Arch : public QObject
 
     // check to see if the utility exists in the PATH of the user
     void verifyUtilityIsAvailable( const TQString &,
-                                   const TQString & = TQString::null );
+                                   const TQString & = TQString() );
 
     void verifyCompressUtilityIsAvailable( const TQString &utility );
 
@@ -146,9 +147,9 @@ class Arch : public QObject
     void clearShellOutput() { m_lastShellOutput.truncate( 0 ); }
     const TQString& getLastShellOutput() const { return m_lastShellOutput; }
 
-    static Arch *archFactory( ArchType aType, ArkWidget *parent,
+    static Arch *archFactory( ArchType aType, ArkWidget *tqparent,
                               const TQString &filename,
-                              const TQString &openAsMimeType = TQString::null );
+                              const TQString &openAsMimeType = TQString() );
 
   protected slots:
     void slotOpenExited( KProcess* );
@@ -204,18 +205,18 @@ class Arch : public QObject
 
 // Columns
 // don't forget to change common_texts.cpp if you change something here
-#define FILENAME_COLUMN    qMakePair( i18n(" Filename "),    Qt::AlignLeft  )
-#define PERMISSION_COLUMN  qMakePair( i18n(" Permissions "), Qt::AlignLeft  )
-#define OWNER_GROUP_COLUMN qMakePair( i18n(" Owner/Group "), Qt::AlignLeft  )
-#define SIZE_COLUMN        qMakePair( i18n(" Size "),        Qt::AlignRight )
-#define TIMESTAMP_COLUMN   qMakePair( i18n(" Timestamp "),   Qt::AlignRight )
-#define LINK_COLUMN        qMakePair( i18n(" Link "),        Qt::AlignLeft  )
-#define PACKED_COLUMN      qMakePair( i18n(" Size Now "),    Qt::AlignRight )
-#define RATIO_COLUMN       qMakePair( i18n(" Ratio "),       Qt::AlignRight )
-#define CRC_COLUMN         qMakePair( i18n("Cyclic Redundancy Check"," CRC "), Qt::AlignLeft )
-#define METHOD_COLUMN      qMakePair( i18n(" Method "),  Qt::AlignLeft  )
-#define VERSION_COLUMN     qMakePair( i18n(" Version "), Qt::AlignLeft  )
-#define OWNER_COLUMN       qMakePair( i18n(" Owner "),   Qt::AlignLeft  )
-#define GROUP_COLUMN       qMakePair( i18n(" Group "),   Qt::AlignLeft  )
+#define FILENAME_COLUMN    tqMakePair( i18n(" Filename "),    TQt::AlignLeft  )
+#define PERMISSION_COLUMN  tqMakePair( i18n(" Permissions "), TQt::AlignLeft  )
+#define OWNER_GROUP_COLUMN tqMakePair( i18n(" Owner/Group "), TQt::AlignLeft  )
+#define SIZE_COLUMN        tqMakePair( i18n(" Size "),        TQt::AlignRight )
+#define TIMESTAMP_COLUMN   tqMakePair( i18n(" Timestamp "),   TQt::AlignRight )
+#define LINK_COLUMN        tqMakePair( i18n(" Link "),        TQt::AlignLeft  )
+#define PACKED_COLUMN      tqMakePair( i18n(" Size Now "),    TQt::AlignRight )
+#define RATIO_COLUMN       tqMakePair( i18n(" Ratio "),       TQt::AlignRight )
+#define CRC_COLUMN         tqMakePair( i18n("Cyclic Redundancy Check"," CRC "), TQt::AlignLeft )
+#define METHOD_COLUMN      tqMakePair( i18n(" Method "),  TQt::AlignLeft  )
+#define VERSION_COLUMN     tqMakePair( i18n(" Version "), TQt::AlignLeft  )
+#define OWNER_COLUMN       tqMakePair( i18n(" Owner "),   TQt::AlignLeft  )
+#define GROUP_COLUMN       tqMakePair( i18n(" Group "),   TQt::AlignLeft  )
 
 #endif /* ARCH_H */

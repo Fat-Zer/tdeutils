@@ -62,11 +62,11 @@ typedef struct adjust_t {
 #define RES_IO_RANGE			2
 #define RES_IRQ				3
 /* Attribute field */
-#define RES_IRQ_TYPE			0x03
-#define RES_IRQ_TYPE_EXCLUSIVE		0
-#define RES_IRQ_TYPE_TIME		1
-#define RES_IRQ_TYPE_DYNAMIC		2
-#define RES_IRQ_CSC			0x04
+#define RES_IRTQ_TYPE			0x03
+#define RES_IRTQ_TYPE_EXCLUSIVE		0
+#define RES_IRTQ_TYPE_TIME		1
+#define RES_IRTQ_TYPE_DYNAMIC		2
+#define RES_IRTQ_CSC			0x04
 #define RES_SHARED			0x08
 #define RES_RESERVED			0x10
 #define RES_ALLOCATED			0x20
@@ -96,11 +96,11 @@ typedef struct config_info_t {
     u_int	Vcc, Vpp1, Vpp2;
     u_int	IntType;
     u_int	ConfigBase;
-    u_char	Status, Pin, Copy, Option, ExtStatus;
+    u_char	tqStatus, Pin, Copy, Option, ExttqStatus;
     u_int	Present;
     u_int	CardValues;
     u_int	AssignedIRQ;
-    u_int	IRQAttributes;
+    u_int	IRTQAttributes;
     ioaddr_t	BasePort1;
     ioaddr_t	NumPorts1;
     u_int	Attributes1;
@@ -143,7 +143,7 @@ typedef struct modconf_t {
 } modconf_t;
 
 /* Attributes for ModifyConfiguration */
-#define CONF_IRQ_CHANGE_VALID	0x100
+#define CONF_IRTQ_CHANGE_VALID	0x100
 #define CONF_VCC_CHANGE_VALID	0x200
 #define CONF_VPP1_CHANGE_VALID	0x400
 #define CONF_VPP2_CHANGE_VALID	0x800
@@ -154,7 +154,7 @@ typedef struct config_req_t {
     u_int	Vcc, Vpp1, Vpp2;
     u_int	IntType;
     u_int	ConfigBase;
-    u_char	Status, Pin, Copy, ExtStatus;
+    u_char	tqStatus, Pin, Copy, ExttqStatus;
     u_char	ConfigIndex;
     u_int	Present;
 } config_req_t;
@@ -194,36 +194,36 @@ typedef struct io_req_t {
 typedef struct irq_req_t {
     u_int	Attributes;
     u_int	AssignedIRQ;
-    u_int	IRQInfo1, IRQInfo2;
+    u_int	IRTQInfo1, IRTQInfo2;
     void	*Handler;
     void	*Instance;
 } irq_req_t;
 
 /* Attributes for RequestIRQ and ReleaseIRQ */
-#define IRQ_TYPE			0x03
-#define IRQ_TYPE_EXCLUSIVE		0x00
-#define IRQ_TYPE_TIME			0x01
-#define IRQ_TYPE_DYNAMIC_SHARING	0x02
-#define IRQ_FORCED_PULSE		0x04
-#define IRQ_FIRST_SHARED		0x08
-#define IRQ_HANDLE_PRESENT		0x10
-#define IRQ_PULSE_ALLOCATED		0x100
+#define IRTQ_TYPE			0x03
+#define IRTQ_TYPE_EXCLUSIVE		0x00
+#define IRTQ_TYPE_TIME			0x01
+#define IRTQ_TYPE_DYNAMIC_SHARING	0x02
+#define IRTQ_FORCED_PULSE		0x04
+#define IRTQ_FIRST_SHARED		0x08
+#define IRTQ_HANDLE_PRESENT		0x10
+#define IRTQ_PULSE_ALLOCATED		0x100
 
-/* Bits in IRQInfo1 field */
-#define IRQ_MASK		0x0f
-#define IRQ_NMI_ID		0x01
-#define IRQ_IOCK_ID		0x02
-#define IRQ_BERR_ID		0x04
-#define IRQ_VEND_ID		0x08
-#define IRQ_INFO2_VALID		0x10
-#define IRQ_LEVEL_ID		0x20
-#define IRQ_PULSE_ID		0x40
-#define IRQ_SHARE_ID		0x80
+/* Bits in IRTQInfo1 field */
+#define IRTQ_MASK		0x0f
+#define IRTQ_NMI_ID		0x01
+#define IRTQ_IOCK_ID		0x02
+#define IRTQ_BERR_ID		0x04
+#define IRTQ_VEND_ID		0x08
+#define IRTQ_INFO2_VALID		0x10
+#define IRTQ_LEVEL_ID		0x20
+#define IRTQ_PULSE_ID		0x40
+#define IRTQ_SHARE_ID		0x80
 
-typedef struct eventmask_t {
+typedef struct eventtqmask_t {
     u_int	Attributes;
     u_int	EventMask;
-} eventmask_t;
+} eventtqmask_t;
 
 #define CONF_EVENT_MASK_VALID	0x01
 
@@ -407,7 +407,7 @@ enum service {
     GetClientInfo, GetConfigurationInfo, GetEventMask,
     GetFirstClient, GetFirstPartion, GetFirstRegion, GetFirstTuple,
     GetNextClient, GetNextPartition, GetNextRegion, GetNextTuple,
-    GetStatus, GetTupleData, MapLogSocket, MapLogWindow, MapMemPage,
+    GettqStatus, GetTupleData, MapLogSocket, MapLogWindow, MapMemPage,
     MapPhySocket, MapPhyWindow, ModifyConfiguration, ModifyWindow,
     OpenMemory, ParseTuple, ReadMemory, RegisterClient,
     RegisterEraseQueue, RegisterMTD, RegisterTimer,

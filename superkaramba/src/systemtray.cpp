@@ -35,8 +35,8 @@
 
 #include <X11/Xlib.h>
 
-Systemtray::Systemtray(TQWidget* parent)
-  : TQWidget(parent,0,0)
+Systemtray::Systemtray(TQWidget* tqparent)
+  : TQWidget(tqparent,0,0)
 {
   setBackgroundOrigin(ParentOrigin);
   setBackgroundMode(FixedPixmap);
@@ -62,7 +62,7 @@ void Systemtray::updateBackgroundPixmap ( const TQPixmap & pixmap) {
     //Stupid stupid stupid work around for annoying bug
     //QXEmbed ignores setBackgroundOrigin(AncestorOrigin)....
     TQPixmap bug = TQPixmap(emb->size());
-    bitBlt(&bug, 0, 0, &pixmap, emb->parentWidget()->x()+emb->x(),  emb->parentWidget()->y()+emb->y(), emb->width(), emb->height(),Qt::CopyROP, false);
+    bitBlt(TQT_TQPAINTDEVICE(&bug), 0, 0, TQT_TQPAINTDEVICE(const_cast<TQPixmap*>(&pixmap)), emb->tqparentWidget()->x()+emb->x(),  emb->tqparentWidget()->y()+emb->y(), emb->width(), emb->height(),TQt::CopyROP, false);
     emb->setPaletteBackgroundPixmap (bug);
 
   }
@@ -153,14 +153,14 @@ void Systemtray::updateTrayWindows( void )
   while ((emb = m_Wins.current()) != 0L)
   {
     WId wid = emb->embeddedWinId();
-    if ((wid == 0) || !kwin_module->systemTrayWindows().contains(wid) )
+    if ((wid == 0) || !kwin_module->systemTrayWindows().tqcontains(wid) )
       m_Wins.remove(emb);
     else
       m_Wins.next();
   }
-  layoutSystray();
+  tqlayoutSystray();
 }
-void Systemtray::layoutSystray()
+void Systemtray::tqlayoutSystray()
 {
   int i = 0, a = 0;
 
@@ -190,7 +190,7 @@ void Systemtray::layoutSystray()
     }
 
     count++;
-    emb->repaint();
+    emb->tqrepaint();
   }
 }
 
@@ -213,7 +213,7 @@ void Systemtray::systemTrayWindowAdded( WId w )
   emb->resize(24, 24);
   emb->show();
 
-  layoutSystray();
+  tqlayoutSystray();
 }
 
 void Systemtray::systemTrayWindowRemoved(WId)

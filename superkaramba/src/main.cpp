@@ -58,7 +58,7 @@ static KCmdLineOptions options[] =
 
 #ifdef KARAMBA_LOG
 
-void karambaMessageOutput(QtMsgType type, const char *msg)
+void karambaMessageOutput(TQtMsgType type, const char *msg)
 {
   FILE* fp = fopen("/tmp/karamba.log", "a");
   if(fp)
@@ -87,7 +87,7 @@ void karambaMessageOutput(QtMsgType type, const char *msg)
 int main(int argc, char **argv)
 {
 #ifdef KARAMBA_LOG
-    qInstallMsgHandler(karambaMessageOutput);
+    tqInstallMsgHandler(karambaMessageOutput);
 #endif
     KAboutData about("superkaramba", I18N_NOOP("SuperKaramba"),
                      version, description,
@@ -128,7 +128,7 @@ int main(int argc, char **argv)
 
     KarambaApplication::unlockKaramba();
 
-    app.connect(qApp,TQT_SIGNAL(lastWindowClosed()),qApp,TQT_SLOT(quit()));
+    app.connect(tqApp,TQT_SIGNAL(lastWindowClosed()),tqApp,TQT_SLOT(quit()));
 
     // Try to restore a previous session if applicable.
     app.checkPreviousSession(app, lst);

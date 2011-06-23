@@ -26,7 +26,7 @@
 
 */
 
-// Qt includes
+// TQt includes
 #include <tqpainter.h>
 #include <tqwhatsthis.h>
 #include <tqheader.h>
@@ -129,7 +129,7 @@ void FileLVI::setText( int column, const TQString &text )
 			name = name.left( name.length() - 1 );
 		if ( name.startsWith( "/" ) )
 			name = name.mid( 1 );
-		int pos = name.findRev( '/' );
+		int pos = name.tqfindRev( '/' );
 		if ( pos != -1 )
 			name = name.right( name.length() - pos - 1 );
 		TQListViewItem::setText( column, name );
@@ -153,7 +153,7 @@ void FileLVI::setText( int column, const TQString &text )
 		else
 			m_ratio = text.toDouble();
 		TQListViewItem::setText( column, i18n( "Packed Ratio", "%1 %" )
-		                                .arg(KGlobal::locale()->formatNumber( m_ratio, 1 ) )
+		                                .tqarg(KGlobal::locale()->formatNumber( m_ratio, 1 ) )
 		                      );
 	}
 	else if ( colName == timeStampStrCol )
@@ -162,7 +162,7 @@ void FileLVI::setText( int column, const TQString &text )
 			TQListViewItem::setText(column, text);
 		else
 		{
-			m_timeStamp = TQDateTime::fromString( text, ISODate );
+			m_timeStamp = TQDateTime::fromString( text, Qt::ISODate );
 			TQListViewItem::setText( column, KGlobal::locale()->formatDateTime( m_timeStamp ) );
 		}
 	}
@@ -170,9 +170,9 @@ void FileLVI::setText( int column, const TQString &text )
 		TQListViewItem::setText(column, text);
 }
 
-static FileLVI* folderLVI( KListViewItem *parent, const TQString& name )
+static FileLVI* folderLVI( KListViewItem *tqparent, const TQString& name )
 {
-	FileLVI *folder = new FileLVI( parent );
+	FileLVI *folder = new FileLVI( tqparent );
 
 	folder->setText( 0, name );
 
@@ -181,9 +181,9 @@ static FileLVI* folderLVI( KListViewItem *parent, const TQString& name )
 	return folder;
 }
 
-static FileLVI* folderLVI( KListView *parent, const TQString& name )
+static FileLVI* folderLVI( KListView *tqparent, const TQString& name )
 {
-	FileLVI *folder = new FileLVI( parent );
+	FileLVI *folder = new FileLVI( tqparent );
 	folder->setText( 0, name );
 	folder->setPixmap( 0, KMimeType::mimeType( "inode/directory" )->pixmap( KIcon::Small ) );
 	return folder;
@@ -194,8 +194,8 @@ static FileLVI* folderLVI( KListView *parent, const TQString& name )
 /////////////////////////////////////////////////////////////////////
 
 
-FileListView::FileListView(TQWidget *parent, const char* name)
-	: KListView(parent, name)
+FileListView::FileListView(TQWidget *tqparent, const char* name)
+	: KListView(tqparent, name)
 {
 	TQWhatsThis::add( this,
 	                 i18n( "This area is for displaying information about the files contained within an archive." )
@@ -242,7 +242,7 @@ void FileListView::removeColumn( int index )
 {
 	for ( unsigned int i = index; i < m_columnMap.count() - 2; i++ )
 	{
-		m_columnMap.replace( i, m_columnMap[ i + 1 ] );
+		m_columnMap.tqreplace( i, m_columnMap[ i + 1 ] );
 	}
 
 	m_columnMap.remove( m_columnMap[ m_columnMap.count() - 1 ] );
@@ -264,31 +264,31 @@ TQStringList FileListView::selectedFilenames()
 	{
 		if ( item->isSelected() )
 		{
-			// If the item has children, add each child and the item
+			// If the item has tqchildren, add each child and the item
 			if ( item->childCount() > 0 )
 			{
 				files += item->fileName();
-				files += childrenOf( item );
+				files += tqchildrenOf( item );
 
 				/* If we got here, then the logic for "going to the next item"
-				 * is a bit different: as we already dealt with all the children,
+				 * is a bit different: as we already dealt with all the tqchildren,
 				 * the "next item" is the next sibling of the current item, not
 				 * its first child. If the current item has no siblings, then
-				 * the next item is the next sibling of its parent, and so on.
+				 * the next item is the next sibling of its tqparent, and so on.
 				 */
 				FileLVI *nitem = static_cast<FileLVI*>( item->nextSibling() );
-				while ( !nitem && item->parent() )
+				while ( !nitem && item->tqparent() )
 				{
-					item = static_cast<FileLVI*>( item->parent() );
-					if ( item->parent() )
-						nitem = static_cast<FileLVI*>( item->parent()->nextSibling() );
+					item = static_cast<FileLVI*>( item->tqparent() );
+					if ( item->tqparent() )
+						nitem = static_cast<FileLVI*>( item->tqparent()->nextSibling() );
 				}
 				item = nitem;
 				continue;
 			}
 			else
 			{
-				// If the item has no children, just add it to the list
+				// If the item has no tqchildren, just add it to the list
 				files += item->fileName();
 			}
 		}
@@ -331,7 +331,7 @@ bool FileListView::isSelectionEmpty()
 void
 FileListView::contentsMousePressEvent(TQMouseEvent *e)
 {
-	if( e->button()==TQMouseEvent::LeftButton )
+	if( e->button()==Qt::LeftButton )
 	{
 		m_pressed = true;
 		m_presspos = e->pos();
@@ -385,9 +385,9 @@ FileListView::item(const TQString& filename) const
 
 void FileListView::addItem( const TQStringList & entries )
 {
-	FileLVI *flvi, *parent = findParent( entries[0] );
-	if ( parent )
-		flvi = new FileLVI( parent );
+	FileLVI *flvi, *tqparent = findParent( entries[0] );
+	if ( tqparent )
+		flvi = new FileLVI( tqparent );
 	else
 		flvi = new FileLVI( this );
 
@@ -422,7 +422,7 @@ void FileListView::setHeaders( const ColumnList& columns )
 	      it != columns.constEnd();
 	      ++it )
 	{
-		QPair< TQString, Qt::AlignmentFlags > pair = *it;
+		TQPair< TQString, TQt::AlignmentFlags > pair = *it;
 		int colnum = addColumn( pair.first );
 		setColumnAlignment( colnum, pair.second );
 	}
@@ -508,13 +508,13 @@ FileLVI* FileListView::findParent( const TQString& fullname )
 		name = name.left( name.length() -1 );
 	if ( name.startsWith( "/" ) )
 		name = name.mid( 1 );
-	// Checks if this entry needs a parent
-	if ( !name.contains( '/' ) )
+	// Checks if this entry needs a tqparent
+	if ( !name.tqcontains( '/' ) )
 		return static_cast< FileLVI* >( 0 );
 
 	// Get a list of ancestors
-	TQString parentFullname = name.left( name.findRev( '/' ) );
-	TQStringList ancestorList = TQStringList::split( '/', parentFullname );
+	TQString tqparentFullname = name.left( name.tqfindRev( '/' ) );
+	TQStringList ancestorList = TQStringList::split( '/', tqparentFullname );
 
 	// Checks if the listview contains the first item in the list of ancestors
 	TQListViewItem *item = firstChild();
@@ -538,8 +538,8 @@ FileLVI* FileListView::findParent( const TQString& fullname )
 	{
 		TQString name = ancestorList[0];
 
-		FileLVI *parent = static_cast< FileLVI*>( item );
-		item = parent->firstChild();
+		FileLVI *tqparent = static_cast< FileLVI*>( item );
+		item = tqparent->firstChild();
 		while ( item )
 		{
 			if ( item->text(0) == name )
@@ -549,7 +549,7 @@ FileLVI* FileListView::findParent( const TQString& fullname )
 
 		if ( !item )
 		{
-			item = folderLVI( parent, name );
+			item = folderLVI( tqparent, name );
 		}
 
 		ancestorList.pop_front();
@@ -559,28 +559,28 @@ FileLVI* FileListView::findParent( const TQString& fullname )
 	return static_cast< FileLVI* >( item );
 }
 
-TQStringList FileListView::childrenOf( FileLVI* parent )
+TQStringList FileListView::tqchildrenOf( FileLVI* tqparent )
 {
-	Q_ASSERT( parent );
-	TQStringList children;
+	Q_ASSERT( tqparent );
+	TQStringList tqchildren;
 
-	FileLVI *item = static_cast<FileLVI*>( parent->firstChild() );
+	FileLVI *item = static_cast<FileLVI*>( tqparent->firstChild() );
 
 	while ( item )
 	{
 		if ( item->childCount() == 0 )
 		{
-			children += item->fileName();
+			tqchildren += item->fileName();
 		}
 		else
 		{
-			children += item->fileName();
-			children += childrenOf( item );
+			tqchildren += item->fileName();
+			tqchildren += tqchildrenOf( item );
 		}
 		item = static_cast<FileLVI*>( item->nextSibling() );
 	}
 
-	return children;
+	return tqchildren;
 }
 
 #include "filelistview.moc"

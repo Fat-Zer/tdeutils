@@ -36,9 +36,10 @@ class CListView;
 class CFileInfoDialog : public KDialogBase
 {
   Q_OBJECT
+  TQ_OBJECT
   
   public:
-    CFileInfoDialog( TQWidget *parent=0, const char *name=0,bool modal=false );
+    CFileInfoDialog( TQWidget *tqparent=0, const char *name=0,bool modal=false );
     ~CFileInfoDialog( void );
 
     void setStatistics( void );

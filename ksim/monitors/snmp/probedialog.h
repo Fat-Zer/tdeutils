@@ -38,8 +38,9 @@ class Monitor;
 class ProbeDialog : public KProgressDialog
 {
     Q_OBJECT
+  TQ_OBJECT
 public:
-    ProbeDialog( const HostConfig &hostConfig, TQWidget *parent, const char *name = 0 );
+    ProbeDialog( const HostConfig &hostConfig, TQWidget *tqparent, const char *name = 0 );
 
     struct ProbeResult
     {

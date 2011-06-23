@@ -24,7 +24,7 @@
         <property name="name">
             <cstring>unnamed</cstring>
         </property>
-        <widget class="QLabel" row="0" column="0">
+        <widget class="TQLabel" row="0" column="0">
             <property name="name">
                 <cstring>textLabel2</cstring>
             </property>
@@ -46,7 +46,7 @@
                 <cstring>hostName</cstring>
             </property>
         </widget>
-        <widget class="QLabel" row="0" column="2">
+        <widget class="TQLabel" row="0" column="2">
             <property name="name">
                 <cstring>textLabel3</cstring>
             </property>
@@ -57,7 +57,7 @@
                 <cstring>port</cstring>
             </property>
         </widget>
-        <widget class="QSpinBox" row="0" column="3">
+        <widget class="TQSpinBox" row="0" column="3">
             <property name="name">
                 <cstring>port</cstring>
             </property>
@@ -78,14 +78,14 @@
             <property name="sizeType">
                 <enum>Expanding</enum>
             </property>
-            <property name="sizeHint">
+            <property name="tqsizeHint">
                 <size>
                     <width>91</width>
                     <height>20</height>
                 </size>
             </property>
         </spacer>
-        <widget class="QButtonGroup" row="1" column="0" rowspan="1" colspan="5">
+        <widget class="TQButtonGroup" row="1" column="0" rowspan="1" colspan="5">
             <property name="name">
                 <cstring>buttonGroup2</cstring>
             </property>
@@ -96,11 +96,11 @@
                 <property name="name">
                     <cstring>unnamed</cstring>
                 </property>
-                <widget class="QWidgetStack" row="2" column="0" rowspan="1" colspan="3">
+                <widget class="TQWidgetStack" row="2" column="0" rowspan="1" colspan="3">
                     <property name="name">
                         <cstring>authenticationDetails</cstring>
                     </property>
-                    <widget class="QWidget">
+                    <widget class="TQWidget">
                         <property name="name">
                             <cstring>snmpV1Page</cstring>
                         </property>
@@ -111,7 +111,7 @@
                             <property name="name">
                                 <cstring>unnamed</cstring>
                             </property>
-                            <widget class="QLabel" row="0" column="0">
+                            <widget class="TQLabel" row="0" column="0">
                                 <property name="name">
                                     <cstring>textLabel5</cstring>
                                 </property>
@@ -132,7 +132,7 @@
                                 <property name="sizeType">
                                     <enum>Expanding</enum>
                                 </property>
-                                <property name="sizeHint">
+                                <property name="tqsizeHint">
                                     <size>
                                         <width>20</width>
                                         <height>41</height>
@@ -149,7 +149,7 @@
                                 <property name="sizeType">
                                     <enum>Expanding</enum>
                                 </property>
-                                <property name="sizeHint">
+                                <property name="tqsizeHint">
                                     <size>
                                         <width>160</width>
                                         <height>20</height>
@@ -166,7 +166,7 @@
                             </widget>
                         </grid>
                     </widget>
-                    <widget class="QWidget">
+                    <widget class="TQWidget">
                         <property name="name">
                             <cstring>snmpV3Page</cstring>
                         </property>
@@ -177,7 +177,7 @@
                             <property name="name">
                                 <cstring>unnamed</cstring>
                             </property>
-                            <widget class="QLabel" row="0" column="0">
+                            <widget class="TQLabel" row="0" column="0">
                                 <property name="name">
                                     <cstring>textLabel6</cstring>
                                 </property>
@@ -188,7 +188,7 @@
                                     <cstring>securityName</cstring>
                                 </property>
                             </widget>
-                            <widget class="QLabel" row="1" column="0">
+                            <widget class="TQLabel" row="1" column="0">
                                 <property name="name">
                                     <cstring>textLabel7</cstring>
                                 </property>
@@ -199,7 +199,7 @@
                                     <cstring>securityLevel</cstring>
                                 </property>
                             </widget>
-                            <widget class="QLabel" row="2" column="0">
+                            <widget class="TQLabel" row="2" column="0">
                                 <property name="name">
                                     <cstring>authenticationTypeLabel</cstring>
                                 </property>
@@ -210,7 +210,7 @@
                                     <cstring>authenticationType</cstring>
                                 </property>
                             </widget>
-                            <widget class="QLabel" row="4" column="0">
+                            <widget class="TQLabel" row="4" column="0">
                                 <property name="name">
                                     <cstring>privacyTypeLabel</cstring>
                                 </property>
@@ -221,7 +221,7 @@
                                     <cstring>privacyType</cstring>
                                 </property>
                             </widget>
-                            <widget class="QLabel" row="5" column="0">
+                            <widget class="TQLabel" row="5" column="0">
                                 <property name="name">
                                     <cstring>privacyPassphraseLabel</cstring>
                                 </property>
@@ -232,7 +232,7 @@
                                     <cstring>privacyPassphrase</cstring>
                                 </property>
                             </widget>
-                            <widget class="QLabel" row="3" column="0">
+                            <widget class="TQLabel" row="3" column="0">
                                 <property name="name">
                                     <cstring>authenticationPassphraseLabel</cstring>
                                 </property>
@@ -253,7 +253,7 @@
                                 <property name="sizeType">
                                     <enum>Expanding</enum>
                                 </property>
-                                <property name="sizeHint">
+                                <property name="tqsizeHint">
                                     <size>
                                         <width>71</width>
                                         <height>20</height>
@@ -265,7 +265,7 @@
                                     <cstring>securityName</cstring>
                                 </property>
                             </widget>
-                            <widget class="QComboBox" row="4" column="1">
+                            <widget class="TQComboBox" row="4" column="1">
                                 <property name="name">
                                     <cstring>privacyType</cstring>
                                 </property>
@@ -281,12 +281,12 @@
                                     <enum>Password</enum>
                                 </property>
                             </widget>
-                            <widget class="QComboBox" row="1" column="1">
+                            <widget class="TQComboBox" row="1" column="1">
                                 <property name="name">
                                     <cstring>securityLevel</cstring>
                                 </property>
                             </widget>
-                            <widget class="QComboBox" row="2" column="1">
+                            <widget class="TQComboBox" row="2" column="1">
                                 <property name="name">
                                     <cstring>authenticationType</cstring>
                                 </property>
@@ -309,7 +309,7 @@
                                 <property name="sizeType">
                                     <enum>Expanding</enum>
                                 </property>
-                                <property name="sizeHint">
+                                <property name="tqsizeHint">
                                     <size>
                                         <width>20</width>
                                         <height>20</height>
@@ -333,7 +333,7 @@
                         <enum>Horizontal</enum>
                     </property>
                 </widget>
-                <widget class="QLabel" row="0" column="0">
+                <widget class="TQLabel" row="0" column="0">
                     <property name="name">
                         <cstring>textLabel2_2</cstring>
                     </property>
@@ -344,7 +344,7 @@
                         <cstring>snmpVersion</cstring>
                     </property>
                 </widget>
-                <widget class="QComboBox" row="0" column="1">
+                <widget class="TQComboBox" row="0" column="1">
                     <property name="name">
                         <cstring>snmpVersion</cstring>
                     </property>
@@ -359,7 +359,7 @@
                     <property name="sizeType">
                         <enum>Expanding</enum>
                     </property>
-                    <property name="sizeHint">
+                    <property name="tqsizeHint">
                         <size>
                             <width>351</width>
                             <height>20</height>
@@ -382,15 +382,15 @@
                 <enum>Horizontal</enum>
             </property>
         </widget>
-        <widget class="QLayoutWidget" row="3" column="0" rowspan="1" colspan="5">
+        <widget class="TQLayoutWidget" row="3" column="0" rowspan="1" colspan="5">
             <property name="name">
-                <cstring>layout2</cstring>
+                <cstring>tqlayout2</cstring>
             </property>
             <hbox>
                 <property name="name">
                     <cstring>unnamed</cstring>
                 </property>
-                <widget class="QPushButton">
+                <widget class="TQPushButton">
                     <property name="name">
                         <cstring>testHostButton</cstring>
                     </property>
@@ -408,14 +408,14 @@
                     <property name="sizeType">
                         <enum>Expanding</enum>
                     </property>
-                    <property name="sizeHint">
+                    <property name="tqsizeHint">
                         <size>
                             <width>220</width>
                             <height>20</height>
                         </size>
                     </property>
                 </spacer>
-                <widget class="QPushButton">
+                <widget class="TQPushButton">
                     <property name="name">
                         <cstring>buttonOk</cstring>
                     </property>
@@ -429,7 +429,7 @@
                         <bool>true</bool>
                     </property>
                 </widget>
-                <widget class="QPushButton">
+                <widget class="TQPushButton">
                     <property name="name">
                         <cstring>buttonCancel</cstring>
                     </property>
@@ -508,13 +508,13 @@
     <tabstop>buttonCancel</tabstop>
     <tabstop>communityString</tabstop>
 </tabstops>
-<slots>
+<Q_SLOTS>
     <slot access="private">showSnmpAuthenticationDetailsForVersion(const QString &amp;)</slot>
     <slot>enableDisabledAuthenticationAndPrivacyElementsForSecurityLevel(const QString &amp;)</slot>
     <slot>checkValidity()</slot>
     <slot access="protected">testHost()</slot>
-</slots>
-<layoutdefaults spacing="6" margin="11"/>
+</Q_SLOTS>
+<tqlayoutdefaults spacing="6" margin="11"/>
 <includehints>
     <includehint>kdialog.h</includehint>
     <includehint>klineedit.h</includehint>

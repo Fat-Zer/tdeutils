@@ -32,7 +32,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 
-// Qt includes
+// TQt includes
 #include <tqlayout.h>
 #include <tqstringlist.h>
 #include <tqlabel.h>
@@ -81,7 +81,7 @@
 #include "searchbar.h"
 #include "arkviewer.h"
 
-static void viewInExternalViewer( ArkWidget* parent, const KURL& filename )
+static void viewInExternalViewer( ArkWidget* tqparent, const KURL& filename )
 {
     TQString mimetype = KMimeType::findByURL( filename )->name();
     bool view = true;
@@ -89,7 +89,7 @@ static void viewInExternalViewer( ArkWidget* parent, const KURL& filename )
     if ( KRun::isExecutable( mimetype ) )
     {
         TQString text = i18n( "The file you're trying to view may be an executable. Running untrusted executables may compromise your system's security.\nAre you sure you want to run that file?" );
-        view = ( KMessageBox::warningContinueCancel( parent, text, TQString::null, i18n("Run Nevertheless") ) == KMessageBox::Continue );
+        view = ( KMessageBox::warningContinueCancel( tqparent, text, TQString(), i18n("Run Nevertheless") ) == KMessageBox::Continue );
     }
 
     if ( view )
@@ -103,10 +103,10 @@ static void viewInExternalViewer( ArkWidget* parent, const KURL& filename )
 //
 //----------------------------------------------------------------------
 
-ArkWidget::ArkWidget( TQWidget *parent, const char *name )
-   : TQVBox(parent, name), m_bBusy( false ), m_bBusyHold( false ),
+ArkWidget::ArkWidget( TQWidget *tqparent, const char *name )
+   : TQVBox(tqparent, name), m_bBusy( false ), m_bBusyHold( false ),
      m_extractOnly( false ), m_extractRemote(false),
-     m_openAsMimeType(TQString::null), m_pTempAddList(NULL),
+     m_openAsMimeType(TQString()), m_pTempAddList(NULL),
      m_bArchivePopupEnabled( false ),
      m_convert_tmpDir( NULL ), m_convertSuccess( false ),
      m_createRealArchTmpDir( NULL ),  m_extractRemoteTmpDir( NULL ),
@@ -199,7 +199,7 @@ ArkWidget::updateStatusTotals()
     m_nSizeOfFiles = m_fileListView->totalSize();
 
     TQString strInfo = i18n( "%n file  %1", "%n files  %1", m_nNumFiles )
-                          .arg( KIO::convertSize( m_nSizeOfFiles ) );
+                          .tqarg( KIO::convertSize( m_nSizeOfFiles ) );
     emit setStatusBarText(strInfo);
 }
 
@@ -354,7 +354,7 @@ ArkWidget::convertSlotCreateDone( bool success )
         // addFile( const TQString & baseDir,                 //
         //          const TQStringList & filesToAdd )         //
         //////////////////////////////////////////////////////
-        *it = TQString::fromLatin1( "file:" )+ m_convert_tmpDir->name() + *it;
+        *it = TQString::tqfromLatin1( "file:" )+ m_convert_tmpDir->name() + *it;
     }
     bool bOldRecVal = ArkSettings::rarRecurseSubdirs();
     connect( arch, TQT_SIGNAL( sigAdd( bool ) ), this, TQT_SLOT( convertSlotAddDone( bool ) ) );
@@ -431,7 +431,7 @@ ArkWidget::extractTo( const KURL & targetDirectory, const KURL & archive, bool b
     {
         if ( !KIO::NetAccess::mkdir( m_extractTo_targetDirectory, this ) )
         {
-            KMessageBox::error( 0, i18n( "Could not create the folder %1" ).arg(
+            KMessageBox::error( 0, i18n( "Could not create the folder %1" ).tqarg(
                                                             targetDirectory.prettyURL() ) );
             emit request_file_quit();
             return;
@@ -441,7 +441,7 @@ ArkWidget::extractTo( const KURL & targetDirectory, const KURL & archive, bool b
     connect( this, TQT_SIGNAL( openDone( bool ) ), this, TQT_SLOT( extractToSlotOpenDone( bool ) ) );
 }
 
-const QString
+const TQString
 ArkWidget::guessName( const KURL &archive )
 {
   TQString fileName = archive.fileName();
@@ -453,7 +453,7 @@ ArkWidget::guessName( const KURL &archive )
     ext = (*it).remove( '*' );
     if ( fileName.endsWith( ext ) )
     {
-      fileName = fileName.left( fileName.findRev( ext ) );
+      fileName = fileName.left( fileName.tqfindRev( ext ) );
       break;
     }
   }
@@ -467,7 +467,7 @@ ArkWidget::extractToSlotOpenDone( bool success )
     disconnect( this, TQT_SIGNAL( openDone( bool ) ), this, TQT_SLOT( extractToSlotOpenDone( bool ) ) );
     if ( !success )
     {
-        KMessageBox::error( this, i18n( "An error occurred while opening the archive %1." ).arg( m_url.prettyURL() ) );
+        KMessageBox::error( this, i18n( "An error occurred while opening the archive %1." ).tqarg( m_url.prettyURL() ) );
         emit request_file_quit();
         return;
     }
@@ -712,7 +712,7 @@ ArkWidget::file_open(const KURL& url)
     TQFileInfo fileInfo( strFile );
     if ( !fileInfo.exists() )
     {
-        KMessageBox::error(this, i18n("The archive %1 does not exist.").arg(strFile));
+        KMessageBox::error(this, i18n("The archive %1 does not exist.").tqarg(strFile));
         emit removeRecentURL( m_realURL );
         return;
     }
@@ -756,7 +756,7 @@ ArkWidget::getCreateFilename(const TQString & _caption,
     TQString strFile;
     KURL url;
 
-    KFileDialog dlg( ":ArkSaveAsDialog", TQString::null, this, "SaveAsDialog", true );
+    KFileDialog dlg( ":ArkSaveAsDialog", TQString(), this, "SaveAsDialog", true );
     dlg.setCaption( _caption );
     dlg.setOperationMode( KFileDialog::Saving );
     dlg.setMimeFilter( ArchiveFormatInfo::self()->supportedMimeTypes( allowCompressed ),
@@ -775,13 +775,13 @@ ArkWidget::getCreateFilename(const TQString & _caption,
         strFile = url.path();
 
         if (strFile.isEmpty())
-            return TQString::null;
+            return TQString();
 
         //the user chose to save as the current archive
         //or wanted to create a new one with the same name
         //no need to do anything
         if (strFile == m_strArchName && m_bIsArchiveOpen)
-            return TQString::null;
+            return TQString();
 
         TQStringList extensions = dlg.currentFilterMimeType()->patterns();
         TQStringList::Iterator it = extensions.begin();
@@ -809,7 +809,7 @@ ArkWidget::getCreateFilename(const TQString & _caption,
             }
             else if ( choice == KMessageBox::Cancel )
             {
-                return TQString::null;
+                return TQString();
             }
             else
             {
@@ -821,8 +821,8 @@ ArkWidget::getCreateFilename(const TQString & _caption,
         {
             KMessageBox::error( this,
                 i18n( "You do not have permission"
-                      " to write to the directory %1" ).arg(url.directory() ) );
-            return TQString::null;
+                      " to write to the directory %1" ).tqarg(url.directory() ) );
+            return TQString();
         }
     } // end of while loop
 
@@ -957,7 +957,7 @@ ArkWidget::file_close()
     if ( isArchiveOpen() )
     {
         closeArch();
-        emit setWindowCaption( TQString::null );
+        emit setWindowCaption( TQString() );
         emit removeOpenArk( m_strArchName );
         updateStatusTotals();
         updateStatusSelection();
@@ -968,7 +968,7 @@ ArkWidget::file_close()
         closeArch();
     }
 
-    m_strArchName = TQString::null;
+    m_strArchName = TQString();
     m_url = KURL();
 }
 
@@ -984,10 +984,10 @@ ArkWidget::askToCreateRealArchive()
     if (choice == KMessageBox::Yes)
     {
         url = getCreateFilename( i18n("Create New Archive"),
-                                 TQString::null, false );
+                                 TQString(), false );
     }
     else
-        url.setPath( TQString::null );
+        url.setPath( TQString() );
     return url;
 }
 
@@ -1096,7 +1096,7 @@ ArkWidget::action_add()
         return;
     }
 
-    KFileDialog fileDlg( ":ArkAddDir", TQString::null, this, "adddlg", true );
+    KFileDialog fileDlg( ":ArkAddDir", TQString(), this, "adddlg", true );
     fileDlg.setMode( KFile::Mode( KFile::Files | KFile::ExistingOnly ) );
     fileDlg.setCaption(i18n("Select Files to Add"));
 
@@ -1204,7 +1204,7 @@ ArkWidget::toLocalFile( const KURL& url )
    TQString strURL = url.prettyURL();
 
         TQString tempfile = tmpDir();
-        tempfile += strURL.right(strURL.length() - strURL.findRev("/") - 1);
+        tempfile += strURL.right(strURL.length() - strURL.tqfindRev("/") - 1);
         deleteAfterUse(tempfile);  // remember for deletion
         KURL tempurl; tempurl.setPath( tempfile );
         if( !KIO::NetAccess::dircopy(url, tempurl, this) )
@@ -1255,7 +1255,7 @@ ArkWidget::action_delete()
     if ( KMessageBox::warningContinueCancelList( this,
                                               i18n( "Do you really want to delete the selected items?" ),
                                               list,
-                                              TQString::null,
+                                              TQString(),
                                               KStdGuiItem::del(),
                                               "confirmDelete" )
          != KMessageBox::Continue)
@@ -1321,7 +1321,7 @@ ArkWidget::openWithSlotExtractDone( bool success )
     {
       KURL::List list;
       list.append(m_viewURL);
-      KOpenWithDlg l( list, i18n("Open with:"), TQString::null, (TQWidget*)0L);
+      KOpenWithDlg l( list, i18n("Open with:"), TQString(), (TQWidget*)0L);
       if ( l.exec() )
       {
           KService::Ptr service = l.service();
@@ -1389,7 +1389,7 @@ ArkWidget::reportExtractFailures( const TQString & _dest, TQStringList *_list )
     return redoExtraction;
 }
 
-QStringList
+TQStringList
 ArkWidget::existingFiles( const TQString & _dest, TQStringList & _list )
 {
     TQString strFilename, tmp;
@@ -1608,7 +1608,7 @@ ArkWidget::editStart()
     KURL::List list;
     // edit will be in progress until the KProcess terminates.
     KOpenWithDlg l( list, i18n("Edit with:"),
-            TQString::null, (TQWidget*)0L );
+            TQString(), (TQWidget*)0L );
     if ( l.exec() )
     {
         KProcess *kp = new KProcess;
@@ -1643,10 +1643,10 @@ ArkWidget::slotEditFinished(KProcess *kp)
     TQStringList::Iterator it = list.begin();
     TQString filename = *it;
     TQString path;
-    if (filename.contains('/') > 3)
+    if (filename.tqcontains('/') > 3)
     {
         kdDebug(1601) << "Filename is originally: " << filename << endl;
-        int i = filename.find('/', 5);
+        int i = filename.tqfind('/', 5);
         path = filename.left(1+i);
         kdDebug(1601) << "Changing to dir: " << path << endl;
         TQDir::setCurrent(path);
@@ -1696,7 +1696,7 @@ ArkWidget::viewSlotExtractDone( bool success )
             if ( !viewer->view( m_viewURL ) )
             {
                 TQString text = i18n( "The internal viewer is not able to display this file. Would you like to view it using an external program?" );
-                view = ( KMessageBox::warningYesNo( this, text, TQString::null, i18n("View Externally"), i18n("Do Not View") ) == KMessageBox::Yes );
+                view = ( KMessageBox::warningYesNo( this, text, TQString(), i18n("View Externally"), i18n("Do Not View") ) == KMessageBox::Yes );
 
                 if ( view )
                     viewInExternalViewer( this, m_viewURL );
@@ -1734,7 +1734,7 @@ ArkWidget::showCurrentFile()
     TQString fullname = tmpDir();
     fullname += name;
 
-    if(fullname.contains("../"))
+    if(fullname.tqcontains("../"))
         fullname.remove("../");
 
     //Convert the TQString filename to KURL to escape the bad characters
@@ -1817,13 +1817,13 @@ ArkWidget::updateStatusSelection()
     else if (m_nNumSelectedFiles != 1)
     {
         strInfo = i18n("%1 files selected  %2")
-                  .arg(KGlobal::locale()->formatNumber(m_nNumSelectedFiles, 0))
-                  .arg(KIO::convertSize(m_nSizeOfSelectedFiles));
+                  .tqarg(KGlobal::locale()->formatNumber(m_nNumSelectedFiles, 0))
+                  .tqarg(KIO::convertSize(m_nSizeOfSelectedFiles));
     }
     else
     {
         strInfo = i18n("1 file selected  %2")
-                  .arg(KIO::convertSize(m_nSizeOfSelectedFiles));
+                  .tqarg(KIO::convertSize(m_nSizeOfSelectedFiles));
     }
 
     emit setStatusBarSelectedFiles(strInfo);
@@ -1896,7 +1896,7 @@ ArkWidget::dropAction( TQStringList  & list )
             // one or open it as the new current archive
             int nRet = KMessageBox::warningYesNoCancel(this,
                        i18n("Do you wish to add this to the current archive or open it as a new archive?"),
-                       TQString::null,
+                       TQString(),
                        i18n("&Add"), i18n("&Open"));
             if (KMessageBox::Yes == nRet) // add it
             {
@@ -1954,7 +1954,7 @@ ArkWidget::dropAction( TQStringList  & list )
             str = (list.count() > 1)
                   ? i18n("There is no archive currently open. Do you wish to create one now for these files?")
                   : i18n("There is no archive currently open. Do you wish to create one now for this file?");
-            int nRet = KMessageBox::warningYesNo(this, str, TQString::null, i18n("Create Archive"), i18n("Do Not Create"));
+            int nRet = KMessageBox::warningYesNo(this, str, TQString(), i18n("Create Archive"), i18n("Do Not Create"));
             if (nRet == KMessageBox::Yes) // yes
             {
                 file_new();
@@ -2044,7 +2044,7 @@ Arch * ArkWidget::getNewArchive( const TQString & _fileName, const TQString& _mi
 
     if (!newArch->archUtilityIsAvailable())
     {
-        KMessageBox::error(this, i18n("The utility %1 is not in your PATH.\nPlease install it or contact your system administrator.").arg(newArch->getArchUtility()));
+        KMessageBox::error(this, i18n("The utility %1 is not in your PATH.\nPlease install it or contact your system administrator.").tqarg(newArch->getArchUtility()));
         return NULL;
     }
 
@@ -2128,7 +2128,7 @@ ArkWidget::openArchive( const TQString & _filename )
             ArchiveFormatDlg * dlg = new ArchiveFormatDlg( this, info->findMimeType( m_url ) );
             if ( !dlg->exec() == TQDialog::Accepted )
             {
-                emit setWindowCaption( TQString::null );
+                emit setWindowCaption( TQString() );
                 emit removeRecentURL( m_realURL );
                 delete dlg;
                 file_close();
@@ -2148,7 +2148,7 @@ ArkWidget::openArchive( const TQString & _filename )
     if( 0 == ( newArch = Arch::archFactory( archtype, this,
                                             _filename, m_openAsMimeType) ) )
     {
-        emit setWindowCaption( TQString::null );
+        emit setWindowCaption( TQString() );
         emit removeRecentURL( m_realURL );
         KMessageBox::error( this, i18n("Unknown archive format or corrupted archive") );
         return;
@@ -2156,7 +2156,7 @@ ArkWidget::openArchive( const TQString & _filename )
 
     if (!newArch->unarchUtilityIsAvailable())
     {
-        KMessageBox::error(this, i18n("The utility %1 is not in your PATH.\nPlease install it or contact your system administrator.").arg(newArch->getUnarchUtility()));
+        KMessageBox::error(this, i18n("The utility %1 is not in your PATH.\nPlease install it or contact your system administrator.").tqarg(newArch->getUnarchUtility()));
         return;
     }
 
@@ -2210,8 +2210,8 @@ ArkWidget::slotOpen( Arch * /* _newarch */, bool _success, const TQString & _fil
     else
     {
         emit removeRecentURL( m_realURL );
-        emit setWindowCaption( TQString::null );
-        KMessageBox::error( this, i18n( "An error occurred while trying to open the archive %1" ).arg( _filename ) );
+        emit setWindowCaption( TQString() );
+        KMessageBox::error( this, i18n( "An error occurred while trying to open the archive %1" ).tqarg( _filename ) );
 
         if ( m_extractOnly )
             emit request_file_quit();
@@ -2257,7 +2257,7 @@ void ArkWidget::showSettings(){
   if ( offers.isEmpty() )
      genPage->kcfg_KonquerorIntegration->setEnabled( false );
   else
-     genPage->konqIntegrationLabel->setText( TQString::null );
+     genPage->konqIntegrationLabel->setText( TQString() );
 
   dialog->show();
 

@@ -87,7 +87,7 @@ typedef struct {
     CARD8 nvReqType;
     CARD16 length B16;
     CARD32 screen B32;
-    CARD32 display_mask B32;
+    CARD32 display_tqmask B32;
     CARD32 attribute B32;
 } xnvCtrlQueryAttributeReq;
 #define sz_xnvCtrlQueryAttributeReq 16
@@ -111,7 +111,7 @@ typedef struct {
     CARD8 nvReqType;
     CARD16 length B16;
     CARD32 screen B32;
-    CARD32 display_mask B32;
+    CARD32 display_tqmask B32;
     CARD32 attribute B32;
     INT32 value B32;
 } xnvCtrlSetAttributeReq;
@@ -122,7 +122,7 @@ typedef struct {
     CARD8 nvReqType;
     CARD16 length B16;
     CARD32 screen B32;
-    CARD32 display_mask B32;
+    CARD32 display_tqmask B32;
     CARD32 attribute B32;
 } xnvCtrlQueryStringAttributeReq;
 #define sz_xnvCtrlQueryStringAttributeReq 16
@@ -150,7 +150,7 @@ typedef struct {
     CARD8 nvReqType;
     CARD16 length B16;
     CARD32 screen B32;
-    CARD32 display_mask B32;
+    CARD32 display_tqmask B32;
     CARD32 attribute B32;
 } xnvCtrlQueryValidAttributeValuesReq;
 #define sz_xnvCtrlQueryValidAttributeValuesReq 16
@@ -192,7 +192,7 @@ typedef struct {
             CARD16 sequenceNumber B16;
             Time time B32;
             CARD32 screen B32;
-            CARD32 display_mask B32;
+            CARD32 display_tqmask B32;
             CARD32 attribute B32;
             CARD32 value B32;
             CARD32 pad0 B32;

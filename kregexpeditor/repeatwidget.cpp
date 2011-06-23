@@ -15,7 +15,7 @@
  *  the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  *  Boston, MA 02110-1301, USA.
  **/
-#ifdef QT_ONLY
+#ifdef TQT_ONLY
   #include "compat.h"
 #else
   #include <klocale.h>
@@ -35,17 +35,17 @@
 #include <tqvbuttongroup.h>
 #include "kwidgetstreamer.h"
 
-RepeatWidget::RepeatWidget(RegExpEditorWindow* editorWindow, TQWidget *parent,
+RepeatWidget::RepeatWidget(RegExpEditorWindow* editorWindow, TQWidget *tqparent,
                            const char *name)
-  : SingleContainerWidget(editorWindow, parent, name ? name : "RepeatWidget")
+  : SingleContainerWidget(editorWindow, tqparent, name ? name : "RepeatWidget")
 {
   _child = new ConcWidget(editorWindow, this);
   init();
 }
 
 RepeatWidget::RepeatWidget( RepeatRegExp* regexp, RegExpEditorWindow* editorWindow,
-                            TQWidget* parent, const char* name )
-  :SingleContainerWidget( editorWindow, parent, name )
+                            TQWidget* tqparent, const char* name )
+  :SingleContainerWidget( editorWindow, tqparent, name )
 {
   init();
   RegExpWidget* child = WidgetFactory::createWidget( regexp->child(), editorWindow, this );
@@ -85,23 +85,23 @@ void RepeatWidget::init()
 }
 
 
-TQSize RepeatWidget::sizeHint() const
+TQSize RepeatWidget::tqsizeHint() const
 {
-  // TODO: Merge with LookAheadWidget::sizeHint
+  // TODO: Merge with LookAheadWidget::tqsizeHint
   TQFontMetrics metrics = fontMetrics();
   _textSize = metrics.size( 0, _content->text() );
 
-  _childSize = _child->sizeHint();
+  _childSize = _child->tqsizeHint();
 
   int height = _textSize.height() + bdSize + _childSize.height() + bdSize + 2*pw;
-  int width  = 2 * pw + QMAX(_childSize.width(), 4*bdSize + _textSize.width());
+  int width  = 2 * pw + TQMAX(_childSize.width(), 4*bdSize + _textSize.width());
   return TQSize(width,height);
 }
 
 void RepeatWidget::paintEvent( TQPaintEvent *e )
 {
   // TODO: Merge with LookAheadWidget::paintEvent
-  TQSize mySize = sizeHint();
+  TQSize mySize = tqsizeHint();
   TQPainter painter(this);
 
   drawPossibleSelection( painter, mySize );
@@ -151,24 +151,24 @@ void RepeatWidget::slotConfigCanceled()
 {
   TQDataStream stream( _backup, IO_ReadOnly );
   KWidgetStreamer streamer;
-  streamer.fromStream( stream, _content );
-  repaint();
+  streamer.fromStream( stream, TQT_TQOBJECT(_content) );
+  tqrepaint();
 }
 
 int RepeatWidget::edit()
 {
-  _configWindow->move(TQCursor::pos() - TQPoint(_configWindow->sizeHint().width()/2,
-                                              _configWindow->sizeHint().height()/2)  );
+  _configWindow->move(TQCursor::pos() - TQPoint(_configWindow->tqsizeHint().width()/2,
+                                              _configWindow->tqsizeHint().height()/2)  );
   TQDataStream stream( _backup, IO_WriteOnly );
   KWidgetStreamer streamer;
-  streamer.toStream( _content, stream );
+  streamer.toStream( TQT_TQOBJECT(_content), stream );
 
   return _configWindow->exec();
 }
 
 //--------------------------------------------------------------------------------
-RepeatRangeWindow::RepeatRangeWindow( TQWidget* parent, const char* name )
-  : TQVBox( parent, name ? name : "RepeatRangeWindow" )
+RepeatRangeWindow::RepeatRangeWindow( TQWidget* tqparent, const char* name )
+  : TQVBox( tqparent, name ? name : "RepeatRangeWindow" )
 {
   setSpacing( 6 );
 
@@ -218,14 +218,14 @@ RepeatRangeWindow::RepeatRangeWindow( TQWidget* parent, const char* name )
 }
 
 
-void RepeatRangeWindow::createLine( TQWidget* parent, TQString text, TQSpinBox** spin, REPEATTYPE tp )
+void RepeatRangeWindow::createLine( TQWidget* tqparent, TQString text, TQSpinBox** spin, REPEATTYPE tp )
 {
 
-  TQRadioButton* radioBut = new TQRadioButton(text, parent);
-  *spin = new TQSpinBox( 1, 999, 1, parent);
+  TQRadioButton* radioBut = new TQRadioButton(text, tqparent);
+  *spin = new TQSpinBox( 1, 999, 1, tqparent);
   (*spin)->setValue(1);
 
-  (void) new TQLabel(i18n("time(s)"), parent);
+  (void) new TQLabel(i18n("time(s)"), tqparent);
   _group->insert(radioBut, tp);
 }
 
@@ -271,7 +271,7 @@ TQString RepeatRangeWindow::text()
   case ATMOST: return i18n("Repeated at Most 1 Time", "Repeated at Most %n Times", _mostTimes->value() );
   case EXACTLY: return i18n("Repeated Exactly 1 Time", "Repeated Exactly %n Times", _exactlyTimes->value() );
   case MINMAX: return i18n("Repeated From %1 to %2 Times")
-                 .arg( _rangeFrom->value() ).arg( _rangeTo->value() );
+                 .tqarg( _rangeFrom->value() ).tqarg( _rangeTo->value() );
   }
   qFatal("Fall through!");
   return TQString::fromLocal8Bit("");

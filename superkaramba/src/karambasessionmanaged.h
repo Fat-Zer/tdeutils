@@ -25,6 +25,6 @@ class KarambaSessionManaged : public KSessionManaged
 public:
     KarambaSessionManaged() {};
 
-    virtual bool commitData( QSessionManager& );
-    virtual bool saveState( QSessionManager& );
+    virtual bool commitData( TQSessionManager& );
+    virtual bool saveState( TQSessionManager& );
 };

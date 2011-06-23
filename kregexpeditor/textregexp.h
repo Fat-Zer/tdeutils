@@ -27,7 +27,7 @@
 class TextRegExp :public RegExp
 {
 public:
-	TextRegExp( bool selected, TQString text = TQString::null);
+	TextRegExp( bool selected, TQString text = TQString());
 
     virtual bool check( ErrorMap&, bool first, bool last );
     virtual int precedence() const {

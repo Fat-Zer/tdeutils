@@ -83,7 +83,7 @@ void KHexEditPart::setupActions( bool BrowserViewWanted )
 {
   KActionCollection *AC = actionCollection();
   // create our actions
-  CopyAction = BrowserViewWanted ? 0 : KStdAction::copy( HexEdit, TQT_SLOT(copy()), AC );
+  CopyAction = BrowserViewWanted ? 0 : KStdAction::copy( TQT_TQOBJECT(HexEdit), TQT_SLOT(copy()), AC );
 
   KStdAction::selectAll( this, TQT_SLOT(slotSelectAll()), AC );
   KStdAction::deselect(  this, TQT_SLOT(slotUnselect()),  AC );
@@ -105,8 +105,8 @@ void KHexEditPart::setupActions( bool BrowserViewWanted )
 
   ShowUnprintableAction = new KToggleAction( i18n("Show &Unprintable Chars (<32)"), 0, this, TQT_SLOT(slotSetShowUnprintable()), actionCollection(), "view_showunprintable" );
 
-  KStdAction::zoomIn(  HexEdit, TQT_SLOT(zoomIn()),   actionCollection() );
-  KStdAction::zoomOut( HexEdit, TQT_SLOT(zoomOut()),  actionCollection() );
+  KStdAction::zoomIn(  TQT_TQOBJECT(HexEdit), TQT_SLOT(zoomIn()),   actionCollection() );
+  KStdAction::zoomOut( TQT_TQOBJECT(HexEdit), TQT_SLOT(zoomOut()),  actionCollection() );
 
   // resize style
   ResizeStyleAction = new KSelectAction( i18n("&Resize Style"), 0, AC, "resizestyle" );
@@ -141,7 +141,7 @@ void KHexEditPart::fitActionSettings()
   ShowUnprintableAction->setChecked( HexEdit->showUnprintable() );
 
   CodingAction->setCurrentItem( (int)HexEdit->coding() );
-  EncodingAction->setCurrentItem( KCharCodec::codecNames().findIndex(HexEdit->encodingName()) );
+  EncodingAction->setCurrentItem( KCharCodec::codecNames().tqfindIndex(HexEdit->encodingName()) );
 
   ResizeStyleAction->setCurrentItem( (int)HexEdit->resizeStyle() );
 

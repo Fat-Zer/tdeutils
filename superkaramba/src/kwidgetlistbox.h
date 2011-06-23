@@ -28,12 +28,13 @@
 
 typedef bool (*show_callback) (int index, TQWidget* widget, void* data);
 
-class KWidgetListbox : public QTable
+class KWidgetListbox : public TQTable
 {
     Q_OBJECT
+  TQ_OBJECT
 
   public:
-    KWidgetListbox(TQWidget *parent = 0, const char *name = 0);
+    KWidgetListbox(TQWidget *tqparent = 0, const char *name = 0);
     ~KWidgetListbox();
 
     int insertItem(TQWidget* item, int index = -1);

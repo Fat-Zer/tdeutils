@@ -29,6 +29,7 @@
 class SevenZipArch : public Arch
 {
   Q_OBJECT
+  TQ_OBJECT
   public:
     SevenZipArch( ArkWidget *, const TQString & );
     virtual ~SevenZipArch();

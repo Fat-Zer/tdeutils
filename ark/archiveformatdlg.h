@@ -28,8 +28,9 @@
 class ArchiveFormatDlg: public KDialogBase
 {
     Q_OBJECT
+  TQ_OBJECT
 public:
-    ArchiveFormatDlg( TQWidget * parent, const TQString & defaultType );
+    ArchiveFormatDlg( TQWidget * tqparent, const TQString & defaultType );
     TQString mimeType();
 
 private:

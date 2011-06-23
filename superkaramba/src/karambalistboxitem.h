@@ -26,6 +26,6 @@ class KarambaListBoxItem : public TQListBoxText
 
 public:
   TQString appId; 
-  KarambaListBoxItem( TQListBox* listbox, const TQString & text=TQString::null );
+  KarambaListBoxItem( TQListBox* listbox, const TQString & text=TQString() );
 
 };

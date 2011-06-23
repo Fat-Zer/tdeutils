@@ -35,6 +35,7 @@ class ArkWidget;
 class RarArch : public Arch
 {
   Q_OBJECT
+  TQ_OBJECT
   public:
     RarArch( ArkWidget *_gui, const TQString & _fileName );
     virtual ~RarArch() {}

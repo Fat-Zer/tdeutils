@@ -68,7 +68,7 @@ public:
     Value( const TQByteArray &data );
     Value( const Identifier &oid );
     Value( const TQHostAddress &address );
-    Value( Q_UINT64 counter );
+    Value( TQ_UINT64 counter );
 
     Value( const Value &rhs );
     Value &operator=( const Value &rhs );
@@ -87,7 +87,7 @@ public:
     uint toCounter() const;
     uint toGauge() const;
     int toTimeTicks() const;
-    Q_UINT64 toCounter64() const;
+    TQ_UINT64 toCounter64() const;
 
     TQString toString( int conversionFlags = 0 ) const;
 

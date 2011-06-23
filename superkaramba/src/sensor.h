@@ -18,9 +18,10 @@
 
 #include "sensorparams.h"
 
-class Sensor : public QObject
+class Sensor : public TQObject
 {
     Q_OBJECT
+  TQ_OBJECT
 
 public:
     Sensor( int msec = 1000 );

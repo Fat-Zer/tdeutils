@@ -54,14 +54,14 @@
 class UpdateViewItem2 : public KListViewItem
 {
 public:
-        UpdateViewItem2(TQListView *parent, TQString name,TQString mail,TQString id,bool isDefault);
+        UpdateViewItem2(TQListView *tqparent, TQString name,TQString mail,TQString id,bool isDefault);
         virtual void paintCell(TQPainter *p, const TQColorGroup &cg,int col, int width, int align);
 	virtual TQString key(int c,bool ) const;
 	bool def;
 };
 
-UpdateViewItem2::UpdateViewItem2(TQListView *parent, TQString name,TQString mail,TQString id,bool isDefault)
-                : KListViewItem(parent)
+UpdateViewItem2::UpdateViewItem2(TQListView *tqparent, TQString name,TQString mail,TQString id,bool isDefault)
+                : KListViewItem(tqparent)
 {
 def=isDefault;
         setText(0,name);
@@ -70,14 +70,14 @@ def=isDefault;
 }
 
 
-void UpdateViewItem2::paintCell(TQPainter *p, const TQColorGroup &cg,int column, int width, int alignment)
+void UpdateViewItem2::paintCell(TQPainter *p, const TQColorGroup &cg,int column, int width, int tqalignment)
 {
         if ((def) && (column<2)) {
                 TQFont font(p->font());
                 font.setBold(true);
                 p->setFont(font);
         }
-        KListViewItem::paintCell(p, cg, column, width, alignment);
+        KListViewItem::paintCell(p, cg, column, width, tqalignment);
 }
 
 TQString UpdateViewItem2 :: key(int c,bool ) const
@@ -87,8 +87,8 @@ TQString UpdateViewItem2 :: key(int c,bool ) const
 
 ///////////////  main view
 
-popupPublic::popupPublic(TQWidget *parent, const char *name,TQString sfile,bool filemode,KShortcut goDefaultKey):
-KDialogBase( Plain, i18n("Select Public Key"), Details | Ok | Cancel, Ok, parent, name,true)
+popupPublic::popupPublic(TQWidget *tqparent, const char *name,TQString sfile,bool filemode,KShortcut goDefaultKey):
+KDialogBase( Plain, i18n("Select Public Key"), Details | Ok | Cancel, Ok, tqparent, name,true)
 {
 
 	TQWidget *page = plainPage();
@@ -106,7 +106,7 @@ KDialogBase( Plain, i18n("Select Public Key"), Details | Ok | Cancel, Ok, parent
         keySingle=loader->loadIcon("kgpg_key1",KIcon::Small,20);
 	keyGroup=loader->loadIcon("kgpg_key3",KIcon::Small,20);
 
-        if (filemode) setCaption(i18n("Select Public Key for %1").arg(sfile));
+        if (filemode) setCaption(i18n("Select Public Key for %1").tqarg(sfile));
         fmode=filemode;
 
 	TQHButtonGroup *hBar=new TQHButtonGroup(page);
@@ -146,7 +146,7 @@ KDialogBase( Plain, i18n("Select Public Key"), Details | Ok | Cancel, Ok, parent
         boutonboxoptions=new TQButtonGroup(5,Qt::Vertical ,page,0);
 
 	KActionCollection *actcol=new KActionCollection(this);
-	(void) new KAction(i18n("&Go to Default Key"),goDefaultKey, this, TQT_SLOT(slotGotoDefaultKey()),actcol,"go_default_key");
+	(void) new KAction(i18n("&Go to Default Key"),goDefaultKey, TQT_TQOBJECT(this), TQT_SLOT(slotGotoDefaultKey()),actcol,"go_default_key");
 
 
         CBarmor=new TQCheckBox(i18n("ASCII armored encryption"),boutonboxoptions);
@@ -167,16 +167,16 @@ KDialogBase( Plain, i18n("Select Public Key"), Details | Ok | Cancel, Ok, parent
                                   "box enables you to use any key, even if it has not be signed."));
 
         if (filemode) {
-		TQWidget *parentBox=new TQWidget(boutonboxoptions);
-		TQHBoxLayout *shredBox=new TQHBoxLayout(parentBox,0);
+		TQWidget *tqparentBox=new TQWidget(boutonboxoptions);
+		TQHBoxLayout *shredBox=new TQHBoxLayout(tqparentBox,0);
 		//shredBox->setFrameStyle(TQFrame::NoFrame);
 		//shredBox->setMargin(0);
-	       CBshred=new TQCheckBox(i18n("Shred source file"),parentBox);
+	       CBshred=new TQCheckBox(i18n("Shred source file"),tqparentBox);
                 TQWhatsThis::add
                         (CBshred,i18n("<b>Shred source file</b>: permanently remove source file. No recovery will be possible"));
 
 		TQString shredWhatsThis = i18n( "<qt><b>Shred source file:</b><br /><p>Checking this option will shred (overwrite several times before erasing) the files you have encrypted. This way, it is almost impossible that the source file is recovered.</p><p><b>But you must be aware that this is not secure</b> on all file systems, and that parts of the file may have been saved in a temporary file or in the spooler of your printer if you previously opened it in an editor or tried to print it. Only works on files (not on folders).</p></qt>");
-		  KActiveLabel *warn= new KActiveLabel( i18n("<a href=\"whatsthis:%1\">Read this before using shredding</a>").arg(shredWhatsThis),parentBox );
+		  KActiveLabel *warn= new KActiveLabel( i18n("<a href=\"whatsthis:%1\">Read this before using shredding</a>").tqarg(shredWhatsThis),tqparentBox );
 		  shredBox->addWidget(CBshred);
 		  shredBox->addWidget(warn);
         }
@@ -208,7 +208,7 @@ KDialogBase( Plain, i18n("Select Public Key"), Details | Ok | Cancel, Ok, parent
 
         char line[200]="\0";
         FILE *fp2;
-        seclist=TQString::null;
+        seclist=TQString();
 
         fp2 = popen("gpg --no-secmem-warning --no-tty --with-colon --list-secret-keys ", "r");
         while ( fgets( line, sizeof(line), fp2))
@@ -256,7 +256,7 @@ void popupPublic::sort()
         if (current==NULL)
                 return;
 
-	if ((untrustedList.find(current->text(2))!=untrustedList.end()) && (!current->text(2).isEmpty())){
+	if ((untrustedList.tqfind(current->text(2))!=untrustedList.end()) && (!current->text(2).isEmpty())){
                 if (current->isSelected()) {
                         current->setSelected(false);
                         reselect=true;
@@ -266,7 +266,7 @@ void popupPublic::sort()
 
         while ( current->nextSibling() ) {
                 current = current->nextSibling();
-                if ((untrustedList.find(current->text(2))!=untrustedList.end()) && (!current->text(2).isEmpty())) {
+                if ((untrustedList.tqfind(current->text(2))!=untrustedList.end()) && (!current->text(2).isEmpty())) {
                 if (current->isSelected()) {
                         current->setSelected(false);
                         reselect=true;
@@ -304,7 +304,7 @@ void popupPublic::customOpts(const TQString &str)
 
 void popupPublic::slotGotoDefaultKey()
 {
-    TQListViewItem *myDefaulKey = keysList->findItem(KGpgSettings::defaultKey(),2);
+    TQListViewItem *myDefaulKey = keysList->tqfindItem(KGpgSettings::defaultKey(),2);
     keysList->clearSelection();
     keysList->setCurrentItem(myDefaulKey);
     keysList->setSelected(myDefaulKey,true);
@@ -329,7 +329,7 @@ void popupPublic::refreshkeys()
 		{
 			if (!TQString(*it).isEmpty())
 			{
-				UpdateViewItem2 *item=new UpdateViewItem2(keysList,TQString(*it),TQString::null,TQString::null,false);
+				UpdateViewItem2 *item=new UpdateViewItem2(keysList,TQString(*it),TQString(),TQString(),false);
 				item->setPixmap(0,keyGroup);
 			}
 		}
@@ -346,7 +346,7 @@ void popupPublic::slotpreselect()
 {
 TQListViewItem *it=NULL;
 if (!keysList->firstChild()) return;
-        if (fmode) it=keysList->findItem(KGpgSettings::defaultKey(),2);
+        if (fmode) it=keysList->tqfindItem(KGpgSettings::defaultKey(),2);
 if (!trusted)
               sort();
 if (fmode)
@@ -415,25 +415,25 @@ void popupPublic::slotprocread(KProcIO *p)
 				untrustedList<<id;
                                 break;
                         }
-			if (keyString[11].find('D')!=-1) dead=true;
+			if (keyString[11].tqfind('D')!=-1) dead=true;
                         tst=keyString[9];
-			if (tst.find("<")!=-1) {
+			if (tst.tqfind("<")!=-1) {
                 keymail=tst.section('<',-1,-1);
                 keymail.truncate(keymail.length()-1);
                 keyname=tst.section('<',0,0);
-                //if (keyname.find("(")!=-1)
+                //if (keyname.tqfind("(")!=-1)
                  //       keyname=keyname.section('(',0,0);
         } else {
-                keymail=TQString::null;
+                keymail=TQString();
                 keyname=tst;//.section('(',0,0);
         }
                         if ((!dead) && (!tst.isEmpty())) {
 				bool isDefaultKey=false;
                                 if (id.right(8)==defaultKey) isDefaultKey=true;
                                         UpdateViewItem2 *item=new UpdateViewItem2(keysList,keyname,keymail,id,isDefaultKey);
-					//KListViewItem *sub= new KListViewItem(item,i18n("ID: %1, trust: %2, validity: %3").arg(id).arg(tr).arg(val));
+					//KListViewItem *sub= new KListViewItem(item,i18n("ID: %1, trust: %2, validity: %3").tqarg(id).tqarg(tr).tqarg(val));
                                         //sub->setSelectable(false);
-                                        if (seclist.find(tst,0,FALSE)!=-1)
+                                        if (seclist.tqfind(tst,0,FALSE)!=-1)
                                                 item->setPixmap(0,keyPair);
                                         else
                                                 item->setPixmap(0,keySingle);

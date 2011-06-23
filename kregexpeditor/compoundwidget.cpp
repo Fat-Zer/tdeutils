@@ -15,7 +15,7 @@
  *  the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  *  Boston, MA 02110-1301, USA.
  **/
-#ifdef QT_ONLY
+#ifdef TQT_ONLY
   #include "compat.h"
   #include "images.h"
 #else
@@ -37,11 +37,11 @@
 
 //================================================================================
 
-CompoundDetailWindow::CompoundDetailWindow( TQWidget* parent, const char* name )
-  :TQWidget( parent, name )
+CompoundDetailWindow::CompoundDetailWindow( TQWidget* tqparent, const char* name )
+  :TQWidget( tqparent, name )
 {
-  TQVBoxLayout* layout = new TQVBoxLayout( this );
-  layout->setAutoAdd( true );
+  TQVBoxLayout* tqlayout = new TQVBoxLayout( this );
+  tqlayout->setAutoAdd( true );
 
   TQLabel* label = new TQLabel( i18n("&Title:"), this);
   _title = new TQLineEdit( this );
@@ -93,17 +93,17 @@ void CompoundDetailWindow::setAllowReplace( bool b )
 
 //================================================================================
 
-CompoundWidget::CompoundWidget( RegExpEditorWindow* editorWindow, TQWidget* parent,
+CompoundWidget::CompoundWidget( RegExpEditorWindow* editorWindow, TQWidget* tqparent,
                                 const char* name )
-  :SingleContainerWidget( editorWindow, parent, name == 0 ? "CompoundWidget" : name )
+  :SingleContainerWidget( editorWindow, tqparent, name == 0 ? "CompoundWidget" : name )
 {
   _child = new ConcWidget( editorWindow, this );
   init();
 }
 
 CompoundWidget::CompoundWidget( CompoundRegExp* regexp, RegExpEditorWindow* editorWindow,
-                                TQWidget* parent, const char* name )
-  : SingleContainerWidget( editorWindow, parent, name  == 0 ? "CompoundWidget" : name )
+                                TQWidget* tqparent, const char* name )
+  : SingleContainerWidget( editorWindow, tqparent, name  == 0 ? "CompoundWidget" : name )
 {
   init();
   _content->setTitle( regexp->title() );
@@ -135,17 +135,17 @@ void CompoundWidget::init( )
   _backRefId = -1;
 }
 
-TQSize CompoundWidget::sizeHint() const
+TQSize CompoundWidget::tqsizeHint() const
 {
   TQFontMetrics metrics = fontMetrics();
-  _childSize = _child->sizeHint();
+  _childSize = _child->tqsizeHint();
   _textSize = metrics.size( 0, _content->title() );
 
   int width, height;
 
   if ( _hidden ) {
     _pixmapSize = _up.size();
-    width = 2*pw + QMAX( 2*bdSize+_textSize.width(), 2*bdSize+_pixmapSize.width());
+    width = 2*pw + TQMAX( 2*bdSize+_textSize.width(), 2*bdSize+_pixmapSize.width());
     height = _pixmapSize.height() + 2*bdSize + _textSize.height()+pw;
   }
   else {
@@ -154,8 +154,8 @@ TQSize CompoundWidget::sizeHint() const
     if ( _textSize.width() != 0)
       headerLineWidth += 3*bdSize + _textSize.width();
 
-    width = QMAX( 2*pw + _childSize.width(), headerLineWidth );
-    height = QMAX( _textSize.height(), _pixmapSize.height() ) +
+    width = TQMAX( 2*pw + _childSize.width(), headerLineWidth );
+    height = TQMAX( _textSize.height(), _pixmapSize.height() ) +
       2*bdSize + _childSize.height() + pw;
   }
   return TQSize( width, height );
@@ -164,7 +164,7 @@ TQSize CompoundWidget::sizeHint() const
 
 void CompoundWidget::paintEvent( TQPaintEvent *e )
 {
-  TQSize mySize = sizeHint();
+  TQSize mySize = tqsizeHint();
 
   TQPainter painter(this);
   drawPossibleSelection( painter, mySize);
@@ -182,7 +182,7 @@ void CompoundWidget::paintEvent( TQPaintEvent *e )
     painter.drawPixmap( _pixmapPos, _up );
   }
   else {
-    int maxH = QMAX( _textSize.height(), _pixmapSize.height() );
+    int maxH = TQMAX( _textSize.height(), _pixmapSize.height() );
     int offset = 0;
     horLineY = maxH/2;
     childY = maxH+bdSize;
@@ -220,8 +220,8 @@ void CompoundWidget::paintEvent( TQPaintEvent *e )
   }
   else {
     TQSize curSize = _child->size();
-    TQSize newSize = TQSize( QMAX( _child->sizeHint().width(), mySize.width()-2*pw),
-                           _child->sizeHint().height());
+    TQSize newSize = TQSize( TQMAX( _child->tqsizeHint().width(), mySize.width()-2*pw),
+                           _child->tqsizeHint().height());
 
     _child->move( pw, childY );
     if ( curSize != newSize ) {
@@ -246,8 +246,8 @@ void CompoundWidget::slotConfigCanceled()
 {
   TQDataStream stream( _backup, IO_ReadOnly );
   KWidgetStreamer streamer;
-  streamer.fromStream( stream, _content );
-  repaint();
+  streamer.fromStream( stream, TQT_TQOBJECT(_content) );
+  tqrepaint();
 }
 
 RegExp* CompoundWidget::regExp() const
@@ -258,8 +258,8 @@ RegExp* CompoundWidget::regExp() const
 
 void CompoundWidget::mousePressEvent( TQMouseEvent* event )
 {
-  if ( event->button() == LeftButton &&
-       TQRect( _pixmapPos, _pixmapSize ).contains( event->pos() ) ) {
+  if ( event->button() == Qt::LeftButton &&
+       TQRect( _pixmapPos, _pixmapSize ).tqcontains( event->pos() ) ) {
     // Skip otherwise we will never see the mouse release
     // since it is eaten by Editor window.
   }
@@ -269,38 +269,38 @@ void CompoundWidget::mousePressEvent( TQMouseEvent* event )
 
 void CompoundWidget::mouseReleaseEvent( TQMouseEvent* event)
 {
-  if ( event->button() == LeftButton &&
-       TQRect( _pixmapPos, _pixmapSize ).contains( event->pos() ) ) {
+  if ( event->button() == Qt::LeftButton &&
+       TQRect( _pixmapPos, _pixmapSize ).tqcontains( event->pos() ) ) {
     _hidden = !_hidden;
     _editorWindow->updateContent( 0 );
-    repaint(); // is this necesary?
+    tqrepaint(); // is this necesary?
     _editorWindow->emitChange();
   }
   else
     SingleContainerWidget::mouseReleaseEvent( event );
 }
 
-bool CompoundWidget::updateSelection( bool parentSelected )
+bool CompoundWidget::updateSelection( bool tqparentSelected )
 {
   if ( _hidden ) {
-    bool changed = RegExpWidget::updateSelection( parentSelected );
+    bool changed = RegExpWidget::updateSelection( tqparentSelected );
     _child->selectWidget( _isSelected );
     if (changed)
-      repaint();
+      tqrepaint();
     return changed;
   }
   else {
-    return SingleContainerWidget::updateSelection( parentSelected );
+    return SingleContainerWidget::updateSelection( tqparentSelected );
   }
 }
 
 int CompoundWidget::edit()
 {
-  _configWindow->move(TQCursor::pos() - TQPoint(_configWindow->sizeHint().width()/2,
-                                              _configWindow->sizeHint().height()/2)  );
+  _configWindow->move(TQCursor::pos() - TQPoint(_configWindow->tqsizeHint().width()/2,
+                                              _configWindow->tqsizeHint().height()/2)  );
   TQDataStream stream( _backup, IO_WriteOnly );
   KWidgetStreamer streamer;
-  streamer.toStream( _content, stream );
+  streamer.toStream( TQT_TQOBJECT(_content), stream );
   return _configWindow->exec();
 }
 
@@ -312,7 +312,7 @@ int nextId()
 
 TQPixmap CompoundWidget::getIcon( const TQString& name )
 {
-#ifdef QT_ONLY
+#ifdef TQT_ONLY
     TQPixmap pix;
     pix.convertFromImage( qembed_findImage(name) );
     return pix;

@@ -24,29 +24,30 @@
 #include <kdelibs_export.h>
 
 /**
- * @short A replacement for TQLabel that supports richtext and proper layout management
+ * @short A replacement for TQLabel that supports richtext and proper tqlayout management
  *
  * @author Waldo Bastian <bastian@kde.org>
  */
 
 /*
- * QLabel
+ * TQLabel
  */
 class KDEUI_EXPORT KRichTextLabel : public TQLabel {
   Q_OBJECT
+  TQ_OBJECT
 
 public:
   /**
    * Default constructor.
    */
-  KRichTextLabel( TQWidget *parent, const char *name = 0 );
-  KRichTextLabel( const TQString &text, TQWidget *parent, const char *name = 0 );
+  KRichTextLabel( TQWidget *tqparent, const char *name = 0 );
+  KRichTextLabel( const TQString &text, TQWidget *tqparent, const char *name = 0 );
 
   int defaultWidth() const { return m_defaultWidth; }
   void setDefaultWidth(int defaultWidth);
 
-  virtual TQSize minimumSizeHint() const;
-  virtual TQSize sizeHint() const;
+  virtual TQSize tqminimumSizeHint() const;
+  virtual TQSize tqsizeHint() const;
   TQSizePolicy sizePolicy() const;
 
 public slots:

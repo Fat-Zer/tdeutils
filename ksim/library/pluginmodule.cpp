@@ -64,7 +64,7 @@ void KSim::PluginObject::setConfigFileName(const TQString &name)
     return;
 
   d->configName = name;
-  if (name.find("ksim") == -1)
+  if (name.tqfind("ksim") == -1)
     d->configName.prepend("ksim_");
 }
 
@@ -77,19 +77,19 @@ class KSim::PluginPage::Private
 {
   public:
     KConfig *config;
-    KSim::PluginObject *parent;
+    KSim::PluginObject *tqparent;
 };
 
-KSim::PluginPage::PluginPage(KSim::PluginObject *parent, const char *name)
+KSim::PluginPage::PluginPage(KSim::PluginObject *tqparent, const char *name)
    : TQWidget(0, name)
 {
   d = new PluginPage::Private;
-  d->parent = parent;
-  if (parent && !parent->configFileName().isEmpty())
-    d->config = new KConfig(parent->configFileName() + "rc");
+  d->tqparent = tqparent;
+  if (tqparent && !tqparent->configFileName().isEmpty())
+    d->config = new KConfig(tqparent->configFileName() + "rc");
   else {
     kdWarning() << className() << ": Can not create the config() "
-       "pointer due to the parent being null" << endl;
+       "pointer due to the tqparent being null" << endl;
     d->config = 0;
   }
 }
@@ -111,25 +111,25 @@ KConfig *KSim::PluginPage::config() const
 class KSim::PluginView::Private
 {
   public:
-    PluginObject *parent;
+    PluginObject *tqparent;
     TQPopupMenu *popupMenu;
     KConfig *config;
 };
 
-KSim::PluginView::PluginView(KSim::PluginObject *parent, const char *name)
+KSim::PluginView::PluginView(KSim::PluginObject *tqparent, const char *name)
    : TQWidget(0, name)
 {
   d = new PluginView::Private;
-  d->parent = parent;
+  d->tqparent = tqparent;
   d->popupMenu = new TQPopupMenu(this);
   d->popupMenu->insertItem(i18n("About"), this,
      TQT_SLOT(showAbout()), 0, -1, 0);
 
-  if (parent && !parent->configFileName().isEmpty())
-    d->config = new KConfig(parent->configFileName() + "rc");
+  if (tqparent && !tqparent->configFileName().isEmpty())
+    d->config = new KConfig(tqparent->configFileName() + "rc");
   else {
     kdWarning() << className() << ": Can not create the config() "
-       "pointer due to the parent being null" << endl;
+       "pointer due to the tqparent being null" << endl;
     d->config = 0;
   }
 }
@@ -159,16 +159,16 @@ void KSim::PluginView::doCommand()
 
 void KSim::PluginView::mousePressEvent(TQMouseEvent *ev)
 {
-  if (ev->button() == TQMouseEvent::LeftButton)
+  if (ev->button() == Qt::LeftButton)
     doCommand();
 }
 
-KSim::PluginObject *KSim::PluginView::parentPlugin() const
+KSim::PluginObject *KSim::PluginView::tqparentPlugin() const
 {
-  return d->parent;
+  return d->tqparent;
 }
 
 void KSim::PluginView::showAbout()
 {
-  parentPlugin()->showAbout();
+  tqparentPlugin()->showAbout();
 }

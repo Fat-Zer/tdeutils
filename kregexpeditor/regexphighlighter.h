@@ -20,7 +20,7 @@
 #define REGEXPHIGHLIGHTER_H
 #include <tqsyntaxhighlighter.h>
 
-class RegexpHighlighter :public QSyntaxHighlighter
+class RegexpHighlighter :public TQSyntaxHighlighter
 {
 public:
     RegexpHighlighter( TQTextEdit* edit );

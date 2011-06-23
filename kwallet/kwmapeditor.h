@@ -29,9 +29,10 @@ class KActionCollection;
 
 class KWMapEditor : public TQTable {
 	Q_OBJECT
+  TQ_OBJECT
 
 	public:
-		KWMapEditor(TQMap<TQString,TQString>& map, TQWidget *parent = 0, const char *name = 0);
+		KWMapEditor(TQMap<TQString,TQString>& map, TQWidget *tqparent = 0, const char *name = 0);
 		virtual ~KWMapEditor();
 
 	public slots:
@@ -46,7 +47,7 @@ class KWMapEditor : public TQTable {
 		void copy();
 
 	protected:
-		virtual TQWidget *beginEdit(int row, int col, bool replace);
+		virtual TQWidget *beginEdit(int row, int col, bool tqreplace);
 
 	signals:
 		void dirty();

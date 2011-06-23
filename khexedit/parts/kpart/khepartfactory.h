@@ -27,14 +27,15 @@ class KAboutData;
 class KHexEditPartFactory : public KParts::Factory
 {
     Q_OBJECT
+  TQ_OBJECT
 
   public:
     KHexEditPartFactory();
     virtual ~KHexEditPartFactory();
 
   public:
-    virtual KParts::Part* createPartObject( TQWidget *parentWidget, const char *widgetName,
-                                            TQObject *parent, const char *name,
+    virtual KParts::Part* createPartObject( TQWidget *tqparentWidget, const char *widgetName,
+                                            TQObject *tqparent, const char *name,
                                             const char *classname, const TQStringList &args );
     static KInstance* instance();
 

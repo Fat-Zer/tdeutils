@@ -48,11 +48,12 @@ class PluginModule : public KSim::PluginObject
 class Fsystem : public KSim::PluginView, public FsystemIface
 {
   Q_OBJECT
+  TQ_OBJECT
   public:
     /**
      * construtor of Fsystem, calls all init functions to create the plugin.
      */
-    Fsystem(KSim::PluginObject *parent, const char *name);
+    Fsystem(KSim::PluginObject *tqparent, const char *name);
     ~Fsystem();
 
     virtual void reparseConfig();
@@ -65,7 +66,7 @@ class Fsystem : public KSim::PluginView, public FsystemIface
     void updateFS();
 
   private:
-    typedef TQValueList<QPair<TQString, TQString> > MountEntryList;
+    typedef TQValueList<TQPair<TQString, TQString> > MountEntryList;
     MountEntryList makeList(const TQStringList &list) const;
 
     FilesystemWidget *m_widget;

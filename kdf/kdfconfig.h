@@ -3,7 +3,7 @@
  *
  * Copyright (c) 1999 Michael Kropfberger <michael.kropfberger@gmx.net>
  *
- * Requires the Qt widget libraries, available at no cost at
+ * Requires the TQt widget libraries, available at no cost at
  * http://www.troll.no/
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -39,9 +39,10 @@ class TQScrollBar;
 
 class CListView;
 
-class KDFConfigWidget : public QWidget
+class KDFConfigWidget : public TQWidget
 {
   Q_OBJECT
+  TQ_OBJECT
 
   class CTabName
   {
@@ -59,7 +60,7 @@ class KDFConfigWidget : public QWidget
   };
 
   public:
-    KDFConfigWidget( TQWidget *parent=0, const char *name=0, bool init=false);
+    KDFConfigWidget( TQWidget *tqparent=0, const char *name=0, bool init=false);
     ~KDFConfigWidget();
 
   public slots:

@@ -8,7 +8,7 @@
 	<action objid="KonquerorIface" prototype="void createNewWindow(QString)" repeat="0" autostart="0">
 		<name>Create New Window</name>
 		<comment>Creates a new window and loads an arbitrary URL.</comment>
-		<argument type="QString"><comment>The URL to load in the window initially.</comment></argument>
+		<argument type=TQSTRING_OBJECT_NAME_STRING><comment>The URL to load in the window initially.</comment></argument>
 	</action>
 	<action objid="MainApplication-Interface" prototype="void quit()" repeat="0" autostart="0">
 		<name>Quit</name>

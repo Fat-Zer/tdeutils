@@ -323,7 +323,7 @@ int SFilterControl::execute( uchar *dest, uchar *src, uint size )
 	// A short description so that I will understand what the
 	// h... is going on five minutes from now.
 	//
-	// Destination byte is masked (AND'ed) with the inverse bitmap
+	// Destination byte is tqmasked (AND'ed) with the inverse bitmap
 	// (the noninversed bitmap contains position of the
 	// two swap bits, eg 7-2 gives 10000100). Then the destination
 	// is OR'ed with the swapped bitmap.
@@ -347,14 +347,14 @@ const char *SExportCArray::printFormatted( const char *b, uint maxSize ) const
   if( elementType == Char )
   {
     char e = 0;
-    memcpy( &e, b, QMIN(sizeof(e),maxSize) );
+    memcpy( &e, b, TQMIN(sizeof(e),maxSize) );
     sprintf( buf, "%d", e );
     return( buf );
   }
   else if( elementType == Uchar )
   {
     unsigned char e = 0;
-    memcpy( &e, b, QMIN(sizeof(e),maxSize) );
+    memcpy( &e, b, TQMIN(sizeof(e),maxSize) );
     if( unsignedAsHexadecimal == true )
     {
       sprintf( buf, "0x%02x", e );
@@ -368,7 +368,7 @@ const char *SExportCArray::printFormatted( const char *b, uint maxSize ) const
   else if( elementType == Short )
   {
     short e = 0;
-    memcpy( &e, b, QMIN(sizeof(e),maxSize) );
+    memcpy( &e, b, TQMIN(sizeof(e),maxSize) );
     sprintf( buf, "%d", e );
     return( buf );
 
@@ -376,7 +376,7 @@ const char *SExportCArray::printFormatted( const char *b, uint maxSize ) const
   else if( elementType == Ushort )
   {
     unsigned short e = 0;
-    memcpy( &e, b, QMIN(sizeof(e),maxSize) );
+    memcpy( &e, b, TQMIN(sizeof(e),maxSize) );
     if( unsignedAsHexadecimal == true )
     {
       sprintf( buf, "0x%04x", e );
@@ -390,14 +390,14 @@ const char *SExportCArray::printFormatted( const char *b, uint maxSize ) const
   else if( elementType == Int )
   {
     int e = 0;
-    memcpy( &e, b, QMIN(sizeof(e),maxSize) );
+    memcpy( &e, b, TQMIN(sizeof(e),maxSize) );
     sprintf( buf, "%u", e );
     return( buf );
   }
   else if( elementType == Uint )
   {
     unsigned int e = 0;
-    memcpy( &e, b, QMIN(sizeof(e),maxSize) );
+    memcpy( &e, b, TQMIN(sizeof(e),maxSize) );
     if( unsignedAsHexadecimal == true )
     {
       sprintf( buf, "0x%08x", e );
@@ -411,14 +411,14 @@ const char *SExportCArray::printFormatted( const char *b, uint maxSize ) const
   else if( elementType == Float )
   {
     float e = 0;
-    memcpy( &e, b, QMIN(sizeof(e),maxSize) );
+    memcpy( &e, b, TQMIN(sizeof(e),maxSize) );
     sprintf( buf, "%f", e );
     return( buf );
   }
   else if( elementType == Double )
   {
     double e = 0;
-    memcpy( &e, b, QMIN(sizeof(e),maxSize) );
+    memcpy( &e, b, TQMIN(sizeof(e),maxSize) );
     sprintf( buf, "%f", e );
     return( buf );
   }
@@ -447,8 +447,8 @@ TQString SExportCArray::variableName( uint range ) const
   uint es = elementSize();
   uint numElement = range / es + ((range % es) ? 1 : 0);
 
-  return( TQString("%1 %2[%2]").arg(typeString[elementType]).
-	  arg(arrayName).arg(numElement) );
+  return( TQString("%1 %2[%2]").tqarg(typeString[elementType]).
+	  tqarg(arrayName).tqarg(numElement) );
 }
 
 
@@ -568,7 +568,7 @@ bool CHexBuffer::hasFileName( void )
   //
   // FIXME: Files can be called "Untitled" so this must be corrected.
   //
-  if( mUrl.isEmpty() || mUrl.contains( i18n( "Untitled" ), false ) )
+  if( mUrl.isEmpty() || mUrl.tqcontains( i18n( "Untitled" ), false ) )
   {
     return( false );
   }
@@ -580,9 +580,9 @@ bool CHexBuffer::hasFileName( void )
 
 
 
-int CHexBuffer::setLayout( SDisplayLayout &layout )
+int CHexBuffer::setLayout( SDisplayLayout &tqlayout )
 {
-  mLayout = layout;
+  mLayout = tqlayout;
   mLayout.verify();
 
   if( mLayout.primaryMode == SDisplayLayout::textOnly )
@@ -630,9 +630,9 @@ void CHexBuffer::setColor( SDisplayColor &color )
   //
   // Test...
   //
-  //mColor.secondTextBg = Qt::yellow;
-  //mColor.offsetBg = Qt::lightGray;
-  //mColor.gridFg = Qt::darkCyan;
+  //mColor.secondTextBg = TQt::yellow;
+  //mColor.offsetBg = TQt::lightGray;
+  //mColor.gridFg = TQt::darkCyan;
 
   /*
   mColor.secondTextBg = mColor.textBg;
@@ -676,7 +676,7 @@ bool CHexBuffer::toggleEditor( void )
       edit_secondary : edit_primary;
   }
 
-  setEditMode( mEditMode ); // Sets the cursor shapes as well
+  setEditMode( mEditMode ); // Sets the cursor tqshapes as well
 
   if( changed == true )
   {
@@ -766,7 +766,7 @@ void CHexBuffer::setDisableCursor( bool disableCursor )
 }
 
 
-void CHexBuffer::setCursorShapeModifier( bool alwaysBlock, bool thickInsert )
+void CHexBuffer::settqCursorShapeModifier( bool alwaysBlock, bool thickInsert )
 {
   mCursor.setShapeModifier( alwaysBlock, thickInsert );
   setEditMode( mEditMode );
@@ -813,12 +813,12 @@ void CHexBuffer::setEditMode( EEditMode editMode )
 
 
 
-void CHexBuffer::setMaximumSize( uint maximumSize )
+void CHexBuffer::setMaximumSize( uint tqmaximumSize )
 {
-  if( maximumSize == 0 ) { maximumSize = ~0; }
+  if( tqmaximumSize == 0 ) { tqmaximumSize = ~0; }
 
-  mMaximumSize   = maximumSize;
-  mFixedSizeMode = maximumSize == (uint)~0 ? false : true;
+  mMaximumSize   = tqmaximumSize;
+  mFixedSizeMode = tqmaximumSize == (uint)~0 ? false : true;
   mCursor.setFixedSizeMode( mFixedSizeMode );
 
   if( mLayout.offsetVisible == false )
@@ -832,9 +832,9 @@ void CHexBuffer::setMaximumSize( uint maximumSize )
     if( mLayout.offsetMode ==  SDisplayLayout::decimal )
     {
       printOffset = &CHexBuffer::printDecimalOffset;
-      for( mOffsetSize=0; maximumSize > 0; mOffsetSize += 1 )
+      for( mOffsetSize=0; tqmaximumSize > 0; mOffsetSize += 1 )
       {
-	maximumSize = maximumSize / 10;
+	tqmaximumSize = tqmaximumSize / 10;
       }
       mOffsetIndex = 10 - mOffsetSize;
     }
@@ -848,9 +848,9 @@ void CHexBuffer::setMaximumSize( uint maximumSize )
       {
 	printOffset = &CHexBuffer::printHexadecimalSmallOffset;
       }
-      for( mOffsetSize=0; maximumSize > 0; mOffsetSize += 1 )
+      for( mOffsetSize=0; tqmaximumSize > 0; mOffsetSize += 1 )
       {
-	maximumSize = maximumSize / 16;
+	tqmaximumSize = tqmaximumSize / 16;
       }
       if( mOffsetSize > 4 ) { mOffsetSize += 1; } // Space for the ':' sign
       mOffsetIndex = 9 - mOffsetSize;
@@ -920,7 +920,7 @@ int CHexBuffer::writeFile( TQFile &file, CProgress &p )
 
   do
   {
-    const uint blockSize = QMIN( 131072 /* == 1024 * 128 */  , remaining );
+    const uint blockSize = TQMIN( 131072 /* == 1024 * 128 */  , remaining );
     const int writeSize = file.writeBlock( data() + offset, blockSize );
     if( writeSize == -1 )
     {
@@ -952,7 +952,7 @@ int CHexBuffer::writeFile( TQFile &file, CProgress &p )
 
 int CHexBuffer::readFile( TQFile &file, const TQString &url, CProgress &p )
 {
-  if( resize( file.size() + 100 ) == false )
+  if( tqresize( file.size() + 100 ) == false )
   {
     p.finish();
     return( Err_NoMemory );
@@ -965,7 +965,7 @@ int CHexBuffer::readFile( TQFile &file, const TQString &url, CProgress &p )
     uint remaining = file.size();
     while( remaining > 0 )
     {
-      const uint blockSize = QMIN( 131072 /* == 1024 * 128 */  , remaining );
+      const uint blockSize = TQMIN( 131072 /* == 1024 * 128 */  , remaining );
       const int readSize = file.readBlock( data() + offset, blockSize );
       if( readSize == -1 )
       {
@@ -1029,7 +1029,7 @@ int CHexBuffer::insertFile( TQFile &file, CProgress &p )
   uint remaining = file.size();
   while( remaining > 0 )
   {
-    const uint blockSize = QMIN( 131072 /* == 1024 * 128 */  , remaining );
+    const uint blockSize = TQMIN( 131072 /* == 1024 * 128 */  , remaining );
     const int readSize = file.readBlock( array.data() + offset, blockSize );
     if( readSize == -1 )
     {
@@ -1064,7 +1064,7 @@ int CHexBuffer::insertFile( TQFile &file, CProgress &p )
 
 int CHexBuffer::newFile( const TQString &url )
 {
-  if( resize( 100 ) == 0 )
+  if( tqresize( 100 ) == 0 )
   {
     return( Err_NoMemory );
   }
@@ -1609,7 +1609,7 @@ void CHexBuffer::drawText( TQPainter &paint, uint line, int sx, int x1, int x2 )
 
   //
   // Draw the bookmark identifiers on this line (if any).  We use the
-  // bitmask to minimize the number of times we try to draw the bookmarks.
+  // bittqmask to minimize the number of times we try to draw the bookmarks.
   //
   int bookmarkPosition = 0;
   if( mBookmarkMap.testBit(fileOffset/200) ||
@@ -1712,17 +1712,17 @@ void CHexBuffer::drawText( TQPainter &paint, uint line, int x1, int x2, int y,
   if( (line+1) % 2 || outsideText == true )
   {
     paint.fillRect( x1, y, x2, lineHeight(),
-		    useBlackWhite == true ? Qt::white : mColor.textBg );
+		    useBlackWhite == true ? TQt::white : mColor.textBg );
   }
   else
   {
     paint.fillRect( x1, y, x2, lineHeight(),
-		    useBlackWhite == true ? Qt::white : mColor.secondTextBg );
+		    useBlackWhite == true ? TQt::white : mColor.secondTextBg );
   }
 
   if( mLayout.horzGridWidth > 0 && outsideText == false )
   {
-    TQPen pen( useBlackWhite == true ? Qt::black : mColor.gridFg,
+    TQPen pen( useBlackWhite == true ? TQt::black : mColor.gridFg,
 	      mLayout.horzGridWidth );
     paint.setPen( pen );
     paint.drawLine( x1, y+mFontHeight, x2+x1, y+mFontHeight );
@@ -1753,7 +1753,7 @@ void CHexBuffer::drawText( TQPainter &paint, uint line, int x1, int x2, int y,
     int s1 = mOffsetSize * mUnitWidth;
     if( fileData != 0 )
     {
-      paint.setPen( useBlackWhite == true ? Qt::black : mColor.offsetFg );
+      paint.setPen( useBlackWhite == true ? TQt::black : mColor.offsetFg );
       THIS_FPTR(printOffset)( mPrintBuf, fileOffset );
       // ## paint.drawText( offset, mFontAscent+y, &mPrintBuf[mOffsetIndex],
       // mOffsetSize );
@@ -1768,7 +1768,7 @@ void CHexBuffer::drawText( TQPainter &paint, uint line, int x1, int x2, int y,
       offset += mLayout.separatorMarginWidth;
 
       int s2 = mLayout.leftSeparatorWidth + mLayout.separatorMarginWidth;
-      TQPen pen( useBlackWhite == true ? Qt::black : mColor.leftSeparatorFg,
+      TQPen pen( useBlackWhite == true ? TQt::black : mColor.leftSeparatorFg,
 		mLayout.leftSeparatorWidth );
       paint.setPen( pen );
       int center = offset + mLayout.leftSeparatorWidth/2;
@@ -1789,7 +1789,7 @@ void CHexBuffer::drawText( TQPainter &paint, uint line, int x1, int x2, int y,
     int flag = THIS_FPTR(printCell)( mPrintBuf, fileData[i] );
     if( useBlackWhite == true )
     {
-      paint.setPen( Qt::black );
+      paint.setPen( TQt::black );
     }
     else
     {
@@ -1804,7 +1804,7 @@ void CHexBuffer::drawText( TQPainter &paint, uint line, int x1, int x2, int y,
     {
       if( (i+1) % mLayout.columnSize == 0 )
       {
-	TQPen pen( useBlackWhite == true ? Qt::black : mColor.gridFg,
+	TQPen pen( useBlackWhite == true ? TQt::black : mColor.gridFg,
 		  mLayout.vertGridWidth );
 	paint.setPen( pen );
 	int x = localOffset - (mSplitWidth+1) / 2;
@@ -1822,7 +1822,7 @@ void CHexBuffer::drawText( TQPainter &paint, uint line, int x1, int x2, int y,
     {
       offset += mLayout.separatorMarginWidth;
       int s = mLayout.separatorMarginWidth + mLayout.rightSeparatorWidth;
-      TQPen pen( useBlackWhite == true ? Qt::black : mColor.rightSeparatorFg,
+      TQPen pen( useBlackWhite == true ? TQt::black : mColor.rightSeparatorFg,
 		mLayout.rightSeparatorWidth );
       paint.setPen( pen );
       int center = offset + mLayout.rightSeparatorWidth/2;
@@ -1841,7 +1841,7 @@ void CHexBuffer::drawText( TQPainter &paint, uint line, int x1, int x2, int y,
       int flag = printAsciiCell( mPrintBuf, fileData[i] );
       if( useBlackWhite == true )
       {
-	paint.setPen( Qt::black );
+	paint.setPen( TQt::black );
       }
       else
       {
@@ -1888,8 +1888,8 @@ void CHexBuffer::drawHeader( TQPainter &paint, int sx, int width, int y,
   paint.setFont( KGlobalSettings::generalFont() );
   const TQFontMetrics &fm = paint.fontMetrics();
 
-  paint.fillRect( sx, y, width, fm.height(), Qt::white );
-  paint.setPen( Qt::black );
+  paint.fillRect( sx, y, width, fm.height(), TQt::white );
+  paint.setPen( TQt::black );
   if( header.line == SPageHeader::SingleLine )
   {
     if( isFooter == false )
@@ -1923,8 +1923,8 @@ void CHexBuffer::drawHeader( TQPainter &paint, int sx, int width, int y,
     else if( header.pos[i] == SPageHeader::PageNumber )
     {
       msg = i18n("Page %1 of %2")
-        .arg(KGlobal::locale()->formatNumber(position.curPage, 0))
-        .arg(KGlobal::locale()->formatNumber(position.maxPage, 0));
+        .tqarg(KGlobal::locale()->formatNumber(position.curPage, 0))
+        .tqarg(KGlobal::locale()->formatNumber(position.maxPage, 0));
     }
     else if( header.pos[i] == SPageHeader::FileName )
     {
@@ -2091,7 +2091,7 @@ void CHexBuffer::drawCursor( TQPainter &paint, uint line, int startx,
   }
 
   //
-  // Draw the cursor shape
+  // Draw the cursor tqshape
   //
   bool transparent = false;
   if( mActiveEditor == edit_primary )
@@ -2116,7 +2116,7 @@ void CHexBuffer::drawCursor( TQPainter &paint, uint line, int startx,
 	  paint.drawLine( center-2, mFontHeight-1, center+2, mFontHeight-1 );
 	}
       }
-      else // Solid block shape
+      else // Solid block tqshape
       {
 	paint.fillRect( c.x1 - startx, 0, mUnitWidth, mFontHeight, cbg );
 	useFg = true;
@@ -2209,7 +2209,7 @@ void CHexBuffer::drawCursor( TQPainter &paint, uint line, int startx,
   }
 
   //
-  // Draw the cursor shape
+  // Draw the cursor tqshape
   //
   transparent = false;
   if( mActiveEditor == edit_secondary )
@@ -2822,16 +2822,16 @@ int CHexBuffer::exportHtml( const SExportHtml &ex, CProgress &p )
   for( uint i=0; i < numFiles; i++ )
   {
     name.sprintf( "%08d.html", i+1 );
-    fileNames.append( TQString("%1/%2%3").arg(ex.package).arg(ex.prefix).
+    fileNames.append( TQString("%1/%2%3").tqarg(ex.package).tqarg(ex.prefix).
 		      arg(name));
   }
   name.sprintf( "%08d.html", 0 );
-  TQString tocName =TQString("%1/%2%3").arg(ex.package).arg(ex.prefix).arg(name);
+  TQString tocName =TQString("%1/%2%3").tqarg(ex.package).tqarg(ex.prefix).tqarg(name);
 
   TQString linkName;
   if( ex.symLink == true )
   {
-    linkName = TQString("%1/%2").arg(ex.package).arg("index.html");
+    linkName = TQString("%1/%2").tqarg(ex.package).tqarg("index.html");
   }
 
   while( remaining  > 0 )
@@ -2849,7 +2849,7 @@ int CHexBuffer::exportHtml( const SExportHtml &ex, CProgress &p )
 
     THIS_FPTR(printOffset)( mPrintBuf, (startLine-1)*mLayout.lineSize );
     mPrintBuf[mOffsetSize]=0;
-    offset += TQString(" %1 [%2]").arg(i18n("to")).arg(mPrintBuf);
+    offset += TQString(" %1 [%2]").tqarg(i18n("to")).tqarg(mPrintBuf);
     offsets.append(offset);
 
     if( p.expired() == true )
@@ -2981,7 +2981,7 @@ int CHexBuffer::copyText( TQByteArray &array, const SExportRange &range,
 
   uint bytePerLine = mOffsetSize + 1 + (mNumCell + 2)*mLayout.lineSize + 1;
   uint size = (stopLine - startLine + 1)*bytePerLine;
-  if( array.resize( size+1 ) == false )
+  if( array.tqresize( size+1 ) == false )
   {
     return( Err_NoMemory );
   }
@@ -3021,7 +3021,7 @@ int CHexBuffer::copySelectedData( TQByteArray &array )
   }
 
   uint size = stop - start;
-  if( array.resize( size ) == false )
+  if( array.tqresize( size ) == false )
   {
     return( Err_NoMemory );
   }
@@ -3466,7 +3466,7 @@ void CHexBuffer::updateBookmarkMap( bool resize )
     {
       //
       // Espen 2000-05-16:
-      // I do this test to avoid some Qt warnings when I have closed
+      // I do this test to avoid some TQt warnings when I have closed
       // or reduced the size of the documnet while the (now invalid)
       // bookmarks still exist.
       //
@@ -3621,7 +3621,7 @@ int CHexBuffer::replaceAll( SSearchControl &sc, bool init )
 	if( sc.key.size() > sc.val.size() )
 	{
 	  uint diff = sc.key.size() - sc.val.size();
-	  stop -= QMIN( stop, diff );
+	  stop -= TQMIN( stop, diff );
 	}
 	else if( sc.key.size() < sc.val.size() )
 	{
@@ -3660,7 +3660,7 @@ int CHexBuffer::replaceAll( SSearchControl &sc, bool init )
 	  }
 	}
 
-	i -= QMIN( i, sc.key.size() );
+	i -= TQMIN( i, sc.key.size() );
 	if( i == 0 ) { break; }
       }
     }
@@ -4167,7 +4167,7 @@ int CHexBuffer::scanData( SSearchControl &sc, bool init )
 	{
 	  sc.match = true;
 	  cursorGoto( i, 7 );
-	  markSet( i, sc.key.size() );
+	  markSet( i, (uint)sc.key.size() );
 	  return( Err_Success );
 	}
       }
@@ -4193,7 +4193,7 @@ int CHexBuffer::scanData( SSearchControl &sc, bool init )
 	{
 	  sc.match = true;
 	  cursorGoto( i, 7 );
-	  markSet( i, sc.key.size() );
+	  markSet( i, (uint)sc.key.size() );
 	  return( Err_Success );
 	}
       }
@@ -4360,7 +4360,7 @@ void CHexBuffer::doActionGroup( CHexActionGroup *group )
 
 void CHexBuffer::doAction( CHexAction *action )
 {
-  if( action->mAction == CHexAction::replace )
+  if( action->mAction == CHexAction::tqreplace )
   {
     doReplace( action, true );
   }
@@ -4406,7 +4406,7 @@ void CHexBuffer::recordStart( SCursor &cursor )
 void CHexBuffer::recordReplace( SCursor &cursor, uint size, char *data1,
 				uint data1Size )
 {
-  CHexAction *hexAction = new CHexAction( CHexAction::replace,
+  CHexAction *hexAction = new CHexAction( CHexAction::tqreplace,
 					  cursor.curr.offset );
   if( hexAction == 0 )
   {
@@ -4786,7 +4786,7 @@ void CHexBuffer::printHtmlTocPage( const TQString &tocName,
   for( uint i=0; i<=numPage; i++ )
   {
     TQString n( fileNames[i].right( fileNames[i].length() -
-				   fileNames[i].findRev('/') - 1) );
+				   fileNames[i].tqfindRev('/') - 1) );
     os << "<A HREF=\"" << n << "\">" << i18n("Page") << i+1;
     os << "</A>";
     os << " " << offsets[i];
@@ -4802,7 +4802,7 @@ void CHexBuffer::printHtmlTocPage( const TQString &tocName,
     // Make a symlink. We ignore any error here. I don't consider
     // it to be fatal.
     //
-    TQString n( tocName.right( tocName.length() - tocName.findRev('/') - 1) );
+    TQString n( tocName.right( tocName.length() - tocName.tqfindRev('/') - 1) );
     symlink( n.latin1(), linkName.latin1() );
   }
 
@@ -4825,11 +4825,11 @@ void CHexBuffer::printHtmlCaption( TQTextStream &os, uint captionType,
     break;
 
     case 2:
-      caption = mUrl.right( mUrl.length() - mUrl.findRev('/') - 1);
+      caption = mUrl.right( mUrl.length() - mUrl.tqfindRev('/') - 1);
     break;
 
     case 3:
-      caption = i18n("Page %1 of %2").arg(curPage).arg(numPage);
+      caption = i18n("Page %1 of %2").tqarg(curPage).tqarg(numPage);
     break;
   }
 
@@ -4854,7 +4854,7 @@ void CHexBuffer::printHtmlNavigator( TQTextStream &os, const TQString *next,
   }
   else
   {
-    TQString n( next->right( next->length() - next->findRev('/') - 1) );
+    TQString n( next->right( next->length() - next->tqfindRev('/') - 1) );
     os << "<A HREF=\"" << n << "\">" << i18n("Next") << "</A>" << " ";
   }
 
@@ -4864,7 +4864,7 @@ void CHexBuffer::printHtmlNavigator( TQTextStream &os, const TQString *next,
   }
   else
   {
-    TQString p( prev->right( prev->length() - prev->findRev('/') - 1) );
+    TQString p( prev->right( prev->length() - prev->tqfindRev('/') - 1) );
     os << "<A HREF=\"" << p << "\">" << i18n("Previous") << "</A>" << " ";
   }
 
@@ -4874,7 +4874,7 @@ void CHexBuffer::printHtmlNavigator( TQTextStream &os, const TQString *next,
   }
   else
   {
-    TQString t( toc->right( toc->length() - toc->findRev('/') - 1) );
+    TQString t( toc->right( toc->length() - toc->tqfindRev('/') - 1) );
     os << "<A HREF=\"" << t << "\">" << i18n("Contents");
     os << "</A>" << " ";
   }
@@ -4896,7 +4896,7 @@ int CHexBuffer::printHtmlHeader( TQTextStream &os, bool isFront )
   if( isFront == true )
   {
     os << "<HTML>" << endl << "<HEAD>" << endl;
-    os << "<META HTTP-EQUIV=\"Content-Type\" CONTENT=\"text/html; ";
+    os << "<META HTTP-ETQUIV=\"Content-Type\" CONTENT=\"text/html; ";
     os << "charset=iso-8859-1\">" << endl;
     os << "<META NAME=\"hexdata\" CONTENT=\"khexedit dump\">" << endl;
     os << "</HEAD>" << endl << "<BODY>" << endl;
@@ -4925,15 +4925,15 @@ int CHexBuffer::printHtmlTable( TQTextStream &os, uint line, uint numLine,
   os << "CELLSPACING=0 CELLPADDING=2>" << endl;
   if( mLayout.offsetVisible == true )
   {
-    color = bw == true ? Qt::white : mColor.offsetBg;
-    os << "<TD BGCOLOR=" << color.name().latin1() << ">" << endl;
+    color = bw == true ? TQt::white : mColor.offsetBg;
+    os << "<TD BGCOLOR=" << TQString(color.name()).latin1() << ">" << endl;
     os << "<TABLE BORDER=0 COLS=1 WIDTH=\"100%\" ";
     os << "CELLSPACING=0 CELLPADDING=2>" << endl;
 
-    color = bw == true ? Qt::black : mColor.offsetFg;
+    color = bw == true ? TQt::black : mColor.offsetFg;
     for( i=0; i<numLine; i++ )
     {
-      os << "<TR><TD><TT><b><FONT COLOR=" << color.name().latin1() << ">";
+      os << "<TR><TD><TT><b><FONT COLOR=" << TQString(color.name()).latin1() << ">";
       THIS_FPTR(printOffset)( mPrintBuf, (line+i)*mLayout.lineSize );
       mPrintBuf[mOffsetSize]=0;
       os << mPrintBuf << "</TD></TR>" << endl;
@@ -4941,8 +4941,8 @@ int CHexBuffer::printHtmlTable( TQTextStream &os, uint line, uint numLine,
     os << "</TABLE>" << endl << "</TD>" << endl;
   }
 
-  color = bw == true ? Qt::white : mColor.textBg;
-  os << "<TD BGCOLOR=" << color.name().latin1()  << ">" << endl;
+  color = bw == true ? TQt::white : mColor.textBg;
+  os << "<TD BGCOLOR=" << TQString(color.name()).latin1()  << ">" << endl;
   os << "<TABLE BORDER=0 COLS=1 WIDTH=\"100%\" ";
   os << "CELLSPACING=0 CELLPADDING=2>" << endl;
   for( i=0; i<numLine; i++ )
@@ -4953,8 +4953,8 @@ int CHexBuffer::printHtmlTable( TQTextStream &os, uint line, uint numLine,
 
   if( mLayout.secondaryMode != SDisplayLayout::hide )
   {
-    color = bw == true ? Qt::white : mColor.textBg;
-    os << "<TD BGCOLOR=" << color.name().latin1() << ">" << endl;
+    color = bw == true ? TQt::white : mColor.textBg;
+    os << "<TD BGCOLOR=" << TQString(color.name()).latin1() << ">" << endl;
     os << "<TABLE BORDER=0 COLS=1 WIDTH=\"100%\" ";
     os << "CELLSPACING=0 CELLPADDING=2>" << endl;
     for( i=0; i<numLine; i++ )
@@ -4978,14 +4978,14 @@ int CHexBuffer::printHtmlLine( TQTextStream &os, uint line, bool isPrimary,
   TQColor color;
   if( bw == true )
   {
-    color = Qt::white;
+    color = TQt::white;
   }
   else
   {
     color = (line+1) % 2 ? mColor.textBg : mColor.secondTextBg;
   }
 
-  os << "<TR><TD NOWRAP BGCOLOR=" << color.name().latin1() << "><TT><B>"
+  os << "<TR><TD NOWRAP BGCOLOR=" << TQString(color.name()).latin1() << "><TT><B>"
      << endl;
   if( offset >= documentSize() )
   {
@@ -5003,7 +5003,7 @@ int CHexBuffer::printHtmlLine( TQTextStream &os, uint line, bool isPrimary,
 	mPrintBuf[mNumCell] = 0;
 	if( i == 0 )
 	{
-	  color = bw == true ? Qt::black : foregroundColor(i);
+	  color = bw == true ? TQt::black : foregroundColor(i);
 	}
 	else
 	{
@@ -5015,21 +5015,21 @@ int CHexBuffer::printHtmlLine( TQTextStream &os, uint line, bool isPrimary,
 	unsigned char val = (unsigned char)data()[offset+i];
 	if( THIS_FPTR(printCell)( mPrintBuf, val ) == 0 )
 	{
-	  color = bw == true ? Qt::black : foregroundColor(i);
+	  color = bw == true ? TQt::black : foregroundColor(i);
 	}
 	else
 	{
-	  color = bw == true ? Qt::black : mColor.nonPrintFg;
+	  color = bw == true ? TQt::black : mColor.nonPrintFg;
 	}
       }
       mPrintBuf[mNumCell] = 0;
       if( i == 0 )
       {
-	os << "<FONT COLOR=" << color.name().latin1() << ">";
+	os << "<FONT COLOR=" << TQString(color.name()).latin1() << ">";
       }
       else if( color != prevColor )
       {
-	os << "</FONT><FONT COLOR=" << color.name().latin1() << ">";
+	os << "</FONT><FONT COLOR=" << TQString(color.name()).latin1() << ">";
       }
       prevColor = color;
 
@@ -5053,7 +5053,7 @@ int CHexBuffer::printHtmlLine( TQTextStream &os, uint line, bool isPrimary,
 	memset(mPrintBuf, ' ', 1 );
 	if( i == 0 )
 	{
-	  color = bw == true ? Qt::black : mColor.secondaryFg;
+	  color = bw == true ? TQt::black : mColor.secondaryFg;
 	}
 	else
 	{
@@ -5065,21 +5065,21 @@ int CHexBuffer::printHtmlLine( TQTextStream &os, uint line, bool isPrimary,
 	unsigned char val = (unsigned char)data()[offset+i];
 	if( printAsciiCell( mPrintBuf, val ) == 0 )
 	{
-	  color = bw == true ? Qt::black : mColor.secondaryFg;
+	  color = bw == true ? TQt::black : mColor.secondaryFg;
 	}
 	else
 	{
-	  color = bw == true ? Qt::black : mColor.nonPrintFg;
+	  color = bw == true ? TQt::black : mColor.nonPrintFg;
 	}
 	mPrintBuf[1] = 0;
 
 	if( i == 0 )
 	{
-	  os << "<FONT COLOR=" << color.name().latin1() << ">";
+	  os << "<FONT COLOR=" << TQString(color.name()).latin1() << ">";
 	}
 	else if( color != prevColor )
 	{
-	  os << "</FONT><FONT COLOR=" << color.name().latin1()  << ">";
+	  os << "</FONT><FONT COLOR=" << TQString(color.name()).latin1()  << ">";
 	}
 	prevColor = color;
 	

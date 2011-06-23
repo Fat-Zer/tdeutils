@@ -34,7 +34,7 @@ namespace KSim
    * @short led using gkrellm themes
    * @author Robbie Ward <linuxphreak@gmx.co.uk>
    */
-  class KDE_EXPORT Led : public QPixmap
+  class KDE_EXPORT Led : public TQPixmap
   {
     public:
       enum Type { First = 0, Second };
@@ -46,7 +46,7 @@ namespace KSim
        * @param ImageName is the image to display
        * the image's height is divided by 4 and each item is used for send in,
        * send out, receive in and receive out
-       * @param parent is the parent widget
+       * @param tqparent is the tqparent widget
        * @param name is the object instance name
        */
       Led(Type type, const TQString &imageName);
@@ -88,7 +88,7 @@ namespace KSim
        */
       Type type() const;
       /**
-       * Force the Led to repaint its state
+       * Force the Led to tqrepaint its state
        */
       void update();
 
@@ -107,35 +107,36 @@ namespace KSim
   class KDE_EXPORT LedLabel : public KSim::Progress
   {
     Q_OBJECT
+  TQ_OBJECT
     public:
       /**
        * Constructs a KSim::LedLabel.
        *
        * @param type is the theme type
        * @param label is the default text to display
-       * @param parent is the parent widget
+       * @param tqparent is the tqparent widget
        * @see KSim::ThemeLoader
        */
       LedLabel(int max, int type, const TQString &label,
-            TQWidget *parent, const char *name = 0, WFlags fl = 0);
+            TQWidget *tqparent, const char *name = 0, WFlags fl = 0);
       /**
        * Constructs a KSim::LedLabel.
        *
        * @param type is the theme type
        * @param label is the default text to display
-       * @param parent is the parent widget
+       * @param tqparent is the tqparent widget
        * @see KSim::ThemeLoader
        */
-      LedLabel(int max, int type, TQWidget *parent,
+      LedLabel(int max, int type, TQWidget *tqparent,
              const char *name = 0, WFlags fl = 0);
       /**
        * Constructs a KSim::LedLabel.
        *
        * @param label is the default text to display
-       * @param parent is the parent widget
+       * @param tqparent is the tqparent widget
        * @see KSim::ThemeLoader
        */
-      LedLabel(int max, TQWidget *parent,
+      LedLabel(int max, TQWidget *tqparent,
              const char *name = 0, WFlags fl = 0);
       /**
        * destructor for KSim::LedLabel.
@@ -149,7 +150,7 @@ namespace KSim
       /**
        * reimplemented for internal reasons
        */
-      virtual TQSize sizeHint() const;
+      virtual TQSize tqsizeHint() const;
 
     public slots:
       /**
@@ -183,7 +184,7 @@ namespace KSim
       virtual void resizeEvent(TQResizeEvent *);
 
     private:
-      void layoutLeds();
+      void tqlayoutLeds();
       void init();
 
       class Private;

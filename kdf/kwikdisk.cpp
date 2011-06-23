@@ -134,7 +134,7 @@ void KwikDisk::setUpdateFrequency(int frequency)
    // Kill current timer and restart it if the frequency is
    // larger than zero.
    //
-   killTimers();
+   TQT_TQOBJECT(this)->killTimers();
    if( frequency > 0 )
    {
       startTimer(frequency * 1000);
@@ -176,13 +176,13 @@ void KwikDisk::updateDFDone()
    {
       // FIXME: tool tips are unused atm
       TQString toolTipText = i18n("%1 (%2) %3 on %4")
-         .arg( disk->mounted() ? i18n("Unmount") : i18n("Mount"))
-         .arg(disk->fsType()).arg(disk->deviceName()).arg(disk->mountPoint());
+         .tqarg( disk->mounted() ? i18n("Unmount") : i18n("Mount"))
+         .tqarg(disk->fsType()).tqarg(disk->deviceName()).tqarg(disk->mountPoint());
 
       TQString entryName = disk->mountPoint();
       if( disk->mounted() )
       {
-         entryName += TQString("\t\t\t[%1]").arg(disk->prettyKBAvail());
+         entryName += TQString("\t\t\t[%1]").tqarg(disk->prettyKBAvail());
       }
       int id = contextMenu()->insertItem("", this, TQT_SLOT(toggleMount(int)) );
       contextMenu()->setItemParameter(id, itemNo);
@@ -190,18 +190,18 @@ void KwikDisk::updateDFDone()
 
       TQPixmap *pix = new TQPixmap(KSystemTray::loadIcon(disk->iconName()));
 
-      if( getuid() !=0 && disk->mountOptions().find("user",0, false) == -1 )
+      if( getuid() !=0 && disk->mountOptions().tqfind("user",0, false) == -1 )
       {
          //
          // Special root icon, normal user cant mount.
          //
          // 2000-01-23 Espen Sand
-         // Careful here: If the mask has not been defined we can
-         // not use TQPixmap::mask() because it returns 0 => segfault
+         // Careful here: If the tqmask has not been defined we can
+         // not use TQPixmap::tqmask() because it returns 0 => segfault
          //
-         if( pix->mask() != 0 )
+         if( pix->tqmask() != 0 )
          {
-            TQBitmap *bm = new TQBitmap(*(pix->mask()));
+            TQBitmap *bm = new TQBitmap(*(pix->tqmask()));
             if( bm != 0 )
             {
                TQPainter qp( bm );
@@ -264,10 +264,10 @@ void KwikDisk::toggleMount(int item)
       if( m_options.fileManager().isEmpty() == false )
       {
          TQString cmd = m_options.fileManager();
-         int pos = cmd.find("%m");
+         int pos = cmd.tqfind("%m");
          if( pos > 0 )
          {
-            cmd = cmd.replace( pos, 2, KProcess::quote(disk->mountPoint()) ) + " &";
+            cmd = cmd.tqreplace( pos, 2, KProcess::quote(disk->mountPoint()) ) + " &";
          }
          else
          {
@@ -286,7 +286,7 @@ void KwikDisk::criticallyFull(DiskEntry *disk)
    if( m_options.popupIfFull() == true )
    {
       TQString msg = i18n("Device [%1] on [%2] is getting critically full!")
-                    .arg(disk->deviceName()).arg(disk->mountPoint());
+                    .tqarg(disk->deviceName()).tqarg(disk->mountPoint());
       KMessageBox::sorry( this, msg, i18n("Warning"));
    }
 }

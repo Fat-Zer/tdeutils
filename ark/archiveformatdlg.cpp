@@ -28,8 +28,8 @@
 #include <tqlabel.h>
 #include <tqvbox.h>
 
-ArchiveFormatDlg::ArchiveFormatDlg( TQWidget * parent, const TQString & defaultType )
-                        :KDialogBase( parent, "archiveformatdialog", true,
+ArchiveFormatDlg::ArchiveFormatDlg( TQWidget * tqparent, const TQString & defaultType )
+                        :KDialogBase( tqparent, "archiveformatdialog", true,
                           i18n( "Choose Archive Format" ),
                           KDialogBase::Ok|KDialogBase::Cancel, KDialogBase::Ok),
                           m_combo( 0 )
@@ -40,12 +40,12 @@ ArchiveFormatDlg::ArchiveFormatDlg( TQWidget * parent, const TQString & defaultT
         text = i18n( "This file appears to be of type %1,\n"
                      "which is not a supported archive format.\n"
                      "In order to proceed, please choose the format\n"
-                     "of the file." ).arg( defaultType );
+                     "of the file." ).tqarg( defaultType );
     else
         text = i18n( "You are about to open a file that has a non-standard extension.\n"
                     "Ark has detected the format: %1\n"
                     "If this is not correct, please choose "
-                    "the appropriate format." ).arg( defaultDescription );
+                    "the appropriate format." ).tqarg( defaultDescription );
 
     TQVBox * page = makeVBoxMainWidget();
 
@@ -56,7 +56,7 @@ ArchiveFormatDlg::ArchiveFormatDlg( TQWidget * parent, const TQString & defaultT
     TQStringList list = ArchiveFormatInfo::self()->allDescriptions();
     list.sort();
     m_combo->insertStringList( list );
-    m_combo->setCurrentItem( list.findIndex( defaultDescription ) );
+    m_combo->setCurrentItem( list.tqfindIndex( defaultDescription ) );
 }
 
 TQString ArchiveFormatDlg::mimeType()

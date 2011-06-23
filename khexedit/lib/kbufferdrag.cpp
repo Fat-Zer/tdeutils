@@ -50,7 +50,7 @@ static const char *localTextPlain()
     TextPlainLocal = TQCString(KGlobal::locale()->encoding()).lower();
     // remove the whitespaces
     int s;
-    while( (s=TextPlainLocal.find(' ')) >= 0 )
+    while( (s=TextPlainLocal.tqfind(' ')) >= 0 )
       TextPlainLocal.remove( s, 1 );
 
     TextPlainLocal.prepend( TextPlainLocalStub );
@@ -62,12 +62,12 @@ static const char *localTextPlain()
 // tries to create a codec by the given charset description
 static TQTextCodec* codecForCharset( const TQCString& Desc )
 {
-  int i = Desc.find( "charset=" );
+  int i = Desc.tqfind( "charset=" );
   if( i >= 0 )
   {
     TQCString CharSetName = Desc.mid( i+8 );
     // remove any further attributes
-    if( (i=CharSetName.find( ';' )) >= 0 )
+    if( (i=CharSetName.tqfind( ';' )) >= 0 )
       CharSetName = CharSetName.left( i );
 
     // try to find codec
@@ -135,7 +135,7 @@ const char *KBufferDrag::format( int i ) const
 }
 
 
-TQByteArray KBufferDrag::encodedData( const char *Format ) const
+TQByteArray KBufferDrag::tqencodedData( const char *Format ) const
 {
   if( Format != 0 )
   {
@@ -144,7 +144,7 @@ TQByteArray KBufferDrag::encodedData( const char *Format ) const
       return( Data );
 
     // plain text wanted?
-    if( qstrncmp(Format,TextPlain,10) == 0 )
+    if( tqstrncmp(Format,TextPlain,10) == 0 )
     {
       TQCString Output;
       TQTextCodec *TextCodec = codecForCharset( TQCString(Format).lower() );
@@ -166,7 +166,7 @@ TQByteArray KBufferDrag::encodedData( const char *Format ) const
         { 
           KHEChar B = CharCodec->decode( Data[i] );
 
-          Text.at(i) = B.isUndefined() ? KHEChar(UndefinedChar) :
+          Text.tqat(i) = B.isUndefined() ? KHEChar(UndefinedChar) :
               (!B.isPrint() && B != Tab && B != Return ) ? KHEChar(SubstituteChar) : B;
         }
         // clean up
@@ -224,12 +224,12 @@ bool KBufferDrag::canDecode( const TQMimeSource* Source )
 
 bool KBufferDrag::decode( const TQMimeSource* Source, TQByteArray &Dest )
 {
-//   Dest = Source->encodedData( MediaString );
+//   Dest = Source->tqencodedData( MediaString );
 //   return Dest.size() != 0;
 
   bool CanDecode = Source->provides( OctetStream );
   if( CanDecode )
-    Dest = Source->encodedData( OctetStream );
+    Dest = Source->tqencodedData( OctetStream );
 
   return CanDecode;
 }

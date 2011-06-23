@@ -80,7 +80,7 @@ TQTimer *KSim::Chart::Timer::m_timer = 0;
 class KSim::Chart::Private
 {
   public:
-    typedef QPair<int, int> ValuePair;
+    typedef TQPair<int, int> ValuePair;
 
     TQSize size;
     int type;
@@ -107,15 +107,15 @@ class KSim::Chart::Private
 };
 
 KSim::Chart::Chart(bool showKrell, int maxValue,
-   const TQString &title, TQWidget *parent, const char *name,
-   WFlags fl) : TQWidget(parent, name, fl)
+   const TQString &title, TQWidget *tqparent, const char *name,
+   WFlags fl) : TQWidget(tqparent, name, fl)
 {
   init(showKrell, maxValue, title);
 }
 
 KSim::Chart::Chart(bool showKrell, int maxValue,
-   TQWidget *parent, const char *name, WFlags fl)
-   : TQWidget(parent, name, fl)
+   TQWidget *tqparent, const char *name, WFlags fl)
+   : TQWidget(tqparent, name, fl)
 {
   init(showKrell, maxValue, i18n("None"));
 }
@@ -232,7 +232,7 @@ void KSim::Chart::buildPixmaps()
   }
   else {
     kdDebug(2003) << className() << ": Using chartInColor() = "
-       << d->dataInColour.name() << endl;
+       << TQString(d->dataInColour.name()) << endl;
   }
 
   image.reset();
@@ -245,13 +245,13 @@ void KSim::Chart::buildPixmaps()
   }
   else {
     kdDebug(2003) << className() << ": Using chartOutColor() = "
-       << d->dataOutColour.name() << endl;
+       << TQString(d->dataOutColour.name()) << endl;
   }
 }
 
-void KSim::Chart::configureObject(bool repaintWidget)
+void KSim::Chart::configureObject(bool tqrepaintWidget)
 {
-  TQSize oldSize = sizeHint();
+  TQSize oldSize = tqsizeHint();
   KSim::Config::config()->setGroup("Misc");
   d->size = KSim::Config::config()->readSizeEntry("GraphSize");
 
@@ -263,11 +263,11 @@ void KSim::Chart::configureObject(bool repaintWidget)
     d->krell->show();
   }
 
-  // Update our geometry if we need to let any
-  // layout know about our sizeHint() change
-  if (oldSize != sizeHint()) {
+  // Update our tqgeometry if we need to let any
+  // tqlayout know about our tqsizeHint() change
+  if (oldSize != tqsizeHint()) {
     // Using resize() here seems to be needed
-    resize(sizeHint());
+    resize(tqsizeHint());
     updateGeometry();
   }
 
@@ -275,18 +275,18 @@ void KSim::Chart::configureObject(bool repaintWidget)
 
   setConfigValues();
 
-  if (repaintWidget)
+  if (tqrepaintWidget)
     update();
 }
 
-TQSize KSim::Chart::sizeHint() const
+TQSize KSim::Chart::tqsizeHint() const
 {
   return d->size;
 }
 
-TQSize KSim::Chart::minimumSizeHint() const
+TQSize KSim::Chart::tqminimumSizeHint() const
 {
-  return sizeHint();
+  return tqsizeHint();
 }
 
 void KSim::Chart::resizeEvent(TQResizeEvent *re)
@@ -333,19 +333,19 @@ void KSim::Chart::setDisplayMeter(bool value)
 
 void KSim::Chart::setText(const TQString &in, const TQString &out)
 {
-  bool repaint = false;
+  bool tqrepaint = false;
 
   if (d->inText != in) {
-    repaint = true;
+    tqrepaint = true;
     d->inText = in;
   }
 
   if (d->outText != out) {
-    repaint = true;
+    tqrepaint = true;
     d->outText = out;
   }
 
-  if (repaint)
+  if (tqrepaint)
     update();
 }
 
@@ -373,7 +373,7 @@ void KSim::Chart::setMaxValue(int maxValue)
 
 void KSim::Chart::setValue(int valueIn, int valueOut)
 {
-  d->values.prepend(qMakePair(range(valueIn), range(valueOut)));
+  d->values.prepend(tqMakePair(range(valueIn), range(valueOut)));
 
   if (d->variableGraphs) {
     d->maxValues.prepend(valueIn > valueOut ? valueIn : valueOut);
@@ -407,13 +407,13 @@ void KSim::Chart::setValue(int valueIn, int valueOut)
 void KSim::Chart::setConfigValues()
 {
   TQFont newFont = font();
-  bool repaint = themeLoader().current().fontColours(this,
+  bool tqrepaint = themeLoader().current().fontColours(this,
      newFont, d->mColour, d->sColour, d->showShadow);
 
   if (font() != newFont)
     setFont(newFont);
 
-  if (repaint)
+  if (tqrepaint)
     update();
 }
 
@@ -446,7 +446,7 @@ void KSim::Chart::paintEvent(TQPaintEvent *)
   const TQSize &size = chartSize();
   TQPixmap pixmap(size);
   TQPainter painter;
-  painter.begin(&pixmap, this);
+  painter.tqbegin(&pixmap, this);
 
   int location = size.height() / 5;
   painter.drawPixmap(0, 0, d->chartPixmap);
@@ -521,7 +521,7 @@ void KSim::Chart::drawChart()
 
   TQPainter painter;
   d->graphData.setMask(drawMask(&painter));
-  painter.begin(&d->graphData, this);
+  painter.tqbegin(&d->graphData, this);
 
   int position = width() - 1;
   TQValueList<Private::ValuePair>::ConstIterator it;
@@ -553,7 +553,7 @@ TQSize KSim::Chart::chartSize() const
 TQBitmap KSim::Chart::drawMask(TQPainter *painter)
 {
   TQBitmap bitmap(chartSize(), true);
-  painter->begin(&bitmap, this);
+  painter->tqbegin(&bitmap, this);
   painter->setPen(color1);
 
   int position = width() - 1;
@@ -608,7 +608,7 @@ void KSim::Chart::init(bool krell, int maxValue, const TQString &title)
 {
   setConfigString("StyleChart");
   setThemeConfigOnly(false);
-  setSizePolicy(TQSizePolicy(TQSizePolicy::MinimumExpanding, TQSizePolicy::Fixed));
+  tqsetSizePolicy(TQSizePolicy(TQSizePolicy::MinimumExpanding, TQSizePolicy::Fixed));
 
   d = new Private;
   KSim::Config::config()->setGroup("Misc");

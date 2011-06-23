@@ -49,6 +49,7 @@ namespace KSim
   class KDE_EXPORT MainView : public TQWidget, virtual public DCOPObject
   {
     Q_OBJECT
+//    TQ_OBJECT
     K_DCOP
     public:
       MainView(KConfig *config, bool loadPlugins,
@@ -62,12 +63,12 @@ namespace KSim
       KSim::Config *config() const;
       void makeDirs();
 
-      TQSize sizeHint(KPanelExtension::Position, TQSize maxSize) const;
-      void positionChange(KPanelExtension::Orientation);
+      TQSize tqsizeHint(KPanelExtension::Position, TQSize maxSize) const;
+      void positionChange(Qt::Orientation);
 
     k_dcop:
       const TQString &hostname() const;
-      virtual void maskMainView();
+      virtual void tqmaskMainView();
 
     signals:
       void reload();
@@ -106,7 +107,7 @@ namespace KSim
       TQBoxLayout *m_pluginLayout;
       TQPoint m_mousePoint;
       int m_oldLocation;
-      TQTimer m_maskTimer;
+      TQTimer m_tqmaskTimer;
   };
 }
 #endif // KSIMVIEW_H

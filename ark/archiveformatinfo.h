@@ -59,7 +59,7 @@ private:
         enum ArchType type;
     };
 
-    FormatInfo & find ( ArchType type );
+    FormatInfo & tqfind ( ArchType type );
 
     typedef TQValueList<FormatInfo> InfoList;
     InfoList m_formatInfos;

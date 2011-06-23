@@ -1,6 +1,6 @@
 <!DOCTYPE UI><UI version="3.3" stdsetdef="1">
 <class>ServerConf</class>
-<widget class="QWidget">
+<widget class="TQWidget">
     <property name="name">
         <cstring>ServerConf</cstring>
     </property>
@@ -80,15 +80,15 @@
                 </sizepolicy>
             </property>
         </widget>
-        <widget class="QLayoutWidget" row="4" column="0">
+        <widget class="TQLayoutWidget" row="4" column="0">
             <property name="name">
-                <cstring>layout2</cstring>
+                <cstring>tqlayout2</cstring>
             </property>
             <vbox>
                 <property name="name">
                     <cstring>unnamed</cstring>
                 </property>
-                <widget class="QLabel">
+                <widget class="TQLabel">
                     <property name="name">
                         <cstring>textLabel1_4</cstring>
                     </property>
@@ -98,7 +98,7 @@ Only the default server will be stored in GnuPG's configuration file,
 all others will be stored for use by KGpg only.</string>
                     </property>
                 </widget>
-                <widget class="QCheckBox">
+                <widget class="TQCheckBox">
                     <property name="name">
                         <cstring>kcfg_UseProxy</cstring>
                     </property>
@@ -110,7 +110,7 @@ all others will be stored for use by KGpg only.</string>
         </widget>
     </grid>
 </widget>
-<layoutdefaults spacing="6" margin="11"/>
+<tqlayoutdefaults spacing="6" margin="11"/>
 <includehints>
     <includehint>kpushbutton.h</includehint>
     <includehint>klistbox.h</includehint>

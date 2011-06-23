@@ -3,7 +3,7 @@
  *
  * Copyright (c) 1999 Michael Kropfberger <michael.kropfberger@gmx.net>
  *
- * Requires the Qt widget libraries, available at no cost at
+ * Requires the TQt widget libraries, available at no cost at
  * http://www.troll.no/
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -93,14 +93,15 @@ private:
 };
 
 /***************************************************************************/
-class DiskList : public QObject
+class DiskList : public TQObject
 {  Q_OBJECT
+  TQ_OBJECT
 public:
-   DiskList( TQObject *parent=0, const char *name=0 );
+   DiskList( TQObject *tqparent=0, const char *name=0 );
  ~DiskList();
    int readFSTAB();
    int readDF();
-   int find(const DiskEntry* disk) {return disks->find(disk);}
+   int tqfind(const DiskEntry* disk) {return disks->tqfind(disk);}
    DiskEntry*  at(uint index) {return disks->at(index);}
    DiskEntry* first() {return disks->first();}
    DiskEntry* next() {return disks->next();}

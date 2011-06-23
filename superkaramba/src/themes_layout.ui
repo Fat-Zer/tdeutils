@@ -1,6 +1,6 @@
 <!DOCTYPE UI><UI version="3.3" stdsetdef="1">
 <class>ThemesLayout</class>
-<widget class="QDialog">
+<widget class="TQDialog">
     <property name="name">
         <cstring>ThemesLayout</cstring>
     </property>
@@ -12,7 +12,7 @@
             <height>517</height>
         </rect>
     </property>
-    <property name="minimumSize">
+    <property name="tqminimumSize">
         <size>
             <width>0</width>
             <height>0</height>
@@ -25,15 +25,15 @@
         <property name="name">
             <cstring>unnamed</cstring>
         </property>
-        <widget class="QLayoutWidget">
+        <widget class="TQLayoutWidget">
             <property name="name">
-                <cstring>layout2</cstring>
+                <cstring>tqlayout2</cstring>
             </property>
             <hbox>
                 <property name="name">
                     <cstring>unnamed</cstring>
                 </property>
-                <widget class="QLabel">
+                <widget class="TQLabel">
                     <property name="name">
                         <cstring>labelSearch</cstring>
                     </property>
@@ -44,12 +44,12 @@
                         <cstring>editSearch</cstring>
                     </property>
                 </widget>
-                <widget class="QLineEdit">
+                <widget class="TQLineEdit">
                     <property name="name">
                         <cstring>editSearch</cstring>
                     </property>
                 </widget>
-                <widget class="QLabel">
+                <widget class="TQLabel">
                     <property name="name">
                         <cstring>labelShow</cstring>
                     </property>
@@ -60,7 +60,7 @@
                         <cstring>comboShow</cstring>
                     </property>
                 </widget>
-                <widget class="QComboBox">
+                <widget class="TQComboBox">
                     <item>
                         <property name="text">
                             <string>All</string>
@@ -93,9 +93,9 @@
                 <enum>StrongFocus</enum>
             </property>
         </widget>
-        <widget class="QLayoutWidget">
+        <widget class="TQLayoutWidget">
             <property name="name">
-                <cstring>layoutButtons</cstring>
+                <cstring>tqlayoutButtons</cstring>
             </property>
             <hbox>
                 <property name="name">
@@ -111,7 +111,7 @@
                     <property name="sizeType">
                         <enum>Expanding</enum>
                     </property>
-                    <property name="sizeHint">
+                    <property name="tqsizeHint">
                         <size>
                             <width>40</width>
                             <height>20</height>
@@ -122,7 +122,7 @@
                     <property name="name">
                         <cstring>buttonAddToDesktop</cstring>
                     </property>
-                    <property name="minimumSize">
+                    <property name="tqminimumSize">
                         <size>
                             <width>0</width>
                             <height>0</height>
@@ -139,7 +139,7 @@
                     <property name="name">
                         <cstring>buttonClose</cstring>
                     </property>
-                    <property name="minimumSize">
+                    <property name="tqminimumSize">
                         <size>
                             <width>0</width>
                             <height>0</height>
@@ -226,13 +226,13 @@
     <tabstop>buttonAddToDesktop</tabstop>
     <tabstop>buttonClose</tabstop>
 </tabstops>
-<slots>
+<Q_SLOTS>
     <slot access="protected">addToDesktop()</slot>
     <slot access="protected">selectionChanged(int)</slot>
     <slot access="protected">search(const QString&amp;)</slot>
-</slots>
-<layoutdefaults spacing="6" margin="11"/>
-<layoutfunctions spacing="KDialog::spacingHint" margin="KDialog::marginHint"/>
+</Q_SLOTS>
+<tqlayoutdefaults spacing="6" margin="11"/>
+<tqlayoutfunctions spacing="KDialog::spacingHint" margin="KDialog::marginHint"/>
 <includehints>
     <includehint>kwidgetlistbox.h</includehint>
     <includehint>kpushbutton.h</includehint>

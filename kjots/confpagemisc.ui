@@ -1,6 +1,6 @@
 <!DOCTYPE UI><UI version="3.3" stdsetdef="1">
 <class>confPageMisc</class>
-<widget class="QDialog">
+<widget class="TQDialog">
     <property name="name">
         <cstring>confPageMisc</cstring>
     </property>
@@ -42,7 +42,7 @@
                 <string>This is the number of minutes KJots will wait before automatically saving changes.</string>
             </property>
         </widget>
-        <widget class="QLabel" row="1" column="1">
+        <widget class="TQLabel" row="1" column="1">
             <property name="name">
                 <cstring>textLabel1</cstring>
             </property>
@@ -66,7 +66,7 @@
             <property name="sizeType">
                 <enum>Expanding</enum>
             </property>
-            <property name="sizeHint">
+            <property name="tqsizeHint">
                 <size>
                     <width>40</width>
                     <height>20</height>
@@ -83,7 +83,7 @@
             <property name="sizeType">
                 <enum>Expanding</enum>
             </property>
-            <property name="sizeHint">
+            <property name="tqsizeHint">
                 <size>
                     <width>20</width>
                     <height>30</height>
@@ -100,14 +100,14 @@
             <property name="sizeType">
                 <enum>Fixed</enum>
             </property>
-            <property name="sizeHint">
+            <property name="tqsizeHint">
                 <size>
                     <width>20</width>
                     <height>20</height>
                 </size>
             </property>
         </spacer>
-        <widget class="QCheckBox" row="0" column="0" rowspan="1" colspan="4">
+        <widget class="TQCheckBox" row="0" column="0" rowspan="1" colspan="4">
             <property name="name">
                 <cstring>kcfg_AutoSave</cstring>
             </property>
@@ -121,7 +121,7 @@
                 <string>When "Enable autosave" is checked, KJots will automatically save changes made to books at the interval defined below.</string>
             </property>
         </widget>
-        <widget class="QCheckBox" row="2" column="0" rowspan="1" colspan="3">
+        <widget class="TQCheckBox" row="2" column="0" rowspan="1" colspan="3">
             <property name="name">
                 <cstring>kcfg_Unicode</cstring>
             </property>
@@ -145,7 +145,7 @@
         <slot>setEnabled(bool)</slot>
     </connection>
 </connections>
-<layoutdefaults spacing="6" margin="11"/>
+<tqlayoutdefaults spacing="6" margin="11"/>
 <includehints>
     <includehint>knuminput.h</includehint>
 </includehints>

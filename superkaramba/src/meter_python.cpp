@@ -78,12 +78,12 @@ bool checkKarambaAndMeter(long widget, long meter, const char* type)
 
 // This just throws awya extra bytes.
 // I guess there is a better way to do this...
-TQString fromUcs4(Q_UINT32* ucs4)
+TQString fromUcs4(TQ_UINT32* ucs4)
 {
   TQString result = "";
   while(*ucs4 != 0)
   {
-    result += TQChar((Q_UINT16)*ucs4);
+    result += TQChar((TQ_UINT16)*ucs4);
     ++ucs4;
   }
   return result;
@@ -102,9 +102,9 @@ TQString PyString2TQString(PyObject* text)
     {
         Py_UNICODE* t = PyUnicode_AsUnicode(text);
         if(sizeof(Py_UNICODE) == 4)
-          qtext = fromUcs4((Q_UINT32*)t);
+          qtext = fromUcs4((TQ_UINT32*)t);
         else
-          qtext = TQString::fromUcs2((Q_UINT16*)t);
+          qtext = TQString::fromUcs2((TQ_UINT16*)t);
     }
     else
     {
@@ -114,7 +114,7 @@ TQString PyString2TQString(PyObject* text)
 }
 
 // Converts a TQString to a Python String with Unicode support
-PyObject* QString2PyString(TQString string)
+PyObject* TQString2PyString(TQString string)
 {
   PyObject *pyString;
 
@@ -283,7 +283,7 @@ PyObject* py_getStringValue(PyObject *, PyObject *args, TQString type)
   if (!checkKarambaAndMeter(widget, meter, type.ascii()))
     return NULL;
   return Py_BuildValue((char*)"O",
-      QString2PyString(((Meter*)meter)->getStringValue()));
+      TQString2PyString(((Meter*)meter)->getStringValue()));
 }
 
 PyObject* py_setStringValue(PyObject *, PyObject *args, TQString type)

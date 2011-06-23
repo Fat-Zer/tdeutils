@@ -23,8 +23,8 @@
 #include "ksim.h"
 #include "themetypes.h"
 
-KSim::Frame::Frame(int type, TQWidget *parent, const char *name)
-   : TQWidget (parent, name)
+KSim::Frame::Frame(int type, TQWidget *tqparent, const char *name)
+   : TQWidget (tqparent, name)
 {
   setType(type);
 
@@ -36,7 +36,7 @@ KSim::Frame::~Frame()
 {
 }
 
-void KSim::Frame::configureObject(bool repaintWidget)
+void KSim::Frame::configureObject(bool tqrepaintWidget)
 {
   m_image.load(themeLoader().current().framePixmap(type()));
 
@@ -58,7 +58,7 @@ void KSim::Frame::configureObject(bool repaintWidget)
   themeLoader().reColourImage(m_image);
   m_background.convertFromImage(m_image.smoothScale(size()));
 
-  if (repaintWidget)
+  if (tqrepaintWidget)
     update();
 }
 

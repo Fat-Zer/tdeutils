@@ -29,8 +29,8 @@
 
 using namespace KSim::Snmp;
 
-View::View( Plugin *parent, const char *name )
-    : KSim::PluginView( parent, name )
+View::View( Plugin *tqparent, const char *name )
+    : KSim::PluginView( tqparent, name )
 {
     m_layout = new TQVBoxLayout( this );
 

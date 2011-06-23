@@ -9,7 +9,7 @@
          http://www.kde.org
          http://www.hackerbuero.org $
    $ License: LGPL with the following explicit clarification:
-         This code may be linked against any version of the Qt toolkit
+         This code may be linked against any version of the TQt toolkit
          from Troll Tech, Norway. $
 
    $Id$
@@ -64,8 +64,8 @@ extern "C" {
 #define SONYPI_IOCGBLUE         _IOR('v', 8, __u8)
 #define SONYPI_IOCSBLUE         _IOW('v', 9, __u8)
 
-KVaioDriverInterface::KVaioDriverInterface(TQObject *parent)
-    : TQObject(parent),
+KVaioDriverInterface::KVaioDriverInterface(TQObject *tqparent)
+    : TQObject(tqparent),
       mFd(0),
       mNotifier(0)
 {
@@ -162,7 +162,7 @@ void KVaioDriverInterface::setBrightness(int value)
     }
 }
 
-bool KVaioDriverInterface::getBatteryStatus(
+bool KVaioDriverInterface::getBatterytqStatus(
     bool& bat1Avail, int& bat1Remaining, int& bat1Max,
     bool& bat2Avail, int& bat2Remaining, int& bat2Max,
     bool& acConnected)
@@ -181,7 +181,7 @@ bool KVaioDriverInterface::getBatteryStatus(
         bat2Avail = batFlags & SONYPI_BFLAGS_B2;
         acConnected = batFlags & SONYPI_BFLAGS_AC;
 
-//         kdDebug() << "KVaioDriverInterface::getBatteryStatus: battery 1:  "
+//         kdDebug() << "KVaioDriverInterface::getBatterytqStatus: battery 1:  "
 //                   << (bat1Avail ? "available" : "not available") << endl
 //                   << "                                        battery 2:  "
 //                   << (bat2Avail ? "available" : "not available") << endl

@@ -40,20 +40,21 @@ class KPassivePopup;
 class KgpgWizard;
 class popupPublic;
 
-class MyView : public QLabel
+class MyView : public TQLabel
 {
 
         Q_OBJECT
+  TQ_OBJECT
 
 public:
-        MyView( TQWidget *parent = 0, const char *name = 0);
+        MyView( TQWidget *tqparent = 0, const char *name = 0);
         ~MyView();
 
         KURL droppedUrl;
         KURL::List droppedUrls;
         KTempFile *kgpgfoldertmp;
 	KShortcut goDefaultKey;
-	QClipboard::Mode clipboardMode;
+	TQClipboard::Mode clipboardMode;
 
 private:
         TQPopupMenu *droppopup,*udroppopup;
@@ -121,9 +122,10 @@ signals:
 class kgpgapplet : public KSystemTray//KUniqueApplication
 {
         Q_OBJECT
+  TQ_OBJECT
 
 public:
-        kgpgapplet( TQWidget *parent = 0, const char *name = 0);
+        kgpgapplet( TQWidget *tqparent = 0, const char *name = 0);
         /** destructor */
         ~kgpgapplet();
         MyView *w;
@@ -144,6 +146,7 @@ class KCmdLineArgs;
 class KgpgAppletApp : public KUniqueApplication
 {
         Q_OBJECT
+  TQ_OBJECT
         friend class kgpgapplet;
 public:
         KgpgAppletApp();

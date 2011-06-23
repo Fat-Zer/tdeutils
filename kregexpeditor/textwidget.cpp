@@ -15,7 +15,7 @@
  *  the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  *  Boston, MA 02110-1301, USA.
  **/
-#ifndef QT_ONLY
+#ifndef TQT_ONLY
   #include "textwidget.moc"
 #endif
 
@@ -24,16 +24,16 @@
 #include "selectablelineedit.h"
 #include <tqlayout.h>
 
-TextWidget::TextWidget(RegExpEditorWindow* editorWindow, TQWidget *parent,
+TextWidget::TextWidget(RegExpEditorWindow* editorWindow, TQWidget *tqparent,
                        const char *name)
-  :RegExpWidget(editorWindow, parent, name)
+  :RegExpWidget(editorWindow, tqparent, name)
 {
   init( TQString::fromLocal8Bit("") );
 }
 
 TextWidget::TextWidget( TextRegExp* regexp,  RegExpEditorWindow* editorWindow,
-            TQWidget* parent, const char* name )
-  : RegExpWidget( editorWindow, parent, name )
+            TQWidget* tqparent, const char* name )
+  : RegExpWidget( editorWindow, tqparent, name )
 {
   init(regexp->text());
 }
@@ -47,7 +47,7 @@ void TextWidget::init( const TQString& txt )
 
   _edit->setText( txt );
 
-  connect( _edit, TQT_SIGNAL( parentPleaseUpdate() ), this, TQT_SLOT(slotUpdate()) );
+  connect( _edit, TQT_SIGNAL( tqparentPleaseUpdate() ), this, TQT_SLOT(slotUpdate()) );
   setFocusProxy( _edit );
   _edit->installEventFilter( this );
   connect( _edit, TQT_SIGNAL( textChanged( const TQString & ) ), _editorWindow, TQT_SLOT( emitChange() ) );
@@ -56,19 +56,19 @@ void TextWidget::init( const TQString& txt )
 
 void TextWidget::slotUpdate()
 {
-  // I need to force the parent to repaint, as the size change of this
-  // widget may not be enough for the parent to change size, and in that
-  // case the parent would not repaint, and the text widget would not be
+  // I need to force the tqparent to tqrepaint, as the size change of this
+  // widget may not be enough for the tqparent to change size, and in that
+  // case the tqparent would not tqrepaint, and the text widget would not be
   // resized.
-  TQWidget *p = static_cast<TQWidget*>(parent());
+  TQWidget *p = TQT_TQWIDGET(tqparent());
   if (p)
-    p->repaint();
+    p->tqrepaint();
   _editorWindow->updateContent( this );
 }
 
-TQSize TextWidget::sizeHint() const
+TQSize TextWidget::tqsizeHint() const
 {
-  return _edit->sizeHint();
+  return _edit->tqsizeHint();
 }
 
 void TextWidget::paintEvent( TQPaintEvent *e)
@@ -81,9 +81,9 @@ void TextWidget::selectWidget( bool sel )
     _edit->setSelected( sel );
 }
 
-bool TextWidget::updateSelection(bool parentSelected)
+bool TextWidget::updateSelection(bool tqparentSelected)
 {
-  bool changed = RegExpWidget::updateSelection( parentSelected );
+  bool changed = RegExpWidget::updateSelection( tqparentSelected );
 
   // I need to call this function all the time, else the rubber band will
   // not be correctly deleted in the line edit.
@@ -114,7 +114,7 @@ bool TextWidget::eventFilter( TQObject*, TQEvent* event)
     if ( event->type() == TQEvent::MouseButtonRelease ) {
         if ( _editorWindow->isInserting() ) {
             if ( acceptWidgetInsert( _editorWindow->insertType() ) ) {
-                mouseReleaseEvent( static_cast<TQMouseEvent*>(event) );
+                mouseReleaseEvent( TQT_TQMOUSEEVENT(event) );
             }
             return true;
         }
@@ -124,7 +124,7 @@ bool TextWidget::eventFilter( TQObject*, TQEvent* event)
             return true;
         }
         else  if ( isSelected() ) {
-            TQMouseEvent* e = static_cast<TQMouseEvent*>( event );
+            TQMouseEvent* e = TQT_TQMOUSEEVENT( event );
             TQMouseEvent ev( event->type(), mapTo(_editorWindow, e->pos()),
                             e->button(), e->state());
             TQApplication::sendEvent( _editorWindow, &ev );

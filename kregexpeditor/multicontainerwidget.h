@@ -21,19 +21,19 @@
 #include "regexpwidget.h"
 
 /**
-   Abstract RegExp widget class representing widgets having multible children.
+   Abstract RegExp widget class representing widgets having multible tqchildren.
    @internal
 */
 class MultiContainerWidget :public RegExpWidget
 {
 public:
-  MultiContainerWidget( RegExpEditorWindow* editorWindow, TQWidget* parent = 0,
+  MultiContainerWidget( RegExpEditorWindow* editorWindow, TQWidget* tqparent = 0,
                    const char* name = 0);
   virtual bool hasSelection() const;
   virtual void clearSelection();
   virtual void deleteSelection();
   virtual void addNewChild(DragAccepter *accepter, RegExpWidget *child);
-  virtual bool updateSelection(bool parentSelected);
+  virtual bool updateSelection(bool tqparentSelected);
   virtual TQRect selectionRect() const;
   virtual RegExpWidget* widgetUnderPoint( TQPoint globalPos, bool justVisibleWidgets );
   virtual RegExpWidget* findWidgetToEdit( TQPoint globalPos );
@@ -43,7 +43,7 @@ public:
 
 protected:
   void append( RegExpWidget* child );
-  TQPtrList<RegExpWidget> _children;
+  TQPtrList<RegExpWidget> _tqchildren;
 };
 
 

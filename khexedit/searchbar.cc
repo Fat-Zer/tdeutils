@@ -51,8 +51,8 @@ static const char * close_xpm[] = {
 "                ",
 "                "};
 
-CSearchBar::CSearchBar( TQWidget *parent, const char *name, WFlags f )
-  :TQFrame( parent, name, f )
+CSearchBar::CSearchBar( TQWidget *tqparent, const char *name, WFlags f )
+  :TQFrame( tqparent, name, f )
 {
   setFrameStyle( TQFrame::Panel | TQFrame::Raised );
   setLineWidth( 1 );
@@ -74,7 +74,7 @@ CSearchBar::CSearchBar( TQWidget *parent, const char *name, WFlags f )
   mFindButton->setAutoDefault(false);
   connect( mFindButton, TQT_SIGNAL(clicked()), this, TQT_SLOT(start()) );
   connect(mInputEdit,TQT_SIGNAL(returnPressed()),mFindButton,TQT_SLOT(animateClick()));
-  mFindButton->setFixedHeight( mTypeCombo->sizeHint().height() );
+  mFindButton->setFixedHeight( mTypeCombo->tqsizeHint().height() );
 
   mBackwards = new TQCheckBox( i18n("Backwards"), this );
   mIgnoreCase = new TQCheckBox( i18n("Ignore case"), this );
@@ -85,7 +85,7 @@ CSearchBar::CSearchBar( TQWidget *parent, const char *name, WFlags f )
   connect( mCloseButton, TQT_SIGNAL(clicked()), this, TQT_SLOT(hideWidget()) );
 
   //
-  // Make layout
+  // Make tqlayout
   //
   TQHBoxLayout *hlay = new TQHBoxLayout( this, 4, 6 );
   hlay->addWidget( mTypeCombo );
@@ -105,12 +105,12 @@ CSearchBar::CSearchBar( TQWidget *parent, const char *name, WFlags f )
 
 //
 // Espen 2000-04-21
-// Qt 2.1: Seems like the TQLineEdit::returnPressed() does not work when
+// TQt 2.1: Seems like the TQLineEdit::returnPressed() does not work when
 // I install a validator. So I catch the event manually
 //
 bool CSearchBar::eventFilter( TQObject *o, TQEvent *e )
 {
-  if( o == mInputEdit && e->type() == TQEvent::KeyPress )
+  if( TQT_BASE_OBJECT(o) == TQT_BASE_OBJECT(mInputEdit) && e->type() == TQEvent::KeyPress )
   {
     TQKeyEvent *ke = (TQKeyEvent*)e;
     if( ke->key() == Key_Return )

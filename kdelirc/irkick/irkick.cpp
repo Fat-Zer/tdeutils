@@ -44,10 +44,10 @@
 
 void IRKTrayIcon::mousePressEvent(TQMouseEvent *e)
 {
-	KSystemTray::mousePressEvent(new TQMouseEvent(TQEvent::MouseButtonPress, e->pos(), e->globalPos(), e->button() == LeftButton ? RightButton : e->button(), e->state()));
+	KSystemTray::mousePressEvent(new TQMouseEvent(TQEvent::MouseButtonPress, e->pos(), e->globalPos(), e->button() == Qt::LeftButton ? Qt::RightButton : e->button(), e->state()));
 }
 
-IRKick::IRKick(const TQCString &obj) : TQObject(), DCOPObject(obj), npApp(TQString::null)
+IRKick::IRKick(const TQCString &obj) : TQObject(), DCOPObject(obj), npApp(TQString())
 {
     kapp->dcopClient()->setDefaultObject(obj);
 	theClient = new KLircClient();
@@ -195,7 +195,7 @@ bool IRKick::getPrograms(const IRAction &action, TQStringList &programs)
 		for(QCStringList::iterator i = buf.begin(); i != buf.end(); ++i)
 		{
 			TQString program = TQString::fromUtf8(*i);
-			if(program.contains(r))
+			if(program.tqcontains(r))
 				programs += program;
 		}
 		if(programs.size() > 1 && action.ifMulti() == IM_DONTSEND)
@@ -206,7 +206,7 @@ bool IRKick::getPrograms(const IRAction &action, TQStringList &programs)
 			for(TQValueList<WId>::iterator i = s.fromLast(); i != s.end(); i--)
 			{	int p = KWin::info(*i).pid;
 				TQString id = action.program() + "-" + TQString().setNum(p);
-				if(programs.contains(id))
+				if(programs.tqcontains(id))
 				{	programs.clear();
 					programs += id;
 					break;
@@ -220,7 +220,7 @@ bool IRKick::getPrograms(const IRAction &action, TQStringList &programs)
 			for(TQValueList<WId>::iterator i = s.begin(); i != s.end(); ++i)
 			{	int p = KWin::info(*i).pid;
 				TQString id = action.program() + "-" + TQString().setNum(p);
-				if(programs.contains(id))
+				if(programs.tqcontains(id))
 				{	programs.clear();
 					programs += id;
 					break;
@@ -244,7 +244,7 @@ void IRKick::executeAction(const IRAction &action)
 	{	TQString sname = ProfileServer::profileServer()->getServiceName(action.program());
 		if(!sname.isNull())
 		{
-			KPassivePopup::message("IRKick", i18n("Starting <b>%1</b>...").arg(action.application()), SmallIcon("irkick"), theTrayIcon);
+			KPassivePopup::message("IRKick", i18n("Starting <b>%1</b>...").tqarg(action.application()), SmallIcon("irkick"), theTrayIcon);
 			KApplication::startServiceByDesktopName(sname);
 		}
 	}
@@ -282,7 +282,7 @@ void IRKick::gotMessage(const TQString &theRemote, const TQString &theButton, in
 	if(!npApp.isNull())
 	{
 		TQString theApp = npApp;
-		npApp = TQString::null;
+		npApp = TQString();
 		// send notifier by DCOP to npApp/npModule/npMethod(theRemote, theButton);
 		TQByteArray data; TQDataStream arg(data, IO_WriteOnly);
 		arg << theRemote << theButton;
@@ -330,7 +330,7 @@ void IRKick::stealNextPress(TQString app, TQString module, TQString method)
 
 void IRKick::dontStealNextPress()
 {
-	npApp = TQString::null;
+	npApp = TQString();
 }
 
 #include "irkick.moc"

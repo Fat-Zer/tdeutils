@@ -71,8 +71,8 @@ void PluginModule::showAbout()
   KAboutApplication(&aboutData).exec();
 }
 
-SensorsView::SensorsView(KSim::PluginObject *parent, const char *name)
-   : DCOPObject("sensors"), KSim::PluginView(parent, name)
+SensorsView::SensorsView(KSim::PluginObject *tqparent, const char *name)
+   : DCOPObject("sensors"), KSim::PluginView(tqparent, name)
 {
   config()->setGroup("Sensors");
   (new TQVBoxLayout(this))->setAutoAdd(true);

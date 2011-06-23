@@ -23,9 +23,10 @@
 
 #include <tqvalidator.h> 
 
-class CHexValidator: public QValidator
+class CHexValidator: public TQValidator
 {
   Q_OBJECT
+  TQ_OBJECT
   
   public:
     enum EState
@@ -38,7 +39,7 @@ class CHexValidator: public QValidator
     };
 
   public:
-    CHexValidator( TQWidget *parent, EState state, const char *name = 0 );
+    CHexValidator( TQWidget *tqparent, EState state, const char *name = 0 );
     ~CHexValidator( void );
     TQValidator::State validate( TQString &string, int &pos ) const;
     void setState( EState state );

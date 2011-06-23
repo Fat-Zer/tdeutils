@@ -81,9 +81,9 @@ void PluginModule::showAbout()
   KAboutApplication(&aboutData).exec();
 }
 
-Fsystem::Fsystem(KSim::PluginObject *parent, const char *name)
+Fsystem::Fsystem(KSim::PluginObject *tqparent, const char *name)
    : DCOPObject("fsystem"),
-   KSim::PluginView(parent, name)
+   KSim::PluginView(tqparent, name)
 {
   config()->setGroup("Fsystem");
   TQVBoxLayout *vbLayout = new TQVBoxLayout(this);
@@ -193,7 +193,7 @@ Fsystem::MountEntryList Fsystem::makeList(const TQStringList &list) const
   TQStringList::ConstIterator it;
   for (it = list.begin(); it != list.end(); ++it) {
     splitList = TQStringList::split(":", (*it));
-    newList.append(qMakePair(splitList[0], splitList[1]));
+    newList.append(tqMakePair(splitList[0], splitList[1]));
   }
 
   return newList;

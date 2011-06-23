@@ -120,7 +120,7 @@ void ZooArch::open()
   if ( !kp->start( KProcess::NotifyOnExit, KProcess::AllOutput ) )
   {
     KMessageBox::error( 0, i18n( "Could not start a subprocess." ) );
-    emit sigOpen( this, false, TQString::null, 0 );
+    emit sigOpen( this, false, TQString(), 0 );
   }
 }
 
@@ -287,9 +287,9 @@ TQString fixTime( const TQString &_strTime )
   // +3 or -3 etc.
   TQString strTime = _strTime;
 
-  if ( strTime.contains("+") || strTime.contains("-") )
+  if ( strTime.tqcontains("+") || strTime.tqcontains("-") )
   {
-    TQCharRef c = strTime.at( 8 );
+    TQCharRef c = strTime.tqat( 8 );
     int offset = strTime.right( strTime.length() - 9 ).toInt();
     TQString strHour = strTime.left( 2 );
     int nHour = strHour.toInt();

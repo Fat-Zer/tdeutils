@@ -9,7 +9,7 @@
          http://www.kde.org
          http://www.hackerbuero.org $
    $ License: LGPL with the following explicit clarification:
-         This code may be linked against any version of the Qt toolkit
+         This code may be linked against any version of the TQt toolkit
          from Troll Tech, Norway. $
 
    $Id$
@@ -31,18 +31,19 @@ extern "C"
 
 class TQSocketNotifier;
 
-class KVaioDriverInterface : public QObject
+class KVaioDriverInterface : public TQObject
 {
     Q_OBJECT
+  TQ_OBJECT
 public:
-    KVaioDriverInterface(TQObject *parent=0);
+    KVaioDriverInterface(TQObject *tqparent=0);
     bool connectToDriver(bool listen = true);
     void disconnectFromDriver();
     /** Return the current display brightness, a value between 0 and
         255. Returns -1 if the setting cannot be retrieved. */
     int brightness();
     /** Get the battery status. */
-    bool getBatteryStatus(bool& bat1Avail, int& bat1Remaining, int& bat1Max,
+    bool getBatterytqStatus(bool& bat1Avail, int& bat1Remaining, int& bat1Max,
 			  bool& bat2Avail, int& bat2Remaining, int& bat2Max,
 			  bool& acConnected);
 public slots:

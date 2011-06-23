@@ -29,26 +29,27 @@ class RegExpEditorWindow;
    Base class for all regular expression widgets.
    @internal
 */
-class RegExpWidget :public QWidget
+class RegExpWidget :public TQWidget
 {
 Q_OBJECT
+  TQ_OBJECT
 
 public:
-  RegExpWidget(RegExpEditorWindow* editorWindow, TQWidget *parent,
+  RegExpWidget(RegExpEditorWindow* editorWindow, TQWidget *tqparent,
                const char *label = 0);
 
   /*======================================================================
      Construction, child management
      ======================================================================*/
   /**
-     Add `child' to the parent of this widget in place of `accepter'
+     Add `child' to the tqparent of this widget in place of `accepter'
      This method only applies to container widgets (see @ref
      SingleContainerWidget, and @ref MultiContainerWidget).
   */
   virtual void addNewChild(DragAccepter *accepter, RegExpWidget *child);
 
   /**
-     Inserts all the children of `child' into this widget in place of
+     Inserts all the tqchildren of `child' into this widget in place of
      `accepter'.
      This method only applies to container widgets (see @ref
      SingleContainerWidget, and @ref MultiContainerWidget).
@@ -82,7 +83,7 @@ public:
   virtual bool isSelected() const;
 
   /**
-     Returns true if this widget or one of its children is selected.
+     Returns true if this widget or one of its tqchildren is selected.
   */
   virtual bool hasSelection() const;
 
@@ -90,15 +91,15 @@ public:
 
   /**
      Update selection information for this widget.
-     @param parentSelected indicates whether the parent is selected.
+     @param tqparentSelected indicates whether the tqparent is selected.
      @return true if the selection state has changed for the widget since
-     the last time the widget was painted. `repaint' is invoked on the widget if
+     the last time the widget was painted. `tqrepaint' is invoked on the widget if
      selection state is changed, to ensure that selection is visible.
   */
-  virtual bool updateSelection(bool parentSelected);
+  virtual bool updateSelection(bool tqparentSelected);
 
   /**
-     Clears the selection and repaints the widget if `update' is true.
+     Clears the selection and tqrepaints the widget if `update' is true.
   */
   virtual void clearSelection();
 
@@ -147,7 +148,7 @@ public:
      @li accept cursor for insert/paste
      @li reject cursor for insert/paste
   */
-  void updateCursorShape();
+  void updatetqCursorShape();
 
   virtual void updateCursorRecursively();
 

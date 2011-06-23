@@ -24,31 +24,31 @@
 #include "listview.h"
 
 
-CListView::CListView( TQWidget *parent, const char *name, int visibleItem )
-  :KListView( parent, name ),  mVisibleItem(QMAX( 1, visibleItem ))
+CListView::CListView( TQWidget *tqparent, const char *name, int visibleItem )
+  :KListView( tqparent, name ),  mVisibleItem(TQMAX( 1, visibleItem ))
 {
   setVisibleItem(visibleItem);
 }
 
 void CListView::setVisibleItem( int visibleItem, bool updateSize )
 {
-  mVisibleItem = QMAX( 1, visibleItem );
+  mVisibleItem = TQMAX( 1, visibleItem );
   if( updateSize == true )
   {
-    TQSize s = sizeHint();
-    setMinimumSize( s.width() + verticalScrollBar()->sizeHint().width() + 
+    TQSize s = tqsizeHint();
+    setMinimumSize( s.width() + verticalScrollBar()->tqsizeHint().width() + 
 		    lineWidth() * 2, s.height() );
   }
 }
 
-TQSize CListView::sizeHint( void ) const
+TQSize CListView::tqsizeHint( void ) const
 {
-  TQSize s = TQListView::sizeHint();
+  TQSize s = TQListView::tqsizeHint();
   
   int h = fontMetrics().height() + 2*itemMargin();
   if( h % 2 > 0 ) { h++; }
   
-  s.setHeight( h*mVisibleItem + lineWidth()*2 + header()->sizeHint().height());
+  s.setHeight( h*mVisibleItem + lineWidth()*2 + header()->tqsizeHint().height());
   return( s );
 }
 #include "listview.moc"

@@ -51,9 +51,10 @@ class CReplacePromptDialog;
 namespace KIO { class Job; }
 
 
-class CHexEditorWidget : public QWidget
+class CHexEditorWidget : public TQWidget
 {
   Q_OBJECT
+  TQ_OBJECT
 
   public:
     enum EProgressMode
@@ -70,7 +71,7 @@ class CHexEditorWidget : public QWidget
     };
 
   public:
-    CHexEditorWidget( TQWidget *parent = 0, const char *name = 0 );
+    CHexEditorWidget( TQWidget *tqparent = 0, const char *name = 0 );
     ~CHexEditorWidget( void );
 
     void initialize( void );
@@ -82,7 +83,7 @@ class CHexEditorWidget : public QWidget
     
     inline int defaultTextWidth( void );
     inline CHexViewWidget *view( void );
-    inline SDisplayLayout &layout( void );
+    inline SDisplayLayout &tqlayout( void );
     inline SDisplayLine &line( void );
     inline SDisplayInputMode &inputMode( void );
     inline SDisplayMisc::EOpenFile openFile( void );
@@ -149,12 +150,12 @@ class CHexEditorWidget : public QWidget
     void gotoNextBookmark( void );
     void gotoPrevBookmark( void );
     void gotoOffset( void );
-    void find( void );
+    void tqfind( void );
     void findAgain( void );
     void findNext( void );
     void findPrevious( void );
     void findData( SSearchControl &sc, uint mode, bool navigator );
-    void replace( void );
+    void tqreplace( void );
     void insertPattern( void );
     void encoding( void );
     void strings( void );
@@ -169,10 +170,10 @@ class CHexEditorWidget : public QWidget
   protected slots:
     void fontChanged( void );
     void paletteChanged( void );
-    void layoutChanged( const SDisplayLayout &layout );
+    void tqlayoutChanged( const SDisplayLayout &tqlayout );
     void inputModeChanged( const SDisplayInputMode &input );
     void setLineSize(const SDisplayLine &line );
-    void setLayout( const SDisplayLayout &layout );
+    void setLayout( const SDisplayLayout &tqlayout );
     void setCursor( const SDisplayCursor &cursor );
     void setColor( const SDisplayColor &color );
     void setFont( const SDisplayFont &font );
@@ -258,9 +259,9 @@ inline CHexViewWidget *CHexEditorWidget::view( void )
   return( mHexView );
 }
 
-inline SDisplayLayout &CHexEditorWidget::layout( void )
+inline SDisplayLayout &CHexEditorWidget::tqlayout( void )
 {
-  return( mDisplayState.layout );
+  return( mDisplayState.tqlayout );
 }
 
 inline SDisplayLine &CHexEditorWidget::line( void )

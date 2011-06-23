@@ -34,12 +34,12 @@
 #include <tqpushbutton.h>
 
 
-CStringDialog::CStringDialog( TQWidget *parent, const char *name, bool modal )
+CStringDialog::CStringDialog( TQWidget *tqparent, const char *name, bool modal )
   : KDialogBase( Plain, i18n("Extract Strings"), Help|User1|Cancel, User1,
-		 parent, name, modal, true, i18n("&Update") ),
+		 tqparent, name, modal, true, i18n("&Update") ),
   mMaxLength(0), mBusy(false), mDirty(false)
 {
-  setHelp( "khexedit/khexedit.html", TQString::null );
+  setHelp( "khexedit/khexedit.html", TQString() );
 
   TQString text;
   TQVBoxLayout *topLayout = new TQVBoxLayout( plainPage(), 0, spacingHint() );
@@ -270,14 +270,14 @@ void CStringDialog::setClean( void )
 
 void CStringDialog::selectionChanged()
 {
-  killTimers();
+  TQT_TQOBJECT(this)->killTimers();
   startTimer( 200 );
 }
 
 
 void CStringDialog::timerEvent( TQTimerEvent * )
 {
-  killTimers();
+  TQT_TQOBJECT(this)->killTimers();
 
   TQListViewItem *item = mStringList->currentItem();
   if( item == 0 )
@@ -307,7 +307,7 @@ int CStringDialog::updateList( CProgress &p )
   for( const TQString *str = list.first(); str != 0; str = list.next() )
   {
     appendListItem( *str, offsetLen );
-    mMaxLength = QMAX( mMaxLength, str->length() );
+    mMaxLength = TQMAX( mMaxLength, str->length() );
 
     if( p.expired() == true )
     {
@@ -372,8 +372,8 @@ void CStringDialog::appendListItem( const TQString &str, uint offsetLen )
 
 void CStringDialog::updateListInfo( void )
 {
-  mListSizeLabel->setText( TQString("%1").arg(mStringData.count()) );
-  mDisplaySizeLabel->setText( TQString("%1").arg(mStringList->childCount()) );
+  mListSizeLabel->setText( TQString("%1").tqarg(mStringData.count()) );
+  mDisplaySizeLabel->setText( TQString("%1").tqarg(mStringList->childCount()) );
   setColumnWidth();
 }
 

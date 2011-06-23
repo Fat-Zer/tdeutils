@@ -24,8 +24,8 @@
 
 using namespace KSim::Snmp;
 
-Monitor::Monitor( const HostConfig &host, const Identifier &oid, int refresh, TQObject *parent, const char *name )
-    : TQObject( parent, name ), m_oid( oid ), m_session( host )
+Monitor::Monitor( const HostConfig &host, const Identifier &oid, int refresh, TQObject *tqparent, const char *name )
+    : TQObject( tqparent, name ), m_oid( oid ), m_session( host )
 {
     if ( refresh > 0 )
         m_timerId = startTimer( refresh );

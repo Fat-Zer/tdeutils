@@ -19,6 +19,7 @@
 class ProgramSensor :  public Sensor
 {
     Q_OBJECT
+  TQ_OBJECT
 public:
     ProgramSensor(const TQString &programName, int msec=1000, TQString encoding="" );
     ~ProgramSensor();

@@ -10,7 +10,7 @@ themes=(
 	"richtext/richtext.theme"
 	"richtext/rtext.theme"
 	"globalMouse/eyes.theme"
-	"unicode/unicode.theme"
+	"tqunicode/tqunicode.theme"
         "mouseDrag/karmix/karmix.theme"
         "input_api/input_api.theme"
         "input_example/input_example.theme"

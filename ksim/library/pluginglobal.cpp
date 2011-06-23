@@ -157,7 +157,7 @@ bool KSim::Plugin::isNull() const
 
 const TQString &KSim::Plugin::name() const
 {
-  return d ? d->name : TQString::null;
+  return d ? d->name : TQString();
 }
 
 TQPixmap KSim::Plugin::icon() const
@@ -172,7 +172,7 @@ TQCString KSim::Plugin::libName() const
 
 const TQString &KSim::Plugin::fileName() const
 {
-  return d ? d->filename : TQString::null;
+  return d ? d->filename : TQString();
 }
 
 KSim::PluginObject *KSim::Plugin::plugin() const

@@ -19,7 +19,7 @@ ClickMap::ClickMap(karamba* k, int x, int y, int w, int h )
     if( h != 0 || w != 0)
         clip = 0;
     else
-        clip = Qt::DontClip;
+        clip = TQt::DontClip;
 */
 
     if( h == 0 || w == 0)
@@ -41,7 +41,7 @@ void ClickMap::setTextProps( TextField *t )
 bool ClickMap::click( TQMouseEvent *e ) {
 
   //Don't load the web page if the click isn't for us
-  if (boundingBox.contains(e->x(), e->y())) {
+  if (boundingBox.tqcontains(e->x(), e->y())) {
 
     int index = ((e -> y() - getY()) / text.getLineHeight()) + 1;
     if (index >= 1 && index <= (int)displays.count()) {
@@ -63,7 +63,7 @@ void ClickMap::mUpdate( TQPainter *p )
     while( it != displays.end() && (row <= getHeight() || getHeight() == -1 )   )
     {
         p->setPen( text.getColor() );
-        // p->drawText(x,y+i,width,height,  Qt::AlignCenter | Qt::ExpandTabs, *it);
+        // p->drawText(x,y+i,width,height,  TQt::AlignCenter | TQt::ExpandTabs, *it);
         p->drawText(getX(), getY() + i + text.getLineHeight(), *it);
         i += text.getLineHeight();
         it++;

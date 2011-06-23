@@ -3,7 +3,7 @@
  *
  * Copyright (c) 2003 Paul Campbell <paul@taniwha.com>
  *
- * Requires the Qt widget libraries, available at no cost at
+ * Requires the TQt widget libraries, available at no cost at
  * http://www.troll.no/
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -42,8 +42,9 @@ class KComboBox;
 class ProfileConfig : public KCModule
 {
   Q_OBJECT
+  TQ_OBJECT
 public:
-  ProfileConfig( TQWidget *parent=0, const char* name=0);
+  ProfileConfig( TQWidget *tqparent=0, const char* name=0);
   ~ProfileConfig( );     
 
   void save( void );

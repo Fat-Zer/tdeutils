@@ -29,7 +29,7 @@ void ConcRegExp::addRegExp( RegExp *regExp )
     addChild( regExp );
 }
 
-RegExpList ConcRegExp::children()
+RegExpList ConcRegExp::tqchildren()
 {
     return list;
 }

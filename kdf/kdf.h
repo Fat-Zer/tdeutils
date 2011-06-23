@@ -31,9 +31,10 @@
 class KDFTopLevel : public KMainWindow
 {
  Q_OBJECT
+  TQ_OBJECT
 
   public:
-    KDFTopLevel(TQWidget *parent=0, const char *name=0);
+    KDFTopLevel(TQWidget *tqparent=0, const char *name=0);
     ~KDFTopLevel() { };
 
   protected slots:

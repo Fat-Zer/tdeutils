@@ -3,7 +3,7 @@
 *
 *  Copyright (C) 2003 Hans Karlsson <karlsson.h@home.se>
 *  Copyright (C) 2003-2004 Adam Geitgey <adam@rootnode.org>
-*  Copyright (c) 2004 Petri Damstén <damu@iki.fi>
+*  Copyright (c) 2004 Petri Damstï¿½n <damu@iki.fi>
 *
 *  This file is part of SuperKaramba.
 *
@@ -38,7 +38,7 @@ long createMenu(long widget)
   karamba* currTheme = (karamba*)widget;
 
   KPopupMenu* tmp = new KPopupMenu(currTheme);
-  currTheme->menuList->append (tmp );
+  currTheme->menuList->append( TQT_TQOBJECT(tmp) );
 
   currTheme->connect(tmp, TQT_SIGNAL(activated(int)), currTheme,
                      TQT_SLOT(passMenuItemClicked(int)));
@@ -86,7 +86,7 @@ long deleteMenu(long widget, long menu)
   karamba* currTheme = (karamba*)widget;
   KPopupMenu* tmp = (KPopupMenu*)menu;
 
-  currTheme->menuList->removeRef(tmp);
+  currTheme->menuList->removeRef(TQT_TQOBJECT(tmp));
 
   return 1;
 }

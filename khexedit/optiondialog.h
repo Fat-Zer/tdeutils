@@ -27,7 +27,7 @@ class TQFrame;
 class TQCheckBox;
 class TQLabel;
 class TQLineEdit;
-class QPushbutton;
+class TQPushbutton;
 class TQRadioButton;
 class TQSpinBox;
 class TQComboBox;
@@ -43,9 +43,10 @@ class KFontChooser;
 class CColorListBox : public KListBox
 {
   Q_OBJECT
+  TQ_OBJECT
 
   public:
-    CColorListBox( TQWidget *parent=0, const char * name=0, WFlags f=0 );
+    CColorListBox( TQWidget *tqparent=0, const char * name=0, WFlags f=0 );
     void setColor( uint index, const TQColor &color );
     const TQColor color( uint index );
 
@@ -69,10 +70,10 @@ class CColorListBox : public KListBox
 };
 
 
-class CColorListItem : public QListBoxItem
+class CColorListItem : public TQListBoxItem
 {
   public:
-    CColorListItem( const TQString &text, const TQColor &color=Qt::black );
+    CColorListItem( const TQString &text, const TQColor &color=TQt::black );
     const TQColor &color( void );
     void  setColor( const TQColor &color );
   
@@ -92,6 +93,7 @@ class CColorListItem : public QListBoxItem
 class COptionDialog : public KDialogBase
 {
   Q_OBJECT
+  TQ_OBJECT
 
   public:
     enum EPage
@@ -105,10 +107,10 @@ class COptionDialog : public KDialogBase
       page_max
     };
 
-    COptionDialog( TQWidget *parent = 0, char *name = 0, bool modal = false );
+    COptionDialog( TQWidget *tqparent = 0, char *name = 0, bool modal = false );
     ~COptionDialog( void );
 
-    void setLayout( SDisplayLayout &layout, SDisplayLine &line );
+    void setLayout( SDisplayLayout &tqlayout, SDisplayLine &line );
     void setCursor( SDisplayCursor &cursor );
     void setColor( SDisplayColor &color );
     void setFont( SDisplayFont &font );
@@ -236,7 +238,7 @@ class COptionDialog : public KDialogBase
 
   signals:
     void lineSizeChoice( const SDisplayLine &lineSize );
-    void layoutChoice( const SDisplayLayout &layout );
+    void tqlayoutChoice( const SDisplayLayout &tqlayout );
     void cursorChoice( const SDisplayCursor &cursor ); 
     void colorChoice( const SDisplayColor &color );
     void fontChoice( const SDisplayFont &font );

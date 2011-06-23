@@ -49,8 +49,8 @@
 
 #include <string.h>
 
-NetDialog::NetDialog(TQWidget *parent, const char *name)
-   : TQTabDialog(parent, name, true)
+NetDialog::NetDialog(TQWidget *tqparent, const char *name)
+   : TQTabDialog(tqparent, name, true)
 {
   m_clicked = false;
   setCaption(kapp->makeStdCaption(i18n("Network Interface")));
@@ -65,7 +65,7 @@ NetDialog::NetDialog(TQWidget *parent, const char *name)
   m_generalLayout->addMultiCellWidget(m_deviceLabel, 0, 0, 0, 0);
 
   m_deviceCombo = new KComboBox(true, m_generalTab);
-  m_deviceCombo->setSizePolicy(TQSizePolicy(TQSizePolicy::Preferred,
+  m_deviceCombo->tqsetSizePolicy(TQSizePolicy(TQSizePolicy::Preferred,
      TQSizePolicy::Fixed));
   m_deviceCombo->setFocus();
   m_deviceCombo->setDuplicatesEnabled(false);
@@ -86,10 +86,10 @@ NetDialog::NetDialog(TQWidget *parent, const char *name)
   m_timerBox = new TQGroupBox(m_generalTab);
   m_timerBox->setTitle(i18n("Timer"));
   m_timerBox->setColumnLayout(0, Qt::Vertical);
-  m_timerBox->layout()->setSpacing(0);
-  m_timerBox->layout()->setMargin(0);
-  m_timerBoxLayout = new TQVBoxLayout(m_timerBox->layout());
-  m_timerBoxLayout->setAlignment(Qt::AlignTop);
+  m_timerBox->tqlayout()->setSpacing(0);
+  m_timerBox->tqlayout()->setMargin(0);
+  m_timerBoxLayout = new TQVBoxLayout(m_timerBox->tqlayout());
+  m_timerBoxLayout->tqsetAlignment(TQt::AlignTop);
   m_timerBoxLayout->setSpacing(6);
   m_timerBoxLayout->setMargin(11);
 
@@ -256,7 +256,7 @@ TQStringList NetDialog::createList() const
   for (it = output.begin(); it != output.end(); ++it) {
     list = TQStringList::split(' ', (*it));
     (*it) = list[0].stripWhiteSpace();
-    (*it).truncate((*it).find(':'));
+    (*it).truncate((*it).tqfind(':'));
   }
 
   return output;

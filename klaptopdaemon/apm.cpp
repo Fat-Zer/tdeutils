@@ -4,7 +4,7 @@
  * Copyright (c) 1999 Paul Campbell <paul@taniwha.com>
  * Copyright (c) 2002 Marc Mutz <mutz@kde.org>
  *
- * Requires the Qt widget libraries, available at no cost at
+ * Requires the TQt widget libraries, available at no cost at
  * http://www.troll.no/
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -40,7 +40,7 @@
 #include <kstandarddirs.h>
 #include <kprocess.h>
 
-// other Qt headers:
+// other TQt headers:
 #include <tqlayout.h>
 #include <tqlabel.h>
 #include <tqcheckbox.h>
@@ -51,8 +51,8 @@
 #include <tqtooltip.h>
 extern void wake_laptop_daemon();
 
-ApmConfig::ApmConfig (TQWidget * parent, const char *name)
-  : KCModule(parent, name)
+ApmConfig::ApmConfig (TQWidget * tqparent, const char *name)
+  : KCModule(tqparent, name)
 {
     KGlobal::locale()->insertCatalogue("klaptopdaemon"); // For translation of klaptopdaemon messages
 
@@ -63,7 +63,7 @@ ApmConfig::ApmConfig (TQWidget * parent, const char *name)
 
     TQLabel *tmp_label = new TQLabel( i18n("This panel lets you configure your APM system and lets "
 					"you have access to some of the extra features provided by it"), this );
-    tmp_label->setAlignment( Qt::WordBreak );
+    tmp_label->tqsetAlignment( TQt::WordBreak );
     top_layout->addWidget( tmp_label );
     
     tmp_label = new TQLabel( i18n("NOTE: some APM implementations have buggy suspend/standby "
@@ -71,12 +71,12 @@ ApmConfig::ApmConfig (TQWidget * parent, const char *name)
 				"all your work, check them on and try a suspend/standby from "
 				"the popup menu on the battery icon in the panel if it fails to come "
 				"back successfully uncheck the box again."), this );
-    tmp_label->setAlignment( Qt::WordBreak );
+    tmp_label->tqsetAlignment( TQt::WordBreak );
     top_layout->addWidget( tmp_label );
 
     tmp_label = new TQLabel( i18n("Some changes made on this page may require you to quit the laptop panel "
 				"and start it again to take effect"), this );
-    tmp_label->setAlignment( Qt::WordBreak );
+    tmp_label->tqsetAlignment( TQt::WordBreak );
     top_layout->addWidget( tmp_label );
 
     bool can_enable = laptop_portable::has_apm(1);	// is helper ready
@@ -100,8 +100,8 @@ ApmConfig::ApmConfig (TQWidget * parent, const char *name)
 				"ways you can enable this application, either make the file "
 				"/proc/apm writeable by anyone every time your system boots "
 				"or use the button below to make the %1 application "
-				"set-uid root").arg(apm_name), this );
-    tmp_label->setAlignment( Qt::WordBreak );
+				"set-uid root").tqarg(apm_name), this );
+    tmp_label->tqsetAlignment( TQt::WordBreak );
     top_layout->addWidget( tmp_label );
     TQHBoxLayout *ll = new TQHBoxLayout(top_layout);
     TQPushButton *setupButton = new TQPushButton(i18n("Setup Helper Application"), this);
@@ -114,7 +114,7 @@ ApmConfig::ApmConfig (TQWidget * parent, const char *name)
 	tmp_label = new TQLabel( i18n("Your system seems to have 'Software Suspend' installed, this can "
 				"be used to hibernate or 'suspend to disk' your system if you want "
 				"to use this for hibernation check the box below"), this );
-	tmp_label->setAlignment( Qt::WordBreak );
+	tmp_label->tqsetAlignment( TQt::WordBreak );
 	top_layout->addWidget( tmp_label );
      	enableSoftwareSuspendHibernate = new TQCheckBox( i18n("Enable software suspend for hibernate"), this );
     	top_layout->addWidget( enableSoftwareSuspendHibernate );
@@ -126,7 +126,7 @@ ApmConfig::ApmConfig (TQWidget * parent, const char *name)
 				"Suspend utility - KDE provides a utility to do this, if you "
 				"wish to use it you must make it set-uid root, the button "
 				"below will do this for you"), this );
-	tmp_label->setAlignment( Qt::WordBreak );
+	tmp_label->tqsetAlignment( TQt::WordBreak );
 	top_layout->addWidget( tmp_label );
         ll = new TQHBoxLayout(this);
         TQPushButton *setupSSButton = new TQPushButton(i18n("Setup SS Helper Application"), this);
@@ -141,7 +141,7 @@ ApmConfig::ApmConfig (TQWidget * parent, const char *name)
 
 
     top_layout->addStretch(1);
-    top_layout->addWidget( new TQLabel( i18n("Version: %1").arg(LAPTOP_VERSION), this), 0, Qt::AlignRight );
+    top_layout->addWidget( new TQLabel( i18n("Version: %1").tqarg(LAPTOP_VERSION), this), 0, TQt::AlignRight );
 
 
     load();      
@@ -158,7 +158,7 @@ void ApmConfig::setupHelper()
 	if (!kdesu.isEmpty()) {
 		int rc = KMessageBox::warningContinueCancel(0,
 				i18n("You will need to supply a root password "
-					"to allow the privileges of the %1 application to change.").arg(apm_name),
+					"to allow the privileges of the %1 application to change.").tqarg(apm_name),
 				"KLaptopDaemon", KStdGuiItem::cont(),
 				"");
 		if (rc == KMessageBox::Continue) {
@@ -170,10 +170,10 @@ void ApmConfig::setupHelper()
 			proc.start(KProcess::Block);	// run it sync so has_apm below sees the results
 		}
 	} else {
-		KMessageBox::sorry(0, i18n("%1 cannot be enabled because kdesu cannot be found.  Please make sure that it is installed correctly.").arg(TQString(apm_name)),
+		KMessageBox::sorry(0, i18n("%1 cannot be enabled because kdesu cannot be found.  Please make sure that it is installed correctly.").tqarg(TQString(apm_name)),
 				i18n("KLaptopDaemon"));
 	}
-	laptop_portable::apm_set_mask(enablestandby, enablesuspend);
+	laptop_portable::apm_set_tqmask(enablestandby, enablesuspend);
     	bool can_enable = laptop_portable::has_apm(1);	// is helper ready
     	enableStandby->setEnabled(can_enable);
     	enableSuspend->setEnabled(can_enable);
@@ -207,7 +207,7 @@ void ApmConfig::setupHelper2()	// we use the acpi helper to do software suspend
 		KMessageBox::sorry(0, i18n("The Software Suspend helper cannot be enabled because kdesu cannot be found.  Please make sure that it is installed correctly."),
 				i18n("KLaptopDaemon"));
 	}
-	laptop_portable::software_suspend_set_mask(enablesoftwaresuspend);
+	laptop_portable::software_suspend_set_tqmask(enablesoftwaresuspend);
     	bool can_enable = laptop_portable::has_software_suspend(2);	// is helper ready
     	enableSoftwareSuspendHibernate->setEnabled(can_enable);
 	wake_laptop_daemon();
@@ -218,9 +218,9 @@ void ApmConfig::save()
 {
         enablestandby = enableStandby->isChecked();
         enablesuspend = enableSuspend->isChecked();
-	laptop_portable::apm_set_mask(enablestandby, enablesuspend);
+	laptop_portable::apm_set_tqmask(enablestandby, enablesuspend);
 	enablesoftwaresuspend = (enableSoftwareSuspendHibernate ? enableSoftwareSuspendHibernate->isChecked():0);
-	laptop_portable::software_suspend_set_mask(enablesoftwaresuspend);
+	laptop_portable::software_suspend_set_tqmask(enablesoftwaresuspend);
 
         config->setGroup("ApmDefault");
 

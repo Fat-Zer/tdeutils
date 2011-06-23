@@ -3,7 +3,7 @@
  *
  * Copyright (c) 1999 Michael Kropfberger <michael.kropfberger@gmx.net>
  *
- * Requires the Qt widget libraries, available at no cost at
+ * Requires the TQt widget libraries, available at no cost at
  * http://www.troll.no/
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -43,9 +43,10 @@ class TQListViewItem;
 
 /**************************************************************/
 
-class MntConfigWidget : public QWidget
+class MntConfigWidget : public TQWidget
 {
   Q_OBJECT
+  TQ_OBJECT
 
   public:
     enum ColType
@@ -58,7 +59,7 @@ class MntConfigWidget : public QWidget
     };
 
   public:
-    MntConfigWidget( TQWidget *parent=0, const char *name=0, bool init=false );
+    MntConfigWidget( TQWidget *tqparent=0, const char *name=0, bool init=false );
     ~MntConfigWidget();
 
   public slots:

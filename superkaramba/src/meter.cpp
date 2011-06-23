@@ -105,7 +105,7 @@ bool Meter::isEnabled()
 
 bool Meter::insideActiveArea(int x, int y)
 {
-  return boundingBox.contains(x, y) && clickable;
+  return boundingBox.tqcontains(x, y) && clickable;
 }
 
 #include "meter.moc"

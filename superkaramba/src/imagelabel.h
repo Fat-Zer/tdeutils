@@ -41,10 +41,11 @@ class ImageLabel;
 class KIO::CopyJob;
 
 // Abstract Effects Baseclass
-class Effect : public QObject
+class Effect : public TQObject
 {
 
 Q_OBJECT
+  TQ_OBJECT
 
 public:
   Effect(ImageLabel*, int millisec);
@@ -100,6 +101,7 @@ class ImageLabel : public Meter
 {
 
 Q_OBJECT
+  TQ_OBJECT
 
 public:
   ImageLabel(karamba* k, int ix,int iy,int iw,int ih );

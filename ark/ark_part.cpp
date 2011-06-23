@@ -63,13 +63,13 @@ KAboutData *ArkPart::createAboutData()
 
 
 
-ArkPart::ArkPart( TQWidget *parentWidget, const char * /*widgetName*/, TQObject *parent,
+ArkPart::ArkPart( TQWidget *tqparentWidget, const char * /*widgetName*/, TQObject *tqparent,
                   const char *name, const TQStringList &, bool readWrite )
-        : KParts::ReadWritePart(parent, name)
+        : KParts::ReadWritePart(tqparent, name)
 {
     kdDebug(1601)<<"ArkPart::ArkPart"<<endl;
     setInstance(ArkFactory::instance());
-    awidget = new  ArkWidget( parentWidget, "ArkWidget" );
+    awidget = new  ArkWidget( tqparentWidget, "ArkWidget" );
 
     setWidget(awidget);
     connect( awidget, TQT_SIGNAL( fixActions() ), this, TQT_SLOT( fixEnables() ) );
@@ -116,40 +116,40 @@ ArkPart::~ArkPart()
 void
 ArkPart::setupActions()
 {
-    addFileAction = new KAction(i18n("Add &File..."), "ark_addfile", 0, awidget,
+    addFileAction = new KAction(i18n("Add &File..."), "ark_addfile", 0, TQT_TQOBJECT(awidget),
                                 TQT_SLOT(action_add()), actionCollection(), "addfile");
 
-    addDirAction = new KAction(i18n("Add Folde&r..."), "ark_adddir", 0, awidget,
+    addDirAction = new KAction(i18n("Add Folde&r..."), "ark_adddir", 0, TQT_TQOBJECT(awidget),
                                TQT_SLOT(action_add_dir()), actionCollection(), "adddir");
 
-    extractAction = new KAction(i18n("E&xtract..."), "ark_extract", 0, awidget,
+    extractAction = new KAction(i18n("E&xtract..."), "ark_extract", 0, TQT_TQOBJECT(awidget),
                                 TQT_SLOT(action_extract()),	actionCollection(), "extract");
 
-    deleteAction = new KAction(i18n("De&lete"), "ark_delete", KShortcut(Qt::Key_Delete), awidget,
+    deleteAction = new KAction(i18n("De&lete"), "ark_delete", KShortcut(TQt::Key_Delete), TQT_TQOBJECT(awidget),
                                TQT_SLOT(action_delete()), actionCollection(), "delete");
 
-    viewAction = new KAction(i18n("to view something","&View"), "ark_view", 0, awidget,
+    viewAction = new KAction(i18n("to view something","&View"), "ark_view", 0, TQT_TQOBJECT(awidget),
                              TQT_SLOT(action_view()), actionCollection(), "view");
 
 
-    openWithAction = new KAction(i18n("&Open With..."), 0, awidget,
+    openWithAction = new KAction(i18n("&Open With..."), 0, TQT_TQOBJECT(awidget),
                                  TQT_SLOT(slotOpenWith()), actionCollection(), "open_with");
 
 
-    editAction = new KAction(i18n("Edit &With..."), 0, awidget,
+    editAction = new KAction(i18n("Edit &With..."), 0, TQT_TQOBJECT(awidget),
                              TQT_SLOT(action_edit()), actionCollection(), "edit");
 
-    selectAllAction = KStdAction::selectAll(awidget->fileList(), TQT_SLOT(selectAll()), actionCollection(), "select_all");
+    selectAllAction = KStdAction::selectAll(TQT_TQOBJECT(awidget->fileList()), TQT_SLOT(selectAll()), actionCollection(), "select_all");
 
-    deselectAllAction =  new KAction(i18n("&Unselect All"), 0, awidget->fileList(), TQT_SLOT(unselectAll()), actionCollection(), "deselect_all");
+    deselectAllAction =  new KAction(i18n("&Unselect All"), 0, TQT_TQOBJECT(awidget->fileList()),TQT_SLOT(unselectAll()), actionCollection(), "deselect_all");
 
-    invertSelectionAction = new KAction(i18n("&Invert Selection"), 0, awidget->fileList(), TQT_SLOT(invertSelection()), actionCollection(), "invert_selection");
+    invertSelectionAction = new KAction(i18n("&Invert Selection"), 0, TQT_TQOBJECT(awidget->fileList()),TQT_SLOT(invertSelection()), actionCollection(), "invert_selection");
 
     saveAsAction = KStdAction::saveAs(this, TQT_SLOT(file_save_as()), actionCollection());
 
     //KStdAction::preferences(awidget, TQT_SLOT(showSettings()), actionCollection());
 
-    ( void ) new KAction( i18n( "Configure &Ark..." ), "configure" , 0, awidget,
+    ( void ) new KAction( i18n( "Configure &Ark..." ), "configure" , 0, TQT_TQOBJECT(awidget),
                                        TQT_SLOT( showSettings() ), actionCollection(), "options_configure_ark" );
 
 
@@ -158,7 +158,7 @@ ArkPart::setupActions()
 
     showSearchBar->setChecked( ArkSettings::showSearchBar() );
 
-    connect( showSearchBar, TQT_SIGNAL( toggled( bool ) ), awidget, TQT_SLOT( slotShowSearchBarToggled( bool ) ) );
+    connect( showSearchBar, TQT_SIGNAL( toggled( bool ) ), TQT_TQOBJECT(awidget), TQT_SLOT( slotShowSearchBarToggled( bool ) ) );
 
     initialEnables();
 }
@@ -249,7 +249,7 @@ bool ArkPart::openFile()
     url.setPath( m_file );
     if( !TQFile::exists( m_file ) )
     {
-        emit setWindowCaption(  TQString::null );
+        emit setWindowCaption(  TQString() );
         emit removeRecentURL( awidget->realURL() );
         return false;
     }
@@ -294,7 +294,7 @@ bool ArkPart::closeURL()
 
   int res = KMessageBox::warningYesNoCancel( widget(),
           i18n( "The archive \"%1\" has been modified.\n"
-                "Do you want to save it?" ).arg( docName ),
+                "Do you want to save it?" ).tqarg( docName ),
           i18n( "Save Archive?" ), KStdGuiItem::save(), KStdGuiItem::discard() );
 
   switch ( res )
@@ -320,7 +320,7 @@ void ArkPart::transferStarted( KIO::Job *job )
 {
     m_job = job;
 
-    m_bar->slotSetBusy( i18n( "Downloading %1..." ).arg( m_url.prettyURL() ),
+    m_bar->slotSetBusy( i18n( "Downloading %1..." ).tqarg( m_url.prettyURL() ),
                         (job != 0), (job != 0) );
 
     if ( job )
@@ -372,8 +372,8 @@ void ArkPart::cancelTransfer()
     }
 }
 
-ArkBrowserExtension::ArkBrowserExtension( KParts::ReadOnlyPart * parent, const char * name )
-                : KParts::BrowserExtension( parent, name )
+ArkBrowserExtension::ArkBrowserExtension( KParts::ReadOnlyPart * tqparent, const char * name )
+                : KParts::BrowserExtension( tqparent, name )
 {
 }
 
@@ -382,8 +382,8 @@ void ArkBrowserExtension::slotOpenURLRequested( const KURL & url )
     emit openURLRequest( url, KParts::URLArgs() );
 }
 
-ArkStatusBarExtension::ArkStatusBarExtension( KParts::ReadWritePart * parent )
-                : KParts::StatusBarExtension( parent ),
+ArkStatusBarExtension::ArkStatusBarExtension( KParts::ReadWritePart * tqparent )
+                : KParts::StatusBarExtension( tqparent ),
                   m_bBusy( false ),
                   m_pStatusLabelSelect( 0 ),
                   m_pStatusLabelTotal( 0 ),
@@ -411,12 +411,12 @@ void ArkStatusBarExtension::setupStatusBar()
 
     m_pStatusLabelTotal = new KSqueezedTextLabel( statusBar(), "StatusLabelTotal" );
     m_pStatusLabelTotal->setFrameStyle( TQFrame::NoFrame );
-    m_pStatusLabelTotal->setAlignment( AlignRight );
+    m_pStatusLabelTotal->tqsetAlignment( AlignRight );
     m_pStatusLabelTotal->setText( i18n( "Total: 0 files" ) );
 
     m_pStatusLabelSelect = new TQLabel( statusBar(), "StatusLabelSelect" );
     m_pStatusLabelSelect->setFrameStyle( TQFrame::NoFrame );
-    m_pStatusLabelSelect->setAlignment( AlignLeft );
+    m_pStatusLabelSelect->tqsetAlignment( AlignLeft );
     m_pStatusLabelSelect->setText(i18n( "0 files selected" ) );
 
     m_cancelButton = new KPushButton( SmallIcon( "cancel" ), TQString(), statusBar(), "CancelButton" );
@@ -454,7 +454,7 @@ void ArkStatusBarExtension::slotSetBusy( const TQString & text, bool showCancelB
     {
         m_pBusyText = new TQLabel( statusBar() );
 
-        m_pBusyText->setAlignment( AlignLeft );
+        m_pBusyText->tqsetAlignment( AlignLeft );
         m_pBusyText->setFrameStyle( TQFrame::Panel | TQFrame::Raised );
     }
 

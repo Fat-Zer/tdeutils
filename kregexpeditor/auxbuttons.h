@@ -23,12 +23,13 @@ class TQComboBox;
 class TQLabel;
 class TQToolButton;
 
-class AuxButtons :public QDockWindow
+class AuxButtons :public TQDockWindow
 {
     Q_OBJECT
+  TQ_OBJECT
 
 public:
-    AuxButtons( TQWidget* parent, const char* name );
+    AuxButtons( TQWidget* tqparent, const char* name );
 
 signals:
     void undo();

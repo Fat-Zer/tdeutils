@@ -16,7 +16,7 @@
  *  Boston, MA 02110-1301, USA.
  **/
 
-#ifdef QT_ONLY
+#ifdef TQT_ONLY
   #include "compat.h"
   #include "images.h"
 #else
@@ -41,8 +41,8 @@
 #include "userdefinedregexps.h"
 #include <tqfileinfo.h>
 
-RegExpEditorWindow::RegExpEditorWindow( TQWidget *parent, const char *name)
-    : TQWidget(parent, name, Qt::WPaintUnclipped)
+RegExpEditorWindow::RegExpEditorWindow( TQWidget *tqparent, const char *name)
+    : TQWidget(tqparent, name, TQt::WPaintUnclipped)
 {
     _top = new ConcWidget(this, this);
     _layout = new TQHBoxLayout( this);
@@ -95,7 +95,7 @@ void  RegExpEditorWindow::mousePressEvent ( TQMouseEvent* event )
 bool RegExpEditorWindow::pointSelected( TQPoint p ) const
 {
     TQRect rect = _top->selectionRect();
-    return rect.contains(p);
+    return rect.tqcontains(p);
 }
 
 void RegExpEditorWindow::mouseMoveEvent ( TQMouseEvent* event )
@@ -121,8 +121,8 @@ void RegExpEditorWindow::mouseMoveEvent ( TQMouseEvent* event )
     }
     else {
         TQPainter p( this );
-        p.setRasterOp( Qt::NotROP );
-        p.setPen( Qt::DotLine );
+        p.setRasterOp( TQt::NotROP );
+        p.setPen( TQt::DotLine );
 
         // remove last selection rectangle
         if ( ! _lastPoint.isNull() && _undrawSelection ) {
@@ -151,8 +151,8 @@ void RegExpEditorWindow::mouseReleaseEvent( TQMouseEvent *event)
 
     // remove last selection rectangle
     TQPainter p( this );
-    p.setRasterOp( Qt::NotROP );
-    p.setPen( Qt::DotLine );
+    p.setRasterOp( TQt::NotROP );
+    p.setPen( TQt::DotLine );
     if ( ! _lastPoint.isNull() ) {
         p.drawRect(TQRect(_start, _lastPoint));
     }
@@ -168,7 +168,7 @@ bool RegExpEditorWindow::selectionOverlap( TQPoint pos, TQSize size ) const
 {
     TQRect child(pos, size);
 
-    return (_selection.intersects(child) && ! child.contains(_selection));
+    return (_selection.intersects(child) && ! child.tqcontains(_selection));
 }
 
 bool RegExpEditorWindow::hasSelection() const
@@ -209,8 +209,8 @@ void RegExpEditorWindow::slotDoSelect()
     _pasteInAction = false;
     _insertInAction = false;
 
-    // I need to update the cursor recursively, as a repaint may not have been issued yet
-    // when this method is invoked. This means that when the repaint comes, the cursor may
+    // I need to update the cursor recursively, as a tqrepaint may not have been issued yet
+    // when this method is invoked. This means that when the tqrepaint comes, the cursor may
     // move to an other widget.
     _top->updateCursorRecursively();
 }
@@ -236,9 +236,9 @@ void RegExpEditorWindow::updateContent( TQWidget* focusChild)
     emit contentChanged( p );
 }
 
-TQSize RegExpEditorWindow::sizeHint() const
+TQSize RegExpEditorWindow::tqsizeHint() const
 {
-    return _top->sizeHint();
+    return _top->tqsizeHint();
 }
 
 void RegExpEditorWindow::paintEvent( TQPaintEvent* event )
@@ -289,7 +289,7 @@ void RegExpEditorWindow::cutCopyAux( TQPoint pos )
     RegExpWidgetDrag *clipboardData = new RegExpWidgetDrag( regexp, this );
     delete regexp;
 
-    QClipboard* clipboard = qApp->clipboard();
+    TQClipboard* clipboard = tqApp->tqclipboard();
     clipboard->setData( clipboardData );
     emit anythingOnClipboard( true );
     emit canSave( _top->hasAnyChildren() );
@@ -298,7 +298,7 @@ void RegExpEditorWindow::cutCopyAux( TQPoint pos )
 
 void RegExpEditorWindow::slotStartPasteAction()
 {
-    TQByteArray data = qApp->clipboard()->data()->encodedData( "KRegExpEditor/widgetdrag" );
+    TQByteArray data = tqApp->tqclipboard()->data()->tqencodedData( "KRegExpEditor/widgetdrag" );
     TQTextStream stream( data, IO_ReadOnly );
     TQString str = stream.read();
 
@@ -335,7 +335,7 @@ void RegExpEditorWindow::showRMBMenu( bool enableCutCopy )
     _menu->setItemEnabled( CUT, enableCutCopy );
     _menu->setItemEnabled( COPY, enableCutCopy );
 
-    if ( ! qApp->clipboard()->data()->provides( "KRegExpEditor/widgetdrag" ) )
+    if ( ! tqApp->tqclipboard()->data()->provides( "KRegExpEditor/widgetdrag" ) )
         _menu->setItemEnabled( PASTE, false );
     else
         _menu->setItemEnabled( PASTE, true );
@@ -369,12 +369,12 @@ void RegExpEditorWindow::slotSave()
     TQString dir = WidgetWinItem::path();
     TQString txt;
 
-#ifdef QT_ONLY
-    txt = QInputDialog::getText( tr("Name for regexp"), tr("Enter name:") );
+#ifdef TQT_ONLY
+    txt = TQInputDialog::getText( tr("Name for regexp"), tr("Enter name:") );
     if ( txt.isNull() )
         return;
 #else
-    KLineEditDlg dlg(i18n("Enter name:"), TQString::null, this);
+    KLineEditDlg dlg(i18n("Enter name:"), TQString(), this);
     dlg.setCaption(i18n("Name for Regular Expression"));
     if (!dlg.exec()) return;
     txt = dlg.text();
@@ -383,14 +383,14 @@ void RegExpEditorWindow::slotSave()
     TQString fileName = dir + TQString::fromLocal8Bit("/") + txt + TQString::fromLocal8Bit(".regexp");
     TQFileInfo finfo( fileName );
     if ( finfo.exists() ) {
-        int answer = KMessageBox::warningContinueCancel( this, i18n("<p>Overwrite named regular expression <b>%1</b></p>").arg(txt), TQString::null, i18n("Overwrite"));
+        int answer = KMessageBox::warningContinueCancel( this, i18n("<p>Overwrite named regular expression <b>%1</b></p>").tqarg(txt), TQString(), i18n("Overwrite"));
         if ( answer != KMessageBox::Continue )
             return;
     }
 
     TQFile file( fileName );
     if ( ! file.open(IO_WriteOnly) ) {
-        KMessageBox::sorry( this, i18n("Could not open file for writing: %1").arg(fileName) );
+        KMessageBox::sorry( this, i18n("Could not open file for writing: %1").tqarg(fileName) );
         return;
     }
 
@@ -411,7 +411,7 @@ void RegExpEditorWindow::slotSetRegExp( RegExp* regexp )
 {
     // I have no clue why the following line is necesarry, but if it is not here
     // then the editor area is messed up when calling slotSetRegExp before starting the eventloop.
-    qApp->processEvents();
+    tqApp->processEvents();
 
     delete _top;
     RegExpWidget* widget = WidgetFactory::createWidget( regexp, this, this );
@@ -431,7 +431,7 @@ void RegExpEditorWindow::updateCursorUnderPoint()
 {
     RegExpWidget* widget = _top->widgetUnderPoint( TQCursor::pos(), false );
     if ( widget )
-        widget->updateCursorShape();
+        widget->updatetqCursorShape();
 }
 
 void RegExpEditorWindow::emitVerifyRegExp()
@@ -442,7 +442,7 @@ void RegExpEditorWindow::emitVerifyRegExp()
 
 TQIconSet RegExpEditorWindow::getIcon( const TQString& name )
 {
-#ifdef QT_ONLY
+#ifdef TQT_ONLY
     TQPixmap pix;
     pix.convertFromImage( qembed_findImage( name ) );
     return pix;

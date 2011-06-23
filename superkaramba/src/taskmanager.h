@@ -46,33 +46,34 @@ class TaskManager;
  * @see TaskManager
  * @see KWinModule
  */
-class Task: public QObject
+class Task: public TQObject
 {
     Q_OBJECT
-    Q_PROPERTY( TQString name READ name )
-    Q_PROPERTY( TQString visibleName READ visibleName )
-    Q_PROPERTY( TQString visibleNameWithState READ visibleNameWithState )
-    Q_PROPERTY( TQString iconName READ iconName )
-    Q_PROPERTY( TQString visibleIconName READ visibleIconName )
-    Q_PROPERTY( TQPixmap pixmap READ pixmap )
-    Q_PROPERTY( bool maximized READ isMaximized )
-    Q_PROPERTY( bool iconified READ isIconified )
-    Q_PROPERTY( bool shaded READ isShaded WRITE setShaded )
-    Q_PROPERTY( bool active READ isActive )
-    Q_PROPERTY( bool onCurrentDesktop READ isOnCurrentDesktop )
-    Q_PROPERTY( bool onAllDesktops READ isOnAllDesktops )
-    Q_PROPERTY( bool alwaysOnTop READ isAlwaysOnTop WRITE setAlwaysOnTop )
-    Q_PROPERTY( bool modified READ isModified )
-    Q_PROPERTY( int desktop READ desktop )
-    Q_PROPERTY( double thumbnailSize READ thumbnailSize WRITE setThumbnailSize )
-    Q_PROPERTY( bool hasThumbnail READ hasThumbnail )
-    Q_PROPERTY( TQPixmap thumbnail READ thumbnail )
+  TQ_OBJECT
+    TQ_PROPERTY( TQString name READ name )
+    TQ_PROPERTY( TQString visibleName READ visibleName )
+    TQ_PROPERTY( TQString visibleNameWithState READ visibleNameWithState )
+    TQ_PROPERTY( TQString iconName READ iconName )
+    TQ_PROPERTY( TQString visibleIconName READ visibleIconName )
+    TQ_PROPERTY( TQPixmap pixmap READ pixmap )
+    TQ_PROPERTY( bool maximized READ isMaximized )
+    TQ_PROPERTY( bool iconified READ isIconified )
+    TQ_PROPERTY( bool shaded READ isShaded WRITE setShaded )
+    TQ_PROPERTY( bool active READ isActive )
+    TQ_PROPERTY( bool onCurrentDesktop READ isOnCurrentDesktop )
+    TQ_PROPERTY( bool onAllDesktops READ isOnAllDesktops )
+    TQ_PROPERTY( bool alwaysOnTop READ isAlwaysOnTop WRITE setAlwaysOnTop )
+    TQ_PROPERTY( bool modified READ isModified )
+    TQ_PROPERTY( int desktop READ desktop )
+    TQ_PROPERTY( double thumbnailSize READ thumbnailSize WRITE setThumbnailSize )
+    TQ_PROPERTY( bool hasThumbnail READ hasThumbnail )
+    TQ_PROPERTY( TQPixmap thumbnail READ thumbnail )
 
 public:
-    Task( WId win, TaskManager * parent, const char *name = 0 );
+    Task( WId win, TaskManager * tqparent, const char *name = 0 );
     virtual ~Task();
 
-    TaskManager* taskManager() const { return (TaskManager*) parent(); }
+    TaskManager* taskManager() const { return (TaskManager*) tqparent(); }
 
     WId window() const { return _win; }
 #ifdef KDE_3_2
@@ -203,7 +204,7 @@ public:
     //* @internal
     void removeTransient( WId w ) { _transients.remove( w ); }
     //* @internal
-    bool hasTransient( WId w ) const { return _transients.contains( w ); }
+    bool hasTransient( WId w ) const { return _transients.tqcontains( w ); }
     //* @internal
     void setActive(bool a);
 
@@ -372,15 +373,16 @@ private:
  *
  * @see TaskManager
  */
-class Startup: public QObject
+class Startup: public TQObject
 {
     Q_OBJECT
-    Q_PROPERTY( TQString text READ text )
-    Q_PROPERTY( TQString bin READ bin )
-    Q_PROPERTY( TQString icon READ icon )
+  TQ_OBJECT
+    TQ_PROPERTY( TQString text READ text )
+    TQ_PROPERTY( TQString bin READ bin )
+    TQ_PROPERTY( TQString icon READ icon )
 
 public:
-    Startup( const KStartupInfoId& id, const KStartupInfoData& data, TQObject * parent,
+    Startup( const KStartupInfoId& id, const KStartupInfoData& data, TQObject * tqparent,
         const char *name = 0);
     virtual ~Startup();
 
@@ -427,14 +429,15 @@ typedef TQPtrList<Startup> StartupList;
  * @see KWinModule
  * @version $Id: taskmanager.h,v 1.2 2004/11/17 10:16:47 kodaaja Exp $
  */
-class TaskManager : public QObject
+class TaskManager : public TQObject
 {
     Q_OBJECT
-    Q_PROPERTY( int currentDesktop READ currentDesktop )
-    Q_PROPERTY( int numberOfDesktops READ numberOfDesktops )
+  TQ_OBJECT
+    TQ_PROPERTY( int currentDesktop READ currentDesktop )
+    TQ_PROPERTY( int numberOfDesktops READ numberOfDesktops )
 
 public:
-    TaskManager( TQObject *parent = 0, const char *name = 0 );
+    TaskManager( TQObject *tqparent = 0, const char *name = 0 );
     virtual ~TaskManager();
 
     /**

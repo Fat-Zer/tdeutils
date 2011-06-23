@@ -30,7 +30,7 @@ public:
 	AltnRegExp( bool selected );
 
 	void addRegExp( RegExp * );
-    RegExpList children() const;
+    RegExpList tqchildren() const;
 
     virtual bool check( ErrorMap&, bool first, bool last );
     virtual int precedence() const { return 1;}

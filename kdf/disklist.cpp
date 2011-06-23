@@ -3,7 +3,7 @@
  *
  * Copyright (c) 1999 Michael Kropfberger <michael.kropfberger@gmx.net>
  *
- * Requires the Qt widget libraries, available at no cost at
+ * Requires the TQt widget libraries, available at no cost at
  * http://www.troll.no/
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -37,8 +37,8 @@
 /***************************************************************************
   * constructor
 **/
-DiskList::DiskList(TQObject *parent, const char *name)
-    : TQObject(parent,name)
+DiskList::DiskList(TQObject *tqparent, const char *name)
+    : TQObject(tqparent,name)
 {
    kdDebug() << k_funcinfo << endl;
 
@@ -183,27 +183,27 @@ TQFile f(FSTAB);
     while (! t.eof()) {
       s=t.readLine();
       s=s.simplifyWhiteSpace();
-      if ( (!s.isEmpty() ) && (s.find(DELIMITER)!=0) ) {
+      if ( (!s.isEmpty() ) && (s.tqfind(DELIMITER)!=0) ) {
                // not empty or commented out by '#'
 	//	kdDebug() << "GOT: [" << s << "]" << endl;
 	disk = new DiskEntry();// Q_CHECK_PTR(disk);
         disk->setMounted(FALSE);
-        disk->setDeviceName(expandEscapes(s.left(s.find(BLANK))));
-            s=s.remove(0,s.find(BLANK)+1 );
+        disk->setDeviceName(expandEscapes(s.left(s.tqfind(BLANK))));
+            s=s.remove(0,s.tqfind(BLANK)+1 );
 	    //  kdDebug() << "    deviceName:    [" << disk->deviceName() << "]" << endl;
 #ifdef _OS_SOLARIS_
             //device to fsck
-            s=s.remove(0,s.find(BLANK)+1 );
+            s=s.remove(0,s.tqfind(BLANK)+1 );
 #endif
-         disk->setMountPoint(expandEscapes(s.left(s.find(BLANK))));
-            s=s.remove(0,s.find(BLANK)+1 );
+         disk->setMountPoint(expandEscapes(s.left(s.tqfind(BLANK))));
+            s=s.remove(0,s.tqfind(BLANK)+1 );
 	    //kdDebug() << "    MountPoint:    [" << disk->mountPoint() << "]" << endl;
 	    //kdDebug() << "    Icon:          [" << disk->iconName() << "]" << endl;
-         disk->setFsType(s.left(s.find(BLANK)) );
-            s=s.remove(0,s.find(BLANK)+1 );
+         disk->setFsType(s.left(s.tqfind(BLANK)) );
+            s=s.remove(0,s.tqfind(BLANK)+1 );
 	    //kdDebug() << "    FS-Type:       [" << disk->fsType() << "]" << endl;
-         disk->setMountOptions(s.left(s.find(BLANK)) );
-            s=s.remove(0,s.find(BLANK)+1 );
+         disk->setMountOptions(s.left(s.tqfind(BLANK)) );
+            s=s.remove(0,s.tqfind(BLANK)+1 );
 	    //kdDebug() << "    Mount-Options: [" << disk->mountOptions() << "]" << endl;
          if ( (disk->deviceName() != "none")
 	      && (disk->fsType() != "swap")
@@ -211,7 +211,7 @@ TQFile f(FSTAB);
 	      && (disk->mountPoint() != "/dev/swap")
 	      && (disk->mountPoint() != "/dev/pts")
 	      && (disk->mountPoint() != "/dev/shm")
-	      && (disk->mountPoint().find("/proc") == -1 ) )
+	      && (disk->mountPoint().tqfind("/proc") == -1 ) )
 	   replaceDeviceEntry(disk);
          else
            delete disk;
@@ -243,7 +243,7 @@ void DiskList::receivedDFStdErrOut(KProcess *, char *data, int len )
    */
    
 
-  TQString tmp = TQString::fromLatin1(data, len);
+  TQString tmp = TQString::tqfromLatin1(data, len);
   dfStringErrOut.append(tmp);
 }
 
@@ -295,7 +295,7 @@ void DiskList::dfDone()
     if ( !s.isEmpty() ) {
       disk = new DiskEntry(); Q_CHECK_PTR(disk);
 
-      if (s.find(BLANK)<0)      // devicename was too long, rest in next line
+      if (s.tqfind(BLANK)<0)      // devicename was too long, rest in next line
 	if ( !t.eof() ) {       // just appends the next line
             v=t.readLine();
             s=s.append(v.latin1() );
@@ -305,37 +305,37 @@ void DiskList::dfDone()
 
       //kdDebug() << "EFFECTIVELY GOT " << s.length() << " chars: [" << s << "]" << endl;
 
-      disk->setDeviceName(s.left(s.find(BLANK)) );
-      s=s.remove(0,s.find(BLANK)+1 );
+      disk->setDeviceName(s.left(s.tqfind(BLANK)) );
+      s=s.remove(0,s.tqfind(BLANK)+1 );
       //kdDebug() << "    DeviceName:    [" << disk->deviceName() << "]" << endl;
 
       if (NO_FS_TYPE) {
 	//kdDebug() << "THERE IS NO FS_TYPE_FIELD!" << endl;
          disk->setFsType("?");
       } else {
-         disk->setFsType(s.left(s.find(BLANK)) );
-         s=s.remove(0,s.find(BLANK)+1 );
+         disk->setFsType(s.left(s.tqfind(BLANK)) );
+         s=s.remove(0,s.tqfind(BLANK)+1 );
       };
       //kdDebug() << "    FS-Type:       [" << disk->fsType() << "]" << endl;
       //kdDebug() << "    Icon:          [" << disk->iconName() << "]" << endl;
 
-      u=s.left(s.find(BLANK));
+      u=s.left(s.tqfind(BLANK));
       disk->setKBSize(u.toInt() );
-      s=s.remove(0,s.find(BLANK)+1 );
+      s=s.remove(0,s.tqfind(BLANK)+1 );
       //kdDebug() << "    Size:       [" << disk->kBSize() << "]" << endl;
 
-      u=s.left(s.find(BLANK));
+      u=s.left(s.tqfind(BLANK));
       disk->setKBUsed(u.toInt() );
-      s=s.remove(0,s.find(BLANK)+1 );
+      s=s.remove(0,s.tqfind(BLANK)+1 );
       //kdDebug() << "    Used:       [" << disk->kBUsed() << "]" << endl;
 
-      u=s.left(s.find(BLANK));
+      u=s.left(s.tqfind(BLANK));
       disk->setKBAvail(u.toInt() );
-      s=s.remove(0,s.find(BLANK)+1 );
+      s=s.remove(0,s.tqfind(BLANK)+1 );
       //kdDebug() << "    Avail:       [" << disk->kBAvail() << "]" << endl;
 
 
-      s=s.remove(0,s.find(BLANK)+1 );  // delete the capacity 94%
+      s=s.remove(0,s.tqfind(BLANK)+1 );  // delete the capacity 94%
       disk->setMountPoint(s);
       //kdDebug() << "    MountPoint:       [" << disk->mountPoint() << "]" << endl;
 
@@ -346,7 +346,7 @@ void DiskList::dfDone()
 	   && (disk->mountPoint() != "/dev/swap")
 	   && (disk->mountPoint() != "/dev/pts")
 	   && (disk->mountPoint() != "/dev/shm")
-	   && (disk->mountPoint().find("/proc") == -1 ) ) {
+	   && (disk->mountPoint().tqfind("/proc") == -1 ) ) {
         disk->setMounted(TRUE);    // its now mounted (df lists only mounted)
 	replaceDeviceEntry(disk);
       } else
@@ -391,10 +391,10 @@ void DiskList::replaceDeviceEntry(DiskEntry *disk)
 
   //
   // 1999-27-11 Espen Sand:
-  // I can't get find() to work. The Disks::compareItems(..) is
+  // I can't get tqfind() to work. The Disks::compareItems(..) is
   // never called.
   //
-  //int pos=disks->find(disk);
+  //int pos=disks->tqfind(disk);
 
   TQString deviceRealName = disk->deviceRealName();
   TQString realMountPoint = disk->realMountPoint();
@@ -426,13 +426,13 @@ void DiskList::replaceDeviceEntry(DiskEntry *disk)
 	// eg. /cache/cache/.cfs_mnt_points/srv:_home_jesus
 	//                                      ^    ^
         TQString odiskName = olddisk->deviceName();
-        int ci=odiskName.find(':'); // goto host-column
-        while ((ci =odiskName.find('/',ci)) > 0) {
-           odiskName.replace(ci,1,"_");
+        int ci=odiskName.tqfind(':'); // goto host-column
+        while ((ci =odiskName.tqfind('/',ci)) > 0) {
+           odiskName.tqreplace(ci,1,"_");
         }//while
         // check if there is something that is exactly the tail
 	// eg. [srv:/tmp3] is exact tail of [/cache/.cfs_mnt_points/srv:_tmp3]
-        if ( ( (p=disk->deviceName().findRev(odiskName
+        if ( ( (p=disk->deviceName().tqfindRev(odiskName
 	            ,disk->deviceName().length()) )
                 != -1)
 	      && (p + odiskName.length()
@@ -455,10 +455,10 @@ void DiskList::replaceDeviceEntry(DiskEntry *disk)
   }
 #endif
 
-  if (pos != -1) {  // replace
+  if (pos != -1) {  // tqreplace
       DiskEntry * olddisk = disks->at(pos);
-      if ( (-1!=olddisk->mountOptions().find("user")) &&
-           (-1==disk->mountOptions().find("user")) ) {
+      if ( (-1!=olddisk->mountOptions().tqfind("user")) &&
+           (-1==disk->mountOptions().tqfind("user")) ) {
           // add "user" option to new diskEntry
           TQString s=disk->mountOptions();
           if (s.length()>0) s.append(",");

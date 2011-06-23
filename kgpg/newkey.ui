@@ -1,6 +1,6 @@
 <!DOCTYPE UI><UI version="3.3" stdsetdef="1">
 <class>newKey</class>
-<widget class="QWidget">
+<widget class="TQWidget">
     <property name="name">
         <cstring>newKey</cstring>
     </property>
@@ -22,7 +22,7 @@
         <property name="margin">
             <number>0</number>
         </property>
-        <widget class="QGroupBox">
+        <widget class="TQGroupBox">
             <property name="name">
                 <cstring>groupBox2</cstring>
             </property>
@@ -33,7 +33,7 @@
                 <property name="name">
                     <cstring>unnamed</cstring>
                 </property>
-                <widget class="QLabel" row="0" column="0" rowspan="1" colspan="2">
+                <widget class="TQLabel" row="0" column="0" rowspan="1" colspan="2">
                     <property name="name">
                         <cstring>textLabel2</cstring>
                     </property>
@@ -41,7 +41,7 @@
                         <string>You have successfully created the following key:</string>
                     </property>
                 </widget>
-                <widget class="QCheckBox" row="6" column="0" rowspan="1" colspan="2">
+                <widget class="TQCheckBox" row="6" column="0" rowspan="1" colspan="2">
                     <property name="name">
                         <cstring>CBdefault</cstring>
                     </property>
@@ -65,7 +65,7 @@
                         <bool>true</bool>
                     </property>
                 </widget>
-                <widget class="QLabel" row="4" column="0" rowspan="1" colspan="2">
+                <widget class="TQLabel" row="4" column="0" rowspan="1" colspan="2">
                     <property name="name">
                         <cstring>textLabel6</cstring>
                     </property>
@@ -73,7 +73,7 @@
                         <string>Fingerprint:</string>
                     </property>
                 </widget>
-                <widget class="QLabel" row="1" column="0">
+                <widget class="TQLabel" row="1" column="0">
                     <property name="name">
                         <cstring>textLabel3</cstring>
                     </property>
@@ -81,7 +81,7 @@
                         <string>Name:</string>
                     </property>
                 </widget>
-                <widget class="QLabel" row="2" column="0">
+                <widget class="TQLabel" row="2" column="0">
                     <property name="name">
                         <cstring>textLabel4</cstring>
                     </property>
@@ -89,7 +89,7 @@
                         <string>Email:</string>
                     </property>
                 </widget>
-                <widget class="QLabel" row="3" column="0">
+                <widget class="TQLabel" row="3" column="0">
                     <property name="name">
                         <cstring>textLabel5</cstring>
                     </property>
@@ -97,7 +97,7 @@
                         <string>Key ID:</string>
                     </property>
                 </widget>
-                <widget class="QLabel" row="1" column="1">
+                <widget class="TQLabel" row="1" column="1">
                     <property name="name">
                         <cstring>TLname</cstring>
                     </property>
@@ -113,7 +113,7 @@
                         <string>textLabel7</string>
                     </property>
                 </widget>
-                <widget class="QLabel" row="2" column="1">
+                <widget class="TQLabel" row="2" column="1">
                     <property name="name">
                         <cstring>TLemail</cstring>
                     </property>
@@ -121,7 +121,7 @@
                         <string>textLabel8</string>
                     </property>
                 </widget>
-                <widget class="QLabel" row="3" column="1">
+                <widget class="TQLabel" row="3" column="1">
                     <property name="name">
                         <cstring>TLid</cstring>
                     </property>
@@ -131,7 +131,7 @@
                 </widget>
             </grid>
         </widget>
-        <widget class="QGroupBox">
+        <widget class="TQGroupBox">
             <property name="name">
                 <cstring>groupBox1</cstring>
             </property>
@@ -142,7 +142,7 @@
                 <property name="name">
                     <cstring>unnamed</cstring>
                 </property>
-                <widget class="QLabel" row="0" column="0" rowspan="1" colspan="2">
+                <widget class="TQLabel" row="0" column="0" rowspan="1" colspan="2">
                     <property name="name">
                         <cstring>textLabel1</cstring>
                     </property>
@@ -150,7 +150,7 @@
                         <string>It is recommended to save or print a revocation certificate in case your key is compromised.</string>
                     </property>
                 </widget>
-                <widget class="QCheckBox" row="2" column="0" rowspan="1" colspan="2">
+                <widget class="TQCheckBox" row="2" column="0" rowspan="1" colspan="2">
                     <property name="name">
                         <cstring>CBprint</cstring>
                     </property>
@@ -158,7 +158,7 @@
                         <string>Print</string>
                     </property>
                 </widget>
-                <widget class="QCheckBox" row="1" column="0">
+                <widget class="TQCheckBox" row="1" column="0">
                     <property name="name">
                         <cstring>CBsave</cstring>
                     </property>
@@ -189,8 +189,8 @@
 <includes>
     <include location="local" impldecl="in implementation">newkey.ui.h</include>
 </includes>
-<slots>
+<Q_SLOTS>
     <slot>CBsave_toggled( bool isOn )</slot>
-</slots>
-<layoutdefaults spacing="6" margin="11"/>
+</Q_SLOTS>
+<tqlayoutdefaults spacing="6" margin="11"/>
 </UI>

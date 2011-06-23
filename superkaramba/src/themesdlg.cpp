@@ -51,8 +51,8 @@
 #include <kio/job.h>
 #include <kprotocolinfo.h>
 
-ThemesDlg::ThemesDlg(TQWidget *parent, const char *name)
- : ThemesLayout(parent, name)
+ThemesDlg::ThemesDlg(TQWidget *tqparent, const char *name)
+ : ThemesLayout(tqparent, name)
 {
   populateListbox();
 #ifdef HAVE_KNEWSTUFF
@@ -220,9 +220,9 @@ void ThemesDlg::getNewStuff()
   KConfig* config = KGlobal::config();
   config->setGroup("KNewStuff");
   config->writePathEntry("ProvidersUrl",
-      TQString::fromLatin1("http://download.kde.org/khotnewstuff/karamba-providers.xml"));
+      TQString::tqfromLatin1("http://download.kde.org/khotnewstuff/karamba-providers.xml"));
   config->sync();
-  m_newStuffStatus = config->entryMap("KNewStuffStatus").keys();
+  m_newStufftqStatus = config->entryMap("KNewStufftqStatus").keys();
   //This check is b/c KNewStuff will download, throw an error, 
   //and still have the entry in the config that it was successful
   configSanityCheck();
@@ -302,10 +302,10 @@ void ThemesDlg::writeNewStuffConfig(const TQString &file)
 {
 #ifdef HAVE_KNEWSTUFF
   KConfig* config = KGlobal::config();
-  TQStringList keys = config->entryMap("KNewStuffStatus").keys();
+  TQStringList keys = config->entryMap("KNewStufftqStatus").keys();
 
-  for(TQStringList::Iterator it = m_newStuffStatus.begin();
-      it != m_newStuffStatus.end(); ++it)
+  for(TQStringList::Iterator it = m_newStufftqStatus.begin();
+      it != m_newStufftqStatus.end(); ++it)
   {
     keys.remove(*it);
   }
@@ -322,7 +322,7 @@ void ThemesDlg::configSanityCheck()
 {
 #ifdef HAVE_KNEWSTUFF
   KConfig* config = KGlobal::config();
-  TQStringList statusKeys = config->entryMap("KNewStuffStatus").keys();
+  TQStringList statusKeys = config->entryMap("KNewStufftqStatus").keys();
   TQStringList nameKeys = config->entryMap("KNewStuffNames").keys();
   TQStringList removeList;
 
@@ -345,7 +345,7 @@ void ThemesDlg::configSanityCheck()
     if( removeKey )
     {
       kdDebug() << "sanityCheck() deleting entry " << keyName << endl;
-      config->setGroup("KNewStuffStatus");
+      config->setGroup("KNewStufftqStatus");
       config->deleteEntry( keyName );
     }
   }
@@ -416,9 +416,9 @@ bool ThemesDlg::filter(int index, TQWidget* widget, void* data)
   }
   else
   {
-    if(w->themeName->text().lower().contains(searchText))
+    if(w->themeName->text().lower().tqcontains(searchText))
       return true;
-    if(w->description->text().lower().contains(searchText))
+    if(w->description->text().lower().tqcontains(searchText))
       return true;
   }
   return false;
@@ -477,7 +477,7 @@ void ThemesDlg::uninstall()
       tableThemes->removeItem( twPtr );
     }
 #ifdef HAVE_KNEWSTUFF
-    // Remove theme from KNewStuffStatus
+    // Remove theme from KNewStufftqStatus
     KConfig* config = KGlobal::config();
     config->setGroup("KNewStuffNames");
     TQString name = config->readEntry(tempPath);
@@ -486,8 +486,8 @@ void ThemesDlg::uninstall()
       kdDebug() << "removing " << tempPath << " under KNewStuffNames from superkarambarc" 
                 << endl;
       kapp->config()->deleteEntry(tempPath);
-      config->setGroup("KNewStuffStatus");
-      kdDebug() << "removing " << name << " under KNewStuffStatus from superkarambarc" 
+      config->setGroup("KNewStufftqStatus");
+      kdDebug() << "removing " << name << " under KNewStufftqStatus from superkarambarc" 
                 << endl;
       kapp->config()->deleteEntry(name);
       kapp->config()->sync();
@@ -507,7 +507,7 @@ void ThemesDlg::uninstall()
     }
     tableThemes->removeItem(w);
 #ifdef HAVE_KNEWSTUFF
-    // Remove theme from KNewStuffStatus
+    // Remove theme from KNewStufftqStatus
     KConfig* config = KGlobal::config();
     config->setGroup("KNewStuffNames");
     TQString name = config->readEntry(theme.path());
@@ -515,7 +515,7 @@ void ThemesDlg::uninstall()
     {
       kdDebug() << "removing " << theme.path() << " from superkarambarc" << endl;
       kapp->config()->deleteEntry(theme.path());
-      config->setGroup("KNewStuffStatus");
+      config->setGroup("KNewStufftqStatus");
       kdDebug() << "removing " << name << " from superkarambarc" << endl;
       kapp->config()->deleteEntry(name);
       kapp->config()->sync();

@@ -22,7 +22,7 @@
         <property name="name">
             <cstring>unnamed</cstring>
         </property>
-        <widget class="QLabel" row="4" column="0">
+        <widget class="TQLabel" row="4" column="0">
             <property name="name">
                 <cstring>textLabel5</cstring>
             </property>
@@ -30,7 +30,7 @@
                 <string>Display type:</string>
             </property>
         </widget>
-        <widget class="QLabel" row="3" column="0">
+        <widget class="TQLabel" row="3" column="0">
             <property name="name">
                 <cstring>textLabel2</cstring>
             </property>
@@ -38,7 +38,7 @@
                 <string>Update interval:</string>
             </property>
         </widget>
-        <widget class="QLabel" row="2" column="0">
+        <widget class="TQLabel" row="2" column="0">
             <property name="name">
                 <cstring>textLabel1</cstring>
             </property>
@@ -46,7 +46,7 @@
                 <string>Object identifier:</string>
             </property>
         </widget>
-        <widget class="QLabel" row="0" column="0">
+        <widget class="TQLabel" row="0" column="0">
             <property name="name">
                 <cstring>textLabel1_2</cstring>
             </property>
@@ -54,7 +54,7 @@
                 <string>Name:</string>
             </property>
         </widget>
-        <widget class="QLabel" row="1" column="0">
+        <widget class="TQLabel" row="1" column="0">
             <property name="name">
                 <cstring>textLabel1_3</cstring>
             </property>
@@ -62,7 +62,7 @@
                 <string>Host:</string>
             </property>
         </widget>
-        <widget class="QGroupBox" row="5" column="0" rowspan="1" colspan="4">
+        <widget class="TQGroupBox" row="5" column="0" rowspan="1" colspan="4">
             <property name="name">
                 <cstring>labelOptions</cstring>
             </property>
@@ -73,7 +73,7 @@
                 <property name="name">
                     <cstring>unnamed</cstring>
                 </property>
-                <widget class="QCheckBox" row="0" column="0">
+                <widget class="TQCheckBox" row="0" column="0">
                     <property name="name">
                         <cstring>customFormatStringCheckBox</cstring>
                     </property>
@@ -81,7 +81,7 @@
                         <string>Use custom format string:</string>
                     </property>
                 </widget>
-                <widget class="QLineEdit" row="0" column="1">
+                <widget class="TQLineEdit" row="0" column="1">
                     <property name="name">
                         <cstring>customFormatString</cstring>
                     </property>
@@ -89,7 +89,7 @@
                         <bool>false</bool>
                     </property>
                 </widget>
-                <widget class="QLabel" row="1" column="0" rowspan="1" colspan="2">
+                <widget class="TQLabel" row="1" column="0" rowspan="1" colspan="2">
                     <property name="name">
                         <cstring>textLabel1_4</cstring>
                     </property>
@@ -104,21 +104,21 @@
                     <property name="text">
                         <string>The text in the edit box is what is displayed except that any occurrence of &lt;b&gt;%s&lt;/b&gt; will be replaced with the snmp object value and any occurrence of &lt;b&gt;%n&lt;/b&gt; will be replaced with the name of this monitor (see Name input field) .</string>
                     </property>
-                    <property name="alignment">
+                    <property name="tqalignment">
                         <set>WordBreak|AlignVCenter</set>
                     </property>
                 </widget>
             </grid>
         </widget>
-        <widget class="QLayoutWidget" row="3" column="1" rowspan="1" colspan="3">
+        <widget class="TQLayoutWidget" row="3" column="1" rowspan="1" colspan="3">
             <property name="name">
-                <cstring>layout2</cstring>
+                <cstring>tqlayout2</cstring>
             </property>
             <hbox>
                 <property name="name">
                     <cstring>unnamed</cstring>
                 </property>
-                <widget class="QSpinBox">
+                <widget class="TQSpinBox">
                     <property name="name">
                         <cstring>updateIntervalMinutes</cstring>
                     </property>
@@ -126,7 +126,7 @@
                         <number>60</number>
                     </property>
                 </widget>
-                <widget class="QLabel">
+                <widget class="TQLabel">
                     <property name="name">
                         <cstring>textLabel4</cstring>
                     </property>
@@ -134,7 +134,7 @@
                         <string>minutes</string>
                     </property>
                 </widget>
-                <widget class="QSpinBox">
+                <widget class="TQSpinBox">
                     <property name="name">
                         <cstring>updateIntervalSeconds</cstring>
                     </property>
@@ -145,7 +145,7 @@
                         <number>1</number>
                     </property>
                 </widget>
-                <widget class="QLabel">
+                <widget class="TQLabel">
                     <property name="name">
                         <cstring>textLabel3</cstring>
                     </property>
@@ -163,7 +163,7 @@
                     <property name="sizeType">
                         <enum>Expanding</enum>
                     </property>
-                    <property name="sizeHint">
+                    <property name="tqsizeHint">
                         <size>
                             <width>141</width>
                             <height>20</height>
@@ -172,15 +172,15 @@
                 </spacer>
             </hbox>
         </widget>
-        <widget class="QLayoutWidget" row="4" column="1" rowspan="1" colspan="3">
+        <widget class="TQLayoutWidget" row="4" column="1" rowspan="1" colspan="3">
             <property name="name">
-                <cstring>layout3</cstring>
+                <cstring>tqlayout3</cstring>
             </property>
             <hbox>
                 <property name="name">
                     <cstring>unnamed</cstring>
                 </property>
-                <widget class="QComboBox">
+                <widget class="TQComboBox">
                     <item>
                         <property name="text">
                             <string>Chart</string>
@@ -205,7 +205,7 @@
                     <property name="sizeType">
                         <enum>Expanding</enum>
                     </property>
-                    <property name="sizeHint">
+                    <property name="tqsizeHint">
                         <size>
                             <width>271</width>
                             <height>20</height>
@@ -224,14 +224,14 @@
             <property name="sizeType">
                 <enum>Expanding</enum>
             </property>
-            <property name="sizeHint">
+            <property name="tqsizeHint">
                 <size>
                     <width>244</width>
                     <height>20</height>
                 </size>
             </property>
         </spacer>
-        <widget class="QLineEdit" row="0" column="1">
+        <widget class="TQLineEdit" row="0" column="1">
             <property name="name">
                 <cstring>monitorName</cstring>
             </property>
@@ -246,19 +246,19 @@
             <property name="sizeType">
                 <enum>Expanding</enum>
             </property>
-            <property name="sizeHint">
+            <property name="tqsizeHint">
                 <size>
                     <width>210</width>
                     <height>20</height>
                 </size>
             </property>
         </spacer>
-        <widget class="QComboBox" row="1" column="1">
+        <widget class="TQComboBox" row="1" column="1">
             <property name="name">
                 <cstring>host</cstring>
             </property>
         </widget>
-        <widget class="QLayoutWidget" row="9" column="0" rowspan="1" colspan="4">
+        <widget class="TQLayoutWidget" row="9" column="0" rowspan="1" colspan="4">
             <property name="name">
                 <cstring>Layout1</cstring>
             </property>
@@ -282,14 +282,14 @@
                     <property name="sizeType">
                         <enum>Expanding</enum>
                     </property>
-                    <property name="sizeHint">
+                    <property name="tqsizeHint">
                         <size>
                             <width>20</width>
                             <height>20</height>
                         </size>
                     </property>
                 </spacer>
-                <widget class="QPushButton">
+                <widget class="TQPushButton">
                     <property name="name">
                         <cstring>buttonOk</cstring>
                     </property>
@@ -303,7 +303,7 @@
                         <bool>true</bool>
                     </property>
                 </widget>
-                <widget class="QPushButton">
+                <widget class="TQPushButton">
                     <property name="name">
                         <cstring>buttonCancel</cstring>
                     </property>
@@ -330,15 +330,15 @@
                 <enum>Horizontal</enum>
             </property>
         </widget>
-        <widget class="QLabel" row="7" column="0" rowspan="1" colspan="4">
+        <widget class="TQLabel" row="7" column="0" rowspan="1" colspan="4">
             <property name="name">
                 <cstring>status</cstring>
             </property>
             <property name="text">
-                <string>blehStatus</string>
+                <string>blehtqStatus</string>
             </property>
         </widget>
-        <widget class="QGroupBox" row="6" column="0" rowspan="1" colspan="4">
+        <widget class="TQGroupBox" row="6" column="0" rowspan="1" colspan="4">
             <property name="name">
                 <cstring>chartOptions</cstring>
             </property>
@@ -349,7 +349,7 @@
                 <property name="name">
                     <cstring>unnamed</cstring>
                 </property>
-                <widget class="QCheckBox">
+                <widget class="TQCheckBox">
                     <property name="name">
                         <cstring>displayCurrentValueInline</cstring>
                     </property>
@@ -367,7 +367,7 @@
                 <string>Browse...</string>
             </property>
         </widget>
-        <widget class="QLineEdit" row="2" column="1" rowspan="1" colspan="2">
+        <widget class="TQLineEdit" row="2" column="1" rowspan="1" colspan="2">
             <property name="name">
                 <cstring>oid</cstring>
             </property>
@@ -428,11 +428,11 @@
     <tabstop>buttonOk</tabstop>
     <tabstop>buttonCancel</tabstop>
 </tabstops>
-<slots>
+<Q_SLOTS>
     <slot access="protected">checkValues()</slot>
     <slot access="protected">browse()</slot>
-</slots>
-<layoutdefaults spacing="6" margin="11"/>
+</Q_SLOTS>
+<tqlayoutdefaults spacing="6" margin="11"/>
 <includehints>
     <includehint>kdialog.h</includehint>
     <includehint>kpushbutton.h</includehint>

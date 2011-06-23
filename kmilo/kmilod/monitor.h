@@ -37,7 +37,7 @@ class KMiloInterface;
 
 class KDE_EXPORT Monitor : public TQObject {
 	public:
-		Monitor(TQObject *parent, const char *name, const TQStringList&);
+		Monitor(TQObject *tqparent, const char *name, const TQStringList&);
 		virtual ~Monitor();
 
 		/**

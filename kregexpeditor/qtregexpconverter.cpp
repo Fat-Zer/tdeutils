@@ -29,33 +29,33 @@
 #include "positionregexp.h"
 #include "repeatregexp.h"
 
-extern RegExp* parseQtRegExp( TQString str, bool *ok );
-extern RegExp* parseDataQtRegExp();
+extern RegExp* parseTQtRegExp( TQString str, bool *ok );
+extern RegExp* parseDataTQtRegExp();
 
-bool QtRegExpConverter::canParse()
+bool TQtRegExpConverter::canParse()
 {
     return true;
 }
 
 
-RegExp* QtRegExpConverter::parse( const TQString& txt, bool* ok )
+RegExp* TQtRegExpConverter::parse( const TQString& txt, bool* ok )
 {
-    return parseQtRegExp( txt, ok );
+    return parseTQtRegExp( txt, ok );
 }
 
-TQString QtRegExpConverter::toString( AltnRegExp* regexp, bool markSelection )
+TQString TQtRegExpConverter::toString( AltnRegExp* regexp, bool markSelection )
 {
     TQString res;
 
 	bool first = true;
-    RegExpList list = regexp->children();
+    RegExpList list = regexp->tqchildren();
     for ( RegExpListIt it(list); *it; ++it ) {
 		if ( !first ) {
-			res += TQString::fromLatin1( "|" );
+			res += TQString::tqfromLatin1( "|" );
 		}
 		first = false;
         if ( markSelection && !regexp->isSelected() && (*it)->isSelected() ) {
-            res += TQString::fromLatin1("(") + toStr( *it, markSelection ) + TQString::fromLatin1(")");
+            res += TQString::tqfromLatin1("(") + toStr( *it, markSelection ) + TQString::tqfromLatin1(")");
         }
         else {
             res += toStr( *it, markSelection );
@@ -64,12 +64,12 @@ TQString QtRegExpConverter::toString( AltnRegExp* regexp, bool markSelection )
 	return res;
 }
 
-TQString QtRegExpConverter::toString( ConcRegExp* regexp, bool markSelection )
+TQString TQtRegExpConverter::toString( ConcRegExp* regexp, bool markSelection )
 {
     TQString res;
     bool childSelected = false;
 
-    RegExpList list = regexp->children();
+    RegExpList list = regexp->tqchildren();
 	for ( RegExpListIt it(list); *it; ++it ) {
         TQString startPar = TQString::fromLocal8Bit("");
         TQString endPar = TQString::fromLocal8Bit("");
@@ -77,38 +77,38 @@ TQString QtRegExpConverter::toString( ConcRegExp* regexp, bool markSelection )
             if ( markSelection )
                 startPar = TQString::fromLocal8Bit("(?:");
             else
-                startPar = TQString::fromLatin1( "(" );
-            endPar = TQString::fromLatin1( ")" );
+                startPar = TQString::tqfromLatin1( "(" );
+            endPar = TQString::tqfromLatin1( ")" );
         }
 
         // Note these two have different tests! They are activated in each their iteration of the loop.
         if ( markSelection && !childSelected && !regexp->isSelected() && (*it)->isSelected() ) {
-            res += TQString::fromLatin1("(");
+            res += TQString::tqfromLatin1("(");
             childSelected = true;
         }
 
         if ( markSelection && childSelected && !regexp->isSelected() && !(*it)->isSelected() ) {
-            res += TQString::fromLatin1(")");
+            res += TQString::tqfromLatin1(")");
             childSelected= false;
         }
 
 		res += startPar + toStr( *it, markSelection ) + endPar;
 	}
     if ( markSelection && childSelected && !regexp->isSelected() ) {
-        res += TQString::fromLatin1(")");
+        res += TQString::tqfromLatin1(")");
     }
 	return res;
 }
 
-TQString QtRegExpConverter::toString( LookAheadRegExp* regexp, bool markSelection )
+TQString TQtRegExpConverter::toString( LookAheadRegExp* regexp, bool markSelection )
 {
     if ( regexp->lookAheadType() == LookAheadRegExp::POSITIVE )
-        return TQString::fromLatin1( "(?=" ) + toStr( regexp->child(), markSelection ) + TQString::fromLocal8Bit( ")" );
+        return TQString::tqfromLatin1( "(?=" ) + toStr( regexp->child(), markSelection ) + TQString::fromLocal8Bit( ")" );
     else
-        return TQString::fromLatin1( "(?!" ) + toStr( regexp->child(), markSelection ) + TQString::fromLocal8Bit( ")" );
+        return TQString::tqfromLatin1( "(?!" ) + toStr( regexp->child(), markSelection ) + TQString::fromLocal8Bit( ")" );
 }
 
-TQString QtRegExpConverter::toString( TextRangeRegExp* regexp, bool /*markSelection*/ )
+TQString TQtRegExpConverter::toString( TextRangeRegExp* regexp, bool /*markSelection*/ )
 {
 	TQString txt;
 
@@ -137,7 +137,7 @@ TQString QtRegExpConverter::toString( TextRangeRegExp* regexp, bool /*markSelect
 	// Now insert the ranges.
     TQPtrList<StringPair> ranges = regexp->range();
     for ( TQPtrListIterator<StringPair> it(ranges); *it; ++it ) {
-		txt.append((*it)->first()+ TQString::fromLatin1("-")+ (*it)->second());
+		txt.append((*it)->first()+ TQString::tqfromLatin1("-")+ (*it)->second());
 	}
 
 	// Ok, its time to build each part of the regexp, here comes the rule:
@@ -147,20 +147,20 @@ TQString QtRegExpConverter::toString( TextRangeRegExp* regexp, bool /*markSelect
 	// finally if '^' is one of the characters, then it must not be the first
 	// one!
 
-	TQString res = TQString::fromLatin1("[");
+	TQString res = TQString::tqfromLatin1("[");
 
 	if ( regexp->negate() )
-		res.append(TQString::fromLatin1("^"));
+		res.append(TQString::tqfromLatin1("^"));
 
 
 	// a ']' must be the first character in teh range.
 	if ( foundParenthesis ) {
-		res.append(TQString::fromLatin1("]"));
+		res.append(TQString::tqfromLatin1("]"));
 	}
 
 	// a '-' must be the first character ( only coming after a ']')
 	if ( foundDash ) {
-		res.append(TQString::fromLatin1("-"));
+		res.append(TQString::tqfromLatin1("-"));
 	}
 
 	res += txt;
@@ -184,41 +184,41 @@ TQString QtRegExpConverter::toString( TextRangeRegExp* regexp, bool /*markSelect
 		res.append( TQChar( '^' ) );
 	}
 
-	res.append(TQString::fromLatin1("]"));
+	res.append(TQString::tqfromLatin1("]"));
 
 	return res;
 }
 
-TQString QtRegExpConverter::toString( CompoundRegExp* regexp, bool markSelection )
+TQString TQtRegExpConverter::toString( CompoundRegExp* regexp, bool markSelection )
 {
     if ( markSelection && !regexp->isSelected() && regexp->child()->isSelected() )
-        return TQString::fromLatin1( "(" ) + toStr( regexp->child(), markSelection ) + TQString::fromLatin1( ")" );
+        return TQString::tqfromLatin1( "(" ) + toStr( regexp->child(), markSelection ) + TQString::tqfromLatin1( ")" );
     else
         return  toStr( regexp->child(), markSelection );
 }
 
-TQString QtRegExpConverter::toString( DotRegExp* /*regexp*/, bool /*markSelection*/ )
+TQString TQtRegExpConverter::toString( DotRegExp* /*regexp*/, bool /*markSelection*/ )
 {
-    return TQString::fromLatin1( "." );
+    return TQString::tqfromLatin1( "." );
 }
 
-TQString QtRegExpConverter::toString( PositionRegExp* regexp, bool /*markSelection*/ )
+TQString TQtRegExpConverter::toString( PositionRegExp* regexp, bool /*markSelection*/ )
 {
 	switch (regexp->position()) {
 	case PositionRegExp::BEGLINE:
-		return TQString::fromLatin1("^");
+		return TQString::tqfromLatin1("^");
 	case PositionRegExp::ENDLINE:
-		return TQString::fromLatin1("$");
+		return TQString::tqfromLatin1("$");
 	case PositionRegExp::WORDBOUNDARY:
-        return TQString::fromLatin1("\\b");
+        return TQString::tqfromLatin1("\\b");
 	case PositionRegExp::NONWORDBOUNDARY:
-        return TQString::fromLatin1("\\B");
+        return TQString::tqfromLatin1("\\B");
     }
 	Q_ASSERT( false );
-	return TQString::fromLatin1("");
+	return TQString::tqfromLatin1("");
 }
 
-TQString QtRegExpConverter::toString( RepeatRegExp* regexp, bool markSelection )
+TQString TQtRegExpConverter::toString( RepeatRegExp* regexp, bool markSelection )
 {
     RegExp* child = regexp->child();
     TQString cText = toStr( child, markSelection );
@@ -227,17 +227,17 @@ TQString QtRegExpConverter::toString( RepeatRegExp* regexp, bool markSelection )
 
     if ( markSelection ) {
         if ( !regexp->isSelected() && child->isSelected()) {
-            startPar = TQString::fromLatin1( "(" );
-            endPar = TQString::fromLatin1( ")" );
+            startPar = TQString::tqfromLatin1( "(" );
+            endPar = TQString::tqfromLatin1( ")" );
         }
         else if ( child->precedence() < regexp->precedence() ) {
-            startPar = TQString::fromLatin1( "(?:" );
-            endPar = TQString::fromLatin1( ")" );
+            startPar = TQString::tqfromLatin1( "(?:" );
+            endPar = TQString::tqfromLatin1( ")" );
         }
     }
     else if ( child->precedence() < regexp->precedence() ) {
-        startPar = TQString::fromLatin1( "(" );
-        endPar = TQString::fromLatin1( ")" );
+        startPar = TQString::tqfromLatin1( "(" );
+        endPar = TQString::tqfromLatin1( ")" );
     }
 
     if ( regexp->min() == 0 && regexp->max() == -1) {
@@ -261,7 +261,7 @@ TQString QtRegExpConverter::toString( RepeatRegExp* regexp, bool markSelection )
     }
 }
 
-TQString QtRegExpConverter::toString( TextRegExp* regexp, bool /*markSelection*/ )
+TQString TQtRegExpConverter::toString( TextRegExp* regexp, bool /*markSelection*/ )
 {
     TQValueList<TQChar> list;
 	list << TQChar('$')
@@ -283,17 +283,17 @@ TQString QtRegExpConverter::toString( TextRegExp* regexp, bool /*markSelection*/
 	return res;
 }
 
-TQString QtRegExpConverter::name()
+TQString TQtRegExpConverter::name()
 {
-    return TQString::fromLatin1( "Qt" );
+    return TQString::tqfromLatin1( "TQt" );
 }
 
-int QtRegExpConverter::features()
+int TQtRegExpConverter::features()
 {
     return WordBoundary | NonWordBoundary | PosLookAhead | NegLookAhead | CharacterRangeNonItems | ExtRange;
 }
 
-RegexpHighlighter* QtRegExpConverter::highlighter( TQTextEdit* edit )
+RegexpHighlighter* TQtRegExpConverter::highlighter( TQTextEdit* edit )
 {
     return new QtRegexpHighlighter( edit );
 }

@@ -30,14 +30,15 @@ class RepeatRegExp;
    Widget containging the configuration for a @ref RepeatWidget
    @internal
 */
-class RepeatRangeWindow :public QVBox
+class RepeatRangeWindow :public TQVBox
 {
 Q_OBJECT
+  TQ_OBJECT
 
 public:
   enum REPEATTYPE {ANY, ATLEAST, ATMOST, EXACTLY, MINMAX};
 
-  RepeatRangeWindow( TQWidget* parent, const char* name = 0 );
+  RepeatRangeWindow( TQWidget* tqparent, const char* name = 0 );
   TQString text();
   int min();
   int max();
@@ -50,7 +51,7 @@ protected slots:
 
 
 private:
-  void createLine( TQWidget* parent, TQString text, TQSpinBox** spin, REPEATTYPE tp );
+  void createLine( TQWidget* tqparent, TQString text, TQSpinBox** spin, REPEATTYPE tp );
 
   TQSpinBox* _leastTimes;
   TQSpinBox* _mostTimes;
@@ -71,14 +72,15 @@ private:
 class RepeatWidget :public SingleContainerWidget
 {
 Q_OBJECT
+  TQ_OBJECT
 
 public:
-  RepeatWidget( RegExpEditorWindow* editorWindow, TQWidget *parent,
+  RepeatWidget( RegExpEditorWindow* editorWindow, TQWidget *tqparent,
                const char *name = 0);
   RepeatWidget( RepeatRegExp* regexp, RegExpEditorWindow* editorWindow,
-              TQWidget* parent, const char* name = 0);
+              TQWidget* tqparent, const char* name = 0);
   void init();
-  virtual TQSize sizeHint() const;
+  virtual TQSize tqsizeHint() const;
 	virtual RegExp* regExp() const;
   virtual RegExpType type() const { return REPEAT; }
   virtual int edit();

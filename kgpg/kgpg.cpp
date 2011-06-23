@@ -74,16 +74,16 @@
 #include "kgpglibrary.h"
 #include "kgpgwizard.h"
 
-MyView::MyView( TQWidget *parent, const char *name )
-                : TQLabel( parent, name )
+MyView::MyView( TQWidget *tqparent, const char *name )
+                : TQLabel( tqparent, name )
 {
         setBackgroundMode( X11ParentRelative );
 	openTasks=0;
 
-	KAction *saveDecrypt=new KAction(i18n("&Decrypt && Save File"),"decrypted",0,this, TQT_SLOT(decryptDroppedFile()),this,"decrypt_file");
-        KAction *showDecrypt=new KAction(i18n("&Show Decrypted File"),"edit",0,this, TQT_SLOT(showDroppedFile()),this,"show_file");
-        KAction *encrypt=new KAction(i18n("&Encrypt File"),"encrypted",0,this, TQT_SLOT(encryptDroppedFile()),this,"encrypt_file");
-        KAction *sign=new KAction(i18n("&Sign File"), "signature",0,this, TQT_SLOT(signDroppedFile()),this,"sign_file");
+	KAction *saveDecrypt=new KAction(i18n("&Decrypt && Save File"),"decrypted",0,TQT_TQOBJECT(this), TQT_SLOT(decryptDroppedFile()),TQT_TQOBJECT(this),"decrypt_file");
+        KAction *showDecrypt=new KAction(i18n("&Show Decrypted File"),"edit",0,TQT_TQOBJECT(this), TQT_SLOT(showDroppedFile()),TQT_TQOBJECT(this),"show_file");
+        KAction *encrypt=new KAction(i18n("&Encrypt File"),"encrypted",0,TQT_TQOBJECT(this), TQT_SLOT(encryptDroppedFile()),TQT_TQOBJECT(this),"encrypt_file");
+        KAction *sign=new KAction(i18n("&Sign File"), "signature",0,TQT_TQOBJECT(this), TQT_SLOT(signDroppedFile()),TQT_TQOBJECT(this),"sign_file");
         //TQToolTip::add(this,i18n("KGpg drag & drop encryption applet"));
 
         readOptions();
@@ -114,24 +114,24 @@ MyView::~MyView()
 void  MyView::clipEncrypt()
 {
         popupPublic *dialoguec=new popupPublic(0, "public_keys", 0,false,goDefaultKey);
-        connect(dialoguec,TQT_SIGNAL(selectedKey(TQStringList,TQStringList,bool,bool)),this,TQT_SLOT(encryptClipboard(TQStringList,TQStringList,bool,bool)));
+        connect(dialoguec,TQT_SIGNAL(selectedKey(TQStringList,TQStringList,bool,bool)),TQT_TQOBJECT(this),TQT_SLOT(encryptClipboard(TQStringList,TQStringList,bool,bool)));
         dialoguec->exec();
         delete dialoguec;
 }
 
 void  MyView::clipDecrypt()
 {
-        TQString clippie=kapp->clipboard()->text(clipboardMode).stripWhiteSpace();
+        TQString clippie=kapp->tqclipboard()->text(clipboardMode).stripWhiteSpace();
 	droppedtext(clippie,false);
 }
 
 void  MyView::clipSign(bool openEditor)
 {
-        TQString clippie=kapp->clipboard()->text(clipboardMode).stripWhiteSpace();
+        TQString clippie=kapp->tqclipboard()->text(clipboardMode).stripWhiteSpace();
         if (!clippie.isEmpty()) {
                 KgpgApp *kgpgtxtedit = new KgpgApp(0, "editor",WDestructiveClose,goDefaultKey);
 		connect(this,TQT_SIGNAL(setFont(TQFont)),kgpgtxtedit,TQT_SLOT(slotSetFont(TQFont)));
-		connect(kgpgtxtedit,TQT_SIGNAL(encryptFiles(KURL::List)),this,TQT_SLOT(encryptFiles(KURL::List)));
+		connect(kgpgtxtedit,TQT_SIGNAL(encryptFiles(KURL::List)),TQT_TQOBJECT(this),TQT_SLOT(encryptFiles(KURL::List)));
 		if (!openEditor)
 		connect(kgpgtxtedit->view,TQT_SIGNAL(verifyFinished()),kgpgtxtedit,TQT_SLOT(closeWindow()));
                 kgpgtxtedit->view->editor->setText(clippie);
@@ -145,9 +145,9 @@ void  MyView::clipSign(bool openEditor)
 void MyView::encryptDroppedFolder()
 {
 	compressionScheme=0;
-        kgpgfoldertmp=new KTempFile(TQString::null);
+        kgpgfoldertmp=new KTempFile(TQString());
         kgpgfoldertmp->setAutoDelete(true);
-        if (KMessageBox::warningContinueCancel(0,i18n("<qt>KGpg will now create a temporary archive file:<br><b>%1</b> to process the encryption. The file will be deleted after the encryption is finished.</qt>").arg(kgpgfoldertmp->name()),i18n("Temporary File Creation"),KStdGuiItem::cont(),"FolderTmpFile")==KMessageBox::Cancel)
+        if (KMessageBox::warningContinueCancel(0,i18n("<qt>KGpg will now create a temporary archive file:<br><b>%1</b> to process the encryption. The file will be deleted after the encryption is finished.</qt>").tqarg(kgpgfoldertmp->name()),i18n("Temporary File Creation"),KStdGuiItem::cont(),"FolderTmpFile")==KMessageBox::Cancel)
                 return;
 
 	dialogue=new popupPublic(0,"Public keys",droppedUrls.first().fileName(),true,goDefaultKey);
@@ -160,8 +160,8 @@ void MyView::encryptDroppedFolder()
 		optionbx->insertItem(i18n("Bzip2"));
 	bGroup->show();
 	connect(dialogue,TQT_SIGNAL(keyListFilled ()),dialogue,TQT_SLOT(slotSetVisible()));
-	connect(optionbx,TQT_SIGNAL(activated (int)),this,TQT_SLOT(slotSetCompression(int)));
-        connect(dialogue,TQT_SIGNAL(selectedKey(TQStringList,TQStringList,bool,bool)),this,TQT_SLOT(startFolderEncode(TQStringList,TQStringList,bool,bool)));
+	connect(optionbx,TQT_SIGNAL(activated (int)),TQT_TQOBJECT(this),TQT_SLOT(slotSetCompression(int)));
+        connect(dialogue,TQT_SIGNAL(selectedKey(TQStringList,TQStringList,bool,bool)),TQT_TQOBJECT(this),TQT_SLOT(startFolderEncode(TQStringList,TQStringList,bool,bool)));
         dialogue->CBshred->setEnabled(false);
         dialogue->exec();
 	dialogue=0L;
@@ -183,7 +183,7 @@ if (compressionScheme==0)
 	else
 	extension=".tar.bz2";
 
-if (encryptOptions.find("armor")!=encryptOptions.end () )
+if (encryptOptions.tqfind("armor")!=encryptOptions.end () )
                 extension+=".asc";
         else if (KGpgSettings::pgpExtension())
                 extension+=".pgp";
@@ -194,7 +194,7 @@ KURL encryptedFile(droppedUrls.first().path()+extension);
 TQFile encryptedFolder(droppedUrls.first().path()+extension);
 if (encryptedFolder.exists()) {
 			dialogue->hide();
-			KIO::RenameDlg *over=new KIO::RenameDlg(0,i18n("File Already Exists"),TQString::null,encryptedFile.path(),KIO::M_OVERWRITE);
+			KIO::RenameDlg *over=new KIO::RenameDlg(0,i18n("File Already Exists"),TQString(),encryptedFile.path(),KIO::M_OVERWRITE);
 		    	if (over->exec()==TQDialog::Rejected)
 	    		{
                 	delete over;
@@ -232,8 +232,8 @@ pop = new KPassivePopup();
 
         KgpgInterface *folderprocess=new KgpgInterface();
         folderprocess->KgpgEncryptFile(selec,KURL(kgpgfoldertmp->name()),encryptedFile,encryptOptions,symetric);
-        connect(folderprocess,TQT_SIGNAL(encryptionfinished(KURL)),this,TQT_SLOT(slotFolderFinished(KURL)));
-        connect(folderprocess,TQT_SIGNAL(errormessage(TQString)),this,TQT_SLOT(slotFolderFinishedError(TQString)));
+        connect(folderprocess,TQT_SIGNAL(encryptionfinished(KURL)),TQT_TQOBJECT(this),TQT_SLOT(slotFolderFinished(KURL)));
+        connect(folderprocess,TQT_SIGNAL(errormessage(TQString)),TQT_TQOBJECT(this),TQT_SLOT(slotFolderFinishedError(TQString)));
 }
 
 void  MyView::slotFolderFinished(KURL)
@@ -276,8 +276,8 @@ void  MyView::encryptDroppedFile()
 {
         TQStringList opts;
         KgpgLibrary *lib=new KgpgLibrary(this,KGpgSettings::pgpExtension());
-	connect(lib,TQT_SIGNAL(systemMessage(TQString,bool)),this,TQT_SLOT(busyMessage(TQString,bool)));
-        if (KGpgSettings::fileKey()!=TQString::null) {
+	connect(lib,TQT_SIGNAL(systemMessage(TQString,bool)),TQT_TQOBJECT(this),TQT_SLOT(busyMessage(TQString,bool)));
+        if (KGpgSettings::fileKey()!=TQString()) {
                 if (KGpgSettings::allowUntrustedKeys())
                         opts<<"--always-trust";
                 if (KGpgSettings::asciiArmor())
@@ -288,7 +288,7 @@ void  MyView::encryptDroppedFile()
                         opts<<"--pgp6";
                 lib->slotFileEnc(droppedUrls,opts,TQStringList::split(" ",KGpgSettings::fileKey()),goDefaultKey);
         } else
-                lib->slotFileEnc(droppedUrls,TQString::null,TQString::null,goDefaultKey);
+                lib->slotFileEnc(droppedUrls,TQString(),TQString(),goDefaultKey);
 }
 
 void  MyView::encryptFiles(KURL::List urls)
@@ -302,16 +302,16 @@ void  MyView::shredDroppedFile()
 KDialogBase *shredConfirm=new KDialogBase( this, "confirm_shred", true,i18n("Shred Files"),KDialogBase::Ok | KDialogBase::Cancel);
 TQWidget *page = new TQWidget(shredConfirm);
 shredConfirm->setMainWidget(page);
-TQBoxLayout *layout=new TQBoxLayout(page,TQBoxLayout::TopToBottom,0);
-layout->setAutoAdd(true);
+TQBoxLayout *tqlayout=new TQBoxLayout(page,TQBoxLayout::TopToBottom,0);
+tqlayout->setAutoAdd(true);
 
-(void) new KActiveLabel( i18n("Do you really want to <a href=\"whatsthis:%1\">shred</a> these files?").arg(i18n( "<qt><p>You must be aware that <b>shredding is not secure</b> on all file systems, and that parts of the file may have been saved in a temporary file or in the spooler of your printer if you previously opened it in an editor or tried to print it. Only works on files (not on folders).</p></qt>")),page);
+(void) new KActiveLabel( i18n("Do you really want to <a href=\"whatsthis:%1\">shred</a> these files?").tqarg(i18n( "<qt><p>You must be aware that <b>shredding is not secure</b> on all file systems, and that parts of the file may have been saved in a temporary file or in the spooler of your printer if you previously opened it in an editor or tried to print it. Only works on files (not on folders).</p></qt>")),page);
 KListBox *lb=new KListBox(page);
 lb->insertStringList(droppedUrls.toStringList());
 if (shredConfirm->exec()==TQDialog::Accepted)
 	{
 	KgpgLibrary *lib=new KgpgLibrary(this);
-	connect(lib,TQT_SIGNAL(systemMessage(TQString,bool)),this,TQT_SLOT(busyMessage(TQString,bool)));
+	connect(lib,TQT_SIGNAL(systemMessage(TQString,bool)),TQT_TQOBJECT(this),TQT_SLOT(busyMessage(TQString,bool)));
 	lib->shredprocessenc(droppedUrls);
 	}
 delete shredConfirm;
@@ -324,7 +324,7 @@ void  MyView::slotVerifyFile()
         if (droppedUrl.isEmpty())
                 return;
 
-        TQString sigfile=TQString::null;
+        TQString sigfile=TQString();
         //////////////////////////////////////       try to find detached signature.
         if (!droppedUrl.fileName().endsWith(".sig")) {
                 sigfile=droppedUrl.path()+".sig";
@@ -334,7 +334,7 @@ void  MyView::slotVerifyFile()
                         TQFile fsig(sigfile);
                         //////////////   if no .asc or .sig signature file included, assume the file is internally signed
                         if (!fsig.exists())
-                                sigfile=TQString::null;
+                                sigfile=TQString();
                 }
         } else {
                 sigfile=droppedUrl.path();
@@ -344,7 +344,7 @@ void  MyView::slotVerifyFile()
         ///////////////////////// pipe gpg command
         KgpgInterface *verifyFileProcess=new KgpgInterface();
         verifyFileProcess->KgpgVerifyFile(droppedUrl,KURL(sigfile));
-        connect (verifyFileProcess,TQT_SIGNAL(verifyquerykey(TQString)),this,TQT_SLOT(importSignature(TQString)));
+        connect (verifyFileProcess,TQT_SIGNAL(verifyquerykey(TQString)),TQT_TQOBJECT(this),TQT_SLOT(importSignature(TQString)));
 }
 
 void  MyView::importSignature(TQString ID)
@@ -397,16 +397,16 @@ void  MyView::decryptDroppedFile()
 	/*
         if (oldname.endsWith(".tar.gz")) {
                 isFolder=true;
-                kgpgFolderExtract=new KTempFile(TQString::null,".tar.gz");
+                kgpgFolderExtract=new KTempFile(TQString(),".tar.gz");
                 kgpgFolderExtract->setAutoDelete(true);
                 swapname=KURL(kgpgFolderExtract->name());
-                if (KMessageBox::warningContinueCancel(0,i18n("<qt>The file to decrypt is an archive. KGpg will create a temporary unencrypted archive file:<br><b>%1</b> before processing the archive extraction. This temporary file will be deleted after the decryption is finished.</qt>").arg(kgpgFolderExtract->name()),i18n("Temporary File Creation"),KStdGuiItem::cont(),"FolderTmpDecFile")==KMessageBox::Cancel)
+                if (KMessageBox::warningContinueCancel(0,i18n("<qt>The file to decrypt is an archive. KGpg will create a temporary unencrypted archive file:<br><b>%1</b> before processing the archive extraction. This temporary file will be deleted after the decryption is finished.</qt>").tqarg(kgpgFolderExtract->name()),i18n("Temporary File Creation"),KStdGuiItem::cont(),"FolderTmpDecFile")==KMessageBox::Cancel)
                         return;
         } else*/ {
                 swapname=KURL(droppedUrls.first().directory(0,0)+oldname);
                 TQFile fgpg(swapname.path());
                 if (fgpg.exists()) {
-	    KIO::RenameDlg *over=new KIO::RenameDlg(0,i18n("File Already Exists"),TQString::null,swapname.path(),KIO::M_OVERWRITE);
+	    KIO::RenameDlg *over=new KIO::RenameDlg(0,i18n("File Already Exists"),TQString(),swapname.path(),KIO::M_OVERWRITE);
 	    if (over->exec()==TQDialog::Rejected)
 	    {
                 delete over;
@@ -419,10 +419,10 @@ void  MyView::decryptDroppedFile()
         }
         KgpgLibrary *lib=new KgpgLibrary(this);
         lib->slotFileDec(droppedUrls.first(),swapname,KGpgSettings::customDecrypt());
-	connect(lib,TQT_SIGNAL(importOver(TQStringList)),this,TQT_SIGNAL(importedKeys(TQStringList)));
-	connect(lib,TQT_SIGNAL(systemMessage(TQString,bool)),this,TQT_SLOT(busyMessage(TQString,bool)));
+	connect(lib,TQT_SIGNAL(importOver(TQStringList)),TQT_TQOBJECT(this),TQT_SIGNAL(importedKeys(TQStringList)));
+	connect(lib,TQT_SIGNAL(systemMessage(TQString,bool)),TQT_TQOBJECT(this),TQT_SLOT(busyMessage(TQString,bool)));
 //        if (isFolder)
-        connect(lib,TQT_SIGNAL(decryptionOver()),this,TQT_SLOT(decryptNextFile()));
+        connect(lib,TQT_SIGNAL(decryptionOver()),TQT_TQOBJECT(this),TQT_SLOT(decryptNextFile()));
 
 }
 
@@ -462,10 +462,10 @@ void  MyView::showDroppedFile()
 kdDebug(2100)<<"------Show dropped file"<<endl;
         KgpgApp *kgpgtxtedit = new KgpgApp(0, "editor",WDestructiveClose,goDefaultKey);
         kgpgtxtedit->view->editor->slotDroppedFile(droppedUrls.first());
-	connect(kgpgtxtedit,TQT_SIGNAL(encryptFiles(KURL::List)),this,TQT_SLOT(encryptFiles(KURL::List)));
+	connect(kgpgtxtedit,TQT_SIGNAL(encryptFiles(KURL::List)),TQT_TQOBJECT(this),TQT_SLOT(encryptFiles(KURL::List)));
 	connect(this,TQT_SIGNAL(setFont(TQFont)),kgpgtxtedit,TQT_SLOT(slotSetFont(TQFont)));
-	connect(kgpgtxtedit,TQT_SIGNAL(refreshImported(TQStringList)),this,TQT_SIGNAL(importedKeys(TQStringList)));
-	connect(kgpgtxtedit->view->editor,TQT_SIGNAL(refreshImported(TQStringList)),this,TQT_SIGNAL(importedKeys(TQStringList)));
+	connect(kgpgtxtedit,TQT_SIGNAL(refreshImported(TQStringList)),TQT_TQOBJECT(this),TQT_SIGNAL(importedKeys(TQStringList)));
+	connect(kgpgtxtedit->view->editor,TQT_SIGNAL(refreshImported(TQStringList)),TQT_TQOBJECT(this),TQT_SIGNAL(importedKeys(TQStringList)));
         kgpgtxtedit->show();
 }
 
@@ -519,7 +519,7 @@ void  MyView::droppedtext (TQString inputText,bool allowEncrypt)
 
         if (inputText.startsWith("-----BEGIN PGP MESSAGE")) {
                 KgpgApp *kgpgtxtedit = new KgpgApp(0, "editor",WDestructiveClose,goDefaultKey);
-		connect(kgpgtxtedit,TQT_SIGNAL(encryptFiles(KURL::List)),this,TQT_SLOT(encryptFiles(KURL::List)));
+		connect(kgpgtxtedit,TQT_SIGNAL(encryptFiles(KURL::List)),TQT_TQOBJECT(this),TQT_SLOT(encryptFiles(KURL::List)));
 		connect(this,TQT_SIGNAL(setFont(TQFont)),kgpgtxtedit,TQT_SLOT(slotSetFont(TQFont)));
                 kgpgtxtedit->view->editor->setText(inputText);
                 kgpgtxtedit->view->slotdecode();
@@ -533,7 +533,7 @@ void  MyView::droppedtext (TQString inputText,bool allowEncrypt)
                 else {
                         KgpgInterface *importKeyProcess=new KgpgInterface();
                         importKeyProcess->importKey(inputText);
-			connect(importKeyProcess,TQT_SIGNAL(importfinished(TQStringList)),this,TQT_SIGNAL(importedKeys(TQStringList)));
+			connect(importKeyProcess,TQT_SIGNAL(importfinished(TQStringList)),TQT_TQOBJECT(this),TQT_SIGNAL(importedKeys(TQStringList)));
                         return;
                 }
         }
@@ -560,7 +560,7 @@ void  MyView::dropEvent (TQDropEvent *o)
                 droppedfile(list);
         else if ( TQTextDrag::decode(o, text) )
 		{
-	        TQApplication::clipboard()->setText(text,clipboardMode);
+	        TQApplication::tqclipboard()->setText(text,clipboardMode);
                 droppedtext(text);
 		}
 }
@@ -568,16 +568,16 @@ void  MyView::dropEvent (TQDropEvent *o)
 
 void  MyView::readOptions()
 {
-	clipboardMode=QClipboard::Clipboard;
-        if ( KGpgSettings::useMouseSelection() && kapp->clipboard()->supportsSelection())
-                clipboardMode=QClipboard::Selection;
+	clipboardMode=TQClipboard::Clipboard;
+        if ( KGpgSettings::useMouseSelection() && kapp->tqclipboard()->supportsSelection())
+                clipboardMode=TQClipboard::Selection;
 
 	if (KGpgSettings::firstRun()) {
                 firstRun();
         } else {
                 TQString path = KGpgSettings::gpgConfigPath();
                 if (path.isEmpty()) {
-                        if (KMessageBox::questionYesNo(0,i18n("<qt>You have not set a path to your GnuPG config file.<br>This may cause some surprising results in KGpg's execution.<br>Would you like to start KGpg's Wizard to fix this problem?</qt>"),TQString::null,i18n("Start Wizard"),i18n("Do Not Start"))==KMessageBox::Yes)
+                        if (KMessageBox::questionYesNo(0,i18n("<qt>You have not set a path to your GnuPG config file.<br>This may cause some surprising results in KGpg's execution.<br>Would you like to start KGpg's Wizard to fix this problem?</qt>"),TQString(),i18n("Start Wizard"),i18n("Do Not Start"))==KMessageBox::Yes)
                                 startWizard();
                 } else {
                         TQStringList groups=KgpgInterface::getGpgGroupNames(path);
@@ -602,7 +602,7 @@ static TQString getGpgHome()
     char    *env=getenv("GNUPGHOME");
     TQString gpgHome(env ? env : TQDir::homeDirPath()+"/.gnupg/");
 
-    gpgHome.replace("//", "/");
+    gpgHome.tqreplace("//", "/");
 
     if(!gpgHome.endsWith("/"))
         gpgHome.append('/');
@@ -621,7 +621,7 @@ void  MyView::startWizard()
         if (!TQFile(confPath).exists()) {
                 confPath=gpgHome+"gpg.conf";
                 if (!TQFile(confPath).exists()) {
-                        if (KMessageBox::questionYesNo(this,i18n("<qt><b>The GnuPG configuration file was not found</b>. Please make sure you have GnuPG installed. Should KGpg try to create a config file ?</qt>"),TQString::null,i18n("Create Config"),i18n("Do Not Create"))==KMessageBox::Yes) {
+                        if (KMessageBox::questionYesNo(this,i18n("<qt><b>The GnuPG configuration file was not found</b>. Please make sure you have GnuPG installed. Should KGpg try to create a config file ?</qt>"),TQString(),i18n("Create Config"),i18n("Do Not Create"))==KMessageBox::Yes) {
                                 confPath=gpgHome+"options";
                                 TQFile file(confPath);
                                 if ( file.open( IO_WriteOnly ) ) {
@@ -631,14 +631,14 @@ void  MyView::startWizard()
                                 }
                         } else {
                                 wiz->text_optionsfound->setText(i18n("<qt><b>The GnuPG configuration file was not found</b>. Please make sure you have GnuPG installed and give the path to the config file.</qt>"));
-                                confPath=TQString::null;
+                                confPath=TQString();
                         }
                 }
         }
 
 	int gpgVersion=KgpgInterface::getGpgVersion();
 	if (gpgVersion<120) wiz->txtGpgVersion->setText(i18n("Your GnuPG version seems to be older than 1.2.0. Photo Id's and Key Groups will not work properly. Please consider upgrading GnuPG (http://gnupg.org)."));
-	else wiz->txtGpgVersion->setText(TQString::null);
+	else wiz->txtGpgVersion->setText(TQString());
 
         wiz->kURLRequester1->setURL(confPath);
         /*
@@ -647,7 +647,7 @@ void  MyView::startWizard()
 
         FILE *fp,*fp2;
         TQString tst,tst2,name,trustedvals="idre-";
-        TQString firstKey=TQString::null;
+        TQString firstKey=TQString();
         char line[300];
         bool counter=false;
 
@@ -660,7 +660,7 @@ void  MyView::startWizard()
                                 fp2 = popen("gpg --display-charset=utf-8 --no-tty --with-colon --list-keys "+TQFile::encodeName(tst.section(':',4,4)), "r");
                                 while ( fgets( line, sizeof(line), fp2)) {
                                         tst2=TQString::fromUtf8(line);
-                                        if (tst2.startsWith("pub") && (trustedvals.find(tst2.section(':',1,1))==-1)) {
+                                        if (tst2.startsWith("pub") && (trustedvals.tqfind(tst2.section(':',1,1))==-1)) {
                                                 counter=true;
                                                 wiz->CBdefault->insertItem(tst.section(':',4,4).right(8)+": "+name);
                                                 if (firstKey.isEmpty())
@@ -674,17 +674,17 @@ void  MyView::startWizard()
         }
         pclose(fp);
 	wiz->CBdefault->setCurrentItem(firstKey);
-        //connect(wiz->pushButton4,TQT_SIGNAL(clicked()),this,TQT_SLOT(slotGenKey()));
+        //connect(wiz->pushButton4,TQT_SIGNAL(clicked()),TQT_TQOBJECT(this),TQT_SLOT(slotGenKey()));
         if (!counter)
-                connect(wiz->finishButton(),TQT_SIGNAL(clicked()),this,TQT_SLOT(slotGenKey()));
+                connect(wiz->finishButton(),TQT_SIGNAL(clicked()),TQT_TQOBJECT(this),TQT_SLOT(slotGenKey()));
         else {
                 wiz->textGenerate->hide();
 		wiz->setTitle(wiz->page_4,i18n("Step Three: Select your Default Private Key"));
-                connect(wiz->finishButton(),TQT_SIGNAL(clicked()),this,TQT_SLOT(slotSaveOptionsPath()));
+                connect(wiz->finishButton(),TQT_SIGNAL(clicked()),TQT_TQOBJECT(this),TQT_SLOT(slotSaveOptionsPath()));
         }
-        connect(wiz->nextButton(),TQT_SIGNAL(clicked()),this,TQT_SLOT(slotWizardChange()));
+        connect(wiz->nextButton(),TQT_SIGNAL(clicked()),TQT_TQOBJECT(this),TQT_SLOT(slotWizardChange()));
         connect( wiz , TQT_SIGNAL( destroyed() ) , this, TQT_SLOT( slotWizardClose()));
-	connect(wiz,TQT_SIGNAL(helpClicked()),this,TQT_SLOT(help()));
+	connect(wiz,TQT_SIGNAL(helpClicked()),TQT_TQOBJECT(this),TQT_SLOT(help()));
 
         wiz->setFinishEnabled(wiz->page_4,true);
         wiz->show();
@@ -771,25 +771,25 @@ void  MyView::help()
         kapp->invokeHelp(0,"kgpg");
 }
 
-kgpgapplet::kgpgapplet(TQWidget *parent, const char *name)
-                : KSystemTray(parent,name)
+kgpgapplet::kgpgapplet(TQWidget *tqparent, const char *name)
+                : KSystemTray(tqparent,name)
 {
         w=new MyView(this);
         w->show();
         KPopupMenu *conf_menu=contextMenu();
-        KgpgEncryptClipboard = new KAction(i18n("&Encrypt Clipboard"), "kgpg", 0,w, TQT_SLOT(clipEncrypt()),actionCollection(),"clip_encrypt");
-        KgpgDecryptClipboard = new KAction(i18n("&Decrypt Clipboard"), 0, 0,w, TQT_SLOT(clipDecrypt()),actionCollection(),"clip_decrypt");
-	KgpgSignClipboard = new KAction(i18n("&Sign/Verify Clipboard"), "signature", 0,w, TQT_SLOT(clipSign()),actionCollection(),"clip_sign");
+        KgpgEncryptClipboard = new KAction(i18n("&Encrypt Clipboard"), "kgpg", 0,TQT_TQOBJECT(w), TQT_SLOT(clipEncrypt()),actionCollection(),"clip_encrypt");
+        KgpgDecryptClipboard = new KAction(i18n("&Decrypt Clipboard"), 0, 0,TQT_TQOBJECT(w), TQT_SLOT(clipDecrypt()),actionCollection(),"clip_decrypt");
+	KgpgSignClipboard = new KAction(i18n("&Sign/Verify Clipboard"), "signature", 0,TQT_TQOBJECT(w), TQT_SLOT(clipSign()),actionCollection(),"clip_sign");
         KAction *KgpgOpenEditor;
 	if (KGpgSettings::leftClick()==KGpgSettings::EnumLeftClick::KeyManager)
-	KgpgOpenEditor = new KAction(i18n("&Open Editor"), "edit", 0,parent, TQT_SLOT(slotOpenEditor()),actionCollection(),"kgpg_editor");
+	KgpgOpenEditor = new KAction(i18n("&Open Editor"), "edit", 0,TQT_TQOBJECT(tqparent), TQT_SLOT(slotOpenEditor()),actionCollection(),"kgpg_editor");
 	else
-	KgpgOpenEditor = new KAction(i18n("&Open Key Manager"), "kgpg", 0,this, TQT_SLOT(slotOpenKeyManager()),actionCollection(),"kgpg_editor");
+	KgpgOpenEditor = new KAction(i18n("&Open Key Manager"), "kgpg", 0,TQT_TQOBJECT(this), TQT_SLOT(slotOpenKeyManager()),actionCollection(),"kgpg_editor");
 
-	KAction *KgpgOpenServer = new KAction(i18n("&Key Server Dialog"), "network", 0,this, TQT_SLOT(slotOpenServerDialog()),actionCollection(),"kgpg_server");
-        KAction *KgpgPreferences=KStdAction::preferences(this, TQT_SLOT(showOptions()), actionCollection());
+	KAction *KgpgOpenServer = new KAction(i18n("&Key Server Dialog"), "network", 0,TQT_TQOBJECT(this), TQT_SLOT(slotOpenServerDialog()),actionCollection(),"kgpg_server");
+        KAction *KgpgPreferences=KStdAction::preferences(TQT_TQOBJECT(this), TQT_SLOT(showOptions()), actionCollection());
 
-	connect (conf_menu,TQT_SIGNAL(aboutToShow()),this,TQT_SLOT(checkMenu()));
+	connect (conf_menu,TQT_SIGNAL(aboutToShow()),TQT_TQOBJECT(this),TQT_SLOT(checkMenu()));
 
         KgpgEncryptClipboard->plug(conf_menu);
         KgpgDecryptClipboard->plug(conf_menu);
@@ -804,7 +804,7 @@ kgpgapplet::kgpgapplet(TQWidget *parent, const char *name)
 void kgpgapplet::checkMenu()
 {
 	KgpgDecryptClipboard->setEnabled(false);
-	if ((kapp->clipboard()->text(w->clipboardMode).isEmpty()))
+	if ((kapp->tqclipboard()->text(w->clipboardMode).isEmpty()))
 	{
 		KgpgEncryptClipboard->setEnabled(false);
 		KgpgSignClipboard->setEnabled(false);
@@ -812,7 +812,7 @@ void kgpgapplet::checkMenu()
 	else
 	{
 		KgpgEncryptClipboard->setEnabled(true);
-		if (kapp->clipboard()->text(w->clipboardMode).stripWhiteSpace().startsWith("-----BEGIN"))
+		if (kapp->tqclipboard()->text(w->clipboardMode).stripWhiteSpace().startsWith("-----BEGIN"))
 		KgpgDecryptClipboard->setEnabled(true);
 		KgpgSignClipboard->setEnabled(true);
 	}
@@ -915,7 +915,7 @@ int KgpgAppletApp::newInstance()
 
                 connect( kgpg_applet, TQT_SIGNAL(quitSelected()), this, TQT_SLOT(slotHandleQuit()));
                 connect(s_keyManager,TQT_SIGNAL(readAgainOptions()),kgpg_applet->w,TQT_SLOT(readOptions()));
-                connect(kgpg_applet->w,TQT_SIGNAL(updateDefault(TQString)),this,TQT_SLOT(wizardOver(TQString)));
+                connect(kgpg_applet->w,TQT_SIGNAL(updateDefault(TQString)),TQT_TQOBJECT(this),TQT_SLOT(wizardOver(TQString)));
                 connect(kgpg_applet->w,TQT_SIGNAL(createNewKey()),s_keyManager,TQT_SLOT(slotgenkey()));
 		connect(s_keyManager,TQT_SIGNAL(fontChanged(TQFont)),kgpg_applet->w,TQT_SIGNAL(setFont(TQFont)));
 		connect(kgpg_applet->w,TQT_SIGNAL(importedKeys(TQStringList)),s_keyManager->keysList2,TQT_SLOT(slotReloadKeys(TQStringList)));
@@ -926,7 +926,7 @@ int KgpgAppletApp::newInstance()
                         if ((KgpgInterface::getGpgBoolSetting("use-agent",gpgPath)) && (!getenv("GPG_AGENT_INFO")))
                                 KMessageBox::sorry(0,i18n("<qt>The use of <b>GnuPG Agent</b> is enabled in GnuPG's configuration file (%1).<br>"
                                                           "However, the agent does not seem to be running. This could result in problems with signing/decryption.<br>"
-                                                          "Please disable GnuPG Agent from KGpg settings, or fix the agent.</qt>").arg(gpgPath));
+                                                          "Please disable GnuPG Agent from KGpg settings, or fix the agent.</qt>").tqarg(gpgPath));
                 }
 
         }
@@ -1008,8 +1008,8 @@ int KgpgAppletApp::newInstance()
 
 void MyView::encryptClipboard(TQStringList selec,TQStringList encryptOptions,bool,bool symmetric)
 {
-        if (kapp->clipboard()->text(clipboardMode).isEmpty()) {
-	KPassivePopup::message(i18n("Clipboard is empty."),TQString::null,KGlobal::iconLoader()->loadIcon("kgpg",KIcon::Desktop),this);
+        if (kapp->tqclipboard()->text(clipboardMode).isEmpty()) {
+	KPassivePopup::message(i18n("Clipboard is empty."),TQString(),KGlobal::iconLoader()->loadIcon("kgpg",KIcon::Desktop),this);
 	return;
 	}
                 if (KGpgSettings::pgpCompatibility())
@@ -1018,19 +1018,19 @@ void MyView::encryptClipboard(TQStringList selec,TQStringList encryptOptions,boo
 
 		if (symmetric) selec.clear();
                 KgpgInterface *txtEncrypt=new KgpgInterface();
-                connect (txtEncrypt,TQT_SIGNAL(txtencryptionfinished(TQString)),this,TQT_SLOT(slotSetClip(TQString)));
-		connect (txtEncrypt,TQT_SIGNAL(txtencryptionstarted()),this,TQT_SLOT(slotPassiveClip()));
-                txtEncrypt->KgpgEncryptText(kapp->clipboard()->text(clipboardMode),selec,encryptOptions);
+                connect (txtEncrypt,TQT_SIGNAL(txtencryptionfinished(TQString)),TQT_TQOBJECT(this),TQT_SLOT(slotSetClip(TQString)));
+		connect (txtEncrypt,TQT_SIGNAL(txtencryptionstarted()),TQT_TQOBJECT(this),TQT_SLOT(slotPassiveClip()));
+                txtEncrypt->KgpgEncryptText(kapp->tqclipboard()->text(clipboardMode),selec,encryptOptions);
 }
 
 void MyView::slotPassiveClip()
 {
-TQString newtxt=kapp->clipboard()->text(clipboardMode);
+TQString newtxt=kapp->tqclipboard()->text(clipboardMode);
 if (newtxt.length()>300)
                         newtxt=TQString(newtxt.left(250).stripWhiteSpace())+"...\n"+TQString(newtxt.right(40).stripWhiteSpace());
 
-                newtxt.replace(TQRegExp("<"),"&lt;");   /////   disable html tags
-                newtxt.replace(TQRegExp("\n"),"<br>");
+                newtxt.tqreplace(TQRegExp("<"),"&lt;");   /////   disable html tags
+                newtxt.tqreplace(TQRegExp("\n"),"<br>");
 
 pop = new KPassivePopup( this);
                 pop->setView(i18n("Encrypted following text:"),newtxt,KGlobal::iconLoader()->loadIcon("kgpg",KIcon::Desktop));
@@ -1045,7 +1045,7 @@ pop = new KPassivePopup( this);
 void MyView::slotSetClip(TQString newtxt)
 {
         if (newtxt.isEmpty()) return;
-                TQApplication::clipboard()->setText(newtxt,clipboardMode);//,QClipboard::Clipboard);    QT 3.1 only
+                TQApplication::tqclipboard()->setText(newtxt,clipboardMode);//,TQClipboard::Clipboard);    QT 3.1 only
 }
 
 

@@ -25,12 +25,13 @@
 class SingleContainerWidget :public RegExpWidget
 {
 Q_OBJECT
+  TQ_OBJECT
 
 public:
-  SingleContainerWidget( RegExpEditorWindow* editorWindow, TQWidget* parent,
+  SingleContainerWidget( RegExpEditorWindow* editorWindow, TQWidget* tqparent,
                          const char* name = 0);
 
-  virtual bool updateSelection( bool parentSelected );
+  virtual bool updateSelection( bool tqparentSelected );
   virtual bool hasSelection() const;
   virtual void clearSelection();
   virtual void deleteSelection();

@@ -32,8 +32,8 @@
 
 #include "kcmdf.h"
 
-KDiskFreeWidget::KDiskFreeWidget( TQWidget *parent, const char *name )
- : KCModule( parent, name )
+KDiskFreeWidget::KDiskFreeWidget( TQWidget *tqparent, const char *name )
+ : KCModule( tqparent, name )
 {
   setButtons(Help);
 
@@ -57,9 +57,9 @@ TQString KDiskFreeWidget::quickHelp() const
 
 extern "C"
 {
-  KDE_EXPORT KCModule* create_kdf( TQWidget *parent, const char * /*name*/ )
+  KDE_EXPORT KCModule* create_kdf( TQWidget *tqparent, const char * /*name*/ )
   {
-    return new KDiskFreeWidget( parent , "kdf" );
+    return new KDiskFreeWidget( tqparent , "kdf" );
   }
 }
 

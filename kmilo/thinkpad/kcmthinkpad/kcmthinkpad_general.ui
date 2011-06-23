@@ -1,6 +1,6 @@
 <!DOCTYPE UI><UI version="3.3" stdsetdef="1">
 <class>KCMThinkpadGeneral</class>
-<widget class="QWidget">
+<widget class="TQWidget">
     <property name="name">
         <cstring>KCMThinkpadGeneral</cstring>
     </property>
@@ -19,7 +19,7 @@
         <property name="name">
             <cstring>unnamed</cstring>
         </property>
-        <widget class="QLabel" row="0" column="0">
+        <widget class="TQLabel" row="0" column="0">
             <property name="name">
                 <cstring>tlOff</cstring>
             </property>
@@ -33,7 +33,7 @@
                 <string>Could not read /dev/nvram. If you have an IBM Thinkpad load the nvram Linux module &lt;em&gt;insmod nvram&lt;/em&gt; and create the node &lt;em&gt;mknod /dev/nvram c 10 144&lt;/em&gt; then make the device readable &lt;em&gt;chmod 664 /dev/nvram&lt;/em&gt; or writable &lt;em&gt;chmod 666 /dev/nvram&lt;/em&gt;.&lt;p&gt;  nvram must be writable for software volume control required for R30/R31 models and for using a custom volume change step.</string>
             </property>
         </widget>
-        <widget class="QButtonGroup" row="1" column="0">
+        <widget class="TQButtonGroup" row="1" column="0">
             <property name="name">
                 <cstring>bgGeneral</cstring>
             </property>
@@ -44,7 +44,7 @@
                 <property name="name">
                     <cstring>unnamed</cstring>
                 </property>
-                <widget class="QCheckBox" row="0" column="0">
+                <widget class="TQCheckBox" row="0" column="0">
                     <property name="name">
                         <cstring>mCbRun</cstring>
                     </property>
@@ -52,7 +52,7 @@
                         <string>Run Thinkpad Buttons KMilo plugin</string>
                     </property>
                 </widget>
-                <widget class="QCheckBox" row="1" column="0">
+                <widget class="TQCheckBox" row="1" column="0">
                     <property name="name">
                         <cstring>mCbSoftwareVolume</cstring>
                     </property>
@@ -60,15 +60,15 @@
                         <string>Change volume in software (required by R30/R31)</string>
                     </property>
                 </widget>
-                <widget class="QLayoutWidget" row="2" column="0">
+                <widget class="TQLayoutWidget" row="2" column="0">
                     <property name="name">
-                        <cstring>layout27</cstring>
+                        <cstring>tqlayout27</cstring>
                     </property>
                     <grid>
                         <property name="name">
                             <cstring>unnamed</cstring>
                         </property>
-                        <widget class="QLabel" row="4" column="0">
+                        <widget class="TQLabel" row="4" column="0">
                             <property name="name">
                                 <cstring>textLabel2_5</cstring>
                             </property>
@@ -76,7 +76,7 @@
                                 <string>Command for Mail button:</string>
                             </property>
                         </widget>
-                        <widget class="QLabel" row="5" column="0">
+                        <widget class="TQLabel" row="5" column="0">
                             <property name="name">
                                 <cstring>textLabel2_6</cstring>
                             </property>
@@ -97,7 +97,7 @@
                                 </sizepolicy>
                             </property>
                         </widget>
-                        <widget class="QLabel" row="3" column="0">
+                        <widget class="TQLabel" row="3" column="0">
                             <property name="name">
                                 <cstring>textLabel2_4</cstring>
                             </property>
@@ -118,7 +118,7 @@
                                 </sizepolicy>
                             </property>
                         </widget>
-                        <widget class="QLabel" row="0" column="0">
+                        <widget class="TQLabel" row="0" column="0">
                             <property name="name">
                                 <cstring>volumeStepLabel</cstring>
                             </property>
@@ -153,7 +153,7 @@
                                 </sizepolicy>
                             </property>
                         </widget>
-                        <widget class="QLabel" row="2" column="0">
+                        <widget class="TQLabel" row="2" column="0">
                             <property name="name">
                                 <cstring>textLabel2_3</cstring>
                             </property>
@@ -161,7 +161,7 @@
                                 <string>Command for Home button:</string>
                             </property>
                         </widget>
-                        <widget class="QSpinBox" row="0" column="1">
+                        <widget class="TQSpinBox" row="0" column="1">
                             <property name="name">
                                 <cstring>mSpinboxVolumeStep</cstring>
                             </property>
@@ -193,7 +193,7 @@
                                 </sizepolicy>
                             </property>
                         </widget>
-                        <widget class="QLabel" row="1" column="0">
+                        <widget class="TQLabel" row="1" column="0">
                             <property name="name">
                                 <cstring>textLabel2</cstring>
                             </property>
@@ -284,14 +284,14 @@
 <includes>
     <include location="local" impldecl="in implementation">kcmthinkpad_general.ui.h</include>
 </includes>
-<signals>
+<Q_SIGNALS>
     <signal>changed();</signal>
-</signals>
-<slots>
+</Q_SIGNALS>
+<Q_SLOTS>
     <slot>slotChanged()</slot>
-</slots>
-<layoutdefaults spacing="6" margin="11"/>
-<layoutfunctions spacing="KDialog::spacingHint" margin="KDialog::marginHint"/>
+</Q_SLOTS>
+<tqlayoutdefaults spacing="6" margin="11"/>
+<tqlayoutfunctions spacing="KDialog::spacingHint" margin="KDialog::marginHint"/>
 <includehints>
     <includehint>kurlrequester.h</includehint>
     <includehint>kpushbutton.h</includehint>

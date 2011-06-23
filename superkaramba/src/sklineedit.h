@@ -29,7 +29,7 @@
 
 class Input;
 
-class SKLineEdit : public QLineEdit
+class SKLineEdit : public TQLineEdit
 {
   public:
     SKLineEdit(TQWidget *w, Input *i);

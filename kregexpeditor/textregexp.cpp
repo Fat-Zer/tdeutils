@@ -15,7 +15,7 @@
  *  the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  *  Boston, MA 02110-1301, USA.
  **/
-#ifdef QT_ONLY
+#ifdef TQT_ONLY
   #include "compat.h"
 #else
   #include <kmessagebox.h>
@@ -62,7 +62,7 @@ bool TextRegExp::load( TQDomElement top, const TQString& /*version*/)
         _text = txtNode.data();
     }
     else {
-        _text = TQString::fromLatin1( "" );
+        _text = TQString::tqfromLatin1( "" );
     }
 
     return true;

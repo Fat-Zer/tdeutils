@@ -39,8 +39,8 @@ bool KNavigator::handleKeyPress( TQKeyEvent *KeyEvent )
   bool KeyUsed = true;
 
   //bool clearUndoRedoInfo = true;
-  bool ShiftPressed =  KeyEvent->state() & Qt::ShiftButton;
-  bool ControlPressed = KeyEvent->state() & Qt::ControlButton;
+  bool ShiftPressed =  KeyEvent->state() & TQt::ShiftButton;
+  bool ControlPressed = KeyEvent->state() & TQt::ControlButton;
   //bool AltPressed = KeyEvent->state() & AltButton;
 
   // we only care for cursor keys and the like, won't hardcode any other keys
@@ -49,28 +49,28 @@ bool KNavigator::handleKeyPress( TQKeyEvent *KeyEvent )
   // in each command anyway
   switch( KeyEvent->key() )
   {
-    case Qt::Key_Left:
+    case TQt::Key_Left:
       moveCursor( ControlPressed ? MoveWordBackward : MoveBackward, ShiftPressed );
       break;
-    case Qt::Key_Right:
+    case TQt::Key_Right:
       moveCursor( ControlPressed ? MoveWordForward : MoveForward, ShiftPressed );
       break;
-    case Qt::Key_Up:
+    case TQt::Key_Up:
       moveCursor( ControlPressed ? MovePgUp : MoveUp, ShiftPressed );
       break;
-    case Qt::Key_Down:
+    case TQt::Key_Down:
       moveCursor( ControlPressed ? MovePgDown : MoveDown, ShiftPressed );
       break;
-    case Qt::Key_Home:
+    case TQt::Key_Home:
       moveCursor( ControlPressed ? MoveHome : MoveLineStart, ShiftPressed );
       break;
-    case Qt::Key_End:
+    case TQt::Key_End:
       moveCursor( ControlPressed ? MoveEnd : MoveLineEnd, ShiftPressed );
       break;
-    case Qt::Key_Prior:
+    case TQt::Key_Prior:
       moveCursor( MovePgUp, ShiftPressed );
       break;
-    case Qt::Key_Next:
+    case TQt::Key_Next:
       moveCursor( MovePgDown, ShiftPressed );
       break;
 
@@ -127,7 +127,7 @@ void KNavigator::moveCursor( KMoveAction Action, bool Select )
   if( Select )
     BufferRanges->setSelectionEnd( BufferCursor->realIndex() );
 
-  HexEdit->repaintChanged();
+  HexEdit->tqrepaintChanged();
   HexEdit->ensureCursorVisible();
 
   HexEdit->unpauseCursor();

@@ -39,8 +39,9 @@ public:
 class MailView : public KSim::PluginView
 {
 	Q_OBJECT
+  TQ_OBJECT
 public:
-	MailView( KSim::PluginObject* parent, const char* name );
+	MailView( KSim::PluginObject* tqparent, const char* name );
 	~MailView();
 
 	virtual void reparseConfig();
@@ -52,8 +53,9 @@ private slots:
 class MailLabel : public KSim::Label
 {
 	Q_OBJECT
+  TQ_OBJECT
 public:
-	MailLabel( TQWidget* parent );
+	MailLabel( TQWidget* tqparent );
 	virtual ~MailLabel();
 
 	virtual void configureObject( bool );
@@ -77,8 +79,9 @@ private:
 class MailConfig : public KSim::PluginPage
 {
 	Q_OBJECT
+  TQ_OBJECT
 public:
-	MailConfig( KSim::PluginObject* parent, const char* name );
+	MailConfig( KSim::PluginObject* tqparent, const char* name );
 	~MailConfig();
 
 	virtual void saveConfig();

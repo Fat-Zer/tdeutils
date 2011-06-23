@@ -37,13 +37,13 @@
 #include <tqpopupmenu.h>
 #include <tqpushbutton.h>
 
-class SensorViewItem : public QCheckListItem
+class SensorViewItem : public TQCheckListItem
 {
   public:
-    SensorViewItem(TQListView *parent, const TQString &text1,
+    SensorViewItem(TQListView *tqparent, const TQString &text1,
        const TQString &text2, const TQString &text3,
        const TQString &text4)
-       : TQCheckListItem(parent, text1, CheckBox)
+       : TQCheckListItem(tqparent, text1, CheckBox)
     {
       setText(1, text2);
       setText(2, text3);
@@ -51,8 +51,8 @@ class SensorViewItem : public QCheckListItem
     }
 };
 
-SensorsConfig::SensorsConfig(KSim::PluginObject *parent, const char *name)
-   : KSim::PluginPage(parent, name)
+SensorsConfig::SensorsConfig(KSim::PluginObject *tqparent, const char *name)
+   : KSim::PluginPage(tqparent, name)
 {
   m_layout = new TQGridLayout(this);
   m_layout->setSpacing(6);
@@ -86,7 +86,7 @@ SensorsConfig::SensorsConfig(KSim::PluginObject *parent, const char *name)
 
   m_updateLabel = new TQLabel(this);
   m_updateLabel->setText(i18n("Update interval:"));
-  m_updateLabel->setSizePolicy(TQSizePolicy(TQSizePolicy::Fixed,
+  m_updateLabel->tqsetSizePolicy(TQSizePolicy(TQSizePolicy::Fixed,
      TQSizePolicy::Fixed));
   m_layout->addMultiCellWidget(m_updateLabel, 4, 4, 0, 0);
 
@@ -95,7 +95,7 @@ SensorsConfig::SensorsConfig(KSim::PluginObject *parent, const char *name)
 
   TQLabel *intervalLabel = new TQLabel(this);
   intervalLabel->setText(i18n("seconds"));
-  intervalLabel->setSizePolicy(TQSizePolicy(TQSizePolicy::Fixed,
+  intervalLabel->tqsetSizePolicy(TQSizePolicy(TQSizePolicy::Fixed,
      TQSizePolicy::Fixed));
   m_layout->addMultiCellWidget(intervalLabel, 4, 4, 2, 2);
 }
@@ -233,7 +233,7 @@ void SensorsConfig::showEvent(TQShowEvent *)
     const SensorList &list = SensorBase::self()->sensorsList();
     SensorList::ConstIterator it;
     for (it = list.begin(); it != list.end(); ++it) {
-      TQListViewItem *item = m_sensorView->findItem((*it).sensorName(), 1);
+      TQListViewItem *item = m_sensorView->tqfindItem((*it).sensorName(), 1);
       if (item)
         item->setText(3, (*it).sensorValue() + (*it).sensorUnit());
     }

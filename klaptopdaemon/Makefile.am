@@ -13,6 +13,7 @@ kded_klaptopdaemon_la_LDFLAGS = $(all_libraries) -module -avoid-version  -lXtst
 kded_klaptopdaemon_la_LIBADD   = $(LIB_KDEUI) $(LIB_XSS) libkcmlaptop.la
 
 klaptop_acpi_helper_SOURCES = acpi_helper.cpp
+klaptop_acpi_helper_LDADD = $(LIB_QT)
 
 klaptop_check_SOURCES = laptop_check.cpp 
 klaptop_check_LDFLAGS = $(all_libraries) 
@@ -41,7 +42,7 @@ dummy.cpp:
 
 noinst_PROGRAMS = makecrc
 makecrc_SOURCES = makecrc.cpp
-makecrc_LDADD = $(LIBZ)
+makecrc_LDADD = $(LIBZ) $(LIB_QT)
 
 crcresult.h:	makecrc klaptop_acpi_helper
 	./makecrc >crcresult.h

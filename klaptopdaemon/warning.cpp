@@ -3,7 +3,7 @@
  *
  * Copyright (c) 1999 Paul Campbell <paul@taniwha.com>
  *
- * Requires the Qt widget libraries, available at no cost at
+ * Requires the TQt widget libraries, available at no cost at
  * http://www.troll.no/
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -44,8 +44,8 @@
 
 extern void wake_laptop_daemon();
 
-WarningConfig::WarningConfig (int t, TQWidget * parent, const char *name)
-  : KCModule(parent, name),
+WarningConfig::WarningConfig (int t, TQWidget * tqparent, const char *name)
+  : KCModule(tqparent, name),
     checkSuspend(0),
     checkStandby(0),
     checkHibernate(0)
@@ -84,9 +84,9 @@ WarningConfig::WarningConfig (int t, TQWidget * parent, const char *name)
         editCriticalPercent->setSuffix(i18n("keep short, unit in spinbox", "%"));
         TQToolTip::add(editCriticalPercent, i18n("When this amount of battery life is left the actions below will be triggered"));
         grid->addWidget(checkCriticalTime, curRow, 0);
-        grid->addWidget(editCriticalTime, curRow++, Qt::AlignLeft);
+        grid->addWidget(editCriticalTime, curRow++, TQt::AlignLeft);
         grid->addWidget(checkCriticalPercent, curRow, 0);
-        grid->addWidget(editCriticalPercent, curRow++, Qt::AlignLeft);
+        grid->addWidget(editCriticalPercent, curRow++, TQt::AlignLeft);
 
         connect(editCriticalTime, TQT_SIGNAL(valueChanged(int)), this, TQT_SLOT(configChanged()));
         connect(editCriticalPercent, TQT_SIGNAL(valueChanged(int)), this, TQT_SLOT(configChanged()));
@@ -104,9 +104,9 @@ WarningConfig::WarningConfig (int t, TQWidget * parent, const char *name)
         editLowPercent->setSuffix(i18n("keep short, unit in spinbox", "%"));
         TQToolTip::add(editLowPercent, i18n("When this amount of battery life is left the actions below will be triggered"));
         grid->addWidget(checkLowTime, curRow, 0);
-        grid->addWidget(editLowTime, curRow++, Qt::AlignLeft);
+        grid->addWidget(editLowTime, curRow++, TQt::AlignLeft);
         grid->addWidget(checkLowPercent, curRow, 0);
-        grid->addWidget(editLowPercent, curRow++, Qt::AlignLeft);
+        grid->addWidget(editLowPercent, curRow++, TQt::AlignLeft);
         
         connect(editLowTime, TQT_SIGNAL(valueChanged(int)), this, TQT_SLOT(configChanged()));
         connect(editLowPercent, TQT_SIGNAL(valueChanged(int)), this, TQT_SLOT(configChanged()));
@@ -164,7 +164,7 @@ WarningConfig::WarningConfig (int t, TQWidget * parent, const char *name)
 
     if (can_brightness) {
       checkBrightness = new TQCheckBox(i18n("Panel b&rightness"), this);
-      checkBrightness->setMinimumSize(checkBrightness->sizeHint());
+      checkBrightness->setMinimumSize(checkBrightness->tqsizeHint());
       TQToolTip::add( checkBrightness, i18n( "If enabled the back panel brightness will change" ) );
       grid->addWidget(checkBrightness, curRow, 0);
       connect(checkBrightness, TQT_SIGNAL(toggled(bool)), this, TQT_SLOT(brightness_changed(bool)));
@@ -236,23 +236,23 @@ WarningConfig::WarningConfig (int t, TQWidget * parent, const char *name)
 
     TQVButtonGroup *b = new TQVButtonGroup(i18n("System State Change"), this);
     TQToolTip::add( b, i18n( "You may choose one of the following to occur when the battery gets low" ) );
-    b->layout()->setSpacing( KDialog::spacingHint() );
+    b->tqlayout()->setSpacing( KDialog::spacingHint() );
     if (can_standby) {
       checkStandby = new TQRadioButton(i18n("Standb&y"), b);
       TQToolTip::add( checkStandby, i18n( "Move the system into the standby state - a temporary lower power state" ) );
-      checkStandby->setMinimumSize(checkStandby->sizeHint());
+      checkStandby->setMinimumSize(checkStandby->tqsizeHint());
       connect(checkStandby, TQT_SIGNAL(clicked()), this, TQT_SLOT(configChanged()));
     }
     if (can_suspend) {
       checkSuspend = new TQRadioButton(i18n("&Suspend"), b);
       TQToolTip::add( checkSuspend, i18n( "Move the system into the suspend state - also known as 'save-to-ram'" ) );
-      checkSuspend->setMinimumSize(checkSuspend->sizeHint());
+      checkSuspend->setMinimumSize(checkSuspend->tqsizeHint());
       connect(checkSuspend, TQT_SIGNAL(clicked()), this, TQT_SLOT(configChanged()));
     }
     if (can_hibernate) {
       checkHibernate = new TQRadioButton(i18n("H&ibernate"), b);
       TQToolTip::add( checkHibernate, i18n( "Move the system into the hibernate state - also known as 'save-to-disk'" ) );
-      checkHibernate->setMinimumSize(checkHibernate->sizeHint());
+      checkHibernate->setMinimumSize(checkHibernate->tqsizeHint());
       connect(checkHibernate, TQT_SIGNAL(clicked()), this, TQT_SLOT(configChanged()));
     }
     // setup the logout option
@@ -266,7 +266,7 @@ WarningConfig::WarningConfig (int t, TQWidget * parent, const char *name)
     checkNone = new TQRadioButton(i18n("&None"), b);
     connect(checkNone, TQT_SIGNAL(clicked()), this, TQT_SLOT(configChanged()));
 
-    grid->addMultiCellWidget(b, curRow, curRow, 0, 1, Qt::AlignLeft|Qt::AlignTop);
+    grid->addMultiCellWidget(b, curRow, curRow, 0, 1, TQt::AlignLeft|TQt::AlignTop);
     curRow++;
 
 
@@ -276,7 +276,7 @@ WarningConfig::WarningConfig (int t, TQWidget * parent, const char *name)
     } else {
       explain = new TQLabel(i18n("This panel controls how and when you receive warnings that your battery power is about to run out"), this);
     }
-    explain->setAlignment( Qt::WordBreak );
+    explain->tqsetAlignment( TQt::WordBreak );
     grid->addMultiCellWidget(explain, curRow, curRow, 0, 1);
     ++curRow;
 
@@ -288,8 +288,8 @@ WarningConfig::WarningConfig (int t, TQWidget * parent, const char *name)
     }
     grid->setRowStretch(curRow++, 1);
 
-    grid->addWidget(new TQLabel( i18n("Version: %1").arg(LAPTOP_VERSION), this),
-		    curRow, 1, Qt::AlignRight);
+    grid->addWidget(new TQLabel( i18n("Version: %1").tqarg(LAPTOP_VERSION), this),
+		    curRow, 1, TQt::AlignRight);
 
   }
   my_load(1);
@@ -560,7 +560,7 @@ void WarningConfig::enablePlaySound(bool enable)
 
 void WarningConfig::browseRunCommand()
 {
-  KURL url = KFileDialog::getOpenURL(TQString::null, TQString::null, this  );
+  KURL url = KFileDialog::getOpenURL(TQString(), TQString(), this  );
   
   if( url.isEmpty() )
     return;
@@ -577,7 +577,7 @@ void WarningConfig::browseRunCommand()
 
 void WarningConfig::browsePlaySound()
 {
-  KURL url = KFileDialog::getOpenURL(TQString::null, TQString::null, this  );
+  KURL url = KFileDialog::getOpenURL(TQString(), TQString(), this  );
   
   if( url.isEmpty() )
     return;

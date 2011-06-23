@@ -24,6 +24,7 @@
 class MemSensor :  public Sensor
 {
 Q_OBJECT
+  TQ_OBJECT
 public:
 
   MemSensor( int interval );

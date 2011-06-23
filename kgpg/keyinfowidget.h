@@ -33,10 +33,11 @@ class KProcIO;
 class KgpgKeyInfo : public KDialogBase
 {
         Q_OBJECT
+  TQ_OBJECT
 
 public:
 
-	KgpgKeyInfo( TQWidget *parent = 0, const char *name = 0,TQString sigkey=0);
+	KgpgKeyInfo( TQWidget *tqparent = 0, const char *name = 0,TQString sigkey=0);
 	~KgpgKeyInfo();
 	KeyProperties *prop;
 

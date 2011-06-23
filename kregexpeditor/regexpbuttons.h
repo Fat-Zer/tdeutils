@@ -26,12 +26,13 @@ class TQToolButton;
 class TQSignalMapper;
 
 
-class RegExpButtons :public QDockWindow
+class RegExpButtons :public TQDockWindow
 {
     Q_OBJECT
+  TQ_OBJECT
 
 public:
-    RegExpButtons( TQWidget *parent, const char *name = 0 );
+    RegExpButtons( TQWidget *tqparent, const char *name = 0 );
     void setFeatures( int features );
 
 protected:

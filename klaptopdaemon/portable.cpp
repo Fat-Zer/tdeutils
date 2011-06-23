@@ -5,7 +5,7 @@
  *
  * Copyright (c) 1999 Paul Campbell <paul@taniwha.com>
  *
- * Requires the Qt widget libraries, available at no cost at
+ * Requires the TQt widget libraries, available at no cost at
  * http://www.troll.no/
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -199,7 +199,7 @@ pmu_read(apm_info *ap)
 	int timerem = 0;
 	int maxcharge = 0;
 	for (int i = 0; i < bcnt; i++) {
-		TQFile bf(TQString("/proc/pmu/battery_%1").arg(i));
+		TQFile bf(TQString("/proc/pmu/battery_%1").tqarg(i));
 		if (!bf.exists() || !bf.open(IO_ReadOnly))
 			continue;
 
@@ -304,7 +304,7 @@ readit:
 				char buff2[1024];
 				if (fgets(buff2, sizeof(buff), f) == NULL)
 					break;
-				if (strstr(buff2, "Status:") != NULL ||
+				if (strstr(buff2, "tqStatus:") != NULL ||
 			    	    strstr(buff2, "state:") != NULL) {
 					if (strstr(buff2, "on-line") != NULL) {
 						fclose(f);
@@ -333,7 +333,7 @@ static void acpi_read_batteries() {
 			f = new TQFile(bat.info_file);
 			if (f && f->exists() && f->open(IO_ReadOnly)) {
 				while(f->readLine(buff,1024) > 0) {
-					if (buff.contains("design capacity low:", false)) {
+					if (buff.tqcontains("design capacity low:", false)) {
 						TQRegExp rx("(\\d*)\\D*$");
 						rx.search(buff);
 						bat.cap_low = rx.cap(1).toInt();
@@ -341,7 +341,7 @@ static void acpi_read_batteries() {
 							bat.cap_low = 0;
 						continue;
 					}
-					if (buff.contains("last full capacity:", false)) {
+					if (buff.tqcontains("last full capacity:", false)) {
 						TQRegExp rx("(\\d*)\\D*$");
 						rx.search(buff);
 						bat.cap = rx.cap(1).toInt();
@@ -363,7 +363,7 @@ static void acpi_read_batteries() {
 			f = new TQFile(bat.state_file);
 			if (f && f->exists() && f->open(IO_ReadOnly)) {
 				while(f->readLine(buff,1024) > 0) {
-					if (buff.contains("present rate:", false)) {
+					if (buff.tqcontains("present rate:", false)) {
 						TQRegExp rx("(\\d*)\\D*$");
 						rx.search(buff);
 						bat.rate = rx.cap(1).toInt();
@@ -372,7 +372,7 @@ static void acpi_read_batteries() {
 						present = true;
 						continue;
 					}
-					if (buff.contains("remaining capacity:", false)) {
+					if (buff.tqcontains("remaining capacity:", false)) {
 						TQRegExp rx("(\\d*)\\D*$");
 						rx.search(buff);
 						bat.remaining = rx.cap(1).toInt();
@@ -602,7 +602,7 @@ laptop_portable::has_software_suspend(int type)
 }
 
 void
-laptop_portable::software_suspend_set_mask(bool hibernate)
+laptop_portable::software_suspend_set_tqmask(bool hibernate)
 {
 	software_suspend_is_preferred = hibernate;
 }
@@ -677,17 +677,17 @@ has_acpi_power()
 	return(val);
 }
 
-static unsigned long acpi_sleep_enabled = 0x00;	// acpi sleep functions enabled mask
+static unsigned long acpi_sleep_enabled = 0x00;	// acpi sleep functions enabled tqmask
 
 
 static bool
 has_acpi_sleep(int state) 
 {
 	static int known=0;
-	static unsigned long mask=0;
+	static unsigned long tqmask=0;
 	if (known != last_seed) {
 		known = last_seed;
-		mask = 0;
+		tqmask = 0;
 
 		TQFile p("/sys/power/state");
 		TQFile f("/proc/acpi/sleep");
@@ -701,11 +701,11 @@ has_acpi_sleep(int state)
 				TQString s = *i;
 				
 				if (s.compare("standby")==0)
-				mask |= (1<<1);
+				tqmask |= (1<<1);
 				else if (s.compare("mem")==0)
-				mask |= (1<<3);
+				tqmask |= (1<<3);
 				else if (s.compare("disk")==0)
-				mask |= (1<<4);
+				tqmask |= (1<<4);
 			}
 			p.close();
 		}
@@ -719,19 +719,19 @@ has_acpi_sleep(int state)
 				if (s[0] == 'S') {
 					int c = s[1].digitValue();
 					if (c >= 0 && c <= 9)
-						mask |= 1<<c;
+						tqmask |= 1<<c;
 				}
 			}
 			f.close();
 		}
 	}
-	return((mask&acpi_sleep_enabled&(1<<state)) != 0);
+	return((tqmask&acpi_sleep_enabled&(1<<state)) != 0);
 }
 
 static bool acpi_performance_enabled = 0;
 static bool acpi_throttle_enabled = 0;
 void
-laptop_portable::acpi_set_mask(bool standby, bool suspend, bool hibernate, bool perf, bool throttle)
+laptop_portable::acpi_set_tqmask(bool standby, bool suspend, bool hibernate, bool perf, bool throttle)
 {
 	acpi_sleep_enabled = 
 			(standby ? (1<<1)|(1<<2) : 0) |
@@ -755,7 +755,7 @@ invoke_acpi_helper(const char *param, const char *param2, const char *param3)
 	proc.start(KProcess::Block);	// helper runs fast and we want to see the result
 }
 
-static unsigned long apm_sleep_enabled = 0x0c;	// apm sleep functions enabled mask
+static unsigned long apm_sleep_enabled = 0x0c;	// apm sleep functions enabled tqmask
 static bool
 has_apm_sleep(int state) 
 {
@@ -763,7 +763,7 @@ has_apm_sleep(int state)
 }
 
 void
-laptop_portable::apm_set_mask(bool standby, bool suspend)
+laptop_portable::apm_set_tqmask(bool standby, bool suspend)
 {
 	apm_sleep_enabled = 
 			(standby ? 1<<2 : 0) |
@@ -939,14 +939,14 @@ int laptop_portable::has_hibernation()
 //	to get any software they lack
 //
 
-KActiveLabel *laptop_portable::no_power_management_explanation(TQWidget *parent)
+KActiveLabel *laptop_portable::no_power_management_explanation(TQWidget *tqparent)
 {
 	if (access("/proc/acpi", F_OK) == 0) {	// probably has default kernel ACPI installed
-		KActiveLabel* explain = new KActiveLabel(i18n("Your computer seems to have a partial ACPI installation. ACPI was probably enabled, but some of the sub-options were not - you need to enable at least 'AC Adaptor' and 'Control Method Battery' and then rebuild your kernel."), parent);
+		KActiveLabel* explain = new KActiveLabel(i18n("Your computer seems to have a partial ACPI installation. ACPI was probably enabled, but some of the sub-options were not - you need to enable at least 'AC Adaptor' and 'Control Method Battery' and then rebuild your kernel."), tqparent);
 		return(explain);
 	}
 
-	KActiveLabel* explain = new KActiveLabel(i18n("Your computer doesn't have the Linux APM (Advanced Power Management) or ACPI software installed, or doesn't have the APM kernel drivers installed - check out the <a href=\"http://www.linuxdoc.org/HOWTO/Laptop-HOWTO.html\">Linux Laptop-HOWTO</a> document for information on how to install APM."), parent);
+	KActiveLabel* explain = new KActiveLabel(i18n("Your computer doesn't have the Linux APM (Advanced Power Management) or ACPI software installed, or doesn't have the APM kernel drivers installed - check out the <a href=\"http://www.linuxdoc.org/HOWTO/Laptop-HOWTO.html\">Linux Laptop-HOWTO</a> document for information on how to install APM."), tqparent);
  
 	return(explain);
 }
@@ -954,23 +954,23 @@ KActiveLabel *laptop_portable::no_power_management_explanation(TQWidget *parent)
 //
 //	explain to the user what they need to do to get suspend/resume to work from user mode
 //
-TQLabel *laptop_portable::how_to_do_suspend_resume(TQWidget *parent)
+TQLabel *laptop_portable::how_to_do_suspend_resume(TQWidget *tqparent)
 {
 	if (::has_apm()) {
                 // TODO: remove linefeed from string, can't do it right now coz we have a string freeze
  		TQLabel* note = new KRichTextLabel(i18n("\nIf you make /usr/bin/apm setuid then you will also "
 						"be able to choose 'suspend' and 'standby' in the above "
 						"dialog - check out the help button below to find out "
-						"how to do this").replace("\n", TQString::null), parent);
+						"how to do this").tqreplace("\n", TQString()), tqparent);
 		return(note);
 	}
 	if (::has_acpi()) {
                 // TODO: remove linefeed from string, can't do it right now coz we have a string freeze
- 		TQLabel* note = new KRichTextLabel(i18n("\nYou may need to enable ACPI suspend/resume in the ACPI panel").replace("\n", TQString::null), parent);
+ 		TQLabel* note = new KRichTextLabel(i18n("\nYou may need to enable ACPI suspend/resume in the ACPI panel").tqreplace("\n", TQString()), tqparent);
 		return(note);
 	}
         // TODO: remove linefeed from string, can't do it right now coz we have a string freeze
- 	TQLabel* note = new KRichTextLabel(i18n("\nYour system does not support suspend/standby").replace("\n", TQString::null), parent);
+ 	TQLabel* note = new KRichTextLabel(i18n("\nYour system does not support suspend/standby").tqreplace("\n", TQString()), tqparent);
 	return(note);
 }
 
@@ -1040,20 +1040,20 @@ void get_pcmcia_info()
 //	pcmcia support - this will be replaced by better - pcmcia support being worked on by
 //	others
 //
-TQLabel *laptop_portable::pcmcia_info(int x, TQWidget *parent)
+TQLabel *laptop_portable::pcmcia_info(int x, TQWidget *tqparent)
 {
 	if (x == 0) 
 		get_pcmcia_info();
 	if (!present) {
 		if (x == 1)
-      			return(new TQLabel(i18n("No PCMCIA controller detected"), parent));
-      		return(new TQLabel(i18n(""), parent));
+      			return(new TQLabel(i18n("No PCMCIA controller detected"), tqparent));
+      		return(new TQLabel(i18n(""), tqparent));
 	} else {
 		switch (x) {
-        	case 0: return(new TQLabel(i18n("Card 0:"), parent));
-        	case 1: return(new TQLabel(tmp0, parent));
-		case 2: return(new TQLabel(i18n("Card 1:"), parent));
-        	default:return(new TQLabel(tmp1, parent));  
+        	case 0: return(new TQLabel(i18n("Card 0:"), tqparent));
+        	case 1: return(new TQLabel(tmp0, tqparent));
+		case 2: return(new TQLabel(i18n("Card 1:"), tqparent));
+        	default:return(new TQLabel(tmp1, tqparent));  
 		}
 	}
 }
@@ -1226,7 +1226,7 @@ laptop_portable::get_battery_status(int &num_batteries, TQStringList &names, TQS
 		for(unsigned int i = 0; i < acpi_batteries.count(); ++i) {
 			acpi_battery_info& bat = acpi_batteries[i];
 			names.append(bat.name);
-			values.append(TQString("%1").arg(bat.percentage));
+			values.append(TQString("%1").tqarg(bat.percentage));
 			state.append(bat.present ? "yes" : "no");
 		}
 		return;
@@ -1330,11 +1330,11 @@ TQString laptop_portable::cpu_frequency() {
 					continue;
 				if (ll.first().stripWhiteSpace() 
 						== "cpu MHz") {
-					rc = i18n("%1 MHz (%2)").arg(ll.last().stripWhiteSpace()).arg(rc);
+					rc = i18n("%1 MHz (%2)").tqarg(ll.last().stripWhiteSpace()).tqarg(rc);
 					break;
 				} else if (ll.first().stripWhiteSpace()
 						== "clock") {
-					rc = TQString("%1 (%2)").arg(ll.last().stripWhiteSpace()).arg(rc);
+					rc = TQString("%1 (%2)").tqarg(ll.last().stripWhiteSpace()).tqarg(rc);
 					break;
 				}
 			}
@@ -1580,8 +1580,8 @@ get_acpi_list(char p, int *map, const char *dev, TQStringList &list, int &index,
 						while (!f.atEnd() && i < MAP_SIZE) {
 							TQString l;
 							f.readLine(l, 500);
-							if (l.contains("active limit", false)) {
-								TQRegExp rx(TQString("%1(\\d+)").arg(p));
+							if (l.tqcontains("active limit", false)) {
+								TQRegExp rx(TQString("%1(\\d+)").tqarg(p));
 								if (rx.search(l) >= 0) {
 									bool ok;
 									int min = rx.cap(1).toInt(&ok);
@@ -1706,7 +1706,7 @@ static int get_cpufreq_24_state(TQStringList &states, int &current, const TQStri
 		f.close();
 		cpufreq_minmax_frequency[i] = buffer;
 		unsigned int val = buffer.toUInt() / 1000;
-		states.append(i18n("%1 MHz").arg(val));
+		states.append(i18n("%1 MHz").tqarg(val));
 		if(buffer.stripWhiteSpace() == cur)
 			current = i;
 	}
@@ -1835,7 +1835,7 @@ laptop_portable::set_system_performance(TQString val)	// val = string given by g
 	int current, result;
 	if((result = get_acpi_list('P', acpi_performance_map, "/performance", performance_list, current, acpi_performance_cpu, false, acpi_performance_enable))) {
 		char tmp[20];
-		int ind = performance_list.findIndex(val);
+		int ind = performance_list.tqfindIndex(val);
 		if (ind < 0 || ind >= MAP_SIZE || current == ind)
 			return;
 		snprintf(tmp, sizeof(tmp), "%d", acpi_performance_map[ind]);
@@ -1857,7 +1857,7 @@ laptop_portable::set_system_performance(TQString val)	// val = string given by g
 				invoke_acpi_helper("--cpufreq-25", tmp.latin1(), 0);
 				return;
 			case CPUFREQ_24:
-				int target = performance_list.findIndex(val);
+				int target = performance_list.tqfindIndex(val);
 				invoke_acpi_helper("--cpufreq-24", cpufreq_cpu.latin1(), cpufreq_minmax_frequency[target].latin1());
 				return;
 		}
@@ -1871,7 +1871,7 @@ laptop_portable::set_system_throttling(TQString val)	// val = string given by ge
 {
 	if (::has_acpi()) {
 		char tmp[20];
-		int ind = throttle_list.findIndex(val);
+		int ind = throttle_list.tqfindIndex(val);
 		if (ind < 0 || ind >= MAP_SIZE)
 			return;
 		snprintf(tmp, sizeof(tmp), "%d", acpi_throttle_map[ind]);
@@ -1909,7 +1909,7 @@ acpi_check_button(const char *prefix, TQString &result)
 				while (!f.atEnd()) {
 					TQString l;
       					f.readLine(l, 500);
-					if (l.contains("state:")) {
+					if (l.tqcontains("state:")) {
 						result = name;
 						v = 1;
 						break;
@@ -2139,7 +2139,7 @@ int laptop_portable::has_hibernation()
 //	explain to the user what they need to do if has_power_management() returned 0
 //	to get any software they lack
 //
-KActiveLabel *laptop_portable::no_power_management_explanation(TQWidget *parent)
+KActiveLabel *laptop_portable::no_power_management_explanation(TQWidget *tqparent)
 {
   int fd;
   KActiveLabel *explain;
@@ -2148,22 +2148,22 @@ KActiveLabel *laptop_portable::no_power_management_explanation(TQWidget *parent)
   if (fd == -1) {
     switch (errno) {
     case ENOENT:
-      explain = new KActiveLabel(i18n("There is no /dev/apm file on this system. Please review the FreeBSD handbook on how to create a device node for the APM device driver (man 4 apm)."), parent);
+      explain = new KActiveLabel(i18n("There is no /dev/apm file on this system. Please review the FreeBSD handbook on how to create a device node for the APM device driver (man 4 apm)."), tqparent);
       break;
     case EACCES:
-      explain = new KActiveLabel(i18n("Your system has the proper device node for APM support, however you cannot access it. If you are logged in as root right now, you have a problem, otherwise contact your local sysadmin and ask for read/write access to /dev/apm."), parent);
+      explain = new KActiveLabel(i18n("Your system has the proper device node for APM support, however you cannot access it. If you are logged in as root right now, you have a problem, otherwise contact your local sysadmin and ask for read/write access to /dev/apm."), tqparent);
       break;
     case ENXIO:
-      explain = new KActiveLabel(i18n("Your kernel lacks support for Advanced Power Management."), parent);
+      explain = new KActiveLabel(i18n("Your kernel lacks support for Advanced Power Management."), tqparent);
       break;
       break;
     default:
-      explain = new KActiveLabel(i18n("There was a generic error while opening /dev/apm."), parent);
+      explain = new KActiveLabel(i18n("There was a generic error while opening /dev/apm."), tqparent);
       break;
     }
   } else {
     close(fd);
-    explain = new KActiveLabel(i18n("APM has most likely been disabled."), parent);
+    explain = new KActiveLabel(i18n("APM has most likely been disabled."), tqparent);
   }
   
   return(explain);
@@ -2172,9 +2172,9 @@ KActiveLabel *laptop_portable::no_power_management_explanation(TQWidget *parent)
 //
 //	explain to the user what they need to do to get suspend/resume to work from user mode
 //
-TQLabel *laptop_portable::how_to_do_suspend_resume(TQWidget *parent)
+TQLabel *laptop_portable::how_to_do_suspend_resume(TQWidget *tqparent)
 {
- 	TQLabel* note = new TQLabel(" ", parent);
+ 	TQLabel* note = new TQLabel(" ", tqparent);
 	return(note);
 }
 
@@ -2183,11 +2183,11 @@ TQLabel *laptop_portable::how_to_do_suspend_resume(TQWidget *parent)
 //	pcmcia support - this will be replaced by better - pcmcia support being worked on by
 //	others
 //
-TQLabel *laptop_portable::pcmcia_info(int x, TQWidget *parent)
+TQLabel *laptop_portable::pcmcia_info(int x, TQWidget *tqparent)
 {
       	if (x == 0)
-		return(new TQLabel(i18n("No PCMCIA controller detected"), parent));
-      	return(new TQLabel(i18n(""), parent));
+		return(new TQLabel(i18n("No PCMCIA controller detected"), tqparent));
+      	return(new TQLabel(i18n(""), tqparent));
 }
 //
 //	puts us into standby mode
@@ -2239,7 +2239,7 @@ void laptop_portable::invoke_hibernation()
 //ACPI specific - chances are you don't need to implement this one
 //
 void
-laptop_portable::acpi_set_mask(bool, bool, bool, bool, bool )
+laptop_portable::acpi_set_tqmask(bool, bool, bool, bool, bool )
 {
 	// INSERT HERE
 }
@@ -2258,7 +2258,7 @@ int laptop_portable::has_apm(int type)
 }
 
 void
-laptop_portable::apm_set_mask(bool , bool )
+laptop_portable::apm_set_tqmask(bool , bool )
 {
 }
 
@@ -2267,7 +2267,7 @@ laptop_portable::apm_set_mask(bool , bool )
 //	adds extra widgets to the battery panel
 //
 void
-laptop_portable::extra_config(TQWidget * /*parent*/, KConfig * /*config*/, TQVBoxLayout * /*layout*/)
+laptop_portable::extra_config(TQWidget * /*tqparent*/, KConfig * /*config*/, TQVBoxLayout * /*tqlayout*/)
 {
 	// INSERT HERE
 }
@@ -2423,7 +2423,7 @@ laptop_portable::has_software_suspend(int /*type*/)
 }
 
 void
-laptop_portable::software_suspend_set_mask(bool /*hibernate*/)
+laptop_portable::software_suspend_set_tqmask(bool /*hibernate*/)
 {
 	// software_suspend_is_preferred = hibernate;
 }
@@ -2544,7 +2544,7 @@ int laptop_portable::has_hibernation()
 //     explain to the user what they need to do if has_power_management() returned 0
 //     to get any software they lack
 //
-KActiveLabel *laptop_portable::no_power_management_explanation(TQWidget *parent)
+KActiveLabel *laptop_portable::no_power_management_explanation(TQWidget *tqparent)
 {
   int fd;
   KActiveLabel *explain;
@@ -2553,22 +2553,22 @@ KActiveLabel *laptop_portable::no_power_management_explanation(TQWidget *parent)
   if (fd == -1) {
     switch (errno) {
     case ENOENT:
-      explain = new KActiveLabel(i18n("There is no /dev/apm file on this system. Please review the NetBSD documentation on how to create a device node for the APM device driver (man 4 apm)."), parent);
+      explain = new KActiveLabel(i18n("There is no /dev/apm file on this system. Please review the NetBSD documentation on how to create a device node for the APM device driver (man 4 apm)."), tqparent);
       break;
     case EACCES:
-      explain = new KActiveLabel(i18n("Your system has the proper device node for APM support, however you cannot access it. If you have APM compiled into the kernel this should not happen."), parent);
+      explain = new KActiveLabel(i18n("Your system has the proper device node for APM support, however you cannot access it. If you have APM compiled into the kernel this should not happen."), tqparent);
       break;
     case ENXIO:
-      explain = new KActiveLabel(i18n("Your kernel lacks support for Advanced Power Management."), parent);
+      explain = new KActiveLabel(i18n("Your kernel lacks support for Advanced Power Management."), tqparent);
       break;
       break;
     default:
-      explain = new KActiveLabel(i18n("There was a generic error while opening /dev/apm."), parent);
+      explain = new KActiveLabel(i18n("There was a generic error while opening /dev/apm."), tqparent);
       break;
     }
   } else {
     close(fd);
-    explain = new KActiveLabel(i18n("APM has most likely been disabled."), parent);
+    explain = new KActiveLabel(i18n("APM has most likely been disabled."), tqparent);
   }
   
   return(explain);
@@ -2577,10 +2577,10 @@ KActiveLabel *laptop_portable::no_power_management_explanation(TQWidget *parent)
 //
 //     explain to the user what they need to do to get suspend/resume to work from user mode
 //
-TQLabel *laptop_portable::how_to_do_suspend_resume(TQWidget *parent)
+TQLabel *laptop_portable::how_to_do_suspend_resume(TQWidget *tqparent)
 {
 	// INSERT HERE
-       TQLabel* note = new TQLabel(" ", parent);
+       TQLabel* note = new TQLabel(" ", tqparent);
        return(note);
 }
 
@@ -2588,12 +2588,12 @@ TQLabel *laptop_portable::how_to_do_suspend_resume(TQWidget *parent)
 //     pcmcia support - this will be replaced by better - pcmcia support being worked on by
 //     others
 //
-TQLabel *laptop_portable::pcmcia_info(int x, TQWidget *parent)
+TQLabel *laptop_portable::pcmcia_info(int x, TQWidget *tqparent)
 {
 	// INSERT HERE
        if (x == 0)
-               return(new TQLabel(i18n("No PCMCIA controller detected"), parent));
-       return(new TQLabel(i18n(""), parent));
+               return(new TQLabel(i18n("No PCMCIA controller detected"), tqparent));
+       return(new TQLabel(i18n(""), tqparent));
 }
 
 //
@@ -2636,7 +2636,7 @@ void laptop_portable::invoke_hibernation()
 //ACPI specific - chances are you don't need to implement this one
 //
 void
-laptop_portable::acpi_set_mask(bool, bool, bool, bool, bool )
+laptop_portable::acpi_set_tqmask(bool, bool, bool, bool, bool )
 {
 	// INSERT HERE
 }
@@ -2655,7 +2655,7 @@ int laptop_portable::has_apm(int type)
 }
 
 void
-laptop_portable::apm_set_mask(bool , bool )
+laptop_portable::apm_set_tqmask(bool , bool )
 {
 }
 
@@ -2861,9 +2861,9 @@ int laptop_portable::has_hibernation()
 //	explain to the user what they need to do if has_power_management() returned 0
 //	to get any software they lack
 //
-KActiveLabel *laptop_portable::no_power_management_explanation(TQWidget *parent)
+KActiveLabel *laptop_portable::no_power_management_explanation(TQWidget *tqparent)
 {
-	KActiveLabel* explain = new KActiveLabel(i18n("Your computer or operating system is not supported by the current version of the\nKDE laptop control panels. If you want help porting these panels to work with it\nplease contact paul@taniwha.com."), parent);
+	KActiveLabel* explain = new KActiveLabel(i18n("Your computer or operating system is not supported by the current version of the\nKDE laptop control panels. If you want help porting these panels to work with it\nplease contact paul@taniwha.com."), tqparent);
 	// INSERT HERE
 	return(explain);
 }
@@ -2871,9 +2871,9 @@ KActiveLabel *laptop_portable::no_power_management_explanation(TQWidget *parent)
 //
 //	explain to the user what they need to do to get suspend/resume to work from user mode
 //
-TQLabel *laptop_portable::how_to_do_suspend_resume(TQWidget *parent)
+TQLabel *laptop_portable::how_to_do_suspend_resume(TQWidget *tqparent)
 {
- 	TQLabel* note = new TQLabel(" ", parent);
+ 	TQLabel* note = new TQLabel(" ", tqparent);
 	// INSERT HERE
 	return(note);
 }
@@ -2883,12 +2883,12 @@ TQLabel *laptop_portable::how_to_do_suspend_resume(TQWidget *parent)
 //	pcmcia support - this will be replaced by better - pcmcia support being worked on by
 //	others
 //
-TQLabel *laptop_portable::pcmcia_info(int x, TQWidget *parent)
+TQLabel *laptop_portable::pcmcia_info(int x, TQWidget *tqparent)
 {
 	// INSERT HERE
       	if (x == 0)
-		return(new TQLabel(i18n("No PCMCIA controller detected"), parent));
-      	return(new TQLabel(i18n(""), parent));
+		return(new TQLabel(i18n("No PCMCIA controller detected"), tqparent));
+      	return(new TQLabel(i18n(""), tqparent));
 }
 //
 //	puts us into standby mode
@@ -2917,7 +2917,7 @@ void laptop_portable::invoke_hibernation()
 //ACPI specific - chances are you don't need to implement this one
 //
 void
-laptop_portable::acpi_set_mask(bool, bool, bool, bool, bool )
+laptop_portable::acpi_set_tqmask(bool, bool, bool, bool, bool )
 {
 	// INSERT HERE
 }
@@ -2929,7 +2929,7 @@ int laptop_portable::has_acpi(int)
 }
 
 void
-laptop_portable::apm_set_mask(bool, bool)
+laptop_portable::apm_set_tqmask(bool, bool)
 {
 	// INSERT HERE
 }
@@ -2945,7 +2945,7 @@ int laptop_portable::has_apm(int)
 //	adds extra widgets to the battery panel
 //
 void
-laptop_portable::extra_config(TQWidget *parent, KConfig *config, TQVBoxLayout *layout)
+laptop_portable::extra_config(TQWidget *tqparent, KConfig *config, TQVBoxLayout *tqlayout)
 {
 	// INSERT HERE
 }
@@ -3080,7 +3080,7 @@ laptop_portable::has_software_suspend(int type)
 }
 
 void
-laptop_portable::software_suspend_set_mask(bool hibernate)
+laptop_portable::software_suspend_set_tqmask(bool hibernate)
 {
 	// software_suspend_is_preferred = hibernate;
 }

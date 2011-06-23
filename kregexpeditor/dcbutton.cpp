@@ -15,7 +15,7 @@
  *  the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  *  Boston, MA 02110-1301, USA.
  **/
-#ifdef QT_ONLY
+#ifdef TQT_ONLY
   #include "compat.h"
 #else
   #include "dcbutton.moc"
@@ -23,8 +23,8 @@
 
 #include "dcbutton.h"
 
-DoubleClickButton::DoubleClickButton( TQPixmap pixmap, TQWidget* parent, const char* name )
-  : TQToolButton( parent, name ? name : "DoubleClickButton" )
+DoubleClickButton::DoubleClickButton( TQPixmap pixmap, TQWidget* tqparent, const char* name )
+  : TQToolButton( tqparent, name ? name : "DoubleClickButton" )
 {
   setPixmap( pixmap );
 }

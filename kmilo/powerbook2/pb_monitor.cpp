@@ -49,9 +49,9 @@ const TQString tpmodes[] = { I18N_NOOP("No Tap"), I18N_NOOP("Tap"), I18N_NOOP("D
 
 namespace KMilo {
 
-PowerBookMonitor::PowerBookMonitor(TQObject *parent, const char *name,
+PowerBookMonitor::PowerBookMonitor(TQObject *tqparent, const char *name,
                                    const TQStringList& args)
-	: Monitor(parent, name, args),
+	: Monitor(tqparent, name, args),
 		m_progress( 0 )
 {
   	init_libpbb();
@@ -79,7 +79,7 @@ Monitor::DisplayType PowerBookMonitor::poll()
 	Monitor::DisplayType rc = None;
 	// Drain the queue, send the last message
 	struct tagitem* tag = readMessage();
-	m_message = TQString::null;
+	m_message = TQString();
 	while ( tag && tag->tag != TAG_END ) {
 		switch ( tag->tag ) {
 		case TAG_VOLUME:
@@ -98,7 +98,7 @@ Monitor::DisplayType PowerBookMonitor::poll()
 			{
 				rc = Monitor::Tap;
 				TQString marg =  tpmodes[ tag->data & 3 ];
-				m_message = i18n( "Operating mode set to: %1." ).arg( marg );
+				m_message = i18n( "Operating mode set to: %1." ).tqarg( marg );
 			}
 			break;
 		default:

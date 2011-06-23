@@ -25,9 +25,10 @@
 #include <tqdragobject.h>
 #include <tqstring.h>
 
-class CHexDrag : public QDragObject
+class CHexDrag : public TQDragObject
 {
   Q_OBJECT
+  TQ_OBJECT
 
   public:
     CHexDrag( const TQByteArray &data, TQWidget *dragSource = 0, 
@@ -36,7 +37,7 @@ class CHexDrag : public QDragObject
 
     void setData( const TQByteArray &data );
     const char* format ( int i ) const; 
-    TQByteArray encodedData( const char *fmt ) const;
+    TQByteArray tqencodedData( const char *fmt ) const;
 
 
     static bool canDecode( const TQMimeSource *e );  

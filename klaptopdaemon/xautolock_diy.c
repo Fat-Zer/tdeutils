@@ -95,24 +95,24 @@ static void
 selectEvents (Window window, Bool substructureOnly)
 {
   Window            root;              /* root window of the window */
-  Window            parent;            /* parent of the window      */
-  Window*           children;          /* children of the window    */
-  unsigned          nofChildren = 0;   /* number of children        */
+  Window            tqparent;            /* tqparent of the window      */
+  Window*           tqchildren;          /* tqchildren of the window    */
+  unsigned          nofChildren = 0;   /* number of tqchildren        */
   unsigned          i;                 /* loop counter              */
   XWindowAttributes attribs;           /* attributes of the window  */
 
   if( xautolock_ignoreWindow( window ))
       return;
  /*
-  *  Start by querying the server about the root and parent windows.
+  *  Start by querying the server about the root and tqparent windows.
   */
-  if (!XQueryTree (queue.display, window, &root, &parent,
-                   &children, &nofChildren))
+  if (!XQueryTree (queue.display, window, &root, &tqparent,
+                   &tqchildren, &nofChildren))
   {
     return;
   }
 
-  if (nofChildren) (void) XFree ((char*) children);
+  if (nofChildren) (void) XFree ((char*) tqchildren);
 
  /*
   *  Build the appropriate event mask. The basic idea is that we don't
@@ -132,7 +132,7 @@ selectEvents (Window window, Bool substructureOnly)
   }
   else
   {
-    if (parent == None) /* the *real* rootwindow */
+    if (tqparent == None) /* the *real* rootwindow */
     {
       attribs.all_event_masks = 
       attribs.do_not_propagate_mask = KeyPressMask;
@@ -168,7 +168,7 @@ selectEvents (Window window, Bool substructureOnly)
   }
 
  /*
-  *  Now ask for the list of children again, since it might have changed
+  *  Now ask for the list of tqchildren again, since it might have changed
   *  in between the last time and us selecting SubstructureNotifyMask.
   *
   *  There is a (very small) chance that we might process a subtree twice:
@@ -178,21 +178,21 @@ selectEvents (Window window, Bool substructureOnly)
   *  XGrabServer(), but that'd be an impolite thing to do, and since it
   *  isn't required...
   */
-  if (!XQueryTree (queue.display, window, &root, &parent,
-                   &children, &nofChildren))
+  if (!XQueryTree (queue.display, window, &root, &tqparent,
+                   &tqchildren, &nofChildren))
   {
     return;
   }
 
  /*
-  *  Now do the same thing for all children.
+  *  Now do the same thing for all tqchildren.
   */
   for (i = 0; i < nofChildren; ++i)
   {
-    selectEvents (children[i], substructureOnly);
+    selectEvents (tqchildren[i], substructureOnly);
   }
 
-  if (nofChildren) (void) XFree ((char*) children);
+  if (nofChildren) (void) XFree ((char*) tqchildren);
 }
 
 #if 0

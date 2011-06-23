@@ -8,7 +8,7 @@
          http://www.kde.org
          http://www.hackerbuero.org $
    $ License: LGPL with the following explicit clarification:
-         This code may be linked against any version of the Qt toolkit
+         This code may be linked against any version of the TQt toolkit
          from Troll Tech, Norway. $
 
    $Id$
@@ -53,12 +53,13 @@ class KMiloKVaio;
  * @author Mirko Boehm <mirko@hackerbuero.org>
  * @version 0.2
  */
-class KVaio : public QObject
+class KVaio : public TQObject
 {
     Q_OBJECT
+  TQ_OBJECT
 public:
-//    KVaio(TQObject *parent = 0, const char *name =0);
-    KVaio(KMiloKVaio *parent = 0, const char *name =0);
+//    KVaio(TQObject *tqparent = 0, const char *name =0);
+    KVaio(KMiloKVaio *tqparent = 0, const char *name =0);
 
     virtual ~KVaio();
     const KVaioDriverInterface *driver();
@@ -73,7 +74,7 @@ protected:
     bool isKMiloDAvailable();
     bool showTextMsg(const TQString& msg);
     bool showProgressMsg(const TQString& msg, int progress);
-    bool showBatteryStatus ( bool force = false);
+    bool showBatterytqStatus ( bool force = false);
 protected slots:
     void slotVaioEvent(int);
     void slotTimeout();
@@ -90,7 +91,7 @@ private:
     bool retrieveVolume();
     void displayVolume();
 
-    KMiloKVaio *myparent;
+    KMiloKVaio *mytqparent;
 
     DCOPRef *kmixClient, *kmixWindow;
 
@@ -105,7 +106,7 @@ private:
     int  m_BrightnessStep;
 
     bool mReportUnknownEvents;
-    bool mReportPowerStatus;
+    bool mReportPowertqStatus;
     bool mShowPowerStatusOnBackButton;
     TQTimer *mTimer;
 };

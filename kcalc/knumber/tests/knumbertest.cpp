@@ -32,13 +32,13 @@ void checkResult(TQString const &string, KNumber const & result,
 {
   std::cout << "Testing result of: " << string.ascii() <<
     " should give " << desired_string.ascii() << " and gives " <<
-    result.toQString(8).ascii() << "....\n";
+    result.toTQString(8).ascii() << "....\n";
   std::cout << "The type of the result should be " <<
     numtypeToString(desired).ascii() << " and gives " <<
     numtypeToString(result.type()).ascii() << "....  ";
 
   if (result.type() == desired  &&
-      result.toQString(8) == desired_string) {
+      result.toTQString(8) == desired_string) {
     std::cout << "OK\n";
     return;
   }

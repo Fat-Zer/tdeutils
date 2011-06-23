@@ -35,9 +35,10 @@ class TQSpinBox;
 class CCharTableDialog : public KDialogBase
 {
   Q_OBJECT
+  TQ_OBJECT
   
   public:
-    CCharTableDialog( TQWidget *parent=0, const char *name=0,bool modal=false );
+    CCharTableDialog( TQWidget *tqparent=0, const char *name=0,bool modal=false );
     ~CCharTableDialog( void );
 
   signals:

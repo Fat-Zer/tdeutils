@@ -81,31 +81,32 @@ class KHEXEDIT_EXPORT KHexEdit : public KColumnsView
   friend class KCharEditor;
 
   Q_OBJECT
+  TQ_OBJECT
   Q_ENUMS( KResizeStyle KCoding )
-  Q_PROPERTY( bool OverwriteMode READ isOverwriteMode WRITE setOverwriteMode )
-  Q_PROPERTY( bool OverwriteOnly READ isOverwriteOnly WRITE setOverwriteOnly )
-  Q_PROPERTY( bool Modified READ isModified WRITE setModified DESIGNABLE false )
-  Q_PROPERTY( bool ReadOnly READ isReadOnly WRITE setReadOnly )
+  TQ_PROPERTY( bool OverwriteMode READ isOverwriteMode WRITE setOverwriteMode )
+  TQ_PROPERTY( bool OverwriteOnly READ isOverwriteOnly WRITE setOverwriteOnly )
+  TQ_PROPERTY( bool Modified READ isModified WRITE setModified DESIGNABLE false )
+  TQ_PROPERTY( bool ReadOnly READ isReadOnly WRITE setReadOnly )
 
-  Q_PROPERTY( int NoOfBytesPerLine READ noOfBytesPerLine WRITE setNoOfBytesPerLine )
-  Q_PROPERTY( bool TabChangesFocus READ tabChangesFocus WRITE setTabChangesFocus )
+  TQ_PROPERTY( int NoOfBytesPerLine READ noOfBytesPerLine WRITE setNoOfBytesPerLine )
+  TQ_PROPERTY( bool TabChangesFocus READ tabChangesFocus WRITE setTabChangesFocus )
 
-  //Q_PROPERTY( bool hasSelectedData READ hasSelectedData )
-  //Q_PROPERTY( TQByteArray SelectedData READ selectedData )
-  Q_PROPERTY( KResizeStyle ResizeStyle READ resizeStyle WRITE setResizeStyle )
-  Q_PROPERTY( int StartOffset READ startOffset WRITE setStartOffset )
-  Q_PROPERTY( int FirstLineOffset READ firstLineOffset WRITE setFirstLineOffset )
+  //TQ_PROPERTY( bool hasSelectedData READ hasSelectedData )
+  //TQ_PROPERTY( TQByteArray SelectedData READ selectedData )
+  TQ_PROPERTY( KResizeStyle ResizeStyle READ resizeStyle WRITE setResizeStyle )
+  TQ_PROPERTY( int StartOffset READ startOffset WRITE setStartOffset )
+  TQ_PROPERTY( int FirstLineOffset READ firstLineOffset WRITE setFirstLineOffset )
   //_PROPERTY( int undoDepth READ undoDepth WRITE setUndoDepth )
   //_PROPERTY( bool undoRedoEnabled READ isUndoRedoEnabled WRITE setUndoRedoEnabled )
   // value column
-  Q_PROPERTY( KCoding Coding READ coding WRITE setCoding )
-  Q_PROPERTY( int ByteSpacingWidth READ byteSpacingWidth WRITE setByteSpacingWidth )
-  Q_PROPERTY( int NoOfGroupedBytes READ noOfGroupedBytes WRITE setNoOfGroupedBytes )
-  Q_PROPERTY( int GroupSpacingWidth READ groupSpacingWidth WRITE setGroupSpacingWidth )
-  Q_PROPERTY( int BinaryGapWidth READ binaryGapWidth WRITE setBinaryGapWidth )
+  TQ_PROPERTY( KCoding Coding READ coding WRITE setCoding )
+  TQ_PROPERTY( int ByteSpacingWidth READ byteSpacingWidth WRITE setByteSpacingWidth )
+  TQ_PROPERTY( int NoOfGroupedBytes READ noOfGroupedBytes WRITE setNoOfGroupedBytes )
+  TQ_PROPERTY( int GroupSpacingWidth READ groupSpacingWidth WRITE setGroupSpacingWidth )
+  TQ_PROPERTY( int BinaryGapWidth READ binaryGapWidth WRITE setBinaryGapWidth )
   // char column
-  Q_PROPERTY( bool ShowUnprintable READ showUnprintable WRITE setShowUnprintable )
-  Q_PROPERTY( TQChar SubstituteChar READ substituteChar WRITE setSubstituteChar )
+  TQ_PROPERTY( bool ShowUnprintable READ showUnprintable WRITE setShowUnprintable )
+  TQ_PROPERTY( TQChar SubstituteChar READ substituteChar WRITE setSubstituteChar )
 
   public:
     enum KResizeStyle { NoResize=0, LockGrouping=1, FullSizeUsage=2, MaxResizeStyleId=0xFF };
@@ -129,8 +130,8 @@ class KHEXEDIT_EXPORT KHexEdit : public KColumnsView
 //    void focusOutEvent( TQFocusEvent *FocusEvent );
     virtual bool eventFilter( TQObject *O, TQEvent *E );
 
-    virtual TQSize sizeHint() const;
-    virtual TQSize minimumSizeHint() const;
+    virtual TQSize tqsizeHint() const;
+    virtual TQSize tqminimumSizeHint() const;
 
 
   public: // value access
@@ -215,7 +216,7 @@ class KHEXEDIT_EXPORT KHexEdit : public KColumnsView
     void placeCursor( const TQPoint &Point );
     /***/
     void setCursorColumn( KBufferColumnId );
-//    void repaintByte( int row, int column, bool Erase = true );
+//    void tqrepaintByte( int row, int column, bool Erase = true );
 //    void updateByte( int row, int column );
 //    void ensureByteVisible( int row, int column );
 
@@ -396,8 +397,8 @@ class KHEXEDIT_EXPORT KHexEdit : public KColumnsView
     /** handles screen update in case of a change to any of the width sizes
       */
     void updateViewByWidth();
-    /** repaints all the parts that are signed as changed */
-    void repaintChanged();
+    /** tqrepaints all the parts that are signed as changed */
+    void tqrepaintChanged();
 
   protected: // drawing related operations
     /** recreates the cursor pixmaps and paints active and inactive cursors if doable */
@@ -424,7 +425,7 @@ class KHEXEDIT_EXPORT KHexEdit : public KColumnsView
   protected:
     /** recalcs all dependant values with the actual NoOfBytesPerLine  */
     void adjustToLayoutNoOfBytesPerLine();
-    /** recalcs a layout due to the resize style that fits into the view size
+    /** recalcs a tqlayout due to the resize style that fits into the view size
       * and updates the dependant values
       */
     void adjustLayoutToSize();
@@ -451,7 +452,7 @@ class KHEXEDIT_EXPORT KHexEdit : public KColumnsView
     /** Buffer with the data */
     KDataBuffer *DataBuffer;
 
-    /** holds the logical layout */
+    /** holds the logical tqlayout */
     KBufferLayout *BufferLayout;
     /** */
     KBufferCursor *BufferCursor;
@@ -506,7 +507,7 @@ class KHEXEDIT_EXPORT KHexEdit : public KColumnsView
     /** point at which the current dragging started */
     TQPoint DragStartPoint;
     /** */
-    QClipboard::Mode ClipboardMode;
+    TQClipboard::Mode ClipboardMode;
     /** font size as set by user (used for zooming) */
     int DefaultFontSize;
 

@@ -15,7 +15,7 @@
  *  the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  *  Boston, MA 02110-1301, USA.
  **/
-#ifdef QT_ONLY
+#ifdef TQT_ONLY
   #include "compat.h"
 #else
   #include <kmessagebox.h>
@@ -46,35 +46,35 @@ bool WidgetFactory::isContainer( RegExpType tp )
   return ( tp == REPEAT || tp == ALTN || tp == COMPOUND );
 }
 
-RegExpWidget* WidgetFactory::createWidget( RegExpEditorWindow* win, TQWidget* parent,
+RegExpWidget* WidgetFactory::createWidget( RegExpEditorWindow* win, TQWidget* tqparent,
                                            RegExpType type )
 {
   RegExpWidget* widget = 0;
 
   switch (type) {
   case TEXT:
-    return new TextWidget( win, parent ); break;
+    return new TextWidget( win, tqparent ); break;
   case ALTN:
-    return  new AltnWidget( win, parent ); break;
+    return  new AltnWidget( win, tqparent ); break;
   case DOT:
-    return  new AnyCharWidget( win, parent ); break;
+    return  new AnyCharWidget( win, tqparent ); break;
   case BEGLINE:
-    return new BegLineWidget( win, parent ); break;
+    return new BegLineWidget( win, tqparent ); break;
   case ENDLINE:
-    return new EndLineWidget( win, parent ); break;
+    return new EndLineWidget( win, tqparent ); break;
   case WORDBOUNDARY:
-    return new WordBoundaryWidget( win, parent ); break;
+    return new WordBoundaryWidget( win, tqparent ); break;
   case NONWORDBOUNDARY:
-    return new NonWordBoundaryWidget( win, parent ); break;
+    return new NonWordBoundaryWidget( win, tqparent ); break;
   case POSLOOKAHEAD:
   case NEGLOOKAHEAD:
-    return new LookAheadWidget( win, type, parent ); break;
+    return new LookAheadWidget( win, type, tqparent ); break;
   case REPEAT:
-    widget = new RepeatWidget( win, parent ); break;
+    widget = new RepeatWidget( win, tqparent ); break;
   case CHARSET:
-    widget = new CharactersWidget( win, parent ); break;
+    widget = new CharactersWidget( win, tqparent ); break;
   case COMPOUND:
-    widget = new CompoundWidget( win, parent ); break;
+    widget = new CompoundWidget( win, tqparent ); break;
   default:
     qFatal("It should not be possible to get here!");
     return 0;
@@ -88,43 +88,43 @@ RegExpWidget* WidgetFactory::createWidget( RegExpEditorWindow* win, TQWidget* pa
 }
 
 RegExpWidget* WidgetFactory::createWidget( RegExp* regexp, RegExpEditorWindow* editorWindow,
-                                           TQWidget* parent )
+                                           TQWidget* tqparent )
 {
   if ( regexp == 0 ) {
     qFatal("%s:%d Regexp is 0", __FILE__, __LINE__ );
   }
   else if ( TextRegExp* reg = dynamic_cast<TextRegExp*>( regexp ) )
-    return new TextWidget( reg, editorWindow, parent );
+    return new TextWidget( reg, editorWindow, tqparent );
   else if ( TextRangeRegExp* reg = dynamic_cast<TextRangeRegExp*>( regexp ) )
-    return new CharactersWidget( reg, editorWindow, parent );
+    return new CharactersWidget( reg, editorWindow, tqparent );
   else if ( RepeatRegExp* reg = dynamic_cast<RepeatRegExp*>( regexp ) )
-    return new RepeatWidget( reg, editorWindow, parent );
+    return new RepeatWidget( reg, editorWindow, tqparent );
   else if ( LookAheadRegExp* reg = dynamic_cast<LookAheadRegExp*>( regexp ) ) {
     if ( reg->lookAheadType() == LookAheadRegExp::POSITIVE )
-      return new LookAheadWidget( reg, editorWindow, POSLOOKAHEAD, parent );
+      return new LookAheadWidget( reg, editorWindow, POSLOOKAHEAD, tqparent );
     else
-      return new LookAheadWidget( reg, editorWindow, NEGLOOKAHEAD, parent );
+      return new LookAheadWidget( reg, editorWindow, NEGLOOKAHEAD, tqparent );
   }
   else if ( ConcRegExp* reg = dynamic_cast<ConcRegExp*>( regexp ) )
-    return new ConcWidget( reg, editorWindow, parent );
+    return new ConcWidget( reg, editorWindow, tqparent );
   else if ( AltnRegExp* reg = dynamic_cast<AltnRegExp*>( regexp ) )
-    return new AltnWidget( reg, editorWindow, parent );
+    return new AltnWidget( reg, editorWindow, tqparent );
   else if ( PositionRegExp* reg = dynamic_cast<PositionRegExp*>( regexp ) ) {
     switch ( reg->position() ) {
     case PositionRegExp::BEGLINE:
-      return new BegLineWidget( editorWindow, parent );
+      return new BegLineWidget( editorWindow, tqparent );
     case PositionRegExp::ENDLINE:
-      return new EndLineWidget( editorWindow, parent );
+      return new EndLineWidget( editorWindow, tqparent );
     case PositionRegExp::WORDBOUNDARY:
-      return new WordBoundaryWidget( editorWindow, parent );
+      return new WordBoundaryWidget( editorWindow, tqparent );
     case PositionRegExp::NONWORDBOUNDARY:
-      return new NonWordBoundaryWidget( editorWindow, parent );
+      return new NonWordBoundaryWidget( editorWindow, tqparent );
     }
   }
   else if ( dynamic_cast<DotRegExp*>( regexp ) )
-    return new AnyCharWidget( editorWindow, parent );
+    return new AnyCharWidget( editorWindow, tqparent );
   else if ( CompoundRegExp* reg = dynamic_cast<CompoundRegExp*>( regexp ) )
-    return new CompoundWidget( reg, editorWindow, parent );
+    return new CompoundWidget( reg, editorWindow, tqparent );
   else {
     qFatal("%s:%d Internal Error: Unknown RegExp type", __FILE__, __LINE__);
   }
@@ -162,7 +162,7 @@ RegExp* WidgetFactory::createRegExp( TQDomElement node, const TQString& version 
   else if ( tag == TQString::fromLocal8Bit( "Repeat" ) )
     regexp = new RepeatRegExp( false );
   else {
-    KMessageBox::sorry( 0, i18n("<p>Unknown tag while reading XML. Tag was <b>%1</b></p>").arg(tag),
+    KMessageBox::sorry( 0, i18n("<p>Unknown tag while reading XML. Tag was <b>%1</b></p>").tqarg(tag),
                         i18n("Error While Loading From XML File") ) ;
 
     return 0;
@@ -191,14 +191,14 @@ RegExp* WidgetFactory::createRegExp( TQString str )
   // Read the RegularExpression element, and extract the version.
   TQDomElement top = doc.documentElement();
   if (! (top.tagName() == TQString::fromLocal8Bit("RegularExpression")) ) {
-    KMessageBox::sorry( 0, i18n("<p>XML file did not contain a <b>%1</b> tag.</p>").arg(TQString::fromLatin1("RegularExpression")),
+    KMessageBox::sorry( 0, i18n("<p>XML file did not contain a <b>%1</b> tag.</p>").tqarg(TQString::tqfromLatin1("RegularExpression")),
                         i18n("Error While Loading From XML File") ) ;
   }
   TQString version = top.attribute( TQString::fromLocal8Bit("version"), KRegExpEditorGUI::version );
   TQDomNode child = top.firstChild();
   if ( ! child.isElement() ) {
     KMessageBox::sorry( 0, i18n("<p>Error while reading XML file. The element just below the tag "
-                                "<b>%1</b> was not an element.</p>").arg(TQString::fromLatin1("RegularExpression")),
+                                "<b>%1</b> was not an element.</p>").tqarg(TQString::tqfromLatin1("RegularExpression")),
                         i18n("Error While Loading From XML File") ) ;
   }
 

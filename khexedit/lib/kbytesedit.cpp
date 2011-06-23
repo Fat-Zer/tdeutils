@@ -129,7 +129,7 @@ void KBytesEdit::setKeepsMemory( bool KM )
 bool KBytesEdit::isAutoDelete() const { return AutoDelete; }
 
 
-void KBytesEdit::repaintRange( int i1, int i2 )
+void KBytesEdit::tqrepaintRange( int i1, int i2 )
 {
   bool ChangeCursor = !(CursorPaused) && KSection(i1,i2).includes( BufferCursor->index() );
   if( ChangeCursor )
@@ -137,7 +137,7 @@ void KBytesEdit::repaintRange( int i1, int i2 )
 
   BufferRanges->addChangedRange( i1, i2 );
 
-  repaintChanged();
+  tqrepaintChanged();
 
   if( ChangeCursor )
     unpauseCursor();

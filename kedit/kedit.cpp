@@ -84,7 +84,7 @@ TopLevel::TopLevel (TQWidget *, const char *name)
   setupEditWidget();
 
   if (!initialGeometrySet())
-    resize( TQSize(550, 400).expandedTo(minimumSizeHint()));
+    resize( TQSize(550, 400).expandedTo(tqminimumSizeHint()));
   setupGUI(ToolBar | Keys | StatusBar | Create);
   setAutoSaveSettings();
 
@@ -195,42 +195,42 @@ void TopLevel::slotSelectionChanged()
 void TopLevel::setupActions()
 {
     // setup File menu
-    KStdAction::openNew(this, TQT_SLOT(file_new()), actionCollection());
-    KStdAction::open(this, TQT_SLOT(file_open()), actionCollection());
-    recent = KStdAction::openRecent(this, TQT_SLOT(openRecent(const KURL&)),
+    KStdAction::openNew(TQT_TQOBJECT(this), TQT_SLOT(file_new()), actionCollection());
+    KStdAction::open(TQT_TQOBJECT(this), TQT_SLOT(file_open()), actionCollection());
+    recent = KStdAction::openRecent(TQT_TQOBJECT(this), TQT_SLOT(openRecent(const KURL&)),
                                           actionCollection());
-    KStdAction::save(this, TQT_SLOT(file_save()), actionCollection());
-    KStdAction::saveAs(this, TQT_SLOT(file_save_as()), actionCollection());
-    KStdAction::close(this, TQT_SLOT(file_close()), actionCollection());
-    KStdAction::print(this, TQT_SLOT(print()), actionCollection());
-    KStdAction::mail(this, TQT_SLOT(mail()), actionCollection());
-    KStdAction::quit(this, TQT_SLOT(close()), actionCollection());
+    KStdAction::save(TQT_TQOBJECT(this), TQT_SLOT(file_save()), actionCollection());
+    KStdAction::saveAs(TQT_TQOBJECT(this), TQT_SLOT(file_save_as()), actionCollection());
+    KStdAction::close(TQT_TQOBJECT(this), TQT_SLOT(file_close()), actionCollection());
+    KStdAction::print(TQT_TQOBJECT(this), TQT_SLOT(print()), actionCollection());
+    KStdAction::mail(TQT_TQOBJECT(this), TQT_SLOT(mail()), actionCollection());
+    KStdAction::quit(TQT_TQOBJECT(this), TQT_SLOT(close()), actionCollection());
 
     // setup edit menu
-    undoAction = KStdAction::undo(this, TQT_SLOT(undo()), actionCollection());
-    redoAction = KStdAction::redo(this, TQT_SLOT(redo()), actionCollection());
-    cutAction = KStdAction::cut(this, TQT_SLOT(cut()), actionCollection());
-    copyAction = KStdAction::copy(this, TQT_SLOT(copy()), actionCollection());
-    KStdAction::pasteText(this, TQT_SLOT(paste()), actionCollection());
-    KStdAction::selectAll(this, TQT_SLOT(select_all()), actionCollection());
-    KStdAction::find(this, TQT_SLOT(search()), actionCollection());
-    KStdAction::findNext(this, TQT_SLOT(search_again()), actionCollection());
-    KStdAction::replace(this, TQT_SLOT(replace()), actionCollection());
+    undoAction = KStdAction::undo(TQT_TQOBJECT(this), TQT_SLOT(undo()), actionCollection());
+    redoAction = KStdAction::redo(TQT_TQOBJECT(this), TQT_SLOT(redo()), actionCollection());
+    cutAction = KStdAction::cut(TQT_TQOBJECT(this), TQT_SLOT(cut()), actionCollection());
+    copyAction = KStdAction::copy(TQT_TQOBJECT(this), TQT_SLOT(copy()), actionCollection());
+    KStdAction::pasteText(TQT_TQOBJECT(this), TQT_SLOT(paste()), actionCollection());
+    KStdAction::selectAll(TQT_TQOBJECT(this), TQT_SLOT(select_all()), actionCollection());
+    KStdAction::find(TQT_TQOBJECT(this), TQT_SLOT(search()), actionCollection());
+    KStdAction::findNext(TQT_TQOBJECT(this), TQT_SLOT(search_again()), actionCollection());
+    KStdAction::replace(TQT_TQOBJECT(this), TQT_SLOT(tqreplace()), actionCollection());
 
-    (void)new KAction(i18n("&Insert File..."), 0, this, TQT_SLOT(file_insert()),
+    (void)new KAction(i18n("&Insert File..."), 0, TQT_TQOBJECT(this), TQT_SLOT(file_insert()),
                       actionCollection(), "insert_file");
-    (void)new KAction(i18n("In&sert Date"), 0, this, TQT_SLOT(insertDate()),
+    (void)new KAction(i18n("In&sert Date"), 0, TQT_TQOBJECT(this), TQT_SLOT(insertDate()),
                       actionCollection(), "insert_date");
-    (void)new KAction(i18n("Cl&ean Spaces"), 0, this, TQT_SLOT(clean_space()),
+    (void)new KAction(i18n("Cl&ean Spaces"), 0, TQT_TQOBJECT(this), TQT_SLOT(clean_space()),
                       actionCollection(), "clean_spaces");
 
     // setup Tools menu
-    KStdAction::spelling(this, TQT_SLOT(spellcheck()), actionCollection());
+    KStdAction::spelling(TQT_TQOBJECT(this), TQT_SLOT(spellcheck()), actionCollection());
 
     // setup Go menu
-    KStdAction::gotoLine(this, TQT_SLOT(gotoLine()), actionCollection());
+    KStdAction::gotoLine(TQT_TQOBJECT(this), TQT_SLOT(gotoLine()), actionCollection());
 
-    KStdAction::preferences(this, TQT_SLOT(showSettings()), actionCollection());
+    KStdAction::preferences(TQT_TQOBJECT(this), TQT_SLOT(showSettings()), actionCollection());
 }
 
 void TopLevel::setupStatusBar()
@@ -265,7 +265,7 @@ void TopLevel::saveProperties(KConfig* config)
   {
     TQString name = m_url.url();
     if (name.isEmpty())
-       name = TQString("kedit%1-%2").arg(getpid()).arg((long)this);
+       name = TQString("kedit%1-%2").tqarg(getpid()).tqarg((long)this);
     TQString tmplocation = kapp->tempSaveName(m_url.url());
     config->writeEntry("saved_to",tmplocation);
     saveFile(tmplocation, false, m_url.fileEncoding());
@@ -341,7 +341,7 @@ void TopLevel::insertDate(){
   int line, column;
 
   TQString string;
-  TQDate dt = TQDate::currentDate();
+  TQDate dt = TQDate::tqcurrentDate();
   string = KGlobal::locale()->formatDate(dt);
 
   eframe->getCursorPosition(&line,&column);
@@ -390,7 +390,7 @@ void TopLevel::spellcheck()
   statusBar()->changeItem(i18n("Spellcheck:  Started."), ID_GENERAL);
 
   initSpellConfig();
-  kspell = new KSpell(this, i18n("Spellcheck"), this,
+  kspell = new KSpell(this, i18n("Spellcheck"), TQT_TQOBJECT(this),
 	TQT_SLOT( spell_started(KSpell *)), kspellconfigOptions);
 
   connect (kspell, TQT_SIGNAL ( death()),
@@ -418,7 +418,7 @@ void TopLevel::spell_started( KSpell *)
 void TopLevel::spell_progress (unsigned int percent)
 {
   TQString s;
-  s = i18n("Spellcheck:  %1% complete").arg(percent);
+  s = i18n("Spellcheck:  %1% complete").tqarg(percent);
 
   statusBar()->changeItem (s, ID_GENERAL);
 }
@@ -445,11 +445,11 @@ TQString TopLevel::replaceISpell(TQString msg, int client)
 {
   switch(client)
   {
-    case KS_CLIENT_ISPELL: msg.replace("ISpell", "<b>ispell</b>"); break;
-    case KS_CLIENT_ASPELL: msg.replace("ISpell", "<b>aspell</b>"); break;
-    case KS_CLIENT_HSPELL: msg.replace("ISpell", "<b>hspell</b>"); break;
+    case KS_CLIENT_ISPELL: msg.tqreplace("ISpell", "<b>ispell</b>"); break;
+    case KS_CLIENT_ASPELL: msg.tqreplace("ISpell", "<b>aspell</b>"); break;
+    case KS_CLIENT_HSPELL: msg.tqreplace("ISpell", "<b>hspell</b>"); break;
   }
-  msg.replace("\n", "<p>");
+  msg.tqreplace("\n", "<p>");
   return "<qt>"+msg+"</qt>";
 }
 
@@ -479,7 +479,7 @@ void TopLevel::file_open( void )
     while( 1 )
   {
     KURL url = KTextFileDialog::getOpenURLwithEncoding(
-		TQString::null, TQString::null, this,
+		TQString(), TQString(), this,
 		i18n("Open File"));
     if( url.isEmpty() )
     {
@@ -549,7 +549,7 @@ void TopLevel::file_insert()
   while( 1 )
   {
     KURL url = KTextFileDialog::getOpenURLwithEncoding(
-        TQString::null, TQString::null, this,
+        TQString(), TQString(), this,
 	i18n("Insert File"), "", KStdGuiItem::insert().text());
     if( url.isEmpty() )
     {
@@ -597,7 +597,7 @@ bool TopLevel::queryClose()
   TQString msg = i18n(""
         "This document has been modified.\n"
         "Would you like to save it?" );
-  switch( KMessageBox::warningYesNoCancel( this, msg, TQString::null,
+  switch( KMessageBox::warningYesNoCancel( this, msg, TQString(),
                        KStdGuiItem::save(), KStdGuiItem::discard() ) )
   {
      case KMessageBox::Yes: // Save, then exit
@@ -618,7 +618,7 @@ bool TopLevel::queryClose()
                     msg = i18n(""
 	                "Could not save the file.\n"
 	                "Exit anyways?");
-                    switch( KMessageBox::warningContinueCancel( this, msg, TQString::null, KStdGuiItem::quit() ) )
+                    switch( KMessageBox::warningContinueCancel( this, msg, TQString(), KStdGuiItem::quit() ) )
                     {
                      case KMessageBox::Continue:
                               return true; // Exit.
@@ -660,7 +660,7 @@ void TopLevel::file_close()
   {
     TQString msg = i18n("This document has been modified.\n"
                        "Would you like to save it?" );
-    switch( KMessageBox::warningYesNoCancel( this, msg, TQString::null,
+    switch( KMessageBox::warningYesNoCancel( this, msg, TQString(),
                            KStdGuiItem::save(), KStdGuiItem::discard() ) )
     {
       case KMessageBox::Yes: // Save, then close
@@ -699,7 +699,7 @@ void TopLevel::file_save()
 
   if ( result == KEDIT_OK ){
      TQString string;
-     string = i18n("Wrote: %1").arg(m_caption);
+     string = i18n("Wrote: %1").tqarg(m_caption);
      setGeneralStatusField(string);
   }
 }
@@ -721,7 +721,7 @@ void TopLevel::file_save_as()
   while(true)
   {
      u = KTextFileDialog::getSaveURLwithEncoding(
-                 m_url.url(), TQString::null, this,
+                 m_url.url(), TQString(), this,
                  i18n("Save File As"),
                  m_url.fileEncoding());
 
@@ -732,7 +732,7 @@ void TopLevel::file_save_as()
      {
         int result = KMessageBox::warningContinueCancel( this,
            i18n( "A file named \"%1\" already exists. "
-                 "Are you sure you want to overwrite it?" ).arg( u.prettyURL() ),
+                 "Are you sure you want to overwrite it?" ).tqarg( u.prettyURL() ),
            i18n( "Overwrite File?" ),
            i18n( "Overwrite" ) );
 
@@ -748,7 +748,7 @@ void TopLevel::file_save_as()
     {
       m_url = u;
       setFileCaption();
-      TQString string = i18n("Saved as: %1").arg(m_caption);
+      TQString string = i18n("Saved as: %1").tqarg(m_caption);
       setGeneralStatusField(string);
       recent->addURL( u );
     }
@@ -762,11 +762,11 @@ void TopLevel::mail()
   // Default subject string
   //
   TQString defaultsubject = name();
-  int index = defaultsubject.findRev('/');
+  int index = defaultsubject.tqfindRev('/');
   if( index != -1)
     defaultsubject = defaultsubject.right(defaultsubject.length() - index - 1 );
 
-  kapp->invokeMailer( TQString::null, TQString::null, TQString::null,
+  kapp->invokeMailer( TQString(), TQString(), TQString(),
        defaultsubject, eframe->text() );
 }
 
@@ -788,7 +788,7 @@ void TopLevel::fancyprint(){
       y += fm.ascent();
       TQString line;
       line = eframe->textLine(i);
-      line.replace( TQRegExp("\t"), "        " );
+      line.tqreplace( TQRegExp("\t"), "        " );
       strncpy(buf,line.local8Bit(),160);
       for (int j = 0 ; j <150; j++){
 	if (!isprint(buf[j]))
@@ -818,7 +818,7 @@ void TopLevel::search(){
   statusbar_slot();
 }
 
-void TopLevel::replace(){
+void TopLevel::tqreplace(){
   eframe->replace();
   statusbar_slot();
 }
@@ -867,12 +867,12 @@ void TopLevel::setFileCaption()
      else
      {
          KURL url(m_url);
-         url.setQuery(TQString::null);
+         url.setQuery(TQString());
          m_caption = url.prettyURL();
      }
      TQString encoding = m_url.fileEncoding();
      if (!encoding.isEmpty())
-        m_caption += TQString(" (%1)").arg(encoding);
+        m_caption += TQString(" (%1)").tqarg(encoding);
   }
   setCaption(m_caption, eframe->isModified());
 }
@@ -887,8 +887,8 @@ void TopLevel::statusbar_slot(){
   TQString linenumber;
 
   linenumber = i18n("Line: %1 Col: %2")
-		     .arg(eframe->currentLine() + 1)
-		     .arg(eframe->currentColumn() +1);
+		     .tqarg(eframe->currentLine() + 1)
+		     .tqarg(eframe->currentColumn() +1);
 
   statusBar()->changeItem(linenumber,ID_LINE_COLUMN);
 }
@@ -896,8 +896,8 @@ void TopLevel::statusbar_slot(){
 void TopLevel::print()
 {
     bool aborted = false;
-    TQString headerLeft = i18n("Date: %1").arg(KGlobal::locale()->formatDate(TQDate::currentDate(),true));
-    TQString headerMid = i18n("File: %1").arg(m_caption);
+    TQString headerLeft = i18n("Date: %1").tqarg(KGlobal::locale()->formatDate(TQDate::tqcurrentDate(),true));
+    TQString headerMid = i18n("File: %1").tqarg(m_caption);
     TQString headerRight;
 
     TQFont printFont = eframe->font();
@@ -908,7 +908,7 @@ void TopLevel::print()
     TQFontMetrics headerFontMetrics(headerFont);
 
     KPrinter *printer = new KPrinter;
-    if(printer->setup(this, i18n("Print %1").arg(m_caption))) {
+    if(printer->setup(this, i18n("Print %1").tqarg(m_caption))) {
         // set up KPrinter
         printer->setFullPage(false);
         printer->setCreator("KEdit");
@@ -932,13 +932,13 @@ void TopLevel::print()
 
 
         while(true) {
-           headerRight = TQString("#%1").arg(page);
+           headerRight = TQString("#%1").tqarg(page);
            dy = headerFontMetrics.lineSpacing();
            TQRect body( 0, dy*2,  metrics.width(), metrics.height()-dy*2);
 
-           p->drawText(0, 0, metrics.width(), dy, Qt::AlignLeft, headerLeft);
-           p->drawText(0, 0, metrics.width(), dy, Qt::AlignHCenter, headerMid);
-           p->drawText(0, 0, metrics.width(), dy, Qt::AlignRight, headerRight);
+           p->drawText(0, 0, metrics.width(), dy, TQt::AlignLeft, headerLeft);
+           p->drawText(0, 0, metrics.width(), dy, TQt::AlignHCenter, headerMid);
+           p->drawText(0, 0, metrics.width(), dy, TQt::AlignRight, headerRight);
 
            TQPen pen;
            pen.setWidth(3);
@@ -1125,7 +1125,7 @@ void TopLevel::openURL( const KURL& _url, int _mode )
     if ( !_url.isValid() )
     {
         TQString string;
-        string = i18n( "Malformed URL\n%1").arg(_url.url());
+        string = i18n( "Malformed URL\n%1").tqarg(_url.url());
 
         KMessageBox::sorry(this, string);
         return;
@@ -1204,7 +1204,7 @@ void TopLevel::timer_slot(){
 
 void TopLevel::set_colors()
 {
-  TQPalette mypalette = (eframe->palette()).copy();
+  TQPalette mypalette = TQPalette((eframe->tqpalette()));
 
   TQColorGroup ncgrp( mypalette.active() );
 
@@ -1317,8 +1317,8 @@ extern "C" KDE_EXPORT int kdemain (int argc, char **argv)
 	return a.exec ();
 }
 
-SettingsDialog::SettingsDialog(TQWidget *parent, const char *name,KConfigSkeleton *config, KSpellConfig *_spellConfig)
- : KConfigDialog(parent, name, config),
+SettingsDialog::SettingsDialog(TQWidget *tqparent, const char *name,KConfigSkeleton *config, KSpellConfig *_spellConfig)
+ : KConfigDialog(tqparent, name, config),
  spellConfig(_spellConfig), spellConfigChanged(false)
 {
   // Font

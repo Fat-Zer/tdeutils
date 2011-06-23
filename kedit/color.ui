@@ -1,6 +1,6 @@
 <!DOCTYPE UI><UI version="3.2" stdsetdef="1">
 <class>Color</class>
-<widget class="QWidget">
+<widget class="TQWidget">
     <property name="name">
         <cstring>Color</cstring>
     </property>
@@ -29,7 +29,7 @@
             <property name="sizeType">
                 <enum>Expanding</enum>
             </property>
-            <property name="sizeHint">
+            <property name="tqsizeHint">
                 <size>
                     <width>41</width>
                     <height>111</height>
@@ -58,7 +58,7 @@
                 <string></string>
             </property>
         </widget>
-        <widget class="QCheckBox" row="0" column="0" rowspan="1" colspan="2">
+        <widget class="TQCheckBox" row="0" column="0" rowspan="1" colspan="2">
             <property name="name">
                 <cstring>kcfg_CustomColor</cstring>
             </property>
@@ -66,7 +66,7 @@
                 <string>Use &amp;custom colors</string>
             </property>
         </widget>
-        <widget class="QLabel" row="1" column="0">
+        <widget class="TQLabel" row="1" column="0">
             <property name="name">
                 <cstring>textLabel1</cstring>
             </property>
@@ -80,7 +80,7 @@
                 <cstring>kcfg_TextColor</cstring>
             </property>
         </widget>
-        <widget class="QLabel" row="2" column="0">
+        <widget class="TQLabel" row="2" column="0">
             <property name="name">
                 <cstring>textLabel2</cstring>
             </property>
@@ -122,7 +122,7 @@
         <slot>setEnabled(bool)</slot>
     </connection>
 </connections>
-<layoutdefaults spacing="6" margin="11"/>
+<tqlayoutdefaults spacing="6" margin="11"/>
 <includehints>
     <includehint>kcolorbutton.h</includehint>
 </includehints>

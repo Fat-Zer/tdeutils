@@ -21,12 +21,13 @@
 class EditMode : public EditModeBase
 {
 	Q_OBJECT
+  TQ_OBJECT
 
 public:
 	void slotCheckText(const TQString &newText);
 	void slotClearIcon();
 
-	EditMode(TQWidget *parent = 0, const char *name = 0, bool modal = false, WFlags fl = 0);
+	EditMode(TQWidget *tqparent = 0, const char *name = 0, bool modal = false, WFlags fl = 0);
 	~EditMode();
 };
 

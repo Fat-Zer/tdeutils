@@ -58,12 +58,12 @@ namespace KSim
    *  class Test : public TQWidget, virtual public KSim::Base
    *  {
    *    public:
-   *      Test(TQWidget *parent, const char *name) : TQWidget(parent, name)
+   *      Test(TQWidget *tqparent, const char *name) : TQWidget(tqparent, name)
    *      {
    *      }
    *      ~Test() {}
    *
-   *      void configureObject(bool repaintWidget)
+   *      void configureObject(bool tqrepaintWidget)
    *      {
    *        // Re-Create view code here
    *      }

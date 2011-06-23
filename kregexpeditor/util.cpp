@@ -21,19 +21,19 @@
 #include <kstandarddirs.h>
 TQPixmap Util::getKRegExpEditorIcon( const TQString& name )
 {
-#ifdef QT_ONLY
+#ifdef TQT_ONLY
     TQPixmap pix;
     pix.convertFromImage( qembed_findImage(name) );
     return pix;
 #else
-  return KGlobal::iconLoader()->loadIcon(locate("data", TQString::fromLatin1("kregexpeditor/pics/") +name ),
+  return KGlobal::iconLoader()->loadIcon(locate("data", TQString::tqfromLatin1("kregexpeditor/pics/") +name ),
                                          KIcon::Toolbar );
 #endif
 }
 
 TQPixmap Util::getSystemIcon( const TQString& name )
 {
-#ifdef QT_ONLY
+#ifdef TQT_ONLY
     TQPixmap pix;
     pix.convertFromImage( qembed_findImage( name ) );
     return pix;
@@ -46,7 +46,7 @@ TQPixmap Util::getSystemIcon( const TQString& name )
 
 TQIconSet Util::getSystemIconSet( const TQString& name )
 {
-#ifdef QT_ONLY
+#ifdef TQT_ONLY
     TQPixmap pix;
     pix.convertFromImage( qembed_findImage( name ) );
     return TQIconSet( pix );

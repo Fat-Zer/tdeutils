@@ -40,7 +40,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 template class TQPtrList<Task>;
 
-// Hack: create a global KWinModule without a parent. We
+// Hack: create a global KWinModule without a tqparent. We
 // can't make it a child of TaskManager because more than one
 // TaskManager might be created. We can't make it a class
 // variable without changing Task, which also uses it.
@@ -48,8 +48,8 @@ template class TQPtrList<Task>;
 // The real problem is that KWinModule should be a singleton.
 KWinModule* kwin_module = 0;
 
-TaskManager::TaskManager(TQObject *parent, const char *name)
-    : TQObject(parent, name), _active(0), _startup_info( NULL )
+TaskManager::TaskManager(TQObject *tqparent, const char *name)
+    : TQObject(tqparent, name), _active(0), _startup_info( NULL )
 {
 
     kwin_module = new KWinModule();
@@ -138,7 +138,7 @@ void TaskManager::windowAdded(WId w )
     WId transient_for = (WId) transient_for_tmp;
 
     // check if it's transient for a skiptaskbar window
-    if (_skiptaskbar_windows.contains(transient_for))
+    if (_skiptaskbar_windows.tqcontains(transient_for))
       return;
 
     // lets see if this is a transient for an existing task
@@ -328,8 +328,8 @@ bool TaskManager::isOnTop(const Task* task)
 }
 
 
-Task::Task(WId win, TaskManager * parent, const char *name) :
-  TQObject(parent, name),
+Task::Task(WId win, TaskManager * tqparent, const char *name) :
+  TQObject(tqparent, name),
   _active(false), _win(win),
   _lastWidth(0), _lastHeight(0), _lastResize(false), _lastIcon(),
   _thumbSize(0.2), _thumb(), _grab()
@@ -464,9 +464,9 @@ bool Task::isModified() const
 {
   static TQString modStr = TQString::fromUtf8("[") + i18n("modified") + TQString::fromUtf8("]");
 #ifdef KDE_3_2
-  int modStrPos = _info.visibleName().find(modStr);
+  int modStrPos = _info.visibleName().tqfind(modStr);
 #else
-  int modStrPos = _info.visibleName.find(modStr);
+  int modStrPos = _info.visibleName.tqfind(modStr);
 #endif
 
   return ( modStrPos != -1 );
@@ -492,7 +492,7 @@ TQString Task::className()
   XFree( hint.res_class );
   return nh;
     }
-    return TQString::null;
+    return TQString();
 }
 
 TQString Task::classClass()
@@ -504,7 +504,7 @@ TQString Task::classClass()
   XFree( hint.res_class );
   return ch;
     }
-    return TQString::null;
+    return TQString();
 }
 
 TQPixmap Task::icon( int width, int height, bool allowResize )
@@ -608,10 +608,10 @@ bool Task::idMatch( const TQString& id1, const TQString& id2 )
   if ( id1.isEmpty() || id2.isEmpty() )
     return false;
 
-  if ( id1.contains( id2 ) > 0 )
+  if ( id1.tqcontains( id2 ) > 0 )
     return true;
 
-  if ( id2.contains( id1 ) > 0 )
+  if ( id2.tqcontains( id1 ) > 0 )
     return true;
 
   return false;
@@ -773,12 +773,8 @@ void Task::updateThumbnail()
    // by the thumbnail generation. This makes things much smoother
    // on slower machines.
    //
-  TQWidget *rootWin = qApp->desktop();
-#ifdef KDE_3_2
+  TQWidget *rootWin = TQT_TQWIDGET(tqApp->desktop());
   TQRect geom = _info.geometry();
-#else
-  TQRect geom = _info.geometry;
-#endif
    _grab = TQPixmap::grabWindow( rootWin->winId(),
         geom.x(), geom.y(),
         geom.width(), geom.height() );
@@ -807,8 +803,8 @@ void Task::generateThumbnail()
 }
 
 Startup::Startup( const KStartupInfoId& id, const KStartupInfoData& data,
-    TQObject * parent, const char *name)
-    : TQObject(parent, name), _id( id ), _data( data )
+    TQObject * tqparent, const char *name)
+    : TQObject(tqparent, name), _id( id ), _data( data )
 {
 }
 

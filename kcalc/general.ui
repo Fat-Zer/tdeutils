@@ -1,6 +1,6 @@
 <!DOCTYPE UI><UI version="3.3" stdsetdef="1">
 <class>General</class>
-<widget class="QWidget">
+<widget class="TQWidget">
     <property name="name">
         <cstring>General</cstring>
     </property>
@@ -22,7 +22,7 @@
         <property name="margin">
             <number>0</number>
         </property>
-        <widget class="QGroupBox">
+        <widget class="TQGroupBox">
             <property name="name">
                 <cstring>groupBox1</cstring>
             </property>
@@ -33,7 +33,7 @@
                 <property name="name">
                     <cstring>unnamed</cstring>
                 </property>
-                <widget class="QCheckBox" row="1" column="0" rowspan="1" colspan="2">
+                <widget class="TQCheckBox" row="1" column="0" rowspan="1" colspan="2">
                     <property name="name">
                         <cstring>kcfg_Fixed</cstring>
                     </property>
@@ -41,7 +41,7 @@
                         <string>Set &amp;decimal precision</string>
                     </property>
                 </widget>
-                <widget class="QLabel" row="2" column="1">
+                <widget class="TQLabel" row="2" column="1">
                     <property name="name">
                         <cstring>textLabel1</cstring>
                     </property>
@@ -55,7 +55,7 @@
                         <cstring>kcfg_FixedPrecision</cstring>
                     </property>
                 </widget>
-                <widget class="QSpinBox" row="2" column="2">
+                <widget class="TQSpinBox" row="2" column="2">
                     <property name="name">
                         <cstring>kcfg_FixedPrecision</cstring>
                     </property>
@@ -73,14 +73,14 @@
                     <property name="sizeType">
                         <enum>Expanding</enum>
                     </property>
-                    <property name="sizeHint">
+                    <property name="tqsizeHint">
                         <size>
                             <width>21</width>
                             <height>20</height>
                         </size>
                     </property>
                 </spacer>
-                <widget class="QLabel" row="0" column="0" rowspan="1" colspan="2">
+                <widget class="TQLabel" row="0" column="0" rowspan="1" colspan="2">
                     <property name="name">
                         <cstring>textLabel2</cstring>
                     </property>
@@ -101,21 +101,21 @@
                     <property name="sizeType">
                         <enum>Expanding</enum>
                     </property>
-                    <property name="sizeHint">
+                    <property name="tqsizeHint">
                         <size>
                             <width>101</width>
                             <height>20</height>
                         </size>
                     </property>
                 </spacer>
-                <widget class="QSpinBox" row="0" column="2">
+                <widget class="TQSpinBox" row="0" column="2">
                     <property name="name">
                         <cstring>kcfg_Precision</cstring>
                     </property>
                 </widget>
             </grid>
         </widget>
-        <widget class="QGroupBox">
+        <widget class="TQGroupBox">
             <property name="name">
                 <cstring>groupBox2</cstring>
             </property>
@@ -126,7 +126,7 @@
                 <property name="name">
                     <cstring>unnamed</cstring>
                 </property>
-                <widget class="QCheckBox">
+                <widget class="TQCheckBox">
                     <property name="name">
                         <cstring>kcfg_Beep</cstring>
                     </property>
@@ -137,7 +137,7 @@
                         <bool>true</bool>
                     </property>
                 </widget>
-                <widget class="QCheckBox">
+                <widget class="TQCheckBox">
                     <property name="name">
                         <cstring>kcfg_CaptionResult</cstring>
                     </property>
@@ -145,7 +145,7 @@
                         <string>Show &amp;result in window title</string>
                     </property>
                 </widget>
-                <widget class="QCheckBox">
+                <widget class="TQCheckBox">
                     <property name="name">
                         <cstring>kcfg_GroupDigits</cstring>
                     </property>
@@ -165,7 +165,7 @@
             <property name="sizeType">
                 <enum>Expanding</enum>
             </property>
-            <property name="sizeHint">
+            <property name="tqsizeHint">
                 <size>
                     <width>20</width>
                     <height>31</height>
@@ -195,5 +195,5 @@
     <tabstop>kcfg_Beep</tabstop>
     <tabstop>kcfg_CaptionResult</tabstop>
 </tabstops>
-<layoutdefaults spacing="6" margin="11"/>
+<tqlayoutdefaults spacing="6" margin="11"/>
 </UI>

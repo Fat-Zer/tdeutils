@@ -28,12 +28,13 @@
 class CListView : public KListView
 {
   Q_OBJECT
+  TQ_OBJECT
 
   public:
-    CListView( TQWidget *parent=0, const char *name=0, int visibleItem=10 );
+    CListView( TQWidget *tqparent=0, const char *name=0, int visibleItem=10 );
     
     void setVisibleItem( int visibleItem, bool updateSize=true );
-    virtual TQSize sizeHint( void ) const; 
+    virtual TQSize tqsizeHint( void ) const; 
     const TQPixmap &icon( const TQString &iconName, bool drawBorder );
 
   private:

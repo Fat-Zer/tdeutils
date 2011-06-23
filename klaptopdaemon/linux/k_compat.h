@@ -124,19 +124,19 @@
 #endif
 
 #if (LINUX_VERSION_CODE < VERSION(2,1,51))
-#define INVALIDATE_INODES(r)	invalidate_inodes(r)
+#define INVALIDATE_INODES(r)	tqinvalidate_inodes(r)
 #else
 #define INVALIDATE_INODES(r) \
 		do { struct super_block *sb = get_super(r); \
-		if (sb) invalidate_inodes(sb); } while (0)
+		if (sb) tqinvalidate_inodes(sb); } while (0)
 #endif
 
 #if (LINUX_VERSION_CODE < VERSION(2,1,60))
-#define IRQ_MAP(irq, dev)	irq2dev_map[irq] = dev
+#define IRTQ_MAP(irq, dev)	irq2dev_map[irq] = dev
 #define FOPS(i,f,b,c,p)		(i,f,b,c)
 #define FPOS			(file->f_pos)
 #else
-#define IRQ_MAP(irq, dev)	while (0)
+#define IRTQ_MAP(irq, dev)	while (0)
 #define FOPS(i,f,b,c,p)		(f,b,c,p)
 #define FPOS			(*ppos)
 #endif
@@ -240,7 +240,7 @@
 #endif
 
 typedef unsigned long k_time_t;
-#define ACQUIRE_RESOURCE_LOCK do {} while (0)
+#define ACTQUIRE_RESOURCE_LOCK do {} while (0)
 #define RELEASE_RESOURCE_LOCK do {} while (0)
 
 #endif /* _LINUX_K_COMPAT_H */

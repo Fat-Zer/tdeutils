@@ -378,26 +378,26 @@ class SDisplayColor
       // choses in Control Center.
       //
       useSystemColor   = false;
-      offsetBg         = Qt::white;
-      textBg           = Qt::white;
-      secondTextBg     = Qt::white;
-      inactiveBg       = Qt::gray;
-      selectBg         = kapp->palette().active().highlight();
-      selectFg         = kapp->palette().active().highlightedText();
-      markBg           = Qt::blue;
-      markFg           = Qt::white;
-      primaryFg[0]     = Qt::black;
-      primaryFg[1]     = Qt::blue;
-      offsetFg         = Qt::red;
-      secondaryFg      = Qt::black;
-      nonPrintFg       = Qt::red;
-      gridFg           = Qt::darkCyan;
-      leftSeparatorFg  = Qt::darkGreen;
-      rightSeparatorFg = Qt::darkGreen;
-      cursorBg         = Qt::red;
-      cursorFg         = Qt::black;
-      bookmarkBg       = Qt::green;
-      bookmarkFg       = Qt::black;
+      offsetBg         = TQt::white;
+      textBg           = TQt::white;
+      secondTextBg     = TQt::white;
+      inactiveBg       = TQt::gray;
+      selectBg         = kapp->tqpalette().active().highlight();
+      selectFg         = kapp->tqpalette().active().highlightedText();
+      markBg           = TQt::blue;
+      markFg           = TQt::white;
+      primaryFg[0]     = TQt::black;
+      primaryFg[1]     = TQt::blue;
+      offsetFg         = TQt::red;
+      secondaryFg      = TQt::black;
+      nonPrintFg       = TQt::red;
+      gridFg           = TQt::darkCyan;
+      leftSeparatorFg  = TQt::darkGreen;
+      rightSeparatorFg = TQt::darkGreen;
+      cursorBg         = TQt::red;
+      cursorFg         = TQt::black;
+      bookmarkBg       = TQt::green;
+      bookmarkFg       = TQt::black;
     }
 
     bool useSystemColor;
@@ -574,7 +574,7 @@ class SDisplayState
 {
   public:
     SDisplayLine      line;
-    SDisplayLayout    layout;
+    SDisplayLayout    tqlayout;
     SDisplayCursor    cursor;
     SDisplayColor     color;
     SDisplayFont      font;

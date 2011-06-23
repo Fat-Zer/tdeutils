@@ -29,10 +29,10 @@ class TQCheckBox;
    Widget containing configuration details for @ref CompoundWidget
    @internal
 */
-class CompoundDetailWindow :public QWidget
+class CompoundDetailWindow :public TQWidget
 {
 public:
-  CompoundDetailWindow(TQWidget* parent, const char* name = 0);
+  CompoundDetailWindow(TQWidget* tqparent, const char* name = 0);
   TQString title() const;
   TQString description() const;
   bool allowReplace() const;
@@ -60,15 +60,16 @@ private:
 class CompoundWidget :public SingleContainerWidget
 {
 Q_OBJECT
+  TQ_OBJECT
 
 public:
-  CompoundWidget( RegExpEditorWindow* editorWindow, TQWidget* parent,
+  CompoundWidget( RegExpEditorWindow* editorWindow, TQWidget* tqparent,
                   const char* name = 0);
   CompoundWidget( CompoundRegExp* regexp, RegExpEditorWindow* editorWindow,
-                  TQWidget* parent, const char* name = 0);
+                  TQWidget* tqparent, const char* name = 0);
 
-  virtual bool updateSelection( bool parentSelected );
-  virtual TQSize sizeHint() const;
+  virtual bool updateSelection( bool tqparentSelected );
+  virtual TQSize tqsizeHint() const;
   virtual RegExp* regExp() const;
   virtual RegExpType type() const { return COMPOUND; }
   virtual int edit();

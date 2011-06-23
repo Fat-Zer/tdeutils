@@ -54,8 +54,8 @@ K_EXPORT_COMPONENT_FACTORY( kcm_thinkpad, KCMThinkpadModuleFactory("kcmthinkpad"
 
 #define CONFIG_FILE "kmilodrc"
 
-KCMThinkpadModule::KCMThinkpadModule(TQWidget* parent, const char* name, const TQStringList&)
-	: KCModule(KCMThinkpadModuleFactory::instance(), parent, name) {
+KCMThinkpadModule::KCMThinkpadModule(TQWidget* tqparent, const char* name, const TQStringList&)
+	: KCModule(KCMThinkpadModuleFactory::instance(), tqparent, name) {
 	KAboutData* about =
 		new KAboutData(I18N_NOOP("kcmthinkpad"),
 			       I18N_NOOP("KDE Control Module for IBM Thinkpad "
@@ -68,10 +68,10 @@ KCMThinkpadModule::KCMThinkpadModule(TQWidget* parent, const char* name, const T
 			 "jr@jriddell.org");
 	setAboutData( about );
 
-	TQVBoxLayout* layout = new TQVBoxLayout(this);
+	TQVBoxLayout* tqlayout = new TQVBoxLayout(this);
 	m_KCMThinkpadGeneral = new KCMThinkpadGeneral(this);
-	layout->addWidget( m_KCMThinkpadGeneral );
-	layout->addStretch();
+	tqlayout->addWidget( m_KCMThinkpadGeneral );
+	tqlayout->addStretch();
 
 	load();
 
@@ -116,7 +116,7 @@ KCMThinkpadModule::KCMThinkpadModule(TQWidget* parent, const char* name, const T
 							  "R30/R31 models and to use a custom volume "
 							  "change step, set the nvram device to world "
 							  "writeable: <em>chmod 666 "
-							  "/dev/nvram</em>").arg(m_nvramFile));
+							  "/dev/nvram</em>").tqarg(m_nvramFile));
 #endif
 	} else {
 		m_KCMThinkpadGeneral->tlOff->setText(i18n("Thinkpad Buttons KMilo Plugin Ready For Configuration"));
@@ -175,7 +175,7 @@ void KCMThinkpadModule::load(bool useDefaults) {
 	m_KCMThinkpadGeneral->mSpinboxVolumeStep->setValue(config.readNumEntry("volumeStep", 14));
 	m_KCMThinkpadGeneral->commandExec->setURL(config.readEntry("buttonThinkpad", KDE_BINDIR "/konsole"));
 	m_KCMThinkpadGeneral->commandExecHome->setURL(config.readEntry("buttonHome", KDE_BINDIR "/konqueror"));
-	m_KCMThinkpadGeneral->commandExecSearch->setURL(config.readEntry("buttonSearch", KDE_BINDIR "/kfind"));
+	m_KCMThinkpadGeneral->commandExecSearch->setURL(config.readEntry("buttonSearch", KDE_BINDIR "/ktqfind"));
 	m_KCMThinkpadGeneral->commandExecMail->setURL(config.readEntry("buttonMail", KDE_BINDIR "/kmail"));
 	m_KCMThinkpadGeneral->commandExecZoom->setURL(config.readEntry("buttonZoom", KDE_BINDIR "/ksnapshot"));
 	m_nvramFile = config.readEntry("nvram", "/dev/nvram");

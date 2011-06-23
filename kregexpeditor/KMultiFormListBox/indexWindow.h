@@ -38,9 +38,10 @@
 
    @internal
 **/
-class indexWindow : public QWidget{
+class indexWindow : public TQWidget{
 
 Q_OBJECT
+  TQ_OBJECT
 
 public:
   indexWindow();

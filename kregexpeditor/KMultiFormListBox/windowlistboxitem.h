@@ -26,7 +26,7 @@ class KMultiFormListBoxEntry;
 /**
    @internal
 */
-class WindowListboxItem :public QListBoxText
+class WindowListboxItem :public TQListBoxText
 {
   friend class WidgetWindow;
   friend class KMultiFormListBoxWindowed;

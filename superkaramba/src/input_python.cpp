@@ -346,9 +346,9 @@ PyObject* py_getInputFocus(PyObject *, PyObject *args)
   // FocusWidget() returns the currently focused line edit,
   // but unfortunately we need an 'Input' object here.
   //
-  TQWidget *obj = ((karamba*)widget)->focusWidget();
+  TQWidget *obj = ((karamba*)widget)->tqfocusWidget();
   
-  if(obj->isA(TQLINEEDIT_OBJECT_NAME_STRING)) // SKLineEdit is no Q_Object, but TQLineEdit can only be here as a SKLineEdit
+  if(obj->isA(TQLINEEDIT_OBJECT_NAME_STRING)) // SKLineEdit is no TQ_Object, but TQLineEdit can only be here as a SKLineEdit
     return Py_BuildValue((char*)"l", ((SKLineEdit*)obj)->getInput());
   
   return Py_BuildValue((char*)"l", 0);

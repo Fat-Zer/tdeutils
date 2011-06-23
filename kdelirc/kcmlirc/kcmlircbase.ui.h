@@ -12,7 +12,7 @@
 ** ui.h extension file, included from the uic-generated form implementation.
 **
 ** If you wish to add, delete or rename functions or slots use
-** Qt Designer which will update this file, preserving your code. Create an
+** TQt Designer which will update this file, preserving your code. Create an
 ** init() function in place of a constructor, and a destroy() function in
 ** place of a destructor.
 *****************************************************************************/
@@ -23,7 +23,7 @@ void KCMLircBase::init()
 {
 	delete theModes;
 	modeLayout->removeItem(modeButtonLayout);
-	theModes = new ModesList(dynamic_cast<TQWidget *>(modeLayout->parent()), "theModes");
+	theModes = new ModesList(TQT_TQWIDGET(modeLayout->parent()), "theModes");
 	theModes->addColumn(i18n("Remote Control"));
 	theModes->addColumn(i18n("Default"));
 	theModes->addColumn(i18n("Icon"));
@@ -32,6 +32,6 @@ void KCMLircBase::init()
 	theModes->setItemsRenameable(true);
 	modeLayout->addWidget(theModes);
 	modeLayout->addLayout(modeButtonLayout);
-	modeLayout->invalidate();
+	modeLayout->tqinvalidate();
 	modeLayout->activate();
 }

@@ -49,6 +49,7 @@ namespace KIO
 class KJotsEntryBase : public TQObject, public KListViewItem
 {
     Q_OBJECT
+  TQ_OBJECT
     public:
         KJotsEntryBase(KListView*, TQListViewItem*);
         KJotsEntryBase(KListViewItem*, TQListViewItem*);
@@ -70,10 +71,10 @@ class KJotsEntryBase : public TQObject, public KListViewItem
         void setDirty(bool d) { m_dirty = d; } //!< Toggles the dirty flag.
         virtual bool isDirty() { return m_dirty; }; //!< Accessor for dirty flag.
 
-        Q_UINT64 id() { return m_id; }
-        void setId(Q_UINT64);
+        TQ_UINT64 id() { return m_id; }
+        void setId(TQ_UINT64);
 
-        KJotsBook *parentBook() { return m_parent; }
+        KJotsBook *tqparentBook() { return m_parent; }
         void resetParent();
 
         bool isBook() const { return m_isBook; }
@@ -86,7 +87,7 @@ class KJotsEntryBase : public TQObject, public KListViewItem
         bool m_isBook; //!< used for speed and code clarity.
 
     private:
-        Q_UINT64 m_id; //!< unique ID for this entry
+        TQ_UINT64 m_id; //!< unique ID for this entry
         bool m_dirty; //!< Set when this entry has been changed.
         KJotsBook *m_parent; //!< used during drag-n-drop moving
 };
@@ -98,6 +99,7 @@ class KJotsEntryBase : public TQObject, public KListViewItem
 class KJotsBook : public KJotsEntryBase
 {
     Q_OBJECT
+  TQ_OBJECT
     public:
         KJotsBook(KListView*, TQListViewItem* after = 0);
         KJotsBook(KListViewItem*, TQListViewItem* after = 0);
@@ -141,8 +143,9 @@ class KJotsBook : public KJotsEntryBase
 class KJotsPage : public KJotsEntryBase
 {
     Q_OBJECT
+  TQ_OBJECT
     public:
-        KJotsPage(KJotsBook* parent, TQListViewItem* after = 0);
+        KJotsPage(KJotsBook* tqparent, TQListViewItem* after = 0);
         ~KJotsPage();
 
     public:

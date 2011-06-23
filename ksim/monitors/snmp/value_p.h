@@ -51,7 +51,7 @@ struct ValueImpl
     TQVariant data;
     Identifier oid;
     TQHostAddress addr;
-    Q_UINT64 ctr64;
+    TQ_UINT64 ctr64;
 };
 
 }

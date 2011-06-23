@@ -31,18 +31,19 @@ namespace Snmp
 class ChartMonitor : public KSim::Chart
 {
     Q_OBJECT
+  TQ_OBJECT
 public:
-    ChartMonitor( const MonitorConfig &config, TQWidget *parent, const char *name = 0 );
+    ChartMonitor( const MonitorConfig &config, TQWidget *tqparent, const char *name = 0 );
 
 public slots:
     void setData( const Value &data );
 
 private:
-    Q_UINT64 m_lastValue;
+    TQ_UINT64 m_lastValue;
     MonitorConfig m_config;
     bool m_firstSampleReceived;
 
-    static Q_UINT64 convertToInt( const Value &data );
+    static TQ_UINT64 convertToInt( const Value &data );
 };
 
 }

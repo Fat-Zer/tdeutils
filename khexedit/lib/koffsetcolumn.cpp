@@ -42,8 +42,8 @@ KOffsetColumn::~KOffsetColumn()
 
 void KOffsetColumn::paintLine( TQPainter *P, int Line )
 {
-  const TQColor &ButtonColor = View->colorGroup().button();
-  P->fillRect( 0,0,width(),LineHeight, TQBrush(ButtonColor,Qt::SolidPattern) );
+  const TQColor &ButtonColor = View->tqcolorGroup().button();
+  P->fillRect( 0,0,width(),LineHeight, TQBrush(ButtonColor,TQt::SolidPattern) );
 
   printFunction()( CodedOffset,FirstLineOffset+Delta*Line );
   P->drawText( 0, DigitBaseLine, TQString().append(CodedOffset) );
@@ -68,8 +68,8 @@ void KOffsetColumn::paintEmptyColumn( TQPainter *P, KPixelXs Xs, KPixelYs Ys )
 {
   Xs.restrictTo( XSpan );
 
-  const TQColor &ButtonColor = View->colorGroup().button();
-  P->fillRect( Xs.start(), Ys.start(), Xs.width(), Ys.width(), TQBrush(ButtonColor,Qt::SolidPattern) );
+  const TQColor &ButtonColor = View->tqcolorGroup().button();
+  P->fillRect( Xs.start(), Ys.start(), Xs.width(), Ys.width(), TQBrush(ButtonColor,TQt::SolidPattern) );
 }
 
 void KOffsetColumn::setFormat( KOffsetFormat::KFormat F )

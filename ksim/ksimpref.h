@@ -73,8 +73,9 @@ namespace KSim
   class KDE_EXPORT ConfigDialog : public KDialogBase
   {
     Q_OBJECT
+  TQ_OBJECT
     public:
-      ConfigDialog(KSim::Config *config, TQWidget *parent, const char *name = 0);
+      ConfigDialog(KSim::Config *config, TQWidget *tqparent, const char *name = 0);
       ~ConfigDialog();
 
     public slots:

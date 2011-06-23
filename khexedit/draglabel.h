@@ -29,12 +29,13 @@
 
 class KURLDrag;
 
-class CDragLabel: public QLabel
+class CDragLabel: public TQLabel
 {
   Q_OBJECT
+  TQ_OBJECT
 
   public:
-    CDragLabel( TQWidget *parent );
+    CDragLabel( TQWidget *tqparent );
     ~CDragLabel( void );
 
     void setUrl( const TQString &url );

@@ -16,7 +16,7 @@
  *  Boston, MA 02110-1301, USA.
  **/
 
-#ifdef QT_ONLY
+#ifdef TQT_ONLY
   #include "compat.h"
 #else
   #include "indexWindow.moc"
@@ -46,7 +46,7 @@ void indexWindow::lbSelected(int index)
 void indexWindow::finish(int index)
 {
   itemSelected = index;
-  qApp->exit_loop();
+  tqApp->exit_loop();
 }
 
 
@@ -71,7 +71,7 @@ int indexWindow::exec(const TQPoint & /*start*/, int /*width*/)
     // 23 Feb. 2003 11:28 -- Jesper K. Pedersen
 /*
     // calculate the height of all the elements together.
-  // I need to do it this way, as sizeHint doesn't report the correct size
+  // I need to do it this way, as tqsizeHint doesn't report the correct size
   // and itemHeight doesn't neither.
   int elm_h = lb->item(0)->height(lb) * lb->count();
   elm_h += 2*lb->frameWidth();
@@ -79,17 +79,17 @@ int indexWindow::exec(const TQPoint & /*start*/, int /*width*/)
   TQWidget *desktop = TQApplication::desktop();
   int desktop_h = desktop->height();
   int rest_h = desktop_h - start.y();
-  int below_h = QMAX(rest_h, 200);
+  int below_h = TQMAX(rest_h, 200);
 
   int start_y = start.y();
 
   if (rest_h < 200 && elm_h > 200) {
-    start_y = desktop_h-QMIN(elm_h,200);
+    start_y = desktop_h-TQMIN(elm_h,200);
   }
 
-  setGeometry(start.x(), start_y, width, QMIN(elm_h, below_h));
+  setGeometry(start.x(), start_y, width, TQMIN(elm_h, below_h));
   show();
-  qApp->enter_loop();
+  tqApp->enter_loop();
   return itemSelected;
 */
     return 0;

@@ -99,8 +99,8 @@ void NetPlugin::showAbout()
   KAboutApplication(&aboutData).exec();
 }
 
-NetView::NetView(KSim::PluginObject *parent, const char *name)
-   : KSim::PluginView(parent, name)
+NetView::NetView(KSim::PluginObject *tqparent, const char *name)
+   : KSim::PluginView(tqparent, name)
 {
 #ifdef __linux__
   m_procStream = 0L;
@@ -356,7 +356,7 @@ void NetView::updateGraph()
       if ( ( *it ).label() )
       {
         timeDisplay = ( *it ).format();
-        newPid = pid.arg( ( *it ).name() );
+        newPid = pid.tqarg( ( *it ).name() );
 
         if ( TQFile::exists( newPid ) && stat( TQFile::encodeName( newPid ).data(), &st ) == 0 )
         {
@@ -371,8 +371,8 @@ void NetView::updateGraph()
         }
 
         // Keep backwards compat for now
-        if ( timeDisplay.contains( '%' ) > 0 )
-          timeDisplay.replace( '%', "" );
+        if ( timeDisplay.tqcontains( '%' ) > 0 )
+          timeDisplay.tqreplace( '%', "" );
 
         ( *it ).label()->setText( netTime.toString( timeDisplay ) );
       }
@@ -394,16 +394,16 @@ void NetView::updateGraph()
       TQString receiveString = KGlobal::locale()->formatNumber( ( float ) receiveDiff / 1024.0, 1 );
       TQString sendString = KGlobal::locale()->formatNumber( ( float ) sendDiff / 1024.0, 1 );
 
-      ( *it ).chart()->setText( i18n( "in: %1k" ).arg( receiveString ),
-         i18n( "out: %1k" ).arg( sendString ) );
+      ( *it ).chart()->setText( i18n( "in: %1k" ).tqarg( receiveString ),
+         i18n( "out: %1k" ).tqarg( sendString ) );
     }
     else
     {
       ( *it ).setData( NetData() );
       ( *it ).chart()->setValue( 0, 0 );
 
-      ( *it ).chart()->setText( i18n( "in: %1k" ).arg( KGlobal::locale()->formatNumber( 0.0, 1 ) ),
-         i18n( "out: %1k" ).arg( KGlobal::locale()->formatNumber( 0.0, 1 ) ) );
+      ( *it ).chart()->setText( i18n( "in: %1k" ).tqarg( KGlobal::locale()->formatNumber( 0.0, 1 ) ),
+         i18n( "out: %1k" ).tqarg( KGlobal::locale()->formatNumber( 0.0, 1 ) ) );
 
       if ( ( *it ).label() )
         ( *it ).label()->setText( i18n( "offline" ) );
@@ -468,7 +468,7 @@ void NetView::netStatistics(const TQString &device, NetData &data)
   while (!m_procStream->atEnd()) {
     parser = m_procStream->readLine();
     // remove all the entries apart from the line containing 'device'
-    if (parser.find(device) != -1)
+    if (parser.tqfind(device) != -1)
       output = parser;
   }
 
@@ -480,7 +480,7 @@ void NetView::netStatistics(const TQString &device, NetData &data)
 
   // make sure our output doesn't contain "eth0:11210107" so we dont
   // end up with netList[1] actually being netList[2]
-  output.replace(TQRegExp(":"), " ");
+  output.tqreplace(TQRegExp(":"), " ");
   TQStringList netList = TQStringList::split(' ', output);
 
   data.in = netList[1].toULong();
@@ -559,7 +559,7 @@ bool NetView::isOnline(const TQString &device)
   if (!file.open(IO_ReadOnly))
     return -1;
 
-  return (TQTextStream(&file).read().find(device) != -1 ? true : false);
+  return (TQTextStream(&file).read().tqfind(device) != -1 ? true : false);
 #endif
 
 #ifdef __FreeBSD__
@@ -632,7 +632,7 @@ bool NetView::eventFilter( TQObject * o, TQEvent * e )
   Network::List::Iterator it;
   for ( it = m_networkList.begin(); it != m_networkList.end(); ++it )
   {
-    if ( o == ( *it ).chart() || o == ( *it ).label() || o == ( *it ).led() )
+    if ( TQT_BASE_OBJECT(o) == TQT_BASE_OBJECT(( *it ).chart()) || TQT_BASE_OBJECT(o) == TQT_BASE_OBJECT(( *it ).label()) || TQT_BASE_OBJECT(o) == TQT_BASE_OBJECT(( *it ).led()) )
     {
       break;
     }
@@ -642,7 +642,7 @@ bool NetView::eventFilter( TQObject * o, TQEvent * e )
 
   if ( e->type() == TQEvent::MouseButtonPress )
   {
-    if ( static_cast<TQMouseEvent *>( e )->button() == TQMouseEvent::RightButton )
+    if ( TQT_TQMOUSEEVENT( e )->button() == Qt::RightButton )
     {
       showMenu(i);
     }

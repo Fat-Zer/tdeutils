@@ -29,14 +29,15 @@ TQString i18n( const TQString& a);
 TQString i18n( const TQString& a, const TQString& b);
 #define isatty(x) 0
 
-#define KTextBrowser QTextBrowser
-#define KListBox QListBox
-#define KFileDialog QFileDialog
-#define KPushButton QPushButton
+#define KTextBrowser TQTextBrowser
+#define KListBox TQListBox
+#define KFileDialog TQFileDialog
+#define KPushButton TQPushButton
 
-class KDialogBase :public QDialog
+class KDialogBase :public TQDialog
 {
     Q_OBJECT
+  TQ_OBJECT
 
 public:
     enum ButtonCode {Ok = 1, Cancel, Help};
@@ -44,10 +45,10 @@ public:
 
     KDialogBase ( int dialogFace, const TQString &caption, int buttonMask,
                   ButtonCode defaultButton,
-                  TQWidget *parent=0, const char *name=0, bool modal=true );
+                  TQWidget *tqparent=0, const char *name=0, bool modal=true );
 
-    KDialogBase( TQWidget* parent, const char* name = 0, bool modal = true,
-                 const TQString& caption = TQString::null,
+    KDialogBase( TQWidget* tqparent, const char* name = 0, bool modal = true,
+                 const TQString& caption = TQString(),
                  int buttonMask = 0 );
 
     void init( int buttonMask, ButtonCode /*defaultButton*/, const TQString& caption );
@@ -69,16 +70,17 @@ private:
     TQVBoxLayout* _layout;
 };
 
-class KMessageBox :public QMessageBox
+class KMessageBox :public TQMessageBox
 {
     Q_OBJECT
+  TQ_OBJECT
 public:
     enum ButtonCode { Ok = 1, Cancel = 2, Yes = 3, No = 4, Continue = 5 };
-    static int  warningYesNo (TQWidget *parent, const TQString &text,
-                              const TQString &caption = TQString::null );
-    static int information( TQWidget* parent, const TQString& text, const TQString& caption = TQString::null,
-                            const TQString& /*dontShowAgainName*/ = TQString::null );
-    static int sorry( TQWidget* parent, const TQString& text, const TQString& caption = TQString::null );
+    static int  warningYesNo (TQWidget *tqparent, const TQString &text,
+                              const TQString &caption = TQString() );
+    static int information( TQWidget* tqparent, const TQString& text, const TQString& caption = TQString(),
+                            const TQString& /*dontShowAgainName*/ = TQString() );
+    static int sorry( TQWidget* tqparent, const TQString& text, const TQString& caption = TQString() );
 };
 
 #endif /* COMPAT_H */

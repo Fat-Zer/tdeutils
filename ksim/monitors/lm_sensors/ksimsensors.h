@@ -48,8 +48,9 @@ class PluginModule : public KSim::PluginObject
 class SensorsView : public KSim::PluginView, public KSimSensorsIface
 {
   Q_OBJECT
+  TQ_OBJECT
   public:
-    SensorsView(KSim::PluginObject *parent, const char *name);
+    SensorsView(KSim::PluginObject *tqparent, const char *name);
     ~SensorsView();
 
     virtual void reparseConfig();

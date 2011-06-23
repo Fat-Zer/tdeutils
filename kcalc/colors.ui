@@ -1,6 +1,6 @@
 <!DOCTYPE UI><UI version="3.2" stdsetdef="1">
 <class>Colors</class>
-<widget class="QWidget">
+<widget class="TQWidget">
     <property name="name">
         <cstring>Colors</cstring>
     </property>
@@ -19,7 +19,7 @@
         <property name="margin">
             <number>0</number>
         </property>
-        <widget class="QGroupBox">
+        <widget class="TQGroupBox">
             <property name="name">
                 <cstring>groupBox3</cstring>
             </property>
@@ -30,7 +30,7 @@
                 <property name="name">
                     <cstring>unnamed</cstring>
                 </property>
-                <widget class="QLabel" row="0" column="0">
+                <widget class="TQLabel" row="0" column="0">
                     <property name="name">
                         <cstring>textLabel3</cstring>
                     </property>
@@ -41,7 +41,7 @@
                         <cstring>kcfg_ForeColor</cstring>
                     </property>
                 </widget>
-                <widget class="QLabel" row="1" column="0">
+                <widget class="TQLabel" row="1" column="0">
                     <property name="name">
                         <cstring>textLabel4</cstring>
                     </property>
@@ -62,7 +62,7 @@
                     <property name="sizeType">
                         <enum>Expanding</enum>
                     </property>
-                    <property name="sizeHint">
+                    <property name="tqsizeHint">
                         <size>
                             <width>110</width>
                             <height>20</height>
@@ -101,7 +101,7 @@
                 </widget>
             </grid>
         </widget>
-        <widget class="QGroupBox">
+        <widget class="TQGroupBox">
             <property name="name">
                 <cstring>groupBox4</cstring>
             </property>
@@ -112,7 +112,7 @@
                 <property name="name">
                     <cstring>unnamed</cstring>
                 </property>
-                <widget class="QLabel" row="0" column="0" rowspan="1" colspan="2">
+                <widget class="TQLabel" row="0" column="0" rowspan="1" colspan="2">
                     <property name="name">
                         <cstring>textLabel5</cstring>
                     </property>
@@ -123,7 +123,7 @@
                         <cstring>kcfg_FunctionButtonsColor</cstring>
                     </property>
                 </widget>
-                <widget class="QLabel" row="2" column="0" rowspan="1" colspan="2">
+                <widget class="TQLabel" row="2" column="0" rowspan="1" colspan="2">
                     <property name="name">
                         <cstring>textLabel7</cstring>
                     </property>
@@ -134,7 +134,7 @@
                         <cstring>kcfg_HexButtonsColor</cstring>
                     </property>
                 </widget>
-                <widget class="QLabel" row="5" column="0" rowspan="1" colspan="2">
+                <widget class="TQLabel" row="5" column="0" rowspan="1" colspan="2">
                     <property name="name">
                         <cstring>textLabel10</cstring>
                     </property>
@@ -179,7 +179,7 @@
                     <property name="sizeType">
                         <enum>Expanding</enum>
                     </property>
-                    <property name="sizeHint">
+                    <property name="tqsizeHint">
                         <size>
                             <width>41</width>
                             <height>20</height>
@@ -202,7 +202,7 @@
                         <string></string>
                     </property>
                 </widget>
-                <widget class="QLabel" row="3" column="0">
+                <widget class="TQLabel" row="3" column="0">
                     <property name="name">
                         <cstring>textLabel8</cstring>
                     </property>
@@ -221,7 +221,7 @@
                         <string></string>
                     </property>
                 </widget>
-                <widget class="QLabel" row="1" column="0">
+                <widget class="TQLabel" row="1" column="0">
                     <property name="name">
                         <cstring>textLabel6</cstring>
                     </property>
@@ -232,7 +232,7 @@
                         <cstring>kcfg_StatButtonsColor</cstring>
                     </property>
                 </widget>
-                <widget class="QLabel" row="4" column="0" rowspan="1" colspan="2">
+                <widget class="TQLabel" row="4" column="0" rowspan="1" colspan="2">
                     <property name="name">
                         <cstring>textLabel9</cstring>
                     </property>
@@ -255,7 +255,7 @@
             <property name="sizeType">
                 <enum>Expanding</enum>
             </property>
-            <property name="sizeHint">
+            <property name="tqsizeHint">
                 <size>
                     <width>20</width>
                     <height>0</height>
@@ -274,5 +274,5 @@
     <tabstop>kcfg_MemoryButtonsColor</tabstop>
     <tabstop>kcfg_OperationButtonsColor</tabstop>
 </tabstops>
-<layoutdefaults spacing="6" margin="11"/>
+<tqlayoutdefaults spacing="6" margin="11"/>
 </UI>

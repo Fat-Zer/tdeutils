@@ -36,12 +36,12 @@
 //----------------------------------------------------------------------
 // MYMULTIEDIT
 //----------------------------------------------------------------------
-KJotsEdit::KJotsEdit (TQWidget* parent, const char* name)
-    : KEdit(parent, name),
+KJotsEdit::KJotsEdit (TQWidget* tqparent, const char* name)
+    : KEdit(tqparent, name),
     m_entry(0)
 {
     // no rich text until printing and other such issues are worked out
-    setTextFormat(Qt::PlainText);
+    setTextFormat(TQt::PlainText);
     setWordWrap(TQTextEdit::WidgetWidth);
     setLinkUnderline(true);
     web_menu = new KPopupMenu(this);;
@@ -55,7 +55,7 @@ KJotsEdit::~KJotsEdit()
 
 void KJotsEdit::mousePressEvent( TQMouseEvent *e )
 {
-    if(e->button() == RightButton &&
+    if(e->button() == Qt::RightButton &&
             hasSelectedText())
     {
         KURL url(selectedText());
@@ -135,7 +135,7 @@ void KJotsEdit::setEntry (KJotsPage *entry)
         m_entry = entry;
         setText(entry->body());
         removeSelection();
-        repaint();
+        tqrepaint();
         setEnabled(true);
         setFocus();
         entry->setEditor(this);

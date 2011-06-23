@@ -31,20 +31,21 @@ class RegExpWidget;
 
    @internal
 */
-class SelectableLineEdit :public QLineEdit
+class SelectableLineEdit :public TQLineEdit
 {
 Q_OBJECT
+  TQ_OBJECT
 
 public:
-  SelectableLineEdit( RegExpWidget* owner, TQWidget* parent = 0, const char* name = 0);
+  SelectableLineEdit( RegExpWidget* owner, TQWidget* tqparent = 0, const char* name = 0);
   void setSelected( bool selected );
-  virtual TQSize sizeHint() const;
+  virtual TQSize tqsizeHint() const;
 
 protected slots:
   void slotKeyPressed();
 
 signals:
-  void parentPleaseUpdate();
+  void tqparentPleaseUpdate();
 
 private:
   RegExpWidget* _owner;

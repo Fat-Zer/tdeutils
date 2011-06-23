@@ -1,6 +1,6 @@
 #Unicode Example
 
-#For Symbol Tables look at www.unicode.org/charts/
+#For Symbol Tables look at www.tqunicode.org/charts/
 
 hidden = 0
 
@@ -35,7 +35,7 @@ is used to encode the formatting commands.</p>
 <li>Hyperlinks: <a href="kfmclient openURL http://netdragon.sourceforge.net"> Superkaramba Homepage</a></li>
 <li>Links can also <a href="#trigger">trigger</a> actions in the script</li>
 <li><i>Various</i> <b>different</b> <u>caracter</u> <s>styles</s></li>
-<li><a href="kfmclient openURL http://www.unicode.org">Unicode</a>: \u03B6 \u03B3 \u03BB \u03A3 \u03A9 </li>
+<li><a href="kfmclient openURL http://www.tqunicode.org">Unicode</a>: \u03B6 \u03B3 \u03BB \u03A3 \u03A9 </li>
 <li>Simple Tables:
 <table bgcolor="darkgray" border="1" width="80%">
 <tr><th colspan="3">Header</th></tr>

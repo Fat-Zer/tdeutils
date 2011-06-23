@@ -44,9 +44,10 @@ class KFActionQueue;
 class FloppyData : public KDialog
 {
     Q_OBJECT
+  TQ_OBJECT
 
 public:
-    FloppyData(TQWidget* parent = 0, const char * name = 0);
+    FloppyData(TQWidget* tqparent = 0, const char * name = 0);
     virtual ~FloppyData();
 
     /// Need to overload normal show() in order to mangle caption
@@ -64,7 +65,7 @@ public:
     void readSettings();
     /// Map stored settings to widget status
     void setWidgets();
-    /// A kind of TQString::find()
+    /// A kind of TQString::tqfind()
     int findKeyWord(TQString &, const TQString &);
     /// Enable/disable all UI elements
     void setEnabled(bool);
@@ -74,7 +75,7 @@ public slots:
       void format();
       void reset();
 
-      void formatStatus(const TQString &,int);
+      void formattqStatus(const TQString &,int);
       
 protected slots:
 

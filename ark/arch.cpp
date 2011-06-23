@@ -118,7 +118,7 @@ void Arch::slotOpenExited( KProcess* _kp )
             return;
         }
         m_password = "";
-        emit sigOpen( this, false, TQString::null, 0 );
+        emit sigOpen( this, false, TQString(), 0 );
         delete _kp;
         _kp = m_currentProcess = 0;
         return;
@@ -140,7 +140,7 @@ void Arch::slotOpenExited( KProcess* _kp )
     emit sigOpen( this, true, m_filename,
                   Arch::Extract | Arch::Delete | Arch::Add | Arch::View );
   else
-    emit sigOpen( this, false, TQString::null, 0 );
+    emit sigOpen( this, false, TQString(), 0 );
 
   delete _kp;
   _kp = m_currentProcess = 0;
@@ -206,7 +206,7 @@ void Arch::slotExtractExited( KProcess *_kp )
 
         if ( !getLastShellOutput().isNull() )
         {
-            //getLastShellOutput() is a TQString. errorList is expecting QStringLists to show in multiple lines
+            //getLastShellOutput() is a TQString. errorList is expecting TQStringLists to show in multiple lines
             TQStringList list = TQStringList::split( "\n", getLastShellOutput() );
             KMessageBox::errorList( m_gui, msg, list );
             clearShellOutput();
@@ -297,7 +297,7 @@ void Arch::slotReceivedTOC( KProcess*, char* data, int length )
     {
       processLine( m_buffer );
     }
-    else if ( m_buffer.find( m_headerString ) == -1 )
+    else if ( m_buffer.tqfind( m_headerString.data() ) == -1 )
     {
       if ( m_header_removed && !m_finished )
       {
@@ -365,13 +365,13 @@ bool Arch::processLine( const TQCString &line )
                    : columns[ m_fixYear ];
     TQString month = ( m_repairMonth >= 0 ) ?
                    TQString( "%1" )
-                   .arg( ArkUtils::getMonth( columns[ m_repairMonth ].ascii() ) )
+                   .tqarg( ArkUtils::getMonth( columns[ m_repairMonth ].ascii() ) )
                    : columns[ m_fixMonth ];
-    TQString timestamp = TQString::fromLatin1( "%1-%2-%3 %4" )
-                        .arg( year )
-                        .arg( month )
-                        .arg( columns[ m_fixDay ] )
-                        .arg( columns[ m_fixTime ] );
+    TQString timestamp = TQString::tqfromLatin1( "%1-%2-%3 %4" )
+                        .tqarg( year )
+                        .tqarg( month )
+                        .tqarg( columns[ m_fixDay ] )
+                        .tqarg( columns[ m_fixTime ] );
 
     columns[ m_dateCol ] = timestamp;
   }
@@ -390,37 +390,37 @@ bool Arch::processLine( const TQCString &line )
 
 
 Arch *Arch::archFactory( ArchType aType,
-                         ArkWidget *parent, const TQString &filename,
+                         ArkWidget *tqparent, const TQString &filename,
                          const TQString &openAsMimeType )
 {
   switch( aType )
   {
     case TAR_FORMAT:
-      return new TarArch( parent, filename, openAsMimeType );
+      return new TarArch( tqparent, filename, openAsMimeType );
 
     case ZIP_FORMAT:
-      return new ZipArch( parent, filename );
+      return new ZipArch( tqparent, filename );
 
     case LHA_FORMAT:
-      return new LhaArch( parent, filename );
+      return new LhaArch( tqparent, filename );
 
     case COMPRESSED_FORMAT:
-      return new CompressedFile( parent, filename, openAsMimeType );
+      return new CompressedFile( tqparent, filename, openAsMimeType );
 
     case ZOO_FORMAT:
-      return new ZooArch( parent, filename );
+      return new ZooArch( tqparent, filename );
 
     case RAR_FORMAT:
-      return new RarArch( parent, filename );
+      return new RarArch( tqparent, filename );
 
     case AA_FORMAT:
-      return new ArArch( parent, filename );
+      return new ArArch( tqparent, filename );
 
     case SEVENZIP_FORMAT:
-      return new SevenZipArch( parent, filename );
+      return new SevenZipArch( tqparent, filename );
 
     case ACE_FORMAT:
-      return new AceArch( parent, filename );
+      return new AceArch( tqparent, filename );
 
     case UNKNOWN_FORMAT:
     default:

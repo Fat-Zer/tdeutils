@@ -74,6 +74,7 @@ class laptop_dock;
 class laptop_daemon: public KDEDModule
 {
 	Q_OBJECT
+//	TQ_OBJECT
 	K_DCOP
 public:
     	laptop_daemon(const TQCString& obj);
@@ -167,7 +168,7 @@ protected:
 	int	saved_brightness_val;
 	TQString saved_performance_val, saved_throttle_val;
 	TQTimer  *wake_timer;		// the timer for the above running
-	QPoint	wakepos;		// the mouse pos at the beginning of time
+	TQPoint	wakepos;		// the mouse pos at the beginning of time
 	void	WakeUpAuto();
 	TQTimer  *backoffTimer;		// backoff
 

@@ -1,7 +1,7 @@
 /*
 
     KCalc, a scientific calculator for the X window system using the
-    Qt widget libraries, available at no cost at http://www.troll.no
+    TQt widget libraries, available at no cost at http://www.troll.no
 
     Copyright (C) 1996 Bernd Johannes Wuebben
                        wuebben@math.cornell.edu

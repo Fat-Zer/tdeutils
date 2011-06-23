@@ -45,11 +45,11 @@
 #include "archiveformatinfo.h"
 #include "arkwidget.h"
 
-MainWindow::MainWindow( TQWidget * /*parent*/, const char *name )
+MainWindow::MainWindow( TQWidget * /*tqparent*/, const char *name )
 	: KParts::MainWindow(), progressDialog( 0 )
 {
     setXMLFile( "arkui.rc" );
-    m_part = KParts::ComponentFactory::createPartInstanceFromLibrary<KParts::ReadWritePart>( "libarkpart", this, name, this, "ArkPart");
+    m_part = KParts::ComponentFactory::createPartInstanceFromLibrary<KParts::ReadWritePart>( "libarkpart", this, name, TQT_TQOBJECT(this), "ArkPart");
     if (m_part )
     {
         //Since most of the functionality is still in ArkWidget:
@@ -109,24 +109,24 @@ MainWindow::~MainWindow()
 void
 MainWindow::setupActions()
 {
-    newWindowAction = new KAction(i18n("New &Window"), "window_new", KShortcut(), this,
+    newWindowAction = new KAction(i18n("New &Window"), "window_new", KShortcut(), TQT_TQOBJECT(this),
                                   TQT_SLOT(file_newWindow()), actionCollection(), "new_window");
 
-    newArchAction = KStdAction::openNew(this, TQT_SLOT(file_new()), actionCollection());
-    openAction = KStdAction::open(this, TQT_SLOT(file_open()), actionCollection());
+    newArchAction = KStdAction::openNew(TQT_TQOBJECT(this), TQT_SLOT(file_new()), actionCollection());
+    openAction = KStdAction::open(TQT_TQOBJECT(this), TQT_SLOT(file_open()), actionCollection());
 
-    reloadAction = new KAction(i18n("Re&load"), "reload", KStdAccel::shortcut( KStdAccel::Reload ), this,
+    reloadAction = new KAction(i18n("Re&load"), "reload", KStdAccel::shortcut( KStdAccel::Reload ), TQT_TQOBJECT(this),
                                TQT_SLOT(file_reload()), actionCollection(), "reload_arch");
-    closeAction = KStdAction::close(this, TQT_SLOT(file_close()), actionCollection(), "file_close");
+    closeAction = KStdAction::close(TQT_TQOBJECT(this), TQT_SLOT(file_close()), actionCollection(), "file_close");
 
-    recent = KStdAction::openRecent(this, TQT_SLOT(openURL(const KURL&)), actionCollection());
+    recent = KStdAction::openRecent(TQT_TQOBJECT(this), TQT_SLOT(openURL(const KURL&)), actionCollection());
     recent->loadEntries(kapp->config());
 
     createStandardStatusBarAction();
 
-    KStdAction::quit(this, TQT_SLOT(window_close()), actionCollection());
-    KStdAction::configureToolbars(this, TQT_SLOT(editToolbars()), actionCollection());
-    KStdAction::keyBindings(this, TQT_SLOT( slotConfigureKeyBindings()), actionCollection());
+    KStdAction::quit(TQT_TQOBJECT(this), TQT_SLOT(window_close()), actionCollection());
+    KStdAction::configureToolbars(TQT_TQOBJECT(this), TQT_SLOT(editToolbars()), actionCollection());
+    KStdAction::keyBindings(TQT_TQOBJECT(this), TQT_SLOT( slotConfigureKeyBindings()), actionCollection());
 
     openAction->setEnabled( true );
     recent->setEnabled( true );
@@ -177,7 +177,7 @@ MainWindow::file_reload()
 void
 MainWindow::editToolbars()
 {
-    saveMainWindowSettings( KGlobal::config(), TQString::fromLatin1("MainWindow") );
+    saveMainWindowSettings( KGlobal::config(), TQString::tqfromLatin1("MainWindow") );
     KEditToolbar dlg( factory(), this );
     connect(&dlg, TQT_SIGNAL( newToolbarConfig() ), this, TQT_SLOT( slotNewToolbarConfig() ));
     dlg.exec();
@@ -187,7 +187,7 @@ void
 MainWindow::slotNewToolbarConfig()
 {
     createGUI( m_part );
-    applyMainWindowSettings( KGlobal::config(), TQString::fromLatin1("MainWindow") );
+    applyMainWindowSettings( KGlobal::config(), TQString::tqfromLatin1("MainWindow") );
 }
 
 void
@@ -221,7 +221,7 @@ MainWindow::arkAlreadyOpen( const KURL & url )
         window_close();
 
         // notify the user what's going on
-        KMessageBox::information(0, i18n("The archive %1 is already open and has been raised.\nNote: if the filename does not match, it only means that one of the two is a symbolic link.").arg(url.prettyURL()));
+        KMessageBox::information(0, i18n("The archive %1 is already open and has been raised.\nNote: if the filename does not match, it only means that one of the two is a symbolic link.").tqarg(url.prettyURL()));
         return true;
     }
     return false;
@@ -262,8 +262,8 @@ MainWindow::getOpenURL( bool addOnly, const TQString & caption,
     TQString filter = ArchiveFormatInfo::self()->filter();
     if ( !suggestedName.isEmpty() )
     {
-        filter = TQString::null;
-        combo->setCurrentItem( list.findIndex( ArchiveFormatInfo::self()->descriptionForMimeType(
+        filter = TQString();
+        combo->setCurrentItem( list.tqfindIndex( ArchiveFormatInfo::self()->descriptionForMimeType(
                                  KMimeType::findByPath( suggestedName, 0, true )->name() ) ) );
     }
 
@@ -296,7 +296,7 @@ MainWindow::getOpenURL( bool addOnly, const TQString & caption,
         m_widget->setOpenAsMimeType(
             ArchiveFormatInfo::self()->mimeTypeForDescription( combo->currentText() ) );
     else
-        m_widget->setOpenAsMimeType( TQString::null );
+        m_widget->setOpenAsMimeType( TQString() );
 
     return url;
 }
@@ -446,11 +446,11 @@ void
 MainWindow::startProgressDialog( const TQString & text )
 {
     if ( !progressDialog )
-        progressDialog = new KProgressDialog( this, "progress_dialog", TQString::null, text, false );
+        progressDialog = new KProgressDialog( this, "progress_dialog", TQString(), text, false );
     else
         progressDialog->setLabel( text );
 
-//    progressDialog->setWFlags( Qt::WType_TopLevel );
+//    progressDialog->setWFlags( TQt::WType_TopLevel );
 
     progressDialog->setAllowCancel( true );
     progressDialog->setPlainCaption( i18n( "Please Wait" ) );

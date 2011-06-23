@@ -43,16 +43,17 @@ class TQToolButton;
    @author Jesper K. Pedersen <blackie@kde.org>
    @version 0.1
 **/
-class KRegExpEditorPrivate  :public QWidget
+class KRegExpEditorPrivate  :public TQWidget
 {
     Q_OBJECT
+  TQ_OBJECT
 
 public:
-    KRegExpEditorPrivate( TQWidget *parent, const char *name = 0 );
+    KRegExpEditorPrivate( TQWidget *tqparent, const char *name = 0 );
     TQString regexp();
     void setMinimal( bool );
     void setCaseSensitive( bool );
-    void setAllowNonQtSyntax( bool );
+    void setAllowNonTQtSyntax( bool );
 
 protected slots:
     void slotUpdateEditor( const TQString & );

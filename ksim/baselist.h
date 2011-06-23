@@ -52,7 +52,7 @@ namespace KSim
           return false;
 
         // Find our object and remove it from the list
-        if (m_baseList->findRef(object) >= 0)
+        if (m_baseList->tqfindRef(object) >= 0)
           return m_baseList->remove();
 
         return false;
@@ -67,7 +67,7 @@ namespace KSim
         for (; object.current(); ++object) {
           // Call processEvents() so our ui doesn't block
           if (!object.current()->isThemeConfigOnly() || themeChanged) {
-            qApp->processEvents();          
+            tqApp->processEvents();          
             object.current()->configureObject(true);
           }
         }

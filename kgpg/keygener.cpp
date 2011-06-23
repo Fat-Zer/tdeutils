@@ -34,7 +34,7 @@
 #include "keygener.h"
 
 ///////////////////////   main window
-keyGenerate::keyGenerate(TQWidget *parent, const char *name):KDialogBase( parent, name, true,i18n("Key Generation"),Apply | Ok | Cancel)
+keyGenerate::keyGenerate(TQWidget *tqparent, const char *name):KDialogBase( tqparent, name, true,i18n("Key Generation"),Apply | Ok | Cancel)
 {
         expert=false;
         setButtonApply(i18n("Expert Mode"));
@@ -64,7 +64,7 @@ keyGenerate::keyGenerate(TQWidget *parent, const char *name):KDialogBase( parent
         keyexp->insertItem(i18n("Weeks"),2);
         keyexp->insertItem(i18n("Months"),3);
         keyexp->insertItem(i18n("Years"),4);
-        keyexp->setMinimumSize(keyexp->sizeHint());
+        keyexp->setMinimumSize(keyexp->tqsizeHint());
         connect(keyexp,TQT_SIGNAL(activated(int)),this,TQT_SLOT(activateexp(int)));
 
         (void) new TQLabel(i18n("Key size:"),bgroup1);
@@ -74,17 +74,17 @@ keyGenerate::keyGenerate(TQWidget *parent, const char *name):KDialogBase( parent
         keysize->insertItem("2048");
         keysize->insertItem("4096");
         keysize->setCurrentItem("1024");
-        keysize->setMinimumSize(keysize->sizeHint());
+        keysize->setMinimumSize(keysize->tqsizeHint());
 
         (void) new TQLabel(i18n("Algorithm:"),bgroup1);
         keykind = new KComboBox(bgroup1);
         keykind->insertItem("DSA & ElGamal");
         keykind->insertItem("RSA");
-        keykind->setMinimumSize(keykind->sizeHint());
+        keykind->setMinimumSize(keykind->tqsizeHint());
 
         vbox->addWidget(bgroup1);
         page->show();
-        page->resize(page->maximumSize());
+        page->resize(page->tqmaximumSize());
         setMainWidget(page);
 }
 
@@ -99,7 +99,7 @@ void keyGenerate::slotOk()
 	{
 	if (KMessageBox::warningContinueCancel(this,i18n("You are about to create a key with no email address"))!=KMessageBox::Continue) return;
         }
-	else if ((vmail.find(" ")!=-1) || (vmail.find(".")==-1) || (vmail.find("@")==-1)) {
+	else if ((vmail.tqfind(" ")!=-1) || (vmail.tqfind(".")==-1) || (vmail.tqfind("@")==-1)) {
                 KMessageBox::sorry(this,i18n("Email address not valid"));
                 return;
         }

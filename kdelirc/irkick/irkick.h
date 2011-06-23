@@ -36,12 +36,13 @@ public:
 	KPopupMenu* contextMenu() const { return KSystemTray::contextMenu(); }
 	KActionCollection* actionCollection() { return KSystemTray::actionCollection(); }
 
-	IRKTrayIcon(TQWidget *parent = 0, const char *name = 0): KSystemTray(parent, name) {}
+	IRKTrayIcon(TQWidget *tqparent = 0, const char *name = 0): KSystemTray(tqparent, name) {}
 };
 
 class IRKick: public TQObject, public DCOPObject
 {
 	Q_OBJECT
+//	TQ_OBJECT
 	K_DCOP
 
 	TQString npApp, npModule, npMethod;

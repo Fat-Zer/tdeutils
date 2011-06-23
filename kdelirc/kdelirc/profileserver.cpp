@@ -66,7 +66,7 @@ void Profile::loadFromFile(const TQString &fileName)
 	curPAA = 0;
 
 	TQFile xmlFile(fileName);
-	TQXmlInputSource source(&xmlFile);
+	TQXmlInputSource source(TQT_TQIODEVICE(&xmlFile));
 	TQXmlSimpleReader reader;
 	reader.setContentHandler(this);
 	reader.parse(source);
@@ -84,7 +84,7 @@ const TQString &ProfileServer::getServiceName(const TQString &appId) const
 {
 	if(theProfiles[appId])
 		return theProfiles[appId]->serviceName();
-	return TQString::null;
+	return TQString();
 }
 
 const ProfileAction *ProfileServer::getAction(const TQString &appId, const TQString &objId, const TQString &prototype) const
@@ -124,7 +124,7 @@ bool Profile::startElement(const TQString &, const TQString &, const TQString &n
 		curPAA->setType(attributes.value("type"));
 	}
 	else if(name == "range" && curPAA)
-		curPAA->setRange(qMakePair(attributes.value("min").toInt(), attributes.value("max").toInt()));
+		curPAA->setRange(tqMakePair(attributes.value("min").toInt(), attributes.value("max").toInt()));
 
 	charBuffer = "";
 	return true;

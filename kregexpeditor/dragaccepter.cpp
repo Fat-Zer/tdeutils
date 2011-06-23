@@ -20,15 +20,15 @@
 
 #include <tqpainter.h>
 
-DragAccepter::DragAccepter(RegExpEditorWindow* editorWindow, RegExpWidget *parent,
+DragAccepter::DragAccepter(RegExpEditorWindow* editorWindow, RegExpWidget *tqparent,
                            const char *name)
-  : RegExpWidget(editorWindow, parent, name == 0 ? "dragaccepter" : name ),
+  : RegExpWidget(editorWindow, tqparent, name == 0 ? "dragaccepter" : name ),
     _drawLine( false )
 {
   setAcceptDrops(TRUE);
 }
 
-TQSize DragAccepter::sizeHint() const
+TQSize DragAccepter::tqsizeHint() const
 {
   return TQSize(10,10);
 }
@@ -46,7 +46,7 @@ void DragAccepter::paintEvent(TQPaintEvent *e)
 
 void DragAccepter::mousePressEvent ( TQMouseEvent* event )
 {
-  if ( event->button() == RightButton ) {
+  if ( event->button() == Qt::RightButton ) {
     _editorWindow->showRMBMenu( _editorWindow->hasSelection() );
   }
   else {
@@ -56,7 +56,7 @@ void DragAccepter::mousePressEvent ( TQMouseEvent* event )
 
 void DragAccepter::mouseReleaseEvent( TQMouseEvent* event )
 {
-  if ( _editorWindow->isPasteing() && event->button() == LeftButton ) {
+  if ( _editorWindow->isPasteing() && event->button() == Qt::LeftButton ) {
     RegExp* regexp = _editorWindow->pasteData();
 
     RegExpWidget *newElm = WidgetFactory::createWidget( regexp, _editorWindow, 0 );
@@ -68,24 +68,24 @@ void DragAccepter::mouseReleaseEvent( TQMouseEvent* event )
 
       Q_ASSERT( elm );
 
-      RegExpWidget *w = dynamic_cast<RegExpWidget*>(parent());
+      RegExpWidget *w = dynamic_cast<RegExpWidget*>(tqparent());
       if (w)
         w->addNewConcChild(this, elm);
       _editorWindow->updateContent( this );
       _editorWindow->clearSelection( true );
     }
   }
-  else if ( _editorWindow->isInserting() && event->button() == LeftButton  ) {
+  else if ( _editorWindow->isInserting() && event->button() == Qt::LeftButton  ) {
     if ( WidgetFactory::isContainer( _editorWindow->insertType() ) &&
          _editorWindow->pointSelected( mapToGlobal( event->pos() ) ) ) {
       RegExpWidget::mouseReleaseEvent( event );
     }
     else {
       RegExpWidget *child = WidgetFactory::createWidget( _editorWindow,
-                                                         dynamic_cast<TQWidget*>(parent()),
+                                                         dynamic_cast<TQWidget*>(tqparent()),
                                                          _editorWindow->insertType() );
       if ( child ) {
-        RegExpWidget *w = dynamic_cast<RegExpWidget*>(parent());
+        RegExpWidget *w = dynamic_cast<RegExpWidget*>(tqparent());
         if (w)
           w->addNewChild(this, child);
         _editorWindow->updateContent( child );
@@ -100,14 +100,14 @@ void DragAccepter::mouseReleaseEvent( TQMouseEvent* event )
 
 void DragAccepter::dragEnterEvent(TQDragEnterEvent *event)
 {
-  bool selfDrag = (  event->source() && event->source()->topLevelWidget() == topLevelWidget() && _isSelected );
+  bool selfDrag = (  event->source() && event->source()->tqtopLevelWidget() == tqtopLevelWidget() && _isSelected );
   event->accept(RegExpWidgetDrag::canDecode( event ) && !selfDrag );
 }
 
 void DragAccepter::dropEvent(TQDropEvent *event)
 {
   // The widget will be reparent afterward or part of it will, so no need to give
-  // it a parent here.
+  // it a tqparent here.
   RegExpWidget *newElm = RegExpWidgetDrag::decode( event, _editorWindow, 0 );
   ConcWidget* elm;
   if ( !(elm = dynamic_cast<ConcWidget*>( newElm ) ) ) {
@@ -116,15 +116,15 @@ void DragAccepter::dropEvent(TQDropEvent *event)
 
   Q_ASSERT( elm );
 
-  RegExpWidget *rew = dynamic_cast<RegExpWidget*>(parent());
+  RegExpWidget *rew = dynamic_cast<RegExpWidget*>(tqparent());
   if (rew)
     rew->addNewConcChild(this, elm);
-  TQWidget *w = dynamic_cast<TQWidget*>(parent());
+  TQWidget *w = dynamic_cast<TQWidget*>(tqparent());
   if (w)
     w->update();
   _editorWindow->updateContent( this );
 
-  bool selfDrag = (  event->source() && event->source()->topLevelWidget() == topLevelWidget() );
+  bool selfDrag = (  event->source() && event->source()->tqtopLevelWidget() == tqtopLevelWidget() );
   if ( ! selfDrag )
     _editorWindow->clearSelection( true );
   else {

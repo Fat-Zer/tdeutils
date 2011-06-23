@@ -1,6 +1,6 @@
 <!DOCTYPE UI><UI version="3.3" stdsetdef="1">
 <class>KeyProperties</class>
-<widget class="QWidget">
+<widget class="TQWidget">
     <property name="name">
         <cstring>KeyProperties</cstring>
     </property>
@@ -30,15 +30,15 @@
         <property name="margin">
             <number>0</number>
         </property>
-        <widget class="QLayoutWidget" row="0" column="3" rowspan="7" colspan="1">
+        <widget class="TQLayoutWidget" row="0" column="3" rowspan="7" colspan="1">
             <property name="name">
-                <cstring>layout39</cstring>
+                <cstring>tqlayout39</cstring>
             </property>
             <vbox>
                 <property name="name">
                     <cstring>unnamed</cstring>
                 </property>
-                <widget class="QLabel">
+                <widget class="TQLabel">
                     <property name="name">
                         <cstring>pLPhoto</cstring>
                     </property>
@@ -50,13 +50,13 @@
                             <verstretch>0</verstretch>
                         </sizepolicy>
                     </property>
-                    <property name="minimumSize">
+                    <property name="tqminimumSize">
                         <size>
                             <width>120</width>
                             <height>140</height>
                         </size>
                     </property>
-                    <property name="maximumSize">
+                    <property name="tqmaximumSize">
                         <size>
                             <width>32767</width>
                             <height>140</height>
@@ -81,7 +81,7 @@
                     <property name="scaledContents">
                         <bool>false</bool>
                     </property>
-                    <property name="alignment">
+                    <property name="tqalignment">
                         <set>AlignCenter</set>
                     </property>
                     <property name="whatsThis" stdset="0">
@@ -90,15 +90,15 @@
 			&lt;/qt&gt;</string>
                     </property>
                 </widget>
-                <widget class="QLayoutWidget">
+                <widget class="TQLayoutWidget">
                     <property name="name">
-                        <cstring>layout13</cstring>
+                        <cstring>tqlayout13</cstring>
                     </property>
                     <hbox>
                         <property name="name">
                             <cstring>unnamed</cstring>
                         </property>
-                        <widget class="QLabel">
+                        <widget class="TQLabel">
                             <property name="name">
                                 <cstring>textLabel1</cstring>
                             </property>
@@ -115,15 +115,15 @@
                 </widget>
             </vbox>
         </widget>
-        <widget class="QLayoutWidget" row="7" column="3" rowspan="4" colspan="1">
+        <widget class="TQLayoutWidget" row="7" column="3" rowspan="4" colspan="1">
             <property name="name">
-                <cstring>layout4</cstring>
+                <cstring>tqlayout4</cstring>
             </property>
             <vbox>
                 <property name="name">
                     <cstring>unnamed</cstring>
                 </property>
-                <widget class="QCheckBox">
+                <widget class="TQCheckBox">
                     <property name="name">
                         <cstring>cbDisabled</cstring>
                     </property>
@@ -131,7 +131,7 @@
                         <string>Disable key</string>
                     </property>
                 </widget>
-                <widget class="QPushButton">
+                <widget class="TQPushButton">
                     <property name="name">
                         <cstring>changeExp</cstring>
                     </property>
@@ -150,7 +150,7 @@
                         <string>Change Expiration...</string>
                     </property>
                 </widget>
-                <widget class="QPushButton">
+                <widget class="TQPushButton">
                     <property name="name">
                         <cstring>changePass</cstring>
                     </property>
@@ -171,7 +171,7 @@
                 </widget>
             </vbox>
         </widget>
-        <widget class="QLabel" row="9" column="0">
+        <widget class="TQLabel" row="9" column="0">
             <property name="name">
                 <cstring>labelLength</cstring>
             </property>
@@ -182,7 +182,7 @@
                 <string>Length:</string>
             </property>
         </widget>
-        <widget class="QLabel" row="3" column="0">
+        <widget class="TQLabel" row="3" column="0">
             <property name="name">
                 <cstring>labelCreation</cstring>
             </property>
@@ -193,7 +193,7 @@
                 <string>Creation:</string>
             </property>
         </widget>
-        <widget class="QLabel" row="7" column="0">
+        <widget class="TQLabel" row="7" column="0">
             <property name="name">
                 <cstring>labelID</cstring>
             </property>
@@ -204,7 +204,7 @@
                 <string>Key ID:</string>
             </property>
         </widget>
-        <widget class="QLabel" row="6" column="0">
+        <widget class="TQLabel" row="6" column="0">
             <property name="name">
                 <cstring>tLTrust_2</cstring>
             </property>
@@ -223,7 +223,7 @@
                 <string>Owner trust:</string>
             </property>
         </widget>
-        <widget class="QLabel" row="1" column="0">
+        <widget class="TQLabel" row="1" column="0">
             <property name="name">
                 <cstring>tLMail2_2</cstring>
             </property>
@@ -234,7 +234,7 @@
                 <string>Email:</string>
             </property>
         </widget>
-        <widget class="QLabel" row="8" column="0">
+        <widget class="TQLabel" row="8" column="0">
             <property name="name">
                 <cstring>labelAlgo</cstring>
             </property>
@@ -245,7 +245,7 @@
                 <string>Algorithm:</string>
             </property>
         </widget>
-        <widget class="QLabel" row="4" column="0">
+        <widget class="TQLabel" row="4" column="0">
             <property name="name">
                 <cstring>labelExpiration</cstring>
             </property>
@@ -256,7 +256,7 @@
                 <string>Expiration:</string>
             </property>
         </widget>
-        <widget class="QLabel" row="5" column="0">
+        <widget class="TQLabel" row="5" column="0">
             <property name="name">
                 <cstring>txtTrust</cstring>
             </property>
@@ -275,7 +275,7 @@
                 <string>Trust:</string>
             </property>
         </widget>
-        <widget class="QLabel" row="2" column="0">
+        <widget class="TQLabel" row="2" column="0">
             <property name="name">
                 <cstring>tLComment2_2</cstring>
             </property>
@@ -286,7 +286,7 @@
                 <string>Comment:</string>
             </property>
         </widget>
-        <widget class="QLabel" row="0" column="0">
+        <widget class="TQLabel" row="0" column="0">
             <property name="name">
                 <cstring>tLName2_2</cstring>
             </property>
@@ -308,7 +308,7 @@
                 <bool>true</bool>
             </property>
         </widget>
-        <widget class="QLabel" row="10" column="0" rowspan="1" colspan="3">
+        <widget class="TQLabel" row="10" column="0" rowspan="1" colspan="3">
             <property name="name">
                 <cstring>tLID_2</cstring>
             </property>
@@ -329,7 +329,7 @@
                 </sizepolicy>
             </property>
         </widget>
-        <widget class="QLabel" row="5" column="2">
+        <widget class="TQLabel" row="5" column="2">
             <property name="name">
                 <cstring>pixmapTrust</cstring>
             </property>
@@ -417,7 +417,7 @@
                 <cstring>kCOwnerTrust</cstring>
             </property>
         </widget>
-        <widget class="QLabel" row="5" column="1">
+        <widget class="TQLabel" row="5" column="1">
             <property name="name">
                 <cstring>kLTrust</cstring>
             </property>
@@ -433,7 +433,7 @@
                 <string></string>
             </property>
         </widget>
-        <widget class="QLabel" row="9" column="1" rowspan="1" colspan="2">
+        <widget class="TQLabel" row="9" column="1" rowspan="1" colspan="2">
             <property name="name">
                 <cstring>tLLength</cstring>
             </property>
@@ -449,7 +449,7 @@
                 <string></string>
             </property>
         </widget>
-        <widget class="QLabel" row="8" column="1" rowspan="1" colspan="2">
+        <widget class="TQLabel" row="8" column="1" rowspan="1" colspan="2">
             <property name="name">
                 <cstring>tLAlgo</cstring>
             </property>
@@ -495,7 +495,7 @@
 </widget>
 <customwidgets>
 </customwidgets>
-<layoutdefaults spacing="6" margin="11"/>
+<tqlayoutdefaults spacing="6" margin="11"/>
 <includehints>
     <includehint>kactivelabel.h</includehint>
     <includehint>kactivelabel.h</includehint>

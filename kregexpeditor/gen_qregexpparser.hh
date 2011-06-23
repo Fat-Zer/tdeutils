@@ -23,8 +23,8 @@
    This special exception was added by the Free Software Foundation
    in version 1.24 of Bison.  */
 
-#ifndef BISON_GEN_QREGEXPPARSER_HH
-# define BISON_GEN_QREGEXPPARSER_HH
+#ifndef BISON_GEN_TQREGEXPPARSER_HH
+# define BISON_GEN_TQREGEXPPARSER_HH
 
 /* Tokens.  */
 #ifndef YYTOKENTYPE
@@ -89,5 +89,5 @@ typedef union {
 extern YYSTYPE qregexplval;
 
 
-#endif /* not BISON_GEN_QREGEXPPARSER_HH */
+#endif /* not BISON_GEN_TQREGEXPPARSER_HH */
 

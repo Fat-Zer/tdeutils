@@ -26,8 +26,8 @@
 #include "kbyteseditwidget.h"
 
 
-KBytesEditWidget::KBytesEditWidget( TQWidget *parent, const char *name, const TQStringList & )
-  : TQWidget( parent, name)
+KBytesEditWidget::KBytesEditWidget( TQWidget *tqparent, const char *name, const TQStringList & )
+  : TQWidget( tqparent, name)
 {
   TQHBoxLayout* Layout = new TQHBoxLayout( this );
   BytesEdit = new KHE::KBytesEdit( this, "BytesEdit" );
@@ -247,9 +247,9 @@ bool KBytesEditWidget::hasSelectedData() const
 }
 
 
-void KBytesEditWidget::repaintRange( int i1, int i2 )
+void KBytesEditWidget::tqrepaintRange( int i1, int i2 )
 {
-  BytesEdit->repaintRange( i1, i2 );
+  BytesEdit->tqrepaintRange( i1, i2 );
 }
 
 

@@ -5,7 +5,7 @@
  * Copyright (c) 2002 Marc Mutz <mutz@kde.org>
  * Copyright (c) 2006 Flavio Castelli <flavio.castelli@gmail.com>
  *
- * Requires the Qt widget libraries, available at no cost at
+ * Requires the TQt widget libraries, available at no cost at
  * http://www.troll.no/
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -38,7 +38,7 @@
 #include <kmessagebox.h>
 #include <krichtextlabel.h>
 
-// other Qt headers:
+// other TQt headers:
 #include <tqlayout.h>
 #include <tqlabel.h>
 #include <tqcheckbox.h>
@@ -51,8 +51,8 @@
 extern void wake_laptop_daemon();
 
 
-BatteryConfig::BatteryConfig (TQWidget * parent, const char *name)
-  : KCModule(parent, name),
+BatteryConfig::BatteryConfig (TQWidget * tqparent, const char *name)
+  : KCModule(tqparent, name),
     editPoll(0),
     iconloader(0),
     buttonNoBattery(0),
@@ -112,10 +112,10 @@ BatteryConfig::BatteryConfig (TQWidget * parent, const char *name)
 
       // group box to hold the icons together
       TQVGroupBox* icons_groupbox = new TQVGroupBox( i18n("Select Battery Icons"), this );
-      icons_groupbox->layout()->setSpacing( KDialog::spacingHint() );
-      top_layout->addWidget( icons_groupbox, 0, Qt::AlignLeft );
+      icons_groupbox->tqlayout()->setSpacing( KDialog::spacingHint() );
+      top_layout->addWidget( icons_groupbox, 0, TQt::AlignLeft );
 
-      // layout to hold the icons inside the groupbox
+      // tqlayout to hold the icons inside the groupbox
       TQGrid *icon_grid = new TQGrid( 3 /*cols*/, icons_groupbox );
       icon_grid->setSpacing( KDialog::spacingHint() );
 
@@ -140,7 +140,7 @@ BatteryConfig::BatteryConfig (TQWidget * parent, const char *name)
 	    TQHBoxLayout *hl = new TQHBoxLayout();
 	    top_layout->addLayout(hl);
 
-	    TQHGroupBox *hb = new TQHGroupBox(i18n("Current Battery Status"), this);
+	    TQHGroupBox *hb = new TQHGroupBox(i18n("Current Battery tqStatus"), this);
 	    for (int i = 0; i < num_batteries; i++) {
 
 		TQWidget *wp;
@@ -171,7 +171,7 @@ BatteryConfig::BatteryConfig (TQWidget * parent, const char *name)
       }
 
       // TODO: remove linefeed from string, can't do it right now coz we have a string freeze
-      TQLabel* explain = new KRichTextLabel( i18n("This panel controls whether the battery status monitor\nappears in the system tray and what it looks like.").replace("\n"," "), this);
+      TQLabel* explain = new KRichTextLabel( i18n("This panel controls whether the battery status monitor\nappears in the system tray and what it looks like.").tqreplace("\n"," "), this);
       top_layout->addWidget(explain, 0);
       laptop_portable::extra_config(this, config, top_layout);
     }
@@ -179,7 +179,7 @@ BatteryConfig::BatteryConfig (TQWidget * parent, const char *name)
     top_layout->addStretch(1);
     startMonitor = new TQPushButton( i18n("&Start Battery Monitor"), this);
     connect(startMonitor, TQT_SIGNAL(clicked()), this, TQT_SLOT(slotStartMonitor()));
-    top_layout->addWidget( startMonitor, 0, Qt::AlignRight );
+    top_layout->addWidget( startMonitor, 0, TQt::AlignRight );
 
     load();
 }
@@ -283,7 +283,7 @@ void BatteryConfig::slotStartMonitor()
 {
 	wake_laptop_daemon();
 	if (!enablemonitor) {
-		KMessageBox::information(0, i18n("<qt>The battery monitor has been started, but the tray icon is currently disabled.  You can make it appear by selecting the <b>Show battery monitor</b> entry on this page and applying your changes.</qt>"), TQString::null, "howToEnableMonitor");
+		KMessageBox::information(0, i18n("<qt>The battery monitor has been started, but the tray icon is currently disabled.  You can make it appear by selecting the <b>Show battery monitor</b> entry on this page and applying your changes.</qt>"), TQString(), "howToEnableMonitor");
 	}
 }
 
@@ -295,14 +295,14 @@ BatteryConfig::ConvertIcon(int percent, TQPixmap &pm, TQPixmap &result)
 	int w = image.width();
 	int h = image.height();
 	int count = 0;
-	QRgb rgb;
+	TQRgb rgb;
 	int x, y;
 	for (x = 0; x < w; x++)
 	for (y = 0; y < h; y++) {
 		rgb = image.pixel(x, y);
-		if (qRed(rgb) == 0xff &&
-		    qGreen(rgb) == 0xff &&
-		    qBlue(rgb) == 0xff)
+		if (tqRed(rgb) == 0xff &&
+		    tqGreen(rgb) == 0xff &&
+		    tqBlue(rgb) == 0xff)
 			count++;
 	}
 	int c = (count*percent)/100;
@@ -315,7 +315,7 @@ BatteryConfig::ConvertIcon(int percent, TQPixmap &pm, TQPixmap &result)
 
 	if (c) {
 		uint ui;
-		QRgb blue = qRgb(0x00,0x00,0xff);
+		TQRgb blue = tqRgb(0x00,0x00,0xff);
 
 		if (image.depth() <= 8) {
 			ui = image.numColors();		// this fix thanks to Sven Krumpke
@@ -328,9 +328,9 @@ BatteryConfig::ConvertIcon(int percent, TQPixmap &pm, TQPixmap &result)
 		for (y = h-1; y >= 0; y--)
 		for (x = 0; x < w; x++) {
 			rgb = image.pixel(x, y);
-			if (qRed(rgb) == 0xff &&
-		    	    qGreen(rgb) == 0xff &&
-		    	    qBlue(rgb) == 0xff) {
+			if (tqRed(rgb) == 0xff &&
+		    	    tqGreen(rgb) == 0xff &&
+		    	    tqBlue(rgb) == 0xff) {
 				image.setPixel(x, y, ui);
 				c--;
 				if (c <= 0)

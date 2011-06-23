@@ -1,6 +1,6 @@
 <!DOCTYPE UI><UI version="3.3" stdsetdef="1">
 <class>GPGConf</class>
-<widget class="QWidget">
+<widget class="TQWidget">
     <property name="name">
         <cstring>GPGConf</cstring>
     </property>
@@ -24,7 +24,7 @@
         <property name="margin">
             <number>0</number>
         </property>
-        <widget class="QGroupBox" row="0" column="0">
+        <widget class="TQGroupBox" row="0" column="0">
             <property name="name">
                 <cstring>groupBox2</cstring>
             </property>
@@ -35,7 +35,7 @@
                 <property name="name">
                     <cstring>unnamed</cstring>
                 </property>
-                <widget class="QLabel" row="0" column="0">
+                <widget class="TQLabel" row="0" column="0">
                     <property name="name">
                         <cstring>textLabel1_5_2</cstring>
                     </property>
@@ -43,7 +43,7 @@
                         <string>Configuration file:</string>
                     </property>
                 </widget>
-                <widget class="QLabel" row="1" column="0">
+                <widget class="TQLabel" row="1" column="0">
                     <property name="name">
                         <cstring>textLabel1_5_2_2</cstring>
                     </property>
@@ -68,7 +68,7 @@
                         <bool>true</bool>
                     </property>
                 </widget>
-                <widget class="QPushButton" row="1" column="3">
+                <widget class="TQPushButton" row="1" column="3">
                     <property name="name">
                         <cstring>changeHome</cstring>
                     </property>
@@ -103,7 +103,7 @@
                     <property name="sizeType">
                         <enum>Expanding</enum>
                     </property>
-                    <property name="sizeHint">
+                    <property name="tqsizeHint">
                         <size>
                             <width>190</width>
                             <height>20</height>
@@ -122,14 +122,14 @@
             <property name="sizeType">
                 <enum>Expanding</enum>
             </property>
-            <property name="sizeHint">
+            <property name="tqsizeHint">
                 <size>
                     <width>21</width>
                     <height>54</height>
                 </size>
             </property>
         </spacer>
-        <widget class="QCheckBox" row="2" column="0">
+        <widget class="TQCheckBox" row="2" column="0">
             <property name="name">
                 <cstring>use_agent</cstring>
             </property>
@@ -137,7 +137,7 @@
                 <string>&amp;Use GnuPG agent</string>
             </property>
         </widget>
-        <widget class="QGroupBox" row="1" column="0">
+        <widget class="TQGroupBox" row="1" column="0">
             <property name="name">
                 <cstring>groupBox2_2</cstring>
             </property>
@@ -148,7 +148,7 @@
                 <property name="name">
                     <cstring>unnamed</cstring>
                 </property>
-                <widget class="QCheckBox" row="0" column="0">
+                <widget class="TQCheckBox" row="0" column="0">
                     <property name="name">
                         <cstring>kcfg_PubKeyring</cstring>
                     </property>
@@ -156,7 +156,7 @@
                         <string>Pu&amp;blic:</string>
                     </property>
                 </widget>
-                <widget class="QCheckBox" row="1" column="0">
+                <widget class="TQCheckBox" row="1" column="0">
                     <property name="name">
                         <cstring>kcfg_PrivKeyring</cstring>
                     </property>
@@ -164,9 +164,9 @@
                         <string>Private:</string>
                     </property>
                 </widget>
-                <widget class="QLayoutWidget" row="0" column="1" rowspan="2" colspan="1">
+                <widget class="TQLayoutWidget" row="0" column="1" rowspan="2" colspan="1">
                     <property name="name">
-                        <cstring>layout1</cstring>
+                        <cstring>tqlayout1</cstring>
                     </property>
                     <vbox>
                         <property name="name">
@@ -190,7 +190,7 @@
                         </widget>
                     </vbox>
                 </widget>
-                <widget class="QCheckBox" row="2" column="0" rowspan="1" colspan="2">
+                <widget class="TQCheckBox" row="2" column="0" rowspan="1" colspan="2">
                     <property name="name">
                         <cstring>kcfg_OnlyAdditional</cstring>
                     </property>
@@ -205,7 +205,7 @@
         </widget>
     </grid>
 </widget>
-<layoutdefaults spacing="6" margin="11"/>
+<tqlayoutdefaults spacing="6" margin="11"/>
 <includehints>
     <includehint>klineedit.h</includehint>
     <includehint>klineedit.h</includehint>

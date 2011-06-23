@@ -1,6 +1,6 @@
 /*
     KCalc, a scientific calculator for the X window system using the
-    Qt widget libraries, available at no cost at http://www.troll.no
+    TQt widget libraries, available at no cost at http://www.troll.no
 
     Copyright (C) 1996 Bernd Johannes Wuebben
                        wuebben@math.cornell.edu
@@ -61,9 +61,10 @@ class Constants;
 class KCalculator : public KMainWindow
 {
     Q_OBJECT
+  TQ_OBJECT
 
 public:
-	KCalculator(TQWidget *parent = 0, const char *name = 0);
+	KCalculator(TQWidget *tqparent = 0, const char *name = 0);
 	~KCalculator();
 
 signals:
@@ -76,16 +77,16 @@ private:
 	void updateGeometry();
 	void setupMainActions(void);
 	void setupStatusbar(void);
-	TQWidget *setupNumericKeys(TQWidget *parent);
-	void setupLogicKeys(TQWidget *parent);
-	void setupScientificKeys(TQWidget *parent);
-	void setupStatisticKeys(TQWidget *parent);
-	void setupConstantsKeys(TQWidget *parent);
+	TQWidget *setupNumericKeys(TQWidget *tqparent);
+	void setupLogicKeys(TQWidget *tqparent);
+	void setupScientificKeys(TQWidget *tqparent);
+	void setupStatisticKeys(TQWidget *tqparent);
+	void setupConstantsKeys(TQWidget *tqparent);
 	void keyPressEvent(TQKeyEvent *e);
 	void keyReleaseEvent(TQKeyEvent *e);
 	void set_precision();
 	void set_style();
-	void resetBase(void) { (BaseChooseGroup->find(1))->animateClick();};
+	void resetBase(void) { (BaseChooseGroup->tqfind(1))->animateClick();};
 
 	void UpdateDisplay(bool get_amount_from_core = false,
 			   bool store_result_in_history = false);

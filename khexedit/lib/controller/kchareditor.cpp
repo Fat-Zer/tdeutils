@@ -39,9 +39,9 @@ bool KCharEditor::handleKeyPress( TQKeyEvent *KeyEvent )
   bool KeyUsed = false;
   // some input that should be inserted?
   if( KeyEvent->text().length() > 0
-      && !(KeyEvent->state()&( Qt::ControlButton | Qt::AltButton | Qt::MetaButton )) )
+      && !(KeyEvent->state()&( TQt::ControlButton | TQt::AltButton | TQt::MetaButton )) )
   {
-    TQChar C = KeyEvent->text()[0];
+    TQChar C = TQString(KeyEvent->text())[0];
     if( C.isPrint() )
     {
       TQByteArray D( 1 );

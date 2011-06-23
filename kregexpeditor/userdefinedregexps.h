@@ -25,12 +25,13 @@
 class TQPoint;
 class RegExp;
 
-class UserDefinedRegExps :public QDockWindow
+class UserDefinedRegExps :public TQDockWindow
 {
 Q_OBJECT
+  TQ_OBJECT
 
 public:
-  UserDefinedRegExps( TQWidget *parent, const char *name = 0 );
+  UserDefinedRegExps( TQWidget *tqparent, const char *name = 0 );
   const TQPtrList<CompoundRegExp> regExps() const;
 
 public slots:
@@ -53,10 +54,10 @@ private:
   TQPtrList<CompoundRegExp> _regExps;
 };
 
-class WidgetWinItem :public QListViewItem
+class WidgetWinItem :public TQListViewItem
 {
 public:
-  WidgetWinItem( TQString name, RegExp* regexp, bool users, TQListViewItem* parent );
+  WidgetWinItem( TQString name, RegExp* regexp, bool users, TQListViewItem* tqparent );
   static TQString path();
 
   TQString fileName() const;

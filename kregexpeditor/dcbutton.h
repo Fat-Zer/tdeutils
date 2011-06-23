@@ -25,12 +25,13 @@ class TQMouseEvent;
    TQToolButton extended to emit a signal on double click.
    @internal
 */
-class DoubleClickButton :public QToolButton
+class DoubleClickButton :public TQToolButton
 {
 Q_OBJECT
+  TQ_OBJECT
 
 public:
-  DoubleClickButton( TQPixmap pix, TQWidget* parent, const char* name = 0);
+  DoubleClickButton( TQPixmap pix, TQWidget* tqparent, const char* name = 0);
 
 protected:
   virtual void mouseDoubleClickEvent ( TQMouseEvent * );

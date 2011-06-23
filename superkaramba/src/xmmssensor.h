@@ -23,8 +23,9 @@
 class XMMSSensor :  public Sensor
 {
     Q_OBJECT
+  TQ_OBJECT
 public:
-    XMMSSensor( int interval, const TQString &encoding=TQString::null );
+    XMMSSensor( int interval, const TQString &encoding=TQString() );
     ~XMMSSensor();
     void update();
     void setMaxValue( SensorParams *);

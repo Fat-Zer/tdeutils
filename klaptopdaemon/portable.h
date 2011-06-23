@@ -72,9 +72,9 @@ public:
 	static void set_brightness(bool blank, int val);	// val = 0-255 255 brightest, 0 means dimmest (if !blank it must be still visible), 
 	static int get_brightness();		// returns 0-255 brightness, -1 if you can't
 	static TQString cpu_frequency();		// Returns the cpu freq.
-	static KActiveLabel *no_power_management_explanation(TQWidget *parent);
-	static TQLabel *how_to_do_suspend_resume(TQWidget *parent);
-	static TQLabel *pcmcia_info(int x, TQWidget *parent);
+	static KActiveLabel *no_power_management_explanation(TQWidget *tqparent);
+	static TQLabel *how_to_do_suspend_resume(TQWidget *tqparent);
+	static TQLabel *pcmcia_info(int x, TQWidget *tqparent);
 
 	/**
 	 * Put this computer into standby mode.
@@ -98,10 +98,10 @@ public:
 	static void get_battery_status(int &num_batteries, TQStringList &names, TQStringList &state, TQStringList &values); // get multiple battery status
 	static bool has_lav();			// true if the following returns a valid value
 	static float get_load_average();	// current short term load average
-	static void extra_config(TQWidget *parent, KConfig *config, TQVBoxLayout *layout);
-	static void acpi_set_mask(bool standby, bool suspend, bool hibernate, bool perf, bool throttle);	
-	static void apm_set_mask(bool standby, bool suspend);
-	static void software_suspend_set_mask(bool hibernate);
+	static void extra_config(TQWidget *tqparent, KConfig *config, TQVBoxLayout *tqlayout);
+	static void acpi_set_tqmask(bool standby, bool suspend, bool hibernate, bool perf, bool throttle);	
+	static void apm_set_tqmask(bool standby, bool suspend);
+	static void software_suspend_set_tqmask(bool hibernate);
 
 	/**
 	 * Get a list of available performance profiles.

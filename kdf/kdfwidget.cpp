@@ -3,7 +3,7 @@
  *
  * Copyright (c) 1998-2001 Michael Kropfberger <michael.kropfberger@gmx.net>
  *
- * Requires the Qt widget libraries, available at no cost at
+ * Requires the TQt widget libraries, available at no cost at
  * http://www.troll.no/
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -56,8 +56,8 @@ static bool GUI;
 
 /**************************************************************/
 
-CListViewItem::CListViewItem( CListView * parent, TQListViewItem * after )
-  :TQListViewItem( parent, after )
+CListViewItem::CListViewItem( CListView * tqparent, TQListViewItem * after )
+  :TQListViewItem( tqparent, after )
 {}
 
 int CListViewItem::compare ( TQListViewItem *i, int column, bool ) const
@@ -92,8 +92,8 @@ void CListViewItem::setKeys (int kb_size, int kb_avail, float percent_full)
 
 /**************************************************************/
 
-KDFWidget::KDFWidget( TQWidget *parent, const char *name, bool init )
-  : TQWidget(parent, name), mOptionDialog(0), mPopup(0), mTimer(0)
+KDFWidget::KDFWidget( TQWidget *tqparent, const char *name, bool init )
+  : TQWidget(tqparent, name), mOptionDialog(0), mPopup(0), mTimer(0)
 {
   connect(&mDiskList , TQT_SIGNAL(readDFDone() ),
            this, TQT_SLOT (updateDFDone()) );
@@ -131,7 +131,7 @@ KDFWidget::KDFWidget( TQWidget *parent, const char *name, bool init )
       this, TQT_SLOT(columnSizeChanged(int, int, int)) );
     makeColumns();
 
-    mIsTopLevel = TQString(parent->className()) == "KDFTopLevel" ? true : false;
+    mIsTopLevel = TQString(tqparent->className()) == "KDFTopLevel" ? true : false;
   }
 
   loadSettings();
@@ -156,9 +156,9 @@ void KDFWidget::makeColumns( void )
   // 1999-11-29 Espen Sand
   // This smells like a bad hack but I need to remove the headers
   // first. If I don't, the list look like shit afterwards. The iterator
-  // is just used to prevent an endless loop. With my Qt (1999-11-10 ?)
+  // is just used to prevent an endless loop. With my TQt (1999-11-10 ?)
   // I only need as many iterations as there are header items but who knows
-  // what a new Qt can do!
+  // what a new TQt can do!
   //
   for( i=1000; mList->header()->count() > 0 && i>0; i-- )
   {
@@ -283,7 +283,7 @@ void KDFWidget::setUpdateFrequency( int frequency )
   // Kill current timer and restart it if the frequency is
   // larger than zero.
   //
-  killTimers();
+  TQT_TQOBJECT(this)->killTimers();
   if( frequency > 0 )
   {
     startTimer( frequency * 1000 );
@@ -343,7 +343,7 @@ void KDFWidget::updateDFDone( void ){
 
     int k=0;
     item = new CListViewItem( mList, item );
-    bool root = disk->mountOptions().find("user",0,false)==-1 ? true : false;
+    bool root = disk->mountOptions().tqfind("user",0,false)==-1 ? true : false;
     item->setPixmap( k++, mList->icon( disk->iconName(), root ) );
     item->setText( k++, disk->deviceName() );
     item->setText( k++, disk->fsType() );
@@ -377,7 +377,7 @@ void KDFWidget::criticallyFull( DiskEntry *disk )
   if( mStd.popupIfFull() == true )
   {
     TQString msg = i18n("Device [%1] on [%2] is getting critically full!").
-      arg(disk->deviceName()).arg(disk->mountPoint());
+      tqarg(disk->deviceName()).tqarg(disk->mountPoint());
     KMessageBox::sorry( this, msg, i18n("Warning"));
   }
 }
@@ -400,10 +400,10 @@ DiskEntry *KDFWidget::selectedDisk( TQListViewItem *item )
   DiskEntry disk(item->text(deviceCol));
   disk.setMountPoint(item->text(mntCol));
 
-  // I can't get find() to work. The Disks::compareItems(..) is
+  // I can't get tqfind() to work. The Disks::compareItems(..) is
   // never called.
   //
-  //int pos=mDiskList->find(disk);
+  //int pos=mDiskList->tqfind(disk);
 
   int pos = -1;
   for( u_int i=0; i<mDiskList.count(); i++ )
@@ -515,10 +515,10 @@ void KDFWidget::popupMenu( TQListViewItem *item, const TQPoint &p )
     if(  mStd.fileManager().isEmpty() == false )
     {
       TQString cmd = mStd.fileManager();
-      int pos = cmd.find("%m");
+      int pos = cmd.tqfind("%m");
       if( pos > 0 )
       {
-	cmd = cmd.replace( pos, 2, KProcess::quote(disk->mountPoint()) ) + " &";
+	cmd = cmd.tqreplace( pos, 2, KProcess::quote(disk->mountPoint()) ) + " &";
       }
       else
       {
@@ -543,7 +543,7 @@ void KDFWidget::popupMenu( TQListViewItem *item, const TQPoint &p )
 
 
 /**************************************************************************
-  * recalculates and repaints the pixBars
+  * recalculates and tqrepaints the pixBars
 **/
 void KDFWidget::updateDiskBarPixmaps( void )
 {
@@ -569,10 +569,10 @@ void KDFWidget::updateDiskBarPixmaps( void )
   int i=0;
   for(TQListViewItem *it=mList->firstChild(); it!=0;it=it->nextSibling(),i++ )
   {
-    // I can't get find() to work. The Disks::compareItems(..) is
+    // I can't get tqfind() to work. The Disks::compareItems(..) is
     // never called.
     //
-    //int pos=mDiskList->find(disk);
+    //int pos=mDiskList->tqfind(disk);
 
     DiskEntry dummy(it->text(deviceCol));
     dummy.setMountPoint(it->text(mntCol));
@@ -609,8 +609,8 @@ void KDFWidget::updateDiskBarPixmaps( void )
       p.setPen(black);
       p.drawRect(0,0,w,h);
       TQColor c;
-      if ( (disk->iconName().find("cdrom") != -1)
-	   || (disk->iconName().find("writer") != -1) )
+      if ( (disk->iconName().tqfind("cdrom") != -1)
+	   || (disk->iconName().tqfind("writer") != -1) )
 	c = gray;
       else
 	c = disk->percentFull() > FULL_PERCENT ? red : darkGreen;

@@ -3,7 +3,7 @@
  *
  * Copyright (c) 1999 Michael Kropfberger <michael.kropfberger@gmx.net>
  *
- * Requires the Qt widget libraries, available at no cost at
+ * Requires the TQt widget libraries, available at no cost at
  * http://www.troll.no/
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -47,8 +47,8 @@ static bool GUI;
 #endif
 
 
-MntConfigWidget::MntConfigWidget(TQWidget *parent, const char *name, bool init)
-  : TQWidget(parent, name)
+MntConfigWidget::MntConfigWidget(TQWidget *tqparent, const char *name, bool init)
+  : TQWidget(tqparent, name)
 {
   mInitializing = false;
 
@@ -102,7 +102,7 @@ MntConfigWidget::MntConfigWidget(TQWidget *parent, const char *name, bool init)
     mIconButton = new KIconButton(mGroupBox);
     mIconButton->setIconType(KIcon::Small, KIcon::Device);
     Q_CHECK_PTR(mIconButton);
-    mIconButton->setFixedWidth( mIconButton->sizeHint().height() );
+    mIconButton->setFixedWidth( mIconButton->tqsizeHint().height() );
     connect(mIconButton,TQT_SIGNAL(iconChanged(TQString)),this,TQT_SLOT(iconChangedButton(TQString)));
     gl->addWidget( mIconButton, 2, 1 );
 
@@ -164,7 +164,7 @@ void MntConfigWidget::readDFDone( void )
   TQListViewItem *item = 0;
   for( DiskEntry *disk=mDiskList.first(); disk!=0; disk=mDiskList.next(),++i )
   {
-     item = new TQListViewItem( mList, item, TQString::null, disk->deviceName(),
+     item = new TQListViewItem( mList, item, TQString(), disk->deviceName(),
       disk->mountPoint(), disk->mountCommand(), disk->umountCommand() );
      item->setPixmap( ICONCOL, SmallIcon( disk->iconName() ) );
      mDiskLookup[i] = item;
@@ -251,14 +251,14 @@ void MntConfigWidget::iconChangedButton(TQString iconName)
 }
 void MntConfigWidget::iconChanged(const TQString &iconName)
 {
-  if( iconName.findRev('_') == 0 ||
-      (iconName.right(iconName.length()-iconName.findRev('_'))!="_mount" &&
-      iconName.right(iconName.length()-iconName.findRev('_'))!="_unmount"))
+  if( iconName.tqfindRev('_') == 0 ||
+      (iconName.right(iconName.length()-iconName.tqfindRev('_'))!="_mount" &&
+      iconName.right(iconName.length()-iconName.tqfindRev('_'))!="_unmount"))
     {
       TQString msg = i18n(""
 			 "This filename is not valid: %1\n"
 			 "It must end with "
-			 "\"_mount\" or \"_unmount\".").arg(iconName);
+			 "\"_mount\" or \"_unmount\".").tqarg(iconName);
       KMessageBox::sorry( this, msg );
       return;
     }

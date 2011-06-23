@@ -85,8 +85,8 @@ void FilesystemWidget::Filesystem::setValue(int value)
   m_display->setValue(value);
 }
 
-FilesystemWidget::FilesystemWidget(TQWidget *parent, const char *name)
-   : TQWidget(parent, name)
+FilesystemWidget::FilesystemWidget(TQWidget *tqparent, const char *name)
+   : TQWidget(tqparent, name)
 {
   m_list.setAutoDelete(true);
   m_layout = new TQVBoxLayout(this);
@@ -141,7 +141,7 @@ bool FilesystemWidget::eventFilter(TQObject *o, TQEvent *e)
   while ((filesystem = it.current()) != 0) {
     ++it;
 
-    if (filesystem->display() == o) {
+    if (TQT_BASE_OBJECT(filesystem->display()) == TQT_BASE_OBJECT(o)) {
       progressBar = filesystem->display();
       break;
     }
@@ -149,17 +149,17 @@ bool FilesystemWidget::eventFilter(TQObject *o, TQEvent *e)
     ++i;
   }
 
-  if (o == progressBar && e->type() == TQEvent::MouseButtonPress)
+  if (TQT_BASE_OBJECT(o) == TQT_BASE_OBJECT(progressBar) && e->type() == TQEvent::MouseButtonPress)
   {
-    switch(static_cast<TQMouseEvent *>(e)->button()) {
-      case TQMouseEvent::RightButton:
+    switch(TQT_TQMOUSEEVENT(e)->button()) {
+      case Qt::RightButton:
         showMenu(i);
         break;
       default:
         break;
-      case TQMouseEvent::LeftButton:
-        if (parentWidget()->inherits("KSim::PluginView"))
-          static_cast<KSim::PluginView *>(parentWidget())->doCommand();
+      case Qt::LeftButton:
+        if (tqparentWidget()->inherits("KSim::PluginView"))
+          static_cast<KSim::PluginView *>(tqparentWidget())->doCommand();
         break;
     }
 
@@ -188,11 +188,11 @@ void FilesystemWidget::processExited(KProcess *)
 
   TQStringList::Iterator it;
   for (it = errorList.begin(); it != errorList.end(); ++it) {
-    message += TQString::fromLatin1("<li>%1</li>")
-       .arg((*it).replace(TQRegExp("[u]?mount: "), TQString::null));
+    message += TQString::tqfromLatin1("<li>%1</li>")
+       .tqarg((*it).tqreplace(TQRegExp("[u]?mount: "), TQString()));
   }
 
-  message += TQString::fromLatin1("</ul></qt>");
+  message += TQString::tqfromLatin1("</ul></qt>");
   KMessageBox::sorry(0, message);
 }
 

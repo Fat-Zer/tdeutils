@@ -25,7 +25,7 @@ typedef struct ss_callback_t {
     void	*info;
 } ss_callback_t;
 
-/* Definitions for card status flags for GetStatus */
+/* Definitions for card status flags for GettqStatus */
 #define SS_WRPROT	0x0001
 #define SS_CARDLOCK	0x0002
 #define SS_EJECTION	0x0004
@@ -44,7 +44,7 @@ typedef struct ss_callback_t {
 /* for InquireSocket */
 typedef struct socket_cap_t {
     u_int	features;
-    u_int	irq_mask;
+    u_int	irq_tqmask;
     u_int	map_size;
     u_char	pci_irq;
     u_char	cardbus;
@@ -56,7 +56,7 @@ typedef struct socket_cap_t {
 /* for GetSocket, SetSocket */
 typedef struct socket_state_t {
     u_int	flags;
-    u_int	csc_mask;
+    u_int	csc_tqmask;
     u_char	Vcc, Vpp;
     u_char	io_irq;
 } socket_state_t;
@@ -105,7 +105,7 @@ typedef struct cb_bridge_map {
 
 enum ss_service {
     SS_RegisterCallback, SS_InquireSocket,
-    SS_GetStatus, SS_GetSocket, SS_SetSocket,
+    SS_GettqStatus, SS_GetSocket, SS_SetSocket,
     SS_GetIOMap, SS_SetIOMap, SS_GetMemMap, SS_SetMemMap,
     SS_GetBridge, SS_SetBridge, SS_ProcSetup
 };

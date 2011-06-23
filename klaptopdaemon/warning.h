@@ -4,7 +4,7 @@
  * Copyright (c) 1999 Paul Campbell <paul@taniwha.com>
  * Copyright (c) 2002 Marc Mutz <mutz@kde.org>
  *
- * Requires the Qt widget libraries, available at no cost at
+ * Requires the TQt widget libraries, available at no cost at
  * http://www.troll.no/
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -41,8 +41,9 @@ class KComboBox;
 class WarningConfig : public KCModule
 {
   Q_OBJECT
+  TQ_OBJECT
 public:
-  WarningConfig(int x, TQWidget *parent=0, const char* name=0);
+  WarningConfig(int x, TQWidget *tqparent=0, const char* name=0);
   ~WarningConfig();
   void save( void );
   void load();

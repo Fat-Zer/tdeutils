@@ -18,7 +18,7 @@
 #ifndef infopage_h
 #define infopage_h
 
-#ifdef QT_ONLY
+#ifdef TQT_ONLY
   #include "compat.h"
   #include <tqtextbrowser.h>
 #else
@@ -28,7 +28,7 @@
 class InfoPage :public KTextBrowser
 {
 public:
-  InfoPage( TQWidget* parent, const char* name );
+  InfoPage( TQWidget* tqparent, const char* name );
   virtual void setSource ( const TQString& name );
 };
 

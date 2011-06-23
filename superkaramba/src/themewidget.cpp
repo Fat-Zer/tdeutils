@@ -25,8 +25,8 @@
 #include <tqlabel.h>
 #include <tqlayout.h>
 
-ThemeWidget::ThemeWidget(TQWidget *parent, const char *name)
-  : ThemeWidgetLayout(parent, name), m_themeFile(0)
+ThemeWidget::ThemeWidget(TQWidget *tqparent, const char *name)
+  : ThemeWidgetLayout(tqparent, name), m_themeFile(0)
 {
   running->setText("");
   setDescriptionMaxHeight();
@@ -58,7 +58,7 @@ ThemeWidget::~ThemeWidget()
 int ThemeWidget::addInstance()
 {
   int i = 1;
-  while(m_instancePool.find(i) != m_instancePool.end())
+  while(m_instancePool.tqfind(i) != m_instancePool.end())
     ++i;
   m_instancePool.append(i);
   updateRunning();
@@ -75,7 +75,7 @@ void ThemeWidget::updateRunning()
 {
   int i = instances();
   if(i > 0)
-    running->setText(i18n("<p align=\"center\">%1 running</p>").arg(i));
+    running->setText(i18n("<p align=\"center\">%1 running</p>").tqarg(i));
   else
     running->setText("");
 }
@@ -101,12 +101,12 @@ void ThemeWidget::showButton(bool show)
 
 void ThemeWidget::setDescriptionMaxHeight()
 {
-  if(layoutText->geometry().height() <= 0)
+  if(tqlayoutText->tqgeometry().height() <= 0)
     return;
-  int height = layoutText->geometry().height() - themeName->height() -
-               layoutText->spacing();
+  int height = tqlayoutText->tqgeometry().height() - themeName->height() -
+               tqlayoutText->spacing();
   if(buttonGo->isVisible())
-    height -= layoutButton->geometry().height() + layoutText->spacing();
+    height -= tqlayoutButton->tqgeometry().height() + tqlayoutText->spacing();
   description->setMaximumHeight(height);
 }
 

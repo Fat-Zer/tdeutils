@@ -30,16 +30,16 @@
 #include "kcalc_button.h"
 
 
-KCalcButton::KCalcButton(TQWidget * parent, const char * name)
-  : KPushButton(parent, name), _show_accel_mode(false),
+KCalcButton::KCalcButton(TQWidget * tqparent, const char * name)
+  : KPushButton(tqparent, name), _show_accel_mode(false),
     _mode_flags(ModeNormal)
 {
   setAutoDefault(false);
 }
 
-KCalcButton::KCalcButton(const TQString &label, TQWidget * parent,
+KCalcButton::KCalcButton(const TQString &label, TQWidget * tqparent,
 			 const char * name, const TQString &tooltip)
-  : KPushButton(label, parent, name), _show_accel_mode(false), _mode_flags(ModeNormal)
+  : KPushButton(label, tqparent, name), _show_accel_mode(false), _mode_flags(ModeNormal)
 {
   setAutoDefault(false);
   addMode(ModeNormal, label, tooltip);
@@ -47,7 +47,7 @@ KCalcButton::KCalcButton(const TQString &label, TQWidget * parent,
 
 void KCalcButton::addMode(ButtonModeFlags mode, TQString label, TQString tooltip, bool is_label_richtext)
 {
-  if (_mode.contains(mode)) _mode.remove(mode);
+  if (_mode.tqcontains(mode)) _mode.remove(mode);
 
   _mode[mode] = ButtonMode(label, tooltip, is_label_richtext);
 
@@ -67,7 +67,7 @@ void KCalcButton::slotSetMode(ButtonModeFlags mode, bool flag)
   	return; // nothing to do
   }
 
-  if (_mode.contains(new_mode)) {
+  if (_mode.tqcontains(new_mode)) {
     // save accel, because setting label erases accel
     TQKeySequence _accel = accel();
 
@@ -92,7 +92,7 @@ void KCalcButton::slotSetMode(ButtonModeFlags mode, bool flag)
 
 static TQString escape(TQString str)
 {
-  str.replace('&', "&&");
+  str.tqreplace('&', "&&");
   return str;
 }
 
@@ -118,7 +118,7 @@ void KCalcButton::paintLabel(TQPainter *paint)
 {
   if (_mode[_mode_flags].is_label_richtext) {
     TQSimpleRichText _text(_label, font());
-    _text.draw(paint, width()/2-_text.width()/2, 0, childrenRegion(), colorGroup());
+    _text.draw(paint, width()/2-_text.width()/2, 0, tqchildrenRegion(), tqcolorGroup());
   } else {
     KPushButton::drawButtonLabel(paint);
   }
@@ -128,7 +128,7 @@ void KCalcButton::drawButtonLabel(TQPainter *paint)
 {
   if (_show_accel_mode) {
     KPushButton::drawButtonLabel(paint);
-  } else if (_mode.contains(_mode_flags)) {
+  } else if (_mode.tqcontains(_mode_flags)) {
     paintLabel(paint);
   }
 }
@@ -159,7 +159,7 @@ void KSquareButton::drawButtonLabel(TQPainter *paint)
 {
   if (_show_accel_mode) {
     KPushButton::drawButtonLabel(paint);
-  } else if (_mode.contains(_mode_flags)) {
+  } else if (_mode.tqcontains(_mode_flags)) {
     paintLabel(paint);
   }
 }

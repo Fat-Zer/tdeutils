@@ -78,8 +78,8 @@ static const char description[] = I18N_NOOP("KDE Calculator");
 static const char version[] = KCALCVERSION;
 
 
-KCalculator::KCalculator(TQWidget *parent, const char *name)
-	: KMainWindow(parent, name), inverse(false),
+KCalculator::KCalculator(TQWidget *tqparent, const char *name)
+	: KMainWindow(tqparent, name), inverse(false),
 	  hyp_mode(false), memory_num(0.0), calc_display(NULL),
 	  mInternalSpacing(4), core()
 {
@@ -106,7 +106,7 @@ KCalculator::KCalculator(TQWidget *parent, const char *name)
 	// Create Button to select BaseMode
 	BaseChooseGroup = new TQHButtonGroup(i18n("Base"), central);
 	connect(BaseChooseGroup, TQT_SIGNAL(clicked(int)), TQT_SLOT(slotBaseSelected(int)));
-	BaseChooseGroup->setSizePolicy(TQSizePolicy::Expanding, TQSizePolicy::Fixed, false);
+	BaseChooseGroup->tqsetSizePolicy(TQSizePolicy::Expanding, TQSizePolicy::Fixed, false);
 
 
 	pbBaseChoose[0] =  new TQRadioButton(i18n("He&x"), BaseChooseGroup,
@@ -155,7 +155,7 @@ KCalculator::KCalculator(TQWidget *parent, const char *name)
 	//  Create Calculator Buttons
 	//
 
-	// First the widgets that are the parents of the buttons
+	// First the widgets that are the tqparents of the buttons
 	mSmallPage = new TQWidget(central);
 	mLargePage = new TQWidget(central);
 	mNumericPage = 	setupNumericKeys(central);
@@ -228,7 +228,7 @@ KCalculator::KCalculator(TQWidget *parent, const char *name)
 
 
 	//
-	// All these layouts are needed because all the groups have their
+	// All these tqlayouts are needed because all the groups have their
 	// own size per row so we can't use one huge TQGridLayout (mosfet)
 	//
 	TQGridLayout *smallBtnLayout = new TQGridLayout(mSmallPage, 6, 4, 0,
@@ -246,54 +246,54 @@ KCalculator::KCalculator(TQWidget *parent, const char *name)
 	mainLayout->addLayout(topLayout);
 	mainLayout->addLayout(btnLayout);
 
-	// button layout
+	// button tqlayout
 	btnLayout->addWidget(mSmallPage, 0, AlignTop);
 	btnLayout->addSpacing(2*mInternalSpacing);
 	btnLayout->addWidget(mNumericPage, 0, AlignTop);
 	btnLayout->addSpacing(2*mInternalSpacing);
 	btnLayout->addWidget(mLargePage, 0, AlignTop);
 
-	// small button layout
+	// small button tqlayout
 	smallBtnLayout->addWidget(pbStat["NumData"], 0, 0);
 	smallBtnLayout->addWidget(pbScientific["HypMode"], 0, 1);
 	smallBtnLayout->addWidget(pbLogic["AND"], 0, 2);
 	smallBtnLayout->addWidget(pbMod, 0, 3);
-	smallBtnLayout->addWidget(NumButtonGroup->find(0xA), 0, 4);
+	smallBtnLayout->addWidget(NumButtonGroup->tqfind(0xA), 0, 4);
 	smallBtnLayout->addWidget(pbConstant[0], 0, 5);
 
 	smallBtnLayout->addWidget(pbStat["Mean"], 1, 0);
 	smallBtnLayout->addWidget(pbScientific["Sine"], 1, 1);
 	smallBtnLayout->addWidget(pbLogic["OR"], 1, 2);
 	smallBtnLayout->addWidget(pbReci, 1, 3);
-	smallBtnLayout->addWidget(NumButtonGroup->find(0xB), 1, 4);
+	smallBtnLayout->addWidget(NumButtonGroup->tqfind(0xB), 1, 4);
 	smallBtnLayout->addWidget(pbConstant[1], 1, 5);
 
 	smallBtnLayout->addWidget(pbStat["StandardDeviation"], 2, 0);
 	smallBtnLayout->addWidget(pbScientific["Cosine"], 2, 1);
 	smallBtnLayout->addWidget(pbLogic["XOR"], 2, 2);
 	smallBtnLayout->addWidget(pbFactorial, 2, 3);
-	smallBtnLayout->addWidget(NumButtonGroup->find(0xC), 2, 4);
+	smallBtnLayout->addWidget(NumButtonGroup->tqfind(0xC), 2, 4);
 	smallBtnLayout->addWidget(pbConstant[2], 2, 5);
 
 	smallBtnLayout->addWidget(pbStat["Median"], 3, 0);
 	smallBtnLayout->addWidget(pbScientific["Tangent"], 3, 1);
 	smallBtnLayout->addWidget(pbLogic["LeftShift"], 3, 2);
 	smallBtnLayout->addWidget(pbSquare, 3, 3);
-	smallBtnLayout->addWidget(NumButtonGroup->find(0xD), 3, 4);
+	smallBtnLayout->addWidget(NumButtonGroup->tqfind(0xD), 3, 4);
 	smallBtnLayout->addWidget(pbConstant[3], 3, 5);
 
 	smallBtnLayout->addWidget(pbStat["InputData"], 4, 0);
 	smallBtnLayout->addWidget(pbScientific["Log10"], 4, 1);
 	smallBtnLayout->addWidget(pbLogic["RightShift"], 4, 2);
 	smallBtnLayout->addWidget(pbRoot, 4, 3);
-	smallBtnLayout->addWidget(NumButtonGroup->find(0xE), 4, 4);
+	smallBtnLayout->addWidget(NumButtonGroup->tqfind(0xE), 4, 4);
 	smallBtnLayout->addWidget(pbConstant[4], 4, 5);
 
 	smallBtnLayout->addWidget(pbStat["ClearData"], 5, 0);
 	smallBtnLayout->addWidget(pbScientific["LogNatural"], 5, 1);
 	smallBtnLayout->addWidget(pbLogic["One-Complement"], 5, 2);
 	smallBtnLayout->addWidget(pbPower, 5, 3);
-	smallBtnLayout->addWidget(NumButtonGroup->find(0xF), 5, 4);
+	smallBtnLayout->addWidget(NumButtonGroup->tqfind(0xF), 5, 4);
 	smallBtnLayout->addWidget(pbConstant[5], 5, 5);
 
 	smallBtnLayout->setRowStretch(0, 0);
@@ -303,7 +303,7 @@ KCalculator::KCalculator(TQWidget *parent, const char *name)
 	smallBtnLayout->setRowStretch(4, 0);
 	smallBtnLayout->setRowStretch(5, 0);
 
-	// large button layout
+	// large button tqlayout
 	largeBtnLayout->addWidget(pbClear, 0, 0);
 	largeBtnLayout->addWidget(pbAC, 0, 1);
 
@@ -319,7 +319,7 @@ KCalculator::KCalculator(TQWidget *parent, const char *name)
 	largeBtnLayout->addWidget(pbPercent, 4, 0);
 	largeBtnLayout->addWidget(pbPlusMinus, 4, 1);
 
-	// top layout
+	// top tqlayout
 	topLayout->addWidget(pbAngleChoose);
 	topLayout->addWidget(BaseChooseGroup);
 	topLayout->addStretch();
@@ -381,7 +381,7 @@ KCalculator::KCalculator(TQWidget *parent, const char *name)
 	updateGeometry();
 
 	adjustSize();
-	setFixedSize(sizeHint());
+	setFixedSize(tqsizeHint());
 
 	UpdateDisplay(true);
 
@@ -457,7 +457,7 @@ actionCollection());
 
 void KCalculator::setupStatusbar(void)
 {
-	// Status bar contents
+	// tqStatus bar contents
 	statusBar()->insertFixedItem(" NORM ", 0, true);
 	statusBar()->setItemAlignment(0, AlignCenter);
 
@@ -471,12 +471,12 @@ void KCalculator::setupStatusbar(void)
 	statusBar()->setItemAlignment(3, AlignCenter);
 }
 
-TQWidget* KCalculator::setupNumericKeys(TQWidget *parent)
+TQWidget* KCalculator::setupNumericKeys(TQWidget *tqparent)
 {
 	Q_CHECK_PTR(mSmallPage);
 	Q_CHECK_PTR(mLargePage);
 
-	TQWidget *thisPage = new TQWidget(parent);
+	TQWidget *thisPage = new TQWidget(tqparent);
 
 	KCalcButton *tmp_pb;
 
@@ -608,28 +608,28 @@ TQWidget* KCalculator::setupNumericKeys(TQWidget *parent)
 	TQGridLayout *thisLayout = new TQGridLayout(thisPage, 5, 4, 0,
 						  mInternalSpacing);
 
-	// large button layout
+	// large button tqlayout
 	thisLayout->addWidget(pbEE, 0, 0);
 	thisLayout->addWidget(pbDivision, 0, 1);
 	thisLayout->addWidget(pbX, 0, 2);
 	thisLayout->addWidget(pbMinus, 0, 3);
 
-	thisLayout->addWidget(NumButtonGroup->find(7), 1, 0);
-	thisLayout->addWidget(NumButtonGroup->find(8), 1, 1);
-	thisLayout->addWidget(NumButtonGroup->find(9), 1, 2);
+	thisLayout->addWidget(NumButtonGroup->tqfind(7), 1, 0);
+	thisLayout->addWidget(NumButtonGroup->tqfind(8), 1, 1);
+	thisLayout->addWidget(NumButtonGroup->tqfind(9), 1, 2);
 	thisLayout->addMultiCellWidget(pbPlus, 1, 2, 3, 3);
 
-	thisLayout->addWidget(NumButtonGroup->find(4), 2, 0);
-	thisLayout->addWidget(NumButtonGroup->find(5), 2, 1);
-	thisLayout->addWidget(NumButtonGroup->find(6), 2, 2);
+	thisLayout->addWidget(NumButtonGroup->tqfind(4), 2, 0);
+	thisLayout->addWidget(NumButtonGroup->tqfind(5), 2, 1);
+	thisLayout->addWidget(NumButtonGroup->tqfind(6), 2, 2);
 	//thisLayout->addMultiCellWidget(pbPlus, 1, 2, 3, 3);
 
-	thisLayout->addWidget(NumButtonGroup->find(1), 3, 0);
-	thisLayout->addWidget(NumButtonGroup->find(2), 3, 1);
-	thisLayout->addWidget(NumButtonGroup->find(3), 3, 2);
+	thisLayout->addWidget(NumButtonGroup->tqfind(1), 3, 0);
+	thisLayout->addWidget(NumButtonGroup->tqfind(2), 3, 1);
+	thisLayout->addWidget(NumButtonGroup->tqfind(3), 3, 2);
 	thisLayout->addMultiCellWidget(pbEqual, 3, 4, 3, 3);
 
-	thisLayout->addMultiCellWidget(NumButtonGroup->find(0), 4, 4, 0, 1);
+	thisLayout->addMultiCellWidget(NumButtonGroup->tqfind(0), 4, 4, 0, 1);
 	thisLayout->addWidget(pbPeriod, 4, 2);
 	//thisLayout->addMultiCellWidget(pbEqual, 3, 4, 3, 3);
 
@@ -741,33 +741,33 @@ TQWidget* KCalculator::setupNumericKeys(TQWidget *parent)
 	return thisPage;
 }
 
-void KCalculator::setupLogicKeys(TQWidget *parent)
+void KCalculator::setupLogicKeys(TQWidget *tqparent)
 {
-	Q_CHECK_PTR(parent);
+	Q_CHECK_PTR(tqparent);
 
 	KCalcButton *tmp_pb;
 
-	tmp_pb = new KCalcButton("AND", parent, "AND-Button", i18n("Bitwise AND"));
+	tmp_pb = new KCalcButton("AND", tqparent, "AND-Button", i18n("Bitwise AND"));
 	pbLogic.insert("AND", tmp_pb);
 	tmp_pb->setAccel(Key_Ampersand);
 	connect(this, TQT_SIGNAL(switchShowAccels(bool)),
 		tmp_pb, TQT_SLOT(slotSetAccelDisplayMode(bool)));
 	connect(tmp_pb, TQT_SIGNAL(clicked(void)), TQT_SLOT(slotANDclicked(void)));
 
-	tmp_pb = new KCalcButton("OR", parent, "OR-Button", i18n("Bitwise OR"));
+	tmp_pb = new KCalcButton("OR", tqparent, "OR-Button", i18n("Bitwise OR"));
 	pbLogic.insert("OR", tmp_pb);
 	tmp_pb->setAccel(Key_Bar);
 	connect(this, TQT_SIGNAL(switchShowAccels(bool)),
 		tmp_pb, TQT_SLOT(slotSetAccelDisplayMode(bool)));
 	connect(tmp_pb, TQT_SIGNAL(clicked(void)), TQT_SLOT(slotORclicked(void)));
 
-	tmp_pb = new KCalcButton("XOR", parent, "XOR-Button", i18n("Bitwise XOR"));
+	tmp_pb = new KCalcButton("XOR", tqparent, "XOR-Button", i18n("Bitwise XOR"));
 	pbLogic.insert("XOR", tmp_pb);
 	connect(this, TQT_SIGNAL(switchShowAccels(bool)),
 		tmp_pb, TQT_SLOT(slotSetAccelDisplayMode(bool)));
 	connect(tmp_pb, TQT_SIGNAL(clicked(void)), TQT_SLOT(slotXORclicked(void)));
 
-	tmp_pb = new KCalcButton("Cmp", parent, "One-Complement-Button",
+	tmp_pb = new KCalcButton("Cmp", tqparent, "One-Complement-Button",
 					i18n("One's complement"));
 	pbLogic.insert("One-Complement", tmp_pb);
 	tmp_pb->setAccel(Key_AsciiTilde);
@@ -775,7 +775,7 @@ void KCalculator::setupLogicKeys(TQWidget *parent)
 		tmp_pb, TQT_SLOT(slotSetAccelDisplayMode(bool)));
 	connect(tmp_pb, TQT_SIGNAL(clicked(void)), TQT_SLOT(slotNegateclicked(void)));
 
-	tmp_pb = new KCalcButton("Lsh", parent, "LeftBitShift-Button",
+	tmp_pb = new KCalcButton("Lsh", tqparent, "LeftBitShift-Button",
 					i18n("Left bit shift"));
 	tmp_pb->setAccel(Key_Less);
 	pbLogic.insert("LeftShift", tmp_pb);
@@ -784,7 +784,7 @@ void KCalculator::setupLogicKeys(TQWidget *parent)
 	connect(tmp_pb, TQT_SIGNAL(clicked(void)),
 		TQT_SLOT(slotLeftShiftclicked(void)));
 
-	tmp_pb = new KCalcButton("Rsh", parent, "RightBitShift-Button",
+	tmp_pb = new KCalcButton("Rsh", tqparent, "RightBitShift-Button",
 					i18n("Right bit shift"));
 	tmp_pb->setAccel(Key_Greater);
 	pbLogic.insert("RightShift", tmp_pb);
@@ -794,13 +794,13 @@ void KCalculator::setupLogicKeys(TQWidget *parent)
 		TQT_SLOT(slotRightShiftclicked(void)));
 }
 
-void KCalculator::setupScientificKeys(TQWidget *parent)
+void KCalculator::setupScientificKeys(TQWidget *tqparent)
 {
-	Q_CHECK_PTR(parent);
+	Q_CHECK_PTR(tqparent);
 
 	KCalcButton *tmp_pb;
 
-	tmp_pb = new KCalcButton("Hyp", parent, "Hyp-Button", i18n("Hyperbolic mode"));
+	tmp_pb = new KCalcButton("Hyp", tqparent, "Hyp-Button", i18n("Hyperbolic mode"));
 	pbScientific.insert("HypMode", tmp_pb);
 	tmp_pb->setAccel(Key_H);
 	connect(this, TQT_SIGNAL(switchShowAccels(bool)),
@@ -808,7 +808,7 @@ void KCalculator::setupScientificKeys(TQWidget *parent)
 	connect(tmp_pb, TQT_SIGNAL(toggled(bool)), TQT_SLOT(slotHyptoggled(bool)));
 	tmp_pb->setToggleButton(true);
 
-	tmp_pb = new KCalcButton(parent, "Sin-Button");
+	tmp_pb = new KCalcButton(tqparent, "Sin-Button");
 	pbScientific.insert("Sine", tmp_pb);
 	tmp_pb->addMode(ModeNormal, "Sin", i18n("Sine"));
 	tmp_pb->addMode(ModeInverse, "Asin", i18n("Arc sine"));
@@ -822,7 +822,7 @@ void KCalculator::setupScientificKeys(TQWidget *parent)
 		tmp_pb, TQT_SLOT(slotSetMode(ButtonModeFlags,bool)));
 	connect(tmp_pb, TQT_SIGNAL(clicked(void)), TQT_SLOT(slotSinclicked(void)));
 
-	tmp_pb = new KCalcButton(parent, "Cos-Button");
+	tmp_pb = new KCalcButton(tqparent, "Cos-Button");
 	pbScientific.insert("Cosine", tmp_pb);
 	tmp_pb->addMode(ModeNormal, "Cos", i18n("Cosine"));
 	tmp_pb->addMode(ModeInverse, "Acos", i18n("Arc cosine"));
@@ -836,7 +836,7 @@ void KCalculator::setupScientificKeys(TQWidget *parent)
 		tmp_pb, TQT_SLOT(slotSetMode(ButtonModeFlags,bool)));
 	connect(tmp_pb, TQT_SIGNAL(clicked(void)), TQT_SLOT(slotCosclicked(void)));
 
-	tmp_pb = new KCalcButton(parent, "Tan-Button");
+	tmp_pb = new KCalcButton(tqparent, "Tan-Button");
 	pbScientific.insert("Tangent", tmp_pb);
 	tmp_pb->addMode(ModeNormal, "Tan", i18n("Tangent"));
 	tmp_pb->addMode(ModeInverse, "Atan", i18n("Arc tangent"));
@@ -850,7 +850,7 @@ void KCalculator::setupScientificKeys(TQWidget *parent)
 		tmp_pb, TQT_SLOT(slotSetMode(ButtonModeFlags,bool)));
 	connect(tmp_pb, TQT_SIGNAL(clicked(void)),TQT_SLOT(slotTanclicked(void)));
 
-	tmp_pb = new KCalcButton(parent, "Ln-Button");
+	tmp_pb = new KCalcButton(tqparent, "Ln-Button");
 	tmp_pb->addMode(ModeNormal, "Ln", i18n("Natural log"));
 	tmp_pb->addMode(ModeInverse, "e<sup> x </sup>", i18n("Exponential function"),
 			true);
@@ -862,7 +862,7 @@ void KCalculator::setupScientificKeys(TQWidget *parent)
 		tmp_pb, TQT_SLOT(slotSetMode(ButtonModeFlags,bool)));
 	connect(tmp_pb, TQT_SIGNAL(clicked(void)), TQT_SLOT(slotLnclicked(void)));
 
-	tmp_pb = new KCalcButton(parent, "Log-Button");
+	tmp_pb = new KCalcButton(tqparent, "Log-Button");
 	tmp_pb->addMode(ModeNormal, "Log", i18n("Logarithm to base 10"));
 	tmp_pb->addMode(ModeInverse, "10<sup> x </sup>", i18n("10 to the power of x"),
 			true);
@@ -876,13 +876,13 @@ void KCalculator::setupScientificKeys(TQWidget *parent)
 
 }
 
-void KCalculator::setupStatisticKeys(TQWidget *parent)
+void KCalculator::setupStatisticKeys(TQWidget *tqparent)
 {
-	Q_CHECK_PTR(parent);
+	Q_CHECK_PTR(tqparent);
 
 	KCalcButton *tmp_pb;
 
-	tmp_pb = new KCalcButton(parent, "Stat.NumData-Button");
+	tmp_pb = new KCalcButton(tqparent, "Stat.NumData-Button");
 	tmp_pb->addMode(ModeNormal, "N", i18n("Number of data entered"));
 	tmp_pb->addMode(ModeInverse, TQString::fromUtf8("\xce\xa3")
 			+ "x", i18n("Sum of all data items"));
@@ -894,7 +894,7 @@ void KCalculator::setupStatisticKeys(TQWidget *parent)
 		tmp_pb, TQT_SLOT(slotSetMode(ButtonModeFlags,bool)));
 	connect(tmp_pb, TQT_SIGNAL(clicked(void)), TQT_SLOT(slotStatNumclicked(void)));
 
-	tmp_pb = new KCalcButton(parent, "Stat.Median-Button");
+	tmp_pb = new KCalcButton(tqparent, "Stat.Median-Button");
 	tmp_pb->addMode(ModeNormal, "Med", i18n("Median"));
 	pbStat.insert("Median", tmp_pb);
         mStatButtonList.append(tmp_pb);
@@ -903,7 +903,7 @@ void KCalculator::setupStatisticKeys(TQWidget *parent)
 		tmp_pb, TQT_SLOT(slotSetAccelDisplayMode(bool)));
 	connect(tmp_pb, TQT_SIGNAL(clicked(void)), TQT_SLOT(slotStatMedianclicked(void)));
 
-	tmp_pb = new KCalcButton(parent, "Stat.Mean-Button");
+	tmp_pb = new KCalcButton(tqparent, "Stat.Mean-Button");
 	tmp_pb->addMode(ModeNormal, "Mea", i18n("Mean"));
 	tmp_pb->addMode(ModeInverse, TQString::fromUtf8("\xce\xa3")
 			+ "x<sup>2</sup>",
@@ -916,7 +916,7 @@ void KCalculator::setupStatisticKeys(TQWidget *parent)
 		tmp_pb, TQT_SLOT(slotSetMode(ButtonModeFlags,bool)));
 	connect(tmp_pb, TQT_SIGNAL(clicked(void)), TQT_SLOT(slotStatMeanclicked(void)));
 
-	tmp_pb = new KCalcButton(parent, "Stat.StandardDeviation-Button");
+	tmp_pb = new KCalcButton(tqparent, "Stat.StandardDeviation-Button");
 	tmp_pb->addMode(ModeNormal, TQString::fromUtf8("σ",-1) +  "<sub>N-1</sub>",
 			i18n("Sample standard deviation"), true);
 	tmp_pb->addMode(ModeInverse, TQString::fromUtf8("σ",-1) +  "<sub>N</sub>",
@@ -929,7 +929,7 @@ void KCalculator::setupStatisticKeys(TQWidget *parent)
 		tmp_pb, TQT_SLOT(slotSetMode(ButtonModeFlags,bool)));
 	connect(tmp_pb, TQT_SIGNAL(clicked(void)), TQT_SLOT(slotStatStdDevclicked(void)));
 
-	tmp_pb = new KCalcButton(parent, "Stat.DataInput-Button");
+	tmp_pb = new KCalcButton(tqparent, "Stat.DataInput-Button");
 	tmp_pb->addMode(ModeNormal, "Dat", i18n("Enter data"));
 	tmp_pb->addMode(ModeInverse, "CDat", i18n("Delete last data item"));
 	pbStat.insert("InputData", tmp_pb);
@@ -940,7 +940,7 @@ void KCalculator::setupStatisticKeys(TQWidget *parent)
 		tmp_pb, TQT_SLOT(slotSetMode(ButtonModeFlags,bool)));
 	connect(tmp_pb, TQT_SIGNAL(clicked(void)), TQT_SLOT(slotStatDataInputclicked(void)));
 
-	tmp_pb = new KCalcButton(parent, "Stat.ClearData-Button");
+	tmp_pb = new KCalcButton(tqparent, "Stat.ClearData-Button");
 	tmp_pb->addMode(ModeNormal, "CSt", i18n("Clear data store"));
 	pbStat.insert("ClearData", tmp_pb);
         mStatButtonList.append(tmp_pb);
@@ -949,16 +949,16 @@ void KCalculator::setupStatisticKeys(TQWidget *parent)
 	connect(tmp_pb, TQT_SIGNAL(clicked(void)), TQT_SLOT(slotStatClearDataclicked(void)));
 }
 
-void KCalculator::setupConstantsKeys(TQWidget *parent)
+void KCalculator::setupConstantsKeys(TQWidget *tqparent)
 {
-	Q_CHECK_PTR(parent);
+	Q_CHECK_PTR(tqparent);
 
 	ConstButtonGroup = new TQButtonGroup(0, "Const-Button-Group");
 	connect(ConstButtonGroup, TQT_SIGNAL(clicked(int)), TQT_SLOT(slotConstclicked(int)));
 
 
 	KCalcConstButton *tmp_pb;
-	tmp_pb = new KCalcConstButton(parent, 0, "C1");
+	tmp_pb = new KCalcConstButton(tqparent, 0, "C1");
 	tmp_pb->setAccel(ALT + Key_1);
 	pbConstant[0] = tmp_pb;
 	connect(this, TQT_SIGNAL(switchShowAccels(bool)),
@@ -967,7 +967,7 @@ void KCalculator::setupConstantsKeys(TQWidget *parent)
 		tmp_pb, TQT_SLOT(slotSetMode(ButtonModeFlags,bool)));
 	ConstButtonGroup->insert(tmp_pb, 0);
 
-	tmp_pb = new KCalcConstButton(parent, 1, "C2");
+	tmp_pb = new KCalcConstButton(tqparent, 1, "C2");
         tmp_pb->setAccel(ALT + Key_2);
 	pbConstant[1] = tmp_pb;
 	connect(this, TQT_SIGNAL(switchShowAccels(bool)),
@@ -976,7 +976,7 @@ void KCalculator::setupConstantsKeys(TQWidget *parent)
 		tmp_pb, TQT_SLOT(slotSetMode(ButtonModeFlags,bool)));
 	ConstButtonGroup->insert(tmp_pb, 1);
 
-	tmp_pb = new KCalcConstButton(parent, 2, "C3");
+	tmp_pb = new KCalcConstButton(tqparent, 2, "C3");
         tmp_pb->setAccel(ALT + Key_3);
 	pbConstant[2] = tmp_pb;
 	connect(this, TQT_SIGNAL(switchShowAccels(bool)),
@@ -985,7 +985,7 @@ void KCalculator::setupConstantsKeys(TQWidget *parent)
 		tmp_pb, TQT_SLOT(slotSetMode(ButtonModeFlags,bool)));
 	ConstButtonGroup->insert(tmp_pb, 2);
 
-	tmp_pb = new KCalcConstButton(parent, 3, "C4");
+	tmp_pb = new KCalcConstButton(tqparent, 3, "C4");
         tmp_pb->setAccel(ALT + Key_4);
 	pbConstant[3] = tmp_pb;
 	connect(this, TQT_SIGNAL(switchShowAccels(bool)),
@@ -994,7 +994,7 @@ void KCalculator::setupConstantsKeys(TQWidget *parent)
 		tmp_pb, TQT_SLOT(slotSetMode(ButtonModeFlags,bool)));
 	ConstButtonGroup->insert(tmp_pb, 3);
 
-	tmp_pb = new KCalcConstButton(parent, 4, "C5");
+	tmp_pb = new KCalcConstButton(tqparent, 4, "C5");
         tmp_pb->setAccel(ALT + Key_5);
 	pbConstant[4] = tmp_pb;
 	connect(this, TQT_SIGNAL(switchShowAccels(bool)),
@@ -1003,7 +1003,7 @@ void KCalculator::setupConstantsKeys(TQWidget *parent)
 		tmp_pb, TQT_SLOT(slotSetMode(ButtonModeFlags,bool)));
 	ConstButtonGroup->insert(tmp_pb, 4);
 
-	tmp_pb = new KCalcConstButton(parent, 5, "C6");
+	tmp_pb = new KCalcConstButton(tqparent, 5, "C6");
         tmp_pb->setAccel(ALT + Key_6);
 	pbConstant[5]  = tmp_pb;
 	connect(this, TQT_SIGNAL(switchShowAccels(bool)),
@@ -1041,7 +1041,7 @@ void KCalculator::updateGeometry(void)
     s.setHeight(mSmallPage->fontMetrics().lineSpacing());
 
     // why this stupid cast!
-    l = const_cast<TQObjectList *>(mSmallPage->children());
+    l = const_cast<TQObjectList *>(mSmallPage->tqchildren());
 
     for(uint i=0; i < l->count(); i++)
     {
@@ -1050,7 +1050,7 @@ void KCalculator::updateGeometry(void)
         {
             TQWidget *tmp_widget = dynamic_cast<TQWidget *>(o);
             margin = TQApplication::style().
-                pixelMetric(TQStyle::PM_ButtonMargin, (tmp_widget))*2;
+                tqpixelMetric(TQStyle::PM_ButtonMargin, (tmp_widget))*2;
             tmp_widget->setFixedSize(s.width()+margin, s.height()+margin);
             //tmp_widget->setMinimumSize(s.width()+margin, s.height()+margin);
             tmp_widget->installEventFilter( this );
@@ -1059,13 +1059,13 @@ void KCalculator::updateGeometry(void)
     }
 
     // why this stupic cast !!
-    l = const_cast<TQObjectList*>(mLargePage->children());
+    l = const_cast<TQObjectList*>(mLargePage->tqchildren());
 
-    int h1 = (NumButtonGroup->find(0x0F))->minimumSize().height();
+    int h1 = (NumButtonGroup->tqfind(0x0F))->tqminimumSize().height();
     int h2 = static_cast<int>( (static_cast<float>(h1) + 4.0) / 5.0 );
     s.setWidth(mLargePage->fontMetrics().width("MMM") +
                TQApplication::style().
-               pixelMetric(TQStyle::PM_ButtonMargin, NumButtonGroup->find(0x0F))*2);
+               tqpixelMetric(TQStyle::PM_ButtonMargin, NumButtonGroup->tqfind(0x0F))*2);
     s.setHeight(h1 + h2);
 
     for(uint i = 0; i < l->count(); i++)
@@ -1086,13 +1086,13 @@ void KCalculator::updateGeometry(void)
 
 
 
-    l = (TQObjectList*)mNumericPage->children(); // silence please
+    l = (TQObjectList*)mNumericPage->tqchildren(); // silence please
 
-    h1 = (NumButtonGroup->find(0x0F))->minimumSize().height();
+    h1 = (NumButtonGroup->tqfind(0x0F))->tqminimumSize().height();
     h2 = (int)((((float)h1 + 4.0) / 5.0));
     s.setWidth(mLargePage->fontMetrics().width("MMM") +
                TQApplication::style().
-               pixelMetric(TQStyle::PM_ButtonMargin, NumButtonGroup->find(0x0F))*2);
+               tqpixelMetric(TQStyle::PM_ButtonMargin, NumButtonGroup->tqfind(0x0F))*2);
     s.setHeight(h1 + h2);
 
     for(uint i = 0; i < l->count(); i++)
@@ -1110,7 +1110,7 @@ void KCalculator::updateGeometry(void)
     // Set Buttons of double size
     TQSize t(s);
     t.setWidth(2*s.width());
-    NumButtonGroup->find(0x00)->setFixedSize(t);
+    NumButtonGroup->tqfind(0x00)->setFixedSize(t);
     t = s;
     t.setHeight(2*s.height());
     pbEqual->setFixedSize(t);
@@ -1152,11 +1152,11 @@ void KCalculator::slotBaseSelected(int base)
 
 	// Enable the buttons not available in this base
 	for (int i=0; i<current_base; i++)
-	  NumButtonGroup->find(i)->setEnabled (true);
+	  NumButtonGroup->tqfind(i)->setEnabled (true);
 
 	// Disable the buttons not available in this base
 	for (int i=current_base; i<16; i++)
-	  NumButtonGroup->find(i)->setEnabled (false);
+	  NumButtonGroup->tqfind(i)->setEnabled (false);
 
 	// Only enable the decimal point in decimal
 	pbPeriod->setEnabled(current_base == NB_DECIMAL);
@@ -1271,7 +1271,7 @@ void KCalculator::slotInvtoggled(bool flag)
 	else
 	{
 		statusBar()->changeItem("NORM", 0);
-		calc_display->setStatusText(0, TQString::null);
+		calc_display->setStatusText(0, TQString());
 	}
 }
 
@@ -1544,7 +1544,7 @@ void KCalculator::slotMCclicked(void)
 {
 	memory_num		= 0;
 	statusBar()->changeItem(" \xa0\xa0 ",3);
-	calc_display->setStatusText(3, TQString::null);
+	calc_display->setStatusText(3, TQString());
 	pbMemRecall->setDisabled(true);
 }
 
@@ -1951,7 +1951,7 @@ void KCalculator::slotStatshow(bool toggled)
 		pbStat["ClearData"]->hide();
 	}
 	adjustSize();
-	setFixedSize(sizeHint());
+	setFixedSize(tqsizeHint());
 	KCalcSettings::setShowStat(toggled);
 }
 
@@ -1983,10 +1983,10 @@ void KCalculator::slotScientificshow(bool toggled)
 		pbAngleChoose->hide();
 		if(statusBar()->hasItem(2))
 			statusBar()->removeItem(2);
-		calc_display->setStatusText(2, TQString::null);
+		calc_display->setStatusText(2, TQString());
 	}
 	adjustSize();
-	setFixedSize(sizeHint());
+	setFixedSize(tqsizeHint());
 	KCalcSettings::setShowScientific(toggled);
 }
 
@@ -2007,7 +2007,7 @@ void KCalculator::slotLogicshow(bool toggled)
 		resetBase();
 		BaseChooseGroup->show();
 		for (int i=10; i<16; i++)
-			(NumButtonGroup->find(i))->show();
+			(NumButtonGroup->tqfind(i))->show();
 	}
 	else
 	{
@@ -2022,12 +2022,12 @@ void KCalculator::slotLogicshow(bool toggled)
 		BaseChooseGroup->hide();
 		if(statusBar()->hasItem(1))
 			statusBar()->removeItem(1);
-		calc_display->setStatusText(1, TQString::null);
+		calc_display->setStatusText(1, TQString());
 		for (int i=10; i<16; i++)
-			(NumButtonGroup->find(i))->hide();
+			(NumButtonGroup->tqfind(i))->hide();
 	}
 	adjustSize();
-	setFixedSize(sizeHint());
+	setFixedSize(tqsizeHint());
 	KCalcSettings::setShowLogic(toggled);
 }
 
@@ -2053,7 +2053,7 @@ void KCalculator::slotConstantsShow(bool toggled)
 		pbConstant[5]->hide();
 	}
 	adjustSize();
-	setFixedSize(sizeHint());
+	setFixedSize(tqsizeHint());
 	KCalcSettings::setShowConstants(toggled);
 }
 
@@ -2104,12 +2104,12 @@ void KCalculator::updateSettings()
 	}
 	else
 	{
-		setCaption(TQString::null);
+		setCaption(TQString());
 	}
 	calc_display->changeSettings();
 
 	updateGeometry();
-	resize(minimumSize());
+	resize(tqminimumSize());
 
 	//
 	// 1999-10-31 Espen Sand: Don't ask me why ;)
@@ -2145,7 +2145,7 @@ void KCalculator::set_colors()
 	TQPalette numPal(KCalcSettings::numberButtonsColor(), bg);
 	for(int i=0; i<10; i++)
 	{
-		(NumButtonGroup->find(i))->setPalette(numPal);
+		(NumButtonGroup->tqfind(i))->setPalette(numPal);
 	}
 
 	TQPalette funcPal(KCalcSettings::functionButtonsColor(), bg);
@@ -2164,7 +2164,7 @@ void KCalculator::set_colors()
 	TQPalette hexPal(KCalcSettings::hexButtonsColor(), bg);
 	for(int i=10; i<16; i++)
 	{
-		(NumButtonGroup->find(i))->setPalette(hexPal);
+		(NumButtonGroup->tqfind(i))->setPalette(hexPal);
 	}
 
 	TQPalette memPal(KCalcSettings::memoryButtonsColor(), bg);
@@ -2218,26 +2218,26 @@ bool KCalculator::eventFilter(TQObject *o, TQEvent *e)
 			  // Was it hex-button or normal digit??
 			  if (num_but <10)
 			    for(int i=0; i<10; i++)
-			      (NumButtonGroup->find(i))->setPalette(pal);
+			      (NumButtonGroup->tqfind(i))->setPalette(pal);
 			  else
 			    for(int i=10; i<16; i++)
-			      (NumButtonGroup->find(i))->setPalette(pal);
+			      (NumButtonGroup->tqfind(i))->setPalette(pal);
 
 			  return true;
 			}
-			else if( mFunctionButtonList.findRef((KCalcButton*)o) != -1)
+			else if( mFunctionButtonList.tqfindRef((KCalcButton*)o) != -1)
 			{
 				list = &mFunctionButtonList;
 			}
-			else if( mStatButtonList.findRef((KCalcButton*)o) != -1)
+			else if( mStatButtonList.tqfindRef((KCalcButton*)o) != -1)
 			{
 				list = &mStatButtonList;
 			}
-			else if( mMemButtonList.findRef((KCalcButton*)o) != -1)
+			else if( mMemButtonList.tqfindRef((KCalcButton*)o) != -1)
 			{
 				list = &mMemButtonList;
 			}
-			else if( mOperationButtonList.findRef((KCalcButton*)o) != -1)
+			else if( mOperationButtonList.tqfindRef((KCalcButton*)o) != -1)
 			{
 				list = &mOperationButtonList;
 			}
@@ -2296,7 +2296,7 @@ extern "C" KDE_EXPORT int kdemain(int argc, char *argv[])
 
 	KCalculator *calc = new KCalculator;
 	app.setTopWidget(calc);
-	calc->setCaption(TQString::null);
+	calc->setCaption(TQString());
 	calc->show();
 
 	int exitCode = app.exec();

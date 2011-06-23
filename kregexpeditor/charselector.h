@@ -24,12 +24,13 @@ class TQComboBox;
 class TQWidgetStack;
 class LimitedCharLineEdit;
 
-class CharSelector :public QWidget
+class CharSelector :public TQWidget
 {
     Q_OBJECT
+  TQ_OBJECT
 
 public:
-    CharSelector( TQWidget* parent, const char* name = 0 );
+    CharSelector( TQWidget* tqparent, const char* name = 0 );
     TQString text() const;
     void setText( TQString text );
     bool isEmpty() const;

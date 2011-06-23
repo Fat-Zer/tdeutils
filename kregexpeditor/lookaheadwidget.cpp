@@ -16,7 +16,7 @@
  *  Boston, MA 02110-1301, USA.
  **/
 
-#ifdef QT_ONLY
+#ifdef TQT_ONLY
   #include "compat.h"
 #else
   #include <klocale.h>
@@ -28,16 +28,16 @@
 #include "concwidget.h"
 #include <tqpainter.h>
 
-LookAheadWidget::LookAheadWidget( RegExpEditorWindow* editorWindow, RegExpType tp, TQWidget* parent, const char* name )
-  :SingleContainerWidget(editorWindow, parent, name ? name : "LookAheadWidget" ), _tp(tp)
+LookAheadWidget::LookAheadWidget( RegExpEditorWindow* editorWindow, RegExpType tp, TQWidget* tqparent, const char* name )
+  :SingleContainerWidget(editorWindow, tqparent, name ? name : "LookAheadWidget" ), _tp(tp)
 {
   _child = new ConcWidget( editorWindow, this );
   init();
 }
 
 LookAheadWidget::LookAheadWidget( LookAheadRegExp* regexp, RegExpEditorWindow* editorWindow, RegExpType tp,
-                                  TQWidget* parent, const char* name )
-  :SingleContainerWidget( editorWindow, parent, name ? name : "LookAheadWidget" ), _tp(tp)
+                                  TQWidget* tqparent, const char* name )
+  :SingleContainerWidget( editorWindow, tqparent, name ? name : "LookAheadWidget" ), _tp(tp)
 {
   RegExpWidget* child = WidgetFactory::createWidget( regexp->child(), editorWindow, this );
   if ( ! (_child = dynamic_cast<ConcWidget*>( child ) ) )
@@ -60,23 +60,23 @@ RegExp* LookAheadWidget::regExp() const
                               _child->regExp() );
 }
 
-TQSize LookAheadWidget::sizeHint() const
+TQSize LookAheadWidget::tqsizeHint() const
 {
-  // TODO: Merge with RepeatWidget::sizeHint
+  // TODO: Merge with RepeatWidget::tqsizeHint
   TQFontMetrics metrics = fontMetrics();
   _textSize = metrics.size( 0, _text );
 
-  _childSize = _child->sizeHint();
+  _childSize = _child->tqsizeHint();
 
   int height = _textSize.height() + bdSize + _childSize.height() + bdSize + 2*pw;
-  int width  = 2 * pw + QMAX(_childSize.width(), 4*bdSize + _textSize.width());
+  int width  = 2 * pw + TQMAX(_childSize.width(), 4*bdSize + _textSize.width());
   return TQSize(width,height);
 }
 
 void LookAheadWidget::paintEvent( TQPaintEvent *e )
 {
   // TODO: Merge with RepeatWidget::paintEvent
-  TQSize mySize = sizeHint();
+  TQSize mySize = tqsizeHint();
   TQPainter painter(this);
 
   drawPossibleSelection( painter, mySize );

@@ -37,9 +37,9 @@ bool KTabController::handleKeyPress( TQKeyEvent *KeyEvent )
 {
   bool KeyUsed = false;
 
-  bool ShiftPressed =  KeyEvent->state() & Qt::ShiftButton;
+  bool ShiftPressed =  KeyEvent->state() & TQt::ShiftButton;
 
-  if( KeyEvent->key() == Qt::Key_Tab )
+  if( KeyEvent->key() == TQt::Key_Tab )
   {
     // are we in the char column?
     if( HexEdit->cursorColumn() == KHexEdit::CharColumnId )

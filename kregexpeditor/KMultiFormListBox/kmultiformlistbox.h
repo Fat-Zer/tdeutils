@@ -25,7 +25,7 @@
 #include <tqlayout.h>
 #include <tqscrollview.h>
 
-#ifdef QT_ONLY
+#ifdef TQT_ONLY
   #include "compat.h"
 #else
   #include <klocale.h>
@@ -63,6 +63,7 @@ class KMultiFormListBoxMultiVisible;
 class KMultiFormListBox : public TQWidget {
 
 Q_OBJECT
+  TQ_OBJECT
 
 public:
 
@@ -71,11 +72,11 @@ public:
   /**
 		 @param factory A factory used to generate the instances of
      KMultiFormListBoxEntry class which is repeated in the KMultiFormListBox
-		 @param parent A pointer to the parent widget
+		 @param tqparent A pointer to the tqparent widget
    **/
   KMultiFormListBox(KMultiFormListBoxFactory *factory,
                     KMultiFormListBoxType tp=Windowed,
-										TQWidget *parent = 0, bool showUpDownButtons = true,
+										TQWidget *tqparent = 0, bool showUpDownButtons = true,
 										bool showHelpButton = true, TQString addButtonText = i18n("Add"),
 										const char *name = 0);
 

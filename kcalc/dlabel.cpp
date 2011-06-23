@@ -2,7 +2,7 @@
     $Id$
 
     KCalc, a scientific calculator for the X window system using the
-    Qt widget libraries, available at no cost at http://www.troll.no
+    TQt widget libraries, available at no cost at http://www.troll.no
     
     Copyright (C) 1996 Bernd Johannes Wuebben   
                        wuebben@math.cornell.edu
@@ -34,9 +34,9 @@
 
 
 
-DispLogic::DispLogic(TQWidget *parent, const char *name,
+DispLogic::DispLogic(TQWidget *tqparent, const char *name,
 		     KActionCollection *coll)
-  :KCalcDisplay(parent,name), _history_index(0)
+  :KCalcDisplay(tqparent,name), _history_index(0)
 {
 	KNumber::setDefaultFloatOutput(true);
 	KNumber::setDefaultFractionalInput(true);

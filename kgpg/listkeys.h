@@ -38,7 +38,7 @@
 class TQPushButton;
 class TQPopupMenu;
 class TQLabel;
-class QCheckbox;
+class TQCheckbox;
 class KStatusBar;
 class KPassivePopup;
 class KProcess;
@@ -68,9 +68,10 @@ struct gpgKey
 class KgpgSelKey : public KDialogBase
 {
         Q_OBJECT
+  TQ_OBJECT
 
 public:
-        KgpgSelKey( TQWidget *parent = 0, const char *name = 0,bool allowMultipleSelection=false, TQString preselected=TQString::null);
+        KgpgSelKey( TQWidget *tqparent = 0, const char *name = 0,bool allowMultipleSelection=false, TQString preselected=TQString());
         KListView *keysListpr;
         TQPixmap keyPair;
         TQCheckBox *local;
@@ -91,9 +92,10 @@ public slots:
 class KeyView : public KListView
 {
         Q_OBJECT
+  TQ_OBJECT
         friend class listKeys;
 public:
-        KeyView( TQWidget *parent = 0, const char *name = 0);
+        KeyView( TQWidget *tqparent = 0, const char *name = 0);
         bool displayPhoto,displayOnlySecret,displayDisabled;
         int previewSize;
 	TQString secretList;
@@ -142,14 +144,15 @@ protected:
 class mySearchLine: public KListViewSearchLine
 {
     Q_OBJECT
+  TQ_OBJECT
 public:
-    mySearchLine(TQWidget *parent = 0, KeyView *listView = 0, const char *name = 0);
+    mySearchLine(TQWidget *tqparent = 0, KeyView *listView = 0, const char *name = 0);
     virtual ~mySearchLine();
 private:
  KeyView *searchListView;    
     
 public slots:
-virtual void updateSearch(const TQString &s = TQString::null);
+virtual void updateSearch(const TQString &s = TQString());
 protected:
 virtual bool itemMatches(const TQListViewItem *item, const TQString & s)  const;
 };
@@ -159,9 +162,10 @@ class listKeys : public KMainWindow, virtual public KeyInterface
 {
         friend class KeyView;
         Q_OBJECT
+  TQ_OBJECT
 
 public:
-        listKeys(TQWidget *parent=0, const char *name=0);
+        listKeys(TQWidget *tqparent=0, const char *name=0);
         ~listKeys();
         TQLabel *keyPhoto;
         KeyView *keysList2;
@@ -192,7 +196,7 @@ private:
         groupEdit *gEdit;
         KgpgInterface *revKeyProcess;
         KDialogBase *addUidWidget;
-        QClipboard::Mode clipboardMode;
+        TQClipboard::Mode clipboardMode;
         TQTimer *statusbarTimer;
 
 

@@ -46,7 +46,7 @@
 # define W(flag, data) ((flag) ? SWAP (data) : (data))
 #endif
 
-typedef Q_UINT32 nls_uint32;
+typedef TQ_UINT32 nls_uint32;
 
 struct loaded_domain
 {
@@ -137,7 +137,7 @@ void ThemeLocale::unload()
 TQString ThemeLocale::translate(TQString text) const
 {
   if(text == 0)
-    return TQString::null;
+    return TQString();
   if(m_domain.data)
   {
     TQString result = TQString::fromUtf8(tl_nl_find_msg(&m_domain, text.ascii()));
@@ -157,12 +157,12 @@ void ThemeLocale::setLanguage(const TQStringList &languages)
       ++it)
   {
     TQString file =
-        TQString("locale/%1/LC_MESSAGES/%2.mo").arg(*it).arg(m_theme->mo());
+        TQString("locale/%1/LC_MESSAGES/%2.mo").tqarg(*it).tqarg(m_theme->mo());
 
     if(m_theme->fileExists(file))
     {
       TQBuffer buffer(m_theme->readThemeFile(file));
-      tl_nl_load_domain(&buffer, buffer.size(), &m_domain);
+      tl_nl_load_domain(TQT_TQIODEVICE(&buffer), buffer.size(), &m_domain);
       m_language = *it;
       return;
     }

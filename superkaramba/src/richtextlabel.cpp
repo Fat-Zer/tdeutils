@@ -17,7 +17,7 @@ RichTextLabel::RichTextLabel(karamba* k) :
     Meter(k, 0, 0, 100, 100),
     text(0),
     source(""),
-    colorGrp(k->colorGroup()),
+    colorGrp(k->tqcolorGroup()),
     underlineLinks(false)
 {
   originalSize = TQSize(0, 0);
@@ -27,7 +27,7 @@ RichTextLabel::RichTextLabel(karamba* k, int x, int y, int w, int h) :
     Meter(k, x, y, w, h),
     text(0),
     source(""),
-    colorGrp(k->colorGroup()),
+    colorGrp(k->tqcolorGroup()),
     underlineLinks(false)
 {
   kdDebug() << k_funcinfo << x << ", " << y << ", " << w << ", " << h << endl;
@@ -60,9 +60,9 @@ void RichTextLabel::setText(TQString t, bool linkUnderline)
 
   text = new TQSimpleRichText(t, font, m_karamba->theme().path(),
                              0,        // default TQStyleSheet*
-                             0,        // default QMimeSourceFactory
+                             0,        // default TQMimeSourceFactory
                              -1,       // no pageBreak
-                             Qt::blue, // (has no effect) link Color
+                             TQt::blue, // (has no effect) link Color
                              underlineLinks);
 
   // set the text to a reasonable size

@@ -29,9 +29,10 @@
 
 class KTimerJob : public TQObject {
  Q_OBJECT
+  TQ_OBJECT
 
  public:
-    KTimerJob( TQObject *parent=0, const char *name=0 );
+    KTimerJob( TQObject *tqparent=0, const char *name=0 );
     virtual ~KTimerJob();
 
     enum States { Stopped, Paused, Started };
@@ -90,8 +91,9 @@ class KTimerJob : public TQObject {
 class KTimerPref : public PrefWidget
 {
     Q_OBJECT
+  TQ_OBJECT
  public:
-    KTimerPref( TQWidget *parent=0, const char *name = 0 );
+    KTimerPref( TQWidget *tqparent=0, const char *name = 0 );
     virtual ~KTimerPref();
 
  protected slots:

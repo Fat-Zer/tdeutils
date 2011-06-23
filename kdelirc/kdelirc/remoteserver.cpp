@@ -58,7 +58,7 @@ void Remote::loadFromFile(const TQString &fileName)
 	curRB = 0;
 
 	TQFile xmlFile(fileName);
-	TQXmlInputSource source(&xmlFile);
+	TQXmlInputSource source(TQT_TQIODEVICE(&xmlFile));
 	TQXmlSimpleReader reader;
 	reader.setContentHandler(this);
 	reader.parse(source);

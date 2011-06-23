@@ -107,8 +107,8 @@ void CpuPlugin::showAbout()
   KAboutApplication(&aboutData).exec();
 }
 
-CpuView::CpuView(KSim::PluginObject *parent, const char *name)
-   : KSim::PluginView(parent, name)
+CpuView::CpuView(KSim::PluginObject *tqparent, const char *name)
+   : KSim::PluginView(tqparent, name)
 {
 #ifdef Q_OS_LINUX
   m_procStream = 0L;
@@ -181,15 +181,15 @@ void CpuView::updateView()
 //    kdDebug(2003) << "idle = " << cpuData.idle << endl;
     
     if (!m_firstTime) {
-      if (text.find("%T") != -1)
+      if (text.tqfind("%T") != -1)
         cpuDiff = cpuData.sys + cpuData.user + cpuData.nice;
-      else if (text.find("%t") != -1)
+      else if (text.tqfind("%t") != -1)
         cpuDiff = cpuData.sys + cpuData.user;
-      else if (text.find("%s") != -1)
+      else if (text.tqfind("%s") != -1)
         cpuDiff = cpuData.sys;
-      else if (text.find("%u") != -1)
+      else if (text.tqfind("%u") != -1)
         cpuDiff = cpuData.user;
-      else if (text.find("%n") != -1)
+      else if (text.tqfind("%n") != -1)
         cpuDiff = cpuData.nice;
 
       cpuDiff *= 100;
@@ -201,7 +201,7 @@ void CpuView::updateView()
         cpuDiff = 100;
     }
 
-    current.chart()->setText(i18n("%1%").arg(cpuDiff));
+    current.chart()->setText(i18n("%1%").tqarg(cpuDiff));
     current.chart()->setValue(cpuDiff, 0);
     current.label()->setValue(cpuDiff);
   }
@@ -225,7 +225,7 @@ void CpuView::updateCpu(CpuData &cpu, int cpuNumber)
   while (!m_procStream->atEnd()) {
     parser = m_procStream->readLine();
     // remove all the entries apart from the line containing 'cpuString'
-    if (!cpuFound && parser.find(TQRegExp(cpuString)) != -1) {
+    if (!cpuFound && parser.tqfind(TQRegExp(cpuString)) != -1) {
       output = parser;
       cpuFound = true;
     }
@@ -361,8 +361,8 @@ KSim::Progress *CpuView::addLabel()
   return progress;
 }
 
-CpuConfig::CpuConfig(KSim::PluginObject *parent, const char *name)
-   : KSim::PluginPage(parent, name)
+CpuConfig::CpuConfig(KSim::PluginObject *tqparent, const char *name)
+   : KSim::PluginPage(tqparent, name)
 {
   TQVBoxLayout * mainLayout = new TQVBoxLayout( this );
   mainLayout->setSpacing( 6 );
@@ -377,27 +377,27 @@ CpuConfig::CpuConfig(KSim::PluginObject *parent, const char *name)
 
   mainLayout->addWidget( m_listView );
 
-  TQHBoxLayout * layout = new TQHBoxLayout;
-  layout->setSpacing( 6 );
+  TQHBoxLayout * tqlayout = new TQHBoxLayout;
+  tqlayout->setSpacing( 6 );
 
   TQSpacerItem * spacer = new TQSpacerItem( 20, 20,
      TQSizePolicy::Expanding, TQSizePolicy::Minimum );
-  layout->addItem(spacer);
+  tqlayout->addItem(spacer);
 
   m_modify = new TQPushButton( this );
   m_modify->setText( i18n( "Modify..." ) );
   connect( m_modify, TQT_SIGNAL( clicked() ), TQT_SLOT( modify() ) );
-  layout->addWidget( m_modify );
-  mainLayout->addLayout( layout );
+  tqlayout->addWidget( m_modify );
+  mainLayout->addLayout( tqlayout );
 
   m_legendBox = new TQGroupBox(this);
   m_legendBox->setColumnLayout(0, Qt::Vertical);
   m_legendBox->setTitle(i18n("Chart Legend"));
-  m_legendBox->layout()->setSpacing(0);
-  m_legendBox->layout()->setMargin(0);
+  m_legendBox->tqlayout()->setSpacing(0);
+  m_legendBox->tqlayout()->setMargin(0);
 
-  m_legendLayout = new TQVBoxLayout(m_legendBox->layout());
-  m_legendLayout->setAlignment(Qt::AlignTop);
+  m_legendLayout = new TQVBoxLayout(m_legendBox->tqlayout());
+  m_legendLayout->tqsetAlignment(TQt::AlignTop);
   m_legendLayout->setSpacing(6);
   m_legendLayout->setMargin(11);
 
@@ -420,7 +420,7 @@ CpuConfig::CpuConfig(KSim::PluginObject *parent, const char *name)
 
   for (uint i = 0; i < addCpus(); ++i)
   {
-    TQCheckListItem *item = new TQCheckListItem(m_listView, i18n("cpu %1").arg(i), TQCheckListItem::CheckBox);
+    TQCheckListItem *item = new TQCheckListItem(m_listView, i18n("cpu %1").tqarg(i), TQCheckListItem::CheckBox);
     item->setText(1, "%T");
   }
 }
@@ -438,7 +438,7 @@ void CpuConfig::readConfig()
   TQStringList::ConstIterator it;
   for (it = enabledCpus.begin(); it != enabledCpus.end(); ++it) {
     if (TQCheckListItem *item =
-          static_cast<TQCheckListItem *>(m_listView->findItem((*it), 0))) {
+          static_cast<TQCheckListItem *>(m_listView->tqfindItem((*it), 0))) {
       item->setOn(true);
       item->setText(1, config()->readEntry(CPU_NAME(cpuNum), "%T"));
     }

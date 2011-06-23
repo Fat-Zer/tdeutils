@@ -26,8 +26,8 @@
 
 namespace KMilo {
 
-Demo::Demo(TQObject *parent, const char *name, const TQStringList& args)
-: Monitor(parent, name, args) {
+Demo::Demo(TQObject *tqparent, const char *name, const TQStringList& args)
+: Monitor(tqparent, name, args) {
 }
 
 

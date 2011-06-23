@@ -43,7 +43,7 @@
 #include "klircclient.h"
 
 
-KLircClient::KLircClient(TQWidget *parent, const char *name) : TQObject(parent, name), theSocket(0), listIsUpToDate(false)
+KLircClient::KLircClient(TQWidget *tqparent, const char *name) : TQObject(tqparent, name), theSocket(0), listIsUpToDate(false)
 {
 	connectToLirc();
 }
@@ -177,14 +177,14 @@ void KLircClient::slotRead()
 		{
 			// <code> <repeat> <button name> <remote control name>
 			line.remove(0, 17); // strip code
-			int pos = line.find(' ');
+			int pos = line.tqfind(' ');
 			if (pos < 0) return;
 			bool ok;
 			int repeat = line.left(pos).toInt(&ok, 16);
 			if (!ok) return;
 			line.remove(0, pos + 1);
 
-			pos = line.find(' ');
+			pos = line.tqfind(' ');
 			if (pos < 0) return;
 			TQString btn = line.left(pos);
 			if(btn.startsWith("'") && btn.endsWith("'"))
@@ -223,7 +223,7 @@ const TQString KLircClient::readLine()
 		theSocket->waitForMore(500, &timeout);
 		if (timeout)
 		{	// something's wrong. there ain't no line comin!
-			return TQString::null;
+			return TQString();
 		}
 	}
 	TQString line = theSocket->readLine();

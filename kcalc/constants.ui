@@ -1,6 +1,6 @@
 <!DOCTYPE UI><UI version="3.3" stdsetdef="1">
 <class>Constants</class>
-<widget class="QWidget">
+<widget class="TQWidget">
     <property name="name">
         <cstring>Constants</cstring>
     </property>
@@ -19,7 +19,7 @@
         <property name="name">
             <cstring>unnamed</cstring>
         </property>
-        <widget class="QGroupBox">
+        <widget class="TQGroupBox">
             <property name="name">
                 <cstring>mainGroupBox</cstring>
             </property>
@@ -30,7 +30,7 @@
                 <property name="name">
                     <cstring>unnamed</cstring>
                 </property>
-                <widget class="QGroupBox">
+                <widget class="TQGroupBox">
                     <property name="name">
                         <cstring>groupBox0</cstring>
                     </property>
@@ -41,7 +41,7 @@
                         <property name="name">
                             <cstring>unnamed</cstring>
                         </property>
-                        <widget class="QLineEdit">
+                        <widget class="TQLineEdit">
                             <property name="name">
                                 <cstring>kcfg_nameConstant0</cstring>
                             </property>
@@ -59,14 +59,14 @@
                             <property name="sizeType">
                                 <enum>Expanding</enum>
                             </property>
-                            <property name="sizeHint">
+                            <property name="tqsizeHint">
                                 <size>
                                     <width>70</width>
                                     <height>21</height>
                                 </size>
                             </property>
                         </spacer>
-                        <widget class="QLineEdit">
+                        <widget class="TQLineEdit">
                             <property name="name">
                                 <cstring>kcfg_valueConstant0</cstring>
                             </property>
@@ -84,7 +84,7 @@
                             <property name="sizeType">
                                 <enum>Expanding</enum>
                             </property>
-                            <property name="sizeHint">
+                            <property name="tqsizeHint">
                                 <size>
                                     <width>80</width>
                                     <height>21</height>
@@ -101,7 +101,7 @@
                         </widget>
                     </hbox>
                 </widget>
-                <widget class="QGroupBox">
+                <widget class="TQGroupBox">
                     <property name="name">
                         <cstring>groupBox1</cstring>
                     </property>
@@ -112,7 +112,7 @@
                         <property name="name">
                             <cstring>unnamed</cstring>
                         </property>
-                        <widget class="QLineEdit">
+                        <widget class="TQLineEdit">
                             <property name="name">
                                 <cstring>kcfg_nameConstant1</cstring>
                             </property>
@@ -130,14 +130,14 @@
                             <property name="sizeType">
                                 <enum>Expanding</enum>
                             </property>
-                            <property name="sizeHint">
+                            <property name="tqsizeHint">
                                 <size>
                                     <width>70</width>
                                     <height>21</height>
                                 </size>
                             </property>
                         </spacer>
-                        <widget class="QLineEdit">
+                        <widget class="TQLineEdit">
                             <property name="name">
                                 <cstring>kcfg_valueConstant1</cstring>
                             </property>
@@ -155,7 +155,7 @@
                             <property name="sizeType">
                                 <enum>Expanding</enum>
                             </property>
-                            <property name="sizeHint">
+                            <property name="tqsizeHint">
                                 <size>
                                     <width>80</width>
                                     <height>21</height>
@@ -172,7 +172,7 @@
                         </widget>
                     </hbox>
                 </widget>
-                <widget class="QGroupBox">
+                <widget class="TQGroupBox">
                     <property name="name">
                         <cstring>groupBox2</cstring>
                     </property>
@@ -183,7 +183,7 @@
                         <property name="name">
                             <cstring>unnamed</cstring>
                         </property>
-                        <widget class="QLineEdit">
+                        <widget class="TQLineEdit">
                             <property name="name">
                                 <cstring>kcfg_nameConstant2</cstring>
                             </property>
@@ -201,14 +201,14 @@
                             <property name="sizeType">
                                 <enum>Expanding</enum>
                             </property>
-                            <property name="sizeHint">
+                            <property name="tqsizeHint">
                                 <size>
                                     <width>70</width>
                                     <height>21</height>
                                 </size>
                             </property>
                         </spacer>
-                        <widget class="QLineEdit">
+                        <widget class="TQLineEdit">
                             <property name="name">
                                 <cstring>kcfg_valueConstant2</cstring>
                             </property>
@@ -226,7 +226,7 @@
                             <property name="sizeType">
                                 <enum>Expanding</enum>
                             </property>
-                            <property name="sizeHint">
+                            <property name="tqsizeHint">
                                 <size>
                                     <width>80</width>
                                     <height>21</height>
@@ -243,7 +243,7 @@
                         </widget>
                     </hbox>
                 </widget>
-                <widget class="QGroupBox">
+                <widget class="TQGroupBox">
                     <property name="name">
                         <cstring>groupBox3</cstring>
                     </property>
@@ -254,7 +254,7 @@
                         <property name="name">
                             <cstring>unnamed</cstring>
                         </property>
-                        <widget class="QLineEdit">
+                        <widget class="TQLineEdit">
                             <property name="name">
                                 <cstring>kcfg_nameConstant3</cstring>
                             </property>
@@ -272,14 +272,14 @@
                             <property name="sizeType">
                                 <enum>Expanding</enum>
                             </property>
-                            <property name="sizeHint">
+                            <property name="tqsizeHint">
                                 <size>
                                     <width>70</width>
                                     <height>21</height>
                                 </size>
                             </property>
                         </spacer>
-                        <widget class="QLineEdit">
+                        <widget class="TQLineEdit">
                             <property name="name">
                                 <cstring>kcfg_valueConstant3</cstring>
                             </property>
@@ -297,7 +297,7 @@
                             <property name="sizeType">
                                 <enum>Expanding</enum>
                             </property>
-                            <property name="sizeHint">
+                            <property name="tqsizeHint">
                                 <size>
                                     <width>80</width>
                                     <height>21</height>
@@ -314,7 +314,7 @@
                         </widget>
                     </hbox>
                 </widget>
-                <widget class="QGroupBox">
+                <widget class="TQGroupBox">
                     <property name="name">
                         <cstring>groupBox4</cstring>
                     </property>
@@ -325,7 +325,7 @@
                         <property name="name">
                             <cstring>unnamed</cstring>
                         </property>
-                        <widget class="QLineEdit">
+                        <widget class="TQLineEdit">
                             <property name="name">
                                 <cstring>kcfg_nameConstant4</cstring>
                             </property>
@@ -343,14 +343,14 @@
                             <property name="sizeType">
                                 <enum>Expanding</enum>
                             </property>
-                            <property name="sizeHint">
+                            <property name="tqsizeHint">
                                 <size>
                                     <width>70</width>
                                     <height>21</height>
                                 </size>
                             </property>
                         </spacer>
-                        <widget class="QLineEdit">
+                        <widget class="TQLineEdit">
                             <property name="name">
                                 <cstring>kcfg_valueConstant4</cstring>
                             </property>
@@ -368,7 +368,7 @@
                             <property name="sizeType">
                                 <enum>Expanding</enum>
                             </property>
-                            <property name="sizeHint">
+                            <property name="tqsizeHint">
                                 <size>
                                     <width>80</width>
                                     <height>21</height>
@@ -385,7 +385,7 @@
                         </widget>
                     </hbox>
                 </widget>
-                <widget class="QGroupBox">
+                <widget class="TQGroupBox">
                     <property name="name">
                         <cstring>groupBox5</cstring>
                     </property>
@@ -396,7 +396,7 @@
                         <property name="name">
                             <cstring>unnamed</cstring>
                         </property>
-                        <widget class="QLineEdit">
+                        <widget class="TQLineEdit">
                             <property name="name">
                                 <cstring>kcfg_nameConstant5</cstring>
                             </property>
@@ -414,14 +414,14 @@
                             <property name="sizeType">
                                 <enum>Expanding</enum>
                             </property>
-                            <property name="sizeHint">
+                            <property name="tqsizeHint">
                                 <size>
                                     <width>70</width>
                                     <height>21</height>
                                 </size>
                             </property>
                         </spacer>
-                        <widget class="QLineEdit">
+                        <widget class="TQLineEdit">
                             <property name="name">
                                 <cstring>kcfg_valueConstant5</cstring>
                             </property>
@@ -439,7 +439,7 @@
                             <property name="sizeType">
                                 <enum>Expanding</enum>
                             </property>
-                            <property name="sizeHint">
+                            <property name="tqsizeHint">
                                 <size>
                                     <width>80</width>
                                     <height>21</height>
@@ -468,7 +468,7 @@
             <property name="sizeType">
                 <enum>Expanding</enum>
             </property>
-            <property name="sizeHint">
+            <property name="tqsizeHint">
                 <size>
                     <width>20</width>
                     <height>40</height>
@@ -479,7 +479,7 @@
 </widget>
 <customwidgets>
 </customwidgets>
-<layoutdefaults spacing="6" margin="11"/>
+<tqlayoutdefaults spacing="6" margin="11"/>
 <includehints>
     <includehint>kpushbutton.h</includehint>
     <includehint>kpushbutton.h</includehint>

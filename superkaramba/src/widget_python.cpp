@@ -63,14 +63,14 @@ long createWidgetMask(long widget, char* path)
 {
   karamba* currTheme = (karamba*)widget;
   TQBitmap bm;
-  TQString maskpath;
+  TQString tqmaskpath;
   TQString rootPath;
   rootPath.setAscii(currTheme->theme().path().ascii());
 
   currTheme->clearMask();
 
-  maskpath.setAscii(path);
-  rootPath.append(maskpath.ascii());
+  tqmaskpath.setAscii(path);
+  rootPath.append(tqmaskpath.ascii());
 
   if(currTheme->theme().isZipTheme())
   {
@@ -86,7 +86,7 @@ long createWidgetMask(long widget, char* path)
   return (long)currTheme->widgetMask;
 }
 
-PyObject* py_create_widget_mask(PyObject *, PyObject *args)
+PyObject* py_create_widget_tqmask(PyObject *, PyObject *args)
 {
   long widget;
   char *text;
@@ -101,7 +101,7 @@ PyObject* py_create_widget_mask(PyObject *, PyObject *args)
 long redrawWidgetBackground(long widget)
 {
   karamba* currTheme = (karamba*)widget;
-  currTheme->kroot->repaint(true);
+  currTheme->kroot->tqrepaint(true);
   return 1;
 }
 

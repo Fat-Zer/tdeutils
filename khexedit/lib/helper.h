@@ -25,7 +25,7 @@
 // temporary solution until syntax highlighting is implemented
 static inline TQColor colorForChar( const KHE::KHEChar Byte )
 {
-  return Byte.isUndefined() ? Qt::yellow : Byte.isPunct() ? Qt::red : Byte.isPrint() ? Qt::black : Qt::blue;
+  return Byte.isUndefined() ? TQt::yellow : Byte.isPunct() ? TQt::red : Byte.isPrint() ? TQt::black : TQt::blue;
 }
 
 #endif

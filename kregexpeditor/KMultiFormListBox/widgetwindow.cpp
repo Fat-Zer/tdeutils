@@ -47,7 +47,7 @@ void WidgetWindow::init(KMultiFormListBoxFactory *factory, KListBox *lb, KMultiF
     myWidget = factory->create(frame);
   }
   TQDataStream stream( _backup, IO_WriteOnly );
-  myFact->toStream( myWidget, stream );
+  myFact->toStream( TQT_TQOBJECT(myWidget), stream );
 
   lay->addWidget(myWidget);
 
@@ -86,7 +86,7 @@ void WidgetWindow::slotCancel()
   }
   else {
     TQDataStream stream( _backup, IO_ReadOnly );
-    myFact->fromStream( stream, myWidget );
+    myFact->fromStream( stream, TQT_TQOBJECT(myWidget) );
   }
   KDialogBase::slotCancel();
 }
@@ -96,9 +96,9 @@ WidgetWindow *WidgetWindow::clone()
   WidgetWindow *item = new WidgetWindow(myFact, listbox);
   TQByteArray data;
   TQDataStream ws( data, IO_WriteOnly );
-  myFact->toStream( myWidget, ws );
+  myFact->toStream( TQT_TQOBJECT(myWidget), ws );
   TQDataStream rs( data, IO_ReadOnly );
-  myFact->fromStream( rs, item->myWidget );
+  myFact->fromStream( rs, TQT_TQOBJECT(item->myWidget) );
 
   item->slotOk();
   return item;
@@ -107,7 +107,7 @@ WidgetWindow *WidgetWindow::clone()
 void WidgetWindow::display()
 {
   TQDataStream stream( _backup, IO_WriteOnly);
-  myFact->toStream( myWidget, stream );
+  myFact->toStream( TQT_TQOBJECT(myWidget), stream );
   show();
 }
 

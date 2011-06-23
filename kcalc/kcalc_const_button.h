@@ -1,6 +1,6 @@
 /*
     KCalc, a scientific calculator for the X window system using the
-    Qt widget libraries, available at no cost at http://www.troll.no
+    TQt widget libraries, available at no cost at http://www.troll.no
 
     Copyright (C) 1996 Bernd Johannes Wuebben
                        wuebben@math.cornell.edu
@@ -31,12 +31,13 @@
 class KCalcConstButton : public KCalcButton
 {
 Q_OBJECT
+  TQ_OBJECT
 
   public:
 
-  KCalcConstButton(TQWidget *parent, int but_num, const char * name = 0);
+  KCalcConstButton(TQWidget *tqparent, int but_num, const char * name = 0);
   
-  KCalcConstButton(const TQString &label, TQWidget *parent, int but_num, const char * name = 0,
+  KCalcConstButton(const TQString &label, TQWidget *tqparent, int but_num, const char * name = 0,
 		   const TQString &tooltip = TQString());
 
   TQString constant(void) const;

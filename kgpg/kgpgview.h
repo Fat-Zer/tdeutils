@@ -41,9 +41,10 @@ class TQDragEnterEvent;
 class MyEditor : public KTextEdit
 {
         Q_OBJECT
+  TQ_OBJECT
 
 public:
-        MyEditor( TQWidget *parent = 0, const char *name = 0);
+        MyEditor( TQWidget *tqparent = 0, const char *name = 0);
 private:
         TQString message,messages,tempFile;
 public slots:
@@ -65,17 +66,18 @@ signals:
 };
 
 
-class KgpgView : public QWidget
+class KgpgView : public TQWidget
 {
         Q_OBJECT
+  TQ_OBJECT
         friend class MyEditor;
 public:
         /** Constructor for the main view */
-        KgpgView(TQWidget *parent = 0, const char *name=0);
+        KgpgView(TQWidget *tqparent = 0, const char *name=0);
         /** Destructor for the main view */
         ~KgpgView();
 
-        /** returns a pointer to the document connected to the view instance. Mind that this method requires a KgpgApp instance as a parent
+        /** returns a pointer to the document connected to the view instance. Mind that this method requires a KgpgApp instance as a tqparent
          * widget to get to the window document pointer by calling the KgpgApp::getDocument() method.
          *
          * @see KgpgApp#getDocument

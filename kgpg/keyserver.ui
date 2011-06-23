@@ -1,6 +1,6 @@
 <!DOCTYPE UI><UI version="3.2" stdsetdef="1">
 <class>keyServerWidget</class>
-<widget class="QWidget">
+<widget class="TQWidget">
     <property name="name">
         <cstring>keyServerWidget</cstring>
     </property>
@@ -19,11 +19,11 @@
         <property name="margin">
             <number>0</number>
         </property>
-        <widget class="QTabWidget" row="0" column="0">
+        <widget class="TQTabWidget" row="0" column="0">
             <property name="name">
                 <cstring>tabWidget2</cstring>
             </property>
-            <widget class="QWidget">
+            <widget class="TQWidget">
                 <property name="name">
                     <cstring>tab</cstring>
                 </property>
@@ -34,7 +34,7 @@
                     <property name="name">
                         <cstring>unnamed</cstring>
                     </property>
-                    <widget class="QLabel" row="2" column="0" rowspan="1" colspan="4">
+                    <widget class="TQLabel" row="2" column="0" rowspan="1" colspan="4">
                         <property name="name">
                             <cstring>textLabel2</cstring>
                         </property>
@@ -67,7 +67,7 @@ Allows the user to select the Key Server which will be used to import PGP/GnuPG 
                             <cstring>kLEimportid</cstring>
                         </property>
                     </widget>
-                    <widget class="QLabel" row="0" column="0" rowspan="1" colspan="4">
+                    <widget class="TQLabel" row="0" column="0" rowspan="1" colspan="4">
                         <property name="name">
                             <cstring>textLabel1</cstring>
                         </property>
@@ -78,7 +78,7 @@ Allows the user to select the Key Server which will be used to import PGP/GnuPG 
                             <string>&lt;qt&gt;&lt;b&gt;Key Server:&lt;/b&gt;&lt;br /&gt; &lt;p&gt;A Key Server is a centralized repository of PGP/GnuPG keys connected to the Internet which can be conveniently accessed in order to obtain or deposit keys. Select from the drop down list to specify which key server should be used.&lt;/p&gt; &lt;p&gt;Often these keys are held by people whom the user has never met and as such the authenticity is dubious at best. Refer to the GnuPG manual covering "Web-of-Trust" relationships to find out how GnuPG works around the problem of verifying authenticity.&lt;/p&gt; &lt;/qt&gt;</string>
                         </property>
                     </widget>
-                    <widget class="QPushButton" row="6" column="0">
+                    <widget class="TQPushButton" row="6" column="0">
                         <property name="name">
                             <cstring>Buttonsearch</cstring>
                         </property>
@@ -89,7 +89,7 @@ Allows the user to select the Key Server which will be used to import PGP/GnuPG 
                             <bool>true</bool>
                         </property>
                     </widget>
-                    <widget class="QPushButton" row="6" column="1" rowspan="1" colspan="2">
+                    <widget class="TQPushButton" row="6" column="1" rowspan="1" colspan="2">
                         <property name="name">
                             <cstring>Buttonimport</cstring>
                         </property>
@@ -107,7 +107,7 @@ Allows the user to select the Key Server which will be used to import PGP/GnuPG 
                         <property name="sizeType">
                             <enum>Expanding</enum>
                         </property>
-                        <property name="sizeHint">
+                        <property name="tqsizeHint">
                             <size>
                                 <width>20</width>
                                 <height>16</height>
@@ -124,7 +124,7 @@ Allows the user to select the Key Server which will be used to import PGP/GnuPG 
                         <property name="sizeType">
                             <enum>Expanding</enum>
                         </property>
-                        <property name="sizeHint">
+                        <property name="tqsizeHint">
                             <size>
                                 <width>20</width>
                                 <height>20</height>
@@ -141,14 +141,14 @@ Allows the user to select the Key Server which will be used to import PGP/GnuPG 
                         <property name="sizeType">
                             <enum>Expanding</enum>
                         </property>
-                        <property name="sizeHint">
+                        <property name="tqsizeHint">
                             <size>
                                 <width>160</width>
                                 <height>20</height>
                             </size>
                         </property>
                     </spacer>
-                    <widget class="QCheckBox" row="4" column="0" rowspan="1" colspan="2">
+                    <widget class="TQCheckBox" row="4" column="0" rowspan="1" colspan="2">
                         <property name="name">
                             <cstring>cBproxyI</cstring>
                         </property>
@@ -180,7 +180,7 @@ Allows the user to select the Key Server which will be used to import PGP/GnuPG 
                     </widget>
                 </grid>
             </widget>
-            <widget class="QWidget">
+            <widget class="TQWidget">
                 <property name="name">
                     <cstring>tab</cstring>
                 </property>
@@ -191,7 +191,7 @@ Allows the user to select the Key Server which will be used to import PGP/GnuPG 
                     <property name="name">
                         <cstring>unnamed</cstring>
                     </property>
-                    <widget class="QPushButton" row="7" column="0">
+                    <widget class="TQPushButton" row="7" column="0">
                         <property name="name">
                             <cstring>Buttonexport</cstring>
                         </property>
@@ -214,7 +214,7 @@ Allows the user to select the Key Server which will be used to import PGP/GnuPG 
                         <property name="sizeType">
                             <enum>Expanding</enum>
                         </property>
-                        <property name="sizeHint">
+                        <property name="tqsizeHint">
                             <size>
                                 <width>250</width>
                                 <height>20</height>
@@ -231,7 +231,7 @@ Allows the user to select the Key Server which will be used to import PGP/GnuPG 
                             <cstring>kCBexportkey</cstring>
                         </property>
                     </widget>
-                    <widget class="QLabel" row="0" column="0" rowspan="1" colspan="3">
+                    <widget class="TQLabel" row="0" column="0" rowspan="1" colspan="3">
                         <property name="name">
                             <cstring>textLabel3</cstring>
                         </property>
@@ -239,7 +239,7 @@ Allows the user to select the Key Server which will be used to import PGP/GnuPG 
                             <string>Key server:</string>
                         </property>
                     </widget>
-                    <widget class="QLabel" row="2" column="0" rowspan="1" colspan="3">
+                    <widget class="TQLabel" row="2" column="0" rowspan="1" colspan="3">
                         <property name="name">
                             <cstring>textLabel4</cstring>
                         </property>
@@ -262,7 +262,7 @@ Allows the user to select the Key Server which will be used to import PGP/GnuPG 
                         <property name="sizeType">
                             <enum>Expanding</enum>
                         </property>
-                        <property name="sizeHint">
+                        <property name="tqsizeHint">
                             <size>
                                 <width>20</width>
                                 <height>40</height>
@@ -279,7 +279,7 @@ Allows the user to select the Key Server which will be used to import PGP/GnuPG 
                         <property name="sizeType">
                             <enum>Expanding</enum>
                         </property>
-                        <property name="sizeHint">
+                        <property name="tqsizeHint">
                             <size>
                                 <width>20</width>
                                 <height>30</height>
@@ -305,7 +305,7 @@ Allows the user to select the Key Server which will be used to import PGP/GnuPG 
                             <bool>true</bool>
                         </property>
                     </widget>
-                    <widget class="QCheckBox" row="5" column="0" rowspan="1" colspan="2">
+                    <widget class="TQCheckBox" row="5" column="0" rowspan="1" colspan="2">
                         <property name="name">
                             <cstring>cBproxyE</cstring>
                         </property>
@@ -316,7 +316,7 @@ Allows the user to select the Key Server which will be used to import PGP/GnuPG 
                             <string>Honor HTTP proxy:</string>
                         </property>
                     </widget>
-                    <widget class="QCheckBox" row="4" column="0" rowspan="1" colspan="3">
+                    <widget class="TQCheckBox" row="4" column="0" rowspan="1" colspan="3">
                         <property name="name">
                             <cstring>exportAttributes</cstring>
                         </property>
@@ -332,5 +332,5 @@ Allows the user to select the Key Server which will be used to import PGP/GnuPG 
         </widget>
     </grid>
 </widget>
-<layoutdefaults spacing="6" margin="11"/>
+<tqlayoutdefaults spacing="6" margin="11"/>
 </UI>

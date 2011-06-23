@@ -39,6 +39,7 @@ class KSimpleConfig;
 class CExportDialog : public KDialogBase
 {
   Q_OBJECT
+  TQ_OBJECT
 
   public:
     enum EPage
@@ -57,7 +58,7 @@ class CExportDialog : public KDialogBase
       option_max
     };
 
-    CExportDialog( TQWidget *parent = 0, char *name = 0, bool modal = false );
+    CExportDialog( TQWidget *tqparent = 0, char *name = 0, bool modal = false );
     ~CExportDialog( void );
     void writeConfiguration( void );
 

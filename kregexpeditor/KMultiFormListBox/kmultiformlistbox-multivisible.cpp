@@ -16,7 +16,7 @@
  *  Boston, MA 02110-1301, USA.
  **/
 
-#ifdef QT_ONLY
+#ifdef TQT_ONLY
   #include "compat.h"
   #include <tqmessagebox.h>
 #else
@@ -38,8 +38,8 @@ const uchar indexButtonBits[] = {
 };
 
 
-KMultiFormListBoxMultiVisible::KMultiFormListBoxMultiVisible(KMultiFormListBoxFactory *fact, TQWidget *parent, const char *name)
-  : TQScrollView(parent, name)
+KMultiFormListBoxMultiVisible::KMultiFormListBoxMultiVisible(KMultiFormListBoxFactory *fact, TQWidget *tqparent, const char *name)
+  : TQScrollView(tqparent, name)
 {
   factory = fact;
 
@@ -94,9 +94,9 @@ void KMultiFormListBoxMultiVisible::updateClipperContent()
 
   // calculate the required size.
   for (TQWidget *child = elms->first(); child; child=elms->next()) {
-    maxWidth = QMAX(maxWidth, child->sizeHint().width());
+    maxWidth = TQMAX(maxWidth, child->tqsizeHint().width());
     if (strcmp(child->name(), "seperator") != 0) {
-      totalHeight += child->sizeHint().height();
+      totalHeight += child->tqsizeHint().height();
       count++;
     }
     else {
@@ -116,7 +116,7 @@ void KMultiFormListBoxMultiVisible::updateClipperContent()
   for (TQWidget *child2 = elms->first(); child2; child2=elms->next()) {
     int h;
     if ( strcmp(child2->name(),"seperator") != 0) {
-      h = child2->sizeHint().height();
+      h = child2->tqsizeHint().height();
       h += extra;
     }
     else {
@@ -154,7 +154,7 @@ void KMultiFormListBoxMultiVisible::append(KMultiFormListBoxEntry *elm)
 
 void KMultiFormListBoxMultiVisible::delElement(TQWidget *elm)
 {
-  int index = elms->find(elm);
+  int index = elms->tqfind(elm);
   TQWidget *next = elms->at(index+1);
   if (strcmp(next->name(),"seperator") != 0) {
     elms->removeRef(next);
@@ -186,7 +186,7 @@ void KMultiFormListBoxMultiVisible::insertElmIntoWidget(KMultiFormListBoxEntry *
   // Find the location to insert the new element.
   int index = elms->count();
   if (after) {
-    index = elms->findRef(after);
+    index = elms->tqfindRef(after);
   }
 
   // Now show the new element.
@@ -266,14 +266,14 @@ void KMultiFormListBoxMultiVisible::cut(KMultiFormListBoxEntry *elm)
 	}
 
   TQDataStream stream(clipboard, IO_WriteOnly);
-  factory->toStream( elm, stream );
+  factory->toStream( TQT_TQOBJECT(elm), stream );
   delElement(elm);
 }
 
 void KMultiFormListBoxMultiVisible::copy(KMultiFormListBoxEntry *elm)
 {
   TQDataStream stream(clipboard, IO_WriteOnly);
-  factory->toStream(elm, stream);
+  factory->toStream(TQT_TQOBJECT(elm), stream);
 }
 
 void KMultiFormListBoxMultiVisible::paste(KMultiFormListBoxEntry *oldElm)
@@ -285,7 +285,7 @@ void KMultiFormListBoxMultiVisible::paste(KMultiFormListBoxEntry *oldElm)
 
   KMultiFormListBoxEntry *newElm = factory->create(viewport());
   TQDataStream stream( clipboard, IO_ReadOnly );
-  factory->fromStream(stream, newElm);
+  factory->fromStream(stream, TQT_TQOBJECT(newElm));
   insertElmIntoWidget(newElm,oldElm);
 }
 

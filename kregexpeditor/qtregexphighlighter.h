@@ -15,8 +15,8 @@
  *  the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  *  Boston, MA 02110-1301, USA.
  **/
-#ifndef QTREGEXPHIGHLIGHTER_H
-#define QTREGEXPHIGHLIGHTER_H
+#ifndef TQTREGEXPHIGHLIGHTER_H
+#define TQTREGEXPHIGHLIGHTER_H
 #include "regexphighlighter.h"
 #include <tqtextedit.h>
 
@@ -30,5 +30,5 @@ private:
     TQTextEdit* _editor;
 };
 
-#endif /* QTREGEXPHIGHLIGHTER_H */
+#endif /* TQTREGEXPHIGHLIGHTER_H */
 

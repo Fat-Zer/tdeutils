@@ -43,8 +43,8 @@ static bool listViewHasSelection( TQListView *lv )
     return false;
 }
 
-ConfigPage::ConfigPage( Plugin *parent, const char *name )
-    : KSim::PluginPage( parent, name )
+ConfigPage::ConfigPage( Plugin *tqparent, const char *name )
+    : KSim::PluginPage( tqparent, name )
 {
     ( new TQVBoxLayout( this ) )->setAutoAdd( true );
 
@@ -123,7 +123,7 @@ void ConfigPage::modifyHost()
     if ( !currentItem )
         return;
 
-    HostConfigMap::Iterator hostIt = m_hosts.find( currentItem->text( 0 ) );
+    HostConfigMap::Iterator hostIt = m_hosts.tqfind( currentItem->text( 0 ) );
     if ( hostIt == m_hosts.end() )
         return;
 
@@ -147,7 +147,7 @@ void ConfigPage::removeHost()
     if ( !currentItem )
         return;
 
-    HostConfigMap::Iterator hostIt = m_hosts.find( currentItem->text( 0 ) );
+    HostConfigMap::Iterator hostIt = m_hosts.tqfind( currentItem->text( 0 ) );
     if ( hostIt == m_hosts.end() )
         return;
 
@@ -191,7 +191,7 @@ void ConfigPage::modifyMonitor()
     if ( !currentItem )
         return;
 
-    MonitorConfigMap::Iterator monitorIt = m_monitors.find( currentItem->text( 0 ) );
+    MonitorConfigMap::Iterator monitorIt = m_monitors.tqfind( currentItem->text( 0 ) );
     if ( monitorIt == m_monitors.end() )
         return;
 
@@ -215,7 +215,7 @@ void ConfigPage::removeMonitor()
     if ( !currentItem )
         return;
 
-    MonitorConfigMap::Iterator monitorIt = m_monitors.find( currentItem->text( 0 ) );
+    MonitorConfigMap::Iterator monitorIt = m_monitors.tqfind( currentItem->text( 0 ) );
     if ( monitorIt == m_monitors.end() )
         return;
 

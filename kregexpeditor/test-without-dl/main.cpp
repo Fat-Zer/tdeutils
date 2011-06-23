@@ -19,13 +19,13 @@
 #include <kcmdlineargs.h>
 #include <tqfile.h>
 #include "../kregexpeditorgui.h"
-class ShootABug :public QObject
+class ShootABug :public TQObject
 {
 public:
   virtual bool eventFilter( TQObject* recv, TQEvent* event )
   {
     if ( event->type() == TQEvent::MouseButtonPress &&
-         dynamic_cast<TQMouseEvent*>(event)->state() == Qt::ControlButton ) {
+         dynamic_cast<TQMouseEvent*>(event)->state() == TQt::ControlButton ) {
       // Ctrl + left mouse click.
 
       qDebug("----------------------------------------------------");
@@ -47,12 +47,12 @@ int main( int argc, char* argv[] )
   KCmdLineArgs::init(argc, argv, "RegExp Example","","");
   KApplication myapp( argc, argv );
 
-  qApp->installEventFilter( new ShootABug() );
+  tqApp->installEventFilter( new ShootABug() );
 
   KRegExpEditorGUIDialog* iface = new KRegExpEditorGUIDialog( 0, "_editor", TQStringList() );
-  iface->setRegExp( TQString::fromLatin1( "#include" ) );
+  iface->setRegExp( TQString::tqfromLatin1( "#include" ) );
   iface->doSomething( "setMinimal", (void*) false );
-  iface->doSomething( "setSyntax", (void*) new TQString( TQString::fromLatin1( "Emacs" ) ) );
+  iface->doSomething( "setSyntax", (void*) new TQString( TQString::tqfromLatin1( "Emacs" ) ) );
   iface->doSomething( "setShowSyntaxCombo", (bool*) true );
 
   TQFile file("/packages/kde-src/kdeutils/kregexpeditor/test/main.cpp");

@@ -15,15 +15,15 @@
  *  the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  *  Boston, MA 02110-1301, USA.
  **/
-#ifndef QT_ONLY
+#ifndef TQT_ONLY
   #include "scrollededitorwindow.moc"
 #endif
 
 #include "scrollededitorwindow.h"
 #include "editorwindow.h"
 
-RegExpScrolledEditorWindow::RegExpScrolledEditorWindow( TQWidget* parent, const char* name)
-    : TQWidget(parent, name)
+RegExpScrolledEditorWindow::RegExpScrolledEditorWindow( TQWidget* tqparent, const char* name)
+    : TQWidget(tqparent, name)
 {
     _scrollView = new TQScrollView( this );
     _editorWindow = new RegExpEditorWindow( _scrollView->viewport());
@@ -106,7 +106,7 @@ void RegExpScrolledEditorWindow::resizeEvent( TQResizeEvent *event )
 
 void RegExpScrolledEditorWindow::slotUpdateContentSize( TQPoint focusPoint )
 {
-    TQSize childSize = _editorWindow->sizeHint();
+    TQSize childSize = _editorWindow->tqsizeHint();
     TQSize vpSize = _scrollView->viewportSize(10,10);
 
     bool change = false;

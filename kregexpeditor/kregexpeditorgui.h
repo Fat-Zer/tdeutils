@@ -18,7 +18,7 @@
 #ifndef kregexpeditorgui_h
 #define kregexpeditorgui_h
 
-#ifdef QT_ONLY
+#ifdef TQT_ONLY
   #include "compat.h"
 #else
   #include <kdialogbase.h>
@@ -37,9 +37,10 @@ class KRegExpEditorPrivate;
 class KDE_EXPORT KRegExpEditorGUI  :public TQWidget, public KRegExpEditorInterface
 {
   Q_OBJECT
-  Q_PROPERTY( TQString regexp READ regExp WRITE setRegExp )
+  TQ_OBJECT
+  TQ_PROPERTY( TQString regexp READ regExp WRITE setRegExp )
 public:
-  KRegExpEditorGUI( TQWidget *parent, const char *name = 0,
+  KRegExpEditorGUI( TQWidget *tqparent, const char *name = 0,
 	            const TQStringList & = TQStringList() );
   virtual TQString regExp() const;
 
@@ -66,9 +67,10 @@ private:
 class KDE_EXPORT KRegExpEditorGUIDialog : public KDialogBase, public KRegExpEditorInterface
 {
     Q_OBJECT
-    Q_PROPERTY( TQString regexp READ regExp WRITE setRegExp )
+  TQ_OBJECT
+    TQ_PROPERTY( TQString regexp READ regExp WRITE setRegExp )
 public:
-    KRegExpEditorGUIDialog( TQWidget *parent, const char *name, const TQStringList &args );
+    KRegExpEditorGUIDialog( TQWidget *tqparent, const char *name, const TQStringList &args );
 
     virtual TQString regExp() const;
 

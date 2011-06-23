@@ -31,15 +31,15 @@
 #include <tqpushbutton.h>
 #include <tqtextedit.h>
 
-KWMapEditor::KWMapEditor(TQMap<TQString,TQString>& map, TQWidget *parent, const char *name)
-: TQTable(0, 3, parent, name), _map(map) {
+KWMapEditor::KWMapEditor(TQMap<TQString,TQString>& map, TQWidget *tqparent, const char *name)
+: TQTable(0, 3, tqparent, name), _map(map) {
 	_ac = new KActionCollection(this);
-	_copyAct = KStdAction::copy(this, TQT_SLOT(copy()), _ac);
+	_copyAct = KStdAction::copy(TQT_TQOBJECT(this), TQT_SLOT(copy()), _ac);
 	connect(this, TQT_SIGNAL(valueChanged(int,int)), this, TQT_SIGNAL(dirty()));
 	connect(this, TQT_SIGNAL(contextMenuRequested(int,int,const TQPoint&)),
 		this, TQT_SLOT(contextMenu(int,int,const TQPoint&)));
 	setSelectionMode(TQTable::NoSelection);
-	horizontalHeader()->setLabel(0, TQString::null);
+	horizontalHeader()->setLabel(0, TQString());
 	horizontalHeader()->setLabel(1, i18n("Key"));
 	horizontalHeader()->setLabel(2, i18n("Value"));
 	setColumnWidth(0, 20); // FIXME: this is arbitrary
@@ -76,9 +76,9 @@ KWMapEditor::~KWMapEditor() {
 
 
 void KWMapEditor::erase() {
-	const TQObject *o = sender();
+	const TQObject *o = TQT_TQOBJECT(const_cast<TQT_BASE_OBJECT_NAME*>(sender()));
 	for (int i = 0; i < numRows(); i++) {
-		if (cellWidget(i, 0) == o) {
+		if (TQT_BASE_OBJECT_CONST(cellWidget(i, 0)) == TQT_BASE_OBJECT_CONST(o)) {
 			removeRow(i);
 			break;
 		}
@@ -125,7 +125,7 @@ void KWMapEditor::contextMenu(int row, int col, const TQPoint& pos) {
 
 
 void KWMapEditor::copy() {
-	TQApplication::clipboard()->setText(text(_contextRow, 2));
+	TQApplication::tqclipboard()->setText(text(_contextRow, 2));
 }
 
 
@@ -140,9 +140,9 @@ class InlineEditor : public TQTextEdit {
 		virtual ~InlineEditor() { if (!_p) return; _p->setText(row, col, text()); _p->emitDirty(); }
 
 	protected:
-		virtual void focusOutEvent(TQFocusEvent*) { 
-			if (TQFocusEvent::reason() == TQFocusEvent::Popup) {
-				TQWidget *focusW = qApp->focusWidget();
+		virtual void focusOutEvent(TQFocusEvent* fe) { 
+			if (fe->reason() == TQFocusEvent::Popup) {
+				TQWidget *focusW = tqApp->tqfocusWidget();
 				if (focusW && focusW == popup) {
 					return;
 				}
@@ -150,7 +150,7 @@ class InlineEditor : public TQTextEdit {
 			close(); 
 		}
 		virtual void keyPressEvent(TQKeyEvent *e) {
-			if (e->key() == Qt::Key_Escape) {
+			if (e->key() == TQt::Key_Escape) {
 				e->accept();
 				close();
 			} else {
@@ -168,10 +168,10 @@ class InlineEditor : public TQTextEdit {
 };
 
 
-TQWidget *KWMapEditor::beginEdit(int row, int col, bool replace) {
+TQWidget *KWMapEditor::beginEdit(int row, int col, bool tqreplace) {
 	//kdDebug(2300) << "EDIT COLUMN " << col << endl;
 	if (col != 2) {
-		return TQTable::beginEdit(row, col, replace);
+		return TQTable::beginEdit(row, col, tqreplace);
 	}
 
 	TQRect geo = cellGeometry(row, col);

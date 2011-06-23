@@ -28,9 +28,9 @@
 #include "hexvalidator.h"
 
 
-CValidateLineEdit::CValidateLineEdit( TQWidget *parent, int validateType,
+CValidateLineEdit::CValidateLineEdit( TQWidget *tqparent, int validateType,
 				      const char *name )
-  :TQLineEdit( parent, name ), mBusy(false)
+  :TQLineEdit( tqparent, name ), mBusy(false)
 {
   mValidator = new CHexValidator( this, (CHexValidator::EState)validateType );
   setValidator( mValidator );
@@ -66,9 +66,9 @@ void CValidateLineEdit::convertText( const TQString &text )
 
 
 
-CConverterDialog::CConverterDialog( TQWidget *parent, const char *name, 
+CConverterDialog::CConverterDialog( TQWidget *tqparent, const char *name, 
 				    bool modal )
-  :KDialogBase( parent, name, modal, i18n("Converter"), Cancel|User2|User1, 
+  :KDialogBase( tqparent, name, modal, i18n("Converter"), Cancel|User2|User1, 
 		Cancel, true, KStdGuiItem::clear(), i18n("&On Cursor") )
 {
   TQWidget *page = new TQWidget( this );

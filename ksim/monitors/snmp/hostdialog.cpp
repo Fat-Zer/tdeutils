@@ -35,15 +35,15 @@
 
 using namespace KSim::Snmp;
 
-HostDialog::HostDialog( TQWidget *parent, const char *name )
-    : HostDialogBase( parent, name )
+HostDialog::HostDialog( TQWidget *tqparent, const char *name )
+    : HostDialogBase( tqparent, name )
 {
     init();
     port->setValue( 161 );
 }
 
-HostDialog::HostDialog( const HostConfig &src, TQWidget *parent, const char *name )
-    : HostDialogBase( parent, name )
+HostDialog::HostDialog( const HostConfig &src, TQWidget *tqparent, const char *name )
+    : HostDialogBase( tqparent, name )
 {
     init( src );
 }
@@ -141,7 +141,7 @@ void HostDialog::init( const HostConfig &src )
 {
     // hide these, there's nothing to choose right now. might be that
     // net-snmp will support different privacy types in the future, but
-    // apparently not now.
+    // aptqparently not now.
     privacyTypeLabel->hide();
     privacyType->hide();
 
@@ -163,7 +163,7 @@ void HostDialog::loadSettingsFromHostConfig( const HostConfig &src )
     hostName->setText( src.name );
     port->setValue( src.port );
 
-    snmpVersion->setCurrentItem( allSnmpVersions().findIndex( snmpVersionToString( src.version ) ) );
+    snmpVersion->setCurrentItem( allSnmpVersions().tqfindIndex( snmpVersionToString( src.version ) ) );
 
     if ( src.version != SnmpVersion3 ) {
         communityString->setText( src.community );
@@ -172,18 +172,18 @@ void HostDialog::loadSettingsFromHostConfig( const HostConfig &src )
 
     securityName->setText( src.securityName );
 
-    securityLevel->setCurrentItem( allSecurityLevels().findIndex( securityLevelToString( src.securityLevel ) ) );
+    securityLevel->setCurrentItem( allSecurityLevels().tqfindIndex( securityLevelToString( src.securityLevel ) ) );
 
     if ( src.securityLevel == NoAuthPriv )
         return;
 
-    authenticationType->setCurrentItem( allAuthenticationProtocols().findIndex( authenticationProtocolToString( src.authentication.protocol ) ) );
+    authenticationType->setCurrentItem( allAuthenticationProtocols().tqfindIndex( authenticationProtocolToString( src.authentication.protocol ) ) );
     authenticationPassphrase->setText( src.authentication.key );
 
     if ( src.securityLevel == AuthNoPriv )
         return;
 
-    privacyType->setCurrentItem( allPrivacyProtocols().findIndex( privacyProtocolToString( src.privacy.protocol ) ) );
+    privacyType->setCurrentItem( allPrivacyProtocols().tqfindIndex( privacyProtocolToString( src.privacy.protocol ) ) );
     privacyPassphrase->setText( src.privacy.key );
 }
 

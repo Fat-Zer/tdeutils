@@ -46,8 +46,8 @@
 #include <tqtimer.h>
 #include <tqtooltip.h>
 
-KWalletManager::KWalletManager(TQWidget *parent, const char *name, WFlags f)
-: KMainWindow(parent, name, f), DCOPObject("KWalletManager") {
+KWalletManager::KWalletManager(TQWidget *tqparent, const char *name, WFlags f)
+: KMainWindow(tqparent, name, f), DCOPObject("KWalletManager") {
 	KGlobal::dirs()->addResourceType("kwallet", "share/apps/kwallet");
 	_kwalletdLaunch = false;
 	TQAccel *accel = new TQAccel(this, "kwalletmanager");
@@ -84,8 +84,8 @@ KWalletManager::KWalletManager(TQWidget *parent, const char *name, WFlags f)
 	}
 
 	_iconView = new KWalletIconView(this, "kwalletmanager icon view");
-	connect(_iconView, TQT_SIGNAL(executed(TQIconViewItem*)), this, TQT_SLOT(openWallet(TQIconViewItem*)));
-	connect(_iconView, TQT_SIGNAL(contextMenuRequested(TQIconViewItem*, const TQPoint&)), this, TQT_SLOT(contextMenu(TQIconViewItem*, const TQPoint&)));
+	connect(_iconView, TQT_SIGNAL(executed(TQIconViewItem*)), TQT_TQOBJECT(this), TQT_SLOT(openWallet(TQIconViewItem*)));
+	connect(_iconView, TQT_SIGNAL(contextMenuRequested(TQIconViewItem*, const TQPoint&)), TQT_TQOBJECT(this), TQT_SLOT(contextMenu(TQIconViewItem*, const TQPoint&)));
 
 	updateWalletDisplay();
 	setCentralWidget(_iconView);
@@ -112,28 +112,28 @@ KWalletManager::KWalletManager(TQWidget *parent, const char *name, WFlags f)
 	//        wallet closes before we are done opening.  We will then stay
 	//        open.  Must check that a wallet is still open here.
 
-	new KAction(i18n("&New Wallet..."), "kwalletmanager", 0, this,
+	new KAction(i18n("&New Wallet..."), "kwalletmanager", 0, TQT_TQOBJECT(this),
 			TQT_SLOT(createWallet()), actionCollection(),
 			"wallet_create");
 	KAction *act = new KAction(i18n("Configure &Wallet..."), "configure",
-			0, this, TQT_SLOT(setupWallet()), actionCollection(),
+			0, TQT_TQOBJECT(this), TQT_SLOT(setupWallet()), actionCollection(),
 			"wallet_settings");
 	if (_tray) {
 		act->plug(_tray->contextMenu());
 	}
-	act = new KAction(i18n("Close &All Wallets"), 0, 0, this,
+	act = new KAction(i18n("Close &All Wallets"), 0, 0, TQT_TQOBJECT(this),
 			TQT_SLOT(closeAllWallets()), actionCollection(),
 			"close_all_wallets");
 	if (_tray) {
 		act->plug(_tray->contextMenu());
 	}
-	KStdAction::quit(this, TQT_SLOT(shuttingDown()), actionCollection());
+	KStdAction::quit(TQT_TQOBJECT(this), TQT_SLOT(shuttingDown()), actionCollection());
 	KStdAction::keyBindings(guiFactory(), TQT_SLOT(configureShortcuts()),
 actionCollection());
 
 	createGUI("kwalletmanager.rc");
-	accel->connectItem(accel->insertItem(Key_Return), this, TQT_SLOT(openWallet()));
-	accel->connectItem(accel->insertItem(Key_Delete), this, TQT_SLOT(deleteWallet()));
+	accel->connectItem(accel->insertItem(Key_Return), TQT_TQOBJECT(this), TQT_SLOT(openWallet()));
+	accel->connectItem(accel->insertItem(Key_Delete), TQT_TQOBJECT(this), TQT_SLOT(deleteWallet()));
 
 	if (_tray) {
 		_tray->show();
@@ -185,7 +185,7 @@ TQStringList wl = KWallet::Wallet::walletList();
 TQPtrStack<TQIconViewItem> trash;
 
 	for (TQIconViewItem *item = _iconView->firstItem(); item; item = item->nextItem()) {
-		if (!wl.contains(item->text())) {
+		if (!wl.tqcontains(item->text())) {
 			trash.push(item);
 		}
 	}
@@ -194,7 +194,7 @@ TQPtrStack<TQIconViewItem> trash;
 	trash.clear();
 
 	for (TQStringList::Iterator i = wl.begin(); i != wl.end(); ++i) {
-		if (!_iconView->findItem(*i)) {
+		if (!_iconView->tqfindItem(*i)) {
 			// FIXME: if KWallet::Wallet::isOpen(*i) then show
 			//        a different icon!
 			new KWalletItem(_iconView, *i);
@@ -208,11 +208,11 @@ TQPtrStack<TQIconViewItem> trash;
 void KWalletManager::contextMenu(TQIconViewItem *item, const TQPoint& pos) {
 	if (item) {
 		TQGuardedPtr<KWalletPopup> popupMenu = new KWalletPopup(item->text(), this);
-		connect(popupMenu, TQT_SIGNAL(walletOpened(const TQString&)), this, TQT_SLOT(openWallet(const TQString&)));
-		connect(popupMenu, TQT_SIGNAL(walletClosed(const TQString&)), this, TQT_SLOT(closeWallet(const TQString&)));
-		connect(popupMenu, TQT_SIGNAL(walletDeleted(const TQString&)), this, TQT_SLOT(deleteWallet(const TQString&)));
-		connect(popupMenu, TQT_SIGNAL(walletChangePassword(const TQString&)), this, TQT_SLOT(changeWalletPassword(const TQString&)));
-		connect(popupMenu, TQT_SIGNAL(walletCreated()), this, TQT_SLOT(createWallet()));
+		connect(popupMenu, TQT_SIGNAL(walletOpened(const TQString&)), TQT_TQOBJECT(this), TQT_SLOT(openWallet(const TQString&)));
+		connect(popupMenu, TQT_SIGNAL(walletClosed(const TQString&)), TQT_TQOBJECT(this), TQT_SLOT(closeWallet(const TQString&)));
+		connect(popupMenu, TQT_SIGNAL(walletDeleted(const TQString&)), TQT_TQOBJECT(this), TQT_SLOT(deleteWallet(const TQString&)));
+		connect(popupMenu, TQT_SIGNAL(walletChangePassword(const TQString&)), TQT_TQOBJECT(this), TQT_SLOT(changeWalletPassword(const TQString&)));
+		connect(popupMenu, TQT_SIGNAL(walletCreated()), TQT_TQOBJECT(this), TQT_SLOT(createWallet()));
 		popupMenu->exec(pos);
 		delete popupMenu;
 	}
@@ -220,13 +220,13 @@ void KWalletManager::contextMenu(TQIconViewItem *item, const TQPoint& pos) {
 
 
 void KWalletManager::deleteWallet(const TQString& walletName) {
-	int rc = KMessageBox::warningContinueCancel(this, i18n("Are you sure you wish to delete the wallet '%1'?").arg(walletName),"",KStdGuiItem::del());
+	int rc = KMessageBox::warningContinueCancel(this, i18n("Are you sure you wish to delete the wallet '%1'?").tqarg(walletName),"",KStdGuiItem::del());
 	if (rc != KMessageBox::Continue) {
 		return;
 	}
 	rc = KWallet::Wallet::deleteWallet(walletName);
 	if (rc != 0) {
-		KMessageBox::sorry(this, i18n("Unable to delete the wallet. Error code was %1.").arg(rc));
+		KMessageBox::sorry(this, i18n("Unable to delete the wallet. Error code was %1.").tqarg(rc));
 	}
 	updateWalletDisplay();
 }
@@ -235,11 +235,11 @@ void KWalletManager::deleteWallet(const TQString& walletName) {
 void KWalletManager::closeWallet(const TQString& walletName) {
 	int rc = KWallet::Wallet::closeWallet(walletName, false);
 	if (rc != 0) {
-		rc = KMessageBox::warningYesNo(this, i18n("Unable to close wallet cleanly. It is probably in use by other applications. Do you wish to force it closed?"), TQString::null, i18n("Force Closure"), i18n("Do Not Force"));
+		rc = KMessageBox::warningYesNo(this, i18n("Unable to close wallet cleanly. It is probably in use by other applications. Do you wish to force it closed?"), TQString(), i18n("Force Closure"), i18n("Do Not Force"));
 		if (rc == KMessageBox::Yes) {
 			rc = KWallet::Wallet::closeWallet(walletName, true);
 			if (rc != 0) {
-				KMessageBox::sorry(this, i18n("Unable to force the wallet closed. Error code was %1.").arg(rc));
+				KMessageBox::sorry(this, i18n("Unable to force the wallet closed. Error code was %1.").tqarg(rc));
 			}
 		}
 	}
@@ -260,7 +260,7 @@ void KWalletManager::openWalletFile(const TQString& path) {
 			this, TQT_SLOT(editorClosed(KMainWindow*)));
 		we->show();
 	} else {
-		KMessageBox::sorry(this, i18n("Error opening wallet %1.").arg(path));
+		KMessageBox::sorry(this, i18n("Error opening wallet %1.").tqarg(path));
 		delete we;
 	}
 }
@@ -302,7 +302,7 @@ void KWalletManager::openWallet(const TQString& walletName, bool newWallet) {
 		we->show();
 		_windows.append(we);
 	} else if (!newWallet) {
-		KMessageBox::sorry(this, i18n("Error opening wallet %1.").arg(walletName));
+		KMessageBox::sorry(this, i18n("Error opening wallet %1.").tqarg(walletName));
 		delete we;
 	}
 }
@@ -357,14 +357,14 @@ void KWalletManager::createWallet() {
 	TQString txt = i18n("Please choose a name for the new wallet:");
 
 	if (!KWallet::Wallet::isEnabled()) {
-		// FIXME: KMessageBox::warningYesNo(this, i1_8n("KWallet is not enabled.  Do you want to enable it?"), TQString::null, i18n("Enable"), i18n("Keep Disabled"));
+		// FIXME: KMessageBox::warningYesNo(this, i1_8n("KWallet is not enabled.  Do you want to enable it?"), TQString(), i18n("Enable"), i18n("Keep Disabled"));
 		return;
 	}
 
 	do {
 		n = KInputDialog::getText(i18n("New Wallet"),
 				txt,
-				TQString::null,
+				TQString(),
 				&ok,
 				this);
 
@@ -372,12 +372,12 @@ void KWalletManager::createWallet() {
 			return;
 		}
 
-		if (_iconView->findItem(n)) {
-			int rc = KMessageBox::questionYesNo(this, i18n("Sorry, that wallet already exists. Try a new name?"), TQString::null, i18n("Try New"), i18n("Do Not Try"));
+		if (_iconView->tqfindItem(n)) {
+			int rc = KMessageBox::questionYesNo(this, i18n("Sorry, that wallet already exists. Try a new name?"), TQString(), i18n("Try New"), i18n("Do Not Try"));
 			if (rc == KMessageBox::Yes) {
 				continue;
 			}
-			n = TQString::null;
+			n = TQString();
 		} else if (regexp.exactMatch(n)) {
 			break;
 		} else {

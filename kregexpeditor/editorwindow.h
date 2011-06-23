@@ -43,12 +43,13 @@ class TQHBoxLayout;
     RegExpEditorWindow which the widget is a child of. They use this
     pointer to start operations like rubber band selection, cut/paste etc.
 */
-class RegExpEditorWindow :public QWidget
+class RegExpEditorWindow :public TQWidget
 {
     Q_OBJECT
+  TQ_OBJECT
 
 public:
-    RegExpEditorWindow(TQWidget *parent, const char *name = 0);
+    RegExpEditorWindow(TQWidget *tqparent, const char *name = 0);
 
     /**
        Returns an object which represent the regular expression "drawn" in
@@ -109,7 +110,7 @@ public:
     */
     void showRMBMenu( bool enableCutCopy );
 
-    virtual TQSize sizeHint() const;
+    virtual TQSize tqsizeHint() const;
 
 public slots:
 
@@ -231,7 +232,7 @@ private:
     /** This points to the top @ref RegExpWidget in the editor window. */
 	ConcWidget *_top;
 
-    /** This points to the layout manager for the editor window */
+    /** This points to the tqlayout manager for the editor window */
     TQHBoxLayout* _layout;
 
     /** Start point and last point draw. Used when doing rubber band selection  */

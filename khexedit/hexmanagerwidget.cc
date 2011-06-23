@@ -23,11 +23,11 @@
 #include "hexmanagerwidget.h"
 #include "searchbar.h"
 
-CHexManagerWidget::CHexManagerWidget( TQWidget *parent, const char *name,
+CHexManagerWidget::CHexManagerWidget( TQWidget *tqparent, const char *name,
 				      EConversionPosition conversionPosition,
 				      EPosition tabBarPosition,
 				      EPosition searchBarPosition )
-  : TQWidget( parent, name )
+  : TQWidget( tqparent, name )
 {
   mValid = false;
 
@@ -70,7 +70,7 @@ void CHexManagerWidget::updateLayout( void )
 {
   if( mValid == false ) { return; }
 
-  delete layout();
+  delete tqlayout();
   TQVBoxLayout *vlay = new TQVBoxLayout( this, 0, 0 );
 
   if( mSearchBar && mSearchBarPosition == AboveEditor )
@@ -126,19 +126,19 @@ void CHexManagerWidget::setConversionVisibility( EConversionPosition position )
   else if( mConversionPosition == Float )
   {
     TQPoint point = mapToGlobal( TQPoint(0,0) );
-    TQRect  rect  = geometry();
+    TQRect  rect  = tqgeometry();
     TQPoint p;
 
-    p.setX(point.x() + rect.width()/2 - mConverter->minimumSize().width()/2);
-    p.setY(point.y() + rect.height()/2 - mConverter->minimumSize().height()/2);
-    mConverter->resize( mConverter->minimumSize() );
+    p.setX(point.x() + rect.width()/2 - mConverter->tqminimumSize().width()/2);
+    p.setY(point.y() + rect.height()/2 - mConverter->tqminimumSize().height()/2);
+    mConverter->resize( mConverter->tqminimumSize() );
     mConverter->reparent( 0, WStyle_Customize | WStyle_DialogBorder, p, true );
     mConverter->setCaption(kapp->makeStdCaption(i18n("Conversion")));
   }
   else
   {
     mConversionPosition = Embed;
-    uint utilHeight = mConverter->minimumSize().height();
+    uint utilHeight = mConverter->tqminimumSize().height();
     TQPoint p( 0, height() - utilHeight );
     mConverter->reparent( this, 0, p, true );
   }
@@ -250,16 +250,16 @@ int CHexManagerWidget::preferredWidth( void )
   int w = mEditor->defaultTextWidth();
   if( mConversionPosition == Embed )
   {
-    int converterWidth = mConverter->sizeHint().width();
-    w = QMAX( w, converterWidth );
+    int converterWidth = mConverter->tqsizeHint().width();
+    w = TQMAX( w, converterWidth );
   }
   return( w );
 }
 
 
 
-CTabBar::CTabBar( TQWidget *parent, char *name )
-  :TQTabBar( parent, name )
+CTabBar::CTabBar( TQWidget *tqparent, char *name )
+  :TQTabBar( tqparent, name )
 {
   connect( this, TQT_SIGNAL(selected(int)), this, TQT_SLOT(slotSelected(int)) );
 }
@@ -267,9 +267,9 @@ CTabBar::CTabBar( TQWidget *parent, char *name )
 
 void CTabBar::addName( const TQString &name )
 {
-  TQString n( name.right(name.length()-name.findRev('/')-1) );
+  TQString n( name.right(name.length()-name.tqfindRev('/')-1) );
 
-  TQTab *t = find( n );
+  TQTab *t = tqfind( n );
   if( t == 0 )
   {
     t = new TQTab();
@@ -283,8 +283,8 @@ void CTabBar::addName( const TQString &name )
 
 void CTabBar::removeName( const TQString &name )
 {
-  TQString n( name.right(name.length()-name.findRev('/')-1) );
-  TQTab *t = find(n);
+  TQString n( name.right(name.length()-name.tqfindRev('/')-1) );
+  TQTab *t = tqfind(n);
   if( t == 0 )
   {
     return;
@@ -297,7 +297,7 @@ void CTabBar::removeName( const TQString &name )
     {
       mFileList.remove(it);
       removeTab(t);
-      layoutTabs();
+      tqlayoutTabs();
       break;
     }
   }
@@ -306,8 +306,8 @@ void CTabBar::removeName( const TQString &name )
 
 void CTabBar::changeName( const TQString &curName, const TQString &newName )
 {
-  TQString n( curName.right(curName.length()-curName.findRev('/')-1) );
-  TQTab *t = find(n);
+  TQString n( curName.right(curName.length()-curName.tqfindRev('/')-1) );
+  TQTab *t = tqfind(n);
   if( t == 0 )
   {
     return;
@@ -318,12 +318,12 @@ void CTabBar::changeName( const TQString &curName, const TQString &newName )
   {
     if( (*it).id() == t->identifier() )
     {
-      TQString m( newName.right(newName.length()-newName.findRev('/')-1) );
+      TQString m( newName.right(newName.length()-newName.tqfindRev('/')-1) );
       t->setText(m);
 
       mFileList.remove(it);
       mFileList.append( CFileKey(newName,t->identifier()) );
-      layoutTabs();
+      tqlayoutTabs();
       update(); // Seems to be necessary
       break;
     }
@@ -331,7 +331,7 @@ void CTabBar::changeName( const TQString &curName, const TQString &newName )
 }
 
 
-TQTab *CTabBar::find( const TQString &name )
+TQTab *CTabBar::tqfind( const TQString &name )
 {
   TQPtrList<TQTab> &list = *tabList();
   for( TQTab *t = list.first(); t != 0; t = list.next() )

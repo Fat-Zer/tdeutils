@@ -3,7 +3,7 @@
  *
  * Copyright (c) 1998 Michael Kropfberger <michael.kropfberger@gmx.net>
  *
- * Requires the Qt widget libraries, available at no cost at
+ * Requires the TQt widget libraries, available at no cost at
  * http://www.troll.no/
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -37,12 +37,13 @@
 #include <kprocess.h>
 #include <klocale.h>
 
-class DiskEntry : public QObject
+class DiskEntry : public TQObject
 {
   Q_OBJECT
+  TQ_OBJECT
 public:
-  DiskEntry(TQObject *parent=0, const char *name=0);
-  DiskEntry(const TQString & deviceName, TQObject *parent=0, const char *name=0);
+  DiskEntry(TQObject *tqparent=0, const char *name=0);
+  DiskEntry(const TQString & deviceName, TQObject *tqparent=0, const char *name=0);
   ~DiskEntry();
   TQString lastSysError() {return sysStringErrOut; }
   TQString deviceName() const { return device; }

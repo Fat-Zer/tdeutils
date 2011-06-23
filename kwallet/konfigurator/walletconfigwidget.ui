@@ -1,6 +1,6 @@
 <!DOCTYPE UI><UI version="3.2" stdsetdef="1">
 <class>WalletConfigWidget</class>
-<widget class="QWidget">
+<widget class="TQWidget">
     <property name="name">
         <cstring>WalletConfigWidget</cstring>
     </property>
@@ -19,11 +19,11 @@
         <property name="margin">
             <number>0</number>
         </property>
-        <widget class="QTabWidget" row="0" column="0" rowspan="1" colspan="2">
+        <widget class="TQTabWidget" row="0" column="0" rowspan="1" colspan="2">
             <property name="name">
                 <cstring>tabWidget2</cstring>
             </property>
-            <widget class="QWidget">
+            <widget class="TQWidget">
                 <property name="name">
                     <cstring>tab</cstring>
                 </property>
@@ -34,7 +34,7 @@
                     <property name="name">
                         <cstring>unnamed</cstring>
                     </property>
-                    <widget class="QCheckBox">
+                    <widget class="TQCheckBox">
                         <property name="name">
                             <cstring>_enabled</cstring>
                         </property>
@@ -48,7 +48,7 @@
                             <string>&lt;p&gt;The wallet subsytem allows a convenient and secure way to manage all your passwords. You can decide if you want to use this system with this option.&lt;/p&gt;</string>
                         </property>
                     </widget>
-                    <widget class="QGroupBox">
+                    <widget class="TQGroupBox">
                         <property name="name">
                             <cstring>groupBox2</cstring>
                         </property>
@@ -62,15 +62,15 @@
                             <property name="name">
                                 <cstring>unnamed</cstring>
                             </property>
-                            <widget class="QLayoutWidget">
+                            <widget class="TQLayoutWidget">
                                 <property name="name">
-                                    <cstring>layout1</cstring>
+                                    <cstring>tqlayout1</cstring>
                                 </property>
                                 <hbox>
                                     <property name="name">
                                         <cstring>unnamed</cstring>
                                     </property>
-                                    <widget class="QCheckBox">
+                                    <widget class="TQCheckBox">
                                         <property name="name">
                                             <cstring>_closeIdle</cstring>
                                         </property>
@@ -89,7 +89,7 @@
                                             <string>&lt;p&gt;&lt;b&gt;Close wallet after a period of inactivity&lt;/b&gt;&lt;br&gt;When a wallet is closed the password is needed to access it again.&lt;/p&gt;</string>
                                         </property>
                                     </widget>
-                                    <widget class="QSpinBox">
+                                    <widget class="TQSpinBox">
                                         <property name="name">
                                             <cstring>_idleTime</cstring>
                                         </property>
@@ -133,7 +133,7 @@
                                         <property name="sizeType">
                                             <enum>Expanding</enum>
                                         </property>
-                                        <property name="sizeHint">
+                                        <property name="tqsizeHint">
                                             <size>
                                                 <width>20</width>
                                                 <height>20</height>
@@ -142,7 +142,7 @@
                                     </spacer>
                                 </hbox>
                             </widget>
-                            <widget class="QCheckBox">
+                            <widget class="TQCheckBox">
                                 <property name="name">
                                     <cstring>_screensaverLock</cstring>
                                 </property>
@@ -153,7 +153,7 @@
                                     <string>&lt;p&gt;&lt;b&gt;Close wallet as soon as the screensaver starts.&lt;/b&gt;&lt;br&gt;When a wallet is closed the password is needed to access it again.&lt;/p&gt;</string>
                                 </property>
                             </widget>
-                            <widget class="QCheckBox">
+                            <widget class="TQCheckBox">
                                 <property name="name">
                                     <cstring>_autoclose</cstring>
                                 </property>
@@ -166,7 +166,7 @@
                             </widget>
                         </vbox>
                     </widget>
-                    <widget class="QGroupBox">
+                    <widget class="TQGroupBox">
                         <property name="name">
                             <cstring>groupBox4</cstring>
                         </property>
@@ -187,14 +187,14 @@
                                 <property name="sizeType">
                                     <enum>Expanding</enum>
                                 </property>
-                                <property name="sizeHint">
+                                <property name="tqsizeHint">
                                     <size>
                                         <width>20</width>
                                         <height>20</height>
                                     </size>
                                 </property>
                             </spacer>
-                            <widget class="QLabel" row="0" column="0">
+                            <widget class="TQLabel" row="0" column="0">
                                 <property name="name">
                                     <cstring>textLabel1_2</cstring>
                                 </property>
@@ -202,7 +202,7 @@
                                     <string>Select wallet to use as default:</string>
                                 </property>
                             </widget>
-                            <widget class="QCheckBox" row="1" column="0">
+                            <widget class="TQCheckBox" row="1" column="0">
                                 <property name="name">
                                     <cstring>_localWalletSelected</cstring>
                                 </property>
@@ -210,7 +210,7 @@
                                     <string>Different wallet for local passwords:</string>
                                 </property>
                             </widget>
-                            <widget class="QComboBox" row="0" column="2">
+                            <widget class="TQComboBox" row="0" column="2">
                                 <property name="name">
                                     <cstring>_defaultWallet</cstring>
                                 </property>
@@ -223,7 +223,7 @@
                                     </sizepolicy>
                                 </property>
                             </widget>
-                            <widget class="QComboBox" row="1" column="2">
+                            <widget class="TQComboBox" row="1" column="2">
                                 <property name="name">
                                     <cstring>_localWallet</cstring>
                                 </property>
@@ -239,7 +239,7 @@
                                     </sizepolicy>
                                 </property>
                             </widget>
-                            <widget class="QPushButton" row="1" column="3">
+                            <widget class="TQPushButton" row="1" column="3">
                                 <property name="name">
                                     <cstring>_newLocalWallet</cstring>
                                 </property>
@@ -250,7 +250,7 @@
                                     <string>New...</string>
                                 </property>
                             </widget>
-                            <widget class="QPushButton" row="0" column="3">
+                            <widget class="TQPushButton" row="0" column="3">
                                 <property name="name">
                                     <cstring>_newWallet</cstring>
                                 </property>
@@ -260,7 +260,7 @@
                             </widget>
                         </grid>
                     </widget>
-                    <widget class="QGroupBox">
+                    <widget class="TQGroupBox">
                         <property name="name">
                             <cstring>groupBox3</cstring>
                         </property>
@@ -281,14 +281,14 @@
                                 <property name="sizeType">
                                     <enum>Fixed</enum>
                                 </property>
-                                <property name="sizeHint">
+                                <property name="tqsizeHint">
                                     <size>
                                         <width>20</width>
                                         <height>20</height>
                                     </size>
                                 </property>
                             </spacer>
-                            <widget class="QCheckBox" row="0" column="0" rowspan="1" colspan="2">
+                            <widget class="TQCheckBox" row="0" column="0" rowspan="1" colspan="2">
                                 <property name="name">
                                     <cstring>_launchManager</cstring>
                                 </property>
@@ -299,7 +299,7 @@
                                     <bool>true</bool>
                                 </property>
                             </widget>
-                            <widget class="QCheckBox" row="1" column="1">
+                            <widget class="TQCheckBox" row="1" column="1">
                                 <property name="name">
                                     <cstring>_autocloseManager</cstring>
                                 </property>
@@ -319,7 +319,7 @@
                         <property name="sizeType">
                             <enum>Expanding</enum>
                         </property>
-                        <property name="sizeHint">
+                        <property name="tqsizeHint">
                             <size>
                                 <width>31</width>
                                 <height>16</height>
@@ -328,7 +328,7 @@
                     </spacer>
                 </vbox>
             </widget>
-            <widget class="QWidget">
+            <widget class="TQWidget">
                 <property name="name">
                     <cstring>tab</cstring>
                 </property>
@@ -339,7 +339,7 @@
                     <property name="name">
                         <cstring>unnamed</cstring>
                     </property>
-                    <widget class="QCheckBox" row="0" column="0">
+                    <widget class="TQCheckBox" row="0" column="0">
                         <property name="name">
                             <cstring>_openPrompt</cstring>
                         </property>
@@ -350,7 +350,7 @@
                             <bool>true</bool>
                         </property>
                     </widget>
-                    <widget class="QListView" row="1" column="0">
+                    <widget class="TQListView" row="1" column="0">
                         <column>
                             <property name="text">
                                 <string>Wallet</string>
@@ -397,7 +397,7 @@
                 </grid>
             </widget>
         </widget>
-        <widget class="QPushButton" row="1" column="1">
+        <widget class="TQPushButton" row="1" column="1">
             <property name="name">
                 <cstring>_launch</cstring>
             </property>
@@ -415,7 +415,7 @@
             <property name="sizeType">
                 <enum>Expanding</enum>
             </property>
-            <property name="sizeHint">
+            <property name="tqsizeHint">
                 <size>
                     <width>369</width>
                     <height>21</height>
@@ -492,8 +492,8 @@
     <tabstop>_accessList</tabstop>
     <tabstop>_launch</tabstop>
 </tabstops>
-<slots>
+<Q_SLOTS>
     <slot>_storeTogether_toggled(bool)</slot>
-</slots>
-<layoutdefaults spacing="6" margin="11"/>
+</Q_SLOTS>
+<tqlayoutdefaults spacing="6" margin="11"/>
 </UI>

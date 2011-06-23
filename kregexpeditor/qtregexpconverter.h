@@ -16,11 +16,11 @@
  *  Boston, MA 02110-1301, USA.
  **/
 
-#ifndef QTREGEXPCONVERTER_H
-#define QTREGEXPCONVERTER_H
+#ifndef TQTREGEXPCONVERTER_H
+#define TQTREGEXPCONVERTER_H
 #include "regexpconverter.h"
 
-class QtRegExpConverter :public RegExpConverter
+class TQtRegExpConverter :public RegExpConverter
 {
 public:
     virtual bool canParse();
@@ -39,5 +39,5 @@ public:
     RegexpHighlighter* highlighter( TQTextEdit* edit );
 };
 
-#endif /* QTREGEXPCONVERTER_H */
+#endif /* TQTREGEXPCONVERTER_H */
 

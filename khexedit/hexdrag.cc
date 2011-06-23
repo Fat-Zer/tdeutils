@@ -75,7 +75,7 @@ const char *CHexDrag::format( int i ) const
 }
 
 
-TQByteArray CHexDrag::encodedData( const char *fmt ) const
+TQByteArray CHexDrag::tqencodedData( const char *fmt ) const
 {
   if( fmt != 0 )
   {
@@ -98,7 +98,7 @@ bool CHexDrag::canDecode( const TQMimeSource *e )
 
 bool CHexDrag::decode( const TQMimeSource *e, TQByteArray &dest )
 {
-  dest = e->encodedData(mediaString);
+  dest = e->tqencodedData(mediaString);
   return( dest.size() == 0 ? false : true );
 
   //
@@ -107,8 +107,8 @@ bool CHexDrag::decode( const TQMimeSource *e, TQByteArray &dest )
   //   Major opcode:  17"
   //
   // if I try to use the code below on a source that has been 
-  // collected from QClipboard. It is the e->provides(mediaString)
-  // that fail (Qt-2.0). Sometimes it works :(
+  // collected from TQClipboard. It is the e->provides(mediaString)
+  // that fail (TQt-2.0). Sometimes it works :(
   //
   // printf("0: %s\n", e->format(0) ); No problem. 
   // printf("1: %s\n", e->format(1) ); Crash. 
@@ -116,7 +116,7 @@ bool CHexDrag::decode( const TQMimeSource *e, TQByteArray &dest )
   #if 0
   if( e->provides(mediaString) == true )
   {
-    dest = e->encodedData(mediaString);
+    dest = e->tqencodedData(mediaString);
     return( true );
   }
   else

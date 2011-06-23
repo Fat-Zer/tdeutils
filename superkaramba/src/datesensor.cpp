@@ -20,7 +20,7 @@ DateSensor::~DateSensor()
 
 void DateSensor::update()
 {
-    TQDateTime qdt  =  TQDateTime::currentDateTime();
+    TQDateTime qdt  =  TQDateTime::tqcurrentDateTime();
     TQString format;
     SensorParams *sp;
     Meter *meter;
@@ -48,8 +48,8 @@ void DateSensor::slotCalendarDeleted()
 }
 
 
-DatePicker::DatePicker(TQWidget *parent)
-    : TQVBox( parent, 0, WType_TopLevel | WDestructiveClose |
+DatePicker::DatePicker(TQWidget *tqparent)
+    : TQVBox( tqparent, 0, WType_TopLevel | WDestructiveClose |
              WStyle_Customize | WStyle_StaysOnTop | WStyle_NoBorder )
 {
     setFrameStyle( TQFrame::PopupPanel | TQFrame::Raised );
@@ -65,7 +65,7 @@ DatePicker::DatePicker(TQWidget *parent)
 void DatePicker::keyReleaseEvent(TQKeyEvent *e)
 {
         TQVBox::keyReleaseEvent(e);
-        if (e->key() == Qt::Key_Escape)
+        if (e->key() == TQt::Key_Escape)
                 close();
 }
 
@@ -80,7 +80,7 @@ void DateSensor::toggleCalendar(TQMouseEvent *ev)
 		TQString height = sp->getParam("CALHEIGHT");
 
 		TQRect rect(meter->getX(),meter->getY(),width.toInt(), height.toInt());
-		if (rect.contains( ev->x(), ev->y() ))
+		if (rect.tqcontains( ev->x(), ev->y() ))
 		{
 			if (hidden)
 			{
@@ -90,8 +90,8 @@ void DateSensor::toggleCalendar(TQMouseEvent *ev)
 				connect(cal, TQT_SIGNAL(destroyed()), TQT_SLOT(slotCalendarDeleted()));
 				TQPoint c = (TQPoint(ev->x(), ev->y()));
 
-				int w = cal->sizeHint().width();
-				int h = cal->sizeHint().height();
+				int w = cal->tqsizeHint().width();
+				int h = cal->tqsizeHint().height();
 
 				// make calendar fully visible
 				 TQRect deskR = TQApplication::desktop()->screenGeometry(TQApplication::desktop()->screenNumber(c));
@@ -117,7 +117,7 @@ void DateSensor::mousePressEvent(TQMouseEvent *ev)
 {
 	switch (ev->button()) 
 	{
-		case TQMouseEvent::LeftButton:
+		case Qt::LeftButton:
 			toggleCalendar(ev);
 			break;
 		default:

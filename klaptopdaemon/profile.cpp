@@ -3,7 +3,7 @@
  *
  * Copyright (c) 2003 Paul Campbell <paul@taniwha.com>
  *
- * Requires the Qt widget libraries, available at no cost at
+ * Requires the TQt widget libraries, available at no cost at
  * http://www.troll.no/
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -40,7 +40,7 @@
 #include <kmessagebox.h>
 #include <kcombobox.h>
 
-// other Qt headers:
+// other TQt headers:
 #include <tqlayout.h>
 #include <tqlabel.h>
 #include <tqcheckbox.h>
@@ -53,8 +53,8 @@
 
 extern void wake_laptop_daemon();
 
-ProfileConfig::ProfileConfig(TQWidget * parent, const char *name)
-  : KCModule(parent, name)
+ProfileConfig::ProfileConfig(TQWidget * tqparent, const char *name)
+  : KCModule(tqparent, name)
 {
     TQStringList performance_list;
     int current_performance;
@@ -205,15 +205,15 @@ ProfileConfig::ProfileConfig(TQWidget * parent, const char *name)
     TQLabel *tmp_label = new TQLabel(i18n("This panel allows you to set default values for system attributes "
 					"so that they change when the laptop is plugged in to the wall or "
 					"running on batteries."), this );
-    tmp_label->setAlignment( Qt::WordBreak );
+    tmp_label->tqsetAlignment( TQt::WordBreak );
     top_layout->addWidget( tmp_label );
 
     tmp_label = new TQLabel(i18n("You can also set options for these values that will be set by low battery "
 				"conditions, or system inactivity in the other panels"), this );
-    tmp_label->setAlignment( Qt::WordBreak );
+    tmp_label->tqsetAlignment( TQt::WordBreak );
     top_layout->addWidget( tmp_label );
     top_layout->addStretch(1);
-    top_layout->addWidget( new TQLabel( i18n("Version: %1").arg(LAPTOP_VERSION), this), 0, Qt::AlignRight );
+    top_layout->addWidget( new TQLabel( i18n("Version: %1").tqarg(LAPTOP_VERSION), this), 0, TQt::AlignRight );
 
 
     load();      

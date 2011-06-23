@@ -35,19 +35,19 @@
 
 extern "C"
 {
-  KDE_EXPORT KPanelExtension *init(TQWidget *parent, const TQString &configFile)
+  KDE_EXPORT KPanelExtension *init(TQWidget *tqparent, const TQString &configFile)
   {
     KGlobal::locale()->insertCatalogue("ksim");
     return new KSim::PanelExtension(configFile, KPanelExtension::Normal,
     KPanelExtension::About | KPanelExtension::Help |
     KPanelExtension::Preferences | KPanelExtension::ReportBug,
-    parent, "ksim");
+    tqparent, "ksim");
   }
 }
 
 KSim::PanelExtension::PanelExtension(const TQString &configFile,
-   Type type, int actions, TQWidget *parent, const char *name)
-   : KPanelExtension(configFile, type, actions, parent, name)
+   Type type, int actions, TQWidget *tqparent, const char *name)
+   : KPanelExtension(configFile, type, actions, tqparent, name)
 {
   m_dcopClient = new DCOPClient;
   m_view = new KSim::MainView(config(), true, this, "m_view");
@@ -75,9 +75,9 @@ KSim::PanelExtension::~PanelExtension()
   delete m_dcopClient;
 }
 
-TQSize KSim::PanelExtension::sizeHint(Position p, TQSize maxSize) const
+TQSize KSim::PanelExtension::tqsizeHint(Position p, TQSize maxSize) const
 {
-  return m_view->sizeHint(p, maxSize);
+  return m_view->tqsizeHint(p, maxSize);
 }
 
 void KSim::PanelExtension::resizeEvent(TQResizeEvent *)

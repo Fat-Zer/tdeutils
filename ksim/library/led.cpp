@@ -77,14 +77,14 @@ void KSim::Led::setOn(bool force)
   TQRect rect = d->splitter.coordinates(d->type == First ? 1 : 3);
   if (d->pixmap.isNull() || rect.isEmpty()) {
     resize(12, 8);
-    fill(Qt::white);
+    fill(TQt::white);
     return;
   }
 
-  if (d->pixmap.mask() && !d->pixmap.mask()->isNull()) {
-    TQBitmap mask(rect.size());
-    bitBlt(&mask, TQPoint(0, 0), d->pixmap.mask(), rect, CopyROP);
-    setMask(mask);
+  if (d->pixmap.tqmask() && !d->pixmap.tqmask()->isNull()) {
+    TQBitmap tqmask(rect.size());
+    bitBlt(&tqmask, TQPoint(0, 0), d->pixmap.tqmask(), rect, CopyROP);
+    setMask(tqmask);
   }
 
   bitBlt(this, TQPoint(0, 0), &d->pixmap, rect, CopyROP);
@@ -100,14 +100,14 @@ void KSim::Led::setOff(bool force)
   TQRect rect = d->splitter.coordinates(d->type == First ? 0 : 2);
   if (d->pixmap.isNull() || rect.isEmpty()) {
     resize(12, 8);
-    fill(Qt::white);
+    fill(TQt::white);
     return;
   }
 
-  if (d->pixmap.mask() && !d->pixmap.mask()->isNull()) {
-    TQBitmap mask(rect.size());
-    bitBlt(&mask, TQPoint(0, 0), d->pixmap.mask(), rect, CopyROP);
-    setMask(mask);
+  if (d->pixmap.tqmask() && !d->pixmap.tqmask()->isNull()) {
+    TQBitmap tqmask(rect.size());
+    bitBlt(&tqmask, TQPoint(0, 0), d->pixmap.tqmask(), rect, CopyROP);
+    setMask(tqmask);
   }
 
   bitBlt(this, TQPoint(0, 0), &d->pixmap, rect, CopyROP);
@@ -184,24 +184,24 @@ class KSim::LedLabel::Private
 };
 
 KSim::LedLabel::LedLabel(int max, int type, const TQString &label,
-   TQWidget *parent, const char *name, WFlags fl)
-   : KSim::Progress(max, type, Panel, parent, name, fl)
+   TQWidget *tqparent, const char *name, WFlags fl)
+   : KSim::Progress(max, type, Panel, tqparent, name, fl)
 {
   init();
   setText(label);
 }
 
 KSim::LedLabel::LedLabel(int max, int type,
-   TQWidget *parent, const char *name, WFlags fl)
-   : KSim::Progress(max, type, Panel, parent, name, fl)
+   TQWidget *tqparent, const char *name, WFlags fl)
+   : KSim::Progress(max, type, Panel, tqparent, name, fl)
 {
   init();
 }
 
 KSim::LedLabel::LedLabel(int max, 
-   TQWidget *parent, const char *name, WFlags fl)
+   TQWidget *tqparent, const char *name, WFlags fl)
    : KSim::Progress(max, KSim::Types::None,
-   Panel, parent, name, fl)
+   Panel, tqparent, name, fl)
 {
   init();
 }
@@ -228,15 +228,15 @@ void KSim::LedLabel::configureObject(bool reapaintWidget)
   d->sendLed.update();
 
   setConfigValues();
-  layoutLeds();
+  tqlayoutLeds();
 
   if (reapaintWidget)
     update();
 }
 
-TQSize KSim::LedLabel::sizeHint() const
+TQSize KSim::LedLabel::tqsizeHint() const
 {
-  TQSize hint(Progress::sizeHint());
+  TQSize hint(Progress::tqsizeHint());
 
   if (d->sendLed.height() > hint.height())
     hint.setHeight(d->sendLed.height());
@@ -313,10 +313,10 @@ void KSim::LedLabel::paintEvent(TQPaintEvent *ev)
 void KSim::LedLabel::resizeEvent(TQResizeEvent *ev)
 {
   KSim::Progress::resizeEvent(ev);
-  layoutLeds();
+  tqlayoutLeds();
 }
 
-void KSim::LedLabel::layoutLeds()
+void KSim::LedLabel::tqlayoutLeds()
 {
   int ledHeight = height() / 2;
 

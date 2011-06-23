@@ -190,7 +190,7 @@ TQString const _knumerror::ascii(int prec) const
   case MinusInfinity:
     return TQString("-inf");
   default:
-    return TQString::null;
+    return TQString();
   }
 }
 

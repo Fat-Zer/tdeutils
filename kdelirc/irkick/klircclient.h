@@ -26,9 +26,10 @@ class TQSocketNotifier;
 @author Gav Wood
 */
 
-class KLircClient: public QObject
+class KLircClient: public TQObject
 {
 	Q_OBJECT
+  TQ_OBJECT
 
 private:
 	struct lirc_config *theConfig;
@@ -107,7 +108,7 @@ public:
 	 */
 	bool connectToLirc();
 
-	KLircClient(TQWidget *parent = 0, const char *name = 0);
+	KLircClient(TQWidget *tqparent = 0, const char *name = 0);
 	~KLircClient();
 };
 

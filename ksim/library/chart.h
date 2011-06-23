@@ -36,6 +36,7 @@ namespace KSim
   class KDE_EXPORT Chart : public TQWidget, public KSim::Base
   {
     Q_OBJECT
+  TQ_OBJECT
     public:
       enum DataType { DataIn = 0, DataOut };
       enum LabelType { Label = 0, Progress, Led };
@@ -46,10 +47,10 @@ namespace KSim
        * @param minValue is the minimum value to show
        * @param maxValue is the maximum value to show
        * @param title is the title off the krell bar (if enabled)
-       * @param parent is the parent widget
+       * @param tqparent is the tqparent widget
        */
       Chart(bool displayMeter, int maxValue,
-         const TQString &title, TQWidget *parent,
+         const TQString &title, TQWidget *tqparent,
          const char *name = 0, WFlags fl = 0);
       /**
        * Constructs a KSim::Chart.
@@ -57,10 +58,10 @@ namespace KSim
        * @param showKrell is if the krellbar should be shown
        * @param minValue is the minimum value to show
        * @param maxValue is the maximum value to show
-       * @param parent is the parent widget
+       * @param tqparent is the tqparent widget
        */
       Chart(bool displayMeter, int maxValue,
-         TQWidget *parent, const char *name = 0,
+         TQWidget *tqparent, const char *name = 0,
          WFlags fl = 0);
       /**
        * destructs KSim::Chart
@@ -103,16 +104,16 @@ namespace KSim
       /**
        * reimplemented for internal reasons
        */
-      virtual void configureObject(bool repaintWidget = true);
+      virtual void configureObject(bool tqrepaintWidget = true);
 
       /**
        * reimplemented for internal reasons
        */
-      TQSize sizeHint() const;
+      TQSize tqsizeHint() const;
       /**
        * reimplemented for internal reasons
        */
-      TQSize minimumSizeHint() const;
+      TQSize tqminimumSizeHint() const;
 
       void disableAutomaticUpdates();
 
@@ -133,7 +134,7 @@ namespace KSim
       /**
        * sets the current text that apears in the top left hand corner
        */
-      void setText(const TQString &in, const TQString &out = TQString::null);
+      void setText(const TQString &in, const TQString &out = TQString());
       /**
        * Sets the minimum value the graph will display
        */

@@ -40,6 +40,7 @@
 class ClickArea : public Meter
 {
     Q_OBJECT
+  TQ_OBJECT
 public:
     ClickArea(karamba* k, int x, int y, int w, int h );
 

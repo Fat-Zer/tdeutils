@@ -71,12 +71,12 @@ TQString KarambaApplication::getMainKaramba()
     if (dcop.isMainKaramba())
       return *it;
   }
-  return TQString::null;
+  return TQString();
 }
 
 bool KarambaApplication::themeExists(TQString pretty_name)
 {
-  TQWidgetList  *list = TQApplication::allWidgets();
+  TQWidgetList  *list = TQApplication::tqallWidgets();
   TQWidgetListIt it( *list );         // iterate over the widgets
   TQWidget * w;
   while ( (w=it.current()) != 0 ) // for each widget...
@@ -296,7 +296,7 @@ void KarambaApplication::addKaramba(karamba* k, bool reloading)
         karambaApp->dcopClient()->appId(), k->theme().file());
     k->setInstance(instance);
   }
-  karambaList->append(k);
+  karambaList->append(TQT_TQOBJECT(k));
 }
 
 void KarambaApplication::deleteKaramba(karamba* k, bool reloading)
@@ -304,12 +304,12 @@ void KarambaApplication::deleteKaramba(karamba* k, bool reloading)
   if(!reloading && karambaApp->dcopStub())
     karambaApp->dcopStub()->themeClosed(
         karambaApp->dcopClient()->appId(), k->theme().file(), k->instance());
-  karambaList->removeRef(k);
+  karambaList->removeRef(TQT_TQOBJECT(k));
 }
 
 bool KarambaApplication::hasKaramba(karamba* k)
 {
-  return karambaList->containsRef(k) > 0;
+  return karambaList->tqcontainsRef(TQT_TQOBJECT(k)) > 0;
 }
 
 // XXX: I guess this should be made with mutex/semaphores
@@ -380,8 +380,8 @@ void KarambaApplication::quitSuperKaramba()
 {
   if(themeListWindow)
     themeListWindow->saveUserAddedThemes();
-  qApp->closeAllWindows();
-  qApp->quit();
+  tqApp->closeAllWindows();
+  tqApp->quit();
 }
 
 void KarambaApplication::globalQuitSuperKaramba()

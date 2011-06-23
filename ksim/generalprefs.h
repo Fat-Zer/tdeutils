@@ -40,11 +40,12 @@ namespace KSim
 {
   class Config;
 
-  class GeneralPrefs : public QWidget
+  class GeneralPrefs : public TQWidget
   {
     Q_OBJECT
+  TQ_OBJECT
     public:
-      GeneralPrefs(TQWidget *parent, const char *name=0);
+      GeneralPrefs(TQWidget *tqparent, const char *name=0);
       ~GeneralPrefs();
 
     public slots:
@@ -62,11 +63,12 @@ namespace KSim
       TQCheckBox *m_recolourThemes;
   };
 
-  class ClockPrefs : public QWidget
+  class ClockPrefs : public TQWidget
   {
     Q_OBJECT
+  TQ_OBJECT
     public:
-      ClockPrefs(TQWidget *parent, const char *name=0);
+      ClockPrefs(TQWidget *tqparent, const char *name=0);
       ~ClockPrefs();
 
     public slots:
@@ -79,11 +81,12 @@ namespace KSim
       TQCheckBox *m_dateCheck;
   };
 
-  class UptimePrefs : public QWidget
+  class UptimePrefs : public TQWidget
   {
     Q_OBJECT
+  TQ_OBJECT
     public:
-      UptimePrefs(TQWidget *parent, const char *name=0);
+      UptimePrefs(TQWidget *tqparent, const char *name=0);
       ~UptimePrefs();
 
     public slots:
@@ -113,11 +116,12 @@ namespace KSim
       TQIconSet m_removeIcon;
   };
 
-  class MemoryPrefs : public QWidget
+  class MemoryPrefs : public TQWidget
   {
     Q_OBJECT
+  TQ_OBJECT
     public:
-      MemoryPrefs(TQWidget *parent, const char *name=0);
+      MemoryPrefs(TQWidget *tqparent, const char *name=0);
       ~MemoryPrefs();
 
     public slots:
@@ -149,11 +153,12 @@ namespace KSim
       TQIconSet m_removeIcon;
   };
 
-  class SwapPrefs : public QWidget
+  class SwapPrefs : public TQWidget
   {
     Q_OBJECT
+  TQ_OBJECT
     public:
-      SwapPrefs(TQWidget *parent, const char *name=0);
+      SwapPrefs(TQWidget *tqparent, const char *name=0);
       ~SwapPrefs();
 
     public slots:

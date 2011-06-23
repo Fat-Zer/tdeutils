@@ -33,9 +33,10 @@ class TQSpinBox;
 class LayoutDialogPage : public KPrintDialogPage
 {
  Q_OBJECT
+  TQ_OBJECT
 
  public:
-    LayoutDialogPage( TQWidget *parent = 0, const char *name = 0 );
+    LayoutDialogPage( TQWidget *tqparent = 0, const char *name = 0 );
     ~LayoutDialogPage( void );
 
     void getOptions( TQMap<TQString,TQString>& opts, bool incldef = false );

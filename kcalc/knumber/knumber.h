@@ -36,8 +36,8 @@ class TQString;
   * KNumber is based on the GMP (GNU Multiprecision) library and
   * provides transparent support to integer, fractional and floating
   * point number. It contains rudimentary error handling, and also
-  * includes methods for converting the numbers to QStrings for
-  * output, and to read QStrings to obtain a KNumber.
+  * includes methods for converting the numbers to TQStrings for
+  * output, and to read TQStrings to obtain a KNumber.
   *
   * The different types of numbers that can be represented by objects
   * of this class will be described below:
@@ -130,7 +130,7 @@ class KDE_EXPORT KNumber
   NumType type(void) const;
 
   /**
-   * Set whether the output of numbers (with KNumber::toQString)
+   * Set whether the output of numbers (with KNumber::toTQString)
    * should happen as floating point numbers or not. This method has
    * in fact only an effect on numbers of type @p
    * NumType::FractionType, which can be either displayed as fractions
@@ -179,7 +179,7 @@ class KDE_EXPORT KNumber
    * is ignored.
    *
    */
-  TQString const toQString(int width = -1, int prec = -1) const;
+  TQString const toTQString(int width = -1, int prec = -1) const;
   
   /**
    * Compute the absolute value, i.e. @p x.abs() returns the value

@@ -33,8 +33,8 @@ extern "C" {
 
 namespace KMilo {
 
-PowerBookMonitor::PowerBookMonitor(TQObject *parent, const char *name, const TQStringList& args)
-: Monitor(parent, name, args) {
+PowerBookMonitor::PowerBookMonitor(TQObject *tqparent, const char *name, const TQStringList& args)
+: Monitor(tqparent, name, args) {
 	_serverPort = -1;
 	_clientPort = -1;
 	_progress = 0;

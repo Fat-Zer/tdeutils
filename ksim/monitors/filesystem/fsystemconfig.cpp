@@ -34,20 +34,20 @@
 #include <tqlabel.h>
 #include <tqwhatsthis.h>
 
-class FSysViewItem : public QCheckListItem
+class FSysViewItem : public TQCheckListItem
 {
   public:
-    FSysViewItem(TQListView *parent, const TQString &text1,
+    FSysViewItem(TQListView *tqparent, const TQString &text1,
        const TQString &text2, const TQString &text3)
-        : TQCheckListItem(parent, text1, CheckBox)
+        : TQCheckListItem(tqparent, text1, CheckBox)
     {
       setText(1, text2);
       setText(2, text3);
     }
 };
 
-FsystemConfig::FsystemConfig(KSim::PluginObject *parent, const char *name)
-   : KSim::PluginPage(parent, name)
+FsystemConfig::FsystemConfig(KSim::PluginObject *tqparent, const char *name)
+   : KSim::PluginPage(tqparent, name)
 {
   m_mainLayout = new TQGridLayout(this);
   m_mainLayout->setSpacing(6);
@@ -71,7 +71,7 @@ FsystemConfig::FsystemConfig(KSim::PluginObject *parent, const char *name)
 
   m_intervalLabel = new TQLabel(this);
   m_intervalLabel->setText( i18n("Update interval:"));
-  m_intervalLabel->setSizePolicy(TQSizePolicy(TQSizePolicy::Fixed,
+  m_intervalLabel->tqsetSizePolicy(TQSizePolicy(TQSizePolicy::Fixed,
      TQSizePolicy::Fixed));
   m_mainLayout->addMultiCellWidget(m_intervalLabel, 3, 3, 0, 0);
 
@@ -82,7 +82,7 @@ FsystemConfig::FsystemConfig(KSim::PluginObject *parent, const char *name)
 
   TQLabel *intervalLabel = new TQLabel(this);
   intervalLabel->setText(i18n("seconds"));
-  intervalLabel->setSizePolicy(TQSizePolicy(TQSizePolicy::Fixed,
+  intervalLabel->tqsetSizePolicy(TQSizePolicy(TQSizePolicy::Fixed,
      TQSizePolicy::Fixed));
   m_mainLayout->addMultiCellWidget(intervalLabel, 3, 3, 2, 2);
 
@@ -107,7 +107,7 @@ void FsystemConfig::readConfig()
   TQStringList list = config()->readListEntry("mountEntries");
   for (TQListViewItemIterator it(m_availableMounts); it.current(); ++it) {
     TQString string = it.current()->text(0) + ":" + splitString(it.current()->text(0));
-    static_cast<TQCheckListItem *>(it.current())->setOn(list.contains(string) > 0);
+    static_cast<TQCheckListItem *>(it.current())->setOn(list.tqcontains(string) > 0);
   }
 }
 
@@ -155,7 +155,7 @@ void FsystemConfig::getStats()
     if ( !FilesystemStats::readStats( ( *it ).dir, total, free ) )
       continue;
 
-    if ( !m_availableMounts->findItem( ( *it ).dir, 0 ) )
+    if ( !m_availableMounts->tqfindItem( ( *it ).dir, 0 ) )
     {
       (void) new FSysViewItem( m_availableMounts, ( *it ).dir,
          ( *it ).fsname, ( *it ).type );
@@ -169,7 +169,7 @@ void FsystemConfig::getStats()
   TQStringList list = config()->readListEntry("mountEntries");
   for (TQListViewItemIterator it(m_availableMounts); it.current(); ++it) {
     TQString string = it.current()->text(0) + ":" + splitString(it.current()->text(0));
-    static_cast<TQCheckListItem *>(it.current())->setOn(list.contains(string) > 0);
+    static_cast<TQCheckListItem *>(it.current())->setOn(list.tqcontains(string) > 0);
   }
 }
 
@@ -178,7 +178,7 @@ TQString FsystemConfig::splitString(const TQString &string) const
   if (string == "/" || !m_splitNames->isChecked())
     return string;
 
-  int location = string.findRev("/");
+  int location = string.tqfindRev("/");
   TQString newString(string);
   return newString.remove(0, location + 1);
 }

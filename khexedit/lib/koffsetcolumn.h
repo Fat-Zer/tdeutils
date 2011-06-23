@@ -81,7 +81,7 @@ class KOffsetColumn : public KColumn
     /** */
     KPixelY DigitBaseLine;
 
-  protected: // general layout
+  protected: // general tqlayout
     KOffsetFormat::KFormat Format;
 
     int CodingWidth;

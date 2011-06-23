@@ -29,12 +29,12 @@ class AltnRegExp;
 class AltnWidget :public MultiContainerWidget
 {
 public:
-  AltnWidget( RegExpEditorWindow* editorWindow, TQWidget *parent,
+  AltnWidget( RegExpEditorWindow* editorWindow, TQWidget *tqparent,
               const char *label = 0);
   AltnWidget( AltnRegExp* regexp, RegExpEditorWindow* editorWindow,
-              TQWidget* parent, const char* name = 0);
+              TQWidget* tqparent, const char* name = 0);
   virtual void addNewChild(DragAccepter *accepter, RegExpWidget *child);
-  virtual TQSize sizeHint() const;
+  virtual TQSize tqsizeHint() const;
 	virtual RegExp* regExp() const;
   virtual void applyRegExpToSelection( RegExpType type );
   virtual RegExpType type() const { return ALTN; }
@@ -58,8 +58,8 @@ private:
   mutable TQSize _textSize;
 
   mutable int _maxSelectedWidth;
-  mutable int _childrenWidth;
-  mutable int _childrenHeight;
+  mutable int _tqchildrenWidth;
+  mutable int _tqchildrenHeight;
 };
 
 #endif // altnwidget

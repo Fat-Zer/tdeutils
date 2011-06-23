@@ -72,7 +72,7 @@ void ArchiveFormatInfo::buildFormatInfos()
   addFormatInfo( COMPRESSED_FORMAT, "application/x-xz", ".xz" );
   addFormatInfo( COMPRESSED_FORMAT, "application/x-lzop", ".lzo"  );
   addFormatInfo( COMPRESSED_FORMAT, "application/x-compress", ".Z" );
-  find( COMPRESSED_FORMAT ).description = i18n( "Compressed File" );
+  tqfind( COMPRESSED_FORMAT ).description = i18n( "Compressed File" );
 
   addFormatInfo( ZOO_FORMAT, "application/x-zoo", ".zoo" );
 
@@ -90,7 +90,7 @@ void ArchiveFormatInfo::buildFormatInfos()
 
 void ArchiveFormatInfo::addFormatInfo( ArchType type, TQString mime, TQString stdExt )
 {
-    FormatInfo & info = find( type );
+    FormatInfo & info = tqfind( type );
 
     KDesktopFile * desktopFile = new KDesktopFile( mime + ".desktop", true, "mime" );
     if( !desktopFile )
@@ -146,7 +146,7 @@ TQStringList ArchiveFormatInfo::allDescriptions()
     return descriptions;
 }
 
-ArchiveFormatInfo::FormatInfo & ArchiveFormatInfo::find( ArchType type )
+ArchiveFormatInfo::FormatInfo & ArchiveFormatInfo::tqfind( ArchType type )
 {
     InfoList::Iterator it = m_formatInfos.begin();
     for( ; it != m_formatInfos.end(); ++it )
@@ -177,7 +177,7 @@ ArchType ArchiveFormatInfo::archTypeForMimeType( const TQString & mimeType )
     InfoList::Iterator it = m_formatInfos.begin();
     for( ; it != m_formatInfos.end(); ++it )
     {
-        int index = (*it).mimeTypes.findIndex( mimeType );
+        int index = (*it).mimeTypes.tqfindIndex( mimeType );
         if( index != -1 )
             return (*it).type;
     }
@@ -223,7 +223,7 @@ TQString ArchiveFormatInfo::findMimeType( const KURL & url )
     char buffer[ 0x200 ];
 
     dev->open(  IO_ReadOnly );
-    Q_LONG n = dev->readBlock( buffer, 0x200 );
+    TQ_LONG n = dev->readBlock( buffer, 0x200 );
     delete dev;
 
     if ( n == 0x200 && buffer[0] != 0 && !strncmp(buffer + 257, "ustar", 5) )
@@ -243,11 +243,11 @@ TQString ArchiveFormatInfo::mimeTypeForDescription( const TQString & description
     int index;
     for( ; it != m_formatInfos.end(); ++it )
     {
-        index = (*it).allDescriptions.findIndex( description );
+        index = (*it).allDescriptions.tqfindIndex( description );
         if ( index != -1 )
             return (* (*it).mimeTypes.at( index ) );
     }
-    return TQString::null;
+    return TQString();
 }
 
 TQString ArchiveFormatInfo::descriptionForMimeType( const TQString & mimeType )
@@ -256,11 +256,11 @@ TQString ArchiveFormatInfo::descriptionForMimeType( const TQString & mimeType )
     int index;
     for( ; it != m_formatInfos.end(); ++it )
     {
-        index = (*it).mimeTypes.findIndex( mimeType );
+        index = (*it).mimeTypes.tqfindIndex( mimeType );
         if ( index != -1 )
             return (* (*it).allDescriptions.at( index ) );
     }
-    return TQString::null;
+    return TQString();
 }
 
 TQString ArchiveFormatInfo::defaultExtension( const TQString & mimeType )
@@ -269,11 +269,11 @@ TQString ArchiveFormatInfo::defaultExtension( const TQString & mimeType )
     int index;
     for( ; it != m_formatInfos.end(); ++it )
     {
-        index = (*it).mimeTypes.findIndex( mimeType );
+        index = (*it).mimeTypes.tqfindIndex( mimeType );
         if ( index != -1 )
             return (* (*it).defaultExtensions.at( index ) );
     }
-    return TQString::null;
+    return TQString();
 }
 
 bool ArchiveFormatInfo::wasUnknownExtension()

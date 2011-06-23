@@ -76,12 +76,12 @@ FILE *fp;
 
 void KgpgInterface::updateIDs(TQString txtString)
 {
- int cut=txtString.find(' ',22,false);
+ int cut=txtString.tqfind(' ',22,false);
           txtString.remove(0,cut);
-          if (txtString.find("(",0,false)!=-1)
+          if (txtString.tqfind("(",0,false)!=-1)
             txtString=txtString.section('(',0,0)+txtString.section(')',-1);
-	    txtString.replace(TQRegExp("<"),"&lt;");
-          if (userIDs.find(txtString)==-1)
+	    txtString.tqreplace(TQRegExp("<"),"&lt;");
+          if (userIDs.tqfind(txtString)==-1)
             {
               if (!userIDs.isEmpty())
                 userIDs+=i18n(" or ");
@@ -92,14 +92,14 @@ void KgpgInterface::updateIDs(TQString txtString)
 void KgpgInterface::KgpgEncryptFile(TQStringList encryptKeys,KURL srcUrl,KURL destUrl, TQStringList Options, bool symetrical)
 {
         sourceFile=srcUrl;
-        message=TQString::null;
+        message=TQString();
 
         KProcIO *proc=new KProcIO(TQTextCodec::codecForLocale());
 	*proc<<"gpg"<<"--no-tty"<<"--no-secmem-warning"<<"--status-fd=2"<<"--command-fd=0"<<"--utf8-strings";
 	for ( TQStringList::Iterator it = Options.begin(); it != Options.end(); ++it )
-       		if (!TQFile::encodeName(*it).isEmpty()) *proc<< TQFile::encodeName(*it);
+       		if (!TQFile::encodeName(*it).isEmpty()) *proc<< TQString(TQFile::encodeName(*it));
 
-                *proc<<"--output"<<TQFile::encodeName(destUrl.path());
+                *proc<<"--output"<<TQString(TQFile::encodeName(destUrl.path()));
 
 		if (!symetrical) {
 		*proc<<"-e";
@@ -108,7 +108,7 @@ void KgpgInterface::KgpgEncryptFile(TQStringList encryptKeys,KURL srcUrl,KURL de
         	} else  ////////////   symetrical encryption, prompt for password
                 *proc<<"-c";
 
-		*proc<<TQFile::encodeName(srcUrl.path());
+		*proc<<TQString(TQFile::encodeName(srcUrl.path()));
 
         /////////  when process ends, update dialog infos
         TQObject::connect(proc, TQT_SIGNAL(processExited(KProcess *)),this,TQT_SLOT(encryptfin(KProcess *)));
@@ -123,7 +123,7 @@ KgpgInterface::~KgpgInterface()
 
 void KgpgInterface::encryptfin(KProcess *)
 {
-        if (message.find("END_ENCRYPTION")!=-1)
+        if (message.tqfind("END_ENCRYPTION")!=-1)
                 emit encryptionfinished(sourceFile);
         else {
                 emit errormessage(message);
@@ -134,12 +134,12 @@ void KgpgInterface::readencprocess(KProcIO *p)
 {
         TQString required;
         while (p->readln(required,true)!=-1) {
-                if (required.find("BEGIN_ENCRYPTION",0,false)!=-1)
+                if (required.tqfind("BEGIN_ENCRYPTION",0,false)!=-1)
                         emit processstarted(sourceFile.path());
-                if (required.find("GET_")!=-1) {
-                        if (required.find("openfile.overwrite.okay")!=-1)
-                                p->writeStdin("Yes");
-                        else if ((required.find("passphrase.enter")!=-1)) {
+                if (required.tqfind("GET_")!=-1) {
+                        if (required.tqfind("openfile.overwrite.okay")!=-1)
+                                p->writeStdin(TQString("Yes"));
+                        else if ((required.tqfind("passphrase.enter")!=-1)) {
                                 TQCString passphrase;
                                 int code=KPasswordDialog::getNewPassword(passphrase,i18n("Enter passphrase for your file (symmetrical encryption):"));
                                 if (code!=TQDialog::Accepted) {
@@ -149,7 +149,7 @@ void KgpgInterface::readencprocess(KProcIO *p)
                                 }
                                 p->writeStdin(passphrase,true);
                         } else {
-                                p->writeStdin("quit");
+                                p->writeStdin(TQString("quit"));
                                 p->closeWhenDone();
                         }
                 }
@@ -162,10 +162,10 @@ void KgpgInterface::readencprocess(KProcIO *p)
 
 void KgpgInterface::KgpgDecryptFile(KURL srcUrl,KURL destUrl,TQStringList Options)
 {
-        message=TQString::null;
+        message=TQString();
         step=3;
 	decryptUrl=srcUrl.path();
-        userIDs=TQString::null;
+        userIDs=TQString();
         anonymous=false;
 
         KProcIO *proc=new KProcIO(TQTextCodec::codecForLocale());
@@ -173,12 +173,12 @@ void KgpgInterface::KgpgDecryptFile(KURL srcUrl,KURL destUrl,TQStringList Option
                 *proc<<"gpg"<<"--no-tty"<<"--no-secmem-warning"<<"--status-fd=2"<<"--command-fd=0"<<"--utf8-strings";
 
 		for ( TQStringList::Iterator it = Options.begin(); it != Options.end(); ++it )
-       		if (!TQFile::encodeName(*it).isEmpty()) *proc<< TQFile::encodeName(*it);
+       		if (!TQFile::encodeName(*it).isEmpty()) *proc<< TQString(TQFile::encodeName(*it));
 
 		if (!destUrl.fileName().isEmpty()) // a filename was entered
-				*proc<<"-o"<<TQFile::encodeName(destUrl.path());
+				*proc<<"-o"<<TQString(TQFile::encodeName(destUrl.path()));
 
-                *proc<<"-d"<<TQFile::encodeName(srcUrl.path());
+                *proc<<"-d"<<TQString(TQFile::encodeName(srcUrl.path()));
 
         TQObject::connect(proc, TQT_SIGNAL(processExited(KProcess *)),this,TQT_SLOT(decryptfin(KProcess *)));
         TQObject::connect(proc,TQT_SIGNAL(readReady(KProcIO *)),this,TQT_SLOT(readdecprocess(KProcIO *)));
@@ -187,7 +187,7 @@ void KgpgInterface::KgpgDecryptFile(KURL srcUrl,KURL destUrl,TQStringList Option
 
 void KgpgInterface::decryptfin(KProcess *)
 {
-        if ((message.find("DECRYPTION_OKAY")!=-1) && (message.find("END_DECRYPTION")!=-1)) //&& (message.find("GOODMDC")!=-1)
+        if ((message.tqfind("DECRYPTION_OKAY")!=-1) && (message.tqfind("END_DECRYPTION")!=-1)) //&& (message.tqfind("GOODMDC")!=-1)
                 emit decryptionfinished();
         else
 	emit errormessage(message);
@@ -198,30 +198,30 @@ void KgpgInterface::readdecprocess(KProcIO *p)
 {
         TQString required;
         while (p->readln(required,true)!=-1) {
-                if (required.find("BEGIN_DECRYPTION",0,false)!=-1)
+                if (required.tqfind("BEGIN_DECRYPTION",0,false)!=-1)
                         emit processstarted(decryptUrl);
-                if (required.find("USERID_HINT",0,false)!=-1)
+                if (required.tqfind("USERID_HINT",0,false)!=-1)
 			updateIDs(required);
 
-                if (required.find("ENC_TO")!=-1) {
-                        if (required.find("0000000000000000")!=-1)
+                if (required.tqfind("ENC_TO")!=-1) {
+                        if (required.tqfind("0000000000000000")!=-1)
                                 anonymous=true;
                 }
-                if (required.find("GET_")!=-1) {
-                        if (required.find("openfile.overwrite.okay")!=-1)
-                                p->writeStdin("Yes");
-                        else if ((required.find("passphrase.enter")!=-1)) {
+                if (required.tqfind("GET_")!=-1) {
+                        if (required.tqfind("openfile.overwrite.okay")!=-1)
+                                p->writeStdin(TQString("Yes"));
+                        else if ((required.tqfind("passphrase.enter")!=-1)) {
                                 if (userIDs.isEmpty())
                                         userIDs=i18n("[No user id found]");
-                                userIDs.replace(TQRegExp("<"),"&lt;");
+                                userIDs.tqreplace(TQRegExp("<"),"&lt;");
                                 TQCString passphrase;
                                 TQString passdlgmessage;
                                 if (anonymous)
                                         passdlgmessage=i18n("<b>No user id found</b>. Trying all secret keys.<br>");
                                 if ((step<3) && (!anonymous))
-                                        passdlgmessage=i18n("<b>Bad passphrase</b>. You have %1 tries left.<br>").arg(step);
+                                        passdlgmessage=i18n("<b>Bad passphrase</b>. You have %1 tries left.<br>").tqarg(step);
 
-                                passdlgmessage+=i18n("Enter passphrase for <b>%1</b>").arg(userIDs);
+                                passdlgmessage+=i18n("Enter passphrase for <b>%1</b>").tqarg(userIDs);
                                 int code=KPasswordDialog::getPassword(passphrase,passdlgmessage);
                                 if (code!=TQDialog::Accepted) {
                                         p->deleteLater();
@@ -229,11 +229,11 @@ void KgpgInterface::readdecprocess(KProcIO *p)
                                         return;
                                 }
                                 p->writeStdin(passphrase,true);
-                                userIDs=TQString::null;
+                                userIDs=TQString();
                                 if (step>1) step--;
 				else step=3;
                         } else {
-                                p->writeStdin("quit");
+                                p->writeStdin(TQString("quit"));
                                 p->closeWhenDone();
                         }
                 }
@@ -247,7 +247,7 @@ void KgpgInterface::readdecprocess(KProcIO *p)
 
 void KgpgInterface::KgpgEncryptText(TQString text,TQStringList userIDs, TQStringList Options)
 {
-        message=TQString::null;
+        message=TQString();
 	//TQTextCodec *codec = KGlobal::charsets()->codecForName(KGlobal::locale()->encoding());
 	TQTextCodec *codec =TQTextCodec::codecForLocale ();
 	if (codec->canEncode(text)) txtToEncrypt=text;
@@ -257,7 +257,7 @@ void KgpgInterface::KgpgEncryptText(TQString text,TQStringList userIDs, TQString
         *proc<<"gpg"<<"--no-tty"<<"--no-secmem-warning"<<"--command-fd=0"<<"--status-fd=1"<<"--utf8-strings";
 
 	for ( TQStringList::Iterator it = Options.begin(); it != Options.end(); ++it )
-       		if (!TQFile::encodeName(*it).isEmpty()) *proc<< TQFile::encodeName(*it);
+       		if (!TQFile::encodeName(*it).isEmpty()) *proc<< TQString(TQFile::encodeName(*it));
 
 	if (!userIDs.isEmpty())
 	{
@@ -282,21 +282,21 @@ void KgpgInterface::txtencryptfin(KProcess *)
         if (!message.isEmpty())
                 emit txtencryptionfinished(message);
         else
-                emit txtencryptionfinished(TQString::null);
+                emit txtencryptionfinished(TQString());
 }
 
 void KgpgInterface::txtreadencprocess(KProcIO *p)
 {
         TQString required;
         while (p->readln(required,true)!=-1) {
-	  if (required.find("BEGIN_ENCRYPTION",0,false)!=-1)
+	  if (required.tqfind("BEGIN_ENCRYPTION",0,false)!=-1)
 	  {
 	    p->writeStdin(txtToEncrypt,false);
-	    txtToEncrypt=TQString::null;
+	    txtToEncrypt=TQString();
 	    p->closeWhenDone();
 	  }
 	  else
-	if ((required.find("passphrase.enter")!=-1))
+	if ((required.tqfind("passphrase.enter")!=-1))
             {
               TQCString passphrase;
               TQString passdlgmessage=i18n("Enter passphrase (symmetrical encryption)");
@@ -318,11 +318,11 @@ void KgpgInterface::txtreadencprocess(KProcIO *p)
 
 void KgpgInterface::KgpgDecryptText(TQString text,TQStringList Options)
 {
-  gpgOutput=TQString::null;
-  log=TQString::null;
+  gpgOutput=TQString();
+  log=TQString();
 
-  message=TQString::null;
-  userIDs=TQString::null;
+  message=TQString();
+  userIDs=TQString();
   step=3;
   anonymous=false;
   decfinished=false;
@@ -331,7 +331,7 @@ void KgpgInterface::KgpgDecryptText(TQString text,TQStringList Options)
   KProcess *proc=new KProcess();
   *proc<<"gpg"<<"--no-tty"<<"--no-secmem-warning"<<"--command-fd=0"<<"--status-fd=2"<<"--no-batch"<<"--utf8-strings";
   for ( TQStringList::Iterator it = Options.begin(); it != Options.end(); ++it )
-	  if (!TQFile::encodeName(*it).isEmpty()) *proc<< TQFile::encodeName(*it);
+	  if (!TQFile::encodeName(*it).isEmpty()) *proc<< TQString(TQFile::encodeName(*it));
   *proc<<"-d";
 
   /////////  when process ends, update dialog infos
@@ -370,23 +370,23 @@ void KgpgInterface::getCmdOutput(KProcess *p, char *data, int )
   log.append(data);
 
   int pos;
-  while ((pos=gpgOutput.find("\n"))!=-1)
+  while ((pos=gpgOutput.tqfind("\n"))!=-1)
   {
 	TQString required=gpgOutput.left(pos);
 	gpgOutput.remove(0,pos+2);
 
-	if (required.find("USERID_HINT",0,false)!=-1)
+	if (required.tqfind("USERID_HINT",0,false)!=-1)
 		updateIDs(required);
 
-	if (required.find("ENC_TO")!=-1)
+	if (required.tqfind("ENC_TO")!=-1)
 	{
-		if (required.find("0000000000000000")!=-1)
+		if (required.tqfind("0000000000000000")!=-1)
 			anonymous=true;
 	}
 
-	if (required.find("GET_")!=-1)
+	if (required.tqfind("GET_")!=-1)
 	{
-		if ((required.find("passphrase.enter")!=-1))
+		if ((required.tqfind("passphrase.enter")!=-1))
 		{
 			if (userIDs.isEmpty())
 			userIDs=i18n("[No user id found]");
@@ -395,8 +395,8 @@ void KgpgInterface::getCmdOutput(KProcess *p, char *data, int )
 			if (anonymous)
 				passdlgmessage=i18n("<b>No user id found</b>. Trying all secret keys.<br>");
 			if ((step<3) && (!anonymous))
-				passdlgmessage=i18n("<b>Bad passphrase</b>. You have %1 tries left.<br>").arg(step);
-			passdlgmessage+=i18n("Enter passphrase for <b>%1</b>").arg(userIDs);
+				passdlgmessage=i18n("<b>Bad passphrase</b>. You have %1 tries left.<br>").tqarg(step);
+			passdlgmessage+=i18n("Enter passphrase for <b>%1</b>").tqarg(userIDs);
 			int code=KPasswordDialog::getPassword(passphrase,passdlgmessage);
 			if (code!=TQDialog::Accepted)
 			{
@@ -406,7 +406,7 @@ void KgpgInterface::getCmdOutput(KProcess *p, char *data, int )
 			}
 			passphrase.append("\n");
 			p->writeStdin(passphrase,passphrase.length());
-			userIDs=TQString::null;
+			userIDs=TQString();
 			if (step>1) step--;
 			else step=3;
 		}
@@ -417,16 +417,16 @@ void KgpgInterface::getCmdOutput(KProcess *p, char *data, int )
 		}
 	}
 
-	if (required.find("BEGIN_DECRYPTION")!=-1)
+	if (required.tqfind("BEGIN_DECRYPTION")!=-1)
 	{
 		p->closeStdin();
-		required=TQString::null;
+		required=TQString();
 	}
 
-	if (required.find("END_DECRYPTION")!=-1) decfinished=true;
-	if (required.find("DECRYPTION_OKAY")!=-1) decok=true;
-	if (required.find("DECRYPTION_FAILED")!=-1) decok=false;
-	if (required.find("BADMDC")!=-1) badmdc=true;
+	if (required.tqfind("END_DECRYPTION")!=-1) decfinished=true;
+	if (required.tqfind("DECRYPTION_OKAY")!=-1) decok=true;
+	if (required.tqfind("DECRYPTION_FAILED")!=-1) decok=false;
+	if (required.tqfind("BADMDC")!=-1) badmdc=true;
 	}
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////    Text signing
@@ -434,7 +434,7 @@ void KgpgInterface::getCmdOutput(KProcess *p, char *data, int )
 
 void KgpgInterface::KgpgSignText(TQString text,TQString userIDs, TQStringList Options)
 {
-        message=TQString::null;
+        message=TQString();
 	step=4;
 	TQString txtprocess;
 	TQTextCodec *codec =TQTextCodec::codecForLocale ();
@@ -445,7 +445,7 @@ void KgpgInterface::KgpgSignText(TQString text,TQString userIDs, TQStringList Op
         *proc<<"gpg"<<"--no-tty"<<"--no-secmem-warning"<<"--command-fd=0"<<"--status-fd=1"<<"--utf8-strings";
 
 	for ( TQStringList::Iterator it = Options.begin(); it != Options.end(); ++it )
-		if (!TQFile::encodeName(*it).isEmpty()) *proc<< TQFile::encodeName(*it);
+		if (!TQFile::encodeName(*it).isEmpty()) *proc<< TQString(TQFile::encodeName(*it));
         *proc<<"--clearsign"<<"-u"<<userIDs;
 
         /////////  when process ends, update dialog infos
@@ -473,7 +473,7 @@ void KgpgInterface::txtsignfin(KProcess *)
         if (!message.isEmpty())
                 emit txtSignOver(message);
         else
-                emit txtSignOver(TQString::null);
+                emit txtSignOver(TQString());
 }
 
 void KgpgInterface::txtsignprocess(KProcIO *p)
@@ -482,17 +482,17 @@ void KgpgInterface::txtsignprocess(KProcIO *p)
         while (p->readln(required,true)!=-1) {
 //	kdDebug(2100)<<"SIGNING: "<<required<<endl;
 
-	if (required.find("USERID_HINT",0,false)!=-1)
+	if (required.tqfind("USERID_HINT",0,false)!=-1)
         updateIDs(required);
 
-	if (required.find("GOOD_PASSPHRASE")!=-1)
+	if (required.tqfind("GOOD_PASSPHRASE")!=-1)
 	{
 	p->writeStdin(message,true);
-	message=TQString::null;
+	message=TQString();
 	p->closeWhenDone();
 	}
 
-	if ((required.find("passphrase.enter")!=-1))
+	if ((required.tqfind("passphrase.enter")!=-1))
             {
 	      if (step>1) step--;
 	      else step=3;
@@ -501,8 +501,8 @@ void KgpgInterface::txtsignprocess(KProcIO *p)
               TQCString passphrase;
               TQString passdlgmessage;
               if (step<3)
-              passdlgmessage=i18n("<b>Bad passphrase</b>. You have %1 tries left.<br>").arg(step);
-              passdlgmessage+=i18n("Enter passphrase for <b>%1</b>").arg(userIDs);
+              passdlgmessage=i18n("<b>Bad passphrase</b>. You have %1 tries left.<br>").tqarg(step);
+              passdlgmessage+=i18n("Enter passphrase for <b>%1</b>").tqarg(userIDs);
               int code=KPasswordDialog::getPassword(passphrase,passdlgmessage);
 	      if (code!=TQDialog::Accepted)
                 {
@@ -522,8 +522,8 @@ void KgpgInterface::txtsignprocess(KProcIO *p)
 void KgpgInterface::KgpgDecryptFileToText(KURL srcUrl,TQStringList Options)
 {
 
-  message=TQString::null;
-  userIDs=TQString::null;
+  message=TQString();
+  userIDs=TQString();
   step=3;
   anonymous=false;
 decfinished=false;
@@ -533,9 +533,9 @@ badmdc=false;
   KProcess *proc=new KProcess();
   *proc<<"gpg"<<"--no-tty"<<"--utf8-strings"<<"--no-secmem-warning"<<"--command-fd=0"<<"--status-fd=2"<<"--no-batch"<<"-o"<<"-";
       	for ( TQStringList::Iterator it = Options.begin(); it != Options.end(); ++it ) {
-       		if (!TQFile::encodeName(*it).isEmpty()) *proc<< TQFile::encodeName(*it);
+       		if (!TQFile::encodeName(*it).isEmpty()) *proc<< TQString(TQFile::encodeName(*it));
     		}
-      *proc<<"-d"<<TQFile::encodeName(srcUrl.path());
+      *proc<<"-d"<<TQString(TQFile::encodeName(srcUrl.path()));
 
   /////////  when process ends, update dialog infos
 
@@ -555,8 +555,8 @@ void KgpgInterface::KgpgVerifyText(TQString text)
 		TQTextCodec *codec =TQTextCodec::codecForLocale ();
 		if (!codec->canEncode(text)) text=text.utf8();
 		signmiss=false;
-		signID=TQString::null;
-		message=TQString::null;
+		signID=TQString();
+		message=TQString();
 		 KProcIO *verifyproc=new KProcIO(TQTextCodec::codecForLocale());
          *verifyproc<<"gpg"<<"--no-secmem-warning"<<"--status-fd=2"<<"--command-fd=0"<<"--utf8-strings"<<"--verify";
         	connect(verifyproc, TQT_SIGNAL(processExited(KProcess *)),this, TQT_SLOT(slotverifyresult(KProcess *)));
@@ -586,13 +586,13 @@ TQString required;
     required=required.section("]",1,-1).stripWhiteSpace();
      if (required.startsWith("GOODSIG"))
      {
-	     TQString userName=required.section(" ",2,-1).replace(TQRegExp("<"),"&lt;");
+	     TQString userName=required.section(" ",2,-1).tqreplace(TQRegExp("<"),"&lt;");
 	     userName=checkForUtf8(userName);
-     signID=i18n("<qt>Good signature from:<br><b>%1</b><br>Key ID: %2</qt>").arg(userName).arg("0x"+required.section(" ",1,1).right(8));
+     signID=i18n("<qt>Good signature from:<br><b>%1</b><br>Key ID: %2</qt>").tqarg(userName).tqarg("0x"+required.section(" ",1,1).right(8));
      }
      if (required.startsWith("BADSIG"))
      {
-     signID=i18n("<qt><b>Bad signature</b> from:<br>%1<br>Key ID: %2<br><br><b>Text is corrupted.</b></qt>").arg(required.section(" ",2,-1).replace(TQRegExp("<"),"&lt;")).arg("0x"+required.section(" ",1,1).right(8));
+     signID=i18n("<qt><b>Bad signature</b> from:<br>%1<br>Key ID: %2<br><br><b>Text is corrupted.</b></qt>").tqarg(required.section(" ",2,-1).tqreplace(TQRegExp("<"),"&lt;")).tqarg("0x"+required.section(" ",1,1).right(8));
      }
      if (required.startsWith("NO_PUBKEY"))
      {
@@ -611,15 +611,15 @@ TQString required;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////   MD5
 
-Md5Widget::Md5Widget(TQWidget *parent, const char *name,KURL url):KDialogBase( parent, name, true,i18n("MD5 Checksum"),Apply | Close)
+Md5Widget::Md5Widget(TQWidget *tqparent, const char *name,KURL url):KDialogBase( tqparent, name, true,i18n("MD5 Checksum"),Apply | Close)
 {
         setButtonApply(i18n("Compare MD5 with Clipboard"));
-        mdSum=TQString::null;
+        mdSum=TQString();
         TQFile f(url.path());
         f.open( IO_ReadOnly);
         KMD5 checkfile;
         checkfile.reset();
-        checkfile.update(f);
+        checkfile.update(*TQT_TQIODEVICE(&f));
         mdSum=checkfile.hexDigest().data();
         f.close();
         TQWidget *page = new TQWidget(this);
@@ -628,7 +628,7 @@ Md5Widget::Md5Widget(TQWidget *parent, const char *name,KURL url):KDialogBase( p
         TQGridLayout *MyDialogLayout = new TQGridLayout( page, 1, 1, 5, 6, "MyDialogLayout");
 
         TQLabel *TextLabel1 = new TQLabel( page, "TextLabel1" );
-        TextLabel1->setText(i18n("MD5 sum for <b>%1</b> is:").arg(url.fileName()));
+        TextLabel1->setText(i18n("MD5 sum for <b>%1</b> is:").tqarg(url.fileName()));
         MyDialogLayout->addWidget( TextLabel1, 0, 0 );
 
         KLineEdit *KRestrictedLine1 = new KLineEdit(mdSum,page);
@@ -641,7 +641,7 @@ Md5Widget::Md5Widget(TQWidget *parent, const char *name,KURL url):KDialogBase( p
 
         KLed1=new KLed(TQColor(80,80,80),KLed::Off,KLed::Sunken,KLed::Circular,page,"KLed1");
         KLed1->off();
-        KLed1->setSizePolicy( TQSizePolicy( (TQSizePolicy::SizeType)0, (TQSizePolicy::SizeType)0, 0, 0, KLed1->sizePolicy().hasHeightForWidth() ) );
+        KLed1->tqsetSizePolicy( TQSizePolicy( (TQSizePolicy::SizeType)0, (TQSizePolicy::SizeType)0, 0, 0, KLed1->sizePolicy().hasHeightForWidth() ) );
         Layout4->addWidget( KLed1 );
 
         TextLabel1_2 = new TQLabel( page, "TextLabel1_2" );
@@ -653,7 +653,7 @@ Md5Widget::Md5Widget(TQWidget *parent, const char *name,KURL url):KDialogBase( p
         MyDialogLayout->addItem( spacer, 3, 0 );
 
         page->show();
-        page->resize(page->minimumSize());
+        page->resize(page->tqminimumSize());
         setMainWidget(page);
 
 
@@ -664,14 +664,14 @@ Md5Widget::~Md5Widget()
 
 void Md5Widget::slotApply()
 {
-        QClipboard *cb = TQApplication::clipboard();
+        TQClipboard *cb = TQApplication::tqclipboard();
         TQString text;
         // Copy text from the clipboard (paste)
-        text = cb->text(QClipboard::Clipboard);
+        text = cb->text(TQClipboard::Clipboard);
         if ( !text.isEmpty() ) {
                 text=text.stripWhiteSpace();
-                while (text.find(' ')!=-1)
-                        text.remove(text.find(' '),1);
+                while (text.tqfind(' ')!=-1)
+                        text.remove(text.tqfind(' '),1);
                 if (text==mdSum) {
                         TextLabel1_2->setText(i18n("<b>Correct checksum</b>, file is ok."));
                         KLed1->setColor(TQColor(0,255,0));
@@ -693,17 +693,17 @@ void Md5Widget::slotApply()
 void KgpgInterface::KgpgSignFile(TQString keyID,KURL srcUrl,TQStringList Options)
 {
         //////////////////////////////////////   create a detached signature for a chosen file
-        message=TQString::null;
+        message=TQString();
         step=3;
         /////////////       create gpg command
         KProcIO *proc=new KProcIO(TQTextCodec::codecForLocale());
         keyID=keyID.stripWhiteSpace();
         *proc<<"gpg"<<"--no-tty"<<"--no-secmem-warning"<<"--utf8-strings"<<"--status-fd=2"<<"--command-fd=0"<<"-u"<<keyID.local8Bit();
 		for ( TQStringList::Iterator it = Options.begin(); it != Options.end(); ++it )
-       		if (!TQFile::encodeName(*it).isEmpty()) *proc<< TQFile::encodeName(*it);
+       		if (!TQFile::encodeName(*it).isEmpty()) *proc<< TQString(TQFile::encodeName(*it));
 
-	*proc<<"--output"<<TQFile::encodeName(srcUrl.path()+".sig");
-        *proc<<"--detach-sig"<<TQFile::encodeName(srcUrl.path());
+	*proc<<"--output"<<TQString(TQFile::encodeName(srcUrl.path()+".sig"));
+        *proc<<"--detach-sig"<<TQString(TQFile::encodeName(srcUrl.path()));
 
         TQObject::connect(proc, TQT_SIGNAL(processExited(KProcess *)),this,TQT_SLOT(signfin(KProcess *)));
         TQObject::connect(proc,TQT_SIGNAL(readReady(KProcIO *)),this,TQT_SLOT(readsignprocess(KProcIO *)));
@@ -714,9 +714,9 @@ void KgpgInterface::KgpgSignFile(TQString keyID,KURL srcUrl,TQStringList Options
 
 void KgpgInterface::signfin(KProcess *)
 {
-        if (message.find("SIG_CREATED")!=-1)
-                KMessageBox::information(0,i18n("The signature file %1 was successfully created.").arg(file.fileName()));
-        else if (message.find("BAD_PASSPHRASE")!=-1)
+        if (message.tqfind("SIG_CREATED")!=-1)
+                KMessageBox::information(0,i18n("The signature file %1 was successfully created.").tqarg(file.fileName()));
+        else if (message.tqfind("BAD_PASSPHRASE")!=-1)
                 KMessageBox::sorry(0,i18n("Bad passphrase, signature was not created."));
         else
                 KMessageBox::sorry(0,message);
@@ -728,20 +728,20 @@ void KgpgInterface::readsignprocess(KProcIO *p)
 {
         TQString required;
         while (p->readln(required,true)!=-1) {
-                if (required.find("USERID_HINT",0,false)!=-1)
+                if (required.tqfind("USERID_HINT",0,false)!=-1)
 		updateIDs(required);
 
-                if (required.find("GET_")!=-1) {
-                        if (required.find("openfile.overwrite.okay")!=-1)
-                                p->writeStdin("Yes");
-                        else if ((required.find("passphrase.enter")!=-1)) {
+                if (required.tqfind("GET_")!=-1) {
+                        if (required.tqfind("openfile.overwrite.okay")!=-1)
+                                p->writeStdin(TQString("Yes"));
+                        else if ((required.tqfind("passphrase.enter")!=-1)) {
                                 if (userIDs.isEmpty())
                                         userIDs=i18n("[No user id found]");
                                 TQCString passphrase;
                                 TQString passdlgmessage;
                                 if (step<3)
-                                        passdlgmessage=i18n("<b>Bad passphrase</b>. you have %1 tries left.<br>").arg(step);
-                                passdlgmessage+=i18n("Enter passphrase for <b>%1</b>").arg(userIDs);
+                                        passdlgmessage=i18n("<b>Bad passphrase</b>. you have %1 tries left.<br>").tqarg(step);
+                                passdlgmessage+=i18n("Enter passphrase for <b>%1</b>").tqarg(userIDs);
                                 int code=KPasswordDialog::getPassword(passphrase,passdlgmessage);
                                 if (code!=TQDialog::Accepted) {
                                         p->deleteLater();
@@ -749,11 +749,11 @@ void KgpgInterface::readsignprocess(KProcIO *p)
                                         return;
                                 }
                                 p->writeStdin(passphrase,true);
-                                userIDs=TQString::null;
+                                userIDs=TQString();
 				if (step>1) step--;
 				else step=3;
                         } else {
-                                p->writeStdin("quit");
+                                p->writeStdin(TQString("quit"));
                                 p->closeWhenDone();
                         }
                 }
@@ -767,16 +767,16 @@ void KgpgInterface::readsignprocess(KProcIO *p)
 void KgpgInterface::KgpgVerifyFile(KURL sigUrl,KURL srcUrl)
 {
         //////////////////////////////////////   verify signature for a chosen file
-        message=TQString::null;
-	signID=TQString::null;
+        message=TQString();
+	signID=TQString();
 	signmiss=false;
         /////////////       create gpg command
         KProcIO *proc=new KProcIO(TQTextCodec::codecForLocale());
         file=sigUrl;
         *proc<<"gpg"<<"--no-tty"<<"--utf8-strings"<<"--no-secmem-warning"<<"--status-fd=2"<<"--verify";
         if (!srcUrl.isEmpty())
-                *proc<<TQFile::encodeName(srcUrl.path());
-        *proc<<TQFile::encodeName(sigUrl.path());
+                *proc<<TQString(TQFile::encodeName(srcUrl.path()));
+        *proc<<TQString(TQFile::encodeName(sigUrl.path()));
 
         TQObject::connect(proc, TQT_SIGNAL(processExited(KProcess *)),this,TQT_SLOT(verifyfin(KProcess *)));
         TQObject::connect(proc,TQT_SIGNAL(readReady(KProcIO *)),this,TQT_SLOT(readprocess(KProcIO *)));
@@ -790,8 +790,8 @@ TQString required;
   while (p->readln(required,true)!=-1)
     {
     message+=required+"\n";
-	if (required.find("GET_")!=-1) {
-        p->writeStdin("quit");
+	if (required.tqfind("GET_")!=-1) {
+        p->writeStdin(TQString("quit"));
         p->closeWhenDone();
         }
     required=required.section("]",1,-1).stripWhiteSpace();
@@ -799,12 +799,12 @@ TQString required;
 	signID=i18n("No signature found.");
     if (required.startsWith("GOODSIG"))
     {
-    signID=i18n("<qt>Good signature from:<br><b>%1</b><br>Key ID: %2</qt>").arg(required.section(" ",2,-1).replace(TQRegExp("<"),"&lt;")).arg("0x"+required.section(" ",1,1).right(8));
+    signID=i18n("<qt>Good signature from:<br><b>%1</b><br>Key ID: %2</qt>").tqarg(required.section(" ",2,-1).tqreplace(TQRegExp("<"),"&lt;")).tqarg("0x"+required.section(" ",1,1).right(8));
     }
     if (required.startsWith("BADSIG"))
     {
     signID=i18n("<qt><b>BAD signature</b> from:<br> %1<br>Key id: %2<br><br>"
-                             "<b>The file is corrupted!</b></qt>").arg(required.section(" ",2,-1).replace(TQRegExp("<"),"&lt;")).arg("0x"+required.section(" ",1,1).right(8));
+                             "<b>The file is corrupted!</b></qt>").tqarg(required.section(" ",2,-1).tqreplace(TQRegExp("<"),"&lt;")).tqarg("0x"+required.section(" ",1,1).right(8));
     }
     if (required.startsWith("NO_PUBKEY"))
     {
@@ -827,7 +827,7 @@ void KgpgInterface::verifyfin(KProcess *)
     }
     else {
     	if (KMessageBox::questionYesNo(0,i18n("<qt><b>Missing signature:</b><br>Key id: %1<br><br>"
-                                                      "Do you want to import this key from a keyserver?</qt>").arg(signID),file.fileName(),TQString::null, i18n("Import"), i18n("Do Not Import"))==KMessageBox::Yes)
+                                                      "Do you want to import this key from a keyserver?</qt>").tqarg(signID),file.fileName(),TQString(), i18n("Import"), i18n("Do Not Import"))==KMessageBox::Yes)
     	emit verifyquerykey(signID);
     }
     emit verifyfinished();
@@ -839,12 +839,12 @@ void KgpgInterface::verifyfin(KProcess *)
 
 void KgpgInterface::KgpgSignKey(TQString keyID,TQString signKeyID,TQString signKeyMail,bool local,int checking)
 {
-        signKeyMail.replace(TQRegExp("<"),"&lt;");
+        signKeyMail.tqreplace(TQRegExp("<"),"&lt;");
         konsChecked=checking;
         konsLocal=local;
         konsSignKey=signKeyID;
         konsKeyID=keyID;
-        errMessage=TQString::null;
+        errMessage=TQString();
         if (checkuid(keyID)>0)
 	{
                 openSignConsole();
@@ -853,7 +853,7 @@ void KgpgInterface::KgpgSignKey(TQString keyID,TQString signKeyID,TQString signK
 
         signSuccess=0;
         step=1;
-        output=TQString::null;
+        output=TQString();
         KProcIO *conprocess=new KProcIO(TQTextCodec::codecForLocale());
         *conprocess<<"gpg"<<"--no-secmem-warning"<<"--no-tty"<<"--utf8-strings"<<"--command-fd=0"<<"--status-fd=2"<<"-u"<<signKeyID;
         *conprocess<<"--edit-key"<<keyID;
@@ -866,74 +866,74 @@ void KgpgInterface::KgpgSignKey(TQString keyID,TQString signKeyID,TQString signK
 
 void KgpgInterface::sigprocess(KProcIO *p)
 {
-        TQString required=TQString::null;
+        TQString required=TQString();
 
         while (p->readln(required,true)!=-1)
         {
 
                 output+=required+"\n";
-                if (required.find("USERID_HINT",0,false)!=-1)
+                if (required.tqfind("USERID_HINT",0,false)!=-1)
 		updateIDs(required);
 
                 if (signSuccess==4) {
-                        if (required.find("GET_")!=-1)
-                                p->writeStdin("quit");
+                        if (required.tqfind("GET_")!=-1)
+                                p->writeStdin(TQString("quit"));
                         p->closeWhenDone();
                         return;
                 }
 
-                if ((required.find("GOOD_PASSPHRASE")!=-1)) {
+                if ((required.tqfind("GOOD_PASSPHRASE")!=-1)) {
                         signSuccess=3;
                         step=2;
                 }
 
-                if (required.find("sign_uid.expire")!=-1) {
-                        p->writeStdin("Never");
-                        required=TQString::null;
+                if (required.tqfind("sign_uid.expire")!=-1) {
+                        p->writeStdin(TQString("Never"));
+                        required=TQString();
                 }
-                if (required.find("sign_uid.class")!=-1) {
+                if (required.tqfind("sign_uid.class")!=-1) {
                         p->writeStdin(TQString::number(konsChecked));
-                        required=TQString::null;
+                        required=TQString();
                 }
-                if (required.find("sign_uid.okay")!=-1) {
-                        p->writeStdin("Y");
-                        required=TQString::null;
-                }
-
-		if (required.find("sign_all.okay")!=-1) {
-                        p->writeStdin("Y");
-                        required=TQString::null;
+                if (required.tqfind("sign_uid.okay")!=-1) {
+                        p->writeStdin(TQString("Y"));
+                        required=TQString();
                 }
 
-                if (required.find("passphrase.enter")!=-1) {
+		if (required.tqfind("sign_all.okay")!=-1) {
+                        p->writeStdin(TQString("Y"));
+                        required=TQString();
+                }
+
+                if (required.tqfind("passphrase.enter")!=-1) {
                         TQCString signpass;
                         int code=KPasswordDialog::getPassword(signpass,i18n("<qt>%1 Enter passphrase for <b>%2</b>:</qt>")
-                                                              .arg(errMessage).arg(userIDs));
+                                                              .tqarg(errMessage).tqarg(userIDs));
                         if (code!=TQDialog::Accepted) {
                                 signSuccess=4;  /////  aborted by user mode
-                                required=TQString::null;
-                                p->writeStdin("quit");
+                                required=TQString();
+                                p->writeStdin(TQString("quit"));
                                 p->closeWhenDone();
                                 return;
                         }
                         p->writeStdin(signpass,true);
-                        required=TQString::null;
+                        required=TQString();
                         //               step=2;
                 }
-                if ((step==2) && (required.find("keyedit.prompt")!=-1)) {
-                        p->writeStdin("save");
-                        required=TQString::null;
+                if ((step==2) && (required.tqfind("keyedit.prompt")!=-1)) {
+                        p->writeStdin(TQString("save"));
+                        required=TQString();
                 }
-                if (required.find("BAD_PASSPHRASE")!=-1) {
+                if (required.tqfind("BAD_PASSPHRASE")!=-1) {
                         errMessage=i18n("<b>Bad passphrase</b>. Try again.</br>");
-                        required=TQString::null;
+                        required=TQString();
                         signSuccess=2;  /////  bad passphrase
                 }
-                if (required.find("GET_")!=-1) /////// gpg asks for something unusal, turn to konsole mode
+                if (required.tqfind("GET_")!=-1) /////// gpg asks for something unusal, turn to konsole mode
                 {
                         if (signSuccess!=2)
                                 signSuccess=1;  /////  switching to console mode
-                        p->writeStdin("quit");
+                        p->writeStdin(TQString("quit"));
                         p->closeWhenDone();
 
                 }
@@ -947,7 +947,7 @@ void KgpgInterface::signover(KProcess *)
                 emit signatureFinished(signSuccess);  ////   signature successful or bad passphrase
         else {
                 KDetailedConsole *q=new KDetailedConsole(0,"sign_error",i18n("<qt>Signing key <b>%1</b> with key <b>%2</b> failed.<br>"
-                                    "Do you want to try signing the key in console mode?</qt>").arg(konsKeyID).arg(konsSignKey),output);
+                                    "Do you want to try signing the key in console mode?</qt>").tqarg(konsKeyID).tqarg(konsSignKey),output);
                 if (q->exec()==TQDialog::Accepted)
                         openSignConsole();
                 else
@@ -997,7 +997,7 @@ void KgpgInterface::KgpgDelSignature(TQString keyID,TQString signKeyID)
         while ( fgets( buffer, sizeof(buffer), fp)) {
                 encResult=buffer;
                 if (encResult.startsWith("sig")) {
-                        if (encResult.find(message)!=-1)
+                        if (encResult.tqfind(message)!=-1)
                                 break;
                         signb++;
                 } else if (encResult.startsWith("rev"))
@@ -1016,26 +1016,26 @@ void KgpgInterface::KgpgDelSignature(TQString keyID,TQString signKeyID)
 void KgpgInterface::delsigprocess(KProcIO *p)
 {
 
-        TQString required=TQString::null;
+        TQString required=TQString();
         while (p->readln(required,true)!=-1)
         {
-                if (required.find("keyedit.delsig")!=-1){
+                if (required.tqfind("keyedit.delsig")!=-1){
 
                         if ((sigsearch==signb) && (step==0)) {
-                                p->writeStdin("Y");
+                                p->writeStdin(TQString("Y"));
                                 step=1;
                         } else
-                                p->writeStdin("n");
+                                p->writeStdin(TQString("n"));
                         sigsearch++;
-                        required=TQString::null;
+                        required=TQString();
                 }
-                if ((step==1) && (required.find("keyedit.prompt")!=-1)) {
-                        p->writeStdin("save");
-                        required=TQString::null;
+                if ((step==1) && (required.tqfind("keyedit.prompt")!=-1)) {
+                        p->writeStdin(TQString("save"));
+                        required=TQString();
                         deleteSuccess=true;
                 }
-                if (required.find("GET_LINE")!=-1) {
-                        p->writeStdin("quit");
+                if (required.tqfind("GET_LINE")!=-1) {
+                        p->writeStdin(TQString("quit"));
                         p->closeWhenDone();
                         deleteSuccess=false;
                 }
@@ -1079,8 +1079,8 @@ void KgpgInterface::KgpgKeyExpire(TQString keyID,TQDate date,bool unlimited)
         if (unlimited)
                 expirationDelay=0;
         else
-                expirationDelay=TQDate::currentDate().daysTo(date);
-        output=TQString::null;
+                expirationDelay=TQDate::tqcurrentDate().daysTo(date);
+        output=TQString();
         KProcIO *conprocess=new KProcIO(TQTextCodec::codecForLocale());
         *conprocess<<"gpg"<<"--no-secmem-warning"<<"--no-tty"<<"--command-fd=0"<<"--status-fd=2"<<"--utf8-strings";
         *conprocess<<"--edit-key"<<keyID<<"expire";
@@ -1092,56 +1092,56 @@ void KgpgInterface::KgpgKeyExpire(TQString keyID,TQDate date,bool unlimited)
 
 void KgpgInterface::expprocess(KProcIO *p)
 {
-        TQString required=TQString::null;
+        TQString required=TQString();
 
         while (p->readln(required,true)!=-1) {
                 output+=required+"\n";
 
-                if (required.find("USERID_HINT",0,false)!=-1)
+                if (required.tqfind("USERID_HINT",0,false)!=-1)
 		updateIDs(required);
 
-                if ((required.find("GOOD_PASSPHRASE")!=-1)) {
+                if ((required.tqfind("GOOD_PASSPHRASE")!=-1)) {
                         expSuccess=3;
                         step=2;
                 }
 
-                if (required.find("keygen.valid")!=-1) {
+                if (required.tqfind("keygen.valid")!=-1) {
                         p->writeStdin(TQString::number(expirationDelay));
-                        required=TQString::null;
+                        required=TQString();
                 }
 
-                if (required.find("passphrase.enter")!=-1) {
+                if (required.tqfind("passphrase.enter")!=-1) {
                         TQCString signpass;
-                        int code=KPasswordDialog::getPassword(signpass,i18n("<qt>Enter passphrase for <b>%1</b>:</qt>").arg(userIDs));
+                        int code=KPasswordDialog::getPassword(signpass,i18n("<qt>Enter passphrase for <b>%1</b>:</qt>").tqarg(userIDs));
                         if (code!=TQDialog::Accepted) {
                                 expSuccess=3;  /////  aborted by user mode
-                                p->writeStdin("quit");
+                                p->writeStdin(TQString("quit"));
                                 p->closeWhenDone();
                                 return;
                         }
                         p->writeStdin(signpass,true);
-                        required=TQString::null;
+                        required=TQString();
                         //              step=2;
                 }
-                if ((step==2) && (required.find("keyedit.prompt")!=-1)) {
-                        p->writeStdin("save");
+                if ((step==2) && (required.tqfind("keyedit.prompt")!=-1)) {
+                        p->writeStdin(TQString("save"));
 			p->closeWhenDone();
-                        required=TQString::null;
+                        required=TQString();
                 }
-		if ((step==2) && (required.find("keyedit.save.okay")!=-1)) {
-                        p->writeStdin("YES");
+		if ((step==2) && (required.tqfind("keyedit.save.okay")!=-1)) {
+                        p->writeStdin(TQString("YES"));
 			p->closeWhenDone();
-                        required=TQString::null;
+                        required=TQString();
                 }
-                if (required.find("BAD_PASSPHRASE")!=-1) {
-                        p->writeStdin("quit");
+                if (required.tqfind("BAD_PASSPHRASE")!=-1) {
+                        p->writeStdin(TQString("quit"));
                         p->closeWhenDone();
                         expSuccess=2;  /////  bad passphrase
                 }
-                if ((required.find("GET_")!=-1) && (expSuccess!=2)) /////// gpg asks for something unusal, turn to konsole mode
+                if ((required.tqfind("GET_")!=-1) && (expSuccess!=2)) /////// gpg asks for something unusal, turn to konsole mode
                 {
                         expSuccess=1;  /////  switching to console mode
-                        p->writeStdin("quit");
+                        p->writeStdin(TQString("quit"));
                         p->closeWhenDone();
 
                 }
@@ -1174,7 +1174,7 @@ void KgpgInterface::KgpgTrustExpire(TQString keyID,int keyTrust)
 	trustValue=keyTrust+1;
 /*	Don't know=1; Do NOT trust=2; Marginally=3; Fully=4; Ultimately=5;   */
 
-        output=TQString::null;
+        output=TQString();
         KProcIO *conprocess=new KProcIO(TQTextCodec::codecForLocale());
         *conprocess<<"gpg"<<"--no-secmem-warning"<<"--no-tty"<<"--command-fd=0"<<"--status-fd=2"<<"--utf8-strings";
         *conprocess<<"--edit-key"<<keyID<<"trust";
@@ -1186,29 +1186,29 @@ void KgpgInterface::KgpgTrustExpire(TQString keyID,int keyTrust)
 
 void KgpgInterface::trustprocess(KProcIO *p)
 {
-        TQString required=TQString::null;
+        TQString required=TQString();
         while (p->readln(required,true)!=-1) {
                 output+=required+"\n";
-                if (required.find("edit_ownertrust.set_ultimate.okay")!=-1) {
-                        p->writeStdin("YES");
-                        required=TQString::null;
+                if (required.tqfind("edit_ownertrust.set_ultimate.okay")!=-1) {
+                        p->writeStdin(TQString("YES"));
+                        required=TQString();
                 }
 
-                if (required.find("edit_ownertrust.value")!=-1) {
+                if (required.tqfind("edit_ownertrust.value")!=-1) {
                         p->writeStdin(TQString::number(trustValue));
-                        required=TQString::null;
+                        required=TQString();
                 }
 
-                if (required.find("keyedit.prompt")!=-1) {
-                        p->writeStdin("save");
+                if (required.tqfind("keyedit.prompt")!=-1) {
+                        p->writeStdin(TQString("save"));
 			p->closeWhenDone();
-                        required=TQString::null;
+                        required=TQString();
                 }
 
-                if (required.find("GET_")!=-1) /////// gpg asks for something unusal, turn to konsole mode
+                if (required.tqfind("GET_")!=-1) /////// gpg asks for something unusal, turn to konsole mode
                 {
                         expSuccess=1;  /////  switching to console mode
-                        p->writeStdin("quit");
+                        p->writeStdin(TQString("quit"));
                         p->closeWhenDone();
 
                 }
@@ -1229,8 +1229,8 @@ void KgpgInterface::trustover(KProcess *)
 void KgpgInterface::KgpgChangePass(TQString keyID)
 {
         step=1;
-        output=TQString::null;
-        message=TQString::null;
+        output=TQString();
+        message=TQString();
         KProcIO *conprocess=new KProcIO(TQTextCodec::codecForLocale());
         *conprocess<<"gpg"<<"--no-secmem-warning"<<"--no-tty"<<"--no-use-agent"<<"--command-fd=0"<<"--status-fd=2"<<"--utf8-strings";
         *conprocess<<"--edit-key"<<keyID<<"passwd";
@@ -1242,43 +1242,43 @@ void KgpgInterface::KgpgChangePass(TQString keyID)
 
 void KgpgInterface::passprocess(KProcIO *p)
 {
-        TQString required=TQString::null;
+        TQString required=TQString();
 
         while (p->readln(required,true)!=-1) {
                 output+=required+"\n";
 
-                if (required.find("USERID_HINT",0,false)!=-1)
+                if (required.tqfind("USERID_HINT",0,false)!=-1)
 		updateIDs(required);
 
-                if ((step>2) && (required.find("keyedit.prompt")!=-1)) {
+                if ((step>2) && (required.tqfind("keyedit.prompt")!=-1)) {
 			if (step==3)
 			{
 			emit passwordChanged();
-                        p->writeStdin("save");
+                        p->writeStdin(TQString("save"));
 			}
-			else p->writeStdin("quit");
-                        required=TQString::null;
+			else p->writeStdin(TQString("quit"));
+                        required=TQString();
                 }
 
-                if ((required.find("GOOD_PASSPHRASE")!=-1) && (step==2))
+                if ((required.tqfind("GOOD_PASSPHRASE")!=-1) && (step==2))
                         step=3;
 
-                if ((required.find("BAD_PASSPHRASE")!=-1) && (step==2)) {
+                if ((required.tqfind("BAD_PASSPHRASE")!=-1) && (step==2)) {
                         step=1;
                         message=i18n("<b>Bad passphrase</b>. Try again<br>");
                 }
 
-                if ((required.find("passphrase.enter")!=-1)) {
+                if ((required.tqfind("passphrase.enter")!=-1)) {
                         if (userIDs.isEmpty())
                                 userIDs=i18n("[No user id found]");
-                        userIDs.replace(TQRegExp("<"),"&lt;");
+                        userIDs.tqreplace(TQRegExp("<"),"&lt;");
 
                         if (step==1) {
                                 TQCString passphrase;
                                 int code=KPasswordDialog::getPassword(passphrase,i18n("<qt>%1 Enter passphrase for <b>%2</b></qt>")
-                                                                      .arg(message).arg(userIDs));
+                                                                      .tqarg(message).tqarg(userIDs));
                                 if (code!=TQDialog::Accepted) {
-                                        p->writeStdin("quit");
+                                        p->writeStdin(TQString("quit"));
                                         //				 p->closeWhenDone();
                                         emit processaborted(true);
                                         p->deleteLater();
@@ -1290,26 +1290,26 @@ void KgpgInterface::passprocess(KProcIO *p)
 
                         if (step==3) {
                                 TQCString passphrase;
-                                int code=KPasswordDialog::getNewPassword(passphrase,i18n("<qt>Enter new passphrase for <b>%1</b><br>If you forget this passphrase, all your encrypted files and messages will be lost !<br></qt>").arg(userIDs));
+                                int code=KPasswordDialog::getNewPassword(passphrase,i18n("<qt>Enter new passphrase for <b>%1</b><br>If you forget this passphrase, all your encrypted files and messages will be lost !<br></qt>").tqarg(userIDs));
                                 if (code!=TQDialog::Accepted) {
 					step=4;
-                                        p->writeStdin("quit");
-                                        p->writeStdin("quit");
+                                        p->writeStdin(TQString("quit"));
+                                        p->writeStdin(TQString("quit"));
                                         p->closeWhenDone();
                                         emit processaborted(true);
                                         return;
                                 }
                                 p->writeStdin(passphrase,true);
-                                userIDs=TQString::null;
+                                userIDs=TQString();
                         }
 
-                        required=TQString::null;
+                        required=TQString();
                 }
 
 
-                if (required.find("GET_")!=-1) /////// gpg asks for something unusal, turn to konsole mode
+                if (required.tqfind("GET_")!=-1) /////// gpg asks for something unusal, turn to konsole mode
                 {
-                        p->writeStdin("quit");
+                        p->writeStdin(TQString("quit"));
                         p->closeWhenDone();
 
                 }
@@ -1329,7 +1329,7 @@ void KgpgInterface::passover(KProcess *)
 
 TQString KgpgInterface::getKey(TQStringList IDs, bool attributes)
 {
-        keyString=TQString::null;
+        keyString=TQString();
         KProcIO *proc=new KProcIO(TQTextCodec::codecForLocale());
         *proc<< "gpg"<<"--no-tty"<<"--no-secmem-warning"<<"--utf8-strings";
         *proc<<"--export"<<"--armor";
@@ -1359,7 +1359,7 @@ void KgpgInterface::importKeyURL(KURL url)
         /////////////      import a key
 
         if( KIO::NetAccess::download( url, tempKeyFile,0) ) {
-                message=TQString::null;
+                message=TQString();
                 KProcIO *conprocess=new KProcIO(TQTextCodec::codecForLocale());
                 *conprocess<< "gpg"<<"--no-tty"<<"--no-secmem-warning"<<"--status-fd=2"<<"--utf8-strings"<<"--import";
                 *conprocess<<"--allow-secret-key-import";
@@ -1373,7 +1373,7 @@ void KgpgInterface::importKeyURL(KURL url)
 void KgpgInterface::importKey(TQString keystr)
 {
         /////////////      import a key
-        message=TQString::null;
+        message=TQString();
         KProcIO *conprocess=new KProcIO(TQTextCodec::codecForLocale());
         *conprocess<< "gpg"<<"--no-tty"<<"--no-secmem-warning"<<"--status-fd=2"<<"--import";
         *conprocess<<"--allow-secret-key-import";
@@ -1394,14 +1394,14 @@ kdDebug(2100)<<"Importing is over"<<endl;
         TQString parsedOutput=message;
         TQStringList importedKeys;
 
-        while (parsedOutput.find("IMPORTED")!=-1) {
-                parsedOutput.remove(0,parsedOutput.find("IMPORTED")+8);
+        while (parsedOutput.tqfind("IMPORTED")!=-1) {
+                parsedOutput.remove(0,parsedOutput.tqfind("IMPORTED")+8);
 		importedKeys<<parsedOutput.section("\n",0,0).stripWhiteSpace();
 		importedKeysIds<<parsedOutput.stripWhiteSpace().section(' ',0,0);
         }
 
 
-        if (message.find("IMPORT_RES")!=-1) {
+        if (message.tqfind("IMPORT_RES")!=-1) {
                 parsedOutput=message.section("IMPORT_RES",-1,-1).stripWhiteSpace();
 		messageList=TQStringList::split(" ",parsedOutput,true);
 
@@ -1460,7 +1460,7 @@ void KgpgInterface::importprocess(KProcIO *p)
 {
         TQString outp;
         while (p->readln(outp)!=-1) {
-                if (outp.find("http-proxy")==-1)
+                if (outp.tqfind("http-proxy")==-1)
                         message+=outp+"\n";
         }
 }
@@ -1474,7 +1474,7 @@ void KgpgInterface::KgpgAddUid(TQString keyID,TQString name,TQString email,TQStr
 uidName=name;
 uidComment=comment;
 uidEmail=email;
-output=TQString::null;
+output=TQString();
 addSuccess=true;
 
         KProcIO *conprocess=new KProcIO(TQTextCodec::codecForLocale());
@@ -1493,52 +1493,52 @@ else emit addUidError(output);
 
 void KgpgInterface::adduidprocess(KProcIO *p)
 {
-        TQString required=TQString::null;
+        TQString required=TQString();
         while (p->readln(required,true)!=-1) {
                 output+=required+"\n";
-                if (required.find("USERID_HINT",0,false)!=-1)
+                if (required.tqfind("USERID_HINT",0,false)!=-1)
 		updateIDs(required);
 
-                if (required.find("keygen.name")!=-1)  {
+                if (required.tqfind("keygen.name")!=-1)  {
                         p->writeStdin(uidName);
-                        required=TQString::null;
+                        required=TQString();
                 }
 
-		if (required.find("keygen.email")!=-1)  {
+		if (required.tqfind("keygen.email")!=-1)  {
                         p->writeStdin(uidEmail);
-                        required=TQString::null;
+                        required=TQString();
                 }
 
-		if (required.find("keygen.comment")!=-1)  {
+		if (required.tqfind("keygen.comment")!=-1)  {
                         p->writeStdin(uidComment);
-                        required=TQString::null;
+                        required=TQString();
                 }
 
-                if (required.find("passphrase.enter")!=-1) {
+                if (required.tqfind("passphrase.enter")!=-1) {
                         TQCString delpass;
                         int code=KPasswordDialog::getPassword(delpass,i18n("<qt>Enter passphrase for <b>%1</b>:</qt>")
-                                                              .arg(userIDs));
+                                                              .tqarg(userIDs));
                         if (code!=TQDialog::Accepted) {
                                 //addSuccess=false;
-                                p->writeStdin("quit");
+                                p->writeStdin(TQString("quit"));
                                 p->closeWhenDone();
                                 return;
                         }
                         p->writeStdin(delpass,true);
-                        required=TQString::null;
+                        required=TQString();
 
                 }
 
-		if (required.find("keyedit.prompt")!=-1) {
-		       p->writeStdin("save");
-                        required=TQString::null;
+		if (required.tqfind("keyedit.prompt")!=-1) {
+		       p->writeStdin(TQString("save"));
+                        required=TQString();
 		}
 
-		if ((required.find("GET_")!=-1)) /////// gpg asks for something unusal, turn to konsole mode
+		if ((required.tqfind("GET_")!=-1)) /////// gpg asks for something unusal, turn to konsole mode
                 {
                         kdDebug(2100)<<"unknown request"<<endl;
                         addSuccess=false;  /////  switching to console mode
-                        p->writeStdin("quit");
+                        p->writeStdin(TQString("quit"));
                         p->closeWhenDone();
                 }
         }
@@ -1557,7 +1557,7 @@ void KgpgInterface::adduidprocess(KProcIO *p)
 void KgpgInterface::KgpgGetPhotoList(TQString keyID)
 {
 photoList.clear();
-output=TQString::null;
+output=TQString();
 photoCount=1;
 userIDs=keyID;
 
@@ -1571,7 +1571,7 @@ userIDs=keyID;
 
 void KgpgInterface::photoreadprocess(KProcIO *p)
 {
-        TQString required=TQString::null;
+        TQString required=TQString();
         while (p->readln(required,true)!=-1) {
                 output+=required+"\n";
                 if (required.startsWith("uat") || required.startsWith("uid")) photoCount++;
@@ -1595,7 +1595,7 @@ KTempFile *kgpginfotmp=new KTempFile();
 
 KProcIO *conprocess=new KProcIO(TQTextCodec::codecForLocale());
         *conprocess<< "gpg"<<"--no-tty"<<"--status-fd=2"<<"--command-fd=0"<<"--utf8-strings";
-        *conprocess<<"--photo-viewer"<<TQFile::encodeName(pgpgOutput)<<"--edit-key"<<userIDs<<"uid"<<TQString::number(uid)<<"showphoto";
+        *conprocess<<"--photo-viewer"<<TQString(TQFile::encodeName(pgpgOutput))<<"--edit-key"<<userIDs<<"uid"<<TQString::number(uid)<<"showphoto";
         conprocess->start(KProcess::Block);
 	if (kgpginfotmp->file()->size()>0)
 	{
@@ -1609,7 +1609,7 @@ KProcIO *conprocess=new KProcIO(TQTextCodec::codecForLocale());
 void KgpgInterface::KgpgDeletePhoto(TQString keyID,TQString uid)
 {
 	delSuccess=true;
-	output=TQString::null;
+	output=TQString();
         KProcIO *conprocess=new KProcIO(TQTextCodec::codecForLocale());
         *conprocess<< "gpg"<<"--no-tty"<<"--status-fd=2"<<"--command-fd=0"<<"--utf8-strings";
         *conprocess<<"--edit-key"<<keyID<<"uid"<<uid<<"deluid";
@@ -1626,41 +1626,41 @@ else emit delPhotoError(output);
 
 void KgpgInterface::delphotoprocess(KProcIO *p)
 {
-        TQString required=TQString::null;
+        TQString required=TQString();
         while (p->readln(required,true)!=-1) {
                 output+=required+"\n";
-                if (required.find("USERID_HINT",0,false)!=-1)
+                if (required.tqfind("USERID_HINT",0,false)!=-1)
                                 updateIDs(required);
 
-                if (required.find("keyedit.remove.uid.okay")!=-1)  {
-                        p->writeStdin("YES");
-                        required=TQString::null;
+                if (required.tqfind("keyedit.remove.uid.okay")!=-1)  {
+                        p->writeStdin(TQString("YES"));
+                        required=TQString();
                 }
 
-                if (required.find("passphrase.enter")!=-1) {
+                if (required.tqfind("passphrase.enter")!=-1) {
                         TQCString delpass;
-                        int code=KPasswordDialog::getPassword(delpass,i18n("<qt>Enter passphrase for <b>%1</b>:</qt>").arg(userIDs));
+                        int code=KPasswordDialog::getPassword(delpass,i18n("<qt>Enter passphrase for <b>%1</b>:</qt>").tqarg(userIDs));
                         if (code!=TQDialog::Accepted) {
                                 //deleteSuccess=false;
-                                p->writeStdin("quit");
+                                p->writeStdin(TQString("quit"));
                                 p->closeWhenDone();
                                 return;
                         }
                         p->writeStdin(delpass,true);
-                        required=TQString::null;
+                        required=TQString();
 
                 }
 
-		if (required.find("keyedit.prompt")!=-1) {
-		       p->writeStdin("save");
-                        required=TQString::null;
+		if (required.tqfind("keyedit.prompt")!=-1) {
+		       p->writeStdin(TQString("save"));
+                        required=TQString();
 		}
 
-		if ((required.find("GET_")!=-1)) /////// gpg asks for something unusal, turn to konsole mode
+		if ((required.tqfind("GET_")!=-1)) /////// gpg asks for something unusal, turn to konsole mode
                 {
                         kdDebug(2100)<<"unknown request"<<endl;
                         delSuccess=false;
-                        p->writeStdin("quit");
+                        p->writeStdin(TQString("quit"));
                         p->closeWhenDone();
 
                 }
@@ -1671,7 +1671,7 @@ void KgpgInterface::delphotoprocess(KProcIO *p)
 void KgpgInterface::KgpgAddPhoto(TQString keyID,TQString imagePath)
 {
 photoUrl=imagePath;
-output=TQString::null;
+output=TQString();
 addSuccess=true;
         KProcIO *conprocess=new KProcIO(TQTextCodec::codecForLocale());
         *conprocess<< "gpg"<<"--no-tty"<<"--status-fd=2"<<"--command-fd=0"<<"--utf8-strings";
@@ -1689,52 +1689,52 @@ else emit addPhotoError(output);
 
 void KgpgInterface::addphotoprocess(KProcIO *p)
 {
-        TQString required=TQString::null;
+        TQString required=TQString();
         while (p->readln(required,true)!=-1) {
                 output+=required+"\n";
-                if (required.find("USERID_HINT",0,false)!=-1)
+                if (required.tqfind("USERID_HINT",0,false)!=-1)
 		updateIDs(required);
 
-                if (required.find("photoid.jpeg.add")!=-1)  {
+                if (required.tqfind("photoid.jpeg.add")!=-1)  {
                         p->writeStdin(photoUrl);
-                        required=TQString::null;
+                        required=TQString();
                 }
 
-		if (required.find("photoid.jpeg.size")!=-1)  {
-			if (KMessageBox::questionYesNo(0,i18n("This image is very large. Use it anyway?"), TQString::null, i18n("Use Anyway"), i18n("Do Not Use"))==KMessageBox::Yes)
-                        p->writeStdin("Yes");
+		if (required.tqfind("photoid.jpeg.size")!=-1)  {
+			if (KMessageBox::questionYesNo(0,i18n("This image is very large. Use it anyway?"), TQString(), i18n("Use Anyway"), i18n("Do Not Use"))==KMessageBox::Yes)
+                        p->writeStdin(TQString("Yes"));
 			else
 			{
-			p->writeStdin("No");
-			p->writeStdin("");
-			p->writeStdin("quit");
+			p->writeStdin(TQString("No"));
+			p->writeStdin(TQString(""));
+			p->writeStdin(TQString("quit"));
 			}
-                        required=TQString::null;
+                        required=TQString();
                 }
 
-                if (required.find("passphrase.enter")!=-1) {
+                if (required.tqfind("passphrase.enter")!=-1) {
                         TQCString delpass;
-                        int code=KPasswordDialog::getPassword(delpass,i18n("<qt>Enter passphrase for <b>%1</b>:</qt>").arg(userIDs));
+                        int code=KPasswordDialog::getPassword(delpass,i18n("<qt>Enter passphrase for <b>%1</b>:</qt>").tqarg(userIDs));
                         if (code!=TQDialog::Accepted) {
                                 //deleteSuccess=false;
-                                p->writeStdin("quit");
+                                p->writeStdin(TQString("quit"));
                                 p->closeWhenDone();
                                 return;
                         }
                         p->writeStdin(delpass,true);
-                        required=TQString::null;
+                        required=TQString();
 
                 }
 
-		if (required.find("keyedit.prompt")!=-1) {
-		       p->writeStdin("save");
-                        required=TQString::null;
+		if (required.tqfind("keyedit.prompt")!=-1) {
+		       p->writeStdin(TQString("save"));
+                        required=TQString();
 		}
 
-		if ((required.find("GET_")!=-1)) /////// gpg asks for something unusal, turn to konsole mode
+		if ((required.tqfind("GET_")!=-1)) /////// gpg asks for something unusal, turn to konsole mode
                 {
                         kdDebug(2100)<<"unknown request"<<endl;
-                        p->writeStdin("quit");
+                        p->writeStdin(TQString("quit"));
 			addSuccess=false;
                         p->closeWhenDone();
 
@@ -1751,7 +1751,7 @@ void KgpgInterface::KgpgRevokeKey(TQString keyID,TQString revokeUrl,int reason,T
         revokeSuccess=false;
         revokeDescription=description;
         certificateUrl=revokeUrl;
-        output=TQString::null;
+        output=TQString();
         KProcIO *conprocess=new KProcIO(TQTextCodec::codecForLocale());
         *conprocess<< "gpg"<<"--no-tty"<<"--status-fd=2"<<"--logger-fd=2"<<"--command-fd=0"<<"--utf8-strings";
         if (!revokeUrl.isEmpty())
@@ -1778,50 +1778,50 @@ void KgpgInterface::revokeover(KProcess *)
 
 void KgpgInterface::revokeprocess(KProcIO *p)
 {
-        TQString required=TQString::null;
+        TQString required=TQString();
         while (p->readln(required,true)!=-1) {
                 output+=required+"\n";
 
-                if (required.find("USERID_HINT",0,false)!=-1)
+                if (required.tqfind("USERID_HINT",0,false)!=-1)
 		updateIDs(required);
 
-                if ((required.find("GOOD_PASSPHRASE")!=-1))
+                if ((required.tqfind("GOOD_PASSPHRASE")!=-1))
                         revokeSuccess=true;
 
-                if ((required.find("gen_revoke.okay")!=-1) || (required.find("ask_revocation_reason.okay")!=-1) || (required.find("openfile.overwrite.okay")!=-1)) {
-                        p->writeStdin("YES");
-                        required=TQString::null;
+                if ((required.tqfind("gen_revoke.okay")!=-1) || (required.tqfind("ask_revocation_reason.okay")!=-1) || (required.tqfind("openfile.overwrite.okay")!=-1)) {
+                        p->writeStdin(TQString("YES"));
+                        required=TQString();
                 }
 
-                if (required.find("ask_revocation_reason.code")!=-1) {
+                if (required.tqfind("ask_revocation_reason.code")!=-1) {
                         p->writeStdin(TQString::number(revokeReason));
-                        required=TQString::null;
+                        required=TQString();
                 }
 
-                if (required.find("passphrase.enter")!=-1) {
+                if (required.tqfind("passphrase.enter")!=-1) {
                         TQCString signpass;
-                        int code=KPasswordDialog::getPassword(signpass,i18n("<qt>Enter passphrase for <b>%1</b>:</qt>").arg(userIDs));
+                        int code=KPasswordDialog::getPassword(signpass,i18n("<qt>Enter passphrase for <b>%1</b>:</qt>").tqarg(userIDs));
                         if (code!=TQDialog::Accepted) {
                                 expSuccess=3;  /////  aborted by user mode
-                                p->writeStdin("quit");
+                                p->writeStdin(TQString("quit"));
                                 p->closeWhenDone();
                                 return;
                         }
                         p->writeStdin(signpass,true);
-                        required=TQString::null;
+                        required=TQString();
 
                 }
-                if (required.find("ask_revocation_reason.text")!=-1) {
+                if (required.tqfind("ask_revocation_reason.text")!=-1) {
                         //		kdDebug(2100)<<"description"<<endl;
                         p->writeStdin(revokeDescription);
-                        revokeDescription=TQString::null;
-                        required=TQString::null;
+                        revokeDescription=TQString();
+                        required=TQString();
                 }
-                if ((required.find("GET_")!=-1)) /////// gpg asks for something unusal, turn to konsole mode
+                if ((required.tqfind("GET_")!=-1)) /////// gpg asks for something unusal, turn to konsole mode
                 {
                         kdDebug(2100)<<"unknown request"<<endl;
                         expSuccess=1;  /////  switching to console mode
-                        p->writeStdin("quit");
+                        p->writeStdin(TQString("quit"));
                         p->closeWhenDone();
 
                 }
@@ -1850,14 +1850,14 @@ TQString KgpgInterface::getGpgSetting(TQString name,TQString configFile)
                 }
                 qfile.close();
         }
-        return TQString::null;
+        return TQString();
 }
 
 TQString KgpgInterface::getGpgMultiSetting(TQString name,TQString configFile)
 {
 // get GnuPG setting for item that can have multiple entries (eg. encrypt-to)
 
-TQString parsedResult=TQString::null;
+TQString parsedResult=TQString();
 
         name=name.stripWhiteSpace()+" ";
         TQFile qfile(TQFile::encodeName(configFile));
@@ -1869,7 +1869,7 @@ TQString parsedResult=TQString::null;
                         if (result.stripWhiteSpace().startsWith(name)) {
                                 result=result.stripWhiteSpace();
                                 result.remove(0,name.length());
-				if (parsedResult!=TQString::null)
+				if (parsedResult!=TQString())
 				parsedResult+=" "+result.stripWhiteSpace();
 				else
                                 parsedResult+=result.stripWhiteSpace();
@@ -1896,9 +1896,9 @@ void KgpgInterface::delGpgGroup(TQString name, TQString configFile)
                                 result2.remove(0,6);
                                 result2=result2.stripWhiteSpace();
                                 if (result2.startsWith(name) && (result2.remove(0,name.length()).stripWhiteSpace().startsWith("=")))
-                                        result=TQString::null;
+                                        result=TQString();
                         }
-                       if (result!=TQString::null) textToWrite+=result+"\n";
+                       if (result!=TQString()) textToWrite+=result+"\n";
                         result=t.readLine();
                 }
                 qfile.close();
@@ -1928,7 +1928,7 @@ void KgpgInterface::setGpgGroupSetting(TQString name,TQStringList values, TQStri
                                 if (result2.startsWith(name) && (result2.remove(0,name.length()).stripWhiteSpace().startsWith("="))) {
 //                                        kdDebug(2100)<<"Found group: "<<name<<endl;
                                         //kdDebug(2100)<<"New values: "<<values<<endl;
-                                        result=TQString("group %1=%2").arg(name).arg(values.join(" "));
+                                        result=TQString("group %1=%2").tqarg(name).tqarg(values.join(" "));
                                         found=true;
                                 }
                         }
@@ -1937,7 +1937,7 @@ void KgpgInterface::setGpgGroupSetting(TQString name,TQStringList values, TQStri
                 }
                 qfile.close();
                 if (!found)
-                        textToWrite+="\n"+TQString("group %1=%2").arg(name).arg(values.join(" "));
+                        textToWrite+="\n"+TQString("group %1=%2").tqarg(name).tqarg(values.join(" "));
 
                 if (qfile.open(IO_WriteOnly)) {
                         TQTextStream t( &qfile);
@@ -1973,7 +1973,7 @@ TQStringList KgpgInterface::getGpgGroupSetting(TQString name,TQString configFile
                 }
                 qfile.close();
         }
-        return TQString::null;
+        return TQString();
 }
 
 TQStringList KgpgInterface::getGpgGroupNames(TQString configFile)
@@ -2033,10 +2033,10 @@ void KgpgInterface::setGpgSetting(TQString name,TQString value,TQString url)
                                 if (!value.isEmpty())
                                         result=name+" "+value;
                                 else
-                                        result=TQString::null;
+                                        result=TQString();
                                 found=true;
                         }
-                        if (result!=TQString::null) textToWrite+=result+"\n";
+                        if (result!=TQString()) textToWrite+=result+"\n";
                         result=t.readLine();
                 }
                 qfile.close();
@@ -2099,10 +2099,10 @@ void KgpgInterface::setGpgBoolSetting(TQString name,bool enable,TQString url)
                                 if (enable)
                                         result=name;
                                 else
-                                        result=TQString::null;
+                                        result=TQString();
                                 found=true;
                         }
-                       if (result!=TQString::null) textToWrite+=result+"\n";
+                       if (result!=TQString()) textToWrite+=result+"\n";
                         result=t.readLine();
                 }
                 qfile.close();
@@ -2119,7 +2119,7 @@ void KgpgInterface::setGpgBoolSetting(TQString name,bool enable,TQString url)
 
 TQString KgpgInterface::checkForUtf8bis(TQString txt)
 {
-    if (strchr (txt.ascii(), 0xc3) || (txt.find("\\x")!=-1))
+    if (strchr (txt.ascii(), 0xc3) || (txt.tqfind("\\x")!=-1))
 	txt=checkForUtf8(txt);
     else {
 	txt=checkForUtf8(txt);
@@ -2137,22 +2137,22 @@ TQString KgpgInterface::checkForUtf8(TQString txt)
         /* Make sure the encoding is UTF-8.
          * Test structure suggested by Werner Koch */
         if (txt.isEmpty())
-                return TQString::null;
+                return TQString();
 
         for (s = txt.ascii(); *s && !(*s & 0x80); s++)
                 ;
-        if (*s && !strchr (txt.ascii(), 0xc3) && (txt.find("\\x")==-1))
+        if (*s && !strchr (txt.ascii(), 0xc3) && (txt.tqfind("\\x")==-1))
                 return txt;
 
         /* The string is not in UTF-8 */
         //if (strchr (txt.ascii(), 0xc3)) return (txt+" +++");
-        if (txt.find("\\x")==-1)
+        if (txt.tqfind("\\x")==-1)
                 return TQString::fromUtf8(txt.ascii());
-        //        if (!strchr (txt.ascii(), 0xc3) || (txt.find("\\x")!=-1)) {
-        for ( int idx = 0 ; (idx = txt.find( "\\x", idx )) >= 0 ; ++idx ) {
+        //        if (!strchr (txt.ascii(), 0xc3) || (txt.tqfind("\\x")!=-1)) {
+        for ( int idx = 0 ; (idx = txt.tqfind( "\\x", idx )) >= 0 ; ++idx ) {
                 char str[2] = "x";
                 str[0] = (char) TQString( txt.mid( idx + 2, 2 ) ).toShort( 0, 16 );
-                txt.replace( idx, 4, str );
+                txt.tqreplace( idx, 4, str );
         }
         if (!strchr (txt.ascii(), 0xc3))
             return TQString::fromUtf8(txt.ascii());

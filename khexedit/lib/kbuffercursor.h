@@ -27,10 +27,10 @@ namespace KHE
 class KBufferLayout;
 
 
-/**@short navigates through the buffer in an abstract way, based on the layout
+/**@short navigates through the buffer in an abstract way, based on the tqlayout
   *
   * The cursor is allowed to access every coord that has content as
-  * described in the layout. It holds the coord of the actual position
+  * described in the tqlayout. It holds the coord of the actual position
   * and the according index in the data array.
   *
   * To enable the cursor to be placed behind the last position in a line
@@ -138,7 +138,7 @@ class KBufferCursor
     void stepToEnd();
 
   private:
-    /** layout, tells how the column is organized  */
+    /** tqlayout, tells how the column is organized  */
     const KBufferLayout *Layout;
 
     /** Position in buffer */
@@ -151,7 +151,7 @@ class KBufferCursor
       */
     bool Behind : 1;
 
-    /** tells whether there could be a position behind the end of the layout */
+    /** tells whether there could be a position behind the end of the tqlayout */
     bool AppendPosEnabled : 1;
 };
 

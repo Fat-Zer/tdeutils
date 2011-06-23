@@ -76,12 +76,13 @@ enum NumBase {
 };
 
 
-class KCalcDisplay : public QLabel
+class KCalcDisplay : public TQLabel
 {
 Q_OBJECT
+  TQ_OBJECT
 
 public:
-	KCalcDisplay(TQWidget *parent=0, const char *name=0);
+	KCalcDisplay(TQWidget *tqparent=0, const char *name=0);
 	~KCalcDisplay();
 
 protected:
@@ -109,7 +110,7 @@ public:
 	TQString text() const;
 	bool updateDisplay(void);
 	void setStatusText(uint i, const TQString& text);
-	virtual TQSize sizeHint() const;
+	virtual TQSize tqsizeHint() const;
 private:
 	bool _beep;
 	bool _groupdigits;

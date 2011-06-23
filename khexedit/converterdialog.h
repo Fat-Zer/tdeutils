@@ -30,9 +30,10 @@ class CHexValidator;
 class CValidateLineEdit : public TQLineEdit 
 {
   Q_OBJECT
+  TQ_OBJECT
    
   public:
-    CValidateLineEdit( TQWidget *parent, int validateType, const char *name=0 );
+    CValidateLineEdit( TQWidget *tqparent, int validateType, const char *name=0 );
     ~CValidateLineEdit( void );
 
   public slots:
@@ -53,9 +54,10 @@ class CValidateLineEdit : public TQLineEdit
 class CConverterDialog : public KDialogBase 
 {
   Q_OBJECT
+  TQ_OBJECT
   
   public:
-    CConverterDialog( TQWidget *parent, const char *name=0, bool modal=true );
+    CConverterDialog( TQWidget *tqparent, const char *name=0, bool modal=true );
     ~CConverterDialog( void );
     
   protected:

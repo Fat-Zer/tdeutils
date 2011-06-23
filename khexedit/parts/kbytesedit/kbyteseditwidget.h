@@ -43,10 +43,11 @@ class KBytesEditWidget : public TQWidget, public KHE::BytesEditInterface,
                          public KHE::ZoomInterface, public KHE::ClipboardInterface
 {
   Q_OBJECT
+  TQ_OBJECT
 
   public:
     /** constructor API as demanded by KGenericFactory */
-    KBytesEditWidget( TQWidget *parent, const char *name, const TQStringList & = TQStringList() );
+    KBytesEditWidget( TQWidget *tqparent, const char *name, const TQStringList & = TQStringList() );
 
   public: // bytesedit interface
     /** hands over to the editor a new byte array.
@@ -85,15 +86,15 @@ class KBytesEditWidget : public TQWidget, public KHE::BytesEditInterface,
     virtual bool isOverwriteOnly() const;
     virtual bool isReadOnly() const;
     virtual bool isModified() const;
-    /** repaint the indizes from i1 to i2 */
-    virtual void repaintRange( int i1, int i2 );
+    /** tqrepaint the indizes from i1 to i2 */
+    virtual void tqrepaintRange( int i1, int i2 );
 
   public: // cursor interface
     /** */
     virtual void setCursorPosition( int Index );
 //     virtual bool tabChangesFocus() const;
 
-  public: // layout interface ??
+  public: // tqlayout interface ??
     /** sets the resizestyle for the value column. Default is KHE::FullSizeUsage */
     virtual void setResizeStyle( KResizeStyle Style );
     /** sets the number of bytes per line, switching the resize style to KHE::NoResize */

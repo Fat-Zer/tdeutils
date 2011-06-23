@@ -41,15 +41,16 @@ class KURLRequester;
 class ExtractionDialog : public KDialogBase
 {
 	Q_OBJECT
+  TQ_OBJECT
 	public:
 		/**
 		 * Constructor.
 		 */
-		ExtractionDialog( TQWidget *parent = 0, const char *name = 0,
+		ExtractionDialog( TQWidget *tqparent = 0, const char *name = 0,
 		                  bool enableSelected = true,
 		                  const KURL &defaultExtractionDir = KURL(),
 		                  const TQString &prefix = TQString(),
-		                  const TQString &archiveName = TQString::null );
+		                  const TQString &archiveName = TQString() );
 
 		/**
 		 * Destructor.

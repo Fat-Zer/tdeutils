@@ -27,10 +27,10 @@
 class ZeroWidget :public RegExpWidget
 {
 public:
-  ZeroWidget(TQString text, RegExpEditorWindow* editorWindow, TQWidget *parent,
+  ZeroWidget(TQString text, RegExpEditorWindow* editorWindow, TQWidget *tqparent,
              const char *name = 0);
   virtual void addNewChild(DragAccepter *accepter, RegExpWidget *child);
-  virtual TQSize sizeHint() const;
+  virtual TQSize tqsizeHint() const;
 
 protected:
   virtual void paintEvent( TQPaintEvent *e );
@@ -51,7 +51,7 @@ private:
 class AnyCharWidget :public ZeroWidget
 {
 public:
-  AnyCharWidget(RegExpEditorWindow* editorWindow, TQWidget *parent,
+  AnyCharWidget(RegExpEditorWindow* editorWindow, TQWidget *tqparent,
                 const char *label = 0);
 
 	virtual RegExp* regExp() const;
@@ -68,7 +68,7 @@ public:
 class BegLineWidget : public ZeroWidget
 {
 public:
-  BegLineWidget(RegExpEditorWindow* editorWindow, TQWidget *parent,
+  BegLineWidget(RegExpEditorWindow* editorWindow, TQWidget *tqparent,
                 const char *name = 0);
 	virtual RegExp* regExp() const;
   virtual RegExpType type() const { return BEGLINE; }
@@ -84,7 +84,7 @@ public:
 class EndLineWidget : public ZeroWidget
 {
 public:
-  EndLineWidget(RegExpEditorWindow* editorWindow, TQWidget *parent,
+  EndLineWidget(RegExpEditorWindow* editorWindow, TQWidget *tqparent,
                 const char *name = 0);
 	virtual RegExp* regExp() const;
   virtual RegExpType type() const { return ENDLINE; }
@@ -99,7 +99,7 @@ public:
 class WordBoundaryWidget : public ZeroWidget
 {
 public:
-  WordBoundaryWidget(RegExpEditorWindow* editorWindow, TQWidget *parent,
+  WordBoundaryWidget(RegExpEditorWindow* editorWindow, TQWidget *tqparent,
                      const char *name = 0);
 	virtual RegExp* regExp() const;
   virtual RegExpType type() const { return WORDBOUNDARY; }
@@ -115,7 +115,7 @@ public:
 class NonWordBoundaryWidget : public ZeroWidget
 {
 public:
-  NonWordBoundaryWidget(RegExpEditorWindow* editorWindow, TQWidget *parent,
+  NonWordBoundaryWidget(RegExpEditorWindow* editorWindow, TQWidget *tqparent,
                         const char *name = 0);
 	virtual RegExp* regExp() const;
   virtual RegExpType type() const { return NONWORDBOUNDARY; }

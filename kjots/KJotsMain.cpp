@@ -72,7 +72,7 @@ KJotsMain::KJotsMain(const char* name)
     // the subject list
     subjectList = new KListView(splitter, "subjectList");
     subjectList->setRootIsDecorated(true);
-    subjectList->setSizePolicy(TQSizePolicy(TQSizePolicy::Preferred, TQSizePolicy::Expanding));
+    subjectList->tqsetSizePolicy(TQSizePolicy(TQSizePolicy::Preferred, TQSizePolicy::Expanding));
     subjectList->setMinimumWidth(subjectList->fontMetrics().maxWidth() * 10 + 5);
     subjectList->addColumn(i18n("Pages"));
     subjectList->setFullWidth(true);
@@ -90,7 +90,7 @@ KJotsMain::KJotsMain(const char* name)
     textStack = new TQWidgetStack(splitter);
 
     me_text = new KJotsEdit(textStack, "me_text");
-    me_text->setFocusPolicy(TQWidget::StrongFocus);
+    me_text->setFocusPolicy(TQ_StrongFocus);
     me_text->setEnabled(false);
     textStack->addWidget(me_text);
     connect(me_text, TQT_SIGNAL(findSuccessful()), this, TQT_SLOT(slotFindSuccessful()));
@@ -101,72 +101,72 @@ KJotsMain::KJotsMain(const char* name)
     TQVBoxLayout *bookGrid = new TQVBoxLayout(f_main, KDialog::marginHint(), KDialog::spacingHint());
     bookGrid->addWidget(splitter, 0, 0);
     bookGrid->setMargin(0);
-    splitter->setSizePolicy(TQSizePolicy(TQSizePolicy::Expanding, TQSizePolicy::Expanding, 2, 1));
+    splitter->tqsetSizePolicy(TQSizePolicy(TQSizePolicy::Expanding, TQSizePolicy::Expanding, 2, 1));
 
     // create actions
-    actions[ACTION_NEXT_BOOK] = new KAction(i18n("Next Book"), TQString::null, CTRL + Key_D, this,
+    actions[ACTION_NEXT_BOOK] = new KAction(i18n("Next Book"), TQString(), CTRL + Key_D, TQT_TQOBJECT(this),
             TQT_SLOT(nextBook()), actionCollection(), "go_next_book");
-    actions[ACTION_PREV_BOOK] = new KAction(i18n("Previous Book"), TQString::null, CTRL + SHIFT + Key_D, this,
+    actions[ACTION_PREV_BOOK] = new KAction(i18n("Previous Book"), TQString(), CTRL + SHIFT + Key_D, TQT_TQOBJECT(this),
             TQT_SLOT(prevBook()), actionCollection(), "go_prev_book");
-    actions[ACTION_NEXT_PAGE] = new KAction(i18n("Next Page"), TQString::null, CTRL + Key_PageDown, this,
+    actions[ACTION_NEXT_PAGE] = new KAction(i18n("Next Page"), TQString(), CTRL + Key_PageDown, TQT_TQOBJECT(this),
             TQT_SLOT(nextPage()), actionCollection(), "go_next_page");
-    actions[ACTION_PREV_PAGE] = new KAction(i18n("Previous Page"), TQString::null, CTRL + Key_PageUp, this,
+    actions[ACTION_PREV_PAGE] = new KAction(i18n("Previous Page"), TQString(), CTRL + Key_PageUp, TQT_TQOBJECT(this),
             TQT_SLOT(prevPage()), actionCollection(), "go_prev_page");
 
-    actions[ACTION_NEW_PAGE] = KStdAction::openNew(this, TQT_SLOT(newEntry()), actionCollection());
+    actions[ACTION_NEW_PAGE] = KStdAction::openNew(TQT_TQOBJECT(this), TQT_SLOT(newEntry()), actionCollection());
     actions[ACTION_NEW_PAGE]->setText(i18n("&New Page"));
-    actions[ACTION_NEW_BOOK] = new KAction(i18n("New &Book..."), "contents", CTRL + SHIFT + Key_N, this,
+    actions[ACTION_NEW_BOOK] = new KAction(i18n("New &Book..."), "contents", CTRL + SHIFT + Key_N, TQT_TQOBJECT(this),
             TQT_SLOT(createNewBook()), actionCollection(), "new_book");
 
     exportPageMenu = new KActionMenu(i18n("Export Page"), actionCollection(), "save_page_to");
-    actions[ACTION_PAGE2TEXT] = new KAction(i18n("To Text File..."), TQString::null, 0, this,
+    actions[ACTION_PAGE2TEXT] = new KAction(i18n("To Text File..."), TQString(), 0, TQT_TQOBJECT(this),
             TQT_SLOT(writePage()), actionCollection(), "save_page_to_ascii");
     actions[ACTION_PAGE2TEXT]->plug(exportPageMenu->popupMenu());
-    actions[ACTION_PAGE2HTML] = new KAction(i18n("To HTML File..."), TQString::null, 0, this,
+    actions[ACTION_PAGE2HTML] = new KAction(i18n("To HTML File..."), TQString(), 0, TQT_TQOBJECT(this),
             TQT_SLOT(writePageToHTML()), actionCollection(), "save_page_to_html");
     actions[ACTION_PAGE2HTML]->plug(exportPageMenu->popupMenu());
 
     exportBookMenu = new KActionMenu(i18n("Export Book"), actionCollection(), "save_book_to");
-    actions[ACTION_BOOK2TEXT] = new KAction(i18n("To Text File..."), TQString::null, 0, this,
+    actions[ACTION_BOOK2TEXT] = new KAction(i18n("To Text File..."), TQString(), 0, TQT_TQOBJECT(this),
             TQT_SLOT(writeBook()), actionCollection(), "save_book_to_ascii");
     actions[ACTION_BOOK2TEXT]->plug(exportBookMenu->popupMenu());
-    actions[ACTION_BOOK2HTML] = new KAction(i18n("To HTML File..."), TQString::null, 0, this,
+    actions[ACTION_BOOK2HTML] = new KAction(i18n("To HTML File..."), TQString(), 0, TQT_TQOBJECT(this),
             TQT_SLOT(writeBookToHTML()), actionCollection(), "save_book_to_html");
     actions[ACTION_BOOK2HTML]->plug(exportBookMenu->popupMenu());
 
-    actions[ACTION_DELETE_PAGE] = new KAction(i18n("&Delete Page"), "editdelete", CTRL + Key_Delete, this,
+    actions[ACTION_DELETE_PAGE] = new KAction(i18n("&Delete Page"), "editdelete", CTRL + Key_Delete, TQT_TQOBJECT(this),
             TQT_SLOT(deleteEntry()), actionCollection(), "del_page");
-    actions[ACTION_DELETE_BOOK] = new KAction(i18n("Delete Boo&k"), "editdelete", CTRL + SHIFT + Key_Delete, this,
+    actions[ACTION_DELETE_BOOK] = new KAction(i18n("Delete Boo&k"), "editdelete", CTRL + SHIFT + Key_Delete, TQT_TQOBJECT(this),
             TQT_SLOT(deleteBook()), actionCollection(), "del_folder");
 
     actions[ACTION_MANUAL_SAVE] = new KAction(i18n("Manual Save"), 0, KStdAccel::save(),
-                         this, TQT_SLOT(autoSave()), actionCollection(), "manual_save");
-    actions[ACTION_PRINT] = KStdAction::print(this, TQT_SLOT(slotPrint()), actionCollection());
-    actions[ACTION_QUIT] = KStdAction::quit(this, TQT_SLOT(slotQuit()), actionCollection());
+                         TQT_TQOBJECT(this), TQT_SLOT(autoSave()), actionCollection(), "manual_save");
+    actions[ACTION_PRINT] = KStdAction::print(TQT_TQOBJECT(this), TQT_SLOT(slotPrint()), actionCollection());
+    actions[ACTION_TQUIT] = KStdAction::quit(TQT_TQOBJECT(this), TQT_SLOT(slotQuit()), actionCollection());
 
-    actions[ACTION_CUT] = KStdAction::cut(me_text, TQT_SLOT(cut()), actionCollection());
+    actions[ACTION_CUT] = KStdAction::cut(TQT_TQOBJECT(me_text), TQT_SLOT(cut()), actionCollection());
     connect(me_text, TQT_SIGNAL(copyAvailable(bool)), actions[ACTION_CUT], TQT_SLOT(setEnabled(bool)));
     actions[ACTION_CUT]->setEnabled(false);
-    actions[ACTION_COPY]  = KStdAction::copy(me_text, TQT_SLOT(copy()), actionCollection());
+    actions[ACTION_COPY]  = KStdAction::copy(TQT_TQOBJECT(me_text), TQT_SLOT(copy()), actionCollection());
     connect(me_text, TQT_SIGNAL(copyAvailable(bool)), actions[ACTION_COPY], TQT_SLOT(setEnabled(bool)));
     actions[ACTION_COPY]->setEnabled(false);
-    actions[ACTION_PASTE2TITLE] = new KAction(i18n("Copy &into Page Title"), "editcopy", CTRL+Key_T, this,
+    actions[ACTION_PASTE2TITLE] = new KAction(i18n("Copy &into Page Title"), "editcopy", CTRL+Key_T, TQT_TQOBJECT(this),
             TQT_SLOT(copySelection()), actionCollection(), "copyIntoTitle");
     connect(me_text, TQT_SIGNAL(copyAvailable(bool)), actions[ACTION_PASTE2TITLE], TQT_SLOT(setEnabled(bool)));
     actions[ACTION_PASTE2TITLE]->setEnabled(false);
-    actions[ACTION_PASTE]  = KStdAction::pasteText(me_text, TQT_SLOT(paste()), actionCollection());
+    actions[ACTION_PASTE]  = KStdAction::pasteText(TQT_TQOBJECT(me_text), TQT_SLOT(paste()), actionCollection());
 
-    actions[ACTION_FIND] = KStdAction::find( this, TQT_SLOT( slotSearch() ), actionCollection() );
-    actions[ACTION_FIND_NEXT] = KStdAction::findNext( this, TQT_SLOT( slotRepeatSearch() ), actionCollection() );
+    actions[ACTION_FIND] = KStdAction::find( TQT_TQOBJECT(this), TQT_SLOT( slotSearch() ), actionCollection() );
+    actions[ACTION_FIND_NEXT] = KStdAction::findNext( TQT_TQOBJECT(this), TQT_SLOT( slotRepeatSearch() ), actionCollection() );
     actions[ACTION_FIND_NEXT]->setEnabled(false);
-    actions[ACTION_REPLACE] = KStdAction::replace( this, TQT_SLOT( slotReplace() ), actionCollection() );
+    actions[ACTION_REPLACE] = KStdAction::replace( TQT_TQOBJECT(this), TQT_SLOT( slotReplace() ), actionCollection() );
 
-    actions[ACTION_RENAME] = new KAction(i18n("Rename..."), TQString::null, CTRL + Key_M, this,
+    actions[ACTION_RENAME] = new KAction(i18n("Rename..."), TQString(), CTRL + Key_M, TQT_TQOBJECT(this),
             TQT_SLOT(slotRenameEntry()), actionCollection(), "rename_entry");
-    actions[ACTION_INSERT_DATE] = new KAction(i18n("Insert Date"), "date", CTRL + Key_I, this,
+    actions[ACTION_INSERT_DATE] = new KAction(i18n("Insert Date"), "date", CTRL + Key_I, TQT_TQOBJECT(this),
             TQT_SLOT(insertDate()), actionCollection(), "insert_date");
 
-    KStdAction::preferences(this, TQT_SLOT(configure()), actionCollection());
+    KStdAction::preferences(TQT_TQOBJECT(this), TQT_SLOT(configure()), actionCollection());
 
     bookmarkMenu = new KActionMenu(i18n("&Bookmarks"), "bookmarks", actionCollection(), "bookmarks");
     KJotsBookmarks* bookmarks = new KJotsBookmarks(this);
@@ -245,7 +245,7 @@ void KJotsMain::loadBooks()
 {
     TQDir dir(locateLocal("appdata",""));
     TQStringList files = dir.entryList(TQDir::Files|TQDir::Readable);
-    Q_UINT64 currentSelection = KJotsSettings::currentSelection();
+    TQ_UINT64 currentSelection = KJotsSettings::currentSelection();
 
     //TODO: Eventually we can make use of the ".book" extension here, but for 
     //right now (2005/06/04) there's just too much legacy data out there.
@@ -284,7 +284,7 @@ bool KJotsMain::createNewBook()
     bool ok;
 
     TQString name = KInputDialog::getText( i18n( "New Book" ),
-        i18n( "Book name:" ), TQString::null, &ok, this );
+        i18n( "Book name:" ), TQString(), &ok, this );
 
     if (!ok)
         return false;
@@ -316,7 +316,7 @@ void KJotsMain::deleteBook()
         return;
 
     TQString msg = i18n("<qt>Are you sure you want to delete the <strong>%1</strong> book?</qt>");
-    int result = KMessageBox::warningContinueCancel(topLevelWidget(), msg.arg(b->subject()), i18n("Delete Book"),KStdGuiItem::del());
+    int result = KMessageBox::warningContinueCancel(tqtopLevelWidget(), msg.tqarg(b->subject()), i18n("Delete Book"),KStdGuiItem::del());
 
     if (result!=KMessageBox::Continue)
         return;
@@ -358,15 +358,15 @@ void KJotsMain::deleteEntry()
     KJotsPage* cur = currentPage();
 
     if (!cur ||
-        KMessageBox::warningContinueCancel(topLevelWidget(),
+        KMessageBox::warningContinueCancel(tqtopLevelWidget(),
                                   i18n("<qt>Are you sure you want to delete the <strong>%1</strong> page?</qt>")
-                                  .arg(cur->subject()),
+                                  .tqarg(cur->subject()),
                                   i18n("Delete Page"),KStdGuiItem::del()) != KMessageBox::Continue)
     {
         return;
     }
 
-    KJotsBook* bk = cur->parentBook();
+    KJotsBook* bk = cur->tqparentBook();
     KJotsPage* nxt = dynamic_cast<KJotsPage*>(cur->nextSibling());
 
     me_text->setEntry(0);
@@ -493,7 +493,7 @@ void KJotsMain::saveBookToFile(bool plainText)
         }
 
         if (!KIO::NetAccess::exists(res.URLs[0], true, this) ||
-            KMessageBox::warningYesNo(this, "<qt>" + i18n("The file <strong>%1</strong> already exists. Do you wish to overwrite it?").arg(res.URLs[0].prettyURL()) + "</qt>", i18n("File Exists"), i18n("Overwrite"), KStdGuiItem::cancel()) == KMessageBox::Yes)
+            KMessageBox::warningYesNo(this, "<qt>" + i18n("The file <strong>%1</strong> already exists. Do you wish to overwrite it?").tqarg(res.URLs[0].prettyURL()) + "</qt>", i18n("File Exists"), i18n("Overwrite"), KStdGuiItem::cancel()) == KMessageBox::Yes)
         {
             tryAgain = false;
         }
@@ -534,7 +534,7 @@ void KJotsMain::savePageToFile(bool plainText)
         }
 
         if (!KIO::NetAccess::exists(res.URLs[0], true, this) ||
-            KMessageBox::warningYesNo(this, "<qt>" + i18n("The file <strong>%1</strong> already exists. Do you wish to overwrite it?").arg(res.URLs[0].prettyURL()) + "</qt>", i18n("File Exists"), i18n("Overwrite"), KStdGuiItem::cancel()) == KMessageBox::Yes)
+            KMessageBox::warningYesNo(this, "<qt>" + i18n("The file <strong>%1</strong> already exists. Do you wish to overwrite it?").tqarg(res.URLs[0].prettyURL()) + "</qt>", i18n("File Exists"), i18n("Overwrite"), KStdGuiItem::cancel()) == KMessageBox::Yes)
         {
             tryAgain = false;
         }
@@ -573,7 +573,7 @@ void KJotsMain::slotQuit()
 
 void KJotsMain::insertDate()
 {
-  me_text->insert(KGlobal::locale()->formatDateTime(TQDateTime::currentDateTime(), true) + " ");
+  me_text->insert(KGlobal::locale()->formatDateTime(TQDateTime::tqcurrentDateTime(), true) + " ");
 }
 
 void KJotsMain::updateMenu()
@@ -657,7 +657,7 @@ void KJotsMain::slotFindSuccessful()
 void KJotsMain::showListviewContextMenu(KListView*, TQListViewItem* i, const TQPoint& p)
 {
     if ( invalidMoveFlag ) return; //Prevent race condition
-    KActionMenu* am = new KActionMenu(this);
+    KActionMenu* am = new KActionMenu(TQT_TQOBJECT(this));
 
     if (!i)
     {
@@ -701,7 +701,7 @@ void KJotsMain::linkClicked(const TQString& link)
         return;
     }
 
-    Q_UINT64 target = link.toULongLong();
+    TQ_UINT64 target = link.toULongLong();
     TQListViewItemIterator it( subjectList );
     while ( it.current() ) {
         KJotsEntryBase *entry = dynamic_cast<KJotsEntryBase*>(it.current());
@@ -769,7 +769,7 @@ TQString KJotsMain::currentBookmarkTitle()
     while ( item )
     {
         KJotsEntryBase *entry = dynamic_cast<KJotsEntryBase*>(item);
-        item = item->parent();
+        item = item->tqparent();
 
         if ( item )
         {
@@ -804,7 +804,7 @@ TQString KJotsMain::currentBookmarkURL()
 */
 void KJotsMain::jumpToBookmark(const TQString& bookmark)
 {
-    Q_UINT64 id = bookmark.toULongLong();
+    TQ_UINT64 id = bookmark.toULongLong();
 
     if ( id )
     {
@@ -825,9 +825,9 @@ void KJotsMain::jumpToBookmark(const TQString& bookmark)
         //in the future. CREATION DATE: 2005/06/10
 
         KMessageBox::information(this, 
-            i18n("This bookmark is from an older version of KJots and is not fully supported. It may or may not work. You should delete and recreate this bookmark."), TQString::null, "oldBookmarkWarning"); 
+            i18n("This bookmark is from an older version of KJots and is not fully supported. It may or may not work. You should delete and recreate this bookmark."), TQString(), "oldBookmarkWarning"); 
 
-        int slash = bookmark.findRev('/');
+        int slash = bookmark.tqfindRev('/');
 
         if (slash != -1)
         {
@@ -865,7 +865,7 @@ void KJotsMain::jumpToBookmark(const TQString& bookmark)
                     {
                         if ( ++pageCount == pageNo )
                         {
-                            static_cast<TQListViewItem*>(entry)->parent()->setOpen(true);
+                            static_cast<TQListViewItem*>(entry)->tqparent()->setOpen(true);
                             subjectList->ensureItemVisible(entry);
                             subjectList->setSelected(entry, true);
                             jumpToEntry(entry);
@@ -914,12 +914,12 @@ void KJotsMain::nextBook()
 */
 void KJotsMain::prevBook()
 {
-    //Don't get caught by parent book.
+    //Don't get caught by tqparent book.
     TQListViewItem *startingPoint = subjectList->currentItem();
     if ( !startingPoint ) return; //sanity check
 
     if ( dynamic_cast<KJotsPage*>(startingPoint) )
-        startingPoint = startingPoint->parent();
+        startingPoint = startingPoint->tqparent();
 
     TQListViewItemIterator it ( startingPoint );
     do {
@@ -1043,7 +1043,7 @@ void KJotsMain::updateCaption()
     while ( item )
     {
         KJotsEntryBase *entry = dynamic_cast<KJotsEntryBase*>(item);
-        item = item->parent();
+        item = item->tqparent();
 
         if ( item )
         {
@@ -1081,7 +1081,7 @@ void KJotsMain::slotItemMoved(TQListViewItem *item, TQListViewItem* afterFirst, 
 
     //afterFirst doesn't work like we need it to. We want it to point to the
     //previous sibling, not just the entry directly above it.
-    if ( afterFirst && afterFirst->parent() != entry->parentBook() )
+    if ( afterFirst && afterFirst->tqparent() != entry->tqparentBook() )
     {
         TQListViewItemIterator it ( afterFirst );
         afterFirst = 0;
@@ -1090,13 +1090,13 @@ void KJotsMain::slotItemMoved(TQListViewItem *item, TQListViewItem* afterFirst, 
         while ( it.current() )
         {
             //No other items were above this one.
-            if ( it.current() == entry->parentBook() ) 
+            if ( it.current() == entry->tqparentBook() ) 
             {
                 break;
             }
 
             //Found a previous sibling!
-            if ( it.current()->parent() == entry->parentBook() )
+            if ( it.current()->tqparent() == entry->tqparentBook() )
             {
                 afterFirst = it.current();
                 break;
@@ -1108,7 +1108,7 @@ void KJotsMain::slotItemMoved(TQListViewItem *item, TQListViewItem* afterFirst, 
 
     KJotsEntryBase *entryAfter = dynamic_cast<KJotsEntryBase*>(afterFirst);
 
-    if ( entry->isPage() && !item->parent() )
+    if ( entry->isPage() && !item->tqparent() )
     {
         invalidMoveFlag=true; //Don't do anything while we're stuck here.
         subjectList->setItemsMovable(false);
@@ -1119,14 +1119,14 @@ void KJotsMain::slotItemMoved(TQListViewItem *item, TQListViewItem* afterFirst, 
                                        i18n("All pages must be inside a book. "
                                             "Would you like to create a new book to put the page in, "
                                             "or would you prefer to not move the page at all?"),
-                                       TQString::null,
+                                       TQString(),
                                        i18n("Create New Book"), i18n("Do Not Move Page")) ==
             KMessageBox::No ||
             !createNewBook())
         {
             //We have to move item back.
             subjectList->takeItem(item);
-            entry->parentBook()->insertItem(item);
+            entry->tqparentBook()->insertItem(item);
             entry->moveItem(afterFirst);
         } else {
             subjectList->takeItem(item);
@@ -1149,11 +1149,11 @@ void KJotsMain::slotItemMoved(TQListViewItem *item, TQListViewItem* afterFirst, 
 
     if ( entryAfter )
     {
-        //Set the old parent book to dirty, since it just lost a page.
+        //Set the old tqparent book to dirty, since it just lost a page.
         if ( entryAfter->isBook() )
             entryAfter->setDirty(true);
         else
-            entryAfter->parentBook()->setDirty(true);
+            entryAfter->tqparentBook()->setDirty(true);
     }
 
     return;
@@ -1173,7 +1173,7 @@ KJotsBook* KJotsMain::currentBook()
         {
             return dynamic_cast<KJotsBook*>(e);
         }
-        e = dynamic_cast<KJotsEntryBase*>(e->KListViewItem::parent());
+        e = dynamic_cast<KJotsEntryBase*>(e->KListViewItem::tqparent());
     }
 
     return 0;

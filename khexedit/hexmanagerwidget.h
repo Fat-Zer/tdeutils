@@ -72,12 +72,13 @@ class CFileKey
 
 
 
-class CTabBar : public QTabBar
+class CTabBar : public TQTabBar
 {
   Q_OBJECT
+  TQ_OBJECT
 
   public:
-    CTabBar( TQWidget *parent=0, char *name=0 );
+    CTabBar( TQWidget *tqparent=0, char *name=0 );
     void addName( const TQString &name );
     void removeName( const TQString &name );
     void changeName( const TQString &curName, const TQString &newName );
@@ -87,7 +88,7 @@ class CTabBar : public QTabBar
     void slotSelected( int id );
 
   private:
-    TQTab *find( const TQString &name );
+    TQTab *tqfind( const TQString &name );
 
   private:
     TQValueList<CFileKey> mFileList;
@@ -97,9 +98,10 @@ class CTabBar : public QTabBar
 };
 
 
-class CHexManagerWidget : public QWidget
+class CHexManagerWidget : public TQWidget
 {
   Q_OBJECT
+  TQ_OBJECT
 
   public:
     enum EConversionPosition
@@ -117,7 +119,7 @@ class CHexManagerWidget : public QWidget
     };      
 
   public:
-    CHexManagerWidget( TQWidget *parent = 0, const char *name = 0, 
+    CHexManagerWidget( TQWidget *tqparent = 0, const char *name = 0, 
 		       EConversionPosition state = Embed,
 		       EPosition tabBarPosition = HideItem,
 		       EPosition searchBarPosition = HideItem );

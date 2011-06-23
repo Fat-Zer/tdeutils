@@ -44,6 +44,7 @@ class ArkWidget;
 class CompressedFile : public Arch
 {
   Q_OBJECT
+  TQ_OBJECT
 public:
   CompressedFile( ArkWidget *_gui, const TQString & _fileName, const TQString &_openAsMimeType );
   virtual ~CompressedFile();

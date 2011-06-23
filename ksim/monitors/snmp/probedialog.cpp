@@ -38,8 +38,8 @@ static const char * const probeIdentifiers[] =
     0
 };
 
-ProbeDialog::ProbeDialog( const HostConfig &hostConfig, TQWidget *parent, const char *name )
-    : KProgressDialog( parent, name, i18n( "SNMP Host Probe" ), TQString::null, true /* modal */ ),
+ProbeDialog::ProbeDialog( const HostConfig &hostConfig, TQWidget *tqparent, const char *name )
+    : KProgressDialog( tqparent, name, i18n( "SNMP Host Probe" ), TQString(), true /* modal */ ),
       m_host( hostConfig ), m_currentMonitor( 0 ), m_canceled( false )
 {
     setLabel( i18n( "Probing for common object identifiers..." ) );
@@ -77,7 +77,7 @@ void ProbeDialog::probeOne()
     Identifier oid = m_probeOIDs.pop();
 
     delete m_currentMonitor;
-    m_currentMonitor = new Monitor( m_host, oid, 0 /* no refresh */, this );
+    m_currentMonitor = new Monitor( m_host, oid, 0 /* no refresh */, TQT_TQOBJECT(this) );
 
     connect( m_currentMonitor, TQT_SIGNAL( newData( const Identifier &, const Value & ) ),
              this, TQT_SLOT( probeResult( const Identifier &, const Value & ) ) );

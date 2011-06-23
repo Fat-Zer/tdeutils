@@ -28,16 +28,16 @@
 #include <klocale.h>
 #include <tqstyle.h>
 
-CStatusBarProgress::CStatusBarProgress( TQWidget *parent, const char *name )
-  : TQFrame(parent, name), TQRangeControl(0, 100, 1, 10, 0),
-    mOrientation( Horizontal )
+CStatusBarProgress::CStatusBarProgress( TQWidget *tqparent, const char *name )
+  : TQFrame(tqparent, name), TQRangeControl(0, 100, 1, 10, 0),
+    mOrientation(Horizontal )
 {
   initialize();
 }
 
 CStatusBarProgress::CStatusBarProgress( Orientation orientation,
-					TQWidget *parent, const char *name )
-  : TQFrame(parent, name), TQRangeControl(0, 100, 1, 10, 0),
+					TQWidget *tqparent, const char *name )
+  : TQFrame(tqparent, name), TQRangeControl(0, 100, 1, 10, 0),
     mOrientation( orientation )
 {
   initialize();
@@ -45,8 +45,8 @@ CStatusBarProgress::CStatusBarProgress( Orientation orientation,
 
 CStatusBarProgress::CStatusBarProgress( int minValue, int maxValue, int value,
 					Orientation orientation,
-					TQWidget *parent, const char *name )
-  : TQFrame(parent, name), TQRangeControl(minValue, maxValue, 1, 10, value),
+					TQWidget *tqparent, const char *name )
+  : TQFrame(tqparent, name), TQRangeControl(minValue, maxValue, 1, 10, value),
     mOrientation(orientation)
 {
   initialize();
@@ -67,10 +67,10 @@ void CStatusBarProgress::initialize( void )
   mBarPixmap    = 0;
   mBarStyle     = Solid;
 
-  mBarColor     = palette().active().highlight();
-  mBarTextColor = palette().active().highlightedText();
-  mTextColor    = palette().active().text();
-  setBackgroundColor( palette().active().background() );
+  mBarColor     = tqpalette().active().highlight();
+  mBarTextColor = tqpalette().active().highlightedText();
+  mTextColor    = tqpalette().active().text();
+  setBackgroundColor( tqpalette().active().background() );
 
   TQFont font( KGlobalSettings::generalFont() );
   font.setBold( true );
@@ -176,7 +176,7 @@ bool CStatusBarProgress::textEnabled( void ) const
   return( mTextEnabled );
 }
 
-TQSize CStatusBarProgress::sizeHint( void ) const
+TQSize CStatusBarProgress::tqsizeHint( void ) const
 {
   TQSize s( size() );
 
@@ -212,13 +212,13 @@ int CStatusBarProgress::recalcValue(int range)
 
 void CStatusBarProgress::valueChange()
 {
-  repaint(contentsRect(), FALSE);
+  tqrepaint(contentsRect(), FALSE);
   emit percentageChanged(recalcValue(100));
 }
 
 void CStatusBarProgress::rangeChange()
 {
-  repaint(contentsRect(), FALSE);
+  tqrepaint(contentsRect(), FALSE);
   emit percentageChanged(recalcValue(100));
 }
 
@@ -229,7 +229,7 @@ void CStatusBarProgress::styleChange( GUIStyle )
 
 void CStatusBarProgress::adjustStyle( void )
 {
-  switch( style().SH_GUIStyle)
+  switch( tqstyle().SH_GUIStyle)
   {
     case WindowsStyle:
       setFrameStyle( TQFrame::NoFrame );
@@ -246,10 +246,10 @@ void CStatusBarProgress::adjustStyle( void )
 
 void CStatusBarProgress::paletteChange( const TQPalette & )
 {
-  mBarColor     = palette().active().highlight();
-  mBarTextColor = palette().active().highlightedText();
-  mTextColor    = palette().active().text();
-  setBackgroundColor( palette().active().background() );
+  mBarColor     = tqpalette().active().highlight();
+  mBarTextColor = tqpalette().active().highlightedText();
+  mTextColor    = tqpalette().active().text();
+  setBackgroundColor( tqpalette().active().background() );
 }
 
 void CStatusBarProgress::drawText( TQPainter *p )
@@ -259,17 +259,17 @@ void CStatusBarProgress::drawText( TQPainter *p )
 
   if( mMsg.isEmpty() == true )
   {
-    s = TQString("%1%").arg(recalcValue(100));
+    s = TQString("%1%").tqarg(recalcValue(100));
   }
   else
   {
     if( mCurPage > 0 )
     {
-      s = i18n("%1... %2 of %3").arg(mMsg).arg(mCurPage).arg(mMaxPage);
+      s = i18n("%1... %2 of %3").tqarg(mMsg).tqarg(mCurPage).tqarg(mMaxPage);
     }
     else
     {
-      s = i18n("%1... %2%").arg(mMsg).arg(recalcValue(100));
+      s = i18n("%1... %2%").tqarg(mMsg).tqarg(recalcValue(100));
     }
   }
 
@@ -297,7 +297,7 @@ void CStatusBarProgress::drawContents(TQPainter *p)
   switch( mBarStyle )
   {
     case Solid:
-      if( mOrientation == Horizontal )
+      if( mOrientation ==Qt::Horizontal )
       {
 	fr.setWidth(recalcValue(cr.width()));
 	er.setLeft(fr.right() + 1);
@@ -319,7 +319,7 @@ void CStatusBarProgress::drawContents(TQPainter *p)
     case Blocked:
       const int margin = 2;
       int max, num, dx, dy;
-      if( mOrientation == Horizontal )
+      if( mOrientation ==Qt::Horizontal )
       {
 	fr.setHeight(cr.height() - 2 * margin);
 	fr.setWidth((int)(0.67 * fr.height()));
@@ -350,7 +350,7 @@ void CStatusBarProgress::drawContents(TQPainter *p)
 
       if (num != max)
       {
-	if( mOrientation == Horizontal )
+	if( mOrientation ==Qt::Horizontal )
 	  er.setLeft(fr.right() + 1);
 	else
 	  er.setBottom(fr.bottom() + 1);

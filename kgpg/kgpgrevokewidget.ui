@@ -1,6 +1,6 @@
 <!DOCTYPE UI><UI version="3.2" stdsetdef="1">
 <class>KgpgRevokeWidget</class>
-<widget class="QWidget">
+<widget class="TQWidget">
     <property name="name">
         <cstring>KgpgRevokeWidget</cstring>
     </property>
@@ -19,18 +19,18 @@
         <property name="margin">
             <number>0</number>
         </property>
-        <widget class="QLabel" row="0" column="1">
+        <widget class="TQLabel" row="0" column="1">
             <property name="name">
                 <cstring>keyID</cstring>
             </property>
             <property name="text">
                 <string>key id</string>
             </property>
-            <property name="alignment">
+            <property name="tqalignment">
                 <set>AlignVCenter</set>
             </property>
         </widget>
-        <widget class="QCheckBox" row="5" column="0">
+        <widget class="TQCheckBox" row="5" column="0">
             <property name="name">
                 <cstring>cbPrint</cstring>
             </property>
@@ -38,7 +38,7 @@
                 <string>Print certificate</string>
             </property>
         </widget>
-        <widget class="QLabel" row="0" column="0">
+        <widget class="TQLabel" row="0" column="0">
             <property name="name">
                 <cstring>textLabel1</cstring>
             </property>
@@ -46,7 +46,7 @@
                 <string>Create revocation certificate for</string>
             </property>
         </widget>
-        <widget class="QLabel" row="2" column="0">
+        <widget class="TQLabel" row="2" column="0">
             <property name="name">
                 <cstring>textLabel4</cstring>
             </property>
@@ -54,7 +54,7 @@
                 <string>Description:</string>
             </property>
         </widget>
-        <widget class="QComboBox" row="1" column="1">
+        <widget class="TQComboBox" row="1" column="1">
             <item>
                 <property name="text">
                     <string>No Reason</string>
@@ -79,7 +79,7 @@
                 <cstring>comboBox1</cstring>
             </property>
         </widget>
-        <widget class="QLabel" row="1" column="0">
+        <widget class="TQLabel" row="1" column="0">
             <property name="name">
                 <cstring>textLabel3</cstring>
             </property>
@@ -87,7 +87,7 @@
                 <string>Reason for revocation:</string>
             </property>
         </widget>
-        <widget class="QCheckBox" row="4" column="0">
+        <widget class="TQCheckBox" row="4" column="0">
             <property name="name">
                 <cstring>cbSave</cstring>
             </property>
@@ -98,7 +98,7 @@
                 <bool>true</bool>
             </property>
         </widget>
-        <widget class="QCheckBox" row="7" column="0">
+        <widget class="TQCheckBox" row="7" column="0">
             <property name="name">
                 <cstring>cbImport</cstring>
             </property>
@@ -109,7 +109,7 @@
                 <string>Import into keyring</string>
             </property>
         </widget>
-        <widget class="QTextEdit" row="3" column="0" rowspan="1" colspan="2">
+        <widget class="TQTextEdit" row="3" column="0" rowspan="1" colspan="2">
             <property name="name">
                 <cstring>textDescription</cstring>
             </property>
@@ -142,10 +142,10 @@
 <includes>
     <include location="local" impldecl="in implementation">kgpgrevokewidget.ui.h</include>
 </includes>
-<slots>
+<Q_SLOTS>
     <slot>cbSave_toggled( bool isOn )</slot>
-</slots>
-<layoutdefaults spacing="6" margin="11"/>
+</Q_SLOTS>
+<tqlayoutdefaults spacing="6" margin="11"/>
 <includehints>
     <includehint>kpushbutton.h</includehint>
 </includehints>

@@ -15,7 +15,7 @@
  *  the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  *  Boston, MA 02110-1301, USA.
  **/
-#ifdef QT_ONLY
+#ifdef TQT_ONLY
   #include "compat.h"
 #else
   #include <kmessagebox.h>
@@ -27,10 +27,10 @@
 #include "widgetwindow.h"
 #include "windowlistboxitem.h"
 
-KMultiFormListBoxWindowed::KMultiFormListBoxWindowed(KMultiFormListBoxFactory *factory, TQWidget *parent,
+KMultiFormListBoxWindowed::KMultiFormListBoxWindowed(KMultiFormListBoxFactory *factory, TQWidget *tqparent,
 																	 bool showUpDownButtons, bool showHelpButton,
 																	 TQString addButtonText,const char *name)
-  : TQWidget( parent, name )
+  : TQWidget( tqparent, name )
 {
   _layout = new TQVBoxLayout(this);
 
@@ -150,7 +150,7 @@ void KMultiFormListBoxWindowed::slotDeleteEntry()
   WindowListboxItem *item = selected();
   if (item) {
 		int answer =
-			KMessageBox::warningContinueCancel(0, i18n("Delete item \"%1\"?").arg(item->text()),i18n("Delete Item"),KStdGuiItem::del());
+			KMessageBox::warningContinueCancel(0, i18n("Delete item \"%1\"?").tqarg(item->text()),i18n("Delete Item"),KStdGuiItem::del());
 		if (answer == KMessageBox::Continue) {
 			delete item;
 			slotUpdateButtonState();

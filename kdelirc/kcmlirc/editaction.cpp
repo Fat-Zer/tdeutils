@@ -35,7 +35,7 @@
 #include "editaction.h"
 #include "addaction.h"
 
-EditAction::EditAction(IRAIt action, TQWidget *parent, const char *name) : EditActionBase(parent, name)
+EditAction::EditAction(IRAIt action, TQWidget *tqparent, const char *name) : EditActionBase(tqparent, name)
 {
 	theAction = action;
 
@@ -175,7 +175,7 @@ void EditAction::updateArguments()
 		}
 		theArguments->setEnabled(p.count());
 		for(unsigned i = 0; i < p.count(); i++)
-		{	theArguments->insertItem(TQString().setNum(i + 1) + ": " + (p.name(i).isEmpty() ? p.type(i) : p.name(i) + " (" + p.type(i) + ")"));
+		{	theArguments->insertItem(TQString(TQString().setNum(i + 1) + ": " + (p.name(i).isEmpty() ? p.type(i) : p.name(i) + " (" + p.type(i) + ")")));
 			arguments[i].cast(TQVariant::nameToType(p.type(i).utf8()));
 		}
 		if(p.count()) updateArgument(0); else updateArgument(-1);
@@ -319,10 +319,10 @@ void EditAction::updateDCOPApplications()
 	QCStringList theApps = theClient->registeredApplications();
 	for(QCStringList::iterator i = theApps.begin(); i != theApps.end(); ++i)
 	{
-		if(!TQString(*i).find("anonymous")) continue;
+		if(!TQString(*i).tqfind("anonymous")) continue;
 		TQRegExp r("(.*)-[0-9]+");
 		TQString name = r.exactMatch(TQString(*i)) ? r.cap(1) : *i;
-		if(names.contains(name)) continue;
+		if(names.tqcontains(name)) continue;
 		names += name;
 
 		theDCOPApplications->insertItem(name);

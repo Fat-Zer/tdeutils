@@ -3,7 +3,7 @@
  *
  * Copyright (c) 2002 Paul Campbell <paul@taniwha.com>
  *
- * Requires the Qt widget libraries, available at no cost at
+ * Requires the TQt widget libraries, available at no cost at
  * http://www.troll.no/
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -42,7 +42,7 @@
 #include <kmessagebox.h>
 #include <krichtextlabel.h>
 
-// other Qt headers:
+// other TQt headers:
 #include <tqlayout.h>
 #include <tqlabel.h>
 #include <tqcheckbox.h>
@@ -55,8 +55,8 @@
 
 extern void wake_laptop_daemon();
 
-SonyConfig::SonyConfig(TQWidget * parent, const char *name)
-  : KCModule(parent, name)
+SonyConfig::SonyConfig(TQWidget * tqparent, const char *name)
+  : KCModule(tqparent, name)
 {
     KGlobal::locale()->insertCatalogue("klaptopdaemon"); // For translation of klaptopdaemon messages
 
@@ -68,7 +68,7 @@ SonyConfig::SonyConfig(TQWidget * parent, const char *name)
     // TODO: remove linefeed from string, can't do it right now coz we have a string freeze
     top_layout->addWidget(new KRichTextLabel(i18n("This panel allows you to control some of the features of the\n"
 		    	"'sonypi' device for your laptop - you should not enable the options below if you\nalso "
-			"use the 'sonypid' program in your system").replace("\n", " "), this));
+			"use the 'sonypid' program in your system").tqreplace("\n", " "), this));
 
     enableScrollBar = new TQCheckBox( i18n("Enable &scroll bar"), this );
     TQToolTip::add( enableScrollBar, i18n( "When checked this box enables the scrollbar so that it works under KDE" ) );
@@ -86,7 +86,7 @@ SonyConfig::SonyConfig(TQWidget * parent, const char *name)
 	
         // TODO: remove linefeed from string, can't do it right now coz we have a string freeze
     	top_layout->addWidget(new KRichTextLabel(i18n("The /dev/sonypi is not accessable, if you wish to use the above features its\n"
-					      "protections need to be changed. Clicking on the button below will change them\n").replace("\n", " "), this));
+					      "protections need to be changed. Clicking on the button below will change them\n").tqreplace("\n", " "), this));
         TQHBoxLayout *ll = new TQHBoxLayout();
         TQPushButton *setupButton = new TQPushButton(i18n("Setup /dev/sonypi"), this);
         connect( setupButton, TQT_SIGNAL(clicked()), this, TQT_SLOT(setupHelper()) );
@@ -99,7 +99,7 @@ SonyConfig::SonyConfig(TQWidget * parent, const char *name)
     
 
     top_layout->addStretch(1);
-    top_layout->addWidget( new TQLabel( i18n("Version: %1").arg(LAPTOP_VERSION), this), 0, Qt::AlignRight );
+    top_layout->addWidget( new TQLabel( i18n("Version: %1").tqarg(LAPTOP_VERSION), this), 0, TQt::AlignRight );
 
 
     load();      

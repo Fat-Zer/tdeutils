@@ -52,6 +52,7 @@ class EqualKey
 class ArkApplication : public KUniqueApplication
 {
 	Q_OBJECT
+  TQ_OBJECT
 	public:
 		virtual int newInstance();
 		virtual ~ArkApplication() {}
@@ -78,7 +79,7 @@ class ArkApplication : public KUniqueApplication
 		ArkApplication();
 
 	private:
-		TQWidget *m_mainwidget;  // to be the parent of all ArkWidgets
+		TQWidget *m_mainwidget;  // to be the tqparent of all ArkWidgets
 		int m_windowCount;
 
 		TQStringList openArksList;

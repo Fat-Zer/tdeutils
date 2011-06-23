@@ -78,8 +78,8 @@ static char *makeAccessString(mode_t mode)
 	return buffer;
 }
 
-TarListingThread::TarListingThread( TQObject *parent, const TQString& filename )
-	: TQThread(), m_parent( parent )
+TarListingThread::TarListingThread( TQObject *tqparent, const TQString& filename )
+	: TQThread(), m_parent( tqparent )
 {
 	Q_ASSERT( m_parent );
 	m_archive = new KTar( filename );
@@ -96,7 +96,7 @@ void TarListingThread::run()
 	if (!m_archive->open( IO_ReadOnly ))
 	{
 		ListingEvent *ev = new ListingEvent( TQStringList(), ListingEvent::Error );
-		qApp->postEvent( m_parent, ev );
+		tqApp->postEvent( m_parent, ev );
 		return;
 	}
 	
@@ -104,7 +104,7 @@ void TarListingThread::run()
 	
 	// Send an empty TQStringList in an Event to signal the listing end.
 	ListingEvent *ev = new ListingEvent( TQStringList(), ListingEvent::ListingFinished );
-	qApp->postEvent( m_parent, ev );
+	tqApp->postEvent( m_parent, ev );
 }
 
 void TarListingThread::processDir( const KTarDirectory *tardir, const TQString & root )
@@ -144,12 +144,12 @@ void TarListingThread::processDir( const KTarDirectory *tardir, const TQString &
 			strSize.sprintf("%d", ((KTarFile *)tarEntry)->size());
 		}
 		col_list.append(strSize);
-		TQString timestamp = tarEntry->datetime().toString(ISODate);
+		TQString timestamp = tarEntry->datetime().toString(Qt::ISODate);
 		col_list.append(timestamp);
 		col_list.append(tarEntry->symlink());
 		
 		ListingEvent *ev = new ListingEvent( col_list );
-		qApp->postEvent( m_parent, ev );
+		tqApp->postEvent( m_parent, ev );
 
 		// if it's a directory, process it.
 		// remember that name is root + / + the name of the directory

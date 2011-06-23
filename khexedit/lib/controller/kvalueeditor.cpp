@@ -46,29 +46,29 @@ bool KValueEditor::handleKeyPress( TQKeyEvent *KeyEvent )
     //
     switch( KeyEvent->key() )
     {
-      case Qt::Key_Plus:
+      case TQt::Key_Plus:
         doValueEditAction( IncValue );
         break;
-      case Qt::Key_Minus:
+      case TQt::Key_Minus:
         doValueEditAction( DecValue );
         break;
-      case Qt::Key_Space:
+      case TQt::Key_Space:
         if( !InEditMode )
         {
           KeyUsed = false;
           break;
         }
-      case Qt::Key_Enter:
-      case Qt::Key_Return:
+      case TQt::Key_Enter:
+      case TQt::Key_Return:
         doValueEditAction( InEditMode?LeaveValue:EnterValue );
         break;
-      case Qt::Key_Escape:
+      case TQt::Key_Escape:
         if( InEditMode )
           doValueEditAction( CancelValue );
         else
           KeyUsed = false;
         break;
-      case Qt::Key_Backspace:
+      case TQt::Key_Backspace:
         if( InEditMode )
           doValueEditAction( ValueBackspace );
         else
@@ -77,9 +77,9 @@ bool KValueEditor::handleKeyPress( TQKeyEvent *KeyEvent )
       default:
         // is plain char?
         if( KeyEvent->text().length() > 0
-            && ( !(KeyEvent->state()&( Qt::ControlButton | Qt::AltButton | Qt::MetaButton )) ) )
+            && ( !(KeyEvent->state()&( TQt::ControlButton | TQt::AltButton | TQt::MetaButton )) ) )
         {
-          TQChar C = KeyEvent->text()[0];
+          TQChar C = TQString(KeyEvent->text())[0];
           // no usable char?
           if( !C.isLetterOrNumber() )
           {
@@ -115,7 +115,7 @@ bool KValueEditor::handleKeyPress( TQKeyEvent *KeyEvent )
                   BufferCursor->gotoRealIndex();
                   KSection ChangedRange( Index,HexEdit->DataBuffer->size()-1 );
                   HexEdit->BufferRanges->addChangedRange( ChangedRange );
-                  HexEdit->repaintChanged();
+                  HexEdit->tqrepaintChanged();
                   HexEdit->ensureCursorVisible();
                   HexEdit->unpauseCursor();
                   HexEdit->updateCursor();
@@ -207,7 +207,7 @@ void KValueEditor::doValueEditAction( KValueEditAction Action, int Input )
     EditValue = NewValue;
     ByteCodec->encode( ByteBuffer, 0, EditValue );
 
-    HexEdit->DataBuffer->replace( Index, 1, (char*)&EditValue, 1 );
+    HexEdit->DataBuffer->tqreplace( Index, 1, (char*)&EditValue, 1 );
   }
 
   HexEdit->updateCursor();

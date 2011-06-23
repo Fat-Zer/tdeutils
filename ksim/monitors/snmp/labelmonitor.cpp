@@ -21,8 +21,8 @@
 
 using namespace KSim::Snmp;
 
-LabelMonitor::LabelMonitor( const MonitorConfig &config, TQWidget *parent, const char *name )
-    : KSim::Label( parent, name ), m_config( config )
+LabelMonitor::LabelMonitor( const MonitorConfig &config, TQWidget *tqparent, const char *name )
+    : KSim::Label( tqparent, name ), m_config( config )
 {
 }
 
@@ -32,8 +32,8 @@ void LabelMonitor::setData( const Value &data )
 
      if ( m_config.useCustomFormatString ) {
          TQString text = m_config.customFormatString;
-         text.replace( "%n", m_config.name );
-         text.replace( "%s", dataString );
+         text.tqreplace( "%n", m_config.name );
+         text.tqreplace( "%s", dataString );
          setText( text );
      } else
          setText( m_config.name + ": " + dataString );

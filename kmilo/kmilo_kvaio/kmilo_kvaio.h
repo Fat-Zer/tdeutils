@@ -8,7 +8,7 @@
          http://www.kde.org
          http://www.hackerbuero.org $
    $ License: LGPL with the following explicit clarification:
-         This code may be linked against any version of the Qt toolkit
+         This code may be linked against any version of the TQt toolkit
          from Troll Tech, Norway. $
 
    $Id$
@@ -35,9 +35,10 @@ class KVaio;
 
 class KMiloKVaio : public KMilo::Monitor {
 //	Q_OBJECT
+  TQ_OBJECT
 
 	public:
-		KMiloKVaio(TQObject *parent, 
+		KMiloKVaio(TQObject *tqparent, 
 			   const char *name, const TQStringList&);
 		virtual ~KMiloKVaio();
 

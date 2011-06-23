@@ -27,22 +27,23 @@
 class KPassivePopup;
 class KProgress;
 
-class KgpgLibrary : public QObject
+class KgpgLibrary : public TQObject
 {
 
         Q_OBJECT
+  TQ_OBJECT
 
 public:
         /**
          * Initialize the class
          */
-        KgpgLibrary(TQWidget *parent=0,bool pgpExtension=false);
+        KgpgLibrary(TQWidget *tqparent=0,bool pgpExtension=false);
         ~KgpgLibrary();
 
         KURL::List urlselecteds;
 
 public slots:
-        void slotFileEnc(KURL::List urls=KURL(""),TQStringList opts=TQString::null,TQStringList defaultKey=TQString::null,KShortcut goDefaultKey=TQKeySequence(CTRL+Qt::Key_Home));
+        void slotFileEnc(KURL::List urls=KURL(""),TQStringList opts=TQString(),TQStringList defaultKey=TQString(),KShortcut goDefaultKey=TQKeySequence(CTRL+TQt::Key_Home));
         void slotFileDec(KURL srcUrl,KURL destUrl,TQStringList customDecryptOption=TQStringList());
 	void shredprocessenc(KURL::List filesToShred);
 

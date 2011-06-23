@@ -20,6 +20,7 @@
 class SensorSensor : public Sensor
 {
     Q_OBJECT
+  TQ_OBJECT
 public:
     SensorSensor(int interval, char tempUnit);
 

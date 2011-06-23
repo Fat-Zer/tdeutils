@@ -30,18 +30,18 @@
 #include "listview.h"
 
 // quick'n'dirty hack to have the occurrence column sorted correctly
-class CStatisticListViewItem : public QListViewItem
+class CStatisticListViewItem : public TQListViewItem
 {
   public:
-    CStatisticListViewItem( TQListView * parent, TQListViewItem * after,
+    CStatisticListViewItem( TQListView * tqparent, TQListViewItem * after,
                             TQString label1, TQString label2, TQString label3, TQString label4,
                             TQString label5, TQString label6, TQString label7, int i, int o)
-    : TQListViewItem( parent, after, label1, label2, label3, label4, label5, label6, label7),
+    : TQListViewItem( tqparent, after, label1, label2, label3, label4, label5, label6, label7),
       item( i ),
       occurrence( o )
     {}
 
-    virtual int compare( TQListViewItem *i, int col, bool ascending/*Qt doc says: ignore this one*/ ) const
+    virtual int compare( TQListViewItem *i, int col, bool ascending/*TQt doc says: ignore this one*/ ) const
     {
       // occurrence column (or the percent one)?
       if( col == 5 || col == 6 )
@@ -69,12 +69,12 @@ class CStatisticListViewItem : public QListViewItem
 
 
 
-CFileInfoDialog::CFileInfoDialog( TQWidget *parent,const char *name,bool modal)
+CFileInfoDialog::CFileInfoDialog( TQWidget *tqparent,const char *name,bool modal)
   :KDialogBase( Plain, i18n("Statistics"), Help|User1|Cancel, User1,
-		parent, name, modal, true, i18n("&Update") ),
+		tqparent, name, modal, true, i18n("&Update") ),
    mBusy(false), mDirty(false)
 {
-  setHelp( "khexedit/khexedit.html", TQString::null );
+  setHelp( "khexedit/khexedit.html", TQString() );
 
   TQString text;
   TQVBoxLayout *topLayout = new TQVBoxLayout( plainPage(), 0, spacingHint() );
@@ -239,13 +239,13 @@ void CFileInfoDialog::setStatistics( SStatisticControl &sc )
     o.sprintf("%03o", i );
     b.sprintf("%s", printBin(i) );
 
-    n = TQString("%1").arg( sc.occurrence[i], pre );
+    n = TQString("%1").tqarg( sc.occurrence[i], pre );
     if( sc.documentSize == 0 )
       p = "0.00";
     else
     {
       double val = 100.0*((double)sc.occurrence[i]/(double)sc.documentSize);
-      p = TQString("%1").arg( val, 6, 'f', 2 );
+      p = TQString("%1").tqarg( val, 6, 'f', 2 );
     }
 
     const TQChar _i((char)i);
@@ -321,7 +321,7 @@ void CFileInfoDialog::showEvent( TQShowEvent *e )
 
 void CFileInfoDialog::timerEvent( TQTimerEvent * )
 {
-  killTimers();
+  TQT_TQOBJECT(this)->killTimers();
   slotUser1();
 }
 

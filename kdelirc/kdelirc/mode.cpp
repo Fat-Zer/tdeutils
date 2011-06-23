@@ -16,7 +16,7 @@
 #include "modes.h"
 #include "mode.h"
 
-Mode::Mode() : theName(TQString::null)
+Mode::Mode() : theName(TQString())
 {
 }
 
@@ -37,7 +37,7 @@ const Mode &Mode::loadFromConfig(KConfig &theConfig, int index)
 	theName = theConfig.readEntry(Prefix + "Name");
 	theRemote = theConfig.readEntry(Prefix + "Remote");
 	theIconFile = theConfig.readEntry(Prefix + "IconFile");
-	if(theIconFile.isEmpty()) theIconFile = TQString::null;
+	if(theIconFile.isEmpty()) theIconFile = TQString();
 	return *this;
 }
 

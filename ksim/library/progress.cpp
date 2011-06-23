@@ -40,17 +40,17 @@ class KSim::Progress::Private
 };
 
 KSim::Progress::Progress(int maxValue,
-   TQWidget *parent, const char *name,
-   WFlags fl) : KSim::Label(parent, name, fl)
+   TQWidget *tqparent, const char *name,
+   WFlags fl) : KSim::Label(tqparent, name, fl)
 {
   init(maxValue);
   configureObject();
 }
 
 KSim::Progress::Progress(int maxValue,
-   int type, const TQString &label, TQWidget *parent,
+   int type, const TQString &label, TQWidget *tqparent,
    const char *name, WFlags fl)
-   : KSim::Label(type, label, parent, name, fl)
+   : KSim::Label(type, label, tqparent, name, fl)
 {
   init(maxValue);
   configureObject();
@@ -58,17 +58,17 @@ KSim::Progress::Progress(int maxValue,
 
 KSim::Progress::Progress(int maxValue,
    int type, const TQString &label, int value,
-   TQWidget *parent, const char *name, WFlags fl)
-   : KSim::Label(type, label, parent, name, fl)
+   TQWidget *tqparent, const char *name, WFlags fl)
+   : KSim::Label(type, label, tqparent, name, fl)
 {
   init(maxValue, value);
   configureObject();
 }
 
 KSim::Progress::Progress(int maxValue,
-   int type, TQWidget *parent,
+   int type, TQWidget *tqparent,
    const char *name, WFlags fl)
-   : KSim::Label(type, parent, name, fl)
+   : KSim::Label(type, tqparent, name, fl)
 {
   init(maxValue);
   configureObject();
@@ -76,8 +76,8 @@ KSim::Progress::Progress(int maxValue,
 
 KSim::Progress::Progress(int maxValue, int type,
    ProgressType progressType,
-   TQWidget *parent, const char *name, WFlags fl)
-   : KSim::Label(type, parent, name, fl)
+   TQWidget *tqparent, const char *name, WFlags fl)
+   : KSim::Label(type, tqparent, name, fl)
 {
   init(maxValue, 0, progressType);
   configureObject();
@@ -108,7 +108,7 @@ const TQRect &KSim::Progress::rectOrigin() const
   return d->rectOrigin;
 }
 
-void KSim::Progress::configureObject(bool repaintWidget)
+void KSim::Progress::configureObject(bool tqrepaintWidget)
 {
   KSim::Label::configureObject(false);
 
@@ -120,13 +120,13 @@ void KSim::Progress::configureObject(bool repaintWidget)
     setMeterPixmap(themeLoader().current().splitPixmap(KSim::Theme::KrellMeter));
   }
 
-  if (repaintWidget)
+  if (tqrepaintWidget)
     update();
 }
 
-TQSize KSim::Progress::sizeHint() const
+TQSize KSim::Progress::tqsizeHint() const
 {
-  TQSize hint(Label::sizeHint());
+  TQSize hint(Label::tqsizeHint());
 
   if (d->meterPixmap.height() > hint.height())
     hint.setHeight(d->meterPixmap.height());
@@ -186,9 +186,9 @@ void KSim::Progress::setOrigin(const TQRect &origin)
 
 void KSim::Progress::setMeterPixmap(const TQPixmap &pixmap)
 {
-  TQSize oldSize = sizeHint();
+  TQSize oldSize = tqsizeHint();
   d->meterPixmap = pixmap;
-  relayoutLabel(oldSize);
+  retqlayoutLabel(oldSize);
 }
 
 int KSim::Progress::xLocation() const

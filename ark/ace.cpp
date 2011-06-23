@@ -102,7 +102,7 @@ void AceArch::open()
 	if ( !kp->start( KProcess::NotifyOnExit, KProcess::AllOutput ) )
 	{
 		KMessageBox::error( 0, i18n( "Could not start a subprocess." ) );
-		emit sigOpen( this, false, TQString::null, 0 );
+		emit sigOpen( this, false, TQString(), 0 );
 	}
 }
 
@@ -174,7 +174,7 @@ void AceArch::unarchFileInternal( )
 
 void AceArch::catchMeIfYouCan( KProcess*, char *buffer, int buflen )
 {
-	TQString myBuf = TQString::fromLatin1( buffer, buflen );
+	TQString myBuf = TQString::tqfromLatin1( buffer, buflen );
 	kdDebug(1601) << "	Wololo!:	" << myBuf << endl;
 }
 

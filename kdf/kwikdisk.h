@@ -42,6 +42,7 @@
 class KwikDisk : public KSystemTray
 {
    Q_OBJECT
+  TQ_OBJECT
    public:
       KwikDisk();
 

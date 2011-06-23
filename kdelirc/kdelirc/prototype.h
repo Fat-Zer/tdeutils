@@ -30,7 +30,7 @@ class Prototype
 
 public:
 	unsigned count() const{ return theTypes.count(); }
-	const QPair<TQString, TQString> operator[](int i) const { return qMakePair(theTypes[i], theNames[i]); }
+	const TQPair<TQString, TQString> operator[](int i) const { return tqMakePair(theTypes[i], theNames[i]); }
 	const TQString &name(int i) const { return theNames[i]; }
 	const TQString &type(int i) const { return theTypes[i]; }
 	const TQString &returnType() const { return theReturn; }

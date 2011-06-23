@@ -41,12 +41,12 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 extern "C"
 {
-    KDE_EXPORT KPanelApplet* init(TQWidget *parent, const TQString& configFile)
+    KDE_EXPORT KPanelApplet* init(TQWidget *tqparent, const TQString& configFile)
     {
         KGlobal::locale()->insertCatalogue("kcharselectapplet");
         return new CharSelectApplet(configFile, KPanelApplet::Normal,
                                     KPanelApplet::About | KPanelApplet::Preferences,
-                                    parent, "kcharselectapplet");
+                                    tqparent, "kcharselectapplet");
     }
 }
 
@@ -55,8 +55,8 @@ static int cell_height = 16;
 static int char_count = 0;
 
 CharSelectApplet::CharSelectApplet(const TQString& configFile, Type type, int actions,
-                               TQWidget *parent, const char *name)
-    : KPanelApplet(configFile, type, actions, parent, name),
+                               TQWidget *tqparent, const char *name)
+    : KPanelApplet(configFile, type, actions, tqparent, name),
       _aboutData(0), _configDialog(0)
 {
     // read configuration
@@ -64,9 +64,9 @@ CharSelectApplet::CharSelectApplet(const TQString& configFile, Type type, int ac
     c->setGroup("General");
     cell_width = c->readNumEntry("CellWidth", cell_width);
     cell_height = c->readNumEntry("CellHeight", cell_height);
-    TQString characters = c->readEntry("Characters", "ÄäÖöÜüß©®§");
+    TQString characters = c->readEntry("Characters", "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß©ï¿½ï¿½");
 
-    // setup layout
+    // setup tqlayout
     TQHBoxLayout *_layout = new TQHBoxLayout(this);
     _layout->setAutoAdd(true);
 
@@ -151,13 +151,13 @@ void CharSelectApplet::about()
     dialog.exec();
 }
 
-CharTable::CharTable(TQWidget* parent, const char* name)
-    : TQFrame(parent, name), _rows(2), _cols(2),
+CharTable::CharTable(TQWidget* tqparent, const char* name)
+    : TQFrame(tqparent, name), _rows(2), _cols(2),
       _activeRow(-1), _activeCol(-1),
       _cWidth(cell_width), _cHeight(cell_height)
 {
     setFrameStyle(TQFrame::StyledPanel | TQFrame::Sunken);
-    setFocusPolicy(TQWidget::NoFocus);
+    setFocusPolicy(TQ_NoFocus);
     setBackgroundMode(TQWidget::NoBackground);
 }
 
@@ -228,7 +228,7 @@ void CharTable::paintEvent(TQPaintEvent* e)
     TQFrame::paintEvent(e);
 }
 
-void CharTable::repaintCell(int r, int c)
+void CharTable::tqrepaintCell(int r, int c)
 {
     TQPainter p(this);
 
@@ -251,16 +251,16 @@ void CharTable::paintCell(TQPainter* p, int row, int col)
 
     // draw background
     if (active) {
-	p->setBrush(TQBrush(colorGroup().highlight()));
+	p->setBrush(TQBrush(tqcolorGroup().highlight()));
 	p->setPen(NoPen);
 	p->drawRect(0, 0, w, h);
-	p->setPen(colorGroup().highlightedText());
+	p->setPen(tqcolorGroup().highlightedText());
     }
     else {
-	p->setBrush(TQBrush(colorGroup().base()));
+	p->setBrush(TQBrush(tqcolorGroup().base()));
 	p->setPen(NoPen);
 	p->drawRect(0, 0, w, h);
-	p->setPen(colorGroup().text());
+	p->setPen(tqcolorGroup().text());
     }
 
     // set font
@@ -285,7 +285,7 @@ void CharTable::mousePressEvent(TQMouseEvent *e)
 
 void CharTable::mouseMoveEvent(TQMouseEvent *e)
 {
-    if(!(e->state() & (LeftButton | RightButton | MidButton))) return;
+    if(!(e->state() & (Qt::LeftButton | Qt::RightButton | Qt::MidButton))) return;
 
     int row = findRow(e->y());
     if (row == -1) return;
@@ -307,10 +307,10 @@ void CharTable::selectCell(int row, int col)
     _activeRow = row;
     _activeCol = col;
 
-    repaintCell(oldRow, oldCol);
-    repaintCell(_activeRow, _activeCol);
+    tqrepaintCell(oldRow, oldCol);
+    tqrepaintCell(_activeRow, _activeCol);
 
-    QClipboard *cb = TQApplication::clipboard();
+    TQClipboard *cb = TQApplication::tqclipboard();
     TQObject::disconnect( cb, TQT_SIGNAL(dataChanged()), this, TQT_SLOT(clearCell()) );
     TQString text = TQString(_map[col + row * _cols]);
     bool oldMode = cb->selectionModeEnabled();
@@ -330,14 +330,14 @@ void CharTable::clearCell()
     _activeRow = -1;
     _activeCol = -1;
 
-    repaintCell(oldRow, oldCol);
+    tqrepaintCell(oldRow, oldCol);
     
-    TQObject::disconnect( TQApplication::clipboard(), TQT_SIGNAL(dataChanged()), this, TQT_SLOT(clearCell()) );
+    TQObject::disconnect( TQApplication::tqclipboard(), TQT_SIGNAL(dataChanged()), this, TQT_SLOT(clearCell()) );
 }
 
 
-ConfigDialog::ConfigDialog(TQWidget* parent, const char* name)
-    : KDialogBase(parent, name, true, i18n("Configuration"),
+ConfigDialog::ConfigDialog(TQWidget* tqparent, const char* name)
+    : KDialogBase(tqparent, name, true, i18n("Configuration"),
                   Ok | Cancel, Ok, true)
 {
     TQVBox *page = makeVBoxMainWidget();

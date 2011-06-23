@@ -41,7 +41,7 @@ struct MonitorConfig
 
     bool isNull() const { return name.isEmpty() || host.isNull(); }
 
-    TQWidget *createMonitorWidget( TQWidget *parent, const char *name = 0 );
+    TQWidget *createMonitorWidget( TQWidget *tqparent, const char *name = 0 );
 
     HostConfig host;
     TQString name;

@@ -1,6 +1,6 @@
 <!DOCTYPE UI><UI version="3.2" stdsetdef="1">
 <class>EditActionBase</class>
-<widget class="QDialog">
+<widget class="TQDialog">
     <property name="name">
         <cstring>EditActionBase</cstring>
     </property>
@@ -22,11 +22,11 @@
         <property name="name">
             <cstring>unnamed</cstring>
         </property>
-        <widget class="QTabWidget">
+        <widget class="TQTabWidget">
             <property name="name">
                 <cstring>tabWidget3</cstring>
             </property>
-            <widget class="QWidget">
+            <widget class="TQWidget">
                 <property name="name">
                     <cstring>tab</cstring>
                 </property>
@@ -37,7 +37,7 @@
                     <property name="name">
                         <cstring>unnamed</cstring>
                     </property>
-                    <widget class="QButtonGroup">
+                    <widget class="TQButtonGroup">
                         <property name="name">
                             <cstring>buttonGroup3</cstring>
                         </property>
@@ -54,15 +54,15 @@
                             <property name="margin">
                                 <number>0</number>
                             </property>
-                            <widget class="QLayoutWidget">
+                            <widget class="TQLayoutWidget">
                                 <property name="name">
-                                    <cstring>layout40</cstring>
+                                    <cstring>tqlayout40</cstring>
                                 </property>
                                 <grid>
                                     <property name="name">
                                         <cstring>unnamed</cstring>
                                     </property>
-                                    <widget class="QComboBox" row="2" column="3">
+                                    <widget class="TQComboBox" row="2" column="3">
                                         <property name="name">
                                             <cstring>theDCOPApplications</cstring>
                                         </property>
@@ -78,7 +78,7 @@
                                             </sizepolicy>
                                         </property>
                                     </widget>
-                                    <widget class="QLabel" row="3" column="1" rowspan="1" colspan="2">
+                                    <widget class="TQLabel" row="3" column="1" rowspan="1" colspan="2">
                                         <property name="name">
                                             <cstring>textLabel4_3</cstring>
                                         </property>
@@ -92,7 +92,7 @@
                                             <cstring>theDCOPObjects</cstring>
                                         </property>
                                     </widget>
-                                    <widget class="QButtonGroup" row="1" column="1" rowspan="1" colspan="3">
+                                    <widget class="TQButtonGroup" row="1" column="1" rowspan="1" colspan="3">
                                         <property name="name">
                                             <cstring>buttonGroup5</cstring>
                                         </property>
@@ -109,7 +109,7 @@
                                             <property name="margin">
                                                 <number>0</number>
                                             </property>
-                                            <widget class="QRadioButton" row="0" column="0">
+                                            <widget class="TQRadioButton" row="0" column="0">
                                                 <property name="name">
                                                     <cstring>theNotJustStart</cstring>
                                                 </property>
@@ -128,7 +128,7 @@
                                                     <bool>true</bool>
                                                 </property>
                                             </widget>
-                                            <widget class="QComboBox" row="0" column="1">
+                                            <widget class="TQComboBox" row="0" column="1">
                                                 <property name="name">
                                                     <cstring>theFunctions</cstring>
                                                 </property>
@@ -141,7 +141,7 @@
                                                     </sizepolicy>
                                                 </property>
                                             </widget>
-                                            <widget class="QRadioButton" row="1" column="0" rowspan="1" colspan="3">
+                                            <widget class="TQRadioButton" row="1" column="0" rowspan="1" colspan="3">
                                                 <property name="name">
                                                     <cstring>theJustStart</cstring>
                                                 </property>
@@ -151,7 +151,7 @@
                                             </widget>
                                         </grid>
                                     </widget>
-                                    <widget class="QLabel" row="4" column="1" rowspan="1" colspan="2">
+                                    <widget class="TQLabel" row="4" column="1" rowspan="1" colspan="2">
                                         <property name="name">
                                             <cstring>textLabel4_2</cstring>
                                         </property>
@@ -165,7 +165,7 @@
                                             <cstring>theDCOPFunctions</cstring>
                                         </property>
                                     </widget>
-                                    <widget class="QLabel" row="0" column="1">
+                                    <widget class="TQLabel" row="0" column="1">
                                         <property name="name">
                                             <cstring>textLabel5</cstring>
                                         </property>
@@ -176,7 +176,7 @@
                                             <cstring>theApplications</cstring>
                                         </property>
                                     </widget>
-                                    <widget class="QComboBox" row="0" column="2" rowspan="1" colspan="2">
+                                    <widget class="TQComboBox" row="0" column="2" rowspan="1" colspan="2">
                                         <property name="name">
                                             <cstring>theApplications</cstring>
                                         </property>
@@ -189,7 +189,7 @@
                                             </sizepolicy>
                                         </property>
                                     </widget>
-                                    <widget class="QComboBox" row="4" column="3">
+                                    <widget class="TQComboBox" row="4" column="3">
                                         <property name="name">
                                             <cstring>theDCOPFunctions</cstring>
                                         </property>
@@ -197,7 +197,7 @@
                                             <bool>false</bool>
                                         </property>
                                     </widget>
-                                    <widget class="QRadioButton" row="0" column="0">
+                                    <widget class="TQRadioButton" row="0" column="0">
                                         <property name="name">
                                             <cstring>theUseProfile</cstring>
                                         </property>
@@ -208,7 +208,7 @@
                                             <bool>true</bool>
                                         </property>
                                     </widget>
-                                    <widget class="QLabel" row="2" column="1" rowspan="1" colspan="2">
+                                    <widget class="TQLabel" row="2" column="1" rowspan="1" colspan="2">
                                         <property name="name">
                                             <cstring>textLabel5_2</cstring>
                                         </property>
@@ -222,7 +222,7 @@
                                             <cstring>theDCOPApplications</cstring>
                                         </property>
                                     </widget>
-                                    <widget class="QRadioButton" row="2" column="0">
+                                    <widget class="TQRadioButton" row="2" column="0">
                                         <property name="name">
                                             <cstring>theUseDCOP</cstring>
                                         </property>
@@ -230,7 +230,7 @@
                                             <string>Use &amp;DCOP:</string>
                                         </property>
                                     </widget>
-                                    <widget class="QComboBox" row="3" column="3">
+                                    <widget class="TQComboBox" row="3" column="3">
                                         <property name="name">
                                             <cstring>theDCOPObjects</cstring>
                                         </property>
@@ -240,15 +240,15 @@
                                     </widget>
                                 </grid>
                             </widget>
-                            <widget class="QLayoutWidget">
+                            <widget class="TQLayoutWidget">
                                 <property name="name">
-                                    <cstring>layout36</cstring>
+                                    <cstring>tqlayout36</cstring>
                                 </property>
                                 <grid>
                                     <property name="name">
                                         <cstring>unnamed</cstring>
                                     </property>
-                                    <widget class="QWidgetStack" row="0" column="2" rowspan="2" colspan="1">
+                                    <widget class="TQWidgetStack" row="0" column="2" rowspan="2" colspan="1">
                                         <property name="name">
                                             <cstring>theValue</cstring>
                                         </property>
@@ -263,7 +263,7 @@
                                                 <verstretch>0</verstretch>
                                             </sizepolicy>
                                         </property>
-                                        <widget class="QWidget">
+                                        <widget class="TQWidget">
                                             <property name="name">
                                                 <cstring>page</cstring>
                                             </property>
@@ -295,7 +295,7 @@
                                                     <property name="sizeType">
                                                         <enum>Expanding</enum>
                                                     </property>
-                                                    <property name="sizeHint">
+                                                    <property name="tqsizeHint">
                                                         <size>
                                                             <width>20</width>
                                                             <height>91</height>
@@ -304,7 +304,7 @@
                                                 </spacer>
                                             </vbox>
                                         </widget>
-                                        <widget class="QWidget">
+                                        <widget class="TQWidget">
                                             <property name="name">
                                                 <cstring>page</cstring>
                                             </property>
@@ -318,7 +318,7 @@
                                                 <property name="margin">
                                                     <number>0</number>
                                                 </property>
-                                                <widget class="QCheckBox">
+                                                <widget class="TQCheckBox">
                                                     <property name="name">
                                                         <cstring>theValueCheckBox</cstring>
                                                     </property>
@@ -339,7 +339,7 @@
                                                     <property name="sizeType">
                                                         <enum>Expanding</enum>
                                                     </property>
-                                                    <property name="sizeHint">
+                                                    <property name="tqsizeHint">
                                                         <size>
                                                             <width>20</width>
                                                             <height>101</height>
@@ -348,7 +348,7 @@
                                                 </spacer>
                                             </vbox>
                                         </widget>
-                                        <widget class="QWidget">
+                                        <widget class="TQWidget">
                                             <property name="name">
                                                 <cstring>page</cstring>
                                             </property>
@@ -377,7 +377,7 @@
                                                     <property name="sizeType">
                                                         <enum>Expanding</enum>
                                                     </property>
-                                                    <property name="sizeHint">
+                                                    <property name="tqsizeHint">
                                                         <size>
                                                             <width>21</width>
                                                             <height>101</height>
@@ -386,7 +386,7 @@
                                                 </spacer>
                                             </vbox>
                                         </widget>
-                                        <widget class="QWidget">
+                                        <widget class="TQWidget">
                                             <property name="name">
                                                 <cstring>page</cstring>
                                             </property>
@@ -415,7 +415,7 @@
                                                     <property name="sizeType">
                                                         <enum>Expanding</enum>
                                                     </property>
-                                                    <property name="sizeHint">
+                                                    <property name="tqsizeHint">
                                                         <size>
                                                             <width>20</width>
                                                             <height>101</height>
@@ -424,7 +424,7 @@
                                                 </spacer>
                                             </vbox>
                                         </widget>
-                                        <widget class="QWidget">
+                                        <widget class="TQWidget">
                                             <property name="name">
                                                 <cstring>page</cstring>
                                             </property>
@@ -467,14 +467,14 @@
                                         <property name="sizeType">
                                             <enum>Expanding</enum>
                                         </property>
-                                        <property name="sizeHint">
+                                        <property name="tqsizeHint">
                                             <size>
                                                 <width>21</width>
                                                 <height>111</height>
                                             </size>
                                         </property>
                                     </spacer>
-                                    <widget class="QComboBox" row="0" column="1">
+                                    <widget class="TQComboBox" row="0" column="1">
                                         <property name="name">
                                             <cstring>theArguments</cstring>
                                         </property>
@@ -486,7 +486,7 @@
                                                 <verstretch>0</verstretch>
                                             </sizepolicy>
                                         </property>
-                                        <property name="minimumSize">
+                                        <property name="tqminimumSize">
                                             <size>
                                                 <width>106</width>
                                                 <height>0</height>
@@ -503,14 +503,14 @@
                                         <property name="sizeType">
                                             <enum>Expanding</enum>
                                         </property>
-                                        <property name="sizeHint">
+                                        <property name="tqsizeHint">
                                             <size>
                                                 <width>20</width>
                                                 <height>101</height>
                                             </size>
                                         </property>
                                     </spacer>
-                                    <widget class="QLabel" row="0" column="0">
+                                    <widget class="TQLabel" row="0" column="0">
                                         <property name="name">
                                             <cstring>textLabel8</cstring>
                                         </property>
@@ -533,22 +533,22 @@
                                 <property name="sizeType">
                                     <enum>Expanding</enum>
                                 </property>
-                                <property name="sizeHint">
+                                <property name="tqsizeHint">
                                     <size>
                                         <width>481</width>
                                         <height>20</height>
                                     </size>
                                 </property>
                             </spacer>
-                            <widget class="QLayoutWidget">
+                            <widget class="TQLayoutWidget">
                                 <property name="name">
-                                    <cstring>layout17</cstring>
+                                    <cstring>tqlayout17</cstring>
                                 </property>
                                 <hbox>
                                     <property name="name">
                                         <cstring>unnamed</cstring>
                                     </property>
-                                    <widget class="QRadioButton">
+                                    <widget class="TQRadioButton">
                                         <property name="name">
                                             <cstring>theChangeMode</cstring>
                                         </property>
@@ -556,7 +556,7 @@
                                             <string>Change &amp;mode to:</string>
                                         </property>
                                     </widget>
-                                    <widget class="QComboBox">
+                                    <widget class="TQComboBox">
                                         <property name="name">
                                             <cstring>theModes</cstring>
                                         </property>
@@ -584,7 +584,7 @@
                                 <property name="sizeType">
                                     <enum>Expanding</enum>
                                 </property>
-                                <property name="sizeHint">
+                                <property name="tqsizeHint">
                                     <size>
                                         <width>21</width>
                                         <height>30</height>
@@ -595,7 +595,7 @@
                     </widget>
                 </vbox>
             </widget>
-            <widget class="QWidget">
+            <widget class="TQWidget">
                 <property name="name">
                     <cstring>tab</cstring>
                 </property>
@@ -606,7 +606,7 @@
                     <property name="name">
                         <cstring>unnamed</cstring>
                     </property>
-                    <widget class="QLabel">
+                    <widget class="TQLabel">
                         <property name="name">
                             <cstring>textLabel3</cstring>
                         </property>
@@ -628,7 +628,7 @@
                             <enum>Horizontal</enum>
                         </property>
                     </widget>
-                    <widget class="QCheckBox">
+                    <widget class="TQCheckBox">
                         <property name="name">
                             <cstring>theRepeat</cstring>
                         </property>
@@ -636,7 +636,7 @@
                             <string>&amp;Action repeats if button is held down</string>
                         </property>
                     </widget>
-                    <widget class="QCheckBox">
+                    <widget class="TQCheckBox">
                         <property name="name">
                             <cstring>theAutoStart</cstring>
                         </property>
@@ -654,14 +654,14 @@
                         <property name="sizeType">
                             <enum>Expanding</enum>
                         </property>
-                        <property name="sizeHint">
+                        <property name="tqsizeHint">
                             <size>
                                 <width>491</width>
                                 <height>20</height>
                             </size>
                         </property>
                     </spacer>
-                    <widget class="QLabel">
+                    <widget class="TQLabel">
                         <property name="name">
                             <cstring>textLabel1_2</cstring>
                         </property>
@@ -683,7 +683,7 @@
                             <enum>Horizontal</enum>
                         </property>
                     </widget>
-                    <widget class="QCheckBox">
+                    <widget class="TQCheckBox">
                         <property name="name">
                             <cstring>theDoBefore</cstring>
                         </property>
@@ -697,7 +697,7 @@
                             <bool>true</bool>
                         </property>
                     </widget>
-                    <widget class="QCheckBox">
+                    <widget class="TQCheckBox">
                         <property name="name">
                             <cstring>theDoAfter</cstring>
                         </property>
@@ -718,14 +718,14 @@
                         <property name="sizeType">
                             <enum>Expanding</enum>
                         </property>
-                        <property name="sizeHint">
+                        <property name="tqsizeHint">
                             <size>
                                 <width>670</width>
                                 <height>20</height>
                             </size>
                         </property>
                     </spacer>
-                    <widget class="QLabel">
+                    <widget class="TQLabel">
                         <property name="name">
                             <cstring>theIMTop</cstring>
                         </property>
@@ -758,7 +758,7 @@
                             <enum>Horizontal</enum>
                         </property>
                     </widget>
-                    <widget class="QLabel">
+                    <widget class="TQLabel">
                         <property name="name">
                             <cstring>theIMLabel</cstring>
                         </property>
@@ -768,11 +768,11 @@
                         <property name="text">
                             <string>This application may have multiple instances. In the case of having multiple instances at once when this action should be executed, choose a course of action:</string>
                         </property>
-                        <property name="alignment">
+                        <property name="tqalignment">
                             <set>WordBreak|AlignVCenter</set>
                         </property>
                     </widget>
-                    <widget class="QButtonGroup">
+                    <widget class="TQButtonGroup">
                         <property name="name">
                             <cstring>theIMGroup</cstring>
                         </property>
@@ -795,7 +795,7 @@
                             <property name="margin">
                                 <number>0</number>
                             </property>
-                            <widget class="QRadioButton">
+                            <widget class="TQRadioButton">
                                 <property name="name">
                                     <cstring>theDontSend</cstring>
                                 </property>
@@ -809,7 +809,7 @@
                                     <bool>true</bool>
                                 </property>
                             </widget>
-                            <widget class="QRadioButton">
+                            <widget class="TQRadioButton">
                                 <property name="name">
                                     <cstring>theSendToTop</cstring>
                                 </property>
@@ -820,7 +820,7 @@
                                     <string>Send the action to the instance hi&amp;ghest in window stacking order</string>
                                 </property>
                             </widget>
-                            <widget class="QRadioButton">
+                            <widget class="TQRadioButton">
                                 <property name="name">
                                     <cstring>theSendToBottom</cstring>
                                 </property>
@@ -831,7 +831,7 @@
                                     <string>Send the action to the instance &amp;lowest in window stacking order</string>
                                 </property>
                             </widget>
-                            <widget class="QRadioButton">
+                            <widget class="TQRadioButton">
                                 <property name="name">
                                     <cstring>theSendToAll</cstring>
                                 </property>
@@ -854,7 +854,7 @@
                         <property name="sizeType">
                             <enum>Expanding</enum>
                         </property>
-                        <property name="sizeHint">
+                        <property name="tqsizeHint">
                             <size>
                                 <width>20</width>
                                 <height>150</height>
@@ -864,7 +864,7 @@
                 </vbox>
             </widget>
         </widget>
-        <widget class="QLayoutWidget">
+        <widget class="TQLayoutWidget">
             <property name="name">
                 <cstring>Layout1</cstring>
             </property>
@@ -878,7 +878,7 @@
                 <property name="spacing">
                     <number>6</number>
                 </property>
-                <widget class="QPushButton">
+                <widget class="TQPushButton">
                     <property name="name">
                         <cstring>buttonHelp</cstring>
                     </property>
@@ -902,14 +902,14 @@
                     <property name="sizeType">
                         <enum>Expanding</enum>
                     </property>
-                    <property name="sizeHint">
+                    <property name="tqsizeHint">
                         <size>
                             <width>20</width>
                             <height>20</height>
                         </size>
                     </property>
                 </spacer>
-                <widget class="QPushButton">
+                <widget class="TQPushButton">
                     <property name="name">
                         <cstring>buttonOk</cstring>
                     </property>
@@ -923,7 +923,7 @@
                         <bool>true</bool>
                     </property>
                 </widget>
-                <widget class="QPushButton">
+                <widget class="TQPushButton">
                     <property name="name">
                         <cstring>buttonCancel</cstring>
                     </property>
@@ -1263,7 +1263,7 @@
     <tabstop>buttonOk</tabstop>
     <tabstop>buttonCancel</tabstop>
 </tabstops>
-<slots>
+<Q_SLOTS>
     <slot>updateFunctions()</slot>
     <slot>updateApplications()</slot>
     <slot>updateDCOPApplications()</slot>
@@ -1273,8 +1273,8 @@
     <slot>updateArgument(int)</slot>
     <slot>slotParameterChanged()</slot>
     <slot>updateOptions()</slot>
-</slots>
-<layoutdefaults spacing="6" margin="11"/>
+</Q_SLOTS>
+<tqlayoutdefaults spacing="6" margin="11"/>
 <includehints>
     <includehint>klineedit.h</includehint>
     <includehint>knuminput.h</includehint>

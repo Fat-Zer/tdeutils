@@ -4,7 +4,7 @@
  * Copyright (c) 1999 Paul Campbell <paul@taniwha.com>
  * Copyright (c) 2002 Marc Mutz <mutz@kde.org>
  *
- * Requires the Qt widget libraries, available at no cost at
+ * Requires the TQt widget libraries, available at no cost at
  * http://www.troll.no/
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -45,8 +45,8 @@
 #include <tqtooltip.h>
 extern void wake_laptop_daemon();
 
-PowerConfig::PowerConfig (TQWidget * parent, const char *name)
-  : KCModule(parent, name),
+PowerConfig::PowerConfig (TQWidget * tqparent, const char *name)
+  : KCModule(tqparent, name),
     nopowerBox(0),
     nopowerStandby(0),
     nopowerSuspend(0),
@@ -122,7 +122,7 @@ PowerConfig::PowerConfig (TQWidget * parent, const char *name)
 
       nopowerBox = new TQVButtonGroup(i18n("Not Powered"), this);
       TQToolTip::add( nopowerBox, i18n( "Options in this box apply when the laptop is unplugged from the wall and has been idle for a while" ) );
-      nopowerBox->layout()->setSpacing( KDialog::spacingHint() );
+      nopowerBox->tqlayout()->setSpacing( KDialog::spacingHint() );
       hlay->addWidget( nopowerBox );
 
       if (can_standby) {
@@ -214,7 +214,7 @@ PowerConfig::PowerConfig (TQWidget * parent, const char *name)
 
 
       powerBox = new TQVButtonGroup(i18n("Powered"), this);
-      powerBox->layout()->setSpacing( KDialog::spacingHint() );
+      powerBox->tqlayout()->setSpacing( KDialog::spacingHint() );
       TQToolTip::add( powerBox, i18n( "Options in this box apply when the laptop is plugged into the wall and has been idle for a while" ) );
       hlay->addWidget( powerBox );
 
@@ -305,19 +305,19 @@ PowerConfig::PowerConfig (TQWidget * parent, const char *name)
 					"it works as a sort of extreme screen saver. You can configure different "
 					"timeouts and types of behavior depending on whether or not your laptop is "
 					"plugged in to the mains supply."), this );
-      explain->setAlignment( Qt::WordBreak );
+      explain->tqsetAlignment( TQt::WordBreak );
       top_layout->addWidget(explain);
 
       if (can_standby) {
 	TQLabel* explain3 = new TQLabel(i18n("Different laptops may respond to 'standby' in different ways - in many "
 					"it is only a temporary state and may not be useful for you."), this);
-	explain3->setAlignment( Qt::WordBreak );
-	top_layout->addWidget(explain3, 0, Qt::AlignLeft);
+	explain3->tqsetAlignment( TQt::WordBreak );
+	top_layout->addWidget(explain3, 0, TQt::AlignLeft);
       }
 
       top_layout->addStretch(1);
 
-      top_layout->addWidget( new TQLabel( i18n("Version: %1").arg(LAPTOP_VERSION), this ), 0, Qt::AlignRight );
+      top_layout->addWidget( new TQLabel( i18n("Version: %1").tqarg(LAPTOP_VERSION), this ), 0, TQt::AlignRight );
     }
   }
 

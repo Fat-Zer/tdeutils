@@ -34,7 +34,7 @@
 
 #include "format.h"
 
-static TQString extPath = TQString::null;
+static TQString extPath = TQString();
 
 /* static */ TQString findExecutable(const TQString &e)
 {
@@ -51,8 +51,8 @@ static TQString extPath = TQString::null;
 
 
 
-KFAction::KFAction(TQObject *parent) :
-	TQObject(parent)
+KFAction::KFAction(TQObject *tqparent) :
+	TQObject(tqparent)
 {
 	DEBUGSETUP;
 }
@@ -79,8 +79,8 @@ public:
 	TQPtrList<KFAction> list;
 } ;
 
-KFActionQueue::KFActionQueue(TQObject *parent) :
-	KFAction(parent),
+KFActionQueue::KFActionQueue(TQObject *tqparent) :
+	KFAction(tqparent),
 	d(new KFActionQueue_p)
 {
 	DEBUGSETUP;
@@ -262,11 +262,11 @@ bool FloppyAction::configureDevice(int drive,int density)
 	const char *devicename = 0L;
 
 	deviceInfo=0L;
-	deviceName = TQString::null;
+	deviceName = TQString();
 
 	if ((drive<0) || (drive>1))
 	{
-		emit status(i18n("Unexpected drive number %1.").arg(drive),-1);
+		emit status(i18n("Unexpected drive number %1.").tqarg(drive),-1);
 		return false;
 	}
 
@@ -278,7 +278,7 @@ bool FloppyAction::configureDevice(int drive,int density)
         }
 	if (!deviceinfo)
 	{
-		emit status(i18n("Unexpected density number %1.").arg(density),-1);
+		emit status(i18n("Unexpected density number %1.").tqarg(density),-1);
 		return false;
 	}
 
@@ -294,7 +294,7 @@ bool FloppyAction::configureDevice(int drive,int density)
 	if (!deviceinfo || !deviceinfo->devices)
 	{
 		emit status(i18n("Cannot find a device for drive %1 and density %2.")
-			.arg(drive).arg(density),-1);
+			.tqarg(drive).tqarg(density),-1);
 		return false;
 	}
 
@@ -313,7 +313,7 @@ bool FloppyAction::configureDevice(int drive,int density)
 	{
 		const TQString str = i18n(
 			"Cannot access %1\nMake sure that the device exists and that "
-			"you have write permission to it.").arg(deviceinfo->devices[0]);
+			"you have write permission to it.").tqarg(deviceinfo->devices[0]);
 		emit status(str,-1);
 		return false;
 	}
@@ -338,18 +338,18 @@ void FloppyAction::processDone(KProcess *p)
 	{
 	        if (p->exitStatus() == 0)
 	        {
-			emit status(TQString::null,100);
+			emit status(TQString(),100);
 			emit done(this,true);
 		}
 		else
 		{
-			emit status(i18n("The program %1 terminated with an error.").arg(theProcessName),100);
+			emit status(i18n("The program %1 terminated with an error.").tqarg(theProcessName),100);
 			emit done(this,false);
 		}
 	}
 	else
 	{
-		emit status(i18n("The program %1 terminated abnormally.").arg(theProcessName),100);
+		emit status(i18n("The program %1 terminated abnormally.").tqarg(theProcessName),100);
 		emit done(this,false);
 	}
 }
@@ -358,7 +358,7 @@ void FloppyAction::processStdOut(KProcess *, char *b, int l)
 {
 	Q_UNUSED(b);
 	Q_UNUSED(l);
-	kdDebug(KFAREA) << "stdout:" << TQString::fromLatin1(b,l) << endl;
+	kdDebug(KFAREA) << "stdout:" << TQString::tqfromLatin1(b,l) << endl;
 }
 
 void FloppyAction::processStdErr(KProcess *p, char *b, int l)
@@ -383,14 +383,14 @@ bool FloppyAction::startProcess()
 }
 
 
-/* static */ TQString FDFormat::fdformatName = TQString::null;
+/* static */ TQString FDFormat::fdformatName = TQString();
 
 FDFormat::FDFormat(TQObject *p) :
 	FloppyAction(p),
 	doVerify(true)
 {
 	DEBUGSETUP;
-	theProcessName = TQString::fromLatin1("fdformat");
+	theProcessName = TQString::tqfromLatin1("fdformat");
 	setName("FDFormat");
 }
 
@@ -473,17 +473,17 @@ void FDFormat::processStdOut(KProcess *, char *b, int l)
 	if (b[0]=='F')
 	{
 		formatTrackCount++;
-		emit status(TQString::null,
+		emit status(TQString(),
 			formatTrackCount * 100 / deviceInfo->tracks);
 	}
 	else if (b[0]=='E')
 	{
-		emit status(i18n("Error formatting track %1.").arg(formatTrackCount),-1);
+		emit status(i18n("Error formatting track %1.").tqarg(formatTrackCount),-1);
 	}
 	else
 	{
-		s = TQString::fromLatin1(b,l);
-		if (s.contains("ioctl(FD_FORM)"))
+		s = TQString::tqfromLatin1(b,l);
+		if (s.tqcontains("ioctl(FD_FORM)"))
 		{
                     emit status (i18n(
                             "Cannot access floppy or floppy drive.\n"
@@ -491,7 +491,7 @@ void FDFormat::processStdOut(KProcess *, char *b, int l)
                             "have selected a valid floppy drive."),-1);
                     return;
 		}
-		if (s.find("/dev/")>=0)
+		if (s.tqfind("/dev/")>=0)
 		{
 			emit status(s,-1);
 			return;
@@ -499,24 +499,24 @@ void FDFormat::processStdOut(KProcess *, char *b, int l)
 		DEBUGS(s);
 	}
 #elif defined(ANY_LINUX)
-	s = TQString::fromLatin1(b,l);
+	s = TQString::tqfromLatin1(b,l);
 	DEBUGS(s);
         TQRegExp regexp( "([0-9]+)" );
-        if ( s.startsWith( "bad data at cyl" ) || ( s.find( "Problem reading cylinder" ) != -1 ) )
+        if ( s.startsWith( "bad data at cyl" ) || ( s.tqfind( "Problem reading cylinder" ) != -1 ) )
         {
             if ( regexp.search( s ) > -1 )
             {
                 const int track = regexp.cap(1).toInt();
-                emit status(i18n("Low-level formatting error at track %1.").arg(track), -1);
+                emit status(i18n("Low-level formatting error at track %1.").tqarg(track), -1);
             }
             else
             {
                 // This error should not happen
-                emit status(i18n("Low-level formatting error: %1").arg(s), -1);
+                emit status(i18n("Low-level formatting error: %1").tqarg(s), -1);
             }
             return;
         }
-	else if (s.find("ioctl(FDFMTBEG)")!=-1)
+	else if (s.tqfind("ioctl(FDFMTBEG)")!=-1)
 	{
             emit status (i18n(
                     "Cannot access floppy or floppy drive.\n"
@@ -524,15 +524,15 @@ void FDFormat::processStdOut(KProcess *, char *b, int l)
                     "have selected a valid floppy drive."),-1);
             return;
 	}
-        else if (s.find("busy")!=-1) // "Device or resource busy"
+        else if (s.tqfind("busy")!=-1) // "Device or resource busy"
         {
             emit status(i18n("Device busy.\nPerhaps you need to unmount the floppy first."),-1);
             return;
         }
         // Be careful to leave "iotcl" as last before checking numbers
-        else if (s.find("ioctl")!=-1)
+        else if (s.tqfind("ioctl")!=-1)
         {
-            emit status(i18n("Low-level format error: %1").arg(s),-1);
+            emit status(i18n("Low-level format error: %1").tqarg(s),-1);
             return;
         }
         // Check for numbers at last (as /dev/fd0u1440 has numbers too)
@@ -542,7 +542,7 @@ void FDFormat::processStdOut(KProcess *, char *b, int l)
             const int p = regexp.cap(1).toInt();
             if ((p>=0) && (p<deviceInfo->tracks))
             {
-                    emit status(TQString::null,
+                    emit status(TQString(),
                             p * 100 / deviceInfo->tracks);
             }
         }
@@ -551,13 +551,13 @@ void FDFormat::processStdOut(KProcess *, char *b, int l)
 }
 
 
-/* static */ TQString DDZeroOut::m_ddName = TQString::null;
+/* static */ TQString DDZeroOut::m_ddName = TQString();
 
 DDZeroOut::DDZeroOut(TQObject *p) :
     FloppyAction(p)
 {
     kdDebug(KFAREA) << (__PRETTY_FUNCTION__) << endl;
-    theProcessName = TQString::fromLatin1("dd");
+    theProcessName = TQString::tqfromLatin1("dd");
     setName("DD");
 }
 
@@ -617,16 +617,16 @@ void DDZeroOut::processDone(KProcess *p)
      *
      * ### TODO: really check if the exit is not on an other error and then abort the formatting
      */
-    emit status(TQString::null,100);
+    emit status(TQString(),100);
     emit done(this,true);
 }
 
 
 
-/* static */ TQString FATFilesystem::newfs_fat = TQString::null ;
+/* static */ TQString FATFilesystem::newfs_fat = TQString() ;
 
-FATFilesystem::FATFilesystem(TQObject *parent) :
-	FloppyAction(parent)
+FATFilesystem::FATFilesystem(TQObject *tqparent) :
+	FloppyAction(tqparent)
 {
 	DEBUGSETUP;
 	runtimeCheck();
@@ -656,7 +656,7 @@ bool FATFilesystem::configure(bool v,bool l,const TQString &lbl)
 	if (l)
 		label=lbl.simplifyWhiteSpace();
 	else
-		label=TQString::null;
+		label=TQString();
 
 	return true;
 }
@@ -720,20 +720,20 @@ void FATFilesystem::processStdOut(KProcess *, char *b, int l)
 #ifdef ANY_BSD
     // ### TODO: do some checks
 #elif defined(ANY_LINUX)
-    TQString s ( TQString::fromLatin1( b, l ) );
+    TQString s ( TQString::tqfromLatin1( b, l ) );
     kdDebug(KFAREA) << s << endl;
-    if (s.find("mounted file system")!=-1) // "/dev/fd0 contains a mounted file system
+    if (s.tqfind("mounted file system")!=-1) // "/dev/fd0 contains a mounted file system
     {
         emit status(i18n("Floppy is mounted.\nYou need to unmount the floppy first."),-1);
         return;
     }
-    else if (s.find("busy")!=-1) // "Device or resource busy"
+    else if (s.tqfind("busy")!=-1) // "Device or resource busy"
     {
         emit status(i18n("Device busy.\nPerhaps you need to unmount the floppy first."),-1);
         return;
     }
 # if 0
-    else if ( s.find( "mkdosfs" ) != -1 ) // DEBUG: get the program header and show it!
+    else if ( s.tqfind( "mkdosfs" ) != -1 ) // DEBUG: get the program header and show it!
     {
         emit status( s, -1 );
         return;
@@ -747,10 +747,10 @@ void FATFilesystem::processStdOut(KProcess *, char *b, int l)
 
 #ifdef ANY_BSD
 
-/* static */ TQString UFSFilesystem::newfs = TQString::null ;
+/* static */ TQString UFSFilesystem::newfs = TQString() ;
 
-UFSFilesystem::UFSFilesystem(TQObject *parent) :
-	FloppyAction(parent)
+UFSFilesystem::UFSFilesystem(TQObject *tqparent) :
+	FloppyAction(tqparent)
 {
 	DEBUGSETUP;
 	runtimeCheck();
@@ -792,7 +792,7 @@ void UFSFilesystem::exec()
         
         // ### TODO: is it still needed? (FreeBSD 5.3's man page says: "For backward compatibility.")
         if ( deviceInfo )
-           *p << "-T" << TQString("fd%1").arg(deviceInfo->blocks);
+           *p << "-T" << TQString("fd%1").tqarg(deviceInfo->blocks);
 
         *p << deviceName;
 
@@ -806,10 +806,10 @@ void UFSFilesystem::exec()
 
 
 
-/* static */ TQString Ext2Filesystem::newfs = TQString::null ;
+/* static */ TQString Ext2Filesystem::newfs = TQString() ;
 
-Ext2Filesystem::Ext2Filesystem(TQObject *parent) :
-	FloppyAction(parent)
+Ext2Filesystem::Ext2Filesystem(TQObject *tqparent) :
+	FloppyAction(tqparent)
 {
 	DEBUGSETUP;
 	runtimeCheck();
@@ -836,7 +836,7 @@ bool Ext2Filesystem::configure(bool v,bool l,const TQString &lbl)
 	}
 	else
 	{
-		label=TQString::null;
+		label=TQString();
 	}
 
 	return true;
@@ -886,14 +886,14 @@ void Ext2Filesystem::processStdOut(KProcess *, char *b, int l)
 #ifdef ANY_BSD
     // ### TODO: do some checks
 #elif defined(ANY_LINUX)
-    TQString s ( TQString::fromLatin1( b, l ) );
+    TQString s ( TQString::tqfromLatin1( b, l ) );
     kdDebug(KFAREA) << s << endl;
-    if (s.find("mounted")!=-1) // "/dev/fd0 is mounted; will not make a filesystem here!"
+    if (s.tqfind("mounted")!=-1) // "/dev/fd0 is mounted; will not make a filesystem here!"
     {
         emit status(i18n("Floppy is mounted.\nYou need to unmount the floppy first."),-1);
         return;
     }
-    else if (s.find("busy")!=-1) // "Device or resource busy"
+    else if (s.tqfind("busy")!=-1) // "Device or resource busy"
     {
         emit status(i18n("Device busy.\nPerhaps you need to unmount the floppy first."),-1);
         return;
@@ -904,10 +904,10 @@ void Ext2Filesystem::processStdOut(KProcess *, char *b, int l)
 
 
 #ifdef ANY_LINUX
-/* static */ TQString MinixFilesystem::newfs = TQString::null ;
+/* static */ TQString MinixFilesystem::newfs = TQString() ;
 
-MinixFilesystem::MinixFilesystem(TQObject *parent) :
-	FloppyAction(parent)
+MinixFilesystem::MinixFilesystem(TQObject *tqparent) :
+	FloppyAction(tqparent)
 {
 	DEBUGSETUP;
 	runtimeCheck();
@@ -934,7 +934,7 @@ bool MinixFilesystem::configure(bool v,bool l,const TQString &lbl)
 	}
 	else
 	{
-		label=TQString::null;
+		label=TQString();
 	}
 
 	return true;
@@ -977,14 +977,14 @@ void MinixFilesystem::exec()
 
 void MinixFilesystem::processStdOut(KProcess *, char *b, int l)
 {
-    TQString s ( TQString::fromLatin1( b, l ) );
+    TQString s ( TQString::tqfromLatin1( b, l ) );
     kdDebug(KFAREA) << s << endl;
-    if (s.find("mounted")!=-1) // "mkfs.minix: /dev/fd0 is mounted; will not make a filesystem here!"
+    if (s.tqfind("mounted")!=-1) // "mkfs.minix: /dev/fd0 is mounted; will not make a filesystem here!"
     {
         emit status(i18n("Floppy is mounted.\nYou need to unmount the floppy first."),-1);
         return;
     }
-    else if (s.find("busy")!=-1) // "Device or resource busy"
+    else if (s.tqfind("busy")!=-1) // "Device or resource busy"
     {
         emit status(i18n("Device busy.\nPerhaps you need to unmount the floppy first."),-1);
         return;

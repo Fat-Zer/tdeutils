@@ -126,7 +126,7 @@ int main(int argc, char **argv)
 //     else
 //     {
 //         TQStringList fileNames;
-//         fileNames = KFileDialog::getOpenFileNames(TQString::null, "*.theme", 0, "Open configurations");
+//         fileNames = KFileDialog::getOpenFileNames(TQString(), "*.theme", 0, "Open configurations");
 //         for ( TQStringList::Iterator it = fileNames.begin(); it != fileNames.end(); ++it )
 //         {
 //             TQFileInfo file( *it );

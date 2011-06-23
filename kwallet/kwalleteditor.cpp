@@ -62,11 +62,11 @@
 #include <assert.h>
 #include <stdlib.h>
 
-KWalletEditor::KWalletEditor(const TQString& wallet, bool isPath, TQWidget *parent, const char *name)
-: KMainWindow(parent, name), _walletName(wallet), _nonLocal(isPath) {
+KWalletEditor::KWalletEditor(const TQString& wallet, bool isPath, TQWidget *tqparent, const char *name)
+: KMainWindow(tqparent, name), _walletName(wallet), _nonLocal(isPath) {
 	_newWallet = false;
 	_ww = new WalletWidget(this, "Wallet Widget");
-	_copyPassAction = KStdAction::copy(this, TQT_SLOT(copyPassword()), actionCollection());
+	_copyPassAction = KStdAction::copy(TQT_TQOBJECT(this), TQT_SLOT(copyPassword()), actionCollection());
 
 	TQVBoxLayout *box = new TQVBoxLayout(_ww->_entryListFrame);
 	box->setSpacing( KDialog::spacingHint() );
@@ -133,7 +133,7 @@ KWalletEditor::KWalletEditor(const TQString& wallet, bool isPath, TQWidget *pare
 
 	setCaption(wallet);
 
-	TQTimer::singleShot(0, this, TQT_SLOT(layout()));
+	TQTimer::singleShot(0, this, TQT_SLOT(tqlayout()));
 }
 
 KWalletEditor::~KWalletEditor() {
@@ -149,7 +149,7 @@ KWalletEditor::~KWalletEditor() {
 	}
 }
 
-void KWalletEditor::layout() {
+void KWalletEditor::tqlayout() {
 	TQValueList<int> sz = _ww->_splitter->sizes();
 	int sum = sz[0] + sz[1];
 	sz[0] = sum/2;
@@ -159,48 +159,48 @@ void KWalletEditor::layout() {
 
 void KWalletEditor::createActions() {
 	_newFolderAction = new KAction(i18n("&New Folder..."), "folder_new",
-			0, this, TQT_SLOT(createFolder()), actionCollection(),
+			0, TQT_TQOBJECT(this), TQT_SLOT(createFolder()), actionCollection(),
 			"create_folder");
 	connect(this, TQT_SIGNAL(enableFolderActions(bool)),
 		_newFolderAction, TQT_SLOT(setEnabled(bool)));
 
 	_deleteFolderAction = new KAction(i18n("&Delete Folder"), 0, 0,
-			this, TQT_SLOT(deleteFolder()), actionCollection(),
+			TQT_TQOBJECT(this), TQT_SLOT(deleteFolder()), actionCollection(),
 			"delete_folder");
 	connect(this, TQT_SIGNAL(enableContextFolderActions(bool)),
 		_deleteFolderAction, TQT_SLOT(setEnabled(bool)));
 	connect(this, TQT_SIGNAL(enableFolderActions(bool)),
 		_deleteFolderAction, TQT_SLOT(setEnabled(bool)));
 
-	_passwordAction = new KAction(i18n("Change &Password..."), 0, 0, this,
+	_passwordAction = new KAction(i18n("Change &Password..."), 0, 0, TQT_TQOBJECT(this),
 			TQT_SLOT(changePassword()), actionCollection(),
 			"change_password");
 	connect(this, TQT_SIGNAL(enableWalletActions(bool)),
 		_passwordAction, TQT_SLOT(setEnabled(bool)));
 
-	_mergeAction = new KAction(i18n("&Merge Wallet..."), 0, 0, this,
+	_mergeAction = new KAction(i18n("&Merge Wallet..."), 0, 0, TQT_TQOBJECT(this),
 			TQT_SLOT(importWallet()), actionCollection(),
 			"merge");
 	connect(this, TQT_SIGNAL(enableWalletActions(bool)),
 		_mergeAction, TQT_SLOT(setEnabled(bool)));
 
-	_importAction = new KAction(i18n("&Import XML..."), 0, 0, this,
+	_importAction = new KAction(i18n("&Import XML..."), 0, 0, TQT_TQOBJECT(this),
 			TQT_SLOT(importXML()), actionCollection(),
 			"import");
 	connect(this, TQT_SIGNAL(enableWalletActions(bool)),
 		_importAction, TQT_SLOT(setEnabled(bool)));
 
-	_exportAction = new KAction(i18n("&Export..."), 0, 0, this,
+	_exportAction = new KAction(i18n("&Export..."), 0, 0, TQT_TQOBJECT(this),
 			TQT_SLOT(exportXML()), actionCollection(),
 			"export");
 	connect(this, TQT_SIGNAL(enableWalletActions(bool)),
 		_exportAction, TQT_SLOT(setEnabled(bool)));
 
-	_saveAsAction = KStdAction::saveAs(this, TQT_SLOT(saveAs()), actionCollection());
+	_saveAsAction = KStdAction::saveAs(TQT_TQOBJECT(this), TQT_SLOT(saveAs()), actionCollection());
 	connect(this, TQT_SIGNAL(enableWalletActions(bool)),
 		_saveAsAction, TQT_SLOT(setEnabled(bool)));
 
-	KStdAction::quit(this, TQT_SLOT(close()), actionCollection());
+	KStdAction::quit(TQT_TQOBJECT(this), TQT_SLOT(close()), actionCollection());
 	KStdAction::keyBindings(guiFactory(), TQT_SLOT(configureShortcuts()),
 actionCollection());
 	emit enableWalletActions(false);
@@ -230,7 +230,7 @@ void KWalletEditor::updateFolderList(bool checkEntries) {
 		if (!fi) {
 			continue;
 		}
-		if (!fl.contains(fi->name())) {
+		if (!fl.tqcontains(fi->name())) {
 			trash.push(i);
 		}
 	}
@@ -277,7 +277,7 @@ void KWalletEditor::updateFolderList(bool checkEntries) {
 	}
 
 	//check if the current folder has been removed
-	if (!fl.contains(_currentFolder)) {
+	if (!fl.tqcontains(_currentFolder)) {
 		_currentFolder = "";
 		_ww->_entryTitle->clear();
 		_ww->_iconTitle->clear();
@@ -293,7 +293,7 @@ void KWalletEditor::deleteFolder() {
 				return;
 			}
 
-			int rc = KMessageBox::warningContinueCancel(this, i18n("Are you sure you wish to delete the folder '%1' from the wallet?").arg(fi->name()),"",KStdGuiItem::del());
+			int rc = KMessageBox::warningContinueCancel(this, i18n("Are you sure you wish to delete the folder '%1' from the wallet?").tqarg(fi->name()),"",KStdGuiItem::del());
 			if (rc == KMessageBox::Continue) {
 				bool rc = _w->removeFolder(fi->name());
 				if (!rc) {
@@ -318,7 +318,7 @@ void KWalletEditor::createFolder() {
 		do {
 			n = KInputDialog::getText(i18n("New Folder"),
 					i18n("Please choose a name for the new folder:"),
-					TQString::null,
+					TQString(),
 					&ok,
 					this);
 
@@ -327,11 +327,11 @@ void KWalletEditor::createFolder() {
 			}
 
 			if (_entryList->existsFolder(n)) {
-				int rc = KMessageBox::questionYesNo(this, i18n("Sorry, that folder name is in use. Try again?"), TQString::null, i18n("Try Again"), i18n("Do Not Try"));
+				int rc = KMessageBox::questionYesNo(this, i18n("Sorry, that folder name is in use. Try again?"), TQString(), i18n("Try Again"), i18n("Do Not Try"));
 				if (rc == KMessageBox::Yes) {
 					continue;
 				}
-				n = TQString::null;
+				n = TQString();
 			}
 			break;
 		} while (true);
@@ -348,8 +348,8 @@ void KWalletEditor::saveEntry() {
 	_ww->_saveChanges->setEnabled(false);
 	_ww->_undoChanges->setEnabled(false);
 
-	if (item && _w && item->parent()) {
-		KWalletContainerItem *ci = dynamic_cast<KWalletContainerItem*>(item->parent());
+	if (item && _w && item->tqparent()) {
+		KWalletContainerItem *ci = dynamic_cast<KWalletContainerItem*>(item->tqparent());
 		if (ci) {
 			if (ci->type() == KWallet::Wallet::Password) {
 				rc = _w->writePassword(item->text(0), _ww->_passwordValue->text());
@@ -366,7 +366,7 @@ void KWalletEditor::saveEntry() {
 		}
 	}
 
-	KMessageBox::sorry(this, i18n("Error saving entry. Error code: %1").arg(rc));
+	KMessageBox::sorry(this, i18n("Error saving entry. Error code: %1").tqarg(rc));
 }
 
 
@@ -387,11 +387,11 @@ void KWalletEditor::entrySelectionChanged(TQListViewItem *item) {
 
 	switch (item->rtti()) {
 		case KWalletEntryItemClass:
-			ci = dynamic_cast<KWalletContainerItem*>(item->parent());
+			ci = dynamic_cast<KWalletContainerItem*>(item->tqparent());
 			if (!ci) {
 				return;
 			}
-			fi = dynamic_cast<KWalletFolderItem*>(ci->parent());
+			fi = dynamic_cast<KWalletFolderItem*>(ci->tqparent());
 			if (!fi) {
 				return;
 			}
@@ -402,7 +402,7 @@ void KWalletEditor::entrySelectionChanged(TQListViewItem *item) {
 				if (_w->readPassword(item->text(0), pass) == 0) {
 					_ww->_entryStack->raiseWidget(int(4));
 					_ww->_entryName->setText(i18n("Password: %1")
-							.arg(item->text(0)));
+							.tqarg(item->text(0)));
 					_ww->_passwordValue->setText(pass);
 					_ww->_saveChanges->setEnabled(false);
 					_ww->_undoChanges->setEnabled(false);
@@ -413,7 +413,7 @@ void KWalletEditor::entrySelectionChanged(TQListViewItem *item) {
 				showHideMapEditorValue(false);
 				if (_w->readMap(item->text(0), _currentMap) == 0) {
 					_mapEditor->reload();
-					_ww->_entryName->setText(i18n("Name-Value Map: %1").arg(item->text(0)));
+					_ww->_entryName->setText(i18n("Name-Value Map: %1").tqarg(item->text(0)));
 					_ww->_saveChanges->setEnabled(false);
 					_ww->_undoChanges->setEnabled(false);
 				}
@@ -422,7 +422,7 @@ void KWalletEditor::entrySelectionChanged(TQListViewItem *item) {
 				TQByteArray ba;
 				if (_w->readEntry(item->text(0), ba) == 0) {
 					_ww->_entryName->setText(i18n("Binary Data: %1")
-							.arg(item->text(0)));
+							.tqarg(item->text(0)));
 					_ww->_saveChanges->setEnabled(false);
 					_ww->_undoChanges->setEnabled(false);
 				}
@@ -430,7 +430,7 @@ void KWalletEditor::entrySelectionChanged(TQListViewItem *item) {
 			break;
 
 		case KWalletContainerItemClass:
-			fi = dynamic_cast<KWalletFolderItem*>(item->parent());
+			fi = dynamic_cast<KWalletFolderItem*>(item->tqparent());
 			if (!fi) {
 				return;
 			}
@@ -454,7 +454,7 @@ void KWalletEditor::entrySelectionChanged(TQListViewItem *item) {
 
 	if (fi) {
 		_currentFolder = fi->name();
-		_ww->_entryTitle->setText(TQString("<font size=\"+1\">%1</font>").arg(fi->text(0)));
+		_ww->_entryTitle->setText(TQString("<font size=\"+1\">%1</font>").tqarg(fi->text(0)));
 		_ww->_iconTitle->setPixmap(fi->getFolderIcon(KIcon::Toolbar));
 	}
 }
@@ -478,7 +478,7 @@ void KWalletEditor::updateEntries(const TQString& folder) {
 
 	// Remove deleted entries
 	for (TQListViewItem *i = pi->firstChild(); i; i = i->nextSibling()) {
-		if (!entries.contains(i->text(0))) {
+		if (!entries.tqcontains(i->text(0))) {
 			if (i == _entryList->currentItem()) {
 				entrySelectionChanged(0L);
 			}
@@ -487,7 +487,7 @@ void KWalletEditor::updateEntries(const TQString& folder) {
 	}
 
 	for (TQListViewItem *i = mi->firstChild(); i; i = i->nextSibling()) {
-		if (!entries.contains(i->text(0))) {
+		if (!entries.tqcontains(i->text(0))) {
 			if (i == _entryList->currentItem()) {
 				entrySelectionChanged(0L);
 			}
@@ -496,7 +496,7 @@ void KWalletEditor::updateEntries(const TQString& folder) {
 	}
 
 	for (TQListViewItem *i = bi->firstChild(); i; i = i->nextSibling()) {
-		if (!entries.contains(i->text(0))) {
+		if (!entries.tqcontains(i->text(0))) {
 			if (i == _entryList->currentItem()) {
 				entrySelectionChanged(0L);
 			}
@@ -505,7 +505,7 @@ void KWalletEditor::updateEntries(const TQString& folder) {
 	}
 
 	for (TQListViewItem *i = ui->firstChild(); i; i = i->nextSibling()) {
-		if (!entries.contains(i->text(0))) {
+		if (!entries.tqcontains(i->text(0))) {
 			if (i == _entryList->currentItem()) {
 				entrySelectionChanged(0L);
 			}
@@ -518,7 +518,7 @@ void KWalletEditor::updateEntries(const TQString& folder) {
 
 	// Add new entries
 	for (TQStringList::Iterator i = entries.begin(); i != entries.end(); ++i) {
-		if (fi->contains(*i)){
+		if (fi->tqcontains(*i)){
 			continue;
 		}
 
@@ -540,7 +540,7 @@ void KWalletEditor::updateEntries(const TQString& folder) {
 	}
 	fi->refresh();
 	if (fi->name() == _currentFolder) {
-		_ww->_entryTitle->setText(TQString("<font size=\"+1\">%1</font>").arg(fi->text(0)));
+		_ww->_entryTitle->setText(TQString("<font size=\"+1\">%1</font>").tqarg(fi->text(0)));
 	}
 	if (!_entryList->selectedItem()) {
 		_ww->_entryName->clear();
@@ -560,7 +560,7 @@ void KWalletEditor::listContextMenuRequested(TQListViewItem *item, const TQPoint
 
 	if (item) {
 		if (item->rtti() == KWalletEntryItemClass) {
-			ci = dynamic_cast<KWalletContainerItem *>(item->parent());
+			ci = dynamic_cast<KWalletContainerItem *>(item->tqparent());
 			if (!ci) {
 				return;
 			}
@@ -617,7 +617,7 @@ void KWalletEditor::copyPassword() {
 	if (_w && item) {
 		TQString pass;
 		if (_w->readPassword(item->text(0), pass) == 0) {
-			TQApplication::clipboard()->setText(pass);
+			TQApplication::tqclipboard()->setText(pass);
 		}
 	}
 }
@@ -635,9 +635,9 @@ void KWalletEditor::newEntry() {
 	if (_w && item) {
 		p = item;
 		if (p->rtti() == KWalletEntryItemClass) {
-			p = item->parent();
+			p = item->tqparent();
 		}
-		fi = dynamic_cast<KWalletFolderItem *>(p->parent());
+		fi = dynamic_cast<KWalletFolderItem *>(p->tqparent());
 		if (!fi) {
 			return;
 		}
@@ -649,7 +649,7 @@ void KWalletEditor::newEntry() {
 	do {
 		n = KInputDialog::getText(i18n("New Entry"),
 				i18n("Please choose a name for the new entry:"),
-				TQString::null,
+				TQString(),
 				&ok,
 				this);
 
@@ -658,12 +658,12 @@ void KWalletEditor::newEntry() {
 		}
 
 		// FIXME: prohibits the use of the subheadings
-		if (fi->contains(n)) {
-			int rc = KMessageBox::questionYesNo(this, i18n("Sorry, that entry already exists. Try again?"), TQString::null, i18n("Try Again"), i18n("Do Not Try"));
+		if (fi->tqcontains(n)) {
+			int rc = KMessageBox::questionYesNo(this, i18n("Sorry, that entry already exists. Try again?"), TQString(), i18n("Try Again"), i18n("Do Not Try"));
 			if (rc == KMessageBox::Yes) {
 				continue;
 			}
-			n = TQString::null;
+			n = TQString();
 		}
 		break;
 	} while (true);
@@ -671,10 +671,10 @@ void KWalletEditor::newEntry() {
 	if (_w && item && !n.isEmpty()) {
 		TQListViewItem *p = item;
 		if (p->rtti() == KWalletEntryItemClass) {
-			p = item->parent();
+			p = item->tqparent();
 		}
 
-		KWalletFolderItem *fi = dynamic_cast<KWalletFolderItem *>(p->parent());
+		KWalletFolderItem *fi = dynamic_cast<KWalletFolderItem *>(p->tqparent());
 		if (!fi) {
 			KMessageBox::error(this, i18n("An unexpected error occurred trying to add the new entry"));
 			return;
@@ -691,7 +691,7 @@ void KWalletEditor::newEntry() {
 			return;
 		}
 		if (ci->type() == KWallet::Wallet::Password) {
-			_w->writePassword(n, TQString::null);
+			_w->writePassword(n, TQString());
 		} else if (ci->type() == KWallet::Wallet::Map) {
 			_w->writeMap(n, TQMap<TQString,TQString>());
 		} else if (ci->type() == KWallet::Wallet::Stream) {
@@ -700,7 +700,7 @@ void KWalletEditor::newEntry() {
 			abort();
 		}
 		fi->refresh();
-		_ww->_entryTitle->setText(TQString("<font size=\"+1\">%1</font>").arg(fi->text(0)));
+		_ww->_entryTitle->setText(TQString("<font size=\"+1\">%1</font>").tqarg(fi->text(0)));
 	}
 }
 
@@ -728,17 +728,17 @@ void KWalletEditor::listItemRenamed(TQListViewItem* item, int, const TQString& t
 
 		if (_w->renameEntry(i->oldName(), t) == 0) {
 			i->clearOldName();
-			KWalletContainerItem *ci = dynamic_cast<KWalletContainerItem*>(item->parent());
+			KWalletContainerItem *ci = dynamic_cast<KWalletContainerItem*>(item->tqparent());
 			if (!ci) {
 				KMessageBox::error(this, i18n("An unexpected error occurred trying to rename the entry"));
 				return;
 			}
 			if (ci->type() == KWallet::Wallet::Password) {
-				_ww->_entryName->setText(i18n("Password: %1").arg(item->text(0)));
+				_ww->_entryName->setText(i18n("Password: %1").tqarg(item->text(0)));
 			} else if (ci->type() == KWallet::Wallet::Map) {
-				_ww->_entryName->setText(i18n("Name-Value Map: %1").arg(item->text(0)));
+				_ww->_entryName->setText(i18n("Name-Value Map: %1").tqarg(item->text(0)));
 			} else if (ci->type() == KWallet::Wallet::Stream) {
-				_ww->_entryName->setText(i18n("Binary Data: %1").arg(item->text(0)));
+				_ww->_entryName->setText(i18n("Binary Data: %1").tqarg(item->text(0)));
 			}
 		} else {
 			i->setText(0, i->oldName());
@@ -750,9 +750,9 @@ void KWalletEditor::listItemRenamed(TQListViewItem* item, int, const TQString& t
 void KWalletEditor::deleteEntry() {
 	TQListViewItem *item = _entryList->selectedItem();
 	if (_w && item) {
-		int rc = KMessageBox::warningContinueCancel(this, i18n("Are you sure you wish to delete the item '%1'?").arg(item->text(0)),"",KStdGuiItem::del());
+		int rc = KMessageBox::warningContinueCancel(this, i18n("Are you sure you wish to delete the item '%1'?").tqarg(item->text(0)),"",KStdGuiItem::del());
 		if (rc == KMessageBox::Continue) {
-			KWalletFolderItem *fi = dynamic_cast<KWalletFolderItem *>(item->parent()->parent());
+			KWalletFolderItem *fi = dynamic_cast<KWalletFolderItem *>(item->tqparent()->tqparent());
 			if (!fi) {
 				KMessageBox::error(this, i18n("An unexpected error occurred trying to delete the entry"));
 				return;
@@ -761,7 +761,7 @@ void KWalletEditor::deleteEntry() {
 			delete item;
 			entrySelectionChanged(_entryList->currentItem());
 			fi->refresh();
-			_ww->_entryTitle->setText(TQString("<font size=\"+1\">%1</font>").arg(fi->text(0)));
+			_ww->_entryTitle->setText(TQString("<font size=\"+1\">%1</font>").tqarg(fi->text(0)));
 		}
 	}
 }
@@ -811,14 +811,14 @@ void KWalletEditor::showHideMapEditorValue(bool show) {
 enum MergePlan { Prompt = 0, Always = 1, Never = 2, Yes = 3, No = 4 };
 
 void KWalletEditor::importWallet() {
-	KURL url = KFileDialog::getOpenURL(TQString::null, "*.kwl", this);
+	KURL url = KFileDialog::getOpenURL(TQString(), "*.kwl", this);
 	if (url.isEmpty()) {
 		return;
 	}
 
 	TQString tmpFile;
 	if (!KIO::NetAccess::download(url, tmpFile, this)) {
-		KMessageBox::sorry(this, i18n("Unable to access wallet '<b>%1</b>'.").arg(url.prettyURL()));
+		KMessageBox::sorry(this, i18n("Unable to access wallet '<b>%1</b>'.").tqarg(url.prettyURL()));
 		return;
 	}
 
@@ -847,7 +847,7 @@ void KWalletEditor::importWallet() {
 					if (hasEntry && mp == Prompt) {
 						KBetterThanKDialogBase *bd;
 						bd = new KBetterThanKDialogBase(this);
-						bd->setLabel(i18n("Folder '<b>%1</b>' already contains an entry '<b>%2</b>'.  Do you wish to replace it?").arg(TQStyleSheet::escape(*f)).arg(TQStyleSheet::escape(me.key())));
+						bd->setLabel(i18n("Folder '<b>%1</b>' already contains an entry '<b>%2</b>'.  Do you wish to replace it?").tqarg(TQStyleSheet::escape(*f)).tqarg(TQStyleSheet::escape(me.key())));
 						mp = (MergePlan)bd->exec();
 						delete bd;
 						bool ok = false;
@@ -877,7 +877,7 @@ void KWalletEditor::importWallet() {
 					if (hasEntry && mp == Prompt) {
 						KBetterThanKDialogBase *bd;
 						bd = new KBetterThanKDialogBase(this);
-						bd->setLabel(i18n("Folder '<b>%1</b>' already contains an entry '<b>%2</b>'.  Do you wish to replace it?").arg(TQStyleSheet::escape(*f)).arg(TQStyleSheet::escape(pe.key())));
+						bd->setLabel(i18n("Folder '<b>%1</b>' already contains an entry '<b>%2</b>'.  Do you wish to replace it?").tqarg(TQStyleSheet::escape(*f)).tqarg(TQStyleSheet::escape(pe.key())));
 						mp = (MergePlan)bd->exec();
 						delete bd;
 						bool ok = false;
@@ -907,7 +907,7 @@ void KWalletEditor::importWallet() {
 					if (hasEntry && mp == Prompt) {
 						KBetterThanKDialogBase *bd;
 						bd = new KBetterThanKDialogBase(this);
-						bd->setLabel(i18n("Folder '<b>%1</b>' already contains an entry '<b>%2</b>'.  Do you wish to replace it?").arg(TQStyleSheet::escape(*f)).arg(TQStyleSheet::escape(ee.key())));
+						bd->setLabel(i18n("Folder '<b>%1</b>' already contains an entry '<b>%2</b>'.  Do you wish to replace it?").tqarg(TQStyleSheet::escape(*f)).tqarg(TQStyleSheet::escape(ee.key())));
 						mp = (MergePlan)bd->exec();
 						delete bd;
 						bool ok = false;
@@ -939,27 +939,27 @@ void KWalletEditor::importWallet() {
 
 
 void KWalletEditor::importXML() {
-	KURL url = KFileDialog::getOpenURL(TQString::null, "*.xml", this);
+	KURL url = KFileDialog::getOpenURL(TQString(), "*.xml", this);
 	if (url.isEmpty()) {
 		return;
 	}
 
 	TQString tmpFile;
 	if (!KIO::NetAccess::download(url, tmpFile, this)) {
-		KMessageBox::sorry(this, i18n("Unable to access XML file '<b>%1</b>'.").arg(url.prettyURL()));
+		KMessageBox::sorry(this, i18n("Unable to access XML file '<b>%1</b>'.").tqarg(url.prettyURL()));
 		return;
 	}
 
 	TQFile qf(tmpFile);
 	if (!qf.open(IO_ReadOnly)) {
-		KMessageBox::sorry(this, i18n("Error opening XML file '<b>%1</b>' for input.").arg(url.prettyURL()));
+		KMessageBox::sorry(this, i18n("Error opening XML file '<b>%1</b>' for input.").tqarg(url.prettyURL()));
 		KIO::NetAccess::removeTempFile(tmpFile);
 		return;
 	}
 
 	TQDomDocument doc(tmpFile);
 	if (!doc.setContent(&qf)) {
-		KMessageBox::sorry(this, i18n("Error reading XML file '<b>%1</b>' for input.").arg(url.prettyURL()));
+		KMessageBox::sorry(this, i18n("Error reading XML file '<b>%1</b>' for input.").tqarg(url.prettyURL()));
 		KIO::NetAccess::removeTempFile(tmpFile);
 		return;
 	}
@@ -998,7 +998,7 @@ void KWalletEditor::importXML() {
 			if (hasEntry && mp == Prompt) {
 				KBetterThanKDialogBase *bd;
 				bd = new KBetterThanKDialogBase(this);
-				bd->setLabel(i18n("Folder '<b>%1</b>' already contains an entry '<b>%2</b>'.  Do you wish to replace it?").arg(TQStyleSheet::escape(fname)).arg(TQStyleSheet::escape(ename)));
+				bd->setLabel(i18n("Folder '<b>%1</b>' already contains an entry '<b>%2</b>'.  Do you wish to replace it?").tqarg(TQStyleSheet::escape(fname)).tqarg(TQStyleSheet::escape(ename)));
 				mp = (MergePlan)bd->exec();
 				delete bd;
 				bool ok = false;
@@ -1020,7 +1020,7 @@ void KWalletEditor::importXML() {
 			if (type == "password") {
 				_w->writePassword(ename, e.text());
 			} else if (type == "stream") {
-				_w->writeEntry(ename, KCodecs::base64Decode(e.text().latin1()));
+				_w->writeEntry(ename, KCodecs::base64Decode(TQCString(e.text().latin1())));
 			} else if (type == "map") {
 				TQMap<TQString,TQString> map;
 				TQDomNode mapNode = e.firstChild();
@@ -1101,12 +1101,12 @@ void KWalletEditor::exportXML() {
 	ts << "</wallet>" << endl;
 	tf.close();
 
-	KURL url = KFileDialog::getSaveURL(TQString::null, "*.xml", this);
+	KURL url = KFileDialog::getSaveURL(TQString(), "*.xml", this);
 
 	if (!url.isEmpty()) {
 		bool ok = true;
 		if (KIO::NetAccess::exists(url, false, this)) {
-			int rc = KMessageBox::warningContinueCancel(this, i18n("The file '%1' already exists. Would you like to overwrite this file?").arg(url.prettyURL()), i18n("Overwrite"));
+			int rc = KMessageBox::warningContinueCancel(this, i18n("The file '%1' already exists. Would you like to overwrite this file?").tqarg(url.prettyURL()), i18n("Overwrite"));
 			if (rc == KMessageBox::Cancel) {
 				ok = false;
 			}
@@ -1125,7 +1125,7 @@ void KWalletEditor::setNewWallet(bool x) {
 
 
 void KWalletEditor::saveAs() {
-	KURL url = KFileDialog::getSaveURL(TQString::null, "*.kwl", this);
+	KURL url = KFileDialog::getSaveURL(TQString(), "*.kwl", this);
 	if (!url.isEmpty()) {
 		// Sync() kwalletd
 		if (_nonLocal) {

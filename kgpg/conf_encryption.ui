@@ -1,7 +1,7 @@
 <!DOCTYPE UI><UI version="3.3" stdsetdef="1">
 <class>Encryption</class>
 <author>bj@altern.org</author>
-<widget class="QWidget">
+<widget class="TQWidget">
     <property name="name">
         <cstring>Encryption</cstring>
     </property>
@@ -23,7 +23,7 @@
         <property name="margin">
             <number>0</number>
         </property>
-        <widget class="QCheckBox" row="2" column="0" rowspan="1" colspan="4">
+        <widget class="TQCheckBox" row="2" column="0" rowspan="1" colspan="4">
             <property name="name">
                 <cstring>kcfg_PgpCompatibility</cstring>
             </property>
@@ -38,11 +38,11 @@
 		&lt;p&gt;Checking this option forces GnuPG to output encrypted packets that are as compliant with PGP (Pretty Good Privacy) 6 standards as possible thus allowing GnuPG users to inter operate with PGP 6 users.&lt;/p&gt;&lt;/qt&gt;</string>
             </property>
         </widget>
-        <widget class="QCheckBox" row="0" column="0" rowspan="1" colspan="4">
+        <widget class="TQCheckBox" row="0" column="0" rowspan="1" colspan="4">
             <property name="name">
                 <cstring>kcfg_AsciiArmor</cstring>
             </property>
-            <property name="minimumSize">
+            <property name="tqminimumSize">
                 <size>
                     <width>0</width>
                     <height>0</height>
@@ -56,7 +56,7 @@
 		&lt;p&gt;Checking this option outputs all encrypted files in a format that can be opened by a text editor and as such the output is suitable for placing in the body of an e-mail message.&lt;/p&gt;&lt;/qt&gt;</string>
             </property>
         </widget>
-        <widget class="QCheckBox" row="3" column="0" rowspan="1" colspan="4">
+        <widget class="TQCheckBox" row="3" column="0" rowspan="1" colspan="4">
             <property name="name">
                 <cstring>kcfg_HideUserID</cstring>
             </property>
@@ -68,7 +68,7 @@
 		&lt;p&gt;Checking this option will remove the keyid of the recipient from all encrypted packets. The advantage: traffic analysis of the encrypted packets cannot be performed as easily because the recipient is unknown. The disadvantage: the receiver of the encrypted packets is forced to try all secret keys before being able to decrypt the packets. This can be a lengthy process depending on the number of secret keys the receiver holds.&lt;/p&gt;&lt;/qt&gt;</string>
             </property>
         </widget>
-        <widget class="QCheckBox" row="4" column="0" rowspan="1" colspan="4">
+        <widget class="TQCheckBox" row="4" column="0" rowspan="1" colspan="4">
             <property name="name">
                 <cstring>kcfg_ShredSource</cstring>
             </property>
@@ -80,7 +80,7 @@
 		&lt;p&gt;Checking this option will shred (overwrite several times before erasing) the files you have encrypted. This way, it is almost impossible that the source file is recovered. But &lt;b&gt;you must be aware that this is not 100% secure&lt;/b&gt; on all file systems, and that parts of the file may have been saved in a temporary file or in the spooler of your printer if you previously opened it in an editor or tried to print it. Only works on files (not on folders).&lt;/p&gt;&lt;/qt&gt;</string>
             </property>
         </widget>
-        <widget class="QCheckBox" row="1" column="0" rowspan="1" colspan="4">
+        <widget class="TQCheckBox" row="1" column="0" rowspan="1" colspan="4">
             <property name="name">
                 <cstring>kcfg_AllowUntrustedKeys</cstring>
             </property>
@@ -102,22 +102,22 @@
             <property name="sizeType">
                 <enum>Expanding</enum>
             </property>
-            <property name="sizeHint">
+            <property name="tqsizeHint">
                 <size>
                     <width>20</width>
                     <height>72</height>
                 </size>
             </property>
         </spacer>
-        <widget class="QLayoutWidget" row="7" column="0" rowspan="1" colspan="4">
+        <widget class="TQLayoutWidget" row="7" column="0" rowspan="1" colspan="4">
             <property name="name">
-                <cstring>layout3</cstring>
+                <cstring>tqlayout3</cstring>
             </property>
             <hbox>
                 <property name="name">
                     <cstring>unnamed</cstring>
                 </property>
-                <widget class="QCheckBox">
+                <widget class="TQCheckBox">
                     <property name="name">
                         <cstring>kcfg_AllowCustomEncryptionOptions</cstring>
                     </property>
@@ -155,7 +155,7 @@
                 </widget>
             </hbox>
         </widget>
-        <widget class="QCheckBox" row="8" column="0" rowspan="1" colspan="4">
+        <widget class="TQCheckBox" row="8" column="0" rowspan="1" colspan="4">
             <property name="name">
                 <cstring>kcfg_PgpExtension</cstring>
             </property>
@@ -167,7 +167,7 @@
 		&lt;p&gt;Checking this option will append a .pgp extension to all encrypted files instead of a .gpg extension. This option will maintain compatibility with users of PGP (Pretty Good Privacy) software.&lt;/p&gt;&lt;/qt&gt;</string>
             </property>
         </widget>
-        <widget class="QLabel" row="6" column="0">
+        <widget class="TQLabel" row="6" column="0">
             <property name="name">
                 <cstring>textLabel1</cstring>
             </property>
@@ -193,7 +193,7 @@
 &lt;p&gt;Checking this option and selecting a key will force any file encryption operation to use the selected key. KGpg will not query for a recipient and the default key will be bypassed.&lt;/p&gt;&lt;/qt&gt;</string>
             </property>
         </widget>
-        <widget class="QToolButton" row="6" column="2">
+        <widget class="TQToolButton" row="6" column="2">
             <property name="name">
                 <cstring>clear_fkey</cstring>
             </property>
@@ -225,7 +225,7 @@
                 <string>Change...</string>
             </property>
         </widget>
-        <widget class="QLabel" row="5" column="0">
+        <widget class="TQLabel" row="5" column="0">
             <property name="name">
                 <cstring>textLabel1_2</cstring>
             </property>
@@ -267,7 +267,7 @@
                 <string>Change...</string>
             </property>
         </widget>
-        <widget class="QToolButton" row="5" column="2">
+        <widget class="TQToolButton" row="5" column="2">
             <property name="name">
                 <cstring>clear_akey</cstring>
             </property>
@@ -310,10 +310,10 @@
 <includes>
     <include location="local" impldecl="in implementation">conf_encryption.ui.h</include>
 </includes>
-<slots>
+<Q_SLOTS>
     <slot>allow_custom_option_toggled( bool isOn )</slot>
-</slots>
-<layoutdefaults spacing="6" margin="11"/>
+</Q_SLOTS>
+<tqlayoutdefaults spacing="6" margin="11"/>
 <includehints>
     <includehint>klineedit.h</includehint>
     <includehint>kpushbutton.h</includehint>

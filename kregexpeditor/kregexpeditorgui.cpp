@@ -16,7 +16,7 @@
  *  Boston, MA 02110-1301, USA.
  **/
 
-#ifdef QT_ONLY
+#ifdef TQT_ONLY
   #include "compat.h"
 #else
   #include <klocale.h>
@@ -34,13 +34,13 @@
 const TQString KRegExpEditorGUI::version = TQString::fromLocal8Bit("1.0");
 
 
-KRegExpEditorGUI::KRegExpEditorGUI(TQWidget *parent, const char *name,
+KRegExpEditorGUI::KRegExpEditorGUI(TQWidget *tqparent, const char *name,
 	                           const TQStringList & )
-  : TQWidget( parent, name)
+  : TQWidget( tqparent, name)
 {
-  TQHBoxLayout* layout = new TQHBoxLayout( this, 6 );
+  TQHBoxLayout* tqlayout = new TQHBoxLayout( this, 6 );
   _editor = new KRegExpEditorPrivate( this, "_editor" );
-  layout->addWidget( _editor );
+  tqlayout->addWidget( _editor );
   connect( _editor, TQT_SIGNAL( canUndo(bool) ), this, TQT_SIGNAL( canUndo(bool) ) );
   connect( _editor, TQT_SIGNAL( canRedo(bool) ), this, TQT_SIGNAL( canRedo(bool) ) );
   connect( _editor, TQT_SIGNAL( changes(bool) ), this, TQT_SIGNAL( changes(bool) ) );
@@ -66,16 +66,16 @@ void KRegExpEditorGUI::setRegExp( const TQString &regexp )
   _editor->slotSetRegexp( regexp );
 }
 
-KRegExpEditorGUIDialog::KRegExpEditorGUIDialog( TQWidget *parent,
+KRegExpEditorGUIDialog::KRegExpEditorGUIDialog( TQWidget *tqparent,
                                                 const char *name,
                                                 const TQStringList & )
   : KDialogBase( KDialogBase::Plain, i18n("Regular Expression Editor"),
                  KDialogBase::Ok | KDialogBase::Cancel | KDialogBase::Help, KDialogBase::Ok,
-                 parent, name ? name : "KRegExpDialog" )
+                 tqparent, name ? name : "KRegExpDialog" )
 {
   TQFrame* frame = plainPage();
-  TQVBoxLayout* layout = new TQVBoxLayout( frame, 6 );
-  layout->setAutoAdd( true );
+  TQVBoxLayout* tqlayout = new TQVBoxLayout( frame, 6 );
+  tqlayout->setAutoAdd( true );
   _editor = new KRegExpEditorGUI( frame );
 
   connect( _editor, TQT_SIGNAL( canUndo(bool) ), this, TQT_SIGNAL( canUndo(bool) ) );
@@ -83,8 +83,8 @@ KRegExpEditorGUIDialog::KRegExpEditorGUIDialog( TQWidget *parent,
   connect( _editor, TQT_SIGNAL( changes(bool) ), this, TQT_SIGNAL( changes(bool) ) );
   resize( 640, 400 );
 
-  setHelp( TQString::null, TQString::fromLocal8Bit( "KRegExpEditor" ) );
-#ifdef QT_ONLY
+  setHelp( TQString(), TQString::fromLocal8Bit( "KRegExpEditor" ) );
+#ifdef TQT_ONLY
   connect( this, TQT_SIGNAL( helpClicked() ), _editor, TQT_SLOT( showHelp() ) );
 #endif
 }
@@ -117,20 +117,20 @@ void KRegExpEditorGUIDialog::doSomething( TQString method, void* arguments )
 
 void KRegExpEditorGUI::doSomething( TQString method, void* arguments )
 {
-    if ( method == TQString::fromLatin1( "setCaseSensitive" ) ) {
+    if ( method == TQString::tqfromLatin1( "setCaseSensitive" ) ) {
         _editor->setCaseSensitive( (bool) arguments );
     }
-    else if ( method == TQString::fromLatin1("setMinimal") ) {
+    else if ( method == TQString::tqfromLatin1("setMinimal") ) {
         _editor->setMinimal( (bool) arguments );
     }
-    else if ( method == TQString::fromLatin1("setSyntax") ) {
+    else if ( method == TQString::tqfromLatin1("setSyntax") ) {
         _editor->setSyntax( *((TQString*) arguments) );
     }
-    else if ( method == TQString::fromLatin1("setAllowNonQtSyntax") ) {
-        _editor->setAllowNonQtSyntax( (bool) arguments );
+    else if ( method == TQString::tqfromLatin1("setAllowNonTQtSyntax") ) {
+        _editor->setAllowNonTQtSyntax( (bool) arguments );
     }
     else {
-        qFatal( "%s", tr("Method '%1' is not valid!").arg(method).latin1() );
+        qFatal( "%s", tqtr("Method '%1' is not valid!").tqarg(method).latin1() );
     }
 }
 
@@ -147,14 +147,14 @@ void KRegExpEditorGUI::setMatchText( const TQString& txt )
 
 void KRegExpEditorGUI::showHelp()
 {
-#ifdef QT_ONLY
+#ifdef TQT_ONLY
     _editor->showHelp();
 #else
-    kapp->invokeHelp( TQString::null, TQString::fromLocal8Bit( "KRegExpEditor" ) );
+    kapp->invokeHelp( TQString(), TQString::fromLocal8Bit( "KRegExpEditor" ) );
 #endif
 }
 
-#ifndef QT_ONLY
+#ifndef TQT_ONLY
 typedef K_TYPELIST_2( KRegExpEditorGUI, KRegExpEditorGUIDialog ) Products;
 K_EXPORT_COMPONENT_FACTORY( libkregexpeditorgui,
                             KGenericFactory<Products>( "kregexpeditor" ) )

@@ -1,6 +1,6 @@
 <!DOCTYPE UI><UI version="3.1" stdsetdef="1">
 <class>SrcSelect</class>
-<widget class="QWidget">
+<widget class="TQWidget">
     <property name="name">
         <cstring>SrcSelect</cstring>
     </property>
@@ -20,7 +20,7 @@
             <verstretch>0</verstretch>
         </sizepolicy>
     </property>
-    <property name="minimumSize">
+    <property name="tqminimumSize">
         <size>
             <width>350</width>
             <height>0</height>
@@ -33,7 +33,7 @@
         <property name="margin">
             <number>0</number>
         </property>
-        <widget class="QButtonGroup" row="0" column="0">
+        <widget class="TQButtonGroup" row="0" column="0">
             <property name="name">
                 <cstring>buttonGroup2</cstring>
             </property>
@@ -44,7 +44,7 @@
                 <property name="name">
                     <cstring>unnamed</cstring>
                 </property>
-                <widget class="QRadioButton" row="2" column="0">
+                <widget class="TQRadioButton" row="2" column="0">
                     <property name="name">
                         <cstring>checkFile</cstring>
                     </property>
@@ -63,7 +63,7 @@
                         <bool>true</bool>
                     </property>
                 </widget>
-                <widget class="QRadioButton" row="1" column="0">
+                <widget class="TQRadioButton" row="1" column="0">
                     <property name="name">
                         <cstring>checkClipboard</cstring>
                     </property>
@@ -83,7 +83,7 @@
             <property name="sizeType">
                 <enum>Expanding</enum>
             </property>
-            <property name="sizeHint">
+            <property name="tqsizeHint">
                 <size>
                     <width>20</width>
                     <height>31</height>
@@ -100,10 +100,10 @@
         <slot>checkFile_toggled(bool)</slot>
     </connection>
 </connections>
-<slots>
+<Q_SLOTS>
     <slot>checkFile_toggled( bool isOn )</slot>
-</slots>
-<layoutdefaults spacing="6" margin="11"/>
+</Q_SLOTS>
+<tqlayoutdefaults spacing="6" margin="11"/>
 <includehints>
     <includehint>kurlrequester.h</includehint>
     <includehint>klineedit.h</includehint>

@@ -36,10 +36,10 @@ class KBytesEditPrivate;
   *
   * 1. used as viewer
   *    a) static data ranges -> no changes for data pointer and length
-  *       possible changes are told to the widget by repaintRange
+  *       possible changes are told to the widget by tqrepaintRange
   *    b) changing data ranges -> data pointer and length might change
   *       changes told by
-  *       * resetData( char *, int size, bool repaint );
+  *       * resetData( char *, int size, bool tqrepaint );
   *       *
   * 2. used as editor
   *    a) static data ranges
@@ -57,10 +57,11 @@ class KBytesEditPrivate;
 class KHEXEDIT_EXPORT KBytesEdit : public KHexEdit
 {
   Q_OBJECT
+  TQ_OBJECT
   //_PROPERTY( char * Data READ data )
-  Q_PROPERTY( int DataSize READ dataSize )
-  Q_PROPERTY( int MaxDataSize READ maxDataSize WRITE setMaxDataSize )
-  Q_PROPERTY( bool AutoDelete READ isAutoDelete WRITE setAutoDelete DESIGNABLE false )
+  TQ_PROPERTY( int DataSize READ dataSize )
+  TQ_PROPERTY( int MaxDataSize READ maxDataSize WRITE setMaxDataSize )
+  TQ_PROPERTY( bool AutoDelete READ isAutoDelete WRITE setAutoDelete DESIGNABLE false )
 
 
   public:
@@ -69,7 +70,7 @@ class KHEXEDIT_EXPORT KBytesEdit : public KHexEdit
       * @param S size of used memory
       * @param RS_ real size of the memory
       * @param KM keep the memory on resize (RS_ is then the maximum size)
-      * @param Parent parent widget
+      * @param Parent tqparent widget
       * @param Name name for this widget
       * @param F flags
       */
@@ -136,8 +137,8 @@ class KHEXEDIT_EXPORT KBytesEdit : public KHexEdit
       */
     void setKeepsMemory( bool KM = true );
 
-    /** repaint the indizes from i1 to i2 */
-    void repaintRange( int i1, int i2 );
+    /** tqrepaint the indizes from i1 to i2 */
+    void tqrepaintRange( int i1, int i2 );
 
   protected:
     /** deletes the databuffer */

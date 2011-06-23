@@ -16,7 +16,7 @@
  *  Boston, MA 02110-1301, USA.
  **/
 
-#ifdef QT_ONLY
+#ifdef TQT_ONLY
   #include "compat.h"
   #include <tqapplication.h>
 #else
@@ -32,7 +32,7 @@
 
 int main( int argc, char* argv[] )
 {
-#ifdef QT_ONLY
+#ifdef TQT_ONLY
     TQApplication myapp( argc, argv );
 #else
     KAboutData aboutData( "kregexpeditor", I18N_NOOP("RegExp Editor"),
@@ -47,7 +47,7 @@ int main( int argc, char* argv[] )
     TQVBoxLayout* lay = new TQVBoxLayout( top, 6 );
 
     KRegExpEditorGUI* iface = new KRegExpEditorGUI( top, "_editor", TQStringList() );
-    iface->doSomething( TQString::fromLatin1("setAllowNonQtSyntax"), (bool*) true );
+    iface->doSomething( TQString::tqfromLatin1("setAllowNonTQtSyntax"), (bool*) true );
     lay->addWidget( iface );
 
     TQHBoxLayout* lay2 = new TQHBoxLayout( lay, 6 );
@@ -59,10 +59,10 @@ int main( int argc, char* argv[] )
     lay2->addWidget( quit );
 
     TQObject::connect( help, TQT_SIGNAL( clicked() ), iface, TQT_SLOT( showHelp() ) );
-    TQObject::connect( quit, TQT_SIGNAL( clicked() ), qApp, TQT_SLOT( quit() ) );
+    TQObject::connect( quit, TQT_SIGNAL( clicked() ), tqApp, TQT_SLOT( quit() ) );
 
     top->show();
-    TQObject::connect( qApp, TQT_SIGNAL( lastWindowClosed() ), qApp, TQT_SLOT( quit() ) );
+    TQObject::connect( tqApp, TQT_SIGNAL( lastWindowClosed() ), tqApp, TQT_SLOT( quit() ) );
     myapp.exec();
 }
 

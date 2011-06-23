@@ -26,7 +26,7 @@
 /*
  * Integer attributes; these are settable/gettable via
  * XNVCTRLSetAttribute() and XNVCTRLQueryAttribute, respectively.
- * Some attributes may only be read; some may require a display_mask
+ * Some attributes may only be read; some may require a display_tqmask
  * argument.  This information is encoded in the "permission" comment
  * after each attribute #define, and can be queried at run time with
  * XNVCTRLQueryValidAttributeValues().
@@ -40,14 +40,14 @@
  *    various reasons: they represent static system information, they
  *    can only be changed by changing an XF86Config option, etc).
  *
- * D: The attribute requires the display mask argument.  The
+ * D: The attribute requires the display tqmask argument.  The
  *    attributes NV_CTRL_CONNECTED_DISPLAYS and NV_CTRL_ENABLED_DISPLAYS
- *    will be a bitmask of what display devices are connected and what
+ *    will be a bittqmask of what display devices are connected and what
  *    display devices are enabled for use in X, respectively.  Each bit
- *    in the bitmask represents a display device; it is these bits which
- *    should be used as the display_mask when dealing with attributes
+ *    in the bittqmask represents a display device; it is these bits which
+ *    should be used as the display_tqmask when dealing with attributes
  *    designated with "D" below.  For attributes that do not require the
- *    display mask, the argument is ignored.
+ *    display tqmask, the argument is ignored.
  */
 
 
@@ -249,7 +249,7 @@
 
 
 /*
- * NV_CTRL_CONNECTED_DISPLAYS - returns a display mask indicating what
+ * NV_CTRL_CONNECTED_DISPLAYS - returns a display tqmask indicating what
  * display devices are connected to the GPU driving the specified X
  * screen.
  */
@@ -258,7 +258,7 @@
 
 
 /*
- * NV_CTRL_ENABLED_DISPLAYS - returns a display mask indicating what
+ * NV_CTRL_ENABLED_DISPLAYS - returns a display tqmask indicating what
  * display devices are enabled for use on the specified X screen.
  */
 
@@ -717,7 +717,7 @@
 
 /*
  * NV_CTRL_STRING_DISPLAY_DEVICE_NAME - name of the display device
- * specified in the display_mask argument.
+ * specified in the display_tqmask argument.
  */
 
 #define NV_CTRL_STRING_DISPLAY_DEVICE_NAME                      4  /* R-D */
@@ -746,7 +746,7 @@
  * is no fixed range of valid values.
  *
  * ATTRIBUTE_TYPE_BITMASK : the attribute is an integer value,
- * interpretted as a bitmask.
+ * interpretted as a bittqmask.
  *
  * ATTRIBUTE_TYPE_BOOL : the attribute is a boolean, valid values are
  * either 1 (on/true) or 0 (off/false).
@@ -763,7 +763,7 @@
  * which can only have certain values, depending on GPU.
  *
  *
- * The permissions field of NVCTRLAttributeValidValuesRec is a bitmask
+ * The permissions field of NVCTRLAttributeValidValuesRec is a bittqmask
  * that may contain:
  *
  * ATTRIBUTE_TYPE_READ

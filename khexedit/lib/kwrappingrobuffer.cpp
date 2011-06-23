@@ -50,7 +50,7 @@ void KWrappingROBuffer::set( const char* D, int L )
 }
 
 
-int KWrappingROBuffer::find( const char*/*KeyData*/, int /*Length*/, KSection /*Section*/ ) const
+int KWrappingROBuffer::tqfind( const char*/*KeyData*/, int /*Length*/, KSection /*Section*/ ) const
 {
   return 0;
 }

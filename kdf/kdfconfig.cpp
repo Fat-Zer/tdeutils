@@ -3,7 +3,7 @@
  *
  * Copyright (c) 1999 Michael Kropfberger <michael.kropfberger@gmx.net>
  *
- * Requires the Qt widget libraries, available at no cost at
+ * Requires the TQt widget libraries, available at no cost at
  * http://www.troll.no/
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -50,8 +50,8 @@ static bool GUI;
 #endif
 
 
-KDFConfigWidget::KDFConfigWidget(TQWidget *parent, const char *name, bool init)
-  : TQWidget( parent, name)
+KDFConfigWidget::KDFConfigWidget(TQWidget *tqparent, const char *name, bool init)
+  : TQWidget( tqparent, name)
 {
 
   mTabName.resize(8);
@@ -99,7 +99,7 @@ KDFConfigWidget::KDFConfigWidget(TQWidget *parent, const char *name, bool init)
 
     mScroll = new TQScrollBar( this );
     Q_CHECK_PTR(mScroll);
-    mScroll->setOrientation( TQScrollBar::Horizontal );
+    mScroll->setOrientation( Qt::Horizontal );
     mScroll->setSteps(1,20);
     mScroll->setRange(0, 180 );
     gl->addWidget( mScroll, 1, 1 );

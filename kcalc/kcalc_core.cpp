@@ -209,7 +209,7 @@ CalcEngine::CalcEngine()
 
 	struct sigaction fpe_trap;
 
-	sigemptyset(&fpe_trap.sa_tqmask);
+	sigemptyset(&fpe_trap.sa_mask);
 	fpe_trap.sa_handler = &fpe_handler;
 #ifdef SA_RESTART
 	fpe_trap.sa_flags = SA_RESTART;

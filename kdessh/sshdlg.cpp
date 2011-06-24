@@ -21,7 +21,7 @@ KDEsshDialog::KDEsshDialog(TQCString host, TQCString user, TQCString stub,
     m_User = user;
     m_Stub = stub;
 
-    setCaption(TQString::tqfromLatin1("%1@%2").tqarg(m_User.data()).tqarg(m_Host.data()));
+    setCaption(TQString::tqfromLatin1("%1@%2").tqarg(TQString(m_User)).tqarg(TQString(m_Host)));
 
     // Make the prompt a little more polite :-)
     if (prompt.lower().left(6) == TQString::tqfromLatin1("enter "))

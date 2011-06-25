@@ -222,7 +222,7 @@ TQString const _knumfloat::ascii(int prec) const
   TQString ret_str;
   char *tmp_ptr;
   if (prec > 0)
-    gmp_asprintf(&tmp_ptr, ("%." + TQString().setNum(prec) + "Fg").ascii(), _mpf);
+    gmp_asprintf(&tmp_ptr, ("%." + TQString(TQString().setNum(prec) + "Fg")).ascii(), _mpf);
   else
     gmp_asprintf(&tmp_ptr, "%Fg", _mpf);
 

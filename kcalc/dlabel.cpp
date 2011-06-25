@@ -40,8 +40,8 @@ DispLogic::DispLogic(TQWidget *tqparent, const char *name,
 {
 	KNumber::setDefaultFloatOutput(true);
 	KNumber::setDefaultFractionalInput(true);
-	_back = KStdAction::undo(this, TQT_SLOT(history_back()), coll);
-	_forward = KStdAction::redo(this, TQT_SLOT(history_forward()), coll);
+	_back = KStdAction::undo(TQT_TQOBJECT(this), TQT_SLOT(history_back()), coll);
+	_forward = KStdAction::redo(TQT_TQOBJECT(this), TQT_SLOT(history_forward()), coll);
 
 	_forward->setEnabled(false);
 	_back->setEnabled(false);

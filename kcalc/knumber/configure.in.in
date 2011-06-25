@@ -53,7 +53,7 @@ KDE_CHECK_HEADER([gmp.h], [
   AC_LANG_CPLUSPLUS
 
   kde_save_LIBS=$LIBS
-  LIBS="$all_libraries -lgmp"
+  LIBS="$all_libraries -lgmp -ltqt"
   AC_TRY_LINK(dnl
   [
     #include <gmp.h>

@@ -123,7 +123,7 @@ void KCalcDisplay::slotPaste(bool bClipboard)
 
 	tmp_str = tmp_str.stripWhiteSpace();
 
-	if (tmp_str.startsWith("0x", false))
+	if (tmp_str.tqstartsWith("0x", false))
 	  tmp_num_base = NB_HEX;
 
 	if (tmp_num_base != NB_DECIMAL)
@@ -150,7 +150,7 @@ void KCalcDisplay::slotPaste(bool bClipboard)
 
 void KCalcDisplay::slotDisplaySelected(void)
 {
-	if(_button == LeftButton) {
+	if(_button == Qt::LeftButton) {
 		if(_lit) {
 			slotCopy();
 			selection_timer->start(100);
@@ -182,11 +182,11 @@ void KCalcDisplay::invertColors()
 
 void KCalcDisplay::mousePressEvent(TQMouseEvent *e)
 {
-	if(e->button() == LeftButton) {
+	if(e->button() == Qt::LeftButton) {
 		_lit = !_lit;
-		_button = LeftButton;
+		_button = Qt::LeftButton;
 	} else {
-		_button = MidButton;
+		_button = Qt::MidButton;
 	}
 	
 	emit clicked();

@@ -737,7 +737,7 @@ bool KHexEdit::selectWord( /*unsigned TODO:change all unneeded signed into unsig
 
       BufferRanges->setFirstWordSelection( WordSection );
       BufferCursor->gotoIndex( WordSection.end()+1 );
-      tqrepaintChanged();
+      repaintChanged();
 
       unpauseCursor();
       return true;
@@ -757,7 +757,7 @@ void KHexEdit::select( KSection Section )
 
   BufferRanges->setSelection( Section );
   BufferCursor->gotoIndex( Section.end()+1 );
-  tqrepaintChanged();
+  repaintChanged();
 
   unpauseCursor();
 
@@ -781,7 +781,7 @@ void KHexEdit::selectAll( bool Select )
     BufferCursor->gotoEnd();
   }
 
-  tqrepaintChanged();
+  repaintChanged();
 
   unpauseCursor();
 
@@ -967,7 +967,7 @@ void KHexEdit::insert( const TQByteArray &D )
   if( Changed )
   {
     BufferRanges->addChangedRange( ChangedRange );
-    tqrepaintChanged();
+    repaintChanged();
   }
   ensureCursorVisible();
 
@@ -994,7 +994,7 @@ void KHexEdit::removeSelectedData()
   KSection ChangedRange = removeData( Selection );
   BufferRanges->removeSelection();
 
-  tqrepaintChanged();
+  repaintChanged();
 
   BufferCursor->gotoCIndex( Selection.start() );
 
@@ -1059,7 +1059,7 @@ void KHexEdit::setCursorPosition( int Index, bool Behind )
   bool RangesModifed = BufferRanges->isModified();
   if( RangesModifed )
   {
-    tqrepaintChanged();
+    repaintChanged();
 
     viewport()->setCursor( isReadOnly() ? arrowCursor : ibeamCursor );
 
@@ -1201,7 +1201,7 @@ bool KHexEdit::eventFilter( TQObject *O, TQEvent *E )
 //       doc->setDefaultFormat( doc->formatCollection()->defaultFormat()->font(), c );
 //       lastFormatted = doc->firstParagraph();
 //       formatMore();
-//       tqrepaintChanged();
+//       repaintChanged();
 //     }
 //   }
 
@@ -1397,12 +1397,12 @@ void KHexEdit::keyPressEvent( TQKeyEvent *KeyEvent )
 }
 
 
-void KHexEdit::tqrepaintChanged()
+void KHexEdit::repaintChanged()
 {
   if( !isUpdatesEnabled() || !viewport()->isUpdatesEnabled() || !BufferRanges->isModified() )
     return;
 
-  // TODO: we do this only to let the scrollview handle new or removed lines. overlaps with tqrepaintRange
+  // TODO: we do this only to let the scrollview handle new or removed lines. overlaps with repaintRange
   resizeContents( totalWidth(), totalHeight() );
 
   KPixelXs Xs( contentsX(), visibleWidth(), true );
@@ -1559,7 +1559,7 @@ void KHexEdit::contentsMousePressEvent( TQMouseEvent *e )
       BufferRanges->setSelectionStart( BufferLayout->indexAtLineStart(DoubleClickLine) );
       BufferCursor->gotoLineEnd();
       BufferRanges->setSelectionEnd( BufferCursor->realIndex() );
-      tqrepaintChanged();
+      repaintChanged();
 
       unpauseCursor();
       return;
@@ -1606,7 +1606,7 @@ void KHexEdit::contentsMousePressEvent( TQMouseEvent *e )
 
   if( BufferRanges->isModified() )
   {
-    tqrepaintChanged();
+    repaintChanged();
     viewport()->setCursor( isReadOnly() ? arrowCursor : ibeamCursor );
   }
 
@@ -1699,7 +1699,7 @@ void KHexEdit::contentsMouseReleaseEvent( TQMouseEvent *e )
     ClipboardMode = TQClipboard::Clipboard;
 
     // ensure selection changes to be drawn TODO: create a insert/pasteAtCursor that leaves out drawing
-    tqrepaintChanged();
+    repaintChanged();
 
     ensureCursorVisible();
     unpauseCursor();
@@ -1803,7 +1803,7 @@ void KHexEdit::handleMouseMove( const TQPoint& Point ) // handles the move of th
   if( BufferRanges->selectionStarted() )
     BufferRanges->setSelectionEnd( BufferCursor->realIndex() );
 
-  tqrepaintChanged();
+  repaintChanged();
 
   unpauseCursor();
 }
@@ -1953,7 +1953,7 @@ void KHexEdit::handleInternalDrag( TQDropEvent *e )
   BufferRanges->addChangedRange( ChangedRange );
   BufferRanges->removeSelection();
 
-  tqrepaintChanged();
+  repaintChanged();
   ensureCursorVisible();
 
   // open ui

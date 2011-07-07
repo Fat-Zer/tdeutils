@@ -197,7 +197,7 @@ protected:
 
 private:
     bool widgetUpdate;
-    bool tqrepaintInProgress;
+    bool repaintInProgress;
     //bool reloading;
     bool want_right_button;
     bool want_meter_wheel_event;

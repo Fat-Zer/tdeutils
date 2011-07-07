@@ -247,9 +247,9 @@ bool KBytesEditWidget::hasSelectedData() const
 }
 
 
-void KBytesEditWidget::tqrepaintRange( int i1, int i2 )
+void KBytesEditWidget::repaintRange( int i1, int i2 )
 {
-  BytesEdit->tqrepaintRange( i1, i2 );
+  BytesEdit->repaintRange( i1, i2 );
 }
 
 

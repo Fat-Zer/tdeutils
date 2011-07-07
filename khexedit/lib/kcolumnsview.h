@@ -113,7 +113,7 @@ class KColumnsView : public TQScrollView
 
   protected: // painting
     void updateView();
-    void tqrepaintView();
+    void repaintView();
 
   private:
     /** hiding it*/

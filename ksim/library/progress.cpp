@@ -108,7 +108,7 @@ const TQRect &KSim::Progress::rectOrigin() const
   return d->rectOrigin;
 }
 
-void KSim::Progress::configureObject(bool tqrepaintWidget)
+void KSim::Progress::configureObject(bool repaintWidget)
 {
   KSim::Label::configureObject(false);
 
@@ -120,7 +120,7 @@ void KSim::Progress::configureObject(bool tqrepaintWidget)
     setMeterPixmap(themeLoader().current().splitPixmap(KSim::Theme::KrellMeter));
   }
 
-  if (tqrepaintWidget)
+  if (repaintWidget)
     update();
 }
 

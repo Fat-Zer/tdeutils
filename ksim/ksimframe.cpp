@@ -36,7 +36,7 @@ KSim::Frame::~Frame()
 {
 }
 
-void KSim::Frame::configureObject(bool tqrepaintWidget)
+void KSim::Frame::configureObject(bool repaintWidget)
 {
   m_image.load(themeLoader().current().framePixmap(type()));
 
@@ -58,7 +58,7 @@ void KSim::Frame::configureObject(bool tqrepaintWidget)
   themeLoader().reColourImage(m_image);
   m_background.convertFromImage(m_image.smoothScale(size()));
 
-  if (tqrepaintWidget)
+  if (repaintWidget)
     update();
 }
 

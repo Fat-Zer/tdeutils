@@ -249,7 +249,7 @@ void KSim::Chart::buildPixmaps()
   }
 }
 
-void KSim::Chart::configureObject(bool tqrepaintWidget)
+void KSim::Chart::configureObject(bool repaintWidget)
 {
   TQSize oldSize = tqsizeHint();
   KSim::Config::config()->setGroup("Misc");
@@ -275,7 +275,7 @@ void KSim::Chart::configureObject(bool tqrepaintWidget)
 
   setConfigValues();
 
-  if (tqrepaintWidget)
+  if (repaintWidget)
     update();
 }
 

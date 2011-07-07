@@ -63,7 +63,7 @@ namespace KSim
    *      }
    *      ~Test() {}
    *
-   *      void configureObject(bool tqrepaintWidget)
+   *      void configureObject(bool repaintWidget)
    *      {
    *        // Re-Create view code here
    *      }

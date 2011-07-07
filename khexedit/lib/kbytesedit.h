@@ -36,7 +36,7 @@ class KBytesEditPrivate;
   *
   * 1. used as viewer
   *    a) static data ranges -> no changes for data pointer and length
-  *       possible changes are told to the widget by tqrepaintRange
+  *       possible changes are told to the widget by repaintRange
   *    b) changing data ranges -> data pointer and length might change
   *       changes told by
   *       * resetData( char *, int size, bool tqrepaint );
@@ -138,7 +138,7 @@ class KHEXEDIT_EXPORT KBytesEdit : public KHexEdit
     void setKeepsMemory( bool KM = true );
 
     /** tqrepaint the indizes from i1 to i2 */
-    void tqrepaintRange( int i1, int i2 );
+    void repaintRange( int i1, int i2 );
 
   protected:
     /** deletes the databuffer */

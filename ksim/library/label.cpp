@@ -79,7 +79,7 @@ const TQString &KSim::Label::text() const
   return d->text;
 }
 
-void KSim::Label::configureObject(bool tqrepaintWidget)
+void KSim::Label::configureObject(bool repaintWidget)
 {
   TQString image = themeLoader().current().meterPixmap(type(), false);
   if (image.isEmpty())
@@ -91,7 +91,7 @@ void KSim::Label::configureObject(bool tqrepaintWidget)
   TQSize oldSize = tqsizeHint();
 
   setConfigValues();
-  retqlayoutLabel(oldSize, tqrepaintWidget);
+  retqlayoutLabel(oldSize, repaintWidget);
 }
 
 void KSim::Label::setPixmap(const TQPixmap &pixmap)

@@ -75,7 +75,7 @@ protected:
     void mouseMoveEvent(TQMouseEvent*);
 
     void paintCell(TQPainter*, int, int);
-    void tqrepaintCell(int, int);
+    void repaintCell(int, int);
     void selectCell(int row, int col);
 
     void insertString(TQString s);

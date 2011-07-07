@@ -104,7 +104,7 @@ namespace KSim
       /**
        * reimplemented for internal reasons
        */
-      virtual void configureObject(bool tqrepaintWidget = true);
+      virtual void configureObject(bool repaintWidget = true);
 
       /**
        * reimplemented for internal reasons

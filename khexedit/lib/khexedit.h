@@ -216,7 +216,7 @@ class KHEXEDIT_EXPORT KHexEdit : public KColumnsView
     void placeCursor( const TQPoint &Point );
     /***/
     void setCursorColumn( KBufferColumnId );
-//    void tqrepaintByte( int row, int column, bool Erase = true );
+//    void repaintByte( int row, int column, bool Erase = true );
 //    void updateByte( int row, int column );
 //    void ensureByteVisible( int row, int column );
 
@@ -397,8 +397,8 @@ class KHEXEDIT_EXPORT KHexEdit : public KColumnsView
     /** handles screen update in case of a change to any of the width sizes
       */
     void updateViewByWidth();
-    /** tqrepaints all the parts that are signed as changed */
-    void tqrepaintChanged();
+    /** repaints all the parts that are signed as changed */
+    void repaintChanged();
 
   protected: // drawing related operations
     /** recreates the cursor pixmaps and paints active and inactive cursors if doable */

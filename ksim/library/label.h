@@ -96,7 +96,7 @@ namespace KSim
       /**
        * recreates the labels look & feel
        */
-      virtual void configureObject(bool tqrepaintWidget = true);
+      virtual void configureObject(bool repaintWidget = true);
       /**
        * sets a pixmap for the label
        */

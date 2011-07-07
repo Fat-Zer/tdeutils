@@ -99,7 +99,7 @@ public:
   virtual bool updateSelection(bool tqparentSelected);
 
   /**
-     Clears the selection and tqrepaints the widget if `update' is true.
+     Clears the selection and repaints the widget if `update' is true.
   */
   virtual void clearSelection();
 

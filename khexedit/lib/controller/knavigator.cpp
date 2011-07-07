@@ -127,7 +127,7 @@ void KNavigator::moveCursor( KMoveAction Action, bool Select )
   if( Select )
     BufferRanges->setSelectionEnd( BufferCursor->realIndex() );
 
-  HexEdit->tqrepaintChanged();
+  HexEdit->repaintChanged();
   HexEdit->ensureCursorVisible();
 
   HexEdit->unpauseCursor();

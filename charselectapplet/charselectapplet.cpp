@@ -228,7 +228,7 @@ void CharTable::paintEvent(TQPaintEvent* e)
     TQFrame::paintEvent(e);
 }
 
-void CharTable::tqrepaintCell(int r, int c)
+void CharTable::repaintCell(int r, int c)
 {
     TQPainter p(this);
 
@@ -307,8 +307,8 @@ void CharTable::selectCell(int row, int col)
     _activeRow = row;
     _activeCol = col;
 
-    tqrepaintCell(oldRow, oldCol);
-    tqrepaintCell(_activeRow, _activeCol);
+    repaintCell(oldRow, oldCol);
+    repaintCell(_activeRow, _activeCol);
 
     TQClipboard *cb = TQApplication::tqclipboard();
     TQObject::disconnect( cb, TQT_SIGNAL(dataChanged()), this, TQT_SLOT(clearCell()) );
@@ -330,7 +330,7 @@ void CharTable::clearCell()
     _activeRow = -1;
     _activeCol = -1;
 
-    tqrepaintCell(oldRow, oldCol);
+    repaintCell(oldRow, oldCol);
     
     TQObject::disconnect( TQApplication::tqclipboard(), TQT_SIGNAL(dataChanged()), this, TQT_SLOT(clearCell()) );
 }

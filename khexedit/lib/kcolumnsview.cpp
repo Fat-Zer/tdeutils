@@ -129,10 +129,10 @@ void KColumnsView::updateView()
 }
 
 
-void KColumnsView::tqrepaintView()
+void KColumnsView::repaintView()
 {
   resizeContents( totalWidth(), totalHeight() );
-  tqrepaintContents( false );
+  repaintContents( false );
 }
 
 

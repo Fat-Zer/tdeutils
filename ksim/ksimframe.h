@@ -40,7 +40,7 @@ namespace KSim
       ~Frame();
 
       const TQPixmap *const background() const { return &m_background; }
-      virtual void configureObject(bool tqrepaintWidget=true);
+      virtual void configureObject(bool repaintWidget=true);
 
     protected:
       virtual void paintEvent(TQPaintEvent *);

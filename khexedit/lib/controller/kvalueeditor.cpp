@@ -115,7 +115,7 @@ bool KValueEditor::handleKeyPress( TQKeyEvent *KeyEvent )
                   BufferCursor->gotoRealIndex();
                   KSection ChangedRange( Index,HexEdit->DataBuffer->size()-1 );
                   HexEdit->BufferRanges->addChangedRange( ChangedRange );
-                  HexEdit->tqrepaintChanged();
+                  HexEdit->repaintChanged();
                   HexEdit->ensureCursorVisible();
                   HexEdit->unpauseCursor();
                   HexEdit->updateCursor();

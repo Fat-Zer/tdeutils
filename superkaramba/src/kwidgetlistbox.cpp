@@ -188,7 +188,7 @@ void KWidgetListbox::showItems(show_callback func, void* data)
 void KWidgetListbox::showEvent(TQShowEvent*)
 {
   //kdDebug() << k_funcinfo << endl;
-  tqrepaintContents(false);
+  repaintContents(false);
 }
 
 void KWidgetListbox::paintCell(TQPainter*, int, int, const TQRect&,

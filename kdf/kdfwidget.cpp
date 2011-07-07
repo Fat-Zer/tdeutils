@@ -543,7 +543,7 @@ void KDFWidget::popupMenu( TQListViewItem *item, const TQPoint &p )
 
 
 /**************************************************************************
-  * recalculates and tqrepaints the pixBars
+  * recalculates and repaints the pixBars
 **/
 void KDFWidget::updateDiskBarPixmaps( void )
 {

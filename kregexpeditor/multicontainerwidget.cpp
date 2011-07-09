@@ -103,7 +103,7 @@ void MultiContainerWidget::addNewChild(DragAccepter *accepter, RegExpWidget *chi
   qFatal("Accepter not found in list");
 }
 
-bool MultiContainerWidget::updateSelection(bool tqparentSelected)
+bool MultiContainerWidget::updateSelection(bool parentSelected)
 {
   bool changed = false;
   bool isSel = _isSelected;
@@ -114,7 +114,7 @@ bool MultiContainerWidget::updateSelection(bool tqparentSelected)
     oldState[i] = _tqchildren.at(i)->isSelected();
   }
 
- RegExpWidget::updateSelection( tqparentSelected );
+ RegExpWidget::updateSelection( parentSelected );
 
   int first;
   int last;

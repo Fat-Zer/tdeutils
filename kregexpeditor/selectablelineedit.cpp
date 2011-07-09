@@ -68,6 +68,6 @@ void SelectableLineEdit::slotKeyPressed()
 
   if ( actualSize > size().width()-frameWidth ) {
     tqrepaint();
-    emit tqparentPleaseUpdate();
+    emit parentPleaseUpdate();
   }
 }

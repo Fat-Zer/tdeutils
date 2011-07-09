@@ -150,7 +150,7 @@ KSim::MainView::MainView(KConfig *config,
     addPlugins();
   }
   
-  connect(&m_tqmaskTimer, TQT_SIGNAL(timeout()), TQT_SLOT(slotMaskMainView()));
+  connect(&m_maskTimer, TQT_SIGNAL(timeout()), TQT_SLOT(slotMaskMainView()));
 }
 
 KSim::MainView::~MainView()
@@ -160,7 +160,7 @@ KSim::MainView::~MainView()
 
 void KSim::MainView::show()
 {
-  tqmaskMainView();
+  maskMainView();
   TQWidget::show();
 }
 
@@ -207,10 +207,10 @@ const TQString &KSim::MainView::hostname() const
 
 void KSim::MainView::slotMaskMainView()
 {
-  tqmaskMainView();
+  maskMainView();
 }
 
-void KSim::MainView::tqmaskMainView()
+void KSim::MainView::maskMainView()
 {
   if (!m_topFrame->background()->tqmask() ||
       !m_leftFrame->background()->tqmask() ||
@@ -228,7 +228,7 @@ void KSim::MainView::tqmaskMainView()
 
   TQSize insideSize(m_pluginLayout->tqgeometry().size());
 
-  // make a cleared bigrect where we can put our pixmap tqmasks on
+  // make a cleared bigrect where we can put our pixmap masks on
   TQBitmap bigBitmap(tqtopLevelWidget()->size(), true);
 
   // better return if our bitmap is null so we can avoid crashes
@@ -318,7 +318,7 @@ void KSim::MainView::reparseConfig(bool emitReload,
     KSim::ThemeLoader::self().themeColours(this);
 
   m_sysinfo->createView();
-  tqmaskMainView();
+  maskMainView();
 
   m_topLevel->reparse();
 
@@ -404,7 +404,7 @@ void KSim::MainView::preferences()
 void KSim::MainView::resizeEvent(TQResizeEvent *re)
 {
   TQWidget::resizeEvent(re);
-  m_tqmaskTimer.start(0, true);
+  m_maskTimer.start(0, true);
 }
 
 void KSim::MainView::paletteChange(const TQPalette &)

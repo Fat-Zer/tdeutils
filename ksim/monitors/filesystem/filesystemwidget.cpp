@@ -158,8 +158,8 @@ bool FilesystemWidget::eventFilter(TQObject *o, TQEvent *e)
       default:
         break;
       case Qt::LeftButton:
-        if (tqparentWidget()->inherits("KSim::PluginView"))
-          static_cast<KSim::PluginView *>(tqparentWidget())->doCommand();
+        if (parentWidget()->inherits("KSim::PluginView"))
+          static_cast<KSim::PluginView *>(parentWidget())->doCommand();
         break;
     }
 

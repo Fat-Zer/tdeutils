@@ -1052,10 +1052,10 @@ TQString KJotsPage::defaultSubject()
 {
     int page = 0;
 
-    if ( tqparentBook() )
+    if ( parentBook() )
     {
         //We can't use childCount() here because it will count books, too.
-        KJotsEntryBase *entry = dynamic_cast<KJotsEntryBase*>(tqparentBook()->firstChild());
+        KJotsEntryBase *entry = dynamic_cast<KJotsEntryBase*>(parentBook()->firstChild());
         while ( entry )
         {
             if ( entry->isPage() ) ++page;
@@ -1192,12 +1192,12 @@ TQString KJotsPage::generateHtml( KJotsEntryBase *top, bool diskMode )
 
     if ( top != this ) 
     {
-        KJotsBook *tqparent = tqparentBook();
+        KJotsBook *tqparent = parentBook();
         while ( tqparent )
         {
             html += TQString("<td><a href=\"#%1\">%2</a></td>").tqarg(tqparent->id()).tqarg(tqparent->subject());
             if ( tqparent == top ) break;
-            tqparent = tqparent->tqparentBook();
+            tqparent = tqparent->parentBook();
         }
     }
     html += TQString("</tr></table>");

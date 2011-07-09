@@ -196,7 +196,7 @@ namespace KSim
        * sets the background image to be painted
        */
       void setThemePixmap(const TQString &image);
-      void retqlayoutLabel(const TQSize &old, bool tqrepaint = true);
+      void relayoutLabel(const TQSize &old, bool tqrepaint = true);
 
     private:
       /**

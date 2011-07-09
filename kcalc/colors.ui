@@ -274,5 +274,5 @@
     <tabstop>kcfg_MemoryButtonsColor</tabstop>
     <tabstop>kcfg_OperationButtonsColor</tabstop>
 </tabstops>
-<tqlayoutdefaults spacing="6" margin="11"/>
+<layoutdefaults spacing="6" margin="11"/>
 </UI>

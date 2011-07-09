@@ -332,5 +332,5 @@ Allows the user to select the Key Server which will be used to import PGP/GnuPG 
         </widget>
     </grid>
 </widget>
-<tqlayoutdefaults spacing="6" margin="11"/>
+<layoutdefaults spacing="6" margin="11"/>
 </UI>

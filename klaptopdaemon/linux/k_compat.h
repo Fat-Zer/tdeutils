@@ -124,11 +124,11 @@
 #endif
 
 #if (LINUX_VERSION_CODE < VERSION(2,1,51))
-#define INVALIDATE_INODES(r)	tqinvalidate_inodes(r)
+#define INVALIDATE_INODES(r)	invalidate_inodes(r)
 #else
 #define INVALIDATE_INODES(r) \
 		do { struct super_block *sb = get_super(r); \
-		if (sb) tqinvalidate_inodes(sb); } while (0)
+		if (sb) invalidate_inodes(sb); } while (0)
 #endif
 
 #if (LINUX_VERSION_CODE < VERSION(2,1,60))

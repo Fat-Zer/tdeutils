@@ -63,13 +63,13 @@ KAboutData *ArkPart::createAboutData()
 
 
 
-ArkPart::ArkPart( TQWidget *tqparentWidget, const char * /*widgetName*/, TQObject *tqparent,
+ArkPart::ArkPart( TQWidget *parentWidget, const char * /*widgetName*/, TQObject *tqparent,
                   const char *name, const TQStringList &, bool readWrite )
         : KParts::ReadWritePart(tqparent, name)
 {
     kdDebug(1601)<<"ArkPart::ArkPart"<<endl;
     setInstance(ArkFactory::instance());
-    awidget = new  ArkWidget( tqparentWidget, "ArkWidget" );
+    awidget = new  ArkWidget( parentWidget, "ArkWidget" );
 
     setWidget(awidget);
     connect( awidget, TQT_SIGNAL( fixActions() ), this, TQT_SLOT( fixEnables() ) );

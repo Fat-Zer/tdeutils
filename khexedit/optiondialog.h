@@ -238,7 +238,7 @@ class COptionDialog : public KDialogBase
 
   signals:
     void lineSizeChoice( const SDisplayLine &lineSize );
-    void tqlayoutChoice( const SDisplayLayout &tqlayout );
+    void layoutChoice( const SDisplayLayout &tqlayout );
     void cursorChoice( const SDisplayCursor &cursor ); 
     void colorChoice( const SDisplayColor &color );
     void fontChoice( const SDisplayFont &font );

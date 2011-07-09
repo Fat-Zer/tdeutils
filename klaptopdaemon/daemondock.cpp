@@ -708,7 +708,7 @@ quit:
             // and which has a transparent background.
             // Unfortunately this required the following twisted code because for some
             // reason text that is drawn on a transparent pixmap is invisible
-            // (aptqparently the alpha channel isn't changed when the text is drawn).
+            // (apparently the alpha channel isn't changed when the text is drawn).
             // Therefore I have to draw the text on a solid background and then remove
             // the background by making it transparent with TQPixmap::setMask. This
             // involves the slow createHeuristicMask() function (from the API docs:

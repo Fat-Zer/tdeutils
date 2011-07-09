@@ -95,7 +95,7 @@
         </widget>
         <widget class="TQLayoutWidget">
             <property name="name">
-                <cstring>tqlayoutButtons</cstring>
+                <cstring>layoutButtons</cstring>
             </property>
             <hbox>
                 <property name="name">
@@ -231,8 +231,8 @@
     <slot access="protected">selectionChanged(int)</slot>
     <slot access="protected">search(const QString&amp;)</slot>
 </Q_SLOTS>
-<tqlayoutdefaults spacing="6" margin="11"/>
-<tqlayoutfunctions spacing="KDialog::spacingHint" margin="KDialog::marginHint"/>
+<layoutdefaults spacing="6" margin="11"/>
+<layoutfunctions spacing="KDialog::spacingHint" margin="KDialog::marginHint"/>
 <includehints>
     <includehint>kwidgetlistbox.h</includehint>
     <includehint>kpushbutton.h</includehint>

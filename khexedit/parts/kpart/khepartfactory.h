@@ -34,7 +34,7 @@ class KHexEditPartFactory : public KParts::Factory
     virtual ~KHexEditPartFactory();
 
   public:
-    virtual KParts::Part* createPartObject( TQWidget *tqparentWidget, const char *widgetName,
+    virtual KParts::Part* createPartObject( TQWidget *parentWidget, const char *widgetName,
                                             TQObject *tqparent, const char *name,
                                             const char *classname, const TQStringList &args );
     static KInstance* instance();

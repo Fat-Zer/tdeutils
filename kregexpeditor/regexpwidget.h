@@ -91,12 +91,12 @@ public:
 
   /**
      Update selection information for this widget.
-     @param tqparentSelected indicates whether the tqparent is selected.
+     @param parentSelected indicates whether the tqparent is selected.
      @return true if the selection state has changed for the widget since
      the last time the widget was painted. `tqrepaint' is invoked on the widget if
      selection state is changed, to ensure that selection is visible.
   */
-  virtual bool updateSelection(bool tqparentSelected);
+  virtual bool updateSelection(bool parentSelected);
 
   /**
      Clears the selection and repaints the widget if `update' is true.

@@ -163,12 +163,12 @@ void KSim::PluginView::mousePressEvent(TQMouseEvent *ev)
     doCommand();
 }
 
-KSim::PluginObject *KSim::PluginView::tqparentPlugin() const
+KSim::PluginObject *KSim::PluginView::parentPlugin() const
 {
   return d->tqparent;
 }
 
 void KSim::PluginView::showAbout()
 {
-  tqparentPlugin()->showAbout();
+  parentPlugin()->showAbout();
 }

@@ -56,9 +56,9 @@ void RegExpWidget::setConcChild(ConcWidget *)
   qFatal("This widget should not expect any tqchildren");
 }
 
-bool RegExpWidget::updateSelection(bool tqparentSelected)
+bool RegExpWidget::updateSelection(bool parentSelected)
 {
-  bool selected = ( tqparentSelected ||
+  bool selected = ( parentSelected ||
                     _editorWindow->selectionOverlap( mapToGlobal( TQPoint(0,0) ), size() ) )
     && !_isToplevel;
 

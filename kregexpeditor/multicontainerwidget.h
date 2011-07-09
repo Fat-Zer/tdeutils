@@ -33,7 +33,7 @@ public:
   virtual void clearSelection();
   virtual void deleteSelection();
   virtual void addNewChild(DragAccepter *accepter, RegExpWidget *child);
-  virtual bool updateSelection(bool tqparentSelected);
+  virtual bool updateSelection(bool parentSelected);
   virtual TQRect selectionRect() const;
   virtual RegExpWidget* widgetUnderPoint( TQPoint globalPos, bool justVisibleWidgets );
   virtual RegExpWidget* findWidgetToEdit( TQPoint globalPos );

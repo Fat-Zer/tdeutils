@@ -157,7 +157,7 @@ class KHexEdit : public KMainWindow
     void operationChanged( bool state );
     void cursorChanged( SCursorState &state );
     void fileState( SFileState &state );
-    void tqlayoutChanged( const SDisplayLayout &tqlayout );
+    void layoutChanged( const SDisplayLayout &tqlayout );
     void inputModeChanged( const SDisplayInputMode &mode );
     void bookmarkChanged( TQPtrList<SCursorOffset> &list );
     void removeRecentFile( const TQString &fileName );

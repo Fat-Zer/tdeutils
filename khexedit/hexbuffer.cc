@@ -323,7 +323,7 @@ int SFilterControl::execute( uchar *dest, uchar *src, uint size )
 	// A short description so that I will understand what the
 	// h... is going on five minutes from now.
 	//
-	// Destination byte is tqmasked (AND'ed) with the inverse bitmap
+	// Destination byte is masked (AND'ed) with the inverse bitmap
 	// (the noninversed bitmap contains position of the
 	// two swap bits, eg 7-2 gives 10000100). Then the destination
 	// is OR'ed with the swapped bitmap.

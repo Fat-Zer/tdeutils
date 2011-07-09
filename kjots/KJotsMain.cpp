@@ -366,7 +366,7 @@ void KJotsMain::deleteEntry()
         return;
     }
 
-    KJotsBook* bk = cur->tqparentBook();
+    KJotsBook* bk = cur->parentBook();
     KJotsPage* nxt = dynamic_cast<KJotsPage*>(cur->nextSibling());
 
     me_text->setEntry(0);
@@ -1081,7 +1081,7 @@ void KJotsMain::slotItemMoved(TQListViewItem *item, TQListViewItem* afterFirst, 
 
     //afterFirst doesn't work like we need it to. We want it to point to the
     //previous sibling, not just the entry directly above it.
-    if ( afterFirst && afterFirst->tqparent() != entry->tqparentBook() )
+    if ( afterFirst && afterFirst->tqparent() != entry->parentBook() )
     {
         TQListViewItemIterator it ( afterFirst );
         afterFirst = 0;
@@ -1090,13 +1090,13 @@ void KJotsMain::slotItemMoved(TQListViewItem *item, TQListViewItem* afterFirst, 
         while ( it.current() )
         {
             //No other items were above this one.
-            if ( it.current() == entry->tqparentBook() ) 
+            if ( it.current() == entry->parentBook() ) 
             {
                 break;
             }
 
             //Found a previous sibling!
-            if ( it.current()->tqparent() == entry->tqparentBook() )
+            if ( it.current()->tqparent() == entry->parentBook() )
             {
                 afterFirst = it.current();
                 break;
@@ -1126,7 +1126,7 @@ void KJotsMain::slotItemMoved(TQListViewItem *item, TQListViewItem* afterFirst, 
         {
             //We have to move item back.
             subjectList->takeItem(item);
-            entry->tqparentBook()->insertItem(item);
+            entry->parentBook()->insertItem(item);
             entry->moveItem(afterFirst);
         } else {
             subjectList->takeItem(item);
@@ -1153,7 +1153,7 @@ void KJotsMain::slotItemMoved(TQListViewItem *item, TQListViewItem* afterFirst, 
         if ( entryAfter->isBook() )
             entryAfter->setDirty(true);
         else
-            entryAfter->tqparentBook()->setDirty(true);
+            entryAfter->parentBook()->setDirty(true);
     }
 
     return;

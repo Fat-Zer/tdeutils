@@ -155,7 +155,7 @@ KCalculator::KCalculator(TQWidget *tqparent, const char *name)
 	//  Create Calculator Buttons
 	//
 
-	// First the widgets that are the tqparents of the buttons
+	// First the widgets that are the parents of the buttons
 	mSmallPage = new TQWidget(central);
 	mLargePage = new TQWidget(central);
 	mNumericPage = 	setupNumericKeys(central);
@@ -228,7 +228,7 @@ KCalculator::KCalculator(TQWidget *tqparent, const char *name)
 
 
 	//
-	// All these tqlayouts are needed because all the groups have their
+	// All these layouts are needed because all the groups have their
 	// own size per row so we can't use one huge TQGridLayout (mosfet)
 	//
 	TQGridLayout *smallBtnLayout = new TQGridLayout(mSmallPage, 6, 4, 0,

@@ -29,7 +29,7 @@ public:
     ArkFactory() : KParts::Factory() {}
     virtual ~ArkFactory();
     virtual KParts::Part *createPartObject(
-        TQWidget *tqparentWidget = 0,const char *widgetName = 0,
+        TQWidget *parentWidget = 0,const char *widgetName = 0,
         TQObject *tqparent = 0, const char *name = 0,
         const char *classname = "KParts::Part",
         const TQStringList &args = TQStringList() );

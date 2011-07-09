@@ -71,7 +71,7 @@ class KarambaApplication : public KApplication
     bool startThemes(TQStringList &lst);
     KarambaIface* dcopIface() { return iface; };
     dcopIface_stub* dcopStub() { return dcopIfaceStub; };
-    TQWidget* tqparentWindow() { return (TQWidget*)themeListWindow; };
+    TQWidget* parentWindow() { return (TQWidget*)themeListWindow; };
 
     void addKaramba(karamba* k, bool reloading = false);
     void deleteKaramba(karamba* k, bool reloading = false);

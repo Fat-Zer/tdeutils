@@ -62,7 +62,7 @@ void Systemtray::updateBackgroundPixmap ( const TQPixmap & pixmap) {
     //Stupid stupid stupid work around for annoying bug
     //QXEmbed ignores setBackgroundOrigin(AncestorOrigin)....
     TQPixmap bug = TQPixmap(emb->size());
-    bitBlt(TQT_TQPAINTDEVICE(&bug), 0, 0, TQT_TQPAINTDEVICE(const_cast<TQPixmap*>(&pixmap)), emb->tqparentWidget()->x()+emb->x(),  emb->tqparentWidget()->y()+emb->y(), emb->width(), emb->height(),TQt::CopyROP, false);
+    bitBlt(TQT_TQPAINTDEVICE(&bug), 0, 0, TQT_TQPAINTDEVICE(const_cast<TQPixmap*>(&pixmap)), emb->parentWidget()->x()+emb->x(),  emb->parentWidget()->y()+emb->y(), emb->width(), emb->height(),TQt::CopyROP, false);
     emb->setPaletteBackgroundPixmap (bug);
 
   }
@@ -158,9 +158,9 @@ void Systemtray::updateTrayWindows( void )
     else
       m_Wins.next();
   }
-  tqlayoutSystray();
+  layoutSystray();
 }
-void Systemtray::tqlayoutSystray()
+void Systemtray::layoutSystray()
 {
   int i = 0, a = 0;
 
@@ -213,7 +213,7 @@ void Systemtray::systemTrayWindowAdded( WId w )
   emb->resize(24, 24);
   emb->show();
 
-  tqlayoutSystray();
+  layoutSystray();
 }
 
 void Systemtray::systemTrayWindowRemoved(WId)

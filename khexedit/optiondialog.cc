@@ -789,7 +789,7 @@ void COptionDialog::slotApply( void )
 	l.horzGridWidth = l.vertGridWidth = 1;
       }
 
-      emit tqlayoutChoice( mDisplayState.tqlayout );
+      emit layoutChoice( mDisplayState.tqlayout );
     }
     break;
 

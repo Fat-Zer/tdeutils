@@ -68,7 +68,7 @@ namespace KSim
 
     k_dcop:
       const TQString &hostname() const;
-      virtual void tqmaskMainView();
+      virtual void maskMainView();
 
     signals:
       void reload();
@@ -107,7 +107,7 @@ namespace KSim
       TQBoxLayout *m_pluginLayout;
       TQPoint m_mousePoint;
       int m_oldLocation;
-      TQTimer m_tqmaskTimer;
+      TQTimer m_maskTimer;
   };
 }
 #endif // KSIMVIEW_H

@@ -68,7 +68,7 @@ public:
   CompoundWidget( CompoundRegExp* regexp, RegExpEditorWindow* editorWindow,
                   TQWidget* tqparent, const char* name = 0);
 
-  virtual bool updateSelection( bool tqparentSelected );
+  virtual bool updateSelection( bool parentSelected );
   virtual TQSize tqsizeHint() const;
   virtual RegExp* regExp() const;
   virtual RegExpType type() const { return COMPOUND; }

@@ -90,7 +90,7 @@ class ArkPart: public KParts::ReadWritePart
     Q_OBJECT
   TQ_OBJECT
 public:
-    ArkPart( TQWidget *tqparentWidget, const char *widgetName, TQObject *tqparent,
+    ArkPart( TQWidget *parentWidget, const char *widgetName, TQObject *tqparent,
              const char *name, const TQStringList &, bool readWrite );
     virtual ~ArkPart();
 

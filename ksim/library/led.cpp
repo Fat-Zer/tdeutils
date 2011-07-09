@@ -228,7 +228,7 @@ void KSim::LedLabel::configureObject(bool reapaintWidget)
   d->sendLed.update();
 
   setConfigValues();
-  tqlayoutLeds();
+  layoutLeds();
 
   if (reapaintWidget)
     update();
@@ -313,10 +313,10 @@ void KSim::LedLabel::paintEvent(TQPaintEvent *ev)
 void KSim::LedLabel::resizeEvent(TQResizeEvent *ev)
 {
   KSim::Progress::resizeEvent(ev);
-  tqlayoutLeds();
+  layoutLeds();
 }
 
-void KSim::LedLabel::tqlayoutLeds()
+void KSim::LedLabel::layoutLeds()
 {
   int ledHeight = height() / 2;
 

@@ -48,7 +48,7 @@ void RssSensor::update()
     bool OK = false;
 
 #if defined(KDE_3_3)
-    if(KIO::NetAccess::download(KURL(source), tmpFile, karambaApp->tqparentWindow()))
+    if(KIO::NetAccess::download(KURL(source), tmpFile, karambaApp->parentWindow()))
 #else
     if(KIO::NetAccess::download(KURL(source), tmpFile))
 #endif

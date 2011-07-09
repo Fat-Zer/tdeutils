@@ -63,14 +63,14 @@ long createWidgetMask(long widget, char* path)
 {
   karamba* currTheme = (karamba*)widget;
   TQBitmap bm;
-  TQString tqmaskpath;
+  TQString maskpath;
   TQString rootPath;
   rootPath.setAscii(currTheme->theme().path().ascii());
 
   currTheme->clearMask();
 
-  tqmaskpath.setAscii(path);
-  rootPath.append(tqmaskpath.ascii());
+  maskpath.setAscii(path);
+  rootPath.append(maskpath.ascii());
 
   if(currTheme->theme().isZipTheme())
   {

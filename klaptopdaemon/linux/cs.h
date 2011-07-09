@@ -220,10 +220,10 @@ typedef struct irq_req_t {
 #define IRTQ_PULSE_ID		0x40
 #define IRTQ_SHARE_ID		0x80
 
-typedef struct eventtqmask_t {
+typedef struct eventmask_t {
     u_int	Attributes;
     u_int	EventMask;
-} eventtqmask_t;
+} eventmask_t;
 
 #define CONF_EVENT_MASK_VALID	0x01
 

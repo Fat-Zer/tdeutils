@@ -446,7 +446,7 @@ void ImageLabel::parseImages(TQString fn, TQString fn_roll, int _xoff,
   {
     TQString tmpFile;
 #if defined(KDE_3_2)
-    if(KIO::NetAccess::download(KURL(path), tmpFile, karambaApp->tqparentWindow()))
+    if(KIO::NetAccess::download(KURL(path), tmpFile, karambaApp->parentWindow()))
 #else
     if(KIO::NetAccess::download(KURL(path), tmpFile))
 #endif
@@ -494,7 +494,7 @@ void ImageLabel::parseImages(TQString fn, TQString fn_roll, int _xoff,
   {
     TQString tmpFile;
 #if defined(KDE_3_2)
-    if(KIO::NetAccess::download(KURL(path), tmpFile, karambaApp->tqparentWindow()))
+    if(KIO::NetAccess::download(KURL(path), tmpFile, karambaApp->parentWindow()))
 #else
     if(KIO::NetAccess::download(KURL(path), tmpFile))
 #endif

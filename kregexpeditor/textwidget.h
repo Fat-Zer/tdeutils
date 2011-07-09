@@ -46,7 +46,7 @@ public:
 protected:
     void init( const TQString& text );
     virtual void paintEvent( TQPaintEvent *e );
-    virtual bool updateSelection( bool tqparentSelected );
+    virtual bool updateSelection( bool parentSelected );
     virtual void clearSelection();
     virtual bool eventFilter( TQObject*, TQEvent* );
 

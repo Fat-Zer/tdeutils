@@ -293,7 +293,7 @@
     <slot>slotCheckText(const QString &amp;)</slot>
     <slot>slotClearIcon()</slot>
 </Q_SLOTS>
-<tqlayoutdefaults spacing="6" margin="11"/>
+<layoutdefaults spacing="6" margin="11"/>
 <includehints>
     <includehint>kicondialog.h</includehint>
     <includehint>kpushbutton.h</includehint>

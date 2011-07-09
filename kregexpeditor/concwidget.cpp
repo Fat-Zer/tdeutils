@@ -229,10 +229,10 @@ RegExp* ConcWidget::regExp() const
   }
 }
 
-bool ConcWidget::updateSelection(bool tqparentSelected)
+bool ConcWidget::updateSelection(bool parentSelected)
 {
   bool isSel = _isSelected;
-  bool changed =  MultiContainerWidget::updateSelection( tqparentSelected );
+  bool changed =  MultiContainerWidget::updateSelection( parentSelected );
 
   _maxSelectedHeight = 0;
 

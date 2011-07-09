@@ -40,7 +40,7 @@ long moveSystray(long widget, long x, long y, long w, long h)
   if (currTheme->systray != 0) {
     currTheme->systray->move((int)x,(int)y);
     currTheme->systray->setMinimumSize((int)w,(int)h);
-    currTheme->systray->tqlayoutSystray();
+    currTheme->systray->layoutSystray();
     currTheme->systray->show();
   }
   return 1;
@@ -161,7 +161,7 @@ long updateSystrayLayout(long widget)
 
   if (currTheme->systray != 0)
   {
-    currTheme->systray->tqlayoutSystray();
+    currTheme->systray->layoutSystray();
   }
   return 1;
 }

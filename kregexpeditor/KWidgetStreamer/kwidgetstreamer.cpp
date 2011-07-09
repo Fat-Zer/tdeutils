@@ -44,7 +44,7 @@ void KWidgetStreamer::fromStream( TQDataStream& stream, TQObject* to )
 
 void KWidgetStreamer::propertyToStream( const TQObject* from, TQDataStream& stream )
 {
-  // Only handle widgets. Alternatives to widgets are tqlayouts, validators, timers, etc.
+  // Only handle widgets. Alternatives to widgets are layouts, validators, timers, etc.
   if ( ! from->inherits(TQWIDGET_OBJECT_NAME_STRING) )
     return;
 
@@ -79,7 +79,7 @@ void KWidgetStreamer::propertyToStream( const TQObject* from, TQDataStream& stre
 
 void KWidgetStreamer::propertyFromStream( TQDataStream& stream, TQObject* to )
 {
-  // Only handle widgets. Alternatives to widgets are tqlayouts, validators, timers, etc.
+  // Only handle widgets. Alternatives to widgets are layouts, validators, timers, etc.
   if ( ! to->inherits(TQWIDGET_OBJECT_NAME_STRING) )
     return;
 

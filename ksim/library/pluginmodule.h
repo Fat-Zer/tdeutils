@@ -145,7 +145,7 @@ namespace KSim
       void pageChanged();
 
     protected:
-      PluginObject *tqparentPlugin() const;
+      PluginObject *parentPlugin() const;
 
     private:
       class Private;
@@ -194,7 +194,7 @@ namespace KSim
 
     protected:
       virtual void mousePressEvent(TQMouseEvent *);
-      PluginObject *tqparentPlugin() const;
+      PluginObject *parentPlugin() const;
 
     private slots:
       void showAbout();

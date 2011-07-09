@@ -45,7 +45,7 @@ protected slots:
   void slotKeyPressed();
 
 signals:
-  void tqparentPleaseUpdate();
+  void parentPleaseUpdate();
 
 private:
   RegExpWidget* _owner;

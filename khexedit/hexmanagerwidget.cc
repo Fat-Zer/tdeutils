@@ -297,7 +297,7 @@ void CTabBar::removeName( const TQString &name )
     {
       mFileList.remove(it);
       removeTab(t);
-      tqlayoutTabs();
+      layoutTabs();
       break;
     }
   }
@@ -323,7 +323,7 @@ void CTabBar::changeName( const TQString &curName, const TQString &newName )
 
       mFileList.remove(it);
       mFileList.append( CFileKey(newName,t->identifier()) );
-      tqlayoutTabs();
+      layoutTabs();
       update(); // Seems to be necessary
       break;
     }

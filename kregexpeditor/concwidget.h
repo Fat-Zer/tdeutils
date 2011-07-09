@@ -42,7 +42,7 @@ public:
 
   virtual TQSize tqsizeHint() const;
 	virtual RegExp* regExp() const;
-  virtual bool updateSelection(bool tqparentSelected);
+  virtual bool updateSelection(bool parentSelected);
   virtual bool isSelected() const;
 
   virtual void applyRegExpToSelection( RegExpType type );

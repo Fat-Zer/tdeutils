@@ -101,12 +101,12 @@ void ThemeWidget::showButton(bool show)
 
 void ThemeWidget::setDescriptionMaxHeight()
 {
-  if(tqlayoutText->tqgeometry().height() <= 0)
+  if(layoutText->tqgeometry().height() <= 0)
     return;
-  int height = tqlayoutText->tqgeometry().height() - themeName->height() -
-               tqlayoutText->spacing();
+  int height = layoutText->tqgeometry().height() - themeName->height() -
+               layoutText->spacing();
   if(buttonGo->isVisible())
-    height -= tqlayoutButton->tqgeometry().height() + tqlayoutText->spacing();
+    height -= layoutButton->tqgeometry().height() + layoutText->spacing();
   description->setMaximumHeight(height);
 }
 

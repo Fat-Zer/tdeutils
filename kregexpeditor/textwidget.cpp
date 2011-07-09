@@ -47,7 +47,7 @@ void TextWidget::init( const TQString& txt )
 
   _edit->setText( txt );
 
-  connect( _edit, TQT_SIGNAL( tqparentPleaseUpdate() ), this, TQT_SLOT(slotUpdate()) );
+  connect( _edit, TQT_SIGNAL( parentPleaseUpdate() ), this, TQT_SLOT(slotUpdate()) );
   setFocusProxy( _edit );
   _edit->installEventFilter( this );
   connect( _edit, TQT_SIGNAL( textChanged( const TQString & ) ), _editorWindow, TQT_SLOT( emitChange() ) );
@@ -81,9 +81,9 @@ void TextWidget::selectWidget( bool sel )
     _edit->setSelected( sel );
 }
 
-bool TextWidget::updateSelection(bool tqparentSelected)
+bool TextWidget::updateSelection(bool parentSelected)
 {
-  bool changed = RegExpWidget::updateSelection( tqparentSelected );
+  bool changed = RegExpWidget::updateSelection( parentSelected );
 
   // I need to call this function all the time, else the rubber band will
   // not be correctly deleted in the line edit.

@@ -66,8 +66,8 @@ CHexEditorWidget::CHexEditorWidget( TQWidget *tqparent, const char *name )
   connect( mHexView, TQT_SIGNAL(pleaseStepFile(bool)), TQT_SLOT( stepFile(bool)) );
   connect( kapp, TQT_SIGNAL( kdisplayFontChanged() ), TQT_SLOT( fontChanged() ) );
   connect( kapp, TQT_SIGNAL( kdisplayPaletteChanged() ),TQT_SLOT( paletteChanged()) );
-  connect( mHexView, TQT_SIGNAL( tqlayoutChanged( const SDisplayLayout & ) ),
-	   TQT_SLOT( tqlayoutChanged( const SDisplayLayout & ) ) );
+  connect( mHexView, TQT_SIGNAL( layoutChanged( const SDisplayLayout & ) ),
+	   TQT_SLOT( layoutChanged( const SDisplayLayout & ) ) );
   connect( mHexView, TQT_SIGNAL( inputModeChanged( const SDisplayInputMode & ) ),
 	   this, TQT_SLOT( inputModeChanged( const SDisplayInputMode & ) ) );
 
@@ -398,7 +398,7 @@ void CHexEditorWidget::paletteChanged( void )
   setColor( mDisplayState.color );
 }
 
-void CHexEditorWidget::tqlayoutChanged( const SDisplayLayout &/*tqlayout*/ )
+void CHexEditorWidget::layoutChanged( const SDisplayLayout &/*tqlayout*/ )
 {
   //mDisplayState.tqlayout = tqlayout;
 }
@@ -1932,7 +1932,7 @@ void CHexEditorWidget::options( void )
 
     connect( mOptionDialog, TQT_SIGNAL(lineSizeChoice(const SDisplayLine &)),
 	     TQT_SLOT(setLineSize(const SDisplayLine &)) );
-    connect( mOptionDialog, TQT_SIGNAL(tqlayoutChoice(const SDisplayLayout &)),
+    connect( mOptionDialog, TQT_SIGNAL(layoutChoice(const SDisplayLayout &)),
 	     TQT_SLOT(setLayout(const SDisplayLayout &)) );
     connect( mOptionDialog, TQT_SIGNAL(fontChoice(const SDisplayFont &)),
 	     TQT_SLOT(setFont(const SDisplayFont &)) );

@@ -432,7 +432,7 @@
     <slot access="protected">checkValues()</slot>
     <slot access="protected">browse()</slot>
 </Q_SLOTS>
-<tqlayoutdefaults spacing="6" margin="11"/>
+<layoutdefaults spacing="6" margin="11"/>
 <includehints>
     <includehint>kdialog.h</includehint>
     <includehint>kpushbutton.h</includehint>

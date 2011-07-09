@@ -2052,24 +2052,24 @@ void listKeys::delsignkey()
                 return;
         }
 
-        TQString signID,tqparentKey,signMail,tqparentMail;
+        TQString signID,parentKey,signMail,parentMail;
 
         //////////////////  open a key selection dialog (KgpgSelKey, see begining of this file)
-        tqparentKey=keysList2->currentItem()->tqparent()->text(6);
+        parentKey=keysList2->currentItem()->tqparent()->text(6);
         signID=keysList2->currentItem()->text(6);
-        tqparentMail=keysList2->currentItem()->tqparent()->text(0)+" ("+keysList2->currentItem()->tqparent()->text(1)+")";
+        parentMail=keysList2->currentItem()->tqparent()->text(0)+" ("+keysList2->currentItem()->tqparent()->text(1)+")";
         signMail=keysList2->currentItem()->text(0)+" ("+keysList2->currentItem()->text(1)+")";
 
-        if (tqparentKey==signID) {
+        if (parentKey==signID) {
                 KMessageBox::sorry(this,i18n("Edit key manually to delete a self-signature."));
                 return;
         }
-        TQString ask=i18n("<qt>Are you sure you want to delete signature<br><b>%1</b> from key:<br><b>%2</b>?</qt>").tqarg(signMail).tqarg(tqparentMail);
+        TQString ask=i18n("<qt>Are you sure you want to delete signature<br><b>%1</b> from key:<br><b>%2</b>?</qt>").tqarg(signMail).tqarg(parentMail);
 
         if (KMessageBox::questionYesNo(this,ask,TQString(),KStdGuiItem::del(),KStdGuiItem::cancel())!=KMessageBox::Yes)
                 return;
         KgpgInterface *delSignKeyProcess=new KgpgInterface();
-        delSignKeyProcess->KgpgDelSignature(tqparentKey,signID);
+        delSignKeyProcess->KgpgDelSignature(parentKey,signID);
         connect(delSignKeyProcess,TQT_SIGNAL(delsigfinished(bool)),TQT_TQOBJECT(this),TQT_SLOT(delsignatureResult(bool)));
 }
 

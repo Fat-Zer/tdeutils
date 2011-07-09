@@ -47,7 +47,7 @@ static PyObject* xcursor_position(self, args)
 	char* display_name;
  	int root_x_return, root_y_return;
  	int win_x_return, win_y_return;
- 	unsigned int tqmask_return;
+ 	unsigned int mask_return;
 
  	if (! (display_name = getenv("DISPLAY")) )
 	{
@@ -83,7 +83,7 @@ static PyObject* xcursor_position(self, args)
 	XQueryPointer(display, root, &root_return, &child_return,
         		&root_x_return, &root_y_return,
         		&win_x_return, &win_y_return,
-        		&tqmask_return);
+        		&mask_return);
 
 	/* return Python Object */
 	return Py_BuildValue("(i,i)", root_x_return, root_y_return);

@@ -170,7 +170,7 @@ class CHexEditorWidget : public TQWidget
   protected slots:
     void fontChanged( void );
     void paletteChanged( void );
-    void tqlayoutChanged( const SDisplayLayout &tqlayout );
+    void layoutChanged( const SDisplayLayout &tqlayout );
     void inputModeChanged( const SDisplayInputMode &input );
     void setLineSize(const SDisplayLine &line );
     void setLayout( const SDisplayLayout &tqlayout );

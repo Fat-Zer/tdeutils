@@ -83,8 +83,8 @@ KHexEdit::KHexEdit( void )
 	   TQT_TQOBJECT(this), TQT_SLOT( textWidth( uint ) ) );
   connect( hexView(), TQT_SIGNAL( fileState( SFileState & ) ),
 	   TQT_TQOBJECT(this), TQT_SLOT( fileState( SFileState & ) ) );
-  connect( hexView(), TQT_SIGNAL( tqlayoutChanged( const SDisplayLayout & ) ),
-	   TQT_TQOBJECT(this), TQT_SLOT( tqlayoutChanged( const SDisplayLayout & ) ) );
+  connect( hexView(), TQT_SIGNAL( layoutChanged( const SDisplayLayout & ) ),
+	   TQT_TQOBJECT(this), TQT_SLOT( layoutChanged( const SDisplayLayout & ) ) );
   connect( hexView(), TQT_SIGNAL( inputModeChanged( const SDisplayInputMode & ) ),
 	   TQT_TQOBJECT(this), TQT_SLOT( inputModeChanged( const SDisplayInputMode & ) ) );
   connect( hexView(), TQT_SIGNAL( bookmarkChanged( TQPtrList<SCursorOffset> &)),
@@ -807,7 +807,7 @@ void KHexEdit::fileState( SFileState &state )
 
 
 
-void KHexEdit::tqlayoutChanged( const SDisplayLayout &tqlayout )
+void KHexEdit::layoutChanged( const SDisplayLayout &tqlayout )
 {
   KRadioAction *radioAction;
 

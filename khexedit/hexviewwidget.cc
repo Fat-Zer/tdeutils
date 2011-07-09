@@ -272,7 +272,7 @@ int CHexViewWidget::insertFile( TQFile &file, CProgress &p )
 
   emit dataChanged();
   emit cursorChanged( mHexBuffer->cursorState() );
-  emit tqlayoutChanged( mLayout );
+  emit layoutChanged( mLayout );
   return( Err_Success );
 }
 
@@ -371,7 +371,7 @@ void CHexViewWidget::setBuffer( CHexBuffer *hexBuffer )
   emit cursorChanged( mHexBuffer->cursorState() );
   emit fileState( mHexBuffer->fileState() );
   emit encodingChanged( mHexBuffer->encoding() );
-  emit tqlayoutChanged( mLayout );
+  emit layoutChanged( mLayout );
   emit inputModeChanged( mHexBuffer->inputMode() );
   emit fileName( mHexBuffer->url(), mHexBuffer->hasFileName() );
   emit bookmarkChanged( mHexBuffer->bookmarkList() );
@@ -722,7 +722,7 @@ void CHexViewWidget::setLayout( SDisplayLayout &tqlayout )
   mHexBuffer->setLayout( mLayout );
   updateWindow();
 
-  emit tqlayoutChanged( mLayout );
+  emit layoutChanged( mLayout );
   emit cursorChanged( mHexBuffer->cursorState() );
   emit textWidth( defaultWidth() );
 }

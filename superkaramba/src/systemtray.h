@@ -50,7 +50,7 @@ public slots:
     int getTraySize();
     void systemTrayWindowAdded( WId w );
     void systemTrayWindowRemoved( WId w );
-    void tqlayoutSystray();
+    void layoutSystray();
     
 signals:
     void updated();

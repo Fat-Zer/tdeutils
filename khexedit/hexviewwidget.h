@@ -218,7 +218,7 @@ class CHexViewWidget : public TQFrame
     void cursorChanged( SCursorState &state );
     void fileState( SFileState &state );
     void dataChanged( void );
-    void tqlayoutChanged( const SDisplayLayout &tqlayout );
+    void layoutChanged( const SDisplayLayout &tqlayout );
     void inputModeChanged( const SDisplayInputMode &mode );
     void bookmarkChanged( TQPtrList<SCursorOffset> &list );
     void editMode( CHexBuffer::EEditMode editMode );

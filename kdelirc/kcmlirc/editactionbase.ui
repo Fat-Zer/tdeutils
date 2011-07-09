@@ -1274,7 +1274,7 @@
     <slot>slotParameterChanged()</slot>
     <slot>updateOptions()</slot>
 </Q_SLOTS>
-<tqlayoutdefaults spacing="6" margin="11"/>
+<layoutdefaults spacing="6" margin="11"/>
 <includehints>
     <includehint>klineedit.h</includehint>
     <includehint>knuminput.h</includehint>

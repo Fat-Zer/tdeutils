@@ -195,5 +195,5 @@
     <tabstop>kcfg_Beep</tabstop>
     <tabstop>kcfg_CaptionResult</tabstop>
 </tabstops>
-<tqlayoutdefaults spacing="6" margin="11"/>
+<layoutdefaults spacing="6" margin="11"/>
 </UI>

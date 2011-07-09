@@ -184,7 +184,7 @@ namespace KSim
       virtual void resizeEvent(TQResizeEvent *);
 
     private:
-      void tqlayoutLeds();
+      void layoutLeds();
       void init();
 
       class Private;

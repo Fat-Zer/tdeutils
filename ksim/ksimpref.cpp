@@ -126,7 +126,7 @@ void KSim::ConfigDialog::removePage(const TQCString &name)
     return;
   }
 
-  TQWidget *frame = plugin.configPage()->tqparentWidget();
+  TQWidget *frame = plugin.configPage()->parentWidget();
   // reparent the widget if the tqparent is not null
   if (frame) {
     plugin.configPage()->hide();

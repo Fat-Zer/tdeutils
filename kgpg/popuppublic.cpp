@@ -167,16 +167,16 @@ KDialogBase( Plain, i18n("Select Public Key"), Details | Ok | Cancel, Ok, tqpare
                                   "box enables you to use any key, even if it has not be signed."));
 
         if (filemode) {
-		TQWidget *tqparentBox=new TQWidget(boutonboxoptions);
-		TQHBoxLayout *shredBox=new TQHBoxLayout(tqparentBox,0);
+		TQWidget *parentBox=new TQWidget(boutonboxoptions);
+		TQHBoxLayout *shredBox=new TQHBoxLayout(parentBox,0);
 		//shredBox->setFrameStyle(TQFrame::NoFrame);
 		//shredBox->setMargin(0);
-	       CBshred=new TQCheckBox(i18n("Shred source file"),tqparentBox);
+	       CBshred=new TQCheckBox(i18n("Shred source file"),parentBox);
                 TQWhatsThis::add
                         (CBshred,i18n("<b>Shred source file</b>: permanently remove source file. No recovery will be possible"));
 
 		TQString shredWhatsThis = i18n( "<qt><b>Shred source file:</b><br /><p>Checking this option will shred (overwrite several times before erasing) the files you have encrypted. This way, it is almost impossible that the source file is recovered.</p><p><b>But you must be aware that this is not secure</b> on all file systems, and that parts of the file may have been saved in a temporary file or in the spooler of your printer if you previously opened it in an editor or tried to print it. Only works on files (not on folders).</p></qt>");
-		  KActiveLabel *warn= new KActiveLabel( i18n("<a href=\"whatsthis:%1\">Read this before using shredding</a>").tqarg(shredWhatsThis),tqparentBox );
+		  KActiveLabel *warn= new KActiveLabel( i18n("<a href=\"whatsthis:%1\">Read this before using shredding</a>").tqarg(shredWhatsThis),parentBox );
 		  shredBox->addWidget(CBshred);
 		  shredBox->addWidget(warn);
         }

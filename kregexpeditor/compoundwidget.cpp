@@ -280,17 +280,17 @@ void CompoundWidget::mouseReleaseEvent( TQMouseEvent* event)
     SingleContainerWidget::mouseReleaseEvent( event );
 }
 
-bool CompoundWidget::updateSelection( bool tqparentSelected )
+bool CompoundWidget::updateSelection( bool parentSelected )
 {
   if ( _hidden ) {
-    bool changed = RegExpWidget::updateSelection( tqparentSelected );
+    bool changed = RegExpWidget::updateSelection( parentSelected );
     _child->selectWidget( _isSelected );
     if (changed)
       tqrepaint();
     return changed;
   }
   else {
-    return SingleContainerWidget::updateSelection( tqparentSelected );
+    return SingleContainerWidget::updateSelection( parentSelected );
   }
 }
 

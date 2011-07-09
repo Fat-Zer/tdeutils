@@ -74,7 +74,7 @@ class KJotsEntryBase : public TQObject, public KListViewItem
         TQ_UINT64 id() { return m_id; }
         void setId(TQ_UINT64);
 
-        KJotsBook *tqparentBook() { return m_parent; }
+        KJotsBook *parentBook() { return m_parent; }
         void resetParent();
 
         bool isBook() const { return m_isBook; }

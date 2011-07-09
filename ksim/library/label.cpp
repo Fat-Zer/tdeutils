@@ -91,7 +91,7 @@ void KSim::Label::configureObject(bool repaintWidget)
   TQSize oldSize = tqsizeHint();
 
   setConfigValues();
-  retqlayoutLabel(oldSize, repaintWidget);
+  relayoutLabel(oldSize, repaintWidget);
 }
 
 void KSim::Label::setPixmap(const TQPixmap &pixmap)
@@ -102,7 +102,7 @@ void KSim::Label::setPixmap(const TQPixmap &pixmap)
   TQSize oldSize = tqsizeHint();
   d->sidePixmap = pixmap;
 
-  retqlayoutLabel(oldSize);
+  relayoutLabel(oldSize);
 }
 
 const TQPixmap &KSim::Label::pixmap() const
@@ -141,7 +141,7 @@ void KSim::Label::setText(const TQString &text)
   TQSize oldSize = tqsizeHint();
   // set the text of our widget and tqrepaint
   d->text = text;
-  retqlayoutLabel(oldSize);
+  relayoutLabel(oldSize);
 }
 
 void KSim::Label::extraTypeCall()
@@ -273,10 +273,10 @@ void KSim::Label::setThemePixmap(const TQString &image)
   d->meterImage.load(image);
   KSim::ThemeLoader::self().reColourImage(d->meterImage);
   d->background = d->meterImage.smoothScale(size());
-  retqlayoutLabel(oldSize);
+  relayoutLabel(oldSize);
 }
 
-void KSim::Label::retqlayoutLabel(const TQSize &old, bool tqrepaint)
+void KSim::Label::relayoutLabel(const TQSize &old, bool tqrepaint)
 {
   if (tqsizeHint() != old) {
     updateGeometry();

@@ -188,7 +188,7 @@ void KSim::Progress::setMeterPixmap(const TQPixmap &pixmap)
 {
   TQSize oldSize = tqsizeHint();
   d->meterPixmap = pixmap;
-  retqlayoutLabel(oldSize);
+  relayoutLabel(oldSize);
 }
 
 int KSim::Progress::xLocation() const

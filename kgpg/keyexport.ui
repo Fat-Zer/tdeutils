@@ -135,7 +135,7 @@
 <Q_SLOTS>
     <slot>checkFile_toggled( bool isOn )</slot>
 </Q_SLOTS>
-<tqlayoutdefaults spacing="6" margin="11"/>
+<layoutdefaults spacing="6" margin="11"/>
 <includehints>
     <includehint>kpushbutton.h</includehint>
 </includehints>

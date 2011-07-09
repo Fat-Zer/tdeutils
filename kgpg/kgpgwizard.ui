@@ -397,7 +397,7 @@ Remember that if you download a file or open one in an editor, parts of the file
 <Q_SLOTS>
     <slot>finishButton_clicked()</slot>
 </Q_SLOTS>
-<tqlayoutdefaults spacing="6" margin="11"/>
+<layoutdefaults spacing="6" margin="11"/>
 <includehints>
     <includehint>kactivelabel.h</includehint>
     <includehint>kpushbutton.h</includehint>

@@ -513,8 +513,8 @@ FileLVI* FileListView::findParent( const TQString& fullname )
 		return static_cast< FileLVI* >( 0 );
 
 	// Get a list of ancestors
-	TQString tqparentFullname = name.left( name.tqfindRev( '/' ) );
-	TQStringList ancestorList = TQStringList::split( '/', tqparentFullname );
+	TQString parentFullname = name.left( name.tqfindRev( '/' ) );
+	TQStringList ancestorList = TQStringList::split( '/', parentFullname );
 
 	// Checks if the listview contains the first item in the list of ancestors
 	TQListViewItem *item = firstChild();

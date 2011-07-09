@@ -141,7 +141,7 @@ void HostDialog::init( const HostConfig &src )
 {
     // hide these, there's nothing to choose right now. might be that
     // net-snmp will support different privacy types in the future, but
-    // aptqparently not now.
+    // apparently not now.
     privacyTypeLabel->hide();
     privacyType->hide();
 

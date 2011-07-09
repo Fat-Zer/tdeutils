@@ -82,5 +82,5 @@ Released under the terms of the GNU GPL.</comment>
         </widget>
     </grid>
 </widget>
-<tqlayoutdefaults spacing="2" margin="2"/>
+<layoutdefaults spacing="2" margin="2"/>
 </UI>

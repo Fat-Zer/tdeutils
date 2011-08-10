@@ -49,9 +49,9 @@ const TQString tpmodes[] = { I18N_NOOP("No Tap"), I18N_NOOP("Tap"), I18N_NOOP("D
 
 namespace KMilo {
 
-PowerBookMonitor::PowerBookMonitor(TQObject *tqparent, const char *name,
+PowerBookMonitor::PowerBookMonitor(TQObject *parent, const char *name,
                                    const TQStringList& args)
-	: Monitor(tqparent, name, args),
+	: Monitor(parent, name, args),
 		m_progress( 0 )
 {
   	init_libpbb();

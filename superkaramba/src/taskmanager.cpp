@@ -40,7 +40,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 template class TQPtrList<Task>;
 
-// Hack: create a global KWinModule without a tqparent. We
+// Hack: create a global KWinModule without a parent. We
 // can't make it a child of TaskManager because more than one
 // TaskManager might be created. We can't make it a class
 // variable without changing Task, which also uses it.
@@ -48,8 +48,8 @@ template class TQPtrList<Task>;
 // The real problem is that KWinModule should be a singleton.
 KWinModule* kwin_module = 0;
 
-TaskManager::TaskManager(TQObject *tqparent, const char *name)
-    : TQObject(tqparent, name), _active(0), _startup_info( NULL )
+TaskManager::TaskManager(TQObject *parent, const char *name)
+    : TQObject(parent, name), _active(0), _startup_info( NULL )
 {
 
     kwin_module = new KWinModule();
@@ -328,8 +328,8 @@ bool TaskManager::isOnTop(const Task* task)
 }
 
 
-Task::Task(WId win, TaskManager * tqparent, const char *name) :
-  TQObject(tqparent, name),
+Task::Task(WId win, TaskManager * parent, const char *name) :
+  TQObject(parent, name),
   _active(false), _win(win),
   _lastWidth(0), _lastHeight(0), _lastResize(false), _lastIcon(),
   _thumbSize(0.2), _thumb(), _grab()
@@ -803,8 +803,8 @@ void Task::generateThumbnail()
 }
 
 Startup::Startup( const KStartupInfoId& id, const KStartupInfoData& data,
-    TQObject * tqparent, const char *name)
-    : TQObject(tqparent, name), _id( id ), _data( data )
+    TQObject * parent, const char *name)
+    : TQObject(parent, name), _id( id ), _data( data )
 {
 }
 

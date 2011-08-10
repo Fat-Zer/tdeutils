@@ -165,11 +165,11 @@ void CDragManager::setupTimer( void )
 
 
 //
-// This widget will use the entire space of the tqparent widget
+// This widget will use the entire space of the parent widget
 //
-CHexViewWidget::CHexViewWidget( TQWidget *tqparent, const char *name,
+CHexViewWidget::CHexViewWidget( TQWidget *parent, const char *name,
 				CHexBuffer *hexBuffer )
-  : TQFrame( tqparent, name,
+  : TQFrame( parent, name,
 	    #ifdef USE_NORTHWEST_GRAVITY
 	    TQt::WStaticContents
 	    #else
@@ -177,7 +177,7 @@ CHexViewWidget::CHexViewWidget( TQWidget *tqparent, const char *name,
 	    #endif
 	    ), mScrollBarSize( 16 )
 {
-  if( tqparent == 0 || hexBuffer == 0 ) { return; }
+  if( parent == 0 || hexBuffer == 0 ) { return; }
 
   //
   // TQt 2.0:
@@ -967,10 +967,10 @@ void CHexViewWidget::copy( void )
   disconnect(TQApplication::tqclipboard(),TQT_SIGNAL(dataChanged()),
 	     this,TQT_SLOT(clipboardChanged()));
   //
-  // Note: Do no give the CHexDrag a tqparent != 0. The clipboard
+  // Note: Do no give the CHexDrag a parent != 0. The clipboard
   // owns the current dragdata and will destroy it on exit or
-  // when it receives a new object. If the CHexDrag has a tqparent
-  // != 0, the CHexDrag object will be destroyed when the tqparent
+  // when it receives a new object. If the CHexDrag has a parent
+  // != 0, the CHexDrag object will be destroyed when the parent
   // is destroyed. We will then have a double destroy situation
   // when the app. is closed (=> segfault).
   //
@@ -1670,7 +1670,7 @@ void CHexViewWidget::dropEvent( TQDropEvent *e )
   {
     //
     // This widget can not itself open a file so it will simply pass
-    // the request to a tqparent that can (hopefully) do this
+    // the request to a parent that can (hopefully) do this
     //
     for( KURL::List::ConstIterator it = list.begin(); it != list.end(); it++ )
     {

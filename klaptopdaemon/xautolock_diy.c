@@ -95,7 +95,7 @@ static void
 selectEvents (Window window, Bool substructureOnly)
 {
   Window            root;              /* root window of the window */
-  Window            tqparent;            /* tqparent of the window      */
+  Window            parent;            /* parent of the window      */
   Window*           tqchildren;          /* tqchildren of the window    */
   unsigned          nofChildren = 0;   /* number of tqchildren        */
   unsigned          i;                 /* loop counter              */
@@ -104,9 +104,9 @@ selectEvents (Window window, Bool substructureOnly)
   if( xautolock_ignoreWindow( window ))
       return;
  /*
-  *  Start by querying the server about the root and tqparent windows.
+  *  Start by querying the server about the root and parent windows.
   */
-  if (!XQueryTree (queue.display, window, &root, &tqparent,
+  if (!XQueryTree (queue.display, window, &root, &parent,
                    &tqchildren, &nofChildren))
   {
     return;
@@ -132,7 +132,7 @@ selectEvents (Window window, Bool substructureOnly)
   }
   else
   {
-    if (tqparent == None) /* the *real* rootwindow */
+    if (parent == None) /* the *real* rootwindow */
     {
       attribs.all_event_masks = 
       attribs.do_not_propagate_mask = KeyPressMask;
@@ -178,7 +178,7 @@ selectEvents (Window window, Bool substructureOnly)
   *  XGrabServer(), but that'd be an impolite thing to do, and since it
   *  isn't required...
   */
-  if (!XQueryTree (queue.display, window, &root, &tqparent,
+  if (!XQueryTree (queue.display, window, &root, &parent,
                    &tqchildren, &nofChildren))
   {
     return;

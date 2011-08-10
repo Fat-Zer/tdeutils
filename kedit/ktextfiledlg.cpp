@@ -32,9 +32,9 @@
 
 KTextFileDialog::KTextFileDialog(const TQString& startDir,
 				 const TQString& filter,
-				 TQWidget *tqparent, const char* name,
+				 TQWidget *parent, const char* name,
 				 bool modal)
-  : KFileDialog(startDir, filter, tqparent, name, modal)
+  : KFileDialog(startDir, filter, parent, name, modal)
 {
   /*
   // insert encoding action into toolbar
@@ -144,12 +144,12 @@ void KTextFileDialog::slotShowEncCombo()
 KURL KTextFileDialog::getOpenURLwithEncoding(
      const TQString& startDir,
      const TQString& filter,
-     TQWidget *tqparent,
+     TQWidget *parent,
      const TQString& caption,
      const TQString& encoding,
      const TQString& buttontext)
 {
-  KTextFileDialog dlg(startDir, filter, tqparent, "filedialog", true);
+  KTextFileDialog dlg(startDir, filter, parent, "filedialog", true);
   dlg.setEncoding(encoding);
   dlg.setOperationMode( Opening );
 
@@ -175,11 +175,11 @@ KURL KTextFileDialog::getOpenURLwithEncoding(
 
 KURL KTextFileDialog::getSaveURLwithEncoding(
        const TQString& dir, const TQString& filter,
-       TQWidget *tqparent,
+       TQWidget *parent,
        const TQString& caption,
        const TQString& encoding)
 {
-  KTextFileDialog dlg(dir, filter, tqparent, "filedialog", true);
+  KTextFileDialog dlg(dir, filter, parent, "filedialog", true);
   dlg.setEncoding(encoding);
   dlg.setOperationMode( Saving );
 

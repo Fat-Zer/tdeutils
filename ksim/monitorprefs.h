@@ -32,7 +32,7 @@ namespace KSim
     Q_OBJECT
   TQ_OBJECT
     public:
-      MonitorPrefs(TQWidget *tqparent, const char *name=0);
+      MonitorPrefs(TQWidget *parent, const char *name=0);
       ~MonitorPrefs();
 
     public slots:

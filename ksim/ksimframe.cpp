@@ -23,8 +23,8 @@
 #include "ksim.h"
 #include "themetypes.h"
 
-KSim::Frame::Frame(int type, TQWidget *tqparent, const char *name)
-   : TQWidget (tqparent, name)
+KSim::Frame::Frame(int type, TQWidget *parent, const char *name)
+   : TQWidget (parent, name)
 {
   setType(type);
 

@@ -32,7 +32,7 @@ class KWMapEditor : public TQTable {
   TQ_OBJECT
 
 	public:
-		KWMapEditor(TQMap<TQString,TQString>& map, TQWidget *tqparent = 0, const char *name = 0);
+		KWMapEditor(TQMap<TQString,TQString>& map, TQWidget *parent = 0, const char *name = 0);
 		virtual ~KWMapEditor();
 
 	public slots:

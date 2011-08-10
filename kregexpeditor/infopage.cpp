@@ -24,8 +24,8 @@
 
 #include "infopage.h"
 
-InfoPage::InfoPage( TQWidget* tqparent, const char* name )
-  :KTextBrowser( tqparent, name )
+InfoPage::InfoPage( TQWidget* parent, const char* name )
+  :KTextBrowser( parent, name )
 {
     TQString txt =
         TQString::tqfromLatin1( "<qt>" ) +

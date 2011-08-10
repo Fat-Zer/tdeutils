@@ -32,7 +32,7 @@ class TQCheckBox;
 class CompoundDetailWindow :public TQWidget
 {
 public:
-  CompoundDetailWindow(TQWidget* tqparent, const char* name = 0);
+  CompoundDetailWindow(TQWidget* parent, const char* name = 0);
   TQString title() const;
   TQString description() const;
   bool allowReplace() const;
@@ -63,10 +63,10 @@ Q_OBJECT
   TQ_OBJECT
 
 public:
-  CompoundWidget( RegExpEditorWindow* editorWindow, TQWidget* tqparent,
+  CompoundWidget( RegExpEditorWindow* editorWindow, TQWidget* parent,
                   const char* name = 0);
   CompoundWidget( CompoundRegExp* regexp, RegExpEditorWindow* editorWindow,
-                  TQWidget* tqparent, const char* name = 0);
+                  TQWidget* parent, const char* name = 0);
 
   virtual bool updateSelection( bool parentSelected );
   virtual TQSize tqsizeHint() const;

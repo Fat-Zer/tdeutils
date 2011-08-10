@@ -33,10 +33,10 @@
 class CStatisticListViewItem : public TQListViewItem
 {
   public:
-    CStatisticListViewItem( TQListView * tqparent, TQListViewItem * after,
+    CStatisticListViewItem( TQListView * parent, TQListViewItem * after,
                             TQString label1, TQString label2, TQString label3, TQString label4,
                             TQString label5, TQString label6, TQString label7, int i, int o)
-    : TQListViewItem( tqparent, after, label1, label2, label3, label4, label5, label6, label7),
+    : TQListViewItem( parent, after, label1, label2, label3, label4, label5, label6, label7),
       item( i ),
       occurrence( o )
     {}
@@ -69,9 +69,9 @@ class CStatisticListViewItem : public TQListViewItem
 
 
 
-CFileInfoDialog::CFileInfoDialog( TQWidget *tqparent,const char *name,bool modal)
+CFileInfoDialog::CFileInfoDialog( TQWidget *parent,const char *name,bool modal)
   :KDialogBase( Plain, i18n("Statistics"), Help|User1|Cancel, User1,
-		tqparent, name, modal, true, i18n("&Update") ),
+		parent, name, modal, true, i18n("&Update") ),
    mBusy(false), mDirty(false)
 {
   setHelp( "khexedit/khexedit.html", TQString() );

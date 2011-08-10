@@ -52,7 +52,7 @@
 #include "detailedconsole.h"
 #include "keyservers.h"
 
-keyServer::keyServer(TQWidget *tqparent, const char *name,bool modal,bool autoClose):KDialogBase( Swallow, i18n("Key Server"), Close, Close, tqparent, name,modal)
+keyServer::keyServer(TQWidget *parent, const char *name,bool modal,bool autoClose):KDialogBase( Swallow, i18n("Key Server"), Close, Close, parent, name,modal)
 {
 	autoCloseWindow=autoClose;
 	config=new KSimpleConfig ("kgpgrc");

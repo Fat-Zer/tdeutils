@@ -46,35 +46,35 @@ bool WidgetFactory::isContainer( RegExpType tp )
   return ( tp == REPEAT || tp == ALTN || tp == COMPOUND );
 }
 
-RegExpWidget* WidgetFactory::createWidget( RegExpEditorWindow* win, TQWidget* tqparent,
+RegExpWidget* WidgetFactory::createWidget( RegExpEditorWindow* win, TQWidget* parent,
                                            RegExpType type )
 {
   RegExpWidget* widget = 0;
 
   switch (type) {
   case TEXT:
-    return new TextWidget( win, tqparent ); break;
+    return new TextWidget( win, parent ); break;
   case ALTN:
-    return  new AltnWidget( win, tqparent ); break;
+    return  new AltnWidget( win, parent ); break;
   case DOT:
-    return  new AnyCharWidget( win, tqparent ); break;
+    return  new AnyCharWidget( win, parent ); break;
   case BEGLINE:
-    return new BegLineWidget( win, tqparent ); break;
+    return new BegLineWidget( win, parent ); break;
   case ENDLINE:
-    return new EndLineWidget( win, tqparent ); break;
+    return new EndLineWidget( win, parent ); break;
   case WORDBOUNDARY:
-    return new WordBoundaryWidget( win, tqparent ); break;
+    return new WordBoundaryWidget( win, parent ); break;
   case NONWORDBOUNDARY:
-    return new NonWordBoundaryWidget( win, tqparent ); break;
+    return new NonWordBoundaryWidget( win, parent ); break;
   case POSLOOKAHEAD:
   case NEGLOOKAHEAD:
-    return new LookAheadWidget( win, type, tqparent ); break;
+    return new LookAheadWidget( win, type, parent ); break;
   case REPEAT:
-    widget = new RepeatWidget( win, tqparent ); break;
+    widget = new RepeatWidget( win, parent ); break;
   case CHARSET:
-    widget = new CharactersWidget( win, tqparent ); break;
+    widget = new CharactersWidget( win, parent ); break;
   case COMPOUND:
-    widget = new CompoundWidget( win, tqparent ); break;
+    widget = new CompoundWidget( win, parent ); break;
   default:
     qFatal("It should not be possible to get here!");
     return 0;
@@ -88,43 +88,43 @@ RegExpWidget* WidgetFactory::createWidget( RegExpEditorWindow* win, TQWidget* tq
 }
 
 RegExpWidget* WidgetFactory::createWidget( RegExp* regexp, RegExpEditorWindow* editorWindow,
-                                           TQWidget* tqparent )
+                                           TQWidget* parent )
 {
   if ( regexp == 0 ) {
     qFatal("%s:%d Regexp is 0", __FILE__, __LINE__ );
   }
   else if ( TextRegExp* reg = dynamic_cast<TextRegExp*>( regexp ) )
-    return new TextWidget( reg, editorWindow, tqparent );
+    return new TextWidget( reg, editorWindow, parent );
   else if ( TextRangeRegExp* reg = dynamic_cast<TextRangeRegExp*>( regexp ) )
-    return new CharactersWidget( reg, editorWindow, tqparent );
+    return new CharactersWidget( reg, editorWindow, parent );
   else if ( RepeatRegExp* reg = dynamic_cast<RepeatRegExp*>( regexp ) )
-    return new RepeatWidget( reg, editorWindow, tqparent );
+    return new RepeatWidget( reg, editorWindow, parent );
   else if ( LookAheadRegExp* reg = dynamic_cast<LookAheadRegExp*>( regexp ) ) {
     if ( reg->lookAheadType() == LookAheadRegExp::POSITIVE )
-      return new LookAheadWidget( reg, editorWindow, POSLOOKAHEAD, tqparent );
+      return new LookAheadWidget( reg, editorWindow, POSLOOKAHEAD, parent );
     else
-      return new LookAheadWidget( reg, editorWindow, NEGLOOKAHEAD, tqparent );
+      return new LookAheadWidget( reg, editorWindow, NEGLOOKAHEAD, parent );
   }
   else if ( ConcRegExp* reg = dynamic_cast<ConcRegExp*>( regexp ) )
-    return new ConcWidget( reg, editorWindow, tqparent );
+    return new ConcWidget( reg, editorWindow, parent );
   else if ( AltnRegExp* reg = dynamic_cast<AltnRegExp*>( regexp ) )
-    return new AltnWidget( reg, editorWindow, tqparent );
+    return new AltnWidget( reg, editorWindow, parent );
   else if ( PositionRegExp* reg = dynamic_cast<PositionRegExp*>( regexp ) ) {
     switch ( reg->position() ) {
     case PositionRegExp::BEGLINE:
-      return new BegLineWidget( editorWindow, tqparent );
+      return new BegLineWidget( editorWindow, parent );
     case PositionRegExp::ENDLINE:
-      return new EndLineWidget( editorWindow, tqparent );
+      return new EndLineWidget( editorWindow, parent );
     case PositionRegExp::WORDBOUNDARY:
-      return new WordBoundaryWidget( editorWindow, tqparent );
+      return new WordBoundaryWidget( editorWindow, parent );
     case PositionRegExp::NONWORDBOUNDARY:
-      return new NonWordBoundaryWidget( editorWindow, tqparent );
+      return new NonWordBoundaryWidget( editorWindow, parent );
     }
   }
   else if ( dynamic_cast<DotRegExp*>( regexp ) )
-    return new AnyCharWidget( editorWindow, tqparent );
+    return new AnyCharWidget( editorWindow, parent );
   else if ( CompoundRegExp* reg = dynamic_cast<CompoundRegExp*>( regexp ) )
-    return new CompoundWidget( reg, editorWindow, tqparent );
+    return new CompoundWidget( reg, editorWindow, parent );
   else {
     qFatal("%s:%d Internal Error: Unknown RegExp type", __FILE__, __LINE__);
   }

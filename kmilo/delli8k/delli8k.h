@@ -45,7 +45,7 @@ namespace KMilo {
 class DellI8kMonitor: public Monitor 
 {
 	public:
-		DellI8kMonitor( TQObject *tqparent, const char *name, const TQStringList& );
+		DellI8kMonitor( TQObject *parent, const char *name, const TQStringList& );
 		virtual ~DellI8kMonitor();
 
 		/**

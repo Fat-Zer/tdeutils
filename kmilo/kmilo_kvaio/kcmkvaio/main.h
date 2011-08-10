@@ -34,7 +34,7 @@ class KVaioModule : public KCModule
   TQ_OBJECT
 
 public:
-    KVaioModule(TQWidget *tqparent, const char *name, const TQStringList &);
+    KVaioModule(TQWidget *parent, const char *name, const TQStringList &);
 
     void  save();
     void  load();

@@ -35,17 +35,17 @@
 #include <tqvbuttongroup.h>
 #include "kwidgetstreamer.h"
 
-RepeatWidget::RepeatWidget(RegExpEditorWindow* editorWindow, TQWidget *tqparent,
+RepeatWidget::RepeatWidget(RegExpEditorWindow* editorWindow, TQWidget *parent,
                            const char *name)
-  : SingleContainerWidget(editorWindow, tqparent, name ? name : "RepeatWidget")
+  : SingleContainerWidget(editorWindow, parent, name ? name : "RepeatWidget")
 {
   _child = new ConcWidget(editorWindow, this);
   init();
 }
 
 RepeatWidget::RepeatWidget( RepeatRegExp* regexp, RegExpEditorWindow* editorWindow,
-                            TQWidget* tqparent, const char* name )
-  :SingleContainerWidget( editorWindow, tqparent, name )
+                            TQWidget* parent, const char* name )
+  :SingleContainerWidget( editorWindow, parent, name )
 {
   init();
   RegExpWidget* child = WidgetFactory::createWidget( regexp->child(), editorWindow, this );
@@ -167,8 +167,8 @@ int RepeatWidget::edit()
 }
 
 //--------------------------------------------------------------------------------
-RepeatRangeWindow::RepeatRangeWindow( TQWidget* tqparent, const char* name )
-  : TQVBox( tqparent, name ? name : "RepeatRangeWindow" )
+RepeatRangeWindow::RepeatRangeWindow( TQWidget* parent, const char* name )
+  : TQVBox( parent, name ? name : "RepeatRangeWindow" )
 {
   setSpacing( 6 );
 
@@ -218,14 +218,14 @@ RepeatRangeWindow::RepeatRangeWindow( TQWidget* tqparent, const char* name )
 }
 
 
-void RepeatRangeWindow::createLine( TQWidget* tqparent, TQString text, TQSpinBox** spin, REPEATTYPE tp )
+void RepeatRangeWindow::createLine( TQWidget* parent, TQString text, TQSpinBox** spin, REPEATTYPE tp )
 {
 
-  TQRadioButton* radioBut = new TQRadioButton(text, tqparent);
-  *spin = new TQSpinBox( 1, 999, 1, tqparent);
+  TQRadioButton* radioBut = new TQRadioButton(text, parent);
+  *spin = new TQSpinBox( 1, 999, 1, parent);
   (*spin)->setValue(1);
 
-  (void) new TQLabel(i18n("time(s)"), tqparent);
+  (void) new TQLabel(i18n("time(s)"), parent);
   _group->insert(radioBut, tp);
 }
 

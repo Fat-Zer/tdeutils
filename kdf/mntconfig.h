@@ -59,7 +59,7 @@ class MntConfigWidget : public TQWidget
     };
 
   public:
-    MntConfigWidget( TQWidget *tqparent=0, const char *name=0, bool init=false );
+    MntConfigWidget( TQWidget *parent=0, const char *name=0, bool init=false );
     ~MntConfigWidget();
 
   public slots:

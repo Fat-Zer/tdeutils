@@ -607,11 +607,11 @@ TQValueList<TQPixmap> KSim::Theme::pixmapToList(PixmapType type,
   for (int i = 0; i < (depth + 1); ++i) {
     newPixmap.fill();
 
-    if (pixmap.tqmask()) {
-      TQBitmap tqmask(newPixmap.size());
-      bitBlt(&tqmask, 0, 0, pixmap.tqmask(), xOffset, yOffset,
+    if (pixmap.mask()) {
+      TQBitmap mask(newPixmap.size());
+      bitBlt(&mask, 0, 0, pixmap.mask(), xOffset, yOffset,
          image.width() - xOffset, size);
-      newPixmap.setMask(tqmask);
+      newPixmap.setMask(mask);
     }
 
     bitBlt(&newPixmap, 0, 0, &pixmap, xOffset, yOffset,

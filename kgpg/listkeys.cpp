@@ -102,16 +102,16 @@
 class UpdateViewItem : public KListViewItem
 {
 public:
-        UpdateViewItem(TQListView *tqparent, TQString name,TQString email, TQString tr, TQString val, TQString size, TQString creat, TQString id,bool isdefault,bool isexpired);
-	UpdateViewItem(TQListViewItem *tqparent=0, TQString name=TQString(),TQString email=TQString(), TQString tr=TQString(), TQString val=TQString(), TQString size=TQString(), TQString creat=TQString(), TQString id=TQString());
+        UpdateViewItem(TQListView *parent, TQString name,TQString email, TQString tr, TQString val, TQString size, TQString creat, TQString id,bool isdefault,bool isexpired);
+	UpdateViewItem(TQListViewItem *parent=0, TQString name=TQString(),TQString email=TQString(), TQString tr=TQString(), TQString val=TQString(), TQString size=TQString(), TQString creat=TQString(), TQString id=TQString());
         virtual void paintCell(TQPainter *p, const TQColorGroup &cg,int col, int width, int align);
         virtual int compare(  TQListViewItem * item, int c, bool ascending ) const;
 	virtual TQString key( int column, bool ) const;
         bool def,exp;
 };
 
-UpdateViewItem::UpdateViewItem(TQListView *tqparent, TQString name,TQString email, TQString tr, TQString val, TQString size, TQString creat, TQString id,bool isdefault,bool isexpired)
-                : KListViewItem(tqparent)
+UpdateViewItem::UpdateViewItem(TQListView *parent, TQString name,TQString email, TQString tr, TQString val, TQString size, TQString creat, TQString id,bool isdefault,bool isexpired)
+                : KListViewItem(parent)
 {
         def=isdefault;
         exp=isexpired;
@@ -124,8 +124,8 @@ UpdateViewItem::UpdateViewItem(TQListView *tqparent, TQString name,TQString emai
         setText(6,id);
 }
 
-UpdateViewItem::UpdateViewItem(TQListViewItem *tqparent, TQString name,TQString email, TQString tr, TQString val, TQString size, TQString creat, TQString id)
-                : KListViewItem(tqparent)
+UpdateViewItem::UpdateViewItem(TQListViewItem *parent, TQString name,TQString email, TQString tr, TQString val, TQString size, TQString creat, TQString id)
+                : KListViewItem(parent)
 {
         setText(0,name);
         setText(1,email);
@@ -213,8 +213,8 @@ TQString UpdateViewItem::key( int column, bool ) const
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 ////////////////   Secret key selection dialog, used when user wants to sign a key
-KgpgSelKey::KgpgSelKey(TQWidget *tqparent, const char *name,bool allowMultipleSelection, TQString preselected):
-KDialogBase( tqparent, name, true,i18n("Private Key List"),Ok | Cancel)
+KgpgSelKey::KgpgSelKey(TQWidget *parent, const char *name,bool allowMultipleSelection, TQString preselected):
+KDialogBase( parent, name, true,i18n("Private Key List"),Ok | Cancel)
 {
         TQString keyname;
         page = new TQWidget(this);
@@ -352,8 +352,8 @@ void KgpgSelKey::slotSelect(TQListViewItem *item)
         if (item==NULL)
                 return;
         if (item->depth()!=0) {
-                keysListpr->setSelected(item->tqparent(),true);
-                keysListpr->setCurrentItem(item->tqparent());
+                keysListpr->setSelected(item->parent(),true);
+                keysListpr->setCurrentItem(item->parent());
         }
 }
 
@@ -392,8 +392,8 @@ TQString KgpgSelKey::getkeyMail()
 
 /////////////////////////////////////////////////////////////////////////////////////////////
 
-KeyView::KeyView( TQWidget *tqparent, const char *name )
-                : KListView( tqparent, name )
+KeyView::KeyView( TQWidget *parent, const char *name )
+                : KListView( parent, name )
 {
         KIconLoader *loader = KGlobal::iconLoader();
 
@@ -476,8 +476,8 @@ void  KeyView::startDrag()
 }
 
 
-mySearchLine::mySearchLine(TQWidget *tqparent, KeyView *listView, const char *name)
-:KListViewSearchLine(tqparent,listView,name)
+mySearchLine::mySearchLine(TQWidget *parent, KeyView *listView, const char *name)
+:KListViewSearchLine(parent,listView,name)
 {
 searchListView=listView;
 setKeepParentsVisible(false);
@@ -519,7 +519,7 @@ void mySearchLine::updateSearch(const TQString& s)
 
 ///////////////////////////////////////////////////////////////////////////////////////   main window for key management
 
-listKeys::listKeys(TQWidget *tqparent, const char *name) : DCOPObject( "KeyInterface" ), KMainWindow(tqparent, name,0)
+listKeys::listKeys(TQWidget *parent, const char *name) : DCOPObject( "KeyInterface" ), KMainWindow(parent, name,0)
 {
         //KWin::setType(TQt::WDestructiveClose);
 
@@ -721,7 +721,7 @@ listKeys::listKeys(TQWidget *tqparent, const char *name) : DCOPObject( "KeyInter
         TQObject::connect(keysList2,TQT_SIGNAL(statusMessage(TQString,int,bool)),TQT_TQOBJECT(this),TQT_SLOT(changeMessage(TQString,int,bool)));
         TQObject::connect(statusbarTimer,TQT_SIGNAL(timeout()),TQT_TQOBJECT(this),TQT_SLOT(statusBarTimeout()));
 
-	s_kgpgEditor= new KgpgApp(tqparent, "editor",WType_Dialog,actionCollection()->action("go_default_key")->shortcut(),true);
+	s_kgpgEditor= new KgpgApp(parent, "editor",WType_Dialog,actionCollection()->action("go_default_key")->shortcut(),true);
         connect(s_kgpgEditor,TQT_SIGNAL(refreshImported(TQStringList)),keysList2,TQT_SLOT(slotReloadKeys(TQStringList)));
         connect(this,TQT_SIGNAL(fontChanged(TQFont)),s_kgpgEditor,TQT_SLOT(slotSetFont(TQFont)));
         connect(s_kgpgEditor->view->editor,TQT_SIGNAL(refreshImported(TQStringList)),keysList2,TQT_SLOT(slotReloadKeys(TQStringList)));
@@ -887,7 +887,7 @@ void listKeys::slotDelUid()
 {
         TQListViewItem *item=keysList2->currentItem();
         while (item->depth()>0)
-                item=item->tqparent();
+                item=item->parent();
 
         KProcess *conprocess=new KProcess();
         KConfig *config = KGlobal::config();
@@ -966,11 +966,11 @@ void listKeys::slotGpgError(TQString errortxt)
 
 void listKeys::slotDeletePhoto()
 {
-        if (KMessageBox::warningContinueCancel(this,i18n("<qt>Are you sure you want to delete Photo id <b>%1</b><br>from key <b>%2 &lt;%3&gt;</b> ?</qt>").tqarg(keysList2->currentItem()->text(6)).tqarg(keysList2->currentItem()->tqparent()->text(0)).tqarg(keysList2->currentItem()->tqparent()->text(1)),i18n("Warning"),KGuiItem(i18n("Delete"),"editdelete"))!=KMessageBox::Continue)
+        if (KMessageBox::warningContinueCancel(this,i18n("<qt>Are you sure you want to delete Photo id <b>%1</b><br>from key <b>%2 &lt;%3&gt;</b> ?</qt>").tqarg(keysList2->currentItem()->text(6)).tqarg(keysList2->currentItem()->parent()->text(0)).tqarg(keysList2->currentItem()->parent()->text(1)),i18n("Warning"),KGuiItem(i18n("Delete"),"editdelete"))!=KMessageBox::Continue)
                 return;
 
         KgpgInterface *delPhotoProcess=new KgpgInterface();
-        delPhotoProcess->KgpgDeletePhoto(keysList2->currentItem()->tqparent()->text(6),keysList2->currentItem()->text(6));
+        delPhotoProcess->KgpgDeletePhoto(keysList2->currentItem()->parent()->text(6),keysList2->currentItem()->text(6));
         connect(delPhotoProcess,TQT_SIGNAL(delPhotoFinished()),TQT_TQOBJECT(this),TQT_SLOT(slotUpdatePhoto()));
         connect(delPhotoProcess,TQT_SIGNAL(delPhotoError(TQString)),TQT_TQOBJECT(this),TQT_SLOT(slotGpgError(TQString)));
 }
@@ -1085,7 +1085,7 @@ void listKeys::findNextKey()
         if (!item)
                 return;
         while(item->depth() > 0)
-                item = item->tqparent();
+                item = item->parent();
         item=item->nextSibling();
         TQString searchText=item->text(0)+" "+item->text(1)+" "+item->text(6);
         //kdDebug(2100)<<"Next string:"<<searchText<<endl;
@@ -1610,7 +1610,7 @@ void listKeys::slotShowPhoto()
         KService::Ptr ptr = offers.first();
         //KMessageBox::sorry(0,ptr->desktopEntryName());
         KProcIO *p=new KProcIO(TQTextCodec::codecForLocale());
-        *p<<"gpg"<<"--no-tty"<<"--photo-viewer"<<TQString(TQFile::encodeName(ptr->desktopEntryName()+" %i"))<<"--edit-key"<<keysList2->currentItem()->tqparent()->text(6)<<"uid"<<keysList2->currentItem()->text(6)<<"showphoto"<<"quit";
+        *p<<"gpg"<<"--no-tty"<<"--photo-viewer"<<TQString(TQFile::encodeName(ptr->desktopEntryName()+" %i"))<<"--edit-key"<<keysList2->currentItem()->parent()->text(6)<<"uid"<<keysList2->currentItem()->text(6)<<"showphoto"<<"quit";
         p->start(KProcess::DontCare,true);
 }
 
@@ -2055,9 +2055,9 @@ void listKeys::delsignkey()
         TQString signID,parentKey,signMail,parentMail;
 
         //////////////////  open a key selection dialog (KgpgSelKey, see begining of this file)
-        parentKey=keysList2->currentItem()->tqparent()->text(6);
+        parentKey=keysList2->currentItem()->parent()->text(6);
         signID=keysList2->currentItem()->text(6);
-        parentMail=keysList2->currentItem()->tqparent()->text(0)+" ("+keysList2->currentItem()->tqparent()->text(1)+")";
+        parentMail=keysList2->currentItem()->parent()->text(0)+" ("+keysList2->currentItem()->parent()->text(1)+")";
         signMail=keysList2->currentItem()->text(0)+" ("+keysList2->currentItem()->text(1)+")";
 
         if (parentKey==signID) {
@@ -2078,7 +2078,7 @@ void listKeys::delsignatureResult(bool success)
         if (success) {
                 TQListViewItem *top=keysList2->currentItem();
                 while (top->depth()!=0)
-                        top=top->tqparent();
+                        top=top->parent();
                 while (top->firstChild()!=0)
                         delete top->firstChild();
                 keysList2->refreshcurrentkey(top);
@@ -2143,7 +2143,7 @@ void listKeys::slotgenkey()
                                         goodpass=true;
                         }
 
-			pop = new KPassivePopup((TQWidget *)tqparent(),"new_key");
+			pop = new KPassivePopup((TQWidget *)parent(),"new_key");
                         pop->setTimeout(0);
 
                         TQWidget *wid=new TQWidget(pop);
@@ -2672,7 +2672,7 @@ void KeyView::refreshkeylist()
         TQListViewItem *current = currentItem();
         if(current != NULL) {
                 while(current->depth() > 0) {
-                        current = current->tqparent();
+                        current = current->parent();
                 }
                 takeItem(current);
         }
@@ -2865,7 +2865,7 @@ void KeyView::refreshselfkey()
         if (currentItem()->depth()==0)
                 refreshcurrentkey(currentItem());
         else
-                refreshcurrentkey(currentItem()->tqparent());
+                refreshcurrentkey(currentItem()->parent());
 }
 
 void KeyView::slotReloadKeys(TQStringList keyIDs)

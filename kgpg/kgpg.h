@@ -47,7 +47,7 @@ class MyView : public TQLabel
   TQ_OBJECT
 
 public:
-        MyView( TQWidget *tqparent = 0, const char *name = 0);
+        MyView( TQWidget *parent = 0, const char *name = 0);
         ~MyView();
 
         KURL droppedUrl;
@@ -125,7 +125,7 @@ class kgpgapplet : public KSystemTray//KUniqueApplication
   TQ_OBJECT
 
 public:
-        kgpgapplet( TQWidget *tqparent = 0, const char *name = 0);
+        kgpgapplet( TQWidget *parent = 0, const char *name = 0);
         /** destructor */
         ~kgpgapplet();
         MyView *w;

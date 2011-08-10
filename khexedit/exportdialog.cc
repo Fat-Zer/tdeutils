@@ -31,9 +31,9 @@
 #include <tqpushbutton.h>
 
 
-CExportDialog::CExportDialog( TQWidget *tqparent, char *name, bool modal )
+CExportDialog::CExportDialog( TQWidget *parent, char *name, bool modal )
   :KDialogBase( Tabbed, i18n("Export Document"), Help|Ok|Cancel, Ok,
-		tqparent, name,  modal )
+		parent, name,  modal )
 {
   setHelp( "khexedit/khexedit.html", TQString() );
 

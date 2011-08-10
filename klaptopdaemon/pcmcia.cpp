@@ -37,8 +37,8 @@
 #include "portable.h"
 #include "version.h"
 
-PcmciaConfig::PcmciaConfig (TQWidget * tqparent, const char *name)
-  : KCModule(tqparent, name)
+PcmciaConfig::PcmciaConfig (TQWidget * parent, const char *name)
+  : KCModule(parent, name)
 {
        KAboutData *about =
        new KAboutData(I18N_NOOP("kcmlaptop"),

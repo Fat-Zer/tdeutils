@@ -40,8 +40,8 @@
 typedef KGenericFactory<KWalletConfig, TQWidget> KWalletFactory;
 K_EXPORT_COMPONENT_FACTORY(kcm_kwallet, KWalletFactory("kcmkwallet"))
 
-KWalletConfig::KWalletConfig(TQWidget *tqparent, const char *name, const TQStringList&)
-: KCModule(KWalletFactory::instance(), tqparent, name) {
+KWalletConfig::KWalletConfig(TQWidget *parent, const char *name, const TQStringList&)
+: KCModule(KWalletFactory::instance(), parent, name) {
 
 	KAboutData *about =
 		new KAboutData(I18N_NOOP("kcmkwallet"),
@@ -302,9 +302,9 @@ TQString KWalletConfig::quickHelp() const {
 
 void KWalletConfig::contextMenuRequested(TQListViewItem *item, const TQPoint& pos, int col) {
 	Q_UNUSED(col)
-	if (item && item->tqparent()) {
+	if (item && item->parent()) {
 		KPopupMenu *m = new KPopupMenu(this);
-		m->insertTitle(item->tqparent()->text(0));
+		m->insertTitle(item->parent()->text(0));
 		m->insertItem(i18n("&Delete"), this, TQT_SLOT(deleteEntry()), Key_Delete);
 		m->popup(pos);
 	}

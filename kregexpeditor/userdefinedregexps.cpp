@@ -35,8 +35,8 @@
 #include <tqlayout.h>
 #include <tqlabel.h>
 
-UserDefinedRegExps::UserDefinedRegExps( TQWidget *tqparent, const char *name )
-  : TQDockWindow( TQDockWindow::InDock, tqparent, name)
+UserDefinedRegExps::UserDefinedRegExps( TQWidget *parent, const char *name )
+  : TQDockWindow( TQDockWindow::InDock, parent, name)
 {
   TQWidget* top = new TQWidget( this );
   TQVBoxLayout* lay = new TQVBoxLayout( top, 6 );
@@ -223,8 +223,8 @@ void UserDefinedRegExps::slotSelectNewAction()
   slotUnSelect();
 }
 
-WidgetWinItem::WidgetWinItem( TQString fileName, RegExp* regexp, bool usersRegExp, TQListViewItem* tqparent )
-  :TQListViewItem( tqparent ), _regexp( regexp ), _usersRegExp ( usersRegExp )
+WidgetWinItem::WidgetWinItem( TQString fileName, RegExp* regexp, bool usersRegExp, TQListViewItem* parent )
+  :TQListViewItem( parent ), _regexp( regexp ), _usersRegExp ( usersRegExp )
 {
   int index = fileName.findRev(TQString::fromLocal8Bit(".regexp"));
   _name = fileName.left(index);

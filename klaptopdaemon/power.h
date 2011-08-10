@@ -43,7 +43,7 @@ class PowerConfig : public KCModule
   Q_OBJECT
   TQ_OBJECT
 public:
-  PowerConfig( TQWidget *tqparent=0, const char* name=0);
+  PowerConfig( TQWidget *parent=0, const char* name=0);
     ~PowerConfig();
   void save( void );
   void load();

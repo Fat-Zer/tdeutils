@@ -392,7 +392,7 @@ class  Md5Widget :public KDialogBase
         Q_OBJECT
   TQ_OBJECT
 public:
-        Md5Widget(TQWidget *tqparent=0, const char *name=0,KURL url=KURL());
+        Md5Widget(TQWidget *parent=0, const char *name=0,KURL url=KURL());
         ~Md5Widget();
 public slots:
         void slotApply();

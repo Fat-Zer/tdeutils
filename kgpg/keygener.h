@@ -27,7 +27,7 @@ class keyGenerate : public KDialogBase
         Q_OBJECT
   TQ_OBJECT
 public:
-        keyGenerate(TQWidget *tqparent=0, const char *name=0);
+        keyGenerate(TQWidget *parent=0, const char *name=0);
 
         KComboBox *keykind,*keysize,*keyexp;
         KLineEdit *numb,*comment,*kname,*mail;

@@ -49,7 +49,7 @@ public:
 	virtual void updateDCOPObjects();
 	virtual void updateDCOPFunctions();
 
-	EditAction(IRAIt action, TQWidget *tqparent = 0, const char *name = 0);
+	EditAction(IRAIt action, TQWidget *parent = 0, const char *name = 0);
 	~EditAction();
 };
 

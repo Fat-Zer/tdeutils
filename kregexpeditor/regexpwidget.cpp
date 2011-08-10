@@ -33,9 +33,9 @@ const int RegExpWidget::pw = 1;
 const int RegExpWidget::bdSize = 5;
 const int RegExpWidget::space = 5;
 
-RegExpWidget::RegExpWidget(RegExpEditorWindow* editorWindow, TQWidget *tqparent,
+RegExpWidget::RegExpWidget(RegExpEditorWindow* editorWindow, TQWidget *parent,
                            const char *name)
-  : TQWidget(tqparent, name ? name : "RegExpWidget", WNoMousePropagation ),
+  : TQWidget(parent, name ? name : "RegExpWidget", WNoMousePropagation ),
     _editorWindow( editorWindow ),  _isSelected( false ), _isToplevel( false )
 {
 }
@@ -136,7 +136,7 @@ void RegExpWidget::mousePressEvent ( TQMouseEvent* event )
   }
 
   // currently (TQt3.0) it seems like qt do not accept that the accept flag is set,
-  // and thus sends the event to the tqparent - given that the following line is in.
+  // and thus sends the event to the parent - given that the following line is in.
   // It doesn't make any change to leave it out.
   // 25 Oct. 2001 19:03 -- Jesper K. Pedersen
   //  TQWidget::mousePressEvent( event );

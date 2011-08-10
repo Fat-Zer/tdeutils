@@ -32,7 +32,7 @@ class KJotsEdit : public KEdit
     Q_OBJECT
   TQ_OBJECT
     public:
-        KJotsEdit (TQWidget* tqparent=0, const char* name=0);
+        KJotsEdit (TQWidget* parent=0, const char* name=0);
         ~KJotsEdit ();
 
         void print(TQString title = TQString());

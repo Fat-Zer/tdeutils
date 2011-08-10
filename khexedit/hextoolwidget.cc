@@ -29,8 +29,8 @@
 #include <tqcombobox.h>
 
 
-CHexToolWidget::CHexToolWidget( TQWidget *tqparent, const char *name )
-  : TQFrame( tqparent, name )
+CHexToolWidget::CHexToolWidget( TQWidget *parent, const char *name )
+  : TQFrame( parent, name )
 {
   setFrameStyle( TQFrame::Panel | TQFrame::Raised );
   setLineWidth( 1 );
@@ -192,7 +192,7 @@ void CHexToolWidget::bitWidthChanged( int /*i*/ )
 //
 unsigned long CHexToolWidget::bitValue( SCursorState &state, int n )
 {
-  static const unsigned char bittqmask[9] =
+  static const unsigned char bitmask[9] =
   {
     0, 1<<7, 3<<6, 7<<5, 15<<4, 31<<3, 63<<2, 127<<1, 255
   };
@@ -217,9 +217,9 @@ unsigned long CHexToolWidget::bitValue( SCursorState &state, int n )
     int this_time = ((8-bit)>=n)?n:(8-bit);
 
     //
-    // tqmask to get only the bit's we're swallowing
+    // mask to get only the bit's we're swallowing
     //
-    c &= bittqmask[this_time];
+    c &= bitmask[this_time];
 
     //
     // shift down to get bit's in low part of byte

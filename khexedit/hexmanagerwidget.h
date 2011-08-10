@@ -78,7 +78,7 @@ class CTabBar : public TQTabBar
   TQ_OBJECT
 
   public:
-    CTabBar( TQWidget *tqparent=0, char *name=0 );
+    CTabBar( TQWidget *parent=0, char *name=0 );
     void addName( const TQString &name );
     void removeName( const TQString &name );
     void changeName( const TQString &curName, const TQString &newName );
@@ -119,7 +119,7 @@ class CHexManagerWidget : public TQWidget
     };      
 
   public:
-    CHexManagerWidget( TQWidget *tqparent = 0, const char *name = 0, 
+    CHexManagerWidget( TQWidget *parent = 0, const char *name = 0, 
 		       EConversionPosition state = Embed,
 		       EPosition tabBarPosition = HideItem,
 		       EPosition searchBarPosition = HideItem );

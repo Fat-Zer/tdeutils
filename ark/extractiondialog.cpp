@@ -51,12 +51,12 @@
 #include "arkutils.h"
 #include "settings.h"
 
-ExtractionDialog::ExtractionDialog( TQWidget *tqparent, const char *name,
+ExtractionDialog::ExtractionDialog( TQWidget *parent, const char *name,
                                     bool enableSelected,
                                     const KURL& defaultExtractionDir,
                                     const TQString &prefix,
                                     const TQString &archiveName )
-	: KDialogBase( tqparent, name, true, i18n( "Extract" ), Ok | Cancel, Ok ),
+	: KDialogBase( parent, name, true, i18n( "Extract" ), Ok | Cancel, Ok ),
 	  m_selectedButton( 0 ), m_allButton( 0 ),
 	  m_selectedOnly( enableSelected ), m_extractionDirectory( defaultExtractionDir ),
 	  m_defaultExtractionDir( defaultExtractionDir.prettyURL() ), m_prefix( prefix )

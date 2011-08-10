@@ -47,10 +47,10 @@ enum RegExpType {
 class WidgetFactory
 {
 public:
-  static RegExpWidget* createWidget( RegExpEditorWindow* editorWindow, TQWidget* tqparent,
+  static RegExpWidget* createWidget( RegExpEditorWindow* editorWindow, TQWidget* parent,
                                      RegExpType type );
   static RegExpWidget* createWidget( RegExp* regexp, RegExpEditorWindow* editorWindow,
-                                     TQWidget* tqparent );
+                                     TQWidget* parent );
   static RegExp* createRegExp( TQDomElement node, const TQString& version );
   static RegExp* createRegExp( TQString str );
   static bool isContainer( RegExpType );

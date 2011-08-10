@@ -51,8 +51,8 @@
 #include <tqtooltip.h>
 extern void wake_laptop_daemon();
 
-ApmConfig::ApmConfig (TQWidget * tqparent, const char *name)
-  : KCModule(tqparent, name)
+ApmConfig::ApmConfig (TQWidget * parent, const char *name)
+  : KCModule(parent, name)
 {
     KGlobal::locale()->insertCatalogue("klaptopdaemon"); // For translation of klaptopdaemon messages
 
@@ -173,7 +173,7 @@ void ApmConfig::setupHelper()
 		KMessageBox::sorry(0, i18n("%1 cannot be enabled because kdesu cannot be found.  Please make sure that it is installed correctly.").tqarg(TQString(apm_name)),
 				i18n("KLaptopDaemon"));
 	}
-	laptop_portable::apm_set_tqmask(enablestandby, enablesuspend);
+	laptop_portable::apm_set_mask(enablestandby, enablesuspend);
     	bool can_enable = laptop_portable::has_apm(1);	// is helper ready
     	enableStandby->setEnabled(can_enable);
     	enableSuspend->setEnabled(can_enable);
@@ -207,7 +207,7 @@ void ApmConfig::setupHelper2()	// we use the acpi helper to do software suspend
 		KMessageBox::sorry(0, i18n("The Software Suspend helper cannot be enabled because kdesu cannot be found.  Please make sure that it is installed correctly."),
 				i18n("KLaptopDaemon"));
 	}
-	laptop_portable::software_suspend_set_tqmask(enablesoftwaresuspend);
+	laptop_portable::software_suspend_set_mask(enablesoftwaresuspend);
     	bool can_enable = laptop_portable::has_software_suspend(2);	// is helper ready
     	enableSoftwareSuspendHibernate->setEnabled(can_enable);
 	wake_laptop_daemon();
@@ -218,9 +218,9 @@ void ApmConfig::save()
 {
         enablestandby = enableStandby->isChecked();
         enablesuspend = enableSuspend->isChecked();
-	laptop_portable::apm_set_tqmask(enablestandby, enablesuspend);
+	laptop_portable::apm_set_mask(enablestandby, enablesuspend);
 	enablesoftwaresuspend = (enableSoftwareSuspendHibernate ? enableSoftwareSuspendHibernate->isChecked():0);
-	laptop_portable::software_suspend_set_tqmask(enablesoftwaresuspend);
+	laptop_portable::software_suspend_set_mask(enablesoftwaresuspend);
 
         config->setGroup("ApmDefault");
 

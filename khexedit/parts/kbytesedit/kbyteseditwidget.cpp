@@ -26,8 +26,8 @@
 #include "kbyteseditwidget.h"
 
 
-KBytesEditWidget::KBytesEditWidget( TQWidget *tqparent, const char *name, const TQStringList & )
-  : TQWidget( tqparent, name)
+KBytesEditWidget::KBytesEditWidget( TQWidget *parent, const char *name, const TQStringList & )
+  : TQWidget( parent, name)
 {
   TQHBoxLayout* Layout = new TQHBoxLayout( this );
   BytesEdit = new KHE::KBytesEdit( this, "BytesEdit" );

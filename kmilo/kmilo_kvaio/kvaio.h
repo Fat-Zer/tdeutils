@@ -58,8 +58,8 @@ class KVaio : public TQObject
     Q_OBJECT
   TQ_OBJECT
 public:
-//    KVaio(TQObject *tqparent = 0, const char *name =0);
-    KVaio(KMiloKVaio *tqparent = 0, const char *name =0);
+//    KVaio(TQObject *parent = 0, const char *name =0);
+    KVaio(KMiloKVaio *parent = 0, const char *name =0);
 
     virtual ~KVaio();
     const KVaioDriverInterface *driver();
@@ -91,7 +91,7 @@ private:
     bool retrieveVolume();
     void displayVolume();
 
-    KMiloKVaio *mytqparent;
+    KMiloKVaio *myparent;
 
     DCOPRef *kmixClient, *kmixWindow;
 

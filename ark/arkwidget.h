@@ -61,7 +61,7 @@ class ArkWidget : public TQVBox
     Q_OBJECT
   TQ_OBJECT
 public:
-    ArkWidget( TQWidget *tqparent=0, const char *name=0 );
+    ArkWidget( TQWidget *parent=0, const char *name=0 );
     virtual ~ArkWidget();
 
     bool isArchiveOpen() const { return m_bIsArchiveOpen; }

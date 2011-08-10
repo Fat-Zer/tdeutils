@@ -37,7 +37,7 @@ class View : public KSim::PluginView
     Q_OBJECT
   TQ_OBJECT
 public:
-    View( Plugin *tqparent, const char *name );
+    View( Plugin *parent, const char *name );
     ~View();
 
     virtual void reparseConfig();

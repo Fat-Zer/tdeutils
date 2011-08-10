@@ -769,7 +769,7 @@ TQString KJotsMain::currentBookmarkTitle()
     while ( item )
     {
         KJotsEntryBase *entry = dynamic_cast<KJotsEntryBase*>(item);
-        item = item->tqparent();
+        item = item->parent();
 
         if ( item )
         {
@@ -865,7 +865,7 @@ void KJotsMain::jumpToBookmark(const TQString& bookmark)
                     {
                         if ( ++pageCount == pageNo )
                         {
-                            static_cast<TQListViewItem*>(entry)->tqparent()->setOpen(true);
+                            static_cast<TQListViewItem*>(entry)->parent()->setOpen(true);
                             subjectList->ensureItemVisible(entry);
                             subjectList->setSelected(entry, true);
                             jumpToEntry(entry);
@@ -914,12 +914,12 @@ void KJotsMain::nextBook()
 */
 void KJotsMain::prevBook()
 {
-    //Don't get caught by tqparent book.
+    //Don't get caught by parent book.
     TQListViewItem *startingPoint = subjectList->currentItem();
     if ( !startingPoint ) return; //sanity check
 
     if ( dynamic_cast<KJotsPage*>(startingPoint) )
-        startingPoint = startingPoint->tqparent();
+        startingPoint = startingPoint->parent();
 
     TQListViewItemIterator it ( startingPoint );
     do {
@@ -1043,7 +1043,7 @@ void KJotsMain::updateCaption()
     while ( item )
     {
         KJotsEntryBase *entry = dynamic_cast<KJotsEntryBase*>(item);
-        item = item->tqparent();
+        item = item->parent();
 
         if ( item )
         {
@@ -1081,7 +1081,7 @@ void KJotsMain::slotItemMoved(TQListViewItem *item, TQListViewItem* afterFirst, 
 
     //afterFirst doesn't work like we need it to. We want it to point to the
     //previous sibling, not just the entry directly above it.
-    if ( afterFirst && afterFirst->tqparent() != entry->parentBook() )
+    if ( afterFirst && afterFirst->parent() != entry->parentBook() )
     {
         TQListViewItemIterator it ( afterFirst );
         afterFirst = 0;
@@ -1096,7 +1096,7 @@ void KJotsMain::slotItemMoved(TQListViewItem *item, TQListViewItem* afterFirst, 
             }
 
             //Found a previous sibling!
-            if ( it.current()->tqparent() == entry->parentBook() )
+            if ( it.current()->parent() == entry->parentBook() )
             {
                 afterFirst = it.current();
                 break;
@@ -1108,7 +1108,7 @@ void KJotsMain::slotItemMoved(TQListViewItem *item, TQListViewItem* afterFirst, 
 
     KJotsEntryBase *entryAfter = dynamic_cast<KJotsEntryBase*>(afterFirst);
 
-    if ( entry->isPage() && !item->tqparent() )
+    if ( entry->isPage() && !item->parent() )
     {
         invalidMoveFlag=true; //Don't do anything while we're stuck here.
         subjectList->setItemsMovable(false);
@@ -1149,7 +1149,7 @@ void KJotsMain::slotItemMoved(TQListViewItem *item, TQListViewItem* afterFirst, 
 
     if ( entryAfter )
     {
-        //Set the old tqparent book to dirty, since it just lost a page.
+        //Set the old parent book to dirty, since it just lost a page.
         if ( entryAfter->isBook() )
             entryAfter->setDirty(true);
         else
@@ -1173,7 +1173,7 @@ KJotsBook* KJotsMain::currentBook()
         {
             return dynamic_cast<KJotsBook*>(e);
         }
-        e = dynamic_cast<KJotsEntryBase*>(e->KListViewItem::tqparent());
+        e = dynamic_cast<KJotsEntryBase*>(e->KListViewItem::parent());
     }
 
     return 0;

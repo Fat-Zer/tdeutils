@@ -36,7 +36,7 @@ public:
 	KPopupMenu* contextMenu() const { return KSystemTray::contextMenu(); }
 	KActionCollection* actionCollection() { return KSystemTray::actionCollection(); }
 
-	IRKTrayIcon(TQWidget *tqparent = 0, const char *name = 0): KSystemTray(tqparent, name) {}
+	IRKTrayIcon(TQWidget *parent = 0, const char *name = 0): KSystemTray(parent, name) {}
 };
 
 class IRKick: public TQObject, public DCOPObject

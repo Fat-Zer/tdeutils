@@ -51,8 +51,8 @@
 extern void wake_laptop_daemon();
 
 
-BatteryConfig::BatteryConfig (TQWidget * tqparent, const char *name)
-  : KCModule(tqparent, name),
+BatteryConfig::BatteryConfig (TQWidget * parent, const char *name)
+  : KCModule(parent, name),
     editPoll(0),
     iconloader(0),
     buttonNoBattery(0),

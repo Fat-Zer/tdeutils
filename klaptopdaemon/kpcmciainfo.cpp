@@ -36,8 +36,8 @@
 #include "kpcmciainfo.h"
 
 
-KPCMCIAInfo::KPCMCIAInfo(KPCMCIA *pcmcia, TQWidget *tqparent, const char *name)
-  : KDialog(tqparent, name, false), _pcmcia(pcmcia) {
+KPCMCIAInfo::KPCMCIAInfo(KPCMCIA *pcmcia, TQWidget *parent, const char *name)
+  : KDialog(parent, name, false), _pcmcia(pcmcia) {
 
   setMinimumSize(300,400);
 
@@ -149,8 +149,8 @@ void KPCMCIAInfo::prepareCards() {
 ///////////////////////////////////////////////////////////////////////////
 
 
-KPCMCIAInfoPage::KPCMCIAInfoPage(KPCMCIACard *card, TQWidget *tqparent, const char *name)
-  : TQFrame(tqparent, name), _card(card) {
+KPCMCIAInfoPage::KPCMCIAInfoPage(KPCMCIACard *card, TQWidget *parent, const char *name)
+  : TQFrame(parent, name), _card(card) {
   _mainGrid = new TQGridLayout(this, 10, 10);
   if (!_card) {
       // display an error

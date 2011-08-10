@@ -107,8 +107,8 @@ void CpuPlugin::showAbout()
   KAboutApplication(&aboutData).exec();
 }
 
-CpuView::CpuView(KSim::PluginObject *tqparent, const char *name)
-   : KSim::PluginView(tqparent, name)
+CpuView::CpuView(KSim::PluginObject *parent, const char *name)
+   : KSim::PluginView(parent, name)
 {
 #ifdef Q_OS_LINUX
   m_procStream = 0L;
@@ -361,8 +361,8 @@ KSim::Progress *CpuView::addLabel()
   return progress;
 }
 
-CpuConfig::CpuConfig(KSim::PluginObject *tqparent, const char *name)
-   : KSim::PluginPage(tqparent, name)
+CpuConfig::CpuConfig(KSim::PluginObject *parent, const char *name)
+   : KSim::PluginPage(parent, name)
 {
   TQVBoxLayout * mainLayout = new TQVBoxLayout( this );
   mainLayout->setSpacing( 6 );

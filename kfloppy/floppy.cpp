@@ -48,8 +48,8 @@
 #include "floppy.h"
 #include "format.h"
 
-FloppyData::FloppyData(TQWidget * tqparent, const char * name)
- : KDialog( tqparent, name ),
+FloppyData::FloppyData(TQWidget * parent, const char * name)
+ : KDialog( parent, name ),
 	formatActions(0L), m_canLowLevel(false), m_canZeroOut( false )
 {
 

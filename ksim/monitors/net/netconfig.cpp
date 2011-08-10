@@ -34,8 +34,8 @@
 #include "netconfig.moc"
 #include "netdialog.h"
 
-NetConfig::NetConfig(KSim::PluginObject *tqparent, const char *name)
-   : KSim::PluginPage(tqparent, name)
+NetConfig::NetConfig(KSim::PluginObject *parent, const char *name)
+   : KSim::PluginPage(parent, name)
 {
   m_yes = i18n("yes");
   m_no = i18n("no");

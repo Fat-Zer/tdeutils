@@ -75,7 +75,7 @@ class CTabEntry
 class CListViewItem : public TQListViewItem
 {
   public:
-    CListViewItem ( CListView * tqparent, TQListViewItem * after );
+    CListViewItem ( CListView * parent, TQListViewItem * after );
  
     virtual int compare ( TQListViewItem* i, int col, bool) const;
     	
@@ -108,7 +108,7 @@ class KDFWidget : public TQWidget
     };
 
   public:
-    KDFWidget( TQWidget *tqparent=0, const char *name=0, bool init=false);
+    KDFWidget( TQWidget *parent=0, const char *name=0, bool init=false);
     ~KDFWidget( void );
 
   public slots:

@@ -39,8 +39,8 @@
 #include "kcalcdisplay.moc"
 
 
-KCalcDisplay::KCalcDisplay(TQWidget *tqparent, const char *name)
-  :TQLabel(tqparent,name), _beep(false), _groupdigits(false), _button(0), _lit(false),
+KCalcDisplay::KCalcDisplay(TQWidget *parent, const char *name)
+  :TQLabel(parent,name), _beep(false), _groupdigits(false), _button(0), _lit(false),
    _num_base(NB_DECIMAL), _precision(9),
    _fixed_precision(-1), _display_amount(0),
    selection_timer(new TQTimer)

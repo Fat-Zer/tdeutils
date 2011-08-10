@@ -53,8 +53,8 @@
 
 //////////////// configuration for editor
 
-MyEditor::MyEditor( TQWidget *tqparent, const char *name )
-                : KTextEdit( tqparent, name )
+MyEditor::MyEditor( TQWidget *parent, const char *name )
+                : KTextEdit( parent, name )
 {
         setTextFormat(PlainText);
 	setCheckSpellingEnabled (true);
@@ -190,7 +190,7 @@ void MyEditor::slotProcessResult(TQStringList iKeys)
 
 ////////////////////////// main view configuration
 
-KgpgView::KgpgView(TQWidget *tqparent, const char *name) : TQWidget(tqparent, name)
+KgpgView::KgpgView(TQWidget *parent, const char *name) : TQWidget(parent, name)
 {
         editor=new MyEditor(this);
 	windowAutoClose=true;
@@ -224,7 +224,7 @@ KgpgView::KgpgView(TQWidget *tqparent, const char *name) : TQWidget(tqparent, na
 void KgpgView::modified()
 {
         /////////////// notify for changes in editor window
-        KgpgApp *win=(KgpgApp *) tqparent();
+        KgpgApp *win=(KgpgApp *) parent();
         if (win->fileSave->isEnabled()==false) {
                 TQString capt=win->Docname.fileName();
                 if (capt.isEmpty())
@@ -298,7 +298,7 @@ else
 	editor->setText(signResult);
 	emit resetEncoding(false);
 
-	KgpgApp *win=(KgpgApp *) tqparent();
+	KgpgApp *win=(KgpgApp *) parent();
 	win->editRedo->setEnabled(false);
 	win->editUndo->setEnabled(false);
 }
@@ -311,7 +311,7 @@ void KgpgView::popuppublic()
         /////    popup dialog to select public key for encryption
 
         ////////  open dialog --> popuppublic.cpp
-        popupPublic *dialogue=new popupPublic(this, "public_keys", 0,false,((KgpgApp *) tqparent())->goDefaultKey);
+        popupPublic *dialogue=new popupPublic(this, "public_keys", 0,false,((KgpgApp *) parent())->goDefaultKey);
         connect(dialogue,TQT_SIGNAL(selectedKey(TQStringList,TQStringList,bool,bool)),TQT_TQOBJECT(this),TQT_SLOT(encodetxt(TQStringList,TQStringList,bool,bool)));
         dialogue->exec();
         delete dialogue;
@@ -334,7 +334,7 @@ void KgpgView::slotdecode()
         txtDecrypt->KgpgDecryptText(editor->text(),TQStringList::split(TQString(" "),KGpgSettings::customDecrypt().simplifyWhiteSpace()));
 
 	/*
-        KgpgApp *win=(KgpgApp *) tqparent();
+        KgpgApp *win=(KgpgApp *) parent();
         if (!resultat.isEmpty()) {
                 editor->setText(resultat);
                 win->editRedo->setEnabled(false);

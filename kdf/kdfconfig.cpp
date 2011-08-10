@@ -50,8 +50,8 @@ static bool GUI;
 #endif
 
 
-KDFConfigWidget::KDFConfigWidget(TQWidget *tqparent, const char *name, bool init)
-  : TQWidget( tqparent, name)
+KDFConfigWidget::KDFConfigWidget(TQWidget *parent, const char *name, bool init)
+  : TQWidget( parent, name)
 {
 
   mTabName.resize(8);

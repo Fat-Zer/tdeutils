@@ -63,9 +63,9 @@ KAboutData *ArkPart::createAboutData()
 
 
 
-ArkPart::ArkPart( TQWidget *parentWidget, const char * /*widgetName*/, TQObject *tqparent,
+ArkPart::ArkPart( TQWidget *parentWidget, const char * /*widgetName*/, TQObject *parent,
                   const char *name, const TQStringList &, bool readWrite )
-        : KParts::ReadWritePart(tqparent, name)
+        : KParts::ReadWritePart(parent, name)
 {
     kdDebug(1601)<<"ArkPart::ArkPart"<<endl;
     setInstance(ArkFactory::instance());
@@ -372,8 +372,8 @@ void ArkPart::cancelTransfer()
     }
 }
 
-ArkBrowserExtension::ArkBrowserExtension( KParts::ReadOnlyPart * tqparent, const char * name )
-                : KParts::BrowserExtension( tqparent, name )
+ArkBrowserExtension::ArkBrowserExtension( KParts::ReadOnlyPart * parent, const char * name )
+                : KParts::BrowserExtension( parent, name )
 {
 }
 
@@ -382,8 +382,8 @@ void ArkBrowserExtension::slotOpenURLRequested( const KURL & url )
     emit openURLRequest( url, KParts::URLArgs() );
 }
 
-ArkStatusBarExtension::ArkStatusBarExtension( KParts::ReadWritePart * tqparent )
-                : KParts::StatusBarExtension( tqparent ),
+ArkStatusBarExtension::ArkStatusBarExtension( KParts::ReadWritePart * parent )
+                : KParts::StatusBarExtension( parent ),
                   m_bBusy( false ),
                   m_pStatusLabelSelect( 0 ),
                   m_pStatusLabelTotal( 0 ),

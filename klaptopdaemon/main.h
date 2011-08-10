@@ -48,7 +48,7 @@ class LaptopModule : public KCModule
 
 public:
 
-  LaptopModule(TQWidget *tqparent, const char *name);
+  LaptopModule(TQWidget *parent, const char *name);
 
   void load();
   void save();

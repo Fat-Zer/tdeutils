@@ -18,8 +18,8 @@
 #include "kmultiformlistboxfactory.h"
 #include <tqframe.h>
 
-TQWidget *KMultiFormListBoxFactory::separator(TQWidget *tqparent) {
-  TQFrame* sep = new TQFrame( tqparent );
+TQWidget *KMultiFormListBoxFactory::separator(TQWidget *parent) {
+  TQFrame* sep = new TQFrame( parent );
   sep->setFrameStyle( TQFrame::HLine | TQFrame::Sunken);
   sep->setLineWidth(1);
   return sep;

@@ -64,8 +64,8 @@ Q_OBJECT
   TQ_OBJECT
 
 public:
- KCalcButton(TQWidget *tqparent, const char * name = 0); 
- KCalcButton(const TQString &label, TQWidget *tqparent, const char * name = 0,
+ KCalcButton(TQWidget *parent, const char * name = 0); 
+ KCalcButton(const TQString &label, TQWidget *parent, const char * name = 0,
 	     const TQString &tooltip = TQString());
 
  void addMode(ButtonModeFlags mode, TQString label, TQString tooltip, bool is_label_richtext = false);
@@ -93,11 +93,11 @@ Q_OBJECT
   TQ_OBJECT
 
 public:
-  KSquareButton(TQWidget *tqparent, const char * name = 0)
-    : KCalcButton(tqparent, name) { }; 
- KSquareButton(const TQString &label, TQWidget *tqparent, const char * name = 0,
+  KSquareButton(TQWidget *parent, const char * name = 0)
+    : KCalcButton(parent, name) { }; 
+ KSquareButton(const TQString &label, TQWidget *parent, const char * name = 0,
 	       const TQString &tooltip = TQString())
-   : KCalcButton(label, tqparent, name, tooltip) { };
+   : KCalcButton(label, parent, name, tooltip) { };
 
 protected:
  virtual void drawButtonLabel(TQPainter *paint);

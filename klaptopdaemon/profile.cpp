@@ -53,8 +53,8 @@
 
 extern void wake_laptop_daemon();
 
-ProfileConfig::ProfileConfig(TQWidget * tqparent, const char *name)
-  : KCModule(tqparent, name)
+ProfileConfig::ProfileConfig(TQWidget * parent, const char *name)
+  : KCModule(parent, name)
 {
     TQStringList performance_list;
     int current_performance;

@@ -49,7 +49,7 @@ class RegExpEditorWindow :public TQWidget
   TQ_OBJECT
 
 public:
-    RegExpEditorWindow(TQWidget *tqparent, const char *name = 0);
+    RegExpEditorWindow(TQWidget *parent, const char *name = 0);
 
     /**
        Returns an object which represent the regular expression "drawn" in

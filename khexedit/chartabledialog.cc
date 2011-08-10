@@ -32,10 +32,10 @@
 #include "chartabledialog.h"
 
 
-CCharTableDialog::CCharTableDialog( TQWidget *tqparent, const char *name,
+CCharTableDialog::CCharTableDialog( TQWidget *parent, const char *name,
 				    bool modal )
   :KDialogBase( Plain, i18n("Character Table"), Help|User1|Cancel, User1,
-		tqparent, name, modal, true, KStdGuiItem::insert())
+		parent, name, modal, true, KStdGuiItem::insert())
 {
   updateGeometry();
   setHelp( "khexedit/khexedit.html", TQString() );

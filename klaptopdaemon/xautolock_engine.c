@@ -74,7 +74,7 @@ xautolock_queryPointer (Display* d)
 {
   Window           dummyWin;         /* as it says                    */
   int              dummyInt;         /* as it says                    */
-  unsigned         tqmask;             /* modifier tqmask                 */
+  unsigned         mask;             /* modifier mask                 */
   int              rootX;            /* as it says                    */
   int              rootY;            /* as it says                    */
   int              corner;           /* corner index                  */
@@ -104,7 +104,7 @@ xautolock_queryPointer (Display* d)
   *  of pointer events.
   */
   if (!XQueryPointer (d, root, &root, &dummyWin, &rootX, &rootY,
-                      &dummyInt, &dummyInt, &tqmask))
+                      &dummyInt, &dummyInt, &mask))
   {
    /*
     *  Pointer has moved to another screen, so let's find out which one.
@@ -121,7 +121,7 @@ xautolock_queryPointer (Display* d)
 
   if (   rootX == prevRootX
       && rootY == prevRootY
-      && tqmask == prevMask)
+      && mask == prevMask)
   {
   xautolock_corner_t* corners = xautolock_corners;
    /*
@@ -186,7 +186,7 @@ xautolock_queryPointer (Display* d)
 #endif
     prevRootX = rootX;
     prevRootY = rootY;
-    prevMask = tqmask;
+    prevMask = mask;
 
     xautolock_resetTriggers ();
   }

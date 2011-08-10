@@ -49,9 +49,9 @@ void RegExp::removeChild( RegExp* child )
   }
 }
 
-void RegExp::setParent( RegExp* tqparent )
+void RegExp::setParent( RegExp* parent )
 {
-  _parent = tqparent;
+  _parent = parent;
 }
 
 RegExp* RegExp::readRegExp( TQDomElement top, const TQString& version )

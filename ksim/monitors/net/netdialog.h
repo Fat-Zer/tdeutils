@@ -37,7 +37,7 @@ class NetDialog : public TQTabDialog
   Q_OBJECT
   TQ_OBJECT
   public:
-    NetDialog(TQWidget *tqparent, const char *name = 0);
+    NetDialog(TQWidget *parent, const char *name = 0);
     ~NetDialog();
 
     const TQString deviceName() const;

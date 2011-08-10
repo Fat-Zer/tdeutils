@@ -43,7 +43,7 @@ class SonyConfig : public KCModule
   Q_OBJECT
   TQ_OBJECT
 public:
-  SonyConfig( TQWidget *tqparent=0, const char* name=0);
+  SonyConfig( TQWidget *parent=0, const char* name=0);
   ~SonyConfig( );     
 
   void save( void );

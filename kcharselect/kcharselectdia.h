@@ -28,7 +28,7 @@ class KCharSelectDia : public KMainWindow
   TQ_OBJECT
 
 public:
-  KCharSelectDia(TQWidget *tqparent,const char *name,const TQChar &_chr,const TQString &_font,int _tableNum, bool direction);
+  KCharSelectDia(TQWidget *parent,const char *name,const TQChar &_chr,const TQString &_font,int _tableNum, bool direction);
 
   static bool selectChar(TQString &_font,TQChar &_chr,int _tableNum);
 

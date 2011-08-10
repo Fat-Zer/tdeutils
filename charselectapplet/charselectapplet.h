@@ -39,7 +39,7 @@ class ConfigDialog : public KDialogBase
   TQ_OBJECT
 
 public:
-    ConfigDialog(TQWidget* tqparent = 0, const char* name = 0);
+    ConfigDialog(TQWidget* parent = 0, const char* name = 0);
 
     void setCharacters(const TQString& s) { _characterInput->setText(s); }
     void setCellWidth(int w) { _widthSpinBox->setValue(w); }
@@ -61,7 +61,7 @@ class CharTable : public TQFrame
   TQ_OBJECT
 
 public:
-    CharTable(TQWidget* tqparent = 0, const char* name = 0);
+    CharTable(TQWidget* parent = 0, const char* name = 0);
 
     void setRowsAndColumns(int, int);
 
@@ -101,7 +101,7 @@ class CharSelectApplet : public KPanelApplet
 
 public:
     CharSelectApplet(const TQString& configFile, Type t = Stretch, int actions = 0,
-                     TQWidget *tqparent = 0, const char *name = 0);
+                     TQWidget *parent = 0, const char *name = 0);
 
     int widthForHeight(int height) const;
     int heightForWidth(int width) const;

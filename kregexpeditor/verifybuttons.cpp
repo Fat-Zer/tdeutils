@@ -39,8 +39,8 @@
 #include <tqpopupmenu.h>
 #include <tqaction.h>
 
-VerifyButtons::VerifyButtons( TQWidget* tqparent, const char* name )
-    :TQDockWindow( TQDockWindow::InDock, tqparent, name ), _configMenu( 0 )
+VerifyButtons::VerifyButtons( TQWidget* parent, const char* name )
+    :TQDockWindow( TQDockWindow::InDock, parent, name ), _configMenu( 0 )
 {
     TQBoxLayout* tqlayout = boxLayout();
 

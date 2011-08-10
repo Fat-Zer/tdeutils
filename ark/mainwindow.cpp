@@ -45,7 +45,7 @@
 #include "archiveformatinfo.h"
 #include "arkwidget.h"
 
-MainWindow::MainWindow( TQWidget * /*tqparent*/, const char *name )
+MainWindow::MainWindow( TQWidget * /*parent*/, const char *name )
 	: KParts::MainWindow(), progressDialog( 0 )
 {
     setXMLFile( "arkui.rc" );

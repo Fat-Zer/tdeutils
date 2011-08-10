@@ -30,7 +30,7 @@ class KWalletConfig : public KCModule {
 	Q_OBJECT
   TQ_OBJECT
 	public:
-		KWalletConfig(TQWidget *tqparent = 0L, const char *name = 0L, const TQStringList& = TQStringList());
+		KWalletConfig(TQWidget *parent = 0L, const char *name = 0L, const TQStringList& = TQStringList());
 		virtual ~KWalletConfig();
 
 		void load();

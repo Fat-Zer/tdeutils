@@ -39,7 +39,7 @@ enum KWalletListItemClasses {
 
 class KWalletEntryItem : public KListViewItem {
 	public:
-		KWalletEntryItem(KWallet::Wallet *w, TQListViewItem* tqparent, const TQString& ename);
+		KWalletEntryItem(KWallet::Wallet *w, TQListViewItem* parent, const TQString& ename);
 		virtual ~KWalletEntryItem();
 
 		const TQString& oldName() { return _oldName; }
@@ -57,7 +57,7 @@ class KWalletEntryItem : public KListViewItem {
 
 class KWalletContainerItem : public KListViewItem {
 	public:
-		KWalletContainerItem(TQListViewItem* tqparent, const TQString& name,
+		KWalletContainerItem(TQListViewItem* parent, const TQString& name,
 		    KWallet::Wallet::EntryType type);
 		virtual ~KWalletContainerItem();
 
@@ -73,7 +73,7 @@ class KWalletContainerItem : public KListViewItem {
 
 class KWalletFolderItem : public KListViewItem {
 	public:
-		KWalletFolderItem(KWallet::Wallet *w, TQListView* tqparent, 
+		KWalletFolderItem(KWallet::Wallet *w, TQListView* parent, 
 			const TQString& name, int entries);
 		virtual ~KWalletFolderItem();
 
@@ -99,7 +99,7 @@ class KWalletEntryList : public KListView {
 	Q_OBJECT
   TQ_OBJECT
 	public:
-		KWalletEntryList(TQWidget *tqparent, const char *name = 0L);
+		KWalletEntryList(TQWidget *parent, const char *name = 0L);
 		virtual ~KWalletEntryList();
 
 		bool existsFolder(const TQString& name);
@@ -122,7 +122,7 @@ class KWalletEntryList : public KListView {
 
 class KWalletItem : public TQIconViewItem {
 	public:
-		KWalletItem(TQIconView *tqparent, const TQString& walletName);
+		KWalletItem(TQIconView *parent, const TQString& walletName);
 		virtual ~KWalletItem();
 
 		virtual bool acceptDrop(const TQMimeSource *mime) const;
@@ -136,7 +136,7 @@ class KWalletIconView : public KIconView {
 	Q_OBJECT
   TQ_OBJECT
 	public:
-		KWalletIconView(TQWidget *tqparent, const char *name = 0L);
+		KWalletIconView(TQWidget *parent, const char *name = 0L);
 		virtual ~KWalletIconView();
 
 	protected slots:

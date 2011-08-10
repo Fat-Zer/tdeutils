@@ -31,7 +31,7 @@ class ArkViewer : public KDialogBase
   TQ_OBJECT
 
 	public:
-		ArkViewer( TQWidget* tqparent = 0, const char * name = 0 );
+		ArkViewer( TQWidget* parent = 0, const char * name = 0 );
 		~ArkViewer();
 
 		bool view( const KURL& filename );

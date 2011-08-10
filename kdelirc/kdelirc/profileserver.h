@@ -36,7 +36,7 @@ class ProfileActionArgument
 	TQString theComment, theType;
 	Range theRange;
 	TQString theDefault;		// should be TQVariant?
-	const ProfileAction *tqparent;
+	const ProfileAction *parent;
 
 	friend class Profile;
 public:
@@ -49,15 +49,15 @@ public:
 	const Range &range() const { return theRange; }
 	void setRange(const Range &a) { theRange = a; }
 
-	const ProfileAction *action() const { return tqparent; }
-	void setAction(const ProfileAction *a) { tqparent = a; }
+	const ProfileAction *action() const { return parent; }
+	void setAction(const ProfileAction *a) { parent = a; }
 };
 
 class ProfileAction
 {
 	TQString theObjId, thePrototype, theName, theComment, theClass;
 	float theMultiplier;
-	const Profile *tqparent;
+	const Profile *parent;
 	bool theRepeat, theAutoStart;
 	TQValueList<ProfileActionArgument> theArguments;
 
@@ -81,8 +81,8 @@ public:
 	void setAutoStart(bool a) { theAutoStart = a; }
 	const TQValueList<ProfileActionArgument> &arguments() const { return theArguments; }
 
-	const Profile *profile() const { return tqparent; }
-	void setProfile(const Profile *a) { tqparent = a; }
+	const Profile *profile() const { return parent; }
+	void setProfile(const Profile *a) { parent = a; }
 };
 
 class Profile : public TQXmlDefaultHandler

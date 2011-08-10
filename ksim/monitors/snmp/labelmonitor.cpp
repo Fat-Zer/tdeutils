@@ -21,8 +21,8 @@
 
 using namespace KSim::Snmp;
 
-LabelMonitor::LabelMonitor( const MonitorConfig &config, TQWidget *tqparent, const char *name )
-    : KSim::Label( tqparent, name ), m_config( config )
+LabelMonitor::LabelMonitor( const MonitorConfig &config, TQWidget *parent, const char *name )
+    : KSim::Label( parent, name ), m_config( config )
 {
 }
 

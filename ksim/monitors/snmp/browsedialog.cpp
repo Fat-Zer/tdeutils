@@ -29,8 +29,8 @@
 
 using namespace KSim::Snmp;
 
-BrowseDialog::BrowseDialog( const HostConfig &hostConfig, const TQString &currentOid, TQWidget *tqparent, const char *name )
-    : BrowseDialogBase( tqparent, name ), m_host( hostConfig )
+BrowseDialog::BrowseDialog( const HostConfig &hostConfig, const TQString &currentOid, TQWidget *parent, const char *name )
+    : BrowseDialogBase( parent, name ), m_host( hostConfig )
 {
     stop->setGuiItem( KGuiItem( i18n( "&Stop" ), "stop" ) );
 

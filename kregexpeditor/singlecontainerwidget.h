@@ -28,7 +28,7 @@ Q_OBJECT
   TQ_OBJECT
 
 public:
-  SingleContainerWidget( RegExpEditorWindow* editorWindow, TQWidget* tqparent,
+  SingleContainerWidget( RegExpEditorWindow* editorWindow, TQWidget* parent,
                          const char* name = 0);
 
   virtual bool updateSelection( bool parentSelected );

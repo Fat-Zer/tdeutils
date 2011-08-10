@@ -31,8 +31,8 @@
 #include "kcalc_settings.h"
 
 
-KCalcConstButton::KCalcConstButton(TQWidget *tqparent, int but_num, const char * name)
-  : KCalcButton(tqparent, name), _button_num(but_num)
+KCalcConstButton::KCalcConstButton(TQWidget *parent, int but_num, const char * name)
+  : KCalcButton(parent, name), _button_num(but_num)
 {
   addMode(ModeInverse, "Store", i18n("Write display data into memory"));
   
@@ -40,9 +40,9 @@ KCalcConstButton::KCalcConstButton(TQWidget *tqparent, int but_num, const char *
 }
 
 
-KCalcConstButton::KCalcConstButton(const TQString &label, TQWidget *tqparent, int but_num,
+KCalcConstButton::KCalcConstButton(const TQString &label, TQWidget *parent, int but_num,
                                    const char * name, const TQString &tooltip)
-  : KCalcButton(label, tqparent, name, tooltip), _button_num(but_num)
+  : KCalcButton(label, parent, name, tooltip), _button_num(but_num)
 {
   addMode(ModeInverse, "Store", i18n("Write display data into memory"));
   

@@ -33,10 +33,10 @@ class TextWidget : public RegExpWidget
   TQ_OBJECT
 
 public:
-    TextWidget(RegExpEditorWindow* editorWindow, TQWidget *tqparent,
+    TextWidget(RegExpEditorWindow* editorWindow, TQWidget *parent,
                const char *name = 0);
     TextWidget( TextRegExp* regexp,  RegExpEditorWindow* editorWindow,
-                TQWidget* tqparent, const char* name = 0);
+                TQWidget* parent, const char* name = 0);
     virtual TQSize tqsizeHint() const;
 	virtual RegExp* regExp() const;
     virtual RegExpType type() const { return TEXT; }

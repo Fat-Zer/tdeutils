@@ -43,7 +43,7 @@
 #include "klircclient.h"
 
 
-KLircClient::KLircClient(TQWidget *tqparent, const char *name) : TQObject(tqparent, name), theSocket(0), listIsUpToDate(false)
+KLircClient::KLircClient(TQWidget *parent, const char *name) : TQObject(parent, name), theSocket(0), listIsUpToDate(false)
 {
 	connectToLirc();
 }

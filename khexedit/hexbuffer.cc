@@ -1609,7 +1609,7 @@ void CHexBuffer::drawText( TQPainter &paint, uint line, int sx, int x1, int x2 )
 
   //
   // Draw the bookmark identifiers on this line (if any).  We use the
-  // bittqmask to minimize the number of times we try to draw the bookmarks.
+  // bitmask to minimize the number of times we try to draw the bookmarks.
   //
   int bookmarkPosition = 0;
   if( mBookmarkMap.testBit(fileOffset/200) ||

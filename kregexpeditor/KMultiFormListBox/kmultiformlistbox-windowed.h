@@ -43,7 +43,7 @@ Q_OBJECT
 friend class KMultiFormListBox;
 
 private:
-  KMultiFormListBoxWindowed(KMultiFormListBoxFactory *factory, TQWidget *tqparent,
+  KMultiFormListBoxWindowed(KMultiFormListBoxFactory *factory, TQWidget *parent,
 														bool showUpDownButtons, bool showHelpButton, TQString addButtonText,
 														const char *name);
 

@@ -50,20 +50,20 @@ class KSim::Label::Private
     bool showShadow;
 };
 
-KSim::Label::Label(TQWidget *tqparent, const char *name, WFlags fl)
-   : TQWidget(tqparent, name, fl)
+KSim::Label::Label(TQWidget *parent, const char *name, WFlags fl)
+   : TQWidget(parent, name, fl)
 {
   initWidget(KSim::Types::None);
 }
 
-KSim::Label::Label(int type, TQWidget *tqparent, const char *name, 
-   WFlags fl) : TQWidget(tqparent, name, fl)
+KSim::Label::Label(int type, TQWidget *parent, const char *name, 
+   WFlags fl) : TQWidget(parent, name, fl)
 {
   initWidget(type);
 }
 
-KSim::Label::Label(int type, const TQString &text, TQWidget *tqparent,
-   const char *name, WFlags fl) : TQWidget(tqparent, name, fl)
+KSim::Label::Label(int type, const TQString &text, TQWidget *parent,
+   const char *name, WFlags fl) : TQWidget(parent, name, fl)
 {
   initWidget(type);
   setText(text);

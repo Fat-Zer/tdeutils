@@ -43,7 +43,7 @@
 #include "kgpgsettings.h"
 #include "kgpginterface.h"
 
-KgpgKeyInfo::KgpgKeyInfo(TQWidget *tqparent, const char *name,TQString sigkey):KDialogBase( Swallow, i18n("Key Properties"), Close, Close, tqparent, name,true)
+KgpgKeyInfo::KgpgKeyInfo(TQWidget *parent, const char *name,TQString sigkey):KDialogBase( Swallow, i18n("Key Properties"), Close, Close, parent, name,true)
 {
 
         FILE *pass;

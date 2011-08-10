@@ -47,18 +47,18 @@ class CStatusBarProgress : public TQFrame, public TQRangeControl
   /** 
   * Construct a default progress bar. Orientation is horizontal. 
   */
-  CStatusBarProgress(TQWidget *tqparent=0, const char *name=0);
+  CStatusBarProgress(TQWidget *parent=0, const char *name=0);
 
   /** 
   * Construct a KProgress bar with an orientation. 
   */
-  CStatusBarProgress(Orientation, TQWidget *tqparent=0, const char *name=0);
+  CStatusBarProgress(Orientation, TQWidget *parent=0, const char *name=0);
 
   /** 
   * Construct a KProgress bar with minimum, maximum and initial value. 
   */
   CStatusBarProgress(int minValue, int maxValue, int value, Orientation, 
-		     TQWidget *tqparent=0, const char *name=0);
+		     TQWidget *parent=0, const char *name=0);
 	
   /** 
   * Destructor 

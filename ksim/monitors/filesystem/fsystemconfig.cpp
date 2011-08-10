@@ -37,17 +37,17 @@
 class FSysViewItem : public TQCheckListItem
 {
   public:
-    FSysViewItem(TQListView *tqparent, const TQString &text1,
+    FSysViewItem(TQListView *parent, const TQString &text1,
        const TQString &text2, const TQString &text3)
-        : TQCheckListItem(tqparent, text1, CheckBox)
+        : TQCheckListItem(parent, text1, CheckBox)
     {
       setText(1, text2);
       setText(2, text3);
     }
 };
 
-FsystemConfig::FsystemConfig(KSim::PluginObject *tqparent, const char *name)
-   : KSim::PluginPage(tqparent, name)
+FsystemConfig::FsystemConfig(KSim::PluginObject *parent, const char *name)
+   : KSim::PluginPage(parent, name)
 {
   m_mainLayout = new TQGridLayout(this);
   m_mainLayout->setSpacing(6);

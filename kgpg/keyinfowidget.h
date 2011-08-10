@@ -37,7 +37,7 @@ class KgpgKeyInfo : public KDialogBase
 
 public:
 
-	KgpgKeyInfo( TQWidget *tqparent = 0, const char *name = 0,TQString sigkey=0);
+	KgpgKeyInfo( TQWidget *parent = 0, const char *name = 0,TQString sigkey=0);
 	~KgpgKeyInfo();
 	KeyProperties *prop;
 

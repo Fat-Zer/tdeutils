@@ -49,7 +49,7 @@ class KRegExpEditorPrivate  :public TQWidget
   TQ_OBJECT
 
 public:
-    KRegExpEditorPrivate( TQWidget *tqparent, const char *name = 0 );
+    KRegExpEditorPrivate( TQWidget *parent, const char *name = 0 );
     TQString regexp();
     void setMinimal( bool );
     void setCaseSensitive( bool );

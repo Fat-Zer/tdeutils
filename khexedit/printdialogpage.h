@@ -36,7 +36,7 @@ class LayoutDialogPage : public KPrintDialogPage
   TQ_OBJECT
 
  public:
-    LayoutDialogPage( TQWidget *tqparent = 0, const char *name = 0 );
+    LayoutDialogPage( TQWidget *parent = 0, const char *name = 0 );
     ~LayoutDialogPage( void );
 
     void getOptions( TQMap<TQString,TQString>& opts, bool incldef = false );

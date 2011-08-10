@@ -36,7 +36,7 @@ class KWalletManager : public KMainWindow, public DCOPObject {
 	K_DCOP
 
 	public:
-		KWalletManager(TQWidget *tqparent = 0, const char* name = 0, WFlags f = 0);
+		KWalletManager(TQWidget *parent = 0, const char* name = 0, WFlags f = 0);
 		virtual ~KWalletManager();
 
                 TQPixmap loadSystemTrayIcon(const TQString &icon);

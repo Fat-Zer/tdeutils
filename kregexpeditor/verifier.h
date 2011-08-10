@@ -28,7 +28,7 @@ class Verifier :public TQTextEdit
 Q_OBJECT
   TQ_OBJECT
 public:
-    Verifier( TQWidget* tqparent, const char* name = 0 );
+    Verifier( TQWidget* parent, const char* name = 0 );
     void setHighlighter( RegexpHighlighter* );
 
 public slots:

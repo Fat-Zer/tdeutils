@@ -67,7 +67,7 @@ class CGotoDialog : public KDialogBase
   TQ_OBJECT
   
   public:
-    CGotoDialog( TQWidget *tqparent, const char *name = 0, bool modal = false );
+    CGotoDialog( TQWidget *parent, const char *name = 0, bool modal = false );
     ~CGotoDialog( void );
 
   protected:
@@ -102,7 +102,7 @@ class CFindDialog : public KDialogBase
     };
 
   public:
-    CFindDialog( TQWidget *tqparent=0, const char *name=0, bool modal=false );
+    CFindDialog( TQWidget *parent=0, const char *name=0, bool modal=false );
     ~CFindDialog( void );
     bool isEmpty( void );
 
@@ -142,7 +142,7 @@ class CFindNavigatorDialog : public KDialogBase
   TQ_OBJECT
   
   public:
-    CFindNavigatorDialog( TQWidget *tqparent=0, const char *name=0, 
+    CFindNavigatorDialog( TQWidget *parent=0, const char *name=0, 
 			  bool modal=false );
     ~CFindNavigatorDialog( void );
     void defineData( SSearchControl &sc );
@@ -172,7 +172,7 @@ class CReplaceDialog : public KDialogBase
   TQ_OBJECT
   
   public:
-    CReplaceDialog( TQWidget *tqparent=0, const char *name=0, bool modal=false );
+    CReplaceDialog( TQWidget *parent=0, const char *name=0, bool modal=false );
     ~CReplaceDialog( void );
 
   protected:
@@ -216,7 +216,7 @@ class CReplacePromptDialog : public KDialogBase
   TQ_OBJECT
   
   public:
-    CReplacePromptDialog( TQWidget *tqparent=0, const char *name=0, 
+    CReplacePromptDialog( TQWidget *parent=0, const char *name=0, 
 			  bool modal=false );
     ~CReplacePromptDialog( void );
     void defineData( SSearchControl &sc );
@@ -255,7 +255,7 @@ class CFilterDialog : public KDialogBase
     };
 
   public:
-    CFilterDialog( TQWidget *tqparent=0, const char *name=0, bool modal=false );
+    CFilterDialog( TQWidget *parent=0, const char *name=0, bool modal=false );
     ~CFilterDialog( void );
 
   protected:
@@ -306,7 +306,7 @@ class CInsertDialog : public KDialogBase
   TQ_OBJECT
   
   public:
-    CInsertDialog( TQWidget *tqparent=0, const char *name=0, bool modal=false );
+    CInsertDialog( TQWidget *parent=0, const char *name=0, bool modal=false );
     ~CInsertDialog( void );
 
   protected:
@@ -343,8 +343,8 @@ void centerDialogBottom( TQWidget *widget, TQWidget *centerParent );
 void comboMatchText( TQComboBox *combo, const TQString &text );
 bool stringToOffset( const TQString & text, uint &offset );
 
-void showEntryFailure( TQWidget *tqparent, const TQString &msg );
-bool verifyFileDestnation( TQWidget *tqparent, const TQString &title, 
+void showEntryFailure( TQWidget *parent, const TQString &msg );
+bool verifyFileDestnation( TQWidget *parent, const TQString &title, 
 			   const TQString &path );
 
 

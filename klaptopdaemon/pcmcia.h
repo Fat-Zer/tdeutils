@@ -43,7 +43,7 @@ class PcmciaConfig : public KCModule
   Q_OBJECT
   TQ_OBJECT
 public:
-  PcmciaConfig( TQWidget *tqparent=0, const char* name=0);
+  PcmciaConfig( TQWidget *parent=0, const char* name=0);
 
   void save( void );
   void load();

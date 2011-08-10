@@ -47,10 +47,10 @@ namespace KSim
        * @param minValue is the minimum value to show
        * @param maxValue is the maximum value to show
        * @param title is the title off the krell bar (if enabled)
-       * @param tqparent is the tqparent widget
+       * @param parent is the parent widget
        */
       Chart(bool displayMeter, int maxValue,
-         const TQString &title, TQWidget *tqparent,
+         const TQString &title, TQWidget *parent,
          const char *name = 0, WFlags fl = 0);
       /**
        * Constructs a KSim::Chart.
@@ -58,10 +58,10 @@ namespace KSim
        * @param showKrell is if the krellbar should be shown
        * @param minValue is the minimum value to show
        * @param maxValue is the maximum value to show
-       * @param tqparent is the tqparent widget
+       * @param parent is the parent widget
        */
       Chart(bool displayMeter, int maxValue,
-         TQWidget *tqparent, const char *name = 0,
+         TQWidget *parent, const char *name = 0,
          WFlags fl = 0);
       /**
        * destructs KSim::Chart

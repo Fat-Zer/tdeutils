@@ -42,7 +42,7 @@ class ButtonsConfig : public KCModule
   Q_OBJECT
   TQ_OBJECT
 public:
-  ButtonsConfig( TQWidget *tqparent=0, const char* name=0);
+  ButtonsConfig( TQWidget *parent=0, const char* name=0);
     ~ButtonsConfig();
   void save( void );
   void load();

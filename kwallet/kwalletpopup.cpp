@@ -28,8 +28,8 @@
 #include <kwallet.h>
 #include <kstdguiitem.h>
 
-KWalletPopup::KWalletPopup(const TQString& wallet, TQWidget *tqparent, const char *name)
-: KPopupMenu(tqparent, name), _walletName(wallet) {
+KWalletPopup::KWalletPopup(const TQString& wallet, TQWidget *parent, const char *name)
+: KPopupMenu(parent, name), _walletName(wallet) {
 	insertTitle(wallet);
 	KActionCollection *ac = new KActionCollection(this, "kwallet context actions");
 	KAction *act;

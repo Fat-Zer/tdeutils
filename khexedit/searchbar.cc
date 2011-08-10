@@ -51,8 +51,8 @@ static const char * close_xpm[] = {
 "                ",
 "                "};
 
-CSearchBar::CSearchBar( TQWidget *tqparent, const char *name, WFlags f )
-  :TQFrame( tqparent, name, f )
+CSearchBar::CSearchBar( TQWidget *parent, const char *name, WFlags f )
+  :TQFrame( parent, name, f )
 {
   setFrameStyle( TQFrame::Panel | TQFrame::Raised );
   setLineWidth( 1 );

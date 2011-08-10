@@ -37,8 +37,8 @@
 /***************************************************************************
   * constructor
 **/
-DiskList::DiskList(TQObject *tqparent, const char *name)
-    : TQObject(tqparent,name)
+DiskList::DiskList(TQObject *parent, const char *name)
+    : TQObject(parent,name)
 {
    kdDebug() << k_funcinfo << endl;
 

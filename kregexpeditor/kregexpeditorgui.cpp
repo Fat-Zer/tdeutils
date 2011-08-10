@@ -34,9 +34,9 @@
 const TQString KRegExpEditorGUI::version = TQString::fromLocal8Bit("1.0");
 
 
-KRegExpEditorGUI::KRegExpEditorGUI(TQWidget *tqparent, const char *name,
+KRegExpEditorGUI::KRegExpEditorGUI(TQWidget *parent, const char *name,
 	                           const TQStringList & )
-  : TQWidget( tqparent, name)
+  : TQWidget( parent, name)
 {
   TQHBoxLayout* tqlayout = new TQHBoxLayout( this, 6 );
   _editor = new KRegExpEditorPrivate( this, "_editor" );
@@ -66,12 +66,12 @@ void KRegExpEditorGUI::setRegExp( const TQString &regexp )
   _editor->slotSetRegexp( regexp );
 }
 
-KRegExpEditorGUIDialog::KRegExpEditorGUIDialog( TQWidget *tqparent,
+KRegExpEditorGUIDialog::KRegExpEditorGUIDialog( TQWidget *parent,
                                                 const char *name,
                                                 const TQStringList & )
   : KDialogBase( KDialogBase::Plain, i18n("Regular Expression Editor"),
                  KDialogBase::Ok | KDialogBase::Cancel | KDialogBase::Help, KDialogBase::Ok,
-                 tqparent, name ? name : "KRegExpDialog" )
+                 parent, name ? name : "KRegExpDialog" )
 {
   TQFrame* frame = plainPage();
   TQVBoxLayout* tqlayout = new TQVBoxLayout( frame, 6 );

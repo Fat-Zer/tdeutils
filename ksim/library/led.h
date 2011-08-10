@@ -46,7 +46,7 @@ namespace KSim
        * @param ImageName is the image to display
        * the image's height is divided by 4 and each item is used for send in,
        * send out, receive in and receive out
-       * @param tqparent is the tqparent widget
+       * @param parent is the parent widget
        * @param name is the object instance name
        */
       Led(Type type, const TQString &imageName);
@@ -114,29 +114,29 @@ namespace KSim
        *
        * @param type is the theme type
        * @param label is the default text to display
-       * @param tqparent is the tqparent widget
+       * @param parent is the parent widget
        * @see KSim::ThemeLoader
        */
       LedLabel(int max, int type, const TQString &label,
-            TQWidget *tqparent, const char *name = 0, WFlags fl = 0);
+            TQWidget *parent, const char *name = 0, WFlags fl = 0);
       /**
        * Constructs a KSim::LedLabel.
        *
        * @param type is the theme type
        * @param label is the default text to display
-       * @param tqparent is the tqparent widget
+       * @param parent is the parent widget
        * @see KSim::ThemeLoader
        */
-      LedLabel(int max, int type, TQWidget *tqparent,
+      LedLabel(int max, int type, TQWidget *parent,
              const char *name = 0, WFlags fl = 0);
       /**
        * Constructs a KSim::LedLabel.
        *
        * @param label is the default text to display
-       * @param tqparent is the tqparent widget
+       * @param parent is the parent widget
        * @see KSim::ThemeLoader
        */
-      LedLabel(int max, TQWidget *tqparent,
+      LedLabel(int max, TQWidget *parent,
              const char *name = 0, WFlags fl = 0);
       /**
        * destructor for KSim::LedLabel.

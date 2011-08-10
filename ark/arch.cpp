@@ -390,37 +390,37 @@ bool Arch::processLine( const TQCString &line )
 
 
 Arch *Arch::archFactory( ArchType aType,
-                         ArkWidget *tqparent, const TQString &filename,
+                         ArkWidget *parent, const TQString &filename,
                          const TQString &openAsMimeType )
 {
   switch( aType )
   {
     case TAR_FORMAT:
-      return new TarArch( tqparent, filename, openAsMimeType );
+      return new TarArch( parent, filename, openAsMimeType );
 
     case ZIP_FORMAT:
-      return new ZipArch( tqparent, filename );
+      return new ZipArch( parent, filename );
 
     case LHA_FORMAT:
-      return new LhaArch( tqparent, filename );
+      return new LhaArch( parent, filename );
 
     case COMPRESSED_FORMAT:
-      return new CompressedFile( tqparent, filename, openAsMimeType );
+      return new CompressedFile( parent, filename, openAsMimeType );
 
     case ZOO_FORMAT:
-      return new ZooArch( tqparent, filename );
+      return new ZooArch( parent, filename );
 
     case RAR_FORMAT:
-      return new RarArch( tqparent, filename );
+      return new RarArch( parent, filename );
 
     case AA_FORMAT:
-      return new ArArch( tqparent, filename );
+      return new ArArch( parent, filename );
 
     case SEVENZIP_FORMAT:
-      return new SevenZipArch( tqparent, filename );
+      return new SevenZipArch( parent, filename );
 
     case ACE_FORMAT:
-      return new AceArch( tqparent, filename );
+      return new AceArch( parent, filename );
 
     case UNKNOWN_FORMAT:
     default:

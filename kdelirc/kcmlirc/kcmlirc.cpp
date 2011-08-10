@@ -49,7 +49,7 @@
 typedef KGenericFactory<KCMLirc, TQWidget> theFactory;
 K_EXPORT_COMPONENT_FACTORY(kcmlirc, theFactory("kcmlirc"))
 
-KCMLirc::KCMLirc(TQWidget *tqparent, const char *name, TQStringList /*args*/) : DCOPObject("KCMLirc"), KCModule(tqparent, name)
+KCMLirc::KCMLirc(TQWidget *parent, const char *name, TQStringList /*args*/) : DCOPObject("KCMLirc"), KCModule(parent, name)
 {
 	KGlobal::locale()->insertCatalogue( "kcmlirc" );
 	setAboutData(new KAboutData("kcmlirc", I18N_NOOP("KDE Lirc"), VERSION, I18N_NOOP("The KDE IR Remote Control System"), KAboutData::License_GPL_V2, "Copyright (c)2003 Gav Wood", I18N_NOOP("Use this to configure KDE's infrared remote control system in order to control any KDE application with your infrared remote control."), "http://www.kde.org"));
@@ -96,11 +96,11 @@ KCMLirc::~KCMLirc()
 
 void KCMLirc::updateModestqStatus(TQListViewItem *item)
 {
-	theKCMLircBase->theModes->setItemsRenameable(item && item->tqparent());
+	theKCMLircBase->theModes->setItemsRenameable(item && item->parent());
 	theKCMLircBase->theAddActions->setEnabled(ProfileServer::profileServer()->profiles().count() && theKCMLircBase->theModes->selectedItem() && RemoteServer::remoteServer()->remotes()[modeMap[theKCMLircBase->theModes->selectedItem()].remote()]);
 	theKCMLircBase->theAddAction->setEnabled(item);
 	theKCMLircBase->theAddMode->setEnabled(item);
-	theKCMLircBase->theRemoveMode->setEnabled(item && item->tqparent());
+	theKCMLircBase->theRemoveMode->setEnabled(item && item->parent());
 	theKCMLircBase->theEditMode->setEnabled(item);
 }
 
@@ -114,7 +114,7 @@ void KCMLirc::slotRenamed(TQListViewItem *item)
 {
 	if(!item) return;
 
-	if(item->tqparent() && item->text(0) != modeMap[item].name())
+	if(item->parent() && item->text(0) != modeMap[item].name())
 	{	allActions.renameMode(modeMap[item], item->text(0));
 		allModes.rename(modeMap[item], item->text(0));
 		emit changed(true);
@@ -128,7 +128,7 @@ void KCMLirc::slotEditAction()
 
 	EditAction theDialog(actionMap[theKCMLircBase->theActions->currentItem()], this);
 	TQListViewItem *item = theKCMLircBase->theModes->currentItem();
-	if(item->tqparent()) item = item->tqparent();
+	if(item->parent()) item = item->parent();
 	theDialog.theModes->insertItem(i18n("[Exit current mode]"));
 	for(item = item->firstChild(); item; item = item->nextSibling())
 		theDialog.theModes->insertItem(item->text(0));
@@ -166,7 +166,7 @@ void KCMLirc::slotAddAction()
 
 	// populate the modes list box
 	TQListViewItem *item = theKCMLircBase->theModes->selectedItem();
-	if(item->tqparent()) item = item->tqparent();
+	if(item->parent()) item = item->parent();
 	theDialog.theModes->setEnabled(item->firstChild());
 	theDialog.theSwitchMode->setEnabled(item->firstChild());
 	for(item = item->firstChild(); item; item = item->nextSibling())
@@ -202,7 +202,7 @@ void KCMLirc::slotAddAction()
 			a.setRepeat(false);
 		}
 		// DCOP?
-		else if(theDialog.theUseDCOP->isChecked() && theDialog.theObjects->selectedItem() && theDialog.theObjects->selectedItem()->tqparent() && theDialog.theFunctions->selectedItem())
+		else if(theDialog.theUseDCOP->isChecked() && theDialog.theObjects->selectedItem() && theDialog.theObjects->selectedItem()->parent() && theDialog.theFunctions->selectedItem())
 		{
 			a.setProgram(theDialog.program);
 			a.setObject(theDialog.theObjects->selectedItem()->text(0));
@@ -284,7 +284,7 @@ void KCMLirc::slotAddMode()
 	NewMode theDialog(this, 0);
 	TQMap<TQListViewItem *, TQString> remoteMap;
 	TQListViewItem *tr = theKCMLircBase->theModes->selectedItem();
-	if(tr) if(tr->tqparent()) tr = tr->tqparent();
+	if(tr) if(tr->parent()) tr = tr->parent();
 	for(TQListViewItem *i = theKCMLircBase->theModes->firstChild(); i; i = i->nextSibling())
 	{	KListViewItem *a = new KListViewItem(theDialog.theRemotes, i->text(0));
 		remoteMap[a] = modeMap[i].remote();
@@ -305,7 +305,7 @@ void KCMLirc::slotEditMode()
 	EditMode theDialog(this, 0);
 
 	Mode &mode = modeMap[theKCMLircBase->theModes->selectedItem()];
-	theDialog.theName->setEnabled(theKCMLircBase->theModes->selectedItem()->tqparent());
+	theDialog.theName->setEnabled(theKCMLircBase->theModes->selectedItem()->parent());
 	theDialog.theName->setText(mode.name().isEmpty() ? mode.remoteName() : mode.name());
 	if(!mode.iconFile().isNull())
 		theDialog.theIcon->setIcon(mode.iconFile());
@@ -331,7 +331,7 @@ void KCMLirc::slotEditMode()
 void KCMLirc::slotRemoveMode()
 {
 	if(!theKCMLircBase->theModes->selectedItem()) return;
-	if(!theKCMLircBase->theModes->selectedItem()->tqparent()) return;
+	if(!theKCMLircBase->theModes->selectedItem()->parent()) return;
 
 	if(KMessageBox::warningContinueCancel(this, i18n("Are you sure you want to remove %1 and all its actions?").tqarg(theKCMLircBase->theModes->selectedItem()->text(0)), i18n("Erase Actions?")) == KMessageBox::Continue)
 	{
@@ -465,7 +465,7 @@ void KCMLirc::updateInformation()
 
 	if(!theKCMLircBase->theExtensions->selectedItem()) return;
 
-	if(!theKCMLircBase->theExtensions->selectedItem()->tqparent())
+	if(!theKCMLircBase->theExtensions->selectedItem()->parent())
 	{
 		theKCMLircBase->theInformationLabel->setText(i18n("Information on <b>%1</b>:").tqarg(theKCMLircBase->theExtensions->selectedItem()->text(0)));
 		if(theKCMLircBase->theExtensions->selectedItem()->text(0) == i18n("Applications"))
@@ -473,7 +473,7 @@ void KCMLirc::updateInformation()
 		else if(theKCMLircBase->theExtensions->selectedItem()->text(0) == i18n("Remote Controls"))
 			new TQListViewItem(theKCMLircBase->theInformation, i18n("Number of Remote Controls"), TQString().setNum(theKCMLircBase->theExtensions->selectedItem()->childCount()));
 	}
-	else if(theKCMLircBase->theExtensions->selectedItem()->tqparent()->text(0) == i18n("Applications"))
+	else if(theKCMLircBase->theExtensions->selectedItem()->parent()->text(0) == i18n("Applications"))
 	{
 		ProfileServer *theServer = ProfileServer::profileServer();
 		const Profile *p = theServer->profiles()[profileMap[theKCMLircBase->theExtensions->selectedItem()]];
@@ -483,7 +483,7 @@ void KCMLirc::updateInformation()
 		new TQListViewItem(theKCMLircBase->theInformation, i18n("Number of Actions"), TQString().setNum(p->actions().count()));
 		theKCMLircBase->theInformationLabel->setText(i18n("Information on <b>%1</b>:").tqarg(p->name()));
 	}
-	else if(theKCMLircBase->theExtensions->selectedItem()->tqparent()->text(0) == i18n("Remote Controls"))
+	else if(theKCMLircBase->theExtensions->selectedItem()->parent()->text(0) == i18n("Remote Controls"))
 	{
 		RemoteServer *theServer = RemoteServer::remoteServer();
 		const Remote *p = theServer->remotes()[remoteMap[theKCMLircBase->theExtensions->selectedItem()]];
@@ -534,9 +534,9 @@ void KCMLirc::configChanged()
 // TODO: Take this out when I know how
 extern "C"
 {
-	KDE_EXPORT KCModule *create_kcmlirc(TQWidget *tqparent, const char *)
+	KDE_EXPORT KCModule *create_kcmlirc(TQWidget *parent, const char *)
 	{	KGlobal::locale()->insertCatalogue("kcmlirc");
-		return new KCMLirc(tqparent, "KCMLirc");
+		return new KCMLirc(parent, "KCMLirc");
 	}
 }
 

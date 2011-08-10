@@ -38,7 +38,7 @@ class KMiloKVaio : public KMilo::Monitor {
   TQ_OBJECT
 
 	public:
-		KMiloKVaio(TQObject *tqparent, 
+		KMiloKVaio(TQObject *parent, 
 			   const char *name, const TQStringList&);
 		virtual ~KMiloKVaio();
 

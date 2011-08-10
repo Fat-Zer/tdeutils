@@ -72,8 +72,8 @@ void I8KPlugin::showAbout()
   KAboutApplication(&aboutData).exec();
 }
 
-I8KView::I8KView(KSim::PluginObject *tqparent, const char *name)
-   : KSim::PluginView(tqparent, name),
+I8KView::I8KView(KSim::PluginObject *parent, const char *name)
+   : KSim::PluginView(parent, name),
      m_timer( 0L ), m_procFile( 0L ), m_procStream( 0L )
 {
   initGUI();
@@ -208,8 +208,8 @@ void I8KView::updateView()
       .tqarg( m_unit ) );
 }
 
-I8KConfig::I8KConfig(KSim::PluginObject *tqparent, const char *name)
-   : KSim::PluginPage(tqparent, name)
+I8KConfig::I8KConfig(KSim::PluginObject *parent, const char *name)
+   : KSim::PluginPage(parent, name)
 {
   m_unit = new TQCheckBox( i18n( "Show temperature in Fahrenheit" ),
         this );

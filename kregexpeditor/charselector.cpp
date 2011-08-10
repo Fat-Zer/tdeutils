@@ -41,7 +41,7 @@
 class StackContainer :public TQWidget
 {
 public:
-    StackContainer( TQWidget* child, TQWidget* tqparent ) : TQWidget( tqparent )
+    StackContainer( TQWidget* child, TQWidget* parent ) : TQWidget( parent )
         {
             TQHBoxLayout* tqlayout = new TQHBoxLayout( this );
             child->reparent( this, TQPoint(0,0), false );
@@ -50,8 +50,8 @@ public:
         }
 };
 
-CharSelector::CharSelector( TQWidget* tqparent, const char* name )
-    :TQWidget( tqparent, name ), _oldIndex(0)
+CharSelector::CharSelector( TQWidget* parent, const char* name )
+    :TQWidget( parent, name ), _oldIndex(0)
 {
   TQStringList items;
   TQHBoxLayout* tqlayout = new TQHBoxLayout( this, 0, 6 );

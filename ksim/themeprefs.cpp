@@ -46,8 +46,8 @@
 class ThemeViewItem : public KListViewItem
 {
   public:
-    ThemeViewItem(TQListView *tqparent, const TQString &text,
-       const KURL &url) : KListViewItem(tqparent, text)
+    ThemeViewItem(TQListView *parent, const TQString &text,
+       const KURL &url) : KListViewItem(parent, text)
     {
       m_url = url;
     }
@@ -58,8 +58,8 @@ class ThemeViewItem : public KListViewItem
     KURL m_url;
 };
 
-KSim::ThemePrefs::ThemePrefs(TQWidget *tqparent, const char *name)
-   : TQWidget(tqparent, name)
+KSim::ThemePrefs::ThemePrefs(TQWidget *parent, const char *name)
+   : TQWidget(parent, name)
 {
   m_themeLayout = new TQGridLayout(this);
   m_themeLayout->setSpacing(6);

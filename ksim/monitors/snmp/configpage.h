@@ -35,14 +35,14 @@ namespace Snmp
 class HostItem : public TQListViewItem
 {
 public:
-    HostItem( TQListView *tqparent, const KSim::Snmp::HostConfig &src )
-        : TQListViewItem( tqparent, TQString(), TQString(), TQString() )
+    HostItem( TQListView *parent, const KSim::Snmp::HostConfig &src )
+        : TQListViewItem( parent, TQString(), TQString(), TQString() )
     {
         setFromHostConfig( src );
     }
 
-    HostItem( TQListView *tqparent )
-        : TQListViewItem( tqparent, TQString(), TQString(), TQString() )
+    HostItem( TQListView *parent )
+        : TQListViewItem( parent, TQString(), TQString(), TQString() )
     {}
 
     void setFromHostConfig( const KSim::Snmp::HostConfig &src )
@@ -56,14 +56,14 @@ public:
 class MonitorItem : public TQListViewItem
 {
 public:
-    MonitorItem( TQListView *tqparent, const KSim::Snmp::MonitorConfig &monitor )
-        : TQListViewItem( tqparent, TQString(), TQString(), TQString() )
+    MonitorItem( TQListView *parent, const KSim::Snmp::MonitorConfig &monitor )
+        : TQListViewItem( parent, TQString(), TQString(), TQString() )
     {
         setFromMonitor( monitor );
     }
 
-    MonitorItem( TQListView *tqparent )
-        : TQListViewItem( tqparent, TQString(), TQString(), TQString() )
+    MonitorItem( TQListView *parent )
+        : TQListViewItem( parent, TQString(), TQString(), TQString() )
     {}
 
     void setFromMonitor( const KSim::Snmp::MonitorConfig &monitor )
@@ -81,7 +81,7 @@ class ConfigPage : public KSim::PluginPage
     Q_OBJECT
   TQ_OBJECT
 public:
-    ConfigPage( Plugin *tqparent, const char *name );
+    ConfigPage( Plugin *parent, const char *name );
     ~ConfigPage();
 
     virtual void saveConfig();

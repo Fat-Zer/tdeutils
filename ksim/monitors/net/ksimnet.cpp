@@ -99,8 +99,8 @@ void NetPlugin::showAbout()
   KAboutApplication(&aboutData).exec();
 }
 
-NetView::NetView(KSim::PluginObject *tqparent, const char *name)
-   : KSim::PluginView(tqparent, name)
+NetView::NetView(KSim::PluginObject *parent, const char *name)
+   : KSim::PluginView(parent, name)
 {
 #ifdef __linux__
   m_procStream = 0L;

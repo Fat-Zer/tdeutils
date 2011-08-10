@@ -29,7 +29,7 @@ class KWalletPopup : public KPopupMenu {
   TQ_OBJECT
 
 	public:
-		KWalletPopup(const TQString& wallet, TQWidget *tqparent = 0, const char* name = 0);
+		KWalletPopup(const TQString& wallet, TQWidget *parent = 0, const char* name = 0);
 		virtual ~KWalletPopup();
 
 	public slots:

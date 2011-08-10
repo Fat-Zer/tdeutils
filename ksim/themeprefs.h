@@ -78,7 +78,7 @@ namespace KSim
     Q_OBJECT
   TQ_OBJECT
     public:
-      ThemePrefs(TQWidget *tqparent, const char *name=0);
+      ThemePrefs(TQWidget *parent, const char *name=0);
       ~ThemePrefs();
 
     public slots:

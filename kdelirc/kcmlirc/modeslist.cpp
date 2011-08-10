@@ -16,7 +16,7 @@
 
 #include "modeslist.h"
 
-ModesList::ModesList(TQWidget *tqparent, const char *name) : KListView(tqparent, name)
+ModesList::ModesList(TQWidget *parent, const char *name) : KListView(parent, name)
 {
 	setAcceptDrops(true);
 	setDropVisualizer(false);

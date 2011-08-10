@@ -77,19 +77,19 @@ class KSim::PluginPage::Private
 {
   public:
     KConfig *config;
-    KSim::PluginObject *tqparent;
+    KSim::PluginObject *parent;
 };
 
-KSim::PluginPage::PluginPage(KSim::PluginObject *tqparent, const char *name)
+KSim::PluginPage::PluginPage(KSim::PluginObject *parent, const char *name)
    : TQWidget(0, name)
 {
   d = new PluginPage::Private;
-  d->tqparent = tqparent;
-  if (tqparent && !tqparent->configFileName().isEmpty())
-    d->config = new KConfig(tqparent->configFileName() + "rc");
+  d->parent = parent;
+  if (parent && !parent->configFileName().isEmpty())
+    d->config = new KConfig(parent->configFileName() + "rc");
   else {
     kdWarning() << className() << ": Can not create the config() "
-       "pointer due to the tqparent being null" << endl;
+       "pointer due to the parent being null" << endl;
     d->config = 0;
   }
 }
@@ -111,25 +111,25 @@ KConfig *KSim::PluginPage::config() const
 class KSim::PluginView::Private
 {
   public:
-    PluginObject *tqparent;
+    PluginObject *parent;
     TQPopupMenu *popupMenu;
     KConfig *config;
 };
 
-KSim::PluginView::PluginView(KSim::PluginObject *tqparent, const char *name)
+KSim::PluginView::PluginView(KSim::PluginObject *parent, const char *name)
    : TQWidget(0, name)
 {
   d = new PluginView::Private;
-  d->tqparent = tqparent;
+  d->parent = parent;
   d->popupMenu = new TQPopupMenu(this);
   d->popupMenu->insertItem(i18n("About"), this,
      TQT_SLOT(showAbout()), 0, -1, 0);
 
-  if (tqparent && !tqparent->configFileName().isEmpty())
-    d->config = new KConfig(tqparent->configFileName() + "rc");
+  if (parent && !parent->configFileName().isEmpty())
+    d->config = new KConfig(parent->configFileName() + "rc");
   else {
     kdWarning() << className() << ": Can not create the config() "
-       "pointer due to the tqparent being null" << endl;
+       "pointer due to the parent being null" << endl;
     d->config = 0;
   }
 }
@@ -165,7 +165,7 @@ void KSim::PluginView::mousePressEvent(TQMouseEvent *ev)
 
 KSim::PluginObject *KSim::PluginView::parentPlugin() const
 {
-  return d->tqparent;
+  return d->parent;
 }
 
 void KSim::PluginView::showAbout()

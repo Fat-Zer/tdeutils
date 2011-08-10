@@ -27,16 +27,16 @@ TQString i18n( const TQString& a, const TQString& b) {
 }
 
 KDialogBase::KDialogBase( int /*dialogFace*/, const TQString &caption, int buttonMask,
-                          ButtonCode defaultButton, TQWidget *tqparent, const char *name,
+                          ButtonCode defaultButton, TQWidget *parent, const char *name,
                           bool modal )
-    :TQDialog( tqparent, name, modal )
+    :TQDialog( parent, name, modal )
 {
     init( buttonMask, defaultButton, caption );
 }
 
-KDialogBase::KDialogBase( TQWidget* tqparent, const char* name, bool modal,
+KDialogBase::KDialogBase( TQWidget* parent, const char* name, bool modal,
                           const TQString& caption, int buttonMask )
-        : TQDialog( tqparent, name, modal )
+        : TQDialog( parent, name, modal )
 {
     init( buttonMask, Ok, caption );
 }
@@ -92,24 +92,24 @@ void KDialogBase::slotCancel()
     emit finished();
 }
 
-int KMessageBox::warningYesNo(TQWidget *tqparent, const TQString &text, const TQString &caption )
+int KMessageBox::warningYesNo(TQWidget *parent, const TQString &text, const TQString &caption )
 {
-    int code = warning( tqparent, caption, text, tr("No"), tr("Yes") );
+    int code = warning( parent, caption, text, tr("No"), tr("Yes") );
     if ( code == 0 )
         return Yes;
     else
         return No;
 }
 
-int KMessageBox::information( TQWidget* tqparent, const TQString& text, const TQString& caption,
+int KMessageBox::information( TQWidget* parent, const TQString& text, const TQString& caption,
                               const TQString& /*dontShowAgainName*/ )
 {
-    return TQMessageBox::information( tqparent, caption, text );
+    return TQMessageBox::information( parent, caption, text );
 }
 
-int KMessageBox::sorry( TQWidget* tqparent, const TQString& text, const TQString& caption )
+int KMessageBox::sorry( TQWidget* parent, const TQString& text, const TQString& caption )
 {
-    return TQMessageBox::information( tqparent, caption, text );
+    return TQMessageBox::information( parent, caption, text );
 }
 
 

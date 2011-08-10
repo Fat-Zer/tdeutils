@@ -38,7 +38,7 @@ Q_OBJECT
 public:
   enum REPEATTYPE {ANY, ATLEAST, ATMOST, EXACTLY, MINMAX};
 
-  RepeatRangeWindow( TQWidget* tqparent, const char* name = 0 );
+  RepeatRangeWindow( TQWidget* parent, const char* name = 0 );
   TQString text();
   int min();
   int max();
@@ -51,7 +51,7 @@ protected slots:
 
 
 private:
-  void createLine( TQWidget* tqparent, TQString text, TQSpinBox** spin, REPEATTYPE tp );
+  void createLine( TQWidget* parent, TQString text, TQSpinBox** spin, REPEATTYPE tp );
 
   TQSpinBox* _leastTimes;
   TQSpinBox* _mostTimes;
@@ -75,10 +75,10 @@ Q_OBJECT
   TQ_OBJECT
 
 public:
-  RepeatWidget( RegExpEditorWindow* editorWindow, TQWidget *tqparent,
+  RepeatWidget( RegExpEditorWindow* editorWindow, TQWidget *parent,
                const char *name = 0);
   RepeatWidget( RepeatRegExp* regexp, RegExpEditorWindow* editorWindow,
-              TQWidget* tqparent, const char* name = 0);
+              TQWidget* parent, const char* name = 0);
   void init();
   virtual TQSize tqsizeHint() const;
 	virtual RegExp* regExp() const;

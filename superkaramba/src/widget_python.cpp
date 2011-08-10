@@ -86,7 +86,7 @@ long createWidgetMask(long widget, char* path)
   return (long)currTheme->widgetMask;
 }
 
-PyObject* py_create_widget_tqmask(PyObject *, PyObject *args)
+PyObject* py_create_widget_mask(PyObject *, PyObject *args)
 {
   long widget;
   char *text;

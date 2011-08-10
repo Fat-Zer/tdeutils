@@ -28,16 +28,16 @@
 #include <klocale.h>
 #include <tqstyle.h>
 
-CStatusBarProgress::CStatusBarProgress( TQWidget *tqparent, const char *name )
-  : TQFrame(tqparent, name), TQRangeControl(0, 100, 1, 10, 0),
+CStatusBarProgress::CStatusBarProgress( TQWidget *parent, const char *name )
+  : TQFrame(parent, name), TQRangeControl(0, 100, 1, 10, 0),
     mOrientation(Horizontal )
 {
   initialize();
 }
 
 CStatusBarProgress::CStatusBarProgress( Orientation orientation,
-					TQWidget *tqparent, const char *name )
-  : TQFrame(tqparent, name), TQRangeControl(0, 100, 1, 10, 0),
+					TQWidget *parent, const char *name )
+  : TQFrame(parent, name), TQRangeControl(0, 100, 1, 10, 0),
     mOrientation( orientation )
 {
   initialize();
@@ -45,8 +45,8 @@ CStatusBarProgress::CStatusBarProgress( Orientation orientation,
 
 CStatusBarProgress::CStatusBarProgress( int minValue, int maxValue, int value,
 					Orientation orientation,
-					TQWidget *tqparent, const char *name )
-  : TQFrame(tqparent, name), TQRangeControl(minValue, maxValue, 1, 10, value),
+					TQWidget *parent, const char *name )
+  : TQFrame(parent, name), TQRangeControl(minValue, maxValue, 1, 10, value),
     mOrientation(orientation)
 {
   initialize();

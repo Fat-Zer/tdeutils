@@ -54,14 +54,14 @@
 class UpdateViewItem2 : public KListViewItem
 {
 public:
-        UpdateViewItem2(TQListView *tqparent, TQString name,TQString mail,TQString id,bool isDefault);
+        UpdateViewItem2(TQListView *parent, TQString name,TQString mail,TQString id,bool isDefault);
         virtual void paintCell(TQPainter *p, const TQColorGroup &cg,int col, int width, int align);
 	virtual TQString key(int c,bool ) const;
 	bool def;
 };
 
-UpdateViewItem2::UpdateViewItem2(TQListView *tqparent, TQString name,TQString mail,TQString id,bool isDefault)
-                : KListViewItem(tqparent)
+UpdateViewItem2::UpdateViewItem2(TQListView *parent, TQString name,TQString mail,TQString id,bool isDefault)
+                : KListViewItem(parent)
 {
 def=isDefault;
         setText(0,name);
@@ -87,8 +87,8 @@ TQString UpdateViewItem2 :: key(int c,bool ) const
 
 ///////////////  main view
 
-popupPublic::popupPublic(TQWidget *tqparent, const char *name,TQString sfile,bool filemode,KShortcut goDefaultKey):
-KDialogBase( Plain, i18n("Select Public Key"), Details | Ok | Cancel, Ok, tqparent, name,true)
+popupPublic::popupPublic(TQWidget *parent, const char *name,TQString sfile,bool filemode,KShortcut goDefaultKey):
+KDialogBase( Plain, i18n("Select Public Key"), Details | Ok | Cancel, Ok, parent, name,true)
 {
 
 	TQWidget *page = plainPage();

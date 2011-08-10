@@ -27,10 +27,10 @@
 #include "widgetwindow.h"
 #include "windowlistboxitem.h"
 
-KMultiFormListBoxWindowed::KMultiFormListBoxWindowed(KMultiFormListBoxFactory *factory, TQWidget *tqparent,
+KMultiFormListBoxWindowed::KMultiFormListBoxWindowed(KMultiFormListBoxFactory *factory, TQWidget *parent,
 																	 bool showUpDownButtons, bool showHelpButton,
 																	 TQString addButtonText,const char *name)
-  : TQWidget( tqparent, name )
+  : TQWidget( parent, name )
 {
   _layout = new TQVBoxLayout(this);
 

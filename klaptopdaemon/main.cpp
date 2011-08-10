@@ -48,46 +48,46 @@ extern void wake_laptop_daemon();
 extern "C"
 {
 
-  KDE_EXPORT KCModule *create_pcmcia(TQWidget *tqparent, const char *)
+  KDE_EXPORT KCModule *create_pcmcia(TQWidget *parent, const char *)
   {
-    return new PcmciaConfig(tqparent, "kcmlaptop");
+    return new PcmciaConfig(parent, "kcmlaptop");
   }
 
-  KDE_EXPORT KCModule *create_bwarning(TQWidget *tqparent, const char *)
+  KDE_EXPORT KCModule *create_bwarning(TQWidget *parent, const char *)
   {
-    return new WarningConfig(0, tqparent, "kcmlaptop");
+    return new WarningConfig(0, parent, "kcmlaptop");
   }
-  KDE_EXPORT KCModule *create_cwarning(TQWidget *tqparent, const char *)
+  KDE_EXPORT KCModule *create_cwarning(TQWidget *parent, const char *)
   {
-    return new WarningConfig(1, tqparent, "kcmlaptop");
+    return new WarningConfig(1, parent, "kcmlaptop");
   }
-  KDE_EXPORT KCModule *create_battery(TQWidget *tqparent, const char *)
+  KDE_EXPORT KCModule *create_battery(TQWidget *parent, const char *)
   {
-    return new BatteryConfig(tqparent, "kcmlaptop");
+    return new BatteryConfig(parent, "kcmlaptop");
   }
-  KDE_EXPORT KCModule *create_power(TQWidget *tqparent, const char *)
+  KDE_EXPORT KCModule *create_power(TQWidget *parent, const char *)
   {
-    return new PowerConfig(tqparent, "kcmlaptop");
+    return new PowerConfig(parent, "kcmlaptop");
   }
-  KDE_EXPORT KCModule *create_acpi(TQWidget *tqparent, const char *)
+  KDE_EXPORT KCModule *create_acpi(TQWidget *parent, const char *)
   {
-    return new AcpiConfig(tqparent, "kcmlaptop");
+    return new AcpiConfig(parent, "kcmlaptop");
   }
-  KDE_EXPORT KCModule *create_apm(TQWidget *tqparent, const char *)
+  KDE_EXPORT KCModule *create_apm(TQWidget *parent, const char *)
   {
-    return new ApmConfig(tqparent, "kcmlaptop");
+    return new ApmConfig(parent, "kcmlaptop");
   }
-  KDE_EXPORT KCModule *create_Profile(TQWidget *tqparent, const char *)
+  KDE_EXPORT KCModule *create_Profile(TQWidget *parent, const char *)
   {
-    return new ProfileConfig(tqparent, "kcmlaptop");
+    return new ProfileConfig(parent, "kcmlaptop");
   }
-  KDE_EXPORT KCModule *create_sony(TQWidget *tqparent, const char *)
+  KDE_EXPORT KCModule *create_sony(TQWidget *parent, const char *)
   {
-    return new SonyConfig(tqparent, "kcmlaptop");
+    return new SonyConfig(parent, "kcmlaptop");
   }
-  KDE_EXPORT KCModule *create_buttons(TQWidget *tqparent, const char *)
+  KDE_EXPORT KCModule *create_buttons(TQWidget *parent, const char *)
   {
-    return new ButtonsConfig(tqparent, "kcmlaptop");
+    return new ButtonsConfig(parent, "kcmlaptop");
   }
 
   KDE_EXPORT void init_battery()
@@ -111,9 +111,9 @@ extern "C"
      wake_laptop_daemon();
   }
 
-  KDE_EXPORT KCModule *create_laptop(TQWidget *tqparent, const char *)
+  KDE_EXPORT KCModule *create_laptop(TQWidget *parent, const char *)
   {
-	return new LaptopModule(tqparent, "kcmlaptop");
+	return new LaptopModule(parent, "kcmlaptop");
   }
 
   KDE_EXPORT void init_laptop()
@@ -124,8 +124,8 @@ extern "C"
 
 
 
-LaptopModule::LaptopModule(TQWidget *tqparent, const char *)
-  : KCModule(tqparent, "kcmlaptop")
+LaptopModule::LaptopModule(TQWidget *parent, const char *)
+  : KCModule(parent, "kcmlaptop")
 {
   {	// export ACPI options
     KConfig config("kcmlaptoprc", true /*readonly*/, false /*no globals*/);
@@ -136,34 +136,34 @@ LaptopModule::LaptopModule(TQWidget *tqparent, const char *)
     bool enablehibernate = config.readBoolEntry("EnableHibernate", false);
     bool enableperformance = config.readBoolEntry("EnablePerformance", false);
     bool enablethrottle = config.readBoolEntry("EnableThrottle", false);
-    laptop_portable::acpi_set_tqmask(enablestandby, enablesuspend, enablehibernate, enableperformance, enablethrottle);
+    laptop_portable::acpi_set_mask(enablestandby, enablesuspend, enablehibernate, enableperformance, enablethrottle);
 
     config.setGroup("ApmDefault");
 
     enablestandby = config.readBoolEntry("EnableStandby", false);
     enablesuspend = config.readBoolEntry("EnableSuspend", false);
-    laptop_portable::apm_set_tqmask(enablestandby, enablesuspend);
+    laptop_portable::apm_set_mask(enablestandby, enablesuspend);
     config.setGroup("SoftwareSuspendDefault");
     enablehibernate = config.readBoolEntry("EnableHibernate", false);
-    laptop_portable::software_suspend_set_tqmask(enablehibernate);
+    laptop_portable::software_suspend_set_mask(enablehibernate);
   }
   TQVBoxLayout *tqlayout = new TQVBoxLayout(this);
   tab = new TQTabWidget(this);
   tqlayout->addWidget(tab);
 
-  battery = new BatteryConfig(tqparent, "kcmlaptop");
+  battery = new BatteryConfig(parent, "kcmlaptop");
   tab->addTab(battery, i18n("&Battery"));
   connect(battery, TQT_SIGNAL(changed(bool)), this, TQT_SLOT(moduleChanged(bool)));
 
-  power = new PowerConfig(tqparent, "kcmlaptop");
+  power = new PowerConfig(parent, "kcmlaptop");
   tab->addTab(power, i18n("&Power Control"));
   connect(power, TQT_SIGNAL(changed(bool)), this, TQT_SLOT(moduleChanged(bool)));
 
-  warning = new WarningConfig(0, tqparent, "kcmlaptop");
+  warning = new WarningConfig(0, parent, "kcmlaptop");
   tab->addTab(warning, i18n("Low Battery &Warning"));
   connect(warning, TQT_SIGNAL(changed(bool)), this, TQT_SLOT(moduleChanged(bool)));
 
-  critical = new WarningConfig(1, tqparent, "kcmlaptop");
+  critical = new WarningConfig(1, parent, "kcmlaptop");
   tab->addTab(critical, i18n("Low Battery &Critical"));
   connect(critical, TQT_SIGNAL(changed(bool)), this, TQT_SLOT(moduleChanged(bool)));
 
@@ -175,28 +175,28 @@ LaptopModule::LaptopModule(TQWidget *tqparent, const char *)
     int current_throttle;
     bool has_throttling = laptop_portable::get_system_throttling(0, current_throttle, throttle_list, active_list);
   if (laptop_portable::has_brightness() || has_profile || has_throttling) {
-  	profile = new ProfileConfig(tqparent, "kcmlaptop");
+  	profile = new ProfileConfig(parent, "kcmlaptop");
   	tab->addTab(profile, i18n("Default Power Profiles"));
   	connect(profile, TQT_SIGNAL(changed(bool)), this, TQT_SLOT(moduleChanged(bool)));
   } else {
 	profile = 0;
   }
   if (laptop_portable::has_button(laptop_portable::LidButton) || laptop_portable::has_button(laptop_portable::PowerButton)) {
-  	buttons = new ButtonsConfig(tqparent, "kcmlaptop");
+  	buttons = new ButtonsConfig(parent, "kcmlaptop");
   	tab->addTab(buttons, i18n("Button Actions"));
   	connect(buttons, TQT_SIGNAL(changed(bool)), this, TQT_SLOT(moduleChanged(bool)));
   } else {
         buttons = 0;
   }
   if (laptop_portable::has_acpi()) {
-  	acpi = new AcpiConfig(tqparent, "kcmlaptop");
+  	acpi = new AcpiConfig(parent, "kcmlaptop");
   	tab->addTab(acpi, i18n("&ACPI Config"));
   	connect(acpi, TQT_SIGNAL(changed(bool)), this, TQT_SLOT(moduleChanged(bool)));
   } else {
         acpi = 0;
   }
   if (laptop_portable::has_apm()) {
-  	apm = new ApmConfig(tqparent, "kcmlaptop");
+  	apm = new ApmConfig(parent, "kcmlaptop");
   	tab->addTab(apm, i18n("&APM Config"));
   	connect(apm, TQT_SIGNAL(changed(bool)), this, TQT_SLOT(moduleChanged(bool)));
   } else {
@@ -213,7 +213,7 @@ LaptopModule::LaptopModule(TQWidget *tqparent, const char *)
 		}
 	}
 	if (do_sony) {
-  		sony = new SonyConfig(tqparent, "kcmlaptop");
+  		sony = new SonyConfig(parent, "kcmlaptop");
   		tab->addTab(sony, i18n("&Sony Laptop Config"));
   		connect(sony, TQT_SIGNAL(changed(bool)), this, TQT_SLOT(moduleChanged(bool)));
 	} else {

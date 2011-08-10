@@ -37,8 +37,8 @@
 
 //================================================================================
 
-CompoundDetailWindow::CompoundDetailWindow( TQWidget* tqparent, const char* name )
-  :TQWidget( tqparent, name )
+CompoundDetailWindow::CompoundDetailWindow( TQWidget* parent, const char* name )
+  :TQWidget( parent, name )
 {
   TQVBoxLayout* tqlayout = new TQVBoxLayout( this );
   tqlayout->setAutoAdd( true );
@@ -93,17 +93,17 @@ void CompoundDetailWindow::setAllowReplace( bool b )
 
 //================================================================================
 
-CompoundWidget::CompoundWidget( RegExpEditorWindow* editorWindow, TQWidget* tqparent,
+CompoundWidget::CompoundWidget( RegExpEditorWindow* editorWindow, TQWidget* parent,
                                 const char* name )
-  :SingleContainerWidget( editorWindow, tqparent, name == 0 ? "CompoundWidget" : name )
+  :SingleContainerWidget( editorWindow, parent, name == 0 ? "CompoundWidget" : name )
 {
   _child = new ConcWidget( editorWindow, this );
   init();
 }
 
 CompoundWidget::CompoundWidget( CompoundRegExp* regexp, RegExpEditorWindow* editorWindow,
-                                TQWidget* tqparent, const char* name )
-  : SingleContainerWidget( editorWindow, tqparent, name  == 0 ? "CompoundWidget" : name )
+                                TQWidget* parent, const char* name )
+  : SingleContainerWidget( editorWindow, parent, name  == 0 ? "CompoundWidget" : name )
 {
   init();
   _content->setTitle( regexp->title() );

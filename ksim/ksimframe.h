@@ -36,7 +36,7 @@ namespace KSim
     Q_OBJECT
   TQ_OBJECT
     public:
-      Frame(int type, TQWidget *tqparent, const char *name = 0);
+      Frame(int type, TQWidget *parent, const char *name = 0);
       ~Frame();
 
       const TQPixmap *const background() const { return &m_background; }

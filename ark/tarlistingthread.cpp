@@ -78,8 +78,8 @@ static char *makeAccessString(mode_t mode)
 	return buffer;
 }
 
-TarListingThread::TarListingThread( TQObject *tqparent, const TQString& filename )
-	: TQThread(), m_parent( tqparent )
+TarListingThread::TarListingThread( TQObject *parent, const TQString& filename )
+	: TQThread(), m_parent( parent )
 {
 	Q_ASSERT( m_parent );
 	m_archive = new KTar( filename );

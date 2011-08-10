@@ -66,8 +66,8 @@ void MailPlugin::showAbout()
 	KAboutApplication( &about ).exec();
 }
 
-MailView::MailView( KSim::PluginObject* tqparent, const char* name )
-	: KSim::PluginView( tqparent, name )
+MailView::MailView( KSim::PluginObject* parent, const char* name )
+	: KSim::PluginView( parent, name )
 {
 	TQVBoxLayout* tqlayout = new TQVBoxLayout( this );
 
@@ -87,8 +87,8 @@ void MailView::updateDisplay()
 {
 }
 
-MailLabel::MailLabel( TQWidget* tqparent )
-	: KSim::Label( KSim::Types::Mail, tqparent )
+MailLabel::MailLabel( TQWidget* parent )
+	: KSim::Label( KSim::Types::Mail, parent )
 {
 //	label->setPixmap( KSim::ThemeLoader::self().current().krellMail() );
 	configureObject( false );
@@ -131,17 +131,17 @@ TQPixmap MailLabel::frame( const TQPixmap& source, int number ) const
 {
 	TQPixmap result( source.width(), source.height() / m_frames );
 	bitBlt( &result, 0, 0, &source, 0, number * source.height() / m_frames );
-	if ( source.tqmask() )
+	if ( source.mask() )
 	{
-		TQBitmap tqmask( result.size() );
-		bitBlt( &tqmask, 0, 0, source.tqmask(), 0, number * source.height() / m_frames );
-		result.setMask( tqmask );
+		TQBitmap mask( result.size() );
+		bitBlt( &mask, 0, 0, source.mask(), 0, number * source.height() / m_frames );
+		result.setMask( mask );
 	}
 	return result;
 }
 
-MailConfig::MailConfig( KSim::PluginObject* tqparent, const char* name )
-	: KSim::PluginPage( tqparent, name )
+MailConfig::MailConfig( KSim::PluginObject* parent, const char* name )
+	: KSim::PluginPage( parent, name )
 {
 }
 

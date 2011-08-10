@@ -49,8 +49,8 @@
 
 #include <string.h>
 
-NetDialog::NetDialog(TQWidget *tqparent, const char *name)
-   : TQTabDialog(tqparent, name, true)
+NetDialog::NetDialog(TQWidget *parent, const char *name)
+   : TQTabDialog(parent, name, true)
 {
   m_clicked = false;
   setCaption(kapp->makeStdCaption(i18n("Network Interface")));

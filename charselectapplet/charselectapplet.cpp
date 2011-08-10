@@ -41,12 +41,12 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 extern "C"
 {
-    KDE_EXPORT KPanelApplet* init(TQWidget *tqparent, const TQString& configFile)
+    KDE_EXPORT KPanelApplet* init(TQWidget *parent, const TQString& configFile)
     {
         KGlobal::locale()->insertCatalogue("kcharselectapplet");
         return new CharSelectApplet(configFile, KPanelApplet::Normal,
                                     KPanelApplet::About | KPanelApplet::Preferences,
-                                    tqparent, "kcharselectapplet");
+                                    parent, "kcharselectapplet");
     }
 }
 
@@ -55,8 +55,8 @@ static int cell_height = 16;
 static int char_count = 0;
 
 CharSelectApplet::CharSelectApplet(const TQString& configFile, Type type, int actions,
-                               TQWidget *tqparent, const char *name)
-    : KPanelApplet(configFile, type, actions, tqparent, name),
+                               TQWidget *parent, const char *name)
+    : KPanelApplet(configFile, type, actions, parent, name),
       _aboutData(0), _configDialog(0)
 {
     // read configuration
@@ -151,8 +151,8 @@ void CharSelectApplet::about()
     dialog.exec();
 }
 
-CharTable::CharTable(TQWidget* tqparent, const char* name)
-    : TQFrame(tqparent, name), _rows(2), _cols(2),
+CharTable::CharTable(TQWidget* parent, const char* name)
+    : TQFrame(parent, name), _rows(2), _cols(2),
       _activeRow(-1), _activeCol(-1),
       _cWidth(cell_width), _cHeight(cell_height)
 {
@@ -336,8 +336,8 @@ void CharTable::clearCell()
 }
 
 
-ConfigDialog::ConfigDialog(TQWidget* tqparent, const char* name)
-    : KDialogBase(tqparent, name, true, i18n("Configuration"),
+ConfigDialog::ConfigDialog(TQWidget* parent, const char* name)
+    : KDialogBase(parent, name, true, i18n("Configuration"),
                   Ok | Cancel, Ok, true)
 {
     TQVBox *page = makeVBoxMainWidget();

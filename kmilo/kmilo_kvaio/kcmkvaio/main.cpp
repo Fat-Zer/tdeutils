@@ -46,8 +46,8 @@ K_EXPORT_COMPONENT_FACTORY( kcm_kvaio, KVaioModuleFactory("kcmkvaio"))
 #define CONFIG_FILE "kmilodrc"
 
 
-KVaioModule::KVaioModule(TQWidget *tqparent, const char *name, const TQStringList &)
-    : KCModule(KVaioModuleFactory::instance(), tqparent, name)
+KVaioModule::KVaioModule(TQWidget *parent, const char *name, const TQStringList &)
+    : KCModule(KVaioModuleFactory::instance(), parent, name)
 {
     KAboutData *about =
         new KAboutData(I18N_NOOP("kcmkvaio"),

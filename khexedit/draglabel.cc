@@ -28,8 +28,8 @@
 #include "draglabel.h"
 
 
-CDragLabel::CDragLabel( TQWidget *tqparent )
-  : TQLabel( "draglabel", tqparent, "kde toolbar widget" )
+CDragLabel::CDragLabel( TQWidget *parent )
+  : TQLabel( "draglabel", parent, "kde toolbar widget" )
 {
   mValid = true;
   mDragPending = false;
@@ -120,12 +120,12 @@ void CDragLabel::prepPixmap( KURLDrag &uriDrag )
   int h = fontMetrics().lineSpacing();
   if( pixmap()->height() > h ) { h = pixmap()->height(); }
 
-  TQBitmap tqmask( w, h, TRUE );
+  TQBitmap mask( w, h, TRUE );
   TQPixmap dragPixmap( w, h );
   dragPixmap.fill( black );
 
   TQPainter p;
-  p.begin( &tqmask );
+  p.begin( &mask );
   p.setPen( white );
   p.drawPixmap( 0, 0, mDragMask );
   p.drawText( pixmap()->width()+sep, 0, w-pixmap()->width()+sep,
@@ -136,7 +136,7 @@ void CDragLabel::prepPixmap( KURLDrag &uriDrag )
   p.drawPixmap( 0, 0, *pixmap() );
   p.end();
 
-  dragPixmap.setMask( tqmask );
+  dragPixmap.setMask( mask );
 
   TQPoint hotspot( pixmap()->width(), pixmap()->height()/2 );
   uriDrag.setPixmap( dragPixmap, hotspot );

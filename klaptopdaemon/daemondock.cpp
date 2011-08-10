@@ -48,13 +48,13 @@
 #include <kiconeffect.h>
 extern void wake_laptop_daemon();
 
-laptop_dock::laptop_dock( laptop_daemon* tqparent )
+laptop_dock::laptop_dock( laptop_daemon* parent )
   : KSystemTray()
 {
     setCaption(i18n("KLaptop Daemon"));
     KGlobal::locale()->insertCatalogue("klaptopdaemon"); // For translation of klaptopdaemon messages
     _pcmcia = NULL;
-    pdaemon = tqparent;
+    pdaemon = parent;
     current_code = -1;
     brightness_widget = 0;
     instance = new KInstance("klaptopdaemon");
@@ -568,10 +568,10 @@ void laptop_dock::displayPixmap()
 	// at this point, we have the file to display.  so display it
 
 	TQImage image = pm.convertToImage();
-	const TQBitmap *bmtqmask = pm.tqmask();
-	TQImage tqmask;
-	if (bmtqmask)
-		tqmask = bmtqmask->convertToImage();
+	const TQBitmap *bmmask = pm.mask();
+	TQImage mask;
+	if (bmmask)
+		mask = bmmask->convertToImage();
 
 	int w = image.width();
 	int h = image.height();
@@ -580,7 +580,7 @@ void laptop_dock::displayPixmap()
 	int x, y;
 	for (x = 0; x < w; x++)
 	for (y = 0; y < h; y++)
-	if (!bmtqmask || tqmask.pixelIndex(x, y) != 0){
+	if (!bmmask || mask.pixelIndex(x, y) != 0){
 		rgb = image.pixel(x, y);
 		if (tqRed(rgb) == 0xff &&
 		    tqGreen(rgb) == 0xff &&
@@ -609,7 +609,7 @@ void laptop_dock::displayPixmap()
 
 		for (y = h-1; y >= 0; y--)
 		for (x = 0; x < w; x++)
-		if (!bmtqmask || tqmask.pixelIndex(x, y) != 0){
+		if (!bmmask || mask.pixelIndex(x, y) != 0){
 			rgb = image.pixel(x, y);
 			if (tqRed(rgb) == 0xff &&
 		    	    tqGreen(rgb) == 0xff &&
@@ -743,8 +743,8 @@ quit:
         {
             TQPixmap q;
             q.convertFromImage(image);
-            if (bmtqmask)
-                    q.setMask(*bmtqmask);
+            if (bmmask)
+                    q.setMask(*bmmask);
             setPixmap(q);
         }
         adjustSize();

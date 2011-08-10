@@ -35,7 +35,7 @@
 #include "editaction.h"
 #include "addaction.h"
 
-EditAction::EditAction(IRAIt action, TQWidget *tqparent, const char *name) : EditActionBase(tqparent, name)
+EditAction::EditAction(IRAIt action, TQWidget *parent, const char *name) : EditActionBase(parent, name)
 {
 	theAction = action;
 

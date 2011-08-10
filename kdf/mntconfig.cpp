@@ -47,8 +47,8 @@ static bool GUI;
 #endif
 
 
-MntConfigWidget::MntConfigWidget(TQWidget *tqparent, const char *name, bool init)
-  : TQWidget(tqparent, name)
+MntConfigWidget::MntConfigWidget(TQWidget *parent, const char *name, bool init)
+  : TQWidget(parent, name)
 {
   mInitializing = false;
 

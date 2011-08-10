@@ -39,7 +39,7 @@ class CFileInfoDialog : public KDialogBase
   TQ_OBJECT
   
   public:
-    CFileInfoDialog( TQWidget *tqparent=0, const char *name=0,bool modal=false );
+    CFileInfoDialog( TQWidget *parent=0, const char *name=0,bool modal=false );
     ~CFileInfoDialog( void );
 
     void setStatistics( void );

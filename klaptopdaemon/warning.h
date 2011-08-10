@@ -43,7 +43,7 @@ class WarningConfig : public KCModule
   Q_OBJECT
   TQ_OBJECT
 public:
-  WarningConfig(int x, TQWidget *tqparent=0, const char* name=0);
+  WarningConfig(int x, TQWidget *parent=0, const char* name=0);
   ~WarningConfig();
   void save( void );
   void load();

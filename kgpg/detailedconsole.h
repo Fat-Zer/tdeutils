@@ -24,7 +24,7 @@ class KDetailedConsole : public KDialogBase
 {
 public:
 
-        KDetailedConsole(TQWidget *tqparent=0, const char *name=0,const TQString &boxLabel=TQString(),const TQString &errormessage=TQString());
+        KDetailedConsole(TQWidget *parent=0, const char *name=0,const TQString &boxLabel=TQString(),const TQString &errormessage=TQString());
         ~KDetailedConsole();
 
 };
@@ -34,7 +34,7 @@ class KDetailedInfo : public KDialogBase
 {
 public:
 
-        KDetailedInfo(TQWidget *tqparent=0, const char *name=0,const TQString &boxLabel=TQString(),const TQString &errormessage=TQString(),TQStringList keysList=TQStringList());
+        KDetailedInfo(TQWidget *parent=0, const char *name=0,const TQString &boxLabel=TQString(),const TQString &errormessage=TQString(),TQStringList keysList=TQStringList());
         ~KDetailedInfo();
 
 };

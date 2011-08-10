@@ -23,9 +23,9 @@
 #include "KJotsMain.h"
 #include "kjotsbookmarks.h"
 
-KJotsBookmarks::KJotsBookmarks(KJotsMain* tqparent, const char* name)
-    : TQObject(tqparent, name),
-      m_kjots(tqparent)
+KJotsBookmarks::KJotsBookmarks(KJotsMain* parent, const char* name)
+    : TQObject(parent, name),
+      m_kjots(parent)
 {
 }
 

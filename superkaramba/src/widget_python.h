@@ -42,17 +42,17 @@ PyObject* py_get_widget_position(PyObject *self, PyObject *args);
 /** Widget/createWidgetMask
 *
 * SYNOPSIS
-*   long createWidgetMask(widget, tqmask)
+*   long createWidgetMask(widget, mask)
 * DESCRIPTION
 *   This function doesn't work currently due to a bug in KDE. Please use
 *   MASK= in your .theme file for the time being.
 * ARGUMENTS
 *   * long widget -- karamba
-*   * string tqmask --  The name of the widget tqmask file.
+*   * string mask --  The name of the widget mask file.
 * RETURN VALUE
 *   1 if successful
 */
-PyObject* py_create_widget_tqmask(PyObject *self, PyObject *args);
+PyObject* py_create_widget_mask(PyObject *self, PyObject *args);
 
 /** Widget/redrawWidgetBackground
 *

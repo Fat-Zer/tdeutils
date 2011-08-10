@@ -35,8 +35,8 @@ class HostDialog : public HostDialogBase
     Q_OBJECT
   TQ_OBJECT
 public:
-    HostDialog( TQWidget *tqparent, const char *name = 0 );
-    HostDialog( const HostConfig &src, TQWidget *tqparent, const char *name = 0 );
+    HostDialog( TQWidget *parent, const char *name = 0 );
+    HostDialog( const HostConfig &src, TQWidget *parent, const char *name = 0 );
 
     HostConfig settings() const;
 

@@ -36,7 +36,7 @@ class Systemtray : public TQWidget
     Q_OBJECT
     TQ_OBJECT
 public:
-    Systemtray(TQWidget* tqparent);
+    Systemtray(TQWidget* parent);
     ~Systemtray();
     
     void updateBackgroundPixmap ( const TQPixmap & );

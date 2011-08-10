@@ -23,11 +23,11 @@
 #include "hexmanagerwidget.h"
 #include "searchbar.h"
 
-CHexManagerWidget::CHexManagerWidget( TQWidget *tqparent, const char *name,
+CHexManagerWidget::CHexManagerWidget( TQWidget *parent, const char *name,
 				      EConversionPosition conversionPosition,
 				      EPosition tabBarPosition,
 				      EPosition searchBarPosition )
-  : TQWidget( tqparent, name )
+  : TQWidget( parent, name )
 {
   mValid = false;
 
@@ -258,8 +258,8 @@ int CHexManagerWidget::preferredWidth( void )
 
 
 
-CTabBar::CTabBar( TQWidget *tqparent, char *name )
-  :TQTabBar( tqparent, name )
+CTabBar::CTabBar( TQWidget *parent, char *name )
+  :TQTabBar( parent, name )
 {
   connect( this, TQT_SIGNAL(selected(int)), this, TQT_SLOT(slotSelected(int)) );
 }

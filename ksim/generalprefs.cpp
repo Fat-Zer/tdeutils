@@ -40,8 +40,8 @@
 
 #include <ksimconfig.h>
 
-KSim::GeneralPrefs::GeneralPrefs(TQWidget *tqparent, const char *name)
-   : TQWidget(tqparent, name)
+KSim::GeneralPrefs::GeneralPrefs(TQWidget *parent, const char *name)
+   : TQWidget(parent, name)
 {
   m_mainLayout = new TQGridLayout(this);
   m_mainLayout->setSpacing(6);
@@ -122,8 +122,8 @@ void KSim::GeneralPrefs::readConfig(KSim::Config *config)
   m_recolourThemes->setChecked(config->reColourThemes());
 }
 
-KSim::ClockPrefs::ClockPrefs(TQWidget *tqparent, const char *name)
-   : TQWidget(tqparent, name)
+KSim::ClockPrefs::ClockPrefs(TQWidget *parent, const char *name)
+   : TQWidget(parent, name)
 {
   m_mainLayout = new TQVBoxLayout(this);
   m_mainLayout->setSpacing(6);
@@ -157,8 +157,8 @@ void KSim::ClockPrefs::readConfig(KSim::Config *config)
   m_dateCheck->setChecked(config->showDate());
 }
 
-KSim::UptimePrefs::UptimePrefs(TQWidget *tqparent, const char *name)
-   : TQWidget(tqparent, name)
+KSim::UptimePrefs::UptimePrefs(TQWidget *parent, const char *name)
+   : TQWidget(parent, name)
 {
   m_addIcon = SmallIconSet("filenew");
   m_removeIcon = SmallIconSet("editdelete");
@@ -294,8 +294,8 @@ void KSim::UptimePrefs::removeUptimeItem()
   m_uptimeCombo->setCurrentItem(currentItem - 1);
 }
 
-KSim::MemoryPrefs::MemoryPrefs(TQWidget *tqparent, const char *name)
-   : TQWidget(tqparent, name)
+KSim::MemoryPrefs::MemoryPrefs(TQWidget *parent, const char *name)
+   : TQWidget(parent, name)
 {
   m_addIcon = SmallIconSet("filenew");
   m_removeIcon = SmallIconSet("editdelete");
@@ -442,8 +442,8 @@ void KSim::MemoryPrefs::removeMemoryItem()
   m_memCombo->setCurrentItem(currentItem - 1);
 }
 
-KSim::SwapPrefs::SwapPrefs(TQWidget *tqparent, const char *name)
-   : TQWidget(tqparent, name)
+KSim::SwapPrefs::SwapPrefs(TQWidget *parent, const char *name)
+   : TQWidget(parent, name)
 {
   m_addIcon = SmallIconSet("filenew");
   m_removeIcon = SmallIconSet("editdelete");

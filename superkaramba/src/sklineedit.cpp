@@ -66,7 +66,7 @@ void SKLineEdit::keyPressEvent(TQKeyEvent* e)
 
   if(!e->text().isEmpty())
   {
-    karamba* k = static_cast<karamba*>(TQT_TQWIDGET(tqparent()));
+    karamba* k = static_cast<karamba*>(TQT_TQWIDGET(parent()));
     k->keyPressed(e->text(), m_input);
   }
 }

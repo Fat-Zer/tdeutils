@@ -44,7 +44,7 @@ class CStringDialog : public KDialogBase
   TQ_OBJECT
   
   public:
-    CStringDialog( TQWidget *tqparent=0, const char *name = 0, bool modal=false );
+    CStringDialog( TQWidget *parent=0, const char *name = 0, bool modal=false );
     ~CStringDialog( void );
 
     int  updateList( CProgress &p ); 

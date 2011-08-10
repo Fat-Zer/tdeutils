@@ -30,16 +30,16 @@
 #include "kcalc_button.h"
 
 
-KCalcButton::KCalcButton(TQWidget * tqparent, const char * name)
-  : KPushButton(tqparent, name), _show_accel_mode(false),
+KCalcButton::KCalcButton(TQWidget * parent, const char * name)
+  : KPushButton(parent, name), _show_accel_mode(false),
     _mode_flags(ModeNormal)
 {
   setAutoDefault(false);
 }
 
-KCalcButton::KCalcButton(const TQString &label, TQWidget * tqparent,
+KCalcButton::KCalcButton(const TQString &label, TQWidget * parent,
 			 const char * name, const TQString &tooltip)
-  : KPushButton(label, tqparent, name), _show_accel_mode(false), _mode_flags(ModeNormal)
+  : KPushButton(label, parent, name), _show_accel_mode(false), _mode_flags(ModeNormal)
 {
   setAutoDefault(false);
   addMode(ModeNormal, label, tooltip);

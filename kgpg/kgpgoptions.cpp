@@ -62,8 +62,8 @@ class TQTabWidget;
 
 ///////////////////////   main window
 
-kgpgOptions::kgpgOptions(TQWidget *tqparent, const char *name)
- : KConfigDialog( tqparent, name, KGpgSettings::self())
+kgpgOptions::kgpgOptions(TQWidget *parent, const char *name)
+ : KConfigDialog( parent, name, KGpgSettings::self())
 {
 	defaultServerList="hkp://wwwkeys.eu.pgp.net ";
 	defaultServerList+=i18n("(Default)");

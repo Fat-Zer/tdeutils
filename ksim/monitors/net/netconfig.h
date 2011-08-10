@@ -35,7 +35,7 @@ class NetConfig : public KSim::PluginPage
   Q_OBJECT
   TQ_OBJECT
   public:
-    NetConfig(KSim::PluginObject *tqparent, const char *name);
+    NetConfig(KSim::PluginObject *parent, const char *name);
     virtual ~NetConfig();
 
     virtual void saveConfig();

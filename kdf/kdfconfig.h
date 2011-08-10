@@ -60,7 +60,7 @@ class KDFConfigWidget : public TQWidget
   };
 
   public:
-    KDFConfigWidget( TQWidget *tqparent=0, const char *name=0, bool init=false);
+    KDFConfigWidget( TQWidget *parent=0, const char *name=0, bool init=false);
     ~KDFConfigWidget();
 
   public slots:

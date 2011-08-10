@@ -23,8 +23,8 @@
 
 #include "dcbutton.h"
 
-DoubleClickButton::DoubleClickButton( TQPixmap pixmap, TQWidget* tqparent, const char* name )
-  : TQToolButton( tqparent, name ? name : "DoubleClickButton" )
+DoubleClickButton::DoubleClickButton( TQPixmap pixmap, TQWidget* parent, const char* name )
+  : TQToolButton( parent, name ? name : "DoubleClickButton" )
 {
   setPixmap( pixmap );
 }

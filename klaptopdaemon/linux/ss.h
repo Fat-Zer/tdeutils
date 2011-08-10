@@ -44,7 +44,7 @@ typedef struct ss_callback_t {
 /* for InquireSocket */
 typedef struct socket_cap_t {
     u_int	features;
-    u_int	irq_tqmask;
+    u_int	irq_mask;
     u_int	map_size;
     u_char	pci_irq;
     u_char	cardbus;
@@ -56,7 +56,7 @@ typedef struct socket_cap_t {
 /* for GetSocket, SetSocket */
 typedef struct socket_state_t {
     u_int	flags;
-    u_int	csc_tqmask;
+    u_int	csc_mask;
     u_char	Vcc, Vpp;
     u_char	io_irq;
 } socket_state_t;

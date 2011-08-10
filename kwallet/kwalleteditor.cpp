@@ -62,8 +62,8 @@
 #include <assert.h>
 #include <stdlib.h>
 
-KWalletEditor::KWalletEditor(const TQString& wallet, bool isPath, TQWidget *tqparent, const char *name)
-: KMainWindow(tqparent, name), _walletName(wallet), _nonLocal(isPath) {
+KWalletEditor::KWalletEditor(const TQString& wallet, bool isPath, TQWidget *parent, const char *name)
+: KMainWindow(parent, name), _walletName(wallet), _nonLocal(isPath) {
 	_newWallet = false;
 	_ww = new WalletWidget(this, "Wallet Widget");
 	_copyPassAction = KStdAction::copy(TQT_TQOBJECT(this), TQT_SLOT(copyPassword()), actionCollection());
@@ -348,8 +348,8 @@ void KWalletEditor::saveEntry() {
 	_ww->_saveChanges->setEnabled(false);
 	_ww->_undoChanges->setEnabled(false);
 
-	if (item && _w && item->tqparent()) {
-		KWalletContainerItem *ci = dynamic_cast<KWalletContainerItem*>(item->tqparent());
+	if (item && _w && item->parent()) {
+		KWalletContainerItem *ci = dynamic_cast<KWalletContainerItem*>(item->parent());
 		if (ci) {
 			if (ci->type() == KWallet::Wallet::Password) {
 				rc = _w->writePassword(item->text(0), _ww->_passwordValue->text());
@@ -387,11 +387,11 @@ void KWalletEditor::entrySelectionChanged(TQListViewItem *item) {
 
 	switch (item->rtti()) {
 		case KWalletEntryItemClass:
-			ci = dynamic_cast<KWalletContainerItem*>(item->tqparent());
+			ci = dynamic_cast<KWalletContainerItem*>(item->parent());
 			if (!ci) {
 				return;
 			}
-			fi = dynamic_cast<KWalletFolderItem*>(ci->tqparent());
+			fi = dynamic_cast<KWalletFolderItem*>(ci->parent());
 			if (!fi) {
 				return;
 			}
@@ -430,7 +430,7 @@ void KWalletEditor::entrySelectionChanged(TQListViewItem *item) {
 			break;
 
 		case KWalletContainerItemClass:
-			fi = dynamic_cast<KWalletFolderItem*>(item->tqparent());
+			fi = dynamic_cast<KWalletFolderItem*>(item->parent());
 			if (!fi) {
 				return;
 			}
@@ -560,7 +560,7 @@ void KWalletEditor::listContextMenuRequested(TQListViewItem *item, const TQPoint
 
 	if (item) {
 		if (item->rtti() == KWalletEntryItemClass) {
-			ci = dynamic_cast<KWalletContainerItem *>(item->tqparent());
+			ci = dynamic_cast<KWalletContainerItem *>(item->parent());
 			if (!ci) {
 				return;
 			}
@@ -635,9 +635,9 @@ void KWalletEditor::newEntry() {
 	if (_w && item) {
 		p = item;
 		if (p->rtti() == KWalletEntryItemClass) {
-			p = item->tqparent();
+			p = item->parent();
 		}
-		fi = dynamic_cast<KWalletFolderItem *>(p->tqparent());
+		fi = dynamic_cast<KWalletFolderItem *>(p->parent());
 		if (!fi) {
 			return;
 		}
@@ -671,10 +671,10 @@ void KWalletEditor::newEntry() {
 	if (_w && item && !n.isEmpty()) {
 		TQListViewItem *p = item;
 		if (p->rtti() == KWalletEntryItemClass) {
-			p = item->tqparent();
+			p = item->parent();
 		}
 
-		KWalletFolderItem *fi = dynamic_cast<KWalletFolderItem *>(p->tqparent());
+		KWalletFolderItem *fi = dynamic_cast<KWalletFolderItem *>(p->parent());
 		if (!fi) {
 			KMessageBox::error(this, i18n("An unexpected error occurred trying to add the new entry"));
 			return;
@@ -728,7 +728,7 @@ void KWalletEditor::listItemRenamed(TQListViewItem* item, int, const TQString& t
 
 		if (_w->renameEntry(i->oldName(), t) == 0) {
 			i->clearOldName();
-			KWalletContainerItem *ci = dynamic_cast<KWalletContainerItem*>(item->tqparent());
+			KWalletContainerItem *ci = dynamic_cast<KWalletContainerItem*>(item->parent());
 			if (!ci) {
 				KMessageBox::error(this, i18n("An unexpected error occurred trying to rename the entry"));
 				return;
@@ -752,7 +752,7 @@ void KWalletEditor::deleteEntry() {
 	if (_w && item) {
 		int rc = KMessageBox::warningContinueCancel(this, i18n("Are you sure you wish to delete the item '%1'?").tqarg(item->text(0)),"",KStdGuiItem::del());
 		if (rc == KMessageBox::Continue) {
-			KWalletFolderItem *fi = dynamic_cast<KWalletFolderItem *>(item->tqparent()->tqparent());
+			KWalletFolderItem *fi = dynamic_cast<KWalletFolderItem *>(item->parent()->parent());
 			if (!fi) {
 				KMessageBox::error(this, i18n("An unexpected error occurred trying to delete the entry"));
 				return;

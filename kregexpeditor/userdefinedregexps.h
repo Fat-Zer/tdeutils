@@ -31,7 +31,7 @@ Q_OBJECT
   TQ_OBJECT
 
 public:
-  UserDefinedRegExps( TQWidget *tqparent, const char *name = 0 );
+  UserDefinedRegExps( TQWidget *parent, const char *name = 0 );
   const TQPtrList<CompoundRegExp> regExps() const;
 
 public slots:
@@ -57,7 +57,7 @@ private:
 class WidgetWinItem :public TQListViewItem
 {
 public:
-  WidgetWinItem( TQString name, RegExp* regexp, bool users, TQListViewItem* tqparent );
+  WidgetWinItem( TQString name, RegExp* regexp, bool users, TQListViewItem* parent );
   static TQString path();
 
   TQString fileName() const;

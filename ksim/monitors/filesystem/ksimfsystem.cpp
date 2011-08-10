@@ -81,9 +81,9 @@ void PluginModule::showAbout()
   KAboutApplication(&aboutData).exec();
 }
 
-Fsystem::Fsystem(KSim::PluginObject *tqparent, const char *name)
+Fsystem::Fsystem(KSim::PluginObject *parent, const char *name)
    : DCOPObject("fsystem"),
-   KSim::PluginView(tqparent, name)
+   KSim::PluginView(parent, name)
 {
   config()->setGroup("Fsystem");
   TQVBoxLayout *vbLayout = new TQVBoxLayout(this);

@@ -79,7 +79,7 @@ class ArkApplication : public KUniqueApplication
 		ArkApplication();
 
 	private:
-		TQWidget *m_mainwidget;  // to be the tqparent of all ArkWidgets
+		TQWidget *m_mainwidget;  // to be the parent of all ArkWidgets
 		int m_windowCount;
 
 		TQStringList openArksList;

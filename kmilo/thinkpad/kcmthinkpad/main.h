@@ -34,7 +34,7 @@ class KCMThinkpadModule : public KCModule {
   TQ_OBJECT
 
  public:
-	KCMThinkpadModule(TQWidget* tqparent, const char* name, const TQStringList&);
+	KCMThinkpadModule(TQWidget* parent, const char* name, const TQStringList&);
 
 	void save();
 	void load();

@@ -31,7 +31,7 @@ class VerifyButtons :public TQDockWindow
   TQ_OBJECT
 
 public:
-    VerifyButtons( TQWidget* tqparent, const char* name );
+    VerifyButtons( TQWidget* parent, const char* name );
     RegExpConverter* setSyntax( const TQString& );
     void setAllowNonTQtSyntax( bool );
 

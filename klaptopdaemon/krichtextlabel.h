@@ -40,8 +40,8 @@ public:
   /**
    * Default constructor.
    */
-  KRichTextLabel( TQWidget *tqparent, const char *name = 0 );
-  KRichTextLabel( const TQString &text, TQWidget *tqparent, const char *name = 0 );
+  KRichTextLabel( TQWidget *parent, const char *name = 0 );
+  KRichTextLabel( const TQString &text, TQWidget *parent, const char *name = 0 );
 
   int defaultWidth() const { return m_defaultWidth; }
   void setDefaultWidth(int defaultWidth);

@@ -32,7 +32,7 @@
 #include "profileserver.h"
 #include "remoteserver.h"
 
-AddAction::AddAction(TQWidget *tqparent, const char *name, const Mode &mode): AddActionBase(tqparent, name), theMode(mode)
+AddAction::AddAction(TQWidget *parent, const char *name, const Mode &mode): AddActionBase(parent, name), theMode(mode)
 {
 	connect(this, TQT_SIGNAL( selected(const TQString &) ), TQT_SLOT( updateForPageChange() ));
 	connect(this, TQT_SIGNAL( selected(const TQString &) ), TQT_SLOT( slotCorrectPage() ));
@@ -180,7 +180,7 @@ void AddAction::updateOptions()
 	else if(theUseDCOP->isChecked())
 	{
 		if(!theObjects->selectedItem()) return;
-		TQListViewItem* i = theObjects->selectedItem()->tqparent();
+		TQListViewItem* i = theObjects->selectedItem()->parent();
 		if(!i) return;
 		isUnique = uniqueProgramMap[i];
 		TQRegExp r("(.*)-[0-9]+");
@@ -361,8 +361,8 @@ void AddAction::updateObjects()
 void AddAction::updateFunctions()
 {
 	theFunctions->clear();
-	if(theObjects->currentItem() && theObjects->currentItem()->tqparent())
-	{	TQStringList functions = getFunctions(nameProgramMap[theObjects->currentItem()->tqparent()], theObjects->currentItem()->text(0));
+	if(theObjects->currentItem() && theObjects->currentItem()->parent())
+	{	TQStringList functions = getFunctions(nameProgramMap[theObjects->currentItem()->parent()], theObjects->currentItem()->text(0));
 		for(TQStringList::iterator i = functions.begin(); i != functions.end(); ++i)
 		{	Prototype p((TQString)(*i));
 			new KListViewItem(theFunctions, p.name(), p.argumentList(), *i);

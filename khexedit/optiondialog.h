@@ -46,7 +46,7 @@ class CColorListBox : public KListBox
   TQ_OBJECT
 
   public:
-    CColorListBox( TQWidget *tqparent=0, const char * name=0, WFlags f=0 );
+    CColorListBox( TQWidget *parent=0, const char * name=0, WFlags f=0 );
     void setColor( uint index, const TQColor &color );
     const TQColor color( uint index );
 
@@ -107,7 +107,7 @@ class COptionDialog : public KDialogBase
       page_max
     };
 
-    COptionDialog( TQWidget *tqparent = 0, char *name = 0, bool modal = false );
+    COptionDialog( TQWidget *parent = 0, char *name = 0, bool modal = false );
     ~COptionDialog( void );
 
     void setLayout( SDisplayLayout &tqlayout, SDisplayLine &line );

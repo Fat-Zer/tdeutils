@@ -42,7 +42,7 @@
 
 namespace KMilo {
 
-AsusMonitor::AsusMonitor(TQObject* tqparent, const char* name, const TQStringList& args): Monitor(tqparent, name, args)
+AsusMonitor::AsusMonitor(TQObject* parent, const char* name, const TQStringList& args): Monitor(parent, name, args)
 {
 }
 

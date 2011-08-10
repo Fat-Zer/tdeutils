@@ -72,11 +72,11 @@ public:
   /**
 		 @param factory A factory used to generate the instances of
      KMultiFormListBoxEntry class which is repeated in the KMultiFormListBox
-		 @param tqparent A pointer to the tqparent widget
+		 @param parent A pointer to the parent widget
    **/
   KMultiFormListBox(KMultiFormListBoxFactory *factory,
                     KMultiFormListBoxType tp=Windowed,
-										TQWidget *tqparent = 0, bool showUpDownButtons = true,
+										TQWidget *parent = 0, bool showUpDownButtons = true,
 										bool showHelpButton = true, TQString addButtonText = i18n("Add"),
 										const char *name = 0);
 

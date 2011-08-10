@@ -44,8 +44,8 @@
 #include <tqtooltip.h>
 extern void wake_laptop_daemon();
 
-ButtonsConfig::ButtonsConfig (TQWidget * tqparent, const char *name)
-  : KCModule(tqparent, name),
+ButtonsConfig::ButtonsConfig (TQWidget * parent, const char *name)
+  : KCModule(parent, name),
     lidBox(0),
     lidStandby(0),
     lidSuspend(0),

@@ -31,8 +31,8 @@
 //                                ZeroWidget
 //--------------------------------------------------------------------------------
 ZeroWidget::ZeroWidget(TQString txt, RegExpEditorWindow* editorWindow,
-                       TQWidget *tqparent, const char *name)
-  : RegExpWidget(editorWindow, tqparent, name ? name : "ZeroWidget" )
+                       TQWidget *parent, const char *name)
+  : RegExpWidget(editorWindow, parent, name ? name : "ZeroWidget" )
 {
   _text = txt;
 }
@@ -70,9 +70,9 @@ void ZeroWidget::paintEvent( TQPaintEvent *e)
 //--------------------------------------------------------------------------------
 //                                AnyCharWidget
 //--------------------------------------------------------------------------------
-AnyCharWidget::AnyCharWidget(RegExpEditorWindow* editorWindow, TQWidget *tqparent,
+AnyCharWidget::AnyCharWidget(RegExpEditorWindow* editorWindow, TQWidget *parent,
                              const char *name)
-  : ZeroWidget(i18n("Any\nCharacter"), editorWindow, tqparent,
+  : ZeroWidget(i18n("Any\nCharacter"), editorWindow, parent,
                name ? name : "AnyCharWidget")
 {
 }
@@ -86,9 +86,9 @@ RegExp* AnyCharWidget::regExp() const
 //--------------------------------------------------------------------------------
 //                                BegLineWidget
 //--------------------------------------------------------------------------------
-BegLineWidget::BegLineWidget(RegExpEditorWindow* editorWindow, TQWidget *tqparent,
+BegLineWidget::BegLineWidget(RegExpEditorWindow* editorWindow, TQWidget *parent,
                              const char *name)
-  : ZeroWidget(i18n("Line\nStart"), editorWindow, tqparent,
+  : ZeroWidget(i18n("Line\nStart"), editorWindow, parent,
                name ? name : "BegLineWidget")
 {
 }
@@ -102,9 +102,9 @@ RegExp* BegLineWidget::regExp() const
 //--------------------------------------------------------------------------------
 //                                EndLineWidget
 //--------------------------------------------------------------------------------
-EndLineWidget::EndLineWidget(RegExpEditorWindow* editorWindow, TQWidget *tqparent,
+EndLineWidget::EndLineWidget(RegExpEditorWindow* editorWindow, TQWidget *parent,
                              const char *name)
-  : ZeroWidget(i18n("Line\nEnd"), editorWindow, tqparent, name)
+  : ZeroWidget(i18n("Line\nEnd"), editorWindow, parent, name)
 {
 }
 
@@ -116,9 +116,9 @@ RegExp* EndLineWidget::regExp() const
 //--------------------------------------------------------------------------------
 //                                WordBoundaryWidget
 //--------------------------------------------------------------------------------
-WordBoundaryWidget::WordBoundaryWidget(RegExpEditorWindow* editorWindow, TQWidget *tqparent,
+WordBoundaryWidget::WordBoundaryWidget(RegExpEditorWindow* editorWindow, TQWidget *parent,
                                        const char *name)
-  : ZeroWidget(i18n("Word\nBoundary"), editorWindow, tqparent,
+  : ZeroWidget(i18n("Word\nBoundary"), editorWindow, parent,
                name ? name : "WordBoundaryWidget" )
 {
 }
@@ -131,9 +131,9 @@ RegExp* WordBoundaryWidget::regExp() const
 //--------------------------------------------------------------------------------
 //                                NonWordBoundaryWidget
 //--------------------------------------------------------------------------------
-NonWordBoundaryWidget::NonWordBoundaryWidget(RegExpEditorWindow* editorWindow, TQWidget *tqparent,
+NonWordBoundaryWidget::NonWordBoundaryWidget(RegExpEditorWindow* editorWindow, TQWidget *parent,
                                              const char *name)
-  : ZeroWidget(i18n("Non-word\nBoundary"), editorWindow, tqparent,
+  : ZeroWidget(i18n("Non-word\nBoundary"), editorWindow, parent,
                name ? name : "NonWordBoundaryWidget" )
 {
 }

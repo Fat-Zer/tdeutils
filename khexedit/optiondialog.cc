@@ -64,9 +64,9 @@ static void enableWidget( TQWidget *w, bool state )
 
 
 
-COptionDialog::COptionDialog( TQWidget *tqparent, char *name, bool modal )
+COptionDialog::COptionDialog( TQWidget *parent, char *name, bool modal )
   :KDialogBase( IconList, i18n("Configure"), Help|Default|Apply|Ok|Cancel,
-		Ok, tqparent, name, modal, true )
+		Ok, parent, name, modal, true )
 {
   setHelp( "khexedit/khexedit.html", TQString() );
 
@@ -1050,8 +1050,8 @@ SDisplayCursor::EFocusMode COptionDialog::cursorFocusMode( void )
 
 
 
-CColorListBox::CColorListBox( TQWidget *tqparent, const char *name, WFlags f )
-  :KListBox( tqparent, name, f ), mCurrentOnDragEnter(-1)
+CColorListBox::CColorListBox( TQWidget *parent, const char *name, WFlags f )
+  :KListBox( parent, name, f ), mCurrentOnDragEnter(-1)
 {
   connect( this, TQT_SIGNAL(selected(int)), this, TQT_SLOT(newColor(int)) );
   setAcceptDrops( true);

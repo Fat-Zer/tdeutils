@@ -20,9 +20,9 @@
 
 #include <tqpainter.h>
 
-DragAccepter::DragAccepter(RegExpEditorWindow* editorWindow, RegExpWidget *tqparent,
+DragAccepter::DragAccepter(RegExpEditorWindow* editorWindow, RegExpWidget *parent,
                            const char *name)
-  : RegExpWidget(editorWindow, tqparent, name == 0 ? "dragaccepter" : name ),
+  : RegExpWidget(editorWindow, parent, name == 0 ? "dragaccepter" : name ),
     _drawLine( false )
 {
   setAcceptDrops(TRUE);
@@ -68,7 +68,7 @@ void DragAccepter::mouseReleaseEvent( TQMouseEvent* event )
 
       Q_ASSERT( elm );
 
-      RegExpWidget *w = dynamic_cast<RegExpWidget*>(tqparent());
+      RegExpWidget *w = dynamic_cast<RegExpWidget*>(parent());
       if (w)
         w->addNewConcChild(this, elm);
       _editorWindow->updateContent( this );
@@ -82,10 +82,10 @@ void DragAccepter::mouseReleaseEvent( TQMouseEvent* event )
     }
     else {
       RegExpWidget *child = WidgetFactory::createWidget( _editorWindow,
-                                                         dynamic_cast<TQWidget*>(tqparent()),
+                                                         dynamic_cast<TQWidget*>(parent()),
                                                          _editorWindow->insertType() );
       if ( child ) {
-        RegExpWidget *w = dynamic_cast<RegExpWidget*>(tqparent());
+        RegExpWidget *w = dynamic_cast<RegExpWidget*>(parent());
         if (w)
           w->addNewChild(this, child);
         _editorWindow->updateContent( child );
@@ -107,7 +107,7 @@ void DragAccepter::dragEnterEvent(TQDragEnterEvent *event)
 void DragAccepter::dropEvent(TQDropEvent *event)
 {
   // The widget will be reparent afterward or part of it will, so no need to give
-  // it a tqparent here.
+  // it a parent here.
   RegExpWidget *newElm = RegExpWidgetDrag::decode( event, _editorWindow, 0 );
   ConcWidget* elm;
   if ( !(elm = dynamic_cast<ConcWidget*>( newElm ) ) ) {
@@ -116,10 +116,10 @@ void DragAccepter::dropEvent(TQDropEvent *event)
 
   Q_ASSERT( elm );
 
-  RegExpWidget *rew = dynamic_cast<RegExpWidget*>(tqparent());
+  RegExpWidget *rew = dynamic_cast<RegExpWidget*>(parent());
   if (rew)
     rew->addNewConcChild(this, elm);
-  TQWidget *w = dynamic_cast<TQWidget*>(tqparent());
+  TQWidget *w = dynamic_cast<TQWidget*>(parent());
   if (w)
     w->update();
   _editorWindow->updateContent( this );

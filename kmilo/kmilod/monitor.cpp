@@ -22,8 +22,8 @@
 
 #include "monitor.h"
 
-KMilo::Monitor::Monitor(TQObject *tqparent, const char *name, const TQStringList&)
-: TQObject(tqparent, name) {
+KMilo::Monitor::Monitor(TQObject *parent, const char *name, const TQStringList&)
+: TQObject(parent, name) {
 	_poll = true;
 }
 

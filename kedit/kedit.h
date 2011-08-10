@@ -62,7 +62,7 @@ public:
 	   OPEN_INSERT 		= 4,
 	   OPEN_NEW             = 8 };
 
-    TopLevel( TQWidget *tqparent=0, const char *name=0 );
+    TopLevel( TQWidget *parent=0, const char *name=0 );
     ~TopLevel();
 
     /**
@@ -209,7 +209,7 @@ Q_OBJECT
   TQ_OBJECT
 
 public:
-  SettingsDialog(TQWidget *tqparent, const char *name,KConfigSkeleton *config, KSpellConfig *_spellConfig);
+  SettingsDialog(TQWidget *parent, const char *name,KConfigSkeleton *config, KSpellConfig *_spellConfig);
   
 protected slots:
   void updateSettings();

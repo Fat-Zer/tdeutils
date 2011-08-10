@@ -23,9 +23,9 @@
 #include "mntconfig.h"
 #include "optiondialog.h"
 
-COptionDialog::COptionDialog( TQWidget *tqparent, const char *name, bool modal )
+COptionDialog::COptionDialog( TQWidget *parent, const char *name, bool modal )
   :KDialogBase( Tabbed, i18n("Configure"), Help|Apply|Ok|Cancel, Ok,
-	        tqparent, name, modal )
+	        parent, name, modal )
 {
   setHelp( "kcontrol/kdf/index.html", TQString() );
 

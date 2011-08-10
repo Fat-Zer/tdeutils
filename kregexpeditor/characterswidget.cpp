@@ -39,16 +39,16 @@
 
 CharacterEdits* CharactersWidget::_configWindow = 0;
 
-CharactersWidget::CharactersWidget(RegExpEditorWindow* editorWindow, TQWidget *tqparent,
+CharactersWidget::CharactersWidget(RegExpEditorWindow* editorWindow, TQWidget *parent,
                                    const char *name)
-    : RegExpWidget(editorWindow, tqparent, name)
+    : RegExpWidget(editorWindow, parent, name)
 {
     _regexp = new TextRangeRegExp( false /* not used */);
 }
 
 CharactersWidget::CharactersWidget( TextRangeRegExp* regexp, RegExpEditorWindow* editorWindow,
-                                    TQWidget* tqparent, const char* name )
-    : RegExpWidget( editorWindow, tqparent, name )
+                                    TQWidget* parent, const char* name )
+    : RegExpWidget( editorWindow, parent, name )
 {
     _regexp = dynamic_cast<TextRangeRegExp*>( regexp->clone() );
     Q_ASSERT( _regexp );
@@ -181,7 +181,7 @@ int CharactersWidget::edit()
 {
     if ( _configWindow == 0 ) {
         TQApplication::setOverrideCursor( WaitCursor );
-        // No tqparent here, as this window should continue to exists.
+        // No parent here, as this window should continue to exists.
         _configWindow = new CharacterEdits( 0, "CharactersWidget::_configWindow" );
         TQApplication::restoreOverrideCursor();
     }
@@ -282,8 +282,8 @@ int CharacterEdits::exec( TextRangeRegExp* regexp )
 }
 
 
-CharacterEdits::CharacterEdits( TQWidget *tqparent, const char *name)
-  : KDialogBase( tqparent, name == 0 ? "CharacterEdits" : name, true,
+CharacterEdits::CharacterEdits( TQWidget *parent, const char *name)
+  : KDialogBase( parent, name == 0 ? "CharacterEdits" : name, true,
                  i18n("Specify Characters"),
                  KDialogBase::Ok | KDialogBase::Cancel)
 {
@@ -377,8 +377,8 @@ void CharacterEdits::slotOK()
 }
 
 
-SingleEntry::SingleEntry(TQWidget* tqparent, const char* name )
-    :KMultiFormListBoxEntry( tqparent, name )
+SingleEntry::SingleEntry(TQWidget* parent, const char* name )
+    :KMultiFormListBoxEntry( parent, name )
 {
     TQHBoxLayout* tqlayout = new TQHBoxLayout( this, 3, 6 );
     _selector = new CharSelector( this );
@@ -402,8 +402,8 @@ bool SingleEntry::isEmpty() const
 }
 
 
-RangeEntry::RangeEntry(TQWidget* tqparent, const char* name )
-    :KMultiFormListBoxEntry( tqparent, name )
+RangeEntry::RangeEntry(TQWidget* parent, const char* name )
+    :KMultiFormListBoxEntry( parent, name )
 {
     TQHBoxLayout* tqlayout = new TQHBoxLayout( this, 3, 6 );
 

@@ -22,8 +22,8 @@
 #include "scrollededitorwindow.h"
 #include "editorwindow.h"
 
-RegExpScrolledEditorWindow::RegExpScrolledEditorWindow( TQWidget* tqparent, const char* name)
-    : TQWidget(tqparent, name)
+RegExpScrolledEditorWindow::RegExpScrolledEditorWindow( TQWidget* parent, const char* name)
+    : TQWidget(parent, name)
 {
     _scrollView = new TQScrollView( this );
     _editorWindow = new RegExpEditorWindow( _scrollView->viewport());

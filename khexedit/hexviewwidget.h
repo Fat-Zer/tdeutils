@@ -43,8 +43,8 @@ class CScrollBar : public TQScrollBar
   TQ_OBJECT
  
   public:
-    CScrollBar( Qt::Orientation o, TQWidget *tqparent, const char *name = 0 )
-      : TQScrollBar( o, tqparent, name )
+    CScrollBar( Qt::Orientation o, TQWidget *parent, const char *name = 0 )
+      : TQScrollBar( o, parent, name )
     {
     } 
   
@@ -103,7 +103,7 @@ class CHexViewWidget : public TQFrame
   TQ_OBJECT
 
   public:
-    CHexViewWidget( TQWidget *tqparent, const char *name, CHexBuffer *hexBuffer );
+    CHexViewWidget( TQWidget *parent, const char *name, CHexBuffer *hexBuffer );
     ~CHexViewWidget( void );
     inline bool widgetValid( void );
 

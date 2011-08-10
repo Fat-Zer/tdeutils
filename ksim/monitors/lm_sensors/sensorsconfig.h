@@ -38,7 +38,7 @@ class SensorsConfig : public KSim::PluginPage
   Q_OBJECT
   TQ_OBJECT
   public:
-    SensorsConfig(KSim::PluginObject *tqparent, const char *name);
+    SensorsConfig(KSim::PluginObject *parent, const char *name);
     ~SensorsConfig();
 
     void saveConfig();

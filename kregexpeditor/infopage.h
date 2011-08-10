@@ -28,7 +28,7 @@
 class InfoPage :public KTextBrowser
 {
 public:
-  InfoPage( TQWidget* tqparent, const char* name );
+  InfoPage( TQWidget* parent, const char* name );
   virtual void setSource ( const TQString& name );
 };
 

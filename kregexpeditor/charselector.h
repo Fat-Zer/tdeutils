@@ -30,7 +30,7 @@ class CharSelector :public TQWidget
   TQ_OBJECT
 
 public:
-    CharSelector( TQWidget* tqparent, const char* name = 0 );
+    CharSelector( TQWidget* parent, const char* name = 0 );
     TQString text() const;
     void setText( TQString text );
     bool isEmpty() const;

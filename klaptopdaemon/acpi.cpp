@@ -51,8 +51,8 @@
 #include <tqtooltip.h>
 extern void wake_laptop_daemon();
 
-AcpiConfig::AcpiConfig (TQWidget * tqparent, const char *name)
-  : KCModule(tqparent, name)
+AcpiConfig::AcpiConfig (TQWidget * parent, const char *name)
+  : KCModule(parent, name)
 {
     KGlobal::locale()->insertCatalogue("klaptopdaemon"); // For translation of klaptopdaemon messages
 
@@ -185,7 +185,7 @@ void AcpiConfig::setupHelper()
 		KMessageBox::sorry(0, i18n("The ACPI helper cannot be enabled because kdesu cannot be found.  Please make sure that it is installed correctly."),
 				i18n("KLaptopDaemon"));
 	}
-	laptop_portable::acpi_set_tqmask(enablestandby, enablesuspend, enablehibernate, enableperformance, enablethrottle);
+	laptop_portable::acpi_set_mask(enablestandby, enablesuspend, enablehibernate, enableperformance, enablethrottle);
     	bool can_enable = laptop_portable::has_acpi(1);	// is helper ready
     	enableStandby->setEnabled(can_enable);
     	enableSuspend->setEnabled(can_enable);
@@ -206,7 +206,7 @@ void AcpiConfig::save()
         enablesoftwaresuspend = (enableSoftwareSuspendHibernate?enableSoftwareSuspendHibernate->isChecked():0);
         enableperformance = enablePerformance->isChecked();
         enablethrottle = enableThrottle->isChecked();
-	laptop_portable::acpi_set_tqmask(enablestandby, enablesuspend, enablehibernate, enableperformance, enablethrottle);
+	laptop_portable::acpi_set_mask(enablestandby, enablesuspend, enablehibernate, enableperformance, enablethrottle);
 
         config->setGroup("AcpiDefault");
 

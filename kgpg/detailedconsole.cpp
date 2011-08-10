@@ -30,8 +30,8 @@
 #include "detailedconsole.h"
 
 
-KDetailedConsole::KDetailedConsole(TQWidget *tqparent, const char *name,const TQString &boxLabel,const TQString &errormessage)
-    : KDialogBase(tqparent,name,true,i18n("Sorry"),KDialogBase::Details|KDialogBase::Ok|KDialogBase::Cancel, KDialogBase::Ok)
+KDetailedConsole::KDetailedConsole(TQWidget *parent, const char *name,const TQString &boxLabel,const TQString &errormessage)
+    : KDialogBase(parent,name,true,i18n("Sorry"),KDialogBase::Details|KDialogBase::Ok|KDialogBase::Cancel, KDialogBase::Ok)
 {
         TQWidget *page = new TQWidget( this );
         setMainWidget(page);
@@ -51,8 +51,8 @@ KDetailedConsole::KDetailedConsole(TQWidget *tqparent, const char *name,const TQ
 KDetailedConsole::~KDetailedConsole()
 {}
 
-KDetailedInfo::KDetailedInfo(TQWidget *tqparent, const char *name , const TQString &boxLabel,const TQString &errormessage,TQStringList keysList)
-    : KDialogBase(Swallow, i18n("Info"),KDialogBase::Details|KDialogBase::Ok, KDialogBase::Ok,tqparent,name,true)
+KDetailedInfo::KDetailedInfo(TQWidget *parent, const char *name , const TQString &boxLabel,const TQString &errormessage,TQStringList keysList)
+    : KDialogBase(Swallow, i18n("Info"),KDialogBase::Details|KDialogBase::Ok, KDialogBase::Ok,parent,name,true)
 {
 	bool checkboxResult;
 	KMessageBox::createKMessageBox(this, TQMessageBox::Information,

@@ -35,14 +35,14 @@ Q_OBJECT
   TQ_OBJECT
 
 public:
-  RegExpWidget(RegExpEditorWindow* editorWindow, TQWidget *tqparent,
+  RegExpWidget(RegExpEditorWindow* editorWindow, TQWidget *parent,
                const char *label = 0);
 
   /*======================================================================
      Construction, child management
      ======================================================================*/
   /**
-     Add `child' to the tqparent of this widget in place of `accepter'
+     Add `child' to the parent of this widget in place of `accepter'
      This method only applies to container widgets (see @ref
      SingleContainerWidget, and @ref MultiContainerWidget).
   */
@@ -91,7 +91,7 @@ public:
 
   /**
      Update selection information for this widget.
-     @param parentSelected indicates whether the tqparent is selected.
+     @param parentSelected indicates whether the parent is selected.
      @return true if the selection state has changed for the widget since
      the last time the widget was painted. `tqrepaint' is invoked on the widget if
      selection state is changed, to ensure that selection is visible.

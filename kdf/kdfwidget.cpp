@@ -56,8 +56,8 @@ static bool GUI;
 
 /**************************************************************/
 
-CListViewItem::CListViewItem( CListView * tqparent, TQListViewItem * after )
-  :TQListViewItem( tqparent, after )
+CListViewItem::CListViewItem( CListView * parent, TQListViewItem * after )
+  :TQListViewItem( parent, after )
 {}
 
 int CListViewItem::compare ( TQListViewItem *i, int column, bool ) const
@@ -92,8 +92,8 @@ void CListViewItem::setKeys (int kb_size, int kb_avail, float percent_full)
 
 /**************************************************************/
 
-KDFWidget::KDFWidget( TQWidget *tqparent, const char *name, bool init )
-  : TQWidget(tqparent, name), mOptionDialog(0), mPopup(0), mTimer(0)
+KDFWidget::KDFWidget( TQWidget *parent, const char *name, bool init )
+  : TQWidget(parent, name), mOptionDialog(0), mPopup(0), mTimer(0)
 {
   connect(&mDiskList , TQT_SIGNAL(readDFDone() ),
            this, TQT_SLOT (updateDFDone()) );
@@ -131,7 +131,7 @@ KDFWidget::KDFWidget( TQWidget *tqparent, const char *name, bool init )
       this, TQT_SLOT(columnSizeChanged(int, int, int)) );
     makeColumns();
 
-    mIsTopLevel = TQString(tqparent->className()) == "KDFTopLevel" ? true : false;
+    mIsTopLevel = TQString(parent->className()) == "KDFTopLevel" ? true : false;
   }
 
   loadSettings();

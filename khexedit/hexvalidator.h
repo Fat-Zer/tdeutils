@@ -39,7 +39,7 @@ class CHexValidator: public TQValidator
     };
 
   public:
-    CHexValidator( TQWidget *tqparent, EState state, const char *name = 0 );
+    CHexValidator( TQWidget *parent, EState state, const char *name = 0 );
     ~CHexValidator( void );
     TQValidator::State validate( TQString &string, int &pos ) const;
     void setState( EState state );

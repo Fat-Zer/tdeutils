@@ -83,7 +83,7 @@ typedef struct {
  */
 class ThinkPadMonitor : public Monitor {
 	public:
-		ThinkPadMonitor(TQObject *tqparent, const char *name, const TQStringList&);
+		ThinkPadMonitor(TQObject *parent, const char *name, const TQStringList&);
 		virtual ~ThinkPadMonitor();
 
 		/**

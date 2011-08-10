@@ -35,9 +35,9 @@ Q_OBJECT
 
   public:
 
-  KCalcConstButton(TQWidget *tqparent, int but_num, const char * name = 0);
+  KCalcConstButton(TQWidget *parent, int but_num, const char * name = 0);
   
-  KCalcConstButton(const TQString &label, TQWidget *tqparent, int but_num, const char * name = 0,
+  KCalcConstButton(const TQString &label, TQWidget *parent, int but_num, const char * name = 0,
 		   const TQString &tooltip = TQString());
 
   TQString constant(void) const;

@@ -21,8 +21,8 @@
 #include <kdebug.h>
 #include <kglobalsettings.h>
 
-KWidgetListbox::KWidgetListbox(TQWidget *tqparent, const char *name)
- : TQTable(tqparent, name)
+KWidgetListbox::KWidgetListbox(TQWidget *parent, const char *name)
+ : TQTable(parent, name)
 {
   setNumRows(0);
   setNumCols(1);

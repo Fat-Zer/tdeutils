@@ -170,9 +170,9 @@ void FileLVI::setText( int column, const TQString &text )
 		TQListViewItem::setText(column, text);
 }
 
-static FileLVI* folderLVI( KListViewItem *tqparent, const TQString& name )
+static FileLVI* folderLVI( KListViewItem *parent, const TQString& name )
 {
-	FileLVI *folder = new FileLVI( tqparent );
+	FileLVI *folder = new FileLVI( parent );
 
 	folder->setText( 0, name );
 
@@ -181,9 +181,9 @@ static FileLVI* folderLVI( KListViewItem *tqparent, const TQString& name )
 	return folder;
 }
 
-static FileLVI* folderLVI( KListView *tqparent, const TQString& name )
+static FileLVI* folderLVI( KListView *parent, const TQString& name )
 {
-	FileLVI *folder = new FileLVI( tqparent );
+	FileLVI *folder = new FileLVI( parent );
 	folder->setText( 0, name );
 	folder->setPixmap( 0, KMimeType::mimeType( "inode/directory" )->pixmap( KIcon::Small ) );
 	return folder;
@@ -194,8 +194,8 @@ static FileLVI* folderLVI( KListView *tqparent, const TQString& name )
 /////////////////////////////////////////////////////////////////////
 
 
-FileListView::FileListView(TQWidget *tqparent, const char* name)
-	: KListView(tqparent, name)
+FileListView::FileListView(TQWidget *parent, const char* name)
+	: KListView(parent, name)
 {
 	TQWhatsThis::add( this,
 	                 i18n( "This area is for displaying information about the files contained within an archive." )
@@ -274,14 +274,14 @@ TQStringList FileListView::selectedFilenames()
 				 * is a bit different: as we already dealt with all the tqchildren,
 				 * the "next item" is the next sibling of the current item, not
 				 * its first child. If the current item has no siblings, then
-				 * the next item is the next sibling of its tqparent, and so on.
+				 * the next item is the next sibling of its parent, and so on.
 				 */
 				FileLVI *nitem = static_cast<FileLVI*>( item->nextSibling() );
-				while ( !nitem && item->tqparent() )
+				while ( !nitem && item->parent() )
 				{
-					item = static_cast<FileLVI*>( item->tqparent() );
-					if ( item->tqparent() )
-						nitem = static_cast<FileLVI*>( item->tqparent()->nextSibling() );
+					item = static_cast<FileLVI*>( item->parent() );
+					if ( item->parent() )
+						nitem = static_cast<FileLVI*>( item->parent()->nextSibling() );
 				}
 				item = nitem;
 				continue;
@@ -385,9 +385,9 @@ FileListView::item(const TQString& filename) const
 
 void FileListView::addItem( const TQStringList & entries )
 {
-	FileLVI *flvi, *tqparent = findParent( entries[0] );
-	if ( tqparent )
-		flvi = new FileLVI( tqparent );
+	FileLVI *flvi, *parent = findParent( entries[0] );
+	if ( parent )
+		flvi = new FileLVI( parent );
 	else
 		flvi = new FileLVI( this );
 
@@ -508,7 +508,7 @@ FileLVI* FileListView::findParent( const TQString& fullname )
 		name = name.left( name.length() -1 );
 	if ( name.startsWith( "/" ) )
 		name = name.mid( 1 );
-	// Checks if this entry needs a tqparent
+	// Checks if this entry needs a parent
 	if ( !name.contains( '/' ) )
 		return static_cast< FileLVI* >( 0 );
 
@@ -538,8 +538,8 @@ FileLVI* FileListView::findParent( const TQString& fullname )
 	{
 		TQString name = ancestorList[0];
 
-		FileLVI *tqparent = static_cast< FileLVI*>( item );
-		item = tqparent->firstChild();
+		FileLVI *parent = static_cast< FileLVI*>( item );
+		item = parent->firstChild();
 		while ( item )
 		{
 			if ( item->text(0) == name )
@@ -549,7 +549,7 @@ FileLVI* FileListView::findParent( const TQString& fullname )
 
 		if ( !item )
 		{
-			item = folderLVI( tqparent, name );
+			item = folderLVI( parent, name );
 		}
 
 		ancestorList.pop_front();
@@ -559,12 +559,12 @@ FileLVI* FileListView::findParent( const TQString& fullname )
 	return static_cast< FileLVI* >( item );
 }
 
-TQStringList FileListView::tqchildrenOf( FileLVI* tqparent )
+TQStringList FileListView::tqchildrenOf( FileLVI* parent )
 {
-	Q_ASSERT( tqparent );
+	Q_ASSERT( parent );
 	TQStringList tqchildren;
 
-	FileLVI *item = static_cast<FileLVI*>( tqparent->firstChild() );
+	FileLVI *item = static_cast<FileLVI*>( parent->firstChild() );
 
 	while ( item )
 	{

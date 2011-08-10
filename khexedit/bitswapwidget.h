@@ -32,7 +32,7 @@ class CDigitLabel : public TQLabel
   TQ_OBJECT
 
   public:
-    CDigitLabel( TQWidget *tqparent, uint digit = 0, const char *name=0 );
+    CDigitLabel( TQWidget *parent, uint digit = 0, const char *name=0 );
     ~CDigitLabel( void );
 
     virtual TQSize tqsizeHint() const;
@@ -74,7 +74,7 @@ class CByteWidget : public TQWidget
   TQ_OBJECT
 
   public:
-    CByteWidget( TQWidget *tqparent, const char *name=0 );
+    CByteWidget( TQWidget *parent, const char *name=0 );
     ~CByteWidget( void );
 
     bool flag( TQByteArray &buf );

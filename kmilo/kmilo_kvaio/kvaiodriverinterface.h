@@ -36,7 +36,7 @@ class KVaioDriverInterface : public TQObject
     Q_OBJECT
   TQ_OBJECT
 public:
-    KVaioDriverInterface(TQObject *tqparent=0);
+    KVaioDriverInterface(TQObject *parent=0);
     bool connectToDriver(bool listen = true);
     void disconnectFromDriver();
     /** Return the current display brightness, a value between 0 and

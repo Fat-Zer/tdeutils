@@ -40,8 +40,8 @@ static const TQStringList &formatStrings( void );
 static const TQStringList &operationStrings( void );
 
 
-CGotoDialog::CGotoDialog( TQWidget *tqparent, const char *name, bool modal )
-  :KDialogBase( Plain, i18n("Goto Offset"), Ok|Cancel, Ok, tqparent, name,
+CGotoDialog::CGotoDialog( TQWidget *parent, const char *name, bool modal )
+  :KDialogBase( Plain, i18n("Goto Offset"), Ok|Cancel, Ok, parent, name,
 		modal )
 {
   TQVBoxLayout *topLayout = new TQVBoxLayout( plainPage(), 0, spacingHint() );
@@ -174,8 +174,8 @@ void CGotoDialog::slotOk( void )
 
 
 
-CFindDialog::CFindDialog( TQWidget *tqparent, const char *name, bool modal )
-  :KDialogBase( Plain, i18n("Find"), Ok|Cancel, Ok, tqparent, name, modal )
+CFindDialog::CFindDialog( TQWidget *parent, const char *name, bool modal )
+  :KDialogBase( Plain, i18n("Find"), Ok|Cancel, Ok, parent, name, modal )
 {
 
   TQVBoxLayout *topLayout = new TQVBoxLayout( plainPage(), 0, spacingHint() );
@@ -343,10 +343,10 @@ void CFindDialog::findAgain( EOperation operation )
 
 
 
-CFindNavigatorDialog::CFindNavigatorDialog( TQWidget *tqparent, const char *name,
+CFindNavigatorDialog::CFindNavigatorDialog( TQWidget *parent, const char *name,
 					     bool modal )
   :KDialogBase( Plain, i18n("Find (Navigator)"), User3|User2|User1|Close,
-		User2, tqparent, name, modal, true, i18n("New &Key"),
+		User2, parent, name, modal, true, i18n("New &Key"),
 		i18n("&Next"), i18n("&Previous") )
 {
   TQString text;
@@ -481,9 +481,9 @@ void CFindNavigatorDialog::done( int resultCode )
 
 
 
-CReplaceDialog::CReplaceDialog( TQWidget *tqparent, const char *name, bool modal )
+CReplaceDialog::CReplaceDialog( TQWidget *parent, const char *name, bool modal )
   :KDialogBase( Plain, i18n("Find & Replace"), Ok|Cancel, Ok,
-		tqparent, name, modal )
+		parent, name, modal )
 {
   TQString text;
   TQVBoxLayout *topLayout = new TQVBoxLayout( plainPage(), 0, spacingHint() );
@@ -676,10 +676,10 @@ void CReplaceDialog::slotOk( void )
 
 
 
-CReplacePromptDialog::CReplacePromptDialog( TQWidget *tqparent, const char *name,
+CReplacePromptDialog::CReplacePromptDialog( TQWidget *parent, const char *name,
 					     bool modal )
   :KDialogBase( Plain, i18n("Find & Replace"), User3|User2|User1|Close,
-		User2, tqparent, name, modal, true, i18n("Replace &All"),
+		User2, parent, name, modal, true, i18n("Replace &All"),
 		i18n("Do Not Replace"), i18n("Replace"))
 {
   TQString text;
@@ -757,9 +757,9 @@ void CReplacePromptDialog::done( int returnCode )
 
 
 
-CFilterDialog::CFilterDialog( TQWidget *tqparent, const char *name, bool modal )
+CFilterDialog::CFilterDialog( TQWidget *parent, const char *name, bool modal )
   :KDialogBase( Plain, i18n("Binary Filter"), Ok|Cancel, Ok,
-		tqparent, name, modal )
+		parent, name, modal )
 {
   TQString text;
   TQVBoxLayout *topLayout = new TQVBoxLayout( plainPage(), 0, spacingHint() );
@@ -1066,9 +1066,9 @@ void CFilterDialog::operationSelectorChanged( int index )
 
 
 
-CInsertDialog::CInsertDialog( TQWidget *tqparent, const char *name, bool modal )
+CInsertDialog::CInsertDialog( TQWidget *parent, const char *name, bool modal )
   :KDialogBase( Plain, i18n("Insert Pattern"), Ok|Cancel, Ok,
-		tqparent, name, modal )
+		parent, name, modal )
 {
   setButtonOKText(i18n("&Insert"));
 
@@ -1278,7 +1278,7 @@ void comboMatchText( TQComboBox *combo, const TQString &text )
 
 
 
-void showEntryFailure( TQWidget *tqparent, const TQString &msg )
+void showEntryFailure( TQWidget *parent, const TQString &msg )
 {
   TQString message;
   message += i18n("Your request can not be processed.");
@@ -1291,17 +1291,17 @@ void showEntryFailure( TQWidget *tqparent, const TQString &msg )
   {
     message += msg;
   }
-  KMessageBox::sorry( tqparent, message, i18n("Invalid argument(s)") );
+  KMessageBox::sorry( parent, message, i18n("Invalid argument(s)") );
 }
 
 
-bool verifyFileDestnation( TQWidget *tqparent, const TQString &title,
+bool verifyFileDestnation( TQWidget *parent, const TQString &title,
 			   const TQString &path )
 {
   if( path.isEmpty() == true )
   {
     TQString msg = i18n("You must specify a destination file.");
-    KMessageBox::sorry( tqparent, msg, title );
+    KMessageBox::sorry( parent, msg, title );
     return( false );
   }
 
@@ -1311,21 +1311,21 @@ bool verifyFileDestnation( TQWidget *tqparent, const TQString &title,
     if( info.isDir() == true )
     {
       TQString msg = i18n("You have specified an existing folder.");
-      KMessageBox::sorry( tqparent, msg, title );
+      KMessageBox::sorry( parent, msg, title );
       return( false );
     }
 
     if( info.isWritable() == false )
     {
       TQString msg = i18n("You do not have write permission to this file.");
-      KMessageBox::sorry( tqparent, msg, title );
+      KMessageBox::sorry( parent, msg, title );
       return( false );
     }
 
     TQString msg = i18n( ""
       "You have specified an existing file.\n"
       "Overwrite current file?" );
-    int reply = KMessageBox::warningContinueCancel( tqparent, msg, title, i18n("Overwrite") );
+    int reply = KMessageBox::warningContinueCancel( parent, msg, title, i18n("Overwrite") );
     if( reply != KMessageBox::Continue )
     {
       return( false );

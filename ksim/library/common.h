@@ -58,7 +58,7 @@ namespace KSim
    *  class Test : public TQWidget, virtual public KSim::Base
    *  {
    *    public:
-   *      Test(TQWidget *tqparent, const char *name) : TQWidget(tqparent, name)
+   *      Test(TQWidget *parent, const char *name) : TQWidget(parent, name)
    *      {
    *      }
    *      ~Test() {}

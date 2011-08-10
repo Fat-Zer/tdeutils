@@ -37,7 +37,7 @@ public:
   virtual TQByteArray tqencodedData ( const char * ) const;
   static bool canDecode(TQDragMoveEvent* event);
   static RegExpWidget* decode(TQDropEvent* event, RegExpEditorWindow* window,
-                              TQWidget* tqparent);
+                              TQWidget* parent);
 private:
   RegExp* _regexp;
 };

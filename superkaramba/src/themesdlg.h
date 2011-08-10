@@ -43,7 +43,7 @@ class ThemesDlg : public ThemesLayout
   TQ_OBJECT
 
   public:
-    ThemesDlg(TQWidget *tqparent = 0, const char *name = 0);
+    ThemesDlg(TQWidget *parent = 0, const char *name = 0);
     ~ThemesDlg();
 
     int addTheme(const TQString &appId, const TQString &file);

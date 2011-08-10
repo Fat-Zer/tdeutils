@@ -38,15 +38,15 @@ static TQString qrichtextify( const TQString& text )
   return lines.join(TQString());
 }
 
-KRichTextLabel::KRichTextLabel( const TQString &text , TQWidget *tqparent, const char *name )
- : TQLabel ( tqparent, name ) {
+KRichTextLabel::KRichTextLabel( const TQString &text , TQWidget *parent, const char *name )
+ : TQLabel ( parent, name ) {
   m_defaultWidth = TQMIN(400, KGlobalSettings::desktopGeometry(this).width()*2/5);
   tqsetAlignment( TQt::WordBreak );
   setText(text);
 }
 
-KRichTextLabel::KRichTextLabel( TQWidget *tqparent, const char *name )
- : TQLabel ( tqparent, name ) {
+KRichTextLabel::KRichTextLabel( TQWidget *parent, const char *name )
+ : TQLabel ( parent, name ) {
   m_defaultWidth = TQMIN(400, KGlobalSettings::desktopGeometry(this).width()*2/5);
   tqsetAlignment( TQt::WordBreak );
 }

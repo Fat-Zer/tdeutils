@@ -34,9 +34,9 @@
 #include <tqpushbutton.h>
 
 
-CStringDialog::CStringDialog( TQWidget *tqparent, const char *name, bool modal )
+CStringDialog::CStringDialog( TQWidget *parent, const char *name, bool modal )
   : KDialogBase( Plain, i18n("Extract Strings"), Help|User1|Cancel, User1,
-		 tqparent, name, modal, true, i18n("&Update") ),
+		 parent, name, modal, true, i18n("&Update") ),
   mMaxLength(0), mBusy(false), mDirty(false)
 {
   setHelp( "khexedit/khexedit.html", TQString() );

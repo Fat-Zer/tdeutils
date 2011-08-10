@@ -47,8 +47,8 @@
 
 
 
-CHexEditorWidget::CHexEditorWidget( TQWidget *tqparent, const char *name )
-  : TQWidget( tqparent, name )
+CHexEditorWidget::CHexEditorWidget( TQWidget *parent, const char *name )
+  : TQWidget( parent, name )
 {
   CHexBuffer *hexBuffer = new CHexBuffer;
   if( hexBuffer == 0 ) { return; }

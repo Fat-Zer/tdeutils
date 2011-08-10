@@ -21,10 +21,10 @@
 /******************************************************************/
 
 //==================================================================
-KCharSelectDia::KCharSelectDia(TQWidget *tqparent,const char *name,
+KCharSelectDia::KCharSelectDia(TQWidget *parent,const char *name,
 			       const TQChar &_chr,const TQString &_font,
 			       int _tableNum, bool direction)
-  : KMainWindow(tqparent,name), vChr(_chr), vFont(_font)
+  : KMainWindow(parent,name), vChr(_chr), vFont(_font)
 {
   setCaption(TQString()); // Standard caption
 

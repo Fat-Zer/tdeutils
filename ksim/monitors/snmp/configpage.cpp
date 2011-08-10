@@ -43,8 +43,8 @@ static bool listViewHasSelection( TQListView *lv )
     return false;
 }
 
-ConfigPage::ConfigPage( Plugin *tqparent, const char *name )
-    : KSim::PluginPage( tqparent, name )
+ConfigPage::ConfigPage( Plugin *parent, const char *name )
+    : KSim::PluginPage( parent, name )
 {
     ( new TQVBoxLayout( this ) )->setAutoAdd( true );
 

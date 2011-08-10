@@ -288,7 +288,7 @@ actionCollection());
 
   mDragLabel = new CDragLabel(this);
   mDragLabel->setPixmap( UserIcon( "hexdrag" ) );
-  mDragLabel->setDragMask( UserIcon( "hextqmask" ) );
+  mDragLabel->setDragMask( UserIcon( "hexmask" ) );
   mDragLabel->setEnabled( false ); // Enabled once we open a document
   TQToolTip::add( mDragLabel, i18n("Drag document") );
  (void) new KWidgetAction(mDragLabel, i18n("Drag Document"), 0, TQT_TQOBJECT(editor()), TQT_SLOT(options()), actionCollection(), "drag_document");

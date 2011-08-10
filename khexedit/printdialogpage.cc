@@ -31,8 +31,8 @@
 
 #include "printdialogpage.h"
 
-LayoutDialogPage::LayoutDialogPage( TQWidget *tqparent, const char *name )
- : KPrintDialogPage( tqparent, name )
+LayoutDialogPage::LayoutDialogPage( TQWidget *parent, const char *name )
+ : KPrintDialogPage( parent, name )
 {
   mConfig = 0;
   setTitle( i18n( "Page Layout" ) );

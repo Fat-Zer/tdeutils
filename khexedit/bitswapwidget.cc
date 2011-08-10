@@ -24,8 +24,8 @@
 
 #include "bitswapwidget.h"
 
-CDigitLabel::CDigitLabel( TQWidget *tqparent, uint digit, const char *name )
-  :TQLabel(tqparent, name), mDigit( digit ), mDotPosition( 0 )
+CDigitLabel::CDigitLabel( TQWidget *parent, uint digit, const char *name )
+  :TQLabel(parent, name), mDigit( digit ), mDotPosition( 0 )
 {
   setFocusPolicy( TQ_StrongFocus );
   initialize();
@@ -174,8 +174,8 @@ void CDigitLabel::keyPressEvent( TQKeyEvent *e )
 
 
 
-CByteWidget::CByteWidget( TQWidget *tqparent, const char *name )
-  :TQWidget(tqparent, name)
+CByteWidget::CByteWidget( TQWidget *parent, const char *name )
+  :TQWidget(parent, name)
 {
   mHBox = new TQHBoxLayout( this, 0 );
   

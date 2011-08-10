@@ -35,7 +35,7 @@ class CDragLabel: public TQLabel
   TQ_OBJECT
 
   public:
-    CDragLabel( TQWidget *tqparent );
+    CDragLabel( TQWidget *parent );
     ~CDragLabel( void );
 
     void setUrl( const TQString &url );

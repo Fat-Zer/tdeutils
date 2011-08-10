@@ -30,14 +30,14 @@ class ConcRegExp;
 class ConcWidget :public MultiContainerWidget
 {
 public:
-  ConcWidget(RegExpEditorWindow* editorWindow, TQWidget *tqparent,
+  ConcWidget(RegExpEditorWindow* editorWindow, TQWidget *parent,
              const char *name = 0);
   ConcWidget(RegExpEditorWindow* editorWindow, RegExpWidget *child,
-             TQWidget *tqparent, const char *name=0);
+             TQWidget *parent, const char *name=0);
   ConcWidget( RegExpEditorWindow* editorWindow, ConcWidget* origConc,
               unsigned int start, unsigned int end);
   ConcWidget( ConcRegExp* regexp, RegExpEditorWindow* editorWindow,
-              TQWidget* tqparent, const char* name = 0);
+              TQWidget* parent, const char* name = 0);
   void init();
 
   virtual TQSize tqsizeHint() const;

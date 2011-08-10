@@ -41,8 +41,8 @@
 #include <string.h>
 
 KSim::Sysinfo::Sysinfo(KSim::Config *config,
-   TQWidget *tqparent, const char *name, WFlags fl)
-   : DCOPObject("sysinfo"), TQWidget(tqparent, name, fl)
+   TQWidget *parent, const char *name, WFlags fl)
+   : DCOPObject("sysinfo"), TQWidget(parent, name, fl)
 {
   m_config = config;
   m_layout = new TQVBoxLayout(this);

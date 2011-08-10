@@ -57,7 +57,7 @@ class DiskView : public KSim::PluginView
   Q_OBJECT
   TQ_OBJECT
   public:
-    DiskView(KSim::PluginObject *tqparent, const char *name);
+    DiskView(KSim::PluginObject *parent, const char *name);
     ~DiskView();
 
     virtual void reparseConfig();
@@ -134,7 +134,7 @@ class DiskConfig : public KSim::PluginPage
   Q_OBJECT
   TQ_OBJECT
   public:
-    DiskConfig(KSim::PluginObject *tqparent, const char *name);
+    DiskConfig(KSim::PluginObject *parent, const char *name);
     ~DiskConfig();
 
     virtual void saveConfig();

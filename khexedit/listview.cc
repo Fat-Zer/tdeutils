@@ -24,8 +24,8 @@
 #include "listview.h"
 
 
-CListView::CListView( TQWidget *tqparent, const char *name, int visibleItem )
-  :KListView( tqparent, name ),  mVisibleItem(TQMAX( 1, visibleItem ))
+CListView::CListView( TQWidget *parent, const char *name, int visibleItem )
+  :KListView( parent, name ),  mVisibleItem(TQMAX( 1, visibleItem ))
 {
   setVisibleItem(visibleItem);
 }

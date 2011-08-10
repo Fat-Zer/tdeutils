@@ -28,9 +28,9 @@
 #include "altnregexp.h"
 #include <tqpainter.h>
 
-AltnWidget::AltnWidget(RegExpEditorWindow* editorWindow, TQWidget *tqparent,
+AltnWidget::AltnWidget(RegExpEditorWindow* editorWindow, TQWidget *parent,
                        const char *name)
-  :MultiContainerWidget(editorWindow, tqparent, name == 0 ? "AltnWidget" : name)
+  :MultiContainerWidget(editorWindow, parent, name == 0 ? "AltnWidget" : name)
 {
   DragAccepter *accepter = new DragAccepter(editorWindow, this);
   accepter->resize(0,0); // See note (1) in Comments
@@ -39,8 +39,8 @@ AltnWidget::AltnWidget(RegExpEditorWindow* editorWindow, TQWidget *tqparent,
 }
 
 AltnWidget::AltnWidget( AltnRegExp* regexp, RegExpEditorWindow* editorWindow,
-            TQWidget* tqparent, const char* name)
-  :MultiContainerWidget( editorWindow, tqparent, name )
+            TQWidget* parent, const char* name)
+  :MultiContainerWidget( editorWindow, parent, name )
 {
   DragAccepter *accepter = new DragAccepter(editorWindow, this);
   accepter->resize(0,0); // See note (1) in Comments
@@ -52,7 +52,7 @@ AltnWidget::AltnWidget( AltnRegExp* regexp, RegExpEditorWindow* editorWindow,
     RegExpWidget* child = WidgetFactory::createWidget( *it, editorWindow, this );
     ConcWidget* conc;
     if (  ! (conc = dynamic_cast<ConcWidget*>( child ) ) ) {
-      conc = new ConcWidget( editorWindow, child, tqparent );
+      conc = new ConcWidget( editorWindow, child, parent );
     }
     append( conc );
   }

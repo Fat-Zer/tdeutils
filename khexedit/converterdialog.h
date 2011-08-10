@@ -33,7 +33,7 @@ class CValidateLineEdit : public TQLineEdit
   TQ_OBJECT
    
   public:
-    CValidateLineEdit( TQWidget *tqparent, int validateType, const char *name=0 );
+    CValidateLineEdit( TQWidget *parent, int validateType, const char *name=0 );
     ~CValidateLineEdit( void );
 
   public slots:
@@ -57,7 +57,7 @@ class CConverterDialog : public KDialogBase
   TQ_OBJECT
   
   public:
-    CConverterDialog( TQWidget *tqparent, const char *name=0, bool modal=true );
+    CConverterDialog( TQWidget *parent, const char *name=0, bool modal=true );
     ~CConverterDialog( void );
     
   protected:

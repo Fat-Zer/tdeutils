@@ -45,9 +45,9 @@ public:
 
     KDialogBase ( int dialogFace, const TQString &caption, int buttonMask,
                   ButtonCode defaultButton,
-                  TQWidget *tqparent=0, const char *name=0, bool modal=true );
+                  TQWidget *parent=0, const char *name=0, bool modal=true );
 
-    KDialogBase( TQWidget* tqparent, const char* name = 0, bool modal = true,
+    KDialogBase( TQWidget* parent, const char* name = 0, bool modal = true,
                  const TQString& caption = TQString(),
                  int buttonMask = 0 );
 
@@ -76,11 +76,11 @@ class KMessageBox :public TQMessageBox
   TQ_OBJECT
 public:
     enum ButtonCode { Ok = 1, Cancel = 2, Yes = 3, No = 4, Continue = 5 };
-    static int  warningYesNo (TQWidget *tqparent, const TQString &text,
+    static int  warningYesNo (TQWidget *parent, const TQString &text,
                               const TQString &caption = TQString() );
-    static int information( TQWidget* tqparent, const TQString& text, const TQString& caption = TQString(),
+    static int information( TQWidget* parent, const TQString& text, const TQString& caption = TQString(),
                             const TQString& /*dontShowAgainName*/ = TQString() );
-    static int sorry( TQWidget* tqparent, const TQString& text, const TQString& caption = TQString() );
+    static int sorry( TQWidget* parent, const TQString& text, const TQString& caption = TQString() );
 };
 
 #endif /* COMPAT_H */

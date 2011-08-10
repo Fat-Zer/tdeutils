@@ -65,14 +65,14 @@ void DiskEntry::init()
 
 }
 
-DiskEntry::DiskEntry(TQObject *tqparent, const char *name)
- : TQObject (tqparent, name)
+DiskEntry::DiskEntry(TQObject *parent, const char *name)
+ : TQObject (parent, name)
 {
   init();
 }
 
-DiskEntry::DiskEntry(const TQString & deviceName, TQObject *tqparent, const char *name)
- : TQObject (tqparent, name)
+DiskEntry::DiskEntry(const TQString & deviceName, TQObject *parent, const char *name)
+ : TQObject (parent, name)
 {
   init();
 

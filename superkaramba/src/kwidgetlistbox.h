@@ -34,7 +34,7 @@ class KWidgetListbox : public TQTable
   TQ_OBJECT
 
   public:
-    KWidgetListbox(TQWidget *tqparent = 0, const char *name = 0);
+    KWidgetListbox(TQWidget *parent = 0, const char *name = 0);
     ~KWidgetListbox();
 
     int insertItem(TQWidget* item, int index = -1);

@@ -21,9 +21,9 @@
 
 #include <tqpainter.h>
 
-ConcWidget::ConcWidget(RegExpEditorWindow* editorWindow, TQWidget *tqparent,
+ConcWidget::ConcWidget(RegExpEditorWindow* editorWindow, TQWidget *parent,
                        const char *name)
-  :MultiContainerWidget(editorWindow, tqparent, name == 0 ? "concwidget" : name)
+  :MultiContainerWidget(editorWindow, parent, name == 0 ? "concwidget" : name)
 {
   init();
   DragAccepter *accepter = new DragAccepter(editorWindow, this);
@@ -33,8 +33,8 @@ ConcWidget::ConcWidget(RegExpEditorWindow* editorWindow, TQWidget *tqparent,
 
 
 ConcWidget::ConcWidget(RegExpEditorWindow* editorWindow, RegExpWidget *child,
-                       TQWidget *tqparent, const char *name)
-  :MultiContainerWidget(editorWindow, tqparent, name == 0 ? "concwidget" : name)
+                       TQWidget *parent, const char *name)
+  :MultiContainerWidget(editorWindow, parent, name == 0 ? "concwidget" : name)
 {
   init();
   DragAccepter *accepter = new DragAccepter(editorWindow, this);
@@ -58,8 +58,8 @@ ConcWidget::ConcWidget( RegExpEditorWindow* editorWindow, ConcWidget* origConc,
 }
 
 ConcWidget::ConcWidget( ConcRegExp* regexp, RegExpEditorWindow* editorWindow,
-            TQWidget* tqparent, const char* name )
-  :MultiContainerWidget( editorWindow, tqparent, name == 0 ? "concwidget" : name )
+            TQWidget* parent, const char* name )
+  :MultiContainerWidget( editorWindow, parent, name == 0 ? "concwidget" : name )
 {
   init();
   DragAccepter *accepter = new DragAccepter(editorWindow, this);

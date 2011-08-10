@@ -42,8 +42,8 @@
 
 using namespace KMilo;
 
-GenericMonitor::GenericMonitor(TQObject *tqparent, const char *name, const TQStringList& args)
-: Monitor(tqparent, name, args)
+GenericMonitor::GenericMonitor(TQObject *parent, const char *name, const TQStringList& args)
+: Monitor(parent, name, args)
 {
 	_poll = false;
 	m_displayType = Monitor::None;

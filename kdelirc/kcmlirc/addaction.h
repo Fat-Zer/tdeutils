@@ -67,7 +67,7 @@ public:
 	TQMap<TQListViewItem *, bool> uniqueProgramMap;
 	TQMap<TQListViewItem *, TQString> nameProgramMap;
 
-	AddAction(TQWidget *tqparent, const char *name, const Mode &mode);
+	AddAction(TQWidget *parent, const char *name, const Mode &mode);
 	~AddAction();
 };
 

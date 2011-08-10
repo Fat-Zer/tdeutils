@@ -69,20 +69,20 @@ TQString htmlFooter()
 // KJotsEntryBase
 //
 
-KJotsEntryBase::KJotsEntryBase(KListView* tqparent, TQListViewItem* after=0)
-    :KListViewItem(tqparent,after)
+KJotsEntryBase::KJotsEntryBase(KListView* parent, TQListViewItem* after=0)
+    :KListViewItem(parent,after)
 {
     m_id = 0;
     m_saveInProgress = m_dirty = false;
     m_parent = 0;
 }
 
-KJotsEntryBase::KJotsEntryBase(KListViewItem* tqparent, TQListViewItem* after=0)
-    :KListViewItem(tqparent,after)
+KJotsEntryBase::KJotsEntryBase(KListViewItem* parent, TQListViewItem* after=0)
+    :KListViewItem(parent,after)
 {
     m_id = 0;
     m_saveInProgress = m_dirty = false;
-    m_parent = dynamic_cast<KJotsBook*>(tqparent);
+    m_parent = dynamic_cast<KJotsBook*>(parent);
 }
 
 void KJotsEntryBase::setSubject(const TQString& subj)
@@ -99,13 +99,13 @@ void KJotsEntryBase::setText(int column, const TQString& text)
 }
 
 /*!
-    \brief Sets a new tqparent.
+    \brief Sets a new parent.
     This is mostly just used during drag-and-drop reordering in the list view.
-    We need to keep track of the previous tqparent in case the move is invalid.
+    We need to keep track of the previous parent in case the move is invalid.
 */
 void KJotsEntryBase::resetParent() 
 { 
-    m_parent = dynamic_cast<KJotsBook*>(TQListViewItem::tqparent()); 
+    m_parent = dynamic_cast<KJotsBook*>(TQListViewItem::parent()); 
 }
 
 /*! 
@@ -139,17 +139,17 @@ void KJotsEntryBase::setId(TQ_UINT64 id)
     This function should ONLY be called when saving the file, as it performs
     other functions than generating XML.
 */
-void KJotsEntryBase::generateXml( TQDomDocument &doc, TQDomElement &tqparent )
+void KJotsEntryBase::generateXml( TQDomDocument &doc, TQDomElement &parent )
 {
     TQDomElement title = doc.createElement( "Title" );
     title.appendChild( doc.createTextNode( subject() ));
-    tqparent.appendChild( title );
+    parent.appendChild( title );
 
     TQDomElement id = doc.createElement( "ID" );
     TQString id_string;
     id_string.setNum(m_id);
     id.appendChild( doc.createTextNode(id_string) );
-    tqparent.appendChild( id );
+    parent.appendChild( id );
 
     setDirty( false );
     return;
@@ -217,14 +217,14 @@ int KJotsEntryBase::printTitleBox(TQString title, KPrinter& printer, TQPainter& 
 // KJotsBook
 //
 
-KJotsBook::KJotsBook(KListView* tqparent, TQListViewItem* after)
-    : KJotsEntryBase(tqparent, after)
+KJotsBook::KJotsBook(KListView* parent, TQListViewItem* after)
+    : KJotsEntryBase(parent, after)
 {
     init();
 }
 
-KJotsBook::KJotsBook(KListViewItem* tqparent, TQListViewItem* after)
-    : KJotsEntryBase(tqparent, after)
+KJotsBook::KJotsBook(KListViewItem* parent, TQListViewItem* after)
+    : KJotsEntryBase(parent, after)
 {
     init();
 }
@@ -672,10 +672,10 @@ bool KJotsBook::isDirty()
     \brief Creates XML code and performs necessary tasks to save file.
     This function should ONLY be called when saving the file.
 */
-void KJotsBook::generateXml( TQDomDocument &doc, TQDomElement &tqparent )
+void KJotsBook::generateXml( TQDomDocument &doc, TQDomElement &parent )
 {
     TQDomElement book = doc.createElement( "KJotsBook" );
-    tqparent.appendChild( book );
+    parent.appendChild( book );
 
     KJotsEntryBase::generateXml(doc, book); //let the base class save important stuff
 
@@ -690,9 +690,9 @@ void KJotsBook::generateXml( TQDomDocument &doc, TQDomElement &tqparent )
         entry = dynamic_cast<KJotsEntryBase*>(entry->nextSibling());
     }
 
-    if ( !m_fileName.isEmpty() && TQListViewItem::tqparent() )
+    if ( !m_fileName.isEmpty() && TQListViewItem::parent() )
     {
-        //Hmmmm... We were originally loaded from a file, but now we have a tqparent, so
+        //Hmmmm... We were originally loaded from a file, but now we have a parent, so
         //we must have been moved into another tree. Remove the old file now that we
         //have saved ourselves into the new tree.
         deleteBook();
@@ -843,8 +843,8 @@ TQString KJotsBook::generateText( void )
 // KJotsPage
 //
 
-KJotsPage::KJotsPage(KJotsBook* tqparent, TQListViewItem *after)
-    : KJotsEntryBase(tqparent,after),
+KJotsPage::KJotsPage(KJotsBook* parent, TQListViewItem *after)
+    : KJotsEntryBase(parent,after),
     m_editor(0)
 {
     m_isBook = false;
@@ -982,7 +982,7 @@ void KJotsPage::slotSaveResult(KIO::Job *)
 
 void KJotsPage::print(TQFont& defaultFont)
 {
-    KJotsEntryBase* book = dynamic_cast<KJotsEntryBase*>(KListViewItem::tqparent());
+    KJotsEntryBase* book = dynamic_cast<KJotsEntryBase*>(KListViewItem::parent());
 
     TQString docName = book->subject();
     if (!subject().isNull())
@@ -1116,10 +1116,10 @@ bool KJotsPage::isDirty()
 /*!
     \brief Creates XML code and performs necessary tasks to save file.
     This function should ONLY be called when saving the file.
-*/void KJotsPage::generateXml( TQDomDocument &doc, TQDomElement &tqparent )
+*/void KJotsPage::generateXml( TQDomDocument &doc, TQDomElement &parent )
 {
     TQDomElement page = doc.createElement( "KJotsPage" );
-    tqparent.appendChild( page );
+    parent.appendChild( page );
 
     KJotsEntryBase::generateXml(doc, page); //let the base class save important stuff
 
@@ -1192,12 +1192,12 @@ TQString KJotsPage::generateHtml( KJotsEntryBase *top, bool diskMode )
 
     if ( top != this ) 
     {
-        KJotsBook *tqparent = parentBook();
-        while ( tqparent )
+        KJotsBook *parent = parentBook();
+        while ( parent )
         {
-            html += TQString("<td><a href=\"#%1\">%2</a></td>").tqarg(tqparent->id()).tqarg(tqparent->subject());
-            if ( tqparent == top ) break;
-            tqparent = tqparent->parentBook();
+            html += TQString("<td><a href=\"#%1\">%2</a></td>").tqarg(parent->id()).tqarg(parent->subject());
+            if ( parent == top ) break;
+            parent = parent->parentBook();
         }
     }
     html += TQString("</tr></table>");

@@ -81,10 +81,10 @@ void KSim::Led::setOn(bool force)
     return;
   }
 
-  if (d->pixmap.tqmask() && !d->pixmap.tqmask()->isNull()) {
-    TQBitmap tqmask(rect.size());
-    bitBlt(&tqmask, TQPoint(0, 0), d->pixmap.tqmask(), rect, CopyROP);
-    setMask(tqmask);
+  if (d->pixmap.mask() && !d->pixmap.mask()->isNull()) {
+    TQBitmap mask(rect.size());
+    bitBlt(&mask, TQPoint(0, 0), d->pixmap.mask(), rect, CopyROP);
+    setMask(mask);
   }
 
   bitBlt(this, TQPoint(0, 0), &d->pixmap, rect, CopyROP);
@@ -104,10 +104,10 @@ void KSim::Led::setOff(bool force)
     return;
   }
 
-  if (d->pixmap.tqmask() && !d->pixmap.tqmask()->isNull()) {
-    TQBitmap tqmask(rect.size());
-    bitBlt(&tqmask, TQPoint(0, 0), d->pixmap.tqmask(), rect, CopyROP);
-    setMask(tqmask);
+  if (d->pixmap.mask() && !d->pixmap.mask()->isNull()) {
+    TQBitmap mask(rect.size());
+    bitBlt(&mask, TQPoint(0, 0), d->pixmap.mask(), rect, CopyROP);
+    setMask(mask);
   }
 
   bitBlt(this, TQPoint(0, 0), &d->pixmap, rect, CopyROP);
@@ -184,24 +184,24 @@ class KSim::LedLabel::Private
 };
 
 KSim::LedLabel::LedLabel(int max, int type, const TQString &label,
-   TQWidget *tqparent, const char *name, WFlags fl)
-   : KSim::Progress(max, type, Panel, tqparent, name, fl)
+   TQWidget *parent, const char *name, WFlags fl)
+   : KSim::Progress(max, type, Panel, parent, name, fl)
 {
   init();
   setText(label);
 }
 
 KSim::LedLabel::LedLabel(int max, int type,
-   TQWidget *tqparent, const char *name, WFlags fl)
-   : KSim::Progress(max, type, Panel, tqparent, name, fl)
+   TQWidget *parent, const char *name, WFlags fl)
+   : KSim::Progress(max, type, Panel, parent, name, fl)
 {
   init();
 }
 
 KSim::LedLabel::LedLabel(int max, 
-   TQWidget *tqparent, const char *name, WFlags fl)
+   TQWidget *parent, const char *name, WFlags fl)
    : KSim::Progress(max, KSim::Types::None,
-   Panel, tqparent, name, fl)
+   Panel, parent, name, fl)
 {
   init();
 }

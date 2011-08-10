@@ -44,8 +44,8 @@
 
 extern void wake_laptop_daemon();
 
-WarningConfig::WarningConfig (int t, TQWidget * tqparent, const char *name)
-  : KCModule(tqparent, name),
+WarningConfig::WarningConfig (int t, TQWidget * parent, const char *name)
+  : KCModule(parent, name),
     checkSuspend(0),
     checkStandby(0),
     checkHibernate(0)

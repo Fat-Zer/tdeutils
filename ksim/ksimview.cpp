@@ -212,19 +212,19 @@ void KSim::MainView::slotMaskMainView()
 
 void KSim::MainView::maskMainView()
 {
-  if (!m_topFrame->background()->tqmask() ||
-      !m_leftFrame->background()->tqmask() ||
-      !m_rightFrame->background()->tqmask() ||
-      !m_bottomFrame->background()->tqmask())
+  if (!m_topFrame->background()->mask() ||
+      !m_leftFrame->background()->mask() ||
+      !m_rightFrame->background()->mask() ||
+      !m_bottomFrame->background()->mask())
   {
     tqtopLevelWidget()->clearMask();
     return;
   }
   
-  TQBitmap topPixmap(*m_topFrame->background()->tqmask());
-  TQBitmap leftPixmap(*m_leftFrame->background()->tqmask());
-  TQBitmap rightPixmap(*m_rightFrame->background()->tqmask());
-  TQBitmap bottomPixmap(*m_bottomFrame->background()->tqmask());
+  TQBitmap topPixmap(*m_topFrame->background()->mask());
+  TQBitmap leftPixmap(*m_leftFrame->background()->mask());
+  TQBitmap rightPixmap(*m_rightFrame->background()->mask());
+  TQBitmap bottomPixmap(*m_bottomFrame->background()->mask());
 
   TQSize insideSize(m_pluginLayout->tqgeometry().size());
 

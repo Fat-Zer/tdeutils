@@ -44,7 +44,7 @@ public:
 
     void addChild( RegExp* child );
     void removeChild( RegExp* child );
-    void setParent( RegExp* tqparent );
+    void setParent( RegExp* parent );
     RegExp* clone() const;
     virtual bool operator==( const RegExp& other ) const { return ( type() == other.type() ); }
 

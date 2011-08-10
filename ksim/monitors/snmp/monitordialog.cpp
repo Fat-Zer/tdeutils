@@ -37,14 +37,14 @@
 
 using namespace KSim::Snmp;
 
-MonitorDialog::MonitorDialog( const HostConfigMap &hosts, TQWidget *tqparent, const char *name )
-    : MonitorDialogBase( tqparent, name ), m_hosts( hosts )
+MonitorDialog::MonitorDialog( const HostConfigMap &hosts, TQWidget *parent, const char *name )
+    : MonitorDialogBase( parent, name ), m_hosts( hosts )
 {
     init();
 }
 
-MonitorDialog::MonitorDialog( const MonitorConfig &monitor, const HostConfigMap &hosts, TQWidget *tqparent, const char *name )
-    : MonitorDialogBase( tqparent, name ), m_hosts( hosts )
+MonitorDialog::MonitorDialog( const MonitorConfig &monitor, const HostConfigMap &hosts, TQWidget *parent, const char *name )
+    : MonitorDialogBase( parent, name ), m_hosts( hosts )
 {
     init( monitor );
 }

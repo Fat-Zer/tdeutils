@@ -107,15 +107,15 @@ class KSim::Chart::Private
 };
 
 KSim::Chart::Chart(bool showKrell, int maxValue,
-   const TQString &title, TQWidget *tqparent, const char *name,
-   WFlags fl) : TQWidget(tqparent, name, fl)
+   const TQString &title, TQWidget *parent, const char *name,
+   WFlags fl) : TQWidget(parent, name, fl)
 {
   init(showKrell, maxValue, title);
 }
 
 KSim::Chart::Chart(bool showKrell, int maxValue,
-   TQWidget *tqparent, const char *name, WFlags fl)
-   : TQWidget(tqparent, name, fl)
+   TQWidget *parent, const char *name, WFlags fl)
+   : TQWidget(parent, name, fl)
 {
   init(showKrell, maxValue, i18n("None"));
 }

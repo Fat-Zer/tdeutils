@@ -41,7 +41,7 @@ class kgpgOptions : public KConfigDialog
         Q_OBJECT
   TQ_OBJECT
 public:
-        kgpgOptions(TQWidget *tqparent=0, const char *name=0);
+        kgpgOptions(TQWidget *parent=0, const char *name=0);
         ~kgpgOptions();
         TQStringList names,ids;
         Encryption *page1;

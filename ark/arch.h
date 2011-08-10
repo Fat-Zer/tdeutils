@@ -147,7 +147,7 @@ class Arch : public TQObject
     void clearShellOutput() { m_lastShellOutput.truncate( 0 ); }
     const TQString& getLastShellOutput() const { return m_lastShellOutput; }
 
-    static Arch *archFactory( ArchType aType, ArkWidget *tqparent,
+    static Arch *archFactory( ArchType aType, ArkWidget *parent,
                               const TQString &filename,
                               const TQString &openAsMimeType = TQString() );
 

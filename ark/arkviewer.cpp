@@ -36,8 +36,8 @@
 #include <tqurl.h>
 
 
-ArkViewer::ArkViewer( TQWidget * tqparent, const char * name )
-	: KDialogBase( tqparent, name, false, TQString(), Close ), m_part( 0 )
+ArkViewer::ArkViewer( TQWidget * parent, const char * name )
+	: KDialogBase( parent, name, false, TQString(), Close ), m_part( 0 )
 {
 	m_widget = new TQVBox( this );
 	m_widget->tqlayout()->setSpacing( 10 );

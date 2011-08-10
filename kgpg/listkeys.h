@@ -71,7 +71,7 @@ class KgpgSelKey : public KDialogBase
   TQ_OBJECT
 
 public:
-        KgpgSelKey( TQWidget *tqparent = 0, const char *name = 0,bool allowMultipleSelection=false, TQString preselected=TQString());
+        KgpgSelKey( TQWidget *parent = 0, const char *name = 0,bool allowMultipleSelection=false, TQString preselected=TQString());
         KListView *keysListpr;
         TQPixmap keyPair;
         TQCheckBox *local;
@@ -95,7 +95,7 @@ class KeyView : public KListView
   TQ_OBJECT
         friend class listKeys;
 public:
-        KeyView( TQWidget *tqparent = 0, const char *name = 0);
+        KeyView( TQWidget *parent = 0, const char *name = 0);
         bool displayPhoto,displayOnlySecret,displayDisabled;
         int previewSize;
 	TQString secretList;
@@ -146,7 +146,7 @@ class mySearchLine: public KListViewSearchLine
     Q_OBJECT
   TQ_OBJECT
 public:
-    mySearchLine(TQWidget *tqparent = 0, KeyView *listView = 0, const char *name = 0);
+    mySearchLine(TQWidget *parent = 0, KeyView *listView = 0, const char *name = 0);
     virtual ~mySearchLine();
 private:
  KeyView *searchListView;    
@@ -165,7 +165,7 @@ class listKeys : public KMainWindow, virtual public KeyInterface
   TQ_OBJECT
 
 public:
-        listKeys(TQWidget *tqparent=0, const char *name=0);
+        listKeys(TQWidget *parent=0, const char *name=0);
         ~listKeys();
         TQLabel *keyPhoto;
         KeyView *keysList2;

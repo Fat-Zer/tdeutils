@@ -44,7 +44,7 @@ class laptop_dock : public KSystemTray {
   TQ_OBJECT
 
 public:
-  laptop_dock(laptop_daemon* tqparent);
+  laptop_dock(laptop_daemon* parent);
   ~laptop_dock();
   void displayPixmap();
 

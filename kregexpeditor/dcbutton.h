@@ -31,7 +31,7 @@ Q_OBJECT
   TQ_OBJECT
 
 public:
-  DoubleClickButton( TQPixmap pix, TQWidget* tqparent, const char* name = 0);
+  DoubleClickButton( TQPixmap pix, TQWidget* parent, const char* name = 0);
 
 protected:
   virtual void mouseDoubleClickEvent ( TQMouseEvent * );

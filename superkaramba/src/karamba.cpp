@@ -1992,8 +1992,8 @@ void karamba::toggleWidgetUpdate( bool b)
     widgetUpdate = b;
 }
 
-SignalBridge::SignalBridge(TQObject* tqparent, TQString name, KActionCollection* ac)
-  : TQObject(tqparent, name.ascii()), collection(ac)
+SignalBridge::SignalBridge(TQObject* parent, TQString name, KActionCollection* ac)
+  : TQObject(parent, name.ascii()), collection(ac)
 {
   setName(name.ascii());
 }
@@ -2004,15 +2004,15 @@ void SignalBridge::receive()
 isChecked());
 }
 
-DesktopChangeSlot::DesktopChangeSlot(TQObject *tqparent, int id)
-    : TQObject(tqparent, "")
+DesktopChangeSlot::DesktopChangeSlot(TQObject *parent, int id)
+    : TQObject(parent, "")
 {
   desktopid = id;
 }
 
 void DesktopChangeSlot::receive()
 {
-  karamba *k = (karamba *)tqparent();
+  karamba *k = (karamba *)parent();
 
   // XXX - check type cast
 

@@ -119,7 +119,7 @@ namespace KSim
       /**
        * constructor for PluginPage
        */
-      PluginPage(KSim::PluginObject *tqparent, const char *name);
+      PluginPage(KSim::PluginObject *parent, const char *name);
       /**
        * destructor for PluginPage
        */
@@ -168,7 +168,7 @@ namespace KSim
       /**
        * constructor for PluginView
        */
-      PluginView(KSim::PluginObject *tqparent, const char *name);
+      PluginView(KSim::PluginObject *parent, const char *name);
       /**
        * destructor for PluginView
        */

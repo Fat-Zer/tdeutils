@@ -31,14 +31,14 @@
 #include "kgpginterface.h"
 #include <kio/renamedlg.h>
 
-KgpgLibrary::KgpgLibrary(TQWidget *tqparent, bool pgpExtension)
+KgpgLibrary::KgpgLibrary(TQWidget *parent, bool pgpExtension)
 {
         if (pgpExtension)
                 extension=".pgp";
         else
                 extension=".gpg";
 	popIsActive=false;
-	panel=tqparent;
+	panel=parent;
 }
 
 KgpgLibrary::~KgpgLibrary()
@@ -152,7 +152,7 @@ void KgpgLibrary::slotShredResult( KIO::Job * job )
     emit systemMessage(TQString());
     if (job && job->error())
     {
-    job->showErrorDialog( (TQWidget*)tqparent() );
+    job->showErrorDialog( (TQWidget*)parent() );
     emit systemMessage(TQString(),true);
     KPassivePopup::message(i18n("KGpg Error"),i18n("Process halted, not all files were shredded."),KGlobal::iconLoader()->loadIcon("kgpg",KIcon::Desktop),panel,"kgpg_error",0);
     }

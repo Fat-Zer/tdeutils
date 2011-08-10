@@ -40,17 +40,17 @@ class KSim::Progress::Private
 };
 
 KSim::Progress::Progress(int maxValue,
-   TQWidget *tqparent, const char *name,
-   WFlags fl) : KSim::Label(tqparent, name, fl)
+   TQWidget *parent, const char *name,
+   WFlags fl) : KSim::Label(parent, name, fl)
 {
   init(maxValue);
   configureObject();
 }
 
 KSim::Progress::Progress(int maxValue,
-   int type, const TQString &label, TQWidget *tqparent,
+   int type, const TQString &label, TQWidget *parent,
    const char *name, WFlags fl)
-   : KSim::Label(type, label, tqparent, name, fl)
+   : KSim::Label(type, label, parent, name, fl)
 {
   init(maxValue);
   configureObject();
@@ -58,17 +58,17 @@ KSim::Progress::Progress(int maxValue,
 
 KSim::Progress::Progress(int maxValue,
    int type, const TQString &label, int value,
-   TQWidget *tqparent, const char *name, WFlags fl)
-   : KSim::Label(type, label, tqparent, name, fl)
+   TQWidget *parent, const char *name, WFlags fl)
+   : KSim::Label(type, label, parent, name, fl)
 {
   init(maxValue, value);
   configureObject();
 }
 
 KSim::Progress::Progress(int maxValue,
-   int type, TQWidget *tqparent,
+   int type, TQWidget *parent,
    const char *name, WFlags fl)
-   : KSim::Label(type, tqparent, name, fl)
+   : KSim::Label(type, parent, name, fl)
 {
   init(maxValue);
   configureObject();
@@ -76,8 +76,8 @@ KSim::Progress::Progress(int maxValue,
 
 KSim::Progress::Progress(int maxValue, int type,
    ProgressType progressType,
-   TQWidget *tqparent, const char *name, WFlags fl)
-   : KSim::Label(type, tqparent, name, fl)
+   TQWidget *parent, const char *name, WFlags fl)
+   : KSim::Label(type, parent, name, fl)
 {
   init(maxValue, 0, progressType);
   configureObject();

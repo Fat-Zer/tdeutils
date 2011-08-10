@@ -51,8 +51,8 @@ static TQString extPath = TQString();
 
 
 
-KFAction::KFAction(TQObject *tqparent) :
-	TQObject(tqparent)
+KFAction::KFAction(TQObject *parent) :
+	TQObject(parent)
 {
 	DEBUGSETUP;
 }
@@ -79,8 +79,8 @@ public:
 	TQPtrList<KFAction> list;
 } ;
 
-KFActionQueue::KFActionQueue(TQObject *tqparent) :
-	KFAction(tqparent),
+KFActionQueue::KFActionQueue(TQObject *parent) :
+	KFAction(parent),
 	d(new KFActionQueue_p)
 {
 	DEBUGSETUP;
@@ -625,8 +625,8 @@ void DDZeroOut::processDone(KProcess *p)
 
 /* static */ TQString FATFilesystem::newfs_fat = TQString() ;
 
-FATFilesystem::FATFilesystem(TQObject *tqparent) :
-	FloppyAction(tqparent)
+FATFilesystem::FATFilesystem(TQObject *parent) :
+	FloppyAction(parent)
 {
 	DEBUGSETUP;
 	runtimeCheck();
@@ -749,8 +749,8 @@ void FATFilesystem::processStdOut(KProcess *, char *b, int l)
 
 /* static */ TQString UFSFilesystem::newfs = TQString() ;
 
-UFSFilesystem::UFSFilesystem(TQObject *tqparent) :
-	FloppyAction(tqparent)
+UFSFilesystem::UFSFilesystem(TQObject *parent) :
+	FloppyAction(parent)
 {
 	DEBUGSETUP;
 	runtimeCheck();
@@ -808,8 +808,8 @@ void UFSFilesystem::exec()
 
 /* static */ TQString Ext2Filesystem::newfs = TQString() ;
 
-Ext2Filesystem::Ext2Filesystem(TQObject *tqparent) :
-	FloppyAction(tqparent)
+Ext2Filesystem::Ext2Filesystem(TQObject *parent) :
+	FloppyAction(parent)
 {
 	DEBUGSETUP;
 	runtimeCheck();
@@ -906,8 +906,8 @@ void Ext2Filesystem::processStdOut(KProcess *, char *b, int l)
 #ifdef ANY_LINUX
 /* static */ TQString MinixFilesystem::newfs = TQString() ;
 
-MinixFilesystem::MinixFilesystem(TQObject *tqparent) :
-	FloppyAction(tqparent)
+MinixFilesystem::MinixFilesystem(TQObject *parent) :
+	FloppyAction(parent)
 {
 	DEBUGSETUP;
 	runtimeCheck();

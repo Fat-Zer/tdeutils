@@ -42,8 +42,8 @@ class DiskEntry : public TQObject
   Q_OBJECT
   TQ_OBJECT
 public:
-  DiskEntry(TQObject *tqparent=0, const char *name=0);
-  DiskEntry(const TQString & deviceName, TQObject *tqparent=0, const char *name=0);
+  DiskEntry(TQObject *parent=0, const char *name=0);
+  DiskEntry(const TQString & deviceName, TQObject *parent=0, const char *name=0);
   ~DiskEntry();
   TQString lastSysError() {return sysStringErrOut; }
   TQString deviceName() const { return device; }

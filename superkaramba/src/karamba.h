@@ -330,7 +330,7 @@ class DesktopChangeSlot : public TQObject
   TQ_OBJECT
 
   public:
-  DesktopChangeSlot(TQObject *tqparent, int desktop_id);
+  DesktopChangeSlot(TQObject *parent, int desktop_id);
   /* Parent should be the karamba object
    * desktop id of 0 indicates all desktops */
   void setMenuId(int id);
@@ -351,7 +351,7 @@ class SignalBridge : public TQObject
   TQ_OBJECT
 
   public:
-    SignalBridge(TQObject* tqparent, TQString, KActionCollection*);
+    SignalBridge(TQObject* parent, TQString, KActionCollection*);
 
   signals:
     void enabled(TQString, bool);

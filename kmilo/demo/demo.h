@@ -26,7 +26,7 @@
 
 class Demo : public KMilo::Monitor {
 	public:
-		Demo(TQObject *tqparent, const char *name, const TQStringList&);
+		Demo(TQObject *parent, const char *name, const TQStringList&);
 		virtual ~Demo();
 
 		virtual bool init();

@@ -145,7 +145,7 @@ class KJotsPage : public KJotsEntryBase
     Q_OBJECT
   TQ_OBJECT
     public:
-        KJotsPage(KJotsBook* tqparent, TQListViewItem* after = 0);
+        KJotsPage(KJotsBook* parent, TQListViewItem* after = 0);
         ~KJotsPage();
 
     public:

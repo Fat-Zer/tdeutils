@@ -43,7 +43,7 @@
 
 namespace KMilo {
 
-ThinkPadMonitor::ThinkPadMonitor(TQObject* tqparent, const char* name, const TQStringList& args): Monitor(tqparent, name, args) {
+ThinkPadMonitor::ThinkPadMonitor(TQObject* parent, const char* name, const TQStringList& args): Monitor(parent, name, args) {
 	m_progress = 0;
 	m_volume = 50;  //set in retrieveVolume()
 }

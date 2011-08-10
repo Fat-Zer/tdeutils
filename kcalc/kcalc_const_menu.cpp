@@ -49,8 +49,8 @@ const struct science_constant KCalcConstMenu::Constants[] = {
   {"N_A", I18N_NOOP("Avogadro's Number"), "", "6.0221415e23", Thermodynamics}
 };
 
-KCalcConstMenu::KCalcConstMenu(TQWidget * tqparent, const char * name)
-  : TQPopupMenu(tqparent, name)
+KCalcConstMenu::KCalcConstMenu(TQWidget * parent, const char * name)
+  : TQPopupMenu(parent, name)
 {
   TQPopupMenu *math_menu = new TQPopupMenu(this, "mathematical constants");
   TQPopupMenu *em_menu = new TQPopupMenu(this, "electromagnetic constants");

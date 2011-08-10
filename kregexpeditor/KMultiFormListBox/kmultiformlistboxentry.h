@@ -51,7 +51,7 @@ class KMultiFormListBoxEntry : public TQWidget
   TQ_OBJECT
 
 public:
-  KMultiFormListBoxEntry(TQWidget *tqparent, const char *name) : TQWidget(tqparent,name) {}
+  KMultiFormListBoxEntry(TQWidget *parent, const char *name) : TQWidget(parent,name) {}
 
   virtual TQPushButton *indexButton() { return 0; }
   virtual TQWidget *valueWidget() { return 0; }

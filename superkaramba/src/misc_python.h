@@ -316,7 +316,7 @@ PyObject* py_get_number_of_desktops(PyObject *self, PyObject *args);
 *   long translateAll(widget, relative_x, relative_y)
 * DESCRIPTION
 *   Moves all widgets within a theme in a particular direction relative to
-*   the previous spot without moving the tqparent theme widget.
+*   the previous spot without moving the parent theme widget.
 * ARGUMENTS
 *   * long widget -- karamba
 *   * long translate_x -- move horizontally

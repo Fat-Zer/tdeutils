@@ -58,7 +58,7 @@ class CExportDialog : public KDialogBase
       option_max
     };
 
-    CExportDialog( TQWidget *tqparent = 0, char *name = 0, bool modal = false );
+    CExportDialog( TQWidget *parent = 0, char *name = 0, bool modal = false );
     ~CExportDialog( void );
     void writeConfiguration( void );
 

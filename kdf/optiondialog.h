@@ -31,7 +31,7 @@ class COptionDialog : public KDialogBase
   TQ_OBJECT
 
   public:
-    COptionDialog( TQWidget *tqparent=0, const char *name=0, bool modal=true );
+    COptionDialog( TQWidget *parent=0, const char *name=0, bool modal=true );
     ~COptionDialog( void );
 
   protected slots:

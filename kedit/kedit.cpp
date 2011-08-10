@@ -1317,8 +1317,8 @@ extern "C" KDE_EXPORT int kdemain (int argc, char **argv)
 	return a.exec ();
 }
 
-SettingsDialog::SettingsDialog(TQWidget *tqparent, const char *name,KConfigSkeleton *config, KSpellConfig *_spellConfig)
- : KConfigDialog(tqparent, name, config),
+SettingsDialog::SettingsDialog(TQWidget *parent, const char *name,KConfigSkeleton *config, KSpellConfig *_spellConfig)
+ : KConfigDialog(parent, name, config),
  spellConfig(_spellConfig), spellConfigChanged(false)
 {
   // Font

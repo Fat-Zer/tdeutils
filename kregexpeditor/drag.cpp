@@ -37,13 +37,13 @@ bool RegExpWidgetDrag::canDecode( TQDragMoveEvent* event )
 }
 
 RegExpWidget* RegExpWidgetDrag::decode(TQDropEvent* event, RegExpEditorWindow* window,
-                                       TQWidget* tqparent)
+                                       TQWidget* parent)
 {
   TQByteArray payload = event->tqencodedData("KRegExpEditor/widgetdrag" );
   TQTextStream stream( payload, IO_ReadOnly );
   TQString str = stream.read();
   RegExp* regexp = WidgetFactory::createRegExp( str );
-  RegExpWidget* widget = WidgetFactory::createWidget( regexp, window, tqparent );
+  RegExpWidget* widget = WidgetFactory::createWidget( regexp, window, parent );
   delete regexp;
   return widget;
 }

@@ -36,7 +36,7 @@ class Monitor : public TQObject, public TQThread
     Q_OBJECT
   TQ_OBJECT
 public:
-    Monitor( const HostConfig &host, const Identifier &oid, int refresh, TQObject *tqparent = 0, const char *name = 0 );
+    Monitor( const HostConfig &host, const Identifier &oid, int refresh, TQObject *parent = 0, const char *name = 0 );
     virtual ~Monitor();
 
 signals:

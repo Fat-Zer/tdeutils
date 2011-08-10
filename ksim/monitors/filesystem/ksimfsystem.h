@@ -53,7 +53,7 @@ class Fsystem : public KSim::PluginView, public FsystemIface
     /**
      * construtor of Fsystem, calls all init functions to create the plugin.
      */
-    Fsystem(KSim::PluginObject *tqparent, const char *name);
+    Fsystem(KSim::PluginObject *parent, const char *name);
     ~Fsystem();
 
     virtual void reparseConfig();

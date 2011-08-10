@@ -41,8 +41,8 @@
 #include "userdefinedregexps.h"
 #include <tqfileinfo.h>
 
-RegExpEditorWindow::RegExpEditorWindow( TQWidget *tqparent, const char *name)
-    : TQWidget(tqparent, name, TQt::WPaintUnclipped)
+RegExpEditorWindow::RegExpEditorWindow( TQWidget *parent, const char *name)
+    : TQWidget(parent, name, TQt::WPaintUnclipped)
 {
     _top = new ConcWidget(this, this);
     _layout = new TQHBoxLayout( this);

@@ -43,7 +43,7 @@ class KgpgApp : public KMainWindow
 public:
         /** construtor of KgpgApp, calls all init functions to create the application.
          */
-        KgpgApp(TQWidget *tqparent=0, const char *name=0,WFlags f = 0,KShortcut goHome=TQKeySequence(CTRL+TQt::Key_Home),bool mainWindow=false);
+        KgpgApp(TQWidget *parent=0, const char *name=0,WFlags f = 0,KShortcut goHome=TQKeySequence(CTRL+TQt::Key_Home),bool mainWindow=false);
         ~KgpgApp();
         /** opens a file specified by commandline option
          */

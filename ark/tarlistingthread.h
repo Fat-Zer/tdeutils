@@ -47,7 +47,7 @@ class ListingEvent: public TQCustomEvent
 class TarListingThread: public TQThread
 {
 	public:
-		TarListingThread( TQObject *tqparent, const TQString& filename );
+		TarListingThread( TQObject *parent, const TQString& filename );
 		~TarListingThread();
 	
 	protected:

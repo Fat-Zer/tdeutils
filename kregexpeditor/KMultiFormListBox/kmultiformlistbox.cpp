@@ -22,9 +22,9 @@
 #include "kmultiformlistbox-multivisible.h"
 #include "kmultiformlistbox-windowed.h"
 
-KMultiFormListBox::KMultiFormListBox( KMultiFormListBoxFactory *factory, KMultiFormListBoxType tp, TQWidget *tqparent,
+KMultiFormListBox::KMultiFormListBox( KMultiFormListBoxFactory *factory, KMultiFormListBoxType tp, TQWidget *parent,
 																		  bool showUpDownButtons, bool showHelpButton, TQString addButtonText,
-																		  const char *name )  : TQWidget( tqparent, name )
+																		  const char *name )  : TQWidget( parent, name )
 {
 	switch ( tp ) {
 

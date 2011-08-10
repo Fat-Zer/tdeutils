@@ -47,7 +47,7 @@ class KColumnsView : public TQScrollView
    friend class KColumn;
 
   public:
-    KColumnsView( /*bool R = false,*/ TQWidget *tqparent=0, const char *name=0, WFlags Flags=0 );
+    KColumnsView( /*bool R = false,*/ TQWidget *parent=0, const char *name=0, WFlags Flags=0 );
     virtual ~KColumnsView();
 
   public: // drawing

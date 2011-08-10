@@ -78,7 +78,7 @@ public:
 	virtual void defaults();
 	virtual void configChanged();
 
-	KCMLirc(TQWidget *tqparent = 0, const char *name = 0, TQStringList args = TQStringList());
+	KCMLirc(TQWidget *parent = 0, const char *name = 0, TQStringList args = TQStringList());
 	~KCMLirc();
 };
 

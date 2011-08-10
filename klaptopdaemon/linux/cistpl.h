@@ -353,7 +353,7 @@ typedef struct cistpl_bar_t {
 typedef struct cistpl_config_t {
     u_char	last_idx;
     u_int	base;
-    u_int	rtqmask[4];
+    u_int	rmask[4];
     u_char	subtuples;
 } cistpl_config_t;
 

@@ -39,15 +39,15 @@
 
 class KTimerJobItem : public TQListViewItem {
 public:
-    KTimerJobItem( KTimerJob *job, TQListView *tqparent )
-        : TQListViewItem( tqparent ) {
+    KTimerJobItem( KTimerJob *job, TQListView *parent )
+        : TQListViewItem( parent ) {
         m_job = job;
         m_error = false;
         update();
     };
 
-    KTimerJobItem( KTimerJob *job, TQListView *tqparent, TQListViewItem *after )
-        : TQListViewItem( tqparent, after ) {
+    KTimerJobItem( KTimerJob *job, TQListView *parent, TQListViewItem *after )
+        : TQListViewItem( parent, after ) {
         m_job = job;
         m_error = false;
         update();
@@ -97,8 +97,8 @@ struct KTimerPrefPrivate
     TQPtrList<KTimerJob> jobs;
 };
 
-KTimerPref::KTimerPref( TQWidget *tqparent, const char *name )
-    : PrefWidget( tqparent, name )
+KTimerPref::KTimerPref( TQWidget *parent, const char *name )
+    : PrefWidget( parent, name )
 {
     d = new KTimerPrefPrivate;
 
@@ -306,8 +306,8 @@ struct KTimerJobPrivate {
 };
 
 
-KTimerJob::KTimerJob( TQObject *tqparent, const char *name )
-    : TQObject( tqparent, name )
+KTimerJob::KTimerJob( TQObject *parent, const char *name )
+    : TQObject( parent, name )
 {
     d = new KTimerJobPrivate;
 

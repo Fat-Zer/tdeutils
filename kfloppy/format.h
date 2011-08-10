@@ -69,7 +69,7 @@ Q_OBJECT
   TQ_OBJECT
 
 public:
-	KFAction(TQObject *tqparent = 0L);
+	KFAction(TQObject *parent = 0L);
 	virtual ~KFAction();
 	
 public slots:
@@ -119,7 +119,7 @@ Q_OBJECT
   TQ_OBJECT
 
 public:
-	KFActionQueue(TQObject *tqparent = 0L);
+	KFActionQueue(TQObject *parent = 0L);
 	virtual ~KFActionQueue();
 	
 	/**
@@ -179,7 +179,7 @@ Q_OBJECT
   TQ_OBJECT
 
 public:
-	FloppyAction(TQObject *tqparent = 0L);
+	FloppyAction(TQObject *parent = 0L);
 	
 	/**
 	 * Kills the running process, if one exists.
@@ -252,7 +252,7 @@ protected:
 class FDFormat : public FloppyAction
 {
 public:
-	FDFormat(TQObject *tqparent = 0L);
+	FDFormat(TQObject *parent = 0L);
 	
 	virtual void exec();
 
@@ -288,7 +288,7 @@ protected:
 class DDZeroOut : public FloppyAction
 {
 public:
-    DDZeroOut(TQObject *tqparent = 0L);
+    DDZeroOut(TQObject *parent = 0L);
 
     virtual void exec();
 
@@ -318,7 +318,7 @@ protected:
 class FATFilesystem : public FloppyAction
 {
 public:
-	FATFilesystem(TQObject *tqparent = 0L);
+	FATFilesystem(TQObject *parent = 0L);
 	
 	virtual void exec();
 	
@@ -349,7 +349,7 @@ protected:
 class Ext2Filesystem : public FloppyAction
 {
 public:
-	Ext2Filesystem(TQObject *tqparent = 0L);
+	Ext2Filesystem(TQObject *parent = 0L);
 	
 	virtual void exec();
 	
@@ -377,7 +377,7 @@ protected:
 class UFSFilesystem : public FloppyAction
 {
 public:
-	UFSFilesystem(TQObject *tqparent = 0L);
+	UFSFilesystem(TQObject *parent = 0L);
 	
 	virtual void exec();
 	
@@ -399,7 +399,7 @@ protected:
 class MinixFilesystem : public FloppyAction
 {
 public:
-	MinixFilesystem(TQObject *tqparent = 0L);
+	MinixFilesystem(TQObject *parent = 0L);
 	
 	virtual void exec();
 	

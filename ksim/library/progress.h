@@ -42,9 +42,9 @@ namespace KSim
        * @param maxValue is the maximum value
        * that the progress bar will show
        * @param label is the text that will be displayed
-       * @param tqparent is the tqparent widget
+       * @param parent is the parent widget
        */
-      Progress(int maxValue, TQWidget *tqparent,
+      Progress(int maxValue, TQWidget *parent,
          const char *name = 0, WFlags fl = 0);
       /**
        * constructs a KSim::Progress
@@ -53,10 +53,10 @@ namespace KSim
        * that the progress bar will show
        * @param type is the theme type
        * @param label is the text that will be displayed
-       * @param tqparent is the tqparent widget
+       * @param parent is the parent widget
        */
       Progress(int maxValue, int type, const TQString &label,
-           TQWidget *tqparent, const char *name = 0, WFlags fl = 0);
+           TQWidget *parent, const char *name = 0, WFlags fl = 0);
       /**
        * constructs a KSim::Progress
        *
@@ -65,10 +65,10 @@ namespace KSim
        * @param type is the theme type
        * @param label is the text that will be displayed
        * @param value is the initial value to be displayed
-       * @param tqparent is the tqparent widget
+       * @param parent is the parent widget
        */
       Progress(int maxValue, int type, const TQString &label,
-           int value, TQWidget *tqparent, const char *name = 0,
+           int value, TQWidget *parent, const char *name = 0,
            WFlags fl = 0);
       /**
        * constructs a KSim::Progress
@@ -76,9 +76,9 @@ namespace KSim
        * @param maxValue is the maximum value
        * that the progress bar will show
        * @param type is the theme type
-       * @param tqparent is the tqparent widget
+       * @param parent is the parent widget
        */
-      Progress(int maxValue, int type, TQWidget *tqparent,
+      Progress(int maxValue, int type, TQWidget *parent,
            const char *name = 0, WFlags fl = 0);
       /**
        * constructs a KSim::Progress
@@ -87,11 +87,11 @@ namespace KSim
        * that the progress bar will show
        * @param type is the theme type
        * @param progressType is onr of Progress::ProgressType
-       * @param tqparent is the tqparent widget
+       * @param parent is the parent widget
        */
       Progress(int maxValue, int type,
            ProgressType progressType,
-           TQWidget *tqparent, const char *name = 0,
+           TQWidget *parent, const char *name = 0,
            WFlags fl = 0);
       /**
        * destructs KSim::Chart

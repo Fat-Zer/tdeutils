@@ -611,7 +611,7 @@ TQString required;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////   MD5
 
-Md5Widget::Md5Widget(TQWidget *tqparent, const char *name,KURL url):KDialogBase( tqparent, name, true,i18n("MD5 Checksum"),Apply | Close)
+Md5Widget::Md5Widget(TQWidget *parent, const char *name,KURL url):KDialogBase( parent, name, true,i18n("MD5 Checksum"),Apply | Close)
 {
         setButtonApply(i18n("Compare MD5 with Clipboard"));
         mdSum=TQString();

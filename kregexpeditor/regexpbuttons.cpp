@@ -34,8 +34,8 @@
 #include <tqsignalmapper.h>
 #include "regexpconverter.h"
 
-RegExpButtons::RegExpButtons( TQWidget *tqparent, const char *name )
-  : TQDockWindow( TQDockWindow::InDock, tqparent, name), _keepMode(false)
+RegExpButtons::RegExpButtons( TQWidget *parent, const char *name )
+  : TQDockWindow( TQDockWindow::InDock, parent, name), _keepMode(false)
 {
   TQBoxLayout *tqlayout = boxLayout();
 

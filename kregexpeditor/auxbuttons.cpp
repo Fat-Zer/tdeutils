@@ -32,8 +32,8 @@
 #include <tqtoolbutton.h>
 #include "util.h"
 
-AuxButtons::AuxButtons( TQWidget* tqparent, const char* name = 0)
-  :TQDockWindow( TQDockWindow::InDock, tqparent, name)
+AuxButtons::AuxButtons( TQWidget* parent, const char* name = 0)
+  :TQDockWindow( TQDockWindow::InDock, parent, name)
 {
   TQBoxLayout* tqlayout = boxLayout();
 

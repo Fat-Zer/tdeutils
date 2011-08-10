@@ -27,8 +27,8 @@
 using namespace KSim::Snmp;
 
 ProbeResultDialog::ProbeResultDialog( const HostConfig &hostConfig, const ProbeDialog::ProbeResultList &probeResults, 
-                                      TQWidget *tqparent, const char *name )
-        : ProbeResultDialogBase( tqparent, name )
+                                      TQWidget *parent, const char *name )
+        : ProbeResultDialogBase( parent, name )
 {
     info->setText( i18n( "Results of scanning host %1:" ).tqarg( hostConfig.name ) );
 

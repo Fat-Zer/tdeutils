@@ -64,8 +64,8 @@ extern "C" {
 #define SONYPI_IOCGBLUE         _IOR('v', 8, __u8)
 #define SONYPI_IOCSBLUE         _IOW('v', 9, __u8)
 
-KVaioDriverInterface::KVaioDriverInterface(TQObject *tqparent)
-    : TQObject(tqparent),
+KVaioDriverInterface::KVaioDriverInterface(TQObject *parent)
+    : TQObject(parent),
       mFd(0),
       mNotifier(0)
 {

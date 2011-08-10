@@ -28,16 +28,16 @@
 #include "concwidget.h"
 #include <tqpainter.h>
 
-LookAheadWidget::LookAheadWidget( RegExpEditorWindow* editorWindow, RegExpType tp, TQWidget* tqparent, const char* name )
-  :SingleContainerWidget(editorWindow, tqparent, name ? name : "LookAheadWidget" ), _tp(tp)
+LookAheadWidget::LookAheadWidget( RegExpEditorWindow* editorWindow, RegExpType tp, TQWidget* parent, const char* name )
+  :SingleContainerWidget(editorWindow, parent, name ? name : "LookAheadWidget" ), _tp(tp)
 {
   _child = new ConcWidget( editorWindow, this );
   init();
 }
 
 LookAheadWidget::LookAheadWidget( LookAheadRegExp* regexp, RegExpEditorWindow* editorWindow, RegExpType tp,
-                                  TQWidget* tqparent, const char* name )
-  :SingleContainerWidget( editorWindow, tqparent, name ? name : "LookAheadWidget" ), _tp(tp)
+                                  TQWidget* parent, const char* name )
+  :SingleContainerWidget( editorWindow, parent, name ? name : "LookAheadWidget" ), _tp(tp)
 {
   RegExpWidget* child = WidgetFactory::createWidget( regexp->child(), editorWindow, this );
   if ( ! (_child = dynamic_cast<ConcWidget*>( child ) ) )

@@ -45,8 +45,8 @@
 #include <tqtooltip.h>
 extern void wake_laptop_daemon();
 
-PowerConfig::PowerConfig (TQWidget * tqparent, const char *name)
-  : KCModule(tqparent, name),
+PowerConfig::PowerConfig (TQWidget * parent, const char *name)
+  : KCModule(parent, name),
     nopowerBox(0),
     nopowerStandby(0),
     nopowerSuspend(0),

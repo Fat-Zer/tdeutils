@@ -40,7 +40,7 @@ class KDE_EXPORT KRegExpEditorGUI  :public TQWidget, public KRegExpEditorInterfa
   TQ_OBJECT
   TQ_PROPERTY( TQString regexp READ regExp WRITE setRegExp )
 public:
-  KRegExpEditorGUI( TQWidget *tqparent, const char *name = 0,
+  KRegExpEditorGUI( TQWidget *parent, const char *name = 0,
 	            const TQStringList & = TQStringList() );
   virtual TQString regExp() const;
 
@@ -70,7 +70,7 @@ class KDE_EXPORT KRegExpEditorGUIDialog : public KDialogBase, public KRegExpEdit
   TQ_OBJECT
     TQ_PROPERTY( TQString regexp READ regExp WRITE setRegExp )
 public:
-    KRegExpEditorGUIDialog( TQWidget *tqparent, const char *name, const TQStringList &args );
+    KRegExpEditorGUIDialog( TQWidget *parent, const char *name, const TQStringList &args );
 
     virtual TQString regExp() const;
 

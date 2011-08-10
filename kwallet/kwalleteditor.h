@@ -39,7 +39,7 @@ class KWalletEditor : public KMainWindow {
   TQ_OBJECT
 
 	public:
-		KWalletEditor(const TQString& wallet, bool isPath, TQWidget *tqparent = 0, const char* name = 0);
+		KWalletEditor(const TQString& wallet, bool isPath, TQWidget *parent = 0, const char* name = 0);
 		virtual ~KWalletEditor();
 
 		bool isOpen() const { return _w != 0L; }

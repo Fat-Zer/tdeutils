@@ -93,7 +93,7 @@ void MonitorConfig::save( KConfigBase &config ) const
         config.writeEntry( "DisplayCurrentValueInline", displayCurrentValueInline );
 }
 
-TQWidget *MonitorConfig::createMonitorWidget( TQWidget *tqparent, const char *name )
+TQWidget *MonitorConfig::createMonitorWidget( TQWidget *parent, const char *name )
 {
     TQWidget *w;
 
@@ -103,9 +103,9 @@ TQWidget *MonitorConfig::createMonitorWidget( TQWidget *tqparent, const char *na
         return 0;
 
     if ( display == Label )
-        w = new LabelMonitor( *this, tqparent, name );
+        w = new LabelMonitor( *this, parent, name );
     else
-        w = new ChartMonitor( *this, tqparent, name );
+        w = new ChartMonitor( *this, parent, name );
 
     Monitor *monitor = new Monitor( host, id, refresh, TQT_TQOBJECT(w) );
     TQObject::connect( monitor, TQT_SIGNAL( newData( const Value & ) ),

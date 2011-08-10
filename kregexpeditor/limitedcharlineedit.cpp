@@ -25,8 +25,8 @@
 class Validator :public TQValidator
 {
 public:
-  Validator( LimitedCharLineEdit::Mode mode, TQWidget* tqparent )
-    :TQValidator( TQT_TQOBJECT(tqparent), "Validator" ), _mode(mode)
+  Validator( LimitedCharLineEdit::Mode mode, TQWidget* parent )
+    :TQValidator( TQT_TQOBJECT(parent), "Validator" ), _mode(mode)
   {
   }
 
@@ -56,8 +56,8 @@ void LimitedCharLineEdit::keyPressEvent ( TQKeyEvent *event )
     focusNextPrevChild(true);
 }
 
-LimitedCharLineEdit::LimitedCharLineEdit( Mode mode, TQWidget* tqparent, const char* name )
-	:TQLineEdit( tqparent, name ), _mode(mode)
+LimitedCharLineEdit::LimitedCharLineEdit( Mode mode, TQWidget* parent, const char* name )
+	:TQLineEdit( parent, name ), _mode(mode)
 {
   if ( mode == NORMAL )
     _count = 1;

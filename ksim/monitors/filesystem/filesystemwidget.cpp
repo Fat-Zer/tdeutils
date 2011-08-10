@@ -85,8 +85,8 @@ void FilesystemWidget::Filesystem::setValue(int value)
   m_display->setValue(value);
 }
 
-FilesystemWidget::FilesystemWidget(TQWidget *tqparent, const char *name)
-   : TQWidget(tqparent, name)
+FilesystemWidget::FilesystemWidget(TQWidget *parent, const char *name)
+   : TQWidget(parent, name)
 {
   m_list.setAutoDelete(true);
   m_layout = new TQVBoxLayout(this);

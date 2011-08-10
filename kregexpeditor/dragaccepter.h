@@ -30,7 +30,7 @@ class DragAccepter :public RegExpWidget
   friend class MultiContainerWidget;
 
 public:
-  DragAccepter(RegExpEditorWindow* editorWindow, RegExpWidget *tqparent,
+  DragAccepter(RegExpEditorWindow* editorWindow, RegExpWidget *parent,
                const char *name = 0);
   TQSize tqsizeHint() const;
 	virtual RegExp* regExp() const;

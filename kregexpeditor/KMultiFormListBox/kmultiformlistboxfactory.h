@@ -47,23 +47,23 @@ public:
      a subclass of this class. This instance will be owned by the caller of
      this function.
 
-     @param tqparent A pointer to the tqparent of this KMultiFormListBoxEntry widget
+     @param parent A pointer to the parent of this KMultiFormListBoxEntry widget
      returned.
      @return A fresh @ref KMultiFormListBoxEntry to be used in an instance of the
      @ref KMultiFormListBox class.
   **/
-  virtual KMultiFormListBoxEntry *create(TQWidget *tqparent) = 0;
+  virtual KMultiFormListBoxEntry *create(TQWidget *parent) = 0;
 
   /**
      This method is used to get a separator between the elements in an @ref
      KMultiFormListBox. The widget returned from this method will be owned by the
      caller.
 
-     @param tqparent A pointer to the tqparent of the TQWidget returned.
+     @param parent A pointer to the parent of the TQWidget returned.
      @return A widget which must be used as a separator between the @ref
      KMultiFormListBoxEntry elements in an @ref KMultiFormListBox.
   **/
-  virtual TQWidget *separator(TQWidget *tqparent);
+  virtual TQWidget *separator(TQWidget *parent);
 };
 
 #endif /* kmultiformlistbox */

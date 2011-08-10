@@ -55,8 +55,8 @@
 
 extern void wake_laptop_daemon();
 
-SonyConfig::SonyConfig(TQWidget * tqparent, const char *name)
-  : KCModule(tqparent, name)
+SonyConfig::SonyConfig(TQWidget * parent, const char *name)
+  : KCModule(parent, name)
 {
     KGlobal::locale()->insertCatalogue("klaptopdaemon"); // For translation of klaptopdaemon messages
 

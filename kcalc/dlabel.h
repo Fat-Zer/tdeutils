@@ -41,7 +41,7 @@ Q_OBJECT
   TQ_OBJECT
 
 public:
-	DispLogic(TQWidget *tqparent, const char *name,
+	DispLogic(TQWidget *parent, const char *name,
 		  KActionCollection *coll);
 	~DispLogic();
 

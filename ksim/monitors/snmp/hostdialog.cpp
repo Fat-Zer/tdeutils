@@ -35,15 +35,15 @@
 
 using namespace KSim::Snmp;
 
-HostDialog::HostDialog( TQWidget *tqparent, const char *name )
-    : HostDialogBase( tqparent, name )
+HostDialog::HostDialog( TQWidget *parent, const char *name )
+    : HostDialogBase( parent, name )
 {
     init();
     port->setValue( 161 );
 }
 
-HostDialog::HostDialog( const HostConfig &src, TQWidget *tqparent, const char *name )
-    : HostDialogBase( tqparent, name )
+HostDialog::HostDialog( const HostConfig &src, TQWidget *parent, const char *name )
+    : HostDialogBase( parent, name )
 {
     init( src );
 }

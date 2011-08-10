@@ -29,7 +29,7 @@ class AuxButtons :public TQDockWindow
   TQ_OBJECT
 
 public:
-    AuxButtons( TQWidget* tqparent, const char* name );
+    AuxButtons( TQWidget* parent, const char* name );
 
 signals:
     void undo();

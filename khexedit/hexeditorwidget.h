@@ -71,7 +71,7 @@ class CHexEditorWidget : public TQWidget
     };
 
   public:
-    CHexEditorWidget( TQWidget *tqparent = 0, const char *name = 0 );
+    CHexEditorWidget( TQWidget *parent = 0, const char *name = 0 );
     ~CHexEditorWidget( void );
 
     void initialize( void );

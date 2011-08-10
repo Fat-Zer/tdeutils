@@ -74,8 +74,8 @@
 #include "kgpglibrary.h"
 #include "kgpgwizard.h"
 
-MyView::MyView( TQWidget *tqparent, const char *name )
-                : TQLabel( tqparent, name )
+MyView::MyView( TQWidget *parent, const char *name )
+                : TQLabel( parent, name )
 {
         setBackgroundMode( X11ParentRelative );
 	openTasks=0;
@@ -771,8 +771,8 @@ void  MyView::help()
         kapp->invokeHelp(0,"kgpg");
 }
 
-kgpgapplet::kgpgapplet(TQWidget *tqparent, const char *name)
-                : KSystemTray(tqparent,name)
+kgpgapplet::kgpgapplet(TQWidget *parent, const char *name)
+                : KSystemTray(parent,name)
 {
         w=new MyView(this);
         w->show();
@@ -782,7 +782,7 @@ kgpgapplet::kgpgapplet(TQWidget *tqparent, const char *name)
 	KgpgSignClipboard = new KAction(i18n("&Sign/Verify Clipboard"), "signature", 0,TQT_TQOBJECT(w), TQT_SLOT(clipSign()),actionCollection(),"clip_sign");
         KAction *KgpgOpenEditor;
 	if (KGpgSettings::leftClick()==KGpgSettings::EnumLeftClick::KeyManager)
-	KgpgOpenEditor = new KAction(i18n("&Open Editor"), "edit", 0,TQT_TQOBJECT(tqparent), TQT_SLOT(slotOpenEditor()),actionCollection(),"kgpg_editor");
+	KgpgOpenEditor = new KAction(i18n("&Open Editor"), "edit", 0,TQT_TQOBJECT(parent), TQT_SLOT(slotOpenEditor()),actionCollection(),"kgpg_editor");
 	else
 	KgpgOpenEditor = new KAction(i18n("&Open Key Manager"), "kgpg", 0,TQT_TQOBJECT(this), TQT_SLOT(slotOpenKeyManager()),actionCollection(),"kgpg_editor");
 

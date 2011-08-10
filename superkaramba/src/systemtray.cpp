@@ -35,8 +35,8 @@
 
 #include <X11/Xlib.h>
 
-Systemtray::Systemtray(TQWidget* tqparent)
-  : TQWidget(tqparent,0,0)
+Systemtray::Systemtray(TQWidget* parent)
+  : TQWidget(parent,0,0)
 {
   setBackgroundOrigin(ParentOrigin);
   setBackgroundMode(FixedPixmap);

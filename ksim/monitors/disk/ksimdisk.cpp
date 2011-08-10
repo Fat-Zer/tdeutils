@@ -103,8 +103,8 @@ void DiskPlugin::showAbout()
   KAboutApplication(&aboutData).exec();
 }
 
-DiskView::DiskView(KSim::PluginObject *tqparent, const char *name)
-   : KSim::PluginView(tqparent, name)
+DiskView::DiskView(KSim::PluginObject *parent, const char *name)
+   : KSim::PluginView(parent, name)
 {
 #ifdef Q_OS_LINUX
   m_bLinux24 = true;
@@ -472,8 +472,8 @@ void DiskView::cleanup()
   m_addAll = false;
 }
 
-DiskConfig::DiskConfig(KSim::PluginObject *tqparent, const char *name)
-   : KSim::PluginPage(tqparent, name)
+DiskConfig::DiskConfig(KSim::PluginObject *parent, const char *name)
+   : KSim::PluginPage(parent, name)
 {
   m_layout = new TQVBoxLayout(this);
   m_layout->setSpacing(6);

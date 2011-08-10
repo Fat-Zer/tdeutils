@@ -47,7 +47,7 @@ class BatteryConfig : public KCModule
   Q_OBJECT
   TQ_OBJECT
 public:
-  BatteryConfig( TQWidget *tqparent=0, const char* name=0);
+  BatteryConfig( TQWidget *parent=0, const char* name=0);
   ~BatteryConfig( );     
 
   void save( void );

@@ -38,8 +38,8 @@ static const char * const probeIdentifiers[] =
     0
 };
 
-ProbeDialog::ProbeDialog( const HostConfig &hostConfig, TQWidget *tqparent, const char *name )
-    : KProgressDialog( tqparent, name, i18n( "SNMP Host Probe" ), TQString(), true /* modal */ ),
+ProbeDialog::ProbeDialog( const HostConfig &hostConfig, TQWidget *parent, const char *name )
+    : KProgressDialog( parent, name, i18n( "SNMP Host Probe" ), TQString(), true /* modal */ ),
       m_host( hostConfig ), m_currentMonitor( 0 ), m_canceled( false )
 {
     setLabel( i18n( "Probing for common object identifiers..." ) );

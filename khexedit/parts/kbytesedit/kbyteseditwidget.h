@@ -47,7 +47,7 @@ class KBytesEditWidget : public TQWidget, public KHE::BytesEditInterface,
 
   public:
     /** constructor API as demanded by KGenericFactory */
-    KBytesEditWidget( TQWidget *tqparent, const char *name, const TQStringList & = TQStringList() );
+    KBytesEditWidget( TQWidget *parent, const char *name, const TQStringList & = TQStringList() );
 
   public: // bytesedit interface
     /** hands over to the editor a new byte array.

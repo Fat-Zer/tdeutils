@@ -37,7 +37,7 @@ public:
         /**
          * Initialize the class
          */
-        KgpgLibrary(TQWidget *tqparent=0,bool pgpExtension=false);
+        KgpgLibrary(TQWidget *parent=0,bool pgpExtension=false);
         ~KgpgLibrary();
 
         KURL::List urlselecteds;

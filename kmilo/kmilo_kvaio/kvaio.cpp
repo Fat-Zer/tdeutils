@@ -55,12 +55,12 @@ extern "C" {
 }
 
 
-KVaio::KVaio(KMiloKVaio *tqparent, const char* name)
-    : TQObject(tqparent, name),
+KVaio::KVaio(KMiloKVaio *parent, const char* name)
+    : TQObject(parent, name),
       mDisp(0),
       mTimer (new TQTimer (this) )
 {
-    mytqparent = tqparent;
+    myparent = parent;
     
     mDriver = new KVaioDriverInterface(this);
 
@@ -176,7 +176,7 @@ void KVaio::slotVaioEvent(int event)
 
 bool KVaio::showTextMsg(const TQString& msg)
 {
-    return mytqparent->showTextMsg(msg);    
+    return myparent->showTextMsg(msg);    
 }
 
 
@@ -184,7 +184,7 @@ bool KVaio::showTextMsg(const TQString& msg)
 bool KVaio::showProgressMsg(const TQString& msg, int value)
 {
     m_progress = value;
-    return mytqparent->showProgressMsg(msg,value);
+    return myparent->showProgressMsg(msg,value);
 }
 
 void KVaio::blankScreen()

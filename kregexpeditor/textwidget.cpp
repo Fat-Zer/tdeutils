@@ -24,16 +24,16 @@
 #include "selectablelineedit.h"
 #include <tqlayout.h>
 
-TextWidget::TextWidget(RegExpEditorWindow* editorWindow, TQWidget *tqparent,
+TextWidget::TextWidget(RegExpEditorWindow* editorWindow, TQWidget *parent,
                        const char *name)
-  :RegExpWidget(editorWindow, tqparent, name)
+  :RegExpWidget(editorWindow, parent, name)
 {
   init( TQString::fromLocal8Bit("") );
 }
 
 TextWidget::TextWidget( TextRegExp* regexp,  RegExpEditorWindow* editorWindow,
-            TQWidget* tqparent, const char* name )
-  : RegExpWidget( editorWindow, tqparent, name )
+            TQWidget* parent, const char* name )
+  : RegExpWidget( editorWindow, parent, name )
 {
   init(regexp->text());
 }
@@ -56,11 +56,11 @@ void TextWidget::init( const TQString& txt )
 
 void TextWidget::slotUpdate()
 {
-  // I need to force the tqparent to tqrepaint, as the size change of this
-  // widget may not be enough for the tqparent to change size, and in that
-  // case the tqparent would not tqrepaint, and the text widget would not be
+  // I need to force the parent to tqrepaint, as the size change of this
+  // widget may not be enough for the parent to change size, and in that
+  // case the parent would not tqrepaint, and the text widget would not be
   // resized.
-  TQWidget *p = TQT_TQWIDGET(tqparent());
+  TQWidget *p = TQT_TQWIDGET(parent());
   if (p)
     p->tqrepaint();
   _editorWindow->updateContent( this );

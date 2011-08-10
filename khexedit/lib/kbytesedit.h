@@ -70,7 +70,7 @@ class KHEXEDIT_EXPORT KBytesEdit : public KHexEdit
       * @param S size of used memory
       * @param RS_ real size of the memory
       * @param KM keep the memory on resize (RS_ is then the maximum size)
-      * @param Parent tqparent widget
+      * @param Parent parent widget
       * @param Name name for this widget
       * @param F flags
       */

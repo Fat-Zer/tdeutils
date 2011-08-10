@@ -19,8 +19,8 @@
 #include "dragaccepter.h"
 
 MultiContainerWidget::MultiContainerWidget( RegExpEditorWindow* editorWindow,
-                                            TQWidget* tqparent, const char* name)
-  :RegExpWidget( editorWindow, tqparent, name )
+                                            TQWidget* parent, const char* name)
+  :RegExpWidget( editorWindow, parent, name )
 {
 }
 
@@ -150,7 +150,7 @@ bool MultiContainerWidget::updateSelection(bool parentSelected)
     RegExpWidget* child = _tqchildren.at(k);
     bool select;
     if ( k == 0 || k == (int)_tqchildren.count()-1) {
-      // The elements at the border is only selected if the tqparent is selected.
+      // The elements at the border is only selected if the parent is selected.
       select = _isSelected;
     }
     else {

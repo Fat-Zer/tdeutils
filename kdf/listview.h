@@ -31,7 +31,7 @@ class CListView : public KListView
   TQ_OBJECT
 
   public:
-    CListView( TQWidget *tqparent=0, const char *name=0, int visibleItem=10 );
+    CListView( TQWidget *parent=0, const char *name=0, int visibleItem=10 );
     
     void setVisibleItem( int visibleItem, bool updateSize=true );
     virtual TQSize tqsizeHint( void ) const; 

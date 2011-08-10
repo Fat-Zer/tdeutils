@@ -41,10 +41,10 @@ class TQCheckBox;
 class CharactersWidget :public RegExpWidget
 {
 public:
-    CharactersWidget(RegExpEditorWindow* editorWindow, TQWidget *tqparent,
+    CharactersWidget(RegExpEditorWindow* editorWindow, TQWidget *parent,
                      const char *label = 0);
     CharactersWidget( TextRangeRegExp* regexp, RegExpEditorWindow* editorWindow,
-                      TQWidget* tqparent, const char* name = 0 );
+                      TQWidget* parent, const char* name = 0 );
     ~CharactersWidget();
     virtual TQSize tqsizeHint() const;
 	virtual RegExp* regExp() const;
@@ -72,7 +72,7 @@ private:
 class SingleEntry :public KMultiFormListBoxEntry
 {
 public:
-    SingleEntry(TQWidget* tqparent, const char* name = 0 );
+    SingleEntry(TQWidget* parent, const char* name = 0 );
     TQString text() const;
     void setText( TQString text );
     bool isEmpty() const;
@@ -87,7 +87,7 @@ private:
 class RangeEntry :public KMultiFormListBoxEntry
 {
 public:
-    RangeEntry(TQWidget* tqparent, const char* name = 0 );
+    RangeEntry(TQWidget* parent, const char* name = 0 );
     TQString fromText() const;
     TQString toText() const;
     void setFrom( TQString text );
@@ -103,7 +103,7 @@ private:
 class SingleFactory :public KMultiFormListBoxFactory
 {
 public:
-    KMultiFormListBoxEntry *create(TQWidget *tqparent) { return new SingleEntry( tqparent ); }
+    KMultiFormListBoxEntry *create(TQWidget *parent) { return new SingleEntry( parent ); }
     TQWidget *separator( TQWidget* ) { return 0; }
 };
 
@@ -113,7 +113,7 @@ public:
 class RangeFactory :public KMultiFormListBoxFactory
 {
 public:
-    KMultiFormListBoxEntry *create(TQWidget *tqparent) { return new RangeEntry( tqparent ); }
+    KMultiFormListBoxEntry *create(TQWidget *parent) { return new RangeEntry( parent ); }
     TQWidget *separator( TQWidget* ) { return 0; }
 };
 
@@ -125,7 +125,7 @@ class CharacterEdits : public KDialogBase
     Q_OBJECT
   TQ_OBJECT
 public:
-    CharacterEdits(TQWidget *tqparent = 0, const char *name = 0);
+    CharacterEdits(TQWidget *parent = 0, const char *name = 0);
 
 public slots:
     int exec( TextRangeRegExp* regexp );

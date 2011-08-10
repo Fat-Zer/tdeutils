@@ -37,7 +37,7 @@ class CHexToolWidget : public TQFrame
   TQ_OBJECT
 
   public:
-    CHexToolWidget( TQWidget *tqparent = 0, const char *name = 0 );
+    CHexToolWidget( TQWidget *parent = 0, const char *name = 0 );
     ~CHexToolWidget( void );
 
     void writeConfiguration( KConfig &config );

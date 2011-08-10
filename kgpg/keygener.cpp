@@ -34,7 +34,7 @@
 #include "keygener.h"
 
 ///////////////////////   main window
-keyGenerate::keyGenerate(TQWidget *tqparent, const char *name):KDialogBase( tqparent, name, true,i18n("Key Generation"),Apply | Ok | Cancel)
+keyGenerate::keyGenerate(TQWidget *parent, const char *name):KDialogBase( parent, name, true,i18n("Key Generation"),Apply | Ok | Cancel)
 {
         expert=false;
         setButtonApply(i18n("Expert Mode"));

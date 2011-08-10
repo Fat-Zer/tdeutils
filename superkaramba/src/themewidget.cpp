@@ -25,8 +25,8 @@
 #include <tqlabel.h>
 #include <tqlayout.h>
 
-ThemeWidget::ThemeWidget(TQWidget *tqparent, const char *name)
-  : ThemeWidgetLayout(tqparent, name), m_themeFile(0)
+ThemeWidget::ThemeWidget(TQWidget *parent, const char *name)
+  : ThemeWidgetLayout(parent, name), m_themeFile(0)
 {
   running->setText("");
   setDescriptionMaxHeight();

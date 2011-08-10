@@ -108,7 +108,7 @@ def widgetUpdated(widget):
 
 		#f.close()
 
-		#karamba.createWidgetMask(widget, theme_path + "pics/tqmask.png")
+		#karamba.createWidgetMask(widget, theme_path + "pics/mask.png")
 
 		linkePupille = karamba.createImage(widget, 15, 30, theme_path + "pics/pupille.png")
 		rechtePupille = karamba.createImage(widget, 100, 30, theme_path + "pics/pupille.png")	

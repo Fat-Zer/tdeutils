@@ -37,7 +37,7 @@ namespace KSim
 //    TQ_OBJECT
     K_DCOP
     public:
-      Sysinfo(KSim::Config *config, TQWidget *tqparent=0,
+      Sysinfo(KSim::Config *config, TQWidget *parent=0,
          const char *name=0, WFlags fl=0);
       ~Sysinfo();
 

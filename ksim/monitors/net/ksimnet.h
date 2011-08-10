@@ -45,7 +45,7 @@ class NetView : public KSim::PluginView
   Q_OBJECT
   TQ_OBJECT
   public:
-    NetView(KSim::PluginObject *tqparent, const char *name);
+    NetView(KSim::PluginObject *parent, const char *name);
     ~NetView();
 
     virtual void reparseConfig();

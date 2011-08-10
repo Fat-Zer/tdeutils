@@ -40,10 +40,10 @@
 class SensorViewItem : public TQCheckListItem
 {
   public:
-    SensorViewItem(TQListView *tqparent, const TQString &text1,
+    SensorViewItem(TQListView *parent, const TQString &text1,
        const TQString &text2, const TQString &text3,
        const TQString &text4)
-       : TQCheckListItem(tqparent, text1, CheckBox)
+       : TQCheckListItem(parent, text1, CheckBox)
     {
       setText(1, text2);
       setText(2, text3);
@@ -51,8 +51,8 @@ class SensorViewItem : public TQCheckListItem
     }
 };
 
-SensorsConfig::SensorsConfig(KSim::PluginObject *tqparent, const char *name)
-   : KSim::PluginPage(tqparent, name)
+SensorsConfig::SensorsConfig(KSim::PluginObject *parent, const char *name)
+   : KSim::PluginPage(parent, name)
 {
   m_layout = new TQGridLayout(this);
   m_layout->setSpacing(6);

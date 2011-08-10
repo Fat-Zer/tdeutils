@@ -47,7 +47,7 @@ class FloppyData : public KDialog
   TQ_OBJECT
 
 public:
-    FloppyData(TQWidget* tqparent = 0, const char * name = 0);
+    FloppyData(TQWidget* parent = 0, const char * name = 0);
     virtual ~FloppyData();
 
     /// Need to overload normal show() in order to mangle caption

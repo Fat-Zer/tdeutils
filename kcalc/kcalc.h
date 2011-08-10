@@ -64,7 +64,7 @@ class KCalculator : public KMainWindow
   TQ_OBJECT
 
 public:
-	KCalculator(TQWidget *tqparent = 0, const char *name = 0);
+	KCalculator(TQWidget *parent = 0, const char *name = 0);
 	~KCalculator();
 
 signals:
@@ -77,11 +77,11 @@ private:
 	void updateGeometry();
 	void setupMainActions(void);
 	void setupStatusbar(void);
-	TQWidget *setupNumericKeys(TQWidget *tqparent);
-	void setupLogicKeys(TQWidget *tqparent);
-	void setupScientificKeys(TQWidget *tqparent);
-	void setupStatisticKeys(TQWidget *tqparent);
-	void setupConstantsKeys(TQWidget *tqparent);
+	TQWidget *setupNumericKeys(TQWidget *parent);
+	void setupLogicKeys(TQWidget *parent);
+	void setupScientificKeys(TQWidget *parent);
+	void setupStatisticKeys(TQWidget *parent);
+	void setupConstantsKeys(TQWidget *parent);
 	void keyPressEvent(TQKeyEvent *e);
 	void keyReleaseEvent(TQKeyEvent *e);
 	void set_precision();

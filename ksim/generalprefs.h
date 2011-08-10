@@ -45,7 +45,7 @@ namespace KSim
     Q_OBJECT
   TQ_OBJECT
     public:
-      GeneralPrefs(TQWidget *tqparent, const char *name=0);
+      GeneralPrefs(TQWidget *parent, const char *name=0);
       ~GeneralPrefs();
 
     public slots:
@@ -68,7 +68,7 @@ namespace KSim
     Q_OBJECT
   TQ_OBJECT
     public:
-      ClockPrefs(TQWidget *tqparent, const char *name=0);
+      ClockPrefs(TQWidget *parent, const char *name=0);
       ~ClockPrefs();
 
     public slots:
@@ -86,7 +86,7 @@ namespace KSim
     Q_OBJECT
   TQ_OBJECT
     public:
-      UptimePrefs(TQWidget *tqparent, const char *name=0);
+      UptimePrefs(TQWidget *parent, const char *name=0);
       ~UptimePrefs();
 
     public slots:
@@ -121,7 +121,7 @@ namespace KSim
     Q_OBJECT
   TQ_OBJECT
     public:
-      MemoryPrefs(TQWidget *tqparent, const char *name=0);
+      MemoryPrefs(TQWidget *parent, const char *name=0);
       ~MemoryPrefs();
 
     public slots:
@@ -158,7 +158,7 @@ namespace KSim
     Q_OBJECT
   TQ_OBJECT
     public:
-      SwapPrefs(TQWidget *tqparent, const char *name=0);
+      SwapPrefs(TQWidget *parent, const char *name=0);
       ~SwapPrefs();
 
     public slots:

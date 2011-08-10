@@ -39,7 +39,7 @@ ArkFactory::~ArkFactory()
 }
 
 KParts::Part * ArkFactory::createPartObject( TQWidget *parentWidget,
-                  const char *widgetName, TQObject *tqparent,
+                  const char *widgetName, TQObject *parent,
                   const char *name, const char *classname,
                   const TQStringList &args )
 {
@@ -49,7 +49,7 @@ KParts::Part * ArkFactory::createPartObject( TQWidget *parentWidget,
     {
             readWrite = true;
     }
-    ArkPart* obj = new ArkPart( parentWidget, widgetName, tqparent, name,
+    ArkPart* obj = new ArkPart( parentWidget, widgetName, parent, name,
                                 args, readWrite );
         //kdDebug( 1601 ) << "classname is: " << TQCString( classname ) << endl;
         return obj;

@@ -27,7 +27,7 @@
 class ZeroWidget :public RegExpWidget
 {
 public:
-  ZeroWidget(TQString text, RegExpEditorWindow* editorWindow, TQWidget *tqparent,
+  ZeroWidget(TQString text, RegExpEditorWindow* editorWindow, TQWidget *parent,
              const char *name = 0);
   virtual void addNewChild(DragAccepter *accepter, RegExpWidget *child);
   virtual TQSize tqsizeHint() const;
@@ -51,7 +51,7 @@ private:
 class AnyCharWidget :public ZeroWidget
 {
 public:
-  AnyCharWidget(RegExpEditorWindow* editorWindow, TQWidget *tqparent,
+  AnyCharWidget(RegExpEditorWindow* editorWindow, TQWidget *parent,
                 const char *label = 0);
 
 	virtual RegExp* regExp() const;
@@ -68,7 +68,7 @@ public:
 class BegLineWidget : public ZeroWidget
 {
 public:
-  BegLineWidget(RegExpEditorWindow* editorWindow, TQWidget *tqparent,
+  BegLineWidget(RegExpEditorWindow* editorWindow, TQWidget *parent,
                 const char *name = 0);
 	virtual RegExp* regExp() const;
   virtual RegExpType type() const { return BEGLINE; }
@@ -84,7 +84,7 @@ public:
 class EndLineWidget : public ZeroWidget
 {
 public:
-  EndLineWidget(RegExpEditorWindow* editorWindow, TQWidget *tqparent,
+  EndLineWidget(RegExpEditorWindow* editorWindow, TQWidget *parent,
                 const char *name = 0);
 	virtual RegExp* regExp() const;
   virtual RegExpType type() const { return ENDLINE; }
@@ -99,7 +99,7 @@ public:
 class WordBoundaryWidget : public ZeroWidget
 {
 public:
-  WordBoundaryWidget(RegExpEditorWindow* editorWindow, TQWidget *tqparent,
+  WordBoundaryWidget(RegExpEditorWindow* editorWindow, TQWidget *parent,
                      const char *name = 0);
 	virtual RegExp* regExp() const;
   virtual RegExpType type() const { return WORDBOUNDARY; }
@@ -115,7 +115,7 @@ public:
 class NonWordBoundaryWidget : public ZeroWidget
 {
 public:
-  NonWordBoundaryWidget(RegExpEditorWindow* editorWindow, TQWidget *tqparent,
+  NonWordBoundaryWidget(RegExpEditorWindow* editorWindow, TQWidget *parent,
                         const char *name = 0);
 	virtual RegExp* regExp() const;
   virtual RegExpType type() const { return NONWORDBOUNDARY; }

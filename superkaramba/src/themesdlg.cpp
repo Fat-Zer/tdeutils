@@ -51,8 +51,8 @@
 #include <kio/job.h>
 #include <kprotocolinfo.h>
 
-ThemesDlg::ThemesDlg(TQWidget *tqparent, const char *name)
- : ThemesLayout(tqparent, name)
+ThemesDlg::ThemesDlg(TQWidget *parent, const char *name)
+ : ThemesLayout(parent, name)
 {
   populateListbox();
 #ifdef HAVE_KNEWSTUFF

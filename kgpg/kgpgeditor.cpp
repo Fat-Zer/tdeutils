@@ -53,7 +53,7 @@
 #include "listkeys.h"
 #include "kgpglibrary.h"
 
-KgpgApp::KgpgApp(TQWidget *tqparent, const char *name, WFlags f,KShortcut goHome,bool mainWindow):KMainWindow(tqparent, name,f)
+KgpgApp::KgpgApp(TQWidget *parent, const char *name, WFlags f,KShortcut goHome,bool mainWindow):KMainWindow(parent, name,f)
 {
 	isMainWindow=mainWindow;
 	textEncoding=TQString();

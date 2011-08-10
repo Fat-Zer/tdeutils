@@ -196,12 +196,12 @@ void KwikDisk::updateDFDone()
          // Special root icon, normal user cant mount.
          //
          // 2000-01-23 Espen Sand
-         // Careful here: If the tqmask has not been defined we can
-         // not use TQPixmap::tqmask() because it returns 0 => segfault
+         // Careful here: If the mask has not been defined we can
+         // not use TQPixmap::mask() because it returns 0 => segfault
          //
-         if( pix->tqmask() != 0 )
+         if( pix->mask() != 0 )
          {
-            TQBitmap *bm = new TQBitmap(*(pix->tqmask()));
+            TQBitmap *bm = new TQBitmap(*(pix->mask()));
             if( bm != 0 )
             {
                TQPainter qp( bm );

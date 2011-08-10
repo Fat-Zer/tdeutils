@@ -32,7 +32,7 @@ class RegExpButtons :public TQDockWindow
   TQ_OBJECT
 
 public:
-    RegExpButtons( TQWidget *tqparent, const char *name = 0 );
+    RegExpButtons( TQWidget *parent, const char *name = 0 );
     void setFeatures( int features );
 
 protected:

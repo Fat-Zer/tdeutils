@@ -29,10 +29,10 @@ class AltnRegExp;
 class AltnWidget :public MultiContainerWidget
 {
 public:
-  AltnWidget( RegExpEditorWindow* editorWindow, TQWidget *tqparent,
+  AltnWidget( RegExpEditorWindow* editorWindow, TQWidget *parent,
               const char *label = 0);
   AltnWidget( AltnRegExp* regexp, RegExpEditorWindow* editorWindow,
-              TQWidget* tqparent, const char* name = 0);
+              TQWidget* parent, const char* name = 0);
   virtual void addNewChild(DragAccepter *accepter, RegExpWidget *child);
   virtual TQSize tqsizeHint() const;
 	virtual RegExp* regExp() const;

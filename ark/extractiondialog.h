@@ -46,7 +46,7 @@ class ExtractionDialog : public KDialogBase
 		/**
 		 * Constructor.
 		 */
-		ExtractionDialog( TQWidget *tqparent = 0, const char *name = 0,
+		ExtractionDialog( TQWidget *parent = 0, const char *name = 0,
 		                  bool enableSelected = true,
 		                  const KURL &defaultExtractionDir = KURL(),
 		                  const TQString &prefix = TQString(),

@@ -38,8 +38,8 @@ const uchar indexButtonBits[] = {
 };
 
 
-KMultiFormListBoxMultiVisible::KMultiFormListBoxMultiVisible(KMultiFormListBoxFactory *fact, TQWidget *tqparent, const char *name)
-  : TQScrollView(tqparent, name)
+KMultiFormListBoxMultiVisible::KMultiFormListBoxMultiVisible(KMultiFormListBoxFactory *fact, TQWidget *parent, const char *name)
+  : TQScrollView(parent, name)
 {
   factory = fact;
 

@@ -36,7 +36,7 @@ class ProbeResultDialog : public ProbeResultDialogBase
   TQ_OBJECT
 public:
     ProbeResultDialog( const HostConfig &hostConfig, const ProbeDialog::ProbeResultList &probeResults,
-                       TQWidget *tqparent, const char *name = 0 );
+                       TQWidget *parent, const char *name = 0 );
 
 private:
     void addResultItem( const ProbeDialog::ProbeResult &result );

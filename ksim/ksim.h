@@ -38,7 +38,7 @@ namespace KSim
   TQ_OBJECT
     public:
       PanelExtension( const TQString & configFile, Type type,
-         int actions, TQWidget * tqparent, const char * name);
+         int actions, TQWidget * parent, const char * name);
 
       ~PanelExtension();
 

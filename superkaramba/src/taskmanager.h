@@ -70,10 +70,10 @@ class Task: public TQObject
     TQ_PROPERTY( TQPixmap thumbnail READ thumbnail )
 
 public:
-    Task( WId win, TaskManager * tqparent, const char *name = 0 );
+    Task( WId win, TaskManager * parent, const char *name = 0 );
     virtual ~Task();
 
-    TaskManager* taskManager() const { return (TaskManager*) tqparent(); }
+    TaskManager* taskManager() const { return (TaskManager*) parent(); }
 
     WId window() const { return _win; }
 #ifdef KDE_3_2
@@ -382,7 +382,7 @@ class Startup: public TQObject
     TQ_PROPERTY( TQString icon READ icon )
 
 public:
-    Startup( const KStartupInfoId& id, const KStartupInfoData& data, TQObject * tqparent,
+    Startup( const KStartupInfoId& id, const KStartupInfoData& data, TQObject * parent,
         const char *name = 0);
     virtual ~Startup();
 
@@ -437,7 +437,7 @@ class TaskManager : public TQObject
     TQ_PROPERTY( int numberOfDesktops READ numberOfDesktops )
 
 public:
-    TaskManager( TQObject *tqparent = 0, const char *name = 0 );
+    TaskManager( TQObject *parent = 0, const char *name = 0 );
     virtual ~TaskManager();
 
     /**

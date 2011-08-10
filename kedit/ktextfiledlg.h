@@ -42,7 +42,7 @@ class KTextFileDialog : public KFileDialog
 
  public:
     KTextFileDialog(const TQString& startDir, const TQString& filter,
-		    TQWidget *tqparent, const char *name,
+		    TQWidget *parent, const char *name,
 		    bool modal);
 
     ~KTextFileDialog();
@@ -50,14 +50,14 @@ class KTextFileDialog : public KFileDialog
     static KURL getOpenURLwithEncoding(
          const TQString& startDir = TQString(),
 	 const TQString& filter= TQString(),
-	 TQWidget *tqparent= 0,
+	 TQWidget *parent= 0,
 	 const TQString& caption = TQString(),
 	 const TQString& encoding = TQString(),
 	 const TQString& buttonText = TQString());
 
     static KURL getSaveURLwithEncoding(
 	 const TQString& dir, const TQString& filter,
-	 TQWidget *tqparent,
+	 TQWidget *parent,
 	 const TQString& caption,
 	 const TQString& encoding = TQString());
 

@@ -34,7 +34,7 @@ class SearchBar: public KListViewSearchLine
 	Q_OBJECT
   TQ_OBJECT
 	public:
-		SearchBar( TQWidget* tqparent, KActionCollection* aC, const char * name = 0 );
+		SearchBar( TQWidget* parent, KActionCollection* aC, const char * name = 0 );
 		~SearchBar();
 };
 

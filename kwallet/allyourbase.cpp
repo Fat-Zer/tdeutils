@@ -38,8 +38,8 @@
 /****************
  *  KWalletFolderItem - ListView items to represent kwallet folders
  */
-KWalletFolderItem::KWalletFolderItem(KWallet::Wallet *w, TQListView* tqparent, const TQString &name, int entries)
-: KListViewItem(tqparent),_wallet(w),_name(name),_entries(entries) {
+KWalletFolderItem::KWalletFolderItem(KWallet::Wallet *w, TQListView* parent, const TQString &name, int entries)
+: KListViewItem(parent),_wallet(w),_name(name),_entries(entries) {
 	setText(0, TQString("%1 (%2)").tqarg(_name).tqarg(_entries));
 	setRenameEnabled(0, false);
 	setDragEnabled(true);
@@ -121,8 +121,8 @@ KWalletFolderItem::~KWalletFolderItem() {
  *  KWalletContainerItem - ListView items to represent kwallet containers, i.e.
  *  passwords, maps, ...
  */
-KWalletContainerItem::KWalletContainerItem(TQListViewItem* tqparent, const TQString &name, KWallet::Wallet::EntryType type)
-: KListViewItem(tqparent, name), _type(type) {
+KWalletContainerItem::KWalletContainerItem(TQListViewItem* parent, const TQString &name, KWallet::Wallet::EntryType type)
+: KListViewItem(parent, name), _type(type) {
 	setRenameEnabled(0, false);
 	setDragEnabled(true);
 }
@@ -154,8 +154,8 @@ TQListViewItem *KWalletContainerItem::getItem(const TQString& key) {
 /****************
  *  KWalletEntryItem - ListView items to represent kwallet entries
  */
-KWalletEntryItem::KWalletEntryItem(KWallet::Wallet *w, TQListViewItem* tqparent, const TQString& ename)
-: KListViewItem(tqparent, ename), _wallet(w), _oldName(ename) {
+KWalletEntryItem::KWalletEntryItem(KWallet::Wallet *w, TQListViewItem* parent, const TQString& ename)
+: KListViewItem(parent, ename), _wallet(w), _oldName(ename) {
 	setRenameEnabled(0, true);
 	setDragEnabled(true);
 }
@@ -170,8 +170,8 @@ KWalletEntryItem::~KWalletEntryItem() {
 /****************
  * KWalletItem - IconView items to represent wallets
  */
-KWalletItem::KWalletItem(TQIconView *tqparent, const TQString& walletName)
-: TQIconViewItem(tqparent, walletName, DesktopIcon("kwalletmanager")) {
+KWalletItem::KWalletItem(TQIconView *parent, const TQString& walletName)
+: TQIconViewItem(parent, walletName, DesktopIcon("kwalletmanager")) {
 }
 
 KWalletItem::~KWalletItem() {
@@ -300,12 +300,12 @@ void KWalletItem::dropped(TQDropEvent *e, const TQValueList<TQIconDragItem>& lst
 
 		//delete the folder from the source if we were moving
 		TQt::ButtonState state = kapp->keyboardMouseState();
-		if (e->source() && e->source()->tqparent() &&
-			!strcmp(e->source()->tqparent()->className(), "KWalletEntryList") &&
+		if (e->source() && e->source()->parent() &&
+			!strcmp(e->source()->parent()->className(), "KWalletEntryList") &&
 			!(state & TQt::ControlButton)) {
 		
 			KWalletEntryList *el =
-				dynamic_cast<KWalletEntryList*>(e->source()->tqparent());
+				dynamic_cast<KWalletEntryList*>(e->source()->parent());
 			if (el) {
 				KWalletFolderItem *fi = 
 					dynamic_cast<KWalletFolderItem*>(el->selectedItem());
@@ -348,8 +348,8 @@ class KWalletFolderDrag : public TQStoredDrag {
 /****************
  *  KWalletEntryList - A listview to store wallet entries
  */
-KWalletEntryList::KWalletEntryList(TQWidget *tqparent, const char *name)
-: KListView(tqparent, name) {
+KWalletEntryList::KWalletEntryList(TQWidget *parent, const char *name)
+: KListView(parent, name) {
 	addColumn(i18n("Folders"));
 	setRootIsDecorated(true);
 	setDefaultRenameAction(Reject);
@@ -389,10 +389,10 @@ void KWalletEntryList::itemDropped(TQDropEvent *e, TQListViewItem *item) {
 	TQListViewItem *sel = 0L;
 
 	//detect if we are dragging from kwallet itself
-	if (e->source() && e->source()->tqparent() &&
-		!strcmp(e->source()->tqparent()->className(), "KWalletEntryList")) {
+	if (e->source() && e->source()->parent() &&
+		!strcmp(e->source()->parent()->className(), "KWalletEntryList")) {
 
-		el = dynamic_cast<KWalletEntryList*>(e->source()->tqparent());
+		el = dynamic_cast<KWalletEntryList*>(e->source()->parent());
 		if (!el) {
 			KMessageBox::error(this, i18n("An unexpected error occurred trying to drop the item"));
 		} else
@@ -401,7 +401,7 @@ void KWalletEntryList::itemDropped(TQDropEvent *e, TQListViewItem *item) {
 
 	if (e->provides("application/x-kwallet-entry")) {
 		//do nothing if we are in the same folder
-		if (sel && sel->tqparent()->tqparent() == 
+		if (sel && sel->parent()->parent() == 
 				KWalletEntryList::getItemFolder(item)) {
 			e->ignore();
 			return;
@@ -562,9 +562,9 @@ KWalletFolderItem *KWalletEntryList::getItemFolder(TQListViewItem *item) {
 		case KWalletFolderItemClass:
 			return dynamic_cast<KWalletFolderItem *>(item);
 		case KWalletContainerItemClass:
-			return dynamic_cast<KWalletFolderItem *>(item->tqparent());
+			return dynamic_cast<KWalletFolderItem *>(item->parent());
 		case KWalletEntryItemClass:
-			return dynamic_cast<KWalletFolderItem *>(item->tqparent()->tqparent());
+			return dynamic_cast<KWalletFolderItem *>(item->parent()->parent());
 	}
 	return 0;
 }
@@ -618,8 +618,8 @@ class KWalletIconDrag : public TQIconDrag {
 /****************
 *  *  KWalletIconView - An iconview to store wallets
 *   */
-KWalletIconView::KWalletIconView(TQWidget *tqparent, const char *name)
-: KIconView(tqparent, name) {
+KWalletIconView::KWalletIconView(TQWidget *parent, const char *name)
+: KIconView(parent, name) {
 	KGlobal::dirs()->addResourceType("kwallet", "share/apps/kwallet");
 	connect(this, TQT_SIGNAL(dropped(TQDropEvent*, const TQValueList<TQIconDragItem>&)), TQT_SLOT(slotDropped(TQDropEvent*, const TQValueList<TQIconDragItem>&)));
 }

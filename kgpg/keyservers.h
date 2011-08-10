@@ -33,7 +33,7 @@ class keyServer : public KDialogBase
         Q_OBJECT
   TQ_OBJECT
 public:
-        keyServer(TQWidget *tqparent=0, const char *name=0,bool modal=false,bool autoClose=false);
+        keyServer(TQWidget *parent=0, const char *name=0,bool modal=false,bool autoClose=false);
         ~keyServer();
 	keyServerWidget *page;
 

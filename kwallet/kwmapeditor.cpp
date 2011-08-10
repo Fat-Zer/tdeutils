@@ -31,8 +31,8 @@
 #include <tqpushbutton.h>
 #include <tqtextedit.h>
 
-KWMapEditor::KWMapEditor(TQMap<TQString,TQString>& map, TQWidget *tqparent, const char *name)
-: TQTable(0, 3, tqparent, name), _map(map) {
+KWMapEditor::KWMapEditor(TQMap<TQString,TQString>& map, TQWidget *parent, const char *name)
+: TQTable(0, 3, parent, name), _map(map) {
 	_ac = new KActionCollection(this);
 	_copyAct = KStdAction::copy(TQT_TQOBJECT(this), TQT_SLOT(copy()), _ac);
 	connect(this, TQT_SIGNAL(valueChanged(int,int)), this, TQT_SIGNAL(dirty()));

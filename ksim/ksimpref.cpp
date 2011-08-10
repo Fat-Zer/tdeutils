@@ -37,9 +37,9 @@
 #include <tqframe.h>
 
 KSim::ConfigDialog::ConfigDialog(KSim::Config *config,
-   TQWidget *tqparent, const char *name)
+   TQWidget *parent, const char *name)
    : KDialogBase(TreeList, i18n("Configure"),
-   Help | Ok | Apply | Close, Ok, tqparent, name, true, true)
+   Help | Ok | Apply | Close, Ok, parent, name, true, true)
 {
   resize(466, 363);
   setShowIconsInTreeList(true);
@@ -93,7 +93,7 @@ KSim::ConfigDialog::ConfigDialog(KSim::Config *config,
   connect(this, TQT_SIGNAL(applyClicked()), TQT_SLOT(savePrefs()));
   connect(this, TQT_SIGNAL(okClicked()), TQT_SLOT(closePrefs()));
   connect(this, TQT_SIGNAL(closeClicked()), TQT_SLOT(loadPluginConfig()));
-  connect(tqparent, TQT_SIGNAL(reload()), TQT_SLOT(reload()));
+  connect(parent, TQT_SIGNAL(reload()), TQT_SLOT(reload()));
 
   KSim::PluginList::ConstIterator it;
   const KSim::PluginList &pluginList = KSim::PluginLoader::self().pluginList();
@@ -127,7 +127,7 @@ void KSim::ConfigDialog::removePage(const TQCString &name)
   }
 
   TQWidget *frame = plugin.configPage()->parentWidget();
-  // reparent the widget if the tqparent is not null
+  // reparent the widget if the parent is not null
   if (frame) {
     plugin.configPage()->hide();
     plugin.configPage()->reparent(0, TQPoint(0, 0), false);

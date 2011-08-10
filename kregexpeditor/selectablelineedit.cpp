@@ -22,8 +22,8 @@
 
 #include "selectablelineedit.h"
 
-SelectableLineEdit::SelectableLineEdit( RegExpWidget* owner, TQWidget* tqparent, const char* name)
-  : TQLineEdit( tqparent, name ), _owner(owner)
+SelectableLineEdit::SelectableLineEdit( RegExpWidget* owner, TQWidget* parent, const char* name)
+  : TQLineEdit( parent, name ), _owner(owner)
 {
   connect( this, TQT_SIGNAL( textChanged( const TQString & ) ), this,
            TQT_SLOT( slotKeyPressed() ) );

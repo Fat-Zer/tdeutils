@@ -24,7 +24,7 @@
 
 #include "verifier.h"
 
-Verifier::Verifier( TQWidget* tqparent, const char* name ) : TQTextEdit( tqparent, name )
+Verifier::Verifier( TQWidget* parent, const char* name ) : TQTextEdit( parent, name )
     /* TQT_ANCHOR_DO_NOT_WORK: ,_current( 0 ) */
 {
     _highlighter = 0;

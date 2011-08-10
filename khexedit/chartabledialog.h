@@ -38,7 +38,7 @@ class CCharTableDialog : public KDialogBase
   TQ_OBJECT
   
   public:
-    CCharTableDialog( TQWidget *tqparent=0, const char *name=0,bool modal=false );
+    CCharTableDialog( TQWidget *parent=0, const char *name=0,bool modal=false );
     ~CCharTableDialog( void );
 
   signals:

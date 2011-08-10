@@ -36,8 +36,8 @@
 //----------------------------------------------------------------------
 // MYMULTIEDIT
 //----------------------------------------------------------------------
-KJotsEdit::KJotsEdit (TQWidget* tqparent, const char* name)
-    : KEdit(tqparent, name),
+KJotsEdit::KJotsEdit (TQWidget* parent, const char* name)
+    : KEdit(parent, name),
     m_entry(0)
 {
     // no rich text until printing and other such issues are worked out

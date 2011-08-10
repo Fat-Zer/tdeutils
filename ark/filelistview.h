@@ -76,7 +76,7 @@ class FileListView: public KListView
 	Q_OBJECT
   TQ_OBJECT
 	public:
-		FileListView( TQWidget *tqparent = 0, const char* name = 0 );
+		FileListView( TQWidget *parent = 0, const char* name = 0 );
 
 		FileLVI *currentItem() {return ((FileLVI *) KListView::currentItem());}
 
@@ -153,7 +153,7 @@ class FileListView: public KListView
 
 	private:
 		FileLVI* findParent( const TQString& fullname );
-		TQStringList tqchildrenOf( FileLVI* tqparent );
+		TQStringList tqchildrenOf( FileLVI* parent );
 
 		TQMap<int, columnName> m_columnMap;
 		bool m_pressed;

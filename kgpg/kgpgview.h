@@ -44,7 +44,7 @@ class MyEditor : public KTextEdit
   TQ_OBJECT
 
 public:
-        MyEditor( TQWidget *tqparent = 0, const char *name = 0);
+        MyEditor( TQWidget *parent = 0, const char *name = 0);
 private:
         TQString message,messages,tempFile;
 public slots:
@@ -73,11 +73,11 @@ class KgpgView : public TQWidget
         friend class MyEditor;
 public:
         /** Constructor for the main view */
-        KgpgView(TQWidget *tqparent = 0, const char *name=0);
+        KgpgView(TQWidget *parent = 0, const char *name=0);
         /** Destructor for the main view */
         ~KgpgView();
 
-        /** returns a pointer to the document connected to the view instance. Mind that this method requires a KgpgApp instance as a tqparent
+        /** returns a pointer to the document connected to the view instance. Mind that this method requires a KgpgApp instance as a parent
          * widget to get to the window document pointer by calling the KgpgApp::getDocument() method.
          *
          * @see KgpgApp#getDocument

@@ -35,7 +35,7 @@ class popupPublic : public KDialogBase //TQDialog
   TQ_OBJECT
 public:
 
-        popupPublic(TQWidget *tqparent=0, const char *name=0,TQString sfile="",bool filemode=false,KShortcut goDefaultKey=TQKeySequence(CTRL+TQt::Key_Home));
+        popupPublic(TQWidget *parent=0, const char *name=0,TQString sfile="",bool filemode=false,KShortcut goDefaultKey=TQKeySequence(CTRL+TQt::Key_Home));
 	~popupPublic();
         KListView *keysList;
         TQCheckBox *CBarmor,*CBuntrusted,*CBshred,*CBsymmetric,*CBhideid;

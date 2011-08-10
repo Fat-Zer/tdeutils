@@ -81,7 +81,7 @@
 #include "searchbar.h"
 #include "arkviewer.h"
 
-static void viewInExternalViewer( ArkWidget* tqparent, const KURL& filename )
+static void viewInExternalViewer( ArkWidget* parent, const KURL& filename )
 {
     TQString mimetype = KMimeType::findByURL( filename )->name();
     bool view = true;
@@ -89,7 +89,7 @@ static void viewInExternalViewer( ArkWidget* tqparent, const KURL& filename )
     if ( KRun::isExecutable( mimetype ) )
     {
         TQString text = i18n( "The file you're trying to view may be an executable. Running untrusted executables may compromise your system's security.\nAre you sure you want to run that file?" );
-        view = ( KMessageBox::warningContinueCancel( tqparent, text, TQString(), i18n("Run Nevertheless") ) == KMessageBox::Continue );
+        view = ( KMessageBox::warningContinueCancel( parent, text, TQString(), i18n("Run Nevertheless") ) == KMessageBox::Continue );
     }
 
     if ( view )
@@ -103,8 +103,8 @@ static void viewInExternalViewer( ArkWidget* tqparent, const KURL& filename )
 //
 //----------------------------------------------------------------------
 
-ArkWidget::ArkWidget( TQWidget *tqparent, const char *name )
-   : TQVBox(tqparent, name), m_bBusy( false ), m_bBusyHold( false ),
+ArkWidget::ArkWidget( TQWidget *parent, const char *name )
+   : TQVBox(parent, name), m_bBusy( false ), m_bBusyHold( false ),
      m_extractOnly( false ), m_extractRemote(false),
      m_openAsMimeType(TQString()), m_pTempAddList(NULL),
      m_bArchivePopupEnabled( false ),

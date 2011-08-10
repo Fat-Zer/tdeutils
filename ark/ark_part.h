@@ -48,7 +48,7 @@ class ArkBrowserExtension: public KParts::BrowserExtension
     Q_OBJECT
   TQ_OBJECT
 public:
-    ArkBrowserExtension( KParts::ReadOnlyPart * tqparent, const char * name = 0L );
+    ArkBrowserExtension( KParts::ReadOnlyPart * parent, const char * name = 0L );
 public slots:
     void slotOpenURLRequested( const KURL & url );
 };
@@ -58,7 +58,7 @@ class ArkStatusBarExtension: public KParts::StatusBarExtension
     Q_OBJECT
   TQ_OBJECT
 public:
-    ArkStatusBarExtension( KParts::ReadWritePart * tqparent );
+    ArkStatusBarExtension( KParts::ReadWritePart * parent );
     ~ArkStatusBarExtension();
 
     void setProgress( unsigned long progress );
@@ -90,7 +90,7 @@ class ArkPart: public KParts::ReadWritePart
     Q_OBJECT
   TQ_OBJECT
 public:
-    ArkPart( TQWidget *parentWidget, const char *widgetName, TQObject *tqparent,
+    ArkPart( TQWidget *parentWidget, const char *widgetName, TQObject *parent,
              const char *name, const TQStringList &, bool readWrite );
     virtual ~ArkPart();
 

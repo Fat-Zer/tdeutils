@@ -48,8 +48,8 @@ void DateSensor::slotCalendarDeleted()
 }
 
 
-DatePicker::DatePicker(TQWidget *tqparent)
-    : TQVBox( tqparent, 0, WType_TopLevel | WDestructiveClose |
+DatePicker::DatePicker(TQWidget *parent)
+    : TQVBox( parent, 0, WType_TopLevel | WDestructiveClose |
              WStyle_Customize | WStyle_StaysOnTop | WStyle_NoBorder )
 {
     setFrameStyle( TQFrame::PopupPanel | TQFrame::Raised );

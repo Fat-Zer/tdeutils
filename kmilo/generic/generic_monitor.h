@@ -51,7 +51,7 @@ class GenericMonitor : public Monitor
   TQ_OBJECT
 
 public:
-	GenericMonitor(TQObject *tqparent, const char *name, const TQStringList&);
+	GenericMonitor(TQObject *parent, const char *name, const TQStringList&);
 	virtual ~GenericMonitor();
 
 	virtual bool init();

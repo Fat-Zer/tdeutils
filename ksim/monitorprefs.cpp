@@ -29,8 +29,8 @@
 #include <ksimconfig.h>
 #include <pluginloader.h>
 
-KSim::MonitorPrefs::MonitorPrefs(TQWidget *tqparent, const char *name)
-    : KListView(tqparent, name)
+KSim::MonitorPrefs::MonitorPrefs(TQWidget *parent, const char *name)
+    : KListView(parent, name)
 {
   addColumn(i18n("Monitor"));
   addColumn(i18n("Description"));

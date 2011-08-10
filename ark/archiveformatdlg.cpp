@@ -28,8 +28,8 @@
 #include <tqlabel.h>
 #include <tqvbox.h>
 
-ArchiveFormatDlg::ArchiveFormatDlg( TQWidget * tqparent, const TQString & defaultType )
-                        :KDialogBase( tqparent, "archiveformatdialog", true,
+ArchiveFormatDlg::ArchiveFormatDlg( TQWidget * parent, const TQString & defaultType )
+                        :KDialogBase( parent, "archiveformatdialog", true,
                           i18n( "Choose Archive Format" ),
                           KDialogBase::Ok|KDialogBase::Cancel, KDialogBase::Ok),
                           m_combo( 0 )

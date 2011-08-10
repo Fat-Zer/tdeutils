@@ -54,8 +54,8 @@ K_EXPORT_COMPONENT_FACTORY( kcm_thinkpad, KCMThinkpadModuleFactory("kcmthinkpad"
 
 #define CONFIG_FILE "kmilodrc"
 
-KCMThinkpadModule::KCMThinkpadModule(TQWidget* tqparent, const char* name, const TQStringList&)
-	: KCModule(KCMThinkpadModuleFactory::instance(), tqparent, name) {
+KCMThinkpadModule::KCMThinkpadModule(TQWidget* parent, const char* name, const TQStringList&)
+	: KCModule(KCMThinkpadModuleFactory::instance(), parent, name) {
 	KAboutData* about =
 		new KAboutData(I18N_NOOP("kcmthinkpad"),
 			       I18N_NOOP("KDE Control Module for IBM Thinkpad "

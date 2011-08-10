@@ -46,8 +46,8 @@
 #include "verifybuttons.h"
 #include <tqwhatsthis.h>
 
-KRegExpEditorPrivate::KRegExpEditorPrivate(TQWidget *tqparent, const char *name)
-    : TQWidget(tqparent, name), _updating( false ), _autoVerify( true )
+KRegExpEditorPrivate::KRegExpEditorPrivate(TQWidget *parent, const char *name)
+    : TQWidget(parent, name), _updating( false ), _autoVerify( true )
 {
   setMinimumSize(730,300);
   TQDockArea* area = new TQDockArea(Qt::Horizontal, TQDockArea::Normal, this );

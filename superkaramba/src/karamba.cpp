@@ -70,7 +70,7 @@ karamba::karamba(TQString fn, TQString name, bool reloading, int instance,
 
   KURL url;
 
-  if(fn.tqfind('/') == -1)
+  if(fn.find('/') == -1)
     url.setFileName(fn);
   else
     url = fn;
@@ -1338,7 +1338,7 @@ void karamba::passClick(TQMouseEvent *e)
   {
     Meter* meter = (Meter*)(*it);
     // Check if meter is still in list
-    if (clickList->tqcontainsRef(meter) && meter->click(e))
+    if (clickList->containsRef(meter) && meter->click(e))
     {
       // callback
       meterClicked(e, meter);
@@ -1388,7 +1388,7 @@ void karamba::passWheelClick( TQWheelEvent *e )
       {
         Meter* meter = (Meter*)(*it);
         // Check if meter is still in list
-        if (clickList->tqcontainsRef(meter) && meter->click(&fakeEvent))
+        if (clickList->containsRef(meter) && meter->click(&fakeEvent))
         {
           if (RichTextLabel* richText = dynamic_cast<RichTextLabel*>(meter))
           {

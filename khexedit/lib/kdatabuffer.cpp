@@ -25,13 +25,13 @@ using namespace KHE;
 
 int KDataBuffer::insert( int Pos, const char* D, int Length )
 {
-  return tqreplace( Pos,0,D,Length );
+  return replace( Pos,0,D,Length );
 }
 
 
 int KDataBuffer::remove( KSection Remove )
 {
-  tqreplace( Remove, 0, 0 );
+  replace( Remove, 0, 0 );
   return Remove.width(); // TODO: check if this is true
 }
 

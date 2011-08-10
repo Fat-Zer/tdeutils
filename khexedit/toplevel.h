@@ -85,10 +85,10 @@ class KHexEdit : public KMainWindow
     KAction *paste;
     KAction *selectAll;
     KAction *unselect;
-    KAction *tqfind;
+    KAction *find;
     KAction *findNext;
     KAction *findPrev;
-    KAction *tqreplace;
+    KAction *replace;
     KAction *gotoOffset;
     KAction *insertPattern;
     KAction *copyAsText;

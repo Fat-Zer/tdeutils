@@ -380,7 +380,7 @@ evaluateTriggers (Display* d)
           *  Nevertheless, simply resetting the screensaver is a
           *  convenience action that aids many xlock users, and doesn't
           *  harm anyone (*). The problem with older versions of xlock 
-	  *  is that they can be told to tqreplace (= disable) the real
+	  *  is that they can be told to replace (= disable) the real
 	  *  screensaver, but forget to reset that same screensaver if
 	  *  it was already active at the time xlock starts. I guess 
 	  *  xlock initially wasn't designed to be run without a user

@@ -248,7 +248,7 @@ void DiskView::updateData(DiskList &disks)
     // (3,0):(108911,48080,1713380,60831,1102644)
     TQRegExp regexp("\\([0-9]+,[0-9]+\\):\\([0-9]+,[0-9]+,[0-9]+,[0-9]+,[0-9]+\\)");
     TQString content = m_procStream->read();
-    if (content.tqfind("disk_io") == -1)
+    if (content.find("disk_io") == -1)
     {
        m_bLinux24 = false;
        
@@ -267,8 +267,8 @@ void DiskView::updateData(DiskList &disks)
     {
       idx += regexp.matchedLength();
       TQString diskStr = regexp.cap(0);
-      diskStr.tqreplace(':', ',');
-      diskStr.tqreplace(TQRegExp("\\)?\\(?"), TQString());
+      diskStr.replace(':', ',');
+      diskStr.replace(TQRegExp("\\)?\\(?"), TQString());
 
       TQStringList list = TQStringList::split(',', diskStr);
       if (list.count() < 7)
@@ -527,7 +527,7 @@ void DiskConfig::readConfig()
   TQStringList::ConstIterator it;
   for (it = list.begin(); it != list.end(); ++it) {
     TQString text = ((*it) == "complete" ? i18n("All Disks") : (*it));
-    if (!m_listview->tqfindItem(text, 0))
+    if (!m_listview->findItem(text, 0))
       new TQListViewItem(m_listview, text);
   }
 }

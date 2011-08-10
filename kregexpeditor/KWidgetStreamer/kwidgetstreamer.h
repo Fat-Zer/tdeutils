@@ -37,7 +37,7 @@
    <pre>
    KWidgetStreamer streamer;
    KWidgetStreamer::PropertyMap& map = streamer.propertyMap();
-   KWidgetStreamer::PropertyList& list = *map.tqfind(TQLCDNUMBER_OBJECT_NAME_STRING);
+   KWidgetStreamer::PropertyList& list = *map.find(TQLCDNUMBER_OBJECT_NAME_STRING);
    list.remove("numDigits");
    </pre>
 **/

@@ -83,7 +83,7 @@ KWalletContainerItem* KWalletFolderItem::getContainer(KWallet::Wallet::EntryType
 	return 0;
 }
 
-bool KWalletFolderItem::tqcontains(const TQString& key) {
+bool KWalletFolderItem::contains(const TQString& key) {
 	return (getItem(key) != 0);
 }
 
@@ -138,7 +138,7 @@ KWallet::Wallet::EntryType KWalletContainerItem::type() {
 	return _type;
 }
 
-bool KWalletContainerItem::tqcontains(const TQString& key) {
+bool KWalletContainerItem::contains(const TQString& key) {
 	return getItem(key) != 0;
 }
 
@@ -668,7 +668,7 @@ void KWalletIconView::slotDropped(TQDropEvent *e, const TQValueList<TQIconDragIt
 
 void KWalletIconView::contentsMousePressEvent(TQMouseEvent *e) {
 	_mousePos = e->pos();
-	if (!tqfindItem(_mousePos)) {
+	if (!findItem(_mousePos)) {
 		clearSelection();
 	}
 	KIconView::contentsMousePressEvent( e );

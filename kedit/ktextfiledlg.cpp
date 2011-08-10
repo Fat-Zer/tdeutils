@@ -50,7 +50,7 @@ KTextFileDialog::KTextFileDialog(const TQString& startDir,
   TQStringList::Iterator it;
   int i = 0;
   for( it = encodings.begin(); it != encodings.end(); ++it) {
-      if ( (*it).tqcontains( encodingStr ) ) {
+      if ( (*it).contains( encodingStr ) ) {
       mEncoding->setCurrentItem( i );
       break;
       }
@@ -111,7 +111,7 @@ void KTextFileDialog::slotShowEncCombo()
   int i = 1;
   for( it = encodings.begin(); it != encodings.end(); ++it) {
 
-    if ( (*it).tqcontains( encoding() ) ) {
+    if ( (*it).contains( encoding() ) ) {
       encCombo->setCurrentItem( i );
       break;
     }

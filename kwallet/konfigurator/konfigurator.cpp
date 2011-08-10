@@ -101,11 +101,11 @@ void KWalletConfig::updateWalletLists() {
 	_wcw->_localWallet->insertStringList(wl);
 	_wcw->_defaultWallet->insertStringList(wl);
 
-	if (wl.tqcontains(p1)) {
+	if (wl.contains(p1)) {
 		_wcw->_localWallet->setCurrentText(p1);
 	}
 
-	if (wl.tqcontains(p2)) {
+	if (wl.contains(p2)) {
 		_wcw->_defaultWallet->setCurrentText(p2);
 	}
 }

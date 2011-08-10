@@ -142,7 +142,7 @@ public:
     void changeInterval(int interval);
     void setWidgetUpdate(bool wu) { widgetUpdate = wu; };
     bool getWidgetUpdate() { return widgetUpdate; };
-    bool hasMeter(Meter* meter) { return meterList->tqcontainsRef(meter) > 0; };
+    bool hasMeter(Meter* meter) { return meterList->containsRef(meter) > 0; };
     char getTempUnit() { return tempUnit; };
     void addMenuConfigOption(TQString key, TQString name);
     bool setMenuConfigOption(TQString key, bool value);

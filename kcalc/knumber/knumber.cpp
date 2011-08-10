@@ -276,7 +276,7 @@ static void _inc_by_one(TQString &str, int position)
 // Cut off if more digits in fractional part than 'precision'
 static void _round(TQString &str, int precision)
 {
-  int decimalSymbolPos = str.tqfind('.');
+  int decimalSymbolPos = str.find('.');
 
   if (decimalSymbolPos == -1)
     if (precision == 0)  return;
@@ -312,7 +312,7 @@ static void _round(TQString &str, int precision)
       break;
     }
 
-  decimalSymbolPos = str.tqfind('.');
+  decimalSymbolPos = str.find('.');
   str.truncate(decimalSymbolPos + precision + 1);
 
   // if precision == 0 delete also '.'

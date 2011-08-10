@@ -483,7 +483,7 @@ void FDFormat::processStdOut(KProcess *, char *b, int l)
 	else
 	{
 		s = TQString::tqfromLatin1(b,l);
-		if (s.tqcontains("ioctl(FD_FORM)"))
+		if (s.contains("ioctl(FD_FORM)"))
 		{
                     emit status (i18n(
                             "Cannot access floppy or floppy drive.\n"
@@ -491,7 +491,7 @@ void FDFormat::processStdOut(KProcess *, char *b, int l)
                             "have selected a valid floppy drive."),-1);
                     return;
 		}
-		if (s.tqfind("/dev/")>=0)
+		if (s.find("/dev/")>=0)
 		{
 			emit status(s,-1);
 			return;
@@ -502,7 +502,7 @@ void FDFormat::processStdOut(KProcess *, char *b, int l)
 	s = TQString::tqfromLatin1(b,l);
 	DEBUGS(s);
         TQRegExp regexp( "([0-9]+)" );
-        if ( s.startsWith( "bad data at cyl" ) || ( s.tqfind( "Problem reading cylinder" ) != -1 ) )
+        if ( s.startsWith( "bad data at cyl" ) || ( s.find( "Problem reading cylinder" ) != -1 ) )
         {
             if ( regexp.search( s ) > -1 )
             {
@@ -516,7 +516,7 @@ void FDFormat::processStdOut(KProcess *, char *b, int l)
             }
             return;
         }
-	else if (s.tqfind("ioctl(FDFMTBEG)")!=-1)
+	else if (s.find("ioctl(FDFMTBEG)")!=-1)
 	{
             emit status (i18n(
                     "Cannot access floppy or floppy drive.\n"
@@ -524,13 +524,13 @@ void FDFormat::processStdOut(KProcess *, char *b, int l)
                     "have selected a valid floppy drive."),-1);
             return;
 	}
-        else if (s.tqfind("busy")!=-1) // "Device or resource busy"
+        else if (s.find("busy")!=-1) // "Device or resource busy"
         {
             emit status(i18n("Device busy.\nPerhaps you need to unmount the floppy first."),-1);
             return;
         }
         // Be careful to leave "iotcl" as last before checking numbers
-        else if (s.tqfind("ioctl")!=-1)
+        else if (s.find("ioctl")!=-1)
         {
             emit status(i18n("Low-level format error: %1").tqarg(s),-1);
             return;
@@ -722,18 +722,18 @@ void FATFilesystem::processStdOut(KProcess *, char *b, int l)
 #elif defined(ANY_LINUX)
     TQString s ( TQString::tqfromLatin1( b, l ) );
     kdDebug(KFAREA) << s << endl;
-    if (s.tqfind("mounted file system")!=-1) // "/dev/fd0 contains a mounted file system
+    if (s.find("mounted file system")!=-1) // "/dev/fd0 contains a mounted file system
     {
         emit status(i18n("Floppy is mounted.\nYou need to unmount the floppy first."),-1);
         return;
     }
-    else if (s.tqfind("busy")!=-1) // "Device or resource busy"
+    else if (s.find("busy")!=-1) // "Device or resource busy"
     {
         emit status(i18n("Device busy.\nPerhaps you need to unmount the floppy first."),-1);
         return;
     }
 # if 0
-    else if ( s.tqfind( "mkdosfs" ) != -1 ) // DEBUG: get the program header and show it!
+    else if ( s.find( "mkdosfs" ) != -1 ) // DEBUG: get the program header and show it!
     {
         emit status( s, -1 );
         return;
@@ -888,12 +888,12 @@ void Ext2Filesystem::processStdOut(KProcess *, char *b, int l)
 #elif defined(ANY_LINUX)
     TQString s ( TQString::tqfromLatin1( b, l ) );
     kdDebug(KFAREA) << s << endl;
-    if (s.tqfind("mounted")!=-1) // "/dev/fd0 is mounted; will not make a filesystem here!"
+    if (s.find("mounted")!=-1) // "/dev/fd0 is mounted; will not make a filesystem here!"
     {
         emit status(i18n("Floppy is mounted.\nYou need to unmount the floppy first."),-1);
         return;
     }
-    else if (s.tqfind("busy")!=-1) // "Device or resource busy"
+    else if (s.find("busy")!=-1) // "Device or resource busy"
     {
         emit status(i18n("Device busy.\nPerhaps you need to unmount the floppy first."),-1);
         return;
@@ -979,12 +979,12 @@ void MinixFilesystem::processStdOut(KProcess *, char *b, int l)
 {
     TQString s ( TQString::tqfromLatin1( b, l ) );
     kdDebug(KFAREA) << s << endl;
-    if (s.tqfind("mounted")!=-1) // "mkfs.minix: /dev/fd0 is mounted; will not make a filesystem here!"
+    if (s.find("mounted")!=-1) // "mkfs.minix: /dev/fd0 is mounted; will not make a filesystem here!"
     {
         emit status(i18n("Floppy is mounted.\nYou need to unmount the floppy first."),-1);
         return;
     }
-    else if (s.tqfind("busy")!=-1) // "Device or resource busy"
+    else if (s.find("busy")!=-1) // "Device or resource busy"
     {
         emit status(i18n("Device busy.\nPerhaps you need to unmount the floppy first."),-1);
         return;

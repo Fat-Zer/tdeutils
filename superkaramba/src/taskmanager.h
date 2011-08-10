@@ -204,7 +204,7 @@ public:
     //* @internal
     void removeTransient( WId w ) { _transients.remove( w ); }
     //* @internal
-    bool hasTransient( WId w ) const { return _transients.tqcontains( w ); }
+    bool hasTransient( WId w ) const { return _transients.contains( w ); }
     //* @internal
     void setActive(bool a);
 

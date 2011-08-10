@@ -469,7 +469,7 @@ void laptop_dock::mousePressEvent( TQMouseEvent *event )
 }
 void laptop_dock::mouseReleaseEvent( TQMouseEvent *e )
 {
-    if ( !TQT_TQRECT_OBJECT(rect()).tqcontains( e->pos() ) )
+    if ( !TQT_TQRECT_OBJECT(rect()).contains( e->pos() ) )
         return;
 
     switch ( e->button() ) {

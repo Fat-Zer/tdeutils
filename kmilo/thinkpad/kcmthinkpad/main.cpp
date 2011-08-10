@@ -175,7 +175,7 @@ void KCMThinkpadModule::load(bool useDefaults) {
 	m_KCMThinkpadGeneral->mSpinboxVolumeStep->setValue(config.readNumEntry("volumeStep", 14));
 	m_KCMThinkpadGeneral->commandExec->setURL(config.readEntry("buttonThinkpad", KDE_BINDIR "/konsole"));
 	m_KCMThinkpadGeneral->commandExecHome->setURL(config.readEntry("buttonHome", KDE_BINDIR "/konqueror"));
-	m_KCMThinkpadGeneral->commandExecSearch->setURL(config.readEntry("buttonSearch", KDE_BINDIR "/ktqfind"));
+	m_KCMThinkpadGeneral->commandExecSearch->setURL(config.readEntry("buttonSearch", KDE_BINDIR "/kfind"));
 	m_KCMThinkpadGeneral->commandExecMail->setURL(config.readEntry("buttonMail", KDE_BINDIR "/kmail"));
 	m_KCMThinkpadGeneral->commandExecZoom->setURL(config.readEntry("buttonZoom", KDE_BINDIR "/ksnapshot"));
 	m_nvramFile = config.readEntry("nvram", "/dev/nvram");

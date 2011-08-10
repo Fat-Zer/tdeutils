@@ -226,7 +226,7 @@ void UserDefinedRegExps::slotSelectNewAction()
 WidgetWinItem::WidgetWinItem( TQString fileName, RegExp* regexp, bool usersRegExp, TQListViewItem* tqparent )
   :TQListViewItem( tqparent ), _regexp( regexp ), _usersRegExp ( usersRegExp )
 {
-  int index = fileName.tqfindRev(TQString::fromLocal8Bit(".regexp"));
+  int index = fileName.findRev(TQString::fromLocal8Bit(".regexp"));
   _name = fileName.left(index);
 
   setText( 0, _name );

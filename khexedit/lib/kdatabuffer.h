@@ -146,9 +146,9 @@ class KHEXEDIT_EXPORT KDataBuffer
       * @param SourceLength
       * @return length of replacced data
       */
-    virtual unsigned int tqreplace( KSection DestSection, const char* Source, unsigned int SourceLength ) = 0;
+    virtual unsigned int replace( KSection DestSection, const char* Source, unsigned int SourceLength ) = 0;
     /** convenience function, behaves as above */
-    unsigned int tqreplace( unsigned int Pos, unsigned int RemoveLength,
+    unsigned int replace( unsigned int Pos, unsigned int RemoveLength,
                           const char* Source, unsigned int SourceLength );
 
     /** moves a part of the data to a new position, while floating the other data around
@@ -201,7 +201,7 @@ class KHEXEDIT_EXPORT KDataBuffer
       * @param Pos the position to start the search
       * @return index of the first  or -1
       */
-    //virtual int tqfind( const char*, int Length, int Pos = 0 ) const = 0;
+    //virtual int find( const char*, int Length, int Pos = 0 ) const = 0;
     /** searches for a given data string
       * The section limits the data within which the key has to be found
       * If the end of the section is lower then the start the search continues at the start???
@@ -210,7 +210,7 @@ class KHEXEDIT_EXPORT KDataBuffer
       * @param Section section within the keydata is to be found
       * @return index of the first occurence or -1
       */
-    virtual int tqfind( const char*KeyData, int Length, KSection Section ) const = 0;
+    virtual int find( const char*KeyData, int Length, KSection Section ) const = 0;
     /** searches backward beginning with byte at Pos.
       * @param 
       * @param Length length of search string
@@ -219,7 +219,7 @@ class KHEXEDIT_EXPORT KDataBuffer
       */
     virtual int rfind( const char*, int Length, int Pos = -1 ) const = 0;
 
-/*     virtual int tqfind( const TQString &expr, bool cs, bool wo, bool forward = true, int *index = 0 ); */
+/*     virtual int find( const TQString &expr, bool cs, bool wo, bool forward = true, int *index = 0 ); */
 };
 
 
@@ -235,9 +235,9 @@ inline const char *KDataBuffer::dataSet( int Offset, int Length ) const
 inline int KDataBuffer::remove( int Pos, int Length )
 { return remove( KSection(Pos,Pos+Length-1) ); }
 
-inline unsigned int KDataBuffer::tqreplace( unsigned int Pos, unsigned int RemoveLength,
+inline unsigned int KDataBuffer::replace( unsigned int Pos, unsigned int RemoveLength,
                                  const char* D, unsigned int InputLength )
-{ return tqreplace( KSection(Pos,Pos+RemoveLength-1), D, InputLength ); }
+{ return replace( KSection(Pos,Pos+RemoveLength-1), D, InputLength ); }
 
 inline bool KDataBuffer::isReadOnly() const { return false; }
 

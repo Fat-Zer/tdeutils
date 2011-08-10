@@ -251,9 +251,9 @@ void MntConfigWidget::iconChangedButton(TQString iconName)
 }
 void MntConfigWidget::iconChanged(const TQString &iconName)
 {
-  if( iconName.tqfindRev('_') == 0 ||
-      (iconName.right(iconName.length()-iconName.tqfindRev('_'))!="_mount" &&
-      iconName.right(iconName.length()-iconName.tqfindRev('_'))!="_unmount"))
+  if( iconName.findRev('_') == 0 ||
+      (iconName.right(iconName.length()-iconName.findRev('_'))!="_mount" &&
+      iconName.right(iconName.length()-iconName.findRev('_'))!="_unmount"))
     {
       TQString msg = i18n(""
 			 "This filename is not valid: %1\n"

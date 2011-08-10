@@ -98,7 +98,7 @@ RegExpWidget* SingleContainerWidget::findWidgetToEdit( TQPoint globalPos )
   RegExpWidget* wid = _child->findWidgetToEdit( globalPos );
   if ( wid )
     return wid;
-  else if ( TQRect(mapToGlobal(TQPoint(0,0)), size()).tqcontains( globalPos ) )
+  else if ( TQRect(mapToGlobal(TQPoint(0,0)), size()).contains( globalPos ) )
     return this;
   else
     return 0;

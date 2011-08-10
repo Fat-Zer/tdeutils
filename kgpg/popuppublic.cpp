@@ -256,7 +256,7 @@ void popupPublic::sort()
         if (current==NULL)
                 return;
 
-	if ((untrustedList.tqfind(current->text(2))!=untrustedList.end()) && (!current->text(2).isEmpty())){
+	if ((untrustedList.find(current->text(2))!=untrustedList.end()) && (!current->text(2).isEmpty())){
                 if (current->isSelected()) {
                         current->setSelected(false);
                         reselect=true;
@@ -266,7 +266,7 @@ void popupPublic::sort()
 
         while ( current->nextSibling() ) {
                 current = current->nextSibling();
-                if ((untrustedList.tqfind(current->text(2))!=untrustedList.end()) && (!current->text(2).isEmpty())) {
+                if ((untrustedList.find(current->text(2))!=untrustedList.end()) && (!current->text(2).isEmpty())) {
                 if (current->isSelected()) {
                         current->setSelected(false);
                         reselect=true;
@@ -304,7 +304,7 @@ void popupPublic::customOpts(const TQString &str)
 
 void popupPublic::slotGotoDefaultKey()
 {
-    TQListViewItem *myDefaulKey = keysList->tqfindItem(KGpgSettings::defaultKey(),2);
+    TQListViewItem *myDefaulKey = keysList->findItem(KGpgSettings::defaultKey(),2);
     keysList->clearSelection();
     keysList->setCurrentItem(myDefaulKey);
     keysList->setSelected(myDefaulKey,true);
@@ -346,7 +346,7 @@ void popupPublic::slotpreselect()
 {
 TQListViewItem *it=NULL;
 if (!keysList->firstChild()) return;
-        if (fmode) it=keysList->tqfindItem(KGpgSettings::defaultKey(),2);
+        if (fmode) it=keysList->findItem(KGpgSettings::defaultKey(),2);
 if (!trusted)
               sort();
 if (fmode)
@@ -415,13 +415,13 @@ void popupPublic::slotprocread(KProcIO *p)
 				untrustedList<<id;
                                 break;
                         }
-			if (keyString[11].tqfind('D')!=-1) dead=true;
+			if (keyString[11].find('D')!=-1) dead=true;
                         tst=keyString[9];
-			if (tst.tqfind("<")!=-1) {
+			if (tst.find("<")!=-1) {
                 keymail=tst.section('<',-1,-1);
                 keymail.truncate(keymail.length()-1);
                 keyname=tst.section('<',0,0);
-                //if (keyname.tqfind("(")!=-1)
+                //if (keyname.find("(")!=-1)
                  //       keyname=keyname.section('(',0,0);
         } else {
                 keymail=TQString();
@@ -433,7 +433,7 @@ void popupPublic::slotprocread(KProcIO *p)
                                         UpdateViewItem2 *item=new UpdateViewItem2(keysList,keyname,keymail,id,isDefaultKey);
 					//KListViewItem *sub= new KListViewItem(item,i18n("ID: %1, trust: %2, validity: %3").tqarg(id).tqarg(tr).tqarg(val));
                                         //sub->setSelectable(false);
-                                        if (seclist.tqfind(tst,0,FALSE)!=-1)
+                                        if (seclist.find(tst,0,FALSE)!=-1)
                                                 item->setPixmap(0,keyPair);
                                         else
                                                 item->setPixmap(0,keySingle);

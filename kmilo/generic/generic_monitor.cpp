@@ -356,7 +356,7 @@ void GenericMonitor::launchBrowser()
 
 void GenericMonitor::launchSearch()
 {
-	launch("search", "ktqfind");
+	launch("search", "kfind");
 }
 
 void GenericMonitor::launchHomeFolder()

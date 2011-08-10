@@ -171,7 +171,7 @@ BatteryConfig::BatteryConfig (TQWidget * tqparent, const char *name)
       }
 
       // TODO: remove linefeed from string, can't do it right now coz we have a string freeze
-      TQLabel* explain = new KRichTextLabel( i18n("This panel controls whether the battery status monitor\nappears in the system tray and what it looks like.").tqreplace("\n"," "), this);
+      TQLabel* explain = new KRichTextLabel( i18n("This panel controls whether the battery status monitor\nappears in the system tray and what it looks like.").replace("\n"," "), this);
       top_layout->addWidget(explain, 0);
       laptop_portable::extra_config(this, config, top_layout);
     }

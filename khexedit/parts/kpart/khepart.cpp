@@ -141,7 +141,7 @@ void KHexEditPart::fitActionSettings()
   ShowUnprintableAction->setChecked( HexEdit->showUnprintable() );
 
   CodingAction->setCurrentItem( (int)HexEdit->coding() );
-  EncodingAction->setCurrentItem( KCharCodec::codecNames().tqfindIndex(HexEdit->encodingName()) );
+  EncodingAction->setCurrentItem( KCharCodec::codecNames().findIndex(HexEdit->encodingName()) );
 
   ResizeStyleAction->setCurrentItem( (int)HexEdit->resizeStyle() );
 

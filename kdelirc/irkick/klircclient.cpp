@@ -177,14 +177,14 @@ void KLircClient::slotRead()
 		{
 			// <code> <repeat> <button name> <remote control name>
 			line.remove(0, 17); // strip code
-			int pos = line.tqfind(' ');
+			int pos = line.find(' ');
 			if (pos < 0) return;
 			bool ok;
 			int repeat = line.left(pos).toInt(&ok, 16);
 			if (!ok) return;
 			line.remove(0, pos + 1);
 
-			pos = line.tqfind(' ');
+			pos = line.find(' ');
 			if (pos < 0) return;
 			TQString btn = line.left(pos);
 			if(btn.startsWith("'") && btn.endsWith("'"))

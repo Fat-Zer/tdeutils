@@ -371,8 +371,8 @@ void NetView::updateGraph()
         }
 
         // Keep backwards compat for now
-        if ( timeDisplay.tqcontains( '%' ) > 0 )
-          timeDisplay.tqreplace( '%', "" );
+        if ( timeDisplay.contains( '%' ) > 0 )
+          timeDisplay.replace( '%', "" );
 
         ( *it ).label()->setText( netTime.toString( timeDisplay ) );
       }
@@ -468,7 +468,7 @@ void NetView::netStatistics(const TQString &device, NetData &data)
   while (!m_procStream->atEnd()) {
     parser = m_procStream->readLine();
     // remove all the entries apart from the line containing 'device'
-    if (parser.tqfind(device) != -1)
+    if (parser.find(device) != -1)
       output = parser;
   }
 
@@ -480,7 +480,7 @@ void NetView::netStatistics(const TQString &device, NetData &data)
 
   // make sure our output doesn't contain "eth0:11210107" so we dont
   // end up with netList[1] actually being netList[2]
-  output.tqreplace(TQRegExp(":"), " ");
+  output.replace(TQRegExp(":"), " ");
   TQStringList netList = TQStringList::split(' ', output);
 
   data.in = netList[1].toULong();
@@ -559,7 +559,7 @@ bool NetView::isOnline(const TQString &device)
   if (!file.open(IO_ReadOnly))
     return -1;
 
-  return (TQTextStream(&file).read().tqfind(device) != -1 ? true : false);
+  return (TQTextStream(&file).read().find(device) != -1 ? true : false);
 #endif
 
 #ifdef __FreeBSD__

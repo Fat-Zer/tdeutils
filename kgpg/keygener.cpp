@@ -99,7 +99,7 @@ void keyGenerate::slotOk()
 	{
 	if (KMessageBox::warningContinueCancel(this,i18n("You are about to create a key with no email address"))!=KMessageBox::Continue) return;
         }
-	else if ((vmail.tqfind(" ")!=-1) || (vmail.tqfind(".")==-1) || (vmail.tqfind("@")==-1)) {
+	else if ((vmail.find(" ")!=-1) || (vmail.find(".")==-1) || (vmail.find("@")==-1)) {
                 KMessageBox::sorry(this,i18n("Email address not valid"));
                 return;
         }

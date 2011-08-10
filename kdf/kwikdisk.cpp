@@ -190,7 +190,7 @@ void KwikDisk::updateDFDone()
 
       TQPixmap *pix = new TQPixmap(KSystemTray::loadIcon(disk->iconName()));
 
-      if( getuid() !=0 && disk->mountOptions().tqfind("user",0, false) == -1 )
+      if( getuid() !=0 && disk->mountOptions().find("user",0, false) == -1 )
       {
          //
          // Special root icon, normal user cant mount.
@@ -264,10 +264,10 @@ void KwikDisk::toggleMount(int item)
       if( m_options.fileManager().isEmpty() == false )
       {
          TQString cmd = m_options.fileManager();
-         int pos = cmd.tqfind("%m");
+         int pos = cmd.find("%m");
          if( pos > 0 )
          {
-            cmd = cmd.tqreplace( pos, 2, KProcess::quote(disk->mountPoint()) ) + " &";
+            cmd = cmd.replace( pos, 2, KProcess::quote(disk->mountPoint()) ) + " &";
          }
          else
          {

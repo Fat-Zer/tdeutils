@@ -416,9 +416,9 @@ bool ThemesDlg::filter(int index, TQWidget* widget, void* data)
   }
   else
   {
-    if(w->themeName->text().lower().tqcontains(searchText))
+    if(w->themeName->text().lower().contains(searchText))
       return true;
-    if(w->description->text().lower().tqcontains(searchText))
+    if(w->description->text().lower().contains(searchText))
       return true;
   }
   return false;

@@ -41,8 +41,8 @@ void Modes::loadFromConfig(KConfig &theConfig)
 void Modes::generateNulls(const TQStringList &theRemotes)
 {
 	for(TQStringList::const_iterator i = theRemotes.begin(); i != theRemotes.end(); ++i)
-	{	if(!tqcontains(*i) || !operator[](*i).tqcontains("")) operator[](*i)[""] = Mode(*i, "");
-		if(!theDefaults.tqcontains(*i)) theDefaults[*i].isEmpty();
+	{	if(!contains(*i) || !operator[](*i).contains("")) operator[](*i)[""] = Mode(*i, "");
+		if(!theDefaults.contains(*i)) theDefaults[*i].isEmpty();
 	}
 }
 
@@ -59,8 +59,8 @@ const Mode Modes::getDefault(const TQString &remote) const
 {
 //	if(theDefaults[remote] == TQString())
 //		return Mode(remote, "");
-	if(tqcontains(remote))
-		if(operator[](remote).tqcontains(theDefaults[remote]))
+	if(contains(remote))
+		if(operator[](remote).contains(theDefaults[remote]))
 			return operator[](remote)[theDefaults[remote]];
 		else return Mode(remote, "");
 	else return Mode(remote, "");

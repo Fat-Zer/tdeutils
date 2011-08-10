@@ -92,8 +92,8 @@ void AddAction::updateButton(const TQString &remote, const TQString &button)
 {
 	if(theMode.remote() == remote)
 	{	// note this isn't the "correct" way of doing it; really i should iterate throughg the items and try to find the item which when put through buttonMap[item] returns the current button name. but i cant be arsed.
-		theButtons->setCurrentItem(theButtons->tqfindItem(RemoteServer::remoteServer()->getButtonName(remote, button), 0));
-		theButtons->ensureItemVisible(theButtons->tqfindItem(RemoteServer::remoteServer()->getButtonName(remote, button), 0));
+		theButtons->setCurrentItem(theButtons->findItem(RemoteServer::remoteServer()->getButtonName(remote, button), 0));
+		theButtons->ensureItemVisible(theButtons->findItem(RemoteServer::remoteServer()->getButtonName(remote, button), 0));
 	}
 	else
 		KMessageBox::error(this, i18n( "You did not select a mode of that remote control. Please use %1, "
@@ -149,7 +149,7 @@ const TQStringList AddAction::getFunctions(const TQString app, const TQString ob
 		if(	*i != "QCStringList interfaces()" &&
 			*i != "QCStringList functions()" &&
 			*i != "QCStringList objects()" &&
-			*i != "QCStringList tqfind(TQCString)" )
+			*i != "QCStringList find(TQCString)" )
 			ret += TQString::fromUtf8(*i);
 	return ret;
 }
@@ -262,19 +262,19 @@ void AddAction::updateParameter()
 	if(theParameters->currentItem())
 	{	TQString type = theParameters->currentItem()->text(2);
 		int index = theParameters->currentItem()->text(3).toInt() - 1;
-		if(type.tqfind("int") != -1 || type.tqfind("short") != -1 || type.tqfind("long") != -1)
+		if(type.find("int") != -1 || type.find("short") != -1 || type.find("long") != -1)
 		{	theValue->raiseWidget(2);
 			theValueIntNumInput->setValue(theArguments[index].toInt());
 		}
-		else if(type.tqfind("double") != -1 || type.tqfind("float") != -1)
+		else if(type.find("double") != -1 || type.find("float") != -1)
 		{	theValue->raiseWidget(3);
 			theValueDoubleNumInput->setValue(theArguments[index].toDouble());
 		}
-		else if(type.tqfind("bool") != -1)
+		else if(type.find("bool") != -1)
 		{	theValue->raiseWidget(1);
 			theValueCheckBox->setChecked(theArguments[index].toBool());
 		}
-		else if(type.tqfind(TQSTRINGLIST_OBJECT_NAME_STRING) != -1)
+		else if(type.find(TQSTRINGLIST_OBJECT_NAME_STRING) != -1)
 		{	theValue->raiseWidget(4);
 			TQStringList backup = theArguments[index].toStringList();
 			// backup needed because calling clear will kill what ever has been saved.
@@ -307,13 +307,13 @@ void AddAction::slotParameterChanged()
 	if(!theParameters->currentItem()) return;
 	int index = theParameters->currentItem()->text(3).toInt() - 1;
 	TQString type = theParameters->currentItem()->text(2);
-	if(type.tqfind("int") != -1 || type.tqfind("short") != -1 || type.tqfind("long") != -1)
+	if(type.find("int") != -1 || type.find("short") != -1 || type.find("long") != -1)
 		theArguments[index].asInt() = theValueIntNumInput->value();
-	else if(type.tqfind("double") != -1 || type.tqfind("float") != -1)
+	else if(type.find("double") != -1 || type.find("float") != -1)
 		theArguments[index].asDouble() = theValueDoubleNumInput->value();
-	else if(type.tqfind("bool") != -1)
+	else if(type.find("bool") != -1)
 		theArguments[index].asBool() = theValueCheckBox->isChecked();
-	else if(type.tqfind(TQSTRINGLIST_OBJECT_NAME_STRING) != -1)
+	else if(type.find(TQSTRINGLIST_OBJECT_NAME_STRING) != -1)
 		theArguments[index].asStringList() = theValueEditListBox->items();
 	else
 		theArguments[index].asString() = theValueLineEdit->text();
@@ -339,11 +339,11 @@ void AddAction::updateObjects()
 	QCStringList theApps = theClient->registeredApplications();
 	for(QCStringList::iterator i = theApps.begin(); i != theApps.end(); ++i)
 	{
-		if(!TQString(*i).tqfind("anonymous")) continue;
-		if(!TQString(*i).tqfind(i18n( "anonymous" ))) continue;
+		if(!TQString(*i).find("anonymous")) continue;
+		if(!TQString(*i).find(i18n( "anonymous" ))) continue;
 		TQRegExp r("(.*)-[0-9]+");
 		TQString name = r.exactMatch(TQString(*i)) ? r.cap(1) : *i;
-		if(names.tqcontains(name)) continue;
+		if(names.contains(name)) continue;
 		names += name;
 
 		KListViewItem *a = new KListViewItem(theObjects, name);

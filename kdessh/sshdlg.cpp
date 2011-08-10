@@ -26,7 +26,7 @@ KDEsshDialog::KDEsshDialog(TQCString host, TQCString user, TQCString stub,
     // Make the prompt a little more polite :-)
     if (prompt.lower().left(6) == TQString::tqfromLatin1("enter "))
 	prompt.remove(0, 6);
-    int pos = prompt.tqfind(':');
+    int pos = prompt.find(':');
     if (pos != -1)
 	prompt.remove(pos, 10);
     prompt += '.';

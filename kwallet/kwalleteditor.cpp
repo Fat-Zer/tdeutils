@@ -230,7 +230,7 @@ void KWalletEditor::updateFolderList(bool checkEntries) {
 		if (!fi) {
 			continue;
 		}
-		if (!fl.tqcontains(fi->name())) {
+		if (!fl.contains(fi->name())) {
 			trash.push(i);
 		}
 	}
@@ -277,7 +277,7 @@ void KWalletEditor::updateFolderList(bool checkEntries) {
 	}
 
 	//check if the current folder has been removed
-	if (!fl.tqcontains(_currentFolder)) {
+	if (!fl.contains(_currentFolder)) {
 		_currentFolder = "";
 		_ww->_entryTitle->clear();
 		_ww->_iconTitle->clear();
@@ -478,7 +478,7 @@ void KWalletEditor::updateEntries(const TQString& folder) {
 
 	// Remove deleted entries
 	for (TQListViewItem *i = pi->firstChild(); i; i = i->nextSibling()) {
-		if (!entries.tqcontains(i->text(0))) {
+		if (!entries.contains(i->text(0))) {
 			if (i == _entryList->currentItem()) {
 				entrySelectionChanged(0L);
 			}
@@ -487,7 +487,7 @@ void KWalletEditor::updateEntries(const TQString& folder) {
 	}
 
 	for (TQListViewItem *i = mi->firstChild(); i; i = i->nextSibling()) {
-		if (!entries.tqcontains(i->text(0))) {
+		if (!entries.contains(i->text(0))) {
 			if (i == _entryList->currentItem()) {
 				entrySelectionChanged(0L);
 			}
@@ -496,7 +496,7 @@ void KWalletEditor::updateEntries(const TQString& folder) {
 	}
 
 	for (TQListViewItem *i = bi->firstChild(); i; i = i->nextSibling()) {
-		if (!entries.tqcontains(i->text(0))) {
+		if (!entries.contains(i->text(0))) {
 			if (i == _entryList->currentItem()) {
 				entrySelectionChanged(0L);
 			}
@@ -505,7 +505,7 @@ void KWalletEditor::updateEntries(const TQString& folder) {
 	}
 
 	for (TQListViewItem *i = ui->firstChild(); i; i = i->nextSibling()) {
-		if (!entries.tqcontains(i->text(0))) {
+		if (!entries.contains(i->text(0))) {
 			if (i == _entryList->currentItem()) {
 				entrySelectionChanged(0L);
 			}
@@ -518,7 +518,7 @@ void KWalletEditor::updateEntries(const TQString& folder) {
 
 	// Add new entries
 	for (TQStringList::Iterator i = entries.begin(); i != entries.end(); ++i) {
-		if (fi->tqcontains(*i)){
+		if (fi->contains(*i)){
 			continue;
 		}
 
@@ -658,7 +658,7 @@ void KWalletEditor::newEntry() {
 		}
 
 		// FIXME: prohibits the use of the subheadings
-		if (fi->tqcontains(n)) {
+		if (fi->contains(n)) {
 			int rc = KMessageBox::questionYesNo(this, i18n("Sorry, that entry already exists. Try again?"), TQString(), i18n("Try Again"), i18n("Do Not Try"));
 			if (rc == KMessageBox::Yes) {
 				continue;

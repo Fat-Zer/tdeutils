@@ -41,7 +41,7 @@ void ClickMap::setTextProps( TextField *t )
 bool ClickMap::click( TQMouseEvent *e ) {
 
   //Don't load the web page if the click isn't for us
-  if (boundingBox.tqcontains(e->x(), e->y())) {
+  if (boundingBox.contains(e->x(), e->y())) {
 
     int index = ((e -> y() - getY()) / text.getLineHeight()) + 1;
     if (index >= 1 && index <= (int)displays.count()) {

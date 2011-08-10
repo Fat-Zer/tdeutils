@@ -501,7 +501,7 @@ CReplaceDialog::CReplaceDialog( TQWidget *tqparent, const char *name, bool modal
   connect( mFindSelector, TQT_SIGNAL(activated(int)),
 	   TQT_SLOT(findSelectorChanged(int)) );
 
-  text = i18n("Fo&rmat (tqfind):");
+  text = i18n("Fo&rmat (find):");
   TQLabel *label = new TQLabel( mFindSelector, text, plainPage() );
   if( label == 0 ) { return; }
 
@@ -530,7 +530,7 @@ CReplaceDialog::CReplaceDialog( TQWidget *tqparent, const char *name, bool modal
   connect( mReplaceSelector, TQT_SIGNAL(activated(int)),
 	   TQT_SLOT(replaceSelectorChanged(int)) );
 
-  text = i18n("For&mat (tqreplace):");
+  text = i18n("For&mat (replace):");
   label = new TQLabel( mReplaceSelector, text, plainPage() );
   if( label == 0 ) { return; }
   label->setFixedHeight( label->tqsizeHint().height() );

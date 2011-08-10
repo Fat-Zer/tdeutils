@@ -271,12 +271,12 @@ KDialogBase( tqparent, name, true,i18n("Private Key List"),Ok | Cancel)
 				dead=false;
                                 break;
 			case '-':
-				if (tst2.section(':',11,11).tqfind('D')==-1) warn=true;
+				if (tst2.section(':',11,11).find('D')==-1) warn=true;
 				break;
                         default:
                                 break;
                         }
-                                        if (tst2.section(':',11,11).tqfind('D')!=-1)
+                                        if (tst2.section(':',11,11).find('D')!=-1)
                                                 dead=true;
 					break;
                                 }
@@ -284,7 +284,7 @@ KDialogBase( tqparent, name, true,i18n("Private Key List"),Ok | Cancel)
                         pclose(fp2);
                         if (!fullname.isEmpty() && (!dead)) {
 			TQString keyMail,keyName;
-			if (fullname.tqfind("<")!=-1) {
+			if (fullname.find("<")!=-1) {
                 	keyMail=fullname.section('<',-1,-1);
                 	keyMail.truncate(keyMail.length()-1);
                 	keyName=fullname.section('<',0,0);
@@ -301,7 +301,7 @@ KDialogBase( tqparent, name, true,i18n("Private Key List"),Ok | Cancel)
 				KListViewItem *sub= new KListViewItem(item,i18n("Expiration:"),val);
                                 sub->setSelectable(false);
                                 item->setPixmap(0,keyPair);
-                                if (preselected.tqfind(id,0,false)!=-1) {
+                                if (preselected.find(id,0,false)!=-1) {
                                         keysListpr->setSelected(item,true);
 					keysListpr->setCurrentItem(item);
                                         selectedok=true;
@@ -506,7 +506,7 @@ void mySearchLine::updateSearch(const TQString& s)
 	{
 	    if (item->isVisible() && !(item->text(6).isEmpty()))
 	    {
-		if (searchListView->displayOnlySecret && searchListView->secretList.tqfind(item->text(6))==-1)
+		if (searchListView->displayOnlySecret && searchListView->secretList.find(item->text(6))==-1)
                     item->setVisible(false);
 		if (!searchListView->displayDisabled && item->pixmap(2))
 		    if (item->pixmap(2)->serialNumber()==disabledSerial)
@@ -838,7 +838,7 @@ void listKeys::slotToggleDisabled()
 
 void listKeys::slotGotoDefaultKey()
 {
-        TQListViewItem *myDefaulKey = keysList2->tqfindItem(KGpgSettings::defaultKey(),6);
+        TQListViewItem *myDefaulKey = keysList2->findItem(KGpgSettings::defaultKey(),6);
         keysList2->clearSelection();
         keysList2->setCurrentItem(myDefaulKey);
         keysList2->setSelected(myDefaulKey,true);
@@ -1006,7 +1006,7 @@ void listKeys::slotSetPhotoSize(int size)
 
         TQListViewItem *newdef = keysList2->firstChild();
         while (newdef) {
-                //if ((keysList2->photoKeysList.tqfind(newdef->text(6))!=-1) && (newdef->childCount ()>0))
+                //if ((keysList2->photoKeysList.find(newdef->text(6))!=-1) && (newdef->childCount ()>0))
                 if (newdef->childCount ()>0) {
                         bool hasphoto=false;
                         TQListViewItem *newdefChild = newdef->firstChild();
@@ -1049,19 +1049,19 @@ void listKeys::findFirstKey()
 
 
         //
-        KFind *m_tqfind = new KFind(searchString, searchOptions,this);
-        m_tqfind->setData(searchText);
-        while (m_tqfind->find()==KFind::NoMatch) {
+        KFind *m_find = new KFind(searchString, searchOptions,this);
+        m_find->setData(searchText);
+        while (m_find->find()==KFind::NoMatch) {
                 if (!item->nextSibling()) {
                         foundItem=false;
                         break;
                 } else {
                         item = item->nextSibling();
                         searchText=item->text(0)+" "+item->text(1)+" "+item->text(6);
-                        m_tqfind->setData(searchText);
+                        m_find->setData(searchText);
                 }
         }
-        delete m_tqfind;
+        delete m_find;
 
         if (foundItem) {
 
@@ -1091,20 +1091,20 @@ void listKeys::findNextKey()
         //kdDebug(2100)<<"Next string:"<<searchText<<endl;
         //kdDebug(2100)<<"Search:"<<searchString<<endl;
         //kdDebug(2100)<<"OPts:"<<searchOptions<<endl;
-        KFind *m_tqfind = new KFind(searchString, searchOptions,this);
-        m_tqfind->setData(searchText);
-        while (m_tqfind->find()==KFind::NoMatch) {
+        KFind *m_find = new KFind(searchString, searchOptions,this);
+        m_find->setData(searchText);
+        while (m_find->find()==KFind::NoMatch) {
                 if (!item->nextSibling()) {
                         foundItem=false;
                         break;
                 } else {
                         item = item->nextSibling();
                         searchText=item->text(0)+" "+item->text(1)+" "+item->text(6);
-                        m_tqfind->setData(searchText);
+                        m_find->setData(searchText);
                         //kdDebug(2100)<<"Next string:"<<searchText<<endl;
                 }
         }
-        delete m_tqfind;
+        delete m_find;
         if (foundItem) {
                 keysList2->clearSelection();
                 keysList2->setCurrentItem(item);
@@ -1309,7 +1309,7 @@ void listKeys::slotSetDefKey()
 
 void listKeys::slotSetDefaultKey(TQString newID)
 {
-        TQListViewItem *newdef = keysList2->tqfindItem(newID,6);
+        TQListViewItem *newdef = keysList2->findItem(newID,6);
         if (newdef)
                 slotSetDefaultKey(newdef);
 }
@@ -1328,7 +1328,7 @@ void listKeys::slotSetDefaultKey(TQListViewItem *newdef)
                 return;
         }
 
-        TQListViewItem *olddef = keysList2->tqfindItem(KGpgSettings::defaultKey(),6);
+        TQListViewItem *olddef = keysList2->findItem(KGpgSettings::defaultKey(),6);
 
         KGpgSettings::setDefaultKey(newdef->text(6));
         KGpgSettings::writeConfig();
@@ -1382,10 +1382,10 @@ void listKeys::slotmenu(TQListViewItem *sel, const TQPoint &pos, int )
                         if (keysList2->currentItem()->text(6).isEmpty())
                                 popupgroup->exec(pos);
                         else {
-                                if ((keysList2->secretList.tqfind(sel->text(6))!=-1) && (keysList2->selectedItems().count()==1))
+                                if ((keysList2->secretList.find(sel->text(6))!=-1) && (keysList2->selectedItems().count()==1))
                                         popupsec->exec(pos);
                                 else
-                                        if ((keysList2->orphanList.tqfind(sel->text(6))!=-1) && (keysList2->selectedItems().count()==1))
+                                        if ((keysList2->orphanList.find(sel->text(6))!=-1) && (keysList2->selectedItems().count()==1))
                                                 popuporphan->exec(pos);
                                         else
                                                 popup->exec(pos);
@@ -1730,7 +1730,7 @@ void listKeys::createNewGroup()
                         TQStringList groups=KgpgInterface::getGpgGroupNames(KGpgSettings::gpgConfigPath());
                         KGpgSettings::setGroups(groups.join(","));
                         keysList2->refreshgroups();
-                        TQListViewItem *newgrp = keysList2->tqfindItem(groupName,0);
+                        TQListViewItem *newgrp = keysList2->findItem(groupName,0);
 
                         keysList2->clearSelection();
                         keysList2->setCurrentItem(newgrp);
@@ -2232,7 +2232,7 @@ void listKeys::readgenprocess(KProcIO *p)
 {
         TQString required;
         while (p->readln(required,true)!=-1) {
-                if (required.tqfind("KEY_CREATED")!=-1)
+                if (required.find("KEY_CREATED")!=-1)
                         newkeyFinger=required.stripWhiteSpace().section(' ',-1);
                 message+=required+"\n";
         }
@@ -2299,7 +2299,7 @@ void listKeys::newKeyDone(KProcess *)
         delete pop;
         keyCreated->exec();
 
-        TQListViewItem *newdef = keysList2->tqfindItem(newkeyID,6);
+        TQListViewItem *newdef = keysList2->findItem(newkeyID,6);
         if (newdef)
                 if (page->CBdefault->isChecked())
                         slotSetDefaultKey(newdef);
@@ -2388,7 +2388,7 @@ void listKeys::confirmdeletekey()
                 deleteGroup();
                 return;
         }
-        if (((keysList2->secretList.tqfind(keysList2->currentItem()->text(6))!=-1) || (keysList2->orphanList.tqfind(keysList2->currentItem()->text(6))!=-1)) && (keysList2->selectedItems().count()==1))
+        if (((keysList2->secretList.find(keysList2->currentItem()->text(6))!=-1) || (keysList2->orphanList.find(keysList2->currentItem()->text(6))!=-1)) && (keysList2->selectedItems().count()==1))
                 deleteseckey();
         else {
                 TQStringList keysToDelete;
@@ -2397,7 +2397,7 @@ void listKeys::confirmdeletekey()
                 bool secretKeyInside=false;
                 for ( uint i = 0; i < exportList.count(); ++i )
                         if ( exportList.at(i) ) {
-				if (keysList2->secretList.tqfind(exportList.at(i)->text(6))!=-1) {
+				if (keysList2->secretList.find(exportList.at(i)->text(6))!=-1) {
                                         secretKeyInside=true;
                                         secList+=exportList.at(i)->text(0)+" ("+exportList.at(i)->text(1)+")<br>";
                                         exportList.at(i)->setSelected(false);
@@ -2718,14 +2718,14 @@ void KeyView::refreshkeylist()
 
 
                         TQStringList::Iterator ite;
-                        ite=issec.tqfind(pubKey.gpgkeyid.right(8));
+                        ite=issec.find(pubKey.gpgkeyid.right(8));
                         if (ite!=issec.end()) {
                                 item->setPixmap(0,pixkeyPair);
                                 secretList+=pubKey.gpgkeyid;
                                 issec.remove(*ite);
                         } else item->setPixmap(0,pixkeySingle);
 
-                        if (openKeys.tqfind(pubKey.gpgkeyid)!=-1)
+                        if (openKeys.find(pubKey.gpgkeyid)!=-1)
                                 item->setOpen(true);
                 }
 
@@ -2753,9 +2753,9 @@ void KeyView::refreshkeylist()
         if(current != NULL) {
                 // select previous selected
                 if (!current->text(6).isEmpty())
-                        newPos = tqfindItem(current->text(6), 6);
+                        newPos = findItem(current->text(6), 6);
                 else
-                        newPos = tqfindItem(current->text(0), 0);
+                        newPos = findItem(current->text(0), 0);
                 delete current;
         }
 
@@ -2816,7 +2816,7 @@ void KeyView::insertOrphanedKeys(TQStringList orphans)
         fp = popen("gpg --no-secmem-warning --no-tty --with-colons --list-secret-keys", "r");
         while ( fgets( line, sizeof(line), fp)) {
                 TQString lineRead=TQString::fromUtf8(line);
-                if ((lineRead.startsWith("sec")) && (orphans.tqfind(lineRead.section(':',4,4).right(8))!=orphans.end())) {
+                if ((lineRead.startsWith("sec")) && (orphans.find(lineRead.section(':',4,4).right(8))!=orphans.end())) {
                         gpgKey orphanedKey=extractKey(lineRead);
 
                         bool isbold=false;
@@ -2881,7 +2881,7 @@ void KeyView::slotReloadKeys(TQStringList keyIDs)
                 refreshcurrentkey(*it);
         }
         kdDebug(2100)<<"Refreshing key:--------"<<TQString((keyIDs.last()).right(8).prepend("0x"))<<endl;
-        ensureItemVisible(this->tqfindItem((keyIDs.last()).right(8).prepend("0x"),6));
+        ensureItemVisible(this->findItem((keyIDs.last()).right(8).prepend("0x"),6));
         emit statusMessage(i18n("%1 Keys, %2 Groups").tqarg(childCount()-groupNb).tqarg(groupNb),1);
         emit statusMessage(i18n("Ready"),0);
 }
@@ -2911,12 +2911,12 @@ void KeyView::slotReloadOrphaned()
         TQStringList::Iterator it;
 
         for ( it = issec.begin(); it != issec.end(); ++it ) {
-                if (tqfindItem(*it,6)==0) {
+                if (findItem(*it,6)==0) {
                         insertOrphan(*it);
                         orphanList+=*it+",";
                 }
         }
-        setSelected(tqfindItem(*it,6),true);
+        setSelected(findItem(*it,6),true);
         emit statusMessage(i18n("%1 Keys, %2 Groups").tqarg(childCount()-groupNb).tqarg(groupNb),1);
         emit statusMessage(i18n("Ready"),0);
 }
@@ -2958,7 +2958,7 @@ void KeyView::refreshcurrentkey(TQString currentID)
                         item->setPixmap(2,pubKey.trustpic);
 			item->setVisible(true);
                         item->setExpandable(true);
-                        if (issec.tqfind(pubKey.gpgkeyid.right(8),0,FALSE)!=-1) {
+                        if (issec.find(pubKey.gpgkeyid.right(8),0,FALSE)!=-1) {
                                 item->setPixmap(0,pixkeyPair);
                                 secretList+=pubKey.gpgkeyid;
                         } else {
@@ -2969,12 +2969,12 @@ void KeyView::refreshcurrentkey(TQString currentID)
         pclose(fp);
 
         if (!keyFound) {
-                if (orphanList.tqfind(currentID)==-1)
+                if (orphanList.find(currentID)==-1)
                         orphanList+=currentID+",";
                 insertOrphan(currentID);
                 return;
         }
-        if (orphanList.tqfind(currentID)!=-1)
+        if (orphanList.find(currentID)!=-1)
                 orphanList.remove(currentID);
 
         clearSelection();
@@ -3059,7 +3059,7 @@ gpgKey KeyView::extractKey(TQString keyColon)
                 ret.gpgkeyexpiration=KGlobal::locale()->formatDate(date, true);
         }
         TQString fullname=keyString[9];
-        if (fullname.tqfind("<")!=-1) {
+        if (fullname.find("<")!=-1) {
                 ret.gpgkeymail=fullname.section('<',-1,-1);
                 ret.gpgkeymail.truncate(ret.gpgkeymail.length()-1);
                 ret.gpgkeyname=fullname.section('<',0,0);
@@ -3138,7 +3138,7 @@ gpgKey KeyView::extractKey(TQString keyColon)
                 ret.trustpic=trustunknown;
                 break;
         }
-        if (keyString[11].tqfind('D')!=-1) {
+        if (keyString[11].find('D')!=-1) {
                 ret.gpgkeytrust=i18n("Disabled");
                 ret.trustpic=trustbad;
         }

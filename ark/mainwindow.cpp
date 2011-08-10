@@ -263,7 +263,7 @@ MainWindow::getOpenURL( bool addOnly, const TQString & caption,
     if ( !suggestedName.isEmpty() )
     {
         filter = TQString();
-        combo->setCurrentItem( list.tqfindIndex( ArchiveFormatInfo::self()->descriptionForMimeType(
+        combo->setCurrentItem( list.findIndex( ArchiveFormatInfo::self()->descriptionForMimeType(
                                  KMimeType::findByPath( suggestedName, 0, true )->name() ) ) );
     }
 

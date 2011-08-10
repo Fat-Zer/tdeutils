@@ -246,14 +246,14 @@ bool XAutoLock::x11Event( XEvent* ev )
 // don't futher process key events that were received only because XAutoLock wants them
     if( ev->type == KeyPress && !ev->xkey.send_event
         && !xautolock_useXidle && !xautolock_useMit
-        && !TQWidget::tqfind( ev->xkey.window ))
+        && !TQWidget::find( ev->xkey.window ))
         return true;
     return false;
 }
 
 bool XAutoLock::ignoreWindow( WId w )
 {
-    if( w != qt_xrootwin() && TQWidget::tqfind( w ))
+    if( w != qt_xrootwin() && TQWidget::find( w ))
         return true;
     return false;
 }

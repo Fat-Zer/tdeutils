@@ -297,7 +297,7 @@ void Arch::slotReceivedTOC( KProcess*, char* data, int length )
     {
       processLine( m_buffer );
     }
-    else if ( m_buffer.tqfind( m_headerString.data() ) == -1 )
+    else if ( m_buffer.find( m_headerString.data() ) == -1 )
     {
       if ( m_header_removed && !m_finished )
       {

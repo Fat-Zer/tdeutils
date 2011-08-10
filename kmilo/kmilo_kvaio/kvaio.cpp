@@ -244,7 +244,7 @@ bool KVaio::isKScreensaverAvailable()
             // kdDebug() << "KVaio::showTextMsg: kded is registered at dcop server."
             //           << endl;
             objects = mClient.remoteObjects("kdesktop");
-            if(objects.tqcontains("KScreensaverIface"))
+            if(objects.contains("KScreensaverIface"))
             {
                 // kdDebug() << "KVaio::showTextMsg: kmilod is available at kded."
                 //           << endl;
@@ -278,7 +278,7 @@ bool KVaio::isKMiloDAvailable()
             // kdDebug() << "KVaio::showTextMsg: kded is registered at dcop server."
             //           << endl;
             objects = mClient.remoteObjects("kded");
-            if(objects.tqcontains("kmilod"))
+            if(objects.contains("kmilod"))
             {
                 // kdDebug() << "KVaio::showTextMsg: kmilod is available at kded."
                 //           << endl;

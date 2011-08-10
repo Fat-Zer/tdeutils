@@ -183,7 +183,7 @@ if (compressionScheme==0)
 	else
 	extension=".tar.bz2";
 
-if (encryptOptions.tqfind("armor")!=encryptOptions.end () )
+if (encryptOptions.find("armor")!=encryptOptions.end () )
                 extension+=".asc";
         else if (KGpgSettings::pgpExtension())
                 extension+=".pgp";
@@ -602,7 +602,7 @@ static TQString getGpgHome()
     char    *env=getenv("GNUPGHOME");
     TQString gpgHome(env ? env : TQDir::homeDirPath()+"/.gnupg/");
 
-    gpgHome.tqreplace("//", "/");
+    gpgHome.replace("//", "/");
 
     if(!gpgHome.endsWith("/"))
         gpgHome.append('/');
@@ -660,7 +660,7 @@ void  MyView::startWizard()
                                 fp2 = popen("gpg --display-charset=utf-8 --no-tty --with-colon --list-keys "+TQFile::encodeName(tst.section(':',4,4)), "r");
                                 while ( fgets( line, sizeof(line), fp2)) {
                                         tst2=TQString::fromUtf8(line);
-                                        if (tst2.startsWith("pub") && (trustedvals.tqfind(tst2.section(':',1,1))==-1)) {
+                                        if (tst2.startsWith("pub") && (trustedvals.find(tst2.section(':',1,1))==-1)) {
                                                 counter=true;
                                                 wiz->CBdefault->insertItem(tst.section(':',4,4).right(8)+": "+name);
                                                 if (firstKey.isEmpty())
@@ -1029,8 +1029,8 @@ TQString newtxt=kapp->tqclipboard()->text(clipboardMode);
 if (newtxt.length()>300)
                         newtxt=TQString(newtxt.left(250).stripWhiteSpace())+"...\n"+TQString(newtxt.right(40).stripWhiteSpace());
 
-                newtxt.tqreplace(TQRegExp("<"),"&lt;");   /////   disable html tags
-                newtxt.tqreplace(TQRegExp("\n"),"<br>");
+                newtxt.replace(TQRegExp("<"),"&lt;");   /////   disable html tags
+                newtxt.replace(TQRegExp("\n"),"<br>");
 
 pop = new KPassivePopup( this);
                 pop->setView(i18n("Encrypted following text:"),newtxt,KGlobal::iconLoader()->loadIcon("kgpg",KIcon::Desktop));

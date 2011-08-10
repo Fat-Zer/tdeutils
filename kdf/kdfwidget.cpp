@@ -343,7 +343,7 @@ void KDFWidget::updateDFDone( void ){
 
     int k=0;
     item = new CListViewItem( mList, item );
-    bool root = disk->mountOptions().tqfind("user",0,false)==-1 ? true : false;
+    bool root = disk->mountOptions().find("user",0,false)==-1 ? true : false;
     item->setPixmap( k++, mList->icon( disk->iconName(), root ) );
     item->setText( k++, disk->deviceName() );
     item->setText( k++, disk->fsType() );
@@ -400,10 +400,10 @@ DiskEntry *KDFWidget::selectedDisk( TQListViewItem *item )
   DiskEntry disk(item->text(deviceCol));
   disk.setMountPoint(item->text(mntCol));
 
-  // I can't get tqfind() to work. The Disks::compareItems(..) is
+  // I can't get find() to work. The Disks::compareItems(..) is
   // never called.
   //
-  //int pos=mDiskList->tqfind(disk);
+  //int pos=mDiskList->find(disk);
 
   int pos = -1;
   for( u_int i=0; i<mDiskList.count(); i++ )
@@ -515,10 +515,10 @@ void KDFWidget::popupMenu( TQListViewItem *item, const TQPoint &p )
     if(  mStd.fileManager().isEmpty() == false )
     {
       TQString cmd = mStd.fileManager();
-      int pos = cmd.tqfind("%m");
+      int pos = cmd.find("%m");
       if( pos > 0 )
       {
-	cmd = cmd.tqreplace( pos, 2, KProcess::quote(disk->mountPoint()) ) + " &";
+	cmd = cmd.replace( pos, 2, KProcess::quote(disk->mountPoint()) ) + " &";
       }
       else
       {
@@ -569,10 +569,10 @@ void KDFWidget::updateDiskBarPixmaps( void )
   int i=0;
   for(TQListViewItem *it=mList->firstChild(); it!=0;it=it->nextSibling(),i++ )
   {
-    // I can't get tqfind() to work. The Disks::compareItems(..) is
+    // I can't get find() to work. The Disks::compareItems(..) is
     // never called.
     //
-    //int pos=mDiskList->tqfind(disk);
+    //int pos=mDiskList->find(disk);
 
     DiskEntry dummy(it->text(deviceCol));
     dummy.setMountPoint(it->text(mntCol));
@@ -609,8 +609,8 @@ void KDFWidget::updateDiskBarPixmaps( void )
       p.setPen(black);
       p.drawRect(0,0,w,h);
       TQColor c;
-      if ( (disk->iconName().tqfind("cdrom") != -1)
-	   || (disk->iconName().tqfind("writer") != -1) )
+      if ( (disk->iconName().find("cdrom") != -1)
+	   || (disk->iconName().find("writer") != -1) )
 	c = gray;
       else
 	c = disk->percentFull() > FULL_PERCENT ? red : darkGreen;

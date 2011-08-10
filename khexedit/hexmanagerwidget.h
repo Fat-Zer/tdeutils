@@ -88,7 +88,7 @@ class CTabBar : public TQTabBar
     void slotSelected( int id );
 
   private:
-    TQTab *tqfind( const TQString &name );
+    TQTab *find( const TQString &name );
 
   private:
     TQValueList<CFileKey> mFileList;

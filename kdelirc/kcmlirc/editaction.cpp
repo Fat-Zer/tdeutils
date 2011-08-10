@@ -319,10 +319,10 @@ void EditAction::updateDCOPApplications()
 	QCStringList theApps = theClient->registeredApplications();
 	for(QCStringList::iterator i = theApps.begin(); i != theApps.end(); ++i)
 	{
-		if(!TQString(*i).tqfind("anonymous")) continue;
+		if(!TQString(*i).find("anonymous")) continue;
 		TQRegExp r("(.*)-[0-9]+");
 		TQString name = r.exactMatch(TQString(*i)) ? r.cap(1) : *i;
-		if(names.tqcontains(name)) continue;
+		if(names.contains(name)) continue;
 		names += name;
 
 		theDCOPApplications->insertItem(name);

@@ -453,7 +453,7 @@ ArkWidget::guessName( const KURL &archive )
     ext = (*it).remove( '*' );
     if ( fileName.endsWith( ext ) )
     {
-      fileName = fileName.left( fileName.tqfindRev( ext ) );
+      fileName = fileName.left( fileName.findRev( ext ) );
       break;
     }
   }
@@ -1204,7 +1204,7 @@ ArkWidget::toLocalFile( const KURL& url )
    TQString strURL = url.prettyURL();
 
         TQString tempfile = tmpDir();
-        tempfile += strURL.right(strURL.length() - strURL.tqfindRev("/") - 1);
+        tempfile += strURL.right(strURL.length() - strURL.findRev("/") - 1);
         deleteAfterUse(tempfile);  // remember for deletion
         KURL tempurl; tempurl.setPath( tempfile );
         if( !KIO::NetAccess::dircopy(url, tempurl, this) )
@@ -1643,10 +1643,10 @@ ArkWidget::slotEditFinished(KProcess *kp)
     TQStringList::Iterator it = list.begin();
     TQString filename = *it;
     TQString path;
-    if (filename.tqcontains('/') > 3)
+    if (filename.contains('/') > 3)
     {
         kdDebug(1601) << "Filename is originally: " << filename << endl;
-        int i = filename.tqfind('/', 5);
+        int i = filename.find('/', 5);
         path = filename.left(1+i);
         kdDebug(1601) << "Changing to dir: " << path << endl;
         TQDir::setCurrent(path);
@@ -1734,7 +1734,7 @@ ArkWidget::showCurrentFile()
     TQString fullname = tmpDir();
     fullname += name;
 
-    if(fullname.tqcontains("../"))
+    if(fullname.contains("../"))
         fullname.remove("../");
 
     //Convert the TQString filename to KURL to escape the bad characters

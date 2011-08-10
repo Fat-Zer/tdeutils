@@ -233,7 +233,7 @@ void SensorsConfig::showEvent(TQShowEvent *)
     const SensorList &list = SensorBase::self()->sensorsList();
     SensorList::ConstIterator it;
     for (it = list.begin(); it != list.end(); ++it) {
-      TQListViewItem *item = m_sensorView->tqfindItem((*it).sensorName(), 1);
+      TQListViewItem *item = m_sensorView->findItem((*it).sensorName(), 1);
       if (item)
         item->setText(3, (*it).sensorValue() + (*it).sensorUnit());
     }

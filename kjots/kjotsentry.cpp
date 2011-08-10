@@ -46,9 +46,9 @@
 // helper functions for HTML output
 TQString prepForHTML(TQString text)
 {
-    text.tqreplace("<", "&lt;");
-    text.tqreplace(">", "&gt;");
-    text.tqreplace("\n", "<br>");
+    text.replace("<", "&lt;");
+    text.replace(">", "&gt;");
+    text.replace("\n", "<br>");
     return text;
 }
 
@@ -428,7 +428,7 @@ bool KJotsBook::loadOldBook(TQFile &file)
 
         int pos = 0;
 
-        while ((pos = buf.tqfind('\\',pos)) != -1)
+        while ((pos = buf.find('\\',pos)) != -1)
             if (buf[++pos] == '\\')
                 buf.remove(pos, 1 );
 
@@ -1125,8 +1125,8 @@ bool KJotsPage::isDirty()
 
     TQDomElement text = doc.createElement( "Text" );
     TQString saveText = body();
-    if ( saveText.tqcontains("]]>") ) {
-        saveText.tqreplace("]]>","]]&gt;");
+    if ( saveText.contains("]]>") ) {
+        saveText.replace("]]>","]]&gt;");
         text.setAttribute("fixed", "1");
     }
     text.appendChild( doc.createCDATASection( saveText ));
@@ -1153,7 +1153,7 @@ void KJotsPage::parseXml( TQDomElement &me )
                     TQString bodyText = e.text();
                     if ( e.hasAttribute("fixed") ) 
                     {
-                        bodyText.tqreplace("]]&gt;", "]]>");
+                        bodyText.replace("]]&gt;", "]]>");
                     }
                     setBody(bodyText);
                 } 

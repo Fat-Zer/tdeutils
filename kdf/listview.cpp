@@ -99,7 +99,7 @@ const TQPixmap &CListView::icon( const TQString &iconName, bool drawBorder )
 
       }
     }
-    mPixDict.tqreplace( iconName, pix );
+    mPixDict.replace( iconName, pix );
   }
 
   return( *pix );

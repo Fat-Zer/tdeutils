@@ -101,7 +101,7 @@ public:
  ~DiskList();
    int readFSTAB();
    int readDF();
-   int tqfind(const DiskEntry* disk) {return disks->tqfind(disk);}
+   int find(const DiskEntry* disk) {return disks->find(disk);}
    DiskEntry*  at(uint index) {return disks->at(index);}
    DiskEntry* first() {return disks->first();}
    DiskEntry* next() {return disks->next();}

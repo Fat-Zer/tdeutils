@@ -154,7 +154,7 @@ void KMultiFormListBoxMultiVisible::append(KMultiFormListBoxEntry *elm)
 
 void KMultiFormListBoxMultiVisible::delElement(TQWidget *elm)
 {
-  int index = elms->tqfind(elm);
+  int index = elms->find(elm);
   TQWidget *next = elms->at(index+1);
   if (strcmp(next->name(),"seperator") != 0) {
     elms->removeRef(next);
@@ -186,7 +186,7 @@ void KMultiFormListBoxMultiVisible::insertElmIntoWidget(KMultiFormListBoxEntry *
   // Find the location to insert the new element.
   int index = elms->count();
   if (after) {
-    index = elms->tqfindRef(after);
+    index = elms->findRef(after);
   }
 
   // Now show the new element.

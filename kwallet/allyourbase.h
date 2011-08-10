@@ -64,7 +64,7 @@ class KWalletContainerItem : public KListViewItem {
 	public:
 		virtual int rtti() const;
 		KWallet::Wallet::EntryType type();
-		bool tqcontains(const TQString& itemKey);
+		bool contains(const TQString& itemKey);
 		TQListViewItem* getItem(const TQString& itemKey);
 
 	private:
@@ -84,7 +84,7 @@ class KWalletFolderItem : public KListViewItem {
 		void refresh();
 		KWalletContainerItem* getContainer(KWallet::Wallet::EntryType type);
 		TQPixmap getFolderIcon(KIcon::Group group);
-		bool tqcontains(const TQString& itemKey);
+		bool contains(const TQString& itemKey);
 		TQListViewItem* getItem(const TQString& itemKey);
 
 	public:

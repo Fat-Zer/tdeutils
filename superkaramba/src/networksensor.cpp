@@ -102,11 +102,11 @@ void NetworkSensor::getInOutBytes ( unsigned long &in,unsigned long &out) const
     {
         TQTextStream t( &file );        // use a text stream
         line = t.readLine();
-        while(line !=0 && !line.tqcontains(device))
+        while(line !=0 && !line.contains(device))
         {
             line = t.readLine();
         }
-        if ( line.tqcontains( device ) )
+        if ( line.contains( device ) )
         {
             TQRegExp rx( "\\W+"+device+":\\D*(\\d+)(?:\\D+\\d+){7}\\D+(\\d+)", false);
             rx.search(line);
@@ -115,7 +115,7 @@ void NetworkSensor::getInOutBytes ( unsigned long &in,unsigned long &out) const
        }
         else
         {
-            qDebug("Network sensor: can not tqfind %s", device.ascii());
+            qDebug("Network sensor: can not find %s", device.ascii());
             in = 0;
             out = 0;
         }
@@ -148,11 +148,11 @@ void NetworkSensor::update()
             format = "%in";
         }
 
-        format.tqreplace( TQRegExp("%inkb", false), TQString::number( ((inB - receivedBytes)*8)/delay, 'f', decimals ) );
-        format.tqreplace( TQRegExp("%in", false), TQString::number( (inB - receivedBytes)/delay, 'f', decimals ) );
+        format.replace( TQRegExp("%inkb", false), TQString::number( ((inB - receivedBytes)*8)/delay, 'f', decimals ) );
+        format.replace( TQRegExp("%in", false), TQString::number( (inB - receivedBytes)/delay, 'f', decimals ) );
 
-        format.tqreplace( TQRegExp("%outkb", false), TQString::number( ((outB - transmittedBytes)*8)/delay, 'f', decimals ) );
-        format.tqreplace( TQRegExp("%out", false), TQString::number( (outB - transmittedBytes)/delay, 'f', decimals ) );
+        format.replace( TQRegExp("%outkb", false), TQString::number( ((outB - transmittedBytes)*8)/delay, 'f', decimals ) );
+        format.replace( TQRegExp("%out", false), TQString::number( (outB - transmittedBytes)/delay, 'f', decimals ) );
 
         meter->setValue( format );
         ++it;

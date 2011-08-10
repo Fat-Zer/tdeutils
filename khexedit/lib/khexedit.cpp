@@ -904,7 +904,7 @@ void KHexEdit::insert( const TQByteArray &D )
       // we restrict the replacement to the minimum length of selection and input
       ChangedRange = BufferRanges->selection();
       ChangedRange.restrictEndTo( ChangedRange.start()+D.size()-1 );
-      int W = DataBuffer->tqreplace( ChangedRange, D.data(), ChangedRange.width() );
+      int W = DataBuffer->replace( ChangedRange, D.data(), ChangedRange.width() );
       BufferCursor->gotoCIndex( ChangedRange.start()+W );
       BufferRanges->removeSelection();
     }
@@ -917,7 +917,7 @@ void KHexEdit::insert( const TQByteArray &D )
         ChangedRange.restrictEndTo( BufferLayout->length()-1 );
         if( ChangedRange.isValid() )
         {
-          int W = DataBuffer->tqreplace( ChangedRange, D.data(), ChangedRange.width() );
+          int W = DataBuffer->replace( ChangedRange, D.data(), ChangedRange.width() );
           BufferCursor->gotoNextByte( W );
         }
       }
@@ -930,7 +930,7 @@ void KHexEdit::insert( const TQByteArray &D )
       // replacing the selection
       KSection Selection = BufferRanges->selection();
       int OldLastIndex = BufferLayout->length() - 1;
-      int W = DataBuffer->tqreplace( Selection, D.data(), D.size() );
+      int W = DataBuffer->replace( Selection, D.data(), D.size() );
       updateLength();
       BufferCursor->gotoIndex( Selection.start() + W );
       if( W > 0 )
@@ -1933,7 +1933,7 @@ void KHexEdit::handleInternalDrag( TQDropEvent *e )
           ChangedRange.restrictEndTo( BufferLayout->length()-1 );
           if( ChangedRange.isValid() )
           {
-            int NoOfReplaced = DataBuffer->tqreplace( ChangedRange, Data.data(), ChangedRange.width() );
+            int NoOfReplaced = DataBuffer->replace( ChangedRange, Data.data(), ChangedRange.width() );
             BufferCursor->gotoNextByte( NoOfReplaced );
           }
         }

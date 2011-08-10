@@ -80,7 +80,7 @@ void DateSensor::toggleCalendar(TQMouseEvent *ev)
 		TQString height = sp->getParam("CALHEIGHT");
 
 		TQRect rect(meter->getX(),meter->getY(),width.toInt(), height.toInt());
-		if (rect.tqcontains( ev->x(), ev->y() ))
+		if (rect.contains( ev->x(), ev->y() ))
 		{
 			if (hidden)
 			{

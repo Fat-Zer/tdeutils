@@ -339,7 +339,7 @@ void TextLabel::mUpdate(TQPainter *p)
 
 bool TextLabel::click(TQMouseEvent* e)
 {
-    if (getBoundingBox().tqcontains(e -> x(), e -> y()) && isEnabled())
+    if (getBoundingBox().contains(e -> x(), e -> y()) && isEnabled())
     {
         TQString program;
         if (e -> button() == Qt::LeftButton)

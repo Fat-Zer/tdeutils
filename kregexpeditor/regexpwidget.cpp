@@ -207,7 +207,7 @@ bool RegExpWidget::acceptWidgetInsert( RegExpType tp ) const
 
 RegExpWidget* RegExpWidget::widgetUnderPoint( TQPoint globalPos, bool )
 {
-  if ( TQRect(mapToGlobal( TQPoint(0,0) ), size() ).tqcontains( globalPos ) )
+  if ( TQRect(mapToGlobal( TQPoint(0,0) ), size() ).contains( globalPos ) )
     return this;
   else
     return 0;

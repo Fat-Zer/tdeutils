@@ -107,10 +107,10 @@ int DiskEntry::mount()
       cmdS=TQString::tqfromLatin1("mount -t%t -o%o %d %m");
       }
 
-  cmdS.tqreplace(TQString::tqfromLatin1("%d"),deviceName());
-  cmdS.tqreplace(TQString::tqfromLatin1("%m"),mountPoint());
-  cmdS.tqreplace(TQString::tqfromLatin1("%t"),fsType());
-  cmdS.tqreplace(TQString::tqfromLatin1("%o"),mountOptions());
+  cmdS.replace(TQString::tqfromLatin1("%d"),deviceName());
+  cmdS.replace(TQString::tqfromLatin1("%m"),mountPoint());
+  cmdS.replace(TQString::tqfromLatin1("%t"),fsType());
+  cmdS.replace(TQString::tqfromLatin1("%o"),mountOptions());
 
   kdDebug() << "mount-cmd: [" << cmdS << "]" << endl;
   int e=sysCall(cmdS);
@@ -126,8 +126,8 @@ int DiskEntry::umount()
   if (cmdS.isEmpty()) // generate default umount cmd
       cmdS="umount %d";
 
-  cmdS.tqreplace(TQString::tqfromLatin1("%d"),deviceName());
-  cmdS.tqreplace(TQString::tqfromLatin1("%m"),mountPoint());
+  cmdS.replace(TQString::tqfromLatin1("%d"),deviceName());
+  cmdS.replace(TQString::tqfromLatin1("%m"),mountPoint());
 
   kdDebug() << "umount-cmd: [" << cmdS << "]" << endl;
   int e=sysCall(cmdS);
@@ -193,23 +193,23 @@ TQString DiskEntry::guessIconName()
 {
   TQString iconName;
     // try to be intelligent
-    if (-1!=mountPoint().tqfind("cdrom",0,FALSE)) iconName+="cdrom";
-    else if (-1!=deviceName().tqfind("cdrom",0,FALSE)) iconName+="cdrom";
-    else if (-1!=mountPoint().tqfind("writer",0,FALSE)) iconName+="cdwriter";
-    else if (-1!=deviceName().tqfind("writer",0,FALSE)) iconName+="cdwriter";
-    else if (-1!=mountPoint().tqfind("mo",0,FALSE)) iconName+="mo";
-    else if (-1!=deviceName().tqfind("mo",0,FALSE)) iconName+="mo";
-    else if (-1!=deviceName().tqfind("fd",0,FALSE)) {
-            if (-1!=deviceName().tqfind("360",0,FALSE)) iconName+="5floppy";
-            if (-1!=deviceName().tqfind("1200",0,FALSE)) iconName+="5floppy";
+    if (-1!=mountPoint().find("cdrom",0,FALSE)) iconName+="cdrom";
+    else if (-1!=deviceName().find("cdrom",0,FALSE)) iconName+="cdrom";
+    else if (-1!=mountPoint().find("writer",0,FALSE)) iconName+="cdwriter";
+    else if (-1!=deviceName().find("writer",0,FALSE)) iconName+="cdwriter";
+    else if (-1!=mountPoint().find("mo",0,FALSE)) iconName+="mo";
+    else if (-1!=deviceName().find("mo",0,FALSE)) iconName+="mo";
+    else if (-1!=deviceName().find("fd",0,FALSE)) {
+            if (-1!=deviceName().find("360",0,FALSE)) iconName+="5floppy";
+            if (-1!=deviceName().find("1200",0,FALSE)) iconName+="5floppy";
             else iconName+="3floppy";
 	 }
-    else if (-1!=mountPoint().tqfind("floppy",0,FALSE)) iconName+="3floppy";
-    else if (-1!=mountPoint().tqfind("zip",0,FALSE)) iconName+="zip";
-    else if (-1!=fsType().tqfind("nfs",0,FALSE)) iconName+="nfs";
+    else if (-1!=mountPoint().find("floppy",0,FALSE)) iconName+="3floppy";
+    else if (-1!=mountPoint().find("zip",0,FALSE)) iconName+="zip";
+    else if (-1!=fsType().find("nfs",0,FALSE)) iconName+="nfs";
     else iconName+="hdd";
     mounted() ? iconName+="_mount" : iconName+="_unmount";
-//    if ( -1==mountOptions().tqfind("user",0,FALSE) )
+//    if ( -1==mountOptions().find("user",0,FALSE) )
 //      iconName.prepend("root_"); // special root icon, normal user can´t mount
 
     //debug("device %s is %s",deviceName().latin1(),iconName.latin1());

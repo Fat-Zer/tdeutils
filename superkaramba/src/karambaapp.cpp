@@ -309,7 +309,7 @@ void KarambaApplication::deleteKaramba(karamba* k, bool reloading)
 
 bool KarambaApplication::hasKaramba(karamba* k)
 {
-  return karambaList->tqcontainsRef(TQT_TQOBJECT(k)) > 0;
+  return karambaList->containsRef(TQT_TQOBJECT(k)) > 0;
 }
 
 // XXX: I guess this should be made with mutex/semaphores

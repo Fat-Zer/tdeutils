@@ -114,31 +114,31 @@ void DiskSensor::processExited(KProcess *)
         {
             format = "%u";
         }
-        format.tqreplace( TQRegExp("%fp", false),TQString::number(getPercentFree(mntPt)));
-        format.tqreplace( TQRegExp("%fg",false),
+        format.replace( TQRegExp("%fp", false),TQString::number(getPercentFree(mntPt)));
+        format.replace( TQRegExp("%fg",false),
                         TQString::number(getFreeSpace(mntPt)/(1024*1024)));
-        format.tqreplace( TQRegExp("%fkb",false),
+        format.replace( TQRegExp("%fkb",false),
                         TQString::number(getFreeSpace(mntPt)*8) );
-        format.tqreplace( TQRegExp("%fk",false),
+        format.replace( TQRegExp("%fk",false),
                         TQString::number(getFreeSpace(mntPt)) );
-        format.tqreplace( TQRegExp("%f", false),TQString::number(getFreeSpace(mntPt)/1024));
+        format.replace( TQRegExp("%f", false),TQString::number(getFreeSpace(mntPt)/1024));
         
-        format.tqreplace( TQRegExp("%up", false),TQString::number(getPercentUsed(mntPt)));
-        format.tqreplace( TQRegExp("%ug",false),
+        format.replace( TQRegExp("%up", false),TQString::number(getPercentUsed(mntPt)));
+        format.replace( TQRegExp("%ug",false),
                         TQString::number(getUsedSpace(mntPt)/(1024*1024)));
-        format.tqreplace( TQRegExp("%ukb",false),
+        format.replace( TQRegExp("%ukb",false),
                         TQString::number(getUsedSpace(mntPt)*8) );
-        format.tqreplace( TQRegExp("%uk",false),
+        format.replace( TQRegExp("%uk",false),
                         TQString::number(getUsedSpace(mntPt)) );
-        format.tqreplace( TQRegExp("%u", false),TQString::number(getUsedSpace(mntPt)/1024));
+        format.replace( TQRegExp("%u", false),TQString::number(getUsedSpace(mntPt)/1024));
 
-        format.tqreplace( TQRegExp("%tg",false),
+        format.replace( TQRegExp("%tg",false),
                         TQString::number(getTotalSpace(mntPt)/(1024*1024)));
-        format.tqreplace( TQRegExp("%tkb",false),
+        format.replace( TQRegExp("%tkb",false),
                         TQString::number(getTotalSpace(mntPt)*8));
-        format.tqreplace( TQRegExp("%tk",false),
+        format.replace( TQRegExp("%tk",false),
                         TQString::number(getTotalSpace(mntPt)));
-        format.tqreplace( TQRegExp("%t", false),TQString::number(getTotalSpace(mntPt)/1024));
+        format.replace( TQRegExp("%t", false),TQString::number(getTotalSpace(mntPt)/1024));
         meter->setValue(format);
         ++lit;
     }

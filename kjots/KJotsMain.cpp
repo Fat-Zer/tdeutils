@@ -827,7 +827,7 @@ void KJotsMain::jumpToBookmark(const TQString& bookmark)
         KMessageBox::information(this, 
             i18n("This bookmark is from an older version of KJots and is not fully supported. It may or may not work. You should delete and recreate this bookmark."), TQString(), "oldBookmarkWarning"); 
 
-        int slash = bookmark.tqfindRev('/');
+        int slash = bookmark.findRev('/');
 
         if (slash != -1)
         {

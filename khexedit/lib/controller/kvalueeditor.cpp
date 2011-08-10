@@ -207,7 +207,7 @@ void KValueEditor::doValueEditAction( KValueEditAction Action, int Input )
     EditValue = NewValue;
     ByteCodec->encode( ByteBuffer, 0, EditValue );
 
-    HexEdit->DataBuffer->tqreplace( Index, 1, (char*)&EditValue, 1 );
+    HexEdit->DataBuffer->replace( Index, 1, (char*)&EditValue, 1 );
   }
 
   HexEdit->updateCursor();

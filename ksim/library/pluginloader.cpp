@@ -125,7 +125,7 @@ bool KSim::PluginLoader::unloadPlugin(const TQCString &name)
     return false;
 
   // see if our plugin is loaded
-  KSim::Plugin plugin = tqfind(name);
+  KSim::Plugin plugin = find(name);
   if (plugin.isNull())
     return false;
 
@@ -161,7 +161,7 @@ bool KSim::PluginLoader::isLoaded(const TQCString &library) const
   if (library.isEmpty())
     return false;
 
-  return !tqfind(library).isNull();
+  return !find(library).isNull();
 }
 
 KSim::PluginInfo KSim::PluginLoader::findPluginInfo(const TQString &name,
@@ -211,13 +211,13 @@ KSim::PluginInfo KSim::PluginLoader::findPluginInfo(const TQString &name,
   return info;
 }
 
-KSim::Plugin &KSim::PluginLoader::tqfind(const TQCString &libName)
+KSim::Plugin &KSim::PluginLoader::find(const TQCString &libName)
 {
   if (libName.isEmpty())
     return KSim::Plugin::null;
 
   TQCString library(libName);
-  if (libName.tqfind(Private::ksimString) == -1)
+  if (libName.find(Private::ksimString) == -1)
     library.prepend(Private::ksimString);
 
   KSim::PluginList::Iterator it;
@@ -229,13 +229,13 @@ KSim::Plugin &KSim::PluginLoader::tqfind(const TQCString &libName)
   return KSim::Plugin::null;
 }
 
-const KSim::Plugin &KSim::PluginLoader::tqfind(const TQCString &libName) const
+const KSim::Plugin &KSim::PluginLoader::find(const TQCString &libName) const
 {
   if (libName.isEmpty())
     return KSim::Plugin::null;
 
   TQCString library(libName);
-  if (libName.tqfind(Private::ksimString) == -1)
+  if (libName.find(Private::ksimString) == -1)
     library.prepend(Private::ksimString);
 
   KSim::PluginList::ConstIterator it;
@@ -247,14 +247,14 @@ const KSim::Plugin &KSim::PluginLoader::tqfind(const TQCString &libName) const
   return KSim::Plugin::null;
 }
 
-KSim::Plugin &KSim::PluginLoader::tqfind(const KSim::PluginInfo &info)
+KSim::Plugin &KSim::PluginLoader::find(const KSim::PluginInfo &info)
 {
-  return tqfind(info.libName());
+  return find(info.libName());
 }
 
-const KSim::Plugin &KSim::PluginLoader::tqfind(const KSim::PluginInfo &info) const
+const KSim::Plugin &KSim::PluginLoader::find(const KSim::PluginInfo &info) const
 {
-  return tqfind(info.libName());
+  return find(info.libName());
 }
 
 const KSim::PluginList &KSim::PluginLoader::pluginList() const

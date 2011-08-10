@@ -181,15 +181,15 @@ void CpuView::updateView()
 //    kdDebug(2003) << "idle = " << cpuData.idle << endl;
     
     if (!m_firstTime) {
-      if (text.tqfind("%T") != -1)
+      if (text.find("%T") != -1)
         cpuDiff = cpuData.sys + cpuData.user + cpuData.nice;
-      else if (text.tqfind("%t") != -1)
+      else if (text.find("%t") != -1)
         cpuDiff = cpuData.sys + cpuData.user;
-      else if (text.tqfind("%s") != -1)
+      else if (text.find("%s") != -1)
         cpuDiff = cpuData.sys;
-      else if (text.tqfind("%u") != -1)
+      else if (text.find("%u") != -1)
         cpuDiff = cpuData.user;
-      else if (text.tqfind("%n") != -1)
+      else if (text.find("%n") != -1)
         cpuDiff = cpuData.nice;
 
       cpuDiff *= 100;
@@ -225,7 +225,7 @@ void CpuView::updateCpu(CpuData &cpu, int cpuNumber)
   while (!m_procStream->atEnd()) {
     parser = m_procStream->readLine();
     // remove all the entries apart from the line containing 'cpuString'
-    if (!cpuFound && parser.tqfind(TQRegExp(cpuString)) != -1) {
+    if (!cpuFound && parser.find(TQRegExp(cpuString)) != -1) {
       output = parser;
       cpuFound = true;
     }
@@ -438,7 +438,7 @@ void CpuConfig::readConfig()
   TQStringList::ConstIterator it;
   for (it = enabledCpus.begin(); it != enabledCpus.end(); ++it) {
     if (TQCheckListItem *item =
-          static_cast<TQCheckListItem *>(m_listView->tqfindItem((*it), 0))) {
+          static_cast<TQCheckListItem *>(m_listView->findItem((*it), 0))) {
       item->setOn(true);
       item->setText(1, config()->readEntry(CPU_NAME(cpuNum), "%T"));
     }

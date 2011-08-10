@@ -65,7 +65,7 @@ public:
     void readSettings();
     /// Map stored settings to widget status
     void setWidgets();
-    /// A kind of TQString::tqfind()
+    /// A kind of TQString::find()
     int findKeyWord(TQString &, const TQString &);
     /// Enable/disable all UI elements
     void setEnabled(bool);

@@ -138,7 +138,7 @@ void TaskManager::windowAdded(WId w )
     WId transient_for = (WId) transient_for_tmp;
 
     // check if it's transient for a skiptaskbar window
-    if (_skiptaskbar_windows.tqcontains(transient_for))
+    if (_skiptaskbar_windows.contains(transient_for))
       return;
 
     // lets see if this is a transient for an existing task
@@ -464,9 +464,9 @@ bool Task::isModified() const
 {
   static TQString modStr = TQString::fromUtf8("[") + i18n("modified") + TQString::fromUtf8("]");
 #ifdef KDE_3_2
-  int modStrPos = _info.visibleName().tqfind(modStr);
+  int modStrPos = _info.visibleName().find(modStr);
 #else
-  int modStrPos = _info.visibleName.tqfind(modStr);
+  int modStrPos = _info.visibleName.find(modStr);
 #endif
 
   return ( modStrPos != -1 );
@@ -608,10 +608,10 @@ bool Task::idMatch( const TQString& id1, const TQString& id2 )
   if ( id1.isEmpty() || id2.isEmpty() )
     return false;
 
-  if ( id1.tqcontains( id2 ) > 0 )
+  if ( id1.contains( id2 ) > 0 )
     return true;
 
-  if ( id2.tqcontains( id1 ) > 0 )
+  if ( id2.contains( id1 ) > 0 )
     return true;
 
   return false;

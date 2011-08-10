@@ -101,7 +101,7 @@ TQString ArkUtils::getTimeStamp(const TQString &_month,
 
   TQString year, timestamp;
 
-  if (_yearOrTime.tqcontains(":"))
+  if (_yearOrTime.contains(":"))
     // it has a timestamp so we have to figure out the year
     {
       year.sprintf("%d", ArkUtils::getYear(nMonth, thisYear, thisMonth));

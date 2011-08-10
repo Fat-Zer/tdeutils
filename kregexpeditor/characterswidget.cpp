@@ -171,7 +171,7 @@ TQString CharactersWidget::title() const
 
 RegExpWidget* CharactersWidget::findWidgetToEdit( TQPoint globalPos )
 {
-    if ( TQRect(mapToGlobal(TQPoint(0,0)), size()).tqcontains( globalPos ) )
+    if ( TQRect(mapToGlobal(TQPoint(0,0)), size()).contains( globalPos ) )
         return this;
     else
         return 0;

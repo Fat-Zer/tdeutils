@@ -64,7 +64,7 @@ void KSim::PluginObject::setConfigFileName(const TQString &name)
     return;
 
   d->configName = name;
-  if (name.tqfind("ksim") == -1)
+  if (name.find("ksim") == -1)
     d->configName.prepend("ksim_");
 }
 

@@ -416,7 +416,7 @@ void kgpgOptions::updateSettings()
 	for (uint i=0;i<page6->ServerBox->count();i++)
 	{
 	TQString currItem=page6->ServerBox->text(i);
-	if (currItem.tqfind(" ")!=-1) // it is the default keyserver
+	if (currItem.find(" ")!=-1) // it is the default keyserver
 	keyServer=currItem.section(" ",0,0);
 	else
 	{
@@ -538,7 +538,7 @@ void kgpgOptions::listkey()
                 tst=line;
                 if (tst.startsWith("pub")) {
                         name=KgpgInterface::checkForUtf8(tst.section(':',9,9));
-                        if ((!name.isEmpty()) && (trustedvals.tqfind(tst.section(':',1,1))==-1)) {
+                        if ((!name.isEmpty()) && (trustedvals.find(tst.section(':',1,1))==-1)) {
                                 counter++;
                                 //name=name.section('<',-1,-1);
                                 //  name=name.section('>',0,0);
@@ -546,7 +546,7 @@ void kgpgOptions::listkey()
                                 ids+=tst.section(':',4,4);
                                 if (tst.section(':',4,4).right(8)==alwaysKeyID)
                                         alwaysKeyName=tst.section(':',4,4).right(8)+":"+name;
-				if (issec.tqfind(tst.section(':',4,4).right(8),0,FALSE)!=-1)
+				if (issec.find(tst.section(':',4,4).right(8),0,FALSE)!=-1)
 				{
 //***                           page1->file_key->insertItem(pixkeyDouble,tst.section(':',4,4).right(8)+":"+name);
 //***                           page1->always_key->insertItem(pixkeyDouble,tst.section(':',4,4).right(8)+":"+name);
@@ -572,13 +572,13 @@ void kgpgOptions::slotAddKeyServer()
 TQString newServer=KInputDialog::getText(i18n("Add New Key Server"),i18n("Server URL:"));
 if (!newServer.isEmpty())
 page6->ServerBox->insertItem(newServer.stripWhiteSpace());
-page6->ServerBox->setSelected(page6->ServerBox->tqfindItem(newServer.stripWhiteSpace()),true);
+page6->ServerBox->setSelected(page6->ServerBox->findItem(newServer.stripWhiteSpace()),true);
 }
 
 void kgpgOptions::slotDelKeyServer()
 {
 bool defaultDeleted=false;
-if (page6->ServerBox->currentText().tqfind(" ")!=-1) defaultDeleted=true;
+if (page6->ServerBox->currentText().find(" ")!=-1) defaultDeleted=true;
 page6->ServerBox->removeItem(page6->ServerBox->currentItem());
 page6->ServerBox->setSelected(0,true);
 if (defaultDeleted) page6->ServerBox->changeItem(page6->ServerBox->currentText().section(" ",0,0)+" "+i18n("(Default)"),0);

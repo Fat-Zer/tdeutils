@@ -108,7 +108,7 @@ int KPlainBuffer::remove( KSection Remove )
 }
 
 
-unsigned int KPlainBuffer::tqreplace( KSection Remove, const char* D, unsigned int InputLength )
+unsigned int KPlainBuffer::replace( KSection Remove, const char* D, unsigned int InputLength )
 {
   // check all parameters
   if( Remove.start() >= (int)Size || (Remove.width()==0 && InputLength==0) )
@@ -259,7 +259,7 @@ int KPlainBuffer::fill( const char FChar, int FillLength, unsigned int Pos )
 }
 
 
-int KPlainBuffer::tqfind( const char* SearchString, int Length, KSection Section ) const  
+int KPlainBuffer::find( const char* SearchString, int Length, KSection Section ) const  
 {
   Section.restrictEndTo( Size-1 );
 

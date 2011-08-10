@@ -267,9 +267,9 @@ CTabBar::CTabBar( TQWidget *tqparent, char *name )
 
 void CTabBar::addName( const TQString &name )
 {
-  TQString n( name.right(name.length()-name.tqfindRev('/')-1) );
+  TQString n( name.right(name.length()-name.findRev('/')-1) );
 
-  TQTab *t = tqfind( n );
+  TQTab *t = find( n );
   if( t == 0 )
   {
     t = new TQTab();
@@ -283,8 +283,8 @@ void CTabBar::addName( const TQString &name )
 
 void CTabBar::removeName( const TQString &name )
 {
-  TQString n( name.right(name.length()-name.tqfindRev('/')-1) );
-  TQTab *t = tqfind(n);
+  TQString n( name.right(name.length()-name.findRev('/')-1) );
+  TQTab *t = find(n);
   if( t == 0 )
   {
     return;
@@ -306,8 +306,8 @@ void CTabBar::removeName( const TQString &name )
 
 void CTabBar::changeName( const TQString &curName, const TQString &newName )
 {
-  TQString n( curName.right(curName.length()-curName.tqfindRev('/')-1) );
-  TQTab *t = tqfind(n);
+  TQString n( curName.right(curName.length()-curName.findRev('/')-1) );
+  TQTab *t = find(n);
   if( t == 0 )
   {
     return;
@@ -318,7 +318,7 @@ void CTabBar::changeName( const TQString &curName, const TQString &newName )
   {
     if( (*it).id() == t->identifier() )
     {
-      TQString m( newName.right(newName.length()-newName.tqfindRev('/')-1) );
+      TQString m( newName.right(newName.length()-newName.findRev('/')-1) );
       t->setText(m);
 
       mFileList.remove(it);
@@ -331,7 +331,7 @@ void CTabBar::changeName( const TQString &curName, const TQString &newName )
 }
 
 
-TQTab *CTabBar::tqfind( const TQString &name )
+TQTab *CTabBar::find( const TQString &name )
 {
   TQPtrList<TQTab> &list = *tabList();
   for( TQTab *t = list.first(); t != 0; t = list.next() )

@@ -95,7 +95,7 @@ void RssSensor::update()
             {
                 TQDomNodeList links = docElem.elementsByTagName( "link" );
                 TQDomNodeList displays;
-                if ( format.tqcontains( "%d", false ) > 0 )
+                if ( format.contains( "%d", false ) > 0 )
                 {
                     displays = docElem.elementsByTagName( "description" );
                 }

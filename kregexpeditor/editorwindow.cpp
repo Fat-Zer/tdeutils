@@ -95,7 +95,7 @@ void  RegExpEditorWindow::mousePressEvent ( TQMouseEvent* event )
 bool RegExpEditorWindow::pointSelected( TQPoint p ) const
 {
     TQRect rect = _top->selectionRect();
-    return rect.tqcontains(p);
+    return rect.contains(p);
 }
 
 void RegExpEditorWindow::mouseMoveEvent ( TQMouseEvent* event )
@@ -168,7 +168,7 @@ bool RegExpEditorWindow::selectionOverlap( TQPoint pos, TQSize size ) const
 {
     TQRect child(pos, size);
 
-    return (_selection.intersects(child) && ! child.tqcontains(_selection));
+    return (_selection.intersects(child) && ! child.contains(_selection));
 }
 
 bool RegExpEditorWindow::hasSelection() const

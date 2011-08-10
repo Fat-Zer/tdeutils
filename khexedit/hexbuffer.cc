@@ -568,7 +568,7 @@ bool CHexBuffer::hasFileName( void )
   //
   // FIXME: Files can be called "Untitled" so this must be corrected.
   //
-  if( mUrl.isEmpty() || mUrl.tqcontains( i18n( "Untitled" ), false ) )
+  if( mUrl.isEmpty() || mUrl.contains( i18n( "Untitled" ), false ) )
   {
     return( false );
   }
@@ -4360,7 +4360,7 @@ void CHexBuffer::doActionGroup( CHexActionGroup *group )
 
 void CHexBuffer::doAction( CHexAction *action )
 {
-  if( action->mAction == CHexAction::tqreplace )
+  if( action->mAction == CHexAction::replace )
   {
     doReplace( action, true );
   }
@@ -4406,7 +4406,7 @@ void CHexBuffer::recordStart( SCursor &cursor )
 void CHexBuffer::recordReplace( SCursor &cursor, uint size, char *data1,
 				uint data1Size )
 {
-  CHexAction *hexAction = new CHexAction( CHexAction::tqreplace,
+  CHexAction *hexAction = new CHexAction( CHexAction::replace,
 					  cursor.curr.offset );
   if( hexAction == 0 )
   {
@@ -4786,7 +4786,7 @@ void CHexBuffer::printHtmlTocPage( const TQString &tocName,
   for( uint i=0; i<=numPage; i++ )
   {
     TQString n( fileNames[i].right( fileNames[i].length() -
-				   fileNames[i].tqfindRev('/') - 1) );
+				   fileNames[i].findRev('/') - 1) );
     os << "<A HREF=\"" << n << "\">" << i18n("Page") << i+1;
     os << "</A>";
     os << " " << offsets[i];
@@ -4802,7 +4802,7 @@ void CHexBuffer::printHtmlTocPage( const TQString &tocName,
     // Make a symlink. We ignore any error here. I don't consider
     // it to be fatal.
     //
-    TQString n( tocName.right( tocName.length() - tocName.tqfindRev('/') - 1) );
+    TQString n( tocName.right( tocName.length() - tocName.findRev('/') - 1) );
     symlink( n.latin1(), linkName.latin1() );
   }
 
@@ -4825,7 +4825,7 @@ void CHexBuffer::printHtmlCaption( TQTextStream &os, uint captionType,
     break;
 
     case 2:
-      caption = mUrl.right( mUrl.length() - mUrl.tqfindRev('/') - 1);
+      caption = mUrl.right( mUrl.length() - mUrl.findRev('/') - 1);
     break;
 
     case 3:
@@ -4854,7 +4854,7 @@ void CHexBuffer::printHtmlNavigator( TQTextStream &os, const TQString *next,
   }
   else
   {
-    TQString n( next->right( next->length() - next->tqfindRev('/') - 1) );
+    TQString n( next->right( next->length() - next->findRev('/') - 1) );
     os << "<A HREF=\"" << n << "\">" << i18n("Next") << "</A>" << " ";
   }
 
@@ -4864,7 +4864,7 @@ void CHexBuffer::printHtmlNavigator( TQTextStream &os, const TQString *next,
   }
   else
   {
-    TQString p( prev->right( prev->length() - prev->tqfindRev('/') - 1) );
+    TQString p( prev->right( prev->length() - prev->findRev('/') - 1) );
     os << "<A HREF=\"" << p << "\">" << i18n("Previous") << "</A>" << " ";
   }
 
@@ -4874,7 +4874,7 @@ void CHexBuffer::printHtmlNavigator( TQTextStream &os, const TQString *next,
   }
   else
   {
-    TQString t( toc->right( toc->length() - toc->tqfindRev('/') - 1) );
+    TQString t( toc->right( toc->length() - toc->findRev('/') - 1) );
     os << "<A HREF=\"" << t << "\">" << i18n("Contents");
     os << "</A>" << " ";
   }

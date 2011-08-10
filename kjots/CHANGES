@@ -10,7 +10,7 @@ new in version 0.5 (Aaron J. Seigo)
 
 (Carsten Pfeiffer <pfeiffer@kde.org>)
 - use KEdit instead of QMultiLineEdit directly
-  -> gains Search & tqreplace + undo
+  -> gains Search & replace + undo
 - allocate KTMainWindow on the heap to avoid double deletion on quit
 
 new in version 0.4 (Mario Weilguni <mweilguni@kde.org>)
@@ -62,7 +62,7 @@ new in version 0.2.0
 - changed the tqlayout to be more KDE conforming (toolbar, statusbar,...)
 - folders are now called books and entries are pages
 - added subject to each page
-- you may popup a window with a list of all subjects and use it to tqfind
+- you may popup a window with a list of all subjects and use it to find
   pages more easily
 - further reduced the minimum size of the window
 

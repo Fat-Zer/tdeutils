@@ -188,7 +188,7 @@ TQString gpgcmd="gpg --no-tty --no-secmem-warning --with-colon --with-fingerprin
                                 break;
                         }
 
-			if (gpgOutput.section(':',11,11).tqfind("D",0,true)!=-1)  // disabled key
+			if (gpgOutput.section(':',11,11).find("D",0,true)!=-1)  // disabled key
 			{
 				tr=i18n("Disabled");
 				trustColor=KGpgSettings::colorBad();
@@ -241,15 +241,15 @@ TQString gpgcmd="gpg --no-tty --no-secmem-warning --with-colon --with-fingerprin
                         }
                         prop->kCOwnerTrust->setCurrentItem(ownerTrust);
 
-                        if (fullname.tqfind("<")!=-1) {
+                        if (fullname.find("<")!=-1) {
                                 TQString kmail=fullname;
-				if (fullname.tqfind(")")!=-1)
+				if (fullname.find(")")!=-1)
 				kmail=kmail.section(')',1);
 				kmail=kmail.section('<',1);
 				kmail.truncate(kmail.length()-1);
-				if (kmail.tqfind("<")!=-1) ////////  several email addresses in the same key
+				if (kmail.find("<")!=-1) ////////  several email addresses in the same key
 				{
-				kmail=kmail.tqreplace(">",";");
+				kmail=kmail.replace(">",";");
 				kmail.remove("<");
 				}
 				prop->tLMail->setText("<qt><a href=mailto:"+kmail+">"+kmail+"</a></qt>");
@@ -257,7 +257,7 @@ TQString gpgcmd="gpg --no-tty --no-secmem-warning --with-colon --with-fingerprin
                                 prop->tLMail->setText(i18n("none"));
 
                         TQString kname=fullname.section('<',0,0);
-                        if (fullname.tqfind("(")!=-1) {
+                        if (fullname.find("(")!=-1) {
                                 kname=kname.section('(',0,0);
                                 TQString comment=fullname.section('(',1,1);
                                 comment=comment.section(')',0,0);
@@ -265,7 +265,7 @@ TQString gpgcmd="gpg --no-tty --no-secmem-warning --with-colon --with-fingerprin
                         } else
                                 prop->tLComment->setText(i18n("none"));
 
-			prop->tLName->setText("<qt><b>"+KgpgInterface::checkForUtf8(kname).tqreplace(TQRegExp("<"),"&lt;")+"</b></qt>");
+			prop->tLName->setText("<qt><b>"+KgpgInterface::checkForUtf8(kname).replace(TQRegExp("<"),"&lt;")+"</b></qt>");
 
                 }
 		if (gpgOutput.startsWith("fpr") && (fingervalue.isNull())) {
@@ -332,7 +332,7 @@ void KgpgKeyInfo::finishphotoreadprocess(KProcIO *p)
 {
         TQString required=TQString();
         while (p->readln(required,true)!=-1)
-		if (required.tqfind("keyedit.prompt")!=-1) {
+		if (required.find("keyedit.prompt")!=-1) {
                         p->writeStdin(TQString("quit"));
 			p->closeWhenDone();
 

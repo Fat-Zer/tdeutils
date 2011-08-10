@@ -967,7 +967,7 @@ class CHexAction
   public:
     enum HexAction 
     { 
-      tqreplace
+      replace
     };
     
   public:

@@ -107,7 +107,7 @@ void FsystemConfig::readConfig()
   TQStringList list = config()->readListEntry("mountEntries");
   for (TQListViewItemIterator it(m_availableMounts); it.current(); ++it) {
     TQString string = it.current()->text(0) + ":" + splitString(it.current()->text(0));
-    static_cast<TQCheckListItem *>(it.current())->setOn(list.tqcontains(string) > 0);
+    static_cast<TQCheckListItem *>(it.current())->setOn(list.contains(string) > 0);
   }
 }
 
@@ -155,7 +155,7 @@ void FsystemConfig::getStats()
     if ( !FilesystemStats::readStats( ( *it ).dir, total, free ) )
       continue;
 
-    if ( !m_availableMounts->tqfindItem( ( *it ).dir, 0 ) )
+    if ( !m_availableMounts->findItem( ( *it ).dir, 0 ) )
     {
       (void) new FSysViewItem( m_availableMounts, ( *it ).dir,
          ( *it ).fsname, ( *it ).type );
@@ -169,7 +169,7 @@ void FsystemConfig::getStats()
   TQStringList list = config()->readListEntry("mountEntries");
   for (TQListViewItemIterator it(m_availableMounts); it.current(); ++it) {
     TQString string = it.current()->text(0) + ":" + splitString(it.current()->text(0));
-    static_cast<TQCheckListItem *>(it.current())->setOn(list.tqcontains(string) > 0);
+    static_cast<TQCheckListItem *>(it.current())->setOn(list.contains(string) > 0);
   }
 }
 
@@ -178,7 +178,7 @@ TQString FsystemConfig::splitString(const TQString &string) const
   if (string == "/" || !m_splitNames->isChecked())
     return string;
 
-  int location = string.tqfindRev("/");
+  int location = string.findRev("/");
   TQString newString(string);
   return newString.remove(0, location + 1);
 }

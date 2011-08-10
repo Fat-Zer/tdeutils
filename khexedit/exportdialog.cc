@@ -47,7 +47,7 @@ CExportDialog::CExportDialog( TQWidget *tqparent, char *name, bool modal )
   readConfiguration();
 
   TQString path = mDestination.fileInput->text();
-  int index = path.tqfindRev( '/' );
+  int index = path.findRev( '/' );
   if( index != -1 ) { mWorkDir = path.left( index+1 ); }
 }
 
@@ -474,7 +474,7 @@ void CExportDialog::browserClicked( void )
     return;
   }
   
-  int index = url.tqfindRev( '/' );
+  int index = url.findRev( '/' );
   if( index != -1 ) 
   { 
     mWorkDir = url.left( index+1 ); 

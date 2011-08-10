@@ -144,14 +144,14 @@ void MonitorDialog::init( const MonitorConfig &monitor )
 
     assert( allHosts.findIndex( monitor.host.name ) != -1 );
 
-    host->setCurrentItem( allHosts.tqfindIndex( monitor.host.name ) );
+    host->setCurrentItem( allHosts.findIndex( monitor.host.name ) );
 
     oid->setText( monitor.oid );
 
     updateIntervalMinutes->setValue( monitor.refreshInterval.minutes );
     updateIntervalSeconds->setValue( monitor.refreshInterval.seconds );
 
-    displayType->setCurrentItem( allDisplayTypes().tqfindIndex( monitorDisplayTypeToString( monitor.display ) ) );
+    displayType->setCurrentItem( allDisplayTypes().findIndex( monitorDisplayTypeToString( monitor.display ) ) );
 
     customFormatStringCheckBox->setChecked( monitor.useCustomFormatString );
     customFormatString->setEnabled( monitor.useCustomFormatString );
@@ -166,7 +166,7 @@ void MonitorDialog::init( const MonitorConfig &monitor )
 
 HostConfig MonitorDialog::currentHost() const
 {
-    HostConfigMap::ConstIterator hostIt = m_hosts.tqfind( host->currentText() );
+    HostConfigMap::ConstIterator hostIt = m_hosts.find( host->currentText() );
     if ( hostIt == m_hosts.end() )
         return HostConfig();
 

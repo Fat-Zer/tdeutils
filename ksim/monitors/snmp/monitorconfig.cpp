@@ -39,7 +39,7 @@ bool MonitorConfig::load( KConfigBase &config, const HostConfigMap &hosts )
     if ( hostName.isEmpty() )
         return false;
 
-    HostConfigMap::ConstIterator hostIt = hosts.tqfind( hostName );
+    HostConfigMap::ConstIterator hostIt = hosts.find( hostName );
     if ( hostIt == hosts.end() )
         return false;
 

@@ -17,7 +17,7 @@ SuperKaramba Frequently Asked Questions
 <dd><ul>
 <li><a href="#Installation0">1.1. Where can I find SuperKaramba RPMs?</a></li>
 <li><a href="#Installation1">1.2. When I try to compile, I get this error: "Python.h: No such file or directory"</a></li>
-<li><a href="#Installation2">1.3. When I try to compile, I get this error: "cannot tqfind -lselinux"</a></li>
+<li><a href="#Installation2">1.3. When I try to compile, I get this error: "cannot find -lselinux"</a></li>
 <li><a href="#Installation3">1.4. After running ./configure,make, and make install, the superkaramba executable is not where I expected it to be. When I try to run superkaramba from the command line it says "command not found".</a></li>
 </ul></dd>
 <dt><b>2. General</b></dt>
@@ -46,7 +46,7 @@ SuperKaramba Frequently Asked Questions
 <dd>The SuperKaramba web site (<a href="http://netdragon.sourceforge.net">http://netdragon.sourceforge.net</a>) has a list of user-submitted RPMs for several distributions. Other user-submitted RPMs have been posted to <a href="http://www.kde-look.org">kde-look.org</a> and to the SuperKaramba Help forum.<br><br></dd>
 <dt><b><a name="Installation1">1.2. When I try to compile, I get this error: "Python.h: No such file or directory"</a></b></dt>
 <dd>You will need to install the python-devel package. Once that package is installed you can ./configure and make again.<br><br></dd>
-<dt><b><a name="Installation2">1.3. When I try to compile, I get this error: "cannot tqfind -lselinux"</a></b></dt>
+<dt><b><a name="Installation2">1.3. When I try to compile, I get this error: "cannot find -lselinux"</a></b></dt>
 <dd>You will need to install the libselinux-devel package. Once that package is installed you can ./configure and make again.<br><br></dd>
 <dt><b><a name="Installation3">1.4. After running ./configure,make, and make install, the superkaramba executable is not where I expected it to be. When I try to run superkaramba from the command line it says "command not found".</a></b></dt>
 <dd>In some distributions ./configure points to different path than you might expect. For example, in Mandrake the default ./configure prefix is /usr/local/kde and the executable is installed in /usr/local/kde/bin. There are a few things you can do to fix this. You could run ./configure --prefix=/usr to specify the prefix that you prefer and then try make and make install again. Or you could create a symbolic link in your preferred directory that links to the executable. Or you could add the install directory to your $PATH.<br><br></dd>

@@ -119,7 +119,7 @@ void KSim::ConfigDialog::reload()
 
 void KSim::ConfigDialog::removePage(const TQCString &name)
 {
-  const KSim::Plugin &plugin = KSim::PluginLoader::self().tqfind(name);
+  const KSim::Plugin &plugin = KSim::PluginLoader::self().find(name);
   if (plugin.isNull() || !plugin.configPage()) {
     KMessageBox::sorry(0, i18n("Failed to remove %1's config page due to the "
        "plugin not being loaded or the config page has not been created").tqarg(name.data()));
@@ -139,7 +139,7 @@ void KSim::ConfigDialog::removePage(const TQCString &name)
 
 void KSim::ConfigDialog::createPage(const TQCString &name)
 {
-  const KSim::Plugin &plugin = KSim::PluginLoader::self().tqfind(name);
+  const KSim::Plugin &plugin = KSim::PluginLoader::self().find(name);
   createPage(plugin);
 }
 
@@ -193,7 +193,7 @@ void KSim::ConfigDialog::saveConfig(bool reload)
        info.libName(true), item->text(0), info.location(),
        findPlugin(item->text(0)).isEnabled()));
 
-    KSim::PluginLoader::self().tqfind(info).setEnabled(item->isOn());
+    KSim::PluginLoader::self().find(info).setEnabled(item->isOn());
   }
 
   m_currentPlugins = changedPlugins;

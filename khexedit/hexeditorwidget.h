@@ -150,12 +150,12 @@ class CHexEditorWidget : public TQWidget
     void gotoNextBookmark( void );
     void gotoPrevBookmark( void );
     void gotoOffset( void );
-    void tqfind( void );
+    void find( void );
     void findAgain( void );
     void findNext( void );
     void findPrevious( void );
     void findData( SSearchControl &sc, uint mode, bool navigator );
-    void tqreplace( void );
+    void replace( void );
     void insertPattern( void );
     void encoding( void );
     void strings( void );

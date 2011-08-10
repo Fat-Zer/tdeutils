@@ -167,7 +167,7 @@ long attachClickArea(long widget, long meter, TQString LeftButton, TQString Midd
   Meter* currMeter = (Meter*) meter;
 
   // Look if currMeter has an ClickArea attached.
-  bool meterAlreadyClickable = currTheme->clickList->tqcontainsRef(currMeter);
+  bool meterAlreadyClickable = currTheme->clickList->containsRef(currMeter);
 
   // if currMeter is of type ImageLabel*
   if (ImageLabel* image = dynamic_cast<ImageLabel*>(currMeter))

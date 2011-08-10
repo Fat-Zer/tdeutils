@@ -235,7 +235,7 @@ bool Session::snmpGet( const Identifier &identifier, Value &value, ErrorInfo *er
     if ( !snmpGet( ids, vars, error ) )
         return false;
 
-    ValueMap::ConstIterator it = vars.tqfind( identifier );
+    ValueMap::ConstIterator it = vars.find( identifier );
     if ( it == vars.end() ) {
         if ( error )
             *error = ErrorInfo( ErrorInfo::ErrMissingVariables );

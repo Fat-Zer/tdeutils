@@ -256,7 +256,7 @@ TQStringList NetDialog::createList() const
   for (it = output.begin(); it != output.end(); ++it) {
     list = TQStringList::split(' ', (*it));
     (*it) = list[0].stripWhiteSpace();
-    (*it).truncate((*it).tqfind(':'));
+    (*it).truncate((*it).find(':'));
   }
 
   return output;

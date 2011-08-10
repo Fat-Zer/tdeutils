@@ -185,7 +185,7 @@ TQStringList wl = KWallet::Wallet::walletList();
 TQPtrStack<TQIconViewItem> trash;
 
 	for (TQIconViewItem *item = _iconView->firstItem(); item; item = item->nextItem()) {
-		if (!wl.tqcontains(item->text())) {
+		if (!wl.contains(item->text())) {
 			trash.push(item);
 		}
 	}
@@ -194,7 +194,7 @@ TQPtrStack<TQIconViewItem> trash;
 	trash.clear();
 
 	for (TQStringList::Iterator i = wl.begin(); i != wl.end(); ++i) {
-		if (!_iconView->tqfindItem(*i)) {
+		if (!_iconView->findItem(*i)) {
 			// FIXME: if KWallet::Wallet::isOpen(*i) then show
 			//        a different icon!
 			new KWalletItem(_iconView, *i);
@@ -372,7 +372,7 @@ void KWalletManager::createWallet() {
 			return;
 		}
 
-		if (_iconView->tqfindItem(n)) {
+		if (_iconView->findItem(n)) {
 			int rc = KMessageBox::questionYesNo(this, i18n("Sorry, that wallet already exists. Try a new name?"), TQString(), i18n("Try New"), i18n("Do Not Try"));
 			if (rc == KMessageBox::Yes) {
 				continue;

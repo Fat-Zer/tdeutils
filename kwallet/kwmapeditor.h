@@ -47,7 +47,7 @@ class KWMapEditor : public TQTable {
 		void copy();
 
 	protected:
-		virtual TQWidget *beginEdit(int row, int col, bool tqreplace);
+		virtual TQWidget *beginEdit(int row, int col, bool replace);
 
 	signals:
 		void dirty();

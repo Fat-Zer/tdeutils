@@ -129,7 +129,7 @@ void FileLVI::setText( int column, const TQString &text )
 			name = name.left( name.length() - 1 );
 		if ( name.startsWith( "/" ) )
 			name = name.mid( 1 );
-		int pos = name.tqfindRev( '/' );
+		int pos = name.findRev( '/' );
 		if ( pos != -1 )
 			name = name.right( name.length() - pos - 1 );
 		TQListViewItem::setText( column, name );
@@ -242,7 +242,7 @@ void FileListView::removeColumn( int index )
 {
 	for ( unsigned int i = index; i < m_columnMap.count() - 2; i++ )
 	{
-		m_columnMap.tqreplace( i, m_columnMap[ i + 1 ] );
+		m_columnMap.replace( i, m_columnMap[ i + 1 ] );
 	}
 
 	m_columnMap.remove( m_columnMap[ m_columnMap.count() - 1 ] );
@@ -509,11 +509,11 @@ FileLVI* FileListView::findParent( const TQString& fullname )
 	if ( name.startsWith( "/" ) )
 		name = name.mid( 1 );
 	// Checks if this entry needs a tqparent
-	if ( !name.tqcontains( '/' ) )
+	if ( !name.contains( '/' ) )
 		return static_cast< FileLVI* >( 0 );
 
 	// Get a list of ancestors
-	TQString parentFullname = name.left( name.tqfindRev( '/' ) );
+	TQString parentFullname = name.left( name.findRev( '/' ) );
 	TQStringList ancestorList = TQStringList::split( '/', parentFullname );
 
 	// Checks if the listview contains the first item in the list of ancestors

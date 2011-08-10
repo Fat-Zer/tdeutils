@@ -564,7 +564,7 @@ void CHexEditorWidget::saveWorkingDirectory( const TQString &url )
     return;
   }
 
-  int index = url.tqfindRev( '/' );
+  int index = url.findRev( '/' );
   if( index != -1 )
   {
     mWorkDir = url.left( index+1 );
@@ -1456,7 +1456,7 @@ void CHexEditorWidget::gotoOffset( void )
 }
 
 
-void CHexEditorWidget::tqfind( void )
+void CHexEditorWidget::find( void )
 {
   if( mFindNavigatorDialog != 0 )
   {
@@ -1619,7 +1619,7 @@ void CHexEditorWidget::findNavigator( SSearchControl &sc )
 	     TQT_SIGNAL(findData(SSearchControl &, uint, bool)),
 	     TQT_SLOT(findData(SSearchControl &, uint, bool)) );
     connect( mFindNavigatorDialog, TQT_SIGNAL(makeKey(void)),
-	     TQT_SLOT(tqfind()) );
+	     TQT_SLOT(find()) );
   }
   if( mFindNavigatorDialog->isVisible() == false )
   {
@@ -1630,7 +1630,7 @@ void CHexEditorWidget::findNavigator( SSearchControl &sc )
 
 
 
-void CHexEditorWidget::tqreplace( void )
+void CHexEditorWidget::replace( void )
 {
   hideReplacePrompt();
 

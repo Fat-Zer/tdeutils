@@ -86,7 +86,7 @@ private:
 	void keyReleaseEvent(TQKeyEvent *e);
 	void set_precision();
 	void set_style();
-	void resetBase(void) { (BaseChooseGroup->tqfind(1))->animateClick();};
+	void resetBase(void) { (BaseChooseGroup->find(1))->animateClick();};
 
 	void UpdateDisplay(bool get_amount_from_core = false,
 			   bool store_result_in_history = false);

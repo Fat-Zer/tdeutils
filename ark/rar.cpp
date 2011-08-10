@@ -291,7 +291,7 @@ void RarArch::unarchFileInternal()
 
 bool RarArch::passwordRequired()
 {
-    return m_lastShellOutput.tqfindRev("password incorrect ?)")+1;
+    return m_lastShellOutput.findRev("password incorrect ?)")+1;
 }
 
 void RarArch::remove( TQStringList *list )

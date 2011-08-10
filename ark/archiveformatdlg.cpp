@@ -56,7 +56,7 @@ ArchiveFormatDlg::ArchiveFormatDlg( TQWidget * tqparent, const TQString & defaul
     TQStringList list = ArchiveFormatInfo::self()->allDescriptions();
     list.sort();
     m_combo->insertStringList( list );
-    m_combo->setCurrentItem( list.tqfindIndex( defaultDescription ) );
+    m_combo->setCurrentItem( list.findIndex( defaultDescription ) );
 }
 
 TQString ArchiveFormatDlg::mimeType()

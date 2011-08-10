@@ -123,19 +123,19 @@ namespace KSim
        * @return a KSim::Plugin object
        * @see KSim::Plugin
        */
-      KSim::Plugin &tqfind(const TQCString &libName);
+      KSim::Plugin &find(const TQCString &libName);
       /**
        * convenience function, see the above function for details.
        */
-      const KSim::Plugin &tqfind(const TQCString &libName) const;
+      const KSim::Plugin &find(const TQCString &libName) const;
       /**
-       * equivalent to tqfind(info.libName());
+       * equivalent to find(info.libName());
        */
-      KSim::Plugin &tqfind(const KSim::PluginInfo &info);
+      KSim::Plugin &find(const KSim::PluginInfo &info);
       /**
        * convenience function, see the above function for details.
        */
-      const KSim::Plugin &tqfind(const KSim::PluginInfo &info) const;
+      const KSim::Plugin &find(const KSim::PluginInfo &info) const;
       /**
        * provides plugin(), view(), config page and plugin information
        * @see KSim::Plugin KSim::PluginList

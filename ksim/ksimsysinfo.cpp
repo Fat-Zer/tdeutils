@@ -110,7 +110,7 @@ void KSim::Sysinfo::clockUptimeUpdate()
     TQString seconds;
 
     // found days so we have to modify hours
-    if (uptime.tqfind(TQRegExp("%d" ), 0) >= 0)
+    if (uptime.find(TQRegExp("%d" ), 0) >= 0)
       uptimeHours -= (uptimeDays * 24);
 
     days.sprintf("%02li", uptimeDays);
@@ -118,10 +118,10 @@ void KSim::Sysinfo::clockUptimeUpdate()
     minutes.sprintf("%02li", uptimeMins);
     seconds.sprintf("%02li", uptimeSecs);
 
-    uptime.tqreplace(TQRegExp("%d"), days);
-    uptime.tqreplace(TQRegExp("%h"), hours);
-    uptime.tqreplace(TQRegExp("%m"), minutes);
-    uptime.tqreplace(TQRegExp("%s"), seconds);
+    uptime.replace(TQRegExp("%d"), days);
+    uptime.replace(TQRegExp("%h"), hours);
+    uptime.replace(TQRegExp("%m"), minutes);
+    uptime.replace(TQRegExp("%s"), seconds);
     m_uptimeLabel->setText(uptime);
   }
 }
@@ -140,15 +140,15 @@ void KSim::Sysinfo::sysUpdate()
   unsigned long cache = system.cacheRam();
   unsigned long used = system.usedRam();
   unsigned long allFree = free + buffer + cache;
-  bool all = memory.tqfind( "%F" ) != -1;
+  bool all = memory.find( "%F" ) != -1;
 
-  memory.tqreplace(TQRegExp("%s"), TQString::number(System::bytesToMegs(shared)));
-  memory.tqreplace(TQRegExp("%b"), TQString::number(System::bytesToMegs(buffer)));
-  memory.tqreplace(TQRegExp("%c"), TQString::number(System::bytesToMegs(cache)));
-  memory.tqreplace(TQRegExp("%u"), TQString::number(System::bytesToMegs(used)));
-  memory.tqreplace(TQRegExp("%t"), TQString::number(System::bytesToMegs(total)));
-  memory.tqreplace(TQRegExp("%f"), TQString::number(System::bytesToMegs(free)));
-  memory.tqreplace(TQRegExp("%F"), TQString::number(System::bytesToMegs(allFree)));
+  memory.replace(TQRegExp("%s"), TQString::number(System::bytesToMegs(shared)));
+  memory.replace(TQRegExp("%b"), TQString::number(System::bytesToMegs(buffer)));
+  memory.replace(TQRegExp("%c"), TQString::number(System::bytesToMegs(cache)));
+  memory.replace(TQRegExp("%u"), TQString::number(System::bytesToMegs(used)));
+  memory.replace(TQRegExp("%t"), TQString::number(System::bytesToMegs(total)));
+  memory.replace(TQRegExp("%f"), TQString::number(System::bytesToMegs(free)));
+  memory.replace(TQRegExp("%F"), TQString::number(System::bytesToMegs(allFree)));
     kdDebug(2003) << memory << endl;
     m_memLabel->setText("Memory");
     TQToolTip::add(m_memLabel, memory );
@@ -164,9 +164,9 @@ void KSim::Sysinfo::sysUpdate()
     unsigned long total = system.totalSwap();
     unsigned long free = system.freeSwap();
     unsigned long swapUsed = system.usedSwap();
-    swap.tqreplace(TQRegExp("%u"), TQString::number(System::bytesToMegs(swapUsed)));
-    swap.tqreplace(TQRegExp("%t"), TQString::number(System::bytesToMegs(total)));
-    swap.tqreplace(TQRegExp("%f"), TQString::number(System::bytesToMegs(free)));
+    swap.replace(TQRegExp("%u"), TQString::number(System::bytesToMegs(swapUsed)));
+    swap.replace(TQRegExp("%t"), TQString::number(System::bytesToMegs(total)));
+    swap.replace(TQRegExp("%f"), TQString::number(System::bytesToMegs(free)));
     m_swapLabel->setText("Swap");
     TQToolTip::add(m_swapLabel, swap);
     m_swapLabel->setValue(System::bytesToMegs(total) - System::bytesToMegs(free));

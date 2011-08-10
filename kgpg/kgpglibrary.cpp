@@ -84,7 +84,7 @@ void KgpgLibrary::fastencode(KURL &fileToCrypt,TQStringList selec,TQStringList e
         }
         urlselected=fileToCrypt;
         KURL dest;
-        if (encryptOptions.tqfind("--armor")!=encryptOptions.end())
+        if (encryptOptions.find("--armor")!=encryptOptions.end())
                 dest.setPath(urlselected.path()+".asc");
         else
                 dest.setPath(urlselected.path()+extension);

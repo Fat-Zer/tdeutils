@@ -48,17 +48,17 @@ class KFixedSizeBuffer : public KDataBuffer
 
     virtual int insert( int Pos, const char*, int Length );
     virtual int remove( KSection Remove );
-    virtual unsigned int tqreplace( KSection Remove, const char*, unsigned int InputLength );
+    virtual unsigned int replace( KSection Remove, const char*, unsigned int InputLength );
     virtual int move( int DestPos, KSection SourceSection );
     virtual int fill( const char FillChar, int Length = -1, unsigned int Pos = 0 );
     virtual void setDatum( unsigned int Offset, const char Char );
 
     virtual void setModified( bool M = true );
 
-    virtual int tqfind( const char*KeyData, int Length, KSection Section ) const;
+    virtual int find( const char*KeyData, int Length, KSection Section ) const;
     virtual int rfind( const char*, int Length, int Pos = -1 ) const;
 
-/*     virtual int tqfind( const TQString &expr, bool cs, bool wo, bool forward = true, int *index = 0 ); */
+/*     virtual int find( const TQString &expr, bool cs, bool wo, bool forward = true, int *index = 0 ); */
 
   public:
     void setReadOnly( bool RO = true );

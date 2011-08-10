@@ -101,13 +101,13 @@ void UptimeSensor::update()
             {
                 format = "%dd %h:%M";
             }
-            format.tqreplace( TQRegExp("%d"), TQString::number(days));
-            format.tqreplace( TQRegExp("%H"), TQString::number(hours).rightJustify(2,'0'));
-            format.tqreplace( TQRegExp("%M"), TQString::number(mins).rightJustify(2,'0'));
-            format.tqreplace( TQRegExp("%S"), TQString::number(secs).rightJustify(2,'0'));
-            format.tqreplace( TQRegExp("%h"), TQString::number(hours));
-            format.tqreplace( TQRegExp("%m"), TQString::number(mins));
-            format.tqreplace( TQRegExp("%s"), TQString::number(secs));
+            format.replace( TQRegExp("%d"), TQString::number(days));
+            format.replace( TQRegExp("%H"), TQString::number(hours).rightJustify(2,'0'));
+            format.replace( TQRegExp("%M"), TQString::number(mins).rightJustify(2,'0'));
+            format.replace( TQRegExp("%S"), TQString::number(secs).rightJustify(2,'0'));
+            format.replace( TQRegExp("%h"), TQString::number(hours));
+            format.replace( TQRegExp("%m"), TQString::number(mins));
+            format.replace( TQRegExp("%s"), TQString::number(secs));
 
             meter->setValue(format);
             ++it;

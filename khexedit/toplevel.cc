@@ -18,7 +18,7 @@
  *
  */
 
-// kate: space-indent on; indent-width 2; tqreplace-tabs on;
+// kate: space-indent on; indent-width 2; replace-tabs on;
 
 #include <tqptrlist.h>
 #include <tqsignalmapper.h>
@@ -161,10 +161,10 @@ actionCollection());
   mAction.paste      = KStdAction::paste(     TQT_TQOBJECT(editor()), TQT_SLOT(paste()), actionCollection() );
   mAction.selectAll  = KStdAction::selectAll( TQT_TQOBJECT(editor()), TQT_SLOT(selectAll()),actionCollection() );
   mAction.unselect   = KStdAction::deselect(  TQT_TQOBJECT(editor()), TQT_SLOT(unselect()), actionCollection());
-  mAction.tqfind     = KStdAction::find(      TQT_TQOBJECT(editor()), TQT_SLOT(tqfind()), actionCollection() );
+  mAction.find     = KStdAction::find(      TQT_TQOBJECT(editor()), TQT_SLOT(find()), actionCollection() );
   mAction.findNext   = KStdAction::findNext(  TQT_TQOBJECT(editor()), TQT_SLOT(findNext()), actionCollection() );
   mAction.findPrev   = KStdAction::findPrev(  TQT_TQOBJECT(editor()),TQT_SLOT(findPrevious()),actionCollection() );
-  mAction.tqreplace  = KStdAction::replace(   TQT_TQOBJECT(editor()), TQT_SLOT(tqreplace()), actionCollection() );
+  mAction.replace  = KStdAction::replace(   TQT_TQOBJECT(editor()), TQT_SLOT(replace()), actionCollection() );
   mAction.gotoOffset = new KAction( i18n("&Goto Offset..."), CTRL+Key_G,
     TQT_TQOBJECT(editor()), TQT_SLOT(gotoOffset()),actionCollection(), "goto_offset" );
   mAction.insertPattern = new KAction( i18n("&Insert Pattern..."), CTRL+Key_Insert,
@@ -479,7 +479,7 @@ void KHexEdit::addRecentFile( const TQString &fileName )
     return;
   }
 
-  if( fileName.tqcontains( i18n( "Untitled" ), false ) )
+  if( fileName.contains( i18n( "Untitled" ), false ) )
   {
     return;
   }
@@ -498,7 +498,7 @@ void KHexEdit::removeRecentFile( const TQString &fileName )
     return;
   }
 
-  if( fileName.tqcontains( i18n( "Untitled" ), false ) )
+  if( fileName.contains( i18n( "Untitled" ), false ) )
   {
     return;
   }
@@ -511,7 +511,7 @@ void KHexEdit::removeRecentFile( const TQString &fileName )
 
 void KHexEdit::renameRecentFile(const TQString &curName, const TQString &newName)
 {
-  if( curName.tqcontains( i18n( "Untitled" ), false ) )
+  if( curName.contains( i18n( "Untitled" ), false ) )
   {
     addRecentFile( newName );
   }
@@ -1232,7 +1232,7 @@ void KHexEdit::removeDocument( const TQString &fileName )
     {
       TQPopupMenu *documentMenu = (TQPopupMenu *)factory()->container("documents", this);
 
-      documentMenu->removeItemAt( mDocumentList.tqfindIndex(*it) );
+      documentMenu->removeItemAt( mDocumentList.findIndex(*it) );
       mDocumentList.remove( it );
 
       for( uint i=0; i < mDocumentList.count(); i++ )
@@ -1259,7 +1259,7 @@ void KHexEdit::renameDocument( const TQString &curName, const TQString &newName 
     if( *it == curName )
     {
       TQPopupMenu *documentMenu = (TQPopupMenu *)factory()->container("documents", this);
-      documentMenu->changeItem( newName, mDocumentList.tqfindIndex(*it) );
+      documentMenu->changeItem( newName, mDocumentList.findIndex(*it) );
       mDocumentList.insert( it, newName );
       mDocumentList.remove( it );
       return;

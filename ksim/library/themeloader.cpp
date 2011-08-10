@@ -63,7 +63,7 @@ class KSim::Theme::Private
       TQString text;
       TQStringList::ConstIterator it;
       for (it = file.begin(); it != file.end(); ++it) {
-        if ((*it).tqfind(entry) != -1) {
+        if ((*it).find(entry) != -1) {
           text = TQStringList::split("=", (*it))[1].stripWhiteSpace();
         }
       }
@@ -73,7 +73,7 @@ class KSim::Theme::Private
 
       TQStringList::ConstIterator it2;
       for (it2 = dFile.begin(); it2 != dFile.end(); ++it) {
-        if ((*it2).tqfind(entry) != -1) {
+        if ((*it2).find(entry) != -1) {
           text = TQStringList::split("=", (*it2))[1].stripWhiteSpace();
         }
       }
@@ -135,13 +135,13 @@ TQString KSim::Theme::name() const
   if (name.endsWith("/"))
     name.remove(name.length() - 1, 1);
 
-  return name.remove(0, name.tqfindRev("/") + 1);
+  return name.remove(0, name.findRev("/") + 1);
 }
 
 TQString KSim::Theme::author() const
 {
   TQString author(d->readOption("author", false));
-  return author.tqreplace(TQRegExp("\""), TQString());
+  return author.replace(TQRegExp("\""), TQString());
 }
 
 int KSim::Theme::fontItem() const
@@ -318,7 +318,7 @@ TQFont KSim::Theme::largeFont() const
     return TQApplication::font();
 
   TQFont themeFont;
-  themeFont.setRawName(font.tqreplace(TQRegExp("\""), TQString()));
+  themeFont.setRawName(font.replace(TQRegExp("\""), TQString()));
   return themeFont;
 }
 
@@ -330,7 +330,7 @@ TQFont KSim::Theme::normalFont() const
     return TQApplication::font();
 
   TQFont themeFont;
-  themeFont.setRawName(font.tqreplace(TQRegExp("\""), TQString()));
+  themeFont.setRawName(font.replace(TQRegExp("\""), TQString()));
   return themeFont;
 }
 
@@ -342,7 +342,7 @@ TQFont KSim::Theme::smallFont() const
     return TQApplication::font();
 
   TQFont themeFont;
-  themeFont.setRawName(font.tqreplace(TQRegExp("\""), TQString()));
+  themeFont.setRawName(font.replace(TQRegExp("\""), TQString()));
   return themeFont;
 }
 
@@ -644,7 +644,7 @@ bool KSim::Theme::textShadow(const TQString &itemType,
     return false;
 
   TQString shadow = readEntry(itemType, entry);
-  if (shadow.isEmpty() || shadow.tqfindRev("none") != -1)
+  if (shadow.isEmpty() || shadow.findRev("none") != -1)
     return false;
 
   return true;
@@ -997,26 +997,26 @@ TQString KSim::ThemeLoader::parseConfig(const TQString &url,
   while (!origStream.atEnd()) {
     TQString line(origStream.readLine().simplifyWhiteSpace());
 
-    if (line.tqfind(reg) == 0) // find the location of the * comments
+    if (line.find(reg) == 0) // find the location of the * comments
       // replace all * comments with # comments so KConfig doesn't complain
-      line.tqreplace(reg, "#");
+      line.replace(reg, "#");
 
-    if (line.tqfind("#") == -1) { // find the location of the string 'gkrellmms'
-      if (line.tqfindRev("=") == -1) { // if found we check for the string '='
-        int numLoc = line.tqfindRev(numbers);
+    if (line.find("#") == -1) { // find the location of the string 'gkrellmms'
+      if (line.findRev("=") == -1) { // if found we check for the string '='
+        int numLoc = line.findRev(numbers);
         if (numLoc != -1)
           // if '=' doesn't exist we add one so KConfig doesn't complain
           line.insert(numLoc, " = ");
 
-        numLoc = line.tqfindRev(number);
+        numLoc = line.findRev(number);
         if (numLoc != -1)
           // if '=' doesn't exist we add one so KConfig doesn't complain
           line.insert(numLoc, " = ");
 
-        numLoc = line.tqfindRev(minus);
+        numLoc = line.findRev(minus);
         if (numLoc != -1)
           // replace the '-' with an '=' so KConfig doesn't get confused
-          line.tqreplace(TQRegExp("-"), "=");
+          line.replace(TQRegExp("-"), "=");
       }
     }
 
@@ -1038,7 +1038,7 @@ void KSim::ThemeLoader::parseDir(const TQString &url, int alt)
     homePath = locateLocal( "data", "ksim" )
        + TQString::tqfromLatin1( "/themes" )
        + homePath.right( homePath.length()
-       - homePath.tqfindRev( TQRegExp( "\\/" ),
+       - homePath.findRev( TQRegExp( "\\/" ),
        homePath.length() ) );
 
     if ( !TQFile::exists( homePath ) )

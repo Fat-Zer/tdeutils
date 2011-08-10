@@ -278,7 +278,7 @@ void keyServer::slotsearchread(KProcIO *p)
         while (p->readln(required,true)!=-1) {
                 //required=TQString::fromUtf8(required);
 
-                if (required.tqfind("keysearch.prompt")!=-1) {
+                if (required.find("keysearch.prompt")!=-1) {
                         if (count<4)
                                 p->writeStdin(TQString("N"));
                         else {
@@ -288,15 +288,15 @@ void keyServer::slotsearchread(KProcIO *p)
                         required=TQString();
                 }
 
-                if (required.tqfind("GOT_IT")!=-1) {
+                if (required.find("GOT_IT")!=-1) {
                         count++;
                         required=TQString();
                 }
 
-                if (required.tqfind("(")==0) {
+                if (required.find("(")==0) {
                         cycle=true;
-			TQString fullname=required.remove(0,required.tqfind(")")+1).stripWhiteSpace();
-			if (fullname.tqfind("<")!=-1) {
+			TQString fullname=required.remove(0,required.find(")")+1).stripWhiteSpace();
+			if (fullname.find("<")!=-1) {
 	                keymail=fullname.section('<',-1,-1);
 			if (keymail.endsWith(">")) keymail.truncate(keymail.length()-1);
                 	keyname=fullname.section('<',0,0);
@@ -312,7 +312,7 @@ void keyServer::slotsearchread(KProcIO *p)
 
                 if ((cycle) && (!required.isEmpty())) {
                         TQString subkey=required.stripWhiteSpace();
-			if (subkey.tqfind(" key ")!=-1 && subkey.at(0).isDigit ())
+			if (subkey.find(" key ")!=-1 && subkey.at(0).isDigit ())
 			{
                         TQString kid=subkey.section(",",0,0).stripWhiteSpace();
                         kid=kid.right(8);
@@ -324,7 +324,7 @@ void keyServer::slotsearchread(KProcIO *p)
 			}
 			else
 			{
-			if (subkey.tqfind("<")!=-1) {
+			if (subkey.find("<")!=-1) {
 	                keymail=subkey.section('<',-1,-1);
         	        if (keymail.endsWith(">")) keymail.truncate(keymail.length()-1);
                 	keyname=subkey.section('<',0,0);
@@ -472,12 +472,12 @@ void keyServer::slotimportresult(KProcess*)
         parsedOutput=readmessage;
 	TQStringList importedKeys;
 
-        while (parsedOutput.tqfind("IMPORTED")!=-1) {
-                parsedOutput.remove(0,parsedOutput.tqfind("IMPORTED")+8);
+        while (parsedOutput.find("IMPORTED")!=-1) {
+                parsedOutput.remove(0,parsedOutput.find("IMPORTED")+8);
                 importedKeys+=parsedOutput.section("\n",0,0).stripWhiteSpace();
         }
 
-        if (readmessage.tqfind("IMPORT_RES")!=-1) {
+        if (readmessage.find("IMPORT_RES")!=-1) {
                 importedNb=readmessage.section("IMPORT_RES",-1,-1);
                   importedNb=importedNb.stripWhiteSpace();
                 importedNbProcess=importedNb.section(" ",0,0);

@@ -333,7 +333,7 @@ static void acpi_read_batteries() {
 			f = new TQFile(bat.info_file);
 			if (f && f->exists() && f->open(IO_ReadOnly)) {
 				while(f->readLine(buff,1024) > 0) {
-					if (buff.tqcontains("design capacity low:", false)) {
+					if (buff.contains("design capacity low:", false)) {
 						TQRegExp rx("(\\d*)\\D*$");
 						rx.search(buff);
 						bat.cap_low = rx.cap(1).toInt();
@@ -341,7 +341,7 @@ static void acpi_read_batteries() {
 							bat.cap_low = 0;
 						continue;
 					}
-					if (buff.tqcontains("last full capacity:", false)) {
+					if (buff.contains("last full capacity:", false)) {
 						TQRegExp rx("(\\d*)\\D*$");
 						rx.search(buff);
 						bat.cap = rx.cap(1).toInt();
@@ -363,7 +363,7 @@ static void acpi_read_batteries() {
 			f = new TQFile(bat.state_file);
 			if (f && f->exists() && f->open(IO_ReadOnly)) {
 				while(f->readLine(buff,1024) > 0) {
-					if (buff.tqcontains("present rate:", false)) {
+					if (buff.contains("present rate:", false)) {
 						TQRegExp rx("(\\d*)\\D*$");
 						rx.search(buff);
 						bat.rate = rx.cap(1).toInt();
@@ -372,7 +372,7 @@ static void acpi_read_batteries() {
 						present = true;
 						continue;
 					}
-					if (buff.tqcontains("remaining capacity:", false)) {
+					if (buff.contains("remaining capacity:", false)) {
 						TQRegExp rx("(\\d*)\\D*$");
 						rx.search(buff);
 						bat.remaining = rx.cap(1).toInt();
@@ -961,16 +961,16 @@ TQLabel *laptop_portable::how_to_do_suspend_resume(TQWidget *tqparent)
  		TQLabel* note = new KRichTextLabel(i18n("\nIf you make /usr/bin/apm setuid then you will also "
 						"be able to choose 'suspend' and 'standby' in the above "
 						"dialog - check out the help button below to find out "
-						"how to do this").tqreplace("\n", TQString()), tqparent);
+						"how to do this").replace("\n", TQString()), tqparent);
 		return(note);
 	}
 	if (::has_acpi()) {
                 // TODO: remove linefeed from string, can't do it right now coz we have a string freeze
- 		TQLabel* note = new KRichTextLabel(i18n("\nYou may need to enable ACPI suspend/resume in the ACPI panel").tqreplace("\n", TQString()), tqparent);
+ 		TQLabel* note = new KRichTextLabel(i18n("\nYou may need to enable ACPI suspend/resume in the ACPI panel").replace("\n", TQString()), tqparent);
 		return(note);
 	}
         // TODO: remove linefeed from string, can't do it right now coz we have a string freeze
- 	TQLabel* note = new KRichTextLabel(i18n("\nYour system does not support suspend/standby").tqreplace("\n", TQString()), tqparent);
+ 	TQLabel* note = new KRichTextLabel(i18n("\nYour system does not support suspend/standby").replace("\n", TQString()), tqparent);
 	return(note);
 }
 
@@ -1580,7 +1580,7 @@ get_acpi_list(char p, int *map, const char *dev, TQStringList &list, int &index,
 						while (!f.atEnd() && i < MAP_SIZE) {
 							TQString l;
 							f.readLine(l, 500);
-							if (l.tqcontains("active limit", false)) {
+							if (l.contains("active limit", false)) {
 								TQRegExp rx(TQString("%1(\\d+)").tqarg(p));
 								if (rx.search(l) >= 0) {
 									bool ok;
@@ -1835,7 +1835,7 @@ laptop_portable::set_system_performance(TQString val)	// val = string given by g
 	int current, result;
 	if((result = get_acpi_list('P', acpi_performance_map, "/performance", performance_list, current, acpi_performance_cpu, false, acpi_performance_enable))) {
 		char tmp[20];
-		int ind = performance_list.tqfindIndex(val);
+		int ind = performance_list.findIndex(val);
 		if (ind < 0 || ind >= MAP_SIZE || current == ind)
 			return;
 		snprintf(tmp, sizeof(tmp), "%d", acpi_performance_map[ind]);
@@ -1857,7 +1857,7 @@ laptop_portable::set_system_performance(TQString val)	// val = string given by g
 				invoke_acpi_helper("--cpufreq-25", tmp.latin1(), 0);
 				return;
 			case CPUFREQ_24:
-				int target = performance_list.tqfindIndex(val);
+				int target = performance_list.findIndex(val);
 				invoke_acpi_helper("--cpufreq-24", cpufreq_cpu.latin1(), cpufreq_minmax_frequency[target].latin1());
 				return;
 		}
@@ -1871,7 +1871,7 @@ laptop_portable::set_system_throttling(TQString val)	// val = string given by ge
 {
 	if (::has_acpi()) {
 		char tmp[20];
-		int ind = throttle_list.tqfindIndex(val);
+		int ind = throttle_list.findIndex(val);
 		if (ind < 0 || ind >= MAP_SIZE)
 			return;
 		snprintf(tmp, sizeof(tmp), "%d", acpi_throttle_map[ind]);
@@ -1909,7 +1909,7 @@ acpi_check_button(const char *prefix, TQString &result)
 				while (!f.atEnd()) {
 					TQString l;
       					f.readLine(l, 500);
-					if (l.tqcontains("state:")) {
+					if (l.contains("state:")) {
 						result = name;
 						v = 1;
 						break;

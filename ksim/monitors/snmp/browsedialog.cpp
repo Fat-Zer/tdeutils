@@ -134,7 +134,7 @@ void BrowseDialog::applyFilter( TQListViewItem *item )
         return;
     }
 
-    if ( item->text( 0 ).tqfind( filterText, 0 /*index*/, false /*case sensitive*/ ) == -1 ) {
+    if ( item->text( 0 ).find( filterText, 0 /*index*/, false /*case sensitive*/ ) == -1 ) {
         item->setVisible( false );
         return;
     }

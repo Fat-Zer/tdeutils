@@ -119,7 +119,7 @@ KSim::MainView::MainView(KConfig *config,
     m_hostLabel->setText(i18n("Unknown"));
   else {
     TQCString host(hostName);
-    int dotLocation = host.tqfind(".");
+    int dotLocation = host.find(".");
     if (!m_config->displayFqdn() && dotLocation != -1)
       host.truncate(dotLocation);
 

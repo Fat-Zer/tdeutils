@@ -153,7 +153,7 @@ void Systemtray::updateTrayWindows( void )
   while ((emb = m_Wins.current()) != 0L)
   {
     WId wid = emb->embeddedWinId();
-    if ((wid == 0) || !kwin_module->systemTrayWindows().tqcontains(wid) )
+    if ((wid == 0) || !kwin_module->systemTrayWindows().contains(wid) )
       m_Wins.remove(emb);
     else
       m_Wins.next();

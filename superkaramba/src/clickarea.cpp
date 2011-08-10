@@ -27,7 +27,7 @@ ClickArea::~ClickArea()
 
 bool ClickArea::click( TQMouseEvent *e )
 {
-    if( rect.tqcontains( e->x(), e->y() ) )
+    if( rect.contains( e->x(), e->y() ) )
     {
         //qDebug(TQString::number(e->type()));
 	//KShellProcess ksp;
@@ -44,7 +44,7 @@ bool ClickArea::click( TQMouseEvent *e )
 	{
 		TQString program;
 		program = onClick;
-		program.tqreplace( TQRegExp("%v", false), value );
+		program.replace( TQRegExp("%v", false), value );
 
 		if( !program.isEmpty() )
 		{

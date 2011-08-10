@@ -240,7 +240,7 @@ void ZipArch::unarchFileInternal()
 
 bool ZipArch::passwordRequired()
 {
-    return m_lastShellOutput.tqfindRev("unable to get password\n")!=-1 || m_lastShellOutput.endsWith("password inflating\n") || m_lastShellOutput.tqfindRev("password incorrect--reenter:")!=-1 || m_lastShellOutput.endsWith("incorrect password\n");
+    return m_lastShellOutput.findRev("unable to get password\n")!=-1 || m_lastShellOutput.endsWith("password inflating\n") || m_lastShellOutput.findRev("password incorrect--reenter:")!=-1 || m_lastShellOutput.endsWith("incorrect password\n");
 }
 
 void ZipArch::remove( TQStringList *list )

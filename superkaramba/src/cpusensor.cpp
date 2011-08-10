@@ -145,12 +145,12 @@ void CPUSensor::update()
         {
             format = "%v";
         }
-        format.tqreplace( TQRegExp("%load", false), TQString::number( load ) );
-        format.tqreplace( TQRegExp("%user", false), TQString::number( user ) );
-        format.tqreplace( TQRegExp("%nice", false), TQString::number( nice ) );
-        format.tqreplace( TQRegExp("%idle", false), TQString::number( idle ) );
-        format.tqreplace( TQRegExp("%system", false), TQString::number( system ) );
-        format.tqreplace( TQRegExp("%v", false), TQString::number( load ) );
+        format.replace( TQRegExp("%load", false), TQString::number( load ) );
+        format.replace( TQRegExp("%user", false), TQString::number( user ) );
+        format.replace( TQRegExp("%nice", false), TQString::number( nice ) );
+        format.replace( TQRegExp("%idle", false), TQString::number( idle ) );
+        format.replace( TQRegExp("%system", false), TQString::number( system ) );
+        format.replace( TQRegExp("%v", false), TQString::number( load ) );
 
         meter->setValue( format );
         ++it;

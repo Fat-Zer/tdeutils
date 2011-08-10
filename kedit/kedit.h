@@ -177,7 +177,7 @@ public slots:
     void file_save_as();
     void helpselected();
     void search();
-    void tqreplace();
+    void replace();
     void search_again();
     void toggle_overwrite();
 

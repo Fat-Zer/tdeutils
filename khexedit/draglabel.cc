@@ -104,7 +104,7 @@ void CDragLabel::prepPixmap( KURLDrag &uriDrag )
   }
 
   TQString text;
-  int index = mUrl.tqfindRev( '/', mUrl.length() );
+  int index = mUrl.findRev( '/', mUrl.length() );
   if( index < 0 )
   {
     text = mUrl;

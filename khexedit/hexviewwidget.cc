@@ -1942,7 +1942,7 @@ void CHexViewWidget::paintText( const TQRect &rect, bool expand )
     #endif
   }
 
-  if( contentsRect().tqcontains( r ) == false )
+  if( contentsRect().contains( r ) == false )
   {
     paintFrame();
     if( r.left() < frameWidth() ) { r.setLeft( frameWidth() ); }

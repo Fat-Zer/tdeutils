@@ -67,7 +67,7 @@ void KSim::MonitorPrefs::saveConfig(KSim::Config *config)
   TQStringList::ConstIterator it;
   for (it = m_locatedFiles.begin(); it != m_locatedFiles.end(); ++it) {
     KSim::PluginInfo info = KSim::PluginLoader::self().findPluginInfo((*it));
-    item = static_cast<TQCheckListItem *>(tqfindItem(info.name(), 0));
+    item = static_cast<TQCheckListItem *>(findItem(info.name(), 0));
     config->setEnabledMonitor(info.libName(), item->isOn());
     config->setMonitorCommand(info.libName(), item->text(2));
     config->setMonitorLocation(info.libName(), itemIndex(item));
@@ -82,7 +82,7 @@ void KSim::MonitorPrefs::readConfig(KSim::Config *config)
   for (it = m_locatedFiles.begin(); it != m_locatedFiles.end(); ++it) {
     KSim::PluginInfo info = KSim::PluginLoader::self().findPluginInfo((*it));
     location = config->monitorLocation(info.libName());
-    origItem = static_cast<TQCheckListItem *>(tqfindItem(info.name(), 0));
+    origItem = static_cast<TQCheckListItem *>(findItem(info.name(), 0));
     origItem->setOn(config->enabledMonitor(info.libName()));
     origItem->setText(2, config->monitorCommand(info.libName()));
     if (TQListViewItem *item = itemAtIndex(location)) {

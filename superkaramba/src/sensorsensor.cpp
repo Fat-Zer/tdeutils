@@ -91,9 +91,9 @@ void SensorSensor::processExited(KProcess *)
         }
 
 #if defined __FreeBSD__ || defined(Q_OS_NETBSD)
-        format.tqreplace( TQRegExp("%v", false), sensorMap[sensorMapBSD[type]]);
+        format.replace( TQRegExp("%v", false), sensorMap[sensorMapBSD[type]]);
 #else
-        format.tqreplace( TQRegExp("%v", false), sensorMap[type]);
+        format.replace( TQRegExp("%v", false), sensorMap[type]);
 #endif
         meter->setValue(format);
         ++lit;

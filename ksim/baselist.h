@@ -52,7 +52,7 @@ namespace KSim
           return false;
 
         // Find our object and remove it from the list
-        if (m_baseList->tqfindRef(object) >= 0)
+        if (m_baseList->findRef(object) >= 0)
           return m_baseList->remove();
 
         return false;

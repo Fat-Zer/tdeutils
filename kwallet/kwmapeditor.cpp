@@ -168,10 +168,10 @@ class InlineEditor : public TQTextEdit {
 };
 
 
-TQWidget *KWMapEditor::beginEdit(int row, int col, bool tqreplace) {
+TQWidget *KWMapEditor::beginEdit(int row, int col, bool replace) {
 	//kdDebug(2300) << "EDIT COLUMN " << col << endl;
 	if (col != 2) {
-		return TQTable::beginEdit(row, col, tqreplace);
+		return TQTable::beginEdit(row, col, replace);
 	}
 
 	TQRect geo = cellGeometry(row, col);

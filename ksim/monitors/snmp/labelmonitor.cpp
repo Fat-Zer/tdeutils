@@ -32,8 +32,8 @@ void LabelMonitor::setData( const Value &data )
 
      if ( m_config.useCustomFormatString ) {
          TQString text = m_config.customFormatString;
-         text.tqreplace( "%n", m_config.name );
-         text.tqreplace( "%s", dataString );
+         text.replace( "%n", m_config.name );
+         text.replace( "%s", dataString );
          setText( text );
      } else
          setText( m_config.name + ": " + dataString );

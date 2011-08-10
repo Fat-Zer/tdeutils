@@ -259,7 +259,7 @@ RegExp* CompoundWidget::regExp() const
 void CompoundWidget::mousePressEvent( TQMouseEvent* event )
 {
   if ( event->button() == Qt::LeftButton &&
-       TQRect( _pixmapPos, _pixmapSize ).tqcontains( event->pos() ) ) {
+       TQRect( _pixmapPos, _pixmapSize ).contains( event->pos() ) ) {
     // Skip otherwise we will never see the mouse release
     // since it is eaten by Editor window.
   }
@@ -270,7 +270,7 @@ void CompoundWidget::mousePressEvent( TQMouseEvent* event )
 void CompoundWidget::mouseReleaseEvent( TQMouseEvent* event)
 {
   if ( event->button() == Qt::LeftButton &&
-       TQRect( _pixmapPos, _pixmapSize ).tqcontains( event->pos() ) ) {
+       TQRect( _pixmapPos, _pixmapSize ).contains( event->pos() ) ) {
     _hidden = !_hidden;
     _editorWindow->updateContent( 0 );
     tqrepaint(); // is this necesary?

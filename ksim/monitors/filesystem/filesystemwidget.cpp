@@ -189,7 +189,7 @@ void FilesystemWidget::processExited(KProcess *)
   TQStringList::Iterator it;
   for (it = errorList.begin(); it != errorList.end(); ++it) {
     message += TQString::tqfromLatin1("<li>%1</li>")
-       .tqarg((*it).tqreplace(TQRegExp("[u]?mount: "), TQString()));
+       .tqarg((*it).replace(TQRegExp("[u]?mount: "), TQString()));
   }
 
   message += TQString::tqfromLatin1("</ul></qt>");

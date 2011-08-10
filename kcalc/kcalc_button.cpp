@@ -47,7 +47,7 @@ KCalcButton::KCalcButton(const TQString &label, TQWidget * tqparent,
 
 void KCalcButton::addMode(ButtonModeFlags mode, TQString label, TQString tooltip, bool is_label_richtext)
 {
-  if (_mode.tqcontains(mode)) _mode.remove(mode);
+  if (_mode.contains(mode)) _mode.remove(mode);
 
   _mode[mode] = ButtonMode(label, tooltip, is_label_richtext);
 
@@ -67,7 +67,7 @@ void KCalcButton::slotSetMode(ButtonModeFlags mode, bool flag)
   	return; // nothing to do
   }
 
-  if (_mode.tqcontains(new_mode)) {
+  if (_mode.contains(new_mode)) {
     // save accel, because setting label erases accel
     TQKeySequence _accel = accel();
 
@@ -92,7 +92,7 @@ void KCalcButton::slotSetMode(ButtonModeFlags mode, bool flag)
 
 static TQString escape(TQString str)
 {
-  str.tqreplace('&', "&&");
+  str.replace('&', "&&");
   return str;
 }
 
@@ -128,7 +128,7 @@ void KCalcButton::drawButtonLabel(TQPainter *paint)
 {
   if (_show_accel_mode) {
     KPushButton::drawButtonLabel(paint);
-  } else if (_mode.tqcontains(_mode_flags)) {
+  } else if (_mode.contains(_mode_flags)) {
     paintLabel(paint);
   }
 }
@@ -159,7 +159,7 @@ void KSquareButton::drawButtonLabel(TQPainter *paint)
 {
   if (_show_accel_mode) {
     KPushButton::drawButtonLabel(paint);
-  } else if (_mode.tqcontains(_mode_flags)) {
+  } else if (_mode.contains(_mode_flags)) {
     paintLabel(paint);
   }
 }

@@ -195,7 +195,7 @@ bool IRKick::getPrograms(const IRAction &action, TQStringList &programs)
 		for(QCStringList::iterator i = buf.begin(); i != buf.end(); ++i)
 		{
 			TQString program = TQString::fromUtf8(*i);
-			if(program.tqcontains(r))
+			if(program.contains(r))
 				programs += program;
 		}
 		if(programs.size() > 1 && action.ifMulti() == IM_DONTSEND)
@@ -206,7 +206,7 @@ bool IRKick::getPrograms(const IRAction &action, TQStringList &programs)
 			for(TQValueList<WId>::iterator i = s.fromLast(); i != s.end(); i--)
 			{	int p = KWin::info(*i).pid;
 				TQString id = action.program() + "-" + TQString().setNum(p);
-				if(programs.tqcontains(id))
+				if(programs.contains(id))
 				{	programs.clear();
 					programs += id;
 					break;
@@ -220,7 +220,7 @@ bool IRKick::getPrograms(const IRAction &action, TQStringList &programs)
 			for(TQValueList<WId>::iterator i = s.begin(); i != s.end(); ++i)
 			{	int p = KWin::info(*i).pid;
 				TQString id = action.program() + "-" + TQString().setNum(p);
-				if(programs.tqcontains(id))
+				if(programs.contains(id))
 				{	programs.clear();
 					programs += id;
 					break;

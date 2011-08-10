@@ -50,7 +50,7 @@ static const char *localTextPlain()
     TextPlainLocal = TQCString(KGlobal::locale()->encoding()).lower();
     // remove the whitespaces
     int s;
-    while( (s=TextPlainLocal.tqfind(' ')) >= 0 )
+    while( (s=TextPlainLocal.find(' ')) >= 0 )
       TextPlainLocal.remove( s, 1 );
 
     TextPlainLocal.prepend( TextPlainLocalStub );
@@ -62,12 +62,12 @@ static const char *localTextPlain()
 // tries to create a codec by the given charset description
 static TQTextCodec* codecForCharset( const TQCString& Desc )
 {
-  int i = Desc.tqfind( "charset=" );
+  int i = Desc.find( "charset=" );
   if( i >= 0 )
   {
     TQCString CharSetName = Desc.mid( i+8 );
     // remove any further attributes
-    if( (i=CharSetName.tqfind( ';' )) >= 0 )
+    if( (i=CharSetName.find( ';' )) >= 0 )
       CharSetName = CharSetName.left( i );
 
     // try to find codec

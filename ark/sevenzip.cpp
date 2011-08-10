@@ -330,11 +330,11 @@ void SevenZipArch::slotReceivedTOC( KProcess*, char* data, int length )
     startChar = lfChar + 1;
 
     // Check if the header was found
-    if ( m_buffer.tqfind( m_headerString.data() ) != -1 )
+    if ( m_buffer.find( m_headerString.data() ) != -1 )
     {
       if ( !m_header_removed )
       {
-        m_nameColumnPos = m_buffer.tqfindRev( ' ' ) + 1;
+        m_nameColumnPos = m_buffer.findRev( ' ' ) + 1;
         m_header_removed = true;
       }
       else

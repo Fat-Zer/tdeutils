@@ -212,16 +212,16 @@ bool SensorBase::init()
 
 TQString SensorBase::sensorType(const TQString &name)
 {
-  if (name.tqfindRev("fan", -1, false) != -1)
+  if (name.findRev("fan", -1, false) != -1)
     return i18n("Rounds per minute", " RPM");
 
-  if (name.tqfindRev("temp", -1, false) != -1)
+  if (name.findRev("temp", -1, false) != -1)
     if (SensorBase::fahrenheit())
       return TQString::tqfromLatin1("°F");
     else
       return TQString::tqfromLatin1("°C");
 
-  if (name.tqfindRev(TQRegExp("[^\\+]?[^\\-]?V$")) != -1)
+  if (name.findRev(TQRegExp("[^\\+]?[^\\-]?V$")) != -1)
     return i18n("Volt", "V");
 
   return TQString();
@@ -239,7 +239,7 @@ TQString SensorBase::chipsetString(const ChipName *c)
 
 float SensorBase::formatValue(const TQString &label, float value)
 {
-  if (label.tqfindRev("temp", -1, false) != -1)
+  if (label.findRev("temp", -1, false) != -1)
       return toFahrenheit(value);
 
  return value;
@@ -247,7 +247,7 @@ float SensorBase::formatValue(const TQString &label, float value)
 
 TQString SensorBase::formatString(const TQString &label, float value)
 {
-  if (label.tqfindRev("fan", -1, false) != -1)
+  if (label.findRev("fan", -1, false) != -1)
     return TQString::number(value);
 
   return TQString::number(value,'f',2);

@@ -68,7 +68,7 @@ SonyConfig::SonyConfig(TQWidget * tqparent, const char *name)
     // TODO: remove linefeed from string, can't do it right now coz we have a string freeze
     top_layout->addWidget(new KRichTextLabel(i18n("This panel allows you to control some of the features of the\n"
 		    	"'sonypi' device for your laptop - you should not enable the options below if you\nalso "
-			"use the 'sonypid' program in your system").tqreplace("\n", " "), this));
+			"use the 'sonypid' program in your system").replace("\n", " "), this));
 
     enableScrollBar = new TQCheckBox( i18n("Enable &scroll bar"), this );
     TQToolTip::add( enableScrollBar, i18n( "When checked this box enables the scrollbar so that it works under KDE" ) );
@@ -86,7 +86,7 @@ SonyConfig::SonyConfig(TQWidget * tqparent, const char *name)
 	
         // TODO: remove linefeed from string, can't do it right now coz we have a string freeze
     	top_layout->addWidget(new KRichTextLabel(i18n("The /dev/sonypi is not accessable, if you wish to use the above features its\n"
-					      "protections need to be changed. Clicking on the button below will change them\n").tqreplace("\n", " "), this));
+					      "protections need to be changed. Clicking on the button below will change them\n").replace("\n", " "), this));
         TQHBoxLayout *ll = new TQHBoxLayout();
         TQPushButton *setupButton = new TQPushButton(i18n("Setup /dev/sonypi"), this);
         connect( setupButton, TQT_SIGNAL(clicked()), this, TQT_SLOT(setupHelper()) );

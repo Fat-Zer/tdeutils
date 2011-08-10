@@ -58,7 +58,7 @@ ThemeWidget::~ThemeWidget()
 int ThemeWidget::addInstance()
 {
   int i = 1;
-  while(m_instancePool.tqfind(i) != m_instancePool.end())
+  while(m_instancePool.find(i) != m_instancePool.end())
     ++i;
   m_instancePool.append(i);
   updateRunning();

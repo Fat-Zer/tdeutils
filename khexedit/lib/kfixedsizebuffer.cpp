@@ -89,7 +89,7 @@ int KFixedSizeBuffer::remove( KSection Remove )
 }
 
 
-unsigned int KFixedSizeBuffer::tqreplace( KSection Remove, const char* D, unsigned int InputLength )
+unsigned int KFixedSizeBuffer::replace( KSection Remove, const char* D, unsigned int InputLength )
 {
   // check all parameters
   if( Remove.startsBehind( Size-1 ) || (Remove.width()==0 && InputLength==0) )
@@ -262,7 +262,7 @@ int KFixedSizeBuffer::compare( const KDataBuffer &Other, KSection OtherRange, un
 }
 
 
-int KFixedSizeBuffer::tqfind(  const char*/*KeyData*/, int /*Length*/, KSection /*Section*/  ) const { return 0; }
+int KFixedSizeBuffer::find(  const char*/*KeyData*/, int /*Length*/, KSection /*Section*/  ) const { return 0; }
 int KFixedSizeBuffer::rfind( const char*, int /*Length*/, int /*Pos*/ ) const { return 0; }
 
 

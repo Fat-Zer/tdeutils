@@ -186,8 +186,8 @@ tv.tv_sec = 0;  tv.tv_usec = 0;
             TQString s;
             if (ts.eof()) break;
             s = ts.readLine();
-            if (s.tqcontains(thisreg)) {
-               _cardname = s.right(s.length() - s.tqfind(':') - 1);
+            if (s.contains(thisreg)) {
+               _cardname = s.right(s.length() - s.find(':') - 1);
                _cardname = _cardname.stripWhiteSpace();
                foundit = true;
                CHECK_CHANGED(oldValues, _cardname);
@@ -200,23 +200,23 @@ tv.tv_sec = 0;  tv.tv_usec = 0;
             int end;
             s.simplifyWhiteSpace();
 
-            end = s.tqfind(TQRegExp("[ \r\t\n]"));
+            end = s.find(TQRegExp("[ \r\t\n]"));
             s = s.remove(0, end+1);
 
-            end = s.tqfind(TQRegExp("[ \r\t\n]"));
+            end = s.find(TQRegExp("[ \r\t\n]"));
             _type = s;
             _type.truncate(end);
             s = s.remove(0, end+1);
 
-            end = s.tqfind(TQRegExp("[ \r\t\n]"));
+            end = s.find(TQRegExp("[ \r\t\n]"));
             _module = s;
             _module.truncate(end);
             s = s.remove(0, end+1);
 
-            end = s.tqfind(TQRegExp("[ \r\t\n]"));
+            end = s.find(TQRegExp("[ \r\t\n]"));
             s = s.remove(0, end+1);
 
-            end = s.tqfind(TQRegExp("[ \r\t\n]"));
+            end = s.find(TQRegExp("[ \r\t\n]"));
             _device = s;
             _device.truncate(end);
             s = s.remove(0, end+1);
@@ -508,7 +508,7 @@ TQString thisreg;
       while (!t.eof()) {
          s = t.readLine();
 
-         if (s.tqcontains(TQRegExp(thisreg))) {
+         if (s.contains(TQRegExp(thisreg))) {
             int n = (s.left(3).stripWhiteSpace()).toInt();
             df.close();
             return n;

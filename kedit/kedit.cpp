@@ -215,7 +215,7 @@ void TopLevel::setupActions()
     KStdAction::selectAll(TQT_TQOBJECT(this), TQT_SLOT(select_all()), actionCollection());
     KStdAction::find(TQT_TQOBJECT(this), TQT_SLOT(search()), actionCollection());
     KStdAction::findNext(TQT_TQOBJECT(this), TQT_SLOT(search_again()), actionCollection());
-    KStdAction::replace(TQT_TQOBJECT(this), TQT_SLOT(tqreplace()), actionCollection());
+    KStdAction::replace(TQT_TQOBJECT(this), TQT_SLOT(replace()), actionCollection());
 
     (void)new KAction(i18n("&Insert File..."), 0, TQT_TQOBJECT(this), TQT_SLOT(file_insert()),
                       actionCollection(), "insert_file");
@@ -445,11 +445,11 @@ TQString TopLevel::replaceISpell(TQString msg, int client)
 {
   switch(client)
   {
-    case KS_CLIENT_ISPELL: msg.tqreplace("ISpell", "<b>ispell</b>"); break;
-    case KS_CLIENT_ASPELL: msg.tqreplace("ISpell", "<b>aspell</b>"); break;
-    case KS_CLIENT_HSPELL: msg.tqreplace("ISpell", "<b>hspell</b>"); break;
+    case KS_CLIENT_ISPELL: msg.replace("ISpell", "<b>ispell</b>"); break;
+    case KS_CLIENT_ASPELL: msg.replace("ISpell", "<b>aspell</b>"); break;
+    case KS_CLIENT_HSPELL: msg.replace("ISpell", "<b>hspell</b>"); break;
   }
-  msg.tqreplace("\n", "<p>");
+  msg.replace("\n", "<p>");
   return "<qt>"+msg+"</qt>";
 }
 
@@ -762,7 +762,7 @@ void TopLevel::mail()
   // Default subject string
   //
   TQString defaultsubject = name();
-  int index = defaultsubject.tqfindRev('/');
+  int index = defaultsubject.findRev('/');
   if( index != -1)
     defaultsubject = defaultsubject.right(defaultsubject.length() - index - 1 );
 
@@ -788,7 +788,7 @@ void TopLevel::fancyprint(){
       y += fm.ascent();
       TQString line;
       line = eframe->textLine(i);
-      line.tqreplace( TQRegExp("\t"), "        " );
+      line.replace( TQRegExp("\t"), "        " );
       strncpy(buf,line.local8Bit(),160);
       for (int j = 0 ; j <150; j++){
 	if (!isprint(buf[j]))
@@ -818,7 +818,7 @@ void TopLevel::search(){
   statusbar_slot();
 }
 
-void TopLevel::tqreplace(){
+void TopLevel::replace(){
   eframe->replace();
   statusbar_slot();
 }

@@ -304,7 +304,7 @@ readit:
 				char buff2[1024];
 				if (fgets(buff2, sizeof(buff), f) == NULL)
 					break;
-				if (strstr(buff2, "tqStatus:") != NULL ||
+				if (strstr(buff2, "Status:") != NULL ||
 			    	    strstr(buff2, "state:") != NULL) {
 					if (strstr(buff2, "on-line") != NULL) {
 						fclose(f);

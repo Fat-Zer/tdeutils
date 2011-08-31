@@ -307,14 +307,14 @@ void KVaio::loadConfiguration(KConfig *k)
     mReportUnknownEvents =
 	k->readBoolEntry("Report_Unknown_Events", false);
     mReportPowertqStatus =
-	k->readBoolEntry("PeriodicallyReportPowertqStatus", false);
+	k->readBoolEntry("PeriodicallyReportPowerStatus", false);
     mShowPowerStatusOnBackButton =
 	k->readBoolEntry("PowerStatusOnBackButton", true);
 
     kdDebug() << "KVaio::loadConfiguration: " << endl
               << "       mReportUnknownEvents:      "
 	      << mReportUnknownEvents << endl
-	      << "       mReportPowertqStatus:        "
+	      << "       mReportPowerStatus:        "
 	      << mReportPowertqStatus << endl
 	      << "mShowPowerStatusOnBackButton:     "
 	      << mShowPowerStatusOnBackButton << endl;

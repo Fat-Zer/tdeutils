@@ -181,7 +181,7 @@ bool KVaioDriverInterface::getBatterytqStatus(
         bat2Avail = batFlags & SONYPI_BFLAGS_B2;
         acConnected = batFlags & SONYPI_BFLAGS_AC;
 
-//         kdDebug() << "KVaioDriverInterface::getBatterytqStatus: battery 1:  "
+//         kdDebug() << "KVaioDriverInterface::getBatteryStatus: battery 1:  "
 //                   << (bat1Avail ? "available" : "not available") << endl
 //                   << "                                        battery 2:  "
 //                   << (bat2Avail ? "available" : "not available") << endl

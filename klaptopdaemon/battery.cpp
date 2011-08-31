@@ -140,7 +140,7 @@ BatteryConfig::BatteryConfig (TQWidget * parent, const char *name)
 	    TQHBoxLayout *hl = new TQHBoxLayout();
 	    top_layout->addLayout(hl);
 
-	    TQHGroupBox *hb = new TQHGroupBox(i18n("Current Battery tqStatus"), this);
+	    TQHGroupBox *hb = new TQHGroupBox(i18n("Current Battery Status"), this);
 	    for (int i = 0; i < num_batteries; i++) {
 
 		TQWidget *wp;

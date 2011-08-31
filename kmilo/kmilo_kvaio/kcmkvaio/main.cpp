@@ -100,7 +100,7 @@ void KVaioModule::save()
 
     config.writeEntry("Report_Unknown_Events",
                       mKVaioGeneral->cbReportUnknownEvents->isChecked());
-    config.writeEntry("PeriodicallyReportPowertqStatus",
+    config.writeEntry("PeriodicallyReportPowerStatus",
 		      mKVaioGeneral->mCbPowerMsgs->isChecked() );
     config.writeEntry("PowerStatusOnBackButton",
 		      mKVaioGeneral->mCbBackButtonMsg->isChecked() );
@@ -139,7 +139,7 @@ void KVaioModule::load(bool useDefaults)
     mKVaioGeneral->cbReportUnknownEvents->setChecked
         (config.readBoolEntry("Report_Unknown_Events", false));
     mKVaioGeneral->mCbPowerMsgs->setChecked
-	(config.readBoolEntry("PeriodicallyReportPowertqStatus", false) );
+	(config.readBoolEntry("PeriodicallyReportPowerStatus", false) );
     mKVaioGeneral->mCbBackButtonMsg->setChecked
 	(config.readBoolEntry("PowerStatusOnBackButton", true) );
 

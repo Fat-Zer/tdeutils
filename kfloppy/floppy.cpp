@@ -644,7 +644,7 @@ void FloppyData::format(){
 
 void FloppyData::formattqStatus(const TQString &s,int p)
 {
-    kdDebug(2002) << "FloppyData::formattqStatus: " << s << " : "  << p << endl;
+    kdDebug(2002) << "FloppyData::formatStatus: " << s << " : "  << p << endl;
 	if (!s.isEmpty())
         {
             const TQString oldText ( frame->text() );

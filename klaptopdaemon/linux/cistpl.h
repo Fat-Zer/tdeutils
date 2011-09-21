@@ -1,19 +1,15 @@
 /*
- * cistpl.h 1.27 1998/09/30 18:08:46
+ * cistpl.h
  *
- * The contents of this file are subject to the Mozilla Public License
- * Version 1.0 (the "License"); you may not use this file except in
- * compliance with the License. You may obtain a copy of the License
- * at http://www.mozilla.org/MPL/
- *
- * Software distributed under the License is distributed on an "AS IS"
- * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See
- * the License for the specific language governing rights and
- * limitations under the License. 
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 2 as
+ * published by the Free Software Foundation.
  *
  * The initial developer of the original code is David A. Hinds
- * <dhinds@hyper.stanford.edu>.  Portions created by David A. Hinds
- * are Copyright (C) 1998 David A. Hinds.  All Rights Reserved.
+ * <dahinds@users.sourceforge.net>.  Portions created by David A. Hinds
+ * are Copyright (C) 1999 David A. Hinds.  All Rights Reserved.
+ *
+ * (C) 1999             David A. Hinds
  */
 
 #ifndef _LINUX_CISTPL_H
@@ -22,10 +18,13 @@
 #define CISTPL_NULL		0x00
 #define CISTPL_DEVICE		0x01
 #define CISTPL_LONGLINK_CB	0x02
+#define CISTPL_INDIRECT		0x03
 #define CISTPL_CONFIG_CB	0x04
 #define CISTPL_CFTABLE_ENTRY_CB	0x05
 #define CISTPL_LONGLINK_MFC	0x06
 #define CISTPL_BAR		0x07
+#define CISTPL_PWR_MGMNT	0x08
+#define CISTPL_EXTDEVICE	0x09
 #define CISTPL_CHECKSUM		0x10
 #define CISTPL_LONGLINK_A	0x11
 #define CISTPL_LONGLINK_C	0x12
@@ -54,8 +53,10 @@
 #define CISTPL_BYTEORDER	0x43
 #define CISTPL_DATE		0x44
 #define CISTPL_BATTERY		0x45
+#define CISTPL_FORMAT_A		0x47
 /* Layer 3 tuples */
 #define CISTPL_ORG		0x46
+#define CISTPL_SPCL		0x90
 
 typedef struct cistpl_longlink_t {
     u_int	addr;
@@ -161,7 +162,7 @@ typedef struct cistpl_funcid_t {
 
 typedef struct cistpl_funce_t {
     u_char	type;
-    u_char	data[1];
+    u_char	data[0];
 } cistpl_funce_t;
 
 /*======================================================================
@@ -170,24 +171,25 @@ typedef struct cistpl_funce_t {
 
 ======================================================================*/
 
-#define CISTPL_FUNCE_SERIAL		0x00
-#define CISTPL_FUNCE_SERIAL_DATA	0x08
-#define CISTPL_FUNCE_SERIAL_FAX		0x09
-#define CISTPL_FUNCE_SERIAL_VOICE	0x0a
-#define CISTPL_FUNCE_CAP		0x01
-#define CISTPL_FUNCE_CAP_DATA		0x05
-#define CISTPL_FUNCE_CAP_FAX		0x06
-#define CISTPL_FUNCE_CAP_VOICE		0x07
-#define CISTPL_FUNCE_SERV_DATA		0x02
-#define CISTPL_FUNCE_SERV_FAX_1		0x13
-#define CISTPL_FUNCE_SERV_FAX_2		0x23
-#define CISTPL_FUNCE_SERV_FAX_3		0x33
-#define CISTPL_FUNCE_SERV_VOICE		0x84
+#define CISTPL_FUNCE_SERIAL_IF		0x00
+#define CISTPL_FUNCE_SERIAL_CAP		0x01
+#define CISTPL_FUNCE_SERIAL_SERV_DATA	0x02
+#define CISTPL_FUNCE_SERIAL_SERV_FAX	0x03
+#define CISTPL_FUNCE_SERIAL_SERV_VOICE	0x04
+#define CISTPL_FUNCE_SERIAL_CAP_DATA	0x05
+#define CISTPL_FUNCE_SERIAL_CAP_FAX	0x06
+#define CISTPL_FUNCE_SERIAL_CAP_VOICE	0x07
+#define CISTPL_FUNCE_SERIAL_IF_DATA	0x08
+#define CISTPL_FUNCE_SERIAL_IF_FAX	0x09
+#define CISTPL_FUNCE_SERIAL_IF_VOICE	0x0a
 
 /* UART identification */
 #define CISTPL_SERIAL_UART_8250		0x00
 #define CISTPL_SERIAL_UART_16450	0x01
 #define CISTPL_SERIAL_UART_16550	0x02
+#define CISTPL_SERIAL_UART_8251		0x03
+#define CISTPL_SERIAL_UART_8530		0x04
+#define CISTPL_SERIAL_UART_85230	0x05
 
 /* UART capabilities */
 #define CISTPL_SERIAL_UART_SPACE	0x01
@@ -211,9 +213,37 @@ typedef struct cistpl_serial_t {
 typedef struct cistpl_modem_cap_t {
     u_char	flow;
     u_char	cmd_buf;
-    u_int	rcv_buf:24;
-    u_int	xmit_buf:24;
+    u_char	rcv_buf_0, rcv_buf_1, rcv_buf_2;
+    u_char	xmit_buf_0, xmit_buf_1, xmit_buf_2;
 } cistpl_modem_cap_t;
+
+#define CISTPL_SERIAL_MOD_103		0x01
+#define CISTPL_SERIAL_MOD_V21		0x02
+#define CISTPL_SERIAL_MOD_V23		0x04
+#define CISTPL_SERIAL_MOD_V22		0x08
+#define CISTPL_SERIAL_MOD_212A		0x10
+#define CISTPL_SERIAL_MOD_V22BIS	0x20
+#define CISTPL_SERIAL_MOD_V26		0x40
+#define CISTPL_SERIAL_MOD_V26BIS	0x80
+#define CISTPL_SERIAL_MOD_V27BIS	0x01
+#define CISTPL_SERIAL_MOD_V29		0x02
+#define CISTPL_SERIAL_MOD_V32		0x04
+#define CISTPL_SERIAL_MOD_V32BIS	0x08
+#define CISTPL_SERIAL_MOD_V34		0x10
+
+#define CISTPL_SERIAL_ERR_MNP2_4	0x01
+#define CISTPL_SERIAL_ERR_V42_LAPM	0x02
+
+#define CISTPL_SERIAL_CMPR_V42BIS	0x01
+#define CISTPL_SERIAL_CMPR_MNP5		0x02
+
+#define CISTPL_SERIAL_CMD_AT1		0x01
+#define CISTPL_SERIAL_CMD_AT2		0x02
+#define CISTPL_SERIAL_CMD_AT3		0x04
+#define CISTPL_SERIAL_CMD_MNP_AT	0x08
+#define CISTPL_SERIAL_CMD_V25BIS	0x10
+#define CISTPL_SERIAL_CMD_V25A		0x20
+#define CISTPL_SERIAL_CMD_DMCL		0x40
 
 typedef struct cistpl_data_serv_t {
     u_char	max_data_0;
@@ -226,7 +256,7 @@ typedef struct cistpl_data_serv_t {
     u_char	escape;
     u_char	encrypt;
     u_char	misc_features;
-    u_char	ccitt_code[1];
+    u_char	ccitt_code[0];
 } cistpl_data_serv_t;
 
 typedef struct cistpl_fax_serv_t {
@@ -236,7 +266,7 @@ typedef struct cistpl_fax_serv_t {
     u_char	encrypt;
     u_char	features_0;
     u_char	features_1;
-    u_char	ccitt_code[1];
+    u_char	ccitt_code[0];
 } cistpl_fax_serv_t;
 
 typedef struct cistpl_voice_serv_t {
@@ -312,7 +342,7 @@ typedef struct cistpl_ide_interface_t {
 
 /* First feature byte */
 #define CISTPL_IDE_SILICON		0x04
-#define CISTPL_IDE_UNITQUE		0x08
+#define CISTPL_IDE_UNIQUE		0x08
 #define CISTPL_IDE_DUAL			0x10
 
 /* Second feature byte */
@@ -398,8 +428,8 @@ typedef struct cistpl_io_t {
 } cistpl_io_t;
 
 typedef struct cistpl_irq_t {
-    u_int	IRTQInfo1;
-    u_int	IRTQInfo2;
+    u_int	IRQInfo1;
+    u_int	IRQInfo2;
 } cistpl_irq_t;
 
 #define CISTPL_MEM_MAX_WIN	8
@@ -486,6 +516,21 @@ typedef struct cistpl_org_t {
 #define CISTPL_ORG_APPSPEC	0x01
 #define CISTPL_ORG_XIP		0x02
 
+typedef struct cistpl_format_t {
+    u_char	type;
+    u_char	edc;
+    u_int	offset;
+    u_int	length;
+} cistpl_format_t;
+
+#define CISTPL_FORMAT_DISK	0x00
+#define CISTPL_FORMAT_MEM	0x01
+
+#define CISTPL_EDC_NONE		0x00
+#define CISTPL_EDC_CKSUM	0x01
+#define CISTPL_EDC_CRC		0x02
+#define CISTPL_EDC_PCC		0x03
+
 typedef union cisparse_t {
     cistpl_device_t		device;
     cistpl_checksum_t		checksum;
@@ -504,6 +549,7 @@ typedef union cisparse_t {
     cistpl_device_geo_t		device_geo;
     cistpl_vers_2_t		vers_2;
     cistpl_org_t		org;
+    cistpl_format_t		format;
 } cisparse_t;
 
 typedef struct tuple_t {
@@ -539,5 +585,21 @@ typedef struct cisdump_t {
     u_int	Length;
     cisdata_t	Data[CISTPL_MAX_CIS_SIZE];
 } cisdump_t;
+
+int pcmcia_get_first_tuple(client_handle_t handle, tuple_t *tuple);
+int pcmcia_get_next_tuple(client_handle_t handle, tuple_t *tuple);
+int pcmcia_get_tuple_data(client_handle_t handle, tuple_t *tuple);
+int pcmcia_parse_tuple(client_handle_t handle, tuple_t *tuple, cisparse_t *parse);
+
+int pcmcia_validate_cis(client_handle_t handle, cisinfo_t *info);
+int pcmcia_replace_cis(struct pcmcia_socket *s, cisdump_t *cis);
+
+/* don't use outside of PCMCIA core yet */
+int pccard_get_next_tuple(struct pcmcia_socket *s, unsigned int func, tuple_t *tuple);
+int pccard_get_first_tuple(struct pcmcia_socket *s, unsigned int function, tuple_t *tuple);
+int pccard_get_tuple_data(struct pcmcia_socket *s, tuple_t *tuple);
+int pccard_parse_tuple(tuple_t *tuple, cisparse_t *parse);
+
+int pccard_validate_cis(struct pcmcia_socket *s, unsigned int function, cisinfo_t *info);
 
 #endif /* LINUX_CISTPL_H */

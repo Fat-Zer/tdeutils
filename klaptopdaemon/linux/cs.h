@@ -1,8 +1,8 @@
 /*
- * cs.h 1.63 1998/12/09 07:36:24
+ * cs.h 1.71 2000/08/29 00:54:20
  *
  * The contents of this file are subject to the Mozilla Public License
- * Version 1.0 (the "License"); you may not use this file except in
+ * Version 1.1 (the "License"); you may not use this file except in
  * compliance with the License. You may obtain a copy of the License
  * at http://www.mozilla.org/MPL/
  *
@@ -12,8 +12,22 @@
  * limitations under the License. 
  *
  * The initial developer of the original code is David A. Hinds
- * <dhinds@hyper.stanford.edu>.  Portions created by David A. Hinds
- * are Copyright (C) 1998 David A. Hinds.  All Rights Reserved.
+ * <dahinds@users.sourceforge.net>.  Portions created by David A. Hinds
+ * are Copyright (C) 1999 David A. Hinds.  All Rights Reserved.
+ *
+ * Contributor:  Apple Computer, Inc.  Portions � 2000 Apple Computer, 
+ * Inc. All rights reserved.
+ *
+ * Alternatively, the contents of this file may be used under the
+ * terms of the GNU Public License version 2 (the "GPL"), in which
+ * case the provisions of the GPL are applicable instead of the
+ * above.  If you wish to allow the use of your version of this file
+ * only under the terms of the GPL and not to allow others to use
+ * your version of this file under the MPL, indicate your decision by
+ * deleting the provisions above and replace them with the notice and
+ * other provisions required by the GPL.  If you do not delete the
+ * provisions above, a recipient may use your version of this file
+ * under either the MPL or the GPL.
  */
 
 #ifndef _LINUX_CS_H
@@ -52,6 +66,10 @@ typedef struct adjust_t {
     } resource;
 } adjust_t;
 
+#ifdef __MACOSX__
+#define CS_ADJUST_FAKE_HANDLE ((void *)0x12345678)
+#endif
+
 /* Action field */
 #define REMOVE_MANAGED_RESOURCE		1
 #define ADD_MANAGED_RESOURCE		2
@@ -62,11 +80,11 @@ typedef struct adjust_t {
 #define RES_IO_RANGE			2
 #define RES_IRQ				3
 /* Attribute field */
-#define RES_IRTQ_TYPE			0x03
-#define RES_IRTQ_TYPE_EXCLUSIVE		0
-#define RES_IRTQ_TYPE_TIME		1
-#define RES_IRTQ_TYPE_DYNAMIC		2
-#define RES_IRTQ_CSC			0x04
+#define RES_IRQ_TYPE			0x03
+#define RES_IRQ_TYPE_EXCLUSIVE		0
+#define RES_IRQ_TYPE_TIME		1
+#define RES_IRQ_TYPE_DYNAMIC		2
+#define RES_IRQ_CSC			0x04
 #define RES_SHARED			0x08
 #define RES_RESERVED			0x10
 #define RES_ALLOCATED			0x20
@@ -87,6 +105,7 @@ typedef struct event_callback_args_t {
     void	*buffer;
     void	*misc;
     void	*client_data;
+    struct bus_operations *bus;
 } event_callback_args_t;
 
 /* for GetConfigurationInfo */
@@ -96,11 +115,11 @@ typedef struct config_info_t {
     u_int	Vcc, Vpp1, Vpp2;
     u_int	IntType;
     u_int	ConfigBase;
-    u_char	tqStatus, Pin, Copy, Option, ExttqStatus;
+    u_char	Status, Pin, Copy, Option, ExtStatus;
     u_int	Present;
     u_int	CardValues;
     u_int	AssignedIRQ;
-    u_int	IRTQAttributes;
+    u_int	IRQAttributes;
     ioaddr_t	BasePort1;
     ioaddr_t	NumPorts1;
     u_int	Attributes1;
@@ -108,6 +127,10 @@ typedef struct config_info_t {
     ioaddr_t	NumPorts2;
     u_int	Attributes2;
     u_int	IOAddrLines;
+#ifdef __MACOSX__
+    void *	PCCardNub;
+    void *	CardBusNub;	// per function
+#endif
 } config_info_t;
 
 /* For CardValues field */
@@ -130,8 +153,13 @@ typedef struct client_reg_t {
     dev_info_t	*dev_info;
     u_int	Attributes;
     u_int	EventMask;
+#ifdef __MACOSX__
+    int		(*event_handler)(cs_event_t event, int priority,
+				 event_callback_args_t *);
+#else
     int		(*event_handler)(event_t event, int priority,
 				 event_callback_args_t *);
+#endif
     event_callback_args_t event_callback_args;
     u_int	Version;
 } client_reg_t;
@@ -143,7 +171,7 @@ typedef struct modconf_t {
 } modconf_t;
 
 /* Attributes for ModifyConfiguration */
-#define CONF_IRTQ_CHANGE_VALID	0x100
+#define CONF_IRQ_CHANGE_VALID	0x100
 #define CONF_VCC_CHANGE_VALID	0x200
 #define CONF_VPP1_CHANGE_VALID	0x400
 #define CONF_VPP2_CHANGE_VALID	0x800
@@ -154,7 +182,7 @@ typedef struct config_req_t {
     u_int	Vcc, Vpp1, Vpp2;
     u_int	IntType;
     u_int	ConfigBase;
-    u_char	tqStatus, Pin, Copy, ExttqStatus;
+    u_char	Status, Pin, Copy, ExtStatus;
     u_char	ConfigIndex;
     u_int	Present;
 } config_req_t;
@@ -194,31 +222,31 @@ typedef struct io_req_t {
 typedef struct irq_req_t {
     u_int	Attributes;
     u_int	AssignedIRQ;
-    u_int	IRTQInfo1, IRTQInfo2;
+    u_int	IRQInfo1, IRQInfo2;
     void	*Handler;
     void	*Instance;
 } irq_req_t;
 
 /* Attributes for RequestIRQ and ReleaseIRQ */
-#define IRTQ_TYPE			0x03
-#define IRTQ_TYPE_EXCLUSIVE		0x00
-#define IRTQ_TYPE_TIME			0x01
-#define IRTQ_TYPE_DYNAMIC_SHARING	0x02
-#define IRTQ_FORCED_PULSE		0x04
-#define IRTQ_FIRST_SHARED		0x08
-#define IRTQ_HANDLE_PRESENT		0x10
-#define IRTQ_PULSE_ALLOCATED		0x100
+#define IRQ_TYPE			0x03
+#define IRQ_TYPE_EXCLUSIVE		0x00
+#define IRQ_TYPE_TIME			0x01
+#define IRQ_TYPE_DYNAMIC_SHARING	0x02
+#define IRQ_FORCED_PULSE		0x04
+#define IRQ_FIRST_SHARED		0x08
+#define IRQ_HANDLE_PRESENT		0x10
+#define IRQ_PULSE_ALLOCATED		0x100
 
-/* Bits in IRTQInfo1 field */
-#define IRTQ_MASK		0x0f
-#define IRTQ_NMI_ID		0x01
-#define IRTQ_IOCK_ID		0x02
-#define IRTQ_BERR_ID		0x04
-#define IRTQ_VEND_ID		0x08
-#define IRTQ_INFO2_VALID		0x10
-#define IRTQ_LEVEL_ID		0x20
-#define IRTQ_PULSE_ID		0x40
-#define IRTQ_SHARE_ID		0x80
+/* Bits in IRQInfo1 field */
+#define IRQ_MASK		0x0f
+#define IRQ_NMI_ID		0x01
+#define IRQ_IOCK_ID		0x02
+#define IRQ_BERR_ID		0x04
+#define IRQ_VEND_ID		0x08
+#define IRQ_INFO2_VALID		0x10
+#define IRQ_LEVEL_ID		0x20
+#define IRQ_PULSE_ID		0x40
+#define IRQ_SHARE_ID		0x80
 
 typedef struct eventmask_t {
     u_int	Attributes;
@@ -239,12 +267,7 @@ typedef struct eventmask_t {
 #define PRESENT_IOBASE_3	0x100
 #define PRESENT_IOSIZE		0x200
 
-/* Attributes for Request/GetConfiguration */
-#define CONF_ENABLE_IRQ		0x01
-#define EXCLUSIVE_USE		0x02
-#define VALID_CLIENT		0x04
-
-/* For MapMemPage */
+/* For GetMemPage, MapMemPage */
 typedef struct memreq_t {
     u_int	CardOffset;
     page_t	Page;
@@ -280,6 +303,7 @@ typedef struct win_req_t {
 #define WIN_SHARED		0x0040
 #define WIN_FIRST_SHARED	0x0080
 #define WIN_USE_WAIT		0x0100
+#define WIN_STRICT_ALIGN	0x0200
 #define WIN_MAP_BELOW_1MB	0x0400
 #define WIN_PREFETCH		0x0800
 #define WIN_CACHEABLE		0x1000
@@ -298,8 +322,13 @@ typedef struct win_req_t {
 
 typedef struct cs_status_t {
     u_char	Function;
+#ifdef __MACOSX__
+    cs_event_t 	CardState;
+    cs_event_t	SocketState;
+#else
     event_t 	CardState;
     event_t	SocketState;
+#endif
 } cs_status_t;
 
 typedef struct error_info_t {
@@ -386,14 +415,21 @@ typedef struct mtd_bind_t {
 
 #define CS_BAD_TUPLE		0x40
 
-#ifdef __KERNEL__
+
+//MACOSX #ifdef __KERNEL__
+#ifdef KERNEL
+
 
 /*
  *  Calls to set up low-level "Socket Services" drivers
  */
 
 typedef int (*ss_entry_t)(u_int sock, u_int cmd, void *arg);
+#ifdef __MACOSX__
+extern int register_ss_entry(int ssock, int esock, ss_entry_t entry);
+#else
 extern int register_ss_entry(int nsock, ss_entry_t entry);
+#endif
 extern void unregister_ss_entry(ss_entry_t entry);
 
 /*
@@ -407,7 +443,7 @@ enum service {
     GetClientInfo, GetConfigurationInfo, GetEventMask,
     GetFirstClient, GetFirstPartion, GetFirstRegion, GetFirstTuple,
     GetNextClient, GetNextPartition, GetNextRegion, GetNextTuple,
-    GettqStatus, GetTupleData, MapLogSocket, MapLogWindow, MapMemPage,
+    GetStatus, GetTupleData, MapLogSocket, MapLogWindow, MapMemPage,
     MapPhySocket, MapPhyWindow, ModifyConfiguration, ModifyWindow,
     OpenMemory, ParseTuple, ReadMemory, RegisterClient,
     RegisterEraseQueue, RegisterMTD, RegisterTimer,
@@ -417,13 +453,18 @@ enum service {
     RequestSocketMask, RequestWindow, ResetCard, ReturnSSEntry,
     SetEventMask, SetRegion, ValidateCIS, VendorSpecific,
     WriteMemory, BindDevice, BindMTD, ReportError,
-    SuspendCard, ResumeCard, EjectCard, InsertCard, ReplaceCIS
+    SuspendCard, ResumeCard, EjectCard, InsertCard, ReplaceCIS,
+    GetFirstWindow, GetNextWindow, GetMemPage
 };
 
 #ifdef IN_CARD_SERVICES
 extern int CardServices(int func, void *a1, void *a2, void *a3);
 #else
+#ifndef __MACOSX__  
+// for macosx we disable direct access to CardServices() call,
+// drivers should instead go thru the device nub (ie, the workloop)
 extern int CardServices(int func, ...);
+#endif
 #endif
 
 #ifdef __BEOS__

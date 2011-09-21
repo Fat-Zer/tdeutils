@@ -1,10 +1,10 @@
 /*
  * Definitions for bulk memory services
  *
- * bulkmem.h 1.8 1998/05/10 12:10:34
+ * bulkmem.h 1.12 2000/06/12 21:55:41
  *
  * The contents of this file are subject to the Mozilla Public License
- * Version 1.0 (the "License"); you may not use this file except in
+ * Version 1.1 (the "License"); you may not use this file except in
  * compliance with the License. You may obtain a copy of the License
  * at http://www.mozilla.org/MPL/
  *
@@ -14,8 +14,22 @@
  * limitations under the License. 
  *
  * The initial developer of the original code is David A. Hinds
- * <dhinds@hyper.stanford.edu>.  Portions created by David A. Hinds
- * are Copyright (C) 1998 David A. Hinds.  All Rights Reserved.
+ * <dahinds@users.sourceforge.net>.  Portions created by David A. Hinds
+ * are Copyright (C) 1999 David A. Hinds.  All Rights Reserved.
+ *
+ * Contributor:  Apple Computer, Inc.  Portions � 2000 Apple Computer, 
+ * Inc. All rights reserved.
+ *
+ * Alternatively, the contents of this file may be used under the
+ * terms of the GNU Public License version 2 (the "GPL"), in which
+ * case the provisions of the GPL are applicable instead of the
+ * above.  If you wish to allow the use of your version of this file
+ * only under the terms of the GPL and not to allow others to use
+ * your version of this file under the MPL, indicate your decision by
+ * deleting the provisions above and replace them with the notice and
+ * other provisions required by the GPL.  If you do not delete the
+ * provisions above, a recipient may use your version of this file
+ * under either the MPL or the GPL.
  * bulkmem.h 1.3 1995/05/27 04:49:49
  */
 
@@ -71,7 +85,7 @@ typedef struct eraseq_hdr_t {
     eraseq_entry_t	*QueueEntryArray;
 } eraseq_hdr_t;
 
-#define ERASE_TQUEUED		0x00
+#define ERASE_QUEUED		0x00
 #define ERASE_IN_PROGRESS(n)	(((n) > 0) && ((n) < 0x80))
 #define ERASE_IDLE		0xff
 #define ERASE_PASSED		0xe0
@@ -125,25 +139,25 @@ typedef struct mtd_request_t {
     u_int	TransferLength;
     u_int	Function;
     u_long	MediaID;
-    u_int	tqStatus;
+    u_int	Status;
     u_int	Timeout;
 } mtd_request_t;
 
 /* Fields in MTD Function */
-#define MTD_RETQ_ACTION		0x003
-#define MTD_RETQ_ERASE		0x000
-#define MTD_RETQ_READ		0x001
-#define MTD_RETQ_WRITE		0x002
-#define MTD_RETQ_COPY		0x003
-#define MTD_RETQ_NOERASE		0x004
-#define MTD_RETQ_VERIFY		0x008
-#define MTD_RETQ_READY		0x010
-#define MTD_RETQ_TIMEOUT		0x020
-#define MTD_RETQ_LAST		0x040
-#define MTD_RETQ_FIRST		0x080
-#define MTD_RETQ_KERNEL		0x100
+#define MTD_REQ_ACTION		0x003
+#define MTD_REQ_ERASE		0x000
+#define MTD_REQ_READ		0x001
+#define MTD_REQ_WRITE		0x002
+#define MTD_REQ_COPY		0x003
+#define MTD_REQ_NOERASE		0x004
+#define MTD_REQ_VERIFY		0x008
+#define MTD_REQ_READY		0x010
+#define MTD_REQ_TIMEOUT		0x020
+#define MTD_REQ_LAST		0x040
+#define MTD_REQ_FIRST		0x080
+#define MTD_REQ_KERNEL		0x100
 
-/* tqStatus codes */
+/* Status codes */
 #define MTD_WAITREQ	0x00
 #define MTD_WAITTIMER	0x01
 #define MTD_WAITRDY	0x02

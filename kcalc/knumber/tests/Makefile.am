@@ -29,4 +29,4 @@ METASOURCES = AUTO
 
 knumbertest_SOURCES = knumbertest.cpp
 knumbertest_LDADD = ../libknumber.la $(LIB_QT) $(LIBGMP)
-knumbertest_LDFLAGS = $(all_libraries) $(KDE_RPATH)
+knumbertest_LDFLAGS = $(all_libraries) $(KDE_RPATH) $(LIB_QT) -lDCOP $(LIB_KDECORE) $(LIB_KDEUI) -lkdefx $(LIB_KIO) -lktexteditor

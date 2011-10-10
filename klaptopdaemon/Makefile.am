@@ -27,7 +27,7 @@ kcm_laptop_la_COMPILE_FIRST = crcresult.h
 
 AM_CPPFLAGS = $(all_includes)
 
-AM_LDFLAGS = $(all_libraries) $(KDE_RPATH)
+AM_LDFLAGS = $(all_libraries) $(KDE_RPATH) $(LIB_QT) -lDCOP $(LIB_KDECORE) $(LIB_KDEUI) -lkdefx $(LIB_KIO) -lktexteditor
 
 KDE_OPTIONS = nofinal
 

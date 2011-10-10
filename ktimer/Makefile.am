@@ -1,5 +1,5 @@
 INCLUDES = $(all_includes)
-AM_LDFLAGS	= $(all_libraries) $(KDE_RPATH)
+AM_LDFLAGS	= $(all_libraries) $(KDE_RPATH) $(LIB_QT) -lDCOP $(LIB_KDECORE) $(LIB_KDEUI) -lkdefx $(LIB_KIO) -lktexteditor
 LDADD =  $(LIB_KDEUI) $(LIB_KFILE)
 
 bin_PROGRAMS = ktimer

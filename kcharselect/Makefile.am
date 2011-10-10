@@ -3,7 +3,7 @@ LDADD	= $(LIB_KFILE)
 bin_PROGRAMS = kcharselect
 
 kcharselect_SOURCES = kcharselectdia.cc main.cc
-kcharselect_LDFLAGS = $(all_libraries) $(KDE_RPATH)
+kcharselect_LDFLAGS = $(all_libraries) $(KDE_RPATH) $(LIB_QT) -lDCOP $(LIB_KDECORE) $(LIB_KDEUI) -lkdefx $(LIB_KIO) -lktexteditor
 kcharselect_METASOURCES = kcharselectdia.moc
 
 updatedir = $(kde_datadir)/kconf_update

@@ -34,7 +34,7 @@ INCLUDES = $(all_includes)
 METASOURCES = AUTO
 
 # the library search path. 
-libkdelirc_la_LDFLAGS = $(all_libraries) $(KDE_RPATH)
+libkdelirc_la_LDFLAGS = $(all_libraries) $(KDE_RPATH) $(LIB_QT) -lDCOP $(LIB_KDECORE) $(LIB_KDEUI) -lkdefx $(LIB_KIO) -lktexteditor
 
 # Uncomment the following two lines if you add a ui.rc file for your application to make use of
 # KDE´s XML GUI builing

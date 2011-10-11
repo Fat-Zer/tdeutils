@@ -1,4 +1,4 @@
-kfloppy_LDFLAGS	= $(all_libraries)  $(KDE_RPATH)
+kfloppy_LDFLAGS	= $(all_libraries)  $(KDE_RPATH) $(LIB_QT) -lDCOP $(LIB_KDECORE) $(LIB_KDEUI) -lkdefx $(LIB_KIO) -lktexteditor
 kfloppy_LDADD =  $(LIB_KDEUI) -lm
 INCLUDES =	$(all_includes)
 

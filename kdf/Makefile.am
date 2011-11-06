@@ -9,11 +9,11 @@ libkdf_common_la_SOURCES = kdfwidget.cpp kdfconfig.cpp mntconfig.cpp disklist.cp
 	disks.cpp listview.cpp optiondialog.cpp stdoption.cpp
 
 kdf_SOURCES = kdf.cpp 
-kdf_LDFLAGS = $(all_libraries) $(KDE_RPATH) $(LIB_QT) -lDCOP $(LIB_KDECORE) $(LIB_KDEUI) -lkdefx $(LIB_KIO) -lktexteditor
+kdf_LDFLAGS = $(all_libraries) $(KDE_RPATH) $(LIB_QT) -lDCOP $(LIB_KDECORE) $(LIB_KDEUI) -ltdefx $(LIB_KIO) -lktexteditor
 kdf_LDADD = libkdf_common.la $(LIB_KFILE)
 
 kwikdisk_SOURCES = kwikdisk.cpp 
-kwikdisk_LDFLAGS = $(all_libraries) $(KDE_RPATH) $(LIB_QT) -lDCOP $(LIB_KDECORE) $(LIB_KDEUI) -lkdefx $(LIB_KIO) -lktexteditor
+kwikdisk_LDFLAGS = $(all_libraries) $(KDE_RPATH) $(LIB_QT) -lDCOP $(LIB_KDECORE) $(LIB_KDEUI) -ltdefx $(LIB_KIO) -lktexteditor
 kwikdisk_LDADD = libkdf_common.la $(LIB_KFILE)
 
 kde_module_LTLIBRARIES = kcm_kdf.la

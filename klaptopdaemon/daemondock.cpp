@@ -233,8 +233,8 @@ laptop_dock::invokeBrightness()
 
 void laptop_dock::slotGoRoot(int /*id*/) {
 #ifdef NOTDEF
-	TQString kdesu = KStandardDirs::findExe("kdesu");
-	if (!kdesu.isEmpty()) {
+	TQString tdesu = KStandardDirs::findExe("tdesu");
+	if (!tdesu.isEmpty()) {
 		int rc = KMessageBox::warningContinueCancel(0,
 				i18n("You will need to supply a root password "
 					"to allow KLaptopDaemon to restart "
@@ -246,7 +246,7 @@ void laptop_dock::slotGoRoot(int /*id*/) {
 		if (rc == KMessageBox::Continue) {
 			KProcess *_rootProcess;
 			_rootProcess = new KProcess;
-			*_rootProcess << kdesu;
+			*_rootProcess << tdesu;
 			*_rootProcess << "-u";
 			*_rootProcess << "root";
 			//*_rootProcess << "--nonewdcop";
@@ -257,7 +257,7 @@ void laptop_dock::slotGoRoot(int /*id*/) {
 			// We should disable this menu item here now.
 		}
 	} else {
-		KMessageBox::sorry(0, i18n("PCMCIA cannot be enabled since kdesu cannot be found. Please make sure that it is installed correctly."),
+		KMessageBox::sorry(0, i18n("PCMCIA cannot be enabled since tdesu cannot be found. Please make sure that it is installed correctly."),
 				i18n("KLaptopDaemon"));
 	}
 #else

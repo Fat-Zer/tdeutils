@@ -166,8 +166,8 @@ void AcpiConfig::setupHelper()
 	TQString helper = KStandardDirs::findExe("klaptop_acpi_helper");
 	checkcrc(TQFile::encodeName(helper), len, crc);
 
-	TQString kdesu = KStandardDirs::findExe("kdesu");
-	if (!kdesu.isEmpty()) {
+	TQString tdesu = KStandardDirs::findExe("tdesu");
+	if (!tdesu.isEmpty()) {
 		int rc = KMessageBox::warningContinueCancel(0,
 				i18n("You will need to supply a root password "
 					"to allow the privileges of the klaptop_acpi_helper to change."),
@@ -175,14 +175,14 @@ void AcpiConfig::setupHelper()
 				"");
 		if (rc == KMessageBox::Continue) {
 			KProcess proc;
-			proc << kdesu;
+			proc << tdesu;
 			proc << "-u";
 			proc << "root";
 			proc <<  "dpkg-statoverride --update --add root root 6755 "+helper;
 			proc.start(KProcess::Block);	// run it sync so has_acpi below sees the results
 		}
 	} else {
-		KMessageBox::sorry(0, i18n("The ACPI helper cannot be enabled because kdesu cannot be found.  Please make sure that it is installed correctly."),
+		KMessageBox::sorry(0, i18n("The ACPI helper cannot be enabled because tdesu cannot be found.  Please make sure that it is installed correctly."),
 				i18n("KLaptopDaemon"));
 	}
 	laptop_portable::acpi_set_mask(enablestandby, enablesuspend, enablehibernate, enableperformance, enablethrottle);

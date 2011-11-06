@@ -11,7 +11,7 @@ kgpg_SOURCES = kgpgoptions.cpp listkeys.cpp popuppublic.cpp kgpgview.cpp \
 		keyproperties.ui conf_encryption.ui conf_decryption.ui conf_gpg.ui dcopiface.skel \
 		keyinfowidget.cpp groupedit.ui kgpgrevokewidget.ui newkey.ui adduid.ui 	keyexport.ui \
 		sourceselect.ui kgpgsettings.kcfgc conf_servers.ui conf_ui2.ui conf_misc.ui
-kgpg_LDADD   =  $(LIB_KIO) $(LIB_KABC) -lkutils -lkdeprint
+kgpg_LDADD   =  $(LIB_KIO) $(LIB_KABC) -lkutils -ltdeprint
 
 pics_DATA= kgpg_anim.gif kgpg_docked.png  kgpg_docked.gif kgpg_blank.png  kgpg_fill.png
 picsdir=$(kde_datadir)/kgpg/pics
@@ -28,7 +28,7 @@ kde_kcfg_DATA = kgpg.kcfg
 METASOURCES = AUTO
 
 # the library search path.
-kgpg_LDFLAGS = $(all_libraries) $(KDE_RPATH) $(LIB_QT) -lDCOP $(LIB_KDECORE) $(LIB_KDEUI) -lkdefx $(LIB_KIO) -lktexteditor
+kgpg_LDFLAGS = $(all_libraries) $(KDE_RPATH) $(LIB_QT) -lDCOP $(LIB_KDECORE) $(LIB_KDEUI) -ltdefx $(LIB_KIO) -lktexteditor
 
 appsdir = $(kde_datadir)/kgpg
 apps_DATA = kgpg.rc listkeys.rc tips

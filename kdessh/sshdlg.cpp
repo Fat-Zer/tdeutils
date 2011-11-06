@@ -2,14 +2,14 @@
  *
  * $Id$
  *
- * This file is part of the KDE project, module kdesu.
+ * This file is part of the KDE project, module tdesu.
  * Copyright (C) 2000 Geert Jansen <jansen@kde.org>
  */
 
 #include <klocale.h>
 #include <kmessagebox.h>
 
-#include <kdesu/ssh.h>
+#include <tdesu/ssh.h>
 #include "sshdlg.h"
 
 
@@ -59,7 +59,7 @@ bool KDEsshDialog::checkPassword(const char *password)
 
     case SshProcess::SshNotFound:
 	KMessageBox::sorry(this,
-		i18n("The programs 'ssh' or 'kdesu_stub' cannot be found.\n"
+		i18n("The programs 'ssh' or 'tdesu_stub' cannot be found.\n"
 		"Make sure your PATH is set correctly."));
 	done(Rejected);
 	return false;

@@ -5,7 +5,7 @@ SUBDIRS = pics
 
 # The binary name. Changed from kzip to ark
 bin_PROGRAMS =
-kdeinit_LTLIBRARIES = ark.la
+tdeinit_LTLIBRARIES = ark.la
 lib_LTLIBRARIES =
 
 ark_la_SOURCES = main.cpp arkapp.cpp mainwindow.cpp

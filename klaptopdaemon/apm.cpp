@@ -154,8 +154,8 @@ ApmConfig::~ApmConfig()
 
 void ApmConfig::setupHelper()
 {
-	TQString kdesu = KStandardDirs::findExe("kdesu");
-	if (!kdesu.isEmpty()) {
+	TQString tdesu = KStandardDirs::findExe("tdesu");
+	if (!tdesu.isEmpty()) {
 		int rc = KMessageBox::warningContinueCancel(0,
 				i18n("You will need to supply a root password "
 					"to allow the privileges of the %1 application to change.").tqarg(apm_name),
@@ -163,14 +163,14 @@ void ApmConfig::setupHelper()
 				"");
 		if (rc == KMessageBox::Continue) {
 			KProcess proc;
-			proc << kdesu;
+			proc << tdesu;
 			proc << "-u";
 			proc << "root";
 			proc <<  TQString("dpkg-statoverride --update --add root root 6755 ")+apm_name;
 			proc.start(KProcess::Block);	// run it sync so has_apm below sees the results
 		}
 	} else {
-		KMessageBox::sorry(0, i18n("%1 cannot be enabled because kdesu cannot be found.  Please make sure that it is installed correctly.").tqarg(TQString(apm_name)),
+		KMessageBox::sorry(0, i18n("%1 cannot be enabled because tdesu cannot be found.  Please make sure that it is installed correctly.").tqarg(TQString(apm_name)),
 				i18n("KLaptopDaemon"));
 	}
 	laptop_portable::apm_set_mask(enablestandby, enablesuspend);
@@ -188,8 +188,8 @@ void ApmConfig::setupHelper2()	// we use the acpi helper to do software suspend
 	TQString helper = KStandardDirs::findExe("klaptop_acpi_helper");
 	checkcrc(helper.latin1(), len, crc);
 
-	TQString kdesu = KStandardDirs::findExe("kdesu");
-	if (!kdesu.isEmpty()) {
+	TQString tdesu = KStandardDirs::findExe("tdesu");
+	if (!tdesu.isEmpty()) {
 		int rc = KMessageBox::warningContinueCancel(0,
 				i18n("You will need to supply a root password "
 					"to allow the privileges of the klaptop_acpi_helper to change."),
@@ -197,14 +197,14 @@ void ApmConfig::setupHelper2()	// we use the acpi helper to do software suspend
 				"");
 		if (rc == KMessageBox::Continue) {
 			KProcess proc;
-			proc << kdesu;
+			proc << tdesu;
 			proc << "-u";
 			proc << "root";
 			proc <<  "dpkg-statoverride --update --add root root 6755 "+helper;
 			proc.start(KProcess::Block);	// run it sync so has_acpi below sees the results
 		}
 	} else {
-		KMessageBox::sorry(0, i18n("The Software Suspend helper cannot be enabled because kdesu cannot be found.  Please make sure that it is installed correctly."),
+		KMessageBox::sorry(0, i18n("The Software Suspend helper cannot be enabled because tdesu cannot be found.  Please make sure that it is installed correctly."),
 				i18n("KLaptopDaemon"));
 	}
 	laptop_portable::software_suspend_set_mask(enablesoftwaresuspend);

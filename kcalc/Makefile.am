@@ -4,7 +4,7 @@ SUBDIRS = knumber
 
 bin_PROGRAMS =
 lib_LTLIBRARIES =
-kdeinit_LTLIBRARIES = kcalc.la
+tdeinit_LTLIBRARIES = kcalc.la
 
 kcalc_la_SOURCES = kcalc.cpp kcalc_button.cpp kcalc_const_button.cpp \
 			kcalc_const_menu.cpp kcalc_core.cpp kcalcdisplay.cpp \

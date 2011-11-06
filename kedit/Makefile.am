@@ -9,10 +9,10 @@ INCLUDES = $(all_includes)
 
 bin_PROGRAMS =
 lib_LTLIBRARIES =
-kdeinit_LTLIBRARIES = kedit.la
+tdeinit_LTLIBRARIES = kedit.la
 
 kedit_la_SOURCES = kedit.cpp ktextfiledlg.cpp misc.ui color.ui prefs.kcfgc
-kedit_la_LIBADD = -lkdeprint $(LIB_KFILE)
+kedit_la_LIBADD = -ltdeprint $(LIB_KFILE)
 kedit_la_LDFLAGS = -module -avoid-version $(KDE_PLUGIN) $(all_libraries)
 
 noinst_HEADERS = kedit.h ktextfiledlg.h\

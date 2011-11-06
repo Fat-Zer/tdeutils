@@ -3,7 +3,7 @@ SUBDIRS = icons
 bin_PROGRAMS =
 lib_LTLIBRARIES =
 noinst_LTLIBRARIES = libirkick_common.la
-kdeinit_LTLIBRARIES = irkick.la
+tdeinit_LTLIBRARIES = irkick.la
 
 CLEANFILES = dummy.cpp
 

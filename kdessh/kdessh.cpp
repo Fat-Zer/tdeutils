@@ -2,7 +2,7 @@
  *
  * $Id$
  *
- * This file is part of the KDE project, module kdesu.
+ * This file is part of the KDE project, module tdesu.
  * Copyright (C) 2000 Geert Jansen <jansen@kde.org>
  */
 
@@ -27,9 +27,9 @@
 #include <kcmdlineargs.h>
 #include <kmessagebox.h>
 
-#include <kdesu/ssh.h>
-#include <kdesu/client.h>
-#include <kdesu/defaults.h>
+#include <tdesu/ssh.h>
+#include <tdesu/client.h>
+#include <tdesu/defaults.h>
 
 #include "sshdlg.h"
 
@@ -38,7 +38,7 @@ static KCmdLineOptions options[] =
     { "+host", I18N_NOOP("Specifies the remote host"), 0 },
     { "+command", I18N_NOOP("The command to run"), 0 },
     { "u <user>", I18N_NOOP("Specifies the target uid"), 0 },
-    { "s <path>", I18N_NOOP("Specify remote stub location"), "kdesu_stub" },
+    { "s <path>", I18N_NOOP("Specify remote stub location"), "tdesu_stub" },
     { "n", I18N_NOOP("Do not keep password"), 0 },
     { "q", I18N_NOOP("Stop the daemon (forgets all passwords)"), 0 },
     { "t", I18N_NOOP("Enable terminal output (no password keeping)"), 0 },
@@ -128,7 +128,7 @@ int main(int argc, char *argv[])
 	have_daemon = false;
     }
 
-    // Try to exec the command with kdesud?
+    // Try to exec the command with tdesud?
     bool keep = !args->isSet("n") && have_daemon;
     bool terminal = args->isSet("t");
     if (keep && !terminal)

@@ -27,7 +27,7 @@ class TQComboBox;
 class TQLabel;
 class TQSpinBox;
 
-#include <kdeprint/kprintdialogpage.h>
+#include <tdeprint/kprintdialogpage.h>
 #include <ksimpleconfig.h>
 
 class LayoutDialogPage : public KPrintDialogPage

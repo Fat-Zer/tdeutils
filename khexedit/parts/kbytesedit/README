@@ -20,4 +20,4 @@ Installs the .desktop file describing the service and the module library.
 
 usage:
 ------
-Only official known usage is by KPilot (kdepim/kpilot) for now.
+Only official known usage is by KPilot (tdepim/kpilot) for now.

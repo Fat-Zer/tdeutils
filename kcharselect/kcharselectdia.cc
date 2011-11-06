@@ -33,7 +33,7 @@ KCharSelectDia::KCharSelectDia(TQWidget *parent,const char *name,
 
   grid = new TQGridLayout( mainWidget, 3, 4, KDialog::marginHint(), KDialog::spacingHint() );
 
-  // Add character selection widget from library kdeui
+  // Add character selection widget from library tdeui
   charSelect = new KCharSelect(mainWidget,"",vFont,vChr,_tableNum);
   charSelect->resize(charSelect->tqsizeHint());
   connect(charSelect,TQT_SIGNAL(highlighted(const TQChar &)),

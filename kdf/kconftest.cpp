@@ -27,7 +27,7 @@
 
 
 /* compile with
-* gcc  -I$TQTDIR/include -I$KDEDIR/include   -L/opt/kde/lib -L/usr/X11R6/lib -lkfm -lkdeui -lkdecore -lqt -lX11 -lXext -fno-rtti kconftest.cpp                
+* gcc  -I$TQTDIR/include -I$KDEDIR/include   -L/opt/kde/lib -L/usr/X11R6/lib -lkfm -ltdeui -ltdecore -lqt -lX11 -lXext -fno-rtti kconftest.cpp                
 */
 
 

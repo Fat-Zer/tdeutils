@@ -107,8 +107,8 @@ SonyConfig::SonyConfig(TQWidget * parent, const char *name)
 
 void SonyConfig::setupHelper()
 {
-	TQString kdesu = KStandardDirs::findExe("kdesu");
-	if (!kdesu.isEmpty()) {
+	TQString tdesu = KStandardDirs::findExe("tdesu");
+	if (!tdesu.isEmpty()) {
 		int rc = KMessageBox::warningContinueCancel(0,
 				i18n("You will need to supply a root password "
 					"to allow the protections of /dev/sonypi to be changed."),
@@ -116,14 +116,14 @@ void SonyConfig::setupHelper()
 				"");
 		if (rc == KMessageBox::Continue) {
 			KProcess proc;
-			proc << kdesu;
+			proc << tdesu;
 			proc << "-u";
 			proc << "root";
 			proc <<  "chmod +r /dev/sonypi";
 			proc.start(KProcess::Block);	// run it sync so has_acpi below sees the results
 		}
 	} else {
-		KMessageBox::sorry(0, i18n("The /dev/sonypi protections cannot be changed because kdesu cannot be found.  Please make sure that it is installed correctly."),
+		KMessageBox::sorry(0, i18n("The /dev/sonypi protections cannot be changed because tdesu cannot be found.  Please make sure that it is installed correctly."),
 				i18n("KLaptopDaemon"));
 	}
     	bool enable = ::access("/dev/sonypi", R_OK) == 0;

@@ -46,7 +46,7 @@ libkregexpeditorgui_la_LIBADD = libkregexpeditorcommon.la
 
 bin_PROGRAMS = kregexpeditor
 kregexpeditor_SOURCES = main.cpp
-kregexpeditor_LDFLAGS = $(all_libraries) $(KDE_RPATH) $(LIB_QT) -lDCOP $(LIB_KDECORE) $(LIB_KDEUI) -lkdefx $(LIB_KIO) -lktexteditor
+kregexpeditor_LDFLAGS = $(all_libraries) $(KDE_RPATH) $(LIB_QT) -lDCOP $(LIB_KDECORE) $(LIB_KDEUI) -ltdefx $(LIB_KIO) -lktexteditor
 kregexpeditor_LDADD =  libkregexpeditorcommon.la $(LIB_KIO)
 kregexpeditor_INCLUDES =  $(all_includes)
 

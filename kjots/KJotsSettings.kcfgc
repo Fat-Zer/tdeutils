@@ -4,5 +4,5 @@ ClassName=KJotsSettings
 Singleton=true
 Mutators=Width,Height,SplitterSizes,CurrentSelection,OpenBooks,LastId
 # Inherits=KConfigSkeleton
-# IncludeFiles=libkdepim/kpimprefs.h
+# IncludeFiles=libtdepim/kpimprefs.h
 # MemberVariables=public

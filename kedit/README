@@ -66,7 +66,7 @@ Problems:
 	
 	o kedit has currently problems to deal with color-scheme changes
  	  without restarting kedit. I have made the necessary changes to 
-	  libkdecore to deal with this problem. You will however have to wait
+	  libtdecore to deal with this problem. You will however have to wait
 	  for the next kdelibs release. At that time I will also bring out
           a new version of kedit that will take advantage of those changes.
 
@@ -164,7 +164,7 @@ Version 0.3 (Torben Weiss, weiss@kde.org, 4.2.97 )
 - Can save files everywhere kfm can, this means right now that you can
   write to ftp servers.
 
-- Using libkdecore and libkfm. This means you need libkde-0.61 and
+- Using libtdecore and libkfm. This means you need libkde-0.61 and
   kfm-0.51 or greater installed
 
 - Fixed some bugs

@@ -4,5 +4,5 @@ ClassName=KCalcSettings
 Singleton=true
 Mutators=ShowStat,ShowScientific,ShowLogic,ShowConstants,nameConstant,valueConstant
 # Inherits=KConfigSkeleton
-# IncludeFiles=libkdepim/kpimprefs.h
+# IncludeFiles=libtdepim/kpimprefs.h
 # MemberVariables=public

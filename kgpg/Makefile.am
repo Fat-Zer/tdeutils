@@ -28,7 +28,7 @@ kde_kcfg_DATA = kgpg.kcfg
 METASOURCES = AUTO
 
 # the library search path.
-kgpg_LDFLAGS = $(all_libraries) $(KDE_RPATH) $(LIB_QT) -lDCOP $(LIB_KDECORE) $(LIB_KDEUI) -ltdefx $(LIB_KIO) -lktexteditor
+kgpg_LDFLAGS = $(all_libraries) $(KDE_RPATH) $(LIB_QT) -lDCOP $(LIB_TDECORE) $(LIB_TDEUI) -ltdefx $(LIB_KIO) -lktexteditor
 
 appsdir = $(kde_datadir)/kgpg
 apps_DATA = kgpg.rc listkeys.rc tips

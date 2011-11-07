@@ -13,7 +13,7 @@ lnk_DATA = kcharselectapplet.desktop
 EXTRA_DIST = $(lnk_DATA)
 
 kcharselect_panelapplet_la_LDFLAGS = $(all_libraries) $(KDE_PLUGIN) -module
-kcharselect_panelapplet_la_LIBADD = $(LIB_KDEUI)
+kcharselect_panelapplet_la_LIBADD = $(LIB_TDEUI)
 
 messages:
 	$(XGETTEXT) *.cpp *.h -o $(podir)/kcharselectapplet.pot

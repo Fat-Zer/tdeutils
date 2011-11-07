@@ -3,7 +3,7 @@ kde_module_LTLIBRARIES = kcm_kvaio.la
 kcm_kvaio_la_SOURCES = kcmkvaio_general.ui main.cpp
 
 kcm_kvaio_la_LDFLAGS = -module $(KDE_PLUGIN) $(all_libraries)
-kcm_kvaio_la_LIBADD = ../kvaiodriverinterface.lo $(LIB_KDEUI)
+kcm_kvaio_la_LIBADD = ../kvaiodriverinterface.lo $(LIB_TDEUI)
 
 INCLUDES= $(all_includes)
  

@@ -4,7 +4,7 @@ noinst_LTLIBRARIES = libkdelirc.la
 noinst_HEADERS = iraction.h arguments.h iractions.h prototype.h modes.h mode.h profileserver.h remoteserver.h
 
 libkdelirc_la_SOURCES = iraction.cpp arguments.cpp iractions.cpp prototype.cpp modes.cpp mode.cpp profileserver.cpp remoteserver.cpp
-libkdelirc_la_LIBADD = $(LIB_QT) $(LIB_KDECORE) $(LIB_KDEUI) $(LIBSOCKET)
+libkdelirc_la_LIBADD = $(LIB_QT) $(LIB_TDECORE) $(LIB_TDEUI) $(LIBSOCKET)
 
 ####### kdevelop will overwrite this part!!! (end)############
 # These paths are KDE specific. Use them:
@@ -34,7 +34,7 @@ INCLUDES = $(all_includes)
 METASOURCES = AUTO
 
 # the library search path. 
-libkdelirc_la_LDFLAGS = $(all_libraries) $(KDE_RPATH) $(LIB_QT) -lDCOP $(LIB_KDECORE) $(LIB_KDEUI) -ltdefx $(LIB_KIO) -lktexteditor
+libkdelirc_la_LDFLAGS = $(all_libraries) $(KDE_RPATH) $(LIB_QT) -lDCOP $(LIB_TDECORE) $(LIB_TDEUI) -ltdefx $(LIB_KIO) -lktexteditor
 
 # Uncomment the following two lines if you add a ui.rc file for your application to make use of
 # KDE´s XML GUI builing

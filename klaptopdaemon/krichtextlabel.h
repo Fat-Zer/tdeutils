@@ -32,7 +32,7 @@
 /*
  * TQLabel
  */
-class KDEUI_EXPORT KRichTextLabel : public TQLabel {
+class TDEUI_EXPORT KRichTextLabel : public TQLabel {
   Q_OBJECT
   TQ_OBJECT
 

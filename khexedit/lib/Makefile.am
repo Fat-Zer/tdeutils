@@ -7,7 +7,7 @@ METASOURCES = AUTO
 # this library is used by the kbytesedit part and the khepart part
 lib_LTLIBRARIES =  libkhexeditcommon.la
 libkhexeditcommon_la_LDFLAGS = $(all_libraries) -no-undefined
-libkhexeditcommon_la_LIBADD =  controller/libkcontroller.la codecs/libkhecodecs.la $(LIB_KDECORE)
+libkhexeditcommon_la_LIBADD =  controller/libkcontroller.la codecs/libkhecodecs.la $(LIB_TDECORE)
 libkhexeditcommon_la_SOURCES = kcolumn.cpp kbordercolumn.cpp koffsetcolumn.cpp \
                                kbuffercolumn.cpp kvaluecolumn.cpp kcharcolumn.cpp \
                                kcolumnsview.cpp khexedit.cpp kbytesedit.cpp \

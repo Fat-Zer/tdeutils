@@ -22,10 +22,10 @@
 #include <tqobject.h>
 #include <kiconloader.h>
 #include <klocale.h>
-#include <kwinmodule.h>
+#include <twinmodule.h>
 #include <kmessagebox.h>
 #include <kdebug.h>
-#include <kwin.h>
+#include <twin.h>
 
 #include <tqpopupmenu.h>
 #include <tqdragobject.h>
@@ -51,7 +51,7 @@ Systemtray::~Systemtray()
 
 int Systemtray::getTraySize() {
 
-	return (int) kwin_module->systemTrayWindows().size();
+	return (int) twin_module->systemTrayWindows().size();
 }
 
 void Systemtray::updateBackgroundPixmap ( const TQPixmap & pixmap) {
@@ -82,8 +82,8 @@ void Systemtray::initSystray( void )
   Display *display = qt_xdisplay();
   no_of_systray_windows = 0;
 
-  kwin_module = new KWinModule();
-  systemTrayWindows = kwin_module->systemTrayWindows();
+  twin_module = new KWinModule();
+  systemTrayWindows = twin_module->systemTrayWindows();
   TQValueList<WId>::ConstIterator end(systemTrayWindows.end());
   for (TQValueList<WId>::ConstIterator it = systemTrayWindows.begin(); it!=end; ++it)
   {
@@ -107,8 +107,8 @@ void Systemtray::initSystray( void )
 
   updateTrayWindows();
 
-  connect(kwin_module, TQT_SIGNAL(systemTrayWindowAdded(WId)), TQT_SLOT(systemTrayWindowAdded(WId)));
-  connect(kwin_module, TQT_SIGNAL(systemTrayWindowRemoved(WId)), TQT_SLOT(systemTrayWindowRemoved(WId)));
+  connect(twin_module, TQT_SIGNAL(systemTrayWindowAdded(WId)), TQT_SLOT(systemTrayWindowAdded(WId)));
+  connect(twin_module, TQT_SIGNAL(systemTrayWindowRemoved(WId)), TQT_SLOT(systemTrayWindowRemoved(WId)));
 
   TQCString screenstr;
   screenstr.setNum(qt_xscreen());
@@ -153,7 +153,7 @@ void Systemtray::updateTrayWindows( void )
   while ((emb = m_Wins.current()) != 0L)
   {
     WId wid = emb->embeddedWinId();
-    if ((wid == 0) || !kwin_module->systemTrayWindows().contains(wid) )
+    if ((wid == 0) || !twin_module->systemTrayWindows().contains(wid) )
       m_Wins.remove(emb);
     else
       m_Wins.next();

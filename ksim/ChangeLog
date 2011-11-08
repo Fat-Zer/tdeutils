@@ -331,7 +331,7 @@ KSim 0.3:
   * Reset the net-plugin information to zero when a net interface goes off line
   * Insert the available net interfaces into the add net interface dialog
   * Fixed the bug where some themes (one without masked image borders)
-     would influence if KSim had a kwin deco or not
+     would influence if KSim had a twin deco or not
   * Re-worked the KSim::Base class, a derived class of KSim::Base no
      longer has to inherit a QObject derived class and doesn't have to
      reimplement 'void setName(const char *name)'

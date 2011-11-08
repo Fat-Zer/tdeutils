@@ -24,7 +24,7 @@
 #include <klocale.h>
 #include <kpopupmenu.h>
 #include <kstdaction.h>
-#include <kwin.h>
+#include <twin.h>
 
 #include <tqapplication.h>
 #include <tqclipboard.h>

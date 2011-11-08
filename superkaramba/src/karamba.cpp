@@ -35,7 +35,7 @@
 #include <kmessagebox.h>
 #include <krun.h>
 #include <klocale.h>
-#include <kwin.h>
+#include <twin.h>
 #include <kdeversion.h>
 #include <kdirwatch.h>
 

@@ -18,9 +18,9 @@
  *  along with SuperKaramba; if not, write to the Free Software
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  ****************************************************************************/
-#include <kwinmodule.h>
+#include <twinmodule.h>
 #include <netwm.h>
-#include <kwin.h>
+#include <twin.h>
 
 #include "karambaapp.h"
 #include "showdesktop.h"
@@ -62,7 +62,7 @@ void ShowDesktop::slotWindowChanged(WId w, unsigned int dirty)
   if (!showingDesktop)
     return;
 
-  // SELI this needs checking for kwin_iii (_NET_SHOWING_DESKTOP)
+  // SELI this needs checking for twin_iii (_NET_SHOWING_DESKTOP)
   if ( dirty & NET::XAWMState )
   {
     NETWinInfo inf(qt_xdisplay(), w, qt_xrootwin(),

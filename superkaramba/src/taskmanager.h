@@ -34,7 +34,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #include <tqpixmap.h>
 
 #include <dcopobject.h>
-#include <kwin.h>
+#include <twin.h>
 #include <kstartupinfo.h>
 #include "karambaapp.h"
 

@@ -17,7 +17,7 @@
  **/
 #ifndef __USERDEFINEDREGEXPS_H
 #define __USERDEFINEDREGEXPS_H
-#include <tqdockwindow.h>
+#include <tqdoctwindow.h>
 #include <tqlistview.h>
 
 #include "compoundregexp.h"

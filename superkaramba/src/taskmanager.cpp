@@ -26,7 +26,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #include <kdebug.h>
 #include <kconfig.h>
 #include <kiconloader.h>
-#include <kwinmodule.h>
+#include <twinmodule.h>
 #include <netwm.h>
 #include <tqtimer.h>
 #include <tqimage.h>
@@ -46,29 +46,29 @@ template class TQPtrList<Task>;
 // variable without changing Task, which also uses it.
 // So, we'll leak a little memory, but it's better than crashing.
 // The real problem is that KWinModule should be a singleton.
-KWinModule* kwin_module = 0;
+KWinModule* twin_module = 0;
 
 TaskManager::TaskManager(TQObject *parent, const char *name)
     : TQObject(parent, name), _active(0), _startup_info( NULL )
 {
 
-    kwin_module = new KWinModule();
+    twin_module = new KWinModule();
 
 //    KGlobal::locale()->insertCatalogue("libtaskmanager");
-    connect(kwin_module, TQT_SIGNAL(windowAdded(WId)), TQT_SLOT(windowAdded(WId)));
-    connect(kwin_module, TQT_SIGNAL(windowRemoved(WId)), TQT_SLOT(windowRemoved(WId)));
-    connect(kwin_module, TQT_SIGNAL(activeWindowChanged(WId)), TQT_SLOT(activeWindowChanged(WId)));
-    connect(kwin_module, TQT_SIGNAL(currentDesktopChanged(int)), TQT_SLOT(currentDesktopChanged(int)));
-    connect(kwin_module, TQT_SIGNAL(windowChanged(WId,unsigned int)), TQT_SLOT(windowChanged(WId,unsigned int)));
+    connect(twin_module, TQT_SIGNAL(windowAdded(WId)), TQT_SLOT(windowAdded(WId)));
+    connect(twin_module, TQT_SIGNAL(windowRemoved(WId)), TQT_SLOT(windowRemoved(WId)));
+    connect(twin_module, TQT_SIGNAL(activeWindowChanged(WId)), TQT_SLOT(activeWindowChanged(WId)));
+    connect(twin_module, TQT_SIGNAL(currentDesktopChanged(int)), TQT_SLOT(currentDesktopChanged(int)));
+    connect(twin_module, TQT_SIGNAL(windowChanged(WId,unsigned int)), TQT_SLOT(windowChanged(WId,unsigned int)));
 
     // register existing windows
-    const TQValueList<WId> windows = kwin_module->windows();
+    const TQValueList<WId> windows = twin_module->windows();
     TQValueList<WId>::ConstIterator end( windows.end() );
     for (TQValueList<WId>::ConstIterator it = windows.begin(); it != end; ++it )
   windowAdded(*it);
 
     // set active window
-    WId win = kwin_module->activeWindow();
+    WId win = twin_module->activeWindow();
     activeWindowChanged(win);
 
     configure_startup();
@@ -300,20 +300,20 @@ void TaskManager::killStartup(Startup* s)
 
 TQString TaskManager::desktopName(int desk) const
 {
-    return kwin_module->desktopName(desk);
+    return twin_module->desktopName(desk);
 }
 
 int TaskManager::numberOfDesktops() const
 {
-    return kwin_module->numberOfDesktops();
+    return twin_module->numberOfDesktops();
 }
 
 bool TaskManager::isOnTop(const Task* task)
 {
     if(!task) return false;
 
-    for (TQValueList<WId>::ConstIterator it = kwin_module->stackingOrder().fromLast();
-         it != kwin_module->stackingOrder().end(); --it ) {
+    for (TQValueList<WId>::ConstIterator it = twin_module->stackingOrder().fromLast();
+         it != twin_module->stackingOrder().end(); --it ) {
   for (Task* t = _tasks.first(); t != 0; t = _tasks.next() ) {
       if ( (*it) == t->window() ) {
     if ( t == task )
@@ -435,9 +435,9 @@ bool Task::isShaded() const
 bool Task::isOnCurrentDesktop() const
 {
 #ifdef KDE_3_2
-  return (_info.onAllDesktops() || _info.desktop() == kwin_module->currentDesktop());
+  return (_info.onAllDesktops() || _info.desktop() == twin_module->currentDesktop());
 #else
-  return (_info.onAllDesktops || _info.desktop == kwin_module->currentDesktop());
+  return (_info.onAllDesktops || _info.desktop == twin_module->currentDesktop());
 #endif
 }
 
@@ -692,13 +692,13 @@ void Task::toDesktop(int desk)
 #ifdef KDE_3_2
     if (_info.onAllDesktops())
     {
-        ni.setDesktop(kwin_module->currentDesktop());
+        ni.setDesktop(twin_module->currentDesktop());
         KWin::forceActiveWindow(_win);
     }
 #else
     if (_info.onAllDesktops)
     {
-        ni.setDesktop(kwin_module->currentDesktop());
+        ni.setDesktop(twin_module->currentDesktop());
         KWin::setActiveWindow(_win);
     }
 #endif
@@ -707,7 +707,7 @@ void Task::toDesktop(int desk)
     return;
   }
   ni.setDesktop(desk);
-  if (desk == kwin_module->currentDesktop())
+  if (desk == twin_module->currentDesktop())
 #ifdef KDE_3_2
     KWin::forceActiveWindow(_win);
 #else
@@ -717,7 +717,7 @@ void Task::toDesktop(int desk)
 
 void Task::toCurrentDesktop()
 {
-    toDesktop(kwin_module->currentDesktop());
+    toDesktop(twin_module->currentDesktop());
 }
 
 void Task::setAlwaysOnTop(bool stay)
@@ -821,5 +821,5 @@ void Startup::update( const KStartupInfoData& data )
 
 int TaskManager::currentDesktop() const
 {
-    return kwin_module->currentDesktop();
+    return twin_module->currentDesktop();
 }

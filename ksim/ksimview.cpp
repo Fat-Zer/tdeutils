@@ -43,7 +43,7 @@
 #include <kstandarddirs.h>
 #include <kmessagebox.h>
 #include <kdesktopfile.h>
-#include <kwin.h>
+#include <twin.h>
 #include <krun.h>
 
 #include <tqfile.h>

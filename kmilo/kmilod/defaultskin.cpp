@@ -29,7 +29,7 @@
 #include <tqlabel.h>
 #include <tqapplication.h>
 
-#include <kwin.h>
+#include <twin.h>
 #include <netwm.h>
 #include <kglobalsettings.h>
 #include <kdeversion.h>

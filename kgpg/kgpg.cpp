@@ -46,7 +46,7 @@
 #include <tqbuttongroup.h>
 #include <kiconloader.h>
 #include <ktempfile.h>
-#include <kwin.h>
+#include <twin.h>
 #include <kprocess.h>
 #include <kprocio.h>
 #include <kaboutapplication.h>

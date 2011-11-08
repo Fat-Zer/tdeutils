@@ -59,7 +59,7 @@
 #include <krun.h>
 #include <kprinter.h>
 #include <kurldrag.h>
-#include <kwin.h>
+#include <twin.h>
 #include <dcopclient.h>
 #include <klineedit.h>
 #include <kiconloader.h>

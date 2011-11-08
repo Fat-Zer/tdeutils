@@ -30,8 +30,8 @@
 #include <klocale.h>
 #include <kaboutdialog.h>
 #include <kaboutkde.h>
-#include <kwinmodule.h>
-#include <kwin.h>
+#include <twinmodule.h>
+#include <twin.h>
 #include <khelpmenu.h>
 #include <kglobal.h>
 #include <kstdguiitem.h>

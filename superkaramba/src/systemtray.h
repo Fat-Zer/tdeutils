@@ -56,7 +56,7 @@ signals:
     void updated();
 
 private:
-    KWinModule *kwin_module;
+    KWinModule *twin_module;
     TQValueList<WId> systemTrayWindows;
 
     TQPtrList<QXEmbed> m_Wins;

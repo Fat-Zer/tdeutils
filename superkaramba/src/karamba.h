@@ -31,8 +31,8 @@
 #include <tqwidget.h>
 #include <kapplication.h>
 
-#include <kwinmodule.h>
-#include <kwin.h>
+#include <twinmodule.h>
+#include <twin.h>
 
 #include <tqfile.h>
 #include <kfile.h>

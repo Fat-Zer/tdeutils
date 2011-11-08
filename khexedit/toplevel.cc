@@ -1342,7 +1342,7 @@ int KHexEdit::acceleratorNumKey( uint index )
 #include <unistd.h>
 
 //
-// This function is used to test kwin performance
+// This function is used to test twin performance
 //
 void KHexEdit::resizeTest()
 {

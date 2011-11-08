@@ -18,7 +18,7 @@
 #ifndef AUXBUTTONS_H
 #define AUXBUTTONS_H
 
-#include <tqdoctwindow.h>
+#include <tqdockwindow.h>
 class TQComboBox;
 class TQLabel;
 class TQToolButton;

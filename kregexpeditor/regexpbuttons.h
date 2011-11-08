@@ -18,7 +18,7 @@
 #ifndef __REGEXPBUTTONS_H
 #define __REGEXPBUTTONS_H
 
-#include <tqdoctwindow.h>
+#include <tqdockwindow.h>
 #include "widgetfactory.h"
 class DoubleClickButton;
 class TQButtonGroup;

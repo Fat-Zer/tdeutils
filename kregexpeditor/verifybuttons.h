@@ -18,7 +18,7 @@
 #ifndef VERIFYBUTTONS_H
 #define VERIFYBUTTONS_H
 
-#include <tqdoctwindow.h>
+#include <tqdockwindow.h>
 #include "regexpconverter.h"
 class TQToolButton;
 class TQLabel;

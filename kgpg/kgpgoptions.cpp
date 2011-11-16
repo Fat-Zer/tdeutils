@@ -24,7 +24,7 @@
 #include <tqtoolbutton.h>
 #include <tqfile.h>
 #include <kconfig.h>
-#include <kdeversion.h>
+#include <tdeversion.h>
 #include <klocale.h>
 #include <kprocio.h>
 #include <tqcheckbox.h>

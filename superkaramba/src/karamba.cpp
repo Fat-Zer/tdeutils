@@ -36,7 +36,7 @@
 #include <krun.h>
 #include <klocale.h>
 #include <twin.h>
-#include <kdeversion.h>
+#include <tdeversion.h>
 #include <kdirwatch.h>
 
 #include <kparts/componentfactory.h>

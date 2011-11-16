@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>
 <!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.2-Based Variant V1.1//EN" "dtd/kdex.dtd" [
   <!ENTITY kappname "&khexedit;" > <!-- this only *seems* redundant -->
-  <!ENTITY package "kdeutils">
+  <!ENTITY package "tdeutils">
   <!ENTITY % English "INCLUDE">
   <!ENTITY % addindex "IGNORE">
 ]>

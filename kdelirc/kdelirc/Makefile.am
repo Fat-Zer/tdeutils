@@ -1,4 +1,4 @@
-####### kdevelop will overwrite this part!!! (begin)##########
+####### tdevelop will overwrite this part!!! (begin)##########
 noinst_LTLIBRARIES = libkdelirc.la
 
 noinst_HEADERS = iraction.h arguments.h iractions.h prototype.h modes.h mode.h profileserver.h remoteserver.h
@@ -6,7 +6,7 @@ noinst_HEADERS = iraction.h arguments.h iractions.h prototype.h modes.h mode.h p
 libkdelirc_la_SOURCES = iraction.cpp arguments.cpp iractions.cpp prototype.cpp modes.cpp mode.cpp profileserver.cpp remoteserver.cpp
 libkdelirc_la_LIBADD = $(LIB_QT) $(LIB_TDECORE) $(LIB_TDEUI) $(LIBSOCKET)
 
-####### kdevelop will overwrite this part!!! (end)############
+####### tdevelop will overwrite this part!!! (end)############
 # These paths are KDE specific. Use them:
 # kde_appsdir         Where your application's menu entry (.desktop) should go to.
 # kde_icondir         Where your icon should go to - better use KDE_ICON.

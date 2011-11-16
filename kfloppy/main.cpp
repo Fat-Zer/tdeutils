@@ -22,7 +22,7 @@
 
 */
 
-#include <kdeversion.h>
+#include <tdeversion.h>
 #include <kapplication.h>
 #include <kcmdlineargs.h>
 #include <kaboutdata.h>

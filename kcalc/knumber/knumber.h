@@ -20,7 +20,7 @@
 #ifndef _KNUMBER_H
 #define _KNUMBER_H
 
-#include <kdelibs_export.h>
+#include <tdelibs_export.h>
 
 #include "knumber_priv.h"
 

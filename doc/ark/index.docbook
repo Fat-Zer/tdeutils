@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>
 <!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.2-Based Variant V1.1//EN" "dtd/kdex.dtd" [
   <!ENTITY kappname "&ark;">
-  <!ENTITY package "kdeutils">
+  <!ENTITY package "tdeutils">
   <!ENTITY % addindex "IGNORE">
   <!ENTITY % English "INCLUDE" > <!-- change language only here -->
 ]>
@@ -47,7 +47,7 @@
 <keyword>zip</keyword>
 <keyword>compression</keyword>
 <keyword>lha</keyword>
-<keyword>kdeutils</keyword>
+<keyword>tdeutils</keyword>
 <keyword>ark</keyword>
 </keywordset>
 </bookinfo>
@@ -62,7 +62,7 @@ as <command>tar</command>, <command>gzip</command>,
 <command>bzip2</command>, <command>zip</command>, <command>rar</command> and
 <command>lha</command> (if appropriate command-line programs are
 installed). &ark; can work closely with &konqueror; in the &kde;
-environment to handle archives, if you install the &konqueror; Integration plugin available in the kdeaddons package.</para>
+environment to handle archives, if you install the &konqueror; Integration plugin available in the tdeaddons package.</para>
 
 </chapter>
 
@@ -199,7 +199,7 @@ be added to the current archive.</para>
 <term><guilabel>Enable Konqueror integration</guilabel></term>
 <listitem>
 <para>Enable the plugin for extracting or adding files to archives through Konqueror context menus.</para>
-<para>This option only works if the Konqueror integration plugin from kdeaddons is installed on your system.</para>
+<para>This option only works if the Konqueror integration plugin from tdeaddons is installed on your system.</para>
 </listitem>
 </varlistentry>
 

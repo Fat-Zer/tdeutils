@@ -1,4 +1,4 @@
-# kossebau: copied from kdelibs/configure.in.in for khexedit
+# kossebau: copied from tdelibs/configure.in.in for khexedit
 AC_LANG_SAVE
 AC_LANG_C
 dnl AC_C_BIGENDIAN has a bug (one of its tests uses "main()" instead of

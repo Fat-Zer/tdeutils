@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>
 <!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.2-Based Variant V1.1//EN" "dtd/kdex.dtd" [
   <!ENTITY kappname "&kcalc;" > 
-  <!ENTITY package "kdeutils">
+  <!ENTITY package "tdeutils">
   <!ENTITY % addindex "IGNORE">
   <!ENTITY % English "INCLUDE" > <!-- change language only here -->
   <!ENTITY commands SYSTEM "commands.docbook">
@@ -702,7 +702,7 @@ whose stack engine is still part of &kcalc;.</para>
 <appendix id="installation">
 <title>Installation</title>
 
-<para>&kcalc; is part of the kdeutils package within the &kde; project and will
+<para>&kcalc; is part of the tdeutils package within the &kde; project and will
 normally be provided as part of a &kde; installation. For more details about
 &kde; visit <ulink url="http://www.kde.org">http://www.kde.org</ulink>.</para>
 

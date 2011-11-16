@@ -28,7 +28,7 @@
 #include <tqtoolbutton.h>
 #include <tqtextcodec.h>
 
-#include <kdeversion.h>
+#include <tdeversion.h>
 #include <klistview.h>
 #include <kprocess.h>
 #include <kprocio.h>

@@ -28,7 +28,7 @@
 #include <tqhbuttongroup.h>
 #include <kglobal.h>
 #include <kactivelabel.h>
-#include <kdeversion.h>
+#include <tdeversion.h>
 #include <klocale.h>
 #include <kconfig.h>
 #include <kapplication.h>

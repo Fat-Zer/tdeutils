@@ -21,7 +21,7 @@
 
 #include <tqlabel.h>
 
-#include <kdelibs_export.h>
+#include <tdelibs_export.h>
 
 /**
  * @short A replacement for TQLabel that supports richtext and proper tqlayout management

@@ -12,7 +12,7 @@
 #define KARAMBAAPP_H
 
 #include "kapplication.h"
-#include <kdeversion.h>
+#include <tdeversion.h>
 #include <ksystemtray.h>
 
 #undef KDE_3_2

@@ -243,7 +243,7 @@
 	  development with crashes. Will add later.
 	* Asks "Are you sure?" when you try to "New" over an existing zip
 	* Began work on new extract dialog - old one doesn't work any longer 
-	  due to kdelibs changes. Doesn't do anything yet - just trying out
+	  due to tdelibs changes. Doesn't do anything yet - just trying out
 	  for look&feel with error-checking.
 	  Idea of extract: highlight the ones to be extracted and then
 	  let the right archiver grab all the highlighted files (or current).

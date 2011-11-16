@@ -1,7 +1,7 @@
 SUBDIRS = icons
 bin_PROGRAMS = kgpg
 
-## INCLUDES were found outside kdevelop specific part
+## INCLUDES were found outside tdevelop specific part
 
 INCLUDES = $(all_includes)
 

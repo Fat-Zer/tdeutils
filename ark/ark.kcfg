@@ -67,7 +67,7 @@
 		</entry>
 		<entry name="KonquerorIntegration" type="Bool">
 			<label>Enable Konqueror integration</label>
-			<whatsthis>Enables integration with Konqueror's context menus, letting you easily archive or unarchive files. This option will only work if you have the kdeaddons package installed.</whatsthis>
+			<whatsthis>Enables integration with Konqueror's context menus, letting you easily archive or unarchive files. This option will only work if you have the tdeaddons package installed.</whatsthis>
 			<default>true</default>
 		</entry>
 		<entry name="UseIntegratedViewer" type="Bool">

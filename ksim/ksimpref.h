@@ -21,7 +21,7 @@
 #define KSIMPREF_H
 
 #include <kdialogbase.h>
-#include <kdelibs_export.h>
+#include <tdelibs_export.h>
 
 class TQFrame;
 class KDesktopFile;

@@ -376,7 +376,7 @@ void KHexEdit::initialize( bool openFiles )
 
   if ( openFiles && editor()->openFile() != SDisplayMisc::none )
   {
-    // Code modified from kdelibs/tdeui/kactionclasses.cpp KRecentFilesAction::loadEntries
+    // Code modified from tdelibs/tdeui/kactionclasses.cpp KRecentFilesAction::loadEntries
       
     KConfig* config = kapp->config();
 

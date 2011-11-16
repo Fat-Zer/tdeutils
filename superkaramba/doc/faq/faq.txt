@@ -116,7 +116,7 @@ To install on SuSE 9.1 Personal, ensure the following packages are installed, wh
 
 qt3-devel
 
-kdelibs3-devel
+tdelibs3-devel
 
 python-devel
 

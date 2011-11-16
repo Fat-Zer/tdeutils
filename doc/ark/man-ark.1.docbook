@@ -55,7 +55,7 @@ formats such as <application>tar</application>,
 <application>lha</application> (if appropriate command-line programs are
 installed). &kappname; can work closely with &konqueror; in the &kde;
 environment to handle archives, if you install the &konqueror;
-Integration plugin available in the kdeaddons package.</para>
+Integration plugin available in the tdeaddons package.</para>
 
 </refsect1>
 

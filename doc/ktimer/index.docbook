@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>
 <!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.2-Based Variant V1.1//EN" "dtd/kdex.dtd" [
   <!ENTITY kappname "&ktimer;">
-  <!ENTITY package "kdeutils">
+  <!ENTITY package "tdeutils">
   <!ENTITY % English "INCLUDE">
   <!ENTITY % addindex "IGNORE">
 ]>
@@ -30,14 +30,14 @@
 
 <abstract>
 <para>
-&ktimer; is part of the kdeutils package.
+&ktimer; is part of the tdeutils package.
 </para>
 </abstract>
 
 
 <keywordset>
 <keyword>KDE</keyword>
-<keyword>kdeutils</keyword>
+<keyword>tdeutils</keyword>
 <keyword>ktimer</keyword>
 </keywordset>
 

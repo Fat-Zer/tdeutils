@@ -55,7 +55,7 @@ int main( int argc, char* argv[] )
   iface->doSomething( "setSyntax", (void*) new TQString( TQString::tqfromLatin1( "Emacs" ) ) );
   iface->doSomething( "setShowSyntaxCombo", (bool*) true );
 
-  TQFile file("/packages/kde-src/kdeutils/kregexpeditor/test/main.cpp");
+  TQFile file("/packages/kde-src/tdeutils/kregexpeditor/test/main.cpp");
   file.open(IO_ReadOnly);
   TQTextStream stream( &file);
   TQString txt = stream.read();

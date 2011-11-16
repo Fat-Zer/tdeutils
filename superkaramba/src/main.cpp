@@ -32,7 +32,7 @@
 #include <tqstringlist.h>
 #include <kconfig.h>
 #include <kstandarddirs.h>
-#include <kdeversion.h>
+#include <tdeversion.h>
 
 #include "karamba.h"
 #include "karambasessionmanaged.h"

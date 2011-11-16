@@ -60,14 +60,14 @@ TODO:
 
 Problems:
 
-	o Help will only work with the next release of kdelibs. Alternatively 
+	o Help will only work with the next release of tdelibs. Alternatively 
 	  you can copy a copy of kedit.html, kedit.gif into 
 	  $(KDEDIR)/docs/HTML
 	
 	o kedit has currently problems to deal with color-scheme changes
  	  without restarting kedit. I have made the necessary changes to 
 	  libtdecore to deal with this problem. You will however have to wait
-	  for the next kdelibs release. At that time I will also bring out
+	  for the next tdelibs release. At that time I will also bring out
           a new version of kedit that will take advantage of those changes.
 
 

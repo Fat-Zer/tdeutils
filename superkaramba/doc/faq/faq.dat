@@ -57,7 +57,7 @@ To create a desktop config file, open KWrite and enter the following:<pre>
 <q>Suse 9.1 Personal
 <a>To install on SuSE 9.1 Personal, ensure the following packages are installed, which you verify via YaST:<br>
 qt3-devel<br>
-kdelibs3-devel<br>
+tdelibs3-devel<br>
 python-devel<br><br>
 Once the above are installed, unzip your SuperKaramba tarball to its own folder.  Now, via terminal, login as root and cd (change directory) to the unzipped SuperKaramba folder. Install with following commands:<br>
 ./configure --prefix=/opt/trinity/<br>

@@ -1,4 +1,4 @@
-## kdebase/Makefile.am
+## tdebase/Makefile.am
 ## (C) 1997 Stephan Kulow
 
 AUTOMAKE_OPTIONS = foreign 1.6.1

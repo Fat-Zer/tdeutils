@@ -29,7 +29,7 @@
 #include <tqptrlist.h>
 #include <tqfileinfo.h>
 #include <tqimage.h>
-#include <kdelibs_export.h>
+#include <tdelibs_export.h>
 
 class KDE_EXPORT daemon_state
 {

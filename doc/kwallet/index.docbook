@@ -2,7 +2,7 @@
 <!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.2-Based Variant V1.1//EN" "dtd/kdex.dtd" [
   <!ENTITY kwallet "<application>KWallet</application>">
   <!ENTITY kwalletmanager "<application>KWallet Manager</application>">
-  <!ENTITY package "kdeutils">
+  <!ENTITY package "tdeutils">
   <!ENTITY kappname "&kwallet;">
   <!ENTITY % addindex "IGNORE">
   <!ENTITY % English "INCLUDE">

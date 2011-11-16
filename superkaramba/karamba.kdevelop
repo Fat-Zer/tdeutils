@@ -1,5 +1,5 @@
 <?xml version = '1.0'?>
-<kdevelop>
+<tdevelop>
   <general>
     <author>See README for the list of authors</author>
     <email></email>
@@ -254,4 +254,4 @@
       <usermanualurl/>
     </projectdoc>
   </kdevdocumentation>
-</kdevelop>
+</tdevelop>

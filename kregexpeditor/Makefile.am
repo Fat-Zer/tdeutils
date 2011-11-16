@@ -36,7 +36,7 @@ METASOURCES = AUTO
 service_DATA = kregexpeditorgui.desktop
 servicedir = $(kde_servicesdir)
 
-#### The dynamically-loadable module (its interface is defined in kdelibs)
+#### The dynamically-loadable module (its interface is defined in tdelibs)
 kde_module_LTLIBRARIES = libkregexpeditorgui.la
 libkregexpeditorgui_la_SOURCES = kregexpeditorfactory.cpp
 libkregexpeditorgui_la_LDFLAGS = $(all_libraries) $(KDE_PLUGIN) -module

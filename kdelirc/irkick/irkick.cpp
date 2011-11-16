@@ -14,7 +14,7 @@
 #include <tqtimer.h>
 #include <tqevent.h>
 
-#include <kdeversion.h>
+#include <tdeversion.h>
 #include <kapplication.h>
 #include <kaction.h>
 #if !(TDE_VERSION_MINOR<=1 && TDE_VERSION_RELEASE<=5)

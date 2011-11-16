@@ -23,8 +23,8 @@ whether this service is run or not (by default it is not).
 
 INSTALL:
 
-Download kdeutils source for kde 3.2 or newer.  Then compile as
-usual starting from the kdeutils directory:
+Download tdeutils source for kde 3.2 or newer.  Then compile as
+usual starting from the tdeutils directory:
 
  make -f Makefile.cvs
  ./configure

@@ -763,7 +763,7 @@ bool karamba::parseConfig()
       // (plays better with taskbar themes this way)
       KWin::setType(winId(), NET::Dock);
       #if defined(KDE_MAKE_VERSION)
-        #if KDE_VERSION >= KDE_MAKE_VERSION(3,1,9)
+        #if TDE_VERSION >= KDE_MAKE_VERSION(3,1,9)
           //KDE 3.2 addition for the always on top issues
           KWin::setState(winId(), NET::KeepBelow);
         #endif
@@ -806,7 +806,7 @@ void karamba::makeActive()
   KWin::setType(winId(), NET::Normal);
 
   #if defined(KDE_MAKE_VERSION)
-    #if KDE_VERSION >= KDE_MAKE_VERSION(3,1,9)
+    #if TDE_VERSION >= KDE_MAKE_VERSION(3,1,9)
       //KDE 3.2 addition for the always on top issues
       KWin::setState(winId(), NET::Modal);
     #endif
@@ -829,7 +829,7 @@ void karamba::makePassive()
   // this way)
   KWin::setType(winId(), NET::Dock);
   #if defined(KDE_MAKE_VERSION)
-    #if KDE_VERSION >= KDE_MAKE_VERSION(3,1,9)
+    #if TDE_VERSION >= KDE_MAKE_VERSION(3,1,9)
       //KDE 3.2 addition for the always on top issues
       KWin::setState(winId(), NET::KeepBelow);
     #endif

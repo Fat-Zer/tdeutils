@@ -17,7 +17,7 @@
 #include <kdeversion.h>
 #include <kapplication.h>
 #include <kaction.h>
-#if !(KDE_VERSION_MINOR<=1 && KDE_VERSION_RELEASE<=5)
+#if !(TDE_VERSION_MINOR<=1 && TDE_VERSION_RELEASE<=5)
 #include <kactioncollection.h>
 #endif
 #include <ksimpleconfig.h>

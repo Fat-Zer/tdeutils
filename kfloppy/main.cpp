@@ -43,7 +43,7 @@ int main( int argc, char *argv[] )
 {
   KAboutData aboutData("kfloppy",
 	I18N_NOOP("KFloppy"),
-    KDE_VERSION_STRING, description, KAboutData::License_GPL,
+    TDE_VERSION_STRING, description, KAboutData::License_GPL,
     "(c) 1997, Bernd Johannes Wuebben\n"
     "(c) 2001, Chris Howells\n"
     "(c) 2002, Adriaan de Groot\n"

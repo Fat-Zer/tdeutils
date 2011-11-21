@@ -248,6 +248,9 @@
         <slot>objectSelected(TQListViewItem*)</slot>
     </connection>
 </connections>
+<forwards>
+    <forward>class TQListViewItem;</forward>
+</forwards>
 <Q_SLOTS>
     <slot access="protected">stopAllWalks()</slot>
     <slot access="protected">applyFilter()</slot>

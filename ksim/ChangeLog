@@ -205,7 +205,7 @@ KSim 0.6.0:
 Bug/Feature Changes:
   * Added a modify button on the net configuration page
   * Dont store absolute paths in the theme configuration, so if one
-     moves their kdedir to somewhere else then they wont have to
+     moves their tdedir to somewhere else then they wont have to
      change any configuration settings
   * Display a more correct value of the free ram on linux
   * Fixed the bug where some themes would prevent any

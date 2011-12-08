@@ -320,7 +320,7 @@ Don't compile superkaramba when python header was not installed
 r425963 | nickell | 2005-06-15 20:52:40 -0400 (Wed, 15 Jun 2005) | 8 lines
 
 Now we can download and install .skz files into the install directory:
-$KDEHOME/share/apps/superkaramba/themes
+$TDEHOME/share/apps/superkaramba/themes
 We also unpack any other type of archive into it's own directory in the 
 install directory.
 TODO: add the install directory to the theme dialog browser

@@ -172,7 +172,7 @@ X-KDE-StartupNotify=false</userinput></screen>
 <para>Then save it as
 <filename><replaceable>themename</replaceable>.desktop</filename> into the
 autostart directory at <filename
-class="directory">$<envar>KDEHOME</envar>/Autostart/</filename>.</para>
+class="directory">$<envar>TDEHOME</envar>/Autostart/</filename>.</para>
 </answer>
 </qandaentry>
 <qandaentry>
@@ -210,7 +210,7 @@ options or use a different configuration method.</para>
 <answer>
 <para>Close all &superkaramba; themes and then delete any session files in
 <filename
-class="directory">$<envar>KDEHOME</envar>/share/config/session/</filename>
+class="directory">$<envar>TDEHOME</envar>/share/config/session/</filename>
 that begin with &superkaramba;. Restart &kde; and start your themes again. Now
 they will stay in the right place.</para> 
 </answer>

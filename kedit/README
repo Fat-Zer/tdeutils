@@ -62,7 +62,7 @@ Problems:
 
 	o Help will only work with the next release of tdelibs. Alternatively 
 	  you can copy a copy of kedit.html, kedit.gif into 
-	  $(KDEDIR)/docs/HTML
+	  $(TDEDIR)/docs/HTML
 	
 	o kedit has currently problems to deal with color-scheme changes
  	  without restarting kedit. I have made the necessary changes to 

@@ -22,7 +22,7 @@ The current planned features are:
 
 NOTE: the plugin naming conventions changed
 in v0.5 and above, i recommend you to
-rm -rf $KDEDIR/lib/libksim* before you install
+rm -rf $TDEDIR/lib/libksim* before you install
 v0.5 or above, if you are using v0.4 or below.
 
 As of v0.9.0 and above, KSim has the option to

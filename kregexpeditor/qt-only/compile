@@ -7,7 +7,7 @@ ln -s gen_qregexpparser.cc gen_qregexpparser.cpp
 touch unistd.h
 mkdir icons
 cp ../picts/* icons
-cp $KDEDIR/share/icons/crystalsvg/22x22/actions/{undo,redo,editcut,editcopy,editpaste,fileopen,filesave,contexthelp,1downarrow,1uparrow}.png  icons
+cp $TDEDIR/share/icons/crystalsvg/22x22/actions/{undo,redo,editcut,editcopy,editpaste,fileopen,filesave,contexthelp,1downarrow,1uparrow}.png  icons
 mkdir predefined
 mkdir predefined/General
 cp ../predefined/General/*.regexp predefined/General

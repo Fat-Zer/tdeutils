@@ -98,7 +98,7 @@ bool KSim::PluginLoader::loadPlugin(const KDesktopFile &file)
     case KSim::PluginLoader::LibNotFound:
       KMessageBox::error(0, i18n("KSim was unable to load the plugin %1"
             " due to not being able to find the plugin, check that the plugin"
-            " is installed and is in your $KDEDIR/lib path").tqarg(file.readName()));
+            " is installed and is in your $TDEDIR/lib path").tqarg(file.readName()));
       return false;
       break;
     case KSim::PluginLoader::UnSymbols:

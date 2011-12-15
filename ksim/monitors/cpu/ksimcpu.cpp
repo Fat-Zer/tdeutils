@@ -20,9 +20,9 @@
 #include "ksimcpu.h"
 #include "ksimcpu.moc"
 
-#include <tqtextstream.h>
+#include <textstream.h>
 #include <tqregexp.h>
-#include <tqlayout.h>
+#include <layout.h>
 #include <tqtimer.h>
 #include <tqfile.h>
 #include <tqgroupbox.h>
@@ -201,7 +201,7 @@ void CpuView::updateView()
         cpuDiff = 100;
     }
 
-    current.chart()->setText(i18n("%1%").tqarg(cpuDiff));
+    current.chart()->setText(i18n("%1%").arg(cpuDiff));
     current.chart()->setValue(cpuDiff, 0);
     current.label()->setValue(cpuDiff);
   }
@@ -377,27 +377,27 @@ CpuConfig::CpuConfig(KSim::PluginObject *parent, const char *name)
 
   mainLayout->addWidget( m_listView );
 
-  TQHBoxLayout * tqlayout = new TQHBoxLayout;
-  tqlayout->setSpacing( 6 );
+  TQHBoxLayout * layout = new TQHBoxLayout;
+  layout->setSpacing( 6 );
 
   TQSpacerItem * spacer = new TQSpacerItem( 20, 20,
      TQSizePolicy::Expanding, TQSizePolicy::Minimum );
-  tqlayout->addItem(spacer);
+  layout->addItem(spacer);
 
   m_modify = new TQPushButton( this );
   m_modify->setText( i18n( "Modify..." ) );
   connect( m_modify, TQT_SIGNAL( clicked() ), TQT_SLOT( modify() ) );
-  tqlayout->addWidget( m_modify );
-  mainLayout->addLayout( tqlayout );
+  layout->addWidget( m_modify );
+  mainLayout->addLayout( layout );
 
   m_legendBox = new TQGroupBox(this);
   m_legendBox->setColumnLayout(0, Qt::Vertical);
   m_legendBox->setTitle(i18n("Chart Legend"));
-  m_legendBox->tqlayout()->setSpacing(0);
-  m_legendBox->tqlayout()->setMargin(0);
+  m_legendBox->layout()->setSpacing(0);
+  m_legendBox->layout()->setMargin(0);
 
-  m_legendLayout = new TQVBoxLayout(m_legendBox->tqlayout());
-  m_legendLayout->tqsetAlignment(TQt::AlignTop);
+  m_legendLayout = new TQVBoxLayout(m_legendBox->layout());
+  m_legendLayout->setAlignment(TQt::AlignTop);
   m_legendLayout->setSpacing(6);
   m_legendLayout->setMargin(11);
 
@@ -420,7 +420,7 @@ CpuConfig::CpuConfig(KSim::PluginObject *parent, const char *name)
 
   for (uint i = 0; i < addCpus(); ++i)
   {
-    TQCheckListItem *item = new TQCheckListItem(m_listView, i18n("cpu %1").tqarg(i), TQCheckListItem::CheckBox);
+    TQCheckListItem *item = new TQCheckListItem(m_listView, i18n("cpu %1").arg(i), TQCheckListItem::CheckBox);
     item->setText(1, "%T");
   }
 }

@@ -67,7 +67,7 @@ LimitedCharLineEdit::LimitedCharLineEdit( Mode mode, TQWidget* parent, const cha
     _count = 4;
 
   setMaxLength( _count );
-  setFixedSize( fontMetrics().width('A')*5+5, tqsizeHint().height());
+  setFixedSize( fontMetrics().width('A')*5+5, sizeHint().height());
 
   setValidator( new Validator( mode, this ) );
 }

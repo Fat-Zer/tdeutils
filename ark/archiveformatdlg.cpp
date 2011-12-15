@@ -40,12 +40,12 @@ ArchiveFormatDlg::ArchiveFormatDlg( TQWidget * parent, const TQString & defaultT
         text = i18n( "This file appears to be of type %1,\n"
                      "which is not a supported archive format.\n"
                      "In order to proceed, please choose the format\n"
-                     "of the file." ).tqarg( defaultType );
+                     "of the file." ).arg( defaultType );
     else
         text = i18n( "You are about to open a file that has a non-standard extension.\n"
                     "Ark has detected the format: %1\n"
                     "If this is not correct, please choose "
-                    "the appropriate format." ).tqarg( defaultDescription );
+                    "the appropriate format." ).arg( defaultDescription );
 
     TQVBox * page = makeVBoxMainWidget();
 

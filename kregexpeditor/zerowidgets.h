@@ -30,7 +30,7 @@ public:
   ZeroWidget(TQString text, RegExpEditorWindow* editorWindow, TQWidget *parent,
              const char *name = 0);
   virtual void addNewChild(DragAccepter *accepter, RegExpWidget *child);
-  virtual TQSize tqsizeHint() const;
+  virtual TQSize sizeHint() const;
 
 protected:
   virtual void paintEvent( TQPaintEvent *e );

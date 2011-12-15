@@ -12,7 +12,7 @@
 #include "sensor.h"
 #include <tqmap.h>
 #include <tqstring.h>
-#include <tqtextcodec.h>
+#include <textcodec.h>
 #include <tqregexp.h>
 #include <tqstringlist.h>
 #include <kprocess.h>

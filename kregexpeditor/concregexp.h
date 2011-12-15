@@ -31,7 +31,7 @@ public:
 	ConcRegExp( bool selected );
 
 	void addRegExp( RegExp *);
-    RegExpList tqchildren();
+    RegExpList children();
     RegExp* lastRegExp();
 
     virtual bool check( ErrorMap&, bool first, bool last );

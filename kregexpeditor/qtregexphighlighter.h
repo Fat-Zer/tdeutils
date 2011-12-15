@@ -18,7 +18,7 @@
 #ifndef TQTREGEXPHIGHLIGHTER_H
 #define TQTREGEXPHIGHLIGHTER_H
 #include "regexphighlighter.h"
-#include <tqtextedit.h>
+#include <textedit.h>
 
 class QtRegexpHighlighter :public RegexpHighlighter
 {

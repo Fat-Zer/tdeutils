@@ -1049,7 +1049,7 @@ yyreduce:
                  yyval.regexp = new AltnRegExp( false );
                  dynamic_cast<AltnRegExp*>( yyval.regexp )->addRegExp( yyvsp[-1].regexp );
                }
-               dynamic_cast<AltnRegExp*>( yyval.regexp )->addRegExp( new TextRegExp( false, TQString::tqfromLatin1("") ) );
+               dynamic_cast<AltnRegExp*>( yyval.regexp )->addRegExp( new TextRegExp( false, TQString::fromLatin1("") ) );
              }
     break;
 
@@ -1057,7 +1057,7 @@ yyreduce:
 #line 107 "qregexpparser.y"
     {  
                yyval.regexp = new AltnRegExp( false );
-               dynamic_cast<AltnRegExp*>( yyval.regexp )->addRegExp( new TextRegExp( false, TQString::tqfromLatin1("") ) );
+               dynamic_cast<AltnRegExp*>( yyval.regexp )->addRegExp( new TextRegExp( false, TQString::fromLatin1("") ) );
                dynamic_cast<AltnRegExp*>( yyval.regexp )->addRegExp( yyvsp[0].regexp );
              }
     break;
@@ -1160,7 +1160,7 @@ yyreduce:
   case 23:
 #line 157 "qregexpparser.y"
     { 
-        TQString match = TQString(TQString::fromLocal8Bit("\\%1")).tqarg( yyvsp[0].backRef );
+        TQString match = TQString(TQString::fromLocal8Bit("\\%1")).arg( yyvsp[0].backRef );
         yyval.regexp = new TextRegExp( false, match );
         KMessageBox::information(0,i18n("<qt>Back reference regular expressions are not supported.<p>"
                                         "<tt>\\1</tt>, <tt>\\2</tt>, ... are <i>back references</i>, meaning they refer to  "
@@ -1170,7 +1170,7 @@ yyreduce:
                                         "just a workaround to ensure that the application handles the regexp at all. "
                                         "Therefore, as soon as you edit the regular expression in the graphical area, "
                                         "the back reference will be replaced by matching the text <b>%2</b> literally.")
-                                    .tqarg( match ).tqarg( match ),
+                                    .arg( match ).arg( match ),
                                  i18n("Back reference regular expressions not supported"), 
                                  TQString::fromLocal8Bit("backReferenceNotSupported") );
       }
@@ -1192,13 +1192,13 @@ yyreduce:
        if ( yyvsp[0].ch == '{' || yyvsp[0].ch == '}' || yyvsp[0].ch == '[' || yyvsp[0].ch == ']' || yyvsp[0].ch == '\\' ) {
           yyerror( "illigal character - needs escaping" );
        }
-       yyval.regexp = new TextRegExp( false, TQString(TQString::fromLocal8Bit("%1")).tqarg(yyvsp[0].ch)); 
+       yyval.regexp = new TextRegExp( false, TQString(TQString::fromLocal8Bit("%1")).arg(yyvsp[0].ch)); 
      }
     break;
 
   case 27:
 #line 182 "qregexpparser.y"
-    { yyval.regexp = new TextRegExp( false, TQString(TQString::fromLocal8Bit("%1")).tqarg(yyvsp[0].ch)); }
+    { yyval.regexp = new TextRegExp( false, TQString(TQString::fromLocal8Bit("%1")).arg(yyvsp[0].ch)); }
     break;
 
 

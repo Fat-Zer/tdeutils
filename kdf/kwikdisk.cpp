@@ -176,13 +176,13 @@ void KwikDisk::updateDFDone()
    {
       // FIXME: tool tips are unused atm
       TQString toolTipText = i18n("%1 (%2) %3 on %4")
-         .tqarg( disk->mounted() ? i18n("Unmount") : i18n("Mount"))
-         .tqarg(disk->fsType()).tqarg(disk->deviceName()).tqarg(disk->mountPoint());
+         .arg( disk->mounted() ? i18n("Unmount") : i18n("Mount"))
+         .arg(disk->fsType()).arg(disk->deviceName()).arg(disk->mountPoint());
 
       TQString entryName = disk->mountPoint();
       if( disk->mounted() )
       {
-         entryName += TQString("\t\t\t[%1]").tqarg(disk->prettyKBAvail());
+         entryName += TQString("\t\t\t[%1]").arg(disk->prettyKBAvail());
       }
       int id = contextMenu()->insertItem("", this, TQT_SLOT(toggleMount(int)) );
       contextMenu()->setItemParameter(id, itemNo);
@@ -286,7 +286,7 @@ void KwikDisk::criticallyFull(DiskEntry *disk)
    if( m_options.popupIfFull() == true )
    {
       TQString msg = i18n("Device [%1] on [%2] is getting critically full!")
-                    .tqarg(disk->deviceName()).tqarg(disk->mountPoint());
+                    .arg(disk->deviceName()).arg(disk->mountPoint());
       KMessageBox::sorry( this, msg, i18n("Warning"));
    }
 }

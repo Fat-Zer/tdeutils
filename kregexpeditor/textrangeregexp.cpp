@@ -127,7 +127,7 @@ bool TextRangeRegExp::load( TQDomElement top, const TQString& /*version*/ )
             addRange( from, to );
         }
         else {
-            KMessageBox::sorry( 0, i18n("<p>Invalid sub element to element <b>TextRange</b>. Tag was <b>%1</b></p>").tqarg(child.tagName()),
+            KMessageBox::sorry( 0, i18n("<p>Invalid sub element to element <b>TextRange</b>. Tag was <b>%1</b></p>").arg(child.tagName()),
                                 i18n("Error While Loading From XML File") ) ;
             return false;
         }

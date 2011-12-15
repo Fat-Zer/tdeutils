@@ -24,7 +24,7 @@
 
 #include <tqbuttongroup.h>
 #include <tqfileinfo.h>
-#include <tqlayout.h>
+#include <layout.h>
 #include <tqvalidator.h>
 
 #include <kfiledialog.h>
@@ -533,7 +533,7 @@ CReplaceDialog::CReplaceDialog( TQWidget *parent, const char *name, bool modal )
   text = i18n("For&mat (replace):");
   label = new TQLabel( mReplaceSelector, text, plainPage() );
   if( label == 0 ) { return; }
-  label->setFixedHeight( label->tqsizeHint().height() );
+  label->setFixedHeight( label->sizeHint().height() );
 
   vbox->addWidget( label );
   vbox->addWidget( mReplaceSelector );
@@ -549,7 +549,7 @@ CReplaceDialog::CReplaceDialog( TQWidget *parent, const char *name, bool modal )
 
   label = new TQLabel( mReplaceInput, i18n("Rep&lace:"), plainPage() );
   if( label == 0 ) { return; }
-  label->setFixedHeight( label->tqsizeHint().height() );
+  label->setFixedHeight( label->sizeHint().height() );
 
   vbox->addWidget( label );
   vbox->addWidget( mReplaceInput );
@@ -846,7 +846,7 @@ void CFilterDialog::makeOperandLayout( void )
 
   mOperandSelector = new TQComboBox( false, page );
   if( mOperandSelector == 0 ) { return; }
-  mOperandSelector->setFixedHeight( mOperandSelector->tqsizeHint().height());
+  mOperandSelector->setFixedHeight( mOperandSelector->sizeHint().height());
   mOperandSelector->setMinimumWidth( fontMetrics().width("M")*20 );
   mOperandSelector->insertStringList( formatStrings() );
   connect( mOperandSelector, TQT_SIGNAL(activated(int)),
@@ -891,7 +891,7 @@ void CFilterDialog::makeBitSwapLayout( void )
   text = i18n("Swap rule");
   TQLabel *label = new TQLabel( text, page );
   if( label == 0 ) { return; }
-  label->setFixedHeight( label->tqsizeHint().height() );
+  label->setFixedHeight( label->sizeHint().height() );
   vbox->addWidget( label );
 
   mByteWidget = new CByteWidget( page );
@@ -902,7 +902,7 @@ void CFilterDialog::makeBitSwapLayout( void )
 
   text = i18n("&Reset");
   TQPushButton *resetButton = new TQPushButton( text, page );
-  resetButton->setFixedHeight( resetButton->tqsizeHint().height() );
+  resetButton->setFixedHeight( resetButton->sizeHint().height() );
   connect( resetButton, TQT_SIGNAL(clicked()), mByteWidget, TQT_SLOT(reset()) );
 
   hbox->addWidget( resetButton );
@@ -1237,7 +1237,7 @@ void centerDialog( TQWidget *widget, TQWidget *centerParent )
   }
 
   TQPoint point = centerParent->mapToGlobal( TQPoint(0,0) );
-  TQRect pos    = centerParent->tqgeometry();
+  TQRect pos    = centerParent->geometry();
 
   widget->setGeometry( point.x() + pos.width()/2  - widget->width()/2,
 		       point.y() + pos.height()/2 - widget->height()/2,
@@ -1253,7 +1253,7 @@ void centerDialogBottom( TQWidget *widget, TQWidget *centerParent )
   }
 
   TQPoint point = centerParent->mapToGlobal( TQPoint(0,0) );
-  TQRect pos    = centerParent->tqgeometry();
+  TQRect pos    = centerParent->geometry();
 
   widget->setGeometry( point.x() + pos.width()/2  - widget->width()/2,
 		       point.y() + pos.height() - widget->height(),

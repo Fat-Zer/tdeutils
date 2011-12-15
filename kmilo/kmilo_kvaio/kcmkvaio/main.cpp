@@ -20,7 +20,7 @@
  */
 
 #include <tqlabel.h>
-#include <tqlayout.h>
+#include <layout.h>
 #include <tqcheckbox.h>
 #include <tqtimer.h>
 #include <tqslider.h>
@@ -61,10 +61,10 @@ KVaioModule::KVaioModule(TQWidget *parent, const char *name, const TQStringList 
                      "mirko@kde.org");
     setAboutData( about );
 
-    TQVBoxLayout *tqlayout = new TQVBoxLayout(this);
+    TQVBoxLayout *layout = new TQVBoxLayout(this);
     mKVaioGeneral = new KCMKVaioGeneral(this);
-    tqlayout->addWidget( mKVaioGeneral );
-    tqlayout->addStretch();
+    layout->addWidget( mKVaioGeneral );
+    layout->addStretch();
 
     mDriver = new KVaioDriverInterface(TQT_TQOBJECT(this));
     mDriverAvailable = mDriver->connectToDriver(false);
@@ -156,7 +156,7 @@ void KVaioModule::timeout()
     bool bat1Avail = false, bat2Avail = false, acConnected = false;
     int bat1Remaining = 0, bat1Max = 0, bat2Remaining = 0, bat2Max = 0;
 
-    if(mDriver->getBatterytqStatus(bat1Avail, bat1Remaining, bat1Max,
+    if(mDriver->getBatteryStatus(bat1Avail, bat1Remaining, bat1Max,
                                  bat2Avail, bat2Remaining, bat2Max,
                                  acConnected) )
     {

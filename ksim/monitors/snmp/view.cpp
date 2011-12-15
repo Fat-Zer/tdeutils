@@ -23,7 +23,7 @@
 
 #include <label.h>
 
-#include <tqlayout.h>
+#include <layout.h>
 
 #include <kconfig.h>
 

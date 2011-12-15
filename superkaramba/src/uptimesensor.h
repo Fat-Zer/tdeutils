@@ -12,7 +12,7 @@
 #include "sensor.h"
 
 #include <tqfile.h>
-#include <tqtextstream.h>
+#include <textstream.h>
 #include <tqstring.h>
 #include <tqregexp.h>
 #include <tqdatetime.h>

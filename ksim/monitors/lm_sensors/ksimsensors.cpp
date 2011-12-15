@@ -27,7 +27,7 @@
 #include <kaboutdata.h>
 #include <kconfig.h>
 
-#include <tqlayout.h>
+#include <layout.h>
 
 #include <label.h>
 #include <themetypes.h>

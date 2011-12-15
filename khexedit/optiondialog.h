@@ -110,7 +110,7 @@ class COptionDialog : public KDialogBase
     COptionDialog( TQWidget *parent = 0, char *name = 0, bool modal = false );
     ~COptionDialog( void );
 
-    void setLayout( SDisplayLayout &tqlayout, SDisplayLine &line );
+    void setLayout( SDisplayLayout &layout, SDisplayLine &line );
     void setCursor( SDisplayCursor &cursor );
     void setColor( SDisplayColor &color );
     void setFont( SDisplayFont &font );
@@ -238,7 +238,7 @@ class COptionDialog : public KDialogBase
 
   signals:
     void lineSizeChoice( const SDisplayLine &lineSize );
-    void layoutChoice( const SDisplayLayout &tqlayout );
+    void layoutChoice( const SDisplayLayout &layout );
     void cursorChoice( const SDisplayCursor &cursor ); 
     void colorChoice( const SDisplayColor &color );
     void fontChoice( const SDisplayFont &font );

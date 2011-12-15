@@ -47,7 +47,7 @@ void ErrorMap::lineStartError()
 {
     if ( ! _prevLineStartError ) {
         KMessageBox::information( 0, i18n("Your regular expression is invalid, due to something preceding a 'line start'."),
-                                  i18n("Regular Expression Error"), TQString::tqfromLatin1("KRegExpEditorLineStartError") );
+                                  i18n("Regular Expression Error"), TQString::fromLatin1("KRegExpEditorLineStartError") );
     }
     _lineStartError = true;
 }
@@ -56,7 +56,7 @@ void ErrorMap::lineEndError()
 {
     if ( !_prevLineEndError ) {
         KMessageBox::information( 0, i18n("Your regular expression is invalid, due to something following a 'line end'."),
-                                  i18n("Regular Expression Error"), TQString::tqfromLatin1("KRegExpEditorLineEndError") );
+                                  i18n("Regular Expression Error"), TQString::fromLatin1("KRegExpEditorLineEndError") );
     }
     _lineEndError = true;
 }
@@ -66,7 +66,7 @@ void ErrorMap::lookAheadError()
 {
     if ( !_prevLookAHeadError ) {
         KMessageBox::information( 0, i18n("Your regular expression is invalid. 'Look Ahead' regular expression must be the last sub expression."),
-                                  i18n("Regular Expression Error"), TQString::tqfromLatin1("KRegExpEditorLookAHeadError") );
+                                  i18n("Regular Expression Error"), TQString::fromLatin1("KRegExpEditorLookAHeadError") );
     }
     _lookAHeadError = true;
 }

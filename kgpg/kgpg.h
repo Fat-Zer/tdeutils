@@ -30,7 +30,7 @@
 
 #include <tqlabel.h>
 #include <tqstringlist.h>
-#include <tqclipboard.h>
+#include <clipboard.h>
 
 
 class TQPopupMenu;

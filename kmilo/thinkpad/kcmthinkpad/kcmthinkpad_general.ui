@@ -62,7 +62,7 @@
                 </widget>
                 <widget class="TQLayoutWidget" row="2" column="0">
                     <property name="name">
-                        <cstring>tqlayout27</cstring>
+                        <cstring>layout27</cstring>
                     </property>
                     <grid>
                         <property name="name">

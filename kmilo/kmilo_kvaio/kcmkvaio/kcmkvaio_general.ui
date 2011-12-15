@@ -71,7 +71,7 @@
                             <property name="text">
                                 <string>Remaining battery capacity:</string>
                             </property>
-                            <property name="tqalignment">
+                            <property name="alignment">
                                 <set>AlignVCenter|AlignRight</set>
                             </property>
                         </widget>
@@ -109,7 +109,7 @@
                             <property name="text">
                                 <string>AC</string>
                             </property>
-                            <property name="tqalignment">
+                            <property name="alignment">
                                 <set>AlignVCenter|AlignLeft</set>
                             </property>
                         </widget>
@@ -150,7 +150,7 @@
                             <property name="text">
                                 <string>Bat 1</string>
                             </property>
-                            <property name="tqalignment">
+                            <property name="alignment">
                                 <set>AlignVCenter|AlignLeft</set>
                             </property>
                         </widget>
@@ -186,7 +186,7 @@
                             <property name="text">
                                 <string>Bat 2</string>
                             </property>
-                            <property name="tqalignment">
+                            <property name="alignment">
                                 <set>AlignVCenter|AlignLeft</set>
                             </property>
                         </widget>

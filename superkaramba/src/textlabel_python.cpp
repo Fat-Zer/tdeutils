@@ -206,7 +206,7 @@ PyObject* py_setTextAlign(PyObject *, PyObject *args)
     return NULL;
   if (!checkKarambaAndMeter(widget, textSensor, "TextLabel"))
     return NULL;
-  ((TextLabel*)textSensor)->tqsetAlignment( text );
+  ((TextLabel*)textSensor)->setAlignment( text );
   return Py_BuildValue((char*)"l", 1);
 }
 

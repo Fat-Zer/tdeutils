@@ -122,7 +122,7 @@ namespace KSim
       /**
        * reimplemented for internal reasons
        */
-      virtual TQSize tqsizeHint() const;
+      virtual TQSize sizeHint() const;
 
     public slots:
       /**

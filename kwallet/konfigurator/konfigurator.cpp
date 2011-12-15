@@ -32,7 +32,7 @@
 
 #include <tqcheckbox.h>
 #include <tqcombobox.h>
-#include <tqlayout.h>
+#include <layout.h>
 #include <tqlistview.h>
 #include <tqpushbutton.h>
 #include <tqspinbox.h>

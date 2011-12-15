@@ -32,7 +32,7 @@
         </property>
         <widget class="TQLayoutWidget" row="0" column="3" rowspan="7" colspan="1">
             <property name="name">
-                <cstring>tqlayout39</cstring>
+                <cstring>layout39</cstring>
             </property>
             <vbox>
                 <property name="name">
@@ -50,13 +50,13 @@
                             <verstretch>0</verstretch>
                         </sizepolicy>
                     </property>
-                    <property name="tqminimumSize">
+                    <property name="minimumSize">
                         <size>
                             <width>120</width>
                             <height>140</height>
                         </size>
                     </property>
-                    <property name="tqmaximumSize">
+                    <property name="maximumSize">
                         <size>
                             <width>32767</width>
                             <height>140</height>
@@ -81,7 +81,7 @@
                     <property name="scaledContents">
                         <bool>false</bool>
                     </property>
-                    <property name="tqalignment">
+                    <property name="alignment">
                         <set>AlignCenter</set>
                     </property>
                     <property name="whatsThis" stdset="0">
@@ -92,7 +92,7 @@
                 </widget>
                 <widget class="TQLayoutWidget">
                     <property name="name">
-                        <cstring>tqlayout13</cstring>
+                        <cstring>layout13</cstring>
                     </property>
                     <hbox>
                         <property name="name">
@@ -117,7 +117,7 @@
         </widget>
         <widget class="TQLayoutWidget" row="7" column="3" rowspan="4" colspan="1">
             <property name="name">
-                <cstring>tqlayout4</cstring>
+                <cstring>layout4</cstring>
             </property>
             <vbox>
                 <property name="name">

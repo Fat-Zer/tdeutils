@@ -214,7 +214,7 @@ int KFixedSizeBuffer::fill( const char FChar, int FillLength, unsigned int Pos )
 
 int KFixedSizeBuffer::compare( const KDataBuffer &Other, KSection OtherRange, unsigned int Pos )
 {
-  //kdDebug() << TQString("Pos: %1, OtherRange: (%3/%4)" ).tqarg(Pos).tqarg(OtherRange.start()).tqarg(OtherRange.end())
+  //kdDebug() << TQString("Pos: %1, OtherRange: (%3/%4)" ).arg(Pos).arg(OtherRange.start()).arg(OtherRange.end())
   //    << endl;
   // test other values
   if( OtherRange.startsBehind(Other.size()-1) )
@@ -245,14 +245,14 @@ int KFixedSizeBuffer::compare( const KDataBuffer &Other, KSection OtherRange, un
       ValueByLength = -1;
   }
   //kdDebug()
-  //    << TQString( "Range: (%1/%2), OtherRange: (%3/%4)" ).tqarg(Range.start()).tqarg(Range.end()).tqarg(OtherRange.start()).tqarg(OtherRange.end())
+  //    << TQString( "Range: (%1/%2), OtherRange: (%3/%4)" ).arg(Range.start()).arg(Range.end()).arg(OtherRange.start()).arg(OtherRange.end())
   //    << endl;
   int oi = OtherRange.start();
   for( int i=Range.start(); i<=Range.end(); ++i,++oi )
   {
     char OD = Other.datum(oi);
     char D = Data[i];
-    //kdDebug() << TQString("%1==%2").tqarg((int)D).tqarg((int)OD) << endl;
+    //kdDebug() << TQString("%1==%2").arg((int)D).arg((int)OD) << endl;
     if( OD == D )
       continue;
     return OD < D ? 1 : -1;

@@ -10,7 +10,7 @@
 
 #include <tqcheckbox.h>
 #include <tqlabel.h>
-#include <tqlayout.h>
+#include <layout.h>
 #include <tqlineedit.h>
 #include <tqradiobutton.h>
 #include <tqcombobox.h>
@@ -74,8 +74,8 @@ KCMLirc::KCMLirc(TQWidget *parent, const char *name, TQStringList /*args*/) : DC
 	(new TQHBoxLayout(this))->setAutoAdd(true);
 	theKCMLircBase = new KCMLircBase(this);
 	connect(theKCMLircBase->theModes, TQT_SIGNAL( selectionChanged(TQListViewItem *) ), this, TQT_SLOT( updateActions() ));
-	connect(theKCMLircBase->theModes, TQT_SIGNAL( selectionChanged(TQListViewItem *) ), this, TQT_SLOT( updateModestqStatus(TQListViewItem *) ));
-	connect(theKCMLircBase->theActions, TQT_SIGNAL( currentChanged(TQListViewItem *) ), this, TQT_SLOT( updateActionstqStatus(TQListViewItem *) ));
+	connect(theKCMLircBase->theModes, TQT_SIGNAL( selectionChanged(TQListViewItem *) ), this, TQT_SLOT( updateModesStatus(TQListViewItem *) ));
+	connect(theKCMLircBase->theActions, TQT_SIGNAL( currentChanged(TQListViewItem *) ), this, TQT_SLOT( updateActionsStatus(TQListViewItem *) ));
 	connect(theKCMLircBase->theExtensions, TQT_SIGNAL( selectionChanged(TQListViewItem *) ), this, TQT_SLOT( updateInformation() ));
 	connect(theKCMLircBase->theModes, TQT_SIGNAL( itemRenamed(TQListViewItem *) ), this, TQT_SLOT( slotRenamed(TQListViewItem *) ));
 	connect(theKCMLircBase->theModes, TQT_SIGNAL(dropped(KListView*, TQDropEvent*, TQListViewItem*, TQListViewItem*)), this, TQT_SLOT(slotDrop(KListView*, TQDropEvent*, TQListViewItem*, TQListViewItem*)));
@@ -94,7 +94,7 @@ KCMLirc::~KCMLirc()
 {
 }
 
-void KCMLirc::updateModestqStatus(TQListViewItem *item)
+void KCMLirc::updateModesStatus(TQListViewItem *item)
 {
 	theKCMLircBase->theModes->setItemsRenameable(item && item->parent());
 	theKCMLircBase->theAddActions->setEnabled(ProfileServer::profileServer()->profiles().count() && theKCMLircBase->theModes->selectedItem() && RemoteServer::remoteServer()->remotes()[modeMap[theKCMLircBase->theModes->selectedItem()].remote()]);
@@ -104,7 +104,7 @@ void KCMLirc::updateModestqStatus(TQListViewItem *item)
 	theKCMLircBase->theEditMode->setEnabled(item);
 }
 
-void KCMLirc::updateActionstqStatus(TQListViewItem *item)
+void KCMLirc::updateActionsStatus(TQListViewItem *item)
 {
 	theKCMLircBase->theRemoveAction->setEnabled(item);
 	theKCMLircBase->theEditAction->setEnabled(item);
@@ -333,7 +333,7 @@ void KCMLirc::slotRemoveMode()
 	if(!theKCMLircBase->theModes->selectedItem()) return;
 	if(!theKCMLircBase->theModes->selectedItem()->parent()) return;
 
-	if(KMessageBox::warningContinueCancel(this, i18n("Are you sure you want to remove %1 and all its actions?").tqarg(theKCMLircBase->theModes->selectedItem()->text(0)), i18n("Erase Actions?")) == KMessageBox::Continue)
+	if(KMessageBox::warningContinueCancel(this, i18n("Are you sure you want to remove %1 and all its actions?").arg(theKCMLircBase->theModes->selectedItem()->text(0)), i18n("Erase Actions?")) == KMessageBox::Continue)
 	{
 		allModes.erase(modeMap[theKCMLircBase->theModes->selectedItem()]);
 		updateModes();
@@ -374,10 +374,10 @@ void KCMLirc::updateActions()
 	theKCMLircBase->theActions->clear();
 	actionMap.clear();
 
-	if(!theKCMLircBase->theModes->selectedItem()) { updateActionstqStatus(0); return; }
+	if(!theKCMLircBase->theModes->selectedItem()) { updateActionsStatus(0); return; }
 
 	Mode m = modeMap[theKCMLircBase->theModes->selectedItem()];
-	theKCMLircBase->theModeLabel->setText(m.remoteName() + ": " + (m.name().isEmpty() ? i18n("Actions <i>always</i> available") : i18n("Actions available only in mode <b>%1</b>").tqarg(m.name())));
+	theKCMLircBase->theModeLabel->setText(m.remoteName() + ": " + (m.name().isEmpty() ? i18n("Actions <i>always</i> available") : i18n("Actions available only in mode <b>%1</b>").arg(m.name())));
 	IRAItList l = allActions.findByMode(m);
 	for(IRAItList::iterator i = l.begin(); i != l.end(); ++i)
 	{	TQListViewItem *b = new KListViewItem(theKCMLircBase->theActions, (**i).buttonName(), (**i).application(), (**i).function(), (**i).arguments().toString(), (**i).notes());
@@ -387,7 +387,7 @@ void KCMLirc::updateActions()
 
 	if(theKCMLircBase->theActions->currentItem())
 		theKCMLircBase->theActions->currentItem()->setSelected(true);
-	updateActionstqStatus(theKCMLircBase->theActions->currentItem());
+	updateActionsStatus(theKCMLircBase->theActions->currentItem());
 }
 
 void KCMLirc::gotButton(TQString remote, TQString button)
@@ -429,7 +429,7 @@ void KCMLirc::updateModes()
 	}
 	if(theKCMLircBase->theModes->currentItem())
 		theKCMLircBase->theModes->currentItem()->setSelected(true);
-	updateModestqStatus(theKCMLircBase->theModes->currentItem());
+	updateModesStatus(theKCMLircBase->theModes->currentItem());
 	updateActions();
 }
 
@@ -467,7 +467,7 @@ void KCMLirc::updateInformation()
 
 	if(!theKCMLircBase->theExtensions->selectedItem()->parent())
 	{
-		theKCMLircBase->theInformationLabel->setText(i18n("Information on <b>%1</b>:").tqarg(theKCMLircBase->theExtensions->selectedItem()->text(0)));
+		theKCMLircBase->theInformationLabel->setText(i18n("Information on <b>%1</b>:").arg(theKCMLircBase->theExtensions->selectedItem()->text(0)));
 		if(theKCMLircBase->theExtensions->selectedItem()->text(0) == i18n("Applications"))
 			new TQListViewItem(theKCMLircBase->theInformation, i18n("Number of Applications"), TQString().setNum(theKCMLircBase->theExtensions->selectedItem()->childCount()));
 		else if(theKCMLircBase->theExtensions->selectedItem()->text(0) == i18n("Remote Controls"))
@@ -481,7 +481,7 @@ void KCMLirc::updateInformation()
 		new TQListViewItem(theKCMLircBase->theInformation, i18n("Extension Author"), p->author());
 		new TQListViewItem(theKCMLircBase->theInformation, i18n("Application Identifier"), p->id());
 		new TQListViewItem(theKCMLircBase->theInformation, i18n("Number of Actions"), TQString().setNum(p->actions().count()));
-		theKCMLircBase->theInformationLabel->setText(i18n("Information on <b>%1</b>:").tqarg(p->name()));
+		theKCMLircBase->theInformationLabel->setText(i18n("Information on <b>%1</b>:").arg(p->name()));
 	}
 	else if(theKCMLircBase->theExtensions->selectedItem()->parent()->text(0) == i18n("Remote Controls"))
 	{
@@ -491,7 +491,7 @@ void KCMLirc::updateInformation()
 		new TQListViewItem(theKCMLircBase->theInformation, i18n("Extension Author"), p->author());
 		new TQListViewItem(theKCMLircBase->theInformation, i18n("Remote Control Identifier"), p->id());
 		new TQListViewItem(theKCMLircBase->theInformation, i18n("Number of Buttons"), TQString().setNum(p->buttons().count()));
-		theKCMLircBase->theInformationLabel->setText(i18n("Information on <b>%1</b>:").tqarg(p->name()));
+		theKCMLircBase->theInformationLabel->setText(i18n("Information on <b>%1</b>:").arg(p->name()));
 	}
 }
 

@@ -35,7 +35,7 @@
 #include <kcombobox.h>
 #include <knuminput.h>
 
-#include <tqlayout.h>
+#include <layout.h>
 #include <tqvbuttongroup.h>
 #include <tqspinbox.h>
 #include <tqradiobutton.h>
@@ -122,7 +122,7 @@ PowerConfig::PowerConfig (TQWidget * parent, const char *name)
 
       nopowerBox = new TQVButtonGroup(i18n("Not Powered"), this);
       TQToolTip::add( nopowerBox, i18n( "Options in this box apply when the laptop is unplugged from the wall and has been idle for a while" ) );
-      nopowerBox->tqlayout()->setSpacing( KDialog::spacingHint() );
+      nopowerBox->layout()->setSpacing( KDialog::spacingHint() );
       hlay->addWidget( nopowerBox );
 
       if (can_standby) {
@@ -214,7 +214,7 @@ PowerConfig::PowerConfig (TQWidget * parent, const char *name)
 
 
       powerBox = new TQVButtonGroup(i18n("Powered"), this);
-      powerBox->tqlayout()->setSpacing( KDialog::spacingHint() );
+      powerBox->layout()->setSpacing( KDialog::spacingHint() );
       TQToolTip::add( powerBox, i18n( "Options in this box apply when the laptop is plugged into the wall and has been idle for a while" ) );
       hlay->addWidget( powerBox );
 
@@ -305,19 +305,19 @@ PowerConfig::PowerConfig (TQWidget * parent, const char *name)
 					"it works as a sort of extreme screen saver. You can configure different "
 					"timeouts and types of behavior depending on whether or not your laptop is "
 					"plugged in to the mains supply."), this );
-      explain->tqsetAlignment( TQt::WordBreak );
+      explain->setAlignment( TQt::WordBreak );
       top_layout->addWidget(explain);
 
       if (can_standby) {
 	TQLabel* explain3 = new TQLabel(i18n("Different laptops may respond to 'standby' in different ways - in many "
 					"it is only a temporary state and may not be useful for you."), this);
-	explain3->tqsetAlignment( TQt::WordBreak );
+	explain3->setAlignment( TQt::WordBreak );
 	top_layout->addWidget(explain3, 0, TQt::AlignLeft);
       }
 
       top_layout->addStretch(1);
 
-      top_layout->addWidget( new TQLabel( i18n("Version: %1").tqarg(LAPTOP_VERSION), this ), 0, TQt::AlignRight );
+      top_layout->addWidget( new TQLabel( i18n("Version: %1").arg(LAPTOP_VERSION), this ), 0, TQt::AlignRight );
     }
   }
 

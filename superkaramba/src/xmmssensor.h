@@ -16,7 +16,7 @@
 
 #include <tqdatetime.h>
 #include <tqregexp.h>
-#include <tqtextcodec.h>
+#include <textcodec.h>
 
 #include "sensor.h"
 

@@ -101,7 +101,7 @@ PyObject* py_create_widget_mask(PyObject *, PyObject *args)
 long redrawWidgetBackground(long widget)
 {
   karamba* currTheme = (karamba*)widget;
-  currTheme->kroot->tqrepaint(true);
+  currTheme->kroot->repaint(true);
   return 1;
 }
 

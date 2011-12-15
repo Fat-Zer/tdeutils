@@ -19,7 +19,7 @@
 
 TQSize HackCalculateFontSize(TQFontMetrics fm, TQString str )
 {
-  TQStringList list = TQStringList::split( TQString::tqfromLatin1("\n"), str );
+  TQStringList list = TQStringList::split( TQString::fromLatin1("\n"), str );
   int maxWidth = 0;
   int height = 0;
   for ( TQStringList::Iterator it = list.begin(); it != list.end(); ++it ) {

@@ -22,7 +22,7 @@
 
 
 #include <tqtabwidget.h>
-#include <tqlayout.h>
+#include <layout.h>
 #include <tqtimer.h>
 #include <kstatusbar.h>
 #include <klocale.h>
@@ -57,14 +57,14 @@ KPCMCIAInfo::KPCMCIAInfo(KPCMCIA *pcmcia, TQWidget *parent, const char *name)
 
   prepareCards();
 
-  _mainTab->resize(KDialog::tqsizeHint());
-  resize(KDialog::tqsizeHint());
+  _mainTab->resize(KDialog::sizeHint());
+  resize(KDialog::sizeHint());
 
   connect(_pcmcia, TQT_SIGNAL(cardUpdated(int)), this, TQT_SLOT(updateCard(int)));
 
   _sb = new KStatusBar(this);
   _sb->insertItem(i18n("Ready."), 0, 1, true);
-  _sb->resize(KDialog::tqsizeHint());
+  _sb->resize(KDialog::sizeHint());
   _mainGrid->addMultiCellWidget(_sb, 8, 8, 0, 4);
   _mainGrid->setRowStretch(8, 0);
 
@@ -91,7 +91,7 @@ void KPCMCIAInfo::showTab(int num) {
 }
 
 
-void KPCMCIAInfo::slotResettqStatus() {
+void KPCMCIAInfo::slotResetStatus() {
   _sb->changeItem(i18n("Ready."), 0);
 }
 
@@ -99,12 +99,12 @@ void KPCMCIAInfo::slotResettqStatus() {
 void KPCMCIAInfo::statusNotice(const TQString& text, int life) {
    _sb->changeItem(text, 0);
    if (life > 0)
-      TQTimer::singleShot(life, this, TQT_SLOT(slotResettqStatus()));
+      TQTimer::singleShot(life, this, TQT_SLOT(slotResetStatus()));
 }
 
 
 
-void KPCMCIAInfo::slotTabSettqStatus(const TQString& text) {
+void KPCMCIAInfo::slotTabSetStatus(const TQString& text) {
    statusNotice(text);
 }
 
@@ -134,9 +134,9 @@ void KPCMCIAInfo::prepareCards() {
      TQString tabname = i18n("Card Slot %1");
      KPCMCIAInfoPage *tp = new KPCMCIAInfoPage(_pcmcia->getCard(i), _mainTab);
      connect(this, TQT_SIGNAL(updateNow()), tp, TQT_SLOT(update()));
-     connect(tp, TQT_SIGNAL(setStatusBar(const TQString&)), this, TQT_SLOT(slotTabSettqStatus(const TQString&)));
-     tp->resize(_mainTab->tqsizeHint());
-     _mainTab->addTab(tp, tabname.tqarg(i+1));
+     connect(tp, TQT_SIGNAL(setStatusBar(const TQString&)), this, TQT_SLOT(slotTabSetStatus(const TQString&)));
+     tp->resize(_mainTab->sizeHint());
+     _mainTab->addTab(tp, tabname.arg(i+1));
      _pages.insert(i, tp);
   }
 }
@@ -233,13 +233,13 @@ void KPCMCIAInfoPage::update() {
    if (_card) {
       TQString tmp;
       _card_name->setText(_card->name());
-      _card_name->resize(_card_name->tqsizeHint());
+      _card_name->resize(_card_name->sizeHint());
       tmp = i18n("Card type: %1 ");
-      _card_type->setText(tmp.tqarg(_card->type()));
-      _card_type->resize(_card_type->tqsizeHint());
+      _card_type->setText(tmp.arg(_card->type()));
+      _card_type->resize(_card_type->sizeHint());
       tmp = i18n("Driver: %1");
-      _card_driver->setText(tmp.tqarg(_card->driver()));
-      _card_driver->resize(_card_driver->tqsizeHint());
+      _card_driver->setText(tmp.arg(_card->driver()));
+      _card_driver->resize(_card_driver->sizeHint());
       tmp = i18n("IRQ: %1%2");
       TQString tmp2;
       switch (_card->intType()) {
@@ -256,33 +256,33 @@ void KPCMCIAInfoPage::update() {
        tmp2 = "";
       };
       if (_card->irq() <= 0)
-         _card_irq->setText(tmp.tqarg(i18n("none")).tqarg(""));
-      else _card_irq->setText(tmp.tqarg(_card->irq()).tqarg(tmp2));
-      _card_irq->resize(_card_irq->tqsizeHint());
+         _card_irq->setText(tmp.arg(i18n("none")).arg(""));
+      else _card_irq->setText(tmp.arg(_card->irq()).arg(tmp2));
+      _card_irq->resize(_card_irq->sizeHint());
       tmp = i18n("I/O port(s): %1");
       if (_card->ports().isEmpty())
-         _card_io->setText(tmp.tqarg(i18n("none")));
-      else _card_io->setText(tmp.tqarg(_card->ports()));
-      _card_io->resize(_card_io->tqsizeHint());
+         _card_io->setText(tmp.arg(i18n("none")));
+      else _card_io->setText(tmp.arg(_card->ports()));
+      _card_io->resize(_card_io->sizeHint());
       tmp = i18n("Bus: %1 bit %2");
       if (_card->busWidth() == 0)
          _card_bus->setText(i18n("Bus: unknown"));
-      else _card_bus->setText(tmp.tqarg(_card->busWidth()).tqarg(_card->busWidth() == 16 ? i18n("PC Card") : i18n("Cardbus")));
-      _card_bus->resize(_card_bus->tqsizeHint());
+      else _card_bus->setText(tmp.arg(_card->busWidth()).arg(_card->busWidth() == 16 ? i18n("PC Card") : i18n("Cardbus")));
+      _card_bus->resize(_card_bus->sizeHint());
       tmp = i18n("Device: %1");
-      _card_dev->setText(tmp.tqarg(_card->device()));
-      _card_dev->resize(_card_dev->tqsizeHint());
+      _card_dev->setText(tmp.arg(_card->device()));
+      _card_dev->resize(_card_dev->sizeHint());
       tmp = i18n("Power: +%1V");
-      _card_vcc->setText(tmp.tqarg(_card->vcc()/10));
-      _card_vcc->resize(_card_vcc->tqsizeHint());
+      _card_vcc->setText(tmp.arg(_card->vcc()/10));
+      _card_vcc->resize(_card_vcc->sizeHint());
       tmp = i18n("Programming power: +%1V, +%2V");
-      _card_vpp->setText(tmp.tqarg(_card->vpp()/10).tqarg(_card->vpp2()/10));
-      _card_vpp->resize(_card_vpp->tqsizeHint());
+      _card_vpp->setText(tmp.arg(_card->vpp()/10).arg(_card->vpp2()/10));
+      _card_vpp->resize(_card_vpp->sizeHint());
       tmp = i18n("Configuration base: 0x%1");
       if (_card->configBase() == 0)
          _card_cfgbase->setText(i18n("Configuration base: none"));
-      else _card_cfgbase->setText(tmp.tqarg(_card->configBase(), -1, 16));
-      _card_cfgbase->resize(_card_cfgbase->tqsizeHint());
+      else _card_cfgbase->setText(tmp.arg(_card->configBase(), -1, 16));
+      _card_cfgbase->resize(_card_cfgbase->sizeHint());
 
       if (!(_card->status() & (CARD_STATUS_READY|CARD_STATUS_SUSPEND))) {
          _card_ej_ins->setText(i18n("&Insert"));

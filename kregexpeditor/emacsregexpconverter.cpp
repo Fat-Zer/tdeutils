@@ -40,10 +40,10 @@ TQString EmacsRegExpConverter::toString( AltnRegExp* regexp, bool markSelection 
     TQString res;
 
 	bool first = true;
-    RegExpList list = regexp->tqchildren();
+    RegExpList list = regexp->children();
     for ( RegExpListIt it(list); *it; ++it ) {
 		if ( !first ) {
-			res += TQString::tqfromLatin1("\\|");
+			res += TQString::fromLatin1("\\|");
 		}
 		first = false;
         res += toStr( *it, markSelection );
@@ -56,13 +56,13 @@ TQString EmacsRegExpConverter::toString( ConcRegExp* regexp, bool markSelection 
 {
 	TQString res;
 
-    RegExpList list = regexp->tqchildren();
+    RegExpList list = regexp->children();
 	for ( RegExpListIt it(list); *it; ++it ) {
         TQString startPar = TQString::fromLocal8Bit("");
         TQString endPar = TQString::fromLocal8Bit("");
         if ( (*it)->precedence() < regexp->precedence() ) {
-            startPar = TQString::tqfromLatin1( "\\(" );
-            endPar = TQString::tqfromLatin1( "\\)" );
+            startPar = TQString::fromLatin1( "\\(" );
+            endPar = TQString::fromLatin1( "\\)" );
         }
 
 		res += startPar + toStr( *it, markSelection ) + endPar;
@@ -112,7 +112,7 @@ TQString EmacsRegExpConverter::toString( TextRangeRegExp* regexp, bool /*markSel
 	// Now insert the ranges.
     TQPtrList<StringPair> ranges = regexp->range();
     for ( TQPtrListIterator<StringPair> it(ranges); *it; ++it ) {
-		txt.append((*it)->first()+ TQString::tqfromLatin1("-")+ (*it)->second());
+		txt.append((*it)->first()+ TQString::fromLatin1("-")+ (*it)->second());
 	}
 
 	// Ok, its time to build each part of the regexp, here comes the rule:
@@ -122,20 +122,20 @@ TQString EmacsRegExpConverter::toString( TextRangeRegExp* regexp, bool /*markSel
 	// finally if '^' is one of the characters, then it must not be the first
 	// one!
 
-	TQString res = TQString::tqfromLatin1("[");
+	TQString res = TQString::fromLatin1("[");
 
 	if ( regexp->negate() )
-		res.append(TQString::tqfromLatin1("^"));
+		res.append(TQString::fromLatin1("^"));
 
 
 	// a ']' must be the first character in teh range.
 	if ( foundParenthesis ) {
-		res.append(TQString::tqfromLatin1("]"));
+		res.append(TQString::fromLatin1("]"));
 	}
 
 	// a '-' must be the first character ( only coming after a ']')
 	if ( foundDash ) {
-		res.append(TQString::tqfromLatin1("-"));
+		res.append(TQString::fromLatin1("-"));
 	}
 
 	res += txt;
@@ -153,7 +153,7 @@ TQString EmacsRegExpConverter::toString( TextRangeRegExp* regexp, bool /*markSel
 		res.append( TQChar( '^' ) );
 	}
 
-	res.append(TQString::tqfromLatin1("]"));
+	res.append(TQString::fromLatin1("]"));
 
 	return res;
 }
@@ -165,7 +165,7 @@ TQString EmacsRegExpConverter::toString( CompoundRegExp* regexp, bool markSelect
 
 TQString EmacsRegExpConverter::toString( DotRegExp* /*regexp*/, bool /*markSelection*/ )
 {
-    return TQString::tqfromLatin1( "." );
+    return TQString::fromLatin1( "." );
 }
 
 TQString EmacsRegExpConverter::toString( PositionRegExp* regexp, bool /*markSelection*/ )
@@ -173,18 +173,18 @@ TQString EmacsRegExpConverter::toString( PositionRegExp* regexp, bool /*markSele
     static bool haveWarned = false;
     switch ( regexp->position()) {
 	case PositionRegExp::BEGLINE:
-		return TQString::tqfromLatin1("^");
+		return TQString::fromLatin1("^");
 	case PositionRegExp::ENDLINE:
-		return TQString::tqfromLatin1("$");
+		return TQString::fromLatin1("$");
 	case PositionRegExp::WORDBOUNDARY:
     case PositionRegExp::NONWORDBOUNDARY:
         if ( ! haveWarned ) {
             KMessageBox::sorry( 0, i18n( "Word boundary and non word boundary is not supported in Emacs syntax" ) );
             haveWarned = true;
-            return TQString::tqfromLatin1("");
+            return TQString::fromLatin1("");
         }
     }
-    return TQString::tqfromLatin1("");
+    return TQString::fromLatin1("");
 }
 
 TQString EmacsRegExpConverter::toString( RepeatRegExp* regexp, bool markSelection )
@@ -195,8 +195,8 @@ TQString EmacsRegExpConverter::toString( RepeatRegExp* regexp, bool markSelectio
     TQString endPar;
 
     if ( child->precedence() < regexp->precedence() ) {
-        startPar = TQString::tqfromLatin1( "\\(" );
-        endPar = TQString::tqfromLatin1( "\\)" );
+        startPar = TQString::fromLatin1( "\\(" );
+        endPar = TQString::fromLatin1( "\\)" );
     }
 
     if (regexp->min() == 0 && regexp->max() == -1) {
@@ -209,17 +209,17 @@ TQString EmacsRegExpConverter::toString( RepeatRegExp* regexp, bool markSelectio
         return startPar + cText + endPar + TQString::fromLocal8Bit("+");
     }
     else {
-        TQString res = TQString::tqfromLatin1("");
+        TQString res = TQString::fromLatin1("");
         for ( int i = 0; i < regexp->min(); ++i ) {
-            res += TQString::tqfromLatin1( "\\(" ) + cText + TQString::tqfromLatin1( "\\)" );
+            res += TQString::fromLatin1( "\\(" ) + cText + TQString::fromLatin1( "\\)" );
         }
         if ( regexp->max() != -1 ) {
             for ( int i = regexp->min(); i < regexp->max(); ++i ) {
-                res += TQString::tqfromLatin1("\\(") + cText + TQString::tqfromLatin1("\\)?");
+                res += TQString::fromLatin1("\\(") + cText + TQString::fromLatin1("\\)?");
             }
         }
         else
-            res += TQString::tqfromLatin1("+");
+            res += TQString::fromLatin1("+");
 
         return res;
     }
@@ -244,7 +244,7 @@ TQString EmacsRegExpConverter::toString( TextRegExp* regexp, bool /*markSelectio
 
 TQString EmacsRegExpConverter::name()
 {
-    return TQString::tqfromLatin1( "Emacs" );
+    return TQString::fromLatin1( "Emacs" );
 }
 
 int EmacsRegExpConverter::features()

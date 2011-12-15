@@ -24,7 +24,7 @@
 #ifndef _KEDIT_H_
 #define _KEDIT_H_
 
-#include <tqtextcodec.h>
+#include <textcodec.h>
 #include <tqptrdict.h>
 
 #include "version.h"

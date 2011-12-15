@@ -23,7 +23,7 @@
 #include <tqdir.h>
 #include <tqpainter.h>
 #include <tqpaintdevicemetrics.h>
-#include <tqtextcodec.h>
+#include <textcodec.h>
 #include <tqdom.h>
 
 #include <kapplication.h>
@@ -532,9 +532,9 @@ void KJotsBook::saveToFile(KURL url, bool plainText, const TQString& encoding)
     //revisions will likely use it. I don't want to make the translators add, remove,
     //and re-add translations, so I'm just keeping this here for now. 
     m_saveProgressDialog = new KProgressDialog(listView(), "bookSaveInProgress",
-                                               i18n("Saving %1").tqarg(subject()),
+                                               i18n("Saving %1").arg(subject()),
                                                i18n("Saving the contents of %1 to %2")
-                                                    .tqarg(subject(), url.prettyURL()),
+                                                    .arg(subject(), url.prettyURL()),
                                                true);
 
     m_saveProgressDialog->progressBar()->setTotalSteps(1);
@@ -613,7 +613,7 @@ void KJotsBook::print(TQFont& defaultFont)
     printer.setFullPage(false);
     printer.setCreator("KJots");
 
-    if (!printer.setup(listView(), i18n("Print: %1").tqarg(subject())))
+    if (!printer.setup(listView(), i18n("Print: %1").arg(subject())))
     {
         return;
     }
@@ -657,7 +657,7 @@ bool KJotsBook::isDirty()
     //Am I dirty?
     if ( KJotsEntryBase::isDirty() ) return true;
 
-    //Check all tqchildren to see if any of them are dirty
+    //Check all children to see if any of them are dirty
     KJotsEntryBase *entry = dynamic_cast<KJotsEntryBase*>(firstChild());
     while ( entry )
     {
@@ -763,7 +763,7 @@ TQString KJotsBook::getToc()
     KJotsEntryBase *entry = dynamic_cast<KJotsEntryBase*>(firstChild());
     while ( entry ) {
         TQString htmlSubject = prepForHTML(entry->subject());
-        toc += TQString("<li><a href=\"#%1\">").tqarg(entry->id()) + htmlSubject + "</a></li>";
+        toc += TQString("<li><a href=\"#%1\">").arg(entry->id()) + htmlSubject + "</a></li>";
 
         KJotsBook *book = dynamic_cast<KJotsBook*>(entry);
         if ( book ) toc += book->getToc();
@@ -787,13 +787,13 @@ TQString KJotsBook::generateHtml( KJotsEntryBase* top, bool diskMode )
 
     if ( top == this )
     {
-        toc = TQString("<h1><a name=\"%1\">%2</a></h1>").tqarg(id()).tqarg(htmlTitle);
+        toc = TQString("<h1><a name=\"%1\">%2</a></h1>").arg(id()).arg(htmlTitle);
     } else {
         if ( diskMode )
         {
-            toc = TQString("<h2><a name=\"%1\">%2</a></h2>").tqarg(id()).tqarg(htmlTitle);
+            toc = TQString("<h2><a name=\"%1\">%2</a></h2>").arg(id()).arg(htmlTitle);
         } else {
-            toc = TQString("<h2><a name=\"%1\" href=\"%2\">%3</a></h2>").tqarg(id()).tqarg(id()).tqarg(htmlTitle);
+            toc = TQString("<h2><a name=\"%1\" href=\"%2\">%3</a></h2>").arg(id()).arg(id()).arg(htmlTitle);
         }
     }
 
@@ -995,7 +995,7 @@ void KJotsPage::print(TQFont& defaultFont)
     printer.setFullPage(false);
     printer.setCreator("KJots");
 
-    if (printer.setup(listView(), i18n("Print: %1").tqarg(docName)))
+    if (printer.setup(listView(), i18n("Print: %1").arg(docName)))
     {
         TQPainter painter( &printer );
         painter.setFont(defaultFont);
@@ -1066,7 +1066,7 @@ TQString KJotsPage::defaultSubject()
         page = 1;
     }
 
-    return i18n("Page %1").tqarg(page);
+    return i18n("Page %1").arg(page);
 }
 
 /*!
@@ -1181,21 +1181,21 @@ TQString KJotsPage::generateHtml( KJotsEntryBase *top, bool diskMode )
     TQString htmlSubject = prepForHTML(subject());
 
     if ( top == this || diskMode ) {
-        html += TQString("<h3><a name=\"%1\">%2</a></h3>").tqarg(id()).tqarg(htmlSubject);
+        html += TQString("<h3><a name=\"%1\">%2</a></h3>").arg(id()).arg(htmlSubject);
     } else {
-        html += TQString("<h3><a name=\"%1\" href=\"%2\">%3</a></h3>").tqarg(id()).tqarg(id()).tqarg(htmlSubject);
+        html += TQString("<h3><a name=\"%1\" href=\"%2\">%3</a></h3>").arg(id()).arg(id()).arg(htmlSubject);
     }
     html += prepForHTML(body());
 
     html += "<br><table border=1><tr>";
-    html += TQString("<td><a href=\"#%1\">%2</a></td>").tqarg(id()).tqarg(subject());
+    html += TQString("<td><a href=\"#%1\">%2</a></td>").arg(id()).arg(subject());
 
     if ( top != this ) 
     {
         KJotsBook *parent = parentBook();
         while ( parent )
         {
-            html += TQString("<td><a href=\"#%1\">%2</a></td>").tqarg(parent->id()).tqarg(parent->subject());
+            html += TQString("<td><a href=\"#%1\">%2</a></td>").arg(parent->id()).arg(parent->subject());
             if ( parent == top ) break;
             parent = parent->parentBook();
         }

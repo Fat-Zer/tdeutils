@@ -15,7 +15,7 @@
 #include <tqstring.h>
 #include <tqstringlist.h>
 #include <tqvaluevector.h>
-#include <tqtextcodec.h>
+#include <textcodec.h>
 class ProgramSensor :  public Sensor
 {
     Q_OBJECT

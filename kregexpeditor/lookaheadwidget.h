@@ -32,7 +32,7 @@ public:
 
  	virtual RegExp* regExp() const;
  	virtual RegExpType type() const { return _tp; }
-    virtual TQSize tqsizeHint() const;
+    virtual TQSize sizeHint() const;
     virtual RegExpWidget* findWidgetToEdit( TQPoint globalPos );
 
 

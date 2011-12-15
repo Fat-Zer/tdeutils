@@ -175,7 +175,7 @@ tv.tv_sec = 0;  tv.tv_usec = 0;
           TQTextStream ts(&f);
           bool foundit = false;
           TQString _thisreg = "^Socket %1: ";
-          TQRegExp thisreg ( _thisreg.tqarg(_num) );
+          TQRegExp thisreg ( _thisreg.arg(_num) );
 
           if (flock(f.handle(), LOCK_SH)) return updated;
 
@@ -500,7 +500,7 @@ TQFile df("/proc/devices");
 TQString thisreg;
 
    thisreg = "^[0-9]+ %1$";
-   thisreg = thisreg.tqarg(x);
+   thisreg = thisreg.arg(x);
 
    if (df.open(IO_ReadOnly)) {
       TQTextStream t(&df);
@@ -523,7 +523,7 @@ static int openDevice(dev_t dev) {
 TQString tmp_path = locateLocal("tmp", KGlobal::instance()->instanceName());
 TQString ext = "_socket%1";
 
-  tmp_path += ext.tqarg((int)dev);
+  tmp_path += ext.arg((int)dev);
 
   int rc = mknod(tmp_path.latin1(), (S_IFCHR | S_IREAD), dev);
   if (rc < 0) return -1;

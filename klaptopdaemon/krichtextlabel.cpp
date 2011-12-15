@@ -19,7 +19,7 @@
 #include "krichtextlabel.h"
 
 #include <tqtooltip.h>
-#include <tqstylesheet.h>
+#include <stylesheet.h>
 #include <tqsimplerichtext.h>
 
 #include <kglobalsettings.h>
@@ -41,14 +41,14 @@ static TQString qrichtextify( const TQString& text )
 KRichTextLabel::KRichTextLabel( const TQString &text , TQWidget *parent, const char *name )
  : TQLabel ( parent, name ) {
   m_defaultWidth = TQMIN(400, KGlobalSettings::desktopGeometry(this).width()*2/5);
-  tqsetAlignment( TQt::WordBreak );
+  setAlignment( TQt::WordBreak );
   setText(text);
 }
 
 KRichTextLabel::KRichTextLabel( TQWidget *parent, const char *name )
  : TQLabel ( parent, name ) {
   m_defaultWidth = TQMIN(400, KGlobalSettings::desktopGeometry(this).width()*2/5);
-  tqsetAlignment( TQt::WordBreak );
+  setAlignment( TQt::WordBreak );
 }
 
 void KRichTextLabel::setDefaultWidth(int defaultWidth)
@@ -62,7 +62,7 @@ TQSizePolicy KRichTextLabel::sizePolicy() const
   return TQSizePolicy(TQSizePolicy::MinimumExpanding, TQSizePolicy::Minimum, false);
 }
 
-TQSize KRichTextLabel::tqminimumSizeHint() const
+TQSize KRichTextLabel::minimumSizeHint() const
 {
   TQString qt_text = qrichtextify( text() );
   int pref_width = 0;
@@ -97,9 +97,9 @@ TQSize KRichTextLabel::tqminimumSizeHint() const
   return TQSize(pref_width, rt.height());
 }
 
-TQSize KRichTextLabel::tqsizeHint() const
+TQSize KRichTextLabel::sizeHint() const
 {
-  return tqminimumSizeHint();
+  return minimumSizeHint();
 }
 
 void KRichTextLabel::setText( const TQString &text ) {

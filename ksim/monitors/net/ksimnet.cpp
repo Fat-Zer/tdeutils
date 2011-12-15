@@ -34,10 +34,10 @@ static int mib[] = { CTL_NET, PF_ROUTE, 0, 0, NET_RT_IFLIST, 0 };
 #endif
 
 #include <tqpushbutton.h>
-#include <tqtextstream.h>
+#include <textstream.h>
 #include <tqfile.h>
 #include <tqdatetime.h>
-#include <tqlayout.h>
+#include <layout.h>
 #include <tqtimer.h>
 #include <tqregexp.h>
 #include <tqcursor.h>
@@ -356,7 +356,7 @@ void NetView::updateGraph()
       if ( ( *it ).label() )
       {
         timeDisplay = ( *it ).format();
-        newPid = pid.tqarg( ( *it ).name() );
+        newPid = pid.arg( ( *it ).name() );
 
         if ( TQFile::exists( newPid ) && stat( TQFile::encodeName( newPid ).data(), &st ) == 0 )
         {
@@ -394,16 +394,16 @@ void NetView::updateGraph()
       TQString receiveString = KGlobal::locale()->formatNumber( ( float ) receiveDiff / 1024.0, 1 );
       TQString sendString = KGlobal::locale()->formatNumber( ( float ) sendDiff / 1024.0, 1 );
 
-      ( *it ).chart()->setText( i18n( "in: %1k" ).tqarg( receiveString ),
-         i18n( "out: %1k" ).tqarg( sendString ) );
+      ( *it ).chart()->setText( i18n( "in: %1k" ).arg( receiveString ),
+         i18n( "out: %1k" ).arg( sendString ) );
     }
     else
     {
       ( *it ).setData( NetData() );
       ( *it ).chart()->setValue( 0, 0 );
 
-      ( *it ).chart()->setText( i18n( "in: %1k" ).tqarg( KGlobal::locale()->formatNumber( 0.0, 1 ) ),
-         i18n( "out: %1k" ).tqarg( KGlobal::locale()->formatNumber( 0.0, 1 ) ) );
+      ( *it ).chart()->setText( i18n( "in: %1k" ).arg( KGlobal::locale()->formatNumber( 0.0, 1 ) ),
+         i18n( "out: %1k" ).arg( KGlobal::locale()->formatNumber( 0.0, 1 ) ) );
 
       if ( ( *it ).label() )
         ( *it ).label()->setText( i18n( "offline" ) );

@@ -17,7 +17,7 @@
  *
  */
 
-#include <tqlayout.h>
+#include <layout.h>
 
 #include "kdfconfig.h"
 #include "mntconfig.h"

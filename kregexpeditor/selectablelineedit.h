@@ -39,7 +39,7 @@ Q_OBJECT
 public:
   SelectableLineEdit( RegExpWidget* owner, TQWidget* parent = 0, const char* name = 0);
   void setSelected( bool selected );
-  virtual TQSize tqsizeHint() const;
+  virtual TQSize sizeHint() const;
 
 protected slots:
   void slotKeyPressed();

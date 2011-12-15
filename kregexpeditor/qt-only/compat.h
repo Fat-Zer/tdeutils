@@ -20,7 +20,7 @@
 #define COMPAT_H
 #include <tqobject.h>
 #include <tqmessagebox.h>
-#include <tqlayout.h>
+#include <layout.h>
 #include <tqpushbutton.h>
 #include <tqinputdialog.h>
 #include <tqframe.h>

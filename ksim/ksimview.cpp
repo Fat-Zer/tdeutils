@@ -49,7 +49,7 @@
 #include <tqfile.h>
 #include <tqbitmap.h>
 #include <tqtimer.h>
-#include <tqlayout.h>
+#include <layout.h>
 #include <tqobjectlist.h>
 #include <tqpainter.h>
 #include <tqcursor.h>
@@ -183,8 +183,8 @@ KSim::Config *KSim::MainView::config() const
 void KSim::MainView::makeDirs()
 {
   TQString homeDir = locateLocal("data", "ksim");
-  TQString themeDir = homeDir + TQString::tqfromLatin1("/themes");
-  TQString monitorDir = homeDir + TQString::tqfromLatin1("/monitors");
+  TQString themeDir = homeDir + TQString::fromLatin1("/themes");
+  TQString monitorDir = homeDir + TQString::fromLatin1("/monitors");
 
   // return true if the dirs already exist
   if (TQFile::exists(themeDir) && TQFile::exists(monitorDir))
@@ -217,7 +217,7 @@ void KSim::MainView::maskMainView()
       !m_rightFrame->background()->mask() ||
       !m_bottomFrame->background()->mask())
   {
-    tqtopLevelWidget()->clearMask();
+    topLevelWidget()->clearMask();
     return;
   }
   
@@ -226,16 +226,16 @@ void KSim::MainView::maskMainView()
   TQBitmap rightPixmap(*m_rightFrame->background()->mask());
   TQBitmap bottomPixmap(*m_bottomFrame->background()->mask());
 
-  TQSize insideSize(m_pluginLayout->tqgeometry().size());
+  TQSize insideSize(m_pluginLayout->geometry().size());
 
   // make a cleared bigrect where we can put our pixmap masks on
-  TQBitmap bigBitmap(tqtopLevelWidget()->size(), true);
+  TQBitmap bigBitmap(topLevelWidget()->size(), true);
 
   // better return if our bitmap is null so we can avoid crashes
   if (bigBitmap.isNull())
     return;
 
-  TQPoint ofs = mapTo(tqtopLevelWidget(), TQPoint(0,0));
+  TQPoint ofs = mapTo(topLevelWidget(), TQPoint(0,0));
   int ofsX = ofs.x();
   int ofsY = ofs.y();
 
@@ -243,7 +243,7 @@ void KSim::MainView::maskMainView()
   painter.begin(&bigBitmap);
   painter.setBrush(color1);
   painter.setPen(color1);
-  TQRect rect = m_pluginLayout->tqgeometry();
+  TQRect rect = m_pluginLayout->geometry();
   rect.moveBy(ofsX, ofsY);
   painter.drawRect(rect);
   painter.drawPixmap(ofsX, ofsY, topPixmap);
@@ -254,7 +254,7 @@ void KSim::MainView::maskMainView()
      bottomPixmap);
 
   painter.end();
-  tqtopLevelWidget()->setMask(bigBitmap);
+  topLevelWidget()->setMask(bigBitmap);
 }
 
 void KSim::MainView::reparseConfig(bool emitReload,
@@ -430,7 +430,7 @@ void KSim::MainView::destroyPref()
   }
 }
 
-TQSize KSim::MainView::tqsizeHint(KPanelExtension::Position p, TQSize) const
+TQSize KSim::MainView::sizeHint(KPanelExtension::Position p, TQSize) const
 {
   int width = 0;
   int height = 0;
@@ -439,7 +439,7 @@ TQSize KSim::MainView::tqsizeHint(KPanelExtension::Position p, TQSize) const
   for( TQLayoutIterator it = m_pluginLayout->iterator();
        (child = it.current()) != 0; ++it)
   {
-     TQSize sz = child->tqminimumSize();
+     TQSize sz = child->minimumSize();
      if ((p == KPanelExtension::Right) || (p == KPanelExtension::Left))
      {
         width = TQMAX(width, sz.width());

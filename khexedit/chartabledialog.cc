@@ -22,7 +22,7 @@
 
 #include <tqlabel.h>
 #include <tqheader.h>
-#include <tqlayout.h>
+#include <layout.h>
 #include <tqspinbox.h>
 
 #include <kglobalsettings.h>
@@ -69,7 +69,7 @@ CCharTableDialog::CCharTableDialog( TQWidget *parent, const char *name,
 
   text = i18n("Insert this number of characters:");
   TQLabel *label = new TQLabel( text, plainPage() );
-  label->setFixedWidth( label->tqsizeHint().width() );
+  label->setFixedWidth( label->sizeHint().width() );
   hbox->addWidget( label );
 
   mInputCountSpin = new TQSpinBox( plainPage(), "spin" );

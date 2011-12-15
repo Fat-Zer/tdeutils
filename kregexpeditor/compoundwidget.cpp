@@ -26,7 +26,7 @@
 #endif
 
 #include "compoundwidget.h"
-#include <tqlayout.h>
+#include <layout.h>
 #include <tqcursor.h>
 #include <tqlineedit.h>
 #include <tqpainter.h>
@@ -40,8 +40,8 @@
 CompoundDetailWindow::CompoundDetailWindow( TQWidget* parent, const char* name )
   :TQWidget( parent, name )
 {
-  TQVBoxLayout* tqlayout = new TQVBoxLayout( this );
-  tqlayout->setAutoAdd( true );
+  TQVBoxLayout* layout = new TQVBoxLayout( this );
+  layout->setAutoAdd( true );
 
   TQLabel* label = new TQLabel( i18n("&Title:"), this);
   _title = new TQLineEdit( this );
@@ -135,10 +135,10 @@ void CompoundWidget::init( )
   _backRefId = -1;
 }
 
-TQSize CompoundWidget::tqsizeHint() const
+TQSize CompoundWidget::sizeHint() const
 {
   TQFontMetrics metrics = fontMetrics();
-  _childSize = _child->tqsizeHint();
+  _childSize = _child->sizeHint();
   _textSize = metrics.size( 0, _content->title() );
 
   int width, height;
@@ -164,7 +164,7 @@ TQSize CompoundWidget::tqsizeHint() const
 
 void CompoundWidget::paintEvent( TQPaintEvent *e )
 {
-  TQSize mySize = tqsizeHint();
+  TQSize mySize = sizeHint();
 
   TQPainter painter(this);
   drawPossibleSelection( painter, mySize);
@@ -220,8 +220,8 @@ void CompoundWidget::paintEvent( TQPaintEvent *e )
   }
   else {
     TQSize curSize = _child->size();
-    TQSize newSize = TQSize( TQMAX( _child->tqsizeHint().width(), mySize.width()-2*pw),
-                           _child->tqsizeHint().height());
+    TQSize newSize = TQSize( TQMAX( _child->sizeHint().width(), mySize.width()-2*pw),
+                           _child->sizeHint().height());
 
     _child->move( pw, childY );
     if ( curSize != newSize ) {
@@ -247,7 +247,7 @@ void CompoundWidget::slotConfigCanceled()
   TQDataStream stream( _backup, IO_ReadOnly );
   KWidgetStreamer streamer;
   streamer.fromStream( stream, TQT_TQOBJECT(_content) );
-  tqrepaint();
+  repaint();
 }
 
 RegExp* CompoundWidget::regExp() const
@@ -273,7 +273,7 @@ void CompoundWidget::mouseReleaseEvent( TQMouseEvent* event)
        TQRect( _pixmapPos, _pixmapSize ).contains( event->pos() ) ) {
     _hidden = !_hidden;
     _editorWindow->updateContent( 0 );
-    tqrepaint(); // is this necesary?
+    repaint(); // is this necesary?
     _editorWindow->emitChange();
   }
   else
@@ -286,7 +286,7 @@ bool CompoundWidget::updateSelection( bool parentSelected )
     bool changed = RegExpWidget::updateSelection( parentSelected );
     _child->selectWidget( _isSelected );
     if (changed)
-      tqrepaint();
+      repaint();
     return changed;
   }
   else {
@@ -296,8 +296,8 @@ bool CompoundWidget::updateSelection( bool parentSelected )
 
 int CompoundWidget::edit()
 {
-  _configWindow->move(TQCursor::pos() - TQPoint(_configWindow->tqsizeHint().width()/2,
-                                              _configWindow->tqsizeHint().height()/2)  );
+  _configWindow->move(TQCursor::pos() - TQPoint(_configWindow->sizeHint().width()/2,
+                                              _configWindow->sizeHint().height()/2)  );
   TQDataStream stream( _backup, IO_WriteOnly );
   KWidgetStreamer streamer;
   streamer.toStream( TQT_TQOBJECT(_content), stream );

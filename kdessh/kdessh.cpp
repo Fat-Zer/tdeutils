@@ -83,7 +83,7 @@ int main(int argc, char *argv[])
 	KCmdLineArgs::usage(i18n("No command or host specified."));
 
     // Check if ssh is available
-    if (KStandardDirs::findExe(TQString::tqfromLatin1("ssh")).isEmpty())
+    if (KStandardDirs::findExe(TQString::fromLatin1("ssh")).isEmpty())
     {
 	kdError(1511) << "ssh not found\n";
 	exit(1);
@@ -151,8 +151,8 @@ int main(int argc, char *argv[])
 
     // Read configuration
     KConfig *config = KGlobal::config();
-    config->setGroup(TQString::tqfromLatin1("Passwords"));
-    int timeout = config->readNumEntry(TQString::tqfromLatin1("Timeout"), defTimeout);
+    config->setGroup(TQString::fromLatin1("Passwords"));
+    int timeout = config->readNumEntry(TQString::fromLatin1("Timeout"), defTimeout);
 
     SshProcess proc(host, user);
     proc.setStub(stub);

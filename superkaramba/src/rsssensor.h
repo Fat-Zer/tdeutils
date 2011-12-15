@@ -13,7 +13,7 @@
 
 #include <sensor.h>
 #include <tqstring.h>
-#include <tqtextcodec.h>
+#include <textcodec.h>
 
 /**
  *

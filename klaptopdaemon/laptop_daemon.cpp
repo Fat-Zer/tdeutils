@@ -102,7 +102,7 @@ laptop_daemon::laptop_daemon(const TQCString& obj): KDEDModule(obj)
 	sony_disp = 0;
         connect(this, TQT_SIGNAL(signal_checkBattery()), TQT_SLOT(checkBatteryNow()));
 
-	//hasAudio = (audioServer.servertqStatus() == 0) ? true : false;
+	//hasAudio = (audioServer.serverStatus() == 0) ? true : false;
 
         // FIXME: make these configurable.  Some system definitely don't
         //        use /var/run/stab
@@ -537,13 +537,13 @@ void laptop_daemon::haveBatteryLow(int t, const int num, const int type)
             if (type) {
                 if (s.time_based_action_critical) {
                     KPassivePopup::message(i18n("Battery power is running out."),
-                                           i18n("%1 % charge left.").tqarg(num),
+                                           i18n("%1 % charge left.").arg(num),
                                            BarIcon("laptop_battery"), dock_widget,
                                            0, 20000);
                 } else {
                     // Will this ever be reached?
                     KPassivePopup::message(i18n("Battery power is running out."),
-                                           i18n("%1 % charge left.").tqarg(num),
+                                           i18n("%1 % charge left.").arg(num),
                                            BarIcon("laptop_battery"), dock_widget,
                                            0, 20000);
                 }

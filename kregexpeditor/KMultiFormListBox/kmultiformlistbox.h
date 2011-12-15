@@ -22,7 +22,7 @@
 #include "kmultiformlistbox-shower.h"
 #include "kmultiformlistboxentry.h"
 #include <tqptrlist.h>
-#include <tqlayout.h>
+#include <layout.h>
 #include <tqscrollview.h>
 
 #ifdef TQT_ONLY

@@ -61,7 +61,7 @@ ImageLabel* createImageLabel(karamba *theme, long x, long y,
   theme->meterList->append (tmp);
   theme->imageList->append (tmp);
   if(bg)
-    theme->kroot->tqrepaint(true);
+    theme->kroot->repaint(true);
   return tmp;
 }
 

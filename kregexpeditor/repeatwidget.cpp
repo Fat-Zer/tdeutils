@@ -30,7 +30,7 @@
 #include <tqcursor.h>
 #include <tqspinbox.h>
 #include <tqradiobutton.h>
-#include <tqlayout.h>
+#include <layout.h>
 #include <tqgrid.h>
 #include <tqvbuttongroup.h>
 #include "kwidgetstreamer.h"
@@ -85,13 +85,13 @@ void RepeatWidget::init()
 }
 
 
-TQSize RepeatWidget::tqsizeHint() const
+TQSize RepeatWidget::sizeHint() const
 {
-  // TODO: Merge with LookAheadWidget::tqsizeHint
+  // TODO: Merge with LookAheadWidget::sizeHint
   TQFontMetrics metrics = fontMetrics();
   _textSize = metrics.size( 0, _content->text() );
 
-  _childSize = _child->tqsizeHint();
+  _childSize = _child->sizeHint();
 
   int height = _textSize.height() + bdSize + _childSize.height() + bdSize + 2*pw;
   int width  = 2 * pw + TQMAX(_childSize.width(), 4*bdSize + _textSize.width());
@@ -101,7 +101,7 @@ TQSize RepeatWidget::tqsizeHint() const
 void RepeatWidget::paintEvent( TQPaintEvent *e )
 {
   // TODO: Merge with LookAheadWidget::paintEvent
-  TQSize mySize = tqsizeHint();
+  TQSize mySize = sizeHint();
   TQPainter painter(this);
 
   drawPossibleSelection( painter, mySize );
@@ -152,13 +152,13 @@ void RepeatWidget::slotConfigCanceled()
   TQDataStream stream( _backup, IO_ReadOnly );
   KWidgetStreamer streamer;
   streamer.fromStream( stream, TQT_TQOBJECT(_content) );
-  tqrepaint();
+  repaint();
 }
 
 int RepeatWidget::edit()
 {
-  _configWindow->move(TQCursor::pos() - TQPoint(_configWindow->tqsizeHint().width()/2,
-                                              _configWindow->tqsizeHint().height()/2)  );
+  _configWindow->move(TQCursor::pos() - TQPoint(_configWindow->sizeHint().width()/2,
+                                              _configWindow->sizeHint().height()/2)  );
   TQDataStream stream( _backup, IO_WriteOnly );
   KWidgetStreamer streamer;
   streamer.toStream( TQT_TQOBJECT(_content), stream );
@@ -271,7 +271,7 @@ TQString RepeatRangeWindow::text()
   case ATMOST: return i18n("Repeated at Most 1 Time", "Repeated at Most %n Times", _mostTimes->value() );
   case EXACTLY: return i18n("Repeated Exactly 1 Time", "Repeated Exactly %n Times", _exactlyTimes->value() );
   case MINMAX: return i18n("Repeated From %1 to %2 Times")
-                 .tqarg( _rangeFrom->value() ).tqarg( _rangeTo->value() );
+                 .arg( _rangeFrom->value() ).arg( _rangeTo->value() );
   }
   qFatal("Fall through!");
   return TQString::fromLocal8Bit("");

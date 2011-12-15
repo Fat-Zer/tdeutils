@@ -23,7 +23,7 @@
 
 #include <kapplication.h>
 #include <tqfont.h> 
-#include <tqpalette.h>
+#include <palette.h>
 #include <kglobalsettings.h>
 
 
@@ -382,8 +382,8 @@ class SDisplayColor
       textBg           = TQt::white;
       secondTextBg     = TQt::white;
       inactiveBg       = TQt::gray;
-      selectBg         = kapp->tqpalette().active().highlight();
-      selectFg         = kapp->tqpalette().active().highlightedText();
+      selectBg         = kapp->palette().active().highlight();
+      selectFg         = kapp->palette().active().highlightedText();
       markBg           = TQt::blue;
       markFg           = TQt::white;
       primaryFg[0]     = TQt::black;
@@ -574,7 +574,7 @@ class SDisplayState
 {
   public:
     SDisplayLine      line;
-    SDisplayLayout    tqlayout;
+    SDisplayLayout    layout;
     SDisplayCursor    cursor;
     SDisplayColor     color;
     SDisplayFont      font;

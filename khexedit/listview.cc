@@ -35,20 +35,20 @@ void CListView::setVisibleItem( int visibleItem, bool updateSize )
   mVisibleItem = TQMAX( 1, visibleItem );
   if( updateSize == true )
   {
-    TQSize s = tqsizeHint();
-    setMinimumSize( s.width() + verticalScrollBar()->tqsizeHint().width() + 
+    TQSize s = sizeHint();
+    setMinimumSize( s.width() + verticalScrollBar()->sizeHint().width() + 
 		    lineWidth() * 2, s.height() );
   }
 }
 
-TQSize CListView::tqsizeHint( void ) const
+TQSize CListView::sizeHint( void ) const
 {
-  TQSize s = TQListView::tqsizeHint();
+  TQSize s = TQListView::sizeHint();
   
   int h = fontMetrics().height() + 2*itemMargin();
   if( h % 2 > 0 ) { h++; }
   
-  s.setHeight( h*mVisibleItem + lineWidth()*2 + header()->tqsizeHint().height());
+  s.setHeight( h*mVisibleItem + lineWidth()*2 + header()->sizeHint().height());
   return( s );
 }
 #include "listview.moc"

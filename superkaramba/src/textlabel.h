@@ -40,7 +40,7 @@ public:
     void setFontSize( int );
     void setBGColor(TQColor clr);
     void setFont( TQString );
-    void tqsetAlignment( TQString );
+    void setAlignment( TQString );
     void setFixedPitch( bool );
     void setShadow( int );
     void mUpdate( TQPainter * );
@@ -62,7 +62,7 @@ public:
     virtual bool click(TQMouseEvent*);
 
 private:
-    int tqalignment;
+    int alignment;
     int clip;
     TQStringList value;
     TQFont font;

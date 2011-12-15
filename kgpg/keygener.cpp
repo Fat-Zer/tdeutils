@@ -19,7 +19,7 @@
 
 
 #include <tqwhatsthis.h>
-#include <tqlayout.h>
+#include <layout.h>
 #include <tqlabel.h>
 #include <tqvbox.h>
 #include <kcombobox.h>
@@ -64,7 +64,7 @@ keyGenerate::keyGenerate(TQWidget *parent, const char *name):KDialogBase( parent
         keyexp->insertItem(i18n("Weeks"),2);
         keyexp->insertItem(i18n("Months"),3);
         keyexp->insertItem(i18n("Years"),4);
-        keyexp->setMinimumSize(keyexp->tqsizeHint());
+        keyexp->setMinimumSize(keyexp->sizeHint());
         connect(keyexp,TQT_SIGNAL(activated(int)),this,TQT_SLOT(activateexp(int)));
 
         (void) new TQLabel(i18n("Key size:"),bgroup1);
@@ -74,17 +74,17 @@ keyGenerate::keyGenerate(TQWidget *parent, const char *name):KDialogBase( parent
         keysize->insertItem("2048");
         keysize->insertItem("4096");
         keysize->setCurrentItem("1024");
-        keysize->setMinimumSize(keysize->tqsizeHint());
+        keysize->setMinimumSize(keysize->sizeHint());
 
         (void) new TQLabel(i18n("Algorithm:"),bgroup1);
         keykind = new KComboBox(bgroup1);
         keykind->insertItem("DSA & ElGamal");
         keykind->insertItem("RSA");
-        keykind->setMinimumSize(keykind->tqsizeHint());
+        keykind->setMinimumSize(keykind->sizeHint());
 
         vbox->addWidget(bgroup1);
         page->show();
-        page->resize(page->tqmaximumSize());
+        page->resize(page->maximumSize());
         setMainWidget(page);
 }
 

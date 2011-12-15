@@ -59,7 +59,7 @@ protected:
 
 private:
     RegExp() {} // disable
-    TQPtrList<RegExp> _tqchildren;
+    TQPtrList<RegExp> _children;
     RegExp* _parent;
     bool _destructing;
     bool _selected;

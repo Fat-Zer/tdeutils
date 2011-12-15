@@ -31,7 +31,7 @@
 #include <tqcheckbox.h>
 #include <tqheader.h>
 #include <tqlabel.h>
-#include <tqlayout.h>
+#include <layout.h>
 #include <tqlcdnumber.h>
 #include <tqlineedit.h>
 

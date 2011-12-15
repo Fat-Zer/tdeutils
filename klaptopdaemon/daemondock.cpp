@@ -202,7 +202,7 @@ laptop_dock::invokeBrightness()
 		brightness_slider->setMinimumHeight(40);
 		brightness_slider->setMinimumWidth(15);
 		connect(brightness_slider, TQT_SIGNAL(valueChanged(int)), this, TQT_SLOT(invokeBrightnessSlider(int)));
-		brightness_widget->resize(brightness_widget->tqsizeHint());
+		brightness_widget->resize(brightness_widget->sizeHint());
 	} else {
 		brightness_slider->setValue(255-brightness);
 	}
@@ -215,7 +215,7 @@ laptop_dock::invokeBrightness()
 		TQPoint pos = TQCursor::pos();
 		int x = pos.x();
 		int y = pos.y();
-		y -= brightness_widget->tqgeometry().height();
+		y -= brightness_widget->geometry().height();
 		int w = brightness_widget->width();
 		int h = brightness_widget->height();
 		if (x+w > sw)
@@ -375,10 +375,10 @@ void laptop_dock::mousePressEvent( TQMouseEvent *event )
 					TQString num3;
 					num3.setNum(pdaemon->left%60);
 					num3 = num3.rightJustify(2, '0');
-					tmp = i18n("%1:%2 hours left").tqarg(pdaemon->left/60).tqarg(num3);
+					tmp = i18n("%1:%2 hours left").arg(pdaemon->left/60).arg(num3);
 				} else {
 					// no remaining time available
-					tmp = i18n("%1% charged").tqarg(pdaemon->val);
+					tmp = i18n("%1% charged").arg(pdaemon->val);
 				}
 			} else {
 				tmp = i18n("No Battery");
@@ -402,7 +402,7 @@ void laptop_dock::mousePressEvent( TQMouseEvent *event )
 			TQString speed = laptop_portable::cpu_frequency();
 			if (!speed.isEmpty()) {
 				popup->insertSeparator();
-				popup->insertItem(i18n("CPU: %1").tqarg(speed));
+				popup->insertItem(i18n("CPU: %1").arg(speed));
 			}
 		}
 
@@ -449,7 +449,7 @@ void laptop_dock::mousePressEvent( TQMouseEvent *event )
 
                          // add a few bits of information
                          thisSub->insertSeparator();
-                         thisSub->insertItem(slotname.tqarg(thiscard->num()+1));
+                         thisSub->insertItem(slotname.arg(thiscard->num()+1));
                          if (thiscard->status() & CARD_STATUS_READY)
                             thisSub->insertItem(i18n("Ready"));
                          if (thiscard->status() & CARD_STATUS_BUSY)
@@ -641,10 +641,10 @@ quit:
 				num3.setNum(pdaemon->left%60);
 				num3 = num3.rightJustify(2, '0');
 				tmp = i18n("Plugged in - %1% charged (%2:%3 hours left)")
-					.tqarg(pdaemon->val).tqarg(pdaemon->left/60).tqarg(num3);
+					.arg(pdaemon->val).arg(pdaemon->left/60).arg(num3);
 			} else {
 				// no remaining time available
-				tmp = i18n("Plugged in - %1% charged").tqarg(pdaemon->val);
+				tmp = i18n("Plugged in - %1% charged").arg(pdaemon->val);
 			}
 		} else {
 			tmp = i18n("Plugged in - no battery");
@@ -658,9 +658,9 @@ quit:
 				num3.setNum(pdaemon->left%60);
 				num3 = num3.rightJustify(2, '0');
 				tmp = i18n("Running on batteries - %1% charged (%2:%3 hours left)")
-						.tqarg(pdaemon->val).tqarg(pdaemon->left/60).tqarg(num3);
+						.arg(pdaemon->val).arg(pdaemon->left/60).arg(num3);
 			} else {
-				tmp = i18n("Running on batteries - %1% charged").tqarg(pdaemon->val);
+				tmp = i18n("Running on batteries - %1% charged").arg(pdaemon->val);
 			}
 		} else {
 			// running without any power source...

@@ -140,7 +140,7 @@ class CHexViewWidget : public TQFrame
 
     virtual void setPalette( const TQPalette & );
     void setInputMode( SDisplayInputMode &mode );
-    void setLayout( SDisplayLayout &tqlayout );
+    void setLayout( SDisplayLayout &layout );
     void setCursor( const SDisplayCursor &cursor, bool updateDisplay );
     void setColor( const SDisplayColor &color, bool updateDisplay );
     void setFont( const SDisplayFontInfo &fontInfo, bool updateDisplay );
@@ -218,7 +218,7 @@ class CHexViewWidget : public TQFrame
     void cursorChanged( SCursorState &state );
     void fileState( SFileState &state );
     void dataChanged( void );
-    void layoutChanged( const SDisplayLayout &tqlayout );
+    void layoutChanged( const SDisplayLayout &layout );
     void inputModeChanged( const SDisplayInputMode &mode );
     void bookmarkChanged( TQPtrList<SCursorOffset> &list );
     void editMode( CHexBuffer::EEditMode editMode );

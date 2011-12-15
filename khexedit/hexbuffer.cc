@@ -447,8 +447,8 @@ TQString SExportCArray::variableName( uint range ) const
   uint es = elementSize();
   uint numElement = range / es + ((range % es) ? 1 : 0);
 
-  return( TQString("%1 %2[%2]").tqarg(typeString[elementType]).
-	  tqarg(arrayName).tqarg(numElement) );
+  return( TQString("%1 %2[%2]").arg(typeString[elementType]).
+	  arg(arrayName).arg(numElement) );
 }
 
 
@@ -580,9 +580,9 @@ bool CHexBuffer::hasFileName( void )
 
 
 
-int CHexBuffer::setLayout( SDisplayLayout &tqlayout )
+int CHexBuffer::setLayout( SDisplayLayout &layout )
 {
-  mLayout = tqlayout;
+  mLayout = layout;
   mLayout.verify();
 
   if( mLayout.primaryMode == SDisplayLayout::textOnly )
@@ -676,7 +676,7 @@ bool CHexBuffer::toggleEditor( void )
       edit_secondary : edit_primary;
   }
 
-  setEditMode( mEditMode ); // Sets the cursor tqshapes as well
+  setEditMode( mEditMode ); // Sets the cursor shapes as well
 
   if( changed == true )
   {
@@ -766,7 +766,7 @@ void CHexBuffer::setDisableCursor( bool disableCursor )
 }
 
 
-void CHexBuffer::settqCursorShapeModifier( bool alwaysBlock, bool thickInsert )
+void CHexBuffer::setCursorShapeModifier( bool alwaysBlock, bool thickInsert )
 {
   mCursor.setShapeModifier( alwaysBlock, thickInsert );
   setEditMode( mEditMode );
@@ -813,12 +813,12 @@ void CHexBuffer::setEditMode( EEditMode editMode )
 
 
 
-void CHexBuffer::setMaximumSize( uint tqmaximumSize )
+void CHexBuffer::setMaximumSize( uint maximumSize )
 {
-  if( tqmaximumSize == 0 ) { tqmaximumSize = ~0; }
+  if( maximumSize == 0 ) { maximumSize = ~0; }
 
-  mMaximumSize   = tqmaximumSize;
-  mFixedSizeMode = tqmaximumSize == (uint)~0 ? false : true;
+  mMaximumSize   = maximumSize;
+  mFixedSizeMode = maximumSize == (uint)~0 ? false : true;
   mCursor.setFixedSizeMode( mFixedSizeMode );
 
   if( mLayout.offsetVisible == false )
@@ -832,9 +832,9 @@ void CHexBuffer::setMaximumSize( uint tqmaximumSize )
     if( mLayout.offsetMode ==  SDisplayLayout::decimal )
     {
       printOffset = &CHexBuffer::printDecimalOffset;
-      for( mOffsetSize=0; tqmaximumSize > 0; mOffsetSize += 1 )
+      for( mOffsetSize=0; maximumSize > 0; mOffsetSize += 1 )
       {
-	tqmaximumSize = tqmaximumSize / 10;
+	maximumSize = maximumSize / 10;
       }
       mOffsetIndex = 10 - mOffsetSize;
     }
@@ -848,9 +848,9 @@ void CHexBuffer::setMaximumSize( uint tqmaximumSize )
       {
 	printOffset = &CHexBuffer::printHexadecimalSmallOffset;
       }
-      for( mOffsetSize=0; tqmaximumSize > 0; mOffsetSize += 1 )
+      for( mOffsetSize=0; maximumSize > 0; mOffsetSize += 1 )
       {
-	tqmaximumSize = tqmaximumSize / 16;
+	maximumSize = maximumSize / 16;
       }
       if( mOffsetSize > 4 ) { mOffsetSize += 1; } // Space for the ':' sign
       mOffsetIndex = 9 - mOffsetSize;
@@ -952,7 +952,7 @@ int CHexBuffer::writeFile( TQFile &file, CProgress &p )
 
 int CHexBuffer::readFile( TQFile &file, const TQString &url, CProgress &p )
 {
-  if( tqresize( file.size() + 100 ) == false )
+  if( resize( file.size() + 100 ) == false )
   {
     p.finish();
     return( Err_NoMemory );
@@ -1064,7 +1064,7 @@ int CHexBuffer::insertFile( TQFile &file, CProgress &p )
 
 int CHexBuffer::newFile( const TQString &url )
 {
-  if( tqresize( 100 ) == 0 )
+  if( resize( 100 ) == 0 )
   {
     return( Err_NoMemory );
   }
@@ -1923,8 +1923,8 @@ void CHexBuffer::drawHeader( TQPainter &paint, int sx, int width, int y,
     else if( header.pos[i] == SPageHeader::PageNumber )
     {
       msg = i18n("Page %1 of %2")
-        .tqarg(KGlobal::locale()->formatNumber(position.curPage, 0))
-        .tqarg(KGlobal::locale()->formatNumber(position.maxPage, 0));
+        .arg(KGlobal::locale()->formatNumber(position.curPage, 0))
+        .arg(KGlobal::locale()->formatNumber(position.maxPage, 0));
     }
     else if( header.pos[i] == SPageHeader::FileName )
     {
@@ -2091,7 +2091,7 @@ void CHexBuffer::drawCursor( TQPainter &paint, uint line, int startx,
   }
 
   //
-  // Draw the cursor tqshape
+  // Draw the cursor shape
   //
   bool transparent = false;
   if( mActiveEditor == edit_primary )
@@ -2116,7 +2116,7 @@ void CHexBuffer::drawCursor( TQPainter &paint, uint line, int startx,
 	  paint.drawLine( center-2, mFontHeight-1, center+2, mFontHeight-1 );
 	}
       }
-      else // Solid block tqshape
+      else // Solid block shape
       {
 	paint.fillRect( c.x1 - startx, 0, mUnitWidth, mFontHeight, cbg );
 	useFg = true;
@@ -2209,7 +2209,7 @@ void CHexBuffer::drawCursor( TQPainter &paint, uint line, int startx,
   }
 
   //
-  // Draw the cursor tqshape
+  // Draw the cursor shape
   //
   transparent = false;
   if( mActiveEditor == edit_secondary )
@@ -2822,16 +2822,16 @@ int CHexBuffer::exportHtml( const SExportHtml &ex, CProgress &p )
   for( uint i=0; i < numFiles; i++ )
   {
     name.sprintf( "%08d.html", i+1 );
-    fileNames.append( TQString("%1/%2%3").tqarg(ex.package).tqarg(ex.prefix).
+    fileNames.append( TQString("%1/%2%3").arg(ex.package).arg(ex.prefix).
 		      arg(name));
   }
   name.sprintf( "%08d.html", 0 );
-  TQString tocName =TQString("%1/%2%3").tqarg(ex.package).tqarg(ex.prefix).tqarg(name);
+  TQString tocName =TQString("%1/%2%3").arg(ex.package).arg(ex.prefix).arg(name);
 
   TQString linkName;
   if( ex.symLink == true )
   {
-    linkName = TQString("%1/%2").tqarg(ex.package).tqarg("index.html");
+    linkName = TQString("%1/%2").arg(ex.package).arg("index.html");
   }
 
   while( remaining  > 0 )
@@ -2849,7 +2849,7 @@ int CHexBuffer::exportHtml( const SExportHtml &ex, CProgress &p )
 
     THIS_FPTR(printOffset)( mPrintBuf, (startLine-1)*mLayout.lineSize );
     mPrintBuf[mOffsetSize]=0;
-    offset += TQString(" %1 [%2]").tqarg(i18n("to")).tqarg(mPrintBuf);
+    offset += TQString(" %1 [%2]").arg(i18n("to")).arg(mPrintBuf);
     offsets.append(offset);
 
     if( p.expired() == true )
@@ -2981,7 +2981,7 @@ int CHexBuffer::copyText( TQByteArray &array, const SExportRange &range,
 
   uint bytePerLine = mOffsetSize + 1 + (mNumCell + 2)*mLayout.lineSize + 1;
   uint size = (stopLine - startLine + 1)*bytePerLine;
-  if( array.tqresize( size+1 ) == false )
+  if( array.resize( size+1 ) == false )
   {
     return( Err_NoMemory );
   }
@@ -3021,7 +3021,7 @@ int CHexBuffer::copySelectedData( TQByteArray &array )
   }
 
   uint size = stop - start;
-  if( array.tqresize( size ) == false )
+  if( array.resize( size ) == false )
   {
     return( Err_NoMemory );
   }
@@ -4829,7 +4829,7 @@ void CHexBuffer::printHtmlCaption( TQTextStream &os, uint captionType,
     break;
 
     case 3:
-      caption = i18n("Page %1 of %2").tqarg(curPage).tqarg(numPage);
+      caption = i18n("Page %1 of %2").arg(curPage).arg(numPage);
     break;
   }
 

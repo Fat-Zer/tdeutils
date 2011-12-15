@@ -10,7 +10,7 @@
 #include "memsensor.h"
 #include <tqfile.h>
 #include <tqglobal.h>
-#include <tqtextstream.h>
+#include <textstream.h>
 #include <tqstring.h>
 #include <tqregexp.h>
 

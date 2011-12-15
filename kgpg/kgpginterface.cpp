@@ -18,8 +18,8 @@
 #include <stdio.h>
 
 #include <tqdialog.h>
-#include <tqclipboard.h>
-#include <tqlayout.h>
+#include <clipboard.h>
+#include <layout.h>
 #include <tqregexp.h>
 #include <tqstring.h>
 #include <tqlabel.h>
@@ -36,7 +36,7 @@
 #include <kpassivepopup.h>
 #include <kiconloader.h>
 #include <kaction.h>
-#include <tqtextcodec.h>
+#include <textcodec.h>
 #include <kprocess.h>
 #include <kprocio.h>
 #include <kconfig.h>
@@ -219,9 +219,9 @@ void KgpgInterface::readdecprocess(KProcIO *p)
                                 if (anonymous)
                                         passdlgmessage=i18n("<b>No user id found</b>. Trying all secret keys.<br>");
                                 if ((step<3) && (!anonymous))
-                                        passdlgmessage=i18n("<b>Bad passphrase</b>. You have %1 tries left.<br>").tqarg(step);
+                                        passdlgmessage=i18n("<b>Bad passphrase</b>. You have %1 tries left.<br>").arg(step);
 
-                                passdlgmessage+=i18n("Enter passphrase for <b>%1</b>").tqarg(userIDs);
+                                passdlgmessage+=i18n("Enter passphrase for <b>%1</b>").arg(userIDs);
                                 int code=KPasswordDialog::getPassword(passphrase,passdlgmessage);
                                 if (code!=TQDialog::Accepted) {
                                         p->deleteLater();
@@ -395,8 +395,8 @@ void KgpgInterface::getCmdOutput(KProcess *p, char *data, int )
 			if (anonymous)
 				passdlgmessage=i18n("<b>No user id found</b>. Trying all secret keys.<br>");
 			if ((step<3) && (!anonymous))
-				passdlgmessage=i18n("<b>Bad passphrase</b>. You have %1 tries left.<br>").tqarg(step);
-			passdlgmessage+=i18n("Enter passphrase for <b>%1</b>").tqarg(userIDs);
+				passdlgmessage=i18n("<b>Bad passphrase</b>. You have %1 tries left.<br>").arg(step);
+			passdlgmessage+=i18n("Enter passphrase for <b>%1</b>").arg(userIDs);
 			int code=KPasswordDialog::getPassword(passphrase,passdlgmessage);
 			if (code!=TQDialog::Accepted)
 			{
@@ -501,8 +501,8 @@ void KgpgInterface::txtsignprocess(KProcIO *p)
               TQCString passphrase;
               TQString passdlgmessage;
               if (step<3)
-              passdlgmessage=i18n("<b>Bad passphrase</b>. You have %1 tries left.<br>").tqarg(step);
-              passdlgmessage+=i18n("Enter passphrase for <b>%1</b>").tqarg(userIDs);
+              passdlgmessage=i18n("<b>Bad passphrase</b>. You have %1 tries left.<br>").arg(step);
+              passdlgmessage+=i18n("Enter passphrase for <b>%1</b>").arg(userIDs);
               int code=KPasswordDialog::getPassword(passphrase,passdlgmessage);
 	      if (code!=TQDialog::Accepted)
                 {
@@ -588,11 +588,11 @@ TQString required;
      {
 	     TQString userName=required.section(" ",2,-1).replace(TQRegExp("<"),"&lt;");
 	     userName=checkForUtf8(userName);
-     signID=i18n("<qt>Good signature from:<br><b>%1</b><br>Key ID: %2</qt>").tqarg(userName).tqarg("0x"+required.section(" ",1,1).right(8));
+     signID=i18n("<qt>Good signature from:<br><b>%1</b><br>Key ID: %2</qt>").arg(userName).arg("0x"+required.section(" ",1,1).right(8));
      }
      if (required.startsWith("BADSIG"))
      {
-     signID=i18n("<qt><b>Bad signature</b> from:<br>%1<br>Key ID: %2<br><br><b>Text is corrupted.</b></qt>").tqarg(required.section(" ",2,-1).replace(TQRegExp("<"),"&lt;")).tqarg("0x"+required.section(" ",1,1).right(8));
+     signID=i18n("<qt><b>Bad signature</b> from:<br>%1<br>Key ID: %2<br><br><b>Text is corrupted.</b></qt>").arg(required.section(" ",2,-1).replace(TQRegExp("<"),"&lt;")).arg("0x"+required.section(" ",1,1).right(8));
      }
      if (required.startsWith("NO_PUBKEY"))
      {
@@ -628,7 +628,7 @@ Md5Widget::Md5Widget(TQWidget *parent, const char *name,KURL url):KDialogBase( p
         TQGridLayout *MyDialogLayout = new TQGridLayout( page, 1, 1, 5, 6, "MyDialogLayout");
 
         TQLabel *TextLabel1 = new TQLabel( page, "TextLabel1" );
-        TextLabel1->setText(i18n("MD5 sum for <b>%1</b> is:").tqarg(url.fileName()));
+        TextLabel1->setText(i18n("MD5 sum for <b>%1</b> is:").arg(url.fileName()));
         MyDialogLayout->addWidget( TextLabel1, 0, 0 );
 
         KLineEdit *KRestrictedLine1 = new KLineEdit(mdSum,page);
@@ -641,7 +641,7 @@ Md5Widget::Md5Widget(TQWidget *parent, const char *name,KURL url):KDialogBase( p
 
         KLed1=new KLed(TQColor(80,80,80),KLed::Off,KLed::Sunken,KLed::Circular,page,"KLed1");
         KLed1->off();
-        KLed1->tqsetSizePolicy( TQSizePolicy( (TQSizePolicy::SizeType)0, (TQSizePolicy::SizeType)0, 0, 0, KLed1->sizePolicy().hasHeightForWidth() ) );
+        KLed1->setSizePolicy( TQSizePolicy( (TQSizePolicy::SizeType)0, (TQSizePolicy::SizeType)0, 0, 0, KLed1->sizePolicy().hasHeightForWidth() ) );
         Layout4->addWidget( KLed1 );
 
         TextLabel1_2 = new TQLabel( page, "TextLabel1_2" );
@@ -653,7 +653,7 @@ Md5Widget::Md5Widget(TQWidget *parent, const char *name,KURL url):KDialogBase( p
         MyDialogLayout->addItem( spacer, 3, 0 );
 
         page->show();
-        page->resize(page->tqminimumSize());
+        page->resize(page->minimumSize());
         setMainWidget(page);
 
 
@@ -664,7 +664,7 @@ Md5Widget::~Md5Widget()
 
 void Md5Widget::slotApply()
 {
-        TQClipboard *cb = TQApplication::tqclipboard();
+        TQClipboard *cb = TQApplication::clipboard();
         TQString text;
         // Copy text from the clipboard (paste)
         text = cb->text(TQClipboard::Clipboard);
@@ -715,7 +715,7 @@ void KgpgInterface::KgpgSignFile(TQString keyID,KURL srcUrl,TQStringList Options
 void KgpgInterface::signfin(KProcess *)
 {
         if (message.find("SIG_CREATED")!=-1)
-                KMessageBox::information(0,i18n("The signature file %1 was successfully created.").tqarg(file.fileName()));
+                KMessageBox::information(0,i18n("The signature file %1 was successfully created.").arg(file.fileName()));
         else if (message.find("BAD_PASSPHRASE")!=-1)
                 KMessageBox::sorry(0,i18n("Bad passphrase, signature was not created."));
         else
@@ -740,8 +740,8 @@ void KgpgInterface::readsignprocess(KProcIO *p)
                                 TQCString passphrase;
                                 TQString passdlgmessage;
                                 if (step<3)
-                                        passdlgmessage=i18n("<b>Bad passphrase</b>. you have %1 tries left.<br>").tqarg(step);
-                                passdlgmessage+=i18n("Enter passphrase for <b>%1</b>").tqarg(userIDs);
+                                        passdlgmessage=i18n("<b>Bad passphrase</b>. you have %1 tries left.<br>").arg(step);
+                                passdlgmessage+=i18n("Enter passphrase for <b>%1</b>").arg(userIDs);
                                 int code=KPasswordDialog::getPassword(passphrase,passdlgmessage);
                                 if (code!=TQDialog::Accepted) {
                                         p->deleteLater();
@@ -799,12 +799,12 @@ TQString required;
 	signID=i18n("No signature found.");
     if (required.startsWith("GOODSIG"))
     {
-    signID=i18n("<qt>Good signature from:<br><b>%1</b><br>Key ID: %2</qt>").tqarg(required.section(" ",2,-1).replace(TQRegExp("<"),"&lt;")).tqarg("0x"+required.section(" ",1,1).right(8));
+    signID=i18n("<qt>Good signature from:<br><b>%1</b><br>Key ID: %2</qt>").arg(required.section(" ",2,-1).replace(TQRegExp("<"),"&lt;")).arg("0x"+required.section(" ",1,1).right(8));
     }
     if (required.startsWith("BADSIG"))
     {
     signID=i18n("<qt><b>BAD signature</b> from:<br> %1<br>Key id: %2<br><br>"
-                             "<b>The file is corrupted!</b></qt>").tqarg(required.section(" ",2,-1).replace(TQRegExp("<"),"&lt;")).tqarg("0x"+required.section(" ",1,1).right(8));
+                             "<b>The file is corrupted!</b></qt>").arg(required.section(" ",2,-1).replace(TQRegExp("<"),"&lt;")).arg("0x"+required.section(" ",1,1).right(8));
     }
     if (required.startsWith("NO_PUBKEY"))
     {
@@ -827,7 +827,7 @@ void KgpgInterface::verifyfin(KProcess *)
     }
     else {
     	if (KMessageBox::questionYesNo(0,i18n("<qt><b>Missing signature:</b><br>Key id: %1<br><br>"
-                                                      "Do you want to import this key from a keyserver?</qt>").tqarg(signID),file.fileName(),TQString(), i18n("Import"), i18n("Do Not Import"))==KMessageBox::Yes)
+                                                      "Do you want to import this key from a keyserver?</qt>").arg(signID),file.fileName(),TQString(), i18n("Import"), i18n("Do Not Import"))==KMessageBox::Yes)
     	emit verifyquerykey(signID);
     }
     emit verifyfinished();
@@ -908,7 +908,7 @@ void KgpgInterface::sigprocess(KProcIO *p)
                 if (required.find("passphrase.enter")!=-1) {
                         TQCString signpass;
                         int code=KPasswordDialog::getPassword(signpass,i18n("<qt>%1 Enter passphrase for <b>%2</b>:</qt>")
-                                                              .tqarg(errMessage).tqarg(userIDs));
+                                                              .arg(errMessage).arg(userIDs));
                         if (code!=TQDialog::Accepted) {
                                 signSuccess=4;  /////  aborted by user mode
                                 required=TQString();
@@ -947,7 +947,7 @@ void KgpgInterface::signover(KProcess *)
                 emit signatureFinished(signSuccess);  ////   signature successful or bad passphrase
         else {
                 KDetailedConsole *q=new KDetailedConsole(0,"sign_error",i18n("<qt>Signing key <b>%1</b> with key <b>%2</b> failed.<br>"
-                                    "Do you want to try signing the key in console mode?</qt>").tqarg(konsKeyID).tqarg(konsSignKey),output);
+                                    "Do you want to try signing the key in console mode?</qt>").arg(konsKeyID).arg(konsSignKey),output);
                 if (q->exec()==TQDialog::Accepted)
                         openSignConsole();
                 else
@@ -1079,7 +1079,7 @@ void KgpgInterface::KgpgKeyExpire(TQString keyID,TQDate date,bool unlimited)
         if (unlimited)
                 expirationDelay=0;
         else
-                expirationDelay=TQDate::tqcurrentDate().daysTo(date);
+                expirationDelay=TQDate::currentDate().daysTo(date);
         output=TQString();
         KProcIO *conprocess=new KProcIO(TQTextCodec::codecForLocale());
         *conprocess<<"gpg"<<"--no-secmem-warning"<<"--no-tty"<<"--command-fd=0"<<"--status-fd=2"<<"--utf8-strings";
@@ -1112,7 +1112,7 @@ void KgpgInterface::expprocess(KProcIO *p)
 
                 if (required.find("passphrase.enter")!=-1) {
                         TQCString signpass;
-                        int code=KPasswordDialog::getPassword(signpass,i18n("<qt>Enter passphrase for <b>%1</b>:</qt>").tqarg(userIDs));
+                        int code=KPasswordDialog::getPassword(signpass,i18n("<qt>Enter passphrase for <b>%1</b>:</qt>").arg(userIDs));
                         if (code!=TQDialog::Accepted) {
                                 expSuccess=3;  /////  aborted by user mode
                                 p->writeStdin(TQString("quit"));
@@ -1276,7 +1276,7 @@ void KgpgInterface::passprocess(KProcIO *p)
                         if (step==1) {
                                 TQCString passphrase;
                                 int code=KPasswordDialog::getPassword(passphrase,i18n("<qt>%1 Enter passphrase for <b>%2</b></qt>")
-                                                                      .tqarg(message).tqarg(userIDs));
+                                                                      .arg(message).arg(userIDs));
                                 if (code!=TQDialog::Accepted) {
                                         p->writeStdin(TQString("quit"));
                                         //				 p->closeWhenDone();
@@ -1290,7 +1290,7 @@ void KgpgInterface::passprocess(KProcIO *p)
 
                         if (step==3) {
                                 TQCString passphrase;
-                                int code=KPasswordDialog::getNewPassword(passphrase,i18n("<qt>Enter new passphrase for <b>%1</b><br>If you forget this passphrase, all your encrypted files and messages will be lost !<br></qt>").tqarg(userIDs));
+                                int code=KPasswordDialog::getNewPassword(passphrase,i18n("<qt>Enter new passphrase for <b>%1</b><br>If you forget this passphrase, all your encrypted files and messages will be lost !<br></qt>").arg(userIDs));
                                 if (code!=TQDialog::Accepted) {
 					step=4;
                                         p->writeStdin(TQString("quit"));
@@ -1517,7 +1517,7 @@ void KgpgInterface::adduidprocess(KProcIO *p)
                 if (required.find("passphrase.enter")!=-1) {
                         TQCString delpass;
                         int code=KPasswordDialog::getPassword(delpass,i18n("<qt>Enter passphrase for <b>%1</b>:</qt>")
-                                                              .tqarg(userIDs));
+                                                              .arg(userIDs));
                         if (code!=TQDialog::Accepted) {
                                 //addSuccess=false;
                                 p->writeStdin(TQString("quit"));
@@ -1639,7 +1639,7 @@ void KgpgInterface::delphotoprocess(KProcIO *p)
 
                 if (required.find("passphrase.enter")!=-1) {
                         TQCString delpass;
-                        int code=KPasswordDialog::getPassword(delpass,i18n("<qt>Enter passphrase for <b>%1</b>:</qt>").tqarg(userIDs));
+                        int code=KPasswordDialog::getPassword(delpass,i18n("<qt>Enter passphrase for <b>%1</b>:</qt>").arg(userIDs));
                         if (code!=TQDialog::Accepted) {
                                 //deleteSuccess=false;
                                 p->writeStdin(TQString("quit"));
@@ -1714,7 +1714,7 @@ void KgpgInterface::addphotoprocess(KProcIO *p)
 
                 if (required.find("passphrase.enter")!=-1) {
                         TQCString delpass;
-                        int code=KPasswordDialog::getPassword(delpass,i18n("<qt>Enter passphrase for <b>%1</b>:</qt>").tqarg(userIDs));
+                        int code=KPasswordDialog::getPassword(delpass,i18n("<qt>Enter passphrase for <b>%1</b>:</qt>").arg(userIDs));
                         if (code!=TQDialog::Accepted) {
                                 //deleteSuccess=false;
                                 p->writeStdin(TQString("quit"));
@@ -1800,7 +1800,7 @@ void KgpgInterface::revokeprocess(KProcIO *p)
 
                 if (required.find("passphrase.enter")!=-1) {
                         TQCString signpass;
-                        int code=KPasswordDialog::getPassword(signpass,i18n("<qt>Enter passphrase for <b>%1</b>:</qt>").tqarg(userIDs));
+                        int code=KPasswordDialog::getPassword(signpass,i18n("<qt>Enter passphrase for <b>%1</b>:</qt>").arg(userIDs));
                         if (code!=TQDialog::Accepted) {
                                 expSuccess=3;  /////  aborted by user mode
                                 p->writeStdin(TQString("quit"));
@@ -1928,7 +1928,7 @@ void KgpgInterface::setGpgGroupSetting(TQString name,TQStringList values, TQStri
                                 if (result2.startsWith(name) && (result2.remove(0,name.length()).stripWhiteSpace().startsWith("="))) {
 //                                        kdDebug(2100)<<"Found group: "<<name<<endl;
                                         //kdDebug(2100)<<"New values: "<<values<<endl;
-                                        result=TQString("group %1=%2").tqarg(name).tqarg(values.join(" "));
+                                        result=TQString("group %1=%2").arg(name).arg(values.join(" "));
                                         found=true;
                                 }
                         }
@@ -1937,7 +1937,7 @@ void KgpgInterface::setGpgGroupSetting(TQString name,TQStringList values, TQStri
                 }
                 qfile.close();
                 if (!found)
-                        textToWrite+="\n"+TQString("group %1=%2").tqarg(name).tqarg(values.join(" "));
+                        textToWrite+="\n"+TQString("group %1=%2").arg(name).arg(values.join(" "));
 
                 if (qfile.open(IO_WriteOnly)) {
                         TQTextStream t( &qfile);

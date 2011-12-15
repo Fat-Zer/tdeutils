@@ -72,7 +72,7 @@ KJotsMain::KJotsMain(const char* name)
     // the subject list
     subjectList = new KListView(splitter, "subjectList");
     subjectList->setRootIsDecorated(true);
-    subjectList->tqsetSizePolicy(TQSizePolicy(TQSizePolicy::Preferred, TQSizePolicy::Expanding));
+    subjectList->setSizePolicy(TQSizePolicy(TQSizePolicy::Preferred, TQSizePolicy::Expanding));
     subjectList->setMinimumWidth(subjectList->fontMetrics().maxWidth() * 10 + 5);
     subjectList->addColumn(i18n("Pages"));
     subjectList->setFullWidth(true);
@@ -101,7 +101,7 @@ KJotsMain::KJotsMain(const char* name)
     TQVBoxLayout *bookGrid = new TQVBoxLayout(f_main, KDialog::marginHint(), KDialog::spacingHint());
     bookGrid->addWidget(splitter, 0, 0);
     bookGrid->setMargin(0);
-    splitter->tqsetSizePolicy(TQSizePolicy(TQSizePolicy::Expanding, TQSizePolicy::Expanding, 2, 1));
+    splitter->setSizePolicy(TQSizePolicy(TQSizePolicy::Expanding, TQSizePolicy::Expanding, 2, 1));
 
     // create actions
     actions[ACTION_NEXT_BOOK] = new KAction(i18n("Next Book"), TQString(), CTRL + Key_D, TQT_TQOBJECT(this),
@@ -316,7 +316,7 @@ void KJotsMain::deleteBook()
         return;
 
     TQString msg = i18n("<qt>Are you sure you want to delete the <strong>%1</strong> book?</qt>");
-    int result = KMessageBox::warningContinueCancel(tqtopLevelWidget(), msg.tqarg(b->subject()), i18n("Delete Book"),KStdGuiItem::del());
+    int result = KMessageBox::warningContinueCancel(topLevelWidget(), msg.arg(b->subject()), i18n("Delete Book"),KStdGuiItem::del());
 
     if (result!=KMessageBox::Continue)
         return;
@@ -358,9 +358,9 @@ void KJotsMain::deleteEntry()
     KJotsPage* cur = currentPage();
 
     if (!cur ||
-        KMessageBox::warningContinueCancel(tqtopLevelWidget(),
+        KMessageBox::warningContinueCancel(topLevelWidget(),
                                   i18n("<qt>Are you sure you want to delete the <strong>%1</strong> page?</qt>")
-                                  .tqarg(cur->subject()),
+                                  .arg(cur->subject()),
                                   i18n("Delete Page"),KStdGuiItem::del()) != KMessageBox::Continue)
     {
         return;
@@ -493,7 +493,7 @@ void KJotsMain::saveBookToFile(bool plainText)
         }
 
         if (!KIO::NetAccess::exists(res.URLs[0], true, this) ||
-            KMessageBox::warningYesNo(this, "<qt>" + i18n("The file <strong>%1</strong> already exists. Do you wish to overwrite it?").tqarg(res.URLs[0].prettyURL()) + "</qt>", i18n("File Exists"), i18n("Overwrite"), KStdGuiItem::cancel()) == KMessageBox::Yes)
+            KMessageBox::warningYesNo(this, "<qt>" + i18n("The file <strong>%1</strong> already exists. Do you wish to overwrite it?").arg(res.URLs[0].prettyURL()) + "</qt>", i18n("File Exists"), i18n("Overwrite"), KStdGuiItem::cancel()) == KMessageBox::Yes)
         {
             tryAgain = false;
         }
@@ -534,7 +534,7 @@ void KJotsMain::savePageToFile(bool plainText)
         }
 
         if (!KIO::NetAccess::exists(res.URLs[0], true, this) ||
-            KMessageBox::warningYesNo(this, "<qt>" + i18n("The file <strong>%1</strong> already exists. Do you wish to overwrite it?").tqarg(res.URLs[0].prettyURL()) + "</qt>", i18n("File Exists"), i18n("Overwrite"), KStdGuiItem::cancel()) == KMessageBox::Yes)
+            KMessageBox::warningYesNo(this, "<qt>" + i18n("The file <strong>%1</strong> already exists. Do you wish to overwrite it?").arg(res.URLs[0].prettyURL()) + "</qt>", i18n("File Exists"), i18n("Overwrite"), KStdGuiItem::cancel()) == KMessageBox::Yes)
         {
             tryAgain = false;
         }
@@ -573,7 +573,7 @@ void KJotsMain::slotQuit()
 
 void KJotsMain::insertDate()
 {
-  me_text->insert(KGlobal::locale()->formatDateTime(TQDateTime::tqcurrentDateTime(), true) + " ");
+  me_text->insert(KGlobal::locale()->formatDateTime(TQDateTime::currentDateTime(), true) + " ");
 }
 
 void KJotsMain::updateMenu()

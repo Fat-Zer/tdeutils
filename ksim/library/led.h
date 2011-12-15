@@ -88,7 +88,7 @@ namespace KSim
        */
       Type type() const;
       /**
-       * Force the Led to tqrepaint its state
+       * Force the Led to repaint its state
        */
       void update();
 
@@ -150,7 +150,7 @@ namespace KSim
       /**
        * reimplemented for internal reasons
        */
-      virtual TQSize tqsizeHint() const;
+      virtual TQSize sizeHint() const;
 
     public slots:
       /**

@@ -42,7 +42,7 @@ namespace KSim
 
       ~PanelExtension();
 
-      TQSize tqsizeHint( Position, TQSize maxSize ) const;
+      TQSize sizeHint( Position, TQSize maxSize ) const;
       void resizeEvent(TQResizeEvent *);
       Position preferedPosition() const;
 

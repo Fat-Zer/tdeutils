@@ -34,7 +34,7 @@
 #include <tqhbuttongroup.h>
 #include <tqlabel.h>
 #include <tqradiobutton.h>
-#include <tqlayout.h>
+#include <layout.h>
 
 #include <klocale.h>
 #include <kglobal.h>
@@ -63,24 +63,24 @@ ExtractionDialog::ExtractionDialog( TQWidget *parent, const char *name,
 {
 	if ( !archiveName.isNull() )
 	{
-		setCaption( i18n( "Extract Files From %1" ).tqarg( archiveName ) );
+		setCaption( i18n( "Extract Files From %1" ).arg( archiveName ) );
 	}
 
 	TQVBox *vbox = makeVBoxMainWidget();
 
 	TQHBox *header = new TQHBox( vbox );
-	header->tqlayout()->setSpacing( 10 );
+	header->layout()->setSpacing( 10 );
 
 	TQLabel *icon = new TQLabel( header );
 	icon->setPixmap( DesktopIcon( "ark_extract" ) );
-	icon->tqsetSizePolicy( TQSizePolicy::Fixed, TQSizePolicy::Minimum );
+	icon->setSizePolicy( TQSizePolicy::Fixed, TQSizePolicy::Minimum );
 
 	if ( enableSelected )
 	{
 		TQVBox *whichFiles = new TQVBox( header );
-		whichFiles->tqlayout()->setSpacing( 6 );
+		whichFiles->layout()->setSpacing( 6 );
 		new TQLabel( TQString( "<qt><b><font size=\"+1\">%1</font></b></qt>" )
-		            .tqarg( i18n( "Extract:" ) ), whichFiles );
+		            .arg( i18n( "Extract:" ) ), whichFiles );
 		TQHButtonGroup *filesGroup = new TQHButtonGroup( whichFiles );
 		m_selectedButton = new TQRadioButton( i18n( "Selected files only" ), filesGroup );
 		m_allButton      = new TQRadioButton( i18n( "All files" ), filesGroup );
@@ -90,13 +90,13 @@ ExtractionDialog::ExtractionDialog( TQWidget *parent, const char *name,
 	else
 	{
 		new TQLabel( TQString( "<qt><b><font size=\"+2\">%1</font></b></qt>" )
-		            .tqarg( i18n( "Extract all files" ) ), header );
+		            .arg( i18n( "Extract all files" ) ), header );
 	}
 
 	TQHBox *destDirBox = new TQHBox( vbox );
 
 	TQLabel *destFolderLabel = new TQLabel( i18n( "Destination folder: " ), destDirBox );
-	destFolderLabel->tqsetSizePolicy( TQSizePolicy::Minimum, TQSizePolicy::Fixed );
+	destFolderLabel->setSizePolicy( TQSizePolicy::Minimum, TQSizePolicy::Fixed );
 
 	KHistoryCombo *combobox = new KHistoryCombo( true, destDirBox );
 	combobox->setPixmapProvider( new KURLPixmapProvider );
@@ -111,7 +111,7 @@ ExtractionDialog::ExtractionDialog( TQWidget *parent, const char *name,
 	combobox->setInsertionPolicy( TQComboBox::AtTop );
 
 	m_urlRequester = new KURLRequester( combobox, destDirBox );
-	m_urlRequester->tqsetSizePolicy( TQSizePolicy::Expanding, TQSizePolicy::Fixed );
+	m_urlRequester->setSizePolicy( TQSizePolicy::Expanding, TQSizePolicy::Fixed );
 	m_urlRequester->setMode( KFile::Directory );
 
 	if (!defaultExtractionDir.prettyURL().isEmpty() )
@@ -145,7 +145,7 @@ void ExtractionDialog::accept()
 		TQFileInfo fi( p.path() );
 		if ( !fi.isDir() && !fi.exists() )
 		{
-			TQString ltext = i18n( "Create folder %1?").tqarg(p.path());
+			TQString ltext = i18n( "Create folder %1?").arg(p.path());
 			int createDir =  KMessageBox::questionYesNo( this, ltext, i18n( "Missing Folder" ) , i18n("Create Folder"), i18n("Do Not Create"));
 			if( createDir == 4 )
 			{

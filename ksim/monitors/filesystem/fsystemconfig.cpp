@@ -29,7 +29,7 @@
 #include <kdebug.h>
 
 #include <tqcheckbox.h>
-#include <tqlayout.h>
+#include <layout.h>
 #include <tqtooltip.h>
 #include <tqlabel.h>
 #include <tqwhatsthis.h>
@@ -71,7 +71,7 @@ FsystemConfig::FsystemConfig(KSim::PluginObject *parent, const char *name)
 
   m_intervalLabel = new TQLabel(this);
   m_intervalLabel->setText( i18n("Update interval:"));
-  m_intervalLabel->tqsetSizePolicy(TQSizePolicy(TQSizePolicy::Fixed,
+  m_intervalLabel->setSizePolicy(TQSizePolicy(TQSizePolicy::Fixed,
      TQSizePolicy::Fixed));
   m_mainLayout->addMultiCellWidget(m_intervalLabel, 3, 3, 0, 0);
 
@@ -82,7 +82,7 @@ FsystemConfig::FsystemConfig(KSim::PluginObject *parent, const char *name)
 
   TQLabel *intervalLabel = new TQLabel(this);
   intervalLabel->setText(i18n("seconds"));
-  intervalLabel->tqsetSizePolicy(TQSizePolicy(TQSizePolicy::Fixed,
+  intervalLabel->setSizePolicy(TQSizePolicy(TQSizePolicy::Fixed,
      TQSizePolicy::Fixed));
   m_mainLayout->addMultiCellWidget(intervalLabel, 3, 3, 2, 2);
 

@@ -74,7 +74,7 @@ namespace KSim
 
       TQString returnString;
       returnString.setLatin1(typeNames[type]);
-      return incSlash ? returnString + TQString::tqfromLatin1("/") : returnString;
+      return incSlash ? returnString + TQString::fromLatin1("/") : returnString;
     }
   }
 }

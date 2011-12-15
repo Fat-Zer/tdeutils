@@ -98,7 +98,7 @@ static const char KEBCDIC1047CharCodecName[] = "EBCDIC 1047";
 
 bool KEBCDIC1047CharCodec::encode( char *D, const TQChar &C ) const
 {
-  int I = C.tqunicode();
+  int I = C.unicode();
   // not in range?
   if( 0x00FF < I )
     return false;
@@ -119,6 +119,6 @@ const TQString& KEBCDIC1047CharCodec::name() const
 
 const TQString& KEBCDIC1047CharCodec::codecName()
 {
-  static const TQString Name( TQString::tqfromLatin1(KEBCDIC1047CharCodecName) );
+  static const TQString Name( TQString::fromLatin1(KEBCDIC1047CharCodecName) );
   return Name;
 }

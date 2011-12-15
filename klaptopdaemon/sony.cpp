@@ -43,7 +43,7 @@
 #include <krichtextlabel.h>
 
 // other TQt headers:
-#include <tqlayout.h>
+#include <layout.h>
 #include <tqlabel.h>
 #include <tqcheckbox.h>
 #include <tqhbox.h>
@@ -99,7 +99,7 @@ SonyConfig::SonyConfig(TQWidget * parent, const char *name)
     
 
     top_layout->addStretch(1);
-    top_layout->addWidget( new TQLabel( i18n("Version: %1").tqarg(LAPTOP_VERSION), this), 0, TQt::AlignRight );
+    top_layout->addWidget( new TQLabel( i18n("Version: %1").arg(LAPTOP_VERSION), this), 0, TQt::AlignRight );
 
 
     load();      

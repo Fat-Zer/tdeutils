@@ -25,7 +25,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-#include <tqlayout.h>
+#include <layout.h>
 #include <tqtimer.h>
 #include <tqpaintdevicemetrics.h>
 #include <tqpainter.h>
@@ -84,7 +84,7 @@ TopLevel::TopLevel (TQWidget *, const char *name)
   setupEditWidget();
 
   if (!initialGeometrySet())
-    resize( TQSize(550, 400).expandedTo(tqminimumSizeHint()));
+    resize( TQSize(550, 400).expandedTo(minimumSizeHint()));
   setupGUI(ToolBar | Keys | StatusBar | Create);
   setAutoSaveSettings();
 
@@ -265,7 +265,7 @@ void TopLevel::saveProperties(KConfig* config)
   {
     TQString name = m_url.url();
     if (name.isEmpty())
-       name = TQString("kedit%1-%2").tqarg(getpid()).tqarg((long)this);
+       name = TQString("kedit%1-%2").arg(getpid()).arg((long)this);
     TQString tmplocation = kapp->tempSaveName(m_url.url());
     config->writeEntry("saved_to",tmplocation);
     saveFile(tmplocation, false, m_url.fileEncoding());
@@ -341,7 +341,7 @@ void TopLevel::insertDate(){
   int line, column;
 
   TQString string;
-  TQDate dt = TQDate::tqcurrentDate();
+  TQDate dt = TQDate::currentDate();
   string = KGlobal::locale()->formatDate(dt);
 
   eframe->getCursorPosition(&line,&column);
@@ -418,7 +418,7 @@ void TopLevel::spell_started( KSpell *)
 void TopLevel::spell_progress (unsigned int percent)
 {
   TQString s;
-  s = i18n("Spellcheck:  %1% complete").tqarg(percent);
+  s = i18n("Spellcheck:  %1% complete").arg(percent);
 
   statusBar()->changeItem (s, ID_GENERAL);
 }
@@ -699,7 +699,7 @@ void TopLevel::file_save()
 
   if ( result == KEDIT_OK ){
      TQString string;
-     string = i18n("Wrote: %1").tqarg(m_caption);
+     string = i18n("Wrote: %1").arg(m_caption);
      setGeneralStatusField(string);
   }
 }
@@ -732,7 +732,7 @@ void TopLevel::file_save_as()
      {
         int result = KMessageBox::warningContinueCancel( this,
            i18n( "A file named \"%1\" already exists. "
-                 "Are you sure you want to overwrite it?" ).tqarg( u.prettyURL() ),
+                 "Are you sure you want to overwrite it?" ).arg( u.prettyURL() ),
            i18n( "Overwrite File?" ),
            i18n( "Overwrite" ) );
 
@@ -748,7 +748,7 @@ void TopLevel::file_save_as()
     {
       m_url = u;
       setFileCaption();
-      TQString string = i18n("Saved as: %1").tqarg(m_caption);
+      TQString string = i18n("Saved as: %1").arg(m_caption);
       setGeneralStatusField(string);
       recent->addURL( u );
     }
@@ -872,7 +872,7 @@ void TopLevel::setFileCaption()
      }
      TQString encoding = m_url.fileEncoding();
      if (!encoding.isEmpty())
-        m_caption += TQString(" (%1)").tqarg(encoding);
+        m_caption += TQString(" (%1)").arg(encoding);
   }
   setCaption(m_caption, eframe->isModified());
 }
@@ -887,8 +887,8 @@ void TopLevel::statusbar_slot(){
   TQString linenumber;
 
   linenumber = i18n("Line: %1 Col: %2")
-		     .tqarg(eframe->currentLine() + 1)
-		     .tqarg(eframe->currentColumn() +1);
+		     .arg(eframe->currentLine() + 1)
+		     .arg(eframe->currentColumn() +1);
 
   statusBar()->changeItem(linenumber,ID_LINE_COLUMN);
 }
@@ -896,8 +896,8 @@ void TopLevel::statusbar_slot(){
 void TopLevel::print()
 {
     bool aborted = false;
-    TQString headerLeft = i18n("Date: %1").tqarg(KGlobal::locale()->formatDate(TQDate::tqcurrentDate(),true));
-    TQString headerMid = i18n("File: %1").tqarg(m_caption);
+    TQString headerLeft = i18n("Date: %1").arg(KGlobal::locale()->formatDate(TQDate::currentDate(),true));
+    TQString headerMid = i18n("File: %1").arg(m_caption);
     TQString headerRight;
 
     TQFont printFont = eframe->font();
@@ -908,7 +908,7 @@ void TopLevel::print()
     TQFontMetrics headerFontMetrics(headerFont);
 
     KPrinter *printer = new KPrinter;
-    if(printer->setup(this, i18n("Print %1").tqarg(m_caption))) {
+    if(printer->setup(this, i18n("Print %1").arg(m_caption))) {
         // set up KPrinter
         printer->setFullPage(false);
         printer->setCreator("KEdit");
@@ -932,7 +932,7 @@ void TopLevel::print()
 
 
         while(true) {
-           headerRight = TQString("#%1").tqarg(page);
+           headerRight = TQString("#%1").arg(page);
            dy = headerFontMetrics.lineSpacing();
            TQRect body( 0, dy*2,  metrics.width(), metrics.height()-dy*2);
 
@@ -1125,7 +1125,7 @@ void TopLevel::openURL( const KURL& _url, int _mode )
     if ( !_url.isValid() )
     {
         TQString string;
-        string = i18n( "Malformed URL\n%1").tqarg(_url.url());
+        string = i18n( "Malformed URL\n%1").arg(_url.url());
 
         KMessageBox::sorry(this, string);
         return;
@@ -1204,7 +1204,7 @@ void TopLevel::timer_slot(){
 
 void TopLevel::set_colors()
 {
-  TQPalette mypalette = TQPalette((eframe->tqpalette()));
+  TQPalette mypalette = TQPalette((eframe->palette()));
 
   TQColorGroup ncgrp( mypalette.active() );
 

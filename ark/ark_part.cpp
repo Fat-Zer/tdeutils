@@ -294,7 +294,7 @@ bool ArkPart::closeURL()
 
   int res = KMessageBox::warningYesNoCancel( widget(),
           i18n( "The archive \"%1\" has been modified.\n"
-                "Do you want to save it?" ).tqarg( docName ),
+                "Do you want to save it?" ).arg( docName ),
           i18n( "Save Archive?" ), KStdGuiItem::save(), KStdGuiItem::discard() );
 
   switch ( res )
@@ -320,7 +320,7 @@ void ArkPart::transferStarted( KIO::Job *job )
 {
     m_job = job;
 
-    m_bar->slotSetBusy( i18n( "Downloading %1..." ).tqarg( m_url.prettyURL() ),
+    m_bar->slotSetBusy( i18n( "Downloading %1..." ).arg( m_url.prettyURL() ),
                         (job != 0), (job != 0) );
 
     if ( job )
@@ -411,12 +411,12 @@ void ArkStatusBarExtension::setupStatusBar()
 
     m_pStatusLabelTotal = new KSqueezedTextLabel( statusBar(), "StatusLabelTotal" );
     m_pStatusLabelTotal->setFrameStyle( TQFrame::NoFrame );
-    m_pStatusLabelTotal->tqsetAlignment( AlignRight );
+    m_pStatusLabelTotal->setAlignment( AlignRight );
     m_pStatusLabelTotal->setText( i18n( "Total: 0 files" ) );
 
     m_pStatusLabelSelect = new TQLabel( statusBar(), "StatusLabelSelect" );
     m_pStatusLabelSelect->setFrameStyle( TQFrame::NoFrame );
-    m_pStatusLabelSelect->tqsetAlignment( AlignLeft );
+    m_pStatusLabelSelect->setAlignment( AlignLeft );
     m_pStatusLabelSelect->setText(i18n( "0 files selected" ) );
 
     m_cancelButton = new KPushButton( SmallIcon( "cancel" ), TQString(), statusBar(), "CancelButton" );
@@ -454,7 +454,7 @@ void ArkStatusBarExtension::slotSetBusy( const TQString & text, bool showCancelB
     {
         m_pBusyText = new TQLabel( statusBar() );
 
-        m_pBusyText->tqsetAlignment( AlignLeft );
+        m_pBusyText->setAlignment( AlignLeft );
         m_pBusyText->setFrameStyle( TQFrame::Panel | TQFrame::Raised );
     }
 

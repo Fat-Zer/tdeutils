@@ -24,7 +24,7 @@
 
 namespace KHE {
 
-/**@short the logical tqlayout of a plain buffer view
+/**@short the logical layout of a plain buffer view
   *
   * Given the values for
   * * length of the buffer,
@@ -38,7 +38,7 @@ namespace KHE {
   * * final position in this line, and
   * * the total number of lines (is final line +1 or 0)
   *
-  * This tqlayout sees the buffer as a continous stream of byte,
+  * This layout sees the buffer as a continous stream of byte,
   * thus uses each line after the start from the begin to the end.
   *
   * If the buffer is empty the end coord will be set one pos left to the start coord
@@ -75,7 +75,7 @@ class KBufferLayout
     /** returns the coord of the end */
     KBufferCoord final() const;
 
-    /** tells how much lines this tqlayout needs (incl. blank leading lines due to StartOffset) */
+    /** tells how much lines this layout needs (incl. blank leading lines due to StartOffset) */
     int noOfLines() const;
 
 

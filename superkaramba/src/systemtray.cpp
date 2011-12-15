@@ -29,7 +29,7 @@
 
 #include <tqpopupmenu.h>
 #include <tqdragobject.h>
-#include <tqlayout.h>
+#include <layout.h>
 #include <tqstringlist.h>
 #include <tqpixmap.h>
 
@@ -190,7 +190,7 @@ void Systemtray::layoutSystray()
     }
 
     count++;
-    emb->tqrepaint();
+    emb->repaint();
   }
 }
 

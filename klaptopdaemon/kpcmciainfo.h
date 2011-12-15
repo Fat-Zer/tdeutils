@@ -52,8 +52,8 @@ public slots:
   void slotClose();
   void update();
   void updateCard(int num);
-  void slotResettqStatus();
-  void slotTabSettqStatus(const TQString& text);
+  void slotResetStatus();
+  void slotTabSetStatus(const TQString& text);
 
 signals:
   void updateNow();

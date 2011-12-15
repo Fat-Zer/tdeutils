@@ -18,7 +18,7 @@
  */
 
 #include <tqpushbutton.h>
-#include <tqlayout.h>
+#include <layout.h>
 #include <tqcursor.h>
 
 #include <klistview.h>
@@ -56,29 +56,29 @@ NetConfig::NetConfig(KSim::PluginObject *parent, const char *name)
      TQT_SLOT(modifyItem(TQListViewItem *)));
   mainLayout->addWidget(usingBox);
 
-  tqlayout = new TQHBoxLayout;
-  tqlayout->setSpacing(6);
+  layout = new TQHBoxLayout;
+  layout->setSpacing(6);
 
   TQSpacerItem *spacer = new TQSpacerItem(20, 20,
      TQSizePolicy::Expanding, TQSizePolicy::Minimum);
-  tqlayout->addItem(spacer);
+  layout->addItem(spacer);
 
   insertButton = new TQPushButton(this);
   insertButton->setText(i18n("Add..."));
   connect(insertButton, TQT_SIGNAL(clicked()), TQT_SLOT(showNetDialog()));
-  tqlayout->addWidget(insertButton);
+  layout->addWidget(insertButton);
 
   modifyButton = new TQPushButton(this);
   modifyButton->setText(i18n("Modify..."));
   connect(modifyButton, TQT_SIGNAL(clicked()), TQT_SLOT(modifyCurrent()));
-  tqlayout->addWidget(modifyButton);
+  layout->addWidget(modifyButton);
 
   removeButton = new TQPushButton(this);
   removeButton->setText(i18n("Remove"));
   connect(removeButton, TQT_SIGNAL(clicked()), TQT_SLOT(removeCurrent()));
-  tqlayout->addWidget(removeButton);
+  layout->addWidget(removeButton);
 
-  mainLayout->addLayout(tqlayout);
+  mainLayout->addLayout(layout);
 }
 
 NetConfig::~NetConfig()
@@ -144,8 +144,8 @@ void NetConfig::menu(KListView *, TQListViewItem *item, const TQPoint &)
 
   if (item) {
     aboutMenu->insertItem(i18n("&Add Net Device"), 3);
-    aboutMenu->insertItem(i18n("&Modify '%1'").tqarg(item->text(0)), 2);
-    aboutMenu->insertItem(i18n("&Remove '%1'").tqarg(item->text(0)), 1);
+    aboutMenu->insertItem(i18n("&Modify '%1'").arg(item->text(0)), 2);
+    aboutMenu->insertItem(i18n("&Remove '%1'").arg(item->text(0)), 1);
   }
   else {
     aboutMenu->insertItem(i18n("&Add Net Device"), 3);
@@ -217,7 +217,7 @@ void NetConfig::removeItem(TQListViewItem *item)
     return;
 
   int result = KMessageBox::warningContinueCancel(0, i18n("Are you sure you "
-     "want to remove the net interface '%1'?").tqarg(item->text(0)), TQString(), KStdGuiItem::del());
+     "want to remove the net interface '%1'?").arg(item->text(0)), TQString(), KStdGuiItem::del());
 
   if (result == KMessageBox::Cancel)
     return;

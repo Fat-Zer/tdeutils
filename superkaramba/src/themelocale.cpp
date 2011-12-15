@@ -157,7 +157,7 @@ void ThemeLocale::setLanguage(const TQStringList &languages)
       ++it)
   {
     TQString file =
-        TQString("locale/%1/LC_MESSAGES/%2.mo").tqarg(*it).tqarg(m_theme->mo());
+        TQString("locale/%1/LC_MESSAGES/%2.mo").arg(*it).arg(m_theme->mo());
 
     if(m_theme->fileExists(file))
     {

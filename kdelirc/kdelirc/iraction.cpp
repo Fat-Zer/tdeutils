@@ -97,7 +97,7 @@ const TQString IRAction::function() const
 		if(theObject.isEmpty())
 			return i18n("Exit mode");
 		else
-			return i18n("Switch to %1").tqarg(theObject);
+			return i18n("Switch to %1").arg(theObject);
 	else
 		if(theObject.isEmpty())
 			return i18n("Just start");

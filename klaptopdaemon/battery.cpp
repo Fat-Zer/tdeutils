@@ -39,7 +39,7 @@
 #include <krichtextlabel.h>
 
 // other TQt headers:
-#include <tqlayout.h>
+#include <layout.h>
 #include <tqlabel.h>
 #include <tqcheckbox.h>
 #include <tqhbox.h>
@@ -112,10 +112,10 @@ BatteryConfig::BatteryConfig (TQWidget * parent, const char *name)
 
       // group box to hold the icons together
       TQVGroupBox* icons_groupbox = new TQVGroupBox( i18n("Select Battery Icons"), this );
-      icons_groupbox->tqlayout()->setSpacing( KDialog::spacingHint() );
+      icons_groupbox->layout()->setSpacing( KDialog::spacingHint() );
       top_layout->addWidget( icons_groupbox, 0, TQt::AlignLeft );
 
-      // tqlayout to hold the icons inside the groupbox
+      // layout to hold the icons inside the groupbox
       TQGrid *icon_grid = new TQGrid( 3 /*cols*/, icons_groupbox );
       icon_grid->setSpacing( KDialog::spacingHint() );
 

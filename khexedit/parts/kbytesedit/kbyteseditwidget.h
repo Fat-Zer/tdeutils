@@ -86,7 +86,7 @@ class KBytesEditWidget : public TQWidget, public KHE::BytesEditInterface,
     virtual bool isOverwriteOnly() const;
     virtual bool isReadOnly() const;
     virtual bool isModified() const;
-    /** tqrepaint the indizes from i1 to i2 */
+    /** repaint the indizes from i1 to i2 */
     virtual void repaintRange( int i1, int i2 );
 
   public: // cursor interface
@@ -94,7 +94,7 @@ class KBytesEditWidget : public TQWidget, public KHE::BytesEditInterface,
     virtual void setCursorPosition( int Index );
 //     virtual bool tabChangesFocus() const;
 
-  public: // tqlayout interface ??
+  public: // layout interface ??
     /** sets the resizestyle for the value column. Default is KHE::FullSizeUsage */
     virtual void setResizeStyle( KResizeStyle Style );
     /** sets the number of bytes per line, switching the resize style to KHE::NoResize */

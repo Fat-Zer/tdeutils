@@ -23,9 +23,9 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #include <math.h>
 
-#include <tqlayout.h>
+#include <layout.h>
 #include <tqpainter.h>
-#include <tqclipboard.h>
+#include <clipboard.h>
 #include <tqvbox.h>
 #include <tqspinbox.h>
 #include <tqlabel.h>
@@ -66,7 +66,7 @@ CharSelectApplet::CharSelectApplet(const TQString& configFile, Type type, int ac
     cell_height = c->readNumEntry("CellHeight", cell_height);
     TQString characters = c->readEntry("Characters", "������ߩ��");
 
-    // setup tqlayout
+    // setup layout
     TQHBoxLayout *_layout = new TQHBoxLayout(this);
     _layout->setAutoAdd(true);
 
@@ -251,16 +251,16 @@ void CharTable::paintCell(TQPainter* p, int row, int col)
 
     // draw background
     if (active) {
-	p->setBrush(TQBrush(tqcolorGroup().highlight()));
+	p->setBrush(TQBrush(colorGroup().highlight()));
 	p->setPen(NoPen);
 	p->drawRect(0, 0, w, h);
-	p->setPen(tqcolorGroup().highlightedText());
+	p->setPen(colorGroup().highlightedText());
     }
     else {
-	p->setBrush(TQBrush(tqcolorGroup().base()));
+	p->setBrush(TQBrush(colorGroup().base()));
 	p->setPen(NoPen);
 	p->drawRect(0, 0, w, h);
-	p->setPen(tqcolorGroup().text());
+	p->setPen(colorGroup().text());
     }
 
     // set font
@@ -310,7 +310,7 @@ void CharTable::selectCell(int row, int col)
     repaintCell(oldRow, oldCol);
     repaintCell(_activeRow, _activeCol);
 
-    TQClipboard *cb = TQApplication::tqclipboard();
+    TQClipboard *cb = TQApplication::clipboard();
     TQObject::disconnect( cb, TQT_SIGNAL(dataChanged()), this, TQT_SLOT(clearCell()) );
     TQString text = TQString(_map[col + row * _cols]);
     bool oldMode = cb->selectionModeEnabled();
@@ -332,7 +332,7 @@ void CharTable::clearCell()
 
     repaintCell(oldRow, oldCol);
     
-    TQObject::disconnect( TQApplication::tqclipboard(), TQT_SIGNAL(dataChanged()), this, TQT_SLOT(clearCell()) );
+    TQObject::disconnect( TQApplication::clipboard(), TQT_SIGNAL(dataChanged()), this, TQT_SLOT(clearCell()) );
 }
 
 

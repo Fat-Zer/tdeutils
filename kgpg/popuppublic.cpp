@@ -16,7 +16,7 @@
  ***************************************************************************/
 
 ////////////////////////////////////////////////////////   code  for choosing a public key from a list for encryption
-#include <tqlayout.h>
+#include <layout.h>
 #include <tqpushbutton.h>
 #include <tqptrlist.h>
 #include <tqwhatsthis.h>
@@ -26,7 +26,7 @@
 #include <tqcheckbox.h>
 #include <tqhbuttongroup.h>
 #include <tqtoolbutton.h>
-#include <tqtextcodec.h>
+#include <textcodec.h>
 
 #include <tdeversion.h>
 #include <klistview.h>
@@ -70,14 +70,14 @@ def=isDefault;
 }
 
 
-void UpdateViewItem2::paintCell(TQPainter *p, const TQColorGroup &cg,int column, int width, int tqalignment)
+void UpdateViewItem2::paintCell(TQPainter *p, const TQColorGroup &cg,int column, int width, int alignment)
 {
         if ((def) && (column<2)) {
                 TQFont font(p->font());
                 font.setBold(true);
                 p->setFont(font);
         }
-        KListViewItem::paintCell(p, cg, column, width, tqalignment);
+        KListViewItem::paintCell(p, cg, column, width, alignment);
 }
 
 TQString UpdateViewItem2 :: key(int c,bool ) const
@@ -106,7 +106,7 @@ KDialogBase( Plain, i18n("Select Public Key"), Details | Ok | Cancel, Ok, parent
         keySingle=loader->loadIcon("kgpg_key1",KIcon::Small,20);
 	keyGroup=loader->loadIcon("kgpg_key3",KIcon::Small,20);
 
-        if (filemode) setCaption(i18n("Select Public Key for %1").tqarg(sfile));
+        if (filemode) setCaption(i18n("Select Public Key for %1").arg(sfile));
         fmode=filemode;
 
 	TQHButtonGroup *hBar=new TQHButtonGroup(page);
@@ -176,7 +176,7 @@ KDialogBase( Plain, i18n("Select Public Key"), Details | Ok | Cancel, Ok, parent
                         (CBshred,i18n("<b>Shred source file</b>: permanently remove source file. No recovery will be possible"));
 
 		TQString shredWhatsThis = i18n( "<qt><b>Shred source file:</b><br /><p>Checking this option will shred (overwrite several times before erasing) the files you have encrypted. This way, it is almost impossible that the source file is recovered.</p><p><b>But you must be aware that this is not secure</b> on all file systems, and that parts of the file may have been saved in a temporary file or in the spooler of your printer if you previously opened it in an editor or tried to print it. Only works on files (not on folders).</p></qt>");
-		  KActiveLabel *warn= new KActiveLabel( i18n("<a href=\"whatsthis:%1\">Read this before using shredding</a>").tqarg(shredWhatsThis),parentBox );
+		  KActiveLabel *warn= new KActiveLabel( i18n("<a href=\"whatsthis:%1\">Read this before using shredding</a>").arg(shredWhatsThis),parentBox );
 		  shredBox->addWidget(CBshred);
 		  shredBox->addWidget(warn);
         }
@@ -431,7 +431,7 @@ void popupPublic::slotprocread(KProcIO *p)
 				bool isDefaultKey=false;
                                 if (id.right(8)==defaultKey) isDefaultKey=true;
                                         UpdateViewItem2 *item=new UpdateViewItem2(keysList,keyname,keymail,id,isDefaultKey);
-					//KListViewItem *sub= new KListViewItem(item,i18n("ID: %1, trust: %2, validity: %3").tqarg(id).tqarg(tr).tqarg(val));
+					//KListViewItem *sub= new KListViewItem(item,i18n("ID: %1, trust: %2, validity: %3").arg(id).arg(tr).arg(val));
                                         //sub->setSelectable(false);
                                         if (seclist.find(tst,0,FALSE)!=-1)
                                                 item->setPixmap(0,keyPair);

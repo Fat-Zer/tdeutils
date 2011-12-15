@@ -31,7 +31,7 @@
 #include <tqlabel.h>
 #include <kiconloader.h>
 #include <tqcheckbox.h>
-#include <tqlayout.h>
+#include <layout.h>
 #include <kactivelabel.h>
 #include <klineedit.h>
 #include <ktrader.h>
@@ -85,7 +85,7 @@ KgpgKeyInfo::KgpgKeyInfo(TQWidget *parent, const char *name,TQString sigkey):KDi
 	connect(prop->kCOwnerTrust,TQT_SIGNAL(activated (int)),this,TQT_SLOT(slotChangeTrust(int)));
 	connect(this,TQT_SIGNAL(changeMainPhoto(const TQPixmap&)),this,TQT_SLOT(slotSetPhoto(const TQPixmap&)));
 
-	//prop->setMinimumSize(prop->tqsizeHint());
+	//prop->setMinimumSize(prop->sizeHint());
 }
 
 void KgpgKeyInfo::slotDisableKey(bool isOn)
@@ -378,14 +378,14 @@ chdate->show();
 
 void KgpgKeyInfo::slotCheckDate(TQDate date)
 {
-chdate->enableButtonOK(date>=TQDate::tqcurrentDate ());
+chdate->enableButtonOK(date>=TQDate::currentDate ());
 }
 
 void KgpgKeyInfo::slotChangeDate()
 {
 KgpgInterface *KeyExpirationProcess=new KgpgInterface();
 		if (kb->isChecked())
-                KeyExpirationProcess->KgpgKeyExpire(displayedKeyID,TQDate::tqcurrentDate(),true);
+                KeyExpirationProcess->KgpgKeyExpire(displayedKeyID,TQDate::currentDate(),true);
 		else
 		KeyExpirationProcess->KgpgKeyExpire(displayedKeyID,kdt->date(),false);
                 connect(KeyExpirationProcess,TQT_SIGNAL(expirationFinished(int)),this,TQT_SLOT(slotInfoExpirationChanged(int)));
@@ -401,7 +401,7 @@ chdate->enableButtonOK(true);
 else
 {
 kdt->setEnabled(true);
-chdate->enableButtonOK(kdt->date()>=TQDate::tqcurrentDate ());
+chdate->enableButtonOK(kdt->date()>=TQDate::currentDate ());
 }
 }
 

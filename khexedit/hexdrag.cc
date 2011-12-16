@@ -75,7 +75,7 @@ const char *CHexDrag::format( int i ) const
 }
 
 
-TQByteArray CHexDrag::encodedData( const char *fmt ) const
+TQByteArray CHexDrag::tqencodedData( const char *fmt ) const
 {
   if( fmt != 0 )
   {
@@ -98,7 +98,7 @@ bool CHexDrag::canDecode( const TQMimeSource *e )
 
 bool CHexDrag::decode( const TQMimeSource *e, TQByteArray &dest )
 {
-  dest = e->encodedData(mediaString);
+  dest = e->tqencodedData(mediaString);
   return( dest.size() == 0 ? false : true );
 
   //
@@ -116,7 +116,7 @@ bool CHexDrag::decode( const TQMimeSource *e, TQByteArray &dest )
   #if 0
   if( e->provides(mediaString) == true )
   {
-    dest = e->encodedData(mediaString);
+    dest = e->tqencodedData(mediaString);
     return( true );
   }
   else

@@ -3,7 +3,7 @@
 #define SENSORSENSOR_H
 
 #include <tqstring.h>
-#include <textcodec.h>
+#include <tqtextcodec.h>
 #include <tqmap.h>
 #include <tqstringlist.h>
 #include <tqregexp.h>

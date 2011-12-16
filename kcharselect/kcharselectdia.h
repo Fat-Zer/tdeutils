@@ -8,9 +8,9 @@
 #define kcharselectdia_h
 
 
-#include <layout.h>
+#include <tqlayout.h>
 #include <tqlineedit.h>
-#include <clipboard.h>
+#include <tqclipboard.h>
 
 #include <kpushbutton.h>
 #include <kcharselect.h>

@@ -80,7 +80,7 @@ public:
   RepeatWidget( RepeatRegExp* regexp, RegExpEditorWindow* editorWindow,
               TQWidget* parent, const char* name = 0);
   void init();
-  virtual TQSize sizeHint() const;
+  virtual TQSize tqsizeHint() const;
 	virtual RegExp* regExp() const;
   virtual RegExpType type() const { return REPEAT; }
   virtual int edit();

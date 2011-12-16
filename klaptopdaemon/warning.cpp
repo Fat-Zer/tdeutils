@@ -33,7 +33,7 @@
 #include <kapplication.h>
 #include <kcombobox.h>
 
-#include <layout.h>
+#include <tqlayout.h>
 #include <tqcheckbox.h>
 #include <tqspinbox.h>
 #include <tqslider.h>
@@ -164,7 +164,7 @@ WarningConfig::WarningConfig (int t, TQWidget * parent, const char *name)
 
     if (can_brightness) {
       checkBrightness = new TQCheckBox(i18n("Panel b&rightness"), this);
-      checkBrightness->setMinimumSize(checkBrightness->sizeHint());
+      checkBrightness->setMinimumSize(checkBrightness->tqsizeHint());
       TQToolTip::add( checkBrightness, i18n( "If enabled the back panel brightness will change" ) );
       grid->addWidget(checkBrightness, curRow, 0);
       connect(checkBrightness, TQT_SIGNAL(toggled(bool)), this, TQT_SLOT(brightness_changed(bool)));
@@ -236,23 +236,23 @@ WarningConfig::WarningConfig (int t, TQWidget * parent, const char *name)
 
     TQVButtonGroup *b = new TQVButtonGroup(i18n("System State Change"), this);
     TQToolTip::add( b, i18n( "You may choose one of the following to occur when the battery gets low" ) );
-    b->layout()->setSpacing( KDialog::spacingHint() );
+    b->tqlayout()->setSpacing( KDialog::spacingHint() );
     if (can_standby) {
       checkStandby = new TQRadioButton(i18n("Standb&y"), b);
       TQToolTip::add( checkStandby, i18n( "Move the system into the standby state - a temporary lower power state" ) );
-      checkStandby->setMinimumSize(checkStandby->sizeHint());
+      checkStandby->setMinimumSize(checkStandby->tqsizeHint());
       connect(checkStandby, TQT_SIGNAL(clicked()), this, TQT_SLOT(configChanged()));
     }
     if (can_suspend) {
       checkSuspend = new TQRadioButton(i18n("&Suspend"), b);
       TQToolTip::add( checkSuspend, i18n( "Move the system into the suspend state - also known as 'save-to-ram'" ) );
-      checkSuspend->setMinimumSize(checkSuspend->sizeHint());
+      checkSuspend->setMinimumSize(checkSuspend->tqsizeHint());
       connect(checkSuspend, TQT_SIGNAL(clicked()), this, TQT_SLOT(configChanged()));
     }
     if (can_hibernate) {
       checkHibernate = new TQRadioButton(i18n("H&ibernate"), b);
       TQToolTip::add( checkHibernate, i18n( "Move the system into the hibernate state - also known as 'save-to-disk'" ) );
-      checkHibernate->setMinimumSize(checkHibernate->sizeHint());
+      checkHibernate->setMinimumSize(checkHibernate->tqsizeHint());
       connect(checkHibernate, TQT_SIGNAL(clicked()), this, TQT_SLOT(configChanged()));
     }
     // setup the logout option
@@ -276,7 +276,7 @@ WarningConfig::WarningConfig (int t, TQWidget * parent, const char *name)
     } else {
       explain = new TQLabel(i18n("This panel controls how and when you receive warnings that your battery power is about to run out"), this);
     }
-    explain->setAlignment( TQt::WordBreak );
+    explain->tqsetAlignment( TQt::WordBreak );
     grid->addMultiCellWidget(explain, curRow, curRow, 0, 1);
     ++curRow;
 
@@ -288,7 +288,7 @@ WarningConfig::WarningConfig (int t, TQWidget * parent, const char *name)
     }
     grid->setRowStretch(curRow++, 1);
 
-    grid->addWidget(new TQLabel( i18n("Version: %1").arg(LAPTOP_VERSION), this),
+    grid->addWidget(new TQLabel( i18n("Version: %1").tqarg(LAPTOP_VERSION), this),
 		    curRow, 1, TQt::AlignRight);
 
   }

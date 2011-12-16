@@ -104,7 +104,7 @@
                     <property name="text">
                         <string>The text in the edit box is what is displayed except that any occurrence of &lt;b&gt;%s&lt;/b&gt; will be replaced with the snmp object value and any occurrence of &lt;b&gt;%n&lt;/b&gt; will be replaced with the name of this monitor (see Name input field) .</string>
                     </property>
-                    <property name="alignment">
+                    <property name="tqalignment">
                         <set>WordBreak|AlignVCenter</set>
                     </property>
                 </widget>
@@ -112,7 +112,7 @@
         </widget>
         <widget class="TQLayoutWidget" row="3" column="1" rowspan="1" colspan="3">
             <property name="name">
-                <cstring>layout2</cstring>
+                <cstring>tqlayout2</cstring>
             </property>
             <hbox>
                 <property name="name">
@@ -163,7 +163,7 @@
                     <property name="sizeType">
                         <enum>Expanding</enum>
                     </property>
-                    <property name="sizeHint">
+                    <property name="tqsizeHint">
                         <size>
                             <width>141</width>
                             <height>20</height>
@@ -174,7 +174,7 @@
         </widget>
         <widget class="TQLayoutWidget" row="4" column="1" rowspan="1" colspan="3">
             <property name="name">
-                <cstring>layout3</cstring>
+                <cstring>tqlayout3</cstring>
             </property>
             <hbox>
                 <property name="name">
@@ -205,7 +205,7 @@
                     <property name="sizeType">
                         <enum>Expanding</enum>
                     </property>
-                    <property name="sizeHint">
+                    <property name="tqsizeHint">
                         <size>
                             <width>271</width>
                             <height>20</height>
@@ -224,7 +224,7 @@
             <property name="sizeType">
                 <enum>Expanding</enum>
             </property>
-            <property name="sizeHint">
+            <property name="tqsizeHint">
                 <size>
                     <width>244</width>
                     <height>20</height>
@@ -246,7 +246,7 @@
             <property name="sizeType">
                 <enum>Expanding</enum>
             </property>
-            <property name="sizeHint">
+            <property name="tqsizeHint">
                 <size>
                     <width>210</width>
                     <height>20</height>
@@ -282,7 +282,7 @@
                     <property name="sizeType">
                         <enum>Expanding</enum>
                     </property>
-                    <property name="sizeHint">
+                    <property name="tqsizeHint">
                         <size>
                             <width>20</width>
                             <height>20</height>
@@ -335,7 +335,7 @@
                 <cstring>status</cstring>
             </property>
             <property name="text">
-                <string>blehStatus</string>
+                <string>blehtqStatus</string>
             </property>
         </widget>
         <widget class="TQGroupBox" row="6" column="0" rowspan="1" colspan="4">

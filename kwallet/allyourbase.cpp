@@ -40,7 +40,7 @@
  */
 KWalletFolderItem::KWalletFolderItem(KWallet::Wallet *w, TQListView* parent, const TQString &name, int entries)
 : KListViewItem(parent),_wallet(w),_name(name),_entries(entries) {
-	setText(0, TQString("%1 (%2)").arg(_name).arg(_entries));
+	setText(0, TQString("%1 (%2)").tqarg(_name).tqarg(_entries));
 	setRenameEnabled(0, false);
 	setDragEnabled(true);
 	setDropEnabled(true);
@@ -66,7 +66,7 @@ TQPixmap KWalletFolderItem::getFolderIcon(KIcon::Group group){
 void KWalletFolderItem::refresh() {
 	TQString saveFolder = _wallet->currentFolder();
 	_wallet->setFolder(_name);
-	setText(0, TQString("%1 (%2)").arg(_name).arg(_wallet->entryList().count()));
+	setText(0, TQString("%1 (%2)").tqarg(_name).tqarg(_wallet->entryList().count()));
 	_wallet->setFolder(saveFolder);
 }
 
@@ -194,7 +194,7 @@ static bool decodeEntry(KWallet::Wallet *_wallet, TQDataStream& ds) {
 	KWallet::Wallet::EntryType et;
 	ds >> name;
 	if (_wallet->hasEntry(name)) {
-		int rc = KMessageBox::warningContinueCancel(0L, i18n("An entry by the name '%1' already exists. Would you like to continue?").arg(name));
+		int rc = KMessageBox::warningContinueCancel(0L, i18n("An entry by the name '%1' already exists. Would you like to continue?").tqarg(name));
 		if (rc == KMessageBox::Cancel) {
 			return false;
 		}
@@ -217,7 +217,7 @@ static bool decodeFolder(KWallet::Wallet *_wallet, TQDataStream& ds) {
 	TQString folder;
 	ds >> folder;
 	if (_wallet->hasFolder(folder)) {
-		int rc = KMessageBox::warningYesNoCancel(0L, i18n("A folder by the name '%1' already exists.  What would you like to do?").arg(folder), TQString(), KStdGuiItem::cont(), i18n("Replace"));
+		int rc = KMessageBox::warningYesNoCancel(0L, i18n("A folder by the name '%1' already exists.  What would you like to do?").tqarg(folder), TQString(), KStdGuiItem::cont(), i18n("Replace"));
 		if (rc == KMessageBox::Cancel) {
 			return false;
 		}
@@ -263,7 +263,7 @@ void KWalletItem::dropped(TQDropEvent *e, const TQValueList<TQIconDragItem>& lst
 		TQDataStream *ds = 0L;
 
 		if (e->provides("application/x-kwallet-folder")) {
-			TQByteArray edata = e->encodedData("application/x-kwallet-folder");
+			TQByteArray edata = e->tqencodedData("application/x-kwallet-folder");
 			if (!edata.isEmpty()) {
 				ds = new TQDataStream(edata, IO_ReadOnly);
 			}
@@ -407,7 +407,7 @@ void KWalletEntryList::itemDropped(TQDropEvent *e, TQListViewItem *item) {
 			return;
 		}
 		isEntry = true;
-		TQByteArray data = e->encodedData("application/x-kwallet-entry");
+		TQByteArray data = e->tqencodedData("application/x-kwallet-entry");
 		if (data.isEmpty()) {
 			e->ignore();
 			return;
@@ -420,7 +420,7 @@ void KWalletEntryList::itemDropped(TQDropEvent *e, TQListViewItem *item) {
 			return;
 		}
 		isEntry = false;
-		TQByteArray data = e->encodedData("application/x-kwallet-folder");
+		TQByteArray data = e->tqencodedData("application/x-kwallet-folder");
 		if (data.isEmpty()) {
 			e->ignore();
 			return;
@@ -589,11 +589,11 @@ class KWalletIconDrag : public TQIconDrag {
 			return 0L;
 		}
 
-		TQByteArray encodedData(const char *mime) const {
+		TQByteArray tqencodedData(const char *mime) const {
 			TQByteArray a;
 			TQCString mimetype(mime);
 			if (mimetype == "application/x-qiconlist") {
-				return TQIconDrag::encodedData(mime);
+				return TQIconDrag::tqencodedData(mime);
 			} else if (mimetype == "text/uri-list") {
 				TQCString s = _urls.join("\r\n").latin1();
 				if (_urls.count() > 0) {
@@ -638,7 +638,7 @@ void KWalletIconView::slotDropped(TQDropEvent *e, const TQValueList<TQIconDragIt
 		return;
 	}
 
-	TQByteArray edata = e->encodedData("text/uri-list");
+	TQByteArray edata = e->tqencodedData("text/uri-list");
 	TQCString urls = edata.data();
 
 	TQStringList ul = TQStringList::split("\r\n", urls);

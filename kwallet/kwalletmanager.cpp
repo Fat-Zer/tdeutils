@@ -220,13 +220,13 @@ void KWalletManager::contextMenu(TQIconViewItem *item, const TQPoint& pos) {
 
 
 void KWalletManager::deleteWallet(const TQString& walletName) {
-	int rc = KMessageBox::warningContinueCancel(this, i18n("Are you sure you wish to delete the wallet '%1'?").arg(walletName),"",KStdGuiItem::del());
+	int rc = KMessageBox::warningContinueCancel(this, i18n("Are you sure you wish to delete the wallet '%1'?").tqarg(walletName),"",KStdGuiItem::del());
 	if (rc != KMessageBox::Continue) {
 		return;
 	}
 	rc = KWallet::Wallet::deleteWallet(walletName);
 	if (rc != 0) {
-		KMessageBox::sorry(this, i18n("Unable to delete the wallet. Error code was %1.").arg(rc));
+		KMessageBox::sorry(this, i18n("Unable to delete the wallet. Error code was %1.").tqarg(rc));
 	}
 	updateWalletDisplay();
 }
@@ -239,7 +239,7 @@ void KWalletManager::closeWallet(const TQString& walletName) {
 		if (rc == KMessageBox::Yes) {
 			rc = KWallet::Wallet::closeWallet(walletName, true);
 			if (rc != 0) {
-				KMessageBox::sorry(this, i18n("Unable to force the wallet closed. Error code was %1.").arg(rc));
+				KMessageBox::sorry(this, i18n("Unable to force the wallet closed. Error code was %1.").tqarg(rc));
 			}
 		}
 	}
@@ -260,7 +260,7 @@ void KWalletManager::openWalletFile(const TQString& path) {
 			this, TQT_SLOT(editorClosed(KMainWindow*)));
 		we->show();
 	} else {
-		KMessageBox::sorry(this, i18n("Error opening wallet %1.").arg(path));
+		KMessageBox::sorry(this, i18n("Error opening wallet %1.").tqarg(path));
 		delete we;
 	}
 }
@@ -302,7 +302,7 @@ void KWalletManager::openWallet(const TQString& walletName, bool newWallet) {
 		we->show();
 		_windows.append(we);
 	} else if (!newWallet) {
-		KMessageBox::sorry(this, i18n("Error opening wallet %1.").arg(walletName));
+		KMessageBox::sorry(this, i18n("Error opening wallet %1.").tqarg(walletName));
 		delete we;
 	}
 }

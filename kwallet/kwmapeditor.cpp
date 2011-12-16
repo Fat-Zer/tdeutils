@@ -27,9 +27,9 @@
 #include <twin.h>
 
 #include <tqapplication.h>
-#include <clipboard.h>
+#include <tqclipboard.h>
 #include <tqpushbutton.h>
-#include <textedit.h>
+#include <tqtextedit.h>
 
 KWMapEditor::KWMapEditor(TQMap<TQString,TQString>& map, TQWidget *parent, const char *name)
 : TQTable(0, 3, parent, name), _map(map) {
@@ -125,7 +125,7 @@ void KWMapEditor::contextMenu(int row, int col, const TQPoint& pos) {
 
 
 void KWMapEditor::copy() {
-	TQApplication::clipboard()->setText(text(_contextRow, 2));
+	TQApplication::tqclipboard()->setText(text(_contextRow, 2));
 }
 
 
@@ -142,7 +142,7 @@ class InlineEditor : public TQTextEdit {
 	protected:
 		virtual void focusOutEvent(TQFocusEvent* fe) { 
 			if (fe->reason() == TQFocusEvent::Popup) {
-				TQWidget *focusW = tqApp->focusWidget();
+				TQWidget *focusW = tqApp->tqfocusWidget();
 				if (focusW && focusW == popup) {
 					return;
 				}

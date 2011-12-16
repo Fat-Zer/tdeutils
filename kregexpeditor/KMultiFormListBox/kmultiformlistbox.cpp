@@ -40,9 +40,9 @@ KMultiFormListBox::KMultiFormListBox( KMultiFormListBoxFactory *factory, KMultiF
 
   TQWidget *widget = theWidget->qWidget();
 
-  TQHBoxLayout *layout = new TQHBoxLayout( this );
+  TQHBoxLayout *tqlayout = new TQHBoxLayout( this );
 	_factory = factory;
-  layout->addWidget( widget );
+  tqlayout->addWidget( widget );
 }
 
 void KMultiFormListBox::append( KMultiFormListBoxEntry *element )

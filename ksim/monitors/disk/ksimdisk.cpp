@@ -20,10 +20,10 @@
 #include "ksimdisk.h"
 #include "ksimdisk.moc"
 
-#include <textstream.h>
+#include <tqtextstream.h>
 #include <tqregexp.h>
 #include <tqtimer.h>
-#include <layout.h>
+#include <tqlayout.h>
 #include <tqradiobutton.h>
 #include <tqvbuttongroup.h>
 #include <tqpushbutton.h>
@@ -216,13 +216,13 @@ void DiskView::updateDisplay()
     if (m_useSeperatly) {
       it.current()->first->setValue(diskData.readBlocks, diskData.writeBlocks);
       it.current()->first->setText(i18n("in: %1k")
-         .arg(KGlobal::locale()->formatNumber((float)diskData.readBlocks / 1024.0, 1)),
-         i18n("out: %1k").arg(KGlobal::locale()->formatNumber((float)diskData.writeBlocks / 1024.0, 1)));
+         .tqarg(KGlobal::locale()->formatNumber((float)diskData.readBlocks / 1024.0, 1)),
+         i18n("out: %1k").tqarg(KGlobal::locale()->formatNumber((float)diskData.writeBlocks / 1024.0, 1)));
     }
     else {
       it.current()->first->setValue(diff, 0);
       it.current()->first->setText(i18n("%1k")
-         .arg(KGlobal::locale()->formatNumber((float)diff / 1024.0, 1)));
+         .tqarg(KGlobal::locale()->formatNumber((float)diff / 1024.0, 1)));
     }
 
     it.current()->second->setMaxValue(it.current()->first->maxValue());
@@ -239,7 +239,7 @@ void DiskView::updateData(DiskList &disks)
   if (!m_procStream)
      return;
 
-  m_procStream->device()->reset();
+  m_procStream->tqdevice()->reset();
   fseek(m_procFile, 0L, SEEK_SET);
 
   if (m_bLinux24)
@@ -414,23 +414,23 @@ TQString DiskView::diskName( int major, int minor ) const
   switch ( major )
   {
     case IDE0_MAJOR:
-      returnValue.prepend(TQString::fromLatin1("hda"));
+      returnValue.prepend(TQString::tqfromLatin1("hda"));
       break;
     case IDE1_MAJOR:
-      returnValue.prepend(TQString::fromLatin1("hdc"));
+      returnValue.prepend(TQString::tqfromLatin1("hdc"));
       break;
     case IDE3_MAJOR:
-      returnValue.prepend(TQString::fromLatin1("hde"));
+      returnValue.prepend(TQString::tqfromLatin1("hde"));
       break;
     case SCSI_DISK0_MAJOR:
-      returnValue.prepend(TQString::fromLatin1("sda"));
+      returnValue.prepend(TQString::tqfromLatin1("sda"));
       break;
     case SCSI_GENERIC_MAJOR:
-      returnValue.prepend(TQString::fromLatin1("sg0"));
+      returnValue.prepend(TQString::tqfromLatin1("sg0"));
       break;
   }
 
-  returnValue.at(2) = returnValue.at(2).latin1() + minor;
+  returnValue.tqat(2) = returnValue.tqat(2).latin1() + minor;
   return returnValue;
 #else
   Q_UNUSED(major);
@@ -482,23 +482,23 @@ DiskConfig::DiskConfig(KSim::PluginObject *parent, const char *name)
   m_listview->addColumn(i18n("Disks"));
   m_layout->addWidget(m_listview);
 
-  TQHBoxLayout *layout = new TQHBoxLayout;
-  layout->setSpacing(6);
+  TQHBoxLayout *tqlayout = new TQHBoxLayout;
+  tqlayout->setSpacing(6);
 
   TQSpacerItem *spacer = new TQSpacerItem(20, 20,
      TQSizePolicy::Expanding, TQSizePolicy::Minimum);
-  layout->addItem(spacer);
+  tqlayout->addItem(spacer);
 
   m_add = new TQPushButton(this);
   m_add->setText(i18n("Add..."));
   connect(m_add, TQT_SIGNAL(clicked()), TQT_SLOT(addItem()));
-  layout->addWidget(m_add);
+  tqlayout->addWidget(m_add);
 
   m_remove = new TQPushButton(this);
   m_remove->setText(i18n("Remove"));
   connect(m_remove, TQT_SIGNAL(clicked()), TQT_SLOT(removeItem()));
-  layout->addWidget(m_remove);
-  m_layout->addLayout(layout);
+  tqlayout->addWidget(m_remove);
+  m_layout->addLayout(tqlayout);
 
   m_buttonBox = new TQVButtonGroup(i18n("Disk Styles"), this);
   m_layout->addWidget(m_buttonBox);

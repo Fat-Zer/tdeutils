@@ -26,7 +26,7 @@ TQPixmap Util::getKRegExpEditorIcon( const TQString& name )
     pix.convertFromImage( qembed_findImage(name) );
     return pix;
 #else
-  return KGlobal::iconLoader()->loadIcon(locate("data", TQString::fromLatin1("kregexpeditor/pics/") +name ),
+  return KGlobal::iconLoader()->loadIcon(locate("data", TQString::tqfromLatin1("kregexpeditor/pics/") +name ),
                                          KIcon::Toolbar );
 #endif
 }

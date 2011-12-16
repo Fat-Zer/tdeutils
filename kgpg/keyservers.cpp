@@ -24,8 +24,8 @@
 #include <kcombobox.h>
 #include <kdialogbase.h>
 #include <kmessagebox.h>
-#include <textcodec.h>
-#include <layout.h>
+#include <tqtextcodec.h>
+#include <tqlayout.h>
 #include <tqlabel.h>
 #include <tqdialog.h>
 #include <tqpushbutton.h>
@@ -88,7 +88,7 @@ keyServer::keyServer(TQWidget *parent, const char *name,bool modal,bool autoClos
         encid->start(KProcess::NotifyOnExit,true);
         page->Buttonimport->setEnabled( !page->kLEimportid->text().isEmpty());
         page->Buttonsearch->setEnabled( !page->kLEimportid->text().isEmpty());
-setMinimumSize(sizeHint());
+setMinimumSize(tqsizeHint());
 }
 
 
@@ -201,7 +201,7 @@ void keyServer::slotSearch()
         searchproc->start(KProcess::NotifyOnExit,true);
 	TQApplication::setOverrideCursor(TQCursor(TQt::BusyCursor));
 	dialogServer->setMainWidget(listpop);
-	listpop->setMinimumSize(listpop->sizeHint());
+	listpop->setMinimumSize(listpop->tqsizeHint());
 	listpop->setMinimumWidth(550);
         dialogServer->exec();
 }
@@ -261,8 +261,8 @@ void keyServer::slotsearchresult(KProcess *)
 	dialogServer->enableButtonOK(true);
 	TQApplication::restoreOverrideCursor();
         nb=nb.setNum(keyNumbers);
-        //listpop->kLVsearch->setColumnText(0,i18n("Found %1 matching keys").arg(nb));
-        listpop->statusText->setText(i18n("Found %1 matching keys").arg(nb));
+        //listpop->kLVsearch->setColumnText(0,i18n("Found %1 matching keys").tqarg(nb));
+        listpop->statusText->setText(i18n("Found %1 matching keys").tqarg(nb));
 
         if (listpop->kLVsearch->firstChild()!=NULL) {
                 listpop->kLVsearch->setSelected(listpop->kLVsearch->firstChild(),true);

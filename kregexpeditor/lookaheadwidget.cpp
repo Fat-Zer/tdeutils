@@ -60,13 +60,13 @@ RegExp* LookAheadWidget::regExp() const
                               _child->regExp() );
 }
 
-TQSize LookAheadWidget::sizeHint() const
+TQSize LookAheadWidget::tqsizeHint() const
 {
-  // TODO: Merge with RepeatWidget::sizeHint
+  // TODO: Merge with RepeatWidget::tqsizeHint
   TQFontMetrics metrics = fontMetrics();
   _textSize = metrics.size( 0, _text );
 
-  _childSize = _child->sizeHint();
+  _childSize = _child->tqsizeHint();
 
   int height = _textSize.height() + bdSize + _childSize.height() + bdSize + 2*pw;
   int width  = 2 * pw + TQMAX(_childSize.width(), 4*bdSize + _textSize.width());
@@ -76,7 +76,7 @@ TQSize LookAheadWidget::sizeHint() const
 void LookAheadWidget::paintEvent( TQPaintEvent *e )
 {
   // TODO: Merge with RepeatWidget::paintEvent
-  TQSize mySize = sizeHint();
+  TQSize mySize = tqsizeHint();
   TQPainter painter(this);
 
   drawPossibleSelection( painter, mySize );

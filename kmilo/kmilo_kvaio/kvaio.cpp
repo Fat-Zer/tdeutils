@@ -163,7 +163,7 @@ void KVaio::slotVaioEvent(int event)
 	case SONYPI_EVENT_BACK_PRESSED:
 	    if (mShowPowerStatusOnBackButton)
 	    {
-		showBatteryStatus (true);
+		showBatterytqStatus (true);
 	    }
 	    break;
 	default:
@@ -306,7 +306,7 @@ void KVaio::loadConfiguration(KConfig *k)
 
     mReportUnknownEvents =
 	k->readBoolEntry("Report_Unknown_Events", false);
-    mReportPowerStatus =
+    mReportPowertqStatus =
 	k->readBoolEntry("PeriodicallyReportPowerStatus", false);
     mShowPowerStatusOnBackButton =
 	k->readBoolEntry("PowerStatusOnBackButton", true);
@@ -315,7 +315,7 @@ void KVaio::loadConfiguration(KConfig *k)
               << "       mReportUnknownEvents:      "
 	      << mReportUnknownEvents << endl
 	      << "       mReportPowerStatus:        "
-	      << mReportPowerStatus << endl
+	      << mReportPowertqStatus << endl
 	      << "mShowPowerStatusOnBackButton:     "
 	      << mShowPowerStatusOnBackButton << endl;
 }
@@ -327,31 +327,31 @@ const KVaioDriverInterface* KVaio::driver()
 
 void KVaio::slotTimeout ()
 {
-    showBatteryStatus ();
+    showBatterytqStatus ();
     mTimer->start (4000, true);
 }
 
-bool KVaio::showBatteryStatus ( bool force )
+bool KVaio::showBatterytqStatus ( bool force )
 {
     static bool acConnectedCache  = false;
     static int previousChargeCache = -1;
     bool bat1Avail = false, bat2Avail = false, acConnected = false;
     int bat1Remaining = 0, bat1Max = 0, bat2Remaining = 0, bat2Max = 0;
     bool displayBatteryMsg = false;
-    bool displayACStatus = false;
+    bool displayACtqStatus = false;
 
     TQString text, acMsg;
     TQTextStream stream(text, IO_WriteOnly);
 
     // -----
-    // only display on startup if mReportPowerStatus is true:
-    if (mReportPowerStatus==false || !force)
+    // only display on startup if mReportPowertqStatus is true:
+    if (mReportPowertqStatus==false || !force)
     {
         return true;
     }
 
     // query all necessary information:
-    (void) mDriver->getBatteryStatus(bat1Avail, bat1Remaining, bat1Max,
+    (void) mDriver->getBatterytqStatus(bat1Avail, bat1Remaining, bat1Max,
                                  bat2Avail, bat2Remaining, bat2Max,
                                  acConnected);
 
@@ -364,7 +364,7 @@ bool KVaio::showBatteryStatus ( bool force )
 
     if (acConnectedCache != acConnected || force)
     {
-	displayACStatus = true;
+	displayACtqStatus = true;
 	acConnectedCache = acConnected;
     }
 
@@ -379,10 +379,10 @@ bool KVaio::showBatteryStatus ( bool force )
     }
 
     // ----- prepare text messages
-    if (displayACStatus || displayBatteryMsg)
+    if (displayACtqStatus || displayBatteryMsg)
     {
 
-	if (displayACStatus)
+	if (displayACtqStatus)
 	{
 	    acMsg = acConnected ? i18n ("AC Connected") : i18n ("AC Disconnected");
 	}
@@ -397,7 +397,7 @@ bool KVaio::showBatteryStatus ( bool force )
 	    case 3:
 	    case 2:
 	    case 1:
-		stream << i18n("Caution: Battery is Almost Empty (%1% remaining).").arg(remaining);
+		stream << i18n("Caution: Battery is Almost Empty (%1% remaining).").tqarg(remaining);
 		break;
 	    case 0:
 		stream << i18n("Alert: Battery is Empty!");
@@ -406,11 +406,11 @@ bool KVaio::showBatteryStatus ( bool force )
                 stream << i18n("No Battery Inserted.");
                 break;
 	    default:
-		stream << i18n("Remaining Battery Capacity: %1%").arg( remaining );
+		stream << i18n("Remaining Battery Capacity: %1%").tqarg( remaining );
 	};
 
 	// show a message if the battery status changed by more then 10% or on startup
-	if (displayACStatus)
+	if (displayACtqStatus)
 	{
 	    stream << endl << acMsg;
 	}

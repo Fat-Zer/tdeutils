@@ -102,11 +102,11 @@ expression : expression TOK_Bar term {
                  $<regexp>$ = new AltnRegExp( false );
                  dynamic_cast<AltnRegExp*>( $<regexp>$ )->addRegExp( $<regexp>1 );
                }
-               dynamic_cast<AltnRegExp*>( $<regexp>$ )->addRegExp( new TextRegExp( false, QString::fromLatin1("") ) );
+               dynamic_cast<AltnRegExp*>( $<regexp>$ )->addRegExp( new TextRegExp( false, QString::tqfromLatin1("") ) );
              }
            | TOK_Bar term {  
                $<regexp>$ = new AltnRegExp( false );
-               dynamic_cast<AltnRegExp*>( $<regexp>$ )->addRegExp( new TextRegExp( false, QString::fromLatin1("") ) );
+               dynamic_cast<AltnRegExp*>( $<regexp>$ )->addRegExp( new TextRegExp( false, QString::tqfromLatin1("") ) );
                dynamic_cast<AltnRegExp*>( $<regexp>$ )->addRegExp( $<regexp>2 );
              }
            | TOK_Bar { $<regexp>$ = new AltnRegExp( false ); }
@@ -155,7 +155,7 @@ atom : TOK_LeftParen expression TOK_RightParent {
      | TOK_Carat  { $<regexp>$ = new PositionRegExp( false, PositionRegExp::BEGLINE ); }
      | TOK_Dot { $<regexp>$ = new DotRegExp( false ); }
      | TOK_BackRef { 
-        QString match = TQString(TQString::fromLocal8Bit("\\%1")).arg( $<backRef>1 );
+        QString match = TQString(TQString::fromLocal8Bit("\\%1")).tqarg( $<backRef>1 );
         $<regexp>$ = new TextRegExp( false, match );
         KMessageBox::information(0,i18n("<qt>Back reference regular expressions are not supported.<p>"
                                         "<tt>\\1</tt>, <tt>\\2</tt>, ... are <i>back references</i>, meaning they refer to  "
@@ -165,7 +165,7 @@ atom : TOK_LeftParen expression TOK_RightParent {
                                         "just a workaround to ensure that the application handles the regexp at all. "
                                         "Therefore, as soon as you edit the regular expression in the graphical area, "
                                         "the back reference will be replaced by matching the text <b>%2</b> literally.")
-                                    .arg( match ).arg( match ),
+                                    .tqarg( match ).tqarg( match ),
                                  i18n("Back reference regular expressions not supported"), 
                                  QString::fromLocal8Bit("backReferenceNotSupported") );
       }
@@ -177,9 +177,9 @@ char : TOK_Char {
        if ( $<ch>1 == '{' || $<ch>1 == '}' || $<ch>1 == '[' || $<ch>1 == ']' || $<ch>1 == '\\' ) {
           yyerror( "illigal character - needs escaping" );
        }
-       $<regexp>$ = new TextRegExp( false, TQString(TQString::fromLocal8Bit("%1")).arg($<ch>1)); 
+       $<regexp>$ = new TextRegExp( false, TQString(TQString::fromLocal8Bit("%1")).tqarg($<ch>1)); 
      }
-     | TOK_EscapeChar { $<regexp>$ = new TextRegExp( false, TQString(TQString::fromLocal8Bit("%1")).arg($<ch>1)); }
+     | TOK_EscapeChar { $<regexp>$ = new TextRegExp( false, TQString(TQString::fromLocal8Bit("%1")).tqarg($<ch>1)); }
      ; 
 
 %%

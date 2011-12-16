@@ -106,7 +106,7 @@ void RegExpScrolledEditorWindow::resizeEvent( TQResizeEvent *event )
 
 void RegExpScrolledEditorWindow::slotUpdateContentSize( TQPoint focusPoint )
 {
-    TQSize childSize = _editorWindow->sizeHint();
+    TQSize childSize = _editorWindow->tqsizeHint();
     TQSize vpSize = _scrollView->viewportSize(10,10);
 
     bool change = false;

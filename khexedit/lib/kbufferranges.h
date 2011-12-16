@@ -28,7 +28,7 @@ namespace KHE
 {
 
 /** a class to control all the ranges like marking and selections
-  * holds also all modified ranges and merges them so a repaint can take its info from here
+  * holds also all modified ranges and merges them so a tqrepaint can take its info from here
   *
   * @author Friedrich W. H.  Kossebau
   */

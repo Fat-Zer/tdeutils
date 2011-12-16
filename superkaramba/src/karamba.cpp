@@ -85,7 +85,7 @@ karamba::karamba(TQString fn, TQString name, bool reloading, int instance,
   karambaApp->addKaramba(this, reloading);
 
   if(prettyName.isEmpty())
-    prettyName = TQString("%1 - %2").arg(m_theme.name()).arg(m_instance);
+    prettyName = TQString("%1 - %2").tqarg(m_theme.name()).tqarg(m_instance);
 
   kdDebug() << "Starting theme: " << m_theme.name()
             << " pretty name: " << prettyName << endl;
@@ -111,7 +111,7 @@ karamba::karamba(TQString fn, TQString name, bool reloading, int instance,
   // Creates KConfig Object
   TQString instanceString;
   if(m_instance > 1)
-    instanceString = TQString("-%1").arg(m_instance);
+    instanceString = TQString("-%1").tqarg(m_instance);
   TQString cfg = TQDir::home().absPath() + "/.superkaramba/"
       + m_theme.id() + instanceString + ".rc";
   kdDebug() << cfg << endl;
@@ -622,7 +622,7 @@ bool karamba::parseConfig()
                                      TQColor("white")));
         defaultTextField->setFont(lineParser.getString("FONT", "Helvetica"));
         defaultTextField->setFontSize(lineParser.getInt("FONTSIZE", 12));
-        defaultTextField->setAlignment(lineParser.getString("ALIGN",
+        defaultTextField->tqsetAlignment(lineParser.getString("ALIGN",
                                        "LEFT"));
         defaultTextField->setFixedPitch(lineParser.getBoolean("FIXEDPITCH",
                                         false));
@@ -647,7 +647,7 @@ bool karamba::parseConfig()
         tmpText->setFont(lineParser.getString("FONT", defTxt.getFont()));
         tmpText->setFontSize(lineParser.getInt("FONTSIZE",
                              defTxt.getFontSize()));
-        tmpText->setAlignment(lineParser.getString("ALIGN",
+        tmpText->tqsetAlignment(lineParser.getString("ALIGN",
                               defTxt.getAlignmentAsString()));
         tmpText->setFixedPitch(lineParser.getInt("FIXEDPITCH",
                                defTxt.getFixedPitch()));
@@ -1619,13 +1619,13 @@ void karamba::updateBackground(KSharedPixmap* kpm)
   {
     systray->updateBackgroundPixmap(buffer2);
   }
-  repaint();
+  tqrepaint();
 }
 
 void karamba::currentDesktopChanged( int i )
 {
   //qDebug("karamba::currentDesktopChanged");
-  kroot->repaint( true );
+  kroot->tqrepaint( true );
   if (pythonIface && pythonIface->isExtensionLoaded())
     pythonIface->desktopChanged(this, i);
 }
@@ -1633,7 +1633,7 @@ void karamba::currentDesktopChanged( int i )
 void karamba::currentWallpaperChanged(int i )
 {
   //qDebug("karamba::currentWallpaperChanged");
-  kroot->repaint( true );
+  kroot->tqrepaint( true );
   if (pythonIface && pythonIface->isExtensionLoaded())
     pythonIface->wallpaperChanged(this, i);
 }
@@ -1660,7 +1660,7 @@ void karamba::externalStep()
     p.end();
 
     bitBlt(&pm,0,0,&buffer,0,TQt::CopyROP);
-    repaint();
+    tqrepaint();
   }
 }
 

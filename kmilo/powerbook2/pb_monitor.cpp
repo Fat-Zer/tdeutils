@@ -98,7 +98,7 @@ Monitor::DisplayType PowerBookMonitor::poll()
 			{
 				rc = Monitor::Tap;
 				TQString marg =  tpmodes[ tag->data & 3 ];
-				m_message = i18n( "Operating mode set to: %1." ).arg( marg );
+				m_message = i18n( "Operating mode set to: %1." ).tqarg( marg );
 			}
 			break;
 		default:

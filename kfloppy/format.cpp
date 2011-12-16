@@ -266,7 +266,7 @@ bool FloppyAction::configureDevice(int drive,int density)
 
 	if ((drive<0) || (drive>1))
 	{
-		emit status(i18n("Unexpected drive number %1.").arg(drive),-1);
+		emit status(i18n("Unexpected drive number %1.").tqarg(drive),-1);
 		return false;
 	}
 
@@ -278,7 +278,7 @@ bool FloppyAction::configureDevice(int drive,int density)
         }
 	if (!deviceinfo)
 	{
-		emit status(i18n("Unexpected density number %1.").arg(density),-1);
+		emit status(i18n("Unexpected density number %1.").tqarg(density),-1);
 		return false;
 	}
 
@@ -294,7 +294,7 @@ bool FloppyAction::configureDevice(int drive,int density)
 	if (!deviceinfo || !deviceinfo->devices)
 	{
 		emit status(i18n("Cannot find a device for drive %1 and density %2.")
-			.arg(drive).arg(density),-1);
+			.tqarg(drive).tqarg(density),-1);
 		return false;
 	}
 
@@ -313,7 +313,7 @@ bool FloppyAction::configureDevice(int drive,int density)
 	{
 		const TQString str = i18n(
 			"Cannot access %1\nMake sure that the device exists and that "
-			"you have write permission to it.").arg(deviceinfo->devices[0]);
+			"you have write permission to it.").tqarg(deviceinfo->devices[0]);
 		emit status(str,-1);
 		return false;
 	}
@@ -343,13 +343,13 @@ void FloppyAction::processDone(KProcess *p)
 		}
 		else
 		{
-			emit status(i18n("The program %1 terminated with an error.").arg(theProcessName),100);
+			emit status(i18n("The program %1 terminated with an error.").tqarg(theProcessName),100);
 			emit done(this,false);
 		}
 	}
 	else
 	{
-		emit status(i18n("The program %1 terminated abnormally.").arg(theProcessName),100);
+		emit status(i18n("The program %1 terminated abnormally.").tqarg(theProcessName),100);
 		emit done(this,false);
 	}
 }
@@ -358,7 +358,7 @@ void FloppyAction::processStdOut(KProcess *, char *b, int l)
 {
 	Q_UNUSED(b);
 	Q_UNUSED(l);
-	kdDebug(KFAREA) << "stdout:" << TQString::fromLatin1(b,l) << endl;
+	kdDebug(KFAREA) << "stdout:" << TQString::tqfromLatin1(b,l) << endl;
 }
 
 void FloppyAction::processStdErr(KProcess *p, char *b, int l)
@@ -390,7 +390,7 @@ FDFormat::FDFormat(TQObject *p) :
 	doVerify(true)
 {
 	DEBUGSETUP;
-	theProcessName = TQString::fromLatin1("fdformat");
+	theProcessName = TQString::tqfromLatin1("fdformat");
 	setName("FDFormat");
 }
 
@@ -478,11 +478,11 @@ void FDFormat::processStdOut(KProcess *, char *b, int l)
 	}
 	else if (b[0]=='E')
 	{
-		emit status(i18n("Error formatting track %1.").arg(formatTrackCount),-1);
+		emit status(i18n("Error formatting track %1.").tqarg(formatTrackCount),-1);
 	}
 	else
 	{
-		s = TQString::fromLatin1(b,l);
+		s = TQString::tqfromLatin1(b,l);
 		if (s.contains("ioctl(FD_FORM)"))
 		{
                     emit status (i18n(
@@ -499,7 +499,7 @@ void FDFormat::processStdOut(KProcess *, char *b, int l)
 		DEBUGS(s);
 	}
 #elif defined(ANY_LINUX)
-	s = TQString::fromLatin1(b,l);
+	s = TQString::tqfromLatin1(b,l);
 	DEBUGS(s);
         TQRegExp regexp( "([0-9]+)" );
         if ( s.startsWith( "bad data at cyl" ) || ( s.find( "Problem reading cylinder" ) != -1 ) )
@@ -507,12 +507,12 @@ void FDFormat::processStdOut(KProcess *, char *b, int l)
             if ( regexp.search( s ) > -1 )
             {
                 const int track = regexp.cap(1).toInt();
-                emit status(i18n("Low-level formatting error at track %1.").arg(track), -1);
+                emit status(i18n("Low-level formatting error at track %1.").tqarg(track), -1);
             }
             else
             {
                 // This error should not happen
-                emit status(i18n("Low-level formatting error: %1").arg(s), -1);
+                emit status(i18n("Low-level formatting error: %1").tqarg(s), -1);
             }
             return;
         }
@@ -532,7 +532,7 @@ void FDFormat::processStdOut(KProcess *, char *b, int l)
         // Be careful to leave "iotcl" as last before checking numbers
         else if (s.find("ioctl")!=-1)
         {
-            emit status(i18n("Low-level format error: %1").arg(s),-1);
+            emit status(i18n("Low-level format error: %1").tqarg(s),-1);
             return;
         }
         // Check for numbers at last (as /dev/fd0u1440 has numbers too)
@@ -557,7 +557,7 @@ DDZeroOut::DDZeroOut(TQObject *p) :
     FloppyAction(p)
 {
     kdDebug(KFAREA) << (__PRETTY_FUNCTION__) << endl;
-    theProcessName = TQString::fromLatin1("dd");
+    theProcessName = TQString::tqfromLatin1("dd");
     setName("DD");
 }
 
@@ -720,7 +720,7 @@ void FATFilesystem::processStdOut(KProcess *, char *b, int l)
 #ifdef ANY_BSD
     // ### TODO: do some checks
 #elif defined(ANY_LINUX)
-    TQString s ( TQString::fromLatin1( b, l ) );
+    TQString s ( TQString::tqfromLatin1( b, l ) );
     kdDebug(KFAREA) << s << endl;
     if (s.find("mounted file system")!=-1) // "/dev/fd0 contains a mounted file system
     {
@@ -792,7 +792,7 @@ void UFSFilesystem::exec()
         
         // ### TODO: is it still needed? (FreeBSD 5.3's man page says: "For backward compatibility.")
         if ( deviceInfo )
-           *p << "-T" << TQString("fd%1").arg(deviceInfo->blocks);
+           *p << "-T" << TQString("fd%1").tqarg(deviceInfo->blocks);
 
         *p << deviceName;
 
@@ -886,7 +886,7 @@ void Ext2Filesystem::processStdOut(KProcess *, char *b, int l)
 #ifdef ANY_BSD
     // ### TODO: do some checks
 #elif defined(ANY_LINUX)
-    TQString s ( TQString::fromLatin1( b, l ) );
+    TQString s ( TQString::tqfromLatin1( b, l ) );
     kdDebug(KFAREA) << s << endl;
     if (s.find("mounted")!=-1) // "/dev/fd0 is mounted; will not make a filesystem here!"
     {
@@ -977,7 +977,7 @@ void MinixFilesystem::exec()
 
 void MinixFilesystem::processStdOut(KProcess *, char *b, int l)
 {
-    TQString s ( TQString::fromLatin1( b, l ) );
+    TQString s ( TQString::tqfromLatin1( b, l ) );
     kdDebug(KFAREA) << s << endl;
     if (s.find("mounted")!=-1) // "mkfs.minix: /dev/fd0 is mounted; will not make a filesystem here!"
     {

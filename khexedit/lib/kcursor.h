@@ -38,7 +38,7 @@ class KCursor
   public:
     /** sets size of the full cursor */
     void setSize( KPixelX Width, KPixelY Height );
-    /** sets the shape of the cursor to be drawn */
+    /** sets the tqshape of the cursor to be drawn */
     void setShape( KPixelX X, KPixelX W );
 
   public: // access

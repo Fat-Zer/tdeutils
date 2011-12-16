@@ -41,7 +41,7 @@
 #include <kcombobox.h>
 
 // other TQt headers:
-#include <layout.h>
+#include <tqlayout.h>
 #include <tqlabel.h>
 #include <tqcheckbox.h>
 #include <tqhbox.h>
@@ -205,15 +205,15 @@ ProfileConfig::ProfileConfig(TQWidget * parent, const char *name)
     TQLabel *tmp_label = new TQLabel(i18n("This panel allows you to set default values for system attributes "
 					"so that they change when the laptop is plugged in to the wall or "
 					"running on batteries."), this );
-    tmp_label->setAlignment( TQt::WordBreak );
+    tmp_label->tqsetAlignment( TQt::WordBreak );
     top_layout->addWidget( tmp_label );
 
     tmp_label = new TQLabel(i18n("You can also set options for these values that will be set by low battery "
 				"conditions, or system inactivity in the other panels"), this );
-    tmp_label->setAlignment( TQt::WordBreak );
+    tmp_label->tqsetAlignment( TQt::WordBreak );
     top_layout->addWidget( tmp_label );
     top_layout->addStretch(1);
-    top_layout->addWidget( new TQLabel( i18n("Version: %1").arg(LAPTOP_VERSION), this), 0, TQt::AlignRight );
+    top_layout->addWidget( new TQLabel( i18n("Version: %1").tqarg(LAPTOP_VERSION), this), 0, TQt::AlignRight );
 
 
     load();      

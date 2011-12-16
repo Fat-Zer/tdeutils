@@ -135,7 +135,7 @@ void KJotsEdit::setEntry (KJotsPage *entry)
         m_entry = entry;
         setText(entry->body());
         removeSelection();
-        repaint();
+        tqrepaint();
         setEnabled(true);
         setFocus();
         entry->setEditor(this);

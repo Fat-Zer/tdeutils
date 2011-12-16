@@ -32,7 +32,7 @@
 // QT includes
 #include <tqfile.h>
 #include <tqdir.h>
-#include <textcodec.h>
+#include <tqtextcodec.h>
 
 // KDE includes
 #include <kdebug.h>
@@ -90,10 +90,10 @@ RarArch::RarArch( ArkWidget *_gui, const TQString & _fileName )
 
 bool RarArch::processLine( const TQCString &line )
 {
-  TQString unicode_line;
+  TQString tqunicode_line;
 
   TQTextCodec *codec = TQTextCodec::codecForLocale();
-  unicode_line = codec->toUnicode( line );
+  tqunicode_line = codec->toUnicode( line );
 
   if ( m_isFirstLine )
   {

@@ -33,7 +33,7 @@ Released under the terms of the GNU GPL.</comment>
                         <property name="text">
                             <string></string>
                         </property>
-                        <property name="alignment">
+                        <property name="tqalignment">
                             <set>AlignCenter</set>
                         </property>
                     </widget>
@@ -57,7 +57,7 @@ Released under the terms of the GNU GPL.</comment>
                         <property name="text">
                             <string></string>
                         </property>
-                        <property name="alignment">
+                        <property name="tqalignment">
                             <set>AlignCenter</set>
                         </property>
                     </widget>

@@ -28,7 +28,7 @@
 
 #include <kdialog.h>
 
-#include <layout.h>
+#include <tqlayout.h>
 
 #include "kcmdf.h"
 

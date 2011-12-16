@@ -32,7 +32,7 @@
 
 #include <tqheader.h>
 #include <tqtimer.h>
-#include <layout.h>
+#include <tqlayout.h>
 #include <tqpainter.h>
 
 #include <kapplication.h>
@@ -377,7 +377,7 @@ void KDFWidget::criticallyFull( DiskEntry *disk )
   if( mStd.popupIfFull() == true )
   {
     TQString msg = i18n("Device [%1] on [%2] is getting critically full!").
-      arg(disk->deviceName()).arg(disk->mountPoint());
+      tqarg(disk->deviceName()).tqarg(disk->mountPoint());
     KMessageBox::sorry( this, msg, i18n("Warning"));
   }
 }

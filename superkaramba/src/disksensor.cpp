@@ -10,7 +10,7 @@
 #include "disksensor.h"
 
 #include <tqfile.h>
-#include <textstream.h>
+#include <tqtextstream.h>
 #include <tqstring.h>
 #include <tqregexp.h>
 #include <kprocess.h>

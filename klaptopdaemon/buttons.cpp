@@ -34,7 +34,7 @@
 #include <kapplication.h>
 #include <kcombobox.h>
 
-#include <layout.h>
+#include <tqlayout.h>
 #include <tqvbuttongroup.h>
 #include <tqspinbox.h>
 #include <tqradiobutton.h>
@@ -120,7 +120,7 @@ ButtonsConfig::ButtonsConfig (TQWidget * parent, const char *name)
 
       if (laptop_portable::has_button(laptop_portable::LidButton)) {
       	lidBox = new TQVButtonGroup(i18n("Lid Switch Closed"), this);
-      	lidBox->layout()->setSpacing( KDialog::spacingHint() );
+      	lidBox->tqlayout()->setSpacing( KDialog::spacingHint() );
         TQToolTip::add( lidBox, i18n( "Select which actions will occur when the laptop's lid is closed" ) );
       	hlay->addWidget( lidBox );
 
@@ -196,7 +196,7 @@ ButtonsConfig::ButtonsConfig (TQWidget * parent, const char *name)
       if (laptop_portable::has_button(laptop_portable::PowerButton)) {
 
       	powerBox = new TQVButtonGroup(i18n("Power Switch Pressed"), this);
-      	powerBox->layout()->setSpacing( KDialog::spacingHint() );
+      	powerBox->tqlayout()->setSpacing( KDialog::spacingHint() );
         TQToolTip::add( powerBox, i18n( "Select which actions will occur when the laptop's power button is pressed" ) );
       	hlay->addWidget( powerBox );
 
@@ -273,12 +273,12 @@ ButtonsConfig::ButtonsConfig (TQWidget * parent, const char *name)
 			    	        "or power switch on your laptop is pressed. Some laptops may already "
 					"automatically do things like this, if you cannot disable them in your BIOS "
 					"you probably should not enable anything in this panel."), this);
-      explain->setAlignment( TQt::WordBreak );
+      explain->tqsetAlignment( TQt::WordBreak );
       top_layout->addWidget(explain);
 
       top_layout->addStretch(1);
 
-      top_layout->addWidget( new TQLabel( i18n("Version: %1").arg(LAPTOP_VERSION), this ), 0, TQt::AlignRight );
+      top_layout->addWidget( new TQLabel( i18n("Version: %1").tqarg(LAPTOP_VERSION), this ), 0, TQt::AlignRight );
     }
   }
 

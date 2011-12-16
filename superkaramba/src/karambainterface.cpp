@@ -24,7 +24,7 @@ KarambaIface::~KarambaIface()
 
 karamba* KarambaIface::getKaramba(TQString name)
 {
-  TQWidgetList *list = TQApplication::allWidgets();
+  TQWidgetList *list = TQApplication::tqallWidgets();
   TQWidgetListIt it(*list);  // iterate over the widgets
   TQWidget* w;
   karamba* result = 0;
@@ -49,7 +49,7 @@ karamba* KarambaIface::getKaramba(TQString name)
 
 ThemesDlg* KarambaIface::getThemeWnd()
 {
-  TQWidgetList  *list = TQApplication::allWidgets();
+  TQWidgetList  *list = TQApplication::tqallWidgets();
   TQWidgetListIt it( *list );         // iterate over the widgets
   TQWidget* w;
   ThemesDlg* result = 0;

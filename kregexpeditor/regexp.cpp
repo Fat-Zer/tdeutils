@@ -28,7 +28,7 @@ RegExp::RegExp( bool selected ) : _parent(0), _destructing( false ), _selected( 
 RegExp::~RegExp()
 {
   _destructing = true;
-  for ( TQPtrListIterator<RegExp> it(_children); *it; ++it ) {
+  for ( TQPtrListIterator<RegExp> it(_tqchildren); *it; ++it ) {
     delete *it;
   }
   if ( _parent )
@@ -38,14 +38,14 @@ RegExp::~RegExp()
 
 void RegExp::addChild( RegExp* child )
 {
-  _children.append( child );
+  _tqchildren.append( child );
   child->setParent( this );
 }
 
 void RegExp::removeChild( RegExp* child )
 {
   if ( ! _destructing ) {
-    _children.remove( child );
+    _tqchildren.remove( child );
   }
 }
 
@@ -68,7 +68,7 @@ RegExp* RegExp::readRegExp( TQDomElement top, const TQString& version )
 TQString RegExp::toXmlString() const
 {
   TQDomDocument doc;
-  doc.setContent( TQString::fromLatin1( "<RegularExpression/>" ) );
+  doc.setContent( TQString::tqfromLatin1( "<RegularExpression/>" ) );
   TQDomNode top = doc.documentElement();
   top.toElement().setAttribute(TQString::fromLocal8Bit("version"), KRegExpEditorGUI::version);
 

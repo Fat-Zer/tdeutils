@@ -59,7 +59,7 @@ public:
 
     KTimerJob *job() { return m_job; };
 
-    void setStatus( bool error ) {
+    void settqStatus( bool error ) {
         m_error = error;
         update();
     }
@@ -239,7 +239,7 @@ void KTimerPref::jobChanged( KTimerJob *job )
 void KTimerPref::jobFinished( KTimerJob *job, bool error )
 {
     KTimerJobItem *item = static_cast<KTimerJobItem*>(job->user());
-    item->setStatus( error );
+    item->settqStatus( error );
     m_list->triggerUpdate();
 }
 
@@ -249,7 +249,7 @@ void KTimerPref::saveJobs( KConfig *cfg )
     int num = 0;
     KTimerJobItem *item = static_cast<KTimerJobItem*>(m_list->firstChild());
     while( item ) {
-        item->job()->save( cfg, TQString("Job%1").arg( num ) );
+        item->job()->save( cfg, TQString("Job%1").tqarg( num ) );
         item = static_cast<KTimerJobItem*>(item->nextSibling());
         num++;
     }
@@ -280,7 +280,7 @@ void KTimerPref::loadJobs( KConfig *cfg )
             connect( job, TQT_SIGNAL(finished(KTimerJob*,bool)),
                      TQT_SLOT(jobFinished(KTimerJob*,bool)) );
 
-            job->load( cfg, TQString( "Job%1" ).arg(n) );
+            job->load( cfg, TQString( "Job%1" ).tqarg(n) );
 
             job->setUser( item );
     }

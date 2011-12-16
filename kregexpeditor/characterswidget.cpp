@@ -60,7 +60,7 @@ CharactersWidget::~CharactersWidget()
 }
 
 
-TQSize CharactersWidget::sizeHint() const
+TQSize CharactersWidget::tqsizeHint() const
 {
     TQFontMetrics metrics = fontMetrics();
     _textSize = HackCalculateFontSize(metrics, title());
@@ -78,7 +78,7 @@ TQSize CharactersWidget::sizeHint() const
 
 void CharactersWidget::paintEvent(TQPaintEvent *e)
 {
-    TQSize mySize = sizeHint();
+    TQSize mySize = tqsizeHint();
 
     TQPainter painter(this);
     drawPossibleSelection( painter, mySize );
@@ -118,7 +118,7 @@ RegExp* CharactersWidget::regExp() const
 
 TQString CharactersWidget::text() const
 {
-    TQString res = TQString::fromLatin1("");
+    TQString res = TQString::tqfromLatin1("");
 
     if (_regexp->wordChar())
         res += i18n("- A word character\n");
@@ -186,8 +186,8 @@ int CharactersWidget::edit()
         TQApplication::restoreOverrideCursor();
     }
 
-    _configWindow->move(TQCursor::pos() - TQPoint(_configWindow->sizeHint().width()/2,
-                                                _configWindow->sizeHint().height()/2));
+    _configWindow->move(TQCursor::pos() - TQPoint(_configWindow->tqsizeHint().width()/2,
+                                                _configWindow->tqsizeHint().height()/2));
     int ret = _configWindow->exec(_regexp );
     if ( ret == TQDialog::Accepted ) {
         _editorWindow->updateContent( 0 );
@@ -380,10 +380,10 @@ void CharacterEdits::slotOK()
 SingleEntry::SingleEntry(TQWidget* parent, const char* name )
     :KMultiFormListBoxEntry( parent, name )
 {
-    TQHBoxLayout* layout = new TQHBoxLayout( this, 3, 6 );
+    TQHBoxLayout* tqlayout = new TQHBoxLayout( this, 3, 6 );
     _selector = new CharSelector( this );
-    layout->addWidget( _selector );
-    layout->addStretch(1);
+    tqlayout->addWidget( _selector );
+    tqlayout->addStretch(1);
 }
 
 TQString SingleEntry::text() const
@@ -405,19 +405,19 @@ bool SingleEntry::isEmpty() const
 RangeEntry::RangeEntry(TQWidget* parent, const char* name )
     :KMultiFormListBoxEntry( parent, name )
 {
-    TQHBoxLayout* layout = new TQHBoxLayout( this, 3, 6 );
+    TQHBoxLayout* tqlayout = new TQHBoxLayout( this, 3, 6 );
 
     TQLabel* label = new TQLabel(i18n("From:"), this );
     _from = new CharSelector( this );
-    layout->addWidget( label );
-    layout->addWidget( _from );
+    tqlayout->addWidget( label );
+    tqlayout->addWidget( _from );
 
-    layout->addStretch(1);
+    tqlayout->addStretch(1);
 
     label = new TQLabel(i18n("end of range","To:"), this );
     _to = new CharSelector( this );
-    layout->addWidget( label );
-    layout->addWidget( _to );
+    tqlayout->addWidget( label );
+    tqlayout->addWidget( _to );
 }
 
 TQString RangeEntry::fromText() const

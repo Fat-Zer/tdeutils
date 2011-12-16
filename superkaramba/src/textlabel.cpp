@@ -13,7 +13,7 @@
 #include "textlabel.h"
 
 TextLabel::TextLabel(karamba *k, int x,int y,int w,int h):
-  Meter(k, x,y,w,h), alignment(TQt::AlignLeft), clip(0), bgColor(0, 0, 0),
+  Meter(k, x,y,w,h), tqalignment(TQt::AlignLeft), clip(0), bgColor(0, 0, 0),
   lineHeight(0), shadow(0), scrollSpeed(0, 0), scrollPos(0, 0), scrollGap(0),
   scrollPause(0), pauseCounter(0), scrollType(ScrollNone)
 {
@@ -31,7 +31,7 @@ TextLabel::TextLabel(karamba *k, int x,int y,int w,int h):
 }
 
 TextLabel::TextLabel(karamba *k):
-  Meter(k, 0, 0, 0, 0), alignment(TQt::AlignLeft), clip(0), bgColor(0, 0, 0),
+  Meter(k, 0, 0, 0, 0), tqalignment(TQt::AlignLeft), clip(0), bgColor(0, 0, 0),
   lineHeight(0), shadow(0), scrollSpeed(0, 0), scrollPos(0, 0), scrollGap(0),
   scrollPause(0), pauseCounter(0), scrollType(ScrollNone)
 {
@@ -60,7 +60,7 @@ void TextLabel::setTextProps( TextField* t )
     text = *t;
     //lineHeight = t->getLineHeight();
     shadow = t->getShadow();
-    alignment = t->getAlignment();
+    tqalignment = t->getAlignment();
     setFontSize(t->getFontSize());
     setFont(t->getFont());
 
@@ -131,22 +131,22 @@ int TextLabel::getFontSize() const
     return font.pixelSize();
 }
 
-void TextLabel::setAlignment( TQString align )
+void TextLabel::tqsetAlignment( TQString align )
 {
     TQString a = align.upper();
     if( a == "LEFT" || a.isEmpty() )
-        alignment = TQt::AlignLeft;
+        tqalignment = TQt::AlignLeft;
     if( a == "RIGHT" )
-        alignment = TQt::AlignRight;
+        tqalignment = TQt::AlignRight;
     if( a == "CENTER" )
-        alignment = TQt::AlignHCenter;
+        tqalignment = TQt::AlignHCenter;
 }
 
 TQString TextLabel::getAlignment() const
 {
-    if( alignment == TQt::AlignHCenter )
+    if( tqalignment == TQt::AlignHCenter )
         return "CENTER";
-    else if( alignment == TQt::AlignRight )
+    else if( tqalignment == TQt::AlignRight )
         return "RIGHT";
     else
         return "LEFT";
@@ -228,10 +228,10 @@ int TextLabel::drawText(TQPainter *p, int x, int y, int width, int height,
   {
     p->setPen(getBGColor());
     p->drawText(x + shadow, y + shadow, width, height,
-                alignment | clip | TQt::ExpandTabs, text);
+                tqalignment | clip | TQt::ExpandTabs, text);
   }
   p->setPen(getColor());
-  p->drawText(x, y, width, height, alignment | clip | TQt::ExpandTabs, text);
+  p->drawText(x, y, width, height, tqalignment | clip | TQt::ExpandTabs, text);
   return 0;
 }
 

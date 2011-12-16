@@ -125,8 +125,8 @@ static PyMethodDef karamba_methods[] = {
     {(char*)"getTextColor", py_getTextColor, METH_VARARGS, (char*)"Get a Text Sensor's Color"},
     {(char*)"changeTextSize", py_setTextFontSize, METH_VARARGS, (char*)"Change a Text Sensor's Font Size"},
     {(char*)"getTextFontSize", py_getTextFontSize, METH_VARARGS, (char*)"Get a Text Sensor's Font Size"},
-    {(char*)"getTextAlign", py_getTextAlign, METH_VARARGS, (char*)"Get Text alignment."},
-    {(char*)"setTextAlign", py_setTextAlign, METH_VARARGS, (char*)"Set Text alignment."},
+    {(char*)"getTextAlign", py_getTextAlign, METH_VARARGS, (char*)"Get Text tqalignment."},
+    {(char*)"setTextAlign", py_setTextAlign, METH_VARARGS, (char*)"Set Text tqalignment."},
     {(char*)"setTextScroll", py_setTextScroll, METH_VARARGS, (char*)"Set Text scroll."},
 
     // RichTextLabel - richtextlabel_python.cpp
@@ -214,7 +214,7 @@ static PyMethodDef karamba_methods[] = {
     {(char*)"showSystray", py_show_systray, METH_VARARGS, (char*)"Show the Systray"},
     {(char*)"moveSystray", py_move_systray, METH_VARARGS, (char*)"Move the Systray"},
     {(char*)"getCurrentWindowCount", py_get_current_window_count, METH_VARARGS, (char*)"Get current Window count"},
-    {(char*)"updateSystrayLayout", py_update_systray_layout, METH_VARARGS, (char*)"Update Systray layout"},
+    {(char*)"updateSystrayLayout", py_update_systray_layout, METH_VARARGS, (char*)"Update Systray tqlayout"},
 
     // Misc - misc_python.cpp
     {(char*)"getThemePath", py_get_theme_path, METH_VARARGS,  (char*)"Get the file path of the theme"},

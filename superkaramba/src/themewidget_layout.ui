@@ -35,7 +35,7 @@
                     <property name="name">
                         <cstring>icon</cstring>
                     </property>
-                    <property name="minimumSize">
+                    <property name="tqminimumSize">
                         <size>
                             <width>76</width>
                             <height>0</height>
@@ -47,7 +47,7 @@
                     <property name="pixmap">
                         <pixmap>image0</pixmap>
                     </property>
-                    <property name="alignment">
+                    <property name="tqalignment">
                         <set>AlignCenter</set>
                     </property>
                 </widget>
@@ -121,7 +121,7 @@
                     <property name="text">
                         <string>Description</string>
                     </property>
-                    <property name="alignment">
+                    <property name="tqalignment">
                         <set>WordBreak|AlignTop</set>
                     </property>
                 </widget>
@@ -143,7 +143,7 @@
                             <property name="sizeType">
                                 <enum>Expanding</enum>
                             </property>
-                            <property name="sizeHint">
+                            <property name="tqsizeHint">
                                 <size>
                                     <width>40</width>
                                     <height>20</height>

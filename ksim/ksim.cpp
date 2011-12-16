@@ -23,7 +23,7 @@
 #include <ksimconfig.h>
 #include <common.h>
 
-#include <layout.h>
+#include <tqlayout.h>
 
 #include <kaboutapplication.h>
 #include <kbugreport.h>
@@ -75,9 +75,9 @@ KSim::PanelExtension::~PanelExtension()
   delete m_dcopClient;
 }
 
-TQSize KSim::PanelExtension::sizeHint(Position p, TQSize maxSize) const
+TQSize KSim::PanelExtension::tqsizeHint(Position p, TQSize maxSize) const
 {
-  return m_view->sizeHint(p, maxSize);
+  return m_view->tqsizeHint(p, maxSize);
 }
 
 void KSim::PanelExtension::resizeEvent(TQResizeEvent *)

@@ -40,7 +40,7 @@ public:
               TQWidget* parent, const char* name = 0);
   void init();
 
-  virtual TQSize sizeHint() const;
+  virtual TQSize tqsizeHint() const;
 	virtual RegExp* regExp() const;
   virtual bool updateSelection(bool parentSelected);
   virtual bool isSelected() const;
@@ -52,7 +52,7 @@ public:
   virtual bool validateSelection() const;
   virtual bool acceptWidgetInsert( RegExpType ) const { return false; }
   virtual bool acceptWidgetPaste() const { return false; }
-  bool hasAnyChildren() { return _children.count() > 1; }
+  bool hasAnyChildren() { return _tqchildren.count() > 1; }
 
 protected:
   virtual void paintEvent( TQPaintEvent *e );

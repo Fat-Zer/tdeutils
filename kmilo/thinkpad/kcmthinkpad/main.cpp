@@ -23,7 +23,7 @@
  */
 
 #include <tqlabel.h>
-#include <layout.h>
+#include <tqlayout.h>
 #include <tqcheckbox.h>
 #include <tqspinbox.h>
 #include <tqfile.h>
@@ -68,10 +68,10 @@ KCMThinkpadModule::KCMThinkpadModule(TQWidget* parent, const char* name, const T
 			 "jr@jriddell.org");
 	setAboutData( about );
 
-	TQVBoxLayout* layout = new TQVBoxLayout(this);
+	TQVBoxLayout* tqlayout = new TQVBoxLayout(this);
 	m_KCMThinkpadGeneral = new KCMThinkpadGeneral(this);
-	layout->addWidget( m_KCMThinkpadGeneral );
-	layout->addStretch();
+	tqlayout->addWidget( m_KCMThinkpadGeneral );
+	tqlayout->addStretch();
 
 	load();
 
@@ -116,7 +116,7 @@ KCMThinkpadModule::KCMThinkpadModule(TQWidget* parent, const char* name, const T
 							  "R30/R31 models and to use a custom volume "
 							  "change step, set the nvram device to world "
 							  "writeable: <em>chmod 666 "
-							  "/dev/nvram</em>").arg(m_nvramFile));
+							  "/dev/nvram</em>").tqarg(m_nvramFile));
 #endif
 	} else {
 		m_KCMThinkpadGeneral->tlOff->setText(i18n("Thinkpad Buttons KMilo Plugin Ready For Configuration"));

@@ -26,7 +26,7 @@
             <property name="text">
                 <string>key id</string>
             </property>
-            <property name="alignment">
+            <property name="tqalignment">
                 <set>AlignVCenter</set>
             </property>
         </widget>

@@ -46,7 +46,7 @@ public:
     CharactersWidget( TextRangeRegExp* regexp, RegExpEditorWindow* editorWindow,
                       TQWidget* parent, const char* name = 0 );
     ~CharactersWidget();
-    virtual TQSize sizeHint() const;
+    virtual TQSize tqsizeHint() const;
 	virtual RegExp* regExp() const;
     virtual RegExpType type() const { return CHARSET; }
     virtual RegExpWidget* findWidgetToEdit( TQPoint globalPos );

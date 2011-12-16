@@ -37,7 +37,7 @@ public:
                const char *name = 0);
     TextWidget( TextRegExp* regexp,  RegExpEditorWindow* editorWindow,
                 TQWidget* parent, const char* name = 0);
-    virtual TQSize sizeHint() const;
+    virtual TQSize tqsizeHint() const;
 	virtual RegExp* regExp() const;
     virtual RegExpType type() const { return TEXT; }
     virtual void updateAll();

@@ -54,7 +54,7 @@ Session::Session( const HostConfig &source )
 
     d->source = source;
 
-    // unicode madness
+    // tqunicode madness
     d->host = source.name.ascii();
     d->community = source.community.ascii();
     d->securityName = source.securityName.ascii();

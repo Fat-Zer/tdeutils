@@ -18,7 +18,7 @@
 ///////////////////////////////////////////////             code for the option dialog box
 
 #include <config.h>
-#include <layout.h>
+#include <tqlayout.h>
 #include <tqtabwidget.h>
 #include <tqlabel.h>
 #include <tqtoolbutton.h>

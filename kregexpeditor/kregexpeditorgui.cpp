@@ -29,7 +29,7 @@
 // #include <unistd.h> // DO I need this?
 #include <stdio.h>
 #include "kregexpeditorprivate.h"
-#include <layout.h>
+#include <tqlayout.h>
 
 const TQString KRegExpEditorGUI::version = TQString::fromLocal8Bit("1.0");
 
@@ -38,9 +38,9 @@ KRegExpEditorGUI::KRegExpEditorGUI(TQWidget *parent, const char *name,
 	                           const TQStringList & )
   : TQWidget( parent, name)
 {
-  TQHBoxLayout* layout = new TQHBoxLayout( this, 6 );
+  TQHBoxLayout* tqlayout = new TQHBoxLayout( this, 6 );
   _editor = new KRegExpEditorPrivate( this, "_editor" );
-  layout->addWidget( _editor );
+  tqlayout->addWidget( _editor );
   connect( _editor, TQT_SIGNAL( canUndo(bool) ), this, TQT_SIGNAL( canUndo(bool) ) );
   connect( _editor, TQT_SIGNAL( canRedo(bool) ), this, TQT_SIGNAL( canRedo(bool) ) );
   connect( _editor, TQT_SIGNAL( changes(bool) ), this, TQT_SIGNAL( changes(bool) ) );
@@ -74,8 +74,8 @@ KRegExpEditorGUIDialog::KRegExpEditorGUIDialog( TQWidget *parent,
                  parent, name ? name : "KRegExpDialog" )
 {
   TQFrame* frame = plainPage();
-  TQVBoxLayout* layout = new TQVBoxLayout( frame, 6 );
-  layout->setAutoAdd( true );
+  TQVBoxLayout* tqlayout = new TQVBoxLayout( frame, 6 );
+  tqlayout->setAutoAdd( true );
   _editor = new KRegExpEditorGUI( frame );
 
   connect( _editor, TQT_SIGNAL( canUndo(bool) ), this, TQT_SIGNAL( canUndo(bool) ) );
@@ -117,20 +117,20 @@ void KRegExpEditorGUIDialog::doSomething( TQString method, void* arguments )
 
 void KRegExpEditorGUI::doSomething( TQString method, void* arguments )
 {
-    if ( method == TQString::fromLatin1( "setCaseSensitive" ) ) {
+    if ( method == TQString::tqfromLatin1( "setCaseSensitive" ) ) {
         _editor->setCaseSensitive( (bool) arguments );
     }
-    else if ( method == TQString::fromLatin1("setMinimal") ) {
+    else if ( method == TQString::tqfromLatin1("setMinimal") ) {
         _editor->setMinimal( (bool) arguments );
     }
-    else if ( method == TQString::fromLatin1("setSyntax") ) {
+    else if ( method == TQString::tqfromLatin1("setSyntax") ) {
         _editor->setSyntax( *((TQString*) arguments) );
     }
-    else if ( method == TQString::fromLatin1("setAllowNonTQtSyntax") ) {
+    else if ( method == TQString::tqfromLatin1("setAllowNonTQtSyntax") ) {
         _editor->setAllowNonTQtSyntax( (bool) arguments );
     }
     else {
-        qFatal( "%s", tqtr("Method '%1' is not valid!").arg(method).latin1() );
+        qFatal( "%s", tqtr("Method '%1' is not valid!").tqarg(method).latin1() );
     }
 }
 

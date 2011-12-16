@@ -27,8 +27,8 @@
 #include <kencodingfiledialog.h>
 
 #include <tqradiobutton.h>
-#include <clipboard.h>
-#include <textcodec.h>
+#include <tqclipboard.h>
+#include <tqtextcodec.h>
 #include <tqpainter.h>
 #include <kprinter.h>
 #include <kmessagebox.h>
@@ -250,8 +250,8 @@ void KgpgApp::slotFilePreDec()
 	page->newFilename->setCaption(i18n("Save File"));
 
 	page->checkClipboard->setText(i18n("Editor"));
-	page->resize(page->minimumSize());
-	popn->resize(popn->minimumSize());
+	page->resize(page->tqminimumSize());
+	popn->resize(popn->tqminimumSize());
         if (popn->exec()==TQDialog::Accepted) {
                 if (page->checkFile->isChecked())
                         newname=page->newFilename->url();
@@ -314,7 +314,7 @@ void KgpgApp::slotFileSave()
     TQTextCodec*cod=TQTextCodec::codecForName (textEncoding.ascii());
         // slotStatusMsg(i18n("Saving file..."));
     if (!checkEncoding(cod)) {
-	KMessageBox::sorry(this,i18n("The document could not been saved, as the selected encoding cannot encode every unicode character in it."));
+	KMessageBox::sorry(this,i18n("The document could not been saved, as the selected encoding cannot encode every tqunicode character in it."));
 	return;
     }
 
@@ -376,7 +376,7 @@ void KgpgApp::slotFileSaveAs()
                 TQString filn=url.path();
                 TQFile f(filn);
                 if (f.exists()) {
-                        TQString message=i18n("Overwrite existing file %1?").arg(url.fileName());
+                        TQString message=i18n("Overwrite existing file %1?").tqarg(url.fileName());
                         int result=KMessageBox::warningContinueCancel(this,TQString(message),i18n("Warning"),i18n("Overwrite"));
                         if (result==KMessageBox::Cancel)
                                 return;
@@ -385,7 +385,7 @@ void KgpgApp::slotFileSaveAs()
 		}
 		else if (KIO::NetAccess::exists(url,false,this))
 		{
-		TQString message=i18n("Overwrite existing file %1?").arg(url.fileName());
+		TQString message=i18n("Overwrite existing file %1?").tqarg(url.fileName());
                         int result=KMessageBox::warningContinueCancel(this,TQString(message),i18n("Warning"),i18n("Overwrite"));
                         if (result==KMessageBox::Cancel)
                                 return;

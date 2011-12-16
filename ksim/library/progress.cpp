@@ -124,9 +124,9 @@ void KSim::Progress::configureObject(bool repaintWidget)
     update();
 }
 
-TQSize KSim::Progress::sizeHint() const
+TQSize KSim::Progress::tqsizeHint() const
 {
-  TQSize hint(Label::sizeHint());
+  TQSize hint(Label::tqsizeHint());
 
   if (d->meterPixmap.height() > hint.height())
     hint.setHeight(d->meterPixmap.height());
@@ -186,7 +186,7 @@ void KSim::Progress::setOrigin(const TQRect &origin)
 
 void KSim::Progress::setMeterPixmap(const TQPixmap &pixmap)
 {
-  TQSize oldSize = sizeHint();
+  TQSize oldSize = tqsizeHint();
   d->meterPixmap = pixmap;
   relayoutLabel(oldSize);
 }

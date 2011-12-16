@@ -126,7 +126,7 @@ void SensorBase::update()
 
         m_sensorList.append(SensorInfo(currentSensor++, label,
            TQString::fromUtf8(name), TQString::fromUtf8(chip->prefix),
-           chipset, sensorType(TQString::fromLatin1(name))));
+           chipset, sensorType(TQString::tqfromLatin1(name))));
       }
     }
   }
@@ -134,13 +134,13 @@ void SensorBase::update()
   if (m_hasNVControl) {
       int temp = 0;
       if (XNVCTRLQueryAttribute(qt_xdisplay(), qt_xscreen(), 0 /* not used? */, NV_CTRL_GPU_CORE_TEMPERATURE, &temp)) {
-          TQString name = TQString::fromLatin1("GPU Temp");
+          TQString name = TQString::tqfromLatin1("GPU Temp");
           m_sensorList.append(SensorInfo(currentSensor++, TQString::number(temp),
                                          name, TQString(), TQString(), sensorType(name)));
       }
 
       if (XNVCTRLQueryAttribute(qt_xdisplay(), qt_xscreen(), 0 /* not used? */, NV_CTRL_AMBIENT_TEMPERATURE, &temp)) {
-          TQString name = TQString::fromLatin1("GPU Ambient Temp");
+          TQString name = TQString::tqfromLatin1("GPU Ambient Temp");
           m_sensorList.append(SensorInfo(currentSensor++, TQString::number(temp),
                                          name, TQString(), TQString(), sensorType(name)));
       }
@@ -217,9 +217,9 @@ TQString SensorBase::sensorType(const TQString &name)
 
   if (name.findRev("temp", -1, false) != -1)
     if (SensorBase::fahrenheit())
-      return TQString::fromLatin1("°F");
+      return TQString::tqfromLatin1("°F");
     else
-      return TQString::fromLatin1("°C");
+      return TQString::tqfromLatin1("°C");
 
   if (name.findRev(TQRegExp("[^\\+]?[^\\-]?V$")) != -1)
     return i18n("Volt", "V");

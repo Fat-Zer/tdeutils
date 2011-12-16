@@ -22,7 +22,7 @@
 #define _BITSWAP_WIDGET_H_
 
 #include <tqlabel.h>
-#include <layout.h> 
+#include <tqlayout.h> 
 #include <tqstring.h> 
 
 
@@ -35,7 +35,7 @@ class CDigitLabel : public TQLabel
     CDigitLabel( TQWidget *parent, uint digit = 0, const char *name=0 );
     ~CDigitLabel( void );
 
-    virtual TQSize sizeHint() const;
+    virtual TQSize tqsizeHint() const;
     inline uint value( void );
 
   signals:

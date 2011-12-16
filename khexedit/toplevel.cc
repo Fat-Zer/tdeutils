@@ -391,7 +391,7 @@ void KHexEdit::initialize( bool openFiles )
         maxItems = 1;
     for( unsigned int i = 1 ; i <= maxItems ; i++ )
     {
-        const TQString key = TQString( "File%1" ).arg( i );
+        const TQString key = TQString( "File%1" ).tqarg( i );
         const TQString value = config->readPathEntry( key );
     
         if (!value.isEmpty())
@@ -533,7 +533,7 @@ void KHexEdit::slotFileOpenRecent( const KURL& url )
   else
   {
     // ### TODO: support network transparency
-    KMessageBox::error( this, i18n("Non local recent file: %1").arg( url.prettyURL() ) );
+    KMessageBox::error( this, i18n("Non local recent file: %1").tqarg( url.prettyURL() ) );
   }
 }
 
@@ -545,7 +545,7 @@ KHexEdit *KHexEdit::newWindow( void )
   {
     TQString msg = i18n( "Can not create new window.\n" );
     msg += hexError( Err_NoMemory );
-    KMessageBox::error( topLevelWidget(), msg );
+    KMessageBox::error( tqtopLevelWidget(), msg );
     return(0);
   }
   hexEdit->show();
@@ -582,7 +582,7 @@ void KHexEdit::closeProgram( void )
 	TQString msg = i18n(""
 	  "There are windows with unsaved modified documents. "
 	  "If you quit now, these modifications will be lost.");
-	int reply = KMessageBox::warningContinueCancel( topLevelWidget(), msg, TQString(), KStdGuiItem::quit() );
+	int reply = KMessageBox::warningContinueCancel( tqtopLevelWidget(), msg, TQString(), KStdGuiItem::quit() );
 	if( reply == KMessageBox::Continue )
 	{
 	  break;
@@ -755,11 +755,11 @@ void KHexEdit::cursorChanged( SCursorState &state )
   }
   else
   {
-    SDisplayLayout &layout = editor()->layout();
+    SDisplayLayout &tqlayout = editor()->tqlayout();
 
-    if( layout.offsetMode == SDisplayLayout::hexadecimal )
+    if( tqlayout.offsetMode == SDisplayLayout::hexadecimal )
     {
-      if( layout.offsetUpperCase == false )
+      if( tqlayout.offsetUpperCase == false )
       {
 	offset += TQString().sprintf( " %04x:%04x-%u", state.offset>>16,
 				     state.offset&0x0000FFFF, state.cell );
@@ -788,7 +788,7 @@ void KHexEdit::fileState( SFileState &state )
 {
   if( state.valid == true )
   {
-    statusBar()->changeItem( i18n("Size: %1").arg( state.size ), status_Size);
+    statusBar()->changeItem( i18n("Size: %1").tqarg( state.size ), status_Size);
     statusBar()->changeItem( state.modified ? "!" : "", status_Modified);
 
     if( mIsModified != state.modified )
@@ -807,23 +807,23 @@ void KHexEdit::fileState( SFileState &state )
 
 
 
-void KHexEdit::layoutChanged( const SDisplayLayout &layout )
+void KHexEdit::layoutChanged( const SDisplayLayout &tqlayout )
 {
   KRadioAction *radioAction;
 
-  if( layout.primaryMode == SDisplayLayout::hexadecimal )
+  if( tqlayout.primaryMode == SDisplayLayout::hexadecimal )
   {
     radioAction = mAction.hexadecimal;
   }
-  else if( layout.primaryMode == SDisplayLayout::decimal )
+  else if( tqlayout.primaryMode == SDisplayLayout::decimal )
   {
     radioAction = mAction.decimal;
   }
-  else if( layout.primaryMode == SDisplayLayout::octal )
+  else if( tqlayout.primaryMode == SDisplayLayout::octal )
   {
     radioAction = mAction.octal;
   }
-  else if( layout.primaryMode == SDisplayLayout::binary )
+  else if( tqlayout.primaryMode == SDisplayLayout::binary )
   {
     radioAction = mAction.binary;
   }
@@ -841,15 +841,15 @@ void KHexEdit::layoutChanged( const SDisplayLayout &layout )
   mAction.dataUppercase->blockSignals(true);
   mAction.offsetUppercase->blockSignals(true);
 
-  mAction.showOffsetColumn->setChecked( layout.offsetVisible );
+  mAction.showOffsetColumn->setChecked( tqlayout.offsetVisible );
   mAction.showTextColumn->setEnabled(
-    layout.primaryMode != SDisplayLayout::textOnly );
+    tqlayout.primaryMode != SDisplayLayout::textOnly );
   mAction.showTextColumn->setChecked(
-    layout.secondaryMode != SDisplayLayout::hide );
+    tqlayout.secondaryMode != SDisplayLayout::hide );
   mAction.offsetAsDecimal->setChecked(
-    layout.offsetMode != SDisplayLayout::hexadecimal);
-  mAction.dataUppercase->setChecked( layout.primaryUpperCase );
-  mAction.offsetUppercase->setChecked( layout.offsetUpperCase );
+    tqlayout.offsetMode != SDisplayLayout::hexadecimal);
+  mAction.dataUppercase->setChecked( tqlayout.primaryUpperCase );
+  mAction.offsetUppercase->setChecked( tqlayout.offsetUpperCase );
 
   mAction.showOffsetColumn->blockSignals(false);
   mAction.showTextColumn->blockSignals(false);
@@ -857,23 +857,23 @@ void KHexEdit::layoutChanged( const SDisplayLayout &layout )
   mAction.dataUppercase->blockSignals(false);
   mAction.offsetUppercase->blockSignals(false);
 
-  if( layout.primaryMode == SDisplayLayout::hexadecimal )
+  if( tqlayout.primaryMode == SDisplayLayout::hexadecimal )
   {
     statusBar()->changeItem( i18n("Hex"), status_Layout );
   }
-  else if( layout.primaryMode == SDisplayLayout::decimal )
+  else if( tqlayout.primaryMode == SDisplayLayout::decimal )
   {
     statusBar()->changeItem( i18n("Dec"), status_Layout );
   }
-  else if( layout.primaryMode == SDisplayLayout::octal )
+  else if( tqlayout.primaryMode == SDisplayLayout::octal )
   {
     statusBar()->changeItem( i18n("Oct"), status_Layout );
   }
-  else if( layout.primaryMode == SDisplayLayout::binary )
+  else if( tqlayout.primaryMode == SDisplayLayout::binary )
   {
     statusBar()->changeItem( i18n("Bin"), status_Layout );
   }
-  else if( layout.primaryMode == SDisplayLayout::textOnly )
+  else if( tqlayout.primaryMode == SDisplayLayout::textOnly )
   {
     statusBar()->changeItem( i18n("Txt"), status_Layout );
   }
@@ -922,7 +922,7 @@ void KHexEdit::bookmarkChanged( TQPtrList<SCursorOffset> &list )
   for( SCursorOffset *p=list.first(); p!=0; p=list.next(), i++ )
   {
     offset.sprintf("%04X:%04X", p->offset>>16, p->offset&0x0000FFFF );
-    text = i18n("Offset: %1").arg(offset);
+    text = i18n("Offset: %1").tqarg(offset);
     KAction *action = new KAction(text, 0, mAction.bookmarkMapper, TQT_SLOT(map()), TQT_TQOBJECT(this), text.latin1());
     int key = acceleratorNumKey( i );
     if( key > 0 )
@@ -1021,7 +1021,7 @@ void KHexEdit::encodingChanged( const SEncodeState &encodeState )
 
   if( mSelectionSize == 0 )
   {
-    statusBar()->changeItem( i18n("Encoding: %1").arg(encodeState.name),
+    statusBar()->changeItem( i18n("Encoding: %1").tqarg(encodeState.name),
 			     status_Selection );
   }
 }
@@ -1186,7 +1186,7 @@ void KHexEdit::setSelectionText( uint selectionOffset, uint selectionSize )
   else
   {
     statusBar()->changeItem(
-      i18n("Encoding: %1").arg(hexView()->encoding().name), status_Selection);
+      i18n("Encoding: %1").tqarg(hexView()->encoding().name), status_Selection);
   }
 }
 

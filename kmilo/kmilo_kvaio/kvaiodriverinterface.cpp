@@ -162,7 +162,7 @@ void KVaioDriverInterface::setBrightness(int value)
     }
 }
 
-bool KVaioDriverInterface::getBatteryStatus(
+bool KVaioDriverInterface::getBatterytqStatus(
     bool& bat1Avail, int& bat1Remaining, int& bat1Max,
     bool& bat2Avail, int& bat2Remaining, int& bat2Max,
     bool& acConnected)

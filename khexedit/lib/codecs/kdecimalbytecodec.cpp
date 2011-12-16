@@ -24,12 +24,12 @@ using namespace KHE;
 void KDecimalByteCodec::encode( TQString &Digits, unsigned int Pos, unsigned char Char ) const
 {
   unsigned char C = Char / 100;
-  Digits.at(Pos++) = '0'+C;
+  Digits.tqat(Pos++) = '0'+C;
   Char -= C * 100;
   C = Char / 10;
-  Digits.at(Pos++) = '0'+C;
+  Digits.tqat(Pos++) = '0'+C;
   Char -= C * 10;
-  Digits.at(Pos) = '0'+Char;
+  Digits.tqat(Pos) = '0'+Char;
 }
 
 
@@ -38,15 +38,15 @@ void KDecimalByteCodec::encodeShort( TQString &Digits, unsigned int Pos, unsigne
   unsigned char C;
   if( (C = Char / 100) )
   {
-    Digits.at(Pos++) = '0'+C;
+    Digits.tqat(Pos++) = '0'+C;
     Char -= C * 100;
   }
   if( (C = Char / 10) )
   {
-    Digits.at(Pos++) = '0'+C;
+    Digits.tqat(Pos++) = '0'+C;
     Char -= C * 10;
   }
-  Digits.at(Pos) = '0'+Char;
+  Digits.tqat(Pos) = '0'+Char;
 }
 
 

@@ -18,7 +18,7 @@ TextField::TextField( )
   setColor(TQColor(192, 192, 192));
   setBGColor(TQColor(0, 0, 0));
   setFont("Helvetica");
-  setAlignment(TQt::AlignLeft);
+  tqsetAlignment(TQt::AlignLeft);
   setFixedPitch(false);
   setShadow(0);
 }
@@ -35,7 +35,7 @@ TextField::TextField( const TextField& def )
     setBGColor(def.getBGColor());
 
     setFont( def.getFont() );
-    setAlignment( def.getAlignment() );
+    tqsetAlignment( def.getAlignment() );
     setFixedPitch( def.getFixedPitch() );
     setShadow( def.getShadow() );
 }
@@ -51,7 +51,7 @@ TextField& TextField::operator=(const TextField& rhs)
     setBGColor(rhs.getBGColor());
 
     setFont( rhs.getFont() );
-    setAlignment( rhs.getAlignment() );
+    tqsetAlignment( rhs.getAlignment() );
     setFixedPitch( rhs.getFixedPitch() );
     setShadow( rhs.getShadow() );
 
@@ -102,32 +102,32 @@ int TextField::getFontSize() const
     return font.pointSize();
 }
 
-void TextField::setAlignment( const TQString &align )
+void TextField::tqsetAlignment( const TQString &align )
 {
     TQString a = align.upper();
     if( a == "LEFT" || a.isEmpty() )
-        alignment = TQt::AlignLeft;
+        tqalignment = TQt::AlignLeft;
     if( a == "RIGHT" )
-        alignment = TQt::AlignRight;
+        tqalignment = TQt::AlignRight;
     if( a == "CENTER" )
-        alignment = TQt::AlignHCenter;
+        tqalignment = TQt::AlignHCenter;
 }
 
-void TextField::setAlignment( int af )
+void TextField::tqsetAlignment( int af )
 {
-    alignment = af;
+    tqalignment = af;
 }
 
 int TextField::getAlignment() const
 {
-    return alignment;
+    return tqalignment;
 }
 
 TQString TextField::getAlignmentAsString() const
 {
-    if( alignment == TQt::AlignHCenter )
+    if( tqalignment == TQt::AlignHCenter )
         return "CENTER";
-    else if( alignment == TQt::AlignRight )
+    else if( tqalignment == TQt::AlignRight )
         return "RIGHT";
     else
         return "LEFT";

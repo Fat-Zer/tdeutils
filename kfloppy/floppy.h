@@ -75,7 +75,7 @@ public slots:
       void format();
       void reset();
 
-      void formatStatus(const TQString &,int);
+      void formattqStatus(const TQString &,int);
       
 protected slots:
 

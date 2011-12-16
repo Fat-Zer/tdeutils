@@ -38,7 +38,7 @@ KBufferColTextExport::KBufferColTextExport( const KBufferColumn* BufferColumn, c
  : Data( D ),
    CoordRange( CR )
 {
-  NoOfBytesPerLine = BufferColumn->layout()->noOfBytesPerLine();
+  NoOfBytesPerLine = BufferColumn->tqlayout()->noOfBytesPerLine();
   Pos = new int[NoOfBytesPerLine];
 
   // TODO: remove this hack and make it more general

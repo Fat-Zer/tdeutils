@@ -22,7 +22,7 @@
 */
 
 // QT includes
-#include <layout.h>
+#include <tqlayout.h>
 
 // KDE includes
 #include <kdebug.h>
@@ -177,7 +177,7 @@ MainWindow::file_reload()
 void
 MainWindow::editToolbars()
 {
-    saveMainWindowSettings( KGlobal::config(), TQString::fromLatin1("MainWindow") );
+    saveMainWindowSettings( KGlobal::config(), TQString::tqfromLatin1("MainWindow") );
     KEditToolbar dlg( factory(), this );
     connect(&dlg, TQT_SIGNAL( newToolbarConfig() ), this, TQT_SLOT( slotNewToolbarConfig() ));
     dlg.exec();
@@ -187,7 +187,7 @@ void
 MainWindow::slotNewToolbarConfig()
 {
     createGUI( m_part );
-    applyMainWindowSettings( KGlobal::config(), TQString::fromLatin1("MainWindow") );
+    applyMainWindowSettings( KGlobal::config(), TQString::tqfromLatin1("MainWindow") );
 }
 
 void
@@ -221,7 +221,7 @@ MainWindow::arkAlreadyOpen( const KURL & url )
         window_close();
 
         // notify the user what's going on
-        KMessageBox::information(0, i18n("The archive %1 is already open and has been raised.\nNote: if the filename does not match, it only means that one of the two is a symbolic link.").arg(url.prettyURL()));
+        KMessageBox::information(0, i18n("The archive %1 is already open and has been raised.\nNote: if the filename does not match, it only means that one of the two is a symbolic link.").tqarg(url.prettyURL()));
         return true;
     }
     return false;

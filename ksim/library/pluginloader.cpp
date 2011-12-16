@@ -92,13 +92,13 @@ bool KSim::PluginLoader::loadPlugin(const KDesktopFile &file)
     case KSim::PluginLoader::EmptyLibName:
       KMessageBox::error(0, i18n("KSim was unable to load the plugin %1"
             " due to the X-KSIM-LIBRARY property being empty in the"
-            " plugins desktop file").arg(file.readName()));
+            " plugins desktop file").tqarg(file.readName()));
       return false;
       break;
     case KSim::PluginLoader::LibNotFound:
       KMessageBox::error(0, i18n("KSim was unable to load the plugin %1"
             " due to not being able to find the plugin, check that the plugin"
-            " is installed and is in your $TDEDIR/lib path").arg(file.readName()));
+            " is installed and is in your $TDEDIR/lib path").tqarg(file.readName()));
       return false;
       break;
     case KSim::PluginLoader::UnSymbols:
@@ -108,8 +108,8 @@ bool KSim::PluginLoader::loadPlugin(const KDesktopFile &file)
             " macro</li>\n<li>The plugin has been damaged or has"
             " some unresolved symbols</li>\n</ul> \nLast"
             " error message that occurred: \n%3</qt>")
-            .arg(d->lib.prepend("ksim_")).arg("KSIM_INIT_PLUGIN")
-            .arg(d->error));
+            .tqarg(d->lib.prepend("ksim_")).tqarg("KSIM_INIT_PLUGIN")
+            .tqarg(d->error));
       return false;
       break;
     default:

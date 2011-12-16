@@ -110,7 +110,7 @@ public:
     */
     void showRMBMenu( bool enableCutCopy );
 
-    virtual TQSize sizeHint() const;
+    virtual TQSize tqsizeHint() const;
 
 public slots:
 
@@ -232,7 +232,7 @@ private:
     /** This points to the top @ref RegExpWidget in the editor window. */
 	ConcWidget *_top;
 
-    /** This points to the layout manager for the editor window */
+    /** This points to the tqlayout manager for the editor window */
     TQHBoxLayout* _layout;
 
     /** Start point and last point draw. Used when doing rubber band selection  */

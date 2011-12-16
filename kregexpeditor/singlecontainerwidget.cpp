@@ -33,7 +33,7 @@ bool SingleContainerWidget::updateSelection( bool parentSelected )
   bool changed = RegExpWidget::updateSelection( parentSelected );
   changed = _child->updateSelection( _isSelected ) && changed;
   if (changed)
-    repaint();
+    tqrepaint();
 
   return changed;
 }
@@ -126,7 +126,7 @@ void SingleContainerWidget::updateAll()
 void SingleContainerWidget::updateCursorRecursively()
 {
   _child->updateCursorRecursively();
-  updateCursorShape();
+  updatetqCursorShape();
 }
 
 

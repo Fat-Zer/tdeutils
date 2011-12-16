@@ -24,7 +24,7 @@
 #include "hostdialog.h"
 #include "monitordialog.h"
 
-#include <layout.h>
+#include <tqlayout.h>
 #include <tqgroupbox.h>
 #include <tqpushbutton.h>
 

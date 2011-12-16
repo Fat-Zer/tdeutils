@@ -43,7 +43,7 @@ public:
         255. Returns -1 if the setting cannot be retrieved. */
     int brightness();
     /** Get the battery status. */
-    bool getBatteryStatus(bool& bat1Avail, int& bat1Remaining, int& bat1Max,
+    bool getBatterytqStatus(bool& bat1Avail, int& bat1Remaining, int& bat1Max,
 			  bool& bat2Avail, int& bat2Remaining, int& bat2Max,
 			  bool& acConnected);
 public slots:

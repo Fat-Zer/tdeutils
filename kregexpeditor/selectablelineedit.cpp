@@ -33,23 +33,23 @@ SelectableLineEdit::SelectableLineEdit( RegExpWidget* owner, TQWidget* parent, c
 void SelectableLineEdit::setSelected( bool selected )
 {
   if ( selected ) {
-    TQPalette pal = TQPalette(palette());
+    TQPalette pal = TQPalette(tqpalette());
     pal.setBrush( TQColorGroup::Base, gray );
     setPalette( pal );
   }
   else {
     unsetPalette();
   }
-  repaint();
+  tqrepaint();
 }
 
-TQSize SelectableLineEdit::sizeHint() const
+TQSize SelectableLineEdit::tqsizeHint() const
 {
   int frameWidth = frame() ? 8 : 4; // from TQLineEdit source
   TQFontMetrics metrics = fontMetrics();
   int actualSize = metrics.width( text() );
   int charWidth = metrics.maxWidth();
-  int height = TQLineEdit::sizeHint().height();
+  int height = TQLineEdit::tqsizeHint().height();
 
   int width;
   if ( hasFocus() )
@@ -67,7 +67,7 @@ void SelectableLineEdit::slotKeyPressed()
   int actualSize = metrics.width( text() );
 
   if ( actualSize > size().width()-frameWidth ) {
-    repaint();
+    tqrepaint();
     emit parentPleaseUpdate();
   }
 }

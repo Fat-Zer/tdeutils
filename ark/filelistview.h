@@ -153,7 +153,7 @@ class FileListView: public KListView
 
 	private:
 		FileLVI* findParent( const TQString& fullname );
-		TQStringList childrenOf( FileLVI* parent );
+		TQStringList tqchildrenOf( FileLVI* parent );
 
 		TQMap<int, columnName> m_columnMap;
 		bool m_pressed;

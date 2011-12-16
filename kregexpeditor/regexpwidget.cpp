@@ -43,17 +43,17 @@ RegExpWidget::RegExpWidget(RegExpEditorWindow* editorWindow, TQWidget *parent,
 
 void RegExpWidget::addNewChild(DragAccepter *, RegExpWidget *)
 {
-  qFatal("This widget should not expect any children");
+  qFatal("This widget should not expect any tqchildren");
 }
 
 void RegExpWidget::addNewConcChild(DragAccepter *, ConcWidget *)
 {
-  qFatal("This widget should not expect any children");
+  qFatal("This widget should not expect any tqchildren");
 }
 
 void RegExpWidget::setConcChild(ConcWidget *)
 {
-  qFatal("This widget should not expect any children");
+  qFatal("This widget should not expect any tqchildren");
 }
 
 bool RegExpWidget::updateSelection(bool parentSelected)
@@ -65,7 +65,7 @@ bool RegExpWidget::updateSelection(bool parentSelected)
   if ( _isSelected != selected ) {
     // Selection state changed
     _isSelected = selected;
-    repaint();
+    tqrepaint();
     return true;
   }
   return false;
@@ -164,10 +164,10 @@ TQRect RegExpWidget::selectionRect() const
 
 void RegExpWidget::enterEvent( TQEvent * )
 {
-  updateCursorShape();
+  updatetqCursorShape();
 }
 
-void RegExpWidget::updateCursorShape()
+void RegExpWidget::updatetqCursorShape()
 {
   TQCursor cursor;
 
@@ -191,7 +191,7 @@ void RegExpWidget::updateCursorShape()
 
 void RegExpWidget::updateCursorRecursively()
 {
-  updateCursorShape();
+  updatetqCursorShape();
 }
 
 

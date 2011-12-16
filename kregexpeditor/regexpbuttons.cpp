@@ -30,14 +30,14 @@
 #include <tqtooltip.h>
 #include <tqwhatsthis.h>
 #include <tqbuttongroup.h>
-#include <layout.h>
+#include <tqlayout.h>
 #include <tqsignalmapper.h>
 #include "regexpconverter.h"
 
 RegExpButtons::RegExpButtons( TQWidget *parent, const char *name )
   : TQDockWindow( TQDockWindow::InDock, parent, name), _keepMode(false)
 {
-  TQBoxLayout *layout = boxLayout();
+  TQBoxLayout *tqlayout = boxLayout();
 
   _grp = new TQButtonGroup(this);
   _grp->hide();
@@ -53,11 +53,11 @@ RegExpButtons::RegExpButtons( TQWidget *parent, const char *name )
   TQPixmap pix;
   pix.convertFromImage( qembed_findImage( "select" ) );
 #else
-  TQPixmap pix = KGlobal::iconLoader()->loadIcon(locate("data", TQString::fromLatin1("kregexpeditor/pics/select.png") ), KIcon::Toolbar );
+  TQPixmap pix = KGlobal::iconLoader()->loadIcon(locate("data", TQString::tqfromLatin1("kregexpeditor/pics/select.png") ), KIcon::Toolbar );
 #endif
 
   _selectBut->setPixmap( pix );
-  layout->addWidget( _selectBut );
+  tqlayout->addWidget( _selectBut );
   _grp->insert(_selectBut);
   _selectBut->setToggleButton( true );
   connect( _selectBut, TQT_SIGNAL(clicked()), TQT_SIGNAL(doSelect()));
@@ -76,19 +76,19 @@ RegExpButtons::RegExpButtons( TQWidget *parent, const char *name )
   but = insert(TEXT, "text", i18n("Text"),
                i18n( "<qt>This will insert a text field, where you may write text. The text you write will "
                      "be matched literally. (i.e. you do not need to escape any characters)</qt>" ) );
-  layout->addWidget( but );
+  tqlayout->addWidget( but );
 
 
   but = insert(CHARSET, "characters", i18n("A single character specified in a range"),
                i18n("<qt>This will match a single character from a predefined range.<p>"
                     "When you insert this widget a dialog box will appear, which lets you specify "
                     "which characters this <i>regexp item</i> will match.</qt>") );
-  layout->addWidget( but );
+  tqlayout->addWidget( but );
 
 
   but = insert(DOT, "anychar", i18n("Any character"),
                i18n("<qt>This will match any single character</qt>") );
-  layout->addWidget( but );
+  tqlayout->addWidget( but );
 
 
   but = insert(REPEAT, "repeat", i18n("Repeated content"),
@@ -102,14 +102,14 @@ RegExpButtons::RegExpButtons( TQWidget *parent, const char *name )
                     "is <tt>abc</tt>, then this <i>regexp item</i> will match the empty string, "
                     "the string <tt>abc</tt>, the string <tt>abcabc</tt>, the string <tt>abcabcabcabc</tt>, "
                     "etc.</qt>") );
-  layout->addWidget( but );
+  tqlayout->addWidget( but );
 
 
   but = insert(ALTN, "altn", i18n("Alternatives"),
                i18n("<qt>This <i>regexp item</i> will match any of its alternatives.</p>"
                     "You specify alternatives by placing <i>regexp items</i> on top of "
                     "each other inside this widget.</qt>") );
-  layout->addWidget( but );
+  tqlayout->addWidget( but );
 
 
   but = insert(COMPOUND,  "compound", i18n("Compound regexp"),
@@ -118,48 +118,48 @@ RegExpButtons::RegExpButtons( TQWidget *parent, const char *name )
                     "a small box. This makes it easier for you to get an overview of large "
                     "<i>regexp items</i>. This is especially useful if you load a predefined <i>regexp item</i> "
                     "you perhaps don't care about the inner workings of.") );
-  layout->addWidget( but );
+  tqlayout->addWidget( but );
 
 
   but = insert(BEGLINE,  "begline", i18n("Beginning of line"),
                i18n("<qt>This will match the beginning of a line.</qt>") );
-  layout->addWidget( but );
+  tqlayout->addWidget( but );
 
 
   but = insert(ENDLINE,  "endline", i18n("End of line"),
                i18n("<qt>This will match the end of a line.</qt>") );
-  layout->addWidget( but );
+  tqlayout->addWidget( but );
 
 
   _wordBoundary = insert(WORDBOUNDARY,  "wordboundary", i18n("Word boundary"),
                          i18n("<qt>This asserts a word boundary (This part does not actually match any characters)</qt>") );
-  layout->addWidget( _wordBoundary );
+  tqlayout->addWidget( _wordBoundary );
 
   _nonWordBoundary = insert(NONWORDBOUNDARY,  "nonwordboundary", i18n("Non Word boundary"),
                             i18n("<qt>This asserts a non-word boundary "
                                  "(This part does not actually match any characters)</qt>") );
-  layout->addWidget( _nonWordBoundary );
+  tqlayout->addWidget( _nonWordBoundary );
 
   _posLookAhead = insert(POSLOOKAHEAD,  "poslookahead", i18n("Positive Look Ahead"),
                          i18n("<qt>This asserts a regular expression (This part does not actually match any characters). "
                               "You can only use this at the end of a regular expression.</qt>") );
-  layout->addWidget( _posLookAhead );
+  tqlayout->addWidget( _posLookAhead );
 
   _negLookAhead = insert(NEGLOOKAHEAD,  "neglookahead", i18n("Negative Look Ahead"),
                          i18n("<qt>This asserts a regular expression that must not match "
                               "(This part does not actually match any characters). "
                               "You can only use this at the end of a regular expression.</qt>") );
-  layout->addWidget( _negLookAhead );
+  tqlayout->addWidget( _negLookAhead );
 }
 
 DoubleClickButton* RegExpButtons::insert(RegExpType tp, const char* name, TQString tooltip, TQString whatsthis)
 {
 #ifdef TQT_ONLY
     TQPixmap pix;
-    pix.convertFromImage( qembed_findImage( TQString::fromLatin1( name ) ) );
+    pix.convertFromImage( qembed_findImage( TQString::tqfromLatin1( name ) ) );
 #else
-    TQPixmap pix = KGlobal::iconLoader()->loadIcon(locate("data", TQString::fromLatin1("kregexpeditor/pics/")+TQString::fromLatin1(name) +
-                                                       TQString::fromLatin1(".png") ), KIcon::Toolbar );
+    TQPixmap pix = KGlobal::iconLoader()->loadIcon(locate("data", TQString::tqfromLatin1("kregexpeditor/pics/")+TQString::tqfromLatin1(name) +
+                                                       TQString::tqfromLatin1(".png") ), KIcon::Toolbar );
 #endif
 
   DoubleClickButton* but = new DoubleClickButton( pix, this, "RegExpButtons::but");

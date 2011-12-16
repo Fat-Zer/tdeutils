@@ -27,7 +27,7 @@
 #include <stdlib.h>
 
 #include <tqfileinfo.h> 
-#include <layout.h>
+#include <tqlayout.h>
 
 #include <kglobal.h>
 #include <klocale.h>
@@ -84,7 +84,7 @@ PcmciaConfig::PcmciaConfig (TQWidget * parent, const char *name)
         TQString s1 = LAPTOP_VERSION;
         TQString s2 = i18n("Version: ")+s1;
         TQLabel* vers = new TQLabel(s2, this);
-        vers->setMinimumSize(vers->sizeHint());
+        vers->setMinimumSize(vers->tqsizeHint());
         v1->addWidget(vers, 0);
 
         top_layout->activate();          

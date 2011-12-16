@@ -37,7 +37,7 @@ class CHexDrag : public TQDragObject
 
     void setData( const TQByteArray &data );
     const char* format ( int i ) const; 
-    TQByteArray encodedData( const char *fmt ) const;
+    TQByteArray tqencodedData( const char *fmt ) const;
 
 
     static bool canDecode( const TQMimeSource *e );  

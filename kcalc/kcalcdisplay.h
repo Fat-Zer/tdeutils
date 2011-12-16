@@ -110,7 +110,7 @@ public:
 	TQString text() const;
 	bool updateDisplay(void);
 	void setStatusText(uint i, const TQString& text);
-	virtual TQSize sizeHint() const;
+	virtual TQSize tqsizeHint() const;
 private:
 	bool _beep;
 	bool _groupdigits;

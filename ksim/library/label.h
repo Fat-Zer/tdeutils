@@ -108,11 +108,11 @@ namespace KSim
       /**
        * reimplemented for internal reasons
        */
-      virtual TQSize sizeHint() const;
+      virtual TQSize tqsizeHint() const;
       /**
        * reimplemented for internal reasons
        */
-      virtual TQSize minimumSizeHint() const;
+      virtual TQSize tqminimumSizeHint() const;
 
     public slots:
       /**
@@ -196,7 +196,7 @@ namespace KSim
        * sets the background image to be painted
        */
       void setThemePixmap(const TQString &image);
-      void relayoutLabel(const TQSize &old, bool repaint = true);
+      void relayoutLabel(const TQSize &old, bool tqrepaint = true);
 
     private:
       /**

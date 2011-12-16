@@ -16,10 +16,10 @@
  ***************************************************************************/
 
 
-#include <layout.h>
+#include <tqlayout.h>
 #include <tqlabel.h>
 #include <tqvgroupbox.h>
-#include <textedit.h>
+#include <tqtextedit.h>
 
 #include <kmessagebox.h>
 #include <klocale.h>
@@ -42,7 +42,7 @@ KDetailedConsole::KDetailedConsole(TQWidget *parent, const char *name,const TQSt
 
         TQVGroupBox *detailsGroup = new TQVGroupBox( i18n("Details"), page);
         (void) new TQLabel(errormessage,detailsGroup);
-        //labdetails->setMinimumSize(labdetails->sizeHint());
+        //labdetails->setMinimumSize(labdetails->tqsizeHint());
         setDetailsWidget(detailsGroup);
         vbox->addWidget(lab1);
 

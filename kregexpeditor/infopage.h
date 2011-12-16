@@ -20,7 +20,7 @@
 
 #ifdef TQT_ONLY
   #include "compat.h"
-  #include <textbrowser.h>
+  #include <tqtextbrowser.h>
 #else
   # include <ktextbrowser.h>
 #endif

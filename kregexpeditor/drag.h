@@ -34,7 +34,7 @@ public:
   RegExpWidgetDrag( RegExp* regexp , TQWidget* dragSource);
   ~RegExpWidgetDrag();
   virtual const char * format ( int i = 0 ) const;
-  virtual TQByteArray encodedData ( const char * ) const;
+  virtual TQByteArray tqencodedData ( const char * ) const;
   static bool canDecode(TQDragMoveEvent* event);
   static RegExpWidget* decode(TQDropEvent* event, RegExpEditorWindow* window,
                               TQWidget* parent);

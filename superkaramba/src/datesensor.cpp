@@ -20,7 +20,7 @@ DateSensor::~DateSensor()
 
 void DateSensor::update()
 {
-    TQDateTime qdt  =  TQDateTime::currentDateTime();
+    TQDateTime qdt  =  TQDateTime::tqcurrentDateTime();
     TQString format;
     SensorParams *sp;
     Meter *meter;
@@ -90,8 +90,8 @@ void DateSensor::toggleCalendar(TQMouseEvent *ev)
 				connect(cal, TQT_SIGNAL(destroyed()), TQT_SLOT(slotCalendarDeleted()));
 				TQPoint c = (TQPoint(ev->x(), ev->y()));
 
-				int w = cal->sizeHint().width();
-				int h = cal->sizeHint().height();
+				int w = cal->tqsizeHint().width();
+				int h = cal->tqsizeHint().height();
 
 				// make calendar fully visible
 				 TQRect deskR = TQApplication::desktop()->screenGeometry(TQApplication::desktop()->screenNumber(c));

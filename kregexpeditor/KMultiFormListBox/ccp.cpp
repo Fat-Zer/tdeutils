@@ -38,9 +38,9 @@ CCP::CCP(KMultiFormListBoxMultiVisible *ee_, KMultiFormListBoxEntry *eee_) : TQO
 void CCP::install(TQObject *elm)
 {
   elm->installEventFilter(this);
-  const TQObjectList children = elm->childrenListObject();
-  if (!children.isEmpty()) {
-    TQObjectListIt it = TQObjectListIt(children);
+  const TQObjectList tqchildren = elm->childrenListObject();
+  if (!tqchildren.isEmpty()) {
+    TQObjectListIt it = TQObjectListIt(tqchildren);
 
     while (TQObject *child=it.current()) {
       if (child->inherits("KMultiFormListBoxMultiVisible")) {

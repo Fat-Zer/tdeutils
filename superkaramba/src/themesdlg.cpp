@@ -220,9 +220,9 @@ void ThemesDlg::getNewStuff()
   KConfig* config = KGlobal::config();
   config->setGroup("KNewStuff");
   config->writePathEntry("ProvidersUrl",
-      TQString::fromLatin1("http://download.kde.org/khotnewstuff/karamba-providers.xml"));
+      TQString::tqfromLatin1("http://download.kde.org/khotnewstuff/karamba-providers.xml"));
   config->sync();
-  m_newStuffStatus = config->entryMap("KNewStuffStatus").keys();
+  m_newStufftqStatus = config->entryMap("KNewStuffStatus").keys();
   //This check is b/c KNewStuff will download, throw an error, 
   //and still have the entry in the config that it was successful
   configSanityCheck();
@@ -304,8 +304,8 @@ void ThemesDlg::writeNewStuffConfig(const TQString &file)
   KConfig* config = KGlobal::config();
   TQStringList keys = config->entryMap("KNewStuffStatus").keys();
 
-  for(TQStringList::Iterator it = m_newStuffStatus.begin();
-      it != m_newStuffStatus.end(); ++it)
+  for(TQStringList::Iterator it = m_newStufftqStatus.begin();
+      it != m_newStufftqStatus.end(); ++it)
   {
     keys.remove(*it);
   }
@@ -477,7 +477,7 @@ void ThemesDlg::uninstall()
       tableThemes->removeItem( twPtr );
     }
 #ifdef HAVE_KNEWSTUFF
-    // Remove theme from KNewStuffStatus
+    // Remove theme from KNewStufftqStatus
     KConfig* config = KGlobal::config();
     config->setGroup("KNewStuffNames");
     TQString name = config->readEntry(tempPath);
@@ -507,7 +507,7 @@ void ThemesDlg::uninstall()
     }
     tableThemes->removeItem(w);
 #ifdef HAVE_KNEWSTUFF
-    // Remove theme from KNewStuffStatus
+    // Remove theme from KNewStufftqStatus
     KConfig* config = KGlobal::config();
     config->setGroup("KNewStuffNames");
     TQString name = config->readEntry(theme.path());

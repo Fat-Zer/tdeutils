@@ -26,7 +26,7 @@
 #include <tqpushbutton.h>
 #include <tqtabwidget.h>
 #include <tqwidget.h>
-#include <layout.h>
+#include <tqlayout.h>
 #include <tqfile.h>
 #include <tqregexp.h>
 
@@ -65,7 +65,7 @@ NetDialog::NetDialog(TQWidget *parent, const char *name)
   m_generalLayout->addMultiCellWidget(m_deviceLabel, 0, 0, 0, 0);
 
   m_deviceCombo = new KComboBox(true, m_generalTab);
-  m_deviceCombo->setSizePolicy(TQSizePolicy(TQSizePolicy::Preferred,
+  m_deviceCombo->tqsetSizePolicy(TQSizePolicy(TQSizePolicy::Preferred,
      TQSizePolicy::Fixed));
   m_deviceCombo->setFocus();
   m_deviceCombo->setDuplicatesEnabled(false);
@@ -86,10 +86,10 @@ NetDialog::NetDialog(TQWidget *parent, const char *name)
   m_timerBox = new TQGroupBox(m_generalTab);
   m_timerBox->setTitle(i18n("Timer"));
   m_timerBox->setColumnLayout(0, Qt::Vertical);
-  m_timerBox->layout()->setSpacing(0);
-  m_timerBox->layout()->setMargin(0);
-  m_timerBoxLayout = new TQVBoxLayout(m_timerBox->layout());
-  m_timerBoxLayout->setAlignment(TQt::AlignTop);
+  m_timerBox->tqlayout()->setSpacing(0);
+  m_timerBox->tqlayout()->setMargin(0);
+  m_timerBoxLayout = new TQVBoxLayout(m_timerBox->tqlayout());
+  m_timerBoxLayout->tqsetAlignment(TQt::AlignTop);
   m_timerBoxLayout->setSpacing(6);
   m_timerBoxLayout->setMargin(11);
 

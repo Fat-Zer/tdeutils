@@ -63,7 +63,7 @@ namespace KSim
       KSim::Config *config() const;
       void makeDirs();
 
-      TQSize sizeHint(KPanelExtension::Position, TQSize maxSize) const;
+      TQSize tqsizeHint(KPanelExtension::Position, TQSize maxSize) const;
       void positionChange(Qt::Orientation);
 
     k_dcop:

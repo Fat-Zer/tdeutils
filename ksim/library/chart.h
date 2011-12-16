@@ -109,11 +109,11 @@ namespace KSim
       /**
        * reimplemented for internal reasons
        */
-      TQSize sizeHint() const;
+      TQSize tqsizeHint() const;
       /**
        * reimplemented for internal reasons
        */
-      TQSize minimumSizeHint() const;
+      TQSize tqminimumSizeHint() const;
 
       void disableAutomaticUpdates();
 

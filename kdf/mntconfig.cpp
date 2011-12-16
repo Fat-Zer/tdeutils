@@ -29,7 +29,7 @@
 
 #include <tqgroupbox.h>
 #include <tqheader.h>
-#include <layout.h>
+#include <tqlayout.h>
 #include <tqlineedit.h>
 
 #undef Unsorted
@@ -102,7 +102,7 @@ MntConfigWidget::MntConfigWidget(TQWidget *parent, const char *name, bool init)
     mIconButton = new KIconButton(mGroupBox);
     mIconButton->setIconType(KIcon::Small, KIcon::Device);
     Q_CHECK_PTR(mIconButton);
-    mIconButton->setFixedWidth( mIconButton->sizeHint().height() );
+    mIconButton->setFixedWidth( mIconButton->tqsizeHint().height() );
     connect(mIconButton,TQT_SIGNAL(iconChanged(TQString)),this,TQT_SLOT(iconChangedButton(TQString)));
     gl->addWidget( mIconButton, 2, 1 );
 
@@ -258,7 +258,7 @@ void MntConfigWidget::iconChanged(const TQString &iconName)
       TQString msg = i18n(""
 			 "This filename is not valid: %1\n"
 			 "It must end with "
-			 "\"_mount\" or \"_unmount\".").arg(iconName);
+			 "\"_mount\" or \"_unmount\".").tqarg(iconName);
       KMessageBox::sorry( this, msg );
       return;
     }

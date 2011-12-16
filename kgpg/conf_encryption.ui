@@ -42,7 +42,7 @@
             <property name="name">
                 <cstring>kcfg_AsciiArmor</cstring>
             </property>
-            <property name="minimumSize">
+            <property name="tqminimumSize">
                 <size>
                     <width>0</width>
                     <height>0</height>
@@ -102,7 +102,7 @@
             <property name="sizeType">
                 <enum>Expanding</enum>
             </property>
-            <property name="sizeHint">
+            <property name="tqsizeHint">
                 <size>
                     <width>20</width>
                     <height>72</height>
@@ -111,7 +111,7 @@
         </spacer>
         <widget class="TQLayoutWidget" row="7" column="0" rowspan="1" colspan="4">
             <property name="name">
-                <cstring>layout3</cstring>
+                <cstring>tqlayout3</cstring>
             </property>
             <hbox>
                 <property name="name">

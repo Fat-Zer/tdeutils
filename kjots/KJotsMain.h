@@ -23,7 +23,7 @@
 #ifndef KJotsMain_included
 #define KJotsMain_included
 
-#include <layout.h>
+#include <tqlayout.h>
 #include <tqpushbutton.h>
 
 #include <kdialogbase.h>

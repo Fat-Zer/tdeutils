@@ -17,7 +17,7 @@
  **/
 #ifndef VERIFIER_H
 #define VERIFIER_H
-#include <textedit.h>
+#include <tqtextedit.h>
 #include "regexphighlighter.h"
 class TQTimer;
 class TQProgressDialog;

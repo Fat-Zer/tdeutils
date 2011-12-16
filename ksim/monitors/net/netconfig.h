@@ -54,7 +54,7 @@ class NetConfig : public KSim::PluginPage
     // Couldnt think of a better name for this :)
     const TQString &boolToString(bool) const;
 
-    TQHBoxLayout *layout;
+    TQHBoxLayout *tqlayout;
     TQPushButton *insertButton;
     TQPushButton *removeButton;
     TQPushButton *modifyButton;

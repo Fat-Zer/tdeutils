@@ -105,7 +105,7 @@ void KValueColumn::paintEditedByte( TQPainter *P, char Byte, const TQString &Edi
 {
   KHEChar B = Codec->decode( Byte );
 
-  const TQColorGroup &CG = View->colorGroup();
+  const TQColorGroup &CG = View->tqcolorGroup();
 
   P->fillRect( 0,0,ByteWidth,LineHeight, TQBrush(colorForChar(B),TQt::SolidPattern) );
 

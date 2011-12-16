@@ -20,7 +20,7 @@
 
 #include <iostream>
 
-#include <clipboard.h>
+#include <tqclipboard.h>
 #include <tqdrawutil.h>
 
 
@@ -233,7 +233,7 @@ CHexViewWidget::CHexViewWidget( TQWidget *parent, const char *name,
   setStartY(0);
 
   setAcceptDrops(true);
-  setDropHighlight(false); // Init state + frame shape
+  setDropHighlight(false); // Init state + frame tqshape
   setBackgroundColor( mHexBuffer->backgroundColor() );
 }
 
@@ -438,7 +438,7 @@ void CHexViewWidget::changeYPos( int p )
 
 void CHexViewWidget::clipboardChanged( void )
 {
-  disconnect(TQApplication::clipboard(),TQT_SIGNAL(dataChanged()),
+  disconnect(TQApplication::tqclipboard(),TQT_SIGNAL(dataChanged()),
 	     this,TQT_SLOT(clipboardChanged()));
   unselect();
 }
@@ -459,7 +459,7 @@ void CHexViewWidget::filter( SFilterControl &fc )
   int errCode = mHexBuffer->filter( fc );
   if( errCode == Err_Success )
   {
-    repaint();
+    tqrepaint();
     emit dataChanged();
     emit cursorChanged( mHexBuffer->cursorState() );
   }
@@ -716,9 +716,9 @@ void CHexViewWidget::setPalette( const TQPalette &p )
 }
 
 
-void CHexViewWidget::setLayout( SDisplayLayout &layout )
+void CHexViewWidget::setLayout( SDisplayLayout &tqlayout )
 {
-  mLayout = layout;
+  mLayout = tqlayout;
   mHexBuffer->setLayout( mLayout );
   updateWindow();
 
@@ -739,7 +739,7 @@ void CHexViewWidget::setCursor( const SDisplayCursor &cursor,
                                 bool /*updateDisplay*/ )
 {
   mCursor = cursor;
-  mHexBuffer->setCursorShapeModifier( cursor.alwaysBlockShape,
+  mHexBuffer->settqCursorShapeModifier( cursor.alwaysBlockShape,
 				      cursor.thickInsertShape );
   setupCursorTimer();
   redrawFromOffset( mHexBuffer->cursorOffset(), false );
@@ -752,7 +752,7 @@ void CHexViewWidget::setColor( const SDisplayColor &color,
   mHexBuffer->setColor( mColor );
   if( updateDisplay == true )
   {
-    repaint();
+    tqrepaint();
   }
 }
 
@@ -796,7 +796,7 @@ int CHexViewWidget::setEncoding( CConversion::EMode mode, CProgress &p )
   int errCode = mHexBuffer->setEncoding( mode, p );
   if( errCode == Err_Success )
   {
-    repaint();
+    tqrepaint();
     emit cursorChanged( mHexBuffer->cursorState() );
     emit encodingChanged( mHexBuffer->encoding() );
   }
@@ -964,7 +964,7 @@ void CHexViewWidget::copy( void )
   {
     return;
   }
-  disconnect(TQApplication::clipboard(),TQT_SIGNAL(dataChanged()),
+  disconnect(TQApplication::tqclipboard(),TQT_SIGNAL(dataChanged()),
 	     this,TQT_SLOT(clipboardChanged()));
   //
   // Note: Do no give the CHexDrag a parent != 0. The clipboard
@@ -974,8 +974,8 @@ void CHexViewWidget::copy( void )
   // is destroyed. We will then have a double destroy situation
   // when the app. is closed (=> segfault).
   //
-  TQApplication::clipboard()->setData(new CHexDrag( buf ));
-  connect(TQApplication::clipboard(),TQT_SIGNAL(dataChanged()),
+  TQApplication::tqclipboard()->setData(new CHexDrag( buf ));
+  connect(TQApplication::tqclipboard(),TQT_SIGNAL(dataChanged()),
 	  this,TQT_SLOT(clipboardChanged()));
 }
 
@@ -988,10 +988,10 @@ void CHexViewWidget::copyText( int columnSegment )
     return;
   }
 
-  disconnect(TQApplication::clipboard(),TQT_SIGNAL(dataChanged()),
+  disconnect(TQApplication::tqclipboard(),TQT_SIGNAL(dataChanged()),
 	     this,TQT_SLOT(clipboardChanged()));
-  TQApplication::clipboard()->setText( buf.data() );
-  connect(TQApplication::clipboard(),TQT_SIGNAL(dataChanged()),
+  TQApplication::tqclipboard()->setText( buf.data() );
+  connect(TQApplication::tqclipboard(),TQT_SIGNAL(dataChanged()),
 	  this,TQT_SLOT(clipboardChanged()));
 }
 
@@ -999,7 +999,7 @@ void CHexViewWidget::copyText( int columnSegment )
 
 void CHexViewWidget::paste( void )
 {
-  TQMimeSource *data = TQApplication::clipboard()->data();
+  TQMimeSource *data = TQApplication::tqclipboard()->data();
   if( data != 0 )
   {
     TQByteArray buf;
@@ -1099,11 +1099,11 @@ int CHexViewWidget::bookmarkMenu( const TQString &title )
     if( p == 0 ) { continue; }
 
     text.sprintf("%04X:%04X", p->offset>>16, p->offset&0x0000FFFF );
-    text.prepend( TQString("[%1] %2: ").arg(i+1).arg(i18n("Offset")) );
+    text.prepend( TQString("[%1] %2: ").tqarg(i+1).tqarg(i18n("Offset")) );
     popup->insertItem( text, i );
   }
 
-  TQSize s(popup->sizeHint());
+  TQSize s(popup->tqsizeHint());
   TQPoint center( (width()-s.width())/2, (height()-s.height())/2 );
   int position = popup->exec( mapToGlobal(center) );
   delete popup;
@@ -1379,7 +1379,7 @@ void CHexViewWidget::drawFrame( TQPainter *p )
   // accepts a drop. The setPalette() function causes quite a bit of flicker
   // in the scrollbars (even when PropagationMode is NoChildren), so I
   // draw the frame manually when it can accept a drop. Note that the
-  // code below is for the frame shape "TQFrame::WinPanel|TQFrame::Plain"
+  // code below is for the frame tqshape "TQFrame::WinPanel|TQFrame::Plain"
   //
   if( mDropHighlight == true )
   {
@@ -1860,7 +1860,7 @@ void CHexViewWidget::setCursorPosition(int x, int y, bool init, bool cellLevel)
 void CHexViewWidget::redrawInterval( uint startOffset, uint stopOffset )
 {
   //
-  // Can be improved, I repaint the entire line even if the offsets
+  // Can be improved, I tqrepaint the entire line even if the offsets
   // only specify one byte.
   //
   uint lineStart = mHexBuffer->calculateLine( startOffset );
@@ -2270,7 +2270,7 @@ void CHexViewWidget::setDropHighlight( bool dropHighlight )
     //
     // 2000-01-10 Espen Sand
     // Highlight. I have reimplemented TQFrame::drawFrame(TQPainter *)
-    // to support a custom frame color. I assume the frame shape is
+    // to support a custom frame color. I assume the frame tqshape is
     // "TQFrame::WinPanel|TQFrame::Plain" in that function.
     //
     setFrameStyle( TQFrame::WinPanel|TQFrame::Plain );

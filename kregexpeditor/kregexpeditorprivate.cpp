@@ -154,17 +154,17 @@ KRegExpEditorPrivate::KRegExpEditorPrivate(TQWidget *parent, const char *name)
 
 
   // Line Edit
-  TQHBoxLayout* layout = new TQHBoxLayout( topLayout, 6 );
+  TQHBoxLayout* tqlayout = new TQHBoxLayout( topLayout, 6 );
   TQLabel* label = new TQLabel( i18n("ASCII syntax:"), this );
-  layout->addWidget( label );
+  tqlayout->addWidget( label );
   clearButton = new TQToolButton( this );
-  const TQString icon( TQString::fromLatin1( TQApplication::reverseLayout() ? "clear_left" : "locationbar_erase" ) );
+  const TQString icon( TQString::tqfromLatin1( TQApplication::reverseLayout() ? "clear_left" : "locationbar_erase" ) );
   TQIconSet clearIcon = SmallIconSet( icon );
   clearButton->setIconSet( clearIcon );
-  layout->addWidget( clearButton );
+  tqlayout->addWidget( clearButton );
   TQToolTip::add( clearButton, i18n("Clear expression") );
   _regexpEdit = new TQLineEdit( this );
-  layout->addWidget( _regexpEdit );
+  tqlayout->addWidget( _regexpEdit );
   TQWhatsThis::add( _regexpEdit, i18n( "This is the regular expression in ASCII syntax. You are likely only "
 				      "to be interested in this if you are a programmer, and need to "
 				      "develop a regular expression using TQRegExp.<p>"
@@ -174,11 +174,11 @@ KRegExpEditorPrivate::KRegExpEditorPrivate(TQWidget *parent, const char *name)
 #ifdef TQT_ONLY
   TQPixmap pix( "icons/error.png" );
 #else
-  TQPixmap pix = KGlobal::iconLoader()->loadIcon(locate("data", TQString::fromLatin1("kregexpeditor/pics/error.png") ), KIcon::Toolbar );
+  TQPixmap pix = KGlobal::iconLoader()->loadIcon(locate("data", TQString::tqfromLatin1("kregexpeditor/pics/error.png") ), KIcon::Toolbar );
 #endif
   _error = new TQLabel( this );
   _error->setPixmap( pix );
-  layout->addWidget( _error );
+  tqlayout->addWidget( _error );
   _error->hide();
 
   _timer = new TQTimer(this);
@@ -196,7 +196,7 @@ KRegExpEditorPrivate::KRegExpEditorPrivate(TQWidget *parent, const char *name)
   accel->connectItem( accel->insertItem( CTRL+Key_Z ), this, TQT_SLOT( slotUndo() ) );
   accel->connectItem( accel->insertItem( CTRL+Key_R ), this, TQT_SLOT( slotRedo() ) );
 
-  setSyntax( TQString::fromLatin1( "TQt" ) );
+  setSyntax( TQString::tqfromLatin1( "TQt" ) );
 }
 
 TQString KRegExpEditorPrivate::regexp()
@@ -371,7 +371,7 @@ void KRegExpEditorPrivate::setVerifyText( const TQString& fileName )
     _autoVerify = false;
     TQFile file( fileName );
     if ( !file.open( IO_ReadOnly ) ) {
-        KMessageBox::sorry(0, i18n("Could not open file '%1' for reading").arg( fileName ) );
+        KMessageBox::sorry(0, i18n("Could not open file '%1' for reading").tqarg( fileName ) );
     }
     else {
         TQTextStream s( &file );

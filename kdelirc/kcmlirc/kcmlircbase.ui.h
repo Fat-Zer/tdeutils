@@ -32,6 +32,6 @@ void KCMLircBase::init()
 	theModes->setItemsRenameable(true);
 	modeLayout->addWidget(theModes);
 	modeLayout->addLayout(modeButtonLayout);
-	modeLayout->invalidate();
+	modeLayout->tqinvalidate();
 	modeLayout->activate();
 }

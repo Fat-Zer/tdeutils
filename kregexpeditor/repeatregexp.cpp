@@ -58,7 +58,7 @@ bool RepeatRegExp::load( TQDomElement top, const TQString& version )
     if ( !ok ) {
         KMessageBox::sorry( 0, i18n("<p>Value for attribute <b>%1</b> was not an integer for element "
                                     "<b>%2</b></p><p>It contained the value <b>%3</b></p>")
-                            .arg(TQString::fromLatin1("lower")).arg(TQString::fromLatin1("Repeat")).arg(lower),
+                            .tqarg(TQString::tqfromLatin1("lower")).tqarg(TQString::tqfromLatin1("Repeat")).tqarg(lower),
                             i18n("Error While Loading From XML File") ) ;
         _lower = 0;
     }
@@ -66,7 +66,7 @@ bool RepeatRegExp::load( TQDomElement top, const TQString& version )
     if ( !ok ) {
         KMessageBox::sorry( 0, i18n("<p>Value for attribute <b>%1</b> was not an integer for element "
                                     "<b>%2</b></p><p>It contained the value <b>%3</b></p>")
-                            .arg(TQString::fromLatin1("upper")).arg(TQString::fromLatin1("Repeat")).arg(upper),
+                            .tqarg(TQString::tqfromLatin1("upper")).tqarg(TQString::tqfromLatin1("Repeat")).tqarg(upper),
                             i18n("Error While Loading From XML File") ) ;
         _upper = -1;
     }

@@ -18,7 +18,7 @@
  *
  */
 
-#include <layout.h>
+#include <tqlayout.h>
 #include <tqbuttongroup.h>
 #include <tqspinbox.h>
 #include <tqlabel.h>
@@ -78,14 +78,14 @@ void LayoutDialogPage::setupLayoutPage( void )
   {
     mLayout.marginSpin[i] = new TQSpinBox( group );
     mLayout.marginSpin[i]->setFixedHeight(
-      mLayout.marginSpin[i]->sizeHint().height() );
+      mLayout.marginSpin[i]->tqsizeHint().height() );
     mLayout.marginSpin[i]->setMinimumWidth(
       mLayout.marginSpin[i]->fontMetrics().width("M")*10 );
     mLayout.marginSpin[i]->setRange( 0, INT_MAX );
 
     TQLabel *label = new TQLabel( mLayout.marginSpin[i], name[i], group );
-    label->setFixedHeight( mLayout.marginSpin[i]->sizeHint().height() );
-    label->setFixedWidth( label->sizeHint().width() );
+    label->setFixedHeight( mLayout.marginSpin[i]->tqsizeHint().height() );
+    label->setFixedWidth( label->tqsizeHint().width() );
 
     if( i < 2 )
     {
@@ -101,7 +101,7 @@ void LayoutDialogPage::setupLayoutPage( void )
   
   text = i18n("Draw h&eader above text");
   mLayout.headerCheck = new TQCheckBox( text, this );
-  mLayout.headerCheck->setFixedSize( mLayout.headerCheck->sizeHint() );
+  mLayout.headerCheck->setFixedSize( mLayout.headerCheck->tqsizeHint() );
   connect( mLayout.headerCheck, TQT_SIGNAL( toggled(bool)),
 	   TQT_SLOT( slotDrawHeader(bool)));
   topLayout->addWidget( mLayout.headerCheck, 0, AlignLeft );
@@ -135,16 +135,16 @@ void LayoutDialogPage::setupLayoutPage( void )
   {
     mLayout.headerCombo[i] = new TQComboBox( false, this );
     mLayout.headerCombo[i]->setFixedHeight(
-      mLayout.headerCombo[i]->sizeHint().height() );
+      mLayout.headerCombo[i]->tqsizeHint().height() );
     mLayout.headerCombo[i]->setMinimumWidth(
       mLayout.headerCombo[i]->fontMetrics().width("M")*10 );
  
     mLayout.headerLabel[i] = new TQLabel( mLayout.headerCombo[i], name[i],
 					 this );
     mLayout.headerLabel[i]->setFixedHeight( 
-      mLayout.headerLabel[i]->sizeHint().height() );
+      mLayout.headerLabel[i]->tqsizeHint().height() );
     mLayout.headerLabel[i]->setFixedWidth( 
-      mLayout.headerLabel[i]->sizeHint().width() );
+      mLayout.headerLabel[i]->tqsizeHint().width() );
 
     if( i<3 )
     {
@@ -163,7 +163,7 @@ void LayoutDialogPage::setupLayoutPage( void )
 
   text = i18n("Draw &footer below text");
   mLayout.footerCheck = new TQCheckBox( text, this );
-  mLayout.footerCheck->setFixedSize( mLayout.footerCheck->sizeHint() );
+  mLayout.footerCheck->setFixedSize( mLayout.footerCheck->tqsizeHint() );
   connect( mLayout.footerCheck, TQT_SIGNAL( toggled(bool)),
 	   TQT_SLOT( slotDrawFooter(bool)));
   topLayout->addWidget( mLayout.footerCheck, 0, AlignLeft );
@@ -181,16 +181,16 @@ void LayoutDialogPage::setupLayoutPage( void )
   {
     mLayout.footerCombo[i] = new TQComboBox( false, this );
     mLayout.footerCombo[i]->setFixedHeight(
-      mLayout.footerCombo[i]->sizeHint().height() );
+      mLayout.footerCombo[i]->tqsizeHint().height() );
     mLayout.footerCombo[i]->setMinimumWidth(
       mLayout.footerCombo[i]->fontMetrics().width("M")*10 );
 
     mLayout.footerLabel[i] = new TQLabel( mLayout.footerCombo[i], name[i], 
 					 this );
     mLayout.footerLabel[i]->setFixedHeight( 
-      mLayout.footerLabel[i]->sizeHint().height() );
+      mLayout.footerLabel[i]->tqsizeHint().height() );
     mLayout.footerLabel[i]->setFixedWidth( 
-      mLayout.footerLabel[i]->sizeHint().width() );
+      mLayout.footerLabel[i]->tqsizeHint().width() );
 
     if( i<3 )
     {

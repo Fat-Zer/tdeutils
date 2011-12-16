@@ -67,10 +67,10 @@ void CStatusBarProgress::initialize( void )
   mBarPixmap    = 0;
   mBarStyle     = Solid;
 
-  mBarColor     = palette().active().highlight();
-  mBarTextColor = palette().active().highlightedText();
-  mTextColor    = palette().active().text();
-  setBackgroundColor( palette().active().background() );
+  mBarColor     = tqpalette().active().highlight();
+  mBarTextColor = tqpalette().active().highlightedText();
+  mTextColor    = tqpalette().active().text();
+  setBackgroundColor( tqpalette().active().background() );
 
   TQFont font( KGlobalSettings::generalFont() );
   font.setBold( true );
@@ -176,7 +176,7 @@ bool CStatusBarProgress::textEnabled( void ) const
   return( mTextEnabled );
 }
 
-TQSize CStatusBarProgress::sizeHint( void ) const
+TQSize CStatusBarProgress::tqsizeHint( void ) const
 {
   TQSize s( size() );
 
@@ -212,13 +212,13 @@ int CStatusBarProgress::recalcValue(int range)
 
 void CStatusBarProgress::valueChange()
 {
-  repaint(contentsRect(), FALSE);
+  tqrepaint(contentsRect(), FALSE);
   emit percentageChanged(recalcValue(100));
 }
 
 void CStatusBarProgress::rangeChange()
 {
-  repaint(contentsRect(), FALSE);
+  tqrepaint(contentsRect(), FALSE);
   emit percentageChanged(recalcValue(100));
 }
 
@@ -246,10 +246,10 @@ void CStatusBarProgress::adjustStyle( void )
 
 void CStatusBarProgress::paletteChange( const TQPalette & )
 {
-  mBarColor     = palette().active().highlight();
-  mBarTextColor = palette().active().highlightedText();
-  mTextColor    = palette().active().text();
-  setBackgroundColor( palette().active().background() );
+  mBarColor     = tqpalette().active().highlight();
+  mBarTextColor = tqpalette().active().highlightedText();
+  mTextColor    = tqpalette().active().text();
+  setBackgroundColor( tqpalette().active().background() );
 }
 
 void CStatusBarProgress::drawText( TQPainter *p )
@@ -259,17 +259,17 @@ void CStatusBarProgress::drawText( TQPainter *p )
 
   if( mMsg.isEmpty() == true )
   {
-    s = TQString("%1%").arg(recalcValue(100));
+    s = TQString("%1%").tqarg(recalcValue(100));
   }
   else
   {
     if( mCurPage > 0 )
     {
-      s = i18n("%1... %2 of %3").arg(mMsg).arg(mCurPage).arg(mMaxPage);
+      s = i18n("%1... %2 of %3").tqarg(mMsg).tqarg(mCurPage).tqarg(mMaxPage);
     }
     else
     {
-      s = i18n("%1... %2%").arg(mMsg).arg(recalcValue(100));
+      s = i18n("%1... %2%").tqarg(mMsg).tqarg(recalcValue(100));
     }
   }
 

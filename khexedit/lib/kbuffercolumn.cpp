@@ -395,7 +395,7 @@ void KBufferColumn::paintLine( TQPainter *P, int Line ) // TODO: could be remove
 
 void KBufferColumn::paintPositions( TQPainter *P, int Line, KSection Pos )
 {
-  const TQColorGroup &CG = View->colorGroup();
+  const TQColorGroup &CG = View->tqcolorGroup();
 
   // clear background
   unsigned int BlankFlag = (Pos.start()!=0?StartsBefore:0) | (Pos.end()!=LastPos?EndsLater:0);
@@ -501,7 +501,7 @@ void KBufferColumn::paintPlain( TQPainter *P, KSection Positions, int Index )
 
 void KBufferColumn::paintSelection( TQPainter *P, KSection Positions, int Index, int Flag )
 {
-  const TQColorGroup &CG = View->colorGroup();
+  const TQColorGroup &CG = View->tqcolorGroup();
 
   paintRange( P, CG.highlight(), Positions, Flag );
 
@@ -524,7 +524,7 @@ void KBufferColumn::paintSelection( TQPainter *P, KSection Positions, int Index,
 
 void KBufferColumn::paintMarking( TQPainter *P, KSection Positions, int Index, int Flag )
 {
-  const TQColorGroup &CG = View->colorGroup();
+  const TQColorGroup &CG = View->tqcolorGroup();
 
   paintRange( P, CG.text(), Positions, Flag );
 
@@ -581,7 +581,7 @@ void KBufferColumn::paintByte( TQPainter *P, int Index )
   char Byte = ( Index > -1 ) ? Buffer->datum( Index ) : EmptyByte;
   KHEChar B = Codec->decode( Byte );
 
-  const TQColorGroup &CG = View->colorGroup();
+  const TQColorGroup &CG = View->tqcolorGroup();
   TQColor Color = CG.text();
   TQBrush Brush( CG.base(), TQt::SolidPattern );
 

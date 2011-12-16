@@ -26,7 +26,7 @@
 #include <kprocess.h>
 #include <kconfig.h>
 #include <kglobal.h>
-#include <layout.h>
+#include <tqlayout.h>
 #include <unistd.h>
 #include <fcntl.h>
 
@@ -147,9 +147,9 @@ LaptopModule::LaptopModule(TQWidget *parent, const char *)
     enablehibernate = config.readBoolEntry("EnableHibernate", false);
     laptop_portable::software_suspend_set_mask(enablehibernate);
   }
-  TQVBoxLayout *layout = new TQVBoxLayout(this);
+  TQVBoxLayout *tqlayout = new TQVBoxLayout(this);
   tab = new TQTabWidget(this);
-  layout->addWidget(tab);
+  tqlayout->addWidget(tab);
 
   battery = new BatteryConfig(parent, "kcmlaptop");
   tab->addTab(battery, i18n("&Battery"));

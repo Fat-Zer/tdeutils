@@ -26,7 +26,7 @@
 #include "charselector.h"
 #include "limitedcharlineedit.h"
 #include "regexpconverter.h"
-#include <layout.h>
+#include <tqlayout.h>
 #include <tqwidgetstack.h>
 #include <tqcombobox.h>
 
@@ -43,10 +43,10 @@ class StackContainer :public TQWidget
 public:
     StackContainer( TQWidget* child, TQWidget* parent ) : TQWidget( parent )
         {
-            TQHBoxLayout* layout = new TQHBoxLayout( this );
+            TQHBoxLayout* tqlayout = new TQHBoxLayout( this );
             child->reparent( this, TQPoint(0,0), false );
-            layout->addWidget( child );
-            layout->addStretch( 1 );
+            tqlayout->addWidget( child );
+            tqlayout->addStretch( 1 );
         }
 };
 
@@ -54,13 +54,13 @@ CharSelector::CharSelector( TQWidget* parent, const char* name )
     :TQWidget( parent, name ), _oldIndex(0)
 {
   TQStringList items;
-  TQHBoxLayout* layout = new TQHBoxLayout( this, 0, 6 );
+  TQHBoxLayout* tqlayout = new TQHBoxLayout( this, 0, 6 );
 
   _type = new TQComboBox( this, "_type" );
   items << i18n("Normal Character")
         << i18n("Unicode Char in Hex.")
         << i18n("Unicode Char in Oct.")
-        << TQString::fromLatin1("----")
+        << TQString::tqfromLatin1("----")
         << i18n("The Bell Character (\\a)")
         << i18n("The Form Feed Character (\\f)")
         << i18n("The Line Feed Character (\\n)")
@@ -68,10 +68,10 @@ CharSelector::CharSelector( TQWidget* parent, const char* name )
         << i18n("TheQt::Horizontal Tab Character (\\t)")
         << i18n("TheQt::Vertical Tab Character (\\v)");
   _type->insertStringList( items );
-  layout->addWidget( _type );
+  tqlayout->addWidget( _type );
 
   _stack = new TQWidgetStack( this, "_stack" );
-  layout->addWidget( _stack );
+  tqlayout->addWidget( _stack );
 
   _normal = new LimitedCharLineEdit( LimitedCharLineEdit::NORMAL, 0, "_normal" );
   _stack->addWidget( new StackContainer( _normal, _stack ), 0 );
@@ -169,17 +169,17 @@ TQString CharSelector::text() const
   case 3: // The seperator
     break;
   case 4:
-    return TQString::fromLatin1("\\a");
+    return TQString::tqfromLatin1("\\a");
   case 5:
-    return TQString::fromLatin1("\\f");
+    return TQString::tqfromLatin1("\\f");
   case 6:
-    return TQString::fromLatin1("\\n");
+    return TQString::tqfromLatin1("\\n");
   case 7:
-    return TQString::fromLatin1("\\r");
+    return TQString::tqfromLatin1("\\r");
   case 8:
-    return TQString::fromLatin1("\\t");
+    return TQString::tqfromLatin1("\\t");
   case 9:
-    return TQString::fromLatin1("\\v");
+    return TQString::tqfromLatin1("\\v");
   }
   return TQString();
 }

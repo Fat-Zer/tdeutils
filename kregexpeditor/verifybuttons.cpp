@@ -30,7 +30,7 @@
 
 #include "verifybuttons.h"
 #include <tqtooltip.h>
-#include <layout.h>
+#include <tqlayout.h>
 #include <tqwhatsthis.h>
 #include "qtregexpconverter.h"
 #include "emacsregexpconverter.h"
@@ -42,56 +42,56 @@
 VerifyButtons::VerifyButtons( TQWidget* parent, const char* name )
     :TQDockWindow( TQDockWindow::InDock, parent, name ), _configMenu( 0 )
 {
-    TQBoxLayout* layout = boxLayout();
+    TQBoxLayout* tqlayout = boxLayout();
 
     _verify =  new TQToolButton(this);
-    TQIconSet icon = Util::getSystemIconSet( TQString::fromLatin1("spellcheck"));
+    TQIconSet icon = Util::getSystemIconSet( TQString::tqfromLatin1("spellcheck"));
     _verify->setIconSet( icon );
     TQToolTip::add( _verify, i18n( "Verify regular expression" ) );
     TQWhatsThis::add( _verify, i18n("Shows what part of the regular expression is being matched in the <i>verifier window</i>."
                                    "(The window below the graphical editor window)."));
-    layout->addWidget( _verify );
+    tqlayout->addWidget( _verify );
     connect( _verify, TQT_SIGNAL( clicked() ), this, TQT_SIGNAL( verify() ) );
 
     TQToolButton* button = new TQToolButton(this);
-    button->setPixmap( Util::getSystemIcon( TQString::fromLatin1("fileopen")) );
-    layout->addWidget( button );
+    button->setPixmap( Util::getSystemIcon( TQString::tqfromLatin1("fileopen")) );
+    tqlayout->addWidget( button );
     connect(button, TQT_SIGNAL(clicked()), this, TQT_SLOT(loadText()));
     TQToolTip::add( button, i18n("Load text in the verifier window") );
 
     button = new TQToolButton(this);
-    button->setPixmap( Util::getSystemIcon( TQString::fromLatin1("package_settings")) );
-    layout->addWidget( button );
+    button->setPixmap( Util::getSystemIcon( TQString::tqfromLatin1("package_settings")) );
+    tqlayout->addWidget( button );
     connect(button, TQT_SIGNAL(clicked()), this, TQT_SLOT(configure()));
     TQToolTip::add( button, i18n("Settings") );
 
     // It is currently not possible to ask for the paragraph being highlighted, thefore scrolling to next/prev match
     // do not work. Enable this when they work.
-    // _first = new TQToolButton( TQString::fromLatin1("<<"), this);
-    // layout->addWidget( _first );
+    // _first = new TQToolButton( TQString::tqfromLatin1("<<"), this);
+    // tqlayout->addWidget( _first );
     // connect(_first, TQT_SIGNAL(clicked()), this, TQT_SIGNAL( gotoFirst()));
     // _first->setFixedWidth( 25 );
     //
-    // _prev = new TQToolButton(TQString::fromLatin1("<"), this);
-    // layout->addWidget( _prev );
+    // _prev = new TQToolButton(TQString::tqfromLatin1("<"), this);
+    // tqlayout->addWidget( _prev );
     // connect(_prev, TQT_SIGNAL(clicked()), this, TQT_SIGNAL( gotoPrev()));
     // _prev->setFixedWidth( 20 );
     //
-    // _next = new TQToolButton(TQString::fromLatin1(">"), this);
-    // layout->addWidget( _next );
+    // _next = new TQToolButton(TQString::tqfromLatin1(">"), this);
+    // tqlayout->addWidget( _next );
     // connect(_next, TQT_SIGNAL(clicked()), this, TQT_SIGNAL( gotoNext()));
     // _next->setFixedWidth( 20 );
     //
-    // _last = new TQToolButton(TQString::fromLatin1(">>"), this);
-    // layout->addWidget( _last );
+    // _last = new TQToolButton(TQString::tqfromLatin1(">>"), this);
+    // tqlayout->addWidget( _last );
     // connect(_last, TQT_SIGNAL(clicked()), this, TQT_SIGNAL( gotoLast()));
     // _last->setFixedWidth( 25 );
 
     // Same as above
 //  TQLabel* label = new TQLabel( i18n("Matches: "), this );
-//  layout->addWidget( label );
+//  tqlayout->addWidget( label );
 //  _matches = new TQLabel(i18n("-"), this );
-//  layout->addWidget( _matches );
+//  tqlayout->addWidget( _matches );
 //  TQString txt = i18n( "Shows number of times regular expression matches the text in the verifier window");
 //  TQToolTip::add( label, txt );
 //  TQToolTip::add( _matches, txt );
@@ -179,7 +179,7 @@ void VerifyButtons::setMatchCount( int /*count*/ )
 // currently this is not possible due to limitation in TQSyntaxHighlighter
 /*
   if ( count == -1 )
-  _matches->setText( TQString::fromLatin1("-") );
+  _matches->setText( TQString::tqfromLatin1("-") );
   else
   _matches->setText( TQString::number( count ) );
 */

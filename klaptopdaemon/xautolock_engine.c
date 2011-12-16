@@ -224,7 +224,7 @@ evaluateTriggers (Display* d)
   *  when we are finally re-enabled.
   */
 #ifdef VMS
-  if (vmsStatus == 0)  
+  if (vmstqStatus == 0)  
   {
 #else /* VMS */
   if (lockerPid)
@@ -336,7 +336,7 @@ evaluateTriggers (Display* d)
       || now >= lockTrigger)
   {
 #ifdef VMS
-    if (vmsStatus != 0)
+    if (vmstqStatus != 0)
 #else /* VMS */
     if (!lockerPid)
 #endif /* VMS */
@@ -350,9 +350,9 @@ evaluateTriggers (Display* d)
         case 0:
           (void) close (ConnectionNumber (d));
 #ifdef VMS
-          vmsStatus = 0;
+          vmstqStatus = 0;
           lockerPid = lib$spawn ((lockNow ? &nowLockerDescr : &lockerDescr),
-	                         0, 0, &1, 0, 0, &vmsStatus);
+	                         0, 0, &1, 0, 0, &vmstqStatus);
 
 	  if (!(lockerPid & 1)) exit (lockerPid);
 

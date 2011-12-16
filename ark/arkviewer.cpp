@@ -30,7 +30,7 @@
 #include <kiconloader.h>
 
 #include <tqvbox.h>
-#include <layout.h>
+#include <tqlayout.h>
 #include <tqlabel.h>
 #include <tqframe.h>
 #include <tqurl.h>
@@ -40,7 +40,7 @@ ArkViewer::ArkViewer( TQWidget * parent, const char * name )
 	: KDialogBase( parent, name, false, TQString(), Close ), m_part( 0 )
 {
 	m_widget = new TQVBox( this );
-	m_widget->layout()->setSpacing( 10 );
+	m_widget->tqlayout()->setSpacing( 10 );
 
 	connect( this, TQT_SIGNAL( finished() ), this, TQT_SLOT( slotFinished() ) );
 
@@ -76,15 +76,15 @@ bool ArkViewer::view( const KURL& filename )
 
 	TQLabel *iconLabel = new TQLabel( header );
 	iconLabel->setPixmap( mimetype->pixmap( KIcon::Desktop ) );
-	iconLabel->setSizePolicy( TQSizePolicy::Fixed, TQSizePolicy::Minimum );
+	iconLabel->tqsetSizePolicy( TQSizePolicy::Fixed, TQSizePolicy::Minimum );
 
 	TQVBox *headerRight = new TQVBox( header );
 	new TQLabel( TQString( "<qt><b>%1</b></qt>" )
-	                     .arg( filename.fileName() ), headerRight
+	                     .tqarg( filename.fileName() ), headerRight
 	          );
 	new TQLabel( mimetype->comment(), headerRight );
 
-	header->setSizePolicy( TQSizePolicy::Expanding, TQSizePolicy::Maximum );
+	header->tqsetSizePolicy( TQSizePolicy::Expanding, TQSizePolicy::Maximum );
 
 	m_part = KParts::ComponentFactory::createPartInstanceFromQuery<KParts::ReadOnlyPart>( mimetype->name(), TQString(), m_widget, 0, TQT_TQOBJECT(this) );
 

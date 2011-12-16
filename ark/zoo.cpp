@@ -289,7 +289,7 @@ TQString fixTime( const TQString &_strTime )
 
   if ( strTime.contains("+") || strTime.contains("-") )
   {
-    TQCharRef c = strTime.at( 8 );
+    TQCharRef c = strTime.tqat( 8 );
     int offset = strTime.right( strTime.length() - 9 ).toInt();
     TQString strHour = strTime.left( 2 );
     int nHour = strHour.toInt();

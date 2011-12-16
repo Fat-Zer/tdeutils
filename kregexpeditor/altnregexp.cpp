@@ -29,7 +29,7 @@ void AltnRegExp::addRegExp( RegExp *elm )
     addChild( elm );
 }
 
-RegExpList AltnRegExp::children() const
+RegExpList AltnRegExp::tqchildren() const
 {
     return list;
 }

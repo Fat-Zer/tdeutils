@@ -74,7 +74,7 @@ CSearchBar::CSearchBar( TQWidget *parent, const char *name, WFlags f )
   mFindButton->setAutoDefault(false);
   connect( mFindButton, TQT_SIGNAL(clicked()), this, TQT_SLOT(start()) );
   connect(mInputEdit,TQT_SIGNAL(returnPressed()),mFindButton,TQT_SLOT(animateClick()));
-  mFindButton->setFixedHeight( mTypeCombo->sizeHint().height() );
+  mFindButton->setFixedHeight( mTypeCombo->tqsizeHint().height() );
 
   mBackwards = new TQCheckBox( i18n("Backwards"), this );
   mIgnoreCase = new TQCheckBox( i18n("Ignore case"), this );
@@ -85,7 +85,7 @@ CSearchBar::CSearchBar( TQWidget *parent, const char *name, WFlags f )
   connect( mCloseButton, TQT_SIGNAL(clicked()), this, TQT_SLOT(hideWidget()) );
 
   //
-  // Make layout
+  // Make tqlayout
   //
   TQHBoxLayout *hlay = new TQHBoxLayout( this, 4, 6 );
   hlay->addWidget( mTypeCombo );

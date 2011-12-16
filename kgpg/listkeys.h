@@ -24,7 +24,7 @@
 #include <klistviewsearchline.h>
 
 #include <kactionclasses.h> 
-#include <clipboard.h>
+#include <tqclipboard.h>
 
 #include "dcopiface.h"
 

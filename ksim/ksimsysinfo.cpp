@@ -18,10 +18,10 @@
  */
 
 #include <tqtooltip.h>
-#include <layout.h>
+#include <tqlayout.h>
 #include <tqtimer.h>
 #include <tqregexp.h>
-#include <textstream.h>
+#include <tqtextstream.h>
 #include <tqdatetime.h>
 
 #include <kdebug.h>
@@ -86,7 +86,7 @@ void KSim::Sysinfo::clockUptimeUpdate()
   // only update the date when necessary
   if (m_dateLabel) {
     if (updateDate) {
-      m_dateLabel->setText(KGlobal::locale()->formatDate(TQDate::currentDate()));
+      m_dateLabel->setText(KGlobal::locale()->formatDate(TQDate::tqcurrentDate()));
       updateDate = false;
     }
   }
@@ -173,7 +173,7 @@ void KSim::Sysinfo::sysUpdate()
   }
 
 //  if (m_config->showProcs()) {
-//    m_procsLabel->setText(i18n("Procs: %1").arg(sysInfo.procs));
+//    m_procsLabel->setText(i18n("Procs: %1").tqarg(sysInfo.procs));
 //  }
 }
 
@@ -274,7 +274,7 @@ void KSim::Sysinfo::createView()
     m_procsLabel = 0L;
   }*/
 
-//  m_layout->invalidate();
+//  m_layout->tqinvalidate();
   updateGeometry();
   adjustSize();
 

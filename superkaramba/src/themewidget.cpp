@@ -23,7 +23,7 @@
 #include <kdebug.h>
 #include <klocale.h>
 #include <tqlabel.h>
-#include <layout.h>
+#include <tqlayout.h>
 
 ThemeWidget::ThemeWidget(TQWidget *parent, const char *name)
   : ThemeWidgetLayout(parent, name), m_themeFile(0)
@@ -75,7 +75,7 @@ void ThemeWidget::updateRunning()
 {
   int i = instances();
   if(i > 0)
-    running->setText(i18n("<p align=\"center\">%1 running</p>").arg(i));
+    running->setText(i18n("<p align=\"center\">%1 running</p>").tqarg(i));
   else
     running->setText("");
 }
@@ -101,12 +101,12 @@ void ThemeWidget::showButton(bool show)
 
 void ThemeWidget::setDescriptionMaxHeight()
 {
-  if(layoutText->geometry().height() <= 0)
+  if(layoutText->tqgeometry().height() <= 0)
     return;
-  int height = layoutText->geometry().height() - themeName->height() -
+  int height = layoutText->tqgeometry().height() - themeName->height() -
                layoutText->spacing();
   if(buttonGo->isVisible())
-    height -= layoutButton->geometry().height() + layoutText->spacing();
+    height -= layoutButton->tqgeometry().height() + layoutText->spacing();
   description->setMaximumHeight(height);
 }
 

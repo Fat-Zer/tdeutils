@@ -162,7 +162,7 @@ RegExp* WidgetFactory::createRegExp( TQDomElement node, const TQString& version 
   else if ( tag == TQString::fromLocal8Bit( "Repeat" ) )
     regexp = new RepeatRegExp( false );
   else {
-    KMessageBox::sorry( 0, i18n("<p>Unknown tag while reading XML. Tag was <b>%1</b></p>").arg(tag),
+    KMessageBox::sorry( 0, i18n("<p>Unknown tag while reading XML. Tag was <b>%1</b></p>").tqarg(tag),
                         i18n("Error While Loading From XML File") ) ;
 
     return 0;
@@ -191,14 +191,14 @@ RegExp* WidgetFactory::createRegExp( TQString str )
   // Read the RegularExpression element, and extract the version.
   TQDomElement top = doc.documentElement();
   if (! (top.tagName() == TQString::fromLocal8Bit("RegularExpression")) ) {
-    KMessageBox::sorry( 0, i18n("<p>XML file did not contain a <b>%1</b> tag.</p>").arg(TQString::fromLatin1("RegularExpression")),
+    KMessageBox::sorry( 0, i18n("<p>XML file did not contain a <b>%1</b> tag.</p>").tqarg(TQString::tqfromLatin1("RegularExpression")),
                         i18n("Error While Loading From XML File") ) ;
   }
   TQString version = top.attribute( TQString::fromLocal8Bit("version"), KRegExpEditorGUI::version );
   TQDomNode child = top.firstChild();
   if ( ! child.isElement() ) {
     KMessageBox::sorry( 0, i18n("<p>Error while reading XML file. The element just below the tag "
-                                "<b>%1</b> was not an element.</p>").arg(TQString::fromLatin1("RegularExpression")),
+                                "<b>%1</b> was not an element.</p>").tqarg(TQString::tqfromLatin1("RegularExpression")),
                         i18n("Error While Loading From XML File") ) ;
   }
 

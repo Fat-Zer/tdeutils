@@ -19,7 +19,7 @@
 #define KHE_KHEXEDIT_H
 
 // qt specific
-#include <clipboard.h>
+#include <tqclipboard.h>
 // lib specific
 // #include "khe.h"
 #include "khexedit_export.h"
@@ -130,8 +130,8 @@ class KHEXEDIT_EXPORT KHexEdit : public KColumnsView
 //    void focusOutEvent( TQFocusEvent *FocusEvent );
     virtual bool eventFilter( TQObject *O, TQEvent *E );
 
-    virtual TQSize sizeHint() const;
-    virtual TQSize minimumSizeHint() const;
+    virtual TQSize tqsizeHint() const;
+    virtual TQSize tqminimumSizeHint() const;
 
 
   public: // value access
@@ -425,7 +425,7 @@ class KHEXEDIT_EXPORT KHexEdit : public KColumnsView
   protected:
     /** recalcs all dependant values with the actual NoOfBytesPerLine  */
     void adjustToLayoutNoOfBytesPerLine();
-    /** recalcs a layout due to the resize style that fits into the view size
+    /** recalcs a tqlayout due to the resize style that fits into the view size
       * and updates the dependant values
       */
     void adjustLayoutToSize();
@@ -452,7 +452,7 @@ class KHEXEDIT_EXPORT KHexEdit : public KColumnsView
     /** Buffer with the data */
     KDataBuffer *DataBuffer;
 
-    /** holds the logical layout */
+    /** holds the logical tqlayout */
     KBufferLayout *BufferLayout;
     /** */
     KBufferCursor *BufferCursor;

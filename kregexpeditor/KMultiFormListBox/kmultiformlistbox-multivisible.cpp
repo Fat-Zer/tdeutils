@@ -94,9 +94,9 @@ void KMultiFormListBoxMultiVisible::updateClipperContent()
 
   // calculate the required size.
   for (TQWidget *child = elms->first(); child; child=elms->next()) {
-    maxWidth = TQMAX(maxWidth, child->sizeHint().width());
+    maxWidth = TQMAX(maxWidth, child->tqsizeHint().width());
     if (strcmp(child->name(), "seperator") != 0) {
-      totalHeight += child->sizeHint().height();
+      totalHeight += child->tqsizeHint().height();
       count++;
     }
     else {
@@ -116,7 +116,7 @@ void KMultiFormListBoxMultiVisible::updateClipperContent()
   for (TQWidget *child2 = elms->first(); child2; child2=elms->next()) {
     int h;
     if ( strcmp(child2->name(),"seperator") != 0) {
-      h = child2->sizeHint().height();
+      h = child2->tqsizeHint().height();
       h += extra;
     }
     else {

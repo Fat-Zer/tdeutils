@@ -40,7 +40,7 @@ KByteCodec *KByteCodec::createCodec( KCoding C )
 
 unsigned int KByteCodec::decode( unsigned char *Char, const TQString &Digits, uint Pos ) const
 {
-  //kdDebug() << TQString("KByteCodec::decode(%1,%2)").arg(Digits).arg(Pos) << endl;
+  //kdDebug() << TQString("KByteCodec::decode(%1,%2)").tqarg(Digits).tqarg(Pos) << endl;
   const uint P = Pos;
 
   // remove leading 0s
@@ -50,7 +50,7 @@ unsigned int KByteCodec::decode( unsigned char *Char, const TQString &Digits, ui
   unsigned int d = encodingWidth();
   do
   {
-    if( !appendDigit(&C,Digits.at(Pos)) )
+    if( !appendDigit(&C,Digits.tqat(Pos)) )
       break;
 
     ++Pos;

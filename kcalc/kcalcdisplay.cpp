@@ -27,7 +27,7 @@
 #include <stdlib.h>
 #include <ctype.h>
 
-#include <clipboard.h>
+#include <tqclipboard.h>
 #include <tqpainter.h>
 #include <tqregexp.h>
 
@@ -46,10 +46,10 @@ KCalcDisplay::KCalcDisplay(TQWidget *parent, const char *name)
    selection_timer(new TQTimer)
 {
 	setFrameStyle(TQFrame::WinPanel | TQFrame::Sunken);
-	setAlignment(AlignRight | AlignVCenter);
+	tqsetAlignment(AlignRight | AlignVCenter);
 	setFocus();
 	setFocusPolicy(TQ_StrongFocus);
-	setSizePolicy(TQSizePolicy::Expanding, TQSizePolicy::Fixed, false);
+	tqsetSizePolicy(TQSizePolicy::Expanding, TQSizePolicy::Fixed, false);
 
 	connect(this, TQT_SIGNAL(clicked()), this, TQT_SLOT(slotDisplaySelected()));
 
@@ -105,13 +105,13 @@ void KCalcDisplay::slotCopy(void)
 	TQString txt = TQLabel::text();
 	if (_num_base == NB_HEX)
 		txt.prepend( "0x" );
-	(TQApplication::clipboard())->setText(txt, TQClipboard::Clipboard);
-	(TQApplication::clipboard())->setText(txt, TQClipboard::Selection);
+	(TQApplication::tqclipboard())->setText(txt, TQClipboard::Clipboard);
+	(TQApplication::tqclipboard())->setText(txt, TQClipboard::Selection);
 }
 
 void KCalcDisplay::slotPaste(bool bClipboard)
 {
-	TQString tmp_str = (TQApplication::clipboard())->text(bClipboard ? TQClipboard::Clipboard : TQClipboard::Selection);
+	TQString tmp_str = (TQApplication::tqclipboard())->text(bClipboard ? TQClipboard::Clipboard : TQClipboard::Selection);
 
 	if (tmp_str.isNull())
 	{
@@ -123,7 +123,7 @@ void KCalcDisplay::slotPaste(bool bClipboard)
 
 	tmp_str = tmp_str.stripWhiteSpace();
 
-	if (tmp_str.startsWith("0x", false))
+	if (tmp_str.tqstartsWith("0x", false))
 	  tmp_num_base = NB_HEX;
 
 	if (tmp_num_base != NB_DECIMAL)
@@ -598,11 +598,11 @@ void KCalcDisplay::drawContents(TQPainter *p)
 
 // Return the TQLabel's normal size hint vertically expanded
 // by half the font height to make room for the status texts
-TQSize KCalcDisplay::sizeHint() const
+TQSize KCalcDisplay::tqsizeHint() const
 {
 	TQFont f(font());
 	f.setPointSize(TQMAX((f.pointSize() / 2), 7));
 	TQFontMetrics fm(f);
-	return TQLabel::sizeHint() + TQSize(0, fm.height());
+	return TQLabel::tqsizeHint() + TQSize(0, fm.height());
 }
 

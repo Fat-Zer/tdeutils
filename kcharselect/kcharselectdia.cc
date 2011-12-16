@@ -35,7 +35,7 @@ KCharSelectDia::KCharSelectDia(TQWidget *parent,const char *name,
 
   // Add character selection widget from library tdeui
   charSelect = new KCharSelect(mainWidget,"",vFont,vChr,_tableNum);
-  charSelect->resize(charSelect->sizeHint());
+  charSelect->resize(charSelect->tqsizeHint());
   connect(charSelect,TQT_SIGNAL(highlighted(const TQChar &)),
 	  TQT_SLOT(charChanged(const TQChar &)));
   connect(charSelect,TQT_SIGNAL(activated(const TQChar &)),
@@ -46,7 +46,7 @@ KCharSelectDia::KCharSelectDia(TQWidget *parent,const char *name,
 
   // Build line editor
   lined = new TQLineEdit(mainWidget);
-  lined->resize(lined->sizeHint());
+  lined->resize(lined->tqsizeHint());
 
   TQFont font = lined->font();
   font.setFamily( vFont );
@@ -59,7 +59,7 @@ KCharSelectDia::KCharSelectDia(TQWidget *parent,const char *name,
   // Build some buttons
   bHelp = new KPushButton( KStdGuiItem::help(), mainWidget );
   connect(bHelp,TQT_SIGNAL(clicked()),this,TQT_SLOT(help()));
-  bHelp->setFixedSize( bHelp->sizeHint() );
+  bHelp->setFixedSize( bHelp->tqsizeHint() );
   grid->addWidget( bHelp, 2, 0 );
 
   TQSpacerItem *space = new TQSpacerItem( 20, 20, TQSizePolicy::Expanding );
@@ -67,12 +67,12 @@ KCharSelectDia::KCharSelectDia(TQWidget *parent,const char *name,
 
   bClear = new KPushButton( KStdGuiItem::clear(), mainWidget );
   connect(bClear,TQT_SIGNAL(clicked()),this,TQT_SLOT(clear()));
-  bClear->setFixedSize( bClear->sizeHint() );
+  bClear->setFixedSize( bClear->tqsizeHint() );
   grid->addWidget( bClear, 2, 2 );
 
   bClip = new KPushButton( KGuiItem( i18n( "&To Clipboard" ),
             "editcopy" ), mainWidget );
-  bClip->setFixedSize( bClip->sizeHint() );
+  bClip->setFixedSize( bClip->tqsizeHint() );
   connect(bClip,TQT_SIGNAL(clicked()),this,TQT_SLOT(toClip()));
   grid->addWidget( bClip, 2, 3 );
 
@@ -98,15 +98,15 @@ KCharSelectDia::KCharSelectDia(TQWidget *parent,const char *name,
   (void)new KAction(i18n("&Flip"), 0, TQT_TQOBJECT(this),
       TQT_SLOT(flipText()), actionCollection(), "flip" );
   (void)new KAction(i18n("&Alignment"), 0, TQT_TQOBJECT(this),
-      TQT_SLOT(toggleEntryDirection()), actionCollection(), "alignment" );
+      TQT_SLOT(toggleEntryDirection()), actionCollection(), "tqalignment" );
   
   charSelect->setFocus();
 
   entryDirection = direction;
   if( entryDirection )
-    lined->setAlignment( TQt::AlignRight );
+    lined->tqsetAlignment( TQt::AlignRight );
   else
-    lined->setAlignment( TQt::AlignLeft );
+    lined->tqsetAlignment( TQt::AlignLeft );
 
   setupGUI(Keys|StatusBar|Save|Create);
 }
@@ -148,7 +148,7 @@ void KCharSelectDia::add(const TQChar &_chr)
 //==================================================================
 void KCharSelectDia::toClip()
 {
-  TQClipboard *cb = TQApplication::clipboard();
+  TQClipboard *cb = TQApplication::tqclipboard();
   cb->setSelectionMode( true );
   cb->setText(lined->text());
   cb->setSelectionMode( false );
@@ -161,7 +161,7 @@ void KCharSelectDia::toClip()
 //
 void KCharSelectDia::toClipUTF8()
 {
-  TQClipboard *cb = TQApplication::clipboard();
+  TQClipboard *cb = TQApplication::tqclipboard();
   TQString str = lined->text();
   cb->setText(str.utf8());
 }
@@ -174,7 +174,7 @@ void KCharSelectDia::toClipUTF8()
 //
 void KCharSelectDia::toClipHTML()
 {
-  TQClipboard *cb = TQApplication::clipboard();
+  TQClipboard *cb = TQApplication::tqclipboard();
   TQString input;
   TQString html;
   TQString tempstring;
@@ -185,13 +185,13 @@ void KCharSelectDia::toClipHTML()
   for(i=0; i< input.length(); i++ )
     {
       tempchar = input.at(i);
-      if(  tempchar.latin1() && ((tempchar.unicode() < 128) || (tempchar.unicode() >= 128+32)) )
+      if(  tempchar.latin1() && ((tempchar.tqunicode() < 128) || (tempchar.tqunicode() >= 128+32)) )
         {
           html.append(input.at(i));
         }
       else
         {
-          html.append(tempstring.sprintf("&#x%x;", tempchar.unicode()));
+          html.append(tempstring.sprintf("&#x%x;", tempchar.tqunicode()));
         }
     }
   cb->setText(html);
@@ -201,7 +201,7 @@ void KCharSelectDia::toClipHTML()
 //
 void KCharSelectDia::fromClip()
 {
-  TQClipboard *cb = TQApplication::clipboard();
+  TQClipboard *cb = TQApplication::tqclipboard();
   lined->setText( cb->text() );
 }
 
@@ -213,7 +213,7 @@ void KCharSelectDia::fromClip()
 //
 void KCharSelectDia::fromClipUTF8()
 {
-  TQClipboard *cb = TQApplication::clipboard();
+  TQClipboard *cb = TQApplication::tqclipboard();
   TQString str = cb->text();
 
   lined->setText( str.fromUtf8( str.latin1() ) );
@@ -244,9 +244,9 @@ void KCharSelectDia::toggleEntryDirection()
 {
     entryDirection ^= 1;
     if( entryDirection )
-        lined->setAlignment( TQt::AlignRight );
+        lined->tqsetAlignment( TQt::AlignRight );
     else
-        lined->setAlignment( TQt::AlignLeft );
+        lined->tqsetAlignment( TQt::AlignLeft );
 }
 
 //==================================================================
@@ -266,7 +266,7 @@ void KCharSelectDia::_exit()
 
   config->setGroup("General");
   config->writeEntry("selectedFont",vFont);
-  config->writeEntry("char",static_cast<int>(vChr.unicode()));
+  config->writeEntry("char",static_cast<int>(vChr.tqunicode()));
   config->writeEntry("table",charSelect->tableNum());
   config->writeEntry("entryDirection",entryDirection);
   config->sync();

@@ -21,10 +21,10 @@ KDEsshDialog::KDEsshDialog(TQCString host, TQCString user, TQCString stub,
     m_User = user;
     m_Stub = stub;
 
-    setCaption(TQString::fromLatin1("%1@%2").arg(TQString(m_User)).arg(TQString(m_Host)));
+    setCaption(TQString::tqfromLatin1("%1@%2").tqarg(TQString(m_User)).tqarg(TQString(m_Host)));
 
     // Make the prompt a little more polite :-)
-    if (prompt.lower().left(6) == TQString::fromLatin1("enter "))
+    if (prompt.lower().left(6) == TQString::tqfromLatin1("enter "))
 	prompt.remove(0, 6);
     int pos = prompt.find(':');
     if (pos != -1)

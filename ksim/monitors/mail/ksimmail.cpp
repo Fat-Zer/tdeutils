@@ -20,7 +20,7 @@
 // $Id$
 
 #include <tqbitmap.h>
-#include <layout.h>
+#include <tqlayout.h>
 #include <tqtimer.h>
 
 #include <kaboutapplication.h>
@@ -69,10 +69,10 @@ void MailPlugin::showAbout()
 MailView::MailView( KSim::PluginObject* parent, const char* name )
 	: KSim::PluginView( parent, name )
 {
-	TQVBoxLayout* layout = new TQVBoxLayout( this );
+	TQVBoxLayout* tqlayout = new TQVBoxLayout( this );
 
 	MailLabel* label = new MailLabel( this );
-	layout->addWidget( label, 0, AlignHCenter );
+	tqlayout->addWidget( label, 0, AlignHCenter );
 }
 
 MailView::~MailView()
@@ -101,7 +101,7 @@ MailLabel::~MailLabel()
 {
 }
 
-void MailLabel::configureObject( bool repaint )
+void MailLabel::configureObject( bool tqrepaint )
 {
 	m_envelope.load( themeLoader().current().mailPixmap() );
 	m_frames = themeLoader().current().mailFrames();
@@ -112,7 +112,7 @@ void MailLabel::configureObject( bool repaint )
 
 	setPixmap( frame( m_envelope, 1 ) );
 
-	KSim::Label::configureObject( repaint );
+	KSim::Label::configureObject( tqrepaint );
 }
 
 void MailLabel::paintEvent( TQPaintEvent* e )

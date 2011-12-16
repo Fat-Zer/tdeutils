@@ -46,13 +46,13 @@ void SKLineEdit::drawContents(TQPainter *p)
 void SKLineEdit::setFrameColor(TQColor c)
 {
   frameColor = c;
-  repaint();
+  tqrepaint();
 }
 
 void SKLineEdit::setBackgroundColor(TQColor c)
 {
   TQLineEdit::setBackgroundColor(c);
-  repaint();
+  tqrepaint();
 }
 
 TQColor SKLineEdit::getFrameColor() const

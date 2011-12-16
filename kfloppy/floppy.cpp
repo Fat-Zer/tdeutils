@@ -22,7 +22,7 @@
 */
 
 
-#include <layout.h>
+#include <tqlayout.h>
 #include <tqcheckbox.h>
 #include <tqlabel.h>
 #include <tqcursor.h>
@@ -288,7 +288,7 @@ FloppyData::FloppyData(TQWidget * parent, const char * name)
 
 	frame = new TQLabel( this, "NewsWindow" );
 	frame->setFrameStyle(TQFrame::Panel | TQFrame::Sunken);
-	frame->setAlignment(WordBreak|ExpandTabs);
+	frame->tqsetAlignment(WordBreak|ExpandTabs);
         TQWhatsThis::add( frame,
             i18n("<qt>This is the status window, where error messages are displayed.</qt>") );
 
@@ -497,7 +497,7 @@ void FloppyData::format(){
         if (KMessageBox::warningContinueCancel( this,
             i18n("<qt>Formatting will erase all data on the device:<br/><b>%1</b><br/>"
                 "(Please check the correctness of the device name.)<br/>"
-                "Are you sure you wish to proceed?</qt>").arg( currentComboBoxDevice )
+                "Are you sure you wish to proceed?</qt>").tqarg( currentComboBoxDevice )
                 , i18n("Proceed?") ) != KMessageBox::Continue)
             {
                 return;
@@ -539,7 +539,7 @@ void FloppyData::format(){
 	formatActions = new KFActionQueue(TQT_TQOBJECT(this));
 
 	connect(formatActions,TQT_SIGNAL(status(const TQString &,int)),
-		this,TQT_SLOT(formatStatus(const TQString &,int)));
+		this,TQT_SLOT(formattqStatus(const TQString &,int)));
 	connect(formatActions,TQT_SIGNAL(done(KFAction *,bool)),
 		this,TQT_SLOT(reset()));
 
@@ -642,7 +642,7 @@ void FloppyData::format(){
 	formatActions->exec();
 }
 
-void FloppyData::formatStatus(const TQString &s,int p)
+void FloppyData::formattqStatus(const TQString &s,int p)
 {
     kdDebug(2002) << "FloppyData::formatStatus: " << s << " : "  << p << endl;
 	if (!s.isEmpty())

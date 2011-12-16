@@ -21,7 +21,7 @@
 
 #include <config.h>
 
-#include <layout.h>
+#include <tqlayout.h>
 #include <tqvaluelist.h>
 #include <tqtimer.h>
 #include <tqfile.h>

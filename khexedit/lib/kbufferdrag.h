@@ -52,7 +52,7 @@ class KBufferDrag : public TQDragObject
 
   public: // TQDragObject API
     virtual const char *format( int i ) const;
-    virtual TQByteArray encodedData( const char* ) const;
+    virtual TQByteArray tqencodedData( const char* ) const;
 
   public:
     virtual void setData( const TQByteArray &);

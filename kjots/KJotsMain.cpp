@@ -316,7 +316,7 @@ void KJotsMain::deleteBook()
         return;
 
     TQString msg = i18n("<qt>Are you sure you want to delete the <strong>%1</strong> book?</qt>");
-    int result = KMessageBox::warningContinueCancel(topLevelWidget(), msg.tqarg(b->subject()), i18n("Delete Book"),KStdGuiItem::del());
+    int result = KMessageBox::warningContinueCancel(topLevelWidget(), msg.arg(b->subject()), i18n("Delete Book"),KStdGuiItem::del());
 
     if (result!=KMessageBox::Continue)
         return;
@@ -360,7 +360,7 @@ void KJotsMain::deleteEntry()
     if (!cur ||
         KMessageBox::warningContinueCancel(topLevelWidget(),
                                   i18n("<qt>Are you sure you want to delete the <strong>%1</strong> page?</qt>")
-                                  .tqarg(cur->subject()),
+                                  .arg(cur->subject()),
                                   i18n("Delete Page"),KStdGuiItem::del()) != KMessageBox::Continue)
     {
         return;
@@ -493,7 +493,7 @@ void KJotsMain::saveBookToFile(bool plainText)
         }
 
         if (!KIO::NetAccess::exists(res.URLs[0], true, this) ||
-            KMessageBox::warningYesNo(this, "<qt>" + i18n("The file <strong>%1</strong> already exists. Do you wish to overwrite it?").tqarg(res.URLs[0].prettyURL()) + "</qt>", i18n("File Exists"), i18n("Overwrite"), KStdGuiItem::cancel()) == KMessageBox::Yes)
+            KMessageBox::warningYesNo(this, "<qt>" + i18n("The file <strong>%1</strong> already exists. Do you wish to overwrite it?").arg(res.URLs[0].prettyURL()) + "</qt>", i18n("File Exists"), i18n("Overwrite"), KStdGuiItem::cancel()) == KMessageBox::Yes)
         {
             tryAgain = false;
         }
@@ -534,7 +534,7 @@ void KJotsMain::savePageToFile(bool plainText)
         }
 
         if (!KIO::NetAccess::exists(res.URLs[0], true, this) ||
-            KMessageBox::warningYesNo(this, "<qt>" + i18n("The file <strong>%1</strong> already exists. Do you wish to overwrite it?").tqarg(res.URLs[0].prettyURL()) + "</qt>", i18n("File Exists"), i18n("Overwrite"), KStdGuiItem::cancel()) == KMessageBox::Yes)
+            KMessageBox::warningYesNo(this, "<qt>" + i18n("The file <strong>%1</strong> already exists. Do you wish to overwrite it?").arg(res.URLs[0].prettyURL()) + "</qt>", i18n("File Exists"), i18n("Overwrite"), KStdGuiItem::cancel()) == KMessageBox::Yes)
         {
             tryAgain = false;
         }

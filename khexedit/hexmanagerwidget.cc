@@ -126,7 +126,7 @@ void CHexManagerWidget::setConversionVisibility( EConversionPosition position )
   else if( mConversionPosition == Float )
   {
     TQPoint point = mapToGlobal( TQPoint(0,0) );
-    TQRect  rect  = tqgeometry();
+    TQRect  rect  = geometry();
     TQPoint p;
 
     p.setX(point.x() + rect.width()/2 - mConverter->minimumSize().width()/2);

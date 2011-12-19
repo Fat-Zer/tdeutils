@@ -263,7 +263,7 @@ void KSim::Chart::configureObject(bool repaintWidget)
     d->krell->show();
   }
 
-  // Update our tqgeometry if we need to let any
+  // Update our geometry if we need to let any
   // tqlayout know about our sizeHint() change
   if (oldSize != sizeHint()) {
     // Using resize() here seems to be needed
@@ -333,19 +333,19 @@ void KSim::Chart::setDisplayMeter(bool value)
 
 void KSim::Chart::setText(const TQString &in, const TQString &out)
 {
-  bool tqrepaint = false;
+  bool repaint = false;
 
   if (d->inText != in) {
-    tqrepaint = true;
+    repaint = true;
     d->inText = in;
   }
 
   if (d->outText != out) {
-    tqrepaint = true;
+    repaint = true;
     d->outText = out;
   }
 
-  if (tqrepaint)
+  if (repaint)
     update();
 }
 
@@ -407,13 +407,13 @@ void KSim::Chart::setValue(int valueIn, int valueOut)
 void KSim::Chart::setConfigValues()
 {
   TQFont newFont = font();
-  bool tqrepaint = themeLoader().current().fontColours(this,
+  bool repaint = themeLoader().current().fontColours(this,
      newFont, d->mColour, d->sColour, d->showShadow);
 
   if (font() != newFont)
     setFont(newFont);
 
-  if (tqrepaint)
+  if (repaint)
     update();
 }
 
@@ -446,7 +446,7 @@ void KSim::Chart::paintEvent(TQPaintEvent *)
   const TQSize &size = chartSize();
   TQPixmap pixmap(size);
   TQPainter painter;
-  painter.tqbegin(&pixmap, this);
+  painter.begin(&pixmap, this);
 
   int location = size.height() / 5;
   painter.drawPixmap(0, 0, d->chartPixmap);
@@ -521,7 +521,7 @@ void KSim::Chart::drawChart()
 
   TQPainter painter;
   d->graphData.setMask(drawMask(&painter));
-  painter.tqbegin(&d->graphData, this);
+  painter.begin(&d->graphData, this);
 
   int position = width() - 1;
   TQValueList<Private::ValuePair>::ConstIterator it;
@@ -553,7 +553,7 @@ TQSize KSim::Chart::chartSize() const
 TQBitmap KSim::Chart::drawMask(TQPainter *painter)
 {
   TQBitmap bitmap(chartSize(), true);
-  painter->tqbegin(&bitmap, this);
+  painter->begin(&bitmap, this);
   painter->setPen(color1);
 
   int position = width() - 1;

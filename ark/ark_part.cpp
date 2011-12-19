@@ -294,7 +294,7 @@ bool ArkPart::closeURL()
 
   int res = KMessageBox::warningYesNoCancel( widget(),
           i18n( "The archive \"%1\" has been modified.\n"
-                "Do you want to save it?" ).tqarg( docName ),
+                "Do you want to save it?" ).arg( docName ),
           i18n( "Save Archive?" ), KStdGuiItem::save(), KStdGuiItem::discard() );
 
   switch ( res )
@@ -320,7 +320,7 @@ void ArkPart::transferStarted( KIO::Job *job )
 {
     m_job = job;
 
-    m_bar->slotSetBusy( i18n( "Downloading %1..." ).tqarg( m_url.prettyURL() ),
+    m_bar->slotSetBusy( i18n( "Downloading %1..." ).arg( m_url.prettyURL() ),
                         (job != 0), (job != 0) );
 
     if ( job )

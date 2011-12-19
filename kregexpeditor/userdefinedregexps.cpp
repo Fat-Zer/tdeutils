@@ -101,7 +101,7 @@ void UserDefinedRegExps::createItems( const TQString& _title, const TQString& di
 
     TQFile file( fileName );
     if ( ! file.open(IO_ReadOnly) ) {
-      KMessageBox::sorry( this, i18n("Could not open file for reading: %1").tqarg(fileName) );
+      KMessageBox::sorry( this, i18n("Could not open file for reading: %1").arg(fileName) );
       continue;
     }
 
@@ -111,7 +111,7 @@ void UserDefinedRegExps::createItems( const TQString& _title, const TQString& di
 
     RegExp* regexp = WidgetFactory::createRegExp( data );
     if ( ! regexp ) {
-      KMessageBox::sorry( this, i18n("File %1 containing user defined regular expression contained an error").tqarg( fileName ) );
+      KMessageBox::sorry( this, i18n("File %1 containing user defined regular expression contained an error").arg( fileName ) );
       continue;
     }
 
@@ -200,7 +200,7 @@ void UserDefinedRegExps::slotEdit( TQListViewItem* item, const TQPoint& pos )
       TQString fileName = WidgetWinItem::path() + TQString::fromLocal8Bit("/") + txt + TQString::fromLocal8Bit(".regexp");
       TQFileInfo finfo( fileName );
       if ( finfo.exists() ) {
-        int answer = KMessageBox::warningYesNo( this, i18n("<p>Overwrite named regular expression <b>%1</b>?</p>").tqarg(txt), TQString(), i18n("Overwrite"), i18n("Do Not Overwrite") );
+        int answer = KMessageBox::warningYesNo( this, i18n("<p>Overwrite named regular expression <b>%1</b>?</p>").arg(txt), TQString(), i18n("Overwrite"), i18n("Do Not Overwrite") );
         if ( answer != KMessageBox::Yes )
           return;
 

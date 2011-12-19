@@ -35,7 +35,7 @@ Input::~Input()
 
 void Input::mUpdate(TQPainter*)
 {
-  edit->tqrepaint();
+  edit->repaint();
 }
 
 void Input::setValue(TQString text)

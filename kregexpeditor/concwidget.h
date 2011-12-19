@@ -52,7 +52,7 @@ public:
   virtual bool validateSelection() const;
   virtual bool acceptWidgetInsert( RegExpType ) const { return false; }
   virtual bool acceptWidgetPaste() const { return false; }
-  bool hasAnyChildren() { return _tqchildren.count() > 1; }
+  bool hasAnyChildren() { return _children.count() > 1; }
 
 protected:
   virtual void paintEvent( TQPaintEvent *e );

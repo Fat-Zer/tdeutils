@@ -153,7 +153,7 @@ void FileLVI::setText( int column, const TQString &text )
 		else
 			m_ratio = text.toDouble();
 		TQListViewItem::setText( column, i18n( "Packed Ratio", "%1 %" )
-		                                .tqarg(KGlobal::locale()->formatNumber( m_ratio, 1 ) )
+		                                .arg(KGlobal::locale()->formatNumber( m_ratio, 1 ) )
 		                      );
 	}
 	else if ( colName == timeStampStrCol )
@@ -264,14 +264,14 @@ TQStringList FileListView::selectedFilenames()
 	{
 		if ( item->isSelected() )
 		{
-			// If the item has tqchildren, add each child and the item
+			// If the item has children, add each child and the item
 			if ( item->childCount() > 0 )
 			{
 				files += item->fileName();
-				files += tqchildrenOf( item );
+				files += childrenOf( item );
 
 				/* If we got here, then the logic for "going to the next item"
-				 * is a bit different: as we already dealt with all the tqchildren,
+				 * is a bit different: as we already dealt with all the children,
 				 * the "next item" is the next sibling of the current item, not
 				 * its first child. If the current item has no siblings, then
 				 * the next item is the next sibling of its parent, and so on.
@@ -288,7 +288,7 @@ TQStringList FileListView::selectedFilenames()
 			}
 			else
 			{
-				// If the item has no tqchildren, just add it to the list
+				// If the item has no children, just add it to the list
 				files += item->fileName();
 			}
 		}
@@ -559,10 +559,10 @@ FileLVI* FileListView::findParent( const TQString& fullname )
 	return static_cast< FileLVI* >( item );
 }
 
-TQStringList FileListView::tqchildrenOf( FileLVI* parent )
+TQStringList FileListView::childrenOf( FileLVI* parent )
 {
 	Q_ASSERT( parent );
-	TQStringList tqchildren;
+	TQStringList children;
 
 	FileLVI *item = static_cast<FileLVI*>( parent->firstChild() );
 
@@ -570,17 +570,17 @@ TQStringList FileListView::tqchildrenOf( FileLVI* parent )
 	{
 		if ( item->childCount() == 0 )
 		{
-			tqchildren += item->fileName();
+			children += item->fileName();
 		}
 		else
 		{
-			tqchildren += item->fileName();
-			tqchildren += tqchildrenOf( item );
+			children += item->fileName();
+			children += childrenOf( item );
 		}
 		item = static_cast<FileLVI*>( item->nextSibling() );
 	}
 
-	return tqchildren;
+	return children;
 }
 
 #include "filelistview.moc"

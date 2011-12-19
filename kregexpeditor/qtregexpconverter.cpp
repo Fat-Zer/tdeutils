@@ -48,7 +48,7 @@ TQString TQtRegExpConverter::toString( AltnRegExp* regexp, bool markSelection )
     TQString res;
 
 	bool first = true;
-    RegExpList list = regexp->tqchildren();
+    RegExpList list = regexp->children();
     for ( RegExpListIt it(list); *it; ++it ) {
 		if ( !first ) {
 			res += TQString::fromLatin1( "|" );
@@ -69,7 +69,7 @@ TQString TQtRegExpConverter::toString( ConcRegExp* regexp, bool markSelection )
     TQString res;
     bool childSelected = false;
 
-    RegExpList list = regexp->tqchildren();
+    RegExpList list = regexp->children();
 	for ( RegExpListIt it(list); *it; ++it ) {
         TQString startPar = TQString::fromLocal8Bit("");
         TQString endPar = TQString::fromLocal8Bit("");

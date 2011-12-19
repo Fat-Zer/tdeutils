@@ -317,7 +317,7 @@ PowerConfig::PowerConfig (TQWidget * parent, const char *name)
 
       top_layout->addStretch(1);
 
-      top_layout->addWidget( new TQLabel( i18n("Version: %1").tqarg(LAPTOP_VERSION), this ), 0, TQt::AlignRight );
+      top_layout->addWidget( new TQLabel( i18n("Version: %1").arg(LAPTOP_VERSION), this ), 0, TQt::AlignRight );
     }
   }
 

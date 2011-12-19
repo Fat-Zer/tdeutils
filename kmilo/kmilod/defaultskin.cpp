@@ -100,7 +100,7 @@ void DefaultSkin::show() {
 #if KDE_IS_VERSION(3,1,90)
 	TQRect r =  KGlobalSettings::splashScreenDesktopGeometry();
 #else
-	TQRect r = TQApplication::desktop()->tqgeometry();
+	TQRect r = TQApplication::desktop()->geometry();
 #endif
 	//	_label->resize(_label->minimumSizeHint());
 	//	_widget->resize(_label->minimumSizeHint());

@@ -46,9 +46,9 @@
 #include <tqobjectlist.h>
 static void enableWidget( TQWidget *w, bool state )
 {
-  if( w->tqchildren() )
+  if( w->children() )
   {
-    TQObjectList *l = (TQObjectList*)w->tqchildren(); // silence please
+    TQObjectList *l = (TQObjectList*)w->children(); // silence please
     for( uint i=0; i < l->count(); i++ )
     {
       TQObject *o = l->at(i);
@@ -351,7 +351,7 @@ void COptionDialog::setupColorPage( void )
   modeList.append( i18n("Marked Background") );
   modeList.append( i18n("Marked Text") );
   modeList.append( i18n("Cursor Background") );
-  modeList.append( i18n("Cursor Text (block tqshape)") );
+  modeList.append( i18n("Cursor Text (block shape)") );
   modeList.append( i18n("Bookmark Background") );
   modeList.append( i18n("Bookmark Text") );
   modeList.append( i18n("Separator") );

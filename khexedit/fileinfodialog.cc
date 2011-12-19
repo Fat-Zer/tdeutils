@@ -239,13 +239,13 @@ void CFileInfoDialog::setStatistics( SStatisticControl &sc )
     o.sprintf("%03o", i );
     b.sprintf("%s", printBin(i) );
 
-    n = TQString("%1").tqarg( sc.occurrence[i], pre );
+    n = TQString("%1").arg( sc.occurrence[i], pre );
     if( sc.documentSize == 0 )
       p = "0.00";
     else
     {
       double val = 100.0*((double)sc.occurrence[i]/(double)sc.documentSize);
-      p = TQString("%1").tqarg( val, 6, 'f', 2 );
+      p = TQString("%1").arg( val, 6, 'f', 2 );
     }
 
     const TQChar _i((char)i);

@@ -397,7 +397,7 @@ bool KVaio::showBatteryStatus ( bool force )
 	    case 3:
 	    case 2:
 	    case 1:
-		stream << i18n("Caution: Battery is Almost Empty (%1% remaining).").tqarg(remaining);
+		stream << i18n("Caution: Battery is Almost Empty (%1% remaining).").arg(remaining);
 		break;
 	    case 0:
 		stream << i18n("Alert: Battery is Empty!");
@@ -406,7 +406,7 @@ bool KVaio::showBatteryStatus ( bool force )
                 stream << i18n("No Battery Inserted.");
                 break;
 	    default:
-		stream << i18n("Remaining Battery Capacity: %1%").tqarg( remaining );
+		stream << i18n("Remaining Battery Capacity: %1%").arg( remaining );
 	};
 
 	// show a message if the battery status changed by more then 10% or on startup

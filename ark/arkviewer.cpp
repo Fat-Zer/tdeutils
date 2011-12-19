@@ -80,7 +80,7 @@ bool ArkViewer::view( const KURL& filename )
 
 	TQVBox *headerRight = new TQVBox( header );
 	new TQLabel( TQString( "<qt><b>%1</b></qt>" )
-	                     .tqarg( filename.fileName() ), headerRight
+	                     .arg( filename.fileName() ), headerRight
 	          );
 	new TQLabel( mimetype->comment(), headerRight );
 

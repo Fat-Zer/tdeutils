@@ -39,7 +39,7 @@ ZeroWidget::ZeroWidget(TQString txt, RegExpEditorWindow* editorWindow,
 
 void ZeroWidget::addNewChild(DragAccepter *, RegExpWidget *)
 {
-  qFatal("No tqchildren should be added to this widget!");
+  qFatal("No children should be added to this widget!");
 }
 
 TQSize ZeroWidget::sizeHint() const

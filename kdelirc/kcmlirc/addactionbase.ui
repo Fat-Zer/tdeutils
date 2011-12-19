@@ -223,7 +223,7 @@
                 <property name="text">
                     <string>You are attempting to configure an action for a button on [remote] (in mode [mode]). Press a button on this remote control or select from the list.</string>
                 </property>
-                <property name="tqalignment">
+                <property name="alignment">
                     <set>WordBreak|AlignVCenter</set>
                 </property>
             </widget>
@@ -1085,7 +1085,7 @@
                 <property name="text">
                     <string>This application may have multiple instances. In the case of having multiple instances at once when this action should be executed, choose a course of action:</string>
                 </property>
-                <property name="tqalignment">
+                <property name="alignment">
                     <set>WordBreak|AlignVCenter</set>
                 </property>
             </widget>

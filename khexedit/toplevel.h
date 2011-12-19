@@ -249,7 +249,7 @@ protected:
 inline void KHexEdit::addStartupFile( const TQString &fileName )
 {
   mStartupFileList.prepend( fileName );
-  mStartupOffsetList.prepend( TQString("%1").tqarg(mStartupOffset,0,16) );
+  mStartupOffsetList.prepend( TQString("%1").arg(mStartupOffset,0,16) );
   mStartupOffset = 0;
 }
 

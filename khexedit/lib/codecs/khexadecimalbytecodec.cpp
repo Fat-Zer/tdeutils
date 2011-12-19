@@ -41,16 +41,16 @@ bool KHexadecimalByteCodec::smallDigits() const { return Digit != BigDigit; }
 
 void KHexadecimalByteCodec::encode( TQString &Digits, unsigned int Pos, unsigned char Char ) const
 {
-  Digits.tqat(Pos++) = Digit[Char>>4];
-  Digits.tqat(Pos) = Digit[Char&0x0F];
+  Digits.at(Pos++) = Digit[Char>>4];
+  Digits.at(Pos) = Digit[Char&0x0F];
 }
 
 void KHexadecimalByteCodec::encodeShort( TQString &Digits, unsigned int Pos, unsigned char Char ) const
 {
   unsigned char C;
   if( (C = (Char>>4)) )
-    Digits.tqat(Pos++) = Digit[C];
-  Digits.tqat(Pos) = Digit[Char&0x0F];
+    Digits.at(Pos++) = Digit[C];
+  Digits.at(Pos) = Digit[Char&0x0F];
 }
 
 

@@ -47,7 +47,7 @@
                     <property name="pixmap">
                         <pixmap>image0</pixmap>
                     </property>
-                    <property name="tqalignment">
+                    <property name="alignment">
                         <set>AlignCenter</set>
                     </property>
                 </widget>
@@ -121,7 +121,7 @@
                     <property name="text">
                         <string>Description</string>
                     </property>
-                    <property name="tqalignment">
+                    <property name="alignment">
                         <set>WordBreak|AlignTop</set>
                     </property>
                 </widget>

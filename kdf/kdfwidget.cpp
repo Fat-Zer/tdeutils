@@ -377,7 +377,7 @@ void KDFWidget::criticallyFull( DiskEntry *disk )
   if( mStd.popupIfFull() == true )
   {
     TQString msg = i18n("Device [%1] on [%2] is getting critically full!").
-      tqarg(disk->deviceName()).tqarg(disk->mountPoint());
+      arg(disk->deviceName()).arg(disk->mountPoint());
     KMessageBox::sorry( this, msg, i18n("Warning"));
   }
 }

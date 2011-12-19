@@ -100,7 +100,7 @@ ApmConfig::ApmConfig (TQWidget * parent, const char *name)
 				"ways you can enable this application, either make the file "
 				"/proc/apm writeable by anyone every time your system boots "
 				"or use the button below to make the %1 application "
-				"set-uid root").tqarg(apm_name), this );
+				"set-uid root").arg(apm_name), this );
     tmp_label->setAlignment( TQt::WordBreak );
     top_layout->addWidget( tmp_label );
     TQHBoxLayout *ll = new TQHBoxLayout(top_layout);
@@ -141,7 +141,7 @@ ApmConfig::ApmConfig (TQWidget * parent, const char *name)
 
 
     top_layout->addStretch(1);
-    top_layout->addWidget( new TQLabel( i18n("Version: %1").tqarg(LAPTOP_VERSION), this), 0, TQt::AlignRight );
+    top_layout->addWidget( new TQLabel( i18n("Version: %1").arg(LAPTOP_VERSION), this), 0, TQt::AlignRight );
 
 
     load();      
@@ -158,7 +158,7 @@ void ApmConfig::setupHelper()
 	if (!tdesu.isEmpty()) {
 		int rc = KMessageBox::warningContinueCancel(0,
 				i18n("You will need to supply a root password "
-					"to allow the privileges of the %1 application to change.").tqarg(apm_name),
+					"to allow the privileges of the %1 application to change.").arg(apm_name),
 				"KLaptopDaemon", KStdGuiItem::cont(),
 				"");
 		if (rc == KMessageBox::Continue) {
@@ -170,7 +170,7 @@ void ApmConfig::setupHelper()
 			proc.start(KProcess::Block);	// run it sync so has_apm below sees the results
 		}
 	} else {
-		KMessageBox::sorry(0, i18n("%1 cannot be enabled because tdesu cannot be found.  Please make sure that it is installed correctly.").tqarg(TQString(apm_name)),
+		KMessageBox::sorry(0, i18n("%1 cannot be enabled because tdesu cannot be found.  Please make sure that it is installed correctly.").arg(TQString(apm_name)),
 				i18n("KLaptopDaemon"));
 	}
 	laptop_portable::apm_set_mask(enablestandby, enablesuspend);

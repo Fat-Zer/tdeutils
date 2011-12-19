@@ -136,10 +136,10 @@ void KSim::Label::clear()
 void KSim::Label::setText(const TQString &text)
 {
   if (text == d->text)
-    return; // If the text is the same, no need to tqrepaint etc
+    return; // If the text is the same, no need to repaint etc
 
   TQSize oldSize = sizeHint();
-  // set the text of our widget and tqrepaint
+  // set the text of our widget and repaint
   d->text = text;
   relayoutLabel(oldSize);
 }
@@ -183,13 +183,13 @@ const TQColor &KSim::Label::shadowColour() const
 void KSim::Label::setConfigValues()
 {
   TQFont newFont = font();
-  bool tqrepaint = themeLoader().current().fontColours(this,
+  bool repaint = themeLoader().current().fontColours(this,
      newFont, d->mColour, d->sColour, d->showShadow);
 
   if (font() != newFont)
     setFont(newFont);
 
-  if (tqrepaint)
+  if (repaint)
     update();
 }
 
@@ -276,13 +276,13 @@ void KSim::Label::setThemePixmap(const TQString &image)
   relayoutLabel(oldSize);
 }
 
-void KSim::Label::relayoutLabel(const TQSize &old, bool tqrepaint)
+void KSim::Label::relayoutLabel(const TQSize &old, bool repaint)
 {
   if (sizeHint() != old) {
     updateGeometry();
   }
 
-  if (tqrepaint)
+  if (repaint)
     update();
 }
 

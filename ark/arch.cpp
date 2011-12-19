@@ -365,13 +365,13 @@ bool Arch::processLine( const TQCString &line )
                    : columns[ m_fixYear ];
     TQString month = ( m_repairMonth >= 0 ) ?
                    TQString( "%1" )
-                   .tqarg( ArkUtils::getMonth( columns[ m_repairMonth ].ascii() ) )
+                   .arg( ArkUtils::getMonth( columns[ m_repairMonth ].ascii() ) )
                    : columns[ m_fixMonth ];
     TQString timestamp = TQString::fromLatin1( "%1-%2-%3 %4" )
-                        .tqarg( year )
-                        .tqarg( month )
-                        .tqarg( columns[ m_fixDay ] )
-                        .tqarg( columns[ m_fixTime ] );
+                        .arg( year )
+                        .arg( month )
+                        .arg( columns[ m_fixDay ] )
+                        .arg( columns[ m_fixTime ] );
 
     columns[ m_dateCol ] = timestamp;
   }

@@ -673,14 +673,14 @@ bool CExportDialog::verifyPackage( const TQString &path )
       }
 
       const TQString prefix = mHtml.prefixInput->text();
-      TQString f1 = TQString("%1%2.html").tqarg(prefix).tqarg("00000000");
-      TQString f2 = TQString("%1%2.html").tqarg(prefix).tqarg("99999999");
+      TQString f1 = TQString("%1%2.html").arg(prefix).arg("00000000");
+      TQString f2 = TQString("%1%2.html").arg(prefix).arg("99999999");
 
       TQString msg = i18n( ""
         "You have specified an existing folder.\n"
 	"If you continue, any existing file in the range "
 	"\"%1\" to \"%2\" can be lost.\n"
-	"Continue?").tqarg(f1).tqarg(f2);
+	"Continue?").arg(f1).arg(f2);
       int reply = KMessageBox::warningContinueCancel( this, msg, title );
       if( reply != KMessageBox::Continue )
       {

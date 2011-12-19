@@ -372,8 +372,8 @@ void CStringDialog::appendListItem( const TQString &str, uint offsetLen )
 
 void CStringDialog::updateListInfo( void )
 {
-  mListSizeLabel->setText( TQString("%1").tqarg(mStringData.count()) );
-  mDisplaySizeLabel->setText( TQString("%1").tqarg(mStringList->childCount()) );
+  mListSizeLabel->setText( TQString("%1").arg(mStringData.count()) );
+  mDisplaySizeLabel->setText( TQString("%1").arg(mStringList->childCount()) );
   setColumnWidth();
 }
 

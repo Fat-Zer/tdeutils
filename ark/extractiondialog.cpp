@@ -63,7 +63,7 @@ ExtractionDialog::ExtractionDialog( TQWidget *parent, const char *name,
 {
 	if ( !archiveName.isNull() )
 	{
-		setCaption( i18n( "Extract Files From %1" ).tqarg( archiveName ) );
+		setCaption( i18n( "Extract Files From %1" ).arg( archiveName ) );
 	}
 
 	TQVBox *vbox = makeVBoxMainWidget();
@@ -80,7 +80,7 @@ ExtractionDialog::ExtractionDialog( TQWidget *parent, const char *name,
 		TQVBox *whichFiles = new TQVBox( header );
 		whichFiles->tqlayout()->setSpacing( 6 );
 		new TQLabel( TQString( "<qt><b><font size=\"+1\">%1</font></b></qt>" )
-		            .tqarg( i18n( "Extract:" ) ), whichFiles );
+		            .arg( i18n( "Extract:" ) ), whichFiles );
 		TQHButtonGroup *filesGroup = new TQHButtonGroup( whichFiles );
 		m_selectedButton = new TQRadioButton( i18n( "Selected files only" ), filesGroup );
 		m_allButton      = new TQRadioButton( i18n( "All files" ), filesGroup );
@@ -90,7 +90,7 @@ ExtractionDialog::ExtractionDialog( TQWidget *parent, const char *name,
 	else
 	{
 		new TQLabel( TQString( "<qt><b><font size=\"+2\">%1</font></b></qt>" )
-		            .tqarg( i18n( "Extract all files" ) ), header );
+		            .arg( i18n( "Extract all files" ) ), header );
 	}
 
 	TQHBox *destDirBox = new TQHBox( vbox );
@@ -145,7 +145,7 @@ void ExtractionDialog::accept()
 		TQFileInfo fi( p.path() );
 		if ( !fi.isDir() && !fi.exists() )
 		{
-			TQString ltext = i18n( "Create folder %1?").tqarg(p.path());
+			TQString ltext = i18n( "Create folder %1?").arg(p.path());
 			int createDir =  KMessageBox::questionYesNo( this, ltext, i18n( "Missing Folder" ) , i18n("Create Folder"), i18n("Do Not Create"));
 			if( createDir == 4 )
 			{

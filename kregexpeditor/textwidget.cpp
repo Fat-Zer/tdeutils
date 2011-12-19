@@ -56,13 +56,13 @@ void TextWidget::init( const TQString& txt )
 
 void TextWidget::slotUpdate()
 {
-  // I need to force the parent to tqrepaint, as the size change of this
+  // I need to force the parent to repaint, as the size change of this
   // widget may not be enough for the parent to change size, and in that
-  // case the parent would not tqrepaint, and the text widget would not be
+  // case the parent would not repaint, and the text widget would not be
   // resized.
   TQWidget *p = TQT_TQWIDGET(parent());
   if (p)
-    p->tqrepaint();
+    p->repaint();
   _editorWindow->updateContent( this );
 }
 

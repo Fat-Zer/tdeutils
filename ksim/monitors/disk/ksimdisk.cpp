@@ -216,13 +216,13 @@ void DiskView::updateDisplay()
     if (m_useSeperatly) {
       it.current()->first->setValue(diskData.readBlocks, diskData.writeBlocks);
       it.current()->first->setText(i18n("in: %1k")
-         .tqarg(KGlobal::locale()->formatNumber((float)diskData.readBlocks / 1024.0, 1)),
-         i18n("out: %1k").tqarg(KGlobal::locale()->formatNumber((float)diskData.writeBlocks / 1024.0, 1)));
+         .arg(KGlobal::locale()->formatNumber((float)diskData.readBlocks / 1024.0, 1)),
+         i18n("out: %1k").arg(KGlobal::locale()->formatNumber((float)diskData.writeBlocks / 1024.0, 1)));
     }
     else {
       it.current()->first->setValue(diff, 0);
       it.current()->first->setText(i18n("%1k")
-         .tqarg(KGlobal::locale()->formatNumber((float)diff / 1024.0, 1)));
+         .arg(KGlobal::locale()->formatNumber((float)diff / 1024.0, 1)));
     }
 
     it.current()->second->setMaxValue(it.current()->first->maxValue());
@@ -239,7 +239,7 @@ void DiskView::updateData(DiskList &disks)
   if (!m_procStream)
      return;
 
-  m_procStream->tqdevice()->reset();
+  m_procStream->device()->reset();
   fseek(m_procFile, 0L, SEEK_SET);
 
   if (m_bLinux24)
@@ -430,7 +430,7 @@ TQString DiskView::diskName( int major, int minor ) const
       break;
   }
 
-  returnValue.tqat(2) = returnValue.tqat(2).latin1() + minor;
+  returnValue.at(2) = returnValue.at(2).latin1() + minor;
   return returnValue;
 #else
   Q_UNUSED(major);

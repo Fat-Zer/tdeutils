@@ -152,7 +152,7 @@ void RepeatWidget::slotConfigCanceled()
   TQDataStream stream( _backup, IO_ReadOnly );
   KWidgetStreamer streamer;
   streamer.fromStream( stream, TQT_TQOBJECT(_content) );
-  tqrepaint();
+  repaint();
 }
 
 int RepeatWidget::edit()
@@ -271,7 +271,7 @@ TQString RepeatRangeWindow::text()
   case ATMOST: return i18n("Repeated at Most 1 Time", "Repeated at Most %n Times", _mostTimes->value() );
   case EXACTLY: return i18n("Repeated Exactly 1 Time", "Repeated Exactly %n Times", _exactlyTimes->value() );
   case MINMAX: return i18n("Repeated From %1 to %2 Times")
-                 .tqarg( _rangeFrom->value() ).tqarg( _rangeTo->value() );
+                 .arg( _rangeFrom->value() ).arg( _rangeTo->value() );
   }
   qFatal("Fall through!");
   return TQString::fromLocal8Bit("");

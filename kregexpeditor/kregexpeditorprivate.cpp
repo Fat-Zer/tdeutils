@@ -371,7 +371,7 @@ void KRegExpEditorPrivate::setVerifyText( const TQString& fileName )
     _autoVerify = false;
     TQFile file( fileName );
     if ( !file.open( IO_ReadOnly ) ) {
-        KMessageBox::sorry(0, i18n("Could not open file '%1' for reading").tqarg( fileName ) );
+        KMessageBox::sorry(0, i18n("Could not open file '%1' for reading").arg( fileName ) );
     }
     else {
         TQTextStream s( &file );

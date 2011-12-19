@@ -188,7 +188,7 @@ void ZipFormat::transition()
 			<< "if=/dev/zero"
 			<< "of=/dev/afd0c"
 			<< "bs=8192" ;
-		*p << TQString("count=%1").tqarg(totalBlocks);
+		*p << TQString("count=%1").arg(totalBlocks);
 		if (!p->start(KProcess::NotifyOnExit,KProcess::AllOutput))
 		{
 			emit statusMessage(i18n("Cannot start dd to zero disk."));
@@ -251,7 +251,7 @@ void ZipFormat::processResult(KProcess *, char *b, int l)
 
 #ifdef DEBUG
 	TQString o = TQString::fromLatin1(b,l);
-	DEBUGS(TQString("  %1").tqarg(o).latin1());
+	DEBUGS(TQString("  %1").arg(o).latin1());
 #endif
 
 	switch(formatStep)
@@ -264,8 +264,8 @@ void ZipFormat::processResult(KProcess *, char *b, int l)
 			if (totalBlocks>10000)
 			{
 				emit statusMessage(i18n("Zeroing block %1 of %2...")
-					.tqarg(currentblock)
-					.tqarg(totalBlocks));
+					.arg(currentblock)
+					.arg(totalBlocks));
 			}
 		}
 		break;

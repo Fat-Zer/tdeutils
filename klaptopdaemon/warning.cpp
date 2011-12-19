@@ -288,7 +288,7 @@ WarningConfig::WarningConfig (int t, TQWidget * parent, const char *name)
     }
     grid->setRowStretch(curRow++, 1);
 
-    grid->addWidget(new TQLabel( i18n("Version: %1").tqarg(LAPTOP_VERSION), this),
+    grid->addWidget(new TQLabel( i18n("Version: %1").arg(LAPTOP_VERSION), this),
 		    curRow, 1, TQt::AlignRight);
 
   }

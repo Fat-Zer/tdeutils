@@ -212,13 +212,13 @@ int CStatusBarProgress::recalcValue(int range)
 
 void CStatusBarProgress::valueChange()
 {
-  tqrepaint(contentsRect(), FALSE);
+  repaint(contentsRect(), FALSE);
   emit percentageChanged(recalcValue(100));
 }
 
 void CStatusBarProgress::rangeChange()
 {
-  tqrepaint(contentsRect(), FALSE);
+  repaint(contentsRect(), FALSE);
   emit percentageChanged(recalcValue(100));
 }
 
@@ -259,17 +259,17 @@ void CStatusBarProgress::drawText( TQPainter *p )
 
   if( mMsg.isEmpty() == true )
   {
-    s = TQString("%1%").tqarg(recalcValue(100));
+    s = TQString("%1%").arg(recalcValue(100));
   }
   else
   {
     if( mCurPage > 0 )
     {
-      s = i18n("%1... %2 of %3").tqarg(mMsg).tqarg(mCurPage).tqarg(mMaxPage);
+      s = i18n("%1... %2 of %3").arg(mMsg).arg(mCurPage).arg(mMaxPage);
     }
     else
     {
-      s = i18n("%1... %2%").tqarg(mMsg).tqarg(recalcValue(100));
+      s = i18n("%1... %2%").arg(mMsg).arg(recalcValue(100));
     }
   }
 

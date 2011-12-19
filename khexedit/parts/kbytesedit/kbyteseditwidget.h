@@ -86,7 +86,7 @@ class KBytesEditWidget : public TQWidget, public KHE::BytesEditInterface,
     virtual bool isOverwriteOnly() const;
     virtual bool isReadOnly() const;
     virtual bool isModified() const;
-    /** tqrepaint the indizes from i1 to i2 */
+    /** repaint the indizes from i1 to i2 */
     virtual void repaintRange( int i1, int i2 );
 
   public: // cursor interface

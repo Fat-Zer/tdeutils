@@ -132,7 +132,7 @@ void CDigitLabel::drawContents( TQPainter *p )
 
   TQString text;
   text.setNum( mDigit );
-  p->drawText( 0, 0, cr.width(), cr.height(), tqalignment(), text );
+  p->drawText( 0, 0, cr.width(), cr.height(), alignment(), text );
 
   
 

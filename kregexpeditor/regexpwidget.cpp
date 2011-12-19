@@ -43,17 +43,17 @@ RegExpWidget::RegExpWidget(RegExpEditorWindow* editorWindow, TQWidget *parent,
 
 void RegExpWidget::addNewChild(DragAccepter *, RegExpWidget *)
 {
-  qFatal("This widget should not expect any tqchildren");
+  qFatal("This widget should not expect any children");
 }
 
 void RegExpWidget::addNewConcChild(DragAccepter *, ConcWidget *)
 {
-  qFatal("This widget should not expect any tqchildren");
+  qFatal("This widget should not expect any children");
 }
 
 void RegExpWidget::setConcChild(ConcWidget *)
 {
-  qFatal("This widget should not expect any tqchildren");
+  qFatal("This widget should not expect any children");
 }
 
 bool RegExpWidget::updateSelection(bool parentSelected)
@@ -65,7 +65,7 @@ bool RegExpWidget::updateSelection(bool parentSelected)
   if ( _isSelected != selected ) {
     // Selection state changed
     _isSelected = selected;
-    tqrepaint();
+    repaint();
     return true;
   }
   return false;

@@ -48,11 +48,11 @@ void KWidgetStreamer::propertyToStream( const TQObject* from, TQDataStream& stre
   if ( ! from->inherits(TQWIDGET_OBJECT_NAME_STRING) )
     return;
 
-  // Serializing all the tqchildren (if any).
-  const TQObjectList tqchildren = from->childrenListObject();
-  if ( !tqchildren.isEmpty() ) {
-    stream <<  tqchildren.count();
-    for ( TQObjectListIt it = TQObjectListIt(tqchildren); *it; ++it ) {
+  // Serializing all the children (if any).
+  const TQObjectList children = from->childrenListObject();
+  if ( !children.isEmpty() ) {
+    stream <<  children.count();
+    for ( TQObjectListIt it = TQObjectListIt(children); *it; ++it ) {
       toStream( *it, stream );
     }
   }
@@ -83,14 +83,14 @@ void KWidgetStreamer::propertyFromStream( TQDataStream& stream, TQObject* to )
   if ( ! to->inherits(TQWIDGET_OBJECT_NAME_STRING) )
     return;
 
-  // Stream in all the tqchildren (if any)
-  const TQObjectList tqchildren = to->childrenListObject();
+  // Stream in all the children (if any)
+  const TQObjectList children = to->childrenListObject();
   unsigned int count;
 
   stream >> count;
-  if ( !tqchildren.isEmpty() ) {
-    Q_ASSERT( count == tqchildren.count() );
-    for ( TQObjectListIt it = TQObjectListIt(tqchildren); *it; ++it )
+  if ( !children.isEmpty() ) {
+    Q_ASSERT( count == children.count() );
+    for ( TQObjectListIt it = TQObjectListIt(children); *it; ++it )
       fromStream( stream, *it );
   }
   else {
@@ -147,14 +147,14 @@ KWidgetStreamer::KWidgetStreamer ()
   l.clear();
   l << TQString::fromLatin1("enabled")
     << TQString::fromLatin1("text") << TQString::fromLatin1("maxLength")
-    << TQString::fromLatin1("echoMode") << TQString::fromLatin1("tqalignment");
+    << TQString::fromLatin1("echoMode") << TQString::fromLatin1("alignment");
   _map.insert(TQString::fromLatin1(TQLINEEDIT_OBJECT_NAME_STRING), l);
 
   // TQMultiLineEdit
   l.clear();
   l << TQString::fromLatin1("enabled")
     << TQString::fromLatin1("text")
-    << TQString::fromLatin1("tqalignment");
+    << TQString::fromLatin1("alignment");
   _map.insert(TQString::fromLatin1(TQTEXTEDIT_OBJECT_NAME_STRING), l);
 
   // TQRadioButton

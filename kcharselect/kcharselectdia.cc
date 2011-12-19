@@ -98,7 +98,7 @@ KCharSelectDia::KCharSelectDia(TQWidget *parent,const char *name,
   (void)new KAction(i18n("&Flip"), 0, TQT_TQOBJECT(this),
       TQT_SLOT(flipText()), actionCollection(), "flip" );
   (void)new KAction(i18n("&Alignment"), 0, TQT_TQOBJECT(this),
-      TQT_SLOT(toggleEntryDirection()), actionCollection(), "tqalignment" );
+      TQT_SLOT(toggleEntryDirection()), actionCollection(), "alignment" );
   
   charSelect->setFocus();
 

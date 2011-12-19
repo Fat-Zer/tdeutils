@@ -125,8 +125,8 @@ static PyMethodDef karamba_methods[] = {
     {(char*)"getTextColor", py_getTextColor, METH_VARARGS, (char*)"Get a Text Sensor's Color"},
     {(char*)"changeTextSize", py_setTextFontSize, METH_VARARGS, (char*)"Change a Text Sensor's Font Size"},
     {(char*)"getTextFontSize", py_getTextFontSize, METH_VARARGS, (char*)"Get a Text Sensor's Font Size"},
-    {(char*)"getTextAlign", py_getTextAlign, METH_VARARGS, (char*)"Get Text tqalignment."},
-    {(char*)"setTextAlign", py_setTextAlign, METH_VARARGS, (char*)"Set Text tqalignment."},
+    {(char*)"getTextAlign", py_getTextAlign, METH_VARARGS, (char*)"Get Text alignment."},
+    {(char*)"setTextAlign", py_setTextAlign, METH_VARARGS, (char*)"Set Text alignment."},
     {(char*)"setTextScroll", py_setTextScroll, METH_VARARGS, (char*)"Set Text scroll."},
 
     // RichTextLabel - richtextlabel_python.cpp

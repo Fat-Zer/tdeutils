@@ -30,7 +30,7 @@ ProbeResultDialog::ProbeResultDialog( const HostConfig &hostConfig, const ProbeD
                                       TQWidget *parent, const char *name )
         : ProbeResultDialogBase( parent, name )
 {
-    info->setText( i18n( "Results of scanning host %1:" ).tqarg( hostConfig.name ) );
+    info->setText( i18n( "Results of scanning host %1:" ).arg( hostConfig.name ) );
 
     for ( ProbeDialog::ProbeResultList::ConstIterator it = probeResults.begin();
           it != probeResults.end(); ++it )

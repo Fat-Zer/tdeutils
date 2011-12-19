@@ -293,7 +293,7 @@ void KWalletEditor::deleteFolder() {
 				return;
 			}
 
-			int rc = KMessageBox::warningContinueCancel(this, i18n("Are you sure you wish to delete the folder '%1' from the wallet?").tqarg(fi->name()),"",KStdGuiItem::del());
+			int rc = KMessageBox::warningContinueCancel(this, i18n("Are you sure you wish to delete the folder '%1' from the wallet?").arg(fi->name()),"",KStdGuiItem::del());
 			if (rc == KMessageBox::Continue) {
 				bool rc = _w->removeFolder(fi->name());
 				if (!rc) {
@@ -366,7 +366,7 @@ void KWalletEditor::saveEntry() {
 		}
 	}
 
-	KMessageBox::sorry(this, i18n("Error saving entry. Error code: %1").tqarg(rc));
+	KMessageBox::sorry(this, i18n("Error saving entry. Error code: %1").arg(rc));
 }
 
 
@@ -402,7 +402,7 @@ void KWalletEditor::entrySelectionChanged(TQListViewItem *item) {
 				if (_w->readPassword(item->text(0), pass) == 0) {
 					_ww->_entryStack->raiseWidget(int(4));
 					_ww->_entryName->setText(i18n("Password: %1")
-							.tqarg(item->text(0)));
+							.arg(item->text(0)));
 					_ww->_passwordValue->setText(pass);
 					_ww->_saveChanges->setEnabled(false);
 					_ww->_undoChanges->setEnabled(false);
@@ -413,7 +413,7 @@ void KWalletEditor::entrySelectionChanged(TQListViewItem *item) {
 				showHideMapEditorValue(false);
 				if (_w->readMap(item->text(0), _currentMap) == 0) {
 					_mapEditor->reload();
-					_ww->_entryName->setText(i18n("Name-Value Map: %1").tqarg(item->text(0)));
+					_ww->_entryName->setText(i18n("Name-Value Map: %1").arg(item->text(0)));
 					_ww->_saveChanges->setEnabled(false);
 					_ww->_undoChanges->setEnabled(false);
 				}
@@ -422,7 +422,7 @@ void KWalletEditor::entrySelectionChanged(TQListViewItem *item) {
 				TQByteArray ba;
 				if (_w->readEntry(item->text(0), ba) == 0) {
 					_ww->_entryName->setText(i18n("Binary Data: %1")
-							.tqarg(item->text(0)));
+							.arg(item->text(0)));
 					_ww->_saveChanges->setEnabled(false);
 					_ww->_undoChanges->setEnabled(false);
 				}
@@ -454,7 +454,7 @@ void KWalletEditor::entrySelectionChanged(TQListViewItem *item) {
 
 	if (fi) {
 		_currentFolder = fi->name();
-		_ww->_entryTitle->setText(TQString("<font size=\"+1\">%1</font>").tqarg(fi->text(0)));
+		_ww->_entryTitle->setText(TQString("<font size=\"+1\">%1</font>").arg(fi->text(0)));
 		_ww->_iconTitle->setPixmap(fi->getFolderIcon(KIcon::Toolbar));
 	}
 }
@@ -540,7 +540,7 @@ void KWalletEditor::updateEntries(const TQString& folder) {
 	}
 	fi->refresh();
 	if (fi->name() == _currentFolder) {
-		_ww->_entryTitle->setText(TQString("<font size=\"+1\">%1</font>").tqarg(fi->text(0)));
+		_ww->_entryTitle->setText(TQString("<font size=\"+1\">%1</font>").arg(fi->text(0)));
 	}
 	if (!_entryList->selectedItem()) {
 		_ww->_entryName->clear();
@@ -700,7 +700,7 @@ void KWalletEditor::newEntry() {
 			abort();
 		}
 		fi->refresh();
-		_ww->_entryTitle->setText(TQString("<font size=\"+1\">%1</font>").tqarg(fi->text(0)));
+		_ww->_entryTitle->setText(TQString("<font size=\"+1\">%1</font>").arg(fi->text(0)));
 	}
 }
 
@@ -734,11 +734,11 @@ void KWalletEditor::listItemRenamed(TQListViewItem* item, int, const TQString& t
 				return;
 			}
 			if (ci->type() == KWallet::Wallet::Password) {
-				_ww->_entryName->setText(i18n("Password: %1").tqarg(item->text(0)));
+				_ww->_entryName->setText(i18n("Password: %1").arg(item->text(0)));
 			} else if (ci->type() == KWallet::Wallet::Map) {
-				_ww->_entryName->setText(i18n("Name-Value Map: %1").tqarg(item->text(0)));
+				_ww->_entryName->setText(i18n("Name-Value Map: %1").arg(item->text(0)));
 			} else if (ci->type() == KWallet::Wallet::Stream) {
-				_ww->_entryName->setText(i18n("Binary Data: %1").tqarg(item->text(0)));
+				_ww->_entryName->setText(i18n("Binary Data: %1").arg(item->text(0)));
 			}
 		} else {
 			i->setText(0, i->oldName());
@@ -750,7 +750,7 @@ void KWalletEditor::listItemRenamed(TQListViewItem* item, int, const TQString& t
 void KWalletEditor::deleteEntry() {
 	TQListViewItem *item = _entryList->selectedItem();
 	if (_w && item) {
-		int rc = KMessageBox::warningContinueCancel(this, i18n("Are you sure you wish to delete the item '%1'?").tqarg(item->text(0)),"",KStdGuiItem::del());
+		int rc = KMessageBox::warningContinueCancel(this, i18n("Are you sure you wish to delete the item '%1'?").arg(item->text(0)),"",KStdGuiItem::del());
 		if (rc == KMessageBox::Continue) {
 			KWalletFolderItem *fi = dynamic_cast<KWalletFolderItem *>(item->parent()->parent());
 			if (!fi) {
@@ -761,7 +761,7 @@ void KWalletEditor::deleteEntry() {
 			delete item;
 			entrySelectionChanged(_entryList->currentItem());
 			fi->refresh();
-			_ww->_entryTitle->setText(TQString("<font size=\"+1\">%1</font>").tqarg(fi->text(0)));
+			_ww->_entryTitle->setText(TQString("<font size=\"+1\">%1</font>").arg(fi->text(0)));
 		}
 	}
 }
@@ -818,7 +818,7 @@ void KWalletEditor::importWallet() {
 
 	TQString tmpFile;
 	if (!KIO::NetAccess::download(url, tmpFile, this)) {
-		KMessageBox::sorry(this, i18n("Unable to access wallet '<b>%1</b>'.").tqarg(url.prettyURL()));
+		KMessageBox::sorry(this, i18n("Unable to access wallet '<b>%1</b>'.").arg(url.prettyURL()));
 		return;
 	}
 
@@ -847,7 +847,7 @@ void KWalletEditor::importWallet() {
 					if (hasEntry && mp == Prompt) {
 						KBetterThanKDialogBase *bd;
 						bd = new KBetterThanKDialogBase(this);
-						bd->setLabel(i18n("Folder '<b>%1</b>' already contains an entry '<b>%2</b>'.  Do you wish to replace it?").tqarg(TQStyleSheet::escape(*f)).tqarg(TQStyleSheet::escape(me.key())));
+						bd->setLabel(i18n("Folder '<b>%1</b>' already contains an entry '<b>%2</b>'.  Do you wish to replace it?").arg(TQStyleSheet::escape(*f)).arg(TQStyleSheet::escape(me.key())));
 						mp = (MergePlan)bd->exec();
 						delete bd;
 						bool ok = false;
@@ -877,7 +877,7 @@ void KWalletEditor::importWallet() {
 					if (hasEntry && mp == Prompt) {
 						KBetterThanKDialogBase *bd;
 						bd = new KBetterThanKDialogBase(this);
-						bd->setLabel(i18n("Folder '<b>%1</b>' already contains an entry '<b>%2</b>'.  Do you wish to replace it?").tqarg(TQStyleSheet::escape(*f)).tqarg(TQStyleSheet::escape(pe.key())));
+						bd->setLabel(i18n("Folder '<b>%1</b>' already contains an entry '<b>%2</b>'.  Do you wish to replace it?").arg(TQStyleSheet::escape(*f)).arg(TQStyleSheet::escape(pe.key())));
 						mp = (MergePlan)bd->exec();
 						delete bd;
 						bool ok = false;
@@ -907,7 +907,7 @@ void KWalletEditor::importWallet() {
 					if (hasEntry && mp == Prompt) {
 						KBetterThanKDialogBase *bd;
 						bd = new KBetterThanKDialogBase(this);
-						bd->setLabel(i18n("Folder '<b>%1</b>' already contains an entry '<b>%2</b>'.  Do you wish to replace it?").tqarg(TQStyleSheet::escape(*f)).tqarg(TQStyleSheet::escape(ee.key())));
+						bd->setLabel(i18n("Folder '<b>%1</b>' already contains an entry '<b>%2</b>'.  Do you wish to replace it?").arg(TQStyleSheet::escape(*f)).arg(TQStyleSheet::escape(ee.key())));
 						mp = (MergePlan)bd->exec();
 						delete bd;
 						bool ok = false;
@@ -946,20 +946,20 @@ void KWalletEditor::importXML() {
 
 	TQString tmpFile;
 	if (!KIO::NetAccess::download(url, tmpFile, this)) {
-		KMessageBox::sorry(this, i18n("Unable to access XML file '<b>%1</b>'.").tqarg(url.prettyURL()));
+		KMessageBox::sorry(this, i18n("Unable to access XML file '<b>%1</b>'.").arg(url.prettyURL()));
 		return;
 	}
 
 	TQFile qf(tmpFile);
 	if (!qf.open(IO_ReadOnly)) {
-		KMessageBox::sorry(this, i18n("Error opening XML file '<b>%1</b>' for input.").tqarg(url.prettyURL()));
+		KMessageBox::sorry(this, i18n("Error opening XML file '<b>%1</b>' for input.").arg(url.prettyURL()));
 		KIO::NetAccess::removeTempFile(tmpFile);
 		return;
 	}
 
 	TQDomDocument doc(tmpFile);
 	if (!doc.setContent(&qf)) {
-		KMessageBox::sorry(this, i18n("Error reading XML file '<b>%1</b>' for input.").tqarg(url.prettyURL()));
+		KMessageBox::sorry(this, i18n("Error reading XML file '<b>%1</b>' for input.").arg(url.prettyURL()));
 		KIO::NetAccess::removeTempFile(tmpFile);
 		return;
 	}
@@ -998,7 +998,7 @@ void KWalletEditor::importXML() {
 			if (hasEntry && mp == Prompt) {
 				KBetterThanKDialogBase *bd;
 				bd = new KBetterThanKDialogBase(this);
-				bd->setLabel(i18n("Folder '<b>%1</b>' already contains an entry '<b>%2</b>'.  Do you wish to replace it?").tqarg(TQStyleSheet::escape(fname)).tqarg(TQStyleSheet::escape(ename)));
+				bd->setLabel(i18n("Folder '<b>%1</b>' already contains an entry '<b>%2</b>'.  Do you wish to replace it?").arg(TQStyleSheet::escape(fname)).arg(TQStyleSheet::escape(ename)));
 				mp = (MergePlan)bd->exec();
 				delete bd;
 				bool ok = false;
@@ -1106,7 +1106,7 @@ void KWalletEditor::exportXML() {
 	if (!url.isEmpty()) {
 		bool ok = true;
 		if (KIO::NetAccess::exists(url, false, this)) {
-			int rc = KMessageBox::warningContinueCancel(this, i18n("The file '%1' already exists. Would you like to overwrite this file?").tqarg(url.prettyURL()), i18n("Overwrite"));
+			int rc = KMessageBox::warningContinueCancel(this, i18n("The file '%1' already exists. Would you like to overwrite this file?").arg(url.prettyURL()), i18n("Overwrite"));
 			if (rc == KMessageBox::Cancel) {
 				ok = false;
 			}

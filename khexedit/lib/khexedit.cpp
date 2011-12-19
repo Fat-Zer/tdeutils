@@ -199,7 +199,7 @@ void KHexEdit::setOverwriteMode( bool OM )
   OverWrite = OM;
 
   // affected:
-  // cursor tqshape
+  // cursor shape
   bool ChangeCursor = !( CursorPaused || ValueEditor->isInEditMode() );
   if( ChangeCursor )
     pauseCursor();
@@ -1275,15 +1275,15 @@ void KHexEdit::createCursorPixmaps()
   int Index = BufferCursor->validIndex();
 
   TQPainter Paint;
-  Paint.tqbegin( const_cast<TQPixmap*>(&CursorPixmaps->offPixmap()), this );
+  Paint.begin( const_cast<TQPixmap*>(&CursorPixmaps->offPixmap()), this );
   activeColumn().paintByte( &Paint, Index );
   Paint.end();
 
-  Paint.tqbegin( const_cast<TQPixmap*>(&CursorPixmaps->onPixmap()), this );
+  Paint.begin( const_cast<TQPixmap*>(&CursorPixmaps->onPixmap()), this );
   activeColumn().paintCursor( &Paint, Index );
   Paint.end();
 
-  // calculat the tqshape
+  // calculat the shape
   KPixelX CursorX;
   KPixelX CursorW;
   if( BufferCursor->isBehind() )
@@ -1498,7 +1498,7 @@ void KHexEdit::paintLine( KBufferColumn *C, int Line, KSection Positions )
 
   // to avoid flickers we first paint to the linebuffer
   TQPainter Paint;
-  Paint.tqbegin( &LineBuffer, this );
+  Paint.begin( &LineBuffer, this );
 
   Paint.translate( C->x(), 0 );
   C->paintPositions( &Paint, Line, Positions );

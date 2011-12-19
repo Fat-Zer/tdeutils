@@ -190,7 +190,7 @@ void Systemtray::layoutSystray()
     }
 
     count++;
-    emb->tqrepaint();
+    emb->repaint();
   }
 }
 

@@ -144,8 +144,8 @@ void NetConfig::menu(KListView *, TQListViewItem *item, const TQPoint &)
 
   if (item) {
     aboutMenu->insertItem(i18n("&Add Net Device"), 3);
-    aboutMenu->insertItem(i18n("&Modify '%1'").tqarg(item->text(0)), 2);
-    aboutMenu->insertItem(i18n("&Remove '%1'").tqarg(item->text(0)), 1);
+    aboutMenu->insertItem(i18n("&Modify '%1'").arg(item->text(0)), 2);
+    aboutMenu->insertItem(i18n("&Remove '%1'").arg(item->text(0)), 1);
   }
   else {
     aboutMenu->insertItem(i18n("&Add Net Device"), 3);
@@ -217,7 +217,7 @@ void NetConfig::removeItem(TQListViewItem *item)
     return;
 
   int result = KMessageBox::warningContinueCancel(0, i18n("Are you sure you "
-     "want to remove the net interface '%1'?").tqarg(item->text(0)), TQString(), KStdGuiItem::del());
+     "want to remove the net interface '%1'?").arg(item->text(0)), TQString(), KStdGuiItem::del());
 
   if (result == KMessageBox::Cancel)
     return;

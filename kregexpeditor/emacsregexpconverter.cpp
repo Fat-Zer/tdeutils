@@ -40,7 +40,7 @@ TQString EmacsRegExpConverter::toString( AltnRegExp* regexp, bool markSelection 
     TQString res;
 
 	bool first = true;
-    RegExpList list = regexp->tqchildren();
+    RegExpList list = regexp->children();
     for ( RegExpListIt it(list); *it; ++it ) {
 		if ( !first ) {
 			res += TQString::fromLatin1("\\|");
@@ -56,7 +56,7 @@ TQString EmacsRegExpConverter::toString( ConcRegExp* regexp, bool markSelection 
 {
 	TQString res;
 
-    RegExpList list = regexp->tqchildren();
+    RegExpList list = regexp->children();
 	for ( RegExpListIt it(list); *it; ++it ) {
         TQString startPar = TQString::fromLocal8Bit("");
         TQString endPar = TQString::fromLocal8Bit("");

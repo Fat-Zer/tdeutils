@@ -104,8 +104,8 @@ void KgpgLibrary::fastencode(KURL &fileToCrypt,TQStringList selec,TQStringList e
         }
 	int filesToEncode=urlselecteds.count();
 	if (filesToEncode>1)
-	emit systemMessage(i18n("<b>%1 Files left.</b>\nEncrypting </b>%2").tqarg(filesToEncode).tqarg(urlselecteds.first().path()));
-	else emit systemMessage(i18n("<b>Encrypting </b>%2").tqarg(urlselecteds.first().path()));
+	emit systemMessage(i18n("<b>%1 Files left.</b>\nEncrypting </b>%2").arg(filesToEncode).arg(urlselecteds.first().path()));
+	else emit systemMessage(i18n("<b>Encrypting </b>%2").arg(urlselecteds.first().path()));
         KgpgInterface *cryptFileProcess=new KgpgInterface();
 	pop = new KPassivePopup(panel);
         cryptFileProcess->KgpgEncryptFile(selec,urlselected,dest,encryptOptions,symetric);
@@ -122,7 +122,7 @@ void KgpgLibrary::processpopup2(TQString fileName)
 {
         
 	//pop->setTimeout(0);
-        pop->setView(i18n("Processing encryption (%1)").tqarg(fileName),i18n("Please wait..."),KGlobal::iconLoader()->loadIcon("kgpg",KIcon::Desktop));
+        pop->setView(i18n("Processing encryption (%1)").arg(fileName),i18n("Please wait..."),KGlobal::iconLoader()->loadIcon("kgpg",KIcon::Desktop));
         pop->show();
         /*TQRect qRect(TQApplication::desktop()->screenGeometry());
         int iXpos=qRect.width()/2-pop->width()/2;
@@ -192,7 +192,7 @@ void KgpgLibrary::slotFileDec(KURL srcUrl,KURL destUrl,TQStringList customDecryp
 
 void KgpgLibrary::processpopup(TQString fileName)
 {
-	emit systemMessage(i18n("Decrypting %1").tqarg(fileName));
+	emit systemMessage(i18n("Decrypting %1").arg(fileName));
 	pop->setTimeout(0);
         pop->setView(i18n("Processing decryption"),i18n("Please wait..."),KGlobal::iconLoader()->loadIcon("kgpg",KIcon::Desktop));
         pop->show();
@@ -222,7 +222,7 @@ void KgpgLibrary::processdecerror(TQString mssge)
                 qfile.close();
                 //////////////     if  pgp data found, decode it
                 if (result.startsWith("-----BEGIN PGP PUBLIC KEY BLOCK")) {//////  dropped file is a public key, ask for import
-                        int result=KMessageBox::warningContinueCancel(0,i18n("<p>The file <b>%1</b> is a public key.<br>Do you want to import it ?</p>").tqarg(urlselected.path()),i18n("Warning"));
+                        int result=KMessageBox::warningContinueCancel(0,i18n("<p>The file <b>%1</b> is a public key.<br>Do you want to import it ?</p>").arg(urlselected.path()),i18n("Warning"));
                         if (result==KMessageBox::Cancel)
                                 return;
                         else {
@@ -233,7 +233,7 @@ void KgpgLibrary::processdecerror(TQString mssge)
                         }
                 } else if (result.startsWith("-----BEGIN PGP PRIVATE KEY BLOCK")) {//////  dropped file is a public key, ask for import
                         qfile.close();
-                        KMessageBox::information(0,i18n("<p>The file <b>%1</b> is a private key block. Please use KGpg key manager to import it.</p>").tqarg(urlselected.path()));
+                        KMessageBox::information(0,i18n("<p>The file <b>%1</b> is a private key block. Please use KGpg key manager to import it.</p>").arg(urlselected.path()));
                         return;
                 }
         }

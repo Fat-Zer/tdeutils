@@ -40,7 +40,7 @@
  */
 KWalletFolderItem::KWalletFolderItem(KWallet::Wallet *w, TQListView* parent, const TQString &name, int entries)
 : KListViewItem(parent),_wallet(w),_name(name),_entries(entries) {
-	setText(0, TQString("%1 (%2)").tqarg(_name).tqarg(_entries));
+	setText(0, TQString("%1 (%2)").arg(_name).arg(_entries));
 	setRenameEnabled(0, false);
 	setDragEnabled(true);
 	setDropEnabled(true);
@@ -66,7 +66,7 @@ TQPixmap KWalletFolderItem::getFolderIcon(KIcon::Group group){
 void KWalletFolderItem::refresh() {
 	TQString saveFolder = _wallet->currentFolder();
 	_wallet->setFolder(_name);
-	setText(0, TQString("%1 (%2)").tqarg(_name).tqarg(_wallet->entryList().count()));
+	setText(0, TQString("%1 (%2)").arg(_name).arg(_wallet->entryList().count()));
 	_wallet->setFolder(saveFolder);
 }
 
@@ -194,7 +194,7 @@ static bool decodeEntry(KWallet::Wallet *_wallet, TQDataStream& ds) {
 	KWallet::Wallet::EntryType et;
 	ds >> name;
 	if (_wallet->hasEntry(name)) {
-		int rc = KMessageBox::warningContinueCancel(0L, i18n("An entry by the name '%1' already exists. Would you like to continue?").tqarg(name));
+		int rc = KMessageBox::warningContinueCancel(0L, i18n("An entry by the name '%1' already exists. Would you like to continue?").arg(name));
 		if (rc == KMessageBox::Cancel) {
 			return false;
 		}
@@ -217,7 +217,7 @@ static bool decodeFolder(KWallet::Wallet *_wallet, TQDataStream& ds) {
 	TQString folder;
 	ds >> folder;
 	if (_wallet->hasFolder(folder)) {
-		int rc = KMessageBox::warningYesNoCancel(0L, i18n("A folder by the name '%1' already exists.  What would you like to do?").tqarg(folder), TQString(), KStdGuiItem::cont(), i18n("Replace"));
+		int rc = KMessageBox::warningYesNoCancel(0L, i18n("A folder by the name '%1' already exists.  What would you like to do?").arg(folder), TQString(), KStdGuiItem::cont(), i18n("Replace"));
 		if (rc == KMessageBox::Cancel) {
 			return false;
 		}

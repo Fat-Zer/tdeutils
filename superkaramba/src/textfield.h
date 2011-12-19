@@ -47,7 +47,7 @@ public:
     int getLineHeight() const;
 
 protected:
-    int tqalignment;
+    int alignment;
     TQFont font;
     TQColor color;
     TQColor bgColor;

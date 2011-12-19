@@ -137,7 +137,7 @@ UpdateViewItem::UpdateViewItem(TQListViewItem *parent, TQString name,TQString em
 }
 
 
-void UpdateViewItem::paintCell(TQPainter *p, const TQColorGroup &cg,int column, int width, int tqalignment)
+void UpdateViewItem::paintCell(TQPainter *p, const TQColorGroup &cg,int column, int width, int alignment)
 {
         TQColorGroup _cg( cg );
 	if (depth()==0)
@@ -157,7 +157,7 @@ void UpdateViewItem::paintCell(TQPainter *p, const TQColorGroup &cg,int column, 
         }
 
 
-        KListViewItem::paintCell(p,_cg, column, width, tqalignment);
+        KListViewItem::paintCell(p,_cg, column, width, alignment);
 }
 
 #include <iostream>
@@ -257,7 +257,7 @@ KDialogBase( parent, name, true,i18n("Private Key List"),Ok | Cancel)
                                 val=i18n("Unlimited");
                         fullname=keyString[9];
 
-                        fp2 = popen(TQFile::encodeName(TQString("gpg --no-tty --with-colons --list-key %1").tqarg(KShellProcess::quote(id))), "r");
+                        fp2 = popen(TQFile::encodeName(TQString("gpg --no-tty --with-colons --list-key %1").arg(KShellProcess::quote(id))), "r");
                         bool dead=true;
                         while ( fgets( line, sizeof(line), fp2)) {
                                 tst2=TQString::fromUtf8(line);
@@ -297,7 +297,7 @@ KDialogBase( parent, name, true,i18n("Private Key List"),Ok | Cancel)
 
 
                                 item=new KListViewItem(keysListpr,keyName,keyMail,id);
-                                //KListViewItem *sub= new KListViewItem(item,i18n("ID: %1, trust: %2, expiration: %3").tqarg(id).tqarg(trust).tqarg(val));
+                                //KListViewItem *sub= new KListViewItem(item,i18n("ID: %1, trust: %2, expiration: %3").arg(id).arg(trust).arg(val));
 				KListViewItem *sub= new KListViewItem(item,i18n("Expiration:"),val);
                                 sub->setSelectable(false);
                                 item->setPixmap(0,keyPair);
@@ -434,7 +434,7 @@ KeyView::KeyView( TQWidget *parent, const char *name )
 
 void  KeyView::droppedfile (KURL url)
 {
-        if (KMessageBox::questionYesNo(this,i18n("<p>Do you want to import file <b>%1</b> into your key ring?</p>").tqarg(url.path()), TQString(), i18n("Import"), i18n("Do Not Import"))!=KMessageBox::Yes)
+        if (KMessageBox::questionYesNo(this,i18n("<p>Do you want to import file <b>%1</b> into your key ring?</p>").arg(url.path()), TQString(), i18n("Import"), i18n("Do Not Import"))!=KMessageBox::Yes)
                 return;
 
         KgpgInterface *importKeyProcess=new KgpgInterface();
@@ -966,7 +966,7 @@ void listKeys::slotGpgError(TQString errortxt)
 
 void listKeys::slotDeletePhoto()
 {
-        if (KMessageBox::warningContinueCancel(this,i18n("<qt>Are you sure you want to delete Photo id <b>%1</b><br>from key <b>%2 &lt;%3&gt;</b> ?</qt>").tqarg(keysList2->currentItem()->text(6)).tqarg(keysList2->currentItem()->parent()->text(0)).tqarg(keysList2->currentItem()->parent()->text(1)),i18n("Warning"),KGuiItem(i18n("Delete"),"editdelete"))!=KMessageBox::Continue)
+        if (KMessageBox::warningContinueCancel(this,i18n("<qt>Are you sure you want to delete Photo id <b>%1</b><br>from key <b>%2 &lt;%3&gt;</b> ?</qt>").arg(keysList2->currentItem()->text(6)).arg(keysList2->currentItem()->parent()->text(0)).arg(keysList2->currentItem()->parent()->text(1)),i18n("Warning"),KGuiItem(i18n("Delete"),"editdelete"))!=KMessageBox::Continue)
                 return;
 
         KgpgInterface *delPhotoProcess=new KgpgInterface();
@@ -1070,7 +1070,7 @@ void listKeys::findFirstKey()
                 keysList2->setSelected(item,true);
                 keysList2->ensureItemVisible(item);
         } else
-                KMessageBox::sorry(this,i18n("<qt>Search string '<b>%1</b>' not found.").tqarg(searchString));
+                KMessageBox::sorry(this,i18n("<qt>Search string '<b>%1</b>' not found.").arg(searchString));
 }
 
 void listKeys::findNextKey()
@@ -1275,7 +1275,7 @@ void listKeys::readOptions()
         KGpgSettings::setGroups(groups.join(","));
         keysList2->groupNb=groups.count();
         if (keyStatusBar)
-                changeMessage(i18n("%1 Keys, %2 Groups").tqarg(keysList2->childCount()-keysList2->groupNb).tqarg(keysList2->groupNb),1);
+                changeMessage(i18n("%1 Keys, %2 Groups").arg(keysList2->childCount()-keysList2->groupNb).arg(keysList2->groupNb),1);
 
         showTipOfDay= KGpgSettings::showTipOfDay();
 }
@@ -1478,7 +1478,7 @@ void listKeys::slotexportsec()
                 p->start(KProcess::Block);
 
                 if (fgpg.exists())
-                        KMessageBox::information(this,i18n("Your PRIVATE key \"%1\" was successfully exported.\nDO NOT leave it in an insecure place.").tqarg(url.path()));
+                        KMessageBox::information(this,i18n("Your PRIVATE key \"%1\" was successfully exported.\nDO NOT leave it in an insecure place.").arg(url.path()));
                 else
                         KMessageBox::sorry(this,i18n("Your secret key could not be exported.\nCheck the key."));
         }
@@ -1553,7 +1553,7 @@ void listKeys::slotexport()
 
                                 p->start(KProcess::Block);
                                 if (fgpg.exists())
-                                        KMessageBox::information(this,i18n("Your public key \"%1\" was successfully exported\n").tqarg(expname));
+                                        KMessageBox::information(this,i18n("Your public key \"%1\" was successfully exported\n").arg(expname));
                                 else
                                         KMessageBox::sorry(this,i18n("Your public key could not be exported\nCheck the key."));
                         }
@@ -1667,7 +1667,7 @@ void listKeys::deleteGroup()
         if (!keysList2->currentItem() || !keysList2->currentItem()->text(6).isEmpty())
                 return;
 
-        int result=KMessageBox::warningContinueCancel(this,i18n("<qt>Are you sure you want to delete group <b>%1</b> ?</qt>").tqarg(keysList2->currentItem()->text(0)),i18n("Warning"),KGuiItem(i18n("Delete"),"editdelete"));
+        int result=KMessageBox::warningContinueCancel(this,i18n("<qt>Are you sure you want to delete group <b>%1</b> ?</qt>").arg(keysList2->currentItem()->text(0)),i18n("Warning"),KGuiItem(i18n("Delete"),"editdelete"));
         if (result!=KMessageBox::Continue)
                 return;
         KgpgInterface::delGpgGroup(keysList2->currentItem()->text(0), KGpgSettings::gpgConfigPath());
@@ -1681,7 +1681,7 @@ void listKeys::deleteGroup()
         TQStringList groups=KgpgInterface::getGpgGroupNames(KGpgSettings::gpgConfigPath());
         KGpgSettings::setGroups(groups.join(","));
         keysList2->groupNb=groups.count();
-        changeMessage(i18n("%1 Keys, %2 Groups").tqarg(keysList2->childCount()-keysList2->groupNb).tqarg(keysList2->groupNb),1);
+        changeMessage(i18n("%1 Keys, %2 Groups").arg(keysList2->childCount()-keysList2->groupNb).arg(keysList2->groupNb),1);
 }
 
 void listKeys::groupChange()
@@ -1737,9 +1737,9 @@ void listKeys::createNewGroup()
                         keysList2->setSelected(newgrp,true);
                         keysList2->ensureItemVisible(newgrp);
                         keysList2->groupNb=groups.count();
-                        changeMessage(i18n("%1 Keys, %2 Groups").tqarg(keysList2->childCount()-keysList2->groupNb).tqarg(keysList2->groupNb),1);
+                        changeMessage(i18n("%1 Keys, %2 Groups").arg(keysList2->childCount()-keysList2->groupNb).arg(keysList2->groupNb),1);
                 } else
-                        KMessageBox::sorry(this,i18n("<qt>No valid or trusted key was selected. The group <b>%1</b> will not be created.</qt>").tqarg(groupName));
+                        KMessageBox::sorry(this,i18n("<qt>No valid or trusted key was selected. The group <b>%1</b> will not be created.</qt>").arg(groupName));
         }
 }
 
@@ -1864,7 +1864,7 @@ void listKeys::signkey()
                 pclose(pass);
                 opt=	i18n("<qt>You are about to sign key:<br><br>%1<br>ID: %2<br>Fingerprint: <br><b>%3</b>.<br><br>"
                           "You should check the key fingerprint by phoning or meeting the key owner to be sure that someone "
-                          "is not trying to intercept your communications</qt>").tqarg(keysList2->currentItem()->text(0)+" ("+keysList2->currentItem()->text(1)+")").tqarg(keysList2->currentItem()->text(6)).tqarg(fingervalue);
+                          "is not trying to intercept your communications</qt>").arg(keysList2->currentItem()->text(0)+" ("+keysList2->currentItem()->text(1)+")").arg(keysList2->currentItem()->text(6)).arg(fingervalue);
 
                 if (KMessageBox::warningContinueCancel(this,opt)!=KMessageBox::Continue)
                         return;
@@ -1958,7 +1958,7 @@ void listKeys::signatureResult(int success)
                 keysList2->refreshcurrentkey(signList.at(keyCount));
 
         else if (success==2)
-                KMessageBox::sorry(this,i18n("<qt>Bad passphrase, key <b>%1</b> not signed.</qt>").tqarg(signList.at(keyCount)->text(0)+i18n(" (")+signList.at(keyCount)->text(1)+i18n(")")));
+                KMessageBox::sorry(this,i18n("<qt>Bad passphrase, key <b>%1</b> not signed.</qt>").arg(signList.at(keyCount)->text(0)+i18n(" (")+signList.at(keyCount)->text(1)+i18n(")")));
 
         keyCount++;
         signLoop();
@@ -2064,7 +2064,7 @@ void listKeys::delsignkey()
                 KMessageBox::sorry(this,i18n("Edit key manually to delete a self-signature."));
                 return;
         }
-        TQString ask=i18n("<qt>Are you sure you want to delete signature<br><b>%1</b> from key:<br><b>%2</b>?</qt>").tqarg(signMail).tqarg(parentMail);
+        TQString ask=i18n("<qt>Are you sure you want to delete signature<br><b>%1</b> from key:<br><b>%2</b>?</qt>").arg(signMail).arg(parentMail);
 
         if (KMessageBox::questionYesNo(this,ask,TQString(),KStdGuiItem::del(),KStdGuiItem::cancel())!=KMessageBox::Yes)
                 return;
@@ -2134,7 +2134,7 @@ void listKeys::slotgenkey()
                         bool goodpass=false;
                         while (!goodpass)
                         {
-                                int code=KPasswordDialog::getNewPassword(password,i18n("<b>Enter passphrase for %1</b>:<br>Passphrase should include non alphanumeric characters and random sequences").tqarg(newKeyName+" <"+newKeyMail+">"));
+                                int code=KPasswordDialog::getNewPassword(password,i18n("<b>Enter passphrase for %1</b>:<br>Passphrase should include non alphanumeric characters and random sequences").arg(newKeyName+" <"+newKeyMail+">"));
                                 if (code!=TQDialog::Accepted)
                                         return;
                                 if (password.length()<5)
@@ -2188,27 +2188,27 @@ void listKeys::slotgenkey()
                         {
                                 proc->writeStdin(TQString("Key-Type: DSA"));
                                 proc->writeStdin(TQString("Subkey-Type: ELG-E"));
-                                proc->writeStdin(TQString("Subkey-Length:%1").tqarg(ksize));
+                                proc->writeStdin(TQString("Subkey-Length:%1").arg(ksize));
                         }
-                        proc->writeStdin(TQString("Passphrase:%1").tqarg(password.data()));
-                        proc->writeStdin(TQString("Key-Length:%1").tqarg(ksize));
-                        proc->writeStdin(TQString("Name-Real:%1").tqarg(newKeyName));
+                        proc->writeStdin(TQString("Passphrase:%1").arg(password.data()));
+                        proc->writeStdin(TQString("Key-Length:%1").arg(ksize));
+                        proc->writeStdin(TQString("Name-Real:%1").arg(newKeyName));
                         if (!newKeyMail.isEmpty())
-                                proc->writeStdin(TQString("Name-Email:%1").tqarg(newKeyMail));
+                                proc->writeStdin(TQString("Name-Email:%1").arg(newKeyMail));
                         if (!kcomment.isEmpty())
-                                proc->writeStdin(TQString("Name-Comment:%1").tqarg(kcomment));
+                                proc->writeStdin(TQString("Name-Comment:%1").arg(kcomment));
                         if (kexp==0)
                                 proc->writeStdin(TQString("Expire-Date:0"));
                         if (kexp==1)
-                                proc->writeStdin(TQString("Expire-Date:%1").tqarg(knumb));
+                                proc->writeStdin(TQString("Expire-Date:%1").arg(knumb));
                         if (kexp==2)
-                                proc->writeStdin(TQString("Expire-Date:%1w").tqarg(knumb));
+                                proc->writeStdin(TQString("Expire-Date:%1w").arg(knumb));
 
                         if (kexp==3)
-                                proc->writeStdin(TQString("Expire-Date:%1m").tqarg(knumb));
+                                proc->writeStdin(TQString("Expire-Date:%1m").arg(knumb));
 
                         if (kexp==4)
-                                proc->writeStdin(TQString("Expire-Date:%1y").tqarg(knumb));
+                                proc->writeStdin(TQString("Expire-Date:%1y").arg(knumb));
                         proc->writeStdin(TQString("%commit"));
                         TQObject::connect(proc,TQT_SIGNAL(readReady(KProcIO *)),TQT_TQOBJECT(this),TQT_SLOT(readgenprocess(KProcIO *)));
                         proc->closeWhenDone();
@@ -2281,7 +2281,7 @@ void listKeys::newKeyDone(KProcess *)
                 return;
         }
         keysList2->refreshcurrentkey(newkeyID);
-        changeMessage(i18n("%1 Keys, %2 Groups").tqarg(keysList2->childCount()-keysList2->groupNb).tqarg(keysList2->groupNb),1);
+        changeMessage(i18n("%1 Keys, %2 Groups").arg(keysList2->childCount()-keysList2->groupNb).arg(keysList2->groupNb),1);
         KDialogBase *keyCreated=new KDialogBase( this, "key_created", true,i18n("New Key Pair Created"), KDialogBase::Ok);
         newKey *page=new newKey(keyCreated);
         page->TLname->setText("<b>"+newKeyName+"</b>");
@@ -2326,7 +2326,7 @@ void listKeys::doFilePrint(TQString url)
                 TQTextStream t( &qfile );
                 doPrint(t.read());
         } else
-                KMessageBox::sorry(this,i18n("<qt>Cannot open file <b>%1</b> for printing...</qt>").tqarg(url));
+                KMessageBox::sorry(this,i18n("<qt>Cannot open file <b>%1</b> for printing...</qt>").arg(url));
 }
 
 void listKeys::doPrint(TQString txt)
@@ -2345,7 +2345,7 @@ void listKeys::deleteseckey()
         //////////////////////// delete a key
         TQString res=keysList2->currentItem()->text(0)+" ("+keysList2->currentItem()->text(1)+")";
         int result=KMessageBox::warningContinueCancel(this,
-                        i18n("<p>Delete <b>SECRET KEY</b> pair <b>%1</b>?</p>Deleting this key pair means you will never be able to decrypt files encrypted with this key again.").tqarg(res),
+                        i18n("<p>Delete <b>SECRET KEY</b> pair <b>%1</b>?</p>Deleting this key pair means you will never be able to decrypt files encrypted with this key again.").arg(res),
                         i18n("Warning"),
                         KGuiItem(i18n("Delete"),"editdelete"));
         if (result!=KMessageBox::Continue)
@@ -2406,7 +2406,7 @@ void listKeys::confirmdeletekey()
                         }
 
                 if (secretKeyInside) {
-                        int result=KMessageBox::warningContinueCancel(this,i18n("<qt>The following are secret key pairs:<br><b>%1</b>They will not be deleted.<br></qt>").tqarg(secList));
+                        int result=KMessageBox::warningContinueCancel(this,i18n("<qt>The following are secret key pairs:<br><b>%1</b>They will not be deleted.<br></qt>").arg(secList));
                         if (result!=KMessageBox::Continue)
                                 return;
                 }
@@ -2461,7 +2461,7 @@ void listKeys::deletekey()
                 }
         }
 	else stateChanged("empty_list");
-        changeMessage(i18n("%1 Keys, %2 Groups").tqarg(keysList2->childCount()-keysList2->groupNb).tqarg(keysList2->groupNb),1);
+        changeMessage(i18n("%1 Keys, %2 Groups").arg(keysList2->childCount()-keysList2->groupNb).arg(keysList2->groupNb),1);
 }
 
 
@@ -2638,7 +2638,7 @@ void KeyView::expandKey(TQListViewItem *item)
                                 } else
                                         if (tst[0]=="sub") {
                                                 gpgKey subKey=extractKey(line);
-                                                itemsub= new UpdateViewItem(item,i18n("%1 subkey").tqarg(subKey.gpgkeyalgo),TQString(),TQString(),subKey.gpgkeyexpiration,subKey.gpgkeysize,subKey.gpgkeycreation,subKey.gpgkeyid);
+                                                itemsub= new UpdateViewItem(item,i18n("%1 subkey").arg(subKey.gpgkeyalgo),TQString(),TQString(),subKey.gpgkeyexpiration,subKey.gpgkeysize,subKey.gpgkeycreation,subKey.gpgkeyid);
                                                 itemsub->setPixmap(0,pixkeySingle);
                                                 itemsub->setPixmap(2,subKey.trustpic);
                                                 cycle="sub";
@@ -2768,7 +2768,7 @@ void KeyView::refreshkeylist()
                 setSelected(firstChild(),true);
         }
 
-        emit statusMessage(i18n("%1 Keys, %2 Groups").tqarg(childCount()-groupNb).tqarg(groupNb),1);
+        emit statusMessage(i18n("%1 Keys, %2 Groups").arg(childCount()-groupNb).arg(groupNb),1);
         emit statusMessage(i18n("Ready"),0);
         kdDebug(2100)<<"Refresh Finished"<<endl;
 }
@@ -2855,7 +2855,7 @@ void KeyView::refreshgroups()
                         item->setPixmap(0,pixkeyGroup);
                         item->setExpandable(false);
                 }
-        emit statusMessage(i18n("%1 Keys, %2 Groups").tqarg(childCount()-groupNb).tqarg(groupNb),1);
+        emit statusMessage(i18n("%1 Keys, %2 Groups").arg(childCount()-groupNb).arg(groupNb),1);
         emit statusMessage(i18n("Ready"),0);
 }
 
@@ -2882,7 +2882,7 @@ void KeyView::slotReloadKeys(TQStringList keyIDs)
         }
         kdDebug(2100)<<"Refreshing key:--------"<<TQString((keyIDs.last()).right(8).prepend("0x"))<<endl;
         ensureItemVisible(this->findItem((keyIDs.last()).right(8).prepend("0x"),6));
-        emit statusMessage(i18n("%1 Keys, %2 Groups").tqarg(childCount()-groupNb).tqarg(groupNb),1);
+        emit statusMessage(i18n("%1 Keys, %2 Groups").arg(childCount()-groupNb).arg(groupNb),1);
         emit statusMessage(i18n("Ready"),0);
 }
 
@@ -2917,7 +2917,7 @@ void KeyView::slotReloadOrphaned()
                 }
         }
         setSelected(findItem(*it,6),true);
-        emit statusMessage(i18n("%1 Keys, %2 Groups").tqarg(childCount()-groupNb).tqarg(groupNb),1);
+        emit statusMessage(i18n("%1 Keys, %2 Groups").arg(childCount()-groupNb).arg(groupNb),1);
         emit statusMessage(i18n("Ready"),0);
 }
 

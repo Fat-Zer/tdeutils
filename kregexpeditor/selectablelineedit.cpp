@@ -40,7 +40,7 @@ void SelectableLineEdit::setSelected( bool selected )
   else {
     unsetPalette();
   }
-  tqrepaint();
+  repaint();
 }
 
 TQSize SelectableLineEdit::sizeHint() const
@@ -67,7 +67,7 @@ void SelectableLineEdit::slotKeyPressed()
   int actualSize = metrics.width( text() );
 
   if ( actualSize > size().width()-frameWidth ) {
-    tqrepaint();
+    repaint();
     emit parentPleaseUpdate();
   }
 }

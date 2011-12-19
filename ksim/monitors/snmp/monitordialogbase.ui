@@ -104,7 +104,7 @@
                     <property name="text">
                         <string>The text in the edit box is what is displayed except that any occurrence of &lt;b&gt;%s&lt;/b&gt; will be replaced with the snmp object value and any occurrence of &lt;b&gt;%n&lt;/b&gt; will be replaced with the name of this monitor (see Name input field) .</string>
                     </property>
-                    <property name="tqalignment">
+                    <property name="alignment">
                         <set>WordBreak|AlignVCenter</set>
                     </property>
                 </widget>

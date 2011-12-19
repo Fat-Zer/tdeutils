@@ -376,7 +376,7 @@ void KgpgApp::slotFileSaveAs()
                 TQString filn=url.path();
                 TQFile f(filn);
                 if (f.exists()) {
-                        TQString message=i18n("Overwrite existing file %1?").tqarg(url.fileName());
+                        TQString message=i18n("Overwrite existing file %1?").arg(url.fileName());
                         int result=KMessageBox::warningContinueCancel(this,TQString(message),i18n("Warning"),i18n("Overwrite"));
                         if (result==KMessageBox::Cancel)
                                 return;
@@ -385,7 +385,7 @@ void KgpgApp::slotFileSaveAs()
 		}
 		else if (KIO::NetAccess::exists(url,false,this))
 		{
-		TQString message=i18n("Overwrite existing file %1?").tqarg(url.fileName());
+		TQString message=i18n("Overwrite existing file %1?").arg(url.fileName());
                         int result=KMessageBox::warningContinueCancel(this,TQString(message),i18n("Warning"),i18n("Overwrite"));
                         if (result==KMessageBox::Cancel)
                                 return;

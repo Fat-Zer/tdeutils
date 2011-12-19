@@ -81,7 +81,7 @@
                     <property name="scaledContents">
                         <bool>false</bool>
                     </property>
-                    <property name="tqalignment">
+                    <property name="alignment">
                         <set>AlignCenter</set>
                     </property>
                     <property name="whatsThis" stdset="0">

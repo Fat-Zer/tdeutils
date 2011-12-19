@@ -62,7 +62,7 @@ public:
     virtual bool click(TQMouseEvent*);
 
 private:
-    int tqalignment;
+    int alignment;
     int clip;
     TQStringList value;
     TQFont font;

@@ -258,7 +258,7 @@ void CHexToolWidget::cursorChanged( SCursorState &state )
     // checking for system endianess, using the compiler for the byte interpretation and cutting bloaded code
     // TODO: add PDP endianess
     void *P8Bit, *P16Bit, *P32Bit, *P64Bit;
-    // ensure strict tqalignment for double as needed on some architectures (e.g. PA-RISC)
+    // ensure strict alignment for double as needed on some architectures (e.g. PA-RISC)
     typedef union { unsigned char b[8]; double d; } aligned_t;
     aligned_t Data;
     if(

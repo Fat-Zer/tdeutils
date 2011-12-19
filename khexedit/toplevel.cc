@@ -391,7 +391,7 @@ void KHexEdit::initialize( bool openFiles )
         maxItems = 1;
     for( unsigned int i = 1 ; i <= maxItems ; i++ )
     {
-        const TQString key = TQString( "File%1" ).tqarg( i );
+        const TQString key = TQString( "File%1" ).arg( i );
         const TQString value = config->readPathEntry( key );
     
         if (!value.isEmpty())
@@ -533,7 +533,7 @@ void KHexEdit::slotFileOpenRecent( const KURL& url )
   else
   {
     // ### TODO: support network transparency
-    KMessageBox::error( this, i18n("Non local recent file: %1").tqarg( url.prettyURL() ) );
+    KMessageBox::error( this, i18n("Non local recent file: %1").arg( url.prettyURL() ) );
   }
 }
 
@@ -788,7 +788,7 @@ void KHexEdit::fileState( SFileState &state )
 {
   if( state.valid == true )
   {
-    statusBar()->changeItem( i18n("Size: %1").tqarg( state.size ), status_Size);
+    statusBar()->changeItem( i18n("Size: %1").arg( state.size ), status_Size);
     statusBar()->changeItem( state.modified ? "!" : "", status_Modified);
 
     if( mIsModified != state.modified )
@@ -922,7 +922,7 @@ void KHexEdit::bookmarkChanged( TQPtrList<SCursorOffset> &list )
   for( SCursorOffset *p=list.first(); p!=0; p=list.next(), i++ )
   {
     offset.sprintf("%04X:%04X", p->offset>>16, p->offset&0x0000FFFF );
-    text = i18n("Offset: %1").tqarg(offset);
+    text = i18n("Offset: %1").arg(offset);
     KAction *action = new KAction(text, 0, mAction.bookmarkMapper, TQT_SLOT(map()), TQT_TQOBJECT(this), text.latin1());
     int key = acceleratorNumKey( i );
     if( key > 0 )
@@ -1021,7 +1021,7 @@ void KHexEdit::encodingChanged( const SEncodeState &encodeState )
 
   if( mSelectionSize == 0 )
   {
-    statusBar()->changeItem( i18n("Encoding: %1").tqarg(encodeState.name),
+    statusBar()->changeItem( i18n("Encoding: %1").arg(encodeState.name),
 			     status_Selection );
   }
 }
@@ -1186,7 +1186,7 @@ void KHexEdit::setSelectionText( uint selectionOffset, uint selectionSize )
   else
   {
     statusBar()->changeItem(
-      i18n("Encoding: %1").tqarg(hexView()->encoding().name), status_Selection);
+      i18n("Encoding: %1").arg(hexView()->encoding().name), status_Selection);
   }
 }
 

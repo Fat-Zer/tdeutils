@@ -101,7 +101,7 @@ MailLabel::~MailLabel()
 {
 }
 
-void MailLabel::configureObject( bool tqrepaint )
+void MailLabel::configureObject( bool repaint )
 {
 	m_envelope.load( themeLoader().current().mailPixmap() );
 	m_frames = themeLoader().current().mailFrames();
@@ -112,7 +112,7 @@ void MailLabel::configureObject( bool tqrepaint )
 
 	setPixmap( frame( m_envelope, 1 ) );
 
-	KSim::Label::configureObject( tqrepaint );
+	KSim::Label::configureObject( repaint );
 }
 
 void MailLabel::paintEvent( TQPaintEvent* e )

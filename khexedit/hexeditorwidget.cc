@@ -580,7 +580,7 @@ void CHexEditorWidget::newFile( void )
     return;
   }
 
-  TQString url = i18n("Untitled %1").tqarg( mUntitledCount );
+  TQString url = i18n("Untitled %1").arg( mUntitledCount );
 
   //
   // If the url is already present in the document list (should not happen),
@@ -1978,7 +1978,7 @@ int CHexEditorWidget::readURL( const KURL &url, bool insert )
   //
   if( !url.isValid() )
   {
-    TQString msg = i18n("Malformed URL\n%1").tqarg( url.url() );
+    TQString msg = i18n("Malformed URL\n%1").arg( url.url() );
     KMessageBox::sorry( topLevelWidget(), msg, i18n("Read URL") );
     return( Err_IllegalArgument );
   }
@@ -2049,21 +2049,21 @@ bool CHexEditorWidget::readFile( const TQString &diskPath, const TQString &url,
   TQFileInfo info( diskPath );
   if( info.exists() == false )
   {
-    const TQString msg = i18n("The specified file does not exist.\n%1").tqarg( diskPath );
+    const TQString msg = i18n("The specified file does not exist.\n%1").arg( diskPath );
     KMessageBox::sorry( topLevelWidget(), msg, i18n("Read") );
     return( false );
   }
 
   if( info.isDir() == true )
   {
-    const TQString msg = i18n("You have specified a folder.\n%1").tqarg( diskPath );
+    const TQString msg = i18n("You have specified a folder.\n%1").arg( diskPath );
     KMessageBox::sorry( topLevelWidget(), msg, i18n("Read") );
     return( false );
   }
 
   if( info.isReadable() == false )
   {
-    const TQString msg = i18n("You do not have read permission to this file.\n%1").tqarg( diskPath );
+    const TQString msg = i18n("You do not have read permission to this file.\n%1").arg( diskPath );
     KMessageBox::sorry( topLevelWidget(), msg, i18n("Read") );
     return( false );
   }
@@ -2071,7 +2071,7 @@ bool CHexEditorWidget::readFile( const TQString &diskPath, const TQString &url,
   TQFile file( diskPath );
   if( file.open( IO_ReadOnly | IO_Raw ) == false )
   {
-    const TQString msg = i18n("An error occurred while trying to open the file.\n%1").tqarg( diskPath );
+    const TQString msg = i18n("An error occurred while trying to open the file.\n%1").arg( diskPath );
     KMessageBox::sorry( topLevelWidget(), msg, i18n("Read") );
     return( false );
   }

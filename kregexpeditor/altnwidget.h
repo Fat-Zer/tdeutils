@@ -58,8 +58,8 @@ private:
   mutable TQSize _textSize;
 
   mutable int _maxSelectedWidth;
-  mutable int _tqchildrenWidth;
-  mutable int _tqchildrenHeight;
+  mutable int _childrenWidth;
+  mutable int _childrenHeight;
 };
 
 #endif // altnwidget

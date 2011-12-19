@@ -116,7 +116,7 @@ KCMThinkpadModule::KCMThinkpadModule(TQWidget* parent, const char* name, const T
 							  "R30/R31 models and to use a custom volume "
 							  "change step, set the nvram device to world "
 							  "writeable: <em>chmod 666 "
-							  "/dev/nvram</em>").tqarg(m_nvramFile));
+							  "/dev/nvram</em>").arg(m_nvramFile));
 #endif
 	} else {
 		m_KCMThinkpadGeneral->tlOff->setText(i18n("Thinkpad Buttons KMilo Plugin Ready For Configuration"));

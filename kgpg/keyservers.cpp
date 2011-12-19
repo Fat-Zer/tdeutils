@@ -261,8 +261,8 @@ void keyServer::slotsearchresult(KProcess *)
 	dialogServer->enableButtonOK(true);
 	TQApplication::restoreOverrideCursor();
         nb=nb.setNum(keyNumbers);
-        //listpop->kLVsearch->setColumnText(0,i18n("Found %1 matching keys").tqarg(nb));
-        listpop->statusText->setText(i18n("Found %1 matching keys").tqarg(nb));
+        //listpop->kLVsearch->setColumnText(0,i18n("Found %1 matching keys").arg(nb));
+        listpop->statusText->setText(i18n("Found %1 matching keys").arg(nb));
 
         if (listpop->kLVsearch->firstChild()!=NULL) {
                 listpop->kLVsearch->setSelected(listpop->kLVsearch->firstChild(),true);

@@ -96,8 +96,8 @@ selectEvents (Window window, Bool substructureOnly)
 {
   Window            root;              /* root window of the window */
   Window            parent;            /* parent of the window      */
-  Window*           tqchildren;          /* tqchildren of the window    */
-  unsigned          nofChildren = 0;   /* number of tqchildren        */
+  Window*           children;          /* children of the window    */
+  unsigned          nofChildren = 0;   /* number of children        */
   unsigned          i;                 /* loop counter              */
   XWindowAttributes attribs;           /* attributes of the window  */
 
@@ -107,12 +107,12 @@ selectEvents (Window window, Bool substructureOnly)
   *  Start by querying the server about the root and parent windows.
   */
   if (!XQueryTree (queue.display, window, &root, &parent,
-                   &tqchildren, &nofChildren))
+                   &children, &nofChildren))
   {
     return;
   }
 
-  if (nofChildren) (void) XFree ((char*) tqchildren);
+  if (nofChildren) (void) XFree ((char*) children);
 
  /*
   *  Build the appropriate event mask. The basic idea is that we don't
@@ -168,7 +168,7 @@ selectEvents (Window window, Bool substructureOnly)
   }
 
  /*
-  *  Now ask for the list of tqchildren again, since it might have changed
+  *  Now ask for the list of children again, since it might have changed
   *  in between the last time and us selecting SubstructureNotifyMask.
   *
   *  There is a (very small) chance that we might process a subtree twice:
@@ -179,20 +179,20 @@ selectEvents (Window window, Bool substructureOnly)
   *  isn't required...
   */
   if (!XQueryTree (queue.display, window, &root, &parent,
-                   &tqchildren, &nofChildren))
+                   &children, &nofChildren))
   {
     return;
   }
 
  /*
-  *  Now do the same thing for all tqchildren.
+  *  Now do the same thing for all children.
   */
   for (i = 0; i < nofChildren; ++i)
   {
-    selectEvents (tqchildren[i], substructureOnly);
+    selectEvents (children[i], substructureOnly);
   }
 
-  if (nofChildren) (void) XFree ((char*) tqchildren);
+  if (nofChildren) (void) XFree ((char*) children);
 }
 
 #if 0

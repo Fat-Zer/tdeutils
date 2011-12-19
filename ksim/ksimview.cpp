@@ -226,7 +226,7 @@ void KSim::MainView::maskMainView()
   TQBitmap rightPixmap(*m_rightFrame->background()->mask());
   TQBitmap bottomPixmap(*m_bottomFrame->background()->mask());
 
-  TQSize insideSize(m_pluginLayout->tqgeometry().size());
+  TQSize insideSize(m_pluginLayout->geometry().size());
 
   // make a cleared bigrect where we can put our pixmap masks on
   TQBitmap bigBitmap(topLevelWidget()->size(), true);
@@ -243,7 +243,7 @@ void KSim::MainView::maskMainView()
   painter.begin(&bigBitmap);
   painter.setBrush(color1);
   painter.setPen(color1);
-  TQRect rect = m_pluginLayout->tqgeometry();
+  TQRect rect = m_pluginLayout->geometry();
   rect.moveBy(ofsX, ofsY);
   painter.drawRect(rect);
   painter.drawPixmap(ofsX, ofsY, topPixmap);

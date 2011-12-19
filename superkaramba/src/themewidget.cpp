@@ -75,7 +75,7 @@ void ThemeWidget::updateRunning()
 {
   int i = instances();
   if(i > 0)
-    running->setText(i18n("<p align=\"center\">%1 running</p>").tqarg(i));
+    running->setText(i18n("<p align=\"center\">%1 running</p>").arg(i));
   else
     running->setText("");
 }
@@ -101,12 +101,12 @@ void ThemeWidget::showButton(bool show)
 
 void ThemeWidget::setDescriptionMaxHeight()
 {
-  if(layoutText->tqgeometry().height() <= 0)
+  if(layoutText->geometry().height() <= 0)
     return;
-  int height = layoutText->tqgeometry().height() - themeName->height() -
+  int height = layoutText->geometry().height() - themeName->height() -
                layoutText->spacing();
   if(buttonGo->isVisible())
-    height -= layoutButton->tqgeometry().height() + layoutText->spacing();
+    height -= layoutButton->geometry().height() + layoutText->spacing();
   description->setMaximumHeight(height);
 }
 

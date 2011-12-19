@@ -127,7 +127,7 @@ TQFile qfile(fileToCheck);
                         } else
                                 if (result.startsWith("-----BEGIN PGP PUBLIC KEY BLOCK")) {//////  dropped file is a public key, ask for import
                                         qfile.close();
-                                        int result=KMessageBox::warningContinueCancel(this,i18n("<p>The file <b>%1</b> is a public key.<br>Do you want to import it ?</p>").tqarg(fileToCheck),i18n("Warning"));
+                                        int result=KMessageBox::warningContinueCancel(this,i18n("<p>The file <b>%1</b> is a public key.<br>Do you want to import it ?</p>").arg(fileToCheck),i18n("Warning"));
                                         if (result==KMessageBox::Cancel) {
                                                 KIO::NetAccess::removeTempFile(fileToCheck);
                                                 return true;
@@ -239,7 +239,7 @@ void KgpgView::modified()
 void KgpgView::slotAskForImport(TQString ID)
 {
 if (KMessageBox::questionYesNo(0,i18n("<qt><b>Missing signature:</b><br>Key id: %1<br><br>"
-	"Do you want to import this key from a keyserver?</qt>").tqarg(ID),i18n("Missing Key"), TQString(), i18n("Import"), i18n("Do Not Import"))==KMessageBox::Yes) {
+	"Do you want to import this key from a keyserver?</qt>").arg(ID),i18n("Missing Key"), TQString(), i18n("Import"), i18n("Do Not Import"))==KMessageBox::Yes) {
         keyServer *kser=new keyServer(0,"server_dialog",false,true);
         kser->page->kLEimportid->setText(ID);
         kser->slotImport();

@@ -718,14 +718,14 @@ bool KSim::Theme::fontColours(int type, const TQString &string, TQFont &font,
    TQColor &text, TQColor &shadow, bool &showShadow) const
 {
   TQString key = KSim::Types::typeToString(type, false);
-  bool tqrepaint = false;
+  bool repaint = false;
 
   // set colours from the string 'key'
   if (!readEntry(string, key + ".textcolor").isEmpty()) {
     text= textColour(string, key + ".textcolor");
     shadow = shadowColour(string, key + ".textcolor");
     showShadow = textShadow(string, key + ".textcolor");
-    tqrepaint = true;
+    repaint = true;
   }
   else {
     text= textColour(string, "*.textcolor");
@@ -737,14 +737,14 @@ bool KSim::Theme::fontColours(int type, const TQString &string, TQFont &font,
   if (!readEntry(string, key + ".font").isEmpty()) {
     if (KSim::ThemeLoader::currentFontItem() != 3) {
       font = readFontEntry(string, key + ".font");
-      tqrepaint = true;
+      repaint = true;
     }
   }
   else {
     font = currentFont();
   }
 
-  return tqrepaint;
+  return repaint;
 }
 
 bool KSim::Theme::fontColours(const KSim::Base *const base, TQFont &font,

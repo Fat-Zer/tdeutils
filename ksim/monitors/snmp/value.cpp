@@ -321,7 +321,7 @@ TQString Value::formatTimeTicks( int ticks, int conversionFlags )
     if ( days > 0 )
         result += TQString::number( days ) + "d:";
 
-    result += TQString(TQString::fromAscii( "%1h:%2m" )).tqarg( hours ).tqarg( minutes );
+    result += TQString(TQString::fromAscii( "%1h:%2m" )).arg( hours ).arg( minutes );
 
     if ( conversionFlags & TimeTicksWithSeconds )
         result += ":" + TQString::number( seconds ) + "s";

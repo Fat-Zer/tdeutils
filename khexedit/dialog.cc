@@ -1237,7 +1237,7 @@ void centerDialog( TQWidget *widget, TQWidget *centerParent )
   }
 
   TQPoint point = centerParent->mapToGlobal( TQPoint(0,0) );
-  TQRect pos    = centerParent->tqgeometry();
+  TQRect pos    = centerParent->geometry();
 
   widget->setGeometry( point.x() + pos.width()/2  - widget->width()/2,
 		       point.y() + pos.height()/2 - widget->height()/2,
@@ -1253,7 +1253,7 @@ void centerDialogBottom( TQWidget *widget, TQWidget *centerParent )
   }
 
   TQPoint point = centerParent->mapToGlobal( TQPoint(0,0) );
-  TQRect pos    = centerParent->tqgeometry();
+  TQRect pos    = centerParent->geometry();
 
   widget->setGeometry( point.x() + pos.width()/2  - widget->width()/2,
 		       point.y() + pos.height() - widget->height(),

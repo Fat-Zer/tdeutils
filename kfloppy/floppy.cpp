@@ -497,7 +497,7 @@ void FloppyData::format(){
         if (KMessageBox::warningContinueCancel( this,
             i18n("<qt>Formatting will erase all data on the device:<br/><b>%1</b><br/>"
                 "(Please check the correctness of the device name.)<br/>"
-                "Are you sure you wish to proceed?</qt>").tqarg( currentComboBoxDevice )
+                "Are you sure you wish to proceed?</qt>").arg( currentComboBoxDevice )
                 , i18n("Proceed?") ) != KMessageBox::Continue)
             {
                 return;

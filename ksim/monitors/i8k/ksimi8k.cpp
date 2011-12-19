@@ -195,17 +195,17 @@ void I8KView::updateView()
   }
 
   if ( rightspeed > 0 )
-    m_fan1Label->setText( i18n( "Right fan: %1 RPM" ).tqarg( rightspeed ) );
+    m_fan1Label->setText( i18n( "Right fan: %1 RPM" ).arg( rightspeed ) );
   else
     m_fan1Label->setText( i18n( "Right fan: Off" ) );
 
   if ( leftspeed > 0 )
-    m_fan2Label->setText( i18n( "Left fan: %1 RPM" ).tqarg( leftspeed ) );
+    m_fan2Label->setText( i18n( "Left fan: %1 RPM" ).arg( leftspeed ) );
   else
     m_fan2Label->setText( i18n( "Left fan: Off" ) );
 
-  m_tempLabel->setText( i18n( "CPU temp: %1°%2" ).tqarg( cputemp )
-      .tqarg( m_unit ) );
+  m_tempLabel->setText( i18n( "CPU temp: %1°%2" ).arg( cputemp )
+      .arg( m_unit ) );
 }
 
 I8KConfig::I8KConfig(KSim::PluginObject *parent, const char *name)

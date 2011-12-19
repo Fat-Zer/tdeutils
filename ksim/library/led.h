@@ -88,7 +88,7 @@ namespace KSim
        */
       Type type() const;
       /**
-       * Force the Led to tqrepaint its state
+       * Force the Led to repaint its state
        */
       void update();
 

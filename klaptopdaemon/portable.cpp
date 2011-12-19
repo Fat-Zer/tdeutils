@@ -199,7 +199,7 @@ pmu_read(apm_info *ap)
 	int timerem = 0;
 	int maxcharge = 0;
 	for (int i = 0; i < bcnt; i++) {
-		TQFile bf(TQString("/proc/pmu/battery_%1").tqarg(i));
+		TQFile bf(TQString("/proc/pmu/battery_%1").arg(i));
 		if (!bf.exists() || !bf.open(IO_ReadOnly))
 			continue;
 
@@ -1226,7 +1226,7 @@ laptop_portable::get_battery_status(int &num_batteries, TQStringList &names, TQS
 		for(unsigned int i = 0; i < acpi_batteries.count(); ++i) {
 			acpi_battery_info& bat = acpi_batteries[i];
 			names.append(bat.name);
-			values.append(TQString("%1").tqarg(bat.percentage));
+			values.append(TQString("%1").arg(bat.percentage));
 			state.append(bat.present ? "yes" : "no");
 		}
 		return;
@@ -1330,11 +1330,11 @@ TQString laptop_portable::cpu_frequency() {
 					continue;
 				if (ll.first().stripWhiteSpace() 
 						== "cpu MHz") {
-					rc = i18n("%1 MHz (%2)").tqarg(ll.last().stripWhiteSpace()).tqarg(rc);
+					rc = i18n("%1 MHz (%2)").arg(ll.last().stripWhiteSpace()).arg(rc);
 					break;
 				} else if (ll.first().stripWhiteSpace()
 						== "clock") {
-					rc = TQString("%1 (%2)").tqarg(ll.last().stripWhiteSpace()).tqarg(rc);
+					rc = TQString("%1 (%2)").arg(ll.last().stripWhiteSpace()).arg(rc);
 					break;
 				}
 			}
@@ -1581,7 +1581,7 @@ get_acpi_list(char p, int *map, const char *dev, TQStringList &list, int &index,
 							TQString l;
 							f.readLine(l, 500);
 							if (l.contains("active limit", false)) {
-								TQRegExp rx(TQString("%1(\\d+)").tqarg(p));
+								TQRegExp rx(TQString("%1(\\d+)").arg(p));
 								if (rx.search(l) >= 0) {
 									bool ok;
 									int min = rx.cap(1).toInt(&ok);
@@ -1706,7 +1706,7 @@ static int get_cpufreq_24_state(TQStringList &states, int &current, const TQStri
 		f.close();
 		cpufreq_minmax_frequency[i] = buffer;
 		unsigned int val = buffer.toUInt() / 1000;
-		states.append(i18n("%1 MHz").tqarg(val));
+		states.append(i18n("%1 MHz").arg(val));
 		if(buffer.stripWhiteSpace() == cur)
 			current = i;
 	}

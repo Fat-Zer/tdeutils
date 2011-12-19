@@ -247,7 +247,7 @@ void CompoundWidget::slotConfigCanceled()
   TQDataStream stream( _backup, IO_ReadOnly );
   KWidgetStreamer streamer;
   streamer.fromStream( stream, TQT_TQOBJECT(_content) );
-  tqrepaint();
+  repaint();
 }
 
 RegExp* CompoundWidget::regExp() const
@@ -273,7 +273,7 @@ void CompoundWidget::mouseReleaseEvent( TQMouseEvent* event)
        TQRect( _pixmapPos, _pixmapSize ).contains( event->pos() ) ) {
     _hidden = !_hidden;
     _editorWindow->updateContent( 0 );
-    tqrepaint(); // is this necesary?
+    repaint(); // is this necesary?
     _editorWindow->emitChange();
   }
   else
@@ -286,7 +286,7 @@ bool CompoundWidget::updateSelection( bool parentSelected )
     bool changed = RegExpWidget::updateSelection( parentSelected );
     _child->selectWidget( _isSelected );
     if (changed)
-      tqrepaint();
+      repaint();
     return changed;
   }
   else {

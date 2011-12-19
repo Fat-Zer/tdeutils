@@ -173,7 +173,7 @@ void KSim::Sysinfo::sysUpdate()
   }
 
 //  if (m_config->showProcs()) {
-//    m_procsLabel->setText(i18n("Procs: %1").tqarg(sysInfo.procs));
+//    m_procsLabel->setText(i18n("Procs: %1").arg(sysInfo.procs));
 //  }
 }
 
@@ -274,7 +274,7 @@ void KSim::Sysinfo::createView()
     m_procsLabel = 0L;
   }*/
 
-//  m_layout->tqinvalidate();
+//  m_layout->invalidate();
   updateGeometry();
   adjustSize();
 

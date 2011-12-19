@@ -201,7 +201,7 @@ void CpuView::updateView()
         cpuDiff = 100;
     }
 
-    current.chart()->setText(i18n("%1%").tqarg(cpuDiff));
+    current.chart()->setText(i18n("%1%").arg(cpuDiff));
     current.chart()->setValue(cpuDiff, 0);
     current.label()->setValue(cpuDiff);
   }
@@ -420,7 +420,7 @@ CpuConfig::CpuConfig(KSim::PluginObject *parent, const char *name)
 
   for (uint i = 0; i < addCpus(); ++i)
   {
-    TQCheckListItem *item = new TQCheckListItem(m_listView, i18n("cpu %1").tqarg(i), TQCheckListItem::CheckBox);
+    TQCheckListItem *item = new TQCheckListItem(m_listView, i18n("cpu %1").arg(i), TQCheckListItem::CheckBox);
     item->setText(1, "%T");
   }
 }

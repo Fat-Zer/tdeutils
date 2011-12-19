@@ -333,7 +333,7 @@ void KCMLirc::slotRemoveMode()
 	if(!theKCMLircBase->theModes->selectedItem()) return;
 	if(!theKCMLircBase->theModes->selectedItem()->parent()) return;
 
-	if(KMessageBox::warningContinueCancel(this, i18n("Are you sure you want to remove %1 and all its actions?").tqarg(theKCMLircBase->theModes->selectedItem()->text(0)), i18n("Erase Actions?")) == KMessageBox::Continue)
+	if(KMessageBox::warningContinueCancel(this, i18n("Are you sure you want to remove %1 and all its actions?").arg(theKCMLircBase->theModes->selectedItem()->text(0)), i18n("Erase Actions?")) == KMessageBox::Continue)
 	{
 		allModes.erase(modeMap[theKCMLircBase->theModes->selectedItem()]);
 		updateModes();
@@ -377,7 +377,7 @@ void KCMLirc::updateActions()
 	if(!theKCMLircBase->theModes->selectedItem()) { updateActionsStatus(0); return; }
 
 	Mode m = modeMap[theKCMLircBase->theModes->selectedItem()];
-	theKCMLircBase->theModeLabel->setText(m.remoteName() + ": " + (m.name().isEmpty() ? i18n("Actions <i>always</i> available") : i18n("Actions available only in mode <b>%1</b>").tqarg(m.name())));
+	theKCMLircBase->theModeLabel->setText(m.remoteName() + ": " + (m.name().isEmpty() ? i18n("Actions <i>always</i> available") : i18n("Actions available only in mode <b>%1</b>").arg(m.name())));
 	IRAItList l = allActions.findByMode(m);
 	for(IRAItList::iterator i = l.begin(); i != l.end(); ++i)
 	{	TQListViewItem *b = new KListViewItem(theKCMLircBase->theActions, (**i).buttonName(), (**i).application(), (**i).function(), (**i).arguments().toString(), (**i).notes());
@@ -467,7 +467,7 @@ void KCMLirc::updateInformation()
 
 	if(!theKCMLircBase->theExtensions->selectedItem()->parent())
 	{
-		theKCMLircBase->theInformationLabel->setText(i18n("Information on <b>%1</b>:").tqarg(theKCMLircBase->theExtensions->selectedItem()->text(0)));
+		theKCMLircBase->theInformationLabel->setText(i18n("Information on <b>%1</b>:").arg(theKCMLircBase->theExtensions->selectedItem()->text(0)));
 		if(theKCMLircBase->theExtensions->selectedItem()->text(0) == i18n("Applications"))
 			new TQListViewItem(theKCMLircBase->theInformation, i18n("Number of Applications"), TQString().setNum(theKCMLircBase->theExtensions->selectedItem()->childCount()));
 		else if(theKCMLircBase->theExtensions->selectedItem()->text(0) == i18n("Remote Controls"))
@@ -481,7 +481,7 @@ void KCMLirc::updateInformation()
 		new TQListViewItem(theKCMLircBase->theInformation, i18n("Extension Author"), p->author());
 		new TQListViewItem(theKCMLircBase->theInformation, i18n("Application Identifier"), p->id());
 		new TQListViewItem(theKCMLircBase->theInformation, i18n("Number of Actions"), TQString().setNum(p->actions().count()));
-		theKCMLircBase->theInformationLabel->setText(i18n("Information on <b>%1</b>:").tqarg(p->name()));
+		theKCMLircBase->theInformationLabel->setText(i18n("Information on <b>%1</b>:").arg(p->name()));
 	}
 	else if(theKCMLircBase->theExtensions->selectedItem()->parent()->text(0) == i18n("Remote Controls"))
 	{
@@ -491,7 +491,7 @@ void KCMLirc::updateInformation()
 		new TQListViewItem(theKCMLircBase->theInformation, i18n("Extension Author"), p->author());
 		new TQListViewItem(theKCMLircBase->theInformation, i18n("Remote Control Identifier"), p->id());
 		new TQListViewItem(theKCMLircBase->theInformation, i18n("Number of Buttons"), TQString().setNum(p->buttons().count()));
-		theKCMLircBase->theInformationLabel->setText(i18n("Information on <b>%1</b>:").tqarg(p->name()));
+		theKCMLircBase->theInformationLabel->setText(i18n("Information on <b>%1</b>:").arg(p->name()));
 	}
 }
 

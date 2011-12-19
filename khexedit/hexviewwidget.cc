@@ -233,7 +233,7 @@ CHexViewWidget::CHexViewWidget( TQWidget *parent, const char *name,
   setStartY(0);
 
   setAcceptDrops(true);
-  setDropHighlight(false); // Init state + frame tqshape
+  setDropHighlight(false); // Init state + frame shape
   setBackgroundColor( mHexBuffer->backgroundColor() );
 }
 
@@ -459,7 +459,7 @@ void CHexViewWidget::filter( SFilterControl &fc )
   int errCode = mHexBuffer->filter( fc );
   if( errCode == Err_Success )
   {
-    tqrepaint();
+    repaint();
     emit dataChanged();
     emit cursorChanged( mHexBuffer->cursorState() );
   }
@@ -752,7 +752,7 @@ void CHexViewWidget::setColor( const SDisplayColor &color,
   mHexBuffer->setColor( mColor );
   if( updateDisplay == true )
   {
-    tqrepaint();
+    repaint();
   }
 }
 
@@ -796,7 +796,7 @@ int CHexViewWidget::setEncoding( CConversion::EMode mode, CProgress &p )
   int errCode = mHexBuffer->setEncoding( mode, p );
   if( errCode == Err_Success )
   {
-    tqrepaint();
+    repaint();
     emit cursorChanged( mHexBuffer->cursorState() );
     emit encodingChanged( mHexBuffer->encoding() );
   }
@@ -1099,7 +1099,7 @@ int CHexViewWidget::bookmarkMenu( const TQString &title )
     if( p == 0 ) { continue; }
 
     text.sprintf("%04X:%04X", p->offset>>16, p->offset&0x0000FFFF );
-    text.prepend( TQString("[%1] %2: ").tqarg(i+1).tqarg(i18n("Offset")) );
+    text.prepend( TQString("[%1] %2: ").arg(i+1).arg(i18n("Offset")) );
     popup->insertItem( text, i );
   }
 
@@ -1379,7 +1379,7 @@ void CHexViewWidget::drawFrame( TQPainter *p )
   // accepts a drop. The setPalette() function causes quite a bit of flicker
   // in the scrollbars (even when PropagationMode is NoChildren), so I
   // draw the frame manually when it can accept a drop. Note that the
-  // code below is for the frame tqshape "TQFrame::WinPanel|TQFrame::Plain"
+  // code below is for the frame shape "TQFrame::WinPanel|TQFrame::Plain"
   //
   if( mDropHighlight == true )
   {
@@ -1860,7 +1860,7 @@ void CHexViewWidget::setCursorPosition(int x, int y, bool init, bool cellLevel)
 void CHexViewWidget::redrawInterval( uint startOffset, uint stopOffset )
 {
   //
-  // Can be improved, I tqrepaint the entire line even if the offsets
+  // Can be improved, I repaint the entire line even if the offsets
   // only specify one byte.
   //
   uint lineStart = mHexBuffer->calculateLine( startOffset );
@@ -2270,7 +2270,7 @@ void CHexViewWidget::setDropHighlight( bool dropHighlight )
     //
     // 2000-01-10 Espen Sand
     // Highlight. I have reimplemented TQFrame::drawFrame(TQPainter *)
-    // to support a custom frame color. I assume the frame tqshape is
+    // to support a custom frame color. I assume the frame shape is
     // "TQFrame::WinPanel|TQFrame::Plain" in that function.
     //
     setFrameStyle( TQFrame::WinPanel|TQFrame::Plain );

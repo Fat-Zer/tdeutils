@@ -21,7 +21,7 @@
 #include "regexpwidget.h"
 
 /**
-   Abstract RegExp widget class representing widgets having multible tqchildren.
+   Abstract RegExp widget class representing widgets having multible children.
    @internal
 */
 class MultiContainerWidget :public RegExpWidget
@@ -43,7 +43,7 @@ public:
 
 protected:
   void append( RegExpWidget* child );
-  TQPtrList<RegExpWidget> _tqchildren;
+  TQPtrList<RegExpWidget> _children;
 };
 
 

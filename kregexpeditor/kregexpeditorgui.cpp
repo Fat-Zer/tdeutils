@@ -130,7 +130,7 @@ void KRegExpEditorGUI::doSomething( TQString method, void* arguments )
         _editor->setAllowNonTQtSyntax( (bool) arguments );
     }
     else {
-        qFatal( "%s", tqtr("Method '%1' is not valid!").tqarg(method).latin1() );
+        qFatal( "%s", tqtr("Method '%1' is not valid!").arg(method).latin1() );
     }
 }
 

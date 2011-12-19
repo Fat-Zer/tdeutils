@@ -88,7 +88,7 @@ void KTextFileDialog::slotShowEncCombo()
   TQComboBox *encCombo;
   TQVBox *vbox;
 
-  // Create widgets, and display using tqgeometry management
+  // Create widgets, and display using geometry management
   encDlg = new KDialogBase( this,
 			    "Encoding Dialog", true, i18n("Select Encoding"),
 			    KDialogBase::Ok | KDialogBase::Cancel );

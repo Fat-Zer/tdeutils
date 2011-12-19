@@ -150,7 +150,7 @@
                                 <property name="textFormat">
                                     <enum>RichText</enum>
                                 </property>
-                                <property name="tqalignment">
+                                <property name="alignment">
                                     <set>AlignVCenter</set>
                                 </property>
                             </widget>
@@ -268,7 +268,7 @@
                                     <property name="text">
                                         <string>This is a binary data entry.  It cannot be editted as its format is unknown and application specific.</string>
                                     </property>
-                                    <property name="tqalignment">
+                                    <property name="alignment">
                                         <set>WordBreak|AlignVCenter</set>
                                     </property>
                                 </widget>

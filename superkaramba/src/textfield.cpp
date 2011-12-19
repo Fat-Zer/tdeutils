@@ -18,7 +18,7 @@ TextField::TextField( )
   setColor(TQColor(192, 192, 192));
   setBGColor(TQColor(0, 0, 0));
   setFont("Helvetica");
-  tqsetAlignment(TQt::AlignLeft);
+  setAlignment(TQt::AlignLeft);
   setFixedPitch(false);
   setShadow(0);
 }
@@ -35,7 +35,7 @@ TextField::TextField( const TextField& def )
     setBGColor(def.getBGColor());
 
     setFont( def.getFont() );
-    tqsetAlignment( def.getAlignment() );
+    setAlignment( def.getAlignment() );
     setFixedPitch( def.getFixedPitch() );
     setShadow( def.getShadow() );
 }
@@ -51,7 +51,7 @@ TextField& TextField::operator=(const TextField& rhs)
     setBGColor(rhs.getBGColor());
 
     setFont( rhs.getFont() );
-    tqsetAlignment( rhs.getAlignment() );
+    setAlignment( rhs.getAlignment() );
     setFixedPitch( rhs.getFixedPitch() );
     setShadow( rhs.getShadow() );
 
@@ -102,7 +102,7 @@ int TextField::getFontSize() const
     return font.pointSize();
 }
 
-void TextField::tqsetAlignment( const TQString &align )
+void TextField::setAlignment( const TQString &align )
 {
     TQString a = align.upper();
     if( a == "LEFT" || a.isEmpty() )
@@ -113,7 +113,7 @@ void TextField::tqsetAlignment( const TQString &align )
         tqalignment = TQt::AlignHCenter;
 }
 
-void TextField::tqsetAlignment( int af )
+void TextField::setAlignment( int af )
 {
     tqalignment = af;
 }

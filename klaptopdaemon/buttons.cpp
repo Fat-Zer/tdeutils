@@ -273,7 +273,7 @@ ButtonsConfig::ButtonsConfig (TQWidget * parent, const char *name)
 			    	        "or power switch on your laptop is pressed. Some laptops may already "
 					"automatically do things like this, if you cannot disable them in your BIOS "
 					"you probably should not enable anything in this panel."), this);
-      explain->tqsetAlignment( TQt::WordBreak );
+      explain->setAlignment( TQt::WordBreak );
       top_layout->addWidget(explain);
 
       top_layout->addStretch(1);

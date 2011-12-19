@@ -74,7 +74,7 @@ protected:
     bool isKMiloDAvailable();
     bool showTextMsg(const TQString& msg);
     bool showProgressMsg(const TQString& msg, int progress);
-    bool showBatterytqStatus ( bool force = false);
+    bool showBatteryStatus ( bool force = false);
 protected slots:
     void slotVaioEvent(int);
     void slotTimeout();
@@ -106,7 +106,7 @@ private:
     int  m_BrightnessStep;
 
     bool mReportUnknownEvents;
-    bool mReportPowertqStatus;
+    bool mReportPowerStatus;
     bool mShowPowerStatusOnBackButton;
     TQTimer *mTimer;
 };

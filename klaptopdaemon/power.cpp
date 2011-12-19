@@ -305,13 +305,13 @@ PowerConfig::PowerConfig (TQWidget * parent, const char *name)
 					"it works as a sort of extreme screen saver. You can configure different "
 					"timeouts and types of behavior depending on whether or not your laptop is "
 					"plugged in to the mains supply."), this );
-      explain->tqsetAlignment( TQt::WordBreak );
+      explain->setAlignment( TQt::WordBreak );
       top_layout->addWidget(explain);
 
       if (can_standby) {
 	TQLabel* explain3 = new TQLabel(i18n("Different laptops may respond to 'standby' in different ways - in many "
 					"it is only a temporary state and may not be useful for you."), this);
-	explain3->tqsetAlignment( TQt::WordBreak );
+	explain3->setAlignment( TQt::WordBreak );
 	top_layout->addWidget(explain3, 0, TQt::AlignLeft);
       }
 

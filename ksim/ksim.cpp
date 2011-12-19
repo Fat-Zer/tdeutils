@@ -75,9 +75,9 @@ KSim::PanelExtension::~PanelExtension()
   delete m_dcopClient;
 }
 
-TQSize KSim::PanelExtension::tqsizeHint(Position p, TQSize maxSize) const
+TQSize KSim::PanelExtension::sizeHint(Position p, TQSize maxSize) const
 {
-  return m_view->tqsizeHint(p, maxSize);
+  return m_view->sizeHint(p, maxSize);
 }
 
 void KSim::PanelExtension::resizeEvent(TQResizeEvent *)

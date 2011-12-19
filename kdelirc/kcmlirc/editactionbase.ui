@@ -295,7 +295,7 @@
                                                     <property name="sizeType">
                                                         <enum>Expanding</enum>
                                                     </property>
-                                                    <property name="tqsizeHint">
+                                                    <property name="sizeHint">
                                                         <size>
                                                             <width>20</width>
                                                             <height>91</height>
@@ -339,7 +339,7 @@
                                                     <property name="sizeType">
                                                         <enum>Expanding</enum>
                                                     </property>
-                                                    <property name="tqsizeHint">
+                                                    <property name="sizeHint">
                                                         <size>
                                                             <width>20</width>
                                                             <height>101</height>
@@ -377,7 +377,7 @@
                                                     <property name="sizeType">
                                                         <enum>Expanding</enum>
                                                     </property>
-                                                    <property name="tqsizeHint">
+                                                    <property name="sizeHint">
                                                         <size>
                                                             <width>21</width>
                                                             <height>101</height>
@@ -415,7 +415,7 @@
                                                     <property name="sizeType">
                                                         <enum>Expanding</enum>
                                                     </property>
-                                                    <property name="tqsizeHint">
+                                                    <property name="sizeHint">
                                                         <size>
                                                             <width>20</width>
                                                             <height>101</height>
@@ -467,7 +467,7 @@
                                         <property name="sizeType">
                                             <enum>Expanding</enum>
                                         </property>
-                                        <property name="tqsizeHint">
+                                        <property name="sizeHint">
                                             <size>
                                                 <width>21</width>
                                                 <height>111</height>
@@ -486,7 +486,7 @@
                                                 <verstretch>0</verstretch>
                                             </sizepolicy>
                                         </property>
-                                        <property name="tqminimumSize">
+                                        <property name="minimumSize">
                                             <size>
                                                 <width>106</width>
                                                 <height>0</height>
@@ -503,7 +503,7 @@
                                         <property name="sizeType">
                                             <enum>Expanding</enum>
                                         </property>
-                                        <property name="tqsizeHint">
+                                        <property name="sizeHint">
                                             <size>
                                                 <width>20</width>
                                                 <height>101</height>
@@ -533,7 +533,7 @@
                                 <property name="sizeType">
                                     <enum>Expanding</enum>
                                 </property>
-                                <property name="tqsizeHint">
+                                <property name="sizeHint">
                                     <size>
                                         <width>481</width>
                                         <height>20</height>
@@ -584,7 +584,7 @@
                                 <property name="sizeType">
                                     <enum>Expanding</enum>
                                 </property>
-                                <property name="tqsizeHint">
+                                <property name="sizeHint">
                                     <size>
                                         <width>21</width>
                                         <height>30</height>
@@ -654,7 +654,7 @@
                         <property name="sizeType">
                             <enum>Expanding</enum>
                         </property>
-                        <property name="tqsizeHint">
+                        <property name="sizeHint">
                             <size>
                                 <width>491</width>
                                 <height>20</height>
@@ -718,7 +718,7 @@
                         <property name="sizeType">
                             <enum>Expanding</enum>
                         </property>
-                        <property name="tqsizeHint">
+                        <property name="sizeHint">
                             <size>
                                 <width>670</width>
                                 <height>20</height>
@@ -854,7 +854,7 @@
                         <property name="sizeType">
                             <enum>Expanding</enum>
                         </property>
-                        <property name="tqsizeHint">
+                        <property name="sizeHint">
                             <size>
                                 <width>20</width>
                                 <height>150</height>
@@ -902,7 +902,7 @@
                     <property name="sizeType">
                         <enum>Expanding</enum>
                     </property>
-                    <property name="tqsizeHint">
+                    <property name="sizeHint">
                         <size>
                             <width>20</width>
                             <height>20</height>

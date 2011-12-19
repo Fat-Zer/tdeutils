@@ -251,7 +251,7 @@ void KSim::Chart::buildPixmaps()
 
 void KSim::Chart::configureObject(bool repaintWidget)
 {
-  TQSize oldSize = tqsizeHint();
+  TQSize oldSize = sizeHint();
   KSim::Config::config()->setGroup("Misc");
   d->size = KSim::Config::config()->readSizeEntry("GraphSize");
 
@@ -264,10 +264,10 @@ void KSim::Chart::configureObject(bool repaintWidget)
   }
 
   // Update our tqgeometry if we need to let any
-  // tqlayout know about our tqsizeHint() change
-  if (oldSize != tqsizeHint()) {
+  // tqlayout know about our sizeHint() change
+  if (oldSize != sizeHint()) {
     // Using resize() here seems to be needed
-    resize(tqsizeHint());
+    resize(sizeHint());
     updateGeometry();
   }
 
@@ -279,14 +279,14 @@ void KSim::Chart::configureObject(bool repaintWidget)
     update();
 }
 
-TQSize KSim::Chart::tqsizeHint() const
+TQSize KSim::Chart::sizeHint() const
 {
   return d->size;
 }
 
-TQSize KSim::Chart::tqminimumSizeHint() const
+TQSize KSim::Chart::minimumSizeHint() const
 {
-  return tqsizeHint();
+  return sizeHint();
 }
 
 void KSim::Chart::resizeEvent(TQResizeEvent *re)
@@ -608,7 +608,7 @@ void KSim::Chart::init(bool krell, int maxValue, const TQString &title)
 {
   setConfigString("StyleChart");
   setThemeConfigOnly(false);
-  tqsetSizePolicy(TQSizePolicy(TQSizePolicy::MinimumExpanding, TQSizePolicy::Fixed));
+  setSizePolicy(TQSizePolicy(TQSizePolicy::MinimumExpanding, TQSizePolicy::Fixed));
 
   d = new Private;
   KSim::Config::config()->setGroup("Misc");

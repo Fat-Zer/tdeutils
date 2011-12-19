@@ -142,7 +142,7 @@ class InlineEditor : public TQTextEdit {
 	protected:
 		virtual void focusOutEvent(TQFocusEvent* fe) { 
 			if (fe->reason() == TQFocusEvent::Popup) {
-				TQWidget *focusW = tqApp->tqfocusWidget();
+				TQWidget *focusW = tqApp->focusWidget();
 				if (focusW && focusW == popup) {
 					return;
 				}

@@ -63,7 +63,7 @@ AcpiConfig::AcpiConfig (TQWidget * parent, const char *name)
 
     TQLabel *tmp_label = new TQLabel( i18n("This panel provides information about your system's ACPI implementation "
 					 "and lets you have access to some of the extra features provided by ACPI"), this );
-    tmp_label->tqsetAlignment( TQt::WordBreak );
+    tmp_label->setAlignment( TQt::WordBreak );
     top_layout->addWidget( tmp_label );
 
     tmp_label = new TQLabel( i18n("NOTE: the Linux ACPI implementation is still a 'work in progress'. "
@@ -73,12 +73,12 @@ AcpiConfig::AcpiConfig (TQWidget * parent, const char *name)
 				"You should test these features very gingerly - save all your work, check them "
 				"on and try a suspend/standby/hibernate from the popup menu on the battery icon "
 				"in the panel if it fails to come back successfully uncheck the box again."), this );
-    tmp_label->tqsetAlignment( TQt::WordBreak );
+    tmp_label->setAlignment( TQt::WordBreak );
     top_layout->addWidget( tmp_label );
 
     tmp_label = new TQLabel( i18n("Some changes made on this page may require you to quit the laptop panel "
 				"and start it again to take effect"), this );
-    tmp_label->tqsetAlignment( TQt::WordBreak );
+    tmp_label->setAlignment( TQt::WordBreak );
     top_layout->addWidget( tmp_label );
 
     bool can_enable = laptop_portable::has_acpi(1);	// is helper ready
@@ -132,7 +132,7 @@ AcpiConfig::AcpiConfig (TQWidget * parent, const char *name)
 				"/proc/acpi/sleep writeable by anyone every time your system boots "
 				"or use the button below to make the KDE ACPI helper application "
 				"set-uid root"), this );
-    tmp_label->tqsetAlignment( TQt::WordBreak );
+    tmp_label->setAlignment( TQt::WordBreak );
     top_layout->addWidget( tmp_label );
     ll = new TQHBoxLayout();
     TQPushButton *setupButton = new TQPushButton(i18n("Setup Helper Application"), this);

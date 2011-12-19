@@ -294,9 +294,9 @@ TQString Value::toString( int conversionFlags ) const
         case Value::TimeTicks: return formatTimeTicks( toTimeTicks(), conversionFlags );
         // not using i18n here, because it may be called from within a worker thread, and I'm
         // not sure it makes sense to translate it anyway
-        case Value::NoSuchObject: return TQString::tqfromLatin1( "No Such Object" );
-        case Value::NoSuchInstance: return TQString::tqfromLatin1( "No Such Instance" );
-        case Value::EndOfMIBView: return TQString::tqfromLatin1( "End Of MIB View" );
+        case Value::NoSuchObject: return TQString::fromLatin1( "No Such Object" );
+        case Value::NoSuchInstance: return TQString::fromLatin1( "No Such Instance" );
+        case Value::EndOfMIBView: return TQString::fromLatin1( "End Of MIB View" );
         case Value::Invalid:
         case Value::Null: return TQString();
     }

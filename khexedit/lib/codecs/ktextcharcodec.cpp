@@ -127,7 +127,7 @@ const TQStringList &KTextCharCodec::codecNames()
       bool Found = true;
       TQTextCodec* Codec = KGlobal::charsets()->codecForName( *it, Found );
       if( Found && is8Bit(Codec) )
-        CodecNames.append( TQString::tqfromLatin1(Codec->name()) );
+        CodecNames.append( TQString::fromLatin1(Codec->name()) );
 }
 }
 
@@ -150,7 +150,7 @@ TQString KTextCharCodec::nameOfEncoding( KEncoding C )
 
   if( N != 0 )
   {
-    TQString CodeName = TQString::tqfromLatin1( N );
+    TQString CodeName = TQString::fromLatin1( N );
   }
   return Codec;
 }
@@ -186,10 +186,10 @@ const TQStringList &KTextCharCodec::codecNames()
     for( unsigned int i=0; i<NoOfEncodings; ++i )
     {
       bool Found = true;
-      TQString Name = TQString::tqfromLatin1( EncodingNames[i].Name );
+      TQString Name = TQString::fromLatin1( EncodingNames[i].Name );
       TQTextCodec* Codec = KGlobal::charsets()->codecForName( Name, Found );
       if( Found )
-        CodecNames.append( TQString::tqfromLatin1(Codec->name()) );
+        CodecNames.append( TQString::fromLatin1(Codec->name()) );
     }
   }
 
@@ -231,6 +231,6 @@ KHEChar KTextCharCodec::decode( char Byte ) const
 const TQString& KTextCharCodec::name() const
 {
   if( Name.isNull() )
-    Name = TQString::tqfromLatin1( Codec->name() );
+    Name = TQString::fromLatin1( Codec->name() );
   return Name;
 }

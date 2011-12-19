@@ -243,7 +243,7 @@ void DiskList::receivedDFStdErrOut(KProcess *, char *data, int len )
    */
    
 
-  TQString tmp = TQString::tqfromLatin1(data, len);
+  TQString tmp = TQString::fromLatin1(data, len);
   dfStringErrOut.append(tmp);
 }
 

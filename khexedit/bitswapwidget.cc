@@ -81,7 +81,7 @@ void CDigitLabel::setDotPosition( uint dotPosition )
 
 
 
-TQSize CDigitLabel::tqsizeHint( void ) const
+TQSize CDigitLabel::sizeHint( void ) const
 {
   int h = fontMetrics().height();
   TQSize s( h, h ); // Retangular
@@ -183,9 +183,9 @@ CByteWidget::CByteWidget( TQWidget *parent, const char *name )
   {
     mDigit[i] = new CDigitLabel( this, 7-i );
     mDigit[i]->setLineWidth( 1 );
-    mDigit[i]->setFixedSize( mDigit[i]->tqsizeHint()*2 );
+    mDigit[i]->setFixedSize( mDigit[i]->sizeHint()*2 );
     mDigit[i]->setFrameStyle( TQFrame::Panel | TQFrame::Sunken );
-    mDigit[i]->tqsetAlignment( AlignCenter );
+    mDigit[i]->setAlignment( AlignCenter );
     connect( mDigit[i], TQT_SIGNAL(stepCell(const TQObject *, bool )),
 	     this, TQT_SLOT(stepCell(const TQObject *, bool )));
     connect( mDigit[i], TQT_SIGNAL(valueChanged(const TQObject *, uint, bool )),

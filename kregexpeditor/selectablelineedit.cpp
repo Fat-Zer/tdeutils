@@ -43,13 +43,13 @@ void SelectableLineEdit::setSelected( bool selected )
   tqrepaint();
 }
 
-TQSize SelectableLineEdit::tqsizeHint() const
+TQSize SelectableLineEdit::sizeHint() const
 {
   int frameWidth = frame() ? 8 : 4; // from TQLineEdit source
   TQFontMetrics metrics = fontMetrics();
   int actualSize = metrics.width( text() );
   int charWidth = metrics.maxWidth();
-  int height = TQLineEdit::tqsizeHint().height();
+  int height = TQLineEdit::sizeHint().height();
 
   int width;
   if ( hasFocus() )

@@ -46,10 +46,10 @@ KCalcDisplay::KCalcDisplay(TQWidget *parent, const char *name)
    selection_timer(new TQTimer)
 {
 	setFrameStyle(TQFrame::WinPanel | TQFrame::Sunken);
-	tqsetAlignment(AlignRight | AlignVCenter);
+	setAlignment(AlignRight | AlignVCenter);
 	setFocus();
 	setFocusPolicy(TQ_StrongFocus);
-	tqsetSizePolicy(TQSizePolicy::Expanding, TQSizePolicy::Fixed, false);
+	setSizePolicy(TQSizePolicy::Expanding, TQSizePolicy::Fixed, false);
 
 	connect(this, TQT_SIGNAL(clicked()), this, TQT_SLOT(slotDisplaySelected()));
 
@@ -123,7 +123,7 @@ void KCalcDisplay::slotPaste(bool bClipboard)
 
 	tmp_str = tmp_str.stripWhiteSpace();
 
-	if (tmp_str.tqstartsWith("0x", false))
+	if (tmp_str.startsWith("0x", false))
 	  tmp_num_base = NB_HEX;
 
 	if (tmp_num_base != NB_DECIMAL)
@@ -598,11 +598,11 @@ void KCalcDisplay::drawContents(TQPainter *p)
 
 // Return the TQLabel's normal size hint vertically expanded
 // by half the font height to make room for the status texts
-TQSize KCalcDisplay::tqsizeHint() const
+TQSize KCalcDisplay::sizeHint() const
 {
 	TQFont f(font());
 	f.setPointSize(TQMAX((f.pointSize() / 2), 7));
 	TQFontMetrics fm(f);
-	return TQLabel::tqsizeHint() + TQSize(0, fm.height());
+	return TQLabel::sizeHint() + TQSize(0, fm.height());
 }
 

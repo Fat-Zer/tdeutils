@@ -74,8 +74,8 @@ KCMLirc::KCMLirc(TQWidget *parent, const char *name, TQStringList /*args*/) : DC
 	(new TQHBoxLayout(this))->setAutoAdd(true);
 	theKCMLircBase = new KCMLircBase(this);
 	connect(theKCMLircBase->theModes, TQT_SIGNAL( selectionChanged(TQListViewItem *) ), this, TQT_SLOT( updateActions() ));
-	connect(theKCMLircBase->theModes, TQT_SIGNAL( selectionChanged(TQListViewItem *) ), this, TQT_SLOT( updateModestqStatus(TQListViewItem *) ));
-	connect(theKCMLircBase->theActions, TQT_SIGNAL( currentChanged(TQListViewItem *) ), this, TQT_SLOT( updateActionstqStatus(TQListViewItem *) ));
+	connect(theKCMLircBase->theModes, TQT_SIGNAL( selectionChanged(TQListViewItem *) ), this, TQT_SLOT( updateModesStatus(TQListViewItem *) ));
+	connect(theKCMLircBase->theActions, TQT_SIGNAL( currentChanged(TQListViewItem *) ), this, TQT_SLOT( updateActionsStatus(TQListViewItem *) ));
 	connect(theKCMLircBase->theExtensions, TQT_SIGNAL( selectionChanged(TQListViewItem *) ), this, TQT_SLOT( updateInformation() ));
 	connect(theKCMLircBase->theModes, TQT_SIGNAL( itemRenamed(TQListViewItem *) ), this, TQT_SLOT( slotRenamed(TQListViewItem *) ));
 	connect(theKCMLircBase->theModes, TQT_SIGNAL(dropped(KListView*, TQDropEvent*, TQListViewItem*, TQListViewItem*)), this, TQT_SLOT(slotDrop(KListView*, TQDropEvent*, TQListViewItem*, TQListViewItem*)));
@@ -94,7 +94,7 @@ KCMLirc::~KCMLirc()
 {
 }
 
-void KCMLirc::updateModestqStatus(TQListViewItem *item)
+void KCMLirc::updateModesStatus(TQListViewItem *item)
 {
 	theKCMLircBase->theModes->setItemsRenameable(item && item->parent());
 	theKCMLircBase->theAddActions->setEnabled(ProfileServer::profileServer()->profiles().count() && theKCMLircBase->theModes->selectedItem() && RemoteServer::remoteServer()->remotes()[modeMap[theKCMLircBase->theModes->selectedItem()].remote()]);
@@ -104,7 +104,7 @@ void KCMLirc::updateModestqStatus(TQListViewItem *item)
 	theKCMLircBase->theEditMode->setEnabled(item);
 }
 
-void KCMLirc::updateActionstqStatus(TQListViewItem *item)
+void KCMLirc::updateActionsStatus(TQListViewItem *item)
 {
 	theKCMLircBase->theRemoveAction->setEnabled(item);
 	theKCMLircBase->theEditAction->setEnabled(item);
@@ -374,7 +374,7 @@ void KCMLirc::updateActions()
 	theKCMLircBase->theActions->clear();
 	actionMap.clear();
 
-	if(!theKCMLircBase->theModes->selectedItem()) { updateActionstqStatus(0); return; }
+	if(!theKCMLircBase->theModes->selectedItem()) { updateActionsStatus(0); return; }
 
 	Mode m = modeMap[theKCMLircBase->theModes->selectedItem()];
 	theKCMLircBase->theModeLabel->setText(m.remoteName() + ": " + (m.name().isEmpty() ? i18n("Actions <i>always</i> available") : i18n("Actions available only in mode <b>%1</b>").tqarg(m.name())));
@@ -387,7 +387,7 @@ void KCMLirc::updateActions()
 
 	if(theKCMLircBase->theActions->currentItem())
 		theKCMLircBase->theActions->currentItem()->setSelected(true);
-	updateActionstqStatus(theKCMLircBase->theActions->currentItem());
+	updateActionsStatus(theKCMLircBase->theActions->currentItem());
 }
 
 void KCMLirc::gotButton(TQString remote, TQString button)
@@ -429,7 +429,7 @@ void KCMLirc::updateModes()
 	}
 	if(theKCMLircBase->theModes->currentItem())
 		theKCMLircBase->theModes->currentItem()->setSelected(true);
-	updateModestqStatus(theKCMLircBase->theModes->currentItem());
+	updateModesStatus(theKCMLircBase->theModes->currentItem());
 	updateActions();
 }
 

@@ -84,7 +84,7 @@ PcmciaConfig::PcmciaConfig (TQWidget * parent, const char *name)
         TQString s1 = LAPTOP_VERSION;
         TQString s2 = i18n("Version: ")+s1;
         TQLabel* vers = new TQLabel(s2, this);
-        vers->setMinimumSize(vers->tqsizeHint());
+        vers->setMinimumSize(vers->sizeHint());
         v1->addWidget(vers, 0);
 
         top_layout->activate();          

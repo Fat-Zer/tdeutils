@@ -622,7 +622,7 @@ bool karamba::parseConfig()
                                      TQColor("white")));
         defaultTextField->setFont(lineParser.getString("FONT", "Helvetica"));
         defaultTextField->setFontSize(lineParser.getInt("FONTSIZE", 12));
-        defaultTextField->tqsetAlignment(lineParser.getString("ALIGN",
+        defaultTextField->setAlignment(lineParser.getString("ALIGN",
                                        "LEFT"));
         defaultTextField->setFixedPitch(lineParser.getBoolean("FIXEDPITCH",
                                         false));
@@ -647,7 +647,7 @@ bool karamba::parseConfig()
         tmpText->setFont(lineParser.getString("FONT", defTxt.getFont()));
         tmpText->setFontSize(lineParser.getInt("FONTSIZE",
                              defTxt.getFontSize()));
-        tmpText->tqsetAlignment(lineParser.getString("ALIGN",
+        tmpText->setAlignment(lineParser.getString("ALIGN",
                               defTxt.getAlignmentAsString()));
         tmpText->setFixedPitch(lineParser.getInt("FIXEDPITCH",
                                defTxt.getFixedPitch()));

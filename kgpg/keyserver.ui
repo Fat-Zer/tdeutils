@@ -107,7 +107,7 @@ Allows the user to select the Key Server which will be used to import PGP/GnuPG 
                         <property name="sizeType">
                             <enum>Expanding</enum>
                         </property>
-                        <property name="tqsizeHint">
+                        <property name="sizeHint">
                             <size>
                                 <width>20</width>
                                 <height>16</height>
@@ -124,7 +124,7 @@ Allows the user to select the Key Server which will be used to import PGP/GnuPG 
                         <property name="sizeType">
                             <enum>Expanding</enum>
                         </property>
-                        <property name="tqsizeHint">
+                        <property name="sizeHint">
                             <size>
                                 <width>20</width>
                                 <height>20</height>
@@ -141,7 +141,7 @@ Allows the user to select the Key Server which will be used to import PGP/GnuPG 
                         <property name="sizeType">
                             <enum>Expanding</enum>
                         </property>
-                        <property name="tqsizeHint">
+                        <property name="sizeHint">
                             <size>
                                 <width>160</width>
                                 <height>20</height>
@@ -214,7 +214,7 @@ Allows the user to select the Key Server which will be used to import PGP/GnuPG 
                         <property name="sizeType">
                             <enum>Expanding</enum>
                         </property>
-                        <property name="tqsizeHint">
+                        <property name="sizeHint">
                             <size>
                                 <width>250</width>
                                 <height>20</height>
@@ -262,7 +262,7 @@ Allows the user to select the Key Server which will be used to import PGP/GnuPG 
                         <property name="sizeType">
                             <enum>Expanding</enum>
                         </property>
-                        <property name="tqsizeHint">
+                        <property name="sizeHint">
                             <size>
                                 <width>20</width>
                                 <height>40</height>
@@ -279,7 +279,7 @@ Allows the user to select the Key Server which will be used to import PGP/GnuPG 
                         <property name="sizeType">
                             <enum>Expanding</enum>
                         </property>
-                        <property name="tqsizeHint">
+                        <property name="sizeHint">
                             <size>
                                 <width>20</width>
                                 <height>30</height>

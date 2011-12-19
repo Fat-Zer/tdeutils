@@ -35,7 +35,7 @@ KCharSelectDia::KCharSelectDia(TQWidget *parent,const char *name,
 
   // Add character selection widget from library tdeui
   charSelect = new KCharSelect(mainWidget,"",vFont,vChr,_tableNum);
-  charSelect->resize(charSelect->tqsizeHint());
+  charSelect->resize(charSelect->sizeHint());
   connect(charSelect,TQT_SIGNAL(highlighted(const TQChar &)),
 	  TQT_SLOT(charChanged(const TQChar &)));
   connect(charSelect,TQT_SIGNAL(activated(const TQChar &)),
@@ -46,7 +46,7 @@ KCharSelectDia::KCharSelectDia(TQWidget *parent,const char *name,
 
   // Build line editor
   lined = new TQLineEdit(mainWidget);
-  lined->resize(lined->tqsizeHint());
+  lined->resize(lined->sizeHint());
 
   TQFont font = lined->font();
   font.setFamily( vFont );
@@ -59,7 +59,7 @@ KCharSelectDia::KCharSelectDia(TQWidget *parent,const char *name,
   // Build some buttons
   bHelp = new KPushButton( KStdGuiItem::help(), mainWidget );
   connect(bHelp,TQT_SIGNAL(clicked()),this,TQT_SLOT(help()));
-  bHelp->setFixedSize( bHelp->tqsizeHint() );
+  bHelp->setFixedSize( bHelp->sizeHint() );
   grid->addWidget( bHelp, 2, 0 );
 
   TQSpacerItem *space = new TQSpacerItem( 20, 20, TQSizePolicy::Expanding );
@@ -67,12 +67,12 @@ KCharSelectDia::KCharSelectDia(TQWidget *parent,const char *name,
 
   bClear = new KPushButton( KStdGuiItem::clear(), mainWidget );
   connect(bClear,TQT_SIGNAL(clicked()),this,TQT_SLOT(clear()));
-  bClear->setFixedSize( bClear->tqsizeHint() );
+  bClear->setFixedSize( bClear->sizeHint() );
   grid->addWidget( bClear, 2, 2 );
 
   bClip = new KPushButton( KGuiItem( i18n( "&To Clipboard" ),
             "editcopy" ), mainWidget );
-  bClip->setFixedSize( bClip->tqsizeHint() );
+  bClip->setFixedSize( bClip->sizeHint() );
   connect(bClip,TQT_SIGNAL(clicked()),this,TQT_SLOT(toClip()));
   grid->addWidget( bClip, 2, 3 );
 
@@ -104,9 +104,9 @@ KCharSelectDia::KCharSelectDia(TQWidget *parent,const char *name,
 
   entryDirection = direction;
   if( entryDirection )
-    lined->tqsetAlignment( TQt::AlignRight );
+    lined->setAlignment( TQt::AlignRight );
   else
-    lined->tqsetAlignment( TQt::AlignLeft );
+    lined->setAlignment( TQt::AlignLeft );
 
   setupGUI(Keys|StatusBar|Save|Create);
 }
@@ -244,9 +244,9 @@ void KCharSelectDia::toggleEntryDirection()
 {
     entryDirection ^= 1;
     if( entryDirection )
-        lined->tqsetAlignment( TQt::AlignRight );
+        lined->setAlignment( TQt::AlignRight );
     else
-        lined->tqsetAlignment( TQt::AlignLeft );
+        lined->setAlignment( TQt::AlignLeft );
 }
 
 //==================================================================

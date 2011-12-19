@@ -215,7 +215,7 @@ KgpgView::KgpgView(TQWidget *parent, const char *name) : TQWidget(parent, name)
         TQObject::connect(editor,TQT_SIGNAL(textChanged()),TQT_TQOBJECT(this),TQT_SLOT(modified()));
 
         boutonbox->tqlayout();
-        editor->resize(editor->tqmaximumSize());
+        editor->resize(editor->maximumSize());
         vbox->addWidget(editor);
         vbox->addWidget(boutonbox);
 }

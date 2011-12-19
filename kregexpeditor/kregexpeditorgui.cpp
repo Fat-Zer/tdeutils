@@ -117,16 +117,16 @@ void KRegExpEditorGUIDialog::doSomething( TQString method, void* arguments )
 
 void KRegExpEditorGUI::doSomething( TQString method, void* arguments )
 {
-    if ( method == TQString::tqfromLatin1( "setCaseSensitive" ) ) {
+    if ( method == TQString::fromLatin1( "setCaseSensitive" ) ) {
         _editor->setCaseSensitive( (bool) arguments );
     }
-    else if ( method == TQString::tqfromLatin1("setMinimal") ) {
+    else if ( method == TQString::fromLatin1("setMinimal") ) {
         _editor->setMinimal( (bool) arguments );
     }
-    else if ( method == TQString::tqfromLatin1("setSyntax") ) {
+    else if ( method == TQString::fromLatin1("setSyntax") ) {
         _editor->setSyntax( *((TQString*) arguments) );
     }
-    else if ( method == TQString::tqfromLatin1("setAllowNonTQtSyntax") ) {
+    else if ( method == TQString::fromLatin1("setAllowNonTQtSyntax") ) {
         _editor->setAllowNonTQtSyntax( (bool) arguments );
     }
     else {

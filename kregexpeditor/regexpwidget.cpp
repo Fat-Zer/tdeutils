@@ -164,10 +164,10 @@ TQRect RegExpWidget::selectionRect() const
 
 void RegExpWidget::enterEvent( TQEvent * )
 {
-  updatetqCursorShape();
+  updateCursorShape();
 }
 
-void RegExpWidget::updatetqCursorShape()
+void RegExpWidget::updateCursorShape()
 {
   TQCursor cursor;
 
@@ -191,7 +191,7 @@ void RegExpWidget::updatetqCursorShape()
 
 void RegExpWidget::updateCursorRecursively()
 {
-  updatetqCursorShape();
+  updateCursorShape();
 }
 
 

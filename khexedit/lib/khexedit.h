@@ -130,8 +130,8 @@ class KHEXEDIT_EXPORT KHexEdit : public KColumnsView
 //    void focusOutEvent( TQFocusEvent *FocusEvent );
     virtual bool eventFilter( TQObject *O, TQEvent *E );
 
-    virtual TQSize tqsizeHint() const;
-    virtual TQSize tqminimumSizeHint() const;
+    virtual TQSize sizeHint() const;
+    virtual TQSize minimumSizeHint() const;
 
 
   public: // value access

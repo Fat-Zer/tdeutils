@@ -174,7 +174,7 @@ void AceArch::unarchFileInternal( )
 
 void AceArch::catchMeIfYouCan( KProcess*, char *buffer, int buflen )
 {
-	TQString myBuf = TQString::tqfromLatin1( buffer, buflen );
+	TQString myBuf = TQString::fromLatin1( buffer, buflen );
 	kdDebug(1601) << "	Wololo!:	" << myBuf << endl;
 }
 

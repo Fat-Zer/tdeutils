@@ -76,7 +76,7 @@ TQString KarambaApplication::getMainKaramba()
 
 bool KarambaApplication::themeExists(TQString pretty_name)
 {
-  TQWidgetList  *list = TQApplication::tqallWidgets();
+  TQWidgetList  *list = TQApplication::allWidgets();
   TQWidgetListIt it( *list );         // iterate over the widgets
   TQWidget * w;
   while ( (w=it.current()) != 0 ) // for each widget...

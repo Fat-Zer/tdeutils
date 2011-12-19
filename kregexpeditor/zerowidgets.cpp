@@ -42,7 +42,7 @@ void ZeroWidget::addNewChild(DragAccepter *, RegExpWidget *)
   qFatal("No tqchildren should be added to this widget!");
 }
 
-TQSize ZeroWidget::tqsizeHint() const
+TQSize ZeroWidget::sizeHint() const
 {
   TQFontMetrics metrics = fontMetrics();
   _textSize = HackCalculateFontSize( metrics, _text );
@@ -54,7 +54,7 @@ TQSize ZeroWidget::tqsizeHint() const
 void ZeroWidget::paintEvent( TQPaintEvent *e)
 {
   // So what is my Size?
-  TQSize mySize = tqsizeHint();
+  TQSize mySize = sizeHint();
 
   TQPainter painter(this);
   drawPossibleSelection( painter, mySize);

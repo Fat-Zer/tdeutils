@@ -439,7 +439,7 @@ void COptionDialog::setupFilePage( void )
   modeList.append( i18n("Most Recent Document") );
   modeList.append( i18n("All Recent Documents") );
   mFile.openCombo->insertStringList( modeList );
-  mFile.openCombo->setMinimumWidth( mFile.openCombo->tqsizeHint().width() );
+  mFile.openCombo->setMinimumWidth( mFile.openCombo->sizeHint().width() );
   connect( mFile.openCombo, TQT_SIGNAL(activated(int)),
     this, TQT_SLOT( slotChanged()));
 

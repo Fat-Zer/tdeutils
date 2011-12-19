@@ -108,11 +108,11 @@ namespace KSim
       /**
        * reimplemented for internal reasons
        */
-      virtual TQSize tqsizeHint() const;
+      virtual TQSize sizeHint() const;
       /**
        * reimplemented for internal reasons
        */
-      virtual TQSize tqminimumSizeHint() const;
+      virtual TQSize minimumSizeHint() const;
 
     public slots:
       /**

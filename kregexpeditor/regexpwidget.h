@@ -148,7 +148,7 @@ public:
      @li accept cursor for insert/paste
      @li reject cursor for insert/paste
   */
-  void updatetqCursorShape();
+  void updateCursorShape();
 
   virtual void updateCursorRecursively();
 

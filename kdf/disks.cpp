@@ -104,13 +104,13 @@ int DiskEntry::mount()
       {
       // FreeBSD's mount(8) is picky: -o _must_ go before
       // the device and mountpoint.
-      cmdS=TQString::tqfromLatin1("mount -t%t -o%o %d %m");
+      cmdS=TQString::fromLatin1("mount -t%t -o%o %d %m");
       }
 
-  cmdS.replace(TQString::tqfromLatin1("%d"),deviceName());
-  cmdS.replace(TQString::tqfromLatin1("%m"),mountPoint());
-  cmdS.replace(TQString::tqfromLatin1("%t"),fsType());
-  cmdS.replace(TQString::tqfromLatin1("%o"),mountOptions());
+  cmdS.replace(TQString::fromLatin1("%d"),deviceName());
+  cmdS.replace(TQString::fromLatin1("%m"),mountPoint());
+  cmdS.replace(TQString::fromLatin1("%t"),fsType());
+  cmdS.replace(TQString::fromLatin1("%o"),mountOptions());
 
   kdDebug() << "mount-cmd: [" << cmdS << "]" << endl;
   int e=sysCall(cmdS);
@@ -126,8 +126,8 @@ int DiskEntry::umount()
   if (cmdS.isEmpty()) // generate default umount cmd
       cmdS="umount %d";
 
-  cmdS.replace(TQString::tqfromLatin1("%d"),deviceName());
-  cmdS.replace(TQString::tqfromLatin1("%m"),mountPoint());
+  cmdS.replace(TQString::fromLatin1("%d"),deviceName());
+  cmdS.replace(TQString::fromLatin1("%m"),mountPoint());
 
   kdDebug() << "umount-cmd: [" << cmdS << "]" << endl;
   int e=sysCall(cmdS);

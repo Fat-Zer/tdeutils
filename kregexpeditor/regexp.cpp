@@ -68,7 +68,7 @@ RegExp* RegExp::readRegExp( TQDomElement top, const TQString& version )
 TQString RegExp::toXmlString() const
 {
   TQDomDocument doc;
-  doc.setContent( TQString::tqfromLatin1( "<RegularExpression/>" ) );
+  doc.setContent( TQString::fromLatin1( "<RegularExpression/>" ) );
   TQDomNode top = doc.documentElement();
   top.toElement().setAttribute(TQString::fromLocal8Bit("version"), KRegExpEditorGUI::version);
 

@@ -397,7 +397,7 @@ CpuConfig::CpuConfig(KSim::PluginObject *parent, const char *name)
   m_legendBox->tqlayout()->setMargin(0);
 
   m_legendLayout = new TQVBoxLayout(m_legendBox->tqlayout());
-  m_legendLayout->tqsetAlignment(TQt::AlignTop);
+  m_legendLayout->setAlignment(TQt::AlignTop);
   m_legendLayout->setSpacing(6);
   m_legendLayout->setMargin(11);
 

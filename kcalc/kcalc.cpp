@@ -106,7 +106,7 @@ KCalculator::KCalculator(TQWidget *parent, const char *name)
 	// Create Button to select BaseMode
 	BaseChooseGroup = new TQHButtonGroup(i18n("Base"), central);
 	connect(BaseChooseGroup, TQT_SIGNAL(clicked(int)), TQT_SLOT(slotBaseSelected(int)));
-	BaseChooseGroup->tqsetSizePolicy(TQSizePolicy::Expanding, TQSizePolicy::Fixed, false);
+	BaseChooseGroup->setSizePolicy(TQSizePolicy::Expanding, TQSizePolicy::Fixed, false);
 
 
 	pbBaseChoose[0] =  new TQRadioButton(i18n("He&x"), BaseChooseGroup,
@@ -381,7 +381,7 @@ KCalculator::KCalculator(TQWidget *parent, const char *name)
 	updateGeometry();
 
 	adjustSize();
-	setFixedSize(tqsizeHint());
+	setFixedSize(sizeHint());
 
 	UpdateDisplay(true);
 
@@ -457,7 +457,7 @@ actionCollection());
 
 void KCalculator::setupStatusbar(void)
 {
-	// tqStatus bar contents
+	// Status bar contents
 	statusBar()->insertFixedItem(" NORM ", 0, true);
 	statusBar()->setItemAlignment(0, AlignCenter);
 
@@ -1050,7 +1050,7 @@ void KCalculator::updateGeometry(void)
         {
             TQWidget *tmp_widget = dynamic_cast<TQWidget *>(o);
             margin = TQApplication::tqstyle().
-                tqpixelMetric(TQStyle::PM_ButtonMargin, (tmp_widget))*2;
+                pixelMetric(TQStyle::PM_ButtonMargin, (tmp_widget))*2;
             tmp_widget->setFixedSize(s.width()+margin, s.height()+margin);
             //tmp_widget->setMinimumSize(s.width()+margin, s.height()+margin);
             tmp_widget->installEventFilter( this );
@@ -1060,11 +1060,11 @@ void KCalculator::updateGeometry(void)
 
     l = mLargePage->childrenListObject();
 
-    int h1 = (NumButtonGroup->find(0x0F))->tqminimumSize().height();
+    int h1 = (NumButtonGroup->find(0x0F))->minimumSize().height();
     int h2 = static_cast<int>( (static_cast<float>(h1) + 4.0) / 5.0 );
     s.setWidth(mLargePage->fontMetrics().width("MMM") +
                TQApplication::tqstyle().
-               tqpixelMetric(TQStyle::PM_ButtonMargin, NumButtonGroup->find(0x0F))*2);
+               pixelMetric(TQStyle::PM_ButtonMargin, NumButtonGroup->find(0x0F))*2);
     s.setHeight(h1 + h2);
 
     for(uint i = 0; i < l.count(); i++)
@@ -1087,11 +1087,11 @@ void KCalculator::updateGeometry(void)
 
     l = mNumericPage->childrenListObject(); // silence please
 
-    h1 = (NumButtonGroup->find(0x0F))->tqminimumSize().height();
+    h1 = (NumButtonGroup->find(0x0F))->minimumSize().height();
     h2 = (int)((((float)h1 + 4.0) / 5.0));
     s.setWidth(mLargePage->fontMetrics().width("MMM") +
                TQApplication::tqstyle().
-               tqpixelMetric(TQStyle::PM_ButtonMargin, NumButtonGroup->find(0x0F))*2);
+               pixelMetric(TQStyle::PM_ButtonMargin, NumButtonGroup->find(0x0F))*2);
     s.setHeight(h1 + h2);
 
     for(uint i = 0; i < l.count(); i++)
@@ -1950,7 +1950,7 @@ void KCalculator::slotStatshow(bool toggled)
 		pbStat["ClearData"]->hide();
 	}
 	adjustSize();
-	setFixedSize(tqsizeHint());
+	setFixedSize(sizeHint());
 	KCalcSettings::setShowStat(toggled);
 }
 
@@ -1985,7 +1985,7 @@ void KCalculator::slotScientificshow(bool toggled)
 		calc_display->setStatusText(2, TQString());
 	}
 	adjustSize();
-	setFixedSize(tqsizeHint());
+	setFixedSize(sizeHint());
 	KCalcSettings::setShowScientific(toggled);
 }
 
@@ -2026,7 +2026,7 @@ void KCalculator::slotLogicshow(bool toggled)
 			(NumButtonGroup->find(i))->hide();
 	}
 	adjustSize();
-	setFixedSize(tqsizeHint());
+	setFixedSize(sizeHint());
 	KCalcSettings::setShowLogic(toggled);
 }
 
@@ -2052,7 +2052,7 @@ void KCalculator::slotConstantsShow(bool toggled)
 		pbConstant[5]->hide();
 	}
 	adjustSize();
-	setFixedSize(tqsizeHint());
+	setFixedSize(sizeHint());
 	KCalcSettings::setShowConstants(toggled);
 }
 
@@ -2108,7 +2108,7 @@ void KCalculator::updateSettings()
 	calc_display->changeSettings();
 
 	updateGeometry();
-	resize(tqminimumSize());
+	resize(minimumSize());
 
 	//
 	// 1999-10-31 Espen Sand: Don't ask me why ;)

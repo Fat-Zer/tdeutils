@@ -17,7 +17,7 @@ RichTextLabel::RichTextLabel(karamba* k) :
     Meter(k, 0, 0, 100, 100),
     text(0),
     source(""),
-    colorGrp(k->tqcolorGroup()),
+    colorGrp(k->colorGroup()),
     underlineLinks(false)
 {
   originalSize = TQSize(0, 0);
@@ -27,7 +27,7 @@ RichTextLabel::RichTextLabel(karamba* k, int x, int y, int w, int h) :
     Meter(k, x, y, w, h),
     text(0),
     source(""),
-    colorGrp(k->tqcolorGroup()),
+    colorGrp(k->colorGroup()),
     underlineLinks(false)
 {
   kdDebug() << k_funcinfo << x << ", " << y << ", " << w << ", " << h << endl;

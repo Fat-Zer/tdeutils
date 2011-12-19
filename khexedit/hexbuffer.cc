@@ -766,7 +766,7 @@ void CHexBuffer::setDisableCursor( bool disableCursor )
 }
 
 
-void CHexBuffer::settqCursorShapeModifier( bool alwaysBlock, bool thickInsert )
+void CHexBuffer::setCursorShapeModifier( bool alwaysBlock, bool thickInsert )
 {
   mCursor.setShapeModifier( alwaysBlock, thickInsert );
   setEditMode( mEditMode );
@@ -813,12 +813,12 @@ void CHexBuffer::setEditMode( EEditMode editMode )
 
 
 
-void CHexBuffer::setMaximumSize( uint tqmaximumSize )
+void CHexBuffer::setMaximumSize( uint maximumSize )
 {
-  if( tqmaximumSize == 0 ) { tqmaximumSize = ~0; }
+  if( maximumSize == 0 ) { maximumSize = ~0; }
 
-  mMaximumSize   = tqmaximumSize;
-  mFixedSizeMode = tqmaximumSize == (uint)~0 ? false : true;
+  mMaximumSize   = maximumSize;
+  mFixedSizeMode = maximumSize == (uint)~0 ? false : true;
   mCursor.setFixedSizeMode( mFixedSizeMode );
 
   if( mLayout.offsetVisible == false )
@@ -832,9 +832,9 @@ void CHexBuffer::setMaximumSize( uint tqmaximumSize )
     if( mLayout.offsetMode ==  SDisplayLayout::decimal )
     {
       printOffset = &CHexBuffer::printDecimalOffset;
-      for( mOffsetSize=0; tqmaximumSize > 0; mOffsetSize += 1 )
+      for( mOffsetSize=0; maximumSize > 0; mOffsetSize += 1 )
       {
-	tqmaximumSize = tqmaximumSize / 10;
+	maximumSize = maximumSize / 10;
       }
       mOffsetIndex = 10 - mOffsetSize;
     }
@@ -848,9 +848,9 @@ void CHexBuffer::setMaximumSize( uint tqmaximumSize )
       {
 	printOffset = &CHexBuffer::printHexadecimalSmallOffset;
       }
-      for( mOffsetSize=0; tqmaximumSize > 0; mOffsetSize += 1 )
+      for( mOffsetSize=0; maximumSize > 0; mOffsetSize += 1 )
       {
-	tqmaximumSize = tqmaximumSize / 16;
+	maximumSize = maximumSize / 16;
       }
       if( mOffsetSize > 4 ) { mOffsetSize += 1; } // Space for the ':' sign
       mOffsetIndex = 9 - mOffsetSize;

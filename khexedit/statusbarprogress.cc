@@ -176,7 +176,7 @@ bool CStatusBarProgress::textEnabled( void ) const
   return( mTextEnabled );
 }
 
-TQSize CStatusBarProgress::tqsizeHint( void ) const
+TQSize CStatusBarProgress::sizeHint( void ) const
 {
   TQSize s( size() );
 

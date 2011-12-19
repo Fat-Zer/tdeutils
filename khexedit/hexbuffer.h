@@ -1082,7 +1082,7 @@ class CHexBuffer : public TQByteArray
     void setNonPrintChar( TQChar nonPrintChar );
     void setShowCursor( bool showCursor );
     void setDisableCursor( bool disableCursor );
-    void settqCursorShapeModifier( bool alwaysBlock, bool thickInsert );
+    void setCursorShapeModifier( bool alwaysBlock, bool thickInsert );
     void setEditMode( EEditMode editMode );
     void setEditMode( EEditMode editMode, bool alwaysBlock, bool thickInsert );
     void setMaximumSize( uint size );

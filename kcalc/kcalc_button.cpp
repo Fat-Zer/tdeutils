@@ -118,7 +118,7 @@ void KCalcButton::paintLabel(TQPainter *paint)
 {
   if (_mode[_mode_flags].is_label_richtext) {
     TQSimpleRichText _text(_label, font());
-    _text.draw(paint, width()/2-_text.width()/2, 0, tqchildrenRegion(), tqcolorGroup());
+    _text.draw(paint, width()/2-_text.width()/2, 0, childrenRegion(), colorGroup());
   } else {
     KPushButton::drawButtonLabel(paint);
   }

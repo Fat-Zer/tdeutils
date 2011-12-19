@@ -28,7 +28,7 @@ DragAccepter::DragAccepter(RegExpEditorWindow* editorWindow, RegExpWidget *paren
   setAcceptDrops(TRUE);
 }
 
-TQSize DragAccepter::tqsizeHint() const
+TQSize DragAccepter::sizeHint() const
 {
   return TQSize(10,10);
 }
@@ -100,7 +100,7 @@ void DragAccepter::mouseReleaseEvent( TQMouseEvent* event )
 
 void DragAccepter::dragEnterEvent(TQDragEnterEvent *event)
 {
-  bool selfDrag = (  event->source() && event->source()->tqtopLevelWidget() == tqtopLevelWidget() && _isSelected );
+  bool selfDrag = (  event->source() && event->source()->topLevelWidget() == topLevelWidget() && _isSelected );
   event->accept(RegExpWidgetDrag::canDecode( event ) && !selfDrag );
 }
 
@@ -124,7 +124,7 @@ void DragAccepter::dropEvent(TQDropEvent *event)
     w->update();
   _editorWindow->updateContent( this );
 
-  bool selfDrag = (  event->source() && event->source()->tqtopLevelWidget() == tqtopLevelWidget() );
+  bool selfDrag = (  event->source() && event->source()->topLevelWidget() == topLevelWidget() );
   if ( ! selfDrag )
     _editorWindow->clearSelection( true );
   else {

@@ -126,7 +126,7 @@ void SingleContainerWidget::updateAll()
 void SingleContainerWidget::updateCursorRecursively()
 {
   _child->updateCursorRecursively();
-  updatetqCursorShape();
+  updateCursorShape();
 }
 
 

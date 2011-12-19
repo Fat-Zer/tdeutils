@@ -48,8 +48,8 @@ KDFTopLevel::KDFTopLevel(TQWidget *, const char *name)
   KStdAction::keyBindings(guiFactory(), TQT_SLOT(configureShortcuts()), 
 actionCollection());
   setCentralWidget(kdf);
-  //  kdf->setMinimumSize(kdf->tqsizeHint());
-  kdf->resize(kdf->tqsizeHint());
+  //  kdf->setMinimumSize(kdf->sizeHint());
+  kdf->resize(kdf->sizeHint());
   setupGUI(KMainWindow::Keys | StatusBar | Save | Create);
 }
 

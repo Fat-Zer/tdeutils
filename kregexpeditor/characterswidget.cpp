@@ -60,7 +60,7 @@ CharactersWidget::~CharactersWidget()
 }
 
 
-TQSize CharactersWidget::tqsizeHint() const
+TQSize CharactersWidget::sizeHint() const
 {
     TQFontMetrics metrics = fontMetrics();
     _textSize = HackCalculateFontSize(metrics, title());
@@ -78,7 +78,7 @@ TQSize CharactersWidget::tqsizeHint() const
 
 void CharactersWidget::paintEvent(TQPaintEvent *e)
 {
-    TQSize mySize = tqsizeHint();
+    TQSize mySize = sizeHint();
 
     TQPainter painter(this);
     drawPossibleSelection( painter, mySize );
@@ -118,7 +118,7 @@ RegExp* CharactersWidget::regExp() const
 
 TQString CharactersWidget::text() const
 {
-    TQString res = TQString::tqfromLatin1("");
+    TQString res = TQString::fromLatin1("");
 
     if (_regexp->wordChar())
         res += i18n("- A word character\n");
@@ -186,8 +186,8 @@ int CharactersWidget::edit()
         TQApplication::restoreOverrideCursor();
     }
 
-    _configWindow->move(TQCursor::pos() - TQPoint(_configWindow->tqsizeHint().width()/2,
-                                                _configWindow->tqsizeHint().height()/2));
+    _configWindow->move(TQCursor::pos() - TQPoint(_configWindow->sizeHint().width()/2,
+                                                _configWindow->sizeHint().height()/2));
     int ret = _configWindow->exec(_regexp );
     if ( ret == TQDialog::Accepted ) {
         _editorWindow->updateContent( 0 );

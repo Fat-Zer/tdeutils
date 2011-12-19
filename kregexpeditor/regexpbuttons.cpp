@@ -53,7 +53,7 @@ RegExpButtons::RegExpButtons( TQWidget *parent, const char *name )
   TQPixmap pix;
   pix.convertFromImage( qembed_findImage( "select" ) );
 #else
-  TQPixmap pix = KGlobal::iconLoader()->loadIcon(locate("data", TQString::tqfromLatin1("kregexpeditor/pics/select.png") ), KIcon::Toolbar );
+  TQPixmap pix = KGlobal::iconLoader()->loadIcon(locate("data", TQString::fromLatin1("kregexpeditor/pics/select.png") ), KIcon::Toolbar );
 #endif
 
   _selectBut->setPixmap( pix );
@@ -156,10 +156,10 @@ DoubleClickButton* RegExpButtons::insert(RegExpType tp, const char* name, TQStri
 {
 #ifdef TQT_ONLY
     TQPixmap pix;
-    pix.convertFromImage( qembed_findImage( TQString::tqfromLatin1( name ) ) );
+    pix.convertFromImage( qembed_findImage( TQString::fromLatin1( name ) ) );
 #else
-    TQPixmap pix = KGlobal::iconLoader()->loadIcon(locate("data", TQString::tqfromLatin1("kregexpeditor/pics/")+TQString::tqfromLatin1(name) +
-                                                       TQString::tqfromLatin1(".png") ), KIcon::Toolbar );
+    TQPixmap pix = KGlobal::iconLoader()->loadIcon(locate("data", TQString::fromLatin1("kregexpeditor/pics/")+TQString::fromLatin1(name) +
+                                                       TQString::fromLatin1(".png") ), KIcon::Toolbar );
 #endif
 
   DoubleClickButton* but = new DoubleClickButton( pix, this, "RegExpButtons::but");

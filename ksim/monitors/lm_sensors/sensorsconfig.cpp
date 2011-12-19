@@ -86,7 +86,7 @@ SensorsConfig::SensorsConfig(KSim::PluginObject *parent, const char *name)
 
   m_updateLabel = new TQLabel(this);
   m_updateLabel->setText(i18n("Update interval:"));
-  m_updateLabel->tqsetSizePolicy(TQSizePolicy(TQSizePolicy::Fixed,
+  m_updateLabel->setSizePolicy(TQSizePolicy(TQSizePolicy::Fixed,
      TQSizePolicy::Fixed));
   m_layout->addMultiCellWidget(m_updateLabel, 4, 4, 0, 0);
 
@@ -95,7 +95,7 @@ SensorsConfig::SensorsConfig(KSim::PluginObject *parent, const char *name)
 
   TQLabel *intervalLabel = new TQLabel(this);
   intervalLabel->setText(i18n("seconds"));
-  intervalLabel->tqsetSizePolicy(TQSizePolicy(TQSizePolicy::Fixed,
+  intervalLabel->setSizePolicy(TQSizePolicy(TQSizePolicy::Fixed,
      TQSizePolicy::Fixed));
   m_layout->addMultiCellWidget(intervalLabel, 4, 4, 2, 2);
 }

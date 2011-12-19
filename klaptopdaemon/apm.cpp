@@ -63,7 +63,7 @@ ApmConfig::ApmConfig (TQWidget * parent, const char *name)
 
     TQLabel *tmp_label = new TQLabel( i18n("This panel lets you configure your APM system and lets "
 					"you have access to some of the extra features provided by it"), this );
-    tmp_label->tqsetAlignment( TQt::WordBreak );
+    tmp_label->setAlignment( TQt::WordBreak );
     top_layout->addWidget( tmp_label );
     
     tmp_label = new TQLabel( i18n("NOTE: some APM implementations have buggy suspend/standby "
@@ -71,12 +71,12 @@ ApmConfig::ApmConfig (TQWidget * parent, const char *name)
 				"all your work, check them on and try a suspend/standby from "
 				"the popup menu on the battery icon in the panel if it fails to come "
 				"back successfully uncheck the box again."), this );
-    tmp_label->tqsetAlignment( TQt::WordBreak );
+    tmp_label->setAlignment( TQt::WordBreak );
     top_layout->addWidget( tmp_label );
 
     tmp_label = new TQLabel( i18n("Some changes made on this page may require you to quit the laptop panel "
 				"and start it again to take effect"), this );
-    tmp_label->tqsetAlignment( TQt::WordBreak );
+    tmp_label->setAlignment( TQt::WordBreak );
     top_layout->addWidget( tmp_label );
 
     bool can_enable = laptop_portable::has_apm(1);	// is helper ready
@@ -101,7 +101,7 @@ ApmConfig::ApmConfig (TQWidget * parent, const char *name)
 				"/proc/apm writeable by anyone every time your system boots "
 				"or use the button below to make the %1 application "
 				"set-uid root").tqarg(apm_name), this );
-    tmp_label->tqsetAlignment( TQt::WordBreak );
+    tmp_label->setAlignment( TQt::WordBreak );
     top_layout->addWidget( tmp_label );
     TQHBoxLayout *ll = new TQHBoxLayout(top_layout);
     TQPushButton *setupButton = new TQPushButton(i18n("Setup Helper Application"), this);
@@ -114,7 +114,7 @@ ApmConfig::ApmConfig (TQWidget * parent, const char *name)
 	tmp_label = new TQLabel( i18n("Your system seems to have 'Software Suspend' installed, this can "
 				"be used to hibernate or 'suspend to disk' your system if you want "
 				"to use this for hibernation check the box below"), this );
-	tmp_label->tqsetAlignment( TQt::WordBreak );
+	tmp_label->setAlignment( TQt::WordBreak );
 	top_layout->addWidget( tmp_label );
      	enableSoftwareSuspendHibernate = new TQCheckBox( i18n("Enable software suspend for hibernate"), this );
     	top_layout->addWidget( enableSoftwareSuspendHibernate );
@@ -126,7 +126,7 @@ ApmConfig::ApmConfig (TQWidget * parent, const char *name)
 				"Suspend utility - KDE provides a utility to do this, if you "
 				"wish to use it you must make it set-uid root, the button "
 				"below will do this for you"), this );
-	tmp_label->tqsetAlignment( TQt::WordBreak );
+	tmp_label->setAlignment( TQt::WordBreak );
 	top_layout->addWidget( tmp_label );
         ll = new TQHBoxLayout(this);
         TQPushButton *setupSSButton = new TQPushButton(i18n("Setup SS Helper Application"), this);

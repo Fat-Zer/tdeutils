@@ -69,7 +69,7 @@ public:
                   TQWidget* parent, const char* name = 0);
 
   virtual bool updateSelection( bool parentSelected );
-  virtual TQSize tqsizeHint() const;
+  virtual TQSize sizeHint() const;
   virtual RegExp* regExp() const;
   virtual RegExpType type() const { return COMPOUND; }
   virtual int edit();

@@ -234,9 +234,9 @@ void KSim::LedLabel::configureObject(bool reapaintWidget)
     update();
 }
 
-TQSize KSim::LedLabel::tqsizeHint() const
+TQSize KSim::LedLabel::sizeHint() const
 {
-  TQSize hint(Progress::tqsizeHint());
+  TQSize hint(Progress::sizeHint());
 
   if (d->sendLed.height() > hint.height())
     hint.setHeight(d->sendLed.height());

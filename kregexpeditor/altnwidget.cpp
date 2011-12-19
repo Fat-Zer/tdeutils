@@ -81,7 +81,7 @@ void AltnWidget::addNewConcChild(DragAccepter *accepter, ConcWidget *child)
 }
 
 
-TQSize AltnWidget::tqsizeHint() const
+TQSize AltnWidget::sizeHint() const
 {
   TQPtrListIterator<RegExpWidget> it(_tqchildren);
   // Skip the first child, as we only need half of the size of the first and the
@@ -93,7 +93,7 @@ TQSize AltnWidget::tqsizeHint() const
   _tqchildrenHeight = 0;
 
   for ( ; *it ; ++it) {
-    TQSize thisChildSize = (*it)->tqsizeHint();
+    TQSize thisChildSize = (*it)->sizeHint();
     _tqchildrenWidth = TQMAX(_tqchildrenWidth, thisChildSize.width());
     _tqchildrenHeight += thisChildSize.height();
   }
@@ -118,7 +118,7 @@ void AltnWidget::paintEvent( TQPaintEvent *e)
             dynamic_cast<DragAccepter*>(_tqchildren.at(_tqchildren.count()-1)) ) );
 
   int offset = 0;
-  TQSize mySize = tqsizeHint();
+  TQSize mySize = sizeHint();
 
   TQPainter painter(this);
   drawPossibleSelection( painter, mySize );
@@ -144,7 +144,7 @@ void AltnWidget::paintEvent( TQPaintEvent *e)
 
     RegExpWidget* child = _tqchildren.at(i);
 
-    TQSize childSize = child->tqsizeHint();
+    TQSize childSize = child->sizeHint();
     TQSize curChildSize = child->size();
 
     //-------------------------------------- place the child

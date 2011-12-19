@@ -135,7 +135,7 @@ const char *KBufferDrag::format( int i ) const
 }
 
 
-TQByteArray KBufferDrag::tqencodedData( const char *Format ) const
+TQByteArray KBufferDrag::encodedData( const char *Format ) const
 {
   if( Format != 0 )
   {
@@ -224,12 +224,12 @@ bool KBufferDrag::canDecode( const TQMimeSource* Source )
 
 bool KBufferDrag::decode( const TQMimeSource* Source, TQByteArray &Dest )
 {
-//   Dest = Source->tqencodedData( MediaString );
+//   Dest = Source->encodedData( MediaString );
 //   return Dest.size() != 0;
 
   bool CanDecode = Source->provides( OctetStream );
   if( CanDecode )
-    Dest = Source->tqencodedData( OctetStream );
+    Dest = Source->encodedData( OctetStream );
 
   return CanDecode;
 }

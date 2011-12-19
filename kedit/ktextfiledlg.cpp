@@ -65,7 +65,7 @@ KTextFileDialog::KTextFileDialog(const TQString& startDir,
       i18n("Select Encoding..."), 0,
       TQT_TQOBJECT(this), TQT_SLOT( slotShowEncCombo() ), TQT_TQOBJECT(this), "encoding");
 
-  mEncoding->setIcon( TQString::tqfromLatin1("charset") );
+  mEncoding->setIcon( TQString::fromLatin1("charset") );
 
   KToolBar *tb = toolBar();
   mEncoding->plug( tb, pathComboIndex() - 1 );
@@ -96,7 +96,7 @@ void KTextFileDialog::slotShowEncCombo()
   vbox->setSpacing( KDialog::spacingHint() );
   encDlg->setMainWidget( vbox );
   label = new TQLabel( vbox );
-  label->tqsetAlignment( AlignLeft | AlignVCenter );
+  label->setAlignment( AlignLeft | AlignVCenter );
   label->setText(i18n("Select encoding for text file: "));
 
   encCombo = new TQComboBox(vbox);

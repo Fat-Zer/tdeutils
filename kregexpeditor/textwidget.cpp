@@ -66,9 +66,9 @@ void TextWidget::slotUpdate()
   _editorWindow->updateContent( this );
 }
 
-TQSize TextWidget::tqsizeHint() const
+TQSize TextWidget::sizeHint() const
 {
-  return _edit->tqsizeHint();
+  return _edit->sizeHint();
 }
 
 void TextWidget::paintEvent( TQPaintEvent *e)

@@ -61,7 +61,7 @@ KSim::GeneralPrefs::GeneralPrefs(TQWidget *parent, const char *name)
   m_sizeHSpin->setValue(40);
   m_sizeHSpin->setMinValue(40);
   m_sizeHSpin->setMaxValue(200);
-  m_sizeHSpin->tqsetSizePolicy(TQSizePolicy(TQSizePolicy::Preferred,
+  m_sizeHSpin->setSizePolicy(TQSizePolicy(TQSizePolicy::Preferred,
      TQSizePolicy::Fixed));
   sizeBoxLayout->addWidget(m_sizeHSpin, 0, 1);
 
@@ -77,7 +77,7 @@ KSim::GeneralPrefs::GeneralPrefs(TQWidget *parent, const char *name)
   m_sizeWSpin->setValue(58);
   m_sizeWSpin->setMinValue(58);
   m_sizeWSpin->setMaxValue(200);
-  m_sizeWSpin->tqsetSizePolicy(TQSizePolicy(TQSizePolicy::Preferred,
+  m_sizeWSpin->setSizePolicy(TQSizePolicy(TQSizePolicy::Preferred,
      TQSizePolicy::Fixed));
   sizeBoxLayout->addWidget(m_sizeWSpin, 1, 1);
 
@@ -168,7 +168,7 @@ KSim::UptimePrefs::UptimePrefs(TQWidget *parent, const char *name)
 
   m_uptimeCombo = new KComboBox(true, this);
   m_uptimeCombo->setDuplicatesEnabled(false);
-  m_uptimeCombo->tqsetSizePolicy(TQSizePolicy(TQSizePolicy::Expanding,
+  m_uptimeCombo->setSizePolicy(TQSizePolicy(TQSizePolicy::Expanding,
      TQSizePolicy::Fixed));
   m_uptimeCombo->insertItem(i18n("%hh:%mm:%ss"));
   m_uptimeCombo->insertItem(i18n("%dd %h:%m"));
@@ -214,7 +214,7 @@ KSim::UptimePrefs::UptimePrefs(TQWidget *parent, const char *name)
   m_uptimeBox->tqlayout()->setSpacing(0);
   m_uptimeBox->tqlayout()->setMargin(0);
   m_boxLayout = new TQVBoxLayout(m_uptimeBox->tqlayout());
-  m_boxLayout->tqsetAlignment(TQt::AlignTop);
+  m_boxLayout->setAlignment(TQt::AlignTop);
   m_boxLayout->setSpacing(6);
   m_boxLayout->setMargin(11);
 
@@ -305,7 +305,7 @@ KSim::MemoryPrefs::MemoryPrefs(TQWidget *parent, const char *name)
 
   m_memCombo = new KComboBox(true, this);
   m_memCombo->setDuplicatesEnabled(false);
-  m_memCombo->tqsetSizePolicy(TQSizePolicy(TQSizePolicy::Expanding,
+  m_memCombo->setSizePolicy(TQSizePolicy(TQSizePolicy::Expanding,
      TQSizePolicy::Fixed));
   //m_memCombo->insertItem(i18n("%tM - %fM free"));
   //m_memCombo->insertItem(i18n("%tM - %uM used"));
@@ -350,7 +350,7 @@ KSim::MemoryPrefs::MemoryPrefs(TQWidget *parent, const char *name)
   m_memBox->tqlayout()->setSpacing(0);
   m_memBox->tqlayout()->setMargin(0);
   m_boxLayout = new TQVBoxLayout(m_memBox->tqlayout());
-  m_boxLayout->tqsetAlignment(TQt::AlignTop);
+  m_boxLayout->setAlignment(TQt::AlignTop);
   m_boxLayout->setSpacing(6);
   m_boxLayout->setMargin(11);
 
@@ -458,7 +458,7 @@ KSim::SwapPrefs::SwapPrefs(TQWidget *parent, const char *name)
 
   m_swapCombo = new KComboBox(true, this);
   m_swapCombo->setDuplicatesEnabled(false);
-  m_swapCombo->tqsetSizePolicy(TQSizePolicy(TQSizePolicy::Expanding,
+  m_swapCombo->setSizePolicy(TQSizePolicy(TQSizePolicy::Expanding,
      TQSizePolicy::Fixed));
   //m_swapCombo->insertItem(i18n("%tM - %fM free"));
   //m_swapCombo->insertItem(i18n("%tM - %uM used"));
@@ -499,7 +499,7 @@ KSim::SwapPrefs::SwapPrefs(TQWidget *parent, const char *name)
   m_swapBox->tqlayout()->setSpacing(0);
   m_swapBox->tqlayout()->setMargin(0);
   m_boxLayout = new TQVBoxLayout(m_swapBox->tqlayout());
-  m_boxLayout->tqsetAlignment(TQt::AlignTop);
+  m_boxLayout->setAlignment(TQt::AlignTop);
   m_boxLayout->setSpacing(6);
   m_boxLayout->setMargin(11);
 

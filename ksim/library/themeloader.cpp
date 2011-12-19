@@ -691,7 +691,7 @@ TQString KSim::Theme::readColourEntry(const TQString &itemType,
 {
   TQString color = readEntry(itemType, entry);
   if (color.isEmpty())
-    color = TQString::tqfromLatin1("#ffffff #ffffff");
+    color = TQString::fromLatin1("#ffffff #ffffff");
 
   return TQStringList::split(' ', color)[row];
 }
@@ -927,7 +927,7 @@ void KSim::ThemeLoader::reload()
   if (m_theme.d)
     m_theme.d->globalReader = d->globalReader;
 
-  TQString fileName = TQString::tqfromLatin1("gkrellmrc") + alternativeAsString();
+  TQString fileName = TQString::fromLatin1("gkrellmrc") + alternativeAsString();
   m_theme.reparse(currentUrl(), fileName, currentAlternative());
 }
 
@@ -1036,7 +1036,7 @@ void KSim::ThemeLoader::parseDir(const TQString &url, int alt)
   {
     TQString homePath = TQDir::current().path();
     homePath = locateLocal( "data", "ksim" )
-       + TQString::tqfromLatin1( "/themes" )
+       + TQString::fromLatin1( "/themes" )
        + homePath.right( homePath.length()
        - homePath.findRev( TQRegExp( "\\/" ),
        homePath.length() ) );
@@ -1072,7 +1072,7 @@ void KSim::ThemeLoader::parseDir(const TQString &url, int alt)
       // go through the meters array and move the files to the correct dir/filename
       TQStringList::Iterator meter;
       for (meter = meters.begin(); meter != meters.end(); ++meter) {
-        TQString bgMeter = TQString::tqfromLatin1("bg_meter_");
+        TQString bgMeter = TQString::fromLatin1("bg_meter_");
         if (TQFile::exists(bgMeter + (*meter) + altString + "." +  (*format))) {
           if (KStandardDirs::makeDir(url + (*meter)))
             directory.rename(bgMeter + (*meter) + altString + "." + (*format),
@@ -1083,7 +1083,7 @@ void KSim::ThemeLoader::parseDir(const TQString &url, int alt)
       // go through the panels array and move the files to the correct dir/filename
       TQStringList::ConstIterator panel;
       for (panel = panels.begin(); panel != panels.end(); ++panel) {
-        TQString bgPanel = TQString::tqfromLatin1("bg_panel_");
+        TQString bgPanel = TQString::fromLatin1("bg_panel_");
         if (TQFile::exists(bgPanel + (*panel) + altString + "." + (*format))) {
           if (KStandardDirs::makeDir(url + (*panel)))
             directory.rename(bgPanel + (*panel) + altString + "." + (*format),
@@ -1092,13 +1092,13 @@ void KSim::ThemeLoader::parseDir(const TQString &url, int alt)
       }
 
       // fix stupid themes that have a bg_panel image in the host dir
-      TQString tempFile = TQString::tqfromLatin1("host/bg_panel");
+      TQString tempFile = TQString::fromLatin1("host/bg_panel");
       if (TQFile::exists(tempFile + altString + "." + (*format)))
         directory.rename(tempFile + altString + "." + (*format), "host/bg_meter"
            + altString + "." + (*format));
 
       // move decal_net_leds* to the net folder to be more consistant
-      tempFile = TQString::tqfromLatin1("decal_net_leds");
+      tempFile = TQString::fromLatin1("decal_net_leds");
       if (TQFile::exists(tempFile + altString + "." + (*format))) {
         if (KStandardDirs::makeDir(url + "net"))
           directory.rename(tempFile + altString + "." + (*format),
@@ -1159,7 +1159,7 @@ int KSim::ThemeLoader::currentAlternative()
 TQString KSim::ThemeLoader::alternativeAsString(int alt)
 {
   int alternative = (alt == -1 ? currentAlternative() : alt);
-  return (alternative == 0 ? TQString() : TQString::tqfromLatin1("_")
+  return (alternative == 0 ? TQString() : TQString::fromLatin1("_")
      + TQString::number(alternative));
 }
 
@@ -1225,7 +1225,7 @@ KSim::ThemeLoader::ThemeLoader()
 
   m_theme.create(d->fileNames, d->imageTypes, d->globalReader);
 
-  TQString fileName = TQString::tqfromLatin1("gkrellmrc") + alternativeAsString();
+  TQString fileName = TQString::fromLatin1("gkrellmrc") + alternativeAsString();
   m_theme.init(currentUrl(), fileName, currentAlternative());
 
   reColourItems();

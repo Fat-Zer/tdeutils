@@ -545,7 +545,7 @@ KHexEdit *KHexEdit::newWindow( void )
   {
     TQString msg = i18n( "Can not create new window.\n" );
     msg += hexError( Err_NoMemory );
-    KMessageBox::error( tqtopLevelWidget(), msg );
+    KMessageBox::error( topLevelWidget(), msg );
     return(0);
   }
   hexEdit->show();
@@ -582,7 +582,7 @@ void KHexEdit::closeProgram( void )
 	TQString msg = i18n(""
 	  "There are windows with unsaved modified documents. "
 	  "If you quit now, these modifications will be lost.");
-	int reply = KMessageBox::warningContinueCancel( tqtopLevelWidget(), msg, TQString(), KStdGuiItem::quit() );
+	int reply = KMessageBox::warningContinueCancel( topLevelWidget(), msg, TQString(), KStdGuiItem::quit() );
 	if( reply == KMessageBox::Continue )
 	{
 	  break;

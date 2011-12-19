@@ -288,7 +288,7 @@ FloppyData::FloppyData(TQWidget * parent, const char * name)
 
 	frame = new TQLabel( this, "NewsWindow" );
 	frame->setFrameStyle(TQFrame::Panel | TQFrame::Sunken);
-	frame->tqsetAlignment(WordBreak|ExpandTabs);
+	frame->setAlignment(WordBreak|ExpandTabs);
         TQWhatsThis::add( frame,
             i18n("<qt>This is the status window, where error messages are displayed.</qt>") );
 
@@ -539,7 +539,7 @@ void FloppyData::format(){
 	formatActions = new KFActionQueue(TQT_TQOBJECT(this));
 
 	connect(formatActions,TQT_SIGNAL(status(const TQString &,int)),
-		this,TQT_SLOT(formattqStatus(const TQString &,int)));
+		this,TQT_SLOT(formatStatus(const TQString &,int)));
 	connect(formatActions,TQT_SIGNAL(done(KFAction *,bool)),
 		this,TQT_SLOT(reset()));
 
@@ -642,7 +642,7 @@ void FloppyData::format(){
 	formatActions->exec();
 }
 
-void FloppyData::formattqStatus(const TQString &s,int p)
+void FloppyData::formatStatus(const TQString &s,int p)
 {
     kdDebug(2002) << "FloppyData::formatStatus: " << s << " : "  << p << endl;
 	if (!s.isEmpty())

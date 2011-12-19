@@ -102,8 +102,8 @@ void DefaultSkin::show() {
 #else
 	TQRect r = TQApplication::desktop()->tqgeometry();
 #endif
-	//	_label->resize(_label->tqminimumSizeHint());
-	//	_widget->resize(_label->tqminimumSizeHint());
+	//	_label->resize(_label->minimumSizeHint());
+	//	_widget->resize(_label->minimumSizeHint());
 	_widget->move(r.center() -
 			TQPoint(_widget->width()/2, _widget->height()/2));
 	_widget->show();

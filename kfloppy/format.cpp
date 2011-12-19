@@ -358,7 +358,7 @@ void FloppyAction::processStdOut(KProcess *, char *b, int l)
 {
 	Q_UNUSED(b);
 	Q_UNUSED(l);
-	kdDebug(KFAREA) << "stdout:" << TQString::tqfromLatin1(b,l) << endl;
+	kdDebug(KFAREA) << "stdout:" << TQString::fromLatin1(b,l) << endl;
 }
 
 void FloppyAction::processStdErr(KProcess *p, char *b, int l)
@@ -390,7 +390,7 @@ FDFormat::FDFormat(TQObject *p) :
 	doVerify(true)
 {
 	DEBUGSETUP;
-	theProcessName = TQString::tqfromLatin1("fdformat");
+	theProcessName = TQString::fromLatin1("fdformat");
 	setName("FDFormat");
 }
 
@@ -482,7 +482,7 @@ void FDFormat::processStdOut(KProcess *, char *b, int l)
 	}
 	else
 	{
-		s = TQString::tqfromLatin1(b,l);
+		s = TQString::fromLatin1(b,l);
 		if (s.contains("ioctl(FD_FORM)"))
 		{
                     emit status (i18n(
@@ -499,7 +499,7 @@ void FDFormat::processStdOut(KProcess *, char *b, int l)
 		DEBUGS(s);
 	}
 #elif defined(ANY_LINUX)
-	s = TQString::tqfromLatin1(b,l);
+	s = TQString::fromLatin1(b,l);
 	DEBUGS(s);
         TQRegExp regexp( "([0-9]+)" );
         if ( s.startsWith( "bad data at cyl" ) || ( s.find( "Problem reading cylinder" ) != -1 ) )
@@ -557,7 +557,7 @@ DDZeroOut::DDZeroOut(TQObject *p) :
     FloppyAction(p)
 {
     kdDebug(KFAREA) << (__PRETTY_FUNCTION__) << endl;
-    theProcessName = TQString::tqfromLatin1("dd");
+    theProcessName = TQString::fromLatin1("dd");
     setName("DD");
 }
 
@@ -720,7 +720,7 @@ void FATFilesystem::processStdOut(KProcess *, char *b, int l)
 #ifdef ANY_BSD
     // ### TODO: do some checks
 #elif defined(ANY_LINUX)
-    TQString s ( TQString::tqfromLatin1( b, l ) );
+    TQString s ( TQString::fromLatin1( b, l ) );
     kdDebug(KFAREA) << s << endl;
     if (s.find("mounted file system")!=-1) // "/dev/fd0 contains a mounted file system
     {
@@ -886,7 +886,7 @@ void Ext2Filesystem::processStdOut(KProcess *, char *b, int l)
 #ifdef ANY_BSD
     // ### TODO: do some checks
 #elif defined(ANY_LINUX)
-    TQString s ( TQString::tqfromLatin1( b, l ) );
+    TQString s ( TQString::fromLatin1( b, l ) );
     kdDebug(KFAREA) << s << endl;
     if (s.find("mounted")!=-1) // "/dev/fd0 is mounted; will not make a filesystem here!"
     {
@@ -977,7 +977,7 @@ void MinixFilesystem::exec()
 
 void MinixFilesystem::processStdOut(KProcess *, char *b, int l)
 {
-    TQString s ( TQString::tqfromLatin1( b, l ) );
+    TQString s ( TQString::fromLatin1( b, l ) );
     kdDebug(KFAREA) << s << endl;
     if (s.find("mounted")!=-1) // "mkfs.minix: /dev/fd0 is mounted; will not make a filesystem here!"
     {

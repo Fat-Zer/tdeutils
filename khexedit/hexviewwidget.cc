@@ -739,7 +739,7 @@ void CHexViewWidget::setCursor( const SDisplayCursor &cursor,
                                 bool /*updateDisplay*/ )
 {
   mCursor = cursor;
-  mHexBuffer->settqCursorShapeModifier( cursor.alwaysBlockShape,
+  mHexBuffer->setCursorShapeModifier( cursor.alwaysBlockShape,
 				      cursor.thickInsertShape );
   setupCursorTimer();
   redrawFromOffset( mHexBuffer->cursorOffset(), false );
@@ -1103,7 +1103,7 @@ int CHexViewWidget::bookmarkMenu( const TQString &title )
     popup->insertItem( text, i );
   }
 
-  TQSize s(popup->tqsizeHint());
+  TQSize s(popup->sizeHint());
   TQPoint center( (width()-s.width())/2, (height()-s.height())/2 );
   int position = popup->exec( mapToGlobal(center) );
   delete popup;

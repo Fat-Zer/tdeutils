@@ -60,7 +60,7 @@ CharSelector::CharSelector( TQWidget* parent, const char* name )
   items << i18n("Normal Character")
         << i18n("Unicode Char in Hex.")
         << i18n("Unicode Char in Oct.")
-        << TQString::tqfromLatin1("----")
+        << TQString::fromLatin1("----")
         << i18n("The Bell Character (\\a)")
         << i18n("The Form Feed Character (\\f)")
         << i18n("The Line Feed Character (\\n)")
@@ -169,17 +169,17 @@ TQString CharSelector::text() const
   case 3: // The seperator
     break;
   case 4:
-    return TQString::tqfromLatin1("\\a");
+    return TQString::fromLatin1("\\a");
   case 5:
-    return TQString::tqfromLatin1("\\f");
+    return TQString::fromLatin1("\\f");
   case 6:
-    return TQString::tqfromLatin1("\\n");
+    return TQString::fromLatin1("\\n");
   case 7:
-    return TQString::tqfromLatin1("\\r");
+    return TQString::fromLatin1("\\r");
   case 8:
-    return TQString::tqfromLatin1("\\t");
+    return TQString::fromLatin1("\\t");
   case 9:
-    return TQString::tqfromLatin1("\\v");
+    return TQString::fromLatin1("\\v");
   }
   return TQString();
 }

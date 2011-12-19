@@ -236,9 +236,9 @@ void RegExpEditorWindow::updateContent( TQWidget* focusChild)
     emit contentChanged( p );
 }
 
-TQSize RegExpEditorWindow::tqsizeHint() const
+TQSize RegExpEditorWindow::sizeHint() const
 {
-    return _top->tqsizeHint();
+    return _top->sizeHint();
 }
 
 void RegExpEditorWindow::paintEvent( TQPaintEvent* event )
@@ -298,7 +298,7 @@ void RegExpEditorWindow::cutCopyAux( TQPoint pos )
 
 void RegExpEditorWindow::slotStartPasteAction()
 {
-    TQByteArray data = tqApp->tqclipboard()->data()->tqencodedData( "KRegExpEditor/widgetdrag" );
+    TQByteArray data = tqApp->tqclipboard()->data()->encodedData( "KRegExpEditor/widgetdrag" );
     TQTextStream stream( data, IO_ReadOnly );
     TQString str = stream.read();
 
@@ -431,7 +431,7 @@ void RegExpEditorWindow::updateCursorUnderPoint()
 {
     RegExpWidget* widget = _top->widgetUnderPoint( TQCursor::pos(), false );
     if ( widget )
-        widget->updatetqCursorShape();
+        widget->updateCursorShape();
 }
 
 void RegExpEditorWindow::emitVerifyRegExp()

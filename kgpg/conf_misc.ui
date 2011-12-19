@@ -53,7 +53,7 @@
                         <property name="name">
                             <cstring>kcfg_UseMouseSelection</cstring>
                         </property>
-                        <property name="tqminimumSize">
+                        <property name="minimumSize">
                             <size>
                                 <width>0</width>
                                 <height>0</height>
@@ -71,7 +71,7 @@
                         <property name="name">
                             <cstring>kcfg_RemoteFileWarn</cstring>
                         </property>
-                        <property name="tqminimumSize">
+                        <property name="minimumSize">
                             <size>
                                 <width>0</width>
                                 <height>0</height>
@@ -107,7 +107,7 @@
                                 <property name="sizeType">
                                     <enum>Expanding</enum>
                                 </property>
-                                <property name="tqsizeHint">
+                                <property name="sizeHint">
                                     <size>
                                         <width>91</width>
                                         <height>20</height>
@@ -159,7 +159,7 @@ the original file.</string>
                         <property name="sizeType">
                             <enum>Expanding</enum>
                         </property>
-                        <property name="tqsizeHint">
+                        <property name="sizeHint">
                             <size>
                                 <width>20</width>
                                 <height>71</height>
@@ -220,7 +220,7 @@ the original file.</string>
                         <property name="sizeType">
                             <enum>Expanding</enum>
                         </property>
-                        <property name="tqsizeHint">
+                        <property name="sizeHint">
                             <size>
                                 <width>21</width>
                                 <height>91</height>

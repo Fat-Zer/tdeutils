@@ -50,9 +50,9 @@ int main( int argc, char* argv[] )
   tqApp->installEventFilter( new ShootABug() );
 
   KRegExpEditorGUIDialog* iface = new KRegExpEditorGUIDialog( 0, "_editor", TQStringList() );
-  iface->setRegExp( TQString::tqfromLatin1( "#include" ) );
+  iface->setRegExp( TQString::fromLatin1( "#include" ) );
   iface->doSomething( "setMinimal", (void*) false );
-  iface->doSomething( "setSyntax", (void*) new TQString( TQString::tqfromLatin1( "Emacs" ) ) );
+  iface->doSomething( "setSyntax", (void*) new TQString( TQString::fromLatin1( "Emacs" ) ) );
   iface->doSomething( "setShowSyntaxCombo", (bool*) true );
 
   TQFile file("/packages/kde-src/tdeutils/kregexpeditor/test/main.cpp");

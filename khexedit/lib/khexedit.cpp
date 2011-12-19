@@ -548,17 +548,17 @@ void KHexEdit::toggleOffsetColumn( bool Visible )
 }
 
 
-TQSize KHexEdit::tqsizeHint() const
+TQSize KHexEdit::sizeHint() const
 {
   return TQSize( totalWidth(), totalHeight() );
 }
 
 
-TQSize KHexEdit::tqminimumSizeHint() const
+TQSize KHexEdit::minimumSizeHint() const
 {
   // TODO: better minimal width (visibility!)
   return TQSize( OffsetColumn->visibleWidth()+FirstBorderColumn->visibleWidth()+SecondBorderColumn->visibleWidth()+valueColumn().byteWidth()+charColumn().byteWidth(),
-                lineHeight() + noOfLines()>1? tqstyle().tqpixelMetric(TQStyle::PM_ScrollBarExtent):0 );
+                lineHeight() + noOfLines()>1? tqstyle().pixelMetric(TQStyle::PM_ScrollBarExtent):0 );
 }
 
 
@@ -598,7 +598,7 @@ int KHexEdit::fittingBytesPerLine( const TQSize &NewSize ) const
 
   // check influence of dis-/appearing of the vertical scrollbar
   bool VerticalScrollbarIsVisible = verticalScrollBar()->isVisible();
-  KPixelX ScrollbarExtent = tqstyle().tqpixelMetric( TQStyle::PM_ScrollBarExtent );//verticalScrollBar()->width();
+  KPixelX ScrollbarExtent = tqstyle().pixelMetric( TQStyle::PM_ScrollBarExtent );//verticalScrollBar()->width();
 
   KPixelX AvailableWidth = FullWidth;
   if( VerticalScrollbarIsVisible )
@@ -1192,11 +1192,11 @@ bool KHexEdit::eventFilter( TQObject *O, TQEvent *E )
 
 //   if( O == this && E->type() == TQEvent::PaletteChange )
 //   {
-//     TQColor old( viewport()->tqcolorGroup().color(TQColorGroup::Text) );
+//     TQColor old( viewport()->colorGroup().color(TQColorGroup::Text) );
 //
-//     if( old != tqcolorGroup().color(TQColorGroup::Text) )
+//     if( old != colorGroup().color(TQColorGroup::Text) )
 //     {
-//       TQColor c( tqcolorGroup().color(TQColorGroup::Text) );
+//       TQColor c( colorGroup().color(TQColorGroup::Text) );
 //       doc->setMinimumWidth( -1 );
 //       doc->setDefaultFormat( doc->formatCollection()->defaultFormat()->font(), c );
 //       lastFormatted = doc->firstParagraph();

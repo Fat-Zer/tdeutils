@@ -605,7 +605,7 @@ void CHexEditorWidget::newFile( void )
   if( errCode != Err_Success )
   {
     TQString msg = i18n("Unable to create new document.");
-    KMessageBox::sorry( tqtopLevelWidget(), msg, i18n("Operation Failed") );
+    KMessageBox::sorry( topLevelWidget(), msg, i18n("Operation Failed") );
     return;
   }
 
@@ -626,7 +626,7 @@ void CHexEditorWidget::newFile( const TQByteArray &data )
 
 void CHexEditorWidget::open()
 {
-  KURL file = KFileDialog::getOpenURL( mWorkDir, "*" ,tqtopLevelWidget() );
+  KURL file = KFileDialog::getOpenURL( mWorkDir, "*" ,topLevelWidget() );
 
   if( file.isEmpty() )
     return;
@@ -764,7 +764,7 @@ bool CHexEditorWidget::selectDocument( const TQString &url,
 
 void CHexEditorWidget::insertFile( void )
 {
-  KFileDialog fdlg(mWorkDir, TQString(), tqtopLevelWidget(), 0, TRUE);
+  KFileDialog fdlg(mWorkDir, TQString(), topLevelWidget(), 0, TRUE);
   fdlg.setOperationMode( KFileDialog::Opening );
   fdlg.okButton()->setGuiItem( KStdGuiItem::insert() );
   fdlg.setCaption(i18n("Insert File"));
@@ -868,7 +868,7 @@ bool CHexEditorWidget::querySave( void )
   TQString msg = i18n(""
     "The current document has been modified.\n"
     "Do you want to save it?" );
-  int reply = KMessageBox::warningYesNoCancel( tqtopLevelWidget(), msg, TQString(), KStdGuiItem::save(), KStdGuiItem::discard() );
+  int reply = KMessageBox::warningYesNoCancel( topLevelWidget(), msg, TQString(), KStdGuiItem::save(), KStdGuiItem::discard() );
   if( reply == KMessageBox::Yes )
   {
     return( save() );
@@ -934,7 +934,7 @@ bool CHexEditorWidget::save( void )
        "Current document has been changed on disk.\n"
        "If you save now, those changes will be lost.\n"
        "Proceed?" );
-      int reply = KMessageBox::warningYesNoCancel( tqtopLevelWidget(), msg,
+      int reply = KMessageBox::warningYesNoCancel( topLevelWidget(), msg,
 						   i18n("Save"), KStdGuiItem::save(), KStdGuiItem::discard() );
       if( reply == KMessageBox::No || reply == KMessageBox::Cancel )
       {
@@ -986,7 +986,7 @@ bool CHexEditorWidget::saveAs( void )
 	TQString msg = i18n(""
           "A document with this name already exists.\n"
           "Do you want to overwrite it?" );
-	int reply = KMessageBox::warningContinueCancel( tqtopLevelWidget(), msg,
+	int reply = KMessageBox::warningContinueCancel( topLevelWidget(), msg,
 					       i18n("Save As"), i18n("Overwrite") );
 	if( reply == KMessageBox::Continue )
 	  break;
@@ -1021,7 +1021,7 @@ void CHexEditorWidget::reload( void )
   if( mHexView->urlValid() == false )
   {
     TQString msg = i18n( "The current document does not exist on the disk." );
-    KMessageBox::sorry( tqtopLevelWidget(), msg, i18n("Reload") );
+    KMessageBox::sorry( topLevelWidget(), msg, i18n("Reload") );
     return;
   }
 
@@ -1040,7 +1040,7 @@ void CHexEditorWidget::reload( void )
                    "If you reload now, the modifications will be lost." );
     }
 
-    int reply = KMessageBox::warningContinueCancel(tqtopLevelWidget(),msg,i18n("Reload"), i18n("&Reload"));
+    int reply = KMessageBox::warningContinueCancel(topLevelWidget(),msg,i18n("Reload"), i18n("&Reload"));
     if( reply != KMessageBox::Continue )
     {
       return;
@@ -1070,7 +1070,7 @@ void CHexEditorWidget::print( void )
   prt.setFullPage( true ); // I use my own marings
 
   // FIXME: Make a better header for the printingdialog
-  if (prt.setup(tqtopLevelWidget(), i18n("Print Hex-Document")))
+  if (prt.setup(topLevelWidget(), i18n("Print Hex-Document")))
   {
      prt.setTopMarginMM( prt.option("kde-khexedit-topmarginmm").toInt() );
      prt.setBottomMarginMM( prt.option("kde-khexedit-bottommarginmm").toInt() );
@@ -1125,7 +1125,7 @@ void CHexEditorWidget::printPostscript( CHexPrinter &printer )
 
   if( errCode != Err_Success )
   {
-    KMessageBox::sorry( tqtopLevelWidget(), msg, i18n("Print") );
+    KMessageBox::sorry( topLevelWidget(), msg, i18n("Print") );
   }
 }
 
@@ -1148,7 +1148,7 @@ bool CHexEditorWidget::confirmPrintPageNumber( CHexPrinter &printer )
         "You are about to print %n pages.<br>"
 	"Proceed?</qt>",
 	numPageSelected );
-      int reply = KMessageBox::warningYesNo( tqtopLevelWidget(), msg,
+      int reply = KMessageBox::warningYesNo( topLevelWidget(), msg,
 					     i18n("Print"), KStdGuiItem::print(), KStdGuiItem::cancel() );
       if( reply != KMessageBox::Continue )
       {
@@ -1165,7 +1165,7 @@ void CHexEditorWidget::exportDialog( void )
 {
   if( mExportDialog == 0 )
   {
-    mExportDialog = new CExportDialog( tqtopLevelWidget(), 0, false );
+    mExportDialog = new CExportDialog( topLevelWidget(), 0, false );
     if( mExportDialog == 0 ) { return; }
     connect( mExportDialog, TQT_SIGNAL( exportText(const SExportText &)),
 	     this, TQT_SLOT( exportText( const SExportText &)) );
@@ -1191,7 +1191,7 @@ void CHexEditorWidget::exportText( const SExportText &ex )
   {
     TQString msg = i18n("Unable to export data.\n");
     msg += hexError( errCode );
-    KMessageBox::sorry( tqtopLevelWidget(), msg, i18n("Export") );
+    KMessageBox::sorry( topLevelWidget(), msg, i18n("Export") );
   }
 }
 
@@ -1208,7 +1208,7 @@ void CHexEditorWidget::exportHtml( const SExportHtml &ex )
   {
     TQString msg = i18n("Unable to export data.\n");
     msg += hexError( errCode );
-    KMessageBox::sorry( tqtopLevelWidget(), msg, i18n("Export") );
+    KMessageBox::sorry( topLevelWidget(), msg, i18n("Export") );
   }
 }
 
@@ -1225,7 +1225,7 @@ void CHexEditorWidget::exportCArray( const SExportCArray &ex )
   {
     TQString msg = i18n("Unable to export data.\n");
     msg += hexError( errCode );
-    KMessageBox::sorry( tqtopLevelWidget(), msg, i18n("Export") );
+    KMessageBox::sorry( topLevelWidget(), msg, i18n("Export") );
   }
 }
 
@@ -1238,7 +1238,7 @@ void CHexEditorWidget::encode( CConversion::EMode mode )
       "The encoding you have selected is not reversible.\n"
       "If you revert to the original encoding later, there is no "
       "guarantee that the data can be restored to the original state.");
-    int reply = KMessageBox::warningContinueCancel( tqtopLevelWidget(), msg,
+    int reply = KMessageBox::warningContinueCancel( topLevelWidget(), msg,
 					   i18n("Encode"), i18n("&Encode"));
     if( reply != KMessageBox::Continue )
     {
@@ -1258,7 +1258,7 @@ void CHexEditorWidget::encode( CConversion::EMode mode )
   {
     TQString msg = i18n("Could not encode data.\n");
     msg += hexError( errCode );
-    KMessageBox::sorry( tqtopLevelWidget(), msg, i18n("Encode") );
+    KMessageBox::sorry( topLevelWidget(), msg, i18n("Encode") );
   }
 }
 
@@ -1412,7 +1412,7 @@ void CHexEditorWidget::removeAllBookmark( void )
     TQString msg = i18n(""
       "Deleted bookmarks can not be restored.\n"
       "Proceed?" );
-    int reply = KMessageBox::warningContinueCancel( tqtopLevelWidget(), msg );
+    int reply = KMessageBox::warningContinueCancel( topLevelWidget(), msg );
     if( reply != KMessageBox::Continue )
     {
       return;
@@ -1447,7 +1447,7 @@ void CHexEditorWidget::gotoOffset( void )
 {
   if( mGotoDialog == 0 )
   {
-    mGotoDialog = new CGotoDialog( tqtopLevelWidget(), 0, false );
+    mGotoDialog = new CGotoDialog( topLevelWidget(), 0, false );
     if( mGotoDialog == 0 ) { return; }
     connect( mGotoDialog, TQT_SIGNAL(gotoOffset( uint, uint, bool, bool )),
 	     mHexView, TQT_SLOT(gotoOffset( uint, uint, bool, bool )) );
@@ -1465,7 +1465,7 @@ void CHexEditorWidget::find( void )
 
   if( mFindDialog == 0 )
   {
-    mFindDialog = new CFindDialog( tqtopLevelWidget(), 0, false );
+    mFindDialog = new CFindDialog( topLevelWidget(), 0, false );
     if( mFindDialog == 0 ) { return; }
     connect( mFindDialog,
 	     TQT_SIGNAL(findData(SSearchControl &, uint, bool)),
@@ -1526,7 +1526,7 @@ void CHexEditorWidget::findData( SSearchControl &sc, uint mode, bool navigator)
   if( mode == Find_First )
   {
     TQString msg = i18n( "Search key not found in document." );
-    KMessageBox::sorry( tqtopLevelWidget(), msg, i18n("Find") );
+    KMessageBox::sorry( topLevelWidget(), msg, i18n("Find") );
   }
 }
 
@@ -1580,7 +1580,7 @@ bool CHexEditorWidget::askWrap( bool fwd, const TQString &header )
       "Continue from the end?" );
   }
 
-  int reply = KMessageBox::questionYesNo( tqtopLevelWidget(), msg, header, KStdGuiItem::cont(), KStdGuiItem::cancel() );
+  int reply = KMessageBox::questionYesNo( topLevelWidget(), msg, header, KStdGuiItem::cont(), KStdGuiItem::cancel() );
   return( reply == KMessageBox::Yes ? true : false );
 }
 
@@ -1594,7 +1594,7 @@ bool CHexEditorWidget::canFind( bool showError )
       TQString msg = i18n(""
         "Your request can not be processed.\n"
         "No search pattern defined." );
-      KMessageBox::sorry( tqtopLevelWidget(), msg, i18n("Find") );
+      KMessageBox::sorry( topLevelWidget(), msg, i18n("Find") );
     }
     return( false );
   }
@@ -1613,7 +1613,7 @@ void CHexEditorWidget::findNavigator( SSearchControl &sc )
 
   if( mFindNavigatorDialog == 0 )
   {
-    mFindNavigatorDialog = new CFindNavigatorDialog(tqtopLevelWidget(),0,false);
+    mFindNavigatorDialog = new CFindNavigatorDialog(topLevelWidget(),0,false);
     if( mFindNavigatorDialog == 0 ) { return; }
     connect( mFindNavigatorDialog,
 	     TQT_SIGNAL(findData(SSearchControl &, uint, bool)),
@@ -1636,7 +1636,7 @@ void CHexEditorWidget::replace( void )
 
   if( mReplaceDialog == 0 )
   {
-    mReplaceDialog = new CReplaceDialog( tqtopLevelWidget(), 0, false );
+    mReplaceDialog = new CReplaceDialog( topLevelWidget(), 0, false );
     if( mReplaceDialog == 0 ) { return; }
     connect( mReplaceDialog,
 	     TQT_SIGNAL( replaceData( SSearchControl &, uint)),
@@ -1726,7 +1726,7 @@ void CHexEditorWidget::replacePrompt( SSearchControl &sc )
 {
   if( mReplacePromptDialog == 0 )
   {
-    mReplacePromptDialog = new CReplacePromptDialog(tqtopLevelWidget(), 0,false);
+    mReplacePromptDialog = new CReplacePromptDialog(topLevelWidget(), 0,false);
     if( mReplacePromptDialog == 0 ) { return; }
     connect( mReplacePromptDialog,
 	     TQT_SIGNAL( replaceData( SSearchControl &, uint)),
@@ -1765,14 +1765,14 @@ void CHexEditorWidget::replaceResult( SSearchControl &sc )
     {
       msg += i18n( "Search key not found in document." );
     }
-    KMessageBox::information( tqtopLevelWidget(), msg, i18n("Find & Replace"));
+    KMessageBox::information( topLevelWidget(), msg, i18n("Find & Replace"));
   }
   else
   {
     const TQString msg = i18n(
       "<qt>Operation complete.<br><br>One replacement was made.</qt>",
       "<qt>Operation complete.<br><br>%n replacements were made.</qt>", sc.numReplace );
-    KMessageBox::information( tqtopLevelWidget(), msg, i18n("Find & Replace"));
+    KMessageBox::information( topLevelWidget(), msg, i18n("Find & Replace"));
   }
 }
 
@@ -1781,7 +1781,7 @@ void CHexEditorWidget::insertPattern( void )
 {
   if( mInsertDialog == 0 )
   {
-    mInsertDialog = new CInsertDialog( tqtopLevelWidget(), 0, false );
+    mInsertDialog = new CInsertDialog( topLevelWidget(), 0, false );
     if( mInsertDialog == 0 ) { return; }
     connect( mInsertDialog, TQT_SIGNAL(execute( SInsertData & )),
 	     mHexView, TQT_SLOT(insert( SInsertData & )) );
@@ -1795,7 +1795,7 @@ void CHexEditorWidget::encoding( void )
   TQString msg = i18n(""
     "Not available yet!\n"
     "Define your own encoding" );
-  KMessageBox::sorry( tqtopLevelWidget(), msg, i18n("Encoding") );
+  KMessageBox::sorry( topLevelWidget(), msg, i18n("Encoding") );
 }
 
 
@@ -1803,7 +1803,7 @@ void CHexEditorWidget::strings( void )
 {
   if( mStringDialog == 0 )
   {
-    mStringDialog = new CStringDialog( tqtopLevelWidget(), 0, false );
+    mStringDialog = new CStringDialog( topLevelWidget(), 0, false );
     if( mStringDialog == 0 ) { return; }
     connect( mStringDialog, TQT_SIGNAL(markText( uint, uint, bool )),
 	     mHexView, TQT_SLOT(setMark( uint, uint, bool )) );
@@ -1830,7 +1830,7 @@ void CHexEditorWidget::collectStrings( void )
   {
     TQString msg = i18n("Could not collect strings.\n");
     msg += hexError( errCode );
-    KMessageBox::sorry( tqtopLevelWidget(), msg, i18n("Collect Strings") );
+    KMessageBox::sorry( topLevelWidget(), msg, i18n("Collect Strings") );
   }
 
 }
@@ -1842,14 +1842,14 @@ void CHexEditorWidget::recordView( void )
   TQString msg = i18n(""
    "Not available yet!\n"
    "Define a record (structure) and fill it with data from the document." );
-  KMessageBox::sorry( tqtopLevelWidget(), msg, i18n("Record Viewer") );
+  KMessageBox::sorry( topLevelWidget(), msg, i18n("Record Viewer") );
 }
 
 void CHexEditorWidget::filter( void )
 {
   if( mFilterDialog == 0 )
   {
-    mFilterDialog = new CFilterDialog( tqtopLevelWidget(), 0, false );
+    mFilterDialog = new CFilterDialog( topLevelWidget(), 0, false );
     if( mFilterDialog == 0 ) { return; }
     connect( mFilterDialog, TQT_SIGNAL(filterData( SFilterControl & )),
 	     mHexView, TQT_SLOT(filter( SFilterControl & )) );
@@ -1862,7 +1862,7 @@ void CHexEditorWidget::chart( void )
 {
   if( mCharTableDialog == 0 )
   {
-    mCharTableDialog = new CCharTableDialog( tqtopLevelWidget(), 0, false );
+    mCharTableDialog = new CCharTableDialog( topLevelWidget(), 0, false );
     if( mCharTableDialog == 0 ) { return; }
     connect( mCharTableDialog, TQT_SIGNAL(assign( const TQByteArray & )),
 	     mHexView, TQT_SLOT(insert( const TQByteArray & )) );
@@ -1887,7 +1887,7 @@ void CHexEditorWidget::statistics( void )
 {
   if( mFileInfoDialog == 0 )
   {
-    mFileInfoDialog = new CFileInfoDialog( tqtopLevelWidget(), 0, false );
+    mFileInfoDialog = new CFileInfoDialog( topLevelWidget(), 0, false );
     if( mFileInfoDialog == 0 ) { return; }
     connect( mFileInfoDialog, TQT_SIGNAL(collectStatistic(SStatisticControl &)),
 	     TQT_SLOT(collectStatistics(SStatisticControl &)));
@@ -1916,7 +1916,7 @@ void CHexEditorWidget::collectStatistics( SStatisticControl &sc )
 
     TQString msg = i18n("Could not collect document statistics.\n");
     msg += hexError( errCode );
-    KMessageBox::sorry( tqtopLevelWidget(), msg,
+    KMessageBox::sorry( topLevelWidget(), msg,
 			i18n("Collect Document Statistics") );
   }
 
@@ -1927,7 +1927,7 @@ void CHexEditorWidget::options( void )
 {
   if( mOptionDialog == 0 )
   {
-    mOptionDialog = new COptionDialog( tqtopLevelWidget(), 0, false );
+    mOptionDialog = new COptionDialog( topLevelWidget(), 0, false );
     if( mOptionDialog == 0 ) { return; }
 
     connect( mOptionDialog, TQT_SIGNAL(lineSizeChoice(const SDisplayLine &)),
@@ -1959,7 +1959,7 @@ void CHexEditorWidget::favorites( void )
   TQString msg = i18n(""
     "Not available yet!\n"
     "Save or retrive your favorite tqlayout" );
-  KMessageBox::sorry( tqtopLevelWidget(), msg, i18n("Profiles") );
+  KMessageBox::sorry( topLevelWidget(), msg, i18n("Profiles") );
 }
 
 
@@ -1979,7 +1979,7 @@ int CHexEditorWidget::readURL( const KURL &url, bool insert )
   if( !url.isValid() )
   {
     TQString msg = i18n("Malformed URL\n%1").tqarg( url.url() );
-    KMessageBox::sorry( tqtopLevelWidget(), msg, i18n("Read URL") );
+    KMessageBox::sorry( topLevelWidget(), msg, i18n("Read URL") );
     return( Err_IllegalArgument );
   }
 
@@ -2013,7 +2013,7 @@ void CHexEditorWidget::writeURL( TQString &url )
     {
       mHexView->setModified( modified );
       TQString msg = i18n("Could not save remote file.");
-      KMessageBox::sorry( tqtopLevelWidget(), msg, i18n("Write Failure") );
+      KMessageBox::sorry( topLevelWidget(), msg, i18n("Write Failure") );
     }
   }
 }
@@ -2050,21 +2050,21 @@ bool CHexEditorWidget::readFile( const TQString &diskPath, const TQString &url,
   if( info.exists() == false )
   {
     const TQString msg = i18n("The specified file does not exist.\n%1").tqarg( diskPath );
-    KMessageBox::sorry( tqtopLevelWidget(), msg, i18n("Read") );
+    KMessageBox::sorry( topLevelWidget(), msg, i18n("Read") );
     return( false );
   }
 
   if( info.isDir() == true )
   {
     const TQString msg = i18n("You have specified a folder.\n%1").tqarg( diskPath );
-    KMessageBox::sorry( tqtopLevelWidget(), msg, i18n("Read") );
+    KMessageBox::sorry( topLevelWidget(), msg, i18n("Read") );
     return( false );
   }
 
   if( info.isReadable() == false )
   {
     const TQString msg = i18n("You do not have read permission to this file.\n%1").tqarg( diskPath );
-    KMessageBox::sorry( tqtopLevelWidget(), msg, i18n("Read") );
+    KMessageBox::sorry( topLevelWidget(), msg, i18n("Read") );
     return( false );
   }
 
@@ -2072,7 +2072,7 @@ bool CHexEditorWidget::readFile( const TQString &diskPath, const TQString &url,
   if( file.open( IO_ReadOnly | IO_Raw ) == false )
   {
     const TQString msg = i18n("An error occurred while trying to open the file.\n%1").tqarg( diskPath );
-    KMessageBox::sorry( tqtopLevelWidget(), msg, i18n("Read") );
+    KMessageBox::sorry( topLevelWidget(), msg, i18n("Read") );
     return( false );
   }
 
@@ -2102,7 +2102,7 @@ bool CHexEditorWidget::readFile( const TQString &diskPath, const TQString &url,
     TQString header = insert == true ? i18n("Insert") : i18n("Read");
     TQString msg = i18n("Could not read file.\n");
     msg += hexError( errCode );
-    KMessageBox::sorry( tqtopLevelWidget(), msg, header );
+    KMessageBox::sorry( topLevelWidget(), msg, header );
   }
 
   file.close();
@@ -2120,14 +2120,14 @@ bool CHexEditorWidget::writeFile( const TQString &diskPath )
     if( info.isDir() == true )
     {
       TQString msg = i18n("You have specified a folder.");
-      KMessageBox::sorry( tqtopLevelWidget(), msg, i18n("Write Failure") );
+      KMessageBox::sorry( topLevelWidget(), msg, i18n("Write Failure") );
       return( false );
     }
 
     if( info.isWritable() == false )
     {
       TQString msg = i18n("You do not have write permission.");
-      KMessageBox::sorry( tqtopLevelWidget(), msg, i18n("Write Failure") );
+      KMessageBox::sorry( topLevelWidget(), msg, i18n("Write Failure") );
       return( false );
     }
   }
@@ -2136,7 +2136,7 @@ bool CHexEditorWidget::writeFile( const TQString &diskPath )
   if( file.open( IO_WriteOnly | IO_Raw | IO_Truncate ) == false )
   {
     TQString msg = i18n("An error occurred while trying to open the file.");
-    KMessageBox::sorry( tqtopLevelWidget(), msg, i18n("Write Failure") );
+    KMessageBox::sorry( topLevelWidget(), msg, i18n("Write Failure") );
     return( false );
   }
 
@@ -2149,7 +2149,7 @@ bool CHexEditorWidget::writeFile( const TQString &diskPath )
   {
     TQString msg = i18n("Could not write data to disk.\n");
     msg += hexError( errCode );
-    KMessageBox::sorry( tqtopLevelWidget(), msg, i18n("Write Failure") );
+    KMessageBox::sorry( topLevelWidget(), msg, i18n("Write Failure") );
   }
 
   file.close();
@@ -2231,7 +2231,7 @@ bool CHexEditorWidget::createBuffer( void )
   {
     TQString msg = i18n( "Can not create text buffer.\n" );
     msg += hexError( Err_NoMemory );
-    KMessageBox::error( tqtopLevelWidget(), msg, i18n("Loading Failed" ) );
+    KMessageBox::error( topLevelWidget(), msg, i18n("Loading Failed" ) );
     return( false );
   }
 
@@ -2418,7 +2418,7 @@ int CHexEditorWidget::progressParse( const SProgressData &pd )
 
   }
 
-  int reply = KMessageBox::warningYesNo( tqtopLevelWidget(), msg, header, KStdGuiItem::cancel(), KStdGuiItem::cont() );
+  int reply = KMessageBox::warningYesNo( topLevelWidget(), msg, header, KStdGuiItem::cancel(), KStdGuiItem::cont() );
   mProgressStop = false;
   return( reply == KMessageBox::Yes ? Err_Stop : Err_Success );
 }
@@ -2431,7 +2431,7 @@ bool CHexEditorWidget::busy( bool showWarning )
   {
     TQString msg = i18n("Could not finish operation.\n");
     msg += hexError( Err_Busy );
-    KMessageBox::sorry( tqtopLevelWidget(), msg );
+    KMessageBox::sorry( topLevelWidget(), msg );
   }
 
   return( mProgressBusy );

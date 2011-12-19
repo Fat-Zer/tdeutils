@@ -131,7 +131,7 @@ void Input::setFontColor(TQColor fontColor)
 
 TQColor Input::getFontColor() const
 {
-  const TQColorGroup &color = edit->tqcolorGroup();
+  const TQColorGroup &color = edit->colorGroup();
   return color.text();
 }
 
@@ -144,7 +144,7 @@ void Input::setSelectionColor(TQColor selectionColor)
 
 TQColor Input::getSelectionColor() const
 {
-  const TQColorGroup &color = edit->tqcolorGroup();
+  const TQColorGroup &color = edit->colorGroup();
   return color.highlight();
 }
 
@@ -157,7 +157,7 @@ void Input::setSelectedTextColor(TQColor selectedTextColor)
 
 TQColor Input::getSelectedTextColor() const
 {
-  const TQColorGroup &color = edit->tqcolorGroup();
+  const TQColorGroup &color = edit->colorGroup();
   return color.highlightedText();
 }
 

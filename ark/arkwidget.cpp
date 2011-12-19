@@ -354,7 +354,7 @@ ArkWidget::convertSlotCreateDone( bool success )
         // addFile( const TQString & baseDir,                 //
         //          const TQStringList & filesToAdd )         //
         //////////////////////////////////////////////////////
-        *it = TQString::tqfromLatin1( "file:" )+ m_convert_tmpDir->name() + *it;
+        *it = TQString::fromLatin1( "file:" )+ m_convert_tmpDir->name() + *it;
     }
     bool bOldRecVal = ArkSettings::rarRecurseSubdirs();
     connect( arch, TQT_SIGNAL( sigAdd( bool ) ), this, TQT_SLOT( convertSlotAddDone( bool ) ) );

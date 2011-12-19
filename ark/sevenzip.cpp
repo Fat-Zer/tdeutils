@@ -285,7 +285,7 @@ bool SevenZipArch::processLine( const TQCString& _line )
                    TQString( "%1" )
                    .tqarg( ArkUtils::getMonth( columns[ m_repairMonth ].ascii() ) )
                    : columns[ m_fixMonth ];
-    TQString timestamp = TQString::tqfromLatin1( "%1-%2-%3 %4" )
+    TQString timestamp = TQString::fromLatin1( "%1-%2-%3 %4" )
                         .tqarg( year )
                         .tqarg( month )
                         .tqarg( columns[ m_fixDay ] )

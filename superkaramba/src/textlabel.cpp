@@ -131,7 +131,7 @@ int TextLabel::getFontSize() const
     return font.pixelSize();
 }
 
-void TextLabel::tqsetAlignment( TQString align )
+void TextLabel::setAlignment( TQString align )
 {
     TQString a = align.upper();
     if( a == "LEFT" || a.isEmpty() )

@@ -64,30 +64,30 @@ CHexToolWidget::CHexToolWidget( TQWidget *parent, const char *name )
   for( int i=0; i<4; i++ )
   {
     TQLabel *Label = new TQLabel( msg1[i], this );
-    Label->tqsetAlignment( AlignRight|AlignVCenter );
+    Label->setAlignment( AlignRight|AlignVCenter );
     ValuesBox->addWidget( Label, i, 0 );
 
     mText1[i] = new TQLineEdit( this );
     mText1[i]->setReadOnly( true );
-    mText1[i]->tqsetAlignment( AlignRight );
+    mText1[i]->setAlignment( AlignRight );
     ValuesBox->addWidget( mText1[i], i, 1 );
 
     Label = new TQLabel( msg2[i], this );
-    Label->tqsetAlignment( AlignRight|AlignVCenter );
+    Label->setAlignment( AlignRight|AlignVCenter );
     ValuesBox->addWidget( Label, i, 3 );
 
     mText2[i] = new TQLineEdit( this );
     mText2[i]->setReadOnly( true );
-    mText2[i]->tqsetAlignment( AlignRight );
+    mText2[i]->setAlignment( AlignRight );
     ValuesBox->addWidget( mText2[i], i, 4 );
 
     Label = new TQLabel( msg3[i], this );
-    Label->tqsetAlignment( AlignRight|AlignVCenter );
+    Label->setAlignment( AlignRight|AlignVCenter );
     mUtilBox->addWidget( Label, i, 1 );
 
     mText3[i] = new TQLineEdit( this );
     mText3[i]->setReadOnly( true );
-    mText3[i]->tqsetAlignment( AlignRight );
+    mText3[i]->setAlignment( AlignRight );
     mUtilBox->addWidget( mText3[i], i, 2 );
   }
 
@@ -95,7 +95,7 @@ CHexToolWidget::CHexToolWidget( TQWidget *parent, const char *name )
 
   text = i18n("Show little endian decoding");
   mCheckIntelFormat = new TQCheckBox( text, this );
-  mCheckIntelFormat->setMinimumSize( mCheckIntelFormat->tqsizeHint() );
+  mCheckIntelFormat->setMinimumSize( mCheckIntelFormat->sizeHint() );
   connect( mCheckIntelFormat, TQT_SIGNAL(clicked()), this, TQT_SLOT(intelFormat()) );
   SettingsBox->addWidget( mCheckIntelFormat, 0, AlignVCenter );
   mCheckIntelFormat->setChecked( // default value to please endian system users
@@ -109,7 +109,7 @@ CHexToolWidget::CHexToolWidget( TQWidget *parent, const char *name )
 
   text = i18n("Show unsigned as hexadecimal");
   mCheckHexadecimal = new TQCheckBox( text, this );
-  mCheckHexadecimal->setMinimumSize( mCheckHexadecimal->tqsizeHint() );
+  mCheckHexadecimal->setMinimumSize( mCheckHexadecimal->sizeHint() );
   connect( mCheckHexadecimal, TQT_SIGNAL(clicked()), this, TQT_SLOT(unsignedFormat()) );
   SettingsBox->addWidget( mCheckHexadecimal, 0, AlignVCenter );
 
@@ -120,7 +120,7 @@ CHexToolWidget::CHexToolWidget( TQWidget *parent, const char *name )
   // Variable bitwidth. Based on Craig Graham's work.
   //
   TQLabel *bitLabel = new TQLabel( i18n("Stream length:"), this );
-  bitLabel->tqsetAlignment( AlignRight|AlignVCenter );
+  bitLabel->setAlignment( AlignRight|AlignVCenter );
   mUtilBox->addWidget( bitLabel, 4, 1 );
 
   mBitCombo = new TQComboBox( false, this );
@@ -132,7 +132,7 @@ CHexToolWidget::CHexToolWidget( TQWidget *parent, const char *name )
     text += i==0 ? i18n("Bit Window") : i18n("Bits Window");
     mBitCombo->insertItem( text );
   }
-  mBitCombo->setMinimumSize( mBitCombo->tqsizeHint() );
+  mBitCombo->setMinimumSize( mBitCombo->sizeHint() );
   connect( mBitCombo, TQT_SIGNAL(activated(int)), TQT_SLOT(bitWidthChanged(int)));
   mUtilBox->addWidget( mBitCombo, 4, 2 );
 
@@ -147,7 +147,7 @@ CHexToolWidget::CHexToolWidget( TQWidget *parent, const char *name )
   mCursorState.valid = false;
   mViewHexCaps = true;
 
-  setMinimumSize( tqsizeHint() );
+  setMinimumSize( sizeHint() );
   show();
 }
 

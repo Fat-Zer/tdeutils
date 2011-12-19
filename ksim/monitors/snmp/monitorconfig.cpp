@@ -117,8 +117,8 @@ TQString KSim::Snmp::monitorDisplayTypeToString( MonitorConfig::DisplayType type
 {
     switch ( type )
     {
-        case MonitorConfig::Label: return TQString::tqfromLatin1( "Label" );
-        case MonitorConfig::Chart: return TQString::tqfromLatin1( "Chart" );
+        case MonitorConfig::Label: return TQString::fromLatin1( "Label" );
+        case MonitorConfig::Chart: return TQString::fromLatin1( "Chart" );
         default: assert( false );
     };
     return TQString();

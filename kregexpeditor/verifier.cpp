@@ -97,7 +97,7 @@ void Verifier::setMinimal( bool b )
 //
 // void Verifier::gotoNum( int which )
 // {
-//     TQString anchor = TQString::tqfromLatin1("match%1").tqarg(which);
+//     TQString anchor = TQString::fromLatin1("match%1").tqarg(which);
 //     scrollToAnchor( anchor );
 //     _current = which;
 //     emit currentChanged( _current );

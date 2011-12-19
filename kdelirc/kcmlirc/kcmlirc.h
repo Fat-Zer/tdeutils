@@ -46,8 +46,8 @@ private:
 
 public slots:
 	void updateActions();
-	void updateModestqStatus(TQListViewItem *);
-	void updateActionstqStatus(TQListViewItem *);
+	void updateModesStatus(TQListViewItem *);
+	void updateActionsStatus(TQListViewItem *);
 	void updateModes();
 	void updateExtensions();
 	void updateInformation();

@@ -250,8 +250,8 @@ void KgpgApp::slotFilePreDec()
 	page->newFilename->setCaption(i18n("Save File"));
 
 	page->checkClipboard->setText(i18n("Editor"));
-	page->resize(page->tqminimumSize());
-	popn->resize(popn->tqminimumSize());
+	page->resize(page->minimumSize());
+	popn->resize(popn->minimumSize());
         if (popn->exec()==TQDialog::Accepted) {
                 if (page->checkFile->isChecked())
                         newname=page->newFilename->url();

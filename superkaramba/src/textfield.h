@@ -31,8 +31,8 @@ public:
     void setColor(TQColor clr);
     void setBGColor(TQColor clr);
     void setFont( const TQString& );
-    void tqsetAlignment( int );
-    void tqsetAlignment( const TQString& );
+    void setAlignment( int );
+    void setAlignment( const TQString& );
     void setFixedPitch( bool );
     void setShadow( int );
 

@@ -47,7 +47,7 @@ int main( int argc, char* argv[] )
     TQVBoxLayout* lay = new TQVBoxLayout( top, 6 );
 
     KRegExpEditorGUI* iface = new KRegExpEditorGUI( top, "_editor", TQStringList() );
-    iface->doSomething( TQString::tqfromLatin1("setAllowNonTQtSyntax"), (bool*) true );
+    iface->doSomething( TQString::fromLatin1("setAllowNonTQtSyntax"), (bool*) true );
     lay->addWidget( iface );
 
     TQHBoxLayout* lay2 = new TQHBoxLayout( lay, 6 );

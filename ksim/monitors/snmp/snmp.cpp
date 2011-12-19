@@ -57,7 +57,7 @@ static TQStringList allStrings( const EnumStringMapInfo *array )
 {
     TQStringList result;
     for ( uint i = 0; array[ i ].stringValue; ++i )
-        result << TQString::tqfromLatin1( array[ i ].stringValue );
+        result << TQString::fromLatin1( array[ i ].stringValue );
     return result;
 }
 
@@ -65,7 +65,7 @@ static TQString enumToString( const EnumStringMapInfo *array, int value )
 {
     for ( uint i = 0; array[ i ].stringValue; ++i )
         if ( array[ i ].enumValue == value )
-            return TQString::tqfromLatin1( array[ i ].stringValue );
+            return TQString::fromLatin1( array[ i ].stringValue );
 
     assert( false );
     return TQString();
@@ -76,7 +76,7 @@ static int stringToEnum( const EnumStringMapInfo *array, TQString string, bool *
     string = string.lower();
     uint i;
     for ( i = 0; array[ i ].stringValue; ++i )
-        if ( TQString::tqfromLatin1( array[ i ].stringValue ).lower() == string ) {
+        if ( TQString::fromLatin1( array[ i ].stringValue ).lower() == string ) {
             if ( ok ) *ok = true;
             return array[ i ].enumValue;
         }
@@ -291,9 +291,9 @@ int KSim::Snmp::sessionErrorCode( netsnmp_session &session )
 static TQString messageForErrorCode( int errorCode )
 {
     if ( errorCode >= SNMPERR_MAX && errorCode <= SNMPERR_GENERR )
-        return TQString::tqfromLatin1( SnmpLib::self()->snmp_api_errstring( errorCode ) );
+        return TQString::fromLatin1( SnmpLib::self()->snmp_api_errstring( errorCode ) );
     if ( errorCode >= SNMP_ERR_NOERROR && errorCode <= MAX_SNMP_ERR )
-        return TQString::tqfromLatin1( SnmpLib::self()->snmp_errstring( errorCode ) );
+        return TQString::fromLatin1( SnmpLib::self()->snmp_errstring( errorCode ) );
 
     return TQString();
 }

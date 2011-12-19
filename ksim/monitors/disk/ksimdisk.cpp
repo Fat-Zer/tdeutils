@@ -414,19 +414,19 @@ TQString DiskView::diskName( int major, int minor ) const
   switch ( major )
   {
     case IDE0_MAJOR:
-      returnValue.prepend(TQString::tqfromLatin1("hda"));
+      returnValue.prepend(TQString::fromLatin1("hda"));
       break;
     case IDE1_MAJOR:
-      returnValue.prepend(TQString::tqfromLatin1("hdc"));
+      returnValue.prepend(TQString::fromLatin1("hdc"));
       break;
     case IDE3_MAJOR:
-      returnValue.prepend(TQString::tqfromLatin1("hde"));
+      returnValue.prepend(TQString::fromLatin1("hde"));
       break;
     case SCSI_DISK0_MAJOR:
-      returnValue.prepend(TQString::tqfromLatin1("sda"));
+      returnValue.prepend(TQString::fromLatin1("sda"));
       break;
     case SCSI_GENERIC_MAJOR:
-      returnValue.prepend(TQString::tqfromLatin1("sg0"));
+      returnValue.prepend(TQString::fromLatin1("sg0"));
       break;
   }
 

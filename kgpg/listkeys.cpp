@@ -923,7 +923,7 @@ void listKeys::slotAddUid()
         addUidWidget->enableButtonOK(false);
         AddUid *keyUid=new AddUid();
         addUidWidget->setMainWidget(keyUid);
-        //keyUid->setMinimumSize(keyUid->tqsizeHint());
+        //keyUid->setMinimumSize(keyUid->sizeHint());
         keyUid->setMinimumWidth(300);
         connect(keyUid->kLineEdit1,TQT_SIGNAL(textChanged ( const TQString & )),TQT_TQOBJECT(this),TQT_SLOT(slotAddUidEnable(const TQString & )));
         if (addUidWidget->exec()!=TQDialog::Accepted)
@@ -1415,7 +1415,7 @@ void listKeys::revokeWidget()
         keyRevoke->kURLRequester1->setURL(TQDir::homeDirPath()+"/"+keysList2->currentItem()->text(1).section('@',0,0)+".revoke");
         keyRevoke->kURLRequester1->setMode(KFile::File);
 
-        keyRevoke->setMinimumSize(keyRevoke->tqsizeHint());
+        keyRevoke->setMinimumSize(keyRevoke->sizeHint());
         keyRevoke->show();
         keyRevokeWidget->setMainWidget(keyRevoke);
 
@@ -1817,7 +1817,7 @@ void listKeys::editGroup()
 	gEdit->groupKeys->setColumnWidthMode(1,TQListView::Manual);
 	gEdit->groupKeys->setColumnWidthMode(2,TQListView::Manual);
 
-        gEdit->setMinimumSize(gEdit->tqsizeHint());
+        gEdit->setMinimumSize(gEdit->sizeHint());
         gEdit->show();
         if (dialogGroupEdit->exec()==TQDialog::Accepted)
                 groupChange();
@@ -2157,7 +2157,7 @@ void listKeys::slotgenkey()
 
                         TQLabel *tex=new TQLabel(wid);
                         TQLabel *tex2=new TQLabel(wid);
-                        tex->tqsetAlignment(AlignHCenter);
+                        tex->setAlignment(AlignHCenter);
                         tex->setMovie(anim);
                         tex2->setText(i18n("\nPlease wait..."));
                         vbox->addWidget(passiveBox);
@@ -2294,7 +2294,7 @@ void listKeys::newKeyDone(KProcess *)
         page->LEfinger->setText(newkeyFinger);
         page->CBdefault->setChecked(true);
         page->show();
-        //page->resize(page->tqmaximumSize());
+        //page->resize(page->maximumSize());
         keyCreated->setMainWidget(page);
         delete pop;
         keyCreated->exec();
@@ -2473,8 +2473,8 @@ void listKeys::slotPreImportKey()
         dial->setMainWidget(page);
         page->newFilename->setCaption(i18n("Open File"));
         page->newFilename->setMode(KFile::File);
-        page->resize(page->tqminimumSize());
-        dial->resize(dial->tqminimumSize());
+        page->resize(page->minimumSize());
+        dial->resize(dial->minimumSize());
 
         if (dial->exec()==TQDialog::Accepted) {
                 if (page->checkFile->isChecked()) {

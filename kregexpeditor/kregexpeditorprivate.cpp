@@ -158,7 +158,7 @@ KRegExpEditorPrivate::KRegExpEditorPrivate(TQWidget *parent, const char *name)
   TQLabel* label = new TQLabel( i18n("ASCII syntax:"), this );
   tqlayout->addWidget( label );
   clearButton = new TQToolButton( this );
-  const TQString icon( TQString::tqfromLatin1( TQApplication::reverseLayout() ? "clear_left" : "locationbar_erase" ) );
+  const TQString icon( TQString::fromLatin1( TQApplication::reverseLayout() ? "clear_left" : "locationbar_erase" ) );
   TQIconSet clearIcon = SmallIconSet( icon );
   clearButton->setIconSet( clearIcon );
   tqlayout->addWidget( clearButton );
@@ -174,7 +174,7 @@ KRegExpEditorPrivate::KRegExpEditorPrivate(TQWidget *parent, const char *name)
 #ifdef TQT_ONLY
   TQPixmap pix( "icons/error.png" );
 #else
-  TQPixmap pix = KGlobal::iconLoader()->loadIcon(locate("data", TQString::tqfromLatin1("kregexpeditor/pics/error.png") ), KIcon::Toolbar );
+  TQPixmap pix = KGlobal::iconLoader()->loadIcon(locate("data", TQString::fromLatin1("kregexpeditor/pics/error.png") ), KIcon::Toolbar );
 #endif
   _error = new TQLabel( this );
   _error->setPixmap( pix );
@@ -196,7 +196,7 @@ KRegExpEditorPrivate::KRegExpEditorPrivate(TQWidget *parent, const char *name)
   accel->connectItem( accel->insertItem( CTRL+Key_Z ), this, TQT_SLOT( slotUndo() ) );
   accel->connectItem( accel->insertItem( CTRL+Key_R ), this, TQT_SLOT( slotRedo() ) );
 
-  setSyntax( TQString::tqfromLatin1( "TQt" ) );
+  setSyntax( TQString::fromLatin1( "TQt" ) );
 }
 
 TQString KRegExpEditorPrivate::regexp()

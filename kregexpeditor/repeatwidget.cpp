@@ -85,13 +85,13 @@ void RepeatWidget::init()
 }
 
 
-TQSize RepeatWidget::tqsizeHint() const
+TQSize RepeatWidget::sizeHint() const
 {
-  // TODO: Merge with LookAheadWidget::tqsizeHint
+  // TODO: Merge with LookAheadWidget::sizeHint
   TQFontMetrics metrics = fontMetrics();
   _textSize = metrics.size( 0, _content->text() );
 
-  _childSize = _child->tqsizeHint();
+  _childSize = _child->sizeHint();
 
   int height = _textSize.height() + bdSize + _childSize.height() + bdSize + 2*pw;
   int width  = 2 * pw + TQMAX(_childSize.width(), 4*bdSize + _textSize.width());
@@ -101,7 +101,7 @@ TQSize RepeatWidget::tqsizeHint() const
 void RepeatWidget::paintEvent( TQPaintEvent *e )
 {
   // TODO: Merge with LookAheadWidget::paintEvent
-  TQSize mySize = tqsizeHint();
+  TQSize mySize = sizeHint();
   TQPainter painter(this);
 
   drawPossibleSelection( painter, mySize );
@@ -157,8 +157,8 @@ void RepeatWidget::slotConfigCanceled()
 
 int RepeatWidget::edit()
 {
-  _configWindow->move(TQCursor::pos() - TQPoint(_configWindow->tqsizeHint().width()/2,
-                                              _configWindow->tqsizeHint().height()/2)  );
+  _configWindow->move(TQCursor::pos() - TQPoint(_configWindow->sizeHint().width()/2,
+                                              _configWindow->sizeHint().height()/2)  );
   TQDataStream stream( _backup, IO_WriteOnly );
   KWidgetStreamer streamer;
   streamer.toStream( TQT_TQOBJECT(_content), stream );

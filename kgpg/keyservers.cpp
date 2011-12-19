@@ -88,7 +88,7 @@ keyServer::keyServer(TQWidget *parent, const char *name,bool modal,bool autoClos
         encid->start(KProcess::NotifyOnExit,true);
         page->Buttonimport->setEnabled( !page->kLEimportid->text().isEmpty());
         page->Buttonsearch->setEnabled( !page->kLEimportid->text().isEmpty());
-setMinimumSize(tqsizeHint());
+setMinimumSize(sizeHint());
 }
 
 
@@ -201,7 +201,7 @@ void keyServer::slotSearch()
         searchproc->start(KProcess::NotifyOnExit,true);
 	TQApplication::setOverrideCursor(TQCursor(TQt::BusyCursor));
 	dialogServer->setMainWidget(listpop);
-	listpop->setMinimumSize(listpop->tqsizeHint());
+	listpop->setMinimumSize(listpop->sizeHint());
 	listpop->setMinimumWidth(550);
         dialogServer->exec();
 }

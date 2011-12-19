@@ -102,7 +102,7 @@ laptop_daemon::laptop_daemon(const TQCString& obj): KDEDModule(obj)
 	sony_disp = 0;
         connect(this, TQT_SIGNAL(signal_checkBattery()), TQT_SLOT(checkBatteryNow()));
 
-	//hasAudio = (audioServer.servertqStatus() == 0) ? true : false;
+	//hasAudio = (audioServer.serverStatus() == 0) ? true : false;
 
         // FIXME: make these configurable.  Some system definitely don't
         //        use /var/run/stab

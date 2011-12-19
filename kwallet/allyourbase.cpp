@@ -263,7 +263,7 @@ void KWalletItem::dropped(TQDropEvent *e, const TQValueList<TQIconDragItem>& lst
 		TQDataStream *ds = 0L;
 
 		if (e->provides("application/x-kwallet-folder")) {
-			TQByteArray edata = e->tqencodedData("application/x-kwallet-folder");
+			TQByteArray edata = e->encodedData("application/x-kwallet-folder");
 			if (!edata.isEmpty()) {
 				ds = new TQDataStream(edata, IO_ReadOnly);
 			}
@@ -407,7 +407,7 @@ void KWalletEntryList::itemDropped(TQDropEvent *e, TQListViewItem *item) {
 			return;
 		}
 		isEntry = true;
-		TQByteArray data = e->tqencodedData("application/x-kwallet-entry");
+		TQByteArray data = e->encodedData("application/x-kwallet-entry");
 		if (data.isEmpty()) {
 			e->ignore();
 			return;
@@ -420,7 +420,7 @@ void KWalletEntryList::itemDropped(TQDropEvent *e, TQListViewItem *item) {
 			return;
 		}
 		isEntry = false;
-		TQByteArray data = e->tqencodedData("application/x-kwallet-folder");
+		TQByteArray data = e->encodedData("application/x-kwallet-folder");
 		if (data.isEmpty()) {
 			e->ignore();
 			return;
@@ -589,11 +589,11 @@ class KWalletIconDrag : public TQIconDrag {
 			return 0L;
 		}
 
-		TQByteArray tqencodedData(const char *mime) const {
+		TQByteArray encodedData(const char *mime) const {
 			TQByteArray a;
 			TQCString mimetype(mime);
 			if (mimetype == "application/x-qiconlist") {
-				return TQIconDrag::tqencodedData(mime);
+				return TQIconDrag::encodedData(mime);
 			} else if (mimetype == "text/uri-list") {
 				TQCString s = _urls.join("\r\n").latin1();
 				if (_urls.count() > 0) {
@@ -638,7 +638,7 @@ void KWalletIconView::slotDropped(TQDropEvent *e, const TQValueList<TQIconDragIt
 		return;
 	}
 
-	TQByteArray edata = e->tqencodedData("text/uri-list");
+	TQByteArray edata = e->encodedData("text/uri-list");
 	TQCString urls = edata.data();
 
 	TQStringList ul = TQStringList::split("\r\n", urls);

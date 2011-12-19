@@ -32,7 +32,7 @@ extern "C" {
 #include <X11/extensions/dpms.h>
 
 #ifndef HAVE_DPMSINFO_PROTO
-tqStatus DPMSInfo ( Display *, CARD16 *, BOOL * );
+Status DPMSInfo ( Display *, CARD16 *, BOOL * );
 #endif
 }
 #endif

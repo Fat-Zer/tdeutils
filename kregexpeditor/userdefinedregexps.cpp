@@ -68,7 +68,7 @@ void UserDefinedRegExps::slotPopulateUserRegexps()
 
 #ifdef TQT_ONLY
   TQStringList dirs;
-  dirs << TQString::tqfromLatin1( "predefined" );
+  dirs << TQString::fromLatin1( "predefined" );
 #else
   TQStringList dirs = KGlobal::dirs()->findDirs( "data", TQString::fromLocal8Bit("kregexpeditor/predefined/") );
 #endif
@@ -88,7 +88,7 @@ void UserDefinedRegExps::slotPopulateUserRegexps()
 void UserDefinedRegExps::createItems( const TQString& _title, const TQString& dir, bool usersRegExp )
 {
   TQString title = _title;
-  if (_title == TQString::tqfromLatin1("general"))
+  if (_title == TQString::fromLatin1("general"))
 	  title = i18n("General");
 
   TQListViewItem* lvItem = new TQListViewItem( _userDefined, title );
@@ -256,7 +256,7 @@ void WidgetWinItem::setName( const TQString& nm )
 TQString WidgetWinItem::path()
 {
 #ifdef TQT_ONLY
-    return TQString::tqfromLatin1( "predefined" );
+    return TQString::fromLatin1( "predefined" );
 #else
   return locateLocal("data", TQString::fromLocal8Bit("KRegExpEditor/"));
 #endif

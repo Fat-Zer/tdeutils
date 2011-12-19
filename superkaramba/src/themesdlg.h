@@ -74,7 +74,7 @@ class ThemesDlg : public ThemesLayout
 #ifdef HAVE_KNEWSTUFF
   private:
     SKNewStuff *mNewStuff;
-    TQStringList m_newStufftqStatus;
+    TQStringList m_newStuffStatus;
 #endif
 };
 

@@ -76,7 +76,7 @@ bool ArkViewer::view( const KURL& filename )
 
 	TQLabel *iconLabel = new TQLabel( header );
 	iconLabel->setPixmap( mimetype->pixmap( KIcon::Desktop ) );
-	iconLabel->tqsetSizePolicy( TQSizePolicy::Fixed, TQSizePolicy::Minimum );
+	iconLabel->setSizePolicy( TQSizePolicy::Fixed, TQSizePolicy::Minimum );
 
 	TQVBox *headerRight = new TQVBox( header );
 	new TQLabel( TQString( "<qt><b>%1</b></qt>" )
@@ -84,7 +84,7 @@ bool ArkViewer::view( const KURL& filename )
 	          );
 	new TQLabel( mimetype->comment(), headerRight );
 
-	header->tqsetSizePolicy( TQSizePolicy::Expanding, TQSizePolicy::Maximum );
+	header->setSizePolicy( TQSizePolicy::Expanding, TQSizePolicy::Maximum );
 
 	m_part = KParts::ComponentFactory::createPartInstanceFromQuery<KParts::ReadOnlyPart>( mimetype->name(), TQString(), m_widget, 0, TQT_TQOBJECT(this) );
 

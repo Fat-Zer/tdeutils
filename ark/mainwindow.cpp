@@ -177,7 +177,7 @@ MainWindow::file_reload()
 void
 MainWindow::editToolbars()
 {
-    saveMainWindowSettings( KGlobal::config(), TQString::tqfromLatin1("MainWindow") );
+    saveMainWindowSettings( KGlobal::config(), TQString::fromLatin1("MainWindow") );
     KEditToolbar dlg( factory(), this );
     connect(&dlg, TQT_SIGNAL( newToolbarConfig() ), this, TQT_SLOT( slotNewToolbarConfig() ));
     dlg.exec();
@@ -187,7 +187,7 @@ void
 MainWindow::slotNewToolbarConfig()
 {
     createGUI( m_part );
-    applyMainWindowSettings( KGlobal::config(), TQString::tqfromLatin1("MainWindow") );
+    applyMainWindowSettings( KGlobal::config(), TQString::fromLatin1("MainWindow") );
 }
 
 void

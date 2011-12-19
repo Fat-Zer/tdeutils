@@ -34,7 +34,7 @@ public:
   AltnWidget( AltnRegExp* regexp, RegExpEditorWindow* editorWindow,
               TQWidget* parent, const char* name = 0);
   virtual void addNewChild(DragAccepter *accepter, RegExpWidget *child);
-  virtual TQSize tqsizeHint() const;
+  virtual TQSize sizeHint() const;
 	virtual RegExp* regExp() const;
   virtual void applyRegExpToSelection( RegExpType type );
   virtual RegExpType type() const { return ALTN; }

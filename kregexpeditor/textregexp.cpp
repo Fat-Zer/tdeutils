@@ -62,7 +62,7 @@ bool TextRegExp::load( TQDomElement top, const TQString& /*version*/)
         _text = txtNode.data();
     }
     else {
-        _text = TQString::tqfromLatin1( "" );
+        _text = TQString::fromLatin1( "" );
     }
 
     return true;

@@ -42,7 +42,7 @@
             <property name="name">
                 <cstring>kcfg_AsciiArmor</cstring>
             </property>
-            <property name="tqminimumSize">
+            <property name="minimumSize">
                 <size>
                     <width>0</width>
                     <height>0</height>
@@ -102,7 +102,7 @@
             <property name="sizeType">
                 <enum>Expanding</enum>
             </property>
-            <property name="tqsizeHint">
+            <property name="sizeHint">
                 <size>
                     <width>20</width>
                     <height>72</height>

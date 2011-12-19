@@ -86,7 +86,7 @@ void KSim::Sysinfo::clockUptimeUpdate()
   // only update the date when necessary
   if (m_dateLabel) {
     if (updateDate) {
-      m_dateLabel->setText(KGlobal::locale()->formatDate(TQDate::tqcurrentDate()));
+      m_dateLabel->setText(KGlobal::locale()->formatDate(TQDate::currentDate()));
       updateDate = false;
     }
   }

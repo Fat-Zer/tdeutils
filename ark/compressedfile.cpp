@@ -60,7 +60,7 @@ CompressedFile::CompressedFile( ArkWidget *_gui, const TQString & _fileName, con
   m_openAsMimeType = _openAsMimeType;
   kdDebug(1601) << "CompressedFile constructor" << endl;
   m_tempDirectory = new KTempDir( _gui->tmpDir()
-                          + TQString::tqfromLatin1( "compressed_file_temp" ) );
+                          + TQString::fromLatin1( "compressed_file_temp" ) );
   m_tempDirectory->setAutoDelete( true );
   m_tmpdir = m_tempDirectory->name();
   initData();

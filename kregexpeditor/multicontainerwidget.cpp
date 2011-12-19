@@ -261,5 +261,5 @@ void MultiContainerWidget::updateCursorRecursively()
   for ( TQPtrListIterator<RegExpWidget> it(_tqchildren); *it ; ++it ) {
     (*it)->updateCursorRecursively();
   }
-  updatetqCursorShape();
+  updateCursorShape();
 }

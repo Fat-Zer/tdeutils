@@ -76,7 +76,7 @@ This wizard will first setup some basic configuration options required for KGpg 
                 <property name="sizeType">
                     <enum>Expanding</enum>
                 </property>
-                <property name="tqsizeHint">
+                <property name="sizeHint">
                     <size>
                         <width>20</width>
                         <height>41</height>
@@ -136,7 +136,7 @@ This wizard will first setup some basic configuration options required for KGpg 
                 <property name="sizeType">
                     <enum>Expanding</enum>
                 </property>
-                <property name="tqsizeHint">
+                <property name="sizeHint">
                     <size>
                         <width>20</width>
                         <height>60</height>
@@ -249,7 +249,7 @@ This wizard will first setup some basic configuration options required for KGpg 
                 <property name="sizeType">
                     <enum>Expanding</enum>
                 </property>
-                <property name="tqsizeHint">
+                <property name="sizeHint">
                     <size>
                         <width>20</width>
                         <height>16</height>
@@ -304,7 +304,7 @@ Remember that if you download a file or open one in an editor, parts of the file
                 <property name="sizeType">
                     <enum>Expanding</enum>
                 </property>
-                <property name="tqsizeHint">
+                <property name="sizeHint">
                     <size>
                         <width>20</width>
                         <height>30</height>

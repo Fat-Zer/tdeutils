@@ -250,7 +250,7 @@ void ZipFormat::processResult(KProcess *, char *b, int l)
 	DEBUGSETUP;
 
 #ifdef DEBUG
-	TQString o = TQString::tqfromLatin1(b,l);
+	TQString o = TQString::fromLatin1(b,l);
 	DEBUGS(TQString("  %1").tqarg(o).latin1());
 #endif
 
@@ -283,7 +283,7 @@ void ZipFormat::processResult(KProcess *, char *b, int l)
 			//
 			emit setProgress(1);
 
-			// TQString myBuf = TQString::tqfromLatin1(b, l);
+			// TQString myBuf = TQString::fromLatin1(b, l);
 			// DEBUGS(myBuf.latin1());
 		}
 		break;

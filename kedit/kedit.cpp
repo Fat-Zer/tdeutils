@@ -84,7 +84,7 @@ TopLevel::TopLevel (TQWidget *, const char *name)
   setupEditWidget();
 
   if (!initialGeometrySet())
-    resize( TQSize(550, 400).expandedTo(tqminimumSizeHint()));
+    resize( TQSize(550, 400).expandedTo(minimumSizeHint()));
   setupGUI(ToolBar | Keys | StatusBar | Create);
   setAutoSaveSettings();
 
@@ -341,7 +341,7 @@ void TopLevel::insertDate(){
   int line, column;
 
   TQString string;
-  TQDate dt = TQDate::tqcurrentDate();
+  TQDate dt = TQDate::currentDate();
   string = KGlobal::locale()->formatDate(dt);
 
   eframe->getCursorPosition(&line,&column);
@@ -896,7 +896,7 @@ void TopLevel::statusbar_slot(){
 void TopLevel::print()
 {
     bool aborted = false;
-    TQString headerLeft = i18n("Date: %1").tqarg(KGlobal::locale()->formatDate(TQDate::tqcurrentDate(),true));
+    TQString headerLeft = i18n("Date: %1").tqarg(KGlobal::locale()->formatDate(TQDate::currentDate(),true));
     TQString headerMid = i18n("File: %1").tqarg(m_caption);
     TQString headerRight;
 

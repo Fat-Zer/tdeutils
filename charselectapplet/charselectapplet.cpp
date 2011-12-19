@@ -251,16 +251,16 @@ void CharTable::paintCell(TQPainter* p, int row, int col)
 
     // draw background
     if (active) {
-	p->setBrush(TQBrush(tqcolorGroup().highlight()));
+	p->setBrush(TQBrush(colorGroup().highlight()));
 	p->setPen(NoPen);
 	p->drawRect(0, 0, w, h);
-	p->setPen(tqcolorGroup().highlightedText());
+	p->setPen(colorGroup().highlightedText());
     }
     else {
-	p->setBrush(TQBrush(tqcolorGroup().base()));
+	p->setBrush(TQBrush(colorGroup().base()));
 	p->setPen(NoPen);
 	p->drawRect(0, 0, w, h);
-	p->setPen(tqcolorGroup().text());
+	p->setPen(colorGroup().text());
     }
 
     // set font

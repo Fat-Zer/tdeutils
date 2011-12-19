@@ -32,16 +32,16 @@ class KArchive;
 class ListingEvent: public TQCustomEvent
 {
 	public:
-		enum tqStatus { Normal, Error, ListingFinished };
-		ListingEvent( const TQStringList& data, tqStatus st = Normal )
+		enum Status { Normal, Error, ListingFinished };
+		ListingEvent( const TQStringList& data, Status st = Normal )
 			: TQCustomEvent( 65442 ), m_data( data ), m_status( st ) {}
 		
 		const TQStringList& columns() const { return m_data; }
-		tqStatus status() const { return m_status; }
+		Status status() const { return m_status; }
 		
 	private:
 		TQStringList m_data;
-		tqStatus      m_status;
+		Status      m_status;
 };
 
 class TarListingThread: public TQThread

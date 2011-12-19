@@ -59,7 +59,7 @@ public:
 
     KTimerJob *job() { return m_job; };
 
-    void settqStatus( bool error ) {
+    void setStatus( bool error ) {
         m_error = error;
         update();
     }
@@ -239,7 +239,7 @@ void KTimerPref::jobChanged( KTimerJob *job )
 void KTimerPref::jobFinished( KTimerJob *job, bool error )
 {
     KTimerJobItem *item = static_cast<KTimerJobItem*>(job->user());
-    item->settqStatus( error );
+    item->setStatus( error );
     m_list->triggerUpdate();
 }
 

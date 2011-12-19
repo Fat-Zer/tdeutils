@@ -102,7 +102,7 @@ MntConfigWidget::MntConfigWidget(TQWidget *parent, const char *name, bool init)
     mIconButton = new KIconButton(mGroupBox);
     mIconButton->setIconType(KIcon::Small, KIcon::Device);
     Q_CHECK_PTR(mIconButton);
-    mIconButton->setFixedWidth( mIconButton->tqsizeHint().height() );
+    mIconButton->setFixedWidth( mIconButton->sizeHint().height() );
     connect(mIconButton,TQT_SIGNAL(iconChanged(TQString)),this,TQT_SLOT(iconChangedButton(TQString)));
     gl->addWidget( mIconButton, 2, 1 );
 

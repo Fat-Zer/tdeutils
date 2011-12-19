@@ -110,7 +110,7 @@ public:
     */
     void showRMBMenu( bool enableCutCopy );
 
-    virtual TQSize tqsizeHint() const;
+    virtual TQSize sizeHint() const;
 
 public slots:
 

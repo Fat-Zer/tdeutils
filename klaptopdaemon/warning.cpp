@@ -164,7 +164,7 @@ WarningConfig::WarningConfig (int t, TQWidget * parent, const char *name)
 
     if (can_brightness) {
       checkBrightness = new TQCheckBox(i18n("Panel b&rightness"), this);
-      checkBrightness->setMinimumSize(checkBrightness->tqsizeHint());
+      checkBrightness->setMinimumSize(checkBrightness->sizeHint());
       TQToolTip::add( checkBrightness, i18n( "If enabled the back panel brightness will change" ) );
       grid->addWidget(checkBrightness, curRow, 0);
       connect(checkBrightness, TQT_SIGNAL(toggled(bool)), this, TQT_SLOT(brightness_changed(bool)));
@@ -240,19 +240,19 @@ WarningConfig::WarningConfig (int t, TQWidget * parent, const char *name)
     if (can_standby) {
       checkStandby = new TQRadioButton(i18n("Standb&y"), b);
       TQToolTip::add( checkStandby, i18n( "Move the system into the standby state - a temporary lower power state" ) );
-      checkStandby->setMinimumSize(checkStandby->tqsizeHint());
+      checkStandby->setMinimumSize(checkStandby->sizeHint());
       connect(checkStandby, TQT_SIGNAL(clicked()), this, TQT_SLOT(configChanged()));
     }
     if (can_suspend) {
       checkSuspend = new TQRadioButton(i18n("&Suspend"), b);
       TQToolTip::add( checkSuspend, i18n( "Move the system into the suspend state - also known as 'save-to-ram'" ) );
-      checkSuspend->setMinimumSize(checkSuspend->tqsizeHint());
+      checkSuspend->setMinimumSize(checkSuspend->sizeHint());
       connect(checkSuspend, TQT_SIGNAL(clicked()), this, TQT_SLOT(configChanged()));
     }
     if (can_hibernate) {
       checkHibernate = new TQRadioButton(i18n("H&ibernate"), b);
       TQToolTip::add( checkHibernate, i18n( "Move the system into the hibernate state - also known as 'save-to-disk'" ) );
-      checkHibernate->setMinimumSize(checkHibernate->tqsizeHint());
+      checkHibernate->setMinimumSize(checkHibernate->sizeHint());
       connect(checkHibernate, TQT_SIGNAL(clicked()), this, TQT_SLOT(configChanged()));
     }
     // setup the logout option
@@ -276,7 +276,7 @@ WarningConfig::WarningConfig (int t, TQWidget * parent, const char *name)
     } else {
       explain = new TQLabel(i18n("This panel controls how and when you receive warnings that your battery power is about to run out"), this);
     }
-    explain->tqsetAlignment( TQt::WordBreak );
+    explain->setAlignment( TQt::WordBreak );
     grid->addMultiCellWidget(explain, curRow, curRow, 0, 1);
     ++curRow;
 

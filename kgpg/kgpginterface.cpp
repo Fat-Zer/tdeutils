@@ -641,7 +641,7 @@ Md5Widget::Md5Widget(TQWidget *parent, const char *name,KURL url):KDialogBase( p
 
         KLed1=new KLed(TQColor(80,80,80),KLed::Off,KLed::Sunken,KLed::Circular,page,"KLed1");
         KLed1->off();
-        KLed1->tqsetSizePolicy( TQSizePolicy( (TQSizePolicy::SizeType)0, (TQSizePolicy::SizeType)0, 0, 0, KLed1->sizePolicy().hasHeightForWidth() ) );
+        KLed1->setSizePolicy( TQSizePolicy( (TQSizePolicy::SizeType)0, (TQSizePolicy::SizeType)0, 0, 0, KLed1->sizePolicy().hasHeightForWidth() ) );
         Layout4->addWidget( KLed1 );
 
         TextLabel1_2 = new TQLabel( page, "TextLabel1_2" );
@@ -653,7 +653,7 @@ Md5Widget::Md5Widget(TQWidget *parent, const char *name,KURL url):KDialogBase( p
         MyDialogLayout->addItem( spacer, 3, 0 );
 
         page->show();
-        page->resize(page->tqminimumSize());
+        page->resize(page->minimumSize());
         setMainWidget(page);
 
 
@@ -1079,7 +1079,7 @@ void KgpgInterface::KgpgKeyExpire(TQString keyID,TQDate date,bool unlimited)
         if (unlimited)
                 expirationDelay=0;
         else
-                expirationDelay=TQDate::tqcurrentDate().daysTo(date);
+                expirationDelay=TQDate::currentDate().daysTo(date);
         output=TQString();
         KProcIO *conprocess=new KProcIO(TQTextCodec::codecForLocale());
         *conprocess<<"gpg"<<"--no-secmem-warning"<<"--no-tty"<<"--command-fd=0"<<"--status-fd=2"<<"--utf8-strings";

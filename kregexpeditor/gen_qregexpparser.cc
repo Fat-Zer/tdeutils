@@ -1049,7 +1049,7 @@ yyreduce:
                  yyval.regexp = new AltnRegExp( false );
                  dynamic_cast<AltnRegExp*>( yyval.regexp )->addRegExp( yyvsp[-1].regexp );
                }
-               dynamic_cast<AltnRegExp*>( yyval.regexp )->addRegExp( new TextRegExp( false, TQString::tqfromLatin1("") ) );
+               dynamic_cast<AltnRegExp*>( yyval.regexp )->addRegExp( new TextRegExp( false, TQString::fromLatin1("") ) );
              }
     break;
 
@@ -1057,7 +1057,7 @@ yyreduce:
 #line 107 "qregexpparser.y"
     {  
                yyval.regexp = new AltnRegExp( false );
-               dynamic_cast<AltnRegExp*>( yyval.regexp )->addRegExp( new TextRegExp( false, TQString::tqfromLatin1("") ) );
+               dynamic_cast<AltnRegExp*>( yyval.regexp )->addRegExp( new TextRegExp( false, TQString::fromLatin1("") ) );
                dynamic_cast<AltnRegExp*>( yyval.regexp )->addRegExp( yyvsp[0].regexp );
              }
     break;

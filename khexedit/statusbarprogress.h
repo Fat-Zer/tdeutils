@@ -115,7 +115,7 @@ class CStatusBarProgress : public TQFrame, public TQRangeControl
    * Returns the recommended width for vertical progress bars or
    * the recommended height for vertical progress bars
    */
-  virtual TQSize tqsizeHint() const;
+  virtual TQSize sizeHint() const;
 	
 		
   public slots:

@@ -202,7 +202,7 @@ laptop_dock::invokeBrightness()
 		brightness_slider->setMinimumHeight(40);
 		brightness_slider->setMinimumWidth(15);
 		connect(brightness_slider, TQT_SIGNAL(valueChanged(int)), this, TQT_SLOT(invokeBrightnessSlider(int)));
-		brightness_widget->resize(brightness_widget->tqsizeHint());
+		brightness_widget->resize(brightness_widget->sizeHint());
 	} else {
 		brightness_slider->setValue(255-brightness);
 	}

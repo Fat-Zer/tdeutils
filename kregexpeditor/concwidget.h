@@ -40,7 +40,7 @@ public:
               TQWidget* parent, const char* name = 0);
   void init();
 
-  virtual TQSize tqsizeHint() const;
+  virtual TQSize sizeHint() const;
 	virtual RegExp* regExp() const;
   virtual bool updateSelection(bool parentSelected);
   virtual bool isSelected() const;

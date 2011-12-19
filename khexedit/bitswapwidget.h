@@ -35,7 +35,7 @@ class CDigitLabel : public TQLabel
     CDigitLabel( TQWidget *parent, uint digit = 0, const char *name=0 );
     ~CDigitLabel( void );
 
-    virtual TQSize tqsizeHint() const;
+    virtual TQSize sizeHint() const;
     inline uint value( void );
 
   signals:

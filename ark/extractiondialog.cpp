@@ -73,7 +73,7 @@ ExtractionDialog::ExtractionDialog( TQWidget *parent, const char *name,
 
 	TQLabel *icon = new TQLabel( header );
 	icon->setPixmap( DesktopIcon( "ark_extract" ) );
-	icon->tqsetSizePolicy( TQSizePolicy::Fixed, TQSizePolicy::Minimum );
+	icon->setSizePolicy( TQSizePolicy::Fixed, TQSizePolicy::Minimum );
 
 	if ( enableSelected )
 	{
@@ -96,7 +96,7 @@ ExtractionDialog::ExtractionDialog( TQWidget *parent, const char *name,
 	TQHBox *destDirBox = new TQHBox( vbox );
 
 	TQLabel *destFolderLabel = new TQLabel( i18n( "Destination folder: " ), destDirBox );
-	destFolderLabel->tqsetSizePolicy( TQSizePolicy::Minimum, TQSizePolicy::Fixed );
+	destFolderLabel->setSizePolicy( TQSizePolicy::Minimum, TQSizePolicy::Fixed );
 
 	KHistoryCombo *combobox = new KHistoryCombo( true, destDirBox );
 	combobox->setPixmapProvider( new KURLPixmapProvider );
@@ -111,7 +111,7 @@ ExtractionDialog::ExtractionDialog( TQWidget *parent, const char *name,
 	combobox->setInsertionPolicy( TQComboBox::AtTop );
 
 	m_urlRequester = new KURLRequester( combobox, destDirBox );
-	m_urlRequester->tqsetSizePolicy( TQSizePolicy::Expanding, TQSizePolicy::Fixed );
+	m_urlRequester->setSizePolicy( TQSizePolicy::Expanding, TQSizePolicy::Fixed );
 	m_urlRequester->setMode( KFile::Directory );
 
 	if (!defaultExtractionDir.prettyURL().isEmpty() )

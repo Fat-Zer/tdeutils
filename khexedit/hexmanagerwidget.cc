@@ -129,16 +129,16 @@ void CHexManagerWidget::setConversionVisibility( EConversionPosition position )
     TQRect  rect  = tqgeometry();
     TQPoint p;
 
-    p.setX(point.x() + rect.width()/2 - mConverter->tqminimumSize().width()/2);
-    p.setY(point.y() + rect.height()/2 - mConverter->tqminimumSize().height()/2);
-    mConverter->resize( mConverter->tqminimumSize() );
+    p.setX(point.x() + rect.width()/2 - mConverter->minimumSize().width()/2);
+    p.setY(point.y() + rect.height()/2 - mConverter->minimumSize().height()/2);
+    mConverter->resize( mConverter->minimumSize() );
     mConverter->reparent( 0, WStyle_Customize | WStyle_DialogBorder, p, true );
     mConverter->setCaption(kapp->makeStdCaption(i18n("Conversion")));
   }
   else
   {
     mConversionPosition = Embed;
-    uint utilHeight = mConverter->tqminimumSize().height();
+    uint utilHeight = mConverter->minimumSize().height();
     TQPoint p( 0, height() - utilHeight );
     mConverter->reparent( this, 0, p, true );
   }
@@ -250,7 +250,7 @@ int CHexManagerWidget::preferredWidth( void )
   int w = mEditor->defaultTextWidth();
   if( mConversionPosition == Embed )
   {
-    int converterWidth = mConverter->tqsizeHint().width();
+    int converterWidth = mConverter->sizeHint().width();
     w = TQMAX( w, converterWidth );
   }
   return( w );

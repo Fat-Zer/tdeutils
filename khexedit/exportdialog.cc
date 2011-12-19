@@ -208,17 +208,17 @@ void CExportDialog::setupDestinationPage( void )
   vbox->addSpacing( fontMetrics().lineSpacing() );
   
   TQRadioButton *radio1 = new TQRadioButton( i18n("&Everything"), group );
-  radio1->setFixedSize( radio1->tqsizeHint() );
+  radio1->setFixedSize( radio1->sizeHint() );
   mDestination.rangeBox->insert( radio1, 0 );
   vbox->addWidget( radio1, 0, AlignLeft );
 
   TQRadioButton *radio2 = new TQRadioButton( i18n("&Selection"), group );
-  radio2->setFixedSize( radio2->tqsizeHint() );
+  radio2->setFixedSize( radio2->sizeHint() );
   mDestination.rangeBox->insert( radio2, 1 );
   vbox->addWidget( radio2, 0, AlignLeft );
 
   TQRadioButton *radio3 = new TQRadioButton( i18n("&Range"), group );
-  radio3->setFixedSize( radio3->tqsizeHint() );
+  radio3->setFixedSize( radio3->sizeHint() );
   mDestination.rangeBox->insert( radio3, 2 );
   vbox->addWidget( radio3, 0, AlignLeft );
 
@@ -264,7 +264,7 @@ void CExportDialog::setupOptionPage( void )
   makeCArrayOption();
   mOptionStack->raiseWidget( (int)option_text );
 
-  TQSize size = mOptionStack->tqsizeHint();
+  TQSize size = mOptionStack->sizeHint();
   size += TQSize(spacingHint()*2, spacingHint()*2);
   page->setMinimumSize( size ); 
 }
@@ -462,11 +462,11 @@ void CExportDialog::browserClicked( void )
   TQString url;
   if( mDestination.formatCombo->currentItem() == option_html )
   {
-    url = KFileDialog::getExistingDirectory( mWorkDir, tqtopLevelWidget() );
+    url = KFileDialog::getExistingDirectory( mWorkDir, topLevelWidget() );
   }
   else
   {
-    url = KFileDialog::getSaveFileName( mWorkDir, "*", tqtopLevelWidget() );
+    url = KFileDialog::getSaveFileName( mWorkDir, "*", topLevelWidget() );
   }
 
   if( url.isEmpty() )

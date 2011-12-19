@@ -78,14 +78,14 @@ void ConcWidget::init()
 }
 
 
-TQSize ConcWidget::tqsizeHint() const
+TQSize ConcWidget::sizeHint() const
 {
   int tqchildrenWidth = 0;
   int tqchildrenHeight = 0;
   TQPtrListIterator<RegExpWidget> it(_tqchildren);
 
   for ( ; *it; ++it) {
-    TQSize thisChildSize = (*it)->tqsizeHint();
+    TQSize thisChildSize = (*it)->sizeHint();
     tqchildrenWidth += thisChildSize.width();
     tqchildrenHeight = TQMAX(tqchildrenHeight, thisChildSize.height());
   }
@@ -106,7 +106,7 @@ void ConcWidget::paintEvent( TQPaintEvent *e)
     _tqchildren.at(0)->setGeometry( 0, 0, size().width(), size().height() );
   }
   else {
-    TQSize myReqSize = tqsizeHint();
+    TQSize myReqSize = sizeHint();
     TQSize mySize(TQMAX(myReqSize.width(), size().width()),
                  TQMAX(myReqSize.height(), size().height()));
 
@@ -131,12 +131,12 @@ void ConcWidget::paintEvent( TQPaintEvent *e)
         continue;
       RegExpWidget* child = _tqchildren.at(i);
 
-      TQSize childSize = child->tqsizeHint();
+      TQSize childSize = child->sizeHint();
       TQSize curChildSize = child->size();
 
       //----------------------------- first place the accepter
       int x = offset;
-      int w = accepter->tqsizeHint().width();
+      int w = accepter->sizeHint().width();
       if ( i == 1 ) w+= extra;
       int h = TQMAX( lastHeight, childSize.height() );
       int y = (mySize.height() - h)/2;
@@ -180,7 +180,7 @@ void ConcWidget::paintEvent( TQPaintEvent *e)
     // dynamic_cast is ASSERTed at top
     int x = offset;
     int h = lastHeight;
-    int w = accepter->tqsizeHint().width() + extra;
+    int w = accepter->sizeHint().width() + extra;
     int y = (mySize.height()-h)/2;
     accepter->setGeometry( x, y, w, h );
   }
@@ -240,7 +240,7 @@ bool ConcWidget::updateSelection(bool parentSelected)
   ++it; // Skip past the first DragAccepter
 	for ( ; *it; it +=2  ) {
     if ( (*it)->isSelected() ) {
-      _maxSelectedHeight = TQMAX( _maxSelectedHeight, (*it)->tqsizeHint().height() );
+      _maxSelectedHeight = TQMAX( _maxSelectedHeight, (*it)->sizeHint().height() );
     }
   }
 

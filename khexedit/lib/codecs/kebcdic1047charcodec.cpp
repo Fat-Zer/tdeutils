@@ -119,6 +119,6 @@ const TQString& KEBCDIC1047CharCodec::name() const
 
 const TQString& KEBCDIC1047CharCodec::codecName()
 {
-  static const TQString Name( TQString::tqfromLatin1(KEBCDIC1047CharCodecName) );
+  static const TQString Name( TQString::fromLatin1(KEBCDIC1047CharCodecName) );
   return Name;
 }

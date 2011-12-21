@@ -15,12 +15,12 @@ new in version 0.5 (Aaron J. Seigo)
 
 new in version 0.4 (Mario Weilguni <mweilguni@kde.org>)
 - works now with Qt 2.0
-- fixed broken tqlayout of main window
-- tqlayout improvements in AskFileName()
-- tqlayout improvements in SubjList()
+- fixed broken layout of main window
+- layout improvements in AskFileName()
+- layout improvements in SubjList()
 - compiles without warnings
 - "Apply" button is only activated when changes were made
-- improved tqlayout of configuration dialog
+- improved layout of configuration dialog
 - fixed a bug in the font selection
 
 - now compiles with EGCS   ( Robert Williams )
@@ -59,7 +59,7 @@ new in version 0.2.1
 
 new in version 0.2.0
 
-- changed the tqlayout to be more KDE conforming (toolbar, statusbar,...)
+- changed the layout to be more KDE conforming (toolbar, statusbar,...)
 - folders are now called books and entries are pages
 - added subject to each page
 - you may popup a window with a list of all subjects and use it to find

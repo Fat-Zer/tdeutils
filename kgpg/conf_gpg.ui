@@ -166,7 +166,7 @@
                 </widget>
                 <widget class="TQLayoutWidget" row="0" column="1" rowspan="2" colspan="1">
                     <property name="name">
-                        <cstring>tqlayout1</cstring>
+                        <cstring>layout1</cstring>
                     </property>
                     <vbox>
                         <property name="name">

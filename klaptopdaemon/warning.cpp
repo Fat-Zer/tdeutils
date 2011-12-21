@@ -236,7 +236,7 @@ WarningConfig::WarningConfig (int t, TQWidget * parent, const char *name)
 
     TQVButtonGroup *b = new TQVButtonGroup(i18n("System State Change"), this);
     TQToolTip::add( b, i18n( "You may choose one of the following to occur when the battery gets low" ) );
-    b->tqlayout()->setSpacing( KDialog::spacingHint() );
+    b->layout()->setSpacing( KDialog::spacingHint() );
     if (can_standby) {
       checkStandby = new TQRadioButton(i18n("Standb&y"), b);
       TQToolTip::add( checkStandby, i18n( "Move the system into the standby state - a temporary lower power state" ) );

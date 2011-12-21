@@ -85,7 +85,7 @@ CSearchBar::CSearchBar( TQWidget *parent, const char *name, WFlags f )
   connect( mCloseButton, TQT_SIGNAL(clicked()), this, TQT_SLOT(hideWidget()) );
 
   //
-  // Make tqlayout
+  // Make layout
   //
   TQHBoxLayout *hlay = new TQHBoxLayout( this, 4, 6 );
   hlay->addWidget( mTypeCombo );

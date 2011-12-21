@@ -1,6 +1,6 @@
 #Unicode Example
 
-#For Symbol Tables look at www.tqunicode.org/charts/
+#For Symbol Tables look at www.unicode.org/charts/
 
 
 #this import statement allows access to the karamba functions
@@ -31,8 +31,8 @@ def initWidget(widget):
 \u0631\u0632\u0633\u0634\u0635\u0636\u0637\u0638\u0639\u063A\u0641\u0642\u0643\u0644\u0645\u0646
 \u0647\u0648\u064A
 <p>
-For a complete reference on tqunicode caracter codes look at:
-<center><a href="kfmclient openURL http://www.tqunicode.org/charts/">www.tqunicode.org/charts/</a></center>
+For a complete reference on unicode caracter codes look at:
+<center><a href="kfmclient openURL http://www.unicode.org/charts/">www.unicode.org/charts/</a></center>
 </p>
 """
     karamba.resizeWidget(widget, 400, 400)

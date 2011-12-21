@@ -1204,7 +1204,7 @@ void TopLevel::timer_slot(){
 
 void TopLevel::set_colors()
 {
-  TQPalette mypalette = TQPalette((eframe->tqpalette()));
+  TQPalette mypalette = TQPalette((eframe->palette()));
 
   TQColorGroup ncgrp( mypalette.active() );
 

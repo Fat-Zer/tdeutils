@@ -151,15 +151,15 @@ void I8KView::closeStream()
 
 void I8KView::initGUI()
 {
-  TQVBoxLayout *tqlayout = new TQVBoxLayout( this );
+  TQVBoxLayout *layout = new TQVBoxLayout( this );
 
   m_fan1Label = new KSim::Label( this );
   m_fan2Label = new KSim::Label( this );
   m_tempLabel = new KSim::Label( this );
 
-  tqlayout->addWidget( m_fan1Label );
-  tqlayout->addWidget( m_fan2Label );
-  tqlayout->addWidget( m_tempLabel );
+  layout->addWidget( m_fan1Label );
+  layout->addWidget( m_fan2Label );
+  layout->addWidget( m_tempLabel );
 }
 
 void I8KView::updateView()
@@ -218,14 +218,14 @@ I8KConfig::I8KConfig(KSim::PluginObject *parent, const char *name)
   m_interval->setRange( 2, 60, 1, true );
   m_interval->setSuffix( i18n( " sec" ) );
 
-  TQGridLayout *tqlayout = new TQGridLayout( this, 3, 2, 0, 
+  TQGridLayout *layout = new TQGridLayout( this, 3, 2, 0, 
       KDialog::spacingHint() );
 
-  tqlayout->addMultiCellWidget( m_unit, 0, 0, 0, 1 );
-  tqlayout->addWidget( label, 1, 0 );
-  tqlayout->addWidget( m_interval, 1, 1 );
-  tqlayout->setColStretch( 1, 1 );
-  tqlayout->setRowStretch( 2, 1 );
+  layout->addMultiCellWidget( m_unit, 0, 0, 0, 1 );
+  layout->addWidget( label, 1, 0 );
+  layout->addWidget( m_interval, 1, 1 );
+  layout->setColStretch( 1, 1 );
+  layout->setRowStretch( 2, 1 );
 }
 
 I8KConfig::~I8KConfig()

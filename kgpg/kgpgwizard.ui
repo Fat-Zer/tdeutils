@@ -313,7 +313,7 @@ Remember that if you download a file or open one in an editor, parts of the file
             </spacer>
             <widget class="TQLayoutWidget" row="1" column="1">
                 <property name="name">
-                    <cstring>tqlayout2</cstring>
+                    <cstring>layout2</cstring>
                 </property>
                 <hbox>
                     <property name="name">

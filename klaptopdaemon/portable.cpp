@@ -2267,7 +2267,7 @@ laptop_portable::apm_set_mask(bool , bool )
 //	adds extra widgets to the battery panel
 //
 void
-laptop_portable::extra_config(TQWidget * /*parent*/, KConfig * /*config*/, TQVBoxLayout * /*tqlayout*/)
+laptop_portable::extra_config(TQWidget * /*parent*/, KConfig * /*config*/, TQVBoxLayout * /*layout*/)
 {
 	// INSERT HERE
 }
@@ -2945,7 +2945,7 @@ int laptop_portable::has_apm(int)
 //	adds extra widgets to the battery panel
 //
 void
-laptop_portable::extra_config(TQWidget *parent, KConfig *config, TQVBoxLayout *tqlayout)
+laptop_portable::extra_config(TQWidget *parent, KConfig *config, TQVBoxLayout *layout)
 {
 	// INSERT HERE
 }

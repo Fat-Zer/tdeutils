@@ -70,7 +70,7 @@ void CHexManagerWidget::updateLayout( void )
 {
   if( mValid == false ) { return; }
 
-  delete tqlayout();
+  delete layout();
   TQVBoxLayout *vlay = new TQVBoxLayout( this, 0, 0 );
 
   if( mSearchBar && mSearchBarPosition == AboveEditor )

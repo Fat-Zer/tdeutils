@@ -50,7 +50,7 @@ KSim::GeneralPrefs::GeneralPrefs(TQWidget *parent, const char *name)
   m_sizeBox->setTitle(i18n("Graph Size"));
   m_sizeBox->setColumnLayout(0, Qt::Horizontal);
 
-  TQGridLayout *sizeBoxLayout = new TQGridLayout(m_sizeBox->tqlayout());
+  TQGridLayout *sizeBoxLayout = new TQGridLayout(m_sizeBox->layout());
   sizeBoxLayout->setSpacing(6);
 
   m_sizeHLabel = new TQLabel(m_sizeBox);
@@ -211,9 +211,9 @@ KSim::UptimePrefs::UptimePrefs(TQWidget *parent, const char *name)
   m_uptimeBox = new TQGroupBox(this);
   m_uptimeBox->setTitle(i18n("Uptime Legend"));
   m_uptimeBox->setColumnLayout(0, Qt::Vertical);
-  m_uptimeBox->tqlayout()->setSpacing(0);
-  m_uptimeBox->tqlayout()->setMargin(0);
-  m_boxLayout = new TQVBoxLayout(m_uptimeBox->tqlayout());
+  m_uptimeBox->layout()->setSpacing(0);
+  m_uptimeBox->layout()->setMargin(0);
+  m_boxLayout = new TQVBoxLayout(m_uptimeBox->layout());
   m_boxLayout->setAlignment(TQt::AlignTop);
   m_boxLayout->setSpacing(6);
   m_boxLayout->setMargin(11);
@@ -347,9 +347,9 @@ KSim::MemoryPrefs::MemoryPrefs(TQWidget *parent, const char *name)
   m_memBox = new TQGroupBox(this);
   m_memBox->setTitle(i18n("Memory Legend"));
   m_memBox->setColumnLayout(0, Qt::Vertical);
-  m_memBox->tqlayout()->setSpacing(0);
-  m_memBox->tqlayout()->setMargin(0);
-  m_boxLayout = new TQVBoxLayout(m_memBox->tqlayout());
+  m_memBox->layout()->setSpacing(0);
+  m_memBox->layout()->setMargin(0);
+  m_boxLayout = new TQVBoxLayout(m_memBox->layout());
   m_boxLayout->setAlignment(TQt::AlignTop);
   m_boxLayout->setSpacing(6);
   m_boxLayout->setMargin(11);
@@ -496,9 +496,9 @@ KSim::SwapPrefs::SwapPrefs(TQWidget *parent, const char *name)
   m_swapBox = new TQGroupBox(this);
   m_swapBox->setTitle(i18n("Swap Legend"));
   m_swapBox->setColumnLayout(0, Qt::Vertical);
-  m_swapBox->tqlayout()->setSpacing(0);
-  m_swapBox->tqlayout()->setMargin(0);
-  m_boxLayout = new TQVBoxLayout(m_swapBox->tqlayout());
+  m_swapBox->layout()->setSpacing(0);
+  m_swapBox->layout()->setMargin(0);
+  m_boxLayout = new TQVBoxLayout(m_swapBox->layout());
   m_boxLayout->setAlignment(TQt::AlignTop);
   m_boxLayout->setSpacing(6);
   m_boxLayout->setMargin(11);

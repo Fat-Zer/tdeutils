@@ -121,13 +121,13 @@ void  MyView::clipEncrypt()
 
 void  MyView::clipDecrypt()
 {
-        TQString clippie=kapp->tqclipboard()->text(clipboardMode).stripWhiteSpace();
+        TQString clippie=kapp->clipboard()->text(clipboardMode).stripWhiteSpace();
 	droppedtext(clippie,false);
 }
 
 void  MyView::clipSign(bool openEditor)
 {
-        TQString clippie=kapp->tqclipboard()->text(clipboardMode).stripWhiteSpace();
+        TQString clippie=kapp->clipboard()->text(clipboardMode).stripWhiteSpace();
         if (!clippie.isEmpty()) {
                 KgpgApp *kgpgtxtedit = new KgpgApp(0, "editor",WDestructiveClose,goDefaultKey);
 		connect(this,TQT_SIGNAL(setFont(TQFont)),kgpgtxtedit,TQT_SLOT(slotSetFont(TQFont)));
@@ -302,8 +302,8 @@ void  MyView::shredDroppedFile()
 KDialogBase *shredConfirm=new KDialogBase( this, "confirm_shred", true,i18n("Shred Files"),KDialogBase::Ok | KDialogBase::Cancel);
 TQWidget *page = new TQWidget(shredConfirm);
 shredConfirm->setMainWidget(page);
-TQBoxLayout *tqlayout=new TQBoxLayout(page,TQBoxLayout::TopToBottom,0);
-tqlayout->setAutoAdd(true);
+TQBoxLayout *layout=new TQBoxLayout(page,TQBoxLayout::TopToBottom,0);
+layout->setAutoAdd(true);
 
 (void) new KActiveLabel( i18n("Do you really want to <a href=\"whatsthis:%1\">shred</a> these files?").arg(i18n( "<qt><p>You must be aware that <b>shredding is not secure</b> on all file systems, and that parts of the file may have been saved in a temporary file or in the spooler of your printer if you previously opened it in an editor or tried to print it. Only works on files (not on folders).</p></qt>")),page);
 KListBox *lb=new KListBox(page);
@@ -560,7 +560,7 @@ void  MyView::dropEvent (TQDropEvent *o)
                 droppedfile(list);
         else if ( TQTextDrag::decode(o, text) )
 		{
-	        TQApplication::tqclipboard()->setText(text,clipboardMode);
+	        TQApplication::clipboard()->setText(text,clipboardMode);
                 droppedtext(text);
 		}
 }
@@ -569,7 +569,7 @@ void  MyView::dropEvent (TQDropEvent *o)
 void  MyView::readOptions()
 {
 	clipboardMode=TQClipboard::Clipboard;
-        if ( KGpgSettings::useMouseSelection() && kapp->tqclipboard()->supportsSelection())
+        if ( KGpgSettings::useMouseSelection() && kapp->clipboard()->supportsSelection())
                 clipboardMode=TQClipboard::Selection;
 
 	if (KGpgSettings::firstRun()) {
@@ -804,7 +804,7 @@ kgpgapplet::kgpgapplet(TQWidget *parent, const char *name)
 void kgpgapplet::checkMenu()
 {
 	KgpgDecryptClipboard->setEnabled(false);
-	if ((kapp->tqclipboard()->text(w->clipboardMode).isEmpty()))
+	if ((kapp->clipboard()->text(w->clipboardMode).isEmpty()))
 	{
 		KgpgEncryptClipboard->setEnabled(false);
 		KgpgSignClipboard->setEnabled(false);
@@ -812,7 +812,7 @@ void kgpgapplet::checkMenu()
 	else
 	{
 		KgpgEncryptClipboard->setEnabled(true);
-		if (kapp->tqclipboard()->text(w->clipboardMode).stripWhiteSpace().startsWith("-----BEGIN"))
+		if (kapp->clipboard()->text(w->clipboardMode).stripWhiteSpace().startsWith("-----BEGIN"))
 		KgpgDecryptClipboard->setEnabled(true);
 		KgpgSignClipboard->setEnabled(true);
 	}
@@ -1008,7 +1008,7 @@ int KgpgAppletApp::newInstance()
 
 void MyView::encryptClipboard(TQStringList selec,TQStringList encryptOptions,bool,bool symmetric)
 {
-        if (kapp->tqclipboard()->text(clipboardMode).isEmpty()) {
+        if (kapp->clipboard()->text(clipboardMode).isEmpty()) {
 	KPassivePopup::message(i18n("Clipboard is empty."),TQString(),KGlobal::iconLoader()->loadIcon("kgpg",KIcon::Desktop),this);
 	return;
 	}
@@ -1020,12 +1020,12 @@ void MyView::encryptClipboard(TQStringList selec,TQStringList encryptOptions,boo
                 KgpgInterface *txtEncrypt=new KgpgInterface();
                 connect (txtEncrypt,TQT_SIGNAL(txtencryptionfinished(TQString)),TQT_TQOBJECT(this),TQT_SLOT(slotSetClip(TQString)));
 		connect (txtEncrypt,TQT_SIGNAL(txtencryptionstarted()),TQT_TQOBJECT(this),TQT_SLOT(slotPassiveClip()));
-                txtEncrypt->KgpgEncryptText(kapp->tqclipboard()->text(clipboardMode),selec,encryptOptions);
+                txtEncrypt->KgpgEncryptText(kapp->clipboard()->text(clipboardMode),selec,encryptOptions);
 }
 
 void MyView::slotPassiveClip()
 {
-TQString newtxt=kapp->tqclipboard()->text(clipboardMode);
+TQString newtxt=kapp->clipboard()->text(clipboardMode);
 if (newtxt.length()>300)
                         newtxt=TQString(newtxt.left(250).stripWhiteSpace())+"...\n"+TQString(newtxt.right(40).stripWhiteSpace());
 
@@ -1045,7 +1045,7 @@ pop = new KPassivePopup( this);
 void MyView::slotSetClip(TQString newtxt)
 {
         if (newtxt.isEmpty()) return;
-                TQApplication::tqclipboard()->setText(newtxt,clipboardMode);//,TQClipboard::Clipboard);    QT 3.1 only
+                TQApplication::clipboard()->setText(newtxt,clipboardMode);//,TQClipboard::Clipboard);    QT 3.1 only
 }
 
 

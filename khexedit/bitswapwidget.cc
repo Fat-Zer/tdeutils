@@ -103,8 +103,8 @@ void CDigitLabel::drawContents( TQPainter *p )
   }
   else
   {
-    p->fillRect( cr, tqpalette().active().base() );
-    p->setPen( tqpalette().active().text() );
+    p->fillRect( cr, palette().active().base() );
+    p->setPen( palette().active().text() );
   }
 
   if( mDotPosition != 0 )

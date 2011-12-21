@@ -69,8 +69,8 @@ void CStatusBarProgress::initialize( void )
 
   mBarColor     = tqpalette().active().highlight();
   mBarTextColor = tqpalette().active().highlightedText();
-  mTextColor    = tqpalette().active().text();
-  setBackgroundColor( tqpalette().active().background() );
+  mTextColor    = palette().active().text();
+  setBackgroundColor( palette().active().background() );
 
   TQFont font( KGlobalSettings::generalFont() );
   font.setBold( true );
@@ -229,7 +229,7 @@ void CStatusBarProgress::styleChange( GUIStyle )
 
 void CStatusBarProgress::adjustStyle( void )
 {
-  switch( tqstyle().SH_GUIStyle)
+  switch( style().SH_GUIStyle)
   {
     case WindowsStyle:
       setFrameStyle( TQFrame::NoFrame );
@@ -248,8 +248,8 @@ void CStatusBarProgress::paletteChange( const TQPalette & )
 {
   mBarColor     = tqpalette().active().highlight();
   mBarTextColor = tqpalette().active().highlightedText();
-  mTextColor    = tqpalette().active().text();
-  setBackgroundColor( tqpalette().active().background() );
+  mTextColor    = palette().active().text();
+  setBackgroundColor( palette().active().background() );
 }
 
 void CStatusBarProgress::drawText( TQPainter *p )

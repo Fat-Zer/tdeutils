@@ -61,10 +61,10 @@ KVaioModule::KVaioModule(TQWidget *parent, const char *name, const TQStringList 
                      "mirko@kde.org");
     setAboutData( about );
 
-    TQVBoxLayout *tqlayout = new TQVBoxLayout(this);
+    TQVBoxLayout *layout = new TQVBoxLayout(this);
     mKVaioGeneral = new KCMKVaioGeneral(this);
-    tqlayout->addWidget( mKVaioGeneral );
-    tqlayout->addStretch();
+    layout->addWidget( mKVaioGeneral );
+    layout->addStretch();
 
     mDriver = new KVaioDriverInterface(TQT_TQOBJECT(this));
     mDriverAvailable = mDriver->connectToDriver(false);

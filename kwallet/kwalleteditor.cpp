@@ -133,7 +133,7 @@ KWalletEditor::KWalletEditor(const TQString& wallet, bool isPath, TQWidget *pare
 
 	setCaption(wallet);
 
-	TQTimer::singleShot(0, this, TQT_SLOT(tqlayout()));
+	TQTimer::singleShot(0, this, TQT_SLOT(layout()));
 }
 
 KWalletEditor::~KWalletEditor() {
@@ -149,7 +149,7 @@ KWalletEditor::~KWalletEditor() {
 	}
 }
 
-void KWalletEditor::tqlayout() {
+void KWalletEditor::layout() {
 	TQValueList<int> sz = _ww->_splitter->sizes();
 	int sum = sz[0] + sz[1];
 	sz[0] = sum/2;
@@ -617,7 +617,7 @@ void KWalletEditor::copyPassword() {
 	if (_w && item) {
 		TQString pass;
 		if (_w->readPassword(item->text(0), pass) == 0) {
-			TQApplication::tqclipboard()->setText(pass);
+			TQApplication::clipboard()->setText(pass);
 		}
 	}
 }

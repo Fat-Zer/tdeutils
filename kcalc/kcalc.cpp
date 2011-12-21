@@ -246,14 +246,14 @@ KCalculator::KCalculator(TQWidget *parent, const char *name)
 	mainLayout->addLayout(topLayout);
 	mainLayout->addLayout(btnLayout);
 
-	// button tqlayout
+	// button layout
 	btnLayout->addWidget(mSmallPage, 0, AlignTop);
 	btnLayout->addSpacing(2*mInternalSpacing);
 	btnLayout->addWidget(mNumericPage, 0, AlignTop);
 	btnLayout->addSpacing(2*mInternalSpacing);
 	btnLayout->addWidget(mLargePage, 0, AlignTop);
 
-	// small button tqlayout
+	// small button layout
 	smallBtnLayout->addWidget(pbStat["NumData"], 0, 0);
 	smallBtnLayout->addWidget(pbScientific["HypMode"], 0, 1);
 	smallBtnLayout->addWidget(pbLogic["AND"], 0, 2);
@@ -303,7 +303,7 @@ KCalculator::KCalculator(TQWidget *parent, const char *name)
 	smallBtnLayout->setRowStretch(4, 0);
 	smallBtnLayout->setRowStretch(5, 0);
 
-	// large button tqlayout
+	// large button layout
 	largeBtnLayout->addWidget(pbClear, 0, 0);
 	largeBtnLayout->addWidget(pbAC, 0, 1);
 
@@ -319,7 +319,7 @@ KCalculator::KCalculator(TQWidget *parent, const char *name)
 	largeBtnLayout->addWidget(pbPercent, 4, 0);
 	largeBtnLayout->addWidget(pbPlusMinus, 4, 1);
 
-	// top tqlayout
+	// top layout
 	topLayout->addWidget(pbAngleChoose);
 	topLayout->addWidget(BaseChooseGroup);
 	topLayout->addStretch();
@@ -608,7 +608,7 @@ TQWidget* KCalculator::setupNumericKeys(TQWidget *parent)
 	TQGridLayout *thisLayout = new TQGridLayout(thisPage, 5, 4, 0,
 						  mInternalSpacing);
 
-	// large button tqlayout
+	// large button layout
 	thisLayout->addWidget(pbEE, 0, 0);
 	thisLayout->addWidget(pbDivision, 0, 1);
 	thisLayout->addWidget(pbX, 0, 2);
@@ -1049,7 +1049,7 @@ void KCalculator::updateGeometry(void)
         if( o->isWidgetType() )
         {
             TQWidget *tmp_widget = dynamic_cast<TQWidget *>(o);
-            margin = TQApplication::tqstyle().
+            margin = TQApplication::style().
                 pixelMetric(TQStyle::PM_ButtonMargin, (tmp_widget))*2;
             tmp_widget->setFixedSize(s.width()+margin, s.height()+margin);
             //tmp_widget->setMinimumSize(s.width()+margin, s.height()+margin);
@@ -1063,7 +1063,7 @@ void KCalculator::updateGeometry(void)
     int h1 = (NumButtonGroup->find(0x0F))->minimumSize().height();
     int h2 = static_cast<int>( (static_cast<float>(h1) + 4.0) / 5.0 );
     s.setWidth(mLargePage->fontMetrics().width("MMM") +
-               TQApplication::tqstyle().
+               TQApplication::style().
                pixelMetric(TQStyle::PM_ButtonMargin, NumButtonGroup->find(0x0F))*2);
     s.setHeight(h1 + h2);
 
@@ -1090,7 +1090,7 @@ void KCalculator::updateGeometry(void)
     h1 = (NumButtonGroup->find(0x0F))->minimumSize().height();
     h2 = (int)((((float)h1 + 4.0) / 5.0));
     s.setWidth(mLargePage->fontMetrics().width("MMM") +
-               TQApplication::tqstyle().
+               TQApplication::style().
                pixelMetric(TQStyle::PM_ButtonMargin, NumButtonGroup->find(0x0F))*2);
     s.setHeight(h1 + h2);
 
@@ -2139,7 +2139,7 @@ void KCalculator::set_colors()
 
 	calc_display->changeSettings();
 
-	TQColor bg = tqpalette().active().background();
+	TQColor bg = palette().active().background();
 
 	TQPalette numPal(KCalcSettings::numberButtonsColor(), bg);
 	for(int i=0; i<10; i++)
@@ -2212,7 +2212,7 @@ bool KCalculator::eventFilter(TQObject *o, TQEvent *e)
 			if((num_but = NumButtonGroup->id((KCalcButton*)o))
 			   != -1)
 			{
-			  TQPalette pal(c, tqpalette().active().background());
+			  TQPalette pal(c, palette().active().background());
 
 			  // Was it hex-button or normal digit??
 			  if (num_but <10)
@@ -2243,7 +2243,7 @@ bool KCalculator::eventFilter(TQObject *o, TQEvent *e)
 			else
 				return false;
 
-			TQPalette pal(c, tqpalette().active().background());
+			TQPalette pal(c, palette().active().background());
 
 			for(KCalcButton *p = list->first(); p; p=list->next())
 				p->setPalette(pal);

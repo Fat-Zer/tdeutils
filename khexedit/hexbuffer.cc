@@ -580,9 +580,9 @@ bool CHexBuffer::hasFileName( void )
 
 
 
-int CHexBuffer::setLayout( SDisplayLayout &tqlayout )
+int CHexBuffer::setLayout( SDisplayLayout &layout )
 {
-  mLayout = tqlayout;
+  mLayout = layout;
   mLayout.verify();
 
   if( mLayout.primaryMode == SDisplayLayout::textOnly )

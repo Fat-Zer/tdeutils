@@ -425,7 +425,7 @@ class KHEXEDIT_EXPORT KHexEdit : public KColumnsView
   protected:
     /** recalcs all dependant values with the actual NoOfBytesPerLine  */
     void adjustToLayoutNoOfBytesPerLine();
-    /** recalcs a tqlayout due to the resize style that fits into the view size
+    /** recalcs a layout due to the resize style that fits into the view size
       * and updates the dependant values
       */
     void adjustLayoutToSize();
@@ -452,7 +452,7 @@ class KHEXEDIT_EXPORT KHexEdit : public KColumnsView
     /** Buffer with the data */
     KDataBuffer *DataBuffer;
 
-    /** holds the logical tqlayout */
+    /** holds the logical layout */
     KBufferLayout *BufferLayout;
     /** */
     KBufferCursor *BufferCursor;

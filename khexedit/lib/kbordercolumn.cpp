@@ -49,7 +49,7 @@ void KBorderColumn::paintLine( TQPainter *P )
 
     if( Middle )
     {
-      int GridColor = View->tqstyle().styleHint( TQStyle::SH_Table_GridLineColor, View );
+      int GridColor = View->style().styleHint( TQStyle::SH_Table_GridLineColor, View );
       P->setPen( GridColor != -1 ? (TQRgb)GridColor : View->colorGroup().mid() );
       P->drawLine( LineX, 0, LineX, LineHeight-1 ) ;
     }
@@ -75,7 +75,7 @@ void KBorderColumn::paintEmptyColumn( TQPainter *P, KPixelXs Xs, KPixelYs Ys )
   KPixelX LX = x() + LineX;
   if( Middle && Xs.includes(LX) )
   {
-    int GridColor = View->tqstyle().styleHint( TQStyle::SH_Table_GridLineColor, View );
+    int GridColor = View->style().styleHint( TQStyle::SH_Table_GridLineColor, View );
     P->setPen( GridColor != -1 ? (TQRgb)GridColor : View->colorGroup().mid() );
     P->drawLine( LX, Ys.start(), LX, Ys.end() ) ;
   }

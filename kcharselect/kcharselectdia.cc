@@ -148,7 +148,7 @@ void KCharSelectDia::add(const TQChar &_chr)
 //==================================================================
 void KCharSelectDia::toClip()
 {
-  TQClipboard *cb = TQApplication::tqclipboard();
+  TQClipboard *cb = TQApplication::clipboard();
   cb->setSelectionMode( true );
   cb->setText(lined->text());
   cb->setSelectionMode( false );
@@ -161,7 +161,7 @@ void KCharSelectDia::toClip()
 //
 void KCharSelectDia::toClipUTF8()
 {
-  TQClipboard *cb = TQApplication::tqclipboard();
+  TQClipboard *cb = TQApplication::clipboard();
   TQString str = lined->text();
   cb->setText(str.utf8());
 }
@@ -174,7 +174,7 @@ void KCharSelectDia::toClipUTF8()
 //
 void KCharSelectDia::toClipHTML()
 {
-  TQClipboard *cb = TQApplication::tqclipboard();
+  TQClipboard *cb = TQApplication::clipboard();
   TQString input;
   TQString html;
   TQString tempstring;
@@ -185,13 +185,13 @@ void KCharSelectDia::toClipHTML()
   for(i=0; i< input.length(); i++ )
     {
       tempchar = input.at(i);
-      if(  tempchar.latin1() && ((tempchar.tqunicode() < 128) || (tempchar.tqunicode() >= 128+32)) )
+      if(  tempchar.latin1() && ((tempchar.unicode() < 128) || (tempchar.unicode() >= 128+32)) )
         {
           html.append(input.at(i));
         }
       else
         {
-          html.append(tempstring.sprintf("&#x%x;", tempchar.tqunicode()));
+          html.append(tempstring.sprintf("&#x%x;", tempchar.unicode()));
         }
     }
   cb->setText(html);
@@ -201,7 +201,7 @@ void KCharSelectDia::toClipHTML()
 //
 void KCharSelectDia::fromClip()
 {
-  TQClipboard *cb = TQApplication::tqclipboard();
+  TQClipboard *cb = TQApplication::clipboard();
   lined->setText( cb->text() );
 }
 
@@ -213,7 +213,7 @@ void KCharSelectDia::fromClip()
 //
 void KCharSelectDia::fromClipUTF8()
 {
-  TQClipboard *cb = TQApplication::tqclipboard();
+  TQClipboard *cb = TQApplication::clipboard();
   TQString str = cb->text();
 
   lined->setText( str.fromUtf8( str.latin1() ) );
@@ -266,7 +266,7 @@ void KCharSelectDia::_exit()
 
   config->setGroup("General");
   config->writeEntry("selectedFont",vFont);
-  config->writeEntry("char",static_cast<int>(vChr.tqunicode()));
+  config->writeEntry("char",static_cast<int>(vChr.unicode()));
   config->writeEntry("table",charSelect->tableNum());
   config->writeEntry("entryDirection",entryDirection);
   config->sync();

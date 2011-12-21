@@ -260,7 +260,7 @@ void COptionDialog::setupCursorPage( void )
   TQVBoxLayout *topLayout = new TQVBoxLayout( page, 0, spacingHint() );
 
   TQVButtonGroup *group = new TQVButtonGroup( i18n("Blinking"), page );
-  group->tqlayout()->setMargin( spacingHint() );
+  group->layout()->setMargin( spacingHint() );
   topLayout->addWidget( group );
 
   text = i18n("Do not b&link");
@@ -282,7 +282,7 @@ void COptionDialog::setupCursorPage( void )
     TQT_SLOT( slotChanged()));
 
   group = new TQVButtonGroup( i18n("Shape"), page );
-  group->tqlayout()->setMargin( spacingHint() );
+  group->layout()->setMargin( spacingHint() );
   topLayout->addWidget( group );
 
   text = i18n("Always &use block (rectangular) cursor");
@@ -298,7 +298,7 @@ void COptionDialog::setupCursorPage( void )
 
   text = i18n("Cursor Behavior When Editor Loses Focus");
   group = new TQVButtonGroup( text, page );
-  group->tqlayout()->setMargin( spacingHint() );
+  group->layout()->setMargin( spacingHint() );
   topLayout->addWidget( group );
 
   text = i18n("&Stop blinking (if blinking is enabled)");
@@ -548,7 +548,7 @@ void COptionDialog::setupMiscPage( void )
     this, TQT_SLOT( slotChanged()));
 
   TQVButtonGroup *group = new TQVButtonGroup( i18n("Sounds"), page );
-  group->tqlayout()->setMargin( spacingHint() );
+  group->layout()->setMargin( spacingHint() );
   topLayout->addWidget( group );
   text = i18n("Make sound on data &input (eg. typing) failure");
   mMisc.inputCheck = new TQCheckBox( text, group );
@@ -560,7 +560,7 @@ void COptionDialog::setupMiscPage( void )
     this, TQT_SLOT( slotChanged()));
 
   group = new TQVButtonGroup( i18n("Bookmark Visibility"), page );
-  group->tqlayout()->setMargin( spacingHint() );
+  group->layout()->setMargin( spacingHint() );
   topLayout->addWidget( group );
   text = i18n("Use visible bookmarks in the offset column");
   mMisc.bookmarkColumnCheck = new TQCheckBox( text, group );
@@ -696,9 +696,9 @@ void COptionDialog::slotDefault( void )
   {
     case page_layout:
     {
-      SDisplayLayout tqlayout;
+      SDisplayLayout layout;
       SDisplayLine line;
-      setLayout( tqlayout, line );
+      setLayout( layout, line );
     }
     break;
 
@@ -758,7 +758,7 @@ void COptionDialog::slotApply( void )
       mDisplayState.line.setColumnSize(index, mLayout.columnSizeSpin->value());
       emit lineSizeChoice( mDisplayState.line );
 
-      SDisplayLayout &l = mDisplayState.tqlayout;
+      SDisplayLayout &l = mDisplayState.layout;
       l.lockLine = mLayout.lockLineCheck->isChecked();
       l.lockColumn = mLayout.lockColumnCheck->isChecked();
       l.leftSeparatorWidth = mLayout.leftSepWidthSpin->value();
@@ -789,7 +789,7 @@ void COptionDialog::slotApply( void )
 	l.horzGridWidth = l.vertGridWidth = 1;
       }
 
-      emit layoutChoice( mDisplayState.tqlayout );
+      emit layoutChoice( mDisplayState.layout );
     }
     break;
 
@@ -883,23 +883,23 @@ void COptionDialog::slotApply( void )
   configChanged = false;
 }
 
-void COptionDialog::setLayout( SDisplayLayout &tqlayout, SDisplayLine &line )
+void COptionDialog::setLayout( SDisplayLayout &layout, SDisplayLine &line )
 {
   mDisplayState.line = line;
-  mDisplayState.tqlayout = tqlayout;
+  mDisplayState.layout = layout;
 
   slotModeSelectorChanged( mLayout.formatCombo->currentItem() );
-  mLayout.lockLineCheck->setChecked( tqlayout.lockLine );
-  mLayout.lockColumnCheck->setChecked( tqlayout.lockColumn );
-  mLayout.leftSepWidthSpin->setValue( tqlayout.leftSeparatorWidth );
-  mLayout.rightSepWidthSpin->setValue( tqlayout.rightSeparatorWidth );
-  mLayout.separatorSpin->setValue( tqlayout.separatorMarginWidth );
-  mLayout.edgeSpin->setValue( tqlayout.edgeMarginWidth );
-  mLayout.leftSepWidthSpin->setValue( tqlayout.leftSeparatorWidth );
-  mLayout.rightSepWidthSpin->setValue( tqlayout.rightSeparatorWidth );
-  mLayout.columnCheck->setChecked( tqlayout.columnCharSpace );
-  slotColumnSepCheck( tqlayout.columnCharSpace );
-  mLayout.columnSepSpin->setValue( tqlayout.columnSpacing );
+  mLayout.lockLineCheck->setChecked( layout.lockLine );
+  mLayout.lockColumnCheck->setChecked( layout.lockColumn );
+  mLayout.leftSepWidthSpin->setValue( layout.leftSeparatorWidth );
+  mLayout.rightSepWidthSpin->setValue( layout.rightSeparatorWidth );
+  mLayout.separatorSpin->setValue( layout.separatorMarginWidth );
+  mLayout.edgeSpin->setValue( layout.edgeMarginWidth );
+  mLayout.leftSepWidthSpin->setValue( layout.leftSeparatorWidth );
+  mLayout.rightSepWidthSpin->setValue( layout.rightSeparatorWidth );
+  mLayout.columnCheck->setChecked( layout.columnCharSpace );
+  slotColumnSepCheck( layout.columnCharSpace );
+  mLayout.columnSepSpin->setValue( layout.columnSpacing );
 
   if( tqlayout.horzGridWidth == 0 && tqlayout.vertGridWidth == 0 )
   {
@@ -911,7 +911,7 @@ void COptionDialog::setLayout( SDisplayLayout &tqlayout, SDisplayLine &line )
   }
   else
   {
-    mLayout.gridCombo->setCurrentItem( tqlayout.vertGridWidth != 0 ? 1 : 2 );
+    mLayout.gridCombo->setCurrentItem( layout.vertGridWidth != 0 ? 1 : 2 );
   }
 
 }
@@ -1021,7 +1021,7 @@ void COptionDialog::setFile( SDisplayMisc &misc )
 
 void COptionDialog::setState( SDisplayState &state )
 {
-  setLayout( state.tqlayout, state.line );
+  setLayout( state.layout, state.line );
   setCursor( state.cursor );
   setColor( state.color );
   setFont( state.font );

@@ -438,7 +438,7 @@ void CHexViewWidget::changeYPos( int p )
 
 void CHexViewWidget::clipboardChanged( void )
 {
-  disconnect(TQApplication::tqclipboard(),TQT_SIGNAL(dataChanged()),
+  disconnect(TQApplication::clipboard(),TQT_SIGNAL(dataChanged()),
 	     this,TQT_SLOT(clipboardChanged()));
   unselect();
 }
@@ -716,9 +716,9 @@ void CHexViewWidget::setPalette( const TQPalette &p )
 }
 
 
-void CHexViewWidget::setLayout( SDisplayLayout &tqlayout )
+void CHexViewWidget::setLayout( SDisplayLayout &layout )
 {
-  mLayout = tqlayout;
+  mLayout = layout;
   mHexBuffer->setLayout( mLayout );
   updateWindow();
 
@@ -964,7 +964,7 @@ void CHexViewWidget::copy( void )
   {
     return;
   }
-  disconnect(TQApplication::tqclipboard(),TQT_SIGNAL(dataChanged()),
+  disconnect(TQApplication::clipboard(),TQT_SIGNAL(dataChanged()),
 	     this,TQT_SLOT(clipboardChanged()));
   //
   // Note: Do no give the CHexDrag a parent != 0. The clipboard
@@ -974,8 +974,8 @@ void CHexViewWidget::copy( void )
   // is destroyed. We will then have a double destroy situation
   // when the app. is closed (=> segfault).
   //
-  TQApplication::tqclipboard()->setData(new CHexDrag( buf ));
-  connect(TQApplication::tqclipboard(),TQT_SIGNAL(dataChanged()),
+  TQApplication::clipboard()->setData(new CHexDrag( buf ));
+  connect(TQApplication::clipboard(),TQT_SIGNAL(dataChanged()),
 	  this,TQT_SLOT(clipboardChanged()));
 }
 
@@ -988,10 +988,10 @@ void CHexViewWidget::copyText( int columnSegment )
     return;
   }
 
-  disconnect(TQApplication::tqclipboard(),TQT_SIGNAL(dataChanged()),
+  disconnect(TQApplication::clipboard(),TQT_SIGNAL(dataChanged()),
 	     this,TQT_SLOT(clipboardChanged()));
-  TQApplication::tqclipboard()->setText( buf.data() );
-  connect(TQApplication::tqclipboard(),TQT_SIGNAL(dataChanged()),
+  TQApplication::clipboard()->setText( buf.data() );
+  connect(TQApplication::clipboard(),TQT_SIGNAL(dataChanged()),
 	  this,TQT_SLOT(clipboardChanged()));
 }
 
@@ -999,7 +999,7 @@ void CHexViewWidget::copyText( int columnSegment )
 
 void CHexViewWidget::paste( void )
 {
-  TQMimeSource *data = TQApplication::tqclipboard()->data();
+  TQMimeSource *data = TQApplication::clipboard()->data();
   if( data != 0 )
   {
     TQByteArray buf;

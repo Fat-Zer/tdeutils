@@ -482,23 +482,23 @@ DiskConfig::DiskConfig(KSim::PluginObject *parent, const char *name)
   m_listview->addColumn(i18n("Disks"));
   m_layout->addWidget(m_listview);
 
-  TQHBoxLayout *tqlayout = new TQHBoxLayout;
-  tqlayout->setSpacing(6);
+  TQHBoxLayout *layout = new TQHBoxLayout;
+  layout->setSpacing(6);
 
   TQSpacerItem *spacer = new TQSpacerItem(20, 20,
      TQSizePolicy::Expanding, TQSizePolicy::Minimum);
-  tqlayout->addItem(spacer);
+  layout->addItem(spacer);
 
   m_add = new TQPushButton(this);
   m_add->setText(i18n("Add..."));
   connect(m_add, TQT_SIGNAL(clicked()), TQT_SLOT(addItem()));
-  tqlayout->addWidget(m_add);
+  layout->addWidget(m_add);
 
   m_remove = new TQPushButton(this);
   m_remove->setText(i18n("Remove"));
   connect(m_remove, TQT_SIGNAL(clicked()), TQT_SLOT(removeItem()));
-  tqlayout->addWidget(m_remove);
-  m_layout->addLayout(tqlayout);
+  layout->addWidget(m_remove);
+  m_layout->addLayout(layout);
 
   m_buttonBox = new TQVButtonGroup(i18n("Disk Styles"), this);
   m_layout->addWidget(m_buttonBox);

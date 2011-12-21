@@ -39,7 +39,7 @@ class KCharCodec;
 const int NoByteFound = -1;
 
 /** base class of all buffer column displayers
-  * holds all information about the vertical tqlayout of a buffer column
+  * holds all information about the vertical layout of a buffer column
   * knows how to paint the data and the editing things (focus, cursor, selection)
   * but does not offer
   *
@@ -154,7 +154,7 @@ class KBufferColumn : public KColumn
     int firstPos() const;
     int lastPos()  const;
     KSection visiblePositions() const;
-    const KBufferLayout *tqlayout() const;
+    const KBufferLayout *layout() const;
     KCharCodec* codec() const;
 
   protected:
@@ -184,7 +184,7 @@ class KBufferColumn : public KColumn
   protected:
     /** pointer to the buffer */
     KDataBuffer *Buffer;
-    /** pointer to the tqlayout */
+    /** pointer to the layout */
     const KBufferLayout *Layout;
     /** pointer to the ranges */
     KBufferRanges *Ranges;
@@ -242,7 +242,7 @@ inline int KBufferColumn::firstPos() const { return PaintPositions.start(); }
 inline int KBufferColumn::lastPos()  const { return PaintPositions.end(); }
 inline KSection KBufferColumn::visiblePositions() const { return PaintPositions; }
 
-inline const KBufferLayout *KBufferColumn::tqlayout() const { return Layout; }
+inline const KBufferLayout *KBufferColumn::layout() const { return Layout; }
 
 
 inline void KBufferColumn::setCodec( KCharCodec *C ) { Codec = C; }

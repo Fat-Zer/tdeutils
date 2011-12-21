@@ -56,29 +56,29 @@ NetConfig::NetConfig(KSim::PluginObject *parent, const char *name)
      TQT_SLOT(modifyItem(TQListViewItem *)));
   mainLayout->addWidget(usingBox);
 
-  tqlayout = new TQHBoxLayout;
-  tqlayout->setSpacing(6);
+  layout = new TQHBoxLayout;
+  layout->setSpacing(6);
 
   TQSpacerItem *spacer = new TQSpacerItem(20, 20,
      TQSizePolicy::Expanding, TQSizePolicy::Minimum);
-  tqlayout->addItem(spacer);
+  layout->addItem(spacer);
 
   insertButton = new TQPushButton(this);
   insertButton->setText(i18n("Add..."));
   connect(insertButton, TQT_SIGNAL(clicked()), TQT_SLOT(showNetDialog()));
-  tqlayout->addWidget(insertButton);
+  layout->addWidget(insertButton);
 
   modifyButton = new TQPushButton(this);
   modifyButton->setText(i18n("Modify..."));
   connect(modifyButton, TQT_SIGNAL(clicked()), TQT_SLOT(modifyCurrent()));
-  tqlayout->addWidget(modifyButton);
+  layout->addWidget(modifyButton);
 
   removeButton = new TQPushButton(this);
   removeButton->setText(i18n("Remove"));
   connect(removeButton, TQT_SIGNAL(clicked()), TQT_SLOT(removeCurrent()));
-  tqlayout->addWidget(removeButton);
+  layout->addWidget(removeButton);
 
-  mainLayout->addLayout(tqlayout);
+  mainLayout->addLayout(layout);
 }
 
 NetConfig::~NetConfig()

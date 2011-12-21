@@ -51,9 +51,9 @@ class KTextCharCodec : public KCharCodec
 
   protected:
     TQTextCodec *Codec;
-    /** decodes the chars to tqunicode */
+    /** decodes the chars to unicode */
     TQTextDecoder *Decoder;
-    /** encodes the chars from tqunicode */
+    /** encodes the chars from unicode */
     TQTextEncoder *Encoder;
     /** */
     mutable TQString Name;

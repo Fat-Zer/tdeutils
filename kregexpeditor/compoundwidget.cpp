@@ -40,8 +40,8 @@
 CompoundDetailWindow::CompoundDetailWindow( TQWidget* parent, const char* name )
   :TQWidget( parent, name )
 {
-  TQVBoxLayout* tqlayout = new TQVBoxLayout( this );
-  tqlayout->setAutoAdd( true );
+  TQVBoxLayout* layout = new TQVBoxLayout( this );
+  layout->setAutoAdd( true );
 
   TQLabel* label = new TQLabel( i18n("&Title:"), this);
   _title = new TQLineEdit( this );

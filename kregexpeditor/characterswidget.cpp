@@ -380,10 +380,10 @@ void CharacterEdits::slotOK()
 SingleEntry::SingleEntry(TQWidget* parent, const char* name )
     :KMultiFormListBoxEntry( parent, name )
 {
-    TQHBoxLayout* tqlayout = new TQHBoxLayout( this, 3, 6 );
+    TQHBoxLayout* layout = new TQHBoxLayout( this, 3, 6 );
     _selector = new CharSelector( this );
-    tqlayout->addWidget( _selector );
-    tqlayout->addStretch(1);
+    layout->addWidget( _selector );
+    layout->addStretch(1);
 }
 
 TQString SingleEntry::text() const
@@ -405,19 +405,19 @@ bool SingleEntry::isEmpty() const
 RangeEntry::RangeEntry(TQWidget* parent, const char* name )
     :KMultiFormListBoxEntry( parent, name )
 {
-    TQHBoxLayout* tqlayout = new TQHBoxLayout( this, 3, 6 );
+    TQHBoxLayout* layout = new TQHBoxLayout( this, 3, 6 );
 
     TQLabel* label = new TQLabel(i18n("From:"), this );
     _from = new CharSelector( this );
-    tqlayout->addWidget( label );
-    tqlayout->addWidget( _from );
+    layout->addWidget( label );
+    layout->addWidget( _from );
 
-    tqlayout->addStretch(1);
+    layout->addStretch(1);
 
     label = new TQLabel(i18n("end of range","To:"), this );
     _to = new CharSelector( this );
-    tqlayout->addWidget( label );
-    tqlayout->addWidget( _to );
+    layout->addWidget( label );
+    layout->addWidget( _to );
 }
 
 TQString RangeEntry::fromText() const

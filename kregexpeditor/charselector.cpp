@@ -43,10 +43,10 @@ class StackContainer :public TQWidget
 public:
     StackContainer( TQWidget* child, TQWidget* parent ) : TQWidget( parent )
         {
-            TQHBoxLayout* tqlayout = new TQHBoxLayout( this );
+            TQHBoxLayout* layout = new TQHBoxLayout( this );
             child->reparent( this, TQPoint(0,0), false );
-            tqlayout->addWidget( child );
-            tqlayout->addStretch( 1 );
+            layout->addWidget( child );
+            layout->addStretch( 1 );
         }
 };
 
@@ -54,7 +54,7 @@ CharSelector::CharSelector( TQWidget* parent, const char* name )
     :TQWidget( parent, name ), _oldIndex(0)
 {
   TQStringList items;
-  TQHBoxLayout* tqlayout = new TQHBoxLayout( this, 0, 6 );
+  TQHBoxLayout* layout = new TQHBoxLayout( this, 0, 6 );
 
   _type = new TQComboBox( this, "_type" );
   items << i18n("Normal Character")
@@ -68,10 +68,10 @@ CharSelector::CharSelector( TQWidget* parent, const char* name )
         << i18n("TheQt::Horizontal Tab Character (\\t)")
         << i18n("TheQt::Vertical Tab Character (\\v)");
   _type->insertStringList( items );
-  tqlayout->addWidget( _type );
+  layout->addWidget( _type );
 
   _stack = new TQWidgetStack( this, "_stack" );
-  tqlayout->addWidget( _stack );
+  layout->addWidget( _stack );
 
   _normal = new LimitedCharLineEdit( LimitedCharLineEdit::NORMAL, 0, "_normal" );
   _stack->addWidget( new StackContainer( _normal, _stack ), 0 );

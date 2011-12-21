@@ -1593,7 +1593,7 @@ void listKeys::slotProcessExportMail(TQString keys)
 
 void listKeys::slotProcessExportClip(TQString keys)
 {
-        kapp->tqclipboard()->setText(keys,clipboardMode);
+        kapp->clipboard()->setText(keys,clipboardMode);
 }
 
 
@@ -2488,7 +2488,7 @@ void listKeys::slotPreImportKey()
                                 connect(importKeyProcess,TQT_SIGNAL(refreshOrphaned()),keysList2,TQT_SLOT(slotReloadOrphaned()));
                         }
                 } else {
-                        TQString keystr = kapp->tqclipboard()->text(clipboardMode);
+                        TQString keystr = kapp->clipboard()->text(clipboardMode);
                         if (!keystr.isEmpty()) {
                                 changeMessage(i18n("Importing..."),0,true);
                                 KgpgInterface *importKeyProcess=new KgpgInterface();

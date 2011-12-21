@@ -69,7 +69,7 @@ ExtractionDialog::ExtractionDialog( TQWidget *parent, const char *name,
 	TQVBox *vbox = makeVBoxMainWidget();
 
 	TQHBox *header = new TQHBox( vbox );
-	header->tqlayout()->setSpacing( 10 );
+	header->layout()->setSpacing( 10 );
 
 	TQLabel *icon = new TQLabel( header );
 	icon->setPixmap( DesktopIcon( "ark_extract" ) );
@@ -78,7 +78,7 @@ ExtractionDialog::ExtractionDialog( TQWidget *parent, const char *name,
 	if ( enableSelected )
 	{
 		TQVBox *whichFiles = new TQVBox( header );
-		whichFiles->tqlayout()->setSpacing( 6 );
+		whichFiles->layout()->setSpacing( 6 );
 		new TQLabel( TQString( "<qt><b><font size=\"+1\">%1</font></b></qt>" )
 		            .arg( i18n( "Extract:" ) ), whichFiles );
 		TQHButtonGroup *filesGroup = new TQHButtonGroup( whichFiles );

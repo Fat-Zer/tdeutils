@@ -217,7 +217,7 @@ TQRect KSim::Theme::frameRightBorder(const TQRect &defValue) const
 TQColor KSim::Theme::chartInColour(const TQColor &defValue) const
 {
   if (d->recolour)
-    return TQApplication::tqpalette().active().background();
+    return TQApplication::palette().active().background();
 
   return internalColourEntry("chart_in_color", defValue);
 }
@@ -230,7 +230,7 @@ TQColor KSim::Theme::chartInColourGrid(const TQColor &defValue) const
 TQColor KSim::Theme::chartOutColour(const TQColor &defValue) const
 {
   if (d->recolour)
-    return TQApplication::tqpalette().active().background();
+    return TQApplication::palette().active().background();
 
   return internalColourEntry("chart_out_color", defValue);
 }
@@ -948,7 +948,7 @@ void KSim::ThemeLoader::reColourImage(TQImage &image)
   if (!d->recolour || image.isNull())
     return;
 
-  TQColor color = TQApplication::tqpalette().active().background();
+  TQColor color = TQApplication::palette().active().background();
   TQImage output(image.width(), image.height(), 32);
   output.setAlphaBuffer(image.hasAlphaBuffer());
 

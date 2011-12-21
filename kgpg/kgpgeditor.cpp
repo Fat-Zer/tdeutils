@@ -314,7 +314,7 @@ void KgpgApp::slotFileSave()
     TQTextCodec*cod=TQTextCodec::codecForName (textEncoding.ascii());
         // slotStatusMsg(i18n("Saving file..."));
     if (!checkEncoding(cod)) {
-	KMessageBox::sorry(this,i18n("The document could not been saved, as the selected encoding cannot encode every tqunicode character in it."));
+	KMessageBox::sorry(this,i18n("The document could not been saved, as the selected encoding cannot encode every unicode character in it."));
 	return;
     }
 

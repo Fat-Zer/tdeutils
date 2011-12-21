@@ -94,7 +94,7 @@ class KBytesEditWidget : public TQWidget, public KHE::BytesEditInterface,
     virtual void setCursorPosition( int Index );
 //     virtual bool tabChangesFocus() const;
 
-  public: // tqlayout interface ??
+  public: // layout interface ??
     /** sets the resizestyle for the value column. Default is KHE::FullSizeUsage */
     virtual void setResizeStyle( KResizeStyle Style );
     /** sets the number of bytes per line, switching the resize style to KHE::NoResize */

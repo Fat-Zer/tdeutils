@@ -38,9 +38,9 @@ KRegExpEditorGUI::KRegExpEditorGUI(TQWidget *parent, const char *name,
 	                           const TQStringList & )
   : TQWidget( parent, name)
 {
-  TQHBoxLayout* tqlayout = new TQHBoxLayout( this, 6 );
+  TQHBoxLayout* layout = new TQHBoxLayout( this, 6 );
   _editor = new KRegExpEditorPrivate( this, "_editor" );
-  tqlayout->addWidget( _editor );
+  layout->addWidget( _editor );
   connect( _editor, TQT_SIGNAL( canUndo(bool) ), this, TQT_SIGNAL( canUndo(bool) ) );
   connect( _editor, TQT_SIGNAL( canRedo(bool) ), this, TQT_SIGNAL( canRedo(bool) ) );
   connect( _editor, TQT_SIGNAL( changes(bool) ), this, TQT_SIGNAL( changes(bool) ) );
@@ -74,8 +74,8 @@ KRegExpEditorGUIDialog::KRegExpEditorGUIDialog( TQWidget *parent,
                  parent, name ? name : "KRegExpDialog" )
 {
   TQFrame* frame = plainPage();
-  TQVBoxLayout* tqlayout = new TQVBoxLayout( frame, 6 );
-  tqlayout->setAutoAdd( true );
+  TQVBoxLayout* layout = new TQVBoxLayout( frame, 6 );
+  layout->setAutoAdd( true );
   _editor = new KRegExpEditorGUI( frame );
 
   connect( _editor, TQT_SIGNAL( canUndo(bool) ), this, TQT_SIGNAL( canUndo(bool) ) );

@@ -755,11 +755,11 @@ void KHexEdit::cursorChanged( SCursorState &state )
   }
   else
   {
-    SDisplayLayout &tqlayout = editor()->tqlayout();
+    SDisplayLayout &layout = editor()->layout();
 
-    if( tqlayout.offsetMode == SDisplayLayout::hexadecimal )
+    if( layout.offsetMode == SDisplayLayout::hexadecimal )
     {
-      if( tqlayout.offsetUpperCase == false )
+      if( layout.offsetUpperCase == false )
       {
 	offset += TQString().sprintf( " %04x:%04x-%u", state.offset>>16,
 				     state.offset&0x0000FFFF, state.cell );
@@ -807,23 +807,23 @@ void KHexEdit::fileState( SFileState &state )
 
 
 
-void KHexEdit::layoutChanged( const SDisplayLayout &tqlayout )
+void KHexEdit::layoutChanged( const SDisplayLayout &layout )
 {
   KRadioAction *radioAction;
 
-  if( tqlayout.primaryMode == SDisplayLayout::hexadecimal )
+  if( layout.primaryMode == SDisplayLayout::hexadecimal )
   {
     radioAction = mAction.hexadecimal;
   }
-  else if( tqlayout.primaryMode == SDisplayLayout::decimal )
+  else if( layout.primaryMode == SDisplayLayout::decimal )
   {
     radioAction = mAction.decimal;
   }
-  else if( tqlayout.primaryMode == SDisplayLayout::octal )
+  else if( layout.primaryMode == SDisplayLayout::octal )
   {
     radioAction = mAction.octal;
   }
-  else if( tqlayout.primaryMode == SDisplayLayout::binary )
+  else if( layout.primaryMode == SDisplayLayout::binary )
   {
     radioAction = mAction.binary;
   }
@@ -841,15 +841,15 @@ void KHexEdit::layoutChanged( const SDisplayLayout &tqlayout )
   mAction.dataUppercase->blockSignals(true);
   mAction.offsetUppercase->blockSignals(true);
 
-  mAction.showOffsetColumn->setChecked( tqlayout.offsetVisible );
+  mAction.showOffsetColumn->setChecked( layout.offsetVisible );
   mAction.showTextColumn->setEnabled(
-    tqlayout.primaryMode != SDisplayLayout::textOnly );
+    layout.primaryMode != SDisplayLayout::textOnly );
   mAction.showTextColumn->setChecked(
-    tqlayout.secondaryMode != SDisplayLayout::hide );
+    layout.secondaryMode != SDisplayLayout::hide );
   mAction.offsetAsDecimal->setChecked(
-    tqlayout.offsetMode != SDisplayLayout::hexadecimal);
-  mAction.dataUppercase->setChecked( tqlayout.primaryUpperCase );
-  mAction.offsetUppercase->setChecked( tqlayout.offsetUpperCase );
+    layout.offsetMode != SDisplayLayout::hexadecimal);
+  mAction.dataUppercase->setChecked( layout.primaryUpperCase );
+  mAction.offsetUppercase->setChecked( layout.offsetUpperCase );
 
   mAction.showOffsetColumn->blockSignals(false);
   mAction.showTextColumn->blockSignals(false);
@@ -857,23 +857,23 @@ void KHexEdit::layoutChanged( const SDisplayLayout &tqlayout )
   mAction.dataUppercase->blockSignals(false);
   mAction.offsetUppercase->blockSignals(false);
 
-  if( tqlayout.primaryMode == SDisplayLayout::hexadecimal )
+  if( layout.primaryMode == SDisplayLayout::hexadecimal )
   {
     statusBar()->changeItem( i18n("Hex"), status_Layout );
   }
-  else if( tqlayout.primaryMode == SDisplayLayout::decimal )
+  else if( layout.primaryMode == SDisplayLayout::decimal )
   {
     statusBar()->changeItem( i18n("Dec"), status_Layout );
   }
-  else if( tqlayout.primaryMode == SDisplayLayout::octal )
+  else if( layout.primaryMode == SDisplayLayout::octal )
   {
     statusBar()->changeItem( i18n("Oct"), status_Layout );
   }
-  else if( tqlayout.primaryMode == SDisplayLayout::binary )
+  else if( layout.primaryMode == SDisplayLayout::binary )
   {
     statusBar()->changeItem( i18n("Bin"), status_Layout );
   }
-  else if( tqlayout.primaryMode == SDisplayLayout::textOnly )
+  else if( layout.primaryMode == SDisplayLayout::textOnly )
   {
     statusBar()->changeItem( i18n("Txt"), status_Layout );
   }

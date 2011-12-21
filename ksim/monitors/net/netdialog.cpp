@@ -86,9 +86,9 @@ NetDialog::NetDialog(TQWidget *parent, const char *name)
   m_timerBox = new TQGroupBox(m_generalTab);
   m_timerBox->setTitle(i18n("Timer"));
   m_timerBox->setColumnLayout(0, Qt::Vertical);
-  m_timerBox->tqlayout()->setSpacing(0);
-  m_timerBox->tqlayout()->setMargin(0);
-  m_timerBoxLayout = new TQVBoxLayout(m_timerBox->tqlayout());
+  m_timerBox->layout()->setSpacing(0);
+  m_timerBox->layout()->setMargin(0);
+  m_timerBoxLayout = new TQVBoxLayout(m_timerBox->layout());
   m_timerBoxLayout->setAlignment(TQt::AlignTop);
   m_timerBoxLayout->setSpacing(6);
   m_timerBoxLayout->setMargin(11);

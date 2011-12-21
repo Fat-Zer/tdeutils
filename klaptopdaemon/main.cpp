@@ -147,9 +147,9 @@ LaptopModule::LaptopModule(TQWidget *parent, const char *)
     enablehibernate = config.readBoolEntry("EnableHibernate", false);
     laptop_portable::software_suspend_set_mask(enablehibernate);
   }
-  TQVBoxLayout *tqlayout = new TQVBoxLayout(this);
+  TQVBoxLayout *layout = new TQVBoxLayout(this);
   tab = new TQTabWidget(this);
-  tqlayout->addWidget(tab);
+  layout->addWidget(tab);
 
   battery = new BatteryConfig(parent, "kcmlaptop");
   tab->addTab(battery, i18n("&Battery"));

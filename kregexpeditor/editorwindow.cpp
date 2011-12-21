@@ -289,7 +289,7 @@ void RegExpEditorWindow::cutCopyAux( TQPoint pos )
     RegExpWidgetDrag *clipboardData = new RegExpWidgetDrag( regexp, this );
     delete regexp;
 
-    TQClipboard* clipboard = tqApp->tqclipboard();
+    TQClipboard* clipboard = tqApp->clipboard();
     clipboard->setData( clipboardData );
     emit anythingOnClipboard( true );
     emit canSave( _top->hasAnyChildren() );
@@ -298,7 +298,7 @@ void RegExpEditorWindow::cutCopyAux( TQPoint pos )
 
 void RegExpEditorWindow::slotStartPasteAction()
 {
-    TQByteArray data = tqApp->tqclipboard()->data()->encodedData( "KRegExpEditor/widgetdrag" );
+    TQByteArray data = tqApp->clipboard()->data()->encodedData( "KRegExpEditor/widgetdrag" );
     TQTextStream stream( data, IO_ReadOnly );
     TQString str = stream.read();
 
@@ -335,7 +335,7 @@ void RegExpEditorWindow::showRMBMenu( bool enableCutCopy )
     _menu->setItemEnabled( CUT, enableCutCopy );
     _menu->setItemEnabled( COPY, enableCutCopy );
 
-    if ( ! tqApp->tqclipboard()->data()->provides( "KRegExpEditor/widgetdrag" ) )
+    if ( ! tqApp->clipboard()->data()->provides( "KRegExpEditor/widgetdrag" ) )
         _menu->setItemEnabled( PASTE, false );
     else
         _menu->setItemEnabled( PASTE, true );

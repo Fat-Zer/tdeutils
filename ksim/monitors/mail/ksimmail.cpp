@@ -69,10 +69,10 @@ void MailPlugin::showAbout()
 MailView::MailView( KSim::PluginObject* parent, const char* name )
 	: KSim::PluginView( parent, name )
 {
-	TQVBoxLayout* tqlayout = new TQVBoxLayout( this );
+	TQVBoxLayout* layout = new TQVBoxLayout( this );
 
 	MailLabel* label = new MailLabel( this );
-	tqlayout->addWidget( label, 0, AlignHCenter );
+	layout->addWidget( label, 0, AlignHCenter );
 }
 
 MailView::~MailView()

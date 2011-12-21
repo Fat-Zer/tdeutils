@@ -33,7 +33,7 @@ SelectableLineEdit::SelectableLineEdit( RegExpWidget* owner, TQWidget* parent, c
 void SelectableLineEdit::setSelected( bool selected )
 {
   if ( selected ) {
-    TQPalette pal = TQPalette(tqpalette());
+    TQPalette pal = TQPalette(palette());
     pal.setBrush( TQColorGroup::Base, gray );
     setPalette( pal );
   }

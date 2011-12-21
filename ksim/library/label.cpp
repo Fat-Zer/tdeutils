@@ -232,7 +232,7 @@ void KSim::Label::drawText(TQPainter *painter, const TQRect &rect,
   if (!pixmap().isNull())
     location.setX(pixmap().width() + 5);
    
-  tqstyle().drawItem(painter, location, AlignCenter, colorGroup(), true,
+  style().drawItem(painter, location, AlignCenter, colorGroup(), true,
       0, text, -1, &color);
 }
 
@@ -242,7 +242,7 @@ void KSim::Label::drawPixmap(TQPainter *painter, const TQRect &rect,
   TQRect location(rect);
   location.setWidth(pixmap.width());
 
-  tqstyle().drawItem(painter, location, AlignCenter, colorGroup(), true,
+  style().drawItem(painter, location, AlignCenter, colorGroup(), true,
     pixmap.isNull() ? 0 : &pixmap, TQString());
 }
 

@@ -195,7 +195,7 @@ KgpgView::KgpgView(TQWidget *parent, const char *name) : TQWidget(parent, name)
         editor=new MyEditor(this);
 	windowAutoClose=true;
 
-        /////    tqlayout
+        /////    layout
 
         TQVBoxLayout *vbox=new TQVBoxLayout(this,3);
 
@@ -214,7 +214,7 @@ KgpgView::KgpgView(TQWidget *parent, const char *name) : TQWidget(parent, name)
 
         TQObject::connect(editor,TQT_SIGNAL(textChanged()),TQT_TQOBJECT(this),TQT_SLOT(modified()));
 
-        boutonbox->tqlayout();
+        boutonbox->layout();
         editor->resize(editor->maximumSize());
         vbox->addWidget(editor);
         vbox->addWidget(boutonbox);

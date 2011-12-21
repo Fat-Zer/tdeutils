@@ -72,7 +72,7 @@ CHexEditorWidget::CHexEditorWidget( TQWidget *parent, const char *name )
 	   this, TQT_SLOT( inputModeChanged( const SDisplayInputMode & ) ) );
 
   mHexView->setFocus();
-  setBackgroundColor( tqpalette().active().base() );
+  setBackgroundColor( palette().active().base() );
 
   mProgressBusy    = false;
   mGotoDialog      = 0;
@@ -115,7 +115,7 @@ void CHexEditorWidget::initialize( void )
   setFont( mDisplayState.font );
   mHexView->setMisc( mDisplayState.misc );
   mHexView->setCursor( mDisplayState.cursor, false );
-  mHexView->setLayout( mDisplayState.tqlayout );
+  mHexView->setLayout( mDisplayState.layout );
   mHexView->setInputMode( mDisplayState.input );
   mHexView->setInsertMode( mDisplayState.misc.insertMode );
 }
@@ -123,25 +123,25 @@ void CHexEditorWidget::initialize( void )
 
 void CHexEditorWidget::writeConfiguration( KConfig &config )
 {
-  SDisplayLayout &tqlayout = mDisplayState.tqlayout;
+  SDisplayLayout &layout = mDisplayState.layout;
   config.setGroup( "Display Options" );
-  config.writeEntry( "PrimaryMode",          tqlayout.primaryModeString() );
-  config.writeEntry( "SecondaryMode",        tqlayout.secondaryModeString() );
-  config.writeEntry( "OffsetMode",           tqlayout.offsetModeString() );
-  config.writeEntry( "OffsetVisible",        tqlayout.offsetVisible );
-  config.writeEntry( "PrimaryUpperCase",     tqlayout.primaryUpperCase );
-  config.writeEntry( "OffsetUpperCase",      tqlayout.offsetUpperCase );
-  config.writeEntry( "LineSize",             tqlayout.lineSize );
-  config.writeEntry( "ColumnSize",           tqlayout.columnSize );
-  config.writeEntry( "LockLine",             tqlayout.lockLine );
-  config.writeEntry( "LockColumn",           tqlayout.lockColumn );
-  config.writeEntry( "ColumnCharSpace",      tqlayout.columnCharSpace );
-  config.writeEntry( "ColumnSpacing",        tqlayout.columnSpacing );
-  config.writeEntry( "SeparatorMarginWidth", tqlayout.separatorMarginWidth );
-  config.writeEntry( "EdgeMarginWidth",      tqlayout.edgeMarginWidth );
-  config.writeEntry( "LeftSeparatorWidth",   tqlayout.leftSeparatorWidth );
-  config.writeEntry( "RightSeparatorWidth",  tqlayout.rightSeparatorWidth );
-  config.writeEntry( "GridMode",             tqlayout.gridModeString() );
+  config.writeEntry( "PrimaryMode",          layout.primaryModeString() );
+  config.writeEntry( "SecondaryMode",        layout.secondaryModeString() );
+  config.writeEntry( "OffsetMode",           layout.offsetModeString() );
+  config.writeEntry( "OffsetVisible",        layout.offsetVisible );
+  config.writeEntry( "PrimaryUpperCase",     layout.primaryUpperCase );
+  config.writeEntry( "OffsetUpperCase",      layout.offsetUpperCase );
+  config.writeEntry( "LineSize",             layout.lineSize );
+  config.writeEntry( "ColumnSize",           layout.columnSize );
+  config.writeEntry( "LockLine",             layout.lockLine );
+  config.writeEntry( "LockColumn",           layout.lockColumn );
+  config.writeEntry( "ColumnCharSpace",      layout.columnCharSpace );
+  config.writeEntry( "ColumnSpacing",        layout.columnSpacing );
+  config.writeEntry( "SeparatorMarginWidth", layout.separatorMarginWidth );
+  config.writeEntry( "EdgeMarginWidth",      layout.edgeMarginWidth );
+  config.writeEntry( "LeftSeparatorWidth",   layout.leftSeparatorWidth );
+  config.writeEntry( "RightSeparatorWidth",  layout.rightSeparatorWidth );
+  config.writeEntry( "GridMode",             layout.gridModeString() );
 
   SDisplayLine &line = mDisplayState.line;
   config.setGroup( "Line Size" );
@@ -183,7 +183,7 @@ void CHexEditorWidget::writeConfiguration( KConfig &config )
   config.setGroup( "Display Font" );
   config.writeEntry( "UseSystemFont",        font.useSystemFont );
   config.writeEntry( "LocalFont",            font.localFont );
-  config.writeEntry( "NonPrintChar",         font.nonPrintChar.tqunicode() );
+  config.writeEntry( "NonPrintChar",         font.nonPrintChar.unicode() );
 
   SDisplayCursor &cursor = mDisplayState.cursor;
   config.setGroup( "Display Cursor" );
@@ -221,38 +221,38 @@ void CHexEditorWidget::writeConfiguration( KConfig &config )
 
 void CHexEditorWidget::readConfiguration( KConfig &config )
 {
-  SDisplayLayout &tqlayout = mDisplayState.tqlayout;
+  SDisplayLayout &layout = mDisplayState.layout;
   config.setGroup( "Display Options" );
-  tqlayout.setPrimaryMode( config.readEntry("PrimaryMode") );
-  tqlayout.setSecondaryMode( config.readEntry("SecondaryMode") );
-  tqlayout.setOffsetMode( config.readEntry("OffsetMode") );
-  tqlayout.offsetVisible = config.readBoolEntry(
-    "OffsetVisible", tqlayout.offsetVisible );
-  tqlayout.primaryUpperCase = config.readBoolEntry(
-    "PrimaryUpperCase", tqlayout.primaryUpperCase );
-  tqlayout.offsetUpperCase = config.readBoolEntry(
-    "OffsetUpperCase", tqlayout.offsetUpperCase );
-  tqlayout.lineSize = config.readNumEntry(
-    "LineSize", tqlayout.lineSize );
-  tqlayout.columnSize = config.readNumEntry(
-    "ColumnSize", tqlayout.columnSize );
-  tqlayout.lockLine = config.readBoolEntry(
-    "LockLine", tqlayout.lockLine );
-  tqlayout.lockColumn = config.readBoolEntry(
-    "LockColumn", tqlayout.lockColumn );
-  tqlayout.columnCharSpace = config.readBoolEntry(
-    "ColumnCharSpace", tqlayout.columnCharSpace );
-  tqlayout.columnSpacing = config.readNumEntry(
-    "ColumnSpacing", tqlayout.columnSpacing );
-  tqlayout.separatorMarginWidth = config.readNumEntry(
-    "SeparatorMarginWidth", tqlayout.separatorMarginWidth );
-  tqlayout.edgeMarginWidth = config.readNumEntry(
-    "EdgeMarginWidth", tqlayout.edgeMarginWidth );
-  tqlayout.leftSeparatorWidth = config.readNumEntry(
-    "LeftSeparatorWidth", tqlayout.leftSeparatorWidth );
-  tqlayout.rightSeparatorWidth = config.readNumEntry(
-    "RightSeparatorWidth", tqlayout.rightSeparatorWidth );
-  tqlayout.setGridMode( config.readEntry("GridMode") );
+  layout.setPrimaryMode( config.readEntry("PrimaryMode") );
+  layout.setSecondaryMode( config.readEntry("SecondaryMode") );
+  layout.setOffsetMode( config.readEntry("OffsetMode") );
+  layout.offsetVisible = config.readBoolEntry(
+    "OffsetVisible", layout.offsetVisible );
+  layout.primaryUpperCase = config.readBoolEntry(
+    "PrimaryUpperCase", layout.primaryUpperCase );
+  layout.offsetUpperCase = config.readBoolEntry(
+    "OffsetUpperCase", layout.offsetUpperCase );
+  layout.lineSize = config.readNumEntry(
+    "LineSize", layout.lineSize );
+  layout.columnSize = config.readNumEntry(
+    "ColumnSize", layout.columnSize );
+  layout.lockLine = config.readBoolEntry(
+    "LockLine", layout.lockLine );
+  layout.lockColumn = config.readBoolEntry(
+    "LockColumn", layout.lockColumn );
+  layout.columnCharSpace = config.readBoolEntry(
+    "ColumnCharSpace", layout.columnCharSpace );
+  layout.columnSpacing = config.readNumEntry(
+    "ColumnSpacing", layout.columnSpacing );
+  layout.separatorMarginWidth = config.readNumEntry(
+    "SeparatorMarginWidth", layout.separatorMarginWidth );
+  layout.edgeMarginWidth = config.readNumEntry(
+    "EdgeMarginWidth", layout.edgeMarginWidth );
+  layout.leftSeparatorWidth = config.readNumEntry(
+    "LeftSeparatorWidth", layout.leftSeparatorWidth );
+  layout.rightSeparatorWidth = config.readNumEntry(
+    "RightSeparatorWidth", layout.rightSeparatorWidth );
+  layout.setGridMode( config.readEntry("GridMode") );
 
   SDisplayLine &line = mDisplayState.line;
   config.setGroup( "Line Size" );
@@ -398,9 +398,9 @@ void CHexEditorWidget::paletteChanged( void )
   setColor( mDisplayState.color );
 }
 
-void CHexEditorWidget::layoutChanged( const SDisplayLayout &/*tqlayout*/ )
+void CHexEditorWidget::layoutChanged( const SDisplayLayout &/*layout*/ )
 {
-  //mDisplayState.tqlayout = tqlayout;
+  //mDisplayState.layout = layout;
 }
 
 void CHexEditorWidget::inputModeChanged( const SDisplayInputMode &input )
@@ -414,30 +414,30 @@ void CHexEditorWidget::setLineSize(const SDisplayLine &line )
   mDisplayState.line = line;
 }
 
-void CHexEditorWidget::setLayout( const SDisplayLayout &tqlayout )
+void CHexEditorWidget::setLayout( const SDisplayLayout &layout )
 {
   //
   // We only set the values that can be modified by the dialog
   //
-  mDisplayState.tqlayout.lockLine = tqlayout.lockLine;
-  mDisplayState.tqlayout.lockColumn = tqlayout.lockColumn;
-  mDisplayState.tqlayout.leftSeparatorWidth = tqlayout.leftSeparatorWidth;
-  mDisplayState.tqlayout.rightSeparatorWidth = tqlayout.rightSeparatorWidth;
-  mDisplayState.tqlayout.separatorMarginWidth = tqlayout.separatorMarginWidth;
-  mDisplayState.tqlayout.edgeMarginWidth = tqlayout.edgeMarginWidth;
-  mDisplayState.tqlayout.columnCharSpace = tqlayout.columnCharSpace;
-  mDisplayState.tqlayout.columnSpacing = tqlayout.columnSpacing;
+  mDisplayState.layout.lockLine = layout.lockLine;
+  mDisplayState.layout.lockColumn = layout.lockColumn;
+  mDisplayState.layout.leftSeparatorWidth = layout.leftSeparatorWidth;
+  mDisplayState.layout.rightSeparatorWidth = layout.rightSeparatorWidth;
+  mDisplayState.layout.separatorMarginWidth = layout.separatorMarginWidth;
+  mDisplayState.layout.edgeMarginWidth = layout.edgeMarginWidth;
+  mDisplayState.layout.columnCharSpace = layout.columnCharSpace;
+  mDisplayState.layout.columnSpacing = layout.columnSpacing;
   mDisplayState.tqlayout.horzGridWidth = tqlayout.horzGridWidth;
-  mDisplayState.tqlayout.vertGridWidth = tqlayout.vertGridWidth;
+  mDisplayState.layout.vertGridWidth = layout.vertGridWidth;
 
   //
   // Select the line and column sizes we shall use now.
   //
-  SDisplayLayout &l = mDisplayState.tqlayout;
+  SDisplayLayout &l = mDisplayState.layout;
   l.lineSize   = mDisplayState.line.lineSize[ l.primaryMode ];
   l.columnSize = mDisplayState.line.columnSize[ l.primaryMode ];
 
-  mHexView->setLayout( mDisplayState.tqlayout );
+  mHexView->setLayout( mDisplayState.layout );
 }
 
 void CHexEditorWidget::setCursor( const SDisplayCursor &cursor )
@@ -459,20 +459,20 @@ void CHexEditorWidget::setColor( const SDisplayColor &color )
   if( mDisplayState.color.useSystemColor == true )
   {
     SDisplayColor c = mDisplayState.color;
-    c.textBg           = kapp->tqpalette().active().base();
-    c.secondTextBg     = kapp->tqpalette().active().base();
-    c.offsetBg         = kapp->tqpalette().active().base();
-    c.inactiveBg       = kapp->tqpalette().active().base();
-    c.primaryFg[0]     = kapp->tqpalette().active().text();
-    c.primaryFg[1]     = kapp->tqpalette().active().text();
-    c.nonPrintFg       = kapp->tqpalette().active().text();
-    c.offsetFg         = kapp->tqpalette().active().text();
-    c.secondaryFg      = kapp->tqpalette().active().text();
-    c.leftSeparatorFg  = kapp->tqpalette().active().text();
-    c.rightSeparatorFg = kapp->tqpalette().active().text();
-    c.cursorBg         = kapp->tqpalette().active().text();
-    c.cursorFg         = kapp->tqpalette().active().base();
-    c.gridFg           = kapp->tqpalette().active().text();
+    c.textBg           = kapp->palette().active().base();
+    c.secondTextBg     = kapp->palette().active().base();
+    c.offsetBg         = kapp->palette().active().base();
+    c.inactiveBg       = kapp->palette().active().base();
+    c.primaryFg[0]     = kapp->palette().active().text();
+    c.primaryFg[1]     = kapp->palette().active().text();
+    c.nonPrintFg       = kapp->palette().active().text();
+    c.offsetFg         = kapp->palette().active().text();
+    c.secondaryFg      = kapp->palette().active().text();
+    c.leftSeparatorFg  = kapp->palette().active().text();
+    c.rightSeparatorFg = kapp->palette().active().text();
+    c.cursorBg         = kapp->palette().active().text();
+    c.cursorFg         = kapp->palette().active().base();
+    c.gridFg           = kapp->palette().active().text();
     SDisplayColor defaultColor;
     c.bookmarkBg       = defaultColor.bookmarkBg;
     c.bookmarkFg       = defaultColor.bookmarkFg;
@@ -513,46 +513,46 @@ void CHexEditorWidget::setMisc( const SDisplayMisc &misc )
 
 void CHexEditorWidget::setHexadecimalMode( void )
 {
-  tqlayout().primaryMode   = SDisplayLayout::hexadecimal;
-  tqlayout().lineSize      = line().lineSize[ SDisplayLine::hexadecimal ];
-  tqlayout().columnSize    = line().columnSize[ SDisplayLine::hexadecimal ];
-  mHexView->setLayout( tqlayout() );
+  layout().primaryMode   = SDisplayLayout::hexadecimal;
+  layout().lineSize      = line().lineSize[ SDisplayLine::hexadecimal ];
+  layout().columnSize    = line().columnSize[ SDisplayLine::hexadecimal ];
+  mHexView->setLayout( layout() );
 }
 
 
 void CHexEditorWidget::setDecimalMode( void )
 {
-  tqlayout().primaryMode   = SDisplayLayout::decimal;
-  tqlayout().lineSize      = line().lineSize[ SDisplayLine::decimal ];
-  tqlayout().columnSize    = line().columnSize[ SDisplayLine::decimal ];
-  mHexView->setLayout( tqlayout() );
+  layout().primaryMode   = SDisplayLayout::decimal;
+  layout().lineSize      = line().lineSize[ SDisplayLine::decimal ];
+  layout().columnSize    = line().columnSize[ SDisplayLine::decimal ];
+  mHexView->setLayout( layout() );
 }
 
 
 void CHexEditorWidget::setOctalMode( void )
 {
-  tqlayout().primaryMode   = SDisplayLayout::octal;
-  tqlayout().lineSize      = line().lineSize[ SDisplayLine::octal ];
-  tqlayout().columnSize    = line().columnSize[ SDisplayLine::octal ];
-  mHexView->setLayout( tqlayout() );
+  layout().primaryMode   = SDisplayLayout::octal;
+  layout().lineSize      = line().lineSize[ SDisplayLine::octal ];
+  layout().columnSize    = line().columnSize[ SDisplayLine::octal ];
+  mHexView->setLayout( layout() );
 }
 
 
 void CHexEditorWidget::setBinaryMode( void )
 {
-  tqlayout().primaryMode   = SDisplayLayout::binary;
-  tqlayout().lineSize      = line().lineSize[ SDisplayLine::binary ];
-  tqlayout().columnSize    = line().columnSize[ SDisplayLine::binary ];
-  mHexView->setLayout( tqlayout() );
+  layout().primaryMode   = SDisplayLayout::binary;
+  layout().lineSize      = line().lineSize[ SDisplayLine::binary ];
+  layout().columnSize    = line().columnSize[ SDisplayLine::binary ];
+  mHexView->setLayout( layout() );
 }
 
 
 void CHexEditorWidget::setTextMode( void )
 {
-  tqlayout().primaryMode   = SDisplayLayout::textOnly;
-  tqlayout().lineSize      = line().lineSize[ SDisplayLine::textOnly ];
-  tqlayout().columnSize    = line().columnSize[ SDisplayLine::textOnly ];
-  mHexView->setLayout( tqlayout() );
+  layout().primaryMode   = SDisplayLayout::textOnly;
+  layout().lineSize      = line().lineSize[ SDisplayLine::textOnly ];
+  layout().columnSize    = line().columnSize[ SDisplayLine::textOnly ];
+  mHexView->setLayout( layout() );
 }
 
 
@@ -1306,34 +1306,34 @@ void CHexEditorWidget::enableInputLock( bool inputLock )
 
 void CHexEditorWidget::toggleOffsetColumnVisibility( void )
 {
-  tqlayout().offsetVisible = tqlayout().offsetVisible == true ? false : true;
-  mHexView->setLayout( tqlayout() );
+  layout().offsetVisible = layout().offsetVisible == true ? false : true;
+  mHexView->setLayout( layout() );
 }
 
 void CHexEditorWidget::toggleTextColumnVisibility( void )
 {
-  tqlayout().secondaryMode = tqlayout().secondaryMode == SDisplayLayout::hide ?
+  layout().secondaryMode = layout().secondaryMode == SDisplayLayout::hide ?
     SDisplayLayout::textOnly : SDisplayLayout::hide;
-  mHexView->setLayout( tqlayout() );
+  mHexView->setLayout( layout() );
 }
 
 void CHexEditorWidget::toggleOffsetAsDecimal( void )
 {
-  tqlayout().offsetMode = tqlayout().offsetMode == SDisplayLayout::hexadecimal ?
+  layout().offsetMode = layout().offsetMode == SDisplayLayout::hexadecimal ?
     SDisplayLayout::decimal : SDisplayLayout::hexadecimal;
-  mHexView->setLayout( tqlayout() );
+  mHexView->setLayout( layout() );
 }
 
 void CHexEditorWidget::toggleDataUppercase( void )
 {
-  tqlayout().primaryUpperCase = tqlayout().primaryUpperCase == true ? false : true;
-  mHexView->setLayout( tqlayout() );
+  layout().primaryUpperCase = layout().primaryUpperCase == true ? false : true;
+  mHexView->setLayout( layout() );
 }
 
 void CHexEditorWidget::toggleOffsetUppercase( void )
 {
-  tqlayout().offsetUpperCase = tqlayout().offsetUpperCase == true ? false : true;
-  mHexView->setLayout( tqlayout() );
+  layout().offsetUpperCase = layout().offsetUpperCase == true ? false : true;
+  mHexView->setLayout( layout() );
 }
 
 void CHexEditorWidget::toggleInsertMode( void )
@@ -1958,7 +1958,7 @@ void CHexEditorWidget::favorites( void )
 {
   TQString msg = i18n(""
     "Not available yet!\n"
-    "Save or retrive your favorite tqlayout" );
+    "Save or retrive your favorite layout" );
   KMessageBox::sorry( topLevelWidget(), msg, i18n("Profiles") );
 }
 

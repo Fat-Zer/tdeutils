@@ -154,17 +154,17 @@ KRegExpEditorPrivate::KRegExpEditorPrivate(TQWidget *parent, const char *name)
 
 
   // Line Edit
-  TQHBoxLayout* tqlayout = new TQHBoxLayout( topLayout, 6 );
+  TQHBoxLayout* layout = new TQHBoxLayout( topLayout, 6 );
   TQLabel* label = new TQLabel( i18n("ASCII syntax:"), this );
-  tqlayout->addWidget( label );
+  layout->addWidget( label );
   clearButton = new TQToolButton( this );
   const TQString icon( TQString::fromLatin1( TQApplication::reverseLayout() ? "clear_left" : "locationbar_erase" ) );
   TQIconSet clearIcon = SmallIconSet( icon );
   clearButton->setIconSet( clearIcon );
-  tqlayout->addWidget( clearButton );
+  layout->addWidget( clearButton );
   TQToolTip::add( clearButton, i18n("Clear expression") );
   _regexpEdit = new TQLineEdit( this );
-  tqlayout->addWidget( _regexpEdit );
+  layout->addWidget( _regexpEdit );
   TQWhatsThis::add( _regexpEdit, i18n( "This is the regular expression in ASCII syntax. You are likely only "
 				      "to be interested in this if you are a programmer, and need to "
 				      "develop a regular expression using TQRegExp.<p>"
@@ -178,7 +178,7 @@ KRegExpEditorPrivate::KRegExpEditorPrivate(TQWidget *parent, const char *name)
 #endif
   _error = new TQLabel( this );
   _error->setPixmap( pix );
-  tqlayout->addWidget( _error );
+  layout->addWidget( _error );
   _error->hide();
 
   _timer = new TQTimer(this);

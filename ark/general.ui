@@ -37,7 +37,7 @@
         </widget>
         <widget class="TQLayoutWidget">
             <property name="name">
-                <cstring>tqlayout1</cstring>
+                <cstring>layout1</cstring>
             </property>
             <hbox>
                 <property name="name">

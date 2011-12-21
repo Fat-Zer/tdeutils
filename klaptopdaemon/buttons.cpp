@@ -120,7 +120,7 @@ ButtonsConfig::ButtonsConfig (TQWidget * parent, const char *name)
 
       if (laptop_portable::has_button(laptop_portable::LidButton)) {
       	lidBox = new TQVButtonGroup(i18n("Lid Switch Closed"), this);
-      	lidBox->tqlayout()->setSpacing( KDialog::spacingHint() );
+      	lidBox->layout()->setSpacing( KDialog::spacingHint() );
         TQToolTip::add( lidBox, i18n( "Select which actions will occur when the laptop's lid is closed" ) );
       	hlay->addWidget( lidBox );
 
@@ -196,7 +196,7 @@ ButtonsConfig::ButtonsConfig (TQWidget * parent, const char *name)
       if (laptop_portable::has_button(laptop_portable::PowerButton)) {
 
       	powerBox = new TQVButtonGroup(i18n("Power Switch Pressed"), this);
-      	powerBox->tqlayout()->setSpacing( KDialog::spacingHint() );
+      	powerBox->layout()->setSpacing( KDialog::spacingHint() );
         TQToolTip::add( powerBox, i18n( "Select which actions will occur when the laptop's power button is pressed" ) );
       	hlay->addWidget( powerBox );
 

@@ -52,7 +52,7 @@ class KWalletEditor : public KMainWindow {
 		void deleteFolder();
 
 	private slots:
-		void tqlayout();
+		void layout();
 		void updateFolderList(bool checkEntries = false);
 		void entrySelectionChanged(TQListViewItem *item);
 		void listItemRenamed(TQListViewItem *, int, const TQString&);

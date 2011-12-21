@@ -264,7 +264,7 @@ void KSim::Chart::configureObject(bool repaintWidget)
   }
 
   // Update our geometry if we need to let any
-  // tqlayout know about our sizeHint() change
+  // layout know about our sizeHint() change
   if (oldSize != sizeHint()) {
     // Using resize() here seems to be needed
     resize(sizeHint());

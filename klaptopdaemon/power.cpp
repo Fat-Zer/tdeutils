@@ -122,7 +122,7 @@ PowerConfig::PowerConfig (TQWidget * parent, const char *name)
 
       nopowerBox = new TQVButtonGroup(i18n("Not Powered"), this);
       TQToolTip::add( nopowerBox, i18n( "Options in this box apply when the laptop is unplugged from the wall and has been idle for a while" ) );
-      nopowerBox->tqlayout()->setSpacing( KDialog::spacingHint() );
+      nopowerBox->layout()->setSpacing( KDialog::spacingHint() );
       hlay->addWidget( nopowerBox );
 
       if (can_standby) {
@@ -214,7 +214,7 @@ PowerConfig::PowerConfig (TQWidget * parent, const char *name)
 
 
       powerBox = new TQVButtonGroup(i18n("Powered"), this);
-      powerBox->tqlayout()->setSpacing( KDialog::spacingHint() );
+      powerBox->layout()->setSpacing( KDialog::spacingHint() );
       TQToolTip::add( powerBox, i18n( "Options in this box apply when the laptop is plugged into the wall and has been idle for a while" ) );
       hlay->addWidget( powerBox );
 

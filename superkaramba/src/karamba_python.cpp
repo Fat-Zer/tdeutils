@@ -214,7 +214,7 @@ static PyMethodDef karamba_methods[] = {
     {(char*)"showSystray", py_show_systray, METH_VARARGS, (char*)"Show the Systray"},
     {(char*)"moveSystray", py_move_systray, METH_VARARGS, (char*)"Move the Systray"},
     {(char*)"getCurrentWindowCount", py_get_current_window_count, METH_VARARGS, (char*)"Get current Window count"},
-    {(char*)"updateSystrayLayout", py_update_systray_layout, METH_VARARGS, (char*)"Update Systray tqlayout"},
+    {(char*)"updateSystrayLayout", py_update_systray_layout, METH_VARARGS, (char*)"Update Systray layout"},
 
     // Misc - misc_python.cpp
     {(char*)"getThemePath", py_get_theme_path, METH_VARARGS,  (char*)"Get the file path of the theme"},

@@ -40,7 +40,7 @@ ArkViewer::ArkViewer( TQWidget * parent, const char * name )
 	: KDialogBase( parent, name, false, TQString(), Close ), m_part( 0 )
 {
 	m_widget = new TQVBox( this );
-	m_widget->tqlayout()->setSpacing( 10 );
+	m_widget->layout()->setSpacing( 10 );
 
 	connect( this, TQT_SIGNAL( finished() ), this, TQT_SLOT( slotFinished() ) );
 

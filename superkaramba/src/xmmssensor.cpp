@@ -164,9 +164,9 @@ void XMMSSensor::update()
     {
         isPlaying = xmms->isPlaying(0);
         pos = xmms->getPlaylistPos(0);
-        qDebug("tqunicode start");
+        qDebug("unicode start");
         title = codec->toUnicode( TQCString( xmms->getPlaylistTitle( 0, pos ) )  );
-        qDebug("tqunicode end");
+        qDebug("unicode end");
         if( title.isEmpty() )
             title = "XMMS";
 

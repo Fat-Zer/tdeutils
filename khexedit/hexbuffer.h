@@ -1072,7 +1072,7 @@ class CHexBuffer : public TQByteArray
     CHexBuffer( void );
     ~CHexBuffer( void );
 
-    int  setLayout( SDisplayLayout &tqlayout );
+    int  setLayout( SDisplayLayout &layout );
     void setColor( SDisplayColor &color );
     void setInputMode( SDisplayInputMode &mode );
     bool toggleEditor( void );
@@ -1156,7 +1156,7 @@ class CHexBuffer : public TQByteArray
     inline SCursorState &cursorState( void );
     inline void valueOnCursor( TQByteArray &buf, uint size );
     inline SFileState &fileState( void );
-    inline const SDisplayLayout &tqlayout( void );
+    inline const SDisplayLayout &layout( void );
 
     inline const SDisplayInputMode &inputMode( void );
     inline TQPtrList<SCursorOffset> &bookmarkList( void );
@@ -1417,7 +1417,7 @@ inline void CHexBuffer::valueOnCursor( TQByteArray &buf, uint size )
 }
 
 
-inline const SDisplayLayout &CHexBuffer::tqlayout( void )
+inline const SDisplayLayout &CHexBuffer::layout( void )
 {
   return( mLayout );
 }

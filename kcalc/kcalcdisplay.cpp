@@ -105,13 +105,13 @@ void KCalcDisplay::slotCopy(void)
 	TQString txt = TQLabel::text();
 	if (_num_base == NB_HEX)
 		txt.prepend( "0x" );
-	(TQApplication::tqclipboard())->setText(txt, TQClipboard::Clipboard);
-	(TQApplication::tqclipboard())->setText(txt, TQClipboard::Selection);
+	(TQApplication::clipboard())->setText(txt, TQClipboard::Clipboard);
+	(TQApplication::clipboard())->setText(txt, TQClipboard::Selection);
 }
 
 void KCalcDisplay::slotPaste(bool bClipboard)
 {
-	TQString tmp_str = (TQApplication::tqclipboard())->text(bClipboard ? TQClipboard::Clipboard : TQClipboard::Selection);
+	TQString tmp_str = (TQApplication::clipboard())->text(bClipboard ? TQClipboard::Clipboard : TQClipboard::Selection);
 
 	if (tmp_str.isNull())
 	{

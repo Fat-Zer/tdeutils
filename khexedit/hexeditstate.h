@@ -574,7 +574,7 @@ class SDisplayState
 {
   public:
     SDisplayLine      line;
-    SDisplayLayout    tqlayout;
+    SDisplayLayout    layout;
     SDisplayCursor    cursor;
     SDisplayColor     color;
     SDisplayFont      font;

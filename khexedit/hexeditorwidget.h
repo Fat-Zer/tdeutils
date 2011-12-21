@@ -83,7 +83,7 @@ class CHexEditorWidget : public TQWidget
     
     inline int defaultTextWidth( void );
     inline CHexViewWidget *view( void );
-    inline SDisplayLayout &tqlayout( void );
+    inline SDisplayLayout &layout( void );
     inline SDisplayLine &line( void );
     inline SDisplayInputMode &inputMode( void );
     inline SDisplayMisc::EOpenFile openFile( void );
@@ -170,10 +170,10 @@ class CHexEditorWidget : public TQWidget
   protected slots:
     void fontChanged( void );
     void paletteChanged( void );
-    void layoutChanged( const SDisplayLayout &tqlayout );
+    void layoutChanged( const SDisplayLayout &layout );
     void inputModeChanged( const SDisplayInputMode &input );
     void setLineSize(const SDisplayLine &line );
-    void setLayout( const SDisplayLayout &tqlayout );
+    void setLayout( const SDisplayLayout &layout );
     void setCursor( const SDisplayCursor &cursor );
     void setColor( const SDisplayColor &color );
     void setFont( const SDisplayFont &font );
@@ -259,9 +259,9 @@ inline CHexViewWidget *CHexEditorWidget::view( void )
   return( mHexView );
 }
 
-inline SDisplayLayout &CHexEditorWidget::tqlayout( void )
+inline SDisplayLayout &CHexEditorWidget::layout( void )
 {
-  return( mDisplayState.tqlayout );
+  return( mDisplayState.layout );
 }
 
 inline SDisplayLine &CHexEditorWidget::line( void )

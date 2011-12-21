@@ -90,10 +90,10 @@ RarArch::RarArch( ArkWidget *_gui, const TQString & _fileName )
 
 bool RarArch::processLine( const TQCString &line )
 {
-  TQString tqunicode_line;
+  TQString unicode_line;
 
   TQTextCodec *codec = TQTextCodec::codecForLocale();
-  tqunicode_line = codec->toUnicode( line );
+  unicode_line = codec->toUnicode( line );
 
   if ( m_isFirstLine )
   {

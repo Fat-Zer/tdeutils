@@ -664,7 +664,7 @@ Md5Widget::~Md5Widget()
 
 void Md5Widget::slotApply()
 {
-        TQClipboard *cb = TQApplication::tqclipboard();
+        TQClipboard *cb = TQApplication::clipboard();
         TQString text;
         // Copy text from the clipboard (paste)
         text = cb->text(TQClipboard::Clipboard);

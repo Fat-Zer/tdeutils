@@ -66,7 +66,7 @@ CharSelectApplet::CharSelectApplet(const TQString& configFile, Type type, int ac
     cell_height = c->readNumEntry("CellHeight", cell_height);
     TQString characters = c->readEntry("Characters", "������ߩ��");
 
-    // setup tqlayout
+    // setup layout
     TQHBoxLayout *_layout = new TQHBoxLayout(this);
     _layout->setAutoAdd(true);
 
@@ -310,7 +310,7 @@ void CharTable::selectCell(int row, int col)
     repaintCell(oldRow, oldCol);
     repaintCell(_activeRow, _activeCol);
 
-    TQClipboard *cb = TQApplication::tqclipboard();
+    TQClipboard *cb = TQApplication::clipboard();
     TQObject::disconnect( cb, TQT_SIGNAL(dataChanged()), this, TQT_SLOT(clearCell()) );
     TQString text = TQString(_map[col + row * _cols]);
     bool oldMode = cb->selectionModeEnabled();
@@ -332,7 +332,7 @@ void CharTable::clearCell()
 
     repaintCell(oldRow, oldCol);
     
-    TQObject::disconnect( TQApplication::tqclipboard(), TQT_SIGNAL(dataChanged()), this, TQT_SLOT(clearCell()) );
+    TQObject::disconnect( TQApplication::clipboard(), TQT_SIGNAL(dataChanged()), this, TQT_SLOT(clearCell()) );
 }
 
 

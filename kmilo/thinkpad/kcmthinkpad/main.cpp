@@ -68,10 +68,10 @@ KCMThinkpadModule::KCMThinkpadModule(TQWidget* parent, const char* name, const T
 			 "jr@jriddell.org");
 	setAboutData( about );
 
-	TQVBoxLayout* tqlayout = new TQVBoxLayout(this);
+	TQVBoxLayout* layout = new TQVBoxLayout(this);
 	m_KCMThinkpadGeneral = new KCMThinkpadGeneral(this);
-	tqlayout->addWidget( m_KCMThinkpadGeneral );
-	tqlayout->addStretch();
+	layout->addWidget( m_KCMThinkpadGeneral );
+	layout->addStretch();
 
 	load();
 

@@ -98,8 +98,8 @@ void CDigitLabel::drawContents( TQPainter *p )
 
   if( hasFocus() == true )
   {
-    p->fillRect( cr, tqpalette().active().highlight() );
-    p->setPen( tqpalette().active().highlightedText() );
+    p->fillRect( cr, palette().active().highlight() );
+    p->setPen( palette().active().highlightedText() );
   }
   else
   {

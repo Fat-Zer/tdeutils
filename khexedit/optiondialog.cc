@@ -901,11 +901,11 @@ void COptionDialog::setLayout( SDisplayLayout &layout, SDisplayLine &line )
   slotColumnSepCheck( layout.columnCharSpace );
   mLayout.columnSepSpin->setValue( layout.columnSpacing );
 
-  if( tqlayout.horzGridWidth == 0 && tqlayout.vertGridWidth == 0 )
+  if( layout.horzGridWidth == 0 && layout.vertGridWidth == 0 )
   {
     mLayout.gridCombo->setCurrentItem(0);
   }
-  else if( tqlayout.horzGridWidth != 0 && tqlayout.vertGridWidth != 0 )
+  else if( layout.horzGridWidth != 0 && layout.vertGridWidth != 0 )
   {
     mLayout.gridCombo->setCurrentItem(3);
   }

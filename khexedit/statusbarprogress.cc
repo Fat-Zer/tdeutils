@@ -67,8 +67,8 @@ void CStatusBarProgress::initialize( void )
   mBarPixmap    = 0;
   mBarStyle     = Solid;
 
-  mBarColor     = tqpalette().active().highlight();
-  mBarTextColor = tqpalette().active().highlightedText();
+  mBarColor     = palette().active().highlight();
+  mBarTextColor = palette().active().highlightedText();
   mTextColor    = palette().active().text();
   setBackgroundColor( palette().active().background() );
 
@@ -246,8 +246,8 @@ void CStatusBarProgress::adjustStyle( void )
 
 void CStatusBarProgress::paletteChange( const TQPalette & )
 {
-  mBarColor     = tqpalette().active().highlight();
-  mBarTextColor = tqpalette().active().highlightedText();
+  mBarColor     = palette().active().highlight();
+  mBarTextColor = palette().active().highlightedText();
   mTextColor    = palette().active().text();
   setBackgroundColor( palette().active().background() );
 }

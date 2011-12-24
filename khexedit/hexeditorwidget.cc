@@ -427,7 +427,7 @@ void CHexEditorWidget::setLayout( const SDisplayLayout &layout )
   mDisplayState.layout.edgeMarginWidth = layout.edgeMarginWidth;
   mDisplayState.layout.columnCharSpace = layout.columnCharSpace;
   mDisplayState.layout.columnSpacing = layout.columnSpacing;
-  mDisplayState.tqlayout.horzGridWidth = tqlayout.horzGridWidth;
+  mDisplayState.layout.horzGridWidth = layout.horzGridWidth;
   mDisplayState.layout.vertGridWidth = layout.vertGridWidth;
 
   //
@@ -453,8 +453,8 @@ void CHexEditorWidget::setColor( const SDisplayColor &color )
   //
   // The selection colors can not be chosen.
   //
-  mDisplayState.color.selectBg = kapp->tqpalette().active().highlight();
-  mDisplayState.color.selectFg = kapp->tqpalette().active().highlightedText();
+  mDisplayState.color.selectBg = kapp->palette().active().highlight();
+  mDisplayState.color.selectFg = kapp->palette().active().highlightedText();
 
   if( mDisplayState.color.useSystemColor == true )
   {

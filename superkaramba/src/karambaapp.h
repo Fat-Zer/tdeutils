@@ -17,11 +17,11 @@
 
 #undef KDE_3_2
 #undef KDE_3_3
-#if defined(KDE_MAKE_VERSION)
-#if TDE_VERSION >= KDE_MAKE_VERSION(3,2,0)
+#if defined(TDE_MAKE_VERSION)
+#if TDE_VERSION >= TDE_MAKE_VERSION(3,2,0)
 #define KDE_3_2
 #endif
-#if TDE_VERSION >= KDE_MAKE_VERSION(3,3,0)
+#if TDE_VERSION >= TDE_MAKE_VERSION(3,3,0)
 #define KDE_3_3
 #endif
 #endif

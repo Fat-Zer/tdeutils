@@ -133,4 +133,3 @@ Icon=ark
 Type=Service
 ServiceTypes=KParts/ReadOnlyPart
 X-KDE-Library=libarkpart
-Hidden=true

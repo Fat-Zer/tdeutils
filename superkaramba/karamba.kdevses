@@ -23,7 +23,7 @@
    <executable path="" params="/usr/src/superkaramba.cvs/examples/richtext/rtext.theme" />
    <valgrind path="/usr/bin/valgrind" params="--tool=memcheck --gen-suppressions=yes" />
    <calltree path="" params="" />
-   <kcachegrind path="" />
+   <tdecachegrind path="" />
   </kdevvalgrind>
  </pluginList>
 </KDevPrjSession>

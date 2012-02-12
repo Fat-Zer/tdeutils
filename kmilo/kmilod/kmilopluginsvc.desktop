@@ -3,7 +3,7 @@ Type=ServiceType
 X-KDE-ServiceType=KMilo Plugin
 
 [PropertyDef::X-KMilo-Plugin-Author]
-Type=QString
+Type=TQString
 [PropertyDef::X-KMilo-Default-Enabled]
 Type=bool
 

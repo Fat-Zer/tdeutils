@@ -473,8 +473,8 @@ void KCalculator::setupStatusbar(void)
 
 TQWidget* KCalculator::setupNumericKeys(TQWidget *parent)
 {
-	Q_CHECK_PTR(mSmallPage);
-	Q_CHECK_PTR(mLargePage);
+	TQ_CHECK_PTR(mSmallPage);
+	TQ_CHECK_PTR(mLargePage);
 
 	TQWidget *thisPage = new TQWidget(parent);
 
@@ -743,7 +743,7 @@ TQWidget* KCalculator::setupNumericKeys(TQWidget *parent)
 
 void KCalculator::setupLogicKeys(TQWidget *parent)
 {
-	Q_CHECK_PTR(parent);
+	TQ_CHECK_PTR(parent);
 
 	KCalcButton *tmp_pb;
 
@@ -796,7 +796,7 @@ void KCalculator::setupLogicKeys(TQWidget *parent)
 
 void KCalculator::setupScientificKeys(TQWidget *parent)
 {
-	Q_CHECK_PTR(parent);
+	TQ_CHECK_PTR(parent);
 
 	KCalcButton *tmp_pb;
 
@@ -878,7 +878,7 @@ void KCalculator::setupScientificKeys(TQWidget *parent)
 
 void KCalculator::setupStatisticKeys(TQWidget *parent)
 {
-	Q_CHECK_PTR(parent);
+	TQ_CHECK_PTR(parent);
 
 	KCalcButton *tmp_pb;
 
@@ -951,7 +951,7 @@ void KCalculator::setupStatisticKeys(TQWidget *parent)
 
 void KCalculator::setupConstantsKeys(TQWidget *parent)
 {
-	Q_CHECK_PTR(parent);
+	TQ_CHECK_PTR(parent);
 
 	ConstButtonGroup = new TQButtonGroup(0, "Const-Button-Group");
 	connect(ConstButtonGroup, TQT_SIGNAL(clicked(int)), TQT_SLOT(slotConstclicked(int)));

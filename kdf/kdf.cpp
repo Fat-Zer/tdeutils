@@ -40,7 +40,7 @@ KDFTopLevel::KDFTopLevel(TQWidget *, const char *name)
   : KMainWindow(0, name)
 {
   kdf = new KDFWidget(this,"kdf",FALSE);
-  Q_CHECK_PTR(kdf);
+  TQ_CHECK_PTR(kdf);
   (void) new KAction( i18n( "&Update" ), 0, TQT_TQOBJECT(kdf), TQT_SLOT( updateDF() ), actionCollection(), "updatedf" );
 
   KStdAction::quit(TQT_TQOBJECT(this), TQT_SLOT(close()), actionCollection());
@@ -77,7 +77,7 @@ int main(int argc, char **argv)
     for( int n=1; KDFTopLevel::canBeRestored(n); n++ )
     {
       KDFTopLevel *ktl = new KDFTopLevel();
-      Q_CHECK_PTR(ktl);
+      TQ_CHECK_PTR(ktl);
       app.setMainWidget(ktl);
       ktl->restore(n);
     }
@@ -85,7 +85,7 @@ int main(int argc, char **argv)
   else
   {
     KDFTopLevel *ktl = new KDFTopLevel();
-    Q_CHECK_PTR(ktl);
+    TQ_CHECK_PTR(ktl);
     ktl->show();
   }
 

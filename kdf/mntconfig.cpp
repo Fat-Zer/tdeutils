@@ -83,7 +83,7 @@ MntConfigWidget::MntConfigWidget(TQWidget *parent, const char *name, bool init)
       arg(mList->header()->label(MNTPNTCOL)).
       arg(i18n("None"));
     mGroupBox = new TQGroupBox( text, this );
-    Q_CHECK_PTR(mGroupBox);
+    TQ_CHECK_PTR(mGroupBox);
     topLayout->addWidget(mGroupBox);
 
     TQGridLayout *gl = new TQGridLayout(mGroupBox, 3, 4, KDialog::spacingHint());
@@ -91,7 +91,7 @@ MntConfigWidget::MntConfigWidget(TQWidget *parent, const char *name, bool init)
     gl->addRowSpacing( 0, fontMetrics().lineSpacing() );
 
     mIconLineEdit = new TQLineEdit(mGroupBox);
-    Q_CHECK_PTR(mIconLineEdit);
+    TQ_CHECK_PTR(mIconLineEdit);
     mIconLineEdit->setMinimumWidth( fontMetrics().maxWidth()*10 );
     connect( mIconLineEdit, TQT_SIGNAL(textChanged(const TQString&)),
 	     this,TQT_SLOT(iconChanged(const TQString&)));
@@ -101,19 +101,19 @@ MntConfigWidget::MntConfigWidget(TQWidget *parent, const char *name, bool init)
 
     mIconButton = new KIconButton(mGroupBox);
     mIconButton->setIconType(KIcon::Small, KIcon::Device);
-    Q_CHECK_PTR(mIconButton);
+    TQ_CHECK_PTR(mIconButton);
     mIconButton->setFixedWidth( mIconButton->sizeHint().height() );
     connect(mIconButton,TQT_SIGNAL(iconChanged(TQString)),this,TQT_SLOT(iconChangedButton(TQString)));
     gl->addWidget( mIconButton, 2, 1 );
 
     //Mount
     mMountButton = new TQPushButton( i18n("Get Mount Command"), mGroupBox );
-    Q_CHECK_PTR(mMountButton);
+    TQ_CHECK_PTR(mMountButton);
     connect(mMountButton,TQT_SIGNAL(clicked()),this,TQT_SLOT(selectMntFile()));
     gl->addWidget( mMountButton, 1, 2 );
 
     mMountLineEdit = new TQLineEdit(mGroupBox);
-    Q_CHECK_PTR(mMountLineEdit);
+    TQ_CHECK_PTR(mMountLineEdit);
     mMountLineEdit->setMinimumWidth( fontMetrics().maxWidth()*10 );
     connect(mMountLineEdit,TQT_SIGNAL(textChanged(const TQString&)),
 	    this,TQT_SLOT(mntCmdChanged(const TQString&)));
@@ -123,12 +123,12 @@ MntConfigWidget::MntConfigWidget(TQWidget *parent, const char *name, bool init)
 
     //Umount
     mUmountButton = new TQPushButton(i18n("Get Unmount Command"), mGroupBox );
-    Q_CHECK_PTR( mUmountButton );
+    TQ_CHECK_PTR( mUmountButton );
     connect(mUmountButton,TQT_SIGNAL(clicked()),this,TQT_SLOT(selectUmntFile()));
     gl->addWidget( mUmountButton, 2, 2 );
 
     mUmountLineEdit=new TQLineEdit(mGroupBox);
-    Q_CHECK_PTR(mUmountLineEdit);
+    TQ_CHECK_PTR(mUmountLineEdit);
     mUmountLineEdit->setMinimumWidth( fontMetrics().maxWidth()*10 );
     connect(mUmountLineEdit,TQT_SIGNAL(textChanged(const TQString&)),
 	    this,TQT_SLOT(umntCmdChanged(const TQString&)));

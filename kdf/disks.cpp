@@ -55,7 +55,7 @@ void DiskEntry::init()
 
  // BackgroundProcesses ****************************************
 
- sysProc = new KShellProcess(); Q_CHECK_PTR(sysProc);
+ sysProc = new KShellProcess(); TQ_CHECK_PTR(sysProc);
  connect( sysProc, TQT_SIGNAL(receivedStdout(KProcess *, char *, int) ),
         this, TQT_SLOT (receivedSysStdErrOut(KProcess *, char *, int)) );
  connect( sysProc, TQT_SIGNAL(receivedStderr(KProcess *, char *, int) ),

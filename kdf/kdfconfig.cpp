@@ -98,7 +98,7 @@ KDFConfigWidget::KDFConfigWidget(TQWidget *parent, const char *name, bool init)
     gl->setColStretch( 1, 10 );
 
     mScroll = new TQScrollBar( this );
-    Q_CHECK_PTR(mScroll);
+    TQ_CHECK_PTR(mScroll);
     mScroll->setOrientation( Qt::Horizontal );
     mScroll->setSteps(1,20);
     mScroll->setRange(0, 180 );
@@ -106,7 +106,7 @@ KDFConfigWidget::KDFConfigWidget(TQWidget *parent, const char *name, bool init)
     connect(mScroll,TQT_SIGNAL(valueChanged(int)),this,TQT_SLOT(slotChanged()));
 
     mLCD = new TQLCDNumber( this );
-    Q_CHECK_PTR(mLCD);
+    TQ_CHECK_PTR(mLCD);
     mLCD->setNumDigits( 3 );
     mLCD->setSegmentStyle(TQLCDNumber::Filled);
     connect(mScroll,TQT_SIGNAL(valueChanged(int)),mLCD,TQT_SLOT(display(int)));
@@ -114,28 +114,28 @@ KDFConfigWidget::KDFConfigWidget(TQWidget *parent, const char *name, bool init)
 
     text = i18n("Update frequency [seconds]. The value 0 disables update" );
     TQLabel *label = new TQLabel( text, this );
-    Q_CHECK_PTR(label);
+    TQ_CHECK_PTR(label);
     gl->addWidget( label, 0, 1 );
 
 
     label = new TQLabel( i18n("File manager (e.g. konsole -e mc %m):") ,this);
-    Q_CHECK_PTR(label);
+    TQ_CHECK_PTR(label);
     topLayout->addWidget( label );
 
     mFileManagerEdit = new TQLineEdit( this );
-    Q_CHECK_PTR(mFileManagerEdit);
+    TQ_CHECK_PTR(mFileManagerEdit);
     topLayout->addWidget( mFileManagerEdit );
     connect(mFileManagerEdit,TQT_SIGNAL(textChanged (const TQString &)),this,TQT_SLOT(slotChanged()));
 
     text = i18n("Open file manager automatically on mount");
     mOpenMountCheck = new TQCheckBox(text, this );
-    Q_CHECK_PTR(mOpenMountCheck);
+    TQ_CHECK_PTR(mOpenMountCheck);
     topLayout->addWidget( mOpenMountCheck );
     connect(mOpenMountCheck,TQT_SIGNAL(toggled(bool)),this,TQT_SLOT(slotChanged()));
 
     text = i18n("Pop up a window when a disk gets critically full");
     mPopupFullCheck = new TQCheckBox( text, this );
-    Q_CHECK_PTR(mPopupFullCheck);
+    TQ_CHECK_PTR(mPopupFullCheck);
     topLayout->addWidget( mPopupFullCheck );
     connect(mPopupFullCheck,TQT_SIGNAL(toggled(bool)),this,TQT_SLOT(slotChanged()));
   }

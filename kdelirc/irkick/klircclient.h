@@ -29,7 +29,7 @@ class TQSocketNotifier;
 class KLircClient: public TQObject
 {
 	Q_OBJECT
-  TQ_OBJECT
+  
 
 private:
 	struct lirc_config *theConfig;

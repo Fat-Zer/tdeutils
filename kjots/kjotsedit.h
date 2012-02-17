@@ -30,7 +30,7 @@ class KJotsPage;
 class KJotsEdit : public KEdit
 {
     Q_OBJECT
-  TQ_OBJECT
+  
     public:
         KJotsEdit (TQWidget* parent=0, const char* name=0);
         ~KJotsEdit ();

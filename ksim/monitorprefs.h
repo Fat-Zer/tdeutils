@@ -30,7 +30,7 @@ namespace KSim
   class MonitorPrefs : public KListView
   {
     Q_OBJECT
-  TQ_OBJECT
+  
     public:
       MonitorPrefs(TQWidget *parent, const char *name=0);
       ~MonitorPrefs();

@@ -49,7 +49,7 @@ namespace KIO
 class KJotsEntryBase : public TQObject, public KListViewItem
 {
     Q_OBJECT
-  TQ_OBJECT
+  
     public:
         KJotsEntryBase(KListView*, TQListViewItem*);
         KJotsEntryBase(KListViewItem*, TQListViewItem*);
@@ -99,7 +99,7 @@ class KJotsEntryBase : public TQObject, public KListViewItem
 class KJotsBook : public KJotsEntryBase
 {
     Q_OBJECT
-  TQ_OBJECT
+  
     public:
         KJotsBook(KListView*, TQListViewItem* after = 0);
         KJotsBook(KListViewItem*, TQListViewItem* after = 0);
@@ -143,7 +143,7 @@ class KJotsBook : public KJotsEntryBase
 class KJotsPage : public KJotsEntryBase
 {
     Q_OBJECT
-  TQ_OBJECT
+  
     public:
         KJotsPage(KJotsBook* parent, TQListViewItem* after = 0);
         ~KJotsPage();

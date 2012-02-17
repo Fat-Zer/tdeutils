@@ -34,7 +34,7 @@
  */
 class TDEUI_EXPORT KRichTextLabel : public TQLabel {
   Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
   /**

@@ -28,7 +28,7 @@ class TQMouseEvent;
 class DoubleClickButton :public TQToolButton
 {
 Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
   DoubleClickButton( TQPixmap pix, TQWidget* parent, const char* name = 0);

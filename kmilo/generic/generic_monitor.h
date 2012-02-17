@@ -48,7 +48,7 @@ struct ShortcutInfo
 class GenericMonitor : public Monitor
 {
 	Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
 	GenericMonitor(TQObject *parent, const char *name, const TQStringList&);

@@ -26,7 +26,7 @@ class TQToolButton;
 class AuxButtons :public TQDockWindow
 {
     Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
     AuxButtons( TQWidget* parent, const char* name );

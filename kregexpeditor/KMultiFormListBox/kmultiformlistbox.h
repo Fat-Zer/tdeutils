@@ -63,7 +63,7 @@ class KMultiFormListBoxMultiVisible;
 class KMultiFormListBox : public TQWidget {
 
 Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
 

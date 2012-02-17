@@ -35,7 +35,7 @@ class KVaio;
 
 class KMiloKVaio : public KMilo::Monitor {
 //	Q_OBJECT
-  TQ_OBJECT
+  
 
 	public:
 		KMiloKVaio(TQObject *parent, 

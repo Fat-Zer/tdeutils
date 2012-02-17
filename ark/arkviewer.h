@@ -28,7 +28,7 @@
 class ArkViewer : public KDialogBase
 {
 	Q_OBJECT
-  TQ_OBJECT
+  
 
 	public:
 		ArkViewer( TQWidget* parent = 0, const char * name = 0 );

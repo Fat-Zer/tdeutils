@@ -40,7 +40,7 @@ class KArchiveDirectory;
 class ThemesDlg : public ThemesLayout
 {
     Q_OBJECT
-  TQ_OBJECT
+  
 
   public:
     ThemesDlg(TQWidget *parent = 0, const char *name = 0);

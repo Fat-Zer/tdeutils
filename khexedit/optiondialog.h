@@ -43,7 +43,7 @@ class KFontChooser;
 class CColorListBox : public KListBox
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
   public:
     CColorListBox( TQWidget *parent=0, const char * name=0, WFlags f=0 );
@@ -93,7 +93,7 @@ class CColorListItem : public TQListBoxItem
 class COptionDialog : public KDialogBase
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
   public:
     enum EPage

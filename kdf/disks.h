@@ -40,7 +40,7 @@
 class DiskEntry : public TQObject
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 public:
   DiskEntry(TQObject *parent=0, const char *name=0);
   DiskEntry(const TQString & deviceName, TQObject *parent=0, const char *name=0);

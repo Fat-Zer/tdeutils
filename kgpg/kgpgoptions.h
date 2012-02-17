@@ -39,7 +39,7 @@ class KSimpleConfig;
 class kgpgOptions : public KConfigDialog
 {
         Q_OBJECT
-  TQ_OBJECT
+  
 public:
         kgpgOptions(TQWidget *parent=0, const char *name=0);
         ~kgpgOptions();

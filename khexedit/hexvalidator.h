@@ -26,7 +26,7 @@
 class CHexValidator: public TQValidator
 {
   Q_OBJECT
-  TQ_OBJECT
+  
   
   public:
     enum EState

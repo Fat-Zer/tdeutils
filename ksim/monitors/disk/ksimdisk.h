@@ -55,7 +55,7 @@ class DiskPlugin : public KSim::PluginObject
 class DiskView : public KSim::PluginView
 {
   Q_OBJECT
-  TQ_OBJECT
+  
   public:
     DiskView(KSim::PluginObject *parent, const char *name);
     ~DiskView();
@@ -132,7 +132,7 @@ class DiskView : public KSim::PluginView
 class DiskConfig : public KSim::PluginPage
 {
   Q_OBJECT
-  TQ_OBJECT
+  
   public:
     DiskConfig(KSim::PluginObject *parent, const char *name);
     ~DiskConfig();

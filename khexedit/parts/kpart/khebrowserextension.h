@@ -34,7 +34,7 @@ class KHexEditPart;
 class KHexEditBrowserExtension : public KParts::BrowserExtension
 {
     Q_OBJECT
-  TQ_OBJECT
+  
 
   public:
     KHexEditBrowserExtension( KHexEditPart *P );

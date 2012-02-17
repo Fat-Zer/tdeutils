@@ -29,7 +29,7 @@
 class CDigitLabel : public TQLabel
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
   public:
     CDigitLabel( TQWidget *parent, uint digit = 0, const char *name=0 );
@@ -71,7 +71,7 @@ inline uint CDigitLabel::value( void )
 class CByteWidget : public TQWidget
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
   public:
     CByteWidget( TQWidget *parent, const char *name=0 );

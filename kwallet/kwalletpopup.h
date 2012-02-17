@@ -26,7 +26,7 @@
 
 class KWalletPopup : public KPopupMenu {
 	Q_OBJECT
-  TQ_OBJECT
+  
 
 	public:
 		KWalletPopup(const TQString& wallet, TQWidget *parent = 0, const char* name = 0);

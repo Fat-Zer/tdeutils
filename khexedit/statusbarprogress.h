@@ -28,7 +28,7 @@
 class CStatusBarProgress : public TQFrame, public TQRangeControl 
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
   public:
   /** 

@@ -39,7 +39,7 @@ class KSimpleConfig;
 class CExportDialog : public KDialogBase
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
   public:
     enum EPage

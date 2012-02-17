@@ -41,7 +41,7 @@ class TQDragEnterEvent;
 class MyEditor : public KTextEdit
 {
         Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
         MyEditor( TQWidget *parent = 0, const char *name = 0);
@@ -69,7 +69,7 @@ signals:
 class KgpgView : public TQWidget
 {
         Q_OBJECT
-  TQ_OBJECT
+  
         friend class MyEditor;
 public:
         /** Constructor for the main view */

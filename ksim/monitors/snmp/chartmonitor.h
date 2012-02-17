@@ -31,7 +31,7 @@ namespace Snmp
 class ChartMonitor : public KSim::Chart
 {
     Q_OBJECT
-  TQ_OBJECT
+  
 public:
     ChartMonitor( const MonitorConfig &config, TQWidget *parent, const char *name = 0 );
 

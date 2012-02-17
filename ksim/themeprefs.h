@@ -76,7 +76,7 @@ namespace KSim
   class ThemePrefs : public TQWidget
   {
     Q_OBJECT
-  TQ_OBJECT
+  
     public:
       ThemePrefs(TQWidget *parent, const char *name=0);
       ~ThemePrefs();

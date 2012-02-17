@@ -23,7 +23,7 @@
 class ClickMap : public Meter
 {
 Q_OBJECT
-  TQ_OBJECT
+  
 public:
     ClickMap(karamba* k, int x, int y, int w, int h);
     ~ClickMap();

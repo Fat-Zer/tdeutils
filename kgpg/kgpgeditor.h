@@ -36,7 +36,7 @@ class KgpgView;
 class KgpgApp : public KMainWindow
 {
         Q_OBJECT
-  TQ_OBJECT
+  
 
         friend class KgpgView;
 

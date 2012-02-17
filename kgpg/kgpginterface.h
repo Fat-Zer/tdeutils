@@ -37,7 +37,7 @@ class KgpgInterface : public TQObject
 {
 
         Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
         /**
@@ -390,7 +390,7 @@ private:
 class  Md5Widget :public KDialogBase
 {
         Q_OBJECT
-  TQ_OBJECT
+  
 public:
         Md5Widget(TQWidget *parent=0, const char *name=0,KURL url=KURL());
         ~Md5Widget();

@@ -91,7 +91,7 @@ class SensorList : public TQValueList<SensorInfo>
 class SensorBase : public TQObject
 {
   Q_OBJECT
-  TQ_OBJECT
+  
   public:
     static SensorBase *self();
 

@@ -33,7 +33,7 @@ class TQListBoxItem;
 class FsystemConfig : public KSim::PluginPage
 {
   Q_OBJECT
-  TQ_OBJECT
+  
   public:
     FsystemConfig(KSim::PluginObject *parent, const char *name);
     ~FsystemConfig();

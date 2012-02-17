@@ -40,7 +40,7 @@ typedef KColTextExport* KColTextExportPtr;
 class KBufferDrag : public TQDragObject
 {
     Q_OBJECT
-  TQ_OBJECT
+  
 
   public:
     // TODO: make this call somewhat more generic

@@ -24,7 +24,7 @@
 class RichTextLabel : public Meter
 {
     Q_OBJECT
-  TQ_OBJECT
+  
   public:
     RichTextLabel(karamba*);
     RichTextLabel(karamba* k, int x, int y, int w, int h);

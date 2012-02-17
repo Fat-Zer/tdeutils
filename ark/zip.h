@@ -38,7 +38,7 @@ class ArkWidget;
 class ZipArch : public Arch
 {
   Q_OBJECT
-  TQ_OBJECT
+  
   public:
     ZipArch( ArkWidget *_gui, const TQString & _fileName );
     virtual ~ZipArch() { }

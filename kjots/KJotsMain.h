@@ -82,7 +82,7 @@ class KJotsEdit;
 class KJotsMain : public KMainWindow
 {
     Q_OBJECT
-  TQ_OBJECT
+  
 
     public:
         KJotsMain( const char* name = 0 );

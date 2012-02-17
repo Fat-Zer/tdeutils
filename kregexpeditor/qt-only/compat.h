@@ -37,7 +37,7 @@ TQString i18n( const TQString& a, const TQString& b);
 class KDialogBase :public TQDialog
 {
     Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
     enum ButtonCode {Ok = 1, Cancel, Help};
@@ -73,7 +73,7 @@ private:
 class KMessageBox :public TQMessageBox
 {
     Q_OBJECT
-  TQ_OBJECT
+  
 public:
     enum ButtonCode { Ok = 1, Cancel = 2, Yes = 3, No = 4, Continue = 5 };
     static int  warningYesNo (TQWidget *parent, const TQString &text,

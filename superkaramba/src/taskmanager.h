@@ -49,7 +49,7 @@ class TaskManager;
 class Task: public TQObject
 {
     Q_OBJECT
-  TQ_OBJECT
+  
     TQ_PROPERTY( TQString name READ name )
     TQ_PROPERTY( TQString visibleName READ visibleName )
     TQ_PROPERTY( TQString visibleNameWithState READ visibleNameWithState )
@@ -376,7 +376,7 @@ private:
 class Startup: public TQObject
 {
     Q_OBJECT
-  TQ_OBJECT
+  
     TQ_PROPERTY( TQString text READ text )
     TQ_PROPERTY( TQString bin READ bin )
     TQ_PROPERTY( TQString icon READ icon )
@@ -432,7 +432,7 @@ typedef TQPtrList<Startup> StartupList;
 class TaskManager : public TQObject
 {
     Q_OBJECT
-  TQ_OBJECT
+  
     TQ_PROPERTY( int currentDesktop READ currentDesktop )
     TQ_PROPERTY( int numberOfDesktops READ numberOfDesktops )
 

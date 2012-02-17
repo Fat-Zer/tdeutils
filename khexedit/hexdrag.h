@@ -28,7 +28,7 @@
 class CHexDrag : public TQDragObject
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
   public:
     CHexDrag( const TQByteArray &data, TQWidget *dragSource = 0, 

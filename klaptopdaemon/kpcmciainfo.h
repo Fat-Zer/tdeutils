@@ -39,7 +39,7 @@ class KPushButton;
 
 class KPCMCIAInfo : public KDialog {
 Q_OBJECT
-  TQ_OBJECT
+  
 public:
 
   KPCMCIAInfo(KPCMCIA *pcmcia, TQWidget *parent = NULL, const char *name = 0);
@@ -78,7 +78,7 @@ class TQLabel;
 
 class KPCMCIAInfoPage : public TQFrame {
 Q_OBJECT
-  TQ_OBJECT
+  
 public:
   KPCMCIAInfoPage(KPCMCIACard *card, TQWidget *parent = NULL, const char *name = 0);
   virtual ~KPCMCIAInfoPage();

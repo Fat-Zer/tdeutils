@@ -39,7 +39,7 @@ class KAboutData;
 class KarambaApplication : public KApplication
 {
     Q_OBJECT
-  TQ_OBJECT
+  
 
     friend class KarambaIface;
 

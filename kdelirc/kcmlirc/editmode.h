@@ -21,7 +21,7 @@
 class EditMode : public EditModeBase
 {
 	Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
 	void slotCheckText(const TQString &newText);

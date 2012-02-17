@@ -35,7 +35,7 @@
 class KMultiFormListBoxMultiVisible :public TQScrollView, KMultiFormListBoxShower {
 
 Q_OBJECT
-  TQ_OBJECT
+  
 
 friend class KMultiFormListBox;
 

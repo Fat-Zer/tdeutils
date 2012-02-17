@@ -95,7 +95,7 @@ private:
 /***************************************************************************/
 class DiskList : public TQObject
 {  Q_OBJECT
-  TQ_OBJECT
+  
 public:
    DiskList( TQObject *parent=0, const char *name=0 );
  ~DiskList();

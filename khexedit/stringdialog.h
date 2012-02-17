@@ -41,7 +41,7 @@ class CListView;
 class CStringDialog : public KDialogBase
 {
   Q_OBJECT
-  TQ_OBJECT
+  
   
   public:
     CStringDialog( TQWidget *parent=0, const char *name = 0, bool modal=false );

@@ -40,7 +40,7 @@ class ArkWidget;
 class ArArch : public Arch 
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 public:
   ArArch( ArkWidget *_gui,
 	   const TQString & _fileName );

@@ -57,7 +57,7 @@ class KBytesEditPrivate;
 class KHEXEDIT_EXPORT KBytesEdit : public KHexEdit
 {
   Q_OBJECT
-  TQ_OBJECT
+  
   //_PROPERTY( char * Data READ data )
   TQ_PROPERTY( int DataSize READ dataSize )
   TQ_PROPERTY( int MaxDataSize READ maxDataSize WRITE setMaxDataSize )

@@ -42,7 +42,7 @@ class CListView;
 class KDFConfigWidget : public TQWidget
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
   class CTabName
   {

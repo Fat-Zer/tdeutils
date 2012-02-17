@@ -33,7 +33,7 @@ class RepeatRegExp;
 class RepeatRangeWindow :public TQVBox
 {
 Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
   enum REPEATTYPE {ANY, ATLEAST, ATMOST, EXACTLY, MINMAX};
@@ -72,7 +72,7 @@ private:
 class RepeatWidget :public SingleContainerWidget
 {
 Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
   RepeatWidget( RegExpEditorWindow* editorWindow, TQWidget *parent,

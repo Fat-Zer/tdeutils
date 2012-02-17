@@ -74,7 +74,7 @@ typedef TQValueList< TQPair< TQString, TQt::AlignmentFlags > > ColumnList;
 class FileListView: public KListView
 {
 	Q_OBJECT
-  TQ_OBJECT
+  
 	public:
 		FileListView( TQWidget *parent = 0, const char* name = 0 );
 

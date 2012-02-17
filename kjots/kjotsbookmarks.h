@@ -30,7 +30,7 @@ class KJotsMain;
 class KJotsBookmarks : public TQObject, public KBookmarkOwner
 {
     Q_OBJECT
-  TQ_OBJECT
+  
 
     public:
         KJotsBookmarks(KJotsMain* parent = 0, const char* name = 0);

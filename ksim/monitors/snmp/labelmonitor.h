@@ -33,7 +33,7 @@ namespace Snmp
 class LabelMonitor : public KSim::Label
 {
     Q_OBJECT
-  TQ_OBJECT
+  
 public:
     LabelMonitor( const MonitorConfig &config, TQWidget *parent, const char *name = 0 );
 

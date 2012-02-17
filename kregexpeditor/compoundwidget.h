@@ -60,7 +60,7 @@ private:
 class CompoundWidget :public SingleContainerWidget
 {
 Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
   CompoundWidget( RegExpEditorWindow* editorWindow, TQWidget* parent,

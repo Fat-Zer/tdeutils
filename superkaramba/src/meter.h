@@ -23,7 +23,7 @@ class karamba;
 class Meter : public TQObject
 {
 Q_OBJECT
-  TQ_OBJECT
+  
 public:
 
   Meter(karamba* k, int ix,int iy,int iw,int ih);

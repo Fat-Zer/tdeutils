@@ -64,7 +64,7 @@ const uint Find_Next       = 7;
 class CGotoDialog : public KDialogBase 
 {
   Q_OBJECT
-  TQ_OBJECT
+  
   
   public:
     CGotoDialog( TQWidget *parent, const char *name = 0, bool modal = false );
@@ -91,7 +91,7 @@ class CGotoDialog : public KDialogBase
 class CFindDialog : public KDialogBase
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
   public:
     enum EOperation
@@ -139,7 +139,7 @@ class CFindDialog : public KDialogBase
 class CFindNavigatorDialog : public KDialogBase
 {
   Q_OBJECT
-  TQ_OBJECT
+  
   
   public:
     CFindNavigatorDialog( TQWidget *parent=0, const char *name=0, 
@@ -169,7 +169,7 @@ class CFindNavigatorDialog : public KDialogBase
 class CReplaceDialog : public KDialogBase
 {
   Q_OBJECT
-  TQ_OBJECT
+  
   
   public:
     CReplaceDialog( TQWidget *parent=0, const char *name=0, bool modal=false );
@@ -213,7 +213,7 @@ class CReplaceDialog : public KDialogBase
 class CReplacePromptDialog : public KDialogBase
 {
   Q_OBJECT
-  TQ_OBJECT
+  
   
   public:
     CReplacePromptDialog( TQWidget *parent=0, const char *name=0, 
@@ -243,7 +243,7 @@ class CReplacePromptDialog : public KDialogBase
 class CFilterDialog : public KDialogBase
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
   public:
     enum EStackMode
@@ -303,7 +303,7 @@ class CFilterDialog : public KDialogBase
 class CInsertDialog : public KDialogBase
 {
   Q_OBJECT
-  TQ_OBJECT
+  
   
   public:
     CInsertDialog( TQWidget *parent=0, const char *name=0, bool modal=false );

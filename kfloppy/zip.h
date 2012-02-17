@@ -47,7 +47,7 @@ class KConfig;
 class ZipFormat : public DiskFormat
 {
 Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
 	ZipFormat(TQWidget *w, const char *n);

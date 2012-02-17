@@ -36,7 +36,7 @@ namespace KSim
   class KDE_EXPORT Chart : public TQWidget, public KSim::Base
   {
     Q_OBJECT
-  TQ_OBJECT
+  
     public:
       enum DataType { DataIn = 0, DataOut };
       enum LabelType { Label = 0, Progress, Led };

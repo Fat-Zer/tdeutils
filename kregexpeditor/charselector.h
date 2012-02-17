@@ -27,7 +27,7 @@ class LimitedCharLineEdit;
 class CharSelector :public TQWidget
 {
     Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
     CharSelector( TQWidget* parent, const char* name = 0 );

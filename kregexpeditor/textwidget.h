@@ -30,7 +30,7 @@ class TextRegExp;
 class TextWidget : public RegExpWidget
 {
     Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
     TextWidget(RegExpEditorWindow* editorWindow, TQWidget *parent,

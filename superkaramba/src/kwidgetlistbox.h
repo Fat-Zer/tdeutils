@@ -31,7 +31,7 @@ typedef bool (*show_callback) (int index, TQWidget* widget, void* data);
 class KWidgetListbox : public TQTable
 {
     Q_OBJECT
-  TQ_OBJECT
+  
 
   public:
     KWidgetListbox(TQWidget *parent = 0, const char *name = 0);

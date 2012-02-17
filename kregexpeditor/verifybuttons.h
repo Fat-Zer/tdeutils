@@ -28,7 +28,7 @@ class TQPopupMenu;
 class VerifyButtons :public TQDockWindow
 {
     Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
     VerifyButtons( TQWidget* parent, const char* name );

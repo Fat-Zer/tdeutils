@@ -52,7 +52,7 @@ class EqualKey
 class ArkApplication : public KUniqueApplication
 {
 	Q_OBJECT
-  TQ_OBJECT
+  
 	public:
 		virtual int newInstance();
 		virtual ~ArkApplication() {}

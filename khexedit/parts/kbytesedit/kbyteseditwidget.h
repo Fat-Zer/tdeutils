@@ -43,7 +43,7 @@ class KBytesEditWidget : public TQWidget, public KHE::BytesEditInterface,
                          public KHE::ZoomInterface, public KHE::ClipboardInterface
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
   public:
     /** constructor API as demanded by KGenericFactory */

@@ -34,7 +34,7 @@ class RegExpWidget;
 class SelectableLineEdit :public TQLineEdit
 {
 Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
   SelectableLineEdit( RegExpWidget* owner, TQWidget* parent = 0, const char* name = 0);

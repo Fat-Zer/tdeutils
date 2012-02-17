@@ -59,7 +59,7 @@ class SearchBar;
 class ArkWidget : public TQVBox
 {
     Q_OBJECT
-  TQ_OBJECT
+  
 public:
     ArkWidget( TQWidget *parent=0, const char *name=0 );
     virtual ~ArkWidget();

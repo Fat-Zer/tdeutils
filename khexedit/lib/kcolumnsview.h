@@ -42,7 +42,7 @@ class KColumnsViewPrivate;
 class KColumnsView : public TQScrollView
 {
    Q_OBJECT
-  TQ_OBJECT
+  
 
    friend class KColumn;
 

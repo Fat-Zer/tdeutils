@@ -28,7 +28,7 @@ class RegExp;
 class UserDefinedRegExps :public TQDockWindow
 {
 Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
   UserDefinedRegExps( TQWidget *parent, const char *name = 0 );

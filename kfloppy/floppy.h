@@ -44,7 +44,7 @@ class KFActionQueue;
 class FloppyData : public KDialog
 {
     Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
     FloppyData(TQWidget* parent = 0, const char * name = 0);

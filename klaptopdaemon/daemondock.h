@@ -41,7 +41,7 @@ class KPopupMenu;
 class laptop_dock : public KSystemTray {
 
   Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
   laptop_dock(laptop_daemon* parent);

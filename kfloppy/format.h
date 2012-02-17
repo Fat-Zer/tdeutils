@@ -66,7 +66,7 @@
 class KFAction : public TQObject
 {
 Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
 	KFAction(TQObject *parent = 0L);
@@ -116,7 +116,7 @@ signals:
 class KFActionQueue : public KFAction
 {
 Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
 	KFActionQueue(TQObject *parent = 0L);
@@ -176,7 +176,7 @@ class KProcess;
 class FloppyAction : public KFAction
 {
 Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
 	FloppyAction(TQObject *parent = 0L);

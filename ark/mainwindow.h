@@ -41,7 +41,7 @@ class
 MainWindow: public KParts::MainWindow
 {
     Q_OBJECT
-  TQ_OBJECT
+  
 public:
     MainWindow( TQWidget *parent=0, const char *name=0 );
     virtual ~MainWindow();

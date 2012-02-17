@@ -48,7 +48,7 @@ class CDragLabel;
 class KHexEdit : public KMainWindow
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
   enum StatusBarId
   {

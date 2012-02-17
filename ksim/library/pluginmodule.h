@@ -114,7 +114,7 @@ namespace KSim
   class KDE_EXPORT PluginPage : public TQWidget
   {
     Q_OBJECT
-  TQ_OBJECT
+  
     public:
       /**
        * constructor for PluginPage
@@ -163,7 +163,7 @@ namespace KSim
   class KDE_EXPORT PluginView : public TQWidget
   {
     Q_OBJECT
-  TQ_OBJECT
+  
     public:
       /**
        * constructor for PluginView

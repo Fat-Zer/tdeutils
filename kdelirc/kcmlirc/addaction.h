@@ -27,7 +27,7 @@ class TQListViewItem;
 class AddAction : public AddActionBase
 {
 	Q_OBJECT
-  TQ_OBJECT
+  
 
 	int curPage;
 	Mode theMode;

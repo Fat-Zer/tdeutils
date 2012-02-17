@@ -27,7 +27,7 @@ class KAboutData;
 class KHexEditPartFactory : public KParts::Factory
 {
     Q_OBJECT
-  TQ_OBJECT
+  
 
   public:
     KHexEditPartFactory();

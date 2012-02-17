@@ -52,7 +52,7 @@ class CpuPlugin : public KSim::PluginObject
 class CpuView : public KSim::PluginView
 {
   Q_OBJECT
-  TQ_OBJECT
+  
   public:
     CpuView(KSim::PluginObject *parent, const char *name);
     ~CpuView();
@@ -201,7 +201,7 @@ class CpuView : public KSim::PluginView
 class CpuConfig : public KSim::PluginPage
 {
   Q_OBJECT
-  TQ_OBJECT
+  
   public:
     CpuConfig(KSim::PluginObject *parent, const char *name);
     ~CpuConfig();

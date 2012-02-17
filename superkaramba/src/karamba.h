@@ -112,7 +112,7 @@ class LineParser;
 class karamba :  public TQWidget
 {
     Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
     karamba(TQString fn, TQString name, bool reloading = false,
@@ -327,7 +327,7 @@ private slots:
 class DesktopChangeSlot : public TQObject
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
   public:
   DesktopChangeSlot(TQObject *parent, int desktop_id);
@@ -348,7 +348,7 @@ class DesktopChangeSlot : public TQObject
 class SignalBridge : public TQObject
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
   public:
     SignalBridge(TQObject* parent, TQString, KActionCollection*);

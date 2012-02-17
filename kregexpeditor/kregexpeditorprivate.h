@@ -46,7 +46,7 @@ class TQToolButton;
 class KRegExpEditorPrivate  :public TQWidget
 {
     Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
     KRegExpEditorPrivate( TQWidget *parent, const char *name = 0 );

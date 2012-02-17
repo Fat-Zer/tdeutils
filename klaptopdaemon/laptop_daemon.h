@@ -74,7 +74,7 @@ class laptop_dock;
 class laptop_daemon: public KDEDModule
 {
 	Q_OBJECT
-//	TQ_OBJECT
+//	
 	K_DCOP
 public:
     	laptop_daemon(const TQCString& obj);

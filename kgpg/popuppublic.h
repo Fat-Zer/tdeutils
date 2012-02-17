@@ -32,7 +32,7 @@ class KProcIO;
 class popupPublic : public KDialogBase //TQDialog
 {
         Q_OBJECT
-  TQ_OBJECT
+  
 public:
 
         popupPublic(TQWidget *parent=0, const char *name=0,TQString sfile="",bool filemode=false,KShortcut goDefaultKey=TQKeySequence(CTRL+TQt::Key_Home));

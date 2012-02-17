@@ -32,7 +32,7 @@ class RegExpEditorWindow;
 class RegExpWidget :public TQWidget
 {
 Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
   RegExpWidget(RegExpEditorWindow* editorWindow, TQWidget *parent,

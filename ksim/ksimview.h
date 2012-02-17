@@ -49,7 +49,7 @@ namespace KSim
   class KDE_EXPORT MainView : public TQWidget, virtual public DCOPObject
   {
     Q_OBJECT
-//    TQ_OBJECT
+//    
     K_DCOP
     public:
       MainView(KConfig *config, bool loadPlugins,

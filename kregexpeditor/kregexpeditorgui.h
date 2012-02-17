@@ -37,7 +37,7 @@ class KRegExpEditorPrivate;
 class KDE_EXPORT KRegExpEditorGUI  :public TQWidget, public KRegExpEditorInterface
 {
   Q_OBJECT
-  TQ_OBJECT
+  
   TQ_PROPERTY( TQString regexp READ regExp WRITE setRegExp )
 public:
   KRegExpEditorGUI( TQWidget *parent, const char *name = 0,
@@ -67,7 +67,7 @@ private:
 class KDE_EXPORT KRegExpEditorGUIDialog : public KDialogBase, public KRegExpEditorInterface
 {
     Q_OBJECT
-  TQ_OBJECT
+  
     TQ_PROPERTY( TQString regexp READ regExp WRITE setRegExp )
 public:
     KRegExpEditorGUIDialog( TQWidget *parent, const char *name, const TQStringList &args );

@@ -40,7 +40,7 @@ class TQPushButton;
 class ApmConfig : public KCModule
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 public:
   ApmConfig( TQWidget *parent=0, const char* name=0);
   ~ApmConfig( );     

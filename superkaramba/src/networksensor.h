@@ -25,7 +25,7 @@
 class NetworkSensor :  public Sensor
 {
     Q_OBJECT
-  TQ_OBJECT
+  
 public:
     NetworkSensor( TQString device, int interval );
     ~NetworkSensor();

@@ -28,7 +28,7 @@
 class CListView : public KListView
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
   public:
     CListView( TQWidget *parent=0, const char *name=0, int visibleItem=10 );

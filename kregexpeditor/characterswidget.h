@@ -123,7 +123,7 @@ public:
 class CharacterEdits : public KDialogBase
 {
     Q_OBJECT
-  TQ_OBJECT
+  
 public:
     CharacterEdits(TQWidget *parent = 0, const char *name = 0);
 

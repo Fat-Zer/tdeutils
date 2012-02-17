@@ -17,7 +17,7 @@
 class CPUSensor :  public Sensor
 {
     Q_OBJECT
-  TQ_OBJECT
+  
 public:
     CPUSensor( TQString cpuNbr, int interval );
     ~CPUSensor();

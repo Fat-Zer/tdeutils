@@ -56,7 +56,7 @@ class KMiloKVaio;
 class KVaio : public TQObject
 {
     Q_OBJECT
-  TQ_OBJECT
+  
 public:
 //    KVaio(TQObject *parent = 0, const char *name =0);
     KVaio(KMiloKVaio *parent = 0, const char *name =0);

@@ -48,7 +48,7 @@
 class KMultiFormListBoxEntry : public TQWidget
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
   KMultiFormListBoxEntry(TQWidget *parent, const char *name) : TQWidget(parent,name) {}

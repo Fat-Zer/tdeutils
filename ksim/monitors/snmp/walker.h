@@ -36,7 +36,7 @@ namespace Snmp
 class Walker : public TQObject, public TQThread
 {
     Q_OBJECT
-  TQ_OBJECT
+  
 public:
     Walker( const HostConfig &host, const Identifier &startOid, TQObject *parent, const char *name = 0 );
     virtual ~Walker();

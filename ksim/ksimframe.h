@@ -34,7 +34,7 @@ namespace KSim
   class Frame : public TQWidget, public KSim::Base
   {
     Q_OBJECT
-  TQ_OBJECT
+  
     public:
       Frame(int type, TQWidget *parent, const char *name = 0);
       ~Frame();

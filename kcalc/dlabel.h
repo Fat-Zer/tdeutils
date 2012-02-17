@@ -38,7 +38,7 @@ class KActionCollection;
 class DispLogic : public KCalcDisplay
 {
 Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
 	DispLogic(TQWidget *parent, const char *name,

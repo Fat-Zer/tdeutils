@@ -61,7 +61,7 @@ public:
 class KCalcButton : public KPushButton
 {
 Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
  KCalcButton(TQWidget *parent, const char * name = 0); 
@@ -90,7 +90,7 @@ protected:
 class KSquareButton : public KCalcButton
 {
 Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
   KSquareButton(TQWidget *parent, const char * name = 0)

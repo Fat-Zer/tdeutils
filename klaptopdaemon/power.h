@@ -41,7 +41,7 @@ class KDoubleSpinBox;
 class PowerConfig : public KCModule
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 public:
   PowerConfig( TQWidget *parent=0, const char* name=0);
     ~PowerConfig();

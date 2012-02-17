@@ -107,7 +107,7 @@ namespace KSim
   class KDE_EXPORT LedLabel : public KSim::Progress
   {
     Q_OBJECT
-  TQ_OBJECT
+  
     public:
       /**
        * Constructs a KSim::LedLabel.

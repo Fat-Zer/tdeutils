@@ -37,7 +37,7 @@ namespace KSim
   class KDE_EXPORT Label : public TQWidget, public KSim::Base
   {
     Q_OBJECT
-  TQ_OBJECT
+  
     public:
       /**
        * Constructs a KSim::Label.

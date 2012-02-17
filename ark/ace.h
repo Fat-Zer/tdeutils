@@ -32,7 +32,7 @@ class KProcess; // TODO: Remove me!
 class AceArch : public Arch
 {
 	Q_OBJECT
-  TQ_OBJECT
+  
 	public:
 		AceArch( ArkWidget *, const TQString & );
 		virtual ~AceArch();

@@ -54,7 +54,7 @@ namespace KIO { class Job; }
 class CHexEditorWidget : public TQWidget
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
   public:
     enum EProgressMode

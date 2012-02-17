@@ -36,7 +36,7 @@ class KWMapEditor;
 
 class KWalletEditor : public KMainWindow {
 	Q_OBJECT
-  TQ_OBJECT
+  
 
 	public:
 		KWalletEditor(const TQString& wallet, bool isPath, TQWidget *parent = 0, const char* name = 0);

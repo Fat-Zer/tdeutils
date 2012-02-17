@@ -40,7 +40,7 @@
 class CScrollBar : public TQScrollBar
 {
   Q_OBJECT
-  TQ_OBJECT
+  
  
   public:
     CScrollBar( Qt::Orientation o, TQWidget *parent, const char *name = 0 )
@@ -62,7 +62,7 @@ class CScrollBar : public TQScrollBar
 class CDragManager : public TQWidget
 {
   Q_OBJECT
-  TQ_OBJECT
+  
     
   public:
     enum EDragActivateMode
@@ -100,7 +100,7 @@ class CDragManager : public TQWidget
 class CHexViewWidget : public TQFrame
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
   public:
     CHexViewWidget( TQWidget *parent, const char *name, CHexBuffer *hexBuffer );

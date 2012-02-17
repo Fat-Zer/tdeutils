@@ -34,7 +34,7 @@ class TQCheckBox;
 class CHexToolWidget : public TQFrame
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
   public:
     CHexToolWidget( TQWidget *parent = 0, const char *name = 0 );

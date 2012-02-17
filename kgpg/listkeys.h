@@ -68,7 +68,7 @@ struct gpgKey
 class KgpgSelKey : public KDialogBase
 {
         Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
         KgpgSelKey( TQWidget *parent = 0, const char *name = 0,bool allowMultipleSelection=false, TQString preselected=TQString());
@@ -92,7 +92,7 @@ public slots:
 class KeyView : public KListView
 {
         Q_OBJECT
-  TQ_OBJECT
+  
         friend class listKeys;
 public:
         KeyView( TQWidget *parent = 0, const char *name = 0);
@@ -144,7 +144,7 @@ protected:
 class mySearchLine: public KListViewSearchLine
 {
     Q_OBJECT
-  TQ_OBJECT
+  
 public:
     mySearchLine(TQWidget *parent = 0, KeyView *listView = 0, const char *name = 0);
     virtual ~mySearchLine();
@@ -162,7 +162,7 @@ class listKeys : public KMainWindow, virtual public KeyInterface
 {
         friend class KeyView;
         Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
         listKeys(TQWidget *parent=0, const char *name=0);

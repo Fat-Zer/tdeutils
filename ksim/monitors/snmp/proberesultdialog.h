@@ -33,7 +33,7 @@ namespace Snmp
 class ProbeResultDialog : public ProbeResultDialogBase
 {
     Q_OBJECT
-  TQ_OBJECT
+  
 public:
     ProbeResultDialog( const HostConfig &hostConfig, const ProbeDialog::ProbeResultList &probeResults,
                        TQWidget *parent, const char *name = 0 );

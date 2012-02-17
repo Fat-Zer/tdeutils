@@ -29,7 +29,7 @@ class TQSignalMapper;
 class RegExpButtons :public TQDockWindow
 {
     Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
     RegExpButtons( TQWidget *parent, const char *name = 0 );

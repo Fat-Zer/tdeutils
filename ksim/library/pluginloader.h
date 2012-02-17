@@ -64,7 +64,7 @@ namespace KSim
   class KDE_EXPORT PluginLoader : public TQObject
   {
     Q_OBJECT
-  TQ_OBJECT
+  
     friend class MainView;
     public:
       enum SearchType { Name = 0, DesktopFile, LibName };

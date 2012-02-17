@@ -39,7 +39,7 @@ struct science_constant{
 class KCalcConstMenu : public TQPopupMenu
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
   KCalcConstMenu(TQWidget * parent = 0, const char * name = 0);

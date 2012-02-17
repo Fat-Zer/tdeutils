@@ -44,7 +44,7 @@ class MyView : public TQLabel
 {
 
         Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
         MyView( TQWidget *parent = 0, const char *name = 0);
@@ -122,7 +122,7 @@ signals:
 class kgpgapplet : public KSystemTray//KUniqueApplication
 {
         Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
         kgpgapplet( TQWidget *parent = 0, const char *name = 0);
@@ -146,7 +146,7 @@ class KCmdLineArgs;
 class KgpgAppletApp : public KUniqueApplication
 {
         Q_OBJECT
-  TQ_OBJECT
+  
         friend class kgpgapplet;
 public:
         KgpgAppletApp();

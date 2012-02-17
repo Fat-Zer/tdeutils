@@ -38,7 +38,7 @@ class ArkWidget;
 class LhaArch : public Arch
 {
   Q_OBJECT
-  TQ_OBJECT
+  
   public:
     LhaArch( ArkWidget *, const TQString & );
     virtual ~LhaArch() { }

@@ -34,7 +34,7 @@ namespace KSim
   class Sysinfo : public TQWidget, virtual public DCOPObject
   {
     Q_OBJECT
-//    TQ_OBJECT
+//    
     K_DCOP
     public:
       Sysinfo(KSim::Config *config, TQWidget *parent=0,

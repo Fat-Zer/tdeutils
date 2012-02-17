@@ -97,7 +97,7 @@ class KWalletFolderItem : public KListViewItem {
 
 class KWalletEntryList : public KListView {
 	Q_OBJECT
-  TQ_OBJECT
+  
 	public:
 		KWalletEntryList(TQWidget *parent, const char *name = 0L);
 		virtual ~KWalletEntryList();
@@ -134,7 +134,7 @@ class KWalletItem : public TQIconViewItem {
 
 class KWalletIconView : public KIconView {
 	Q_OBJECT
-  TQ_OBJECT
+  
 	public:
 		KWalletIconView(TQWidget *parent, const char *name = 0L);
 		virtual ~KWalletIconView();

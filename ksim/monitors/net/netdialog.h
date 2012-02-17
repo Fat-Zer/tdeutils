@@ -35,7 +35,7 @@ class KURLRequester;
 class NetDialog : public TQTabDialog
 {
   Q_OBJECT
-  TQ_OBJECT
+  
   public:
     NetDialog(TQWidget *parent, const char *name = 0);
     ~NetDialog();

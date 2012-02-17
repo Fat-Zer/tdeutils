@@ -26,7 +26,7 @@ class SyntaxHighlighter;
 class Verifier :public TQTextEdit
 {
 Q_OBJECT
-  TQ_OBJECT
+  
 public:
     Verifier( TQWidget* parent, const char* name = 0 );
     void setHighlighter( RegexpHighlighter* );

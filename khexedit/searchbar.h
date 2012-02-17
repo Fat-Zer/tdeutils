@@ -33,7 +33,7 @@ class CHexValidator;
 class CSearchBar : public TQFrame
 {
   Q_OBJECT
-  TQ_OBJECT
+  
   
   public:
     CSearchBar( TQWidget *parent=0, const char *name=0, WFlags f=0 );

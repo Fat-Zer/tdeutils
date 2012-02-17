@@ -29,7 +29,7 @@ class KActionCollection;
 
 class KWMapEditor : public TQTable {
 	Q_OBJECT
-  TQ_OBJECT
+  
 
 	public:
 		KWMapEditor(TQMap<TQString,TQString>& map, TQWidget *parent = 0, const char *name = 0);

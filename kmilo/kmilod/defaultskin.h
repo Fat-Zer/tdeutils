@@ -32,7 +32,7 @@ class DefaultWidget;
 
 class DefaultSkin : public TQObject, public KMilo::DisplaySkin {
 	Q_OBJECT
-  TQ_OBJECT
+  
 	public:
 		DefaultSkin();
 		virtual ~DefaultSkin();

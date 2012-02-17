@@ -41,7 +41,7 @@
 class PcmciaConfig : public KCModule
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 public:
   PcmciaConfig( TQWidget *parent=0, const char* name=0);
 

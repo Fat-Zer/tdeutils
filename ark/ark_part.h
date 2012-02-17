@@ -46,7 +46,7 @@ namespace KIO
 class ArkBrowserExtension: public KParts::BrowserExtension
 {
     Q_OBJECT
-  TQ_OBJECT
+  
 public:
     ArkBrowserExtension( KParts::ReadOnlyPart * parent, const char * name = 0L );
 public slots:
@@ -56,7 +56,7 @@ public slots:
 class ArkStatusBarExtension: public KParts::StatusBarExtension
 {
     Q_OBJECT
-  TQ_OBJECT
+  
 public:
     ArkStatusBarExtension( KParts::ReadWritePart * parent );
     ~ArkStatusBarExtension();
@@ -88,7 +88,7 @@ private:
 class ArkPart: public KParts::ReadWritePart
 {
     Q_OBJECT
-  TQ_OBJECT
+  
 public:
     ArkPart( TQWidget *parentWidget, const char *widgetName, TQObject *parent,
              const char *name, const TQStringList &, bool readWrite );

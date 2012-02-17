@@ -79,7 +79,7 @@ enum NumBase {
 class KCalcDisplay : public TQLabel
 {
 Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
 	KCalcDisplay(TQWidget *parent=0, const char *name=0);

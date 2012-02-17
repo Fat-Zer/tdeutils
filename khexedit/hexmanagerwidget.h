@@ -75,7 +75,7 @@ class CFileKey
 class CTabBar : public TQTabBar
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
   public:
     CTabBar( TQWidget *parent=0, char *name=0 );
@@ -101,7 +101,7 @@ class CTabBar : public TQTabBar
 class CHexManagerWidget : public TQWidget
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
   public:
     enum EConversionPosition

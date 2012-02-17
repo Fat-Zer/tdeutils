@@ -32,7 +32,7 @@ class KURLDrag;
 class CDragLabel: public TQLabel
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
   public:
     CDragLabel( TQWidget *parent );

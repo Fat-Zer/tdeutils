@@ -22,7 +22,7 @@
 class RssSensor : public Sensor
 {
     Q_OBJECT
-  TQ_OBJECT
+  
 public:
     RssSensor( const TQString &source, int interval, const TQString &format, const TQString &encoding=TQString() );
 

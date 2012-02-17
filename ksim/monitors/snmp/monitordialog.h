@@ -32,7 +32,7 @@ namespace Snmp
 class MonitorDialog : public MonitorDialogBase
 {
     Q_OBJECT
-  TQ_OBJECT
+  
 public:
     MonitorDialog( const HostConfigMap &hosts, TQWidget *parent, const char *name = 0 );
     MonitorDialog( const MonitorConfig &monitor, const HostConfigMap &hosts, TQWidget *parent, const char *name = 0 );

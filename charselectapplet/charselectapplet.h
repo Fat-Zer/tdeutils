@@ -36,7 +36,7 @@ class KAboutData;
 class ConfigDialog : public KDialogBase
 {
     Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
     ConfigDialog(TQWidget* parent = 0, const char* name = 0);
@@ -58,7 +58,7 @@ private:
 class CharTable : public TQFrame
 {
     Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
     CharTable(TQWidget* parent = 0, const char* name = 0);
@@ -97,7 +97,7 @@ private:
 class CharSelectApplet : public KPanelApplet
 {
     Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
     CharSelectApplet(const TQString& configFile, Type t = Stretch, int actions = 0,

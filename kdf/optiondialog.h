@@ -28,7 +28,7 @@ class MntConfigWidget;
 class COptionDialog : public KDialogBase
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
   public:
     COptionDialog( TQWidget *parent=0, const char *name=0, bool modal=true );

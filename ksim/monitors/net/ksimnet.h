@@ -43,7 +43,7 @@ class NetPlugin : public KSim::PluginObject
 class NetView : public KSim::PluginView
 {
   Q_OBJECT
-  TQ_OBJECT
+  
   public:
     NetView(KSim::PluginObject *parent, const char *name);
     ~NetView();

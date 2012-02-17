@@ -79,7 +79,7 @@ class Plugin;
 class ConfigPage : public KSim::PluginPage
 {
     Q_OBJECT
-  TQ_OBJECT
+  
 public:
     ConfigPage( Plugin *parent, const char *name );
     ~ConfigPage();

@@ -30,7 +30,7 @@ class RegExp;
 class RegExpScrolledEditorWindow :public TQWidget
 {
     Q_OBJECT
-  TQ_OBJECT
+  
 public:
     RegExpScrolledEditorWindow( TQWidget *parent = 0, const char* name = 0);
     RegExp* regExp();

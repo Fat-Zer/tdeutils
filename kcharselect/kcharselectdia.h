@@ -25,7 +25,7 @@ static const char *version = "v1.1";
 class KCharSelectDia : public KMainWindow
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
   KCharSelectDia(TQWidget *parent,const char *name,const TQChar &_chr,const TQString &_font,int _tableNum, bool direction);

@@ -41,7 +41,7 @@ class TQPushButton;
 class SonyConfig : public KCModule
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 public:
   SonyConfig( TQWidget *parent=0, const char* name=0);
   ~SonyConfig( );     

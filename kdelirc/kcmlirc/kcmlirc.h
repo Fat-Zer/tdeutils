@@ -31,7 +31,7 @@ class Remote;
 class KCMLirc: public KCModule, virtual public DCOPObject
 {
 	Q_OBJECT
-//	TQ_OBJECT
+//	
 	K_DCOP
 
 private:

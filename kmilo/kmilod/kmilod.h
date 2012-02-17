@@ -36,7 +36,7 @@ class KMiloInterface;
 
 class KMiloD : public KDEDModule {
 	Q_OBJECT
-//	TQ_OBJECT
+//	
 	K_DCOP
 	public:
 		KMiloD(const TQCString &name);

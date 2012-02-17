@@ -76,7 +76,7 @@ typedef TQValueList< TQPair< TQString, TQt::AlignmentFlags > > ColumnList;
 class Arch : public TQObject
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
   protected:
     /**

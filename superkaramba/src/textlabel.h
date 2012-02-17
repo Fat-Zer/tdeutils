@@ -23,7 +23,7 @@
 class TextLabel : public Meter
 {
 Q_OBJECT
-  TQ_OBJECT
+  
 public:
     enum ScrollType { ScrollNone, ScrollNormal,
                       ScrollBackAndForth, ScrollOnePass };

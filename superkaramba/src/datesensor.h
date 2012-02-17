@@ -27,7 +27,7 @@ private:
 class DateSensor :  public Sensor
 {
 Q_OBJECT
-  TQ_OBJECT
+  
 public:
   DateSensor( int interval );
   ~DateSensor();

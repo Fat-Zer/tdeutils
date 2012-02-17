@@ -43,7 +43,7 @@ namespace KSim
   class GeneralPrefs : public TQWidget
   {
     Q_OBJECT
-  TQ_OBJECT
+  
     public:
       GeneralPrefs(TQWidget *parent, const char *name=0);
       ~GeneralPrefs();
@@ -66,7 +66,7 @@ namespace KSim
   class ClockPrefs : public TQWidget
   {
     Q_OBJECT
-  TQ_OBJECT
+  
     public:
       ClockPrefs(TQWidget *parent, const char *name=0);
       ~ClockPrefs();
@@ -84,7 +84,7 @@ namespace KSim
   class UptimePrefs : public TQWidget
   {
     Q_OBJECT
-  TQ_OBJECT
+  
     public:
       UptimePrefs(TQWidget *parent, const char *name=0);
       ~UptimePrefs();
@@ -119,7 +119,7 @@ namespace KSim
   class MemoryPrefs : public TQWidget
   {
     Q_OBJECT
-  TQ_OBJECT
+  
     public:
       MemoryPrefs(TQWidget *parent, const char *name=0);
       ~MemoryPrefs();
@@ -156,7 +156,7 @@ namespace KSim
   class SwapPrefs : public TQWidget
   {
     Q_OBJECT
-  TQ_OBJECT
+  
     public:
       SwapPrefs(TQWidget *parent, const char *name=0);
       ~SwapPrefs();

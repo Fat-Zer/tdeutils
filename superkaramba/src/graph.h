@@ -18,7 +18,7 @@
 class Graph : public Meter
 {
 Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
   Graph(karamba* k, int ix, int iy, int iw, int ih, int nbrPoints);

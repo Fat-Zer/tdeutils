@@ -178,7 +178,7 @@ private:
 
 class KPCMCIA : public TQObject {
   Q_OBJECT
-  TQ_OBJECT
+  
 public:
 
   KPCMCIA(int maxSlots = 8, const char *stabPath = "/var/run/stab");

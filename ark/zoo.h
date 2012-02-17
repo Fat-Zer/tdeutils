@@ -36,7 +36,7 @@ class ArkWidget;
 class ZooArch : public Arch
 {
   Q_OBJECT
-  TQ_OBJECT
+  
   public:
     ZooArch( ArkWidget *, const TQString & );
     virtual ~ZooArch() { }

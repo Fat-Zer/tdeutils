@@ -44,7 +44,7 @@ class ButtonsConfig;
 class LaptopModule : public KCModule
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
 

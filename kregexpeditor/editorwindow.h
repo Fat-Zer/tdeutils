@@ -46,7 +46,7 @@ class TQHBoxLayout;
 class RegExpEditorWindow :public TQWidget
 {
     Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
     RegExpEditorWindow(TQWidget *parent, const char *name = 0);

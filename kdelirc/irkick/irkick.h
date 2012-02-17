@@ -42,7 +42,7 @@ public:
 class IRKick: public TQObject, public DCOPObject
 {
 	Q_OBJECT
-//	TQ_OBJECT
+//	
 	K_DCOP
 
 	TQString npApp, npModule, npMethod;

@@ -48,7 +48,7 @@ namespace KIO { class Job; }
 class TopLevel : public KMainWindow
 {
     Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
     enum { KEDIT_OK 		= 0,
@@ -206,7 +206,7 @@ private slots:
 
 class SettingsDialog: public KConfigDialog {
 Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
   SettingsDialog(TQWidget *parent, const char *name,KConfigSkeleton *config, KSpellConfig *_spellConfig);

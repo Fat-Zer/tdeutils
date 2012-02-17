@@ -31,7 +31,7 @@
 class KCalcConstButton : public KCalcButton
 {
 Q_OBJECT
-  TQ_OBJECT
+  
 
   public:
 

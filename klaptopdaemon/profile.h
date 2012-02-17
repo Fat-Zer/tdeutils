@@ -42,7 +42,7 @@ class KComboBox;
 class ProfileConfig : public KCModule
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 public:
   ProfileConfig( TQWidget *parent=0, const char* name=0);
   ~ProfileConfig( );     

@@ -34,7 +34,7 @@ class TQSocketNotifier;
 class KVaioDriverInterface : public TQObject
 {
     Q_OBJECT
-  TQ_OBJECT
+  
 public:
     KVaioDriverInterface(TQObject *parent=0);
     bool connectToDriver(bool listen = true);

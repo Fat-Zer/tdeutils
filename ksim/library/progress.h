@@ -33,7 +33,7 @@ namespace KSim
   class KDE_EXPORT Progress : public KSim::Label
   {
     Q_OBJECT
-  TQ_OBJECT
+  
     public:
       enum ProgressType { Panel, Meter };
       /**

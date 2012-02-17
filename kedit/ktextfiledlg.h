@@ -38,7 +38,7 @@ class KURL;
 class KTextFileDialog : public KFileDialog
 {
   Q_OBJECT
-  TQ_OBJECT
+  
 
  public:
     KTextFileDialog(const TQString& startDir, const TQString& filter,

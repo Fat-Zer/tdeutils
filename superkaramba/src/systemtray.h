@@ -34,7 +34,7 @@ typedef long unsigned int Atom;
 class Systemtray : public TQWidget
 {
     Q_OBJECT
-    TQ_OBJECT
+    
 public:
     Systemtray(TQWidget* parent);
     ~Systemtray();

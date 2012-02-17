@@ -30,7 +30,7 @@
 class ThemeWidget : public ThemeWidgetLayout
 {
     Q_OBJECT
-  TQ_OBJECT
+  
   public:
     ThemeWidget(TQWidget *parent = 0, const char *name = 0);
     ThemeWidget(ThemeFile* tf);

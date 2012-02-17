@@ -26,7 +26,7 @@
 class EditAction : public EditActionBase
 {
 	Q_OBJECT
-  TQ_OBJECT
+  
 	IRAIt theAction;
 	TQMap<TQString, TQString> applicationMap, functionMap;
 	TQMap<TQString, TQString> nameProgramMap;

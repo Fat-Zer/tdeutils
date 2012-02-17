@@ -38,7 +38,7 @@ class WindowListboxItem;
 class KMultiFormListBoxWindowed  :public TQWidget, KMultiFormListBoxShower {
 
 Q_OBJECT
-  TQ_OBJECT
+  
 
 friend class KMultiFormListBox;
 

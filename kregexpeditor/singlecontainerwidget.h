@@ -25,7 +25,7 @@
 class SingleContainerWidget :public RegExpWidget
 {
 Q_OBJECT
-  TQ_OBJECT
+  
 
 public:
   SingleContainerWidget( RegExpEditorWindow* editorWindow, TQWidget* parent,

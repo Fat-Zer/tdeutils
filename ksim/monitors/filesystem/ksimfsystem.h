@@ -48,7 +48,7 @@ class PluginModule : public KSim::PluginObject
 class Fsystem : public KSim::PluginView, public FsystemIface
 {
   Q_OBJECT
-  TQ_OBJECT
+  
   public:
     /**
      * construtor of Fsystem, calls all init functions to create the plugin.

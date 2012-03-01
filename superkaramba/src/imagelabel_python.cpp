@@ -121,7 +121,7 @@ PyObject* py_createTaskIcon(PyObject *, PyObject *args)
   if (currTask == 0)
   {
     //no task was found
-    qWarning("Task not found.");
+    tqWarning("Task not found.");
     return (long)NULL ;
   }
   //retrieve the TQPixmap that represents this image

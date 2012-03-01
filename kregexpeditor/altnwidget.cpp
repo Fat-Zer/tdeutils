@@ -205,7 +205,7 @@ RegExp* AltnWidget::selection() const
       }
     }
   }
-  qFatal("Selection not found");
+  tqFatal("Selection not found");
   return 0; // compiler shut up.
 }
 

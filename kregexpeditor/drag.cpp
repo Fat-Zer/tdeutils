@@ -70,7 +70,7 @@ TQByteArray RegExpWidgetDrag::encodedData ( const char* format ) const
       stream << RegExpConverter::current()->toStr( _regexp, false );
   }
   else {
-    qWarning("Unexpected drag and drop format: %s", format );
+    tqWarning("Unexpected drag and drop format: %s", format );
   }
   return data;
 }

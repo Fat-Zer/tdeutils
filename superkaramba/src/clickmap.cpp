@@ -45,7 +45,7 @@ bool ClickMap::click( TQMouseEvent *e ) {
 
     int index = ((e -> y() - getY()) / text.getLineHeight()) + 1;
     if (index >= 1 && index <= (int)displays.count()) {
-      // qDebug( "You clicked item " + TQString::number( index ) + ", " +
+      // tqDebug( "You clicked item " + TQString::number( index ) + ", " +
       //  displays[index - 1] + " " + links[index - 1] );
       KRun::runCommand("konqueror " + links[index - 1]);
     }

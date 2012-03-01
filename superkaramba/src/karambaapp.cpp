@@ -114,14 +114,14 @@ void KarambaApplication::checkSuperKarambaDir()
   TQDir configDir(TQDir::home().absPath() + "/.superkaramba");
   if (!configDir.exists())
   {
-    qWarning("~/.superkaramba doesn't exist");
+    tqWarning("~/.superkaramba doesn't exist");
     if(!configDir.mkdir(TQDir::home().absPath() + "/.superkaramba"))
     {
-        qWarning("Couldn't create Directory ~/.superkaramba");
+        tqWarning("Couldn't create Directory ~/.superkaramba");
     }
     else
     {
-        qWarning("created ~/.superkaramba");
+        tqWarning("created ~/.superkaramba");
     }
   }
 }
@@ -323,13 +323,13 @@ bool KarambaApplication::lockKaramba()
   fd = open(file.ascii(), O_CREAT | O_RDWR | O_TRUNC, mode);
   if (fd < 0)
   {
-    qWarning("Open failed in lock.");
+    tqWarning("Open failed in lock.");
     return false;
   }
-  //qDebug("lock %d", getpid());
+  //tqDebug("lock %d", getpid());
   if(lockf(fd, F_LOCK, 0))
   {
-    qWarning("Lock failed.");
+    tqWarning("Lock failed.");
     return false;
   }
   return true;
@@ -340,7 +340,7 @@ void KarambaApplication::unlockKaramba()
   if(fd > 0)
   {
     lockf(fd, F_ULOCK, 0);
-    //qDebug("Unlock %d", getpid());
+    //tqDebug("Unlock %d", getpid());
     close(fd);
     fd = -1;
   }

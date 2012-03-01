@@ -29,7 +29,7 @@ bool ClickArea::click( TQMouseEvent *e )
 {
     if( rect.contains( e->x(), e->y() ) )
     {
-        //qDebug(TQString::number(e->type()));
+        //tqDebug(TQString::number(e->type()));
 	//KShellProcess ksp;
         if( e->button() != Qt::LeftButton )
 			return false;
@@ -48,7 +48,7 @@ bool ClickArea::click( TQMouseEvent *e )
 
 		if( !program.isEmpty() )
 		{
-			//qDebug(program);
+			//tqDebug(program);
 			KRun::runCommand(program);
 		}
 	}

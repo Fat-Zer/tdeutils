@@ -68,7 +68,7 @@ void KWidgetStreamer::propertyToStream( const TQObject* from, TQDataStream& stre
       for ( PropertyListIt it = list.begin(); it != list.end(); ++it ) {
         TQVariant prop = from->property( (*it).latin1() );
         if ( ! prop.isValid() )
-          qWarning("Invalid property: %s:%s", tp.latin1(), (*it).latin1() );
+          tqWarning("Invalid property: %s:%s", tp.latin1(), (*it).latin1() );
 
         stream <<  prop ;
       }

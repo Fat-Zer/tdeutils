@@ -44,7 +44,7 @@ SensorBase *SensorBase::self()
 {
   if (!m_self) {
     m_self = new SensorBase;
-    qAddPostRoutine(cleanup);
+    tqAddPostRoutine(cleanup);
   }
 
   return m_self;

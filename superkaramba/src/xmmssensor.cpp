@@ -164,13 +164,13 @@ void XMMSSensor::update()
     {
         isPlaying = xmms->isPlaying(0);
         pos = xmms->getPlaylistPos(0);
-        qDebug("unicode start");
+        tqDebug("unicode start");
         title = codec->toUnicode( TQCString( xmms->getPlaylistTitle( 0, pos ) )  );
-        qDebug("unicode end");
+        tqDebug("unicode end");
         if( title.isEmpty() )
             title = "XMMS";
 
-        qDebug("Title: %s", title.ascii());
+        tqDebug("Title: %s", title.ascii());
         songLength = xmms->getPlaylistTime( 0, pos );
         currentTime = xmms->getOutputTime( 0 );
     }

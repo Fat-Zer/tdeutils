@@ -28,14 +28,14 @@ public:
          dynamic_cast<TQMouseEvent*>(event)->state() == TQt::ControlButton ) {
       // Ctrl + left mouse click.
 
-      qDebug("----------------------------------------------------");
-      qDebug((TQString("Widget name : ") + TQString( recv->name() )).latin1() );
-      qDebug((TQString("Widget class: ") + TQString( recv->className() )).latin1() );
-      qDebug("\nObject info:");
+      tqDebug("----------------------------------------------------");
+      tqDebug((TQString("Widget name : ") + TQString( recv->name() )).latin1() );
+      tqDebug((TQString("Widget class: ") + TQString( recv->className() )).latin1() );
+      tqDebug("\nObject info:");
       recv->dumpObjectInfo();
-      qDebug("\nObject tree:");
+      tqDebug("\nObject tree:");
       recv->dumpObjectTree();
-      qDebug("----------------------------------------------------");
+      tqDebug("----------------------------------------------------");
       return false;
     }
     return false;

@@ -46,7 +46,7 @@ class KSim::Chart::Timer
       if (!m_timer) {
         m_timer = new TQTimer;
         m_timer->start(1000);
-        qAddPostRoutine(cleanup);
+        tqAddPostRoutine(cleanup);
       }
 
       TQObject::connect(m_timer, TQT_SIGNAL(timeout()),

@@ -385,7 +385,7 @@ void ConcWidget::addNewConcChild(DragAccepter *accepter, ConcWidget *other)
       return;
     }
   }
-  qFatal("accepter not found");
+  tqFatal("accepter not found");
 }
 
 bool ConcWidget::validateSelection() const

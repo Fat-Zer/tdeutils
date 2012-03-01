@@ -115,7 +115,7 @@ void NetworkSensor::getInOutBytes ( unsigned long &in,unsigned long &out) const
        }
         else
         {
-            qDebug("Network sensor: can not find %s", device.ascii());
+            tqDebug("Network sensor: can not find %s", device.ascii());
             in = 0;
             out = 0;
         }

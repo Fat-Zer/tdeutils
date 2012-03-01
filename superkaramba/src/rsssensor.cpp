@@ -62,16 +62,16 @@ void RssSensor::update()
             }
             else
             {
-                qDebug("Error on building DOM");
+                tqDebug("Error on building DOM");
             }
         }
         else
         {
-            qDebug("Error opening file");
+            tqDebug("Error opening file");
         }
     }
     else {
-        qDebug( "Error Downloading: %s", source.ascii());
+        tqDebug( "Error Downloading: %s", source.ascii());
     }
 
     if ( OK )
@@ -116,13 +116,13 @@ void RssSensor::update()
                     }
                     else
                     {
-                        qDebug("Skipping");
+                        tqDebug("Skipping");
                     }
                 }
             }
             else
             {
-                qDebug ("Document Node was null!!");
+                tqDebug ("Document Node was null!!");
             }
 
             ++it;

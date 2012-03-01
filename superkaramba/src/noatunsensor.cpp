@@ -139,7 +139,7 @@ TQString NoatunSensor::getTitle()
                        data, replyType, replyData))
     {
         result = "";
-        qDebug("there was some error using DCOP.");
+        tqDebug("there was some error using DCOP.");
     }
     else
     {
@@ -154,7 +154,7 @@ TQString NoatunSensor::getTitle()
         else
         {
             result = "";
-            qDebug("title returned an unexpected type of reply!");
+            tqDebug("title returned an unexpected type of reply!");
         }
     }
     return result;
@@ -172,7 +172,7 @@ int NoatunSensor::getTime()
                        data, replyType, replyData))
     {
         result = 0;
-        qDebug("there was some error using DCOP.");
+        tqDebug("there was some error using DCOP.");
     }
     else
     {
@@ -184,7 +184,7 @@ int NoatunSensor::getTime()
         else
         {
             result = 0;
-            qDebug("title returned an unexpected type of reply!");
+            tqDebug("title returned an unexpected type of reply!");
         }
     }
     return result;
@@ -202,7 +202,7 @@ int NoatunSensor::getLength()
                        data, replyType, replyData))
     {
         result = 0;
-        qDebug("there was some error using DCOP.");
+        tqDebug("there was some error using DCOP.");
     }
     else
     {
@@ -214,7 +214,7 @@ int NoatunSensor::getLength()
         else
         {
             result = 0;
-            qDebug("title returned an unexpected type of reply!");
+            tqDebug("title returned an unexpected type of reply!");
         }
     }
     return result;

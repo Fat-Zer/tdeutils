@@ -273,7 +273,7 @@ TQString RepeatRangeWindow::text()
   case MINMAX: return i18n("Repeated From %1 to %2 Times")
                  .arg( _rangeFrom->value() ).arg( _rangeTo->value() );
   }
-  qFatal("Fall through!");
+  tqFatal("Fall through!");
   return TQString::fromLocal8Bit("");
 }
 
@@ -286,7 +286,7 @@ int RepeatRangeWindow::min()
   case EXACTLY: return _exactlyTimes->value();
   case MINMAX: return _rangeFrom->value();
   }
-  qFatal("Fall through!");
+  tqFatal("Fall through!");
   return -1;
 }
 
@@ -299,7 +299,7 @@ int RepeatRangeWindow::max()
   case EXACTLY: return _exactlyTimes->value();
   case MINMAX:  return _rangeTo->value();
   }
-  qFatal("Fall through!");
+  tqFatal("Fall through!");
   return -1;
 }
 

@@ -96,10 +96,10 @@ int main(int argc, char **argv)
 //             if( args->arg(i) != "" )
 //             {
 //                 TQFileInfo file( args->arg(i) );
-//                 //qDebug( file.dirPath(true) );
+//                 //tqDebug( file.dirPath(true) );
 //                 if( file.exists() && !file.isDir() )
 //                 {
-//                     //qDebug( "File exists" );
+//                     //tqDebug( "File exists" );
 //                     mainWin = new karamba( ( args->arg(i) ));
 //                     mainWin->show();
 //                     OK = true;

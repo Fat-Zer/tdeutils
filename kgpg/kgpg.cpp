@@ -729,7 +729,7 @@ void  MyView::installShred()
 
 void  MyView::slotSaveOptionsPath()
 {
-qWarning("Save wizard settings...");
+tqWarning("Save wizard settings...");
         if (wiz->checkBox1->isChecked()) installShred();
 
         KGpgSettings::setAutoStart( wiz->checkBox2->isChecked() );

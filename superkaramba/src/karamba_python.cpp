@@ -469,7 +469,7 @@ bool KarambaPython::callObject(const char* func, PyObject* pArgs, bool lock)
   bool result = false;
   PyThreadState* myThreadState;
 
-  //qDebug("Calling %s", func);
+  //tqDebug("Calling %s", func);
 
   if (lock)
     getLock(&myThreadState);
@@ -486,7 +486,7 @@ bool KarambaPython::callObject(const char* func, PyObject* pArgs, bool lock)
     }
     else
     {
-      qWarning("Call to %s failed", func);
+      tqWarning("Call to %s failed", func);
       PyErr_Print();
     }
   }

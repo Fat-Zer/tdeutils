@@ -112,7 +112,7 @@ ValueImpl::ValueImpl( variable_list *var )
             }
 #endif
         default: {
-            qDebug( "ValueImp: converting from %i to invalid", var->type );
+            tqDebug( "ValueImp: converting from %i to invalid", var->type );
             type = Value::Invalid; break;
         }
     }
@@ -214,7 +214,7 @@ int Value::toInt() const
     switch ( d->type ) {
         case Int:
         case TimeTicks: return d->data.toInt();
-        case Invalid: qDebug( "cannot convert from invalid to int" );
+        case Invalid: tqDebug( "cannot convert from invalid to int" );
         default: assert( false );
     }
     assert( false );
@@ -227,7 +227,7 @@ uint Value::toUInt() const
         case UInt:
         case Counter:
         case Gauge: return d->data.toUInt();
-        case Invalid: qDebug( "cannot convert from invalid to uint" );
+        case Invalid: tqDebug( "cannot convert from invalid to uint" );
         default: assert( false );
     }
     assert( false );

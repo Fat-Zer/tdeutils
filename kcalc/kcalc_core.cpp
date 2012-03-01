@@ -500,7 +500,7 @@ void CalcEngine::CosDeg(KNumber input)
 		  	_last_number = -1;
 		  else if (mult == KNumber(3))
 		  	_last_number = 0;
-		  else qDebug("Something wrong in CalcEngine::CosDeg\n");
+		  else tqDebug("Something wrong in CalcEngine::CosDeg\n");
 		  return;
 		}
 	}
@@ -538,7 +538,7 @@ void CalcEngine::CosGrad(KNumber input)
 		  	_last_number = -1;
 		  else if (mult == KNumber(3))
 		  	_last_number = 0;
-		  else qDebug("Something wrong in CalcEngine::CosGrad\n");
+		  else tqDebug("Something wrong in CalcEngine::CosGrad\n");
 		  return;
 		}
 	}
@@ -720,7 +720,7 @@ void CalcEngine::SinDeg(KNumber input)
 		  	_last_number = 0;
 		  else if (mult == KNumber(3))
 		  	_last_number = -1;
-		  else qDebug("Something wrong in CalcEngine::SinDeg\n");
+		  else tqDebug("Something wrong in CalcEngine::SinDeg\n");
 		  return;
 		}
 	}
@@ -760,7 +760,7 @@ void CalcEngine::SinGrad(KNumber input)
 		  	_last_number = 0;
 		  else if (mult == KNumber(3))
 		  	_last_number = -1;
-		  else qDebug("Something wrong in CalcEngine::SinGrad\n");
+		  else tqDebug("Something wrong in CalcEngine::SinGrad\n");
 		  return;
 		}
 	}

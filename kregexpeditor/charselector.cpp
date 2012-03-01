@@ -141,7 +141,7 @@ void CharSelector::setText( TQString text )
     else if ( text.at(1) == TQChar('v') )
       slotNewItem(9);
     else {
-      qWarning("Warning %s:%d Unknown escape %s", __FILE__, __LINE__, text.latin1() );
+      tqWarning("Warning %s:%d Unknown escape %s", __FILE__, __LINE__, text.latin1() );
     }
   }
   else {

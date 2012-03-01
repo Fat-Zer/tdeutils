@@ -52,7 +52,7 @@ TQString RegExpConverter::toStr( RegExp* regexp, bool markSelection )
     case RegExp::LOOKAHEAD: return toString( static_cast<LookAheadRegExp*>( regexp ), markSelection );
     case RegExp::TEXTRANGE: return toString( static_cast<TextRangeRegExp*>( regexp ), markSelection );
     }
-    qWarning("We shouldn't get here!");
+    tqWarning("We shouldn't get here!");
     return TQString::fromLatin1( "" );
 }
 

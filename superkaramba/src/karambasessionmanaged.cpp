@@ -52,7 +52,7 @@ bool KarambaSessionManaged::saveState(TQSessionManager&)
   }
   delete list;                      // delete the list, not the widgets
 
-  qDebug("Open themes %s", openThemes.ascii());
+  tqDebug("Open themes %s", openThemes.ascii());
   config->writeEntry("OpenThemes", openThemes);
   return true;
 }

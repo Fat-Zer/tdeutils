@@ -43,17 +43,17 @@ RegExpWidget::RegExpWidget(RegExpEditorWindow* editorWindow, TQWidget *parent,
 
 void RegExpWidget::addNewChild(DragAccepter *, RegExpWidget *)
 {
-  qFatal("This widget should not expect any children");
+  tqFatal("This widget should not expect any children");
 }
 
 void RegExpWidget::addNewConcChild(DragAccepter *, ConcWidget *)
 {
-  qFatal("This widget should not expect any children");
+  tqFatal("This widget should not expect any children");
 }
 
 void RegExpWidget::setConcChild(ConcWidget *)
 {
-  qFatal("This widget should not expect any children");
+  tqFatal("This widget should not expect any children");
 }
 
 bool RegExpWidget::updateSelection(bool parentSelected)
@@ -95,12 +95,12 @@ void RegExpWidget::clearSelection()
 
 void RegExpWidget::applyRegExpToSelection( RegExpType )
 {
-  qFatal("This method should not be called for this widget");
+  tqFatal("This method should not be called for this widget");
 }
 
 void RegExpWidget::deleteSelection()
 {
-  qFatal("This method should be overridden if needed!");
+  tqFatal("This method should be overridden if needed!");
 }
 
 RegExp* RegExpWidget::selection() const
@@ -110,7 +110,7 @@ RegExp* RegExpWidget::selection() const
 
 int RegExpWidget::edit()
 {
-  qFatal("This method should be overridden if needed!");
+  tqFatal("This method should be overridden if needed!");
   return 0; // Compiler shut up
 }
 

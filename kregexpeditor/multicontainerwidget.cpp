@@ -100,7 +100,7 @@ void MultiContainerWidget::addNewChild(DragAccepter *accepter, RegExpWidget *chi
       return;
     }
   }
-  qFatal("Accepter not found in list");
+  tqFatal("Accepter not found in list");
 }
 
 bool MultiContainerWidget::updateSelection(bool parentSelected)

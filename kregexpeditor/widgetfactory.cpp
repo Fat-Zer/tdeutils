@@ -76,7 +76,7 @@ RegExpWidget* WidgetFactory::createWidget( RegExpEditorWindow* win, TQWidget* pa
   case COMPOUND:
     widget = new CompoundWidget( win, parent ); break;
   default:
-    qFatal("It should not be possible to get here!");
+    tqFatal("It should not be possible to get here!");
     return 0;
   }
 
@@ -91,7 +91,7 @@ RegExpWidget* WidgetFactory::createWidget( RegExp* regexp, RegExpEditorWindow* e
                                            TQWidget* parent )
 {
   if ( regexp == 0 ) {
-    qFatal("%s:%d Regexp is 0", __FILE__, __LINE__ );
+    tqFatal("%s:%d Regexp is 0", __FILE__, __LINE__ );
   }
   else if ( TextRegExp* reg = dynamic_cast<TextRegExp*>( regexp ) )
     return new TextWidget( reg, editorWindow, parent );
@@ -126,7 +126,7 @@ RegExpWidget* WidgetFactory::createWidget( RegExp* regexp, RegExpEditorWindow* e
   else if ( CompoundRegExp* reg = dynamic_cast<CompoundRegExp*>( regexp ) )
     return new CompoundWidget( reg, editorWindow, parent );
   else {
-    qFatal("%s:%d Internal Error: Unknown RegExp type", __FILE__, __LINE__);
+    tqFatal("%s:%d Internal Error: Unknown RegExp type", __FILE__, __LINE__);
   }
   return 0;
 }

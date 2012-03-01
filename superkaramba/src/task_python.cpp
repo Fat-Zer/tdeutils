@@ -193,7 +193,7 @@ PyObject* getTaskInfo(long widget, long ctask)
   }
   else
   {
-    qWarning("Task not found.");
+    tqWarning("Task not found.");
     return NULL;
   }
 }

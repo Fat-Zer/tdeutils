@@ -37,7 +37,7 @@ namespace KSim
           
           // Make sure our m_baseList instance gets
           // deleted when KSim exits
-          qAddPostRoutine(cleanup);
+          tqAddPostRoutine(cleanup);
         }
 
         if (!object)

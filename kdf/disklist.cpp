@@ -264,7 +264,7 @@ int DiskList::readDF()
   dfProc->clearArguments();
   (*dfProc) << "env" << "LC_ALL=POSIX" << DF_COMMAND << DF_ARGS;
   if (!dfProc->start( KProcess::NotifyOnExit, KProcess::AllOutput ))
-    qFatal(i18n("could not execute [%s]").local8Bit().data(), DF_COMMAND);
+    tqFatal(i18n("could not execute [%s]").local8Bit().data(), DF_COMMAND);
   return 1;
 }
 
@@ -286,7 +286,7 @@ void DiskList::dfDone()
   TQTextStream t (dfStringErrOut, IO_ReadOnly);
   TQString s=t.readLine();
   if ( ( s.isEmpty() ) || ( s.left(10) != "Filesystem" ) )
-    qFatal("Error running df command... got [%s]",s.latin1());
+    tqFatal("Error running df command... got [%s]",s.latin1());
   while ( !t.atEnd() ) {
     TQString u,v;
     DiskEntry *disk;

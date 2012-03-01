@@ -199,7 +199,7 @@ RegExpConverter* VerifyButtons::setSyntax( const TQString& which)
             return (*it).first;
         }
     }
-    qWarning( "No such converter: '%s'", which.latin1() );
+    tqWarning( "No such converter: '%s'", which.latin1() );
     return 0;
 }
 

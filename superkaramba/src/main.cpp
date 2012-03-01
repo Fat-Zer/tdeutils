@@ -52,7 +52,7 @@ static KCmdLineOptions options[] =
   { 0, 0, 0 }
 };
 
-// This is for redirecting all qWarning, qDebug,... messages to file.
+// This is for redirecting all tqWarning, tqDebug,... messages to file.
 // Usefull when testing session management issues etc.
 // #define KARAMBA_LOG 1
 
@@ -148,7 +148,7 @@ int main(int argc, char **argv)
     args->clear();
 
     KarambaPython::initPython();
-    //qDebug("startThemes");
+    //tqDebug("startThemes");
     if(app.startThemes(lst) || mainAppId.isEmpty())
       ret = app.exec();
     KarambaPython::shutdownPython();

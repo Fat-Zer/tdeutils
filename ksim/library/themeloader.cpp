@@ -886,7 +886,7 @@ KSim::ThemeLoader &KSim::ThemeLoader::self()
 {
   if (!m_self) { // is it the first call?
     m_self = new KSim::ThemeLoader; // create sole instance
-    qAddPostRoutine(cleanup);
+    tqAddPostRoutine(cleanup);
   }
 
   return *m_self; // address of sole instance

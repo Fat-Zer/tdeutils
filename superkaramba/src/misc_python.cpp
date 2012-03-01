@@ -175,7 +175,7 @@ long attachClickArea(long widget, long meter, TQString LeftButton, TQString Midd
       image -> attachClickArea(LeftButton, MiddleButton, RightButton);
       if (!meterAlreadyClickable)
       {
-          //qWarning("attachClickArea : meter is image");
+          //tqWarning("attachClickArea : meter is image");
           currTheme -> clickList -> append(image);
       }
   }
@@ -185,14 +185,14 @@ long attachClickArea(long widget, long meter, TQString LeftButton, TQString Midd
       text -> attachClickArea(LeftButton, MiddleButton, RightButton);
       if (!meterAlreadyClickable)
       {
-          //qWarning("attachClickArea : meter is text");
+          //tqWarning("attachClickArea : meter is text");
           currTheme -> clickList -> append(text);
       }
   }
   else
   {
       //The given meter does not support attached clickAreas.
-      qWarning("The given meter is not of type image or text");
+      tqWarning("The given meter is not of type image or text");
       return 0;
   }
   return 1;
@@ -678,7 +678,7 @@ TQString getIp(char *device_name)
    */
   if ((sd = socket(AF_INET,SOCK_DGRAM,0)) < 0)
   {
-    qWarning("Error: Unable to create socket (socket)");
+    tqWarning("Error: Unable to create socket (socket)");
     return "Error";
   }
 
@@ -691,7 +691,7 @@ TQString getIp(char *device_name)
   ifc_conf.ifc_buf = ifc_conf_buf;
   if (ioctl(sd,SIOCGIFCONF,&ifc_conf) < 0)
   {
-    qWarning("Error: Unable to get network interface conf (ioctl)");
+    tqWarning("Error: Unable to get network interface conf (ioctl)");
     close(sd);
     return "Error";
   }
@@ -701,10 +701,10 @@ TQString getIp(char *device_name)
    * have broadcast capability?
    */
   numdevs = ifc_conf.ifc_len / sizeof (struct ifreq);
-  //qDebug("numdevs = %d", numdevs);
+  //tqDebug("numdevs = %d", numdevs);
   for (i = 0; i < numdevs; i++)
   {
-    //qDebug("iterations: %d", i);
+    //tqDebug("iterations: %d", i);
     /* devptr points into an array of ifreq structs. */
     devptr = &ifc_conf.ifc_req[i];
 
@@ -713,7 +713,7 @@ TQString getIp(char *device_name)
 
     if (ioctl(sd,SIOCGIFFLAGS,devptr) < 0)
     {
-      qWarning("Error: Unable to get device interface flags (ioctl).");
+      tqWarning("Error: Unable to get device interface flags (ioctl).");
       close(sd);
       return "Error";
     }
@@ -731,7 +731,7 @@ TQString getIp(char *device_name)
   /* Get the broadcast address. */
   if (ioctl(sd,SIOCGIFFLAGS,devptr) < 0)
   {
-    qWarning("Error: Unable to get device interface flags (ioctl).");
+    tqWarning("Error: Unable to get device interface flags (ioctl).");
     close(sd);
     return "Error";
   }

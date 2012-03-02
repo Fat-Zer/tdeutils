@@ -65,7 +65,7 @@ void ShowDesktop::slotWindowChanged(WId w, unsigned int dirty)
   // SELI this needs checking for twin_iii (_NET_SHOWING_DESKTOP)
   if ( dirty & NET::XAWMState )
   {
-    NETWinInfo inf(qt_xdisplay(), w, qt_xrootwin(),
+    NETWinInfo inf(tqt_xdisplay(), w, tqt_xrootwin(),
                    NET::XAWMState | NET::WMWindowType);
 #ifdef KDE_3_2
     NET::WindowType windowType = inf.windowType(NET_ALL_TYPES_MASK);
@@ -96,7 +96,7 @@ void ShowDesktop::showDesktop( bool b )
         TQValueList<WId>::ConstIterator end( windows.end() );
         for ( it=windows.begin(); it!=end; ++it ) {
             WId w = *it;
-            NETWinInfo info( qt_xdisplay(), w, qt_xrootwin(),
+            NETWinInfo info( tqt_xdisplay(), w, tqt_xrootwin(),
                              NET::XAWMState | NET::WMDesktop );
             if ( info.mappingState() == NET::Visible &&
                  ( info.desktop() == NETWinInfo::OnAllDesktops

@@ -61,20 +61,20 @@ XAutoLock::XAutoLock()
     xautolock_useXidle = 0;
     xautolock_useMit = 0;
 #ifdef HAVE_XIDLE
-    useXidle = XidleQueryExtension( qt_xdisplay(), &dummy, &dummy );
+    useXidle = XidleQueryExtension( tqt_xdisplay(), &dummy, &dummy );
 #endif
 #ifdef HAVE_XSCREENSAVER
     if( !xautolock_useXidle )
-        xautolock_useMit = XScreenSaverQueryExtension( qt_xdisplay(), &dummy, &dummy );
+        xautolock_useMit = XScreenSaverQueryExtension( tqt_xdisplay(), &dummy, &dummy );
 #endif
     if( !xautolock_useXidle && !xautolock_useMit )
     {
         kapp->installX11EventFilter( this );
         int (*oldHandler)(Display *, XErrorEvent *);
         oldHandler = XSetErrorHandler(catchFalseAlarms);
-        XSync(qt_xdisplay(), False );
-        xautolock_initDiy( qt_xdisplay());
-        XSync(qt_xdisplay(), False );
+        XSync(tqt_xdisplay(), False );
+        xautolock_initDiy( tqt_xdisplay());
+        XSync(tqt_xdisplay(), False );
         XSetErrorHandler(oldHandler);
     }
 
@@ -175,7 +175,7 @@ void XAutoLock::timerEvent(TQTimerEvent *ev)
     int (*oldHandler)(Display *, XErrorEvent *) = NULL;
     if( !xautolock_useXidle && !xautolock_useMit )
     { // only the diy way needs special X handler
-        XSync( qt_xdisplay(), False );
+        XSync( tqt_xdisplay(), False );
         oldHandler = XSetErrorHandler(catchFalseAlarms);
     }
 
@@ -193,8 +193,8 @@ void XAutoLock::timerEvent(TQTimerEvent *ev)
 
     mLastTimeout = now;
 
-    xautolock_queryIdleTime( qt_xdisplay());
-    xautolock_queryPointer( qt_xdisplay());
+    xautolock_queryIdleTime( tqt_xdisplay());
+    xautolock_queryPointer( tqt_xdisplay());
 
     if( !xautolock_useXidle && !xautolock_useMit )
         XSetErrorHandler(oldHandler);
@@ -211,7 +211,7 @@ void XAutoLock::timerEvent(TQTimerEvent *ev)
 #ifdef HAVE_DPMS
     BOOL on;
     CARD16 state;
-    DPMSInfo( qt_xdisplay(), &state, &on );
+    DPMSInfo( tqt_xdisplay(), &state, &on );
 
     //kdDebug() << "DPMSInfo " << state << " " << on << endl;
     // If DPMS is active, it makes XScreenSaverQueryInfo() report idle time
@@ -229,7 +229,7 @@ void XAutoLock::timerEvent(TQTimerEvent *ev)
 #ifdef HAVE_XSCREENSAVER
     static XScreenSaverInfo* mitInfo = 0;
     if (!mitInfo) mitInfo = XScreenSaverAllocInfo ();
-    if (XScreenSaverQueryInfo (qt_xdisplay(), DefaultRootWindow (qt_xdisplay()), mitInfo)) {
+    if (XScreenSaverQueryInfo (tqt_xdisplay(), DefaultRootWindow (tqt_xdisplay()), mitInfo)) {
         //kdDebug() << "XScreenSaverQueryInfo " << mitInfo->state << " " << ScreenSaverDisabled << endl;
         if (mitInfo->state == ScreenSaverDisabled)
 	    activate = false;
@@ -253,7 +253,7 @@ bool XAutoLock::x11Event( XEvent* ev )
 
 bool XAutoLock::ignoreWindow( WId w )
 {
-    if( w != qt_xrootwin() && TQWidget::find( w ))
+    if( w != tqt_xrootwin() && TQWidget::find( w ))
         return true;
     return false;
 }

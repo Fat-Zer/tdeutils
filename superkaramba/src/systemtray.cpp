@@ -68,18 +68,18 @@ void Systemtray::updateBackgroundPixmap ( const TQPixmap & pixmap) {
   }
 
     TQPoint topPoint = mapToGlobal(TQPoint(0,0));
-    Window hack = XCreateSimpleWindow(qt_xdisplay(), winId(), 0,0, width(), height(), 0, 0, 0);
-    XRaiseWindow(qt_xdisplay(), hack);
-    XMapWindow(qt_xdisplay(), hack);
-    XUnmapWindow(qt_xdisplay(), hack);
-    XDestroyWindow(qt_xdisplay(), hack);
+    Window hack = XCreateSimpleWindow(tqt_xdisplay(), winId(), 0,0, width(), height(), 0, 0, 0);
+    XRaiseWindow(tqt_xdisplay(), hack);
+    XMapWindow(tqt_xdisplay(), hack);
+    XUnmapWindow(tqt_xdisplay(), hack);
+    XDestroyWindow(tqt_xdisplay(), hack);
 }
 
 void Systemtray::initSystray( void )
 {
   bool existing = false;
   //bool content = false;
-  Display *display = qt_xdisplay();
+  Display *display = tqt_xdisplay();
   no_of_systray_windows = 0;
 
   twin_module = new KWinModule();
@@ -111,7 +111,7 @@ void Systemtray::initSystray( void )
   connect(twin_module, TQT_SIGNAL(systemTrayWindowRemoved(WId)), TQT_SLOT(systemTrayWindowRemoved(WId)));
 
   TQCString screenstr;
-  screenstr.setNum(qt_xscreen());
+  screenstr.setNum(tqt_xscreen());
   TQCString trayatom = "_NET_SYSTEM_TRAY_S" + screenstr;
 
   net_system_tray_selection = XInternAtom( display, trayatom, false );
@@ -123,7 +123,7 @@ void Systemtray::initSystray( void )
     winId(),
     CurrentTime );
 
-  WId root = qt_xrootwin();
+  WId root = tqt_xrootwin();
 
   if (XGetSelectionOwner(display, net_system_tray_selection) == winId())
   {

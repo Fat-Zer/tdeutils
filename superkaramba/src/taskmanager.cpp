@@ -114,7 +114,7 @@ Task* TaskManager::findTask(WId w)
 
 void TaskManager::windowAdded(WId w )
 {
-  NETWinInfo info(qt_xdisplay(),  w, qt_xrootwin(),
+  NETWinInfo info(tqt_xdisplay(),  w, tqt_xrootwin(),
                   NET::WMWindowType | NET::WMPid | NET::WMState );
   #ifdef KDE_3_2
   NET::WindowType windowType = info.windowType(NET_ALL_TYPES_MASK);
@@ -133,7 +133,7 @@ void TaskManager::windowAdded(WId w )
   }
 
   Window transient_for_tmp;
-  if (XGetTransientForHint(qt_xdisplay(), (Window) w, &transient_for_tmp))
+  if (XGetTransientForHint(tqt_xdisplay(), (Window) w, &transient_for_tmp))
   {
     WId transient_for = (WId) transient_for_tmp;
 
@@ -142,7 +142,7 @@ void TaskManager::windowAdded(WId w )
       return;
 
     // lets see if this is a transient for an existing task
-    if (transient_for != qt_xrootwin() && transient_for != 0 )
+    if (transient_for != tqt_xrootwin() && transient_for != 0 )
     {
       Task* t = findTask(transient_for);
       if (t)
@@ -188,7 +188,7 @@ void TaskManager::windowRemoved(WId w )
 void TaskManager::windowChanged(WId w, unsigned int dirty)
 {
     if( dirty & NET::WMState ) {
-        NETWinInfo info ( qt_xdisplay(),  w, qt_xrootwin(), NET::WMState );
+        NETWinInfo info ( tqt_xdisplay(),  w, tqt_xrootwin(), NET::WMState );
         if ( (info.state() & NET::SkipTaskbar) != 0 ) {
             windowRemoved( w );
             _skiptaskbar_windows.push_front( w );
@@ -474,19 +474,19 @@ bool Task::isModified() const
 
 TQString Task::iconName() const
 {
-    NETWinInfo ni( qt_xdisplay(),  _win, qt_xrootwin(), NET::WMIconName);
+    NETWinInfo ni( tqt_xdisplay(),  _win, tqt_xrootwin(), NET::WMIconName);
     return TQString::fromUtf8(ni.iconName());
 }
 TQString Task::visibleIconName() const
 {
-    NETWinInfo ni( qt_xdisplay(),  _win, qt_xrootwin(), NET::WMVisibleIconName);
+    NETWinInfo ni( tqt_xdisplay(),  _win, tqt_xrootwin(), NET::WMVisibleIconName);
     return TQString::fromUtf8(ni.visibleIconName());
 }
 
 TQString Task::className()
 {
     XClassHint hint;
-    if(XGetClassHint(qt_xdisplay(), _win, &hint)) {
+    if(XGetClassHint(tqt_xdisplay(), _win, &hint)) {
   TQString nh( hint.res_name );
   XFree( hint.res_name );
   XFree( hint.res_class );
@@ -498,7 +498,7 @@ TQString Task::className()
 TQString Task::classClass()
 {
     XClassHint hint;
-    if(XGetClassHint(qt_xdisplay(), _win, &hint)) {
+    if(XGetClassHint(tqt_xdisplay(), _win, &hint)) {
   TQString ch( hint.res_class );
   XFree( hint.res_name );
   XFree( hint.res_class );
@@ -620,7 +620,7 @@ bool Task::idMatch( const TQString& id1, const TQString& id2 )
 
 void Task::maximize()
 {
-  NETWinInfo ni( qt_xdisplay(),  _win, qt_xrootwin(), NET::WMState);
+  NETWinInfo ni( tqt_xdisplay(),  _win, tqt_xrootwin(), NET::WMState);
   ni.setState( NET::Max, NET::Max );
 
 #ifdef KDE_3_2
@@ -633,7 +633,7 @@ void Task::maximize()
 
 void Task::restore()
 {
-  NETWinInfo ni( qt_xdisplay(),  _win, qt_xrootwin(), NET::WMState);
+  NETWinInfo ni( tqt_xdisplay(),  _win, tqt_xrootwin(), NET::WMState);
   ni.setState( 0, NET::Max );
 #ifdef KDE_3_2
   if (_info.mappingState() == NET::Iconic)
@@ -645,31 +645,31 @@ void Task::restore()
 
 void Task::iconify()
 {
-  XIconifyWindow( qt_xdisplay(), _win, qt_xscreen() );
+  XIconifyWindow( tqt_xdisplay(), _win, tqt_xscreen() );
 }
 
 void Task::close()
 {
-    NETRootInfo ri( qt_xdisplay(),  NET::CloseWindow );
+    NETRootInfo ri( tqt_xdisplay(),  NET::CloseWindow );
     ri.closeWindowRequest( _win );
 }
 
 void Task::raise()
 {
 //    kdDebug(1210) << "Task::raise(): " << name() << endl;
-    XRaiseWindow( qt_xdisplay(), _win );
+    XRaiseWindow( tqt_xdisplay(), _win );
 }
 
 void Task::lower()
 {
 //    kdDebug(1210) << "Task::lower(): " << name() << endl;
-    XLowerWindow( qt_xdisplay(), _win );
+    XLowerWindow( tqt_xdisplay(), _win );
 }
 
 void Task::activate()
 {
 //    kdDebug(1210) << "Task::activate():" << name() << endl;
-    NETRootInfo ri( qt_xdisplay(), 0 );
+    NETRootInfo ri( tqt_xdisplay(), 0 );
     ri.setActiveWindow( _win );
 }
 
@@ -686,7 +686,7 @@ void Task::activateRaiseOrIconify()
 
 void Task::toDesktop(int desk)
 {
-  NETWinInfo ni(qt_xdisplay(), _win, qt_xrootwin(), NET::WMDesktop);
+  NETWinInfo ni(tqt_xdisplay(), _win, tqt_xrootwin(), NET::WMDesktop);
   if (desk == 0)
   {
 #ifdef KDE_3_2
@@ -722,7 +722,7 @@ void Task::toCurrentDesktop()
 
 void Task::setAlwaysOnTop(bool stay)
 {
-    NETWinInfo ni( qt_xdisplay(),  _win, qt_xrootwin(), NET::WMState);
+    NETWinInfo ni( tqt_xdisplay(),  _win, tqt_xrootwin(), NET::WMState);
     if(stay)
         ni.setState( NET::StaysOnTop, NET::StaysOnTop );
     else
@@ -736,7 +736,7 @@ void Task::toggleAlwaysOnTop()
 
 void Task::setShaded(bool shade)
 {
-    NETWinInfo ni( qt_xdisplay(),  _win, qt_xrootwin(), NET::WMState);
+    NETWinInfo ni( tqt_xdisplay(),  _win, tqt_xrootwin(), NET::WMState);
     if(shade)
         ni.setState( NET::Shaded, NET::Shaded );
     else
@@ -750,7 +750,7 @@ void Task::toggleShaded()
 
 void Task::publishIconGeometry(TQRect rect)
 {
-    NETWinInfo ni( qt_xdisplay(),  _win, qt_xrootwin(), NET::WMIconGeometry);
+    NETWinInfo ni( tqt_xdisplay(),  _win, tqt_xrootwin(), NET::WMIconGeometry);
     NETRect r;
     r.pos.x = rect.x();
     r.pos.y = rect.y();

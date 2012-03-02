@@ -136,7 +136,7 @@ karamba::karamba(TQString fn, TQString name, bool reloading, int instance,
   }
 
   widgetMask = 0;
-  info = new NETWinInfo( qt_xdisplay(), winId(), qt_xrootwin(), NET::WMState );
+  info = new NETWinInfo( tqt_xdisplay(), winId(), tqt_xrootwin(), NET::WMState );
 
   // could be replaced with TaskManager
   kWinModule = new KWinModule();

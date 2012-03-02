@@ -72,7 +72,7 @@ SensorBase::SensorBase() : TQObject()
   {
       int eventBase;
       int errorBase;
-      m_hasNVControl = XNVCTRLQueryExtension(qt_xdisplay(), &eventBase, &errorBase) == True;
+      m_hasNVControl = XNVCTRLQueryExtension(tqt_xdisplay(), &eventBase, &errorBase) == True;
   }
 
   m_updateTimer = new TQTimer(this);
@@ -133,13 +133,13 @@ void SensorBase::update()
 
   if (m_hasNVControl) {
       int temp = 0;
-      if (XNVCTRLQueryAttribute(qt_xdisplay(), qt_xscreen(), 0 /* not used? */, NV_CTRL_GPU_CORE_TEMPERATURE, &temp)) {
+      if (XNVCTRLQueryAttribute(tqt_xdisplay(), tqt_xscreen(), 0 /* not used? */, NV_CTRL_GPU_CORE_TEMPERATURE, &temp)) {
           TQString name = TQString::fromLatin1("GPU Temp");
           m_sensorList.append(SensorInfo(currentSensor++, TQString::number(temp),
                                          name, TQString(), TQString(), sensorType(name)));
       }
 
-      if (XNVCTRLQueryAttribute(qt_xdisplay(), qt_xscreen(), 0 /* not used? */, NV_CTRL_AMBIENT_TEMPERATURE, &temp)) {
+      if (XNVCTRLQueryAttribute(tqt_xdisplay(), tqt_xscreen(), 0 /* not used? */, NV_CTRL_AMBIENT_TEMPERATURE, &temp)) {
           TQString name = TQString::fromLatin1("GPU Ambient Temp");
           m_sensorList.append(SensorInfo(currentSensor++, TQString::number(temp),
                                          name, TQString(), TQString(), sensorType(name)));

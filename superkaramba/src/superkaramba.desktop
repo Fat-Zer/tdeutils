@@ -96,4 +96,4 @@ GenericName[zh_CN]=桌面部件
 GenericName[zh_TW]=桌面元件
 DocPath=superkaramba/index.html
 Categories=Qt;KDE;Utility;X-KDE-Utilities-Desktop;
-OnlyShowIn=KDE;
+OnlyShowIn=TDE;

@@ -175,7 +175,7 @@ TQStringList ThemeLocale::languageList()
   // Reset the list and add the new languages
   TQStringList languageList;
   languageList +=
-      TQStringList::split(':', TQFile::decodeName(::getenv("KDE_LANG")));
+      TQStringList::split(':', TQFile::decodeName(::getenv("TDE_LANG")));
 
   languageList += config->readListEntry("Language", ':');
 

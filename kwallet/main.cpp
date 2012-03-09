@@ -48,8 +48,8 @@ int main(int argc, char **argv) {
 		KCmdLineLastOption
 	};
 
-	KAboutData about("kwalletmanager", I18N_NOOP("KDE Wallet Manager"), "1.1",
-		I18N_NOOP("KDE Wallet Management Tool"),
+	KAboutData about("kwalletmanager", I18N_NOOP("TDE Wallet Manager"), "1.1",
+		I18N_NOOP("TDE Wallet Management Tool"),
 		KAboutData::License_GPL,
 		I18N_NOOP("(c) 2003,2004 George Staikos"), 0,
 		"http://www.kde.org/");
@@ -67,7 +67,7 @@ int main(int argc, char **argv) {
 	MyApp a;
 
 	KWalletManager wm;
-	wm.setCaption(i18n("KDE Wallet Manager"));
+	wm.setCaption(i18n("TDE Wallet Manager"));
 
 	a.setMainWidget(&wm);
 

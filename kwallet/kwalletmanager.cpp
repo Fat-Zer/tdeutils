@@ -60,7 +60,7 @@ KWalletManager::KWalletManager(TQWidget *parent, const char *name, WFlags f)
 	if (walletConfigGroup.readBoolEntry("Launch Manager", true)) {
 		_tray = new KSystemTray(this, "kwalletmanager tray");
 		_tray->setPixmap(loadSystemTrayIcon("wallet_closed"));
-		TQToolTip::add(_tray, i18n("KDE Wallet: No wallets open."));
+		TQToolTip::add(_tray, i18n("TDE Wallet: No wallets open."));
 		connect(_tray, TQT_SIGNAL(quitSelected()), TQT_SLOT(shuttingDown()));
 		TQStringList wl = KWallet::Wallet::walletList();
 		bool isOpen = false;
@@ -68,7 +68,7 @@ KWalletManager::KWalletManager(TQWidget *parent, const char *name, WFlags f)
 			if (KWallet::Wallet::isOpen(*it)) {
 				_tray->setPixmap(loadSystemTrayIcon("wallet_open"));
 				TQToolTip::remove(_tray);
-				TQToolTip::add(_tray, i18n("KDE Wallet: A wallet is open."));
+				TQToolTip::add(_tray, i18n("TDE Wallet: A wallet is open."));
 				isOpen = true;
 				break;
 			}
@@ -174,7 +174,7 @@ void KWalletManager::aWalletWasOpened() {
 	if (_tray) {
 		_tray->setPixmap(loadSystemTrayIcon("wallet_open"));
 		TQToolTip::remove(_tray);
-		TQToolTip::add(_tray, i18n("KDE Wallet: A wallet is open."));
+		TQToolTip::add(_tray, i18n("TDE Wallet: A wallet is open."));
 	}
 	updateWalletDisplay();
 }
@@ -319,7 +319,7 @@ void KWalletManager::allWalletsClosed() {
 	if (_tray) {
 		_tray->setPixmap(loadSystemTrayIcon("wallet_closed"));
 		TQToolTip::remove(_tray);
-		TQToolTip::add(_tray, i18n("KDE Wallet: No wallets open."));
+		TQToolTip::add(_tray, i18n("TDE Wallet: No wallets open."));
 	}
 	possiblyQuit();
 }

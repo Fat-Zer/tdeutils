@@ -45,7 +45,7 @@ KWalletConfig::KWalletConfig(TQWidget *parent, const char *name, const TQStringL
 
 	KAboutData *about =
 		new KAboutData(I18N_NOOP("kcmkwallet"),
-				I18N_NOOP("KDE Wallet Control Module"),
+				I18N_NOOP("TDE Wallet Control Module"),
 				0, 0, KAboutData::License_GPL,
 				I18N_NOOP("(c) 2003 George Staikos"));
 		about->addAuthor("George Staikos", 0, "staikos@kde.org");

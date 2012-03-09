@@ -39,7 +39,7 @@
                             <cstring>_enabled</cstring>
                         </property>
                         <property name="text">
-                            <string>&amp;Enable the KDE wallet subsystem</string>
+                            <string>&amp;Enable the TDE wallet subsystem</string>
                         </property>
                         <property name="checked">
                             <bool>true</bool>

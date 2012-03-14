@@ -85,4 +85,4 @@ Terminal=false
 DocPath=kdf/index.html
 X-KDE-StartupNotify=true
 X-DCOP-ServiceType=Multi
-Categories=Qt;KDE;System;X-KDE-More;
+Categories=Qt;KDE;System;

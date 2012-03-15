@@ -2,6 +2,7 @@
 X-KDE-ModuleType=Library
 X-KDE-Library=laptop
 X-KDE-FactoryName=pcmcia
+X-KDE-ParentApp=kinfocenter
 Exec=kcmshell pcmcia
 Icon=laptop_pcmcia
 Type=Application
@@ -81,4 +82,4 @@ Name[pt_BR]=Cartões PCMCIA
 Name[ta]= PCMCIA
 Name[th]=อุปกรณ์ PCMCIA
 
-Categories=Qt;KDE;X-KDE-settings-hardware;
+Categories=Qt;KDE;X-KDE-settings-information;

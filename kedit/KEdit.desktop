@@ -79,4 +79,4 @@ Name[xh]=Abahleli Be K
 Name[zh_TW]=KDE 編輯器
 X-KDE-StartupNotify=true
 X-DCOP-ServiceType=Multi
-Categories=Qt;KDE;Utility;TextEditor;
+Categories=Qt;KDE;TextEditor;

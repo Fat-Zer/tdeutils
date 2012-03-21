@@ -2,7 +2,7 @@ KARAMBA X=0 Y=0 W=1600 H=31 LOCKED=true ONTOP=TRUE BOTTOMBAR=true INTERVAL=20000
 
 IMAGE X=0 Y=0 PATH="pics/bar2.png"
 
-#K Menu
+#TDE Menu
 CLICKAREA X=4 Y=6 W=64 H=25 ONCLICK="dcop kicker kicker popupKMenu 0"
 
 #XMMS controls

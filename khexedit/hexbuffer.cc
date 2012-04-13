@@ -4896,7 +4896,7 @@ int CHexBuffer::printHtmlHeader( TQTextStream &os, bool isFront )
   if( isFront == true )
   {
     os << "<HTML>" << endl << "<HEAD>" << endl;
-    os << "<META HTTP-ETQUIV=\"Content-Type\" CONTENT=\"text/html; ";
+    os << "<META HTTP-EQUIV=\"Content-Type\" CONTENT=\"text/html; ";
     os << "charset=iso-8859-1\">" << endl;
     os << "<META NAME=\"hexdata\" CONTENT=\"khexedit dump\">" << endl;
     os << "</HEAD>" << endl << "<BODY>" << endl;

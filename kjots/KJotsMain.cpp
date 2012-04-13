@@ -142,7 +142,7 @@ KJotsMain::KJotsMain(const char* name)
     actions[ACTION_MANUAL_SAVE] = new KAction(i18n("Manual Save"), 0, KStdAccel::save(),
                          TQT_TQOBJECT(this), TQT_SLOT(autoSave()), actionCollection(), "manual_save");
     actions[ACTION_PRINT] = KStdAction::print(TQT_TQOBJECT(this), TQT_SLOT(slotPrint()), actionCollection());
-    actions[ACTION_TQUIT] = KStdAction::quit(TQT_TQOBJECT(this), TQT_SLOT(slotQuit()), actionCollection());
+    actions[ACTION_QUIT] = KStdAction::quit(TQT_TQOBJECT(this), TQT_SLOT(slotQuit()), actionCollection());
 
     actions[ACTION_CUT] = KStdAction::cut(TQT_TQOBJECT(me_text), TQT_SLOT(cut()), actionCollection());
     connect(me_text, TQT_SIGNAL(copyAvailable(bool)), actions[ACTION_CUT], TQT_SLOT(setEnabled(bool)));

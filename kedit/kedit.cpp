@@ -1250,7 +1250,7 @@ void TopLevel::toggle_overwrite(){
 
 }
 
-static const char description[] = I18N_NOOP("KDE text editor");
+static const char description[] = I18N_NOOP("TDE text editor");
 
 static const KCmdLineOptions options[] =
 {

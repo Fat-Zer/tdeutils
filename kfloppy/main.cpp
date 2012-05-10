@@ -31,7 +31,7 @@
 
 
 static const char description[] =
-	I18N_NOOP("KDE Floppy Disk Utility");
+	I18N_NOOP("TDE Floppy Disk Utility");
 
 static const KCmdLineOptions options[] =
 {

@@ -40,7 +40,7 @@
 #include "karamba_python.h"
 
 static const char *description =
-    I18N_NOOP("A KDE Eye-candy Application");
+    I18N_NOOP("A TDE Eye-candy Application");
 
 static const char *version = "0.42";
 

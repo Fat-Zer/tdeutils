@@ -51,7 +51,7 @@ KVaioModule::KVaioModule(TQWidget *parent, const char *name, const TQStringList 
 {
     KAboutData *about =
         new KAboutData(I18N_NOOP("kcmkvaio"),
-                       I18N_NOOP("KDE Control Module for Sony "
+                       I18N_NOOP("TDE Control Module for Sony "
                                  "Vaio Laptop Hardware"),
                        0, 0, KAboutData::License_GPL,
                        "(c) 2003 Mirko Boehm");

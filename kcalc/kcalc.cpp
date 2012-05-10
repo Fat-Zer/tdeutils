@@ -74,7 +74,7 @@
 
 
 
-static const char description[] = I18N_NOOP("KDE Calculator");
+static const char description[] = I18N_NOOP("TDE Calculator");
 static const char version[] = KCALCVERSION;
 
 

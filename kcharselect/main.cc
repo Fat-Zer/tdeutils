@@ -13,7 +13,7 @@
 #include <kglobalsettings.h>
 
 static const char description[] = 
-	I18N_NOOP("KDE character selection utility");
+	I18N_NOOP("TDE character selection utility");
 
 /*================================================================*/
 int main(int argc, char **argv)

@@ -34,7 +34,7 @@
 #include "KJotsMain.h"
 
 
-static const char description[] = I18N_NOOP("KDE note taking utility");
+static const char description[] = I18N_NOOP("TDE note taking utility");
 
 static const char version[] = "v0.7";
 

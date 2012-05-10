@@ -30,7 +30,7 @@
 #include <kpopupmenu.h>
 
 static const char description[] =
-	I18N_NOOP("KDE free disk space utility");
+	I18N_NOOP("TDE free disk space utility");
 
 static const char version[] = "v0.5";
 

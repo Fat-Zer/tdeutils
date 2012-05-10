@@ -45,7 +45,7 @@
 #include <krun.h>
 
 static const char description[] =
-   I18N_NOOP("KDE Free disk space utility");
+   I18N_NOOP("TDE Free disk space utility");
 
 static const char version[] = "0.2";
 
@@ -326,8 +326,8 @@ int main(int argc, char **argv)
                   0, 0, "Stanislav.Karchebny@kdemail.net");
    about.addAuthor( "Michael Kropfberger", I18N_NOOP("Original author"),
                     "michael.kropfberger@gmx.net" );
-   about.addAuthor( "Espen Sand", I18N_NOOP("KDE 2 changes"), "" );
-   about.addAuthor( "Stanislav Karchebny", I18N_NOOP("KDE 3 changes"),
+   about.addAuthor( "Espen Sand", I18N_NOOP("TDE 2 changes"), "" );
+   about.addAuthor( "Stanislav Karchebny", I18N_NOOP("TDE 3 changes"),
                     "Stanislav.Karchebny@kdemail.net" );
    KCmdLineArgs::init(argc, argv, &about);
    KCmdLineArgs::addCmdLineOptions( options );

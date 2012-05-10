@@ -31,7 +31,7 @@
 
 
 static const char description[] =
-	I18N_NOOP("KDE hex editor");
+	I18N_NOOP("TDE hex editor");
 
 static const char version[] = APP_VERSION_STRING;
 

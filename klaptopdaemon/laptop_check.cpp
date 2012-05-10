@@ -29,7 +29,7 @@
 #include <kcmdlineargs.h>
 #include <klocale.h>
 static const char description[] =
-        I18N_NOOP("KDE laptop daemon starter");
+        I18N_NOOP("TDE laptop daemon starter");
 
 static const char version[] = "v0.0.1";
 

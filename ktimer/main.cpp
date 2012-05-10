@@ -24,7 +24,7 @@
 #include "ktimer.h"
 
 static const char description[] =
-        I18N_NOOP("KDE Timer");
+        I18N_NOOP("TDE Timer");
 
 static const char version[] = "v0.1";
 

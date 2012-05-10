@@ -42,7 +42,7 @@ PcmciaConfig::PcmciaConfig (TQWidget * parent, const char *name)
 {
        KAboutData *about =
        new KAboutData(I18N_NOOP("kcmlaptop"),
-		   I18N_NOOP("KDE Panel System Information Control Module"),
+		   I18N_NOOP("TDE Panel System Information Control Module"),
 		   0, 0, KAboutData::License_GPL,
 		   I18N_NOOP("(c) 1999 - 2002 Paul Campbell"));
        about->addAuthor("Paul Campbell", 0, "paul@taniwha.com");

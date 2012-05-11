@@ -53,8 +53,8 @@ component of that infrastructure.</para></abstract>
 
 <para>
 &irkick; is a background server that provides the 'glue' between
-the operating system and your KDE applications for the purpose of
-controlling KDE applications with your infrared remote controls.
+the operating system and your TDE applications for the purpose of
+controlling TDE applications with your infrared remote controls.
 </para>
 
 <para>

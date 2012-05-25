@@ -32,5 +32,11 @@ fi
 dnl Check for dell laptop support
 AM_CONDITIONAL(supports_i8k, test -f /proc/i8k)
 
-KDE_CHECK_HEADER(X11/extensions/extutil.h, AC_DEFINE(HAVE_EXTUTIL_H, 1, [If we have extutil.h]) have_extutil_h=yes, , )
+kde_safe_cppflags=$CPPFLAGS
+CPPFLAGS="$CPPFLAGS -include X11/Xlib.h -include X11/Xutil.h -include X11/Xproto.h"
+AC_LANG_SAVE
+AC_LANG_CPLUSPLUS
+AC_CHECK_HEADER(X11/extensions/extutil.h, AC_DEFINE(HAVE_EXTUTIL_H, 1, [If we have extutil.h]) have_extutil_h=yes, , )
 AM_CONDITIONAL(include_nv, test "x$have_extutil_h" = "xyes")
+AC_LANG_RESTORE
+CPPFLAGS=$kde_safe_cppflags

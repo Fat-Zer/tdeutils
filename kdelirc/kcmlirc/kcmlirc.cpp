@@ -63,7 +63,7 @@ KCMLirc::KCMLirc(TQWidget *parent, const char *name, TQStringList /*args*/) : DC
 			KSimpleConfig theConfig("irkickrc");
 			theConfig.setGroup("General");
 			if(theConfig.readBoolEntry("AutoStart", true) == false)
-				if(KMessageBox::questionYesNo(this, i18n("Would you like the infrared remote control software to start automatically when you begin KDE?"), i18n("Automatically Start?"), i18n("Start Automatically"), i18n("Do Not Start")) == KMessageBox::Yes)
+				if(KMessageBox::questionYesNo(this, i18n("Would you like the infrared remote control software to start automatically when you begin TDE?"), i18n("Automatically Start?"), i18n("Start Automatically"), i18n("Do Not Start")) == KMessageBox::Yes)
 					theConfig.writeEntry("AutoStart", true);
 		}
 

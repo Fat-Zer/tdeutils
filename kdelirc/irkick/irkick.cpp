@@ -55,11 +55,11 @@ IRKick::IRKick(const TQCString &obj) : TQObject(), DCOPObject(obj), npApp(TQStri
 	theTrayIcon = new IRKTrayIcon();
 	if(theClient->isConnected())
 	{	theTrayIcon->setPixmap(SmallIcon("irkick"));
-		TQToolTip::add(theTrayIcon, i18n("KDE Lirc Server: Ready."));
+		TQToolTip::add(theTrayIcon, i18n("TDE Lirc Server: Ready."));
 	}
 	else
 	{	theTrayIcon->setPixmap(SmallIcon("irkickoff"));
-		TQToolTip::add(theTrayIcon, i18n("KDE Lirc Server: No infra-red remote controls found."));
+		TQToolTip::add(theTrayIcon, i18n("TDE Lirc Server: No infra-red remote controls found."));
 		TQTimer::singleShot(10000, this, TQT_SLOT(checkLirc()));
 	}
 	theFlashOff = new TQTimer(theTrayIcon);
@@ -115,7 +115,7 @@ void IRKick::doQuit()
 {
 	KSimpleConfig theConfig("irkickrc");
 	theConfig.setGroup("General");
-	switch(KMessageBox::questionYesNoCancel(0, i18n("Should the Infrared Remote Control server start automatically when you begin KDE?"), i18n("Automatically Start?"), i18n("Start Automatically"), i18n("Do Not Start")))
+	switch(KMessageBox::questionYesNoCancel(0, i18n("Should the Infrared Remote Control server start automatically when you begin TDE?"), i18n("Automatically Start?"), i18n("Start Automatically"), i18n("Do Not Start")))
 	{	case KMessageBox::No: theConfig.writeEntry("AutoStart", false); break;
 		case KMessageBox::Yes: theConfig.writeEntry("AutoStart", true); break;
 		case KMessageBox::Cancel: return;

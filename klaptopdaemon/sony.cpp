@@ -71,7 +71,7 @@ SonyConfig::SonyConfig(TQWidget * parent, const char *name)
 			"use the 'sonypid' program in your system").replace("\n", " "), this));
 
     enableScrollBar = new TQCheckBox( i18n("Enable &scroll bar"), this );
-    TQToolTip::add( enableScrollBar, i18n( "When checked this box enables the scrollbar so that it works under KDE" ) );
+    TQToolTip::add( enableScrollBar, i18n( "When checked this box enables the scrollbar so that it works under TDE" ) );
     top_layout->addWidget( enableScrollBar );
     connect( enableScrollBar, TQT_SIGNAL(clicked()), this, TQT_SLOT(configChanged()) );
 

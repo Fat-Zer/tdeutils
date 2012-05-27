@@ -247,7 +247,7 @@ FloppyData::FloppyData(TQWidget * parent, const char * name)
 
 	lineedit = new KLineEdit( this, "Lineedit" );
         // ### TODO ext2 supports 16 characters. Minix has not any label. UFS?
-	lineedit->setText(i18n( "Volume label, maximal 11 characters", "KDE Floppy" ) );
+	lineedit->setText(i18n( "Volume label, maximal 11 characters", "TDE Floppy" ) );
 	lineedit->setMaxLength(11);
         h2->addWidget( lineedit, AlignRight );
         TQWhatsThis::add( lineedit,
@@ -344,7 +344,7 @@ void FloppyData::keyPressEvent(TQKeyEvent *e)
 }
 
 void FloppyData::show() {
-  setCaption(i18n("KDE Floppy Formatter"));
+  setCaption(i18n("TDE Floppy Formatter"));
   KDialog::show();
 }
 
@@ -699,7 +699,7 @@ void FloppyData::readSettings(){
 
 	verifyconfig = config->readNumEntry("Verify", 1);
 	labelconfig = config->readNumEntry("CreateLabel",1);
-	labelnameconfig = config->readEntry( "Label", i18n("Volume label, maximal 11 characters", "KDE Floppy") );
+	labelnameconfig = config->readEntry( "Label", i18n("Volume label, maximal 11 characters", "TDE Floppy") );
 	quickformatconfig = config->readNumEntry("QuickFormat",0);
 	driveconfig = config->readEntry( "FloppyDrive", i18n("Primary") );
 #if defined(ANY_LINUX)

@@ -492,7 +492,7 @@ void COptionDialog::setupFilePage( void )
                    i18n( "Clicking this check box makes KHexEdit forget his recent document list "
                           "when the program is closed.\n"
                           "Note: it will not erase any document of the recent document list "
-                          "created by KDE." ) );
+                          "created by TDE." ) );
   connect( mFile.discardRecentCheck, TQT_SIGNAL(toggled(bool)),
     this, TQT_SLOT( slotChanged()));
 
@@ -502,7 +502,7 @@ void COptionDialog::setupFilePage( void )
   TQWhatsThis::add( discardRecentButton,
                    i18n( "Clicking this button makes KHexEdit forget his recent document list.\n"
                           "Note: it will not erase any document of the recent document list "
-                          "created by KDE." ) );
+                          "created by TDE." ) );
   topLayout->addWidget( discardRecentButton, 0, AlignCenter );
   connect( discardRecentButton, TQT_SIGNAL(clicked()),
 	   TQT_SIGNAL(removeRecentFiles()) );

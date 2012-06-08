@@ -1,6 +1,6 @@
 [Desktop Entry]
 Type=ServiceType
-X-KDE-ServiceType=KMilo Plugin
+X-TDE-ServiceType=KMilo Plugin
 
 [PropertyDef::X-KMilo-Plugin-Author]
 Type=TQString

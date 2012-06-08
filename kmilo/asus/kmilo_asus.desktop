@@ -1,7 +1,7 @@
 [Desktop Entry]
 Type=Service
 ServiceTypes=KMilo Plugin
-X-KDE-ModuleType=Plugin
+X-TDE-ModuleType=Plugin
 Name=Asus Laptop Plugin
 Name[ar]=ملحق حاسوب Asus المحمول
 Name[br]=Lugent hezoug Asus
@@ -94,4 +94,4 @@ Comment[tr]=Asus dizüstü bilgisayarlar için özel tuş desteğini etkinleşti
 Comment[uk]=Уможливлює підтримку спеціальних клавіш для лептопа Asus
 Comment[zh_CN]=启用华硕笔记本的特殊按键
 Comment[zh_TW]=開啟華碩筆記型電腦特殊鍵支援
-X-KDE-Library=kmilo_asus
+X-TDE-Library=kmilo_asus

@@ -3,9 +3,9 @@ Icon=kwalletmanager
 Type=Application
 Exec=kcmshell kwalletconfig
 DocPath=kwallet/index.html
-X-KDE-ModuleType=Library
-X-KDE-Library=kwallet
-X-KDE-ParentApp=kcontrol
+X-TDE-ModuleType=Library
+X-TDE-Library=kwallet
+X-TDE-ParentApp=kcontrol
 
 Name=TDE Wallet
 Name[ar]=محفظة كدى
@@ -149,4 +149,4 @@ Keywords[tr]=Cüzdan,Form Doldur,Şifreler,Form Verisi
 Keywords[uk]=Торбинка,Заповнення форм,Паролі,Дані форм
 Keywords[zh_CN]=Wallet,Form Fill,Passwords,Form Data,钱包,填充表单,密码,表单数据
 
-Categories=Qt;KDE;X-KDE-settings-security;
+Categories=Qt;TDE;X-TDE-settings-security;

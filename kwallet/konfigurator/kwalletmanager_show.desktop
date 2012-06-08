@@ -57,4 +57,4 @@ MimeType=application/x-kde-wallet
 InitialPreference=6
 Icon=kwalletmanager
 Type=Service
-X-KDE-StartupNotify=true
+X-TDE-StartupNotify=true

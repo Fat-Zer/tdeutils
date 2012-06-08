@@ -1,7 +1,7 @@
 [Desktop Entry]
 Type=Service
 ServiceTypes=KMilo Plugin
-X-KDE-ModuleType=Plugin
+X-TDE-ModuleType=Plugin
 Name=Demo Plugin
 Name[ar]=ملحق للعرض
 Name[bg]=Демонстрационна приставка
@@ -107,4 +107,4 @@ Comment[uz@cyrillic]=Бу плагин ҳеч нарса бажармайди.
 Comment[wa]=Ci tchôke-divins chal ni fwait rén do tot.
 Comment[zh_CN]=此插件不完成任何工作。
 Comment[zh_TW]=這個外掛程式不做任何事。
-X-KDE-Library=kmilo_demo
+X-TDE-Library=kmilo_demo

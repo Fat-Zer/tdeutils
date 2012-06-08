@@ -132,4 +132,4 @@ Name[zu]=Umqulu
 Icon=ark
 Type=Service
 ServiceTypes=KParts/ReadOnlyPart
-X-KDE-Library=libarkpart
+X-TDE-Library=libarkpart

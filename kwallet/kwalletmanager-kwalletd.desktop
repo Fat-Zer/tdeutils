@@ -56,5 +56,5 @@ Exec=kwalletmanager --kwalletd
 Icon=kwalletmanager
 Type=Application
 Terminal=false
-X-KDE-StartupNotify=false
+X-TDE-StartupNotify=false
 NoDisplay=true

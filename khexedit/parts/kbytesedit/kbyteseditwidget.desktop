@@ -46,7 +46,7 @@ Name[tg]=Элементи Таҳрири Додаҳои Дуӣ
 Name[uk]=Віджет побайтового редагування
 Name[zh_CN]=字节编辑部件
 Name[zh_TW]=位元編輯器元件
-X-KDE-Library=libkbyteseditwidget
+X-TDE-Library=libkbyteseditwidget
 InitialPreference=2
 ServiceTypes=KHexEdit/KBytesEdit
 

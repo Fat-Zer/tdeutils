@@ -1,9 +1,9 @@
 [Desktop Entry]
-X-KDE-ModuleType=Library
-X-KDE-Library=kdf
-X-KDE-FactoryName=kdf
-X-KDE-ParentApp=kinfocenter
-X-KDE-LocalUser=false
+X-TDE-ModuleType=Library
+X-TDE-Library=kdf
+X-TDE-FactoryName=kdf
+X-TDE-ParentApp=kinfocenter
+X-TDE-LocalUser=false
 Exec=kcmshell kcmdf
 Icon=kcmdf
 Type=Application
@@ -136,4 +136,4 @@ Comment[zh_CN]=显示挂接设备的磁盘使用率
 Comment[zh_TW]=顯示連接的設備的磁碟使用率
 Comment[zu]=Ikhombisa ukusebenziswa kwediski yamathuluzi okunyuka
 
-Categories=Qt;KDE;X-KDE-settings-information;
+Categories=Qt;TDE;X-TDE-settings-information;

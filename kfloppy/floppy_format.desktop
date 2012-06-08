@@ -50,5 +50,5 @@ Name[zh_TW]=格式化
 [Desktop Entry]
 Actions=Format;
 ServiceTypes=media/floppy_unmounted,media/floppy5_unmounted
-X-KDE-Priority=TopLevel
-X-KDE-MediaNotifierHide=true
+X-TDE-Priority=TopLevel
+X-TDE-MediaNotifierHide=true

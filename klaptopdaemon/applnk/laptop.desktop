@@ -1,12 +1,12 @@
 [Desktop Entry]
-X-KDE-Library=laptop
-X-KDE-FactoryName=laptop
-X-KDE-Init=laptop
+X-TDE-Library=laptop
+X-TDE-FactoryName=laptop
+X-TDE-Init=laptop
 Exec=kcmshell laptop
 Icon=laptop_battery
 Type=Application
 DocPath=kcontrol/laptop/index.html
-Categories=Qt;KDE;X-KDE-settings-hardware;
+Categories=Qt;TDE;X-TDE-settings-hardware;
 Comment=Laptop Battery
 Comment[af]=Draagbare rekenaar Batery
 Comment[ar]=بطّاريّة الحاسوب المحمول

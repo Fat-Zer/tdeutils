@@ -49,4 +49,4 @@ Icon=superkaramba_theme
 MimeType=application/x-superkaramba
 Patterns=*.skz;*.SKZ;*.theme;*.THEME
 Type=MimeType
-X-KDE-AutoEmbed=false
+X-TDE-AutoEmbed=false

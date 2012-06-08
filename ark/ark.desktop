@@ -83,5 +83,5 @@ Terminal=false
 SwallowExec=
 SwallowTitle=
 X-DCOP-ServiceType=Unique
-X-KDE-HasTempFileOption=true
-Categories=Qt;KDE;Utility;X-KDE-Utilities-File;
+X-TDE-HasTempFileOption=true
+Categories=Qt;TDE;Utility;X-TDE-Utilities-File;

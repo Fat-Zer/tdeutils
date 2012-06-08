@@ -84,5 +84,5 @@ GenericName[zh_TW]=科學計算機
 GenericName[zu]=Umshini wokubala ezenzululwazi
 Terminal=false
 Type=Application
-X-KDE-StartupNotify=true
-Categories=Qt;KDE;Utility;
+X-TDE-StartupNotify=true
+Categories=Qt;TDE;Utility;

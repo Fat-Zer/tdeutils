@@ -80,7 +80,7 @@ Path=
 Type=Application
 DocPath=khexedit/index.html
 Terminal=false
-X-KDE-StartupNotify=true
+X-TDE-StartupNotify=true
 X-DCOP-ServiceType=Multi
-Categories=Qt;KDE;Utility;X-KDE-Utilities-File;
+Categories=Qt;TDE;Utility;X-TDE-Utilities-File;
 

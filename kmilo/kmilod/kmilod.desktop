@@ -1,11 +1,11 @@
 [Desktop Entry]
 Type=Service
 ServiceTypes=KDEDModule
-X-KDE-ModuleType=Library
-X-KDE-Library=kmilod
-X-KDE-FactoryName=kmilod
-X-KDE-Kded-autoload=true
-X-KDE-Kded-load-on-demand=false
+X-TDE-ModuleType=Library
+X-TDE-Library=kmilod
+X-TDE-FactoryName=kmilod
+X-TDE-Kded-autoload=true
+X-TDE-Kded-load-on-demand=false
 Name=KMilo
 Name[de]=KMilo Sondertasten
 Name[hi]=के-मिलो

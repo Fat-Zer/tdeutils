@@ -74,5 +74,5 @@ GenericName[zh_CN]=可移动介质工具
 GenericName[zh_TW]=可移動媒體公用程式
 GenericName[zu]=Umsebenzi Wonozindaba Ogudluzekayo
 Terminal=false
-Categories=Qt;KDE;System;
+Categories=Qt;TDE;System;
 OnlyShowIn=TDE;

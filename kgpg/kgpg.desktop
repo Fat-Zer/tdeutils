@@ -116,7 +116,7 @@ Name[nl]=KGPG
 Name[sv]=Kgpg
 Name[ta]= KGpg 
 
-X-KDE-autostart-after=panel
-X-KDE-autostart-condition=kgpgrc:User Interface:AutoStart:false
+X-TDE-autostart-after=panel
+X-TDE-autostart-condition=kgpgrc:User Interface:AutoStart:false
 
-Categories=Qt;KDE;Utility;X-KDE-Utilities-PIM;
+Categories=Qt;TDE;Utility;X-TDE-Utilities-PIM;

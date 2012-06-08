@@ -98,4 +98,4 @@ Comment[zh_TW]=嵌入式二進位顯示器
 MimeType=application/octet-stream
 ServiceTypes=KParts/ReadOnlyPart,Browser/View
 #,KParts/ReadWritePart
-X-KDE-Library=libkhexedit2part
+X-TDE-Library=libkhexedit2part

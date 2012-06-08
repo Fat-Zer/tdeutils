@@ -1,7 +1,7 @@
 [Desktop Entry]
 Type=Service
 ServiceTypes=KMilo Plugin
-X-KDE-ModuleType=Plugin
+X-TDE-ModuleType=Plugin
 Name=Generic Keyboard Plugin
 Name[ar]=ملحق عام للوحة المفاتيح
 Name[bg]=Приставка за клавиатурата
@@ -105,4 +105,4 @@ Comment[tr]=Bu plugin tüm klavye ve dizüstülerdeki özel tuşlar için deste�
 Comment[uk]=Цей втулок додає підтримку спеціальних клавіш для різних типів клавіатур та лептопів.
 Comment[zh_CN]=此插件启用各种键盘和便携电脑的特殊按键。
 Comment[zh_TW]=這個外掛程式開啟所有鍵盤與筆記型電腦的特殊鍵支援。
-X-KDE-Library=kmilo_generic
+X-TDE-Library=kmilo_generic

@@ -53,12 +53,12 @@ GenericName[uz@cyrillic]=TDE LIRC сервери
 GenericName[zh_CN]=TDE LIRC 服务器
 GenericName[zh_TW]=TDE LIRC 伺服器
 
-X-KDE-Library=irkick
-X-KDE-autostart-after=panel
-X-KDE-StartupNotify=false
+X-TDE-Library=irkick
+X-TDE-autostart-after=panel
+X-TDE-StartupNotify=false
 X-DCOP-ServiceType=Unique
-X-KDE-autostart-condition=irkickrc:General:AutoStart:false
-Categories=Qt;KDE;Utility;
+X-TDE-autostart-condition=irkickrc:General:AutoStart:false
+Categories=Qt;TDE;Utility;
 
 Exec=irkick
 Icon=irkick

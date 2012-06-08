@@ -1,7 +1,7 @@
 [Desktop Entry]
 Type=Service
 ServiceTypes=KMilo Plugin
-X-KDE-ModuleType=Plugin
+X-TDE-ModuleType=Plugin
 Name=Apple (R) PowerBook (R) Plugin
 Name[ar]=ملحق Apple (R) PowerBook (R)ة
 Name[br]=Lugent Apple (R) PowerBook (R)
@@ -102,4 +102,4 @@ Comment[tr]=Bu plugin pbbuttonsd aracılığı ile Apple(R) PowerBook(R) dizüst
 Comment[uk]=Цей втулок дозволяє користуватися спеціальними клавішами на лептопах Apple (R) PowerBook (R) за допомогою pbbuttonsd.
 Comment[zh_CN]=此插件启用 Apple(R) PowerBook(R) 便携电脑上的特殊按键。
 Comment[zh_TW]=這個外掛程式透過 pbbuttonsd 開啟 Apple(R) PowerBook(R) 筆記型電腦的特殊鍵支援。
-X-KDE-Library=kmilo_powerbook
+X-TDE-Library=kmilo_powerbook

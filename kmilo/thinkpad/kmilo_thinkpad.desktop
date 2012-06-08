@@ -1,7 +1,7 @@
 [Desktop Entry]
 Type=Service
 ServiceTypes=KMilo Plugin
-X-KDE-ModuleType=Plugin
+X-TDE-ModuleType=Plugin
 Name=Thinkpad Plugin
 Name[ar]=ملحق Thinkpad
 Name[br]=Lugent Thinkpad
@@ -98,4 +98,4 @@ Comment[tr]=Özel Thinkpad tuşları için desteği etkinleştirir
 Comment[uk]=Уможливлює підтримку спеціальних клавіш для Thinkpad.
 Comment[zh_CN]=此插件启用各种键盘和便携电脑的特殊按键
 Comment[zh_TW]=開啟特殊 Thinkpad 按鍵支援
-X-KDE-Library=kmilo_thinkpad
+X-TDE-Library=kmilo_thinkpad

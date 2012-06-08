@@ -79,7 +79,7 @@ To create a desktop config file, open KWrite and enter the following:
             Exec=superkaramba {location of theme file}.theme
             Name={theme name}
             Type=Application
-            X-KDE-StartupNotify=false
+            X-TDE-StartupNotify=false
 Then save it as {theme}.desktop into /home/{user}/.kde/Autostart/.
 
 2.4. Why is the Edit Script option disabled when I right-click on a theme?

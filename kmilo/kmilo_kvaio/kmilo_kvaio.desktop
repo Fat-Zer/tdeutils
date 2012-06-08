@@ -1,7 +1,7 @@
 [Desktop Entry]
 Type=Service
 ServiceTypes=KMilo Plugin
-X-KDE-ModuleType=Plugin
+X-TDE-ModuleType=Plugin
 Name=Sony Vaio Plugin
 Name[ar]=ملحق سونى فايوة
 Name[br]=Lugent an hezoug Sony Vaio
@@ -103,4 +103,4 @@ Comment[tr]=Sony Vaio Dizüstüler için KMilo Modül desteği
 Comment[uk]=Модуль KMilo, що додає підтримку лептопів Sony Vaio
 Comment[zh_CN]=索尼 Vaio 便携电脑支持的 KMilo 模块
 Comment[zh_TW]=支援 Sony Vaio 筆記型電腦的 KMilo 模組
-X-KDE-Library=kmilo_kvaio
+X-TDE-Library=kmilo_kvaio

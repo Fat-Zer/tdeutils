@@ -4,8 +4,8 @@ Exec=kcmshell thinkpad
 Icon=laptop
 DocPath=kcontrol/thinkpad/index.html
 
-X-KDE-Library=thinkpad
-X-KDE-ParentApp=kcontrol
+X-TDE-Library=thinkpad
+X-TDE-ParentApp=kcontrol
 
 Name=IBM Thinkpad Laptop
 Name[ar]=حاسوب IBM Thinkpad المحمول
@@ -142,4 +142,4 @@ Keywords[tr]=IBM, Thinkpad, parlaklık, sessiz, gösterme itmesi
 Keywords[uk]=IBM, Thinkpad, яскравість, вимкнення звуку, Jog Dial
 Keywords[zh_CN]=IBM, Lenovo, Thinkpad, brightness, mute, Jog Dial,亮度,静音,联想,导航键
 
-Categories=Qt;KDE;X-KDE-settings-system;
+Categories=Qt;TDE;X-TDE-settings-system;

@@ -1,7 +1,7 @@
 [Desktop Entry]
 Type=Service
 ServiceTypes=KMilo Plugin
-X-KDE-ModuleType=Plugin
+X-TDE-ModuleType=Plugin
 Name=Dell I8k Laptop Plugin
 Name[ar]=ملحق حاسوب Dell I8k المحمول
 Name[br]=Lugent hezoug Dell I8k
@@ -93,4 +93,4 @@ Comment[tr]=Dell dizüstü bilgisayarların özel tuşları için desteği etkin
 Comment[uk]=Уможливлює підтримку спеціальних клавіш для лептопа Dell
 Comment[zh_CN]=此插件启用 Dell 笔记本的特殊按键
 Comment[zh_TW]=開啟 Dell 筆記型電腦特殊鍵支援
-X-KDE-Library=kmilo_delli8k
+X-TDE-Library=kmilo_delli8k

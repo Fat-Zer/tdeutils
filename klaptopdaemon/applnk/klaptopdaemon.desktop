@@ -2,11 +2,11 @@
 Type=Service
 
 ServiceTypes=KDEDModule
-X-KDE-ModuleType=Library
-X-KDE-Library=klaptopdaemon
-X-KDE-FactoryName=klaptopdaemon
-X-KDE-Kded-autoload=false
-X-KDE-Kded-load-on-demand=true
+X-TDE-ModuleType=Library
+X-TDE-Library=klaptopdaemon
+X-TDE-FactoryName=klaptopdaemon
+X-TDE-Kded-autoload=false
+X-TDE-Kded-load-on-demand=true
 
 Icon=laptop_battery
 DocPath=kcontrol/battery-monitor.html

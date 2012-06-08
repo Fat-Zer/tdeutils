@@ -168,7 +168,7 @@ following:</para>
 Exec=superkaramba {location of theme file}.theme
 Name={theme name}
 Type=Application
-X-KDE-StartupNotify=false</userinput></screen>
+X-TDE-StartupNotify=false</userinput></screen>
 <para>Then save it as
 <filename><replaceable>themename</replaceable>.desktop</filename> into the
 autostart directory at <filename

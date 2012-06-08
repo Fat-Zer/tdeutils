@@ -4,8 +4,8 @@ Exec=kcmshell kvaio
 Icon=laptop
 DocPath=kcontrol/kvaio/index.html
 
-X-KDE-Library=kvaio
-X-KDE-ParentApp=kcontrol
+X-TDE-Library=kvaio
+X-TDE-ParentApp=kcontrol
 
 Name=Sony Vaio Laptop
 Name[ar]=حاسوب سونى فايو المحمولة
@@ -143,4 +143,4 @@ Keywords[tr]=Sony, Vaio, kvaio, parlaklık, sessiz, gösterme itmesi
 Keywords[uk]=Sony, Vaio, kvaio, яскравість, вимкнення звуку
 Keywords[zh_CN]=Sony, Vaio, kvaio, brightness, mute, Jog Dial,索尼,亮度,静音
 
-Categories=Qt;KDE;X-KDE-settings-system;
+Categories=Qt;TDE;X-TDE-settings-system;

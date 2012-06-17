@@ -65,7 +65,7 @@ class ArkWidget;
 
 enum ArchType { UNKNOWN_FORMAT, ZIP_FORMAT, TAR_FORMAT, AA_FORMAT,
                 LHA_FORMAT, RAR_FORMAT, ZOO_FORMAT, COMPRESSED_FORMAT,
-                SEVENZIP_FORMAT, ACE_FORMAT };
+                SEVENZIP_FORMAT, ACE_FORMAT, ARJ_FORMAT };
 
 typedef TQValueList< TQPair< TQString, TQt::AlignmentFlags > > ColumnList;
 
@@ -101,6 +101,7 @@ class Arch : public TQObject
     virtual void open() = 0;
     virtual void create() = 0;
     virtual void remove( TQStringList * ) = 0;
+    virtual void test();
 
     virtual void addFile( const TQStringList & ) = 0;
     virtual void addDir( const TQString & ) = 0;
@@ -150,12 +151,16 @@ class Arch : public TQObject
     static Arch *archFactory( ArchType aType, ArkWidget *parent,
                               const TQString &filename,
                               const TQString &openAsMimeType = TQString() );
+    TQString password() { return m_password; }
+    void setPassword(const TQString & pw) { m_password = pw.local8Bit(); }
+    virtual void createPassword() {}
 
   protected slots:
     void slotOpenExited( KProcess* );
     void slotExtractExited( KProcess* );
     void slotDeleteExited( KProcess* );
     void slotAddExited( KProcess* );
+    void slotTestExited( KProcess* );
 
     void slotReceivedOutput( KProcess *, char*, int );
 
@@ -168,6 +173,7 @@ class Arch : public TQObject
     void sigDelete( bool );
     void sigExtract( bool );
     void sigAdd( bool );
+    void sigTest( bool );
     void headers( const ColumnList& columns );
 
   protected:  // data

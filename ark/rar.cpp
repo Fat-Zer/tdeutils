@@ -107,6 +107,12 @@ bool RarArch::processLine( const TQCString &line )
 
   TQStringList l2 = TQStringList::split( ' ', line );
 
+  if( l2[5].startsWith("d") )
+  {
+    m_isFirstLine = true;
+    return true;
+  }
+
   list << m_entryFilename; // filename
   list << l2[ 0 ]; // size
   list << l2[ 1 ]; // packed
@@ -179,6 +185,12 @@ void RarArch::create()
                   Arch::Extract | Arch::Delete | Arch::Add | Arch::View );
 }
 
+void RarArch::createPassword()
+{
+  if( m_password.isEmpty() && ArkSettings::askCreatePassword() )
+    KPasswordDialog::getNewPassword( m_password, i18n("Warning!\nUsing KGpg for encryption is more secure.\nCancel this dialog or enter password for %1 archiver:").arg(m_archiver_program) );
+}
+
 void RarArch::addDir( const TQString & _dirName )
 {
   if ( !_dirName.isEmpty() )
@@ -205,6 +217,9 @@ void RarArch::addFile( const TQStringList & urls )
     *kp << "-ol";
   if ( ArkSettings::rarRecurseSubdirs() )
     *kp << "-r";
+
+  if ( !m_password.isEmpty() )
+    *kp << "-p"+m_password;
 
   *kp << m_filename;
 
@@ -291,7 +306,7 @@ void RarArch::unarchFileInternal()
 
 bool RarArch::passwordRequired()
 {
-    return m_lastShellOutput.findRev("password incorrect ?)")+1;
+    return m_lastShellOutput.find("Enter password") >= 0;
 }
 
 void RarArch::remove( TQStringList *list )
@@ -322,6 +337,34 @@ void RarArch::remove( TQStringList *list )
   {
     KMessageBox::error( 0, i18n( "Could not start a subprocess." ) );
     emit sigDelete( false );
+  }
+}
+
+void RarArch::test()
+{
+  clearShellOutput();
+
+  KProcess *kp = m_currentProcess = new KProcess;
+  kp->clearArguments();
+
+  *kp << m_unarchiver_program << "t";
+
+  if ( !m_password.isEmpty() )
+    *kp << "-p" + m_password;
+
+  *kp << m_filename;
+
+  connect( kp, SIGNAL( receivedStdout(KProcess*, char*, int) ),
+           SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
+  connect( kp, SIGNAL( receivedStderr(KProcess*, char*, int) ),
+           SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
+  connect( kp, SIGNAL( processExited(KProcess*) ),
+           SLOT( slotTestExited(KProcess*) ) );
+
+  if ( !kp->start( KProcess::NotifyOnExit, KProcess::AllOutput ) )
+  {
+    KMessageBox::error( 0, i18n( "Could not start a subprocess." ) );
+    emit sigTest( false );
   }
 }
 

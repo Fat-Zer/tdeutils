@@ -36,12 +36,15 @@ class SevenZipArch : public Arch
   
     virtual void open();
     virtual void create();
+    virtual void test();
 
     virtual void addFile( const TQStringList & );
     virtual void addDir( const TQString & );
 
     virtual void remove( TQStringList * );
     virtual void unarchFileInternal( );
+    virtual bool passwordRequired();
+    virtual void createPassword();
 
   protected slots:
     virtual bool processLine( const TQCString& line );

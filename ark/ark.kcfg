@@ -18,6 +18,11 @@
 			<whatsthis>Overwrite any files that have matching names on disk with the one from the archive</whatsthis>
 			<default>false</default>
 		</entry>
+		<entry name="askCreatePassword" type="Bool">
+			<label>Ask for password when create archive if possible</label>
+			<whatsthis>Ask for password when create archive if possible</whatsthis>
+			<default>true</default>
+		</entry>
 	</group>
 	<group name="Tar">
 		<entry name="preservePerms" type="Bool">

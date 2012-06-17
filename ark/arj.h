@@ -8,6 +8,7 @@
   1999: Francois-Xavier Duranceau duranceau@kde.org
   1999-2000: Corel Corporation (author: Emily Ezust, emilye@corel.com)
   2001: Corel Corporation (author: Michael Jarrett, michaelj@corel.com)
+  2007: ALT Linux (author: Sergey V Turchin, zerg@altlinux.org)
 
   This program is free software; you can redistribute it and/or
   modify it under the terms of the GNU General Public License
@@ -25,8 +26,8 @@
 
 */
 
-#ifndef ZIPARCH_H
-#define ZIPARCH_H
+#ifndef ARJARCH_H
+#define ARJARCH_H
 
 #include "arch.h"
 
@@ -35,27 +36,30 @@ class TQStringList;
 
 class ArkWidget;
 
-class ZipArch : public Arch
+class ArjArch : public Arch
 {
   Q_OBJECT
-  
   public:
-    ZipArch( ArkWidget *_gui, const TQString & _fileName );
-    virtual ~ZipArch() { }
+    ArjArch( ArkWidget *_gui, const TQString & _fileName );
+    virtual ~ArjArch() { }
 
     virtual void open();
     virtual void create();
     virtual void test();
 
-    virtual void addFile( const TQStringList & );
-    virtual void addDir( const TQString &  );
+    virtual void remove(TQStringList*);
+    virtual void addFile(const TQStringList&);
+    virtual void addDir(const TQString&);
 
-    virtual void remove( TQStringList * );
     virtual void unarchFileInternal();
     virtual bool passwordRequired();
     virtual void createPassword();
+
+  protected slots:
+    virtual bool processLine( const TQCString & );
   private:
+    TQCString file_entry;
     void setHeaders();
 };
 
-#endif /* ZIPARCH_H */
+#endif /* ARJARCH_H */

@@ -16,6 +16,15 @@
         <property name="name">
             <cstring>unnamed</cstring>
         </property>
+
+        <widget class="TQCheckBox">
+            <property name="name">
+                <cstring>kcfg_askCreatePassword</cstring>
+            </property>
+            <property name="text">
+                <string>Ask for &amp;password when create archive if possible</string>
+            </property>
+        </widget>
         <widget class="TQCheckBox">
             <property name="name">
                 <cstring>kcfg_replaceOnlyWithNewer</cstring>

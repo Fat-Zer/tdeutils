@@ -121,6 +121,7 @@ protected slots:
     bool action_extract();
     void slotOpenWith();
     void action_edit();
+    void action_test();
 
     void doPopup(TQListViewItem *, const TQPoint &, int); // right-click menus
     void viewFile(TQListViewItem*); // doubleClick view files
@@ -133,6 +134,7 @@ protected slots:
     void slotExtractRemoteDone(KIO::Job *job);
     void slotAddDone(bool);
     void slotEditFinished(KProcess *);
+    void slotTestDone(bool);
 signals:
     void openURLRequest( const KURL & url );
     void request_file_quit();
@@ -235,7 +237,7 @@ protected:
     void createFileListView();
 
     bool createArchive(const TQString & name);
-    void openArchive(const TQString & name);
+    void openArchive(const TQString & name, const TQString & pass = "");
 
     void showCurrentFile();
 

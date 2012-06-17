@@ -84,6 +84,8 @@ void ArchiveFormatInfo::buildFormatInfos()
 
   addFormatInfo( SEVENZIP_FORMAT, "application/x-7z", ".7z" );
 
+  addFormatInfo( ARJ_FORMAT, "application/x-arj", ".arj" );
+
   if ( ArkSettings::aceSupport() )
     addFormatInfo( ACE_FORMAT, "application/x-ace", ".ace" );
 }

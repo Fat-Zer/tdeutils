@@ -139,6 +139,9 @@ ArkPart::setupActions()
     editAction = new KAction(i18n("Edit &With..."), 0, TQT_TQOBJECT(awidget),
                              TQT_SLOT(action_edit()), actionCollection(), "edit");
 
+    testAction = new KAction(i18n("&Test integrity"), 0, awidget,
+                                TQT_SLOT(action_test()),	actionCollection(), "test");
+
     selectAllAction = KStdAction::selectAll(TQT_TQOBJECT(awidget->fileList()), TQT_SLOT(selectAll()), actionCollection(), "select_all");
 
     deselectAllAction =  new KAction(i18n("&Unselect All"), 0, TQT_TQOBJECT(awidget->fileList()),TQT_SLOT(unselectAll()), actionCollection(), "deselect_all");
@@ -189,6 +192,7 @@ void ArkPart::fixEnables()
     addDirAction->setEnabled(awidget->isArchiveOpen() &&
                              !bReadOnly && bAddDirSupported);
     extractAction->setEnabled(bHaveFiles);
+    testAction->setEnabled(true);
     awidget->searchBar()->setEnabled(bHaveFiles);
 
     bool b = ( bHaveFiles
@@ -216,6 +220,7 @@ void ArkPart::initialEnables()
     addDirAction->setEnabled(false);
     openWithAction->setEnabled(false);
     editAction->setEnabled(false);
+    testAction->setEnabled(false);
 
     awidget->searchBar()->setEnabled(false);
 }
@@ -234,6 +239,7 @@ void ArkPart::disableActions()
     addDirAction->setEnabled(false);
     openWithAction->setEnabled(false);
     editAction->setEnabled(false);
+    testAction->setEnabled(false);
     awidget->searchBar()->setEnabled(false);
 }
 

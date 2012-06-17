@@ -64,6 +64,7 @@ class TarArch : public Arch
 
 		virtual void open();
 		virtual void create();
+		virtual void test();
 
 		virtual void addFile( const TQStringList & );
 		virtual void addDir( const TQString & );

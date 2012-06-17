@@ -33,6 +33,7 @@
 // QT includes
 #include <tqapplication.h>
 #include <tqfile.h>
+#include <tqtextcodec.h>
 
 // KDE includes
 #include <kdebug.h>
@@ -59,6 +60,7 @@
 #include "ar.h"
 #include "sevenzip.h"
 #include "ace.h"
+#include "arj.h"
 
 Arch::ArchColumns::ArchColumns( int col, TQRegExp reg, int length, bool opt )
   : colRef( col ), pattern( reg ), maxLength( length ), optional( opt )
@@ -288,7 +290,7 @@ void Arch::slotReceivedTOC( KProcess*, char* data, int length )
 
     data[ lfChar ] = '\0';
 
-    m_buffer.append( TQString::fromUtf8(data + startChar).latin1() );
+    m_buffer.append( data + startChar );
 
     data[ lfChar ] = '\n';
     startChar = lfChar + 1;
@@ -333,12 +335,16 @@ bool Arch::processLine( const TQCString &line )
   unsigned int pos = 0;
   int strpos, len;
 
+  TQTextCodec::setCodecForCStrings(TQTextCodec::codecForLocale());
+  TQTextCodec *codec = TQTextCodec::codecForLocale();
+  TQString tqunicode_line = codec->toUnicode( line );
+
   // Go through our columns, try to pick out data, return silently on failure
   for ( TQPtrListIterator <ArchColumns>col( m_archCols ); col.current(); ++col )
   {
     ArchColumns *curCol = *col;
 
-    strpos = curCol->pattern.search( line, pos );
+    strpos = curCol->pattern.search( tqunicode_line, pos );
     len = curCol->pattern.matchedLength();
 
     if ( ( strpos == -1 ) || ( len > curCol->maxLength ) )
@@ -354,7 +360,7 @@ bool Arch::processLine( const TQCString &line )
 
     pos = strpos + len;
 
-    columns[curCol->colRef] = TQString::fromLocal8Bit( line.mid(strpos, len) );
+    columns[curCol->colRef] = tqunicode_line.mid(strpos, len).utf8();
   }
 
 
@@ -388,6 +394,60 @@ bool Arch::processLine( const TQCString &line )
   return true;
 }
 
+void Arch::test()
+{
+    emit sigTest(false);
+    KMessageBox::information(0, i18n("Not implemented."));
+}
+
+void Arch::slotTestExited( KProcess *_kp )
+{
+  bool success = ( _kp->normalExit() && ( _kp->exitStatus() == 0 ) );
+
+  if( !success )
+  {
+    if ( passwordRequired() )
+    {
+        TQString msg;
+        if ( !m_password.isEmpty() )
+            msg = i18n("The password was incorrect. ");
+        if (KPasswordDialog::getPassword( m_password, msg+i18n("You must enter a password to extract the file:") ) == KPasswordDialog::Accepted )
+        {
+            delete _kp;
+            _kp = m_currentProcess = 0;
+            clearShellOutput();
+            test(); // try to test the archive again with a password
+            return;
+        }
+        m_password = "";
+        emit sigTest( false );
+        delete _kp;
+        _kp = m_currentProcess = 0;
+        return;
+    }
+    else if ( m_password.isEmpty() || _kp->exitStatus() > 1 )
+    {
+        TQApplication::restoreOverrideCursor();
+
+        TQString msg = i18n( "The test operation failed." );
+
+        if ( !getLastShellOutput().isNull() )
+        {
+            //getLastShellOutput() is a TQString. errorList is expecting TQStringLists to show in multiple lines
+            TQStringList list = TQStringList::split( "\n", getLastShellOutput() );
+            KMessageBox::errorList( m_gui, msg, list );
+            clearShellOutput();
+        }
+        else
+        {
+            KMessageBox::error( m_gui, msg );
+        }
+    }
+  }
+  delete _kp;
+  _kp = m_currentProcess = 0;
+  emit sigTest( success );
+}
 
 Arch *Arch::archFactory( ArchType aType,
                          ArkWidget *parent, const TQString &filename,
@@ -421,6 +481,9 @@ Arch *Arch::archFactory( ArchType aType,
 
     case ACE_FORMAT:
       return new AceArch( parent, filename );
+
+    case ARJ_FORMAT:
+      return new ArjArch( parent, filename );
 
     case UNKNOWN_FORMAT:
     default:

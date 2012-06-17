@@ -17,6 +17,7 @@
     <Action name="extract"/>
     <Action name="view"/>
     <Action name="open_with"/>
+    <Action name="test"/>
   </Menu>
  <Menu noMerge="1" name="settings">
     <text>&amp;Settings</text>

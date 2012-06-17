@@ -25,6 +25,7 @@
 */
 
 #include <tqdir.h>
+#include <tqtextcodec.h>
 
 #include <kglobal.h>
 #include <klocale.h>
@@ -120,12 +121,21 @@ void SevenZipArch::create()
                   Arch::Extract | Arch::Delete | Arch::Add | Arch::View );
 }
 
+void SevenZipArch::createPassword()
+{
+  if( m_password.isEmpty() && ArkSettings::askCreatePassword() )
+    KPasswordDialog::getNewPassword( m_password, i18n("Warning!\nUsing KGpg for encryption is more secure.\nCancel this dialog or enter password for %1 archiver:").arg(m_archiver_program) );
+}
+
 void SevenZipArch::addFile( const TQStringList & urls )
 {
   KProcess *kp = m_currentProcess = new KProcess;
 
   kp->clearArguments();
   *kp << m_archiver_program << "a" ;
+
+  if ( !m_password.isEmpty() )
+    *kp << "-p" + m_password;
 
   KURL url( urls.first() );
   TQDir::setCurrent( url.directory() );
@@ -161,6 +171,11 @@ void SevenZipArch::addDir( const TQString & dirName )
     list.append( dirName );
     addFile( list );
   }
+}
+
+bool SevenZipArch::passwordRequired()
+{
+    return m_lastShellOutput.find("Enter password") >= 0;
 }
 
 void SevenZipArch::remove( TQStringList *list )
@@ -212,6 +227,12 @@ void SevenZipArch::unarchFileInternal( )
     //*kp << "-ao";
   }
 
+  // FIXME overwrite existing files created with wrong password
+  *kp << "-y";
+
+  if ( !m_password.isEmpty() )
+    *kp << "-p" + m_password;
+
   *kp << m_filename;
 
   // if the file list is empty, no filenames go on the command line,
@@ -243,12 +264,15 @@ void SevenZipArch::unarchFileInternal( )
 
 bool SevenZipArch::processLine( const TQCString& _line )
 {
-  TQCString line( _line );
+  TQString line;
   TQString columns[ 11 ];
   unsigned int pos = 0;
   int strpos, len;
 
-  columns[ 0 ] = line.right( line.length() - m_nameColumnPos +1);
+  TQTextCodec *codec = TQTextCodec::codecForLocale();
+  line = codec->toUnicode( _line );
+
+  columns[ 0 ] = line.right( line.length() - m_nameColumnPos);
   line.truncate( m_nameColumnPos );
 
   // Go through our columns, try to pick out data, return silently on failure
@@ -275,6 +299,8 @@ bool SevenZipArch::processLine( const TQCString& _line )
     columns[ curCol->colRef ] = line.mid( strpos, len );
   }
 
+  // Separated directories pass
+  if(columns[4].length() && columns[4][0] == 'D') return true;
 
   if ( m_dateCol >= 0 )
   {
@@ -362,6 +388,34 @@ void SevenZipArch::slotReceivedTOC( KProcess*, char* data, int length )
     m_buffer.append( data + startChar);	// Append what's left of the buffer
 
   data[ length ] = endchar;
+}
+
+void SevenZipArch::test()
+{
+  clearShellOutput();
+
+  KProcess *kp = m_currentProcess = new KProcess;
+  kp->clearArguments();
+
+  *kp << m_unarchiver_program << "t";
+
+  if ( !m_password.isEmpty() )
+    *kp << "-p" + m_password;
+
+  *kp << m_filename;
+
+  connect( kp, SIGNAL( receivedStdout(KProcess*, char*, int) ),
+           SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
+  connect( kp, SIGNAL( receivedStderr(KProcess*, char*, int) ),
+           SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
+  connect( kp, SIGNAL( processExited(KProcess*) ),
+           SLOT( slotTestExited(KProcess*) ) );
+
+  if ( !kp->start( KProcess::NotifyOnExit, KProcess::AllOutput ) )
+  {
+    KMessageBox::error( 0, i18n( "Could not start a subprocess." ) );
+    emit sigTest( false );
+  }
 }
 
 #include "sevenzip.moc"

@@ -21,6 +21,7 @@
     <Action name="view"/>
     <Action name="open_with"/>
     <Action name="edit"/>
+    <Action name="test"/>
   </Menu>
  <Menu noMerge="1" name="settings">
     <text>&amp;Settings</text>

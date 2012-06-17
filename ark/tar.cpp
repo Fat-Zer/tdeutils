@@ -785,5 +785,42 @@ void TarArch::customEvent( TQCustomEvent *ev )
   }
 }
 
+void TarArch::test()
+{
+  clearShellOutput();
+
+  KProcess *kp = m_currentProcess = new KProcess;
+  kp->clearArguments();
+
+  TQString uncomp = getUnCompressor();
+
+  *kp << uncomp;
+
+  if( uncomp == "bunzip2" || uncomp == "gunzip" || uncomp == "lzop" )
+  {
+    *kp << "-t";
+  }
+  else
+  {
+    Arch::test();
+    return;
+  }
+
+  *kp << m_filename;
+
+  connect( kp, SIGNAL( receivedStdout(KProcess*, char*, int) ),
+           SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
+  connect( kp, SIGNAL( receivedStderr(KProcess*, char*, int) ),
+           SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
+  connect( kp, SIGNAL( processExited(KProcess*) ),
+           SLOT( slotTestExited(KProcess*) ) );
+
+  if ( !kp->start( KProcess::NotifyOnExit, KProcess::AllOutput ) )
+  {
+    KMessageBox::error( 0, i18n( "Could not start a subprocess." ) );
+    emit sigTest( false );
+  }
+}
+
 #include "tar.moc"
 // kate: space-indent on;

@@ -739,7 +739,10 @@ ArkWidget::file_open(const KURL& url)
     m_url = url;
     //arch->clearShellOutput();
 
-    openArchive( strFile );
+    if( url.hasPass() )
+	openArchive( strFile, url.pass() );
+    else
+	openArchive( strFile );
 }
 
 
@@ -1184,6 +1187,8 @@ ArkWidget::slotAddDone(bool _bSuccess)
         //simulate reload
         KURL u;
         u.setPath( arch->fileName() );
+	if( !arch->password().isEmpty() )
+    	    u.setPass( arch->password() );
         file_close();
         file_open( u );
         emit setWindowCaption( u.path() );
@@ -1682,6 +1687,25 @@ ArkWidget::action_view()
 }
 
 void
+ArkWidget::action_test()
+{
+    connect( arch, TQT_SIGNAL( sigTest( bool ) ), this,
+             TQT_SLOT( slotTestDone( bool ) ) );
+    busy( i18n( "Testing..." ) );
+    arch->test();
+}
+
+void
+ArkWidget::slotTestDone(bool ok)
+{
+    disconnect( arch, TQT_SIGNAL( sigTest( bool ) ), this,
+             TQT_SLOT( slotTestDone( bool ) ) );
+    ready();
+    if( ok )
+	KMessageBox::information(0, i18n("Test successful."));
+}
+
+void
 ArkWidget::viewSlotExtractDone( bool success )
 {
     if ( success )
@@ -2102,6 +2126,7 @@ ArkWidget::slotCreate(Arch * _newarch, bool _success, const TQString & _filename
         m_bIsSimpleCompressedFile =
             (m_archType == COMPRESSED_FORMAT);
         fixEnables();
+	arch->createPassword();
     }
     else
     {
@@ -2115,7 +2140,7 @@ ArkWidget::slotCreate(Arch * _newarch, bool _success, const TQString & _filename
 //////////////////////////////////////////////////////////////////////
 
 void
-ArkWidget::openArchive( const TQString & _filename )
+ArkWidget::openArchive( const TQString & _filename, const TQString & _password )
 {
     Arch *newArch = 0;
     ArchType archtype;
@@ -2172,6 +2197,7 @@ ArkWidget::openArchive( const TQString & _filename )
     busy( i18n( "Opening the archive..." ) );
     m_fileListView->setUpdatesEnabled( false );
     arch = newArch;
+    newArch->setPassword(_password);
     newArch->open();
     emit addRecentURL( m_url );
 }

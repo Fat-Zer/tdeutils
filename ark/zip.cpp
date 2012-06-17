@@ -34,6 +34,7 @@
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <kprocess.h>
+#include <kpassdlg.h>
 
 // ark includes
 #include "zip.h"
@@ -112,6 +113,12 @@ void ZipArch::create()
 {
   emit sigCreate( this, true, m_filename,
                  Arch::Extract | Arch::Delete | Arch::Add | Arch::View );
+}
+
+void ZipArch::createPassword()
+{
+  if( m_password.isEmpty() && ArkSettings::askCreatePassword() )
+    KPasswordDialog::getNewPassword( m_password, i18n("Warning!\nUsing KGpg for encryption is more secure.\nCancel this dialog or enter password for %1 archiver:").arg(m_archiver_program) );
 }
 
 void ZipArch::addDir( const TQString & _dirName )
@@ -240,13 +247,14 @@ void ZipArch::unarchFileInternal()
 
 bool ZipArch::passwordRequired()
 {
-    return m_lastShellOutput.findRev("unable to get password\n")!=-1 || m_lastShellOutput.endsWith("password inflating\n") || m_lastShellOutput.findRev("password incorrect--reenter:")!=-1 || m_lastShellOutput.endsWith("incorrect password\n");
+    return m_lastShellOutput.findRev("password:") >= 0 || m_lastShellOutput.findRev("unable to get password\n")!=-1 || m_lastShellOutput.endsWith("password inflating\n") || m_lastShellOutput.findRev("password incorrect--reenter:")!=-1 || m_lastShellOutput.endsWith("incorrect password\n");
 }
 
 void ZipArch::remove( TQStringList *list )
 {
   if ( !list )
     return;
+
 
   KProcess *kp = m_currentProcess = new KProcess;
   kp->clearArguments();
@@ -271,6 +279,34 @@ void ZipArch::remove( TQStringList *list )
   {
     KMessageBox::error( 0, i18n( "Could not start a subprocess." ) );
     emit sigDelete( false );
+  }
+}
+
+void ZipArch::test()
+{
+  clearShellOutput();
+
+  KProcess *kp = m_currentProcess = new KProcess;
+  kp->clearArguments();
+
+  *kp << m_unarchiver_program << "-t";
+
+  if ( !m_password.isEmpty() )
+    *kp << "-P" << m_password;
+
+  *kp << m_filename;
+
+  connect( kp, SIGNAL( receivedStdout(KProcess*, char*, int) ),
+           SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
+  connect( kp, SIGNAL( receivedStderr(KProcess*, char*, int) ),
+           SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
+  connect( kp, SIGNAL( processExited(KProcess*) ),
+           SLOT( slotTestExited(KProcess*) ) );
+
+  if ( !kp->start( KProcess::NotifyOnExit, KProcess::AllOutput ) )
+  {
+    KMessageBox::error( 0, i18n( "Could not start a subprocess." ) );
+    emit sigTest( false );
   }
 }
 

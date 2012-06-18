@@ -32,6 +32,7 @@
 #include <kdebug.h>
 #include <kurl.h>
 #include <kmessagebox.h>
+#include <kpassdlg.h>
 #include <kprocess.h>
 #include <kstandarddirs.h>
 

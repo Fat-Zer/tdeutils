@@ -39,6 +39,7 @@
 #include <kglobal.h>
 #include <klocale.h>
 #include <kmessagebox.h>
+#include <kpassdlg.h>
 #include <kprocess.h>
 #include <kstandarddirs.h>
 

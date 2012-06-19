@@ -42,7 +42,8 @@
 #include "arj.h"
 #include "arkwidget.h"
 #include "settings.h"
-
+#include "arkutils.h"
+#include "filelistview.h"
 
 ArjArch::ArjArch( ArkWidget *_gui, const TQString & _fileName )
   : Arch(  _gui, _fileName )

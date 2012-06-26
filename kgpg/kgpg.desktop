@@ -114,9 +114,9 @@ Name=KGpg
 Name[hi]=के-जीपीजी
 Name[nl]=KGPG
 Name[sv]=Kgpg
-Name[ta]= KGpg 
+Name[ta]= KGpg
 
 X-TDE-autostart-after=panel
 X-TDE-autostart-condition=kgpgrc:User Interface:AutoStart:false
 
-Categories=Qt;TDE;Utility;X-TDE-Utilities-PIM;
+Categories=Qt;TDE;Office;X-TDE-Office-PIM;

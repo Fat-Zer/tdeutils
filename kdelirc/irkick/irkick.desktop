@@ -58,7 +58,7 @@ X-TDE-autostart-after=panel
 X-TDE-StartupNotify=false
 X-DCOP-ServiceType=Unique
 X-TDE-autostart-condition=irkickrc:General:AutoStart:false
-Categories=Qt;TDE;Utility;
+Categories=Qt;TDE;Utility;X-TDE-Utilities-Peripherals;
 
 Exec=irkick
 Icon=irkick

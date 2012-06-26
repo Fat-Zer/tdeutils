@@ -77,4 +77,4 @@ Path=
 Terminal=false
 X-TDE-StartupNotify=true
 X-DCOP-ServiceType=Multi
-Categories=Qt;TDE;Utility;X-TDE-Utilities-PIM;
+Categories=Qt;TDE;Office;X-TDE-Office-PIM;

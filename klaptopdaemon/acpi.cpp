@@ -178,7 +178,7 @@ void AcpiConfig::setupHelper()
 			proc << tdesu;
 			proc << "-u";
 			proc << "root";
-			proc <<  "dpkg-statoverride --update --add root root 6755 "+helper;
+			proc <<  "chown root "+helper+"; chmod +s "+helper;
 			proc.start(KProcess::Block);	// run it sync so has_acpi below sees the results
 		}
 	} else {

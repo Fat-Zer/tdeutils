@@ -166,7 +166,7 @@ void ApmConfig::setupHelper()
 			proc << tdesu;
 			proc << "-u";
 			proc << "root";
-			proc <<  TQString("dpkg-statoverride --update --add root root 6755 ")+apm_name;
+			proc <<  TQString("chown root ")+apm_name+TQString("; chmod +s ")+apm_name;
 			proc.start(KProcess::Block);	// run it sync so has_apm below sees the results
 		}
 	} else {
@@ -200,7 +200,7 @@ void ApmConfig::setupHelper2()	// we use the acpi helper to do software suspend
 			proc << tdesu;
 			proc << "-u";
 			proc << "root";
-			proc <<  "dpkg-statoverride --update --add root root 6755 "+helper;
+			proc <<  "chown root "+helper+"; chmod +s "+helper;
 			proc.start(KProcess::Block);	// run it sync so has_acpi below sees the results
 		}
 	} else {

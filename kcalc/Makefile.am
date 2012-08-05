@@ -19,7 +19,7 @@ noinst_HEADERS  = kcalc.h kcalc_button.h kcalc_const_button.h \
 			kcalctype.h dlabel.h stats.h
 
 kcalc_la_LDFLAGS = $(all_libraries) -module -avoid-version
-kcalc_la_LIBADD = $(LIB_TDEUI) knumber/libknumber.la
+kcalc_la_LIBADD = $(LIB_TDEUI) knumber/libknumber.la $(LIB_QT) $(LIB_TDECORE)
 
 KDE_ICON = kcalc
 

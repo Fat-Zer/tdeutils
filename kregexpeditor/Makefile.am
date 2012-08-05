@@ -29,7 +29,7 @@ libkregexpeditorcommon_la_SOURCES = \
 
 libkregexpeditorcommon_la_LDFLAGS = $(all_libraries) -version-info 1:0:0 -no-undefined
 libkregexpeditorcommon_la_LIBADD = KMultiFormListBox/libkmultiformlistbox.la \
-	KWidgetStreamer/libkwidgetstreamer.la $(LIB_KIO)
+	KWidgetStreamer/libkwidgetstreamer.la $(LIB_KIO) $(LIB_QT) $(LIB_TDECORE) $(LIB_TDEUI)
 
 METASOURCES = AUTO
 

@@ -1467,7 +1467,7 @@
     </connection>
     <connection>
         <sender>theValueLineEdit</sender>
-        <signal>textChanged(const QString&amp;)</signal>
+        <signal>textChanged(const TQString&amp;)</signal>
         <receiver>AddActionBase</receiver>
         <slot>slotParameterChanged()</slot>
     </connection>
@@ -1579,7 +1579,7 @@
     <slot>updateParameter()</slot>
     <slot>updateParameters()</slot>
     <slot>updateButtonStates()</slot>
-    <slot>updateCurrentParam(const QString &amp;)</slot>
+    <slot>updateCurrentParam(const TQString &amp;)</slot>
     <slot>slotNextParam()</slot>
     <slot>slotCorrectPage()</slot>
     <slot>slotModeSelected()</slot>

@@ -266,9 +266,9 @@
 <connections>
     <connection>
         <sender>theName</sender>
-        <signal>textChanged(const QString&amp;)</signal>
+        <signal>textChanged(const TQString&amp;)</signal>
         <receiver>EditModeBase</receiver>
-        <slot>slotCheckText(const QString&amp;)</slot>
+        <slot>slotCheckText(const TQString&amp;)</slot>
     </connection>
     <connection>
         <sender>theOK</sender>
@@ -290,7 +290,7 @@
     </connection>
 </connections>
 <Q_SLOTS>
-    <slot>slotCheckText(const QString &amp;)</slot>
+    <slot>slotCheckText(const TQString &amp;)</slot>
     <slot>slotClearIcon()</slot>
 </Q_SLOTS>
 <layoutdefaults spacing="6" margin="11"/>

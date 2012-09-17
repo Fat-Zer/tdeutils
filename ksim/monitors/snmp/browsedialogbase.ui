@@ -237,7 +237,7 @@
     </connection>
     <connection>
         <sender>filter</sender>
-        <signal>textChanged(const QString&amp;)</signal>
+        <signal>textChanged(const TQString&amp;)</signal>
         <receiver>MyDialog</receiver>
         <slot>applyFilter()</slot>
     </connection>

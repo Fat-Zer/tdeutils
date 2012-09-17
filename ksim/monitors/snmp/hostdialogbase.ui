@@ -459,31 +459,31 @@
     </connection>
     <connection>
         <sender>snmpVersion</sender>
-        <signal>activated(const QString&amp;)</signal>
+        <signal>activated(const TQString&amp;)</signal>
         <receiver>HostDialogBase</receiver>
-        <slot>showSnmpAuthenticationDetailsForVersion(const QString&amp;)</slot>
+        <slot>showSnmpAuthenticationDetailsForVersion(const TQString&amp;)</slot>
     </connection>
     <connection>
         <sender>securityLevel</sender>
-        <signal>activated(const QString&amp;)</signal>
+        <signal>activated(const TQString&amp;)</signal>
         <receiver>HostDialogBase</receiver>
-        <slot>enableDisabledAuthenticationAndPrivacyElementsForSecurityLevel(const QString&amp;)</slot>
+        <slot>enableDisabledAuthenticationAndPrivacyElementsForSecurityLevel(const TQString&amp;)</slot>
     </connection>
     <connection>
         <sender>hostName</sender>
-        <signal>textChanged(const QString&amp;)</signal>
+        <signal>textChanged(const TQString&amp;)</signal>
         <receiver>HostDialogBase</receiver>
         <slot>checkValidity()</slot>
     </connection>
     <connection>
         <sender>securityName</sender>
-        <signal>textChanged(const QString&amp;)</signal>
+        <signal>textChanged(const TQString&amp;)</signal>
         <receiver>HostDialogBase</receiver>
         <slot>checkValidity()</slot>
     </connection>
     <connection>
         <sender>communityString</sender>
-        <signal>textChanged(const QString&amp;)</signal>
+        <signal>textChanged(const TQString&amp;)</signal>
         <receiver>HostDialogBase</receiver>
         <slot>checkValidity()</slot>
     </connection>
@@ -509,8 +509,8 @@
     <tabstop>communityString</tabstop>
 </tabstops>
 <Q_SLOTS>
-    <slot access="private">showSnmpAuthenticationDetailsForVersion(const QString &amp;)</slot>
-    <slot>enableDisabledAuthenticationAndPrivacyElementsForSecurityLevel(const QString &amp;)</slot>
+    <slot access="private">showSnmpAuthenticationDetailsForVersion(const TQString &amp;)</slot>
+    <slot>enableDisabledAuthenticationAndPrivacyElementsForSecurityLevel(const TQString &amp;)</slot>
     <slot>checkValidity()</slot>
     <slot access="protected">testHost()</slot>
 </Q_SLOTS>

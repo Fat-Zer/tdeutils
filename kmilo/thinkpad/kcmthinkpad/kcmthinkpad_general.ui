@@ -243,31 +243,31 @@
     </connection>
     <connection>
         <sender>commandExec</sender>
-        <signal>textChanged(const QString&amp;)</signal>
+        <signal>textChanged(const TQString&amp;)</signal>
         <receiver>KCMThinkpadGeneral</receiver>
         <slot>slotChanged()</slot>
     </connection>
     <connection>
         <sender>commandExecHome</sender>
-        <signal>textChanged(const QString&amp;)</signal>
+        <signal>textChanged(const TQString&amp;)</signal>
         <receiver>KCMThinkpadGeneral</receiver>
         <slot>slotChanged()</slot>
     </connection>
     <connection>
         <sender>commandExecMail</sender>
-        <signal>textChanged(const QString&amp;)</signal>
+        <signal>textChanged(const TQString&amp;)</signal>
         <receiver>KCMThinkpadGeneral</receiver>
         <slot>slotChanged()</slot>
     </connection>
     <connection>
         <sender>commandExecSearch</sender>
-        <signal>textChanged(const QString&amp;)</signal>
+        <signal>textChanged(const TQString&amp;)</signal>
         <receiver>KCMThinkpadGeneral</receiver>
         <slot>slotChanged()</slot>
     </connection>
     <connection>
         <sender>commandExecZoom</sender>
-        <signal>textChanged(const QString&amp;)</signal>
+        <signal>textChanged(const TQString&amp;)</signal>
         <receiver>KCMThinkpadGeneral</receiver>
         <slot>slotChanged()</slot>
     </connection>

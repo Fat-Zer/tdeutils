@@ -389,19 +389,19 @@
     </connection>
     <connection>
         <sender>monitorName</sender>
-        <signal>textChanged(const QString&amp;)</signal>
+        <signal>textChanged(const TQString&amp;)</signal>
         <receiver>MonitorDialogBase</receiver>
         <slot>checkValues()</slot>
     </connection>
     <connection>
         <sender>oid</sender>
-        <signal>textChanged(const QString&amp;)</signal>
+        <signal>textChanged(const TQString&amp;)</signal>
         <receiver>MonitorDialogBase</receiver>
         <slot>checkValues()</slot>
     </connection>
     <connection>
         <sender>displayType</sender>
-        <signal>activated(const QString&amp;)</signal>
+        <signal>activated(const TQString&amp;)</signal>
         <receiver>MonitorDialogBase</receiver>
         <slot>checkValues()</slot>
     </connection>

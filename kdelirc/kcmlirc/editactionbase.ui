@@ -991,31 +991,31 @@
     </connection>
     <connection>
         <sender>theApplications</sender>
-        <signal>activated(const QString&amp;)</signal>
+        <signal>activated(const TQString&amp;)</signal>
         <receiver>EditActionBase</receiver>
         <slot>updateFunctions()</slot>
     </connection>
     <connection>
         <sender>theDCOPApplications</sender>
-        <signal>activated(const QString&amp;)</signal>
+        <signal>activated(const TQString&amp;)</signal>
         <receiver>EditActionBase</receiver>
         <slot>updateDCOPObjects()</slot>
     </connection>
     <connection>
         <sender>theDCOPObjects</sender>
-        <signal>activated(const QString&amp;)</signal>
+        <signal>activated(const TQString&amp;)</signal>
         <receiver>EditActionBase</receiver>
         <slot>updateDCOPFunctions()</slot>
     </connection>
     <connection>
         <sender>theFunctions</sender>
-        <signal>activated(const QString&amp;)</signal>
+        <signal>activated(const TQString&amp;)</signal>
         <receiver>EditActionBase</receiver>
         <slot>updateArguments()</slot>
     </connection>
     <connection>
         <sender>theDCOPFunctions</sender>
-        <signal>activated(const QString&amp;)</signal>
+        <signal>activated(const TQString&amp;)</signal>
         <receiver>EditActionBase</receiver>
         <slot>updateArguments()</slot>
     </connection>
@@ -1093,7 +1093,7 @@
     </connection>
     <connection>
         <sender>theValueLineEdit</sender>
-        <signal>textChanged(const QString&amp;)</signal>
+        <signal>textChanged(const TQString&amp;)</signal>
         <receiver>EditActionBase</receiver>
         <slot>slotParameterChanged()</slot>
     </connection>
@@ -1177,13 +1177,13 @@
     </connection>
     <connection>
         <sender>theDCOPApplications</sender>
-        <signal>activated(const QString&amp;)</signal>
+        <signal>activated(const TQString&amp;)</signal>
         <receiver>EditActionBase</receiver>
         <slot>updateOptions()</slot>
     </connection>
     <connection>
         <sender>theApplications</sender>
-        <signal>activated(const QString&amp;)</signal>
+        <signal>activated(const TQString&amp;)</signal>
         <receiver>EditActionBase</receiver>
         <slot>updateOptions()</slot>
     </connection>

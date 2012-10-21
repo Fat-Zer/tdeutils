@@ -6,7 +6,7 @@ rm -rf predefined
 rm -rf icons 
 rm unistd.h
 find -lname \* -maxdepth 1 | xargs rm
-rm tqmoc_*
+rm moc_*
 rm images.h
 rm gen_*
 rm -rf kregexpeditor*

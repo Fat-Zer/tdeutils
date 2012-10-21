@@ -63,9 +63,9 @@ public slots:
 	void slotEditMode();
 
 #ifndef Q_MOC_RUN
-// QMOC_SKIP_BEGIN
+// MOC_SKIP_BEGIN
 k_dcop:
-// QMOC_SKIP_END
+// MOC_SKIP_END
 #endif
 	// now just used as a proxy to AddAction class
 	virtual void gotButton(TQString remote, TQString button);

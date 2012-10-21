@@ -82,7 +82,7 @@ class KHEXEDIT_EXPORT KHexEdit : public KColumnsView
 
   Q_OBJECT
   
-  Q_ENUMS( KResizeStyle KCoding )
+  TQ_ENUMS( KResizeStyle KCoding )
   TQ_PROPERTY( bool OverwriteMode READ isOverwriteMode WRITE setOverwriteMode )
   TQ_PROPERTY( bool OverwriteOnly READ isOverwriteOnly WRITE setOverwriteOnly )
   TQ_PROPERTY( bool Modified READ isModified WRITE setModified DESIGNABLE false )

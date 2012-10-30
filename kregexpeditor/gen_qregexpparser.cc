@@ -182,7 +182,7 @@ typedef struct yyltype
 
 /* The parser invokes alloca or malloc; define the necessary symbols.  */
 
-# if YYSTACK_USE_ALLOCA
+# ifdef YYSTACK_USE_ALLOCA
 #  define YYSTACK_ALLOC alloca
 # else
 #  ifndef YYSTACK_USE_ALLOCA
@@ -569,7 +569,7 @@ int yydebug;
    SIZE_MAX < YYSTACK_BYTES (YYMAXDEPTH)
    evaluated with infinite-precision integer arithmetic.  */
 
-#if YYMAXDEPTH == 0
+#ifdef YYMAXDEPTH == 0
 # undef YYMAXDEPTH
 #endif
 

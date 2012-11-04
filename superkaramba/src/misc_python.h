@@ -207,7 +207,7 @@ PyObject* py_language(PyObject *self, PyObject *args);
 * DESCRIPTION
 *   Returns a string containing the language name abbreviation for the
 *   language user chose for the KDE session in Region & Language settings.
-*   Implemented in version 0.40. Parse ~/.kde/share/config/kdeglobals
+*   Implemented in version 0.40. Parse ~/.trinity/share/config/kdeglobals
 *   for 'Language' directly for earlier clients.
 * ARGUMENTS
 *   * long widget -- karamba

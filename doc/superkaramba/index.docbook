@@ -131,7 +131,7 @@ running?</para>
 <answer><para>Many themes depend on &kicker; and will not work well without
 it. If you don't want &kicker; to show on your desktop, you can set it to
 auto-hide. Another solution is to change the auto-hide setting in a
-<filename>~/.kde</filename> file. For more information see the wiki page about
+<filename>~/.trinity</filename> file. For more information see the wiki page about
 <ulink
 url="http://wiki.kdenews.org/tiki-print.php?page=Secret+Config+Settings">secret
 configuration settings</ulink>.</para>

@@ -30,7 +30,7 @@
       <terminal>false</terminal>
       <envvars/>
       <directoryradio>build</directoryradio>
-      <customdirectory>/home/damu/.kde/share/apps/superkaramba/themes/hdd/</customdirectory>
+      <customdirectory>/home/damu/.trinity/share/apps/superkaramba/themes/hdd/</customdirectory>
       <autocompile>true</autocompile>
     </run>
     <makeenvvars>
@@ -139,7 +139,7 @@
   <kdevdebugger>
     <general>
       <dbgshell>libtool</dbgshell>
-      <programargs>/home/damu/.kde/share/apps/superkaramba/themes/hdd/hdd.theme</programargs>
+      <programargs>/home/damu/.trinity/share/apps/superkaramba/themes/hdd/hdd.theme</programargs>
       <gdbpath></gdbpath>
       <breakonloadinglibs>false</breakonloadinglibs>
       <separatetty>false</separatetty>

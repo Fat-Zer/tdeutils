@@ -16,7 +16,7 @@
 
 <c>General
 <q>How do I get rid of the KDE taskbar? Do I have to keep kicker running?
-<a>Many themes depend on kicker and will not work well without it. If you don't want kicker to show on your desktop, you can set it to auto-hide. Another solution is to change the auto-hide setting in a ~/.kde file. For more information see <a href="http://wiki.kdenews.org/tiki-print.php?page=Secret+Config+Settings">http://wiki.kdenews.org/tiki-print.php?page=Secret+Config+Settings</a>.
+<a>Many themes depend on kicker and will not work well without it. If you don't want kicker to show on your desktop, you can set it to auto-hide. Another solution is to change the auto-hide setting in a ~/.trinity file. For more information see <a href="http://wiki.kdenews.org/tiki-print.php?page=Secret+Config+Settings">http://wiki.kdenews.org/tiki-print.php?page=Secret+Config+Settings</a>.
 
 <c>General
 <q>Can I run a systray theme while the kicker systray is running?
@@ -31,7 +31,7 @@ To create a desktop config file, open KWrite and enter the following:<pre>
             Name={theme name}
             Type=Application
             X-TDE-StartupNotify=false
-</pre>Then save it as {theme}.desktop into /home/{user}/.kde/Autostart/.
+</pre>Then save it as {theme}.desktop into /home/{user}/.trinity/Autostart/.
 
 <c>Troubleshooting
 <q>All of my themes are "always on top" of the other windows.
@@ -39,7 +39,7 @@ To create a desktop config file, open KWrite and enter the following:<pre>
 
 <c>Troubleshooting
 <q>My themes start up in different locations when I start KDE.
-<a>Close all superkaramba themes and then delete any session files in ~/.kde/share/config/session/ that begin with superkaramba. Restart KDE and start your themes again. Now they will stay in the right place.
+<a>Close all superkaramba themes and then delete any session files in ~/.trinity/share/config/session/ that begin with superkaramba. Restart KDE and start your themes again. Now they will stay in the right place.
 
 <c>Troubleshooting
 <q>The backgrounds of my themes are black instead of transparent.

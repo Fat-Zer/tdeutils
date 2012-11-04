@@ -121,7 +121,7 @@ to the far less cluttered and simpler:
 
 That's it - just save it as <id>.remote.xml, where <id> is the ID of the remote
 control (*not* its name but the LIRC id!) and copy it to your KDE remotes data
-directory (~/.kde/share/apps/remotes).
+directory (~/.trinity/share/apps/remotes).
 
    You'll probably need to restart control center before the remote definition
 is recognised.

@@ -54,7 +54,7 @@ SuperKaramba Frequently Asked Questions
 <hr><h2>2. General</h2>
 <dl>
 <dt><b><a name="General0">2.1. How do I get rid of the KDE taskbar? Do I have to keep kicker running?</a></b></dt>
-<dd>Many themes depend on kicker and will not work well without it. If you don't want kicker to show on your desktop, you can set it to auto-hide. Another solution is to change the auto-hide setting in a ~/.kde file. For more information see <a href="http://wiki.kdenews.org/tiki-print.php?page=Secret+Config+Settings">http://wiki.kdenews.org/tiki-print.php?page=Secret+Config+Settings</a>.<br><br></dd>
+<dd>Many themes depend on kicker and will not work well without it. If you don't want kicker to show on your desktop, you can set it to auto-hide. Another solution is to change the auto-hide setting in a ~/.trinity file. For more information see <a href="http://wiki.kdenews.org/tiki-print.php?page=Secret+Config+Settings">http://wiki.kdenews.org/tiki-print.php?page=Secret+Config+Settings</a>.<br><br></dd>
 <dt><b><a name="General1">2.2. Can I run a systray theme while the kicker systray is running?</a></b></dt>
 <dd>It's better not to. If you run a theme with a SysTray on it while a regular kicker systray is running, the theme will "steal" all the icons from the first systray.  This is because in KDE and Gnome, the systray icons are really little windows and there is only one copy of each running. If you want to run a systray theme, you can remove the systray from kicker.<br><br></dd>
 <dt><b><a name="General2">2.3. How do I set up my themes to run automatically on startup?</a></b></dt>
@@ -65,7 +65,7 @@ To create a desktop config file, open KWrite and enter the following:<pre>
             Name={theme name}
             Type=Application
             X-TDE-StartupNotify=false
-</pre>Then save it as {theme}.desktop into /home/{user}/.kde/Autostart/.<br><br></dd>
+</pre>Then save it as {theme}.desktop into /home/{user}/.trinity/Autostart/.<br><br></dd>
 <dt><b><a name="General3">2.4. Why is the Edit Script option disabled when I right-click on a theme?</a></b></dt>
 <dd>Some karamba themes don't include a python script. This is normal and those themes will still work fine without one. However, if the theme does use a python script, superkaramba may have not been able to load the script. This is usually due to python errors. Run the theme from the command line to find out the specific error message.<br><br></dd>
 <dt><b><a name="General4">2.5. Why is the Configure Theme menu disabled when I right-click on a theme?</a></b></dt>
@@ -76,7 +76,7 @@ To create a desktop config file, open KWrite and enter the following:<pre>
 <dt><b><a name="Troubleshooting0">3.1. All of my themes are "always on top" of the other windows.</a></b></dt>
 <dd>This problem should be fixed in the most recent release.<br><br></dd>
 <dt><b><a name="Troubleshooting1">3.2. My themes start up in different locations when I start KDE.</a></b></dt>
-<dd>Close all superkaramba themes and then delete any session files in ~/.kde/share/config/session/ that begin with superkaramba. Restart KDE and start your themes again. Now they will stay in the right place.<br><br></dd>
+<dd>Close all superkaramba themes and then delete any session files in ~/.trinity/share/config/session/ that begin with superkaramba. Restart KDE and start your themes again. Now they will stay in the right place.<br><br></dd>
 <dt><b><a name="Troubleshooting2">3.3. The backgrounds of my themes are black instead of transparent.</a></b></dt>
 <dd>In KDE, transparency only works when the desktop background is a wallpaper image that is centered or scaled. If the background is a plain color or a tiled image then superkaramba themes will not be transparent. In Gnome, there is a known issue that themes will have a black background even when a wallpaper is set.  Unfortunately there is no current solution. Your theme should work fine otherwise.<br><br></dd>
 </dl>

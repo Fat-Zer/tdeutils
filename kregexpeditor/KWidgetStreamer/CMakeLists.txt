@@ -33,3 +33,11 @@ tde_add_library( kwidgetstreamer STATIC_PIC AUTOMOC
   SOURCES kwidgetstreamer.cpp
 )
 
+
+##### other data ################################
+
+install(
+  FILES
+    kwidgetstreamer.h
+  DESTINATION ${INCLUDE_INSTALL_DIR}
+)

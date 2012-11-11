@@ -37,3 +37,9 @@ install( FILES kwalletconfig.desktop
   DESTINATION ${XDG_APPS_INSTALL_DIR}
 )
 
+install(
+  FILES
+    kwallet_config.desktop
+    kwalletmanager_show.desktop
+  DESTINATION ${SERVICES_INSTALL_DIR}
+)

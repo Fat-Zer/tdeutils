@@ -86,7 +86,7 @@ tde_add_library( kregexpeditorcommon SHARED AUTOMOC
 
 ##### kregexpeditorgui (kpart) ##################
 
-tde_add_kpart( kregexpeditorgui AUTOMOC
+tde_add_kpart( libkregexpeditorgui AUTOMOC
   SOURCES kregexpeditorfactory.cpp
   DESTINATION ${PLUGIN_INSTALL_DIR}
   LINK kregexpeditorcommon-shared

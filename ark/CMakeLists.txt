@@ -45,7 +45,7 @@ tde_add_tdeinit_executable( ark AUTOMOC
 
 ##### arkpart (kpart) ###########################
 
-tde_add_kpart( arkpart AUTOMOC
+tde_add_kpart( libarkpart AUTOMOC
   SOURCES ark_part.cpp arkfactory.cpp zip.cpp
     tar.cpp filelistview.cpp arch.cpp lha.cpp
     compressedfile.cpp zoo.cpp rar.cpp ar.cpp

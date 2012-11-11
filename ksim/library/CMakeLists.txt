@@ -31,7 +31,7 @@ tde_add_library( ksimcore SHARED AUTOMOC
     label.cpp led.cpp progress.cpp
     pluginglobal.cpp pluginloader.cpp
     pluginmodule.cpp ksimconfig.cpp
-  VERSION 1.0
+  VERSION 1.0.0
   LINK tdeui-shared
   DESTINATION ${LIB_INSTALL_DIR}
 )

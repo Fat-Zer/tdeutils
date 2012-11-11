@@ -47,6 +47,7 @@ tde_add_library( khexeditcommon SHARED AUTOMOC
     kcharcoltextexport.cpp
   LINK tdecore-shared kcontroller-static
     khecodecs-static
+  VERSION 0.0.0
   DESTINATION ${LIB_INSTALL_DIR}
 )
 

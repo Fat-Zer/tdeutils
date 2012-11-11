@@ -26,7 +26,7 @@ link_directories(
 
 ##### khexedit2part (kpart) #####################
 
-tde_add_kpart( khexedit2part AUTOMOC
+tde_add_kpart( libkhexedit2part AUTOMOC
   SOURCES khepart.cpp khebrowserextension.cpp
     khepartfactory.cpp
   LINK khexeditcommon-shared kparts-shared

@@ -26,7 +26,7 @@ link_directories(
 
 ##### kbyteseditwidget (kpart) ##################
 
-tde_add_kpart( kbyteseditwidget AUTOMOC
+tde_add_kpart( libkbyteseditwidget AUTOMOC
   SOURCES kbyteseditwidget.cpp
   DESTINATION ${PLUGIN_INSTALL_DIR}
   LINK khexeditcommon-shared kparts-shared

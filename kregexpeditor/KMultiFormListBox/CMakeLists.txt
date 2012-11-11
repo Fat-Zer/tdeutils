@@ -38,3 +38,13 @@ tde_add_library( kmultiformlistbox STATIC_PIC AUTOMOC
     widgetwindow.cpp windowlistboxitem.cpp
 )
 
+
+##### other data ################################
+
+install(
+  FILES
+    kmultiformlistbox.h
+    kmultiformlistboxentry.h
+    kmultiformlistboxfactory.h
+  DESTINATION ${INCLUDE_INSTALL_DIR}
+)

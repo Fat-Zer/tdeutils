@@ -50,6 +50,7 @@ tde_add_library( kcmlaptop SHARED AUTOMOC
     daemon_state.cpp wake_laptop.cpp
     krichtextlabel.cpp
   LINK kio-shared
+  VERSION 0.0.0
   DESTINATION ${LIB_INSTALL_DIR}
 )
 

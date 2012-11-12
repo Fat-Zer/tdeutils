@@ -30,7 +30,14 @@ if test x$sysinfo_check = xyes; then
 fi
 
 dnl Check for dell laptop support
-AM_CONDITIONAL(supports_i8k, test -f /proc/i8k)
+AC_MSG_CHECKING([if dellI8k ksim module should be compiled])
+case "$host" in
+  *-*-linux*) ksim_delli8k_compile=yes; UNAME='Linux' ;;
+  *) ksim_delli8k_compile=no; UNAME='' ;;
+esac
+
+AC_MSG_RESULT($ksim_delli8k_compile)
+AM_CONDITIONAL(supports_i8k, test x$ksim_delli8k_compile = xyes)
 
 kde_safe_cppflags=$CPPFLAGS
 CPPFLAGS="$CPPFLAGS -include X11/Xlib.h -include X11/Xutil.h -include X11/Xproto.h"

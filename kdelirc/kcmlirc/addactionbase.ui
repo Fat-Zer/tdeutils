@@ -1383,19 +1383,19 @@
 <connections>
     <connection>
         <sender>theObjects</sender>
-        <signal>currentChanged(QListViewItem*)</signal>
+        <signal>currentChanged(TQListViewItem*)</signal>
         <receiver>AddActionBase</receiver>
         <slot>updateFunctions()</slot>
     </connection>
     <connection>
         <sender>theParameters</sender>
-        <signal>currentChanged(QListViewItem*)</signal>
+        <signal>currentChanged(TQListViewItem*)</signal>
         <receiver>AddActionBase</receiver>
         <slot>updateParameter()</slot>
     </connection>
     <connection>
         <sender>theFunctions</sender>
-        <signal>currentChanged(QListViewItem*)</signal>
+        <signal>currentChanged(TQListViewItem*)</signal>
         <receiver>AddActionBase</receiver>
         <slot>updateButtonStates()</slot>
     </connection>
@@ -1431,19 +1431,19 @@
     </connection>
     <connection>
         <sender>theProfiles</sender>
-        <signal>currentChanged(QListViewItem*)</signal>
+        <signal>currentChanged(TQListViewItem*)</signal>
         <receiver>AddActionBase</receiver>
         <slot>updateButtonStates()</slot>
     </connection>
     <connection>
         <sender>theModes</sender>
-        <signal>currentChanged(QListViewItem*)</signal>
+        <signal>currentChanged(TQListViewItem*)</signal>
         <receiver>AddActionBase</receiver>
         <slot>updateButtonStates()</slot>
     </connection>
     <connection>
         <sender>theModes</sender>
-        <signal>clicked(QListViewItem*)</signal>
+        <signal>clicked(TQListViewItem*)</signal>
         <receiver>AddActionBase</receiver>
         <slot>slotModeSelected()</slot>
     </connection>
@@ -1479,19 +1479,19 @@
     </connection>
     <connection>
         <sender>theProfileFunctions</sender>
-        <signal>currentChanged(QListViewItem*)</signal>
+        <signal>currentChanged(TQListViewItem*)</signal>
         <receiver>AddActionBase</receiver>
         <slot>updateParameters()</slot>
     </connection>
     <connection>
         <sender>theFunctions</sender>
-        <signal>currentChanged(QListViewItem*)</signal>
+        <signal>currentChanged(TQListViewItem*)</signal>
         <receiver>AddActionBase</receiver>
         <slot>updateParameters()</slot>
     </connection>
     <connection>
         <sender>theProfiles</sender>
-        <signal>currentChanged(QListViewItem*)</signal>
+        <signal>currentChanged(TQListViewItem*)</signal>
         <receiver>AddActionBase</receiver>
         <slot>updateProfileFunctions()</slot>
     </connection>
@@ -1533,43 +1533,43 @@
     </connection>
     <connection>
         <sender>theProfileFunctions</sender>
-        <signal>currentChanged(QListViewItem*)</signal>
+        <signal>currentChanged(TQListViewItem*)</signal>
         <receiver>AddActionBase</receiver>
         <slot>updateOptions()</slot>
     </connection>
     <connection>
         <sender>theFunctions</sender>
-        <signal>currentChanged(QListViewItem*)</signal>
+        <signal>currentChanged(TQListViewItem*)</signal>
         <receiver>AddActionBase</receiver>
         <slot>updateOptions()</slot>
     </connection>
     <connection>
         <sender>theProfiles</sender>
-        <signal>doubleClicked(QListViewItem*)</signal>
+        <signal>doubleClicked(TQListViewItem*)</signal>
         <receiver>AddActionBase</receiver>
         <slot>next()</slot>
     </connection>
     <connection>
         <sender>theButtons</sender>
-        <signal>doubleClicked(QListViewItem*)</signal>
+        <signal>doubleClicked(TQListViewItem*)</signal>
         <receiver>AddActionBase</receiver>
         <slot>next()</slot>
     </connection>
     <connection>
         <sender>theFunctions</sender>
-        <signal>doubleClicked(QListViewItem*)</signal>
+        <signal>doubleClicked(TQListViewItem*)</signal>
         <receiver>AddActionBase</receiver>
         <slot>next()</slot>
     </connection>
     <connection>
         <sender>theProfileFunctions</sender>
-        <signal>doubleClicked(QListViewItem*)</signal>
+        <signal>doubleClicked(TQListViewItem*)</signal>
         <receiver>AddActionBase</receiver>
         <slot>next()</slot>
     </connection>
     <connection>
         <sender>theModes</sender>
-        <signal>doubleClicked(QListViewItem*)</signal>
+        <signal>doubleClicked(TQListViewItem*)</signal>
         <receiver>AddActionBase</receiver>
         <slot>accept()</slot>
     </connection>

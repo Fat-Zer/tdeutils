@@ -32,7 +32,7 @@
 
 // kcalc
 
-@SIZEOF_UNSIGNED_LONG_CODE@
+#cmakedefine SIZEOF_UNSIGNED_LONG @SIZEOF_UNSIGNED_LONG@
 
 #if !defined( HAVE_STDLIB_H )
 #cmakedefine HAVE_STDLIB_H

@@ -28,7 +28,7 @@ link_directories(
 
 tde_add_kpart( kmilo_powerbook AUTOMOC
   SOURCES pb_monitor.cpp
-  LINK kio-shared kmilo-shared
+  LINK kio-shared kmilo-shared ${PBB_LIBRARY}
   DESTINATION ${PLUGIN_INSTALL_DIR}
 )
 

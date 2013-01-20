@@ -61,7 +61,7 @@ int main(int argc, char *argv[])
                 return 0;
 
         //KgpgAppletApp *app;
-        KApplication *app;
+        TDEApplication *app;
         app=new KgpgAppletApp;
         return app->exec();
 

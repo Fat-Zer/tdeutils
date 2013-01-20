@@ -120,7 +120,7 @@ void IRKick::doQuit()
 		case KMessageBox::Yes: theConfig.writeEntry("AutoStart", true); break;
 		case KMessageBox::Cancel: return;
 	}
-	KApplication::kApplication()->quit();
+	TDEApplication::kApplication()->quit();
 }
 
 void IRKick::resetModes()
@@ -152,7 +152,7 @@ void IRKick::slotReloadConfiguration()
 
 void IRKick::slotConfigure()
 {
-	KApplication::startServiceByDesktopName("kcmlirc");
+	TDEApplication::startServiceByDesktopName("kcmlirc");
 }
 
 void IRKick::updateModeIcons()
@@ -180,7 +180,7 @@ void IRKick::updateModeIcons()
 
 bool IRKick::getPrograms(const IRAction &action, TQStringList &programs)
 {
-	DCOPClient *theDC = KApplication::dcopClient();
+	DCOPClient *theDC = TDEApplication::dcopClient();
 	programs.clear();
 
 	if(action.unique())
@@ -234,7 +234,7 @@ bool IRKick::getPrograms(const IRAction &action, TQStringList &programs)
 
 void IRKick::executeAction(const IRAction &action)
 {
-	DCOPClient *theDC = KApplication::dcopClient();
+	DCOPClient *theDC = TDEApplication::dcopClient();
 	TQStringList programs;
 
 	if(!getPrograms(action, programs)) return;
@@ -245,7 +245,7 @@ void IRKick::executeAction(const IRAction &action)
 		if(!sname.isNull())
 		{
 			KPassivePopup::message("IRKick", i18n("Starting <b>%1</b>...").arg(action.application()), SmallIcon("irkick"), theTrayIcon);
-			KApplication::startServiceByDesktopName(sname);
+			TDEApplication::startServiceByDesktopName(sname);
 		}
 	}
 	if(action.isJustStart()) return;
@@ -286,7 +286,7 @@ void IRKick::gotMessage(const TQString &theRemote, const TQString &theButton, in
 		// send notifier by DCOP to npApp/npModule/npMethod(theRemote, theButton);
 		TQByteArray data; TQDataStream arg(data, IO_WriteOnly);
 		arg << theRemote << theButton;
-		KApplication::dcopClient()->send(theApp.utf8(), npModule.utf8(), npMethod.utf8(), data);
+		TDEApplication::dcopClient()->send(theApp.utf8(), npModule.utf8(), npMethod.utf8(), data);
 	}
 	else
 	{

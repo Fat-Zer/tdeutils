@@ -70,7 +70,7 @@ int main( int argc, char **argv )
   TDECmdLineArgs::init( argc, argv, &aboutData );
   TDECmdLineArgs::addCmdLineOptions( option );
 
-  KApplication app;
+  TDEApplication app;
 
   if( app.isRestored() != 0 )
   {

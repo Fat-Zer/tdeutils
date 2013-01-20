@@ -45,7 +45,7 @@ public:
 int main( int argc, char* argv[] )
 {
   TDECmdLineArgs::init(argc, argv, "RegExp Example","","");
-  KApplication myapp( argc, argv );
+  TDEApplication myapp( argc, argv );
 
   tqApp->installEventFilter( new ShootABug() );
 

@@ -1270,7 +1270,7 @@ extern "C" KDE_EXPORT int kdemain (int argc, char **argv)
 	TDECmdLineArgs::init( argc, argv, &aboutData );
 	TDECmdLineArgs::addCmdLineOptions( options );
 
-	KApplication a;
+	TDEApplication a;
 	//CT KIO::Job::initStatic();
 	if ( a.isRestored() )
 	{

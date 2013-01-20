@@ -143,7 +143,7 @@ void AddAction::updateButtonStates()
 const TQStringList AddAction::getFunctions(const TQString app, const TQString obj)
 {
 	TQStringList ret;
-	DCOPClient *theClient = KApplication::kApplication()->dcopClient();
+	DCOPClient *theClient = TDEApplication::kApplication()->dcopClient();
 	QCStringList theApps = theClient->remoteFunctions(app.utf8(), obj.utf8());
 	for(QCStringList::iterator i = theApps.begin(); i != theApps.end(); ++i)
 		if(	*i != "QCStringList interfaces()" &&
@@ -335,7 +335,7 @@ void AddAction::updateObjects()
 	uniqueProgramMap.clear();
 	nameProgramMap.clear();
 
-	DCOPClient *theClient = KApplication::kApplication()->dcopClient();
+	DCOPClient *theClient = TDEApplication::kApplication()->dcopClient();
 	QCStringList theApps = theClient->registeredApplications();
 	for(QCStringList::iterator i = theApps.begin(); i != theApps.end(); ++i)
 	{

@@ -70,7 +70,7 @@ int main(int argc, char **argv)
   aboutData.addAuthor("Michael Kropfberger",0, "michael.kropfberger@gmx.net");
   TDECmdLineArgs::init( argc, argv, &aboutData );
 
-  KApplication app;
+  TDEApplication app;
 
   if( app.isRestored() ) //SessionManagement
   {

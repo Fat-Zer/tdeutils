@@ -139,7 +139,7 @@ void CDragManager::timerEvent( TQTimerEvent *e )
     if( mPending == true )
     {
       mPending = false;
-      emit startDrag( ( kapp->keyboardModifiers() & KApplication::ShiftModifier ) );
+      emit startDrag( ( kapp->keyboardModifiers() & TDEApplication::ShiftModifier ) );
     }
   }
 }

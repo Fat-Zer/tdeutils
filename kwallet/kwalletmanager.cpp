@@ -52,7 +52,7 @@ KWalletManager::KWalletManager(TQWidget *parent, const char *name, WFlags f)
 	_kwalletdLaunch = false;
 	TQAccel *accel = new TQAccel(this, "kwalletmanager");
 
-	KApplication::dcopClient()->setQtBridgeEnabled(false);
+	TDEApplication::dcopClient()->setQtBridgeEnabled(false);
 	_shuttingDown = false;
 	KConfig cfg("kwalletrc"); // not sure why this setting isn't in kwalletmanagerrc...
 	KConfigGroup walletConfigGroup(&cfg, "Wallet");
@@ -399,7 +399,7 @@ void KWalletManager::shuttingDown() {
 
 
 void KWalletManager::setupWallet() {
-	KApplication::startServiceByDesktopName("kwallet_config");
+	TDEApplication::startServiceByDesktopName("kwallet_config");
 }
 
 

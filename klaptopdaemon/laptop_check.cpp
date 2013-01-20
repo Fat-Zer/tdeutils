@@ -44,7 +44,7 @@ main(int argc, char **argv)
     aboutData.addAuthor("Paul Campbell",0, "paul@taniwha.com");
     TDECmdLineArgs::init( argc, argv, &aboutData );
 
-    KApplication a;
+    TDEApplication a;
     daemon_state s;
     s.load();
     if (s.need_to_run()) 

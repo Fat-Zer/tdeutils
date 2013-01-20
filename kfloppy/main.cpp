@@ -66,7 +66,7 @@ int main( int argc, char *argv[] )
   }
   args->clear();
 
-  KApplication a;
+  TDEApplication a;
 
   FloppyData* floppy  = new FloppyData();
   a.setMainWidget(floppy);

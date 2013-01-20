@@ -56,10 +56,10 @@ KCMLirc::KCMLirc(TQWidget *parent, const char *name, TQStringList /*args*/) : DC
 	setButtons(KCModule::Help);
 	setQuickHelp(i18n("<h1>Remote Controls</h1><p>This module allows you to configure bindings between your remote controls and TDE applications. Simply select your remote control and click Add under the Actions/Buttons list. If you want TDE to attempt to automatically assign buttons to a supported application's actions, try clicking the Auto-Populate button.</p><p>To view the recognised applications and remote controls, simply select the <em>Loaded Extensions</em> tab.</p>"));
 	bool ok;
-	KApplication::kApplication()->dcopClient()->remoteInterfaces("irkick", "IRKick", &ok);
+	TDEApplication::kApplication()->dcopClient()->remoteInterfaces("irkick", "IRKick", &ok);
 	if(!ok)
 		if(KMessageBox::questionYesNo(this, i18n("The Infrared Remote Control software is not currently running. This configuration module will not work properly without it. Would you like to start it now?"), i18n("Software Not Running"), i18n("Start"), i18n("Do Not Start")) == KMessageBox::Yes)
-		{	kdDebug() << "S" << KApplication::startServiceByDesktopName("irkick") << endl;
+		{	kdDebug() << "S" << TDEApplication::startServiceByDesktopName("irkick") << endl;
 			KSimpleConfig theConfig("irkickrc");
 			theConfig.setGroup("General");
 			if(theConfig.readBoolEntry("AutoStart", true) == false)
@@ -67,7 +67,7 @@ KCMLirc::KCMLirc(TQWidget *parent, const char *name, TQStringList /*args*/) : DC
 					theConfig.writeEntry("AutoStart", true);
 		}
 
-	KApplication::kApplication()->dcopClient()->remoteInterfaces("irkick", "IRKick", &ok);
+	TDEApplication::kApplication()->dcopClient()->remoteInterfaces("irkick", "IRKick", &ok);
 	kdDebug() << "OK" << ok << endl;
 
 

@@ -315,7 +315,7 @@ void EditAction::updateDCOPApplications()
 	TQStringList names;
 
 	theDCOPApplications->clear();
-	DCOPClient *theClient = KApplication::kApplication()->dcopClient();
+	DCOPClient *theClient = TDEApplication::kApplication()->dcopClient();
 	QCStringList theApps = theClient->registeredApplications();
 	for(QCStringList::iterator i = theApps.begin(); i != theApps.end(); ++i)
 	{
@@ -337,7 +337,7 @@ void EditAction::updateDCOPApplications()
 void EditAction::updateDCOPObjects()
 {
 	theDCOPObjects->clear();
-	DCOPClient *theClient = KApplication::kApplication()->dcopClient();
+	DCOPClient *theClient = TDEApplication::kApplication()->dcopClient();
 	if(theDCOPApplications->currentText().isNull() || theDCOPApplications->currentText().isEmpty()) return;
 	QCStringList theObjects = theClient->remoteObjects(nameProgramMap[theDCOPApplications->currentText()].utf8());
 	if(!theObjects.size() && theDCOPApplications->currentText() == (*theAction).program()) theDCOPObjects->insertItem((*theAction).object());

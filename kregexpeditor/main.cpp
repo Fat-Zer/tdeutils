@@ -40,7 +40,7 @@ int main( int argc, char* argv[] )
 			  KAboutData::License_GPL,
                           "(c) 2002-2003 Jesper K. Pedersen");
     TDECmdLineArgs::init(argc, argv, &aboutData);
-    KApplication myapp;
+    TDEApplication myapp;
 #endif
 
     TQDialog* top = new TQDialog( 0 );

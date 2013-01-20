@@ -36,7 +36,7 @@ class dcopIface_stub;
 class KHelpMenu;
 class KAboutData;
 
-class KarambaApplication : public KApplication
+class KarambaApplication : public TDEApplication
 {
     Q_OBJECT
   
@@ -66,7 +66,7 @@ class KarambaApplication : public KApplication
     bool themeExists(TQString pretty_name);
     void initDcopStub(TQCString app = "");
     void setUpSysTray(KAboutData* about);
-    void checkPreviousSession(KApplication &app, TQStringList &lst);
+    void checkPreviousSession(TDEApplication &app, TQStringList &lst);
     void checkCommandLine(TDECmdLineArgs *args, TQStringList &lst);
     bool startThemes(TQStringList &lst);
     KarambaIface* dcopIface() { return iface; };

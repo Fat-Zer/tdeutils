@@ -312,7 +312,7 @@ class CHexViewWidget : public TQFrame
 
 inline bool CHexViewWidget::shiftButtonState( void )
 {
-  return kapp->keyboardModifiers() & KApplication::ShiftModifier;
+  return kapp->keyboardModifiers() & TDEApplication::ShiftModifier;
 }
 
 

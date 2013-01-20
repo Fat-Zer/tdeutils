@@ -331,7 +331,7 @@ int main(int argc, char **argv)
                     "Stanislav.Karchebny@kdemail.net" );
    TDECmdLineArgs::init(argc, argv, &about);
    TDECmdLineArgs::addCmdLineOptions( options );
-   KApplication app;
+   TDEApplication app;
    KwikDisk *mainWin = 0;
 
    mainWin = new KwikDisk;

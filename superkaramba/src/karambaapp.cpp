@@ -235,7 +235,7 @@ void KarambaApplication::buildToolTip()
   setToolTip(toolTip);
 }
 
-void KarambaApplication::checkPreviousSession(KApplication &app,
+void KarambaApplication::checkPreviousSession(TDEApplication &app,
                                               TQStringList &lst)
 {
   /******

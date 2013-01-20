@@ -36,7 +36,7 @@ int main( int argc, char **argv )
     aboutData.addAuthor("Stefan Schimanski",0, "schimmi@kde.org");
     TDECmdLineArgs::init( argc, argv, &aboutData );
 
-    KApplication app;
+    TDEApplication app;
 
     KTimerPref *timer = new KTimerPref;
     app.setMainWidget( timer );

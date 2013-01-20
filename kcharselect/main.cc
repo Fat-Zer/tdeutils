@@ -29,7 +29,7 @@ int main(int argc, char **argv)
   aboutData.addCredit("Benjamin C. Meyer",I18N_NOOP("XMLUI conversion"),"ben+kcharselect@meyerhome.net");
 	TDECmdLineArgs::init( argc, argv, &aboutData );
 
-  KApplication app;
+  TDEApplication app;
 
   KConfig *config = kapp->config();
 

@@ -49,7 +49,7 @@ main(int argc, char ** argv)
 {
  TDECmdLineArgs::init(argc, argv, "test", description, version);
  
- KApplication app;
+ TDEApplication app;
  KConfig * cfg = kapp->config();
 
  TQDict<char> dict;

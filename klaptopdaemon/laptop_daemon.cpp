@@ -820,14 +820,14 @@ void laptop_daemon::invokeHibernate()
 
 void laptop_daemon::invokeLogout()
 {
-	bool rc = kapp->requestShutDown(KApplication::ShutdownConfirmNo, KApplication::ShutdownTypeNone, KApplication::ShutdownModeForceNow);
+	bool rc = kapp->requestShutDown(TDEApplication::ShutdownConfirmNo, TDEApplication::ShutdownTypeNone, TDEApplication::ShutdownModeForceNow);
 	if (!rc)
 		KMessageBox::sorry(0, i18n("Logout failed."));
 }
 
 void laptop_daemon::invokeShutdown()
 {
-	bool rc = kapp->requestShutDown(KApplication::ShutdownConfirmNo, KApplication::ShutdownTypeHalt, KApplication::ShutdownModeForceNow);
+	bool rc = kapp->requestShutDown(TDEApplication::ShutdownConfirmNo, TDEApplication::ShutdownTypeHalt, TDEApplication::ShutdownModeForceNow);
 	if (!rc)
 		KMessageBox::sorry(0, i18n("Shutdown failed."));
 }

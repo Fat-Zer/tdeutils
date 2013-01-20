@@ -887,7 +887,7 @@ void KgpgAppletApp::wizardOver(TQString defaultKeyId)
 int KgpgAppletApp::newInstance()
 {
         kdDebug(2100)<<"New instance"<<endl;
-        args = KCmdLineArgs::parsedArgs();
+        args = TDECmdLineArgs::parsedArgs();
         if (running) {
                 kdDebug(2100)<<"Already running"<<endl;
                 kgpg_applet->show();

@@ -105,9 +105,9 @@ extern "C" KDE_EXPORT int kdemain( int argc, char *argv[]  )
 	                     I18N_NOOP( "Ideas, help with the icons" ),
 	                     "smitty@absamail.co.za" );
 
-	KCmdLineArgs::init( argc, argv, &aboutData );
-	KCmdLineArgs::addCmdLineOptions( option );
-	KCmdLineArgs::addTempFileOption();
+	TDECmdLineArgs::init( argc, argv, &aboutData );
+	TDECmdLineArgs::addCmdLineOptions( option );
+	TDECmdLineArgs::addTempFileOption();
 
 	if ( !ArkApplication::start() )
 	{

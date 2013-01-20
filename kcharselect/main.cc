@@ -27,7 +27,7 @@ int main(int argc, char **argv)
   aboutData.addCredit( "Ryan Cumming", I18N_NOOP( "GUI cleanup and fixes" ),
         "bodnar42@phalynx.dhs.org" );
   aboutData.addCredit("Benjamin C. Meyer",I18N_NOOP("XMLUI conversion"),"ben+kcharselect@meyerhome.net");
-	KCmdLineArgs::init( argc, argv, &aboutData );
+	TDECmdLineArgs::init( argc, argv, &aboutData );
 
   KApplication app;
 

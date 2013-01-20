@@ -30,7 +30,7 @@
 
 class karamba;
 class KarambaIface;
-class KCmdLineArgs;
+class TDECmdLineArgs;
 class ThemesDlg;
 class dcopIface_stub;
 class KHelpMenu;
@@ -67,7 +67,7 @@ class KarambaApplication : public KApplication
     void initDcopStub(TQCString app = "");
     void setUpSysTray(KAboutData* about);
     void checkPreviousSession(KApplication &app, TQStringList &lst);
-    void checkCommandLine(KCmdLineArgs *args, TQStringList &lst);
+    void checkCommandLine(TDECmdLineArgs *args, TQStringList &lst);
     bool startThemes(TQStringList &lst);
     KarambaIface* dcopIface() { return iface; };
     dcopIface_stub* dcopStub() { return dcopIfaceStub; };

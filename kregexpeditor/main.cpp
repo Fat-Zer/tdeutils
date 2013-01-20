@@ -39,7 +39,7 @@ int main( int argc, char* argv[] )
                           "1.0", I18N_NOOP("Editor for Regular Expressions"),
 			  KAboutData::License_GPL,
                           "(c) 2002-2003 Jesper K. Pedersen");
-    KCmdLineArgs::init(argc, argv, &aboutData);
+    TDECmdLineArgs::init(argc, argv, &aboutData);
     KApplication myapp;
 #endif
 

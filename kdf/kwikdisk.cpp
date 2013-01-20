@@ -329,8 +329,8 @@ int main(int argc, char **argv)
    about.addAuthor( "Espen Sand", I18N_NOOP("TDE 2 changes"), "" );
    about.addAuthor( "Stanislav Karchebny", I18N_NOOP("TDE 3 changes"),
                     "Stanislav.Karchebny@kdemail.net" );
-   KCmdLineArgs::init(argc, argv, &about);
-   KCmdLineArgs::addCmdLineOptions( options );
+   TDECmdLineArgs::init(argc, argv, &about);
+   TDECmdLineArgs::addCmdLineOptions( options );
    KApplication app;
    KwikDisk *mainWin = 0;
 

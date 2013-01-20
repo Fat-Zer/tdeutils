@@ -141,7 +141,7 @@ private slots:
 	void checkMenu();
 };
 
-class KCmdLineArgs;
+class TDECmdLineArgs;
 
 class KgpgAppletApp : public KUniqueApplication
 {
@@ -157,7 +157,7 @@ public:
 	KShortcut goHome;
 
 protected:
-        KCmdLineArgs *args;
+        TDECmdLineArgs *args;
 private:
         kgpgapplet *kgpg_applet;
         class listKeys *s_keyManager;

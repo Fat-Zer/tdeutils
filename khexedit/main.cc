@@ -67,8 +67,8 @@ int main( int argc, char **argv )
     "\n"
     "Edward Livingston-Blade, sbcs@bigfoot.com, has given me very good\n"
     "reports which removed some nasty bugs.\n"));
-  KCmdLineArgs::init( argc, argv, &aboutData );
-  KCmdLineArgs::addCmdLineOptions( option );
+  TDECmdLineArgs::init( argc, argv, &aboutData );
+  TDECmdLineArgs::addCmdLineOptions( option );
 
   KApplication app;
 
@@ -87,7 +87,7 @@ int main( int argc, char **argv )
 
     hexEdit->show();
 
-    KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
+    TDECmdLineArgs *args = TDECmdLineArgs::parsedArgs();
 
     if (args->isSet("offset"))
     {

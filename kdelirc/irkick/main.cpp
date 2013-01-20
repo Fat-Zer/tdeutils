@@ -26,7 +26,7 @@ extern "C" KDE_EXPORT int kdemain(int argc, char *argv[])
 	aboutData->addCredit("Zsolt Rizsanyi", I18N_NOOP("Random patches"), "rizsanyi@myrealbox.com");
 	aboutData->addCredit("Antonio Larrosa Jiménez", I18N_NOOP("Ideas"), "larrosa@kde.org");
 
-	KCmdLineArgs::init( argc, argv, aboutData );
+	TDECmdLineArgs::init( argc, argv, aboutData );
 	KUniqueApplication::addCmdLineOptions();
 	KUniqueApplication app;
 	KGlobal::locale()->insertCatalogue( "kdelirc" );

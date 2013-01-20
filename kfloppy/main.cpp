@@ -56,10 +56,10 @@ int main( int argc, char *argv[] )
   aboutData.addCredit("Adriaan de Groot", I18N_NOOP("Add BSD support"), "groot@kde.org");
   aboutData.addCredit("Nicolas Goutte", I18N_NOOP("Make KFloppy work again for KDE 3.4"), "goutte@kde.org");
   
-  KCmdLineArgs::init( argc, argv, &aboutData );
-  KCmdLineArgs::addCmdLineOptions( options );
+  TDECmdLineArgs::init( argc, argv, &aboutData );
+  TDECmdLineArgs::addCmdLineOptions( options );
 
-  KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
+  TDECmdLineArgs *args = TDECmdLineArgs::parsedArgs();
   TQString device;
   if (args->count()) {
 	device = args->arg(0);

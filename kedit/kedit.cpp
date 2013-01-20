@@ -1267,8 +1267,8 @@ extern "C" KDE_EXPORT int kdemain (int argc, char **argv)
 		KEDITVERSION, description, KAboutData::License_GPL,
 		"(c) 1997-2000, Bernd Johannes Wuebben");
 	aboutData.addAuthor("Bernd Johannes Wuebben",0, "wuebben@kde.org");
-	KCmdLineArgs::init( argc, argv, &aboutData );
-	KCmdLineArgs::addCmdLineOptions( options );
+	TDECmdLineArgs::init( argc, argv, &aboutData );
+	TDECmdLineArgs::addCmdLineOptions( options );
 
 	KApplication a;
 	//CT KIO::Job::initStatic();
@@ -1286,7 +1286,7 @@ extern "C" KDE_EXPORT int kdemain (int argc, char **argv)
 	else
 	{
 		have_top_window = false;
-		KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
+		TDECmdLineArgs *args = TDECmdLineArgs::parsedArgs();
 
 		const TQString encoding = args->getOption("encoding");
 		const bool doEncoding = args->isSet("encoding") &&

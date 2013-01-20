@@ -55,11 +55,11 @@ int main(int argc, char *argv[])
     aboutData.addAuthor("Geert Jansen", I18N_NOOP("Maintainer"),
 	    "jansen@kde.org", "http://www.stack.nl/~geertj/");
 
-    KCmdLineArgs::init(argc, argv, &aboutData);
-    KCmdLineArgs::addCmdLineOptions(options);
+    TDECmdLineArgs::init(argc, argv, &aboutData);
+    TDECmdLineArgs::addCmdLineOptions(options);
 
     KApplication app;
-    KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
+    TDECmdLineArgs *args = TDECmdLineArgs::parsedArgs();
 
     // Stop daemon and exit?
     if (args->isSet("q"))
@@ -80,7 +80,7 @@ int main(int argc, char *argv[])
     }
 
     if (args->count() < 2)
-	KCmdLineArgs::usage(i18n("No command or host specified."));
+	TDECmdLineArgs::usage(i18n("No command or host specified."));
 
     // Check if ssh is available
     if (KStandardDirs::findExe(TQString::fromLatin1("ssh")).isEmpty())

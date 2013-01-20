@@ -120,7 +120,7 @@ ArkApplication::newInstance()
     // another window on startup.
     if (restoringSession()) return 0;
 
-    KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
+    TDECmdLineArgs *args = TDECmdLineArgs::parsedArgs();
 
     if ( args->isSet( "extract-to" ) )
     {
@@ -133,7 +133,7 @@ ArkApplication::newInstance()
         }
         else
         {
-            KCmdLineArgs::usage( i18n( "Wrong number of arguments specified" ) );
+            TDECmdLineArgs::usage( i18n( "Wrong number of arguments specified" ) );
             return 0;
         }
     }
@@ -142,7 +142,7 @@ ArkApplication::newInstance()
     {
         if ( args->count() < 2 )
         {
-            KCmdLineArgs::usage( i18n( "You need to specify at least one file to be added to the archive." ) );
+            TDECmdLineArgs::usage( i18n( "You need to specify at least one file to be added to the archive." ) );
             return 0;
         }
         else
@@ -185,7 +185,7 @@ ArkApplication::newInstance()
     {
         if ( args->count() < 1 )
         {
-            KCmdLineArgs::usage( i18n( "You need to specify at least one file to be added to the archive." ) );
+            TDECmdLineArgs::usage( i18n( "You need to specify at least one file to be added to the archive." ) );
             return 0;
         }
         else
@@ -205,7 +205,7 @@ ArkApplication::newInstance()
     int i = 0;
     KURL url;
     bool doAutoExtract = args->isSet("extract");
-    bool tempFile = KCmdLineArgs::isTempFileSet();
+    bool tempFile = TDECmdLineArgs::isTempFileSet();
     do
     {
         if (args->count() > 0)

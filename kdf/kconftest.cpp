@@ -47,7 +47,7 @@ static const char version[] = "v0.0.1";
 
 main(int argc, char ** argv)
 {
- KCmdLineArgs::init(argc, argv, "test", description, version);
+ TDECmdLineArgs::init(argc, argv, "test", description, version);
  
  KApplication app;
  KConfig * cfg = kapp->config();

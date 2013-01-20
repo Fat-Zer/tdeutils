@@ -57,8 +57,8 @@ int main(int argc, char **argv) {
 	about.addAuthor("George Staikos", I18N_NOOP("Primary author and maintainer"), "staikos@kde.org");
 	about.addAuthor("Isaac Clerencia", I18N_NOOP("Developer"), "isaac@warp.es");
 
-	KCmdLineArgs::init(argc, argv, &about);
-	KCmdLineArgs::addCmdLineOptions(options);
+	TDECmdLineArgs::init(argc, argv, &about);
+	TDECmdLineArgs::addCmdLineOptions(options);
 
 	if (!KUniqueApplication::start()) {
 		return 0;
@@ -73,7 +73,7 @@ int main(int argc, char **argv) {
 
 	KGlobal::dirs()->addResourceType("kwallet", "share/apps/kwallet");
 
-	KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
+	TDECmdLineArgs *args = TDECmdLineArgs::parsedArgs();
 
 	if (args->isSet("show")) {
 		wm.show();

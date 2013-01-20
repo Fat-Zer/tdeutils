@@ -68,7 +68,7 @@ int main(int argc, char **argv)
     version, description, KAboutData::License_GPL,
     "(c) 1998-2001, Michael Kropfberger");
   aboutData.addAuthor("Michael Kropfberger",0, "michael.kropfberger@gmx.net");
-  KCmdLineArgs::init( argc, argv, &aboutData );
+  TDECmdLineArgs::init( argc, argv, &aboutData );
 
   KApplication app;
 

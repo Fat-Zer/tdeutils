@@ -252,7 +252,7 @@ void KarambaApplication::checkPreviousSession(KApplication &app,
   }
 }
 
-void KarambaApplication::checkCommandLine(KCmdLineArgs *args, TQStringList &lst)
+void KarambaApplication::checkCommandLine(TDECmdLineArgs *args, TQStringList &lst)
 {
   /******
     Not a saved session - check for themes given on command line

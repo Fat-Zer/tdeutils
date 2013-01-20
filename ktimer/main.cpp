@@ -34,7 +34,7 @@ int main( int argc, char **argv )
                           version, description, KAboutData::License_GPL,
                           "(c) 2001, Stefan Schimanski");
     aboutData.addAuthor("Stefan Schimanski",0, "schimmi@kde.org");
-    KCmdLineArgs::init( argc, argv, &aboutData );
+    TDECmdLineArgs::init( argc, argv, &aboutData );
 
     KApplication app;
 

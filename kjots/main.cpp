@@ -49,7 +49,7 @@ int main( int argc, char **argv )
   aboutData.addAuthor("Aaron J. Seigo", 0, "aseigo@kde.org");
   aboutData.addAuthor("Stanislav Kljuhhin", 0, "crz@starman.ee");
   aboutData.addAuthor("Christoph Neerfeld", I18N_NOOP("Original author"), "chris@kde.org");
-  KCmdLineArgs::init(argc, argv, &aboutData);
+  TDECmdLineArgs::init(argc, argv, &aboutData);
   KUniqueApplication::addCmdLineOptions();
 
   if (!KUniqueApplication::start())

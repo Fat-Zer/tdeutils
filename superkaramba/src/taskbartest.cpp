@@ -53,13 +53,13 @@ int main(int argc, char **argv)
     KAboutData about("karamba", I18N_NOOP("karamba"), version, description,
                      KAboutData::License_GPL, "(C) 2003 Hans Karlsson", 0, 0, "karlsson.h@home.se");
     about.addAuthor( "Hans Karlsson", 0, "karlsson.h@home.se" );
-    KCmdLineArgs::init(argc, argv, &about);
-    KCmdLineArgs::addCmdLineOptions( options );
+    TDECmdLineArgs::init(argc, argv, &about);
+    TDECmdLineArgs::addCmdLineOptions( options );
 
     KApplication app;
 //     karamba *mainWin = 0;
 
-    KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
+    TDECmdLineArgs *args = TDECmdLineArgs::parsedArgs();
 
 //     //KSGRD::SensorManager *f32 = new KSGRD::SensorManager();
 //     //f32->engage("localhost");

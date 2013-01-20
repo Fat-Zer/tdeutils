@@ -42,7 +42,7 @@ main(int argc, char **argv)
 		            version, description, KAboutData::License_GPL,
 			            "(c) 2003, Paul Campbell");
     aboutData.addAuthor("Paul Campbell",0, "paul@taniwha.com");
-    KCmdLineArgs::init( argc, argv, &aboutData );
+    TDECmdLineArgs::init( argc, argv, &aboutData );
 
     KApplication a;
     daemon_state s;

@@ -99,11 +99,11 @@ int main(int argc, char **argv)
     about.addAuthor("Petri Damstén", 0, "petri.damsten@iki.fi");
     about.addAuthor("Alexander Wiedenbruch", 0, "mail@wiedenbruch.de");
     about.addAuthor("Luke Kenneth Casson Leighton", 0, "lkcl@lkcl.net");
-    KCmdLineArgs::init(argc, argv, &about);
-    KCmdLineArgs::addCmdLineOptions(options);
+    TDECmdLineArgs::init(argc, argv, &about);
+    TDECmdLineArgs::addCmdLineOptions(options);
     KarambaSessionManaged ksm;
     //karamba *mainWin = 0;
-    KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
+    TDECmdLineArgs *args = TDECmdLineArgs::parsedArgs();
     TQStringList lst;
     int ret = 0;
 

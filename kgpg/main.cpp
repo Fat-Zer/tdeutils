@@ -50,8 +50,8 @@ int main(int argc, char *argv[])
         KAboutData about("kgpg", I18N_NOOP("KGpg"), version, description,
                          KAboutData::License_GPL, "(C) 2003 Jean-Baptiste Mardelle");
         about.addAuthor( "Jean-Baptiste Mardelle", 0, "bj@altern.org" );
-        KCmdLineArgs::init(argc, argv, &about);
-        KCmdLineArgs::addCmdLineOptions(options);
+        TDECmdLineArgs::init(argc, argv, &about);
+        TDECmdLineArgs::addCmdLineOptions(options);
         KUniqueApplication::addCmdLineOptions();
 
 

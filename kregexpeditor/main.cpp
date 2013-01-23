@@ -35,9 +35,9 @@ int main( int argc, char* argv[] )
 #ifdef TQT_ONLY
     TQApplication myapp( argc, argv );
 #else
-    KAboutData aboutData( "kregexpeditor", I18N_NOOP("RegExp Editor"),
+    TDEAboutData aboutData( "kregexpeditor", I18N_NOOP("RegExp Editor"),
                           "1.0", I18N_NOOP("Editor for Regular Expressions"),
-			  KAboutData::License_GPL,
+			  TDEAboutData::License_GPL,
                           "(c) 2002-2003 Jesper K. Pedersen");
     TDECmdLineArgs::init(argc, argv, &aboutData);
     TDEApplication myapp;

@@ -46,8 +46,8 @@ static uint parseDecimalOrHexadecimal( char *buf );
 
 int main( int argc, char **argv )
 {
-  KAboutData aboutData("khexedit", I18N_NOOP("KHexEdit"),
-    version, description, KAboutData::License_GPL_V2,
+  TDEAboutData aboutData("khexedit", I18N_NOOP("KHexEdit"),
+    version, description, TDEAboutData::License_GPL_V2,
     "(c) 1999-2000, Espen Sand");
   aboutData.addAuthor("Espen Sand",0, "espensa@online.no",
 		      "http://home.online.no/~espensa/khexedit/" );

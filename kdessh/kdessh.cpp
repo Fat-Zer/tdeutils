@@ -48,9 +48,9 @@ static KCmdLineOptions options[] =
 
 int main(int argc, char *argv[])
 {
-    KAboutData aboutData("kdessh", I18N_NOOP("TDE ssh"),
+    TDEAboutData aboutData("kdessh", I18N_NOOP("TDE ssh"),
 	    VERSION, I18N_NOOP("Runs a program on a remote host"),
-	    KAboutData::License_Artistic,
+	    TDEAboutData::License_Artistic,
 	    "Copyright (c) 2000 Geert Jansen");
     aboutData.addAuthor("Geert Jansen", I18N_NOOP("Maintainer"),
 	    "jansen@kde.org", "http://www.stack.nl/~geertj/");

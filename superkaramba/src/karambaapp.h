@@ -34,7 +34,7 @@ class TDECmdLineArgs;
 class ThemesDlg;
 class dcopIface_stub;
 class KHelpMenu;
-class KAboutData;
+class TDEAboutData;
 
 class KarambaApplication : public TDEApplication
 {
@@ -65,7 +65,7 @@ class KarambaApplication : public TDEApplication
     TQStringList getKarambas();
     bool themeExists(TQString pretty_name);
     void initDcopStub(TQCString app = "");
-    void setUpSysTray(KAboutData* about);
+    void setUpSysTray(TDEAboutData* about);
     void checkPreviousSession(TDEApplication &app, TQStringList &lst);
     void checkCommandLine(TDECmdLineArgs *args, TQStringList &lst);
     bool startThemes(TQStringList &lst);

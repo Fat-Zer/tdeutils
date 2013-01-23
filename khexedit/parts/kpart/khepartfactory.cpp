@@ -38,8 +38,8 @@ static const char FWHKEmailAddress[] = "Friedrich.W.H@Kossebau.de";
 // static const char FWHKWebAddress[] = "http://www.kossebau.de";
 
 
-KInstance*  KHexEditPartFactory::s_instance = 0L;
-KAboutData* KHexEditPartFactory::s_about = 0L;
+TDEInstance*  KHexEditPartFactory::s_instance = 0L;
+TDEAboutData* KHexEditPartFactory::s_about = 0L;
 
 
 KHexEditPartFactory::KHexEditPartFactory()
@@ -72,14 +72,14 @@ KParts::Part* KHexEditPartFactory::createPartObject( TQWidget *ParentWidget, con
 }
 
 
-KInstance* KHexEditPartFactory::instance()
+TDEInstance* KHexEditPartFactory::instance()
 {
   if( !s_instance )
   {
-    s_about = new KAboutData( PartId, PartName, PartVersion, PartDescription,
-                              KAboutData::License_GPL_V2, PartCopyright, 0, 0, FWHKEmailAddress );
+    s_about = new TDEAboutData( PartId, PartName, PartVersion, PartDescription,
+                              TDEAboutData::License_GPL_V2, PartCopyright, 0, 0, FWHKEmailAddress );
     s_about->addAuthor( FWHKName, FWHKTask, FWHKEmailAddress );
-    s_instance = new KInstance( s_about );
+    s_instance = new TDEInstance( s_about );
   }
   return s_instance;
 }

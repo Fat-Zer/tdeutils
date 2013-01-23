@@ -38,8 +38,8 @@ extern void wake_laptop_daemon();
 int
 main(int argc, char **argv)
 {
-    KAboutData aboutData( "klaptop_check", I18N_NOOP("KLaptop"),
-		            version, description, KAboutData::License_GPL,
+    TDEAboutData aboutData( "klaptop_check", I18N_NOOP("KLaptop"),
+		            version, description, TDEAboutData::License_GPL,
 			            "(c) 2003, Paul Campbell");
     aboutData.addAuthor("Paul Campbell",0, "paul@taniwha.com");
     TDECmdLineArgs::init( argc, argv, &aboutData );

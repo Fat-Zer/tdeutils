@@ -61,10 +61,10 @@ void I8KPlugin::showAbout()
 {
   TQString version = kapp->aboutData()->version();
 
-  KAboutData aboutData(instanceName(),
+  TDEAboutData aboutData(instanceName(),
      I18N_NOOP("KSim I8K Plugin"), version.latin1(),
      I18N_NOOP("Dell I8K Hardware Monitor plugin"),
-     KAboutData::License_GPL, "(C) 2003 Nadeem Hasan");
+     TDEAboutData::License_GPL, "(C) 2003 Nadeem Hasan");
 
   aboutData.addAuthor("Nadeem Hasan", I18N_NOOP("Author"),
      "nhasan@kde.org");

@@ -63,7 +63,7 @@ BatteryConfig::BatteryConfig (TQWidget * parent, const char *name)
 
     apm = laptop_portable::has_power_management();
     config =  new KConfig("kcmlaptoprc");
-    instance = new KInstance("klaptopdaemon");
+    instance = new TDEInstance("klaptopdaemon");
 
     TQVBoxLayout *top_layout = new TQVBoxLayout( this, KDialog::marginHint(),
 					       KDialog::spacingHint() );

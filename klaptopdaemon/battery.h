@@ -94,7 +94,7 @@ private:
 	TQPtrList<TQLabel> batt_label_1, batt_label_2, batt_label_3;
 	TQPixmap battery_pm, battery_nopm;
 
-    	KInstance *instance;
+    	TDEInstance *instance;
 };
 
 #endif

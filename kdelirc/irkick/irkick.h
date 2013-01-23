@@ -53,7 +53,7 @@ class IRKick: public TQObject, public DCOPObject
 	Modes allModes;
 
 	IRKTrayIcon *theTrayIcon;
-	KAboutData *aboutData;
+	TDEAboutData *aboutData;
 	TQTimer *theFlashOff;
 
 	void updateModeIcons();

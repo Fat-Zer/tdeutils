@@ -31,7 +31,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 class TQSpinBox;
 class KLineEdit;
-class KAboutData;
+class TDEAboutData;
 
 class ConfigDialog : public KDialogBase
 {
@@ -111,7 +111,7 @@ public:
 
 private:
     CharTable    *_table;
-    KAboutData   *_aboutData;
+    TDEAboutData   *_aboutData;
     ConfigDialog *_configDialog;
 };
 

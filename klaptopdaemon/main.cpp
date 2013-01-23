@@ -223,10 +223,10 @@ LaptopModule::LaptopModule(TQWidget *parent, const char *)
         sony = 0;
   }
   
-  KAboutData* about = 
-  new KAboutData("kcmlaptop", I18N_NOOP("Laptop Battery Configuration"), LAPTOP_VERSION,
+  TDEAboutData* about = 
+  new TDEAboutData("kcmlaptop", I18N_NOOP("Laptop Battery Configuration"), LAPTOP_VERSION,
        I18N_NOOP("Battery Control Panel Module"),
-      KAboutData::License_GPL,
+      TDEAboutData::License_GPL,
        I18N_NOOP("(c) 1999 Paul Campbell"), 0, 0);
   //about->addAuthor("NAME", 0, "e-mail addy");
   setAboutData( about );

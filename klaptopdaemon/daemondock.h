@@ -101,7 +101,7 @@ private:
                           _displayActions,
                           _insertActions;
 
-  KInstance 	*instance; 	// handle so we get our pretty icons right
+  TDEInstance 	*instance; 	// handle so we get our pretty icons right
   KPopupMenu 	*rightPopup;
 
 }; 

@@ -42,12 +42,12 @@
 #include <tqfile.h>
 #include <tqtimer.h>
 
-KAboutData *ArkPart::createAboutData()
+TDEAboutData *ArkPart::createAboutData()
 {
-    KAboutData *about = new KAboutData("ark", I18N_NOOP("ark"),
+    TDEAboutData *about = new TDEAboutData("ark", I18N_NOOP("ark"),
                                        "1.0",
                                        I18N_NOOP("Ark KParts Component"),
-                                       KAboutData::License_GPL,
+                                       TDEAboutData::License_GPL,
                                        I18N_NOOP( "(c) 1997-2003, The Various Ark Developers" ));
     about->addAuthor("Robert Palmbos",0, "palm9744@kettering.edu");
     about->addAuthor("Francois-Xavier Duranceau",0, "duranceau@kde.org");

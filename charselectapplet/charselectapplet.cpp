@@ -139,11 +139,11 @@ void CharSelectApplet::preferences()
 void CharSelectApplet::about()
 {
     if(!_aboutData) {
-	_aboutData = new KAboutData("kcharselectapplet", I18N_NOOP("KCharSelectApplet"), "1.0",
+	_aboutData = new TDEAboutData("kcharselectapplet", I18N_NOOP("KCharSelectApplet"), "1.0",
                                     I18N_NOOP("A character picker applet.\n"
                                         "Used to copy single characters to the X11 clipboard.\n"
                                         "You can paste them to an application with the middle mouse button."),
-                                    KAboutData::License_BSD, "(c) 2001, Matthias Elter");
+                                    TDEAboutData::License_BSD, "(c) 2001, Matthias Elter");
 	_aboutData->addAuthor("Matthias Elter", 0, "elter@kde.org");
     }
 

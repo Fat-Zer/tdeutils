@@ -89,9 +89,9 @@ int main(int argc, char **argv)
 #ifdef KARAMBA_LOG
     tqInstallMsgHandler(karambaMessageOutput);
 #endif
-    KAboutData about("superkaramba", I18N_NOOP("SuperKaramba"),
+    TDEAboutData about("superkaramba", I18N_NOOP("SuperKaramba"),
                      version, description,
-                     KAboutData::License_GPL,
+                     TDEAboutData::License_GPL,
                      "(c) 2003-2006 The SuperKaramba developers");
     about.addAuthor("Adam Geitgey", 0, "adam@rootnode.org");
     about.addAuthor("Hans Karlsson", 0, "karlsson.h@home.se");

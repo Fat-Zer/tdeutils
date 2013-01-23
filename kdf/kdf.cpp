@@ -64,8 +64,8 @@ bool KDFTopLevel::queryExit( void )
 /***************************************************************/
 int main(int argc, char **argv)
 {
-  KAboutData aboutData( "kdf", I18N_NOOP("KDiskFree"),
-    version, description, KAboutData::License_GPL,
+  TDEAboutData aboutData( "kdf", I18N_NOOP("KDiskFree"),
+    version, description, TDEAboutData::License_GPL,
     "(c) 1998-2001, Michael Kropfberger");
   aboutData.addAuthor("Michael Kropfberger",0, "michael.kropfberger@gmx.net");
   TDECmdLineArgs::init( argc, argv, &aboutData );

@@ -33,10 +33,10 @@ public:
         TQObject *parent = 0, const char *name = 0,
         const char *classname = "KParts::Part",
         const TQStringList &args = TQStringList() );
-    static KInstance* instance();
+    static TDEInstance* instance();
    private:
-    static KInstance* s_instance;
-    static KAboutData* s_about;
+    static TDEInstance* s_instance;
+    static TDEAboutData* s_about;
     static int instanceNumber;
 };
 

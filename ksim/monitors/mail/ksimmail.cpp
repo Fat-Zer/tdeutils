@@ -57,10 +57,10 @@ KSim::PluginPage* MailPlugin::createConfigPage( const char* name )
 
 void MailPlugin::showAbout()
 {
-	KAboutData about( instanceName(),
+	TDEAboutData about( instanceName(),
 	                  I18N_NOOP( "KSim Mail Plugin" ), "0.1",
 	                  I18N_NOOP( "A mail monitor plugin for KSim" ),
-	                  KAboutData::License_GPL, "(c) 2002 Malte Starostik" );
+	                  TDEAboutData::License_GPL, "(c) 2002 Malte Starostik" );
 	about.addAuthor( "Malte Starostik", I18N_NOOP( "Author" ), "malte@kde.org" );
 
 	KAboutApplication( &about ).exec();

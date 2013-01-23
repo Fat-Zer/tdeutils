@@ -26,7 +26,7 @@
 
 class KConfig;
 class SensorList;
-class KInstance;
+class TDEInstance;
 
 /**
  * This class is the lm_sensors monitor plugin

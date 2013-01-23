@@ -1263,8 +1263,8 @@ extern "C" KDE_EXPORT int kdemain (int argc, char **argv)
 {
 	bool have_top_window = false;
 
-	KAboutData aboutData( "kedit", I18N_NOOP("KEdit"),
-		KEDITVERSION, description, KAboutData::License_GPL,
+	TDEAboutData aboutData( "kedit", I18N_NOOP("KEdit"),
+		KEDITVERSION, description, TDEAboutData::License_GPL,
 		"(c) 1997-2000, Bernd Johannes Wuebben");
 	aboutData.addAuthor("Bernd Johannes Wuebben",0, "wuebben@kde.org");
 	TDECmdLineArgs::init( argc, argv, &aboutData );

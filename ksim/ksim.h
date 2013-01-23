@@ -24,8 +24,8 @@
 #include <kpanelextension.h>
 
 class TQBoxLayout;
-class KAboutData;
-class KInstance;
+class TDEAboutData;
+class TDEInstance;
 class DCOPClient;
 
 namespace KSim
@@ -61,7 +61,7 @@ namespace KSim
     private:
       KSim::MainView * m_view;
       TQBoxLayout * m_layout;
-      KAboutData * m_aboutData;
+      TDEAboutData * m_aboutData;
       DCOPClient * m_dcopClient;
   };
 }

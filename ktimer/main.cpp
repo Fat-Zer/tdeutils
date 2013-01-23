@@ -30,8 +30,8 @@ static const char version[] = "v0.1";
 
 int main( int argc, char **argv )
 {
-    KAboutData aboutData( "ktimer", I18N_NOOP("KTimer"),
-                          version, description, KAboutData::License_GPL,
+    TDEAboutData aboutData( "ktimer", I18N_NOOP("KTimer"),
+                          version, description, TDEAboutData::License_GPL,
                           "(c) 2001, Stefan Schimanski");
     aboutData.addAuthor("Stefan Schimanski",0, "schimmi@kde.org");
     TDECmdLineArgs::init( argc, argv, &aboutData );

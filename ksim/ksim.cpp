@@ -55,9 +55,9 @@ KSim::PanelExtension::PanelExtension(const TQString &configFile,
 
   m_dcopClient->registerAs(name, false);
 
-  m_aboutData = new KAboutData(name, I18N_NOOP("KSim"), KSIM_VERSION_STRING,
+  m_aboutData = new TDEAboutData(name, I18N_NOOP("KSim"), KSIM_VERSION_STRING,
      I18N_NOOP("A plugin based system monitor for TDE"),
-     KAboutData::License_GPL, I18N_NOOP("(C) 2001-2003 Robbie Ward\n(C) 2005 Reuben Sutton"));
+     TDEAboutData::License_GPL, I18N_NOOP("(C) 2001-2003 Robbie Ward\n(C) 2005 Reuben Sutton"));
   m_aboutData->addAuthor("Reuben Sutton", I18N_NOOP("Maintainer"),"reuben.sutton@gmail.com");
   m_aboutData->addAuthor("Robbie Ward", I18N_NOOP("Original Author"),
      "linuxphreak@gmx.co.uk");

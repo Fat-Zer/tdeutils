@@ -41,8 +41,8 @@ static const char version[] = "v0.7";
 
 int main( int argc, char **argv )
 {
-  KAboutData aboutData( "kjots", I18N_NOOP("KJots"),
-    version, description, KAboutData::License_GPL,
+  TDEAboutData aboutData( "kjots", I18N_NOOP("KJots"),
+    version, description, TDEAboutData::License_GPL,
     "(c) 1997-2002, Christoph Neerfeld");
   aboutData.addAuthor("Pradeepto K. Bhattacharya", I18N_NOOP("Current maintainer"), "pradeepto@kde.org");
   aboutData.addAuthor("Jaison Lee", 0, "lee.jaison@gmail.com");

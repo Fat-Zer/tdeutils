@@ -32,7 +32,7 @@
 
 #include <tqlabel.h>
 
-class KAboutData;
+class TDEAboutData;
 class KPushButton;
 
 class ArkWidget;
@@ -94,7 +94,7 @@ public:
              const char *name, const TQStringList &, bool readWrite );
     virtual ~ArkPart();
 
-    static KAboutData* createAboutData();
+    static TDEAboutData* createAboutData();
 
 public slots:
     void fixEnables();//rename to slotFixEnables()...

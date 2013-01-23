@@ -25,8 +25,8 @@
 #include "ark_part.h"
 #include "arkfactory.h"
 
-KInstance* ArkFactory::s_instance = 0L;
-KAboutData* ArkFactory::s_about = 0L;
+TDEInstance* ArkFactory::s_instance = 0L;
+TDEAboutData* ArkFactory::s_about = 0L;
 int ArkFactory::instanceNumber = 0;
 
 K_EXPORT_COMPONENT_FACTORY( libarkpart, ArkFactory )
@@ -55,13 +55,13 @@ KParts::Part * ArkFactory::createPartObject( TQWidget *parentWidget,
         return obj;
 }
 
-KInstance* ArkFactory::instance()
+TDEInstance* ArkFactory::instance()
 {
     instanceNumber++;
     if( !s_instance )
     {
         s_about = ArkPart::createAboutData();
-        s_instance = new KInstance( s_about );
+        s_instance = new TDEInstance( s_about );
     }
     return s_instance;
 }

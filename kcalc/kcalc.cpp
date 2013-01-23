@@ -2269,8 +2269,8 @@ bool KCalculator::eventFilter(TQObject *o, TQEvent *e)
 
 extern "C" KDE_EXPORT int kdemain(int argc, char *argv[])
 {
-	KAboutData aboutData( "kcalc", I18N_NOOP("KCalc"),
-                          version, description, KAboutData::License_GPL,
+	TDEAboutData aboutData( "kcalc", I18N_NOOP("KCalc"),
+                          version, description, TDEAboutData::License_GPL,
                           I18N_NOOP("(c) 2003-2005, Klaus Niederkr" "\xc3\xbc" "ger\n"
 				    "(c) 1996-2000, Bernd Johannes Wuebben\n"
                                     "(c) 2000-2005, The KDE Team"));

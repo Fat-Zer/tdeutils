@@ -49,11 +49,11 @@ K_EXPORT_COMPONENT_FACTORY( kcm_kvaio, KVaioModuleFactory("kcmkvaio"))
 KVaioModule::KVaioModule(TQWidget *parent, const char *name, const TQStringList &)
     : KCModule(KVaioModuleFactory::instance(), parent, name)
 {
-    KAboutData *about =
-        new KAboutData(I18N_NOOP("kcmkvaio"),
+    TDEAboutData *about =
+        new TDEAboutData(I18N_NOOP("kcmkvaio"),
                        I18N_NOOP("TDE Control Module for Sony "
                                  "Vaio Laptop Hardware"),
-                       0, 0, KAboutData::License_GPL,
+                       0, 0, TDEAboutData::License_GPL,
                        "(c) 2003 Mirko Boehm");
 
     about->addAuthor("Mirko Boehm",

@@ -20,8 +20,8 @@
 
 #include <kparts/factory.h>
 
-class KInstance;
-class KAboutData;
+class TDEInstance;
+class TDEAboutData;
 
 
 class KHexEditPartFactory : public KParts::Factory
@@ -37,12 +37,12 @@ class KHexEditPartFactory : public KParts::Factory
     virtual KParts::Part* createPartObject( TQWidget *parentWidget, const char *widgetName,
                                             TQObject *parent, const char *name,
                                             const char *classname, const TQStringList &args );
-    static KInstance* instance();
+    static TDEInstance* instance();
 
 
   private:
-    static KInstance* s_instance;
-    static KAboutData* s_about;
+    static TDEInstance* s_instance;
+    static TDEAboutData* s_about;
 };
 
 #endif

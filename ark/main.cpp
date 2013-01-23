@@ -64,9 +64,9 @@ static KCmdLineOptions option[] =
 
 extern "C" KDE_EXPORT int kdemain( int argc, char *argv[]  )
 {
-	KAboutData aboutData( "ark", I18N_NOOP( "Ark" ),
+	TDEAboutData aboutData( "ark", I18N_NOOP( "Ark" ),
 	                      "2.6.4", I18N_NOOP( "TDE Archiving tool" ),
-	                      KAboutData::License_GPL,
+	                      TDEAboutData::License_GPL,
 	                      I18N_NOOP( "(c) 1997-2006, The Various Ark Developers" )
 	                    );
 

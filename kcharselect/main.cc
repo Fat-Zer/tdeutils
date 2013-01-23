@@ -18,8 +18,8 @@ static const char description[] =
 /*================================================================*/
 int main(int argc, char **argv)
 {
-  KAboutData aboutData( "kcharselect", I18N_NOOP("KCharSelect"),
-    version, description, KAboutData::License_GPL,
+  TDEAboutData aboutData( "kcharselect", I18N_NOOP("KCharSelect"),
+    version, description, TDEAboutData::License_GPL,
     "(c) 1999, Reginald Stadlbauer");
   aboutData.addAuthor("Reginald Stadlbauer",0, "reggie@kde.org");
   aboutData.addCredit( "Nadeem Hasan", I18N_NOOP( "GUI cleanup and fixes" ),

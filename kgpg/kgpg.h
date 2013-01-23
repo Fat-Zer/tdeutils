@@ -35,7 +35,7 @@
 
 class TQPopupMenu;
 class KTempFile;
-class KAboutData;
+class TDEAboutData;
 class KPassivePopup;
 class KgpgWizard;
 class popupPublic;
@@ -58,7 +58,7 @@ public:
 
 private:
         TQPopupMenu *droppopup,*udroppopup;
-        KAboutData   *_aboutData;
+        TDEAboutData   *_aboutData;
         TQStringList customDecrypt;
         KgpgWizard *wiz;
         KPassivePopup *pop;

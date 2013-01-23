@@ -86,10 +86,10 @@ void NetPlugin::showAbout()
 {
   TQString version = kapp->aboutData()->version();
 
-  KAboutData aboutData(instanceName(),
+  TDEAboutData aboutData(instanceName(),
      I18N_NOOP("KSim Net Plugin"), version.latin1(),
      I18N_NOOP("A net plugin for KSim"),
-     KAboutData::License_GPL, "(C) 2001 Robbie Ward");
+     TDEAboutData::License_GPL, "(C) 2001 Robbie Ward");
 
   aboutData.addAuthor("Robbie Ward", I18N_NOOP("Author"),
      "linuxphreak@gmx.co.uk");

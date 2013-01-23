@@ -57,7 +57,7 @@ laptop_dock::laptop_dock( laptop_daemon* parent )
     pdaemon = parent;
     current_code = -1;
     brightness_widget = 0;
-    instance = new KInstance("klaptopdaemon");
+    instance = new TDEInstance("klaptopdaemon");
       // popup menu for right mouse button
     rightPopup = contextMenu();
     SetupPopup();

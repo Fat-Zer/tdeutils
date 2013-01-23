@@ -43,10 +43,10 @@ K_EXPORT_COMPONENT_FACTORY(kcm_kwallet, KWalletFactory("kcmkwallet"))
 KWalletConfig::KWalletConfig(TQWidget *parent, const char *name, const TQStringList&)
 : KCModule(KWalletFactory::instance(), parent, name) {
 
-	KAboutData *about =
-		new KAboutData(I18N_NOOP("kcmkwallet"),
+	TDEAboutData *about =
+		new TDEAboutData(I18N_NOOP("kcmkwallet"),
 				I18N_NOOP("TDE Wallet Control Module"),
-				0, 0, KAboutData::License_GPL,
+				0, 0, TDEAboutData::License_GPL,
 				I18N_NOOP("(c) 2003 George Staikos"));
 		about->addAuthor("George Staikos", 0, "staikos@kde.org");
 	setAboutData( about );

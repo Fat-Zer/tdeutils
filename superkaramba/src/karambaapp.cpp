@@ -126,7 +126,7 @@ void KarambaApplication::checkSuperKarambaDir()
   }
 }
 
-void KarambaApplication::setUpSysTray(KAboutData* about)
+void KarambaApplication::setUpSysTray(TDEAboutData* about)
 {
   //kdDebug() << k_funcinfo << endl;
   KAction* action;

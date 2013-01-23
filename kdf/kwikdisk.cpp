@@ -321,8 +321,8 @@ int main(int argc, char **argv)
 {
    KLocale::setMainCatalogue( "kdf" );
 
-   KAboutData about("kwikdisk", I18N_NOOP("KwikDisk"), version, description,
-                  KAboutData::License_GPL, "(C) 2004 Stanislav Karchebny",
+   TDEAboutData about("kwikdisk", I18N_NOOP("KwikDisk"), version, description,
+                  TDEAboutData::License_GPL, "(C) 2004 Stanislav Karchebny",
                   0, 0, "Stanislav.Karchebny@kdemail.net");
    about.addAuthor( "Michael Kropfberger", I18N_NOOP("Original author"),
                     "michael.kropfberger@gmx.net" );

@@ -56,11 +56,11 @@ K_EXPORT_COMPONENT_FACTORY( kcm_thinkpad, KCMThinkpadModuleFactory("kcmthinkpad"
 
 KCMThinkpadModule::KCMThinkpadModule(TQWidget* parent, const char* name, const TQStringList&)
 	: KCModule(KCMThinkpadModuleFactory::instance(), parent, name) {
-	KAboutData* about =
-		new KAboutData(I18N_NOOP("kcmthinkpad"),
+	TDEAboutData* about =
+		new TDEAboutData(I18N_NOOP("kcmthinkpad"),
 			       I18N_NOOP("TDE Control Module for IBM Thinkpad "
 					 "Laptop Hardware"),
-			       0, 0, KAboutData::License_GPL,
+			       0, 0, TDEAboutData::License_GPL,
 			       "(c) 2004 Jonathan Riddell");
 
 	about->addAuthor("Jonathan Riddell",

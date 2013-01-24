@@ -37,7 +37,7 @@ extern "C"
 {
   KDE_EXPORT KPanelExtension *init(TQWidget *parent, const TQString &configFile)
   {
-    KGlobal::locale()->insertCatalogue("ksim");
+    TDEGlobal::locale()->insertCatalogue("ksim");
     return new KSim::PanelExtension(configFile, KPanelExtension::Normal,
     KPanelExtension::About | KPanelExtension::Help |
     KPanelExtension::Preferences | KPanelExtension::ReportBug,

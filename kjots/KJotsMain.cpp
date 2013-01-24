@@ -67,7 +67,7 @@ KJotsMain::KJotsMain(const char* name)
     setCentralWidget(f_main);
 
     splitter = new TQSplitter(f_main);
-    splitter->setOpaqueResize( KGlobalSettings::opaqueResize() );
+    splitter->setOpaqueResize( TDEGlobalSettings::opaqueResize() );
 
     // the subject list
     subjectList = new KListView(splitter, "subjectList");
@@ -573,7 +573,7 @@ void KJotsMain::slotQuit()
 
 void KJotsMain::insertDate()
 {
-  me_text->insert(KGlobal::locale()->formatDateTime(TQDateTime::currentDateTime(), true) + " ");
+  me_text->insert(TDEGlobal::locale()->formatDateTime(TQDateTime::currentDateTime(), true) + " ");
 }
 
 void KJotsMain::updateMenu()

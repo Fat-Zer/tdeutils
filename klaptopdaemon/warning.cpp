@@ -50,7 +50,7 @@ WarningConfig::WarningConfig (int t, TQWidget * parent, const char *name)
     checkStandby(0),
     checkHibernate(0)
 {
-  KGlobal::locale()->insertCatalogue("klaptopdaemon"); // For translation of klaptopdaemon messages
+  TDEGlobal::locale()->insertCatalogue("klaptopdaemon"); // For translation of klaptopdaemon messages
 
   type = t;
   apm = laptop_portable::has_power_management();

@@ -126,7 +126,7 @@ void ThemesDlg::populateListbox()
   tableThemes->clear();
 
   item = new ThemeWidget;
-  item->icon->setPixmap(KGlobal::iconLoader()->loadIcon("knewstuff",
+  item->icon->setPixmap(TDEGlobal::iconLoader()->loadIcon("knewstuff",
                         KIcon::NoGroup, KIcon::SizeHuge));
   item->setHeaderText(i18n("Get New Stuff"));
   item->setDescriptionText(i18n("Download new themes."));
@@ -142,7 +142,7 @@ void ThemesDlg::populateListbox()
   tableThemes->insertItem(item);
 
   item = new ThemeWidget;
-  item->icon->setPixmap(KGlobal::iconLoader()->loadIcon("ksysguard",
+  item->icon->setPixmap(TDEGlobal::iconLoader()->loadIcon("ksysguard",
                         KIcon::NoGroup, KIcon::SizeHuge));
   item->setHeaderText(i18n("Open Local Theme"));
   item->setDescriptionText(i18n("Add local theme to the list."));
@@ -217,7 +217,7 @@ void ThemesDlg::openLocalTheme()
 void ThemesDlg::getNewStuff()
 {
 #ifdef HAVE_KNEWSTUFF
-  KConfig* config = KGlobal::config();
+  KConfig* config = TDEGlobal::config();
   config->setGroup("KNewStuff");
   config->writePathEntry("ProvidersUrl",
       TQString::fromLatin1("http://download.kde.org/khotnewstuff/karamba-providers.xml"));
@@ -301,7 +301,7 @@ void ThemesDlg::addThemeToDialog(const KArchiveDirectory *archiveDir,
 void ThemesDlg::writeNewStuffConfig(const TQString &file)
 {
 #ifdef HAVE_KNEWSTUFF
-  KConfig* config = KGlobal::config();
+  KConfig* config = TDEGlobal::config();
   TQStringList keys = config->entryMap("KNewStuffStatus").keys();
 
   for(TQStringList::Iterator it = m_newStuffStatus.begin();
@@ -321,7 +321,7 @@ void ThemesDlg::writeNewStuffConfig(const TQString &file)
 void ThemesDlg::configSanityCheck()
 {
 #ifdef HAVE_KNEWSTUFF
-  KConfig* config = KGlobal::config();
+  KConfig* config = TDEGlobal::config();
   TQStringList statusKeys = config->entryMap("KNewStuffStatus").keys();
   TQStringList nameKeys = config->entryMap("KNewStuffNames").keys();
   TQStringList removeList;
@@ -427,7 +427,7 @@ bool ThemesDlg::filter(int index, TQWidget* widget, void* data)
 bool ThemesDlg::isDownloaded( const TQString& path )
 {
   kdDebug() << "isDownloaded path: " << path << endl;
-  KConfig* config = KGlobal::config();
+  KConfig* config = TDEGlobal::config();
   config->setGroup("KNewStuffNames");
   return !config->readEntry(path).isEmpty();
 }
@@ -442,7 +442,7 @@ void ThemesDlg::uninstall()
 
   karambaApp->dcopIface()->closeTheme(tf->name());
   if(!KProtocolInfo::isKnownProtocol(trash))
-    trash = KGlobalSettings::trashPath();
+    trash = TDEGlobalSettings::trashPath();
 
   if(!tf->isZipTheme())
   {
@@ -478,7 +478,7 @@ void ThemesDlg::uninstall()
     }
 #ifdef HAVE_KNEWSTUFF
     // Remove theme from KNewStuffStatus
-    KConfig* config = KGlobal::config();
+    KConfig* config = TDEGlobal::config();
     config->setGroup("KNewStuffNames");
     TQString name = config->readEntry(tempPath);
     if(!name.isEmpty())
@@ -508,7 +508,7 @@ void ThemesDlg::uninstall()
     tableThemes->removeItem(w);
 #ifdef HAVE_KNEWSTUFF
     // Remove theme from KNewStuffStatus
-    KConfig* config = KGlobal::config();
+    KConfig* config = TDEGlobal::config();
     config->setGroup("KNewStuffNames");
     TQString name = config->readEntry(theme.path());
     if(!name.isEmpty())

@@ -56,10 +56,10 @@ void DiskEntry::init()
  // BackgroundProcesses ****************************************
 
  sysProc = new KShellProcess(); TQ_CHECK_PTR(sysProc);
- connect( sysProc, TQT_SIGNAL(receivedStdout(KProcess *, char *, int) ),
-        this, TQT_SLOT (receivedSysStdErrOut(KProcess *, char *, int)) );
- connect( sysProc, TQT_SIGNAL(receivedStderr(KProcess *, char *, int) ),
-        this, TQT_SLOT (receivedSysStdErrOut(KProcess *, char *, int)) );
+ connect( sysProc, TQT_SIGNAL(receivedStdout(TDEProcess *, char *, int) ),
+        this, TQT_SLOT (receivedSysStdErrOut(TDEProcess *, char *, int)) );
+ connect( sysProc, TQT_SIGNAL(receivedStderr(TDEProcess *, char *, int) ),
+        this, TQT_SLOT (receivedSysStdErrOut(TDEProcess *, char *, int)) );
  readingSysStdErrOut=FALSE;
 
 
@@ -229,7 +229,7 @@ int DiskEntry::sysCall(const TQString & command)
   sysStringErrOut=i18n("Called: %1\n\n").arg(command); // put the called command on ErrOut
   sysProc->clearArguments();
   (*sysProc) << command;
-    if (!sysProc->start( KProcess::Block, KProcess::AllOutput ))
+    if (!sysProc->start( TDEProcess::Block, TDEProcess::AllOutput ))
      kdFatal() << i18n("could not execute %1").arg(command.local8Bit().data()) << endl;
 
   if (sysProc->exitStatus()!=0) emit sysCallError(this, sysProc->exitStatus());
@@ -241,7 +241,7 @@ int DiskEntry::sysCall(const TQString & command)
 /***************************************************************************
   * is called, when the Sys-command writes on StdOut or StdErr
 **/
-void DiskEntry::receivedSysStdErrOut(KProcess *, char *data, int len)
+void DiskEntry::receivedSysStdErrOut(TDEProcess *, char *data, int len)
 {
   TQString tmp = TQString::fromLocal8Bit(data, len);
   sysStringErrOut.append(tmp);

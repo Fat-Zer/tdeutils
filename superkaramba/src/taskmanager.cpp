@@ -54,7 +54,7 @@ TaskManager::TaskManager(TQObject *parent, const char *name)
 
     twin_module = new KWinModule();
 
-//    KGlobal::locale()->insertCatalogue("libtaskmanager");
+//    TDEGlobal::locale()->insertCatalogue("libtaskmanager");
     connect(twin_module, TQT_SIGNAL(windowAdded(WId)), TQT_SLOT(windowAdded(WId)));
     connect(twin_module, TQT_SIGNAL(windowRemoved(WId)), TQT_SLOT(windowRemoved(WId)));
     connect(twin_module, TQT_SIGNAL(activeWindowChanged(WId)), TQT_SLOT(activeWindowChanged(WId)));
@@ -344,7 +344,7 @@ Task::Task(WId win, TaskManager * parent, const char *name) :
 
   // try to guess the icon from the classhint
   if(_pixmap.isNull())
-    KGlobal::instance()->iconLoader()->loadIcon(className().lower(),
+    TDEGlobal::instance()->iconLoader()->loadIcon(className().lower(),
             KIcon::Small,KIcon::Small,
             KIcon::DefaultState, 0, true);
 
@@ -372,7 +372,7 @@ void Task::refresh(bool icon)
     // try to guess the icon from the classhint
     if(_pixmap.isNull())
     {
-        KGlobal::instance()->iconLoader()->loadIcon(className().lower(),
+        TDEGlobal::instance()->iconLoader()->loadIcon(className().lower(),
             KIcon::Small, KIcon::Small, KIcon::DefaultState, 0, true);
     }
 
@@ -538,7 +538,7 @@ TQPixmap Task::bestIcon( int size, bool &isStaticIcon )
 
       // Icon of last resort
       if( pixmap.isNull() ) {
-  pixmap = KGlobal::iconLoader()->loadIcon( "go",
+  pixmap = TDEGlobal::iconLoader()->loadIcon( "go",
               KIcon::NoGroup,
               KIcon::SizeSmall );
   isStaticIcon = true;
@@ -561,7 +561,7 @@ TQPixmap Task::bestIcon( int size, bool &isStaticIcon )
 
       // Icon of last resort
       if( pixmap.isNull() ) {
-  pixmap = KGlobal::iconLoader()->loadIcon( "go",
+  pixmap = TDEGlobal::iconLoader()->loadIcon( "go",
               KIcon::NoGroup,
               KIcon::SizeMedium );
   isStaticIcon = true;
@@ -575,7 +575,7 @@ TQPixmap Task::bestIcon( int size, bool &isStaticIcon )
 
       // If not, try to get one from the classname
       if ( pixmap.isNull() || pixmap.width() != size || pixmap.height() != size ) {
-  pixmap = KGlobal::iconLoader()->loadIcon( className(),
+  pixmap = TDEGlobal::iconLoader()->loadIcon( className(),
               KIcon::NoGroup,
               size,
               KIcon::DefaultState,
@@ -592,7 +592,7 @@ TQPixmap Task::bestIcon( int size, bool &isStaticIcon )
 
       // Icon of last resort
       if( pixmap.isNull() ) {
-  pixmap = KGlobal::iconLoader()->loadIcon( "go",
+  pixmap = TDEGlobal::iconLoader()->loadIcon( "go",
               KIcon::NoGroup,
               size );
   isStaticIcon = true;

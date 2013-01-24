@@ -1900,14 +1900,14 @@ void karamba::startupRemoved(Startup* t)
     pythonIface->startupRemoved(this, t);
 }
 
-void  karamba::processExited (KProcess* proc)
+void  karamba::processExited (TDEProcess* proc)
 {
   //tqDebug("karamba::processExited");
   if (pythonIface && pythonIface->isExtensionLoaded())
     pythonIface->commandFinished(this, (int)proc->pid());
 }
 
-void  karamba::receivedStdout (KProcess *proc, char *buffer, int)
+void  karamba::receivedStdout (TDEProcess *proc, char *buffer, int)
 {
   //tqDebug("karamba::receivedStdout");
   //Everything below is to call the python callback function

@@ -89,7 +89,7 @@ bool CDragManager::start( TQMouseEvent *e )
 
   if( mActivateMode == Movement )
   {
-    if( (mOrigin - e->pos()).manhattanLength() > KGlobalSettings::dndEventDelay() )
+    if( (mOrigin - e->pos()).manhattanLength() > TDEGlobalSettings::dndEventDelay() )
     {
       mPending = false;
       emit startDrag( e->state() & ShiftButton ? true : false );

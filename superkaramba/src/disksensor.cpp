@@ -18,10 +18,10 @@
 
 DiskSensor::DiskSensor( int msec ) : Sensor( msec )
 {
-    connect(&ksp, TQT_SIGNAL(receivedStdout(KProcess *, char *, int )),
-            this,TQT_SLOT(receivedStdout(KProcess *, char *, int )));
-    connect(&ksp, TQT_SIGNAL(processExited(KProcess *)),
-            this,TQT_SLOT(processExited( KProcess * )));
+    connect(&ksp, TQT_SIGNAL(receivedStdout(TDEProcess *, char *, int )),
+            this,TQT_SLOT(receivedStdout(TDEProcess *, char *, int )));
+    connect(&ksp, TQT_SIGNAL(processExited(TDEProcess *)),
+            this,TQT_SLOT(processExited( TDEProcess * )));
 
     // update values on startup
     ksp.clearArguments();
@@ -68,7 +68,7 @@ int DiskSensor::getPercentFree(TQString mntPt) const
     return ( 100 - getPercentUsed( mntPt ) );
 }
 
-void DiskSensor::receivedStdout(KProcess *, char *buffer, int len )
+void DiskSensor::receivedStdout(TDEProcess *, char *buffer, int len )
 {
 
     buffer[len] = 0;
@@ -76,7 +76,7 @@ void DiskSensor::receivedStdout(KProcess *, char *buffer, int len )
 
 }
 
-void DiskSensor::processExited(KProcess *)
+void DiskSensor::processExited(TDEProcess *)
 {
     TQStringList stringList = TQStringList::split('\n',sensorResult);
     sensorResult = "";

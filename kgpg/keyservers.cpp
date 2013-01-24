@@ -85,7 +85,7 @@ keyServer::keyServer(TQWidget *parent, const char *name,bool modal,bool autoClos
         KProcIO *encid=new KProcIO(TQTextCodec::codecForLocale());
         *encid << "gpg"<<"--no-secmem-warning"<<"--no-tty"<<"--with-colon"<<"--list-keys";
         TQObject::connect(encid, TQT_SIGNAL(readReady(KProcIO *)),this, TQT_SLOT(slotprocread(KProcIO *)));
-        encid->start(KProcess::NotifyOnExit,true);
+        encid->start(TDEProcess::NotifyOnExit,true);
         page->Buttonimport->setEnabled( !page->kLEimportid->text().isEmpty());
         page->Buttonsearch->setEnabled( !page->kLEimportid->text().isEmpty());
 setMinimumSize(sizeHint());
@@ -119,7 +119,7 @@ void keyServer::slotprocread(KProcIO *p)
         ///////////////////////////////////////////////////////////////// extract  encryption keys
         bool dead;
         TQString tst;
-	//TQPixmap pixkeySingle(KGlobal::iconLoader()->loadIcon("kgpg_key1",KIcon::Small,20));
+	//TQPixmap pixkeySingle(TDEGlobal::iconLoader()->loadIcon("kgpg_key1",KIcon::Small,20));
         while (p->readln(tst)!=-1) {
                 //tst=tst.stripWhiteSpace();
                 if (tst.startsWith("pub")) {
@@ -196,9 +196,9 @@ void keyServer::slotSearch()
         *searchproc<<"--keyserver"<<keyserv<<"--command-fd=0"<<"--status-fd=2"<<"--search-keys"<<page->kLEimportid->text().stripWhiteSpace();
 
         keyNumbers=0;
-        TQObject::connect(searchproc, TQT_SIGNAL(processExited(KProcess *)),this, TQT_SLOT(slotsearchresult(KProcess *)));
+        TQObject::connect(searchproc, TQT_SIGNAL(processExited(TDEProcess *)),this, TQT_SLOT(slotsearchresult(TDEProcess *)));
         TQObject::connect(searchproc, TQT_SIGNAL(readReady(KProcIO *)),this, TQT_SLOT(slotsearchread(KProcIO *)));
-        searchproc->start(KProcess::NotifyOnExit,true);
+        searchproc->start(TDEProcess::NotifyOnExit,true);
 	TQApplication::setOverrideCursor(TQCursor(TQt::BusyCursor));
 	dialogServer->setMainWidget(listpop);
 	listpop->setMinimumSize(listpop->sizeHint());
@@ -255,7 +255,7 @@ void keyServer::transferKeyID()
 	listpop->kLEID->setText(keysToSearch.stripWhiteSpace());
 }
 
-void keyServer::slotsearchresult(KProcess *)
+void keyServer::slotsearchresult(TDEProcess *)
 {
         TQString nb;
 	dialogServer->enableButtonOK(true);
@@ -364,9 +364,9 @@ void keyServer::slotExport(TQStringList keyIds)
                 *exportproc<<	"--keyserver-options"<<"no-honor-http-proxy";
         *exportproc << "--status-fd=2" << "--keyserver" << keyserv << "--send-keys" << keyIds;
 
-        TQObject::connect(exportproc, TQT_SIGNAL(processExited(KProcess *)),this, TQT_SLOT(slotexportresult(KProcess *)));
+        TQObject::connect(exportproc, TQT_SIGNAL(processExited(TDEProcess *)),this, TQT_SLOT(slotexportresult(TDEProcess *)));
         TQObject::connect(exportproc, TQT_SIGNAL(readReady(KProcIO *)),this, TQT_SLOT(slotimportread(KProcIO *)));
-        exportproc->start(KProcess::NotifyOnExit,true);
+        exportproc->start(TDEProcess::NotifyOnExit,true);
 	TQApplication::setOverrideCursor(TQCursor(TQt::BusyCursor));
         importpop = new TQDialog( this,0,true,TQt::WDestructiveClose);
         TQVBoxLayout *vbox=new TQVBoxLayout(importpop,3);
@@ -392,7 +392,7 @@ void keyServer::abortExport()
 	}
 }
 
-void keyServer::slotexportresult(KProcess*)
+void keyServer::slotexportresult(TDEProcess*)
 {
 	TQApplication::restoreOverrideCursor();
         KMessageBox::information(0,readmessage);
@@ -431,9 +431,9 @@ void keyServer::slotImport()
                 *importproc<<TQString(TQFile::encodeName(fkeyNames));
         }
 
-        TQObject::connect(importproc, TQT_SIGNAL(processExited(KProcess *)),this, TQT_SLOT(slotimportresult(KProcess *)));
+        TQObject::connect(importproc, TQT_SIGNAL(processExited(TDEProcess *)),this, TQT_SLOT(slotimportresult(TDEProcess *)));
         TQObject::connect(importproc, TQT_SIGNAL(readReady(KProcIO *)),this, TQT_SLOT(slotimportread(KProcIO *)));
-        importproc->start(KProcess::NotifyOnExit,true);
+        importproc->start(TDEProcess::NotifyOnExit,true);
 	importproc->closeWhenDone();
 	TQApplication::setOverrideCursor(TQCursor(TQt::BusyCursor));
         importpop = new TQDialog( this,0,true,TQt::WDestructiveClose);
@@ -462,7 +462,7 @@ void keyServer::abortImport()
 	if (autoCloseWindow) close();
 }
 
-void keyServer::slotimportresult(KProcess*)
+void keyServer::slotimportresult(TDEProcess*)
 {
 	TQApplication::restoreOverrideCursor();
         TQString importedNb,importedNbSucess,importedNbProcess,resultMessage, parsedOutput,importedNbUnchanged,importedNbSig;

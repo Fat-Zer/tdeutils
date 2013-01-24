@@ -64,7 +64,7 @@ ProfileConfig::ProfileConfig(TQWidget * parent, const char *name)
     int current_throttle;
     bool has_throttle = laptop_portable::get_system_throttling(0, current_throttle, throttle_list, active_list);
 
-    KGlobal::locale()->insertCatalogue("klaptopdaemon"); // For translation of klaptopdaemon messages
+    TDEGlobal::locale()->insertCatalogue("klaptopdaemon"); // For translation of klaptopdaemon messages
 
     config =  new KConfig("kcmlaptoprc");
 

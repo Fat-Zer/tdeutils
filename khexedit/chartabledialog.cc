@@ -45,7 +45,7 @@ CCharTableDialog::CCharTableDialog( TQWidget *parent, const char *name,
   if( topLayout == 0 ) { return; }
 
   mCharacterList = new CListView( plainPage(), "characterList" );
-  mCharacterList->setFont( KGlobalSettings::fixedFont() );
+  mCharacterList->setFont( TDEGlobalSettings::fixedFont() );
   mCharacterList->addColumn( i18n("Decimal") );
   mCharacterList->addColumn( i18n("Hexadecimal") );
   mCharacterList->addColumn( i18n("Octal") );

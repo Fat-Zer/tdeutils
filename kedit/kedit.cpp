@@ -342,7 +342,7 @@ void TopLevel::insertDate(){
 
   TQString string;
   TQDate dt = TQDate::currentDate();
-  string = KGlobal::locale()->formatDate(dt);
+  string = TDEGlobal::locale()->formatDate(dt);
 
   eframe->getCursorPosition(&line,&column);
   eframe->insertAt(string,line,column);
@@ -896,7 +896,7 @@ void TopLevel::statusbar_slot(){
 void TopLevel::print()
 {
     bool aborted = false;
-    TQString headerLeft = i18n("Date: %1").arg(KGlobal::locale()->formatDate(TQDate::currentDate(),true));
+    TQString headerLeft = i18n("Date: %1").arg(TDEGlobal::locale()->formatDate(TQDate::currentDate(),true));
     TQString headerMid = i18n("File: %1").arg(m_caption);
     TQString headerRight;
 
@@ -1215,8 +1215,8 @@ void TopLevel::set_colors()
   }
   else
   {
-     ncgrp.setColor(TQColorGroup::Text, KGlobalSettings::textColor());
-     ncgrp.setColor(TQColorGroup::Base, KGlobalSettings::baseColor());
+     ncgrp.setColor(TQColorGroup::Text, TDEGlobalSettings::textColor());
+     ncgrp.setColor(TQColorGroup::Base, TDEGlobalSettings::baseColor());
   }
 
   mypalette.setActive(ncgrp);

@@ -126,7 +126,7 @@ PyObject* py_execute_command_interactive(PyObject *, PyObject* args)
 
   karamba* currTheme = (karamba*)widget;
 
-  currTheme->currProcess = new KProcess;
+  currTheme->currProcess = new TDEProcess;
 
   /* get the number of lines passed to us */
   numLines = PyList_Size(listObj);
@@ -149,14 +149,14 @@ PyObject* py_execute_command_interactive(PyObject *, PyObject* args)
 
   }
   TQApplication::connect(currTheme->currProcess,
-                        TQT_SIGNAL(processExited(KProcess *)),
+                        TQT_SIGNAL(processExited(TDEProcess *)),
                         currTheme,
-                        TQT_SLOT(processExited(KProcess *)));
+                        TQT_SLOT(processExited(TDEProcess *)));
   TQApplication::connect(currTheme->currProcess,
-                        TQT_SIGNAL(receivedStdout(KProcess *, char *, int)),
+                        TQT_SIGNAL(receivedStdout(TDEProcess *, char *, int)),
                         currTheme,
-                        TQT_SLOT(receivedStdout(KProcess *, char *, int)));
-  currTheme->currProcess->start(KProcess::NotifyOnExit, KProcess::Stdout);
+                        TQT_SLOT(receivedStdout(TDEProcess *, char *, int)));
+  currTheme->currProcess->start(TDEProcess::NotifyOnExit, TDEProcess::Stdout);
 
   return Py_BuildValue((char*)"l", (int)(currTheme->currProcess->pid()));
 }
@@ -308,7 +308,7 @@ PyObject* py_userLanguage(PyObject *, PyObject *args)
     return NULL;
   if (!checkKaramba(widget))
     return NULL;
-  return Py_BuildValue((char*)"s", KGlobal::locale()->language().ascii());
+  return Py_BuildValue((char*)"s", TDEGlobal::locale()->language().ascii());
 }
 
 PyObject* py_userLanguages(PyObject *, PyObject *args)
@@ -319,14 +319,14 @@ PyObject* py_userLanguages(PyObject *, PyObject *args)
   if (!checkKaramba(widget))
     return NULL;
 
-  unsigned int noOfLangs = KGlobal::locale()->languageList().count();
+  unsigned int noOfLangs = TDEGlobal::locale()->languageList().count();
 
   PyObject *list, *item;
   list = PyList_New(noOfLangs);
     
   for(unsigned int i = 0; i < noOfLangs; i++)
   {
-     item = Py_BuildValue((char*)"s", KGlobal::locale()->languageList()[i].ascii());
+     item = Py_BuildValue((char*)"s", TDEGlobal::locale()->languageList()[i].ascii());
      PyList_SetItem(list, i, item);
   }
   

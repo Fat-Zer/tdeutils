@@ -273,7 +273,7 @@ void MntConfigWidget::iconChanged(const TQString &iconName)
 	    {
 	      disk->setIconName(iconName);
 	      mIconLineEdit->setText(iconName);
-	      KIconLoader &loader = *KGlobal::iconLoader();
+	      KIconLoader &loader = *TDEGlobal::iconLoader();
 	      item->setPixmap( ICONCOL, loader.loadIcon( iconName, KIcon::Small));
 	    }
 	  break;

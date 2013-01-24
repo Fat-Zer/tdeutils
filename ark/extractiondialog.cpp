@@ -105,7 +105,7 @@ ExtractionDialog::ExtractionDialog( TQWidget *parent, const char *name,
 
 	KURLCompletion *comp = new KURLCompletion();
 	comp->setReplaceHome( true );
-	comp->setCompletionMode( KGlobalSettings::CompletionAuto );
+	comp->setCompletionMode( TDEGlobalSettings::CompletionAuto );
 	combobox->setCompletionObject( comp );
 	combobox->setMaxCount( 20 );
 	combobox->setInsertionPolicy( TQComboBox::AtTop );

@@ -98,7 +98,7 @@ void DefaultSkin::clear() {
 
 void DefaultSkin::show() {
 #if KDE_IS_VERSION(3,1,90)
-	TQRect r =  KGlobalSettings::splashScreenDesktopGeometry();
+	TQRect r =  TDEGlobalSettings::splashScreenDesktopGeometry();
 #else
 	TQRect r = TQApplication::desktop()->geometry();
 #endif

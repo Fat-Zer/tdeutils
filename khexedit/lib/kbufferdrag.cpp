@@ -47,7 +47,7 @@ static const char *localTextPlain()
 
   if( TextPlainLocal.isNull() )
   {
-    TextPlainLocal = TQCString(KGlobal::locale()->encoding()).lower();
+    TextPlainLocal = TQCString(TDEGlobal::locale()->encoding()).lower();
     // remove the whitespaces
     int s;
     while( (s=TextPlainLocal.find(' ')) >= 0 )
@@ -74,7 +74,7 @@ static TQTextCodec* codecForCharset( const TQCString& Desc )
     return TQTextCodec::codecForName( CharSetName );
   }
   // no charset=, use locale
-  return KGlobal::locale()->codecForEncoding();
+  return TDEGlobal::locale()->codecForEncoding();
 }
 
 

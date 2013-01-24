@@ -24,7 +24,7 @@
 
 #include <tqptrlist.h>
 
-class KProcess;
+class TDEProcess;
 class TQVBoxLayout;
 
 class FilesystemWidget : public TQWidget
@@ -44,8 +44,8 @@ class FilesystemWidget : public TQWidget
     bool eventFilter(TQObject *, TQEvent *);
 
   private slots:
-    void receivedStderr(KProcess *, char *, int);
-    void processExited(KProcess *);
+    void receivedStderr(TDEProcess *, char *, int);
+    void processExited(TDEProcess *);
 
   private:
     class Filesystem
@@ -73,7 +73,7 @@ class FilesystemWidget : public TQWidget
     typedef TQPtrList<Filesystem> ProgressList;
     ProgressList m_list;
     TQVBoxLayout *m_layout;
-    KProcess *m_process;
+    TDEProcess *m_process;
     TQString m_stderrString;
 };
 #endif

@@ -332,7 +332,7 @@ void KDFWidget::updateDFDone( void ){
     TQString size, percent;
     if( disk->kBSize() > 0 )
     {
-      percent = KGlobal::locale()->formatNumber(disk->percentFull(), 1) + '%';
+      percent = TDEGlobal::locale()->formatNumber(disk->percentFull(), 1) + '%';
       size = disk->prettyKBSize();
     }
     else
@@ -518,11 +518,11 @@ void KDFWidget::popupMenu( TQListViewItem *item, const TQPoint &p )
       int pos = cmd.find("%m");
       if( pos > 0 )
       {
-	cmd = cmd.replace( pos, 2, KProcess::quote(disk->mountPoint()) ) + " &";
+	cmd = cmd.replace( pos, 2, TDEProcess::quote(disk->mountPoint()) ) + " &";
       }
       else
       {
-	cmd += " " + KProcess::quote(disk->mountPoint()) +" &";
+	cmd += " " + TDEProcess::quote(disk->mountPoint()) +" &";
       }
       system( TQFile::encodeName(cmd) );
     }

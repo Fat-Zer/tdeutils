@@ -169,16 +169,16 @@ bool FilesystemWidget::eventFilter(TQObject *o, TQEvent *e)
   return TQWidget::eventFilter(o, e);
 }
 
-void FilesystemWidget::receivedStderr(KProcess *, char *buffer, int length)
+void FilesystemWidget::receivedStderr(TDEProcess *, char *buffer, int length)
 {
   m_stderrString.setLatin1(buffer, length);
 }
 
-void FilesystemWidget::processExited(KProcess *)
+void FilesystemWidget::processExited(TDEProcess *)
 {
   delete m_process;
   m_process = 0;
-  kdDebug(2003) << "Deleting KProcess pointer" << endl;
+  kdDebug(2003) << "Deleting TDEProcess pointer" << endl;
 
   if (m_stderrString.isEmpty())
     return;
@@ -198,16 +198,16 @@ void FilesystemWidget::processExited(KProcess *)
 
 void FilesystemWidget::createProcess(const TQString &command, const TQString &point)
 {
-  m_process = new KProcess();
+  m_process = new TDEProcess();
   connect(m_process,
-     TQT_SIGNAL(receivedStderr(KProcess *, char *, int)),
-     TQT_SLOT(receivedStderr(KProcess *, char *, int)));
+     TQT_SIGNAL(receivedStderr(TDEProcess *, char *, int)),
+     TQT_SLOT(receivedStderr(TDEProcess *, char *, int)));
   connect(m_process,
-     TQT_SIGNAL(processExited(KProcess *)),
-     TQT_SLOT(processExited(KProcess *)));
+     TQT_SIGNAL(processExited(TDEProcess *)),
+     TQT_SLOT(processExited(TDEProcess *)));
 
   (*m_process) << command << point;
-  void(m_process->start(KProcess::NotifyOnExit, KProcess::Stderr));
+  void(m_process->start(TDEProcess::NotifyOnExit, TDEProcess::Stderr));
 }
 
 void FilesystemWidget::showMenu(uint id)

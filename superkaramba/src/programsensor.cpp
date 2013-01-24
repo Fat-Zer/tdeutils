@@ -25,22 +25,22 @@ ProgramSensor::ProgramSensor(const TQString &progName, int interval, TQString en
 
     programName = progName;
     //update();
-    connect(&ksp, TQT_SIGNAL(receivedStdout(KProcess *, char *, int )),
-            this,TQT_SLOT(receivedStdout(KProcess *, char *, int )));
-    connect(&ksp, TQT_SIGNAL(processExited(KProcess *)),
-            this,TQT_SLOT(processExited( KProcess * )));
+    connect(&ksp, TQT_SIGNAL(receivedStdout(TDEProcess *, char *, int )),
+            this,TQT_SLOT(receivedStdout(TDEProcess *, char *, int )));
+    connect(&ksp, TQT_SIGNAL(processExited(TDEProcess *)),
+            this,TQT_SLOT(processExited( TDEProcess * )));
 }
 
 ProgramSensor::~ProgramSensor()
 {}
 
-void ProgramSensor::receivedStdout(KProcess *, char *buffer, int len)
+void ProgramSensor::receivedStdout(TDEProcess *, char *buffer, int len)
 {
     buffer[len] = 0;
     sensorResult += codec->toUnicode( TQCString(buffer) );
 }
 
-void ProgramSensor::processExited(KProcess *)
+void ProgramSensor::processExited(TDEProcess *)
 {
     int lineNbr;
     SensorParams *sp;

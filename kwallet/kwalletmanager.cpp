@@ -48,7 +48,7 @@
 
 KWalletManager::KWalletManager(TQWidget *parent, const char *name, WFlags f)
 : KMainWindow(parent, name, f), DCOPObject("KWalletManager") {
-	KGlobal::dirs()->addResourceType("kwallet", "share/apps/kwallet");
+	TDEGlobal::dirs()->addResourceType("kwallet", "share/apps/kwallet");
 	_kwalletdLaunch = false;
 	TQAccel *accel = new TQAccel(this, "kwalletmanager");
 

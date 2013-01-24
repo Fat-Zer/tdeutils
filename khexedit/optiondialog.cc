@@ -392,7 +392,7 @@ void COptionDialog::setupFontPage( void )
 
   mFont.chooser = new KFontChooser( page, "font", true, TQStringList(), false, 4 );
   topLayout->addWidget( mFont.chooser );
-  TQFont fixFont( KGlobalSettings::fixedFont() );
+  TQFont fixFont( TDEGlobalSettings::fixedFont() );
   fixFont.setBold(true);
   mFont.chooser->setFont( fixFont, true );
   mFont.chooser->setSampleText( i18n("KHexEdit editor font") );

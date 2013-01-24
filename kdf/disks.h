@@ -119,7 +119,7 @@ public slots:
   TQString guessIconName();
 
 private slots:
-   void receivedSysStdErrOut(KProcess *, char *data, int len);
+   void receivedSysStdErrOut(TDEProcess *, char *data, int len);
 
 private:
   void init();

@@ -45,7 +45,7 @@ class TQDragMoveEvent;
 class TQDropEvent;
 
 class KPopupMenu;
-class KProcess;
+class TDEProcess;
 class KURL;
 class KRun;
 class KTempFile;
@@ -133,7 +133,7 @@ protected slots:
     void slotExtractDone(bool);
     void slotExtractRemoteDone(KIO::Job *job);
     void slotAddDone(bool);
-    void slotEditFinished(KProcess *);
+    void slotEditFinished(TDEProcess *);
     void slotTestDone(bool);
 signals:
     void openURLRequest( const KURL & url );

@@ -429,7 +429,7 @@ class SDisplayFontInfo
 
     SDisplayFontInfo &init( void )
     {
-      font = KGlobalSettings::fixedFont();
+      font = TDEGlobalSettings::fixedFont();
       nonPrintChar = '.';
       return( *this );
     }
@@ -444,7 +444,7 @@ class SDisplayFont
     SDisplayFont( void )
     {
       useSystemFont = false;
-      localFont = KGlobalSettings::fixedFont();
+      localFont = TDEGlobalSettings::fixedFont();
       nonPrintChar = '.';
     }
 

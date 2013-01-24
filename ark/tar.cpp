@@ -149,13 +149,13 @@ void TarArch::updateArch()
       else
           fd = NULL;
 
-      KProcess *kp = m_currentProcess = new KProcess;
+      TDEProcess *kp = m_currentProcess = new TDEProcess;
       kp->clearArguments();
-      KProcess::Communication flag = KProcess::AllOutput;
+      TDEProcess::Communication flag = TDEProcess::AllOutput;
       if ( getCompressor() == "lzop" )
       {
-        kp->setUsePty( KProcess::Stdin, false );
-        flag = KProcess::Stdout;
+        kp->setUsePty( TDEProcess::Stdin, false );
+        flag = TDEProcess::Stdout;
       }
       if ( !getCompressor().isNull() )
           *kp << getCompressor() << "-c" << tmpfile;
@@ -163,15 +163,15 @@ void TarArch::updateArch()
           *kp << "cat" << tmpfile;
 
 
-      connect(kp, TQT_SIGNAL(receivedStdout(KProcess*, char*, int)),
-              this, TQT_SLOT(updateProgress( KProcess *, char *, int )));
-      connect( kp, TQT_SIGNAL(receivedStderr(KProcess*, char*, int)),
-               (Arch *)this, TQT_SLOT(slotReceivedOutput(KProcess*, char*, int)));
+      connect(kp, TQT_SIGNAL(receivedStdout(TDEProcess*, char*, int)),
+              this, TQT_SLOT(updateProgress( TDEProcess *, char *, int )));
+      connect( kp, TQT_SIGNAL(receivedStderr(TDEProcess*, char*, int)),
+               (Arch *)this, TQT_SLOT(slotReceivedOutput(TDEProcess*, char*, int)));
 
-      connect(kp, TQT_SIGNAL(processExited(KProcess *)),
-               this, TQT_SLOT(updateFinished(KProcess *)) );
+      connect(kp, TQT_SIGNAL(processExited(TDEProcess *)),
+               this, TQT_SLOT(updateFinished(TDEProcess *)) );
 
-      if ( !fd || kp->start(KProcess::NotifyOnExit, flag) == false)
+      if ( !fd || kp->start(TDEProcess::NotifyOnExit, flag) == false)
         {
           KMessageBox::error(0, i18n("Trouble writing to the archive..."));
           emit updateDone();
@@ -179,7 +179,7 @@ void TarArch::updateArch()
     }
 }
 
-void TarArch::updateProgress( KProcess * _proc, char *_buffer, int _bufflen )
+void TarArch::updateProgress( TDEProcess * _proc, char *_buffer, int _bufflen )
 {
   // we're trying to capture the output of a command like this
   //    gzip -c myarch.tar
@@ -257,7 +257,7 @@ TarArch::open()
     //
     // Now it's essential - used later to decide whether pathnames in the
     // tar archive are plain or start with "./"
-    KProcess *kp = m_currentProcess = new KProcess;
+    TDEProcess *kp = m_currentProcess = new TDEProcess;
 
     *kp << m_archiver_program;
 
@@ -272,14 +272,14 @@ TarArch::open()
     m_header_removed = false;
     m_finished = false;
 
-    connect(kp, TQT_SIGNAL(processExited(KProcess *)),
-            this, TQT_SLOT(slotListingDone(KProcess *)));
-    connect(kp, TQT_SIGNAL(receivedStdout(KProcess*, char*, int)),
-        this, TQT_SLOT(slotReceivedOutput( KProcess *, char *, int )));
-    connect( kp, TQT_SIGNAL(receivedStderr(KProcess*, char*, int)),
-        this, TQT_SLOT(slotReceivedOutput(KProcess*, char*, int)));
+    connect(kp, TQT_SIGNAL(processExited(TDEProcess *)),
+            this, TQT_SLOT(slotListingDone(TDEProcess *)));
+    connect(kp, TQT_SIGNAL(receivedStdout(TDEProcess*, char*, int)),
+        this, TQT_SLOT(slotReceivedOutput( TDEProcess *, char *, int )));
+    connect( kp, TQT_SIGNAL(receivedStderr(TDEProcess*, char*, int)),
+        this, TQT_SLOT(slotReceivedOutput(TDEProcess*, char*, int)));
 
-    if (kp->start(KProcess::NotifyOnExit, KProcess::AllOutput) == false)
+    if (kp->start(TDEProcess::NotifyOnExit, TDEProcess::AllOutput) == false)
     {
         KMessageBox::error( 0, i18n("Could not start a subprocess.") );
     }
@@ -315,7 +315,7 @@ void TarArch::openFirstCreateTempDone()
     m_listingThread->start();
 }
 
-void TarArch::slotListingDone(KProcess *_kp)
+void TarArch::slotListingDone(TDEProcess *_kp)
 {
   const TQString list = getLastShellOutput();
   FileListView *flv = m_gui->fileList();
@@ -393,29 +393,29 @@ void TarArch::createTmp()
             else
                 fd = NULL;
 
-            KProcess *kp = m_currentProcess = new KProcess;
+            TDEProcess *kp = m_currentProcess = new TDEProcess;
             kp->clearArguments();
             kdDebug(1601) << "Uncompressor is " << strUncompressor << endl;
             *kp << strUncompressor;
-            KProcess::Communication flag = KProcess::AllOutput;
+            TDEProcess::Communication flag = TDEProcess::AllOutput;
             if (strUncompressor == "lzop")
             {
                 // setting up a pty for lzop, since it doesn't like stdin to
                 // be /dev/null ( "no filename allowed when reading from stdin" )
                 // - but it used to work without this ? ( Feb 13, 2003 )
-                kp->setUsePty( KProcess::Stdin, false );
-                flag = KProcess::Stdout;
+                kp->setUsePty( TDEProcess::Stdin, false );
+                flag = TDEProcess::Stdout;
                 *kp << "-d";
             }
             *kp << "-c" << m_filename;
 
-            connect(kp, TQT_SIGNAL(processExited(KProcess *)),
-                    this, TQT_SLOT(createTmpFinished(KProcess *)));
-            connect(kp, TQT_SIGNAL(receivedStdout(KProcess*, char*, int)),
-                    this, TQT_SLOT(createTmpProgress( KProcess *, char *, int )));
-            connect( kp, TQT_SIGNAL(receivedStderr(KProcess*, char*, int)),
-                    this, TQT_SLOT(slotReceivedOutput(KProcess*, char*, int)));
-            if (kp->start(KProcess::NotifyOnExit, flag ) == false)
+            connect(kp, TQT_SIGNAL(processExited(TDEProcess *)),
+                    this, TQT_SLOT(createTmpFinished(TDEProcess *)));
+            connect(kp, TQT_SIGNAL(receivedStdout(TDEProcess*, char*, int)),
+                    this, TQT_SLOT(createTmpProgress( TDEProcess *, char *, int )));
+            connect( kp, TQT_SIGNAL(receivedStderr(TDEProcess*, char*, int)),
+                    this, TQT_SLOT(slotReceivedOutput(TDEProcess*, char*, int)));
+            if (kp->start(TDEProcess::NotifyOnExit, flag ) == false)
             {
                 KMessageBox::error(0, i18n("Unable to fork a decompressor"));
 		emit sigOpen( this, false, TQString(), 0 );
@@ -433,7 +433,7 @@ void TarArch::createTmp()
     }
 }
 
-void TarArch::createTmpProgress( KProcess * _proc, char *_buffer, int _bufflen )
+void TarArch::createTmpProgress( TDEProcess * _proc, char *_buffer, int _bufflen )
 {
   // we're trying to capture the output of a command like this
   //    gunzip -c myarch.tar.gz
@@ -532,7 +532,7 @@ void TarArch::addFileCreateTempDone()
   disconnect( this, TQT_SIGNAL( createTempDone() ), this, TQT_SLOT( addFileCreateTempDone() ) );
   TQStringList * urls = &m_filesToAdd;
 
-  KProcess *kp = m_currentProcess = new KProcess;
+  TDEProcess *kp = m_currentProcess = new TDEProcess;
   *kp << m_archiver_program;
 
   if( ArkSettings::replaceOnlyWithNewer())
@@ -562,25 +562,25 @@ void TarArch::addFileCreateTempDone()
       kdDebug(1601) << *strTemp << " " << endl;
     }
 
-  connect( kp, TQT_SIGNAL(receivedStdout(KProcess*, char*, int)),
-           this, TQT_SLOT(slotReceivedOutput(KProcess*, char*, int)));
-  connect( kp, TQT_SIGNAL(receivedStderr(KProcess*, char*, int)),
-           this, TQT_SLOT(slotReceivedOutput(KProcess*, char*, int)));
+  connect( kp, TQT_SIGNAL(receivedStdout(TDEProcess*, char*, int)),
+           this, TQT_SLOT(slotReceivedOutput(TDEProcess*, char*, int)));
+  connect( kp, TQT_SIGNAL(receivedStderr(TDEProcess*, char*, int)),
+           this, TQT_SLOT(slotReceivedOutput(TDEProcess*, char*, int)));
 
-  connect( kp, TQT_SIGNAL(processExited(KProcess*)), this,
-           TQT_SLOT(slotAddFinished(KProcess*)));
+  connect( kp, TQT_SIGNAL(processExited(TDEProcess*)), this,
+           TQT_SLOT(slotAddFinished(TDEProcess*)));
 
-  if (kp->start(KProcess::NotifyOnExit, KProcess::AllOutput) == false)
+  if (kp->start(TDEProcess::NotifyOnExit, TDEProcess::AllOutput) == false)
     {
       KMessageBox::error( 0, i18n("Could not start a subprocess.") );
       emit sigAdd(false);
     }
 }
 
-void TarArch::slotAddFinished(KProcess *_kp)
+void TarArch::slotAddFinished(TDEProcess *_kp)
 {
-  disconnect( _kp, TQT_SIGNAL(processExited(KProcess*)), this,
-              TQT_SLOT(slotAddFinished(KProcess*)));
+  disconnect( _kp, TQT_SIGNAL(processExited(TDEProcess*)), this,
+              TQT_SLOT(slotAddFinished(TDEProcess*)));
   m_pTmpProc = _kp;
   m_filesToAdd = TQStringList();
   if ( compressed )
@@ -613,7 +613,7 @@ void TarArch::unarchFileInternal()
 
   TQString tmp;
 
-  KProcess *kp = m_currentProcess = new KProcess;
+  TDEProcess *kp = m_currentProcess = new TDEProcess;
   kp->clearArguments();
 
   *kp << m_archiver_program;
@@ -641,15 +641,15 @@ void TarArch::unarchFileInternal()
         }
     }
 
-  connect( kp, TQT_SIGNAL(receivedStdout(KProcess*, char*, int)),
-           this, TQT_SLOT(slotReceivedOutput(KProcess*, char*, int)));
-  connect( kp, TQT_SIGNAL(receivedStderr(KProcess*, char*, int)),
-           this, TQT_SLOT(slotReceivedOutput(KProcess*, char*, int)));
+  connect( kp, TQT_SIGNAL(receivedStdout(TDEProcess*, char*, int)),
+           this, TQT_SLOT(slotReceivedOutput(TDEProcess*, char*, int)));
+  connect( kp, TQT_SIGNAL(receivedStderr(TDEProcess*, char*, int)),
+           this, TQT_SLOT(slotReceivedOutput(TDEProcess*, char*, int)));
 
-  connect( kp, TQT_SIGNAL(processExited(KProcess*)), this,
-           TQT_SLOT(slotExtractExited(KProcess*)));
+  connect( kp, TQT_SIGNAL(processExited(TDEProcess*)), this,
+           TQT_SLOT(slotExtractExited(TDEProcess*)));
 
-  if (kp->start(KProcess::NotifyOnExit, KProcess::AllOutput) == false)
+  if (kp->start(TDEProcess::NotifyOnExit, TDEProcess::AllOutput) == false)
     {
       KMessageBox::error( 0, i18n("Could not start a subprocess.") );
       emit sigExtract(false);
@@ -670,7 +670,7 @@ void TarArch::removeCreateTempDone()
   disconnect( this, TQT_SIGNAL( createTempDone() ), this, TQT_SLOT( removeCreateTempDone() ) );
 
   TQString name, tmp;
-  KProcess *kp = m_currentProcess = new KProcess;
+  TDEProcess *kp = m_currentProcess = new TDEProcess;
   kp->clearArguments();
   *kp << m_archiver_program << "--delete" << "-f" ;
   if (compressed)
@@ -685,22 +685,22 @@ void TarArch::removeCreateTempDone()
     }
   m_filesToRemove = TQStringList();
 
-  connect( kp, TQT_SIGNAL(receivedStdout(KProcess*, char*, int)),
-           this, TQT_SLOT(slotReceivedOutput(KProcess*, char*, int)));
-  connect( kp, TQT_SIGNAL(receivedStderr(KProcess*, char*, int)),
-           this, TQT_SLOT(slotReceivedOutput(KProcess*, char*, int)));
+  connect( kp, TQT_SIGNAL(receivedStdout(TDEProcess*, char*, int)),
+           this, TQT_SLOT(slotReceivedOutput(TDEProcess*, char*, int)));
+  connect( kp, TQT_SIGNAL(receivedStderr(TDEProcess*, char*, int)),
+           this, TQT_SLOT(slotReceivedOutput(TDEProcess*, char*, int)));
 
-  connect( kp, TQT_SIGNAL(processExited(KProcess*)), this,
-           TQT_SLOT(slotDeleteExited(KProcess*)));
+  connect( kp, TQT_SIGNAL(processExited(TDEProcess*)), this,
+           TQT_SLOT(slotDeleteExited(TDEProcess*)));
 
-  if (kp->start(KProcess::NotifyOnExit, KProcess::AllOutput) == false)
+  if (kp->start(TDEProcess::NotifyOnExit, TDEProcess::AllOutput) == false)
     {
       KMessageBox::error( 0, i18n("Could not start a subprocess.") );
       emit sigDelete(false);
     }
 }
 
-void TarArch::slotDeleteExited(KProcess *_kp)
+void TarArch::slotDeleteExited(TDEProcess *_kp)
 {
   m_pTmpProc2 = _kp;
   if ( compressed )
@@ -730,14 +730,14 @@ void TarArch::addDir(const TQString & _dirName)
   addFile(list);
 }
 
-void TarArch::openFinished( KProcess * )
+void TarArch::openFinished( TDEProcess * )
 {
   // do nothing
   // turn off busy light (when someone makes one)
   kdDebug(1601) << "Open finshed" << endl;
 }
 
-void TarArch::createTmpFinished( KProcess *_kp )
+void TarArch::createTmpFinished( TDEProcess *_kp )
 {
   createTmpInProgress = false;
   fclose(fd);
@@ -747,7 +747,7 @@ void TarArch::createTmpFinished( KProcess *_kp )
   emit createTempDone();
 }
 
-void TarArch::updateFinished( KProcess *_kp )
+void TarArch::updateFinished( TDEProcess *_kp )
 {
   fclose(fd);
   updateInProgress = false;
@@ -789,7 +789,7 @@ void TarArch::test()
 {
   clearShellOutput();
 
-  KProcess *kp = m_currentProcess = new KProcess;
+  TDEProcess *kp = m_currentProcess = new TDEProcess;
   kp->clearArguments();
 
   TQString uncomp = getUnCompressor();
@@ -808,14 +808,14 @@ void TarArch::test()
 
   *kp << m_filename;
 
-  connect( kp, SIGNAL( receivedStdout(KProcess*, char*, int) ),
-           SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
-  connect( kp, SIGNAL( receivedStderr(KProcess*, char*, int) ),
-           SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
-  connect( kp, SIGNAL( processExited(KProcess*) ),
-           SLOT( slotTestExited(KProcess*) ) );
+  connect( kp, SIGNAL( receivedStdout(TDEProcess*, char*, int) ),
+           SLOT( slotReceivedOutput(TDEProcess*, char*, int) ) );
+  connect( kp, SIGNAL( receivedStderr(TDEProcess*, char*, int) ),
+           SLOT( slotReceivedOutput(TDEProcess*, char*, int) ) );
+  connect( kp, SIGNAL( processExited(TDEProcess*) ),
+           SLOT( slotTestExited(TDEProcess*) ) );
 
-  if ( !kp->start( KProcess::NotifyOnExit, KProcess::AllOutput ) )
+  if ( !kp->start( TDEProcess::NotifyOnExit, TDEProcess::AllOutput ) )
   {
     KMessageBox::error( 0, i18n( "Could not start a subprocess." ) );
     emit sigTest( false );

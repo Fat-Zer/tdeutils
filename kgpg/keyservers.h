@@ -24,7 +24,7 @@
 class KListViewItem;
 class KSimpleConfig;
 class KProcIO;
-class KProcess;
+class TDEProcess;
 
 class searchRes;
 
@@ -47,14 +47,14 @@ public slots:
         void syncCombobox();
         void slotImport();
         void slotSearch();
-        void slotimportresult(KProcess*);
-	void slotexportresult(KProcess*);
+        void slotimportresult(TDEProcess*);
+	void slotexportresult(TDEProcess*);
         void slotimportread(KProcIO *p);
         void slotprocread(KProcIO *p);
         void slotPreExport();
 	void slotExport(TQStringList keyIds);
         void preimport();
-        void slotsearchresult(KProcess *);
+        void slotsearchresult(TDEProcess *);
         void slotEnableProxyI(bool on);
         void slotEnableProxyE(bool on);
         void handleQuit();

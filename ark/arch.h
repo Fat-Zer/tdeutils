@@ -26,7 +26,7 @@
 */
 
 /* The following class is the base class for all of the archive types.
- * In order for it to work properly with the KProcess, you have to
+ * In order for it to work properly with the TDEProcess, you have to
  * connect the ProcessExited signal appropriately before spawning
  * the core operations. Then the signal that the process exited can
  * be intercepted by the viewer (in ark, ArkWidget) and dealt with
@@ -58,7 +58,7 @@
 
 class TQCString;
 class TQStringList;
-class KProcess;
+class TDEProcess;
 
 class FileListView;
 class ArkWidget;
@@ -156,16 +156,16 @@ class Arch : public TQObject
     virtual void createPassword() {}
 
   protected slots:
-    void slotOpenExited( KProcess* );
-    void slotExtractExited( KProcess* );
-    void slotDeleteExited( KProcess* );
-    void slotAddExited( KProcess* );
-    void slotTestExited( KProcess* );
+    void slotOpenExited( TDEProcess* );
+    void slotExtractExited( TDEProcess* );
+    void slotDeleteExited( TDEProcess* );
+    void slotAddExited( TDEProcess* );
+    void slotTestExited( TDEProcess* );
 
-    void slotReceivedOutput( KProcess *, char*, int );
+    void slotReceivedOutput( TDEProcess *, char*, int );
 
     virtual bool processLine( const TQCString &line );
-    virtual void slotReceivedTOC( KProcess *, char *, int );
+    virtual void slotReceivedTOC( TDEProcess *, char *, int );
 
   signals:
     void sigOpen( Arch * archive, bool success, const TQString &filename, int );
@@ -202,7 +202,7 @@ class Arch : public TQObject
     TQPtrList<ArchColumns> m_archCols;
     int m_numCols, m_dateCol, m_fixYear, m_fixMonth, m_fixDay, m_fixTime;
     int m_repairYear, m_repairMonth, m_repairTime;
-    KProcess *m_currentProcess;
+    TDEProcess *m_currentProcess;
     TQStringList *m_fileList;
     TQString m_destDir;
     bool m_viewFriendly;

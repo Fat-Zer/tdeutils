@@ -72,7 +72,7 @@ void CStatusBarProgress::initialize( void )
   mTextColor    = palette().active().text();
   setBackgroundColor( palette().active().background() );
 
-  TQFont font( KGlobalSettings::generalFont() );
+  TQFont font( TDEGlobalSettings::generalFont() );
   font.setBold( true );
   setFont( font );
 

@@ -29,10 +29,10 @@ SensorSensor::SensorSensor(int interval, char tempUnit) : Sensor( interval )
 #endif
     if(tempUnit == 'F')
       extraParams = " -f";
-    connect(&ksp, TQT_SIGNAL(receivedStdout(KProcess *, char *, int )),
-            this,TQT_SLOT(receivedStdout(KProcess *, char *, int )));
-    connect(&ksp, TQT_SIGNAL(processExited(KProcess *)),
-            this,TQT_SLOT(processExited( KProcess * )));
+    connect(&ksp, TQT_SIGNAL(receivedStdout(TDEProcess *, char *, int )),
+            this,TQT_SLOT(receivedStdout(TDEProcess *, char *, int )));
+    connect(&ksp, TQT_SIGNAL(processExited(TDEProcess *)),
+            this,TQT_SLOT(processExited( TDEProcess * )));
 
     // readValues();
 }
@@ -42,13 +42,13 @@ SensorSensor::~SensorSensor()
 {
 }
 
-void SensorSensor::receivedStdout(KProcess *, char *buffer, int len )
+void SensorSensor::receivedStdout(TDEProcess *, char *buffer, int len )
 {
     buffer[len] = 0;
     sensorResult += TQString( TQCString(buffer) );
 }
 
-void SensorSensor::processExited(KProcess *)
+void SensorSensor::processExited(TDEProcess *)
 {
     TQStringList stringList = TQStringList::split('\n',sensorResult);
     sensorResult = "";
@@ -108,7 +108,7 @@ void SensorSensor::update()
 #else
     ksp << "sensors" << extraParams;
 #endif
-    ksp.start( KProcess::NotifyOnExit,KProcIO::Stdout);
+    ksp.start( TDEProcess::NotifyOnExit,KProcIO::Stdout);
 }
 
 

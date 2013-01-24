@@ -74,7 +74,7 @@ IRKick::IRKick(const TQCString &obj) : TQObject(), DCOPObject(obj), npApp(TQStri
 	theTrayIcon->contextMenu()->changeTitle(0, "IRKick");
 	theTrayIcon->contextMenu()->insertItem(SmallIcon( "configure" ), i18n("&Configure..."), this, TQT_SLOT(slotConfigure()));
 	theTrayIcon->contextMenu()->insertSeparator();
-	theTrayIcon->contextMenu()->insertItem(SmallIcon( "help" ), KStdGuiItem::help().text(), (new KHelpMenu(theTrayIcon, KGlobal::instance()->aboutData()))->menu());
+	theTrayIcon->contextMenu()->insertItem(SmallIcon( "help" ), KStdGuiItem::help().text(), (new KHelpMenu(theTrayIcon, TDEGlobal::instance()->aboutData()))->menu());
 	theTrayIcon->actionCollection()->action("file_quit")->disconnect(TQT_SIGNAL(activated()));
 	connect(theTrayIcon->actionCollection()->action("file_quit"), TQT_SIGNAL(activated()), TQT_SLOT(doQuit()));
 

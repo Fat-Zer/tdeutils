@@ -13,7 +13,7 @@
     </entry>
     <entry name="Font" type="Font">
       <label>The font used to display the contents of books.</label>
-      <default code="true">KGlobalSettings::generalFont()</default>
+      <default code="true">TDEGlobalSettings::generalFont()</default>
     </entry>
     <entry name="AutoSave" type="Bool">
       <label>Whether books should be saved automatically.</label>

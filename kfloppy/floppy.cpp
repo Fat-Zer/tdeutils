@@ -272,7 +272,7 @@ FloppyData::FloppyData(TQWidget * parent, const char * name)
         v3->addStretch( 1 );
 
 	//Setup the Help Menu
-	helpMenu = new KHelpMenu(this, KGlobal::instance()->aboutData(), false);
+	helpMenu = new KHelpMenu(this, TDEGlobal::instance()->aboutData(), false);
 
 	helpbutton = new KPushButton( KStdGuiItem::help(), this );
 	helpbutton->setAutoRepeat( false );

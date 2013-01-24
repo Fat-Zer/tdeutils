@@ -34,7 +34,7 @@ RemoteServer::~RemoteServer()
 
 void RemoteServer::loadRemotes()
 {
-	TQStringList theFiles = KGlobal::dirs()->findAllResources("data", "remotes/*.remote.xml");
+	TQStringList theFiles = TDEGlobal::dirs()->findAllResources("data", "remotes/*.remote.xml");
 	for(TQStringList::iterator i = theFiles.begin(); i != theFiles.end(); ++i)
 	{	kdDebug() << "Found data file: " << *i << endl;
 		Remote *p = new Remote();

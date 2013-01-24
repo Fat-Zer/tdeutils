@@ -135,6 +135,6 @@ TQString SKNewStuff::downloadDestination( KNS::Entry *entry )
     KRun::runURL( source, "text/html");
     return file;
   }
-  return KGlobal::dirs()->saveLocation( "tmp" ) + source.fileName();
+  return TDEGlobal::dirs()->saveLocation( "tmp" ) + source.fileName();
 }
 #endif //HAVE_KNEWSTUFF

@@ -41,7 +41,7 @@ class TQLabel;
 class TQCheckbox;
 class KStatusBar;
 class KPassivePopup;
-class KProcess;
+class TDEProcess;
 class KProcIO;
 class TQEvent;
 class KTempFile;
@@ -236,7 +236,7 @@ private slots:
         void slotSetPhotoSize(int size);
         void slotShowPhoto();
         void readgenprocess(KProcIO *p);
-        void newKeyDone(KProcess *);
+        void newKeyDone(TDEProcess *);
         void slotrevoke(TQString keyID,TQString revokeUrl,int reason,TQString description);
         void revokeWidget();
         void doFilePrint(TQString url);
@@ -251,7 +251,7 @@ private slots:
         void slotProcessExportMail(TQString keys);
         void slotProcessExportClip(TQString keys);
         void readOptions();
-        void genover(KProcess *p);
+        void genover(TDEProcess *p);
         void showOptions();
         void slotSetDefKey();
         void slotSetDefaultKey(TQListViewItem *newdef);

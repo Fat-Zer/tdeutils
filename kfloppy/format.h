@@ -167,7 +167,7 @@ typedef struct { const char **devices;
 	int tracks;
 	int flags; } fdinfo;
 
-class KProcess;
+class TDEProcess;
 
 /**
  * Concrete action for running a single external program.
@@ -219,11 +219,11 @@ protected slots:
         /**
          * \brief Provide handling of the exit of the external program
          */
-	virtual void processDone(KProcess *);
+	virtual void processDone(TDEProcess *);
 	/**
          * \brief Provide handling of stdout
          */
-	virtual void processStdOut(KProcess *, char *, int);
+	virtual void processStdOut(TDEProcess *, char *, int);
 	/**
          * \brief Provide handling stderr.
          *
@@ -231,14 +231,14 @@ protected slots:
 	 * to processStdOut(), so you need reimplement only
 	 * FloppyAction::processStdOut if you choose.
 	 */
-	virtual void processStdErr(KProcess *, char *, int);
+	virtual void processStdErr(TDEProcess *, char *, int);
 	
 protected:
-	KProcess *theProcess;
+	TDEProcess *theProcess;
 	TQString theProcessName;  ///< human-readable
 
 	/**
-	 * Sets up connections, calls KProcess::run().
+	 * Sets up connections, calls TDEProcess::run().
 	 * You need to *theProcess << program << args ; first.
 	 */
 		
@@ -273,7 +273,7 @@ public:
 	
 	bool configure(bool verify);
 	
-	virtual void processStdOut(KProcess *, char *,int);
+	virtual void processStdOut(TDEProcess *, char *,int);
 
 protected:
 	static TQString fdformatName;    ///< path to executable.
@@ -306,7 +306,7 @@ protected:
     /**
      * \brief Provide handling of the exit of the external program
      */
-    virtual void processDone(KProcess *);
+    virtual void processDone(TDEProcess *);
 protected:
     static TQString m_ddName;    ///< path to executable.
 } ;
@@ -333,7 +333,7 @@ public:
 	bool configure(bool verify, bool label, const TQString &l);
 	
         /// Parse output
-        virtual void processStdOut(KProcess*, char* b, int l);
+        virtual void processStdOut(TDEProcess*, char* b, int l);
         
 protected:
 	static TQString newfs_fat;
@@ -359,7 +359,7 @@ public:
 	bool configure(bool verify, bool label, const TQString &l);
 
         /// Parse output
-        virtual void processStdOut(KProcess*, char* b, int l);
+        virtual void processStdOut(TDEProcess*, char* b, int l);
 	
 protected:
 	static TQString newfs;
@@ -409,7 +409,7 @@ public:
 	bool configure(bool verify, bool label, const TQString &l);
         
         /// Parse output
-        virtual void processStdOut(KProcess*, char* b, int l);
+        virtual void processStdOut(TDEProcess*, char* b, int l);
 protected:
 	static TQString newfs;
 	

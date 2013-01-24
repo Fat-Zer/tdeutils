@@ -100,7 +100,7 @@ KDialogBase( Plain, i18n("Select Public Key"), Details | Ok | Cancel, Ok, parent
         if (KGpgSettings::allowCustomEncryptionOptions())
                 customOptions=KGpgSettings::customEncryptionOptions();
 
-        KIconLoader *loader = KGlobal::iconLoader();
+        KIconLoader *loader = TDEGlobal::iconLoader();
 
         keyPair=loader->loadIcon("kgpg_key2",KIcon::Small,20);
         keySingle=loader->loadIcon("kgpg_key1",KIcon::Small,20);
@@ -337,9 +337,9 @@ void popupPublic::refreshkeys()
         KProcIO *encid=new KProcIO(TQTextCodec::codecForLocale());
         *encid << "gpg"<<"--no-secmem-warning"<<"--no-tty"<<"--with-colon"<<"--list-keys";
         /////////  when process ends, update dialog infos
-        TQObject::connect(encid, TQT_SIGNAL(processExited(KProcess *)),this, TQT_SLOT(slotpreselect()));
+        TQObject::connect(encid, TQT_SIGNAL(processExited(TDEProcess *)),this, TQT_SLOT(slotpreselect()));
         TQObject::connect(encid, TQT_SIGNAL(readReady(KProcIO *)),this, TQT_SLOT(slotprocread(KProcIO *)));
-        encid->start(KProcess::NotifyOnExit,true);
+        encid->start(TDEProcess::NotifyOnExit,true);
 }
 
 void popupPublic::slotpreselect()

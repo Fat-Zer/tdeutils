@@ -1611,17 +1611,17 @@ ArkWidget::editStart()
 {
     kdDebug(1601) << "Edit in progress..." << endl;
     KURL::List list;
-    // edit will be in progress until the KProcess terminates.
+    // edit will be in progress until the TDEProcess terminates.
     KOpenWithDlg l( list, i18n("Edit with:"),
             TQString(), (TQWidget*)0L );
     if ( l.exec() )
     {
-        KProcess *kp = new KProcess;
+        TDEProcess *kp = new TDEProcess;
 
         *kp << l.text() << m_strFileToView;
-        connect( kp, TQT_SIGNAL(processExited(KProcess *)),
-                this, TQT_SLOT(slotEditFinished(KProcess *)) );
-        if ( kp->start(KProcess::NotifyOnExit, KProcess::AllOutput) == false )
+        connect( kp, TQT_SIGNAL(processExited(TDEProcess *)),
+                this, TQT_SLOT(slotEditFinished(TDEProcess *)) );
+        if ( kp->start(TDEProcess::NotifyOnExit, TDEProcess::AllOutput) == false )
         {
             KMessageBox::error(0, i18n("Trouble editing the file..."));
         }
@@ -1629,7 +1629,7 @@ ArkWidget::editStart()
 }
 
 void
-ArkWidget::slotEditFinished(KProcess *kp)
+ArkWidget::slotEditFinished(TDEProcess *kp)
 {
     kdDebug(1601) << "+ArkWidget::slotEditFinished" << endl;
     connect( arch, TQT_SIGNAL( sigAdd( bool ) ), this, TQT_SLOT( editSlotAddDone( bool ) ) );
@@ -1841,7 +1841,7 @@ ArkWidget::updateStatusSelection()
     else if (m_nNumSelectedFiles != 1)
     {
         strInfo = i18n("%1 files selected  %2")
-                  .arg(KGlobal::locale()->formatNumber(m_nNumSelectedFiles, 0))
+                  .arg(TDEGlobal::locale()->formatNumber(m_nNumSelectedFiles, 0))
                   .arg(KIO::convertSize(m_nSizeOfSelectedFiles));
     }
     else

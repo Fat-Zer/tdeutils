@@ -83,23 +83,23 @@ void AceArch::open()
 	m_header_removed = false;
 	m_finished = false;
 
-	KProcess *kp = m_currentProcess = new KProcess;
+	TDEProcess *kp = m_currentProcess = new TDEProcess;
 	*kp << m_archiver_program << "v" << m_filename;
 	//kp->setUseShell( true );
 
 	kdDebug() << "AceArch::open(): kp->args(): " << kp->args() << endl;
 
-	connect( kp, TQT_SIGNAL( receivedStdout(KProcess*, char*, int) ),
-			 TQT_SLOT( slotReceivedTOC(KProcess*, char*, int) ) );
-	connect( kp, TQT_SIGNAL( receivedStderr(KProcess*, char*, int) ),
-			 TQT_SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
-	connect( kp, TQT_SIGNAL( processExited(KProcess*) ),
-			 TQT_SLOT( slotOpenExited(KProcess*) ) );
+	connect( kp, TQT_SIGNAL( receivedStdout(TDEProcess*, char*, int) ),
+			 TQT_SLOT( slotReceivedTOC(TDEProcess*, char*, int) ) );
+	connect( kp, TQT_SIGNAL( receivedStderr(TDEProcess*, char*, int) ),
+			 TQT_SLOT( slotReceivedOutput(TDEProcess*, char*, int) ) );
+	connect( kp, TQT_SIGNAL( processExited(TDEProcess*) ),
+			 TQT_SLOT( slotOpenExited(TDEProcess*) ) );
 
-	connect( kp, TQT_SIGNAL( receivedStdout(KProcess*, char*, int) ),
-			 this, TQT_SLOT( catchMeIfYouCan(KProcess*, char*, int) ) );
+	connect( kp, TQT_SIGNAL( receivedStdout(TDEProcess*, char*, int) ),
+			 this, TQT_SLOT( catchMeIfYouCan(TDEProcess*, char*, int) ) );
 
-	if ( !kp->start( KProcess::NotifyOnExit, KProcess::AllOutput ) )
+	if ( !kp->start( TDEProcess::NotifyOnExit, TDEProcess::AllOutput ) )
 	{
 		KMessageBox::error( 0, i18n( "Could not start a subprocess." ) );
 		emit sigOpen( this, false, TQString(), 0 );
@@ -132,7 +132,7 @@ void AceArch::unarchFileInternal( )
 		return;
 	}
 
-	KProcess *kp = m_currentProcess = new KProcess;
+	TDEProcess *kp = m_currentProcess = new TDEProcess;
 	kp->clearArguments();
 
 	// extract (and maybe overwrite)
@@ -158,21 +158,21 @@ void AceArch::unarchFileInternal( )
 		}
 	}
 
-	connect( kp, TQT_SIGNAL( receivedStdout(KProcess*, char*, int) ),
-			 TQT_SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
-	connect( kp, TQT_SIGNAL( receivedStderr(KProcess*, char*, int) ),
-			 TQT_SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
-	connect( kp, TQT_SIGNAL( processExited(KProcess*) ),
-			 TQT_SLOT( slotExtractExited(KProcess*) ) );
+	connect( kp, TQT_SIGNAL( receivedStdout(TDEProcess*, char*, int) ),
+			 TQT_SLOT( slotReceivedOutput(TDEProcess*, char*, int) ) );
+	connect( kp, TQT_SIGNAL( receivedStderr(TDEProcess*, char*, int) ),
+			 TQT_SLOT( slotReceivedOutput(TDEProcess*, char*, int) ) );
+	connect( kp, TQT_SIGNAL( processExited(TDEProcess*) ),
+			 TQT_SLOT( slotExtractExited(TDEProcess*) ) );
 
-	if ( !kp->start( KProcess::NotifyOnExit, KProcess::AllOutput ) )
+	if ( !kp->start( TDEProcess::NotifyOnExit, TDEProcess::AllOutput ) )
 	{
 		KMessageBox::error( 0, i18n( "Could not start a subprocess." ) );
 		emit sigExtract( false );
 	}
 }
 
-void AceArch::catchMeIfYouCan( KProcess*, char *buffer, int buflen )
+void AceArch::catchMeIfYouCan( TDEProcess*, char *buffer, int buflen )
 {
 	TQString myBuf = TQString::fromLatin1( buffer, buflen );
 	kdDebug(1601) << "	Wololo!:	" << myBuf << endl;

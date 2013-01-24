@@ -42,8 +42,8 @@ private:
   int init;
 
 private slots:
-  void receivedStdout(KProcess *, char *buffer, int);
-  void processExited(KProcess *);
+  void receivedStdout(TDEProcess *, char *buffer, int);
+  void processExited(TDEProcess *);
 
 signals:
   void initComplete();

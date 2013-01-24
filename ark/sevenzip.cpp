@@ -46,9 +46,9 @@ SevenZipArch::SevenZipArch( ArkWidget *gui, const TQString &filename )
   : Arch( gui, filename ), m_nameColumnPos( -1 )
 {
   // Check if 7z is available
-  bool have_7z = !KGlobal::dirs()->findExe( "7z" ).isNull();
+  bool have_7z = !TDEGlobal::dirs()->findExe( "7z" ).isNull();
   // Check if 7za is available
-  bool have_7za = !KGlobal::dirs()->findExe( "7za" ).isNull();
+  bool have_7za = !TDEGlobal::dirs()->findExe( "7za" ).isNull();
 
   if ( have_7z )
     m_archiver_program = m_unarchiver_program = "7z";  // Use 7z
@@ -99,17 +99,17 @@ void SevenZipArch::open()
   m_header_removed = false;
   m_finished = false;
 
-  KProcess *kp = m_currentProcess = new KProcess;
+  TDEProcess *kp = m_currentProcess = new TDEProcess;
   *kp << m_archiver_program << "l" << m_filename;
 
-  connect( kp, TQT_SIGNAL( receivedStdout(KProcess*, char*, int) ),
-           TQT_SLOT( slotReceivedTOC(KProcess*, char*, int) ) );
-  connect( kp, TQT_SIGNAL( receivedStderr(KProcess*, char*, int) ),
-           TQT_SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
-  connect( kp, TQT_SIGNAL( processExited(KProcess*) ),
-           TQT_SLOT( slotOpenExited(KProcess*) ) );
+  connect( kp, TQT_SIGNAL( receivedStdout(TDEProcess*, char*, int) ),
+           TQT_SLOT( slotReceivedTOC(TDEProcess*, char*, int) ) );
+  connect( kp, TQT_SIGNAL( receivedStderr(TDEProcess*, char*, int) ),
+           TQT_SLOT( slotReceivedOutput(TDEProcess*, char*, int) ) );
+  connect( kp, TQT_SIGNAL( processExited(TDEProcess*) ),
+           TQT_SLOT( slotOpenExited(TDEProcess*) ) );
 
-  if ( !kp->start( KProcess::NotifyOnExit, KProcess::AllOutput ) )
+  if ( !kp->start( TDEProcess::NotifyOnExit, TDEProcess::AllOutput ) )
   {
     KMessageBox::error( 0, i18n( "Could not start a subprocess." ) );
     emit sigOpen( this, false, TQString(), 0 );
@@ -130,7 +130,7 @@ void SevenZipArch::createPassword()
 
 void SevenZipArch::addFile( const TQStringList & urls )
 {
-  KProcess *kp = m_currentProcess = new KProcess;
+  TDEProcess *kp = m_currentProcess = new TDEProcess;
 
   kp->clearArguments();
   *kp << m_archiver_program << "a" ;
@@ -150,14 +150,14 @@ void SevenZipArch::addFile( const TQStringList & urls )
     *kp << url.fileName();
   }
 
-  connect( kp, TQT_SIGNAL( receivedStdout(KProcess*, char*, int) ),
-           TQT_SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
-  connect( kp, TQT_SIGNAL( receivedStderr(KProcess*, char*, int) ),
-           TQT_SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
-  connect( kp, TQT_SIGNAL( processExited(KProcess*) ),
-           TQT_SLOT( slotAddExited(KProcess*) ) );
+  connect( kp, TQT_SIGNAL( receivedStdout(TDEProcess*, char*, int) ),
+           TQT_SLOT( slotReceivedOutput(TDEProcess*, char*, int) ) );
+  connect( kp, TQT_SIGNAL( receivedStderr(TDEProcess*, char*, int) ),
+           TQT_SLOT( slotReceivedOutput(TDEProcess*, char*, int) ) );
+  connect( kp, TQT_SIGNAL( processExited(TDEProcess*) ),
+           TQT_SLOT( slotAddExited(TDEProcess*) ) );
 
-  if ( !kp->start( KProcess::NotifyOnExit, KProcess::AllOutput ) )
+  if ( !kp->start( TDEProcess::NotifyOnExit, TDEProcess::AllOutput ) )
   {
     KMessageBox::error( 0, i18n( "Could not start a subprocess." ) );
     emit sigAdd( false );
@@ -184,7 +184,7 @@ void SevenZipArch::remove( TQStringList *list )
   if ( !list )
     return;
 
-  KProcess *kp = m_currentProcess = new KProcess;
+  TDEProcess *kp = m_currentProcess = new TDEProcess;
   kp->clearArguments();
 
   *kp << m_archiver_program << "d" << m_filename;
@@ -195,14 +195,14 @@ void SevenZipArch::remove( TQStringList *list )
     *kp << *it;
   }
 
-  connect( kp, TQT_SIGNAL( receivedStdout(KProcess*, char*, int) ),
-           TQT_SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
-  connect( kp, TQT_SIGNAL( receivedStderr(KProcess*, char*, int) ),
-           TQT_SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
-  connect( kp, TQT_SIGNAL( processExited(KProcess*) ),
-           TQT_SLOT( slotDeleteExited(KProcess*) ) );
+  connect( kp, TQT_SIGNAL( receivedStdout(TDEProcess*, char*, int) ),
+           TQT_SLOT( slotReceivedOutput(TDEProcess*, char*, int) ) );
+  connect( kp, TQT_SIGNAL( receivedStderr(TDEProcess*, char*, int) ),
+           TQT_SLOT( slotReceivedOutput(TDEProcess*, char*, int) ) );
+  connect( kp, TQT_SIGNAL( processExited(TDEProcess*) ),
+           TQT_SLOT( slotDeleteExited(TDEProcess*) ) );
 
-  if ( !kp->start( KProcess::NotifyOnExit, KProcess::AllOutput ) )
+  if ( !kp->start( TDEProcess::NotifyOnExit, TDEProcess::AllOutput ) )
   {
     KMessageBox::error( 0, i18n( "Could not start a subprocess." ) );
     emit sigDelete( false );
@@ -217,7 +217,7 @@ void SevenZipArch::unarchFileInternal( )
     return;
   }
 
-  KProcess *kp = m_currentProcess = new KProcess;
+  TDEProcess *kp = m_currentProcess = new TDEProcess;
   kp->clearArguments();
 
   // extract (and maybe overwrite)
@@ -249,14 +249,14 @@ void SevenZipArch::unarchFileInternal( )
 
   *kp << "-o" + m_destDir ;
 
-  connect( kp, TQT_SIGNAL( receivedStdout(KProcess*, char*, int) ),
-           TQT_SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
-  connect( kp, TQT_SIGNAL( receivedStderr(KProcess*, char*, int) ),
-           TQT_SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
-  connect( kp, TQT_SIGNAL( processExited(KProcess*) ),
-           TQT_SLOT( slotExtractExited(KProcess*) ) );
+  connect( kp, TQT_SIGNAL( receivedStdout(TDEProcess*, char*, int) ),
+           TQT_SLOT( slotReceivedOutput(TDEProcess*, char*, int) ) );
+  connect( kp, TQT_SIGNAL( receivedStderr(TDEProcess*, char*, int) ),
+           TQT_SLOT( slotReceivedOutput(TDEProcess*, char*, int) ) );
+  connect( kp, TQT_SIGNAL( processExited(TDEProcess*) ),
+           TQT_SLOT( slotExtractExited(TDEProcess*) ) );
 
-  if ( !kp->start( KProcess::NotifyOnExit, KProcess::AllOutput ) )
+  if ( !kp->start( TDEProcess::NotifyOnExit, TDEProcess::AllOutput ) )
   {
     KMessageBox::error( 0, i18n( "Could not start a subprocess." ) );
     emit sigExtract( false );
@@ -333,7 +333,7 @@ bool SevenZipArch::processLine( const TQCString& _line )
   return true;
 }
 
-void SevenZipArch::slotReceivedTOC( KProcess*, char* data, int length )
+void SevenZipArch::slotReceivedTOC( TDEProcess*, char* data, int length )
 {
   char endchar = data[ length ];
   data[ length ] = '\0';
@@ -395,7 +395,7 @@ void SevenZipArch::test()
 {
   clearShellOutput();
 
-  KProcess *kp = m_currentProcess = new KProcess;
+  TDEProcess *kp = m_currentProcess = new TDEProcess;
   kp->clearArguments();
 
   *kp << m_unarchiver_program << "t";
@@ -405,14 +405,14 @@ void SevenZipArch::test()
 
   *kp << m_filename;
 
-  connect( kp, SIGNAL( receivedStdout(KProcess*, char*, int) ),
-           SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
-  connect( kp, SIGNAL( receivedStderr(KProcess*, char*, int) ),
-           SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
-  connect( kp, SIGNAL( processExited(KProcess*) ),
-           SLOT( slotTestExited(KProcess*) ) );
+  connect( kp, SIGNAL( receivedStdout(TDEProcess*, char*, int) ),
+           SLOT( slotReceivedOutput(TDEProcess*, char*, int) ) );
+  connect( kp, SIGNAL( receivedStderr(TDEProcess*, char*, int) ),
+           SLOT( slotReceivedOutput(TDEProcess*, char*, int) ) );
+  connect( kp, SIGNAL( processExited(TDEProcess*) ),
+           SLOT( slotTestExited(TDEProcess*) ) );
 
-  if ( !kp->start( KProcess::NotifyOnExit, KProcess::AllOutput ) )
+  if ( !kp->start( TDEProcess::NotifyOnExit, TDEProcess::AllOutput ) )
   {
     KMessageBox::error( 0, i18n( "Could not start a subprocess." ) );
     emit sigTest( false );

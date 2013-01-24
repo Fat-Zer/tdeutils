@@ -46,7 +46,7 @@ static TQString extPath = TQString();
 		extPath = path;
 	}
 
-	return KGlobal::dirs()->findExe(e, extPath);
+	return TDEGlobal::dirs()->findExe(e, extPath);
 }
 
 
@@ -324,7 +324,7 @@ bool FloppyAction::configureDevice(int drive,int density)
 	return true;
 }
 
-void FloppyAction::processDone(KProcess *p)
+void FloppyAction::processDone(TDEProcess *p)
 {
 	DEBUGSETUP;
 
@@ -354,14 +354,14 @@ void FloppyAction::processDone(KProcess *p)
 	}
 }
 
-void FloppyAction::processStdOut(KProcess *, char *b, int l)
+void FloppyAction::processStdOut(TDEProcess *, char *b, int l)
 {
 	Q_UNUSED(b);
 	Q_UNUSED(l);
 	kdDebug(KFAREA) << "stdout:" << TQString::fromLatin1(b,l) << endl;
 }
 
-void FloppyAction::processStdErr(KProcess *p, char *b, int l)
+void FloppyAction::processStdErr(TDEProcess *p, char *b, int l)
 {
 	processStdOut(p,b,l);
 }
@@ -370,16 +370,16 @@ bool FloppyAction::startProcess()
 {
 	DEBUGSETUP;
 
-	connect(theProcess,TQT_SIGNAL(processExited(KProcess *)),
-		this,TQT_SLOT(processDone(KProcess *)));
-	connect(theProcess,TQT_SIGNAL(receivedStdout(KProcess *,char *,int)),
-		this,TQT_SLOT(processStdOut(KProcess *,char *,int)));
-	connect(theProcess,TQT_SIGNAL(receivedStderr(KProcess *,char *,int)),
-		this,TQT_SLOT(processStdErr(KProcess *,char *,int)));
+	connect(theProcess,TQT_SIGNAL(processExited(TDEProcess *)),
+		this,TQT_SLOT(processDone(TDEProcess *)));
+	connect(theProcess,TQT_SIGNAL(receivedStdout(TDEProcess *,char *,int)),
+		this,TQT_SLOT(processStdOut(TDEProcess *,char *,int)));
+	connect(theProcess,TQT_SIGNAL(receivedStderr(TDEProcess *,char *,int)),
+		this,TQT_SLOT(processStdErr(TDEProcess *,char *,int)));
 
         theProcess->setEnvironment( "LC_ALL", "C" ); // We need the untranslated output of the tool
-	return theProcess->start(KProcess::NotifyOnExit,
-		KProcess::AllOutput);
+	return theProcess->start(TDEProcess::NotifyOnExit,
+		TDEProcess::AllOutput);
 }
 
 
@@ -425,7 +425,7 @@ bool FDFormat::configure(bool v)
 	}
 
 	if (theProcess) delete theProcess;
-	theProcess = new KProcess;
+	theProcess = new TDEProcess;
 
 	formatTrackCount=0;
 
@@ -464,7 +464,7 @@ bool FDFormat::configure(bool v)
 // need, since the messages can be standardized across OSsen.
 //
 //
-void FDFormat::processStdOut(KProcess *, char *b, int l)
+void FDFormat::processStdOut(TDEProcess *, char *b, int l)
 {
 	DEBUGSETUP;
 	TQString s;
@@ -586,7 +586,7 @@ DDZeroOut::DDZeroOut(TQObject *p) :
     }
 
     delete theProcess;
-    theProcess = new KProcess;
+    theProcess = new TDEProcess;
 
     *theProcess << m_ddName ;
 
@@ -601,7 +601,7 @@ DDZeroOut::DDZeroOut(TQObject *p) :
 
 }
 
-void DDZeroOut::processDone(KProcess *p)
+void DDZeroOut::processDone(TDEProcess *p)
 {
     kdDebug(KFAREA) << (__PRETTY_FUNCTION__) << endl;
 
@@ -685,7 +685,7 @@ void FATFilesystem::exec()
 	}
 
 	if (theProcess) delete theProcess;
-	KProcess *p = theProcess = new KProcess;
+	TDEProcess *p = theProcess = new TDEProcess;
 
 	*p << newfs_fat;
 #ifdef ANY_BSD
@@ -715,7 +715,7 @@ void FATFilesystem::exec()
 	}
 }
 
-void FATFilesystem::processStdOut(KProcess *, char *b, int l)
+void FATFilesystem::processStdOut(TDEProcess *, char *b, int l)
 {
 #ifdef ANY_BSD
     // ### TODO: do some checks
@@ -786,7 +786,7 @@ void UFSFilesystem::exec()
 	}
 
 	if (theProcess) delete theProcess;
-	KProcess *p = theProcess = new KProcess;
+	TDEProcess *p = theProcess = new TDEProcess;
 
 	*p << newfs;
         
@@ -865,7 +865,7 @@ void Ext2Filesystem::exec()
 	}
 
 	if (theProcess) delete theProcess;
-	KProcess *p = theProcess = new KProcess;
+	TDEProcess *p = theProcess = new TDEProcess;
 
 	*p << newfs;
 	*p << "-q";
@@ -881,7 +881,7 @@ void Ext2Filesystem::exec()
 	}
 }
 
-void Ext2Filesystem::processStdOut(KProcess *, char *b, int l)
+void Ext2Filesystem::processStdOut(TDEProcess *, char *b, int l)
 {
 #ifdef ANY_BSD
     // ### TODO: do some checks
@@ -959,7 +959,7 @@ void MinixFilesystem::exec()
 	}
 
 	if (theProcess) delete theProcess;
-	KProcess *p = theProcess = new KProcess;
+	TDEProcess *p = theProcess = new TDEProcess;
 
 	*p << newfs;
 
@@ -975,7 +975,7 @@ void MinixFilesystem::exec()
 	}
 }
 
-void MinixFilesystem::processStdOut(KProcess *, char *b, int l)
+void MinixFilesystem::processStdOut(TDEProcess *, char *b, int l)
 {
     TQString s ( TQString::fromLatin1( b, l ) );
     kdDebug(KFAREA) << s << endl;

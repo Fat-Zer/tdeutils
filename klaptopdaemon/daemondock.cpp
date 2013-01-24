@@ -52,7 +52,7 @@ laptop_dock::laptop_dock( laptop_daemon* parent )
   : KSystemTray()
 {
     setCaption(i18n("KLaptop Daemon"));
-    KGlobal::locale()->insertCatalogue("klaptopdaemon"); // For translation of klaptopdaemon messages
+    TDEGlobal::locale()->insertCatalogue("klaptopdaemon"); // For translation of klaptopdaemon messages
     _pcmcia = NULL;
     pdaemon = parent;
     current_code = -1;
@@ -207,7 +207,7 @@ laptop_dock::invokeBrightness()
 		brightness_slider->setValue(255-brightness);
 	}
 	if (!brightness_widget->isVisible()) {
-		TQRect desktop = KGlobalSettings::desktopGeometry(this);
+		TQRect desktop = TDEGlobalSettings::desktopGeometry(this);
 		int sw = desktop.width();
 		int sh = desktop.height();
 		int sx = desktop.x();
@@ -244,16 +244,16 @@ void laptop_dock::slotGoRoot(int /*id*/) {
 				i18n("KLaptopDaemon"), KStdGuiItem::cont(),
 				"switchToPCMCIAPrompt");
 		if (rc == KMessageBox::Continue) {
-			KProcess *_rootProcess;
-			_rootProcess = new KProcess;
+			TDEProcess *_rootProcess;
+			_rootProcess = new TDEProcess;
 			*_rootProcess << tdesu;
 			*_rootProcess << "-u";
 			*_rootProcess << "root";
 			//*_rootProcess << "--nonewdcop";
 			*_rootProcess << KStandardDirs::findExe("klaptopdaemon");
-			connect(_rootProcess, TQT_SIGNAL(processExited(KProcess*)),
-				this, TQT_SLOT(rootExited(KProcess*)));
-			_rootProcess->start(KProcess::NotifyOnExit);
+			connect(_rootProcess, TQT_SIGNAL(processExited(TDEProcess*)),
+				this, TQT_SLOT(rootExited(TDEProcess*)));
+			_rootProcess->start(TDEProcess::NotifyOnExit);
 			// We should disable this menu item here now.
 		}
 	} else {
@@ -307,7 +307,7 @@ void laptop_dock::slotQuit() {
 }
 
 
-void laptop_dock::rootExited(KProcess *p) {
+void laptop_dock::rootExited(TDEProcess *p) {
 	if (p && p->isRunning()) {
 		p->detach();
 	}
@@ -525,10 +525,10 @@ void laptop_dock::invokeLockSuspend()
 
 void laptop_dock::invokeSetup()
 {
-	KProcess proc;
+	TDEProcess proc;
 	proc << KStandardDirs::findExe("kcmshell");
 	proc << "laptop";
-	proc.start(KProcess::DontCare);
+	proc.start(TDEProcess::DontCare);
 	proc.detach();
 }
 
@@ -690,7 +690,7 @@ quit:
             int oldPixmapWidth = image.size().width();
             int oldPixmapHeight = image.size().height();
             
-            TQFont percentageFont = KGlobalSettings::generalFont();
+            TQFont percentageFont = TDEGlobalSettings::generalFont();
             percentageFont.setBold(true);
         
             // decrease the size of the font for the number of unread messages if the

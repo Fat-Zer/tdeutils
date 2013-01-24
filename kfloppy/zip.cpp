@@ -138,17 +138,17 @@ void ZipFormat::quit()
 	formatStep=0;
 
 	if (p) delete p;
-	p = new KProcess();
+	p = new TDEProcess();
 
 	if (statusTimer) delete statusTimer;
 	statusTimer = new TQTimer(this);
 
-	connect(p,TQT_SIGNAL(processExited(KProcess *)),
+	connect(p,TQT_SIGNAL(processExited(TDEProcess *)),
 		this,TQT_SLOT(transition()));
-	connect(p,TQT_SIGNAL(receivedStdout(KProcess *,char *,int)),
-		this,TQT_SLOT(processResult(KProcess *,char *,int)));
-	connect(p,TQT_SIGNAL(receivedStderr(KProcess *,char *,int)),
-		this,TQT_SLOT(processResult(KProcess *,char *,int)));
+	connect(p,TQT_SIGNAL(receivedStdout(TDEProcess *,char *,int)),
+		this,TQT_SLOT(processResult(TDEProcess *,char *,int)));
+	connect(p,TQT_SIGNAL(receivedStderr(TDEProcess *,char *,int)),
+		this,TQT_SLOT(processResult(TDEProcess *,char *,int)));
 	connect(statusTimer,TQT_SIGNAL(timeout()),
 		this,TQT_SLOT(statusRequest()));
 
@@ -189,7 +189,7 @@ void ZipFormat::transition()
 			<< "of=/dev/afd0c"
 			<< "bs=8192" ;
 		*p << TQString("count=%1").arg(totalBlocks);
-		if (!p->start(KProcess::NotifyOnExit,KProcess::AllOutput))
+		if (!p->start(TDEProcess::NotifyOnExit,TDEProcess::AllOutput))
 		{
 			emit statusMessage(i18n("Cannot start dd to zero disk."));
 			emit formatDone(-1);
@@ -222,7 +222,7 @@ void ZipFormat::transition()
 			*p << "-U" ;
 		}
 		*p << "/dev/afd0c" ;
-		if (!p->start(KProcess::NotifyOnExit,KProcess::AllOutput))
+		if (!p->start(TDEProcess::NotifyOnExit,TDEProcess::AllOutput))
 		{
 			emit statusMessage(i18n("Cannot start newfs."));
 			emit formatDone(-1);
@@ -245,7 +245,7 @@ void ZipFormat::transition()
 	}
 }
 
-void ZipFormat::processResult(KProcess *, char *b, int l)
+void ZipFormat::processResult(TDEProcess *, char *b, int l)
 {
 	DEBUGSETUP;
 

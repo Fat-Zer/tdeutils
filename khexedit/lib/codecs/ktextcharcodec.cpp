@@ -79,7 +79,7 @@ static bool is8Bit( TQTextCodec *Codec )
 
 static TQTextCodec *createLatin1()
 {
-  return KGlobal::charsets()->codecForName( EncodingNames[0].Name );
+  return TDEGlobal::charsets()->codecForName( EncodingNames[0].Name );
 }
 
 /** heuristic seems to be doomed :(
@@ -120,12 +120,12 @@ const TQStringList &KTextCharCodec::codecNames()
   // first call?
   if( CodecNames.isEmpty() )
 {
-    const TQStringList &CharSets = KGlobal::charsets()->availableEncodingNames();
+    const TQStringList &CharSets = TDEGlobal::charsets()->availableEncodingNames();
 
     for( TQStringList::ConstIterator it = CharSets.begin(); it != CharSets.end(); ++it )
 {
       bool Found = true;
-      TQTextCodec* Codec = KGlobal::charsets()->codecForName( *it, Found );
+      TQTextCodec* Codec = TDEGlobal::charsets()->codecForName( *it, Found );
       if( Found && is8Bit(Codec) )
         CodecNames.append( TQString::fromLatin1(Codec->name()) );
 }
@@ -161,7 +161,7 @@ TQStringList KTextCharCodec::CodecNames;
 
 KTextCharCodec *KTextCharCodec::createLocalCodec()
 {
-  TQTextCodec *Codec = KGlobal::locale()->codecForEncoding();
+  TQTextCodec *Codec = TDEGlobal::locale()->codecForEncoding();
   if( !is8Bit(Codec) )
     Codec = createLatin1();
   return new KTextCharCodec( Codec );
@@ -171,7 +171,7 @@ KTextCharCodec *KTextCharCodec::createLocalCodec()
 KTextCharCodec *KTextCharCodec::createCodec( const TQString &CodeName )
 { 
   bool Ok;
-  TQTextCodec *Codec = KGlobal::charsets()->codecForName( CodeName, Ok );
+  TQTextCodec *Codec = TDEGlobal::charsets()->codecForName( CodeName, Ok );
   if( Ok )
     Ok = is8Bit( Codec );
   return Ok ? new KTextCharCodec( Codec ) : 0;
@@ -187,7 +187,7 @@ const TQStringList &KTextCharCodec::codecNames()
     {
       bool Found = true;
       TQString Name = TQString::fromLatin1( EncodingNames[i].Name );
-      TQTextCodec* Codec = KGlobal::charsets()->codecForName( Name, Found );
+      TQTextCodec* Codec = TDEGlobal::charsets()->codecForName( Name, Found );
       if( Found )
         CodecNames.append( TQString::fromLatin1(Codec->name()) );
     }

@@ -88,7 +88,7 @@ Arch::~Arch()
 void Arch::verifyCompressUtilityIsAvailable( const TQString &utility )
 {
   // see if the utility is in the PATH of the user.
-  TQString cmd = KGlobal::dirs()->findExe( utility );
+  TQString cmd = TDEGlobal::dirs()->findExe( utility );
   m_bArchUtilityIsAvailable = !cmd.isEmpty();
 }
 
@@ -96,11 +96,11 @@ void Arch::verifyCompressUtilityIsAvailable( const TQString &utility )
 void Arch::verifyUncompressUtilityIsAvailable( const TQString &utility )
 {
   // see if the utility is in the PATH of the user.
-  TQString cmd = KGlobal::dirs()->findExe( utility );
+  TQString cmd = TDEGlobal::dirs()->findExe( utility );
   m_bUnarchUtilityIsAvailable = !cmd.isEmpty();
 }
 
-void Arch::slotOpenExited( KProcess* _kp )
+void Arch::slotOpenExited( TDEProcess* _kp )
 {
  bool success = ( _kp->normalExit() && ( _kp->exitStatus() == 0 ) );
 
@@ -148,7 +148,7 @@ void Arch::slotOpenExited( KProcess* _kp )
   _kp = m_currentProcess = 0;
 }
 
-void Arch::slotDeleteExited( KProcess *_kp )
+void Arch::slotDeleteExited( TDEProcess *_kp )
 {
   bool success = ( _kp->normalExit() && ( _kp->exitStatus() == 0 ) );
 
@@ -175,7 +175,7 @@ void Arch::slotDeleteExited( KProcess *_kp )
   _kp = m_currentProcess = 0;
 }
 
-void Arch::slotExtractExited( KProcess *_kp )
+void Arch::slotExtractExited( TDEProcess *_kp )
 {
   bool success = ( _kp->normalExit() && ( _kp->exitStatus() == 0 ) );
 
@@ -234,7 +234,7 @@ void Arch::unarchFile( TQStringList *fileList, const TQString & destDir,
     unarchFileInternal();
 }
 
-void Arch::slotAddExited( KProcess *_kp )
+void Arch::slotAddExited( TDEProcess *_kp )
 {
   bool success = ( _kp->normalExit() && ( _kp->exitStatus() == 0 ) );
 
@@ -261,7 +261,7 @@ void Arch::slotAddExited( KProcess *_kp )
   _kp = m_currentProcess = 0;
 }
 
-void Arch::slotReceivedOutput( KProcess*, char* data, int length )
+void Arch::slotReceivedOutput( TDEProcess*, char* data, int length )
 {
   char c = data[ length ];
   data[ length ] = '\0';
@@ -271,7 +271,7 @@ void Arch::slotReceivedOutput( KProcess*, char* data, int length )
 }
 
 
-void Arch::slotReceivedTOC( KProcess*, char* data, int length )
+void Arch::slotReceivedTOC( TDEProcess*, char* data, int length )
 {
   char c = data[ length ];
   data[ length ] = '\0';
@@ -400,7 +400,7 @@ void Arch::test()
     KMessageBox::information(0, i18n("Not implemented."));
 }
 
-void Arch::slotTestExited( KProcess *_kp )
+void Arch::slotTestExited( TDEProcess *_kp )
 {
   bool success = ( _kp->normalExit() && ( _kp->exitStatus() == 0 ) );
 

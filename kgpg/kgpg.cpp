@@ -206,7 +206,7 @@ if (encryptedFolder.exists()) {
                 }
 
 pop = new KPassivePopup();
-	pop->setView(i18n("Processing folder compression and encryption"),i18n("Please wait..."),KGlobal::iconLoader()->loadIcon("kgpg",KIcon::Desktop));
+	pop->setView(i18n("Processing folder compression and encryption"),i18n("Please wait..."),TDEGlobal::iconLoader()->loadIcon("kgpg",KIcon::Desktop));
 	pop->setAutoDelete(false);
 	pop->show();
 	kapp->processEvents();
@@ -592,7 +592,7 @@ void  MyView::firstRun()
 {
         KProcIO *p=new KProcIO();
         *p<<"gpg"<<"--no-tty"<<"--list-secret-keys";
-        p->start(KProcess::Block);  ////  start gnupg so that it will create a config file
+        p->start(TDEProcess::Block);  ////  start gnupg so that it will create a config file
         startWizard();
 }
 
@@ -642,7 +642,7 @@ void  MyView::startWizard()
 
         wiz->kURLRequester1->setURL(confPath);
         /*
-	wiz->kURLRequester2->setURL(KGlobalSettings::desktopPath());
+	wiz->kURLRequester2->setURL(TDEGlobalSettings::desktopPath());
         wiz->kURLRequester2->setMode(2);*/
 
         FILE *fp,*fp2;
@@ -715,7 +715,7 @@ void  MyView::slotWizardChange()
 void  MyView::installShred()
 {
                 KURL path;
-		path.setPath(KGlobalSettings::desktopPath());
+		path.setPath(TDEGlobalSettings::desktopPath());
 		path.addPath("shredder.desktop");
                 KDesktopFile configl2(path.path(), false);
                 if (configl2.isImmutable() ==false) {
@@ -865,7 +865,7 @@ KgpgAppletApp::~KgpgAppletApp()
 
 void KgpgAppletApp::slotHandleQuit()
 {
-s_keyManager->keysList2->saveLayout(KGlobal::config(),"KeyView");
+s_keyManager->keysList2->saveLayout(TDEGlobal::config(),"KeyView");
         KGpgSettings::setPhotoProperties(s_keyManager->photoProps->currentItem());
 	KGpgSettings::setShowTrust(s_keyManager->sTrust->isChecked());
 	KGpgSettings::setShowExpi(s_keyManager->sExpi->isChecked());
@@ -1009,7 +1009,7 @@ int KgpgAppletApp::newInstance()
 void MyView::encryptClipboard(TQStringList selec,TQStringList encryptOptions,bool,bool symmetric)
 {
         if (kapp->clipboard()->text(clipboardMode).isEmpty()) {
-	KPassivePopup::message(i18n("Clipboard is empty."),TQString(),KGlobal::iconLoader()->loadIcon("kgpg",KIcon::Desktop),this);
+	KPassivePopup::message(i18n("Clipboard is empty."),TQString(),TDEGlobal::iconLoader()->loadIcon("kgpg",KIcon::Desktop),this);
 	return;
 	}
                 if (KGpgSettings::pgpCompatibility())
@@ -1033,7 +1033,7 @@ if (newtxt.length()>300)
                 newtxt.replace(TQRegExp("\n"),"<br>");
 
 pop = new KPassivePopup( this);
-                pop->setView(i18n("Encrypted following text:"),newtxt,KGlobal::iconLoader()->loadIcon("kgpg",KIcon::Desktop));
+                pop->setView(i18n("Encrypted following text:"),newtxt,TDEGlobal::iconLoader()->loadIcon("kgpg",KIcon::Desktop));
                 pop->setTimeout(3200);
                 pop->show();
                 TQRect qRect(TQApplication::desktop()->screenGeometry());

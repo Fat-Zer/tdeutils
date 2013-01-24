@@ -90,18 +90,18 @@ void ZipArch::open()
   m_header_removed = false;
   m_finished = false;
 
-  KProcess *kp = m_currentProcess = new KProcess;
+  TDEProcess *kp = m_currentProcess = new TDEProcess;
 
   *kp << m_unarchiver_program << "-v" << m_filename;
 
-  connect( kp, TQT_SIGNAL( receivedStdout(KProcess*, char*, int) ),
-           TQT_SLOT( slotReceivedTOC(KProcess*, char*, int) ) );
-  connect( kp, TQT_SIGNAL( receivedStderr(KProcess*, char*, int) ),
-           TQT_SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
-  connect( kp, TQT_SIGNAL( processExited(KProcess*) ),
-           TQT_SLOT( slotOpenExited(KProcess*) ) );
+  connect( kp, TQT_SIGNAL( receivedStdout(TDEProcess*, char*, int) ),
+           TQT_SLOT( slotReceivedTOC(TDEProcess*, char*, int) ) );
+  connect( kp, TQT_SIGNAL( receivedStderr(TDEProcess*, char*, int) ),
+           TQT_SLOT( slotReceivedOutput(TDEProcess*, char*, int) ) );
+  connect( kp, TQT_SIGNAL( processExited(TDEProcess*) ),
+           TQT_SLOT( slotOpenExited(TDEProcess*) ) );
 
-  if ( !kp->start( KProcess::NotifyOnExit, KProcess::AllOutput ) )
+  if ( !kp->start( TDEProcess::NotifyOnExit, TDEProcess::AllOutput ) )
   {
     KMessageBox::error( 0, i18n( "Could not start a subprocess." ) );
     emit sigOpen( this, false, TQString(), 0 );
@@ -138,7 +138,7 @@ void ZipArch::addDir( const TQString & _dirName )
 
 void ZipArch::addFile( const TQStringList &urls )
 {
-  KProcess *kp = m_currentProcess = new KProcess;
+  TDEProcess *kp = m_currentProcess = new TDEProcess;
   kp->clearArguments();
 
   *kp << m_archiver_program;
@@ -172,14 +172,14 @@ void ZipArch::addFile( const TQStringList &urls )
     *kp << fileURL.fileName();
   }
 
-  connect( kp, TQT_SIGNAL( receivedStdout(KProcess*, char*, int) ),
-           TQT_SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
-  connect( kp, TQT_SIGNAL( receivedStderr(KProcess*, char*, int) ),
-           TQT_SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
-  connect( kp, TQT_SIGNAL( processExited(KProcess*) ),
-           TQT_SLOT( slotAddExited(KProcess*) ) );
+  connect( kp, TQT_SIGNAL( receivedStdout(TDEProcess*, char*, int) ),
+           TQT_SLOT( slotReceivedOutput(TDEProcess*, char*, int) ) );
+  connect( kp, TQT_SIGNAL( receivedStderr(TDEProcess*, char*, int) ),
+           TQT_SLOT( slotReceivedOutput(TDEProcess*, char*, int) ) );
+  connect( kp, TQT_SIGNAL( processExited(TDEProcess*) ),
+           TQT_SLOT( slotAddExited(TDEProcess*) ) );
 
-  if ( !kp->start( KProcess::NotifyOnExit, KProcess::AllOutput ) )
+  if ( !kp->start( TDEProcess::NotifyOnExit, TDEProcess::AllOutput ) )
   {
     KMessageBox::error( 0, i18n( "Could not start a subprocess." ) );
     emit sigAdd( false );
@@ -196,7 +196,7 @@ void ZipArch::unarchFileInternal()
     return;
   }
 
-  KProcess *kp = m_currentProcess = new KProcess;
+  TDEProcess *kp = m_currentProcess = new TDEProcess;
   kp->clearArguments();
 
   *kp << m_unarchiver_program;
@@ -231,14 +231,14 @@ void ZipArch::unarchFileInternal()
 
   *kp << "-d" << m_destDir;
 
-  connect( kp, TQT_SIGNAL( receivedStdout(KProcess*, char*, int) ),
-           TQT_SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
-  connect( kp, TQT_SIGNAL( receivedStderr(KProcess*, char*, int) ),
-           TQT_SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
-  connect( kp, TQT_SIGNAL( processExited(KProcess*) ),
-           TQT_SLOT( slotExtractExited(KProcess*) ) );
+  connect( kp, TQT_SIGNAL( receivedStdout(TDEProcess*, char*, int) ),
+           TQT_SLOT( slotReceivedOutput(TDEProcess*, char*, int) ) );
+  connect( kp, TQT_SIGNAL( receivedStderr(TDEProcess*, char*, int) ),
+           TQT_SLOT( slotReceivedOutput(TDEProcess*, char*, int) ) );
+  connect( kp, TQT_SIGNAL( processExited(TDEProcess*) ),
+           TQT_SLOT( slotExtractExited(TDEProcess*) ) );
 
-  if ( !kp->start( KProcess::NotifyOnExit, KProcess::AllOutput ) )
+  if ( !kp->start( TDEProcess::NotifyOnExit, TDEProcess::AllOutput ) )
   {
     KMessageBox::error( 0, i18n( "Could not start a subprocess." ) );
     emit sigExtract( false );
@@ -256,7 +256,7 @@ void ZipArch::remove( TQStringList *list )
     return;
 
 
-  KProcess *kp = m_currentProcess = new KProcess;
+  TDEProcess *kp = m_currentProcess = new TDEProcess;
   kp->clearArguments();
 
   *kp << m_archiver_program << "-d" << m_filename;
@@ -268,14 +268,14 @@ void ZipArch::remove( TQStringList *list )
     *kp << str;
   }
 
-  connect( kp, TQT_SIGNAL( receivedStdout(KProcess*, char*, int) ),
-           TQT_SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
-  connect( kp, TQT_SIGNAL( receivedStderr(KProcess*, char*, int) ),
-           TQT_SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
-  connect( kp, TQT_SIGNAL( processExited(KProcess*) ),
-           TQT_SLOT( slotDeleteExited(KProcess*) ) );
+  connect( kp, TQT_SIGNAL( receivedStdout(TDEProcess*, char*, int) ),
+           TQT_SLOT( slotReceivedOutput(TDEProcess*, char*, int) ) );
+  connect( kp, TQT_SIGNAL( receivedStderr(TDEProcess*, char*, int) ),
+           TQT_SLOT( slotReceivedOutput(TDEProcess*, char*, int) ) );
+  connect( kp, TQT_SIGNAL( processExited(TDEProcess*) ),
+           TQT_SLOT( slotDeleteExited(TDEProcess*) ) );
 
-  if ( !kp->start( KProcess::NotifyOnExit, KProcess::AllOutput ) )
+  if ( !kp->start( TDEProcess::NotifyOnExit, TDEProcess::AllOutput ) )
   {
     KMessageBox::error( 0, i18n( "Could not start a subprocess." ) );
     emit sigDelete( false );
@@ -286,7 +286,7 @@ void ZipArch::test()
 {
   clearShellOutput();
 
-  KProcess *kp = m_currentProcess = new KProcess;
+  TDEProcess *kp = m_currentProcess = new TDEProcess;
   kp->clearArguments();
 
   *kp << m_unarchiver_program << "-t";
@@ -296,14 +296,14 @@ void ZipArch::test()
 
   *kp << m_filename;
 
-  connect( kp, SIGNAL( receivedStdout(KProcess*, char*, int) ),
-           SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
-  connect( kp, SIGNAL( receivedStderr(KProcess*, char*, int) ),
-           SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
-  connect( kp, SIGNAL( processExited(KProcess*) ),
-           SLOT( slotTestExited(KProcess*) ) );
+  connect( kp, SIGNAL( receivedStdout(TDEProcess*, char*, int) ),
+           SLOT( slotReceivedOutput(TDEProcess*, char*, int) ) );
+  connect( kp, SIGNAL( receivedStderr(TDEProcess*, char*, int) ),
+           SLOT( slotReceivedOutput(TDEProcess*, char*, int) ) );
+  connect( kp, SIGNAL( processExited(TDEProcess*) ),
+           SLOT( slotTestExited(TDEProcess*) ) );
 
-  if ( !kp->start( KProcess::NotifyOnExit, KProcess::AllOutput ) )
+  if ( !kp->start( TDEProcess::NotifyOnExit, TDEProcess::AllOutput ) )
   {
     KMessageBox::error( 0, i18n( "Could not start a subprocess." ) );
     emit sigTest( false );

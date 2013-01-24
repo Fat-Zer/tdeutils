@@ -37,7 +37,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 class TQString;
 class TQStrList;
 
-class KProcess;
+class TDEProcess;
 class KTempDir;
 class KTarDirectory;
 class KTar;
@@ -77,14 +77,14 @@ class TarArch : public Arch
 		TQString getUnCompressor();
 
 	public slots:
-		void updateProgress( KProcess *_kp, char *_buffer, int _bufflen );
-		void openFinished( KProcess * );
-		void updateFinished( KProcess * );
-		void createTmpFinished( KProcess * );
-		void createTmpProgress( KProcess *_kp, char *_buffer, int _bufflen );
-		void slotAddFinished( KProcess * );
-		void slotListingDone( KProcess * );
-		void slotDeleteExited( KProcess * );
+		void updateProgress( TDEProcess *_kp, char *_buffer, int _bufflen );
+		void openFinished( TDEProcess * );
+		void updateFinished( TDEProcess * );
+		void createTmpFinished( TDEProcess * );
+		void createTmpProgress( TDEProcess *_kp, char *_buffer, int _bufflen );
+		void slotAddFinished( TDEProcess * );
+		void slotListingDone( TDEProcess * );
+		void slotDeleteExited( TDEProcess * );
 
 	signals:
 		void removeDone();
@@ -126,8 +126,8 @@ class TarArch : public Arch
 		FILE *fd;
 		TQStringList m_filesToAdd;
 		TQStringList m_filesToRemove;
-		KProcess * m_pTmpProc;
-		KProcess * m_pTmpProc2;
+		TDEProcess * m_pTmpProc;
+		TDEProcess * m_pTmpProc2;
 		bool failed;
 		bool m_dotslash;
 		TarListingThread *m_listingThread;

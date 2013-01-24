@@ -48,7 +48,7 @@ PcmciaConfig::PcmciaConfig (TQWidget * parent, const char *name)
        about->addAuthor("Paul Campbell", 0, "paul@taniwha.com");
        setAboutData( about );
 
-       KGlobal::locale()->insertCatalogue("klaptopdaemon"); // For translation of klaptopdaemon messages
+       TDEGlobal::locale()->insertCatalogue("klaptopdaemon"); // For translation of klaptopdaemon messages
 
        label0 = laptop_portable::pcmcia_info(0, this);
        label0_text = laptop_portable::pcmcia_info(1, this);

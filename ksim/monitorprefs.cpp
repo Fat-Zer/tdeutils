@@ -45,7 +45,7 @@ KSim::MonitorPrefs::MonitorPrefs(TQWidget *parent, const char *name)
   setSelectionMode(TQListView::Single);
 
   // Scan for .desktop files and enter them into the KListView
-  m_locatedFiles = KGlobal::dirs()->findAllResources("data", "ksim/monitors/*.desktop");
+  m_locatedFiles = TDEGlobal::dirs()->findAllResources("data", "ksim/monitors/*.desktop");
   m_locatedFiles.sort();
   TQStringList::ConstIterator it;
   for (it = m_locatedFiles.begin(); it != m_locatedFiles.end(); ++it) {

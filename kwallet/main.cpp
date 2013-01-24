@@ -71,7 +71,7 @@ int main(int argc, char **argv) {
 
 	a.setMainWidget(&wm);
 
-	KGlobal::dirs()->addResourceType("kwallet", "share/apps/kwallet");
+	TDEGlobal::dirs()->addResourceType("kwallet", "share/apps/kwallet");
 
 	TDECmdLineArgs *args = TDECmdLineArgs::parsedArgs();
 

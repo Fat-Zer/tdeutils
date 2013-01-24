@@ -98,7 +98,7 @@ bool GenericMonitor::init()
 		{ "Mute", KShortcut("XF86AudioMute"), TQT_SLOT(mute()) }
 	};
 
-	ga = new KGlobalAccel(this, "miloGenericAccel");
+	ga = new TDEGlobalAccel(this, "miloGenericAccel");
 
 	ShortcutInfo si;
 	int len = (int)sizeof(shortcuts)/sizeof(ShortcutInfo);
@@ -338,9 +338,9 @@ Monitor::DisplayType GenericMonitor::poll()
 void GenericMonitor::launch(TQString configKey, TQString defaultApplication)
 {
 	TQString application = config->readEntry(configKey, defaultApplication);
-	KProcess proc;
+	TDEProcess proc;
 	proc << application;
-	proc.start(KProcess::DontCare);
+	proc.start(TDEProcess::DontCare);
 }
 
 void GenericMonitor::launchMail()
@@ -362,9 +362,9 @@ void GenericMonitor::launchSearch()
 void GenericMonitor::launchHomeFolder()
 {
 	TQString home = TQDir::home().path();
-	KProcess proc;
+	TDEProcess proc;
 	proc << "kfmclient" << "exec" << home;
-	proc.start(KProcess::DontCare);
+	proc.start(TDEProcess::DontCare);
 }
 
 void GenericMonitor::launchMusic()

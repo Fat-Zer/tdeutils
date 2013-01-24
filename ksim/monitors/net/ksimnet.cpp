@@ -391,8 +391,8 @@ void NetView::updateGraph()
       ( *it ).chart()->setValue( receiveDiff, sendDiff );
       ( *it ).setMaxValue( ( *it ).chart()->maxValue() );
 
-      TQString receiveString = KGlobal::locale()->formatNumber( ( float ) receiveDiff / 1024.0, 1 );
-      TQString sendString = KGlobal::locale()->formatNumber( ( float ) sendDiff / 1024.0, 1 );
+      TQString receiveString = TDEGlobal::locale()->formatNumber( ( float ) receiveDiff / 1024.0, 1 );
+      TQString sendString = TDEGlobal::locale()->formatNumber( ( float ) sendDiff / 1024.0, 1 );
 
       ( *it ).chart()->setText( i18n( "in: %1k" ).arg( receiveString ),
          i18n( "out: %1k" ).arg( sendString ) );
@@ -402,8 +402,8 @@ void NetView::updateGraph()
       ( *it ).setData( NetData() );
       ( *it ).chart()->setValue( 0, 0 );
 
-      ( *it ).chart()->setText( i18n( "in: %1k" ).arg( KGlobal::locale()->formatNumber( 0.0, 1 ) ),
-         i18n( "out: %1k" ).arg( KGlobal::locale()->formatNumber( 0.0, 1 ) ) );
+      ( *it ).chart()->setText( i18n( "in: %1k" ).arg( TDEGlobal::locale()->formatNumber( 0.0, 1 ) ),
+         i18n( "out: %1k" ).arg( TDEGlobal::locale()->formatNumber( 0.0, 1 ) ) );
 
       if ( ( *it ).label() )
         ( *it ).label()->setText( i18n( "offline" ) );

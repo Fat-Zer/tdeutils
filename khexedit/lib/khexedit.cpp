@@ -128,7 +128,7 @@ KHexEdit::KHexEdit( KDataBuffer *Buffer, TQWidget *Parent, const char *Name, WFl
   FixedFont.setFixedPitch( true );
   setFont( FixedFont );
 #else
-  setFont( KGlobalSettings::fixedFont() );
+  setFont( TDEGlobalSettings::fixedFont() );
 #endif
 
   // get the full control

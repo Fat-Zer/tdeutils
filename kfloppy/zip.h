@@ -41,7 +41,7 @@
 
 class TQCheckBox;
 class TQTimer;
-class KProcess;
+class TDEProcess;
 class KConfig;
 
 class ZipFormat : public DiskFormat
@@ -74,7 +74,7 @@ protected:
 
 	static TQString newfs,dd;
 
-	KProcess *p;	///< dd or newfs, doing the real work
+	TDEProcess *p;	///< dd or newfs, doing the real work
 	int formatStep;	///< keeps track of what phase we are in
 
 	// Variables for the zeroing phase
@@ -93,7 +93,7 @@ protected slots:
          * processResult() reads output
 	 * from either dd or newfs and interprets it.
          */
-	void processResult(KProcess *,char *,int);
+	void processResult(TDEProcess *,char *,int);
          
         /**
          *statusRequest()

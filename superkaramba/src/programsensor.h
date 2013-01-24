@@ -32,8 +32,8 @@ private:
     TQString sensorResult;
 
 public slots:
-    void receivedStdout(KProcess *proc, char *buffer, int buflen);
-    void processExited(KProcess *proc);
+    void receivedStdout(TDEProcess *proc, char *buffer, int buflen);
+    void processExited(TDEProcess *proc);
 };
 
 #endif // PROGRAMSENSOR_H

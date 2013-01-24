@@ -40,8 +40,8 @@ private:
     TQString sensorResult;
 
 private slots:
-    void receivedStdout(KProcess *, char *buffer, int);
-    void processExited(KProcess *);
+    void receivedStdout(TDEProcess *, char *buffer, int);
+    void processExited(TDEProcess *);
 
 
 

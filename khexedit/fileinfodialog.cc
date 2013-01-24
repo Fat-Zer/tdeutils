@@ -100,7 +100,7 @@ CFileInfoDialog::CFileInfoDialog( TQWidget *parent,const char *name,bool modal)
   gbox->addWidget( mFileSizeLabel, 1, 1 );
 
   mFrequencyList = new CListView( plainPage(), "stringList" );
-  mFrequencyList->setFont( KGlobalSettings::fixedFont() );
+  mFrequencyList->setFont( TDEGlobalSettings::fixedFont() );
 
   mFrequencyList->addColumn( i18n("Hexadecimal") );
   mFrequencyList->addColumn( i18n("Decimal") );
@@ -219,7 +219,7 @@ void CFileInfoDialog::setStatistics( SStatisticControl &sc )
   setClean();
   mFrequencyList->clear();
   mFileNameLabel->setText( sc.documentName );
-  mFileSizeLabel->setText( KGlobal::locale()->formatNumber(sc.documentSize, 0) );
+  mFileSizeLabel->setText( TDEGlobal::locale()->formatNumber(sc.documentSize, 0) );
 
   TQString d, h, o, b, c, n, p;
   TQListViewItem *item = 0;

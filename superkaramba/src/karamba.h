@@ -136,7 +136,7 @@ public:
     KarambaRootPixmap *kroot;
     TaskManager taskManager;
     Systemtray* systray;
-    KProcess* currProcess;
+    TDEProcess* currProcess;
     bool useSmoothTransforms();
 
     void changeInterval(int interval);
@@ -267,8 +267,8 @@ public slots:
     void updateBackground(KSharedPixmap*);
     void passMenuOptionChanged(TQString key, bool);
     void passMenuItemClicked(int);
-    void processExited (KProcess *proc);
-    void receivedStdout (KProcess *proc, char *buffer, int buflen);
+    void processExited (TDEProcess *proc);
+    void receivedStdout (TDEProcess *proc, char *buffer, int buflen);
     void toDesktop(int desktopid, int menuid);
     const char *getPrettyName() { return prettyName.ascii(); }
 

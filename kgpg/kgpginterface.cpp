@@ -111,9 +111,9 @@ void KgpgInterface::KgpgEncryptFile(TQStringList encryptKeys,KURL srcUrl,KURL de
 		*proc<<TQString(TQFile::encodeName(srcUrl.path()));
 
         /////////  when process ends, update dialog infos
-        TQObject::connect(proc, TQT_SIGNAL(processExited(KProcess *)),this,TQT_SLOT(encryptfin(KProcess *)));
+        TQObject::connect(proc, TQT_SIGNAL(processExited(TDEProcess *)),this,TQT_SLOT(encryptfin(TDEProcess *)));
         TQObject::connect(proc,TQT_SIGNAL(readReady(KProcIO *)),this,TQT_SLOT(readencprocess(KProcIO *)));
-        proc->start(KProcess::NotifyOnExit,true);
+        proc->start(TDEProcess::NotifyOnExit,true);
 }
 
 
@@ -121,7 +121,7 @@ KgpgInterface::~KgpgInterface()
 {}
 
 
-void KgpgInterface::encryptfin(KProcess *)
+void KgpgInterface::encryptfin(TDEProcess *)
 {
         if (message.find("END_ENCRYPTION")!=-1)
                 emit encryptionfinished(sourceFile);
@@ -180,12 +180,12 @@ void KgpgInterface::KgpgDecryptFile(KURL srcUrl,KURL destUrl,TQStringList Option
 
                 *proc<<"-d"<<TQString(TQFile::encodeName(srcUrl.path()));
 
-        TQObject::connect(proc, TQT_SIGNAL(processExited(KProcess *)),this,TQT_SLOT(decryptfin(KProcess *)));
+        TQObject::connect(proc, TQT_SIGNAL(processExited(TDEProcess *)),this,TQT_SLOT(decryptfin(TDEProcess *)));
         TQObject::connect(proc,TQT_SIGNAL(readReady(KProcIO *)),this,TQT_SLOT(readdecprocess(KProcIO *)));
-        proc->start(KProcess::NotifyOnExit,true);
+        proc->start(TDEProcess::NotifyOnExit,true);
 }
 
-void KgpgInterface::decryptfin(KProcess *)
+void KgpgInterface::decryptfin(TDEProcess *)
 {
         if ((message.find("DECRYPTION_OKAY")!=-1) && (message.find("END_DECRYPTION")!=-1)) //&& (message.find("GOODMDC")!=-1)
                 emit decryptionfinished();
@@ -248,7 +248,7 @@ void KgpgInterface::readdecprocess(KProcIO *p)
 void KgpgInterface::KgpgEncryptText(TQString text,TQStringList userIDs, TQStringList Options)
 {
         message=TQString();
-	//TQTextCodec *codec = KGlobal::charsets()->codecForName(KGlobal::locale()->encoding());
+	//TQTextCodec *codec = TDEGlobal::charsets()->codecForName(TDEGlobal::locale()->encoding());
 	TQTextCodec *codec =TQTextCodec::codecForLocale ();
 	if (codec->canEncode(text)) txtToEncrypt=text;
 	else txtToEncrypt=text.utf8();
@@ -270,14 +270,14 @@ void KgpgInterface::KgpgEncryptText(TQString text,TQStringList userIDs, TQString
 
         /////////  when process ends, update dialog infos
 
-        TQObject::connect(proc, TQT_SIGNAL(processExited(KProcess *)),this,TQT_SLOT(txtencryptfin(KProcess *)));
+        TQObject::connect(proc, TQT_SIGNAL(processExited(TDEProcess *)),this,TQT_SLOT(txtencryptfin(TDEProcess *)));
         TQObject::connect(proc,TQT_SIGNAL(readReady(KProcIO *)),this,TQT_SLOT(txtreadencprocess(KProcIO *)));
-        proc->start(KProcess::NotifyOnExit,false);
+        proc->start(TDEProcess::NotifyOnExit,false);
 	emit txtencryptionstarted();
 }
 
 
-void KgpgInterface::txtencryptfin(KProcess *)
+void KgpgInterface::txtencryptfin(TDEProcess *)
 {
         if (!message.isEmpty())
                 emit txtencryptionfinished(message);
@@ -328,7 +328,7 @@ void KgpgInterface::KgpgDecryptText(TQString text,TQStringList Options)
   decfinished=false;
   decok=false;
   badmdc=false;
-  KProcess *proc=new KProcess();
+  TDEProcess *proc=new TDEProcess();
   *proc<<"gpg"<<"--no-tty"<<"--no-secmem-warning"<<"--command-fd=0"<<"--status-fd=2"<<"--no-batch"<<"--utf8-strings";
   for ( TQStringList::Iterator it = Options.begin(); it != Options.end(); ++it )
 	  if (!TQFile::encodeName(*it).isEmpty()) *proc<< TQString(TQFile::encodeName(*it));
@@ -336,14 +336,14 @@ void KgpgInterface::KgpgDecryptText(TQString text,TQStringList Options)
 
   /////////  when process ends, update dialog infos
 
-  TQObject::connect(proc, TQT_SIGNAL(processExited(KProcess *)),this,TQT_SLOT(txtdecryptfin(KProcess *)));
-  connect(proc, TQT_SIGNAL(receivedStdout(KProcess *, char *, int)),this, TQT_SLOT(getOutput(KProcess *, char *, int)));
-  connect(proc, TQT_SIGNAL(receivedStderr(KProcess *, char *, int)),this, TQT_SLOT(getCmdOutput(KProcess *, char *, int)));
-  proc->start(KProcess::NotifyOnExit,KProcess::All);
+  TQObject::connect(proc, TQT_SIGNAL(processExited(TDEProcess *)),this,TQT_SLOT(txtdecryptfin(TDEProcess *)));
+  connect(proc, TQT_SIGNAL(receivedStdout(TDEProcess *, char *, int)),this, TQT_SLOT(getOutput(TDEProcess *, char *, int)));
+  connect(proc, TQT_SIGNAL(receivedStderr(TDEProcess *, char *, int)),this, TQT_SLOT(getCmdOutput(TDEProcess *, char *, int)));
+  proc->start(TDEProcess::NotifyOnExit,TDEProcess::All);
   proc->writeStdin(text.utf8(), text.length());
 }
 
-void KgpgInterface::txtdecryptfin(KProcess *)
+void KgpgInterface::txtdecryptfin(TDEProcess *)
 {
 if ((decok) && (!badmdc))
 emit txtdecryptionfinished(message);
@@ -358,13 +358,13 @@ emit txtdecryptionfailed(log);
 }
 
 
-void KgpgInterface::getOutput(KProcess *, char *data, int )
+void KgpgInterface::getOutput(TDEProcess *, char *data, int )
 {
 	message.append(TQString::fromUtf8(data));
 }
 
 
-void KgpgInterface::getCmdOutput(KProcess *p, char *data, int )
+void KgpgInterface::getCmdOutput(TDEProcess *p, char *data, int )
 {
   gpgOutput.append(TQString::fromUtf8(data));
   log.append(data);
@@ -450,12 +450,12 @@ void KgpgInterface::KgpgSignText(TQString text,TQString userIDs, TQStringList Op
 
         /////////  when process ends, update dialog infos
 
-        TQObject::connect(proc, TQT_SIGNAL(processExited(KProcess *)),this,TQT_SLOT(txtsignfin(KProcess *)));
+        TQObject::connect(proc, TQT_SIGNAL(processExited(TDEProcess *)),this,TQT_SLOT(txtsignfin(TDEProcess *)));
         TQObject::connect(proc,TQT_SIGNAL(readReady(KProcIO *)),this,TQT_SLOT(txtsignprocess(KProcIO *)));
 
 	//emit txtsigningstarted();
 
-	proc->start(KProcess::NotifyOnExit,false);
+	proc->start(TDEProcess::NotifyOnExit,false);
 	/*if (useAgent)
 	{
 	kdDebug(2100)<<"Using Agent+++++++++++++"<<endl;
@@ -468,7 +468,7 @@ void KgpgInterface::KgpgSignText(TQString text,TQString userIDs, TQStringList Op
 }
 
 
-void KgpgInterface::txtsignfin(KProcess *)
+void KgpgInterface::txtsignfin(TDEProcess *)
 {
         if (!message.isEmpty())
                 emit txtSignOver(message);
@@ -530,7 +530,7 @@ decfinished=false;
 decok=false;
 badmdc=false;
 
-  KProcess *proc=new KProcess();
+  TDEProcess *proc=new TDEProcess();
   *proc<<"gpg"<<"--no-tty"<<"--utf8-strings"<<"--no-secmem-warning"<<"--command-fd=0"<<"--status-fd=2"<<"--no-batch"<<"-o"<<"-";
       	for ( TQStringList::Iterator it = Options.begin(); it != Options.end(); ++it ) {
        		if (!TQFile::encodeName(*it).isEmpty()) *proc<< TQString(TQFile::encodeName(*it));
@@ -539,10 +539,10 @@ badmdc=false;
 
   /////////  when process ends, update dialog infos
 
-  connect(proc, TQT_SIGNAL(processExited(KProcess *)),this,TQT_SLOT(txtdecryptfin(KProcess *)));
-  connect(proc, TQT_SIGNAL(receivedStdout(KProcess *, char *, int)),this, TQT_SLOT(getOutput(KProcess *, char *, int)));
-  connect(proc, TQT_SIGNAL(receivedStderr(KProcess *, char *, int)),this, TQT_SLOT(getCmdOutput(KProcess *, char *, int)));
-  proc->start(KProcess::NotifyOnExit,KProcess::All);
+  connect(proc, TQT_SIGNAL(processExited(TDEProcess *)),this,TQT_SLOT(txtdecryptfin(TDEProcess *)));
+  connect(proc, TQT_SIGNAL(receivedStdout(TDEProcess *, char *, int)),this, TQT_SLOT(getOutput(TDEProcess *, char *, int)));
+  connect(proc, TQT_SIGNAL(receivedStderr(TDEProcess *, char *, int)),this, TQT_SLOT(getCmdOutput(TDEProcess *, char *, int)));
+  proc->start(TDEProcess::NotifyOnExit,TDEProcess::All);
 }
 
 
@@ -559,15 +559,15 @@ void KgpgInterface::KgpgVerifyText(TQString text)
 		message=TQString();
 		 KProcIO *verifyproc=new KProcIO(TQTextCodec::codecForLocale());
          *verifyproc<<"gpg"<<"--no-secmem-warning"<<"--status-fd=2"<<"--command-fd=0"<<"--utf8-strings"<<"--verify";
-        	connect(verifyproc, TQT_SIGNAL(processExited(KProcess *)),this, TQT_SLOT(slotverifyresult(KProcess *)));
+        	connect(verifyproc, TQT_SIGNAL(processExited(TDEProcess *)),this, TQT_SLOT(slotverifyresult(TDEProcess *)));
         	connect(verifyproc, TQT_SIGNAL(readReady(KProcIO *)),this, TQT_SLOT(slotverifyread(KProcIO *)));
-        	verifyproc->start(KProcess::NotifyOnExit,true);
+        	verifyproc->start(TDEProcess::NotifyOnExit,true);
 		verifyproc->writeStdin (text);
 		verifyproc->closeWhenDone();
 }
 
 
-void KgpgInterface::slotverifyresult(KProcess*)
+void KgpgInterface::slotverifyresult(TDEProcess*)
 {
 if (signmiss) emit missingSignature(signID);
     else {
@@ -705,14 +705,14 @@ void KgpgInterface::KgpgSignFile(TQString keyID,KURL srcUrl,TQStringList Options
 	*proc<<"--output"<<TQString(TQFile::encodeName(srcUrl.path()+".sig"));
         *proc<<"--detach-sig"<<TQString(TQFile::encodeName(srcUrl.path()));
 
-        TQObject::connect(proc, TQT_SIGNAL(processExited(KProcess *)),this,TQT_SLOT(signfin(KProcess *)));
+        TQObject::connect(proc, TQT_SIGNAL(processExited(TDEProcess *)),this,TQT_SLOT(signfin(TDEProcess *)));
         TQObject::connect(proc,TQT_SIGNAL(readReady(KProcIO *)),this,TQT_SLOT(readsignprocess(KProcIO *)));
-        proc->start(KProcess::NotifyOnExit,true);
+        proc->start(TDEProcess::NotifyOnExit,true);
 }
 
 
 
-void KgpgInterface::signfin(KProcess *)
+void KgpgInterface::signfin(TDEProcess *)
 {
         if (message.find("SIG_CREATED")!=-1)
                 KMessageBox::information(0,i18n("The signature file %1 was successfully created.").arg(file.fileName()));
@@ -778,9 +778,9 @@ void KgpgInterface::KgpgVerifyFile(KURL sigUrl,KURL srcUrl)
                 *proc<<TQString(TQFile::encodeName(srcUrl.path()));
         *proc<<TQString(TQFile::encodeName(sigUrl.path()));
 
-        TQObject::connect(proc, TQT_SIGNAL(processExited(KProcess *)),this,TQT_SLOT(verifyfin(KProcess *)));
+        TQObject::connect(proc, TQT_SIGNAL(processExited(TDEProcess *)),this,TQT_SLOT(verifyfin(TDEProcess *)));
         TQObject::connect(proc,TQT_SIGNAL(readReady(KProcIO *)),this,TQT_SLOT(readprocess(KProcIO *)));
-        proc->start(KProcess::NotifyOnExit,true);
+        proc->start(TDEProcess::NotifyOnExit,true);
 }
 
 
@@ -819,7 +819,7 @@ TQString required;
 }
 
 
-void KgpgInterface::verifyfin(KProcess *)
+void KgpgInterface::verifyfin(TDEProcess *)
 {
     if (!signmiss) {
         if (signID.isEmpty()) signID=i18n("No signature found.");
@@ -860,8 +860,8 @@ void KgpgInterface::KgpgSignKey(TQString keyID,TQString signKeyID,TQString signK
 	if (local) *conprocess<<"lsign";
 	else *conprocess<<"sign";
         TQObject::connect(conprocess,TQT_SIGNAL(readReady(KProcIO *)),this,TQT_SLOT(sigprocess(KProcIO *)));
-        TQObject::connect(conprocess, TQT_SIGNAL(processExited(KProcess *)),this, TQT_SLOT(signover(KProcess *)));
-        conprocess->start(KProcess::NotifyOnExit,true);
+        TQObject::connect(conprocess, TQT_SIGNAL(processExited(TDEProcess *)),this, TQT_SLOT(signover(TDEProcess *)));
+        conprocess->start(TDEProcess::NotifyOnExit,true);
 }
 
 void KgpgInterface::sigprocess(KProcIO *p)
@@ -941,7 +941,7 @@ void KgpgInterface::sigprocess(KProcIO *p)
 }
 
 
-void KgpgInterface::signover(KProcess *)
+void KgpgInterface::signover(TDEProcess *)
 {
         if (signSuccess>1)
                 emit signatureFinished(signSuccess);  ////   signature successful or bad passphrase
@@ -957,8 +957,8 @@ void KgpgInterface::signover(KProcess *)
 
 void KgpgInterface::openSignConsole()
 {
-        KProcess conprocess;
-	KConfig *config = KGlobal::config();
+        TDEProcess conprocess;
+	KConfig *config = TDEGlobal::config();
 	config->setGroup("General");
 	conprocess<< config->readPathEntry("TerminalApplication","konsole");
         conprocess<<"-e"<<"gpg";
@@ -967,7 +967,7 @@ void KgpgInterface::openSignConsole()
                 conprocess<<"--sign-key"<<konsKeyID;
         else
                 conprocess<<"--lsign-key"<<konsKeyID;
-        conprocess.start(KProcess::Block);
+        conprocess.start(TDEProcess::Block);
 	emit signatureFinished(3);
 
 }
@@ -1008,8 +1008,8 @@ void KgpgInterface::KgpgDelSignature(TQString keyID,TQString signKeyID)
         *conprocess<<"gpg"<<"--no-secmem-warning"<<"--no-tty"<<"--utf8-strings"<<"--command-fd=0"<<"--status-fd=2";
         *conprocess<<"--edit-key"<<keyID<<"uid 1"<<"delsig";
         TQObject::connect(conprocess,TQT_SIGNAL(readReady(KProcIO *)),this,TQT_SLOT(delsigprocess(KProcIO *)));
-        TQObject::connect(conprocess, TQT_SIGNAL(processExited(KProcess *)),this, TQT_SLOT(delsignover(KProcess *)));
-        conprocess->start(KProcess::NotifyOnExit,true);
+        TQObject::connect(conprocess, TQT_SIGNAL(processExited(TDEProcess *)),this, TQT_SLOT(delsignover(TDEProcess *)));
+        conprocess->start(TDEProcess::NotifyOnExit,true);
 }
 
 
@@ -1042,7 +1042,7 @@ void KgpgInterface::delsigprocess(KProcIO *p)
         }
 }
 
-void KgpgInterface::delsignover(KProcess *)
+void KgpgInterface::delsignover(TDEProcess *)
 {
         emit delsigfinished(deleteSuccess);
 }
@@ -1085,8 +1085,8 @@ void KgpgInterface::KgpgKeyExpire(TQString keyID,TQDate date,bool unlimited)
         *conprocess<<"gpg"<<"--no-secmem-warning"<<"--no-tty"<<"--command-fd=0"<<"--status-fd=2"<<"--utf8-strings";
         *conprocess<<"--edit-key"<<keyID<<"expire";
         TQObject::connect(conprocess,TQT_SIGNAL(readReady(KProcIO *)),this,TQT_SLOT(expprocess(KProcIO *)));
-        TQObject::connect(conprocess, TQT_SIGNAL(processExited(KProcess *)),this, TQT_SLOT(expover(KProcess *)));
-        conprocess->start(KProcess::NotifyOnExit,KProcess::AllOutput);
+        TQObject::connect(conprocess, TQT_SIGNAL(processExited(TDEProcess *)),this, TQT_SLOT(expover(TDEProcess *)));
+        conprocess->start(TDEProcess::NotifyOnExit,TDEProcess::AllOutput);
 
 }
 
@@ -1150,7 +1150,7 @@ void KgpgInterface::expprocess(KProcIO *p)
 
 
 
-void KgpgInterface::expover(KProcess *)
+void KgpgInterface::expover(TDEProcess *)
 {
         if ((expSuccess==3) || (expSuccess==2))
                 emit expirationFinished(expSuccess);  ////   signature successful or bad passphrase
@@ -1179,8 +1179,8 @@ void KgpgInterface::KgpgTrustExpire(TQString keyID,int keyTrust)
         *conprocess<<"gpg"<<"--no-secmem-warning"<<"--no-tty"<<"--command-fd=0"<<"--status-fd=2"<<"--utf8-strings";
         *conprocess<<"--edit-key"<<keyID<<"trust";
         TQObject::connect(conprocess,TQT_SIGNAL(readReady(KProcIO *)),this,TQT_SLOT(trustprocess(KProcIO *)));
-        TQObject::connect(conprocess, TQT_SIGNAL(processExited(KProcess *)),this, TQT_SLOT(trustover(KProcess *)));
-        conprocess->start(KProcess::NotifyOnExit,true);
+        TQObject::connect(conprocess, TQT_SIGNAL(processExited(TDEProcess *)),this, TQT_SLOT(trustover(TDEProcess *)));
+        conprocess->start(TDEProcess::NotifyOnExit,true);
 
 }
 
@@ -1217,7 +1217,7 @@ void KgpgInterface::trustprocess(KProcIO *p)
 
 
 
-void KgpgInterface::trustover(KProcess *)
+void KgpgInterface::trustover(TDEProcess *)
 {
         emit trustfinished();
 }
@@ -1235,8 +1235,8 @@ void KgpgInterface::KgpgChangePass(TQString keyID)
         *conprocess<<"gpg"<<"--no-secmem-warning"<<"--no-tty"<<"--no-use-agent"<<"--command-fd=0"<<"--status-fd=2"<<"--utf8-strings";
         *conprocess<<"--edit-key"<<keyID<<"passwd";
         TQObject::connect(conprocess,TQT_SIGNAL(readReady(KProcIO *)),this,TQT_SLOT(passprocess(KProcIO *)));
-        TQObject::connect(conprocess, TQT_SIGNAL(processExited(KProcess *)),this, TQT_SLOT(passover(KProcess *)));
-        conprocess->start(KProcess::NotifyOnExit,KProcess::AllOutput);
+        TQObject::connect(conprocess, TQT_SIGNAL(processExited(TDEProcess *)),this, TQT_SLOT(passover(TDEProcess *)));
+        conprocess->start(TDEProcess::NotifyOnExit,TDEProcess::AllOutput);
 
 }
 
@@ -1318,7 +1318,7 @@ void KgpgInterface::passprocess(KProcIO *p)
 
 
 
-void KgpgInterface::passover(KProcess *)
+void KgpgInterface::passover(TDEProcess *)
 {
         //emit trustfinished();
 }
@@ -1339,7 +1339,7 @@ TQString KgpgInterface::getKey(TQStringList IDs, bool attributes)
         for ( TQStringList::Iterator it = IDs.begin(); it != IDs.end(); ++it )
                 *proc << *it;
         TQObject::connect(proc, TQT_SIGNAL(readReady(KProcIO *)),this, TQT_SLOT(slotReadKey(KProcIO *)));
-        proc->start(KProcess::Block,false);
+        proc->start(TDEProcess::Block,false);
         return keyString;
 }
 
@@ -1364,9 +1364,9 @@ void KgpgInterface::importKeyURL(KURL url)
                 *conprocess<< "gpg"<<"--no-tty"<<"--no-secmem-warning"<<"--status-fd=2"<<"--utf8-strings"<<"--import";
                 *conprocess<<"--allow-secret-key-import";
                 *conprocess<<tempKeyFile;
-                TQObject::connect(conprocess, TQT_SIGNAL(processExited(KProcess *)),this, TQT_SLOT(importURLover(KProcess *)));
+                TQObject::connect(conprocess, TQT_SIGNAL(processExited(TDEProcess *)),this, TQT_SLOT(importURLover(TDEProcess *)));
                 TQObject::connect(conprocess, TQT_SIGNAL(readReady(KProcIO *)),this, TQT_SLOT(importprocess(KProcIO *)));
-                conprocess->start(KProcess::NotifyOnExit,true);
+                conprocess->start(TDEProcess::NotifyOnExit,true);
         }
 }
 
@@ -1377,14 +1377,14 @@ void KgpgInterface::importKey(TQString keystr)
         KProcIO *conprocess=new KProcIO(TQTextCodec::codecForLocale());
         *conprocess<< "gpg"<<"--no-tty"<<"--no-secmem-warning"<<"--status-fd=2"<<"--import";
         *conprocess<<"--allow-secret-key-import";
-        TQObject::connect(conprocess, TQT_SIGNAL(processExited(KProcess *)),this, TQT_SLOT(importover(KProcess *)));
+        TQObject::connect(conprocess, TQT_SIGNAL(processExited(TDEProcess *)),this, TQT_SLOT(importover(TDEProcess *)));
         TQObject::connect(conprocess, TQT_SIGNAL(readReady(KProcIO *)),this, TQT_SLOT(importprocess(KProcIO *)));
-        conprocess->start(KProcess::NotifyOnExit,true);
+        conprocess->start(TDEProcess::NotifyOnExit,true);
         conprocess->writeStdin(keystr, true);
         conprocess->closeWhenDone();
 }
 
-void KgpgInterface::importover(KProcess *)
+void KgpgInterface::importover(TDEProcess *)
 {
 TQStringList importedKeysIds;
 TQStringList messageList;
@@ -1448,7 +1448,7 @@ kdDebug(2100)<<"Importing is over"<<endl;
 	(void) new KDetailedInfo(0,"import_result",resultMessage,message,importedKeys);
 }
 
-void KgpgInterface::importURLover(KProcess *p)
+void KgpgInterface::importURLover(TDEProcess *p)
 {
         KIO::NetAccess::removeTempFile(tempKeyFile);
         importover(p);
@@ -1480,12 +1480,12 @@ addSuccess=true;
         KProcIO *conprocess=new KProcIO(TQTextCodec::codecForLocale());
         *conprocess<< "gpg"<<"--no-tty"<<"--status-fd=2"<<"--command-fd=0"<<"--utf8-strings";
         *conprocess<<"--edit-key"<<keyID<<"adduid";
-        TQObject::connect(conprocess, TQT_SIGNAL(processExited(KProcess *)),this, TQT_SLOT(adduidover(KProcess *)));
+        TQObject::connect(conprocess, TQT_SIGNAL(processExited(TDEProcess *)),this, TQT_SLOT(adduidover(TDEProcess *)));
         TQObject::connect(conprocess, TQT_SIGNAL(readReady(KProcIO *)),this, TQT_SLOT(adduidprocess(KProcIO *)));
-        conprocess->start(KProcess::NotifyOnExit,true);
+        conprocess->start(TDEProcess::NotifyOnExit,true);
 }
 
-void KgpgInterface::adduidover(KProcess *)
+void KgpgInterface::adduidover(TDEProcess *)
 {
 if (addSuccess) emit addUidFinished();
 else emit addUidError(output);
@@ -1564,9 +1564,9 @@ userIDs=keyID;
         KProcIO *conprocess=new KProcIO(TQTextCodec::codecForLocale());
         *conprocess<< "gpg"<<"--no-tty"<<"--status-fd=2"<<"--command-fd=0";
         *conprocess<<"--with-colon"<<"--list-keys"<<keyID;
-        TQObject::connect(conprocess, TQT_SIGNAL(processExited(KProcess *)),this, TQT_SLOT(photoreadover(KProcess *)));
+        TQObject::connect(conprocess, TQT_SIGNAL(processExited(TDEProcess *)),this, TQT_SLOT(photoreadover(TDEProcess *)));
         TQObject::connect(conprocess, TQT_SIGNAL(readReady(KProcIO *)),this, TQT_SLOT(photoreadprocess(KProcIO *)));
-        conprocess->start(KProcess::NotifyOnExit,true);
+        conprocess->start(TDEProcess::NotifyOnExit,true);
 }
 
 void KgpgInterface::photoreadprocess(KProcIO *p)
@@ -1579,7 +1579,7 @@ void KgpgInterface::photoreadprocess(KProcIO *p)
 }
 
 
-void KgpgInterface::photoreadover(KProcess *)
+void KgpgInterface::photoreadover(TDEProcess *)
 {
 for (int i=1;i<photoCount+1;i++)
 if (isPhotoId(i)) photoList+=TQString::number(i);
@@ -1596,7 +1596,7 @@ KTempFile *kgpginfotmp=new KTempFile();
 KProcIO *conprocess=new KProcIO(TQTextCodec::codecForLocale());
         *conprocess<< "gpg"<<"--no-tty"<<"--status-fd=2"<<"--command-fd=0"<<"--utf8-strings";
         *conprocess<<"--photo-viewer"<<TQString(TQFile::encodeName(pgpgOutput))<<"--edit-key"<<userIDs<<"uid"<<TQString::number(uid)<<"showphoto";
-        conprocess->start(KProcess::Block);
+        conprocess->start(TDEProcess::Block);
 	if (kgpginfotmp->file()->size()>0)
 	{
 	kgpginfotmp->unlink();
@@ -1613,12 +1613,12 @@ void KgpgInterface::KgpgDeletePhoto(TQString keyID,TQString uid)
         KProcIO *conprocess=new KProcIO(TQTextCodec::codecForLocale());
         *conprocess<< "gpg"<<"--no-tty"<<"--status-fd=2"<<"--command-fd=0"<<"--utf8-strings";
         *conprocess<<"--edit-key"<<keyID<<"uid"<<uid<<"deluid";
-        TQObject::connect(conprocess, TQT_SIGNAL(processExited(KProcess *)),this, TQT_SLOT(delphotoover(KProcess *)));
+        TQObject::connect(conprocess, TQT_SIGNAL(processExited(TDEProcess *)),this, TQT_SLOT(delphotoover(TDEProcess *)));
         TQObject::connect(conprocess, TQT_SIGNAL(readReady(KProcIO *)),this, TQT_SLOT(delphotoprocess(KProcIO *)));
-        conprocess->start(KProcess::NotifyOnExit,true);
+        conprocess->start(TDEProcess::NotifyOnExit,true);
 }
 
-void KgpgInterface::delphotoover(KProcess *)
+void KgpgInterface::delphotoover(TDEProcess *)
 {
 if (delSuccess) emit delPhotoFinished();
 else emit delPhotoError(output);
@@ -1676,12 +1676,12 @@ addSuccess=true;
         KProcIO *conprocess=new KProcIO(TQTextCodec::codecForLocale());
         *conprocess<< "gpg"<<"--no-tty"<<"--status-fd=2"<<"--command-fd=0"<<"--utf8-strings";
         *conprocess<<"--edit-key"<<keyID<<"addphoto";
-        TQObject::connect(conprocess, TQT_SIGNAL(processExited(KProcess *)),this, TQT_SLOT(addphotoover(KProcess *)));
+        TQObject::connect(conprocess, TQT_SIGNAL(processExited(TDEProcess *)),this, TQT_SLOT(addphotoover(TDEProcess *)));
         TQObject::connect(conprocess, TQT_SIGNAL(readReady(KProcIO *)),this, TQT_SLOT(addphotoprocess(KProcIO *)));
-        conprocess->start(KProcess::NotifyOnExit,true);
+        conprocess->start(TDEProcess::NotifyOnExit,true);
 }
 
-void KgpgInterface::addphotoover(KProcess *)
+void KgpgInterface::addphotoover(TDEProcess *)
 {
 if (addSuccess) emit addPhotoFinished();
 else emit addPhotoError(output);
@@ -1757,12 +1757,12 @@ void KgpgInterface::KgpgRevokeKey(TQString keyID,TQString revokeUrl,int reason,T
         if (!revokeUrl.isEmpty())
                 *conprocess<<"-o"<<revokeUrl;
         *conprocess<<"--gen-revoke"<<keyID;
-        TQObject::connect(conprocess, TQT_SIGNAL(processExited(KProcess *)),this, TQT_SLOT(revokeover(KProcess *)));
+        TQObject::connect(conprocess, TQT_SIGNAL(processExited(TDEProcess *)),this, TQT_SLOT(revokeover(TDEProcess *)));
         TQObject::connect(conprocess, TQT_SIGNAL(readReady(KProcIO *)),this, TQT_SLOT(revokeprocess(KProcIO *)));
-        conprocess->start(KProcess::NotifyOnExit,true);
+        conprocess->start(TDEProcess::NotifyOnExit,true);
 }
 
-void KgpgInterface::revokeover(KProcess *)
+void KgpgInterface::revokeover(TDEProcess *)
 {
         if (!revokeSuccess)
                 KMessageBox::detailedSorry(0,i18n("Creation of the revocation certificate failed..."),output);

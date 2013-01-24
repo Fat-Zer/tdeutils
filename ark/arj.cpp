@@ -95,7 +95,7 @@ void ArjArch::addDir( const TQString & _dirName )
 
 void ArjArch::addFile( const TQStringList & urls )
 {
-  KProcess *kp = m_currentProcess = new KProcess;
+  TDEProcess *kp = m_currentProcess = new TDEProcess;
 
   kp->clearArguments();
   *kp << m_archiver_program;
@@ -122,14 +122,14 @@ void ArjArch::addFile( const TQStringList & urls )
     *kp << url.fileName();
   }
 
-  connect( kp, SIGNAL( receivedStdout(KProcess*, char*, int) ),
-           SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
-  connect( kp, SIGNAL( receivedStderr(KProcess*, char*, int) ),
-           SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
-  connect( kp, SIGNAL( processExited(KProcess*) ),
-           SLOT( slotAddExited(KProcess*) ) );
+  connect( kp, SIGNAL( receivedStdout(TDEProcess*, char*, int) ),
+           SLOT( slotReceivedOutput(TDEProcess*, char*, int) ) );
+  connect( kp, SIGNAL( receivedStderr(TDEProcess*, char*, int) ),
+           SLOT( slotReceivedOutput(TDEProcess*, char*, int) ) );
+  connect( kp, SIGNAL( processExited(TDEProcess*) ),
+           SLOT( slotAddExited(TDEProcess*) ) );
 
-  if ( !kp->start( KProcess::NotifyOnExit, KProcess::AllOutput ) )
+  if ( !kp->start( TDEProcess::NotifyOnExit, TDEProcess::AllOutput ) )
   {
     KMessageBox::error( 0, i18n( "Could not start a subprocess." ) );
     emit sigAdd( false );
@@ -186,18 +186,18 @@ void ArjArch::open()
   m_header_removed = false;
   m_finished = false;
 
-  KProcess *kp = m_currentProcess = new KProcess;
+  TDEProcess *kp = m_currentProcess = new TDEProcess;
 
   *kp << m_unarchiver_program << "v" << m_filename;
 
-  connect( kp, SIGNAL( receivedStdout(KProcess*, char*, int) ),
-           SLOT( slotReceivedTOC(KProcess*, char*, int) ) );
-  connect( kp, SIGNAL( receivedStderr(KProcess*, char*, int) ),
-           SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
-  connect( kp, SIGNAL( processExited(KProcess*) ),
-           SLOT( slotOpenExited(KProcess*) ) );
+  connect( kp, SIGNAL( receivedStdout(TDEProcess*, char*, int) ),
+           SLOT( slotReceivedTOC(TDEProcess*, char*, int) ) );
+  connect( kp, SIGNAL( receivedStderr(TDEProcess*, char*, int) ),
+           SLOT( slotReceivedOutput(TDEProcess*, char*, int) ) );
+  connect( kp, SIGNAL( processExited(TDEProcess*) ),
+           SLOT( slotOpenExited(TDEProcess*) ) );
 
-  if ( !kp->start( KProcess::NotifyOnExit, KProcess::AllOutput ) )
+  if ( !kp->start( TDEProcess::NotifyOnExit, TDEProcess::AllOutput ) )
   {
     KMessageBox::error( 0, i18n( "Could not start a subprocess." ) );
     emit sigOpen( this, false, TQString::null, 0 );
@@ -214,7 +214,7 @@ void ArjArch::unarchFileInternal()
     return;
   }
 
-  KProcess *kp = m_currentProcess = new KProcess;
+  TDEProcess *kp = m_currentProcess = new TDEProcess;
   kp->clearArguments();
 
   *kp << m_unarchiver_program;
@@ -246,14 +246,14 @@ void ArjArch::unarchFileInternal()
     }
   }
 
-  connect( kp, SIGNAL( receivedStdout(KProcess*, char*, int) ),
-           SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
-  connect( kp, SIGNAL( receivedStderr(KProcess*, char*, int) ),
-           SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
-  connect( kp, SIGNAL( processExited(KProcess*) ),
-           SLOT( slotExtractExited(KProcess*) ) );
+  connect( kp, SIGNAL( receivedStdout(TDEProcess*, char*, int) ),
+           SLOT( slotReceivedOutput(TDEProcess*, char*, int) ) );
+  connect( kp, SIGNAL( receivedStderr(TDEProcess*, char*, int) ),
+           SLOT( slotReceivedOutput(TDEProcess*, char*, int) ) );
+  connect( kp, SIGNAL( processExited(TDEProcess*) ),
+           SLOT( slotExtractExited(TDEProcess*) ) );
 
-  if ( !kp->start( KProcess::NotifyOnExit, KProcess::AllOutput ) )
+  if ( !kp->start( TDEProcess::NotifyOnExit, TDEProcess::AllOutput ) )
   {
     KMessageBox::error( 0, i18n( "Could not start a subprocess." ) );
     emit sigExtract( false );
@@ -270,7 +270,7 @@ void ArjArch::remove( TQStringList *list )
   if ( !list )
     return;
 
-  KProcess *kp = m_currentProcess = new KProcess;
+  TDEProcess *kp = m_currentProcess = new TDEProcess;
   kp->clearArguments();
 
   *kp << m_archiver_program << "d" << m_filename;
@@ -282,14 +282,14 @@ void ArjArch::remove( TQStringList *list )
     *kp << str;
   }
 
-  connect( kp, SIGNAL( receivedStdout(KProcess*, char*, int) ),
-           SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
-  connect( kp, SIGNAL( receivedStderr(KProcess*, char*, int) ),
-           SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
-  connect( kp, SIGNAL( processExited(KProcess*) ),
-           SLOT( slotDeleteExited(KProcess*) ) );
+  connect( kp, SIGNAL( receivedStdout(TDEProcess*, char*, int) ),
+           SLOT( slotReceivedOutput(TDEProcess*, char*, int) ) );
+  connect( kp, SIGNAL( receivedStderr(TDEProcess*, char*, int) ),
+           SLOT( slotReceivedOutput(TDEProcess*, char*, int) ) );
+  connect( kp, SIGNAL( processExited(TDEProcess*) ),
+           SLOT( slotDeleteExited(TDEProcess*) ) );
 
-  if ( !kp->start( KProcess::NotifyOnExit, KProcess::AllOutput ) )
+  if ( !kp->start( TDEProcess::NotifyOnExit, TDEProcess::AllOutput ) )
   {
     KMessageBox::error( 0, i18n( "Could not start a subprocess." ) );
     emit sigDelete( false );
@@ -300,7 +300,7 @@ void ArjArch::test()
 {
   clearShellOutput();
 
-  KProcess *kp = m_currentProcess = new KProcess;
+  TDEProcess *kp = m_currentProcess = new TDEProcess;
   kp->clearArguments();
 
   *kp << m_unarchiver_program << "t";
@@ -310,14 +310,14 @@ void ArjArch::test()
 
   *kp << m_filename;
 
-  connect( kp, SIGNAL( receivedStdout(KProcess*, char*, int) ),
-           SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
-  connect( kp, SIGNAL( receivedStderr(KProcess*, char*, int) ),
-           SLOT( slotReceivedOutput(KProcess*, char*, int) ) );
-  connect( kp, SIGNAL( processExited(KProcess*) ),
-           SLOT( slotTestExited(KProcess*) ) );
+  connect( kp, SIGNAL( receivedStdout(TDEProcess*, char*, int) ),
+           SLOT( slotReceivedOutput(TDEProcess*, char*, int) ) );
+  connect( kp, SIGNAL( receivedStderr(TDEProcess*, char*, int) ),
+           SLOT( slotReceivedOutput(TDEProcess*, char*, int) ) );
+  connect( kp, SIGNAL( processExited(TDEProcess*) ),
+           SLOT( slotTestExited(TDEProcess*) ) );
 
-  if ( !kp->start( KProcess::NotifyOnExit, KProcess::AllOutput ) )
+  if ( !kp->start( TDEProcess::NotifyOnExit, TDEProcess::AllOutput ) )
   {
     KMessageBox::error( 0, i18n( "Could not start a subprocess." ) );
     emit sigTest( false );

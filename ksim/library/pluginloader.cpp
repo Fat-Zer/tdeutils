@@ -171,7 +171,7 @@ KSim::PluginInfo KSim::PluginLoader::findPluginInfo(const TQString &name,
 
   switch (type) {
     case Name: {
-      TQStringList files = KGlobal::dirs()->findAllResources("data", "ksim/monitors/*.desktop");
+      TQStringList files = TDEGlobal::dirs()->findAllResources("data", "ksim/monitors/*.desktop");
       TQStringList::ConstIterator it;
       for (it = files.begin(); it != files.end(); ++it) {
         KDesktopFile file((*it));
@@ -183,7 +183,7 @@ KSim::PluginInfo KSim::PluginLoader::findPluginInfo(const TQString &name,
       break;
     }
     case LibName: {
-      TQStringList files = KGlobal::dirs()->findAllResources("data", "ksim/monitors/*.desktop");
+      TQStringList files = TDEGlobal::dirs()->findAllResources("data", "ksim/monitors/*.desktop");
       TQStringList::ConstIterator it;
       for (it = files.begin(); it != files.end(); ++it) {
         KDesktopFile file((*it));

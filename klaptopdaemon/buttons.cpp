@@ -77,7 +77,7 @@ ButtonsConfig::ButtonsConfig (TQWidget * parent, const char *name)
   int can_shutdown = 1; // fix me
   int can_logout = 1; // fix me
 
-  KGlobal::locale()->insertCatalogue("klaptopdaemon"); // For translation of klaptopdaemon messages
+  TDEGlobal::locale()->insertCatalogue("klaptopdaemon"); // For translation of klaptopdaemon messages
 
   apm = laptop_portable::has_power_management();
   config =  new KConfig("kcmlaptoprc");

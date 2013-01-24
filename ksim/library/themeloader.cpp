@@ -362,7 +362,7 @@ TQFont KSim::Theme::currentFont() const
       return KSim::ThemeLoader::currentFont();
       break;
     case 4:
-      return KGlobalSettings::generalFont();
+      return TDEGlobalSettings::generalFont();
       break;
   }
 
@@ -660,7 +660,7 @@ TQColor KSim::Theme::textColour(const TQString &itemType,
    const TQString &entry) const
 {
   if (d->recolour)
-    return KGlobalSettings::textColor();
+    return TDEGlobalSettings::textColor();
 
   return readColourEntry(itemType, entry, 0);
 }
@@ -1134,7 +1134,7 @@ TQString KSim::ThemeLoader::currentUrl()
   KSim::Config::config()->setGroup("Theme");
   TQString folder(KSim::Config::config()->readEntry("Name"));
   folder.prepend("ksim/themes/").append("/");
-  TQString dirName(KGlobal::dirs()->findResourceDir("data", folder));
+  TQString dirName(TDEGlobal::dirs()->findResourceDir("data", folder));
   dirName += folder;
 
   return dirName;
@@ -1142,7 +1142,7 @@ TQString KSim::ThemeLoader::currentUrl()
 
 TQString KSim::ThemeLoader::defaultUrl()
 {
-  return KGlobal::dirs()->findDirs("data", "ksim/themes/ksim").first();
+  return TDEGlobal::dirs()->findDirs("data", "ksim/themes/ksim").first();
 }
 
 int KSim::ThemeLoader::currentAlternative()

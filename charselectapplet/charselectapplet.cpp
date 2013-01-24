@@ -43,7 +43,7 @@ extern "C"
 {
     KDE_EXPORT KPanelApplet* init(TQWidget *parent, const TQString& configFile)
     {
-        KGlobal::locale()->insertCatalogue("kcharselectapplet");
+        TDEGlobal::locale()->insertCatalogue("kcharselectapplet");
         return new CharSelectApplet(configFile, KPanelApplet::Normal,
                                     KPanelApplet::About | KPanelApplet::Preferences,
                                     parent, "kcharselectapplet");

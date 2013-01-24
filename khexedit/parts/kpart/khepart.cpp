@@ -69,7 +69,7 @@ KHexEditPart::~KHexEditPart()
 /*
 void KHexEditPart::setupTools( bool BrowserViewWanted )
 {
-  if( !BrowserViewWanted ) new KClipboardTool( this );
+  if( !BrowserViewWanted ) new TDEClipboardTool( this );
   
   new KZoomToolet( this );
   new KSelectToolet( this );

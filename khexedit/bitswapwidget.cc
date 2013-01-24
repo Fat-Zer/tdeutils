@@ -38,7 +38,7 @@ CDigitLabel::~CDigitLabel( void )
 
 void CDigitLabel::initialize( void )
 {
-  TQFont font( KGlobalSettings::generalFont() );
+  TQFont font( TDEGlobalSettings::generalFont() );
   font.setBold( true );
   setFont( font );
 }

@@ -493,7 +493,7 @@ void CHexEditorWidget::setFont( const SDisplayFont &font )
   SDisplayFontInfo fontInfo;
   if( mDisplayState.font.useSystemFont == true )
   {
-    fontInfo.font = KGlobalSettings::fixedFont();
+    fontInfo.font = TDEGlobalSettings::fixedFont();
   }
   else
   {

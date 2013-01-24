@@ -745,14 +745,14 @@ laptop_portable::acpi_set_mask(bool standby, bool suspend, bool hibernate, bool 
 static void
 invoke_acpi_helper(const char *param, const char *param2, const char *param3)
 {
-	KProcess proc;
+	TDEProcess proc;
 	proc << KStandardDirs::findExe("klaptop_acpi_helper");
 	proc << param;
 	if (param2) 
 		proc << param2;
 	if (param3) 
 		proc << param3;
-	proc.start(KProcess::Block);	// helper runs fast and we want to see the result
+	proc.start(TDEProcess::Block);	// helper runs fast and we want to see the result
 }
 
 static unsigned long apm_sleep_enabled = 0x0c;	// apm sleep functions enabled mask
@@ -1086,10 +1086,10 @@ void laptop_portable::invoke_standby()
 		return;
 	}
 	// add other machine specific standbys here
-	KProcess proc;
+	TDEProcess proc;
 	proc << "/usr/bin/apm";
 	proc << "--standby";
-	proc.start(KProcess::Block);	// helper runs fast and we want to see the result
+	proc.start(TDEProcess::Block);	// helper runs fast and we want to see the result
 }
 
 //
@@ -1100,10 +1100,10 @@ void laptop_portable::invoke_suspend()
 	last_seed++;	// make it look for battery removal/return
 
 	if (::has_pmu()) {
-		KProcess proc;
+		TDEProcess proc;
 		proc << "/usr/bin/apm";
 		proc << "-f";
-		proc.start(KProcess::Block);	// helper runs fast and we want to see the result
+		proc.start(TDEProcess::Block);	// helper runs fast and we want to see the result
 		return;
 	}
 
@@ -1125,10 +1125,10 @@ void laptop_portable::invoke_suspend()
 		return;
 	}
 	// add other machine specific suspends here
-	KProcess proc;
+	TDEProcess proc;
 	proc << "/usr/bin/apm";
 	proc << "--suspend";
-	proc.start(KProcess::Block);	// helper runs fast and we want to see the result
+	proc.start(TDEProcess::Block);	// helper runs fast and we want to see the result
 }
 
 //
@@ -2225,12 +2225,12 @@ void laptop_portable::invoke_suspend()
 //
 void laptop_portable::invoke_hibernation()
 {
-	KProcess thisProc;
+	TDEProcess thisProc;
 
 	if (::access(PATH_TPCTL, X_OK)==0) {
 		thisProc << PATH_TPCTL;
 		thisProc << "---hibernate";
-		thisProc.start(KProcess::Block);
+		thisProc.start(TDEProcess::Block);
 		return;
 	}
 }
@@ -2603,10 +2603,10 @@ TQLabel *laptop_portable::pcmcia_info(int x, TQWidget *parent)
 //
 void laptop_portable::invoke_standby()
 {
-	KProcess proc;
+	TDEProcess proc;
 	proc << "/usr/sbin/apm";
 	proc << "-S";
-	proc.start(KProcess::Block);	// helper runs fast and we want to see the result
+	proc.start(TDEProcess::Block);	// helper runs fast and we want to see the result
 }
 
 //
@@ -2616,10 +2616,10 @@ void laptop_portable::invoke_standby()
 //
 void laptop_portable::invoke_suspend()
 {
-	KProcess proc;
+	TDEProcess proc;
 	proc << "/usr/sbin/apm";
 	proc << "-z";
-	proc.start(KProcess::Block);	// helper runs fast and we want to see the result
+	proc.start(TDEProcess::Block);	// helper runs fast and we want to see the result
 }
 
 //

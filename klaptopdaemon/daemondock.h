@@ -80,7 +80,7 @@ private slots:
   void fill_performance();
 
 
-  void rootExited(KProcess *p);
+  void rootExited(TDEProcess *p);
   void slotGoRoot(int id);
   void slotQuit();
   void slotHide();

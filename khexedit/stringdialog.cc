@@ -91,7 +91,7 @@ CStringDialog::CStringDialog( TQWidget *parent, const char *name, bool modal )
   // Using listview as suggested by Dima Rogozin <dima@mercury.co.il>
   //
   mStringList = new CListView( plainPage(), "stringList" );
-  mStringList->setFont( KGlobalSettings::fixedFont() );
+  mStringList->setFont( TDEGlobalSettings::fixedFont() );
   mStringList->addColumn( i18n("Offset") );
   mStringList->addColumn( i18n("String") );
   mStringList->setAllColumnsShowFocus( true );

@@ -520,7 +520,7 @@ return -1;
 }
 
 static int openDevice(dev_t dev) {
-TQString tmp_path = locateLocal("tmp", KGlobal::instance()->instanceName());
+TQString tmp_path = locateLocal("tmp", TDEGlobal::instance()->instanceName());
 TQString ext = "_socket%1";
 
   tmp_path += ext.arg((int)dev);

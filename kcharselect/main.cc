@@ -34,7 +34,7 @@ int main(int argc, char **argv)
   KConfig *config = kapp->config();
 
   config->setGroup("General");
-  TQString font(config->readEntry("selectedFont", KGlobalSettings::generalFont().family()));
+  TQString font(config->readEntry("selectedFont", TDEGlobalSettings::generalFont().family()));
   TQChar c = TQChar(static_cast<unsigned short>(config->readNumEntry("char",33)));
   int tn = config->readNumEntry("table",0);
   bool direction = config->readNumEntry("entryDirection",0);

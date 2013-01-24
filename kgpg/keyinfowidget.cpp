@@ -90,7 +90,7 @@ KgpgKeyInfo::KgpgKeyInfo(TQWidget *parent, const char *name,TQString sigkey):KDi
 
 void KgpgKeyInfo::slotDisableKey(bool isOn)
 {
-KProcess kp;
+TDEProcess kp;
 
 	kp<<"gpg"
         <<"--no-tty"
@@ -99,7 +99,7 @@ KProcess kp;
 if (isOn) kp<<"disable";
 else kp<<"enable";
 	kp<<"save";
-        kp.start(KProcess::Block);
+        kp.start(TDEProcess::Block);
 loadKey(displayedKeyID);
 keyWasChanged=true;
 }
@@ -205,13 +205,13 @@ TQString gpgcmd="gpg --no-tty --no-secmem-warning --with-colon --with-fingerprin
                         TQString fullname=gpgOutput.section(':',9,9);
 
                         TQDate date = TQDate::fromString(gpgOutput.section(':',5,5), Qt::ISODate);
-                        prop->tLCreation->setText(KGlobal::locale()->formatDate(date));
+                        prop->tLCreation->setText(TDEGlobal::locale()->formatDate(date));
 
 			if (gpgOutput.section(':',6,6).isEmpty()) expirationDate=i18n("Unlimited");
 			else
 			{
 			date = TQDate::fromString(gpgOutput.section(':',6,6), Qt::ISODate);
-			expirationDate=KGlobal::locale()->formatDate(date);
+			expirationDate=TDEGlobal::locale()->formatDate(date);
 			}
                         prop->tLExpiration->setText(expirationDate);
 
@@ -297,13 +297,13 @@ void KgpgKeyInfo::reloadMainPhoto(const TQString &uid)
                 *p<<"gpg"<<"--no-tty"<<"--show-photos"<<"--photo-viewer"<<TQString(TQFile::encodeName(pgpgOutput));
 		*p<<"--edit-key"<<displayedKeyID<<"uid"<<uid<<"showphoto";
 		TQObject::connect(p, TQT_SIGNAL(readReady(KProcIO *)),this, TQT_SLOT(finishphotoreadprocess(KProcIO *)));
-                TQObject::connect(p, TQT_SIGNAL(processExited(KProcess *)),this, TQT_SLOT(slotMainImageRead(KProcess *)));
-                p->start(KProcess::NotifyOnExit,true);
+                TQObject::connect(p, TQT_SIGNAL(processExited(TDEProcess *)),this, TQT_SLOT(slotMainImageRead(TDEProcess *)));
+                p->start(TDEProcess::NotifyOnExit,true);
 
 }
 
 
-void KgpgKeyInfo::slotMainImageRead(KProcess *p)
+void KgpgKeyInfo::slotMainImageRead(TDEProcess *p)
 {
 	p->deleteLater();
 	TQPixmap pixmap;
@@ -347,7 +347,7 @@ void KgpgKeyInfo::openPhoto()
  			//KMessageBox::sorry(0,ptr->desktopEntryName());
                         KProcIO *p=new KProcIO();
                         *p<<"gpg"<<"--show-photos"<<"--photo-viewer"<<TQString(TQFile::encodeName(ptr->desktopEntryName()+" %i"))<<"--list-keys"<<displayedKeyID;
-                        p->start(KProcess::DontCare,true);
+                        p->start(TDEProcess::DontCare,true);
 }
 
 void KgpgKeyInfo::slotChangeExp()
@@ -363,7 +363,7 @@ kb->setChecked(true);
 kdt->setEnabled(false);
 }
 else
-kdt= new KDatePicker(page,KGlobal::locale()->readDate(prop->tLExpiration->text()));
+kdt= new KDatePicker(page,TDEGlobal::locale()->readDate(prop->tLExpiration->text()));
 TQVBoxLayout *vbox=new TQVBoxLayout(page,3);
 vbox->addWidget(kdt);
 vbox->addWidget(kb);
@@ -405,7 +405,7 @@ chdate->enableButtonOK(kdt->date()>=TQDate::currentDate ());
 }
 }
 
-void KgpgKeyInfo::slotinfoimgread(KProcess *)
+void KgpgKeyInfo::slotinfoimgread(TDEProcess *)
 {
 	TQPixmap pixmap;
         pixmap.load(kgpginfotmp->name());
@@ -430,14 +430,14 @@ void KgpgKeyInfo::slotChangeTrust(int newTrust)
 
 void KgpgKeyInfo::slotInfoPasswordChanged()
 {
-KPassivePopup::message(i18n("Passphrase for the key was changed"),TQString(),KGlobal::iconLoader()->loadIcon("kgpg",KIcon::Desktop),this);
+KPassivePopup::message(i18n("Passphrase for the key was changed"),TQString(),TDEGlobal::iconLoader()->loadIcon("kgpg",KIcon::Desktop),this);
 }
 
 void KgpgKeyInfo::slotInfoTrustChanged()
 {
 keyWasChanged=true;
 loadKey(displayedKeyID);
-//KPassivePopup::message(i18n("Owner trust of the key was changed"),TQString(),KGlobal::iconLoader()->loadIcon("kgpg",KIcon::Desktop),this,0,600);
+//KPassivePopup::message(i18n("Owner trust of the key was changed"),TQString(),TDEGlobal::iconLoader()->loadIcon("kgpg",KIcon::Desktop),this,0,600);
 }
 
 void KgpgKeyInfo::slotInfoExpirationChanged(int res)
@@ -447,11 +447,11 @@ if (res==3)
 {
 keyWasChanged=true;
 if (kb->isChecked()) prop->tLExpiration->setText(i18n("Unlimited"));
-else prop->tLExpiration->setText(KGlobal::locale()->formatDate(kdt->date()));
+else prop->tLExpiration->setText(TDEGlobal::locale()->formatDate(kdt->date()));
 }
 if (res==2) {
 infoMessage=i18n("Could not change expiration");infoText=i18n("Bad passphrase");
-KPassivePopup::message(infoMessage,infoText,KGlobal::iconLoader()->loadIcon("kgpg",KIcon::Desktop),this);
+KPassivePopup::message(infoMessage,infoText,TDEGlobal::iconLoader()->loadIcon("kgpg",KIcon::Desktop),this);
 }
 }
 

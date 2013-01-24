@@ -153,7 +153,7 @@ void FileLVI::setText( int column, const TQString &text )
 		else
 			m_ratio = text.toDouble();
 		TQListViewItem::setText( column, i18n( "Packed Ratio", "%1 %" )
-		                                .arg(KGlobal::locale()->formatNumber( m_ratio, 1 ) )
+		                                .arg(TDEGlobal::locale()->formatNumber( m_ratio, 1 ) )
 		                      );
 	}
 	else if ( colName == timeStampStrCol )
@@ -163,7 +163,7 @@ void FileLVI::setText( int column, const TQString &text )
 		else
 		{
 			m_timeStamp = TQDateTime::fromString( text, Qt::ISODate );
-			TQListViewItem::setText( column, KGlobal::locale()->formatDateTime( m_timeStamp ) );
+			TQListViewItem::setText( column, TDEGlobal::locale()->formatDateTime( m_timeStamp ) );
 		}
 	}
 	else
@@ -354,7 +354,7 @@ FileListView::contentsMouseMoveEvent(TQMouseEvent *e)
 	{
 		KListView::contentsMouseMoveEvent(e);
 	}
-	else if( ( m_presspos - e->pos() ).manhattanLength() > KGlobalSettings::dndEventDelay() )
+	else if( ( m_presspos - e->pos() ).manhattanLength() > TDEGlobalSettings::dndEventDelay() )
 	{
 		m_pressed = false;	// Prevent triggering again
 		if(isSelectionEmpty())

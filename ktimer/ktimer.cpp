@@ -299,7 +299,7 @@ struct KTimerJobPrivate {
     bool oneInstance;
     unsigned value;
     KTimerJob::States state;
-    TQPtrList<KProcess> processes;
+    TQPtrList<TDEProcess> processes;
     void *user;
 
     TQTimer *timer;
@@ -487,7 +487,7 @@ void KTimerJob::timeout()
 }
 
 
-void KTimerJob::processExited(KProcess *proc)
+void KTimerJob::processExited(TDEProcess *proc)
 {
     bool ok = proc->exitStatus()==0;
     d->processes.remove( proc );
@@ -502,9 +502,9 @@ void KTimerJob::fire()
         KShellProcess *proc = new KShellProcess;
         (*proc) << d->command;
         d->processes.append( proc );
-        connect( proc, TQT_SIGNAL(processExited(KProcess*)),
-                 TQT_SLOT(processExited(KProcess*)) );
-        bool ok = proc->start( KProcess::NotifyOnExit );
+        connect( proc, TQT_SIGNAL(processExited(TDEProcess*)),
+                 TQT_SLOT(processExited(TDEProcess*)) );
+        bool ok = proc->start( TDEProcess::NotifyOnExit );
         emit fired( this );
         if( !ok ) {
             d->processes.remove( proc );

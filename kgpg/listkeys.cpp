@@ -167,8 +167,8 @@ int UpdateViewItem :: compare(  TQListViewItem * item, int c, bool ascending ) c
 {
         int rc = 0;
         if ((c==3) || (c==5)) {
-                TQDate d = KGlobal::locale()->readDate(text(c));
-                TQDate itemDate = KGlobal::locale()->readDate(item->text(c));
+                TQDate d = TDEGlobal::locale()->readDate(text(c));
+                TQDate itemDate = TDEGlobal::locale()->readDate(item->text(c));
                 bool itemDateValid = itemDate.isValid();
                 if (d.isValid()) {
                         if (itemDateValid) {
@@ -219,7 +219,7 @@ KDialogBase( parent, name, true,i18n("Private Key List"),Ok | Cancel)
         TQString keyname;
         page = new TQWidget(this);
         TQLabel *labeltxt;
-        KIconLoader *loader = KGlobal::iconLoader();
+        KIconLoader *loader = TDEGlobal::iconLoader();
         keyPair=loader->loadIcon("kgpg_key2",KIcon::Small,20);
 
         setMinimumSize(350,100);
@@ -395,7 +395,7 @@ TQString KgpgSelKey::getkeyMail()
 KeyView::KeyView( TQWidget *parent, const char *name )
                 : KListView( parent, name )
 {
-        KIconLoader *loader = KGlobal::iconLoader();
+        KIconLoader *loader = TDEGlobal::iconLoader();
 
         pixkeyOrphan=loader->loadIcon("kgpg_key4",KIcon::Small,20);
         pixkeyGroup=loader->loadIcon("kgpg_key3",KIcon::Small,20);
@@ -680,7 +680,7 @@ listKeys::listKeys(TQWidget *parent, const char *name) : DCOPObject( "KeyInterfa
 	newContact->setEnabled(false);
 
         setCentralWidget(keysList2);
-        keysList2->restoreLayout(KGlobal::config(), "KeyView");
+        keysList2->restoreLayout(TDEGlobal::config(), "KeyView");
 
         TQObject::connect(keysList2,TQT_SIGNAL(returnPressed(TQListViewItem *)),TQT_TQOBJECT(this),TQT_SLOT(listsigns()));
         TQObject::connect(keysList2,TQT_SIGNAL(doubleClicked(TQListViewItem *,const TQPoint &,int)),TQT_TQOBJECT(this),TQT_SLOT(listsigns()));
@@ -889,13 +889,13 @@ void listKeys::slotDelUid()
         while (item->depth()>0)
                 item=item->parent();
 
-        KProcess *conprocess=new KProcess();
-        KConfig *config = KGlobal::config();
+        TDEProcess *conprocess=new TDEProcess();
+        KConfig *config = TDEGlobal::config();
         config->setGroup("General");
         *conprocess<< config->readPathEntry("TerminalApplication","konsole");
         *conprocess<<"-e"<<"gpg";
         *conprocess<<"--edit-key"<<item->text(6)<<"uid";
-        conprocess->start(KProcess::Block);
+        conprocess->start(TDEProcess::Block);
         keysList2->refreshselfkey();
 }
 
@@ -1475,7 +1475,7 @@ void listKeys::slotexportsec()
 
                 KProcIO *p=new KProcIO(TQTextCodec::codecForLocale());
                 *p<<"gpg"<<"--no-tty"<<"--output"<<TQString(TQFile::encodeName(url.path()))<<"--armor"<<"--export-secret-keys"<<keysList2->currentItem()->text(6);
-                p->start(KProcess::Block);
+                p->start(TDEProcess::Block);
 
                 if (fgpg.exists())
                         KMessageBox::information(this,i18n("Your PRIVATE key \"%1\" was successfully exported.\nDO NOT leave it in an insecure place.").arg(url.path()));
@@ -1551,7 +1551,7 @@ void listKeys::slotexport()
                                                 *p<<(exportList.at(i)->text(6)).stripWhiteSpace();
 
 
-                                p->start(KProcess::Block);
+                                p->start(TDEProcess::Block);
                                 if (fgpg.exists())
                                         KMessageBox::information(this,i18n("Your public key \"%1\" was successfully exported\n").arg(expname));
                                 else
@@ -1611,7 +1611,7 @@ void listKeys::slotShowPhoto()
         //KMessageBox::sorry(0,ptr->desktopEntryName());
         KProcIO *p=new KProcIO(TQTextCodec::codecForLocale());
         *p<<"gpg"<<"--no-tty"<<"--photo-viewer"<<TQString(TQFile::encodeName(ptr->desktopEntryName()+" %i"))<<"--edit-key"<<keysList2->currentItem()->parent()->text(6)<<"uid"<<keysList2->currentItem()->text(6)<<"showphoto"<<"quit";
-        p->start(KProcess::DontCare,true);
+        p->start(TDEProcess::DontCare,true);
 }
 
 void listKeys::listsigns()
@@ -1778,8 +1778,8 @@ void listKeys::editGroup()
         KDialogBase *dialogGroupEdit=new KDialogBase(KDialogBase::Swallow, i18n("Group Properties"), KDialogBase::Ok | KDialogBase::Cancel,KDialogBase::Ok,this,0,true);
 
         gEdit=new groupEdit();
-        gEdit->buttonAdd->setPixmap(KGlobal::iconLoader()->loadIcon("down",KIcon::Small,20));
-        gEdit->buttonRemove->setPixmap(KGlobal::iconLoader()->loadIcon("up",KIcon::Small,20));
+        gEdit->buttonAdd->setPixmap(TDEGlobal::iconLoader()->loadIcon("down",KIcon::Small,20));
+        gEdit->buttonRemove->setPixmap(TDEGlobal::iconLoader()->loadIcon("up",KIcon::Small,20));
 
         connect(gEdit->buttonAdd,TQT_SIGNAL(clicked()),TQT_TQOBJECT(this),TQT_SLOT(groupAdd()));
         connect(gEdit->buttonRemove,TQT_SIGNAL(clicked()),TQT_TQOBJECT(this),TQT_SLOT(groupRemove()));
@@ -1919,9 +1919,9 @@ void listKeys::signkey()
         if (!terminalSign->isChecked())
                 signLoop();
         else {
-                KProcess kp;
+                TDEProcess kp;
 
-                KConfig *config = KGlobal::config();
+                KConfig *config = TDEGlobal::config();
                 config->setGroup("General");
                 kp<< config->readPathEntry("TerminalApplication","konsole");
                 kp<<"-e"
@@ -1935,7 +1935,7 @@ void listKeys::signkey()
                         kp<<"lsign";
                 else
                         kp<<"sign";
-                kp.start(KProcess::Block);
+                kp.start(TDEProcess::Block);
                 keysList2->refreshcurrentkey(keysList2->currentItem());
         }
 }
@@ -2095,9 +2095,9 @@ void listKeys::slotedit()
         if (keysList2->currentItem()->text(6).isEmpty())
                 return;
 
-        KProcess kp;
+        TDEProcess kp;
 
-        KConfig *config = KGlobal::config();
+        KConfig *config = TDEGlobal::config();
         config->setGroup("General");
         kp<< config->readPathEntry("TerminalApplication","konsole");
         kp<<"-e"
@@ -2107,7 +2107,7 @@ void listKeys::slotedit()
         <<"--edit-key"
         <<keysList2->currentItem()->text(6)
         <<"help";
-        kp.start(KProcess::Block);
+        kp.start(TDEProcess::Block);
         keysList2->refreshcurrentkey(keysList2->currentItem());
 }
 
@@ -2149,7 +2149,7 @@ void listKeys::slotgenkey()
                         TQWidget *wid=new TQWidget(pop);
                         TQVBoxLayout *vbox=new TQVBoxLayout(wid,3);
 
-                        TQVBox *passiveBox=pop->standardView(i18n("Generating new key pair."),TQString(),KGlobal::iconLoader()->loadIcon("kgpg",KIcon::Desktop),wid);
+                        TQVBox *passiveBox=pop->standardView(i18n("Generating new key pair."),TQString(),TDEGlobal::iconLoader()->loadIcon("kgpg",KIcon::Desktop),wid);
 
 
                         TQMovie anim;
@@ -2179,8 +2179,8 @@ void listKeys::slotgenkey()
                         //*proc<<"gpg"<<"--no-tty"<<"--no-secmem-warning"<<"--batch"<<"--passphrase-fd"<<res<<"--gen-key"<<"-a"<<"kgpg.tmp";
                         *proc<<"gpg"<<"--no-tty"<<"--status-fd=2"<<"--no-secmem-warning"<<"--batch"<<"--gen-key"<<"--utf8-strings";
                         /////////  when process ends, update dialog infos
-                        TQObject::connect(proc, TQT_SIGNAL(processExited(KProcess *)),TQT_TQOBJECT(this), TQT_SLOT(genover(KProcess *)));
-                        proc->start(KProcess::NotifyOnExit,true);
+                        TQObject::connect(proc, TQT_SIGNAL(processExited(TDEProcess *)),TQT_TQOBJECT(this), TQT_SLOT(genover(TDEProcess *)));
+                        proc->start(TDEProcess::NotifyOnExit,true);
 
                         if (ktype=="RSA")
                                 proc->writeStdin(TQString("Key-Type: 1"));
@@ -2214,15 +2214,15 @@ void listKeys::slotgenkey()
                         proc->closeWhenDone();
                 } else  ////// start expert (=konsole) mode
                 {
-                        KProcess kp;
+                        TDEProcess kp;
 
-                        KConfig *config = KGlobal::config();
+                        KConfig *config = TDEGlobal::config();
                         config->setGroup("General");
                         kp<< config->readPathEntry("TerminalApplication","konsole");
                         kp<<"-e"
                         <<"gpg"
                         <<"--gen-key";
-                        kp.start(KProcess::Block);
+                        kp.start(TDEProcess::Block);
                         refreshkey();
                 }
         }
@@ -2240,7 +2240,7 @@ void listKeys::readgenprocess(KProcIO *p)
         //  sample:   [GNUPG:] KEY_CREATED B 156A4305085A58C01E2988229282910254D1B368
 }
 
-void listKeys::genover(KProcess *)
+void listKeys::genover(TDEProcess *)
 {
         newkeyID=TQString();
         continueSearch=true;
@@ -2248,8 +2248,8 @@ void listKeys::genover(KProcess *)
         *conprocess<< "gpg";
         *conprocess<<"--no-secmem-warning"<<"--with-colons"<<"--fingerprint"<<"--list-keys"<<newKeyName;
         TQObject::connect(conprocess,TQT_SIGNAL(readReady(KProcIO *)),TQT_TQOBJECT(this),TQT_SLOT(slotReadFingerProcess(KProcIO *)));
-        TQObject::connect(conprocess, TQT_SIGNAL(processExited(KProcess *)),TQT_TQOBJECT(this), TQT_SLOT(newKeyDone(KProcess *)));
-        conprocess->start(KProcess::NotifyOnExit,true);
+        TQObject::connect(conprocess, TQT_SIGNAL(processExited(TDEProcess *)),TQT_TQOBJECT(this), TQT_SLOT(newKeyDone(TDEProcess *)));
+        conprocess->start(TDEProcess::NotifyOnExit,true);
 }
 
 
@@ -2270,7 +2270,7 @@ void listKeys::slotReadFingerProcess(KProcIO *p)
 }
 
 
-void listKeys::newKeyDone(KProcess *)
+void listKeys::newKeyDone(TDEProcess *)
 {
         changeMessage(i18n("Ready"),0);
         //        refreshkey();
@@ -2351,15 +2351,15 @@ void listKeys::deleteseckey()
         if (result!=KMessageBox::Continue)
                 return;
 
-        KProcess *conprocess=new KProcess();
-        KConfig *config = KGlobal::config();
+        TDEProcess *conprocess=new TDEProcess();
+        KConfig *config = TDEGlobal::config();
         config->setGroup("General");
         *conprocess<< config->readPathEntry("TerminalApplication","konsole");
         *conprocess<<"-e"<<"gpg"
         <<"--no-secmem-warning"
         <<"--delete-secret-key"<<keysList2->currentItem()->text(6);
-        TQObject::connect(conprocess, TQT_SIGNAL(processExited(KProcess *)),TQT_TQOBJECT(this), TQT_SLOT(reloadSecretKeys()));
-        conprocess->start(KProcess::NotifyOnExit,KProcess::AllOutput);
+        TQObject::connect(conprocess, TQT_SIGNAL(processExited(TDEProcess *)),TQT_TQOBJECT(this), TQT_SLOT(reloadSecretKeys()));
+        conprocess->start(TDEProcess::NotifyOnExit,TDEProcess::AllOutput);
 }
 
 void listKeys::reloadSecretKeys()
@@ -2425,7 +2425,7 @@ void listKeys::deletekey()
         TQPtrList<TQListViewItem> exportList=keysList2->selectedItems();
         if (exportList.count()==0)
                 return;
-        KProcess gp;
+        TDEProcess gp;
         gp << "gpg"
         << "--no-tty"
         << "--no-secmem-warning"
@@ -2435,7 +2435,7 @@ void listKeys::deletekey()
         for ( uint i = 0; i < exportList.count(); ++i )
                 if ( exportList.at(i) )
                         gp<<(exportList.at(i)->text(6)).stripWhiteSpace();
-        gp.start(KProcess::Block);
+        gp.start(TDEProcess::Block);
 
         for ( uint i = 0; i < exportList.count(); ++i )
                 if ( exportList.at(i) )
@@ -2520,7 +2520,7 @@ TQPixmap KeyView::slotGetPhoto(TQString photoId,bool mini)
         TQString popt="cp %i "+phototmp->name();
         KProcIO *p=new KProcIO(TQTextCodec::codecForLocale());
         *p<<"gpg"<<"--show-photos"<<"--photo-viewer"<<TQString(TQFile::encodeName(popt))<<"--list-keys"<<photoId;
-        p->start(KProcess::Block);
+        p->start(TDEProcess::Block);
 
         TQPixmap pixmap;
 
@@ -2580,7 +2580,7 @@ void KeyView::expandKey(TQListViewItem *item)
                                                 KProcIO *p=new KProcIO(TQTextCodec::codecForLocale());
                                                 *p<<"gpg"<<"--no-tty"<<"--photo-viewer"<<TQString(TQFile::encodeName(pgpgOutput));
                                                 *p<<"--edit-key"<<item->text(6)<<"uid"<<TQString::number(uidNumber)<<"showphoto"<<"quit";
-                                                p->start(KProcess::Block);
+                                                p->start(TDEProcess::Block);
                                                 TQPixmap pixmap;
                                                 pixmap.load(kgpgphototmp->name());
                                                 TQImage dup=pixmap.convertToImage();
@@ -3047,7 +3047,7 @@ gpgKey KeyView::extractKey(TQString keyColon)
         ret.gpgkeycreation=keyString[5];
         if(!ret.gpgkeycreation.isEmpty()) {
                 TQDate date = TQDate::fromString(ret.gpgkeycreation, Qt::ISODate);
-                ret.gpgkeycreation=KGlobal::locale()->formatDate(date, true);
+                ret.gpgkeycreation=TDEGlobal::locale()->formatDate(date, true);
         }
         TQString tid=keyString[4];
         ret.gpgkeyid=TQString("0x"+tid.right(8));
@@ -3056,7 +3056,7 @@ gpgKey KeyView::extractKey(TQString keyColon)
                 ret.gpgkeyexpiration=i18n("Unlimited");
         else {
                 TQDate date = TQDate::fromString(ret.gpgkeyexpiration, Qt::ISODate);
-                ret.gpgkeyexpiration=KGlobal::locale()->formatDate(date, true);
+                ret.gpgkeyexpiration=TDEGlobal::locale()->formatDate(date, true);
         }
         TQString fullname=keyString[9];
         if (fullname.find("<")!=-1) {

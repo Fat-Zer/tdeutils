@@ -330,7 +330,7 @@ void KSim::MainView::reparseConfig(bool emitReload,
 
 void KSim::MainView::addPlugins()
 {
-  TQStringList locatedFiles = KGlobal::dirs()->findAllResources("data", "ksim/monitors/*.desktop");
+  TQStringList locatedFiles = TDEGlobal::dirs()->findAllResources("data", "ksim/monitors/*.desktop");
   TQStringList::ConstIterator it;
   for (it = locatedFiles.begin(); it != locatedFiles.end(); ++it)
   {

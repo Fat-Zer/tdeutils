@@ -1860,7 +1860,7 @@ void CHexBuffer::drawText( TQPainter &paint, uint line, int x1, int x2, int y,
 int CHexBuffer::headerHeight( TQPainter &paint )
 {
   TQFont font( paint.font() );
-  paint.setFont( KGlobalSettings::generalFont() );
+  paint.setFont( TDEGlobalSettings::generalFont() );
   const TQFontMetrics &fm = paint.fontMetrics();
 
   int height = fm.height();
@@ -1871,7 +1871,7 @@ int CHexBuffer::headerHeight( TQPainter &paint )
 int CHexBuffer::headerMargin( TQPainter &paint )
 {
   TQFont font( paint.font() );
-  paint.setFont( KGlobalSettings::generalFont() );
+  paint.setFont( TDEGlobalSettings::generalFont() );
   const TQFontMetrics &fm = paint.fontMetrics();
 
   int margin = fm.height() / 2;
@@ -1885,7 +1885,7 @@ void CHexBuffer::drawHeader( TQPainter &paint, int sx, int width, int y,
 			     const SPagePosition &position )
 {
   TQFont font( paint.font() );
-  paint.setFont( KGlobalSettings::generalFont() );
+  paint.setFont( TDEGlobalSettings::generalFont() );
   const TQFontMetrics &fm = paint.fontMetrics();
 
   paint.fillRect( sx, y, width, fm.height(), TQt::white );
@@ -1918,13 +1918,13 @@ void CHexBuffer::drawHeader( TQPainter &paint, int sx, int width, int y,
     {
       TQDateTime datetime;
       datetime.setTime_t( position.now );
-      msg = KGlobal::locale()->formatDateTime(datetime);
+      msg = TDEGlobal::locale()->formatDateTime(datetime);
     }
     else if( header.pos[i] == SPageHeader::PageNumber )
     {
       msg = i18n("Page %1 of %2")
-        .arg(KGlobal::locale()->formatNumber(position.curPage, 0))
-        .arg(KGlobal::locale()->formatNumber(position.maxPage, 0));
+        .arg(TDEGlobal::locale()->formatNumber(position.curPage, 0))
+        .arg(TDEGlobal::locale()->formatNumber(position.maxPage, 0));
     }
     else if( header.pos[i] == SPageHeader::FileName )
     {
@@ -1937,7 +1937,7 @@ void CHexBuffer::drawHeader( TQPainter &paint, int sx, int width, int y,
 
     if( 0 && pos[i] == TQPainter::AlignRight )
     {
-      //const TQFontMetrics &f = TQFontMetrics( KGlobalSettings::generalFont() );
+      //const TQFontMetrics &f = TQFontMetrics( TDEGlobalSettings::generalFont() );
       //TQRect r = paint.boundingRect(sx, y, width, fm.height(), pos[i], msg );
       //printf("R: %d, %d, %d, %d\n", r.x(), r.y(), r.width(), r.height() );
 

@@ -81,7 +81,7 @@ class KTimerJob : public TQObject {
 
  private slots:
     void timeout();
-    void processExited(KProcess *proc);
+    void processExited(TDEProcess *proc);
 
  private:
     struct KTimerJobPrivate *d;

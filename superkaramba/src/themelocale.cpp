@@ -171,7 +171,7 @@ void ThemeLocale::setLanguage(const TQStringList &languages)
 
 TQStringList ThemeLocale::languageList()
 {
-  KConfig* config = KGlobal::instance()->config();
+  KConfig* config = TDEGlobal::instance()->config();
   // Reset the list and add the new languages
   TQStringList languageList;
   languageList +=

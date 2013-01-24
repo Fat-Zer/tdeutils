@@ -56,10 +56,10 @@ MemSensor::MemSensor(int msec) : Sensor(msec)
 # if defined(Q_OS_FREEBSD) && defined(__FreeBSD_version) && __FreeBSD_version >= 500018
     kd = kvm_open("/dev/null", "/dev/null", "/dev/null", O_RDONLY, "kvm_open");
 # elif defined Q_OS_FREEBSD
-    connect(&ksp, TQT_SIGNAL(receivedStdout(KProcess *, char *, int )),
-            this,TQT_SLOT(receivedStdout(KProcess *, char *, int )));
-    connect(&ksp, TQT_SIGNAL(processExited(KProcess *)),
-            this,TQT_SLOT(processExited( KProcess * )));
+    connect(&ksp, TQT_SIGNAL(receivedStdout(TDEProcess *, char *, int )),
+            this,TQT_SLOT(receivedStdout(TDEProcess *, char *, int )));
+    connect(&ksp, TQT_SIGNAL(processExited(TDEProcess *)),
+            this,TQT_SLOT(processExited( TDEProcess * )));
 
     swapTotal = swapUsed = 0;
 
@@ -76,18 +76,18 @@ MemSensor::~MemSensor()
 {}
 
 #ifdef Q_OS_FREEBSD
-void MemSensor::receivedStdout(KProcess *, char *buffer, int len )
+void MemSensor::receivedStdout(TDEProcess *, char *buffer, int len )
 {
     buffer[len] = 0;
     sensorResult += TQString( TQCString(buffer) );
 }
 #else
-void MemSensor::receivedStdout(KProcess *, char *, int)
+void MemSensor::receivedStdout(TDEProcess *, char *, int)
 {
 }
 #endif
 
-void MemSensor::processExited(KProcess *)
+void MemSensor::processExited(TDEProcess *)
 {
 #ifdef Q_OS_FREEBSD
     TQStringList stringList = TQStringList::split('\n',sensorResult);
@@ -272,7 +272,7 @@ void MemSensor::readValues()
 # if defined(Q_OS_FREEBSD) && !(defined(__FreeBSD_version) && __FreeBSD_version >= 500018)
     ksp.clearArguments();
     ksp << "swapinfo";
-    ksp.start( KProcess::NotifyOnExit,KProcIO::Stdout);
+    ksp.start( TDEProcess::NotifyOnExit,KProcIO::Stdout);
 # endif
 #else
     TQFile file("/proc/meminfo");

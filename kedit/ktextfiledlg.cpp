@@ -43,7 +43,7 @@ KTextFileDialog::KTextFileDialog(const TQString& startDir,
       TQT_SLOT( slotSetEncoding() ), this,
       "encoding" );
 
-  TQStringList encodings = KGlobal::charsets()->descriptiveEncodingNames();
+  TQStringList encodings = TDEGlobal::charsets()->descriptiveEncodingNames();
   encodings.prepend( i18n( "Default encoding" ) );
   mEncoding->setItems( encodings );
   mEncoding->setCurrentItem(0);
@@ -103,7 +103,7 @@ void KTextFileDialog::slotShowEncCombo()
   encCombo->setInsertionPolicy(TQComboBox::NoInsertion);
   encCombo->insertItem(i18n("Default Encoding"));
 
-  TQStringList encodings = KGlobal::charsets()->descriptiveEncodingNames();
+  TQStringList encodings = TDEGlobal::charsets()->descriptiveEncodingNames();
   encodings.prepend( i18n( "Default encoding" ) );
   encCombo->insertStringList( encodings );
   encCombo->setCurrentItem(0);
@@ -131,7 +131,7 @@ void KTextFileDialog::slotShowEncCombo()
     if (encCombo->currentItem() == 0) { // Default
       setEncoding("");
     } else {
-      setEncoding(KGlobal::charsets()->
+      setEncoding(TDEGlobal::charsets()->
 		  encodingForName(encCombo->currentText()));
     }
   }

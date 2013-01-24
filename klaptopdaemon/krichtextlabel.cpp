@@ -40,14 +40,14 @@ static TQString qrichtextify( const TQString& text )
 
 KRichTextLabel::KRichTextLabel( const TQString &text , TQWidget *parent, const char *name )
  : TQLabel ( parent, name ) {
-  m_defaultWidth = TQMIN(400, KGlobalSettings::desktopGeometry(this).width()*2/5);
+  m_defaultWidth = TQMIN(400, TDEGlobalSettings::desktopGeometry(this).width()*2/5);
   setAlignment( TQt::WordBreak );
   setText(text);
 }
 
 KRichTextLabel::KRichTextLabel( TQWidget *parent, const char *name )
  : TQLabel ( parent, name ) {
-  m_defaultWidth = TQMIN(400, KGlobalSettings::desktopGeometry(this).width()*2/5);
+  m_defaultWidth = TQMIN(400, TDEGlobalSettings::desktopGeometry(this).width()*2/5);
   setAlignment( TQt::WordBreak );
 }
 

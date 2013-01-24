@@ -28,7 +28,7 @@
 class TQString;
 class TQCString;
 class TQStringList;
-class KProcess;
+class TDEProcess;
 class KTempDir;
 
 class Arch;
@@ -61,9 +61,9 @@ public:
   TQString tempFileName(){ return m_tmpfile; }
 
 private slots:
-  void slotUncompressDone(KProcess *);
-  void slotAddInProgress(KProcess*, char*, int);
-  void slotAddDone(KProcess*);
+  void slotUncompressDone(TDEProcess *);
+  void slotAddInProgress(TDEProcess*, char*, int);
+  void slotAddDone(TDEProcess*);
 
 private:
   void initExtract( bool, bool, bool );

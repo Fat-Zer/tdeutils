@@ -26,7 +26,7 @@
 
 class TQLabel;
 class KProcIO;
-class KProcess;
+class TDEProcess;
 class KLed;
 
 /**
@@ -84,7 +84,7 @@ public slots:
 
 	void KgpgVerifyText(TQString text);
 	void slotverifyread(KProcIO *p);
-	void slotverifyresult(KProcess*);
+	void slotverifyresult(TDEProcess*);
 	
 	
         /**Import key function
@@ -124,15 +124,15 @@ public slots:
         */
 	//static TQString KgpgDecryptText(TQString text,TQString userID);
 	void KgpgDecryptText(TQString text,TQStringList Options=TQString());
-	void txtdecryptfin(KProcess *);
+	void txtdecryptfin(TDEProcess *);
 
 	/**Extract list of photographic user id's
         * @param keyID the recipients key id's.
         */
 	void KgpgGetPhotoList(TQString keyID);
 
-	void getOutput(KProcess *, char *data, int );
-	void getCmdOutput(KProcess *p, char *data, int );
+	void getOutput(TDEProcess *, char *data, int );
+	void getCmdOutput(TDEProcess *p, char *data, int );
 
 	TQString getKey(TQStringList IDs, bool attributes);
 
@@ -141,7 +141,7 @@ public slots:
 	void KgpgChangePass(TQString keyID);
 
 	void KgpgRevokeKey(TQString keyID,TQString revokeUrl,int reason,TQString description);
-	void revokeover(KProcess *);
+	void revokeover(TDEProcess *);
 	void revokeprocess(KProcIO *p);
 	void KgpgDeletePhoto(TQString keyID,TQString uid);
 	void KgpgAddPhoto(TQString keyID,TQString imagePath);
@@ -173,7 +173,7 @@ private slots:
         /**
               * Checks output of the signature process
               */
-        void signover(KProcess *);
+        void signover(TDEProcess *);
         /**
                 * Read output of the signature process
                 */
@@ -182,17 +182,17 @@ private slots:
         /**
          * Checks if the encrypted file was saved.
          */
-        void encryptfin(KProcess *);
+        void encryptfin(TDEProcess *);
 
         /**
                 * Checks if the decrypted file was saved.
                 */
-        void decryptfin(KProcess *);
+        void decryptfin(TDEProcess *);
 
         /**
                 * Checks if the signing was successful.
                 */
-        void signfin(KProcess *p);
+        void signfin(TDEProcess *p);
 
         /**
                 * Checks the number of uid's for a key-> if greater than one, key signature will switch to konsole mode
@@ -206,12 +206,12 @@ private slots:
         /**
                 * Checks output of the delete signature process
                 */
-        void delsignover(KProcess *p);
+        void delsignover(TDEProcess *p);
         /**
                 * Checks output of the import process
                 */
-        void importURLover(KProcess *p);
-        void importover(KProcess *);
+        void importURLover(TDEProcess *p);
+        void importover(TDEProcess *);
         /**
                  * Read output of the import process
                  */
@@ -235,37 +235,37 @@ private slots:
         /**
                  * Checks output of the verify process
                  */
-        void verifyfin(KProcess *p);
+        void verifyfin(TDEProcess *p);
 
         void expprocess(KProcIO *p);
-        void expover(KProcess*);
+        void expover(TDEProcess*);
         void trustprocess(KProcIO *p);
 	void passprocess(KProcIO *p);
-        void trustover(KProcess *);
-	void passover(KProcess *);
+        void trustover(TDEProcess *);
+	void passover(TDEProcess *);
 
         void txtreadencprocess(KProcIO *p);
 
-        void txtencryptfin(KProcess *);
+        void txtencryptfin(TDEProcess *);
 
-	void delphotoover(KProcess *);
+	void delphotoover(TDEProcess *);
 	void delphotoprocess(KProcIO *p);
-	void addphotoover(KProcess *);
+	void addphotoover(TDEProcess *);
 	void addphotoprocess(KProcIO *p);
 	
-	void adduidover(KProcess *);
+	void adduidover(TDEProcess *);
 	void adduidprocess(KProcIO *p);
 		
 	void slotReadKey(KProcIO *p);
-	void photoreadover(KProcess *);
+	void photoreadover(TDEProcess *);
 	void photoreadprocess(KProcIO *p);
 	bool isPhotoId(int uid);
 	void updateIDs(TQString txtString);
 	
 	void txtsignprocess(KProcIO *p);
-	void txtsignfin(KProcess *);
+	void txtsignfin(TDEProcess *);
 
-        //void txtdecryptfin(KProcess *);
+        //void txtdecryptfin(TDEProcess *);
 
 
 signals:

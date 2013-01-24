@@ -52,10 +52,10 @@ DiskList::DiskList(TQObject *parent, const char *name)
    disks->setAutoDelete(TRUE);
 
    // BackgroundProcesses ****************************************
-   dfProc = new KProcess(); TQ_CHECK_PTR(dfProc);
-   connect( dfProc, TQT_SIGNAL(receivedStdout(KProcess *, char *, int) ),
-      this, TQT_SLOT (receivedDFStdErrOut(KProcess *, char *, int)) );
-   connect(dfProc,TQT_SIGNAL(processExited(KProcess *) ),
+   dfProc = new TDEProcess(); TQ_CHECK_PTR(dfProc);
+   connect( dfProc, TQT_SIGNAL(receivedStdout(TDEProcess *, char *, int) ),
+      this, TQT_SLOT (receivedDFStdErrOut(TDEProcess *, char *, int)) );
+   connect(dfProc,TQT_SIGNAL(processExited(TDEProcess *) ),
       this, TQT_SLOT(dfDone() ) );
 
    readingDFStdErrOut=FALSE;
@@ -231,7 +231,7 @@ TQFile f(FSTAB);
 /***************************************************************************
   * is called, when the df-command writes on StdOut or StdErr
 **/
-void DiskList::receivedDFStdErrOut(KProcess *, char *data, int len )
+void DiskList::receivedDFStdErrOut(TDEProcess *, char *data, int len )
 {
   kdDebug() << k_funcinfo << endl;
 
@@ -263,7 +263,7 @@ int DiskList::readDF()
   dfStringErrOut=""; // yet no data received
   dfProc->clearArguments();
   (*dfProc) << "env" << "LC_ALL=POSIX" << DF_COMMAND << DF_ARGS;
-  if (!dfProc->start( KProcess::NotifyOnExit, KProcess::AllOutput ))
+  if (!dfProc->start( TDEProcess::NotifyOnExit, TDEProcess::AllOutput ))
     tqFatal(i18n("could not execute [%s]").local8Bit().data(), DF_COMMAND);
   return 1;
 }

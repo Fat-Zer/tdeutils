@@ -85,7 +85,7 @@ private:
 	void displayVolume();
 	void launch(TQString configKey, TQString defaultApplication);
 
-	KGlobalAccel *ga;
+	TDEGlobalAccel *ga;
 	KConfig* config;
 
 	DCOPRef *kmixClient, *kmixWindow;

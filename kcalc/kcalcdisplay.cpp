@@ -268,10 +268,10 @@ void KCalcDisplay::setText(TQString const &string)
 	  // truncating, formatting and appending again
 	  if (string.endsWith(".")) {
 	    localizedString.truncate(localizedString.length() - 1);
-	    localizedString = KGlobal::locale()->formatNumber(localizedString, false, 0); // Note: rounding happened already above!
-	    localizedString.append(KGlobal::locale()->decimalSymbol());
+	    localizedString = TDEGlobal::locale()->formatNumber(localizedString, false, 0); // Note: rounding happened already above!
+	    localizedString.append(TDEGlobal::locale()->decimalSymbol());
 	  } else
-	    localizedString = KGlobal::locale()->formatNumber(string, false, 0); // Note: rounding happened already above!
+	    localizedString = TDEGlobal::locale()->formatNumber(string, false, 0); // Note: rounding happened already above!
 
 	TQLabel::setText(localizedString);
 	emit changedText(localizedString);

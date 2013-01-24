@@ -70,7 +70,7 @@ void UserDefinedRegExps::slotPopulateUserRegexps()
   TQStringList dirs;
   dirs << TQString::fromLatin1( "predefined" );
 #else
-  TQStringList dirs = KGlobal::dirs()->findDirs( "data", TQString::fromLocal8Bit("kregexpeditor/predefined/") );
+  TQStringList dirs = TDEGlobal::dirs()->findDirs( "data", TQString::fromLocal8Bit("kregexpeditor/predefined/") );
 #endif
 
   for ( TQStringList::iterator it1 = dirs.begin(); it1 != dirs.end(); ++it1 ) {

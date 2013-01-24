@@ -267,11 +267,11 @@ void KwikDisk::toggleMount(int item)
          int pos = cmd.find("%m");
          if( pos > 0 )
          {
-            cmd = cmd.replace( pos, 2, KProcess::quote(disk->mountPoint()) ) + " &";
+            cmd = cmd.replace( pos, 2, TDEProcess::quote(disk->mountPoint()) ) + " &";
          }
          else
          {
-            cmd += " " + KProcess::quote(disk->mountPoint()) +" &";
+            cmd += " " + TDEProcess::quote(disk->mountPoint()) +" &";
          }
          system( TQFile::encodeName(cmd) );
       }

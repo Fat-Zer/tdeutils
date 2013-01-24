@@ -503,9 +503,9 @@ void laptop_daemon::haveBatteryLow(int t, const int num, const int type)
 	if (s.runCommand[t]) {
 		// make sure the command exists
 		if (!s.runCommandPath[t].isEmpty()) {
-			KProcess command;
+			TDEProcess command;
 			command << s.runCommandPath[t];
-			command.start(KProcess::DontCare);
+			command.start(TDEProcess::DontCare);
 		}
 	}
 

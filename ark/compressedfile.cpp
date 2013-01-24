@@ -143,7 +143,7 @@ void CompressedFile::initData()
     }
     if ( mimeType == "application/x-compress" )
     {
-        m_unarchiver_program = KGlobal::dirs()->findExe( "uncompress" ).isNull()? "gunzip" : "uncompress";
+        m_unarchiver_program = TDEGlobal::dirs()->findExe( "uncompress" ).isNull()? "gunzip" : "uncompress";
         m_archiver_program   = "compress";
         m_defaultExtensions  = ".Z";
     }
@@ -184,14 +184,14 @@ void CompressedFile::open()
   if ( !KIO::NetAccess::exists( target, true, NULL ) )
     return;
 
-  KProcess *kp = m_currentProcess = new KProcess;
+  TDEProcess *kp = m_currentProcess = new TDEProcess;
   kp->clearArguments();
   *kp << m_unarchiver_program << "-f" ;
   if ( m_unarchiver_program == "lzop")
   {
     *kp << "-d";
     // lzop hack, see comment in tar.cpp createTmp()
-    kp->setUsePty( KProcess::Stdin, false );
+    kp->setUsePty( TDEProcess::Stdin, false );
   }
   // gunzip 1.3 seems not to like original names with directories in them
   // testcase: https://listman.redhat.com/pipermail/valhalla-list/2006-October.txt.gz
@@ -202,14 +202,14 @@ void CompressedFile::open()
 
   kdDebug(1601) << "Command is " << m_unarchiver_program << " " << m_tmpfile<< endl;
 
-  connect( kp, TQT_SIGNAL(receivedStdout(KProcess*, char*, int)),
-	   this, TQT_SLOT(slotReceivedOutput(KProcess*, char*, int)));
-  connect( kp, TQT_SIGNAL(receivedStderr(KProcess*, char*, int)),
-	   this, TQT_SLOT(slotReceivedOutput(KProcess*, char*, int)));
-  connect( kp, TQT_SIGNAL(processExited(KProcess*)), this,
-	   TQT_SLOT(slotUncompressDone(KProcess*)));
+  connect( kp, TQT_SIGNAL(receivedStdout(TDEProcess*, char*, int)),
+	   this, TQT_SLOT(slotReceivedOutput(TDEProcess*, char*, int)));
+  connect( kp, TQT_SIGNAL(receivedStderr(TDEProcess*, char*, int)),
+	   this, TQT_SLOT(slotReceivedOutput(TDEProcess*, char*, int)));
+  connect( kp, TQT_SIGNAL(processExited(TDEProcess*)), this,
+	   TQT_SLOT(slotUncompressDone(TDEProcess*)));
 
-  if (kp->start(KProcess::NotifyOnExit, KProcess::AllOutput) == false)
+  if (kp->start(TDEProcess::NotifyOnExit, TDEProcess::AllOutput) == false)
     {
       KMessageBox::error( 0, i18n("Could not start a subprocess.") );
       emit sigOpen(this, false, TQString(), 0 );
@@ -218,7 +218,7 @@ void CompressedFile::open()
   kdDebug(1601) << "-CompressedFile::open" << endl;
 }
 
-void CompressedFile::slotUncompressDone(KProcess *_kp)
+void CompressedFile::slotUncompressDone(TDEProcess *_kp)
 {
   bool bSuccess = false;
   kdDebug(1601) << "normalExit = " << _kp->normalExit() << endl;
@@ -284,9 +284,9 @@ void CompressedFile::addFile( const TQStringList &urls )
   TQString file;
   file = url.path();
 
-  KProcess proc;
+  TDEProcess proc;
   proc << "cp" << file << m_tmpdir;
-  proc.start(KProcess::Block);
+  proc.start(TDEProcess::Block);
 
   m_tmpfile = file.right(file.length()
 			 - file.findRev("/")-1);
@@ -296,23 +296,23 @@ void CompressedFile::addFile( const TQStringList &urls )
 
   kdDebug(1601) << "File is " << file << endl;
 
-  KProcess *kp = m_currentProcess = new KProcess;
+  TDEProcess *kp = m_currentProcess = new TDEProcess;
   kp->clearArguments();
 
   // lzop hack, see comment in tar.cpp createTmp()
   if ( m_archiver_program == "lzop")
-    kp->setUsePty( KProcess::Stdin, false );
+    kp->setUsePty( TDEProcess::Stdin, false );
 
   TQString compressor = m_archiver_program;
 
   *kp << compressor << "-c" << file;
 
-  connect( kp, TQT_SIGNAL(receivedStdout(KProcess*, char*, int)),
-	   this, TQT_SLOT(slotAddInProgress(KProcess*, char*, int)));
-  connect( kp, TQT_SIGNAL(receivedStderr(KProcess*, char*, int)),
-	   this, TQT_SLOT(slotReceivedOutput(KProcess*, char*, int)));
-  connect( kp, TQT_SIGNAL(processExited(KProcess*)), this,
-	   TQT_SLOT(slotAddDone(KProcess*)));
+  connect( kp, TQT_SIGNAL(receivedStdout(TDEProcess*, char*, int)),
+	   this, TQT_SLOT(slotAddInProgress(TDEProcess*, char*, int)));
+  connect( kp, TQT_SIGNAL(receivedStderr(TDEProcess*, char*, int)),
+	   this, TQT_SLOT(slotReceivedOutput(TDEProcess*, char*, int)));
+  connect( kp, TQT_SIGNAL(processExited(TDEProcess*)), this,
+	   TQT_SLOT(slotAddDone(TDEProcess*)));
 
   int f_desc = KDE_open(TQFile::encodeName(m_filename), O_CREAT | O_TRUNC | O_WRONLY, 0666);
   if (f_desc != -1)
@@ -320,7 +320,7 @@ void CompressedFile::addFile( const TQStringList &urls )
   else
       fd = NULL;
 
-  if (kp->start(KProcess::NotifyOnExit, KProcess::AllOutput) == false)
+  if (kp->start(TDEProcess::NotifyOnExit, TDEProcess::AllOutput) == false)
     {
       KMessageBox::error( 0, i18n("Could not start a subprocess.") );
     }
@@ -328,7 +328,7 @@ void CompressedFile::addFile( const TQStringList &urls )
   kdDebug(1601) << "-CompressedFile::addFile" << endl;
 }
 
-void CompressedFile::slotAddInProgress(KProcess*, char* _buffer, int _bufflen)
+void CompressedFile::slotAddInProgress(TDEProcess*, char* _buffer, int _bufflen)
 {
   // we're trying to capture the output of a command like this
   //    gzip -c myfile
@@ -342,7 +342,7 @@ void CompressedFile::slotAddInProgress(KProcess*, char* _buffer, int _bufflen)
     }
 }
 
-void CompressedFile::slotAddDone(KProcess *_kp)
+void CompressedFile::slotAddDone(TDEProcess *_kp)
 {
   fclose(fd);
   slotAddExited(_kp);
@@ -361,9 +361,9 @@ void CompressedFile::unarchFileInternal()
       else
           dest=m_destDir;
 
-      KProcess proc;
+      TDEProcess proc;
       proc << "cp" << m_tmpfile << dest;
-      proc.start(KProcess::Block);
+      proc.start(TDEProcess::Block);
     }
   emit sigExtract(true);
 }

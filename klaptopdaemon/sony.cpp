@@ -58,7 +58,7 @@ extern void wake_laptop_daemon();
 SonyConfig::SonyConfig(TQWidget * parent, const char *name)
   : KCModule(parent, name)
 {
-    KGlobal::locale()->insertCatalogue("klaptopdaemon"); // For translation of klaptopdaemon messages
+    TDEGlobal::locale()->insertCatalogue("klaptopdaemon"); // For translation of klaptopdaemon messages
 
     config =  new KConfig("kcmlaptoprc");
 
@@ -115,12 +115,12 @@ void SonyConfig::setupHelper()
 				i18n("KLaptopDaemon"), KStdGuiItem::cont(),
 				"");
 		if (rc == KMessageBox::Continue) {
-			KProcess proc;
+			TDEProcess proc;
 			proc << tdesu;
 			proc << "-u";
 			proc << "root";
 			proc <<  "chmod +r /dev/sonypi";
-			proc.start(KProcess::Block);	// run it sync so has_acpi below sees the results
+			proc.start(TDEProcess::Block);	// run it sync so has_acpi below sees the results
 		}
 	} else {
 		KMessageBox::sorry(0, i18n("The /dev/sonypi protections cannot be changed because tdesu cannot be found.  Please make sure that it is installed correctly."),

@@ -216,13 +216,13 @@ void DiskView::updateDisplay()
     if (m_useSeperatly) {
       it.current()->first->setValue(diskData.readBlocks, diskData.writeBlocks);
       it.current()->first->setText(i18n("in: %1k")
-         .arg(KGlobal::locale()->formatNumber((float)diskData.readBlocks / 1024.0, 1)),
-         i18n("out: %1k").arg(KGlobal::locale()->formatNumber((float)diskData.writeBlocks / 1024.0, 1)));
+         .arg(TDEGlobal::locale()->formatNumber((float)diskData.readBlocks / 1024.0, 1)),
+         i18n("out: %1k").arg(TDEGlobal::locale()->formatNumber((float)diskData.writeBlocks / 1024.0, 1)));
     }
     else {
       it.current()->first->setValue(diff, 0);
       it.current()->first->setText(i18n("%1k")
-         .arg(KGlobal::locale()->formatNumber((float)diff / 1024.0, 1)));
+         .arg(TDEGlobal::locale()->formatNumber((float)diff / 1024.0, 1)));
     }
 
     it.current()->second->setMaxValue(it.current()->first->maxValue());

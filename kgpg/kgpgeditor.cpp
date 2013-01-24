@@ -300,7 +300,7 @@ void KgpgApp::slotFileOpen()
 
 bool KgpgApp::checkEncoding(TQTextCodec *codec)
 {
- /////////////          KGlobal::locale()->encoding()->name()
+ /////////////          TDEGlobal::locale()->encoding()->name()
 return codec->canEncode(view->editor->text());
 }
 

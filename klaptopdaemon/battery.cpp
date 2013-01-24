@@ -59,7 +59,7 @@ BatteryConfig::BatteryConfig (TQWidget * parent, const char *name)
     buttonNoCharge(0),
     buttonCharge(0)
 {
-    KGlobal::locale()->insertCatalogue("klaptopdaemon"); // For translation of klaptopdaemon messages
+    TDEGlobal::locale()->insertCatalogue("klaptopdaemon"); // For translation of klaptopdaemon messages
 
     apm = laptop_portable::has_power_management();
     config =  new KConfig("kcmlaptoprc");

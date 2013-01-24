@@ -1131,7 +1131,7 @@ void KWalletEditor::saveAs() {
 		if (_nonLocal) {
 			KIO::NetAccess::file_copy(KURL(_walletName), url, 0600, false, false, this);
 		} else {
-			TQString path = KGlobal::dirs()->saveLocation("kwallet") + "/" + _walletName + ".kwl";
+			TQString path = TDEGlobal::dirs()->saveLocation("kwallet") + "/" + _walletName + ".kwl";
 			KURL destURL; destURL.setPath(path);
 			KIO::NetAccess::file_copy(destURL, url, 0600, false, false, this);
 		}

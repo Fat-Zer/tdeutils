@@ -119,14 +119,14 @@ public slots:
   void applySettings();
 
 private slots:
-   void receivedDFStdErrOut(KProcess *, char *data, int len);
+   void receivedDFStdErrOut(TDEProcess *, char *data, int len);
    void dfDone();
 
 private:
   void replaceDeviceEntry(DiskEntry *disk);
 
   Disks            *disks;
-  KProcess         *dfProc;
+  TDEProcess         *dfProc;
   TQString           dfStringErrOut;
   bool              readingDFStdErrOut;
   KConfig           *config;

@@ -584,7 +584,7 @@ TQWidget* KCalculator::setupNumericKeys(TQWidget *parent)
 		pbMinus, TQT_SLOT(slotSetAccelDisplayMode(bool)));
 	connect(pbMinus, TQT_SIGNAL(clicked(void)), TQT_SLOT(slotMinusclicked(void)));
 
-	pbPeriod = new KCalcButton(KGlobal::locale()->decimalSymbol(), thisPage,
+	pbPeriod = new KCalcButton(TDEGlobal::locale()->decimalSymbol(), thisPage,
 					"Period-Button", i18n("Decimal point"));
 	connect(TQT_TQOBJECT(this), TQT_SIGNAL(switchShowAccels(bool)),
 		TQT_TQOBJECT(pbPeriod), TQT_SLOT(slotSetAccelDisplayMode(bool)));

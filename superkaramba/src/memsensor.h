@@ -60,8 +60,8 @@ private:
 #endif
 
 private slots:
-    void receivedStdout(KProcess *, char *buffer, int);
-    void processExited(KProcess *);
+    void receivedStdout(TDEProcess *, char *buffer, int);
+    void processExited(TDEProcess *);
 
 };
 

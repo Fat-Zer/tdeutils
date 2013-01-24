@@ -51,7 +51,7 @@ KWalletFolderItem::KWalletFolderItem(KWallet::Wallet *w, TQListView* parent, con
 }
 
 TQPixmap KWalletFolderItem::getFolderIcon(KIcon::Group group){
-	KIconLoader *loader = KGlobal::instance()->iconLoader();
+	KIconLoader *loader = TDEGlobal::instance()->iconLoader();
 	TQPixmap pix = loader->loadIcon( _name, group, 0,
 			KIcon::DefaultState, 0, true );
 	if (pix.isNull())
@@ -620,7 +620,7 @@ class KWalletIconDrag : public TQIconDrag {
 *   */
 KWalletIconView::KWalletIconView(TQWidget *parent, const char *name)
 : KIconView(parent, name) {
-	KGlobal::dirs()->addResourceType("kwallet", "share/apps/kwallet");
+	TDEGlobal::dirs()->addResourceType("kwallet", "share/apps/kwallet");
 	connect(this, TQT_SIGNAL(dropped(TQDropEvent*, const TQValueList<TQIconDragItem>&)), TQT_SLOT(slotDropped(TQDropEvent*, const TQValueList<TQIconDragItem>&)));
 }
 
@@ -654,7 +654,7 @@ void KWalletIconView::slotDropped(TQDropEvent *e, const TQValueList<TQIconDragIt
 		return;
 	}
 
-	TQString dest = KGlobal::dirs()->saveLocation("kwallet") + u.fileName();
+	TQString dest = TDEGlobal::dirs()->saveLocation("kwallet") + u.fileName();
 	if (TQFile::exists(dest)) {
 		KMessageBox::sorry(viewport(), i18n("That wallet file already exists.  You cannot overwrite wallets."));
 		e->ignore();
@@ -676,7 +676,7 @@ void KWalletIconView::contentsMousePressEvent(TQMouseEvent *e) {
 
 TQDragObject *KWalletIconView::dragObject() {
 	KWalletIconDrag* id = new KWalletIconDrag(viewport(), "KWallet Drag");
-	TQString path = "file:" + KGlobal::dirs()->saveLocation("kwallet");
+	TQString path = "file:" + TDEGlobal::dirs()->saveLocation("kwallet");
 	TQPoint pos = _mousePos;
 	for (TQIconViewItem *item = firstItem(); item; item = item->nextItem()) {
 		if (item->isSelected()) {

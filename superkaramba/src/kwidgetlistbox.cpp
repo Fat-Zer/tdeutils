@@ -152,19 +152,19 @@ void KWidgetListbox::setItemColors(int index, bool even)
 
   if(index == selected())
   {
-    itm->setPaletteBackgroundColor(KGlobalSettings::highlightColor());
-    itm->setPaletteForegroundColor(KGlobalSettings::highlightedTextColor());
+    itm->setPaletteBackgroundColor(TDEGlobalSettings::highlightColor());
+    itm->setPaletteForegroundColor(TDEGlobalSettings::highlightedTextColor());
   }
   else if(even)
   {
-    itm->setPaletteBackgroundColor(KGlobalSettings::baseColor());
-    itm->setPaletteForegroundColor(KGlobalSettings::textColor());
+    itm->setPaletteBackgroundColor(TDEGlobalSettings::baseColor());
+    itm->setPaletteForegroundColor(TDEGlobalSettings::textColor());
   }
   else
   {
     itm->setPaletteBackgroundColor(
-        KGlobalSettings::alternateBackgroundColor());
-    itm->setPaletteForegroundColor(KGlobalSettings::textColor());
+        TDEGlobalSettings::alternateBackgroundColor());
+    itm->setPaletteForegroundColor(TDEGlobalSettings::textColor());
   }
 }
 

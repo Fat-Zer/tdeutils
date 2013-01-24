@@ -27,7 +27,7 @@ class KDialogBase;
 class TQCheckBox;
 class KDatePicker;
 class KeyProperties;
-class KProcess;
+class TDEProcess;
 class KProcIO;
 
 class KgpgKeyInfo : public KDialogBase
@@ -42,7 +42,7 @@ public:
 	KeyProperties *prop;
 
 private slots:
-        void slotinfoimgread(KProcess *);
+        void slotinfoimgread(TDEProcess *);
         void slotChangePass();
         void slotPreOk();
 	void slotChangeExp();
@@ -52,7 +52,7 @@ private slots:
 	void openPhoto();
 	void slotSetPhoto(const TQPixmap &pix);
 	void finishphotoreadprocess(KProcIO *p);
-	void slotMainImageRead(KProcess *);
+	void slotMainImageRead(TDEProcess *);
 	void slotSetMainPhoto(TQStringList list);
 	void reloadMainPhoto(const TQString &uid);
 	void slotInfoPasswordChanged();

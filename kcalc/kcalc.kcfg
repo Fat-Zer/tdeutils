@@ -45,7 +45,7 @@
   <group name="Font">
     <entry name="Font" type="Font">
       <label>The font to use in the display.</label>
-      <default code="true">TQFont(KGlobalSettings::generalFont().family(), 14, TQFont::Bold)</default>
+      <default code="true">TQFont(TDEGlobalSettings::generalFont().family(), 14, TQFont::Bold)</default>
     </entry>
   </group>
   <group name="Precision">

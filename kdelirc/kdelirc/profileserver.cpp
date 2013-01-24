@@ -34,7 +34,7 @@ ProfileServer::~ProfileServer()
 
 void ProfileServer::loadProfiles()
 {
-	TQStringList theFiles = KGlobal::dirs()->findAllResources("data", "profiles/*.profile.xml");
+	TQStringList theFiles = TDEGlobal::dirs()->findAllResources("data", "profiles/*.profile.xml");
 	for(TQStringList::iterator i = theFiles.begin(); i != theFiles.end(); ++i)
 	{	kdDebug() << "Found data file: " << *i << endl;
 		Profile *p = new Profile();

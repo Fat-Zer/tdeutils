@@ -130,7 +130,7 @@ KSim::ThemePrefs::ThemePrefs(TQWidget *parent, const char *name)
      this, TQT_SLOT(showFontDialog(int)));
   m_themeLayout->addMultiCellWidget(m_fontsCombo, 5, 5, 4, 4);
 
-  TQStringList locatedFiles = KGlobal::dirs()->findDirs("data", "ksim/themes");
+  TQStringList locatedFiles = TDEGlobal::dirs()->findDirs("data", "ksim/themes");
   for (TQStringList::ConstIterator it = locatedFiles.begin(); it != locatedFiles.end(); ++it)
     readThemes(*it);
 }

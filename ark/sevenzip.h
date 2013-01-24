@@ -48,7 +48,7 @@ class SevenZipArch : public Arch
 
   protected slots:
     virtual bool processLine( const TQCString& line );
-    virtual void slotReceivedTOC( KProcess*, char*, int );
+    virtual void slotReceivedTOC( TDEProcess*, char*, int );
 
   private:
     void setHeaders();

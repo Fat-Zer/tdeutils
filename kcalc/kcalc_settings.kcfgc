@@ -3,6 +3,6 @@ File=kcalc.kcfg
 ClassName=KCalcSettings
 Singleton=true
 Mutators=ShowStat,ShowScientific,ShowLogic,ShowConstants,nameConstant,valueConstant
-# Inherits=KConfigSkeleton
+# Inherits=TDEConfigSkeleton
 # IncludeFiles=libtdepim/kpimprefs.h
 # MemberVariables=public

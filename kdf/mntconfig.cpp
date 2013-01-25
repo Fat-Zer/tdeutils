@@ -179,7 +179,7 @@ void MntConfigWidget::applySettings( void )
 {
   mDiskList.applySettings();
 
-  KConfig &config = *kapp->config();
+  TDEConfig &config = *kapp->config();
   config.setGroup("MntConfig");
   if(GUI )
   {
@@ -192,7 +192,7 @@ void MntConfigWidget::applySettings( void )
 
 void MntConfigWidget::loadSettings( void )
 {
-  KConfig &config = *kapp->config();
+  TDEConfig &config = *kapp->config();
   if( mInitializing == false && GUI )
   {
     config.setGroup("MntConfig");

@@ -34,7 +34,7 @@
 
 class TQWidget;
 class TQSpinBox;
-class KConfig;
+class TDEConfig;
 class TQCheckBox;
 class KIconLoader;
 class KIconButton;
@@ -42,7 +42,7 @@ class TQPushButton;
 class TQLabel;
 
 
-class BatteryConfig : public KCModule
+class BatteryConfig : public TDECModule
 {
   Q_OBJECT
   
@@ -68,7 +68,7 @@ private slots:
 private:
 	void timerEvent(TQTimerEvent *);
 	void ConvertIcon(int percent, TQPixmap &pm, TQPixmap &result);
-	KConfig *config;
+	TDEConfig *config;
 
         TQSpinBox* editPoll;
         TQCheckBox* runMonitor;

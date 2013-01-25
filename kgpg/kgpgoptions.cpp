@@ -63,12 +63,12 @@ class TQTabWidget;
 ///////////////////////   main window
 
 kgpgOptions::kgpgOptions(TQWidget *parent, const char *name)
- : KConfigDialog( parent, name, KGpgSettings::self())
+ : TDEConfigDialog( parent, name, KGpgSettings::self())
 {
 	defaultServerList="hkp://wwwkeys.eu.pgp.net ";
 	defaultServerList+=i18n("(Default)");
 	defaultServerList+=",hkp://search.keyserver.net,hkp://wwwkeys.pgp.net,hkp://pgp.dtype.org,hkp://wwwkeys.us.pgp.net";
-	config = new KConfig ("kgpgrc");
+	config = new TDEConfig ("kgpgrc");
 	config->setGroup("Servers");
 	serverList=TQStringList::split (",",config->readEntry("Server_List",defaultServerList));
 	keyServer = KgpgInterface::getGpgSetting("keyserver", KGpgSettings::gpgConfigPath());

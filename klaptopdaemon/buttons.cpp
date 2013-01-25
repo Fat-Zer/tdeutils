@@ -45,7 +45,7 @@
 extern void wake_laptop_daemon();
 
 ButtonsConfig::ButtonsConfig (TQWidget * parent, const char *name)
-  : KCModule(parent, name),
+  : TDECModule(parent, name),
     lidBox(0),
     lidStandby(0),
     lidSuspend(0),
@@ -80,7 +80,7 @@ ButtonsConfig::ButtonsConfig (TQWidget * parent, const char *name)
   TDEGlobal::locale()->insertCatalogue("klaptopdaemon"); // For translation of klaptopdaemon messages
 
   apm = laptop_portable::has_power_management();
-  config =  new KConfig("kcmlaptoprc");
+  config =  new TDEConfig("kcmlaptoprc");
   int can_brightness = laptop_portable::has_brightness();
     TQStringList throttle_list;
     int current_throttle;

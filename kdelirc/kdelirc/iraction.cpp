@@ -37,7 +37,7 @@ IRAction::IRAction(const TQString &newProgram, const TQString &newObject, const 
 	theIfMulti = newIfMulti;
 }
 
-const IRAction &IRAction::loadFromConfig(KConfig &theConfig, int index)
+const IRAction &IRAction::loadFromConfig(TDEConfig &theConfig, int index)
 {
 	TQString Binding = "Binding" + TQString().setNum(index);
 	int numArguments = theConfig.readNumEntry(Binding + "Arguments");
@@ -64,7 +64,7 @@ const IRAction &IRAction::loadFromConfig(KConfig &theConfig, int index)
 	return *this;
 }
 
-void IRAction::saveToConfig(KConfig &theConfig, int index) const
+void IRAction::saveToConfig(TDEConfig &theConfig, int index) const
 {
 	TQString Binding = "Binding" + TQString().setNum(index);
 

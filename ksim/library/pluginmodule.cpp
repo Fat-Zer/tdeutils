@@ -76,7 +76,7 @@ const TQString &KSim::PluginObject::configFileName() const
 class KSim::PluginPage::Private
 {
   public:
-    KConfig *config;
+    TDEConfig *config;
     KSim::PluginObject *parent;
 };
 
@@ -86,7 +86,7 @@ KSim::PluginPage::PluginPage(KSim::PluginObject *parent, const char *name)
   d = new PluginPage::Private;
   d->parent = parent;
   if (parent && !parent->configFileName().isEmpty())
-    d->config = new KConfig(parent->configFileName() + "rc");
+    d->config = new TDEConfig(parent->configFileName() + "rc");
   else {
     kdWarning() << className() << ": Can not create the config() "
        "pointer due to the parent being null" << endl;
@@ -100,7 +100,7 @@ KSim::PluginPage::~PluginPage()
   delete d;
 }
 
-KConfig *KSim::PluginPage::config() const
+TDEConfig *KSim::PluginPage::config() const
 {
   if (d)
     return d->config;
@@ -113,7 +113,7 @@ class KSim::PluginView::Private
   public:
     PluginObject *parent;
     TQPopupMenu *popupMenu;
-    KConfig *config;
+    TDEConfig *config;
 };
 
 KSim::PluginView::PluginView(KSim::PluginObject *parent, const char *name)
@@ -126,7 +126,7 @@ KSim::PluginView::PluginView(KSim::PluginObject *parent, const char *name)
      TQT_SLOT(showAbout()), 0, -1, 0);
 
   if (parent && !parent->configFileName().isEmpty())
-    d->config = new KConfig(parent->configFileName() + "rc");
+    d->config = new TDEConfig(parent->configFileName() + "rc");
   else {
     kdWarning() << className() << ": Can not create the config() "
        "pointer due to the parent being null" << endl;
@@ -142,7 +142,7 @@ KSim::PluginView::~PluginView()
   d = 0;
 }
 
-KConfig *KSim::PluginView::config() const
+TDEConfig *KSim::PluginView::config() const
 {
   return d->config;
 }

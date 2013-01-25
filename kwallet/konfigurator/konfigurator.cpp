@@ -41,7 +41,7 @@ typedef KGenericFactory<KWalletConfig, TQWidget> KWalletFactory;
 K_EXPORT_COMPONENT_FACTORY(kcm_kwallet, KWalletFactory("kcmkwallet"))
 
 KWalletConfig::KWalletConfig(TQWidget *parent, const char *name, const TQStringList&)
-: KCModule(KWalletFactory::instance(), parent, name) {
+: TDECModule(KWalletFactory::instance(), parent, name) {
 
 	TDEAboutData *about =
 		new TDEAboutData(I18N_NOOP("kcmkwallet"),
@@ -51,7 +51,7 @@ KWalletConfig::KWalletConfig(TQWidget *parent, const char *name, const TQStringL
 		about->addAuthor("George Staikos", 0, "staikos@kde.org");
 	setAboutData( about );
 
-	_cfg = new KConfig("kwalletrc", false, false);
+	_cfg = new TDEConfig("kwalletrc", false, false);
 
 	TQVBoxLayout *vbox = new TQVBoxLayout(this, 0, KDialog::spacingHint());
 	vbox->add(_wcw = new WalletConfigWidget(this));
@@ -182,7 +182,7 @@ void KWalletConfig::load() {
 }
 
 void KWalletConfig::load(bool useDefaults) {
-	KConfigGroup config(_cfg, "Wallet");
+	TDEConfigGroup config(_cfg, "Wallet");
 	config.setReadDefaults( useDefaults );
 	_wcw->_enabled->setChecked(config.readBoolEntry("Enabled", true));
 	_wcw->_openPrompt->setChecked(config.readBoolEntry("Prompt on Open", true));
@@ -235,7 +235,7 @@ void KWalletConfig::load(bool useDefaults) {
 
 
 void KWalletConfig::save() {
-	KConfigGroup config(_cfg, "Wallet");
+	TDEConfigGroup config(_cfg, "Wallet");
 	config.writeEntry("Enabled", _wcw->_enabled->isChecked());
 	config.writeEntry("Launch Manager", _wcw->_launchManager->isChecked());
 	config.writeEntry("Leave Manager Open", !_wcw->_autocloseManager->isChecked());

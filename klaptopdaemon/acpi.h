@@ -30,14 +30,14 @@
 
 class TQWidget;
 class TQSpinBox;
-class KConfig;
+class TDEConfig;
 class TQCheckBox;
 class KIconLoader;
 class KIconButton;
 class TQPushButton;
 
 
-class AcpiConfig : public KCModule
+class AcpiConfig : public TDECModule
 {
   Q_OBJECT
   
@@ -58,7 +58,7 @@ private slots:
   void setupHelper();
 
 private:
-  KConfig *config;
+  TDEConfig *config;
 
   TQCheckBox *enableHibernate;
   TQCheckBox *enableSuspend;

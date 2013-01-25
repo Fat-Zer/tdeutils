@@ -213,7 +213,7 @@ void KMiloD::displayProgress(const TQString& text, int progress, const TQPixmap&
 void KMiloD::reconfigure()
 {
 	// load the kmilo configuration file:
-	KConfig config("kmilodrc");
+	TDEConfig config("kmilodrc");
 
 	KMilo::Monitor *monitor;
 

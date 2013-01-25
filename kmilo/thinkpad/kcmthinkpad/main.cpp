@@ -55,7 +55,7 @@ K_EXPORT_COMPONENT_FACTORY( kcm_thinkpad, KCMThinkpadModuleFactory("kcmthinkpad"
 #define CONFIG_FILE "kmilodrc"
 
 KCMThinkpadModule::KCMThinkpadModule(TQWidget* parent, const char* name, const TQStringList&)
-	: KCModule(KCMThinkpadModuleFactory::instance(), parent, name) {
+	: TDECModule(KCMThinkpadModuleFactory::instance(), parent, name) {
 	TDEAboutData* about =
 		new TDEAboutData(I18N_NOOP("kcmthinkpad"),
 			       I18N_NOOP("TDE Control Module for IBM Thinkpad "
@@ -132,7 +132,7 @@ void KCMThinkpadModule::save() {
 	}
 	DCOPClient client;
 
-	KConfig config(CONFIG_FILE);
+	TDEConfig config(CONFIG_FILE);
 	config.setGroup("thinkpad");
 
 	config.writeEntry("run", m_KCMThinkpadGeneral->mCbRun->isChecked());
@@ -164,7 +164,7 @@ void KCMThinkpadModule::load() {
 }
 
 void KCMThinkpadModule::load(bool useDefaults) {
-	KConfig config(CONFIG_FILE);
+	TDEConfig config(CONFIG_FILE);
 
 	config.setReadDefaults( useDefaults );
 

@@ -198,11 +198,11 @@ void KDFWidget::settingsChanged( void )
 
 
 /***************************************************************************
-  * writes the KConfig
+  * writes the TDEConfig
 **/
 void KDFWidget::applySettings( void )
 {
-  KConfig &config = *kapp->config();
+  TDEConfig &config = *kapp->config();
 
   config.setGroup("KDiskFree");
   if( GUI )
@@ -223,7 +223,7 @@ void KDFWidget::applySettings( void )
 
 
 /***************************************************************************
-  * reads the KConfig
+  * reads the TDEConfig
 **/
 void KDFWidget::loadSettings( void )
 {
@@ -231,7 +231,7 @@ void KDFWidget::loadSettings( void )
 
   if(GUI)
   {
-    KConfig &config = *kapp->config();
+    TDEConfig &config = *kapp->config();
     config.setGroup("KDiskFree");
     for( uint i=0; i<mTabProp.size(); i++ )
     {

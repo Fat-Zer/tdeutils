@@ -37,7 +37,7 @@ class KPushButton;
 
 class ArkWidget;
 
-namespace KIO
+namespace TDEIO
 {
 	class Job;
 }
@@ -104,10 +104,10 @@ public slots:
     bool saveFile();
     bool openURL( const KURL & url );
     bool closeURL();
-    void transferStarted( KIO::Job * );
+    void transferStarted( TDEIO::Job * );
     void transferCompleted();
     void transferCanceled( const TQString& errMsg );
-    void progressInformation( KIO::Job *, unsigned long );
+    void progressInformation( TDEIO::Job *, unsigned long );
     void cancelTransfer();
 
 signals:
@@ -146,7 +146,7 @@ private:
     KAction *popupOpenWithAction;
     KToggleAction *showSearchBar;
 
-    KIO::Job *m_job;
+    TDEIO::Job *m_job;
 };
 
 #endif // ARK_PART_H

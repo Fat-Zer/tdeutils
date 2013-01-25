@@ -30,7 +30,7 @@
 
 class TQWidget;
 class TQSpinBox;
-class KConfig;
+class TDEConfig;
 class TQCheckBox;
 class TQSlider;
 class KIconLoader;
@@ -38,7 +38,7 @@ class KIconButton;
 class TQPushButton;
 
 
-class SonyConfig : public KCModule
+class SonyConfig : public TDECModule
 {
   Q_OBJECT
   
@@ -60,7 +60,7 @@ private slots:
   void setupHelper();
 
 private:
-	KConfig *config;
+	TDEConfig *config;
 
 	TQCheckBox *enableScrollBar;
 	bool enablescrollbar;

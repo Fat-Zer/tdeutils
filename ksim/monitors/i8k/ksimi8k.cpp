@@ -54,7 +54,7 @@ KSim::PluginView *I8KPlugin::createView(const char *className)
 
 KSim::PluginPage *I8KPlugin::createConfigPage(const char *className)
 {
-  return new I8KConfig(this, className);
+  return new I8TDEConfig(this, className);
 }
 
 void I8KPlugin::showAbout()
@@ -208,7 +208,7 @@ void I8KView::updateView()
       .arg( m_unit ) );
 }
 
-I8KConfig::I8KConfig(KSim::PluginObject *parent, const char *name)
+I8TDEConfig::I8TDEConfig(KSim::PluginObject *parent, const char *name)
    : KSim::PluginPage(parent, name)
 {
   m_unit = new TQCheckBox( i18n( "Show temperature in Fahrenheit" ),
@@ -228,11 +228,11 @@ I8KConfig::I8KConfig(KSim::PluginObject *parent, const char *name)
   layout->setRowStretch( 2, 1 );
 }
 
-I8KConfig::~I8KConfig()
+I8TDEConfig::~I8TDEConfig()
 {
 }
 
-void I8KConfig::readConfig()
+void I8TDEConfig::readConfig()
 {
   config()->setGroup("I8KPlugin");
 
@@ -243,7 +243,7 @@ void I8KConfig::readConfig()
   m_interval->setValue( interval );
 }
 
-void I8KConfig::saveConfig()
+void I8TDEConfig::saveConfig()
 {
   config()->setGroup("I8KPlugin");
 

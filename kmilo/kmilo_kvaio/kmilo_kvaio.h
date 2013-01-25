@@ -46,7 +46,7 @@ class KMiloKVaio : public KMilo::Monitor {
 		virtual DisplayType poll();
 		virtual int progress() const;
 
-		virtual void reconfigure(KConfig*);
+		virtual void reconfigure(TDEConfig*);
 
 
 		bool showTextMsg(const TQString& msg) {

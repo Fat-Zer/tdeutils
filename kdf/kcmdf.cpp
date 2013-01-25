@@ -21,7 +21,7 @@
 
 //
 // 1999-12-05 Espen Sand 
-// Modified to use KCModule instead of the old and obsolete 
+// Modified to use TDECModule instead of the old and obsolete 
 // KControlApplication
 //
 
@@ -33,7 +33,7 @@
 #include "kcmdf.h"
 
 KDiskFreeWidget::KDiskFreeWidget( TQWidget *parent, const char *name )
- : KCModule( parent, name )
+ : TDECModule( parent, name )
 {
   setButtons(Help);
 
@@ -57,7 +57,7 @@ TQString KDiskFreeWidget::quickHelp() const
 
 extern "C"
 {
-  KDE_EXPORT KCModule* create_kdf( TQWidget *parent, const char * /*name*/ )
+  KDE_EXPORT TDECModule* create_kdf( TQWidget *parent, const char * /*name*/ )
   {
     return new KDiskFreeWidget( parent , "kdf" );
   }

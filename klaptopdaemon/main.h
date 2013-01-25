@@ -41,7 +41,7 @@ class SonyConfig;
 class ProfileConfig;
 class ButtonsConfig;
 
-class LaptopModule : public KCModule
+class LaptopModule : public TDECModule
 {
   Q_OBJECT
   

@@ -68,7 +68,7 @@ daemon_state::~daemon_state()
 
 void daemon_state::load()
 {
-	KConfig *config = new KConfig("kcmlaptoprc");
+	TDEConfig *config = new TDEConfig("kcmlaptoprc");
 
 	if (config == 0) {
 		::fprintf(stderr, "laptop_daemon: can't open kcmlaptop config files\n");

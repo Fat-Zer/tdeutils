@@ -38,7 +38,7 @@
 #include "version.h"
 
 PcmciaConfig::PcmciaConfig (TQWidget * parent, const char *name)
-  : KCModule(parent, name)
+  : TDECModule(parent, name)
 {
        TDEAboutData *about =
        new TDEAboutData(I18N_NOOP("kcmlaptop"),
@@ -109,7 +109,7 @@ void PcmciaConfig::defaults()
 
 void PcmciaConfig::changed()
 {
-  emit KCModule::changed(true);
+  emit TDECModule::changed(true);
 }
 
 

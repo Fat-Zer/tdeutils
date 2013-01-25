@@ -47,7 +47,7 @@ K_EXPORT_COMPONENT_FACTORY( kcm_kvaio, KVaioModuleFactory("kcmkvaio"))
 
 
 KVaioModule::KVaioModule(TQWidget *parent, const char *name, const TQStringList &)
-    : KCModule(KVaioModuleFactory::instance(), parent, name)
+    : TDECModule(KVaioModuleFactory::instance(), parent, name)
 {
     TDEAboutData *about =
         new TDEAboutData(I18N_NOOP("kcmkvaio"),
@@ -94,7 +94,7 @@ void KVaioModule::save()
     DCOPClient mClient;
 
     kdDebug() << "KVaioModule: saving." << endl;
-    KConfig config(CONFIG_FILE);
+    TDEConfig config(CONFIG_FILE);
 
     config.setGroup("KVaio");
 
@@ -131,7 +131,7 @@ void KVaioModule::load()
 void KVaioModule::load(bool useDefaults)
 {
     kdDebug() << "KVaioModule: loading." << endl;
-    KConfig config(CONFIG_FILE);
+    TDEConfig config(CONFIG_FILE);
 
 	 config.setReadDefaults( useDefaults );
 

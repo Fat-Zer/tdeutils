@@ -98,7 +98,7 @@ public:
 	static void get_battery_status(int &num_batteries, TQStringList &names, TQStringList &state, TQStringList &values); // get multiple battery status
 	static bool has_lav();			// true if the following returns a valid value
 	static float get_load_average();	// current short term load average
-	static void extra_config(TQWidget *parent, KConfig *config, TQVBoxLayout *layout);
+	static void extra_config(TQWidget *parent, TDEConfig *config, TQVBoxLayout *layout);
 	static void acpi_set_mask(bool standby, bool suspend, bool hibernate, bool perf, bool throttle);	
 	static void apm_set_mask(bool standby, bool suspend);
 	static void software_suspend_set_mask(bool hibernate);

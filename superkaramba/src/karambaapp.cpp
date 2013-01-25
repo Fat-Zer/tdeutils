@@ -243,7 +243,7 @@ void KarambaApplication::checkPreviousSession(TDEApplication &app,
   */
   if (app.isSessionRestored())
   {
-    KConfig* config = app.sessionConfig();
+    TDEConfig* config = app.sessionConfig();
     config->setGroup("General Options");
     TQString restartThemes = config->readEntry("OpenThemes");
 

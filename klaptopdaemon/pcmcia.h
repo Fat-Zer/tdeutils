@@ -38,7 +38,7 @@
 #include <kcmodule.h>
 #include <kaboutdata.h>
 
-class PcmciaConfig : public KCModule
+class PcmciaConfig : public TDECModule
 {
   Q_OBJECT
   

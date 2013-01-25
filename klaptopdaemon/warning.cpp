@@ -45,7 +45,7 @@
 extern void wake_laptop_daemon();
 
 WarningConfig::WarningConfig (int t, TQWidget * parent, const char *name)
-  : KCModule(parent, name),
+  : TDECModule(parent, name),
     checkSuspend(0),
     checkStandby(0),
     checkHibernate(0)
@@ -54,7 +54,7 @@ WarningConfig::WarningConfig (int t, TQWidget * parent, const char *name)
 
   type = t;
   apm = laptop_portable::has_power_management();
-  config =  new KConfig("kcmlaptoprc");
+  config =  new TDEConfig("kcmlaptoprc");
 
   my_load(0);
 

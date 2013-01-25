@@ -76,7 +76,7 @@ ConfigPage::~ConfigPage()
 
 void ConfigPage::saveConfig()
 {
-    KConfig &cfg = *config();
+    TDEConfig &cfg = *config();
 
     // collect garbage
     removeAllHostGroups();
@@ -92,7 +92,7 @@ void ConfigPage::saveConfig()
 
 void ConfigPage::readConfig()
 {
-    KConfig &cfg = *config();
+    TDEConfig &cfg = *config();
 
     cfg.setGroup( "General" );
     TQStringList hosts = cfg.readListEntry( "Hosts" );
@@ -274,7 +274,7 @@ void ConfigPage::removeAllMonitorGroups()
 
 void ConfigPage::removeConfigGroups( const TQString &prefix )
 {
-    KConfig &cfg = *config();
+    TDEConfig &cfg = *config();
 
     TQStringList groups = cfg.groupList();
     for ( TQStringList::ConstIterator it = groups.begin(); it != groups.end(); ++it )

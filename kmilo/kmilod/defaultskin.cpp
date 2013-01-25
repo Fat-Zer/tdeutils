@@ -51,7 +51,7 @@ DefaultSkin::DefaultSkin() {
 
 	_widget->hide();
 
-	KConfig config("kmilodrc");
+	TDEConfig config("kmilodrc");
 	reconfigure( &config );
 }
 
@@ -61,7 +61,7 @@ DefaultSkin::~DefaultSkin() {
 	_widget = 0;
 }
 
-void DefaultSkin::reconfigure( KConfig *config ) {
+void DefaultSkin::reconfigure( TDEConfig *config ) {
 	
 	config->setGroup("DefaultSkin");
 	

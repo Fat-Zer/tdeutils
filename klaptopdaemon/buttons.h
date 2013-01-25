@@ -33,11 +33,11 @@ class TQSlider;
 class TQButtonGroup;
 class TQRadioButton;
 class TQSpinBox;
-class KConfig;
+class TDEConfig;
 class TQCheckBox;
 class KComboBox;
 
-class ButtonsConfig : public KCModule
+class ButtonsConfig : public TDECModule
 {
   Q_OBJECT
   
@@ -85,7 +85,7 @@ private:
   bool lid_performance_enabled, power_performance_enabled;
   TQString lid_performance_val, power_performance_val;
 
-  KConfig *config;
+  TDEConfig *config;
   int power, lid, apm;
 };
 

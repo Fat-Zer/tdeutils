@@ -24,18 +24,18 @@
 @author Gav Wood
 */
 
-class KConfig;
+class TDEConfig;
 
 typedef TQValueList<Mode> ModeList;
 
 class Modes : protected TQMap<TQString, TQMap<TQString, Mode> >
 {
-	void purgeAllModes(KConfig &theConfig);
+	void purgeAllModes(TDEConfig &theConfig);
 	TQMap<TQString, TQString> theDefaults;
 
 public:
-	void loadFromConfig(KConfig &theConfig);
-	void saveToConfig(KConfig &theConfig);
+	void loadFromConfig(TDEConfig &theConfig);
+	void saveToConfig(TDEConfig &theConfig);
 	void generateNulls(const TQStringList &theRemotes);
 
 	const Mode &getMode(const TQString &remote, const TQString &mode) const;

@@ -46,8 +46,8 @@ class KTimerJob : public TQObject {
     void *user();
     void setUser( void *user );
 
-    void load( KConfig *cfg, const TQString& grp );
-    void save( KConfig *cfg, const TQString& grp );
+    void load( TDEConfig *cfg, const TQString& grp );
+    void save( TDEConfig *cfg, const TQString& grp );
 
  public slots:
     void setDelay( unsigned sec );
@@ -101,8 +101,8 @@ class KTimerPref : public PrefWidget
     void remove();
     void currentChanged( TQListViewItem * );
 
-    void saveJobs( KConfig *cfg );
-    void loadJobs( KConfig *cfg );
+    void saveJobs( TDEConfig *cfg );
+    void loadJobs( TDEConfig *cfg );
 
  private slots:
     void jobChanged( KTimerJob *job );

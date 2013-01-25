@@ -45,7 +45,7 @@ public:
 	TQStringList untrustedList;
 
 private:
-        KConfig *config;
+        TDEConfig *config;
         TQButtonGroup *boutonboxoptions;
         TQString customOptions;
 

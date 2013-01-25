@@ -354,7 +354,7 @@ static void acpi_read_batteries() {
 			delete f;
 		}
 		if (bat.cap <= 0) {
-			KConfig* config = new KConfig("kcmlaptoprc", true /*readonly*/, false /*useKDEGlobals*/);
+			TDEConfig* config = new TDEConfig("kcmlaptoprc", true /*readonly*/, false /*useKDEGlobals*/);
 			config->setGroup("AcpiBattery");
 			bat.cap = config->readNumEntry(bat.name,0);
 			delete config;
@@ -393,7 +393,7 @@ static void acpi_read_batteries() {
 		if (bat.present) {
 			if (bat.remaining > bat.cap) {	// happens e.g. if the system doesn't provide a capacity value
 				bat.cap = bat.remaining;
-				KConfig* config = new KConfig("kcmlaptoprc", false /*readonly*/, false /*useKDEGlobals*/);
+				TDEConfig* config = new TDEConfig("kcmlaptoprc", false /*readonly*/, false /*useKDEGlobals*/);
 				config->setGroup("AcpiBattery");
 				config->writeEntry(bat.name, bat.cap);
 				config->sync();
@@ -1162,7 +1162,7 @@ void laptop_portable::invoke_hibernation()
 }
 
 void
-laptop_portable::extra_config(TQWidget *wp, KConfig *, TQVBoxLayout *top_layout)
+laptop_portable::extra_config(TQWidget *wp, TDEConfig *, TQVBoxLayout *top_layout)
 {
 	if (laptop_portable::has_apm(1) || laptop_portable::has_acpi(1))
 		return;
@@ -2267,7 +2267,7 @@ laptop_portable::apm_set_mask(bool , bool )
 //	adds extra widgets to the battery panel
 //
 void
-laptop_portable::extra_config(TQWidget * /*parent*/, KConfig * /*config*/, TQVBoxLayout * /*layout*/)
+laptop_portable::extra_config(TQWidget * /*parent*/, TDEConfig * /*config*/, TQVBoxLayout * /*layout*/)
 {
 	// INSERT HERE
 }
@@ -2945,7 +2945,7 @@ int laptop_portable::has_apm(int)
 //	adds extra widgets to the battery panel
 //
 void
-laptop_portable::extra_config(TQWidget *parent, KConfig *config, TQVBoxLayout *layout)
+laptop_portable::extra_config(TQWidget *parent, TDEConfig *config, TQVBoxLayout *layout)
 {
 	// INSERT HERE
 }

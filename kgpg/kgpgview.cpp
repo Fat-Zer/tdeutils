@@ -87,7 +87,7 @@ void MyEditor::slotDroppedFile(KURL url)
         /////////////////    decide what to do with dropped file
         TQString text;
         if (!tempFile.isEmpty()) {
-                KIO::NetAccess::removeTempFile(tempFile);
+                TDEIO::NetAccess::removeTempFile(tempFile);
                 tempFile=TQString();
         }
 
@@ -96,7 +96,7 @@ void MyEditor::slotDroppedFile(KURL url)
         else {
                 if (KMessageBox::warningContinueCancel(0,i18n("<qt><b>Remote file dropped</b>.<br>The remote file will now be copied to a temporary file to process requested operation. This temporary file will be deleted after operation.</qt>"),0,KStdGuiItem::cont(),"RemoteFileWarning")!=KMessageBox::Continue)
                         return;
-                if (!KIO::NetAccess::download (url, tempFile,this)) {
+                if (!TDEIO::NetAccess::download (url, tempFile,this)) {
                         KMessageBox::sorry(this,i18n("Could not download file."));
                         return;
                 }
@@ -129,7 +129,7 @@ TQFile qfile(fileToCheck);
                                         qfile.close();
                                         int result=KMessageBox::warningContinueCancel(this,i18n("<p>The file <b>%1</b> is a public key.<br>Do you want to import it ?</p>").arg(fileToCheck),i18n("Warning"));
                                         if (result==KMessageBox::Cancel) {
-                                                KIO::NetAccess::removeTempFile(fileToCheck);
+                                                TDEIO::NetAccess::removeTempFile(fileToCheck);
                                                 return true;
                                         } else {
                                                 KgpgInterface *importKeyProcess=new KgpgInterface();
@@ -141,13 +141,13 @@ TQFile qfile(fileToCheck);
                                         if (result.startsWith("-----BEGIN PGP PRIVATE KEY BLOCK")) {
 						qfile.close();
                                                 KMessageBox::information(0,i18n("This file is a private key.\nPlease use kgpg key management to import it."));
-                                                KIO::NetAccess::removeTempFile(fileToCheck);
+                                                TDEIO::NetAccess::removeTempFile(fileToCheck);
                                                 return true;
                                         }
 
                                         setText(result);
                                         qfile.close();
-                                        KIO::NetAccess::removeTempFile(fileToCheck);
+                                        TDEIO::NetAccess::removeTempFile(fileToCheck);
                                 }
                 }
 		return false;
@@ -183,7 +183,7 @@ void MyEditor::slotDecodeFile(TQString fname)
 void MyEditor::slotProcessResult(TQStringList iKeys)
 {
 	emit refreshImported(iKeys);
-        KIO::NetAccess::removeTempFile(tempFile);
+        TDEIO::NetAccess::removeTempFile(tempFile);
         tempFile=TQString();
 }
 

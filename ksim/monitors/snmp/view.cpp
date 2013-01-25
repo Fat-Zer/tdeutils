@@ -47,7 +47,7 @@ void View::reparseConfig()
     m_widgets.clear();
     m_widgets.setAutoDelete( false );
 
-    KConfig &cfg = *config();
+    TDEConfig &cfg = *config();
     cfg.setGroup( "General" );
     TQStringList allHosts = cfg.readListEntry( "Hosts" );
     TQStringList monitors = cfg.readListEntry( "Monitors" );

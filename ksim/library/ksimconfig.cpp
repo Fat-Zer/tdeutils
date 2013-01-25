@@ -24,9 +24,9 @@
 #include "ksimconfig.h"
 #include "themeloader.h"
 
-KConfig *KSim::Config::mainConfig = 0;
+TDEConfig *KSim::Config::mainConfig = 0;
 
-KSim::Config::Config(KConfig *config)
+KSim::Config::Config(TDEConfig *config)
 {
   mainConfig = config;
 }
@@ -35,7 +35,7 @@ KSim::Config::~Config()
 {
 }
 
-KConfig *KSim::Config::config()
+TDEConfig *KSim::Config::config()
 {
   return mainConfig;
 }

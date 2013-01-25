@@ -150,7 +150,7 @@ int main(int argc, char *argv[])
 
 
     // Read configuration
-    KConfig *config = TDEGlobal::config();
+    TDEConfig *config = TDEGlobal::config();
     config->setGroup(TQString::fromLatin1("Passwords"));
     int timeout = config->readNumEntry(TQString::fromLatin1("Timeout"), defTimeout);
 

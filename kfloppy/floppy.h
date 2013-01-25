@@ -35,7 +35,7 @@ class TQButtonGroup;
 class TQGroupBox;
 
 class KProgress;
-class KConfig;
+class TDEConfig;
 class KPushButton;
 class KHelpMenu;
 class KFAction;
@@ -87,7 +87,7 @@ private:
 	TQString driveconfig;
 	TQString densityconfig;
 	TQString filesystemconfig;
-	KConfig *config;
+	TDEConfig *config;
 
 	int drive;
         /// Number of blocks of the floppy (typically 1440)

@@ -3,6 +3,6 @@ File=kjots.kcfg
 ClassName=KJotsSettings
 Singleton=true
 Mutators=Width,Height,SplitterSizes,CurrentSelection,OpenBooks,LastId
-# Inherits=KConfigSkeleton
+# Inherits=TDEConfigSkeleton
 # IncludeFiles=libtdepim/kpimprefs.h
 # MemberVariables=public

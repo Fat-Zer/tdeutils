@@ -48,7 +48,7 @@ class CExportDialog;
 class CConverterDialog;
 class CFindNavigatorDialog;
 class CReplacePromptDialog;
-namespace KIO { class Job; }
+namespace TDEIO { class Job; }
 
 
 class CHexEditorWidget : public TQWidget
@@ -75,8 +75,8 @@ class CHexEditorWidget : public TQWidget
     ~CHexEditorWidget( void );
 
     void initialize( void );
-    void writeConfiguration( KConfig &config );
-    void readConfiguration( KConfig &config );
+    void writeConfiguration( TDEConfig &config );
+    void readConfiguration( TDEConfig &config );
 
     bool isOpen( const TQString &url, uint &offset );
     bool modified( void );

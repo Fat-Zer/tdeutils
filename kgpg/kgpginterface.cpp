@@ -958,7 +958,7 @@ void KgpgInterface::signover(TDEProcess *)
 void KgpgInterface::openSignConsole()
 {
         TDEProcess conprocess;
-	KConfig *config = TDEGlobal::config();
+	TDEConfig *config = TDEGlobal::config();
 	config->setGroup("General");
 	conprocess<< config->readPathEntry("TerminalApplication","konsole");
         conprocess<<"-e"<<"gpg";
@@ -1358,7 +1358,7 @@ void KgpgInterface::importKeyURL(KURL url)
 {
         /////////////      import a key
 
-        if( KIO::NetAccess::download( url, tempKeyFile,0) ) {
+        if( TDEIO::NetAccess::download( url, tempKeyFile,0) ) {
                 message=TQString();
                 KProcIO *conprocess=new KProcIO(TQTextCodec::codecForLocale());
                 *conprocess<< "gpg"<<"--no-tty"<<"--no-secmem-warning"<<"--status-fd=2"<<"--utf8-strings"<<"--import";
@@ -1450,7 +1450,7 @@ kdDebug(2100)<<"Importing is over"<<endl;
 
 void KgpgInterface::importURLover(TDEProcess *p)
 {
-        KIO::NetAccess::removeTempFile(tempKeyFile);
+        TDEIO::NetAccess::removeTempFile(tempKeyFile);
         importover(p);
         //KMessageBox::information(0,message);
         //emit importfinished();

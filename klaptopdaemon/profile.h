@@ -30,7 +30,7 @@
 
 class TQWidget;
 class TQSpinBox;
-class KConfig;
+class TDEConfig;
 class TQCheckBox;
 class TQSlider;
 class KIconLoader;
@@ -39,7 +39,7 @@ class TQPushButton;
 class KComboBox;
 
 
-class ProfileConfig : public KCModule
+class ProfileConfig : public TDECModule
 {
   Q_OBJECT
   
@@ -67,7 +67,7 @@ private slots:
 
 
 private:
-	KConfig *config;
+	TDEConfig *config;
 
 	TQCheckBox *pon, *performance_on, *throttle_on;
 	TQSlider *son;

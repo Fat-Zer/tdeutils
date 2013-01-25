@@ -115,7 +115,7 @@ class ThinkPadMonitor : public Monitor {
 		 * Reimplemented from KMilo::Monitor.
 		 * Loads configuration from kmilorc
 		 */
-		virtual void reconfigure(KConfig*);
+		virtual void reconfigure(TDEConfig*);
 	private:
 		/**
 		 * get the current state from the nvram

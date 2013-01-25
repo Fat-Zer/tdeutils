@@ -248,7 +248,7 @@ void TopLevel::setupStatusBar()
 }
 
 
-void TopLevel::saveProperties(KConfig* config)
+void TopLevel::saveProperties(TDEConfig* config)
 {
   if(m_url.isEmpty() && !eframe->isModified())
     return;
@@ -273,7 +273,7 @@ void TopLevel::saveProperties(KConfig* config)
 }
 
 
-void TopLevel::readProperties(KConfig* config){
+void TopLevel::readProperties(TDEConfig* config){
     KURL url = config->readPathEntry("url");
     TQString filename = config->readPathEntry("saved_to");
 
@@ -486,8 +486,8 @@ void TopLevel::file_open( void )
       return;
     }
 
-    KIO::UDSEntry entry;
-    KIO::NetAccess::stat(url, entry, this);
+    TDEIO::UDSEntry entry;
+    TDEIO::NetAccess::stat(url, entry, this);
     KFileItem fileInfo(entry, url);
     if (fileInfo.size() > 2097152 && // 2MB large/small enough?
         KMessageBox::warningContinueCancel(this,
@@ -515,10 +515,10 @@ void TopLevel::file_open( void )
     }
 
     TQString tmpfile;
-    KIO::NetAccess::download( url, tmpfile, toplevel );
+    TDEIO::NetAccess::download( url, tmpfile, toplevel );
 
     int result = toplevel->openFile( tmpfile, 0, url.fileEncoding());
-    KIO::NetAccess::removeTempFile( tmpfile );
+    TDEIO::NetAccess::removeTempFile( tmpfile );
 
     if( result == KEDIT_OK )
     {
@@ -557,9 +557,9 @@ void TopLevel::file_insert()
     }
 
     TQString tmpfile;
-    KIO::NetAccess::download( url, tmpfile, this );
+    TDEIO::NetAccess::download( url, tmpfile, this );
     int result = openFile( tmpfile, OPEN_INSERT, url.fileEncoding(), true );
-    KIO::NetAccess::removeTempFile( tmpfile );
+    TDEIO::NetAccess::removeTempFile( tmpfile );
 
     if( result == KEDIT_OK )
     {
@@ -728,7 +728,7 @@ void TopLevel::file_save_as()
      if (u.isEmpty())
         return;
 
-     if ( KIO::NetAccess::exists(u, false, this) )
+     if ( TDEIO::NetAccess::exists(u, false, this) )
      {
         int result = KMessageBox::warningContinueCancel( this,
            i18n( "A file named \"%1\" already exists. "
@@ -827,11 +827,11 @@ void TopLevel::replace(){
 
 void TopLevel::showSettings()
 {
-  if(KConfigDialog::showDialog("settings"))
+  if(TDEConfigDialog::showDialog("settings"))
     return;
 
   initSpellConfig();
-  KConfigDialog* dialog = new SettingsDialog(this, "settings", Prefs::self(), kspellconfigOptions);
+  TDEConfigDialog* dialog = new SettingsDialog(this, "settings", Prefs::self(), kspellconfigOptions);
 
   connect(dialog, TQT_SIGNAL(settingsChanged()), this, TQT_SLOT(updateSettings()));
   dialog->show();
@@ -1007,7 +1007,7 @@ int TopLevel::saveURL( const KURL& _url )
     eframe->setModified( true );
     saveFile( tmpFile.name(), false, _url.fileEncoding() );
 
-    if (KIO::NetAccess::upload( tmpFile.name(), _url, this ) == false)
+    if (TDEIO::NetAccess::upload( tmpFile.name(), _url, this ) == false)
     {
       KMessageBox::error(this, "Could not save remote file");
       return KEDIT_RETRY;
@@ -1133,7 +1133,7 @@ void TopLevel::openURL( const KURL& _url, int _mode )
 
     TQString target;
     int result = KEDIT_OK;
-    if (KIO::NetAccess::download(_url, target, this))
+    if (TDEIO::NetAccess::download(_url, target, this))
     {
         result = openFile(target, _mode, _url.fileEncoding());
     }
@@ -1271,7 +1271,7 @@ extern "C" KDE_EXPORT int kdemain (int argc, char **argv)
 	TDECmdLineArgs::addCmdLineOptions( options );
 
 	TDEApplication a;
-	//CT KIO::Job::initStatic();
+	//CT TDEIO::Job::initStatic();
 	if ( a.isRestored() )
 	{
 		int n = 1;
@@ -1317,8 +1317,8 @@ extern "C" KDE_EXPORT int kdemain (int argc, char **argv)
 	return a.exec ();
 }
 
-SettingsDialog::SettingsDialog(TQWidget *parent, const char *name,KConfigSkeleton *config, KSpellConfig *_spellConfig)
- : KConfigDialog(parent, name, config),
+SettingsDialog::SettingsDialog(TQWidget *parent, const char *name,TDEConfigSkeleton *config, KSpellConfig *_spellConfig)
+ : TDEConfigDialog(parent, name, config),
  spellConfig(_spellConfig), spellConfigChanged(false)
 {
   // Font

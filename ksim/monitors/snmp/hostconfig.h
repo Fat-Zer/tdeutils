@@ -31,7 +31,7 @@ namespace Snmp
 struct HostConfig
 {
     HostConfig() {}
-    HostConfig( KConfigBase &config )
+    HostConfig( TDEConfigBase &config )
     { load( config ); }
 
     TQString name; // hostname
@@ -56,8 +56,8 @@ struct HostConfig
         TQString key;
     } privacy;
 
-    bool load( KConfigBase &config );
-    void save( KConfigBase &config ) const;
+    bool load( TDEConfigBase &config );
+    void save( TDEConfigBase &config ) const;
 
     bool isNull() const { return name.isEmpty(); }
 
@@ -65,7 +65,7 @@ struct HostConfig
     { return name == rhs.name; }
 
 private:
-    static void writeIfNotEmpty( KConfigBase &config, const TQString &name, const TQString &value );
+    static void writeIfNotEmpty( TDEConfigBase &config, const TQString &name, const TQString &value );
 };
 
 struct HostConfigMap : public TQMap< TQString, HostConfig >
@@ -74,8 +74,8 @@ struct HostConfigMap : public TQMap< TQString, HostConfig >
     HostConfigMap( const TQMap< TQString, HostConfig > &rhs )
         : TQMap< TQString, HostConfig >( rhs ) {}
 
-    void load( KConfigBase &config, const TQStringList &hosts );
-    TQStringList save( KConfigBase &config ) const;
+    void load( TDEConfigBase &config, const TQStringList &hosts );
+    TQStringList save( TDEConfigBase &config ) const;
 };
 
 }

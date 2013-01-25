@@ -255,13 +255,13 @@ void ImageLabel::applyTransformations(bool useSmoothScale)
     setHeight(pixmap.height());
 }
 
-void ImageLabel::slotCopyResult(KIO::Job* job)
+void ImageLabel::slotCopyResult(TDEIO::Job* job)
 {
-  TQString tempFile = ((KIO::FileCopyJob*)job)->destURL().path();
+  TQString tempFile = ((TDEIO::FileCopyJob*)job)->destURL().path();
   if(job->error() == 0)
   {
     setValue(tempFile);
-    imagePath = ((KIO::FileCopyJob*)job)->srcURL().path();
+    imagePath = ((TDEIO::FileCopyJob*)job)->srcURL().path();
     emit pixmapLoaded();
   }
   else
@@ -269,7 +269,7 @@ void ImageLabel::slotCopyResult(KIO::Job* job)
     tqWarning("Error downloading (%s): %s", job->errorText().ascii(),
                                            tempFile.ascii());
   }
-  KIO::NetAccess::removeTempFile(tempFile);
+  TDEIO::NetAccess::removeTempFile(tempFile);
 }
 
 void ImageLabel::setValue(TQString fn)
@@ -285,10 +285,10 @@ void ImageLabel::setValue(TQString fn)
   if(protocol && url.isLocalFile() == false)
   {
     KTempFile tmpFile;
-    KIO::FileCopyJob* copy = KIO::file_copy(fileName, tmpFile.name(), 0600,
+    TDEIO::FileCopyJob* copy = TDEIO::file_copy(fileName, tmpFile.name(), 0600,
                                             true, false, false);
-    connect(copy, TQT_SIGNAL(result(KIO::Job*)),
-            this, TQT_SLOT(slotCopyResult(KIO::Job*)));
+    connect(copy, TQT_SIGNAL(result(TDEIO::Job*)),
+            this, TQT_SLOT(slotCopyResult(TDEIO::Job*)));
     return;
   }
   else
@@ -446,13 +446,13 @@ void ImageLabel::parseImages(TQString fn, TQString fn_roll, int _xoff,
   {
     TQString tmpFile;
 #if defined(KDE_3_2)
-    if(KIO::NetAccess::download(KURL(path), tmpFile, karambaApp->parentWindow()))
+    if(TDEIO::NetAccess::download(KURL(path), tmpFile, karambaApp->parentWindow()))
 #else
-    if(KIO::NetAccess::download(KURL(path), tmpFile))
+    if(TDEIO::NetAccess::download(KURL(path), tmpFile))
 #endif
     {
       pixmap_off = KPixmap(tmpFile);
-      KIO::NetAccess::removeTempFile(tmpFile);
+      TDEIO::NetAccess::removeTempFile(tmpFile);
       tqDebug( "Downloaded: %s to %s", path.ascii(), tmpFile.ascii() );
     }
     else
@@ -494,13 +494,13 @@ void ImageLabel::parseImages(TQString fn, TQString fn_roll, int _xoff,
   {
     TQString tmpFile;
 #if defined(KDE_3_2)
-    if(KIO::NetAccess::download(KURL(path), tmpFile, karambaApp->parentWindow()))
+    if(TDEIO::NetAccess::download(KURL(path), tmpFile, karambaApp->parentWindow()))
 #else
-    if(KIO::NetAccess::download(KURL(path), tmpFile))
+    if(TDEIO::NetAccess::download(KURL(path), tmpFile))
 #endif
     {
       pixmap_on = KPixmap(tmpFile);
-      KIO::NetAccess::removeTempFile(tmpFile);
+      TDEIO::NetAccess::removeTempFile(tmpFile);
       tqDebug( "Downloaded: %s to %s", path.ascii(), tmpFile.ascii());
     }
     else

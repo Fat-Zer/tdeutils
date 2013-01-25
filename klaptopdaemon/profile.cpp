@@ -54,7 +54,7 @@
 extern void wake_laptop_daemon();
 
 ProfileConfig::ProfileConfig(TQWidget * parent, const char *name)
-  : KCModule(parent, name)
+  : TDECModule(parent, name)
 {
     TQStringList performance_list;
     int current_performance;
@@ -66,7 +66,7 @@ ProfileConfig::ProfileConfig(TQWidget * parent, const char *name)
 
     TDEGlobal::locale()->insertCatalogue("klaptopdaemon"); // For translation of klaptopdaemon messages
 
-    config =  new KConfig("kcmlaptoprc");
+    config =  new TDEConfig("kcmlaptoprc");
 
     TQVBoxLayout *top_layout = new TQVBoxLayout( this, KDialog::marginHint(),
 					       KDialog::spacingHint() );

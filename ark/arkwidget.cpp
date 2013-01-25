@@ -199,7 +199,7 @@ ArkWidget::updateStatusTotals()
     m_nSizeOfFiles = m_fileListView->totalSize();
 
     TQString strInfo = i18n( "%n file  %1", "%n files  %1", m_nNumFiles )
-                          .arg( KIO::convertSize( m_nSizeOfFiles ) );
+                          .arg( TDEIO::convertSize( m_nSizeOfFiles ) );
     emit setStatusBarText(strInfo);
 }
 
@@ -287,7 +287,7 @@ ArkWidget::getSaveAsFileName()
 bool
 ArkWidget::file_save_as( const KURL & u )
 {
-    bool success = KIO::NetAccess::upload( m_strArchName, u, this );
+    bool success = TDEIO::NetAccess::upload( m_strArchName, u, this );
     if ( m_modified && success )
         m_modified = false;
     return success;
@@ -388,7 +388,7 @@ ArkWidget::convertFinish()
         }
         else
         {
-            KIO::NetAccess::upload( tmpDir()
+            TDEIO::NetAccess::upload( tmpDir()
                        + m_convert_saveAsURL.fileName(), m_convert_saveAsURL, this );
             // TODO: save bandwidth - we already have a local tmp file ...
             emit openURLRequest( m_convert_saveAsURL );
@@ -427,9 +427,9 @@ ArkWidget::extractTo( const KURL & targetDirectory, const KURL & archive, bool b
         m_extractTo_targetDirectory.setPath( targetDirectory.path( 1 ) + fileName + '/' );
     }
 
-    if ( !KIO::NetAccess::exists( m_extractTo_targetDirectory, false, this ) )
+    if ( !TDEIO::NetAccess::exists( m_extractTo_targetDirectory, false, this ) )
     {
-        if ( !KIO::NetAccess::mkdir( m_extractTo_targetDirectory, this ) )
+        if ( !TDEIO::NetAccess::mkdir( m_extractTo_targetDirectory, this ) )
         {
             KMessageBox::error( 0, i18n( "Could not create the folder %1" ).arg(
                                                             targetDirectory.prettyURL() ) );
@@ -548,7 +548,7 @@ ArkWidget::addToArchive( const KURL::List & filesToAdd, const KURL & archive)
 {
     m_addToArchive_filesToAdd = filesToAdd;
     m_addToArchive_archive = archive;
-    if ( !KIO::NetAccess::exists( archive, false, this ) )
+    if ( !TDEIO::NetAccess::exists( archive, false, this ) )
     {
         if ( !m_openAsMimeType.isEmpty() )
         {
@@ -676,7 +676,7 @@ ArkWidget::addToArchiveSlotAddDone( bool success )
         KMessageBox::error( this, i18n( "An error occurred while adding the files to the archive." ) );
     }
     if ( !m_addToArchive_archive.isLocalFile() )
-        KIO::NetAccess::upload( m_strArchName, m_addToArchive_archive, this );
+        TDEIO::NetAccess::upload( m_strArchName, m_addToArchive_archive, this );
     emit request_file_quit();
     return;
 }
@@ -918,15 +918,15 @@ ArkWidget::extractRemoteInitiateMoving( const KURL & target )
 
     m_extractURL.adjustPath( 1 );
 
-    KIO::CopyJob *job = KIO::copy( srcList, target, this );
-    connect( job, TQT_SIGNAL(result(KIO::Job*)),
-            this, TQT_SLOT(slotExtractRemoteDone(KIO::Job*)) );
+    TDEIO::CopyJob *job = TDEIO::copy( srcList, target, this );
+    connect( job, TQT_SIGNAL(result(TDEIO::Job*)),
+            this, TQT_SLOT(slotExtractRemoteDone(TDEIO::Job*)) );
 
     m_extractRemote = false;
 }
 
 void
-ArkWidget::slotExtractRemoteDone(KIO::Job *job)
+ArkWidget::slotExtractRemoteDone(TDEIO::Job *job)
 {
     delete m_extractRemoteTmpDir;
     m_extractRemoteTmpDir = NULL;
@@ -1008,7 +1008,7 @@ ArkWidget::createRealArchive( const TQString & strFilename, const TQStringList &
     u1.setPath( m_compressedFile );
     m_createRealArchTmpDir = new KTempDir( tmpDir() + "create_real_arch" );
     u2.setPath( m_createRealArchTmpDir->name() + u1.fileName() );
-    KIO::NetAccess::copy( u1, u2, this );
+    TDEIO::NetAccess::copy( u1, u2, this );
     m_compressedFile = "file:" + u2.path(); // AGAIN THE 5 SPACES Hack :-(
     connect( newArch, TQT_SIGNAL( sigCreate( Arch *, bool, const TQString &, int ) ),
              this, TQT_SLOT( createRealArchiveSlotCreate( Arch *, bool,
@@ -1212,7 +1212,7 @@ ArkWidget::toLocalFile( const KURL& url )
         tempfile += strURL.right(strURL.length() - strURL.findRev("/") - 1);
         deleteAfterUse(tempfile);  // remember for deletion
         KURL tempurl; tempurl.setPath( tempfile );
-        if( !KIO::NetAccess::dircopy(url, tempurl, this) )
+        if( !TDEIO::NetAccess::dircopy(url, tempurl, this) )
             return KURL();
         localURL = tempfile;
     }
@@ -1439,7 +1439,7 @@ ArkWidget::action_extract()
     fileToExtract.setPath( arch->fileName() );
 
      //before we start, make sure the archive is still there
-    if (!KIO::NetAccess::exists( fileToExtract.prettyURL(), true, this ) )
+    if (!TDEIO::NetAccess::exists( fileToExtract.prettyURL(), true, this ) )
     {
         KMessageBox::error(0, i18n("The archive to extract from no longer exists."));
         return false;
@@ -1531,7 +1531,7 @@ ArkWidget::action_extract()
         }
         else
         {
-                KIO::filesize_t nTotalSize = 0;
+                TDEIO::filesize_t nTotalSize = 0;
                 // make a list to send to unarchFile
                 TQStringList selectedFiles = m_fileListView->selectedFilenames();
                 for ( TQStringList::const_iterator it = selectedFiles.constBegin();
@@ -1842,12 +1842,12 @@ ArkWidget::updateStatusSelection()
     {
         strInfo = i18n("%1 files selected  %2")
                   .arg(TDEGlobal::locale()->formatNumber(m_nNumSelectedFiles, 0))
-                  .arg(KIO::convertSize(m_nSizeOfSelectedFiles));
+                  .arg(TDEIO::convertSize(m_nSizeOfSelectedFiles));
     }
     else
     {
         strInfo = i18n("1 file selected  %2")
-                  .arg(KIO::convertSize(m_nSizeOfSelectedFiles));
+                  .arg(TDEIO::convertSize(m_nSizeOfSelectedFiles));
     }
 
     emit setStatusBarSelectedFiles(strInfo);
@@ -2266,10 +2266,10 @@ void ArkWidget::slotShowSearchBarToggled( bool b )
  * Show Settings dialog.
  */
 void ArkWidget::showSettings(){
-  if(KConfigDialog::showDialog("settings"))
+  if(TDEConfigDialog::showDialog("settings"))
     return;
 
-  KConfigDialog *dialog = new KConfigDialog(this, "settings", ArkSettings::self());
+  TDEConfigDialog *dialog = new TDEConfigDialog(this, "settings", ArkSettings::self());
 
   General* genPage = new General(0, "General");
   dialog->addPage(genPage, i18n("General"), "ark", i18n("General Settings"));

@@ -88,11 +88,11 @@ bool SKNewStuff::install( const TQString &fileName )
     //as a .zip instead of .bz2 or .tar.gz
     KURL sourceFile(fileName);
     KURL destFile( destDir + sourceFile.fileName() );
-    if(!KIO::NetAccess::file_copy( sourceFile, destFile ))
+    if(!TDEIO::NetAccess::file_copy( sourceFile, destFile ))
     {
       return false;
     }
-    KIO::NetAccess::removeTempFile( sourceFile.url() );
+    TDEIO::NetAccess::removeTempFile( sourceFile.url() );
     //Add the skz theme to the Theme Dialog
     mDlg->addSkzThemeToDialog(destFile.path());
   }

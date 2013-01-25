@@ -178,10 +178,10 @@ void CompressedFile::open()
   src.setPath( m_filename );
   target.setPath( m_tmpfile );
 
-  KIO::NetAccess::copy( src, target, m_gui );
+  TDEIO::NetAccess::copy( src, target, m_gui );
   kdDebug(1601) << "Temp file name is " << target << endl;
 
-  if ( !KIO::NetAccess::exists( target, true, NULL ) )
+  if ( !TDEIO::NetAccess::exists( target, true, NULL ) )
     return;
 
   TDEProcess *kp = m_currentProcess = new TDEProcess;
@@ -246,15 +246,15 @@ void CompressedFile::slotUncompressDone(TDEProcess *_kp)
   KURL url;
   url.setPath( m_tmpdir + lst.first() );
   m_tmpfile = url.path();
-  KIO::UDSEntry udsInfo;
-  KIO::NetAccess::stat( url, udsInfo, m_gui );
+  TDEIO::UDSEntry udsInfo;
+  TDEIO::NetAccess::stat( url, udsInfo, m_gui );
   KFileItem fileItem( udsInfo, url );
   TQStringList list;
   list << fileItem.name();
   list << fileItem.permissionsString();
   list << fileItem.user();
   list << fileItem.group();
-  list << KIO::number( fileItem.size() );
+  list << TDEIO::number( fileItem.size() );
   m_gui->fileList()->addItem(list); // send to GUI
 
   emit sigOpen( this, bSuccess, m_filename,

@@ -157,7 +157,7 @@ CHexToolWidget::~CHexToolWidget( void )
 }
 
 
-void CHexToolWidget::writeConfiguration( KConfig &config )
+void CHexToolWidget::writeConfiguration( TDEConfig &config )
 {
   config.setGroup("Conversion" );
   config.writeEntry("LittleEndian",  mCheckIntelFormat->isChecked() );
@@ -165,7 +165,7 @@ void CHexToolWidget::writeConfiguration( KConfig &config )
   config.writeEntry("StreamWindow", mBitCombo->currentItem() );
 }
 
-void CHexToolWidget::readConfiguration( KConfig &config )
+void CHexToolWidget::readConfiguration( TDEConfig &config )
 {
   config.setGroup("Conversion" );
   bool s1  = config.readBoolEntry( "LittleEndian", true );

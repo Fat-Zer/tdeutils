@@ -62,7 +62,7 @@ int main( int argc, char **argv )
 
   // backwards compatibility code to convert "old" user font settings
   // to the new config settings
-  KConfig *config = a.config();
+  TDEConfig *config = a.config();
   config->setGroup("kjots");
   if (config->hasKey("EFontFamily")) {
     // read old font and create it

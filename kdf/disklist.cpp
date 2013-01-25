@@ -81,7 +81,7 @@ void DiskList::setUpdatesDisabled(bool disable)
 }
 
 /***************************************************************************
-  * saves the KConfig for special mount/umount scripts
+  * saves the TDEConfig for special mount/umount scripts
 **/
 void DiskList::applySettings()
 {
@@ -110,7 +110,7 @@ void DiskList::applySettings()
 
 
 /***************************************************************************
-  * reads the KConfig for special mount/umount scripts
+  * reads the TDEConfig for special mount/umount scripts
 **/
 void DiskList::loadSettings()
 {

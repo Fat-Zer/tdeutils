@@ -33,12 +33,12 @@ class TQSlider;
 class TQButtonGroup;
 class TQRadioButton;
 class TQSpinBox;
-class KConfig;
+class TDEConfig;
 class TQCheckBox;
 class KComboBox;
 class KDoubleSpinBox;
 
-class PowerConfig : public KCModule
+class PowerConfig : public TDECModule
 {
   Q_OBJECT
   
@@ -91,7 +91,7 @@ private:
   float edit_lav, noedit_lav;
   TQString nopower_performance_val, power_performance_val;
 
-  KConfig *config;
+  TDEConfig *config;
   int power, nopower, apm;
 };
 

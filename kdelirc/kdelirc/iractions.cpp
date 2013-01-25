@@ -16,7 +16,7 @@
 #include "iractions.h"
 #include "iraction.h"
 
-void IRActions::loadFromConfig(KConfig &theConfig)
+void IRActions::loadFromConfig(TDEConfig &theConfig)
 {
 	clear();
 	int numBindings = theConfig.readNumEntry("Bindings");
@@ -24,7 +24,7 @@ void IRActions::loadFromConfig(KConfig &theConfig)
 		addAction(IRAction().loadFromConfig(theConfig, i));
 }
 
-void IRActions::purgeAllBindings(KConfig &theConfig)
+void IRActions::purgeAllBindings(TDEConfig &theConfig)
 {
 	int numBindings = theConfig.readNumEntry("Bindings");
 	for(int i = 0; i < numBindings; i++)
@@ -41,7 +41,7 @@ void IRActions::purgeAllBindings(KConfig &theConfig)
 	}
 }
 
-void IRActions::saveToConfig(KConfig &theConfig)
+void IRActions::saveToConfig(TDEConfig &theConfig)
 {
 	int index = 0;
 	purgeAllBindings(theConfig);

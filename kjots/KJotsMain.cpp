@@ -388,10 +388,10 @@ void KJotsMain::deleteEntry()
 
 void KJotsMain::configure()
 {
-    if(KConfigDialog::showDialog("settings"))
+    if(TDEConfigDialog::showDialog("settings"))
         return;
 
-    KConfigDialog* dialog = new KConfigDialog(this, "settings", KJotsSettings::self());
+    TDEConfigDialog* dialog = new TDEConfigDialog(this, "settings", KJotsSettings::self());
 
     confPageFont* cpFont = new confPageFont(0, "Font");
     dialog->addPage(cpFont, i18n("Font"), "fonts");
@@ -492,7 +492,7 @@ void KJotsMain::saveBookToFile(bool plainText)
             tryAgain = false;
         }
 
-        if (!KIO::NetAccess::exists(res.URLs[0], true, this) ||
+        if (!TDEIO::NetAccess::exists(res.URLs[0], true, this) ||
             KMessageBox::warningYesNo(this, "<qt>" + i18n("The file <strong>%1</strong> already exists. Do you wish to overwrite it?").arg(res.URLs[0].prettyURL()) + "</qt>", i18n("File Exists"), i18n("Overwrite"), KStdGuiItem::cancel()) == KMessageBox::Yes)
         {
             tryAgain = false;
@@ -533,7 +533,7 @@ void KJotsMain::savePageToFile(bool plainText)
             tryAgain = false;
         }
 
-        if (!KIO::NetAccess::exists(res.URLs[0], true, this) ||
+        if (!TDEIO::NetAccess::exists(res.URLs[0], true, this) ||
             KMessageBox::warningYesNo(this, "<qt>" + i18n("The file <strong>%1</strong> already exists. Do you wish to overwrite it?").arg(res.URLs[0].prettyURL()) + "</qt>", i18n("File Exists"), i18n("Overwrite"), KStdGuiItem::cancel()) == KMessageBox::Yes)
         {
             tryAgain = false;

@@ -78,7 +78,7 @@ CGotoDialog::CGotoDialog( TQWidget *parent, const char *name, bool modal )
   gbox->addWidget( mCheckVisible, 2, 0 );
   gbox->setRowStretch( 3, 10 );
 
-  KConfig &config = *kapp->config();
+  TDEConfig &config = *kapp->config();
   config.setGroup("Goto Dialog");
   mCheckFromCursor->setChecked( config.readBoolEntry( "FromCursor", false ) );
   mCheckVisible->setChecked( config.readBoolEntry( "StayVisible", true ) );
@@ -89,7 +89,7 @@ CGotoDialog::CGotoDialog( TQWidget *parent, const char *name, bool modal )
 
 CGotoDialog::~CGotoDialog( void )
 {
-  KConfig &config = *kapp->config();
+  TDEConfig &config = *kapp->config();
   config.setGroup("Goto Dialog");
   config.writeEntry( "FromCursor", mCheckFromCursor->isChecked() );
   config.writeEntry( "StayVisible", mCheckVisible->isChecked() );
@@ -232,7 +232,7 @@ CFindDialog::CFindDialog( TQWidget *parent, const char *name, bool modal )
   gbox->addWidget( mCheckIgnoreCase, 3, 0 );
   gbox->setRowStretch( 4, 10 );
 
-  KConfig &config = *kapp->config();
+  TDEConfig &config = *kapp->config();
   config.setGroup("Find Dialog");
   mCheckFromCursor->setChecked( config.readBoolEntry( "FromCursor", true ) );
   mCheckInSelection->setChecked( config.readBoolEntry( "InSelection", false) );
@@ -248,7 +248,7 @@ CFindDialog::CFindDialog( TQWidget *parent, const char *name, bool modal )
 
 CFindDialog::~CFindDialog( void )
 {
-  KConfig &config = *kapp->config();
+  TDEConfig &config = *kapp->config();
   config.setGroup("Find Dialog");
   config.writeEntry( "FromCursor", mCheckFromCursor->isChecked() );
   config.writeEntry( "InSelection", mCheckInSelection->isChecked() );
@@ -573,7 +573,7 @@ CReplaceDialog::CReplaceDialog( TQWidget *parent, const char *name, bool modal )
   gbox->addWidget( mCheckIgnoreCase, 3, 0 );
   gbox->setRowStretch( 4, 10 );
 
-  KConfig &config = *kapp->config();
+  TDEConfig &config = *kapp->config();
   config.setGroup("Replace Dialog");
   mCheckFromCursor->setChecked( config.readBoolEntry( "FromCursor", true ) );
   mCheckInSelection->setChecked( config.readBoolEntry( "InSelection", false) );
@@ -592,7 +592,7 @@ CReplaceDialog::CReplaceDialog( TQWidget *parent, const char *name, bool modal )
 
 CReplaceDialog::~CReplaceDialog( void )
 {
-  KConfig &config = *kapp->config();
+  TDEConfig &config = *kapp->config();
   config.setGroup("Replace Dialog");
   config.writeEntry( "FromCursor", mCheckFromCursor->isChecked() );
   config.writeEntry( "InSelection", mCheckInSelection->isChecked() );
@@ -1146,7 +1146,7 @@ CInsertDialog::CInsertDialog( TQWidget *parent, const char *name, bool modal )
   connect( mCheckOnCursor, TQT_SIGNAL(clicked()), TQT_SLOT(cursorCheck()) );
   gbox->setRowStretch( 3, 10 );
 
-  KConfig &config = *kapp->config();
+  TDEConfig &config = *kapp->config();
   config.setGroup("Insert Pattern Dialog");
   mCheckPattern->setChecked( config.readBoolEntry( "RepeatPattern", false ) );
   mCheckOnCursor->setChecked( config.readBoolEntry( "InsertOnCursor", false) );
@@ -1159,7 +1159,7 @@ CInsertDialog::CInsertDialog( TQWidget *parent, const char *name, bool modal )
 
 CInsertDialog::~CInsertDialog( void )
 {
-  KConfig &config = *kapp->config();
+  TDEConfig &config = *kapp->config();
   config.setGroup("Insert Pattern Dialog");
   config.writeEntry( "RepeatPattern", mCheckPattern->isChecked() );
   config.writeEntry( "InsertOnCursor", mCheckOnCursor->isChecked() );

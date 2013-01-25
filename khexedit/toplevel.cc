@@ -378,7 +378,7 @@ void KHexEdit::initialize( bool openFiles )
   {
     // Code modified from tdelibs/tdeui/kactionclasses.cpp KRecentFilesAction::loadEntries
       
-    KConfig* config = kapp->config();
+    TDEConfig* config = kapp->config();
 
     const TQString oldGroup = config->group();
     
@@ -644,19 +644,19 @@ bool KHexEdit::queryExit( void )
 
 void KHexEdit::readConfiguration( void )
 {
-  KConfig &config = *kapp->config();
+  TDEConfig &config = *kapp->config();
   readConfiguration( config );
 }
 
 
 void KHexEdit::writeConfiguration( void )
 {
-  KConfig &config = *kapp->config();
+  TDEConfig &config = *kapp->config();
   writeConfiguration( config );
 }
 
 
-void KHexEdit::writeConfiguration( KConfig &config )
+void KHexEdit::writeConfiguration( TDEConfig &config )
 {
     saveMainWindowSettings(& config, "General Options");
   config.setGroup("General Options" );
@@ -676,7 +676,7 @@ void KHexEdit::writeConfiguration( KConfig &config )
 }
 
 
-void KHexEdit::readConfiguration( KConfig &config )
+void KHexEdit::readConfiguration( TDEConfig &config )
 {
     applyMainWindowSettings(& config, "General Options");
 

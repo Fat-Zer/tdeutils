@@ -244,7 +244,7 @@ void KTimerPref::jobFinished( KTimerJob *job, bool error )
 }
 
 
-void KTimerPref::saveJobs( KConfig *cfg )
+void KTimerPref::saveJobs( TDEConfig *cfg )
 {
     int num = 0;
     KTimerJobItem *item = static_cast<KTimerJobItem*>(m_list->firstChild());
@@ -261,7 +261,7 @@ void KTimerPref::saveJobs( KConfig *cfg )
 }
 
 
-void KTimerPref::loadJobs( KConfig *cfg )
+void KTimerPref::loadJobs( TDEConfig *cfg )
 {
     cfg->setGroup( "Jobs" );
     int num = cfg->readNumEntry( "Number", 0 );
@@ -330,7 +330,7 @@ KTimerJob::~KTimerJob()
 }
 
 
-void KTimerJob::load( KConfig *cfg, const TQString& grp )
+void KTimerJob::load( TDEConfig *cfg, const TQString& grp )
 {
     cfg->setGroup( grp );
     cfg->writeEntry( "Delay", d->delay );
@@ -341,7 +341,7 @@ void KTimerJob::load( KConfig *cfg, const TQString& grp )
 }
 
 
-void KTimerJob::save( KConfig *cfg, const TQString& grp )
+void KTimerJob::save( TDEConfig *cfg, const TQString& grp )
 {
     cfg->setGroup( grp );
     setDelay( cfg->readNumEntry( "Delay", 100 ) );

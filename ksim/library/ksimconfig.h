@@ -26,7 +26,7 @@
 
 #include <kdemacros.h>
 
-class KConfig;
+class TDEConfig;
 
 namespace KSim
 {
@@ -36,10 +36,10 @@ namespace KSim
   class KDE_EXPORT Config
   {
     public:
-      Config(KConfig *config);
+      Config(TDEConfig *config);
       ~Config();
 
-      static KConfig *config();
+      static TDEConfig *config();
 
       int width(int defaultWidth) const;
       void setWidth(int width);
@@ -103,7 +103,7 @@ namespace KSim
       void setReColourThemes(bool);
 
     private:
-      static KConfig *mainConfig;
+      static TDEConfig *mainConfig;
   };
 }
 #endif

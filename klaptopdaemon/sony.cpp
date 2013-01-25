@@ -56,11 +56,11 @@
 extern void wake_laptop_daemon();
 
 SonyConfig::SonyConfig(TQWidget * parent, const char *name)
-  : KCModule(parent, name)
+  : TDECModule(parent, name)
 {
     TDEGlobal::locale()->insertCatalogue("klaptopdaemon"); // For translation of klaptopdaemon messages
 
-    config =  new KConfig("kcmlaptoprc");
+    config =  new TDEConfig("kcmlaptoprc");
 
     TQVBoxLayout *top_layout = new TQVBoxLayout( this, KDialog::marginHint(),
 					       KDialog::spacingHint() );

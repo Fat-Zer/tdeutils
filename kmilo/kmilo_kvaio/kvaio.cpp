@@ -87,7 +87,7 @@ KVaio::KVaio(KMiloKVaio *parent, const char* name)
        kdDebug() << "KVaio ctor: cannot attach to DCOP server." << endl;
     }
 
-    KConfig config("kmilodrc");
+    TDEConfig config("kmilodrc");
 
     loadConfiguration(&config);
 
@@ -300,7 +300,7 @@ bool KVaio::isKMiloDAvailable()
     }
 }
 
-void KVaio::loadConfiguration(KConfig *k)
+void KVaio::loadConfiguration(TDEConfig *k)
 {
     k->setGroup("KVaio");
 

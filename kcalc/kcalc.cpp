@@ -1809,11 +1809,11 @@ void KCalculator::showSettings()
 {
 	// Check if there is already a dialog and if so bring
 	// it to the foreground.
-	if(KConfigDialog::showDialog("settings"))
+	if(TDEConfigDialog::showDialog("settings"))
 		return;
 
 	// Create a new dialog with the same name as the above checking code.
-	KConfigDialog *dialog = new KConfigDialog(this, "settings", KCalcSettings::self());
+	TDEConfigDialog *dialog = new TDEConfigDialog(this, "settings", KCalcSettings::self());
 	dialog->enableButtonSeparator( true );
 
 	// Add the general page.  Store the settings in the General group and

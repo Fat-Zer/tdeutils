@@ -217,7 +217,7 @@ void ThemesDlg::openLocalTheme()
 void ThemesDlg::getNewStuff()
 {
 #ifdef HAVE_KNEWSTUFF
-  KConfig* config = TDEGlobal::config();
+  TDEConfig* config = TDEGlobal::config();
   config->setGroup("KNewStuff");
   config->writePathEntry("ProvidersUrl",
       TQString::fromLatin1("http://download.kde.org/khotnewstuff/karamba-providers.xml"));
@@ -301,7 +301,7 @@ void ThemesDlg::addThemeToDialog(const KArchiveDirectory *archiveDir,
 void ThemesDlg::writeNewStuffConfig(const TQString &file)
 {
 #ifdef HAVE_KNEWSTUFF
-  KConfig* config = TDEGlobal::config();
+  TDEConfig* config = TDEGlobal::config();
   TQStringList keys = config->entryMap("KNewStuffStatus").keys();
 
   for(TQStringList::Iterator it = m_newStuffStatus.begin();
@@ -321,7 +321,7 @@ void ThemesDlg::writeNewStuffConfig(const TQString &file)
 void ThemesDlg::configSanityCheck()
 {
 #ifdef HAVE_KNEWSTUFF
-  KConfig* config = TDEGlobal::config();
+  TDEConfig* config = TDEGlobal::config();
   TQStringList statusKeys = config->entryMap("KNewStuffStatus").keys();
   TQStringList nameKeys = config->entryMap("KNewStuffNames").keys();
   TQStringList removeList;
@@ -427,7 +427,7 @@ bool ThemesDlg::filter(int index, TQWidget* widget, void* data)
 bool ThemesDlg::isDownloaded( const TQString& path )
 {
   kdDebug() << "isDownloaded path: " << path << endl;
-  KConfig* config = TDEGlobal::config();
+  TDEConfig* config = TDEGlobal::config();
   config->setGroup("KNewStuffNames");
   return !config->readEntry(path).isEmpty();
 }
@@ -454,7 +454,7 @@ void ThemesDlg::uninstall()
       TQDir remDir(remPath.dir());
       remDir.cdUp();
       kdDebug() << "moving " << remDir.path() << " to the trash" << endl;
-      KIO::move(remDir.path(), trash);
+      TDEIO::move(remDir.path(), trash);
     }
     tableThemes->removeItem(w);
     
@@ -478,7 +478,7 @@ void ThemesDlg::uninstall()
     }
 #ifdef HAVE_KNEWSTUFF
     // Remove theme from KNewStuffStatus
-    KConfig* config = TDEGlobal::config();
+    TDEConfig* config = TDEGlobal::config();
     config->setGroup("KNewStuffNames");
     TQString name = config->readEntry(tempPath);
     if(!name.isEmpty())
@@ -503,12 +503,12 @@ void ThemesDlg::uninstall()
       TQFileInfo remPath(theme.path());
       TQDir remDir(remPath.dir());
       kdDebug() << "moving " << remDir.path() << " to the trash" << endl;
-      KIO::move(remDir.path(), trash);
+      TDEIO::move(remDir.path(), trash);
     }
     tableThemes->removeItem(w);
 #ifdef HAVE_KNEWSTUFF
     // Remove theme from KNewStuffStatus
-    KConfig* config = TDEGlobal::config();
+    TDEConfig* config = TDEGlobal::config();
     config->setGroup("KNewStuffNames");
     TQString name = config->readEntry(theme.path());
     if(!name.isEmpty())

@@ -49,8 +49,8 @@ namespace ArkUtils
                        const TQString &day,
                        const TQString &year);
   bool haveDirPermissions(const TQString &strFile);
-  bool diskHasSpace(const TQString &dir, KIO::filesize_t size);
-  KIO::filesize_t getSizes(TQStringList *list);
+  bool diskHasSpace(const TQString &dir, TDEIO::filesize_t size);
+  TDEIO::filesize_t getSizes(TQStringList *list);
 }
 
 #endif

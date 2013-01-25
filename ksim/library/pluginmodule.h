@@ -25,7 +25,7 @@
 #include <kdemacros.h>
 
 class TQPopupMenu;
-class KConfig;
+class TDEConfig;
 
 #define KSIM_INIT_PLUGIN(className) \
 extern "C" { \
@@ -139,7 +139,7 @@ namespace KSim
        * use this to get a config object unique to the plugin name,
        * eg: the plugin foo would have the config file foorc
        */
-      KConfig *config() const;
+      TDEConfig *config() const;
 
     signals:
       void pageChanged();
@@ -178,7 +178,7 @@ namespace KSim
        * use this to get a config object unique to the plugin name,
        * eg: the plugin foo would have the config file foorc
        */
-      KConfig *config() const;
+      TDEConfig *config() const;
       /**
        * the plugins popup menu
        */

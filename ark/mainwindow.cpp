@@ -344,7 +344,7 @@ MainWindow::slotSaveProperties()
 }
 
 void
-MainWindow::saveProperties( KConfig* config )
+MainWindow::saveProperties( TDEConfig* config )
 {
     //TODO: make it work for URLS
     config->writePathEntry( "SMOpenedFile",m_widget->getArchName() );
@@ -353,10 +353,10 @@ MainWindow::saveProperties( KConfig* config )
 
 
 void
-MainWindow::readProperties( KConfig* config )
+MainWindow::readProperties( TDEConfig* config )
 {
     TQString file = config->readPathEntry("SMOpenedFile");
-    kdDebug(1601) << "ArkWidget::readProperties( KConfig* config ) file=" << file << endl;
+    kdDebug(1601) << "ArkWidget::readProperties( TDEConfig* config ) file=" << file << endl;
     if ( !file.isEmpty() )
         openURL( KURL::fromPathOrURL( file ) );
 }
@@ -433,7 +433,7 @@ MainWindow::addToArchive( const KURL::List & filesToAdd, const TQString & /*cwd*
 
     startProgressDialog( i18n( "Compressing..." ) );
 
-    bool exists = KIO::NetAccess::exists( archiveFile, false, m_widget );
+    bool exists = TDEIO::NetAccess::exists( archiveFile, false, m_widget );
     kdDebug( 1601 ) << archiveFile << endl;
 
     if ( !m_widget->addToArchive( filesToAdd, archiveFile ) )

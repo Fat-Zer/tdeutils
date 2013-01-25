@@ -53,7 +53,7 @@ ThinkPadMonitor::~ThinkPadMonitor() {
 
 bool ThinkPadMonitor::init() {
 
-	KConfig config("kmilodrc");
+	TDEConfig config("kmilodrc");
 	reconfigure(&config);
 
 	if (m_run) {
@@ -436,7 +436,7 @@ void ThinkPadMonitor::showToggleMessage(TQString onMessage, TQString offMessage,
 		_interface->displayText(message);
 }
 
-void ThinkPadMonitor::reconfigure(KConfig* config) {
+void ThinkPadMonitor::reconfigure(TDEConfig* config) {
 	config->setGroup("thinkpad");
 
 	m_nvramFile = config->readEntry("nvram", "/dev/nvram");

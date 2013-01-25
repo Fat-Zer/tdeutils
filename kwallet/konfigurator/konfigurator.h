@@ -22,11 +22,11 @@
 
 #include <kcmodule.h>
 
-class KConfig;
+class TDEConfig;
 class WalletConfigWidget;
 class TQListViewItem;
 
-class KWalletConfig : public KCModule {
+class KWalletConfig : public TDECModule {
 	Q_OBJECT
   
 	public:
@@ -52,7 +52,7 @@ class KWalletConfig : public KCModule {
 
 	private:
 		WalletConfigWidget *_wcw;
-		KConfig *_cfg;
+		TDEConfig *_cfg;
 };
 
 #endif

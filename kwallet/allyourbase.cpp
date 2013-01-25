@@ -282,13 +282,13 @@ void KWalletItem::dropped(TQDropEvent *e, const TQValueList<TQIconDragItem>& lst
 				return;
 			}
 			TQString tmpFile;
-			if (KIO::NetAccess::download(u, tmpFile, 0L)) {
+			if (TDEIO::NetAccess::download(u, tmpFile, 0L)) {
 				file.setName(tmpFile);
 				file.open(IO_ReadOnly);
 				ds = new TQDataStream(&file);
-				KIO::NetAccess::removeTempFile(tmpFile);
+				TDEIO::NetAccess::removeTempFile(tmpFile);
 			} else {
-				KMessageBox::error(iconView(), KIO::NetAccess::lastErrorString());
+				KMessageBox::error(iconView(), TDEIO::NetAccess::lastErrorString());
 			}
 		}
 		if (ds) {
@@ -439,7 +439,7 @@ void KWalletEntryList::itemDropped(TQDropEvent *e, TQListViewItem *item) {
 			return;
 		}
 		TQString tmpFile;
-		if (KIO::NetAccess::download(u, tmpFile, 0L)) {
+		if (TDEIO::NetAccess::download(u, tmpFile, 0L)) {
 			file.setName(tmpFile);
 			file.open(IO_ReadOnly);
 			ds = new TQDataStream(&file);
@@ -459,9 +459,9 @@ void KWalletEntryList::itemDropped(TQDropEvent *e, TQListViewItem *item) {
 			//set the file back to the beginning
 			file.reset();
 			ds = new TQDataStream(&file);
-			KIO::NetAccess::removeTempFile(tmpFile);
+			TDEIO::NetAccess::removeTempFile(tmpFile);
 		} else {
-			KMessageBox::error(this, KIO::NetAccess::lastErrorString());
+			KMessageBox::error(this, TDEIO::NetAccess::lastErrorString());
 			return;
 		}
 	} else {
@@ -662,7 +662,7 @@ void KWalletIconView::slotDropped(TQDropEvent *e, const TQValueList<TQIconDragIt
 	}
 
 	// FIXME: verify that it is a real wallet file first
-	KIO::NetAccess::file_copy(u, KURL::fromPathOrURL(dest));
+	TDEIO::NetAccess::file_copy(u, KURL::fromPathOrURL(dest));
 	e->accept();
 }
 

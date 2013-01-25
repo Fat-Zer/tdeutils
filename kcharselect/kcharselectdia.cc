@@ -262,7 +262,7 @@ void KCharSelectDia::lineEditChanged()
 //==================================================================
 void KCharSelectDia::_exit()
 {
-  KConfig *config = kapp->config();
+  TDEConfig *config = kapp->config();
 
   config->setGroup("General");
   config->writeEntry("selectedFont",vFont);

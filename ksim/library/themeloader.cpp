@@ -47,7 +47,7 @@ class KSim::Theme::Private
 
     TQStringList file;
     TQStringList dFile;
-    KConfig *globalReader;
+    TDEConfig *globalReader;
     TQString altTheme;
     TQString location;
     const TQValueVector<TQString> &fileNames;
@@ -94,7 +94,7 @@ class KSim::ThemeLoader::Private
   public:
     TQValueVector<TQString> fileNames;
     TQStringList imageTypes;
-    KConfig *globalReader;
+    TDEConfig *globalReader;
     bool recolour;
     TQColor pixelColour;
 };
@@ -764,7 +764,7 @@ KSim::Theme::Theme()
 
 KSim::Theme::Theme(const TQString &url, const TQString &fileName, int alt,
    const TQValueVector<TQString> &vector, const TQStringList &list,
-   KConfig *globalReader)
+   TDEConfig *globalReader)
 {
   create(vector, list, globalReader);
   init(url, fileName, alt);
@@ -774,7 +774,7 @@ KSim::Theme::Theme(const TQString &url, const TQString &fileName, int alt,
 }
 
 void KSim::Theme::create(const TQValueVector<TQString> &vector,
-   const TQStringList &list, KConfig *globalReader)
+   const TQStringList &list, TDEConfig *globalReader)
 {
   d = new Private(vector, list);
   d->globalReader = globalReader;
@@ -917,7 +917,7 @@ void KSim::ThemeLoader::reload()
 
   if (currentUrl() != defaultUrl()) {
     if (!d->globalReader)
-      d->globalReader = new KConfig(defaultUrl() + "gkrellmrc_ksim");
+      d->globalReader = new TDEConfig(defaultUrl() + "gkrellmrc_ksim");
   }
   else {
     delete d->globalReader;
@@ -998,24 +998,24 @@ TQString KSim::ThemeLoader::parseConfig(const TQString &url,
     TQString line(origStream.readLine().simplifyWhiteSpace());
 
     if (line.find(reg) == 0) // find the location of the * comments
-      // replace all * comments with # comments so KConfig doesn't complain
+      // replace all * comments with # comments so TDEConfig doesn't complain
       line.replace(reg, "#");
 
     if (line.find("#") == -1) { // find the location of the string 'gkrellmms'
       if (line.findRev("=") == -1) { // if found we check for the string '='
         int numLoc = line.findRev(numbers);
         if (numLoc != -1)
-          // if '=' doesn't exist we add one so KConfig doesn't complain
+          // if '=' doesn't exist we add one so TDEConfig doesn't complain
           line.insert(numLoc, " = ");
 
         numLoc = line.findRev(number);
         if (numLoc != -1)
-          // if '=' doesn't exist we add one so KConfig doesn't complain
+          // if '=' doesn't exist we add one so TDEConfig doesn't complain
           line.insert(numLoc, " = ");
 
         numLoc = line.findRev(minus);
         if (numLoc != -1)
-          // replace the '-' with an '=' so KConfig doesn't get confused
+          // replace the '-' with an '=' so TDEConfig doesn't get confused
           line.replace(TQRegExp("-"), "=");
       }
     }
@@ -1186,7 +1186,7 @@ KSim::ThemeLoader::ThemeLoader()
   d->imageTypes << "png" << "jpg" << "jpeg" << "xpm" << "gif";
 
   if (currentUrl() != defaultUrl())
-    d->globalReader = new KConfig(defaultUrl() + "gkrellmrc_ksim");
+    d->globalReader = new TDEConfig(defaultUrl() + "gkrellmrc_ksim");
   else
     d->globalReader = 0;
 

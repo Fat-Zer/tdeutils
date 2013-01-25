@@ -729,7 +729,7 @@ void laptop_daemon::displayPixmap()
 {
 	if (s.have_time == 2 && s.exists && !powered) {		// in some circumstances
 		s.have_time = (val < 0 ? 0 : 1);			// the battery is not charging
-		KConfig *config = new KConfig("kcmlaptoprc");
+		TDEConfig *config = new TDEConfig("kcmlaptoprc");
 		if (config) {
 			config->setGroup("BatteryLow");			// we can;t figure this out 'till
 			config->writeEntry("HaveTime", s.have_time);

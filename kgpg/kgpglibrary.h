@@ -51,7 +51,7 @@ private slots:
 	void startencode(TQStringList encryptKeys,TQStringList encryptOptions,bool shred,bool symetric);
         void fastencode(KURL &fileToCrypt,TQStringList selec,TQStringList encryptOptions,bool symetric);
 //        void startencode(TQString &selec,TQString encryptOptions,bool shred,bool symetric);
-	void slotShredResult( KIO::Job * job );
+	void slotShredResult( TDEIO::Job * job );
 	void shredpreprocessenc(KURL fileToShred);
         void processenc(KURL);
         void processdecover();

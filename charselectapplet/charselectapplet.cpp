@@ -60,7 +60,7 @@ CharSelectApplet::CharSelectApplet(const TQString& configFile, Type type, int ac
       _aboutData(0), _configDialog(0)
 {
     // read configuration
-    KConfig *c = config();
+    TDEConfig *c = config();
     c->setGroup("General");
     cell_width = c->readNumEntry("CellWidth", cell_width);
     cell_height = c->readNumEntry("CellHeight", cell_height);
@@ -128,7 +128,7 @@ void CharSelectApplet::preferences()
     emit updateLayout();
 
     // write configuration
-    KConfig *c = config();
+    TDEConfig *c = config();
     c->setGroup("General");
     c->writeEntry("CellWidth", cell_width);
     c->writeEntry("CellHeight", cell_height);

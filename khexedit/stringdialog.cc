@@ -150,7 +150,7 @@ void CStringDialog::showEvent( TQShowEvent *e )
 
 void CStringDialog::readConfiguration( void )
 {
-  KConfig &config = *kapp->config();
+  TDEConfig &config = *kapp->config();
   config.setGroup( "String Dialog" );
 
   mLengthSpin->setValue( config.readNumEntry("MinimumLength", 4)  );
@@ -163,7 +163,7 @@ void CStringDialog::readConfiguration( void )
 
 void CStringDialog::writeConfiguration( void )
 {
-  KConfig &config = *kapp->config();
+  TDEConfig &config = *kapp->config();
   config.setGroup( "String Dialog" );
 
   config.writeEntry( "MinimumLength", mLengthSpin->value() );

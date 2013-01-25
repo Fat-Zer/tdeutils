@@ -162,7 +162,7 @@ void KDFConfigWidget::closeEvent(TQCloseEvent *)
 
 void KDFConfigWidget::applySettings( void )
 {
-  KConfig &config = *kapp->config();
+  TDEConfig &config = *kapp->config();
   config.setGroup("KDFConfig");
 
   if( GUI )
@@ -196,7 +196,7 @@ void KDFConfigWidget::applySettings( void )
 
 void KDFConfigWidget::loadSettings( void )
 {
-  KConfig &config = *kapp->config();
+  TDEConfig &config = *kapp->config();
   config.setGroup("KDFConfig");
 
   if( GUI )

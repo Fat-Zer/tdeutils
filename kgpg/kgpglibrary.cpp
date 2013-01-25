@@ -92,7 +92,7 @@ void KgpgLibrary::fastencode(KURL &fileToCrypt,TQStringList selec,TQStringList e
         TQFile fgpg(dest.path());
 
         if (fgpg.exists()) {
-			KIO::RenameDlg *over=new KIO::RenameDlg(0,i18n("File Already Exists"),TQString(),dest.path(),KIO::M_OVERWRITE);
+			TDEIO::RenameDlg *over=new TDEIO::RenameDlg(0,i18n("File Already Exists"),TQString(),dest.path(),TDEIO::M_OVERWRITE);
 		    	if (over->exec()==TQDialog::Rejected)
 	    		{
                 	delete over;
@@ -142,12 +142,12 @@ void KgpgLibrary::shredprocessenc(KURL::List filesToShred)
 {
 emit systemMessage(i18n("Shredding %n file","Shredding %n files",filesToShred.count()));
 
-KIO::Job *job;
-job = KIO::del( filesToShred, true );
-connect( job, TQT_SIGNAL( result( KIO::Job * ) ),TQT_SLOT( slotShredResult( KIO::Job * ) ) );	
+TDEIO::Job *job;
+job = TDEIO::del( filesToShred, true );
+connect( job, TQT_SIGNAL( result( TDEIO::Job * ) ),TQT_SLOT( slotShredResult( TDEIO::Job * ) ) );	
 }
 
-void KgpgLibrary::slotShredResult( KIO::Job * job )
+void KgpgLibrary::slotShredResult( TDEIO::Job * job )
 {
     emit systemMessage(TQString());
     if (job && job->error())

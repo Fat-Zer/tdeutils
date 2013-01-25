@@ -128,7 +128,7 @@ xml index file support to skz themes
 ------------------------------------------------------------------------
 r419386 | pdamsten | 2005-05-29 06:24:45 -0400 (Sun, 29 May 2005) | 1 line
 
-KIO::NetAccess support for themes.
+TDEIO::NetAccess support for themes.
 ------------------------------------------------------------------------
 r419557 | pdamsten | 2005-05-29 16:19:15 -0400 (Sun, 29 May 2005) | 1 line
 
@@ -179,7 +179,7 @@ Save user added themes to config file.
 ------------------------------------------------------------------------
 r421472 | pdamsten | 2005-06-03 03:58:55 -0400 (Fri, 03 Jun 2005) | 1 line
 
-KConfigXT files.
+TDEConfigXT files.
 ------------------------------------------------------------------------
 r421480 | pdamsten | 2005-06-03 04:27:04 -0400 (Fri, 03 Jun 2005) | 1 line
 

@@ -42,7 +42,7 @@
 class TQCheckBox;
 class TQTimer;
 class TDEProcess;
-class KConfig;
+class TDEConfig;
 
 class ZipFormat : public DiskFormat
 {
@@ -60,8 +60,8 @@ public:
 	virtual void setEnabled(bool);
 	virtual void format(FilesystemData *);
 	virtual void quit();
-	virtual void readSettings(KConfig *);
-	virtual void writeSettings(KConfig *);
+	virtual void readSettings(TDEConfig *);
+	virtual void writeSettings(TDEConfig *);
 
 	/** Check for dd and newfs, which we
 	 * need to do the formatting.

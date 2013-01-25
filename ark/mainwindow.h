@@ -63,8 +63,8 @@ public slots:
     void file_close();
     void slotNewToolbarConfig();
     void slotConfigureKeyBindings();
-    virtual void saveProperties( KConfig* config );
-    virtual void readProperties( KConfig* config );
+    virtual void saveProperties( TDEConfig* config );
+    virtual void readProperties( TDEConfig* config );
     void slotSaveProperties();
     void slotArchivePopup( const TQPoint &pPoint);
     void slotRemoveRecentURL( const KURL &url );

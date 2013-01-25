@@ -24,7 +24,7 @@
 #define UnknownColor 2
 #define RevColor 3
 
-class KConfig;
+class TDEConfig;
 class Encryption;
 class Decryption;
 class UIConf;
@@ -33,10 +33,10 @@ class ServerConf;
 class ColorsConf;
 class MiscConf;
 class KFontChooser;
-class KConfig;
+class TDEConfig;
 class KSimpleConfig;
 
-class kgpgOptions : public KConfigDialog
+class kgpgOptions : public TDEConfigDialog
 {
         Q_OBJECT
   
@@ -53,7 +53,7 @@ public:
 	KFontChooser *kfc;
         
 private:
-        KConfig *config;
+        TDEConfig *config;
         TQString alwaysKeyID,alwaysKeyName;
         bool firstDisplay;
 	

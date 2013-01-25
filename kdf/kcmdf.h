@@ -30,7 +30,7 @@
 #include <kcmodule.h>
 #include <tqtabwidget.h>
 
-class KDiskFreeWidget : public KCModule
+class KDiskFreeWidget : public TDECModule
 {
   Q_OBJECT
   

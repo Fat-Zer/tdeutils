@@ -129,7 +129,7 @@ private:
   TDEProcess         *dfProc;
   TQString           dfStringErrOut;
   bool              readingDFStdErrOut;
-  KConfig           *config;
+  TDEConfig           *config;
   bool              updatesDisabled;
   
 };

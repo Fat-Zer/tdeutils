@@ -41,7 +41,7 @@ class TQFile;
 
 class KJotsBook;
 
-namespace KIO
+namespace TDEIO
 {
     class Job;
 }
@@ -122,8 +122,8 @@ class KJotsBook : public KJotsEntryBase
         TQString generateText( void );
 
     protected slots:
-        void saveDataReq(KIO::Job* job, TQByteArray& data);
-        void slotSaveResult(KIO::Job*);
+        void saveDataReq(TDEIO::Job* job, TQByteArray& data);
+        void slotSaveResult(TDEIO::Job*);
 
     private:
         TQString getToc();
@@ -166,8 +166,8 @@ class KJotsPage : public KJotsEntryBase
         TQString generateText( void );
 
     protected slots:
-        void saveDataReq(KIO::Job* job, TQByteArray& data);
-        void slotSaveResult(KIO::Job*);
+        void saveDataReq(TDEIO::Job* job, TQByteArray& data);
+        void slotSaveResult(TDEIO::Job*);
 
     private:
         TQString m_text;

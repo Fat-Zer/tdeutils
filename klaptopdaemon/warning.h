@@ -30,7 +30,7 @@
 #include <tqstring.h>
 
 class TQWidget;
-class KConfig;
+class TDEConfig;
 class KURLRequester;
 class TQCheckBox;
 class TQRadioButton;
@@ -38,7 +38,7 @@ class TQSpinBox;
 class TQSlider;
 class KComboBox;
 
-class WarningConfig : public KCModule
+class WarningConfig : public TDECModule
 {
   Q_OBJECT
   
@@ -65,7 +65,7 @@ private slots:
 private:
   void my_load(int x, bool useDefaults=false );
 
-  KConfig *config;
+  TDEConfig *config;
  
   KURLRequester* editRunCommand;
   KURLRequester* editPlaySound;

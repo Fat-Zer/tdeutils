@@ -108,7 +108,7 @@ karamba::karamba(TQString fn, TQString name, bool reloading, int instance,
 
   widgetUpdate = true;
 
-  // Creates KConfig Object
+  // Creates TDEConfig Object
   TQString instanceString;
   if(m_instance > 1)
     instanceString = TQString("-%1").arg(m_instance);
@@ -124,7 +124,7 @@ karamba::karamba(TQString fn, TQString name, bool reloading, int instance,
     themeConfigFile.close();
   }
 
-  config = new KConfig(cfg, false, false);
+  config = new TDEConfig(cfg, false, false);
   config -> sync();
   config -> setGroup("internal");
 
@@ -1916,7 +1916,7 @@ void  karamba::receivedStdout (TDEProcess *proc, char *buffer, int)
 }
 
 //For KDE session management
-void karamba::saveProperties(KConfig* config)
+void karamba::saveProperties(TDEConfig* config)
 {
   //tqDebug("karamba::saveProperties");
   config->setGroup("session");
@@ -1925,7 +1925,7 @@ void karamba::saveProperties(KConfig* config)
 }
 
 //For KDE session management
-void karamba::readProperties(KConfig* config)
+void karamba::readProperties(TDEConfig* config)
 {
   //tqDebug("karamba::readProperties");
   config->setGroup("session");

@@ -28,7 +28,7 @@
 
 bool KarambaSessionManaged::saveState(TQSessionManager&)
 {
-  KConfig* config = kapp->sessionConfig();
+  TDEConfig* config = kapp->sessionConfig();
 
   config->setGroup("General Options");
 

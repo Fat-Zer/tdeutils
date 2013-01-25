@@ -102,7 +102,7 @@ ArkPart::ArkPart( TQWidget *parentWidget, const char * /*widgetName*/, TQObject 
                  TQT_SLOT( slotSetBusy( const TQString & ) ) );
     connect( awidget, TQT_SIGNAL( setReady() ), m_bar,
                  TQT_SLOT( slotSetReady() ) );
-    connect( this, TQT_SIGNAL( started(KIO::Job*) ), TQT_SLOT( transferStarted(KIO::Job*) ) );
+    connect( this, TQT_SIGNAL( started(TDEIO::Job*) ), TQT_SLOT( transferStarted(TDEIO::Job*) ) );
     connect( this, TQT_SIGNAL( completed() ), TQT_SLOT( transferCompleted() ) );
     connect( this, TQT_SIGNAL( canceled(const TQString&) ),
              TQT_SLOT( transferCanceled(const TQString&) ) );
@@ -246,7 +246,7 @@ void ArkPart::disableActions()
 bool ArkPart::openURL( const KURL & url )
 {
     awidget->setRealURL( url );
-    return KParts::ReadWritePart::openURL( KIO::NetAccess::mostLocalURL( url, awidget ) );
+    return KParts::ReadWritePart::openURL( TDEIO::NetAccess::mostLocalURL( url, awidget ) );
 }
 
 bool ArkPart::openFile()
@@ -322,7 +322,7 @@ void ArkPart::slotFilePopup( const TQPoint &pPoint )
         static_cast<KPopupMenu *>(factory()->container("file_popup", this))->popup(pPoint);
 }
 
-void ArkPart::transferStarted( KIO::Job *job )
+void ArkPart::transferStarted( TDEIO::Job *job )
 {
     m_job = job;
 
@@ -332,8 +332,8 @@ void ArkPart::transferStarted( KIO::Job *job )
     if ( job )
     {
         disableActions();
-        connect( job, TQT_SIGNAL( percent(KIO::Job*, unsigned long) ),
-                 TQT_SLOT( progressInformation(KIO::Job*, unsigned long) ) );
+        connect( job, TQT_SIGNAL( percent(TDEIO::Job*, unsigned long) ),
+                 TQT_SLOT( progressInformation(TDEIO::Job*, unsigned long) ) );
         connect( m_bar->cancelButton(), TQT_SIGNAL( clicked() ),
                  TQT_SLOT( cancelTransfer() ) );
     }
@@ -343,8 +343,8 @@ void ArkPart::transferCompleted()
 {
     if ( m_job )
     {
-        disconnect( m_job, TQT_SIGNAL( percent(KIO::Job*, unsigned long) ),
-                    this, TQT_SLOT( progressInformation(KIO::Job*, unsigned long) ) );
+        disconnect( m_job, TQT_SIGNAL( percent(TDEIO::Job*, unsigned long) ),
+                    this, TQT_SLOT( progressInformation(TDEIO::Job*, unsigned long) ) );
         m_job = 0;
     }
 
@@ -362,7 +362,7 @@ void ArkPart::transferCanceled( const TQString& errMsg )
     m_bar->slotSetReady();
 }
 
-void ArkPart::progressInformation( KIO::Job *, unsigned long progress )
+void ArkPart::progressInformation( TDEIO::Job *, unsigned long progress )
 {
     m_bar->setProgress( progress );
 }

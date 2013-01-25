@@ -49,11 +49,11 @@
 typedef KGenericFactory<KCMLirc, TQWidget> theFactory;
 K_EXPORT_COMPONENT_FACTORY(kcmlirc, theFactory("kcmlirc"))
 
-KCMLirc::KCMLirc(TQWidget *parent, const char *name, TQStringList /*args*/) : DCOPObject("KCMLirc"), KCModule(parent, name)
+KCMLirc::KCMLirc(TQWidget *parent, const char *name, TQStringList /*args*/) : DCOPObject("KCMLirc"), TDECModule(parent, name)
 {
 	TDEGlobal::locale()->insertCatalogue( "kcmlirc" );
 	setAboutData(new TDEAboutData("kcmlirc", I18N_NOOP("TDE Lirc"), VERSION, I18N_NOOP("The TDE IR Remote Control System"), TDEAboutData::License_GPL_V2, "Copyright (c)2003 Gav Wood", I18N_NOOP("Use this to configure TDE's infrared remote control system in order to control any TDE application with your infrared remote control."), "http://www.kde.org"));
-	setButtons(KCModule::Help);
+	setButtons(TDECModule::Help);
 	setQuickHelp(i18n("<h1>Remote Controls</h1><p>This module allows you to configure bindings between your remote controls and TDE applications. Simply select your remote control and click Add under the Actions/Buttons list. If you want TDE to attempt to automatically assign buttons to a supported application's actions, try clicking the Auto-Populate button.</p><p>To view the recognised applications and remote controls, simply select the <em>Loaded Extensions</em> tab.</p>"));
 	bool ok;
 	TDEApplication::kApplication()->dcopClient()->remoteInterfaces("irkick", "IRKick", &ok);
@@ -534,7 +534,7 @@ void KCMLirc::configChanged()
 // TODO: Take this out when I know how
 extern "C"
 {
-	KDE_EXPORT KCModule *create_kcmlirc(TQWidget *parent, const char *)
+	KDE_EXPORT TDECModule *create_kcmlirc(TQWidget *parent, const char *)
 	{	TDEGlobal::locale()->insertCatalogue("kcmlirc");
 		return new KCMLirc(parent, "KCMLirc");
 	}

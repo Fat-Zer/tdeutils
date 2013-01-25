@@ -21,7 +21,7 @@
 @author Gav Wood
 */
 
-class KConfig;
+class TDEConfig;
 
 class Mode
 {
@@ -37,8 +37,8 @@ public:
 	const TQString &iconFile() const { return theIconFile; }
 	const TQString &remoteName() const { return RemoteServer::remoteServer()->getRemoteName(theRemote); }
 
-	const Mode &loadFromConfig(KConfig &theConfig, int index);
-	void saveToConfig(KConfig &theConfig, int index);
+	const Mode &loadFromConfig(TDEConfig &theConfig, int index);
+	void saveToConfig(TDEConfig &theConfig, int index);
 
 	bool operator==(const Mode &mode) const { return mode.theName == theName && mode.theRemote == theRemote; }
 

@@ -33,7 +33,7 @@ class TQHBoxLayout;
 class TQVBoxLayout;
 class TQPopupMenu;
 class KDesktopFile;
-class KConfig;
+class TDEConfig;
 
 namespace KSim
 {
@@ -52,7 +52,7 @@ namespace KSim
 //    
     K_DCOP
     public:
-      MainView(KConfig *config, bool loadPlugins,
+      MainView(TDEConfig *config, bool loadPlugins,
          KSim::PanelExtension *topLevel,
          const char *name);
 

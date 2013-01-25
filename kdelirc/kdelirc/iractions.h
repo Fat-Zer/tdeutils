@@ -25,7 +25,7 @@
 @author Gav Wood
 */
 
-class KConfig;
+class TDEConfig;
 
 typedef TQValueListIterator<IRAction> IRAIt;
 typedef TQValueList<IRAIt> IRAItList;
@@ -33,7 +33,7 @@ typedef TQValueList<IRAIt> IRAItList;
 class IRActions: protected TQValueList<IRAction>
 {
 private:
-	void purgeAllBindings(KConfig &theConfig);
+	void purgeAllBindings(TDEConfig &theConfig);
 
 public:
 	IRAIt addAction(const IRAction &theAction);
@@ -44,8 +44,8 @@ public:
 	void erase(const IRAIt &action) { TQValueList<IRAction>::erase(action); }
 	void renameMode(const Mode &mode, const TQString &to);
 
-	void loadFromConfig(KConfig &theConfig);
-	void saveToConfig(KConfig &theConfig);
+	void loadFromConfig(TDEConfig &theConfig);
+	void saveToConfig(TDEConfig &theConfig);
 };
 
 

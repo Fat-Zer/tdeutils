@@ -890,7 +890,7 @@ void listKeys::slotDelUid()
                 item=item->parent();
 
         TDEProcess *conprocess=new TDEProcess();
-        KConfig *config = TDEGlobal::config();
+        TDEConfig *config = TDEGlobal::config();
         config->setGroup("General");
         *conprocess<< config->readPathEntry("TerminalApplication","konsole");
         *conprocess<<"-e"<<"gpg";
@@ -1283,7 +1283,7 @@ void listKeys::readOptions()
 
 void listKeys::showOptions()
 {
-        if (KConfigDialog::showDialog("settings"))
+        if (TDEConfigDialog::showDialog("settings"))
                 return;
         kgpgOptions *optionsDialog=new kgpgOptions(this,"settings");
         connect(optionsDialog,TQT_SIGNAL(settingsUpdated()),TQT_TQOBJECT(this),TQT_SLOT(readAllOptions()));
@@ -1921,7 +1921,7 @@ void listKeys::signkey()
         else {
                 TDEProcess kp;
 
-                KConfig *config = TDEGlobal::config();
+                TDEConfig *config = TDEGlobal::config();
                 config->setGroup("General");
                 kp<< config->readPathEntry("TerminalApplication","konsole");
                 kp<<"-e"
@@ -2097,7 +2097,7 @@ void listKeys::slotedit()
 
         TDEProcess kp;
 
-        KConfig *config = TDEGlobal::config();
+        TDEConfig *config = TDEGlobal::config();
         config->setGroup("General");
         kp<< config->readPathEntry("TerminalApplication","konsole");
         kp<<"-e"
@@ -2216,7 +2216,7 @@ void listKeys::slotgenkey()
                 {
                         TDEProcess kp;
 
-                        KConfig *config = TDEGlobal::config();
+                        TDEConfig *config = TDEGlobal::config();
                         config->setGroup("General");
                         kp<< config->readPathEntry("TerminalApplication","konsole");
                         kp<<"-e"
@@ -2352,7 +2352,7 @@ void listKeys::deleteseckey()
                 return;
 
         TDEProcess *conprocess=new TDEProcess();
-        KConfig *config = TDEGlobal::config();
+        TDEConfig *config = TDEGlobal::config();
         config->setGroup("General");
         *conprocess<< config->readPathEntry("TerminalApplication","konsole");
         *conprocess<<"-e"<<"gpg"

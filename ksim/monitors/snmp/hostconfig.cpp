@@ -33,7 +33,7 @@ static int defaultSnmpPort()
     return ent->s_port;
 }
 
-bool HostConfig::load( KConfigBase &config )
+bool HostConfig::load( TDEConfigBase &config )
 {
     name = config.readEntry( "Host" );
     if ( name.isEmpty() )
@@ -76,7 +76,7 @@ bool HostConfig::load( KConfigBase &config )
     return true;
 }
 
-void HostConfig::save( KConfigBase &config ) const
+void HostConfig::save( TDEConfigBase &config ) const
 {
     if ( isNull() )
         return;
@@ -109,7 +109,7 @@ void HostConfig::save( KConfigBase &config ) const
     writeIfNotEmpty( config, "PrivPassphrase", KStringHandler::obscure( privacy.key ) );
 }
 
-void HostConfig::writeIfNotEmpty( KConfigBase &config, const TQString &name, const TQString &value )
+void HostConfig::writeIfNotEmpty( TDEConfigBase &config, const TQString &name, const TQString &value )
 {
     if ( value.isEmpty() )
         return;
@@ -117,7 +117,7 @@ void HostConfig::writeIfNotEmpty( KConfigBase &config, const TQString &name, con
     config.writeEntry( name, value );
 }
 
-void HostConfigMap::load( KConfigBase &config, const TQStringList &hosts )
+void HostConfigMap::load( TDEConfigBase &config, const TQStringList &hosts )
 {
     clear();
 
@@ -132,7 +132,7 @@ void HostConfigMap::load( KConfigBase &config, const TQStringList &hosts )
     }
 }
 
-TQStringList HostConfigMap::save( KConfigBase &config ) const
+TQStringList HostConfigMap::save( TDEConfigBase &config ) const
 {
     TQStringList hostList;
 

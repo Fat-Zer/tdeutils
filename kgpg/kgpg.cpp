@@ -194,7 +194,7 @@ KURL encryptedFile(droppedUrls.first().path()+extension);
 TQFile encryptedFolder(droppedUrls.first().path()+extension);
 if (encryptedFolder.exists()) {
 			dialogue->hide();
-			KIO::RenameDlg *over=new KIO::RenameDlg(0,i18n("File Already Exists"),TQString(),encryptedFile.path(),KIO::M_OVERWRITE);
+			TDEIO::RenameDlg *over=new TDEIO::RenameDlg(0,i18n("File Already Exists"),TQString(),encryptedFile.path(),TDEIO::M_OVERWRITE);
 		    	if (over->exec()==TQDialog::Rejected)
 	    		{
                 	delete over;
@@ -406,7 +406,7 @@ void  MyView::decryptDroppedFile()
                 swapname=KURL(droppedUrls.first().directory(0,0)+oldname);
                 TQFile fgpg(swapname.path());
                 if (fgpg.exists()) {
-	    KIO::RenameDlg *over=new KIO::RenameDlg(0,i18n("File Already Exists"),TQString(),swapname.path(),KIO::M_OVERWRITE);
+	    TDEIO::RenameDlg *over=new TDEIO::RenameDlg(0,i18n("File Already Exists"),TQString(),swapname.path(),TDEIO::M_OVERWRITE);
 	    if (over->exec()==TQDialog::Rejected)
 	    {
                 delete over;

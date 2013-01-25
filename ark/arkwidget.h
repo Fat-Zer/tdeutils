@@ -131,7 +131,7 @@ protected slots:
     void slotCreate(Arch *, bool, const TQString &, int);
     void slotDeleteDone(bool);
     void slotExtractDone(bool);
-    void slotExtractRemoteDone(KIO::Job *job);
+    void slotExtractRemoteDone(TDEIO::Job *job);
     void slotAddDone(bool);
     void slotEditFinished(TDEProcess *);
     void slotTestDone(bool);
@@ -302,8 +302,8 @@ private: // data
     ArchType m_archType;
     FileListView * m_fileListView;
 
-    KIO::filesize_t m_nSizeOfFiles;
-    KIO::filesize_t m_nSizeOfSelectedFiles;
+    TDEIO::filesize_t m_nSizeOfFiles;
+    TDEIO::filesize_t m_nSizeOfSelectedFiles;
     unsigned int m_nNumFiles;
     int m_nNumSelectedFiles;
     int m_arkInstanceId;

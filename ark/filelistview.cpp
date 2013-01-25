@@ -138,12 +138,12 @@ void FileLVI::setText( int column, const TQString &text )
 	else if ( colName == sizeCol )
 	{
 		m_fileSize = text.toULongLong();
-		TQListViewItem::setText( column, KIO::convertSize( m_fileSize ) );
+		TQListViewItem::setText( column, TDEIO::convertSize( m_fileSize ) );
 	}
 	else if ( colName == packedStrCol )
 	{
 		m_packedFileSize = text.toULongLong();
-		TQListViewItem::setText( column, KIO::convertSize( m_packedFileSize ) );
+		TQListViewItem::setText( column, TDEIO::convertSize( m_packedFileSize ) );
 	}
 	else if ( colName == ratioStrCol )
 	{
@@ -470,9 +470,9 @@ int FileListView::selectedFilesCount()
 	return numFiles;
 }
 
-KIO::filesize_t FileListView::totalSize()
+TDEIO::filesize_t FileListView::totalSize()
 {
-	KIO::filesize_t size = 0;
+	TDEIO::filesize_t size = 0;
 
 	TQListViewItemIterator it(this);
 	while ( it.current() )
@@ -485,9 +485,9 @@ KIO::filesize_t FileListView::totalSize()
 	return size;
 }
 
-KIO::filesize_t FileListView::selectedSize()
+TDEIO::filesize_t FileListView::selectedSize()
 {
-	KIO::filesize_t size = 0;
+	TDEIO::filesize_t size = 0;
 
 	TQListViewItemIterator it( this, TQListViewItemIterator::Selected );
 	while ( it.current() )

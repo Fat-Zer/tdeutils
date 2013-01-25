@@ -30,7 +30,7 @@
 
 class TQStringList;
 template<class> class TQValueVector;
-class KConfig;
+class TDEConfig;
 class TQWidget;
 
 namespace KSim
@@ -372,8 +372,8 @@ namespace KSim
       Theme();
       Theme(const TQString &url, const TQString &fileName, int alt,
          const TQValueVector<TQString> &vector, const TQStringList &list,
-         KConfig *globalReader);
-      void create(const TQValueVector<TQString> &, const TQStringList &, KConfig *);
+         TDEConfig *globalReader);
+      void create(const TQValueVector<TQString> &, const TQStringList &, TDEConfig *);
       void init(const TQString &url, const TQString &fileName, int alt);
       void reparse(const TQString &url, const TQString &fileName, int alt);
       TQString parseConfig(const TQString &, const TQString &);

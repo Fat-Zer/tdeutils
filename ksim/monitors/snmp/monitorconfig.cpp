@@ -33,7 +33,7 @@ MonitorConfig::MonitorConfig()
     displayCurrentValueInline = false;
 }
 
-bool MonitorConfig::load( KConfigBase &config, const HostConfigMap &hosts )
+bool MonitorConfig::load( TDEConfigBase &config, const HostConfigMap &hosts )
 {
     TQString hostName = config.readEntry( "Host" );
     if ( hostName.isEmpty() )
@@ -74,7 +74,7 @@ bool MonitorConfig::load( KConfigBase &config, const HostConfigMap &hosts )
     return true;
 }
 
-void MonitorConfig::save( KConfigBase &config ) const
+void MonitorConfig::save( TDEConfigBase &config ) const
 {
     if ( isNull() )
         return;
@@ -148,7 +148,7 @@ TQStringList KSim::Snmp::allDisplayTypes()
     return TQStringList() << "Label" << "Chart";
 }
 
-void MonitorConfigMap::load( KConfigBase &config, const TQStringList &names, const HostConfigMap &hosts )
+void MonitorConfigMap::load( TDEConfigBase &config, const TQStringList &names, const HostConfigMap &hosts )
 {
     clear();
 
@@ -163,7 +163,7 @@ void MonitorConfigMap::load( KConfigBase &config, const TQStringList &names, con
     }
 }
 
-TQStringList MonitorConfigMap::save( KConfigBase &config ) const
+TQStringList MonitorConfigMap::save( TDEConfigBase &config ) const
 {
     TQStringList names;
 

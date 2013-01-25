@@ -274,7 +274,7 @@ void laptop_dock::slotHide() {
 		return;
 
 	// just tell ourselves to hide the battery
-	KConfig *config = new KConfig("kcmlaptoprc");
+	TDEConfig *config = new TDEConfig("kcmlaptoprc");
 	if (config) {
 		config->setGroup("BatteryDefault");
 		config->writeEntry("Enable", false);
@@ -295,7 +295,7 @@ void laptop_dock::slotQuit() {
 
 	if (confirm == KMessageBox::Yes) {
 		// just tell ourselves to hide the battery
-		KConfig *config = new KConfig("kcmlaptoprc");
+		TDEConfig *config = new TDEConfig("kcmlaptoprc");
 		if (config) {
 			config->setGroup("BatteryDefault");
 			config->writeEntry("Enable", false);
@@ -673,7 +673,7 @@ quit:
     
         // prepare icon for systemtray
         
-        KConfig* config =  new KConfig("kcmlaptoprc");
+        TDEConfig* config =  new TDEConfig("kcmlaptoprc");
         bool showlevel = false;
         
         if (config)

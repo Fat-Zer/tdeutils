@@ -40,8 +40,8 @@ class CHexToolWidget : public TQFrame
     CHexToolWidget( TQWidget *parent = 0, const char *name = 0 );
     ~CHexToolWidget( void );
 
-    void writeConfiguration( KConfig &config );
-    void readConfiguration( KConfig &config );
+    void writeConfiguration( TDEConfig &config );
+    void readConfiguration( TDEConfig &config );
     unsigned long bitValue( SCursorState &state, int n );
 
   protected:

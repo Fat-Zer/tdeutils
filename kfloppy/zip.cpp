@@ -99,7 +99,7 @@ FilesystemList ZipFormat::FSLabels() const
 	enableSoftUpdates->setEnabled(b);
 }
 
-/* virtual */  void ZipFormat::readSettings(KConfig *c)
+/* virtual */  void ZipFormat::readSettings(TDEConfig *c)
 {
 	c->setGroup(fslabel);
 	zeroWholeDisk->setChecked(
@@ -108,7 +108,7 @@ FilesystemList ZipFormat::FSLabels() const
 		c->readBoolEntry("SoftUpdates",false));
 }
 
-/* virtual */  void ZipFormat::writeSettings(KConfig *c)
+/* virtual */  void ZipFormat::writeSettings(TDEConfig *c)
 {
 	c->setGroup(fslabel);
 	c->writeEntry("ZeroDisk",zeroWholeDisk->isChecked());

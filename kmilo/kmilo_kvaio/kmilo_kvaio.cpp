@@ -59,7 +59,7 @@ int KMiloKVaio::progress() const {
 	return m_kvaio->progress();
 }
 
-void KMiloKVaio::reconfigure(KConfig* k)
+void KMiloKVaio::reconfigure(TDEConfig* k)
 {
     m_kvaio->loadConfiguration(k);
 }

@@ -213,8 +213,8 @@ protected:
     void renameDocument( const TQString &curName, const TQString &newName );
     void setTickedDocument( const TQString &fileName );
 
-    void writeConfiguration( KConfig &config );
-    void readConfiguration( KConfig &config );
+    void writeConfiguration( TDEConfig &config );
+    void readConfiguration( TDEConfig &config );
     bool eventFilter( TQObject *obj, TQEvent *event );
 
     int acceleratorNumKey( uint index );

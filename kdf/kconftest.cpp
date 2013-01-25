@@ -50,7 +50,7 @@ main(int argc, char ** argv)
  TDECmdLineArgs::init(argc, argv, "test", description, version);
  
  TDEApplication app;
- KConfig * cfg = kapp->config();
+ TDEConfig * cfg = kapp->config();
 
  TQDict<char> dict;
 

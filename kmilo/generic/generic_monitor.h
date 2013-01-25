@@ -57,7 +57,7 @@ public:
 	virtual bool init();
 	virtual int progress() const;
 	virtual DisplayType poll();
-	virtual void reconfigure(KConfig*);
+	virtual void reconfigure(TDEConfig*);
 
 public slots:
   void slowVolumeUp();
@@ -86,7 +86,7 @@ private:
 	void launch(TQString configKey, TQString defaultApplication);
 
 	TDEGlobalAccel *ga;
-	KConfig* config;
+	TDEConfig* config;
 
 	DCOPRef *kmixClient, *kmixWindow;
 

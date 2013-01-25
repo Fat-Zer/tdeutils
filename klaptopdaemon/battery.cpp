@@ -52,7 +52,7 @@ extern void wake_laptop_daemon();
 
 
 BatteryConfig::BatteryConfig (TQWidget * parent, const char *name)
-  : KCModule(parent, name),
+  : TDECModule(parent, name),
     editPoll(0),
     iconloader(0),
     buttonNoBattery(0),
@@ -62,7 +62,7 @@ BatteryConfig::BatteryConfig (TQWidget * parent, const char *name)
     TDEGlobal::locale()->insertCatalogue("klaptopdaemon"); // For translation of klaptopdaemon messages
 
     apm = laptop_portable::has_power_management();
-    config =  new KConfig("kcmlaptoprc");
+    config =  new TDEConfig("kcmlaptoprc");
     instance = new TDEInstance("klaptopdaemon");
 
     TQVBoxLayout *top_layout = new TQVBoxLayout( this, KDialog::marginHint(),

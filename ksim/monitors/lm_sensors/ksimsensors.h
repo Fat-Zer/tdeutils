@@ -24,7 +24,7 @@
 #include <label.h>
 #include "ksimsensorsiface.h"
 
-class KConfig;
+class TDEConfig;
 class SensorList;
 class TDEInstance;
 

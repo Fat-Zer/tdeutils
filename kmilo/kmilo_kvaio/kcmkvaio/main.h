@@ -28,7 +28,7 @@
 class TQTimer;
 class KCMKVaioGeneral;
 
-class KVaioModule : public KCModule
+class KVaioModule : public TDECModule
 {
     Q_OBJECT
   

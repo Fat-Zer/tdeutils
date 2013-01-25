@@ -38,7 +38,7 @@ class DefaultSkin : public TQObject, public KMilo::DisplaySkin {
 		virtual ~DefaultSkin();
 
 		virtual void clear();
-		virtual void reconfigure( KConfig *config );
+		virtual void reconfigure( TDEConfig *config );
 
 		virtual void displayText(const TQString& text, const TQPixmap& customPixmap=TQPixmap());
 		virtual void displayProgress(const TQString& text,

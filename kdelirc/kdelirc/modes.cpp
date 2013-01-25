@@ -25,7 +25,7 @@ Modes::~Modes()
 {
 }
 
-void Modes::loadFromConfig(KConfig &theConfig)
+void Modes::loadFromConfig(TDEConfig &theConfig)
 {
 	clear();
 	int numModes = theConfig.readNumEntry("Modes");
@@ -67,7 +67,7 @@ const Mode Modes::getDefault(const TQString &remote) const
 
 }
 
-void Modes::purgeAllModes(KConfig &theConfig)
+void Modes::purgeAllModes(TDEConfig &theConfig)
 {
 	int numModes = theConfig.readNumEntry("Modes");
 	for(int i = 0; i < numModes; i++)
@@ -77,7 +77,7 @@ void Modes::purgeAllModes(KConfig &theConfig)
 	}
 }
 
-void Modes::saveToConfig(KConfig &theConfig)
+void Modes::saveToConfig(TDEConfig &theConfig)
 {
 	int index = 0;
 	purgeAllModes(theConfig);

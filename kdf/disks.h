@@ -80,11 +80,11 @@ public:
   int kBSize() const { return size; }
   TQString iconName();
   TQString realIconName() { return icoName; }
-  TQString prettyKBSize() const { return KIO::convertSizeFromKB(size); }
+  TQString prettyKBSize() const { return TDEIO::convertSizeFromKB(size); }
   int kBUsed() const { return used; }
-  TQString prettyKBUsed() const { return KIO::convertSizeFromKB(used); }
+  TQString prettyKBUsed() const { return TDEIO::convertSizeFromKB(used); }
   int kBAvail() const  { return avail; }
-  TQString prettyKBAvail() const { return KIO::convertSizeFromKB(avail); }
+  TQString prettyKBAvail() const { return TDEIO::convertSizeFromKB(avail); }
   float percentFull() const;
 
 signals:

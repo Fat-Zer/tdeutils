@@ -48,9 +48,9 @@ void RssSensor::update()
     bool OK = false;
 
 #if defined(KDE_3_3)
-    if(KIO::NetAccess::download(KURL(source), tmpFile, karambaApp->parentWindow()))
+    if(TDEIO::NetAccess::download(KURL(source), tmpFile, karambaApp->parentWindow()))
 #else
-    if(KIO::NetAccess::download(KURL(source), tmpFile))
+    if(TDEIO::NetAccess::download(KURL(source), tmpFile))
 #endif
     {
         file.setName(tmpFile);
@@ -130,7 +130,7 @@ void RssSensor::update()
     }
     // Cleanup
     file.close();
-    KIO::NetAccess::removeTempFile( tmpFile );
+    TDEIO::NetAccess::removeTempFile( tmpFile );
 }
 
 #include "rsssensor.moc"

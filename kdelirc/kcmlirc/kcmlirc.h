@@ -28,7 +28,7 @@ class TQDropEvent;
 class Profile;
 class Remote;
 
-class KCMLirc: public KCModule, virtual public DCOPObject
+class KCMLirc: public TDECModule, virtual public DCOPObject
 {
 	Q_OBJECT
 //	

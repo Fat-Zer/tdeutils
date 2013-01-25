@@ -79,13 +79,13 @@ class I8KView : public KSim::PluginView
     TQRegExp *m_reData;
 };
 
-class I8KConfig : public KSim::PluginPage
+class I8TDEConfig : public KSim::PluginPage
 {
   Q_OBJECT
   
   public:
-    I8KConfig(KSim::PluginObject *parent, const char *name);
-    ~I8KConfig();
+    I8TDEConfig(KSim::PluginObject *parent, const char *name);
+    ~I8TDEConfig();
 
     virtual void saveConfig();
     virtual void readConfig();

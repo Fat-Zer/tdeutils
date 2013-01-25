@@ -69,10 +69,10 @@ GenericMonitor::~GenericMonitor()
 
 bool GenericMonitor::init()
 {
-	KConfig config(CONFIG_FILE);
+	TDEConfig config(CONFIG_FILE);
 	reconfigure(&config);
 
-	//config = new KConfig("kmilodrc");
+	//config = new TDEConfig("kmilodrc");
 	config.setGroup("kubuntu");
 
 	if(!m_enabled)
@@ -120,7 +120,7 @@ bool GenericMonitor::init()
 	return true;
 }
 
-void GenericMonitor::reconfigure(KConfig *config)
+void GenericMonitor::reconfigure(TDEConfig *config)
 {
 	config->setGroup("generic monitor");
 

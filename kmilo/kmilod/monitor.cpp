@@ -30,7 +30,7 @@ KMilo::Monitor::Monitor(TQObject *parent, const char *name, const TQStringList&)
 KMilo::Monitor::~Monitor() {
 }
 
-void KMilo::Monitor::reconfigure(KConfig*)
+void KMilo::Monitor::reconfigure(TDEConfig*)
 {
 }
 

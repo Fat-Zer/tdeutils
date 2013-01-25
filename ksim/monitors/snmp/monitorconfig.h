@@ -33,11 +33,11 @@ struct MonitorConfig
     enum DisplayType { Label = 0, Chart };
 
     MonitorConfig();
-    MonitorConfig( KConfigBase &config, const HostConfigMap &hosts )
+    MonitorConfig( TDEConfigBase &config, const HostConfigMap &hosts )
     { load( config, hosts ); }
 
-    bool load( KConfigBase &config, const HostConfigMap &hosts );
-    void save( KConfigBase &config ) const;
+    bool load( TDEConfigBase &config, const HostConfigMap &hosts );
+    void save( TDEConfigBase &config ) const;
 
     bool isNull() const { return name.isEmpty() || host.isNull(); }
 
@@ -65,8 +65,8 @@ struct MonitorConfigMap : public TQMap< TQString, MonitorConfig >
     MonitorConfigMap( const TQMap< TQString, MonitorConfig > &rhs )
         : TQMap< TQString, MonitorConfig >( rhs ) {}
 
-    void load( KConfigBase &config, const TQStringList &names, const HostConfigMap &hosts );
-    TQStringList save( KConfigBase &config ) const;
+    void load( TDEConfigBase &config, const TQStringList &names, const HostConfigMap &hosts );
+    TQStringList save( TDEConfigBase &config ) const;
 };
 
 typedef TQValueList<MonitorConfig> MonitorConfigList;

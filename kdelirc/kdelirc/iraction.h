@@ -23,7 +23,7 @@
 @author Gav Wood
 */
 
-class KConfig;
+class TDEConfig;
 
 class IRAction
 {
@@ -36,8 +36,8 @@ class IRAction
 
 public:
 	// load/save convenience functions
-	const IRAction &loadFromConfig(KConfig &theConfig, int index);
-	void saveToConfig(KConfig &theConfig, int index) const;
+	const IRAction &loadFromConfig(TDEConfig &theConfig, int index);
+	void saveToConfig(TDEConfig &theConfig, int index) const;
 
 	// may be changed to a profile-based representation in the future.
 	const TQString function() const;

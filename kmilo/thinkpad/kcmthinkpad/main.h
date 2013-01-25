@@ -29,7 +29,7 @@
 
 class KCMThinkPadGeneral;
 
-class KCMThinkpadModule : public KCModule {
+class KCMThinkpadModule : public TDECModule {
 	Q_OBJECT
   
 

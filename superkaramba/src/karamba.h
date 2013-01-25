@@ -155,7 +155,7 @@ public:
     void keyPressed(const TQString& s, const Meter* meter);
 
     int numberOfConfMenuItems;
-    KConfig* config;
+    TDEConfig* config;
     TQString prettyName;
     bool m_sub_theme;
     bool isSubTheme() { return m_sub_theme; }
@@ -190,8 +190,8 @@ protected:
     void keyPressEvent ( TQKeyEvent * e );
     void closeEvent ( TQCloseEvent *);
     void paintEvent ( TQPaintEvent *);
-    void saveProperties(KConfig *);
-    void readProperties(KConfig *);
+    void saveProperties(TDEConfig *);
+    void readProperties(TDEConfig *);
     void dragEnterEvent(TQDragEnterEvent* event);
     void dropEvent(TQDropEvent* event);
 

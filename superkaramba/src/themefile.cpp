@@ -232,7 +232,7 @@ bool ThemeFile::set(const KURL &url)
         return false;
       }
     }
-    if(!KIO::NetAccess::file_copy(url, localFile.filePath(), -1, true,
+    if(!TDEIO::NetAccess::file_copy(url, localFile.filePath(), -1, true,
       false, kapp->mainWidget()))
     {
       return false;

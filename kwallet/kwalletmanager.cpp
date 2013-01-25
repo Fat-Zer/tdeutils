@@ -54,8 +54,8 @@ KWalletManager::KWalletManager(TQWidget *parent, const char *name, WFlags f)
 
 	TDEApplication::dcopClient()->setQtBridgeEnabled(false);
 	_shuttingDown = false;
-	KConfig cfg("kwalletrc"); // not sure why this setting isn't in kwalletmanagerrc...
-	KConfigGroup walletConfigGroup(&cfg, "Wallet");
+	TDEConfig cfg("kwalletrc"); // not sure why this setting isn't in kwalletmanagerrc...
+	TDEConfigGroup walletConfigGroup(&cfg, "Wallet");
 	_dcopRef = 0L;
 	if (walletConfigGroup.readBoolEntry("Launch Manager", true)) {
 		_tray = new KSystemTray(this, "kwalletmanager tray");
@@ -326,7 +326,7 @@ void KWalletManager::allWalletsClosed() {
 
 
 void KWalletManager::possiblyQuit() {
-	KConfig cfg("kwalletrc");
+	TDEConfig cfg("kwalletrc");
 	cfg.setGroup("Wallet");
 	if (_windows.isEmpty() &&
 			!isVisible() &&
@@ -412,8 +412,8 @@ TQPixmap KWalletManager::loadSystemTrayIcon(const TQString &icon) {
 #if KDE_IS_VERSION(3, 1, 90)
 	return KSystemTray::loadIcon(icon);
 #else
-	KConfig *appCfg = kapp->config();
-	KConfigGroupSaver configSaver(appCfg, "System Tray");
+	TDEConfig *appCfg = kapp->config();
+	TDEConfigGroupSaver configSaver(appCfg, "System Tray");
 	int iconWidth = appCfg->readNumEntry("systrayIconWidth", 22);
 	return kapp->iconLoader()->loadIcon( icon, KIcon::Panel, iconWidth );
 #endif

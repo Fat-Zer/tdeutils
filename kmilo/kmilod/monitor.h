@@ -30,7 +30,7 @@
 
 #include <kdemacros.h>
 
-class KConfig;
+class TDEConfig;
 
 namespace KMilo {
 class KMiloInterface;
@@ -83,7 +83,7 @@ class KDE_EXPORT Monitor : public TQObject {
 
 		bool shouldPoll() const { return _poll; }
 
-		virtual void reconfigure(KConfig*);
+		virtual void reconfigure(TDEConfig*);
 
 	protected:
 		bool _poll;  // set to false to disable polling.

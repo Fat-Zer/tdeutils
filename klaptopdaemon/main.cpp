@@ -48,51 +48,51 @@ extern void wake_laptop_daemon();
 extern "C"
 {
 
-  KDE_EXPORT KCModule *create_pcmcia(TQWidget *parent, const char *)
+  KDE_EXPORT TDECModule *create_pcmcia(TQWidget *parent, const char *)
   {
     return new PcmciaConfig(parent, "kcmlaptop");
   }
 
-  KDE_EXPORT KCModule *create_bwarning(TQWidget *parent, const char *)
+  KDE_EXPORT TDECModule *create_bwarning(TQWidget *parent, const char *)
   {
     return new WarningConfig(0, parent, "kcmlaptop");
   }
-  KDE_EXPORT KCModule *create_cwarning(TQWidget *parent, const char *)
+  KDE_EXPORT TDECModule *create_cwarning(TQWidget *parent, const char *)
   {
     return new WarningConfig(1, parent, "kcmlaptop");
   }
-  KDE_EXPORT KCModule *create_battery(TQWidget *parent, const char *)
+  KDE_EXPORT TDECModule *create_battery(TQWidget *parent, const char *)
   {
     return new BatteryConfig(parent, "kcmlaptop");
   }
-  KDE_EXPORT KCModule *create_power(TQWidget *parent, const char *)
+  KDE_EXPORT TDECModule *create_power(TQWidget *parent, const char *)
   {
     return new PowerConfig(parent, "kcmlaptop");
   }
-  KDE_EXPORT KCModule *create_acpi(TQWidget *parent, const char *)
+  KDE_EXPORT TDECModule *create_acpi(TQWidget *parent, const char *)
   {
     return new AcpiConfig(parent, "kcmlaptop");
   }
-  KDE_EXPORT KCModule *create_apm(TQWidget *parent, const char *)
+  KDE_EXPORT TDECModule *create_apm(TQWidget *parent, const char *)
   {
     return new ApmConfig(parent, "kcmlaptop");
   }
-  KDE_EXPORT KCModule *create_Profile(TQWidget *parent, const char *)
+  KDE_EXPORT TDECModule *create_Profile(TQWidget *parent, const char *)
   {
     return new ProfileConfig(parent, "kcmlaptop");
   }
-  KDE_EXPORT KCModule *create_sony(TQWidget *parent, const char *)
+  KDE_EXPORT TDECModule *create_sony(TQWidget *parent, const char *)
   {
     return new SonyConfig(parent, "kcmlaptop");
   }
-  KDE_EXPORT KCModule *create_buttons(TQWidget *parent, const char *)
+  KDE_EXPORT TDECModule *create_buttons(TQWidget *parent, const char *)
   {
     return new ButtonsConfig(parent, "kcmlaptop");
   }
 
   KDE_EXPORT void init_battery()
   {
-    KConfig config("kcmlaptoprc", true /*readonly*/, false /*no globals*/);
+    TDEConfig config("kcmlaptoprc", true /*readonly*/, false /*no globals*/);
     config.setGroup("BatteryDefault");
     bool enable = false;
     if (!config.hasKey("Enable")) {  // if they have APM or PCMCIA, Enable=true
@@ -111,7 +111,7 @@ extern "C"
      wake_laptop_daemon();
   }
 
-  KDE_EXPORT KCModule *create_laptop(TQWidget *parent, const char *)
+  KDE_EXPORT TDECModule *create_laptop(TQWidget *parent, const char *)
   {
 	return new LaptopModule(parent, "kcmlaptop");
   }
@@ -125,10 +125,10 @@ extern "C"
 
 
 LaptopModule::LaptopModule(TQWidget *parent, const char *)
-  : KCModule(parent, "kcmlaptop")
+  : TDECModule(parent, "kcmlaptop")
 {
   {	// export ACPI options
-    KConfig config("kcmlaptoprc", true /*readonly*/, false /*no globals*/);
+    TDEConfig config("kcmlaptoprc", true /*readonly*/, false /*no globals*/);
     config.setGroup("AcpiDefault");
 
     bool enablestandby = config.readBoolEntry("EnableStandby", false);

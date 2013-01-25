@@ -51,7 +51,7 @@ void ChartMonitor::setData( const Value &data )
     setValue( currentValue );
     if ( m_config.displayCurrentValueInline ) {
         TQ_UINT64 bytesPerSec = currentValue / ( m_config.refreshInterval.seconds + m_config.refreshInterval.minutes * 60 );
-        setText( KIO::convertSize( bytesPerSec ), 0 );
+        setText( TDEIO::convertSize( bytesPerSec ), 0 );
     }
 }
 

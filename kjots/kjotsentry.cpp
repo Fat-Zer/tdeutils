@@ -521,7 +521,7 @@ void KJotsBook::saveToFile(KURL url, bool plainText, const TQString& encoding)
 
     m_saveToPlainText = plainText;
     m_saveEncoding = TQTextCodec::codecForName(encoding.ascii());
-    KIO::TransferJob* job = KIO::put(url, -1, true, false, false);
+    TDEIO::TransferJob* job = TDEIO::put(url, -1, true, false, false);
 
     if (!job)
     {
@@ -541,8 +541,8 @@ void KJotsBook::saveToFile(KURL url, bool plainText, const TQString& encoding)
     m_saveProgressDialog->showCancelButton(false);
     m_saveProgressDialog->setAutoClose(true);
 
-    connect(job, TQT_SIGNAL(dataReq(KIO::Job*, TQByteArray&)), TQT_SLOT(saveDataReq(KIO::Job*, TQByteArray&)));
-    connect(job, TQT_SIGNAL(result( KIO::Job *)), TQT_SLOT(slotSaveResult( KIO::Job *)));
+    connect(job, TQT_SIGNAL(dataReq(TDEIO::Job*, TQByteArray&)), TQT_SLOT(saveDataReq(TDEIO::Job*, TQByteArray&)));
+    connect(job, TQT_SIGNAL(result( TDEIO::Job *)), TQT_SLOT(slotSaveResult( TDEIO::Job *)));
 
     m_saveInProgress = true;
 }
@@ -551,7 +551,7 @@ void KJotsBook::saveToFile(KURL url, bool plainText, const TQString& encoding)
     \brief Pumps out data when saving to a file.
     This function pumps out page data during a disk save. 
 */
-void KJotsBook::saveDataReq(KIO::Job* /* job */, TQByteArray& data)
+void KJotsBook::saveDataReq(TDEIO::Job* /* job */, TQByteArray& data)
 {
     if (!m_saveInProgress) return; //sanity check
 
@@ -575,7 +575,7 @@ void KJotsBook::saveDataReq(KIO::Job* /* job */, TQByteArray& data)
     This function is called after a disk save. The disk save may or may 
     not have completed normally.
 */
-void KJotsBook::slotSaveResult(KIO::Job *)
+void KJotsBook::slotSaveResult(TDEIO::Job *)
 {
     m_saveInProgress = false;
     delete m_saveProgressDialog;
@@ -933,14 +933,14 @@ void KJotsPage::saveToFile(KURL url, bool plainText, const TQString& encoding)
 
     m_saveToPlainText = plainText;
     m_saveEncoding = TQTextCodec::codecForName(encoding.ascii());
-    KIO::TransferJob* job = KIO::put(url, -1, true, false, false);
+    TDEIO::TransferJob* job = TDEIO::put(url, -1, true, false, false);
     if (!job)
     {
         return;
     }
 
-    connect(job, TQT_SIGNAL(dataReq(KIO::Job*, TQByteArray&)), TQT_SLOT(saveDataReq(KIO::Job*, TQByteArray&)));
-    connect(job, TQT_SIGNAL(result( KIO::Job *)), TQT_SLOT(slotSaveResult( KIO::Job *)));
+    connect(job, TQT_SIGNAL(dataReq(TDEIO::Job*, TQByteArray&)), TQT_SLOT(saveDataReq(TDEIO::Job*, TQByteArray&)));
+    connect(job, TQT_SIGNAL(result( TDEIO::Job *)), TQT_SLOT(slotSaveResult( TDEIO::Job *)));
     m_saveInProgress = true;
 }
 
@@ -950,7 +950,7 @@ void KJotsPage::saveToFile(KURL url, bool plainText, const TQString& encoding)
 
     \todo This should be augmented to cycle in case of REALLY long pages.
 */
-void KJotsPage::saveDataReq(KIO::Job* /* job */, TQByteArray& data)
+void KJotsPage::saveDataReq(TDEIO::Job* /* job */, TQByteArray& data)
 {
     if (!m_saveInProgress) return; //sanity check
 
@@ -974,7 +974,7 @@ void KJotsPage::saveDataReq(KIO::Job* /* job */, TQByteArray& data)
     This function is called after a disk save. The disk save may or may 
     not have completed normally.
 */
-void KJotsPage::slotSaveResult(KIO::Job *)
+void KJotsPage::slotSaveResult(TDEIO::Job *)
 {
     m_saveInProgress = false;
     /* if (job->error() != 0) {} */

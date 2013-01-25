@@ -817,7 +817,7 @@ void KWalletEditor::importWallet() {
 	}
 
 	TQString tmpFile;
-	if (!KIO::NetAccess::download(url, tmpFile, this)) {
+	if (!TDEIO::NetAccess::download(url, tmpFile, this)) {
 		KMessageBox::sorry(this, i18n("Unable to access wallet '<b>%1</b>'.").arg(url.prettyURL()));
 		return;
 	}
@@ -932,7 +932,7 @@ void KWalletEditor::importWallet() {
 
 	delete w;
 
-	KIO::NetAccess::removeTempFile(tmpFile);
+	TDEIO::NetAccess::removeTempFile(tmpFile);
 	updateFolderList(true);
 	restoreEntry();
 }
@@ -945,7 +945,7 @@ void KWalletEditor::importXML() {
 	}
 
 	TQString tmpFile;
-	if (!KIO::NetAccess::download(url, tmpFile, this)) {
+	if (!TDEIO::NetAccess::download(url, tmpFile, this)) {
 		KMessageBox::sorry(this, i18n("Unable to access XML file '<b>%1</b>'.").arg(url.prettyURL()));
 		return;
 	}
@@ -953,21 +953,21 @@ void KWalletEditor::importXML() {
 	TQFile qf(tmpFile);
 	if (!qf.open(IO_ReadOnly)) {
 		KMessageBox::sorry(this, i18n("Error opening XML file '<b>%1</b>' for input.").arg(url.prettyURL()));
-		KIO::NetAccess::removeTempFile(tmpFile);
+		TDEIO::NetAccess::removeTempFile(tmpFile);
 		return;
 	}
 
 	TQDomDocument doc(tmpFile);
 	if (!doc.setContent(&qf)) {
 		KMessageBox::sorry(this, i18n("Error reading XML file '<b>%1</b>' for input.").arg(url.prettyURL()));
-		KIO::NetAccess::removeTempFile(tmpFile);
+		TDEIO::NetAccess::removeTempFile(tmpFile);
 		return;
 	}
 
 	TQDomElement top = doc.documentElement();
 	if (top.tagName().lower() != "wallet") {
 		KMessageBox::sorry(this, i18n("Error: XML file does not contain a wallet."));
-		KIO::NetAccess::removeTempFile(tmpFile);
+		TDEIO::NetAccess::removeTempFile(tmpFile);
 		return;
 	}
 
@@ -1038,7 +1038,7 @@ void KWalletEditor::importXML() {
 		n = n.nextSibling();
 	}
 
-	KIO::NetAccess::removeTempFile(tmpFile);
+	TDEIO::NetAccess::removeTempFile(tmpFile);
 	updateFolderList(true);
 	restoreEntry();
 }
@@ -1105,7 +1105,7 @@ void KWalletEditor::exportXML() {
 
 	if (!url.isEmpty()) {
 		bool ok = true;
-		if (KIO::NetAccess::exists(url, false, this)) {
+		if (TDEIO::NetAccess::exists(url, false, this)) {
 			int rc = KMessageBox::warningContinueCancel(this, i18n("The file '%1' already exists. Would you like to overwrite this file?").arg(url.prettyURL()), i18n("Overwrite"));
 			if (rc == KMessageBox::Cancel) {
 				ok = false;
@@ -1113,7 +1113,7 @@ void KWalletEditor::exportXML() {
 		}
 		if (ok) {
 			KURL tfURL; tfURL.setPath(tf.name());
-			KIO::NetAccess::file_copy(tfURL, url, 0600, true, false, this);
+			TDEIO::NetAccess::file_copy(tfURL, url, 0600, true, false, this);
 		}
 	}
 }
@@ -1129,11 +1129,11 @@ void KWalletEditor::saveAs() {
 	if (!url.isEmpty()) {
 		// Sync() kwalletd
 		if (_nonLocal) {
-			KIO::NetAccess::file_copy(KURL(_walletName), url, 0600, false, false, this);
+			TDEIO::NetAccess::file_copy(KURL(_walletName), url, 0600, false, false, this);
 		} else {
 			TQString path = TDEGlobal::dirs()->saveLocation("kwallet") + "/" + _walletName + ".kwl";
 			KURL destURL; destURL.setPath(path);
-			KIO::NetAccess::file_copy(destURL, url, 0600, false, false, this);
+			TDEIO::NetAccess::file_copy(destURL, url, 0600, false, false, this);
 		}
 	}
 }

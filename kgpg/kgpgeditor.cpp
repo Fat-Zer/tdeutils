@@ -265,7 +265,7 @@ void KgpgApp::slotFilePreDec()
         if (!newname.isEmpty()) {
                 TQFile fgpg(newname);
                 if (fgpg.exists()) {
-			KIO::RenameDlg *over=new KIO::RenameDlg(0,i18n("File Already Exists"),TQString(),newname,KIO::M_OVERWRITE);
+			TDEIO::RenameDlg *over=new TDEIO::RenameDlg(0,i18n("File Already Exists"),TQString(),newname,TDEIO::M_OVERWRITE);
 		    	if (over->exec()==TQDialog::Rejected)
 	    		{
                 	delete over;
@@ -348,7 +348,7 @@ void KgpgApp::slotFileSave()
 	stream->setCodec(cod);
     	*stream << view->editor->text();//.utf8();
    	tmpfile.close();
-	if(!KIO::NetAccess::upload(tmpfile.name(), Docname,this)) {
+	if(!TDEIO::NetAccess::upload(tmpfile.name(), Docname,this)) {
 	    KMessageBox::sorry(this,i18n("The document could not be saved, please check your permissions and disk space."));
 	    tmpfile.unlink();
             return;
@@ -383,7 +383,7 @@ void KgpgApp::slotFileSaveAs()
                 }
                 f.close();
 		}
-		else if (KIO::NetAccess::exists(url,false,this))
+		else if (TDEIO::NetAccess::exists(url,false,this))
 		{
 		TQString message=i18n("Overwrite existing file %1?").arg(url.fileName());
                         int result=KMessageBox::warningContinueCancel(this,TQString(message),i18n("Warning"),i18n("Overwrite"));
@@ -400,7 +400,7 @@ void KgpgApp::openDocumentFile(const KURL& url,TQString encoding)
 {
 TQString tempOpenFile;
         /////////////////////////////////////////////////
-if( KIO::NetAccess::download( url, tempOpenFile,this ) ) {
+if( TDEIO::NetAccess::download( url, tempOpenFile,this ) ) {
         TQFile qfile(tempOpenFile);
         if (qfile.open(IO_ReadOnly)) {
                 TQTextStream t( &qfile );

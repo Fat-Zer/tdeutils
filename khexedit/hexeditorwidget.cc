@@ -121,7 +121,7 @@ void CHexEditorWidget::initialize( void )
 }
 
 
-void CHexEditorWidget::writeConfiguration( KConfig &config )
+void CHexEditorWidget::writeConfiguration( TDEConfig &config )
 {
   SDisplayLayout &layout = mDisplayState.layout;
   config.setGroup( "Display Options" );
@@ -219,7 +219,7 @@ void CHexEditorWidget::writeConfiguration( KConfig &config )
   }
 }
 
-void CHexEditorWidget::readConfiguration( KConfig &config )
+void CHexEditorWidget::readConfiguration( TDEConfig &config )
 {
   SDisplayLayout &layout = mDisplayState.layout;
   config.setGroup( "Display Options" );
@@ -1987,12 +1987,12 @@ int CHexEditorWidget::readURL( const KURL &url, bool insert )
   // 3) Load the file.
   //
   TQString tmpfile;
-  if ( !KIO::NetAccess::download( url, tmpfile, this ) )
+  if ( !TDEIO::NetAccess::download( url, tmpfile, this ) )
     return Err_ReadFailed;
 
   bool success = readFile( tmpfile, url.url(), insert );
 
-  KIO::NetAccess::removeTempFile( tmpfile );
+  TDEIO::NetAccess::removeTempFile( tmpfile );
 
   return( success == true ? Err_Success : Err_ReadFailed );
 }
@@ -2009,7 +2009,7 @@ void CHexEditorWidget::writeURL( TQString &url )
     KTempFile tf;
     tf.setAutoDelete( true );
     writeFile( tf.name() );
-    if( !KIO::NetAccess::upload(tf.name(),url,this) )
+    if( !TDEIO::NetAccess::upload(tf.name(),url,this) )
     {
       mHexView->setModified( modified );
       TQString msg = i18n("Could not save remote file.");

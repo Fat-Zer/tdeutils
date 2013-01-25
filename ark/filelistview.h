@@ -52,8 +52,8 @@ class FileLVI : public KListViewItem
 		FileLVI( KListViewItem* lvi );
 
 		TQString fileName() const { return m_entryName; }
-		KIO::filesize_t fileSize() const { return m_fileSize; }
-		KIO::filesize_t packedFileSize() const { return m_packedFileSize; }
+		TDEIO::filesize_t fileSize() const { return m_fileSize; }
+		TDEIO::filesize_t packedFileSize() const { return m_packedFileSize; }
 		double ratio() const { return m_ratio; }
 		TQDateTime timeStamp() const { return m_timeStamp; }
 
@@ -62,8 +62,8 @@ class FileLVI : public KListViewItem
 		virtual void setText( int column, const TQString &text );
 
 	private:
-		KIO::filesize_t m_fileSize;
-		KIO::filesize_t m_packedFileSize;
+		TDEIO::filesize_t m_fileSize;
+		TDEIO::filesize_t m_packedFileSize;
 		double    m_ratio;
 		TQDateTime m_timeStamp;
 		TQString   m_entryName;
@@ -125,12 +125,12 @@ class FileListView: public KListView
 		/**
 		 * Return the sum of the sizes of all files in the archive.
 		 */
-		KIO::filesize_t totalSize();
+		TDEIO::filesize_t totalSize();
 
 		/**
 		 * Return the sum of the sizes of the selected files.
 		 */
-		KIO::filesize_t selectedSize();
+		TDEIO::filesize_t selectedSize();
 
 		/**
 		 * Adjust the size of all columns to fit their content.

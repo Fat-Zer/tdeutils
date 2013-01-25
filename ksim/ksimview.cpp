@@ -63,7 +63,7 @@
 #define MAXHOSTNAMELEN 64
 #endif
 
-KSim::MainView::MainView(KConfig *config,
+KSim::MainView::MainView(TDEConfig *config,
    bool loadPlugins, KSim::PanelExtension *topLevel,
    const char *name) : DCOPObject("KSim"),
    TQWidget(topLevel, name)
@@ -272,7 +272,7 @@ void KSim::MainView::reparseConfig(bool emitReload,
   for (plugin = pluginList.begin(); plugin != pluginList.end(); ++plugin) {
     if ((*plugin).configPage()) {
       (*plugin).configPage()->saveConfig();
-      KConfig *conf = (*plugin).configPage()->config();
+      TDEConfig *conf = (*plugin).configPage()->config();
       if (conf) conf->sync();
     }
 

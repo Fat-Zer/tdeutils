@@ -31,7 +31,7 @@ int main(int argc, char **argv)
 
   TDEApplication app;
 
-  KConfig *config = kapp->config();
+  TDEConfig *config = kapp->config();
 
   config->setGroup("General");
   TQString font(config->readEntry("selectedFont", TDEGlobalSettings::generalFont().family()));

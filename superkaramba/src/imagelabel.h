@@ -38,7 +38,7 @@
 #include "karamba.h"
 
 class ImageLabel;
-class KIO::CopyJob;
+class TDEIO::CopyJob;
 
 // Abstract Effects Baseclass
 class Effect : public TQObject
@@ -144,7 +144,7 @@ private slots:
 
   // gets called if a timed effects needs to bee removed
   void slotEffectExpired();
-  void slotCopyResult(KIO::Job* job);
+  void slotCopyResult(TDEIO::Job* job);
 
 signals:
   void pixmapLoaded();

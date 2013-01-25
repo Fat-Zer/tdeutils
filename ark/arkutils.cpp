@@ -186,7 +186,7 @@ ArkUtils::haveDirPermissions( const TQString &strFile )
 }
 
 bool
-ArkUtils::diskHasSpace(const TQString &dir, KIO::filesize_t size)
+ArkUtils::diskHasSpace(const TQString &dir, TDEIO::filesize_t size)
   // check if disk has enough space to accommodate (a) new file(s) of
   // the given size in the partition containing the given directory
 {
@@ -211,10 +211,10 @@ ArkUtils::diskHasSpace(const TQString &dir, KIO::filesize_t size)
   return true;
 }
 
-KIO::filesize_t
+TDEIO::filesize_t
 ArkUtils::getSizes(TQStringList *list)
 {
-  KIO::filesize_t sum = 0;
+  TDEIO::filesize_t sum = 0;
   TQString str;
   KDE_struct_stat st;
 

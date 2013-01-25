@@ -66,7 +66,7 @@ int main(int argc, char **argv)
 //     //      KSGRD::SensorMgr  foo ;//  p->engage( "" );
 
 
-//     //KConfig *kconfig = TDEGlobal::config();
+//     //TDEConfig *kconfig = TDEGlobal::config();
 //     //kconfig->setGroup("karamba");
 //     //kconfig->writeEntry("test", "/home/hk/foofoo");
 //     //kconfig->sync();

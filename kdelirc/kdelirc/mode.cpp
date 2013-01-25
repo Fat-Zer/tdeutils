@@ -31,7 +31,7 @@ Mode::~Mode()
 {
 }
 
-const Mode &Mode::loadFromConfig(KConfig &theConfig, int index)
+const Mode &Mode::loadFromConfig(TDEConfig &theConfig, int index)
 {
 	TQString Prefix = "Mode" + TQString().setNum(index);
 	theName = theConfig.readEntry(Prefix + "Name");
@@ -41,7 +41,7 @@ const Mode &Mode::loadFromConfig(KConfig &theConfig, int index)
 	return *this;
 }
 
-void Mode::saveToConfig(KConfig &theConfig, int index)
+void Mode::saveToConfig(TDEConfig &theConfig, int index)
 {
 	TQString Prefix = "Mode" + TQString().setNum(index);
 	theConfig.writeEntry(Prefix + "Name", theName);

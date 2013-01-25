@@ -63,7 +63,7 @@ public:
 
     virtual ~KVaio();
     const KVaioDriverInterface *driver();
-    void loadConfiguration(KConfig *);
+    void loadConfiguration(TDEConfig *);
     const int progress() { return m_progress; }
 
 protected:

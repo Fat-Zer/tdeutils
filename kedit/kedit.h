@@ -38,7 +38,7 @@ class TQTimer;
 class KAction;
 class KRecentFilesAction;
 
-namespace KIO { class Job; }
+namespace TDEIO { class Job; }
 
 // StatusBar field IDs
 #define ID_LINE_COLUMN 1
@@ -136,7 +136,7 @@ private:
 
     int open_mode;
 
-    KConfig *config;
+    TDEConfig *config;
 
     KSpell *kspell; // Current spell checking object
 
@@ -149,8 +149,8 @@ private:
     TQPtrDict <int> m_openMode;
 
     // Session management
-    void saveProperties(KConfig*);
-    void readProperties(KConfig*);
+    void saveProperties(TDEConfig*);
+    void readProperties(TDEConfig*);
 
 public slots:
     void openRecent(const KURL&);
@@ -204,12 +204,12 @@ private slots:
     TQString replaceISpell(TQString msg, int client);
 };
 
-class SettingsDialog: public KConfigDialog {
+class SettingsDialog: public TDEConfigDialog {
 Q_OBJECT
   
 
 public:
-  SettingsDialog(TQWidget *parent, const char *name,KConfigSkeleton *config, KSpellConfig *_spellConfig);
+  SettingsDialog(TQWidget *parent, const char *name,TDEConfigSkeleton *config, KSpellConfig *_spellConfig);
   
 protected slots:
   void updateSettings();

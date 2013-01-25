@@ -25,7 +25,7 @@
 #ifndef __MNTCONFIG_H__
 #define __MNTCONFIG_H__
 
-#include <kcmodule.h>
+#include <tdecmodule.h>
 #include <kconfig.h>
 #include <kiconloader.h>
 

@@ -27,7 +27,7 @@
 #include "kdfconfig.h"
 #include "mntconfig.h"
 
-#include <kcmodule.h>
+#include <tdecmodule.h>
 #include <tqtabwidget.h>
 
 class KDiskFreeWidget : public TDECModule

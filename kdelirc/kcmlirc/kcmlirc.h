@@ -14,7 +14,7 @@
 #include <tqstringlist.h>
 #include <tqmap.h>
 
-#include <kcmodule.h>
+#include <tdecmodule.h>
 
 #include <dcopobject.h>
 

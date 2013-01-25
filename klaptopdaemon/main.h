@@ -29,7 +29,7 @@
 #include <tqtabwidget.h>
 
 
-#include <kcmodule.h>
+#include <tdecmodule.h>
 
 
 class WarningConfig;

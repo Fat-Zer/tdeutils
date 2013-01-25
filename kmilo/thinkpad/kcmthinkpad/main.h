@@ -25,7 +25,7 @@
 #ifndef KCMTHINKPAD_MAIN_H
 #define KCMTHINKPAD_MAIN_H
 
-#include <kcmodule.h>
+#include <tdecmodule.h>
 
 class KCMThinkPadGeneral;
 

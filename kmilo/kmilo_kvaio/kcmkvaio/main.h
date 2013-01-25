@@ -22,7 +22,7 @@
 #ifndef KCMKVAIO_MAIN_H
 #define KCMKVAIO_MAIN_H
 
-#include <kcmodule.h>
+#include <tdecmodule.h>
 #include "../kvaiodriverinterface.h"
 
 class TQTimer;

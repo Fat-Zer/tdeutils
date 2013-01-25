@@ -26,7 +26,7 @@
 #ifndef __WARNINGCONFIG_H__
 #define __WARNINGCONFIG_H__
 
-#include <kcmodule.h>
+#include <tdecmodule.h>
 #include <tqstring.h>
 
 class TQWidget;

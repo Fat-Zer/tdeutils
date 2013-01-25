@@ -35,7 +35,7 @@
 #include <kdebug.h>
 #include <kconfig.h>
 #include <kurlrequester.h>
-#include <kcmodule.h>
+#include <tdecmodule.h>
 
 #ifdef Q_OS_FREEBSD
 #include <sys/types.h>

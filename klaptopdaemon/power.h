@@ -25,7 +25,7 @@
 #ifndef __POWERCONFIG_H__
 #define __POWERCONFIG_H__
 
-#include <kcmodule.h>
+#include <tdecmodule.h>
 #include <tqstring.h>
 
 class TQWidget;

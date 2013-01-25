@@ -27,7 +27,7 @@
 #ifndef __BATTERYCONFIG_H__
 #define __BATTERYCONFIG_H__
 
-#include <kcmodule.h>
+#include <tdecmodule.h>
 #include <tqstring.h>
 #include <tqpixmap.h>
 #include <tqptrlist.h>

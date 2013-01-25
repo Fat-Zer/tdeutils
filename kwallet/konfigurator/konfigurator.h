@@ -20,7 +20,7 @@
 #ifndef _KWALLETKONFIGURATOR_H
 #define _KWALLETKONFIGURATOR_H
 
-#include <kcmodule.h>
+#include <tdecmodule.h>
 
 class TDEConfig;
 class WalletConfigWidget;

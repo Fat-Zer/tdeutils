@@ -25,7 +25,7 @@
 #ifndef __BRIGHTNESSCONFIG_H__
 #define __BRIGHTNESSCONFIG_H__
 
-#include <kcmodule.h>
+#include <tdecmodule.h>
 #include <tqstring.h>
 
 class TQWidget;

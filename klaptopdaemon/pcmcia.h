@@ -35,7 +35,7 @@
 #include <kapplication.h>
 #include <knuminput.h>
 
-#include <kcmodule.h>
+#include <tdecmodule.h>
 #include <kaboutdata.h>
 
 class PcmciaConfig : public TDECModule

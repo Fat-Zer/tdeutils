@@ -25,7 +25,7 @@
 #ifndef __APMCONFIG_H__
 #define __APMCONFIG_H__
 
-#include <kcmodule.h>
+#include <tdecmodule.h>
 #include <tqstring.h>
 
 class TQWidget;

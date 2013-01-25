@@ -25,7 +25,7 @@
 #ifndef __ACPICONFIG_H__
 #define __ACPICONFIG_H__
 
-#include <kcmodule.h>
+#include <tdecmodule.h>
 #include <tqstring.h>
 
 class TQWidget;

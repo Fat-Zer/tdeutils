@@ -33,7 +33,7 @@ namespace KHE
 {
 
 // class KHexEdit;
-class KBufferRanges;
+class TDEBufferRanges;
 class KCharCodec;
 
 const int NoByteFound = -1;
@@ -43,15 +43,15 @@ const int NoByteFound = -1;
   * knows how to paint the data and the editing things (focus, cursor, selection)
   * but does not offer
   *
-  *@author Friedrich W. H. Kossebauint KBufferColumn::posOfX( KPixelX PX, bool *ToTheRightFlag ) const
+  *@author Friedrich W. H. Kossebauint TDEBufferColumn::posOfX( KPixelX PX, bool *ToTheRightFlag ) const
   */
-class KBufferColumn : public KColumn
+class TDEBufferColumn : public KColumn
 {
   public:
     enum KFrameStyle { Frame, Left, Right };
   public:
-    KBufferColumn( KColumnsView/*KHexEdit*/ *HE, KDataBuffer *B, KBufferLayout *L, KBufferRanges *R );
-    virtual ~KBufferColumn();
+    TDEBufferColumn( KColumnsView/*KHexEdit*/ *HE, KDataBuffer *B, TDEBufferLayout *L, TDEBufferRanges *R );
+    virtual ~TDEBufferColumn();
 
 
   public: // KColumn-API
@@ -154,7 +154,7 @@ class KBufferColumn : public KColumn
     int firstPos() const;
     int lastPos()  const;
     KSection visiblePositions() const;
-    const KBufferLayout *layout() const;
+    const TDEBufferLayout *layout() const;
     KCharCodec* codec() const;
 
   protected:
@@ -185,9 +185,9 @@ class KBufferColumn : public KColumn
     /** pointer to the buffer */
     KDataBuffer *Buffer;
     /** pointer to the layout */
-    const KBufferLayout *Layout;
+    const TDEBufferLayout *Layout;
     /** pointer to the ranges */
-    KBufferRanges *Ranges;
+    TDEBufferRanges *Ranges;
     /** */
     KCharCodec *Codec;
 
@@ -231,22 +231,22 @@ class KBufferColumn : public KColumn
 };
 
 
-inline KPixelX KBufferColumn::byteWidth()         const { return ByteWidth; }
-inline KPixelX KBufferColumn::digitWidth()        const { return DigitWidth; }
-inline KPixelX KBufferColumn::byteSpacingWidth()  const { return ByteSpacingWidth; }
-inline KPixelX KBufferColumn::groupSpacingWidth() const { return GroupSpacingWidth; }
+inline KPixelX TDEBufferColumn::byteWidth()         const { return ByteWidth; }
+inline KPixelX TDEBufferColumn::digitWidth()        const { return DigitWidth; }
+inline KPixelX TDEBufferColumn::byteSpacingWidth()  const { return ByteSpacingWidth; }
+inline KPixelX TDEBufferColumn::groupSpacingWidth() const { return GroupSpacingWidth; }
 
-inline int KBufferColumn::noOfGroupedBytes()      const { return NoOfGroupedBytes; }
+inline int TDEBufferColumn::noOfGroupedBytes()      const { return NoOfGroupedBytes; }
 
-inline int KBufferColumn::firstPos() const { return PaintPositions.start(); }
-inline int KBufferColumn::lastPos()  const { return PaintPositions.end(); }
-inline KSection KBufferColumn::visiblePositions() const { return PaintPositions; }
+inline int TDEBufferColumn::firstPos() const { return PaintPositions.start(); }
+inline int TDEBufferColumn::lastPos()  const { return PaintPositions.end(); }
+inline KSection TDEBufferColumn::visiblePositions() const { return PaintPositions; }
 
-inline const KBufferLayout *KBufferColumn::layout() const { return Layout; }
+inline const TDEBufferLayout *TDEBufferColumn::layout() const { return Layout; }
 
 
-inline void KBufferColumn::setCodec( KCharCodec *C ) { Codec = C; }
-inline KCharCodec* KBufferColumn::codec() const { return Codec; }
+inline void TDEBufferColumn::setCodec( KCharCodec *C ) { Codec = C; }
+inline KCharCodec* TDEBufferColumn::codec() const { return Codec; }
 
 }
 

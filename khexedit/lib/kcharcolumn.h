@@ -35,10 +35,10 @@ namespace KHE
   *
   *@author Friedrich W. H. Kossebau
   */
-class KCharColumn : public KBufferColumn
+class KCharColumn : public TDEBufferColumn
 {
   public:
-    KCharColumn( KColumnsView *CV, KDataBuffer *B, KBufferLayout *L, KBufferRanges *R );
+    KCharColumn( KColumnsView *CV, KDataBuffer *B, TDEBufferLayout *L, TDEBufferRanges *R );
     virtual ~KCharColumn();
 
 
@@ -70,7 +70,7 @@ class KCharColumn : public KBufferColumn
     TQChar undefinedChar() const;
 
 
-  protected: // KBufferColumn API
+  protected: // TDEBufferColumn API
     virtual void drawByte( TQPainter *P, char Byte, KHEChar B, const TQColor &Color ) const;
 
   protected:

@@ -33,8 +33,8 @@ static const KCoding NotDefaultCoding =      DecimalCoding;
 static const int     DefaultBinaryGapWidth = 1;
 
 
-KValueColumn::KValueColumn( KColumnsView *CV, KDataBuffer *B, KBufferLayout *L, KBufferRanges *R )
- : KBufferColumn( CV, B, L, R ),
+KValueColumn::KValueColumn( KColumnsView *CV, KDataBuffer *B, TDEBufferLayout *L, TDEBufferRanges *R )
+ : TDEBufferColumn( CV, B, L, R ),
    Coding( NotDefaultCoding ),
    ByteCodec( 0 ),
    BinaryGapWidth( DefaultBinaryGapWidth )

@@ -39,7 +39,7 @@ static const KPixelX DefaultByteSpacingWidth = 3;
 static const KPixelX DefaultGroupSpacingWidth = 9;
 static const int DefaultNoOfGroupedBytes = 4;
 
-KBufferColumn::KBufferColumn( KColumnsView *CV, KDataBuffer *B, KBufferLayout *L, KBufferRanges *R )
+TDEBufferColumn::TDEBufferColumn( KColumnsView *CV, KDataBuffer *B, TDEBufferLayout *L, TDEBufferRanges *R )
  : KColumn( CV ),
    Buffer( B ),
    Layout( L ),
@@ -58,7 +58,7 @@ KBufferColumn::KBufferColumn( KColumnsView *CV, KDataBuffer *B, KBufferLayout *L
 }
 
 
-KBufferColumn::~KBufferColumn()
+TDEBufferColumn::~TDEBufferColumn()
 {
   delete [] PosX;
   delete [] PosRightX;
@@ -66,13 +66,13 @@ KBufferColumn::~KBufferColumn()
 
 
 
-void KBufferColumn::set( KDataBuffer *B )
+void TDEBufferColumn::set( KDataBuffer *B )
 {
   Buffer= B;
 }
 
 
-void KBufferColumn::resetXBuffer()
+void TDEBufferColumn::resetXBuffer()
 {
   delete [] PosX;
   delete [] PosRightX;
@@ -86,14 +86,14 @@ void KBufferColumn::resetXBuffer()
 }
 
 
-void KBufferColumn::setMetrics( KPixelX DW, KPixelY DBL )
+void TDEBufferColumn::setMetrics( KPixelX DW, KPixelY DBL )
 {
   DigitBaseLine = DBL;
   setDigitWidth( DW );
 }
 
 
-bool KBufferColumn::setDigitWidth( KPixelX DW )
+bool TDEBufferColumn::setDigitWidth( KPixelX DW )
 {
   // no changes?
   if( DigitWidth == DW )
@@ -109,7 +109,7 @@ bool KBufferColumn::setDigitWidth( KPixelX DW )
 }
 
 
-bool KBufferColumn::setSpacing( KPixelX BSW, int NoGB, KPixelX GSW )
+bool TDEBufferColumn::setSpacing( KPixelX BSW, int NoGB, KPixelX GSW )
 {
   // no changes?
   if( ByteSpacingWidth == BSW && NoOfGroupedBytes == NoGB && GroupSpacingWidth == GSW )
@@ -128,7 +128,7 @@ bool KBufferColumn::setSpacing( KPixelX BSW, int NoGB, KPixelX GSW )
 }
 
 
-bool KBufferColumn::setByteSpacingWidth( KPixelX BSW )
+bool TDEBufferColumn::setByteSpacingWidth( KPixelX BSW )
 {
   // no changes?
   if( ByteSpacingWidth == BSW )
@@ -145,7 +145,7 @@ bool KBufferColumn::setByteSpacingWidth( KPixelX BSW )
 }
 
 
-bool KBufferColumn::setNoOfGroupedBytes( int NoGB )
+bool TDEBufferColumn::setNoOfGroupedBytes( int NoGB )
 {
   // no changes?
   if( NoOfGroupedBytes == NoGB )
@@ -159,7 +159,7 @@ bool KBufferColumn::setNoOfGroupedBytes( int NoGB )
 }
 
 
-bool KBufferColumn::setGroupSpacingWidth( KPixelX GSW )
+bool TDEBufferColumn::setGroupSpacingWidth( KPixelX GSW )
 {
   // no changes?
   if( GroupSpacingWidth == GSW )
@@ -176,20 +176,20 @@ bool KBufferColumn::setGroupSpacingWidth( KPixelX GSW )
 }
 
 
-void KBufferColumn::recalcByteWidth()
+void TDEBufferColumn::recalcByteWidth()
 {
   ByteWidth = DigitWidth;
   recalcVerticalGridX();
 }
 
 
-void KBufferColumn::recalcVerticalGridX()
+void TDEBufferColumn::recalcVerticalGridX()
 {
  VerticalGridX = ByteWidth-1 + GroupSpacingWidth/2;
 }
 
 
-void KBufferColumn::recalcX()
+void TDEBufferColumn::recalcX()
 {
   SpacingTrigger = noOfGroupedBytes() > 0 ? noOfGroupedBytes()-1 : LastPos+1; // last ensures to never trigger the spacing
 
@@ -219,7 +219,7 @@ void KBufferColumn::recalcX()
 
 // TODO: why are inlined functions not available as symbols when defined before their use
 //TODO: works not precisly for the byte rects but includes spacing and left and right
-/*inline*/ int KBufferColumn::posOfX( KPixelX PX ) const
+/*inline*/ int TDEBufferColumn::posOfX( KPixelX PX ) const
 {
   if( !PosX )
     return NoByteFound;
@@ -235,7 +235,7 @@ void KBufferColumn::recalcX()
 }
 
 
-int KBufferColumn::magPosOfX( KPixelX PX ) const
+int TDEBufferColumn::magPosOfX( KPixelX PX ) const
 {
   if( !PosX )
     return NoByteFound;
@@ -256,7 +256,7 @@ int KBufferColumn::magPosOfX( KPixelX PX ) const
 }
 
 
-KSection KBufferColumn::posOfX( KPixelX PX, KPixelX PW ) const
+KSection TDEBufferColumn::posOfX( KPixelX PX, KPixelX PW ) const
 {
   if( !PosX )
     return KSection();
@@ -284,11 +284,11 @@ KSection KBufferColumn::posOfX( KPixelX PX, KPixelX PW ) const
 }
 
 
-KPixelX KBufferColumn::xOfPos( int Pos )      const { return x() + (PosX?PosX[Pos]:0); }
-KPixelX KBufferColumn::rightXOfPos( int Pos ) const { return x() + (PosRightX?PosRightX[Pos]:0); }
+KPixelX TDEBufferColumn::xOfPos( int Pos )      const { return x() + (PosX?PosX[Pos]:0); }
+KPixelX TDEBufferColumn::rightXOfPos( int Pos ) const { return x() + (PosRightX?PosRightX[Pos]:0); }
 
 
-int KBufferColumn::posOfRelX( KPixelX PX ) const
+int TDEBufferColumn::posOfRelX( KPixelX PX ) const
 {
   if( !PosX )
     return NoByteFound;
@@ -302,7 +302,7 @@ int KBufferColumn::posOfRelX( KPixelX PX ) const
 }
 
 
-KSection KBufferColumn::posOfRelX( KPixelX PX, KPixelX PW ) const
+KSection TDEBufferColumn::posOfRelX( KPixelX PX, KPixelX PW ) const
 {
   if( !PosX )
     return KSection();
@@ -328,25 +328,25 @@ KSection KBufferColumn::posOfRelX( KPixelX PX, KPixelX PW ) const
 }
 
 
-KPixelX KBufferColumn::relXOfPos( int Pos )      const { return PosX ? PosX[Pos] : 0; }
-KPixelX KBufferColumn::relRightXOfPos( int Pos ) const { return PosRightX ? PosRightX[Pos] : 0; }
+KPixelX TDEBufferColumn::relXOfPos( int Pos )      const { return PosX ? PosX[Pos] : 0; }
+KPixelX TDEBufferColumn::relRightXOfPos( int Pos ) const { return PosRightX ? PosRightX[Pos] : 0; }
 
 
-KPixelXs KBufferColumn::wideXPixelsOfPos( KSection Positions ) const
+KPixelXs TDEBufferColumn::wideXPixelsOfPos( KSection Positions ) const
 {
   return KPixelXs( Positions.start()>0?rightXOfPos(Positions.start()-1)+1:xOfPos(Positions.start()),
                    Positions.end()<LastPos?xOfPos(Positions.end()+1)-1:rightXOfPos(Positions.end())  );
 }
 
 
-KPixelXs KBufferColumn::relWideXPixelsOfPos( KSection Positions ) const
+KPixelXs TDEBufferColumn::relWideXPixelsOfPos( KSection Positions ) const
 {
   return KPixelXs( Positions.start()>0?relRightXOfPos(Positions.start()-1)+1:relXOfPos(Positions.start()),
                    Positions.end()<LastPos?relXOfPos(Positions.end()+1)-1:relRightXOfPos(Positions.end())  );
 }
 
 
-void KBufferColumn::preparePainting( KPixelXs Xs )
+void TDEBufferColumn::preparePainting( KPixelXs Xs )
 {
   Xs.restrictTo( XSpan );
   // translate
@@ -362,7 +362,7 @@ void KBufferColumn::preparePainting( KPixelXs Xs )
 }
 
 
-void KBufferColumn::paintFirstLine( TQPainter *P, KPixelXs Xs, int FirstLine )
+void TDEBufferColumn::paintFirstLine( TQPainter *P, KPixelXs Xs, int FirstLine )
 {
   preparePainting( Xs );
 
@@ -375,14 +375,14 @@ void KBufferColumn::paintFirstLine( TQPainter *P, KPixelXs Xs, int FirstLine )
 }
 
 
-void KBufferColumn::paintNextLine( TQPainter *P )
+void TDEBufferColumn::paintNextLine( TQPainter *P )
 {
 //  paintPositions( P, PaintLine++, PaintPositions );
   paintLine( P, PaintLine++ );
 }
 
 
-void KBufferColumn::paintLine( TQPainter *P, int Line ) // TODO: could be removed???
+void TDEBufferColumn::paintLine( TQPainter *P, int Line ) // TODO: could be removed???
 {
 //  kdDebug(1501) << "paintLine line: "<<Line<<" Start: "<<PaintPositions.start()<<" End: "<<PaintPositions.end() << "\n";
   // no bytes to paint?
@@ -393,7 +393,7 @@ void KBufferColumn::paintLine( TQPainter *P, int Line ) // TODO: could be remove
 }
 
 
-void KBufferColumn::paintPositions( TQPainter *P, int Line, KSection Pos )
+void TDEBufferColumn::paintPositions( TQPainter *P, int Line, KSection Pos )
 {
   const TQColorGroup &CG = View->colorGroup();
 
@@ -403,15 +403,15 @@ void KBufferColumn::paintPositions( TQPainter *P, int Line, KSection Pos )
 
   // Go through the lines TODO: handle first and last line more effeciently
   // check for leading and trailing spaces
-  KSection Positions( Layout->firstPos(KBufferCoord( Pos.start(), Line )),
-                      Layout->lastPos( KBufferCoord( Pos.end(),  Line )) );
+  KSection Positions( Layout->firstPos(TDEBufferCoord( Pos.start(), Line )),
+                      Layout->lastPos( TDEBufferCoord( Pos.end(),  Line )) );
 
   // no bytes to paint?
   if( !Layout->hasContent(Line) )
     return;
 
   // check for leading and trailing spaces
-  KSection Indizes( Layout->indexAtCoord(KBufferCoord( Positions.start(), Line )), Positions.width(), false );
+  KSection Indizes( Layout->indexAtCoord(TDEBufferCoord( Positions.start(), Line )), Positions.width(), false );
 
   unsigned int SelectionFlag;
   unsigned int MarkingFlag;
@@ -481,7 +481,7 @@ void KBufferColumn::paintPositions( TQPainter *P, int Line, KSection Pos )
 }
 
 
-void KBufferColumn::paintPlain( TQPainter *P, KSection Positions, int Index )
+void TDEBufferColumn::paintPlain( TQPainter *P, KSection Positions, int Index )
 {
   // paint all the bytes affected
   for( int p=Positions.start(); p<=Positions.end(); ++p,++Index )
@@ -499,7 +499,7 @@ void KBufferColumn::paintPlain( TQPainter *P, KSection Positions, int Index )
 }
 
 
-void KBufferColumn::paintSelection( TQPainter *P, KSection Positions, int Index, int Flag )
+void TDEBufferColumn::paintSelection( TQPainter *P, KSection Positions, int Index, int Flag )
 {
   const TQColorGroup &CG = View->colorGroup();
 
@@ -522,7 +522,7 @@ void KBufferColumn::paintSelection( TQPainter *P, KSection Positions, int Index,
 }
 
 
-void KBufferColumn::paintMarking( TQPainter *P, KSection Positions, int Index, int Flag )
+void TDEBufferColumn::paintMarking( TQPainter *P, KSection Positions, int Index, int Flag )
 {
   const TQColorGroup &CG = View->colorGroup();
 
@@ -546,7 +546,7 @@ void KBufferColumn::paintMarking( TQPainter *P, KSection Positions, int Index, i
 
 
 // TODO: smarter calculation
-void KBufferColumn::paintGrid( TQPainter *P, KSection Range )
+void TDEBufferColumn::paintGrid( TQPainter *P, KSection Range )
 {
   int st = 0; // counter for spacing triggering
   P->setPen( TQt::black );
@@ -567,7 +567,7 @@ void KBufferColumn::paintGrid( TQPainter *P, KSection Range )
 }
 
 
-void KBufferColumn::paintRange( TQPainter *P, const TQColor &Color, KSection Positions, int Flag )
+void TDEBufferColumn::paintRange( TQPainter *P, const TQColor &Color, KSection Positions, int Flag )
 {
   KPixelX RangeX = Flag & StartsBefore ? relRightXOfPos( Positions.start()-1 ) + 1 : relXOfPos( Positions.start() );
   KPixelX RangeW = (Flag & EndsLater ? relXOfPos( Positions.end()+1 ): relRightXOfPos( Positions.end() ) + 1)  - RangeX;
@@ -576,7 +576,7 @@ void KBufferColumn::paintRange( TQPainter *P, const TQColor &Color, KSection Pos
 }
 
 
-void KBufferColumn::paintByte( TQPainter *P, int Index )
+void TDEBufferColumn::paintByte( TQPainter *P, int Index )
 {
   char Byte = ( Index > -1 ) ? Buffer->datum( Index ) : EmptyByte;
   KHEChar B = Codec->decode( Byte );
@@ -611,7 +611,7 @@ void KBufferColumn::paintByte( TQPainter *P, int Index )
 }
 
 
-void KBufferColumn::paintFramedByte( TQPainter *P, int Index, KFrameStyle FrameStyle )
+void TDEBufferColumn::paintFramedByte( TQPainter *P, int Index, KFrameStyle FrameStyle )
 {
   paintByte( P, Index );
   char Byte = ( Index > -1 ) ? Buffer->datum( Index ) : EmptyByte;
@@ -627,7 +627,7 @@ void KBufferColumn::paintFramedByte( TQPainter *P, int Index, KFrameStyle FrameS
 }
 
 
-void KBufferColumn::paintCursor( TQPainter *P, int Index )
+void TDEBufferColumn::paintCursor( TQPainter *P, int Index )
 {
   char Byte = ( Index > -1 ) ? Buffer->datum( Index ) : EmptyByte;
   KHEChar B = Codec->decode( Byte );
@@ -635,14 +635,14 @@ void KBufferColumn::paintCursor( TQPainter *P, int Index )
 }
 
 
-void KBufferColumn::drawByte( TQPainter *P, char /*Byte*/, KHEChar B, const TQColor &Color ) const
+void TDEBufferColumn::drawByte( TQPainter *P, char /*Byte*/, KHEChar B, const TQColor &Color ) const
 {
   P->setPen( Color );
   P->drawText( 0, DigitBaseLine, TQString(B) );
 }
 
 
-bool KBufferColumn::isSelected( KSection Range, KSection *Selection, unsigned int *Flag ) const
+bool TDEBufferColumn::isSelected( KSection Range, KSection *Selection, unsigned int *Flag ) const
 {
   KSection S;
   unsigned int F = 0;
@@ -671,7 +671,7 @@ bool KBufferColumn::isSelected( KSection Range, KSection *Selection, unsigned in
 }
 
 
-bool KBufferColumn::isMarked( KSection Range, KSection *Marking, unsigned int *Flag ) const
+bool TDEBufferColumn::isMarked( KSection Range, KSection *Marking, unsigned int *Flag ) const
 {
   KSection M;
   unsigned int F = 0;

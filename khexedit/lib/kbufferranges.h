@@ -32,11 +32,11 @@ namespace KHE
   *
   * @author Friedrich W. H.  Kossebau
   */
-class KBufferRanges
+class TDEBufferRanges
 {
   public:
-    KBufferRanges( KBufferLayout *L );
-    ~KBufferRanges();
+    TDEBufferRanges( TDEBufferLayout *L );
+    ~TDEBufferRanges();
 
   public: // modifcation access
     void setMarking( KSection M );
@@ -102,28 +102,28 @@ class KBufferRanges
 
     KCoordRangeList ChangedRanges;
 
-    KBufferLayout *Layout;
+    TDEBufferLayout *Layout;
 };
 
 
-inline int KBufferRanges::noOfSelections()  const { return 1; }
+inline int TDEBufferRanges::noOfSelections()  const { return 1; }
 
-inline int KBufferRanges::selectionStart()  const { return Selection.start(); }
-inline int KBufferRanges::selectionEnd()    const { return Selection.end(); }
-inline KSection KBufferRanges::selection()  const { return Selection; }
-inline KSection KBufferRanges::firstWordSelection()  const { return FirstWordSelection; }
-inline int KBufferRanges::selectionLength() const { return Selection.width(); }
-inline bool KBufferRanges::isModified()     const { return Modified; }
+inline int TDEBufferRanges::selectionStart()  const { return Selection.start(); }
+inline int TDEBufferRanges::selectionEnd()    const { return Selection.end(); }
+inline KSection TDEBufferRanges::selection()  const { return Selection; }
+inline KSection TDEBufferRanges::firstWordSelection()  const { return FirstWordSelection; }
+inline int TDEBufferRanges::selectionLength() const { return Selection.width(); }
+inline bool TDEBufferRanges::isModified()     const { return Modified; }
 
-inline bool KBufferRanges::hasSelection()             const { return Selection.isValid(); }
-inline bool KBufferRanges::selectionStarted()         const { return Selection.started(); }
-inline bool KBufferRanges::selectionJustStarted()     const { return Selection.justStarted(); }
-inline bool KBufferRanges::hasFirstWordSelection()    const { return FirstWordSelection.isValid(); }
-inline bool KBufferRanges::hasMarking()               const { return Marking.isValid(); }
-inline bool KBufferRanges::selectionIncludes( int Index ) const { return Selection.includes( Index ); }
-inline bool KBufferRanges::markingIncludes( int Index )   const { return Marking.includes( Index ); }
+inline bool TDEBufferRanges::hasSelection()             const { return Selection.isValid(); }
+inline bool TDEBufferRanges::selectionStarted()         const { return Selection.started(); }
+inline bool TDEBufferRanges::selectionJustStarted()     const { return Selection.justStarted(); }
+inline bool TDEBufferRanges::hasFirstWordSelection()    const { return FirstWordSelection.isValid(); }
+inline bool TDEBufferRanges::hasMarking()               const { return Marking.isValid(); }
+inline bool TDEBufferRanges::selectionIncludes( int Index ) const { return Selection.includes( Index ); }
+inline bool TDEBufferRanges::markingIncludes( int Index )   const { return Marking.includes( Index ); }
 
-inline void KBufferRanges::setModified( bool M )           { Modified = M; }
+inline void TDEBufferRanges::setModified( bool M )           { Modified = M; }
 
 }
 

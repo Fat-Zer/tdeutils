@@ -24,7 +24,7 @@
 namespace KHE
 {
 
-class KBufferLayout;
+class TDEBufferLayout;
 
 
 /**@short navigates through the buffer in an abstract way, based on the layout
@@ -51,16 +51,16 @@ class KBufferLayout;
   *
   *@author Friedrich W. H. Kossebau
   */
-class KBufferCursor
+class TDEBufferCursor
 {
   public:
-    KBufferCursor( const KBufferLayout *L );
-    ~KBufferCursor();
+    TDEBufferCursor( const TDEBufferLayout *L );
+    ~TDEBufferCursor();
 
 
   public:
-    bool operator==( const KBufferCursor &c ) const;
-    bool operator!=( const KBufferCursor &c ) const { return !(*this == c); }
+    bool operator==( const TDEBufferCursor &c ) const;
+    bool operator!=( const TDEBufferCursor &c ) const { return !(*this == c); }
 
   public: // modificator
     void setAppendPosEnabled( bool APE=true );
@@ -73,7 +73,7 @@ class KBufferCursor
     /** the line of the actual coord */
     int line() const;
     /** the actual coord */
-    KBufferCoord coord() const;
+    TDEBufferCoord coord() const;
     /** true if the cursor is located to the right of the actual coord but still shown at the coord */
     bool isBehind() const;
     /** returns the real index. That is if the cursor is tagged as "behind" the current index
@@ -97,9 +97,9 @@ class KBufferCursor
 
   public: // navigation commands
     void gotoIndex( int I );
-    void gotoCoord( const KBufferCoord &C );
+    void gotoCoord( const TDEBufferCoord &C );
     void gotoCIndex( int I );
-    void gotoCCoord( const KBufferCoord &C );
+    void gotoCCoord( const TDEBufferCoord &C );
     void gotoRealIndex();
 
     void gotoPreviousByte();
@@ -139,12 +139,12 @@ class KBufferCursor
 
   private:
     /** layout, tells how the column is organized  */
-    const KBufferLayout *Layout;
+    const TDEBufferLayout *Layout;
 
     /** Position in buffer */
     int Index;
     /** Position and Line */
-    KBufferCoord Coord;
+    TDEBufferCoord Coord;
 
     /** tells whether the cursor is actually behind the actual position.
       * This is used for selection to the end of a line or of the whole buffer.
@@ -156,16 +156,16 @@ class KBufferCursor
 };
 
 
-inline int KBufferCursor::index()          const { return Index; }
-inline int KBufferCursor::pos()            const { return Coord.pos(); }
-inline int KBufferCursor::line()           const { return Coord.line(); }
-inline KBufferCoord KBufferCursor::coord() const { return Coord; }
-inline bool KBufferCursor::isBehind()      const { return Behind; }
-inline int KBufferCursor::realIndex()      const { return Behind ? Index + 1 : Index; }
+inline int TDEBufferCursor::index()          const { return Index; }
+inline int TDEBufferCursor::pos()            const { return Coord.pos(); }
+inline int TDEBufferCursor::line()           const { return Coord.line(); }
+inline TDEBufferCoord TDEBufferCursor::coord() const { return Coord; }
+inline bool TDEBufferCursor::isBehind()      const { return Behind; }
+inline int TDEBufferCursor::realIndex()      const { return Behind ? Index + 1 : Index; }
 
-inline void KBufferCursor::stepBehind() { Behind = true; }
+inline void TDEBufferCursor::stepBehind() { Behind = true; }
 
-//inline bool KBufferCursor::isValid()  const { return Index != -1; }
+//inline bool TDEBufferCursor::isValid()  const { return Index != -1; }
 
 }
 

@@ -30,7 +30,7 @@ class KCharColumn;
 class KCharCodec;
 
 
-class KCharColTextExport : public KBufferColTextExport
+class KCharColTextExport : public TDEBufferColTextExport
 {
   public:
     KCharColTextExport( const KCharColumn* BF, const char *D, KCoordRange CR, const TQString &CodecName );

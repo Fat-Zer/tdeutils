@@ -25,7 +25,7 @@ using namespace KHE;
 
 
 KCharColTextExport::KCharColTextExport( const KCharColumn* TC, const char *D, KCoordRange CR, const TQString &CodecName )
- : KBufferColTextExport( TC, D, CR, 1 ),
+ : TDEBufferColTextExport( TC, D, CR, 1 ),
    CharCodec( KCharCodec::createCodec(CodecName) ),
    SubstituteChar( TC->substituteChar() ),
    UndefinedChar( TC->undefinedChar() )

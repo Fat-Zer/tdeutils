@@ -27,7 +27,7 @@
 using namespace KHE;
 
 
-KCharEditor::KCharEditor( KCharColumn *CC, KBufferCursor *BC, KHexEdit *HE, KController *P )
+KCharEditor::KCharEditor( KCharColumn *CC, TDEBufferCursor *BC, KHexEdit *HE, KController *P )
   : KEditor( BC, HE, P ),
   CharColumn( CC )
 {

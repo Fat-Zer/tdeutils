@@ -86,8 +86,8 @@ void KNavigator::moveCursor( KMoveAction Action, bool Select )
 {
   HexEdit->pauseCursor( true );
 
-  KBufferCursor *BufferCursor = HexEdit->BufferCursor;
-  KBufferRanges *BufferRanges = HexEdit->BufferRanges;
+  TDEBufferCursor *BufferCursor = HexEdit->BufferCursor;
+  TDEBufferRanges *BufferRanges = HexEdit->BufferRanges;
 
   if( Select )
   {

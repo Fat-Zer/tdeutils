@@ -46,12 +46,12 @@ namespace KHE {
   *
   *@author Friedrich W. H.  Kossebau
   */
-class KBufferLayout
+class TDEBufferLayout
 {
   public:
-    KBufferLayout( int NoBpL, int SO, int L );
-    //KBufferLayout();
-    ~KBufferLayout();
+    TDEBufferLayout( int NoBpL, int SO, int L );
+    //TDEBufferLayout();
+    ~TDEBufferLayout();
 
 
   public: // given values
@@ -68,12 +68,12 @@ class KBufferLayout
     int startLine() const;
     int startPos() const;
     /** returns the coord of the start */
-    KBufferCoord start() const;
+    TDEBufferCoord start() const;
 
     int finalLine() const;
     int finalPos() const;
     /** returns the coord of the end */
-    KBufferCoord final() const;
+    TDEBufferCoord final() const;
 
     /** tells how much lines this layout needs (incl. blank leading lines due to StartOffset) */
     int noOfLines() const;
@@ -84,7 +84,7 @@ class KBufferLayout
       * If the coord is before the first coord the first index is returned,
       * if the coord is behind the last coord the last index is returned
       */
-    int indexAtCCoord( const KBufferCoord &C ) const;
+    int indexAtCCoord( const TDEBufferCoord &C ) const;
     /** calculates the index of the first pos in line.
       * If the line is below the first line the first index is returned,
       * if the line is above the last line the last index is returned
@@ -104,10 +104,10 @@ class KBufferLayout
       * If the index is below the first index the first coord is returned,
       * if the index is above the last index the last coord is returned
       */
-    KBufferCoord coordOfCIndex( int Index ) const;
+    TDEBufferCoord coordOfCIndex( int Index ) const;
 
     /** calculates the index of coord. if coord is invalid the behaviour is undefinded */
-    int indexAtCoord( const KBufferCoord &C ) const;
+    int indexAtCoord( const TDEBufferCoord &C ) const;
     /** calculates the index of the first pos in line. if line is invalid the behaviour is undefinded */
     int indexAtLineStart( int L ) const;
     /** calculates the index of last pos in line. if line is invalid the behaviour is undefinded */
@@ -115,7 +115,7 @@ class KBufferLayout
     /** calculates the line in which index is found. if index is invalid the behaviour is undefinded */
     int lineAtIndex( int Index ) const;
     /** calculates the coord in which index is found. if index is invalid the behaviour is undefinded */
-    KBufferCoord coordOfIndex( int Index ) const;
+    TDEBufferCoord coordOfIndex( int Index ) const;
 
     /** returns the used positions in line */
     KSection positions( int Line ) const;
@@ -124,20 +124,20 @@ class KBufferLayout
     /** returns the last Pos in line. if line is invalid the behaviour is undefinded */
     int lastPos( int Line ) const;
     /** returns the valid Pos or the first Pos in line. if coord is invalid the behaviour is undefinded */
-    int firstPos( const KBufferCoord &C ) const;
+    int firstPos( const TDEBufferCoord &C ) const;
     /** returns the valid Pos or the last Pos in line. if coord is invalid the behaviour is undefinded */
-    int lastPos( const KBufferCoord &C ) const;
+    int lastPos( const TDEBufferCoord &C ) const;
     /** returns true if the line has content */
     bool hasContent( int Line ) const;
     /** returns true if the coord is the first in it's line. if coord is invalid the behaviour is undefinded */
-    bool atLineStart( const KBufferCoord &C ) const;
+    bool atLineStart( const TDEBufferCoord &C ) const;
     /** returns true if the coord is the last in it's line. if coord is invalid the behaviour is undefinded */
-    bool atLineEnd( const KBufferCoord &C ) const;
+    bool atLineEnd( const TDEBufferCoord &C ) const;
 
     /** returns the index if valid or the nearest valid index */
     int correctIndex( int I ) const;
     /** returns the coord if valid or the nearest valid coord */
-    KBufferCoord correctCoord( const KBufferCoord &C ) const;
+    TDEBufferCoord correctCoord( const TDEBufferCoord &C ) const;
 
 
   public: // modification access; return true if changes
@@ -170,26 +170,26 @@ class KBufferLayout
 
   protected: // calculated values, buffered
     /** coord in which the start offset is (starting with 0) */
-//    KBufferCoord Start;
+//    TDEBufferCoord Start;
     /** coord in which the last byte is (starting with 0) */
-//    KBufferCoord Final;
+//    TDEBufferCoord Final;
     /** */
     KCoordRange ContentCoords;
 };
 
 
-inline int KBufferLayout::startOffset()       const { return StartOffset; }
-inline int KBufferLayout::noOfBytesPerLine()  const { return NoOfBytesPerLine; }
-inline int KBufferLayout::length()            const { return Length; }
+inline int TDEBufferLayout::startOffset()       const { return StartOffset; }
+inline int TDEBufferLayout::noOfBytesPerLine()  const { return NoOfBytesPerLine; }
+inline int TDEBufferLayout::length()            const { return Length; }
 
-inline KBufferCoord KBufferLayout::final()    const { return ContentCoords.end(); }
-inline KBufferCoord KBufferLayout::start()    const { return ContentCoords.start(); }
-inline int KBufferLayout::startPos()          const { return start().pos(); }
-inline int KBufferLayout::finalPos()          const { return final().pos(); }
-inline int KBufferLayout::startLine()         const { return start().line(); }
-inline int KBufferLayout::finalLine()         const { return final().line(); }
-inline int KBufferLayout::noOfLinesPerPage()  const { return NoOfLinesPerPage; }
-inline int KBufferLayout::noOfLines()         const { return Length==0?0:final().line()+1; }
+inline TDEBufferCoord TDEBufferLayout::final()    const { return ContentCoords.end(); }
+inline TDEBufferCoord TDEBufferLayout::start()    const { return ContentCoords.start(); }
+inline int TDEBufferLayout::startPos()          const { return start().pos(); }
+inline int TDEBufferLayout::finalPos()          const { return final().pos(); }
+inline int TDEBufferLayout::startLine()         const { return start().line(); }
+inline int TDEBufferLayout::finalLine()         const { return final().line(); }
+inline int TDEBufferLayout::noOfLinesPerPage()  const { return NoOfLinesPerPage; }
+inline int TDEBufferLayout::noOfLines()         const { return Length==0?0:final().line()+1; }
 
 }
 

@@ -21,7 +21,7 @@ using namespace KHE;
 
 
 
-KBufferLayout::KBufferLayout( int NoBpL, int SO, int L )
+TDEBufferLayout::TDEBufferLayout( int NoBpL, int SO, int L )
  : NoOfBytesPerLine( NoBpL ),
    StartOffset( SO ),
    Length( L )
@@ -31,12 +31,12 @@ KBufferLayout::KBufferLayout( int NoBpL, int SO, int L )
 }
 
 
-KBufferLayout::~KBufferLayout()
+TDEBufferLayout::~TDEBufferLayout()
 {
 }
 
 
-bool KBufferLayout::setStartOffset( int SO )
+bool TDEBufferLayout::setStartOffset( int SO )
 {
   // rejecting <0
   if( SO < 0 )
@@ -53,7 +53,7 @@ bool KBufferLayout::setStartOffset( int SO )
 }
 
 
-bool KBufferLayout::setNoOfBytesPerLine( int N )
+bool TDEBufferLayout::setNoOfBytesPerLine( int N )
 {
   // rejecting <1
   if( N < 1 )
@@ -71,7 +71,7 @@ bool KBufferLayout::setNoOfBytesPerLine( int N )
 }
 
 
-bool KBufferLayout::setLength( int L )
+bool TDEBufferLayout::setLength( int L )
 {
   // rejecting < 0
   if( L < 0 )
@@ -88,26 +88,26 @@ bool KBufferLayout::setLength( int L )
 }
 
 
-void KBufferLayout::setNoOfLinesPerPage( int N )
+void TDEBufferLayout::setNoOfLinesPerPage( int N )
 {
   NoOfLinesPerPage = N;
 }
 
 
-void KBufferLayout::calcStart()
+void TDEBufferLayout::calcStart()
 {
-  ContentCoords.setStart( KBufferCoord(StartOffset,NoOfBytesPerLine,false) );
+  ContentCoords.setStart( TDEBufferCoord(StartOffset,NoOfBytesPerLine,false) );
 }
 
 
-void KBufferLayout::calcEnd()
+void TDEBufferLayout::calcEnd()
 {
-  ContentCoords.setEnd( (Length>0)?KBufferCoord(Length-1+StartOffset,NoOfBytesPerLine,false):
-                                   KBufferCoord(-1,ContentCoords.start().line()) );
+  ContentCoords.setEnd( (Length>0)?TDEBufferCoord(Length-1+StartOffset,NoOfBytesPerLine,false):
+                                   TDEBufferCoord(-1,ContentCoords.start().line()) );
 }
 
 
-int KBufferLayout::indexAtCLineStart( int L ) const
+int TDEBufferLayout::indexAtCLineStart( int L ) const
 {
   return ( L <= ContentCoords.start().line() ) ? 0:
          ( L > ContentCoords.end().line() ) ?    Length-1:
@@ -115,7 +115,7 @@ int KBufferLayout::indexAtCLineStart( int L ) const
 }
 
 
-int KBufferLayout::indexAtCLineEnd( int L ) const
+int TDEBufferLayout::indexAtCLineEnd( int L ) const
 {
   return ( L < ContentCoords.start().line() ) ? 0:
          ( L >= ContentCoords.end().line() ) ?  Length-1:
@@ -123,7 +123,7 @@ int KBufferLayout::indexAtCLineEnd( int L ) const
 }
 
 
-int KBufferLayout::indexAtCCoord( const KBufferCoord &C ) const
+int TDEBufferLayout::indexAtCCoord( const TDEBufferCoord &C ) const
 {
   int Index = indexAtCoord( C );
 
@@ -133,7 +133,7 @@ int KBufferLayout::indexAtCCoord( const KBufferCoord &C ) const
 }
 
 
-int KBufferLayout::lineAtCIndex( int Index ) const
+int TDEBufferLayout::lineAtCIndex( int Index ) const
 {
   return ( Index <= 0 ) ?      ContentCoords.start().line():
          ( Index >= Length ) ? ContentCoords.end().line():
@@ -141,7 +141,7 @@ int KBufferLayout::lineAtCIndex( int Index ) const
 }
 
 
-KBufferCoord KBufferLayout::coordOfCIndex( int Index ) const
+TDEBufferCoord TDEBufferLayout::coordOfCIndex( int Index ) const
 {
   return ( Index <= 0 ) ?      ContentCoords.start():
          ( Index >= Length ) ? ContentCoords.end():
@@ -149,36 +149,36 @@ KBufferCoord KBufferLayout::coordOfCIndex( int Index ) const
 }
 
 
-int KBufferLayout::indexAtLineStart( int L ) const
+int TDEBufferLayout::indexAtLineStart( int L ) const
 {
   return ( L == ContentCoords.start().line() ) ? 0 : L*NoOfBytesPerLine-StartOffset;
 }
 
 
-int KBufferLayout::indexAtLineEnd( int L ) const
+int TDEBufferLayout::indexAtLineEnd( int L ) const
 {
   return ( L == ContentCoords.end().line() ) ? Length-1 : (L+1)*NoOfBytesPerLine-StartOffset-1;
 }
 
 
-int KBufferLayout::indexAtCoord( const KBufferCoord &C ) const
+int TDEBufferLayout::indexAtCoord( const TDEBufferCoord &C ) const
 {
   return C.indexByLineWidth( NoOfBytesPerLine ) - StartOffset;
 }
 
-int KBufferLayout::lineAtIndex( int Index ) const
+int TDEBufferLayout::lineAtIndex( int Index ) const
 {
   return (Index+StartOffset)/NoOfBytesPerLine;
 }
 
-KBufferCoord KBufferLayout::coordOfIndex( int Index ) const
+TDEBufferCoord TDEBufferLayout::coordOfIndex( int Index ) const
 {
-  return KBufferCoord( Index+StartOffset, NoOfBytesPerLine, false );
+  return TDEBufferCoord( Index+StartOffset, NoOfBytesPerLine, false );
 }
 
 
 
-int KBufferLayout::correctIndex( int I ) const
+int TDEBufferLayout::correctIndex( int I ) const
 {
   return ( I <= 0 ) ?      0:
          ( I >= Length ) ? Length-1:
@@ -186,55 +186,55 @@ int KBufferLayout::correctIndex( int I ) const
 }
 
 
-KBufferCoord KBufferLayout::correctCoord( const KBufferCoord &C ) const
+TDEBufferCoord TDEBufferLayout::correctCoord( const TDEBufferCoord &C ) const
 {
   return ( C <= ContentCoords.start() ) ?  ContentCoords.start():
          ( C >= ContentCoords.end() ) ?    ContentCoords.end():
-         ( C.pos() >= NoOfBytesPerLine ) ? KBufferCoord( NoOfBytesPerLine-1, C.line() ):
+         ( C.pos() >= NoOfBytesPerLine ) ? TDEBufferCoord( NoOfBytesPerLine-1, C.line() ):
                                            C;
 }
 
 
-bool KBufferLayout::atLineStart( const KBufferCoord &C ) const
+bool TDEBufferLayout::atLineStart( const TDEBufferCoord &C ) const
 {
   return ( C.line() == ContentCoords.start().line() ) ? C.pos() == ContentCoords.start().pos():
                                                         C.pos() == 0;
 }
 
-bool KBufferLayout::atLineEnd( const KBufferCoord &C ) const
+bool TDEBufferLayout::atLineEnd( const TDEBufferCoord &C ) const
 {
   return ( C.line() == ContentCoords.end().line() ) ? C.pos() == ContentCoords.end().pos():
                                                       C.pos() == NoOfBytesPerLine-1;
 }
 
 
-KSection KBufferLayout::positions( int Line ) const
+KSection TDEBufferLayout::positions( int Line ) const
 {
   return KSection( firstPos(Line), lastPos(Line) );
 }
 
 
-int KBufferLayout::firstPos( const KBufferCoord &C ) const
+int TDEBufferLayout::firstPos( const TDEBufferCoord &C ) const
 {
   return ( ContentCoords.start().isLaterInLineThan(C) ) ? ContentCoords.start().pos() : C.pos();
 }
 
-int KBufferLayout::lastPos( const KBufferCoord &C ) const
+int TDEBufferLayout::lastPos( const TDEBufferCoord &C ) const
 {
   return ( ContentCoords.end().isPriorInLineThan(C) ) ? ContentCoords.end().pos() : C.pos();
 }
 
-int KBufferLayout::firstPos( int Line ) const
+int TDEBufferLayout::firstPos( int Line ) const
 {
   return Line == ContentCoords.start().line() ? ContentCoords.start().pos() : 0;
 }
 
-int KBufferLayout::lastPos( int Line ) const
+int TDEBufferLayout::lastPos( int Line ) const
 {
   return ( Line == ContentCoords.end().line() ) ? ContentCoords.end().pos() : NoOfBytesPerLine-1;
 }
 
-bool KBufferLayout::hasContent( int Line ) const
+bool TDEBufferLayout::hasContent( int Line ) const
 {
   return ContentCoords.includesLine( Line );
 }

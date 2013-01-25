@@ -69,9 +69,9 @@ static const int InsertCursorWidth = 2;
 KHexEdit::KHexEdit( KDataBuffer *Buffer, TQWidget *Parent, const char *Name, WFlags Flags )
  : KColumnsView( Parent, Name, Flags ),
    DataBuffer( Buffer ),
-   BufferLayout( new KBufferLayout(DefaultNoOfBytesPerLine,DefaultStartOffset,0) ),
-   BufferCursor( new KBufferCursor(BufferLayout) ),
-   BufferRanges( new KBufferRanges(BufferLayout) ),
+   BufferLayout( new TDEBufferLayout(DefaultNoOfBytesPerLine,DefaultStartOffset,0) ),
+   BufferCursor( new TDEBufferCursor(BufferLayout) ),
+   BufferRanges( new TDEBufferRanges(BufferLayout) ),
    CursorBlinkTimer( new TQTimer(this) ),
    ScrollTimer( new TQTimer(this) ),
    DragStartTimer( new TQTimer(this) ),
@@ -178,7 +178,7 @@ const TQString &KHexEdit::encodingName()        const { return Codec->name(); }
 KSection KHexEdit::selection()                 const { return BufferRanges->selection(); }
 int KHexEdit::cursorPosition()                 const { return BufferCursor->index(); }
 bool KHexEdit::isCursorBehind()                const { return BufferCursor->isBehind(); }
-KHexEdit::KBufferColumnId KHexEdit::cursorColumn() const
+KHexEdit::TDEBufferColumnId KHexEdit::cursorColumn() const
 { return static_cast<KHE::KValueColumn *>( ActiveColumn ) == &valueColumn()? ValueColumnId : CharColumnId; }
 
 void KHexEdit::setOverwriteOnly( bool OO )    { OverWriteOnly = OO; if( OverWriteOnly ) setOverwriteMode( true ); }
@@ -810,7 +810,7 @@ TQByteArray KHexEdit::selectedData() const
 }
 
 
-KBufferDrag *KHexEdit::dragObject( TQWidget *Parent ) const
+TDEBufferDrag *KHexEdit::dragObject( TQWidget *Parent ) const
 {
   if( !BufferRanges->hasSelection() )
     return 0;
@@ -835,7 +835,7 @@ KBufferDrag *KHexEdit::dragObject( TQWidget *Parent ) const
     Range.set( BufferLayout->coordOfIndex(S.start()),BufferLayout->coordOfIndex(S.end()) );
   }
 
-  return new KBufferDrag( selectedData(), Range, OC, HC, TC,
+  return new TDEBufferDrag( selectedData(), Range, OC, HC, TC,
                           charColumn().substituteChar(), charColumn().undefinedChar(),
                           Codec->name(), Parent );
 }
@@ -846,7 +846,7 @@ void KHexEdit::cut()
   if( isReadOnly() || OverWrite )
     return;
 
-  KBufferDrag *Drag = dragObject();
+  TDEBufferDrag *Drag = dragObject();
   if( !Drag )
     return;
 
@@ -858,7 +858,7 @@ void KHexEdit::cut()
 
 void KHexEdit::copy()
 {
-  KBufferDrag *Drag = dragObject();
+  TDEBufferDrag *Drag = dragObject();
   if( !Drag )
     return;
 
@@ -878,11 +878,11 @@ void KHexEdit::paste()
 
 void KHexEdit::pasteFromSource( TQMimeSource *Source )
 {
-  if( !Source || !KBufferDrag::canDecode(Source) )
+  if( !Source || !TDEBufferDrag::canDecode(Source) )
     return;
 
   TQByteArray Data;
-  if( !KBufferDrag::decode(Source,Data) )
+  if( !TDEBufferDrag::decode(Source,Data) )
     return;
 
   if( !Data.isEmpty() )
@@ -1091,7 +1091,7 @@ void KHexEdit::showBufferColumns( int CCs )
   // active column not visible anymore?
   if( !activeColumn().isVisible() )
   {
-    KBufferColumn *H = ActiveColumn;
+    TDEBufferColumn *H = ActiveColumn;
     ActiveColumn = InactiveColumn;
     InactiveColumn = H;
     Controller = ReadOnly ? (KController*)Navigator :
@@ -1102,7 +1102,7 @@ void KHexEdit::showBufferColumns( int CCs )
 }
 
 
-void KHexEdit::setCursorColumn( KBufferColumnId CC )
+void KHexEdit::setCursorColumn( TDEBufferColumnId CC )
 {
   // no changes or not visible?
   if( CC == cursorColumn()
@@ -1149,7 +1149,7 @@ void KHexEdit::placeCursor( const TQPoint &Point )
       cursorColumn() == CharColumnId ? (KController*)CharEditor : (KController*)ValueEditor;
 
   // get coord of click and whether this click was closer to the end of the pos
-  KBufferCoord C( activeColumn().magPosOfX(Point.x()), lineAt(Point.y()) );
+  TDEBufferCoord C( activeColumn().magPosOfX(Point.x()), lineAt(Point.y()) );
 
   BufferCursor->gotoCCoord( C );
 }
@@ -1157,13 +1157,13 @@ void KHexEdit::placeCursor( const TQPoint &Point )
 
 int KHexEdit::indexByPoint( const TQPoint &Point ) const
 {
-  const KBufferColumn *C;
+  const TDEBufferColumn *C;
   if( charColumn().isVisible() && Point.x() >= charColumn().x() )
     C = &charColumn();
   else
     C = &valueColumn();
 
-  KBufferCoord Coord( C->posOfX(Point.x()), lineAt(Point.y()) );
+  TDEBufferCoord Coord( C->posOfX(Point.x()), lineAt(Point.y()) );
 
   return BufferLayout->indexAtCCoord( Coord );
 }
@@ -1300,7 +1300,7 @@ void KHexEdit::createCursorPixmaps()
 }
 
 
-void KHexEdit::pointPainterToCursor( TQPainter &Painter, const KBufferColumn &Column ) const
+void KHexEdit::pointPainterToCursor( TQPainter &Painter, const TDEBufferColumn &Column ) const
 {
   int x = Column.xOfPos( BufferCursor->pos() ) - contentsX();
   int y = LineHeight * BufferCursor->line() - contentsY();
@@ -1357,10 +1357,10 @@ void KHexEdit::paintInactiveCursor( bool CursorOn )
   pointPainterToCursor( Painter, inactiveColumn() );
   if( CursorOn )
   {
-    KBufferColumn::KFrameStyle Style =
-      BufferCursor->isBehind() ? KBufferColumn::Right :
-      (OverWrite||ValueEditor->isInEditMode()) ? KBufferColumn::Frame :
-      KBufferColumn::Left;
+    TDEBufferColumn::KFrameStyle Style =
+      BufferCursor->isBehind() ? TDEBufferColumn::Right :
+      (OverWrite||ValueEditor->isInEditMode()) ? TDEBufferColumn::Frame :
+      TDEBufferColumn::Left;
     inactiveColumn().paintFramedByte( &Painter, Index, Style );
   }
   else
@@ -1408,9 +1408,9 @@ void KHexEdit::repaintChanged()
   KPixelXs Xs( contentsX(), visibleWidth(), true );
 
   // collect affected buffer columns
-  TQPtrList<KBufferColumn> RepaintColumns;
+  TQPtrList<TDEBufferColumn> RepaintColumns;
 
-  KBufferColumn *C = ValueColumn;
+  TDEBufferColumn *C = ValueColumn;
   while( true )
   {
     if( C->isVisible() && C->overlaps(Xs) )
@@ -1441,24 +1441,24 @@ void KHexEdit::repaintChanged()
 
       // only one line?
       if( ChangedRange.start().line() == ChangedRange.end().line() )
-        for( KBufferColumn *C=RepaintColumns.first(); C; C=RepaintColumns.next() )
+        for( TDEBufferColumn *C=RepaintColumns.first(); C; C=RepaintColumns.next() )
           paintLine( C, ChangedRange.start().line(),
                      KSection(ChangedRange.start().pos(),ChangedRange.end().pos()) );
       //
       else
       {
         // first line
-        for( KBufferColumn *C=RepaintColumns.first(); C; C=RepaintColumns.next() )
+        for( TDEBufferColumn *C=RepaintColumns.first(); C; C=RepaintColumns.next() )
           paintLine( C, ChangedRange.start().line(),
                      KSection(ChangedRange.start().pos(),FullPositions.end()) );
 
         // at least one full line?
         for( int l = ChangedRange.start().line()+1; l < ChangedRange.end().line(); ++l )
-          for( KBufferColumn *C=RepaintColumns.first(); C; C=RepaintColumns.next() )
+          for( TDEBufferColumn *C=RepaintColumns.first(); C; C=RepaintColumns.next() )
             paintLine( C, l, FullPositions );
 
         // last line
-        for( KBufferColumn *C=RepaintColumns.first(); C; C=RepaintColumns.next() )
+        for( TDEBufferColumn *C=RepaintColumns.first(); C; C=RepaintColumns.next() )
           paintLine( C, ChangedRange.end().line(),
                      KSection(FullPositions.start(),ChangedRange.end().pos()) );
       }
@@ -1482,7 +1482,7 @@ void KHexEdit::repaintChanged()
 }
 
 
-void KHexEdit::paintLine( KBufferColumn *C, int Line, KSection Positions )
+void KHexEdit::paintLine( TDEBufferColumn *C, int Line, KSection Positions )
 {
   Positions.restrictTo( C->visiblePositions() );
 
@@ -1648,7 +1648,7 @@ void KHexEdit::contentsMouseReleaseEvent( TQMouseEvent *e )
   {
     int Line = lineAt( e->pos().y() );
     int Pos = activeColumn().posOfX( e->pos().x() ); // TODO: can we be sure here about the active column?
-    int Index = BufferLayout->indexAtCCoord( KBufferCoord(Pos,Line) ); // TODO: can this be another index than the one of the cursor???
+    int Index = BufferLayout->indexAtCCoord( TDEBufferCoord(Pos,Line) ); // TODO: can this be another index than the one of the cursor???
     emit clicked( Index );
   }
 
@@ -1835,7 +1835,7 @@ void KHexEdit::startDrag()
 void KHexEdit::contentsDragEnterEvent( TQDragEnterEvent *e )
 {
   // interesting for this widget?
-  if( isReadOnly() || !KBufferDrag::canDecode(e) )
+  if( isReadOnly() || !TDEBufferDrag::canDecode(e) )
   {
     e->ignore();
     return;
@@ -1849,7 +1849,7 @@ void KHexEdit::contentsDragEnterEvent( TQDragEnterEvent *e )
 void KHexEdit::contentsDragMoveEvent( TQDragMoveEvent *e )
 {
   // is this content still interesting for us? 
-  if( isReadOnly() || !KBufferDrag::canDecode(e) )
+  if( isReadOnly() || !TDEBufferDrag::canDecode(e) )
   {
     e->ignore();
     return;
@@ -1882,7 +1882,7 @@ void KHexEdit::contentsDropEvent( TQDropEvent *e )
   InDnD = false;
   e->acceptAction();
 
-  if( !KBufferDrag::canDecode(e) ) //TODO: why do we acept the action still?
+  if( !TDEBufferDrag::canDecode(e) ) //TODO: why do we acept the action still?
     return;
 
   // is this an internal dnd?
@@ -1923,7 +1923,7 @@ void KHexEdit::handleInternalDrag( TQDropEvent *e )
   {
     // get data
     TQByteArray Data;
-    if( KBufferDrag::decode(e,Data) && !Data.isEmpty() )
+    if( TDEBufferDrag::decode(e,Data) && !Data.isEmpty() )
     {
       if( OverWrite )
       {

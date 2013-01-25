@@ -25,7 +25,7 @@
 using namespace KHE;
 
 KValueColTextExport::KValueColTextExport( const KValueColumn* HC, const char *D, KCoordRange CR )
-  : KBufferColTextExport( HC, D, CR, HC->byteCodec()->encodingWidth() ),
+  : TDEBufferColTextExport( HC, D, CR, HC->byteCodec()->encodingWidth() ),
    ByteCodec( KByteCodec::createCodec(HC->coding()) )
 {
 }

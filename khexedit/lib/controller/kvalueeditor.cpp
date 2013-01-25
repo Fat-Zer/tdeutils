@@ -27,7 +27,7 @@
 
 using namespace KHE;
 
-KValueEditor::KValueEditor( KValueColumn *VC, KBufferCursor *BC, KHexEdit* HE, KController *P )
+KValueEditor::KValueEditor( KValueColumn *VC, TDEBufferCursor *BC, KHexEdit* HE, KController *P )
   : KEditor( BC, HE, P ),
   ValueColumn( VC ),
   InEditMode( false ),

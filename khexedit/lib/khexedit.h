@@ -36,13 +36,13 @@ class KDataBuffer;
 
 class KCharColumn;
 class KValueColumn;
-class KBufferColumn;
+class TDEBufferColumn;
 class KOffsetColumn;
 class KBorderColumn;
 
-class KBufferCursor;
-class KBufferLayout;
-class KBufferRanges;
+class TDEBufferCursor;
+class TDEBufferLayout;
+class TDEBufferRanges;
 
 class KController;
 class KTabController;
@@ -50,7 +50,7 @@ class KNavigator;
 class KValueEditor;
 class KCharEditor;
 
-class KBufferDrag;
+class TDEBufferDrag;
 
 class KCursor;
 class KCharCodec;
@@ -114,7 +114,7 @@ class KHEXEDIT_EXPORT KHexEdit : public KColumnsView
     enum KEncoding { LocalEncoding=0, ISO8859_1Encoding=1, EBCDIC1047Encoding=2,
                      StartOfOwnEncoding=0x8000, MaxEncodingId=0xFFFF };
 
-    enum KBufferColumnId { ValueColumnId=1, CharColumnId=2 };
+    enum TDEBufferColumnId { ValueColumnId=1, CharColumnId=2 };
 
 
   public:
@@ -139,7 +139,7 @@ class KHEXEDIT_EXPORT KHexEdit : public KColumnsView
     int cursorPosition() const;
     /***/
     bool isCursorBehind() const;
-    KBufferColumnId cursorColumn() const;
+    TDEBufferColumnId cursorColumn() const;
 
     bool isOverwriteMode() const;
     bool isOverwriteOnly() const;
@@ -215,7 +215,7 @@ class KHEXEDIT_EXPORT KHexEdit : public KColumnsView
     /** puts the cursor in the column at the pos of Point (in absolute coord), does not handle the drawing */
     void placeCursor( const TQPoint &Point );
     /***/
-    void setCursorColumn( KBufferColumnId );
+    void setCursorColumn( TDEBufferColumnId );
 //    void repaintByte( int row, int column, bool Erase = true );
 //    void updateByte( int row, int column );
 //    void ensureByteVisible( int row, int column );
@@ -386,12 +386,12 @@ class KHEXEDIT_EXPORT KHexEdit : public KColumnsView
   protected: // element accessor functions
     KValueColumn& valueColumn();
     KCharColumn& charColumn();
-    KBufferColumn& activeColumn();
-    KBufferColumn& inactiveColumn();
+    TDEBufferColumn& activeColumn();
+    TDEBufferColumn& inactiveColumn();
     const KValueColumn& valueColumn()    const;
     const KCharColumn& charColumn()   const;
-    const KBufferColumn& activeColumn() const;
-    const KBufferColumn& inactiveColumn() const;
+    const TDEBufferColumn& activeColumn() const;
+    const TDEBufferColumn& inactiveColumn() const;
 
   protected: // atomic ui operations
     /** handles screen update in case of a change to any of the width sizes
@@ -404,15 +404,15 @@ class KHEXEDIT_EXPORT KHexEdit : public KColumnsView
     /** recreates the cursor pixmaps and paints active and inactive cursors if doable */
     void updateCursor();
     void createCursorPixmaps();
-    void pointPainterToCursor( TQPainter &Painter, const KBufferColumn &Column ) const;
+    void pointPainterToCursor( TQPainter &Painter, const TDEBufferColumn &Column ) const;
     /** draws the blinking cursor or removes it */
     void paintActiveCursor( bool CursorOn );
     void paintInactiveCursor( bool CursorOn );
-    void paintLine( KBufferColumn *C, int Line, KSection Positions );
+    void paintLine( TDEBufferColumn *C, int Line, KSection Positions );
 
   protected: // partial operations
     void handleMouseMove( const TQPoint& Point );
-    KBufferDrag *dragObject( TQWidget *Parent = 0 ) const;
+    TDEBufferDrag *dragObject( TQWidget *Parent = 0 ) const;
     void pasteFromSource( TQMimeSource *Source );
     /** removes the section from the databuffer and updates all affected values */
     KSection removeData( KSection Indizes );
@@ -453,11 +453,11 @@ class KHEXEDIT_EXPORT KHexEdit : public KColumnsView
     KDataBuffer *DataBuffer;
 
     /** holds the logical layout */
-    KBufferLayout *BufferLayout;
+    TDEBufferLayout *BufferLayout;
     /** */
-    KBufferCursor *BufferCursor;
+    TDEBufferCursor *BufferCursor;
     /** */
-    KBufferRanges *BufferRanges;
+    TDEBufferRanges *BufferRanges;
 
 
   protected:
@@ -468,9 +468,9 @@ class KHEXEDIT_EXPORT KHexEdit : public KColumnsView
     KCharColumn   *CharColumn;
 
     /** points to the column with keyboard focus */
-    KBufferColumn *ActiveColumn;
+    TDEBufferColumn *ActiveColumn;
     /** points to the column without keyboard focus (if there is) */
-    KBufferColumn *InactiveColumn;
+    TDEBufferColumn *InactiveColumn;
 
     /** the actual input controller */
     KController *Controller;
@@ -550,13 +550,13 @@ class KHEXEDIT_EXPORT KHexEdit : public KColumnsView
 
 inline const KValueColumn& KHexEdit::valueColumn()     const { return *ValueColumn; }
 inline const KCharColumn& KHexEdit::charColumn()       const { return *CharColumn; }
-inline const KBufferColumn& KHexEdit::activeColumn()   const { return *ActiveColumn; }
-inline const KBufferColumn& KHexEdit::inactiveColumn() const { return *InactiveColumn; }
+inline const TDEBufferColumn& KHexEdit::activeColumn()   const { return *ActiveColumn; }
+inline const TDEBufferColumn& KHexEdit::inactiveColumn() const { return *InactiveColumn; }
 
 inline KValueColumn& KHexEdit::valueColumn()     { return *ValueColumn; }
 inline KCharColumn& KHexEdit::charColumn()       { return *CharColumn; }
-inline KBufferColumn& KHexEdit::activeColumn()   { return *ActiveColumn; }
-inline KBufferColumn& KHexEdit::inactiveColumn() { return *InactiveColumn; }
+inline TDEBufferColumn& KHexEdit::activeColumn()   { return *ActiveColumn; }
+inline TDEBufferColumn& KHexEdit::inactiveColumn() { return *InactiveColumn; }
 
 }
 

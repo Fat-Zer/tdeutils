@@ -26,7 +26,7 @@
 namespace KHE
 {
 
-class KBufferCursor;
+class TDEBufferCursor;
 
 class KEditor : public KController
 {
@@ -34,7 +34,7 @@ class KEditor : public KController
     enum KEditAction { CharDelete, WordDelete, CharBackspace, WordBackspace };
 
   protected:
-    KEditor( KBufferCursor *BC, KHexEdit *HE, KController *P );
+    KEditor( TDEBufferCursor *BC, KHexEdit *HE, KController *P );
 
   public: // API
     virtual bool handleKeyPress( TQKeyEvent *KeyEvent );
@@ -44,7 +44,7 @@ class KEditor : public KController
     void doEditAction( KEditAction Action );
 
   protected:
-    KBufferCursor *BufferCursor;
+    TDEBufferCursor *BufferCursor;
 };
 
 }

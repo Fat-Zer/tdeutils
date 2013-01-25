@@ -32,36 +32,36 @@ namespace KHE
   * 
   * @author Friedrich W. H. Kossebau
   */
-class KBufferCoord
+class TDEBufferCoord
 {
   public:
     /** creates a coord with 0,0 */
-    KBufferCoord();
-    KBufferCoord( int P, int L );
-    KBufferCoord( int Index, int LineWidth, bool /*dummy*/ );
-    KBufferCoord( const KBufferCoord &C );
-    KBufferCoord &operator=( const KBufferCoord &c );
-    ~KBufferCoord();
+    TDEBufferCoord();
+    TDEBufferCoord( int P, int L );
+    TDEBufferCoord( int Index, int LineWidth, bool /*dummy*/ );
+    TDEBufferCoord( const TDEBufferCoord &C );
+    TDEBufferCoord &operator=( const TDEBufferCoord &c );
+    ~TDEBufferCoord();
 
 
   public: // logic
-    bool operator==( const KBufferCoord &c ) const;
-    bool operator!=( const KBufferCoord &c ) const;
-    bool operator<( const KBufferCoord &c ) const;
-    bool operator<=( const KBufferCoord &c ) const;
-    bool operator>( const KBufferCoord &c ) const;
-    bool operator>=( const KBufferCoord &c ) const;
+    bool operator==( const TDEBufferCoord &c ) const;
+    bool operator!=( const TDEBufferCoord &c ) const;
+    bool operator<( const TDEBufferCoord &c ) const;
+    bool operator<=( const TDEBufferCoord &c ) const;
+    bool operator>( const TDEBufferCoord &c ) const;
+    bool operator>=( const TDEBufferCoord &c ) const;
 
     /** tests if the coord is prior in the same line than the given coord.
      * If at least one of both is invalid the result is undefined.
      * @return true if the pos is left to the pos of C and both are in the same line, otherwise false.
      */
-    bool isPriorInLineThan( const KBufferCoord &C ) const;
+    bool isPriorInLineThan( const TDEBufferCoord &C ) const;
     /** tests if the coord is later in the same line than the given coord.
      * If at least one of both is invalid the result is undefined.
      * @return true if the pos is right to the pos of C and both are in the same line, otherwise false 
      */
-    bool isLaterInLineThan( const KBufferCoord &C ) const;
+    bool isLaterInLineThan( const TDEBufferCoord &C ) const;
     /** @return true if the line is below L, otherwise false */
     bool isBelow( int L ) const;
     /** @return true if the line is above L, otherwise false */
@@ -129,14 +129,14 @@ class KBufferCoord
       * If one or more of the coords is invalid the behaviour is undefined.
       * @param C a possible line start coord
       */
-    void goLineStart( const KBufferCoord &C );
+    void goLineStart( const TDEBufferCoord &C );
     /** sets the position to the given pos or 
       * if the line is the same as that of the given coord to the position of that. 
       * If one or more of the coords is invalid the behaviour is undefined.
       * @param L last position in normal line
       * @param C a possible line end coord
       */
-    void goLineEnd( int L, const KBufferCoord &C );
+    void goLineEnd( int L, const TDEBufferCoord &C );
     /** moves the coord 1 lines upwards. There is no check whether the first line is overstepped. */
     void goUp();
     /** moves the coord L lines downwards. */
@@ -166,56 +166,56 @@ class KBufferCoord
 };
 
 
-inline KBufferCoord::KBufferCoord() : Pos( 0 ), Line( 0 ) {}
-inline KBufferCoord::KBufferCoord( int P, int L ) : Pos( P ), Line( L ) {}
-inline KBufferCoord::KBufferCoord( int Index, int LineWidth, bool )
+inline TDEBufferCoord::TDEBufferCoord() : Pos( 0 ), Line( 0 ) {}
+inline TDEBufferCoord::TDEBufferCoord( int P, int L ) : Pos( P ), Line( L ) {}
+inline TDEBufferCoord::TDEBufferCoord( int Index, int LineWidth, bool )
 {
   Line = Index / LineWidth;
   Pos  = Index - Line*LineWidth;
 }
 
-inline KBufferCoord::KBufferCoord( const KBufferCoord &C ) : Pos( C.Pos ), Line( C.Line ) {}
-inline KBufferCoord &KBufferCoord::operator=( const KBufferCoord &C ) { Pos = C.Pos; Line = C.Line; return *this; }
-inline KBufferCoord::~KBufferCoord() {}
+inline TDEBufferCoord::TDEBufferCoord( const TDEBufferCoord &C ) : Pos( C.Pos ), Line( C.Line ) {}
+inline TDEBufferCoord &TDEBufferCoord::operator=( const TDEBufferCoord &C ) { Pos = C.Pos; Line = C.Line; return *this; }
+inline TDEBufferCoord::~TDEBufferCoord() {}
 
-inline bool KBufferCoord::operator==( const KBufferCoord &C ) const { return Pos == C.Pos && Line == C.Line; }
-inline bool KBufferCoord::operator!=( const KBufferCoord &C ) const { return !(*this == C); }
+inline bool TDEBufferCoord::operator==( const TDEBufferCoord &C ) const { return Pos == C.Pos && Line == C.Line; }
+inline bool TDEBufferCoord::operator!=( const TDEBufferCoord &C ) const { return !(*this == C); }
 
-inline bool KBufferCoord::operator<( const KBufferCoord &C ) const
+inline bool TDEBufferCoord::operator<( const TDEBufferCoord &C ) const
 { return Line < C.Line || (Line == C.Line && Pos<C.Pos); }
-inline bool KBufferCoord::operator<=( const KBufferCoord &C ) const
+inline bool TDEBufferCoord::operator<=( const TDEBufferCoord &C ) const
 { return Line < C.Line || (Line == C.Line && Pos<=C.Pos); }
-inline bool KBufferCoord::operator>( const KBufferCoord &C ) const
+inline bool TDEBufferCoord::operator>( const TDEBufferCoord &C ) const
 { return Line > C.Line || (Line == C.Line && Pos>C.Pos); }
-inline bool KBufferCoord::operator>=( const KBufferCoord &C ) const
+inline bool TDEBufferCoord::operator>=( const TDEBufferCoord &C ) const
 { return Line > C.Line || (Line == C.Line && Pos>=C.Pos); }
 
-inline int  KBufferCoord::pos()         const { return Pos; }
-inline int  KBufferCoord::line()        const { return Line; }
-inline bool KBufferCoord::isValid()     const { return Line >= 0 && Pos >= 0; }
+inline int  TDEBufferCoord::pos()         const { return Pos; }
+inline int  TDEBufferCoord::line()        const { return Line; }
+inline bool TDEBufferCoord::isValid()     const { return Line >= 0 && Pos >= 0; }
 
-inline void KBufferCoord::setByIndexNWidth( int Index, int LineWidth )
+inline void TDEBufferCoord::setByIndexNWidth( int Index, int LineWidth )
 {
   Line = Index / LineWidth;
   Pos  = Index - Line*LineWidth;
 }
 
-inline void KBufferCoord::set( int P, int L )
+inline void TDEBufferCoord::set( int P, int L )
 {
   Pos  = P;
   Line = L;
 }
-inline void KBufferCoord::setPos( int P )  { Pos  = P; }
-inline void KBufferCoord::setLine( int L ) { Line = L; }
+inline void TDEBufferCoord::setPos( int P )  { Pos  = P; }
+inline void TDEBufferCoord::setLine( int L ) { Line = L; }
 
-inline void KBufferCoord::goCRight( int MaxPos )
+inline void TDEBufferCoord::goCRight( int MaxPos )
 {
   if( isBeforeLineEnd(MaxPos) )
     goRight();
   else
     gotoStartOfNextLine();
 }
-inline void KBufferCoord::goCLeft( int MaxPos )
+inline void TDEBufferCoord::goCLeft( int MaxPos )
 {
   if( isBehindLineStart() )
     goLeft();
@@ -223,69 +223,69 @@ inline void KBufferCoord::goCLeft( int MaxPos )
     gotoEndOfPreviousLine( MaxPos );
 }
 
-inline void KBufferCoord::goRight() { ++Pos; }
-inline void KBufferCoord::goLeft()  { --Pos; }
-inline void KBufferCoord::goRight( unsigned int P ) { Pos += P; }
-inline void KBufferCoord::goLeft( unsigned int P )  { Pos -= P; }
+inline void TDEBufferCoord::goRight() { ++Pos; }
+inline void TDEBufferCoord::goLeft()  { --Pos; }
+inline void TDEBufferCoord::goRight( unsigned int P ) { Pos += P; }
+inline void TDEBufferCoord::goLeft( unsigned int P )  { Pos -= P; }
 
-inline void KBufferCoord::gotoStart() { Pos = Line = 0; }
+inline void TDEBufferCoord::gotoStart() { Pos = Line = 0; }
 
-inline void KBufferCoord::gotoEndOfPreviousLine( int LastPos )
+inline void TDEBufferCoord::gotoEndOfPreviousLine( int LastPos )
 {
   --Line;
   Pos = LastPos;
 }
 
-inline void KBufferCoord::gotoStartOfNextLine()
+inline void TDEBufferCoord::gotoStartOfNextLine()
 {
   ++Line;
   Pos = 0;
 }
 
 
-inline void KBufferCoord::goLineStart( const KBufferCoord &C )
+inline void TDEBufferCoord::goLineStart( const TDEBufferCoord &C )
 {
   Pos = ( Line == C.Line ) ? C.Pos : 0;
 }
 
-inline void KBufferCoord::goLineEnd( int L, const KBufferCoord &C )
+inline void TDEBufferCoord::goLineEnd( int L, const TDEBufferCoord &C )
 {
   Pos = ( Line == C.Line ) ? C.Pos : L;
 }
 
-inline void KBufferCoord::goUp()           { --Line; }
-inline void KBufferCoord::goDown()         { ++Line; }
-inline void KBufferCoord::goUp( unsigned int L )    { Line -= L; }
-inline void KBufferCoord::goDown( unsigned int L )  { Line += L; }
+inline void TDEBufferCoord::goUp()           { --Line; }
+inline void TDEBufferCoord::goDown()         { ++Line; }
+inline void TDEBufferCoord::goUp( unsigned int L )    { Line -= L; }
+inline void TDEBufferCoord::goDown( unsigned int L )  { Line += L; }
 
 
-inline int KBufferCoord::indexByLineWidth( int LineWidth ) const
+inline int TDEBufferCoord::indexByLineWidth( int LineWidth ) const
 {
   return Line * LineWidth + Pos;
 }
 
 
-inline bool KBufferCoord::isPriorInLineThan( const KBufferCoord &C ) const
+inline bool TDEBufferCoord::isPriorInLineThan( const TDEBufferCoord &C ) const
 {
   return Line == C.Line && Pos < C.Pos;
 }
 
-inline bool KBufferCoord::isLaterInLineThan( const KBufferCoord &C ) const
+inline bool TDEBufferCoord::isLaterInLineThan( const TDEBufferCoord &C ) const
 {
   return Line == C.Line && Pos > C.Pos;
 }
 
-inline bool KBufferCoord::isBelow( int L ) const { return Line > L; }
-inline bool KBufferCoord::isAbove( int L ) const { return Line < L; }
+inline bool TDEBufferCoord::isBelow( int L ) const { return Line > L; }
+inline bool TDEBufferCoord::isAbove( int L ) const { return Line < L; }
 
-inline bool KBufferCoord::isBehindLineStart()           const { return Pos > 0; }
-inline bool KBufferCoord::isBeforeLineEnd( int MaxPos ) const { return Pos < MaxPos; }
+inline bool TDEBufferCoord::isBehindLineStart()           const { return Pos > 0; }
+inline bool TDEBufferCoord::isBeforeLineEnd( int MaxPos ) const { return Pos < MaxPos; }
 
-inline bool KBufferCoord::isAtStart()                   const { return Pos == 0 && Line == 0; }
+inline bool TDEBufferCoord::isAtStart()                   const { return Pos == 0 && Line == 0; }
 
-inline KBufferCoord operator+( const KBufferCoord &C, int p )
+inline TDEBufferCoord operator+( const TDEBufferCoord &C, int p )
 {
-  return KBufferCoord( C.pos()+p, C.line() );
+  return TDEBufferCoord( C.pos()+p, C.line() );
 }
 
 }

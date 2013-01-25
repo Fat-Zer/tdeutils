@@ -28,12 +28,12 @@ using namespace KHE;
 static const int DefaultTEByteSpacingWidth = 1;
 static const int TEGroupSpacingWidth = 3;
 
-TQString KBufferColTextExport::whiteSpace( uint s )
+TQString TDEBufferColTextExport::whiteSpace( uint s )
 {
   return TQString().fill( ' ', s );
 }
 
-KBufferColTextExport::KBufferColTextExport( const KBufferColumn* BufferColumn, const char *D,
+TDEBufferColTextExport::TDEBufferColTextExport( const TDEBufferColumn* BufferColumn, const char *D,
                                             KCoordRange CR, int ByteWidth )
  : Data( D ),
    CoordRange( CR )
@@ -74,19 +74,19 @@ KBufferColTextExport::KBufferColTextExport( const KBufferColumn* BufferColumn, c
 }
 
 
-KBufferColTextExport::~KBufferColTextExport()
+TDEBufferColTextExport::~TDEBufferColTextExport()
 {
   delete [] Pos;
 }
 
 
-int KBufferColTextExport::charsPerLine() const
+int TDEBufferColTextExport::charsPerLine() const
 {
   return NoOfCharsPerLine;
 }
 
 
-void KBufferColTextExport::printFirstLine( TQString &T, int Line ) const
+void TDEBufferColTextExport::printFirstLine( TQString &T, int Line ) const
 {
   PrintLine = Line;
   PrintData = Data;
@@ -94,13 +94,13 @@ void KBufferColTextExport::printFirstLine( TQString &T, int Line ) const
 }
 
 
-void KBufferColTextExport::printNextLine( TQString &T ) const
+void TDEBufferColTextExport::printNextLine( TQString &T ) const
 {
   print( T );
 }
 
 
-void KBufferColTextExport::print( TQString &T ) const
+void TDEBufferColTextExport::print( TQString &T ) const
 {
   T.append( whiteSpace(NoOfCharsPerLine) );
   ++PrintLine;

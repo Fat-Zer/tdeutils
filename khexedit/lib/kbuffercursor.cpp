@@ -23,7 +23,7 @@
 
 using namespace KHE;
 
-KBufferCursor::KBufferCursor( const KBufferLayout *L )
+TDEBufferCursor::TDEBufferCursor( const TDEBufferLayout *L )
  : Layout( L ),
    Index( 0 ),
    Coord( 0, 0 ),
@@ -32,18 +32,18 @@ KBufferCursor::KBufferCursor( const KBufferLayout *L )
 {
 }
 
-KBufferCursor::~KBufferCursor()
+TDEBufferCursor::~TDEBufferCursor()
 {
 }
 
 
-bool KBufferCursor::operator==( const KBufferCursor &C ) const
+bool TDEBufferCursor::operator==( const TDEBufferCursor &C ) const
 {
   return Index == C.Index && Behind == C.Behind ;
 }
 
 
-void KBufferCursor::setAppendPosEnabled( bool APE )
+void TDEBufferCursor::setAppendPosEnabled( bool APE )
 {
   if( AppendPosEnabled == APE )
     return;
@@ -70,7 +70,7 @@ void KBufferCursor::setAppendPosEnabled( bool APE )
 }
 
 
-void KBufferCursor::gotoPreviousByte()
+void TDEBufferCursor::gotoPreviousByte()
 {
   if( Behind )
     Behind = false;
@@ -82,7 +82,7 @@ void KBufferCursor::gotoPreviousByte()
 }
 
 
-void KBufferCursor::gotoPreviousByte( int D )
+void TDEBufferCursor::gotoPreviousByte( int D )
 {
   if( Behind )
   {
@@ -99,7 +99,7 @@ void KBufferCursor::gotoPreviousByte( int D )
 }
 
 
-void KBufferCursor::gotoNextByte()
+void TDEBufferCursor::gotoNextByte()
 {
   int Length = Layout->length();
 
@@ -117,7 +117,7 @@ void KBufferCursor::gotoNextByte()
 }
 
 
-void KBufferCursor::gotoNextByte( int D ) // TODO: think about consistency with gotoNextByte!!!
+void TDEBufferCursor::gotoNextByte( int D ) // TODO: think about consistency with gotoNextByte!!!
 {
   if( Behind )
   {
@@ -132,7 +132,7 @@ void KBufferCursor::gotoNextByte( int D ) // TODO: think about consistency with 
 }
 
 
-void KBufferCursor::gotoNextByteInLine()
+void TDEBufferCursor::gotoNextByteInLine()
 {
   int Length = Layout->length();
 
@@ -153,7 +153,7 @@ void KBufferCursor::gotoNextByteInLine()
 }
 
 
-void KBufferCursor::gotoUp()
+void TDEBufferCursor::gotoUp()
 {
   // can we even go up?
   if( Coord.isBelow(Layout->startLine()) )
@@ -179,7 +179,7 @@ void KBufferCursor::gotoUp()
 }
 
 
-void KBufferCursor::gotoDown()
+void TDEBufferCursor::gotoDown()
 {
   if( Coord.isAbove(Layout->finalLine()) )
   {
@@ -193,7 +193,7 @@ void KBufferCursor::gotoDown()
 }
 
 
-void KBufferCursor::gotoLineStart()
+void TDEBufferCursor::gotoLineStart()
 {
   int OldIndex = Index;
   Index = Layout->indexAtLineStart( Coord.line() );
@@ -202,7 +202,7 @@ void KBufferCursor::gotoLineStart()
 }
 
 
-void KBufferCursor::gotoLineEnd()
+void TDEBufferCursor::gotoLineEnd()
 {
   if( Index < Layout->length() )
   {
@@ -215,7 +215,7 @@ void KBufferCursor::gotoLineEnd()
 }
 
 
-void KBufferCursor::gotoStart()
+void TDEBufferCursor::gotoStart()
 {
   Index = 0;
   Coord = Layout->start();
@@ -223,7 +223,7 @@ void KBufferCursor::gotoStart()
 }
 
 
-void KBufferCursor::gotoEnd()
+void TDEBufferCursor::gotoEnd()
 {
   int Length = Layout->length();
   if( Length > 0 )
@@ -238,7 +238,7 @@ void KBufferCursor::gotoEnd()
 }
 
 
-void KBufferCursor::gotoCIndex( int i )
+void TDEBufferCursor::gotoCIndex( int i )
 {
   if( Layout->length() > 0 )
   {
@@ -254,7 +254,7 @@ void KBufferCursor::gotoCIndex( int i )
 }
 
 
-void KBufferCursor::gotoCCoord( const KBufferCoord &C )
+void TDEBufferCursor::gotoCCoord( const TDEBufferCoord &C )
 {
   if( Layout->length() > 0 )
   {
@@ -270,7 +270,7 @@ void KBufferCursor::gotoCCoord( const KBufferCoord &C )
 }
 
 
-void KBufferCursor::stepToEnd()
+void TDEBufferCursor::stepToEnd()
 {
   if( AppendPosEnabled && (Coord.pos() < Layout->noOfBytesPerLine()-1) )
   {
@@ -283,7 +283,7 @@ void KBufferCursor::stepToEnd()
 }
 
 
-void KBufferCursor::gotoIndex( int i )
+void TDEBufferCursor::gotoIndex( int i )
 {
   Index = i;
   Coord = Layout->coordOfIndex( Index );
@@ -291,7 +291,7 @@ void KBufferCursor::gotoIndex( int i )
 }
 
 
-void KBufferCursor::gotoRealIndex()
+void TDEBufferCursor::gotoRealIndex()
 {
   if( Behind )
   {
@@ -302,7 +302,7 @@ void KBufferCursor::gotoRealIndex()
 }
 
 
-void KBufferCursor::gotoCoord( const KBufferCoord &C )
+void TDEBufferCursor::gotoCoord( const TDEBufferCoord &C )
 {
   Index = Layout->indexAtCoord( C );
   Coord = C;
@@ -310,14 +310,14 @@ void KBufferCursor::gotoCoord( const KBufferCoord &C )
 }
 
 
-void KBufferCursor::updateCoord()
+void TDEBufferCursor::updateCoord()
 {
   Coord = Layout->coordOfIndex( Index );
 }
 
 // page down should be: one page minus one line
 // -> if in the very first line page down will put the cursor on the same page into the last line
-void KBufferCursor::gotoPageUp()
+void TDEBufferCursor::gotoPageUp()
 {
   int NoOfLinesPerPage = Layout->noOfLinesPerPage();
   int NewIndex = Index - NoOfLinesPerPage * Layout->noOfBytesPerLine();
@@ -337,7 +337,7 @@ void KBufferCursor::gotoPageUp()
 }
 
 
-void KBufferCursor::gotoPageDown()
+void TDEBufferCursor::gotoPageDown()
 {
   int NoOfLinesPerPage = Layout->noOfLinesPerPage();
   int NewIndex = Index + NoOfLinesPerPage * Layout->noOfBytesPerLine();
@@ -351,15 +351,15 @@ void KBufferCursor::gotoPageDown()
 }
 
 
-int KBufferCursor::validIndex()       const { return Index < Layout->length() ? Index : -1; }
-int KBufferCursor::indexAtLineStart() const { return Layout->indexAtLineStart( Coord.line() ); }
-int KBufferCursor::indexAtLineEnd()   const { return Layout->indexAtLineEnd( Coord.line() ); }
+int TDEBufferCursor::validIndex()       const { return Index < Layout->length() ? Index : -1; }
+int TDEBufferCursor::indexAtLineStart() const { return Layout->indexAtLineStart( Coord.line() ); }
+int TDEBufferCursor::indexAtLineEnd()   const { return Layout->indexAtLineEnd( Coord.line() ); }
 
 
-bool KBufferCursor::atStart()     const { return Index == 0; }
-bool KBufferCursor::atEnd()       const { return Index == Layout->length() - 1; }
-bool KBufferCursor::atAppendPos() const { return realIndex() >= Layout->length(); }
+bool TDEBufferCursor::atStart()     const { return Index == 0; }
+bool TDEBufferCursor::atEnd()       const { return Index == Layout->length() - 1; }
+bool TDEBufferCursor::atAppendPos() const { return realIndex() >= Layout->length(); }
 
 
-bool KBufferCursor::atLineStart() const { return Layout->atLineStart( Coord ); }
-bool KBufferCursor::atLineEnd()   const { return Layout->atLineEnd( Coord ); }
+bool TDEBufferCursor::atLineStart() const { return Layout->atLineStart( Coord ); }
+bool TDEBufferCursor::atLineEnd()   const { return Layout->atLineEnd( Coord ); }

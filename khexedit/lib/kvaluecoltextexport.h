@@ -28,7 +28,7 @@ namespace KHE
 class KValueColumn;
 
 
-class KValueColTextExport : public KBufferColTextExport
+class KValueColTextExport : public TDEBufferColTextExport
 {
   public:
     KValueColTextExport( const KValueColumn* BF, const char *D, KCoordRange CR );

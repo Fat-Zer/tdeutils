@@ -23,19 +23,19 @@
 
 using namespace KHE;
 
-KBufferRanges::KBufferRanges( KBufferLayout *L )
+TDEBufferRanges::TDEBufferRanges( TDEBufferLayout *L )
  : Modified( false ),
    Layout( L )
 {
 }
 
 
-KBufferRanges::~KBufferRanges()
+TDEBufferRanges::~TDEBufferRanges()
 {
 }
 
 
-void KBufferRanges::reset()
+void TDEBufferRanges::reset()
 {
   Selection.cancel();
   FirstWordSelection.unset();
@@ -44,7 +44,7 @@ void KBufferRanges::reset()
 }
 
 
-void KBufferRanges::setMarking( KSection M )
+void TDEBufferRanges::setMarking( KSection M )
 {
   if( Marking == M )
     return;
@@ -54,14 +54,14 @@ void KBufferRanges::setMarking( KSection M )
 }
 
 
-void KBufferRanges::removeFurtherSelections()
+void TDEBufferRanges::removeFurtherSelections()
 {
   for( int i = 1; i < noOfSelections(); ++i )
     removeSelection( i );
 }
 
 
-void KBufferRanges::setSelection( KSection S )
+void TDEBufferRanges::setSelection( KSection S )
 {
   bool Changed = Selection.isValid();
   if( Changed )
@@ -70,7 +70,7 @@ void KBufferRanges::setSelection( KSection S )
   addChangedRange( Selection );
 }
 
-void KBufferRanges::setSelectionStart( int StartIndex )
+void TDEBufferRanges::setSelectionStart( int StartIndex )
 {
   bool Changed = Selection.isValid();
   if( Changed )
@@ -80,7 +80,7 @@ void KBufferRanges::setSelectionStart( int StartIndex )
 }
 
 
-void KBufferRanges::setSelectionEnd( int EndIndex )
+void TDEBufferRanges::setSelectionEnd( int EndIndex )
 {
   KSection OldSelection = Selection;
   Selection.setEnd( EndIndex );
@@ -143,7 +143,7 @@ void KBufferRanges::setSelectionEnd( int EndIndex )
 }
 
 
-void KBufferRanges::removeSelection( int id )
+void TDEBufferRanges::removeSelection( int id )
 {
   if( id > 0 )
     return;
@@ -157,7 +157,7 @@ void KBufferRanges::removeSelection( int id )
 }
 
 
-bool KBufferRanges::overlapsSelection( int FirstIndex, int LastIndex, int *SI, int *EI ) const
+bool TDEBufferRanges::overlapsSelection( int FirstIndex, int LastIndex, int *SI, int *EI ) const
 {
   if( Selection.overlaps(KSection(FirstIndex,LastIndex)) )
   {
@@ -169,7 +169,7 @@ bool KBufferRanges::overlapsSelection( int FirstIndex, int LastIndex, int *SI, i
 }
 
 
-bool KBufferRanges::overlapsMarking( int FirstIndex, int LastIndex, int *SI, int *EI ) const
+bool TDEBufferRanges::overlapsMarking( int FirstIndex, int LastIndex, int *SI, int *EI ) const
 {
   if( Marking.overlaps(KSection(FirstIndex,LastIndex)) )
   {
@@ -181,7 +181,7 @@ bool KBufferRanges::overlapsMarking( int FirstIndex, int LastIndex, int *SI, int
 }
 
 
-const KSection *KBufferRanges::firstOverlappingSelection( KSection Range ) const
+const KSection *TDEBufferRanges::firstOverlappingSelection( KSection Range ) const
 {
   if( Selection.overlaps(Range) )
     return &Selection;
@@ -190,7 +190,7 @@ const KSection *KBufferRanges::firstOverlappingSelection( KSection Range ) const
 }
 
 
-const KSection *KBufferRanges::overlappingMarking( KSection Range ) const
+const KSection *TDEBufferRanges::overlappingMarking( KSection Range ) const
 {
   if( Marking.overlaps(Range) )
     return &Marking;
@@ -199,7 +199,7 @@ const KSection *KBufferRanges::overlappingMarking( KSection Range ) const
 }
 
 /*
-bool KBufferRanges::overlapsChanges( int FirstIndex, int LastIndex, int *SI, int *EI ) const
+bool TDEBufferRanges::overlapsChanges( int FirstIndex, int LastIndex, int *SI, int *EI ) const
 {
   for( KCoordRangeList::const_iterator S=ChangedRanges.begin(); S!=ChangedRanges.end(); ++S )
   {
@@ -214,7 +214,7 @@ bool KBufferRanges::overlapsChanges( int FirstIndex, int LastIndex, int *SI, int
   return false;
 }
 
-bool KBufferRanges::overlapsChanges( KSection Indizes, KSection *ChangedRange ) const
+bool TDEBufferRanges::overlapsChanges( KSection Indizes, KSection *ChangedRange ) const
 {
   for( KSectionList::const_iterator S=ChangedRanges.begin(); S!=ChangedRanges.end(); ++S )
   {
@@ -228,7 +228,7 @@ bool KBufferRanges::overlapsChanges( KSection Indizes, KSection *ChangedRange ) 
   return false;
 }
 */
-bool KBufferRanges::overlapsChanges( const KCoordRange &Range, KCoordRange *ChangedRange ) const
+bool TDEBufferRanges::overlapsChanges( const KCoordRange &Range, KCoordRange *ChangedRange ) const
 {
   // TODO: add a lastusedrange pointer for quicker access
   for( KCoordRangeList::const_iterator R=ChangedRanges.begin(); R!=ChangedRanges.end(); ++R )
@@ -244,19 +244,19 @@ bool KBufferRanges::overlapsChanges( const KCoordRange &Range, KCoordRange *Chan
 }
 
 
-void KBufferRanges::addChangedRange( int SI, int EI )
+void TDEBufferRanges::addChangedRange( int SI, int EI )
 {
   addChangedRange( KSection(SI,EI) );
 }
 
 
-void KBufferRanges::addChangedRange( KSection S )
+void TDEBufferRanges::addChangedRange( KSection S )
 {
   addChangedRange( KCoordRange(Layout->coordOfIndex(S.start()),Layout->coordOfIndex(S.end())) );
 }
 
 
-void KBufferRanges::addChangedRange( const KCoordRange &NewRange )
+void TDEBufferRanges::addChangedRange( const KCoordRange &NewRange )
 {
   ChangedRanges.addCoordRange( NewRange );
 
@@ -264,7 +264,7 @@ void KBufferRanges::addChangedRange( const KCoordRange &NewRange )
 }
 
 
-void KBufferRanges::removeMarking()
+void TDEBufferRanges::removeMarking()
 {
   bool Changed = Marking.isValid();
   if( Changed )
@@ -274,20 +274,20 @@ void KBufferRanges::removeMarking()
 }
 
 
-void KBufferRanges::resetChangedRanges()
+void TDEBufferRanges::resetChangedRanges()
 {
   ChangedRanges.clear();
   Modified = false;
 }
 
 
-void KBufferRanges::setFirstWordSelection( KSection Section )
+void TDEBufferRanges::setFirstWordSelection( KSection Section )
 {
   FirstWordSelection = Section;
   setSelection( FirstWordSelection );
 }
 
- void KBufferRanges::ensureWordSelectionForward( bool Forward )
+ void TDEBufferRanges::ensureWordSelectionForward( bool Forward )
  {
    // in the anchor not on the right side?
    if( Selection.isForward() != Forward )

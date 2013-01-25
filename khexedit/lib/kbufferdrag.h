@@ -37,18 +37,18 @@ typedef KColTextExport* KColTextExportPtr;
 /**
   *@author Friedrich W. H. Kossebau
   */
-class KBufferDrag : public TQDragObject
+class TDEBufferDrag : public TQDragObject
 {
     Q_OBJECT
   
 
   public:
     // TODO: make this call somewhat more generic
-    KBufferDrag( const TQByteArray &, KCoordRange Range,
+    TDEBufferDrag( const TQByteArray &, KCoordRange Range,
                  const KOffsetColumn *OC, const KValueColumn *HC, const KCharColumn *TC,
                  TQChar SC, TQChar UC, const TQString &CN,
                  TQWidget *Source = 0, const char *Name = 0 );
-    ~KBufferDrag();
+    ~TDEBufferDrag();
 
   public: // TQDragObject API
     virtual const char *format( int i ) const;

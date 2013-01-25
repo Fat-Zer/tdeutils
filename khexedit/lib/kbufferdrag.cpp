@@ -79,7 +79,7 @@ static TQTextCodec* codecForCharset( const TQCString& Desc )
 
 
 
-KBufferDrag::KBufferDrag( const TQByteArray &D, KCoordRange Range,
+TDEBufferDrag::TDEBufferDrag( const TQByteArray &D, KCoordRange Range,
                           const KOffsetColumn *OC, const KValueColumn *HC, const KCharColumn *TC,
                           TQChar SC, TQChar UC, const TQString &CN,
                           TQWidget *Source, const char *Name )
@@ -111,7 +111,7 @@ KBufferDrag::KBufferDrag( const TQByteArray &D, KCoordRange Range,
 }
 
 
-KBufferDrag::~KBufferDrag()
+TDEBufferDrag::~TDEBufferDrag()
 {
   for( uint i=0; i<NoOfCol; ++i )
     delete Columns[i];
@@ -119,13 +119,13 @@ KBufferDrag::~KBufferDrag()
 
 
 
-void KBufferDrag::setData( const TQByteArray &D )
+void TDEBufferDrag::setData( const TQByteArray &D )
 {
   Data = D;
 }
 
 
-const char *KBufferDrag::format( int i ) const
+const char *TDEBufferDrag::format( int i ) const
 {
   return( i == 0 ? OctetStream :
           i == 1 ? TextPlainUTF8 :
@@ -135,7 +135,7 @@ const char *KBufferDrag::format( int i ) const
 }
 
 
-TQByteArray KBufferDrag::encodedData( const char *Format ) const
+TQByteArray TDEBufferDrag::encodedData( const char *Format ) const
 {
   if( Format != 0 )
   {
@@ -214,7 +214,7 @@ TQByteArray KBufferDrag::encodedData( const char *Format ) const
 
 
 
-bool KBufferDrag::canDecode( const TQMimeSource* Source )
+bool TDEBufferDrag::canDecode( const TQMimeSource* Source )
 {
   bool c =( Source->provides(OctetStream) /*|| Source->provides(TextPlain)*/ );
   return c;
@@ -222,7 +222,7 @@ bool KBufferDrag::canDecode( const TQMimeSource* Source )
 }
 
 
-bool KBufferDrag::decode( const TQMimeSource* Source, TQByteArray &Dest )
+bool TDEBufferDrag::decode( const TQMimeSource* Source, TQByteArray &Dest )
 {
 //   Dest = Source->encodedData( MediaString );
 //   return Dest.size() != 0;

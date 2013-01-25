@@ -28,7 +28,7 @@
 
 using namespace KHE;
 
-KEditor::KEditor( KBufferCursor *BC, KHexEdit* HE, KController *P )
+KEditor::KEditor( TDEBufferCursor *BC, KHexEdit* HE, KController *P )
   : KController( HE, P ),
   BufferCursor( BC )
 {

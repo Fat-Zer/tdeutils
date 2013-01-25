@@ -28,14 +28,14 @@
 namespace KHE
 {
 
-class KBufferColumn;
+class TDEBufferColumn;
 
 
-class KBufferColTextExport : public KColTextExport
+class TDEBufferColTextExport : public KColTextExport
 {
   public:
-    KBufferColTextExport( const KBufferColumn* BF, const char *D, KCoordRange CR, int BytesWidth );
-    virtual ~KBufferColTextExport();
+    TDEBufferColTextExport( const TDEBufferColumn* BF, const char *D, KCoordRange CR, int BytesWidth );
+    virtual ~TDEBufferColTextExport();
 
   public: // API
     void printFirstLine( TQString &T, int Line ) const;

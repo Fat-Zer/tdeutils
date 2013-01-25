@@ -87,7 +87,7 @@ void KHexEditBrowserExtension::restoreState( TQDataStream &stream )
   HexEdit->setShowUnprintable( ShowUnprintable );
   HexEdit->setContentsPos( x, y );
   HexEdit->setCursorPosition( Position, CursorBehind );
-  HexEdit->setCursorColumn( (KHexEdit::KBufferColumnId)CursorColumn );
+  HexEdit->setCursorColumn( (KHexEdit::TDEBufferColumnId)CursorColumn );
 
   HexEditPart->fitActionSettings();
 }

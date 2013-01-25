@@ -29,7 +29,7 @@ class KCharColumn;
 class KCharEditor : public KEditor
 {
   public:
-    KCharEditor( KCharColumn *CC, KBufferCursor *BC, KHexEdit *HE, KController *P );
+    KCharEditor( KCharColumn *CC, TDEBufferCursor *BC, KHexEdit *HE, KController *P );
 
   public: // KEditor API
     virtual bool handleKeyPress( TQKeyEvent *KeyEvent );

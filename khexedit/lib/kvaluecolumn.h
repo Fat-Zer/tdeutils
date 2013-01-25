@@ -26,17 +26,17 @@
 namespace KHE
 {
 
-class KBufferRanges;
+class TDEBufferRanges;
 
 
 /** buffer column which displays the numerical values of the bytes
   *
   *@author Friedrich W. H. Kossebau
   */
-class KValueColumn : public KBufferColumn
+class KValueColumn : public TDEBufferColumn
 {
   public:
-    KValueColumn( KColumnsView *CV, KDataBuffer *B, KBufferLayout *L, KBufferRanges *R );
+    KValueColumn( KColumnsView *CV, KDataBuffer *B, TDEBufferLayout *L, TDEBufferRanges *R );
     virtual ~KValueColumn();
 
   public:
@@ -60,7 +60,7 @@ class KValueColumn : public KBufferColumn
     const KByteCodec *byteCodec() const;
 
 
-  protected: // KBufferColumn API
+  protected: // TDEBufferColumn API
     virtual void drawByte( TQPainter *P, char Byte, KHEChar B, const TQColor &Color ) const;
     virtual void recalcByteWidth();
 

@@ -27,21 +27,21 @@ namespace KHE
 {
 
 template<>
-inline const KBufferCoord KRange<KBufferCoord>::null()  const { return KBufferCoord(-1,-1);}
+inline const TDEBufferCoord KRange<TDEBufferCoord>::null()  const { return TDEBufferCoord(-1,-1);}
 
-typedef KRange<KBufferCoord> KBasicCoordRange;
+typedef KRange<TDEBufferCoord> KBasicCoordRange;
 
 /** describes a range in the buffercoord
   *@author Friedrich W. H.  Kossebau
   */
-class KCoordRange : public KRange<KBufferCoord>
+class KCoordRange : public KRange<TDEBufferCoord>
 {
   public:
     /** 
       * @param SC start coord
       * @param EC end coord
       */
-    KCoordRange( KBufferCoord SC, KBufferCoord EC );
+    KCoordRange( TDEBufferCoord SC, TDEBufferCoord EC );
     /** 
       * @param Pos start and end pos
       * @param Lines start and end line
@@ -77,9 +77,9 @@ class KCoordRange : public KRange<KBufferCoord>
 };
 
 
-inline KCoordRange::KCoordRange( KBufferCoord SC, KBufferCoord EC ) : KBasicCoordRange(SC,EC) {}
+inline KCoordRange::KCoordRange( TDEBufferCoord SC, TDEBufferCoord EC ) : KBasicCoordRange(SC,EC) {}
 inline KCoordRange::KCoordRange( KSection Pos, KSection Lines )
- : KBasicCoordRange( KBufferCoord(Pos.start(),Lines.start()), KBufferCoord(Pos.end(),Lines.end()) ) {}
+ : KBasicCoordRange( TDEBufferCoord(Pos.start(),Lines.start()), TDEBufferCoord(Pos.end(),Lines.end()) ) {}
 inline KCoordRange::KCoordRange()  {}
 inline KCoordRange::~KCoordRange() {}
 

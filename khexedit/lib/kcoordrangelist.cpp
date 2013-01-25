@@ -53,7 +53,7 @@ void KCoordRangeList::addCoordRange( KCoordRange NewCoordRange )
       // Start of the combined sections is the smaller one
       NewCoordRange.extendStartTo( (*S).start() );
       // next we search all the overlapping sections and keep the highest end index
-      KBufferCoord End((*S).end());
+      TDEBufferCoord End((*S).end());
       iterator LS = S;
       for( ++LS; LS!=end(); ++LS )
       {

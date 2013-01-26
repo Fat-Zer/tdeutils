@@ -23,7 +23,7 @@
  */
 
 #include <kdialogbase.h>
-#include <kparts/part.h>
+#include <tdeparts/part.h>
 
 class ArkViewer : public KDialogBase
 {

@@ -39,7 +39,7 @@ tde_add_library( ark_common STATIC_PIC
 
 tde_add_tdeinit_executable( ark AUTOMOC
   SOURCES main.cpp arkapp.cpp mainwindow.cpp
-  LINK ark_common-static khtml-shared
+  LINK ark_common-static tdehtml-shared
 )
 
 
@@ -49,12 +49,12 @@ tde_add_kpart( libarkpart AUTOMOC
   SOURCES ark_part.cpp arkfactory.cpp zip.cpp
     tar.cpp filelistview.cpp arch.cpp lha.cpp
     compressedfile.cpp zoo.cpp rar.cpp ar.cpp
-    arkutils.cpp archiveformatdlg.cpp
+    artdeutils.cpp archiveformatdlg.cpp
     arkwidget.cpp searchbar.cpp addition.ui
     extraction.ui general.ui arkviewer.cpp
     sevenzip.cpp extractiondialog.cpp ace.cpp
     tarlistingthread.cpp arj.cpp
-  LINK ark_common-static khtml-shared
+  LINK ark_common-static tdehtml-shared
   DESTINATION ${PLUGIN_INSTALL_DIR}
 )
 

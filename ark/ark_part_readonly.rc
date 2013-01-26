@@ -1,5 +1,5 @@
 <!DOCTYPE kpartgui>
-<kpartgui name="ark_kparts" version="7">
+<kpartgui name="ark_tdeparts" version="7">
 <ActionProperties>
     <Action name="select_all" icon="ark_selectall"/>
 </ActionProperties>

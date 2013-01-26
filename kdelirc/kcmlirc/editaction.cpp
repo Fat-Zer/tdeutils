@@ -342,7 +342,7 @@ void EditAction::updateDCOPObjects()
 	QCStringList theObjects = theClient->remoteObjects(nameProgramMap[theDCOPApplications->currentText()].utf8());
 	if(!theObjects.size() && theDCOPApplications->currentText() == (*theAction).program()) theDCOPObjects->insertItem((*theAction).object());
 	for(QCStringList::iterator j = theObjects.begin(); j != theObjects.end(); ++j)
-		if(*j != "ksycoca" && *j != "qt" && AddAction::getFunctions(nameProgramMap[theDCOPApplications->currentText()], *j).count())
+		if(*j != "tdesycoca" && *j != "qt" && AddAction::getFunctions(nameProgramMap[theDCOPApplications->currentText()], *j).count())
 			theDCOPObjects->insertItem(TQString::fromUtf8(*j));
 	updateDCOPFunctions();
 }

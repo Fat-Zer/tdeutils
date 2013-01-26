@@ -27,14 +27,14 @@ add_definitions(
 )
 
 
-##### kmultiformlistbox (static) ################
+##### tdemultiformlistbox (static) ################
 
-tde_add_library( kmultiformlistbox STATIC_PIC AUTOMOC
-  SOURCES ccp.cpp kmultiformlistboxentry.cpp
-    kmultiformlistbox.cpp
-    kmultiformlistbox-multivisible.cpp
-    kmultiformlistboxfactory.cpp indexWindow.cpp
-    kmultiformlistbox-windowed.cpp
+tde_add_library( tdemultiformlistbox STATIC_PIC AUTOMOC
+  SOURCES ccp.cpp tdemultiformlistboxentry.cpp
+    tdemultiformlistbox.cpp
+    tdemultiformlistbox-multivisible.cpp
+    tdemultiformlistboxfactory.cpp indexWindow.cpp
+    tdemultiformlistbox-windowed.cpp
     widgetwindow.cpp windowlistboxitem.cpp
 )
 
@@ -43,8 +43,8 @@ tde_add_library( kmultiformlistbox STATIC_PIC AUTOMOC
 
 install(
   FILES
-    kmultiformlistbox.h
-    kmultiformlistboxentry.h
-    kmultiformlistboxfactory.h
+    tdemultiformlistbox.h
+    tdemultiformlistboxentry.h
+    tdemultiformlistboxfactory.h
   DESTINATION ${INCLUDE_INSTALL_DIR}
 )

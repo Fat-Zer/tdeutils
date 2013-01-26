@@ -352,7 +352,7 @@ void AddAction::updateObjects()
 
 		QCStringList theObjects = theClient->remoteObjects(*i);
 		for(QCStringList::iterator j = theObjects.begin(); j != theObjects.end(); ++j)
-			if(*j != "ksycoca" && *j != "qt")// && getFunctions(*i, *j).count())
+			if(*j != "tdesycoca" && *j != "qt")// && getFunctions(*i, *j).count())
 				new KListViewItem(a, *j);
 	}
 	updateFunctions();

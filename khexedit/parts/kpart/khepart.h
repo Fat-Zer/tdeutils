@@ -19,7 +19,7 @@
 #define KHEPART_H
 
 // kde specific
-#include <kparts/part.h>
+#include <tdeparts/part.h>
 // app specific
 #include "kbigbuffer.h"
 

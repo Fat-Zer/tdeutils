@@ -1,15 +1,15 @@
 AM_CPPFLAGS = -DQT_NO_CAST_ASCII
-noinst_LTLIBRARIES  = libkmultiformlistbox.la
+noinst_LTLIBRARIES  = libtdemultiformlistbox.la
 
 INCLUDES= -I$(srcdir)/../KWidgetStreamer $(all_includes)
 
-include_HEADERS = kmultiformlistboxentry.h kmultiformlistbox.h \
-	kmultiformlistboxfactory.h 
-noinst_HEADERS = ccp.h indexWindow.h kmultiformlistbox-multivisible.h \
-	kmultiformlistbox-windowed.h widgetwindow.h windowlistboxitem.h
-libkmultiformlistbox_la_SOURCES = ccp.cpp kmultiformlistboxentry.cpp \
-	kmultiformlistbox.cpp kmultiformlistbox-multivisible.cpp \
-	kmultiformlistboxfactory.cpp indexWindow.cpp \
-	kmultiformlistbox-windowed.cpp widgetwindow.cpp windowlistboxitem.cpp
+include_HEADERS = tdemultiformlistboxentry.h tdemultiformlistbox.h \
+	tdemultiformlistboxfactory.h 
+noinst_HEADERS = ccp.h indexWindow.h tdemultiformlistbox-multivisible.h \
+	tdemultiformlistbox-windowed.h widgetwindow.h windowlistboxitem.h
+libtdemultiformlistbox_la_SOURCES = ccp.cpp tdemultiformlistboxentry.cpp \
+	tdemultiformlistbox.cpp tdemultiformlistbox-multivisible.cpp \
+	tdemultiformlistboxfactory.cpp indexWindow.cpp \
+	tdemultiformlistbox-windowed.cpp widgetwindow.cpp windowlistboxitem.cpp
 
 METASOURCES = AUTO

@@ -16,7 +16,7 @@
  *  Boston, MA 02110-1301, USA.
  **/
 #include "kwidgetstreamer.h"
-#include "kmultiformlistbox.h"
+#include "tdemultiformlistbox.h"
 #include <tqobjectlist.h>
 #include <tqvariant.h>
 

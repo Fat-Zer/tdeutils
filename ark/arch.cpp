@@ -47,7 +47,7 @@
 // ark includes
 #include "arch.h"
 #include "arkwidget.h"
-#include "arkutils.h"
+#include "artdeutils.h"
 #include "filelistview.h"
 
 // the archive types

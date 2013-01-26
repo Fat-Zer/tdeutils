@@ -44,7 +44,7 @@
 #include <kprinter.h>
 #include <ksavefile.h>
 #include <kstatusbar.h>
-#include <kspell.h>
+#include <tdespell.h>
 #include <kurldrag.h>
 
 #include "ktextfiledlg.h"
@@ -61,8 +61,8 @@ TQPtrList<TopLevel> *TopLevel::windowList = 0;
 int default_open =  TopLevel::OPEN_READWRITE;
 
 TopLevel::TopLevel (TQWidget *, const char *name)
-  : KMainWindow ( 0,name ), kspellconfigOptions(0),
-  eframe(0), newWindow(false), kspell(0)
+  : KMainWindow ( 0,name ), tdespellconfigOptions(0),
+  eframe(0), newWindow(false), tdespell(0)
 {
   if (!windowList)
   {
@@ -385,24 +385,24 @@ void TopLevel::spellcheck()
 {
   if (!eframe) return;
 
-  if (kspell) return; // In progress
+  if (tdespell) return; // In progress
 
   statusBar()->changeItem(i18n("Spellcheck:  Started."), ID_GENERAL);
 
   initSpellConfig();
-  kspell = new KSpell(this, i18n("Spellcheck"), TQT_TQOBJECT(this),
-	TQT_SLOT( spell_started(KSpell *)), kspellconfigOptions);
+  tdespell = new KSpell(this, i18n("Spellcheck"), TQT_TQOBJECT(this),
+	TQT_SLOT( spell_started(KSpell *)), tdespellconfigOptions);
 
-  connect (kspell, TQT_SIGNAL ( death()),
+  connect (tdespell, TQT_SIGNAL ( death()),
           this, TQT_SLOT ( spell_finished( )));
 
-  connect (kspell, TQT_SIGNAL (progress (unsigned int)),
+  connect (tdespell, TQT_SIGNAL (progress (unsigned int)),
           this, TQT_SLOT (spell_progress (unsigned int)));
-  connect (kspell, TQT_SIGNAL (misspelling (const TQString &, const TQStringList &, unsigned int)),
+  connect (tdespell, TQT_SIGNAL (misspelling (const TQString &, const TQStringList &, unsigned int)),
           eframe, TQT_SLOT (misspelling (const TQString &, const TQStringList &, unsigned int)));
-  connect (kspell, TQT_SIGNAL (corrected (const TQString &, const TQString &, unsigned int)),
+  connect (tdespell, TQT_SIGNAL (corrected (const TQString &, const TQString &, unsigned int)),
           eframe, TQT_SLOT (corrected (const TQString &, const TQString &, unsigned int)));
-  connect (kspell, TQT_SIGNAL (done(const TQString&)),
+  connect (tdespell, TQT_SIGNAL (done(const TQString&)),
 		 this, TQT_SLOT (spell_done(const TQString&)));
 }
 
@@ -410,8 +410,8 @@ void TopLevel::spellcheck()
 void TopLevel::spell_started( KSpell *)
 {
    eframe->spellcheck_start();
-   kspell->setProgressResolution(2);
-   kspell->check(eframe->text());
+   tdespell->setProgressResolution(2);
+   tdespell->check(eframe->text());
 }
 
 
@@ -427,7 +427,7 @@ void TopLevel::spell_progress (unsigned int percent)
 void TopLevel::spell_done(const TQString& newtext)
 {
   eframe->spellcheck_stop();
-  if (kspell->dlgResult() == 0)
+  if (tdespell->dlgResult() == 0)
   {
      eframe->setText( newtext);
      statusBar()->changeItem (i18n("Spellcheck:  Aborted."), ID_GENERAL);
@@ -436,7 +436,7 @@ void TopLevel::spell_done(const TQString& newtext)
   {
      statusBar()->changeItem (i18n("Spellcheck:  Complete."), ID_GENERAL);
   }
-  kspell->cleanUp();
+  tdespell->cleanUp();
 }
 
 // Replace ISpell with the name of the actual spell checker.
@@ -455,10 +455,10 @@ TQString TopLevel::replaceISpell(TQString msg, int client)
 
 void TopLevel::spell_finished( )
 {
-  KSpell::spellStatus status = kspell->status();
-  int client = kspellconfigOptions->client();
-  delete kspell;
-  kspell = 0;
+  KSpell::spellStatus status = tdespell->status();
+  int client = tdespellconfigOptions->client();
+  delete tdespell;
+  tdespell = 0;
   if (status == KSpell::Error)
   {
      KMessageBox::sorry(this, replaceISpell(i18n("ISpell could not be started.\n"
@@ -831,7 +831,7 @@ void TopLevel::showSettings()
     return;
 
   initSpellConfig();
-  TDEConfigDialog* dialog = new SettingsDialog(this, "settings", Prefs::self(), kspellconfigOptions);
+  TDEConfigDialog* dialog = new SettingsDialog(this, "settings", Prefs::self(), tdespellconfigOptions);
 
   connect(dialog, TQT_SIGNAL(settingsChanged()), this, TQT_SLOT(updateSettings()));
   dialog->show();
@@ -839,8 +839,8 @@ void TopLevel::showSettings()
 
 void TopLevel::initSpellConfig()
 {
-  if (!kspellconfigOptions)
-     kspellconfigOptions = new KSpellConfig(0 , "SpellingSettings", 0, false );
+  if (!tdespellconfigOptions)
+     tdespellconfigOptions = new KSpellConfig(0 , "SpellingSettings", 0, false );
 }
 
 void TopLevel::search_again()

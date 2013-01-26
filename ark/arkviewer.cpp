@@ -22,7 +22,7 @@
 #include "arkviewer.h"
 
 #include <klocale.h>
-#include <kparts/componentfactory.h>
+#include <tdeparts/componentfactory.h>
 #include <kmimetype.h>
 #include <kdebug.h>
 #include <kurl.h>

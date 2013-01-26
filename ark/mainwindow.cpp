@@ -32,8 +32,8 @@
 #include <kfiledialog.h>
 #include <kmessagebox.h>
 #include <kpopupmenu.h>
-#include <kparts/componentfactory.h>
-#include <kparts/browserextension.h>
+#include <tdeparts/componentfactory.h>
+#include <tdeparts/browserextension.h>
 #include <kkeydialog.h>
 #include <kcombobox.h>
 #include <kio/netaccess.h>

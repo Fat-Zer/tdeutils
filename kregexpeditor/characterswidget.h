@@ -24,7 +24,7 @@
 #include <kdialogbase.h>
 #endif
 
-#include <kmultiformlistbox.h>
+#include <tdemultiformlistbox.h>
 #include "regexpwidget.h"
 #include <tqvgroupbox.h>
 

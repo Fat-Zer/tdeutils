@@ -31,12 +31,12 @@ HEADERS += altnregexp.h \
            gen_qregexpparser.hh \
            indexWindow.h \
            infopage.h \
-           kmultiformlistbox-multivisible.h \
-           kmultiformlistbox-shower.h \
-           kmultiformlistbox-windowed.h \
-           kmultiformlistbox.h \
-           kmultiformlistboxentry.h \
-           kmultiformlistboxfactory.h \
+           tdemultiformlistbox-multivisible.h \
+           tdemultiformlistbox-shower.h \
+           tdemultiformlistbox-windowed.h \
+           tdemultiformlistbox.h \
+           tdemultiformlistboxentry.h \
+           tdemultiformlistboxfactory.h \
            kregexpeditorgui.h \
            kregexpeditorprivate.h \
            kwidgetstreamer.h \
@@ -96,11 +96,11 @@ SOURCES += altnregexp.cpp \
            gen_qregexplexer.cpp \
            indexWindow.cpp \
            infopage.cpp \
-           kmultiformlistbox-multivisible.cpp \
-           kmultiformlistbox-windowed.cpp \
-           kmultiformlistbox.cpp \
-           kmultiformlistboxentry.cpp \
-           kmultiformlistboxfactory.cpp \
+           tdemultiformlistbox-multivisible.cpp \
+           tdemultiformlistbox-windowed.cpp \
+           tdemultiformlistbox.cpp \
+           tdemultiformlistboxentry.cpp \
+           tdemultiformlistboxfactory.cpp \
            kregexpeditorgui.cpp \
            kregexpeditorprivate.cpp \
            kwidgetstreamer.cpp \

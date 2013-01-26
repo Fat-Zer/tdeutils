@@ -48,7 +48,7 @@
 #include <kurlpixmapprovider.h>
 #include <kdebug.h>
 
-#include "arkutils.h"
+#include "artdeutils.h"
 #include "settings.h"
 
 ExtractionDialog::ExtractionDialog( TQWidget *parent, const char *name,

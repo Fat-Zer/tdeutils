@@ -29,7 +29,7 @@ link_directories(
 tde_add_kpart( libkhexedit2part AUTOMOC
   SOURCES khepart.cpp khebrowserextension.cpp
     khepartfactory.cpp
-  LINK khexeditcommon-shared kparts-shared
+  LINK khexeditcommon-shared tdeparts-shared
   DESTINATION ${PLUGIN_INSTALL_DIR}
 )
 

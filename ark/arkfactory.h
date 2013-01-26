@@ -21,7 +21,7 @@
 
 #ifndef ARKFACTORY_H
 #define ARKFACTORY_H
-#include <kparts/factory.h>
+#include <tdeparts/factory.h>
 
 class ArkFactory : public KParts::Factory
 {

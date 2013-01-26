@@ -35,7 +35,7 @@
 #include <kservicetype.h>
 #include <kservice.h>
 #include <kconfig.h>
-#include <kparts/componentfactory.h>
+#include <tdeparts/componentfactory.h>
 
 #include "kmilointerface.h"
 #include "defaultskin.h"

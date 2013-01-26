@@ -426,7 +426,7 @@ void COptionDialog::setupFilePage( void )
 {
   TQString text;
   TQFrame *page = addPage( i18n("Files"), i18n("File Management"),
-			  BarIcon("kmultiple", KIcon::SizeMedium ) );
+			  BarIcon("tdemultiple", KIcon::SizeMedium ) );
 
   TQVBoxLayout *topLayout = new TQVBoxLayout( page, 0, spacingHint() );
 

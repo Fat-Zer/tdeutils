@@ -39,8 +39,8 @@
 #include <tdeversion.h>
 #include <kdirwatch.h>
 
-#include <kparts/componentfactory.h>
-#include <kparts/part.h>
+#include <tdeparts/componentfactory.h>
+#include <tdeparts/part.h>
 
 #include <tqdir.h>
 #include <tqwidgetlist.h>

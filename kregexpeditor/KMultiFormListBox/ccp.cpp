@@ -19,7 +19,7 @@
 // ccp = Cut-Copy-Paste
 //---------------------
 
-#include "kmultiformlistbox-multivisible.h"
+#include "tdemultiformlistbox-multivisible.h"
 #include "ccp.h"
 #include <tqobjectlist.h>
 #include <tqpopupmenu.h>

@@ -1,5 +1,5 @@
 <!DOCTYPE kpartgui>
-<kpartgui name="ark_kparts" version="8">
+<kpartgui name="ark_tdeparts" version="8">
 <ActionProperties>
     <Action name="select_all" icon="ark_selectall"/>
     <Action name="deselect_all" icon="ark_deselectall"/>

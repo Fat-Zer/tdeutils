@@ -29,7 +29,7 @@ link_directories(
 tde_add_kpart( libkbyteseditwidget AUTOMOC
   SOURCES kbyteseditwidget.cpp
   DESTINATION ${PLUGIN_INSTALL_DIR}
-  LINK khexeditcommon-shared kparts-shared
+  LINK khexeditcommon-shared tdeparts-shared
 )
 
 

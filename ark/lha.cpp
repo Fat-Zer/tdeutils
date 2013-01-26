@@ -49,7 +49,7 @@
 #include "settings.h"
 #include "arch.h"
 #include "lha.h"
-#include "arkutils.h"
+#include "artdeutils.h"
 #include "filelistview.h"
 
 LhaArch::LhaArch( ArkWidget *_gui, const TQString & _fileName )

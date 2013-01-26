@@ -39,7 +39,7 @@
 #include "sevenzip.h"
 #include "arkwidget.h"
 #include "settings.h"
-#include "arkutils.h"
+#include "artdeutils.h"
 #include "filelistview.h"
 
 SevenZipArch::SevenZipArch( ArkWidget *gui, const TQString &filename )

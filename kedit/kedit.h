@@ -117,7 +117,7 @@ protected:
     void initSpellConfig();
 
 private:
-    KSpellConfig *kspellconfigOptions;
+    KSpellConfig *tdespellconfigOptions;
     
 public:  // Should not be!
     KEdit *eframe;
@@ -138,7 +138,7 @@ private:
 
     TDEConfig *config;
 
-    KSpell *kspell; // Current spell checking object
+    KSpell *tdespell; // Current spell checking object
 
     /*
      * The source, the destination of the copy, and the open mode

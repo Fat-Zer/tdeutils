@@ -15,7 +15,7 @@ The code in this module is heavily based on:
     - the Thinkpad plug-in by Jonathan Riddell (jr@jriddell.org)
 
 Also, for the Dell specific implementations, code was taken from the 
-i8kutils package of Massimo Dal Zotto <dz@debian.org> which can be
+i8tdeutils package of Massimo Dal Zotto <dz@debian.org> which can be
 downloaded from http://www.debian.org/~dz/i8k/
 
 LICENSE:
@@ -42,7 +42,7 @@ COMPATIBILITY:
 
 This plug-in should work on any Linux distribution that has the i8k module
 loaded or compiled into the kernel. Compatibility is really dependant on
-the i8kutils package of Massimo Dal Zotto <dz@debian.org> which can be
+the i8tdeutils package of Massimo Dal Zotto <dz@debian.org> which can be
 downloaded from http://www.debian.org/~dz/i8k/. Currently (20041122), this
 should support:
 

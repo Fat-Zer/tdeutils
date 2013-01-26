@@ -77,7 +77,7 @@ tde_add_library( kregexpeditorcommon SHARED AUTOMOC
     emacsregexpconverter.cpp
     regexphighlighter.cpp util.cpp
   VERSION 1.0.0
-  LINK kio-shared kmultiformlistbox-static
+  LINK kio-shared tdemultiformlistbox-static
     kwidgetstreamer-static
   DESTINATION ${LIB_INSTALL_DIR}
 )

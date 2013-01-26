@@ -19,7 +19,7 @@
 #define KHEBROWSEREXTENSION_H
 
 // kde specific
-#include <kparts/browserextension.h>
+#include <tdeparts/browserextension.h>
 
 namespace KHE
 {

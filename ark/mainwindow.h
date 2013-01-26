@@ -31,8 +31,8 @@
 
 // KDE includes
 #include <kmainwindow.h>
-#include <kparts/mainwindow.h>
-#include <kparts/part.h>
+#include <tdeparts/mainwindow.h>
+#include <tdeparts/part.h>
 #include <kprogress.h>
 
 class ArkWidget;

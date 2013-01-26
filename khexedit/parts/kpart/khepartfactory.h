@@ -18,7 +18,7 @@
 #ifndef KHEPARTFACTORY_H
 #define KHEPARTFACTORY_H
 
-#include <kparts/factory.h>
+#include <tdeparts/factory.h>
 
 class TDEInstance;
 class TDEAboutData;

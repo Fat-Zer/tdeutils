@@ -23,10 +23,10 @@
 #ifndef ARK_PART_H
 #define ARK_PART_H
 
-#include <kparts/part.h>
-#include <kparts/browserextension.h>
-#include <kparts/statusbarextension.h>
-#include <kparts/factory.h>
+#include <tdeparts/part.h>
+#include <tdeparts/browserextension.h>
+#include <tdeparts/statusbarextension.h>
+#include <tdeparts/factory.h>
 #include <kaction.h>
 #include <kprogress.h>
 

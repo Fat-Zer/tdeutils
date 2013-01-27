@@ -1,6 +1,6 @@
 [Desktop Entry]
 Type=Application
-Exec=kcmshell kvaio
+Exec=tdecmshell kvaio
 Icon=laptop
 DocPath=kcontrol/kvaio/index.html
 

@@ -28,7 +28,7 @@
 #include <stdlib.h>
 #include <kuniqueapplication.h>
 #include <kcmdlineargs.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <kaboutdata.h>
 
 #include "KJotsMain.h"

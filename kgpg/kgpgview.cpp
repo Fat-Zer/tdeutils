@@ -25,7 +25,7 @@
 #include <tqscrollview.h>
 #include <tqregexp.h>
 
-#include <kio/netaccess.h>
+#include <tdeio/netaccess.h>
 #include <klocale.h>
 #include <kstdaction.h>
 #include <kurldrag.h>

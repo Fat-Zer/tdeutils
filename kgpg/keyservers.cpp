@@ -40,7 +40,7 @@
 #include <kprocio.h>
 #include <klistview.h>
 #include <kstatusbar.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <klineedit.h>
 #include <ksimpleconfig.h>
 #include <kaction.h>

@@ -30,10 +30,10 @@
 #include <kapplication.h>
 #include <kdebug.h>
 #include <kdialog.h>
-#include <kfiledialog.h>
+#include <tdefiledialog.h>
 #include <kiconview.h>
 #include <kinputdialog.h>
-#include <kio/netaccess.h>
+#include <tdeio/netaccess.h>
 #include <klistviewsearchline.h>
 #include <klocale.h>
 #include <kmdcodec.h>

@@ -29,7 +29,7 @@ link_directories(
 
 tde_add_executable( klaptop_acpi_helper
   SOURCES acpi_helper.cpp
-  LINK kio-shared
+  LINK tdeio-shared
   DESTINATION ${BIN_INSTALL_DIR}
 )
 
@@ -38,7 +38,7 @@ tde_add_executable( klaptop_acpi_helper
 
 tde_add_executable( klaptop_check
   SOURCES laptop_check.cpp
-  LINK kio-shared kcmlaptop-shared
+  LINK tdeio-shared kcmlaptop-shared
   DESTINATION ${BIN_INSTALL_DIR}
 )
 
@@ -49,7 +49,7 @@ tde_add_library( kcmlaptop SHARED AUTOMOC
   SOURCES portable.cpp smapidev.c
     daemon_state.cpp wake_laptop.cpp
     krichtextlabel.cpp
-  LINK kio-shared
+  LINK tdeio-shared
   VERSION 0.0.0
   DESTINATION ${LIB_INSTALL_DIR}
 )
@@ -62,7 +62,7 @@ tde_add_kpart( kcm_laptop AUTOMOC
     power.cpp warning.cpp acpi.cpp sony.cpp
     profile.cpp buttons.cpp apm.cpp 
     ${CMAKE_CURRENT_BINARY_DIR}/crcresult.h
-  LINK kio-shared kcmlaptop-shared
+  LINK tdeio-shared kcmlaptop-shared
   DESTINATION ${PLUGIN_INSTALL_DIR}
 )
 # crcresult.h header is included here cause it is
@@ -76,7 +76,7 @@ tde_add_kpart( kded_klaptopdaemon AUTOMOC
     xautolock.cc kpcmciainfo.cpp daemondock.cpp
     xautolock_diy.c xautolock_engine.c
     laptop_daemon.skel
-  LINK kio-shared kcmlaptop-shared 
+  LINK tdeio-shared kcmlaptop-shared 
     tdeinit_kded-shared ${XTEST_LIBRARIES} 
     ${XSCREENSAVER_LIBRARIES} ${XEXT_LIBRARIES}
   DESTINATION ${PLUGIN_INSTALL_DIR}

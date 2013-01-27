@@ -49,9 +49,9 @@
 #include <tqpopupmenu.h>
 
 #include <kurlrequester.h>
-#include <kio/netaccess.h>
+#include <tdeio/netaccess.h>
 #include <kurl.h>
-#include <kfiledialog.h>
+#include <tdefiledialog.h>
 #include <kshortcut.h>
 #include <kstdaccel.h>
 #include <klocale.h>

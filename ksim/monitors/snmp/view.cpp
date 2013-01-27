@@ -25,7 +25,7 @@
 
 #include <tqlayout.h>
 
-#include <kconfig.h>
+#include <tdeconfig.h>
 
 using namespace KSim::Snmp;
 

@@ -23,7 +23,7 @@
 #include <klocale.h>
 #include "verifybuttons.moc"
 #include <kstandarddirs.h>
-#include <kfiledialog.h>
+#include <tdefiledialog.h>
 #include <kiconloader.h>
 #include <kmessagebox.h>
 #endif

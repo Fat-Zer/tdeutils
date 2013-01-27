@@ -33,7 +33,7 @@
 #include <netwm.h>
 #include <kglobalsettings.h>
 #include <tdeversion.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 
 #include "defaultskin.h"
 

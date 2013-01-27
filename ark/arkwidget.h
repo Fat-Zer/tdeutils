@@ -30,7 +30,7 @@
 #ifndef ARKWIDGET_H
 #define ARKWIDGET_H
 
-#include <kio/job.h>
+#include <tdeio/job.h>
 #include <ktempdir.h>
 
 #include <tqvbox.h>

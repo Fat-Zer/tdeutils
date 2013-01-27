@@ -21,7 +21,7 @@
 #ifndef _HEX_TOOL_WIDGET_H_
 #define _HEX_TOOL_WIDGET_H_
 
-#include <kconfig.h>
+#include <tdeconfig.h>
 
 class TQGridLayout;
 class TQComboBox;

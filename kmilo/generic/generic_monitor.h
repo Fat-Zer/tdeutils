@@ -29,7 +29,7 @@
 #include <kglobalaccel.h>
 #include <dcopref.h>
 #include <kapplication.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 
 #include "kmilod.h"
 #include "monitor.h"

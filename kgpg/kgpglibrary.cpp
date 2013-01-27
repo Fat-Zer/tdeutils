@@ -20,7 +20,7 @@
 
 #include <klocale.h>
 #include <kapplication.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <kmessagebox.h>
 #include <krun.h>
 #include <tqfile.h>
@@ -29,7 +29,7 @@
 #include "kgpglibrary.h"
 #include "popuppublic.h"
 #include "kgpginterface.h"
-#include <kio/renamedlg.h>
+#include <tdeio/renamedlg.h>
 
 KgpgLibrary::KgpgLibrary(TQWidget *parent, bool pgpExtension)
 {

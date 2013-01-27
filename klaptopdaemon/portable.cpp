@@ -92,7 +92,7 @@
 #include <tqvaluevector.h>
 
 #include <kactivelabel.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <kstandarddirs.h>
 #include <kprocess.h>
 #include <krichtextlabel.h>

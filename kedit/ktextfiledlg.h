@@ -21,7 +21,7 @@
 #ifndef __KTEXTFILEDLG_H__
 #define __KTEXTFILEDLG_H__
 
-#include <kfiledialog.h>
+#include <tdefiledialog.h>
 
 class TQComboBox;
 class TQTextCodec;

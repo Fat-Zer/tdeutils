@@ -27,14 +27,14 @@
 
 
 /* compile with
-* gcc  -I$TQTDIR/include -I$TDEDIR/include   -L/opt/kde/lib -L/usr/X11R6/lib -lkfm -ltdeui -ltdecore -lqt -lX11 -lXext -fno-rtti kconftest.cpp                
+* gcc  -I$TQTDIR/include -I$TDEDIR/include   -L/opt/kde/lib -L/usr/X11R6/lib -lkfm -ltdeui -ltdecore -lqt -lX11 -lXext -fno-rtti tdeconftest.cpp                
 */
 
 
 #include <iostream>
 #include <tqstring.h>
 #include <tqdict.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <kdebug.h>
 #include <kapplication.h>
 #include <klocale.h>

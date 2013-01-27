@@ -23,7 +23,7 @@
 #include <kapplication.h>
 #include <kdebug.h>
 #include <kglobal.h>
-#include <kio/netaccess.h>
+#include <tdeio/netaccess.h>
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <kstandarddirs.h>

@@ -7,7 +7,7 @@
 #include "kcharselectdia.h"
 
 #include <kapplication.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <kcmdlineargs.h>
 #include <kaboutdata.h>
 #include <kglobalsettings.h>

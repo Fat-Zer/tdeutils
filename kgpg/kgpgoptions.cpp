@@ -23,7 +23,7 @@
 #include <tqlabel.h>
 #include <tqtoolbutton.h>
 #include <tqfile.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <tdeversion.h>
 #include <klocale.h>
 #include <kprocio.h>
@@ -37,7 +37,7 @@
 #include <kcombobox.h>
 #include <kurlrequester.h>
 #include <kiconloader.h>
-#include <kfiledialog.h>
+#include <tdefiledialog.h>
 #include <kinputdialog.h>
 #include <kfontdialog.h>
 #include <kdesktopfile.h>

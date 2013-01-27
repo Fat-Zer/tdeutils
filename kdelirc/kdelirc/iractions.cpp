@@ -10,7 +10,7 @@
 // Copyright: See COPYING file that comes with this distribution
 //
 //
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <kdebug.h>
 
 #include "iractions.h"

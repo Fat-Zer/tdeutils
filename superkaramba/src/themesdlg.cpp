@@ -36,7 +36,7 @@
 #include "superkarambasettings.h"
 #include <karchive.h>
 #include <kdebug.h>
-#include <kfiledialog.h>
+#include <tdefiledialog.h>
 #include <kpushbutton.h>
 #include <kstandarddirs.h>
 #include <kapplication.h>
@@ -48,7 +48,7 @@
 #include <tqlabel.h>
 #include <tqcombobox.h>
 #include <tqptrlist.h>
-#include <kio/job.h>
+#include <tdeio/job.h>
 #include <kprotocolinfo.h>
 
 ThemesDlg::ThemesDlg(TQWidget *parent, const char *name)
@@ -220,7 +220,7 @@ void ThemesDlg::getNewStuff()
   TDEConfig* config = TDEGlobal::config();
   config->setGroup("KNewStuff");
   config->writePathEntry("ProvidersUrl",
-      TQString::fromLatin1("http://download.kde.org/khotnewstuff/karamba-providers.xml"));
+      TQString::fromLatin1("http://download.kde.org/tdehotnewstuff/karamba-providers.xml"));
   config->sync();
   m_newStuffStatus = config->entryMap("KNewStuffStatus").keys();
   //This check is b/c KNewStuff will download, throw an error, 

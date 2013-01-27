@@ -43,8 +43,8 @@
 #include <kdebug.h>
 #include <klocale.h>
 #include <kmessagebox.h>
-#include <kio/netaccess.h>
-#include <kio/job.h>
+#include <tdeio/netaccess.h>
+#include <tdeio/job.h>
 #include <kopenwith.h>
 #include <ktempfile.h>
 #include <kmimemagic.h>
@@ -52,12 +52,12 @@
 #include <kstandarddirs.h>
 #include <ktempdir.h>
 #include <kprocess.h>
-#include <kfiledialog.h>
+#include <tdefiledialog.h>
 #include <kdirselectdialog.h>
 #include <kurldrag.h>
 #include <klistviewsearchline.h>
 #include <ktoolbar.h>
-#include <kconfigdialog.h>
+#include <tdeconfigdialog.h>
 #include <ktrader.h>
 #include <kurl.h>
 

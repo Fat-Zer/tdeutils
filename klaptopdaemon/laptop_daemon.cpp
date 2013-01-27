@@ -31,7 +31,7 @@
 
 #include <tqtimer.h>
 
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <klocale.h>
 #include <kcmdlineargs.h>
 #include "laptop_daemon.h"

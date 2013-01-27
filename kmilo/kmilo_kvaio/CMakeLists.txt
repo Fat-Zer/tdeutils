@@ -37,7 +37,7 @@ tde_add_library( kvaiodriverinterface STATIC_PIC AUTOMOC
 
 tde_add_kpart( kmilo_kvaio AUTOMOC
   SOURCES kmilo_kvaio.cpp kvaio.cpp
-  LINK kio-shared kmilo-shared 
+  LINK tdeio-shared kmilo-shared 
     kvaiodriverinterface-static
   DESTINATION ${PLUGIN_INSTALL_DIR}
 )

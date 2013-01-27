@@ -1,7 +1,7 @@
 [Desktop Entry]
 Icon=tdewalletmanager
 Type=Application
-Exec=kcmshell tdewalletconfig
+Exec=tdecmshell tdewalletconfig
 DocPath=tdewallet/index.html
 X-TDE-ModuleType=Library
 X-TDE-Library=tdewallet

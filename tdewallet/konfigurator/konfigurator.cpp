@@ -23,7 +23,7 @@
 #include <dcopref.h>
 #include <kaboutdata.h>
 #include <kapplication.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <kdialog.h>
 #include <kgenericfactory.h>
 #include <kinputdialog.h>

@@ -33,7 +33,7 @@
 #include <kgenericfactory.h>
 #include <kaboutdata.h>
 #include <kdebug.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <kurlrequester.h>
 #include <tdecmodule.h>
 

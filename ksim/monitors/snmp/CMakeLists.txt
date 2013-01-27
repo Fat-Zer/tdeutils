@@ -37,7 +37,7 @@ tde_add_kpart( ksim_snmp AUTOMOC
     snmplib.cpp pdu.cpp proberesultdialogbase.ui
     proberesultdialog.cpp browsedialogbase.ui
     browsedialog.cpp walker.cpp
-  LINK kio-shared ksimcore-shared
+  LINK tdeio-shared ksimcore-shared
     ${NETSNMP_LIBRARIES}
   DESTINATION ${PLUGIN_INSTALL_DIR}
 )

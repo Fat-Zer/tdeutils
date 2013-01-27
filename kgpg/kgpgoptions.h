@@ -17,7 +17,7 @@
 #ifndef KGPGOPTIONS_H
 #define KGPGOPTIONS_H
 
-#include <kconfigdialog.h>
+#include <tdeconfigdialog.h>
 
 #define GoodColor 0
 #define BadColor 1

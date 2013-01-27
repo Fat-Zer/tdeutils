@@ -20,7 +20,7 @@
 #ifndef KSIM_SNMP_H
 #define KSIM_SNMP_H
 
-#include <kconfigbase.h>
+#include <tdeconfigbase.h>
 
 #include <tqmap.h>
 

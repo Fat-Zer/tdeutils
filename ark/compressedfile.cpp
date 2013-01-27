@@ -40,9 +40,9 @@
 #include <ktempdir.h>
 #include <kprocess.h>
 #include <kmimetype.h>
-#include <kio/netaccess.h>
-#include <kio/global.h>
-#include <kfileitem.h>
+#include <tdeio/netaccess.h>
+#include <tdeio/global.h>
+#include <tdefileitem.h>
 #include <kapplication.h>
 #include <kglobal.h>
 

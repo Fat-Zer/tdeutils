@@ -39,7 +39,7 @@ tde_add_executable( khexedit AUTOMOC
     bitswapwidget.cc chartabledialog.cc
     hexdrag.cc exportdialog.cc fileinfodialog.cc
     converterdialog.cc listview.cc searchbar.cc
-  LINK kio-shared tdeprint-shared
+  LINK tdeio-shared tdeprint-shared
   DESTINATION ${BIN_INSTALL_DIR}
 )
 

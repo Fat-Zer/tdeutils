@@ -46,7 +46,7 @@
 	* further refactoring of configuration options for const buttons
 
 2004-12-05 Klaus Niederkrüger <kniederk@math.uni-koeln.de>
-	* understood how kconfigxt handles indexed configuration options
+	* understood how tdeconfigxt handles indexed configuration options
 
 2004-12-03 Klaus Niederkrüger <kniederk@math.uni-koeln.de>
 	* moving through history is now done via undo/redo

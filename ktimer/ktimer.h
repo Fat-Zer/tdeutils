@@ -22,7 +22,7 @@
 #include <tqdialog.h>
 #include <tqwidget.h>
 #include <kprocess.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 
 #include "prefwidget.h"
 

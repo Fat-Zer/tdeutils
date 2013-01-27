@@ -22,7 +22,7 @@
 */
 
 #include <kgenericfactory.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <krun.h>
 #include <kurl.h>
 

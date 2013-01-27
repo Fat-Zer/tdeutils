@@ -35,7 +35,7 @@
 #undef Unsorted
 
 #include <kapplication.h>
-#include <kfiledialog.h>
+#include <tdefiledialog.h>
 #include <kicondialog.h>
 #include <kmessagebox.h>
 

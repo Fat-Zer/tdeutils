@@ -28,7 +28,7 @@ link_directories(
 
 tde_add_kpart( ksim_net AUTOMOC
   SOURCES ksimnet.cpp netdialog.cpp netconfig.cpp
-  LINK ksimcore-shared kio-shared
+  LINK ksimcore-shared tdeio-shared
   DESTINATION ${PLUGIN_INSTALL_DIR}
 )
 

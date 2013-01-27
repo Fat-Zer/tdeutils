@@ -26,11 +26,11 @@
 #include <kaboutdata.h>
 #include <kcmdlineargs.h>
 #include <klocale.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <kmainwindow.h>
 #include <tqfileinfo.h>
 #include <tqstringlist.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <kstandarddirs.h>
 #include <tdeversion.h>
 

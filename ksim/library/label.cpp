@@ -34,7 +34,7 @@
 #include <kdebug.h>
 #include <kglobal.h>
 #include <kglobalsettings.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 
 class KSim::Label::Private
 {

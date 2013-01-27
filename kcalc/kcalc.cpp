@@ -47,8 +47,8 @@
 #include <kcmdlineargs.h>
 #include <kcolorbutton.h>
 #include <kcolordrag.h>
-#include <kconfig.h>
-#include <kconfigdialog.h>
+#include <tdeconfig.h>
+#include <tdeconfigdialog.h>
 #include <kdialog.h>
 #include <kfontdialog.h>
 #include <kglobal.h>

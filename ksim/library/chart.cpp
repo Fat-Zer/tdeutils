@@ -31,7 +31,7 @@
 #include <kdebug.h>
 #include <klocale.h>
 #include <kglobalsettings.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 
 #include <themeloader.h>
 #include <led.h>

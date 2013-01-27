@@ -43,7 +43,7 @@ tde_add_kpart( ksim_panelextension AUTOMOC
     ksimsysinfo.cpp ksimsysinfo.skel
     ksimframe.cpp ksimpref.cpp monitorprefs.cpp
     generalprefs.cpp themeprefs.cpp
-  LINK kio-shared ksimcore-shared systeminfo-static
+  LINK tdeio-shared ksimcore-shared systeminfo-static
   DESTINATION ${PLUGIN_INSTALL_DIR}
 )
 

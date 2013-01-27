@@ -28,7 +28,7 @@
 #include <tqgroupbox.h>
 #include <tqpushbutton.h>
 
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <klistview.h>
 #include <kmessagebox.h>
 #include <klocale.h>

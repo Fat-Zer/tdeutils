@@ -34,7 +34,7 @@ tde_add_kpart( kcm_kcmlirc AUTOMOC
     addaction.cpp kcmlirc.skel editactionbase.ui
     editmodebase.ui editmode.cpp editaction.cpp
     modeslist.cpp
-  LINK kdelirc-static tdeui-shared kio-shared
+  LINK kdelirc-static tdeui-shared tdeio-shared
   DESTINATION ${PLUGIN_INSTALL_DIR}
 )
 

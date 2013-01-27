@@ -26,7 +26,7 @@
 #include <kgenericfactory.h>
 #include <kdebug.h>
 #include <kprocess.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 
 #include <sys/types.h>
 #include <unistd.h>

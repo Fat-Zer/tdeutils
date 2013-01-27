@@ -25,7 +25,7 @@
 #include <klocale.h>
 #include <kaboutapplication.h>
 #include <kaboutdata.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 
 #include <tqlayout.h>
 

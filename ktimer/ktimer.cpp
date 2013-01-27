@@ -31,7 +31,7 @@
 #include <kiconloader.h>
 #include <kapplication.h>
 #include <ksystemtray.h>
-#include <kfiledialog.h>
+#include <tdefiledialog.h>
 
 #include "ktimer.h"
 #include <tqpushbutton.h>

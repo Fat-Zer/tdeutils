@@ -31,7 +31,7 @@
 
 // other KDE headers:
 #include <klocale.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <knuminput.h>
 #include <kiconloader.h>
 #include <kicondialog.h>

@@ -21,11 +21,11 @@
  ****************************************************************************/
 
 #include <kapplication.h>
-#include <kfiledialog.h>
+#include <tdefiledialog.h>
 #include <kaboutdata.h>
 #include <kcmdlineargs.h>
 #include <klocale.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 
 #include <tqfileinfo.h>
 #include <tqstringlist.h>
@@ -66,10 +66,10 @@ int main(int argc, char **argv)
 //     //      KSGRD::SensorMgr  foo ;//  p->engage( "" );
 
 
-//     //TDEConfig *kconfig = TDEGlobal::config();
-//     //kconfig->setGroup("karamba");
-//     //kconfig->writeEntry("test", "/home/hk/foofoo");
-//     //kconfig->sync();
+//     //TDEConfig *tdeconfig = TDEGlobal::config();
+//     //tdeconfig->setGroup("karamba");
+//     //tdeconfig->writeEntry("test", "/home/hk/foofoo");
+//     //tdeconfig->sync();
 
 
 //     bool OK = false;

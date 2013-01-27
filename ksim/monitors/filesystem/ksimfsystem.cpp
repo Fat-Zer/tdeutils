@@ -32,7 +32,7 @@
 #include <kaboutapplication.h>
 #include <kaboutdata.h>
 #include <kapplication.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 
 #include "ksimfsystem.h"
 #include "fsystemconfig.h"

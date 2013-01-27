@@ -35,7 +35,7 @@
 #include <kapplication.h>
 #include <klistview.h>
 #include <kinputdialog.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 
 #include <chart.h>
 #include <progress.h>

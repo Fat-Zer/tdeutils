@@ -13,7 +13,7 @@
 
 #include <tqvariant.h>
 
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <klocale.h>
 
 #include "iraction.h"

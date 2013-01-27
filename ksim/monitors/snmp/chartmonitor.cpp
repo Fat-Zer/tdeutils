@@ -18,7 +18,7 @@
 */
 #include "chartmonitor.h"
 
-#include <kio/global.h>
+#include <tdeio/global.h>
 
 using namespace KSim::Snmp;
 

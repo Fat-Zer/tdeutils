@@ -35,7 +35,7 @@
 #include <kstandarddirs.h>
 #include <ktempfile.h>
 
-#include <kio/job.h>
+#include <tdeio/job.h>
 #include <assert.h>
 
 #include "kjotsedit.h"

@@ -32,7 +32,7 @@ rc_DATA = kcalcui.rc
 messages: rc.cpp
 	$(XGETTEXT) *.cpp -o $(podir)/kcalc.pot
 
-updatedir = $(kde_datadir)/kconf_update
+updatedir = $(kde_datadir)/tdeconf_update
 update_DATA = kcalcrc.upd
 
 DOXYGEN_EMPTY = YES

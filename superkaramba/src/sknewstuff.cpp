@@ -20,8 +20,8 @@
 
 #include <kapplication.h>
 #include <kdebug.h>
-#include <kfilemetainfo.h>
-#include <kio/netaccess.h>
+#include <tdefilemetainfo.h>
+#include <tdeio/netaccess.h>
 #include <kmimetype.h>
 #include <krun.h>
 #include <kstandarddirs.h>

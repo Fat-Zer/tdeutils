@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <!DOCTYPE profile SYSTEM "profile.dtd">
-<profile id="klauncher">
+<profile id="tdelauncher">
 	<name>TDE Program Launcher</name>
 	<author>Gav Wood</author>
 	<action objid="default" prototype="void tdeinit_exec(QString, QStringList)" repeat="0" autostart="0">

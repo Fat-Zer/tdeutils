@@ -30,7 +30,7 @@ link_directories(
 
 tde_add_kpart( kmilo_thinkpad AUTOMOC
   SOURCES thinkpad.cpp
-  LINK kio-shared kmilo-shared
+  LINK tdeio-shared kmilo-shared
   DESTINATION ${PLUGIN_INSTALL_DIR}
 )
 

@@ -1,6 +1,6 @@
 [Desktop Entry]
 Type=Service
-Exec=kcmshell --caption %c tdewalletconfig
+Exec=tdecmshell --caption %c tdewalletconfig
 Icon=tdewalletmanager
 DocPath=tdewallet/index.html
 Name=TDE Wallet

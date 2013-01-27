@@ -26,7 +26,7 @@ link_directories(
 
 tde_add_kpart( kmilo_demo AUTOMOC
   SOURCES demo.cpp
-  LINK kio-shared
+  LINK tdeio-shared
   DESTINATION ${PLUGIN_INSTALL_DIR}
 )
 

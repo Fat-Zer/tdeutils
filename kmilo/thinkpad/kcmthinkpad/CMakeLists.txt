@@ -29,7 +29,7 @@ add_definitions(
 
 tde_add_kpart( kcm_thinkpad AUTOMOC
   SOURCES kcmthinkpad_general.ui main.cpp
-  LINK kio-shared
+  LINK tdeio-shared
   DESTINATION ${PLUGIN_INSTALL_DIR}
 )
 

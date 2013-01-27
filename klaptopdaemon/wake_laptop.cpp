@@ -21,7 +21,7 @@
  */
 
 #include <kprocess.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <kdatastream.h>
 #include <dcopclient.h>
 #include <kapplication.h>

@@ -22,7 +22,7 @@
 #else
   #include <klocale.h>
   #include <kmessagebox.h>
-//   #include <kfiledialog.h>
+//   #include <tdefiledialog.h>
   #include <kstandarddirs.h>
   #include <kiconloader.h>
   #include "editorwindow.moc"

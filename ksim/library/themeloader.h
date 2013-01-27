@@ -430,7 +430,7 @@ namespace KSim
        */
       void reColourImage(TQImage &image);
       /**
-       * changes some of the entries in the config file so kconfig
+       * changes some of the entries in the config file so tdeconfig
        * can handle the file better.
        * @return the location of the config file
        */

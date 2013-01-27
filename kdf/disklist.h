@@ -26,7 +26,7 @@
 #define __DISKLIST_H__
 
 #include <kdebug.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <klocale.h>
 //#include <kcontrol.h>
 

@@ -26,7 +26,7 @@
 #include <kdebug.h>
 #include <tqregexp.h>
 #include <tqpopupmenu.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 
 
 class KSim::PluginObject::Private

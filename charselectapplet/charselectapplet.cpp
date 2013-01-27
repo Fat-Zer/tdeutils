@@ -32,7 +32,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #include <klocale.h>
 #include <kglobal.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <klineedit.h>
 #include <kaboutapplication.h>
 

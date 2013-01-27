@@ -22,12 +22,12 @@
 #include <tqheader.h>
 #include <tqwidgetstack.h>
 
-#include <kio/netaccess.h>
+#include <tdeio/netaccess.h>
 
 #include <kaction.h>
 #include <kapplication.h>
 #include <kbookmarkmenu.h>
-#include <kconfigdialog.h>
+#include <tdeconfigdialog.h>
 #include <kdebug.h>
 #include <keditcl.h>
 #include <kencodingfiledialog.h>

@@ -28,7 +28,7 @@
 #include <kdebug.h>
 #include <kimageeffect.h>
 #include <ktempfile.h>
-#include <kio/job.h>
+#include <tdeio/job.h>
 #include "karambaapp.h"
 #include "imagelabel.h"
 

@@ -54,7 +54,7 @@ tde_add_executable( superkaramba AUTOMOC
     superkarambasettings.kcfgc themelocale.cpp
     input.cpp sklineedit.cpp input_python.cpp
     svcgrp_python.cpp
-  LINK kio-shared ${PYTHON_LIBRARIES} 
+  LINK tdeio-shared ${PYTHON_LIBRARIES} 
     ${KNEWSTUFF_LIBRARIES}
   DESTINATION ${BIN_INSTALL_DIR}
 )

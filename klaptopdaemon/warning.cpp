@@ -26,9 +26,9 @@
 #include "version.h"
 
 #include <klocale.h>
-#include <kfiledialog.h>
+#include <tdefiledialog.h>
 #include <kmessagebox.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <kurlrequester.h>
 #include <kapplication.h>
 #include <kcombobox.h>

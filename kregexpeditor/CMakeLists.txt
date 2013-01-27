@@ -41,7 +41,7 @@ add_definitions(
 
 tde_add_executable( kregexpeditor AUTOMOC
   SOURCES main.cpp
-  LINK kio-shared
+  LINK tdeio-shared
   DESTINATION ${BIN_INSTALL_DIR}
   LINK kregexpeditorcommon-shared
 )
@@ -77,7 +77,7 @@ tde_add_library( kregexpeditorcommon SHARED AUTOMOC
     emacsregexpconverter.cpp
     regexphighlighter.cpp util.cpp
   VERSION 1.0.0
-  LINK kio-shared tdemultiformlistbox-static
+  LINK tdeio-shared tdemultiformlistbox-static
     kwidgetstreamer-static
   DESTINATION ${LIB_INSTALL_DIR}
 )

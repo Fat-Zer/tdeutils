@@ -21,7 +21,7 @@
 #include <kapplication.h>
 #include <klocale.h>
 #include <kglobal.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <kicondialog.h>
 #include <kiconloader.h>
 #include <kdebug.h>

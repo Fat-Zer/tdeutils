@@ -30,7 +30,7 @@
 #include <kactivelabel.h>
 #include <tdeversion.h>
 #include <klocale.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <kapplication.h>
 #include <kmessagebox.h>
 #include <kcombobox.h>
@@ -40,7 +40,7 @@
 #include <kdebug.h>
 #include <kurlrequesterdlg.h>
 #include <klineedit.h>
-#include <kio/renamedlg.h>
+#include <tdeio/renamedlg.h>
 #include <kpassivepopup.h>
 #include <tqlayout.h>
 #include <tqbuttongroup.h>
@@ -57,7 +57,7 @@
 #include <kzip.h>
 #include <dcopclient.h>
 #include <kstandarddirs.h>
-#include <kfiledialog.h>
+#include <tdefiledialog.h>
 #include <kpopupmenu.h>
 #include <tqcursor.h>
 #include <kdesktopfile.h>

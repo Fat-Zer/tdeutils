@@ -38,7 +38,7 @@
 #include <kapplication.h>
 #include <kprocess.h>
 #include <kstandarddirs.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <kglobalsettings.h>
 #include <kmessagebox.h>
 #include <tqvbox.h>
@@ -526,7 +526,7 @@ void laptop_dock::invokeLockSuspend()
 void laptop_dock::invokeSetup()
 {
 	TDEProcess proc;
-	proc << KStandardDirs::findExe("kcmshell");
+	proc << KStandardDirs::findExe("tdecmshell");
 	proc << "laptop";
 	proc.start(TDEProcess::DontCare);
 	proc.detach();

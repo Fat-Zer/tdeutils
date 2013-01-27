@@ -34,7 +34,7 @@
 
 #include <tqstring.h>
 
-#include <kio/global.h>
+#include <tdeio/global.h>
 
 class TQStringList;
 

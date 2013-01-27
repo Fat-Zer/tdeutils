@@ -26,7 +26,7 @@
    * 		Fn+F12 (suspend to disk)
 */
 
-#include <kconfig.h>
+#include <tdeconfig.h>
 
 #include "kvaio.h"
 #include "kmilointerface.h"

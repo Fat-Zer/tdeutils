@@ -30,7 +30,7 @@ tde_add_library( kdf_common STATIC_PIC AUTOMOC
   SOURCES kdfwidget.cpp kdfconfig.cpp
     mntconfig.cpp disklist.cpp disks.cpp
     listview.cpp optiondialog.cpp stdoption.cpp
-  LINK tdeui-shared kio-shared
+  LINK tdeui-shared tdeio-shared
 )
 
 

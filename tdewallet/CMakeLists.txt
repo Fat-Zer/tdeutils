@@ -32,7 +32,7 @@ tde_add_executable( tdewalletmanager AUTOMOC
     tdewalletmanager.skel main.cpp tdewalletpopup.cpp
     tdewalleteditor.cpp kwmapeditor.cpp
     allyourbase.cpp kbetterthankdialogbase.ui
-  LINK kio-shared
+  LINK tdeio-shared
   DESTINATION ${BIN_INSTALL_DIR}
 )
 

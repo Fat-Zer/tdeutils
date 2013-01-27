@@ -24,7 +24,7 @@
 #include <tqlineedit.h>
 #include <tqspinbox.h>
 
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <kglobalsettings.h>
 #include <klocale.h>
 #include <kmessagebox.h>

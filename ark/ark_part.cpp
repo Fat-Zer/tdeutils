@@ -35,7 +35,7 @@
 #include <kxmlguifactory.h>
 #include <kstatusbar.h>
 #include <kiconloader.h>
-#include <kio/netaccess.h>
+#include <tdeio/netaccess.h>
 #include <kpushbutton.h>
 #include <ksqueezedtextlabel.h>
 

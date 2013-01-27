@@ -21,7 +21,7 @@
 ****************************************************************************/
 
 #include <kapplication.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include "karambasessionmanaged.h"
 #include "karamba.h"
 #include "tqwidgetlist.h"

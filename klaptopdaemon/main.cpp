@@ -24,7 +24,7 @@
 
 #include <klocale.h>
 #include <kprocess.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <kglobal.h>
 #include <tqlayout.h>
 #include <unistd.h>

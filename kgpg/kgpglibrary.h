@@ -22,7 +22,7 @@
 #include <tqobject.h>
 #include <kurl.h>
 #include <kshortcut.h>
-#include <kio/job.h> 
+#include <tdeio/job.h> 
 
 class KPassivePopup;
 class KProgress;

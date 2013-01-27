@@ -24,9 +24,9 @@
 
 #undef Unsorted
 
-#include <kfiledialog.h>
+#include <tdefiledialog.h>
 #include <kglobalsettings.h>
-#include <kio/netaccess.h>
+#include <tdeio/netaccess.h>
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <ktempfile.h>

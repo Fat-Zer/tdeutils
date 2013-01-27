@@ -35,7 +35,7 @@
 #include <twin.h>
 
 #include <tqfile.h>
-#include <kfile.h>
+#include <tdefile.h>
 #include <tqfileinfo.h>
 #include <kaction.h>
 #include <tqtimer.h>
@@ -56,13 +56,13 @@
 #include <tqcursor.h>
 #include <netwm.h>
 #include <kiconloader.h>
-#include <kfiledialog.h>
+#include <tdefiledialog.h>
 #include <tqmap.h>
 #include <kurl.h>
 #include <krun.h>
 #include <tqdatetime.h>
 #include <tqbitmap.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include  <kprocess.h>
 #include <tqdragobject.h>
 

@@ -28,7 +28,7 @@
 
 #include <kglobal.h>
 #include <klocale.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <knumvalidator.h>
 #include <kdialog.h>
 #include <kapplication.h>

@@ -26,7 +26,7 @@
 #include <tqglobal.h>
 #include <klibloader.h>
 #include <kstandarddirs.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 
 #include <tqtimer.h>
 #include <tqfile.h>

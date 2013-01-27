@@ -27,7 +27,7 @@
 #include <tqlayout.h>
 #include <tqvalidator.h>
 
-#include <kfiledialog.h>
+#include <tdefiledialog.h>
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <kseparator.h>

@@ -40,7 +40,7 @@
 
 #include <klocale.h>
 #include <kprocess.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 
 ZipFormat::ZipFormat(TQWidget *w,const char *n) :
 	DiskFormat(w,n),

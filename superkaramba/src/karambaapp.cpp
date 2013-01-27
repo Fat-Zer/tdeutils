@@ -11,7 +11,7 @@
 #include <tqstring.h>
 #include <tqstringlist.h>
 #include <tqdir.h>
-#include <kfiledialog.h>
+#include <tdefiledialog.h>
 #include <kcmdlineargs.h>
 #include <fcntl.h>
 #include <klocale.h>

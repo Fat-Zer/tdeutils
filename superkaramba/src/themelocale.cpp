@@ -30,7 +30,7 @@
 #include "themelocale.h"
 #include "themefile.h"
 #include <kdebug.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <kglobal.h>
 #include <klocale.h>
 #include <tqbuffer.h>

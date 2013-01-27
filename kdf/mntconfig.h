@@ -26,7 +26,7 @@
 #define __MNTCONFIG_H__
 
 #include <tdecmodule.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <kiconloader.h>
 
 #include "disks.h"

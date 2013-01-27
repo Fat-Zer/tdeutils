@@ -37,7 +37,7 @@ tde_add_library( kmilo SHARED
 tde_add_kpart( kded_kmilod AUTOMOC
   SOURCES kmilod.cpp kmilod.skel defaultskin.cpp
     defaultwidget.ui kmilointerface.cpp
-  LINK kio-shared kmilo-shared tdeinit_kded-shared
+  LINK tdeio-shared kmilo-shared tdeinit_kded-shared
   DESTINATION ${PLUGIN_INSTALL_DIR}
 )
 

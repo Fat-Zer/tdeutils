@@ -32,7 +32,7 @@
 #include <tqprogressbar.h>
 #include <tqfile.h>
 
-#include <kio/global.h>
+#include <tdeio/global.h>
 #include <kprogress.h>
 #include <kprocess.h>
 #include <klocale.h>

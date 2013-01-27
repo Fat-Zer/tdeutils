@@ -29,14 +29,14 @@
 #include <klocale.h>
 #include <kedittoolbar.h>
 #include <kstatusbar.h>
-#include <kfiledialog.h>
+#include <tdefiledialog.h>
 #include <kmessagebox.h>
 #include <kpopupmenu.h>
 #include <tdeparts/componentfactory.h>
 #include <tdeparts/browserextension.h>
 #include <kkeydialog.h>
 #include <kcombobox.h>
-#include <kio/netaccess.h>
+#include <tdeio/netaccess.h>
 #include <kaccel.h>
 
 // ark includes

@@ -25,7 +25,7 @@
 #include <kiconloader.h>
 #include <klistview.h>
 #include <knuminput.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <kdebug.h>
 #include <kinputdialog.h>
 

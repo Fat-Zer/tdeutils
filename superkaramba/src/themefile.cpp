@@ -31,7 +31,7 @@
 #include <kmessagebox.h>
 #include <kstandarddirs.h>
 #include <klocale.h>
-#include <kio/netaccess.h>
+#include <tdeio/netaccess.h>
 #include <tqtextstream.h>
 #include <tqfileinfo.h>
 #include <tqdom.h>

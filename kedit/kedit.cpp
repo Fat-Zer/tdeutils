@@ -34,12 +34,12 @@
 #include <kaction.h>
 #include <kapplication.h>
 #include <kcmdlineargs.h>
-#include <kconfigdialog.h>
+#include <tdeconfigdialog.h>
 #include <kcursor.h>
 #include <keditcl.h>
-#include <kfileitem.h>
+#include <tdefileitem.h>
 #include <kfontdialog.h>
-#include <kio/netaccess.h>
+#include <tdeio/netaccess.h>
 #include <kmessagebox.h>
 #include <kprinter.h>
 #include <ksavefile.h>

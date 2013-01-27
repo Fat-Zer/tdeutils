@@ -13,7 +13,7 @@
 #include <tqdom.h>
 #include <tqregexp.h>
 #include <kurl.h>
-#include <kio/netaccess.h>
+#include <tdeio/netaccess.h>
 
 RssSensor::RssSensor( const TQString &src, int interval, const TQString &form, const TQString &enc)
     : Sensor(interval),

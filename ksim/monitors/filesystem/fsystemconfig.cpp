@@ -20,7 +20,7 @@
 #include "fsystemconfig.h"
 #include "fsystemconfig.moc"
 
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <klocale.h>
 #include <kiconloader.h>
 #include <klistview.h>

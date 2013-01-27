@@ -26,7 +26,7 @@ link_directories(
 
 tde_add_executable( ktimer AUTOMOC
   SOURCES main.cpp ktimer.cpp prefwidget.ui
-  LINK kio-shared
+  LINK tdeio-shared
   DESTINATION ${BIN_INSTALL_DIR}
 )
 

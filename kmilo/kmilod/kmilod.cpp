@@ -34,7 +34,7 @@
 #include <kdebug.h>
 #include <kservicetype.h>
 #include <kservice.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <tdeparts/componentfactory.h>
 
 #include "kmilointerface.h"

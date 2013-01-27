@@ -11,7 +11,7 @@
 //
 //
 
-#include <kconfig.h>
+#include <tdeconfig.h>
 
 #include "modes.h"
 #include "mode.h"

@@ -36,7 +36,7 @@
 #include <tqlineedit.h>
 
 #include <kapplication.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <kdialog.h>
 #include <klocale.h>
 #include <kiconloader.h>

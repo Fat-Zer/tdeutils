@@ -2,7 +2,7 @@
 X-TDE-Library=laptop
 X-TDE-FactoryName=laptop
 X-TDE-Init=laptop
-Exec=kcmshell laptop
+Exec=tdecmshell laptop
 Icon=laptop_battery
 Type=Application
 DocPath=kcontrol/laptop/index.html

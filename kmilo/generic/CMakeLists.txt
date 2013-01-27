@@ -28,7 +28,7 @@ link_directories(
 
 tde_add_kpart( kmilo_generic AUTOMOC
   SOURCES generic_monitor.cpp
-  LINK kio-shared kmilo-shared
+  LINK tdeio-shared kmilo-shared
   DESTINATION ${PLUGIN_INSTALL_DIR}
 )
 

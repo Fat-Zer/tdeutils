@@ -32,7 +32,7 @@
 #include <tqstring.h>
 #include <tqstringlist.h>
 #include <kurl.h>
-#include <kio/netaccess.h>
+#include <tdeio/netaccess.h>
 #include <tqregexp.h>
 #include <tqtimer.h>
 #include "karamba.h"

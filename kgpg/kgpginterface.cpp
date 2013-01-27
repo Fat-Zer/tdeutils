@@ -24,7 +24,7 @@
 #include <tqstring.h>
 #include <tqlabel.h>
 #include <tqapplication.h>
-#include <kio/netaccess.h>
+#include <tdeio/netaccess.h>
 #include <tqcheckbox.h>
 
 #include <kmessagebox.h>
@@ -39,7 +39,7 @@
 #include <tqtextcodec.h>
 #include <kprocess.h>
 #include <kprocio.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <tqfile.h>
 #include <kled.h>
 #include <kdebug.h>
@@ -617,10 +617,10 @@ Md5Widget::Md5Widget(TQWidget *parent, const char *name,KURL url):KDialogBase( p
         mdSum=TQString();
         TQFile f(url.path());
         f.open( IO_ReadOnly);
-        KMD5 checkfile;
-        checkfile.reset();
-        checkfile.update(*TQT_TQIODEVICE(&f));
-        mdSum=checkfile.hexDigest().data();
+        KMD5 chectdefile;
+        chectdefile.reset();
+        chectdefile.update(*TQT_TQIODEVICE(&f));
+        mdSum=chectdefile.hexDigest().data();
         f.close();
         TQWidget *page = new TQWidget(this);
 

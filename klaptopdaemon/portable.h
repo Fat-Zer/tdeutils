@@ -1,6 +1,6 @@
 #include <tqlabel.h>
 #include <kactivelabel.h>
-#include <kconfig.h>
+#include <tdeconfig.h>
 #include <tqvgroupbox.h>
 #include <tqstringlist.h>
 

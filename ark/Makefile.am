@@ -17,7 +17,7 @@ noinst_LTLIBRARIES = libark_common.la
 
 libark_common_la_SOURCES = settings.kcfgc archiveformatinfo.cpp
 libark_common_la_LDFLAGS = $(all_libraries) -no-undefined
-libark_common_la_LIBADD  = $(LIB_KDED) -lDCOP $(LIB_TDEHTML) $(LIB_KIO) $(LIB_KDEUI) $(LIB_KDECORE) $(LIB_QT)  $(LIB_KFILE)
+libark_common_la_LIBADD  = $(LIB_KDED) -lDCOP $(LIB_TDEHTML) $(LIB_KIO) $(LIB_KDEUI) $(LIB_KDECORE) $(LIB_QT)  $(LIB_TDEFILE)
 
 kde_module_LTLIBRARIES = libarkpart.la
 libarkpart_la_LDFLAGS = $(KDE_PLUGIN) $(all_libraries)

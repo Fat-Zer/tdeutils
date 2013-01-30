@@ -17,12 +17,12 @@ klaptop_acpi_helper_LDADD = $(LIB_QT)
 
 klaptop_check_SOURCES = laptop_check.cpp 
 klaptop_check_LDFLAGS = $(all_libraries) $(LIB_QT) -lDCOP $(LIB_TDECORE) $(LIB_TDEUI) -ltdefx $(LIB_KIO) -ltdetexteditor
-klaptop_check_LDADD = $(LIB_KFILE) $(LIB_TDEUI) libkcmlaptop.la
+klaptop_check_LDADD = $(LIB_TDEFILE) $(LIB_TDEUI) libkcmlaptop.la
 
 kcm_laptop_la_SOURCES = battery.cpp main.cpp pcmcia.cpp power.cpp warning.cpp \
 	acpi.cpp sony.cpp profile.cpp buttons.cpp apm.cpp  
 kcm_laptop_la_LDFLAGS  = $(all_libraries) $(KDE_PLUGIN) $(LIB_QT) -lDCOP $(LIB_TDECORE) $(LIB_TDEUI) -ltdefx $(LIB_KIO) -ltdetexteditor -module
-kcm_laptop_la_LIBADD = $(LIB_KFILE) $(LIB_TDEUI) libkcmlaptop.la
+kcm_laptop_la_LIBADD = $(LIB_TDEFILE) $(LIB_TDEUI) libkcmlaptop.la
 kcm_laptop_la_COMPILE_FIRST = crcresult.h
 
 AM_CPPFLAGS = $(all_includes)

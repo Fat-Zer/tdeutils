@@ -10,17 +10,17 @@ libkdf_common_la_SOURCES = kdfwidget.cpp kdfconfig.cpp mntconfig.cpp disklist.cp
 
 kdf_SOURCES = kdf.cpp 
 kdf_LDFLAGS = $(all_libraries) $(KDE_RPATH) $(LIB_QT) -lDCOP $(LIB_TDECORE) $(LIB_TDEUI) -ltdefx $(LIB_KIO) -ltdetexteditor
-kdf_LDADD = libkdf_common.la $(LIB_KFILE)
+kdf_LDADD = libkdf_common.la $(LIB_TDEFILE)
 
 kwikdisk_SOURCES = kwikdisk.cpp 
 kwikdisk_LDFLAGS = $(all_libraries) $(KDE_RPATH) $(LIB_QT) -lDCOP $(LIB_TDECORE) $(LIB_TDEUI) -ltdefx $(LIB_KIO) -ltdetexteditor
-kwikdisk_LDADD = libkdf_common.la $(LIB_KFILE)
+kwikdisk_LDADD = libkdf_common.la $(LIB_TDEFILE)
 
 kde_module_LTLIBRARIES = kcm_kdf.la
 
 kcm_kdf_la_SOURCES = kcmdf.cpp
 kcm_kdf_la_LDFLAGS = $(all_libraries) -module -avoid-version -no-undefined
-kcm_kdf_la_LIBADD = libkdf_common.la $(LIB_KFILE)
+kcm_kdf_la_LIBADD = libkdf_common.la $(LIB_TDEFILE)
 
 noinst_HEADERS = kdfwidget.h kcmdf.h kdfconfig.h mntconfig.h \
 disks.h kdf.h disklist.h kwikdisk.h listview.h optiondialog.h stdoption.h

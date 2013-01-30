@@ -1,5 +1,5 @@
 INCLUDES = $(all_includes)
-LDADD	= $(LIB_KFILE)
+LDADD	= $(LIB_TDEFILE)
 bin_PROGRAMS = kcharselect
 
 kcharselect_SOURCES = kcharselectdia.cc main.cc

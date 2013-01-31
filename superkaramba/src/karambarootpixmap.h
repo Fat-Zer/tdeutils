@@ -28,7 +28,7 @@ public:
     ~KarambaRootPixmap();
 
 
-void  updateBackground ( KSharedPixmap * );
+void  updateBackground ( TDESharedPixmap * );
 
 private:
 TQWidget *widget;

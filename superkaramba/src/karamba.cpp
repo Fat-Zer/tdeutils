@@ -1563,7 +1563,7 @@ void karamba::updateSensors()
   TQTimer::singleShot( 500, this, TQT_SLOT(step()) );
 }
 
-void karamba::updateBackground(KSharedPixmap* kpm)
+void karamba::updateBackground(TDESharedPixmap* kpm)
 {
   //kdDebug() << k_funcinfo << pm.size() << endl;
   // if pm width == 0 this is the first time we come here and we should start

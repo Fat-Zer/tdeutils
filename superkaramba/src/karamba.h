@@ -264,7 +264,7 @@ public slots:
     void currentDesktopChanged(int);
     void currentWallpaperChanged(int);
     void slotToggleConfigOption(TQString key, bool);
-    void updateBackground(KSharedPixmap*);
+    void updateBackground(TDESharedPixmap*);
     void passMenuOptionChanged(TQString key, bool);
     void passMenuItemClicked(int);
     void processExited (TDEProcess *proc);

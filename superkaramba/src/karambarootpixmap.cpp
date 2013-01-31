@@ -29,7 +29,7 @@ KarambaRootPixmap::~KarambaRootPixmap()
 {
 }
 
-void  KarambaRootPixmap::updateBackground (KSharedPixmap *kpm)
+void  KarambaRootPixmap::updateBackground (TDESharedPixmap *kpm)
 {
   ((karamba*)widget)->updateBackground(kpm);
 }

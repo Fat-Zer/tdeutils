@@ -107,7 +107,7 @@ SonyConfig::SonyConfig(TQWidget * parent, const char *name)
 
 void SonyConfig::setupHelper()
 {
-	TQString tdesu = KStandardDirs::findExe("tdesu");
+	TQString tdesu = TDEStandardDirs::findExe("tdesu");
 	if (!tdesu.isEmpty()) {
 		int rc = KMessageBox::warningContinueCancel(0,
 				i18n("You will need to supply a root password "

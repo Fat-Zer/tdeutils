@@ -74,7 +74,7 @@ ThemesDlg::~ThemesDlg()
 
 void ThemesDlg::saveUserAddedThemes()
 {
-  KStandardDirs ksd;
+  TDEStandardDirs ksd;
   TQStringList t = themes();
   TQStringList dirs = ksd.findDirs("data", TQString(kapp->name()) + "/themes");
   TQStringList::Iterator it = t.begin();
@@ -121,7 +121,7 @@ void ThemesDlg::populateListbox()
   TQDir dir;
   TQStringList dirs;
   TQStringList t;
-  KStandardDirs ksd;
+  TDEStandardDirs ksd;
 
   tableThemes->clear();
 

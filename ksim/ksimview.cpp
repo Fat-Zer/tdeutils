@@ -190,8 +190,8 @@ void KSim::MainView::makeDirs()
   if (TQFile::exists(themeDir) && TQFile::exists(monitorDir))
     return;
 
-  bool themeCreated = KStandardDirs::makeDir(themeDir);
-  bool monitorCreated = KStandardDirs::makeDir(monitorDir);
+  bool themeCreated = TDEStandardDirs::makeDir(themeDir);
+  bool monitorCreated = TDEStandardDirs::makeDir(monitorDir);
 
   if (!themeCreated || !monitorCreated)
   {

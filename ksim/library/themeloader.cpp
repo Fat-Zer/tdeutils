@@ -1042,7 +1042,7 @@ void KSim::ThemeLoader::parseDir(const TQString &url, int alt)
        homePath.length() ) );
 
     if ( !TQFile::exists( homePath ) )
-      KStandardDirs::makeDir( homePath );
+      TDEStandardDirs::makeDir( homePath );
 
     kdWarning() << "Cant write to current dir, setting dir to "
        << homePath << endl;
@@ -1074,7 +1074,7 @@ void KSim::ThemeLoader::parseDir(const TQString &url, int alt)
       for (meter = meters.begin(); meter != meters.end(); ++meter) {
         TQString bgMeter = TQString::fromLatin1("bg_meter_");
         if (TQFile::exists(bgMeter + (*meter) + altString + "." +  (*format))) {
-          if (KStandardDirs::makeDir(url + (*meter)))
+          if (TDEStandardDirs::makeDir(url + (*meter)))
             directory.rename(bgMeter + (*meter) + altString + "." + (*format),
                  (*meter) + "/bg_meter" + altString + "." + (*format));
         }
@@ -1085,7 +1085,7 @@ void KSim::ThemeLoader::parseDir(const TQString &url, int alt)
       for (panel = panels.begin(); panel != panels.end(); ++panel) {
         TQString bgPanel = TQString::fromLatin1("bg_panel_");
         if (TQFile::exists(bgPanel + (*panel) + altString + "." + (*format))) {
-          if (KStandardDirs::makeDir(url + (*panel)))
+          if (TDEStandardDirs::makeDir(url + (*panel)))
             directory.rename(bgPanel + (*panel) + altString + "." + (*format),
                 (*panel) + "/bg_panel" + altString + "." + (*format));
         }
@@ -1100,7 +1100,7 @@ void KSim::ThemeLoader::parseDir(const TQString &url, int alt)
       // move decal_net_leds* to the net folder to be more consistant
       tempFile = TQString::fromLatin1("decal_net_leds");
       if (TQFile::exists(tempFile + altString + "." + (*format))) {
-        if (KStandardDirs::makeDir(url + "net"))
+        if (TDEStandardDirs::makeDir(url + "net"))
           directory.rename(tempFile + altString + "." + (*format),
              "net/decal_net_leds" + altString + "." + (*format));
       }

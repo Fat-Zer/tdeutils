@@ -154,7 +154,7 @@ ApmConfig::~ApmConfig()
 
 void ApmConfig::setupHelper()
 {
-	TQString tdesu = KStandardDirs::findExe("tdesu");
+	TQString tdesu = TDEStandardDirs::findExe("tdesu");
 	if (!tdesu.isEmpty()) {
 		int rc = KMessageBox::warningContinueCancel(0,
 				i18n("You will need to supply a root password "
@@ -185,10 +185,10 @@ void ApmConfig::setupHelper()
 void ApmConfig::setupHelper2()	// we use the acpi helper to do software suspend
 {
 	unsigned long len, crc;
-	TQString helper = KStandardDirs::findExe("klaptop_acpi_helper");
+	TQString helper = TDEStandardDirs::findExe("klaptop_acpi_helper");
 	checkcrc(helper.latin1(), len, crc);
 
-	TQString tdesu = KStandardDirs::findExe("tdesu");
+	TQString tdesu = TDEStandardDirs::findExe("tdesu");
 	if (!tdesu.isEmpty()) {
 		int rc = KMessageBox::warningContinueCancel(0,
 				i18n("You will need to supply a root password "

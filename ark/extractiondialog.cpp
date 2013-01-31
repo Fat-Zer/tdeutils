@@ -153,7 +153,7 @@ void ExtractionDialog::accept()
 			}
 			// create directory using filename, make sure it has trailing slash
 			p.adjustPath(1);
-			if( !KStandardDirs::makeDir( p.path() ) )
+			if( !TDEStandardDirs::makeDir( p.path() ) )
 			{
 				KMessageBox::error( this, i18n( "The folder could not be created. Please check permissions." ) );
 				return;

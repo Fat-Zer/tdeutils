@@ -746,7 +746,7 @@ static void
 invoke_acpi_helper(const char *param, const char *param2, const char *param3)
 {
 	TDEProcess proc;
-	proc << KStandardDirs::findExe("klaptop_acpi_helper");
+	proc << TDEStandardDirs::findExe("klaptop_acpi_helper");
 	proc << param;
 	if (param2) 
 		proc << param2;
@@ -1358,7 +1358,7 @@ acpi_helper_ok(bool type)
 	known[type] = last_seed;
 	known_res[type] = 0;
 	struct stat sb;
-	TQString str = KStandardDirs::findExe("klaptop_acpi_helper");
+	TQString str = TDEStandardDirs::findExe("klaptop_acpi_helper");
 	if (str.isNull() || str.isEmpty())
 		return(0);
 	

@@ -607,7 +607,7 @@ static TQString getGpgHome()
     if(!gpgHome.endsWith("/"))
         gpgHome.append('/');
 
-    KStandardDirs::makeDir(gpgHome, 0700);
+    TDEStandardDirs::makeDir(gpgHome, 0700);
     return gpgHome;
 }
 

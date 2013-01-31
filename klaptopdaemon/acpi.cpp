@@ -163,10 +163,10 @@ AcpiConfig::~AcpiConfig()
 void AcpiConfig::setupHelper()
 {
 	unsigned long len, crc;
-	TQString helper = KStandardDirs::findExe("klaptop_acpi_helper");
+	TQString helper = TDEStandardDirs::findExe("klaptop_acpi_helper");
 	checkcrc(TQFile::encodeName(helper), len, crc);
 
-	TQString tdesu = KStandardDirs::findExe("tdesu");
+	TQString tdesu = TDEStandardDirs::findExe("tdesu");
 	if (!tdesu.isEmpty()) {
 		int rc = KMessageBox::warningContinueCancel(0,
 				i18n("You will need to supply a root password "

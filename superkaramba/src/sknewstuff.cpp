@@ -50,12 +50,12 @@ bool SKNewStuff::install( const TQString &fileName )
   kdDebug() << "SKNewStuff::install(): " << fileName << endl;
 
   KMimeType::Ptr result = KMimeType::findByURL(fileName);
-  KStandardDirs myStdDir;
+  TDEStandardDirs myStdDir;
   TQFileInfo fi(fileName);
   TQString base = fi.baseName();
   TQString baseDestDir =myStdDir.saveLocation("data", kapp->instanceName() + "/themes/", true);
   const TQString destDir = baseDestDir + base + "/";
-  KStandardDirs::makeDir( destDir );
+  TDEStandardDirs::makeDir( destDir );
 
   kdDebug() << "SKNewStuff::install() mimetype: " << result->name() << endl;
 

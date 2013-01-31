@@ -83,7 +83,7 @@ int main(int argc, char *argv[])
 	TDECmdLineArgs::usage(i18n("No command or host specified."));
 
     // Check if ssh is available
-    if (KStandardDirs::findExe(TQString::fromLatin1("ssh")).isEmpty())
+    if (TDEStandardDirs::findExe(TQString::fromLatin1("ssh")).isEmpty())
     {
 	kdError(1511) << "ssh not found\n";
 	exit(1);

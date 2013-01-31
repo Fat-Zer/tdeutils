@@ -233,7 +233,7 @@ laptop_dock::invokeBrightness()
 
 void laptop_dock::slotGoRoot(int /*id*/) {
 #ifdef NOTDEF
-	TQString tdesu = KStandardDirs::findExe("tdesu");
+	TQString tdesu = TDEStandardDirs::findExe("tdesu");
 	if (!tdesu.isEmpty()) {
 		int rc = KMessageBox::warningContinueCancel(0,
 				i18n("You will need to supply a root password "
@@ -250,7 +250,7 @@ void laptop_dock::slotGoRoot(int /*id*/) {
 			*_rootProcess << "-u";
 			*_rootProcess << "root";
 			//*_rootProcess << "--nonewdcop";
-			*_rootProcess << KStandardDirs::findExe("klaptopdaemon");
+			*_rootProcess << TDEStandardDirs::findExe("klaptopdaemon");
 			connect(_rootProcess, TQT_SIGNAL(processExited(TDEProcess*)),
 				this, TQT_SLOT(rootExited(TDEProcess*)));
 			_rootProcess->start(TDEProcess::NotifyOnExit);
@@ -526,7 +526,7 @@ void laptop_dock::invokeLockSuspend()
 void laptop_dock::invokeSetup()
 {
 	TDEProcess proc;
-	proc << KStandardDirs::findExe("tdecmshell");
+	proc << TDEStandardDirs::findExe("tdecmshell");
 	proc << "laptop";
 	proc.start(TDEProcess::DontCare);
 	proc.detach();

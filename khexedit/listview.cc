@@ -25,7 +25,7 @@
 
 
 CListView::CListView( TQWidget *parent, const char *name, int visibleItem )
-  :KListView( parent, name ),  mVisibleItem(TQMAX( 1, visibleItem ))
+  :TDEListView( parent, name ),  mVisibleItem(TQMAX( 1, visibleItem ))
 {
   setVisibleItem(visibleItem);
 }

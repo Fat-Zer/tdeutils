@@ -97,9 +97,9 @@
 #include "kgpgoptions.h"
 #include "keyinfowidget.h"
 
-//////////////  KListviewItem special
+//////////////  TDEListviewItem special
 
-class UpdateViewItem : public KListViewItem
+class UpdateViewItem : public TDEListViewItem
 {
 public:
         UpdateViewItem(TQListView *parent, TQString name,TQString email, TQString tr, TQString val, TQString size, TQString creat, TQString id,bool isdefault,bool isexpired);
@@ -111,7 +111,7 @@ public:
 };
 
 UpdateViewItem::UpdateViewItem(TQListView *parent, TQString name,TQString email, TQString tr, TQString val, TQString size, TQString creat, TQString id,bool isdefault,bool isexpired)
-                : KListViewItem(parent)
+                : TDEListViewItem(parent)
 {
         def=isdefault;
         exp=isexpired;
@@ -125,7 +125,7 @@ UpdateViewItem::UpdateViewItem(TQListView *parent, TQString name,TQString email,
 }
 
 UpdateViewItem::UpdateViewItem(TQListViewItem *parent, TQString name,TQString email, TQString tr, TQString val, TQString size, TQString creat, TQString id)
-                : KListViewItem(parent)
+                : TDEListViewItem(parent)
 {
         setText(0,name);
         setText(1,email);
@@ -157,7 +157,7 @@ void UpdateViewItem::paintCell(TQPainter *p, const TQColorGroup &cg,int column, 
         }
 
 
-        KListViewItem::paintCell(p,_cg, column, width, alignment);
+        TDEListViewItem::paintCell(p,_cg, column, width, alignment);
 }
 
 #include <iostream>
@@ -223,7 +223,7 @@ KDialogBase( parent, name, true,i18n("Private Key List"),Ok | Cancel)
         keyPair=loader->loadIcon("kgpg_key2",KIcon::Small,20);
 
         setMinimumSize(350,100);
-        keysListpr = new KListView( page );
+        keysListpr = new TDEListView( page );
         keysListpr->setRootIsDecorated(true);
         keysListpr->addColumn( i18n( "Name" ));
 	keysListpr->addColumn( i18n( "Email" ));
@@ -244,7 +244,7 @@ KDialogBase( parent, name, true,i18n("Private Key List"),Ok | Cancel)
 
         bool selectedok=false;
 	bool warn=false;
-	KListViewItem *item;
+	TDEListViewItem *item;
 
         fp = popen("gpg --no-tty --with-colons --list-secret-keys", "r");
         while ( fgets( line, sizeof(line), fp)) {
@@ -296,9 +296,9 @@ KDialogBase( parent, name, true,i18n("Private Key List"),Ok | Cancel)
         		keyName=KgpgInterface::checkForUtf8(keyName);
 
 
-                                item=new KListViewItem(keysListpr,keyName,keyMail,id);
-                                //KListViewItem *sub= new KListViewItem(item,i18n("ID: %1, trust: %2, expiration: %3").arg(id).arg(trust).arg(val));
-				KListViewItem *sub= new KListViewItem(item,i18n("Expiration:"),val);
+                                item=new TDEListViewItem(keysListpr,keyName,keyMail,id);
+                                //TDEListViewItem *sub= new TDEListViewItem(item,i18n("ID: %1, trust: %2, expiration: %3").arg(id).arg(trust).arg(val));
+				TDEListViewItem *sub= new TDEListViewItem(item,i18n("Expiration:"),val);
                                 sub->setSelectable(false);
                                 item->setPixmap(0,keyPair);
                                 if (preselected.find(id,0,false)!=-1) {
@@ -393,7 +393,7 @@ TQString KgpgSelKey::getkeyMail()
 /////////////////////////////////////////////////////////////////////////////////////////////
 
 KeyView::KeyView( TQWidget *parent, const char *name )
-                : KListView( parent, name )
+                : TDEListView( parent, name )
 {
         KIconLoader *loader = TDEGlobal::iconLoader();
 
@@ -477,7 +477,7 @@ void  KeyView::startDrag()
 
 
 mySearchLine::mySearchLine(TQWidget *parent, KeyView *listView, const char *name)
-:KListViewSearchLine(parent,listView,name)
+:TDEListViewSearchLine(parent,listView,name)
 {
 searchListView=listView;
 setKeepParentsVisible(false);
@@ -490,14 +490,14 @@ mySearchLine::~ mySearchLine()
 bool mySearchLine::itemMatches(const TQListViewItem *item, const TQString & s) const
 {
 if (item->depth()!=0) return true;
-else return KListViewSearchLine::itemMatches(item,s);
+else return TDEListViewSearchLine::itemMatches(item,s);
 }
 
 
 
 void mySearchLine::updateSearch(const TQString& s)
 {
-    KListViewSearchLine::updateSearch(s);
+    TDEListViewSearchLine::updateSearch(s);
     if (searchListView->displayOnlySecret || !searchListView->displayDisabled)
     {
     int disabledSerial=searchListView->trustbad.serialNumber();
@@ -519,7 +519,7 @@ void mySearchLine::updateSearch(const TQString& s)
 
 ///////////////////////////////////////////////////////////////////////////////////////   main window for key management
 
-listKeys::listKeys(TQWidget *parent, const char *name) : DCOPObject( "KeyInterface" ), KMainWindow(parent, name,0)
+listKeys::listKeys(TQWidget *parent, const char *name) : DCOPObject( "KeyInterface" ), TDEMainWindow(parent, name,0)
 {
         //KWin::setType(TQt::WDestructiveClose);
 
@@ -533,63 +533,63 @@ listKeys::listKeys(TQWidget *parent, const char *name) : DCOPObject( "KeyInterfa
                 installEventFilter(this);
         setCaption(i18n("Key Management"));
 
-        (void) new KAction(i18n("&Open Editor"), "edit",0,TQT_TQOBJECT(this), TQT_SLOT(slotOpenEditor()),actionCollection(),"kgpg_editor");
-        KAction *exportPublicKey = new KAction(i18n("E&xport Public Keys..."), "kgpg_export", KStdAccel::shortcut(KStdAccel::Copy),TQT_TQOBJECT(this), TQT_SLOT(slotexport()),actionCollection(),"key_export");
-        KAction *deleteKey = new KAction(i18n("&Delete Keys"),"editdelete", TQt::Key_Delete,TQT_TQOBJECT(this), TQT_SLOT(confirmdeletekey()),actionCollection(),"key_delete");
-        signKey = new KAction(i18n("&Sign Keys..."), "kgpg_sign", 0,TQT_TQOBJECT(this), TQT_SLOT(signkey()),actionCollection(),"key_sign");
-        KAction *delSignKey = new KAction(i18n("Delete Sign&ature"),"editdelete", 0,TQT_TQOBJECT(this), TQT_SLOT(delsignkey()),actionCollection(),"key_delsign");
-        KAction *infoKey = new KAction(i18n("&Edit Key"), "kgpg_info", TQt::Key_Return,TQT_TQOBJECT(this), TQT_SLOT(listsigns()),actionCollection(),"key_info");
-        KAction *importKey = new KAction(i18n("&Import Key..."), "kgpg_import", KStdAccel::shortcut(KStdAccel::Paste),TQT_TQOBJECT(this), TQT_SLOT(slotPreImportKey()),actionCollection(),"key_import");
-        KAction *setDefaultKey = new KAction(i18n("Set as De&fault Key"),0, 0,TQT_TQOBJECT(this), TQT_SLOT(slotSetDefKey()),actionCollection(),"key_default");
-        importSignatureKey = new KAction(i18n("Import Key From Keyserver"),"network", 0,TQT_TQOBJECT(this), TQT_SLOT(preimportsignkey()),actionCollection(),"key_importsign");
-        importAllSignKeys = new KAction(i18n("Import &Missing Signatures From Keyserver"),"network", 0,TQT_TQOBJECT(this), TQT_SLOT(importallsignkey()),actionCollection(),"key_importallsign");
-        refreshKey = new KAction(i18n("&Refresh Keys From Keyserver"),"reload", 0,TQT_TQOBJECT(this), TQT_SLOT(refreshKeyFromServer()),actionCollection(),"key_server_refresh");
+        (void) new TDEAction(i18n("&Open Editor"), "edit",0,TQT_TQOBJECT(this), TQT_SLOT(slotOpenEditor()),actionCollection(),"kgpg_editor");
+        TDEAction *exportPublicKey = new TDEAction(i18n("E&xport Public Keys..."), "kgpg_export", TDEStdAccel::shortcut(TDEStdAccel::Copy),TQT_TQOBJECT(this), TQT_SLOT(slotexport()),actionCollection(),"key_export");
+        TDEAction *deleteKey = new TDEAction(i18n("&Delete Keys"),"editdelete", TQt::Key_Delete,TQT_TQOBJECT(this), TQT_SLOT(confirmdeletekey()),actionCollection(),"key_delete");
+        signKey = new TDEAction(i18n("&Sign Keys..."), "kgpg_sign", 0,TQT_TQOBJECT(this), TQT_SLOT(signkey()),actionCollection(),"key_sign");
+        TDEAction *delSignKey = new TDEAction(i18n("Delete Sign&ature"),"editdelete", 0,TQT_TQOBJECT(this), TQT_SLOT(delsignkey()),actionCollection(),"key_delsign");
+        TDEAction *infoKey = new TDEAction(i18n("&Edit Key"), "kgpg_info", TQt::Key_Return,TQT_TQOBJECT(this), TQT_SLOT(listsigns()),actionCollection(),"key_info");
+        TDEAction *importKey = new TDEAction(i18n("&Import Key..."), "kgpg_import", TDEStdAccel::shortcut(TDEStdAccel::Paste),TQT_TQOBJECT(this), TQT_SLOT(slotPreImportKey()),actionCollection(),"key_import");
+        TDEAction *setDefaultKey = new TDEAction(i18n("Set as De&fault Key"),0, 0,TQT_TQOBJECT(this), TQT_SLOT(slotSetDefKey()),actionCollection(),"key_default");
+        importSignatureKey = new TDEAction(i18n("Import Key From Keyserver"),"network", 0,TQT_TQOBJECT(this), TQT_SLOT(preimportsignkey()),actionCollection(),"key_importsign");
+        importAllSignKeys = new TDEAction(i18n("Import &Missing Signatures From Keyserver"),"network", 0,TQT_TQOBJECT(this), TQT_SLOT(importallsignkey()),actionCollection(),"key_importallsign");
+        refreshKey = new TDEAction(i18n("&Refresh Keys From Keyserver"),"reload", 0,TQT_TQOBJECT(this), TQT_SLOT(refreshKeyFromServer()),actionCollection(),"key_server_refresh");
 
-	KAction *createGroup=new KAction(i18n("&Create Group with Selected Keys..."), 0, 0,TQT_TQOBJECT(this), TQT_SLOT(createNewGroup()),actionCollection(),"create_group");
-        KAction *delGroup= new KAction(i18n("&Delete Group"), 0, 0,TQT_TQOBJECT(this), TQT_SLOT(deleteGroup()),actionCollection(),"delete_group");
-        KAction *editCurrentGroup= new KAction(i18n("&Edit Group"), 0, 0,TQT_TQOBJECT(this), TQT_SLOT(editGroup()),actionCollection(),"edit_group");
+	TDEAction *createGroup=new TDEAction(i18n("&Create Group with Selected Keys..."), 0, 0,TQT_TQOBJECT(this), TQT_SLOT(createNewGroup()),actionCollection(),"create_group");
+        TDEAction *delGroup= new TDEAction(i18n("&Delete Group"), 0, 0,TQT_TQOBJECT(this), TQT_SLOT(deleteGroup()),actionCollection(),"delete_group");
+        TDEAction *editCurrentGroup= new TDEAction(i18n("&Edit Group"), 0, 0,TQT_TQOBJECT(this), TQT_SLOT(editGroup()),actionCollection(),"edit_group");
 
-	KAction *newContact=new KAction(i18n("&Create New Contact in Address Book"), "kaddressbook", 0,TQT_TQOBJECT(this), TQT_SLOT(addToKAB()),actionCollection(),"add_kab");
-        (void) new KAction(i18n("&Go to Default Key"), "gohome",TQKeySequence(CTRL+TQt::Key_Home) ,TQT_TQOBJECT(this), TQT_SLOT(slotGotoDefaultKey()),actionCollection(),"go_default_key");
+	TDEAction *newContact=new TDEAction(i18n("&Create New Contact in Address Book"), "kaddressbook", 0,TQT_TQOBJECT(this), TQT_SLOT(addToKAB()),actionCollection(),"add_kab");
+        (void) new TDEAction(i18n("&Go to Default Key"), "gohome",TQKeySequence(CTRL+TQt::Key_Home) ,TQT_TQOBJECT(this), TQT_SLOT(slotGotoDefaultKey()),actionCollection(),"go_default_key");
 
         KStdAction::quit(TQT_TQOBJECT(this), TQT_SLOT(quitApp()), actionCollection());
         KStdAction::find(TQT_TQOBJECT(this), TQT_SLOT(findKey()), actionCollection());
         KStdAction::findNext(TQT_TQOBJECT(this), TQT_SLOT(findNextKey()), actionCollection());
-        (void) new KAction(i18n("&Refresh List"), "reload", KStdAccel::reload(),TQT_TQOBJECT(this), TQT_SLOT(refreshkey()),actionCollection(),"key_refresh");
-        KAction *openPhoto= new KAction(i18n("&Open Photo"), "image", 0,TQT_TQOBJECT(this), TQT_SLOT(slotShowPhoto()),actionCollection(),"key_photo");
-        KAction *deletePhoto= new KAction(i18n("&Delete Photo"), "delete", 0,TQT_TQOBJECT(this), TQT_SLOT(slotDeletePhoto()),actionCollection(),"delete_photo");
-        KAction *addPhoto= new KAction(i18n("&Add Photo"), 0, 0,TQT_TQOBJECT(this), TQT_SLOT(slotAddPhoto()),actionCollection(),"add_photo");
+        (void) new TDEAction(i18n("&Refresh List"), "reload", TDEStdAccel::reload(),TQT_TQOBJECT(this), TQT_SLOT(refreshkey()),actionCollection(),"key_refresh");
+        TDEAction *openPhoto= new TDEAction(i18n("&Open Photo"), "image", 0,TQT_TQOBJECT(this), TQT_SLOT(slotShowPhoto()),actionCollection(),"key_photo");
+        TDEAction *deletePhoto= new TDEAction(i18n("&Delete Photo"), "delete", 0,TQT_TQOBJECT(this), TQT_SLOT(slotDeletePhoto()),actionCollection(),"delete_photo");
+        TDEAction *addPhoto= new TDEAction(i18n("&Add Photo"), 0, 0,TQT_TQOBJECT(this), TQT_SLOT(slotAddPhoto()),actionCollection(),"add_photo");
 
-        KAction *addUid= new KAction(i18n("&Add User Id"), 0, 0,TQT_TQOBJECT(this), TQT_SLOT(slotAddUid()),actionCollection(),"add_uid");
-        KAction *delUid= new KAction(i18n("&Delete User Id"), 0, 0,TQT_TQOBJECT(this), TQT_SLOT(slotDelUid()),actionCollection(),"del_uid");
+        TDEAction *addUid= new TDEAction(i18n("&Add User Id"), 0, 0,TQT_TQOBJECT(this), TQT_SLOT(slotAddUid()),actionCollection(),"add_uid");
+        TDEAction *delUid= new TDEAction(i18n("&Delete User Id"), 0, 0,TQT_TQOBJECT(this), TQT_SLOT(slotDelUid()),actionCollection(),"del_uid");
 
-        KAction *editKey = new KAction(i18n("Edit Key in &Terminal"), "kgpg_term", TQKeySequence(ALT+TQt::Key_Return),TQT_TQOBJECT(this), TQT_SLOT(slotedit()),actionCollection(),"key_edit");
-        KAction *exportSecretKey = new KAction(i18n("Export Secret Key..."), 0, 0,TQT_TQOBJECT(this), TQT_SLOT(slotexportsec()),actionCollection(),"key_sexport");
-        KAction *revokeKey = new KAction(i18n("Revoke Key..."), 0, 0,TQT_TQOBJECT(this), TQT_SLOT(revokeWidget()),actionCollection(),"key_revoke");
+        TDEAction *editKey = new TDEAction(i18n("Edit Key in &Terminal"), "kgpg_term", TQKeySequence(ALT+TQt::Key_Return),TQT_TQOBJECT(this), TQT_SLOT(slotedit()),actionCollection(),"key_edit");
+        TDEAction *exportSecretKey = new TDEAction(i18n("Export Secret Key..."), 0, 0,TQT_TQOBJECT(this), TQT_SLOT(slotexportsec()),actionCollection(),"key_sexport");
+        TDEAction *revokeKey = new TDEAction(i18n("Revoke Key..."), 0, 0,TQT_TQOBJECT(this), TQT_SLOT(revokeWidget()),actionCollection(),"key_revoke");
 
-        KAction *deleteKeyPair = new KAction(i18n("Delete Key Pair"), 0, 0,TQT_TQOBJECT(this), TQT_SLOT(deleteseckey()),actionCollection(),"key_pdelete");
-        KAction *generateKey = new KAction(i18n("&Generate Key Pair..."), "kgpg_gen", KStdAccel::shortcut(KStdAccel::New),TQT_TQOBJECT(this), TQT_SLOT(slotgenkey()),actionCollection(),"key_gener");
+        TDEAction *deleteKeyPair = new TDEAction(i18n("Delete Key Pair"), 0, 0,TQT_TQOBJECT(this), TQT_SLOT(deleteseckey()),actionCollection(),"key_pdelete");
+        TDEAction *generateKey = new TDEAction(i18n("&Generate Key Pair..."), "kgpg_gen", TDEStdAccel::shortcut(TDEStdAccel::New),TQT_TQOBJECT(this), TQT_SLOT(slotgenkey()),actionCollection(),"key_gener");
 
-        KAction *regeneratePublic = new KAction(i18n("&Regenerate Public Key"), 0, 0,TQT_TQOBJECT(this), TQT_SLOT(slotregenerate()),actionCollection(),"key_regener");
+        TDEAction *regeneratePublic = new TDEAction(i18n("&Regenerate Public Key"), 0, 0,TQT_TQOBJECT(this), TQT_SLOT(slotregenerate()),actionCollection(),"key_regener");
 
-        (void) new KAction(i18n("&Key Server Dialog"), "network", 0,TQT_TQOBJECT(this), TQT_SLOT(showKeyServer()),actionCollection(),"key_server");
+        (void) new TDEAction(i18n("&Key Server Dialog"), "network", 0,TQT_TQOBJECT(this), TQT_SLOT(showKeyServer()),actionCollection(),"key_server");
         KStdAction::preferences(TQT_TQOBJECT(this), TQT_SLOT(showOptions()), actionCollection(),"options_configure");
-        (void) new KAction(i18n("Tip of the &Day"), "idea", 0,TQT_TQOBJECT(this), TQT_SLOT(slotTip()), actionCollection(),"help_tipofday");
-        (void) new KAction(i18n("View GnuPG Manual"), "contents", 0,TQT_TQOBJECT(this), TQT_SLOT(slotManpage()),actionCollection(),"gpg_man");
+        (void) new TDEAction(i18n("Tip of the &Day"), "idea", 0,TQT_TQOBJECT(this), TQT_SLOT(slotTip()), actionCollection(),"help_tipofday");
+        (void) new TDEAction(i18n("View GnuPG Manual"), "contents", 0,TQT_TQOBJECT(this), TQT_SLOT(slotManpage()),actionCollection(),"gpg_man");
 
-        (void) new KToggleAction(i18n("&Show only Secret Keys"), "kgpg_show", 0,TQT_TQOBJECT(this), TQT_SLOT(slotToggleSecret()),actionCollection(),"show_secret");
+        (void) new TDEToggleAction(i18n("&Show only Secret Keys"), "kgpg_show", 0,TQT_TQOBJECT(this), TQT_SLOT(slotToggleSecret()),actionCollection(),"show_secret");
         keysList2->displayOnlySecret=false;
 
-	(void) new KToggleAction(i18n("&Hide Expired/Disabled Keys"),0, 0,TQT_TQOBJECT(this), TQT_SLOT(slotToggleDisabled()),actionCollection(),"hide_disabled");
+	(void) new TDEToggleAction(i18n("&Hide Expired/Disabled Keys"),0, 0,TQT_TQOBJECT(this), TQT_SLOT(slotToggleDisabled()),actionCollection(),"hide_disabled");
 	keysList2->displayDisabled=true;
 
-        sTrust=new KToggleAction(i18n("Trust"),0, 0,TQT_TQOBJECT(this), TQT_SLOT(slotShowTrust()),actionCollection(),"show_trust");
-        sSize=new KToggleAction(i18n("Size"),0, 0,TQT_TQOBJECT(this), TQT_SLOT(slotShowSize()),actionCollection(),"show_size");
-        sCreat=new KToggleAction(i18n("Creation"),0, 0,TQT_TQOBJECT(this), TQT_SLOT(slotShowCreat()),actionCollection(),"show_creat");
-        sExpi=new KToggleAction(i18n("Expiration"),0, 0,TQT_TQOBJECT(this), TQT_SLOT(slotShowExpi()),actionCollection(),"show_expi");
+        sTrust=new TDEToggleAction(i18n("Trust"),0, 0,TQT_TQOBJECT(this), TQT_SLOT(slotShowTrust()),actionCollection(),"show_trust");
+        sSize=new TDEToggleAction(i18n("Size"),0, 0,TQT_TQOBJECT(this), TQT_SLOT(slotShowSize()),actionCollection(),"show_size");
+        sCreat=new TDEToggleAction(i18n("Creation"),0, 0,TQT_TQOBJECT(this), TQT_SLOT(slotShowCreat()),actionCollection(),"show_creat");
+        sExpi=new TDEToggleAction(i18n("Expiration"),0, 0,TQT_TQOBJECT(this), TQT_SLOT(slotShowExpi()),actionCollection(),"show_expi");
 
 
-        photoProps = new KSelectAction(i18n("&Photo ID's"),"kgpg_photo", actionCollection(), "photo_settings");
+        photoProps = new TDESelectAction(i18n("&Photo ID's"),"kgpg_photo", actionCollection(), "photo_settings");
         connect(photoProps, TQT_SIGNAL(activated(int)), this, TQT_SLOT(slotSetPhotoSize(int)));
 
         // Keep the list in kgpg.kcfg in sync with this one!
@@ -616,7 +616,7 @@ listKeys::listKeys(TQWidget *parent, const char *name) : DCOPObject( "KeyInterfa
         keysList2->setAllColumnsShowFocus(true);
         keysList2->setFullWidth(true);
         keysList2->setAcceptDrops (true) ;
-        keysList2->setSelectionModeExt(KListView::Extended);
+        keysList2->setSelectionModeExt(TDEListView::Extended);
 
 
         popup=new TQPopupMenu();
@@ -693,7 +693,7 @@ listKeys::listKeys(TQWidget *parent, const char *name) : DCOPObject( "KeyInterfa
         ///////////////    get all keys data
 	keyStatusBar=statusBar();
 
-	setupGUI(KMainWindow::Create | Save | ToolBar | StatusBar | Keys, "listkeys.rc");
+	setupGUI(TDEMainWindow::Create | Save | ToolBar | StatusBar | Keys, "listkeys.rc");
         toolBar()->insertLineSeparator();
 
 	TQToolButton *clearSearch = new TQToolButton(toolBar());
@@ -705,7 +705,7 @@ listKeys::listKeys(TQWidget *parent, const char *name) : DCOPObject( "KeyInterfa
 	connect(clearSearch, TQT_SIGNAL(pressed()), TQT_TQOBJECT(listViewSearch), TQT_SLOT(clear()));
 
 
-	(void)new KAction(i18n("Filter Search"), TQt::Key_F6, TQT_TQOBJECT(listViewSearch), TQT_SLOT(setFocus()),actionCollection(), "search_focus");
+	(void)new TDEAction(i18n("Filter Search"), TQt::Key_F6, TQT_TQOBJECT(listViewSearch), TQT_SLOT(setFocus()),actionCollection(), "search_focus");
 
         sTrust->setChecked(KGpgSettings::showTrust());
         sSize->setChecked(KGpgSettings::showSize());
@@ -1191,8 +1191,8 @@ void listKeys::slotTip()
 
 void listKeys::closeEvent ( TQCloseEvent * e )
 {
-        //kapp->ref(); // prevent KMainWindow from closing the app
-        //KMainWindow::closeEvent( e );
+        //kapp->ref(); // prevent TDEMainWindow from closing the app
+        //TDEMainWindow::closeEvent( e );
         e->accept();
         //	hide();
         //	e->ignore();
@@ -1791,13 +1791,13 @@ void listKeys::editGroup()
                 return;
         if (item->pixmap(2)) {
                 if (item->pixmap(2)->serialNumber()==keysList2->trustgood.serialNumber())
-                        (void) new KListViewItem(gEdit->availableKeys,item->text(0),item->text(1),item->text(6));
+                        (void) new TDEListViewItem(gEdit->availableKeys,item->text(0),item->text(1),item->text(6));
         }
         while (item->nextSibling()) {
                 item=item->nextSibling();
                 if (item->pixmap(2)) {
                         if (item->pixmap(2)->serialNumber()==keysList2->trustgood.serialNumber())
-                                (void) new KListViewItem(gEdit->availableKeys,item->text(0),item->text(1),item->text(6));
+                                (void) new TDEListViewItem(gEdit->availableKeys,item->text(0),item->text(1),item->text(6));
                 }
         }
         keysGroup=KgpgInterface::getGpgGroupSetting(keysList2->currentItem()->text(0),KGpgSettings::gpgConfigPath());

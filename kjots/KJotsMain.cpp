@@ -56,7 +56,7 @@ extern KIconLoader* global_pix_loader;
 // KJOTSMAIN
 //----------------------------------------------------------------------
 KJotsMain::KJotsMain(const char* name)
-    : KMainWindow(0,name),
+    : TDEMainWindow(0,name),
       currentEntry(0),
       invalidMoveFlag(false)
 {
@@ -70,7 +70,7 @@ KJotsMain::KJotsMain(const char* name)
     splitter->setOpaqueResize( TDEGlobalSettings::opaqueResize() );
 
     // the subject list
-    subjectList = new KListView(splitter, "subjectList");
+    subjectList = new TDEListView(splitter, "subjectList");
     subjectList->setRootIsDecorated(true);
     subjectList->setSizePolicy(TQSizePolicy(TQSizePolicy::Preferred, TQSizePolicy::Expanding));
     subjectList->setMinimumWidth(subjectList->fontMetrics().maxWidth() * 10 + 5);
@@ -104,42 +104,42 @@ KJotsMain::KJotsMain(const char* name)
     splitter->setSizePolicy(TQSizePolicy(TQSizePolicy::Expanding, TQSizePolicy::Expanding, 2, 1));
 
     // create actions
-    actions[ACTION_NEXT_BOOK] = new KAction(i18n("Next Book"), TQString(), CTRL + Key_D, TQT_TQOBJECT(this),
+    actions[ACTION_NEXT_BOOK] = new TDEAction(i18n("Next Book"), TQString(), CTRL + Key_D, TQT_TQOBJECT(this),
             TQT_SLOT(nextBook()), actionCollection(), "go_next_book");
-    actions[ACTION_PREV_BOOK] = new KAction(i18n("Previous Book"), TQString(), CTRL + SHIFT + Key_D, TQT_TQOBJECT(this),
+    actions[ACTION_PREV_BOOK] = new TDEAction(i18n("Previous Book"), TQString(), CTRL + SHIFT + Key_D, TQT_TQOBJECT(this),
             TQT_SLOT(prevBook()), actionCollection(), "go_prev_book");
-    actions[ACTION_NEXT_PAGE] = new KAction(i18n("Next Page"), TQString(), CTRL + Key_PageDown, TQT_TQOBJECT(this),
+    actions[ACTION_NEXT_PAGE] = new TDEAction(i18n("Next Page"), TQString(), CTRL + Key_PageDown, TQT_TQOBJECT(this),
             TQT_SLOT(nextPage()), actionCollection(), "go_next_page");
-    actions[ACTION_PREV_PAGE] = new KAction(i18n("Previous Page"), TQString(), CTRL + Key_PageUp, TQT_TQOBJECT(this),
+    actions[ACTION_PREV_PAGE] = new TDEAction(i18n("Previous Page"), TQString(), CTRL + Key_PageUp, TQT_TQOBJECT(this),
             TQT_SLOT(prevPage()), actionCollection(), "go_prev_page");
 
     actions[ACTION_NEW_PAGE] = KStdAction::openNew(TQT_TQOBJECT(this), TQT_SLOT(newEntry()), actionCollection());
     actions[ACTION_NEW_PAGE]->setText(i18n("&New Page"));
-    actions[ACTION_NEW_BOOK] = new KAction(i18n("New &Book..."), "contents", CTRL + SHIFT + Key_N, TQT_TQOBJECT(this),
+    actions[ACTION_NEW_BOOK] = new TDEAction(i18n("New &Book..."), "contents", CTRL + SHIFT + Key_N, TQT_TQOBJECT(this),
             TQT_SLOT(createNewBook()), actionCollection(), "new_book");
 
-    exportPageMenu = new KActionMenu(i18n("Export Page"), actionCollection(), "save_page_to");
-    actions[ACTION_PAGE2TEXT] = new KAction(i18n("To Text File..."), TQString(), 0, TQT_TQOBJECT(this),
+    exportPageMenu = new TDEActionMenu(i18n("Export Page"), actionCollection(), "save_page_to");
+    actions[ACTION_PAGE2TEXT] = new TDEAction(i18n("To Text File..."), TQString(), 0, TQT_TQOBJECT(this),
             TQT_SLOT(writePage()), actionCollection(), "save_page_to_ascii");
     actions[ACTION_PAGE2TEXT]->plug(exportPageMenu->popupMenu());
-    actions[ACTION_PAGE2HTML] = new KAction(i18n("To HTML File..."), TQString(), 0, TQT_TQOBJECT(this),
+    actions[ACTION_PAGE2HTML] = new TDEAction(i18n("To HTML File..."), TQString(), 0, TQT_TQOBJECT(this),
             TQT_SLOT(writePageToHTML()), actionCollection(), "save_page_to_html");
     actions[ACTION_PAGE2HTML]->plug(exportPageMenu->popupMenu());
 
-    exportBookMenu = new KActionMenu(i18n("Export Book"), actionCollection(), "save_book_to");
-    actions[ACTION_BOOK2TEXT] = new KAction(i18n("To Text File..."), TQString(), 0, TQT_TQOBJECT(this),
+    exportBookMenu = new TDEActionMenu(i18n("Export Book"), actionCollection(), "save_book_to");
+    actions[ACTION_BOOK2TEXT] = new TDEAction(i18n("To Text File..."), TQString(), 0, TQT_TQOBJECT(this),
             TQT_SLOT(writeBook()), actionCollection(), "save_book_to_ascii");
     actions[ACTION_BOOK2TEXT]->plug(exportBookMenu->popupMenu());
-    actions[ACTION_BOOK2HTML] = new KAction(i18n("To HTML File..."), TQString(), 0, TQT_TQOBJECT(this),
+    actions[ACTION_BOOK2HTML] = new TDEAction(i18n("To HTML File..."), TQString(), 0, TQT_TQOBJECT(this),
             TQT_SLOT(writeBookToHTML()), actionCollection(), "save_book_to_html");
     actions[ACTION_BOOK2HTML]->plug(exportBookMenu->popupMenu());
 
-    actions[ACTION_DELETE_PAGE] = new KAction(i18n("&Delete Page"), "editdelete", CTRL + Key_Delete, TQT_TQOBJECT(this),
+    actions[ACTION_DELETE_PAGE] = new TDEAction(i18n("&Delete Page"), "editdelete", CTRL + Key_Delete, TQT_TQOBJECT(this),
             TQT_SLOT(deleteEntry()), actionCollection(), "del_page");
-    actions[ACTION_DELETE_BOOK] = new KAction(i18n("Delete Boo&k"), "editdelete", CTRL + SHIFT + Key_Delete, TQT_TQOBJECT(this),
+    actions[ACTION_DELETE_BOOK] = new TDEAction(i18n("Delete Boo&k"), "editdelete", CTRL + SHIFT + Key_Delete, TQT_TQOBJECT(this),
             TQT_SLOT(deleteBook()), actionCollection(), "del_folder");
 
-    actions[ACTION_MANUAL_SAVE] = new KAction(i18n("Manual Save"), 0, KStdAccel::save(),
+    actions[ACTION_MANUAL_SAVE] = new TDEAction(i18n("Manual Save"), 0, TDEStdAccel::save(),
                          TQT_TQOBJECT(this), TQT_SLOT(autoSave()), actionCollection(), "manual_save");
     actions[ACTION_PRINT] = KStdAction::print(TQT_TQOBJECT(this), TQT_SLOT(slotPrint()), actionCollection());
     actions[ACTION_QUIT] = KStdAction::quit(TQT_TQOBJECT(this), TQT_SLOT(slotQuit()), actionCollection());
@@ -150,7 +150,7 @@ KJotsMain::KJotsMain(const char* name)
     actions[ACTION_COPY]  = KStdAction::copy(TQT_TQOBJECT(me_text), TQT_SLOT(copy()), actionCollection());
     connect(me_text, TQT_SIGNAL(copyAvailable(bool)), actions[ACTION_COPY], TQT_SLOT(setEnabled(bool)));
     actions[ACTION_COPY]->setEnabled(false);
-    actions[ACTION_PASTE2TITLE] = new KAction(i18n("Copy &into Page Title"), "editcopy", CTRL+Key_T, TQT_TQOBJECT(this),
+    actions[ACTION_PASTE2TITLE] = new TDEAction(i18n("Copy &into Page Title"), "editcopy", CTRL+Key_T, TQT_TQOBJECT(this),
             TQT_SLOT(copySelection()), actionCollection(), "copyIntoTitle");
     connect(me_text, TQT_SIGNAL(copyAvailable(bool)), actions[ACTION_PASTE2TITLE], TQT_SLOT(setEnabled(bool)));
     actions[ACTION_PASTE2TITLE]->setEnabled(false);
@@ -161,14 +161,14 @@ KJotsMain::KJotsMain(const char* name)
     actions[ACTION_FIND_NEXT]->setEnabled(false);
     actions[ACTION_REPLACE] = KStdAction::replace( TQT_TQOBJECT(this), TQT_SLOT( slotReplace() ), actionCollection() );
 
-    actions[ACTION_RENAME] = new KAction(i18n("Rename..."), TQString(), CTRL + Key_M, TQT_TQOBJECT(this),
+    actions[ACTION_RENAME] = new TDEAction(i18n("Rename..."), TQString(), CTRL + Key_M, TQT_TQOBJECT(this),
             TQT_SLOT(slotRenameEntry()), actionCollection(), "rename_entry");
-    actions[ACTION_INSERT_DATE] = new KAction(i18n("Insert Date"), "date", CTRL + Key_I, TQT_TQOBJECT(this),
+    actions[ACTION_INSERT_DATE] = new TDEAction(i18n("Insert Date"), "date", CTRL + Key_I, TQT_TQOBJECT(this),
             TQT_SLOT(insertDate()), actionCollection(), "insert_date");
 
     KStdAction::preferences(TQT_TQOBJECT(this), TQT_SLOT(configure()), actionCollection());
 
-    bookmarkMenu = new KActionMenu(i18n("&Bookmarks"), "bookmarks", actionCollection(), "bookmarks");
+    bookmarkMenu = new TDEActionMenu(i18n("&Bookmarks"), "bookmarks", actionCollection(), "bookmarks");
     KJotsBookmarks* bookmarks = new KJotsBookmarks(this);
     connect(bookmarks, TQT_SIGNAL(openPage(const TQString&)), TQT_SLOT(jumpToBookmark(const TQString&)));
     new KBookmarkMenu(KBookmarkManager::managerForFile(locateLocal("appdata","bookmarks.xml")),
@@ -177,7 +177,7 @@ KJotsMain::KJotsMain(const char* name)
     setupGUI();
     /*
      * TODO: add a bookmark bar, something like this
-    KToolBar* bar = dynamic_cast<KToolBar *>(child("bookmarkToolBar", "KToolBar"));
+    TDEToolBar* bar = dynamic_cast<TDEToolBar *>(child("bookmarkToolBar", "TDEToolBar"));
     new KBookmarkBar(KBookmarkManager::managerForFile(locateLocal("appdata","bookmarks.xml")),
                      bookmarks, bar, actionCollection(), this, "BookmarkBar");
     if (bar->count() == 0)
@@ -215,8 +215,8 @@ KJotsMain::KJotsMain(const char* name)
             this, TQT_SLOT(slotExpandBook(TQListViewItem*)));
     connect(subjectList, TQT_SIGNAL(collapsed(TQListViewItem*)),
             this, TQT_SLOT(slotCollapseBook(TQListViewItem*)));
-    connect(subjectList, TQT_SIGNAL(contextMenu(KListView*,TQListViewItem*,const TQPoint&)),
-            this, TQT_SLOT(showListviewContextMenu(KListView*,TQListViewItem*,const TQPoint&)));
+    connect(subjectList, TQT_SIGNAL(contextMenu(TDEListView*,TQListViewItem*,const TQPoint&)),
+            this, TQT_SLOT(showListviewContextMenu(TDEListView*,TQListViewItem*,const TQPoint&)));
     connect(subjectList, TQT_SIGNAL(itemRenamed(TQListViewItem*,const TQString&,int)),
             this, TQT_SLOT(slotItemRenamed(TQListViewItem*,const TQString&,int)));
     connect(roTextView, TQT_SIGNAL(urlClick(const TQString&)),
@@ -654,10 +654,10 @@ void KJotsMain::slotFindSuccessful()
     actions[ACTION_FIND_NEXT]->setEnabled(true);
 }
 
-void KJotsMain::showListviewContextMenu(KListView*, TQListViewItem* i, const TQPoint& p)
+void KJotsMain::showListviewContextMenu(TDEListView*, TQListViewItem* i, const TQPoint& p)
 {
     if ( invalidMoveFlag ) return; //Prevent race condition
-    KActionMenu* am = new KActionMenu(TQT_TQOBJECT(this));
+    TDEActionMenu* am = new TDEActionMenu(TQT_TQOBJECT(this));
 
     if (!i)
     {
@@ -670,7 +670,7 @@ void KJotsMain::showListviewContextMenu(KListView*, TQListViewItem* i, const TQP
         am->insert(actions[ACTION_NEW_PAGE]);
         am->insert(actions[ACTION_RENAME]);
         am->insert(exportBookMenu);
-        am->insert(new KActionSeparator(am));
+        am->insert(new TDEActionSeparator(am));
         am->insert(actions[ACTION_DELETE_BOOK]);
     }
     else
@@ -679,7 +679,7 @@ void KJotsMain::showListviewContextMenu(KListView*, TQListViewItem* i, const TQP
         am->insert(actions[ACTION_NEW_PAGE]);
         am->insert(actions[ACTION_RENAME]);
         am->insert(exportPageMenu);
-        am->insert(new KActionSeparator(am));
+        am->insert(new TDEActionSeparator(am));
         am->insert(actions[ACTION_DELETE_PAGE]);
     }
 
@@ -1173,7 +1173,7 @@ KJotsBook* KJotsMain::currentBook()
         {
             return dynamic_cast<KJotsBook*>(e);
         }
-        e = dynamic_cast<KJotsEntryBase*>(e->KListViewItem::parent());
+        e = dynamic_cast<KJotsEntryBase*>(e->TDEListViewItem::parent());
     }
 
     return 0;

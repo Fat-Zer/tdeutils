@@ -29,11 +29,11 @@
 
 class KPassivePopup;
 class KComboBox;
-class KToggleAction;
-class KAction;
+class TDEToggleAction;
+class TDEAction;
 class KgpgView;
 
-class KgpgApp : public KMainWindow
+class KgpgApp : public TDEMainWindow
 {
         Q_OBJECT
   
@@ -43,7 +43,7 @@ class KgpgApp : public KMainWindow
 public:
         /** construtor of KgpgApp, calls all init functions to create the application.
          */
-        KgpgApp(TQWidget *parent=0, const char *name=0,WFlags f = 0,KShortcut goHome=TQKeySequence(CTRL+TQt::Key_Home),bool mainWindow=false);
+        KgpgApp(TQWidget *parent=0, const char *name=0,WFlags f = 0,TDEShortcut goHome=TQKeySequence(CTRL+TQt::Key_Home),bool mainWindow=false);
         ~KgpgApp();
         /** opens a file specified by commandline option
          */
@@ -56,7 +56,7 @@ public:
         int version;
         TQString messages;
         KgpgView *view;
-	KShortcut goDefaultKey;
+	TDEShortcut goDefaultKey;
 
 
 protected:
@@ -105,9 +105,9 @@ public slots:
 private:
 
         TQStringList customDecrypt;
-	//KToggleAction *encodingAction ;
+	//TDEToggleAction *encodingAction ;
         KURL urlselected;
-        KAction* fileSave, *editUndo, *editRedo;
+        TDEAction* fileSave, *editUndo, *editRedo;
 	KComboBox *fontCombo;
 	bool isMainWindow;
 	TQString textEncoding;

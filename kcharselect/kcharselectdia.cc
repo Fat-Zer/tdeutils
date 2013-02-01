@@ -24,7 +24,7 @@
 KCharSelectDia::KCharSelectDia(TQWidget *parent,const char *name,
 			       const TQChar &_chr,const TQString &_font,
 			       int _tableNum, bool direction)
-  : KMainWindow(parent,name), vChr(_chr), vFont(_font)
+  : TDEMainWindow(parent,name), vChr(_chr), vFont(_font)
 {
   setCaption(TQString()); // Standard caption
 
@@ -79,25 +79,25 @@ KCharSelectDia::KCharSelectDia(TQWidget *parent,const char *name,
   // Build menu
   KStdAction::quit( TQT_TQOBJECT(this), TQT_SLOT(_exit()), actionCollection() );
   
-  new KAction(i18n("&To Clipboard"), "editcopy",
-         KStdAccel::shortcut(KStdAccel::Copy), TQT_TQOBJECT(this), TQT_SLOT(toClip()), actionCollection(), "copy_clip" );
+  new TDEAction(i18n("&To Clipboard"), "editcopy",
+         TDEStdAccel::shortcut(TDEStdAccel::Copy), TQT_TQOBJECT(this), TQT_SLOT(toClip()), actionCollection(), "copy_clip" );
 
-  (void)new KAction(i18n("To Clipboard &UTF-8"), 0, TQT_TQOBJECT(this),
+  (void)new TDEAction(i18n("To Clipboard &UTF-8"), 0, TQT_TQOBJECT(this),
     TQT_SLOT(toClipUTF8()), actionCollection(), "copy_utf_8" );
-  (void)new KAction(i18n("To Clipboard &HTML"), 0, TQT_TQOBJECT(this),
+  (void)new TDEAction(i18n("To Clipboard &HTML"), 0, TQT_TQOBJECT(this),
       TQT_SLOT(toClipHTML()), actionCollection(), "copy_html" );
  
-  new KAction(i18n("&From Clipboard"), "editpaste",
-         KStdAccel::shortcut(KStdAccel::Paste), TQT_TQOBJECT(this), TQT_SLOT(fromClip()), actionCollection(), "from_clip" );
-  (void)new KAction(i18n("From Clipboard UTF-8"), 0, TQT_TQOBJECT(this),
+  new TDEAction(i18n("&From Clipboard"), "editpaste",
+         TDEStdAccel::shortcut(TDEStdAccel::Paste), TQT_TQOBJECT(this), TQT_SLOT(fromClip()), actionCollection(), "from_clip" );
+  (void)new TDEAction(i18n("From Clipboard UTF-8"), 0, TQT_TQOBJECT(this),
       TQT_SLOT(fromClipUTF8()), actionCollection(), "from_clip_utf8" );
   
   i18n("From Clipboard HTML");      // Intended for future use
   
   KStdAction::clear(TQT_TQOBJECT(this), TQT_SLOT(clear()), actionCollection(), "clear");
-  (void)new KAction(i18n("&Flip"), 0, TQT_TQOBJECT(this),
+  (void)new TDEAction(i18n("&Flip"), 0, TQT_TQOBJECT(this),
       TQT_SLOT(flipText()), actionCollection(), "flip" );
-  (void)new KAction(i18n("&Alignment"), 0, TQT_TQOBJECT(this),
+  (void)new TDEAction(i18n("&Alignment"), 0, TQT_TQOBJECT(this),
       TQT_SLOT(toggleEntryDirection()), actionCollection(), "alignment" );
   
   charSelect->setFocus();

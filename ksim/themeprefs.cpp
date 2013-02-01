@@ -43,11 +43,11 @@
 #include <common.h>
 #include <themeloader.h>
 
-class ThemeViewItem : public KListViewItem
+class ThemeViewItem : public TDEListViewItem
 {
   public:
     ThemeViewItem(TQListView *parent, const TQString &text,
-       const KURL &url) : KListViewItem(parent, text)
+       const KURL &url) : TDEListViewItem(parent, text)
     {
       m_url = url;
     }
@@ -96,7 +96,7 @@ KSim::ThemePrefs::ThemePrefs(TQWidget *parent, const char *name)
   m_authLabel->setText(i18n("None"));
   m_themeLayout->addMultiCellWidget(m_authLabel, 3, 3, 1, 4);
 
-  m_listView = new KListView(this);
+  m_listView = new TDEListView(this);
   m_listView->addColumn(i18n("Theme"));
   m_listView->setFullWidth(true);
   connect(m_listView, TQT_SIGNAL(currentChanged(TQListViewItem *)),
@@ -265,8 +265,8 @@ void KSim::ThemePrefs::showFontDialog(int currentItem)
 {
   if (currentItem == 3) {
     TQFont customFont = m_font;
-    int result = KFontDialog::getFont(customFont);
-    if (result == KFontDialog::Accepted)
+    int result = TDEFontDialog::getFont(customFont);
+    if (result == TDEFontDialog::Accepted)
       m_font = customFont;
   }
 }

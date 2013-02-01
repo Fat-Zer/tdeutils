@@ -37,7 +37,7 @@ KMultiFormListBoxWindowed::KMultiFormListBoxWindowed(KMultiFormListBoxFactory *f
 	TQHBoxLayout *innerLayout = new TQHBoxLayout();
 	_layout->addLayout(innerLayout);
 
-  _listbox = new KListBox(this,"listbox");
+  _listbox = new TDEListBox(this,"listbox");
   _listbox->setSelectionMode(TQListBox::Single);
   innerLayout->addWidget(_listbox);
 

@@ -46,13 +46,13 @@ namespace TDEIO
     class Job;
 }
 
-class KJotsEntryBase : public TQObject, public KListViewItem
+class KJotsEntryBase : public TQObject, public TDEListViewItem
 {
     Q_OBJECT
   
     public:
-        KJotsEntryBase(KListView*, TQListViewItem*);
-        KJotsEntryBase(KListViewItem*, TQListViewItem*);
+        KJotsEntryBase(TDEListView*, TQListViewItem*);
+        KJotsEntryBase(TDEListViewItem*, TQListViewItem*);
 
     public:
         virtual void setSubject(const TQString&);
@@ -101,8 +101,8 @@ class KJotsBook : public KJotsEntryBase
     Q_OBJECT
   
     public:
-        KJotsBook(KListView*, TQListViewItem* after = 0);
-        KJotsBook(KListViewItem*, TQListViewItem* after = 0);
+        KJotsBook(TDEListView*, TQListViewItem* after = 0);
+        KJotsBook(TDEListViewItem*, TQListViewItem* after = 0);
         ~KJotsBook();
 
         static bool isBookFile(const TQString& book);

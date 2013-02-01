@@ -29,26 +29,26 @@
 #include <kstdguiitem.h>
 
 KWalletPopup::KWalletPopup(const TQString& wallet, TQWidget *parent, const char *name)
-: KPopupMenu(parent, name), _walletName(wallet) {
+: TDEPopupMenu(parent, name), _walletName(wallet) {
 	insertTitle(wallet);
-	KActionCollection *ac = new KActionCollection(this, "tdewallet context actions");
-	KAction *act;
+	TDEActionCollection *ac = new TDEActionCollection(this, "tdewallet context actions");
+	TDEAction *act;
 
-	act = new KAction(i18n("&New Wallet..."), 0, 0, TQT_TQOBJECT(this),
+	act = new TDEAction(i18n("&New Wallet..."), 0, 0, TQT_TQOBJECT(this),
 			TQT_SLOT(createWallet()), ac, "wallet_create");
 	act->plug(this);
 
-	act = new KAction(i18n("&Open..."), 0, Key_Return, TQT_TQOBJECT(this),
+	act = new TDEAction(i18n("&Open..."), 0, Key_Return, TQT_TQOBJECT(this),
 			TQT_SLOT(openWallet()), ac, "wallet_open");
 	act->plug(this);
 
-	act = new KAction(i18n("Change &Password..."), 0, 0, TQT_TQOBJECT(this),
+	act = new TDEAction(i18n("Change &Password..."), 0, 0, TQT_TQOBJECT(this),
 			TQT_SLOT(changeWalletPassword()), ac, "wallet_password");
 	act->plug(this);
 
 	TQStringList ul = KWallet::Wallet::users(wallet);
 	if (!ul.isEmpty()) {
-		KPopupMenu *pm = new KPopupMenu(this, "Disconnect Apps");
+		TDEPopupMenu *pm = new TDEPopupMenu(this, "Disconnect Apps");
 		int id = 7000;
 		for (TQStringList::Iterator it = ul.begin(); it != ul.end(); ++it) {
 			_appMap[id] = *it;
@@ -67,7 +67,7 @@ KWalletPopup::KWalletPopup(const TQString& wallet, TQWidget *parent, const char 
 	act->setEnabled(KWallet::Wallet::isOpen(wallet));
 	act->plug(this);
 
-	act = new KAction(i18n("&Delete"), 0, Key_Delete, TQT_TQOBJECT(this),
+	act = new TDEAction(i18n("&Delete"), 0, Key_Delete, TQT_TQOBJECT(this),
 			TQT_SLOT(deleteWallet()), ac, "wallet_delete");
 	act->plug(this);
 }

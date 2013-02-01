@@ -304,7 +304,7 @@ void keyServer::slotsearchread(KProcIO *p)
                 	keymail=TQString();
 			keyname=fullname;
 		        }
-                        kitem=new KListViewItem(listpop->kLVsearch,keyname,keymail,TQString(),TQString());
+                        kitem=new TDEListViewItem(listpop->kLVsearch,keyname,keymail,TQString(),TQString());
                         keyNumbers++;
                         count=0;
                         required=TQString();
@@ -332,7 +332,7 @@ void keyServer::slotsearchread(KProcIO *p)
                 	keymail=TQString();
 			keyname=subkey;
 		        }
-			KListViewItem *subk = new KListViewItem(kitem,keyname,keymail,TQString(),TQString());
+			TDEListViewItem *subk = new TDEListViewItem(kitem,keyname,keymail,TQString(),TQString());
 			subk->setSelectable(false);
 			}
                         required=TQString();

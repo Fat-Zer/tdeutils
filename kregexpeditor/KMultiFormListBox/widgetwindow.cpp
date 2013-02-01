@@ -19,19 +19,19 @@
 #include "windowlistboxitem.h"
 #include <iostream>
 
-WidgetWindow::WidgetWindow(KMultiFormListBoxFactory *factory, KListBox *lb)
+WidgetWindow::WidgetWindow(KMultiFormListBoxFactory *factory, TDEListBox *lb)
   :KDialogBase(Plain, i18n("Widget Configuration"), Ok | Cancel, Ok, 0, "ConfigWindow", false)
 {
   init(factory, lb);
 }
 
-WidgetWindow::WidgetWindow(KMultiFormListBoxFactory *factory, KMultiFormListBoxEntry *widget, KListBox *lb)
+WidgetWindow::WidgetWindow(KMultiFormListBoxFactory *factory, KMultiFormListBoxEntry *widget, TDEListBox *lb)
   :KDialogBase(Plain, i18n("Widget Configuration"), Ok | Cancel, Ok, 0, "ConfigWindow", false)
 {
   init(factory, lb, widget);
 }
 
-void WidgetWindow::init(KMultiFormListBoxFactory *factory, KListBox *lb, KMultiFormListBoxEntry *widget)
+void WidgetWindow::init(KMultiFormListBoxFactory *factory, TDEListBox *lb, KMultiFormListBoxEntry *widget)
 {
   listbox = lb;
   myFact = factory;

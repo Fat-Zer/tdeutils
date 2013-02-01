@@ -38,7 +38,7 @@ KTextFileDialog::KTextFileDialog(const TQString& startDir,
 {
   /*
   // insert encoding action into toolbar
-  KSelectAction *mEncoding = new KSelectAction(
+  TDESelectAction *mEncoding = new TDESelectAction(
       i18n( "Set &Encoding" ), 0, this,
       TQT_SLOT( slotSetEncoding() ), this,
       "encoding" );
@@ -57,17 +57,17 @@ KTextFileDialog::KTextFileDialog(const TQString& startDir,
     i++;
   }
 
-  KToolBar *tb = toolBar();
+  TDEToolBar *tb = toolBar();
   mEncoding->plug( tb, 7 );
   */
 
-  KAction* mEncoding = new KAction(
+  TDEAction* mEncoding = new TDEAction(
       i18n("Select Encoding..."), 0,
       TQT_TQOBJECT(this), TQT_SLOT( slotShowEncCombo() ), TQT_TQOBJECT(this), "encoding");
 
   mEncoding->setIcon( TQString::fromLatin1("charset") );
 
-  KToolBar *tb = toolBar();
+  TDEToolBar *tb = toolBar();
   mEncoding->plug( tb, pathComboIndex() - 1 );
 }
 
@@ -162,9 +162,9 @@ KURL KTextFileDialog::getOpenURLwithEncoding(
   KURL url = dlg.selectedURL();
   if (url.isValid()) {
     if ( url.isLocalFile() )
-      KRecentDocument::add( url.path(-1) );
+      TDERecentDocument::add( url.path(-1) );
     else
-      KRecentDocument::add( url.url(-1), true );
+      TDERecentDocument::add( url.url(-1), true );
   }
 
   // append encoding to the URL params
@@ -191,9 +191,9 @@ KURL KTextFileDialog::getSaveURLwithEncoding(
   KURL url = dlg.selectedURL();
   if (url.isValid()) {
     if ( url.isLocalFile() )
-      KRecentDocument::add( url.path(-1) );
+      TDERecentDocument::add( url.path(-1) );
     else
-      KRecentDocument::add( url.url(-1) );
+      TDERecentDocument::add( url.url(-1) );
   }
 
   // append encoding to the URL params

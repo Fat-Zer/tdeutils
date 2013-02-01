@@ -53,7 +53,7 @@ public:
         KURL droppedUrl;
         KURL::List droppedUrls;
         KTempFile *kgpgfoldertmp;
-	KShortcut goDefaultKey;
+	TDEShortcut goDefaultKey;
 	TQClipboard::Mode clipboardMode;
 
 private:
@@ -132,7 +132,7 @@ public:
 
 private:
         KSystemTray *kgpgapp;
-	KAction *KgpgEncryptClipboard, *KgpgDecryptClipboard, *KgpgSignClipboard;
+	TDEAction *KgpgEncryptClipboard, *KgpgDecryptClipboard, *KgpgSignClipboard;
 
 private slots:
 	void slotOpenKeyManager();
@@ -154,7 +154,7 @@ public:
         int newInstance ();
         KURL::List urlList;
         bool running;
-	KShortcut goHome;
+	TDEShortcut goHome;
 
 protected:
         TDECmdLineArgs *args;

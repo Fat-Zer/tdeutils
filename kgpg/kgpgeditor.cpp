@@ -53,7 +53,7 @@
 #include "listkeys.h"
 #include "kgpglibrary.h"
 
-KgpgApp::KgpgApp(TQWidget *parent, const char *name, WFlags f,KShortcut goHome,bool mainWindow):KMainWindow(parent, name,f)
+KgpgApp::KgpgApp(TQWidget *parent, const char *name, WFlags f,TDEShortcut goHome,bool mainWindow):TDEMainWindow(parent, name,f)
 {
 	isMainWindow=mainWindow;
 	textEncoding=TQString();
@@ -94,7 +94,7 @@ void KgpgApp::closeEvent ( TQCloseEvent * e )
         if (!isMainWindow)
 	{
 	 kapp->ref();
-	KMainWindow::closeEvent( e );
+	TDEMainWindow::closeEvent( e );
 	}
   else e->accept();
 }
@@ -140,19 +140,19 @@ void KgpgApp::initActions()
         //KStdAction::configureToolbars(TQT_TQOBJECT(this), TQT_SLOT(slotConfigureToolbars()), actionCollection());
 
         fileSave = KStdAction::save(TQT_TQOBJECT(this), TQT_SLOT(slotFileSave()), actionCollection());
-        (void) new KAction(i18n("&Encrypt File..."), "encrypted", 0,TQT_TQOBJECT(this), TQT_SLOT(slotFilePreEnc()), actionCollection(),"file_encrypt");
-        (void) new KAction(i18n("&Decrypt File..."), "decrypted", 0,TQT_TQOBJECT(this), TQT_SLOT(slotFilePreDec()), actionCollection(),"file_decrypt");
-	(void) new KAction(i18n("&Open Key Manager"), "kgpg", 0,TQT_TQOBJECT(this), TQT_SLOT(slotKeyManager()), actionCollection(),"key_manage");
+        (void) new TDEAction(i18n("&Encrypt File..."), "encrypted", 0,TQT_TQOBJECT(this), TQT_SLOT(slotFilePreEnc()), actionCollection(),"file_encrypt");
+        (void) new TDEAction(i18n("&Decrypt File..."), "decrypted", 0,TQT_TQOBJECT(this), TQT_SLOT(slotFilePreDec()), actionCollection(),"file_decrypt");
+	(void) new TDEAction(i18n("&Open Key Manager"), "kgpg", 0,TQT_TQOBJECT(this), TQT_SLOT(slotKeyManager()), actionCollection(),"key_manage");
         editUndo = KStdAction::undo(TQT_TQOBJECT(this), TQT_SLOT(slotundo()), actionCollection());
         editRedo = KStdAction::redo(TQT_TQOBJECT(this), TQT_SLOT(slotredo()), actionCollection());
-        //(void) new KAction(i18n("&Manage Keys"), "kgpg_manage", CTRL+Key_K,TQT_TQOBJECT(this), TQT_SLOT(slotManageKey()), actionCollection(),"keys_manage");
-        (void) new KAction(i18n("&Generate Signature..."),0, TQT_TQOBJECT(this), TQT_SLOT(slotPreSignFile()), actionCollection(), "sign_generate");
-        (void) new KAction(i18n("&Verify Signature..."),0, TQT_TQOBJECT(this), TQT_SLOT(slotPreVerifyFile()), actionCollection(), "sign_verify");
-        (void) new KAction(i18n("&Check MD5 Sum..."), 0,TQT_TQOBJECT(this), TQT_SLOT(slotCheckMd5()), actionCollection(), "sign_check");
+        //(void) new TDEAction(i18n("&Manage Keys"), "kgpg_manage", CTRL+Key_K,TQT_TQOBJECT(this), TQT_SLOT(slotManageKey()), actionCollection(),"keys_manage");
+        (void) new TDEAction(i18n("&Generate Signature..."),0, TQT_TQOBJECT(this), TQT_SLOT(slotPreSignFile()), actionCollection(), "sign_generate");
+        (void) new TDEAction(i18n("&Verify Signature..."),0, TQT_TQOBJECT(this), TQT_SLOT(slotPreVerifyFile()), actionCollection(), "sign_verify");
+        (void) new TDEAction(i18n("&Check MD5 Sum..."), 0,TQT_TQOBJECT(this), TQT_SLOT(slotCheckMd5()), actionCollection(), "sign_check");
 	KStdAction::print(TQT_TQOBJECT(this), TQT_SLOT(slotFilePrint()), actionCollection());
 
     // comment out for now, only confusing
-	//encodingAction=new KToggleAction(i18n("&Unicode (utf-8) Encoding"), 0, 0,this, TQT_SLOT(slotSetCharset()),actionCollection(),"charsets");
+	//encodingAction=new TDEToggleAction(i18n("&Unicode (utf-8) Encoding"), 0, 0,this, TQT_SLOT(slotSetCharset()),actionCollection(),"charsets");
 }
 
 void KgpgApp::slotSetFont(TQFont myFont)

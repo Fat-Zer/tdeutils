@@ -49,7 +49,7 @@ class KgpgApp;
 class keyServer;
 class groupEdit;
 class KgpgInterface;
-class KSelectAction;
+class TDESelectAction;
 
 struct gpgKey
 {
@@ -72,7 +72,7 @@ class KgpgSelKey : public KDialogBase
 
 public:
         KgpgSelKey( TQWidget *parent = 0, const char *name = 0,bool allowMultipleSelection=false, TQString preselected=TQString());
-        KListView *keysListpr;
+        TDEListView *keysListpr;
         TQPixmap keyPair;
         TQCheckBox *local;
         TQVBoxLayout *vbox;
@@ -89,7 +89,7 @@ public slots:
 
 
 
-class KeyView : public KListView
+class KeyView : public TDEListView
 {
         Q_OBJECT
   
@@ -141,7 +141,7 @@ protected:
         virtual void  contentsDropEvent (TQDropEvent*);
 };
 
-class mySearchLine: public KListViewSearchLine
+class mySearchLine: public TDEListViewSearchLine
 {
     Q_OBJECT
   
@@ -158,7 +158,7 @@ virtual bool itemMatches(const TQListViewItem *item, const TQString & s)  const;
 };
 
 
-class listKeys : public KMainWindow, virtual public KeyInterface
+class listKeys : public TDEMainWindow, virtual public KeyInterface
 {
         friend class KeyView;
         Q_OBJECT
@@ -173,20 +173,20 @@ public:
         TQString message;
         TQStringList keynames;
         KPassivePopup *pop;
-        KToggleAction *sTrust,*sCreat,*sExpi,*sSize;
-        KSelectAction *photoProps;
+        TDEToggleAction *sTrust,*sCreat,*sExpi,*sSize;
+        TDESelectAction *photoProps;
         KStatusBar *keyStatusBar;
 	KgpgApp *s_kgpgEditor;
 
 private:
         TQPushButton *bouton1,*bouton2,*bouton0;
         TQString tempKeyFile,newKeyMail,newKeyName,newkeyFinger,newkeyID;
-	KListViewSearchLine* listViewSearch;	
+	TDEListViewSearchLine* listViewSearch;	
         bool continueSearch;
         bool showPhoto;
         keyServer *kServer;
         KTempFile *kgpgtmp;
-        KAction *importSignatureKey,*importAllSignKeys,*signKey,*refreshKey;
+        TDEAction *importSignatureKey,*importAllSignKeys,*signKey,*refreshKey;
         TQPtrList<TQListViewItem> signList,keysList;
         uint globalCount,keyCount;
         int globalChecked;

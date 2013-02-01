@@ -127,24 +127,24 @@ private:
     ArkBrowserExtension *m_ext;
     ArkStatusBarExtension *m_bar;
 
-    KAction *saveAsAction;
-    KAction *addFileAction;
-    KAction *addDirAction;
-    KAction *extractAction;
-    KAction *deleteAction;
-    KAction *selectAllAction;
-    KAction *viewAction;
-    KAction *helpAction;
-    KAction *openWithAction;
-    KAction *deselectAllAction;
-    KAction *invertSelectionAction;
-    KAction *editAction;
-    KAction *testAction;
+    TDEAction *saveAsAction;
+    TDEAction *addFileAction;
+    TDEAction *addDirAction;
+    TDEAction *extractAction;
+    TDEAction *deleteAction;
+    TDEAction *selectAllAction;
+    TDEAction *viewAction;
+    TDEAction *helpAction;
+    TDEAction *openWithAction;
+    TDEAction *deselectAllAction;
+    TDEAction *invertSelectionAction;
+    TDEAction *editAction;
+    TDEAction *testAction;
 
-    // the following have different enable rules from the above KActions
-    KAction *popupViewAction;
-    KAction *popupOpenWithAction;
-    KToggleAction *showSearchBar;
+    // the following have different enable rules from the above TDEActions
+    TDEAction *popupViewAction;
+    TDEAction *popupOpenWithAction;
+    TDEToggleAction *showSearchBar;
 
     TDEIO::Job *m_job;
 };

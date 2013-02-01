@@ -32,18 +32,18 @@
 class TQGroupBox;
 class TQWidgetStack;
 class KTextBrowser;
-class KAccel;
+class TDEAccel;
 class KJotsMain;
-class KToolBar;
-class KListBox;
-class KListView;
-class KPopupMenu;
+class TDEToolBar;
+class TDEListBox;
+class TDEListView;
+class TDEPopupMenu;
 class ConfigureDialog;
 class KEdFind;
 class KEdReplace;
 class TQTimer;
-class KAction;
-class KActionMenu;
+class TDEAction;
+class TDEActionMenu;
 
 class KJotsPage;
 class KJotsBook;
@@ -79,7 +79,7 @@ class KJotsEdit;
 #define ACTION_INSERT_DATE 23
 #define ACTION_MAX 24
 
-class KJotsMain : public KMainWindow
+class KJotsMain : public TDEMainWindow
 {
     Q_OBJECT
   
@@ -131,7 +131,7 @@ class KJotsMain : public KMainWindow
         void prevPage();
 
         // handling page changes in the listview
-        void showListviewContextMenu(KListView* l, TQListViewItem* i, const TQPoint& p);
+        void showListviewContextMenu(TDEListView* l, TQListViewItem* i, const TQPoint& p);
         void linkClicked(const TQString&);
         void autoSave(void);
 
@@ -150,7 +150,7 @@ class KJotsMain : public KMainWindow
         TQButtonGroup  *bg_top;
         KJotsEdit   *me_text;
         KTextBrowser *roTextView;
-        KListView     *subjectList;
+        TDEListView     *subjectList;
         KJotsEntryBase *currentEntry;
         TQSplitter *splitter;
         TQWidgetStack *textStack;
@@ -158,8 +158,8 @@ class KJotsMain : public KMainWindow
         TQTimer*  m_autosaveTimer;
         bool invalidMoveFlag; //!< Used to fix a race condition. See Bug #109299
 
-        KAction* actions[ACTION_MAX];
-        KActionMenu *exportPageMenu, *exportBookMenu, *bookmarkMenu;
+        TDEAction* actions[ACTION_MAX];
+        TDEActionMenu *exportPageMenu, *exportBookMenu, *bookmarkMenu;
 };
 
 #endif // KJotsMain_included

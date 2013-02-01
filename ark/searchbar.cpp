@@ -32,10 +32,10 @@
 #include <tqapplication.h>
 #include <tqvaluelist.h>
 
-SearchBar::SearchBar( TQWidget* parent, KActionCollection* aC, const char * name )
-	: KListViewSearchLine( parent, 0, name )
+SearchBar::SearchBar( TQWidget* parent, TDEActionCollection* aC, const char * name )
+	: TDEListViewSearchLine( parent, 0, name )
 {
-	KAction *resetSearch = new KAction( i18n( "Reset Search" ), TQApplication::reverseLayout() ? "clear_left" : "locationbar_erase", 0, TQT_TQOBJECT(this), TQT_SLOT( clear() ), aC, "reset_search" );
+	TDEAction *resetSearch = new TDEAction( i18n( "Reset Search" ), TQApplication::reverseLayout() ? "clear_left" : "locationbar_erase", 0, TQT_TQOBJECT(this), TQT_SLOT( clear() ), aC, "reset_search" );
 
 	resetSearch->plug( parent );
 	resetSearch->setWhatsThis( i18n( "Reset Search\n"

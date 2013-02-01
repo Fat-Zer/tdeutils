@@ -159,7 +159,7 @@ karamba::karamba(TQString fn, TQString name, bool reloading, int instance,
   connect(&taskManager, TQT_SIGNAL(startupRemoved(Startup*)), this,
            TQT_SLOT(startupRemoved(Startup*)) );
 
-  themeConfMenu = new KPopupMenu( this);
+  themeConfMenu = new TDEPopupMenu( this);
   themeConfMenu -> setCheckable(true);
 
   /* XXX - need to be able to delete all these DesktopChangeSlot objects */
@@ -167,7 +167,7 @@ karamba::karamba(TQString fn, TQString name, bool reloading, int instance,
 
   int mid;
 
-  toDesktopMenu = new KPopupMenu (this);
+  toDesktopMenu = new TDEPopupMenu (this);
   toDesktopMenu -> setCheckable(true);
   mid = toDesktopMenu -> insertItem (i18n("&All Desktops"),
                                      dslot = new DesktopChangeSlot(TQT_TQOBJECT(this),0),
@@ -186,15 +186,15 @@ karamba::karamba(TQString fn, TQString name, bool reloading, int instance,
   }
 
 
-  kpop = new KPopupMenu( this );
+  kpop = new TDEPopupMenu( this );
   kpop -> setCheckable(true);
 
-  accColl = new KActionCollection( this );
-  menuAccColl = new KActionCollection( this );
+  accColl = new TDEActionCollection( this );
+  menuAccColl = new TDEActionCollection( this );
 
   kpop->insertItem( SmallIconSet("reload"),i18n("Update"), this,
                     TQT_SLOT(updateSensors()), Key_F5 );
-  toggleLocked = new KToggleAction (  i18n("Toggle &Locked Position"),
+  toggleLocked = new TDEToggleAction (  i18n("Toggle &Locked Position"),
                                       SmallIconSet("locked"),
                                       CTRL+Key_L, TQT_TQOBJECT(this),
                                       TQT_SLOT( slotToggleLocked() ),
@@ -204,7 +204,7 @@ karamba::karamba(TQString fn, TQString name, bool reloading, int instance,
 
   toggleLocked->plug(kpop);
 
-  toggleFastTransforms = new KToggleAction(i18n("Use &Fast Image Scaling"),
+  toggleFastTransforms = new TDEToggleAction(i18n("Use &Fast Image Scaling"),
                          CTRL+Key_F, TQT_TQOBJECT(this),
                          TQT_SLOT( slotToggleFastTransforms() ),
                          accColl, "Fast transformations");
@@ -1780,7 +1780,7 @@ void karamba::addMenuConfigOption(TQString key, TQString name)
   kpop -> setItemEnabled(THEMECONF, true);
 
   SignalBridge* action = new SignalBridge(TQT_TQOBJECT(this), key, menuAccColl);
-  KToggleAction* confItem = new KToggleAction (name, KShortcut::null(),
+  TDEToggleAction* confItem = new TDEToggleAction (name, TDEShortcut::null(),
                                                action, TQT_SLOT(receive()),
                                                menuAccColl, key.ascii());
   confItem -> setName(key.ascii());
@@ -1801,7 +1801,7 @@ void karamba::addMenuConfigOption(TQString key, TQString name)
 bool karamba::setMenuConfigOption(TQString key, bool value)
 {
   //tqDebug("karamba::setMenuConfigOption");
-  KToggleAction* menuAction = ((KToggleAction*)menuAccColl -> action(key.ascii()));
+  TDEToggleAction* menuAction = ((TDEToggleAction*)menuAccColl -> action(key.ascii()));
   if (menuAction == NULL)
   {
     tqWarning("Menu action %s not found.", key.ascii());
@@ -1817,7 +1817,7 @@ bool karamba::setMenuConfigOption(TQString key, bool value)
 bool karamba::readMenuConfigOption(TQString key)
 {
   //tqDebug("karamba::readMenuConfigOption");
-  KToggleAction* menuAction = ((KToggleAction*)menuAccColl -> action(key.ascii()));
+  TDEToggleAction* menuAction = ((TDEToggleAction*)menuAccColl -> action(key.ascii()));
   if (menuAction == NULL)
   {
     tqWarning("Menu action %s not found.", key.ascii());
@@ -1835,17 +1835,17 @@ void karamba::passMenuItemClicked(int id)
   //Everything below is to call the python callback function
   if (pythonIface && pythonIface->isExtensionLoaded())
   {
-    KPopupMenu* menu = 0;
+    TDEPopupMenu* menu = 0;
     for(int i = 0; i < (int)menuList->count(); i++)
     {
-      KPopupMenu* tmp;
+      TDEPopupMenu* tmp;
       if(i==0)
       {
-        tmp = (KPopupMenu*) menuList->first();
+        tmp = (TDEPopupMenu*) menuList->first();
       }
       else
       {
-        tmp = (KPopupMenu*) menuList->next();
+        tmp = (TDEPopupMenu*) menuList->next();
       }
       if(tmp != 0)
       {
@@ -1992,7 +1992,7 @@ void karamba::toggleWidgetUpdate( bool b)
     widgetUpdate = b;
 }
 
-SignalBridge::SignalBridge(TQObject* parent, TQString name, KActionCollection* ac)
+SignalBridge::SignalBridge(TQObject* parent, TQString name, TDEActionCollection* ac)
   : TQObject(parent, name.ascii()), collection(ac)
 {
   setName(name.ascii());
@@ -2000,7 +2000,7 @@ SignalBridge::SignalBridge(TQObject* parent, TQString name, KActionCollection* a
 
 void SignalBridge::receive()
 {
-  emit enabled(name(), ((KToggleAction*)collection -> action(name())) ->
+  emit enabled(name(), ((TDEToggleAction*)collection -> action(name())) ->
 isChecked());
 }
 
@@ -2031,7 +2031,7 @@ int DesktopChangeSlot::menuId()
 
 void karamba::showMenuExtension()
 {
-  kglobal = new KPopupMenu(this);
+  kglobal = new TDEPopupMenu(this);
 
   trayMenuToggleId = kglobal->insertItem(SmallIconSet("superkaramba"),
                                          i18n("Show System Tray Icon"), this,

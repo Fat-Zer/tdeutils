@@ -32,8 +32,8 @@
 #include "kcalcdisplay.h"
 
 class CalcEngine;
-class KAction;
-class KActionCollection;
+class TDEAction;
+class TDEActionCollection;
 
 class DispLogic : public KCalcDisplay
 {
@@ -42,7 +42,7 @@ Q_OBJECT
 
 public:
 	DispLogic(TQWidget *parent, const char *name,
-		  KActionCollection *coll);
+		  TDEActionCollection *coll);
 	~DispLogic();
 
 	void changeSettings();
@@ -58,8 +58,8 @@ private:
 	TQValueVector<KNumber> _history_list;
 	int _history_index;
 
-	KAction *_forward;
-	KAction *_back;
+	TDEAction *_forward;
+	TDEAction *_back;
 };
 
 #endif

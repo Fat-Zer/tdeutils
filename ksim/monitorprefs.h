@@ -27,7 +27,7 @@ namespace KSim
 {
   class Config;
 
-  class MonitorPrefs : public KListView
+  class MonitorPrefs : public TDEListView
   {
     Q_OBJECT
   

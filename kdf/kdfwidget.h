@@ -39,7 +39,7 @@
 class CListView;
 class COptionDialog;
 class TQTimer;
-class KPopupMenu;
+class TDEPopupMenu;
 
 /**************************************************************/
 
@@ -143,7 +143,7 @@ class KDFWidget : public TQWidget
     TQMemArray<CTabEntry*> mTabProp;
     CListView     *mList;
     COptionDialog *mOptionDialog;
-    KPopupMenu    *mPopup;
+    TDEPopupMenu    *mPopup;
     TQTimer        *mTimer;
     DiskList   mDiskList;
     bool       mIsTopLevel;

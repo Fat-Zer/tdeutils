@@ -22,7 +22,7 @@
 @author Gav Wood
 */
 
-class ModesList : public KListView
+class ModesList : public TDEListView
 {
 	Q_OBJECT
   

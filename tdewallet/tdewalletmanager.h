@@ -30,7 +30,7 @@ class TQIconViewItem;
 class DCOPRef;
 
 
-class KWalletManager : public KMainWindow, public DCOPObject {
+class KWalletManager : public TDEMainWindow, public DCOPObject {
 	Q_OBJECT
 //	
 	K_DCOP
@@ -66,7 +66,7 @@ class KWalletManager : public KMainWindow, public DCOPObject {
 	private slots:
 		void shuttingDown();
 		void possiblyQuit();
-		void editorClosed(KMainWindow* e);
+		void editorClosed(TDEMainWindow* e);
 		void possiblyRescan(const TQCString& app);
 		void setupWallet();
 		void openWallet();
@@ -78,7 +78,7 @@ class KWalletManager : public KMainWindow, public DCOPObject {
 		bool _shuttingDown;
 		KWalletIconView *_iconView;
 		DCOPRef *_dcopRef;
-		TQPtrList<KMainWindow> _windows;
+		TQPtrList<TDEMainWindow> _windows;
 		bool _tdewalletdLaunch;
 };
 

@@ -47,7 +47,7 @@
 #include <tqtooltip.h>
 
 KWalletManager::KWalletManager(TQWidget *parent, const char *name, WFlags f)
-: KMainWindow(parent, name, f), DCOPObject("KWalletManager") {
+: TDEMainWindow(parent, name, f), DCOPObject("KWalletManager") {
 	TDEGlobal::dirs()->addResourceType("tdewallet", "share/apps/tdewallet");
 	_tdewalletdLaunch = false;
 	TQAccel *accel = new TQAccel(this, "tdewalletmanager");
@@ -112,16 +112,16 @@ KWalletManager::KWalletManager(TQWidget *parent, const char *name, WFlags f)
 	//        wallet closes before we are done opening.  We will then stay
 	//        open.  Must check that a wallet is still open here.
 
-	new KAction(i18n("&New Wallet..."), "tdewalletmanager", 0, TQT_TQOBJECT(this),
+	new TDEAction(i18n("&New Wallet..."), "tdewalletmanager", 0, TQT_TQOBJECT(this),
 			TQT_SLOT(createWallet()), actionCollection(),
 			"wallet_create");
-	KAction *act = new KAction(i18n("Configure &Wallet..."), "configure",
+	TDEAction *act = new TDEAction(i18n("Configure &Wallet..."), "configure",
 			0, TQT_TQOBJECT(this), TQT_SLOT(setupWallet()), actionCollection(),
 			"wallet_settings");
 	if (_tray) {
 		act->plug(_tray->contextMenu());
 	}
-	act = new KAction(i18n("Close &All Wallets"), 0, 0, TQT_TQOBJECT(this),
+	act = new TDEAction(i18n("Close &All Wallets"), 0, 0, TQT_TQOBJECT(this),
 			TQT_SLOT(closeAllWallets()), actionCollection(),
 			"close_all_wallets");
 	if (_tray) {
@@ -256,8 +256,8 @@ void KWalletManager::changeWalletPassword(const TQString& walletName) {
 void KWalletManager::openWalletFile(const TQString& path) {
 	KWalletEditor *we = new KWalletEditor(path, true, this, "Wallet Editor");
 	if (we->isOpen()) {
-		connect(we, TQT_SIGNAL(editorClosed(KMainWindow*)),
-			this, TQT_SLOT(editorClosed(KMainWindow*)));
+		connect(we, TQT_SIGNAL(editorClosed(TDEMainWindow*)),
+			this, TQT_SLOT(editorClosed(TDEMainWindow*)));
 		we->show();
 	} else {
 		KMessageBox::sorry(this, i18n("Error opening wallet %1.").arg(path));
@@ -286,7 +286,7 @@ void KWalletManager::openWallet(const TQString& walletName) {
 
 void KWalletManager::openWallet(const TQString& walletName, bool newWallet) {
 	// Don't allow a wallet to open in two windows
-	for (KMainWindow *w = _windows.first(); w; w = _windows.next()) {
+	for (TDEMainWindow *w = _windows.first(); w; w = _windows.next()) {
 		KWalletEditor *e = static_cast<KWalletEditor*>(w);
 		if (e->isOpen() && e->_walletName == walletName) {
 			w->raise();
@@ -297,8 +297,8 @@ void KWalletManager::openWallet(const TQString& walletName, bool newWallet) {
 	KWalletEditor *we = new KWalletEditor(walletName, false, this, "Wallet Editor");
 	we->setNewWallet(newWallet);
 	if (we->isOpen()) {
-		connect(we, TQT_SIGNAL(editorClosed(KMainWindow*)),
-			this, TQT_SLOT(editorClosed(KMainWindow*)));
+		connect(we, TQT_SIGNAL(editorClosed(TDEMainWindow*)),
+			this, TQT_SLOT(editorClosed(TDEMainWindow*)));
 		we->show();
 		_windows.append(we);
 	} else if (!newWallet) {
@@ -337,7 +337,7 @@ void KWalletManager::possiblyQuit() {
 }
 
 
-void KWalletManager::editorClosed(KMainWindow* e) {
+void KWalletManager::editorClosed(TDEMainWindow* e) {
 	_windows.remove(e);
 }
 

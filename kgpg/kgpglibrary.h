@@ -43,7 +43,7 @@ public:
         KURL::List urlselecteds;
 
 public slots:
-        void slotFileEnc(KURL::List urls=KURL(""),TQStringList opts=TQString(),TQStringList defaultKey=TQString(),KShortcut goDefaultKey=TQKeySequence(CTRL+TQt::Key_Home));
+        void slotFileEnc(KURL::List urls=KURL(""),TQStringList opts=TQString(),TQStringList defaultKey=TQString(),TDEShortcut goDefaultKey=TQKeySequence(CTRL+TQt::Key_Home));
         void slotFileDec(KURL srcUrl,KURL destUrl,TQStringList customDecryptOption=TQStringList());
 	void shredprocessenc(KURL::List filesToShred);
 

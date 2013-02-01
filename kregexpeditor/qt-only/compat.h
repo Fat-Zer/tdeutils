@@ -30,7 +30,7 @@ TQString i18n( const TQString& a, const TQString& b);
 #define isatty(x) 0
 
 #define KTextBrowser TQTextBrowser
-#define KListBox TQListBox
+#define TDEListBox TQListBox
 #define KFileDialog TQFileDialog
 #define KPushButton TQPushButton
 

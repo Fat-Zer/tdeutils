@@ -39,7 +39,7 @@
  *  KWalletFolderItem - ListView items to represent tdewallet folders
  */
 KWalletFolderItem::KWalletFolderItem(KWallet::Wallet *w, TQListView* parent, const TQString &name, int entries)
-: KListViewItem(parent),_wallet(w),_name(name),_entries(entries) {
+: TDEListViewItem(parent),_wallet(w),_name(name),_entries(entries) {
 	setText(0, TQString("%1 (%2)").arg(_name).arg(_entries));
 	setRenameEnabled(0, false);
 	setDragEnabled(true);
@@ -122,7 +122,7 @@ KWalletFolderItem::~KWalletFolderItem() {
  *  passwords, maps, ...
  */
 KWalletContainerItem::KWalletContainerItem(TQListViewItem* parent, const TQString &name, KWallet::Wallet::EntryType type)
-: KListViewItem(parent, name), _type(type) {
+: TDEListViewItem(parent, name), _type(type) {
 	setRenameEnabled(0, false);
 	setDragEnabled(true);
 }
@@ -155,7 +155,7 @@ TQListViewItem *KWalletContainerItem::getItem(const TQString& key) {
  *  KWalletEntryItem - ListView items to represent tdewallet entries
  */
 KWalletEntryItem::KWalletEntryItem(KWallet::Wallet *w, TQListViewItem* parent, const TQString& ename)
-: KListViewItem(parent, ename), _wallet(w), _oldName(ename) {
+: TDEListViewItem(parent, ename), _wallet(w), _oldName(ename) {
 	setRenameEnabled(0, true);
 	setDragEnabled(true);
 }
@@ -349,7 +349,7 @@ class KWalletFolderDrag : public TQStoredDrag {
  *  KWalletEntryList - A listview to store wallet entries
  */
 KWalletEntryList::KWalletEntryList(TQWidget *parent, const char *name)
-: KListView(parent, name) {
+: TDEListView(parent, name) {
 	addColumn(i18n("Folders"));
 	setRootIsDecorated(true);
 	setDefaultRenameAction(Reject);

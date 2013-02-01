@@ -367,7 +367,7 @@ CpuConfig::CpuConfig(KSim::PluginObject *parent, const char *name)
   TQVBoxLayout * mainLayout = new TQVBoxLayout( this );
   mainLayout->setSpacing( 6 );
 
-  m_listView = new KListView(this);
+  m_listView = new TDEListView(this);
   m_listView->addColumn(i18n("Available CPUs"));
   m_listView->addColumn(i18n("Chart Format"));
   m_listView->setAllColumnsShowFocus(true);

@@ -464,7 +464,7 @@ void KDFWidget::popupMenu( TQListViewItem *item, const TQPoint &p )
     return;
   }
 
-  mPopup = new KPopupMenu( 0 );
+  mPopup = new TDEPopupMenu( 0 );
   mPopup->insertTitle( disk->mountPoint() );
   mPopup->insertItem( i18n("Mount Device"), 0 );
   mPopup->insertItem( i18n("Unmount Device"), 1 );

@@ -80,10 +80,10 @@ MyView::MyView( TQWidget *parent, const char *name )
         setBackgroundMode( X11ParentRelative );
 	openTasks=0;
 
-	KAction *saveDecrypt=new KAction(i18n("&Decrypt && Save File"),"decrypted",0,TQT_TQOBJECT(this), TQT_SLOT(decryptDroppedFile()),TQT_TQOBJECT(this),"decrypt_file");
-        KAction *showDecrypt=new KAction(i18n("&Show Decrypted File"),"edit",0,TQT_TQOBJECT(this), TQT_SLOT(showDroppedFile()),TQT_TQOBJECT(this),"show_file");
-        KAction *encrypt=new KAction(i18n("&Encrypt File"),"encrypted",0,TQT_TQOBJECT(this), TQT_SLOT(encryptDroppedFile()),TQT_TQOBJECT(this),"encrypt_file");
-        KAction *sign=new KAction(i18n("&Sign File"), "signature",0,TQT_TQOBJECT(this), TQT_SLOT(signDroppedFile()),TQT_TQOBJECT(this),"sign_file");
+	TDEAction *saveDecrypt=new TDEAction(i18n("&Decrypt && Save File"),"decrypted",0,TQT_TQOBJECT(this), TQT_SLOT(decryptDroppedFile()),TQT_TQOBJECT(this),"decrypt_file");
+        TDEAction *showDecrypt=new TDEAction(i18n("&Show Decrypted File"),"edit",0,TQT_TQOBJECT(this), TQT_SLOT(showDroppedFile()),TQT_TQOBJECT(this),"show_file");
+        TDEAction *encrypt=new TDEAction(i18n("&Encrypt File"),"encrypted",0,TQT_TQOBJECT(this), TQT_SLOT(encryptDroppedFile()),TQT_TQOBJECT(this),"encrypt_file");
+        TDEAction *sign=new TDEAction(i18n("&Sign File"), "signature",0,TQT_TQOBJECT(this), TQT_SLOT(signDroppedFile()),TQT_TQOBJECT(this),"sign_file");
         //TQToolTip::add(this,i18n("KGpg drag & drop encryption applet"));
 
         readOptions();
@@ -306,7 +306,7 @@ TQBoxLayout *layout=new TQBoxLayout(page,TQBoxLayout::TopToBottom,0);
 layout->setAutoAdd(true);
 
 (void) new KActiveLabel( i18n("Do you really want to <a href=\"whatsthis:%1\">shred</a> these files?").arg(i18n( "<qt><p>You must be aware that <b>shredding is not secure</b> on all file systems, and that parts of the file may have been saved in a temporary file or in the spooler of your printer if you previously opened it in an editor or tried to print it. Only works on files (not on folders).</p></qt>")),page);
-KListBox *lb=new KListBox(page);
+TDEListBox *lb=new TDEListBox(page);
 lb->insertStringList(droppedUrls.toStringList());
 if (shredConfirm->exec()==TQDialog::Accepted)
 	{
@@ -776,18 +776,18 @@ kgpgapplet::kgpgapplet(TQWidget *parent, const char *name)
 {
         w=new MyView(this);
         w->show();
-        KPopupMenu *conf_menu=contextMenu();
-        KgpgEncryptClipboard = new KAction(i18n("&Encrypt Clipboard"), "kgpg", 0,TQT_TQOBJECT(w), TQT_SLOT(clipEncrypt()),actionCollection(),"clip_encrypt");
-        KgpgDecryptClipboard = new KAction(i18n("&Decrypt Clipboard"), 0, 0,TQT_TQOBJECT(w), TQT_SLOT(clipDecrypt()),actionCollection(),"clip_decrypt");
-	KgpgSignClipboard = new KAction(i18n("&Sign/Verify Clipboard"), "signature", 0,TQT_TQOBJECT(w), TQT_SLOT(clipSign()),actionCollection(),"clip_sign");
-        KAction *KgpgOpenEditor;
+        TDEPopupMenu *conf_menu=contextMenu();
+        KgpgEncryptClipboard = new TDEAction(i18n("&Encrypt Clipboard"), "kgpg", 0,TQT_TQOBJECT(w), TQT_SLOT(clipEncrypt()),actionCollection(),"clip_encrypt");
+        KgpgDecryptClipboard = new TDEAction(i18n("&Decrypt Clipboard"), 0, 0,TQT_TQOBJECT(w), TQT_SLOT(clipDecrypt()),actionCollection(),"clip_decrypt");
+	KgpgSignClipboard = new TDEAction(i18n("&Sign/Verify Clipboard"), "signature", 0,TQT_TQOBJECT(w), TQT_SLOT(clipSign()),actionCollection(),"clip_sign");
+        TDEAction *KgpgOpenEditor;
 	if (KGpgSettings::leftClick()==KGpgSettings::EnumLeftClick::KeyManager)
-	KgpgOpenEditor = new KAction(i18n("&Open Editor"), "edit", 0,TQT_TQOBJECT(parent), TQT_SLOT(slotOpenEditor()),actionCollection(),"kgpg_editor");
+	KgpgOpenEditor = new TDEAction(i18n("&Open Editor"), "edit", 0,TQT_TQOBJECT(parent), TQT_SLOT(slotOpenEditor()),actionCollection(),"kgpg_editor");
 	else
-	KgpgOpenEditor = new KAction(i18n("&Open Key Manager"), "kgpg", 0,TQT_TQOBJECT(this), TQT_SLOT(slotOpenKeyManager()),actionCollection(),"kgpg_editor");
+	KgpgOpenEditor = new TDEAction(i18n("&Open Key Manager"), "kgpg", 0,TQT_TQOBJECT(this), TQT_SLOT(slotOpenKeyManager()),actionCollection(),"kgpg_editor");
 
-	KAction *KgpgOpenServer = new KAction(i18n("&Key Server Dialog"), "network", 0,TQT_TQOBJECT(this), TQT_SLOT(slotOpenServerDialog()),actionCollection(),"kgpg_server");
-        KAction *KgpgPreferences=KStdAction::preferences(TQT_TQOBJECT(this), TQT_SLOT(showOptions()), actionCollection());
+	TDEAction *KgpgOpenServer = new TDEAction(i18n("&Key Server Dialog"), "network", 0,TQT_TQOBJECT(this), TQT_SLOT(slotOpenServerDialog()),actionCollection(),"kgpg_server");
+        TDEAction *KgpgPreferences=KStdAction::preferences(TQT_TQOBJECT(this), TQT_SLOT(showOptions()), actionCollection());
 
 	connect (conf_menu,TQT_SIGNAL(aboutToShow()),TQT_TQOBJECT(this),TQT_SLOT(checkMenu()));
 

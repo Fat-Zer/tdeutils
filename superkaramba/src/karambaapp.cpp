@@ -129,7 +129,7 @@ void KarambaApplication::checkSuperKarambaDir()
 void KarambaApplication::setUpSysTray(TDEAboutData* about)
 {
   //kdDebug() << k_funcinfo << endl;
-  KAction* action;
+  TDEAction* action;
 
   //Create theme list window.
   //This will function as the main window for the tray icon
@@ -138,7 +138,7 @@ void KarambaApplication::setUpSysTray(TDEAboutData* about)
   //Set up systray icon
   sysTrayIcon = new KSystemTray(themeListWindow);
 
-  KPopupMenu *menu = sysTrayIcon->contextMenu();
+  TDEPopupMenu *menu = sysTrayIcon->contextMenu();
   menu->insertItem(SmallIconSet("superkaramba"),
                    i18n("Hide System Tray Icon"), this,
                    TQT_SLOT(globalHideSysTray()));

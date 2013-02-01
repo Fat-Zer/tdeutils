@@ -26,7 +26,7 @@
 class NetDialog;
 class TQPopupMenu;
 class TQPushButton;
-class KListView;
+class TDEListView;
 class TQHBoxLayout;
 class TQListViewItem;
 
@@ -42,7 +42,7 @@ class NetConfig : public KSim::PluginPage
     virtual void readConfig();
 
   private slots:
-    void menu(KListView *, TQListViewItem *, const TQPoint &);
+    void menu(TDEListView *, TQListViewItem *, const TQPoint &);
     void modifyItem(TQListViewItem *);
     void removeItem(TQListViewItem *);
     void removeCurrent();
@@ -58,7 +58,7 @@ class NetConfig : public KSim::PluginPage
     TQPushButton *insertButton;
     TQPushButton *removeButton;
     TQPushButton *modifyButton;
-    KListView *usingBox;
+    TDEListView *usingBox;
     NetDialog *netDialog;
     Network::List m_networkList;
     TQString m_yes;

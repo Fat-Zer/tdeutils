@@ -78,7 +78,7 @@ KCMLirc::KCMLirc(TQWidget *parent, const char *name, TQStringList /*args*/) : DC
 	connect(theKCMLircBase->theActions, TQT_SIGNAL( currentChanged(TQListViewItem *) ), this, TQT_SLOT( updateActionsStatus(TQListViewItem *) ));
 	connect(theKCMLircBase->theExtensions, TQT_SIGNAL( selectionChanged(TQListViewItem *) ), this, TQT_SLOT( updateInformation() ));
 	connect(theKCMLircBase->theModes, TQT_SIGNAL( itemRenamed(TQListViewItem *) ), this, TQT_SLOT( slotRenamed(TQListViewItem *) ));
-	connect(theKCMLircBase->theModes, TQT_SIGNAL(dropped(KListView*, TQDropEvent*, TQListViewItem*, TQListViewItem*)), this, TQT_SLOT(slotDrop(KListView*, TQDropEvent*, TQListViewItem*, TQListViewItem*)));
+	connect(theKCMLircBase->theModes, TQT_SIGNAL(dropped(TDEListView*, TQDropEvent*, TQListViewItem*, TQListViewItem*)), this, TQT_SLOT(slotDrop(TDEListView*, TQDropEvent*, TQListViewItem*, TQListViewItem*)));
 	connect((TQObject *)(theKCMLircBase->theAddActions), TQT_SIGNAL( clicked() ), this, TQT_SLOT( slotAddActions() ));
 	connect((TQObject *)(theKCMLircBase->theAddAction), TQT_SIGNAL( clicked() ), this, TQT_SLOT( slotAddAction() ));
 	connect((TQObject *)(theKCMLircBase->theEditAction), TQT_SIGNAL( clicked() ), this, TQT_SLOT( slotEditAction() ));
@@ -170,7 +170,7 @@ void KCMLirc::slotAddAction()
 	theDialog.theModes->setEnabled(item->firstChild());
 	theDialog.theSwitchMode->setEnabled(item->firstChild());
 	for(item = item->firstChild(); item; item = item->nextSibling())
-	{	KListViewItem *a = new KListViewItem(theDialog.theModes, item->text(0));
+	{	TDEListViewItem *a = new TDEListViewItem(theDialog.theModes, item->text(0));
 		if(item->isSelected()) { a->setSelected(true); theDialog.theModes->setCurrentItem(a); }
 	}
 
@@ -286,7 +286,7 @@ void KCMLirc::slotAddMode()
 	TQListViewItem *tr = theKCMLircBase->theModes->selectedItem();
 	if(tr) if(tr->parent()) tr = tr->parent();
 	for(TQListViewItem *i = theKCMLircBase->theModes->firstChild(); i; i = i->nextSibling())
-	{	KListViewItem *a = new KListViewItem(theDialog.theRemotes, i->text(0));
+	{	TDEListViewItem *a = new TDEListViewItem(theDialog.theRemotes, i->text(0));
 		remoteMap[a] = modeMap[i].remote();
 		if(i == tr) { a->setSelected(true); theDialog.theRemotes->setCurrentItem(a); }
 	}
@@ -349,7 +349,7 @@ void KCMLirc::slotSetDefaultMode()
 	emit changed(true);
 }
 
-void KCMLirc::slotDrop(KListView *, TQDropEvent *, TQListViewItem *, TQListViewItem *after)
+void KCMLirc::slotDrop(TDEListView *, TQDropEvent *, TQListViewItem *, TQListViewItem *after)
 {
 	Mode m = modeMap[after];
 
@@ -380,7 +380,7 @@ void KCMLirc::updateActions()
 	theKCMLircBase->theModeLabel->setText(m.remoteName() + ": " + (m.name().isEmpty() ? i18n("Actions <i>always</i> available") : i18n("Actions available only in mode <b>%1</b>").arg(m.name())));
 	IRAItList l = allActions.findByMode(m);
 	for(IRAItList::iterator i = l.begin(); i != l.end(); ++i)
-	{	TQListViewItem *b = new KListViewItem(theKCMLircBase->theActions, (**i).buttonName(), (**i).application(), (**i).function(), (**i).arguments().toString(), (**i).notes());
+	{	TQListViewItem *b = new TDEListViewItem(theKCMLircBase->theActions, (**i).buttonName(), (**i).application(), (**i).function(), (**i).arguments().toString(), (**i).notes());
 		actionMap[b] = *i;
 		if(*i == oldCurrent) { b->setSelected(true); theKCMLircBase->theActions->setCurrentItem(b); }
 	}
@@ -411,7 +411,7 @@ void KCMLirc::updateModes()
 		theKCMLircBase->theMainLabel->setMaximumSize(0, 0);
 	for(TQStringList::iterator i = remotes.begin(); i != remotes.end(); ++i)
 	{	Mode mode = allModes.getMode(*i, "");
-		TQListViewItem *a = new KListViewItem(theKCMLircBase->theModes, RemoteServer::remoteServer()->getRemoteName(*i), allModes.isDefault(mode) ? "Default" : "", mode.iconFile().isNull() ? "" : "");
+		TQListViewItem *a = new TDEListViewItem(theKCMLircBase->theModes, RemoteServer::remoteServer()->getRemoteName(*i), allModes.isDefault(mode) ? "Default" : "", mode.iconFile().isNull() ? "" : "");
 		if(!mode.iconFile().isNull())
 			a->setPixmap(2, KIconLoader().loadIcon(mode.iconFile(), KIcon::Panel));
 		modeMap[a] = mode;	// the null mode
@@ -420,7 +420,7 @@ void KCMLirc::updateModes()
 		ModeList l = allModes.getModes(*i);
 		for(ModeList::iterator j = l.begin(); j != l.end(); ++j)
 			if(!(*j).name().isEmpty())
-			{	TQListViewItem *b = new KListViewItem(a, (*j).name(), allModes.isDefault(*j) ? i18n("Default") : "", (*j).iconFile().isNull() ? "" : "");
+			{	TQListViewItem *b = new TDEListViewItem(a, (*j).name(), allModes.isDefault(*j) ? i18n("Default") : "", (*j).iconFile().isNull() ? "" : "");
 				if(!(*j).iconFile().isNull())
 					b->setPixmap(2, KIconLoader().loadIcon((*j).iconFile(), KIcon::Panel));
 				modeMap[b] = *j;

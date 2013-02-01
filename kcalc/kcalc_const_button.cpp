@@ -70,7 +70,7 @@ void KCalcConstButton::initPopupMenu(void)
 {
   KCalcConstMenu *tmp_menu = new KCalcConstMenu(this);
   
-  _popup = new KPopupMenu(this, "set const-cutton");
+  _popup = new TDEPopupMenu(this, "set const-cutton");
   _popup->insertItem(i18n("Set Name"), 0);
   _popup->insertItem(i18n("Choose From List"), tmp_menu, 1);
   

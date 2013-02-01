@@ -35,7 +35,7 @@
 
 
 DispLogic::DispLogic(TQWidget *parent, const char *name,
-		     KActionCollection *coll)
+		     TDEActionCollection *coll)
   :KCalcDisplay(parent,name), _history_index(0)
 {
 	KNumber::setDefaultFloatOutput(true);

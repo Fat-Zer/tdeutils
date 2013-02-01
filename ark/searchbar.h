@@ -25,16 +25,16 @@
 
 #include <tqwidget.h>
 
-class KListView;
+class TDEListView;
 class KComboBox;
-class KActionCollection;
+class TDEActionCollection;
 
-class SearchBar: public KListViewSearchLine
+class SearchBar: public TDEListViewSearchLine
 {
 	Q_OBJECT
   
 	public:
-		SearchBar( TQWidget* parent, KActionCollection* aC, const char * name = 0 );
+		SearchBar( TQWidget* parent, TDEActionCollection* aC, const char * name = 0 );
 		~SearchBar();
 };
 

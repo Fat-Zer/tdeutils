@@ -33,7 +33,7 @@
 
 KWMapEditor::KWMapEditor(TQMap<TQString,TQString>& map, TQWidget *parent, const char *name)
 : TQTable(0, 3, parent, name), _map(map) {
-	_ac = new KActionCollection(this);
+	_ac = new TDEActionCollection(this);
 	_copyAct = KStdAction::copy(TQT_TQOBJECT(this), TQT_SLOT(copy()), _ac);
 	connect(this, TQT_SIGNAL(valueChanged(int,int)), this, TQT_SIGNAL(dirty()));
 	connect(this, TQT_SIGNAL(contextMenuRequested(int,int,const TQPoint&)),
@@ -117,7 +117,7 @@ void KWMapEditor::emitDirty() {
 void KWMapEditor::contextMenu(int row, int col, const TQPoint& pos) {
 	_contextRow = row;
 	_contextCol = col;
-	KPopupMenu *m = new KPopupMenu(this);
+	TDEPopupMenu *m = new TDEPopupMenu(this);
 	m->insertItem(i18n("&New Entry"), this, TQT_SLOT(addEntry()));
 	_copyAct->plug(m);
 	m->popup(pos);

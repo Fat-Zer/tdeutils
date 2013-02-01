@@ -22,7 +22,7 @@ static const char *version = "v1.1";
 /* class KCharSelectDia                                           */
 /******************************************************************/
 
-class KCharSelectDia : public KMainWindow
+class KCharSelectDia : public TDEMainWindow
 {
   Q_OBJECT
   

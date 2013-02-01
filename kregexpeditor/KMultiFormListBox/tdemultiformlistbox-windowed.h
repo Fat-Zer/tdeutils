@@ -56,7 +56,7 @@ private:
 	TQVBoxLayout* _layout;
   KMultiFormListBoxFactory* _factory;
 	TQPtrList<TQPushButton> _buttonList;
-  KListBox* _listbox;
+  TDEListBox* _listbox;
 	virtual void delElement(TQWidget *); // Deletes the given element
 	virtual void delAnElement();
   void addElement();

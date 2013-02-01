@@ -24,7 +24,7 @@
 #include "filesystemstats.h"
 
 class KIntSpinBox;
-class KListView;
+class TDEListView;
 class TQGridLayout;
 class TQCheckBox;
 class TQLabel;
@@ -52,7 +52,7 @@ class FsystemConfig : public KSim::PluginPage
     TQCheckBox *m_splitNames;
     TQLabel *m_intervalLabel;
     KIntSpinBox *m_updateTimer;
-    KListView *m_availableMounts;
+    TDEListView *m_availableMounts;
     TQGridLayout *m_mainLayout;
     FilesystemStats::List m_entries;
 };

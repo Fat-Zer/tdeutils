@@ -130,8 +130,8 @@ public:
     TQString findSensorFromMap(Sensor* sensor);
     void deleteMeterFromSensors(Meter* meter);
     Sensor* findSensorFromList(Meter* meter);
-    KPopupMenu* keditpop;
-    KPopupMenu *kpop;
+    TDEPopupMenu* keditpop;
+    TDEPopupMenu *kpop;
     TQBitmap* widgetMask;
     KarambaRootPixmap *kroot;
     TaskManager taskManager;
@@ -225,9 +225,9 @@ private:
     // use only the first occurance of KARAMBA in a config file
     bool foundKaramba;
 
-    KPopupMenu* themeConfMenu;
-    KPopupMenu* toDesktopMenu;
-    KPopupMenu* kglobal;
+    TDEPopupMenu* themeConfMenu;
+    TDEPopupMenu* toDesktopMenu;
+    TDEPopupMenu* kglobal;
 
     DCOPClient *client;
     TQCString appId;
@@ -237,11 +237,11 @@ private:
     TQPainter p;
 
     TQPoint clickPos;
-    KActionCollection* accColl;
-    KActionCollection* menuAccColl;
-    KToggleAction *toggleLocked;
+    TDEActionCollection* accColl;
+    TDEActionCollection* menuAccColl;
+    TDEToggleAction *toggleLocked;
     // use highquality scale and rotate algorithms
-    KToggleAction *toggleFastTransforms;
+    TDEToggleAction *toggleFastTransforms;
 
     // Python module references
     KarambaPython* pythonIface;
@@ -351,7 +351,7 @@ class SignalBridge : public TQObject
   
 
   public:
-    SignalBridge(TQObject* parent, TQString, KActionCollection*);
+    SignalBridge(TQObject* parent, TQString, TDEActionCollection*);
 
   signals:
     void enabled(TQString, bool);
@@ -360,7 +360,7 @@ class SignalBridge : public TQObject
     void receive();
 
   private:
-    KActionCollection* collection;
+    TDEActionCollection* collection;
 };
 
 #endif // _KARAMBA_H_

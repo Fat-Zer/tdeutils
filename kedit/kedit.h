@@ -35,8 +35,8 @@ class KEdit;
 class KSpell;
 class KSpellConfig;
 class TQTimer;
-class KAction;
-class KRecentFilesAction;
+class TDEAction;
+class TDERecentFilesAction;
 
 namespace TDEIO { class Job; }
 
@@ -45,7 +45,7 @@ namespace TDEIO { class Job; }
 #define ID_INS_OVR 2
 #define ID_GENERAL 3
 
-class TopLevel : public KMainWindow
+class TopLevel : public TDEMainWindow
 {
     Q_OBJECT
   
@@ -128,11 +128,11 @@ private:
     bool newWindow;
     int statusID, toolID, indentID;
     TQTimer *statusbar_timer;
-    KRecentFilesAction *recent;
-    KAction *cutAction;
-    KAction *copyAction;
-    KAction *undoAction;
-    KAction *redoAction;
+    TDERecentFilesAction *recent;
+    TDEAction *cutAction;
+    TDEAction *copyAction;
+    TDEAction *undoAction;
+    TDEAction *redoAction;
 
     int open_mode;
 

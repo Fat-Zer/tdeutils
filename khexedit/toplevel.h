@@ -35,17 +35,17 @@
 #include "statusbarprogress.h"
 
 class TQSignalMapper;
-class KAction;
-class KRecentFilesAction;
-class KRadioAction;
-class KSelectAction;
-class KToggleAction;
-class KToolBarButton;
+class TDEAction;
+class TDERecentFilesAction;
+class TDERadioAction;
+class TDESelectAction;
+class TDEToggleAction;
+class TDEToolBarButton;
 class KURL;
 class CDragLabel;
 
 
-class KHexEdit : public KMainWindow
+class KHexEdit : public TDEMainWindow
 {
   Q_OBJECT
   
@@ -64,79 +64,79 @@ class KHexEdit : public KMainWindow
 
   struct SActionList
   {
-    KAction *insert;
-    KRecentFilesAction *openRecent;
-    KAction *save;
-    KAction *saveAs;
-    KAction *revert;
-    KAction *close;
-    KAction *print;
-    KAction *exportData;
-    KAction *cancel;
-    KToggleAction *readOnly;
-    KToggleAction *resizeLock;
-    KAction *newWindow;
-    KAction *closeWindow;
-    KAction *quit;
-    KAction *undo;
-    KAction *redo;
-    KAction *cut;
-    KAction *copy;
-    KAction *paste;
-    KAction *selectAll;
-    KAction *unselect;
-    KAction *find;
-    KAction *findNext;
-    KAction *findPrev;
-    KAction *replace;
-    KAction *gotoOffset;
-    KAction *insertPattern;
-    KAction *copyAsText;
-    KAction *pasteToNewFile;
-    KAction *pasteToNewWindow;
-    KRadioAction *hexadecimal;
-    KRadioAction *decimal;
-    KRadioAction *octal;
-    KRadioAction *binary;
-    KRadioAction *textOnly;
-    KToggleAction *showOffsetColumn;
-    KToggleAction *showTextColumn;
-    KToggleAction *offsetAsDecimal;
-    KToggleAction *dataUppercase;
-    KToggleAction *offsetUppercase;
-    KRadioAction *defaultEncoding;
-    KRadioAction *usAsciiEncoding;
-    KRadioAction *ebcdicEncoding;
-//     KAction *customEncoding;
+    TDEAction *insert;
+    TDERecentFilesAction *openRecent;
+    TDEAction *save;
+    TDEAction *saveAs;
+    TDEAction *revert;
+    TDEAction *close;
+    TDEAction *print;
+    TDEAction *exportData;
+    TDEAction *cancel;
+    TDEToggleAction *readOnly;
+    TDEToggleAction *resizeLock;
+    TDEAction *newWindow;
+    TDEAction *closeWindow;
+    TDEAction *quit;
+    TDEAction *undo;
+    TDEAction *redo;
+    TDEAction *cut;
+    TDEAction *copy;
+    TDEAction *paste;
+    TDEAction *selectAll;
+    TDEAction *unselect;
+    TDEAction *find;
+    TDEAction *findNext;
+    TDEAction *findPrev;
+    TDEAction *replace;
+    TDEAction *gotoOffset;
+    TDEAction *insertPattern;
+    TDEAction *copyAsText;
+    TDEAction *pasteToNewFile;
+    TDEAction *pasteToNewWindow;
+    TDERadioAction *hexadecimal;
+    TDERadioAction *decimal;
+    TDERadioAction *octal;
+    TDERadioAction *binary;
+    TDERadioAction *textOnly;
+    TDEToggleAction *showOffsetColumn;
+    TDEToggleAction *showTextColumn;
+    TDEToggleAction *offsetAsDecimal;
+    TDEToggleAction *dataUppercase;
+    TDEToggleAction *offsetUppercase;
+    TDERadioAction *defaultEncoding;
+    TDERadioAction *usAsciiEncoding;
+    TDERadioAction *ebcdicEncoding;
+//     TDEAction *customEncoding;
 
-    KAction *strings;
-//     KAction *recordViewer;
-    KAction *filter;
-    KAction *characterTable;
-    KAction *converter;
-    KAction *statistics;
+    TDEAction *strings;
+//     TDEAction *recordViewer;
+    TDEAction *filter;
+    TDEAction *characterTable;
+    TDEAction *converter;
+    TDEAction *statistics;
 
-    KAction *addBookmark;
-    KAction *replaceBookmark;
-    KAction *removeBookmark;
-    KAction *removeAllBookmark;
-    KAction *nextBookmark;
-    KAction *prevBookmark;
+    TDEAction *addBookmark;
+    TDEAction *replaceBookmark;
+    TDEAction *removeBookmark;
+    TDEAction *removeAllBookmark;
+    TDEAction *nextBookmark;
+    TDEAction *prevBookmark;
 
-    KToggleAction *showFullPath;
-    KRadioAction *tabHide;
-    KRadioAction *tabShowBelowEditor;
-    KRadioAction *tabShowAboveEditor;
-    KRadioAction *conversionHide;
-    KRadioAction *conversionFloat;
-    KRadioAction *conversionEmbed;
-    KRadioAction *searchHide;
-    KRadioAction *searchShowAboveEditor;
-    KRadioAction *searchShowBelowEditor;
+    TDEToggleAction *showFullPath;
+    TDERadioAction *tabHide;
+    TDERadioAction *tabShowBelowEditor;
+    TDERadioAction *tabShowAboveEditor;
+    TDERadioAction *conversionHide;
+    TDERadioAction *conversionFloat;
+    TDERadioAction *conversionEmbed;
+    TDERadioAction *searchHide;
+    TDERadioAction *searchShowAboveEditor;
+    TDERadioAction *searchShowBelowEditor;
 
-//     KAction *favorites;
+//     TDEAction *favorites;
 
-    TQPtrList< KAction > bookmarkList;
+    TQPtrList< TDEAction > bookmarkList;
     TQSignalMapper *bookmarkMapper;
   };
 
@@ -234,7 +234,7 @@ protected:
     SActionList mAction;
 
     CDragLabel     *mDragLabel;
-    KToolBarButton *mWriteProtectButton;
+    TDEToolBarButton *mWriteProtectButton;
 
     bool mIsModified;
     bool mShowFullPath;

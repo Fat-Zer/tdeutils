@@ -46,7 +46,7 @@
 TQPtrList<KHexEdit> KHexEdit::mWindowList;
 
 KHexEdit::KHexEdit( void )
-  : KMainWindow(0, "toplevel"), mStartupOffset(0),
+  : TDEMainWindow(0, "toplevel"), mStartupOffset(0),
   mIsModified(0)
 {
   mWindowList.append( this );
@@ -130,7 +130,7 @@ void KHexEdit::setupActions( void )
   KStdAction::keyBindings(guiFactory(), TQT_SLOT(configureShortcuts()), 
 actionCollection());
    
-  mAction.insert     = new KAction( i18n("&Insert..."), CTRL+Key_I,
+  mAction.insert     = new TDEAction( i18n("&Insert..."), CTRL+Key_I,
     TQT_TQOBJECT(editor()), TQT_SLOT(insertFile()), actionCollection(), "insert_file" );
   mAction.openRecent = KStdAction::openRecent( TQT_TQOBJECT(this), TQT_SLOT( slotFileOpenRecent( const KURL& ) ), actionCollection() );
   mAction.save       = KStdAction::save( TQT_TQOBJECT(editor()), TQT_SLOT(save()), actionCollection() );
@@ -140,17 +140,17 @@ actionCollection());
 
   mAction.close      = KStdAction::close( TQT_TQOBJECT(editor()), TQT_SLOT(close()), actionCollection() );
   mAction.print      = KStdAction::print( TQT_TQOBJECT(editor()), TQT_SLOT(print()), actionCollection() );
-  mAction.exportData = new KAction( i18n("E&xport..."), 0,
+  mAction.exportData = new TDEAction( i18n("E&xport..."), 0,
     TQT_TQOBJECT(editor()), TQT_SLOT(exportDialog()), actionCollection(), "export" );
-  mAction.cancel     = new KAction( i18n("&Cancel Operation"),
+  mAction.cancel     = new TDEAction( i18n("&Cancel Operation"),
     "stop", 0, TQT_TQOBJECT(editor()), TQT_SLOT(stop()), actionCollection(), "cancel" );
-  mAction.readOnly   = new KToggleAction( i18n("&Read Only"),
+  mAction.readOnly   = new TDEToggleAction( i18n("&Read Only"),
     0, TQT_TQOBJECT(editor()), TQT_SLOT(toggleWriteProtection()),actionCollection(), "read_only" );
-  mAction.resizeLock = new KToggleAction( i18n("&Allow Resize"),
+  mAction.resizeLock = new TDEToggleAction( i18n("&Allow Resize"),
    0, TQT_TQOBJECT(editor()), TQT_SLOT(toggleResizeLock()),actionCollection(), "resize_lock" );
-  mAction.newWindow  = new KAction( i18n("N&ew Window"),
+  mAction.newWindow  = new TDEAction( i18n("N&ew Window"),
     0, TQT_TQOBJECT(this), TQT_SLOT(newWindow()),actionCollection(), "new_window" );
-  mAction.closeWindow= new KAction( i18n("Close &Window"),
+  mAction.closeWindow= new TDEAction( i18n("Close &Window"),
     0, TQT_TQOBJECT(this), TQT_SLOT(closeWindow()),actionCollection(), "close_window" );
   mAction.quit       = KStdAction::quit( TQT_TQOBJECT(this), TQT_SLOT(closeProgram()), actionCollection() );
 
@@ -165,27 +165,27 @@ actionCollection());
   mAction.findNext   = KStdAction::findNext(  TQT_TQOBJECT(editor()), TQT_SLOT(findNext()), actionCollection() );
   mAction.findPrev   = KStdAction::findPrev(  TQT_TQOBJECT(editor()),TQT_SLOT(findPrevious()),actionCollection() );
   mAction.replace  = KStdAction::replace(   TQT_TQOBJECT(editor()), TQT_SLOT(replace()), actionCollection() );
-  mAction.gotoOffset = new KAction( i18n("&Goto Offset..."), CTRL+Key_G,
+  mAction.gotoOffset = new TDEAction( i18n("&Goto Offset..."), CTRL+Key_G,
     TQT_TQOBJECT(editor()), TQT_SLOT(gotoOffset()),actionCollection(), "goto_offset" );
-  mAction.insertPattern = new KAction( i18n("&Insert Pattern..."), CTRL+Key_Insert,
+  mAction.insertPattern = new TDEAction( i18n("&Insert Pattern..."), CTRL+Key_Insert,
     TQT_TQOBJECT(editor()), TQT_SLOT(insertPattern()), actionCollection(), "insert_pattern" );
 
-  mAction.copyAsText = new KAction( i18n("Copy as &Text"), 0,
+  mAction.copyAsText = new TDEAction( i18n("Copy as &Text"), 0,
     TQT_TQOBJECT(editor()), TQT_SLOT(copyText()), actionCollection(), "copy_as_text" );
-  mAction.pasteToNewFile = new KAction( i18n("Paste into New &File"), 0,
+  mAction.pasteToNewFile = new TDEAction( i18n("Paste into New &File"), 0,
     TQT_TQOBJECT(editor()), TQT_SLOT(pasteNewFile()), actionCollection(), "paste_into_new_file" );
-  mAction.pasteToNewWindow = new KAction( i18n("Paste into New &Window"), 0,
+  mAction.pasteToNewWindow = new TDEAction( i18n("Paste into New &Window"), 0,
     TQT_TQOBJECT(this), TQT_SLOT(pasteNewWindow()), actionCollection(), "paste_into_new_window" );
 
-  mAction.hexadecimal = new KRadioAction( i18n("&Hexadecimal"),
+  mAction.hexadecimal = new TDERadioAction( i18n("&Hexadecimal"),
     0, TQT_TQOBJECT(this), TQT_SLOT(setDisplayMode()), actionCollection(), "mode_hex" );
-  mAction.decimal     = new KRadioAction( i18n("&Decimal"),
+  mAction.decimal     = new TDERadioAction( i18n("&Decimal"),
     0, TQT_TQOBJECT(this), TQT_SLOT(setDisplayMode()), actionCollection(), "mode_dec" );
-  mAction.octal       = new KRadioAction( i18n("&Octal"),
+  mAction.octal       = new TDERadioAction( i18n("&Octal"),
     0, TQT_TQOBJECT(this), TQT_SLOT(setDisplayMode()), actionCollection(), "mode_oct" );
-  mAction.binary      = new KRadioAction( i18n("&Binary"),
+  mAction.binary      = new TDERadioAction( i18n("&Binary"),
     0, TQT_TQOBJECT(this), TQT_SLOT(setDisplayMode()), actionCollection(), "mode_bin" );
-  mAction.textOnly    = new KRadioAction( i18n("&Text"),
+  mAction.textOnly    = new TDERadioAction( i18n("&Text"),
     0, TQT_TQOBJECT(this), TQT_SLOT(setDisplayMode()), actionCollection(), "mode_text" );
   mAction.hexadecimal->setExclusiveGroup( "displayMode" );
   mAction.decimal->setExclusiveGroup( "displayMode" );
@@ -193,87 +193,87 @@ actionCollection());
   mAction.binary->setExclusiveGroup( "displayMode" );
   mAction.textOnly->setExclusiveGroup( "displayMode" );
 
-  mAction.showOffsetColumn = new KToggleAction( i18n("Show O&ffset Column"),
+  mAction.showOffsetColumn = new TDEToggleAction( i18n("Show O&ffset Column"),
     0, TQT_TQOBJECT(editor()), TQT_SLOT(toggleOffsetColumnVisibility()),actionCollection(), "show_offset_column" );
-  mAction.showTextColumn = new KToggleAction( i18n("Show Te&xt Field"),
+  mAction.showTextColumn = new TDEToggleAction( i18n("Show Te&xt Field"),
     0, TQT_TQOBJECT(editor()), TQT_SLOT(toggleTextColumnVisibility()),actionCollection(), "show_text_field" );
-  mAction.offsetAsDecimal = new KToggleAction( i18n("Off&set as Decimal"),
+  mAction.offsetAsDecimal = new TDEToggleAction( i18n("Off&set as Decimal"),
     0, TQT_TQOBJECT(editor()), TQT_SLOT(toggleOffsetAsDecimal()),actionCollection(), "offset_as_decimal" );
-  mAction.dataUppercase = new KToggleAction( i18n("&Upper Case (Data)"),
+  mAction.dataUppercase = new TDEToggleAction( i18n("&Upper Case (Data)"),
     0, TQT_TQOBJECT(editor()), TQT_SLOT(toggleDataUppercase()),actionCollection(), "upper_case_data" );
-  mAction.offsetUppercase = new KToggleAction( i18n("Upper &Case (Offset)"),
+  mAction.offsetUppercase = new TDEToggleAction( i18n("Upper &Case (Offset)"),
     0, TQT_TQOBJECT(editor()), TQT_SLOT(toggleOffsetUppercase()),actionCollection(), "upper_case_offset" );
 
-  mAction.defaultEncoding = new KRadioAction( i18n("&Default encoding", "&Default"),
+  mAction.defaultEncoding = new TDERadioAction( i18n("&Default encoding", "&Default"),
     0, TQT_TQOBJECT(this), TQT_SLOT( setEncoding()), actionCollection(), "enc_default" );
-  mAction.usAsciiEncoding = new KRadioAction( i18n("US-&ASCII (7 bit)"),
+  mAction.usAsciiEncoding = new TDERadioAction( i18n("US-&ASCII (7 bit)"),
     0, TQT_TQOBJECT(this), TQT_SLOT( setEncoding()), actionCollection(), "enc_ascii");
-  mAction.ebcdicEncoding  = new KRadioAction( i18n("&EBCDIC"),
+  mAction.ebcdicEncoding  = new TDERadioAction( i18n("&EBCDIC"),
     0, TQT_TQOBJECT(this), TQT_SLOT( setEncoding()), actionCollection(), "enc_ebcdic" );
-//   mAction.customEncoding  = new KAction( i18n("&Custom..."),
+//   mAction.customEncoding  = new TDEAction( i18n("&Custom..."),
 //     0, TQT_TQOBJECT(editor()), TQT_SLOT( encoding()), actionCollection(), "enc_custom" );
   mAction.defaultEncoding->setExclusiveGroup( "encodingMode" );
   mAction.usAsciiEncoding->setExclusiveGroup( "encodingMode" );
   mAction.ebcdicEncoding->setExclusiveGroup( "encodingMode" );
 
-  mAction.strings = new KAction( i18n("&Extract Strings..."), 0,
+  mAction.strings = new TDEAction( i18n("&Extract Strings..."), 0,
     TQT_TQOBJECT(editor()), TQT_SLOT(strings()), actionCollection(), "extract_strings" );
-//   mAction.recordViewer = new KAction( i18n("&Record Viewer"), 0,
+//   mAction.recordViewer = new TDEAction( i18n("&Record Viewer"), 0,
 //     TQT_TQOBJECT(editor()), TQT_SLOT(recordView()), actionCollection(), "record_viewer" );
-  mAction.filter = new KAction( i18n("&Binary Filter..."), 0,
+  mAction.filter = new TDEAction( i18n("&Binary Filter..."), 0,
     TQT_TQOBJECT(editor()), TQT_SLOT(filter()), actionCollection(), "binary_filter" );
-  mAction.characterTable = new KAction( i18n("&Character Table"), 0,
+  mAction.characterTable = new TDEAction( i18n("&Character Table"), 0,
     TQT_TQOBJECT(editor()), TQT_SLOT(chart()), actionCollection(), "char_table" );
-  mAction.converter = new KAction( i18n("C&onverter"), 0,
+  mAction.converter = new TDEAction( i18n("C&onverter"), 0,
     TQT_TQOBJECT(editor()), TQT_SLOT(converter()), actionCollection(), "converter" );
-  mAction.statistics = new KAction( i18n("&Statistics"), 0,
+  mAction.statistics = new TDEAction( i18n("&Statistics"), 0,
     TQT_TQOBJECT(editor()), TQT_SLOT(statistics()), actionCollection(), "statistics" );
 
   mAction.addBookmark = KStdAction::addBookmark( TQT_TQOBJECT(editor()),
     TQT_SLOT(addBookmark()), actionCollection() );
-  mAction.replaceBookmark = new KAction( i18n("&Replace Bookmark"), CTRL+Key_E,
+  mAction.replaceBookmark = new TDEAction( i18n("&Replace Bookmark"), CTRL+Key_E,
     TQT_TQOBJECT(editor()), TQT_SLOT(replaceBookmark()), actionCollection(), "replace_bookmark");
-  mAction.removeBookmark = new KAction( i18n("R&emove Bookmark"), CTRL+Key_U,
+  mAction.removeBookmark = new TDEAction( i18n("R&emove Bookmark"), CTRL+Key_U,
     TQT_TQOBJECT(editor()), TQT_SLOT(removeBookmark()), actionCollection(), "remove_bookmark" );
-  mAction.removeAllBookmark = new KAction( i18n("Re&move All"), 0,
+  mAction.removeAllBookmark = new TDEAction( i18n("Re&move All"), 0,
     TQT_TQOBJECT(editor()), TQT_SLOT(removeAllBookmark()), actionCollection(), "remove_all_bookmarks" );
-  mAction.nextBookmark = new KAction( i18n("Goto &Next Bookmark"),
+  mAction.nextBookmark = new TDEAction( i18n("Goto &Next Bookmark"),
 				      ALT+Key_Down, TQT_TQOBJECT(editor()),
 				      TQT_SLOT(gotoNextBookmark()), actionCollection(), "next_bookmark" );
-  mAction.prevBookmark = new KAction( i18n("Goto &Previous Bookmark"),
+  mAction.prevBookmark = new TDEAction( i18n("Goto &Previous Bookmark"),
 				      ALT+Key_Up, TQT_TQOBJECT(editor()),
 				      TQT_SLOT(gotoPrevBookmark()), actionCollection(), "prev_bookmark" );
 
   createStandardStatusBarAction();
   setStandardToolBarMenuEnabled(true);
-  mAction.showFullPath  = new KToggleAction( i18n("Show F&ull Path"),
+  mAction.showFullPath  = new TDEToggleAction( i18n("Show F&ull Path"),
     0, TQT_TQOBJECT(this), TQT_SLOT(showFullPath()), actionCollection(), "show_full_path" );
 
-  mAction.tabHide = new KRadioAction( i18n("&Hide"),
+  mAction.tabHide = new TDERadioAction( i18n("&Hide"),
     0, TQT_TQOBJECT(this), TQT_SLOT(showDocumentTabs()), actionCollection(), "doctab_hide" );
-  mAction.tabShowAboveEditor = new KRadioAction( i18n("&Above Editor"),
+  mAction.tabShowAboveEditor = new TDERadioAction( i18n("&Above Editor"),
     0, TQT_TQOBJECT(this), TQT_SLOT(showDocumentTabs()), actionCollection(), "doctab_above" );
-  mAction.tabShowBelowEditor = new KRadioAction( i18n("&Below Editor"),
+  mAction.tabShowBelowEditor = new TDERadioAction( i18n("&Below Editor"),
     0, TQT_TQOBJECT(this), TQT_SLOT(showDocumentTabs()), actionCollection(), "doctab_below" );
   mAction.tabHide->setExclusiveGroup( "editorTab" );
   mAction.tabShowAboveEditor->setExclusiveGroup( "editorTab" );
   mAction.tabShowBelowEditor->setExclusiveGroup( "editorTab" );
 
-  mAction.conversionHide  = new KRadioAction( i18n("&Hide"),
+  mAction.conversionHide  = new TDERadioAction( i18n("&Hide"),
     0, TQT_TQOBJECT(this), TQT_SLOT(showConversionField()), actionCollection(), "conversion_field_hide");
-  mAction.conversionFloat = new KRadioAction( i18n("&Floating"),
+  mAction.conversionFloat = new TDERadioAction( i18n("&Floating"),
     0, TQT_TQOBJECT(this), TQT_SLOT(showConversionField()), actionCollection(), "conversion_field_float");
-  mAction.conversionEmbed = new KRadioAction( i18n("&Embed in Main Window"),
+  mAction.conversionEmbed = new TDERadioAction( i18n("&Embed in Main Window"),
     0, TQT_TQOBJECT(this), TQT_SLOT(showConversionField()), actionCollection(), "conversion_field_embed");
   mAction.conversionHide->setExclusiveGroup( "conversionField" );
   mAction.conversionFloat->setExclusiveGroup( "conversionField" );
   mAction.conversionEmbed->setExclusiveGroup( "conversionField" );
 
-  mAction.searchHide = new KRadioAction( i18n("&Hide"),
+  mAction.searchHide = new TDERadioAction( i18n("&Hide"),
     0, TQT_TQOBJECT(this), TQT_SLOT(showSearchBar()), actionCollection(), "searchbar_hide" );
-  mAction.searchShowAboveEditor = new KRadioAction( i18n("&Above Editor"),
+  mAction.searchShowAboveEditor = new TDERadioAction( i18n("&Above Editor"),
     Key_F5, TQT_TQOBJECT(this), TQT_SLOT(showSearchBar()), actionCollection(), "searchbar_above" );
-  mAction.searchShowBelowEditor = new KRadioAction( i18n("&Below Editor"),
+  mAction.searchShowBelowEditor = new TDERadioAction( i18n("&Below Editor"),
     Key_F6, TQT_TQOBJECT(this), TQT_SLOT(showSearchBar()), actionCollection(), "searchbar_below" );
   mAction.searchHide->setExclusiveGroup( "searchBar" );
   mAction.searchShowAboveEditor->setExclusiveGroup( "searchBar" );
@@ -281,7 +281,7 @@ actionCollection());
 
   KStdAction::saveOptions(TQT_TQOBJECT(this), TQT_SLOT(writeConfiguration()), actionCollection());
   KStdAction::preferences(TQT_TQOBJECT(editor()) ,TQT_SLOT(options()),actionCollection() );
-//   mAction.favorites = new KAction( i18n("P&rofiles..."), 0,
+//   mAction.favorites = new TDEAction( i18n("P&rofiles..."), 0,
 //     TQT_TQOBJECT(editor()), TQT_SLOT(favorites()), actionCollection(), "favorites" );
 
   KStdAction::help( TQT_TQOBJECT(this), TQT_SLOT(appHelpActivated()), actionCollection() );
@@ -376,7 +376,7 @@ void KHexEdit::initialize( bool openFiles )
 
   if ( openFiles && editor()->openFile() != SDisplayMisc::none )
   {
-    // Code modified from tdelibs/tdeui/kactionclasses.cpp KRecentFilesAction::loadEntries
+    // Code modified from tdelibs/tdeui/kactionclasses.cpp TDERecentFilesAction::loadEntries
       
     TDEConfig* config = kapp->config();
 
@@ -809,7 +809,7 @@ void KHexEdit::fileState( SFileState &state )
 
 void KHexEdit::layoutChanged( const SDisplayLayout &layout )
 {
-  KRadioAction *radioAction;
+  TDERadioAction *radioAction;
 
   if( layout.primaryMode == SDisplayLayout::hexadecimal )
   {
@@ -914,7 +914,7 @@ void KHexEdit::bookmarkChanged( TQPtrList<SCursorOffset> &list )
     return;
   }
 
-  mAction.bookmarkList.append(new KActionSeparator());
+  mAction.bookmarkList.append(new TDEActionSeparator());
 
   TQString text, offset;
   int i=0;
@@ -923,11 +923,11 @@ void KHexEdit::bookmarkChanged( TQPtrList<SCursorOffset> &list )
   {
     offset.sprintf("%04X:%04X", p->offset>>16, p->offset&0x0000FFFF );
     text = i18n("Offset: %1").arg(offset);
-    KAction *action = new KAction(text, 0, mAction.bookmarkMapper, TQT_SLOT(map()), TQT_TQOBJECT(this), text.latin1());
+    TDEAction *action = new TDEAction(text, 0, mAction.bookmarkMapper, TQT_SLOT(map()), TQT_TQOBJECT(this), text.latin1());
     int key = acceleratorNumKey( i );
     if( key > 0 )
     {
-      action->setShortcut(KShortcut(ALT+key));
+      action->setShortcut(TDEShortcut(ALT+key));
     }
     mAction.bookmarkMapper->setMapping(action, i);
     mAction.bookmarkList.append(action);
@@ -996,7 +996,7 @@ void KHexEdit::editMode( CHexBuffer::EEditMode editMode )
 
 void KHexEdit::encodingChanged( const SEncodeState &encodeState )
 {
-  KRadioAction *radioAction;
+  TDERadioAction *radioAction;
 
   if( encodeState.mode == CConversion::cnvDefault )
   {
@@ -1324,7 +1324,7 @@ bool KHexEdit::eventFilter( TQObject *o, TQEvent *event )
     return( true );
   }
 
-  return KMainWindow::eventFilter( o, event );
+  return TDEMainWindow::eventFilter( o, event );
 }
 
 

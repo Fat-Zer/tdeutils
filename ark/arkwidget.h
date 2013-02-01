@@ -44,13 +44,13 @@ class TQListViewItem;
 class TQDragMoveEvent;
 class TQDropEvent;
 
-class KPopupMenu;
+class TDEPopupMenu;
 class TDEProcess;
 class KURL;
 class KRun;
 class KTempFile;
 class KTempDir;
-class KToolBar;
+class TDEToolBar;
 
 class FileListView;
 class SearchBar;
@@ -292,7 +292,7 @@ private: // data
 
     bool m_modified;
 
-    KToolBar  * m_searchToolBar;
+    TDEToolBar  * m_searchToolBar;
     SearchBar * m_searchBar;
 
     Arch   * arch;

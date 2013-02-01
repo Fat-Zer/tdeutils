@@ -45,11 +45,11 @@ class TQPoint;
 
 enum columnName { sizeCol = 1 , packedStrCol, ratioStrCol, timeStampStrCol, otherCol };
 
-class FileLVI : public KListViewItem
+class FileLVI : public TDEListViewItem
 {
 	public:
-		FileLVI( KListView* lv );
-		FileLVI( KListViewItem* lvi );
+		FileLVI( TDEListView* lv );
+		FileLVI( TDEListViewItem* lvi );
 
 		TQString fileName() const { return m_entryName; }
 		TDEIO::filesize_t fileSize() const { return m_fileSize; }
@@ -71,14 +71,14 @@ class FileLVI : public KListViewItem
 
 typedef TQValueList< TQPair< TQString, TQt::AlignmentFlags > > ColumnList;
 
-class FileListView: public KListView
+class FileListView: public TDEListView
 {
 	Q_OBJECT
   
 	public:
 		FileListView( TQWidget *parent = 0, const char* name = 0 );
 
-		FileLVI *currentItem() {return ((FileLVI *) KListView::currentItem());}
+		FileLVI *currentItem() {return ((FileLVI *) TDEListView::currentItem());}
 
 		/**
 		 * Returns the full names of the selected files.

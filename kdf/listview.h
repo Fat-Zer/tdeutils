@@ -25,7 +25,7 @@
 
 #include <klistview.h>
 
-class CListView : public KListView
+class CListView : public TDEListView
 {
   Q_OBJECT
   

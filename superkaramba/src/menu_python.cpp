@@ -37,7 +37,7 @@ long createMenu(long widget)
 {
   karamba* currTheme = (karamba*)widget;
 
-  KPopupMenu* tmp = new KPopupMenu(currTheme);
+  TDEPopupMenu* tmp = new TDEPopupMenu(currTheme);
   currTheme->menuList->append( TQT_TQOBJECT(tmp) );
 
   currTheme->connect(tmp, TQT_SIGNAL(activated(int)), currTheme,
@@ -54,20 +54,20 @@ PyObject* py_create_menu(PyObject *, PyObject *args)
   return Py_BuildValue((char*)"l", createMenu(widget));
 }
 
-bool menuExists(karamba* currTheme, KPopupMenu* menu)
+bool menuExists(karamba* currTheme, TDEPopupMenu* menu)
 {
   bool foundMenu = false;
-  KPopupMenu* tmp;
+  TDEPopupMenu* tmp;
 
   for(int i = 0; i < (int)currTheme->menuList->count(); i++)
   {
     if(i==0)
     {
-      tmp = (KPopupMenu*) currTheme->menuList->first();
+      tmp = (TDEPopupMenu*) currTheme->menuList->first();
     }
     else
     {
-      tmp = (KPopupMenu*) currTheme->menuList->next();
+      tmp = (TDEPopupMenu*) currTheme->menuList->next();
     }
     if(tmp != 0)
     {
@@ -84,7 +84,7 @@ bool menuExists(karamba* currTheme, KPopupMenu* menu)
 long deleteMenu(long widget, long menu)
 {
   karamba* currTheme = (karamba*)widget;
-  KPopupMenu* tmp = (KPopupMenu*)menu;
+  TDEPopupMenu* tmp = (TDEPopupMenu*)menu;
 
   currTheme->menuList->removeRef(TQT_TQOBJECT(tmp));
 
@@ -102,7 +102,7 @@ PyObject* py_delete_menu(PyObject *, PyObject *args)
 long addMenuItem(long widget, long menu, TQString text, TQString icon)
 {
   karamba* currTheme = (karamba*)widget;
-  KPopupMenu* tmp = (KPopupMenu*)menu;
+  TDEPopupMenu* tmp = (TDEPopupMenu*)menu;
 
   long id = 0;
   if(menuExists(currTheme, tmp))
@@ -129,7 +129,7 @@ PyObject* py_add_menu_item(PyObject *, PyObject *args)
 long addMenuSeparator(long widget, long menu)
 {
   karamba* currTheme = (karamba*)widget;
-  KPopupMenu* tmp = (KPopupMenu*)menu;
+  TDEPopupMenu* tmp = (TDEPopupMenu*)menu;
 
   long id = 0;
   if(menuExists(currTheme, tmp))
@@ -153,7 +153,7 @@ PyObject* py_add_menu_separator(PyObject *, PyObject *args)
 long removeMenuItem(long widget, long menu, long id)
 {
   karamba* currTheme = (karamba*)widget;
-  KPopupMenu* tmp = (KPopupMenu*)menu;
+  TDEPopupMenu* tmp = (TDEPopupMenu*)menu;
 
   if(menuExists(currTheme,tmp))
   {
@@ -177,7 +177,7 @@ PyObject* py_remove_menu_item(PyObject *, PyObject *args)
 long popupMenu(long widget, long menu, long x, long y)
 {
   karamba* currTheme = (karamba*)widget;
-  KPopupMenu* tmp = (KPopupMenu*)menu;
+  TDEPopupMenu* tmp = (TDEPopupMenu*)menu;
 
   if(menuExists(currTheme,tmp))
   {

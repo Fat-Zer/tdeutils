@@ -34,20 +34,20 @@ namespace KHE
   *
   *@author Friedrich W. H.  Kossebau
   */
-class KSelection : public KSection
+class TDESelection : public KSection
 {
   public:
     /** creates a selection with a given start.
       * @param Index index in front of which the selection begins
       */
-    KSelection( int Index );
+    TDESelection( int Index );
     /** creates an invalid selection */
-    KSelection();
-    ~KSelection();
+    TDESelection();
+    ~TDESelection();
 
   public:
-    KSelection &operator=( const KSelection &S );
-    KSelection &operator=( const KSection &S );
+    TDESelection &operator=( const TDESelection &S );
+    TDESelection &operator=( const KSection &S );
 
   public: // modification access
     /** starts the selection. 
@@ -103,18 +103,18 @@ class KSelection : public KSection
 };
 
 
-inline KSelection::KSelection() : Anchor( -1 ) {}
-inline KSelection::KSelection( int Index ) : Anchor( Index )  {}
-inline KSelection::~KSelection() {}
+inline TDESelection::TDESelection() : Anchor( -1 ) {}
+inline TDESelection::TDESelection( int Index ) : Anchor( Index )  {}
+inline TDESelection::~TDESelection() {}
 
-inline KSelection &KSelection::operator=( const KSelection &S )
+inline TDESelection &TDESelection::operator=( const TDESelection &S )
 { 
   KSection::operator=(S); 
   Anchor = S.Anchor; 
   return *this; 
 }
 
-inline KSelection &KSelection::operator=( const KSection &S )
+inline TDESelection &TDESelection::operator=( const KSection &S )
 { 
   KSection::operator=(S); 
   Anchor = start(); 
@@ -122,14 +122,14 @@ inline KSelection &KSelection::operator=( const KSection &S )
 }
 
 
-inline void KSelection::setStart( int Index )
+inline void TDESelection::setStart( int Index )
 {
   Anchor = Index;
   unset();
 }
 
 
-inline void KSelection::setEnd( int Index )
+inline void TDESelection::setEnd( int Index )
 {
   // nothing selected?
   if( Index == Anchor )
@@ -148,30 +148,30 @@ inline void KSelection::setEnd( int Index )
   }
 }
 
-inline void KSelection::reverse() 
+inline void TDESelection::reverse() 
 {
    Anchor = isForward() ? end()+1 : start();
 }
 
-inline void KSelection::setForward() 
+inline void TDESelection::setForward() 
 {
    Anchor = start();
 }
 
-inline void KSelection::setBackward() 
+inline void TDESelection::setBackward() 
 {
    Anchor = end()+1;
 }
 
-inline int KSelection::anchor() const { return Anchor; }
+inline int TDESelection::anchor() const { return Anchor; }
 
-inline void KSelection::cancel() { Anchor = -1; unset(); }
+inline void TDESelection::cancel() { Anchor = -1; unset(); }
 
-inline bool KSelection::started() const { return Anchor != -1; }
+inline bool TDESelection::started() const { return Anchor != -1; }
 
-inline bool KSelection::justStarted() const { return Anchor != -1 && start() == -1; }
+inline bool TDESelection::justStarted() const { return Anchor != -1 && start() == -1; }
 
-inline bool KSelection::isForward() const { return Anchor == start(); }
+inline bool TDESelection::isForward() const { return Anchor == start(); }
 
 }
 

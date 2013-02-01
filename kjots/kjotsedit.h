@@ -24,7 +24,7 @@
 #define __KJOTSEDIT_H
 
 #include <keditcl.h>
-class KPopupMenu;
+class TDEPopupMenu;
 class KJotsPage;
 
 class KJotsEdit : public KEdit
@@ -47,7 +47,7 @@ class KJotsEdit : public KEdit
     protected:
         virtual void mousePressEvent (TQMouseEvent *e);
 
-        KPopupMenu *web_menu;
+        TDEPopupMenu *web_menu;
         KJotsPage *m_entry; //!< The entry we are editing. It needs to be kept informed.
 };
 

@@ -58,7 +58,7 @@ SensorsConfig::SensorsConfig(KSim::PluginObject *parent, const char *name)
   m_layout->setSpacing(6);
   m_neverShown = true;
 
-  m_sensorView = new KListView(this);
+  m_sensorView = new TDEListView(this);
   m_sensorView->addColumn(i18n("No."));
   m_sensorView->addColumn(i18n("Label"));
   m_sensorView->addColumn(i18n("Sensors"));
@@ -67,8 +67,8 @@ SensorsConfig::SensorsConfig(KSim::PluginObject *parent, const char *name)
   m_sensorView->setColumnWidth(1, 60);
   m_sensorView->setColumnWidth(2, 80);
   m_sensorView->setAllColumnsShowFocus(true);
-  connect(m_sensorView, TQT_SIGNAL(contextMenu(KListView *,
-     TQListViewItem *, const TQPoint &)), this, TQT_SLOT(menu(KListView *,
+  connect(m_sensorView, TQT_SIGNAL(contextMenu(TDEListView *,
+     TQListViewItem *, const TQPoint &)), this, TQT_SLOT(menu(TDEListView *,
      TQListViewItem *, const TQPoint &)));
 
   connect( m_sensorView, TQT_SIGNAL( doubleClicked( TQListViewItem * ) ),
@@ -134,7 +134,7 @@ void SensorsConfig::readConfig()
   }
 }
 
-void SensorsConfig::menu(KListView *, TQListViewItem *, const TQPoint &)
+void SensorsConfig::menu(TDEListView *, TQListViewItem *, const TQPoint &)
 {
   m_popupMenu = new TQPopupMenu(this);
 

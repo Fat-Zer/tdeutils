@@ -67,7 +67,7 @@
                 <string>Delete</string>
             </property>
         </widget>
-        <widget class="KListBox" row="0" column="0" rowspan="4" colspan="1">
+        <widget class="TDEListBox" row="0" column="0" rowspan="4" colspan="1">
             <property name="name">
                 <cstring>ServerBox</cstring>
             </property>

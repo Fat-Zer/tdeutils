@@ -26,7 +26,7 @@
 class TQListViewItem;
 class TQGridLayout;
 class TQLabel;
-class KListView;
+class TDEListView;
 class KURLLabel;
 class KComboBox;
 class KSqueezedTextLabel;
@@ -97,7 +97,7 @@ namespace KSim
       void showFontDialog(int);
 
     private:
-      KListView *m_listView;
+      TDEListView *m_listView;
       KURLLabel *m_urlLabel;
       KIntSpinBox *m_altTheme;
       KComboBox *m_fontsCombo;

@@ -21,7 +21,7 @@
 #include <kdialogbase.h>
 #include "keyserver.h"
 
-class KListViewItem;
+class TDEListViewItem;
 class KSimpleConfig;
 class KProcIO;
 class TDEProcess;
@@ -71,7 +71,7 @@ private:
         searchRes *listpop;
         int count;
         bool cycle,autoCloseWindow;
-        KListViewItem *kitem;
+        TDEListViewItem *kitem;
 	KDialogBase *dialogServer;
 	
 signals:

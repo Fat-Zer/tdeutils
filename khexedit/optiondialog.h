@@ -31,7 +31,7 @@ class TQPushbutton;
 class TQRadioButton;
 class TQSpinBox;
 class TQComboBox;
-class KFontChooser;
+class TDEFontChooser;
 
 
 #include <kdialogbase.h>
@@ -40,7 +40,7 @@ class KFontChooser;
 
 
 
-class CColorListBox : public KListBox
+class CColorListBox : public TDEListBox
 {
   Q_OBJECT
   
@@ -198,7 +198,7 @@ class COptionDialog : public KDialogBase
     struct SFontWidgets
     {
       TQCheckBox    *checkSystem;
-      KFontChooser *chooser;
+      TDEFontChooser *chooser;
       TQLineEdit    *nonPrintInput;
     };
     struct SFileWidgets

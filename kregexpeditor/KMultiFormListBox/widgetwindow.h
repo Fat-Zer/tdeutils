@@ -36,9 +36,9 @@ class WidgetWindow :public KDialogBase
   friend class KMultiFormListBoxWindowed;
   friend class WindowListboxItem;
 
-  WidgetWindow(KMultiFormListBoxFactory *, KListBox *);
-  WidgetWindow(KMultiFormListBoxFactory *, KMultiFormListBoxEntry *widget, KListBox *);
-  void init(KMultiFormListBoxFactory *, KListBox *, KMultiFormListBoxEntry *widget = 0);
+  WidgetWindow(KMultiFormListBoxFactory *, TDEListBox *);
+  WidgetWindow(KMultiFormListBoxFactory *, KMultiFormListBoxEntry *widget, TDEListBox *);
+  void init(KMultiFormListBoxFactory *, TDEListBox *, KMultiFormListBoxEntry *widget = 0);
   void display();
   KMultiFormListBoxEntry *entry();
   WidgetWindow *clone();
@@ -52,7 +52,7 @@ private:
   KMultiFormListBoxFactory *myFact;
   KMultiFormListBoxEntry *myWidget;
   TQByteArray _backup;
-  KListBox *listbox;
+  TDEListBox *listbox;
   WindowListboxItem *myListboxItem;
   bool initialShow;
 };

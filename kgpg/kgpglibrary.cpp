@@ -45,7 +45,7 @@ KgpgLibrary::~KgpgLibrary()
 {}
 
 
-void KgpgLibrary::slotFileEnc(KURL::List urls,TQStringList opts,TQStringList defaultKey,KShortcut goDefaultKey)
+void KgpgLibrary::slotFileEnc(KURL::List urls,TQStringList opts,TQStringList defaultKey,TDEShortcut goDefaultKey)
 {
         /////////////////////////////////////////////////////////////////////////  encode file file
         if (!urls.empty()) {

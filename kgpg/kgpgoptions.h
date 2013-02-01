@@ -32,7 +32,7 @@ class GPGConf;
 class ServerConf;
 class ColorsConf;
 class MiscConf;
-class KFontChooser;
+class TDEFontChooser;
 class TDEConfig;
 class KSimpleConfig;
 
@@ -50,7 +50,7 @@ public:
         GPGConf *page4;
 	ServerConf *page6;
 	MiscConf *page7;
-	KFontChooser *kfc;
+	TDEFontChooser *kfc;
         
 private:
         TDEConfig *config;

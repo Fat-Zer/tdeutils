@@ -45,15 +45,15 @@
 // FileLVI implementation
 /////////////////////////////////////////////////////////////////////
 
-FileLVI::FileLVI( KListView* lv )
-	: KListViewItem( lv ), m_fileSize( 0 ), m_packedFileSize( 0 ),
+FileLVI::FileLVI( TDEListView* lv )
+	: TDEListViewItem( lv ), m_fileSize( 0 ), m_packedFileSize( 0 ),
 	  m_ratio( 0 ), m_timeStamp( TQDateTime() ), m_entryName( TQString() )
 {
 
 }
 
-FileLVI::FileLVI( KListViewItem* lvi )
-	: KListViewItem( lvi ), m_fileSize( 0 ), m_packedFileSize( 0 ),
+FileLVI::FileLVI( TDEListViewItem* lvi )
+	: TDEListViewItem( lvi ), m_fileSize( 0 ), m_packedFileSize( 0 ),
 	  m_ratio( 0 ), m_timeStamp( TQDateTime() ), m_entryName( TQString() )
 {
 }
@@ -77,7 +77,7 @@ int FileLVI::compare( TQListViewItem * i, int column, bool ascending ) const
 		return 1;
 
 	if ( column == 0 )
-		return KListViewItem::compare( i, column, ascending );
+		return TDEListViewItem::compare( i, column, ascending );
 	
 	columnName colName = ( static_cast< FileListView * > ( listView() ) )->nameOfColumn( column );
 	switch ( colName )
@@ -115,7 +115,7 @@ int FileLVI::compare( TQListViewItem * i, int column, bool ascending ) const
 		}
 
 		default:
-			return KListViewItem::compare( i, column, ascending );
+			return TDEListViewItem::compare( i, column, ascending );
 	}
 }
 
@@ -170,7 +170,7 @@ void FileLVI::setText( int column, const TQString &text )
 		TQListViewItem::setText(column, text);
 }
 
-static FileLVI* folderLVI( KListViewItem *parent, const TQString& name )
+static FileLVI* folderLVI( TDEListViewItem *parent, const TQString& name )
 {
 	FileLVI *folder = new FileLVI( parent );
 
@@ -181,7 +181,7 @@ static FileLVI* folderLVI( KListViewItem *parent, const TQString& name )
 	return folder;
 }
 
-static FileLVI* folderLVI( KListView *parent, const TQString& name )
+static FileLVI* folderLVI( TDEListView *parent, const TQString& name )
 {
 	FileLVI *folder = new FileLVI( parent );
 	folder->setText( 0, name );
@@ -195,7 +195,7 @@ static FileLVI* folderLVI( KListView *parent, const TQString& name )
 
 
 FileListView::FileListView(TQWidget *parent, const char* name)
-	: KListView(parent, name)
+	: TDEListView(parent, name)
 {
 	TQWhatsThis::add( this,
 	                 i18n( "This area is for displaying information about the files contained within an archive." )
@@ -214,7 +214,7 @@ FileListView::FileListView(TQWidget *parent, const char* name)
 
 int FileListView::addColumn ( const TQString & label, int width )
 {
-	int index = KListView::addColumn( label, width );
+	int index = TDEListView::addColumn( label, width );
 	if ( label == SIZE_COLUMN.first )
 	{
 		m_columnMap[ index ] = sizeCol;
@@ -246,7 +246,7 @@ void FileListView::removeColumn( int index )
 	}
 
 	m_columnMap.remove( m_columnMap[ m_columnMap.count() - 1 ] );
-	KListView::removeColumn( index );
+	TDEListView::removeColumn( index );
 }
 
 columnName FileListView::nameOfColumn( int index )
@@ -337,14 +337,14 @@ FileListView::contentsMousePressEvent(TQMouseEvent *e)
 		m_presspos = e->pos();
 	}
 
-	KListView::contentsMousePressEvent(e);
+	TDEListView::contentsMousePressEvent(e);
 }
 
 void
 FileListView::contentsMouseReleaseEvent(TQMouseEvent *e)
 {
 	m_pressed = false;
-	KListView::contentsMouseReleaseEvent(e);
+	TDEListView::contentsMouseReleaseEvent(e);
 }
 
 void
@@ -352,7 +352,7 @@ FileListView::contentsMouseMoveEvent(TQMouseEvent *e)
 {
 	if(!m_pressed)
 	{
-		KListView::contentsMouseMoveEvent(e);
+		TDEListView::contentsMouseMoveEvent(e);
 	}
 	else if( ( m_presspos - e->pos() ).manhattanLength() > TDEGlobalSettings::dndEventDelay() )
 	{
@@ -363,7 +363,7 @@ FileListView::contentsMouseMoveEvent(TQMouseEvent *e)
 		}
 		TQStringList dragFiles = selectedFilenames();
 		emit startDragRequest( dragFiles );
-		KListView::contentsMouseMoveEvent(e);
+		TDEListView::contentsMouseMoveEvent(e);
 	}
 }
 

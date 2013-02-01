@@ -29,7 +29,7 @@
 
 class TQTextStream;
 class TQTimer;
-class KListView;
+class TDEListView;
 class TQVBoxLayout;
 class TQVButtonGroup;
 class TQRadioButton;
@@ -146,7 +146,7 @@ class DiskConfig : public KSim::PluginPage
 
   private:
     TQVBoxLayout *m_layout;
-    KListView *m_listview;
+    TDEListView *m_listview;
     TQPushButton *m_add;
     TQPushButton *m_remove;
     TQVButtonGroup *m_buttonBox;

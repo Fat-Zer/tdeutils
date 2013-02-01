@@ -61,7 +61,7 @@ TQPtrList<TopLevel> *TopLevel::windowList = 0;
 int default_open =  TopLevel::OPEN_READWRITE;
 
 TopLevel::TopLevel (TQWidget *, const char *name)
-  : KMainWindow ( 0,name ), tdespellconfigOptions(0),
+  : TDEMainWindow ( 0,name ), tdespellconfigOptions(0),
   eframe(0), newWindow(false), tdespell(0)
 {
   if (!windowList)
@@ -217,11 +217,11 @@ void TopLevel::setupActions()
     KStdAction::findNext(TQT_TQOBJECT(this), TQT_SLOT(search_again()), actionCollection());
     KStdAction::replace(TQT_TQOBJECT(this), TQT_SLOT(replace()), actionCollection());
 
-    (void)new KAction(i18n("&Insert File..."), 0, TQT_TQOBJECT(this), TQT_SLOT(file_insert()),
+    (void)new TDEAction(i18n("&Insert File..."), 0, TQT_TQOBJECT(this), TQT_SLOT(file_insert()),
                       actionCollection(), "insert_file");
-    (void)new KAction(i18n("In&sert Date"), 0, TQT_TQOBJECT(this), TQT_SLOT(insertDate()),
+    (void)new TDEAction(i18n("In&sert Date"), 0, TQT_TQOBJECT(this), TQT_SLOT(insertDate()),
                       actionCollection(), "insert_date");
-    (void)new KAction(i18n("Cl&ean Spaces"), 0, TQT_TQOBJECT(this), TQT_SLOT(clean_space()),
+    (void)new TDEAction(i18n("Cl&ean Spaces"), 0, TQT_TQOBJECT(this), TQT_SLOT(clean_space()),
                       actionCollection(), "clean_spaces");
 
     // setup Tools menu
@@ -1324,7 +1324,7 @@ SettingsDialog::SettingsDialog(TQWidget *parent, const char *name,TDEConfigSkele
   // Font
   TQWidget *font = new TQWidget(0, "FontSetting");
   TQVBoxLayout *topLayout = new TQVBoxLayout(font, 0, KDialog::spacingHint());
-  KFontChooser *mFontChooser = new KFontChooser(font, "kcfg_Font", false, TQStringList(), false, 6);
+  TDEFontChooser *mFontChooser = new TDEFontChooser(font, "kcfg_Font", false, TQStringList(), false, 6);
   topLayout->addWidget(mFontChooser);
   addPage(font, i18n("Font"), "fonts", i18n("Editor Font"));
 

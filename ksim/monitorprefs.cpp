@@ -30,7 +30,7 @@
 #include <pluginloader.h>
 
 KSim::MonitorPrefs::MonitorPrefs(TQWidget *parent, const char *name)
-    : KListView(parent, name)
+    : TDEListView(parent, name)
 {
   addColumn(i18n("Monitor"));
   addColumn(i18n("Description"));
@@ -44,7 +44,7 @@ KSim::MonitorPrefs::MonitorPrefs(TQWidget *parent, const char *name)
   setAllColumnsShowFocus(true);
   setSelectionMode(TQListView::Single);
 
-  // Scan for .desktop files and enter them into the KListView
+  // Scan for .desktop files and enter them into the TDEListView
   m_locatedFiles = TDEGlobal::dirs()->findAllResources("data", "ksim/monitors/*.desktop");
   m_locatedFiles.sort();
   TQStringList::ConstIterator it;

@@ -51,7 +51,7 @@
                         <string>Add...</string>
                     </property>
                 </widget>
-                <widget class="KListView" row="0" column="0" rowspan="1" colspan="4">
+                <widget class="TDEListView" row="0" column="0" rowspan="1" colspan="4">
                     <column>
                         <property name="text">
                             <string>Host</string>
@@ -163,7 +163,7 @@
                         </size>
                     </property>
                 </spacer>
-                <widget class="KListView" row="0" column="0" rowspan="1" colspan="4">
+                <widget class="TDEListView" row="0" column="0" rowspan="1" colspan="4">
                     <column>
                         <property name="text">
                             <string>Name</string>

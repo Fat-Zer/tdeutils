@@ -58,7 +58,7 @@ class Constants;
 #include "kcalc_button.h"
 #include "kcalc_const_button.h"
 
-class KCalculator : public KMainWindow
+class KCalculator : public TDEMainWindow
 {
     Q_OBJECT
   
@@ -222,10 +222,10 @@ private:
     // ConstButtonGroup C1-C6
     TQButtonGroup*	ConstButtonGroup;
 
-    KToggleAction *actionStatshow;
-    KToggleAction *actionScientificshow;
-    KToggleAction *actionLogicshow;
-    KToggleAction *actionConstantsShow;
+    TDEToggleAction *actionStatshow;
+    TDEToggleAction *actionScientificshow;
+    TDEToggleAction *actionLogicshow;
+    TDEToggleAction *actionConstantsShow;
 
     TQPtrList<KCalcButton> mFunctionButtonList;
     TQPtrList<KCalcButton> mStatButtonList;

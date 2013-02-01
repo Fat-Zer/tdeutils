@@ -116,47 +116,47 @@ ArkPart::~ArkPart()
 void
 ArkPart::setupActions()
 {
-    addFileAction = new KAction(i18n("Add &File..."), "ark_addfile", 0, TQT_TQOBJECT(awidget),
+    addFileAction = new TDEAction(i18n("Add &File..."), "ark_addfile", 0, TQT_TQOBJECT(awidget),
                                 TQT_SLOT(action_add()), actionCollection(), "addfile");
 
-    addDirAction = new KAction(i18n("Add Folde&r..."), "ark_adddir", 0, TQT_TQOBJECT(awidget),
+    addDirAction = new TDEAction(i18n("Add Folde&r..."), "ark_adddir", 0, TQT_TQOBJECT(awidget),
                                TQT_SLOT(action_add_dir()), actionCollection(), "adddir");
 
-    extractAction = new KAction(i18n("E&xtract..."), "ark_extract", 0, TQT_TQOBJECT(awidget),
+    extractAction = new TDEAction(i18n("E&xtract..."), "ark_extract", 0, TQT_TQOBJECT(awidget),
                                 TQT_SLOT(action_extract()),	actionCollection(), "extract");
 
-    deleteAction = new KAction(i18n("De&lete"), "ark_delete", KShortcut(TQt::Key_Delete), TQT_TQOBJECT(awidget),
+    deleteAction = new TDEAction(i18n("De&lete"), "ark_delete", TDEShortcut(TQt::Key_Delete), TQT_TQOBJECT(awidget),
                                TQT_SLOT(action_delete()), actionCollection(), "delete");
 
-    viewAction = new KAction(i18n("to view something","&View"), "ark_view", 0, TQT_TQOBJECT(awidget),
+    viewAction = new TDEAction(i18n("to view something","&View"), "ark_view", 0, TQT_TQOBJECT(awidget),
                              TQT_SLOT(action_view()), actionCollection(), "view");
 
 
-    openWithAction = new KAction(i18n("&Open With..."), 0, TQT_TQOBJECT(awidget),
+    openWithAction = new TDEAction(i18n("&Open With..."), 0, TQT_TQOBJECT(awidget),
                                  TQT_SLOT(slotOpenWith()), actionCollection(), "open_with");
 
 
-    editAction = new KAction(i18n("Edit &With..."), 0, TQT_TQOBJECT(awidget),
+    editAction = new TDEAction(i18n("Edit &With..."), 0, TQT_TQOBJECT(awidget),
                              TQT_SLOT(action_edit()), actionCollection(), "edit");
 
-    testAction = new KAction(i18n("&Test integrity"), 0, awidget,
+    testAction = new TDEAction(i18n("&Test integrity"), 0, awidget,
                                 TQT_SLOT(action_test()),	actionCollection(), "test");
 
     selectAllAction = KStdAction::selectAll(TQT_TQOBJECT(awidget->fileList()), TQT_SLOT(selectAll()), actionCollection(), "select_all");
 
-    deselectAllAction =  new KAction(i18n("&Unselect All"), 0, TQT_TQOBJECT(awidget->fileList()),TQT_SLOT(unselectAll()), actionCollection(), "deselect_all");
+    deselectAllAction =  new TDEAction(i18n("&Unselect All"), 0, TQT_TQOBJECT(awidget->fileList()),TQT_SLOT(unselectAll()), actionCollection(), "deselect_all");
 
-    invertSelectionAction = new KAction(i18n("&Invert Selection"), 0, TQT_TQOBJECT(awidget->fileList()),TQT_SLOT(invertSelection()), actionCollection(), "invert_selection");
+    invertSelectionAction = new TDEAction(i18n("&Invert Selection"), 0, TQT_TQOBJECT(awidget->fileList()),TQT_SLOT(invertSelection()), actionCollection(), "invert_selection");
 
     saveAsAction = KStdAction::saveAs(this, TQT_SLOT(file_save_as()), actionCollection());
 
     //KStdAction::preferences(awidget, TQT_SLOT(showSettings()), actionCollection());
 
-    ( void ) new KAction( i18n( "Configure &Ark..." ), "configure" , 0, TQT_TQOBJECT(awidget),
+    ( void ) new TDEAction( i18n( "Configure &Ark..." ), "configure" , 0, TQT_TQOBJECT(awidget),
                                        TQT_SLOT( showSettings() ), actionCollection(), "options_configure_ark" );
 
 
-    showSearchBar = new KToggleAction( i18n( "Show Search Bar" ), KShortcut(), actionCollection(), "options_show_search_bar" );
+    showSearchBar = new TDEToggleAction( i18n( "Show Search Bar" ), TDEShortcut(), actionCollection(), "options_show_search_bar" );
     showSearchBar->setCheckedState(i18n("Hide Search Bar"));
 
     showSearchBar->setChecked( ArkSettings::showSearchBar() );
@@ -319,7 +319,7 @@ bool ArkPart::closeURL()
 void ArkPart::slotFilePopup( const TQPoint &pPoint )
 {
     if ( factory() )
-        static_cast<KPopupMenu *>(factory()->container("file_popup", this))->popup(pPoint);
+        static_cast<TDEPopupMenu *>(factory()->container("file_popup", this))->popup(pPoint);
 }
 
 void ArkPart::transferStarted( TDEIO::Job *job )

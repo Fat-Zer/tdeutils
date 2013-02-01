@@ -24,8 +24,8 @@
 #include <tqstring.h>
 #include <tqtable.h>
 
-class KAction;
-class KActionCollection;
+class TDEAction;
+class TDEActionCollection;
 
 class KWMapEditor : public TQTable {
 	Q_OBJECT
@@ -55,8 +55,8 @@ class KWMapEditor : public TQTable {
 	private:
 		TQMap<TQString,TQString>& _map;
 		int _contextRow, _contextCol;
-		KActionCollection *_ac;
-		KAction *_copyAct;
+		TDEActionCollection *_ac;
+		TDEAction *_copyAct;
 };
 
 #endif

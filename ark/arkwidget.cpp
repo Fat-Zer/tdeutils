@@ -127,7 +127,7 @@ ArkWidget::ArkWidget( TQWidget *parent, const char *name )
        m_tmpDir = NULL;
     }
 
-    m_searchToolBar = new KToolBar( this, "searchBar" );
+    m_searchToolBar = new TDEToolBar( this, "searchBar" );
     m_searchToolBar->boxLayout()->setSpacing( KDialog::spacingHint() );
 
     TQLabel * l1 = new TQLabel( i18n( "&Search:" ), m_searchToolBar, "kde toolbar widget" );

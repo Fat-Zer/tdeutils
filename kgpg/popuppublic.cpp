@@ -51,7 +51,7 @@
 
 /////////////////   klistviewitem special
 
-class UpdateViewItem2 : public KListViewItem
+class UpdateViewItem2 : public TDEListViewItem
 {
 public:
         UpdateViewItem2(TQListView *parent, TQString name,TQString mail,TQString id,bool isDefault);
@@ -61,7 +61,7 @@ public:
 };
 
 UpdateViewItem2::UpdateViewItem2(TQListView *parent, TQString name,TQString mail,TQString id,bool isDefault)
-                : KListViewItem(parent)
+                : TDEListViewItem(parent)
 {
 def=isDefault;
         setText(0,name);
@@ -77,7 +77,7 @@ void UpdateViewItem2::paintCell(TQPainter *p, const TQColorGroup &cg,int column,
                 font.setBold(true);
                 p->setFont(font);
         }
-        KListViewItem::paintCell(p, cg, column, width, alignment);
+        TDEListViewItem::paintCell(p, cg, column, width, alignment);
 }
 
 TQString UpdateViewItem2 :: key(int c,bool ) const
@@ -87,7 +87,7 @@ TQString UpdateViewItem2 :: key(int c,bool ) const
 
 ///////////////  main view
 
-popupPublic::popupPublic(TQWidget *parent, const char *name,TQString sfile,bool filemode,KShortcut goDefaultKey):
+popupPublic::popupPublic(TQWidget *parent, const char *name,TQString sfile,bool filemode,TDEShortcut goDefaultKey):
 KDialogBase( Plain, i18n("Select Public Key"), Details | Ok | Cancel, Ok, parent, name,true)
 {
 
@@ -119,11 +119,11 @@ KDialogBase( Plain, i18n("Select Public Key"), Details | Ok | Cancel, Ok, parent
 	clearSearch->setIconSet(SmallIconSet(TQApplication::reverseLayout() ? "clear_left"
                                             : "locationbar_erase"));
 	(void) new TQLabel(i18n("Search: "),hBar);
-	KListViewSearchLine* listViewSearch = new KListViewSearchLine(hBar);
+	TDEListViewSearchLine* listViewSearch = new TDEListViewSearchLine(hBar);
 	connect(clearSearch, TQT_SIGNAL(pressed()), listViewSearch, TQT_SLOT(clear()));
 #endif
 
-        keysList = new KListView( page );
+        keysList = new TDEListView( page );
 	 keysList->addColumn(i18n("Name"));
 	 keysList->addColumn(i18n("Email"));
 	 keysList->addColumn(i18n("ID"));
@@ -137,7 +137,7 @@ KDialogBase( Plain, i18n("Select Public Key"), Details | Ok | Cancel, Ok, parent
         keysList->setShowSortIndicator(true);
         keysList->setFullWidth(true);
 	keysList->setAllColumnsShowFocus(true);
-        keysList->setSelectionModeExt(KListView::Extended);
+        keysList->setSelectionModeExt(TDEListView::Extended);
 	keysList->setColumnWidthMode(0,TQListView::Manual);
 	keysList->setColumnWidthMode(1,TQListView::Manual);
 	keysList->setColumnWidth(0,210);
@@ -145,8 +145,8 @@ KDialogBase( Plain, i18n("Select Public Key"), Details | Ok | Cancel, Ok, parent
 
         boutonboxoptions=new TQButtonGroup(5,Qt::Vertical ,page,0);
 
-	KActionCollection *actcol=new KActionCollection(this);
-	(void) new KAction(i18n("&Go to Default Key"),goDefaultKey, TQT_TQOBJECT(this), TQT_SLOT(slotGotoDefaultKey()),actcol,"go_default_key");
+	TDEActionCollection *actcol=new TDEActionCollection(this);
+	(void) new TDEAction(i18n("&Go to Default Key"),goDefaultKey, TQT_TQOBJECT(this), TQT_SLOT(slotGotoDefaultKey()),actcol,"go_default_key");
 
 
         CBarmor=new TQCheckBox(i18n("ASCII armored encryption"),boutonboxoptions);
@@ -431,7 +431,7 @@ void popupPublic::slotprocread(KProcIO *p)
 				bool isDefaultKey=false;
                                 if (id.right(8)==defaultKey) isDefaultKey=true;
                                         UpdateViewItem2 *item=new UpdateViewItem2(keysList,keyname,keymail,id,isDefaultKey);
-					//KListViewItem *sub= new KListViewItem(item,i18n("ID: %1, trust: %2, validity: %3").arg(id).arg(tr).arg(val));
+					//TDEListViewItem *sub= new TDEListViewItem(item,i18n("ID: %1, trust: %2, validity: %3").arg(id).arg(tr).arg(val));
                                         //sub->setSelectable(false);
                                         if (seclist.find(tst,0,FALSE)!=-1)
                                                 item->setPixmap(0,keyPair);

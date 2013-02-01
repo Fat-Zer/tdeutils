@@ -26,7 +26,7 @@
 #define KARAMBA_PYTHON_H
 
 class TQString;
-class KPopupMenu;
+class TDEPopupMenu;
 class Task;
 class Startup;
 class karamba;
@@ -67,7 +67,7 @@ public:
   bool widgetClicked(karamba* k, int x, int y, int button);
   bool keyPressed(karamba* k, const Meter* meter, const TQString& text);
   bool widgetMouseMoved(karamba* k, int x, int y, int button);
-  bool menuItemClicked(karamba* k, KPopupMenu* menu, long id);
+  bool menuItemClicked(karamba* k, TDEPopupMenu* menu, long id);
   bool activeTaskChanged(karamba* k, Task* t);
   bool taskAdded(karamba* k, Task* t);
   bool taskRemoved(karamba* k, Task* t);

@@ -51,7 +51,7 @@ Q_OBJECT
   private:
   void initPopupMenu(void);
   
-  KPopupMenu* _popup;
+  TDEPopupMenu* _popup;
   int _button_num;
 };
 

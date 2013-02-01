@@ -96,7 +96,7 @@ class TDEBufferRanges
     bool Modified;
 
     KSection Marking;
-    KSelection Selection;
+    TDESelection Selection;
     /** memories first selected word on wordwise selection */
     KSection FirstWordSelection;
 

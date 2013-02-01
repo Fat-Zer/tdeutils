@@ -109,13 +109,13 @@ MainWindow::~MainWindow()
 void
 MainWindow::setupActions()
 {
-    newWindowAction = new KAction(i18n("New &Window"), "window_new", KShortcut(), TQT_TQOBJECT(this),
+    newWindowAction = new TDEAction(i18n("New &Window"), "window_new", TDEShortcut(), TQT_TQOBJECT(this),
                                   TQT_SLOT(file_newWindow()), actionCollection(), "new_window");
 
     newArchAction = KStdAction::openNew(TQT_TQOBJECT(this), TQT_SLOT(file_new()), actionCollection());
     openAction = KStdAction::open(TQT_TQOBJECT(this), TQT_SLOT(file_open()), actionCollection());
 
-    reloadAction = new KAction(i18n("Re&load"), "reload", KStdAccel::shortcut( KStdAccel::Reload ), TQT_TQOBJECT(this),
+    reloadAction = new TDEAction(i18n("Re&load"), "reload", TDEStdAccel::shortcut( TDEStdAccel::Reload ), TQT_TQOBJECT(this),
                                TQT_SLOT(file_reload()), actionCollection(), "reload_arch");
     closeAction = KStdAction::close(TQT_TQOBJECT(this), TQT_SLOT(file_close()), actionCollection(), "file_close");
 
@@ -204,7 +204,7 @@ MainWindow::slotConfigureKeyBindings()
 void
 MainWindow::slotArchivePopup( const TQPoint &pPoint)
 {
-    static_cast<KPopupMenu *>(factory()->container("archive_popup", this))->popup(pPoint);
+    static_cast<TDEPopupMenu *>(factory()->container("archive_popup", this))->popup(pPoint);
 }
 
 // see if the ark is already open in another window

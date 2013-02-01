@@ -479,7 +479,7 @@ void laptop_dock::mouseReleaseEvent( TQMouseEvent *e )
         // fall through
     case Qt::RightButton:
 	{
-		KPopupMenu *menu = contextMenu();
+		TDEPopupMenu *menu = contextMenu();
         	contextMenuAboutToShow( menu );
         	menu->popup( e->globalPos() );
 	}

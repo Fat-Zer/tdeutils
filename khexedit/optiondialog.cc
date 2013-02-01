@@ -33,7 +33,7 @@
 
 #include <kcolordialog.h>
 #include <kcolordrag.h>
-#include <kfontdialog.h> // For KFontChooser
+#include <kfontdialog.h> // For TDEFontChooser
 #include <kiconloader.h>
 #include <klocale.h>
 #include <kglobalsettings.h>
@@ -390,7 +390,7 @@ void COptionDialog::setupFontPage( void )
   hline->setFrameStyle( TQFrame::Sunken | TQFrame::HLine );
   topLayout->addWidget( hline );
 
-  mFont.chooser = new KFontChooser( page, "font", true, TQStringList(), false, 4 );
+  mFont.chooser = new TDEFontChooser( page, "font", true, TQStringList(), false, 4 );
   topLayout->addWidget( mFont.chooser );
   TQFont fixFont( TDEGlobalSettings::fixedFont() );
   fixFont.setBold(true);
@@ -1051,7 +1051,7 @@ SDisplayCursor::EFocusMode COptionDialog::cursorFocusMode( void )
 
 
 CColorListBox::CColorListBox( TQWidget *parent, const char *name, WFlags f )
-  :KListBox( parent, name, f ), mCurrentOnDragEnter(-1)
+  :TDEListBox( parent, name, f ), mCurrentOnDragEnter(-1)
 {
   connect( this, TQT_SIGNAL(selected(int)), this, TQT_SLOT(newColor(int)) );
   setAcceptDrops( true);

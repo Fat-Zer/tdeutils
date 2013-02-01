@@ -34,7 +34,7 @@ class KPCMCIACard;
 class TQPopupMenu;
 class TQVBox;
 class TQSlider;
-class KPopupMenu;
+class TDEPopupMenu;
 
 #include <tqmap.h>
 
@@ -102,7 +102,7 @@ private:
                           _insertActions;
 
   TDEInstance 	*instance; 	// handle so we get our pretty icons right
-  KPopupMenu 	*rightPopup;
+  TDEPopupMenu 	*rightPopup;
 
 }; 
 #endif 

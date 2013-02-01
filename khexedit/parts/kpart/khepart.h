@@ -24,9 +24,9 @@
 #include "kbigbuffer.h"
 
 // forward declarations
-class KRadioAction;
-class KToggleAction;
-class KSelectAction;
+class TDERadioAction;
+class TDEToggleAction;
+class TDESelectAction;
 
 namespace KHE
 {
@@ -80,15 +80,15 @@ class KHexEditPart : public KParts::ReadOnlyPart
     KBigBuffer Wrapping;
 
     // edit menu
-    KAction *CopyAction;
+    TDEAction *CopyAction;
     // view menu
-    KSelectAction *CodingAction;
-    KSelectAction *EncodingAction;
-    KToggleAction *ShowUnprintableAction;
+    TDESelectAction *CodingAction;
+    TDESelectAction *EncodingAction;
+    TDEToggleAction *ShowUnprintableAction;
     // settings menu
-    KSelectAction *ResizeStyleAction;
-    KToggleAction *ShowOffsetColumnAction;
-    KSelectAction *ToggleColumnsAction;
+    TDESelectAction *ResizeStyleAction;
+    TDEToggleAction *ShowOffsetColumnAction;
+    TDESelectAction *ToggleColumnsAction;
 };
 
 }

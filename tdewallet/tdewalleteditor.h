@@ -26,7 +26,7 @@
 #include <kmainwindow.h>
 #include <tqstringlist.h>
 
-class KAction;
+class TDEAction;
 class TQIconViewItem;
 class TQListViewItem;
 class TQCheckBox;
@@ -34,7 +34,7 @@ class KWalletFolderIconView;
 class KWalletEntryList;
 class KWMapEditor;
 
-class KWalletEditor : public KMainWindow {
+class KWalletEditor : public TDEMainWindow {
 	Q_OBJECT
   
 
@@ -84,7 +84,7 @@ class KWalletEditor : public KMainWindow {
 		void enableWalletActions(bool enable);
 		void enableFolderActions(bool enable);
 		void enableContextFolderActions(bool enable);
-		void editorClosed(KMainWindow*);
+		void editorClosed(TDEMainWindow*);
 
 	public:
 		TQString _walletName;
@@ -96,9 +96,9 @@ class KWalletEditor : public KMainWindow {
 		WalletWidget *_ww;
 		KWalletEntryList *_entryList;
 		bool _walletIsOpen;
-		KAction *_newFolderAction, *_deleteFolderAction;
-		KAction *_passwordAction, *_exportAction, *_saveAsAction, *_mergeAction, *_importAction;
-		KAction *_copyPassAction;
+		TDEAction *_newFolderAction, *_deleteFolderAction;
+		TDEAction *_passwordAction, *_exportAction, *_saveAsAction, *_mergeAction, *_importAction;
+		TDEAction *_copyPassAction;
 		TQLabel*_details;
 		TQString _currentFolder;
 		TQMap<TQString,TQString> _currentMap; // save memory by storing

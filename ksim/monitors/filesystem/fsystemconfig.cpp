@@ -52,7 +52,7 @@ FsystemConfig::FsystemConfig(KSim::PluginObject *parent, const char *name)
   m_mainLayout = new TQGridLayout(this);
   m_mainLayout->setSpacing(6);
 
-  m_availableMounts = new KListView(this);
+  m_availableMounts = new TDEListView(this);
   m_availableMounts->addColumn(i18n("Mounted Partition"));
   m_availableMounts->addColumn(i18n("Device"));
   m_availableMounts->addColumn(i18n("Type"));

@@ -23,7 +23,7 @@
 #include <pluginmodule.h>
 #include "fsystemiface.h"
 
-class KPopupMenu;
+class TDEPopupMenu;
 class FilesystemWidget;
 class TQTimer;
 

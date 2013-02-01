@@ -239,7 +239,7 @@
 	* Caption is set via signal/slots
 	* Fixed "%"-mode to make it again more conformant with documentation.
 	  "x^y%" does still not work. Did it ever?
-	* Number-keys are now handled by KAccel instead of keyPressEvent
+	* Number-keys are now handled by TDEAccel instead of keyPressEvent
 	* ConfigDialog is modal
 
 2003-08-27 Klaus Niederkrüger <kniederk@math.uni-koeln.de>

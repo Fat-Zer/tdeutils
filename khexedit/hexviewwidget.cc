@@ -1091,7 +1091,7 @@ int CHexViewWidget::bookmarkMenu( const TQString &title )
   }
 
   TQString text;
-  KPopupMenu *popup = new KPopupMenu(  0 );
+  TDEPopupMenu *popup = new TDEPopupMenu(  0 );
   popup->insertTitle( title );
   for( uint i=0; i < list.count(); i++ )
   {

@@ -303,7 +303,7 @@ TQString KWalletConfig::quickHelp() const {
 void KWalletConfig::contextMenuRequested(TQListViewItem *item, const TQPoint& pos, int col) {
 	Q_UNUSED(col)
 	if (item && item->parent()) {
-		KPopupMenu *m = new KPopupMenu(this);
+		TDEPopupMenu *m = new TDEPopupMenu(this);
 		m->insertTitle(item->parent()->text(0));
 		m->insertItem(i18n("&Delete"), this, TQT_SLOT(deleteEntry()), Key_Delete);
 		m->popup(pos);

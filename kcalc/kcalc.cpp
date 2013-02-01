@@ -79,14 +79,14 @@ static const char version[] = KCALCVERSION;
 
 
 KCalculator::KCalculator(TQWidget *parent, const char *name)
-	: KMainWindow(parent, name), inverse(false),
+	: TDEMainWindow(parent, name), inverse(false),
 	  hyp_mode(false), memory_num(0.0), calc_display(NULL),
 	  mInternalSpacing(4), core()
 {
 	/* central widget to contain all the elements */
 	TQWidget *central = new TQWidget(this);
 	setCentralWidget(central);
-	KAcceleratorManager::setNoAccel( central );
+	TDEAcceleratorManager::setNoAccel( central );
 
 	// Detect color change
 	connect(kapp,TQT_SIGNAL(kdisplayPaletteChanged()), TQT_SLOT(set_colors()));
@@ -132,7 +132,7 @@ KCalculator::KCalculator(TQWidget *parent, const char *name)
 	TQToolTip::add(pbAngleChoose, i18n("Choose the unit for the angle measure"));
 	pbAngleChoose->setAutoDefault(false);
 
-	KPopupMenu *angle_menu = new KPopupMenu(pbAngleChoose, "AngleMode-Selection-Menu");
+	TDEPopupMenu *angle_menu = new TDEPopupMenu(pbAngleChoose, "AngleMode-Selection-Menu");
 	angle_menu->insertItem(i18n("Degrees"), 0);
 	angle_menu->insertItem(i18n("Radians"), 1);
 	angle_menu->insertItem(i18n("Gradians"), 2);
@@ -417,35 +417,35 @@ void KCalculator::setupMainActions(void)
 	KStdAction::paste(TQT_TQOBJECT(calc_display), TQT_SLOT(slotPaste()), actionCollection());
 
 	// settings menu
-	actionStatshow =  new KToggleAction(i18n("&Statistic Buttons"), 0,
+	actionStatshow =  new TDEToggleAction(i18n("&Statistic Buttons"), 0,
 					    actionCollection(), "show_stat");
 	actionStatshow->setChecked(true);
 	connect(actionStatshow, TQT_SIGNAL(toggled(bool)),
 		TQT_SLOT(slotStatshow(bool)));
 
-	actionScientificshow = new KToggleAction(i18n("Science/&Engineering Buttons"),
+	actionScientificshow = new TDEToggleAction(i18n("Science/&Engineering Buttons"),
 						 0, actionCollection(), "show_science");
 	actionScientificshow->setChecked(true);
 	connect(actionScientificshow, TQT_SIGNAL(toggled(bool)),
 		TQT_SLOT(slotScientificshow(bool)));
 
-	actionLogicshow = new KToggleAction(i18n("&Logic Buttons"), 0,
+	actionLogicshow = new TDEToggleAction(i18n("&Logic Buttons"), 0,
 					    actionCollection(), "show_logic");
 	actionLogicshow->setChecked(true);
 	connect(actionLogicshow, TQT_SIGNAL(toggled(bool)),
 		TQT_SLOT(slotLogicshow(bool)));
 
-	actionConstantsShow = new KToggleAction(i18n("&Constants Buttons"), 0,
+	actionConstantsShow = new TDEToggleAction(i18n("&Constants Buttons"), 0,
 						actionCollection(), "show_constants");
 	actionConstantsShow->setChecked(true);
 	connect(actionConstantsShow, TQT_SIGNAL(toggled(bool)),
 		TQT_SLOT(slotConstantsShow(bool)));
 
 
-	(void) new KAction(i18n("&Show All"), 0, TQT_TQOBJECT(this), TQT_SLOT(slotShowAll()),
+	(void) new TDEAction(i18n("&Show All"), 0, TQT_TQOBJECT(this), TQT_SLOT(slotShowAll()),
 			   actionCollection(), "show_all");
 
-	(void) new KAction(i18n("&Hide All"), 0, TQT_TQOBJECT(this), TQT_SLOT(slotHideAll()),
+	(void) new TDEAction(i18n("&Hide All"), 0, TQT_TQOBJECT(this), TQT_SLOT(slotHideAll()),
 			   actionCollection(), "hide_all");
 
 	KStdAction::preferences(TQT_TQOBJECT(this), TQT_SLOT(showSettings()), actionCollection());
@@ -1825,8 +1825,8 @@ void KCalculator::showSettings()
 
 	TQWidget *fontWidget = new TQWidget(0,"Font");
 	TQVBoxLayout *fontLayout = new TQVBoxLayout(fontWidget);
-	KFontChooser *mFontChooser =
-		new KFontChooser(fontWidget, "kcfg_Font", false, TQStringList(), false, 6);
+	TDEFontChooser *mFontChooser =
+		new TDEFontChooser(fontWidget, "kcfg_Font", false, TQStringList(), false, 6);
 
 	fontLayout->addWidget(mFontChooser);
 	dialog->addPage(fontWidget, i18n("Font"), "fonts", i18n("Select Display Font"));
@@ -2253,7 +2253,7 @@ bool KCalculator::eventFilter(TQObject *o, TQEvent *e)
 	}
 	else
 	{
-		return KMainWindow::eventFilter(o, e);
+		return TDEMainWindow::eventFilter(o, e);
 	}
 }
 

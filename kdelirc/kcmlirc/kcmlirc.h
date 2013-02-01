@@ -23,7 +23,7 @@
 #include "modes.h"
 
 class TQListViewItem;
-class KListView;
+class TDEListView;
 class TQDropEvent;
 class Profile;
 class Remote;
@@ -58,7 +58,7 @@ public slots:
 	void slotAddActions();
 	void slotEditAction();
 	void slotRemoveAction();
-	void slotDrop(KListView *, TQDropEvent *, TQListViewItem *, TQListViewItem *after);
+	void slotDrop(TDEListView *, TQDropEvent *, TQListViewItem *, TQListViewItem *after);
 	void slotRenamed(TQListViewItem *item);
 	void slotEditMode();
 

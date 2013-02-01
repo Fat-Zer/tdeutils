@@ -24,7 +24,7 @@
 #include <tqmap.h>
 #include <tqstring.h>
 
-class KWalletPopup : public KPopupMenu {
+class KWalletPopup : public TDEPopupMenu {
 	Q_OBJECT
   
 

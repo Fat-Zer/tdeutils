@@ -37,11 +37,11 @@ static const char version[] = "v0.5";
 
 /***************************************************************/
 KDFTopLevel::KDFTopLevel(TQWidget *, const char *name)
-  : KMainWindow(0, name)
+  : TDEMainWindow(0, name)
 {
   kdf = new KDFWidget(this,"kdf",FALSE);
   TQ_CHECK_PTR(kdf);
-  (void) new KAction( i18n( "&Update" ), 0, TQT_TQOBJECT(kdf), TQT_SLOT( updateDF() ), actionCollection(), "updatedf" );
+  (void) new TDEAction( i18n( "&Update" ), 0, TQT_TQOBJECT(kdf), TQT_SLOT( updateDF() ), actionCollection(), "updatedf" );
 
   KStdAction::quit(TQT_TQOBJECT(this), TQT_SLOT(close()), actionCollection());
   KStdAction::preferences(TQT_TQOBJECT(kdf), TQT_SLOT(settingsBtnClicked()), actionCollection());
@@ -50,7 +50,7 @@ actionCollection());
   setCentralWidget(kdf);
   //  kdf->setMinimumSize(kdf->sizeHint());
   kdf->resize(kdf->sizeHint());
-  setupGUI(KMainWindow::Keys | StatusBar | Save | Create);
+  setupGUI(TDEMainWindow::Keys | StatusBar | Save | Create);
 }
 
 

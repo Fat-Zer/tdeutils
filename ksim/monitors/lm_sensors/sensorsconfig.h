@@ -26,7 +26,7 @@ class TQPushButton;
 class TQCheckListItem;
 class TQGridLayout;
 class TQLabel;
-class KListView;
+class TDEListView;
 class TQListViewItem;
 class TQPopupMenu;
 class KIntSpinBox;
@@ -45,7 +45,7 @@ class SensorsConfig : public KSim::PluginPage
     void readConfig();
 
   private slots:
-    void menu(KListView *, TQListViewItem *, const TQPoint &);
+    void menu(TDEListView *, TQListViewItem *, const TQPoint &);
     void initSensors();
     void selectAll();
     void unSelectAll();
@@ -61,7 +61,7 @@ class SensorsConfig : public KSim::PluginPage
     bool m_neverShown;
     TQLabel *m_updateLabel;
     KIntSpinBox *m_sensorSlider;
-    KListView *m_sensorView;
+    TDEListView *m_sensorView;
     TQCheckBox *m_fahrenBox;
     TQGridLayout *m_layout;
     TQPopupMenu *m_popupMenu;

@@ -72,7 +72,7 @@ void KHexEditPart::setupTools( bool BrowserViewWanted )
   if( !BrowserViewWanted ) new TDEClipboardTool( this );
   
   new KZoomToolet( this );
-  new KSelectToolet( this );
+  new TDESelectToolet( this );
   new KHEValueCodingToolet( this );
   new KHECharEncodingToolet( this );
   new KHEResizeStyleToolet( this );
@@ -81,7 +81,7 @@ void KHexEditPart::setupTools( bool BrowserViewWanted )
 */
 void KHexEditPart::setupActions( bool BrowserViewWanted )
 {
-  KActionCollection *AC = actionCollection();
+  TDEActionCollection *AC = actionCollection();
   // create our actions
   CopyAction = BrowserViewWanted ? 0 : KStdAction::copy( TQT_TQOBJECT(HexEdit), TQT_SLOT(copy()), AC );
 
@@ -89,7 +89,7 @@ void KHexEditPart::setupActions( bool BrowserViewWanted )
   KStdAction::deselect(  this, TQT_SLOT(slotUnselect()),  AC );
 
   // value encoding
-  CodingAction = new KSelectAction( i18n("&Value Coding"), 0, AC, "view_valuecoding" );
+  CodingAction = new TDESelectAction( i18n("&Value Coding"), 0, AC, "view_valuecoding" );
   TQStringList List;
   List.append( i18n("&Hexadecimal") );
   List.append( i18n("&Decimal")     );
@@ -99,17 +99,17 @@ void KHexEditPart::setupActions( bool BrowserViewWanted )
   connect( CodingAction, TQT_SIGNAL(activated(int)), this, TQT_SLOT(slotSetCoding(int)) );
 
   // document encoding
-  EncodingAction = new KSelectAction( i18n("&Char Encoding"), 0, AC, "view_charencoding" );
+  EncodingAction = new TDESelectAction( i18n("&Char Encoding"), 0, AC, "view_charencoding" );
   EncodingAction->setItems( KCharCodec::codecNames() );
   connect( EncodingAction, TQT_SIGNAL(activated(int)), this, TQT_SLOT(slotSetEncoding(int)) );
 
-  ShowUnprintableAction = new KToggleAction( i18n("Show &Unprintable Chars (<32)"), 0, this, TQT_SLOT(slotSetShowUnprintable()), actionCollection(), "view_showunprintable" );
+  ShowUnprintableAction = new TDEToggleAction( i18n("Show &Unprintable Chars (<32)"), 0, this, TQT_SLOT(slotSetShowUnprintable()), actionCollection(), "view_showunprintable" );
 
   KStdAction::zoomIn(  TQT_TQOBJECT(HexEdit), TQT_SLOT(zoomIn()),   actionCollection() );
   KStdAction::zoomOut( TQT_TQOBJECT(HexEdit), TQT_SLOT(zoomOut()),  actionCollection() );
 
   // resize style
-  ResizeStyleAction = new KSelectAction( i18n("&Resize Style"), 0, AC, "resizestyle" );
+  ResizeStyleAction = new TDESelectAction( i18n("&Resize Style"), 0, AC, "resizestyle" );
   List.clear();
   List.append( i18n("&No Resize") );
   List.append( i18n("&Lock Groups") );
@@ -117,10 +117,10 @@ void KHexEditPart::setupActions( bool BrowserViewWanted )
   ResizeStyleAction->setItems( List );
   connect( ResizeStyleAction, TQT_SIGNAL(activated(int)), this, TQT_SLOT(slotSetResizeStyle(int)) );
 
-  ShowOffsetColumnAction = new KToggleAction( i18n("&Line Offset"), Key_F11, this, TQT_SLOT(slotToggleOffsetColumn()), AC, "view_lineoffset" );
+  ShowOffsetColumnAction = new TDEToggleAction( i18n("&Line Offset"), Key_F11, this, TQT_SLOT(slotToggleOffsetColumn()), AC, "view_lineoffset" );
 
   // show buffer columns
-  ToggleColumnsAction = new KSelectAction( i18n("&Columns"), 0, AC, "togglecolumns" );
+  ToggleColumnsAction = new TDESelectAction( i18n("&Columns"), 0, AC, "togglecolumns" );
   List.clear();
   List.append( i18n("&Values Column") );
   List.append( i18n("&Chars Column") );

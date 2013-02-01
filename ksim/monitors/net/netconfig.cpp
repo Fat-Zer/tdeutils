@@ -43,15 +43,15 @@ NetConfig::NetConfig(KSim::PluginObject *parent, const char *name)
   TQVBoxLayout *mainLayout = new TQVBoxLayout(this);
   mainLayout->setSpacing(6);
 
-  usingBox = new KListView(this);
+  usingBox = new TDEListView(this);
   usingBox ->addColumn(i18n("Interface"));
   usingBox ->addColumn(i18n("Timer"));
   usingBox ->addColumn(i18n("Commands"));
   usingBox->setAllColumnsShowFocus(true);
 
-  connect(usingBox, TQT_SIGNAL(contextMenu(KListView *,
+  connect(usingBox, TQT_SIGNAL(contextMenu(TDEListView *,
      TQListViewItem *, const TQPoint &)),
-     TQT_SLOT(menu(KListView *, TQListViewItem *, const TQPoint &)));
+     TQT_SLOT(menu(TDEListView *, TQListViewItem *, const TQPoint &)));
   connect(usingBox, TQT_SIGNAL(doubleClicked(TQListViewItem *)),
      TQT_SLOT(modifyItem(TQListViewItem *)));
   mainLayout->addWidget(usingBox);
@@ -138,7 +138,7 @@ void NetConfig::readConfig()
   }
 }
 
-void NetConfig::menu(KListView *, TQListViewItem *item, const TQPoint &)
+void NetConfig::menu(TDEListView *, TQListViewItem *item, const TQPoint &)
 {
   aboutMenu = new TQPopupMenu(this);
 

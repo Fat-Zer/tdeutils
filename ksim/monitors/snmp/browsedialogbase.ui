@@ -67,7 +67,7 @@
                 </widget>
             </hbox>
         </widget>
-        <widget class="KListView" row="1" column="0">
+        <widget class="TDEListView" row="1" column="0">
             <column>
                 <property name="text">
                     <string>Object</string>

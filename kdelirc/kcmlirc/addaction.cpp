@@ -228,7 +228,7 @@ void AddAction::updateParameters()
 	{
 		Prototype p(theFunctions->currentItem()->text(2));
 		for(unsigned k = 0; k < p.count(); k++)
-		{	new KListViewItem(theParameters, p.name(k).isEmpty() ? i18n( "<anonymous>" ) : p.name(k), "", p.type(k), TQString().setNum(k + 1));
+		{	new TDEListViewItem(theParameters, p.name(k).isEmpty() ? i18n( "<anonymous>" ) : p.name(k), "", p.type(k), TQString().setNum(k + 1));
 			theArguments.append(TQVariant(""));
 			theArguments.back().cast(TQVariant::nameToType(p.type(k).utf8()));
 		}
@@ -346,14 +346,14 @@ void AddAction::updateObjects()
 		if(names.contains(name)) continue;
 		names += name;
 
-		KListViewItem *a = new KListViewItem(theObjects, name);
+		TDEListViewItem *a = new TDEListViewItem(theObjects, name);
 		uniqueProgramMap[a] = name == TQString(*i);
 		nameProgramMap[a] = *i;
 
 		QCStringList theObjects = theClient->remoteObjects(*i);
 		for(QCStringList::iterator j = theObjects.begin(); j != theObjects.end(); ++j)
 			if(*j != "tdesycoca" && *j != "qt")// && getFunctions(*i, *j).count())
-				new KListViewItem(a, *j);
+				new TDEListViewItem(a, *j);
 	}
 	updateFunctions();
 }
@@ -365,7 +365,7 @@ void AddAction::updateFunctions()
 	{	TQStringList functions = getFunctions(nameProgramMap[theObjects->currentItem()->parent()], theObjects->currentItem()->text(0));
 		for(TQStringList::iterator i = functions.begin(); i != functions.end(); ++i)
 		{	Prototype p((TQString)(*i));
-			new KListViewItem(theFunctions, p.name(), p.argumentList(), *i);
+			new TDEListViewItem(theFunctions, p.name(), p.argumentList(), *i);
 		}
 	}
 	updateOptions();

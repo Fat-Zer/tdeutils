@@ -35,7 +35,7 @@ class TQLabel;
 class TQGroupBox;
 class TQTimer;
 class TQListViewItem;
-class KListView;
+class TDEListView;
 
 class CpuPlugin : public KSim::PluginObject
 {
@@ -216,7 +216,7 @@ class CpuConfig : public KSim::PluginPage
   private:
     uint addCpus();
 
-    KListView *m_listView;
+    TDEListView *m_listView;
     TQGroupBox *m_legendBox;
     TQLabel *m_totalNiceLabel;
     TQLabel *m_totalLabel;

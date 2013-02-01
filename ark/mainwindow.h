@@ -98,12 +98,12 @@ private: // data
     KParts::ReadWritePart *m_part;
     ArkWidget *m_widget; //the parts widget
 
-    KAction *newWindowAction;
-    KAction *newArchAction;
-    KAction *openAction;
-    KAction *closeAction;
-    KAction *reloadAction;
-    KRecentFilesAction *recent;
+    TDEAction *newWindowAction;
+    TDEAction *newArchAction;
+    TDEAction *openAction;
+    TDEAction *closeAction;
+    TDEAction *reloadAction;
+    TDERecentFilesAction *recent;
 
     //progress dialog for konqs service menus / commmand line
     KProgressDialog *progressDialog;

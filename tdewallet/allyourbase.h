@@ -37,7 +37,7 @@ enum KWalletListItemClasses {
 	KWalletUnknownClass = 2000
 };
 
-class KWalletEntryItem : public KListViewItem {
+class KWalletEntryItem : public TDEListViewItem {
 	public:
 		KWalletEntryItem(KWallet::Wallet *w, TQListViewItem* parent, const TQString& ename);
 		virtual ~KWalletEntryItem();
@@ -55,7 +55,7 @@ class KWalletEntryItem : public KListViewItem {
 		TQString _oldName;
 };
 
-class KWalletContainerItem : public KListViewItem {
+class KWalletContainerItem : public TDEListViewItem {
 	public:
 		KWalletContainerItem(TQListViewItem* parent, const TQString& name,
 		    KWallet::Wallet::EntryType type);
@@ -71,7 +71,7 @@ class KWalletContainerItem : public KListViewItem {
 		KWallet::Wallet::EntryType _type;
 };
 
-class KWalletFolderItem : public KListViewItem {
+class KWalletFolderItem : public TDEListViewItem {
 	public:
 		KWalletFolderItem(KWallet::Wallet *w, TQListView* parent, 
 			const TQString& name, int entries);
@@ -95,7 +95,7 @@ class KWalletFolderItem : public KListViewItem {
 		int _entries;
 };
 
-class KWalletEntryList : public KListView {
+class KWalletEntryList : public TDEListView {
 	Q_OBJECT
   
 	public:

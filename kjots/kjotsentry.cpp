@@ -69,16 +69,16 @@ TQString htmlFooter()
 // KJotsEntryBase
 //
 
-KJotsEntryBase::KJotsEntryBase(KListView* parent, TQListViewItem* after=0)
-    :KListViewItem(parent,after)
+KJotsEntryBase::KJotsEntryBase(TDEListView* parent, TQListViewItem* after=0)
+    :TDEListViewItem(parent,after)
 {
     m_id = 0;
     m_saveInProgress = m_dirty = false;
     m_parent = 0;
 }
 
-KJotsEntryBase::KJotsEntryBase(KListViewItem* parent, TQListViewItem* after=0)
-    :KListViewItem(parent,after)
+KJotsEntryBase::KJotsEntryBase(TDEListViewItem* parent, TQListViewItem* after=0)
+    :TDEListViewItem(parent,after)
 {
     m_id = 0;
     m_saveInProgress = m_dirty = false;
@@ -93,9 +93,9 @@ void KJotsEntryBase::setSubject(const TQString& subj)
 void KJotsEntryBase::setText(int column, const TQString& text)
 {
     if (column == 0 && text.isEmpty())
-        KListViewItem::setText(0, defaultSubject());
+        TDEListViewItem::setText(0, defaultSubject());
     else
-        KListViewItem::setText(column, text);
+        TDEListViewItem::setText(column, text);
 }
 
 /*!
@@ -217,13 +217,13 @@ int KJotsEntryBase::printTitleBox(TQString title, KPrinter& printer, TQPainter& 
 // KJotsBook
 //
 
-KJotsBook::KJotsBook(KListView* parent, TQListViewItem* after)
+KJotsBook::KJotsBook(TDEListView* parent, TQListViewItem* after)
     : KJotsEntryBase(parent, after)
 {
     init();
 }
 
-KJotsBook::KJotsBook(KListViewItem* parent, TQListViewItem* after)
+KJotsBook::KJotsBook(TDEListViewItem* parent, TQListViewItem* after)
     : KJotsEntryBase(parent, after)
 {
     init();
@@ -982,7 +982,7 @@ void KJotsPage::slotSaveResult(TDEIO::Job *)
 
 void KJotsPage::print(TQFont& defaultFont)
 {
-    KJotsEntryBase* book = dynamic_cast<KJotsEntryBase*>(KListViewItem::parent());
+    KJotsEntryBase* book = dynamic_cast<KJotsEntryBase*>(TDEListViewItem::parent());
 
     TQString docName = book->subject();
     if (!subject().isNull())

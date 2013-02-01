@@ -63,7 +63,7 @@
 #include <stdlib.h>
 
 KWalletEditor::KWalletEditor(const TQString& wallet, bool isPath, TQWidget *parent, const char *name)
-: KMainWindow(parent, name), _walletName(wallet), _nonLocal(isPath) {
+: TDEMainWindow(parent, name), _walletName(wallet), _nonLocal(isPath) {
 	_newWallet = false;
 	_ww = new WalletWidget(this, "Wallet Widget");
 	_copyPassAction = KStdAction::copy(TQT_TQOBJECT(this), TQT_SLOT(copyPassword()), actionCollection());
@@ -72,7 +72,7 @@ KWalletEditor::KWalletEditor(const TQString& wallet, bool isPath, TQWidget *pare
 	box->setSpacing( KDialog::spacingHint() );
 	box->setMargin( KDialog::marginHint() );
 	_entryList = new KWalletEntryList(_ww->_entryListFrame, "Wallet Entry List");
-	box->addWidget(new KListViewSearchLineWidget(_entryList, _ww->_entryListFrame));
+	box->addWidget(new TDEListViewSearchLineWidget(_entryList, _ww->_entryListFrame));
 	box->addWidget(_entryList);
 
 	_ww->_entryStack->setEnabled(true);
@@ -158,13 +158,13 @@ void KWalletEditor::layout() {
 }
 
 void KWalletEditor::createActions() {
-	_newFolderAction = new KAction(i18n("&New Folder..."), "folder_new",
+	_newFolderAction = new TDEAction(i18n("&New Folder..."), "folder_new",
 			0, TQT_TQOBJECT(this), TQT_SLOT(createFolder()), actionCollection(),
 			"create_folder");
 	connect(this, TQT_SIGNAL(enableFolderActions(bool)),
 		_newFolderAction, TQT_SLOT(setEnabled(bool)));
 
-	_deleteFolderAction = new KAction(i18n("&Delete Folder"), 0, 0,
+	_deleteFolderAction = new TDEAction(i18n("&Delete Folder"), 0, 0,
 			TQT_TQOBJECT(this), TQT_SLOT(deleteFolder()), actionCollection(),
 			"delete_folder");
 	connect(this, TQT_SIGNAL(enableContextFolderActions(bool)),
@@ -172,25 +172,25 @@ void KWalletEditor::createActions() {
 	connect(this, TQT_SIGNAL(enableFolderActions(bool)),
 		_deleteFolderAction, TQT_SLOT(setEnabled(bool)));
 
-	_passwordAction = new KAction(i18n("Change &Password..."), 0, 0, TQT_TQOBJECT(this),
+	_passwordAction = new TDEAction(i18n("Change &Password..."), 0, 0, TQT_TQOBJECT(this),
 			TQT_SLOT(changePassword()), actionCollection(),
 			"change_password");
 	connect(this, TQT_SIGNAL(enableWalletActions(bool)),
 		_passwordAction, TQT_SLOT(setEnabled(bool)));
 
-	_mergeAction = new KAction(i18n("&Merge Wallet..."), 0, 0, TQT_TQOBJECT(this),
+	_mergeAction = new TDEAction(i18n("&Merge Wallet..."), 0, 0, TQT_TQOBJECT(this),
 			TQT_SLOT(importWallet()), actionCollection(),
 			"merge");
 	connect(this, TQT_SIGNAL(enableWalletActions(bool)),
 		_mergeAction, TQT_SLOT(setEnabled(bool)));
 
-	_importAction = new KAction(i18n("&Import XML..."), 0, 0, TQT_TQOBJECT(this),
+	_importAction = new TDEAction(i18n("&Import XML..."), 0, 0, TQT_TQOBJECT(this),
 			TQT_SLOT(importXML()), actionCollection(),
 			"import");
 	connect(this, TQT_SIGNAL(enableWalletActions(bool)),
 		_importAction, TQT_SLOT(setEnabled(bool)));
 
-	_exportAction = new KAction(i18n("&Export..."), 0, 0, TQT_TQOBJECT(this),
+	_exportAction = new TDEAction(i18n("&Export..."), 0, 0, TQT_TQOBJECT(this),
 			TQT_SLOT(exportXML()), actionCollection(),
 			"export");
 	connect(this, TQT_SIGNAL(enableWalletActions(bool)),
@@ -577,7 +577,7 @@ void KWalletEditor::listContextMenuRequested(TQListViewItem *item, const TQPoint
 		menuClass = static_cast<KWalletListItemClasses>(item->rtti());
 	}
 
-	KPopupMenu *m = new KPopupMenu(this);
+	TDEPopupMenu *m = new TDEPopupMenu(this);
 	if (item) {
 		TQString title = item->text(0);
 		// I think 200 pixels is wide enough for a title

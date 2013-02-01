@@ -28,7 +28,7 @@
 #include "kdfwidget.h"
 
 /***************************************************************/
-class KDFTopLevel : public KMainWindow
+class KDFTopLevel : public TDEMainWindow
 {
  Q_OBJECT
   

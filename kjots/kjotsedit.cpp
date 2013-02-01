@@ -44,7 +44,7 @@ KJotsEdit::KJotsEdit (TQWidget* parent, const char* name)
     setTextFormat(TQt::PlainText);
     setWordWrap(TQTextEdit::WidgetWidth);
     setLinkUnderline(true);
-    web_menu = new KPopupMenu(this);;
+    web_menu = new TDEPopupMenu(this);;
     web_menu->insertItem(i18n("Open URL"), this, TQT_SLOT(openUrl()) );
 }
 

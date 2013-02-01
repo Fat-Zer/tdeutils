@@ -478,7 +478,7 @@ DiskConfig::DiskConfig(KSim::PluginObject *parent, const char *name)
   m_layout = new TQVBoxLayout(this);
   m_layout->setSpacing(6);
 
-  m_listview = new KListView(this);
+  m_listview = new TDEListView(this);
   m_listview->addColumn(i18n("Disks"));
   m_layout->addWidget(m_listview);
 

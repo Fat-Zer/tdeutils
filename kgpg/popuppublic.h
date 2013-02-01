@@ -25,7 +25,7 @@
 
 class TQPushButton;
 class TQCheckBox;
-class KListView;
+class TDEListView;
 class TQButtonGroup;
 class KProcIO;
 
@@ -35,9 +35,9 @@ class popupPublic : public KDialogBase //TQDialog
   
 public:
 
-        popupPublic(TQWidget *parent=0, const char *name=0,TQString sfile="",bool filemode=false,KShortcut goDefaultKey=TQKeySequence(CTRL+TQt::Key_Home));
+        popupPublic(TQWidget *parent=0, const char *name=0,TQString sfile="",bool filemode=false,TDEShortcut goDefaultKey=TQKeySequence(CTRL+TQt::Key_Home));
 	~popupPublic();
-        KListView *keysList;
+        TDEListView *keysList;
         TQCheckBox *CBarmor,*CBuntrusted,*CBshred,*CBsymmetric,*CBhideid;
         bool fmode,trusted;
         TQPixmap keyPair,keySingle,keyGroup;

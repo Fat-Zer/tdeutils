@@ -520,7 +520,7 @@ bool KarambaPython::menuOptionChanged(karamba* k, TQString key, bool value)
   return callObject("menuOptionChanged", pArgs);
 }
 
-bool KarambaPython::menuItemClicked(karamba* k, KPopupMenu* menu, long id)
+bool KarambaPython::menuItemClicked(karamba* k, TDEPopupMenu* menu, long id)
 {
   PyObject* pArgs = Py_BuildValue((char*)"(lll)", k, menu, id);
   return callObject("menuItemClicked", pArgs);

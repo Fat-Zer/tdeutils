@@ -79,23 +79,23 @@ bool GenericMonitor::init()
 		return false; // exit early if we are not supposed to run
 
 	static const ShortcutInfo shortcuts[] = {
- 		{ "Search", KShortcut("XF86Search"), TQT_SLOT(launchSearch()) },
- 		{ "Home Folder", KShortcut("XF86MyComputer"), TQT_SLOT(launchHomeFolder()) },
- 		{ "Mail", KShortcut("XF86Mail"), TQT_SLOT(launchMail()) },
- 		{ "Audio Media", KShortcut("XF86AudioMedia"), TQT_SLOT(launchMusic()) },
- 		{ "Music", KShortcut("XF86Music"), TQT_SLOT(launchMusic()) },
- 		{ "Browser", KShortcut("XF86WWW"), TQT_SLOT(launchBrowser()) },
- 		{ "Calculator", KShortcut("XF86Calculator"), TQT_SLOT(launchCalculator()) },
- 		{ "Terminal", KShortcut("XF86Terminal"), TQT_SLOT(launchTerminal()) },
- 		{ "Eject", KShortcut("XF86Eject"), TQT_SLOT(eject()) },
- 		{ "Help", KShortcut("XF86Launch0"), TQT_SLOT(launchHelp()) },
-		{ "Light Bulb", KShortcut("XF86LightBulb"), TQT_SLOT(lightBulb()) },
-		{ "Battery", KShortcut("XF86LaunchB"), TQT_SLOT(pmBattery()) },
+ 		{ "Search", TDEShortcut("XF86Search"), TQT_SLOT(launchSearch()) },
+ 		{ "Home Folder", TDEShortcut("XF86MyComputer"), TQT_SLOT(launchHomeFolder()) },
+ 		{ "Mail", TDEShortcut("XF86Mail"), TQT_SLOT(launchMail()) },
+ 		{ "Audio Media", TDEShortcut("XF86AudioMedia"), TQT_SLOT(launchMusic()) },
+ 		{ "Music", TDEShortcut("XF86Music"), TQT_SLOT(launchMusic()) },
+ 		{ "Browser", TDEShortcut("XF86WWW"), TQT_SLOT(launchBrowser()) },
+ 		{ "Calculator", TDEShortcut("XF86Calculator"), TQT_SLOT(launchCalculator()) },
+ 		{ "Terminal", TDEShortcut("XF86Terminal"), TQT_SLOT(launchTerminal()) },
+ 		{ "Eject", TDEShortcut("XF86Eject"), TQT_SLOT(eject()) },
+ 		{ "Help", TDEShortcut("XF86Launch0"), TQT_SLOT(launchHelp()) },
+		{ "Light Bulb", TDEShortcut("XF86LightBulb"), TQT_SLOT(lightBulb()) },
+		{ "Battery", TDEShortcut("XF86LaunchB"), TQT_SLOT(pmBattery()) },
 		{ "FastVolumeUp", TQt::Key_VolumeUp, TQT_SLOT(fastVolumeUp()) },
 		{ "FastVolumeDown", TQt::Key_VolumeDown, TQT_SLOT(fastVolumeDown()) },
 		{ "SlowVolumeUp", TQt::CTRL+TQt::Key_VolumeUp, TQT_SLOT(slowVolumeUp()) },
 		{ "SlowVolumeDown", TQt::CTRL+TQt::Key_VolumeDown, TQT_SLOT(slowVolumeDown()) },
-		{ "Mute", KShortcut("XF86AudioMute"), TQT_SLOT(mute()) }
+		{ "Mute", TDEShortcut("XF86AudioMute"), TQT_SLOT(mute()) }
 	};
 
 	ga = new TDEGlobalAccel(this, "miloGenericAccel");

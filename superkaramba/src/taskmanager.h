@@ -382,7 +382,7 @@ class Startup: public TQObject
     TQ_PROPERTY( TQString icon READ icon )
 
 public:
-    Startup( const KStartupInfoId& id, const KStartupInfoData& data, TQObject * parent,
+    Startup( const TDEStartupInfoId& id, const TDEStartupInfoData& data, TQObject * parent,
         const char *name = 0);
     virtual ~Startup();
 
@@ -400,8 +400,8 @@ public:
      * The name of the icon to be used for the starting task.
      */
     TQString icon() const { return _data.findIcon(); }
-    void update( const KStartupInfoData& data );
-    const KStartupInfoId& id() const { return _id; }
+    void update( const TDEStartupInfoData& data );
+    const TDEStartupInfoId& id() const { return _id; }
 
 signals:
     /**
@@ -410,8 +410,8 @@ signals:
     void changed();
 
 private:
-    KStartupInfoId _id;
-    KStartupInfoData _data;
+    TDEStartupInfoId _id;
+    TDEStartupInfoData _data;
     class StartupPrivate *d;
 };
 
@@ -522,16 +522,16 @@ protected slots:
     //* @internal
     void currentDesktopChanged(int);
     //* @internal
-    void killStartup( const KStartupInfoId& );
+    void killStartup( const TDEStartupInfoId& );
     //* @internal
     void killStartup(Startup*);
 
     //* @internal
-    void gotNewStartup( const KStartupInfoId&, const KStartupInfoData& );
+    void gotNewStartup( const TDEStartupInfoId&, const TDEStartupInfoData& );
     //* @internal
-    void gotStartupChange( const KStartupInfoId&, const KStartupInfoData& );
+    void gotStartupChange( const TDEStartupInfoId&, const TDEStartupInfoData& );
     //* @internal
-    void gotRemoveStartup( const KStartupInfoId& );
+    void gotRemoveStartup( const TDEStartupInfoId& );
 
 protected:
     /**
@@ -545,7 +545,7 @@ private:
     TaskList           _tasks;
     TQValueList< WId >   _skiptaskbar_windows;
     StartupList         _startups;
-    KStartupInfo*       _startup_info;
+    TDEStartupInfo*       _startup_info;
 
     class TaskManagerPrivate *d;
 };

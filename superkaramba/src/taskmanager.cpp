@@ -84,16 +84,16 @@ void TaskManager::configure_startup()
     c.setGroup("FeedbackStyle");
     if (!c.readBoolEntry("TaskbarButton", true))
         return;
-    _startup_info = new KStartupInfo( true, this );
+    _startup_info = new TDEStartupInfo( true, this );
     connect( _startup_info,
-        TQT_SIGNAL( gotNewStartup( const KStartupInfoId&, const KStartupInfoData& )),
-        TQT_SLOT( gotNewStartup( const KStartupInfoId&, const KStartupInfoData& )));
+        TQT_SIGNAL( gotNewStartup( const TDEStartupInfoId&, const TDEStartupInfoData& )),
+        TQT_SLOT( gotNewStartup( const TDEStartupInfoId&, const TDEStartupInfoData& )));
     connect( _startup_info,
-        TQT_SIGNAL( gotStartupChange( const KStartupInfoId&, const KStartupInfoData& )),
-        TQT_SLOT( gotStartupChange( const KStartupInfoId&, const KStartupInfoData& )));
+        TQT_SIGNAL( gotStartupChange( const TDEStartupInfoId&, const TDEStartupInfoData& )),
+        TQT_SLOT( gotStartupChange( const TDEStartupInfoId&, const TDEStartupInfoData& )));
     connect( _startup_info,
-        TQT_SIGNAL( gotRemoveStartup( const KStartupInfoId&, const KStartupInfoData& )),
-        TQT_SLOT( gotRemoveStartup( const KStartupInfoId& )));
+        TQT_SIGNAL( gotRemoveStartup( const TDEStartupInfoId&, const TDEStartupInfoData& )),
+        TQT_SLOT( gotRemoveStartup( const TDEStartupInfoId& )));
     c.setGroup( "TaskbarButtonSettings" );
     _startup_info->setTimeout( c.readUnsignedNumEntry( "Timeout", 30 ));
 }
@@ -252,7 +252,7 @@ void TaskManager::currentDesktopChanged(int desktop)
     emit desktopChanged(desktop);
 }
 
-void TaskManager::gotNewStartup( const KStartupInfoId& id, const KStartupInfoData& data )
+void TaskManager::gotNewStartup( const TDEStartupInfoId& id, const TDEStartupInfoData& data )
 {
     Startup* s = new Startup( id, data, this );
     _startups.append(s);
@@ -260,7 +260,7 @@ void TaskManager::gotNewStartup( const KStartupInfoId& id, const KStartupInfoDat
     emit startupAdded(s);
 }
 
-void TaskManager::gotStartupChange( const KStartupInfoId& id, const KStartupInfoData& data )
+void TaskManager::gotStartupChange( const TDEStartupInfoId& id, const TDEStartupInfoData& data )
 {
     for( Startup* s = _startups.first(); s != 0; s = _startups.next()) {
         if ( s->id() == id ) {
@@ -270,12 +270,12 @@ void TaskManager::gotStartupChange( const KStartupInfoId& id, const KStartupInfo
     }
 }
 
-void TaskManager::gotRemoveStartup( const KStartupInfoId& id )
+void TaskManager::gotRemoveStartup( const TDEStartupInfoId& id )
 {
     killStartup( id );
 }
 
-void TaskManager::killStartup( const KStartupInfoId& id )
+void TaskManager::killStartup( const TDEStartupInfoId& id )
 {
     Startup* s = 0;
     for(s = _startups.first(); s != 0; s = _startups.next()) {
@@ -802,7 +802,7 @@ void Task::generateThumbnail()
    emit thumbnailChanged();
 }
 
-Startup::Startup( const KStartupInfoId& id, const KStartupInfoData& data,
+Startup::Startup( const TDEStartupInfoId& id, const TDEStartupInfoData& data,
     TQObject * parent, const char *name)
     : TQObject(parent, name), _id( id ), _data( data )
 {
@@ -813,7 +813,7 @@ Startup::~Startup()
 
 }
 
-void Startup::update( const KStartupInfoData& data )
+void Startup::update( const TDEStartupInfoData& data )
 {
     _data.update( data );
     emit changed();

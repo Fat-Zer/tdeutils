@@ -192,7 +192,7 @@ TQStringList ThemeLocale::languageList()
       ++it )
   {
     TQString ln, ct, chrset;
-    KLocale::splitLocale(*it, ln, ct, chrset);
+    TDELocale::splitLocale(*it, ln, ct, chrset);
     /*
     We don't use these in zip themes...
     if (!ct.isEmpty())

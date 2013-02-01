@@ -342,7 +342,7 @@ void KgpgKeyInfo::finishphotoreadprocess(KProcIO *p)
 
 void KgpgKeyInfo::openPhoto()
 {
-			 KTrader::OfferList offers = KTrader::self()->query("image/jpeg", "Type == 'Application'");
+			 TDETrader::OfferList offers = TDETrader::self()->query("image/jpeg", "Type == 'Application'");
  			KService::Ptr ptr = offers.first();
  			//KMessageBox::sorry(0,ptr->desktopEntryName());
                         KProcIO *p=new KProcIO();

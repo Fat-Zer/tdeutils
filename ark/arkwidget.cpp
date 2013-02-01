@@ -2276,9 +2276,9 @@ void ArkWidget::showSettings(){
   dialog->addPage(new Addition(0, "Addition"), i18n("Addition"), "ark_addfile", i18n("File Addition Settings"));
   dialog->addPage(new Extraction(0, "Extraction"), i18n("Extraction"), "ark_extract", i18n("Extraction Settings"));
 
-  KTrader::OfferList offers;
+  TDETrader::OfferList offers;
 
-  offers = KTrader::self()->query( "KonqPopupMenu/Plugin", "Library == 'libarkplugin'" );
+  offers = TDETrader::self()->query( "KonqPopupMenu/Plugin", "Library == 'libarkplugin'" );
 
   if ( offers.isEmpty() )
      genPage->kcfg_KonquerorIntegration->setEnabled( false );

@@ -35,13 +35,13 @@
 #include <tqbitmap.h>
 #include <tqpainter.h>
 
-#include <kmainwindow.h>
+#include <tdemainwindow.h>
 #include <klocale.h>
 #include <kapplication.h>
 #include <kaboutdata.h>
 #include <kcmdlineargs.h>
 #include <kmessagebox.h>
-#include <kpopupmenu.h>
+#include <tdepopupmenu.h>
 #include <krun.h>
 
 static const char description[] =

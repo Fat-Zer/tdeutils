@@ -20,7 +20,7 @@
 
 // lib specific
 #include "kbufferlayout.h"
-#include "kselection.h"
+#include "tdeselection.h"
 #include "ksectionlist.h"
 #include "kcoordrangelist.h"
 

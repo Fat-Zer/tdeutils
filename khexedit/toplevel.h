@@ -27,8 +27,8 @@
 
 #include <tqptrlist.h>
 #include <kapplication.h>
-#include <kstdaccel.h>
-#include <kmainwindow.h>
+#include <tdestdaccel.h>
+#include <tdemainwindow.h>
 
 #include "hexbuffer.h"
 #include "hexmanagerwidget.h"

@@ -18,7 +18,7 @@
 // kde specific
 #include <klocale.h>
 //#include <kinstance.h>
-#include <kaction.h>
+#include <tdeaction.h>
 #include <kstdaction.h>
 //#include <kglobalsettings.h>
 // app specific

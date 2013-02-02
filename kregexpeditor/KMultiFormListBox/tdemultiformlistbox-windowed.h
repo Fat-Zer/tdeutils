@@ -22,7 +22,7 @@
   #include "compat.h"
   #include <tqlistbox.h>
 #else
-  #include <klistbox.h>
+  #include <tdelistbox.h>
 #endif
 
 #include "tdemultiformlistboxfactory.h"

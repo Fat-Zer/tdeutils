@@ -27,7 +27,7 @@
 #include <kdebug.h>
 #include <ksimpleconfig.h>
 #include <kgenericfactory.h>
-#include <klistview.h>
+#include <tdelistview.h>
 #include <kmessagebox.h>
 #include <kpushbutton.h>
 

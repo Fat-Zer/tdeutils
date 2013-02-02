@@ -27,7 +27,7 @@
 #include <kdialog.h>
 #include <kgenericfactory.h>
 #include <kinputdialog.h>
-#include <kpopupmenu.h>
+#include <tdepopupmenu.h>
 #include <tdewallet.h>
 
 #include <tqcheckbox.h>

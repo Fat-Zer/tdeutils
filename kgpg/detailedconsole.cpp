@@ -23,7 +23,7 @@
 
 #include <kmessagebox.h>
 #include <klocale.h>
-#include <klistbox.h>
+#include <tdelistbox.h>
 #include <kglobal.h>
 
 #include "kgpgoptions.h"

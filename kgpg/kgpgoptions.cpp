@@ -31,7 +31,7 @@
 #include <tqradiobutton.h>
 #include <tqpushbutton.h>
 #include <tqfont.h>
-#include <kaction.h>
+#include <tdeaction.h>
 #include <kmessagebox.h>
 #include <klineedit.h>
 #include <kcombobox.h>
@@ -39,7 +39,7 @@
 #include <kiconloader.h>
 #include <tdefiledialog.h>
 #include <kinputdialog.h>
-#include <kfontdialog.h>
+#include <tdefontdialog.h>
 #include <kdesktopfile.h>
 #include <kstandarddirs.h>
 #include <kcolorbutton.h>

@@ -21,7 +21,7 @@
 #include <tqfile.h>
 #include <kprocio.h>
 #include <kpassivepopup.h>
-#include <kaction.h>
+#include <tdeaction.h>
 #include <tqregexp.h>
 #include <ktempfile.h>
 #include <tqimage.h>

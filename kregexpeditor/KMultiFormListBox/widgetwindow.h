@@ -23,7 +23,7 @@
   #include <tqlistbox.h>
 #else
   #include <kdialogbase.h>
-  #include <klistbox.h>
+  #include <tdelistbox.h>
 #endif
 
 #include "tdemultiformlistbox-windowed.h"

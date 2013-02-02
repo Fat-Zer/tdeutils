@@ -17,7 +17,7 @@
 
 #include <stdlib.h>
 
-#include <kaction.h>
+#include <tdeaction.h>
 #include <tdefiledialog.h>
 #include <klocale.h>
 #include <dcopclient.h>
@@ -470,7 +470,7 @@ void KgpgApp::slotCheckMd5()
                 Md5Widget *mdwidget=new Md5Widget(this,0,url);
                 mdwidget->exec();
                 delete mdwidget;
-                //      KMessageBox::information(this,TQString("MD5 sum for "+url.fileName()+" is:\n"+chectdefile.hexDigest().data()));
+                //      KMessageBox::information(this,TQString("MD5 sum for "+url.fileName()+" is:\n"+checkfile.hexDigest().data()));
         }
 }
 

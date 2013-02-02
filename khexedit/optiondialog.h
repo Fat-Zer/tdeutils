@@ -35,7 +35,7 @@ class TDEFontChooser;
 
 
 #include <kdialogbase.h>
-#include <klistbox.h> 
+#include <tdelistbox.h> 
 #include "hexeditstate.h"
 
 

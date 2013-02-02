@@ -14,7 +14,7 @@
 
 #include <kpushbutton.h>
 #include <kcharselect.h>
-#include <kmainwindow.h>
+#include <tdemainwindow.h>
 
 static const char *version = "v1.1"; 
 

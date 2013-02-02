@@ -29,7 +29,7 @@
 
 #include "version.h"
 
-#include <kmainwindow.h>
+#include <tdemainwindow.h>
 
 class KEdit;
 class KSpell;

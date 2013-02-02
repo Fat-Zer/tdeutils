@@ -33,7 +33,7 @@
 #include <kaboutdata.h>
 #include <klocale.h>
 #include <kapplication.h>
-#include <klistview.h>
+#include <tdelistview.h>
 #include <kinputdialog.h>
 #include <tdeconfig.h>
 

@@ -22,7 +22,7 @@
 #define ALLYOURBASE_H
 
 #include <kiconview.h>
-#include <klistview.h>
+#include <tdelistview.h>
 #include <tdewallet.h>
 #include <kiconloader.h>
 #include <kicontheme.h>

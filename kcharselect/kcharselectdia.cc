@@ -11,10 +11,10 @@
 
 #include <kdialog.h>
 #include <kapplication.h>
-#include <kaccel.h>
+#include <tdeaccel.h>
 #include <tdeconfig.h>
 #include <klocale.h>
-#include <kaction.h>
+#include <tdeaction.h>
 
 /******************************************************************/
 /* class KCharSelectDia                                           */

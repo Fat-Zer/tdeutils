@@ -41,8 +41,8 @@
 
 
 #include <kaboutdata.h>
-#include <kaccel.h>
-#include <kaction.h>
+#include <tdeaccel.h>
+#include <tdeaction.h>
 #include <kapplication.h>
 #include <kcmdlineargs.h>
 #include <kcolorbutton.h>
@@ -50,14 +50,14 @@
 #include <tdeconfig.h>
 #include <tdeconfigdialog.h>
 #include <kdialog.h>
-#include <kfontdialog.h>
+#include <tdefontdialog.h>
 #include <kglobal.h>
 #include <kglobalsettings.h>
 #include <kkeydialog.h>
 #include <kmenubar.h>
 #include <knotifyclient.h>
 #include <knumvalidator.h>
-#include <kpopupmenu.h>
+#include <tdepopupmenu.h>
 #include <kpushbutton.h>
 #include <kstatusbar.h>
 #include <kstdaction.h>
@@ -69,7 +69,7 @@
 #include "general.h"
 #include "colors.h"
 #include "constants.h"
-#include <kaccelmanager.h>
+#include <tdeaccelmanager.h>
 #include "kcalc_settings.h"
 
 

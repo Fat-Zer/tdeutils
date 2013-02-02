@@ -21,7 +21,7 @@
 #ifndef _LISTVIEW_H_
 #define _LISTVIEW_H_
 
-#include <klistview.h>
+#include <tdelistview.h>
 
 class CListView : public TDEListView
 {

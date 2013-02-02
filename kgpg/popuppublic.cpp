@@ -29,16 +29,16 @@
 #include <tqtextcodec.h>
 
 #include <tdeversion.h>
-#include <klistview.h>
+#include <tdelistview.h>
 #include <kprocess.h>
 #include <kprocio.h>
 #include <klocale.h>
-#include <kaccel.h>
+#include <tdeaccel.h>
 #if KDE_IS_VERSION( 3, 2, 90 )
-#include <klistviewsearchline.h>
+#include <tdelistviewsearchline.h>
 #endif
 #include <kactivelabel.h>
-#include <kaction.h>
+#include <tdeaction.h>
 #include <kdebug.h>
 #include <kiconloader.h>
 #include <klineedit.h>
@@ -49,7 +49,7 @@
 #include "kgpgview.h"
 #include "kgpg.h"
 
-/////////////////   klistviewitem special
+/////////////////   tdelistviewitem special
 
 class UpdateViewItem2 : public TDEListViewItem
 {

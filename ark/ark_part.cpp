@@ -29,7 +29,7 @@
 #include "searchbar.h"
 
 #include <kdebug.h>
-#include <kpopupmenu.h>
+#include <tdepopupmenu.h>
 #include <kmessagebox.h>
 #include <kaboutdata.h>
 #include <kxmlguifactory.h>

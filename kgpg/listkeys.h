@@ -19,11 +19,11 @@
 #define LISTKEYS_H
 
 #include <kdialogbase.h>
-#include <klistview.h>
-#include <kmainwindow.h>
-#include <klistviewsearchline.h>
+#include <tdelistview.h>
+#include <tdemainwindow.h>
+#include <tdelistviewsearchline.h>
 
-#include <kactionclasses.h> 
+#include <tdeactionclasses.h> 
 #include <tqclipboard.h>
 
 #include "dcopiface.h"
@@ -33,7 +33,7 @@
 #include <kurl.h>
 
 #include <tqcheckbox.h>
-#include <kmainwindow.h>
+#include <tdemainwindow.h>
 
 class TQPushButton;
 class TQPopupMenu;

@@ -30,7 +30,7 @@
 #include <tqglobal.h>
 #include <tqpushbutton.h>
 
-#include <klistview.h>
+#include <tdelistview.h>
 #include <kdebug.h>
 #include <kaboutapplication.h>
 #include <kaboutdata.h>

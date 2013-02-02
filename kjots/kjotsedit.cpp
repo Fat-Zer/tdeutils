@@ -24,7 +24,7 @@
 #include <tqpaintdevicemetrics.h>
 #include <tqcursor.h>
 
-#include <kpopupmenu.h>
+#include <tdepopupmenu.h>
 #include <keditcl.h>
 #include <klocale.h>
 #include <kopenwith.h>

@@ -20,7 +20,7 @@
 #ifndef KWALLETMANAGER_H
 #define KWALLETMANAGER_H
 
-#include <kmainwindow.h>
+#include <tdemainwindow.h>
 #include <dcopobject.h>
 #include <tqptrlist.h>
 

@@ -19,10 +19,10 @@
 
 #include "kwmapeditor.h"
 
-#include <kaction.h>
+#include <tdeaction.h>
 #include <kdebug.h>
 #include <klocale.h>
-#include <kpopupmenu.h>
+#include <tdepopupmenu.h>
 #include <kstdaction.h>
 #include <twin.h>
 

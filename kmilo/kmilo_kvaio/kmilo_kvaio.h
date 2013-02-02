@@ -22,7 +22,7 @@
 #ifndef _KMILO_KVAIO_H_
 #define _KMILO_KVAIO_H_
 
-#include <kmainwindow.h>
+#include <tdemainwindow.h>
 #include <kglobalaccel.h>
 #include <dcopref.h>
 #include <kapplication.h>

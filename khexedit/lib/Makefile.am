@@ -26,7 +26,7 @@ noinst_HEADERS = kcolumn.h kbordercolumn.h koffsetcolumn.h \
                  kbuffercolumn.h kvaluecolumn.h kcharcolumn.h \
                  kbytecodec.h koffsetformat.h khexedit_export.h \
                  kbuffercursor.h kbufferlayout.h kbufferranges.h \
-                 kbuffercoord.h kselection.h \
+                 kbuffercoord.h tdeselection.h \
                  kcursor.h kbufferdrag.h \
                  kcoordrange.h ksectionlist.h kcoordrangelist.h \
                  khechar.h kcharcodec.h \

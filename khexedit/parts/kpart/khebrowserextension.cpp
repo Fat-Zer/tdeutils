@@ -16,7 +16,7 @@
 
 
 // qt specific
-#include <kaction.h>
+#include <tdeaction.h>
 // app specific
 #include "khexedit.h"
 #include "khepart.h"

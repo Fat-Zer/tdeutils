@@ -37,7 +37,7 @@
 #include <tqfile.h>
 #include <tdefile.h>
 #include <tqfileinfo.h>
-#include <kaction.h>
+#include <tdeaction.h>
 #include <tqtimer.h>
 #include <tqpixmap.h>
 #include <tqpainter.h>
@@ -52,7 +52,7 @@
 #include <ksharedpixmap.h>
 #include <tqvaluestack.h>
 #include <dcopclient.h>
-#include <kpopupmenu.h>
+#include <tdepopupmenu.h>
 #include <tqcursor.h>
 #include <netwm.h>
 #include <kiconloader.h>

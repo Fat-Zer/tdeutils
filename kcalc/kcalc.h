@@ -31,7 +31,7 @@ class TQHButtonGroup;
 class TQWidget;
 class DispLogic;
 class Constants;
-#include <kmainwindow.h>
+#include <tdemainwindow.h>
 
 /*
   Kcalc basically consist of a class for the GUI (here), a class for

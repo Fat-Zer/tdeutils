@@ -24,8 +24,8 @@
 #include <klocale.h>
 #include <kcharsets.h>
 #include <kdiroperator.h>
-#include <krecentdocument.h>
-#include <ktoolbar.h>
+#include <tderecentdocument.h>
+#include <tdetoolbar.h>
 #include <kpushbutton.h>
 
 #include "ktextfiledlg.h"

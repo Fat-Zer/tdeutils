@@ -32,9 +32,9 @@
 #include <kstandarddirs.h>
 #include <kurllabel.h>
 #include <kapplication.h>
-#include <kfontdialog.h>
+#include <tdefontdialog.h>
 #include <kcombobox.h>
-#include <klistview.h>
+#include <tdelistview.h>
 #include <ksqueezedtextlabel.h>
 #include <knuminput.h>
 #include <kseparator.h>

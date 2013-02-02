@@ -21,7 +21,7 @@
 #define CONFIGPAGE_H
 
 #include <pluginmodule.h>
-#include <klistview.h>
+#include <tdelistview.h>
 
 #include "monitorconfig.h"
 #include "hostconfig.h"

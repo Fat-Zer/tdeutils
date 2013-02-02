@@ -21,12 +21,12 @@
 
 #include "searchbar.h"
 
-#include <klistviewsearchline.h>
-#include <klistview.h>
+#include <tdelistviewsearchline.h>
+#include <tdelistview.h>
 #include <kcombobox.h>
 #include <klocale.h>
-#include <kaction.h>
-#include <kactioncollection.h>
+#include <tdeaction.h>
+#include <tdeactioncollection.h>
 
 #include <tqlabel.h>
 #include <tqapplication.h>

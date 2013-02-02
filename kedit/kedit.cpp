@@ -31,14 +31,14 @@
 #include <tqpainter.h>
 
 #include <kaboutdata.h>
-#include <kaction.h>
+#include <tdeaction.h>
 #include <kapplication.h>
 #include <kcmdlineargs.h>
 #include <tdeconfigdialog.h>
 #include <kcursor.h>
 #include <keditcl.h>
 #include <tdefileitem.h>
-#include <kfontdialog.h>
+#include <tdefontdialog.h>
 #include <tdeio/netaccess.h>
 #include <kmessagebox.h>
 #include <kprinter.h>

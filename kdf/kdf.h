@@ -22,7 +22,7 @@
 #ifndef __KDF_H__
 #define __KDF_H__
 
-#include <kmainwindow.h>
+#include <tdemainwindow.h>
 #include <kmenubar.h>
 
 #include "kdfwidget.h"

@@ -27,7 +27,7 @@
 #include <kcmdlineargs.h>
 #include <klocale.h>
 #include <tdeconfig.h>
-#include <kmainwindow.h>
+#include <tdemainwindow.h>
 #include <tqfileinfo.h>
 #include <tqstringlist.h>
 #include <tdeconfig.h>

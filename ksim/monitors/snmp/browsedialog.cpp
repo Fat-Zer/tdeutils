@@ -21,7 +21,7 @@
 
 #include <tqlabel.h>
 
-#include <klistview.h>
+#include <tdelistview.h>
 #include <kguiitem.h>
 #include <klocale.h>
 #include <kpushbutton.h>

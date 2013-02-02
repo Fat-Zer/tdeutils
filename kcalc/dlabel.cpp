@@ -24,7 +24,7 @@
 */
 
 #include <tqglobal.h>
-#include <kactioncollection.h>
+#include <tdeactioncollection.h>
 #include <kstdaction.h>
 
 #include "kcalc_settings.h"

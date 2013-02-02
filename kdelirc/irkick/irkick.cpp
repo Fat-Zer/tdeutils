@@ -16,16 +16,16 @@
 
 #include <tdeversion.h>
 #include <kapplication.h>
-#include <kaction.h>
+#include <tdeaction.h>
 #if !(TDE_VERSION_MINOR<=1 && TDE_VERSION_RELEASE<=5)
-#include <kactioncollection.h>
+#include <tdeactioncollection.h>
 #endif
 #include <ksimpleconfig.h>
 #include <ksystemtray.h>
 #include <kiconloader.h>
 #include <kpassivepopup.h>
 #include <kmessagebox.h>
-#include <kpopupmenu.h>
+#include <tdepopupmenu.h>
 #include <kdebug.h>
 #include <klocale.h>
 #include <kaboutdialog.h>

@@ -30,7 +30,7 @@
 
 #include <dcopclient.h>
 #include <dcopref.h>
-#include <kmainwindow.h>
+#include <tdemainwindow.h>
 #include "kvaiodriverinterface.h"
 #include "monitor.h"
 #include "kmilo_kvaio.h"

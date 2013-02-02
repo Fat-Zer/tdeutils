@@ -55,8 +55,8 @@
 #include <tdefiledialog.h>
 #include <kdirselectdialog.h>
 #include <kurldrag.h>
-#include <klistviewsearchline.h>
-#include <ktoolbar.h>
+#include <tdelistviewsearchline.h>
+#include <tdetoolbar.h>
 #include <tdeconfigdialog.h>
 #include <ktrader.h>
 #include <kurl.h>
@@ -66,7 +66,7 @@
 #include "general.h"
 #include "addition.h"
 #include "extraction.h"
-#include <kpopupmenu.h>
+#include <tdepopupmenu.h>
 #include <kdialog.h>
 
 // ark includes

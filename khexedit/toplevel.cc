@@ -25,14 +25,14 @@
 #include <tqtimer.h>
 #include <tqtooltip.h>
 
-#include <kaction.h>
+#include <tdeaction.h>
 #include <kiconloader.h>
 #include <klocale.h>
 #include <kmessagebox.h>
 #include <kstatusbar.h>
-#include <kpopupmenu.h>
+#include <tdepopupmenu.h>
 #include <kstdaction.h>
-#include <ktoolbarbutton.h>
+#include <tdetoolbarbutton.h>
 #include <kdebug.h>
 #include <kurl.h>
 #include <kurldrag.h>
@@ -376,7 +376,7 @@ void KHexEdit::initialize( bool openFiles )
 
   if ( openFiles && editor()->openFile() != SDisplayMisc::none )
   {
-    // Code modified from tdelibs/tdeui/kactionclasses.cpp TDERecentFilesAction::loadEntries
+    // Code modified from tdelibs/tdeui/tdeactionclasses.cpp TDERecentFilesAction::loadEntries
       
     TDEConfig* config = kapp->config();
 

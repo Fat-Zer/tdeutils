@@ -22,7 +22,7 @@
 #include <config.h>
 #endif
 
-#include <kmainwindow.h>
+#include <tdemainwindow.h>
 
 #include <tqstringlist.h>
 #include <kurl.h>

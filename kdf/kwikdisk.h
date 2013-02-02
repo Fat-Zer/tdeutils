@@ -28,11 +28,11 @@
 #include <config.h>
 #endif
 
-#include "disklist.h"
+#include "distdelist.h"
 #include "stdoption.h"
 #include "optiondialog.h"
 
-#include <kmainwindow.h>
+#include <tdemainwindow.h>
 #include <ksystemtray.h>
 
 /**

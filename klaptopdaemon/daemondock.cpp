@@ -28,7 +28,7 @@
 
 #include <tqslider.h>
 #include <klocale.h>
-#include <kpopupmenu.h>
+#include <tdepopupmenu.h>
 #include <dcopclient.h>
 #include <dcopref.h>
 #include "kpcmciainfo.h"

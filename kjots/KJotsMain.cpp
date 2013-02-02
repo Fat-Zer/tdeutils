@@ -24,7 +24,7 @@
 
 #include <tdeio/netaccess.h>
 
-#include <kaction.h>
+#include <tdeaction.h>
 #include <kapplication.h>
 #include <kbookmarkmenu.h>
 #include <tdeconfigdialog.h>
@@ -34,10 +34,10 @@
 #include <kglobalsettings.h>
 #include <kinputdialog.h>
 #include <kmessagebox.h>
-#include <kpopupmenu.h>
+#include <tdepopupmenu.h>
 #include <krun.h>
 #include <kstandarddirs.h>
-#include <kstdaccel.h>
+#include <tdestdaccel.h>
 #include <ktextbrowser.h>
 
 #include "KJotsMain.h"

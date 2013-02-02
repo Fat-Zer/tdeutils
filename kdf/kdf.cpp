@@ -20,14 +20,14 @@
  */
 
 #include <kapplication.h>
-#include <kstdaccel.h>
+#include <tdestdaccel.h>
 #include <kcmdlineargs.h>
 #include <kaboutdata.h>
 #include <kstdaction.h>
-#include <kaction.h>
+#include <tdeaction.h>
 
 #include "kdf.h"
-#include <kpopupmenu.h>
+#include <tdepopupmenu.h>
 
 static const char description[] =
 	I18N_NOOP("TDE free disk space utility");

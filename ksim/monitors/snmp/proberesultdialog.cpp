@@ -22,7 +22,7 @@
 #include <tqlabel.h>
 
 #include <klocale.h>
-#include <klistview.h>
+#include <tdelistview.h>
 
 using namespace KSim::Snmp;
 

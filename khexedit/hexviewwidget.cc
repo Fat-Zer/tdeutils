@@ -26,7 +26,7 @@
 
 #include <kglobalsettings.h>
 #include <klocale.h>
-#include <kpopupmenu.h>
+#include <tdepopupmenu.h>
 #include <kdebug.h>
 #include <kurldrag.h>
 

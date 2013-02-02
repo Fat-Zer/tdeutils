@@ -20,7 +20,7 @@
 #include <kdialogbase.h>
 
 //#include <kiconloader.h>
-#include <kshortcut.h>
+#include <tdeshortcut.h>
 
 
 class TQPushButton;

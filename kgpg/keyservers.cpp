@@ -38,12 +38,12 @@
 #include <klocale.h>
 #include <kprocess.h>
 #include <kprocio.h>
-#include <klistview.h>
+#include <tdelistview.h>
 #include <kstatusbar.h>
 #include <tdeconfig.h>
 #include <klineedit.h>
 #include <ksimpleconfig.h>
-#include <kaction.h>
+#include <tdeaction.h>
 #include <kdebug.h>
 
 

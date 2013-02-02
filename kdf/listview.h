@@ -23,7 +23,7 @@
 #include <tqdict.h>
 #include <tqpixmap.h>
 
-#include <klistview.h>
+#include <tdelistview.h>
 
 class CListView : public TDEListView
 {

@@ -31,13 +31,13 @@
 #include <kstatusbar.h>
 #include <tdefiledialog.h>
 #include <kmessagebox.h>
-#include <kpopupmenu.h>
+#include <tdepopupmenu.h>
 #include <tdeparts/componentfactory.h>
 #include <tdeparts/browserextension.h>
 #include <kkeydialog.h>
 #include <kcombobox.h>
 #include <tdeio/netaccess.h>
-#include <kaccel.h>
+#include <tdeaccel.h>
 
 // ark includes
 #include "arkapp.h"

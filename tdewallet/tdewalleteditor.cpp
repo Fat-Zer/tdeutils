@@ -26,7 +26,7 @@
 
 #include <dcopclient.h>
 #include <dcopref.h>
-#include <kaction.h>
+#include <tdeaction.h>
 #include <kapplication.h>
 #include <kdebug.h>
 #include <kdialog.h>
@@ -34,11 +34,11 @@
 #include <kiconview.h>
 #include <kinputdialog.h>
 #include <tdeio/netaccess.h>
-#include <klistviewsearchline.h>
+#include <tdelistviewsearchline.h>
 #include <klocale.h>
 #include <kmdcodec.h>
 #include <kmessagebox.h>
-#include <kpopupmenu.h>
+#include <tdepopupmenu.h>
 #include <ksqueezedtextlabel.h>
 #include <kstandarddirs.h>
 #include <kstdaction.h>

@@ -41,7 +41,7 @@
 #include <kprocess.h>
 #include <kprocio.h>
 #include <tqwidget.h>
-#include <kaction.h>
+#include <tdeaction.h>
 #include <tqcheckbox.h>
 #include <tqlabel.h>
 #include <tqtoolbutton.h>
@@ -52,8 +52,8 @@
 #include <tdeio/netaccess.h>
 #include <kurl.h>
 #include <tdefiledialog.h>
-#include <kshortcut.h>
-#include <kstdaccel.h>
+#include <tdeshortcut.h>
+#include <tdestdaccel.h>
 #include <klocale.h>
 #include <ktip.h>
 #include <krun.h>
@@ -1559,15 +1559,15 @@ void listKeys::slotexport()
                         }
                 } else {
 
-                        TQStringList klist;
+                        TQStringList tdelist;
 
                         for ( uint i = 0; i < exportList.count(); ++i )
                                 if ( exportList.at(i) )
-                                        klist.append(exportList.at(i)->text(6).stripWhiteSpace());
+                                        tdelist.append(exportList.at(i)->text(6).stripWhiteSpace());
 
                         KgpgInterface *kexp=new KgpgInterface();
 
-                        TQString result=kexp->getKey(klist,exportAttr);
+                        TQString result=kexp->getKey(tdelist,exportAttr);
                         if (page->checkClipboard->isChecked())
                                 slotProcessExportClip(result);
                         //connect(kexp,TQT_SIGNAL(publicKeyString(TQString)),TQT_TQOBJECT(this),TQT_SLOT(slotProcessExportClip(TQString)));

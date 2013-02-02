@@ -29,7 +29,7 @@
 #include <tqpushbutton.h>
 
 #include <tdeconfig.h>
-#include <klistview.h>
+#include <tdelistview.h>
 #include <kmessagebox.h>
 #include <klocale.h>
 

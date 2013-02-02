@@ -33,6 +33,6 @@
 </customwidgets>
 <layoutdefaults spacing="6" margin="11"/>
 <includehints>
-    <includehint>kfontdialog.h</includehint>
+    <includehint>tdefontdialog.h</includehint>
 </includehints>
 </UI>

@@ -35,7 +35,7 @@
 #include <kcharsets.h>
 #include <kpassivepopup.h>
 #include <kiconloader.h>
-#include <kaction.h>
+#include <tdeaction.h>
 #include <tqtextcodec.h>
 #include <kprocess.h>
 #include <kprocio.h>
@@ -617,10 +617,10 @@ Md5Widget::Md5Widget(TQWidget *parent, const char *name,KURL url):KDialogBase( p
         mdSum=TQString();
         TQFile f(url.path());
         f.open( IO_ReadOnly);
-        KMD5 chectdefile;
-        chectdefile.reset();
-        chectdefile.update(*TQT_TQIODEVICE(&f));
-        mdSum=chectdefile.hexDigest().data();
+        KMD5 checkfile;
+        checkfile.reset();
+        checkfile.update(*TQT_TQIODEVICE(&f));
+        mdSum=checkfile.hexDigest().data();
         f.close();
         TQWidget *page = new TQWidget(this);
 

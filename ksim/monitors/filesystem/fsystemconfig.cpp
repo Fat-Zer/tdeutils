@@ -23,7 +23,7 @@
 #include <tdeconfig.h>
 #include <klocale.h>
 #include <kiconloader.h>
-#include <klistview.h>
+#include <tdelistview.h>
 #include <kapplication.h>
 #include <knuminput.h>
 #include <kdebug.h>

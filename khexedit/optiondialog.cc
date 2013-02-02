@@ -33,7 +33,7 @@
 
 #include <kcolordialog.h>
 #include <kcolordrag.h>
-#include <kfontdialog.h> // For TDEFontChooser
+#include <tdefontdialog.h> // For TDEFontChooser
 #include <kiconloader.h>
 #include <klocale.h>
 #include <kglobalsettings.h>

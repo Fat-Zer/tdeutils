@@ -24,7 +24,7 @@
 
 #include <kcmenumngr.h>
 #include <kinputdialog.h>
-#include <kpopupmenu.h>
+#include <tdepopupmenu.h>
 
 #include "kcalc_const_button.h"
 #include "kcalc_const_menu.h"

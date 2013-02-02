@@ -21,7 +21,7 @@
  *
  */
 
-#include <klistviewsearchline.h>
+#include <tdelistviewsearchline.h>
 
 #include <tqwidget.h>
 

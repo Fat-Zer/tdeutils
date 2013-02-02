@@ -21,7 +21,7 @@
 
 #include <tqobject.h>
 #include <kurl.h>
-#include <kshortcut.h>
+#include <tdeshortcut.h>
 #include <tdeio/job.h> 
 
 class KPassivePopup;

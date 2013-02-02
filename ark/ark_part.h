@@ -27,7 +27,7 @@
 #include <tdeparts/browserextension.h>
 #include <tdeparts/statusbarextension.h>
 #include <tdeparts/factory.h>
-#include <kaction.h>
+#include <tdeaction.h>
 #include <kprogress.h>
 
 #include <tqlabel.h>

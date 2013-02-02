@@ -38,7 +38,7 @@
 #include <kapplication.h>
 #include <kcmenumngr.h>
 #include <kmessagebox.h>
-#include <kpopupmenu.h>
+#include <tdepopupmenu.h>
 #include <kprocess.h>
 
 #include "listview.h"

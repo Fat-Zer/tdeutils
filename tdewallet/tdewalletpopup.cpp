@@ -20,7 +20,7 @@
 
 #include "tdewalletpopup.h"
 
-#include <kaction.h>
+#include <tdeaction.h>
 #include <kdebug.h>
 #include <kiconview.h>
 #include <klocale.h>

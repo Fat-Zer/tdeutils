@@ -35,7 +35,7 @@
 #include <tqlayout.h>
 #include <kbuttonbox.h>
 #include <unistd.h>
-#include <kaction.h>
+#include <tdeaction.h>
 #include <klineedit.h>
 #include <tqtextcodec.h>
 

@@ -21,12 +21,12 @@
 #include <tqlayout.h>
 #include <tqcursor.h>
 
-#include <klistview.h>
+#include <tdelistview.h>
 #include <ksimpleconfig.h>
 #include <klocale.h>
 #include <kiconloader.h>
 #include <kapplication.h>
-#include <kpopupmenu.h>
+#include <tdepopupmenu.h>
 #include <kdebug.h>
 #include <kmessagebox.h>
 

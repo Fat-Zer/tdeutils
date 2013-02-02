@@ -25,7 +25,7 @@
 #ifndef _GENERICMONITOR_H_
 #define _GENERICMONITOR_H_
 
-#include <kmainwindow.h>
+#include <tdemainwindow.h>
 #include <kglobalaccel.h>
 #include <dcopref.h>
 #include <kapplication.h>

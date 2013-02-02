@@ -80,7 +80,7 @@ TaskManager::~TaskManager()
 
 void TaskManager::configure_startup()
 {
-    TDEConfig c("klaunchrc", true);
+    TDEConfig c("tdelaunchrc", true);
     c.setGroup("FeedbackStyle");
     if (!c.readBoolEntry("TaskbarButton", true))
         return;

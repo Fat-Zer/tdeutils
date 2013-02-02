@@ -23,7 +23,7 @@
 #ifndef __KJOTSENTRY_H
 #define __KJOTSENTRY_H
 
-#include <klistview.h>
+#include <tdelistview.h>
 #include <kprinter.h>
 
 //

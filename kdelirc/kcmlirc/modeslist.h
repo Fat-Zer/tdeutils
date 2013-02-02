@@ -13,9 +13,9 @@
 #ifndef MODESLIST_H
 #define MODESLIST_H
 
-#include <klistview.h>
+#include <tdelistview.h>
 
-#include <klistview.h>
+#include <tdelistview.h>
 
 /**
 

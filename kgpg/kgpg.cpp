@@ -58,7 +58,7 @@
 #include <dcopclient.h>
 #include <kstandarddirs.h>
 #include <tdefiledialog.h>
-#include <kpopupmenu.h>
+#include <tdepopupmenu.h>
 #include <tqcursor.h>
 #include <kdesktopfile.h>
 

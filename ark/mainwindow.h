@@ -30,7 +30,7 @@
 #include <tqtimer.h>
 
 // KDE includes
-#include <kmainwindow.h>
+#include <tdemainwindow.h>
 #include <tdeparts/mainwindow.h>
 #include <tdeparts/part.h>
 #include <kprogress.h>

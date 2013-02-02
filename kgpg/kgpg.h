@@ -22,11 +22,11 @@
 #include <config.h>
 #endif
 
-#include <kaction.h>
+#include <tdeaction.h>
 #include <ksystemtray.h>
 #include <kuniqueapplication.h>
 #include <kurl.h>
-#include <kshortcut.h>
+#include <tdeshortcut.h>
 
 #include <tqlabel.h>
 #include <tqstringlist.h>

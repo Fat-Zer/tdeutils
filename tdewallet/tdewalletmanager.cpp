@@ -25,7 +25,7 @@
 
 #include <dcopclient.h>
 #include <dcopref.h>
-#include <kaction.h>
+#include <tdeaction.h>
 #include <kapplication.h>
 #include <tdeconfig.h>
 #include <kdebug.h>

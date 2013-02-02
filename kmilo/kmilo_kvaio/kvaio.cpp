@@ -35,7 +35,7 @@
 #include <tqcstring.h>
 #include <tqevent.h>
 #include <tqdatastream.h>
-#include <kmainwindow.h>
+#include <tdemainwindow.h>
 #include <klocale.h>
 #include <kdebug.h>
 #include <kdialogbase.h>

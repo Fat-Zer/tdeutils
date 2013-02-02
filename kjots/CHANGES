@@ -37,7 +37,7 @@ new in version 0.2.5
 - more kde conforming due to the use of KTopLevelWidget
 
 new in version 0.2.4
-- uses kfontdialog to set the font of the editor widget
+- uses tdefontdialog to set the font of the editor widget
 - you may select an URL in your text and press the right mouse button
   to execute a program with this URL. The program to execute is
   configurable for http and ftp URLs.

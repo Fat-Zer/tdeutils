@@ -20,7 +20,7 @@
 #ifndef MONITORPREFS_H
 #define MONITORPREFS_H
 
-#include <klistview.h>
+#include <tdelistview.h>
 #include <tqstringlist.h>
 
 namespace KSim

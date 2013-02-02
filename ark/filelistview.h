@@ -32,7 +32,7 @@
 #include <tqpair.h>
 #include <tqvaluelist.h>
 
-#include <klistview.h>
+#include <tdelistview.h>
 #include <tdeio/global.h>
 
 class TQString;

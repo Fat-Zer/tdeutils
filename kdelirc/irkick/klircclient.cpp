@@ -31,7 +31,7 @@
 #include <kiconloader.h>
 #include <kpassivepopup.h>
 #include <kmessagebox.h>
-#include <kpopupmenu.h>
+#include <tdepopupmenu.h>
 #include <kdebug.h>
 #include <klocale.h>
 #include <kaboutdialog.h>

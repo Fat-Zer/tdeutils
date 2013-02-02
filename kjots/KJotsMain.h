@@ -27,7 +27,7 @@
 #include <tqpushbutton.h>
 
 #include <kdialogbase.h>
-#include <kmainwindow.h>
+#include <tdemainwindow.h>
 
 class TQGroupBox;
 class TQWidgetStack;

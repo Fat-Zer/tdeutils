@@ -23,7 +23,7 @@
 
 #include "walletwidget.h"
 #include <tdewallet.h>
-#include <kmainwindow.h>
+#include <tdemainwindow.h>
 #include <tqstringlist.h>
 
 class TDEAction;

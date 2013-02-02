@@ -20,7 +20,7 @@
 #ifndef KWALLETPOPUP_H
 #define KWALLETPOPUP_H
 
-#include <kpopupmenu.h>
+#include <tdepopupmenu.h>
 #include <tqmap.h>
 #include <tqstring.h>
 

@@ -64,8 +64,8 @@ CHexEditorWidget::CHexEditorWidget( TQWidget *parent, const char *name )
   connect( mHexView, TQT_SIGNAL(pleaseOpenFile( const TQString&, bool, uint )),
 	   TQT_SLOT( open(const TQString&, bool, uint)) );
   connect( mHexView, TQT_SIGNAL(pleaseStepFile(bool)), TQT_SLOT( stepFile(bool)) );
-  connect( kapp, TQT_SIGNAL( kdisplayFontChanged() ), TQT_SLOT( fontChanged() ) );
-  connect( kapp, TQT_SIGNAL( kdisplayPaletteChanged() ),TQT_SLOT( paletteChanged()) );
+  connect( kapp, TQT_SIGNAL( tdedisplayFontChanged() ), TQT_SLOT( fontChanged() ) );
+  connect( kapp, TQT_SIGNAL( tdedisplayPaletteChanged() ),TQT_SLOT( paletteChanged()) );
   connect( mHexView, TQT_SIGNAL( layoutChanged( const SDisplayLayout & ) ),
 	   TQT_SLOT( layoutChanged( const SDisplayLayout & ) ) );
   connect( mHexView, TQT_SIGNAL( inputModeChanged( const SDisplayInputMode & ) ),

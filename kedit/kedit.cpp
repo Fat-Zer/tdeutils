@@ -74,7 +74,7 @@ TopLevel::TopLevel (TQWidget *, const char *name)
   statusbar_timer = new TQTimer(this);
   connect(statusbar_timer, TQT_SIGNAL(timeout()),this,TQT_SLOT(timer_slot()));
 
-  connect(kapp,TQT_SIGNAL(kdisplayPaletteChanged()),this,TQT_SLOT(set_colors()));
+  connect(kapp,TQT_SIGNAL(tdedisplayPaletteChanged()),this,TQT_SLOT(set_colors()));
 
   setupStatusBar();
   setupActions();

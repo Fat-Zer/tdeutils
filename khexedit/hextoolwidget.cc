@@ -141,7 +141,7 @@ CHexToolWidget::CHexToolWidget( TQWidget *parent, const char *name )
 
   mUtilBox->activate();
 
-  connect( kapp, TQT_SIGNAL( kdisplayFontChanged() ),
+  connect( kapp, TQT_SIGNAL( tdedisplayFontChanged() ),
 	   TQT_SLOT( fontChanged() ) );
 
   mCursorState.valid = false;

@@ -89,7 +89,7 @@ KCalculator::KCalculator(TQWidget *parent, const char *name)
 	TDEAcceleratorManager::setNoAccel( central );
 
 	// Detect color change
-	connect(kapp,TQT_SIGNAL(kdisplayPaletteChanged()), TQT_SLOT(set_colors()));
+	connect(kapp,TQT_SIGNAL(tdedisplayPaletteChanged()), TQT_SLOT(set_colors()));
 
 	calc_display = new DispLogic(central, "display", actionCollection());
 

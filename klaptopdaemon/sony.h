@@ -33,8 +33,8 @@ class TQSpinBox;
 class TDEConfig;
 class TQCheckBox;
 class TQSlider;
-class KIconLoader;
-class KIconButton;
+class TDEIconLoader;
+class TDEIconButton;
 class TQPushButton;
 
 

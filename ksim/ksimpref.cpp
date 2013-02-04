@@ -48,12 +48,12 @@ KSim::ConfigDialog::ConfigDialog(KSim::Config *config,
   m_config = config;
 
   setFolderIcon(TQStringList(' ' + i18n("Plugins")),
-     BarIcon("folder", KIcon::SizeSmall));
+     BarIcon("folder", TDEIcon::SizeSmall));
   setFolderIcon(TQStringList(' ' + i18n("Miscellaneous")),
-     BarIcon("misc", KIcon::SizeSmall));
+     BarIcon("misc", TDEIcon::SizeSmall));
 
   TQFrame *monitors = addHBoxPage(' ' + i18n("Monitors"),
-     i18n("Monitors Installed"), BarIcon("ksim", KIcon::SizeSmall));
+     i18n("Monitors Installed"), BarIcon("ksim", TDEIcon::SizeSmall));
   m_monPage = new KSim::MonitorPrefs(monitors);
 
   TQStringList list;
@@ -87,7 +87,7 @@ KSim::ConfigDialog::ConfigDialog(KSim::Config *config,
   m_swapPage = new KSim::SwapPrefs(swap);
 
   TQFrame *theme = addHBoxPage(' ' + i18n("Themes"),
-     i18n("Theme Selector"), BarIcon("folder_image", KIcon::SizeSmall));
+     i18n("Theme Selector"), BarIcon("folder_image", TDEIcon::SizeSmall));
   m_themePage = new KSim::ThemePrefs(theme);
 
   connect(this, TQT_SIGNAL(applyClicked()), TQT_SLOT(savePrefs()));

@@ -100,11 +100,11 @@ KDialogBase( Plain, i18n("Select Public Key"), Details | Ok | Cancel, Ok, parent
         if (KGpgSettings::allowCustomEncryptionOptions())
                 customOptions=KGpgSettings::customEncryptionOptions();
 
-        KIconLoader *loader = TDEGlobal::iconLoader();
+        TDEIconLoader *loader = TDEGlobal::iconLoader();
 
-        keyPair=loader->loadIcon("kgpg_key2",KIcon::Small,20);
-        keySingle=loader->loadIcon("kgpg_key1",KIcon::Small,20);
-	keyGroup=loader->loadIcon("kgpg_key3",KIcon::Small,20);
+        keyPair=loader->loadIcon("kgpg_key2",TDEIcon::Small,20);
+        keySingle=loader->loadIcon("kgpg_key1",TDEIcon::Small,20);
+	keyGroup=loader->loadIcon("kgpg_key3",TDEIcon::Small,20);
 
         if (filemode) setCaption(i18n("Select Public Key for %1").arg(sfile));
         fmode=filemode;

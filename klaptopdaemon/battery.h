@@ -36,8 +36,8 @@ class TQWidget;
 class TQSpinBox;
 class TDEConfig;
 class TQCheckBox;
-class KIconLoader;
-class KIconButton;
+class TDEIconLoader;
+class TDEIconButton;
 class TQPushButton;
 class TQLabel;
 
@@ -81,11 +81,11 @@ private:
 	bool		useblanksaver;
 	bool		notifyme;
 
-	KIconLoader *iconloader;
+	TDEIconLoader *iconloader;
 
-        KIconButton *buttonNoBattery;
-        KIconButton *buttonNoCharge;
-        KIconButton *buttonCharge;
+        TDEIconButton *buttonNoBattery;
+        TDEIconButton *buttonNoCharge;
+        TDEIconButton *buttonCharge;
         TQString nobattery, nochargebattery, chargebattery;
 	TQPushButton *startMonitor;
         bool    apm;

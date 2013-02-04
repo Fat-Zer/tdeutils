@@ -45,21 +45,21 @@ KWalletFolderItem::KWalletFolderItem(KWallet::Wallet *w, TQListView* parent, con
 	setDragEnabled(true);
 	setDropEnabled(true);
 
-	TQPixmap pix = getFolderIcon(KIcon::Small);
+	TQPixmap pix = getFolderIcon(TDEIcon::Small);
 	
 	setPixmap(0,pix);
 }
 
-TQPixmap KWalletFolderItem::getFolderIcon(KIcon::Group group){
-	KIconLoader *loader = TDEGlobal::instance()->iconLoader();
+TQPixmap KWalletFolderItem::getFolderIcon(TDEIcon::Group group){
+	TDEIconLoader *loader = TDEGlobal::instance()->iconLoader();
 	TQPixmap pix = loader->loadIcon( _name, group, 0,
-			KIcon::DefaultState, 0, true );
+			TDEIcon::DefaultState, 0, true );
 	if (pix.isNull())
 		pix = loader->loadIcon( _name.lower(), group, 0,
-			KIcon::DefaultState, 0, true);
+			TDEIcon::DefaultState, 0, true);
 	if (pix.isNull())
 		pix = loader->loadIcon( "folder_red", group, 0,
-			KIcon::DefaultState, 0, true);
+			TDEIcon::DefaultState, 0, true);
 	return pix;
 }
 
@@ -619,7 +619,7 @@ class KWalletIconDrag : public TQIconDrag {
 *  *  KWalletIconView - An iconview to store wallets
 *   */
 KWalletIconView::KWalletIconView(TQWidget *parent, const char *name)
-: KIconView(parent, name) {
+: TDEIconView(parent, name) {
 	TDEGlobal::dirs()->addResourceType("tdewallet", "share/apps/tdewallet");
 	connect(this, TQT_SIGNAL(dropped(TQDropEvent*, const TQValueList<TQIconDragItem>&)), TQT_SLOT(slotDropped(TQDropEvent*, const TQValueList<TQIconDragItem>&)));
 }
@@ -671,7 +671,7 @@ void KWalletIconView::contentsMousePressEvent(TQMouseEvent *e) {
 	if (!findItem(_mousePos)) {
 		clearSelection();
 	}
-	KIconView::contentsMousePressEvent( e );
+	TDEIconView::contentsMousePressEvent( e );
 }
 
 TQDragObject *KWalletIconView::dragObject() {

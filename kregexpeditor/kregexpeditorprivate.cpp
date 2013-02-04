@@ -174,7 +174,7 @@ KRegExpEditorPrivate::KRegExpEditorPrivate(TQWidget *parent, const char *name)
 #ifdef TQT_ONLY
   TQPixmap pix( "icons/error.png" );
 #else
-  TQPixmap pix = TDEGlobal::iconLoader()->loadIcon(locate("data", TQString::fromLatin1("kregexpeditor/pics/error.png") ), KIcon::Toolbar );
+  TQPixmap pix = TDEGlobal::iconLoader()->loadIcon(locate("data", TQString::fromLatin1("kregexpeditor/pics/error.png") ), TDEIcon::Toolbar );
 #endif
   _error = new TQLabel( this );
   _error->setPixmap( pix );

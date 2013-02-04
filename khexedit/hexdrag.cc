@@ -52,7 +52,7 @@ void CHexDrag::prepPixmap(void)
   // Wont use it yet,
   //
   /*
-  KIconLoader &loader = *TDEGlobal::iconLoader();
+  TDEIconLoader &loader = *TDEGlobal::iconLoader();
   TQPixmap pix = loader.loadIcon( "binary.xpm" );
 
   TQPoint hotspot( pix.width()-20,pix.height()/2 );

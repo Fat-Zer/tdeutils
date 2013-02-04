@@ -172,7 +172,7 @@ void IRKick::updateModeIcons()
 				currentModeIcons[i.key()]->contextMenu()->changeTitle(0, mode.remoteName());
 				currentModeIcons[i.key()]->actionCollection()->action("file_quit")->setEnabled(false);
 			}
-			currentModeIcons[i.key()]->setPixmap(KIconLoader().loadIcon(mode.iconFile(), KIcon::Panel));
+			currentModeIcons[i.key()]->setPixmap(TDEIconLoader().loadIcon(mode.iconFile(), TDEIcon::Panel));
 			TQToolTip::add(currentModeIcons[i.key()], mode.remoteName() + ": <b>" + mode.name() + "</b>");
 		}
 	}

@@ -245,7 +245,7 @@ void KJotsBook::init()
     m_open = false;
     m_saveProgressDialog = 0;
     setExpandable(true);
-    setPixmap(0, kapp->iconLoader()->loadIcon(TQString("contents"),KIcon::Small));
+    setPixmap(0, kapp->iconLoader()->loadIcon(TQString("contents"),TDEIcon::Small));
 }
 
 /*!
@@ -849,7 +849,7 @@ KJotsPage::KJotsPage(KJotsBook* parent, TQListViewItem *after)
 {
     m_isBook = false;
     m_paraPos = m_indexPos = 0;
-    setPixmap(0, kapp->iconLoader()->loadIcon(TQString("edit"), KIcon::Small));
+    setPixmap(0, kapp->iconLoader()->loadIcon(TQString("edit"), TDEIcon::Small));
 }
 
 KJotsPage::~KJotsPage()

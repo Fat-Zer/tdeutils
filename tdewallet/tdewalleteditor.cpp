@@ -455,7 +455,7 @@ void KWalletEditor::entrySelectionChanged(TQListViewItem *item) {
 	if (fi) {
 		_currentFolder = fi->name();
 		_ww->_entryTitle->setText(TQString("<font size=\"+1\">%1</font>").arg(fi->text(0)));
-		_ww->_iconTitle->setPixmap(fi->getFolderIcon(KIcon::Toolbar));
+		_ww->_iconTitle->setPixmap(fi->getFolderIcon(TDEIcon::Toolbar));
 	}
 }
 

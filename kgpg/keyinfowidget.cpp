@@ -430,14 +430,14 @@ void KgpgKeyInfo::slotChangeTrust(int newTrust)
 
 void KgpgKeyInfo::slotInfoPasswordChanged()
 {
-KPassivePopup::message(i18n("Passphrase for the key was changed"),TQString(),TDEGlobal::iconLoader()->loadIcon("kgpg",KIcon::Desktop),this);
+KPassivePopup::message(i18n("Passphrase for the key was changed"),TQString(),TDEGlobal::iconLoader()->loadIcon("kgpg",TDEIcon::Desktop),this);
 }
 
 void KgpgKeyInfo::slotInfoTrustChanged()
 {
 keyWasChanged=true;
 loadKey(displayedKeyID);
-//KPassivePopup::message(i18n("Owner trust of the key was changed"),TQString(),TDEGlobal::iconLoader()->loadIcon("kgpg",KIcon::Desktop),this,0,600);
+//KPassivePopup::message(i18n("Owner trust of the key was changed"),TQString(),TDEGlobal::iconLoader()->loadIcon("kgpg",TDEIcon::Desktop),this,0,600);
 }
 
 void KgpgKeyInfo::slotInfoExpirationChanged(int res)
@@ -451,7 +451,7 @@ else prop->tLExpiration->setText(TDEGlobal::locale()->formatDate(kdt->date()));
 }
 if (res==2) {
 infoMessage=i18n("Could not change expiration");infoText=i18n("Bad passphrase");
-KPassivePopup::message(infoMessage,infoText,TDEGlobal::iconLoader()->loadIcon("kgpg",KIcon::Desktop),this);
+KPassivePopup::message(infoMessage,infoText,TDEGlobal::iconLoader()->loadIcon("kgpg",TDEIcon::Desktop),this);
 }
 }
 

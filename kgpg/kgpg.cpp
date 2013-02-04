@@ -206,7 +206,7 @@ if (encryptedFolder.exists()) {
                 }
 
 pop = new KPassivePopup();
-	pop->setView(i18n("Processing folder compression and encryption"),i18n("Please wait..."),TDEGlobal::iconLoader()->loadIcon("kgpg",KIcon::Desktop));
+	pop->setView(i18n("Processing folder compression and encryption"),i18n("Please wait..."),TDEGlobal::iconLoader()->loadIcon("kgpg",TDEIcon::Desktop));
 	pop->setAutoDelete(false);
 	pop->show();
 	kapp->processEvents();
@@ -1009,7 +1009,7 @@ int KgpgAppletApp::newInstance()
 void MyView::encryptClipboard(TQStringList selec,TQStringList encryptOptions,bool,bool symmetric)
 {
         if (kapp->clipboard()->text(clipboardMode).isEmpty()) {
-	KPassivePopup::message(i18n("Clipboard is empty."),TQString(),TDEGlobal::iconLoader()->loadIcon("kgpg",KIcon::Desktop),this);
+	KPassivePopup::message(i18n("Clipboard is empty."),TQString(),TDEGlobal::iconLoader()->loadIcon("kgpg",TDEIcon::Desktop),this);
 	return;
 	}
                 if (KGpgSettings::pgpCompatibility())
@@ -1033,7 +1033,7 @@ if (newtxt.length()>300)
                 newtxt.replace(TQRegExp("\n"),"<br>");
 
 pop = new KPassivePopup( this);
-                pop->setView(i18n("Encrypted following text:"),newtxt,TDEGlobal::iconLoader()->loadIcon("kgpg",KIcon::Desktop));
+                pop->setView(i18n("Encrypted following text:"),newtxt,TDEGlobal::iconLoader()->loadIcon("kgpg",TDEIcon::Desktop));
                 pop->setTimeout(3200);
                 pop->show();
                 TQRect qRect(TQApplication::desktop()->screenGeometry());

@@ -99,8 +99,8 @@ MntConfigWidget::MntConfigWidget(TQWidget *parent, const char *name, bool init)
 	     this,TQT_SLOT(slotChanged()));
     gl->addWidget( mIconLineEdit, 2, 0 );
 
-    mIconButton = new KIconButton(mGroupBox);
-    mIconButton->setIconType(KIcon::Small, KIcon::Device);
+    mIconButton = new TDEIconButton(mGroupBox);
+    mIconButton->setIconType(TDEIcon::Small, TDEIcon::Device);
     TQ_CHECK_PTR(mIconButton);
     mIconButton->setFixedWidth( mIconButton->sizeHint().height() );
     connect(mIconButton,TQT_SIGNAL(iconChanged(TQString)),this,TQT_SLOT(iconChangedButton(TQString)));
@@ -273,8 +273,8 @@ void MntConfigWidget::iconChanged(const TQString &iconName)
 	    {
 	      disk->setIconName(iconName);
 	      mIconLineEdit->setText(iconName);
-	      KIconLoader &loader = *TDEGlobal::iconLoader();
-	      item->setPixmap( ICONCOL, loader.loadIcon( iconName, KIcon::Small));
+	      TDEIconLoader &loader = *TDEGlobal::iconLoader();
+	      item->setPixmap( ICONCOL, loader.loadIcon( iconName, TDEIcon::Small));
 	    }
 	  break;
 	}

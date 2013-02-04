@@ -18,7 +18,7 @@
 
 EditMode::EditMode(TQWidget *parent, const char *name, bool modal, WFlags fl) : EditModeBase(parent, name, modal, fl)
 {
-	theIcon->setIconType(KIcon::Panel, KIcon::Any);
+	theIcon->setIconType(TDEIcon::Panel, TDEIcon::Any);
 }
 
 EditMode::~EditMode()

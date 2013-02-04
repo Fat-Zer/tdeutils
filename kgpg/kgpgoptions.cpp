@@ -96,8 +96,8 @@ kdDebug(2100)<<"Adding pages"<<endl;
 
 	page7->shredInfo->setText(i18n( "<qt><p>You must be aware that <b>shredding is not secure</b> on all file systems, and that parts of the file may have been saved in a temporary file or in the spooler of your printer if you previously opened it in an editor or tried to print it. Only works on files (not on folders).</p></qt>"));
 	page7->groupShred->adjustSize();
-	pixkeySingle=TDEGlobal::iconLoader()->loadIcon("kgpg_key1",KIcon::Small,20);
-	pixkeyDouble=TDEGlobal::iconLoader()->loadIcon("kgpg_key2",KIcon::Small,20);
+	pixkeySingle=TDEGlobal::iconLoader()->loadIcon("kgpg_key1",TDEIcon::Small,20);
+	pixkeyDouble=TDEGlobal::iconLoader()->loadIcon("kgpg_key2",TDEIcon::Small,20);
         addPage(page1, i18n("Encryption"), "encrypted");
         addPage(page2, i18n("Decryption"), "decrypted");
         addPage(page3, i18n("Appearance"), "looknfeel");

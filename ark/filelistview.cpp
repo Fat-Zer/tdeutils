@@ -176,7 +176,7 @@ static FileLVI* folderLVI( TDEListViewItem *parent, const TQString& name )
 
 	folder->setText( 0, name );
 
-	folder->setPixmap( 0, KMimeType::mimeType( "inode/directory" )->pixmap( KIcon::Small ) );
+	folder->setPixmap( 0, KMimeType::mimeType( "inode/directory" )->pixmap( TDEIcon::Small ) );
 
 	return folder;
 }
@@ -185,7 +185,7 @@ static FileLVI* folderLVI( TDEListView *parent, const TQString& name )
 {
 	FileLVI *folder = new FileLVI( parent );
 	folder->setText( 0, name );
-	folder->setPixmap( 0, KMimeType::mimeType( "inode/directory" )->pixmap( KIcon::Small ) );
+	folder->setPixmap( 0, KMimeType::mimeType( "inode/directory" )->pixmap( TDEIcon::Small ) );
 	return folder;
 }
 
@@ -401,7 +401,7 @@ void FileListView::addItem( const TQStringList & entries )
 	}
 
 	KMimeType::Ptr mimeType = KMimeType::findByPath( entries.first(), 0, true );
-	flvi->setPixmap( 0, mimeType->pixmap( KIcon::Small ) );
+	flvi->setPixmap( 0, mimeType->pixmap( TDEIcon::Small ) );
 }
 
 void FileListView::selectAll()

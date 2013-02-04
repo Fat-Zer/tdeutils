@@ -103,7 +103,7 @@ void COptionDialog::setupLayoutPage( void )
 {
   TQString text;
   TQFrame *page = addPage( i18n("Layout"), i18n("Data Layout in Editor"),
-			  BarIcon("khexedit", KIcon::SizeMedium ) );
+			  BarIcon("khexedit", TDEIcon::SizeMedium ) );
 
   TQGridLayout *gbox = new TQGridLayout( page, 15, 2, 0, spacingHint() );
   gbox->setColStretch( 1, 10 );
@@ -256,7 +256,7 @@ void COptionDialog::setupCursorPage( void )
   TQString text;
   TQFrame *page = addPage( i18n("Cursor"),
     i18n("Cursor Behavior (only valid for editor)"),
-    BarIcon("mouse", KIcon::SizeMedium ) );
+    BarIcon("mouse", TDEIcon::SizeMedium ) );
   TQVBoxLayout *topLayout = new TQVBoxLayout( page, 0, spacingHint() );
 
   TQVButtonGroup *group = new TQVButtonGroup( i18n("Blinking"), page );
@@ -322,7 +322,7 @@ void COptionDialog::setupColorPage( void )
   TQString text;
   TQFrame *page = addPage( i18n("Colors"),
     i18n("Editor Colors (system selection color is always used)"),
-    BarIcon("colorize", KIcon::SizeMedium ) );
+    BarIcon("colorize", TDEIcon::SizeMedium ) );
 
   TQVBoxLayout *topLayout = new TQVBoxLayout( page, 0, spacingHint() );
 
@@ -374,7 +374,7 @@ void COptionDialog::setupFontPage( void )
   TQString text;
   TQFrame *page = addPage( i18n("Font"),
     i18n("Font Selection (editor can only use a fixed font)"),
-    BarIcon("fonts", KIcon::SizeMedium ) );
+    BarIcon("fonts", TDEIcon::SizeMedium ) );
 
   TQVBoxLayout *topLayout = new TQVBoxLayout( page, 0, spacingHint() );
 
@@ -426,7 +426,7 @@ void COptionDialog::setupFilePage( void )
 {
   TQString text;
   TQFrame *page = addPage( i18n("Files"), i18n("File Management"),
-			  BarIcon("tdemultiple", KIcon::SizeMedium ) );
+			  BarIcon("tdemultiple", TDEIcon::SizeMedium ) );
 
   TQVBoxLayout *topLayout = new TQVBoxLayout( page, 0, spacingHint() );
 
@@ -518,7 +518,7 @@ void COptionDialog::setupMiscPage( void )
   TQLabel *label;
 
   TQFrame *page = addPage( i18n("Miscellaneous"), i18n("Various Properties"),
-			  BarIcon("gear", KIcon::SizeMedium ) );
+			  BarIcon("gear", TDEIcon::SizeMedium ) );
 
   TQVBoxLayout *topLayout = new TQVBoxLayout( page, 0, spacingHint() );
 

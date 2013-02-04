@@ -83,7 +83,7 @@ class KWalletFolderItem : public TDEListViewItem {
 		TQString name() const;
 		void refresh();
 		KWalletContainerItem* getContainer(KWallet::Wallet::EntryType type);
-		TQPixmap getFolderIcon(KIcon::Group group);
+		TQPixmap getFolderIcon(TDEIcon::Group group);
 		bool contains(const TQString& itemKey);
 		TQListViewItem* getItem(const TQString& itemKey);
 
@@ -132,7 +132,7 @@ class KWalletItem : public TQIconViewItem {
 };
 
 
-class KWalletIconView : public KIconView {
+class KWalletIconView : public TDEIconView {
 	Q_OBJECT
   
 	public:

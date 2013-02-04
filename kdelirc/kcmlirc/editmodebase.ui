@@ -85,7 +85,7 @@
                                 </size>
                             </property>
                         </spacer>
-                        <widget class="KIconButton">
+                        <widget class="TDEIconButton">
                             <property name="name">
                                 <cstring>theIcon</cstring>
                             </property>

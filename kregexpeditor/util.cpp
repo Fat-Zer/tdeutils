@@ -27,7 +27,7 @@ TQPixmap Util::getKRegExpEditorIcon( const TQString& name )
     return pix;
 #else
   return TDEGlobal::iconLoader()->loadIcon(locate("data", TQString::fromLatin1("kregexpeditor/pics/") +name ),
-                                         KIcon::Toolbar );
+                                         TDEIcon::Toolbar );
 #endif
 }
 
@@ -38,8 +38,8 @@ TQPixmap Util::getSystemIcon( const TQString& name )
     pix.convertFromImage( qembed_findImage( name ) );
     return pix;
 #else
-  KIconLoader loader;
-  return loader.loadIcon( name, KIcon::Toolbar);
+  TDEIconLoader loader;
+  return loader.loadIcon( name, TDEIcon::Toolbar);
 #endif
 
 }
@@ -51,8 +51,8 @@ TQIconSet Util::getSystemIconSet( const TQString& name )
     pix.convertFromImage( qembed_findImage( name ) );
     return TQIconSet( pix );
 #else
-  KIconLoader loader;
-  return loader.loadIconSet( name, KIcon::Toolbar);
+  TDEIconLoader loader;
+  return loader.loadIconSet( name, TDEIcon::Toolbar);
 #endif
 
 }

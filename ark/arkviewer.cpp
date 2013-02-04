@@ -75,7 +75,7 @@ bool ArkViewer::view( const KURL& filename )
 	headerLayout->setAutoAdd( true );
 
 	TQLabel *iconLabel = new TQLabel( header );
-	iconLabel->setPixmap( mimetype->pixmap( KIcon::Desktop ) );
+	iconLabel->setPixmap( mimetype->pixmap( TDEIcon::Desktop ) );
 	iconLabel->setSizePolicy( TQSizePolicy::Fixed, TQSizePolicy::Minimum );
 
 	TQVBox *headerRight = new TQVBox( header );

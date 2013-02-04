@@ -219,8 +219,8 @@ KDialogBase( parent, name, true,i18n("Private Key List"),Ok | Cancel)
         TQString keyname;
         page = new TQWidget(this);
         TQLabel *labeltxt;
-        KIconLoader *loader = TDEGlobal::iconLoader();
-        keyPair=loader->loadIcon("kgpg_key2",KIcon::Small,20);
+        TDEIconLoader *loader = TDEGlobal::iconLoader();
+        keyPair=loader->loadIcon("kgpg_key2",TDEIcon::Small,20);
 
         setMinimumSize(350,100);
         keysListpr = new TDEListView( page );
@@ -395,16 +395,16 @@ TQString KgpgSelKey::getkeyMail()
 KeyView::KeyView( TQWidget *parent, const char *name )
                 : TDEListView( parent, name )
 {
-        KIconLoader *loader = TDEGlobal::iconLoader();
+        TDEIconLoader *loader = TDEGlobal::iconLoader();
 
-        pixkeyOrphan=loader->loadIcon("kgpg_key4",KIcon::Small,20);
-        pixkeyGroup=loader->loadIcon("kgpg_key3",KIcon::Small,20);
-        pixkeyPair=loader->loadIcon("kgpg_key2",KIcon::Small,20);
-        pixkeySingle=loader->loadIcon("kgpg_key1",KIcon::Small,20);
-        pixsignature=loader->loadIcon("signature",KIcon::Small,20);
-        pixuserid=loader->loadIcon("kgpg_identity",KIcon::Small,20);
-        pixuserphoto=loader->loadIcon("kgpg_photo",KIcon::Small,20);
-        pixRevoke=loader->loadIcon("stop",KIcon::Small,20);
+        pixkeyOrphan=loader->loadIcon("kgpg_key4",TDEIcon::Small,20);
+        pixkeyGroup=loader->loadIcon("kgpg_key3",TDEIcon::Small,20);
+        pixkeyPair=loader->loadIcon("kgpg_key2",TDEIcon::Small,20);
+        pixkeySingle=loader->loadIcon("kgpg_key1",TDEIcon::Small,20);
+        pixsignature=loader->loadIcon("signature",TDEIcon::Small,20);
+        pixuserid=loader->loadIcon("kgpg_identity",TDEIcon::Small,20);
+        pixuserphoto=loader->loadIcon("kgpg_photo",TDEIcon::Small,20);
+        pixRevoke=loader->loadIcon("stop",TDEIcon::Small,20);
 	TQPixmap blankFrame;
 	blankFrame.load(locate("appdata", "pics/kgpg_blank.png"));
 
@@ -1778,8 +1778,8 @@ void listKeys::editGroup()
         KDialogBase *dialogGroupEdit=new KDialogBase(KDialogBase::Swallow, i18n("Group Properties"), KDialogBase::Ok | KDialogBase::Cancel,KDialogBase::Ok,this,0,true);
 
         gEdit=new groupEdit();
-        gEdit->buttonAdd->setPixmap(TDEGlobal::iconLoader()->loadIcon("down",KIcon::Small,20));
-        gEdit->buttonRemove->setPixmap(TDEGlobal::iconLoader()->loadIcon("up",KIcon::Small,20));
+        gEdit->buttonAdd->setPixmap(TDEGlobal::iconLoader()->loadIcon("down",TDEIcon::Small,20));
+        gEdit->buttonRemove->setPixmap(TDEGlobal::iconLoader()->loadIcon("up",TDEIcon::Small,20));
 
         connect(gEdit->buttonAdd,TQT_SIGNAL(clicked()),TQT_TQOBJECT(this),TQT_SLOT(groupAdd()));
         connect(gEdit->buttonRemove,TQT_SIGNAL(clicked()),TQT_TQOBJECT(this),TQT_SLOT(groupRemove()));
@@ -2149,7 +2149,7 @@ void listKeys::slotgenkey()
                         TQWidget *wid=new TQWidget(pop);
                         TQVBoxLayout *vbox=new TQVBoxLayout(wid,3);
 
-                        TQVBox *passiveBox=pop->standardView(i18n("Generating new key pair."),TQString(),TDEGlobal::iconLoader()->loadIcon("kgpg",KIcon::Desktop),wid);
+                        TQVBox *passiveBox=pop->standardView(i18n("Generating new key pair."),TQString(),TDEGlobal::iconLoader()->loadIcon("kgpg",TDEIcon::Desktop),wid);
 
 
                         TQMovie anim;

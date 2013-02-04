@@ -415,7 +415,7 @@ TQPixmap KWalletManager::loadSystemTrayIcon(const TQString &icon) {
 	TDEConfig *appCfg = kapp->config();
 	TDEConfigGroupSaver configSaver(appCfg, "System Tray");
 	int iconWidth = appCfg->readNumEntry("systrayIconWidth", 22);
-	return kapp->iconLoader()->loadIcon( icon, KIcon::Panel, iconWidth );
+	return kapp->iconLoader()->loadIcon( icon, TDEIcon::Panel, iconWidth );
 #endif
 }
 

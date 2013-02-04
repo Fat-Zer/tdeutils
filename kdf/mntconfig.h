@@ -36,7 +36,7 @@ class TQGroupBox;
 class TQPushButton;
 class TQRadioButton;
 class TQLineEdit;
-class KIconButton;
+class TDEIconButton;
 
 class CListView;
 class TQListViewItem;
@@ -90,7 +90,7 @@ class MntConfigWidget : public TQWidget
     TQLineEdit   *mUmountLineEdit;
     TQPushButton *mMountButton;
     TQPushButton *mUmountButton;
-    KIconButton *mIconButton;
+    TDEIconButton *mIconButton;
     DiskList    mDiskList;
     bool        mInitializing;
     TQMemArray<TQListViewItem*> mDiskLookup;

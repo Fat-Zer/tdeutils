@@ -413,7 +413,7 @@ void KCMLirc::updateModes()
 	{	Mode mode = allModes.getMode(*i, "");
 		TQListViewItem *a = new TDEListViewItem(theKCMLircBase->theModes, RemoteServer::remoteServer()->getRemoteName(*i), allModes.isDefault(mode) ? "Default" : "", mode.iconFile().isNull() ? "" : "");
 		if(!mode.iconFile().isNull())
-			a->setPixmap(2, KIconLoader().loadIcon(mode.iconFile(), KIcon::Panel));
+			a->setPixmap(2, TDEIconLoader().loadIcon(mode.iconFile(), TDEIcon::Panel));
 		modeMap[a] = mode;	// the null mode
 		if(modeMap[a] == oldCurrent) { a->setSelected(true); theKCMLircBase->theModes->setCurrentItem(a); }
 		a->setOpen(true);
@@ -422,7 +422,7 @@ void KCMLirc::updateModes()
 			if(!(*j).name().isEmpty())
 			{	TQListViewItem *b = new TDEListViewItem(a, (*j).name(), allModes.isDefault(*j) ? i18n("Default") : "", (*j).iconFile().isNull() ? "" : "");
 				if(!(*j).iconFile().isNull())
-					b->setPixmap(2, KIconLoader().loadIcon((*j).iconFile(), KIcon::Panel));
+					b->setPixmap(2, TDEIconLoader().loadIcon((*j).iconFile(), TDEIcon::Panel));
 				modeMap[b] = *j;
 				if(*j == oldCurrent) { b->setSelected(true); theKCMLircBase->theModes->setCurrentItem(b); }
 			}

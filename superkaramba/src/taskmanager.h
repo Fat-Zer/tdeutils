@@ -104,25 +104,25 @@ public:
     TQValueList<WId> transients() const { return _transients; }
 
     /**
-     * Returns a 16x16 (KIcon::Small) icon for the task. This method will
+     * Returns a 16x16 (TDEIcon::Small) icon for the task. This method will
      * only fall back to a static icon if there is no icon of any size in
      * the WM hints.
      */
     TQPixmap pixmap() const { return _pixmap; }
 
     /**
-     * Returns the best icon for any of the KIcon::StdSizes. If there is no
+     * Returns the best icon for any of the TDEIcon::StdSizes. If there is no
      * icon of the specified size specified in the WM hints, it will try to
-     * get one using KIconLoader.
+     * get one using TDEIconLoader.
      *
      * <pre>
      *   bool gotStaticIcon;
-     *   TQPixmap icon = myTask->icon( KIcon::SizeMedium, gotStaticIcon );
+     *   TQPixmap icon = myTask->icon( TDEIcon::SizeMedium, gotStaticIcon );
      * </pre>
      *
-     * @param size Any of the constants in KIcon::StdSizes.
-     * @param isStaticIcon Set to true if KIconLoader was used, false otherwise.
-     * @see KIcon
+     * @param size Any of the constants in TDEIcon::StdSizes.
+     * @param isStaticIcon Set to true if TDEIconLoader was used, false otherwise.
+     * @see TDEIcon
      */
     TQPixmap bestIcon( int size, bool &isStaticIcon );
 

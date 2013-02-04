@@ -715,7 +715,7 @@ quit:
             // "This function is slow because it involves transformation to a TQImage,
             // non-trivial computations and a transformation back to a TQBitmap."). Then
             // I have to convert the resulting TQPixmap to a TQImage in order to overlay
-            // the light KMail icon with the number (because KIconEffect::overlay only
+            // the light KMail icon with the number (because TDEIconEffect::overlay only
             // works with TQImage). Finally the resulting TQImage has to be converted
             // back to a TQPixmap.
             // That's a lot of work for overlaying the KMail icon with the number of
@@ -732,7 +732,7 @@ quit:
         
             // Overlay the light KMail icon with the number image
             TQImage iconWithPercentageImage = image.copy();
-            KIconEffect::overlay( iconWithPercentageImage, percentageImage );
+            TDEIconEffect::overlay( iconWithPercentageImage, percentageImage );
         
             TQPixmap iconWithPercentage;
             iconWithPercentage.convertFromImage( iconWithPercentageImage );

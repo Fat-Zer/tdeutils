@@ -119,7 +119,7 @@ void keyServer::slotprocread(KProcIO *p)
         ///////////////////////////////////////////////////////////////// extract  encryption keys
         bool dead;
         TQString tst;
-	//TQPixmap pixkeySingle(TDEGlobal::iconLoader()->loadIcon("kgpg_key1",KIcon::Small,20));
+	//TQPixmap pixkeySingle(TDEGlobal::iconLoader()->loadIcon("kgpg_key1",TDEIcon::Small,20));
         while (p->readln(tst)!=-1) {
                 //tst=tst.stripWhiteSpace();
                 if (tst.startsWith("pub")) {

@@ -50,7 +50,7 @@
 
 #define KJOTSVERSION "0.7"
 
-extern KIconLoader* global_pix_loader;
+extern TDEIconLoader* global_pix_loader;
 
 //----------------------------------------------------------------------
 // KJOTSMAIN

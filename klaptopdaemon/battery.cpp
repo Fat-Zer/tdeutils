@@ -93,7 +93,7 @@ BatteryConfig::BatteryConfig (TQWidget * parent, const char *name)
     if (!apm) {
       top_layout->addWidget( laptop_portable::no_power_management_explanation(this) );
     } else {
-      iconloader = new KIconLoader("klaptopdaemon");
+      iconloader = new TDEIconLoader("klaptopdaemon");
 
       // the poll time (in seconds)
       TQHBox *hb = new TQHBox( this );
@@ -119,15 +119,15 @@ BatteryConfig::BatteryConfig (TQWidget * parent, const char *name)
       TQGrid *icon_grid = new TQGrid( 3 /*cols*/, icons_groupbox );
       icon_grid->setSpacing( KDialog::spacingHint() );
 
-      buttonNoBattery = new KIconButton( iconloader, icon_grid );
-      buttonNoCharge  = new KIconButton( iconloader, icon_grid );
-      buttonCharge    = new KIconButton( iconloader, icon_grid );
+      buttonNoBattery = new TDEIconButton( iconloader, icon_grid );
+      buttonNoCharge  = new TDEIconButton( iconloader, icon_grid );
+      buttonCharge    = new TDEIconButton( iconloader, icon_grid );
       (void)new TQLabel( buttonNoBattery, i18n("No &battery"), icon_grid);
       (void)new TQLabel( buttonNoCharge, i18n("&Not charging"), icon_grid);
       (void)new TQLabel( buttonCharge, i18n("Char&ging"), icon_grid);
-      buttonNoBattery->setIconType( KIcon::NoGroup, KIcon::Any, 1);
-      buttonNoCharge->setIconType( KIcon::NoGroup, KIcon::Any, 1);
-      buttonCharge->setIconType( KIcon::NoGroup, KIcon::Any, 1);
+      buttonNoBattery->setIconType( TDEIcon::NoGroup, TDEIcon::Any, 1);
+      buttonNoCharge->setIconType( TDEIcon::NoGroup, TDEIcon::Any, 1);
+      buttonCharge->setIconType( TDEIcon::NoGroup, TDEIcon::Any, 1);
       connect(buttonNoBattery, TQT_SIGNAL(iconChanged(TQString)), this, TQT_SLOT(iconChanged()));
       connect(buttonNoCharge, TQT_SIGNAL(iconChanged(TQString)), this, TQT_SLOT(iconChanged()));
       connect(buttonCharge, TQT_SIGNAL(iconChanged(TQString)), this, TQT_SLOT(configChanged()));
@@ -249,8 +249,8 @@ void BatteryConfig::load(bool useDefaults)
                 buttonCharge->setIcon(chargebattery);
 	        buttonNoBattery->setIcon(nobattery);
         }
-        battery_pm = SmallIcon(nochargebattery, 20, KIcon::DefaultState, instance);
-        battery_nopm = SmallIcon(nobattery, 20, KIcon::DefaultState, instance);
+        battery_pm = SmallIcon(nochargebattery, 20, TDEIcon::DefaultState, instance);
+        battery_nopm = SmallIcon(nobattery, 20, TDEIcon::DefaultState, instance);
         emit changed(useDefaults);
 	BatteryStateUpdate();
 }
@@ -374,8 +374,8 @@ void BatteryConfig::iconChanged()
 {
     nobattery =  buttonNoBattery->icon();
     nochargebattery =  buttonNoCharge->icon();
-    battery_pm = SmallIcon(nochargebattery, 20, KIcon::DefaultState, instance);
-    battery_nopm = SmallIcon(nobattery, 20, KIcon::DefaultState, instance);
+    battery_pm = SmallIcon(nochargebattery, 20, TDEIcon::DefaultState, instance);
+    battery_nopm = SmallIcon(nobattery, 20, TDEIcon::DefaultState, instance);
     emit changed(true);
     BatteryStateUpdate();
 }

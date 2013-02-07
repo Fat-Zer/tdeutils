@@ -762,7 +762,7 @@ void  MyView::slotGenKey()
 
 void  MyView::about()
 {
-        KAboutApplication dialog(kapp->aboutData());//_aboutData);
+        TDEAboutApplication dialog(kapp->aboutData());//_aboutData);
         dialog.exec();
 }
 

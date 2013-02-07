@@ -63,7 +63,7 @@ void MailPlugin::showAbout()
 	                  TDEAboutData::License_GPL, "(c) 2002 Malte Starostik" );
 	about.addAuthor( "Malte Starostik", I18N_NOOP( "Author" ), "malte@kde.org" );
 
-	KAboutApplication( &about ).exec();
+	TDEAboutApplication( &about ).exec();
 }
 
 MailView::MailView( KSim::PluginObject* parent, const char* name )

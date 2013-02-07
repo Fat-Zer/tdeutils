@@ -96,7 +96,7 @@ void NetPlugin::showAbout()
   aboutData.addAuthor("Heitham Omar", I18N_NOOP("FreeBSD ports"),
      "super_ice@ntlworld.com");
 
-  KAboutApplication(&aboutData).exec();
+  TDEAboutApplication(&aboutData).exec();
 }
 
 NetView::NetView(KSim::PluginObject *parent, const char *name)

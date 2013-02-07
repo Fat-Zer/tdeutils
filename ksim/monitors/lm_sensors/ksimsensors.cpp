@@ -68,7 +68,7 @@ void PluginModule::showAbout()
   aboutData.addAuthor("Robbie Ward", I18N_NOOP("Author"),
      "linuxphreak@gmx.co.uk");
 
-  KAboutApplication(&aboutData).exec();
+  TDEAboutApplication(&aboutData).exec();
 }
 
 SensorsView::SensorsView(KSim::PluginObject *parent, const char *name)

@@ -100,7 +100,7 @@ void DiskPlugin::showAbout()
   aboutData.addAuthor("Robbie Ward", I18N_NOOP("Author"),
      "linuxphreak@gmx.co.uk");
 
-  KAboutApplication(&aboutData).exec();
+  TDEAboutApplication(&aboutData).exec();
 }
 
 DiskView::DiskView(KSim::PluginObject *parent, const char *name)

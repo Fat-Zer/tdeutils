@@ -69,7 +69,7 @@ void I8KPlugin::showAbout()
   aboutData.addAuthor("Nadeem Hasan", I18N_NOOP("Author"),
      "nhasan@kde.org");
 
-  KAboutApplication(&aboutData).exec();
+  TDEAboutApplication(&aboutData).exec();
 }
 
 I8KView::I8KView(KSim::PluginObject *parent, const char *name)

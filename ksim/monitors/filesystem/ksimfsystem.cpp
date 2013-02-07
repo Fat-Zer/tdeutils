@@ -78,7 +78,7 @@ void PluginModule::showAbout()
   aboutData.addAuthor("Heitham Omar", I18N_NOOP("FreeBSD ports"),
      "super_ice@ntlworld.com");
 
-  KAboutApplication(&aboutData).exec();
+  TDEAboutApplication(&aboutData).exec();
 }
 
 Fsystem::Fsystem(KSim::PluginObject *parent, const char *name)

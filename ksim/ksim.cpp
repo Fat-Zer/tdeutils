@@ -104,7 +104,7 @@ void KSim::PanelExtension::show()
 
 void KSim::PanelExtension::about()
 {
-  KAboutApplication(m_aboutData).exec();
+  TDEAboutApplication(m_aboutData).exec();
 }
 
 void KSim::PanelExtension::help()

@@ -45,7 +45,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 // ark includes
 #include "arkapp.h"
 
-static KCmdLineOptions option[] =
+static TDECmdLineOptions option[] =
 {
     { "extract", I18N_NOOP( "Open extract dialog, quit when finished" ), 0 },
     { "extract-to", I18N_NOOP( "Extract 'archive' to 'folder'. Quit when finished.\n"
@@ -59,7 +59,7 @@ static KCmdLineOptions option[] =
     { "+[folder]", I18N_NOOP( "Folder to extract to" ), 0 },
     { "+[files]", I18N_NOOP( "Files to be added" ), 0 },
     { "+[archive]", I18N_NOOP( "Open 'archive'" ), 0 },
-    KCmdLineLastOption
+    TDECmdLineLastOption
 };
 
 extern "C" KDE_EXPORT int kdemain( int argc, char *argv[]  )

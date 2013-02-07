@@ -1252,11 +1252,11 @@ void TopLevel::toggle_overwrite(){
 
 static const char description[] = I18N_NOOP("TDE text editor");
 
-static const KCmdLineOptions options[] =
+static const TDECmdLineOptions options[] =
 {
 	{ "encoding <encoding>", I18N_NOOP("Encoding to use for the following documents"), 0 },
 	{ "+file", I18N_NOOP("File or URL to open"), 0 },
-	KCmdLineLastOption
+	TDECmdLineLastOption
 };
 
 extern "C" KDE_EXPORT int kdemain (int argc, char **argv)

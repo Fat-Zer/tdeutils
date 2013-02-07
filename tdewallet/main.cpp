@@ -41,11 +41,11 @@ class MyApp : public KUniqueApplication {
 };
 
 int main(int argc, char **argv) {
-	static KCmdLineOptions options[] = {
+	static TDECmdLineOptions options[] = {
 		{"show", I18N_NOOP("Show window on startup"), 0},
 		{"tdewalletd", I18N_NOOP("For use by tdewalletd only"), 0},
 		{"+name", I18N_NOOP("A wallet name"), 0},
-		KCmdLineLastOption
+		TDECmdLineLastOption
 	};
 
 	TDEAboutData about("tdewalletmanager", I18N_NOOP("TDE Wallet Manager"), "1.1",

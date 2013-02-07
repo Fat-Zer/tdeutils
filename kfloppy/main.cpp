@@ -33,10 +33,10 @@
 static const char description[] =
 	I18N_NOOP("TDE Floppy Disk Utility");
 
-static const KCmdLineOptions options[] =
+static const TDECmdLineOptions options[] =
 {
 	{ "+[device]", I18N_NOOP("Default device"), 0 },
-	KCmdLineLastOption
+	TDECmdLineLastOption
 };
 
 int main( int argc, char *argv[] )

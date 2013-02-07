@@ -33,7 +33,7 @@
 
 #include "sshdlg.h"
 
-static KCmdLineOptions options[] =
+static TDECmdLineOptions options[] =
 {
     { "+host", I18N_NOOP("Specifies the remote host"), 0 },
     { "+command", I18N_NOOP("The command to run"), 0 },
@@ -42,7 +42,7 @@ static KCmdLineOptions options[] =
     { "n", I18N_NOOP("Do not keep password"), 0 },
     { "q", I18N_NOOP("Stop the daemon (forgets all passwords)"), 0 },
     { "t", I18N_NOOP("Enable terminal output (no password keeping)"), 0 },
-    KCmdLineLastOption
+    TDECmdLineLastOption
 };
 
 

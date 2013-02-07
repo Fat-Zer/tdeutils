@@ -35,11 +35,11 @@ static const char description[] =
 
 static const char version[] = APP_VERSION_STRING;
 
-static KCmdLineOptions option[] =
+static TDECmdLineOptions option[] =
 {
    { "offset <offset>", I18N_NOOP("Jump to 'offset'"), 0 },
    { "+[file(s)]", I18N_NOOP("File(s) to open"), 0 },
-   KCmdLineLastOption
+   TDECmdLineLastOption
 };
 
 static uint parseDecimalOrHexadecimal( char *buf );

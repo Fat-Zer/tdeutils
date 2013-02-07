@@ -44,7 +44,7 @@ static const char *description =
 
 static const char *version = "0.42";
 
-static KCmdLineOptions options[] =
+static TDECmdLineOptions options[] =
 {
   // { "+[URL]", I18N_NOOP( "Document to open" ), 0 },
   // { "!nosystray", I18N_NOOP("Disable systray icon"), 0 },

@@ -31,7 +31,7 @@ static const char description[] =
 
 static const char version[] = "1.2.2";
 
-static KCmdLineOptions options[] =
+static TDECmdLineOptions options[] =
         {
                 { "e", I18N_NOOP("Encrypt file"), 0 },
                 { "k", I18N_NOOP("Open key manager"), 0 },
@@ -40,7 +40,7 @@ static KCmdLineOptions options[] =
                 { "V", I18N_NOOP("Verify signature"), 0 },
                 { "X", I18N_NOOP("Shred file"), 0 },
                 { "+[File]", I18N_NOOP("File to open"), 0 },
-                KCmdLineLastOption
+                TDECmdLineLastOption
                 // INSERT YOUR COMMANDLINE OPTIONS HERE
         };
 

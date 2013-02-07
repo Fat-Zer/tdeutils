@@ -49,9 +49,9 @@ static const char description[] =
 
 static const char version[] = "0.2";
 
-static KCmdLineOptions options[] =
+static TDECmdLineOptions options[] =
 {
-   KCmdLineLastOption
+   TDECmdLineLastOption
 };
 
 /*****************************************************************************/

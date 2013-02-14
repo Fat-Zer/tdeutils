@@ -26,7 +26,7 @@
 #include <tqtextcodec.h>
 #include <tqdom.h>
 
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <kiconloader.h>
 #include <kinputdialog.h>
 #include <klocale.h>

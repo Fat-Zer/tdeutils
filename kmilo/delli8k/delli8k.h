@@ -29,7 +29,7 @@
 #ifndef DELLI8K_H
 #define DELLI8K_H
 
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <dcopref.h>
 
 #include "monitor.h"

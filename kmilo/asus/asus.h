@@ -23,7 +23,7 @@
 #ifndef ASUS_H
 #define ASUS_H
 
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <dcopref.h>
 
 #include "monitor.h"

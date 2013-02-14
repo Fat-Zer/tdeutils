@@ -15,7 +15,7 @@
 #include <tqevent.h>
 
 #include <tdeversion.h>
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <tdeaction.h>
 #if !(TDE_VERSION_MINOR<=1 && TDE_VERSION_RELEASE<=5)
 #include <tdeactioncollection.h>
@@ -28,8 +28,8 @@
 #include <tdepopupmenu.h>
 #include <kdebug.h>
 #include <klocale.h>
-#include <kaboutdialog.h>
-#include <kaboutkde.h>
+#include <tdeaboutdialog.h>
+#include <tdeabouttde.h>
 #include <twinmodule.h>
 #include <twin.h>
 #include <khelpmenu.h>

@@ -45,12 +45,12 @@ static int mib[] = { CTL_NET, PF_ROUTE, 0, 0, NET_RT_IFLIST, 0 };
 
 #include <kdebug.h>
 #include <klocale.h>
-#include <kaboutapplication.h>
-#include <kaboutdata.h>
+#include <tdeaboutapplication.h>
+#include <tdeaboutdata.h>
 #include <ksimpleconfig.h>
 #include <kglobal.h>
 #include <krun.h>
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <kiconloader.h>
 
 #include "ksimnet.h"

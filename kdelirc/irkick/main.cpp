@@ -8,9 +8,9 @@
 // This program is free software.
 
 #include <klocale.h>
-#include <kcmdlineargs.h>
+#include <tdecmdlineargs.h>
 #include <twin.h>
-#include <kaboutdata.h>
+#include <tdeaboutdata.h>
 #include <kglobal.h>
 #include <kdebug.h>
 #include <kuniqueapplication.h>

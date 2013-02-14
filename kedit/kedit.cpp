@@ -30,10 +30,10 @@
 #include <tqpaintdevicemetrics.h>
 #include <tqpainter.h>
 
-#include <kaboutdata.h>
+#include <tdeaboutdata.h>
 #include <tdeaction.h>
-#include <kapplication.h>
-#include <kcmdlineargs.h>
+#include <tdeapplication.h>
+#include <tdecmdlineargs.h>
 #include <tdeconfigdialog.h>
 #include <kcursor.h>
 #include <keditcl.h>

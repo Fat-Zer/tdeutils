@@ -21,7 +21,7 @@
 #ifndef _HEX_EDIT_STATE_H_
 #define _HEX_EDIT_STATE_H_
 
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <tqfont.h> 
 #include <tqpalette.h>
 #include <kglobalsettings.h>

@@ -31,7 +31,7 @@
 #include <kglobal.h>
 #include <kstandarddirs.h>
 #include <kurllabel.h>
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <tdefontdialog.h>
 #include <kcombobox.h>
 #include <tdelistview.h>

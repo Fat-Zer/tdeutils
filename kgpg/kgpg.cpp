@@ -31,11 +31,11 @@
 #include <tdeversion.h>
 #include <klocale.h>
 #include <tdeconfig.h>
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <kmessagebox.h>
 #include <kcombobox.h>
 #include <tqregexp.h>
-#include <kcmdlineargs.h>
+#include <tdecmdlineargs.h>
 #include <tqtooltip.h>
 #include <kdebug.h>
 #include <kurlrequesterdlg.h>
@@ -49,7 +49,7 @@
 #include <twin.h>
 #include <kprocess.h>
 #include <kprocio.h>
-#include <kaboutapplication.h>
+#include <tdeaboutapplication.h>
 #include <kurlrequester.h>
 #include <ktip.h>
 #include <kurldrag.h>

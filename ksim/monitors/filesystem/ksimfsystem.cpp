@@ -29,9 +29,9 @@
 
 #include <kdebug.h>
 #include <klocale.h>
-#include <kaboutapplication.h>
-#include <kaboutdata.h>
-#include <kapplication.h>
+#include <tdeaboutapplication.h>
+#include <tdeaboutdata.h>
+#include <tdeapplication.h>
 #include <tdeconfig.h>
 
 #include "ksimfsystem.h"

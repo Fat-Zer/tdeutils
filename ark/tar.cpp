@@ -54,7 +54,7 @@
 #include <tqeventloop.h>
 
 // KDE includes
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <kdebug.h>
 #include <klargefile.h>
 #include <klocale.h>

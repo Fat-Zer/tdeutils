@@ -19,10 +19,10 @@
  *
  */
 
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <tdestdaccel.h>
-#include <kcmdlineargs.h>
-#include <kaboutdata.h>
+#include <tdecmdlineargs.h>
+#include <tdeaboutdata.h>
 #include <kstdaction.h>
 #include <tdeaction.h>
 

@@ -31,7 +31,7 @@
 #include <kdebug.h>
 #include <tdepopupmenu.h>
 #include <kmessagebox.h>
-#include <kaboutdata.h>
+#include <tdeaboutdata.h>
 #include <kxmlguifactory.h>
 #include <kstatusbar.h>
 #include <kiconloader.h>

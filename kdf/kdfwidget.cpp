@@ -35,7 +35,7 @@
 #include <tqlayout.h>
 #include <tqpainter.h>
 
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <kcmenumngr.h>
 #include <kmessagebox.h>
 #include <tdepopupmenu.h>

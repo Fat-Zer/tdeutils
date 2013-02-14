@@ -43,7 +43,7 @@
 #include <tdeio/netaccess.h>
 #include <tdeio/global.h>
 #include <tdefileitem.h>
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <kglobal.h>
 
 // ark includes

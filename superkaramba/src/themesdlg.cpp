@@ -39,7 +39,7 @@
 #include <tdefiledialog.h>
 #include <kpushbutton.h>
 #include <kstandarddirs.h>
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <kiconloader.h>
 #include <klocale.h>
 #include <tqlineedit.h>

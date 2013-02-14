@@ -29,7 +29,7 @@
 #endif
 
 #include <tqwidget.h>
-#include <kapplication.h>
+#include <tdeapplication.h>
 
 #include <twinmodule.h>
 #include <twin.h>

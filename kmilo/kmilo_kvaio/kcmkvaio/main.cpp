@@ -27,7 +27,7 @@
 
 #include <dcopclient.h>
 #include <kgenericfactory.h>
-#include <kaboutdata.h>
+#include <tdeaboutdata.h>
 #include <kdebug.h>
 #include <tdeconfig.h>
 #include <kled.h>

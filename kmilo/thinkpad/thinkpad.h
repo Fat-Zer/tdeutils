@@ -31,7 +31,7 @@
 #include <fcntl.h>
 #include <unistd.h>
 
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <dcopref.h>
 
 #include "monitor.h"

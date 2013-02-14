@@ -26,7 +26,7 @@
 #include <tqsocketnotifier.h>
 #include <tqfile.h>
 
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <ksystemtray.h>
 #include <kiconloader.h>
 #include <kpassivepopup.h>
@@ -34,8 +34,8 @@
 #include <tdepopupmenu.h>
 #include <kdebug.h>
 #include <klocale.h>
-#include <kaboutdialog.h>
-#include <kaboutkde.h>
+#include <tdeaboutdialog.h>
+#include <tdeabouttde.h>
 
 #include <dcopclient.h>
 #include <dcopref.h>

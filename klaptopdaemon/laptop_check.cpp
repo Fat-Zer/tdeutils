@@ -24,9 +24,9 @@
 
 #include "daemon_state.h"
 #include <stdlib.h>
-#include <kaboutdata.h>
-#include <kapplication.h>
-#include <kcmdlineargs.h>
+#include <tdeaboutdata.h>
+#include <tdeapplication.h>
+#include <tdecmdlineargs.h>
 #include <klocale.h>
 static const char description[] =
         I18N_NOOP("TDE laptop daemon starter");

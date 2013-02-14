@@ -33,12 +33,12 @@
 
 #include <tdeconfig.h>
 #include <klocale.h>
-#include <kcmdlineargs.h>
+#include <tdecmdlineargs.h>
 #include "laptop_daemon.h"
 #include "portable.h"
-#include <kaboutdata.h>
+#include <tdeaboutdata.h>
 #include <kaudioplayer.h>
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <sys/ioctl.h>
 #include <kmessagebox.h>
 #include <kpassivepopup.h>

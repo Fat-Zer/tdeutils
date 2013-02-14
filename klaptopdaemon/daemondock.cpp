@@ -35,7 +35,7 @@
 #include "daemondock.h"
 #include "portable.h"
 #include <kiconloader.h>
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <kprocess.h>
 #include <kstandarddirs.h>
 #include <tdeconfig.h>

@@ -20,9 +20,9 @@
   #include "compat.h"
   #include <tqapplication.h>
 #else
-  #include <kaboutdata.h>
-  #include <kapplication.h>
-  #include <kcmdlineargs.h>
+  #include <tdeaboutdata.h>
+  #include <tdeapplication.h>
+  #include <tdecmdlineargs.h>
   #include <klocale.h>
   #include <kpushbutton.h>
 #endif

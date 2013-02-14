@@ -37,7 +37,7 @@
 #include <tqstring.h>
 #include <tqtextstream.h>
 
-#include <kapplication.h>
+#include <tdeapplication.h>
 
 #include "conversion.h"
 #include "hexeditstate.h"

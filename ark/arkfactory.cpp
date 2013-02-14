@@ -19,7 +19,7 @@
 
 */
 
-#include <kaboutdata.h>
+#include <tdeaboutdata.h>
 #include <kinstance.h>
 
 #include "ark_part.h"

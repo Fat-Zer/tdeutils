@@ -20,7 +20,7 @@
 // kde specific
 #include <klocale.h>
 #include <kgenericfactory.h>
-#include <kapplication.h>
+#include <tdeapplication.h>
 // lib specific
 #include "kbytesedit.h"
 #include "kbyteseditwidget.h"

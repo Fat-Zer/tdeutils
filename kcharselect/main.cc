@@ -6,10 +6,10 @@
 
 #include "kcharselectdia.h"
 
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <tdeconfig.h>
-#include <kcmdlineargs.h>
-#include <kaboutdata.h>
+#include <tdecmdlineargs.h>
+#include <tdeaboutdata.h>
 #include <kglobalsettings.h>
 
 static const char description[] = 

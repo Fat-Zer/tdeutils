@@ -26,7 +26,7 @@
 #include <math.h>
 #include <stdlib.h>
 #include <kdebug.h>
-#include <kapplication.h>
+#include <tdeapplication.h>
 
 #include "distdelist.h"
 

@@ -24,7 +24,7 @@
 #include <tdeconfig.h>
 #include <kdatastream.h>
 #include <dcopclient.h>
-#include <kapplication.h>
+#include <tdeapplication.h>
 
 KDE_EXPORT void
 wake_laptop_daemon()

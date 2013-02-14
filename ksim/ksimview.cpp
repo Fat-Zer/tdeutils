@@ -37,7 +37,7 @@
 #include "baselist.h"
 #include <themetypes.h>
 
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <klocale.h>
 #include <kdebug.h>
 #include <kstandarddirs.h>

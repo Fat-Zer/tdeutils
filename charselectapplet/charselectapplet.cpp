@@ -34,7 +34,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #include <kglobal.h>
 #include <tdeconfig.h>
 #include <klineedit.h>
-#include <kaboutapplication.h>
+#include <tdeaboutapplication.h>
 
 #include "charselectapplet.h"
 #include "charselectapplet.moc"

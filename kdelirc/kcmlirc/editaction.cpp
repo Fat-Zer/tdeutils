@@ -21,7 +21,7 @@
 #include <kdebug.h>
 #include <klineedit.h>
 #include <tdelistview.h>
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <kmessagebox.h>
 #include <knuminput.h>
 #include <keditlistbox.h>

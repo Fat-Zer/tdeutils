@@ -23,7 +23,7 @@
 #include <tqlayout.h>
 #include <tqtimer.h>
 
-#include <kaboutapplication.h>
+#include <tdeaboutapplication.h>
 #include <kdebug.h>
 #include <klocale.h>
 

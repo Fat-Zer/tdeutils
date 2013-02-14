@@ -32,11 +32,11 @@
 #include <tqradiobutton.h>
 #include <tqbuttongroup.h>
 
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <knuminput.h>
 
 #include <tdecmodule.h>
-#include <kaboutdata.h>
+#include <tdeaboutdata.h>
 
 class PcmciaConfig : public TDECModule
 {

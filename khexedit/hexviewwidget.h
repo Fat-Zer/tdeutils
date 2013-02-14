@@ -31,7 +31,7 @@
 #include <tqpopupmenu.h> 
 #include <tqscrollbar.h> 
 
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <kcmenumngr.h>
 
 #include "hexclipboard.h"

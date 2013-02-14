@@ -23,8 +23,8 @@
 #include <karambaapp.h>
 #include <tqobject.h>
 
-#include <kaboutdata.h>
-#include <kcmdlineargs.h>
+#include <tdeaboutdata.h>
+#include <tdecmdlineargs.h>
 #include <klocale.h>
 #include <tdeconfig.h>
 #include <tdemainwindow.h>

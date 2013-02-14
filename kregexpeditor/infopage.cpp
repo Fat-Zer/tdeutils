@@ -19,7 +19,7 @@
   #include "compat.h"
 #else
   #include <klocale.h>
-  #include <kapplication.h>
+  #include <tdeapplication.h>
 #endif
 
 #include "infopage.h"

@@ -40,11 +40,11 @@
 
 
 
-#include <kaboutdata.h>
+#include <tdeaboutdata.h>
 #include <tdeaccel.h>
 #include <tdeaction.h>
-#include <kapplication.h>
-#include <kcmdlineargs.h>
+#include <tdeapplication.h>
+#include <tdecmdlineargs.h>
 #include <kcolorbutton.h>
 #include <kcolordrag.h>
 #include <tdeconfig.h>

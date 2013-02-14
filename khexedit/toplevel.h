@@ -26,7 +26,7 @@
 #endif
 
 #include <tqptrlist.h>
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <tdestdaccel.h>
 #include <tdemainwindow.h>
 

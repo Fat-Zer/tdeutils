@@ -24,7 +24,7 @@
 #include <klocale.h>
 #include <kiconloader.h>
 #include <tdelistview.h>
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <knuminput.h>
 #include <kdebug.h>
 

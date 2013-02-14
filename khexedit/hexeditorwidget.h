@@ -28,7 +28,7 @@
 
 #include <tqvariant.h>
 #include <tqptrdict.h> 
-#include <kapplication.h>
+#include <tdeapplication.h>
 
 #include "hexbuffer.h"
 #include "hexviewwidget.h"

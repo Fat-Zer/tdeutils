@@ -25,7 +25,7 @@
 #include <ksimpleconfig.h>
 #include <klocale.h>
 #include <kiconloader.h>
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <tdepopupmenu.h>
 #include <kdebug.h>
 #include <kmessagebox.h>

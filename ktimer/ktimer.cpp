@@ -29,7 +29,7 @@
 #include <klineedit.h>
 
 #include <kiconloader.h>
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <ksystemtray.h>
 #include <tdefiledialog.h>
 

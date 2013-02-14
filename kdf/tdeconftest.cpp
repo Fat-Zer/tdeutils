@@ -36,9 +36,9 @@
 #include <tqdict.h>
 #include <tdeconfig.h>
 #include <kdebug.h>
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <klocale.h>
-#include <kcmdlineargs.h>
+#include <tdecmdlineargs.h>
 
 static const char description[] =
 	I18N_NOOP("A test application");

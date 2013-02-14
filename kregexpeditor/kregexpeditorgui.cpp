@@ -21,7 +21,7 @@
 #else
   #include <klocale.h>
   #include <kgenericfactory.h>
-  #include <kapplication.h>
+  #include <tdeapplication.h>
   #include "kregexpeditorgui.moc"
 #endif
 

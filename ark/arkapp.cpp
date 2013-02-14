@@ -27,7 +27,7 @@
 
 #include <dcopclient.h>
 #include <kdebug.h>
-#include <kcmdlineargs.h>
+#include <tdecmdlineargs.h>
 #include <klocale.h>
 #include <unistd.h>
 #include <tqfile.h>

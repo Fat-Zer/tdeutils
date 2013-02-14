@@ -29,9 +29,9 @@
 
 #include <label.h>
 #include <klocale.h>
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <tdeconfig.h>
-#include <kaboutapplication.h>
+#include <tdeaboutapplication.h>
 #include <knuminput.h>
 #include <kdebug.h>
 

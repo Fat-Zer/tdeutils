@@ -18,7 +18,7 @@
 
 #include <ksystemtray.h>
 #include <kdedmodule.h>
-#include <kaboutdata.h>
+#include <tdeaboutdata.h>
 
 #include <dcopobject.h>
 

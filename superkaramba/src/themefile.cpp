@@ -27,7 +27,7 @@
 #include <kdebug.h>
 #include <kurl.h>
 #include <kzip.h>
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <kmessagebox.h>
 #include <kstandarddirs.h>
 #include <klocale.h>

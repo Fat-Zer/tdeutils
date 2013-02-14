@@ -21,8 +21,8 @@
 #include "pluginmodule.moc"
 
 #include <klocale.h>
-#include <kapplication.h>
-#include <kaboutdata.h>
+#include <tdeapplication.h>
+#include <tdeaboutdata.h>
 #include <kdebug.h>
 #include <tqregexp.h>
 #include <tqpopupmenu.h>

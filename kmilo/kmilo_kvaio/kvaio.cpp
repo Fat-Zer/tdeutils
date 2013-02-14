@@ -40,7 +40,7 @@
 #include <kdebug.h>
 #include <kdialogbase.h>
 #include <dcopclient.h>
-#include <kapplication.h>
+#include <tdeapplication.h>
 
 extern "C" {
 #include <stdio.h>

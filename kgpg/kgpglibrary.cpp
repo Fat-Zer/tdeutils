@@ -19,7 +19,7 @@
 #include <tqvbox.h>
 
 #include <klocale.h>
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <tdeconfig.h>
 #include <kmessagebox.h>
 #include <krun.h>

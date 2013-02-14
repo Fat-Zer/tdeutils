@@ -25,9 +25,9 @@
 
 #include <tqlayout.h>
 
-#include <kaboutapplication.h>
+#include <tdeaboutapplication.h>
 #include <kbugreport.h>
-#include <kaboutdata.h>
+#include <tdeaboutdata.h>
 #include <dcopclient.h>
 #include <kmessagebox.h>
 #include <kglobal.h>

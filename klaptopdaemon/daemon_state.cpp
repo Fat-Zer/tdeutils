@@ -33,10 +33,10 @@
 
 #include <tdeconfig.h>
 #include <klocale.h>
-#include <kcmdlineargs.h>
+#include <tdecmdlineargs.h>
 #include "daemon_state.h"
 #include "portable.h"
-#include <kaboutdata.h>
+#include <tdeaboutdata.h>
 #include <kaudioplayer.h>
 #include <sys/ioctl.h>
 #include <kmessagebox.h>

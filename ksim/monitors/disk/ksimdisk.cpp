@@ -29,10 +29,10 @@
 #include <tqpushbutton.h>
 
 #include <kdebug.h>
-#include <kaboutapplication.h>
-#include <kaboutdata.h>
+#include <tdeaboutapplication.h>
+#include <tdeaboutdata.h>
 #include <klocale.h>
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <tdelistview.h>
 #include <kinputdialog.h>
 #include <tdeconfig.h>

@@ -25,7 +25,7 @@
 #include <tdeio/netaccess.h>
 
 #include <tdeaction.h>
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <kbookmarkmenu.h>
 #include <tdeconfigdialog.h>
 #include <kdebug.h>

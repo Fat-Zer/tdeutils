@@ -26,7 +26,7 @@
 */
 
 
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <tdeconfig.h>
 
 #include "stdoption.h"

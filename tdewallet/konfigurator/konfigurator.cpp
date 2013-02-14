@@ -21,8 +21,8 @@
 #include "walletconfigwidget.h"
 #include <dcopclient.h>
 #include <dcopref.h>
-#include <kaboutdata.h>
-#include <kapplication.h>
+#include <tdeaboutdata.h>
+#include <tdeapplication.h>
 #include <tdeconfig.h>
 #include <kdialog.h>
 #include <kgenericfactory.h>

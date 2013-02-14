@@ -10,7 +10,7 @@
 #include <stdlib.h>
 
 #include <kdialog.h>
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <tdeaccel.h>
 #include <tdeconfig.h>
 #include <klocale.h>

@@ -36,7 +36,7 @@
 #include <knuminput.h>
 #include <kiconloader.h>
 #include <kicondialog.h>
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <kprocess.h>
 #include <kstandarddirs.h>
 #include <kmessagebox.h>

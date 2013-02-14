@@ -11,7 +11,7 @@
 #ifndef KARAMBAAPP_H
 #define KARAMBAAPP_H
 
-#include "kapplication.h"
+#include "tdeapplication.h"
 #include <tdeversion.h>
 #include <ksystemtray.h>
 

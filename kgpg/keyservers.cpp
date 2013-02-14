@@ -19,7 +19,7 @@
 
 #include <tqfile.h>
 #include <tqcheckbox.h>
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <kiconloader.h>
 #include <kcombobox.h>
 #include <kdialogbase.h>

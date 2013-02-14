@@ -34,7 +34,7 @@
 #include <kcombobox.h>
 #include <kdebug.h>
 #include <klineedit.h>
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <kurlrequester.h>
 #include <kstdguiitem.h>
 

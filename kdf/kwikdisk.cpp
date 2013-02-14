@@ -37,9 +37,9 @@
 
 #include <tdemainwindow.h>
 #include <klocale.h>
-#include <kapplication.h>
-#include <kaboutdata.h>
-#include <kcmdlineargs.h>
+#include <tdeapplication.h>
+#include <tdeaboutdata.h>
+#include <tdecmdlineargs.h>
 #include <kmessagebox.h>
 #include <tdepopupmenu.h>
 #include <krun.h>

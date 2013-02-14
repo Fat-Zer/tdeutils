@@ -31,7 +31,7 @@
 #include <tdeconfig.h>
 #include <knumvalidator.h>
 #include <kdialog.h>
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <kcombobox.h>
 #include <knuminput.h>
 

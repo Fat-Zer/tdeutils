@@ -32,12 +32,12 @@
 
 #include <tdelistview.h>
 #include <kdebug.h>
-#include <kaboutapplication.h>
-#include <kaboutdata.h>
+#include <tdeaboutapplication.h>
+#include <tdeaboutdata.h>
 #include <klocale.h>
 #include <kglobal.h>
 #include <tdeconfig.h>
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <kinputdialog.h>
 
 #include <themetypes.h>

@@ -37,7 +37,7 @@
 #include <khelpmenu.h>
 #include <kpushbutton.h>
 #include <tdepopupmenu.h>
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <kprogress.h>
 #include <klocale.h>
 #include <kcombobox.h>

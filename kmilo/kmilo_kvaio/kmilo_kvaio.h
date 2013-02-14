@@ -25,7 +25,7 @@
 #include <tdemainwindow.h>
 #include <kglobalaccel.h>
 #include <dcopref.h>
-#include <kapplication.h>
+#include <tdeapplication.h>
 
 #include "kmilod.h"
 #include "monitor.h"

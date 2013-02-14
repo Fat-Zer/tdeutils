@@ -18,7 +18,7 @@
 #include <tqlistview.h>
 
 #include <kpushbutton.h>
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <klocale.h>
 #include <kglobal.h>
 #include <tdeconfig.h>

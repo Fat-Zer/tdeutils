@@ -23,9 +23,9 @@
 */
 
 #include <tdeversion.h>
-#include <kapplication.h>
-#include <kcmdlineargs.h>
-#include <kaboutdata.h>
+#include <tdeapplication.h>
+#include <tdecmdlineargs.h>
+#include <tdeaboutdata.h>
 
 #include "floppy.h"
 

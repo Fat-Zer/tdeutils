@@ -12,7 +12,7 @@
 #include <tqstringlist.h>
 #include <tqdir.h>
 #include <tdefiledialog.h>
-#include <kcmdlineargs.h>
+#include <tdecmdlineargs.h>
 #include <fcntl.h>
 #include <klocale.h>
 #include <kmessagebox.h>

@@ -30,7 +30,7 @@
 #include <kmessagebox.h>
 #include <tdeconfig.h>
 #include <kurlrequester.h>
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <kcombobox.h>
 
 #include <tqlayout.h>

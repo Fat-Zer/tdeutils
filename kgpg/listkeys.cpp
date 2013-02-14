@@ -64,7 +64,7 @@
 #include <klineedit.h>
 #include <kiconloader.h>
 #include <kmessagebox.h>
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <kabc/stdaddressbook.h>
 #include <kabc/addresseedialog.h>
 #include <kdesktopfile.h>

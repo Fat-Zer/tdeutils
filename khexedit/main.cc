@@ -21,10 +21,10 @@
 
 #include <stdlib.h>
 
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <klocale.h>
-#include <kcmdlineargs.h>
-#include <kaboutdata.h>
+#include <tdecmdlineargs.h>
+#include <tdeaboutdata.h>
 
 #include "toplevel.h"
 #include "version.h" // Contains khexedit name string and version string

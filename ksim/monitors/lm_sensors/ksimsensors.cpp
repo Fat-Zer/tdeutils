@@ -21,10 +21,10 @@
 #include "ksimsensors.moc"
 
 #include <kdebug.h>
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <klocale.h>
-#include <kaboutapplication.h>
-#include <kaboutdata.h>
+#include <tdeaboutapplication.h>
+#include <tdeaboutdata.h>
 #include <tdeconfig.h>
 
 #include <tqlayout.h>

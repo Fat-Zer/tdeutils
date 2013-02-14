@@ -20,10 +20,10 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  ****************************************************************************/
 
-#include <kapplication.h>
+#include <tdeapplication.h>
 #include <tdefiledialog.h>
-#include <kaboutdata.h>
-#include <kcmdlineargs.h>
+#include <tdeaboutdata.h>
+#include <tdecmdlineargs.h>
 #include <klocale.h>
 #include <tdeconfig.h>
 

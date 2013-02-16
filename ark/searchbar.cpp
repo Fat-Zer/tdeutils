@@ -24,7 +24,7 @@
 #include <tdelistviewsearchline.h>
 #include <tdelistview.h>
 #include <kcombobox.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tdeaction.h>
 #include <tdeactioncollection.h>
 

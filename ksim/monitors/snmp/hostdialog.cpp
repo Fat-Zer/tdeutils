@@ -28,8 +28,8 @@
 #include <tqpushbutton.h>
 #include <tqspinbox.h>
 
-#include <klocale.h>
-#include <kmessagebox.h>
+#include <tdelocale.h>
+#include <tdemessagebox.h>
 
 #include <assert.h>
 

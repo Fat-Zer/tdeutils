@@ -16,14 +16,14 @@
  ***************************************************************************/
 
 #include <tqstring.h>
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 
 
 #include <kuniqueapplication.h>
 #include <dcopclient.h>
 #include <tdeaboutdata.h>
 #include <tdecmdlineargs.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include "kgpg.h"
 
 static const char description[] =

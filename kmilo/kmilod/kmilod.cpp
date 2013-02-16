@@ -30,7 +30,7 @@
 
 #include <tqfile.h>
 
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kdebug.h>
 #include <kservicetype.h>
 #include <kservice.h>

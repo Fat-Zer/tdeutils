@@ -19,7 +19,7 @@
  */
 
 
-#include <klocale.h>
+#include <tdelocale.h>
 
 #include "dialog.h"
 #include "hexvalidator.h"

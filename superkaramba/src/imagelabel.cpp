@@ -27,7 +27,7 @@
 #include <kpixmapeffect.h>
 #include <kdebug.h>
 #include <kimageeffect.h>
-#include <ktempfile.h>
+#include <tdetempfile.h>
 #include <tdeio/job.h>
 #include "karambaapp.h"
 #include "imagelabel.h"

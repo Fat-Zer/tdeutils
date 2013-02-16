@@ -13,7 +13,7 @@
 #include <tdeapplication.h>
 #include <tdeaccel.h>
 #include <tdeconfig.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tdeaction.h>
 
 /******************************************************************/

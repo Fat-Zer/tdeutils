@@ -31,9 +31,9 @@
 #include <kdebug.h>
 #include <keditcl.h>
 #include <kencodingfiledialog.h>
-#include <kglobalsettings.h>
+#include <tdeglobalsettings.h>
 #include <kinputdialog.h>
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 #include <tdepopupmenu.h>
 #include <krun.h>
 #include <kstandarddirs.h>

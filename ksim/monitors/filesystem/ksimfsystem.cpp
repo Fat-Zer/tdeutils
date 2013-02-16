@@ -28,7 +28,7 @@
 #include <tqregexp.h>
 
 #include <kdebug.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tdeaboutapplication.h>
 #include <tdeaboutdata.h>
 #include <tdeapplication.h>

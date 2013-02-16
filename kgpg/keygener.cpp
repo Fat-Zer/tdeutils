@@ -28,8 +28,8 @@
 #include <tqbuttongroup.h>
 #include <tqhbuttongroup.h>
 #include <tqvbuttongroup.h>
-#include <kmessagebox.h>
-#include <klocale.h>
+#include <tdemessagebox.h>
+#include <tdelocale.h>
 
 #include "keygener.h"
 

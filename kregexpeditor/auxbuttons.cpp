@@ -22,7 +22,7 @@
 #else
   #include "auxbuttons.moc"
   #include <kiconloader.h>
-  #include <klocale.h>
+  #include <tdelocale.h>
 #endif
 
 #include "auxbuttons.h"

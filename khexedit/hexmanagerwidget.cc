@@ -18,7 +18,7 @@
  *
  */
 
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tqlayout.h>
 #include "hexmanagerwidget.h"
 #include "searchbar.h"

@@ -14,8 +14,8 @@
 #include <tdefiledialog.h>
 #include <tdecmdlineargs.h>
 #include <fcntl.h>
-#include <klocale.h>
-#include <kmessagebox.h>
+#include <tdelocale.h>
+#include <tdemessagebox.h>
 #include <kdebug.h>
 #include <khelpmenu.h>
 

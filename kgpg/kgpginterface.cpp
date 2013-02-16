@@ -27,8 +27,8 @@
 #include <tdeio/netaccess.h>
 #include <tqcheckbox.h>
 
-#include <kmessagebox.h>
-#include <klocale.h>
+#include <tdemessagebox.h>
+#include <tdelocale.h>
 #include <kpassdlg.h>
 #include <kmdcodec.h>
 #include <klineedit.h>
@@ -43,7 +43,7 @@
 #include <tqfile.h>
 #include <kled.h>
 #include <kdebug.h>
-#include <ktempfile.h>
+#include <tdetempfile.h>
 
 #include "kgpginterface.h"
 #include "listkeys.h"

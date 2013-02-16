@@ -21,7 +21,7 @@
 #include "sensorsconfig.moc"
 #include "sensorbase.h"
 
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kiconloader.h>
 #include <tdelistview.h>
 #include <knuminput.h>

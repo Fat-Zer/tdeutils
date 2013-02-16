@@ -34,9 +34,9 @@
 
 #include <kdebug.h>
 #include <ksimpleconfig.h>
-#include <kglobalsettings.h>
+#include <tdeglobalsettings.h>
 #include <kstandarddirs.h>
-#include <kglobal.h>
+#include <tdeglobal.h>
 
 class KSim::Theme::Private
 {

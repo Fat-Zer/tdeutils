@@ -23,10 +23,10 @@
 #include <kdebug.h>
 #include <klibloader.h>
 #include <kdesktopfile.h>
-#include <klocale.h>
-#include <kglobal.h>
+#include <tdelocale.h>
+#include <tdeglobal.h>
 #include <kstandarddirs.h>
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 
 #include <tqstringlist.h>
 

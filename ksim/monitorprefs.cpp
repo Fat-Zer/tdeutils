@@ -20,8 +20,8 @@
 #include "monitorprefs.h"
 #include "monitorprefs.moc"
 
-#include <klocale.h>
-#include <kglobal.h>
+#include <tdelocale.h>
+#include <tdeglobal.h>
 #include <kdesktopfile.h>
 #include <kstandarddirs.h>
 #include <kdebug.h>

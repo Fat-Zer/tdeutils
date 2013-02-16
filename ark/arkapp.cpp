@@ -28,7 +28,7 @@
 #include <dcopclient.h>
 #include <kdebug.h>
 #include <tdecmdlineargs.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <unistd.h>
 #include <tqfile.h>
 #include <errno.h>

@@ -49,8 +49,8 @@
 #include <config.h>
 #include "kcalc_core.h"
 #include <stdlib.h>
-#include <klocale.h>
-#include <kmessagebox.h>
+#include <tdelocale.h>
+#include <tdemessagebox.h>
 #include "kcalctype.h"
 
 #ifndef HAVE_FUNC_ISINF

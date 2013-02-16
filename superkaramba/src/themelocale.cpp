@@ -1,5 +1,5 @@
 /*
- * languageList from klocale.cpp
+ * languageList from tdelocale.cpp
  *  Copyright (c) 1997,2001 Stephan Kulow <coolo@kde.org>
  *  Copyright (c) 1999 Preston Brown <pbrown@kde.org>
  *  Copyright (c) 1999-2002 Hans Petter Bieker <bieker@kde.org>
@@ -31,8 +31,8 @@
 #include "themefile.h"
 #include <kdebug.h>
 #include <tdeconfig.h>
-#include <kglobal.h>
-#include <klocale.h>
+#include <tdeglobal.h>
+#include <tdelocale.h>
 #include <tqbuffer.h>
 #include <tqglobal.h>
 #include <tqiodevice.h>

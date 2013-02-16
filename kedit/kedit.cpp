@@ -40,7 +40,7 @@
 #include <tdefileitem.h>
 #include <tdefontdialog.h>
 #include <tdeio/netaccess.h>
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 #include <kprinter.h>
 #include <ksavefile.h>
 #include <kstatusbar.h>

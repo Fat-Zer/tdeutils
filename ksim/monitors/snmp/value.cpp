@@ -24,7 +24,7 @@
 
 #include <tqvariant.h>
 
-#include <klocale.h>
+#include <tdelocale.h>
 
 #include <assert.h>
 

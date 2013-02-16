@@ -19,10 +19,10 @@
 #ifdef TQT_ONLY
   #include "compat.h"
 #else
-  #include <klocale.h>
+  #include <tdelocale.h>
   #include <kiconloader.h>
   #include <kstandarddirs.h>
-  #include <kmessagebox.h>
+  #include <tdemessagebox.h>
   #include "kregexpeditorprivate.moc"
 #endif
 

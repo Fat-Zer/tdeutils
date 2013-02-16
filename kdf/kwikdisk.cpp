@@ -36,11 +36,11 @@
 #include <tqpainter.h>
 
 #include <tdemainwindow.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tdeapplication.h>
 #include <tdeaboutdata.h>
 #include <tdecmdlineargs.h>
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 #include <tdepopupmenu.h>
 #include <krun.h>
 

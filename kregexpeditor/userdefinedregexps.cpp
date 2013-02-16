@@ -19,8 +19,8 @@
   #include "compat.h"
 #else
   #include <klineeditdlg.h>
-  #include <klocale.h>
-  #include <kmessagebox.h>
+  #include <tdelocale.h>
+  #include <tdemessagebox.h>
   #include <kstandarddirs.h>
   #include <kdebug.h>
   #include "userdefinedregexps.moc"

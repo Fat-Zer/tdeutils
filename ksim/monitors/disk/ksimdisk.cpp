@@ -31,7 +31,7 @@
 #include <kdebug.h>
 #include <tdeaboutapplication.h>
 #include <tdeaboutdata.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tdeapplication.h>
 #include <tdelistview.h>
 #include <kinputdialog.h>

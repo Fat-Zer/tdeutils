@@ -37,7 +37,7 @@
 #include <tdeapplication.h>
 #include <tdefiledialog.h>
 #include <kicondialog.h>
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 
 #include "listview.h"
 #include "mntconfig.h"

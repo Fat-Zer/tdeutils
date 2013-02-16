@@ -19,7 +19,7 @@
   #include "compat.h"
   #include "images.h"
 #else
-  #include <klocale.h>
+  #include <tdelocale.h>
   #include <kdialogbase.h>
   #include <kiconloader.h>
   #include "compoundwidget.moc"

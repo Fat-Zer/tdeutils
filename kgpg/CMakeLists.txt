@@ -40,7 +40,7 @@ tde_add_executable( kgpg AUTOMOC
     keyexport.ui sourceselect.ui
     kgpgsettings.kcfgc conf_servers.ui
     conf_ui2.ui conf_misc.ui
-  LINK kabc-shared tdeutils-shared tdeprint-shared
+  LINK tdeabc-shared tdeutils-shared tdeprint-shared
   DESTINATION ${BIN_INSTALL_DIR}
 )
 

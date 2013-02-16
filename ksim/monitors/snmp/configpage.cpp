@@ -30,8 +30,8 @@
 
 #include <tdeconfig.h>
 #include <tdelistview.h>
-#include <kmessagebox.h>
-#include <klocale.h>
+#include <tdemessagebox.h>
+#include <tdelocale.h>
 
 using namespace KSim::Snmp;
 

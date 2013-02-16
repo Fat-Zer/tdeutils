@@ -19,7 +19,7 @@
  ****************************************************************************/
 #include "kwidgetlistbox.h"
 #include <kdebug.h>
-#include <kglobalsettings.h>
+#include <tdeglobalsettings.h>
 
 KWidgetListbox::KWidgetListbox(TQWidget *parent, const char *name)
  : TQTable(parent, name)

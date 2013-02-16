@@ -38,7 +38,7 @@
 #include <tqtimer.h>
 #include <tqwhatsthis.h>
 
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kprocess.h>
 #include <tdeconfig.h>
 

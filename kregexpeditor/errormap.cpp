@@ -19,8 +19,8 @@
 #ifdef TQT_ONLY
   #include "compat.h"
 #else
-  #include <kmessagebox.h>
-  #include <klocale.h>
+  #include <tdemessagebox.h>
+  #include <tdelocale.h>
 #endif
 
 #include "errormap.h"

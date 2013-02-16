@@ -44,11 +44,11 @@ static int mib[] = { CTL_NET, PF_ROUTE, 0, 0, NET_RT_IFLIST, 0 };
 #include <tqpopupmenu.h>
 
 #include <kdebug.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tdeaboutapplication.h>
 #include <tdeaboutdata.h>
 #include <ksimpleconfig.h>
-#include <kglobal.h>
+#include <tdeglobal.h>
 #include <krun.h>
 #include <tdeapplication.h>
 #include <kiconloader.h>

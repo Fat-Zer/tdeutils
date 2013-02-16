@@ -18,7 +18,7 @@
 #ifdef TQT_ONLY
   #include "compat.h"
 #else
-  #include <klocale.h>
+  #include <tdelocale.h>
   #include "verifier.moc"
 #endif
 

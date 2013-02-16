@@ -22,7 +22,7 @@
 #include <tqlabel.h>
 #include <tqlayout.h>
 
-#include <klocale.h>
+#include <tdelocale.h>
 
 #include "converterdialog.h"
 #include "hexvalidator.h"

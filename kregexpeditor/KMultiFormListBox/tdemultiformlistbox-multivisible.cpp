@@ -20,7 +20,7 @@
   #include "compat.h"
   #include <tqmessagebox.h>
 #else
-  #include <kmessagebox.h>
+  #include <tdemessagebox.h>
   #include "tdemultiformlistbox-multivisible.moc"
 #endif
 

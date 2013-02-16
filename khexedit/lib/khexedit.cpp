@@ -30,7 +30,7 @@
 #include <tqapplication.h>
 // kde specific
 #ifndef TQT_ONLY
-#include <kglobalsettings.h>
+#include <tdeglobalsettings.h>
 #endif
 // lib specific
 #include "kdatabuffer.h"

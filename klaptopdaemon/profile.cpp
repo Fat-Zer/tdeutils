@@ -31,13 +31,13 @@
 #include <sys/ioctl.h>
 
 // other KDE headers:
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tdeconfig.h>
 #include <knuminput.h>
 #include <kiconloader.h>
 #include <kicondialog.h>
 #include <tdeapplication.h>
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 #include <kcombobox.h>
 
 // other TQt headers:

@@ -22,10 +22,10 @@
  */
 
 
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kprocess.h>
 #include <tdeconfig.h>
-#include <kglobal.h>
+#include <tdeglobal.h>
 #include <tqlayout.h>
 #include <unistd.h>
 #include <fcntl.h>

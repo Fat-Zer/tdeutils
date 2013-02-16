@@ -21,8 +21,8 @@
 #include <tqpainter.h>
 // kde specific
 #include <kcharsets.h>
-#include <klocale.h>
-#include <kglobal.h>
+#include <tdelocale.h>
+#include <tdeglobal.h>
 // lib specific
 #include "kcolumnsview.h"
 #include "kbuffercursor.h"

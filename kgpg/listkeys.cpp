@@ -36,7 +36,7 @@
 #include <tqpaintdevicemetrics.h>
 #include <tqtooltip.h>
 #include <tqheader.h>
-#include <ktempfile.h>
+#include <tdetempfile.h>
 #include <kdebug.h>
 #include <kprocess.h>
 #include <kprocio.h>
@@ -54,7 +54,7 @@
 #include <tdefiledialog.h>
 #include <tdeshortcut.h>
 #include <tdestdaccel.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <ktip.h>
 #include <krun.h>
 #include <kprinter.h>
@@ -63,10 +63,10 @@
 #include <dcopclient.h>
 #include <klineedit.h>
 #include <kiconloader.h>
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 #include <tdeapplication.h>
-#include <kabc/stdaddressbook.h>
-#include <kabc/addresseedialog.h>
+#include <tdeabc/stdaddressbook.h>
+#include <tdeabc/addresseedialog.h>
 #include <kdesktopfile.h>
 #include <kmimetype.h>
 #include <kstandarddirs.h>

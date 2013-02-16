@@ -32,7 +32,7 @@
 #include <tdelistview.h>
 #include <kprocess.h>
 #include <kprocio.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tdeaccel.h>
 #if KDE_IS_VERSION( 3, 2, 90 )
 #include <tdelistviewsearchline.h>

@@ -35,8 +35,8 @@
 #include <kcolordrag.h>
 #include <tdefontdialog.h> // For TDEFontChooser
 #include <kiconloader.h>
-#include <klocale.h>
-#include <kglobalsettings.h>
+#include <tdelocale.h>
+#include <tdeglobalsettings.h>
 
 #include "optiondialog.h"
 #include <tqpushbutton.h>

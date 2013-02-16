@@ -30,7 +30,7 @@
 #include <tqfile.h>
 #include <tqregexp.h>
 
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kcombobox.h>
 #include <kdebug.h>
 #include <klineedit.h>

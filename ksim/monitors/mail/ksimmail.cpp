@@ -25,7 +25,7 @@
 
 #include <tdeaboutapplication.h>
 #include <kdebug.h>
-#include <klocale.h>
+#include <tdelocale.h>
 
 #include <label.h>
 #include <themeloader.h>

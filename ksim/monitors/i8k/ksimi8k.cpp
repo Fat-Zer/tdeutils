@@ -28,7 +28,7 @@
 #include <tqcheckbox.h>
 
 #include <label.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tdeapplication.h>
 #include <tdeconfig.h>
 #include <tdeaboutapplication.h>

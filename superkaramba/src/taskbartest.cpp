@@ -24,7 +24,7 @@
 #include <tdefiledialog.h>
 #include <tdeaboutdata.h>
 #include <tdecmdlineargs.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tdeconfig.h>
 
 #include <tqfileinfo.h>

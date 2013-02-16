@@ -31,8 +31,8 @@
 #include <tqpainter.h>
 #include <tqregexp.h>
 
-#include <kglobal.h>
-#include <klocale.h>
+#include <tdeglobal.h>
+#include <tdelocale.h>
 #include <knotifyclient.h>
 #include "kcalc_settings.h"
 #include "kcalcdisplay.h"

@@ -26,7 +26,7 @@
 #ifdef TQT_ONLY
   #include "compat.h"
 #else
-  #include <klocale.h>
+  #include <tdelocale.h>
 #endif
 
 CCP::CCP(KMultiFormListBoxMultiVisible *ee_, KMultiFormListBoxEntry *eee_) : TQObject() {

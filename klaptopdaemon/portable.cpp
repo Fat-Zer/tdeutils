@@ -59,7 +59,7 @@
 //
 
 #include <config.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kdebug.h>
 #include <stdio.h>
 #include "portable.h"

@@ -19,8 +19,8 @@
 
 #include <kpushbutton.h>
 #include <tdeapplication.h>
-#include <klocale.h>
-#include <kglobal.h>
+#include <tdelocale.h>
+#include <tdeglobal.h>
 #include <tdeconfig.h>
 #include <kicondialog.h>
 #include <kiconloader.h>
@@ -28,7 +28,7 @@
 #include <ksimpleconfig.h>
 #include <kgenericfactory.h>
 #include <tdelistview.h>
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 #include <kpushbutton.h>
 
 #include <dcopclient.h>

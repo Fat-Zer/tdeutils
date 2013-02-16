@@ -18,7 +18,7 @@
  *
  */
 
-#include <klocale.h>
+#include <tdelocale.h>
 
 #include "hexerror.h"
 

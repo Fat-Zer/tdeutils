@@ -18,8 +18,8 @@
 #ifdef TQT_ONLY
   #include "compat.h"
 #else
-  #include <klocale.h>
-  #include <kmessagebox.h>
+  #include <tdelocale.h>
+  #include <tdemessagebox.h>
 #endif
 
 #include "textrangeregexp.h"

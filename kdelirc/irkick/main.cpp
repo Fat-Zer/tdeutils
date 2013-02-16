@@ -7,11 +7,11 @@
 
 // This program is free software.
 
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tdecmdlineargs.h>
 #include <twin.h>
 #include <tdeaboutdata.h>
-#include <kglobal.h>
+#include <tdeglobal.h>
 #include <kdebug.h>
 #include <kuniqueapplication.h>
 

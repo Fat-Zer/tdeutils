@@ -35,7 +35,7 @@
 #include <tdeio/global.h>
 #include <kprogress.h>
 #include <kprocess.h>
-#include <klocale.h>
+#include <tdelocale.h>
 
 class DiskEntry : public TQObject
 {

@@ -20,7 +20,7 @@
 
 #include <string.h>
 
-#include <klocale.h>
+#include <tdelocale.h>
 
 #include "conversion.h"
 

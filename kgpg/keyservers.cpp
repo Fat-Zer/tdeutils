@@ -23,7 +23,7 @@
 #include <kiconloader.h>
 #include <kcombobox.h>
 #include <kdialogbase.h>
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 #include <tqtextcodec.h>
 #include <tqlayout.h>
 #include <tqlabel.h>
@@ -35,7 +35,7 @@
 #include <tqregexp.h>
 #include <tqcursor.h>
 
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kprocess.h>
 #include <kprocio.h>
 #include <tdelistview.h>

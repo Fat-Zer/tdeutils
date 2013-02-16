@@ -25,14 +25,14 @@
 #include <tqfile.h>
 #include <tdeconfig.h>
 #include <tdeversion.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kprocio.h>
 #include <tqcheckbox.h>
 #include <tqradiobutton.h>
 #include <tqpushbutton.h>
 #include <tqfont.h>
 #include <tdeaction.h>
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 #include <klineedit.h>
 #include <kcombobox.h>
 #include <kurlrequester.h>

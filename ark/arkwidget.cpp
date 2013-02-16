@@ -41,12 +41,12 @@
 
 // KDE includes
 #include <kdebug.h>
-#include <klocale.h>
-#include <kmessagebox.h>
+#include <tdelocale.h>
+#include <tdemessagebox.h>
 #include <tdeio/netaccess.h>
 #include <tdeio/job.h>
 #include <kopenwith.h>
-#include <ktempfile.h>
+#include <tdetempfile.h>
 #include <kmimemagic.h>
 #include <kmimetype.h>
 #include <kstandarddirs.h>

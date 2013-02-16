@@ -35,15 +35,15 @@
 #include <kinputdialog.h>
 #include <tdeio/netaccess.h>
 #include <tdelistviewsearchline.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kmdcodec.h>
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 #include <tdepopupmenu.h>
 #include <ksqueezedtextlabel.h>
 #include <kstandarddirs.h>
 #include <kstdaction.h>
 #include <kstringhandler.h>
-#include <ktempfile.h>
+#include <tdetempfile.h>
 
 #include <tqcheckbox.h>
 #include <tqcombobox.h>

@@ -19,7 +19,7 @@
 
 #include <tdeaction.h>
 #include <tdefiledialog.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <dcopclient.h>
 #include <tqpaintdevicemetrics.h>
 #include <tqcstring.h>
@@ -31,12 +31,12 @@
 #include <tqtextcodec.h>
 #include <tqpainter.h>
 #include <kprinter.h>
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 #include <kdebug.h>
 #include <klineedit.h>
 #include <tqcheckbox.h>
 #include <kurlrequester.h>
-#include <ktempfile.h>
+#include <tdetempfile.h>
 #include <tdeio/netaccess.h>
 #include <tdeio/renamedlg.h>
 #include <kedittoolbar.h>

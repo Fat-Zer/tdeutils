@@ -22,7 +22,7 @@
 
 #include <kdebug.h>
 #include <kdesktopfile.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kiconloader.h>
 
 class KSim::Plugin::Private

@@ -20,8 +20,8 @@
   #include "compat.h"
   #include "images.h"
 #else
-  #include <klocale.h>
-  #include <kmessagebox.h>
+  #include <tdelocale.h>
+  #include <tdemessagebox.h>
 //   #include <tdefiledialog.h>
   #include <kstandarddirs.h>
   #include <kiconloader.h>

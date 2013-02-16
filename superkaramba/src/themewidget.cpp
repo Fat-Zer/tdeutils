@@ -21,7 +21,7 @@
 #include "themelocale.h"
 #include <kpushbutton.h>
 #include <kdebug.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tqlabel.h>
 #include <tqlayout.h>
 

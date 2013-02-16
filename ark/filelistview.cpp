@@ -32,10 +32,10 @@
 #include <tqheader.h>
 
 // KDE includes
-#include <klocale.h>
-#include <kglobal.h>
+#include <tdelocale.h>
+#include <tdeglobal.h>
 #include <kdebug.h>
-#include <kglobalsettings.h>
+#include <tdeglobalsettings.h>
 #include <kmimetype.h>
 
 #include "filelistview.h"

@@ -18,8 +18,8 @@
 // qt specific
 #include "tqtextcodec.h"
 // kde specific
-#include <kglobal.h>
-#include <klocale.h>
+#include <tdeglobal.h>
+#include <tdelocale.h>
 #include <kcharsets.h>
 // lib specific
 #include "ktextcharcodec.h"

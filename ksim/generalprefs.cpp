@@ -31,7 +31,7 @@
 #include <tqtooltip.h>
 #include <tqpopupmenu.h>
 
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tdeapplication.h>
 #include <kcombobox.h>
 #include <kdebug.h>

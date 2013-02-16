@@ -29,11 +29,11 @@
 #include <tdeapplication.h>
 #include <kiconloader.h>
 #include <kinputdialog.h>
-#include <klocale.h>
-#include <kmessagebox.h>
+#include <tdelocale.h>
+#include <tdemessagebox.h>
 #include <kprogress.h>
 #include <kstandarddirs.h>
-#include <ktempfile.h>
+#include <tdetempfile.h>
 
 #include <tdeio/job.h>
 #include <assert.h>

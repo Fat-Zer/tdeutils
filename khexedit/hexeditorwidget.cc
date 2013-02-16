@@ -25,11 +25,11 @@
 #undef Unsorted
 
 #include <tdefiledialog.h>
-#include <kglobalsettings.h>
+#include <tdeglobalsettings.h>
 #include <tdeio/netaccess.h>
-#include <klocale.h>
-#include <kmessagebox.h>
-#include <ktempfile.h>
+#include <tdelocale.h>
+#include <tdemessagebox.h>
+#include <tdetempfile.h>
 #include <kpushbutton.h>
 #include <kstdguiitem.h>
 

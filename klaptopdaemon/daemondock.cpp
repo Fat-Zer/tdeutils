@@ -27,7 +27,7 @@
 #include <tqcursor.h>
 
 #include <tqslider.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tdepopupmenu.h>
 #include <dcopclient.h>
 #include <dcopref.h>
@@ -39,8 +39,8 @@
 #include <kprocess.h>
 #include <kstandarddirs.h>
 #include <tdeconfig.h>
-#include <kglobalsettings.h>
-#include <kmessagebox.h>
+#include <tdeglobalsettings.h>
+#include <tdemessagebox.h>
 #include <tqvbox.h>
 #include <tqstringlist.h>
 #include <tqbitmap.h>

@@ -57,9 +57,9 @@
 #include <tdeapplication.h>
 #include <kdebug.h>
 #include <klargefile.h>
-#include <klocale.h>
-#include <kmessagebox.h>
-#include <ktempfile.h>
+#include <tdelocale.h>
+#include <tdemessagebox.h>
+#include <tdetempfile.h>
 #include <kmimetype.h>
 #include <kstandarddirs.h>
 #include <ktempdir.h>

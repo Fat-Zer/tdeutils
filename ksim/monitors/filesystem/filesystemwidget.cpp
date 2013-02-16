@@ -27,8 +27,8 @@
 #include <tqcursor.h>
 
 #include <kprocess.h>
-#include <kmessagebox.h>
-#include <klocale.h>
+#include <tdemessagebox.h>
+#include <tdelocale.h>
 #include <kiconloader.h>
 #include <kdebug.h>
 

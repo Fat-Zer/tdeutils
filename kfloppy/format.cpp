@@ -27,7 +27,7 @@
 #include <tqtimer.h>
 #include <tqregexp.h>
 
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kprocess.h>
 #include <kdebug.h>
 #include <kstandarddirs.h>

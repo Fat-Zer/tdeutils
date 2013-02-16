@@ -18,7 +18,7 @@
 // qt specific
 #include <tqlayout.h>
 // kde specific
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kgenericfactory.h>
 #include <tdeapplication.h>
 // lib specific

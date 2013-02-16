@@ -34,8 +34,8 @@
 // KDE includes
 #include <kdebug.h>
 #include <klargefile.h>
-#include <klocale.h>
-#include <kmessagebox.h>
+#include <tdelocale.h>
+#include <tdemessagebox.h>
 #include <kstandarddirs.h>
 #include <ktempdir.h>
 #include <kprocess.h>
@@ -44,7 +44,7 @@
 #include <tdeio/global.h>
 #include <tdefileitem.h>
 #include <tdeapplication.h>
-#include <kglobal.h>
+#include <tdeglobal.h>
 
 // ark includes
 #include "arkwidget.h"

@@ -22,10 +22,10 @@
 #include <tdeapplication.h>
 #include <kstandarddirs.h>
 #include <tdeconfig.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tdeaboutdata.h>
 #include <tdecmdlineargs.h>
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 
 #include <tdesu/ssh.h>
 #include <tdesu/client.h>

@@ -15,7 +15,7 @@
  *                                                                         *
  ***************************************************************************/
 
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kprocess.h>
 #include <tqdatetime.h>
 #include <tqfile.h>
@@ -23,7 +23,7 @@
 #include <kpassivepopup.h>
 #include <tdeaction.h>
 #include <tqregexp.h>
-#include <ktempfile.h>
+#include <tdetempfile.h>
 #include <tqimage.h>
 #include <kdatepicker.h>
 #include <tqpushbutton.h>
@@ -36,7 +36,7 @@
 #include <klineedit.h>
 #include <ktrader.h>
 #include <kservice.h>
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 
 #include "keyinfowidget.h"
 #include "keyproperties.h"

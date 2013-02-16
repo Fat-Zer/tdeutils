@@ -21,7 +21,7 @@
 
 #include <tdeaction.h>
 #include <kdebug.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tdepopupmenu.h>
 #include <kstdaction.h>
 #include <twin.h>

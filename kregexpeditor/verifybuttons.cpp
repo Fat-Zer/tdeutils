@@ -20,12 +20,12 @@
 #include <tqfiledialog.h>
 #include "images.h"
 #else
-#include <klocale.h>
+#include <tdelocale.h>
 #include "verifybuttons.moc"
 #include <kstandarddirs.h>
 #include <tdefiledialog.h>
 #include <kiconloader.h>
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 #endif
 
 #include "verifybuttons.h"

@@ -25,9 +25,9 @@
 #include "portable.h"
 #include "version.h"
 
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tdefiledialog.h>
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 #include <tdeconfig.h>
 #include <kurlrequester.h>
 #include <tdeapplication.h>

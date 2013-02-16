@@ -22,7 +22,7 @@
 #include <tqstylesheet.h>
 #include <tqsimplerichtext.h>
 
-#include <kglobalsettings.h>
+#include <tdeglobalsettings.h>
 
 static TQString qrichtextify( const TQString& text )
 {

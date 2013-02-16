@@ -19,7 +19,7 @@
 
 #include <kstandarddirs.h>
 #include <tdeconfig.h>
-#include <kglobal.h>
+#include <tdeglobal.h>
 
 #include "ksimconfig.h"
 #include "themeloader.h"

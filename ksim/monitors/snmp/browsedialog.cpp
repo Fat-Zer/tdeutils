@@ -23,7 +23,7 @@
 
 #include <tdelistview.h>
 #include <kguiitem.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kpushbutton.h>
 #include <klineedit.h>
 

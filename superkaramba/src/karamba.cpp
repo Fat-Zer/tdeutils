@@ -32,9 +32,9 @@
 #include "superkarambasettings.h"
 
 #include <kdebug.h>
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 #include <krun.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <twin.h>
 #include <tdeversion.h>
 #include <kdirwatch.h>

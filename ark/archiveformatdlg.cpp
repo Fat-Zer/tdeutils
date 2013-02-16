@@ -23,7 +23,7 @@
 #include "archiveformatinfo.h"
 #include "arch.h"
 
-#include <klocale.h>
+#include <tdelocale.h>
 
 #include <tqlabel.h>
 #include <tqvbox.h>

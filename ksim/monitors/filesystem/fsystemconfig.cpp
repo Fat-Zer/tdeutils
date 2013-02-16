@@ -21,7 +21,7 @@
 #include "fsystemconfig.moc"
 
 #include <tdeconfig.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kiconloader.h>
 #include <tdelistview.h>
 #include <tdeapplication.h>

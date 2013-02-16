@@ -32,8 +32,8 @@
 #include <kiconloader.h>
 #include <kiconview.h>
 #include <kinputdialog.h>
-#include <klocale.h>
-#include <kmessagebox.h>
+#include <tdelocale.h>
+#include <tdemessagebox.h>
 #include <kstandarddirs.h>
 #include <kstdaction.h>
 #include <ksystemtray.h>

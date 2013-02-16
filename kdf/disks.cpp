@@ -24,7 +24,7 @@
 #include <tqfileinfo.h>
 #include <tqdir.h>
 
-#include <kglobal.h>
+#include <tdeglobal.h>
 #include <kdebug.h>
 
 #include "disks.h"

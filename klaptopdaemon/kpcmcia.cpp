@@ -27,7 +27,7 @@
 #include <tqfile.h>
 #include <tqregexp.h>
 
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kinstance.h>
 #include <kstandarddirs.h>
 

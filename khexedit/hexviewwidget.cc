@@ -24,8 +24,8 @@
 #include <tqdrawutil.h>
 
 
-#include <kglobalsettings.h>
-#include <klocale.h>
+#include <tdeglobalsettings.h>
+#include <tdelocale.h>
 #include <tdepopupmenu.h>
 #include <kdebug.h>
 #include <kurldrag.h>

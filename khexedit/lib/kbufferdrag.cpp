@@ -19,8 +19,8 @@
 #include <tqcstring.h>
 #include <tqtextcodec.h>
 // kde specific
-#include <kglobal.h>
-#include <klocale.h>
+#include <tdeglobal.h>
+#include <tdelocale.h>
 // lib specific
 #include "kbordercoltextexport.h"
 #include "koffsetcoltextexport.h"

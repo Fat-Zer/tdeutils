@@ -26,11 +26,11 @@
 
 // KDE includes
 #include <kdebug.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kedittoolbar.h>
 #include <kstatusbar.h>
 #include <tdefiledialog.h>
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 #include <tdepopupmenu.h>
 #include <tdeparts/componentfactory.h>
 #include <tdeparts/browserextension.h>

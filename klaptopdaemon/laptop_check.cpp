@@ -27,7 +27,7 @@
 #include <tdeaboutdata.h>
 #include <tdeapplication.h>
 #include <tdecmdlineargs.h>
-#include <klocale.h>
+#include <tdelocale.h>
 static const char description[] =
         I18N_NOOP("TDE laptop daemon starter");
 

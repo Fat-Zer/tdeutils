@@ -22,9 +22,9 @@
 #include <tqlabel.h>
 #include <tqlayout.h>
 
-#include <kglobalsettings.h>
-#include <kglobal.h>
-#include <klocale.h>
+#include <tdeglobalsettings.h>
+#include <tdeglobal.h>
+#include <tdelocale.h>
 
 #include "fileinfodialog.h"
 #include "listview.h"

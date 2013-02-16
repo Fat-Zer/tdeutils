@@ -21,12 +21,12 @@
 
 #include "arkviewer.h"
 
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tdeparts/componentfactory.h>
 #include <kmimetype.h>
 #include <kdebug.h>
 #include <kurl.h>
-#include <kglobal.h>
+#include <tdeglobal.h>
 #include <kiconloader.h>
 
 #include <tqvbox.h>

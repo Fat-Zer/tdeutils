@@ -25,7 +25,7 @@
 #include <tqlayout.h>
 #include <tqtimer.h>
 #include <kstatusbar.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kpushbutton.h>
 #include <kstdguiitem.h>
 

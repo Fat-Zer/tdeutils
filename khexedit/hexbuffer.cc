@@ -26,9 +26,9 @@
 
 #include <tqfileinfo.h>
 
-#include <klocale.h>
-#include <kglobal.h>
-#include <kglobalsettings.h>
+#include <tdelocale.h>
+#include <tdeglobal.h>
+#include <tdeglobalsettings.h>
 #include <knotifyclient.h>
 
 #include "hexbuffer.h"

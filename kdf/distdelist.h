@@ -27,7 +27,7 @@
 
 #include <kdebug.h>
 #include <tdeconfig.h>
-#include <klocale.h>
+#include <tdelocale.h>
 //#include <kcontrol.h>
 
 // defines the os-type

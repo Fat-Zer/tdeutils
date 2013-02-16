@@ -41,7 +41,7 @@
 #include <kstandarddirs.h>
 #include <tdeapplication.h>
 #include <kiconloader.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tqlineedit.h>
 #include <tqtable.h>
 #include <tqdir.h>

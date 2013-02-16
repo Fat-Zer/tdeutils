@@ -28,7 +28,7 @@
 #ifdef TQT_ONLY
   #include "compat.h"
 #else
-  #include <klocale.h>
+  #include <tdelocale.h>
 #endif
 
 class TQDataStream;

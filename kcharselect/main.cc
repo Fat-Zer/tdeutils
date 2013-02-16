@@ -10,7 +10,7 @@
 #include <tdeconfig.h>
 #include <tdecmdlineargs.h>
 #include <tdeaboutdata.h>
-#include <kglobalsettings.h>
+#include <tdeglobalsettings.h>
 
 static const char description[] = 
 	I18N_NOOP("TDE character selection utility");

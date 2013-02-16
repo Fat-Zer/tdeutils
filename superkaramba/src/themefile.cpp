@@ -28,9 +28,9 @@
 #include <kurl.h>
 #include <kzip.h>
 #include <tdeapplication.h>
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 #include <kstandarddirs.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tdeio/netaccess.h>
 #include <tqtextstream.h>
 #include <tqfileinfo.h>

@@ -51,10 +51,10 @@
 #include <tdeconfigdialog.h>
 #include <kdialog.h>
 #include <tdefontdialog.h>
-#include <kglobal.h>
-#include <kglobalsettings.h>
+#include <tdeglobal.h>
+#include <tdeglobalsettings.h>
 #include <kkeydialog.h>
-#include <kmenubar.h>
+#include <tdemenubar.h>
 #include <knotifyclient.h>
 #include <knumvalidator.h>
 #include <tdepopupmenu.h>

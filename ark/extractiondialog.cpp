@@ -36,13 +36,13 @@
 #include <tqradiobutton.h>
 #include <tqlayout.h>
 
-#include <klocale.h>
-#include <kglobal.h>
+#include <tdelocale.h>
+#include <tdeglobal.h>
 #include <kiconloader.h>
 #include <kurlrequester.h>
 #include <kurlcompletion.h>
 #include <kstandarddirs.h>
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 #include <kcombobox.h>
 #include <klineedit.h>
 #include <kurlpixmapprovider.h>

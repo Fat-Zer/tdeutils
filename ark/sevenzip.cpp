@@ -27,11 +27,11 @@
 #include <tqdir.h>
 #include <tqtextcodec.h>
 
-#include <kglobal.h>
-#include <klocale.h>
+#include <tdeglobal.h>
+#include <tdelocale.h>
 #include <kdebug.h>
 #include <kurl.h>
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 #include <kpassdlg.h>
 #include <kprocess.h>
 #include <kstandarddirs.h>

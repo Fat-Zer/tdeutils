@@ -20,7 +20,7 @@
 
 #include <tqpainter.h>
  
-#include <kglobalsettings.h>
+#include <tdeglobalsettings.h>
 
 #include "bitswapwidget.h"
 

@@ -29,13 +29,13 @@
 #include "portable.h"
 
 // other KDE headers:
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tdeconfig.h>
 #include <knuminput.h>
 #include <kiconloader.h>
 #include <kicondialog.h>
 #include <tdeapplication.h>
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 #include <krichtextlabel.h>
 
 // other TQt headers:

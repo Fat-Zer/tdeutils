@@ -30,7 +30,7 @@
 
 #include <kdebug.h>
 #include <tdepopupmenu.h>
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 #include <tdeaboutdata.h>
 #include <kxmlguifactory.h>
 #include <kstatusbar.h>

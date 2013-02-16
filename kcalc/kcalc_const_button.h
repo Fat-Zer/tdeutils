@@ -24,7 +24,7 @@
 #ifndef _KCALC_CONST_BUTTON_H
 #define _KCALC_CONST_BUTTON_H
 
-#include <klocale.h>
+#include <tdelocale.h>
 #include "kcalc_button.h"
 
 

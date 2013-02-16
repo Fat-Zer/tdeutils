@@ -23,8 +23,8 @@
 #include <tdeaction.h>
 #include <kdebug.h>
 #include <kiconview.h>
-#include <klocale.h>
-#include <kmessagebox.h>
+#include <tdelocale.h>
+#include <tdemessagebox.h>
 #include <tdewallet.h>
 #include <kstdguiitem.h>
 

@@ -25,9 +25,9 @@
 #include <tqspinbox.h>
 
 #include <tdeconfig.h>
-#include <kglobalsettings.h>
-#include <klocale.h>
-#include <kmessagebox.h>
+#include <tdeglobalsettings.h>
+#include <tdelocale.h>
+#include <tdemessagebox.h>
 
 #include "listview.h"
 #include "stringdialog.h"

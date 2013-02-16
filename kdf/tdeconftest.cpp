@@ -37,7 +37,7 @@
 #include <tdeconfig.h>
 #include <kdebug.h>
 #include <tdeapplication.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tdecmdlineargs.h>
 
 static const char description[] =

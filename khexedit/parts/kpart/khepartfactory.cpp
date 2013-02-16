@@ -18,7 +18,7 @@
 // kde specific
 #include <kinstance.h>
 #include <tdeaboutdata.h>
-#include <klocale.h>
+#include <tdelocale.h>
 // app specific
 #include "khepart.h"
 #include "khepartfactory.h"

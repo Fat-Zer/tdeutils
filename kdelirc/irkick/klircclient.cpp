@@ -30,10 +30,10 @@
 #include <ksystemtray.h>
 #include <kiconloader.h>
 #include <kpassivepopup.h>
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 #include <tdepopupmenu.h>
 #include <kdebug.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tdeaboutdialog.h>
 #include <tdeabouttde.h>
 

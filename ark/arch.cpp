@@ -37,9 +37,9 @@
 
 // KDE includes
 #include <kdebug.h>
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 #include <kmimetype.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kpassdlg.h>
 #include <kprocess.h>
 #include <kstandarddirs.h>

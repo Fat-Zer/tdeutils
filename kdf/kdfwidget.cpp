@@ -37,7 +37,7 @@
 
 #include <tdeapplication.h>
 #include <kcmenumngr.h>
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 #include <tdepopupmenu.h>
 #include <kprocess.h>
 

@@ -14,7 +14,7 @@
 #include <tqvariant.h>
 
 #include <tdeconfig.h>
-#include <klocale.h>
+#include <tdelocale.h>
 
 #include "iraction.h"
 #include "profileserver.h"

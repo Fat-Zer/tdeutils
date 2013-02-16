@@ -35,7 +35,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #include <dcopobject.h>
 #include <twin.h>
-#include <kstartupinfo.h>
+#include <tdestartupinfo.h>
 #include "karambaapp.h"
 
 class TaskManager;

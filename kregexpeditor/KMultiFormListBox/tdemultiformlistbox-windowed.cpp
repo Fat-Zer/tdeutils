@@ -18,7 +18,7 @@
 #ifdef TQT_ONLY
   #include "compat.h"
 #else
-  #include <kmessagebox.h>
+  #include <tdemessagebox.h>
   #include <kpushbutton.h>
   #include <kstdguiitem.h>
   #include "tdemultiformlistbox-windowed.moc"

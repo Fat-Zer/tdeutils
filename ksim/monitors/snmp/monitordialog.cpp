@@ -30,7 +30,7 @@
 #include <tqcheckbox.h>
 #include <tqlabel.h>
 
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kpushbutton.h>
 
 #include <assert.h>

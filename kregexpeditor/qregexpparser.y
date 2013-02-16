@@ -19,8 +19,8 @@
 #ifdef QT_ONLY
   #include "compat.h"
 #else
-  #include <klocale.h>
-  #include <kmessagebox.h>
+  #include <tdelocale.h>
+  #include <tdemessagebox.h>
 #endif
 
   #include <qstring.h>

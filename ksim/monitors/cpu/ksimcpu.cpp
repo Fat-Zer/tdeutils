@@ -34,8 +34,8 @@
 #include <kdebug.h>
 #include <tdeaboutapplication.h>
 #include <tdeaboutdata.h>
-#include <klocale.h>
-#include <kglobal.h>
+#include <tdelocale.h>
+#include <tdeglobal.h>
 #include <tdeconfig.h>
 #include <tdeapplication.h>
 #include <kinputdialog.h>

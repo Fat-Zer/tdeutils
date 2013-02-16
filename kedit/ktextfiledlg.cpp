@@ -21,9 +21,9 @@
 #include <tqlabel.h>
 #include <tqvbox.h>
 
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kcharsets.h>
-#include <kdiroperator.h>
+#include <tdediroperator.h>
 #include <tderecentdocument.h>
 #include <tdetoolbar.h>
 #include <kpushbutton.h>

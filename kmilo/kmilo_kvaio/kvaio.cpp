@@ -36,7 +36,7 @@
 #include <tqevent.h>
 #include <tqdatastream.h>
 #include <tdemainwindow.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kdebug.h>
 #include <kdialogbase.h>
 #include <dcopclient.h>

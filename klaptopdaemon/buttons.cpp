@@ -26,8 +26,8 @@
 #include "portable.h"
 #include "version.h"
 
-#include <kglobal.h>
-#include <klocale.h>
+#include <tdeglobal.h>
+#include <tdelocale.h>
 #include <tdeconfig.h>
 #include <knumvalidator.h>
 #include <kdialog.h>

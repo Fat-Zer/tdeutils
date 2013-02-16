@@ -20,8 +20,8 @@
 #include <tdeaboutdata.h>
 #include <tdecmdlineargs.h>
 #include <kdebug.h>
-#include <kglobal.h>
-#include <klocale.h>
+#include <tdeglobal.h>
+#include <tdelocale.h>
 #include <kmimetype.h>
 #include <kstandarddirs.h>
 #include <kuniqueapplication.h>

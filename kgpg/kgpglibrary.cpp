@@ -18,10 +18,10 @@
 #include <tqhbox.h>
 #include <tqvbox.h>
 
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tdeapplication.h>
 #include <tdeconfig.h>
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 #include <krun.h>
 #include <tqfile.h>
 #include <kpassivepopup.h>

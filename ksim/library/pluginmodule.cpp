@@ -20,7 +20,7 @@
 #include "pluginmodule.h"
 #include "pluginmodule.moc"
 
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tdeapplication.h>
 #include <tdeaboutdata.h>
 #include <kdebug.h>

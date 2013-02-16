@@ -21,7 +21,7 @@
 
 #include <tqlabel.h>
 
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tdelistview.h>
 
 using namespace KSim::Snmp;

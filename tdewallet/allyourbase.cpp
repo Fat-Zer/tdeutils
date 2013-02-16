@@ -22,10 +22,10 @@
 
 #include <tdeapplication.h>
 #include <kdebug.h>
-#include <kglobal.h>
+#include <tdeglobal.h>
 #include <tdeio/netaccess.h>
-#include <klocale.h>
-#include <kmessagebox.h>
+#include <tdelocale.h>
+#include <tdemessagebox.h>
 #include <kstandarddirs.h>
 #include <kurl.h>
 #include <kurldrag.h>

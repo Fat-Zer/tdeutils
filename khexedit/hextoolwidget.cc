@@ -19,7 +19,7 @@
  */
 
 #include <kdialog.h>
-#include <klocale.h>
+#include <tdelocale.h>
 
 #include "hextoolwidget.h"
 #include <tqlabel.h>

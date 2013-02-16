@@ -27,11 +27,11 @@
 #include <ksimconfig.h>
 #include <pluginmodule.h>
 
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kiconloader.h>
 #include <kdebug.h>
 #include <kstandarddirs.h>
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 
 #include <tqhbox.h>
 #include <tqframe.h>

@@ -25,8 +25,8 @@
 #include <tqlayout.h>
 #include <tqspinbox.h>
 
-#include <kglobalsettings.h>
-#include <klocale.h>
+#include <tdeglobalsettings.h>
+#include <tdelocale.h>
 #include <kstdguiitem.h>
 
 #include "chartabledialog.h"

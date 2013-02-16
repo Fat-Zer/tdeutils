@@ -32,7 +32,7 @@
 #include <tqtimer.h>
 
 #include <tdeconfig.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tdecmdlineargs.h>
 #include "laptop_daemon.h"
 #include "portable.h"
@@ -40,7 +40,7 @@
 #include <kaudioplayer.h>
 #include <tdeapplication.h>
 #include <sys/ioctl.h>
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 #include <kpassivepopup.h>
 #include <dcopclient.h>
 #include <tqsocketnotifier.h>

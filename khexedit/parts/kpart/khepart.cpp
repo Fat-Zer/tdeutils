@@ -16,11 +16,11 @@
 
 
 // kde specific
-#include <klocale.h>
+#include <tdelocale.h>
 //#include <kinstance.h>
 #include <tdeaction.h>
 #include <kstdaction.h>
-//#include <kglobalsettings.h>
+//#include <tdeglobalsettings.h>
 // app specific
 #include "khexedit.h"
 #include "kcharcodec.h"

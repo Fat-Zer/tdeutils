@@ -22,7 +22,7 @@
 #include <ksimconfig.h>
 
 #include <kdebug.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tqglobal.h>
 #include <klibloader.h>
 #include <kstandarddirs.h>

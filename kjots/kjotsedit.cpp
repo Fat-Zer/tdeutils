@@ -26,7 +26,7 @@
 
 #include <tdepopupmenu.h>
 #include <keditcl.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kopenwith.h>
 #include <kprinter.h>
 

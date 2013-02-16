@@ -32,14 +32,14 @@
 
 #include <tdeconfig.h>
 
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 #include <kdebug.h>
 #include <khelpmenu.h>
 #include <kpushbutton.h>
 #include <tdepopupmenu.h>
 #include <tdeapplication.h>
 #include <kprogress.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kcombobox.h>
 #include <klineedit.h>
 #include <dcopref.h>

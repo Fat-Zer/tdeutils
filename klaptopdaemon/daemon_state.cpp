@@ -32,14 +32,14 @@
 #include <tqtimer.h>
 
 #include <tdeconfig.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tdecmdlineargs.h>
 #include "daemon_state.h"
 #include "portable.h"
 #include <tdeaboutdata.h>
 #include <kaudioplayer.h>
 #include <sys/ioctl.h>
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 #include <dcopclient.h>
 #include <tqsocketnotifier.h>
 #include <tqcursor.h>

@@ -21,10 +21,10 @@
 #include <tqvgroupbox.h>
 #include <tqtextedit.h>
 
-#include <kmessagebox.h>
-#include <klocale.h>
+#include <tdemessagebox.h>
+#include <tdelocale.h>
 #include <tdelistbox.h>
-#include <kglobal.h>
+#include <tdeglobal.h>
 
 #include "kgpgoptions.h"
 #include "detailedconsole.h"

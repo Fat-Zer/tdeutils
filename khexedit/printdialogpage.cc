@@ -26,7 +26,7 @@
 #include <tqstringlist.h>
 #include <tqcombobox.h>
 
-#include <klocale.h>
+#include <tdelocale.h>
 
 
 #include "printdialogpage.h"

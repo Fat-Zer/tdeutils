@@ -24,7 +24,7 @@
 #include <tdeapplication.h>
 #include <tqfont.h> 
 #include <tqpalette.h>
-#include <kglobalsettings.h>
+#include <tdeglobalsettings.h>
 
 
 class SDisplayLine

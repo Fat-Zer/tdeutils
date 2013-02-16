@@ -26,11 +26,11 @@
 #include <tqregexp.h>
 
 #include <tdeio/netaccess.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kstdaction.h>
 #include <kurldrag.h>
 
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 #include <tqfile.h>
 #include <tqlayout.h>
 #include <kbuttonbox.h>

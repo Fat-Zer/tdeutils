@@ -23,8 +23,8 @@
 #include <tqlineedit.h> 
 
 #include <tdefiledialog.h>
-#include <klocale.h>
-#include <kmessagebox.h>
+#include <tdelocale.h>
+#include <tdemessagebox.h>
 
 #include "dialog.h"
 #include "exportdialog.h"

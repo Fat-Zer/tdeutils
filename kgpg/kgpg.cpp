@@ -26,13 +26,13 @@
 #include <tqmovie.h>
 #include <tqcstring.h>
 #include <tqhbuttongroup.h>
-#include <kglobal.h>
+#include <tdeglobal.h>
 #include <kactivelabel.h>
 #include <tdeversion.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tdeconfig.h>
 #include <tdeapplication.h>
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 #include <kcombobox.h>
 #include <tqregexp.h>
 #include <tdecmdlineargs.h>
@@ -45,7 +45,7 @@
 #include <tqlayout.h>
 #include <tqbuttongroup.h>
 #include <kiconloader.h>
-#include <ktempfile.h>
+#include <tdetempfile.h>
 #include <twin.h>
 #include <kprocess.h>
 #include <kprocio.h>

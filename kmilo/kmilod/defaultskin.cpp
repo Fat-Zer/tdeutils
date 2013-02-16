@@ -31,7 +31,7 @@
 
 #include <twin.h>
 #include <netwm.h>
-#include <kglobalsettings.h>
+#include <tdeglobalsettings.h>
 #include <tdeversion.h>
 #include <tdeconfig.h>
 

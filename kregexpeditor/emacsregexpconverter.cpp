@@ -28,8 +28,8 @@
 #include "positionregexp.h"
 #include "repeatregexp.h"
 
-#include <kmessagebox.h>
-#include <klocale.h>
+#include <tdemessagebox.h>
+#include <tdelocale.h>
 bool EmacsRegExpConverter::canParse()
 {
     return false;

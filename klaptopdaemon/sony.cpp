@@ -31,7 +31,7 @@
 #include <sys/ioctl.h>
 
 // other KDE headers:
-#include <klocale.h>
+#include <tdelocale.h>
 #include <tdeconfig.h>
 #include <knuminput.h>
 #include <kiconloader.h>
@@ -39,7 +39,7 @@
 #include <tdeapplication.h>
 #include <kprocess.h>
 #include <kstandarddirs.h>
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 #include <krichtextlabel.h>
 
 // other TQt headers:

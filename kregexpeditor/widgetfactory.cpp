@@ -18,7 +18,7 @@
 #ifdef TQT_ONLY
   #include "compat.h"
 #else
-  #include <kmessagebox.h>
+  #include <tdemessagebox.h>
 #endif
 
 #include "widgetfactory.h"

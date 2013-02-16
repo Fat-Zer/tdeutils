@@ -20,7 +20,7 @@
   #include "images.h"
 #else
   #include <kiconloader.h>
-  #include <klocale.h>
+  #include <tdelocale.h>
   #include <kstandarddirs.h>
   #include "regexpbuttons.moc"
 #endif

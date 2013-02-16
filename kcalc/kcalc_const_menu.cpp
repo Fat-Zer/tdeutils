@@ -19,7 +19,7 @@
 
 */
 
-#include <klocale.h>
+#include <tdelocale.h>
 
 #include "kcalc_const_menu.h"
 

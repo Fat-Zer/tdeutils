@@ -65,8 +65,8 @@
 
 // KDE includes
 #include <kdebug.h>
-#include <kmessagebox.h>
-#include <klocale.h>
+#include <tdemessagebox.h>
+#include <tdelocale.h>
 #include <klargefile.h>
 
 // TQt includes

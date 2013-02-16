@@ -23,12 +23,12 @@
 
 #include <tdelistview.h>
 #include <ksimpleconfig.h>
-#include <klocale.h>
+#include <tdelocale.h>
 #include <kiconloader.h>
 #include <tdeapplication.h>
 #include <tdepopupmenu.h>
 #include <kdebug.h>
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 
 #include "netconfig.h"
 #include "netconfig.moc"

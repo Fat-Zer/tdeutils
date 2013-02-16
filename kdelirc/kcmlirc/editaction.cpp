@@ -22,7 +22,7 @@
 #include <klineedit.h>
 #include <tdelistview.h>
 #include <tdeapplication.h>
-#include <kmessagebox.h>
+#include <tdemessagebox.h>
 #include <knuminput.h>
 #include <keditlistbox.h>
 

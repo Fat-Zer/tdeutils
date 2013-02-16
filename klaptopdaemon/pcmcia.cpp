@@ -29,8 +29,8 @@
 #include <tqfileinfo.h> 
 #include <tqlayout.h>
 
-#include <kglobal.h>
-#include <klocale.h>
+#include <tdeglobal.h>
+#include <tdelocale.h>
 #include <stdio.h>
 
 #include "pcmcia.h"

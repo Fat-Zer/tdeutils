@@ -1,5 +1,5 @@
 /*
- * distdelist.h
+ * disklist.h
  *
  * Copyright (c) 1999 Michael Kropfberger <michael.kropfberger@gmx.net>
  *

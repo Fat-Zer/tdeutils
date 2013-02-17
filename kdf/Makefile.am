@@ -5,7 +5,7 @@ INCLUDES= $(all_includes)
 bin_PROGRAMS = kdf kwikdisk
 
 noinst_LTLIBRARIES = libkdf_common.la
-libkdf_common_la_SOURCES = kdfwidget.cpp kdfconfig.cpp mntconfig.cpp distdelist.cpp \
+libkdf_common_la_SOURCES = kdfwidget.cpp kdfconfig.cpp mntconfig.cpp disklist.cpp \
 	disks.cpp listview.cpp optiondialog.cpp stdoption.cpp
 
 kdf_SOURCES = kdf.cpp 
@@ -23,7 +23,7 @@ kcm_kdf_la_LDFLAGS = $(all_libraries) -module -avoid-version -no-undefined
 kcm_kdf_la_LIBADD = libkdf_common.la $(LIB_TDEFILE)
 
 noinst_HEADERS = kdfwidget.h kcmdf.h kdfconfig.h mntconfig.h \
-disks.h kdf.h distdelist.h kwikdisk.h listview.h optiondialog.h stdoption.h
+disks.h kdf.h disklist.h kwikdisk.h listview.h optiondialog.h stdoption.h
 
 METASOURCES = AUTO
 

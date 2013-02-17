@@ -28,7 +28,7 @@
 #include <config.h>
 #endif
 
-#include "distdelist.h"
+#include "disklist.h"
 #include "stdoption.h"
 #include "optiondialog.h"
 

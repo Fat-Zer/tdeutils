@@ -55,7 +55,7 @@ MntConfigWidget::MntConfigWidget(TQWidget *parent, const char *name, bool init)
   GUI = !init;
   if (GUI)
   {
-    //tabList fillup waits until distdelist.readDF() is done...
+    //tabList fillup waits until disklist.readDF() is done...
     mDiskList.readFSTAB();
     mDiskList.readDF();
     mInitializing = true;

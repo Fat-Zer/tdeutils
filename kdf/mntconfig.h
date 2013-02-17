@@ -30,7 +30,7 @@
 #include <kiconloader.h>
 
 #include "disks.h"
-#include "distdelist.h"
+#include "disklist.h"
 
 class TQGroupBox;
 class TQPushButton;

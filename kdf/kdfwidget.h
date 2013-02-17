@@ -31,7 +31,7 @@
 #include <tqlistview.h>
 
 #include "disks.h"
-#include "distdelist.h"
+#include "disklist.h"
 #include "mntconfig.h"
 #include "kdfconfig.h"
 #include "stdoption.h"

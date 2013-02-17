@@ -1,5 +1,5 @@
 /*
- * distdelist.cpp
+ * disklist.cpp
  *
  * Copyright (c) 1999 Michael Kropfberger <michael.kropfberger@gmx.net>
  *
@@ -28,7 +28,7 @@
 #include <kdebug.h>
 #include <tdeapplication.h>
 
-#include "distdelist.h"
+#include "disklist.h"
 
 #define BLANK ' '
 #define DELIMITER '#'
@@ -497,7 +497,7 @@ void DiskList::replaceDeviceEntry(DiskEntry *disk)
 
 }
 
-#include "distdelist.moc"
+#include "disklist.moc"
 
 
 

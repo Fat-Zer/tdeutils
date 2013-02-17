@@ -183,8 +183,9 @@ TQFile f(FSTAB);
     while (! t.eof()) {
       s=t.readLine();
       s=s.simplifyWhiteSpace();
-      if ( (!s.isEmpty() ) && (s.find(DELIMITER)!=0) ) {
+      if ( (!s.isEmpty() ) && (s.find(DELIMITER)!=0) && (s.find("LABEL=")!=0) ) {
                // not empty or commented out by '#'
+	       // skip LABEL entries as long as kdf can't handle them properly
 	//	kdDebug() << "GOT: [" << s << "]" << endl;
 	disk = new DiskEntry();// TQ_CHECK_PTR(disk);
         disk->setMounted(FALSE);

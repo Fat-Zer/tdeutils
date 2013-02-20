@@ -1119,18 +1119,18 @@ void listKeys::findNextKey()
 
 void listKeys::addToKAB()
 {
-        KABC::Key key;
+        TDEABC::Key key;
 	if (!keysList2->currentItem()) return;
         //TQString email=extractKeyMail(keysList2->currentItem()).stripWhiteSpace();
         TQString email=keysList2->currentItem()->text(1);
 
-        KABC::AddressBook *ab = KABC::StdAddressBook::self();
+        TDEABC::AddressBook *ab = TDEABC::StdAddressBook::self();
         if ( !ab->load() ) {
                 KMessageBox::sorry(this,i18n("Unable to contact the address book. Please check your installation."));
                 return;
         }
 
-	KABC::Addressee::List addresseeList = ab->findByEmail(email);
+	TDEABC::Addressee::List addresseeList = ab->findByEmail(email);
   	kapp->startServiceByDesktopName( "kaddressbook" );
   	DCOPRef call( "kaddressbook", "KAddressBookIface" );
   	if( !addresseeList.isEmpty() ) {
@@ -1144,12 +1144,12 @@ void listKeys::addToKAB()
 /*
 void listKeys::allToKAB()
 {
-        KABC::Key key;
+        TDEABC::Key key;
         TQString email;
         TQStringList keylist;
-        KABC::Addressee a;
+        TDEABC::Addressee a;
 
-        KABC::AddressBook *ab = KABC::StdAddressBook::self();
+        TDEABC::AddressBook *ab = TDEABC::StdAddressBook::self();
         if ( !ab->load() ) {
                 KMessageBox::sorry(this,i18n("Unable to contact the address book. Please check your installation."));
                 return;
@@ -1159,7 +1159,7 @@ void listKeys::allToKAB()
         while( myChild ) {
                 //email=extractKeyMail(myChild).stripWhiteSpace();
                 email=myChild->text(1);
-                KABC::Addressee::List addressees = ab->findByEmail( email );
+                TDEABC::Addressee::List addressees = ab->findByEmail( email );
                 if (addressees.count()==1) {
                         a=addressees.first();
                         KgpgInterface *ks=new KgpgInterface();
@@ -1171,7 +1171,7 @@ void listKeys::allToKAB()
                 //            doSomething( myChild );
                 myChild = myChild->nextSibling();
         }
-        KABC::StdAddressBook::save();
+        TDEABC::StdAddressBook::save();
         if (!keylist.isEmpty())
                 KMessageBox::informationList(this,i18n("The following keys were exported to the address book:"),keylist);
         else

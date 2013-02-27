@@ -78,7 +78,7 @@ namespace KSim
       /**
        * loads a plugin, example:
        * <pre>
-       *   KDesktopFile destdefile("/home/user/foo.desktop");
+       *   KDesktopFile deskfile("/home/user/foo.desktop");
        *   KSim::PluginLoader::self().loadPlugin(deskFile);
        * </pre>
        * you can then use @ref pluginList() to access the plugin, view,

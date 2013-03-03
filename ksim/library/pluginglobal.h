@@ -93,7 +93,7 @@ namespace KSim
        * @return the name of the plugin, NOT the library name
        * @see #libName
        */
-      const TQString &name() const;
+      TQString name() const;
       /**
        * @return the icon of the plugin
        */
@@ -105,7 +105,7 @@ namespace KSim
       /**
        * @return path to the .desktop file
        */
-      const TQString &fileName() const;
+      TQString fileName() const;
       /**
        * @return the plugin object
        */

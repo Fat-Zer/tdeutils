@@ -155,7 +155,7 @@ bool KSim::Plugin::isNull() const
   return !d;
 }
 
-const TQString &KSim::Plugin::name() const
+TQString KSim::Plugin::name() const
 {
   return d ? d->name : TQString();
 }
@@ -170,7 +170,7 @@ TQCString KSim::Plugin::libName() const
   return d ? d->libName : TQCString();
 }
 
-const TQString &KSim::Plugin::fileName() const
+TQString KSim::Plugin::fileName() const
 {
   return d ? d->filename : TQString();
 }

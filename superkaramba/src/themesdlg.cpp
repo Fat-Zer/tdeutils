@@ -220,7 +220,7 @@ void ThemesDlg::getNewStuff()
   TDEConfig* config = TDEGlobal::config();
   config->setGroup("KNewStuff");
   config->writePathEntry("ProvidersUrl",
-      TQString::fromLatin1("http://download.kde.org/tdehotnewstuff/karamba-providers.xml"));
+      TQString::fromLatin1("http://download.kde.org/khotnewstuff/karamba-providers.xml"));
   config->sync();
   m_newStuffStatus = config->entryMap("KNewStuffStatus").keys();
   //This check is b/c KNewStuff will download, throw an error, 

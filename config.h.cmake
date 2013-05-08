@@ -23,6 +23,7 @@
 # ifdef __cplusplus
   }
 #  endif
+#define HAVE_STRLCAT
 #endif
 
 // NOTE: some macros already defined in python.h so if they

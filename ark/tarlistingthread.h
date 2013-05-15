@@ -55,7 +55,8 @@ class TarListingThread: public TQThread
 	
 	private:
 		void processDir( const KTarDirectory *tardir, const TQString & root );
-		
+
+		TQString m_archiveFileName;
 		KArchive *m_archive;
 		TQObject  *m_parent;
 };

@@ -79,29 +79,33 @@ static char *makeAccessString(mode_t mode)
 }
 
 TarListingThread::TarListingThread( TQObject *parent, const TQString& filename )
-	: TQThread(), m_parent( parent )
+	: TQThread(), m_parent( parent ), m_archive(NULL)
 {
 	Q_ASSERT( m_parent );
-	m_archive = new KTar( filename );
+	m_archiveFileName = filename;
 }
 
 TarListingThread::~TarListingThread()
 {
-	delete m_archive;
-	m_archive = 0;
+	if (m_archive) {
+		delete m_archive;
+		m_archive = 0;
+	}
 }
 
 void TarListingThread::run()
 {
+	m_archive = new KTar( m_archiveFileName );
+
 	if (!m_archive->open( IO_ReadOnly ))
 	{
 		ListingEvent *ev = new ListingEvent( TQStringList(), ListingEvent::Error );
 		tqApp->postEvent( m_parent, ev );
 		return;
 	}
-	
+
 	processDir( m_archive->directory(), TQString() );
-	
+
 	// Send an empty TQStringList in an Event to signal the listing end.
 	ListingEvent *ev = new ListingEvent( TQStringList(), ListingEvent::ListingFinished );
 	tqApp->postEvent( m_parent, ev );

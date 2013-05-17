@@ -13,7 +13,7 @@
 #include "sshdlg.h"
 
 
-KDEsshDialog::KDEsshDialog(TQCString host, TQCString user, TQCString stub,
+TDEsshDialog::TDEsshDialog(TQCString host, TQCString user, TQCString stub,
 	TQString prompt, bool enableKeep)
     : KPasswordDialog(Password, enableKeep, 0)
 {
@@ -36,12 +36,12 @@ KDEsshDialog::KDEsshDialog(TQCString host, TQCString user, TQCString stub,
 }
 
 
-KDEsshDialog::~KDEsshDialog()
+TDEsshDialog::~TDEsshDialog()
 {
 }
 
 
-bool KDEsshDialog::checkPassword(const char *password)
+bool TDEsshDialog::checkPassword(const char *password)
 {
     SshProcess proc(m_Host, m_User);
     proc.setStub(m_Stub);

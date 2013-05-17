@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>
 <!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.2-Based Variant V1.1//EN" "dtd/kdex.dtd" [
   <!ENTITY irkick "<application>IRKick</application>">
-  <!ENTITY kdelirc "<application>KDE LIRC</application>">
+  <!ENTITY tdelirc "<application>TDE LIRC</application>">
   <!ENTITY kappname "&irkick;">
   <!ENTITY package "tdeutils">
   <!ENTITY % English "INCLUDE" > <!-- change language only here -->
@@ -11,7 +11,7 @@
 <book lang="&language;">
 <bookinfo>
 
-<title>&irkick;: The KDE LIRC Server Handbook</title>
+<title>&irkick;: The TDE LIRC Server Handbook</title>
 
 <authorgroup>
 <author>
@@ -34,14 +34,14 @@
 
 <legalnotice>&FDLNotice;</legalnotice>
 
-<abstract><para>&kdelirc; is the infrastructure for the KDE's
+<abstract><para>&tdelirc; is the infrastructure for the TDE's
 Infrared Remote Control functionality; &irkick; is the server
 component of that infrastructure.</para></abstract>
 
 <keywordset>
-<keyword>KDE</keyword>
+<keyword>TDE</keyword>
 <keyword>irkick</keyword>
-<keyword>kdelirc</keyword>
+<keyword>tdelirc</keyword>
 <keyword>kcmlirc</keyword>
 <keyword>lirc</keyword>
 </keywordset>
@@ -66,8 +66,8 @@ TDE Control Center or directly from the menu of &irkick;.
 <title>Requirements</title>
 
 <para>
-For the KDELirc framework to be utilised you must have setup a LIRC
-on your KDE machine. If it is properly set up, the &irkick; icon in
+For the TDELirc framework to be utilised you must have setup a LIRC
+on your TDE machine. If it is properly set up, the &irkick; icon in
 the system tray will light up red. If not, it will be grey and crossed
 out.
 </para>
@@ -90,7 +90,7 @@ remote controls.
 </para>
 
 <para>
-Using the right-mouse-button menu, you can configure the KDE infrared remote
+Using the right-mouse-button menu, you can configure the TDE infrared remote
 control framework.
 </para>
 
@@ -99,7 +99,7 @@ control framework.
 <chapter id="credits">
 <title>Credits and Licenses</title>
 
-<para>&kdelirc;: The KDE LIRC Framework Copyright (c) 2004 Gav Wood
+<para>&tdelirc;: The TDE LIRC Framework Copyright (c) 2004 Gav Wood
 <email>gav@kde.org</email>.</para>
 
 <!-- TRANS:CREDIT_FOR_TRANSLATORS -->

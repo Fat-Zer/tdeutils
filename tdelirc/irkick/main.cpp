@@ -29,7 +29,7 @@ extern "C" KDE_EXPORT int kdemain(int argc, char *argv[])
 	TDECmdLineArgs::init( argc, argv, aboutData );
 	KUniqueApplication::addCmdLineOptions();
 	KUniqueApplication app;
-	TDEGlobal::locale()->insertCatalogue( "kdelirc" );
+	TDEGlobal::locale()->insertCatalogue( "tdelirc" );
 	app.disableSessionManagement();
 	IRKick *theIRKick = new IRKick("IRKick");
 

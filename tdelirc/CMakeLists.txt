@@ -12,6 +12,6 @@
 add_subdirectory( icons )
 add_subdirectory( irkick )
 add_subdirectory( kcmlirc )
-add_subdirectory( kdelirc )
+add_subdirectory( tdelirc )
 add_subdirectory( profiles )
 add_subdirectory( remotes )

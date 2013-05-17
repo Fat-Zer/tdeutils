@@ -7,7 +7,7 @@ tdeinit_LTLIBRARIES = irkick.la
 
 CLEANFILES = dummy.cpp
 
-libirkick_common_la_LIBADD = $(LIB_TDECORE) $(LIB_TDEUI) $(LIB_KSYCOCA) ../kdelirc/libkdelirc.la
+libirkick_common_la_LIBADD = $(LIB_TDECORE) $(LIB_TDEUI) $(LIB_KSYCOCA) ../tdelirc/libtdelirc.la
 libirkick_common_la_SOURCES = main.cpp irkick.cpp irkick.skel irkick.stub klircclient.cpp
 
 libirkick_common_la_LDFLAGS = $(all_libraries)
@@ -32,11 +32,11 @@ dummy.cpp:
 #lib_LTLIBRARIES = libkded_irkick.la
 #libkded_irkick_la_SOURCES = irkick.cpp irkick.skel irkick.stub klircclient.cpp
 #libkded_irkick_la_LDFLAGS = $(all_libraries) -module -avoid-version
-#libkded_irkick_la_LIBADD = $(LIB_TDECORE) ../kdelirc/libkdelirc.la
+#libkded_irkick_la_LIBADD = $(LIB_TDECORE) ../tdelirc/libtdelirc.la
 
 noinst_HEADERS = irkick.h klircclient.h irkick_stub.h
 
-INCLUDES = -I$(srcdir)/../kdelirc $(all_includes)
+INCLUDES = -I$(srcdir)/../tdelirc $(all_includes)
 
 KDE_ICON = AUTO
 METASOURCES = AUTO

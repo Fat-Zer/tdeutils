@@ -48,7 +48,7 @@ static TDECmdLineOptions options[] =
 
 int main(int argc, char *argv[])
 {
-    TDEAboutData aboutData("kdessh", I18N_NOOP("TDE ssh"),
+    TDEAboutData aboutData("tdessh", I18N_NOOP("TDE ssh"),
 	    VERSION, I18N_NOOP("Runs a program on a remote host"),
 	    TDEAboutData::License_Artistic,
 	    "Copyright (c) 2000 Geert Jansen");
@@ -169,11 +169,11 @@ int main(int argc, char *argv[])
     TQCString password;
     if (needpw != 0)
     {
-	KDEsshDialog *dlg = new KDEsshDialog(host, user, stub,
+	TDEsshDialog *dlg = new TDEsshDialog(host, user, stub,
 		proc.prompt(), keep && !terminal);
 	dlg->addLine(i18n("Command"), command);
 	int res = dlg->exec();
-	if (res == KDEsshDialog::Rejected)
+	if (res == TDEsshDialog::Rejected)
 	    exit(0);
 	keep = dlg->keep();
 	password = dlg->password();

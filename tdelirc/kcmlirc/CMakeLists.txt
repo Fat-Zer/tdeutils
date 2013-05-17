@@ -12,17 +12,17 @@
 include_directories(
   ${CMAKE_BINARY_DIR}
   ${CMAKE_CURRENT_BINARY_DIR}
-  ${CMAKE_BINARY_DIR}/kdelirc/irkick
+  ${CMAKE_BINARY_DIR}/tdelirc/irkick
   ${CMAKE_CURRENT_SOURCE_DIR}
-  ${CMAKE_SOURCE_DIR}/kdelirc/irkick
-  ${CMAKE_SOURCE_DIR}/kdelirc/kdelirc
+  ${CMAKE_SOURCE_DIR}/tdelirc/irkick
+  ${CMAKE_SOURCE_DIR}/tdelirc/tdelirc
   ${TDE_INCLUDE_DIR}
   ${TQT_INCLUDE_DIRS}
 )
 
 link_directories(
   ${TQT_LIBRARY_DIRS}
-  ${CMAKE_BINARY_DIR}/kdelirc/kdelirc
+  ${CMAKE_BINARY_DIR}/tdelirc/tdelirc
 )
 
 
@@ -34,7 +34,7 @@ tde_add_kpart( kcm_kcmlirc AUTOMOC
     addaction.cpp kcmlirc.skel editactionbase.ui
     editmodebase.ui editmode.cpp editaction.cpp
     modeslist.cpp
-  LINK kdelirc-static tdeui-shared tdeio-shared
+  LINK tdelirc-static tdeui-shared tdeio-shared
   DESTINATION ${PLUGIN_INSTALL_DIR}
 )
 

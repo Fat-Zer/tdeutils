@@ -1,7 +1,7 @@
-kdelirc
+tdelirc
 -------
 
-KDELIRC is a KDE frontend for the Linux Infrared Remote Control system. It has
+TDELIRC is a TDE frontend for the Linux Infrared Remote Control system. It has
 two aims:
 
 1. Provide a control center module for configuration of:
@@ -9,7 +9,7 @@ two aims:
 	b) Actual remote controls installed (i.e. lirc configuration).
 
 2. Provide a system-tray applet to act as a proxy between the LIRC system and
-	KDE (applications), in order to launch DCOP requests (and potentially
+	TDE (applications), in order to launch DCOP requests (and potentially
 	other IPC signals) to applications (and potentially collect/display
 	results).
 
@@ -19,7 +19,7 @@ Nothing but the normal ./configure && make && su -c "make install".
 
 SETUP
 
-For the KDELirc system to work properly, you *must* have lircd configured and
+For the TDELirc system to work properly, you *must* have lircd configured and
 running. If you have already had a Lirc program running, then you most likely
 have Lirc set up properly. If not, be sure that you have a correct kernel module
 loaded for your IR receiver (1) and that the lircd program is running (2).

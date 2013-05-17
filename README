@@ -14,7 +14,7 @@ What it is
                the clipboard
 * charselectapplet: dito, but as a Kicker applet
 * kdepasswd: like 'passwd', a graphical password changer
-* kdessh: front end to ssh
+* tdessh: front end to ssh
 * kdf: like 'df', a graphical free disk space viewer
 * kedit: a simple text editor, without formatting like bold, italics etc
 * kfloppy: format a floppy disks with this app

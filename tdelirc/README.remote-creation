@@ -1,4 +1,4 @@
-How to give your LIRC remote control KDELIRC functionality
+How to give your LIRC remote control TDELIRC functionality
 ==========================================================
 
 by Gav Wood, 2003.
@@ -6,8 +6,8 @@ by Gav Wood, 2003.
 Introduction
 ------------
 
-All LIRC-understandable remote controls automatically function in KDELirc.
-However, to get the advanced (really cool) KDELirc stuff you'll need to create a
+All LIRC-understandable remote controls automatically function in TDELirc.
+However, to get the advanced (really cool) TDELirc stuff you'll need to create a
 remote.xml file for your remote control. The files are simple and easy to create
 so don't be put off.
 
@@ -17,7 +17,7 @@ since LIRC only allows non-spaces, non-symbolic charecters in the remote control
 definition files.
 
 When you're finished your remote.xml, you might want to send it to me
-(gav at kde dot org) for inclusion in the distribution of KDELirc. It may soon
+(gav at kde dot org) for inclusion in the distribution of TDELirc. It may soon
 be possible to distribute the remote.xml files along with the lircd.conf files.
 
 Method
@@ -52,8 +52,8 @@ b) With the hard work out of the way, just start going though each button on the
 remote control. For each button, make sure the "id" attribute is the same as in
 the lircd.conf file.
    For each (common) button, you might also want to specify the class, which will
-help KDELirc match it to any application's action. For a list of all button
-classes, look in the remote.dtd file which comes with KDELirc. If the class type
+help TDELirc match it to any application's action. For a list of all button
+classes, look in the remote.dtd file which comes with TDELirc. If the class type
 is one which encompasses many buttons, for example "number", then you should also
 specify which number it is in the parameter attribute. Currently, this only
 actually applies to "number" - all other classes are simple and do not require a
@@ -120,7 +120,7 @@ to the far less cluttered and simpler:
 		<button id="num0" class="number" parameter="0"/>
 
 That's it - just save it as <id>.remote.xml, where <id> is the ID of the remote
-control (*not* its name but the LIRC id!) and copy it to your KDE remotes data
+control (*not* its name but the LIRC id!) and copy it to your TDE remotes data
 directory (~/.trinity/share/apps/remotes).
 
    You'll probably need to restart control center before the remote definition

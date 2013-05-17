@@ -15,14 +15,14 @@ include_directories(
   ${CMAKE_BINARY_DIR}
   ${CMAKE_CURRENT_BINARY_DIR}
   ${CMAKE_CURRENT_SOURCE_DIR}
-  ${CMAKE_SOURCE_DIR}/kdelirc/kdelirc
+  ${CMAKE_SOURCE_DIR}/tdelirc/tdelirc
   ${TDE_INCLUDE_DIR}
   ${TQT_INCLUDE_DIRS}
 )
 
 link_directories(
   ${TQT_LIBRARY_DIRS}
-  ${CMAKE_BINARY_DIR}/kdelirc/kdelirc
+  ${CMAKE_BINARY_DIR}/tdelirc/tdelirc
 )
 
 
@@ -31,7 +31,7 @@ link_directories(
 tde_add_library( irkick_common STATIC_PIC AUTOMOC
   SOURCES irkick.cpp irkick.skel
     irkick.stub klircclient.cpp
-  LINK tdeui-shared kdelirc-static
+  LINK tdeui-shared tdelirc-static
 )
 
 

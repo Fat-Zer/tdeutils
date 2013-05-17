@@ -11,16 +11,16 @@
 
 #include <kpassdlg.h>
 
-class KDEsshDialog
+class TDEsshDialog
     : public KPasswordDialog
 {
     Q_OBJECT
   
 
 public:
-    KDEsshDialog(TQCString host, TQCString user, TQCString stub, 
+    TDEsshDialog(TQCString host, TQCString user, TQCString stub, 
 	    TQString prompt, bool enableKeep);
-    ~KDEsshDialog();
+    ~TDEsshDialog();
 
 protected:
     bool checkPassword(const char *password);

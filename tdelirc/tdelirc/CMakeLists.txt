@@ -21,16 +21,12 @@ link_directories(
   ${TQT_LIBRARY_DIRS}
 )
 
-add_definitions(
-  -DQT_NO_CAST_ASCII
-)
 
+##### tdelirc (static) ##########################
 
-##### kdessh (executable) #######################
-
-tde_add_executable( kdessh AUTOMOC
-  SOURCES kdessh.cpp sshdlg.cpp
-  LINK tdeui-shared tdesu-shared
-  DESTINATION ${BIN_INSTALL_DIR}
+tde_add_library( tdelirc STATIC_PIC
+  SOURCES iraction.cpp arguments.cpp
+    iractions.cpp prototype.cpp modes.cpp
+    mode.cpp profileserver.cpp remoteserver.cpp
 )
 

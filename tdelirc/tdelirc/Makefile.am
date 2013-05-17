@@ -1,13 +1,13 @@
 ####### tdevelop will overwrite this part!!! (begin)##########
-noinst_LTLIBRARIES = libkdelirc.la
+noinst_LTLIBRARIES = libtdelirc.la
 
 noinst_HEADERS = iraction.h arguments.h iractions.h prototype.h modes.h mode.h profileserver.h remoteserver.h
 
-libkdelirc_la_SOURCES = iraction.cpp arguments.cpp iractions.cpp prototype.cpp modes.cpp mode.cpp profileserver.cpp remoteserver.cpp
-libkdelirc_la_LIBADD = $(LIB_QT) $(LIB_TDECORE) $(LIB_TDEUI) $(LIBSOCKET)
+libtdelirc_la_SOURCES = iraction.cpp arguments.cpp iractions.cpp prototype.cpp modes.cpp mode.cpp profileserver.cpp remoteserver.cpp
+libtdelirc_la_LIBADD = $(LIB_QT) $(LIB_TDECORE) $(LIB_TDEUI) $(LIBSOCKET)
 
 ####### tdevelop will overwrite this part!!! (end)############
-# These paths are KDE specific. Use them:
+# These paths are TDE specific. Use them:
 # kde_appsdir         Where your application's menu entry (.desktop) should go to.
 # kde_icondir         Where your icon should go to - better use KDE_ICON.
 # kde_sounddir        Where your sounds should go to.
@@ -25,16 +25,16 @@ libkdelirc_la_LIBADD = $(LIB_QT) $(LIB_TDECORE) $(LIB_TDEUI) $(LIBSOCKET)
 # kde_bindir          Where executables should go to. Use bin_PROGRAMS or bin_SCRIPTS.
 # kde_libdir          Where shared libraries should go to. Use lib_LTLIBRARIES.
 # kde_moduledir       Where modules (e.g. parts) should go to. Use kde_module_LTLIBRARIES.
-# kde_styledir        Where Qt/KDE widget styles should go to (new in KDE 3).
+# kde_styledir        Where Qt/TDE widget styles should go to (new in KDE 3).
 # kde_designerdir     Where Qt Designer plugins should go to (new in KDE 3).
 
-# set the include path for X, qt and KDE
+# set the include path for X, qt and TDE
 INCLUDES = $(all_includes)
 
 METASOURCES = AUTO
 
 # the library search path. 
-libkdelirc_la_LDFLAGS = $(all_libraries) $(KDE_RPATH) $(LIB_QT) -lDCOP $(LIB_TDECORE) $(LIB_TDEUI) -ltdefx $(LIB_KIO) -ltdetexteditor
+libtdelirc_la_LDFLAGS = $(all_libraries) $(KDE_RPATH) $(LIB_QT) -lDCOP $(LIB_TDECORE) $(LIB_TDEUI) -ltdefx $(LIB_KIO) -ltdetexteditor
 
 # Uncomment the following two lines if you add a ui.rc file for your application to make use of
 # KDE´s XML GUI builing
@@ -42,4 +42,4 @@ libkdelirc_la_LDFLAGS = $(all_libraries) $(KDE_RPATH) $(LIB_QT) -lDCOP $(LIB_TDE
 #rc_DATA = irkickui.rc
 
 messages:
-	$(XGETTEXT) *.cpp *.h -o $(podir)/kdelirc.pot
+	$(XGETTEXT) *.cpp *.h -o $(podir)/tdelirc.pot

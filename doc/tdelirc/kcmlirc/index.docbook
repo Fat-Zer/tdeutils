@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>
 <!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.2-Based Variant V1.1//EN" "dtd/kdex.dtd" [
-  <!ENTITY kcmlirc "<application>KDE LIRC Control Center Module</application>">
-  <!ENTITY kdelirc "<application>KDE LIRC</application>">
+  <!ENTITY kcmlirc "<application>TDE LIRC Control Center Module</application>">
+  <!ENTITY tdelirc "<application>TDE LIRC</application>">
   
   <!ENTITY % English "INCLUDE" > <!-- change language only here -->
   <!ENTITY % addindex "IGNORE">
@@ -10,7 +10,7 @@
 <book lang="&language;">
 <bookinfo>
 
-<title>KDE Infrared Remote Control Configuration</title>
+<title>TDE Infrared Remote Control Configuration</title>
 
 <authorgroup>
 <author>
@@ -33,13 +33,13 @@
 
 <legalnotice>&FDLNotice;</legalnotice>
 
-<abstract><para>&kdelirc; configuration: The infrastructure for the KDE's
+<abstract><para>&tdelirc; configuration: The infrastructure for the TDE's
 Infrared Remote Control functionality.</para></abstract>
 
 <keywordset>
-<keyword>KDE</keyword>
+<keyword>TDE</keyword>
 <keyword>irkick</keyword>
-<keyword>kdelirc</keyword>
+<keyword>tdelirc</keyword>
 <keyword>kcmlirc</keyword>
 <keyword>lirc</keyword>
 </keywordset>
@@ -56,8 +56,8 @@ Infrared Remote Control functionality.</para></abstract>
 <title>Requirements</title>
 
 <para>
-For the KDELirc framework to be utilised you must have setup a LIRC
-on your KDE machine. If it is properly set up, the &kdelirc; icon in
+For the TDELirc framework to be utilised you must have setup a LIRC
+on your TDE machine. If it is properly set up, the &tdelirc; icon in
 the system tray (show icon here) will light up red. If not, it will
 be grey and crossed out.
 </para>
@@ -88,7 +88,7 @@ Each remote control can be in at most one mode at once (it may also be in no mod
 </para>
 
 <para>
-The list contains any remote controls detected on your system. Modes may be added and removed by selecting the desired remote control and using the buttons directly below the list Add, Remove. Modes may be renamed "inline" in the standard KDE fashion by first selecting the mode in the list box, and then clicking it again after a short pause. The Edit button allows mode names to be edited, and also allows you to define an icon that will show up in the system tray when that mode is entered.
+The list contains any remote controls detected on your system. Modes may be added and removed by selecting the desired remote control and using the buttons directly below the list Add, Remove. Modes may be renamed "inline" in the standard TDE fashion by first selecting the mode in the list box, and then clicking it again after a short pause. The Edit button allows mode names to be edited, and also allows you to define an icon that will show up in the system tray when that mode is entered.
 </para>
 
 </sect1>
@@ -97,7 +97,7 @@ The list contains any remote controls detected on your system. Modes may be adde
 <title>Action-Button Bindings</title>
 
 <para>
-An action/button binding ("action") is a connection between a button press and an effect. The effect may be to switch modes, to start a KDE program or to execute a function in a KDE program (using DCOP).
+An action/button binding ("action") is a connection between a button press and an effect. The effect may be to switch modes, to start a TDE program or to execute a function in a TDE program (using DCOP).
 </para>
 
 <para>
@@ -109,7 +109,7 @@ To add an action/button binding simply use the Add button. Removal may be perfor
 </para>
 
 <para>
-Actions may also be "automatically" populated. This handles the instance when you have a supported remote control and you wish to map its buttons to a supported application's functions. &kdelirc; can attempt to match buttons to functions for you; this behaviour may have to be tweaked, however.
+Actions may also be "automatically" populated. This handles the instance when you have a supported remote control and you wish to map its buttons to a supported application's functions. &tdelirc; can attempt to match buttons to functions for you; this behaviour may have to be tweaked, however.
 </para>
 
 </sect1>
@@ -118,7 +118,7 @@ Actions may also be "automatically" populated. This handles the instance when yo
 <title>Loaded Extensions</title>
 
 <para>
-There is another tab available named "Loaded Extensions". This details the applications and remote controls that &kdelirc; recognises. &kdelirc; can also use unsupported remote controls and applications, but the Auto-Populate function will not work as well (if at all).
+There is another tab available named "Loaded Extensions". This details the applications and remote controls that &tdelirc; recognises. &tdelirc; can also use unsupported remote controls and applications, but the Auto-Populate function will not work as well (if at all).
 </para>
 
 <para>
@@ -132,7 +132,7 @@ By clicking on an entry you can see information on it such as the author's detai
 <chapter id="credits">
 <title>Credits and Licenses</title>
 
-<para>&kdelirc; KDE LIRC Framework Copyright (c) 2004 Gav Wood
+<para>&tdelirc; TDE LIRC Framework Copyright (c) 2004 Gav Wood
 <email>gav@kde.org</email>.</para>
 
 <para>Documentation Copyright (c) 2004 by Gav Wood

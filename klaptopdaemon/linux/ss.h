@@ -15,7 +15,7 @@
  * <dahinds@users.sourceforge.net>.  Portions created by David A. Hinds
  * are Copyright (C) 1999 David A. Hinds.  All Rights Reserved.
  *
- * Contributor:  Apple Computer, Inc.  Portions � 2000 Apple Computer, 
+ * Contributor:  Apple Computer, Inc.  Portions (C) 2000 Apple Computer, 
  * Inc. All rights reserved.
  *
  * Alternatively, the contents of this file may be used under the

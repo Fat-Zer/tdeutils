@@ -64,7 +64,7 @@ CharSelectApplet::CharSelectApplet(const TQString& configFile, Type type, int ac
     c->setGroup("General");
     cell_width = c->readNumEntry("CellWidth", cell_width);
     cell_height = c->readNumEntry("CellHeight", cell_height);
-    TQString characters = c->readEntry("Characters", "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß©ï¿½ï¿½");
+    TQString characters = c->readEntry("Characters", "ÄäÖöÜüß©®§");
 
     // setup layout
     TQHBoxLayout *_layout = new TQHBoxLayout(this);

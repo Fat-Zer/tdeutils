@@ -427,13 +427,13 @@ void TDEBufferColumn::paintPositions( TQPainter *P, int Line, KSection Pos )
     // falls Marking nicht mehr gebuffert und noch zu erwarten
     if( HasMarking && Marking.endsBefore(IndizesPart.start()) )
     {
-      // erhebe nï¿½chste Markierung im Bereich
+      // erhebe nächste Markierung im Bereich
       HasMarking = isMarked( IndizesPart, &Marking, &MarkingFlag );
     }
     // falls Selection nicht mehr gebuffert und noch zu erwarten
     if( HasSelection && Selection.endsBefore(IndizesPart.start()) )
     {
-      // erhebe nï¿½chste Selection im Bereich
+      // erhebe nächste Selection im Bereich
       HasSelection = isSelected( IndizesPart, &Selection, &SelectionFlag );
     }
 

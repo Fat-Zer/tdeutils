@@ -1,3 +1,4 @@
-tdelirciconsdir = $(kde_datadir)/irkick/icons
+SUBDIRS = actions
+
 tdelircicons_ICON = AUTO
 

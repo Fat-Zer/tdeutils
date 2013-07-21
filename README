@@ -13,7 +13,7 @@ What it is
 * kcharselect: select special characters from any fonts and put them into
                the clipboard
 * charselectapplet: dito, but as a Kicker applet
-* kdepasswd: like 'passwd', a graphical password changer
+* tdepasswd: like 'passwd', a graphical password changer - moved to tdebase
 * tdessh: front end to ssh
 * kdf: like 'df', a graphical free disk space viewer
 * kedit: a simple text editor, without formatting like bold, italics etc

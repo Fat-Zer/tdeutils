@@ -130,7 +130,7 @@ AcpiConfig::AcpiConfig (TQWidget * parent, const char *name)
 				"application set up to help change ACPI states, there are two "
 				"ways you can enable this application, either make the file "
 				"/proc/acpi/sleep writeable by anyone every time your system boots "
-				"or use the button below to make the KDE ACPI helper application "
+				"or use the button below to make the TDE ACPI helper application "
 				"set-uid root"), this );
     tmp_label->setAlignment( TQt::WordBreak );
     top_layout->addWidget( tmp_label );

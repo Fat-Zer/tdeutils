@@ -123,7 +123,7 @@ ApmConfig::ApmConfig (TQWidget * parent, const char *name)
     	connect( enableSoftwareSuspendHibernate, TQT_SIGNAL(clicked()), this, TQT_SLOT(configChanged()) );
 	tmp_label = new TQLabel( i18n("If the above box is disabled then you need to be logged in "
 				"as root or need a helper application to invoke the Software "
-				"Suspend utility - KDE provides a utility to do this, if you "
+				"Suspend utility - TDE provides a utility to do this, if you "
 				"wish to use it you must make it set-uid root, the button "
 				"below will do this for you"), this );
 	tmp_label->setAlignment( TQt::WordBreak );

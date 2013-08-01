@@ -2863,7 +2863,7 @@ int laptop_portable::has_hibernation()
 //
 KActiveLabel *laptop_portable::no_power_management_explanation(TQWidget *parent)
 {
-	KActiveLabel* explain = new KActiveLabel(i18n("Your computer or operating system is not supported by the current version of the\nKDE laptop control panels. If you want help porting these panels to work with it\nplease contact paul@taniwha.com."), parent);
+	KActiveLabel* explain = new KActiveLabel(i18n("Your computer or operating system is not supported by the current version of the\nTDE laptop control panels. If you want help porting these panels to work with it\nplease contact paul@taniwha.com."), parent);
 	// INSERT HERE
 	return(explain);
 }

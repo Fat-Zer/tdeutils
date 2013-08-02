@@ -17,7 +17,7 @@ cmake_minimum_required( VERSION 2.8 )
 project( tdeutils )
 
 set( PACKAGE tdeutils )
-set( VERSION R14 )
+set( VERSION R14.0.0 )
 
 
 ##### include essential cmake modules ###########

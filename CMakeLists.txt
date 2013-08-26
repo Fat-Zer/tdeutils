@@ -123,7 +123,7 @@ option( BUILD_KMILO "Build kmilo" ${BUILD_ALL} )
 option( BUILD_KREGEXPEDITOR "Build kregexpeditor" ${BUILD_ALL} )
 option( BUILD_KSIM "Build ksim" ${BUILD_ALL} )
 option( BUILD_KTIMER "Build ktimer" ${BUILD_ALL} )
-option( BUILD_KWALLET "Build tdewallet" ${BUILD_ALL} )
+option( BUILD_TDEWALLET "Build tdewallet" ${BUILD_ALL} )
 
 option( BUILD_SUPERKARAMBA "Build superkaramba" ${BUILD_ALL} )
 
@@ -173,7 +173,7 @@ tde_conditional_add_subdirectory( BUILD_KMILO kmilo )
 tde_conditional_add_subdirectory( BUILD_KREGEXPEDITOR kregexpeditor )
 tde_conditional_add_subdirectory( BUILD_KSIM ksim )
 tde_conditional_add_subdirectory( BUILD_KTIMER ktimer )
-tde_conditional_add_subdirectory( BUILD_KWALLET tdewallet )
+tde_conditional_add_subdirectory( BUILD_TDEWALLET tdewallet )
 tde_conditional_add_subdirectory( BUILD_SUPERKARAMBA superkaramba )
 
 

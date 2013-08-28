@@ -25,19 +25,19 @@
 #include <tqptrlist.h>
 
 class KSystemTray;
-class KWalletIconView;
+class TDEWalletIconView;
 class TQIconViewItem;
 class DCOPRef;
 
 
-class KWalletManager : public TDEMainWindow, public DCOPObject {
+class TDEWalletManager : public TDEMainWindow, public DCOPObject {
 	Q_OBJECT
 //	
 	K_DCOP
 
 	public:
-		KWalletManager(TQWidget *parent = 0, const char* name = 0, WFlags f = 0);
-		virtual ~KWalletManager();
+		TDEWalletManager(TQWidget *parent = 0, const char* name = 0, WFlags f = 0);
+		virtual ~TDEWalletManager();
 
                 TQPixmap loadSystemTrayIcon(const TQString &icon);
 
@@ -76,7 +76,7 @@ class KWalletManager : public TDEMainWindow, public DCOPObject {
 	private:
 		KSystemTray *_tray;
 		bool _shuttingDown;
-		KWalletIconView *_iconView;
+		TDEWalletIconView *_iconView;
 		DCOPRef *_dcopRef;
 		TQPtrList<TDEMainWindow> _windows;
 		bool _tdewalletdLaunch;

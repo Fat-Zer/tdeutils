@@ -30,17 +30,17 @@ class TDEAction;
 class TQIconViewItem;
 class TQListViewItem;
 class TQCheckBox;
-class KWalletFolderIconView;
-class KWalletEntryList;
+class TDEWalletFolderIconView;
+class TDEWalletEntryList;
 class KWMapEditor;
 
-class KWalletEditor : public TDEMainWindow {
+class TDEWalletEditor : public TDEMainWindow {
 	Q_OBJECT
   
 
 	public:
-		KWalletEditor(const TQString& wallet, bool isPath, TQWidget *parent = 0, const char* name = 0);
-		virtual ~KWalletEditor();
+		TDEWalletEditor(const TQString& wallet, bool isPath, TQWidget *parent = 0, const char* name = 0);
+		virtual ~TDEWalletEditor();
 
 		bool isOpen() const { return _w != 0L; }
 
@@ -92,9 +92,9 @@ class KWalletEditor : public TDEMainWindow {
 	private:
 		void createActions();
 		bool _nonLocal;
-		KWallet::Wallet *_w;
+		TDEWallet::Wallet *_w;
 		WalletWidget *_ww;
-		KWalletEntryList *_entryList;
+		TDEWalletEntryList *_entryList;
 		bool _walletIsOpen;
 		TDEAction *_newFolderAction, *_deleteFolderAction;
 		TDEAction *_passwordAction, *_exportAction, *_saveAsAction, *_mergeAction, *_importAction;

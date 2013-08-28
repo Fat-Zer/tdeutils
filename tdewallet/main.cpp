@@ -66,7 +66,7 @@ int main(int argc, char **argv) {
 
 	MyApp a;
 
-	KWalletManager wm;
+	TDEWalletManager wm;
 	wm.setCaption(i18n("TDE Wallet Manager"));
 
 	a.setMainWidget(&wm);

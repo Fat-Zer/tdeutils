@@ -37,11 +37,11 @@
 #include <tqpushbutton.h>
 #include <tqspinbox.h>
 
-typedef KGenericFactory<KWalletConfig, TQWidget> KWalletFactory;
-K_EXPORT_COMPONENT_FACTORY(kcm_tdewallet, KWalletFactory("kcmtdewallet"))
+typedef KGenericFactory<TDEWalletConfig, TQWidget> TDEWalletFactory;
+K_EXPORT_COMPONENT_FACTORY(kcm_tdewallet, TDEWalletFactory("kcmtdewallet"))
 
-KWalletConfig::KWalletConfig(TQWidget *parent, const char *name, const TQStringList&)
-: TDECModule(KWalletFactory::instance(), parent, name) {
+TDEWalletConfig::TDEWalletConfig(TQWidget *parent, const char *name, const TQStringList&)
+: TDECModule(TDEWalletFactory::instance(), parent, name) {
 
 	TDEAboutData *about =
 		new TDEAboutData(I18N_NOOP("kcmtdewallet"),
@@ -83,13 +83,13 @@ KWalletConfig::KWalletConfig(TQWidget *parent, const char *name, const TQStringL
 }
 
 
-KWalletConfig::~KWalletConfig() {
+TDEWalletConfig::~TDEWalletConfig() {
 	delete _cfg;
 	_cfg = 0L;
 }
 
 
-void KWalletConfig::updateWalletLists() {
+void TDEWalletConfig::updateWalletLists() {
 	TQString p1, p2;
 	p1 = _wcw->_localWallet->currentText();
 	p2 = _wcw->_defaultWallet->currentText();
@@ -97,7 +97,7 @@ void KWalletConfig::updateWalletLists() {
 	_wcw->_localWallet->clear();
 	_wcw->_defaultWallet->clear();
 
-	TQStringList wl = KWallet::Wallet::walletList();
+	TQStringList wl = TDEWallet::Wallet::walletList();
 	_wcw->_localWallet->insertStringList(wl);
 	_wcw->_defaultWallet->insertStringList(wl);
 
@@ -111,7 +111,7 @@ void KWalletConfig::updateWalletLists() {
 }
 
 
-TQString KWalletConfig::newWallet() {
+TQString TDEWalletConfig::newWallet() {
 	bool ok;
 
 	TQString n = KInputDialog::getText(i18n("New Wallet"),
@@ -124,7 +124,7 @@ TQString KWalletConfig::newWallet() {
 		return TQString();
 	}
 
-	KWallet::Wallet *w = KWallet::Wallet::openWallet(n);
+	TDEWallet::Wallet *w = TDEWallet::Wallet::openWallet(n);
 	if (!w) {
 		return TQString();
 	}
@@ -134,7 +134,7 @@ TQString KWalletConfig::newWallet() {
 }
 
 
-void KWalletConfig::newLocalWallet() {
+void TDEWalletConfig::newLocalWallet() {
 	TQString n = newWallet();
 	if (n.isEmpty()) {
 		return;
@@ -148,7 +148,7 @@ void KWalletConfig::newLocalWallet() {
 }
 
 
-void KWalletConfig::newNetworkWallet() {
+void TDEWalletConfig::newNetworkWallet() {
 	TQString n = newWallet();
 	if (n.isEmpty()) {
 		return;
@@ -162,7 +162,7 @@ void KWalletConfig::newNetworkWallet() {
 }
 
 
-void KWalletConfig::launchManager() {
+void TDEWalletConfig::launchManager() {
 	if (!DCOPClient::mainClient()->isApplicationRegistered("tdewalletmanager")) {
 		TDEApplication::startServiceByDesktopName("tdewalletmanager_show");
 	} else {
@@ -173,15 +173,15 @@ void KWalletConfig::launchManager() {
 }
 
 
-void KWalletConfig::configChanged() {
+void TDEWalletConfig::configChanged() {
 	emit changed(true);
 }
 
-void KWalletConfig::load() {
+void TDEWalletConfig::load() {
 	load( false );
 }
 
-void KWalletConfig::load(bool useDefaults) {
+void TDEWalletConfig::load(bool useDefaults) {
 	TDEConfigGroup config(_cfg, "Wallet");
 	config.setReadDefaults( useDefaults );
 	_wcw->_enabled->setChecked(config.readBoolEntry("Enabled", true));
@@ -234,7 +234,7 @@ void KWalletConfig::load(bool useDefaults) {
 }
 
 
-void KWalletConfig::save() {
+void TDEWalletConfig::save() {
 	TDEConfigGroup config(_cfg, "Wallet");
 	config.writeEntry("Enabled", _wcw->_enabled->isChecked());
 	config.writeEntry("Launch Manager", _wcw->_launchManager->isChecked());
@@ -290,17 +290,17 @@ void KWalletConfig::save() {
 }
 
 
-void KWalletConfig::defaults() {
+void TDEWalletConfig::defaults() {
 	load( true );
 }
 
 
-TQString KWalletConfig::quickHelp() const {
+TQString TDEWalletConfig::quickHelp() const {
 	return i18n("This configuration module allows you to configure the KDE wallet system.");
 }
 
 
-void KWalletConfig::contextMenuRequested(TQListViewItem *item, const TQPoint& pos, int col) {
+void TDEWalletConfig::contextMenuRequested(TQListViewItem *item, const TQPoint& pos, int col) {
 	Q_UNUSED(col)
 	if (item && item->parent()) {
 		TDEPopupMenu *m = new TDEPopupMenu(this);
@@ -311,7 +311,7 @@ void KWalletConfig::contextMenuRequested(TQListViewItem *item, const TQPoint& po
 }
 
 
-void KWalletConfig::deleteEntry() {
+void TDEWalletConfig::deleteEntry() {
 	TQListViewItem *item = _wcw->_accessList->selectedItem();
 	if (item) {
 		delete item;

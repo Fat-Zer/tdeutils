@@ -62,7 +62,7 @@
 #include <assert.h>
 #include <stdlib.h>
 
-KWalletEditor::KWalletEditor(const TQString& wallet, bool isPath, TQWidget *parent, const char *name)
+TDEWalletEditor::TDEWalletEditor(const TQString& wallet, bool isPath, TQWidget *parent, const char *name)
 : TDEMainWindow(parent, name), _walletName(wallet), _nonLocal(isPath) {
 	_newWallet = false;
 	_ww = new WalletWidget(this, "Wallet Widget");
@@ -71,7 +71,7 @@ KWalletEditor::KWalletEditor(const TQString& wallet, bool isPath, TQWidget *pare
 	TQVBoxLayout *box = new TQVBoxLayout(_ww->_entryListFrame);
 	box->setSpacing( KDialog::spacingHint() );
 	box->setMargin( KDialog::marginHint() );
-	_entryList = new KWalletEntryList(_ww->_entryListFrame, "Wallet Entry List");
+	_entryList = new TDEWalletEntryList(_ww->_entryListFrame, "Wallet Entry List");
 	box->addWidget(new TDEListViewSearchLineWidget(_entryList, _ww->_entryListFrame));
 	box->addWidget(_entryList);
 
@@ -116,7 +116,7 @@ KWalletEditor::KWalletEditor(const TQString& wallet, bool isPath, TQWidget *pare
 
 	_walletIsOpen = false;
 
-	_w = KWallet::Wallet::openWallet(wallet, winId(), isPath ? KWallet::Wallet::Path : KWallet::Wallet::Asynchronous);
+	_w = TDEWallet::Wallet::openWallet(wallet, winId(), isPath ? TDEWallet::Wallet::Path : TDEWallet::Wallet::Asynchronous);
 	if (_w) {
 		connect(_w, TQT_SIGNAL(walletOpened(bool)), this, TQT_SLOT(walletOpened(bool)));
 		connect(_w, TQT_SIGNAL(walletClosed()), this, TQT_SLOT(walletClosed()));
@@ -136,7 +136,7 @@ KWalletEditor::KWalletEditor(const TQString& wallet, bool isPath, TQWidget *pare
 	TQTimer::singleShot(0, this, TQT_SLOT(layout()));
 }
 
-KWalletEditor::~KWalletEditor() {
+TDEWalletEditor::~TDEWalletEditor() {
 	emit editorClosed(this);
 	delete _newFolderAction;
 	_newFolderAction = 0L;
@@ -145,11 +145,11 @@ KWalletEditor::~KWalletEditor() {
 	delete _w;
 	_w = 0L;
 	if (_nonLocal) {
-		KWallet::Wallet::closeWallet(_walletName, true);
+		TDEWallet::Wallet::closeWallet(_walletName, true);
 	}
 }
 
-void KWalletEditor::layout() {
+void TDEWalletEditor::layout() {
 	TQValueList<int> sz = _ww->_splitter->sizes();
 	int sum = sz[0] + sz[1];
 	sz[0] = sum/2;
@@ -157,7 +157,7 @@ void KWalletEditor::layout() {
 	_ww->_splitter->setSizes(sz);
 }
 
-void KWalletEditor::createActions() {
+void TDEWalletEditor::createActions() {
 	_newFolderAction = new TDEAction(i18n("&New Folder..."), "folder_new",
 			0, TQT_TQOBJECT(this), TQT_SLOT(createFolder()), actionCollection(),
 			"create_folder");
@@ -209,7 +209,7 @@ actionCollection());
 }
 
 
-void KWalletEditor::walletClosed() {
+void TDEWalletEditor::walletClosed() {
 	delete _w;
 	_walletIsOpen = false;
 	_w = 0L;
@@ -221,12 +221,12 @@ void KWalletEditor::walletClosed() {
 }
 
 
-void KWalletEditor::updateFolderList(bool checkEntries) {
+void TDEWalletEditor::updateFolderList(bool checkEntries) {
 	TQStringList fl = _w->folderList();
 	TQPtrStack<TQListViewItem> trash;
 
 	for (TQListViewItem *i = _entryList->firstChild(); i; i = i->nextSibling()) {
-		KWalletFolderItem *fi = dynamic_cast<KWalletFolderItem *>(i);
+		TDEWalletFolderItem *fi = dynamic_cast<TDEWalletFolderItem *>(i);
 		if (!fi) {
 			continue;
 		}
@@ -248,26 +248,26 @@ void KWalletEditor::updateFolderList(bool checkEntries) {
 
 		_w->setFolder(*i);
 		TQStringList entries = _w->entryList();
-		KWalletFolderItem *item = new KWalletFolderItem(_w,_entryList,
+		TDEWalletFolderItem *item = new TDEWalletFolderItem(_w,_entryList,
 			*i, entries.count());
 
-		KWalletContainerItem *pi = new KWalletContainerItem(item, i18n("Passwords"),KWallet::Wallet::Password);
-		KWalletContainerItem *mi = new KWalletContainerItem(item, i18n("Maps"),KWallet::Wallet::Map);
-		KWalletContainerItem *bi = new KWalletContainerItem(item, i18n("Binary Data"),KWallet::Wallet::Stream);
-		KWalletContainerItem *ui = new KWalletContainerItem(item, i18n("Unknown"),KWallet::Wallet::Unknown);
+		TDEWalletContainerItem *pi = new TDEWalletContainerItem(item, i18n("Passwords"),TDEWallet::Wallet::Password);
+		TDEWalletContainerItem *mi = new TDEWalletContainerItem(item, i18n("Maps"),TDEWallet::Wallet::Map);
+		TDEWalletContainerItem *bi = new TDEWalletContainerItem(item, i18n("Binary Data"),TDEWallet::Wallet::Stream);
+		TDEWalletContainerItem *ui = new TDEWalletContainerItem(item, i18n("Unknown"),TDEWallet::Wallet::Unknown);
 
 		for (TQStringList::Iterator j = entries.begin(); j != entries.end(); ++j) {
 			switch (_w->entryType(*j)) {
-				case KWallet::Wallet::Password:
-					new KWalletEntryItem(_w, pi, *j);
+				case TDEWallet::Wallet::Password:
+					new TDEWalletEntryItem(_w, pi, *j);
 					break;
-				case KWallet::Wallet::Stream:
-					new KWalletEntryItem(_w, bi, *j);
+				case TDEWallet::Wallet::Stream:
+					new TDEWalletEntryItem(_w, bi, *j);
 					break;
-				case KWallet::Wallet::Map:
-					new KWalletEntryItem(_w, mi, *j);
+				case TDEWallet::Wallet::Map:
+					new TDEWalletEntryItem(_w, mi, *j);
 					break;
-				case KWallet::Wallet::Unknown:
+				case TDEWallet::Wallet::Unknown:
 				default:
 					new TQListViewItem(ui, *j);
 					break;
@@ -284,11 +284,11 @@ void KWalletEditor::updateFolderList(bool checkEntries) {
 	}
 }
 
-void KWalletEditor::deleteFolder() {
+void TDEWalletEditor::deleteFolder() {
 	if (_w) {
 		TQListViewItem *i = _entryList->currentItem();
 		if (i) {
-			KWalletFolderItem *fi = dynamic_cast<KWalletFolderItem *>(i);
+			TDEWalletFolderItem *fi = dynamic_cast<TDEWalletFolderItem *>(i);
 			if (!fi) {
 				return;
 			}
@@ -310,7 +310,7 @@ void KWalletEditor::deleteFolder() {
 }
 
 
-void KWalletEditor::createFolder() {
+void TDEWalletEditor::createFolder() {
 	if (_w) {
 		TQString n;
 		bool ok;
@@ -342,18 +342,18 @@ void KWalletEditor::createFolder() {
 }
 
 
-void KWalletEditor::saveEntry() {
+void TDEWalletEditor::saveEntry() {
 	int rc = 1;
 	TQListViewItem *item = _entryList->currentItem();
 	_ww->_saveChanges->setEnabled(false);
 	_ww->_undoChanges->setEnabled(false);
 
 	if (item && _w && item->parent()) {
-		KWalletContainerItem *ci = dynamic_cast<KWalletContainerItem*>(item->parent());
+		TDEWalletContainerItem *ci = dynamic_cast<TDEWalletContainerItem*>(item->parent());
 		if (ci) {
-			if (ci->type() == KWallet::Wallet::Password) {
+			if (ci->type() == TDEWallet::Wallet::Password) {
 				rc = _w->writePassword(item->text(0), _ww->_passwordValue->text());
-			} else if (ci->type() == KWallet::Wallet::Map) {
+			} else if (ci->type() == TDEWallet::Wallet::Map) {
 				_mapEditor->saveMap();
 				rc = _w->writeMap(item->text(0), _currentMap);
 			} else {
@@ -370,34 +370,34 @@ void KWalletEditor::saveEntry() {
 }
 
 
-void KWalletEditor::restoreEntry() {
+void TDEWalletEditor::restoreEntry() {
 	entrySelectionChanged(_entryList->currentItem());
 }
 
 
-void KWalletEditor::entryEditted() {
+void TDEWalletEditor::entryEditted() {
 	_ww->_saveChanges->setEnabled(true);
 	_ww->_undoChanges->setEnabled(true);
 }
 
 
-void KWalletEditor::entrySelectionChanged(TQListViewItem *item) {
-	KWalletContainerItem *ci = 0L;
-	KWalletFolderItem *fi = 0L;
+void TDEWalletEditor::entrySelectionChanged(TQListViewItem *item) {
+	TDEWalletContainerItem *ci = 0L;
+	TDEWalletFolderItem *fi = 0L;
 
 	switch (item->rtti()) {
-		case KWalletEntryItemClass:
-			ci = dynamic_cast<KWalletContainerItem*>(item->parent());
+		case TDEWalletEntryItemClass:
+			ci = dynamic_cast<TDEWalletContainerItem*>(item->parent());
 			if (!ci) {
 				return;
 			}
-			fi = dynamic_cast<KWalletFolderItem*>(ci->parent());
+			fi = dynamic_cast<TDEWalletFolderItem*>(ci->parent());
 			if (!fi) {
 				return;
 			}
 			_w->setFolder(fi->name());
 			_deleteFolderAction->setEnabled(false);
-			if (ci->type() == KWallet::Wallet::Password) {
+			if (ci->type() == TDEWallet::Wallet::Password) {
 				TQString pass;
 				if (_w->readPassword(item->text(0), pass) == 0) {
 					_ww->_entryStack->raiseWidget(int(4));
@@ -407,7 +407,7 @@ void KWalletEditor::entrySelectionChanged(TQListViewItem *item) {
 					_ww->_saveChanges->setEnabled(false);
 					_ww->_undoChanges->setEnabled(false);
 				}
-			} else if (ci->type() == KWallet::Wallet::Map) {
+			} else if (ci->type() == TDEWallet::Wallet::Map) {
 				_ww->_entryStack->raiseWidget(int(2));
 				_mapEditorShowHide->setChecked(false);
 				showHideMapEditorValue(false);
@@ -417,7 +417,7 @@ void KWalletEditor::entrySelectionChanged(TQListViewItem *item) {
 					_ww->_saveChanges->setEnabled(false);
 					_ww->_undoChanges->setEnabled(false);
 				}
-			} else if (ci->type() == KWallet::Wallet::Stream) {
+			} else if (ci->type() == TDEWallet::Wallet::Stream) {
 				_ww->_entryStack->raiseWidget(int(3));
 				TQByteArray ba;
 				if (_w->readEntry(item->text(0), ba) == 0) {
@@ -429,8 +429,8 @@ void KWalletEditor::entrySelectionChanged(TQListViewItem *item) {
 			}
 			break;
 
-		case KWalletContainerItemClass:
-			fi = dynamic_cast<KWalletFolderItem*>(item->parent());
+		case TDEWalletContainerItemClass:
+			fi = dynamic_cast<TDEWalletFolderItem*>(item->parent());
 			if (!fi) {
 				return;
 			}
@@ -440,8 +440,8 @@ void KWalletEditor::entrySelectionChanged(TQListViewItem *item) {
 			_ww->_entryStack->raiseWidget(int(0));
 			break;
 
-		case KWalletFolderItemClass:
-			fi = dynamic_cast<KWalletFolderItem*>(item);
+		case TDEWalletFolderItemClass:
+			fi = dynamic_cast<TDEWalletFolderItem*>(item);
 			if (!fi) {
 				return;
 			}
@@ -459,22 +459,22 @@ void KWalletEditor::entrySelectionChanged(TQListViewItem *item) {
 	}
 }
 
-void KWalletEditor::updateEntries(const TQString& folder) {
+void TDEWalletEditor::updateEntries(const TQString& folder) {
 	TQPtrStack<TQListViewItem> trash;
 
 	_w->setFolder(folder);
 	TQStringList entries = _w->entryList();
 
-	KWalletFolderItem *fi = _entryList->getFolder(folder);
+	TDEWalletFolderItem *fi = _entryList->getFolder(folder);
 
 	if (!fi) {
 		return;
 	}
 
-	KWalletContainerItem *pi = fi->getContainer(KWallet::Wallet::Password);
-	KWalletContainerItem *mi = fi->getContainer(KWallet::Wallet::Map);
-	KWalletContainerItem *bi = fi->getContainer(KWallet::Wallet::Stream);
-	KWalletContainerItem *ui = fi->getContainer(KWallet::Wallet::Unknown);
+	TDEWalletContainerItem *pi = fi->getContainer(TDEWallet::Wallet::Password);
+	TDEWalletContainerItem *mi = fi->getContainer(TDEWallet::Wallet::Map);
+	TDEWalletContainerItem *bi = fi->getContainer(TDEWallet::Wallet::Stream);
+	TDEWalletContainerItem *ui = fi->getContainer(TDEWallet::Wallet::Unknown);
 
 	// Remove deleted entries
 	for (TQListViewItem *i = pi->firstChild(); i; i = i->nextSibling()) {
@@ -523,16 +523,16 @@ void KWalletEditor::updateEntries(const TQString& folder) {
 		}
 
 		switch (_w->entryType(*i)) {
-			case KWallet::Wallet::Password:
-				new KWalletEntryItem(_w, pi, *i);
+			case TDEWallet::Wallet::Password:
+				new TDEWalletEntryItem(_w, pi, *i);
 				break;
-			case KWallet::Wallet::Stream:
-				new KWalletEntryItem(_w, bi, *i);
+			case TDEWallet::Wallet::Stream:
+				new TDEWalletEntryItem(_w, bi, *i);
 				break;
-			case KWallet::Wallet::Map:
-				new KWalletEntryItem(_w, mi, *i);
+			case TDEWallet::Wallet::Map:
+				new TDEWalletEntryItem(_w, mi, *i);
 				break;
-			case KWallet::Wallet::Unknown:
+			case TDEWallet::Wallet::Unknown:
 			default:
 				new TQListViewItem(ui, *i);
 				break;
@@ -548,33 +548,33 @@ void KWalletEditor::updateEntries(const TQString& folder) {
 	}
 }
 
-void KWalletEditor::listContextMenuRequested(TQListViewItem *item, const TQPoint& pos, int col) {
+void TDEWalletEditor::listContextMenuRequested(TQListViewItem *item, const TQPoint& pos, int col) {
 	Q_UNUSED(col)
 
 	if (!_walletIsOpen) {
 		return;
 	}
 
-	KWalletListItemClasses menuClass = KWalletUnknownClass;
-	KWalletContainerItem *ci = 0L;
+	TDEWalletListItemClasses menuClass = TDEWalletUnknownClass;
+	TDEWalletContainerItem *ci = 0L;
 
 	if (item) {
-		if (item->rtti() == KWalletEntryItemClass) {
-			ci = dynamic_cast<KWalletContainerItem *>(item->parent());
+		if (item->rtti() == TDEWalletEntryItemClass) {
+			ci = dynamic_cast<TDEWalletContainerItem *>(item->parent());
 			if (!ci) {
 				return;
 			}
-		} else if (item->rtti() == KWalletContainerItemClass) {
-			ci = dynamic_cast<KWalletContainerItem *>(item);
+		} else if (item->rtti() == TDEWalletContainerItemClass) {
+			ci = dynamic_cast<TDEWalletContainerItem *>(item);
 			if (!ci) {
 				return;
 			}
 		}
 
-		if (ci && ci->type() == KWallet::Wallet::Unknown) {
+		if (ci && ci->type() == TDEWallet::Wallet::Unknown) {
 			return;
 		}
-		menuClass = static_cast<KWalletListItemClasses>(item->rtti());
+		menuClass = static_cast<TDEWalletListItemClasses>(item->rtti());
 	}
 
 	TDEPopupMenu *m = new TDEPopupMenu(this);
@@ -584,21 +584,21 @@ void KWalletEditor::listContextMenuRequested(TQListViewItem *item, const TQPoint
 		title = KStringHandler::cPixelSqueeze(title, m->fontMetrics(), 200);
 		m->insertTitle(title);
 		switch (menuClass) {
-			case KWalletEntryItemClass:
+			case TDEWalletEntryItemClass:
 				m->insertItem(i18n("&New..." ), this, TQT_SLOT(newEntry()), Key_Insert);
 				m->insertItem(i18n( "&Rename" ), this, TQT_SLOT(renameEntry()), Key_F2);
 				m->insertItem(i18n( "&Delete" ), this, TQT_SLOT(deleteEntry()), Key_Delete);
-				if (ci && ci->type() == KWallet::Wallet::Password) {
+				if (ci && ci->type() == TDEWallet::Wallet::Password) {
 					m->insertSeparator();
 					_copyPassAction->plug(m);
 				}
 				break;
 
-			case KWalletContainerItemClass:
+			case TDEWalletContainerItemClass:
 				m->insertItem(i18n( "&New..." ), this, TQT_SLOT(newEntry()), Key_Insert);
 				break;
 
-			case KWalletFolderItemClass:
+			case TDEWalletFolderItemClass:
 				_newFolderAction->plug(m);
 				_deleteFolderAction->plug(m);
 				break;
@@ -612,7 +612,7 @@ void KWalletEditor::listContextMenuRequested(TQListViewItem *item, const TQPoint
 }
 
 
-void KWalletEditor::copyPassword() {
+void TDEWalletEditor::copyPassword() {
 	TQListViewItem *item = _entryList->selectedItem();
 	if (_w && item) {
 		TQString pass;
@@ -623,21 +623,21 @@ void KWalletEditor::copyPassword() {
 }
 
 
-void KWalletEditor::newEntry() {
+void TDEWalletEditor::newEntry() {
 	TQListViewItem *item = _entryList->selectedItem();
 	TQString n;
 	bool ok;
 
 	TQListViewItem *p;
-	KWalletFolderItem *fi;
+	TDEWalletFolderItem *fi;
 
 	//set the folder where we're trying to create the new entry
 	if (_w && item) {
 		p = item;
-		if (p->rtti() == KWalletEntryItemClass) {
+		if (p->rtti() == TDEWalletEntryItemClass) {
 			p = item->parent();
 		}
-		fi = dynamic_cast<KWalletFolderItem *>(p->parent());
+		fi = dynamic_cast<TDEWalletFolderItem *>(p->parent());
 		if (!fi) {
 			return;
 		}
@@ -670,31 +670,31 @@ void KWalletEditor::newEntry() {
 
 	if (_w && item && !n.isEmpty()) {
 		TQListViewItem *p = item;
-		if (p->rtti() == KWalletEntryItemClass) {
+		if (p->rtti() == TDEWalletEntryItemClass) {
 			p = item->parent();
 		}
 
-		KWalletFolderItem *fi = dynamic_cast<KWalletFolderItem *>(p->parent());
+		TDEWalletFolderItem *fi = dynamic_cast<TDEWalletFolderItem *>(p->parent());
 		if (!fi) {
 			KMessageBox::error(this, i18n("An unexpected error occurred trying to add the new entry"));
 			return;
 		}
 		_w->setFolder(fi->name());
 
-		KWalletEntryItem *ni = new KWalletEntryItem(_w, p, n);
+		TDEWalletEntryItem *ni = new TDEWalletEntryItem(_w, p, n);
 		_entryList->setSelected(ni,true);
 		_entryList->ensureItemVisible(ni);
 
-		KWalletContainerItem *ci = dynamic_cast<KWalletContainerItem*>(p);
+		TDEWalletContainerItem *ci = dynamic_cast<TDEWalletContainerItem*>(p);
 		if (!ci) {
 			KMessageBox::error(this, i18n("An unexpected error occurred trying to add the new entry"));
 			return;
 		}
-		if (ci->type() == KWallet::Wallet::Password) {
+		if (ci->type() == TDEWallet::Wallet::Password) {
 			_w->writePassword(n, TQString());
-		} else if (ci->type() == KWallet::Wallet::Map) {
+		} else if (ci->type() == TDEWallet::Wallet::Map) {
 			_w->writeMap(n, TQMap<TQString,TQString>());
-		} else if (ci->type() == KWallet::Wallet::Stream) {
+		} else if (ci->type() == TDEWallet::Wallet::Stream) {
 			_w->writeEntry(n, TQByteArray());
 		} else {
 			abort();
@@ -705,7 +705,7 @@ void KWalletEditor::newEntry() {
 }
 
 
-void KWalletEditor::renameEntry() {
+void TDEWalletEditor::renameEntry() {
 	TQListViewItem *item = _entryList->selectedItem();
 	if (_w && item) {
 		item->startRename(0);
@@ -713,10 +713,10 @@ void KWalletEditor::renameEntry() {
 }
 
 
-// Only supports renaming of KWalletEntryItem derived classes.
-void KWalletEditor::listItemRenamed(TQListViewItem* item, int, const TQString& t) {
+// Only supports renaming of TDEWalletEntryItem derived classes.
+void TDEWalletEditor::listItemRenamed(TQListViewItem* item, int, const TQString& t) {
 	if (item) {
-		KWalletEntryItem *i = dynamic_cast<KWalletEntryItem*>(item);
+		TDEWalletEntryItem *i = dynamic_cast<TDEWalletEntryItem*>(item);
 		if (!i) {
 			return;
 		}
@@ -728,16 +728,16 @@ void KWalletEditor::listItemRenamed(TQListViewItem* item, int, const TQString& t
 
 		if (_w->renameEntry(i->oldName(), t) == 0) {
 			i->clearOldName();
-			KWalletContainerItem *ci = dynamic_cast<KWalletContainerItem*>(item->parent());
+			TDEWalletContainerItem *ci = dynamic_cast<TDEWalletContainerItem*>(item->parent());
 			if (!ci) {
 				KMessageBox::error(this, i18n("An unexpected error occurred trying to rename the entry"));
 				return;
 			}
-			if (ci->type() == KWallet::Wallet::Password) {
+			if (ci->type() == TDEWallet::Wallet::Password) {
 				_ww->_entryName->setText(i18n("Password: %1").arg(item->text(0)));
-			} else if (ci->type() == KWallet::Wallet::Map) {
+			} else if (ci->type() == TDEWallet::Wallet::Map) {
 				_ww->_entryName->setText(i18n("Name-Value Map: %1").arg(item->text(0)));
-			} else if (ci->type() == KWallet::Wallet::Stream) {
+			} else if (ci->type() == TDEWallet::Wallet::Stream) {
 				_ww->_entryName->setText(i18n("Binary Data: %1").arg(item->text(0)));
 			}
 		} else {
@@ -747,12 +747,12 @@ void KWalletEditor::listItemRenamed(TQListViewItem* item, int, const TQString& t
 }
 
 
-void KWalletEditor::deleteEntry() {
+void TDEWalletEditor::deleteEntry() {
 	TQListViewItem *item = _entryList->selectedItem();
 	if (_w && item) {
 		int rc = KMessageBox::warningContinueCancel(this, i18n("Are you sure you wish to delete the item '%1'?").arg(item->text(0)),"",KStdGuiItem::del());
 		if (rc == KMessageBox::Continue) {
-			KWalletFolderItem *fi = dynamic_cast<KWalletFolderItem *>(item->parent()->parent());
+			TDEWalletFolderItem *fi = dynamic_cast<TDEWalletFolderItem *>(item->parent()->parent());
 			if (!fi) {
 				KMessageBox::error(this, i18n("An unexpected error occurred trying to delete the entry"));
 				return;
@@ -766,12 +766,12 @@ void KWalletEditor::deleteEntry() {
 	}
 }
 
-void KWalletEditor::changePassword() {
-	KWallet::Wallet::changePassword(_walletName);
+void TDEWalletEditor::changePassword() {
+	TDEWallet::Wallet::changePassword(_walletName);
 }
 
 
-void KWalletEditor::walletOpened(bool success) {
+void TDEWalletEditor::walletOpened(bool success) {
 	if (success) {
 		emit enableFolderActions(true);
 		emit enableContextFolderActions(false);
@@ -789,17 +789,17 @@ void KWalletEditor::walletOpened(bool success) {
 }
 
 
-void KWalletEditor::hidePasswordContents() {
+void TDEWalletEditor::hidePasswordContents() {
 	_ww->_entryStack->raiseWidget(int(4));
 }
 
 
-void KWalletEditor::showPasswordContents() {
+void TDEWalletEditor::showPasswordContents() {
 	_ww->_entryStack->raiseWidget(int(1));
 }
 
 
-void KWalletEditor::showHideMapEditorValue(bool show) {
+void TDEWalletEditor::showHideMapEditorValue(bool show) {
 	if (show) {
 		_mapEditor->showColumn(2);
 	} else {
@@ -810,7 +810,7 @@ void KWalletEditor::showHideMapEditorValue(bool show) {
 
 enum MergePlan { Prompt = 0, Always = 1, Never = 2, Yes = 3, No = 4 };
 
-void KWalletEditor::importWallet() {
+void TDEWalletEditor::importWallet() {
 	KURL url = KFileDialog::getOpenURL(TQString(), "*.kwl", this);
 	if (url.isEmpty()) {
 		return;
@@ -822,7 +822,7 @@ void KWalletEditor::importWallet() {
 		return;
 	}
 
-	KWallet::Wallet *w = KWallet::Wallet::openWallet(tmpFile, winId(), KWallet::Wallet::Path);
+	TDEWallet::Wallet *w = TDEWallet::Wallet::openWallet(tmpFile, winId(), TDEWallet::Wallet::Path);
 	if (w && w->isOpen()) {
 		MergePlan mp = Prompt;
 		TQStringList fl = w->folderList();
@@ -938,7 +938,7 @@ void KWalletEditor::importWallet() {
 }
 
 
-void KWalletEditor::importXML() {
+void TDEWalletEditor::importXML() {
 	KURL url = KFileDialog::getOpenURL(TQString(), "*.xml", this);
 	if (url.isEmpty()) {
 		return;
@@ -1044,7 +1044,7 @@ void KWalletEditor::importXML() {
 }
 
 
-void KWalletEditor::exportXML() {
+void TDEWalletEditor::exportXML() {
 	KTempFile tf;
 	tf.setAutoDelete(true);
 	TQTextStream& ts(*tf.textStream());
@@ -1057,7 +1057,7 @@ void KWalletEditor::exportXML() {
 		TQStringList entries = _w->entryList();
 		for (TQStringList::Iterator j = entries.begin(); j != entries.end(); ++j) {
 			switch (_w->entryType(*j)) {
-				case KWallet::Wallet::Password:
+				case TDEWallet::Wallet::Password:
 					{
 						TQString pass;
 						if (_w->readPassword(*j, pass) == 0) {
@@ -1067,7 +1067,7 @@ void KWalletEditor::exportXML() {
 						}
 						break;
 					}
-				case KWallet::Wallet::Stream:
+				case TDEWallet::Wallet::Stream:
 					{
 						TQByteArray ba;
 						if (_w->readEntry(*j, ba) == 0) {
@@ -1078,7 +1078,7 @@ void KWalletEditor::exportXML() {
 						}
 						break;
 					}
-				case KWallet::Wallet::Map:
+				case TDEWallet::Wallet::Map:
 					{
 						TQMap<TQString,TQString> map;
 						if (_w->readMap(*j, map) == 0) {
@@ -1090,7 +1090,7 @@ void KWalletEditor::exportXML() {
 						}
 						break;
 					}
-				case KWallet::Wallet::Unknown:
+				case TDEWallet::Wallet::Unknown:
 				default:
 					break;
 			}
@@ -1119,12 +1119,12 @@ void KWalletEditor::exportXML() {
 }
 
 
-void KWalletEditor::setNewWallet(bool x) {
+void TDEWalletEditor::setNewWallet(bool x) {
 	_newWallet = x;
 }
 
 
-void KWalletEditor::saveAs() {
+void TDEWalletEditor::saveAs() {
 	KURL url = KFileDialog::getSaveURL(TQString(), "*.kwl", this);
 	if (!url.isEmpty()) {
 		// Sync() tdewalletd

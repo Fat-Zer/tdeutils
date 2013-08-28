@@ -28,7 +28,7 @@
 #include <tdewallet.h>
 #include <kstdguiitem.h>
 
-KWalletPopup::KWalletPopup(const TQString& wallet, TQWidget *parent, const char *name)
+TDEWalletPopup::TDEWalletPopup(const TQString& wallet, TQWidget *parent, const char *name)
 : TDEPopupMenu(parent, name), _walletName(wallet) {
 	insertTitle(wallet);
 	TDEActionCollection *ac = new TDEActionCollection(this, "tdewallet context actions");
@@ -46,7 +46,7 @@ KWalletPopup::KWalletPopup(const TQString& wallet, TQWidget *parent, const char 
 			TQT_SLOT(changeWalletPassword()), ac, "wallet_password");
 	act->plug(this);
 
-	TQStringList ul = KWallet::Wallet::users(wallet);
+	TQStringList ul = TDEWallet::Wallet::users(wallet);
 	if (!ul.isEmpty()) {
 		TDEPopupMenu *pm = new TDEPopupMenu(this, "Disconnect Apps");
 		int id = 7000;
@@ -64,7 +64,7 @@ KWalletPopup::KWalletPopup(const TQString& wallet, TQWidget *parent, const char 
 			TQT_SLOT(closeWallet()), ac, "wallet_close");
 	// FIXME: let's track this inside the manager so we don't need a dcop
 	//        roundtrip here.
-	act->setEnabled(KWallet::Wallet::isOpen(wallet));
+	act->setEnabled(TDEWallet::Wallet::isOpen(wallet));
 	act->plug(this);
 
 	act = new TDEAction(i18n("&Delete"), 0, Key_Delete, TQT_TQOBJECT(this),
@@ -73,37 +73,37 @@ KWalletPopup::KWalletPopup(const TQString& wallet, TQWidget *parent, const char 
 }
 
 
-KWalletPopup::~KWalletPopup() {
+TDEWalletPopup::~TDEWalletPopup() {
 }
 
 
-void KWalletPopup::openWallet() {
+void TDEWalletPopup::openWallet() {
 	emit walletOpened(_walletName);
 }
 
 
-void KWalletPopup::deleteWallet() {
+void TDEWalletPopup::deleteWallet() {
         emit walletDeleted(_walletName);
 }
 
 
-void KWalletPopup::closeWallet() {
+void TDEWalletPopup::closeWallet() {
 	emit walletClosed(_walletName);
 }
 
 
-void KWalletPopup::changeWalletPassword() {
+void TDEWalletPopup::changeWalletPassword() {
 	emit walletChangePassword(_walletName);
 }
 
 
-void KWalletPopup::createWallet() {
+void TDEWalletPopup::createWallet() {
 	emit walletCreated();
 }
 
 
-void KWalletPopup::disconnectApp(int id) {
-	KWallet::Wallet::disconnectApplication(_walletName, _appMap[id].latin1());
+void TDEWalletPopup::disconnectApp(int id) {
+	TDEWallet::Wallet::disconnectApplication(_walletName, _appMap[id].latin1());
 }
 
 #include "tdewalletpopup.moc"

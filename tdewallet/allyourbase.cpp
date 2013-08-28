@@ -36,9 +36,9 @@
 #include <tqptrlist.h>
 
 /****************
- *  KWalletFolderItem - ListView items to represent tdewallet folders
+ *  TDEWalletFolderItem - ListView items to represent tdewallet folders
  */
-KWalletFolderItem::KWalletFolderItem(KWallet::Wallet *w, TQListView* parent, const TQString &name, int entries)
+TDEWalletFolderItem::TDEWalletFolderItem(TDEWallet::Wallet *w, TQListView* parent, const TQString &name, int entries)
 : TDEListViewItem(parent),_wallet(w),_name(name),_entries(entries) {
 	setText(0, TQString("%1 (%2)").arg(_name).arg(_entries));
 	setRenameEnabled(0, false);
@@ -50,7 +50,7 @@ KWalletFolderItem::KWalletFolderItem(KWallet::Wallet *w, TQListView* parent, con
 	setPixmap(0,pix);
 }
 
-TQPixmap KWalletFolderItem::getFolderIcon(TDEIcon::Group group){
+TQPixmap TDEWalletFolderItem::getFolderIcon(TDEIcon::Group group){
 	TDEIconLoader *loader = TDEGlobal::instance()->iconLoader();
 	TQPixmap pix = loader->loadIcon( _name, group, 0,
 			TDEIcon::DefaultState, 0, true );
@@ -63,16 +63,16 @@ TQPixmap KWalletFolderItem::getFolderIcon(TDEIcon::Group group){
 	return pix;
 }
 
-void KWalletFolderItem::refresh() {
+void TDEWalletFolderItem::refresh() {
 	TQString saveFolder = _wallet->currentFolder();
 	_wallet->setFolder(_name);
 	setText(0, TQString("%1 (%2)").arg(_name).arg(_wallet->entryList().count()));
 	_wallet->setFolder(saveFolder);
 }
 
-KWalletContainerItem* KWalletFolderItem::getContainer(KWallet::Wallet::EntryType type) {
+TDEWalletContainerItem* TDEWalletFolderItem::getContainer(TDEWallet::Wallet::EntryType type) {
 	for (TQListViewItem *i = firstChild(); i; i = i->nextSibling()) {
-		KWalletContainerItem *ci = dynamic_cast<KWalletContainerItem *>(i);
+		TDEWalletContainerItem *ci = dynamic_cast<TDEWalletContainerItem *>(i);
 		if (!ci) {
 			continue;
 		}
@@ -83,13 +83,13 @@ KWalletContainerItem* KWalletFolderItem::getContainer(KWallet::Wallet::EntryType
 	return 0;
 }
 
-bool KWalletFolderItem::contains(const TQString& key) {
+bool TDEWalletFolderItem::contains(const TQString& key) {
 	return (getItem(key) != 0);
 }
 
-TQListViewItem* KWalletFolderItem::getItem(const TQString& key) {
+TQListViewItem* TDEWalletFolderItem::getItem(const TQString& key) {
 	for (TQListViewItem *i = firstChild(); i; i = i->nextSibling()) {
-		KWalletContainerItem *ci = dynamic_cast<KWalletContainerItem *>(i);
+		TDEWalletContainerItem *ci = dynamic_cast<TDEWalletContainerItem *>(i);
 		if (!ci) {
 			continue;
 		}
@@ -101,48 +101,48 @@ TQListViewItem* KWalletFolderItem::getItem(const TQString& key) {
 	return 0;
 }
 
-bool KWalletFolderItem::acceptDrop(const TQMimeSource *mime) const {
+bool TDEWalletFolderItem::acceptDrop(const TQMimeSource *mime) const {
 	return mime->provides("application/x-tdewallet-entry") ||
 		mime->provides("text/uri-list");
 }
 
-int KWalletFolderItem::rtti() const {
-	return KWalletFolderItemClass;
+int TDEWalletFolderItem::rtti() const {
+	return TDEWalletFolderItemClass;
 }
 
-TQString KWalletFolderItem::name() const {
+TQString TDEWalletFolderItem::name() const {
 	return _name;
 }
 
-KWalletFolderItem::~KWalletFolderItem() {
+TDEWalletFolderItem::~TDEWalletFolderItem() {
 }
 
 /****************
- *  KWalletContainerItem - ListView items to represent tdewallet containers, i.e.
+ *  TDEWalletContainerItem - ListView items to represent tdewallet containers, i.e.
  *  passwords, maps, ...
  */
-KWalletContainerItem::KWalletContainerItem(TQListViewItem* parent, const TQString &name, KWallet::Wallet::EntryType type)
+TDEWalletContainerItem::TDEWalletContainerItem(TQListViewItem* parent, const TQString &name, TDEWallet::Wallet::EntryType type)
 : TDEListViewItem(parent, name), _type(type) {
 	setRenameEnabled(0, false);
 	setDragEnabled(true);
 }
 
-KWalletContainerItem::~KWalletContainerItem() {
+TDEWalletContainerItem::~TDEWalletContainerItem() {
 }
 
-int KWalletContainerItem::rtti() const {
-	return KWalletContainerItemClass;
+int TDEWalletContainerItem::rtti() const {
+	return TDEWalletContainerItemClass;
 }
 
-KWallet::Wallet::EntryType KWalletContainerItem::type() {
+TDEWallet::Wallet::EntryType TDEWalletContainerItem::type() {
 	return _type;
 }
 
-bool KWalletContainerItem::contains(const TQString& key) {
+bool TDEWalletContainerItem::contains(const TQString& key) {
 	return getItem(key) != 0;
 }
 
-TQListViewItem *KWalletContainerItem::getItem(const TQString& key) {
+TQListViewItem *TDEWalletContainerItem::getItem(const TQString& key) {
 	for (TQListViewItem *i = firstChild(); i; i = i->nextSibling()) {
 		if (i->text(0) == key) {
 			return i;
@@ -152,37 +152,37 @@ TQListViewItem *KWalletContainerItem::getItem(const TQString& key) {
 }
 
 /****************
- *  KWalletEntryItem - ListView items to represent tdewallet entries
+ *  TDEWalletEntryItem - ListView items to represent tdewallet entries
  */
-KWalletEntryItem::KWalletEntryItem(KWallet::Wallet *w, TQListViewItem* parent, const TQString& ename)
+TDEWalletEntryItem::TDEWalletEntryItem(TDEWallet::Wallet *w, TQListViewItem* parent, const TQString& ename)
 : TDEListViewItem(parent, ename), _wallet(w), _oldName(ename) {
 	setRenameEnabled(0, true);
 	setDragEnabled(true);
 }
 
-int KWalletEntryItem::rtti() const {
-	return KWalletEntryItemClass;
+int TDEWalletEntryItem::rtti() const {
+	return TDEWalletEntryItemClass;
 }
 
-KWalletEntryItem::~KWalletEntryItem() {
+TDEWalletEntryItem::~TDEWalletEntryItem() {
 }
 
 /****************
- * KWalletItem - IconView items to represent wallets
+ * TDEWalletItem - IconView items to represent wallets
  */
-KWalletItem::KWalletItem(TQIconView *parent, const TQString& walletName)
+TDEWalletItem::TDEWalletItem(TQIconView *parent, const TQString& walletName)
 : TQIconViewItem(parent, walletName, DesktopIcon("tdewalletmanager")) {
 }
 
-KWalletItem::~KWalletItem() {
+TDEWalletItem::~TDEWalletItem() {
 }
 
-bool KWalletItem::acceptDrop(const TQMimeSource *mime) const {
+bool TDEWalletItem::acceptDrop(const TQMimeSource *mime) const {
 	return mime->provides("application/x-tdewallet-folder") ||
 		mime->provides("text/uri-list");
 }
 
-static bool decodeEntry(KWallet::Wallet *_wallet, TQDataStream& ds) {
+static bool decodeEntry(TDEWallet::Wallet *_wallet, TQDataStream& ds) {
 	TQ_UINT32 magic;
 	ds >> magic;
 	if (magic != KWALLETENTRYMAGIC) {
@@ -191,7 +191,7 @@ static bool decodeEntry(KWallet::Wallet *_wallet, TQDataStream& ds) {
 	}
 	TQString name;
 	TQByteArray value;
-	KWallet::Wallet::EntryType et;
+	TDEWallet::Wallet::EntryType et;
 	ds >> name;
 	if (_wallet->hasEntry(name)) {
 		int rc = KMessageBox::warningContinueCancel(0L, i18n("An entry by the name '%1' already exists. Would you like to continue?").arg(name));
@@ -201,13 +201,13 @@ static bool decodeEntry(KWallet::Wallet *_wallet, TQDataStream& ds) {
 	}
 	long l;
 	ds >> l;
-	et = KWallet::Wallet::EntryType(l);
+	et = TDEWallet::Wallet::EntryType(l);
 	ds >> value;
 	_wallet->writeEntry(name, value, et);
 	return true;
 }
 
-static bool decodeFolder(KWallet::Wallet *_wallet, TQDataStream& ds) {
+static bool decodeFolder(TDEWallet::Wallet *_wallet, TQDataStream& ds) {
 	TQ_UINT32 magic;
 	ds >> magic;
 	if (magic != KWALLETFOLDERMAGIC) {
@@ -233,25 +233,25 @@ static bool decodeFolder(KWallet::Wallet *_wallet, TQDataStream& ds) {
 	while (!ds.atEnd()) {
 		TQString name;
 		TQByteArray value;
-		KWallet::Wallet::EntryType et;
+		TDEWallet::Wallet::EntryType et;
 		ds >> name;
 		long l;
 		ds >> l;
-		et = KWallet::Wallet::EntryType(l);
+		et = TDEWallet::Wallet::EntryType(l);
 		ds >> value;
 		_wallet->writeEntry(name, value, et);
 	}
 	return true;
 }
 
-void KWalletItem::dropped(TQDropEvent *e, const TQValueList<TQIconDragItem>& lst) {
+void TDEWalletItem::dropped(TQDropEvent *e, const TQValueList<TQIconDragItem>& lst) {
 	Q_UNUSED(lst);
 	if (e->provides("application/x-tdewallet-folder") || 
 			e->provides("text/uri-list")) {
 
 		// FIXME: don't allow the drop if the wallet name is the same
 
-		KWallet::Wallet *_wallet = KWallet::Wallet::openWallet(text());
+		TDEWallet::Wallet *_wallet = TDEWallet::Wallet::openWallet(text());
 		if (!_wallet) {
 			e->ignore();
 			return;
@@ -301,14 +301,14 @@ void KWalletItem::dropped(TQDropEvent *e, const TQValueList<TQIconDragItem>& lst
 		//delete the folder from the source if we were moving
 		TQt::ButtonState state = kapp->keyboardMouseState();
 		if (e->source() && e->source()->parent() &&
-			!strcmp(e->source()->parent()->className(), "KWalletEntryList") &&
+			!strcmp(e->source()->parent()->className(), "TDEWalletEntryList") &&
 			!(state & TQt::ControlButton)) {
 		
-			KWalletEntryList *el =
-				dynamic_cast<KWalletEntryList*>(e->source()->parent());
+			TDEWalletEntryList *el =
+				dynamic_cast<TDEWalletEntryList*>(e->source()->parent());
 			if (el) {
-				KWalletFolderItem *fi = 
-					dynamic_cast<KWalletFolderItem*>(el->selectedItem());
+				TDEWalletFolderItem *fi = 
+					dynamic_cast<TDEWalletFolderItem*>(el->selectedItem());
 				if (fi) {
 					el->_wallet->removeFolder(fi->name());	
 				}
@@ -322,33 +322,33 @@ void KWalletItem::dropped(TQDropEvent *e, const TQValueList<TQIconDragItem>& lst
 }
 
 /****************
- *  KWalletEntryDrag - Stores data for wallet entry drags
+ *  TDEWalletEntryDrag - Stores data for wallet entry drags
  */
-class KWalletEntryDrag : public TQStoredDrag {
+class TDEWalletEntryDrag : public TQStoredDrag {
 	public:
-		KWalletEntryDrag(TQWidget *dragSource, const char *name = 0L)
+		TDEWalletEntryDrag(TQWidget *dragSource, const char *name = 0L)
 			: TQStoredDrag("application/x-tdewallet-entry", dragSource, name) {
 		}
 
-		virtual ~KWalletEntryDrag() {}
+		virtual ~TDEWalletEntryDrag() {}
 };
 
 /****************
- *  KWalletFolderDrag - Stores data for wallet folder drags
+ *  TDEWalletFolderDrag - Stores data for wallet folder drags
  */
-class KWalletFolderDrag : public TQStoredDrag {
+class TDEWalletFolderDrag : public TQStoredDrag {
 	public:
-		KWalletFolderDrag(TQWidget *dragSource, const char *name = 0L)
+		TDEWalletFolderDrag(TQWidget *dragSource, const char *name = 0L)
 			: TQStoredDrag("application/x-tdewallet-folder", dragSource, name) {
 		}
 
-		virtual ~KWalletFolderDrag() {}
+		virtual ~TDEWalletFolderDrag() {}
 };
 
 /****************
- *  KWalletEntryList - A listview to store wallet entries
+ *  TDEWalletEntryList - A listview to store wallet entries
  */
-KWalletEntryList::KWalletEntryList(TQWidget *parent, const char *name)
+TDEWalletEntryList::TDEWalletEntryList(TQWidget *parent, const char *name)
 : TDEListView(parent, name) {
 	addColumn(i18n("Folders"));
 	setRootIsDecorated(true);
@@ -359,10 +359,10 @@ KWalletEntryList::KWalletEntryList(TQWidget *parent, const char *name)
 	viewport()->setAcceptDrops(true);
 }
 
-KWalletEntryList::~KWalletEntryList() {
+TDEWalletEntryList::~TDEWalletEntryList() {
 }
 
-bool KWalletEntryList::acceptDrag(TQDropEvent* e) const {
+bool TDEWalletEntryList::acceptDrag(TQDropEvent* e) const {
 	TQListViewItem *i = itemAt(contentsToViewport(e->pos()));
 	if (i) {
 		if (e->provides("application/x-tdewallet-entry") ||
@@ -379,20 +379,20 @@ bool KWalletEntryList::acceptDrag(TQDropEvent* e) const {
 }
 
 //returns true if the item has been dropped successfully
-void KWalletEntryList::itemDropped(TQDropEvent *e, TQListViewItem *item) {
+void TDEWalletEntryList::itemDropped(TQDropEvent *e, TQListViewItem *item) {
 	bool ok = true;
 	bool isEntry;
 	TQFile file;
 	TQDataStream *ds;
 
-	KWalletEntryList *el = 0L;
+	TDEWalletEntryList *el = 0L;
 	TQListViewItem *sel = 0L;
 
 	//detect if we are dragging from tdewallet itself
 	if (e->source() && e->source()->parent() &&
-		!strcmp(e->source()->parent()->className(), "KWalletEntryList")) {
+		!strcmp(e->source()->parent()->className(), "TDEWalletEntryList")) {
 
-		el = dynamic_cast<KWalletEntryList*>(e->source()->parent());
+		el = dynamic_cast<TDEWalletEntryList*>(e->source()->parent());
 		if (!el) {
 			KMessageBox::error(this, i18n("An unexpected error occurred trying to drop the item"));
 		} else
@@ -402,7 +402,7 @@ void KWalletEntryList::itemDropped(TQDropEvent *e, TQListViewItem *item) {
 	if (e->provides("application/x-tdewallet-entry")) {
 		//do nothing if we are in the same folder
 		if (sel && sel->parent()->parent() == 
-				KWalletEntryList::getItemFolder(item)) {
+				TDEWalletEntryList::getItemFolder(item)) {
 			e->ignore();
 			return;
 		}
@@ -474,7 +474,7 @@ void KWalletEntryList::itemDropped(TQDropEvent *e, TQListViewItem *item) {
 			e->ignore();
 			return;
 		}
-		KWalletFolderItem *fi = KWalletEntryList::getItemFolder(item);
+		TDEWalletFolderItem *fi = TDEWalletEntryList::getItemFolder(item);
 		if (!fi) {
 			KMessageBox::error(this, i18n("An unexpected error occurred trying to drop the entry"));
 			delete(ds);
@@ -500,7 +500,7 @@ void KWalletEntryList::itemDropped(TQDropEvent *e, TQListViewItem *item) {
 		//delete source if we were moving, i.e., we are dragging
 		//from tdewalletmanager and Control is not pressed
 		if (ok && el && !(state & TQt::ControlButton) && sel) {
-			KWalletFolderItem *fi = dynamic_cast<KWalletFolderItem *>(sel);
+			TDEWalletFolderItem *fi = dynamic_cast<TDEWalletFolderItem *>(sel);
 			if (fi) {
 				el->_wallet->removeFolder(fi->name());
 				delete sel;
@@ -512,13 +512,13 @@ void KWalletEntryList::itemDropped(TQDropEvent *e, TQListViewItem *item) {
 	}
 }
 
-void KWalletEntryList::setWallet(KWallet::Wallet *w) {
+void TDEWalletEntryList::setWallet(TDEWallet::Wallet *w) {
 	_wallet = w;
 }
 
-bool KWalletEntryList::existsFolder(const TQString& name) {
+bool TDEWalletEntryList::existsFolder(const TQString& name) {
 	for (TQListViewItem *vi = firstChild(); vi; vi = vi->nextSibling()) {
-		KWalletFolderItem *fi = dynamic_cast<KWalletFolderItem *>(vi);
+		TDEWalletFolderItem *fi = dynamic_cast<TDEWalletFolderItem *>(vi);
 		if (!fi) {
 			continue;
 		}
@@ -529,12 +529,12 @@ bool KWalletEntryList::existsFolder(const TQString& name) {
 	return false;
 }
 
-void KWalletEntryList::contentsDropEvent(TQDropEvent *e) {
+void TDEWalletEntryList::contentsDropEvent(TQDropEvent *e) {
 	TQListViewItem *i = itemAt(contentsToViewport(e->pos()));
 	itemDropped(e, i);
 }
 
-void KWalletEntryList::contentsDragEnterEvent(TQDragEnterEvent *e) {
+void TDEWalletEntryList::contentsDragEnterEvent(TQDragEnterEvent *e) {
 	if (e->provides("application/x-tdewallet-entry") ||
 		e->provides("application/x-tdewallet-folder") ||
 		e->provides("application/uri-list")) {
@@ -544,9 +544,9 @@ void KWalletEntryList::contentsDragEnterEvent(TQDragEnterEvent *e) {
 	}
 }
 
-KWalletFolderItem* KWalletEntryList::getFolder(const TQString& name) {
+TDEWalletFolderItem* TDEWalletEntryList::getFolder(const TQString& name) {
 	for (TQListViewItem *vi = firstChild(); vi; vi = vi->nextSibling()) {
-		KWalletFolderItem *fi = dynamic_cast<KWalletFolderItem *>(vi);
+		TDEWalletFolderItem *fi = dynamic_cast<TDEWalletFolderItem *>(vi);
 		if (!fi) {
 			continue;
 		}
@@ -557,28 +557,28 @@ KWalletFolderItem* KWalletEntryList::getFolder(const TQString& name) {
 	return 0;
 }
 
-KWalletFolderItem *KWalletEntryList::getItemFolder(TQListViewItem *item) {
+TDEWalletFolderItem *TDEWalletEntryList::getItemFolder(TQListViewItem *item) {
 	switch (item->rtti()) {
-		case KWalletFolderItemClass:
-			return dynamic_cast<KWalletFolderItem *>(item);
-		case KWalletContainerItemClass:
-			return dynamic_cast<KWalletFolderItem *>(item->parent());
-		case KWalletEntryItemClass:
-			return dynamic_cast<KWalletFolderItem *>(item->parent()->parent());
+		case TDEWalletFolderItemClass:
+			return dynamic_cast<TDEWalletFolderItem *>(item);
+		case TDEWalletContainerItemClass:
+			return dynamic_cast<TDEWalletFolderItem *>(item->parent());
+		case TDEWalletEntryItemClass:
+			return dynamic_cast<TDEWalletFolderItem *>(item->parent()->parent());
 	}
 	return 0;
 }
 
 /****************
- *  KWalletIconDrag - Stores the data for wallet drags
+ *  TDEWalletIconDrag - Stores the data for wallet drags
  */
-class KWalletIconDrag : public TQIconDrag {
+class TDEWalletIconDrag : public TQIconDrag {
 	public:
-		KWalletIconDrag(TQWidget *dragSource, const char *name = 0L)
+		TDEWalletIconDrag(TQWidget *dragSource, const char *name = 0L)
 			: TQIconDrag(dragSource, name) {
 		}
 
-		virtual ~KWalletIconDrag() {}
+		virtual ~TDEWalletIconDrag() {}
 
 		virtual const char *format(int i = 0) const {
 			if (i == 0) {
@@ -616,18 +616,18 @@ class KWalletIconDrag : public TQIconDrag {
 };
 
 /****************
-*  *  KWalletIconView - An iconview to store wallets
+*  *  TDEWalletIconView - An iconview to store wallets
 *   */
-KWalletIconView::KWalletIconView(TQWidget *parent, const char *name)
+TDEWalletIconView::TDEWalletIconView(TQWidget *parent, const char *name)
 : TDEIconView(parent, name) {
 	TDEGlobal::dirs()->addResourceType("tdewallet", "share/apps/tdewallet");
 	connect(this, TQT_SIGNAL(dropped(TQDropEvent*, const TQValueList<TQIconDragItem>&)), TQT_SLOT(slotDropped(TQDropEvent*, const TQValueList<TQIconDragItem>&)));
 }
 
-KWalletIconView::~KWalletIconView() {
+TDEWalletIconView::~TDEWalletIconView() {
 }
 
-void KWalletIconView::slotDropped(TQDropEvent *e, const TQValueList<TQIconDragItem>& /*lst*/) {
+void TDEWalletIconView::slotDropped(TQDropEvent *e, const TQValueList<TQIconDragItem>& /*lst*/) {
 	if (e->source() == viewport()) {
 		e->ignore();
 		return;
@@ -666,7 +666,7 @@ void KWalletIconView::slotDropped(TQDropEvent *e, const TQValueList<TQIconDragIt
 	e->accept();
 }
 
-void KWalletIconView::contentsMousePressEvent(TQMouseEvent *e) {
+void TDEWalletIconView::contentsMousePressEvent(TQMouseEvent *e) {
 	_mousePos = e->pos();
 	if (!findItem(_mousePos)) {
 		clearSelection();
@@ -674,8 +674,8 @@ void KWalletIconView::contentsMousePressEvent(TQMouseEvent *e) {
 	TDEIconView::contentsMousePressEvent( e );
 }
 
-TQDragObject *KWalletIconView::dragObject() {
-	KWalletIconDrag* id = new KWalletIconDrag(viewport(), "KWallet Drag");
+TQDragObject *TDEWalletIconView::dragObject() {
+	TDEWalletIconDrag* id = new TDEWalletIconDrag(viewport(), "TDEWallet Drag");
 	TQString path = "file:" + TDEGlobal::dirs()->saveLocation("tdewallet");
 	TQPoint pos = _mousePos;
 	for (TQIconViewItem *item = firstItem(); item; item = item->nextItem()) {
@@ -698,28 +698,28 @@ TQDragObject *KWalletIconView::dragObject() {
 	return id;
 }
 
-TQDragObject *KWalletEntryList::dragObject() {
+TQDragObject *TDEWalletEntryList::dragObject() {
 	TQListViewItem *i = currentItem();
 
 	TQStoredDrag *sd = 0L;  
 
-	if (i->rtti() == KWalletEntryItemClass) {
-		KWalletEntryItem *ei = dynamic_cast<KWalletEntryItem*>(i);
+	if (i->rtti() == TDEWalletEntryItemClass) {
+		TDEWalletEntryItem *ei = dynamic_cast<TDEWalletEntryItem*>(i);
 		if (!ei) {
 			return 0L;
 		}
-		sd = new KWalletEntryDrag(viewport(), "KWallet Entry Drag");
+		sd = new TDEWalletEntryDrag(viewport(), "TDEWallet Entry Drag");
 		TQByteArray a;
 		TQDataStream ds(a, IO_WriteOnly);
 		ds << KWALLETENTRYMAGIC;
 		ds << *ei;
 		sd->setEncodedData(a);
-	} else if (i->rtti() == KWalletFolderItemClass) {
-		KWalletFolderItem *fi = dynamic_cast<KWalletFolderItem*>(i);
+	} else if (i->rtti() == TDEWalletFolderItemClass) {
+		TDEWalletFolderItem *fi = dynamic_cast<TDEWalletFolderItem*>(i);
 		if (!fi) {
 			return 0L;
 		}
-		sd = new KWalletFolderDrag(viewport(), "KWallet Folder Drag");
+		sd = new TDEWalletFolderDrag(viewport(), "TDEWallet Folder Drag");
 		TQByteArray a;
 		TQDataStream ds(a, IO_WriteOnly);
 

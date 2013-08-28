@@ -26,12 +26,12 @@ class TDEConfig;
 class WalletConfigWidget;
 class TQListViewItem;
 
-class KWalletConfig : public TDECModule {
+class TDEWalletConfig : public TDECModule {
 	Q_OBJECT
   
 	public:
-		KWalletConfig(TQWidget *parent = 0L, const char *name = 0L, const TQStringList& = TQStringList());
-		virtual ~KWalletConfig();
+		TDEWalletConfig(TQWidget *parent = 0L, const char *name = 0L, const TQStringList& = TQStringList());
+		virtual ~TDEWalletConfig();
 
 		void load();
 		void load( bool useDefaults );

@@ -24,13 +24,13 @@
 #include <tqmap.h>
 #include <tqstring.h>
 
-class KWalletPopup : public TDEPopupMenu {
+class TDEWalletPopup : public TDEPopupMenu {
 	Q_OBJECT
   
 
 	public:
-		KWalletPopup(const TQString& wallet, TQWidget *parent = 0, const char* name = 0);
-		virtual ~KWalletPopup();
+		TDEWalletPopup(const TQString& wallet, TQWidget *parent = 0, const char* name = 0);
+		virtual ~TDEWalletPopup();
 
 	public slots:
 		void openWallet();

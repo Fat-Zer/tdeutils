@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>
 <!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.2-Based Variant V1.1//EN" "dtd/kdex.dtd" [
-  <!ENTITY tdewallet "<application>KWallet</application>">
-  <!ENTITY tdewalletmanager "<application>KWallet Manager</application>">
+  <!ENTITY tdewallet "<application>TDEWallet</application>">
+  <!ENTITY tdewalletmanager "<application>TDEWallet Manager</application>">
   <!ENTITY package "tdeutils">
   <!ENTITY kappname "&tdewallet;">
   <!ENTITY % addindex "IGNORE">

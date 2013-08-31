@@ -17,8 +17,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KWALLETMANAGER_H
-#define KWALLETMANAGER_H
+#ifndef TDEWALLETMANAGER_H
+#define TDEWALLETMANAGER_H
 
 #include <tdemainwindow.h>
 #include <dcopobject.h>

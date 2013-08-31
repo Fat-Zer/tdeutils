@@ -27,8 +27,8 @@
 #include <kiconloader.h>
 #include <kicontheme.h>
 
-#define KWALLETENTRYMAGIC ((TQ_UINT32) 0x6B776C65)
-#define KWALLETFOLDERMAGIC ((TQ_UINT32) 0x6B776C66)
+#define TDEWALLETENTRYMAGIC ((TQ_UINT32) 0x6B776C65)
+#define TDEWALLETFOLDERMAGIC ((TQ_UINT32) 0x6B776C66)
 
 enum TDEWalletListItemClasses {
 	TDEWalletFolderItemClass = 1000,

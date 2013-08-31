@@ -185,7 +185,7 @@ bool TDEWalletItem::acceptDrop(const TQMimeSource *mime) const {
 static bool decodeEntry(TDEWallet::Wallet *_wallet, TQDataStream& ds) {
 	TQ_UINT32 magic;
 	ds >> magic;
-	if (magic != KWALLETENTRYMAGIC) {
+	if (magic != TDEWALLETENTRYMAGIC) {
 		kdDebug() << "bad magic" << endl;
 		return false;
 	}
@@ -210,7 +210,7 @@ static bool decodeEntry(TDEWallet::Wallet *_wallet, TQDataStream& ds) {
 static bool decodeFolder(TDEWallet::Wallet *_wallet, TQDataStream& ds) {
 	TQ_UINT32 magic;
 	ds >> magic;
-	if (magic != KWALLETFOLDERMAGIC) {
+	if (magic != TDEWALLETFOLDERMAGIC) {
 		kdDebug() << "bad magic" << endl;
 		return false;
 	}
@@ -446,9 +446,9 @@ void TDEWalletEntryList::itemDropped(TQDropEvent *e, TQListViewItem *item) {
 			//check magic to discover mime type
 			TQ_UINT32 magic;
 			(*ds) >> magic;
-			if (magic == KWALLETENTRYMAGIC) {
+			if (magic == TDEWALLETENTRYMAGIC) {
 				isEntry = true;
-			} else if (magic == KWALLETFOLDERMAGIC) {
+			} else if (magic == TDEWALLETFOLDERMAGIC) {
 				isEntry = false;
 			} else {
 				kdDebug() << "bad magic" << endl;
@@ -711,7 +711,7 @@ TQDragObject *TDEWalletEntryList::dragObject() {
 		sd = new TDEWalletEntryDrag(viewport(), "TDEWallet Entry Drag");
 		TQByteArray a;
 		TQDataStream ds(a, IO_WriteOnly);
-		ds << KWALLETENTRYMAGIC;
+		ds << TDEWALLETENTRYMAGIC;
 		ds << *ei;
 		sd->setEncodedData(a);
 	} else if (i->rtti() == TDEWalletFolderItemClass) {
@@ -723,7 +723,7 @@ TQDragObject *TDEWalletEntryList::dragObject() {
 		TQByteArray a;
 		TQDataStream ds(a, IO_WriteOnly);
 
-		ds << KWALLETFOLDERMAGIC;
+		ds << TDEWALLETFOLDERMAGIC;
 		ds << *fi;
 		sd->setEncodedData(a);
 	}

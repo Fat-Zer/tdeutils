@@ -17,8 +17,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KWALLETPOPUP_H
-#define KWALLETPOPUP_H
+#ifndef TDEWALLETPOPUP_H
+#define TDEWALLETPOPUP_H
 
 #include <tdepopupmenu.h>
 #include <tqmap.h>

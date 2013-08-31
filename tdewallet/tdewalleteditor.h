@@ -18,8 +18,8 @@
    Boston, MA 02110-1301, USA.
 */
 
-#ifndef KWALLETEDITOR_H
-#define KWALLETEDITOR_H
+#ifndef TDEWALLETEDITOR_H
+#define TDEWALLETEDITOR_H
 
 #include "walletwidget.h"
 #include <tdewallet.h>

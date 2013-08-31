@@ -88,7 +88,7 @@ int main(int argc, char **argv) {
 		KMimeType::Ptr ptr;
 		if (TQFile::exists(fn) &&
 			(ptr = KMimeType::findByFileContent(fn)) &&
-			ptr->is("application/x-kde-wallet")) {
+			ptr->is("application/x-tde-wallet")) {
 			wm.openWalletFile(fn);
 		} else {
 			wm.openWallet(args->arg(i));

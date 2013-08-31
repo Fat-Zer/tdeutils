@@ -17,8 +17,8 @@
    Boston, MA 02110-1301, USA.
  */
 
-#ifndef _KWALLETKONFIGURATOR_H
-#define _KWALLETKONFIGURATOR_H
+#ifndef _TDEWALLETKONFIGURATOR_H
+#define _TDEWALLETKONFIGURATOR_H
 
 #include <tdecmodule.h>
 

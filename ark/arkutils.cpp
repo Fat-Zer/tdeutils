@@ -72,7 +72,7 @@
 // TQt includes
 #include <tqfile.h>
 
-#include "artdeutils.h"
+#include "arkutils.h"
 
 TQString ArkUtils::getTimeStamp(const TQString &_month,
                             const TQString &_day,

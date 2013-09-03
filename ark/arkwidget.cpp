@@ -75,7 +75,7 @@
 #include "extractiondialog.h"
 #include "arkwidget.h"
 #include "filelistview.h"
-#include "artdeutils.h"
+#include "arkutils.h"
 #include "archiveformatinfo.h"
 #include "compressedfile.h"
 #include "searchbar.h"

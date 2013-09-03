@@ -21,7 +21,7 @@ INCLUDES=-I$(srcdir)/../kmilod $(all_includes)
 kde_module_LTLIBRARIES = kmilo_generic.la
 
 kmilo_generic_la_LDFLAGS = -module $(KDE_PLUGIN) $(all_libraries)
-kmilo_generic_la_LIBADD = ../kmilod/libkmilo.la $(LIB_KIO)
+kmilo_generic_la_LIBADD = ../kmilod/libkmilo.la $(LIB_TDEIO)
 kmilo_generic_la_SOURCES = generic_monitor.cpp
 METASOURCES = AUTO
 

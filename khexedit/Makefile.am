@@ -20,8 +20,8 @@ draglabel.h progress.h hexeditstate.h chartabledialog.h hexdrag.h \
 exportdialog.h fileinfodialog.h converterdialog.h listview.h searchbar.h
 
 khexedit_METASOURCES = AUTO
-khexedit_LDFLAGS = $(all_libraries) $(KDE_RPATH) $(LIB_QT) -lDCOP $(LIB_TDECORE) $(LIB_TDEUI) -ltdefx $(LIB_KIO) -ltdetexteditor
-khexedit_LDADD = $(LIB_KIO) $(LIB_TDEPRINT)
+khexedit_LDFLAGS = $(all_libraries) $(KDE_RPATH) $(LIB_QT) -lDCOP $(LIB_TDECORE) $(LIB_TDEUI) -ltdefx $(LIB_TDEIO) -ltdetexteditor
+khexedit_LDADD = $(LIB_TDEIO) $(LIB_TDEPRINT)
 
 xdg_apps_DATA = khexedit.desktop
 

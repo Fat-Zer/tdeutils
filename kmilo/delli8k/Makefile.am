@@ -22,7 +22,7 @@ INCLUDES=-I$(srcdir)/../kmilod $(all_includes)
 kde_module_LTLIBRARIES = kmilo_delli8k.la
 
 kmilo_delli8k_la_LDFLAGS = -module $(KDE_PLUGIN) $(all_libraries)
-kmilo_delli8k_la_LIBADD = ../kmilod/libkmilo.la $(LIB_KIO)
+kmilo_delli8k_la_LIBADD = ../kmilod/libkmilo.la $(LIB_TDEIO)
 kmilo_delli8k_la_SOURCES = delli8k.cpp
 METASOURCES = AUTO
 

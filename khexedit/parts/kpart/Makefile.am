@@ -9,7 +9,7 @@ METASOURCES = AUTO
 libkhexedit2part_la_SOURCES = khepart.cpp khebrowserextension.cpp khepartfactory.cpp
 
 libkhexedit2part_la_LDFLAGS = $(all_libraries) $(KDE_PLUGIN) -module -no-undefined
-libkhexedit2part_la_LIBADD = ../../lib/libkhexeditcommon.la $(LIB_KPARTS) $(LIB_KIO)
+libkhexedit2part_la_LIBADD = ../../lib/libkhexeditcommon.la $(LIB_TDEPARTS) $(LIB_TDEIO)
 
 partdesktop_DATA = khexedit2part.desktop
 partdesktopdir   = $(kde_servicesdir)

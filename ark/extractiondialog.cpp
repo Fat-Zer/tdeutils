@@ -48,7 +48,7 @@
 #include <kurlpixmapprovider.h>
 #include <kdebug.h>
 
-#include "artdeutils.h"
+#include "arkutils.h"
 #include "settings.h"
 
 ExtractionDialog::ExtractionDialog( TQWidget *parent, const char *name,
@@ -139,7 +139,7 @@ void ExtractionDialog::accept()
 	uc.setReplaceHome( true );
 	KURL p( uc.replacedPath( m_urlRequester->comboBox()->currentText() ) );
 
-	//if p isn't local KIO and friends will complain later on
+	//if p isn't local TDEIO and friends will complain later on
 	if ( p.isLocalFile() )
 	{
 		TQFileInfo fi( p.path() );

@@ -49,7 +49,7 @@
 #include "arch.h"
 #include "settings.h"
 #include "rar.h"
-#include "artdeutils.h"
+#include "arkutils.h"
 #include "filelistview.h"
 
 RarArch::RarArch( ArkWidget *_gui, const TQString & _fileName )

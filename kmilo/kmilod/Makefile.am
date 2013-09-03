@@ -20,7 +20,7 @@ INCLUDES=$(all_includes)
 
 kde_module_LTLIBRARIES = kded_kmilod.la
 kded_kmilod_la_LDFLAGS = -module -avoid-version $(all_libraries)
-kded_kmilod_la_LIBADD = $(LIB_KIO) libkmilo.la
+kded_kmilod_la_LIBADD = $(LIB_TDEIO) libkmilo.la
 kded_kmilod_la_SOURCES = kmilod.cpp kmilod.skel defaultskin.cpp \
 			defaultwidget.ui kmilointerface.cpp
 

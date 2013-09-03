@@ -23,7 +23,7 @@ INCLUDES=-I$(srcdir)/../kmilod $(all_includes)
 kde_module_LTLIBRARIES = kmilo_kvaio.la
 
 kmilo_kvaio_la_LDFLAGS = -module $(KDE_PLUGIN) $(all_libraries)
-kmilo_kvaio_la_LIBADD = ../kmilod/libkmilo.la $(LIB_KIO)  -lXext -lXtst
+kmilo_kvaio_la_LIBADD = ../kmilod/libkmilo.la $(LIB_TDEIO)  -lXext -lXtst
 kmilo_kvaio_la_SOURCES = kmilo_kvaio.cpp kvaiodriverinterface.cpp kvaio.cpp
 
 METASOURCES = AUTO

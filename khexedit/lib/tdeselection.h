@@ -15,8 +15,8 @@
  ***************************************************************************/
 
 
-#ifndef KHE_KSELECTION_H
-#define KHE_KSELECTION_H
+#ifndef KHE_TDESELECTION_H
+#define KHE_TDESELECTION_H
 
 #include "ksection.h"
 

@@ -21,7 +21,7 @@ INCLUDES=-I$(srcdir)/../kmilod $(all_includes)
 kde_module_LTLIBRARIES = kmilo_demo.la
 
 kmilo_demo_la_LDFLAGS = -module $(KDE_PLUGIN) $(all_libraries)
-kmilo_demo_la_LIBADD = ../kmilod/libkmilo.la $(LIB_KIO)
+kmilo_demo_la_LIBADD = ../kmilod/libkmilo.la $(LIB_TDEIO)
 kmilo_demo_la_SOURCES = demo.cpp
 METASOURCES = AUTO
 

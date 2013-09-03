@@ -9,7 +9,7 @@ METASOURCES = AUTO
 libkbyteseditwidget_la_SOURCES = kbyteseditwidget.cpp
 
 libkbyteseditwidget_la_LDFLAGS = $(all_libraries) $(KDE_PLUGIN) -module -avoid-version -no-undefined
-libkbyteseditwidget_la_LIBADD = ../../lib/libkhexeditcommon.la $(LIB_KPARTS)
+libkbyteseditwidget_la_LIBADD = ../../lib/libkhexeditcommon.la $(LIB_TDEPARTS)
 
 service_DATA = kbyteseditwidget.desktop
 servicedir = $(kde_servicesdir)

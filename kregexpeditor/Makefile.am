@@ -29,7 +29,7 @@ libkregexpeditorcommon_la_SOURCES = \
 
 libkregexpeditorcommon_la_LDFLAGS = $(all_libraries) -version-info 1:0:0 -no-undefined
 libkregexpeditorcommon_la_LIBADD = KMultiFormListBox/libtdemultiformlistbox.la \
-	KWidgetStreamer/libkwidgetstreamer.la $(LIB_KIO) $(LIB_QT) $(LIB_TDECORE) $(LIB_TDEUI)
+	KWidgetStreamer/libkwidgetstreamer.la $(LIB_TDEIO) $(LIB_QT) $(LIB_TDECORE) $(LIB_TDEUI)
 
 METASOURCES = AUTO
 
@@ -46,8 +46,8 @@ libkregexpeditorgui_la_LIBADD = libkregexpeditorcommon.la
 
 bin_PROGRAMS = kregexpeditor
 kregexpeditor_SOURCES = main.cpp
-kregexpeditor_LDFLAGS = $(all_libraries) $(KDE_RPATH) $(LIB_QT) -lDCOP $(LIB_TDECORE) $(LIB_TDEUI) -ltdefx $(LIB_KIO) -ltdetexteditor
-kregexpeditor_LDADD =  libkregexpeditorcommon.la $(LIB_KIO)
+kregexpeditor_LDFLAGS = $(all_libraries) $(KDE_RPATH) $(LIB_QT) -lDCOP $(LIB_TDECORE) $(LIB_TDEUI) -ltdefx $(LIB_TDEIO) -ltdetexteditor
+kregexpeditor_LDADD =  libkregexpeditorcommon.la $(LIB_TDEIO)
 kregexpeditor_INCLUDES =  $(all_includes)
 
 xdg_apps_DATA = kregexpeditor.desktop

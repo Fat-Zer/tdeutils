@@ -10,7 +10,7 @@ ksim_panelextension_la_SOURCES = ksim.cpp ksimview.cpp ksimview.skel \
                              themeprefs.cpp
 
 ksim_panelextension_la_LDFLAGS = -module $(KDE_PLUGIN) $(all_libraries)
-ksim_panelextension_la_LIBADD = ./library/libksimcore.la libsysteminfo.la $(LIB_KIO) $(LIB_TDEUI)
+ksim_panelextension_la_LIBADD = ./library/libksimcore.la libsysteminfo.la $(LIB_TDEIO) $(LIB_TDEUI)
 
 SUBDIRS = themes library monitors pics
 EXTRA_DIST = ksim.desktop

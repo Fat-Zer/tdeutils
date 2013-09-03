@@ -2,7 +2,7 @@ kde_module_LTLIBRARIES = ksim_net.la
 ksim_net_la_SOURCES = ksimnet.cpp netdialog.cpp netconfig.cpp
 
 ksim_net_la_LDFLAGS = $(all_libraries) -module $(KDE_PLUGIN)
-ksim_net_la_LIBADD = ../../library/libksimcore.la $(LIB_KIO)
+ksim_net_la_LIBADD = ../../library/libksimcore.la $(LIB_TDEIO)
 
 EXTRA_DIST = Net.desktop
 

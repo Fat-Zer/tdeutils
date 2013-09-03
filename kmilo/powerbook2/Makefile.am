@@ -21,7 +21,7 @@ INCLUDES=-I$(srcdir)/../kmilod $(all_includes)
 kde_module_LTLIBRARIES = kmilo_powerbook.la
 
 kmilo_powerbook_la_LDFLAGS = -module $(KDE_PLUGIN) $(all_libraries)
-kmilo_powerbook_la_LIBADD = ../kmilod/libkmilo.la $(LIB_KIO) $(KEYBOARD_LIBS)
+kmilo_powerbook_la_LIBADD = ../kmilod/libkmilo.la $(LIB_TDEIO) $(KEYBOARD_LIBS)
 kmilo_powerbook_la_SOURCES = pb_monitor.cpp
 METASOURCES = AUTO
 

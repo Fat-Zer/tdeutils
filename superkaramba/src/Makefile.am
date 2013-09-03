@@ -40,7 +40,7 @@ superkaramba_SOURCES = main.cpp karamba.cpp meter.cpp bar.cpp sensor.cpp \
 
 # kde_cfg_DATA = superkaramba.kcfg
 
-superkaramba_LDFLAGS = -Wl,-export-dynamic  $(KDE_RPATH) $(all_libraries) $(PYTHONLIB) $(LIB_QT) -lDCOP $(LIB_TDECORE) $(LIB_TDEUI) -ltdefx $(LIB_KIO) -ltdetexteditor
+superkaramba_LDFLAGS = -Wl,-export-dynamic  $(KDE_RPATH) $(all_libraries) $(PYTHONLIB) $(LIB_QT) -lDCOP $(LIB_TDECORE) $(LIB_TDEUI) -ltdefx $(LIB_TDEIO) -ltdetexteditor
 #superkaramba_LDADD = -ltdeio $(LIB_TDEUI) $(LIBPYTHON) $(LIBKVM) $(MY_LIBKNEWSTUFF)
 superkaramba_LDADD = -ltdeio $(LIB_TDEUI) $(LIBPYTHON) $(LIBKVM) $(MY_LIBKNEWSTUFF)
 

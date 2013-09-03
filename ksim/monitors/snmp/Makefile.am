@@ -6,7 +6,7 @@ ksim_snmp_la_SOURCES = plugin.cpp view.cpp configpage.cpp configwidget.ui snmp.c
 		       walker.cpp
 
 ksim_snmp_la_LDFLAGS = $(all_libraries) -module $(KDE_PLUGIN)
-ksim_snmp_la_LIBADD = ../../library/libksimcore.la $(LIB_KIO) $(LIBSNMP)
+ksim_snmp_la_LIBADD = ../../library/libksimcore.la $(LIB_TDEIO) $(LIBSNMP)
 
 INCLUDES= -I$(top_srcdir)/ksim/library $(all_includes)
 

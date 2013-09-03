@@ -3,7 +3,7 @@ kde_module_LTLIBRARIES = kcm_thinkpad.la
 kcm_thinkpad_la_SOURCES = kcmthinkpad_general.ui main.cpp
 
 kcm_thinkpad_la_LDFLAGS = -module $(KDE_PLUGIN) $(all_libraries)
-kcm_thinkpad_la_LIBADD = $(LIB_KIO)
+kcm_thinkpad_la_LIBADD = $(LIB_TDEIO)
 
 INCLUDES= $(all_includes) -DKDE_BINDIR="\"$(bindir)\""
  

@@ -7,7 +7,7 @@ tdeinit_LTLIBRARIES = irkick.la
 
 CLEANFILES = dummy.cpp
 
-libirkick_common_la_LIBADD = $(LIB_TDECORE) $(LIB_TDEUI) $(LIB_KSYCOCA) ../tdelirc/libtdelirc.la
+libirkick_common_la_LIBADD = $(LIB_TDECORE) $(LIB_TDEUI) $(LIB_TDESYCOCA) ../tdelirc/libtdelirc.la
 libirkick_common_la_SOURCES = main.cpp irkick.cpp irkick.skel irkick.stub klircclient.cpp
 
 libirkick_common_la_LDFLAGS = $(all_libraries)

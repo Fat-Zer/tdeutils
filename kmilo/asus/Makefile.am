@@ -24,7 +24,7 @@ INCLUDES=-I$(srcdir)/../kmilod $(all_includes)
 kde_module_LTLIBRARIES = kmilo_asus.la
 
 kmilo_asus_la_LDFLAGS = -module $(KDE_PLUGIN) $(all_libraries)
-kmilo_asus_la_LIBADD = ../kmilod/libkmilo.la $(LIB_KIO)
+kmilo_asus_la_LIBADD = ../kmilod/libkmilo.la $(LIB_TDEIO)
 kmilo_asus_la_SOURCES = asus.cpp
 METASOURCES = AUTO
 

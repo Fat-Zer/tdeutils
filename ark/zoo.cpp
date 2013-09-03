@@ -46,7 +46,7 @@
 #include "arkwidget.h"
 #include "arch.h"
 #include "zoo.h"
-#include "artdeutils.h"
+#include "arkutils.h"
 #include "filelistview.h"
 
 static TQString fixTime( const TQString &_strTime );

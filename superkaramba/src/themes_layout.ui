@@ -173,7 +173,7 @@
         </sizepolicy>
         <pixmap>image0</pixmap>
         <signal>selected(int)</signal>
-        <signal>doubleClicked(int, int, int, const QPoint&amp;)</signal>
+        <signal>doubleClicked(int, int, int, const TQPoint&amp;)</signal>
     </customwidget>
 </customwidgets>
 <images>
@@ -214,7 +214,7 @@
     </connection>
     <connection>
         <sender>tableThemes</sender>
-        <signal>doubleClicked(int,int,int,const QPoint&amp;)</signal>
+        <signal>doubleClicked(int,int,int,const TQPoint&amp;)</signal>
         <receiver>ThemesLayout</receiver>
         <slot>addToDesktop()</slot>
     </connection>

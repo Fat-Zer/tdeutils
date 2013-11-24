@@ -64,7 +64,7 @@ int main(int argc, char *argv[])
     // Stop daemon and exit?
     if (args->isSet("q"))
     {
-	KDEsuClient client;
+	TDEsuClient client;
 	if (client.ping() == -1)
 	{
 	    kdError(1511) << "Daemon not running -- nothing to stop\n";
@@ -116,7 +116,7 @@ int main(int argc, char *argv[])
 
     // Check for daemon and start if necessary
     bool have_daemon = true;
-    KDEsuClient client;
+    TDEsuClient client;
     if (!client.isServerSGID())
     {
 	kdWarning(1511) << "Daemon not safe (not sgid), not using it.\n";

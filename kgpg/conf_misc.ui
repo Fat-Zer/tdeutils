@@ -45,8 +45,8 @@
                             <bool>false</bool>
                         </property>
                         <property name="whatsThis" stdset="0">
-                            <string>&lt;qt&gt;&lt;b&gt;Start KGpg automatically at KDE startup:&lt;/b&gt;&lt;br /&gt;
-&lt;p&gt;If checked KGpg will start automatically each time that KDE starts up.&lt;/p&gt;&lt;/qt&gt;</string>
+                            <string>&lt;qt&gt;&lt;b&gt;Start KGpg automatically at TDE startup:&lt;/b&gt;&lt;br /&gt;
+&lt;p&gt;If checked KGpg will start automatically each time that TDE starts up.&lt;/p&gt;&lt;/qt&gt;</string>
                         </property>
                     </widget>
                     <widget class="TQCheckBox" row="1" column="0">
